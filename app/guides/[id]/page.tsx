@@ -1,6 +1,4 @@
-// app/guides/[id]/page.tsx
 import dynamic from 'next/dynamic';
-import React from 'react';
 import { Metadata } from 'next';
 
 // Dynamically import the components for the guides
@@ -9,20 +7,14 @@ const ProgressionGuide = dynamic(() => import('../game-progression-guide'));
 const TopTipsAndTricks = dynamic(() => import('../top-tips-and-tricks'));
 const HiddenSecretsGuide = dynamic(() => import('../hidden-secrets'));
 
-// 使用函数封装参数获取
-async function getGuideId(params: { id: string }) {
-  return params.id;
-}
-
-// Dynamically generate metadata for the page
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  // 使用异步函数获取参数
-  const id = await getGuideId(params);
+// 修改 generateMetadata 函数
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  // 使用 await 解析 params
+  const { id } = await params;
 
   let title = 'Whisper of the House Guide';
   let description = 'Discover detailed guides, tips, and secrets to help you navigate through Whisper of the House.';
 
-  // Set the title and description based on the id
   switch (id) {
     case 'beginner-guide':
       title = "Beginner's Guide - Whisper of the House";
@@ -49,17 +41,17 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     title,
     description,
     alternates: {
-      canonical: `/guides/${id}`, // 添加 canonical URL
+      canonical: `https://www.whisperofthehouse.com/guides/${id}`,
     },
   };
 }
 
-// Render the content based on the id
-const GuidePage = ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+// 同时修改页面组件
+export default async function GuidePage({ params }: { params: Promise<{ id: string }> }) {
+  // 使用 await 解析 params
+  const { id } = await params;
   let content;
 
-  // Render the corresponding component based on the id
   switch (id) {
     case 'beginner-guide':
       content = <BeginnerGuide />;
@@ -82,12 +74,5 @@ const GuidePage = ({ params }: { params: { id: string } }) => {
       );
   }
 
-  return (
-    <div>
-      {/* Render the corresponding content */}
-      {content}
-    </div>
-  );
-};
-
-export default GuidePage;
+  return <div>{content}</div>;
+}
