@@ -10,6 +10,37 @@ const DownloadNewsClient = () => {
   // 新闻数据（与你之前的一致）
   const newsItems = [
     {
+        id: 4,
+        title: 'Progress Report (Sept 1 – Sept 5) & Delay of House Purchase Feature',
+        date: '2025-09-05',
+        content: [
+            'Over the past week, our updates have mainly focused on:',
+            'Fixing certain quest flows that could get stuck.',
+            'Correcting object sizes and properties that caused issues.',
+            'Improving parts of the UI display and localization.',
+            'Optimizing certain operations and prompts.',
+            'Replaced problematic and questionable assets.',
+            'However, we’re sorry to say that the workload has exceeded our expectations.',
+            'The house purchase feature, originally scheduled for this week, is not ready yet and will be delayed.',
+            'We hope to bring the house purchase feature to you as soon as possible.',
+            <img 
+            height="267" width="400"
+            src="/images/whisper_of_the_house_real_estate_evergreen_house_ui_preview.png" 
+            alt="UI preview of the Whisper of the House Evergreen House real estate feature with plant-themed rooms and balance details." 
+            loading="lazy" 
+            />,
+            'In the meantime, we’ve received over 70 replies in our feedback thread this past week—thank you so much!',
+            'Your comments made us realize there’s still room to refine the details of the current version.',
+            'Therefore, for this month, our updates will mainly focus on:',
+            'Better quest guidance.',
+            'Furniture search & categorization.',
+            'Completing furniture sets.',
+            'Thank you again for your patience and understanding.',
+            'We’re excited to keep improving the game with your support!'
+        ]
+        
+    },
+    {
       id: 3,
       title: 'Official Statement on Garden Assets Issue',
       date: '2025-09-03',
