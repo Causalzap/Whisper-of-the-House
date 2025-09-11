@@ -119,13 +119,279 @@ const SecretsAndStoryClient = () => {
       alt: 'Whisper of the House Abnormal Point #15: Park Area Fountain Columns - A unique anomaly located near the fountain in the park area, unlocked early in the game.',
     },
     {
+        "id": 16,
+        "title": "NO. 16 Police Station Phone Booth",
+        "description": "A unique anomaly located beneath the phone booth near the police station, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_16_police_station_phone_booth.png",
+        "alt": "Whisper of the House Abnormal Point #16: Police Station Phone Booth - A unique anomaly located beneath the phone booth near the police station, unlocked early in the game."
+    },
+    {
         "id": 17,
         "title": "NO. 17 Luna's House Bathroom Footprints",
         "description": "In Luna's bathroom, mysterious wet footprints may randomly appear on the floor. This anomaly is located near the bathtub and can be triggered while cleaning or closely inspecting the bathroom, hinting at an unusual presence.",
         "image": "/images/whisper_of_the_house_abnormal_point_17_luna_bathroom_footprints.png",
         "alt": "Whisper of the House Abnormal Point #17: Luna's House Bathroom Footprints - Strange footprints appear on the bathroom floor near the bathtub, which can be triggered during cleaning."
-    }
+    },
+    {
+        "id": 18,
+        "title": "NO. 18 Bathroom Rubber Duck",
+        "description": "A unique anomaly found in the bathtub with a rubber duck, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_18_bathroom_rubber_duck.png",
+        "alt": "Whisper of the House Abnormal Point #18: Bathroom Rubber Duck - A unique anomaly found in the bathtub with a rubber duck, unlocked early in the game."
+    },
+    {
+        "id": 19,
+        "title": "NO. 19 Mansion Room Painting Keyhole",
+        "description": "A unique anomaly found behind the painting in the mansion room, unlocked by moving the painting. Discover this secret early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_19_mansion_room_painting_keyhole.png",
+        "alt": "Whisper of the House Abnormal Point #19: Mansion Room Painting Keyhole - A unique anomaly found behind the painting in the mansion room, unlocked by moving the painting. Discover this secret early in the game."
+    },
+    {
+        "id": 20,
+        "title": "NO. 20 Bakery Workshop Sheep Horn Bread",
+        "description": "A unique anomaly found in the bakery workshop after placing the sheep horn bread in the oven three times. Unlocked during early game stages.",
+        "image": "/images/whisper_of_the_house_abnormal_point_20_bakery_workshop_sheep_horn_bread.png",
+        "alt": "Whisper of the House Abnormal Point #20: Bakery Workshop Sheep Horn Bread - A unique anomaly found in the bakery workshop after placing the sheep horn bread in the oven three times. Unlocked during early game stages."
+      }
       ,
+      {
+        "id": 21,
+        "title": "NO. 21 Bakery Workshop Bedroom Mysterious Orb",
+        "description": "A unique anomaly found in the bedroom of the bakery workshop. This orb appears when clicked directly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_21_bakery_workshop_bedroom_mysterious_orb.png",
+        "alt": "Whisper of the House Abnormal Point #21: Bakery Workshop Bedroom Mysterious Orb - A unique anomaly found in the bedroom of the bakery workshop. This orb appears when clicked directly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 22,
+        "title": "NO. 22 Bakery Workshop Bedroom Water Crystal Ball",
+        "description": "A unique anomaly found in the bedroom of the bakery workshop. This large natural water crystal ball appears when clicked directly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_22_bakery_workshop_bedroom_water_crystal_ball.png",
+        "alt": "Whisper of the House Abnormal Point #22: Bakery Workshop Bedroom Water Crystal Ball - A unique anomaly found in the bedroom of the bakery workshop. This large natural water crystal ball appears when clicked directly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 23,
+        "title": "NO. 23 Flower Shop Flower Theft",
+        "description": "A unique anomaly found in the flower shop. This anomaly is triggered by clicking directly on the plants, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_23_flower_shop_flower_theft.png",
+        "alt": "Whisper of the House Abnormal Point #23: Flower Shop Flower Theft - A unique anomaly found in the flower shop. This anomaly is triggered by clicking directly on the plants, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 24,
+        "title": "NO. 24 Music Store Bass Guitar",
+        "description": "A unique anomaly found in the music store, where the bass guitar emits a strange glow when clicked directly. Unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_24_music_store_bass_guitar.png",
+        "alt": "Whisper of the House Abnormal Point #24: Music Store Bass Guitar - A unique anomaly found in the music store, where the bass guitar emits a strange glow when clicked directly. Unlocked early in the game."
+      }
+      ,
+      {
+        "id": 25,
+        "title": "NO. 25 Seaside Hut Wooden Plank",
+        "description": "A unique anomaly found in the seaside hut, triggered by clicking on the wooden plank. Unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_25_seaside_hut_wooden_plank.png",
+        "alt": "Whisper of the House Abnormal Point #25: Seaside Hut Wooden Plank - A unique anomaly found in the seaside hut, triggered by clicking on the wooden plank. Unlocked early in the game."
+      }
+      ,
+      {
+        "id": 26,
+        "title": "NO. 26 Seaside Hut Watercolor",
+        "description": "A unique anomaly found in the seaside hut. This watercolor-like anomaly is triggered by clicking directly on the colorful pattern, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_26_seaside_hut_watercolor.png",
+        "alt": "Whisper of the House Abnormal Point #26: Seaside Hut Watercolor - A unique anomaly found in the seaside hut. This watercolor-like anomaly is triggered by clicking directly on the colorful pattern, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 27,
+        "title": "NO. 27 Alchemy Workshop Couple Portrait",
+        "description": "A unique anomaly found in the alchemy workshop. This couple portrait reveals a hidden secret when clicked directly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_27_alchemy_workshop_couple_portrait.png",
+        "alt": "Whisper of the House Abnormal Point #27: Alchemy Workshop Couple Portrait - A unique anomaly found in the alchemy workshop. This couple portrait reveals a hidden secret when clicked directly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 28,
+        "title": "NO. 28 Alchemy Workshop Experiment Smoke Flower",
+        "description": "A unique anomaly found in the alchemy workshop. The smoke flower is created by combining fire flowers and a special catalyst in the experiment chamber, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_28_alchemy_workshop_experiment_smoke_flower.png",
+        "alt": "Whisper of the House Abnormal Point #28: Alchemy Workshop Experiment Smoke Flower - A unique anomaly found in the alchemy workshop. The smoke flower is created by combining fire flowers and a special catalyst in the experiment chamber, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 29,
+        "title": "NO. 29 Alchemy Workshop Experiment Broom",
+        "description": "A unique anomaly found in the alchemy workshop. The broom is created by combining the feather pen and a special model star in the experiment chamber, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_29_alchemy_workshop_experiment_broom.png",
+        "alt": "Whisper of the House Abnormal Point #29: Alchemy Workshop Experiment Broom - A unique anomaly found in the alchemy workshop. The broom is created by combining the feather pen and a special model star in the experiment chamber, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 30,
+        "title": "NO. 30 Alchemy Workshop Space Prism",
+        "description": "A unique anomaly found in the alchemy workshop. The space prism is created by combining moon flowers, silver fern, and silver leaf herb in the experiment chamber, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_30_alchemy_workshop_space_prism.png",
+        "alt": "Whisper of the House Abnormal Point #30: Alchemy Workshop Space Prism - A unique anomaly found in the alchemy workshop. The space prism is created by combining moon flowers, silver fern, and silver leaf herb in the experiment chamber, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 31,
+        "title": "NO. 31 Grand Bazaar Tea Shopkeeper",
+        "description": "A unique anomaly found at the grand bazaar. The tea shopkeeper, shrouded in mystery, can be revealed by clicking directly on the stall, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_31_grand_bazaar_tea_shopkeeper.png",
+        "alt": "Whisper of the House Abnormal Point #31: Grand Bazaar Tea Shopkeeper - A unique anomaly found at the grand bazaar. The tea shopkeeper, shrouded in mystery, can be revealed by clicking directly on the stall, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 32,
+        "title": "NO. 32 Grand Bazaar Cat in the Wool",
+        "description": "A unique anomaly found at the grand bazaar. The cat in the wool can be triggered by clicking directly on the hanging display, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_32_grand_bazaar_cat_in_the_wool.png",
+        "alt": "Whisper of the House Abnormal Point #32: Grand Bazaar Cat in the Wool - A unique anomaly found at the grand bazaar. The cat in the wool can be triggered by clicking directly on the hanging display, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 33,
+        "title": "NO. 33 Convenience Store Large Freezer",
+        "description": "A unique anomaly found in the convenience store. The large freezer reveals a hidden pattern when clicked directly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_33_convenience_store_large_freezer.png",
+        "alt": "Whisper of the House Abnormal Point #33: Convenience Store Large Freezer - A unique anomaly found in the convenience store. The large freezer reveals a hidden pattern when clicked directly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 34,
+        "title": "NO. 34 Seaside Hut Falling Lamp",
+        "description": "A unique anomaly found in the seaside hut. The falling lamp appears when clicked directly after retrieving it from the shelf, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_34_seaside_hut_falling_lamp.png",
+        "alt": "Whisper of the House Abnormal Point #34: Seaside Hut Falling Lamp - A unique anomaly found in the seaside hut. The falling lamp appears when clicked directly after retrieving it from the shelf, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 35,
+        "title": "NO. 35 Bar Ice Box",
+        "description": "A unique anomaly found at the bar. The ice box reveals a hidden pattern when clicked directly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_35_bar_ice_box.png",
+        "alt": "Whisper of the House Abnormal Point #35: Bar Ice Box - A unique anomaly found at the bar. The ice box reveals a hidden pattern when clicked directly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 36,
+        "title": "NO. 36 Aigis Lab Basement Card Puzzle",
+        "description": "A unique anomaly found in the Aigis lab basement. Solve the card puzzle by inserting one box into the slot and pulling another to activate the anomaly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_36_aigis_lab_basement_card_puzzle.png",
+        "alt": "Whisper of the House Abnormal Point #36: Aigis Lab Basement Card Puzzle - A unique anomaly found in the Aigis lab basement. Solve the card puzzle by inserting one box into the slot and pulling another to activate the anomaly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 37,
+        "title": "NO. 37 Grandpa's Time Capsule",
+        "description": "A unique anomaly found at Grandpa's house. The time capsule can be triggered by clicking directly on the object near the garden, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_37_grandpas_time_capsule.png",
+        "alt": "Whisper of the House Abnormal Point #37: Grandpa's Time Capsule - A unique anomaly found at Grandpa's house. The time capsule can be triggered by clicking directly on the object near the garden, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 38,
+        "title": "NO. 38 Grandpa's House Tree in the Courtyard",
+        "description": "A unique anomaly found in Grandpa's house. Clicking on the tree in the courtyard activates the anomaly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_38_grandpas_house_tree_in_the_courtyard.png",
+        "alt": "Whisper of the House Abnormal Point #38: Grandpa's House Tree in the Courtyard - A unique anomaly found in Grandpa's house. Clicking on the tree in the courtyard activates the anomaly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 39,
+        "title": "NO. 39 Scholar's Study Brush Rack",
+        "description": "A unique anomaly found in the scholar's study room. Clicking on the brush rack activates the anomaly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_39_scholars_study_brush_rack.png",
+        "alt": "Whisper of the House Abnormal Point #39: Scholar's Study Brush Rack - A unique anomaly found in the scholar's study room. Clicking on the brush rack activates the anomaly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 40,
+        "title": "NO. 40 Scholar's Study Incense Burner",
+        "description": "A unique anomaly found in the scholar's study room. Clicking on the incense burner activates the anomaly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_40_scholars_study_incense_burner.png",
+        "alt": "Whisper of the House Abnormal Point #40: Scholar's Study Incense Burner - A unique anomaly found in the scholar's study room. Clicking on the incense burner activates the anomaly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 41,
+        "title": "NO. 41 Scholar's Study Pentagram Print",
+        "description": "A unique anomaly found in the scholar's study room. Clicking on the large printer and printing a pentagram shape activates this anomaly, unlocked early in the game.",
+        "image": "/images/whisper_of_the_house_abnormal_point_41_scholars_study_pentagram_print.png",
+        "alt": "Whisper of the House Abnormal Point #41: Scholar's Study Pentagram Print - A unique anomaly found in the scholar's study room. Clicking on the large printer and printing a pentagram shape activates this anomaly, unlocked early in the game."
+      }
+      ,
+      {
+        "id": 42,
+        "title": "NO. 42 Convenience Store Ice Cream",
+        "description": "A unique anomaly found in the convenience store section. Place an egg in the ice cream machine, and it will create an ice cream cone, triggering the anomaly.",
+        "image": "/images/whisper_of_the_house_abnormal_point_42_convenience_store_ice_cream.png",
+        "alt": "Whisper of the House Abnormal Point #42: Convenience Store Ice Cream - A unique anomaly found in the convenience store section. Place an egg in the ice cream machine, and it will create an ice cream cone, triggering the anomaly."
+      }
+      ,
+      {
+        "id": 43,
+        "title": "NO. 43 Xiu Nia's Home Second Floor Bed",
+        "description": "A unique anomaly found in Xiu Nia's home. The second-floor bed can be clicked to trigger an anomaly.",
+        "image": "/images/whisper_of_the_house_abnormal_point_43_xiu_nia_home_second_floor_bed.png",
+        "alt": "Whisper of the House Abnormal Point #43: Xiu Nia's Home Second Floor Bed - A unique anomaly found in Xiu Nia's home. The second-floor bed can be clicked to trigger an anomaly."
+      }
+      ,
+      {
+        "id": 44,
+        "title": "NO. 44 Hospital Bulletin",
+        "description": "An abnormal point found in the hospital area, where a bulletin on preventing stray cats from spreading diseases can be clicked to trigger the anomaly.",
+        "image": "/images/whisper_of_the_house_abnormal_point_44_hospital_bulletin.png",
+        "alt": "Whisper of the House Abnormal Point #44: Hospital Bulletin - A bulletin on preventing stray cats from spreading diseases. Clicking it triggers an anomaly."
+      }
+      ,
+      {
+        "id": 45,
+        "title": "NO. 45 Hospital Window Cat Feeder",
+        "description": "An anomaly can be triggered by clicking on the cat feeder outside the hospital window.",
+        "image": "/images/whisper_of_the_house_abnormal_point_45_hospital_window_cat_feeder.png",
+        "alt": "Whisper of the House Abnormal Point #45: Hospital Window Cat Feeder - Click to trigger anomaly."
+      }
+      ,
+      {
+        "id": 46,
+        "title": "NO. 46 Graveyard Photo Wall",
+        "description": "An anomaly can be triggered by clicking on the photo wall in the graveyard.",
+        "image": "/images/whisper_of_the_house_abnormal_point_46_graveyard_photo_wall.png",
+        "alt": "Whisper of the House Abnormal Point #46: Graveyard Photo Wall - Click to trigger anomaly."
+      }
+      ,
+      {
+        "id": 47,
+        "title": "NO. 47 Graveyard Grave Stone",
+        "description": "An anomaly can be triggered by moving the photo of the grave to the grave stone.",
+        "image": "/images/whisper_of_the_house_abnormal_point_47_graveyard_grave_stone.png",
+        "alt": "Whisper of the House Abnormal Point #47: Graveyard Grave Stone - Click to trigger anomaly."
+      }
+      ,
+      {
+        "id": 48,
+        "title": "NO. 48 Graveyard Tower First Floor Lamp",
+        "description": "An anomaly can be triggered by clicking on the first floor lamp in the Graveyard Tower.",
+        "image": "/images/whisper_of_the_house_abnormal_point_48_graveyard_tower_first_floor_lamp.png",
+        "alt": "Whisper of the House Abnormal Point #48: Graveyard Tower First Floor Lamp - Click to trigger anomaly."
+      }
+      ,
+      {
+        "id": 49,
+        "title": "NO. 49 Flower Shop Planting Flower",
+        "description": "An anomaly unlocked by planting flowers in the Flower Shop.",
+        "image": "/images/whisper_of_the_house_abnormal_point_49_flower_shop_planting_flower.png",
+        "alt": "Whisper of the House Abnormal Point #49: Flower Shop Planting Flower - Unlock anomaly by planting flowers."
+      },
+      {
+        "id": 50,
+        "title": "NO. 50 Flower Shop Planting Flower Guide",
+        "description": "A guide showing the flower planting recipes in the Flower Shop, including various flower types and required materials.",
+        "image": "/images/whisper_of_the_house_abnormal_point_50_flower_shop_planting_flower_guide.png",
+        "alt": "Whisper of the House Abnormal Point #50: Flower Shop Planting Flower Guide - Recipes for cactus, snowflower, red maple, and more."
+      }
     // ...其余数据按需补充
   ];
 
