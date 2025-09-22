@@ -35,6 +35,7 @@ const Footer = () => {
                 <li><Link href="/" className="footer-link">Home</Link></li>
                 <li><Link href="/guides" className="footer-link">Guides</Link></li>
                 <li><Link href="/collection" className="footer-link">Collection</Link></li>
+                <li><Link href="/play-online" className="footer-link">Play Online</Link></li>
                 <li><Link href="/abnormal-points-collection" className="footer-link">Abnormal Points Collection</Link></li>
                 <li><Link href="/download-and-news" className="footer-link">Downloads & News</Link></li>
               </ul>

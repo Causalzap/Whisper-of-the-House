@@ -52,6 +52,18 @@ export default function GuidesPage() {
               <p>Uncover the hidden mysteries and secret rooms of the mansion...</p>
               <Link href="/guides/hidden-secrets" className="read-more-link">Read More</Link>
             </section>
+
+            <section id="hidden-secrets" className="guide-section">
+              <h2>Organize and Discover Secrets</h2>
+              <p>
+                  Dive deep into the world of <strong>Whisper of the House</strong> as you uncover hidden rooms, mysterious objects, and the
+                  secrets that lie within the mansion. Whether you're a beginner or an advanced player, learning the best strategies to 
+                  discover these secrets will enhance your gameplay experience. In this guide, we'll show you how to organize the house 
+                  while uncovering its hidden mysteries.
+              </p>
+              
+              <Link href="/guides/organize-and-uncover-secrets" className="read-more-link">Read More</Link>
+            </section>
           </div>
 
           <div className="sidebar">
@@ -62,6 +74,7 @@ export default function GuidesPage() {
                 <li><a href="#progression-guide">Progression Guide</a></li>
                 <li><a href="#tips-tricks">Top Tips & Tricks</a></li>
                 <li><a href="#hidden-secrets">Hidden Secrets Guide</a></li>
+                <li><a href="#hidden-secrets">Organize and Discover Secrets</a></li>
               </ul>
             </div>
           </div>

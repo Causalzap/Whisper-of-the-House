@@ -6,6 +6,7 @@ const BeginnerGuide = dynamic(() => import('../beginner-guide'));
 const ProgressionGuide = dynamic(() => import('../game-progression-guide'));
 const TopTipsAndTricks = dynamic(() => import('../top-tips-and-tricks'));
 const HiddenSecretsGuide = dynamic(() => import('../hidden-secrets'));
+const OrganizeAndUncoverSecrets = dynamic(() => import('../organize-and-uncover-secrets'));
 
 // 修改 generateMetadata 函数
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
@@ -31,6 +32,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     case 'hidden-secrets':
       title = 'Hidden Secrets Guide - Whisper of the House';
       description = 'Uncover the hidden secrets of Whisper of the House. Find secret rooms, mysteries, and lore hidden deep within the haunted mansion.';
+      break;
+    case 'organize-and-uncover-secrets':
+      title = 'Organize and Discover Secrets';
+      description = 'Uncover hidden rooms, mysterious objects, and secrets in Whisper of the House. Learn strategies to organize and explore the mansion’s mysteries.';
       break;
     default:
       title = 'Guide Not Found';
@@ -64,6 +69,9 @@ export default async function GuidePage({ params }: { params: Promise<{ id: stri
       break;
     case 'hidden-secrets':
       content = <HiddenSecretsGuide />;
+      break;
+    case 'organize-and-uncover-secrets':
+      content = <OrganizeAndUncoverSecrets />;
       break;
     default:
       content = (
