@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: 'Enjoy playing Home Design Small House directly in your browser. Organize and design rooms while uncovering hidden secrets. No downloads needed.',
   },
   alternates: {
-    canonical: 'https://whisperofthehouse.com/play-online', // Add the canonical link here
+    canonical: 'https://www.whisperofthehouse.com/play-online', // Add the canonical link here
   },
 };
 
