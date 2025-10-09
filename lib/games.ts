@@ -28,7 +28,7 @@ export const GAMES = defineGames({
     subtitle: 'Create your dream home with endless possibilities',
     thumbnail: '/images/home-design-logo.jpeg',
     tags: ['Design', 'Casual', 'Creative'],
-    iframe: 'https://html5.gamedistribution.com/2752a06ef4f9406cbbe85d3f78096d25/?gd_sdk_referrer_url=https%3A%2F%2Fzh.y8.com%2Fgames%2Fhome_design_small_house&key=y8&value=default',
+    iframe: 'https://html5.gamedistribution.com/2752a06ef4f9406cbbe85d3f78096d25/',
     description: 'Organize rooms, uncover secrets, and design the perfect cozy home.',
     videoId:null,
     videoTitle:null,
