@@ -28,7 +28,7 @@ export const GAMES = defineGames({
     subtitle: 'Create your dream home with endless possibilities',
     thumbnail: '/images/home-design-logo.jpeg',
     tags: ['Design', 'Casual', 'Creative'],
-    iframe: 'https://html5.gamedistribution.com/2752a06ef4f9406cbbe85d3f78096d25/',
+    iframe: 'https://html5.gamedistribution.com/2752a06ef4f9406cbbe85d3f78096d25/?gd_sdk_referrer_url=https://www.whisperofthehouse.com/play-online',
     description: 'Organize rooms, uncover secrets, and design the perfect cozy home.',
     videoId:null,
     videoTitle:null,
