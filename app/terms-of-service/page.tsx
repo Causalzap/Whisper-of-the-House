@@ -68,7 +68,7 @@ const TermsOfService = () => {
           If you have any questions about these Terms of Service, please contact us at:
         </p>
         <p>
-          Email: <a href="mailto:support@whisperofthehouse.com" className="footer-link">support@whisperofthehouse.com</a>
+          Email: <a href="mailto:support@causalzap.com" className="footer-link">support@causalzap.com</a>
         </p>
 
         <style jsx>{`
@@ -78,27 +78,27 @@ const TermsOfService = () => {
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
-            color: white;
+            color: black;
           }
 
           h1 {
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: #ffffff;
+            color: black;
           }
 
           h2 {
             font-size: 1.5rem;
             margin-top: 1.5rem;
-            color: #ffffff;
+            color: black;
           }
 
           p {
-            color: #cccccc;
+            color: black;
           }
 
           ul {
-            color: #cccccc;
+            color: black;
           }
 
           .footer-link {

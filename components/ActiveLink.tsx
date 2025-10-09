@@ -1,29 +1,28 @@
-"use client";
-
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+// components/ActiveLink.tsx
+'use client';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 export default function ActiveLink({
   href,
+  className,
   children,
-  className = "",
 }: {
   href: string;
-  children: React.ReactNode;
   className?: string;
+  children: React.ReactNode;
 }) {
   const pathname = usePathname();
-
-  const isActive =
-    pathname === href ||
-    (href !== "/" && pathname.startsWith(href));
+  const isActive = pathname === href;
 
   return (
     <Link
       href={href}
-      className={`${className} ${isActive ? "active" : ""}`}
-      aria-current={isActive ? "page" : undefined}
+      className={clsx(
+        className,
+        isActive && 'text-emerald-300'
+      )}
     >
       {children}
     </Link>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: '%s | Whisper of the House',
   },
   description:
-    'Explore guides, secrets, furniture lists, and the full story of Whisper of the House',
+    'Explore Beginner\'s Guide, Progression Guide, Top Tips & Tricks, Hidden Secrets Guide , Organize and Discover Secrets and the full story of Whisper of the House',
 
     icons: {
       icon: [
@@ -17,6 +17,9 @@ export const metadata: Metadata = {
         // { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
         // { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       ],
+    },
+    alternates: {
+      canonical: 'https://www.whisperofthehouse.com/guides',
     },
 };
 

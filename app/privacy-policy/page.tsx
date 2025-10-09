@@ -27,13 +27,13 @@ const PrivacyPolicy = () => {
           <p>We use cookies to improve your experience on our website. Cookies are small data files stored on your device to help us understand how you interact with our site.</p>
 
           <h2>6. Your Rights</h2>
-          <p>You have the right to access, modify, or delete any personal data we have collected from you. If you wish to exercise any of these rights, please contact us at support@whisperofthehouse.com.</p>
+          <p>You have the right to access, modify, or delete any personal data we have collected from you. If you wish to exercise any of these rights, please contact us at support@causalzap.com.</p>
 
           <h2>7. Changes to this Policy</h2>
           <p>We may update this privacy policy from time to time. Any changes will be posted on this page, and the date of the most recent update will be shown at the bottom.</p>
 
           <h2>8. Contact Us</h2>
-          <p>If you have any questions or concerns about this privacy policy, please contact us at <a href="mailto:support@whisperofthehouse.com">support@whisperofthehouse.com</a>.</p>
+          <p>If you have any questions or concerns about this privacy policy, please contact us at <a href="mailto:support@causalzap.com">support@causalzap.com</a>.</p>
         </section>
       </div>
       <style jsx>{`
@@ -43,7 +43,7 @@ const PrivacyPolicy = () => {
           padding: 1rem;
           background: rgba(255, 255, 255, 0.1);
           border-radius: 8px;
-          color: white;
+          color: black;
         }
         
         h1 {

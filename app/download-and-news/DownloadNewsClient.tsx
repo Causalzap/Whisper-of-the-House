@@ -2,12 +2,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import '../../styles/globals.css';
 
 const DownloadNewsClient = () => {
   const [activeTab, setActiveTab] = useState<'download' | 'news'>('download');
 
-  // 新闻数据（与你之前的一致）
+  // 新闻数据
   const newsItems = [
     {
         id: 4,
@@ -23,12 +22,9 @@ const DownloadNewsClient = () => {
             'However, we’re sorry to say that the workload has exceeded our expectations.',
             'The house purchase feature, originally scheduled for this week, is not ready yet and will be delayed.',
             'We hope to bring the house purchase feature to you as soon as possible.',
-            <img 
-            height="267" width="400"
-            src="/images/whisper_of_the_house_real_estate_evergreen_house_ui_preview.png" 
-            alt="UI preview of the Whisper of the House Evergreen House real estate feature with plant-themed rooms and balance details." 
-            loading="lazy" 
-            />,
+            <div className="my-4">
+              
+            </div>,
             'In the meantime, we’ve received over 70 replies in our feedback thread this past week—thank you so much!',
             'Your comments made us realize there’s still room to refine the details of the current version.',
             'Therefore, for this month, our updates will mainly focus on:',
@@ -108,470 +104,277 @@ const DownloadNewsClient = () => {
   ];
 
   return (
-    <div className="download-news-container">
-      <div className="header">
-        <h1>Download & News</h1>
-        <p className="subtitle">Get the latest version and stay updated with game developments</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-indigo-900 text-gray-100">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        {/* 头部 */}
+        <div className="text-center mb-10 py-8 bg-gradient-to-r from-indigo-800 to-purple-800 rounded-2xl shadow-xl">
+          <h1 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-purple-300">
+            Download & News
+          </h1>
+          <p className="text-lg text-indigo-200 max-w-2xl mx-auto">
+            Get the latest version and stay updated with game developments
+          </p>
+        </div>
 
-      {/* 标签切换 */}
-      <div className="tab-switcher">
-        <button
-          className={`tab-button ${activeTab === 'download' ? 'active' : ''}`}
-          onClick={() => setActiveTab('download')}
-        >
-          Download
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'news' ? 'active' : ''}`}
-          onClick={() => setActiveTab('news')}
-        >
-          News
-        </button>
-      </div>
+        {/* 标签切换 */}
+        <div className="flex justify-center mb-10">
+          <div className="bg-gray-800 rounded-full p-1 flex">
+            <button
+              className={`px-8 py-3 rounded-full transition-all duration-300 ${
+                activeTab === 'download' 
+                  ? 'bg-indigo-600 text-white shadow-lg' 
+                  : 'text-gray-300 hover:text-white'
+              }`}
+              onClick={() => setActiveTab('download')}
+            >
+              Download
+            </button>
+            <button
+              className={`px-8 py-3 rounded-full transition-all duration-300 ${
+                activeTab === 'news' 
+                  ? 'bg-indigo-600 text-white shadow-lg' 
+                  : 'text-gray-300 hover:text-white'
+              }`}
+              onClick={() => setActiveTab('news')}
+            >
+              News
+            </button>
+          </div>
+        </div>
 
-      {/* 下载部分 */}
-      {activeTab === 'download' && (
-        <div className="download-section">
-          <div className="download-card">
-            <div className="download-info">
-              <h2>Download Whisper of the House</h2>
-              <p>Experience the unique puzzle-solving adventure on Steam</p>
+        {/* 下载部分 */}
+        {activeTab === 'download' && (
+          <div className="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-700">
+            <div className="grid md:grid-cols-2 gap-10">
+              <div>
+                <h2 className="text-3xl font-bold mb-4 text-white">Download Whisper of the House</h2>
+                <p className="text-gray-300 mb-6">
+                  Experience the unique puzzle-solving adventure on Steam
+                </p>
 
-              <a
-                href="https://store.steampowered.com/app/2589500/Whisper_of_the_House/"
-                className="steam-button"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="steam-icon">🎮</span>
-                Download on Steam
-              </a>
+                <a
+                  href="https://store.steampowered.com/app/2589500/Whisper_of_the_House/"
+                  className="inline-flex items-center bg-gradient-to-r from-blue-700 to-purple-700 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg mb-8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="mr-3">🎮</span>
+                  Download on Steam
+                </a>
 
-              <div className="features-section">
-                <h3>Game Features:</h3>
-                <div className="features-grid">
-                  <div className="feature-column">
-                    <ul>
-                      <li>Unpacking and organizing tasks</li>
-                      <li>Cleaning cluttered homes and shops</li>
-                      <li>Arranging furniture with creative freedom</li>
-                      <li>Over 1800 unique furniture pieces</li>
-                      <li>Interactive furniture with custom sound effects</li>
-                      <li>Task-driven with daily new requests</li>
-                      <li>Discovering secrets and hidden storylines</li>
-                      <li>Character-driven narrative with various townsfolk</li>
-                      <li>Unlocking and decorating multiple homes</li>
+                <div className="mt-8">
+                  <h3 className="text-xl font-semibold mb-4 text-indigo-300 border-b border-indigo-700 pb-2">
+                    Game Features:
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Unpacking and organizing tasks</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Cleaning cluttered homes and shops</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Arranging furniture with creative freedom</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Over 1800 unique furniture pieces</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Interactive furniture with custom sound effects</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Task-driven with daily new requests</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Discovering secrets and hidden storylines</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Character-driven narrative with various townsfolk</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Unlocking and decorating multiple homes</span>
+                      </li>
                     </ul>
-                  </div>
-                  <div className="feature-column">
-                    <ul>
-                      <li>Collecting vouchers and exchanging them for furniture</li>
-                      <li>Photo mode with stickers and filters</li>
-                      <li>Exploring the town and collecting trinkets</li>
-                      <li>Recycling objects for rewards</li>
-                      <li>Robot assistant to help with tasks</li>
-                      <li>Time-travel themed storyline elements</li>
-                      <li>Multiple endings and secret collectibles</li>
-                      <li>Cozy pixel art and soothing soundtrack</li>
-                      <li>Dynamic, lived-in environments with attention to detail</li>
-                      <li>No wrong answer decorating style</li>
-                      <li>Museum collectibles and puzzles</li>
+                    <ul className="space-y-2">
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Collecting vouchers and exchanging them for furniture</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Photo mode with stickers and filters</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Exploring the town and collecting trinkets</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Recycling objects for rewards</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Robot assistant to help with tasks</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Time-travel themed storyline elements</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Multiple endings and secret collectibles</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Cozy pixel art and soothing soundtrack</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Dynamic, lived-in environments with attention to detail</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>No wrong answer decorating style</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-indigo-400 mr-2">•</span>
+                        <span>Museum collectibles and puzzles</span>
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="system-requirements">
-              <h3>System Requirements</h3>
+              <div>
+                <h3 className="text-2xl font-bold mb-6 text-white border-b border-indigo-700 pb-2">
+                  System Requirements
+                </h3>
 
-              <div className="platform-card">
-                <div className="platform-header">
-                  <div className="platform-icon">💻</div>
-                  <h4>Windows</h4>
-                </div>
-                <div className="requirements">
-                  <div className="minimal">
-                    <h5>Minimum:</h5>
-                    <ul>
-                      <li>Requires a 64-bit processor and operating system</li>
-                      <li>OS *: Windows 7 64bit</li>
-                      <li>Processor: Intel Core i3</li>
-                      <li>Memory: 4 GB RAM</li>
-                      <li>Graphics: Intel UHD 630</li>
-                      <li>Storage: 2 GB available space</li>
-                    </ul>
+                <div className="mb-8 bg-gray-900/50 p-6 rounded-xl border border-gray-700">
+                  <div className="flex items-center mb-4">
+                    <div className="text-2xl mr-3">💻</div>
+                    <h4 className="text-xl font-semibold text-blue-300">Windows</h4>
                   </div>
-                  <div className="recommended">
-                    <h5>Recommended:</h5>
-                    <ul>
-                      <li>Requires a 64-bit processor and operating system</li>
-                      <li>* Starting January 1st, 2024, the Steam Client will only support Windows 10 and later versions.</li>
-                    </ul>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h5 className="font-semibold text-green-400 mb-2">Minimum:</h5>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-start">
+                          <span className="text-green-400 mr-2">-</span>
+                          <span>Requires a 64-bit processor and operating system</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="text-green-400 mr-2">-</span>
+                          <span>OS *: Windows 7 64bit</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="text-green-400 mr-2">-</span>
+                          <span>Processor: Intel Core i3</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="text-green-400 mr-2">-</span>
+                          <span>Memory: 4 GB RAM</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="text-green-400 mr-2">-</span>
+                          <span>Graphics: Intel UHD 630</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="text-green-400 mr-2">-</span>
+                          <span>Storage: 2 GB available space</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-purple-400 mb-2">Recommended:</h5>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex items-start">
+                          <span className="text-purple-400 mr-2">-</span>
+                          <span>Requires a 64-bit processor and operating system</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="text-purple-400 mr-2">-</span>
+                          <span>* Starting January 1st, 2024, the Steam Client will only support Windows 10 and later versions.</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="platform-card">
-                <div className="platform-header">
-                  <div className="platform-icon">🍎</div>
-                  <h4>macOS</h4>
-                </div>
-                <div className="requirements">
-                  <div className="minimal">
-                    <h5>Minimum:</h5>
-                    <ul>
-                      <li>OS: macOS 10.13+</li>
-                      <li>Processor: Any Intel or Apple Silicon processor</li>
-                      <li>Memory: 4 GB RAM</li>
-                      <li>Storage: 2 GB available space</li>
+                <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-700">
+                  <div className="flex items-center mb-4">
+                    <div className="text-2xl mr-3">🍎</div>
+                    <h4 className="text-xl font-semibold text-pink-300">macOS</h4>
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-green-400 mb-2">Minimum:</h5>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-start">
+                        <span className="text-green-400 mr-2">-</span>
+                        <span>OS: macOS 10.13+</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-400 mr-2">-</span>
+                        <span>Processor: Any Intel or Apple Silicon processor</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-400 mr-2">-</span>
+                        <span>Memory: 4 GB RAM</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-400 mr-2">-</span>
+                        <span>Storage: 2 GB available space</span>
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* 新闻部分 */}
-      {activeTab === 'news' && (
-        <div className="news-section">
-          {newsItems.map((news) => (
-            <div key={news.id} className="news-card">
-              <div className="news-header">
-                <h2>{news.title}</h2>
-                <span className="news-date">{news.date}</span>
+        {/* 新闻部分 */}
+        {activeTab === 'news' && (
+          <div className="space-y-8">
+            {newsItems.map((news) => (
+              <div key={news.id} className="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-700">
+                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 pb-4 border-b border-gray-700">
+                  <h2 className="text-2xl font-bold text-white">{news.title}</h2>
+                  <span className="text-indigo-300 bg-indigo-900/30 px-3 py-1 rounded-full text-sm mt-2 md:mt-0">
+                    {news.date}
+                  </span>
+                </div>
+
+                <div className="prose prose-invert max-w-none">
+                  <ul className="space-y-3">
+                    {news.content.map((item, index) => (
+                      <li key={index} className="text-gray-300">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {news.note && (
+                    <div className="mt-6 p-4 bg-blue-900/20 rounded-lg border border-blue-800">
+                      <p className="text-blue-300 italic">{news.note}</p>
+                    </div>
+                  )}
+                </div>
               </div>
-
-              <div className="news-content">
-                <ul>
-                  {news.content.map((item, index) => (
-                    <li key={index}>
-                      <span className="bullet">•</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                {news.note && (
-                  <div className="news-note">
-                    <p>{news.note}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <style jsx>{`
-        .download-news-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 2rem;
-          color: #e0e0e0;
-          font-family: 'Poppins', sans-serif;
-        }
-        .header {
-          text-align: center;
-          margin-bottom: 2rem;
-          padding: 2rem 0;
-          background: linear-gradient(135deg, #1a2a6c, #2a4b8c);
-          border-radius: 12px;
-        }
-        .header h1 {
-          font-size: 2.5rem;
-          color: #fff;
-          margin-bottom: 0.5rem;
-          font-weight: 700;
-        }
-        .subtitle {
-          font-size: 1.2rem;
-          color: #aaa;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-        .tab-switcher {
-          display: flex;
-          justify-content: center;
-          margin: 2rem 0;
-          border-bottom: 1px solid #444;
-          padding-bottom: 1rem;
-        }
-        .tab-button {
-          background: none;
-          border: none;
-          padding: 0.8rem 2rem;
-          font-size: 1.1rem;
-          color: var(--text-light);
-          cursor: pointer;
-          position: relative;
-          transition: all 0.3s ease;
-          border-radius: 30px;
-          margin: 0 0.5rem;
-        }
-        .tab-button:hover {
-          background: rgba(255, 255, 255, 0.1);
-        }
-        .tab-button.active {
-          background: var(--accent);
-          color: white;
-          box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
-        }
-        .download-section {
-          padding: 2rem 0;
-        }
-        .download-card {
-          background: rgba(35, 35, 50, 0.7);
-          border-radius: 12px;
-          padding: 2.5rem;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        .download-info {
-          margin-bottom: 3rem;
-        }
-        .download-info h2 {
-          font-size: 2rem;
-          margin-bottom: 1rem;
-          color: white;
-          position: relative;
-          padding-bottom: 0.5rem;
-        }
-        .download-info h2::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 60px;
-          height: 3px;
-          background: var(--accent);
-        }
-        .download-info p {
-          color: var(--text-gray);
-          margin-bottom: 1.5rem;
-          font-size: 1.1rem;
-          max-width: 600px;
-        }
-        .steam-button {
-          display: inline-flex;
-          align-items: center;
-          background: linear-gradient(to right, #1b2838, #2a475e);
-          color: white;
-          padding: 1rem 2rem;
-          border-radius: 50px;
-          text-decoration: none;
-          font-weight: 600;
-          transition: all 0.3s ease;
-          margin: 1rem 0 2rem;
-          font-size: 1.1rem;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        .steam-button:hover {
-          background: linear-gradient(to right, #2a475e, #1b2838);
-          transform: translateY(-3px);
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        .steam-icon {
-          margin-right: 0.8rem;
-          font-size: 1.2rem;
-        }
-        .features-section {
-          margin-top: 2rem;
-        }
-        .features-section h3 {
-          font-size: 1.4rem;
-          margin-bottom: 1.5rem;
-          color: var(--accent);
-          position: relative;
-          padding-left: 1.5rem;
-        }
-        .features-section h3::before {
-          content: '✦';
-          position: absolute;
-          left: 0;
-          color: var(--accent);
-        }
-        .features-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-        }
-        .feature-column ul {
-          list-style: none;
-          padding-left: 0;
-        }
-        .feature-column li {
-          position: relative;
-          padding-left: 1.5rem;
-          margin-bottom: 0.8rem;
-          line-height: 1.6;
-        }
-        .feature-column li::before {
-          content: '✓';
-          position: absolute;
-          left: 0;
-          color: var(--accent);
-          font-weight: bold;
-        }
-        .system-requirements {
-          background: rgba(30, 30, 40, 0.8);
-          border-radius: 12px;
-          padding: 2rem;
-        }
-        .system-requirements h3 {
-          text-align: center;
-          margin-bottom: 2rem;
-          font-size: 1.5rem;
-          color: white;
-          position: relative;
-        }
-        .system-requirements h3::after {
-          content: '';
-          position: absolute;
-          bottom: -10px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 80px;
-          height: 3px;
-          background: var(--accent);
-        }
-        .platform-card {
-          background: rgba(40, 40, 50, 0.6);
-          border-radius: 10px;
-          padding: 1.5rem;
-          margin-bottom: 1.5rem;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        .platform-header {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          margin-bottom: 1.5rem;
-        }
-        .platform-icon {
-          font-size: 1.8rem;
-        }
-        .platform-header h4 {
-          color: var(--accent);
-          margin: 0;
-          font-size: 1.3rem;
-        }
-        .requirements {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
-        }
-        .minimal, .recommended {
-          background: rgba(50, 50, 60, 0.5);
-          border-radius: 8px;
-          padding: 1.5rem;
-        }
-        .minimal h5, .recommended h5 {
-          color: #6c63ff;
-          margin-bottom: 1rem;
-          font-size: 1.1rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-        .minimal ul, .recommended ul {
-          list-style: none;
-          padding-left: 0;
-        }
-        .minimal li, .recommended li {
-          margin-bottom: 0.5rem;
-          color: var(--text-gray);
-          font-size: 0.95rem;
-          padding-left: 1.5rem;
-          position: relative;
-        }
-        .minimal li::before, .recommended li::before {
-          content: '•';
-          position: absolute;
-          left: 0;
-          color: #6c63ff;
-        }
-        .news-section {
-          padding: 2rem 0;
-        }
-        .news-card {
-          background: rgba(35, 35, 50, 0.7);
-          border-radius: 12px;
-          padding: 2rem;
-          margin-bottom: 2rem;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        .news-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1.5rem;
-          padding-bottom: 1rem;
-          border-bottom: 1px solid #444;
-        }
-        .news-header h2 {
-          font-size: 1.5rem;
-          color: white;
-          margin: 0;
-        }
-        .news-date {
-          color: #aaa;
-          font-size: 0.9rem;
-          background: rgba(0, 0, 0, 0.3);
-          padding: 0.3rem 0.8rem;
-          border-radius: 20px;
-        }
-        .news-content ul {
-          list-style: none;
-          padding-left: 0;
-        }
-        .news-content li {
-          position: relative;
-          padding-left: 1.5rem;
-          margin-bottom: 0.8rem;
-          color: #ccc;
-          line-height: 1.6;
-        }
-        .bullet {
-          color: var(--accent);
-          position: absolute;
-          left: 0;
-          font-size: 1.2rem;
-        }
-        .news-note {
-          margin-top: 2rem;
-          padding: 1.5rem;
-          background: rgba(78, 204, 163, 0.1);
-          border-left: 3px solid var(--accent);
-          border-radius: 8px;
-        }
-        .news-note p {
-          color: #ccc;
-          font-style: italic;
-          margin: 0;
-          line-height: 1.6;
-        }
-        @media (max-width: 768px) {
-          .download-news-container { padding: 1rem; }
-          .header { padding: 1.5rem; }
-          .header h1 { font-size: 2rem; }
-          .tab-button { padding: 0.6rem 1.5rem; font-size: 1rem; }
-          .download-card { padding: 1.5rem; }
-          .features-grid { grid-template-columns: 1fr; }
-          .requirements { grid-template-columns: 1fr; }
-          .download-info h2 { font-size: 1.8rem; }
-        }
-        @media (max-width: 480px) {
-          .tab-switcher { flex-direction: column; align-items: center; gap: 0.5rem; }
-          .tab-button { width: 100%; margin: 0.3rem 0; }
-          .news-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-          .news-date { align-self: flex-start; }
-          .header h1 { font-size: 1.8rem; }
-          .subtitle { font-size: 1rem; }
-        }
-      `}</style>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
