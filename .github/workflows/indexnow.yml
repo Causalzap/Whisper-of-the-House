@@ -1,0 +1,89 @@
+name: IndexNow on push
+on:
+  push:
+    branches: [ main ]   # ← 如不是 main，这里改成你的默认分支
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    env:
+      DOMAIN: https://www.whisperofthehouse.com   # ← 你的站点域名（带 https）
+      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}   # ← 仓库 Secret
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+
+      - name: Collect changed files
+        env:
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          # 计算基线提交（合并/多次提交也兼容）
+          BASE="${BEFORE:-$(git rev-parse HEAD^)}"
+          git diff --name-only "$BASE" "$SHA" > changed.txt || true
+
+          # 依据你的项目结构筛选“会映射到 URL 的源文件”
+          # 如有自定义目录（例如 posts/、blog/），在正则里加进去
+          grep -E '^(app/|src/app/).*?/page\.(t|j)sx|^(pages/|src/pages/).*\.(t|j)sx|^(content|posts)/.*\.(md|mdx)|^public/.*\.html$' changed.txt > urlfiles.txt || true
+          cat urlfiles.txt || true
+
+      - name: Build payload
+        run: |
+          python3 - <<'PY'
+          import os, re, json
+          domain = os.environ['DOMAIN'].rstrip('/')
+          key = os.environ['INDEXNOW_KEY']
+
+          try:
+            paths = [l.strip() for l in open('urlfiles.txt') if l.strip()]
+          except FileNotFoundError:
+            paths = []
+
+          def to_url(p: str):
+            p = p.replace('\\','/')
+            # 静态文件直接挂到根
+            if p.startswith('public/'):
+              return f"{domain}/" + p[len('public/'):].lstrip('/')
+
+            # Next.js app router
+            if p.startswith('app/') or p.startswith('src/app/'):
+              u = re.sub(r'^(src/)?app/','',p)
+              u = re.sub(r'/page\.(t|j)sx$','',u)  # /foo/page.tsx -> /foo
+              return f"{domain}/" + u.strip('/')
+
+            # Next.js pages router
+            if p.startswith('pages/') or p.startswith('src/pages/'):
+              u = re.sub(r'^(src/)?pages/','',p)
+              u = re.sub(r'/index\.(t|j)sx$','/',u)   # /about/index.tsx -> /about/
+              u = re.sub(r'\.(t|j)sx$','',u)         # /about.tsx -> /about
+              return f"{domain}/" + u.strip('/')
+
+            # 内容目录（按你的站点路由改这里）
+            if p.startswith(('content/','posts/')):
+              u = re.sub(r'^(content/|posts/)', '', p)
+              u = re.sub(r'\.(md|mdx)$','',u)
+              return f"{domain}/" + u.strip('/')
+
+            return None
+
+          urls = sorted({ u for p in paths for u in [to_url(p)] if u })
+          payload = {
+            "host": re.sub(r'^https?://','',domain),
+            "key": key,
+            "keyLocation": f"{domain}/{key}.txt",
+            "urlList": urls
+          }
+          open('payload.json','w').write(json.dumps(payload))
+          print(json.dumps(payload, indent=2))
+          PY
+
+      - name: Submit to IndexNow
+        run: |
+          if [ -s payload.json ]; then
+            echo "Submitting to IndexNow..."
+            curl -sS -X POST 'https://api.indexnow.org/indexnow' \
+              -H 'Content-Type: application/json; charset=utf-8' \
+              --data @payload.json
+          else
+            echo "No URLs to submit."
+          fi
