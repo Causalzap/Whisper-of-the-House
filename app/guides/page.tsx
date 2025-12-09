@@ -102,6 +102,14 @@ export default function GuidesPage() {
                       Organize and Discover Secrets
                     </a>
                   </li>
+                  <li>
+                    <a 
+                      href="#audio-automation" 
+                      className="text-gray-300 hover:text-white transition-colors duration-300 block py-1 border-l-2 border-transparent hover:border-teal-400 pl-3"
+                    >
+                      Audio Automation Workflow
+                    </a>
+                  </li>
                 </ul>
               </div>
             </aside>
@@ -217,6 +225,30 @@ export default function GuidesPage() {
                 <Link 
                   href="/guides/organize-and-uncover-secrets" 
                   className="inline-flex items-center bg-yellow-500 text-white font-medium px-6 py-3 rounded-lg hover:bg-yellow-600 transition-colors duration-300"
+                >
+                  Read More
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </section>
+
+              {/* Audio Automation Workflow */}
+              <section id="audio-automation" className="guide-section bg-white/5 backdrop-blur-sm rounded-xl p-8 mb-8 border border-white/10">
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-white text-xl font-bold">6</span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white">Audio Automation Workflow</h2>
+                </div>
+                <p className="text-gray-300 text-lg mb-6">
+                  Learn how the audio team built a zero-tech-dependency workflow to deliver 2,000+ sound effects with no dedicated programmers. 
+                  This technical guide reveals the innovative system that enabled efficient audio integration for <em>Whisper of the House</em>, 
+                  from semantic naming conventions to AI-powered automation scripts.
+                </p>
+                <Link 
+                  href="/guides/audio-automation-workflow" 
+                  className="inline-flex items-center bg-teal-500 text-white font-medium px-6 py-3 rounded-lg hover:bg-teal-600 transition-colors duration-300"
                 >
                   Read More
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
