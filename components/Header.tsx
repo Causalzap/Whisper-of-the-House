@@ -65,6 +65,15 @@ const Header = () => {
 
             <li>
               <ActiveLink 
+                href="/i-am-alone" 
+                className="nav-link px-3 py-2 text-slate-200 transition-all duration-300 hover:text-white hover:bg-white/10 rounded-lg"
+              >
+                YES, I'M ALONE. Guide
+              </ActiveLink>
+            </li>
+
+            <li>
+              <ActiveLink 
                 href="/abnormal-points-collection" 
                 className="nav-link px-3 py-2 text-slate-200 transition-all duration-300 hover:text-white hover:bg-white/10 rounded-lg"
               >
