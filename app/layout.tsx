@@ -6,7 +6,7 @@ import "../styles/globals.css";
 export const metadata: Metadata = {
   title: {
     default: "Whisper of the House - Fansite",
-    template: "%s | Whisper of the House",
+    template: "%s",
   },
   description:
     "Explore Beginner's Guide, Progression Guide, Top Tips & Tricks, Hidden Secrets Guide , Organize and Discover Secrets and the full story of Whisper of the House",
