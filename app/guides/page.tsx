@@ -110,6 +110,16 @@ export default function GuidesPage() {
                       Audio Automation Workflow
                     </a>
                   </li>
+                  
+                  <li>
+                    <a 
+                      href="#how-to-help-luna" 
+                      className="text-gray-300 hover:text-white transition-colors duration-300 block py-1 border-l-2 border-transparent hover:border-blue-400 pl-3"
+                    >
+                      How to Help Luna
+                    </a>
+                  </li>
+
                 </ul>
               </div>
             </aside>
@@ -256,6 +266,33 @@ export default function GuidesPage() {
                   </svg>
                 </Link>
               </section>
+
+              {/* How to Help Luna Guide */}
+              <section id="help-luna" className="guide-section bg-white/5 backdrop-blur-sm rounded-xl p-8 mb-8 border border-white/10">
+                <div className="flex items-center mb-6">
+                  {/* 这里的 bg-indigo-500 是为了配合 Luna 的神秘感，也可以换回 bg-teal-500 */}
+                  <div className="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mr-4">
+                    {/* 请根据你列表的实际顺序修改这个数字，比如 7 */}
+                    <span className="text-white text-xl font-bold">7</span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white">How to Help Luna: Full Walkthrough</h2>
+                </div>
+                <p className="text-gray-300 text-lg mb-6">
+                  Stuck on Luna's request? Don't miss the crucial <strong>Mouse Trap</strong> step or you will fail her storyline. 
+                  This guide reveals the location of the <em>Secret Room</em> behind the painting, helps you trigger the second commission, 
+                  and lists every hidden anomaly in her apartment.
+                </p>
+                <Link 
+                  href="/guides/how-to-help-luna" 
+                  className="inline-flex items-center bg-indigo-500 text-white font-medium px-6 py-3 rounded-lg hover:bg-indigo-600 transition-colors duration-300"
+                >
+                  Read More
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </section>
+
             </main>
           </div>
         </div>

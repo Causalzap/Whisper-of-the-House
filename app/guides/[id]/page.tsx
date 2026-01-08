@@ -8,6 +8,7 @@ const TopTipsAndTricks = dynamic(() => import('../top-tips-and-tricks'));
 const HiddenSecretsGuide = dynamic(() => import('../hidden-secrets'));
 const OrganizeAndUncoverSecrets = dynamic(() => import('../organize-and-uncover-secrets'));
 const AudioAutomationWorkflow = dynamic(() => import('../audio-automation-workflow')); // 新增导入
+const HowToHelpLuna = dynamic(() => import('../how-to-help-luna'));
 
 
 // 修改 generateMetadata 函数
@@ -42,6 +43,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     case 'audio-automation-workflow': // 新增case
       title = 'Audio Automation Workflow - Whisper of the House';
       description = 'Learn how the audio team built a zero-tech-dependency workflow to deliver 2,000+ sound effects with no dedicated programmers.';
+      break;
+    case 'how-to-help-luna': // 新增
+      title = 'How to Help Luna: Whisper of the House Walkthrough';
+      description = 'Stuck on Luna’s commission? Learn how to find the Secret Room, place the Mouse Trap, and unlock the second email in this step-by-step guide.';
       break;
     default:
       title = 'Guide Not Found';
@@ -81,6 +86,9 @@ export default async function GuidePage({ params }: { params: Promise<{ id: stri
       break;
     case 'audio-automation-workflow': // 新增case
       content = <AudioAutomationWorkflow />;
+      break;
+    case 'how-to-help-luna': // 新增
+      content = <HowToHelpLuna />;
       break;
     default:
       content = (
