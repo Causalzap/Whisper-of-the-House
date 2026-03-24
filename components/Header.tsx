@@ -1,4 +1,3 @@
-// components/Header.tsx
 'use client';
 
 import React from 'react';
@@ -9,7 +8,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 shadow-lg backdrop-blur-sm">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 cursor-pointer">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
             <span className="text-xl font-bold text-white">W</span>
           </div>
@@ -20,7 +19,7 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="hidden lg:block">
-          <ul className="flex items-center space-x-8">
+          <ul className="flex items-center space-x-6">
             <li>
               <ActiveLink 
                 href="/" 
@@ -29,14 +28,54 @@ const Header = () => {
                 Home
               </ActiveLink>
             </li>
-            <li>
-              <ActiveLink 
-                href="/guides" 
-                className="nav-link px-3 py-2 text-slate-200 transition-all duration-300 hover:text-white hover:bg-white/10 rounded-lg"
-              >
-                Guides
-              </ActiveLink>
+            
+            {/* Game Guides Dropdown */}
+            <li className="relative group">
+              <button className="flex items-center gap-1 nav-link px-3 py-2 text-slate-200 transition-all duration-300 hover:text-white hover:bg-white/10 rounded-lg cursor-pointer">
+                Game Guides
+                {/* 下拉小箭头 */}
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {/* 下拉面板 */}
+              <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out w-72">
+                <div className="bg-purple-900/95 backdrop-blur-md border border-purple-700/50 rounded-xl shadow-xl overflow-hidden flex flex-col p-1">
+                  <ActiveLink 
+                    href="/retro-rewind" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    Retro Rewind - Video Store Simulator
+                  </ActiveLink>
+                  <ActiveLink 
+                    href="/winter-burrow" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    Winter Burrow
+                  </ActiveLink>
+                  <ActiveLink 
+                    href="/routine-guide" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    Routine
+                  </ActiveLink>
+                  <ActiveLink 
+                    href="/i-am-alone" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    YES, I'M ALONE.
+                  </ActiveLink>
+                  <ActiveLink 
+                    href="/abnormal-points-collection" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                  >
+                    Abnormal Points - Whisper of the house
+                  </ActiveLink>
+                </div>
+              </div>
             </li>
+
             <li>
               <ActiveLink 
                 href="/collection" 
@@ -53,42 +92,6 @@ const Header = () => {
                 Play Online
               </ActiveLink>
             </li>
-
-            <li>
-              <ActiveLink 
-                href="/winter-burrow" 
-                className="nav-link px-3 py-2 text-slate-200 transition-all duration-300 hover:text-white hover:bg-white/10 rounded-lg"
-              >
-                Winter Burrow Guide
-              </ActiveLink>
-            </li>
-
-            <li>
-              <ActiveLink 
-                href="/routine-guide" 
-                className="nav-link px-3 py-2 text-slate-200 transition-all duration-300 hover:text-white hover:bg-white/10 rounded-lg"
-              >
-                Routine Guide
-              </ActiveLink>
-            </li>
-
-            <li>
-              <ActiveLink 
-                href="/i-am-alone" 
-                className="nav-link px-3 py-2 text-slate-200 transition-all duration-300 hover:text-white hover:bg-white/10 rounded-lg"
-              >
-                YES, I'M ALONE. Guide
-              </ActiveLink>
-            </li>
-
-            <li>
-              <ActiveLink 
-                href="/abnormal-points-collection" 
-                className="nav-link px-3 py-2 text-slate-200 transition-all duration-300 hover:text-white hover:bg-white/10 rounded-lg"
-              >
-                Abnormal Points
-              </ActiveLink>
-            </li>
             <li>
               <ActiveLink 
                 href="/download-and-news" 
@@ -100,7 +103,7 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Mobile menu button (简单实现) */}
+        {/* Mobile menu button */}
         <button className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -108,7 +111,6 @@ const Header = () => {
         </button>
       </div>
 
-      {/* ActiveLink 样式 */}
       <style jsx>{`
         :global(.nav-link.active) {
           color: rgb(96 165 250);
