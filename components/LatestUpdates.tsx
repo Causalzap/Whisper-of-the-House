@@ -17,11 +17,8 @@ export default function Home() {
   return (
     <Layout>
       <main>
-        {/* Hero Section */}
-        {/* 修改点：去掉了 min-h-screen，改为合理的内边距 pb-32 (为下方卡片留出重叠空间)，pt-20 保证上方空间 */}
-        <section className="flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 px-4 pt-20 pb-32">
+        <section className="flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 px-4 pt-20 pb-16">
           <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-            {/* 游戏封面图 */}
             <div className="flex-1 flex justify-center">
               <img 
                 src="/images/whisper-of-the-house-game-cover.webp" 
@@ -46,28 +43,30 @@ export default function Home() {
           </div>
         </section>
 
-        {/* === 新增：悬浮的 Latest Updates 组件 === */}
-        <LatestUpdates />
+        <section className="relative z-10 -mt-8 px-4">
+          <div className="container mx-auto max-w-5xl">
+            <LatestUpdates />
+          </div>
+        </section>
 
-        {/* 文章内容部分 */}
-        {/* 修改点：加了 pt-24，这样上方的悬浮卡片就不会挡住 "The Ultimate Guide" 这个大标题了 */}
-        <section id="guide-content" className="pt-24 pb-16 bg-white px-4">
+        <section id="guide-content" className="pt-16 pb-16 bg-white px-4">
           <div className="container mx-auto max-w-4xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">The Ultimate Guide to Whisper of the House: High-Score Tips, Furniture Collection & Hidden Secrets</h2>
-              <p className="text-lg text-gray-600">Master Organization, Unlock Secrets, and Achieve Perfect Scores</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                The Ultimate Guide to Whisper of the House: High-Score Tips, Furniture Collection & Hidden Secrets
+              </h2>
+              <p className="text-lg text-gray-600">
+                Master Organization, Unlock Secrets, and Achieve Perfect Scores
+              </p>
             </div>
 
-            {/* 引用文章组件 */}
             <WhisperOfTheHouseGuide />
           </div>
         </section>
 
-        {/* Features Section */}
         <section className="py-16 bg-gray-100 px-4">
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Guides Feature Card */}
               <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
                 <h2 className="text-2xl font-bold text-gray-800 mb-3">Guides</h2>
                 <p className="text-gray-600 flex-grow">Step-by-step walkthroughs to help you progress through the game, from the basics to advanced strategies.</p>
@@ -76,7 +75,6 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Furniture Feature Card */}
               <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
                 <h2 className="text-2xl font-bold text-gray-800 mb-3">Collection</h2>
                 <p className="text-gray-600 flex-grow">Explore a complete list of furniture, with detailed stats, uses, and tips for decoration and functionality.</p>
@@ -85,17 +83,14 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Play Online Feature Card */}
               <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
                 <h2 className="text-2xl font-bold text-gray-800 mb-3">Play Online</h2>
                 <p className="text-gray-600 flex-grow">Dive into a fun and interactive online game. Play, relax, and enjoy a cozy gaming experience with friends!</p>
-                
                 <Link href="/play-online" className="mt-4 bg-orange-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-300">
                   Play Now
                 </Link>
               </div>
 
-              {/* Secrets & Story Feature Card */}
               <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
                 <h2 className="text-2xl font-bold text-gray-800 mb-3">Abnormal Points Collection</h2>
                 <p className="text-gray-600 flex-grow">Discover hidden items, secret rooms, and mysteries waiting to be solved in the Whisper of the House world.</p>
@@ -103,7 +98,6 @@ export default function Home() {
                   Discover Secrets
                 </Link>
               </div>
-
             </div>
           </div>
         </section>

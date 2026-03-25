@@ -4,9 +4,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Retro Rewind Strategy Guide: Black Market, Damaged Tapes, and Early Decisions",
+  title:
+    "Retro Rewind Strategy Guide: Black Market, Damaged Tapes, Custom Videos, and Community",
   description:
-    "Retro Rewind strategy hub covering the Black Market, damaged tape decisions, and the store management choices that matter most.",
+    "Retro Rewind strategy hub covering the Black Market, damaged tape decisions, custom TV videos, community links, and the store management choices that matter most.",
   alternates: {
     canonical: "https://www.whisperofthehouse.com/retro-rewind",
   },
@@ -25,6 +26,18 @@ const coreGuides = [
     description:
       "A decision guide for broken tapes, replacement costs, rainy Friday timing, and when to replace revenue instead of chasing the exact same title.",
   },
+  {
+    href: "/retro-rewind/custom-videos/",
+    title: "How to Add Your Own Videos to Retro Rewind",
+    description:
+      "Learn how to replace TV channel files, use the correct filename and format, and avoid common custom video playback problems.",
+  },
+  {
+    href: "/retro-rewind/community/",
+    title: "Retro Rewind Discord, Community, and Official Links",
+    description:
+      "Find the official Discord, the best places to report bugs, where players share custom content, and which community spaces are most useful.",
+  },
 ];
 
 const comingSoon = [
@@ -34,7 +47,6 @@ const comingSoon = [
 ];
 
 export default function Page() {
-  // FAQ JSON-LD 结构化数据，用于抢占谷歌搜索结果的富文本展示
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -63,12 +75,27 @@ export default function Page() {
           text: "No. Replace proven earners and let weak stock go. In many cases, it is smarter to replace the revenue than the exact title.",
         },
       },
+      {
+        "@type": "Question",
+        name: "Can you add your own videos to Retro Rewind?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. You can replace the default public TV channel file with your own compatible MP4 video, as long as you use the correct filename and folder path.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does Retro Rewind have an official Discord?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Retro Rewind has an official Discord, and it is one of the best places for updates, bug discussion, and custom-content help.",
+        },
+      },
     ],
   };
 
   return (
     <>
-      {/* 注入 JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -99,8 +126,9 @@ export default function Page() {
           </p>
           <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-600 dark:text-zinc-300">
             This hub collects the guides that matter most for running a smarter
-            video store, starting with damaged tape decisions and whether the
-            Black Market is actually worth using.
+            video store, from damaged tape decisions and Black Market strategy
+            to custom TV videos and the main community spaces players actually
+            use.
           </p>
         </header>
 
@@ -108,7 +136,7 @@ export default function Page() {
           <h2 className="mb-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
             Core Decisions That Define Your Store
           </h2>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-2">
             {coreGuides.map((guide) => (
               <article
                 key={guide.href}
@@ -148,7 +176,6 @@ export default function Page() {
             earns the most from this shelf right now?” That is the difference
             between replacing titles and replacing revenue.
           </p>
-          {/* 优化了这里的列表：使用了 Tailwind 的原生态 list-disc 和 list-inside */}
           <ul className="mt-4 list-inside list-disc space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
             <li>Replace hot demand drivers quickly</li>
             <li>Let weak stock die instead of overpaying to recover it</li>
@@ -159,10 +186,51 @@ export default function Page() {
 
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
+            Featured Guides
+          </h2>
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
+            <ul className="list-inside list-disc space-y-3 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+              <li>
+                <Link
+                  href="/retro-rewind/is-the-black-market-worth-it/"
+                  className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
+                >
+                  Black Market strategy and exact-title decisions
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/retro-rewind/when-to-replace-damaged-tape/"
+                  className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
+                >
+                  Damaged tapes, replacement timing, and rainy Friday demand
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/retro-rewind/custom-videos/"
+                  className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
+                >
+                  Custom TV videos, channel files, and playback fixes
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/retro-rewind/community/"
+                  className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
+                >
+                  Official Discord, bug-report channels, and community links
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="mb-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
             What to Learn Next
           </h2>
           <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-            {/* 优化了这里的列表：去掉了硬编码的圆点，使用 Tailwind 原生样式 */}
             <ul className="list-inside list-disc space-y-3 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
               {comingSoon.map((item) => (
                 <li key={item}>{item}</li>
@@ -204,6 +272,28 @@ export default function Page() {
               <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
                 No. Replace proven earners and let weak stock go. In many cases,
                 it is smarter to replace the revenue than the exact title.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                Can you add your own videos to Retro Rewind?
+              </h3>
+              <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
+                Yes. You can replace the default public TV channel file with
+                your own compatible MP4 video, as long as you use the correct
+                filename and folder path.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                Does Retro Rewind have an official Discord?
+              </h3>
+              <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
+                Yes. Retro Rewind has an official Discord, and it is one of the
+                best places for updates, bug discussion, and custom-content
+                help.
               </p>
             </div>
           </div>
