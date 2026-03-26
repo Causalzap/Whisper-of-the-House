@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title:
-    "Retro Rewind Strategy Guide: Black Market, Damaged Tapes, Custom Videos, and Community",
+    "Retro Rewind Strategy Guide: SKU Codes, Black Market, Damaged Tapes, Custom Videos, and Community",
   description:
-    "Retro Rewind strategy hub covering the Black Market, damaged tape decisions, custom TV videos, community links, and the store management choices that matter most.",
+    "Retro Rewind strategy hub covering SKU codes, the Black Market, damaged tape decisions, custom TV videos, community links, and the store-management choices that matter most.",
   alternates: {
     canonical: "https://www.whisperofthehouse.com/retro-rewind",
   },
@@ -15,10 +15,16 @@ export const metadata: Metadata = {
 
 const coreGuides = [
   {
+    href: "/retro-rewind/sku-codes/",
+    title: "Retro Rewind SKU Codes & Black Market Guide",
+    description:
+      "Learn how to find SKU codes, use them in the Black Market, and decide when exact VHS replacement is actually worth the extra cost.",
+  },
+  {
     href: "/retro-rewind/is-the-black-market-worth-it/",
     title: "Is the Black Market Worth It in Retro Rewind?",
     description:
-      "Learn when the shady Tape Dealer is actually worth using, when regular PC orders are better, and how to avoid reputation damage from bad shelf placement.",
+      "Learn when the shady Tape Dealer is actually worth using, when regular PC orders are better, and how to avoid overusing exact-title purchases.",
   },
   {
     href: "/retro-rewind/when-to-replace-damaged-tape/",
@@ -43,7 +49,7 @@ const coreGuides = [
 const comingSoon = [
   "Best Early-Game Priorities in Retro Rewind",
   "Inventory Strategy: Variety vs Demand",
-  "How to Use the Black Market Without Hurting Your Store",
+  "Best Genres and Shelf Priorities in Retro Rewind",
 ];
 
 export default function Page() {
@@ -65,6 +71,14 @@ export default function Page() {
         acceptedAnswer: {
           "@type": "Answer",
           text: "Usually only in specific situations. It is better as a precision tool than as your main growth engine.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What do SKU codes do in Retro Rewind?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "SKU codes let you order one exact VHS tape through the Black Market instead of waiting for normal stock rotation. They are most useful for replacing a proven seller or targeting one exact title.",
         },
       },
       {
@@ -119,18 +133,39 @@ export default function Page() {
             Retro Rewind Strategy Guide: What Actually Matters
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-600 dark:text-zinc-300">
-            Retro Rewind is not really about stocking tapes — it is about making
-            the right store decisions. Most players lose money because they
-            replace the wrong tapes, overuse the Black Market, or chase exact
-            titles instead of protecting revenue.
+            Retro Rewind is not just about stocking tapes. It is about making
+            the right store decisions at the right time — whether that means
+            using SKU codes for an exact replacement, deciding if the Black
+            Market premium is justified, or knowing when to stop protecting weak
+            inventory.
           </p>
           <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-600 dark:text-zinc-300">
             This hub collects the guides that matter most for running a smarter
-            video store, from damaged tape decisions and Black Market strategy
-            to custom TV videos and the main community spaces players actually
-            use.
+            video store, from SKU codes and Black Market strategy to damaged
+            tape decisions, custom TV videos, and the main community spaces
+            players actually use.
           </p>
         </header>
+
+        <section className="mb-12 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-900">
+          <h2 className="mb-3 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
+            Start Here First
+          </h2>
+          <p className="max-w-3xl text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+            If you only read one guide first, start with SKU codes. It explains
+            how exact-title ordering works, how the Black Market fits into that
+            system, and why precise replacement is sometimes smart — but not
+            always.
+          </p>
+          <div className="mt-4">
+            <Link
+              href="/retro-rewind/sku-codes/"
+              className="text-sm font-medium text-zinc-900 underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:text-zinc-100 dark:decoration-zinc-700"
+            >
+              Read the SKU Codes & Black Market Guide
+            </Link>
+          </div>
+        </section>
 
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
@@ -177,6 +212,7 @@ export default function Page() {
             between replacing titles and replacing revenue.
           </p>
           <ul className="mt-4 list-inside list-disc space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+            <li>Use SKU codes when exact replacement is actually justified</li>
             <li>Replace hot demand drivers quickly</li>
             <li>Let weak stock die instead of overpaying to recover it</li>
             <li>Use the Black Market for precision, not general growth</li>
@@ -190,6 +226,14 @@ export default function Page() {
           </h2>
           <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
             <ul className="list-inside list-disc space-y-3 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+              <li>
+                <Link
+                  href="/retro-rewind/sku-codes/"
+                  className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
+                >
+                  SKU codes, exact-title ordering, and when the Black Market is worth using
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/retro-rewind/is-the-black-market-worth-it/"
@@ -262,6 +306,18 @@ export default function Page() {
               <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
                 Usually only in specific situations. It is better as a precision
                 tool than as your main growth engine.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                What do SKU codes do in Retro Rewind?
+              </h3>
+              <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
+                SKU codes let you order one exact VHS tape through the Black
+                Market instead of waiting for normal stock rotation. They are
+                most useful for replacing a proven seller or targeting one exact
+                title.
               </p>
             </div>
 
