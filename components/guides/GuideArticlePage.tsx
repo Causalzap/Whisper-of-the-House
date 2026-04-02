@@ -18,8 +18,10 @@ type GuideArticlePageProps = {
   title: string;
   description: string;
   gameTitle: string;
+  gameHref?: string;
   breadcrumbBaseHref?: string;
   breadcrumbBaseLabel?: string;
+  hideCurrentTitleInBreadcrumb?: boolean;
   updatedAt?: string;
   toc?: TocItem[];
   relatedLinks?: RelatedLink[];
@@ -30,8 +32,10 @@ export default function GuideArticlePage({
   title,
   description,
   gameTitle,
+  gameHref = "/retro-rewind/",
   breadcrumbBaseHref = "/",
   breadcrumbBaseLabel = "Home",
+  hideCurrentTitleInBreadcrumb = false,
   updatedAt,
   toc = [],
   relatedLinks = [],
@@ -108,13 +112,18 @@ export default function GuideArticlePage({
           {breadcrumbBaseLabel}
         </Link>
         <span className="mx-2">/</span>
-        <Link href="/retro-rewind/" className="hover:underline">
+        <Link href={gameHref} className="hover:underline">
           {gameTitle}
         </Link>
-        <span className="mx-2">/</span>
-        <span className="text-zinc-700 dark:text-zinc-300 line-clamp-1 inline-block align-bottom max-w-[200px] sm:max-w-none">
-          {title}
-        </span>
+        
+        {!hideCurrentTitleInBreadcrumb && (
+          <>
+            <span className="mx-2">/</span>
+            <span className="text-zinc-700 dark:text-zinc-300 line-clamp-1 inline-block align-bottom max-w-[200px] sm:max-w-none">
+              {title}
+            </span>
+          </>
+        )}
       </nav>
 
       <div className="grid gap-10 lg:grid-cols-[1fr_280px]">
