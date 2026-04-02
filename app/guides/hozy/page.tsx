@@ -102,6 +102,10 @@ export default function Page() {
     <>
       <Header />
       <main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <GuideArticlePage
           title="Hozy Guides: Help for Dreams, Penthouse, Cafe, and Other Tough Levels"
           description="Some Hozy rooms are much easier to understand than others. This page helps you find the right guide if a level feels strange, cluttered, or harder to balance than it should."
