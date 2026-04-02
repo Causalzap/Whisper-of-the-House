@@ -50,101 +50,160 @@ export default function Home() {
               >
                 Browse Retro Rewind
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative z-10 -mt-8 md:-mt-10 px-4 pt-20">
-        <div className="container mx-auto max-w-5xl">
-          <div className="rounded-2xl bg-white shadow-xl border border-gray-100 p-6 md:p-7">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-5">
-              <h2 className="text-xl font-bold text-gray-900">
-                Latest Retro Rewind Updates
-              </h2>
-              <span className="text-sm text-gray-400">New guides & articles</span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Link
-                href="/retro-rewind/custom-videos"
-                className="group rounded-xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-purple-300"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-sm md:text-base font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
-                      Custom Videos Guide
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-                      Learn how custom videos work and how to use them more effectively in Retro Rewind.
-                    </p>
-                  </div>
-                  <span className="text-purple-500 transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
 
               <Link
-                href="/retro-rewind/community"
-                className="group rounded-xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-purple-300"
+                href="/guides/hozy"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-sm md:text-base font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
-                      Community Insights
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-                      Discover player tips, helpful ideas, and shared strategies from the Retro Rewind community.
-                    </p>
-                  </div>
-                  <span className="text-purple-500 transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
-
-              <Link
-                href="/retro-rewind/is-the-black-market-worth-it"
-                className="group rounded-xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-purple-300"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-sm md:text-base font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
-                      Is the Black Market Worth It?
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-                      A practical guide to the risks, rewards, and best times to use the black market.
-                    </p>
-                  </div>
-                  <span className="text-purple-500 transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
-              </Link>
-
-              <Link
-                href="/retro-rewind/when-to-replace-damaged-tape"
-                className="group rounded-xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 px-4 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-purple-300"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-sm md:text-base font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">
-                      When to Replace Damaged Tape
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-                      Learn when replacing damaged tape improves workflow, efficiency, and long-term progress.
-                    </p>
-                  </div>
-                  <span className="text-purple-500 transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </div>
+                Explore Hozy
               </Link>
             </div>
           </div>
         </div>
       </section>
+
+      <section className="relative z-10 -mt-8 md:-mt-10 px-4 pt-16">
+  <div className="container mx-auto max-w-6xl">
+    <div className="rounded-2xl bg-white shadow-lg border border-gray-100 p-4 md:p-5">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-4">
+        <h2 className="text-lg font-bold text-gray-900">
+          Latest Updates
+        </h2>
+        <span className="text-xs text-gray-400">New guides & articles</span>
+      </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
+        {/* ===== Retro Rewind ===== */}
+
+        <Link
+          href="/retro-rewind/custom-videos"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-purple-500 font-semibold">Retro Rewind</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+              Custom Videos Guide
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            How custom videos work and how to use them effectively.
+          </p>
+        </Link>
+
+        <Link
+          href="/retro-rewind/community"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-purple-500 font-semibold">Retro Rewind</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+              Community Insights
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Tips and strategies from the community.
+          </p>
+        </Link>
+
+        <Link
+          href="/retro-rewind/is-the-black-market-worth-it"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-purple-500 font-semibold">Retro Rewind</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+              Black Market Worth It?
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Risks, rewards, and when to use it.
+          </p>
+        </Link>
+
+        <Link
+          href="/retro-rewind/when-to-replace-damaged-tape"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-purple-500 font-semibold">Retro Rewind</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+              Replace Damaged Tape
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            When replacing improves progress.
+          </p>
+        </Link>
+
+        {/* ===== Hozy ===== */}
+
+        <Link
+          href="/guides/hozy/cafe-layout-tips"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-indigo-500 font-semibold">Hozy</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700">
+              Cafe Layout Tips
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Keep the Cafe cozy without clutter.
+          </p>
+        </Link>
+
+        <Link
+          href="/guides/hozy/hardest-levels-ranked"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-indigo-500 font-semibold">Hozy</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700">
+              Hardest Levels Ranked
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Which rooms feel toughest to finish.
+          </p>
+        </Link>
+
+        <Link
+          href="/guides/hozy/penthouse-layout-guide"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-indigo-500 font-semibold">Hozy</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700">
+              Penthouse Layout Guide
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Balance the large space effectively.
+          </p>
+        </Link>
+
+        <Link
+          href="/guides/hozy/dreams-explained"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-indigo-500 font-semibold">Hozy</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700">
+              Dreams Explained
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Why the level feels so strange.
+          </p>
+        </Link>
+
+      </div>
+    </div>
+  </div>
+</section>
 
       <section id="guide-content" className="pt-20 pb-16 bg-white px-4">
         <div className="container mx-auto max-w-4xl">
