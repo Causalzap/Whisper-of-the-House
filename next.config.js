@@ -31,6 +31,7 @@ const nextConfig = {
       { source: '/panda-resort', destination: '/play-online/panda-resort' },
       { source: '/puppet-master', destination: '/play-online/puppet-master' },
       { source: '/blumgi-slime', destination: '/play-online/blumgi-slime' },
+      { source: '/my-perfect-hotel', destination: '/play-online/my-perfect-hotel' },
       { source: '/grow-a-garden', destination: '/play-online/grow-a-garden' },
     ];
   },

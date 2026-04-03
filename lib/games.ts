@@ -136,6 +136,19 @@ export const GAMES = defineGames({
         videoTitle:null,
         Guide: dynamic(() => import('@/content/guides/blumgi-slime.mdx')),
     },
+    'my-perfect-hotel': {
+        slug: 'my-perfect-hotel',
+        title: 'My Perfect Hotel — Ultimate Strategy Guide, Tips & Best Upgrades',
+        subtitle: 'Master Staff Management, Optimize Room Upgrades, Serve VIP Guests, and Build Your Hotel Empire Fast',
+        thumbnail: '/images/my-perfect-hotel-logo.jpg', 
+        tags: ['Arcade', 'Idle', 'Simulation', 'Time Management', 'Tycoon', 'Casual'],
+        iframe: 'https://hotgames.io/my-perfect-hotel.embed',
+        description: 
+        'Looking for the best upgrades to buy first in My Perfect Hotel? This ultimate guide covers core gameplay, staff management, smart diamond spending, and pro tips to earn money faster.',
+        videoId: null,
+        videoTitle: null,
+        Guide: dynamic(() => import('@/content/guides/my-perfect-hotel.mdx')),
+    },
     'grow-a-garden': {
         slug: 'grow-a-garden',
         title: 'Grow A Garden — Ultimate Farming Simulator Guide & All Tips and Tricks',

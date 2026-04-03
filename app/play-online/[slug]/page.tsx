@@ -88,10 +88,7 @@ export default async function GamePage(
             </div>
           </section>
 
-          {/* 推荐游戏 */}
-          <section className="mb-8">
-            <HotGames games={ALL_GAMES.filter(g => g.slug !== slug)} />
-          </section>
+         
 
           {/* 攻略 */}
           <section className="mb-16 bg-gray-800/30 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
@@ -115,6 +112,11 @@ export default async function GamePage(
               <YouTubeClient videoId={videoId} />
             </section>
           )}
+
+           {/* 推荐游戏 */}
+           <section className="mb-8">
+            <HotGames games={ALL_GAMES.filter(g => g.slug !== slug)} />
+          </section>
 
         </div>
       </div>
