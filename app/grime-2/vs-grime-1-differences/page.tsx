@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BladeMammothBossGuideContent from "@/data/grime-2/blade-mammoth-boss-guide.mdx";
+import VsGrime1DifferencesContent from "@/data/grime-2/vs-grime-1-differences.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/grime-2/blade-mammoth-boss-guide`;
+const pageUrl = `${siteUrl}/grime-2/vs-grime-1-differences`;
 
 export const metadata: Metadata = {
-  title: "How to Beat Blade Mammoth in GRIME II",
+  title: "GRIME II vs GRIME 1: What Changed and What Improved?",
   description:
-    "Stuck on Blade Mammoth in GRIME II? This guide covers its main attacks, Phase 2 changes, and the safest punish windows.",
+    "Wondering how GRIME II compares with the first game? This guide breaks down combat freedom, Molds, weapons, world design, atmosphere, and which game feels better for different players.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Blade Mammoth Boss Guide",
+          name: "GRIME II vs GRIME 1 Differences",
           item: pageUrl,
         },
       ],
@@ -50,17 +50,13 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "How to Beat Blade Mammoth in GRIME II",
+      headline: "GRIME II vs GRIME 1: What Changed and What Improved?",
       description:
-        "Stuck on Blade Mammoth in GRIME II? This guide covers its main attacks, Phase 2 changes, and the safest punish windows.",
+        "This comparison explains the biggest differences between GRIME II and the original GRIME, including combat freedom, Molds, dynamic weapons, atmosphere, and which game may suit different players better.",
       image: [
-        `${siteUrl}/images/grime-2/blade-mammoth/step1.jpg`,
-        `${siteUrl}/images/grime-2/blade-mammoth/step2.jpg`,
-        `${siteUrl}/images/grime-2/blade-mammoth/step3.jpg`,
-        `${siteUrl}/images/grime-2/blade-mammoth/step5.jpg`,
-        `${siteUrl}/images/grime-2/blade-mammoth/step6.jpg`,
-        `${siteUrl}/images/grime-2/blade-mammoth/step7.jpg`,
-        `${siteUrl}/images/grime-2/blade-mammoth/step-9.jpg`,
+        `${siteUrl}/images/grime-2/vs-grime-1-differences/grime-2-combat.webp`,
+        `${siteUrl}/images/grime-2/vs-grime-1-differences/grime-2-world.webp`,
+        `${siteUrl}/images/grime-2/vs-grime-1-differences/grime-1-battle.webp`,
       ],
       inLanguage: "en",
       dateModified: "2026-04-04",
@@ -70,12 +66,20 @@ const jsonLd = {
           name: "GRIME II",
         },
         {
-          "@type": "Thing",
-          name: "Blade Mammoth",
+          "@type": "VideoGame",
+          name: "GRIME",
         },
         {
           "@type": "Thing",
-          name: "Blade Mammoth boss guide",
+          name: "Molds system",
+        },
+        {
+          "@type": "Thing",
+          name: "Combat freedom",
+        },
+        {
+          "@type": "Thing",
+          name: "Art direction",
         },
       ],
       isPartOf: {
@@ -107,8 +111,8 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="How to Beat Blade Mammoth in GRIME II"
-          description="Stuck on Blade Mammoth in GRIME II? This guide covers its main attacks, Phase 2 changes, and the safest punish windows."
+          title="GRIME II vs GRIME 1: What Changed and What Improved?"
+          description="Wondering how GRIME II compares with the first game? This guide breaks down combat freedom, Molds, weapons, world design, atmosphere, and which game feels better for different players."
           gameTitle="GRIME II"
           gameHref="/grime-2"
           breadcrumbBaseHref="/"
@@ -116,32 +120,32 @@ export default function Page() {
           updatedAt="April 4, 2026"
           toc={[
             {
-              id: "why-blade-mammoth-is-worth-studying-in-grime-ii",
-              label: "Why Blade Mammoth matters",
+              id: "the-biggest-difference-between-grime-ii-and-grime-1",
+              label: "Biggest difference",
             },
             {
-              id: "grime-ii-blade-mammoth-boss-summary",
-              label: "Boss summary",
+              id: "how-grime-ii-changes-combat-freedom",
+              label: "Combat freedom",
             },
             {
-              id: "best-preparation-for-blade-mammoth-in-grime-ii",
-              label: "Best preparation",
+              id: "how-molds-and-dynamic-weapons-make-grime-ii-broader",
+              label: "Molds and weapons",
             },
             {
-              id: "grime-ii-blade-mammoth-main-attacks-and-how-to-handle-them",
-              label: "Main attacks",
+              id: "what-grime-ii-clearly-improves-over-grime-1",
+              label: "Clear improvements",
             },
             {
-              id: "grime-ii-blade-mammoth-phase-2-when-it-starts-and-how-to-handle-the-expanded-coverage",
-              label: "Phase 2",
+              id: "what-is-different-but-not-necessarily-better",
+              label: "Different, not always better",
             },
             {
-              id: "best-punish-windows-against-blade-mammoth-in-grime-ii",
-              label: "Punish windows",
+              id: "what-grime-1-fans-may-not-like-about-grime-ii",
+              label: "What old fans may dislike",
             },
             {
-              id: "most-common-blade-mammoth-mistakes-in-grime-ii",
-              label: "Common mistakes",
+              id: "which-game-is-better-for-different-types-of-players",
+              label: "Which game is better for you",
             },
             {
               id: "faq",
@@ -150,24 +154,24 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/grime-2/kankan-guide/",
-              label: "GRIME II Kankan Guide",
+              href: "/grime-2/",
+              label: "GRIME II Guide Hub",
             },
             {
               href: "/grime-2/best-early-weapons/",
               label: "GRIME II Best Early Weapons",
             },
             {
-              href: "/grime-2/vs-grime-1-differences/",
-              label: "GRIME II vs GRIME 1 Differences",
+              href: "/grime-2/kankan-guide/",
+              label: "GRIME II Kankan Guide",
             },
             {
-              href: "/grime-2/",
-              label: "GRIME II Guide Hub",
+              href: "/grime-2/blade-mammoth-boss-guide/",
+              label: "How to Beat Blade Mammoth in GRIME II",
             },
           ]}
         >
-          <BladeMammothBossGuideContent />
+          <VsGrime1DifferencesContent />
         </GuideArticlePage>
       </main>
       <Footer />

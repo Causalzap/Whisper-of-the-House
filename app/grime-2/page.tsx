@@ -9,9 +9,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 
 export const metadata: Metadata = {
   title:
-    "GRIME II Guide Hub: Bosses, Kankan, Best Early Weapons, and What Changed",
+    "GRIME II Guide Hub: Bosses, Routes & Early Weapons",
   description:
-    "Start here for the most useful GRIME II guides, including the Blade Mammoth boss fight, the Kankan walkthrough, the best early weapons, and the biggest differences from GRIME 1.",
+    "Your complete GRIME II guide hub. Conquer the Blade Mammoth, navigate Kankan, discover the best early weapons, and see what changed from the first game.",
   alternates: {
     canonical: pageUrl,
   },
@@ -140,19 +140,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/grime-2/blade-mammoth-boss-guide/",
+              href: "/grime-2/blade-mammoth-boss-guide",
               label: "How to Beat Blade Mammoth in GRIME II",
             },
             {
-              href: "/grime-2/kankan-guide/",
+              href: "/grime-2/kankan-guide",
               label: "GRIME II Kankan Guide",
             },
             {
-              href: "/grime-2/best-early-weapons/",
+              href: "/grime-2/best-early-weapons",
               label: "GRIME II Best Early Weapons",
             },
             {
-              href: "/grime-2/vs-grime-1-differences/",
+              href: "/grime-2/vs-grime-1-differences",
               label: "GRIME II vs GRIME 1 Differences",
             },
           ]}
