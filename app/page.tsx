@@ -57,6 +57,13 @@ export default function Home() {
               >
                 Explore Hozy
               </Link>
+
+              <Link
+                href="/grime-2"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                Explore GRIME II
+              </Link>
             </div>
           </div>
         </div>
@@ -197,6 +204,68 @@ export default function Home() {
           </div>
           <p className="mt-1 text-xs text-gray-600">
             Why the level feels so strange.
+          </p>
+        </Link>
+
+        {/* ===== GRIME II ===== */}
+
+        <Link
+          href="/grime-2/blade-mammoth-boss-guide"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-emerald-500 font-semibold">GRIME II</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+              Blade Mammoth Boss Guide
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            How to beat Blade Mammoth and survive Phase 2.
+          </p>
+        </Link>
+
+        <Link
+          href="/grime-2/kankan-guide"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-emerald-500 font-semibold">GRIME II</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+              Kankan Guide
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            What to do, where to go, and how to get back on track.
+          </p>
+        </Link>
+
+        <Link
+          href="/grime-2/best-early-weapons"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-emerald-500 font-semibold">GRIME II</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+              Best Early Weapons
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Which weapon to use first and why Maul Axe is safest early.
+          </p>
+        </Link>
+
+        <Link
+          href="/grime-2/vs-grime-1-differences"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-emerald-500 font-semibold">GRIME II</span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+              GRIME II vs GRIME 1
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            What changed, what improved, and what old fans may miss.
           </p>
         </Link>
 
