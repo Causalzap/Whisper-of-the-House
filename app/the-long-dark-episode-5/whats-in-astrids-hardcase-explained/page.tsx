@@ -2,16 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import MissingPeopleLocationsContent from "@/data/the-long-dark/episode-5-missing-people-locations.mdx";
+import AstridsHardcaseExplainedContent from "@/data/the-long-dark/whats-in-astrids-hardcase-explained.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-long-dark-episode-5/episode-5-missing-people-locations`;
+const pageUrl = `${siteUrl}/the-long-dark-episode-5/whats-in-astrids-hardcase-explained`;
 
 export const metadata: Metadata = {
-  title: "Where to Find the 3 Missing People in The Long Dark Ep 5",
-  description:
-    "Stuck in the snow? Don't waste hours searching. Get the exact map locations for all 3 missing people in TLD Episode 5, including how to reach the Constable past the broken bridge.",
-  alternates: {
+    title: "What Is in Astrid's Hardcase in The Long Dark Episode 5?",
+    description: "The case finally opens. Uncover what's inside Astrid's hardcase in The Long Dark Episode 5, why she smuggled the meds, and the tragic truth about Donner.",
+    alternates: {
     canonical: pageUrl,
   },
 };
@@ -38,7 +37,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Episode 5 Missing People Locations",
+          name: "What Is in Astrid's Hardcase?",
           item: pageUrl,
         },
       ],
@@ -50,16 +49,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "The Long Dark Episode 5 Missing People Locations Guide",
+      headline: "What Is in Astrid's Hardcase in The Long Dark Episode 5?",
       description:
-        "This guide shows where to find all three missing people in The Long Dark Episode 5, including the basement survivor, the body behind the waterfall, and the Constable past the broken bridge.",
+        "This guide explains what is in Astrid's hardcase in The Long Dark Episode 5, why she kept it secret, why it could not save Donner, and what the reveal means for the bigger story.",
       image: [
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-1-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-2-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-3-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-basement.jpg`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-waterfall.jpg`,
-        `${siteUrl}/images/the-long-dark/episode-5/constable-fishing-pier.jpg`,
+        `${siteUrl}/images/the-long-dark/episode-5/hardcase-cure-reveal.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/where-is-the-case.webp`,
       ],
       inLanguage: "en",
       dateModified: "2026-04-05",
@@ -74,15 +69,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Missing People objective",
+          name: "Astrid's hardcase",
         },
         {
           "@type": "Thing",
-          name: "Perseverance Mills",
+          name: "Experimental medication",
         },
         {
           "@type": "Thing",
-          name: "Search Party achievement",
+          name: "Aurora-linked cognitive symptoms",
         },
       ],
       isPartOf: {
@@ -114,8 +109,8 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Missing People Locations Guide"
-          description="Looking for all missing people in The Long Dark Episode 5? This guide shows where to find the basement survivor, the body behind the waterfall, and the Constable past the broken bridge."
+          title="What Is in Astrid's Hardcase in The Long Dark Episode 5?"
+          description="Wondering what is in Astrid's hardcase in The Long Dark Episode 5? This guide explains the reveal, why Astrid kept it secret, why it could not save Donner, and what it means for the bigger story."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5"
           breadcrumbBaseHref="/"
@@ -123,32 +118,44 @@ export default function Page() {
           updatedAt="April 5, 2026"
           toc={[
             {
-              id: "where-to-find-all-missing-people-in-the-long-dark-episode-5",
-              label: "All missing people overview",
+              id: "what-is-in-astrids-hardcase-in-one-paragraph",
+              label: "Hardcase in one paragraph",
             },
             {
-              id: "missing-person-1-basement-location",
-              label: "Missing Person 1: basement",
+              id: "what-the-game-actually-confirms-about-the-hardcase",
+              label: "What the game confirms",
             },
             {
-              id: "missing-person-2-waterfall-location",
-              label: "Missing Person 2: waterfall",
+              id: "why-the-hardcase-matters-so-much-in-episode-5",
+              label: "Why the hardcase matters",
             },
             {
-              id: "missing-person-3-constable-location",
-              label: "Constable location",
+              id: "is-it-a-cure-or-just-a-treatment",
+              label: "Cure or treatment?",
             },
             {
-              id: "best-order-to-find-all-three-missing-people",
-              label: "Best route order",
+              id: "why-astrid-kept-it-secret-for-so-long",
+              label: "Why Astrid kept it secret",
             },
             {
-              id: "search-party-achievement-how-to-get-it",
-              label: "Search Party achievement",
+              id: "why-the-hardcase-could-not-save-donner",
+              label: "Why it could not save Donner",
             },
             {
-              id: "most-common-missing-people-mistakes",
-              label: "Common mistakes",
+              id: "what-the-hardcase-reveal-says-about-astrid",
+              label: "What it says about Astrid",
+            },
+            {
+              id: "does-episode-5-fully-answer-the-hardcase-mystery",
+              label: "Does Episode 5 fully answer it?",
+            },
+            {
+              id: "was-the-hardcase-reveal-worth-the-wait",
+              label: "Was the reveal worth it?",
+            },
+            {
+              id: "what-the-hardcase-reveal-means-for-the-bigger-story",
+              label: "What it means for the story",
             },
             {
               id: "faq",
@@ -157,20 +164,24 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
-              label: "Episode 5 Walkthrough",
-            },
-            {
               href: "/the-long-dark-episode-5/",
               label: "The Long Dark Episode 5 Guide Hub",
+            },
+            {
+              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
+              label: "Episode 5 Walkthrough",
             },
             {
               href: "/the-long-dark-episode-5/episode-5-ending-explained/",
               label: "Episode 5 Ending Explained",
             },
+            {
+              href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
+              label: "Missing People Locations Guide",
+            },
           ]}
         >
-          <MissingPeopleLocationsContent />
+          <AstridsHardcaseExplainedContent />
         </GuideArticlePage>
       </main>
       <Footer />
