@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <Layout>
+
       <section className="flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 px-4 pt-20 pb-20 md:pt-24 md:pb-24">
         <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
           <div className="flex-1 flex justify-center">
@@ -71,6 +72,13 @@ export default function Home() {
               >
                 Explore The Long Dark Episode 5
               </Link>
+
+              <Link
+                href="/i-am-jesus-christ"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                Explore I Am Jesus Christ
+              </Link>
             </div>
           </div>
         </div>
@@ -87,7 +95,76 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              
+             {/* ===== I Am Jesus Christ ===== */} 
 
+            <Link
+          href="/i-am-jesus-christ/walkthrough/"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-amber-500">
+              I Am Jesus Christ
+            </span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">
+              Full Walkthrough
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Full story route from John the Baptist to the ending.
+          </p>
+        </Link>
+
+        <Link
+          href="/i-am-jesus-christ/miracles-list/"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-amber-500">
+              I Am Jesus Christ
+            </span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">
+              Miracles List
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Holy Spirit, Divine Vision, miracle categories, and key story scenes.
+          </p>
+        </Link>
+
+        <Link
+          href="/i-am-jesus-christ/apostles-locations/"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-amber-500">
+              I Am Jesus Christ
+            </span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">
+              12 Apostles Locations
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Recruitment order, trigger chains, missables, and follower route help.
+          </p>
+        </Link>
+
+        <Link
+          href="/i-am-jesus-christ/who-should-play/"
+          className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-amber-500">
+              I Am Jesus Christ
+            </span>
+            <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">
+              Who Should Play?
+            </h3>
+          </div>
+          <p className="mt-1 text-xs text-gray-600">
+            Buying advice for Christians, non-Christians, and story-first players.
+          </p>
+        </Link>
               {/* ===== Retro Rewind ===== */}
 
               <Link

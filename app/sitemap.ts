@@ -37,8 +37,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/grow-a-garden`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/guide/hozy`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/the-long-dark-episode-5`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/i-am-jesus-christ`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
 
     // ⬇️ 把 4 篇文章补上
+    { url: `${base}/i-am-jesus-christ/apostles-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/i-am-jesus-christ/miracles-list`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/i-am-jesus-christ/walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/i-am-jesus-christ/who-should-play`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     { url: `${base}/the-long-dark-episode-5/episode-5-ending-explained`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/the-long-dark-episode-5/episode-5-missing-people-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
