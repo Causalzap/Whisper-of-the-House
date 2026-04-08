@@ -5,14 +5,32 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import TheLongDarkEpisode5Content from "@/data/the-long-dark/index.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-long-dark-episode-5`;
+const pageUrl = `${siteUrl}/the-long-dark-episode-5/`;
 
 export const metadata: Metadata = {
-  title: "The Long Dark Episode 5 Guide Hub: Walkthrough, Ending, Missing People",
+  title:
+    "The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People",
   description:
-    "Use this The Long Dark Episode 5 guide hub to find the full walkthrough, missing people locations, ending explained, and Astrid's hardcase answer in one place.",
+    "A complete guide to The Long Dark Episode 5, with the full walkthrough, mission route, Missing People help, ending explanation, and Astrid's hardcase guide.",
   alternates: {
     canonical: pageUrl,
+  },
+  openGraph: {
+    title:
+      "The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People",
+    description:
+      "A complete guide to The Long Dark Episode 5, with the full walkthrough, mission route, Missing People help, ending explanation, and Astrid's hardcase guide.",
+    url: pageUrl,
+    siteName: "Whisper of the House",
+    type: "article",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People",
+    description:
+      "A complete guide to The Long Dark Episode 5, with the full walkthrough, mission route, Missing People help, ending explanation, and Astrid's hardcase guide.",
   },
 };
 
@@ -38,61 +56,59 @@ const jsonLd = {
       ],
     },
     {
-      "@type": "CollectionPage",
-      "@id": `${pageUrl}#webpage`,
-      url: pageUrl,
-      name: "The Long Dark Episode 5 Guide Hub: Walkthrough, Ending, Missing People, and Hardcase Help",
-      description:
-        "Use this The Long Dark Episode 5 guide hub to find the full walkthrough, missing people locations, ending explained, and Astrid's hardcase answer in one place.",
-      inLanguage: "en",
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": pageUrl,
       },
+      headline:
+        "The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People",
+      description:
+        "Main guide for The Long Dark Episode 5, covering the best walkthrough starting point, mission route, Missing People help, ending explanation, and Astrid's hardcase.",
+      inLanguage: "en",
+      dateModified: "2026-04-05",
+      about: [
+        {
+          "@type": "VideoGame",
+          name: "The Long Dark",
+        },
+        {
+          "@type": "CreativeWork",
+          name: "Wintermute Episode 5",
+        },
+        {
+          "@type": "Thing",
+          name: "Perseverance Mills",
+        },
+        {
+          "@type": "Thing",
+          name: "Desperation Bay",
+        },
+        {
+          "@type": "Thing",
+          name: "Suzuki Radio Telescope",
+        },
+        {
+          "@type": "Thing",
+          name: "SAR station",
+        },
+      ],
       isPartOf: {
         "@type": "WebSite",
+        "@id": `${siteUrl}#website`,
         name: "Whisper of the House",
         url: siteUrl,
       },
-      about: {
-        "@type": "VideoGame",
-        name: "The Long Dark",
+      publisher: {
+        "@type": "Organization",
+        "@id": `${siteUrl}#organization`,
+        name: "Whisper of the House",
+        url: siteUrl,
       },
-      dateModified: "2026-04-05",
-      mainEntity: {
-        "@id": `${pageUrl}#itemlist`,
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
       },
-    },
-    {
-      "@type": "ItemList",
-      "@id": `${pageUrl}#itemlist`,
-      name: "The Long Dark Episode 5 guides",
-      numberOfItems: 4,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "The Long Dark Episode 5 Walkthrough",
-          url: `${siteUrl}/the-long-dark-episode-5/episode-5-walkthrough/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "The Long Dark Episode 5 Missing People Locations Guide",
-          url: `${siteUrl}/the-long-dark-episode-5/episode-5-missing-people-locations/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "The Long Dark Episode 5 Ending Explained",
-          url: `${siteUrl}/the-long-dark-episode-5/episode-5-ending-explained/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 4,
-          name: "What Is in Astrid's Hardcase in The Long Dark Episode 5?",
-          url: `${siteUrl}/the-long-dark-episode-5/whats-in-astrids-hardcase-explained/`,
-        },
-      ],
     },
   ],
 };
@@ -107,26 +123,34 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Guide Hub: Walkthrough, Ending, Missing People, and Hardcase Help"
-          description="Use this The Long Dark Episode 5 guide hub to find the full walkthrough, missing people locations, ending explained, and Astrid's hardcase answer in one place."
+          title="The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People"
+          description="The main The Long Dark Episode 5 guide with the best walkthrough starting point, mission route, Missing People help, ending explanation, and Astrid's hardcase links."
           gameTitle="The Long Dark Episode 5"
-          gameHref="/the-long-dark-episode-5"
+          gameHref="/the-long-dark-episode-5/"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           hideCurrentTitleInBreadcrumb={true}
           updatedAt="April 5, 2026"
           toc={[
             {
-              id: "what-this-guide-covers",
-              label: "What this guide covers",
+              id: "what-is-the-long-dark-episode-5",
+              label: "What is Episode 5?",
             },
             {
-              id: "best-guides-to-start-with",
-              label: "Best guides to start with",
+              id: "the-best-way-to-use-this-episode-5-guide",
+              label: "Best way to use this guide",
             },
             {
-              id: "why-these-topics-matter",
-              label: "Why these topics matter",
+              id: "the-main-the-long-dark-episode-5-walkthrough-route",
+              label: "Main walkthrough route",
+            },
+            {
+              id: "most-common-episode-5-stuck-points",
+              label: "Most common stuck points",
+            },
+            {
+              id: "which-episode-5-guide-should-you-open-first",
+              label: "Which guide to open first",
             },
             {
               id: "faq",
@@ -135,20 +159,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-long-dark-episode-5/episode-5-walkthrough",
+              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
               label: "The Long Dark Episode 5 Walkthrough",
             },
             {
-              href: "/the-long-dark-episode-5/episode-5-ending-explained",
+              href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
+              label: "Episode 5 Missing People Locations",
+            },
+            {
+              href: "/the-long-dark-episode-5/episode-5-ending-explained/",
               label: "Episode 5 Ending Explained",
             },
             {
-              href: "/the-long-dark-episode-5/whats-in-astrids-hardcase-explained",
+              href: "/the-long-dark-episode-5/whats-in-astrids-hardcase-explained/",
               label: "What Is in Astrid's Hardcase?",
-            },
-            {
-              href: "/the-long-dark-episode-5/episode-5-missing-people-locations",
-              label: "Episode 5 Missing People Locations Guide",
             },
           ]}
         >

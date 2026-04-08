@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/the-long-dark-episode-5/episode-5-walkthrough`;
 
 export const metadata: Metadata = {
-  title: "The Long Dark Episode 5 Walkthrough [100% Complete Guide]",
+  title: "The Long Dark Episode 5 Walkthrough: Full Story Guide",
   description:
-    "Stuck in Perseverance Mills or the Desperation Bay mine? Our step-by-step walkthrough covers all puzzle solutions, key locations (Dr. Larson's, Radio Telescope), and the final ending.",
+    "Step-by-step The Long Dark Episode 5 walkthrough covering Perseverance Mills, the mine, the substations, the SAR station, and the ending.",
   alternates: {
     canonical: pageUrl,
   },
@@ -50,10 +50,9 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "The Long Dark Episode 5 Walkthrough: The Light At The End Of All Things",
+      headline: "The Long Dark Episode 5 Walkthrough: Full Story Guide",
       description:
-        "This full walkthrough for The Long Dark Episode 5 covers Perseverance Mills, Dr. Larson's clinic, Terry's radio hut, Desperation Bay, the mine, the three substations, the Suzuki Radio Telescope, the SAR station, and the ending.",
+        "Step-by-step walkthrough for The Long Dark Episode 5, covering the full route from Perseverance Mills to the ending.",
       image: [
         `${siteUrl}/images/the-long-dark/episode-5/perseverance-mills-arrival.webp`,
         `${siteUrl}/images/the-long-dark/episode-5/cargo-ship.webp`,
@@ -112,8 +111,8 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Walkthrough: The Light At The End Of All Things"
-          description="Stuck in The Long Dark Episode 5? This full walkthrough covers Perseverance Mills, Dr. Larson's clinic, Terry's radio hut, Desperation Bay, the mine, the three substations, the Suzuki Radio Telescope, the SAR station, and the ending."
+          title="The Long Dark Episode 5 Walkthrough: Full Story Guide"
+          description="Step-by-step The Long Dark Episode 5 walkthrough covering Perseverance Mills, the mine, the substations, the SAR station, and the ending."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5"
           breadcrumbBaseHref="/"
@@ -164,7 +163,7 @@ export default function Page() {
           relatedLinks={[
             {
               href: "/the-long-dark-episode-5/",
-              label: "The Long Dark Episode 5 Guide Hub",
+              label: "The Long Dark Episode 5 Guide",
             },
             {
               href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
