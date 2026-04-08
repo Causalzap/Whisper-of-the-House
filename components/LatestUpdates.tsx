@@ -1,107 +1,221 @@
-import Layout from '../components/Layout';
+// components/LatestUpdates.tsx
+import React from 'react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
-import '../styles/globals.css';
-import WhisperOfTheHouseGuide from '@/components/WhisperOfTheHouseGuide';
-import LatestUpdates from '@/components/LatestUpdates';
 
-export const metadata: Metadata = {
-  title: 'Whisper of the House',
-  description: 'Explore Whisper of the House—detailed guides, hidden secrets, furniture lists, and the full storyline. Uncover all the hidden gems in this captivating world.',
-  alternates: {
-    canonical: 'https://www.whisperofthehouse.com',
-  }
-};
-
-export default function Home() {
+export default function LatestUpdates() {
   return (
-    <Layout>
-      <main>
-        <section className="flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 px-4 pt-20 pb-16">
-          <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-            <div className="flex-1 flex justify-center">
-              <img 
-                src="/images/whisper-of-the-house-game-cover.webp" 
-                alt="Whisper of the House Game Cover" 
-                className="w-full max-w-md rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105"
-              />
-            </div>
-            <div className="flex-1 space-y-6 text-white">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Whisper of the House — Guides, Furniture, Secrets & Full Story
-              </h1>
-              <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
-                Explore comprehensive guides, uncover hidden secrets, browse the complete furniture list, and dive deep into the full story of Whisper of the House.
-              </p>
-              <Link 
-                href="/guides" 
-                className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1"
-              >
-                Start Exploring
-              </Link>
-            </div>
+    <section className="relative z-10 -mt-8 md:-mt-10 px-4 pt-16">
+      <div className="container mx-auto max-w-6xl">
+        <div className="rounded-2xl bg-white shadow-lg border border-gray-100 p-4 md:p-5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-4">
+            <h2 className="text-lg font-bold text-gray-900">Latest Updates</h2>
+            <span className="text-xs text-gray-400">New guides & articles</span>
           </div>
-        </section>
 
-        <section className="relative z-10 -mt-8 px-4">
-          <div className="container mx-auto max-w-5xl">
-            <LatestUpdates />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* ===== I Am Jesus Christ ===== */}
+            <Link href="/i-am-jesus-christ/walkthrough/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-amber-500">I Am Jesus Christ</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">Full Walkthrough</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Full story route from John the Baptist to the ending.</p>
+            </Link>
+
+            <Link href="/i-am-jesus-christ/miracles-list/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-amber-500">I Am Jesus Christ</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">Miracles List</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Holy Spirit, Divine Vision, miracle categories, and key story scenes.</p>
+            </Link>
+
+            <Link href="/i-am-jesus-christ/apostles-locations/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-amber-500">I Am Jesus Christ</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">12 Apostles Locations</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Recruitment order, trigger chains, missables, and follower route help.</p>
+            </Link>
+
+            <Link href="/i-am-jesus-christ/who-should-play/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-amber-500">I Am Jesus Christ</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">Who Should Play?</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Buying advice for Christians, non-Christians, and story-first players.</p>
+            </Link>
+
+            {/* ===== Retro Rewind ===== */}
+            <Link href="/retro-rewind/custom-videos" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-purple-500 font-semibold">Retro Rewind</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">Custom Videos Guide</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">How custom videos work and how to use them effectively.</p>
+            </Link>
+
+            <Link href="/retro-rewind/community" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-purple-500 font-semibold">Retro Rewind</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">Community Insights</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Tips and strategies from the community.</p>
+            </Link>
+
+            <Link href="/retro-rewind/is-the-black-market-worth-it" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-purple-500 font-semibold">Retro Rewind</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">Black Market Worth It?</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Risks, rewards, and when to use it.</p>
+            </Link>
+
+            <Link href="/retro-rewind/when-to-replace-damaged-tape" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-purple-500 font-semibold">Retro Rewind</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">Replace Damaged Tape</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">When replacing improves progress.</p>
+            </Link>
+
+            {/* ===== Hozy ===== */}
+            <Link href="/guides/hozy/cafe-layout-tips" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-indigo-500 font-semibold">Hozy</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700">Cafe Layout Tips</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Keep the Cafe cozy without clutter.</p>
+            </Link>
+
+            <Link href="/guides/hozy/hardest-levels-ranked" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-indigo-500 font-semibold">Hozy</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700">Hardest Levels Ranked</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Which rooms feel toughest to finish.</p>
+            </Link>
+
+            <Link href="/guides/hozy/penthouse-layout-guide" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-indigo-500 font-semibold">Hozy</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700">Penthouse Layout Guide</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Balance the large space effectively.</p>
+            </Link>
+
+            <Link href="/guides/hozy/dreams-explained" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-indigo-500 font-semibold">Hozy</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700">Dreams Explained</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Why the level feels so strange.</p>
+            </Link>
+
+            {/* ===== GRIME II ===== */}
+            <Link href="/grime-2/blade-mammoth-boss-guide" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-emerald-500 font-semibold">GRIME II</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">Blade Mammoth Boss Guide</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">How to beat Blade Mammoth and survive Phase 2.</p>
+            </Link>
+
+            <Link href="/grime-2/kankan-guide" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-emerald-500 font-semibold">GRIME II</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">Kankan Guide</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">What to do, where to go, and how to get back on track.</p>
+            </Link>
+
+            <Link href="/grime-2/best-early-weapons" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-emerald-500 font-semibold">GRIME II</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">Best Early Weapons</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Which weapon to use first and why Maul Axe is safest early.</p>
+            </Link>
+
+            <Link href="/grime-2/vs-grime-1-differences" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-emerald-500 font-semibold">GRIME II</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">GRIME II vs GRIME 1</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">What changed, what improved, and what old fans may miss.</p>
+            </Link>
+
+            {/* ===== All Will Fall ===== */}
+
+
+            <Link href="/all-will-fall/oil-rig-guide/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-orange-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-orange-500 font-semibold">All Will Fall</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-orange-700">Oil Rig Guide</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Best early build order, first raise timing, and the 500% Rain Catcher setup.</p>
+            </Link>
+
+            <Link href="/all-will-fall/tanker-truck-guide/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-orange-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-orange-500 font-semibold">All Will Fall</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-orange-700">Tanker Truck Guide</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Early build order, fuel math, and how to keep zone progression from stalling out.</p>
+            </Link>
+
+            <Link href="/all-will-fall/tornado-race-guide/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-orange-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-orange-500 font-semibold">All Will Fall</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-orange-700">Tornado Race Guide</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Day 60 timeline, Thruster Engines, Power Grid timing, and evacuation planning.</p>
+            </Link>
+
+            <Link href="/all-will-fall/collapse-troubleshooting/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-orange-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-orange-500 font-semibold">All Will Fall</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-orange-700">Collapse Troubleshooting</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Why buildings fail, what stability problems look like, and how to fix them fast.</p>
+            </Link>
+
+            {/* ===== The Long Dark Episode 5 ===== */}
+            <Link href="/the-long-dark-episode-5" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-sky-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-sky-500 font-semibold">The Long Dark</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-sky-700">Episode 5 Guide Hub</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Walkthroughs, missing people help, ending answers, and hardcase guides.</p>
+            </Link>
+
+            <Link href="/the-long-dark-episode-5/episode-5-walkthrough" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-sky-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-sky-500 font-semibold">The Long Dark</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-sky-700">Episode 5 Walkthrough</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Full chapter route from Perseverance Mills to the ending.</p>
+            </Link>
+
+            <Link href="/the-long-dark-episode-5/episode-5-missing-people-locations" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-sky-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-sky-500 font-semibold">The Long Dark</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-sky-700">Missing People Locations</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">Basement, waterfall, and Constable routes in one guide.</p>
+            </Link>
+
+            <Link href="/the-long-dark-episode-5/episode-5-ending-explained" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-sky-300">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-sky-500 font-semibold">The Long Dark</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-sky-700">Episode 5 Ending Explained</h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">What the ending means, what Atwood reveals, and how to read the final scenes.</p>
+            </Link>
+
           </div>
-        </section>
-
-        <section id="guide-content" className="pt-16 pb-16 bg-white px-4">
-          <div className="container mx-auto max-w-4xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                The Ultimate Guide to Whisper of the House: High-Score Tips, Furniture Collection & Hidden Secrets
-              </h2>
-              <p className="text-lg text-gray-600">
-                Master Organization, Unlock Secrets, and Achieve Perfect Scores
-              </p>
-            </div>
-
-            <WhisperOfTheHouseGuide />
-          </div>
-        </section>
-
-        <section className="py-16 bg-gray-100 px-4">
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-                <h2 className="text-2xl font-bold text-gray-800 mb-3">Guides</h2>
-                <p className="text-gray-600 flex-grow">Step-by-step walkthroughs to help you progress through the game, from the basics to advanced strategies.</p>
-                <Link href="/guides" className="mt-4 bg-blue-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
-                  View Guides
-                </Link>
-              </div>
-
-              <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-                <h2 className="text-2xl font-bold text-gray-800 mb-3">Collection</h2>
-                <p className="text-gray-600 flex-grow">Explore a complete list of furniture, with detailed stats, uses, and tips for decoration and functionality.</p>
-                <Link href="/collection" className="mt-4 bg-green-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-300">
-                  Explore Collection
-                </Link>
-              </div>
-
-              <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-                <h2 className="text-2xl font-bold text-gray-800 mb-3">Play Online</h2>
-                <p className="text-gray-600 flex-grow">Dive into a fun and interactive online game. Play, relax, and enjoy a cozy gaming experience with friends!</p>
-                <Link href="/play-online" className="mt-4 bg-orange-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-300">
-                  Play Now
-                </Link>
-              </div>
-
-              <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-                <h2 className="text-2xl font-bold text-gray-800 mb-3">Abnormal Points Collection</h2>
-                <p className="text-gray-600 flex-grow">Discover hidden items, secret rooms, and mysteries waiting to be solved in the Whisper of the House world.</p>
-                <Link href="/abnormal-points-collection" className="mt-4 bg-purple-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors duration-300">
-                  Discover Secrets
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </Layout>
+        </div>
+      </div>
+    </section>
   );
 }

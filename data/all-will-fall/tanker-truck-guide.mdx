@@ -1,0 +1,561 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+
+export const tankerTruckObservedRows = [
+  {
+    status: "confirmed",
+    item: "Opening population target",
+    value: "12 people",
+    why: "The opening food and water math in the observed run is built around stabilizing 12 citizens first."
+  },
+  {
+    status: "confirmed",
+    item: "Wood Catcher output",
+    value: "1.5 wood per hour",
+    why: "This is the first hard production number used to justify the opening route."
+  },
+  {
+    status: "confirmed",
+    item: "Wood Boiler cost",
+    value: "20 wood",
+    why: "This is the first practical water stabilizer in the observed Tanker Truck route."
+  },
+  {
+    status: "confirmed",
+    item: "Opening food plan",
+    value: "2 Fishing Huts for 12 people",
+    why: "The observed run treats two fishing huts as the first equilibrium target before expanding population."
+  },
+  {
+    status: "confirmed",
+    item: "Electric Junk Catcher power need",
+    value: "3 electricity",
+    why: "This is why the early energy route matters so much in this scenario."
+  },
+  {
+    status: "confirmed",
+    item: "Hamster Wheel output",
+    value: "3 electricity",
+    why: "It is the simplest first way to power the Electric Junk Catcher in the observed route."
+  },
+  {
+    status: "confirmed",
+    item: "Observed move / jump cost",
+    value: "60 fuel",
+    why: "This is the clearest visible checkpoint for route planning between zones in the run."
+  },
+  {
+    status: "confirmed",
+    item: "Wave Generator threshold used",
+    value: "70% placement was enough to reach the needed 3 electricity",
+    why: "The run explicitly uses an imperfect but usable placement instead of waiting for a perfect one."
+  },
+  {
+    status: "confirmed",
+    item: "Broken boat repair result",
+    value: "15 wood spent for a Simple Boat, plus 5 junk returned",
+    why: "Useful for deciding whether a broken boat event is worth fixing in the early-midgame."
+  },
+  {
+    status: "confirmed",
+    item: "Wood-to-fuel planning note",
+    value: "3 wood per hour was treated as the key fuel-production threshold",
+    why: "Fuel is the real scenario bottleneck, so wood math matters more than comfort buildings early."
+  },
+  {
+    status: "confirmed",
+    item: "Mushroom Farm comparison",
+    value: "1 Mushroom Farm was treated as worth about 3 Fishing Huts",
+    why: "This is the clearest late opening pivot away from sailor-heavy fishing micro."
+  },
+  {
+    status: "pending",
+    item: "Exact per-jump fuel formula across all zones",
+    value: "Not yet fully verified from a single observed run",
+    why: "The transcript clearly shows a 60-fuel move, but not a universal formula for every map state."
+  },
+  {
+    status: "pending",
+    item: "Best permanent passive-water setup",
+    value: "Still needs direct side-by-side testing",
+    why: "The run compares boilers, distillers, and later electric water, but does not fully isolate each method."
+  },
+  {
+    status: "pending",
+    item: "Best long-run fuel ratio",
+    value: "Still needs direct testing",
+    why: "The run confirms the importance of wood-to-fuel, but not the final optimized ratio for every population size."
+  }
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**All Will Fall Tanker Truck guide — the shortest route that actually works**
+
+If you only need the fast version, use this:
+
+- **Open with a strict checklist:** **Storage → Water Storage → Food Storage → Small Lab / Society building → Wood Catcher → Wood Boiler → 2 Fishing Huts → Simple Boat**
+- **Your first real number is Wood Catcher = 1.5 wood per hour.** That is why wood is the first true bottleneck to solve
+- **One clearly shown move cost is 60 fuel.** Do not leave a zone casually if you cannot replace that fuel pressure
+- **Electric Junk Catcher needs 3 electricity, and Hamster Wheel gives 3 electricity.** That is the first practical powered scavenging bridge
+- **A 70% Wave Generator placement was still good enough to hit the required power threshold.** “Good enough now” can beat “perfect later”
+- **The cleanest later food pivot is 1 Mushroom Farm ≈ 3 Fishing Huts.** That is when the scenario stops being sailor-heavy fishing micro and starts feeling scalable
+
+</GuideQuickAnswer>
+
+<GuideCallout title="About this guide">
+This page focuses on the scenario often referred to in creator coverage as **Broken Tanker**, but it is written to serve the same search intent as **All Will Fall Tanker Truck guide**.
+
+It is not pretending to be a fake “perfect run” page. Instead, it is built around a long observed Tanker run that repeatedly explains the **math**, **order of operations**, and **fuel economy decisions** that make the scenario stop feeling random and start feeling manageable.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/broken-tanker-overview-start.webp"
+    alt="Opening view of the Broken Tanker scenario in All Will Fall."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first real Tanker Truck question is not “where do I expand?” It is “how do I stabilize enough storage, water, food, and fuel to leave this zone without bricking the run?”
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="confirmed-tanker-truck-numbers">
+  Confirmed Tanker Truck numbers from the observed run
+</h2>
+
+<GuideDataTable
+  title="Observed numbers you can actually plan around"
+  rows={tankerTruckObservedRows}
+/>
+
+<GuideCallout title="What this page can and cannot honestly prove">
+This guide can confidently use the **opening production math**, the **visible 60-fuel move checkpoint**, the **3-electricity junk route**, and the **later Mushroom Farm pivot** because those are directly stated or shown in the observed run.
+
+It does **not** claim to provide a perfect universal formula for every jump, every map roll, or every late-game fuel layout. Where the source only shows a strong example rather than a complete rule, the page says so.
+</GuideCallout>
+
+---
+
+<h2 id="how-tanker-truck-actually-works">
+  How the Tanker Truck scenario actually works
+</h2>
+
+The Tanker Truck scenario becomes much easier once you stop treating it like a normal static colony map.
+
+What makes it hard is not just scarcity. It is the combination of:
+
+- **limited opening resources**
+- **fuel-gated movement between zones**
+- **temporary scavenging windows**
+- **the need to repair and expand while still saving enough to leave**
+- **a population that can quietly outgrow your production**
+
+That is why the observed run keeps returning to the same idea: **stabilize an equilibrium first, then move**.
+
+In practical terms, the first successful loop is:
+
+- get storage online
+- stabilize **wood**
+- convert wood into **water**
+- stabilize **food**
+- open **boat scavenging**
+- add **powered junk income**
+- pivot into **fuel production**
+- only then start acting like you have freedom
+
+If you skip those steps and start improvising with too many side systems, the scenario tends to punish you with fuel starvation rather than immediate collapse.
+
+---
+
+<h2 id="all-will-fall-tanker-truck-best-build-order">
+  All Will Fall Tanker Truck best build order
+</h2>
+
+For most players, the strongest opening from the observed run looks like this:
+
+### 1. Build Storage, Water Storage, and Food Storage first
+
+This opening is not glamorous, but it is correct. The run starts by getting the ship unloaded and immediately creating stable drop-off points before trying to expand anywhere fancy.
+
+That matters because the scenario wastes your time fast if you gather before you can properly hold and route materials. It also matters because **storage pressure arrives early** in this scenario. If storage fills too fast, your gather loop stalls, floating value gets missed, and the run can look “resource rich” while actually choking.
+
+### 2. Build the first research structure immediately
+
+The observed route immediately pushes into early research so it can stop improvising and start using math.
+
+The whole guide really starts once the player can say:
+
+- Wood Catcher output is visible
+- Wood Boiler cost is visible
+- food equilibrium can be planned instead of guessed
+
+### 3. Build the Wood Catcher first
+
+The early argument is simple: **wood unlocks the rest of the opening**.
+
+In the observed run, the Wood Catcher is treated as the first true stabilizer because it shows **1.5 wood per hour**, which then supports the next water step.
+
+### 4. Build the Wood Boiler second
+
+Once wood is not purely scavenged, the next goal is turning that into survivable water. The Wood Boiler is the first serious water bridge in the observed route, and its visible cost is **20 wood**.
+
+The practical lesson here is that the Tanker Truck opening is not “whatever I can afford first.” It is a dependency chain.
+
+### 5. Add two Fishing Huts for the first equilibrium
+
+The run explicitly frames **2 Fishing Huts** as the early answer for feeding the opening 12-population setup.
+
+That does not mean fishing is the best forever food solution. It means fishing is the first clean way to stop bleeding out while you are still fuel-poor.
+
+### 6. Add a Simple Boat as soon as junk pressure starts
+
+Once the base materials are barely stable, the guide pivots into the first boat because too much of the scenario economy is floating outside your core structure.
+
+That is the point where the map starts opening up.
+
+If you want the shortest possible principle, it is this:
+
+**Do not jump from “I can barely survive” to “I want advanced systems.” Build the first equilibrium first.**
+
+---
+
+<h2 id="resource-math-and-why-fuel-is-the-real-bottleneck">
+  Resource math and why fuel is the real bottleneck
+</h2>
+
+The smartest part of the observed run is that it does not hide behind vague advice like “just gather more resources.” It repeatedly frames the scenario as a **math problem**.
+
+The most important opening math is:
+
+- **Wood Catcher = 1.5 wood per hour**
+- **Wood Boiler = early water bridge**
+- **2 Fishing Huts = first food equilibrium target**
+- **movement between zones costs fuel**
+- **a visible move cost reaches 60 fuel**
+- **wood-to-fuel becomes the real economic pivot**
+
+That changes how you should think about almost every early decision.
+
+### Why wood matters more than it first looks
+
+At first, wood feels like “just another basic material.” In Tanker Truck, it is much more than that:
+
+- wood supports early construction
+- wood supports early water
+- wood supports some support pieces and ramps
+- later, wood becomes part of the fuel solution
+
+That is why the run keeps revisiting wood catchers, wall wood, and wood conservation.
+
+### Why the scenario feels harder than it really is
+
+Many failed runs are not losing because the player misunderstood one big mechanic. They lose because they drift into negative numbers on:
+
+- fuel
+- wood
+- water
+- or staffing efficiency
+
+The scenario then becomes impossible to recover because leaving the current zone also costs fuel.
+
+---
+
+<h2 id="boats-scavenging-and-why-sailors-matter">
+  Boats, scavenging, and why sailors matter
+</h2>
+
+The scenario feels dramatically better once you stop depending only on walkable scraps.
+
+The observed route makes two major points:
+
+### Simple boats are not optional for long
+
+Once the first Simple Boat is live, the colony is no longer limited to purely local hand gathering.
+
+That means you can:
+
+- grab floating junk
+- grab floating wood
+- reduce how much your whole economy depends on one cramped build zone
+- start preparing for future moves instead of barely surviving the current one
+
+### Sailors are a real bottleneck
+
+The run calls this out directly: sailors matter because boats matter, and boats are one of the cleanest ways to keep the scenario from choking.
+
+That also explains why you cannot just accept every new person mindlessly. More people means more consumption, but the wrong staffing mix can also leave your best economic tools half-idle.
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/broken-tanker-double-fishing-and-boat.webp"
+    alt="Early Tanker Truck layout with fishing access and the first boat-focused expansion."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first real turning point is not advanced tech. It is the moment when wood, water, food, and the first boat all exist at the same time and the map stops being only a cramped hand-gather puzzle.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="powering-the-first-junk-economy">
+  Powering the first junk economy
+</h2>
+
+This is the first powered threshold that really matters in Tanker Truck.
+
+The logic is straightforward:
+
+- **Electric Junk Catcher needs 3 electricity**
+- **Hamster Wheel provides 3 electricity**
+- once both are active, you finally have a repeatable powered scavenging route instead of only temporary scraps
+
+That is one of the biggest early turning points in the whole scenario.
+
+### Use Hamster Wheel as the bridge
+
+The wheel is small, simple, and good enough to unlock the first powered junk route.
+
+That makes it strong even if it is not elegant.
+
+### Switch toward Wave Generator once passive energy matters more than emergency access
+
+Later, the observed run treats the **Wave Generator** as the smarter long-term play because passive energy frees workers and supports a cleaner economy.
+
+One especially useful observed detail is that a **70% placement** was still enough to reach the needed power threshold in that moment.
+
+That makes the practical lesson clear:
+
+- Hamster Wheel = first bridge
+- Wave Generator = first serious passive energy pivot
+
+Do not wait for a perfect placement if the structure you have right now is already enough to hit the next useful threshold.
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/broken-tanker-wave-generator-70-percent.webp"
+    alt="Wave Generator placement in the Tanker Truck scenario showing an imperfect but usable efficiency threshold."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This image matters because it proves a practical Tanker Truck rule: a Wave Generator does not need to be perfect to be worth placing if it already clears the threshold you actually need.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="when-to-move-between-zones">
+  When to move between zones
+</h2>
+
+This is the question that decides whether the run feels manageable or doomed.
+
+A visible move in the observed run costs **60 fuel**, which means leaving is never a free reset button. Before you move, you want a simple decision framework.
+
+### Move only when at least most of these are true
+
+- **your current zone is no longer offering easy fuel, wood, or junk**
+- **your food and water are stable enough that one bad event will not instantly break the run**
+- **you can afford the next move without gutting your reserve**
+- **you have already converted the best low-risk loot into actual stored materials**
+- **your boats are working and not sitting idle for preventable reasons**
+
+### Do not leave just because the map feels awkward
+
+Tanker Truck often feels messy even when it is salvageable. A weird-looking zone is not the same thing as a dead zone.
+
+### Do not stay just because the zone still has loot
+
+If the remaining loot is expensive, awkward, or requires too much fuel or worker time to reach, it may already be worse than just moving on.
+
+<GuideCallout title="A simple move rule that works well">
+If leaving the zone will cost **60 fuel**, do not treat it like a casual travel action. Treat it like a midgame purchase.
+
+A good practical question is:
+
+**“If I leave right now, am I buying safety and future access — or am I just fleeing a problem I have not actually stabilized yet?”**
+</GuideCallout>
+
+---
+
+<h2 id="when-to-start-making-your-own-fuel">
+  When to start making your own fuel
+</h2>
+
+This is the true scenario pivot.
+
+The observed run is blunt about it: the early base can look stable and still be doomed if it cannot produce enough fuel to keep jumping.
+
+That is why the guide eventually says the quiet part out loud:
+
+- fuel is the hardest part
+- once basics are established, the scenario becomes manageable
+- the real problem is producing enough fuel to keep moving
+
+### The wood-to-fuel turning point
+
+The clearest planning note shown in the run is that **3 wood per hour** is treated as the key threshold for wood-to-fuel logic.
+
+That is not the same thing as a universal final formula, but it is absolutely enough to guide early-midgame planning.
+
+### What changes once fuel is online
+
+Once your own fuel production works, the whole scenario changes:
+
+- movement stops feeling like a countdown to failure
+- you can evaluate zones more calmly
+- you can prioritize higher-value scavenging
+- you can afford to plan upgrades instead of only emergency exits
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/broken-tanker-fuel-production-online.webp"
+    alt="Fuel production going online in the Tanker Truck scenario."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is the real “the run is alive” moment. Once your own fuel production is online, Tanker Truck stops being only about survival and starts becoming a solvable economic route.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="the-midgame-food-pivot-mushroom-farm-vs-fishing-huts">
+  The midgame food pivot: Mushroom Farm vs Fishing Huts
+</h2>
+
+This is one of the most useful high-intent takeaways from the long run.
+
+Early fishing is fine. But later, the player explicitly treats **1 Mushroom Farm as roughly equal to 3 Fishing Huts**.
+
+That matters for two reasons:
+
+### 1. It frees sailors
+
+Fishing-heavy openings keep sailors busy, which can be awkward when boats are also valuable.
+
+### 2. It turns food into a cleaner systems problem
+
+The Mushroom Farm route is framed as a better long-run conversion because it uses resources the colony already wants to scale anyway.
+
+So the practical progression becomes:
+
+- survive with fishing
+- stabilize wood and water
+- move into fuel
+- later replace sailor-heavy food with denser production
+
+That is a much stronger Tanker Truck flow than trying to force fishing to carry the whole campaign forever.
+
+---
+
+<h2 id="common-tanker-truck-mistakes">
+  Common Tanker Truck mistakes
+</h2>
+
+### 1. Expanding before the first equilibrium exists
+
+If wood, water, and food are not stable yet, more buildings usually make the map feel worse, not better.
+
+### 2. Treating boats as optional
+
+They are not. Too much value floats outside your reach.
+
+### 3. Solving the wrong bottleneck first
+
+A layout can look terrible and still be fine if the economy is stable. A pretty base can still die instantly if fuel is negative.
+
+### 4. Waiting for perfect passive placements
+
+A usable 70% threshold can be better than a perfect theoretical build that comes too late.
+
+### 5. Overcommitting to fishing forever
+
+Fishing works as an opening stabilizer. It is not automatically the best forever plan.
+
+### 6. Ignoring storage pressure
+
+This is not just a late cleanup issue. It starts in the opening. If storage fills too fast, gather routes stall and your apparent surplus stops turning into real usable stock.
+
+<GuideCallout title="The Tanker Truck mindset that actually works">
+The most reliable mental model is not “How do I make this base look complete?” It is:
+
+**What is the next threshold that stops the run from choking?**
+
+Usually that threshold is one of these:
+
+- enough wood to keep water and supports alive
+- enough food to stop population pressure
+- enough power to unlock passive junk
+- enough fuel to leave safely
+</GuideCallout>
+
+---
+
+<h2 id="what-this-page-still-cannot-fully-confirm">
+  What this page still cannot fully confirm
+</h2>
+
+This guide can strongly support the opening route and several key visible numbers, but it does **not** yet claim to have fully solved:
+
+- the universal fuel formula for every jump
+- the final best passive-water stack for all map states
+- the exact best long-run fuel ratio for every population size
+- the final “perfect” staffing split once the run becomes very large
+
+That means this page is strongest as a **launch-window practical guide**, not a fake universal spreadsheet.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is Tanker Truck the same as Broken Tanker in All Will Fall?
+
+For practical search intent, yes — this guide is written around the scenario commonly referred to in creator coverage as **Broken Tanker**.
+
+### What should I build first in the Tanker Truck scenario?
+
+The safest observed opening is **Storage → Water Storage → Food Storage → early research → Wood Catcher → Wood Boiler → 2 Fishing Huts → Simple Boat**.
+
+### What is the first useful production number in Tanker Truck?
+
+The clearest early number shown in the observed run is **Wood Catcher = 1.5 wood per hour**.
+
+### How much fuel does it cost to move between zones?
+
+The clearest visible checkpoint in the run shows a move costing **60 fuel**. This page does not yet claim that 60 is the universal formula for every zone state.
+
+### What powers the Electric Junk Catcher?
+
+It needs **3 electricity**, and the first simple bridge shown in the run is **Hamster Wheel = 3 electricity**.
+
+### Is Wave Generator better than Hamster Wheel?
+
+In the long run, yes, because passive energy frees workers and supports a stronger economy. In the short run, Hamster Wheel is still a very practical bridge.
+
+### When should I move to another zone?
+
+Move when the current zone is no longer giving you cheap fuel, wood, or junk and when paying the next move cost is buying safety, not just covering for an unstable economy.
+
+### When should I start making my own fuel?
+
+As soon as your opening food-and-water equilibrium is real enough that the colony can survive the staffing shift. In the observed run, fuel production is treated as the true scenario pivot.
+
+### Are Fishing Huts the best food source forever?
+
+No. The observed run later treats **1 Mushroom Farm as roughly equal to 3 Fishing Huts**, which makes it a strong pivot once your economy can support it.

@@ -1,0 +1,443 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+
+export const collapseObservedRows = [
+  {
+    status: "confirmed",
+    item: "Support values shown in the run",
+    value: "768 vs 288 in one comparison; 800 vs 800 in another",
+    why: "The game is clearly evaluating structural pieces numerically, even if the full formula is not exposed cleanly to the player."
+  },
+  {
+    status: "confirmed",
+    item: "Collapse timers",
+    value: "Examples shown include about 9 hours 4 minutes and 4 hours",
+    why: "This proves that some structures are not instantly invalid, but are already in a failure state and need repair before the timer expires."
+  },
+  {
+    status: "confirmed",
+    item: "Railing direction matters",
+    value: "The run explicitly notes that the railing goes one way and can be placed sideways by mistake",
+    why: "A build can look connected but still fail because the path or railing piece is oriented incorrectly."
+  },
+  {
+    status: "confirmed",
+    item: "Bottom support can be the missing piece",
+    value: "A failed span became stable after adding one more bottom support",
+    why: "This is one of the clearest observed reasons a structure can fail even when the upper span looks complete."
+  },
+  {
+    status: "confirmed",
+    item: "Every segment needs support",
+    value: "The run explicitly says every part of the span has to be supported",
+    why: "This is the most useful non-obvious rule for diagnosing why a bridge or extension keeps failing."
+  },
+  {
+    status: "confirmed",
+    item: "Wooden path with railing",
+    value: "Acts as a walkway, gives a speed bonus, and can support things above it",
+    why: "Players often treat it as just access infrastructure, but it can also function as a temporary structural tool."
+  },
+  {
+    status: "confirmed",
+    item: "Pathing can imitate collapse",
+    value: "The run repeatedly shows no access or cannot walk cases during unstable builds",
+    why: "Not every failed build is a pure support problem. Sometimes the structure is physically there but still unusable because workers cannot reach it."
+  },
+  {
+    status: "pending",
+    item: "Full support formula",
+    value: "Not yet confirmed",
+    why: "The transcript proves important local rules, but it does not provide a complete universal formula for all materials and spans."
+  },
+  {
+    status: "pending",
+    item: "Complete piece-by-piece value chart",
+    value: "Not yet confirmed",
+    why: "We have observed numbers and comparisons, but not a complete tested table for every support, path, and foundation type."
+  },
+  {
+    status: "pending",
+    item: "Exact blast interaction rules for all materials",
+    value: "Partially observed, not fully confirmed",
+    why: "The run shows that steel-like sections can resist weaker blasts differently, but the full damage logic still needs direct testing."
+  }
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**All Will Fall collapse troubleshooting — the fastest fixes that actually worked**
+
+If your structure keeps failing in **All Will Fall**, start with these rules first:
+
+- **Check the bottom support before you redesign the top span.** In the observed run, one missing lower support was enough to keep a nearly complete extension invalid.
+- **Treat 70% as a warning, not a solution.** The run repeatedly shows structures that look close to working but still sit in a failure state until another support piece is added.
+- **Collapse can be delayed, not instant.** Timers shown in the run include roughly **9 hours 4 minutes** and later **4 hours**, which means you often have time to repair — but only if you stop extending and stabilize first.
+- **Direction matters.** A sideways railing or path piece can make a build look connected while still breaking access.
+- **Support is numeric, not just visual.** One comparison in the run shows **768 vs 288**, while another later view shows **800 vs 800**, which confirms that the game is evaluating pieces structurally even when the exact formula is still unclear.
+- **Stop using explosives the moment a base becomes unstable.** Explosions do not just clear debris—they can accidentally destroy critical load-bearing elements. If a collapse timer starts, put the explosives away until the foundation is secured.
+
+If you only need the next page after this one, use the <Link href="/all-will-fall/">All Will Fall guide hub</Link>, the <Link href="/all-will-fall/beginner-guide/">beginner guide</Link> if you are still learning the systems, or the <Link href="/all-will-fall/oil-rig-guide/">Oil Rig guide</Link> if your main problem is economic rather than structural.
+</GuideQuickAnswer>
+
+<GuideCallout title="About this guide">
+This page is built from an observed **Broken Tanker** run and is written as a **practical troubleshooting guide**, not a fake “full physics formula” page. It focuses on the collapse patterns the run clearly demonstrates: missing bottom support, unsupported segments, bad railing direction, temporary support fixes, pathing confusion, and the difference between “placeable” and “stable.”
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/collapse-warning-70-percent.webp"
+    alt="A collapsing structure warning in All Will Fall showing that a nearly-stable build is still marked unsafe."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This screenshot proves the core troubleshooting point of the page: a structure can read as nearly stable and still remain in a collapse state. “Almost working” is not the same thing as safe.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="why-buildings-collapse-in-all-will-fall">
+  Why buildings collapse in All Will Fall
+</h2>
+
+**All Will Fall** is not using support as mere decoration. The transcript repeatedly shows that a build can be:
+
+- physically placeable
+- visually connected
+- partially supported
+- still doomed
+
+That matters because many players only look for one big mistake, like “I used the wrong material” or “the span is too long.” The run suggests the real problem is usually more local than that. A single missing bottom piece, a misoriented railing segment, or one unsupported link in the chain is enough to turn a nearly working design into a collapse timer.
+
+The most important mindset shift is this: **a valid-looking structure is not the same thing as a stable structure**.
+
+---
+
+<h2 id="collapse-symptoms-players-actually-see">
+  Collapse symptoms players actually see
+</h2>
+
+Players usually do not experience collapse as one clean error message. In practice, the run shows several different warning states that all belong to the same troubleshooting family.
+
+<h3 id="building-will-collapse">
+  Building will collapse
+</h3>
+
+This is the most obvious one. A structure can still be partially built, visible, and reachable, but already marked as unstable. In one sequence, the builder gets a warning that the structure will collapse even after pushing stability upward, which is why “it placed successfully” should never be your final test.
+
+<h3 id="collapse-timer">
+  Collapse timer
+</h3>
+
+Some failures are not immediate. The run shows timers such as roughly **9 hours 4 minutes** and later **4 hours**, which means the build is already in a losing state and needs reinforcement quickly rather than eventually. That is why temporary support pieces are often worth placing before you keep extending the span.
+
+<h3 id="seventy-percent-is-not-safety">
+  70% is not safety
+</h3>
+
+One of the most useful practical lessons in the transcript is that **70%** or even **near-100%** readings do not automatically mean you are done. The player repeatedly tries to stretch structures out to a point where they are almost working, but “almost” still leaves the build in danger.
+
+<h3 id="pathing-fails-even-when-the-build-looks-right">
+  Pathing fails even when the build looks right
+</h3>
+
+A lot of frustrating “collapse” moments are really mixed failures. The structure might be marginally supported, but workers still cannot enter it, cannot walk across it, or cannot reach the detonator connection. That makes support diagnosis harder, because access and stability are often entangled.
+
+---
+
+<h2 id="all-will-fall-collapse-causes">
+  All Will Fall collapse causes: the 5 mistakes that matter most
+</h2>
+
+In rough order of how often they sabotage real builds in the observed run, these are the five collapse causes worth checking first.
+
+<h3 id="missing-bottom-support">
+  1. Missing bottom support <span className="text-sm font-normal text-slate-400">(Very high frequency)</span>
+</h3>
+
+This is one of the clearest failure patterns in the entire run. A span that would not hold becomes stable only after the builder realizes it **needs one more thing on the bottom**.
+
+That is a very strong troubleshooting clue:
+
+- if the top span looks correct
+- if the structure almost holds
+- if the warning persists anyway
+
+then the missing fix may be **underneath**, not in front.
+
+In other words, do not only inspect the visible bridge line. Inspect the support layer below it.
+
+<h3 id="one-unsupported-segment-breaks-the-whole-span">
+  2. One unsupported segment breaks the whole span <span className="text-sm font-normal text-slate-400">(Very high frequency)</span>
+</h3>
+
+The transcript eventually states the rule in plain language: **you have to support every part of it**.
+
+That is the rule many players miss. They think a strong anchor at the start and a good connection near the end should be enough. The observed run suggests that this game is much harsher than that. One weak middle section can invalidate the entire extension.
+
+A good practical habit is to stop every tile or two and ask:
+
+- is this segment supported from below?
+- is the next piece inheriting support, or only looking connected?
+- if I removed one temporary piece here, would the whole chain still stand?
+
+<h3 id="railing-and-path-direction-are-wrong">
+  3. Railing and path direction are wrong <span className="text-sm font-normal text-slate-400">(High frequency)</span>
+</h3>
+
+This is another excellent real-world troubleshooting clue from the run. At one point the builder realizes the setup failed because the piece was placed sideways, then explicitly notes that **the railing goes one way**.
+
+This matters because it explains a very common frustration:
+
+- the build looks connected
+- the route visually exists
+- but workers still do not behave as expected
+
+If a ramp, path, or railing piece was rotated the wrong way, your structure can be “architecturally close” but functionally broken.
+
+<h3 id="you-removed-a-hidden-load-bearing-piece">
+  4. You removed a hidden load-bearing piece <span className="text-sm font-normal text-slate-400">(Medium frequency)</span>
+</h3>
+
+Another pattern in the run is that the player often rebuilds, refunds, or clears old pieces while trying to optimize the structure. That is efficient, but it is also dangerous. Sometimes the part you remove was not “extra” at all. It was the piece silently keeping the whole assembly valid.
+
+This is why aggressive cleanup causes so many mid-build failures. If you want to tidy the structure, stabilize it first, then remove temporary pieces one by one.
+
+<h3 id="you-extended-outward-too-early">
+  5. You extended outward too early <span className="text-sm font-normal text-slate-400">(Medium frequency)</span>
+</h3>
+
+A lot of collapse in **All Will Fall** is really sequencing failure. The run repeatedly shows outward experimentation at **70%**, partial stability, or “maybe one more tile” logic before the base has fully settled.
+
+The better approach is:
+
+- secure the bottom
+- verify the current section
+- only then add the next outward tile
+
+The more your structure feels like it is barely working, the worse it gets when you push one tile too far.
+
+---
+
+<h2 id="how-to-fix-collapse-step-by-step">
+  How to fix collapse step by step
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/collapse-timer-wooden-path-with-railing.webp"
+    alt="A wooden path with railing being used as a structural fix in All Will Fall while a collapse timer is active."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This image proves that temporary reinforcement is not a theory-only fix. In the observed run, a wooden path with railing is used as a live repair tool while the build is already under collapse pressure.
+  </figcaption>
+</figure>
+
+If your build is failing right now, use this order.
+
+<h3 id="step-1-check-the-bottom-first">
+  Step 1: Check the bottom first
+</h3>
+
+If the structure almost works, inspect the support underneath it before you redesign the whole top layer. Several observed failures were solved by changing the base rather than the visible bridge.
+
+<h3 id="step-2-rebuild-access-before-extending-further">
+  Step 2: Rebuild access before extending further
+</h3>
+
+Do not keep pushing outward while workers still cannot reach the current piece. If the build says **no way to get in here** or behaves like pathing is broken, solve that first.
+
+<h3 id="step-3-use-temporary-support">
+  Step 3: Use temporary support
+</h3>
+
+The run repeatedly uses small wooden supports and temporary route pieces to keep a structure alive long enough to finish the next connection. That is not sloppy play. It is a reliable stabilization method.
+
+<h3 id="step-4-retest-after-every-small-extension">
+  Step 4: Retest after every small extension
+</h3>
+
+Do not add three or four sections and only then inspect stability. The run gets the best results when it adds just a little stability, tests it, then moves forward again.
+
+<h3 id="step-5-remove-old-pieces-last">
+  Step 5: Remove old pieces last
+</h3>
+
+Do not clean the build up until it is unquestionably stable. If you strip old supports too early, you can accidentally remove the one piece that was still carrying the load.
+
+---
+
+<h2 id="wooden-path-with-railing">
+  Why wooden path with railing matters more than players think
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/bottom-support-fix-100-percent.webp"
+    alt="A repaired support setup in All Will Fall reaching full stability after the missing lower support was added."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This screenshot is valuable because it shows the size of the actual fix: not a full redesign, but one support correction that pushes the structure from "nearly valid" to fully usable.
+  </figcaption>
+</figure>
+
+Many players initially treat **wooden path with railing** as just a movement tool. The run suggests it is more than that.
+
+It can do at least three important jobs:
+
+- create access
+- improve movement through speed bonuses
+- support structures above it
+
+That last point is the key. If you only think of it as a walkway, you will miss one of the most flexible temporary structure pieces in the game.
+
+The catch is that it also introduces one of the biggest hidden mistakes in the run: **orientation matters**. So it is both a solution and a trap.
+
+If you are repeatedly failing a narrow bridge or temporary expansion, this is one of the first pieces to try.
+
+---
+
+<h2 id="support-values-and-what-the-run-actually-proves">
+  Support values and what the run actually proves
+</h2>
+
+<GuideDataTable
+  title="Observed collapse and support clues from the run"
+  rows={collapseObservedRows}
+/>
+
+<GuideCallout title="What still needs direct testing">
+This page can honestly confirm several very useful local rules, but it **cannot** yet prove a universal support formula for every material, support piece, or blast interaction. The most important next-step tests would be: a piece-by-piece support-value chart, exact blast strength comparisons, and controlled span tests using identical lengths with different materials.
+</GuideCallout>
+
+---
+
+<h2 id="when-the-problem-is-pathing-not-support">
+  When the problem is pathing, not support
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/railing-direction-pathing-fix.webp"
+    alt="A pathing and railing direction fix in All Will Fall after a sideways placement caused access problems."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This image matters because it proves the issue is not always raw support math. A sideways piece can create a build that looks finished but still fails as a usable route.
+  </figcaption>
+</figure>
+
+One reason collapse feels confusing in **All Will Fall** is that structure and pathing fail together.
+
+The transcript shows several examples of:
+
+- **they cannot get in here**
+- **it has to have a connection to detonate**
+- **sometimes they cannot walk on things**
+- a build becoming usable only after a path or support correction
+
+That means you should separate two questions every time something fails:
+
+### Is the structure stable enough to exist?
+
+This is the support problem.
+
+### Can workers actually use it?
+
+This is the pathing problem.
+
+If you do not split those questions, you will often fix the wrong layer of the issue.
+
+---
+
+<h2 id="explosives-and-collapse-risk">
+  Explosives and collapse risk
+</h2>
+
+Explosives are not just a resource issue. They are a structural issue.
+
+The run shows several practical lessons here:
+
+- some obstacles are easy to clear with standard blasts
+- some tougher sections behave differently and appear to need stronger solutions
+- bad bomb placement can destroy more than intended
+- sometimes going around is safer than forcing a blast through the load-bearing area
+
+This matters for collapse troubleshooting because many “mystery failures” happen after demolition, not before it.
+
+A good rule is simple:
+
+- if the structure is already unstable, do **not** keep blasting near the base until access and support are controlled
+
+If your structure is wobbling and you also start removing nearby pieces with bombs, you are stacking two failure sources on top of each other.
+
+A more practical decision order looks like this:
+
+1. **Ask whether the target piece is actually blocking progression.** If it is not, postpone the blast.
+2. **Check whether the area below or behind the blast point is carrying load.** If you are unsure, assume it is important.
+3. **Stabilize access first.** In several sequences, the safer solution was to rebuild the path, add a support, or approach from another angle before blasting.
+4. **Use manual clearing or demolition crews when uncertainty is high.** When a blast path keeps failing or destabilizes the area, treat Demolition Hut access or a safe metal gathering route as the default fallback before trying another explosive.
+5. **Only blast once the structure is readable.** If you cannot tell what is support, what is rubble, and what is route, you are not ready to detonate.
+
+<GuideCallout title="A simple anti-collapse rule for explosives">
+If you are not sure whether a piece is carrying the structure, do **not** solve the problem with a bomb first. Stabilize the route, add one temporary support, and see whether a worker or demolition crew can clear the blockage safely.
+</GuideCallout>
+
+---
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use the <Link href="/all-will-fall/">guide hub</Link> if you are building out the full scenario cluster, the <Link href="/all-will-fall/beginner-guide/">beginner guide</Link> if you are still learning the basic systems, the <Link href="/all-will-fall/oil-rig-guide/">Oil Rig guide</Link> if your failures are more economic than structural, and the <Link href="/all-will-fall/broken-tanker-guide/">Broken Tanker guide</Link> if you want the broader scenario route rather than a pure troubleshooting page.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Why do buildings collapse even when they look connected?
+
+Because visual connection is not enough. The run shows that a structure can look almost right and still be missing bottom support, segment support, or valid orientation on a route piece.
+
+### Does railing direction matter in All Will Fall?
+
+Yes. The observed run explicitly shows that a railing piece can be placed the wrong way and break the intended route.
+
+### Do I need support under every segment?
+
+That is the strongest practical rule the run gives us. The builder eventually concludes that every part of the span needs support.
+
+### Why did the structure fail after I removed one piece?
+
+Because that piece may have been carrying more of the load than it looked like. Cleanup is one of the easiest ways to break a barely stable build.
+
+### What does 70% stability actually mean?
+
+It means the structure is closer to valid than before, not that it is safe. The run repeatedly treats 70% as a warning state, not a finished state.
+
+### Can a wooden path with railing support other structures?
+
+Yes. In this run, it is clearly treated as more than a walkway. It provides access, a speed bonus, and support for structures above it.
+
+### Why does the game say no path or no access when the build looks valid?
+
+Because structure and pathing are intertwined. A piece can exist physically but still be unusable due to orientation, connection, or worker access.
+
+### Is this a full physics formula guide?
+
+No. This page is a **troubleshooting guide built from observed collapse behavior**. It gives reliable practical rules, but it does not pretend to prove every hidden formula in the game.

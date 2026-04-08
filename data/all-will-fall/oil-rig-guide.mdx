@@ -1,0 +1,619 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+
+export const oilRigObservedRows = [
+  {
+    status: "confirmed",
+    item: "First platform raise",
+    value: "40 metal + 15 fuel",
+    why: "This is the first hard economic checkpoint in the scenario."
+  },
+  {
+    status: "confirmed",
+    item: "Raise duration",
+    value: "24 hours",
+    why: "You need to start the raise early enough that the timer finishes before your working space collapses."
+  },
+  {
+    status: "confirmed",
+    item: "Small Lab cost",
+    value: "20 junk",
+    why: "This is the first exact tech-gating number clearly visible in the run."
+  },
+  {
+    status: "confirmed",
+    item: "Storage capacity",
+    value: "200",
+    why: "Confirms that a single early storage unit is enough to stabilize the opening gather loop."
+  },
+  {
+    status: "confirmed",
+    item: "Default food use",
+    value: "1 per person per day",
+    why: "Explains why fast population growth can break your early plan."
+  },
+  {
+    status: "confirmed",
+    item: "Default water use",
+    value: "1 per person per day",
+    why: "Helps you calculate whether your Rain Catcher setup is keeping up."
+  },
+  {
+    status: "confirmed",
+    item: "Schedule shown on UI",
+    value: "Work starts 6:00 a.m.; leisure starts 11:00 p.m.; sleep starts 4:00 a.m.",
+    why: "Useful context for reading work speed, idle time, and downtime."
+  },
+  {
+    status: "confirmed",
+    item: "Rain Catcher result",
+    value: "500% efficiency with four inward roofs during rain",
+    why: "This is the single most actionable early water optimization shown in the run."
+  },
+  {
+    status: "confirmed",
+    item: "Rain Catcher production note",
+    value: "Displayed at about 20 water per day during the observed rain window",
+    why: "Shows why the roof-fed layout can outpace early demand."
+  },
+  {
+    status: "confirmed",
+    item: "Locked safe cost",
+    value: "10 tools",
+    why: "Confirms why early tool routes matter so much."
+  },
+  {
+    status: "confirmed",
+    item: "Locked safe reward shown",
+    value: "25 goods",
+    why: "A strong early happiness spike if your colony is wobbling politically."
+  },
+  {
+    status: "confirmed",
+    item: "Strange device requirement",
+    value: "15 tools + 30 happiness with one group",
+    why: "A clear midgame breakpoint for political management."
+  },
+  {
+    status: "confirmed",
+    item: "Watchtower cost",
+    value: "20 wood",
+    why: "Affordable enough to plan around once your opening is stable."
+  },
+  {
+    status: "confirmed",
+    item: "Watchtower buff",
+    value: "Buildings with workplaces get 10% production speed",
+    why: "Tells you to overlap it with active production, not empty tiles."
+  },
+  {
+    status: "pending",
+    item: "Demolition Hut research cost",
+    value: "Pending direct in-game verification",
+    why: "Important early unlock, but the current source does not show a clean readable cost."
+  },
+  {
+    status: "pending",
+    item: "Rain Catcher tile radius",
+    value: "Pending direct in-game verification",
+    why: "This page can confirm the central four-roof 500% setup, not the exact radius."
+  },
+  {
+    status: "pending",
+    item: "Second raise fuel cost",
+    value: "Partially visible, not yet confirmed cleanly",
+    why: "Useful for planning the first true midgame fuel curve."
+  },
+  {
+    status: "pending",
+    item: "Oil pump staffing / conversion ratio",
+    value: "Pending direct in-game verification",
+    why: "The run confirms metal into fuel, but not the exact worker count or ratio."
+  }
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**All Will Fall Oil Rig guide — best early build order, Rain Catcher layout, and how to raise the platform on time**
+
+If you only need the short version, use this:
+
+- **What is the core objective in Oil Rig?** Keep the rig ahead of the water by gathering **metal** and **fuel** and using them to **raise the platform before key routes get flooded**
+- **What is the first confirmed raise cost?** **40 metal + 15 fuel**, and the raise itself takes **24 hours**
+- **What should you build first?** **Storage**, **Food Storage**, **Small Lab**, then rush **Demolition Hut** research so you can open blocked routes and reach upper metal faster
+- **What is the best early water setup?** A compact **Rain Catcher** with **four sloped roofs feeding inward**; in the observed Oil Rig run, that setup reached **500% efficiency** during rain
+- **What is the biggest Oil Rig mistake?** Overbuilding early. Extra weight, long walkways, and wasted edge tiles all make later raises harder
+- **What should you prioritize after the first raise?** **Tools**, the **oil pump route**, and sea access for **boats / catchers / fisheries**
+- **Completely new to the game?** Start with the <Link href="/all-will-fall/beginners-guide/">All Will Fall beginner guide</Link> first, then come back to Oil Rig
+</GuideQuickAnswer>
+
+<GuideCallout title="About this guide">
+This page is a **scenario-specific Oil Rig guide**, not a generic All Will Fall overview. It is built around a full launch-window Oil Rig playthrough analysis, so every exact number included here is taken from what is directly shown on screen. When the source material does **not** confirm a number, this guide avoids inventing one, and the missing values are tracked in the update queue below.
+</GuideCallout>
+
+<GuideCallout title="Version and trust notes">
+- **Last updated:** April 8, 2026
+- **Guide basis:** launch-window Oil Rig playthrough analysis
+- **Difficulty:** **Intermediate / punishing for beginners**
+- **Important limitation:** this guide can confirm the **first platform raise cost**, **Small Lab cost**, **Storage capacity**, **basic consumption**, **Rain Catcher efficiency result**, **safe cost**, **strange device requirement**, and **Watchtower cost / buff**. It **cannot** confirm the exact **Demolition Hut research cost** or the exact **Rain Catcher tile radius** from transcript evidence alone.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/oil-rig-overview-start.webp"
+    alt="Oil Rig scenario overview in All Will Fall."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Oil Rig becomes a race against space almost immediately, so the cleanest opening comes from compact building, short routes, and early access planning.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="all-will-fall-oil-rig-guide-difficulty">
+  All Will Fall Oil Rig guide: difficulty and who this page is for
+</h2>
+
+**Oil Rig is not a relaxed first scenario.** Its core pressure is the opposite of a normal map: instead of waiting for water to reveal more room, you are constantly trying to stay ahead of a map that keeps trying to take space away.
+
+This page is best for two groups:
+
+- players who already understand the basic building controls but keep failing the **first or second raise**
+- players who reached midgame once and want a cleaner **best build order** on the retry
+
+If you are completely new, the best order is usually:
+
+1. learn the basic physics and pathing rules in a simpler map
+2. read the <Link href="/all-will-fall/beginners-guide/">beginner guide</Link>
+3. return to this page for the Oil Rig-specific route
+
+<GuideCallout title="What advanced players should use this page for">
+If you already know the basics, the useful part here is not the explanation of water or housing. It is the **confirmed raise timing**, the **compact Rain Catcher layout**, the **edge-tile rule**, and the **midgame transition into tools, pump access, and power**.
+</GuideCallout>
+
+---
+
+<h2 id="confirmed-oil-rig-numbers">
+  Confirmed Oil Rig numbers from the launch-window run
+</h2>
+
+<GuideDataTable
+  title=""
+  rows={oilRigObservedRows}
+/>
+
+<GuideCallout title="What this page cannot honestly confirm yet">
+The transcript does **not** show the exact **Demolition Hut research cost**, the exact **Rain Catcher tile radius**, or the clearly readable **fuel number for the second raise**. Those numbers should only be added after direct in-game testing or a clean UI screenshot.
+
+**Update queue for the next revision:**
+
+- exact **Demolition Hut** research cost and any scenario-specific requirements
+- exact **Rain Catcher** tile radius and the cleanest side/top connection proof
+- clearly readable **second raise fuel** requirement
+- **oil pump** conversion ratio, staffing requirement, and full unlock path
+
+This page will be expanded when those values are verified directly in-game.
+</GuideCallout>
+
+---
+
+<h2 id="all-will-fall-oil-rig-guide-core-rules">
+  All Will Fall Oil Rig guide: the core rules that make this scenario different
+</h2>
+
+Oil Rig looks like a normal survival start for the first few minutes, but it is actually a **resource conversion puzzle**.
+
+Your real loop is:
+
+- gather just enough basics to stabilize the colony
+- unlock access to **upper metal**, **tools**, and blocked routes
+- conserve **fuel** for the raise
+- start the raise before the map takes away too much safe space
+- repeat without overbuilding
+
+That is why this scenario punishes three habits especially hard:
+
+- building broad decorative neighborhoods too early
+- spending fuel casually on non-raise uses
+- using edge tiles like ordinary interior land
+
+### The edge-tile rule
+
+One of the most useful practical points in Oil Rig is that the **edge of the structure is premium real estate**.
+
+You want those sea-facing edges for:
+
+- fishing structures
+- docks
+- catchers / blockers for floating resources
+- later boat-based collection
+
+So the best Oil Rig layouts usually keep:
+
+- **housing, lab, and storage in the interior**
+- **utility and sea collection on the edge**
+
+That one rule alone makes a big difference in how clean your midgame feels.
+
+---
+
+<h2 id="all-will-fall-oil-rig-best-build-order">
+  All Will Fall Oil Rig best build order
+</h2>
+
+If your goal is a stable first raise, this is the cleanest early route based on the transcripted run:
+
+### Step 1: place Storage and Food Storage first
+
+The first storage unit shown has **200 capacity**, which is enough to let your workers stop wasting time on tiny hand-carry loops and start accumulating the opening junk, wood, food, and water efficiently.
+
+### Step 2: build the Small Lab as soon as possible
+
+The **Small Lab costs 20 junk**. That is the first exact tech gate shown in the run, and it matters because Oil Rig gets much easier the moment your opening stops being pure manual gathering.
+
+### Step 3: rush Demolition Hut research
+
+This is the most important early unlock shown in the route. The reason is simple: visible resources are not the same thing as **accessible** resources.
+
+Demolition Hut lets you start clearing the blockers that are sitting between you and:
+
+- upper metal
+- tool caches
+- crates
+- routes that later support cranes or better gather tools
+
+The exact research cost is **not visible in the transcript**, so do not publish a hard number for it unless you have direct gameplay confirmation.
+
+### Step 4: build only the shortest walkways you need
+
+Do not sprawl. Use short walkways and stairs only to:
+
+- touch the first food and water nodes
+- reach junk that keeps research moving
+- open the first route toward metal
+
+This is where most failed Oil Rig starts go wrong. Players start building for comfort instead of for **access**.
+
+### Step 5: make a compact housing block instead of a wide settlement
+
+A tight housing block is better because it:
+
+- uses fewer materials
+- shortens travel
+- leaves edge tiles free
+- supports the Rain Catcher plan later
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/oil-rig-core-layout.webp"
+    alt="Early Oil Rig housing block and Rain Catcher core layout in All Will Fall."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A tight interior housing block like this keeps your shoreline free for docks, fishing, and floating-resource collection later.
+  </figcaption>
+</figure>
+
+### Step 6: add dock / fishing access without wasting the whole shoreline
+
+Once the interior core is stable, start reserving edge space for:
+
+- fishing hut
+- dock
+- boat deployment
+- floating resource catchers
+
+### Step 7: secure upper metal and tools before the first raise deadline
+
+The first raise wants **40 metal + 15 fuel**, so your route planning should keep asking one question:
+
+**what is the cheapest safe path to the next metal or tool cluster?**
+
+### Step 8: start the first raise as soon as the colony can survive the 24-hour timer
+
+Do not delay it just because you want a prettier base.
+
+If you need a more general non-scenario route, use the <Link href="/all-will-fall/guide-hub/">All Will Fall guide hub</Link> and work back inward from the scenario pages.
+
+---
+
+<h2 id="all-will-fall-oil-rig-rain-catcher-layout">
+  All Will Fall Oil Rig Rain Catcher layout and best early housing block
+</h2>
+
+This is the best specific optimization shown in the run, and it is where the guide can be more concrete than a generic tips page.
+
+The observed setup is:
+
+- one **Rain Catcher** in the middle
+- a compact house cluster around it
+- **four sloped roofs** directing water inward
+- housing capacity expanded to **16 total** in the shown block
+
+The important confirmed result is not the tile radius. The transcript does **not** show a precise grid measurement for that. The important confirmed result is the output:
+
+- the Rain Catcher jumped to **500% efficiency**
+- at **100% rain intensity**, the displayed collection time improved from **4 hours** to **48 minutes**
+- the observed average gain shown during the rain window was about **20 water per day**
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/oil-rig-rain-catcher-500.webp"
+    alt="Rain Catcher reaching 500 percent efficiency in the Oil Rig scenario of All Will Fall."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is the key early-game water breakpoint: one central Rain Catcher, four inward roofs, and a visible 500% efficiency spike.
+  </figcaption>
+</figure>
+
+### What this page can confirm about Rain Catcher placement
+
+This guide can **directly confirm** one layout: a **single central Rain Catcher** with **four inward roofs** feeding it. That layout clearly works in the analyzed run and visibly reaches **500% efficiency** during rain.
+
+What this page cannot yet confirm from direct testing is the exact **tile radius** or the exact **side-mounted / top-mounted** attachment rule. Until those are verified with clean screenshots, the safest advice is to copy the central layout shown on this page rather than rely on undocumented placement assumptions.
+
+### Why this matters more than a generic water guide
+
+In Oil Rig, water is not just a comfort stat. It affects:
+
+- happiness stability
+- growth decisions
+- event handling
+- whether you can afford to keep expanding while waiting on raise timers
+
+So the practical takeaway is simple:
+
+**do not build scattered water solutions first. Build one compact Rain Catcher block that actually spikes output when rain arrives.**
+
+### What this layout does well
+
+- solves early water in a very small footprint
+- keeps your settlement dense instead of sprawling
+- gives your roofs both decorative and functional value
+- makes it easier to support more colonists without immediately panicking about water
+
+### What this layout does badly
+
+- it can consume prime central build space if you overdo it
+- it does not solve food by itself
+- it is still rain-dependent, so you cannot treat it as your only long-term water answer forever
+
+---
+
+<h2 id="how-to-raise-the-platform-in-all-will-fall-oil-rig">
+  How to raise the platform in All Will Fall Oil Rig
+</h2>
+
+The first confirmed raise in the run costs:
+
+- **40 metal**
+- **15 fuel**
+- **24 hours** to complete
+
+That makes the real question less about “can I pay it eventually?” and more about:
+
+**can I pay it early enough that the 24-hour timer finishes before the scenario squeezes my access routes?**
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/oil-rig-first-platform-raise.webp"
+    alt="First platform raise requirement in the Oil Rig scenario of All Will Fall."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is the first real checkpoint in the scenario: 40 metal, 15 fuel, and a 24-hour timer that punishes late decisions.
+  </figcaption>
+</figure>
+
+### The practical raise rule
+
+Start the raise when these are true:
+
+- you already stabilized your absolute basics
+- you have a route to keep gathering while the timer runs
+- waiting longer is more likely to cost access than to create value
+
+### What usually goes wrong
+
+The transcript shows exactly the kind of failure pattern that makes Oil Rig punishing:
+
+- a raise is started
+- a complication delays the completion
+- the player misses a stockpile target by a tiny margin
+- loyalty drops because the economy was balanced too tightly
+
+That is why the right mindset is:
+
+- do not build a fancy base first
+- do not hold fuel back for vanity systems
+- do not wait until the last safe moment to start the raise
+
+### A simple early raise checklist
+
+Before you press the raise button, ask:
+
+- do I already have the **40 metal**?
+- do I really have spare **fuel**, or am I pretending I do?
+- am I about to lose routes to tools, lower debris, or support space if I wait?
+- can the colony survive the next 24 hours without a panic rebuild?
+
+If the answers are mostly yes, raise.
+
+---
+
+<h2 id="oil-rig-midgame-priorities-after-first-raise">
+  Oil Rig midgame priorities after the first raise
+</h2>
+
+Once the first raise is secured, the best next goals are not random expansion. They are:
+
+### 1. Tools
+
+Tools keep unlocking the map. The run shows several important breakpoints tied to tools:
+
+- a **locked safe** that costs **10 tools** and pays **25 goods**
+- a **strange device** that needs **15 tools** plus **30 happiness** with one group
+- the continuing push toward pump access and better gathering tools
+
+### 2. Oil pump access
+
+The run confirms that once the oil pump is repaired, it converts:
+
+- **metal input**
+- into **fuel output**
+
+That makes pump access one of the biggest midgame momentum swings in the scenario, because every future raise starts leaning harder on stable fuel generation.
+
+<GuideCallout title="Why the oil pump is a midgame priority even before every number is confirmed">
+This page can **confirm the direction of the conversion**: the repaired oil pump turns **metal into fuel**. What it cannot yet confirm from transcript evidence alone is the exact **conversion ratio**, the exact **worker staffing requirement**, or the full **unlock chain** needed to reach the usable entrance cleanly.
+
+That still makes the pump an important priority. Once your first raise is stable, the best next question is usually not “what can I decorate?” but **“how quickly can I turn metal access into reliable future raise fuel?”**
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/oil-rig-oil-pump-metal-to-fuel.webp"
+    alt="Oil pump turning metal into fuel in the Oil Rig scenario of All Will Fall."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Repairing the pump changes the scenario economy because it turns your metal access into a fuel source for future raises.
+  </figcaption>
+</figure>
+
+### 3. Happiness management that is actually targeted
+
+The transcripted run makes a useful point here: goods can push a group up temporarily, but that feels like a short-term lever rather than a permanent solution.
+
+The stronger long-term happiness fixes are tied to:
+
+- better housing quality
+- decorations that actually fill decor caps efficiently
+- leisure buildings
+- not overstraining food and water while population rises
+
+### 4. Power
+
+Power starts mattering once your upgrades and water systems become more ambitious. One of the best confirmed payoffs is the water-oriented upgrade area that, when powered, gives **water buildings +3 production output**.
+
+### 5. Watchtower placement
+
+The **Watchtower costs 20 wood** and gives **buildings with workplaces +10% production speed**.
+
+That means the correct placement rule is simple:
+
+- do **not** drop it in a scenic empty corner
+- overlap it with fisheries, active production, or other real workplaces
+
+<figure className="my-8">
+  <Image
+    src="/images/all-will-fall/oil-rig-watchtower-buff.webp"
+    alt="Watchtower production speed buff in the Oil Rig scenario of All Will Fall."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Watchtower placement matters more than it first appears, because its value comes from overlapping real workplaces rather than empty scenic tiles.
+  </figcaption>
+</figure>
+
+If you want a general page for water, food, and metal planning beyond this scenario, connect this page to a future <Link href="/all-will-fall/resource-management-guide/">resource management guide</Link>.
+
+---
+
+<h2 id="oil-rig-mistakes-to-avoid">
+  Oil Rig mistakes to avoid
+</h2>
+
+### Building wide instead of building useful
+
+Every extra platform, bridge, and decorative extension costs materials, adds clutter, and can make later platform raises less forgiving.
+
+### Wasting the shoreline
+
+If you spend your best sea-facing edge tiles on random houses or unnecessary structures, your fishing and boat options get worse later.
+
+### Delaying Demolition Hut logic
+
+You do not beat Oil Rig by staring at resources. You beat it by opening routes to them.
+
+### Treating Rain Catcher as a vague water building
+
+The reason the Rain Catcher is good here is **not** that it exists. It is that the transcript shows a **specific roof-fed layout** hitting **500% efficiency**.
+
+### Pushing population before food is ready
+
+The run repeatedly shows how quickly food becomes the next crisis once housing and recruitment start working.
+
+### Ignoring political recovery after a near miss
+
+A failed stockpile or a delayed raise can cost loyalty fast. If you recover the economy but ignore the people layer, your colony still slows down.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the first raise cost in All Will Fall Oil Rig?
+
+The first clearly confirmed raise in the analyzed run costs **40 metal and 15 fuel**, and it takes **24 hours**.
+
+### What should I research first in Oil Rig?
+
+The best first priority shown is **Demolition Hut**, because it starts opening the blocked routes that lead to upper metal, tools, and crates.
+
+### What does the Small Lab cost in Oil Rig?
+
+The **Small Lab costs 20 junk** in the analyzed run.
+
+### What is the storage capacity of the first storage building?
+
+The storage unit shown early has **200 capacity**.
+
+### What is the best early water setup for Oil Rig?
+
+The strongest early setup shown is a **Rain Catcher** supported by **four inward-facing roofs**, which reached **500% efficiency** during rain in the observed run.
+
+### What is the exact Rain Catcher radius in tiles?
+
+This transcript does **not** confirm the exact radius in tiles, so this page does not publish a hard number for it.
+
+### Can Rain Catcher connect from the side or from above?
+
+This page can **directly confirm** the **compact central Rain Catcher + four inward roofs** layout shown here, because that setup visibly reaches **500% efficiency** in the analyzed run. The exact **side-mounted** and **top-mounted** connection rules are still waiting on direct screenshot verification, so the safest answer for now is: **copy the central layout first, and treat side/top connection rules as pending confirmation.**
+
+### What is the Demolition Hut research cost?
+
+The transcript confirms the importance of rushing **Demolition Hut**, but it does **not** show a clean exact research cost. Add that only after direct gameplay confirmation.
+
+### Why are edge tiles so important in Oil Rig?
+
+Because they give access to the sea for **fishing**, **docks**, **boats**, and **floating resource collection**. Interior buildings should usually stay off the edge if possible.
+
+### What does the oil pump do once repaired?
+
+The analyzed run shows the oil pump taking **metal as input** and producing **fuel as output**.
+
+### What does the strange device require?
+
+The strange device shown in the run requires **15 tools** and **30 happiness** with one social group.
+
+### Is Oil Rig a good beginner scenario?
+
+No. Even the analyzed run explicitly treats Oil Rig as a tougher scenario because it flips the normal pacing and punishes waste much harder.
