@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import Episode5WalkthroughContent from "@/data/the-long-dark/episode-5-walkthrough.mdx";
+import HowToGetToDesperationBayContent from "@/data/the-long-dark/how-to-get-to-desperation-bay.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-long-dark-episode-5/episode-5-walkthrough`;
+const pageUrl = `${siteUrl}/the-long-dark-episode-5/how-to-get-to-desperation-bay`;
 
 export const metadata: Metadata = {
-  title: "The Long Dark Episode 5 Walkthrough | Full Step-by-Step Guide",
+  title: "How to Get to Desperation Bay in The Long Dark Ep 5",
   description:
-    "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
+    "Stuck trying to reach Desperation Bay in The Long Dark Episode 5? This guide explains the lighthouse clue, the icy coastal route, and how to reach the cargo ship.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Episode 5 Walkthrough",
+          name: "How to Get to Desperation Bay",
           item: pageUrl,
         },
       ],
@@ -50,16 +50,15 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "The Long Dark Episode 5 Walkthrough",
+      headline: "How to Get to Desperation Bay in The Long Dark Episode 5",
       description:
-                "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
+        "This guide explains how to get to Desperation Bay in The Long Dark Episode 5, how the lighthouse clue helps, and how to work through the icy coast route to the cargo ship.",
       image: [
-        `${siteUrl}/images/the-long-dark/episode-5/perseverance-mills-arrival.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/desperation-bay-map.webp`,
         `${siteUrl}/images/the-long-dark/episode-5/cargo-ship.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/suzuki-radio-telescope.webp`,
       ],
       inLanguage: "en",
-      dateModified: "2026-04-05",
+      dateModified: "2026-04-09",
       about: [
         {
           "@type": "VideoGame",
@@ -71,15 +70,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Perseverance Mills",
-        },
-        {
-          "@type": "Thing",
           name: "Desperation Bay",
         },
         {
           "@type": "Thing",
-          name: "Suzuki Radio Telescope",
+          name: "Lighthouse clue",
+        },
+        {
+          "@type": "Thing",
+          name: "Cargo ship",
         },
       ],
       isPartOf: {
@@ -111,49 +110,49 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Walkthrough"
-          description="Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, the substations, the SAR station, and the ending."
+          title="How to Get to Desperation Bay in The Long Dark Episode 5"
+          description="Stuck trying to reach Desperation Bay in The Long Dark Episode 5? This guide explains the lighthouse clue, the icy coastal route, and how to reach the cargo ship."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="April 5, 2026"
+          updatedAt="April 9, 2026"
           toc={[
             {
-              id: "part-1-astrid-in-perseverance-mills",
-              label: "Astrid in Perseverance Mills",
+              id: "how-to-get-to-desperation-bay-in-one-paragraph",
+              label: "Quick answer",
             },
             {
-              id: "part-2-astrid-radio-hut-and-desperation-bay",
-              label: "Radio hut and Desperation Bay",
+              id: "the-best-way-to-think-about-this-route",
+              label: "How to think about the route",
             },
             {
-              id: "part-3-mackenzie-and-jace-through-the-wilderness",
-              label: "Mackenzie and Jace",
+              id: "what-the-lighthouse-clue-is-telling-you",
+              label: "What the lighthouse clue means",
             },
             {
-              id: "part-4-the-mine-walkthrough",
-              label: "Mine walkthrough",
+              id: "why-this-part-feels-like-an-ice-maze",
+              label: "Why it feels like an ice maze",
             },
             {
-              id: "part-5-reach-atwood-and-start-the-substation-objective",
-              label: "Atwood and substations",
+              id: "how-to-handle-wrong-turns-without-wasting-time",
+              label: "How to handle wrong turns",
             },
             {
-              id: "part-6-the-suzuki-radio-telescope-sequence",
-              label: "Suzuki Radio Telescope",
+              id: "how-to-know-you-are-close-to-the-ship",
+              label: "How to know you are close",
             },
             {
-              id: "part-7-astrids-sar-station-and-train-section",
-              label: "SAR station and train",
+              id: "most-common-desperation-bay-route-mistakes",
+              label: "Common route mistakes",
             },
             {
-              id: "part-8-mackenzie-in-occupied-perseverance-mills",
-              label: "Occupied Perseverance Mills",
+              id: "why-reaching-the-ship-matters-so-much",
+              label: "Why reaching the ship matters",
             },
             {
-              id: "episode-5-ending-summary",
-              label: "Ending summary",
+              id: "what-comes-right-after-you-get-there",
+              label: "What comes after",
             },
             {
               id: "faq",
@@ -162,20 +161,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
+              href: "/the-long-dark-episode-5/where-to-go-after-terry/",
+              label: "Where to Go After Terry",
+            },
+            {
+              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
+              label: "Episode 5 Walkthrough",
+            },
+            {
               href: "/the-long-dark-episode-5/",
-              label: "The Long Dark Episode 5 Guide",
-            },
-            {
-              href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
-              label: "Episode 5 Missing People Locations",
-            },
-            {
-              href: "/the-long-dark-episode-5/episode-5-ending-explained/",
-              label: "Episode 5 Ending Explained",
+              label: "The Long Dark Episode 5 Guide Hub",
             },
           ]}
         >
-          <Episode5WalkthroughContent />
+          <HowToGetToDesperationBayContent />
         </GuideArticlePage>
       </main>
       <Footer />

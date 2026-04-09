@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title:
     "The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People",
   description:
-    "A complete guide to The Long Dark Episode 5, with the full walkthrough, mission route, Missing People help, ending explanation, and Astrid's hardcase guide.",
+    "A complete guide to The Long Dark Episode 5, with the full walkthrough, Missing People help, what to do after the autopsy, where to go after Terry, and how to get to Desperation Bay.",
   alternates: {
     canonical: pageUrl,
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title:
       "The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People",
     description:
-      "A complete guide to The Long Dark Episode 5, with the full walkthrough, mission route, Missing People help, ending explanation, and Astrid's hardcase guide.",
+      "A complete guide to The Long Dark Episode 5, with the full walkthrough, Missing People help, what to do after the autopsy, where to go after Terry, and how to get to Desperation Bay.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title:
       "The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People",
     description:
-      "A complete guide to The Long Dark Episode 5, with the full walkthrough, mission route, Missing People help, ending explanation, and Astrid's hardcase guide.",
+      "A complete guide to The Long Dark Episode 5, with the full walkthrough, Missing People help, what to do after the autopsy, where to go after Terry, and how to get to Desperation Bay.",
   },
 };
 
@@ -65,9 +65,9 @@ const jsonLd = {
       headline:
         "The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People",
       description:
-        "Main guide for The Long Dark Episode 5, covering the best walkthrough starting point, mission route, Missing People help, ending explanation, and Astrid's hardcase.",
+        "Main guide for The Long Dark Episode 5, covering the walkthrough, Missing People help, what to do after the autopsy, where to go after Terry, and how to get to Desperation Bay.",
       inLanguage: "en",
-      dateModified: "2026-04-05",
+      dateModified: "2026-04-09",
       about: [
         {
           "@type": "VideoGame",
@@ -83,7 +83,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Terry's radio hut",
+        },
+        {
+          "@type": "Thing",
           name: "Desperation Bay",
+        },
+        {
+          "@type": "Thing",
+          name: "Cargo ship",
         },
         {
           "@type": "Thing",
@@ -124,13 +132,13 @@ export default function Page() {
         />
         <GuideArticlePage
           title="The Long Dark Episode 5 Guide: Walkthrough, Mission List, Ending, Missing People"
-          description="The main The Long Dark Episode 5 guide with the best walkthrough starting point, mission route, Missing People help, ending explanation, and Astrid's hardcase links."
+          description="The main The Long Dark Episode 5 guide with the full walkthrough, Missing People help, what to do after the autopsy, where to go after Terry, and how to get to Desperation Bay."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5/"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           hideCurrentTitleInBreadcrumb={true}
-          updatedAt="April 5, 2026"
+          updatedAt="April 9, 2026"
           toc={[
             {
               id: "what-is-the-long-dark-episode-5",
@@ -167,12 +175,12 @@ export default function Page() {
               label: "Episode 5 Missing People Locations",
             },
             {
-              href: "/the-long-dark-episode-5/episode-5-ending-explained/",
-              label: "Episode 5 Ending Explained",
+              href: "/the-long-dark-episode-5/what-to-do-after-the-autopsy/",
+              label: "What to Do After the Autopsy",
             },
             {
-              href: "/the-long-dark-episode-5/whats-in-astrids-hardcase-explained/",
-              label: "What Is in Astrid's Hardcase?",
+              href: "/the-long-dark-episode-5/where-to-go-after-terry/",
+              label: "Where to Go After Terry",
             },
           ]}
         >

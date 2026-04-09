@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import Episode5WalkthroughContent from "@/data/the-long-dark/episode-5-walkthrough.mdx";
+import SearchPartyAchievementContent from "@/data/the-long-dark/search-party-achievement.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-long-dark-episode-5/episode-5-walkthrough`;
+const pageUrl = `${siteUrl}/the-long-dark-episode-5/search-party-achievement`;
 
 export const metadata: Metadata = {
-  title: "The Long Dark Episode 5 Walkthrough | Full Step-by-Step Guide",
+  title: "How to Get Search Party in The Long Dark Ep 5",
   description:
-    "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
+    "Need the Search Party achievement in The Long Dark Episode 5? This guide explains the 40-minute timed run, the best route order, and the biggest time-wasting mistakes.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Episode 5 Walkthrough",
+          name: "Search Party Achievement",
           item: pageUrl,
         },
       ],
@@ -50,16 +50,19 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "The Long Dark Episode 5 Walkthrough",
+      headline: "The Long Dark Episode 5 Search Party Achievement Guide",
       description:
-                "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
+        "This guide explains how to get the Search Party achievement in The Long Dark Episode 5, including the timer logic, best route order, and the most common time-wasting mistakes.",
       image: [
-        `${siteUrl}/images/the-long-dark/episode-5/perseverance-mills-arrival.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/cargo-ship.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/suzuki-radio-telescope.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-2-map.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-1-map.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-3-map.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/missing-person-waterfall.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/missing-person-basement.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/constable-fishing-pier.webp`,
       ],
       inLanguage: "en",
-      dateModified: "2026-04-05",
+      dateModified: "2026-04-09",
       about: [
         {
           "@type": "VideoGame",
@@ -71,15 +74,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Search Party achievement",
+        },
+        {
+          "@type": "Thing",
+          name: "Missing People objective",
+        },
+        {
+          "@type": "Thing",
           name: "Perseverance Mills",
-        },
-        {
-          "@type": "Thing",
-          name: "Desperation Bay",
-        },
-        {
-          "@type": "Thing",
-          name: "Suzuki Radio Telescope",
         },
       ],
       isPartOf: {
@@ -111,49 +114,49 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Walkthrough"
-          description="Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, the substations, the SAR station, and the ending."
+          title="The Long Dark Episode 5 Search Party Achievement Guide"
+          description="Trying to get Search Party in The Long Dark Episode 5? This guide covers the timed run, the best route order, and the mistakes that waste the most time."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="April 5, 2026"
+          updatedAt="April 9, 2026"
           toc={[
             {
-              id: "part-1-astrid-in-perseverance-mills",
-              label: "Astrid in Perseverance Mills",
+              id: "what-search-party-requires-in-episode-5",
+              label: "Achievement requirements",
             },
             {
-              id: "part-2-astrid-radio-hut-and-desperation-bay",
-              label: "Radio hut and Desperation Bay",
+              id: "when-the-search-party-timer-starts",
+              label: "When the timer starts",
             },
             {
-              id: "part-3-mackenzie-and-jace-through-the-wilderness",
-              label: "Mackenzie and Jace",
+              id: "best-search-party-route",
+              label: "Best route order",
             },
             {
-              id: "part-4-the-mine-walkthrough",
-              label: "Mine walkthrough",
+              id: "stop-1-waterfall-route",
+              label: "Stop 1: waterfall",
             },
             {
-              id: "part-5-reach-atwood-and-start-the-substation-objective",
-              label: "Atwood and substations",
+              id: "stop-2-basement-route",
+              label: "Stop 2: basement",
             },
             {
-              id: "part-6-the-suzuki-radio-telescope-sequence",
-              label: "Suzuki Radio Telescope",
+              id: "stop-3-constable-route",
+              label: "Stop 3: Constable",
             },
             {
-              id: "part-7-astrids-sar-station-and-train-section",
-              label: "SAR station and train",
+              id: "what-wastes-the-most-time-in-search-party",
+              label: "Biggest time-wasters",
             },
             {
-              id: "part-8-mackenzie-in-occupied-perseverance-mills",
-              label: "Occupied Perseverance Mills",
+              id: "how-to-prepare-before-you-start-search-party",
+              label: "How to prepare",
             },
             {
-              id: "episode-5-ending-summary",
-              label: "Ending summary",
+              id: "search-party-vs-the-normal-missing-people-route",
+              label: "Search Party vs normal route",
             },
             {
               id: "faq",
@@ -162,20 +165,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-long-dark-episode-5/",
-              label: "The Long Dark Episode 5 Guide",
-            },
-            {
               href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
               label: "Episode 5 Missing People Locations",
             },
             {
-              href: "/the-long-dark-episode-5/episode-5-ending-explained/",
-              label: "Episode 5 Ending Explained",
+              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
+              label: "Episode 5 Walkthrough",
+            },
+            {
+              href: "/the-long-dark-episode-5/",
+              label: "The Long Dark Episode 5 Guide Hub",
             },
           ]}
         >
-          <Episode5WalkthroughContent />
+          <SearchPartyAchievementContent />
         </GuideArticlePage>
       </main>
       <Footer />

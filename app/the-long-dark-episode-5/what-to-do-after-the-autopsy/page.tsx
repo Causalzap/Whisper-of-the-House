@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import Episode5WalkthroughContent from "@/data/the-long-dark/episode-5-walkthrough.mdx";
+import WhatToDoAfterTheAutopsyContent from "@/data/the-long-dark/what-to-do-after-the-autopsy.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-long-dark-episode-5/episode-5-walkthrough`;
+const pageUrl = `${siteUrl}/the-long-dark-episode-5/what-to-do-after-the-autopsy`;
 
 export const metadata: Metadata = {
-  title: "The Long Dark Episode 5 Walkthrough | Full Step-by-Step Guide",
+  title: "What to Do After the Autopsy in The Long Dark Ep 5",
   description:
-    "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
+    "Stuck after the autopsy in The Long Dark Episode 5? This guide explains why Terry's radio hut is the next objective and what to do before heading to Desperation Bay.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Episode 5 Walkthrough",
+          name: "What to Do After the Autopsy",
           item: pageUrl,
         },
       ],
@@ -50,16 +50,14 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "The Long Dark Episode 5 Walkthrough",
+      headline: "What to Do After the Autopsy in The Long Dark Episode 5",
       description:
-                "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
+        "This guide explains what to do after the autopsy in The Long Dark Episode 5, why Terry is the next objective, and how this step leads to Desperation Bay.",
       image: [
-        `${siteUrl}/images/the-long-dark/episode-5/perseverance-mills-arrival.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/cargo-ship.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/suzuki-radio-telescope.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/radio-hut.webp`,
       ],
       inLanguage: "en",
-      dateModified: "2026-04-05",
+      dateModified: "2026-04-09",
       about: [
         {
           "@type": "VideoGame",
@@ -71,15 +69,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Autopsy objective",
+        },
+        {
+          "@type": "Thing",
+          name: "Terry's radio hut",
+        },
+        {
+          "@type": "Thing",
           name: "Perseverance Mills",
-        },
-        {
-          "@type": "Thing",
-          name: "Desperation Bay",
-        },
-        {
-          "@type": "Thing",
-          name: "Suzuki Radio Telescope",
         },
       ],
       isPartOf: {
@@ -111,49 +109,41 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Walkthrough"
-          description="Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, the substations, the SAR station, and the ending."
+          title="What to Do After the Autopsy in The Long Dark Episode 5"
+          description="Stuck after the autopsy in The Long Dark Episode 5? This guide explains why Terry's radio hut is the next objective and what to do before heading to Desperation Bay."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="April 5, 2026"
+          updatedAt="April 9, 2026"
           toc={[
             {
-              id: "part-1-astrid-in-perseverance-mills",
-              label: "Astrid in Perseverance Mills",
+              id: "what-to-do-after-the-autopsy-in-one-paragraph",
+              label: "Quick answer",
             },
             {
-              id: "part-2-astrid-radio-hut-and-desperation-bay",
-              label: "Radio hut and Desperation Bay",
+              id: "why-the-autopsy-changes-the-route",
+              label: "Why the route changes",
             },
             {
-              id: "part-3-mackenzie-and-jace-through-the-wilderness",
-              label: "Mackenzie and Jace",
+              id: "why-terry-is-the-next-objective",
+              label: "Why Terry is next",
             },
             {
-              id: "part-4-the-mine-walkthrough",
-              label: "Mine walkthrough",
+              id: "where-to-go-after-the-autopsy",
+              label: "Where to go next",
             },
             {
-              id: "part-5-reach-atwood-and-start-the-substation-objective",
-              label: "Atwood and substations",
+              id: "most-common-after-the-autopsy-mistakes",
+              label: "Common mistakes",
             },
             {
-              id: "part-6-the-suzuki-radio-telescope-sequence",
-              label: "Suzuki Radio Telescope",
+              id: "what-happens-when-you-reach-terry",
+              label: "What happens at Terry's hut",
             },
             {
-              id: "part-7-astrids-sar-station-and-train-section",
-              label: "SAR station and train",
-            },
-            {
-              id: "part-8-mackenzie-in-occupied-perseverance-mills",
-              label: "Occupied Perseverance Mills",
-            },
-            {
-              id: "episode-5-ending-summary",
-              label: "Ending summary",
+              id: "how-this-fits-into-the-main-walkthrough",
+              label: "How this fits the walkthrough",
             },
             {
               id: "faq",
@@ -162,20 +152,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-long-dark-episode-5/",
-              label: "The Long Dark Episode 5 Guide",
+              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
+              label: "Episode 5 Walkthrough",
             },
             {
               href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
               label: "Episode 5 Missing People Locations",
             },
             {
-              href: "/the-long-dark-episode-5/episode-5-ending-explained/",
-              label: "Episode 5 Ending Explained",
+              href: "/the-long-dark-episode-5/",
+              label: "The Long Dark Episode 5 Guide Hub",
             },
           ]}
         >
-          <Episode5WalkthroughContent />
+          <WhatToDoAfterTheAutopsyContent />
         </GuideArticlePage>
       </main>
       <Footer />

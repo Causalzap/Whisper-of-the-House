@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import Episode5WalkthroughContent from "@/data/the-long-dark/episode-5-walkthrough.mdx";
+import WhereToGoAfterTerryContent from "@/data/the-long-dark/where-to-go-after-terry.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-long-dark-episode-5/episode-5-walkthrough`;
+const pageUrl = `${siteUrl}/the-long-dark-episode-5/where-to-go-after-terry`;
 
 export const metadata: Metadata = {
-  title: "The Long Dark Episode 5 Walkthrough | Full Step-by-Step Guide",
+  title: "Where to Go After Terry in The Long Dark Ep 5",
   description:
-    "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
+    "Stuck after talking to Terry in The Long Dark Episode 5? This guide explains why Desperation Bay is the next objective and why the cargo ship is the real destination.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Episode 5 Walkthrough",
+          name: "Where to Go After Terry",
           item: pageUrl,
         },
       ],
@@ -50,16 +50,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "The Long Dark Episode 5 Walkthrough",
+      headline: "Where to Go After Terry in The Long Dark Episode 5",
       description:
-                "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
-      image: [
-        `${siteUrl}/images/the-long-dark/episode-5/perseverance-mills-arrival.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/cargo-ship.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/suzuki-radio-telescope.webp`,
-      ],
+        "This guide explains where to go after talking to Terry in The Long Dark Episode 5, why Desperation Bay is the next area, and why the cargo ship is the real destination.",
+      image: [`${siteUrl}/images/the-long-dark/episode-5/desperation-bay-map.webp`],
       inLanguage: "en",
-      dateModified: "2026-04-05",
+      dateModified: "2026-04-09",
       about: [
         {
           "@type": "VideoGame",
@@ -71,7 +67,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Perseverance Mills",
+          name: "Terry's radio hut",
         },
         {
           "@type": "Thing",
@@ -79,7 +75,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Suzuki Radio Telescope",
+          name: "Cargo ship",
         },
       ],
       isPartOf: {
@@ -111,49 +107,45 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Walkthrough"
-          description="Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, the substations, the SAR station, and the ending."
+          title="Where to Go After Terry in The Long Dark Episode 5"
+          description="Stuck after talking to Terry in The Long Dark Episode 5? This guide explains why Desperation Bay is the next objective and why the cargo ship is the real destination."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="April 5, 2026"
+          updatedAt="April 9, 2026"
           toc={[
             {
-              id: "part-1-astrid-in-perseverance-mills",
-              label: "Astrid in Perseverance Mills",
+              id: "desperation-bay-is-the-next-area",
+              label: "Desperation Bay is next",
             },
             {
-              id: "part-2-astrid-radio-hut-and-desperation-bay",
-              label: "Radio hut and Desperation Bay",
+              id: "the-cargo-ship-is-the-real-target",
+              label: "Cargo ship is the target",
             },
             {
-              id: "part-3-mackenzie-and-jace-through-the-wilderness",
-              label: "Mackenzie and Jace",
+              id: "what-terrys-clue-actually-means",
+              label: "What Terry's clue means",
             },
             {
-              id: "part-4-the-mine-walkthrough",
-              label: "Mine walkthrough",
+              id: "signs-you-are-heading-the-right-way",
+              label: "Signs you're on track",
             },
             {
-              id: "part-5-reach-atwood-and-start-the-substation-objective",
-              label: "Atwood and substations",
+              id: "why-players-still-get-stuck-after-terry",
+              label: "Why players get stuck",
             },
             {
-              id: "part-6-the-suzuki-radio-telescope-sequence",
-              label: "Suzuki Radio Telescope",
+              id: "what-you-find-on-the-coast-matters-so-much",
+              label: "Why the coast matters",
             },
             {
-              id: "part-7-astrids-sar-station-and-train-section",
-              label: "SAR station and train",
+              id: "what-not-to-do-after-terry",
+              label: "What not to do",
             },
             {
-              id: "part-8-mackenzie-in-occupied-perseverance-mills",
-              label: "Occupied Perseverance Mills",
-            },
-            {
-              id: "episode-5-ending-summary",
-              label: "Ending summary",
+              id: "what-comes-after-desperation-bay",
+              label: "What comes after",
             },
             {
               id: "faq",
@@ -162,20 +154,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
+              href: "/the-long-dark-episode-5/what-to-do-after-the-autopsy/",
+              label: "What to Do After the Autopsy",
+            },
+            {
+              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
+              label: "Episode 5 Walkthrough",
+            },
+            {
               href: "/the-long-dark-episode-5/",
-              label: "The Long Dark Episode 5 Guide",
-            },
-            {
-              href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
-              label: "Episode 5 Missing People Locations",
-            },
-            {
-              href: "/the-long-dark-episode-5/episode-5-ending-explained/",
-              label: "Episode 5 Ending Explained",
+              label: "The Long Dark Episode 5 Guide Hub",
             },
           ]}
         >
-          <Episode5WalkthroughContent />
+          <WhereToGoAfterTerryContent />
         </GuideArticlePage>
       </main>
       <Footer />
