@@ -8,9 +8,10 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/the-occultist`;
 
 export const metadata: Metadata = {
-  title: "The Occultist Guide Hub: Collectibles, Redler Manor, Codex, and Ending",
+  title:
+    "The Occultist Guide Hub: Collectibles, Puzzle Solutions, Redler Manor, Codex, and Ending",
   description:
-    "The main The Occultist guide hub. Find all Medallions, all Altars, Codex Lumina fragments, Redler Manor help, and ending explained pages in one place.",
+    "The main The Occultist guide hub. Find all Medallions, all Altars, Codex Lumina fragments, major puzzle solutions, Redler Manor help, and ending explained pages in one place.",
   alternates: {
     canonical: pageUrl,
   },
@@ -45,12 +46,12 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "The Occultist Guide Hub: Collectibles, Redler Manor, Codex, and Ending",
+        "The Occultist Guide Hub: Collectibles, Puzzle Solutions, Redler Manor, Codex, and Ending",
       description:
-        "This is the main The Occultist guide hub, covering Medallions, Altars, Codex Lumina fragments, Redler Manor progression, and ending explained.",
+        "This is the main The Occultist guide hub, covering Medallions, Altars, Codex Lumina fragments, key puzzle solutions, Redler Manor progression, and ending explained.",
       image: [
         `${siteUrl}/images/the-occultist/redler-manor/codex-fragment-clock-room.webp`,
-        `${siteUrl}/images/the-occultist/medallions/medallion-08-circus-wire.webp`,
+        `${siteUrl}/images/the-occultist/puzzles/planetarium-star-moon-panel.webp`,
         `${siteUrl}/images/the-occultist/altars/altar-07-redler-manor-music-room.webp`,
       ],
       inLanguage: "en",
@@ -75,6 +76,26 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Altars",
+        },
+        {
+          "@type": "Thing",
+          name: "Puzzle solutions",
+        },
+        {
+          "@type": "Thing",
+          name: "Planetarium Star and Moon Puzzle",
+        },
+        {
+          "@type": "Thing",
+          name: "Clock Room and Sundial Puzzle",
+        },
+        {
+          "@type": "Thing",
+          name: "Greenhouse Statue Puzzle",
+        },
+        {
+          "@type": "Thing",
+          name: "Mausoleum Door Lion Key Path Puzzle",
         },
       ],
       isPartOf: {
@@ -106,8 +127,8 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Occultist Guide Hub: Collectibles, Redler Manor, Codex, and Ending"
-          description="Need the best The Occultist guides in one place? Use this hub for all 15 Medallions, all 7 Altars, Codex Lumina fragments, Redler Manor help, and ending explained."
+          title="The Occultist Guide Hub: Collectibles, Puzzle Solutions, Redler Manor, Codex, and Ending"
+          description="Need the best The Occultist guides in one place? Use this hub for all 15 Medallions, all 7 Altars, Codex Lumina fragments, key puzzle solutions, Redler Manor help, and ending explained."
           gameTitle="The Occultist"
           gameHref="/the-occultist"
           breadcrumbBaseHref="/"
@@ -121,6 +142,10 @@ export default function Page() {
             {
               id: "the-occultist-collectibles-guides",
               label: "Collectibles guides",
+            },
+            {
+              id: "the-occultist-puzzle-solution-guides",
+              label: "Puzzle solution guides",
             },
             {
               id: "the-occultist-redler-manor-guides",
@@ -143,28 +168,7 @@ export default function Page() {
               label: "FAQ",
             },
           ]}
-          relatedLinks={[
-            {
-              href: "/the-occultist/all-medallion-locations/",
-              label: "All 15 Medallion Locations",
-            },
-            {
-              href: "/the-occultist/all-altar-locations/",
-              label: "All 7 Altar Locations",
-            },
-            {
-              href: "/the-occultist/codex-lumina-fragments/",
-              label: "Codex Lumina Fragments",
-            },
-            {
-              href: "/the-occultist/redler-manor-walkthrough/",
-              label: "Redler Manor Walkthrough",
-            },
-            {
-              href: "/the-occultist/ending-explained/",
-              label: "Ending Explained",
-            },
-          ]}
+        
         >
           <TheOccultistGuideHubContent />
         </GuideArticlePage>

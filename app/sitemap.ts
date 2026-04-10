@@ -45,7 +45,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/the-occultist/all-altar-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/the-occultist/all-medallion-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/the-occultist/codex-lumina-fragments`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
+    { url: `${base}/the-occultist/clock-room-sundial-puzzle-solution`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/the-occultist/greenhouse-statue-puzzle-solution`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/the-occultist/mausoleum-door-lion-key-puzzle-solution`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/the-occultist/planetarium-star-moon-puzzle-solution`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/the-long-dark-episode-5/search-party-achievement`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/the-long-dark-episode-5/what-to-do-after-the-autopsy`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
