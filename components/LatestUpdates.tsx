@@ -145,6 +145,67 @@ export default function LatestUpdates() {
               <p className="mt-1 text-xs text-gray-600">What changed, what improved, and what old fans may miss.</p>
             </Link>
 
+            {/* ===== THE OCCULTIST ===== */}
+            <Link
+              href="/the-occultist"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-emerald-500 font-semibold">THE OCCULTIST</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+                  Guide Hub
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Collectibles, Codex pages, and the key puzzle solution routes in one place.
+              </p>
+            </Link>
+
+            <Link
+              href="/the-occultist/all-medallion-locations"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-emerald-500 font-semibold">THE OCCULTIST</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+                  All 15 Medallion Locations
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Every Medallion location across the Farm, Hospital, Orphanage, Circus, Cemetery, Manor, and Temple.
+              </p>
+            </Link>
+
+            <Link
+              href="/the-occultist/all-altar-locations"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-emerald-500 font-semibold">THE OCCULTIST</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+                  All 7 Altar Locations
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Every altar location, including the Lighthouse room, Mausoleum path, and final Redler Manor altar.
+              </p>
+            </Link>
+
+            <Link
+              href="/the-occultist/codex-lumina-fragments"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-emerald-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-emerald-500 font-semibold">THE OCCULTIST</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+                  Codex Lumina Fragments
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Find all four missing Codex pages in Redler Manor and complete the ritual book route.
+              </p>
+            </Link>
+
             {/* ===== All Will Fall ===== */}
 
 
