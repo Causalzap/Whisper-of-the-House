@@ -166,6 +166,14 @@ export default function Page() {
               label: "Production positions and furnace work",
             },
             {
+              id: "airship-tribesmen-roles-in-shifting-sands",
+              label: "Airship Tribesmen roles",
+            },
+            {
+              id: "training-ground-in-shifting-sands",
+              label: "Training Ground in Shifting Sands",
+            },
+            {
               id: "best-way-to-build-a-war-party",
               label: "How to build a war party",
             },
@@ -176,10 +184,6 @@ export default function Page() {
             {
               id: "best-practical-tribesmen-order",
               label: "Best practical Tribesmen order",
-            },
-            {
-              id: "what-still-needs-testing",
-              label: "What still needs testing",
             },
             {
               id: "tribesmen-system-at-a-glance",
@@ -202,10 +206,6 @@ export default function Page() {
             {
               href: "/soulmask/airship-guide/",
               label: "Airship Guide",
-            },
-            {
-              href: "/soulmask/tribesmen-guide/",
-              label: "Tribesmen Guide",
             },
 
           ]}

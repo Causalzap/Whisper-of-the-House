@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     'Explore Whisper of the House guides, hidden secrets, furniture lists, and story details, plus tips and updates for Retro Rewind, GRIME II, The Long Dark Episode 5, and other games.',
   alternates: {
-    canonical: 'https://www.whisperofthehouse.com',
+    canonical: 'https://www.whisperofthehouse.com/',
   },
 };
 
