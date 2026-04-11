@@ -85,7 +85,7 @@ export default function Home() {
                 href="/i-am-jesus-christ"
                 className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
               >
-                All Will Fall Guide
+                All Will Fall Guides
               </Link>
 
               <Link
@@ -93,6 +93,13 @@ export default function Home() {
                 className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
               >
                 View The Occultist Guides
+              </Link>
+
+              <Link
+                href="/soulmask"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                View Soulmask Guides
               </Link>
 
 

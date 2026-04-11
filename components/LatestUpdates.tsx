@@ -79,6 +79,67 @@ export default function LatestUpdates() {
               <p className="mt-1 text-xs text-gray-600">When replacing improves progress.</p>
             </Link>
 
+            {/* ===== soulmask ===== */}
+            <Link
+              href="/soulmask"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-600 font-semibold">Soulmask</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+                  Shifting Sands Guide Hub
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Your starting point for Shifting Sands guides, including beginner tips, airships, cross-map transfer, and tribesmen management.
+              </p>
+            </Link>
+
+            <Link
+              href="/soulmask/tribesmen-role-system-guide"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-600 font-semibold">Soulmask</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+                  Tribesmen Role System Guide
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Learn how assignments, roles, and Training Ground work, and how to manage tribesmen more efficiently in 1.0.
+              </p>
+            </Link>
+
+            <Link
+              href="/soulmask/airship-guide"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-600 font-semibold">Soulmask</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+                  Airship Guide
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Understand how airships work in Shifting Sands, including ship building, modules, combat use, and mobile base potential.
+              </p>
+            </Link>
+
+            <Link
+              href="/soulmask/shifting-sands-beginner-guide"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-600 font-semibold">Soulmask</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+                  Shifting Sands Beginner Guide
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                A practical first-steps guide for new and returning players, covering what to do in your first hours on the new map.
+              </p>
+            </Link>
+
             {/* ===== Hozy ===== */}
             <Link href="/guides/hozy/cafe-layout-tips" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300">
               <div className="flex items-center gap-2">
