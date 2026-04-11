@@ -1,19 +1,31 @@
 import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
 
-// Dynamically import the components for the guides
+export function generateStaticParams() {
+  return [
+    { id: 'beginner-guide' },
+    { id: 'game-progression-guide' },
+    { id: 'top-tips-and-tricks' },
+    { id: 'hidden-secrets' },
+    { id: 'organize-and-uncover-secrets' },
+    { id: 'audio-automation-workflow' },
+    { id: 'how-to-help-luna' },
+  ];
+}
+
+export const dynamicParams = false;
+
 const BeginnerGuide = dynamic(() => import('../beginner-guide'));
 const ProgressionGuide = dynamic(() => import('../game-progression-guide'));
 const TopTipsAndTricks = dynamic(() => import('../top-tips-and-tricks'));
 const HiddenSecretsGuide = dynamic(() => import('../hidden-secrets'));
 const OrganizeAndUncoverSecrets = dynamic(() => import('../organize-and-uncover-secrets'));
-const AudioAutomationWorkflow = dynamic(() => import('../audio-automation-workflow')); // 新增导入
+const AudioAutomationWorkflow = dynamic(() => import('../audio-automation-workflow'));
 const HowToHelpLuna = dynamic(() => import('../how-to-help-luna'));
 
-
-// 修改 generateMetadata 函数
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  // 使用 await 解析 params
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> }
+): Promise<Metadata> {
   const { id } = await params;
 
   let title = 'Whisper of the House Guide';
@@ -40,11 +52,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       title = 'Organize and Discover Secrets';
       description = 'Uncover hidden rooms, mysterious objects, and secrets in Whisper of the House. Learn strategies to organize and explore the mansion’s mysteries.';
       break;
-    case 'audio-automation-workflow': // 新增case
+    case 'audio-automation-workflow':
       title = 'Audio Automation Workflow - Whisper of the House';
       description = 'Learn how the audio team built a zero-tech-dependency workflow to deliver 2,000+ sound effects with no dedicated programmers.';
       break;
-    case 'how-to-help-luna': // 新增
+    case 'how-to-help-luna':
       title = 'How to Help Luna: Whisper of the House Walkthrough';
       description = 'Stuck on Luna’s commission? Learn how to find the Secret Room, place the Mouse Trap, and unlock the second email in this step-by-step guide.';
       break;
@@ -62,42 +74,32 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-// 同时修改页面组件
-export default async function GuidePage({ params }: { params: Promise<{ id: string }> }) {
-  // 使用 await 解析 params
+export default async function GuidePage(
+  { params }: { params: Promise<{ id: string }> }
+) {
   const { id } = await params;
-  let content;
 
   switch (id) {
     case 'beginner-guide':
-      content = <BeginnerGuide />;
-      break;
+      return <BeginnerGuide />;
     case 'game-progression-guide':
-      content = <ProgressionGuide />;
-      break;
+      return <ProgressionGuide />;
     case 'top-tips-and-tricks':
-      content = <TopTipsAndTricks />;
-      break;
+      return <TopTipsAndTricks />;
     case 'hidden-secrets':
-      content = <HiddenSecretsGuide />;
-      break;
+      return <HiddenSecretsGuide />;
     case 'organize-and-uncover-secrets':
-      content = <OrganizeAndUncoverSecrets />;
-      break;
-    case 'audio-automation-workflow': // 新增case
-      content = <AudioAutomationWorkflow />;
-      break;
-    case 'how-to-help-luna': // 新增
-      content = <HowToHelpLuna />;
-      break;
+      return <OrganizeAndUncoverSecrets />;
+    case 'audio-automation-workflow':
+      return <AudioAutomationWorkflow />;
+    case 'how-to-help-luna':
+      return <HowToHelpLuna />;
     default:
-      content = (
+      return (
         <div className="error-message">
           <h2>Guide Not Found</h2>
           <p>The requested guide could not be found.</p>
         </div>
       );
   }
-
-  return <div>{content}</div>;
 }
