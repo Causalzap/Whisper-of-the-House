@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "../styles/globals.css";
 
+// 添加这一行来适配 Cloudflare Pages
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: {
     default: "Whisper of the House - Fansite",
