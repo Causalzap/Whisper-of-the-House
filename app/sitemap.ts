@@ -41,7 +41,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/all-will-fall`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/the-occultist`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/soulmask`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/crystalfall`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/crystalfall/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/crystalfall/crafting-sockets-gem-fusion-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/crystalfall/fireball-build-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/crystalfall/inventory-stash-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/soulmask/airship-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

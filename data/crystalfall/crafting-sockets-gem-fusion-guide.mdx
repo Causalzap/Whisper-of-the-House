@@ -1,0 +1,771 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+
+export const craftingRows = [
+  {
+    status: "confirmed",
+    item: "Crafting value early",
+    value: "Very useful, but initially confusing",
+    why: "Crystalfall crafting can solve weak items and weak skills early, but the menu flow and risk profile are not obvious at first.",
+  },
+  {
+    status: "confirmed",
+    item: "Base item quality check",
+    value: "Check alpha / omega affixes before investing",
+    why: "Base items can carry alpha and omega affixes that affect max sockets, max quality, crafting success chance, and other critical limits, so the base matters before rarity does.",
+  },
+  {
+    status: "confirmed",
+    item: "Common -> Uncommon",
+    value: "Confirmed for both items and skills",
+    why: "The run explicitly upgrades a white item / skill into blue quality through crafting.",
+  },
+  {
+    status: "confirmed",
+    item: "Further rarity upgrades",
+    value: "Uncommon -> Rare is also confirmed",
+    why: "The playthrough upgrades gear again after the first rarity bump and starts gaining more meaningful affix value.",
+  },
+  {
+    status: "confirmed",
+    item: "Crafting risk",
+    value: "Crafting can fail and brick items",
+    why: "Developer guidance explicitly says crafting is not deterministic and can absolutely fail, so good bases should be treated as risk-bearing investments.",
+  },
+  {
+    status: "confirmed",
+    item: "Unsocketing",
+    value: "You can remove socketed cores for free",
+    why: "The playthrough initially expects a cost, then confirms removal is free.",
+  },
+  {
+    status: "confirmed",
+    item: "Adding sockets",
+    value: "Possible, but the interface is confusing at first",
+    why: "The run first misreads the process, then later discovers the correct add-socket path in the crafting flow.",
+  },
+  {
+    status: "confirmed",
+    item: "Skill-side crafting",
+    value: "Skill rarity, row shuffle, Skill Keys, and Crests all matter",
+    why: "Skill progression works through several layered systems rather than one simple upgrade button.",
+  },
+  {
+    status: "confirmed",
+    item: "Biggest beginner mistake",
+    value: "Upgrading rarity on a base before checking alpha / omega value and accepting brick risk",
+    why: "A bad base does not become smart just because it is rarer, especially when crafting can fail.",
+  },
+];
+
+<GuideCallout title="About this guide">
+This is a **real early-game crafting guide** for **Crystalfall**, focused on the systems players actually get confused by first:
+
+- **item rarity upgrades**
+- **skill rarity upgrades**
+- **alpha / omega affixes**
+- **sockets and unsocketing**
+- **gem fusion**
+- **Skill Crests**
+- **failure / brick risk**
+
+If you need the general entry page first, use the <Link href="/crystalfall/beginner-guide">Crystalfall Beginner Guide</Link>.  
+If you need a practical build example of how crafting supports a real character, use the <Link href="/crystalfall/fireball-build-guide">Fireball Build Guide</Link>.
+</GuideCallout>
+
+<GuideCallout title="Version note">
+This guide is based on the **Early Access launch-period version of Crystalfall (April 2026)**.  
+Because the game is still being patched, crafting UI flow, success rates, and material clarity may change.
+</GuideCallout>
+
+<GuideQuickAnswer title="Quick Answer">
+**Crystalfall crafting is already useful in Early Access, but it is much riskier and less intuitive than it first looks. The biggest beginner lessons are: good bases matter because of alpha / omega affixes, crafting can fail and brick items, skills have their own separate progression layers, socketed cores can be removed for free, and gem fusion is a real upgrade path rather than just stash clutter.**
+
+If you only want the short version:
+
+- **check the base before you check the rarity**
+- **alpha / omega affixes matter because they change important limits**
+- **common -> uncommon -> rare upgrades are confirmed**
+- **crafting can fail, so do not treat upgrades as safe**
+- **skills scale through rarity, row shuffle, Skill Keys, and Crests**
+- **Skill Artisan skill crafting is tied to Arcadia**
+- **socketed cores can be removed for free (confirmed for the launch-period build shown here)**
+- **adding sockets is possible, but the menu flow is confusing**
+- **gem fusion works upward through matching duplicates**
+- **do not waste premium materials too early on the wrong item**
+</GuideQuickAnswer>
+
+---
+
+<h2 id="why-crafting-matters-so-much-in-crystalfall">
+  Why crafting matters so much in Crystalfall
+</h2>
+
+Crystalfall is not one of those ARPGs where you can safely ignore crafting for your first several hours.
+
+In practice, crafting starts mattering early because it helps solve the exact problems new players run into first:
+
+- weak gear
+- awkward skill rolls
+- resource problems
+- low-value drops that can still be improved
+- too many small systems with unclear interfaces
+
+The key point is simple:
+
+**crafting is already strong before it is fully elegant.**
+
+That is why it feels important so quickly.
+
+<GuideCallout title="The real beginner lesson">
+Crystalfall crafting is not “late-game optimization.”
+
+It is an early progression system that helps turn mediocre drops into usable ones.
+</GuideCallout>
+
+---
+
+<h2 id="how-crafting-works-in-crystalfall">
+  How crafting works in Crystalfall
+</h2>
+
+The practical way to understand crafting is that it is really several systems at once:
+
+1. **item rarity upgrades**
+2. **skill rarity upgrades**
+3. **row rerolls / shuffle effects**
+4. **alpha / omega affix evaluation**
+5. **socket and core management**
+6. **gem fusion / fusing chains**
+7. **module-based affix changes on some items**
+
+That matters because many beginners expect one simple crafting bench.
+
+Crystalfall is closer to a layered upgrade system.
+
+You are not just “making an item better.”
+
+You are deciding whether to:
+
+- improve its rarity
+- reroll part of it
+- add a socket
+- change what is socketed
+- save the material for a better base later
+- risk bricking an item that was already worth keeping
+
+---
+
+<h2 id="alpha-and-omega-affixes-explained">
+  Alpha and Omega affixes explained
+</h2>
+
+This is the biggest missing concept in most beginner crafting explanations.
+
+### These are not normal affixes
+
+Developer guidance makes this clear: **base items, regardless of rarity, can have alpha and omega affixes**.
+
+These are not the same thing as ordinary “just add more stats” prefixes and suffixes.
+
+They can modify things like:
+
+- salvage quantity
+- merchant price
+- max quality
+- max sockets
+- max prefixes
+- max suffixes
+- crafting success chance
+- lucky rolls
+- damage conversion
+- cooldown time
+- skill resource cost
+
+That means a base item can already be special **before** you start raising its rarity.
+
+### Why this matters so much
+
+A lot of beginners instinctively think like this:
+
+> “If I make it blue or rare, it becomes worth caring about.”
+
+That is backwards in Crystalfall.
+
+The better mental model is:
+
+> **first ask whether the base is worth investing in, then ask whether rarity makes sense.**
+
+If the base has weak alpha / omega value, making it rarer does not magically make it a smart crafting target.
+
+<GuideCallout title="Base-item rule">
+In Crystalfall, good bases matter because they can carry alpha / omega value that affects your item’s ceiling.
+
+Do not judge an item only by its current rarity.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-upgrade-item-rarity">
+  How to upgrade item rarity
+</h2>
+
+This is the first piece many players will understand.
+
+### Common to uncommon
+
+The run explicitly shows a crafting material that upgrades a **common item or skill to an uncommon** one.
+
+That is the basic white-to-blue improvement step.
+
+This matters because it tells you right away that Crystalfall does **not** want you to think of white gear as permanently disposable if the base itself is useful.
+
+### Uncommon to rare
+
+The next important lesson is that rarity does not stop at blue.
+
+The playthrough also upgrades gear again into **rare**, at which point the item starts gaining more meaningful stats like penetration and extra support affixes.
+
+So the practical beginner crafting order is:
+
+1. find a base you actually like
+2. check whether the base itself is worth investing in
+3. upgrade its rarity
+4. check whether the new result is worth keeping
+5. avoid dumping every scarce material into a mediocre base
+
+That matters even more because developer guidance is explicit that **crafting can fail and brick items**.
+
+So rarity upgrades should be treated as real risks, not guaranteed free progress.
+
+<figure className="my-8">
+  <Image
+    src="/images/crystalfall/crafting-rarity-upgrade.webp"
+    alt="Item rarity upgrade flow in Crystalfall crafting."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early Crystalfall crafting already lets you push a useful base item upward instead of waiting for a perfect drop.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Rarity upgrade rule">
+Do not upgrade an item just because you can.
+
+Upgrade a base that is already solving a real problem for your build.
+</GuideCallout>
+
+---
+
+<h2 id="can-crafting-fail-and-brick-items">
+  Can crafting fail and brick items?
+</h2>
+
+**Yes.**
+
+This is one of the most important things to understand before you start spending real materials.
+
+Developer guidance is explicit here:
+
+**crafting can fail and brick your items.**
+
+That means you should not treat Crystalfall crafting like a risk-free bench where every click is guaranteed value.
+
+### What this changes for beginners
+
+Once you know failure is real, your crafting priorities should change:
+
+- do not invest heavily into weak bases
+- do not assume “I can always fix it later”
+- do not burn premium materials just because you are impatient
+- do not mistake rarity upgrades for free progress
+
+### The safe beginner mindset
+
+Crafting is best used like this:
+
+- stabilize a good base
+- improve a skill you already know you want
+- make practical upgrades that solve a real problem
+- avoid gambling hard on filler gear
+
+<GuideCallout title="Brick-risk rule">
+Treat every serious craft as a risk-bearing decision.
+
+If the base is bad, the risk is usually not worth it.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-upgrade-skill-rarity">
+  How to upgrade skill rarity
+</h2>
+
+Skill crafting is one of the coolest parts of the game, but also one of the easiest places to waste resources if you do not understand what you are looking for.
+
+### Skill rarity is real progression
+
+The run shows that skill rarity upgrades matter a lot, especially once the player starts working on Fireball / Firebolt.
+
+The big lesson is that skill power is not only about level.
+
+It also comes from:
+
+- the skill’s current rarity
+- the row options you see
+- what nodes become available
+- how many Skill Keys you can invest
+- what Crest you insert later
+
+### Why this matters for beginners
+
+If your skill looks bad early, that does not always mean the skill is doomed.
+
+Sometimes it means:
+
+- the rarity is too low
+- the row is weak
+- the node options are not supporting the build yet
+- you should upgrade the skill instead of abandoning it immediately
+
+That is why skill crafting is a progression system, not just a cosmetic tweak.
+
+---
+
+<h2 id="what-shuffle-skill-row-does">
+  What “Shuffle Skill Row” actually means
+</h2>
+
+This is one of the first crafting options that confuses people.
+
+The run explicitly notices the **Shuffle Skill Row** option, understands that it changes a row, but is also unsure at first how to evaluate the result.
+
+That is a useful beginner signal in itself.
+
+### The practical interpretation
+
+You should think of row shuffle as:
+
+**changing the options on part of the skill’s progression layout so you can chase stronger or more relevant modifiers.**
+
+That matters because a skill can go from “trash” to “worth building around” once the row gives you better effects.
+
+For example, the playthrough lights up when skill crafting starts revealing things like:
+
+- burn
+- pierce
+- projectile support
+- resource leech or sustain-adjacent value
+
+That is exactly the kind of system you use when the skill is close to good, but not quite there yet.
+
+### Where do you do this?
+
+Skill-side crafting is tied to the **Skill Artisan** flow, and official FAQ guidance says the **Skill Artisan Crafting NPC is only available in Arcadia**.
+
+So if you are trying to shuffle a skill row and cannot find where to do it, the real problem may not be the material.
+
+It may be that you are not at the correct progression location yet.
+
+<GuideCallout title="Row shuffle rule">
+Use row shuffle when the skill base is good but the current options are bad.
+
+Do not waste it on a skill you would never use anyway.
+</GuideCallout>
+
+---
+
+<h2 id="how-skill-crests-work">
+  How Skill Crests work
+</h2>
+
+Skill Crests are not just generic socketables you can shove into anything.
+
+Official FAQ guidance makes three things clear:
+
+1. you must unlock the **Crest Node at the top of the skill grid**
+2. the **Crest must have a matching tag for your skill**
+3. the relevant **Skill Artisan Crafting NPC is only available in Arcadia**
+
+That means beginners should stop thinking of Crests as “free extra power.”
+
+The real logic is:
+
+- first, get the skill to a state worth investing in
+- then unlock the Crest Node
+- then check whether your Crest actually matches the skill’s tags
+- only after that does cresting become real progression instead of random clicking
+
+### Why this matters
+
+A lot of player confusion comes from trying to insert a Crest and assuming the system is broken.
+
+Often it is not broken.
+
+The issue is simply one of these:
+
+- the Crest Node is not unlocked yet
+- the Crest tag does not match the skill
+- the player is not at the right Arcadia skill-crafting point
+
+<GuideCallout title="Skill Crest rule">
+A Crest is not universally compatible.
+
+It only works when the skill has its Crest Node unlocked and the Crest’s tag matches the skill.
+</GuideCallout>
+
+---
+
+<h2 id="how-sockets-and-socketed-cores-work">
+  How sockets and socketed cores work
+</h2>
+
+This is one of the most searched beginner questions for a reason.
+
+### The first confusion: can you remove socketed cores?
+
+At first, the answer feels unclear.
+
+The player literally pauses to ask how to remove socketed cores, wonders whether a special item is required, and expects there might be a destruction cost.
+
+Then the game reveals the key answer:
+
+**you can remove them for free.**
+
+That is one of the most useful beginner discoveries in the entire crafting system.
+
+It means you should stop being overly afraid of socketing something early just because you think the core will be trapped forever.
+
+### What this changes
+
+Once you know unsocketing is free, sockets become much more approachable:
+
+- testing a core is lower risk
+- upgrading a base item feels safer
+- you are less likely to hoard every socketable thing forever
+- you can actually move useful cores when your gear improves
+
+<GuideCallout title="Unsocketing rule">
+If you were afraid to use a core because you thought removal would destroy it, you can relax.
+
+The launch-period build shown here confirms that **socket removal is free**.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-add-a-socket">
+  How to add a socket
+</h2>
+
+This is where Crystalfall gets awkward.
+
+### The system works, but the UI is messy
+
+The run first struggles with socket adding:
+
+- the item says a socket can be added
+- the player tries to do it through fusing
+- the menu flow feels unclear
+- there is confusion about how the socket item should actually be applied
+
+Later, the important breakthrough happens:
+
+**the player realizes the socket can be added right there in the crafting flow.**
+
+That is the part most guides should state clearly.
+
+### What beginners should take away
+
+If socket adding feels inconsistent, it is usually not because sockets do not exist.
+
+It is because the crafting interface is not yet teaching the flow clearly enough.
+
+Just as importantly, this appears to be part of the **main item crafting flow**, not the separate **Skill Artisan** path used for skill-side crafting in Arcadia.
+
+So your beginner rule should be:
+
+1. confirm the item is a base you want to keep
+2. confirm the material really is a socket-adding material
+3. check the crafting options carefully instead of assuming it must go through the first fuse flow you see
+4. do not assume early confusion means the feature is impossible
+
+<figure className="my-8">
+  <Image
+    src="/images/crystalfall/crafting-add-socket.webp"
+    alt="Adding a socket through Crystalfall crafting."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Adding sockets is possible in Crystalfall, but the menu flow is much less intuitive than it should be at first.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-gem-fusion-works">
+  How gem fusion works
+</h2>
+
+This is one of the cleaner systems once you realize it exists.
+
+### The core rule
+
+The playthrough confirms the basic beginner logic of combining matching materials upward.
+
+But the current public fusing database shows the system is more specific than a vague “higher-tier gem” idea.
+
+For example, the fusing page currently shows:
+
+- **Flawed Frostcore**
+- **Requirements: Level 15**
+- clickable component rows that jump-select the next required part
+
+That means fusing is not just a one-line “3 gems -> 1 gem” system.
+
+It already behaves more like a **recipe chain** with named outputs, requirements, and linked components.
+
+### What beginners should take away
+
+The safe beginner expectation is:
+
+- duplicate matching components can be fused upward
+- at least some outputs have specific names and level requirements
+- a component in one recipe can also be part of another recipe chain
+- this is a system you revisit over time, not just a one-click cleanup trick
+
+### Why gem fusion matters
+
+Early on, gems and gem-like components pile up quickly and create inventory pressure.
+
+Fusion helps because it lets you:
+
+- compress clutter
+- turn low-tier duplicates into something more useful
+- create a more meaningful socket target
+- get more value out of materials that would otherwise just sit in stash
+
+<figure className="my-8">
+  <Image
+    src="/images/crystalfall/crafting-gem-fusion.webp"
+    alt="Gem fusion using matching components in Crystalfall."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Crystalfall fusing already looks more like a real recipe chain than a throwaway stash-cleanup button.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Gem fusion rule">
+Think of fusing as a recipe system with named outputs and requirements, not just a vague “combine three things and hope for the best.”
+</GuideCallout>
+
+---
+
+<h2 id="what-crafting-materials-are-worth-saving">
+  What crafting materials are worth saving
+</h2>
+
+One of the easiest mistakes beginners make is treating every crafting material as equally urgent.
+
+They are not.
+
+### Best materials to respect early
+
+You should be careful with anything that can:
+
+- upgrade item rarity
+- upgrade skill rarity
+- reroll valuable skill rows
+- add sockets
+- improve an already-good base instead of a random filler drop
+
+### Why restraint matters
+
+The playthrough repeatedly hesitates before spending certain pieces because the player knows the material is real value, but is not always sure the target item deserves it.
+
+That is good instinct.
+
+Your early crafting success is not about using materials fast.
+
+It is about using them on things that are already close to worth keeping.
+
+And now that you know **crafting can fail**, that restraint matters even more.
+
+---
+
+<h2 id="modules-rerolls-and-affix-manipulation">
+  Modules, rerolls, and affix manipulation
+</h2>
+
+This is a more advanced corner of early crafting, but it is still worth mentioning because the run does interact with it.
+
+The player experiments with module-based affix changes and rerolls, including cases where an unwanted affix gets swapped into something else.
+
+That tells you two useful things:
+
+1. the game does support more targeted item manipulation than just “upgrade rarity”
+2. you should expect some amount of material-specific reroll logic later, even if you do not fully rely on it immediately
+
+For a beginner page, though, this is not the first crafting layer to master.
+
+The real first layers are:
+
+- base evaluation
+- rarity
+- sockets
+- gem fusion
+- skill progression
+- brick-risk awareness
+
+Everything else can come after that.
+
+If you are still getting comfortable with rarity upgrades and sockets, this is the kind of system you should revisit later rather than force immediately.
+
+---
+
+<h2 id="biggest-crafting-mistakes-beginners-make">
+  Biggest crafting mistakes beginners make
+</h2>
+
+### 1. Upgrading rarity on a weak base
+
+A weak item does not become smart just because you upgraded it.
+
+### 2. Ignoring alpha / omega affixes
+
+If the base has poor ceilings or weak utility, rarity does not save it.
+
+### 3. Forgetting that crafting can fail
+
+Treating every upgrade like guaranteed value is a great way to lose good items.
+
+### 4. Assuming socket removal is expensive or destructive
+
+That fear makes players too conservative for no reason.
+
+### 5. Treating gem clutter like a storage problem only
+
+It is also a fusion opportunity.
+
+### 6. Confusing UI friction with system depth
+
+Some of Crystalfall’s crafting confusion is not because the system is deep.
+
+It is because the interface still explains itself poorly.
+
+---
+
+<h2 id="best-practical-crafting-order-for-beginners">
+  Best practical crafting order for beginners
+</h2>
+
+If you want the cleanest beginner order, do this:
+
+1. **Keep only bases you would realistically use**
+2. **Check whether the base has good alpha / omega value before investing**
+3. **Upgrade rarity on gear that already solves a real problem**
+4. **Upgrade skill rarity on skills you actually plan to keep**
+5. **Use row shuffle when a skill is promising but the options are weak**
+6. **Do not be afraid to socket, because unsocketing is free**
+7. **Add sockets only to items worth keeping**
+8. **Fuse duplicate matching gems upward instead of just hoarding them**
+9. **Save scarce premium materials for genuinely strong bases**
+10. **Always remember that a craft can fail, so treat every click like a decision**
+
+That is the version of crafting that creates progression instead of chaos.
+
+---
+
+<h2 id="what-this-guide-does-and-does-not-confirm">
+  What this guide does and does not confirm
+</h2>
+
+This page is meant to solve the **early crafting confusion** around Crystalfall.
+
+It does **not** pretend to settle:
+
+- the best endgame crafting strategy
+- every material source
+- every perfect item base
+- the final most efficient gem economy
+- every hidden UI rule the game may add later
+
+That matters.
+
+A good launch-period crafting guide should explain what already works, while staying honest about what still feels rough.
+
+<GuideCallout title="Best writing rule for Crystalfall crafting content">
+Write the confirmed early functionality clearly.
+
+Do not pretend the whole system is already perfectly documented.
+</GuideCallout>
+
+---
+
+<h2 id="crafting-at-a-glance">
+  Crafting at a glance
+</h2>
+
+<GuideDataTable
+  title=""
+  rows={craftingRows}
+/>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Can you upgrade common items in Crystalfall?
+
+Yes. Early crafting confirms that common items can be upgraded into uncommon quality.
+
+### Can crafting fail in Crystalfall?
+
+Yes. Developer guidance explicitly says crafting can fail and brick items, so it should not be treated as deterministic or risk-free.
+
+### What are alpha and omega affixes?
+
+They are base-layer modifiers that can exist regardless of item rarity and affect things like max sockets, max quality, crafting success chance, and other important limits.
+
+### Can you upgrade skills in Crystalfall?
+
+Yes. Skills can be improved through rarity upgrades, row changes, Skill Keys, and Crest-related progression.
+
+### Where do you do skill crafting?
+
+Official FAQ guidance says the **Skill Artisan Crafting NPC is only available in Arcadia**.
+
+### How do Skill Crests work?
+
+A Crest only works if you unlock the **Crest Node** at the top of the skill grid and the Crest has a matching tag for your skill.
+
+### Can you remove socketed cores?
+
+Yes. The launch-period crafting flow shown here confirms that socketed cores can be removed for free.
+
+### Can you add sockets to items?
+
+Yes, but the interface is confusing at first. Socket adding exists, but the path is not very intuitive until you see the correct crafting option.
+
+### How does gem fusion work?
+
+The beginner-confirmed rule is that matching fusion materials can be combined upward, and the current public fusing database already shows named outputs, requirements, and component chains rather than a purely generic one-step combine.
+
+### Should I spend crafting materials early?
+
+Yes, but selectively. Spend them on gear or skills you actually expect to keep for a while, not on random filler drops.
+
+### Is crafting important in the early game?
+
+Yes. In Crystalfall, crafting is part of early progression, not just late-game optimization.

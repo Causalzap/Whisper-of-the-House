@@ -140,6 +140,67 @@ export default function LatestUpdates() {
               </p>
             </Link>
 
+            {/* ===== crystalfall ===== */}
+            <Link
+              href="/crystalfall"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-600 font-semibold">Crystalfall</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+                  Crystalfall Guide Hub
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Your starting point for Crystalfall guides, including beginner tips, Fireball builds, crafting systems, and inventory management.
+              </p>
+            </Link>
+              
+            <Link
+              href="/crystalfall/beginner-guide"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-600 font-semibold">Crystalfall</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+                  Crystalfall Beginner Guide
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                A practical first-steps guide covering the best starting class, Fireball opener, Aether priorities, and what to do in your first hours.
+              </p>
+            </Link>
+              
+            <Link
+              href="/crystalfall/fireball-build-guide"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-600 font-semibold">Crystalfall</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+                  Best Fireball Build for Beginners
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Learn the cleanest Technomancer Fireball setup, including early passive pathing, Rod compatibility, Aether sustain, and top upgrade priorities.
+              </p>
+            </Link>
+              
+            <Link
+              href="/crystalfall/crafting-sockets-gem-fusion-guide"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-amber-600 font-semibold">Crystalfall</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-purple-700">
+                  Crafting, Sockets, and Gem Fusion Guide
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Understand alpha and omega affixes, rarity upgrades, brick risk, sockets, Skill Crests, and how gem fusion works in Early Access.
+              </p>
+            </Link>
+
             {/* ===== Hozy ===== */}
             <Link href="/guides/hozy/cafe-layout-tips" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-indigo-300">
               <div className="flex items-center gap-2">
