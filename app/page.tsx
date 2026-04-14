@@ -109,6 +109,13 @@ export default function Home() {
                 View Crystalfall Guides
               </Link>
 
+              <Link
+                href="/sol-cesto"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                View Sol Cesto Guides
+              </Link>
+
             </div>
           </div>
         </div>

@@ -46,6 +46,67 @@ export default function LatestUpdates() {
               <p className="mt-1 text-xs text-gray-600">Buying advice for Christians, non-Christians, and story-first players.</p>
             </Link>
 
+            {/* ===== Sol Cesto ===== */}
+            <Link
+              href="/sol-cesto/all-characters-unlock-guide/"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-sm"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-emerald-500">Sol Cesto</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+                  All Characters Unlock Guide
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Full roster overview, normal progression unlocks, and the hidden Lizard route.
+              </p>
+            </Link>
+              
+            <Link
+              href="/sol-cesto/how-to-unlock-lizard/"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-sm"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-emerald-500">Sol Cesto</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+                  How to Unlock Lizard
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Egg location, Biome 3 hatch condition, and why the Candle is not required.
+              </p>
+            </Link>
+              
+            <Link
+              href="/sol-cesto/flute-guide/"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-sm"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-emerald-500">Sol Cesto</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+                  Flute Guide
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                Flute Fragments, melody inputs, effects, and fountain bird repair explained.
+              </p>
+            </Link>
+              
+            <Link
+              href="/sol-cesto/how-to-unlock-huntress/"
+              className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-sm"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-emerald-500">Sol Cesto</span>
+                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-700">
+                  How to Unlock Huntress
+                </h3>
+              </div>
+              <p className="mt-1 text-xs text-gray-600">
+                The fastest Huntress unlock answer, what counts as a clear, and common confusion.
+              </p>
+            </Link>
+
             {/* ===== Retro Rewind ===== */}
             <Link href="/retro-rewind/custom-videos" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-purple-300">
               <div className="flex items-center gap-2">

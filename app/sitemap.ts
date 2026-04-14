@@ -42,6 +42,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/the-occultist`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/soulmask`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/crystalfall`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/sol-cesto`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/sol-cesto/all-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/sol-cesto/flute-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/sol-cesto/how-to-unlock-huntress`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/sol-cesto/how-to-unlock-lizard`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/crystalfall/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
