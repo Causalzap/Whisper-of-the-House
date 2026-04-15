@@ -13,6 +13,40 @@ export default function LatestUpdates() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* ===== Pokemon Champions ===== */}
+
+<Link href="/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
+  <div className="flex items-center gap-2">
+    <span className="text-xs font-semibold text-amber-500">Pokemon Champions</span>
+    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">Incineroar Counter Guide</h3>
+  </div>
+  <p className="mt-1 text-xs text-gray-600">How to beat Incineroar in Doubles: Fake Out cycles, Parting Shot loops, and best counter picks.</p>
+</Link>
+
+<Link href="/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
+  <div className="flex items-center gap-2">
+    <span className="text-xs font-semibold text-amber-500">Pokemon Champions</span>
+    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">Sneasler Counter Guide</h3>
+  </div>
+  <p className="mt-1 text-xs text-gray-600">Best counters for Sneasler: Ghost-types, Psychic pressure, and stopping Unburden sweeps.</p>
+</Link>
+
+<Link href="/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
+  <div className="flex items-center gap-2">
+    <span className="text-xs font-semibold text-amber-500">Pokemon Champions</span>
+    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">Tailwind Counter Guide</h3>
+  </div>
+  <p className="mt-1 text-xs text-gray-600">How to beat Tailwind teams: Taunt, Fake Out pressure, Trick Room reversal, and positioning tips.</p>
+</Link>
+
+<Link href="/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
+  <div className="flex items-center gap-2">
+    <span className="text-xs font-semibold text-amber-500">Pokemon Champions</span>
+    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-amber-700">Trick Room Counter Guide</h3>
+  </div>
+  <p className="mt-1 text-xs text-gray-600">How to stop Trick Room: Taunt leads, double targeting setters, and reversing speed control.</p>
+</Link>
+            
             {/* ===== I Am Jesus Christ ===== */}
             <Link href="/i-am-jesus-christ/walkthrough/" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-sm">
               <div className="flex items-center gap-2">
@@ -423,6 +457,8 @@ export default function LatestUpdates() {
               </div>
               <p className="mt-1 text-xs text-gray-600">Why buildings fail, what stability problems look like, and how to fix them fast.</p>
             </Link>
+
+
 
             {/* ===== The Long Dark Episode 5 ===== */}
             <Link href="/the-long-dark-episode-5" className="group rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 transition-all hover:-translate-y-0.5 hover:shadow-sm hover:border-sky-300">
