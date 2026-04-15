@@ -44,15 +44,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/crystalfall`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/sol-cesto`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/pokemon-champions`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    
+    { url: `${base}/grime-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+   
 
      // ⬇️ 把 4 篇文章补上
      { url: `${base}/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    
+     // ⬇️ 把 4 篇文章补上
+     { url: `${base}/grime-2/blade-mammoth-boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/grime-2/kankan-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/grime-2/vs-grime-1-differences`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/grime-2/hozy`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
-     
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/sol-cesto/all-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/sol-cesto/flute-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
