@@ -15,7 +15,7 @@ export type LatestUpdateItem = {
 
       // ===== Road to Vostok =====
   {
-    href: "/road-to-vostok/area-05-guide/",
+    href: "/road-to-vostok/area-05-guide",
     game: "Road to Vostok",
     title: "Area 05 Guide",
     description:
@@ -25,7 +25,7 @@ export type LatestUpdateItem = {
     hoverTitleClass: "group-hover:text-sky-700",
   },
   {
-    href: "/road-to-vostok/generalist-and-doctor-locations/",
+    href: "/road-to-vostok/generalist-and-doctor-locations",
     game: "Road to Vostok",
     title: "Generalist and Doctor Locations",
     description:
@@ -35,7 +35,7 @@ export type LatestUpdateItem = {
     hoverTitleClass: "group-hover:text-sky-700",
   },
   {
-    href: "/road-to-vostok/permadeath-save-and-stash-guide/",
+    href: "/road-to-vostok/permadeath-save-and-stash-guide",
     game: "Road to Vostok",
     title: "Permadeath, Save, and Stash Guide",
     description:
@@ -45,7 +45,7 @@ export type LatestUpdateItem = {
     hoverTitleClass: "group-hover:text-sky-700",
   },
   {
-    href: "/road-to-vostok/all-shelter-locations/",
+    href: "/road-to-vostok/all-shelter-locations",
     game: "Road to Vostok",
     title: "All Shelter Locations",
     description:
@@ -57,7 +57,7 @@ export type LatestUpdateItem = {
   
     // ===== Pokemon Champions =====
     {
-      href: "/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles/",
+      href: "/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles",
       game: "Pokemon Champions",
       title: "Incineroar Counter Guide",
       description:
@@ -67,7 +67,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-amber-700",
     },
     {
-      href: "/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles/",
+      href: "/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles",
       game: "Pokemon Champions",
       title: "Sneasler Counter Guide",
       description:
@@ -77,7 +77,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-amber-700",
     },
     {
-      href: "/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles/",
+      href: "/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles",
       game: "Pokemon Champions",
       title: "Tailwind Counter Guide",
       description:
@@ -87,7 +87,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-amber-700",
     },
     {
-      href: "/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles/",
+      href: "/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles",
       game: "Pokemon Champions",
       title: "Trick Room Counter Guide",
       description:
@@ -99,7 +99,7 @@ export type LatestUpdateItem = {
   
     // ===== I Am Jesus Christ =====
     {
-      href: "/i-am-jesus-christ/walkthrough/",
+      href: "/i-am-jesus-christ/walkthrough",
       game: "I Am Jesus Christ",
       title: "Full Walkthrough",
       description:
@@ -109,7 +109,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-amber-700",
     },
     {
-      href: "/i-am-jesus-christ/miracles-list/",
+      href: "/i-am-jesus-christ/miracles-list",
       game: "I Am Jesus Christ",
       title: "Miracles List",
       description:
@@ -119,7 +119,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-amber-700",
     },
     {
-      href: "/i-am-jesus-christ/apostles-locations/",
+      href: "/i-am-jesus-christ/apostles-locations",
       game: "I Am Jesus Christ",
       title: "12 Apostles Locations",
       description:
@@ -129,7 +129,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-amber-700",
     },
     {
-      href: "/i-am-jesus-christ/who-should-play/",
+      href: "/i-am-jesus-christ/who-should-play",
       game: "I Am Jesus Christ",
       title: "Who Should Play?",
       description:
@@ -141,7 +141,7 @@ export type LatestUpdateItem = {
   
     // ===== Sol Cesto =====
     {
-      href: "/sol-cesto/all-characters-unlock-guide/",
+      href: "/sol-cesto/all-characters-unlock-guide",
       game: "Sol Cesto",
       title: "All Characters Unlock Guide",
       description:
@@ -151,7 +151,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-emerald-700",
     },
     {
-      href: "/sol-cesto/how-to-unlock-lizard/",
+      href: "/sol-cesto/how-to-unlock-lizard",
       game: "Sol Cesto",
       title: "How to Unlock Lizard",
       description:
@@ -161,7 +161,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-emerald-700",
     },
     {
-      href: "/sol-cesto/flute-guide/",
+      href: "/sol-cesto/flute-guide",
       game: "Sol Cesto",
       title: "Flute Guide",
       description:
@@ -171,7 +171,7 @@ export type LatestUpdateItem = {
       hoverTitleClass: "group-hover:text-emerald-700",
     },
     {
-      href: "/sol-cesto/how-to-unlock-huntress/",
+      href: "/sol-cesto/how-to-unlock-huntress",
       game: "Sol Cesto",
       title: "How to Unlock Huntress",
       description:
