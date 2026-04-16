@@ -1,0 +1,761 @@
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+
+export const saveSnapshotRows = [
+  {
+    status: "confirmed",
+    item: "Manual save button",
+    value: "Not available",
+    why: "The current Early Access build does not behave like a normal quick-save game. Practical save protection comes from Shelter and map-transition logic.",
+  },
+  {
+    status: "confirmed",
+    item: "Entering or leaving Shelter",
+    value: "Hard save trigger",
+    why: "Walking into or out of a Shelter records your current state and also refreshes the outside map instance.",
+  },
+  {
+    status: "confirmed",
+    item: "Area transition",
+    value: "Hard save trigger",
+    why: "Moving between maps such as Village and School records your state at the transition point rather than letting you undo it later.",
+  },
+  {
+    status: "confirmed",
+    item: "Shelter interior items",
+    value: "Persistent",
+    why: "Items left inside Shelter space remain there after menu exit or relaunch, whether they are in containers or physically placed in the room.",
+  },
+  {
+    status: "confirmed",
+    item: "Open-world ground drops",
+    value: "Unsafe",
+    why: "Normal maps reset. Loose items dropped outside Shelter should be treated as temporary, not as stash.",
+  },
+  {
+    status: "confirmed",
+    item: "Best save rhythm",
+    value: "Hit loading screens on purpose",
+    why: "If you have been looting for a long time without a Shelter or zone transition, you have not truly banked that run yet.",
+  },
+];
+
+export const quitRiskRows = [
+  {
+    status: "community",
+    item: "Quit or Alt+F4 in open world",
+    value: "Treat as death-level loss of carried items",
+    why: "Community guides consistently warn that closing the game outside a safe transition can cost everything you are carrying on that run.",
+  },
+  {
+    status: "community",
+    item: "Crash or force quit in Vostok",
+    value: "Treat as full-wipe risk",
+    why: "Multiple current guides warn that Vostok crashes or hard quits can be processed as fatal run-ending events.",
+  },
+  {
+    status: "confirmed",
+    item: "Quit after Shelter or map transition",
+    value: "Safest exit timing",
+    why: "If you must stop playing, do it right after a loading screen that has already locked your state in.",
+  },
+  {
+    status: "confirmed",
+    item: "Best practical rule",
+    value: "Never rely on quit-out as recovery",
+    why: "Road to Vostok is built to punish combat logging and mid-run interruption, not to support save-scumming.",
+  },
+];
+
+export const deathMatrixRows = [
+  {
+    status: "confirmed",
+    item: "Area 05 death",
+    value: "Lose carried gear and backpack loot",
+    why: "Village-side deaths are punishing, but they are still rebuildable from Shelter if you banked properly.",
+  },
+  {
+    status: "confirmed",
+    item: "Border Zone death",
+    value: "Lose carried gear and backpack loot",
+    why: "The Border is more dangerous than Area 05, but official game messaging still separates it from true Vostok permadeath.",
+  },
+  {
+    status: "confirmed",
+    item: "Vostok death",
+    value: "Officially described as 'lose everything'",
+    why: "The official game page says Vostok is the permadeath zone and that dying there means you lose everything.",
+  },
+  {
+    status: "patch-sensitive",
+    item: "Exact scope of a Vostok wipe",
+    value: "Publish carefully",
+    why: "Current community coverage is not perfectly consistent on whether every protected system is erased in every edge case. The safe editorial stance is to treat Vostok as full-run-loss risk unless you have build-specific proof.",
+  },
+  {
+    status: "confirmed",
+    item: "Shelter stash after normal-zone death",
+    value: "Kept",
+    why: "That is the whole reason stable looping works. If the death was outside true permadeath space, your banked Shelter value remains your recovery base.",
+  },
+  {
+    status: "confirmed",
+    item: "Best default rule",
+    value: "Bank first, push second",
+    why: "If you would be angry to lose the item, move it into Shelter before your next dangerous route segment.",
+  },
+];
+
+export const stashRulesRows = [
+  {
+    status: "confirmed",
+    item: "Cabin floor / shelf / fridge",
+    value: "Safe stash",
+    why: "Inside Shelter space, persistence is the rule. Food, ammo, weapons, and tools become real progression there.",
+  },
+  {
+    status: "confirmed",
+    item: "Bought cabinet or storage box",
+    value: "Safe stash",
+    why: "Formal containers are still worth using for organization even if Shelter floor persistence already exists.",
+  },
+  {
+    status: "confirmed",
+    item: "Village road or School hallway",
+    value: "Not safe",
+    why: "Items dropped on active maps can disappear when the instance refreshes. Never confuse emergency dumping with banking.",
+  },
+  {
+    status: "confirmed",
+    item: "Cross-shelter storage",
+    value: "Not shared",
+    why: "A gun stored in the Village Cabin stays there until you physically carry it to another Shelter yourself.",
+  },
+  {
+    status: "community",
+    item: "Shelter management time cost",
+    value: "Still drains survival stats",
+    why: "Shelter is not a true pause menu. Long sorting sessions can still cost hunger, thirst, energy, and time.",
+  },
+  {
+    status: "confirmed",
+    item: "Practical takeaway",
+    value: "Shelter good, map ground bad",
+    why: "That single distinction prevents a huge amount of beginner loss.",
+  },
+];
+
+export const vostokPrepRows = [
+  {
+    status: "community",
+    item: "Reserve kits in Shelter",
+    value: "Keep 2 to 3 rebuild kits ready",
+    why: "A basic rifle, basic armor, ammo, and medical essentials in reserve dramatically reduce the emotional and economic cost of a bad death.",
+  },
+  {
+    status: "community",
+    item: "Primary weapon",
+    value: "Bring a high-durability rifle",
+    why: "Current guides consistently recommend crossing with a reliable primary rather than a worn gun that may jam in the worst fight of the run.",
+  },
+  {
+    status: "community",
+    item: "Medical baseline",
+    value: "At least 2 tourniquets, 2 bandages, 1 IFAK, 1 antibiotics, 1 fracture / mobility answer",
+    why: "Vostok and Border mistakes usually snowball through untreated injuries rather than through the first bullet alone.",
+  },
+  {
+    status: "community",
+    item: "Ammo reserve",
+    value: "Bring enough to fight and to extract",
+    why: "Do not plan for one clean fight. Plan for a bad engagement, a second contact, and the trip back out.",
+  },
+  {
+    status: "confirmed",
+    item: "High-value loot policy",
+    value: "Do not mix banking with border-pushing",
+    why: "A good loot run and a dangerous push should usually be two separate trips.",
+  },
+  {
+    status: "confirmed",
+    item: "Final check",
+    value: "If losing the run would tilt you, do not cross yet",
+    why: "That emotional test is surprisingly useful because the system is built around meaningful risk, not casual experimentation.",
+  },
+];
+
+<GuideCallout title="About this guide">
+This page is built for the practical question that decides whether a run in **Road to Vostok** becomes progression or wasted time:
+
+**How does saving actually work, what do you lose on death, what counts as real stash, and how should you prepare before a risky push or a true Vostok crossing?**
+
+This version is intentionally stricter and more careful than a generic survival guide.
+
+It focuses on:
+
+- what actually triggers a **hard save**
+- the difference between **Shelter persistence** and **temporary map state**
+- what current sources agree on for **Area 05** and **Border Zone** deaths
+- how to talk about **Vostok permadeath** without overstating edge cases
+- why **quit / crash behavior** deserves its own warning section
+- why **independent Shelter storage** changes route planning
+- when to split a session into **loot run first, combat run second**
+</GuideCallout>
+
+<GuideQuickAnswer title="Road to Vostok Permadeath, Save, and Stash Guide">
+**Road to Vostok does not use a normal manual save system. In the current Early Access build, practical save protection comes from Shelter transitions, map transitions, and anything already secured inside Shelter space. Dying in Area 05 or the Border Zone usually wipes what you were carrying on that run, but not your already banked Shelter stash. Vostok is different: the official game page describes it as the true permadeath space where dying means you lose everything, so the safest guide-writing stance is to treat every Vostok entry as full-run-loss risk unless you have build-specific proof for a narrower outcome.**
+
+If you only want the shortest useful version:
+
+1. **There is no normal quick-save button**
+2. **Entering or leaving a Shelter is a hard save trigger**
+3. **Area transitions also lock in your state**
+4. **Anything safely inside Shelter space is your real stash**
+5. **Anything dropped on normal map ground is not real stash**
+6. **Area 05 and Border deaths usually cost carried gear, not your whole bank**
+7. **Vostok should be treated as full-run-loss risk**
+8. **Quits and crashes are not safe escape tools**
+9. **The smartest default rule is simple: bank loot before a long or violent push**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/road-to-vostok-zone-progression-map.webp"
+    alt="Road to Vostok progression map showing the route from early western maps toward the deeper Vostok permadeath side."
+    width={2000}
+    height={1000}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Save and death logic only make sense when you read the game as a progression ladder. The farther east you go, the less forgiving the recovery model becomes.
+  </figcaption>
+</figure>
+
+<div>
+  The biggest trust-killer in a permadeath guide is pretending there is no ambiguity.
+  In <strong>Road to Vostok</strong>, the broad structure is clear, but some edge-case reporting still varies by build, guide, and test method.
+  That means your article should be firm where the game and community clearly agree, and careful where current reporting is still inconsistent.
+</div>
+
+---
+
+<h2 id="build-and-certainty-note">
+  Build and certainty note
+</h2>
+
+<GuideCallout title="How this page handles conflicting reports">
+For the current Early Access / Godot-era coverage, the safest editorial rule is:
+
+- write **Area 05** and **Border Zone** loss rules as normal carried-gear loss
+- write **Shelter persistence** as your true bank
+- write **Vostok** as the official permadeath line
+- avoid publishing a narrow Vostok exception unless you have personally reproduced it in your current build
+
+In other words: when community sources conflict, lean on the harsher interpretation for player safety and label the uncertainty instead of hiding it.
+</GuideCallout>
+
+---
+
+<h2 id="save-mechanics-snapshot">
+  Save mechanics snapshot
+</h2>
+
+A lot of confusion comes from expecting a normal survival-game save menu when the game is actually built around transitions, persistence zones, and rebuild loops.
+
+<GuideDataTable
+  title=""
+  rows={saveSnapshotRows}
+/>
+
+The practical takeaway is simple:
+
+- **no normal manual save**
+- **Shelter transitions save**
+- **area transitions save**
+- **Shelter space persists**
+- **open-world ground drops are not safe stash**
+- **save rhythm matters, not just loot quality**
+
+---
+
+<h2 id="how-saving-works">
+  How saving works in Road to Vostok
+</h2>
+
+The safest way to explain saving in <strong>Road to Vostok</strong> is this:
+
+the game saves around <strong>state changes</strong>, not around a button you press.
+
+### Entering or leaving Shelter
+In the current build, going into or out of a Shelter behaves like a hard save trigger.
+
+That matters for two reasons:
+
+1. it protects your current state
+2. it refreshes the outside map instance
+
+So if you loot Village, return to Cabin, and secure your items, you are not just banking value.
+You are also creating the next safe baseline for the following run.
+
+### Area transitions
+Changing maps, such as moving from Village into School, also records your current state.
+
+That means force-quitting after a bad transition is not a reliable undo.
+If you crossed while badly wounded, hungry, or underprepared, that damaged state may already be the state the game remembers.
+
+### Shelter interior persistence
+Shelter persistence is what makes the whole system playable.
+
+Inside Cabin or another valid Shelter, items remain where you leave them.
+That can mean shelves, containers, or physically placed floor items.
+
+<GuideCallout title="The key save rule">
+Do not ask, “When did the game autosave?”
+
+Ask:
+
+**“What transition just locked my state in, and is the item I care about already inside Shelter?”**
+
+That question leads to much better decisions.
+</GuideCallout>
+
+---
+
+<h2 id="save-cadence-matters">
+  Why save cadence matters more than most players think
+</h2>
+
+A surprising number of bad runs are not caused by bad aim.
+They are caused by bad timing.
+
+If you have been looting for 30 to 45 minutes without touching a Shelter or crossing a zone boundary, you may feel rich, but you are still carrying temporary progress rather than secured progress.
+
+That is why disciplined routing in <strong>Road to Vostok</strong> looks repetitive on purpose:
+
+- loot
+- bank
+- reset
+- re-enter stronger
+
+It is slower than greed.
+It is also the reason your inventory keeps getting larger over time instead of repeatedly exploding back to zero.
+
+---
+
+<h2 id="quit-crash-and-altf4">
+  Quit, crash, and Alt+F4 risk
+</h2>
+
+This is the section many guides bury when it should be near the top.
+
+<GuideDataTable
+  title=""
+  rows={quitRiskRows}
+/>
+
+The safe version for readers is brutally simple:
+
+- do not treat quitting in the open world as a harmless pause
+- do not treat Alt+F4 as a recovery tool
+- do not assume a crash inside Vostok will spare your run
+- if you must stop, do it right after a loading screen, not in the middle of active space
+
+This matters even outside Vostok because many players only think about true permadeath and forget that losing a full combat loadout to a real-life interruption still feels terrible.
+
+---
+
+<h2 id="what-gets-saved">
+  What gets saved and what does not
+</h2>
+
+The easiest way to avoid confusion is to separate <strong>run state</strong> from <strong>map instance state</strong>.
+
+### What usually gets saved
+- your current post-transition condition
+- your Shelter inventory state
+- items physically left inside Shelter space
+- your broader progress as long as you did not trigger a true permadeath wipe
+
+### What does not behave like safe saved value
+- loose items left on Village roads
+- emergency dumping in School or Border map space
+- anything still sitting in your backpack on a doomed push
+- the assumption that quitting later will undo a bad decision now
+
+Players lose more value to this misunderstanding than to poor recoil control.
+
+Only the loot you already banked is truly yours.
+
+---
+
+<h2 id="what-you-lose-on-death">
+  What you lose on death in each zone
+</h2>
+
+The death model becomes much easier to understand when you stop thinking in terms of “easy map versus hard map” and start thinking in terms of <strong>rebuildable death versus run-ending death</strong>.
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/death-screen-vostok-permadeath.webp"
+    alt="Dark Road to Vostok death atmosphere image representing the full-run-loss danger of deeper progression."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In the early game, death usually means losing the run you were carrying. In deeper Vostok progression, death can mean losing the run you were building.
+  </figcaption>
+</figure>
+
+<GuideDataTable
+  title=""
+  rows={deathMatrixRows}
+/>
+
+### The most important wording fix
+Do not casually write “Vostok death just deletes your backpack” unless you have reproduced that exact behavior in your current build.
+
+The official game page uses much stronger language: <strong>lose everything</strong>.
+
+That does not mean every player report is identical in wording.
+It does mean your public guide should treat Vostok like the highest possible consequence tier unless proven otherwise.
+
+<GuideCallout title="Best editorial stance for Vostok">
+For beginner-facing strategy content, the safest sentence is:
+
+**“Officially, Vostok is the permadeath zone where dying means losing everything. If you have seen narrower community reports for a specific build or edge case, label them as build-sensitive rather than as universal truth.”**
+</GuideCallout>
+
+---
+
+<h2 id="how-stash-protection-works">
+  How stash protection actually works
+</h2>
+
+If you want one concept that immediately makes you better at <strong>Road to Vostok</strong>, it is this:
+
+<strong>Shelter space is your bank.</strong>
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/cabin-stash-shelf-food.webp"
+    alt="Food and supplies stored safely inside the Cabin shelter in Road to Vostok."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Cabin is not just a rest stop. It is your first reliable bank. Food, water, ammo, medicine, and spare gear only become truly safe once they are inside Shelter space.
+  </figcaption>
+</figure>
+
+Inside a valid Shelter, persistence is the rule.
+
+That is why these all count as real stash in practical play:
+
+- putting food in the fridge
+- dropping spare weapons on the floor
+- leaving ammo on shelves
+- organizing tools or medical gear in containers
+
+<GuideDataTable
+  title=""
+  rows={stashRulesRows}
+/>
+
+### Floor versus container inside Shelter
+From a pure persistence standpoint, both work.
+
+From a practical standpoint, containers are still better for anything valuable because they reduce clutter, improve visibility, and lower the chance of later organization problems.
+
+### Cross-shelter storage is not shared
+This is a major routing lesson.
+
+A rifle stored in the Village Cabin does not magically appear in a School shelter or an Outpost shelter.
+If you want gear farther east, you must physically move it there yourself.
+
+That means storage decisions are also logistics decisions.
+
+<GuideCallout title="Simple stash rule">
+If the item is not inside a Shelter, it is not fully yours yet.
+</GuideCallout>
+
+---
+
+<h2 id="shelter-is-not-a-pause-menu">
+  Shelter is not a pause menu
+</h2>
+
+This is easy to underestimate because Shelter feels safe.
+
+It is safe from enemies.
+It is not a full suspension of survival systems.
+
+If you spend a long time decorating, sorting, or dragging items around, you can still burn time and survival resources while doing it.
+The exact drain experience may feel lighter than sprinting outside under load, but the key point for guide readers is the same:
+
+- do not reorganize forever on an empty stomach
+- keep water nearby before a long stash session
+- finish critical triage first, then start decorating
+
+That advice sounds small, but it prevents a surprisingly dumb category of self-inflicted losses.
+
+---
+
+<h2 id="manual-backup-workaround">
+  Manual backup workaround
+</h2>
+
+Because <strong>Road to Vostok</strong> is a single-player local-save game, players often create their own backup before a dangerous crossing.
+
+This is not a native in-game feature.
+It is a community workaround.
+
+### The careful way to write it
+Say that players can manually copy their save folder <strong>after a loading screen</strong> if they want a personal rollback point before a high-risk run.
+
+What you should not do is publish one exact file path as universal truth without a note.
+
+Current community references do not line up perfectly:
+
+- some current community instructions point to **%AppData%\\Godot\\app_userdata\\Road to Vostok**
+- some newer third-party guides cite **%AppData%\\Local\\RoadToVostok**
+
+So the safest version for your article is:
+
+1. trigger a loading screen first
+2. identify which Road to Vostok save folder is actually updating on your machine
+3. copy that whole folder somewhere safe
+4. only then cross into the run you consider too expensive to lose
+
+<GuideCallout title="Important backup note">
+A backup is a community workaround, not an official save feature.
+
+If you mention it, frame it as:
+
+**“manual local-file backup for a single-player game”**
+
+not as normal built-in progression behavior.
+</GuideCallout>
+
+---
+
+<h2 id="why-stable-loops-win">
+  Why stable loops beat greedy clears
+</h2>
+
+The reason stable looping is so strong is not just safety.
+It is <strong>compounding</strong>.
+
+### Stable Loop scenario
+You loot Village, fill part of a bag with useful value, then return to Cabin before trying anything ambitious.
+
+That does three things at once:
+
+1. it converts temporary value into permanent value
+2. it gives you a reset anchor
+3. it lets the next run start from a stronger baseline
+
+That is why early progression snowballs fastest when you stop treating every trip like a heroic raid and start treating it like controlled capital accumulation.
+
+### Greedy Death scenario
+A lot of players do the opposite.
+
+They finish a good School run, already have enough to call it a win, then keep pushing because one more room might contain something even better.
+
+That is where they die.
+
+And because the item was never safely banked, the whole run collapses into zero.
+
+The lesson is brutal but useful:
+
+<strong>only the loot inside Shelter is real progression.</strong>
+
+---
+
+<h2 id="when-to-bank-loot">
+  When to bank loot before a longer push
+</h2>
+
+The right moment to bank loot is usually earlier than new players think.
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/pre-long-run-loadout-and-loot.webp"
+    alt="A loaded inventory and combat setup before a longer push in Road to Vostok."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is the decision point that separates disciplined runs from expensive ones. Once your bag contains attachments, tools, medical value, or spare weapons you care about, the next push should often become a separate combat trip.
+  </figcaption>
+</figure>
+
+### Bank first when:
+- your backpack is already carrying meaningful value, not just filler
+- you just found optics, tools, fuel, medkits, or rare barter material
+- your healing depth is weaker than the area you want to enter
+- the next route segment is more dangerous than the one you just finished
+- you are about to cross from looting into deliberate combat
+
+### Pre-Long Run scenario
+A classic example is finishing School or Outpost with a bag full of expensive value, then thinking about pushing farther toward Border or deeper progression.
+
+That is when disciplined players split the plan in two:
+
+- first trip: loot and return
+- second trip: pure combat kit and medical prep
+
+This is how you stop dying with your best value still on your back.
+
+<GuideCallout title="Best default rule">
+Do not combine a good loot haul and a dangerous push unless you are comfortable losing both at once.
+</GuideCallout>
+
+---
+
+<h2 id="vostok-prep-and-rebuild-kits">
+  Vostok prep and rebuild kits
+</h2>
+
+Principles are useful, but this part becomes better when it gives readers a concrete checklist.
+
+<GuideDataTable
+  title=""
+  rows={vostokPrepRows}
+/>
+
+### The reserve-kit rule
+A lot of players only prepare for the ideal run.
+
+Better players also prepare for the bad recovery.
+
+Keeping 2 to 3 simple rebuild kits in Shelter changes the emotional cost of a death dramatically.
+That can mean:
+
+- one serviceable rifle
+- one basic armor setup
+- a stack of ammo
+- enough medical to leave Shelter again without panic
+
+### A practical Vostok entry checklist
+Before a serious border or Vostok attempt, ask:
+
+- is my primary weapon reliable and worth trusting?
+- do I have enough healing for both combat and extraction?
+- do I have enough ammo for a second fight, not just the first one?
+- did I already bank the expensive stuff I do not need for this push?
+- am I crossing because I am ready, or just because I am impatient?
+
+That last question matters more than most gear questions.
+
+---
+
+<h2 id="ironman-note">
+  Ironman note
+</h2>
+
+If you want to mention <strong>Ironman</strong> in your article, do it carefully.
+
+Current community coverage often describes Ironman or max-difficulty style play as extending harsher death logic much more broadly than Standard.
+That is useful context, but it is also the kind of rule that can shift with updates or be misunderstood if the reader assumes it behaves exactly like Standard with different numbers.
+
+So the safest publishable version is:
+
+- include Ironman as a <strong>separate mode note</strong>
+- label it as <strong>mode-specific and patch-sensitive</strong>
+- avoid writing its exact death consequences as a universal truth unless you verified them in your current build
+
+That keeps your Standard-mode guide clean while still helping advanced readers.
+
+---
+
+<h2 id="common-mistakes">
+  Common save and stash mistakes
+</h2>
+
+These are the mistakes that quietly ruin runs even when the gunplay itself is fine.
+
+### 1. Treating map ground like stash
+If you throw something on the road in Village and assume it will still be there after a reset, you are gambling with deletion.
+
+### 2. Misreading Shelter persistence
+Some players think only containers count.
+In practice, Shelter floor space persists too.
+The real line is not floor versus box.
+It is Shelter versus non-Shelter.
+
+### 3. Carrying value too long
+If you already won the run, stop trying to win it twice.
+
+### 4. Pushing injured because “the game will save me”
+The game can preserve bad state just as easily as good state.
+
+### 5. Forgetting that shelters do not share storage
+Not planning eastward logistics leads to avoidable shortages later.
+
+### 6. Treating Vostok like a harder loot map instead of a different risk category
+That mindset is how players accidentally stake their whole save on a run they did not truly mean to commit to.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Can you manually save in Road to Vostok?
+
+Not with a normal quick-save button. Practical saving comes from Shelter and map-transition logic.
+
+### Does entering a Shelter save the game?
+
+Yes. Entering or leaving Shelter behaves like a hard save trigger in current play.
+
+### Do area transitions save the game?
+
+Yes. Crossing from one map area to another can lock in your current state.
+
+### Can you quit out to undo damage?
+
+Do not count on it. Open-world quitting is widely treated as dangerous rather than protective.
+
+### Is the Cabin a safe stash?
+
+Yes. The Cabin is your first true bank.
+
+### Do items on the Shelter floor persist?
+
+Yes. Inside Shelter, loose floor items can persist.
+
+### Do items dropped on normal maps persist?
+
+Do not treat them as safe stash. Active map space resets.
+
+### Do all shelters share the same storage?
+
+No. Shelter storage is independent. You must physically move gear between shelters yourself.
+
+### What do you lose on a normal-zone death?
+
+Usually the gear and loot you were carrying on that run.
+
+### What do you lose in Vostok permadeath?
+
+The official wording is “lose everything,” so the safest guide-writing stance is to treat Vostok as full-run-loss risk.
+
+### Should you mention manual save backups?
+
+Yes, but as a community workaround, not as a built-in game system.
+
+### Can hunger and thirst still matter inside Shelter?
+
+Yes. Shelter is safe from enemies, but not a true pause menu for survival management.
+
+### What is the best beginner rule for save and stash decisions?
+
+If you would hate to lose it, bank it before the next dangerous push.

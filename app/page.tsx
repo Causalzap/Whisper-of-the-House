@@ -7,7 +7,7 @@ import LatestUpdates from '@/components/LatestUpdates';
 export const metadata: Metadata = {
   title: 'Whisper of the House Game Guides: Cozy Games, GRIME II & The Long Dark Episode 5',
   description:
-    'Explore Whisper of the House guides, hidden secrets, furniture lists, and story details, plus tips and updates for Retro Rewind, GRIME II, The Long Dark Episode 5, and other games.',
+    'Explore Whisper of the House guides, hidden secrets, furniture lists, and story details, plus tips and updates for Retro Rewind, GRIME II,The Long Dark Episode 5 and other games.',
   alternates: {
     canonical: 'https://www.whisperofthehouse.com/',
   },
@@ -35,7 +35,7 @@ export default function Home() {
             <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
               Explore in-depth guides, hidden secrets, furniture collections, and story details for
               Whisper of the House, along with fresh tips and updates for Retro Rewind, GRIME II,
-              The Long Dark Episode 5, and other games.
+              The Long Dark Episode 5, Road To Vostok, Soulmask, Sol Cesto , The Occultist and other games.
             </p>
 
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start">
@@ -121,6 +121,13 @@ export default function Home() {
                 className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
               >
                 Pokemon Champions
+              </Link>
+
+              <Link
+                href="/road-to-vostok"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                Road To Vostok Guide
               </Link>
               
 

@@ -1,0 +1,758 @@
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+
+export const shelterOverviewRows = [
+  {
+    status: "confirmed",
+    item: "Cabin",
+    value: "Village · Area 05 · Default",
+    why: "Your starting shelter and first true bank. It is small, but it powers the first loot-save-reset loop that makes every later shelter matter.",
+  },
+  {
+    status: "confirmed",
+    item: "Attic",
+    value: "Village · Area 05 · Above the Generalist",
+    why: "The best early shelter upgrade because it improves the Village loop you are already running instead of forcing a new danger line just to make the shelter useful.",
+  },
+  {
+    status: "confirmed",
+    item: "Classroom",
+    value: "School · Area 05",
+    why: "A strong School-side shelter, but its official unlock path is much more punishing than the room itself first suggests.",
+  },
+  {
+    status: "confirmed",
+    item: "Tent",
+    value: "Outpost · Border Zone · Free access",
+    why: "Your first forward shelter. Its value is location, not comfort: it changes your eastern route network the moment you reach Outpost.",
+  },
+  {
+    status: "confirmed",
+    item: "Bunker",
+    value: "Outpost · Border Zone · Gunsmith path",
+    why: "The best mid-game shelter because it turns Outpost from a checkpoint into a real eastern base.",
+  },
+  {
+    status: "confirmed",
+    item: "Apartment Room",
+    value: "Vostok",
+    why: "Late-game shelter in the permadeath region. Powerful in theory, but not a sensible early progression goal.",
+  },
+];
+
+export const shelterPriorityRows = [
+  {
+    status: "confirmed",
+    item: "Best early upgrade",
+    value: "Attic",
+    why: "It expands the Village loop you are already using, stays close to the Generalist, and asks for less route risk than the eastern shelters.",
+  },
+  {
+    status: "confirmed",
+    item: "Best first forward shelter",
+    value: "Tent",
+    why: "Small and limited, but immediately valuable because it gives you a safe eastern fallback point the moment Outpost becomes part of your route.",
+  },
+  {
+    status: "confirmed",
+    item: "Best mid-game shelter",
+    value: "Bunker",
+    why: "The strongest logistics upgrade once your Border progression is real.",
+  },
+  {
+    status: "conditional",
+    item: "Most over-prioritized shelter",
+    value: "Classroom",
+    why: "Excellent room, expensive route. The unlock pressure is often worse than players expect.",
+  },
+  {
+    status: "confirmed",
+    item: "Late-game luxury",
+    value: "Apartment Room",
+    why: "It belongs to the permadeath side of the map and should not be treated as an early goal.",
+  },
+  {
+    status: "confirmed",
+    item: "Recommended order",
+    value: "Cabin -> Attic -> Tent -> Bunker -> Classroom -> Apartment Room",
+    why: "That order improves your route network earliest for the least risk in the current build.",
+  },
+];
+
+export const shelterDecisionRows = [
+  {
+    status: "confirmed",
+    item: "Cabin",
+    value: "Auto-unlocked",
+    why: "Use it as your default safety anchor, your first stash, and your reset point for every early farming loop.",
+  },
+  {
+    status: "confirmed",
+    item: "Attic",
+    value: "Rush",
+    why: "This is the best early shelter upgrade because it directly improves Area 05 efficiency with minimal route risk.",
+  },
+  {
+    status: "confirmed",
+    item: "Tent",
+    value: "Rush once Outpost matters",
+    why: "It is cramped, but its position changes your eastern route network immediately.",
+  },
+  {
+    status: "confirmed",
+    item: "Bunker",
+    value: "High priority",
+    why: "This is the shelter that turns Outpost from a checkpoint into a real base.",
+  },
+  {
+    status: "conditional",
+    item: "Classroom",
+    value: "Conditional",
+    why: "Very good shelter, but often a bad early obsession because the official unlock path is tied to extreme risk.",
+  },
+  {
+    status: "confirmed",
+    item: "Apartment Room",
+    value: "Late only",
+    why: "Treat it as endgame infrastructure, not as a short-term objective.",
+  },
+];
+
+export const shelterRulesRows = [
+  {
+    status: "confirmed",
+    item: "Independent stash",
+    value: "Shelters do not share storage",
+    why: "A rifle left in the Cabin stays in the Cabin. If you want gear farther east, you must physically carry it there.",
+  },
+  {
+    status: "confirmed",
+    item: "Decor Mode",
+    value: "Press F1 inside Shelter",
+    why: "F1 opens Decor Mode so you can place furniture and props you have bought from traders.",
+  },
+  {
+    status: "confirmed",
+    item: "Sleep system",
+    value: "Bed can push time forward",
+    why: "Current guide coverage describes shelter sleep as a way to skip roughly 4 to 8 hours and control whether you head out by day or night.",
+  },
+  {
+    status: "community",
+    item: "Shelter is not a true pause menu",
+    value: "Manage hunger and thirst anyway",
+    why: "Player reports consistently warn that long sorting sessions inside shelters can still burn survival resources.",
+  },
+  {
+    status: "confirmed",
+    item: "Open-world dumping",
+    value: "Not safe stash",
+    why: "Ground drops outside Shelter space can vanish when the map instance resets.",
+  },
+  {
+    status: "confirmed",
+    item: "Best mental model",
+    value: "Shelter = network, not checklist",
+    why: "A forward shelter is route value, not just storage value.",
+  },
+];
+
+<GuideCallout title="About this guide">
+This page is built for the question shelter searches are really trying to solve in **Road to Vostok**:
+
+**Which shelters actually matter first, how do you find them fast, how do you unlock them, and which ones are worth rushing instead of just knowing where they are?**
+
+Instead of treating shelters like a flat location list, this guide focuses on:
+
+- all current shelter locations in the **current Early Access build**
+- the **fastest practical navigation** to each one
+- the difference between **good shelters** and **good first shelters**
+- why **Attic**, **Tent**, and **Bunker** matter more to progression than their unlock drama might suggest
+- why **Classroom** is powerful but often over-prioritized
+- why **Apartment Room** belongs to late-game planning, not early-game ambition
+</GuideCallout>
+
+<GuideQuickAnswer title="Road to Vostok All Shelter Locations">
+**Road to Vostok currently revolves around six practical shelters: the Cabin, Attic, Classroom, Tent, Bunker, and Apartment Room. The best early shelter upgrade is the Attic because it improves the Village loop you are already running. The best first forward shelter is the Tent because it gives you immediate Outpost safety. The best mid-game shelter is the Bunker. The Classroom is useful but much more expensive than it first looks, and the Apartment Room is a late-game luxury inside the permadeath side of the map.**
+
+If you only want the shortest useful version:
+
+1. **Cabin is your starting shelter and first true bank**
+2. **Attic is the best early upgrade**
+3. **Tent is your first forward shelter and should not be ignored**
+4. **Bunker is the best mid-game shelter**
+5. **Classroom is strong but dangerous to rush**
+6. **Apartment Room is late-game, not early-game**
+7. **The best shelter is not the hardest one to unlock**
+8. **The best shelter is the one that improves your route network earliest for the least risk**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/all-shelters-network-map.webp"
+    alt="Road to Vostok shelter progression map showing the Cabin, Attic, Classroom, Tent, Bunker, and Apartment Room across Area 05, Border Zone, and Vostok."
+    width={2000}
+    height={1000}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Think of shelters as a route network, not a list. Area 05 shelters stabilize your early economy, Border shelters improve forward logistics, and the Vostok room sits behind the harshest risk line in the game.
+  </figcaption>
+</figure>
+
+<div>
+  The biggest mistake shelter guides make is assuming that every shelter is equally important.
+  It is not.
+  In <strong>Road to Vostok</strong>, the most useful shelter is usually the one that improves your current loop the soonest, not the one with the most dramatic unlock condition.
+</div>
+
+---
+
+<h2 id="all-shelter-locations-at-a-glance">
+  All shelter locations at a glance
+</h2>
+
+<GuideDataTable
+  title=""
+  rows={shelterOverviewRows}
+/>
+
+The big pattern is simple:
+
+- <strong>Area 05 shelters</strong> stabilize your early runs
+- <strong>Border Zone shelters</strong> make longer eastern routes viable
+- <strong>Vostok shelter</strong> belongs to the full-commitment side of progression
+
+That means this page is not just about “where they are.”
+It is about which shelter improves your survival odds the most at the moment you unlock it.
+
+---
+
+<h2 id="best-first-shelters-to-unlock">
+  Best first shelters to unlock
+</h2>
+
+If you care about progression value more than raw completionism, use this order.
+
+<GuideDataTable
+  title=""
+  rows={shelterPriorityRows}
+/>
+
+<GuideCallout title="Best default order">
+For most players in the current build, the strongest progression order is:
+
+<strong>Cabin -> Attic -> Tent -> Bunker -> Classroom -> Apartment Room</strong>
+</GuideCallout>
+
+This order works because it follows route value.
+
+It upgrades the loop you are already running first, then gives you a safer eastern midpoint, then upgrades that midpoint into a real base, and only later asks you to commit to the shelters whose unlocks are tied to much harsher risk.
+
+---
+
+<h2 id="how-to-unlock-every-shelter">
+  How to unlock every shelter in Road to Vostok
+</h2>
+
+The most useful way to read the full shelter list is:
+
+- where it is
+- how to find it quickly
+- what unlocks it
+- what it is actually good for
+- whether it is worth rushing now
+
+---
+
+<h3 id="cabin-village-area-05">
+  Cabin (Village, Area 05)
+</h3>
+
+The <strong>Cabin</strong> is your starting shelter.
+
+You do not need to unlock it, and that matters more than it sounds.
+
+This is not just where the game begins.
+It is where your first stable economy begins.
+
+### How to find it quickly
+You start here in Standard, so the real navigation lesson is learning how to return to it mentally.
+Treat the Cabin as your western anchor: if you can still picture the train tracks, the Generalist barn, and the Village exit lanes relative to the Cabin, your whole Area 05 loop becomes easier to recover.
+
+What it is actually good for:
+
+- your first stash
+- your first safe save point
+- your Village reset loop
+- your early medicine, food, and spare-gear bank
+
+A lot of players mentally downgrade the Cabin because it is “default.”
+
+That is the wrong way to think about it.
+
+The Cabin is the foundation every better shelter depends on.
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/cabin-default-shelter-interior.webp"
+    alt="The default Cabin shelter interior in Road to Vostok."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Cabin is small, but it is the foundation of your entire early-game economy. This is where temporary loot becomes permanent progress.
+  </figcaption>
+</figure>
+
+---
+
+<h3 id="attic-village-area-05">
+  Attic (Village, Area 05)
+</h3>
+
+The <strong>Attic</strong> is located directly above the <strong>Generalist</strong> in the Village.
+
+This is the shelter most players should want first.
+
+### How to find it quickly
+Exit your Cabin and turn right.
+Follow the train tracks until you see the red trader building on the left side of the tracks.
+That building is the Generalist shop, and the Attic is directly above it.
+
+### Official unlock route
+The cleanest progression route is the <strong>Generalist task path</strong>.
+Current task coverage points to his final task chain as the route that awards the <strong>Attic key</strong>.
+
+### Delivery bug note
+If the Generalist task interface looks stuck and does not seem to accept the required delivery items, manually press <strong>Start Delivery</strong> in the trader task window before assuming the chain is broken.
+That small UI step is easy to miss and can make the Attic route feel more confusing than it really is.
+
+### Community shortcut note
+There are also community reports that the key can appear as rare loose loot in the School sports-hall route.
+Treat that as a lucky shortcut, not as a route you should build your plan around.
+
+What it is actually good for:
+
+- expanding your safest area
+- staying close to the Generalist
+- making Village storage less cramped
+- improving the loop you are already running instead of forcing a new one
+
+Should you rush it?
+
+<strong>Yes.</strong>
+
+This is the best early upgrade because it gives you more space in the least punishing part of the map.
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/village-map-with-attic-shelter.webp"
+    alt="Village map in Road to Vostok showing the Generalist area and the Attic shelter location."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Attic wins because it upgrades the route you are already using. Village-side shelter value is strongest when it improves your existing Generalist loop.
+  </figcaption>
+</figure>
+
+---
+
+<h3 id="classroom-school-area-05">
+  Classroom (School, Area 05)
+</h3>
+
+The <strong>Classroom</strong> sits in the <strong>School</strong> map.
+
+On paper, it looks like one of the strongest shelters in the game because it creates a real School-side anchor.
+
+In practice, it is often over-prioritized.
+
+### How to find it quickly
+From the Cabin, turn right and follow the train tracks to the eastern side of Village.
+Keep following the map edge until you reach the School transition, then load into School and move straight over the bridge toward the large school building on your left.
+Enter through the nearest door, use the staircase on your right, climb to the top floor, and follow the same corridor route used for the Doctor; the Classroom shelter is one of the locked rooms on that upper level.
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/school-map-classroom-shelter.webp"
+    alt="School map in Road to Vostok showing the Classroom shelter area."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Classroom is a real School-side anchor, but the practical unlock route is much more expensive than the room itself first appears.
+  </figcaption>
+</figure>
+
+### Official unlock route
+Current task coverage ties the <strong>Classroom key</strong> to the <strong>Doctor</strong> and the oil-sample task chain.
+
+This is the part many short guides under-explain:
+
+- you need <strong>three oil samples</strong>
+- the samples are tied to the <strong>Terminal / Vostok permadeath side</strong>
+- current guide coverage and player reports consistently describe this as an extremely dangerous errand
+- for most players, getting all three in one run is not a realistic expectation
+
+That is why the Classroom is not just a “School shelter.”
+It is a shelter whose official path asks you to pay Vostok-level risk before the room becomes yours.
+
+### Community shortcut note
+There are community reports of lucky key finds in the School gymnasium route.
+That can happen, but it should be treated as a bonus outcome rather than as the default plan.
+
+What it is actually good for:
+
+- turning School into a repeatable base instead of a one-off run
+- lowering the fragility of repeated School trips
+- supporting Doctor-side progression
+- reducing the feeling that every School push is a full there-and-back commitment
+
+Should you rush it?
+
+<strong>Usually no.</strong>
+
+The Classroom is good.
+It is just often worse than it looks when measured against unlock cost and risk.
+
+<GuideCallout title="Classroom reality check">
+A good shelter is not automatically a good first shelter.
+
+The Classroom becomes far more attractive once your eastern routes are stable and your gear quality can support the unlock pressure.
+</GuideCallout>
+
+---
+
+<h3 id="tent-outpost-border-zone">
+  Tent (Outpost, Border Zone)
+</h3>
+
+The <strong>Tent</strong> is in the <strong>Outpost</strong> and is the first real forward shelter most players should care about.
+
+It matters the moment you reach it.
+
+### How to find it quickly
+From the Cabin, follow the train tracks right to the School transition, then move straight through School by following the main road beyond the bridge.
+At the far end of School, use the Outpost transition.
+Once you spawn in Outpost, follow the dirt road until it splits and take the left-hand route; the small yurt-style Tent will be on that side as your first Border fallback point.
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/outpost-tent-shelter-location.webp"
+    alt="The Tent shelter near the Outpost entrance in Road to Vostok."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Tent is small, but its forward position is what matters. Once you reach Outpost, this becomes your first real eastern fallback point.
+  </figcaption>
+</figure>
+
+### Important Tent limitation
+The Tent is useful immediately, but it is <strong>not</strong> a Cabin replacement.
+
+Current guide coverage consistently treats it as a limited forward shelter:
+
+- very small storage footprint by default
+- no reason to mistake it for a comfortable main base
+- something that becomes better only once you expand its practical storage value with shelves and organization
+
+The safe takeaway is simple:
+
+<strong>use the Tent as a forward stash and route anchor first, not as a luxury home.</strong>
+
+What it is actually good for:
+
+- giving you a safe midpoint east of Area 05
+- reducing the psychological cost of pushing farther
+- making longer Outpost / Border plans feel less all-or-nothing
+- functioning as your first real “I do not have to drag everything back to Village immediately” shelter
+
+Should you rush it?
+
+<strong>Yes, as soon as you are actually reaching Outpost.</strong>
+
+It may not be the biggest shelter, but it changes your route network immediately.
+
+---
+
+<h3 id="bunker-outpost-border-zone">
+  Bunker (Outpost, Border Zone)
+</h3>
+
+The <strong>Bunker</strong> is the most important mid-game shelter.
+
+If the Attic is the best early upgrade, the Bunker is the best shelter that actually changes your mid-game.
+
+### How to find it quickly
+Once you are in Outpost, do not stop at the Tent.
+Move deeper into the zone and use the left side of the valley as your reference line.
+The practical landmarks are the tank, the sandbags, and the cave-side approach across the water; that cave entrance is the route players use to reach the Gunsmith side and the Bunker shelter.
+
+<figure className="my-8">
+  <Image
+    src="/images/road-to-vostok/outpost-bunker-cave-entrance.webp"
+    alt="The cave entrance leading to the Bunker shelter in the Outpost area of Road to Vostok."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Bunker is where Outpost starts feeling like a base instead of a checkpoint. Once you can use it reliably, your eastern logistics improve immediately.
+  </figcaption>
+</figure>
+
+### Official unlock route
+Current trader-task coverage ties the <strong>Bunker key</strong> to the <strong>Gunsmith</strong> and the <strong>Punisher</strong> bounty path.
+
+That means the unlock is not just about walking somewhere.
+It is about being strong enough to complete a real combat objective and return with proof.
+
+What it is actually good for:
+
+- making Outpost a true base instead of a stopover
+- supporting Border progression
+- giving you a much better eastern staging point
+- improving long-route logistics far more than a random locked room ever could
+
+Should you rush it?
+
+<strong>Yes, once your Border progression is real.</strong>
+
+This is the shelter that deserves “worth rushing” more than Classroom does.
+
+---
+
+<h3 id="apartment-room-vostok">
+  Apartment Room (Vostok)
+</h3>
+
+The <strong>Apartment Room</strong> is the shelter that sounds coolest and matters least for your early priorities.
+
+That does not make it weak.
+It makes it late.
+
+It sits in the <strong>Vostok</strong> side of progression, which means every attempt to use or unlock it lives under the harshest risk model in the game.
+
+### How to find it quickly
+Treat the Apartment Room like a Vostok objective, not a normal shelter errand.
+You only worry about this room after you already know how to cross Border reliably, survive Vostok entries, and read the apartment-side layout under pressure.
+If you still think in terms of “my next shelter,” this one is not for your next run.
+
+What it is actually good for:
+
+- late-game staging
+- deep-run persistence planning
+- turning Vostok operations into something more deliberate
+- giving advanced players an eastern anchor inside the most dangerous side of the map
+
+### The warning most players need to hear
+Do not think about the Apartment Room in terms of “late shelter value” only.
+
+Think about the price of failure.
+
+The official game page states that dying in <strong>Vostok</strong> means you <strong>lose everything</strong>.
+For player-facing strategy writing, the safest assumption is that a failed Vostok commitment can wipe the whole shelter network you have built, not just the backpack on your body.
+
+Should you rush it?
+
+<strong>No.</strong>
+
+This is a late-game luxury objective, not a practical early-game target.
+
+<GuideCallout title="Do not build your early plan around the Apartment Room">
+If you are still asking which first shelter to prioritize, the Apartment Room is not the answer.
+
+Your next best shelter is almost always somewhere west of it.
+</GuideCallout>
+
+---
+
+<h2 id="area-05-vs-border-vs-vostok-shelters">
+  Area 05 vs Border vs Vostok shelters
+</h2>
+
+The best way to understand shelter value is to compare them by region instead of by unlock flavor.
+
+### Area 05 shelters
+- Cabin
+- Attic
+- Classroom
+
+These shelters are about <strong>stability</strong>.
+
+They improve your early economy, your task loop, and your ability to bank value safely before things get expensive.
+
+### Border Zone shelters
+- Tent
+- Bunker
+
+These shelters are about <strong>forward logistics</strong>.
+
+They do not just save time.
+They change how ambitious your eastern planning can become.
+
+### Vostok shelter
+- Apartment Room
+
+This shelter is about <strong>endgame anchoring</strong>.
+
+It matters, but only after you are already strong enough that Vostok is a real part of your routine instead of a terrifying exception.
+
+<GuideCallout title="The Vostok difference">
+Area 05 and Border shelters help you recover from bad runs.
+
+Vostok asks whether you are ready to stake the whole network.
+
+The official game page frames Vostok as the zone where a death means <strong>lose everything</strong>, which is why Apartment Room should be read as an endgame commitment, not an early progression reward.
+</GuideCallout>
+
+---
+
+<h2 id="what-each-shelter-is-actually-good-for">
+  What each shelter is actually good for
+</h2>
+
+A lot of shelter pages stop at location and unlock method.
+
+That is never enough.
+
+### Cabin
+Best for:
+- starting stash
+- save rhythm
+- Area 05 rebuilds
+
+### Attic
+Best for:
+- early storage expansion
+- Generalist-side route quality
+- Village farming efficiency
+
+### Classroom
+Best for:
+- School-side anchoring
+- Doctor-side repeat visits
+- reducing School fragility once you are ready
+
+### Tent
+Best for:
+- first eastern fallback
+- route extension
+- immediate Outpost-side safety
+
+### Bunker
+Best for:
+- mid-game eastern base value
+- storage and staging
+- making Border progression feel sustainable
+
+### Apartment Room
+Best for:
+- late-game eastern persistence
+- advanced Vostok staging
+- players already comfortable with true permadeath pressure
+
+That is why the best shelter order is not the same thing as the hardest shelter order.
+
+---
+
+<h2 id="which-shelters-are-worth-rushing">
+  Which shelters are worth rushing
+</h2>
+
+Use this simplified decision table when you do not want to overthink it.
+
+<GuideDataTable
+  title=""
+  rows={shelterDecisionRows}
+/>
+
+<GuideCallout title="Shortest useful judgment">
+If you only remember one ranking, remember this:
+
+<strong>Attic and Bunker usually matter more than Classroom, and Tent matters earlier than many players think.</strong>
+</GuideCallout>
+
+---
+
+<h2 id="hidden-shelter-rules-most-players-miss">
+  Hidden shelter rules most players miss
+</h2>
+
+These are the shelter truths that matter more than one extra location screenshot.
+
+<GuideDataTable
+  title=""
+  rows={shelterRulesRows}
+/>
+
+### Decor Mode matters more than it sounds
+Shelter customization is not just cosmetic fluff.
+Once you understand that F1 opens Decor Mode, the room starts functioning like a real home base instead of a static loot box.
+
+### Shelter time management matters too
+Beds are valuable not only because they let you recover.
+Current public guide coverage also treats shelter sleep as your main way to push time forward by several hours and deliberately leave at the time of day you want.
+
+### Hunger and thirst discipline still matters
+The room is safe from enemies, but it should not be treated like a true pause screen.
+If you spend a long time reorganizing a cluttered shelter, keep food and water nearby before you turn that into a self-inflicted survival problem.
+
+### The two biggest practical rules
+If you want the shortest shelter wisdom in the article, it is this:
+
+- <strong>stash is independent</strong>
+- <strong>forward shelter value is route value</strong>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Can you customize shelters in Road to Vostok?
+
+Yes. Current guide coverage describes <strong>F1</strong> inside Shelter as the way to open Decor Mode and place trader-bought furniture and props.
+
+### Can you sleep outside without a shelter?
+
+Current public guide coverage says yes, using sleep items such as a sleeping bag, mattress, blanket, pillow, or sleep aids. But sleeping outside is not the same thing as having a shelter because it does not create safe stash.
+
+### Do all shelters share the same stash?
+
+No. Each shelter keeps its own storage.
+
+### Does shelter management pause hunger and thirst?
+
+Do not count on it. Player reports consistently warn that survival stats can keep draining while you spend time organizing.
+
+### Why is the Classroom unlock considered so dangerous?
+
+Because the official route is tied to three oil samples on the Terminal / Vostok permadeath side, and current guide coverage consistently treats that as one of the harshest shelter unlocks in the game.
+
+### What is the best first shelter upgrade?
+
+For most players, the answer is still the <strong>Attic</strong>.
+
+### Is the Tent a real main base?
+
+Not by default. Treat it as a forward shelter first and a serious main base only after you solve its storage limitations.
+
+### What happens if you die in Vostok?
+
+The official game page describes Vostok as the zone where you <strong>lose everything</strong>. For practical strategy writing, that means treating a failed Vostok push as a whole-network disaster, not just a dropped backpack.
+
+### What is the best current shelter order?
+
+For most runs: <strong>Cabin -> Attic -> Tent -> Bunker -> Classroom -> Apartment Room</strong>.
