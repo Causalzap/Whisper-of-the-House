@@ -46,7 +46,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/pokemon-champions`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/grime-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/road-to-vostok`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    
+    { url: `${base}/mouse-pi-for-hire/collectibles-hub`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/mouse-pi-for-hire/baseball-card-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/mouse-pi-for-hire/buy-back-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/mouse-pi-for-hire/missable-side-job-rewards`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/mouse-pi-for-hire/missables-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/mouse-pi-for-hire/mouseberg-herald-comic-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/mouse-pi-for-hire/weapon-schematics-secret-figurines-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+
+
      // ⬇️ 把 4 篇文章补上
      { url: `${base}/road-to-vostok/area-05-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/road-to-vostok/generalist-and-doctor-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

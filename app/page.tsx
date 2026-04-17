@@ -129,6 +129,13 @@ export default function Home() {
               >
                 Road To Vostok Guide
               </Link>
+
+              <Link
+                href="/mouse-pi-for-hire"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                Mouse P.I. For Hire Collectibles Guide
+              </Link>
               
 
             </div>

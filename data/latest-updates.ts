@@ -390,6 +390,48 @@ export type LatestUpdateItem = {
       hoverBorderClass: "hover:border-emerald-300",
       hoverTitleClass: "group-hover:text-emerald-700",
     },
+
+    // ===== MOUSE: P.I. For Hire =====
+{
+  href: "/mouse-pi-for-hire/collectibles-hub",
+  game: "MOUSE: P.I. For Hire",
+  title: "Collectibles & 100% Completion Hub",
+  description:
+    "The best starting point for a safe 100% run, including missables rules, buy-back logic, Side Job risk, and the main collectible guides.",
+  tagClass: "text-neutral-500",
+  hoverBorderClass: "hover:border-neutral-300",
+  hoverTitleClass: "group-hover:text-neutral-700",
+},
+{
+  href: "/mouse-pi-for-hire/missables-guide",
+  game: "MOUSE: P.I. For Hire",
+  title: "Missables Guide",
+  description:
+    "Jack Squat lockout, best manual saves, what can be recovered later, and which missables actually threaten a full-completion route.",
+  tagClass: "text-neutral-500",
+  hoverBorderClass: "hover:border-neutral-300",
+  hoverTitleClass: "group-hover:text-neutral-700",
+},
+{
+  href: "/mouse-pi-for-hire/buy-back-guide",
+  game: "MOUSE: P.I. For Hire",
+  title: "Buy-Back Guide",
+  description:
+    "Which missed collectibles can be bought back later, which ones cannot, and why Side Job reward cards are the biggest exception.",
+  tagClass: "text-neutral-500",
+  hoverBorderClass: "hover:border-neutral-300",
+  hoverTitleClass: "group-hover:text-neutral-700",
+},
+{
+  href: "/mouse-pi-for-hire/baseball-card-locations",
+  game: "MOUSE: P.I. For Hire",
+  title: "Baseball Card Locations Guide",
+  description:
+    "How Baseball Cards work, where cards come from, how Prize Tokens and the Prize D-Spenser work, and which card sources are truly risky.",
+  tagClass: "text-neutral-500",
+  hoverBorderClass: "hover:border-neutral-300",
+  hoverTitleClass: "group-hover:text-neutral-700",
+},
   
     // ===== THE OCCULTIST =====
     {

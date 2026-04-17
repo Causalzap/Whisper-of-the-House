@@ -13,9 +13,10 @@ type GuideDataTableProps = {
   title?: string;
   rows: GuideDataTableRow[];
   className?: string;
+  showStatus?: boolean;
 };
 
-function StatusBadge({ status = "confirmed" }: { status?: RowStatus }) {
+function StatusBadge({ status }: { status: RowStatus }) {
   const styles =
     status === "confirmed"
       ? "border-emerald-200 bg-emerald-50 text-emerald-700"
@@ -43,7 +44,13 @@ export default function GuideDataTable({
   title,
   rows,
   className = "",
+  showStatus,
 }: GuideDataTableProps) {
+  const shouldShowStatus =
+    typeof showStatus === "boolean"
+      ? showStatus
+      : rows.some((row) => row.status !== undefined);
+
   return (
     <section className={`not-prose my-8 ${className}`}>
       {title ? (
@@ -54,10 +61,16 @@ export default function GuideDataTable({
         <table className="min-w-full text-left text-sm">
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50">
-              <th className="px-4 py-3 font-semibold text-slate-900">Status</th>
+              {shouldShowStatus ? (
+                <th className="px-4 py-3 font-semibold text-slate-900">
+                  Status
+                </th>
+              ) : null}
               <th className="px-4 py-3 font-semibold text-slate-900">Detail</th>
               <th className="px-4 py-3 font-semibold text-slate-900">Value</th>
-              <th className="px-4 py-3 font-semibold text-slate-900">Why it matters</th>
+              <th className="px-4 py-3 font-semibold text-slate-900">
+                Why it matters
+              </th>
             </tr>
           </thead>
 
@@ -69,9 +82,12 @@ export default function GuideDataTable({
                   index % 2 === 0 ? "bg-white" : "bg-slate-50/60"
                 }`}
               >
-                <td className="px-4 py-4 align-top">
-                  <StatusBadge status={row.status} />
-                </td>
+                {shouldShowStatus ? (
+                  <td className="px-4 py-4 align-top">
+                    {row.status ? <StatusBadge status={row.status} /> : null}
+                  </td>
+                ) : null}
+
                 <td className="px-4 py-4 align-top font-medium text-slate-900">
                   {row.item}
                 </td>
