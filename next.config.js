@@ -26,6 +26,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/play-online/:slug',
+        destination: '/:slug',
+        permanent: false,
+      },
+      {
         source: '/home-design',
         destination: '/play-online',
         permanent: true,
