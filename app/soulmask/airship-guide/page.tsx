@@ -113,8 +113,8 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Soulmask Airship Guide: How to Unlock Flight, Upgrade Your Starter Ship, and Reach Falcon-Class Progression"
-          description="Looking for the full Airship route in Soulmask: Shifting Sands? This guide covers the starter ship, first flying upgrade, airship camps, floating-base use, and Falcon-Class progression."
+          title="Soulmask Airship Guide: When Ship Progression Becomes Real Flight"
+          description="A progression-focused guide to how airships work in Soulmask: Shifting Sands, from the starter ship and first true flight to camp pressure, ship role choices, and the later large-ship phase."
           gameTitle="Soulmask"
           gameHref="/soulmask"
           breadcrumbBaseHref="/"
@@ -122,44 +122,32 @@ export default function Page() {
           updatedAt="April 11, 2026"
           toc={[
             {
-              id: "what-airships-are-in-shifting-sands",
-              label: "What airships are in Shifting Sands",
+              id: "what-airships-mean-in-shifting-sands",
+              label: "What airships actually mean in Shifting Sands",
             },
             {
-              id: "do-you-start-with-a-ship-in-shifting-sands",
-              label: "Do you start with a ship",
+              id: "do-you-start-with-a-useful-ship",
+              label: "Do you start with a useful ship?",
             },
             {
-              id: "how-to-unlock-your-first-flying-ship",
-              label: "How to unlock your first flying ship",
+              id: "when-the-ship-becomes-a-real-airship",
+              label: "When the ship becomes a real airship",
             },
             {
-              id: "what-first-flight-actually-changes",
-              label: "What first flight actually changes",
+              id: "airship-camps-are-progression-checks",
+              label: "Airship camps are progression checks",
             },
             {
-              id: "airship-camps-and-why-they-matter",
-              label: "Airship camps and why they matter",
+              id: "floating-base-vs-travel-ship",
+              label: "Floating base or travel ship?",
             },
             {
-              id: "can-you-turn-airships-into-a-floating-base",
-              label: "Can you turn airships into a floating base",
+              id: "where-larger-ship-progression-gets-expensive",
+              label: "Where larger-ship progression gets expensive",
             },
             {
-              id: "falcon-class-airship-progression",
-              label: "Falcon-Class progression",
-            },
-            {
-              id: "best-practical-airship-order",
-              label: "Best practical Airship order",
-            },
-            {
-              id: "what-still-needs-testing",
-              label: "What still needs testing",
-            },
-            {
-              id: "airship-progression-at-a-glance",
-              label: "Airship progression at a glance",
+              id: "what-still-should-not-be-overclaimed",
+              label: "What still should not be overclaimed",
             },
             {
               id: "faq",

@@ -130,64 +130,44 @@ export default function Page() {
           updatedAt="April 11, 2026"
           toc={[
             {
-              id: "why-tribesmen-matter-in-shifting-sands",
-              label: "Why Tribesmen matter",
+              id: "what-tribesmen-actually-do-in-shifting-sands",
+              label: "What Tribesmen actually do",
             },
             {
-              id: "how-to-unlock-and-recruit-tribesmen",
-              label: "How to unlock and recruit Tribesmen",
+              id: "how-recruitment-actually-works",
+              label: "How recruitment works",
             },
             {
-              id: "best-first-tribesmen-jobs",
-              label: "Best first Tribesmen jobs",
+              id: "first-jobs-that-actually-remove-friction",
+              label: "The first useful jobs",
             },
             {
-              id: "why-tribesmen-stop-working",
-              label: "Why Tribesmen stop working",
+              id: "why-workers-go-idle",
+              label: "Why workers go idle",
             },
             {
-              id: "how-farming-actually-works",
-              label: "How farming actually works",
+              id: "when-farming-and-gathering-become-real-automation",
+              label: "When automation becomes real",
             },
             {
-              id: "wild-collection-and-basic-resource-loops",
-              label: "Wild collection and resource loops",
+              id: "animal-loops-and-why-specialists-matter",
+              label: "Animal loops and specialists",
             },
             {
-              id: "breeding-farm-and-animal-automation",
-              label: "Breeding farm and animal automation",
+              id: "production-ownership-and-later-base-scaling",
+              label: "Later production scaling",
             },
             {
-              id: "profession-bonuses-and-why-output-matters",
-              label: "Profession bonuses and output",
+              id: "war-party-and-field-use",
+              label: "War party and field use",
             },
             {
-              id: "position-based-production-and-furnace-work",
-              label: "Production positions and furnace work",
+              id: "airships-change-reach-not-base-economy",
+              label: "Airships and the bonfire base",
             },
             {
-              id: "airship-tribesmen-roles-in-shifting-sands",
-              label: "Airship Tribesmen roles",
-            },
-            {
-              id: "training-ground-in-shifting-sands",
-              label: "Training Ground in Shifting Sands",
-            },
-            {
-              id: "best-way-to-build-a-war-party",
-              label: "How to build a war party",
-            },
-            {
-              id: "what-tribesmen-still-do-badly",
-              label: "What Tribesmen still do badly",
-            },
-            {
-              id: "best-practical-tribesmen-order",
-              label: "Best practical Tribesmen order",
-            },
-            {
-              id: "tribesmen-system-at-a-glance",
-              label: "Tribesmen system at a glance",
+              id: "where-strict-optimization-ends",
+              label: "Where strict optimization ends and playstyle begins",
             },
             {
               id: "faq",

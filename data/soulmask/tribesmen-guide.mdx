@@ -2,460 +2,152 @@ import Link from "next/link";
 import Image from "next/image";
 import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
 import GuideCallout from "@/components/guides/GuideCallout";
-import GuideDataTable from "@/components/guides/GuideDataTable";
-
-export const tribesmenTroubleshootingRows = [
-  {
-    status: "confirmed",
-    item: "Input materials",
-    value: "The station has no fiber, seeds, ore, wood, fuel, or other required inputs",
-    why: "Put the required materials into the correct nearby storage or supply chain container.",
-  },
-  {
-    status: "confirmed",
-    item: "Tools",
-    value: "The worker needs a tool but does not have one, or the tool broke",
-    why: "Re-equip the right tool and keep replacement tools available.",
-  },
-  {
-    status: "confirmed",
-    item: "Job list",
-    value: "The wrong job is enabled, or the needed station interaction was never assigned",
-    why: "Re-open the work menu and enable the exact task you want this worker to do.",
-  },
-  {
-    status: "confirmed",
-    item: "Work area",
-    value: "The station is outside the assigned zone, blocked by pathing, or too far from storage",
-    why: "Expand the work area, move the station closer, or shorten the route.",
-  },
-];
-
-export const tribesmenRows = [
-  {
-    status: "confirmed",
-    item: "Recruitment flow",
-    value: "Unlock recruitment, Deter low-health enemies, then wait for Recruit",
-    why: "Recruitment is a two-step flow: first you knock the target into a Deter state, then you wait for recognition to reach the point where Recruit becomes available.",
-  },
-  {
-    status: "confirmed",
-    item: "First worker order",
-    value: "Linen first, then planks, then gathering",
-    why: "Those roles remove the biggest early bottlenecks and make the rest of the base easier to stabilize.",
-  },
-  {
-    status: "confirmed",
-    item: "Idle worker fix",
-    value: "Check materials, tools, assignment, and work area",
-    why: "Most 'broken AI' moments are really supply, tool, or routing problems.",
-  },
-  {
-    status: "confirmed",
-    item: "Farm loop",
-    value: "Farmland, seeds, Grainery, water source, and water tanks",
-    why: "A farm worker only feels automated once the full input chain exists.",
-  },
-  {
-    status: "confirmed",
-    item: "Gathering loop",
-    value: "Bonfire work area plus tools and nearby storage",
-    why: "Gatherers become much more reliable once the work zone is tight and drop-off is close.",
-  },
-  {
-    status: "confirmed",
-    item: "Breeding automation",
-    value: "Breed and slaughter can run as a repeatable chicken loop",
-    why: "With food, water, knives, and a population floor, one worker can produce meat, bones, and feathers steadily.",
-  },
-  {
-    status: "confirmed",
-    item: "Profession bonuses",
-    value: "Stable specialists can reach major output gains",
-    why: "One plank worker reached **+24% output**, effectively creating bonus planks over time.",
-  },
-  {
-    status: "confirmed",
-    item: "Furnace staffing",
-    value: "Dedicated Tribesmen should own smelting roles",
-    why: "Later production works best when one worker handles tin, one copper, one bronze, and others support the chain.",
-  },
-  {
-    status: "confirmed",
-    item: "Airship progression",
-    value: "Real flight comes later; the airship extends reach, not your whole economy",
-    why: "Shifting Sands uses the ship as a mobile platform, but your bonfire base still carries farming, storage, and production.",
-  },
-  {
-    status: "partial",
-    item: "Training Ground",
-    value: "Skill sharing changes how you judge long-term recruits",
-    why: "Even without a final priority order yet, it clearly matters because mediocre recruits can become more worth keeping.",
-  },
-  {
-    status: "confirmed",
-    item: "War party",
-    value: "Up to 3 Tribesmen can be deployed with you",
-    why: "Followers add distraction, extra damage, and boss pressure relief when equipped and commanded properly.",
-  },
-];
 
 <GuideCallout title="About this guide">
-This is a **full Tribesmen role and assignment guide** for **Soulmask: Shifting Sands**.
+This is a **role and assignment guide** for **Soulmask: Shifting Sands** Tribesmen.
 
-If you need the DLC overview first, use the <Link href="/soulmask">Shifting Sands Guide Hub</Link>.  
-If you need the opening route first, use the <Link href="/soulmask/shifting-sands-beginner-guide/">Shifting Sands Beginner Guide</Link>.  
-If you mainly need the first flying upgrade and ship progression, use the <Link href="/soulmask/airship-guide">Shifting Sands Airship Guide</Link>.
+It focuses on one practical question: **how Tribesmen become genuinely useful instead of feeling half-automated**. That means this page is less about listing every possible feature and more about explaining how recruitment, job ownership, supply chains, combat followers, and later base scaling actually fit together.
+
+**Other helpful resources for this DLC:**
+* **General overview:** <Link href="/soulmask">Shifting Sands Guide Hub</Link>
+* **Opening route:** <Link href="/soulmask/shifting-sands-beginner-guide/">Shifting Sands Beginner Guide</Link>
+* **Ship progression:** <Link href="/soulmask/airship-guide">Shifting Sands Airship Guide</Link>
 </GuideCallout>
 
 <GuideQuickAnswer title="Quick Answer">
-**The best early Tribesmen setup in Soulmask: Shifting Sands is to unlock recruitment quickly, assign one worker to a single bottleneck job, and only expand once their materials, tools, and route are stable.**
-
-If you only want the short version:
-
-- **unlock recruitment as early as possible**
-- **recruitment is a two-step flow: Deter first, Recruit second**
-- **your first useful jobs are linen, planks, and gathering**
-- **if a worker is idle, check materials, tools, assignment, and work area in that order**
-- **a real farm loop needs farmland, seeds, a Grainery, water access, and water tanks**
-- **one dedicated farm worker is better than several unfocused workers**
-- **breeding and slaughter management can automate chickens into a repeatable resource loop**
-- **profession bonuses are best on stable specialists**
-- **kiln and furnace positions are where the base starts feeling properly automated**
-- **you can deploy up to 3 Tribesmen to fight with you**
-- **Shifting Sands stands out because airships improve mobility, but your main worker loops still belong at a real bonfire base**
+Tribesmen in **Soulmask: Shifting Sands** work best when you treat them as a progression system instead of instant automation. Recruitment gives you labor, labor stabilizes one bottleneck at a time, and only after those loops are properly supplied do farming, animal management, combat followers, and later production start to feel reliable.
 </GuideQuickAnswer>
 
 ---
 
-<h2 id="why-tribesmen-matter-in-shifting-sands">
-  Why Tribesmen matter in Shifting Sands
+<h2 id="what-tribesmen-actually-do-in-shifting-sands">
+  What Tribesmen actually do in Shifting Sands
 </h2>
 
-Tribesmen matter in **Shifting Sands** because they remove repeat chores first, then become true production multipliers later.
+Tribesmen matter in **Shifting Sands** because they remove repetition first and multiply output later. The early value is not “full automation.” The early value is that one correctly assigned worker can take a boring but constant task off your hands and keep the rest of the base from stalling.
 
-The mistake most players make is expecting full automation too early.
+That distinction is important because a lot of players expect the system to feel complete too early. It usually does not. At first, Tribesmen are only as good as the loop you give them: a worker with no inputs, no tool, or no clear route does not create automation, even if the assignment menu says everything is enabled. Once the chain around them is stable, though, the same worker can become the reason your base finally feels smooth.
 
-The practical progression looks like this:
+A good way to think about the whole system is this: first you unlock labor, then you assign one meaningful job, then you tighten the supply chain around that job, and only after that do larger loops like farming, breeding, furnace work, or combat support start to scale properly.
 
-1. **unlock recruitment**
-2. **recruit your first worker**
-3. **assign one simple job**
-4. **fix the missing inputs that stop that job**
-5. **stabilize gathering or farming**
-6. **add breeding or furnace work**
-7. **claim profession bonuses on stable workers**
-8. **build a 3-follower combat party**
-9. **use airship progression to expand mobility without breaking your bonfire base**
-
-Start small. One useful worker is better than three badly supplied ones.
-
----
-
-<h2 id="how-to-unlock-and-recruit-tribesmen">
-  How to unlock and recruit Tribesmen
-</h2>
-
-The first real breakpoint is unlocking **recruitment** early enough that enemies can become workers instead of just loot.
-
-### Stage 1: Deter the target
-
-The first part of recruitment is **Deter**.
-
-In practical play, this means:
-
-1. **unlock recruitment first**
-2. **find an eligible enemy**
-3. **drop them to low health**
-4. **use Deter when the prompt appears**
-
-That Deter step is the “knock them down” part of the process, not the full recruit.
-
-### Stage 2: Wait for Recruit
-
-After a successful Deter, wait until that tribe's **recognition reaches 500**, then use **Recruit**.
-
-That is the important distinction:
-
-- **Deter** gets the target into the recruitable state
-- **recognition 500** is what unlocks the actual **Recruit** step afterward
-
-If you mix those two together, the system feels confusing even when it is working correctly.
-
-### What your first recruit should do
-
-Do not treat the first recruit as a throwaway combat extra.
-
-Your first Tribesman should immediately be turned into a **worker who removes one real bottleneck**, usually:
-
-- linen
-- planks
-- gathering
-- basic farm support
-
-That is when the system starts paying you back.
-
-<figure className="my-8">
-  <Image
-    src="/images/soulmask/first-recruit-work-menu.webp"
-    alt="First recruited tribesman and work menu in Soulmask Shifting Sands."
-    width={1600}
-    height={900}
-    className="rounded-xl"
-  />
-  <figcaption className="mt-3 text-sm text-slate-400">
-    Your first recruit should become a useful worker immediately, not sit around as a vague backup follower.
-  </figcaption>
-</figure>
-
----
-
-<h2 id="best-first-tribesmen-jobs">
-  Best first Tribesmen jobs
-</h2>
-
-The best first jobs are the jobs that unblock everything else.
-
-### Best early jobs in order
-
-For most runs, the cleanest early order is:
-
-1. **Loom / linen**
-2. **carpentry / planks**
-3. **basic gathering**
-4. **farm support**
-5. **simple cooking or production support**
-
-These jobs are strong because they solve base friction instead of adding complexity.
-
-### Why linen and planks come first
-
-Linen and planks are boring jobs, which is exactly why they should be automated first.
-
-They create the most common early interruptions:
-
-- you need more cloth inputs
-- you need more planks again
-- you cannot keep up with basic crafting materials
-
-A worker who handles that bottleneck is more valuable than a flashy recruit who does not solve anything immediately.
-
-### How to choose your first specialist
-
-Use this rule:
-
-- if crafting chains keep stopping, assign **linen or planks**
-- if you keep running out of wood, bark, fiber, or basics, assign **gathering**
-- if your fields are half-manual and inconsistent, assign **one dedicated farm worker**
-
-Do not choose a first job based on what looks strongest on paper.
-
-Choose the job you are most tired of doing by hand.
-
----
-
-<h2 id="why-tribesmen-stop-working">
-  Why Tribesmen stop working
-</h2>
-
-If a Tribesman is standing still in **Soulmask: Shifting Sands**, the problem is usually not “bad AI.”
-
-Most of the time, it is one of four setup problems:
-
-1. **missing input materials**
-2. **missing or broken tools**
-3. **wrong job assignment**
-4. **work area or station access problems**
-
-Use this checklist in order before assuming the worker system is bugged.
-
-<GuideDataTable
-  title=""
-  rows={tribesmenTroubleshootingRows}
-/>
-
-### The cleanest early example: the Loom worker
-
-A Loom worker can look completely idle when the real problem is simple:
-
-- the Loom job is assigned
-- the worker exists
-- but **fiber is missing**
-
-That is not an AI problem. It is a supply problem.
-
-Once fiber is added, the worker starts making linen immediately.
-
-### What to check when a farm worker stops
-
-If your farm worker stops, check these in order:
-
-1. **seeds available**
-2. **water source working**
-3. **water tanks available**
-4. **Grainery or farm storage supporting the loop**
-5. **farmland inside the work area**
-6. **the worker is actually assigned to farm actions**
-
-### What to check when a gatherer stops
-
-If a gatherer is doing nothing, check:
-
-- the correct tool is equipped
-- the gathering area still has resources in it
-- there is nearby drop-off storage
-- the job is tied to the correct work area
-
-<GuideCallout title="Fast fix rule">
-If a worker is idle, do not start by blaming the AI.
-
-Start by checking **materials, tools, assignment, and work area** in that exact order.
+<GuideCallout title="Best mindset for early Tribesmen">
+Do not ask whether the entire system is automated yet. Ask whether **one worker now owns one repetitive problem** that used to slow you down.
 </GuideCallout>
 
 ---
 
-<h2 id="how-farming-actually-works">
-  How farming actually works
+<h2 id="how-recruitment-actually-works">
+  How recruitment actually works
 </h2>
 
-Farming is one of the first places where Tribesmen start saving real time instead of just looking useful.
+The first real breakpoint is unlocking **recruitment** early enough that enemies can become workers instead of only becoming loot. In practice, the system is easy to misunderstand because the game separates the takedown step from the actual recruit step.
 
-A farm loop only works when the **entire chain** exists, not just the field itself.
+The first half is **Deter**. You weaken an eligible target until the Deter prompt appears, then use it to force the target into a recruitable state. That is not the same thing as finishing recruitment. After that, you still need to wait until that tribe's **recognition reaches 500**, which is the point where **Recruit** becomes available.
 
-### Minimum farm setup
+Once that distinction is clear, the system stops feeling arbitrary. Deter is the setup; Recruit is the actual conversion.
 
-A reliable early farm loop needs:
-
-- **farmland**
-- **seeds**
-- **a Grainery**
-- **water access**
-- **water tanks**
-- later, **fertilizer support** if you want a cleaner full cycle
-
-If one of those is missing, the farm worker often starts part of the loop and then stalls.
-
-### What one farm worker should actually do
-
-A dedicated farm worker should cover one clear cycle:
-
-1. **plant**
-2. **water**
-3. **fertilize**
-4. **harvest**
-5. **return output through the farm storage loop**
-
-That is much better than giving several workers a vague farming role and hoping it works.
-
-### How to think about the Grainery
-
-The Grainery matters because it keeps the farm loop tight.
-
-The important part is that:
-
-- the worker can reach the field
-- the worker can reach the Grainery
-- seeds are assigned to the correct plots
-- the well and water tanks can actually support watering
-
-The farm only becomes truly self-sufficient once water tanks are added and the worker can refill and water on her own.
-
-### Why farm loops usually fail
-
-Most failed farm setups come from one of these problems:
-
-- seeds are missing
-- the wrong seeds are assigned
-- water exists but the worker cannot complete the watering step
-- storage is not supporting the loop properly
-- farmland is outside the assigned work area
-- the worker is trying to do too many unrelated jobs
+What matters just as much is what you do next. Your first recruit is usually most valuable as a **worker who removes a bottleneck immediately**, not as a vague backup fighter. In most runs, the strongest first recruit is the one who takes over an annoying, repeatable task that has already started slowing your base down.
 
 <figure className="my-8">
   <Image
-    src="/images/soulmask/farm-manager-grainery-well.webp"
-    alt="Farm manager setup with grainery, farmland, and well in Soulmask Shifting Sands."
+    src="/images/soulmask/first-recruit-work-menu.webp"
+    alt="First recruited Tribesman and work menu in Soulmask Shifting Sands."
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-400">
-    Farming gets much smoother once one worker owns the full loop and the field, storage, well, and water tanks all belong to the same setup.
+    The first recruit becomes truly valuable when they are tied to a real base problem instead of left as a generic extra body.
   </figcaption>
 </figure>
 
----
-
-<h2 id="wild-collection-and-basic-resource-loops">
-  Wild collection and basic resource loops
-</h2>
-
-Once your first production bottleneck is solved, the next clean win is **basic gathering**.
-
-### Why defined gathering areas matter
-
-Gatherers work best when they have:
-
-- **a clearly defined area**
-- **the right tool**
-- **a nearby place to drop materials**
-- **one clear purpose**
-
-Without that, gathering feels random even when the system is technically working.
-
-### Best way to make gathering feel consistent
-
-Do not assign gathering as a vague background role.
-
-Instead:
-
-1. define the work area
-2. equip the correct tool
-3. place nearby drop-off storage
-4. make sure the worker is not overloaded with unrelated tasks
-
-A collection yard can work, but one of the cleanest confirmed upgrades is using the **bonfire itself as the wild collection work location** and directing a gatherer to the nearby trees and basic resources around that base area.
-
-That is when gathering starts feeling reliable instead of random.
+<GuideCallout title="First recruit rule">
+Your first recruit should solve **a real production problem**, not just exist because recruitment finally became available.
+</GuideCallout>
 
 ---
 
-<h2 id="breeding-farm-and-animal-automation">
-  Breeding farm and animal automation
+<h2 id="first-jobs-that-actually-remove-friction">
+  First jobs that actually remove friction
 </h2>
 
-Animal automation is where Tribesmen stop being convenience tools and start becoming a repeatable material engine.
+The best early jobs are usually the boring ones, because boring jobs are the ones that repeatedly interrupt progress. If a worker takes over the task you are most tired of doing by hand, that worker is already pulling real weight.
 
-### Why the chicken loop is strong
+In practice, the strongest early assignments are the jobs that keep common materials moving: **linen**, **planks**, **basic gathering**, and later **farm support** once the underlying farm loop is ready. These jobs do not look glamorous, but they remove the kind of base friction that quietly wastes the most time.
 
-Once you have a breeding pair and the right management setup, chickens can become a steady source of:
+That is why first-job choice should not be treated as an abstract tier list. It should be tied to your actual pain point. If cloth inputs keep stopping your crafting, automate linen. If you constantly run short on wood products, automate planks. If you keep interrupting yourself to collect basics, assign gathering. The right answer is usually the task you most want to stop babysitting.
 
-- meat
-- bones
-- feathers
-- related byproducts
+<GuideCallout title="How to choose the first specialist">
+Pick the job that saves you the most manual time right now. Early Tribesmen are strongest when they reduce friction, not when they merely look optimized on paper.
+</GuideCallout>
 
-That is valuable because it supports both survival and crafting.
+---
 
-### How to build the loop
+<h2 id="why-workers-go-idle">
+  Why workers go idle
+</h2>
 
-The practical setup is:
+When a Tribesman stops working, the problem is usually not bad AI in the abstract. Most of the time, the worker is blocked by a broken loop rather than by a broken system.
 
-1. **capture and place the animals**
-2. **make sure food and water are available**
-3. **assign one worker to breed and slaughter management**
-4. **give that worker butcher's knives**
-5. **set a population floor so the worker only kills surplus animals**
+The cleanest troubleshooting order is:
 
-One confirmed setup kept the coop at **2 male and 2 female**, only slaughtering above that threshold.
+1. **missing materials**
+2. **missing or broken tools**
+3. **wrong assignment**
+4. **bad work area or pathing**
 
-### What makes this better than manual handling
+That order matters because it solves most false “AI problems” quickly. A Loom worker who stands still may simply be missing fiber. A gatherer may have the right role but no usable tool. A farm worker may be assigned correctly but unable to complete the route because the field, storage, and water chain do not actually connect. In other words, a stationary worker often means the assignment is fine and the surrounding logistics are not.
 
-A stable animal loop saves time in three ways:
+The biggest mistake here is to diagnose the behavior too generally. “My worker is broken” is often less useful than “this loop is missing one requirement.”
 
-- you stop checking the pen constantly
-- you get repeatable materials
-- the worker turns maintenance into background production
+<GuideCallout title="Fast troubleshooting rule">
+If a worker looks idle, check **materials, tools, assignment, and work area** in that order before assuming the system itself is failing.
+</GuideCallout>
+
+---
+
+<h2 id="when-farming-and-gathering-become-real-automation">
+  When farming and gathering become real automation
+</h2>
+
+Farming and gathering are the first places where Tribesmen can start saving real time instead of merely looking promising. They only become reliable, however, when the full loop exists around them.
+
+For farming, that means more than placing farmland and hoping a worker handles the rest. A stable early farm loop needs **farmland**, **assigned seeds**, **a Grainery**, **water access**, and **water tanks**. The point is not just that the worker has a field; the point is that planting, watering, harvesting, and returning output all belong to one connected setup. If one part of that chain is missing, the worker often begins the loop and then stalls.
+
+Gathering works the same way. It becomes much more consistent when the worker has a tight area, the correct tool, and nearby storage. Without those supports, gathering feels random even when the system is technically doing what it was told. With them, it starts to feel predictable.
+
+The deeper lesson is that automation in **Shifting Sands** does not come from turning on a role. It comes from building a loop the role can actually complete.
+
+<figure className="my-8">
+  <Image
+    src="/images/soulmask/farm-manager-grainery-well.webp"
+    alt="Farm manager setup with Grainery, farmland, and well in Soulmask Shifting Sands."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A worker feels reliable when the field, storage, and water chain function as one loop instead of several disconnected parts.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Loop-building principle">
+One focused worker on one complete loop is usually stronger than several workers attached to half-finished systems.
+</GuideCallout>
+
+---
+
+<h2 id="animal-loops-and-why-specialists-matter">
+  Animal loops and why specialists matter
+</h2>
+
+Animal management is one of the clearest points where Tribesmen stop being convenience tools and start becoming a real background economy. A breeding-and-slaughter loop works because it turns repeated maintenance into a steady supply of useful resources, but only when the conditions are tightly controlled.
+
+In the confirmed setup here, one worker can maintain a chicken loop as long as food, water, and slaughter settings are already configured, the worker has the necessary butcher's knives, and the pen keeps a **minimum population floor** so the breeding stock is not destroyed. The value of that loop is not just convenience. It is that meat, bones, feathers, and related outputs start arriving without constant manual supervision.
+
+This is also a good place to understand why **stable specialists** matter more than constantly rotating staff. Once a worker remains on the same useful loop for long enough, profession bonuses begin to feel real instead of cosmetic. In one confirmed example, a plank-focused worker reached **+24% output**, which is exactly the kind of gain that turns a background assignment into a meaningful material multiplier.
+
+That is why long-term investment belongs on workers attached to loops you know you will keep.
 
 <figure className="my-8">
   <Image
@@ -466,94 +158,25 @@ A stable animal loop saves time in three ways:
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-400">
-    Breed-and-slaughter management works best when one worker owns the loop and the population floor is set conservatively.
+    Animal automation becomes strong when one worker owns the loop and the breeding stock is protected from over-slaughter.
   </figcaption>
 </figure>
 
-<GuideCallout title="Breeding warning">
-If you do not set a minimum population rule, the worker can wipe out the breeding stock and kill the loop completely.
+<GuideCallout title="Specialist value rule">
+Stable workers on stable loops are usually worth more than constantly swapping in “better-looking” recruits who never stay long enough to scale.
 </GuideCallout>
 
 ---
 
-<h2 id="profession-bonuses-and-why-output-matters">
-  Profession bonuses and why output matters
+<h2 id="production-ownership-and-later-base-scaling">
+  Production ownership and later base scaling
 </h2>
 
-A stable specialist is often worth more than a fresh recruit with prettier potential.
+Later production is where Tribesmen stop feeling like helpers and start feeling like a workforce. This shift happens when a worker no longer “occasionally assists,” but instead **owns a station or material role**.
 
-### Why output bonuses matter
+That is especially clear with kiln and furnace work. Once later smelting chains appear, a base becomes much easier to run when one worker handles tin, another handles copper, another handles bronze, and the surrounding support roles keep inputs moving. The point is not that every worker needs a highly specialized late-game identity immediately. The point is that production scales more cleanly when responsibility is divided by role instead of left as a pile of loosely shared tasks.
 
-Once a worker stays on the same discipline for long enough, the output gain stops feeling cosmetic and starts feeling real.
-
-The practical rule is simple:
-
-**stable specialists scale better than constantly rotating staff.**
-
-One plank worker reached **wood and stone proficiency 68**, claimed two bonuses, and ended up at **+24% output**, effectively producing bonus planks over time.
-
-### When to claim bonuses
-
-Claim profession bonuses once a worker has already proven that they belong in a stable loop.
-
-That usually means they are:
-
-- permanently handling a useful station or activity
-- consistently supplied with inputs
-- no longer an experimental recruit you might replace tomorrow
-
-### Which workers deserve long-term investment
-
-The best long-term workers are the ones attached to loops you know you will keep:
-
-- planks
-- linen
-- farming
-- furnace roles
-- other consistent high-use stations
-
----
-
-<h2 id="position-based-production-and-furnace-work">
-  Position-based production and furnace work
-</h2>
-
-This is where the base starts feeling responsive instead of clumsy.
-
-### Why position-based jobs are better
-
-Once you start using real station positions instead of one-off manual orders, the worker system becomes easier to scale.
-
-That is the big shift with roles like:
-
-- kiln work
-- furnace work
-- other dedicated production positions
-
-The important difference is ownership.
-
-A worker is no longer “sometimes helping.” They are now **responsible for that role**.
-
-### How to assign later production cleanly
-
-The cleanest way to scale later production is to split work by station or material instead of making every worker do everything.
-
-A practical example looks like:
-
-- one worker on **tin ingots**
-- one worker on **copper ingots**
-- one worker on **bronze**
-- others on support stations feeding the chain
-
-This is how you stop stalling out on later smelting.
-
-### Why furnaces matter so much
-
-Later production breaks down fast when no one owns it.
-
-In practice, furnace work is one of the clearest examples because a furnace effectively needs a Tribesman operating it constantly.
-
-If those stations are still relying on manual babysitting, the whole base feels slower than it should.
+This is one of the biggest transitions in the whole Tribesmen system. Early workers reduce interruptions. Later workers allow the base to keep functioning at a scale that would otherwise require constant babysitting.
 
 <figure className="my-8">
   <Image
@@ -564,295 +187,78 @@ If those stations are still relying on manual babysitting, the whole base feels 
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-400">
-    Position-based jobs are where Tribesmen stop feeling like helpers and start feeling like a real workforce.
+    Later production becomes smoother when workers own specific roles instead of vaguely helping everywhere.
   </figcaption>
 </figure>
 
----
-
-<h2 id="airship-tribesmen-roles-in-shifting-sands">
-  Airship Tribesmen roles in Shifting Sands
-</h2>
-
-This is the clearest reason a **Shifting Sands** Tribesmen guide should not read like a base-game guide.
-
-The important point is not just that airships exist.
-
-It is that **airships change your logistics, but they do not replace your real worker base**.
-
-### When do you actually get a flying ship?
-
-For a new Shifting Sands player, the important distinction is this:
-
-- you can start with a **small ship-style mobile setup**
-- your **first real flying upgrade** comes later, after the Sobec route and the ship parts unlocked from that progression
-
-If you want the full first-airship route, parts order, and ship progression, use the <Link href="/soulmask/airship-guide">Shifting Sands Airship Guide</Link>.
-
-### What changes once airships matter
-
-Early on, the ship works as a mobile staging area.
-
-Later, that stops being enough.
-
-A key Shifting Sands breakpoint is that once tribe progression starts requiring a **bonfire, farmland, and a wider spread of workstations**, your main base cannot stay on the boat forever. you eventually need to move onto land and build a real bonfire-centered base.
-
-That is the real shift:
-
-- the airship improves **mobility**
-- the bonfire base still handles **farming**
-- the bonfire base still handles **storage**
-- the bonfire base still handles **smelting and workstation growth**
-
-### Best way to think about the airship
-
-Treat the ship as:
-
-- a **mobile staging platform**
-- a **transport and resupply tool**
-- a way to **park near points of interest, jump out, and clear content**
-
-Do not treat it as a full replacement for your entire tribe economy.
-
-### Why this matters for Tribesmen
-
-Airships make Tribesmen more valuable because your base now has to keep working while you roam farther.
-
-That means your real specialists matter even more:
-
-- plank production
-- gathering
-- farming
-- breeding
-- furnace work
-- other support loops that keep your expeditions supplied
-
-<GuideCallout title="Airship rule">
-Airships should expand your reach, not replace the bonfire base loops that keep your tribe alive.
+<GuideCallout title="Scaling rule">
+A later base gets stronger when jobs are divided by **ownership**, not when every worker is asked to do a little of everything.
 </GuideCallout>
 
 ---
 
-<h2 id="training-ground-in-shifting-sands">
-  Training Ground in Shifting Sands
+<h2 id="war-party-and-field-use">
+  War party and field use
 </h2>
 
-Training Ground matters in **Shifting Sands** because it changes how you evaluate long-term recruits.
+Tribesmen are not only labor. They can also function as a small combat party, and that changes how much pressure you have to absorb alone.
 
-The key idea is simple:
+The usable limit here is **up to 3 deployed followers at once**, but the raw number matters less than how they are managed. A combat follower contributes best when equipped, provisioned, and actively directed. In practice, that means bringing followers with decent spare gear, food, and bandages, then manually commanding them onto priority targets instead of hoping they improvise well.
 
-**a mediocre recruit is more worth keeping if your tribe can teach and improve that body over time.**
+That is why deployed Tribesmen perform far better in boss fights than in messy, unmanaged situations. Their best value is not perfect AI. Their best value is that they distract enemies, split pressure, create time to heal or reposition, and add enough damage that harder encounters stop feeling like pure solo attrition.
 
-That matters more in a DLC built around a wider roster and longer logistics loops than it did in older early-access thinking.
-
-What this guide can say confidently right now is:
-
-- Training Ground is **not** just a flavor feature
-- it changes how valuable borderline recruits can become
-- it gives you a stronger reason to care about roster development instead of disposable workers
-
-The exact best priority order for Shifting Sands still needs more direct testing, so this guide keeps the section short instead of pretending the final sequence is solved.
-
----
-
-<h2 id="best-way-to-build-a-war-party">
-  Best way to build a war party
-</h2>
-
-Tribesmen are not only for labor.
-
-You can also deploy them as a small combat party.
-
-### War party limit
-
-You can have up to **3 Tribesmen** deployed with you at the same time.
-
-That only matters if they are actually equipped, brought along, and used correctly.
-
-### How to build a usable war party
-
-To deploy a Tribesman, approach them and hold **E**, then select **Deploy** from the work menu. Once deployed, you can command them to follow, attack a specific target, or hold position.
-
-The practical process is:
-
-1. **recruit bodies you actually want to field**
-2. **deploy up to 3 of them**
-3. **give them the best spare gear you can afford**
-4. **load them with food and bandages**
-5. **bring them into fights where distraction matters**
-6. **manually command them onto the boss target when the fight starts**
-
-That last point matters a lot.
-
-Boss fights go much more smoothly when deployed followers are **commanded to target the boss from the start** instead of being left to freelance.
-
-### What makes a good combat recruit
-
-The best combat followers do not need to be perfect.
-
-They need to do useful things consistently:
-
-- draw enemy attention
-- survive long enough to split pressure
-- contribute damage
-- carry usable gear
-- help you avoid pure solo pressure in harder fights
-
-Things that start to matter more later include:
-
-- combat talents
-- combat proficiencies
-- max proficiency caps
-- role fit
-- whether you can actually keep them geared
-
-### Common war party failure points
-
-Followers perform much worse when:
-
-- they are undergeared
-- they are not fed or supplied
-- they get left behind
-- you expect perfect AI instead of giving target priority
-- you reload and do not realize they are no longer deployed
-
-One especially painful confirmed failure point is that a reload can silently take your group **out of deployment**, which can leave them absent or exposed if you assume they are still active.
-
-### What deployed Tribesmen are best at
-
-Deployed followers are strongest when they:
-
-- distract enemies
-- create breathing room in boss fights
-- buy you time to bandage, reposition, or shoot
-- carry spare gear and supplies
-- contribute enough damage that focusing the boss becomes realistic
+One detail worth remembering is that follower state is not always as sticky as players expect. A reload can leave your group out of deployment, so it is worth checking that they are actually active before walking into danger.
 
 <GuideCallout title="Combat control rule">
-A war party is strongest when you **gear them, provision them, and manually point them at the right target** instead of letting them improvise every fight.
+A war party is strongest when you **gear them, supply them, and tell them who matters** instead of treating them like fully autonomous fighters.
 </GuideCallout>
 
 ---
 
-<h2 id="what-tribesmen-still-do-badly">
-  What Tribesmen still do badly
+<h2 id="airships-change-reach-not-base-economy">
+  Airships change reach, not base economy
 </h2>
 
-The system is useful, but it is not magic.
+This is one of the most important **Shifting Sands-specific** distinctions. Airships change your mobility, but they do not replace the bonfire base that keeps your tribe alive.
 
-Tribesmen can still:
+Early on, the ship works well as a mobile staging area. Later, though, once the DLC expects a wider set of workstations, farmland, storage, and production loops, the idea of keeping your whole economy on the ship stops being practical. The bonfire base remains the real center of farming, smelting, storage, breeding, and routine worker logic. The airship expands your operational reach; it does not replace the systems that sustain that reach.
 
-- path badly
-- stop when inputs run out
-- lag behind while following
-- get confused in messy fights
-- underperform when their route or station ownership is poorly planned
+That is exactly why Tribesmen become more important, not less important, once airships matter. The farther you travel, the more valuable it is that the land base continues producing while you are away.
 
-Judge them by whether they improve the run overall, not whether they behave perfectly every second.
+<GuideCallout title="Airship rule">
+Treat the airship as a **mobility and staging tool**, not as a full substitute for the bonfire-centered worker economy.
+</GuideCallout>
 
----
-
-<h2 id="best-practical-tribesmen-order">
-  Best practical Tribesmen order
+<h2 id="where-strict-optimization-ends">
+  Where strict optimization ends and playstyle begins
 </h2>
 
-If you want the simplest practical order for building the system, use this:
+A strong Tribesmen setup relies on the confirmed mechanics we have covered: understanding the two-step recruitment flow, assigning early workers to clear bottlenecks, scaling later production through role ownership, and keeping your bonfire base active even when flying airships. 
 
-1. **unlock recruitment**
-2. **recruit your first worker**
-3. **assign one simple job like linen or planks**
-4. **fix missing inputs and tools**
-5. **set up a defined gathering loop**
-6. **set up farmland, Grainery, water source, and water tanks**
-7. **assign one dedicated farm worker**
-8. **add a breeding loop**
-9. **claim profession bonuses on stable workers**
-10. **move into furnace and later production positions**
-11. **build a 3-follower war party**
-12. **use the airship to extend your reach without breaking your bonfire base**
-13. **start caring about Training Ground once you know which recruits are worth keeping**
+However, players often look for a single "perfect" late-game staffing pattern or a universally solved Training Ground priority list. In practice, because base locations, resource deficits, and combat styles vary so heavily between runs, that final layer of optimization is highly dynamic. 
 
-That order keeps the system understandable and prevents you from building three broken loops at once.
-
----
-
-<h2 id="tribesmen-system-at-a-glance">
-  Tribesmen system at a glance
-</h2>
-
-<GuideDataTable
-  title=""
-  rows={tribesmenRows}
-/>
-
----
+Rather than chasing a rigid tier list, the goal is to build the stable foundation described here. Once your core loops are automated, your roster development and training priorities should adapt to whatever your specific base needs next.
 
 <h2 id="faq">
   FAQ
 </h2>
 
-### How do you recruit Tribesmen in Soulmask: Shifting Sands?
+### Should my first recruit be a worker or a fighter?
 
-Recruitment is a two-step flow. First, weaken an eligible enemy until **Deter** becomes available and use it. After that, wait for the target to reach the point where **Recruit** becomes available. A visible gate in this flow is **recognition 500** before **Recruit** appears.
+Usually a worker. Early Tribesmen create the most value when they remove a repeated bottleneck that is already slowing the base down.
 
-### What are the best first jobs for Tribesmen?
+### Why do Tribesmen often feel unreliable even when the system is working?
 
-The best first jobs are the ones that remove your current bottleneck. For most players, that means:
+Because the worker is only as reliable as the loop around them. Most apparent AI failures are really broken supply, tool, storage, or routing chains.
 
-1. **Loom / linen**
-2. **carpentry / planks**
-3. **basic gathering**
-4. **farm support once seeds and water are stable**
+### Is one focused worker better than several flexible workers early on?
 
-Do not start with “best worker overall.” Start with the job that saves you the most manual time right now.
+Most of the time, yes. One worker attached to a complete loop usually produces more value than several workers spread across half-finished setups.
 
-### Why is my Tribesman not working?
+### Do airships make the land base less important?
 
-Check four things in order:
+No. Airships improve reach, but the bonfire base still carries the economy that makes longer expeditions sustainable.
 
-1. **input materials**
-2. **tool equipped and not broken**
-3. **correct job enabled**
-4. **work area includes the station**
+### Is there a single "best" Training Ground priority?
 
-Most “idle Tribesman” problems are caused by missing fiber, seeds, fuel, or a tool that broke and was never replaced.
-
-### Can one Tribesman run the farm?
-
-Yes, but only if the full farm loop already exists. One worker can handle planting, watering, fertilizing, and harvesting when the farm has farmland, assigned seeds, a Grainery, a water source, water tanks, and a work area that actually covers the field.
-
-### Can Tribesmen automate breeding and slaughter?
-
-Yes. A worker can maintain a breeding-and-slaughter loop if food, water, animal settings, and slaughter conditions are already configured correctly. The most important safeguard is setting a minimum population floor so the worker only kills surplus animals.
-
-### Are profession bonuses worth taking?
-
-Yes. Profession bonuses matter most on workers who already have a stable long-term role. One plank worker reached reached **+24% output**, which is the kind of gain that turns a background worker into a real material multiplier.
-
-### How many Tribesmen can fight with you at once?
-
-You can deploy up to **3 Tribesmen** to fight alongside you at one time.
-
-### How do I make Tribesmen fight better in boss fights?
-
-Deploy them before you leave, give them decent gear, food, and bandages, and manually command them onto the boss instead of letting them roam freely. Boss fights improve sharply once the followers are ordered to focus the boss from the start.
-
-### Can deployed Tribesmen help revive you?
-
-Yes. One confirmed combat example showed that while downed, you can ask your allies to help you back up with **F7**.
-
-### When do I actually get a flying ship in Shifting Sands?
-
-The ship becomes a true airship later in progression, after the Sobec route and the parts unlocked from that path. For the full first-airship route and ship progression, use the <Link href="/soulmask/airship-guide">Shifting Sands Airship Guide</Link>.
-
-### Do airships make Tribesmen less important in Shifting Sands?
-
-No. Airships make Tribesmen more valuable because they improve your mobility, but your real farming, gathering, smelting, and storage loops still belong at a bonfire base.
-
-### Can my main base stay on the boat forever?
-
-Not realistically. Early on, the ship works as a mobile staging area, but once tribe progression requires a bonfire, farmland, and more workstations, you need a proper land base to keep your worker economy running.
-
-### Is Training Ground worth using in Shifting Sands?
-
-Yes. Training Ground lets Tribesmen teach skills to each other, which makes borderline recruits more viable long term. The full best-priority order still needs more route testing, but it already changes how you judge whether a mediocre recruit is worth keeping.
+It is highly situational. What is clear is that it increases the long-term value of recruits and makes roster development matter more than it used to.
