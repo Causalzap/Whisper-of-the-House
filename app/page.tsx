@@ -137,6 +137,13 @@ export default function Home() {
                 Mouse P.I. For Hire Collectibles Guide
               </Link>
 
+              <Link
+                href="/pragmata"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                Pragmata Guide
+              </Link>
+
               
 
             </div>

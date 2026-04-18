@@ -431,6 +431,48 @@ export type LatestUpdateItem = {
   tagClass: "text-neutral-500",
   hoverBorderClass: "hover:border-neutral-300",
   hoverTitleClass: "group-hover:text-neutral-700",
+},  
+
+// ===== Pragmata =====
+{
+  href: "/pragmata/pragmata-best-pc-settings",
+  game: "Pragmata",
+  title: "Best PC Settings",
+  description:
+    "Best settings for 8GB and 16GB GPUs, ray tracing tradeoffs, and when DLSS or FSR gives the smoothest result.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/pragmata/pragmata-best-early-upgrades",
+  game: "Pragmata",
+  title: "Best Early Upgrades",
+  description:
+    "The best first upgrade priorities at the Shelter, and why mobility, hacking, and survivability beat blind damage stacking.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/pragmata/pragmata-unknown-signal-guide",
+  game: "Pragmata",
+  title: "Unknown Signal Guide",
+  description:
+    "How postgame really works: pod unlock paths, final boss rematch flow, best rewards, and what true cleanup actually requires.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/pragmata/pragmata-pure-lunum-guide",
+  game: "Pragmata",
+  title: "Pure Lunum Guide",
+  description:
+    "Where Pure Lunum comes from, why it is effectively finite, and which high-end upgrades deserve it first.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
 },
   
     // ===== THE OCCULTIST =====

@@ -47,7 +47,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/grime-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/road-to-vostok`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/mouse-pi-for-hire/collectibles-hub`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/pragmata`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+    // ⬇️ 把 5 篇文章补上
+    { url: `${base}/pragmata/pragmata-best-early-upgrades`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/pragmata/pragmata-best-pc-settings`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/pragmata/pragmata-pure-lunum-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/pragmata/pragmata-red-zones-and-stamp-club-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/pragmata/pragmata-unknown-signal-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+  
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/mouse-pi-for-hire/baseball-card-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
