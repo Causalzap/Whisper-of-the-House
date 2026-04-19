@@ -1,539 +1,526 @@
+import Link from "next/link";
 import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
 import GuideDataTable from "@/components/guides/GuideDataTable";
 
-const baselineHellLayout =
-  "/images/sintopia/sintopia-layout-baseline-resurrection-flow.webp";
-const badRoutingLayout =
-  "/images/sintopia/sintopia-bad-layout-routing-bug.webp";
-const fixedRoutingLayout =
-  "/images/sintopia/sintopia-fixed-layout-routing-success.webp";
-const dispatcherOverview =
-  "/images/sintopia/sintopia-dispatcher-overview.webp";
-const dispatcherHeroLane =
-  "/images/sintopia/sintopia-dispatcher-hero-lane-rule.webp";
-const dispatcherFallbackLoop =
-  "/images/sintopia/sintopia-dispatcher-fallback-loop.webp";
-const deviantsExplainer =
-  "/images/sintopia/sintopia-deviant-specialist-explainer.webp";
-const envyRoutingLive =
-  "/images/sintopia/sintopia-envy-deviant-routing-live.webp";
-const imployeeSampleA =
-  "/images/sintopia/sintopia-imployees-sample-set-a.webp";
-const imployeeSampleB =
-  "/images/sintopia/sintopia-imployees-sample-set-b.webp";
-const strikeWarning =
-  "/images/sintopia/sintopia-upkeep-strike-warning.webp";
-
-const guideImageProps = {
-  width: 1600,
-  height: 900,
-  sizes: "(min-width: 1280px) 896px, (min-width: 768px) 92vw, 100vw",
-  className: "rounded-xl my-6 w-full h-auto",
-};
-
-export const sintopiaImployeeRows = [
+export const buyBackRows = [
   {
-    item: "Bradley Almost",
-    value: "Hire 320 · Wage 150/day · Work Time 2m 10s · Efficiency 115%",
-    why: "The best budget pick in the first trio if you want stronger-than-baseline throughput without paying Victor prices. A good early Sadimp for your first Omnisin Doctor block.",
+    item: "Mission replay",
+    value: "No traditional mission select",
+    why: "If you leave a chapter behind, you cannot simply jump back in through a level-select menu. That is why the buy-back system matters at all.",
   },
   {
-    item: "Henry Shaky",
-    value: "Hire 370 · Wage 160/day · Work Time 2m 23s · Efficiency 100%",
-    why: "More uptime than Bradley, but worse output per minute. Fine as a filler Imployee, not the best value card in the row.",
+    item: "Collectible totals",
+    value: "38 Newspapers / 41 Baseball Cards / 29 Comics / 10 Secret Figurines / 83 Schematics",
+    why: "Players need the actual totals to understand which categories are large cleanup lines and which are smaller high-risk lines.",
   },
   {
-    item: "Victor Carpediem",
-    value: "Hire 390 · Wage 170/day · Work Time 2m 56s · Efficiency 100%",
-    why: "The longest work time in this group. Best when you need reliable coverage on a bottleneck building and can afford the extra daily wage.",
+    item: "Buy-back locations",
+    value: "P.I. Office and Roadhouse shops",
+    why: "Those are the two shop loops most consistently tied to missed collectible cleanup.",
   },
   {
-    item: "Nat Frosty",
-    value: "Hire 170 · Wage 110/day · Work Time 2m 20s · Efficiency 115%",
-    why: "One of the strongest early-value Imployees shown here. Cheap to hire, cheap to keep, and comfortably above baseline output.",
+    item: "Can usually be bought back",
+    value: "Newspapers, Comics, and standard Baseball Cards",
+    why: "These are the ordinary collectible lines most consistently treated as recoverable later.",
   },
   {
-    item: "Betty Touchy",
-    value: "Hire 110 · Wage 130/day · Work Time 2m 50s · Efficiency 115%",
-    why: "The standout value pick from the second capture. Extremely low hire cost, long work time, and 115% efficiency make Betty excellent for stabilizing a main punishment lane.",
+    item: "Cannot be bought back",
+    value: "Schematics and Secret Figurines",
+    why: "These are the two categories players should treat as true field-only missables.",
+  },
+  {
+    item: "Biggest Baseball Card exception",
+    value: "Some side-job reward cards do not enter the shop pool",
+    why: "Ordinary Baseball Cards and side-job reward Baseball Cards do not share the same risk profile.",
+  },
+  {
+    item: "Shop-exclusive cards",
+    value: "8 known shop-sold Baseball Cards",
+    why: "Not every card in the shop is a buy-back item. Some cards are simply sold there by default.",
+  },
+  {
+    item: "Known shop-only card prices",
+    value: "4 cards cost 500 Coins / 4 cards cost 1000 Coins",
+    why: "This is more useful than a vague pricing note because players can budget before the late-game squeeze.",
+  },
+  {
+    item: "Late-game shop risk",
+    value: "The last 2 missions remove practical access to the shops",
+    why: "Even buy-back-friendly categories become risky if you wait too long.",
   },
 ];
 
-# How To Create The Best Hell Layout In Sintopia
+export const categoryRows = [
+  {
+    item: "Mouseberg Herald / Newspapers",
+    value: "38 total / commonly treated as recoverable",
+    why: "A core buy-back category. Still better to pick them up in the field because shop access is not unlimited.",
+  },
+  {
+    item: "Comics",
+    value: "29 total / commonly treated as recoverable",
+    why: "These are one of the main cleanup-friendly lines, but relying on the shop still costs money and time.",
+  },
+  {
+    item: "Baseball Cards",
+    value: "41 total / partial buy-back",
+    why: "Standard field pickups can be recovered later, some cards are shop-exclusive by design, and some side-job reward cards do not enter the shop pool.",
+  },
+  {
+    item: "Secret Figurines",
+    value: "10 total / not buy-back",
+    why: "Treat these as true missables. They are not part of the shop cleanup system, and the menu does not track your total.",
+  },
+  {
+    item: "Schematics",
+    value: "83 total / not buy-back",
+    why: "These are not sold back through the shop. The good news is that only 63 are required for the full upgrade trophy path.",
+  },
+  {
+    item: "Clues",
+    value: "Varies by case / do not assume",
+    why: "This page is not a clue guide, but clue-related completion routing is cautious enough that you should collect clues on sight instead of treating them like disposable story flavor.",
+  },
+];
 
-A strong **Sintopia hell layout** is not about cramming in the most buildings. It is about controlling where Souls go, how long they stay exposed to **Infernal Corruption**, when they become **Hearosable**, and which traffic should never touch your profitable main line at all.
+export const shopRows = [
+  {
+    item: "P.I. Office",
+    value: "Missed Newspapers, Comics, standard Baseball Cards, and the known shop-sold card line",
+    why: "Use this as your main cleanup checkpoint after major story progress and before the late-game squeeze.",
+  },
+  {
+    item: "Roadhouse",
+    value: "Missed Newspapers, Comics, and standard Baseball Cards that enter the travel-shop loop",
+    why: "Treat this as your second cleanup pass whenever you suspect you rushed through a mission or skipped side rooms.",
+  },
+];
 
-That means a real layout guide has to solve five separate problems at once:
+<GuideQuickAnswer title="Quick Answer">
+**Yes, you can buy back some missed collectibles in MOUSE: P.I. For Hire, but only some of them.**
 
-- convert low-Sin Souls into **Hearos**
-- keep **Purgadollars** flowing
-- generate enough **Faithcoins** to support your Overworld spells
-- isolate **Saints**
-- route **Deviants** into specialist treatment before they break your throughput
+If you only want the short version:
 
-The best layout in **Sintopia** is the one that handles all five cleanly.
+- **there are 38 Newspapers, 41 Baseball Cards, 29 Comics, 10 Secret Figurines, and 83 Schematics**
+- **missed Newspapers can show up later in shops**
+- **missed Comics can show up later in shops**
+- **missed standard Baseball Cards can show up later in shops**
+- **some Baseball Cards are shop-exclusive by design**
+- **Schematics cannot be relied on as buy-back items**
+- **Secret Figurines cannot be relied on as buy-back items**
+- **Secret Figurines are not menu-tracked, so you must check the P.I. Office shelf to confirm your figurine progress**
+- **some side-job Baseball Card rewards do not enter the shop pool at all**
+- **the relevant cleanup shops are the P.I. Office and the Roadhouse**
+- **the last 2 missions effectively end relaxed shop cleanup, so do not leave everything for later**
+</GuideQuickAnswer>
 
-<h2 id="core-routing-rules">
-  <a href="#core-routing-rules">Core Routing Rules</a>
+---
+
+<h2 id="buy-back-system-at-a-glance">
+  Buy-back system at a glance
 </h2>
 
-Everything else in Hell flows from a few hard rules:
+<GuideDataTable title="" rows={buyBackRows} />
 
-- A Soul is **Hearosable** at **50 total Sin or lower**.
-- Once incoming traffic starts landing closer to **75+ total Sin**, a single exit check becomes unreliable and a **two-Dispatcher layout** becomes much stronger.
-- **Omnisin Doctor** removes **21 Sin** at a time and is your opening-game backbone.
-- **Deviants** cannot be efficiently treated by Omnisin Doctor and should be split into specialist branches.
-- **Saints** do not give **Purgadollars**, **Faithcoins**, or **Hearos** while they remain Saints.
-- Souls walking exposed on roads gain Sin from **Infernal Corruption every few seconds**. Buildings and **Waiting Lines** protect them from that.
+---
 
-Those six rules tell you what your Hell has to do:  
-clean easy traffic fast, stop hard traffic from leaking out, and shorten every unnecessary walk.
-
-<h2 id="best-early-game-hell-layout">
-  <a href="#best-early-game-hell-layout">Best Early-Game Hell Layout</a>
+<h2 id="can-you-buy-missed-collectibles-later-in-mouse-pi-for-hire">
+  Can you buy missed collectibles later in MOUSE: P.I. For Hire?
 </h2>
 
-The safest early structure is still a simple spine:
+**Yes, but only for specific collectible types.**
 
-1. **Hellgate entry**
-2. **Omnisin Doctor block**
-3. **Souls Dispatcher**
-4. **Hearos lane**
-5. **Fallback loop**
-6. **Reincarnation Gate**
+The cleanest way to think about the buy-back system is this:
 
-<Image
-  {...guideImageProps}
-  src={baselineHellLayout}
-  alt="Baseline Sintopia hell layout with a main treatment lane feeding into the resurrection route."
-  priority
-/>
+**MOUSE lets you recover some standard collectible lines through shops, but it does not function like a universal cleanup safety net.**
 
-This works because it solves the early game in the right order.
+That distinction matters because players usually hear “you can buy missed collectibles later” and mentally translate it into “I can clean up everything later.”
 
-First, you earn **Purgadollars** through broad treatment.  
-Then, you separate Hearosable Souls from traffic that still needs work.  
-Then, you loop unfinished Souls back instead of releasing them too early.
+That is **not** the safe way to play this game.
 
-That is better than building several parallel lanes right away. Parallel layouts look scalable, but in practice they make it harder to guarantee that Souls pass through the buildings that matter.
+The practical pattern looks like this:
 
-<h2 id="bad-layout-vs-fixed-layout">
-  <a href="#bad-layout-vs-fixed-layout">Bad Layout Vs Fixed Layout</a>
+1. **ordinary collectible lines can often be recovered later**
+2. **special collectible lines still behave like true missables**
+3. **side-job rewards create their own exception layer**
+4. **shop access itself has a late-game time limit**
+
+<GuideCallout title="Best way to use buy-back">
+  <div>
+    Treat buy-back as a <strong>safety net for standard exploration misses</strong>, not as permission to ignore collectible routes completely.
+  </div>
+</GuideCallout>
+
+---
+
+<h2 id="collectible-categories-and-buy-back-rules">
+  Collectible categories and buy-back rules
 </h2>
 
-The most common bad layout in **Sintopia** is uncontrolled early splitting.
+<GuideDataTable title="" rows={categoryRows} />
 
-<Image
-  {...guideImageProps}
-  src={badRoutingLayout}
-  alt="Bad Sintopia routing example with Souls splitting too early and missing intended treatment flow."
-/>
+---
 
-That creates three common failures:
-
-- Souls miss your core treatment sequence
-- some buildings starve while others clog
-- dirty Souls reach the end of Hell and fail to become Hearosable
-
-The fix is not more buildings. It is clearer order.
-
-<Image
-  {...guideImageProps}
-  src={fixedRoutingLayout}
-  alt="Fixed Sintopia routing example with a controlled main line and specialist split."
-/>
-
-A good corrected layout has:
-
-- one main punishment district
-- one clear decision point
-- one fallback loop
-- one specialist split only when the traffic justifies it
-
-Think of Hell like a processing system, not a decorative city grid.
-
-<h2 id="infernal-corruption-and-why-shorter-walks-win">
-  <a href="#infernal-corruption-and-why-shorter-walks-win">Infernal Corruption And Why Shorter Walks Win</a>
+<h2 id="which-collectibles-can-be-bought-back">
+  Which collectibles can be bought back?
 </h2>
 
-A lot of players know that long walks are bad, but not why.
+The categories that are currently safest to treat as recoverable later are:
 
-The reason is **Infernal Corruption**.
+- **Newspapers**
+- **Comics**
+- **standard Baseball Cards**
 
-As long as a Soul is exposed on the road, it gains Sin **every few seconds**. That means every unnecessary detour is not just time loss. It is a direct threat to your **Hearos** yield.
+These are the collectible lines most consistently tied to later cleanup through the shop loop.
 
-In practice, this creates two layout rules:
+In practical terms, that means if you simply missed a normal pickup while moving through a chapter, you may still see that item appear later in the shop inventory instead of losing it forever.
 
-- keep profitable routes short
-- protect long queues with **Waiting Lines**
+### Why these are the safer cleanup categories
 
-If you ever wonder why a Soul keeps missing the Hearos threshold by a small amount, the answer is often not “wrong building.” It is “too much walking.”
+These collectible types behave more like **ordinary story-exploration pickups** than one-off progression gates.
 
-<h2 id="waiting-lines-and-booths">
-  <a href="#waiting-lines-and-booths">Waiting Lines And Booths</a>
+That makes them the most believable candidates for launch-version catch-up support.
+
+It also explains why strong completion routes still tell players to collect everything on sight anyway:
+
+- shop cleanup costs money
+- shop stock still has timing pressure
+- buy-back does not protect every collectible line
+- late-game shop access is limited
+
+<GuideCallout title="Practical rule">
+  <div>
+    If a missed collectible is a <strong>normal Newspaper, Comic, or non-special Baseball Card</strong>, it is the kind of item most likely to be recoverable later.
+  </div>
+</GuideCallout>
+
+---
+
+<h2 id="which-collectibles-cannot-be-bought-back">
+  Which collectibles cannot be bought back?
 </h2>
 
-**Waiting Lines** and **Waiting Booths** are not cosmetic queue tools. They are one of the best anti-corruption tools in the game.
+The two most important non-buy-back categories are:
 
-A Soul inside a properly serviced **Waiting Line** does not gain Sin from Infernal Corruption. That makes Waiting Lines mandatory for:
+- **Schematics**
+- **Secret Figurines**
 
-- busy punishment buildings
-- long transit sections
-- Saint handling
-- any route where you are trying to preserve a Hearosable total
+If you miss one of these during normal progression, you should not assume the shop will save your run.
 
-That is also why long exposed paths are almost always worse than a slightly longer but protected queue route.
+### Why this distinction matters
 
-<h2 id="best-souls-dispatcher-setup">
-  <a href="#best-souls-dispatcher-setup">Best Souls Dispatcher Setup</a>
+These items are closer to **special progression or special collectible tracks** than ordinary environmental pickups.
+
+A missed Newspaper is annoying.
+
+A missed Schematic or Secret Figurine is the sort of miss that can force you into:
+
+- an older manual save
+- a later cleanup run on another slot
+- or accepting that the current file is no longer your clean completion file
+
+### Secret Figurines: what you actually need to know
+
+There are **10 Secret Figurines** total.
+
+They are one of the smallest collectible lines in the game, which is exactly why players tend to underestimate them.
+
+They also do **not** belong to the shop cleanup system, so the small total count does not make them safer.
+
+The menu also does **not** tell you how many of them you have.
+
+If you want to check figurine progress, go back to the **P.I. Office shelf between your caseboard and bedroom**.
+
+<figure className="my-8">
+  <Image
+    src="/images/mouse-pi/mouse-pi-office-figurine-shelf.webp"
+    alt="Secret Figurine progress shelf in the P.I. Office in MOUSE P.I. For Hire."
+    width={1432}
+    height={806}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Secret Figurines are not menu-tracked. Use the P.I. Office shelf to confirm how many Jack Pepper figurines you have actually found.
+  </figcaption>
+</figure>
+
+<GuideCallout title="High-risk collectible types">
+  <div>
+    If you care about clean 100% routing, treat <strong>Schematics</strong> and <strong>Secret Figurines</strong> as <strong>must-check items in the field</strong>, not shop-cleanup items.
+  </div>
+</GuideCallout>
+
+---
+
+<h2 id="where-do-buy-back-items-appear">
+  Where do buy-back items appear?
 </h2>
 
-The **Souls Dispatcher** is the building that turns a working Hell into a controlled one.
+The two shop locations that matter most for missed collectible cleanup are:
 
-<Image
-  {...guideImageProps}
-  src={dispatcherOverview}
-  alt="Souls Dispatcher overview in Sintopia."
-/>
+- **P.I. Office**
+- **Roadhouse**
 
-Your first Dispatcher should sit **after** your first Omnisin block.
+Those are the two places you should check whenever you suspect you missed a normal collectible during story progress.
 
-Its job is simple:
+<GuideDataTable title="" rows={shopRows} />
 
-- send **Hearosable Souls** toward the exit
-- send everything else back through treatment
+### Why both locations matter
 
-That alone is enough to stabilize the early game.
+A lot of players mentally reduce cleanup to “check the main office shop later.”
 
-<h2 id="the-two-dispatcher-layout">
-  <a href="#the-two-dispatcher-layout">The Two-Dispatcher Layout</a>
+That is too narrow.
+
+The safer assumption is:
+
+**check both your main hub shop and the Roadhouse shop whenever you are trying to recover missed standard collectibles.**
+
+<figure className="my-8">
+  <Image
+    src="/images/mouse-pi/mouse-pi-pi-office-shop-comic-strips.webp"
+    alt="P.I. Office shop inventory showing collectible purchases in MOUSE P.I. For Hire."
+    width={1280}
+    height={720}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The P.I. Office shop is one of the two key places to check for missed standard collectibles and shop-sold card entries.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="shop-only-cards-versus-buy-back-cards">
+  Shop-only cards versus buy-back cards
 </h2>
 
-Once Souls start arriving with much dirtier totals, especially around **75+ total Sin**, a one-Dispatcher layout gets shaky.
+Not every Baseball Card in the shop is there because you missed it.
 
-The strongest mid-game structure is a **two-Dispatcher layout**:
+Some are simply **shop-sold cards by design**.
 
-### Dispatcher 1: front sorter
+The clearest currently confirmed example is the early P.I. Office / Roadhouse shop card set:
 
-Place this after your first broad treatment block.
+- **8 Baseball Cards are sold in the shop**
+- **4 cost 500 Coins**
+- **4 cost 1000 Coins**
 
-It should:
-- peel off already Hearosable Souls
-- split out Saints if you have built a Saint lane
-- send everything else deeper into Hell
+That means you should separate Baseball Cards into three buckets:
 
-### Dispatcher 2: back-end fail-safe
+1. **ordinary field pickups**
+2. **shop-sold cards**
+3. **side-job reward cards**
 
-Place this near the end of your Hell, before the final route to reincarnation.
+Those three buckets do **not** share the same logic.
 
-It should:
-- catch Souls that still are not Hearosable
-- send them into the fallback loop
-- stop accidental dirty releases
+<GuideCallout title="Baseball Card rule">
+  <div>
+    Do not assume every shop card is a “buy-back” card.
+  </div>
+  <div>
+    Some cards are <strong>shop-only purchases</strong>, and some side-job reward cards do <strong>not</strong> enter the shop pool at all.
+  </div>
+</GuideCallout>
 
-This is the layout that keeps your **Hearos lane** clean while still letting you run dense traffic.
+---
 
-<h2 id="hearos-lane">
-  <a href="#hearos-lane">Hearos Lane</a>
+<h2 id="do-side-job-rewards-follow-the-same-rules">
+  Do side-job rewards follow the same rules?
 </h2>
 
-Your **Hearos lane** is the most protected route in Hell.
+**No. That is the biggest trap on this page.**
 
-<Image
-  {...guideImageProps}
-  src={dispatcherHeroLane}
-  alt="Hearos lane rule setup on a Souls Dispatcher in Sintopia."
-/>
+Some **side-job Baseball Card rewards** do **not** behave like normal missed Baseball Cards.
 
-Only Souls at **50 total Sin or lower** should be allowed onto it.
+That means you cannot safely say:
 
-A good Hearos lane should be:
+> “Baseball Cards are shop recoverable, so I can ignore any card reward for now.”
 
-- short
-- obvious
-- protected from unnecessary walking
-- free from specialist detours
-- free from Saint traffic
+The clearest currently confirmed examples are:
 
-Do not overprocess Souls that are already Hearosable. Once they are ready, get them out before Infernal Corruption or a bad route ruins the total.
+- **Oh Yes... They Float** → **Jeremiah Curd Baseball Card**
+- **Friends in Deep Places** → **Jacob “Cheesehead” McQueen Baseball Card**
 
-<h2 id="fallback-loop">
-  <a href="#fallback-loop">Fallback Loop</a>
+Those are the side-job card rewards you should treat as real missables, not as normal shop cleanup.
+
+If you want the full side-job reward breakdown, use the{" "}
+<Link href="/mouse-pi-for-hire/missable-side-job-rewards">
+  Missable Side Job Rewards guide
+</Link>
+
+<figure className="my-8">
+  <Image
+    src="/images/mouse-pi/mouse-pi-side-jobs-menu-behind-the-nuts.webp"
+    alt="Pause menu showing Side Jobs in MOUSE P.I. For Hire, including Behind the Nuts."
+    width={1668}
+    height={938}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Side-job rewards live in their own bucket. If a reward comes from the Side Jobs list, do not automatically assume the normal shop rules will save it later.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Most important exception on this page">
+  <div>
+    The buy-back system does <strong>not</strong> make side-job reward cards safe to ignore.
+  </div>
+  <div>
+    If a Baseball Card comes from a <strong>side-job reward</strong>, treat it as a missable reward, not as ordinary shop cleanup.
+  </div>
+</GuideCallout>
+
+---
+
+<h2 id="clues-and-locked-containers-still-change-routing">
+  Clues and locked containers still change routing
 </h2>
 
-Any Soul that fails your Hearos check should be forced into a **fallback loop**.
+This page is about buy-back, not clue solving.
 
-<Image
-  {...guideImageProps}
-  src={dispatcherFallbackLoop}
-  alt="Fallback loop setup on a Souls Dispatcher in Sintopia."
-/>
+But two related systems still matter for your cleanup planning.
 
-A good fallback loop should be:
+### 1. Clues are not disposable
 
-- short enough to stay efficient
-- long enough to feed another useful treatment step
-- impossible to confuse with the Hearos lane
-- easy to reconnect into your main punishment district
+Even though Clues are not part of the shop cleanup economy, they still belong in your broader missables checklist.
 
-The fallback loop exists to do one job well:  
-**keep unfinished Souls working until they are profitable to release**.
+The safe rule is simple: **collect clues on sight.**
 
-<h2 id="saint-lane">
-  <a href="#saint-lane">Saint Lane</a>
+### 2. Timed safes and locks still need discipline
+
+Buy-back logic does not erase the risk from locks, safes, and tailpick attempts.
+
+If you fail a difficult time-sensitive lock, you may be creating extra cleanup pressure for yourself even before the shop system becomes relevant.
+
+The practical rule is:
+
+**save before attempting black safes or any tailpick sequence you do not feel confident about.**
+
+<GuideCallout title="Practical lock rule">
+  <div>
+    Do not treat locked collectibles as future shop problems by default.
+  </div>
+  <div>
+    Before a black safe or tense tailpick attempt, make a manual save first.
+  </div>
+</GuideCallout>
+
+---
+
+<h2 id="how-late-game-lockout-changes-buy-back-planning">
+  How late-game lockout changes buy-back planning
 </h2>
 
-**Saints** are one of the biggest hidden throughput traps in Hell.
+Even if the buy-back system exists, it is still tied to your access to the normal game loop.
 
-While they remain Saints, they:
+Public collectible routing is already explicit about the danger here:
 
-- generate **no Purgadollars**
-- generate **no Faithcoins**
-- generate **no Hearos**
-- slow nearby Souls
-- depress nearby **Imployees**
+**the last 2 missions are the point where you no longer have access to the shops.**
 
-So they should never be left on your main money route.
+That means even buy-back-friendly categories become risky if you wait too long.
 
-There are two good Saint plans.
+That is why the safest completion rhythm is:
 
-### Option 1: eject them fast
+1. collect as much as possible during each mission
+2. finish side jobs early
+3. check shops regularly
+4. spend your cleanup money before the late-game squeeze
+5. do not enter the final two-mission stretch while still assuming cleanup is for later
 
-If you do not need to farm them, route **Saints** straight back toward the Reincarnation Gate so they stop wasting space.
+<GuideCallout title="Late-game cleanup rule">
+  <div>
+    Once you are entering the <strong>final two-mission stretch around Jack Squat</strong>, stop assuming the shops will save a lazy cleanup plan.
+  </div>
+</GuideCallout>
 
-### Option 2: break sainthood on purpose
+---
 
-If you do want to convert Saints into profitable traffic, give them a dedicated **Saint lane**:
-
-- long **Waiting Line**
-- **Waiting Booth**
-- optional follow-up building for more patience break pressure
-
-Saints lose **Holy Patience** while waiting in line, and failures from a serviced line can knock that patience down much faster. Once Holy Patience hits zero, they become normal Souls again and can rejoin your normal Hell economy.
-
-This is why a Saint lane should be separate from your Hearos lane. Saints are not clean profit. They are a special routing problem.
-
-<h2 id="deviant-branch-and-specialist-districts">
-  <a href="#deviant-branch-and-specialist-districts">Deviant Branch And Specialist Districts</a>
+<h2 id="should-you-rely-on-buy-back-for-100-percent-completion">
+  Should you rely on buy-back for 100% completion?
 </h2>
 
-If Saints are low-value blockers, **Deviants** are high-pressure exceptions.
+**No. Use it, but do not rely on it.**
 
-A **Deviant** appears when a Soul has **50 or more in a specific Sin**. Once they show up, your generic broad-treatment line stops being enough.
+The buy-back system is strong enough to rescue ordinary exploration mistakes.
 
-<Image
-  {...guideImageProps}
-  src={deviantsExplainer}
-  alt="Deviant and specialist treatment explanation in Sintopia."
-/>
+It is **not** strong enough to replace good completion habits.
 
-The right response is a **specialist district**.
+### Best way to use it
 
-### Build it like this
+Use buy-back for:
 
-- keep your Omnisin block at the front
-- add a routing split after broad treatment
-- branch Deviants into matching sin treatment
-- keep the branch self-contained so they do not wander back into your Hearos lane
+- accidental missed Newspapers
+- accidental missed Comics
+- accidental missed standard Baseball Cards
 
-This matters because **Omnisin Doctor** cannot efficiently handle Deviants, while specialist doctors are built for exactly that traffic.
+Do **not** use it as your main plan for:
 
-Specialists are where your mid-game economy really starts to scale. For example:
+- Schematics
+- Secret Figurines
+- side-job reward cards
+- late-game cleanup after you have already pushed too far
 
-- **Pridologist** removes **32 Pride** for **1050 Purgadollars**
-- **Wrathologist** removes **32 Wrath** for **1050 Purgadollars**
-- **Envyologist** removes **32 Envy** for **1050 Purgadollars**
+### Best clean-completion routine
 
-That is a major jump over broad early treatment.
+If you want the least painful route:
 
-<h2 id="envy-deviant-routing-example">
-  <a href="#envy-deviant-routing-example">Envy Deviant Routing Example</a>
-</h2>
+1. collect as much as possible during each chapter
+2. keep multiple manual saves
+3. check the shop loop after major progress beats
+4. finish side jobs before the late story lockout
+5. treat buy-back as backup, not as strategy
 
-A clean specialist split looks like this:
-
-1. Soul enters Hell
-2. First Dispatcher checks if it is already Hearosable
-3. If not, it enters broad punishment
-4. If it is now identified as an **Envy Deviant**, it gets routed out of the main loop
-5. It enters **Envyologist**
-6. It only rejoins the normal flow if your route intentionally sends it back
-
-<Image
-  {...guideImageProps}
-  src={envyRoutingLive}
-  alt="Live Envy Deviant routing example in Sintopia."
-/>
-
-That is the core management loop of **Sintopia**:  
-**identify -> intercept -> route -> specialist treat -> cash out**
-
-And this is also where **Demons** become part of your throughput plan. Once you defeat a Demon in the Overworld, you can hire it to buff buildings in Hell. Hired Demons do not take breaks like **Imployees**, and matching Demons can turn specialist branches into much stronger mid-game engines.
-
-<h2 id="hellpet-show-faithcoins-and-total-hell-recall">
-  <a href="#hellpet-show-faithcoins-and-total-hell-recall">Hellpet Show, Faithcoins, And Total Hell Recall</a>
-</h2>
-
-A lot of layout guides focus only on **Purgadollars** and **Hearos**, but **Faithcoins** matter too.
-
-The most reliable way to generate them is the **Hellpet Show**.
-
-The best place for a Hellpet Show is usually **late in the route, near the way to the Reincarnation Gate**, not in the middle of your core punishment spine. That way, Souls that are already mostly settled can still generate **Faithcoins** without slowing down your primary treatment economy too early.
-
-There are two clean ways to use it:
-
-- place one on the way out so most Souls naturally pass through it
-- use it on a separate side lane if your main Hell is already traffic-heavy
-
-Once you unlock **Total Hell Recall**, that Faithcoin line gets much better and becomes a real part of mid-game layout planning instead of a side gimmick.
-
-<h2 id="best-imployees-to-hire-early">
-  <a href="#best-imployees-to-hire-early">Best Imployees To Hire Early</a>
-</h2>
-
-A lot of layout failures are really staffing failures.
-
-What matters early is not flavor text. It is:
-
-- hire cost
-- daily wage
-- work time
-- efficiency
-- whether the Imployee is sitting on a true bottleneck
-
-<Image
-  {...guideImageProps}
-  src={imployeeSampleA}
-  alt="Early Imployee recruitment sample set A in Sintopia."
-/>
-
-<Image
-  {...guideImageProps}
-  src={imployeeSampleB}
-  alt="Early Imployee recruitment sample set B in Sintopia."
-/>
-
-<GuideDataTable rows={sintopiaImployeeRows} />
-
-The big takeaway from these samples is simple:
-
-- **Betty Touchy** is the best raw value card shown
-- **Nat Frosty** is an excellent cheap stabilizer
-- **Victor Carpediem** is good, but only if your wage load can support him
-- buying a better card too early can be worse than buying a decent cheap one that keeps the line running
-
-In other words, the best Imployee is not always the strongest one. It is the one your current Hell can actually afford.
-
-<h2 id="how-to-stop-imployee-strikes">
-  <a href="#how-to-stop-imployee-strikes">How To Stop Imployee Strikes</a>
-</h2>
-
-**Imployees** strike when your Hell stops being able to support its own growth.
-
-<Image
-  {...guideImageProps}
-  src={strikeWarning}
-  alt="Sintopia upkeep and strike warning."
-/>
-
-That usually happens because one of these went wrong:
-
-- too many Imployees too early
-- too many buildings before routing is stable
-- Saints left on profitable routes
-- dirty Souls leaking out before they become Hearosable
-- no specialist branch once Deviants become common
-- too much exposed walking and too little protected queueing
-
-The cure is usually the same:
-
-1. stabilize one main punishment spine
-2. add the first Dispatcher
-3. build the Hearos lane
-4. add the fallback loop
-5. isolate Saints
-6. split Deviants
-7. only then scale staff and buildings
-
-If your Hell cannot comfortably pay for the new building tomorrow morning, you cannot afford it today.
-
-<h2 id="mode-adjustments-campaign-sandbox-and-challenge">
-  <a href="#mode-adjustments-campaign-sandbox-and-challenge">Mode Adjustments: Campaign, Sandbox, And Challenge</a>
-</h2>
-
-There is no one perfect layout for every map, but there is one strong skeleton.
-
-### Campaign
-
-Use the same backbone, but let the mission decide which specialist branch comes first. If the map pressures money, bias toward throughput. If it pressures stability, bring the Saint lane and second Dispatcher online sooner.
-
-### Sandbox
-
-This is where the full version shines:
-
-- Hearos lane
-- Saint lane
-- fallback loop
-- specialist district
-- Hellpet Show Faithcoin route
-
-### Challenge
-
-Challenge mode rewards restraint. Build the smallest structure that still supports:
-
-- one punishment spine
-- one Hearos lane
-- one fallback loop
-- one Saint answer
-- one specialist branch only when forced
+---
 
 <h2 id="faq">
-  <a href="#faq">FAQ</a>
+  FAQ
 </h2>
 
-### What is the best hell layout in Sintopia?
+### Can you buy back missed collectibles in MOUSE: P.I. For Hire?
 
-The best **Sintopia** hell layout is a controlled spine with **Omnisin Doctor**, a **Souls Dispatcher**, a dedicated **Hearos lane**, a fallback loop, a separate **Saint lane**, and a specialist district for **Deviants**.
+Yes, but only for specific collectible categories. The safest currently confirmed buy-back lines are Newspapers, Comics, and standard Baseball Cards.
 
-### What is the Hearos threshold in Sintopia?
+### How many Newspapers, Baseball Cards, and Comics are there?
 
-A Soul becomes **Hearosable** when it reincarnates with **50 total Sin or lower**.
+There are **38 Newspapers**, **41 Baseball Cards**, and **29 Comics** in total.
 
-### When should I use two Souls Dispatchers?
+### Are some Baseball Cards sold in shops by default?
 
-Once your incoming Souls start clustering around **75+ total Sin**, a front sorter and a back-end fail-safe become much more reliable than a single Dispatcher.
+Yes. There are currently **8 known shop-sold Baseball Cards**, with **4 costing 500 Coins** and **4 costing 1000 Coins**.
 
-### How do I deal with Saints in Sintopia?
+### Can you buy back missed Schematics later?
 
-Either route **Saints** out of Hell quickly, or send them into a dedicated **Waiting Line + Waiting Booth** setup to break **Holy Patience** and turn them back into normal Souls.
+No. Schematics should not be treated as shop-recoverable cleanup items.
 
-### Can Omnisin Doctor treat Deviants?
+### Can you buy back missed Secret Figurines later?
 
-Not efficiently. **Omnisin Doctor** is your opening-game generalist, but **Deviants** should be routed into matching specialist buildings.
+No. Secret Figurines should be treated as non-buy-back collectibles.
 
-### Why are my Souls missing Hearos by a tiny amount?
+### How many Secret Figurines are there?
 
-Usually because they are spending too long exposed on roads and gaining Sin from **Infernal Corruption** before reincarnating.
+There are **10 Secret Figurines** in total.
 
-<h2 id="final-build-order">
-  <a href="#final-build-order">Final Build Order</a>
-</h2>
+### How do you check Secret Figurine progress?
 
-If you want the shortest build order that still plays like a real guide, use this:
+The menu does not track Secret Figurines. To check progress, go to the **P.I. Office shelf between your caseboard and bedroom**.
 
-1. **Main Omnisin punishment spine**
-2. **First Souls Dispatcher**
-3. **Hearos lane**
-4. **Fallback loop**
-5. **Waiting Line coverage on key queues**
-6. **Saint lane**
-7. **Second Souls Dispatcher**
-8. **First specialist district**
-9. **Hellpet Show near the exit route**
-10. **Total Hell Recall / Demon-assisted upgrades once economy is stable**
+### Where do missed collectible items show up later?
 
-That is the real answer to building the best Hell in **Sintopia**.
+The main places to check are the **P.I. Office** shop and the **Roadhouse** shop.
 
-Not the biggest Hell.  
-Not the prettiest Hell.  
-The one that keeps **Purgadollars**, **Faithcoins**, **Hearos**, **Imployees**, **Saints**, and **Deviants** under control at the same time.
+### Do all Baseball Cards follow the same buy-back rules?
+
+No. Ordinary field pickups, shop-only cards, and side-job reward cards do **not** all follow the same rule set.
+
+### Which side-job reward cards should I treat as true missables?
+
+The clearest named examples are **Oh Yes... They Float** and **Friends in Deep Places**, because they reward unique Baseball Cards that should not be treated like ordinary shop cleanup.
+
+### What should I do before trying a black safe or difficult lock?
+
+Make a manual save first. Buy-back does not protect you from bad lock-routing decisions.
+
+### When does shop cleanup stop being safe to leave for later?
+
+The practical danger point is the **final two-mission stretch**, where collectible routing no longer treats shop access as safely available.
