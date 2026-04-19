@@ -516,7 +516,48 @@ export type LatestUpdateItem = {
       hoverBorderClass: "hover:border-emerald-300",
       hoverTitleClass: "group-hover:text-emerald-700",
     },
-  
+    
+    // ===== Sintopia =====
+{
+  href: "/sintopia/best-hell-layout-guide",
+  game: "Sintopia",
+  title: "Best Hell Layout Guide",
+  description:
+    "How to build the best Hell layout, including Souls Dispatchers, Hearos lanes, fallback loops, Saints, Deviants, and long-run routing control.",
+  tagClass: "text-rose-500",
+  hoverBorderClass: "hover:border-rose-300",
+  hoverTitleClass: "group-hover:text-rose-700",
+},
+{
+  href: "/sintopia/hearos-guide",
+  game: "Sintopia",
+  title: "How to Get Hearos",
+  description:
+    "Learn the Hearos threshold, best first unlocks, why Souls fail to convert, and how Saints, Deviants, and routing affect Hearos income.",
+  tagClass: "text-rose-500",
+  hoverBorderClass: "hover:border-rose-300",
+  hoverTitleClass: "group-hover:text-rose-700",
+},
+{
+  href: "/sintopia/overworld-guide",
+  game: "Sintopia",
+  title: "Overworld Guide",
+  description:
+    "Best spells, ruler personalities, Power Shrines, Corruption Stones, Demons, Sin Spawns, and how the Overworld changes your Hell economy.",
+  tagClass: "text-rose-500",
+  hoverBorderClass: "hover:border-rose-300",
+  hoverTitleClass: "group-hover:text-rose-700",
+},
+{
+  href: "/sintopia/saints-guide",
+  game: "Sintopia",
+  title: "Saints Guide",
+  description:
+    "How to deal with Saints, break Holy Patience, use Waiting Lines and Waiting Booths, and when Attrition Warfare or Time Dilatator are worth it.",
+  tagClass: "text-rose-500",
+  hoverBorderClass: "hover:border-rose-300",
+  hoverTitleClass: "group-hover:text-rose-700",
+},
     // ===== All Will Fall =====
     {
       href: "/all-will-fall/oil-rig-guide/",
