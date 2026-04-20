@@ -151,6 +151,13 @@ export default function Home() {
                 Sintopia Guide
               </Link>
 
+              <Link
+                href="/airborne-empire"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                Airborne Empire Guide
+              </Link>
+
               
 
             </div>

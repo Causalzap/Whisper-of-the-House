@@ -50,6 +50,13 @@ const Header = () => {
                   </ActiveLink>
 
                   <ActiveLink 
+                    href="/airborne-empire" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors font-medium"
+                  >
+                    Airborne Empire
+                  </ActiveLink>
+
+                  <ActiveLink 
                     href="/mouse-pi-for-hire/collectibles-hub" 
                     className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors font-medium"
                   >

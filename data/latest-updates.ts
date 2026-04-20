@@ -54,6 +54,48 @@ export type LatestUpdateItem = {
     hoverBorderClass: "hover:border-sky-300",
     hoverTitleClass: "group-hover:text-sky-700",
   },
+
+  // ===== Airborne Empire =====
+{
+  href: "/airborne-empire/kingsfell-guide/",
+  game: "Airborne Empire",
+  title: "Kingsfell Guide",
+  description:
+    "When to enter the final biome, how to prepare your city, Jet Engine timing, and the safest way to approach the endgame push.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/airborne-empire/pirate-queen-guide/",
+  game: "Airborne Empire",
+  title: "Pirate Queen Guide",
+  description:
+    "How to beat the final boss with the safest city setup, better anti-air control, cleaner approach timing, and smarter flank rotation.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/airborne-empire/tilt-lift-balance-guide/",
+  game: "Airborne Empire",
+  title: "Tilt, Lift, and Balance Guide",
+  description:
+    "Fix unstable layouts, solve the not enough lift to support weight warning, improve propulsion, and know when to rebuild instead of patching.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/airborne-empire/jet-engine-guide/",
+  game: "Airborne Empire",
+  title: "Jet Engine Guide",
+  description:
+    "When Jet Engine becomes relevant, how to rebuild your city around it, and why it matters so much in Kingsfell and the Pirate Queen fight.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
   
     // ===== Pokemon Champions =====
     {

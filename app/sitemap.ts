@@ -49,8 +49,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/mouse-pi-for-hire/collectibles-hub`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/pragmata`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/sintopia`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/airborne-empire`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
 
+     // ⬇️ 把 4 篇文章补上
+     { url: `${base}/airborne-empire/jet-engine-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/airborne-empire/kingsfell-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/airborne-empire/pirate-queen-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/airborne-empire/tilt-lift-balance-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+   
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/sintopia/best-hell-layout-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/sintopia/hearos-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
