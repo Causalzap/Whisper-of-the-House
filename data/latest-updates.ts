@@ -96,7 +96,47 @@ export type LatestUpdateItem = {
   hoverBorderClass: "hover:border-sky-300",
   hoverTitleClass: "group-hover:text-sky-700",
 },
-  
+  // ===== Lucky Tower Ultimate =====
+{
+  href: "/lucky-tower-ultimate/potion-recipes-and-permanent-buffs-guide/",
+  game: "Lucky Tower Ultimate",
+  title: "Potion Recipes and Permanent Buffs Guide",
+  description:
+    "Learn fixed potion colors, the most important recipes, how permanent buffs really work, and when Antidote, Monster, Speed, and Strength matter most.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/lucky-tower-ultimate/companions-guide/",
+  game: "Lucky Tower Ultimate",
+  title: "Companions Guide",
+  description:
+    "How Sobu, Princess, Alva, Hubert, Marisha and Louise, and the Bard work, plus loyalty rules, rescue value, and the best companion routes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/lucky-tower-ultimate/pipeline-guide/",
+  game: "Lucky Tower Ultimate",
+  title: "Pipeline Guide",
+  description:
+    "Where to find the Pipefitters, how the four broken pipes work, what the 100 gold activation and 8 gold reclaim costs mean, and when piping an item is worth it.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/lucky-tower-ultimate/100-achievement-guide/",
+  game: "Lucky Tower Ultimate",
+  title: "100% Achievement Guide",
+  description:
+    "A practical roadmap for escape, village, companion, potion, pipeline, and endgame achievements, including No touching!, Speedrunner-er, and The chosen one.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
     // ===== Pokemon Champions =====
     {
       href: "/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles",
