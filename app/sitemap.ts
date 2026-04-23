@@ -51,12 +51,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/sintopia`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/airborne-empire`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/lucky-tower-ultimate`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/vampire-crawlers`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
      // ⬇️ 把 4 篇文章补上
-     { url: `${base}/lucky-tower-ultimate/potion-recipes-and-permanent-buffs-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/lucky-tower-ultimate/companions-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/lucky-tower-ultimate/pipeline-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/lucky-tower-ultimate/100-achievement-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/vampire-crawlers/all-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/vampire-crawlers/best-characters-for-beginners`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/vampire-crawlers/secret-characters-how-to-unlock`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
      // ⬇️ 把 4 篇文章补上
      { url: `${base}/airborne-empire/jet-engine-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
