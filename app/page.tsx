@@ -164,7 +164,15 @@ export default function Home() {
               >
                 Lucky Tower Ultimate Guide
               </Link>
+              
+              <Link
+                href="/vampire-crawlers"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                Vampire Crawlers Guide
+              </Link>
 
+              
               
 
             </div>

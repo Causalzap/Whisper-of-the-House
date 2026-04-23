@@ -1,0 +1,664 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const unlockSystemRows = [
+  {
+    item: "Fastest early unlocks",
+    value: "Antonio, Imelda, Gennaro, Pugnala",
+    why: "These are the cleanest first roster wins because they overlap with the tutorial, Mad Forest progress, and your first coffin route.",
+  },
+  {
+    item: "Main regular unlock buckets",
+    value: "Map progress / Coffins / Boss & enemy kills / Card-based conditions",
+    why: "Vampire Crawlers does not use one single roster system. That is why players often feel lost once unlocks stop being purely map-based.",
+  },
+  {
+    item: "Biggest early decision factors",
+    value: "Gold Cost, Crawler Card Effect, Color Bonus",
+    why: "Unlocking a character is only half the question. The better question is whether buying that crawler improves your current party and deck engine.",
+  },
+  {
+    item: "Best early utility stats",
+    value: "Armor, Mana, Hand, Amount, Area, Draw",
+    why: "These are the effects that usually matter most for early progression and for turning new crawlers into useful party pieces immediately.",
+  },
+  {
+    item: "Secret character layer",
+    value: "Leda The Dealer / Red Death / MissingN0",
+    why: "These are not standard progression unlocks. They behave more like challenge or puzzle unlocks tied to extreme runs.",
+  },
+  {
+    item: "What changes unlock priority later",
+    value: "Party system",
+    why: "Once you start building multi-crawler teams, some characters become valuable because of synergy, not because they are the strongest solo pick.",
+  },
+];
+
+export const regularCharacterColumns = [
+  { key: "name", label: "Character" },
+  { key: "unlock", label: "Unlock Condition" },
+  { key: "gold", label: "Gold Cost", align: "right" },
+  { key: "effect", label: "Crawler Card Effect" },
+  { key: "bonus", label: "Color Bonus" },
+];
+
+export const regularCharacterRows = [
+  {
+    name: "Antonio Belpaese",
+    unlock: "Unlocked from the start (tutorial)",
+    gold: "Free",
+    effect: "Add 3 Armor",
+    bonus: "Increase damage 10% when a red card is played",
+  },
+  {
+    name: "Imelda Belpaese",
+    unlock: "Play a run in Mad Forest",
+    gold: "10",
+    effect: "Add 15 XP",
+    bonus: "Gain 1 XP Growth when a yellow card is played",
+  },
+  {
+    name: "Pasqualina Belpaese",
+    unlock: "Reach level 20 as Imelda in Inlaid Library",
+    gold: "110",
+    effect: "Add 10 Speed", 
+    bonus: "Increase Hand by 1 when a purple card is played",
+  },
+  {
+    name: "Gennaro Belpaese",
+    unlock: "Defeat the Mantichana boss in Mad Forest",
+    gold: "700",
+    effect: "Add 1 Amount", 
+    bonus: "Deal 60 damage when a red card is played",
+  },
+  {
+    name: "Arca Ladonna",
+    unlock: "Play the Fire Wand card 100 times",
+    gold: "420",
+    effect: "Add 3 Mana",
+    bonus: "Add 1 Mana when a purple card is played",
+  },
+  {
+    name: "Porta Ladonna",
+    unlock: "Play the Lightning Ring card 100 times",
+    gold: "1,000",
+    effect: "Add 25 Area",
+    bonus: "Add 1 Mana when a red card is played",
+  },
+  {
+    name: "Lama Ladonna",
+    unlock: "Complete a dungeon with 10% Curse or more",
+    gold: "1,300",
+    effect: "Increase damage 50%",
+    bonus: "Increase damage 15% when a blue card is played",
+  },
+  {
+    name: "Poe Ratcho",
+    unlock: "Play the Garlic card 25 times",
+    gold: "360",
+    effect: "Add 20 Area",
+    bonus: "Draw 1 card when a blue card is played",
+  },
+  {
+    name: "Dommario",
+    unlock: "Collect 5,000 coins",
+    gold: "1,120",
+    effect: "Gain 2 Duration",
+    bonus: "Deal 40 damage when a purple card is played",
+  },
+  {
+    name: "Krochi Freetto",
+    unlock: "Defeat 6,666 enemies",
+    gold: "3,000",
+    effect: "Add 10 Revival",
+    bonus: "Add 5 Revival when a Wild card is played",
+  },
+  {
+    name: "Christine Davain",
+    unlock: "Find and play a Pentagram card",
+    gold: "2,800",
+    effect: "Gain 1 Level",
+    bonus: "Gain 1 Mana when a yellow card is played",
+  },
+  {
+    name: "Pugnala Provola",
+    unlock: "Find the Coffin in Berserk Wood",
+    gold: "1,440",
+    effect: "Increase Might 20%",
+    bonus: "Increase Might 10% when a purple card is played",
+  },
+  {
+    name: "Poppea Pecorina",
+    unlock: "Find the Coffin in Milk Factory (floor 5)",
+    gold: "2,200",
+    effect: "Increase Hand by 1",
+    bonus: "Gain 1 Duration when a yellow card is played",
+  },
+  {
+    name: "Concetta Caciotta",
+    unlock: "Find the Coffin in Gallo Tower (floor 3)",
+    gold: "1,920",
+    effect: "Add 10 Area",
+    bonus: "Add 5 Area when a red card is played",
+  },
+  {
+    name: "Yatta Cavallo",
+    unlock: "Defeat 250 Lion Heads in Inlaid Library",
+    gold: "600",
+    effect: "Add 2 Amount",
+    bonus: "Add 1 Amount when a yellow card is played",
+  },
+  {
+    name: "O'Sole Meeo",
+    unlock: "Defeat 50 Dragon Shrimps",
+    gold: "2,400",
+    effect: "Add 1 Amount",
+    bonus: "Add 2 Recovery when a Wild card is played",
+  },
+  {
+    name: "Mortaccio",
+    unlock: "Defeat 444 Skeletons",
+    gold: "600",
+    effect: "Add 1 Amount",
+    bonus: "Add 1 Amount when a Wild card is played",
+  },
+  {
+    name: "Bianca Ramba",
+    unlock: "Defeat the Milk Elemental boss in Dairy Plant",
+    gold: "1,330",
+    effect: "Add 3 Amount",
+    bonus: "Add 1 Amount when a purple card is played",
+  },
+  {
+    name: "Suor Clerici",
+    unlock: "Recover 1,000 HP total",
+    gold: "1,760",
+    effect: "Heal 3",
+    bonus: "Heal 1 after each encounter when a blue card is played",
+  },
+  {
+    name: "Giovanna Grana",
+    unlock: "Find the Coffin in Library Sanctum",
+    gold: "1,360",
+    effect: "Gain 1 Amount",
+    bonus: "Gain 1 Duration when a yellow card is played",
+  },
+  {
+    name: "Iguana Gallo Valletto",
+    unlock: "Defeat Gallo, the final boss of Gallo Tower",
+    gold: "4,800",
+    effect: "Gain 25% more coins",
+    bonus: "Gain 10% more coins when a Wild card is played",
+  },
+];
+
+export const secretCharacterColumns = [
+  { key: "name", label: "Secret Character" },
+  { key: "unlock", label: "Currently Known Unlock Method" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const secretCharacterRows = [
+  {
+    name: "Leda The Dealer",
+    unlock: "Defeat 50 enemies in a single Turboturn",
+    why: "Burst AOE challenge unlock",
+  },
+  {
+    name: "Red Death (Card Form)",
+    unlock: "Clear an Infested Dungeon using only Wildcards",
+    why: "Wildcard-only challenge run",
+  },
+  {
+    name: "MissingN0",
+    unlock: "Trigger a Glitch State by overdrawing 100 cards in one run",
+    why: "Draw-engine puzzle unlock",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To unlock all characters in Vampire Crawlers, you need a mix of tutorial progress, map unlocks, coffin routes, boss kills, enemy farming, and card-specific run conditions.**
+
+If you only want the fastest early unlocks first, focus on these:
+
+- **Antonio Belpaese**: unlocked from the tutorial
+- **Imelda Belpaese**: play a run in **Mad Forest**
+- **Gennaro Belpaese**: defeat **Mantichana** in **Mad Forest**
+- **Pugnala Provola**: find the coffin in **Berserk Wood**
+- **Dommario**: collect **5,000 coins**
+- **Krochi Freetto**: defeat **6,666 enemies**
+
+Most character unlocks work in two steps:
+
+- **Step 1:** meet the unlock condition
+- **Step 2:** buy the character with gold
+
+If your goal is pure progression, unlock the easiest map and coffin characters first, then move into card-based and secret-character challenges later.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/vampire-crawlers/all-characters-roster.png"
+    alt="All regular and secret characters shown on the Vampire Crawlers character select screen."
+    width={1600}
+    height={900}
+    priority={true} 
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vampire Crawlers character unlocks split into early progression characters, coffin characters, boss and kill-count unlocks, and hidden challenge characters.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="unlock-system-at-a-glance">
+  Unlock system at a glance
+</h2>
+
+<GuideDataTable title="" rows={unlockSystemRows} />
+
+---
+
+<h2 id="how-character-unlocks-work-in-vampire-crawlers">
+  How character unlocks work in Vampire Crawlers
+</h2>
+
+Character unlocks in Vampire Crawlers are not tied to just one system.
+
+Some characters unlock because you:
+
+- reach a new map
+- open a coffin
+- defeat a boss
+- farm a specific enemy type
+- collect enough coins
+- recover enough total HP
+
+But others unlock because you:
+
+- play a specific card enough times
+- clear a dungeon with a modifier
+- complete a run under a special challenge
+- push the game’s combo, Wildcard, or overdraw systems far enough
+
+That is why the roster can feel slow at first and then suddenly open up once you understand how the game tracks progression.
+
+<GuideCallout title="Best way to think about the roster">
+Do not treat Vampire Crawlers characters like one big checklist.
+
+They are really four different unlock systems:
+
+1. early map and resource unlocks  
+2. coffin characters  
+3. boss and enemy-kill characters  
+4. card-based and secret challenge characters
+</GuideCallout>
+
+---
+
+<h2 id="all-regular-characters-unlock-conditions">
+  All regular characters unlock conditions
+</h2>
+
+The easiest way to read the regular roster is by **unlock type**, but once you are actually deciding who to buy and who to use, you also need the **gold cost**, the **Crawler card effect**, and the **color bonus**.
+
+That is why this table is more useful than a basic unlock checklist.
+
+It answers five different player questions at once:
+
+- how to unlock the character
+- how much gold the character costs
+- what the Crawler card does when played
+- what the passive color bonus is
+- whether the character is worth unlocking early
+
+<GuideTable
+  caption="All regular Vampire Crawlers characters: unlock condition, gold cost, and Crawler card effects."
+  columns={regularCharacterColumns}
+  rows={regularCharacterRows}
+/>
+
+These are the most important takeaways from the full table:
+
+- **Antonio** and **Imelda** are your easiest early progression characters
+- **Pugnala**, **Poppea**, **Concetta**, and **Giovanna** are major **coffin unlocks**
+- **Gennaro**, **Bianca Ramba**, and **Iguana Gallo Valletto** are tied to **boss clears**
+- **Arca**, **Porta**, and **Poe** are tied to **specific card usage**
+- some of the best early Crawler card effects come from characters that improve **Armor**, **Mana**, **Amount**, **Hand**, or **draw**
+
+<GuideCallout title="Best way to use this table">
+Do not use the table only to ask, “How do I unlock this character?”
+
+Use it to ask the more valuable question:
+
+“Does this character give me a better unlock path, a better party slot, or a better Crawler card right now?”
+</GuideCallout>
+
+---
+
+<h3 id="story-progression-and-resource-unlocks">
+  Story progression and resource unlocks
+</h3>
+
+The easiest early unlocks are still the progression and resource characters.
+
+That group includes:
+
+- **Antonio Belpaese**
+- **Imelda Belpaese**
+- **Dommario**
+- **Suor Clerici**
+- **Krochi Freetto**
+
+These are the most natural pickups because they unlock while you are still learning the maps, economy, and run structure.
+
+<h3 id="coffin-characters">
+  Coffin characters
+</h3>
+
+Coffin characters are some of the best roster unlocks in the game because they overlap with maps you already want to revisit for progression.
+
+The main coffin characters are:
+
+- **Pugnala Provola**
+- **Giovanna Grana**
+- **Poppea Pecorina**
+- **Concetta Caciotta**
+
+If you are planning efficient unlock routing, coffin characters should usually come before the more awkward card-count unlocks.
+
+<h3 id="boss-and-enemy-kill-unlocks">
+  Boss and enemy kill unlocks
+</h3>
+
+Some of the regular roster is tied to specific bosses or enemy families.
+
+That includes characters like:
+
+- **Gennaro Belpaese**
+- **Bianca Ramba**
+- **Iguana Gallo Valletto**
+- **Mortaccio**
+- **Yatta Cavallo**
+- **O'Sole Meeo**
+
+These unlocks usually come later because they require targeted farming or deeper map progress.
+
+<h3 id="card-and-run-specific-unlocks">
+  Card and run-specific unlocks
+</h3>
+
+This is the part of the roster where Vampire Crawlers stops being a simple map guide and starts becoming a system-mastery guide.
+
+That group includes:
+
+- **Arca Ladonna**
+- **Porta Ladonna**
+- **Poe Ratcho**
+- **Christine Davain**
+- **Lama Ladonna**
+- **Pasqualina Belpaese**
+
+If a character unlock is tied to a card, the fastest strategy is usually to build a run that exists only to cast that card as often as possible.
+
+---
+
+<h2 id="which-characters-should-you-unlock-first">
+  Which characters should you unlock first
+</h2>
+
+If your goal is not just to complete the roster but to get stronger faster, these are the best regular characters to prioritize early.
+
+### 1. Imelda Belpaese
+
+Imelda is one of the earliest characters you can add, and she fits the kind of progression runs that help newer players snowball quickly.
+
+### 2. Gennaro Belpaese
+
+Gennaro is a clean early boss unlock that fits naturally into Mad Forest progression and does not require weird setup.
+
+### 3. Pugnala Provola
+
+Pugnala is one of the strongest early “real roster growth” milestones because coffin unlocks overlap with map learning and stronger runs.
+
+### 4. Dommario
+
+Dommario is a natural long-tail unlock if you are replaying maps and collecting coins anyway.
+
+### 5. Pasqualina Belpaese
+
+Pasqualina becomes a strong target once your library runs are stable enough to chase targeted level and card goals.
+
+<p>If you want broader progression help too, pair this page with the <Link href="/vampire-crawlers-beginner-guide">beginner guide</Link>, <Link href="/vampire-crawlers-combo-guide">combo guide</Link>, and <Link href="/vampire-crawlers-best-early-upgrades">best early upgrades guide</Link>.</p>
+
+<GuideCallout title="Best early unlock route">
+For most players, the cleanest early route looks like this:
+
+tutorial → Mad Forest → Imelda → Gennaro → Pugnala → library progress → Pasqualina → deeper map and boss unlocks
+</GuideCallout>
+
+---
+
+<h2 id="party-system-and-why-it-changes-your-unlock-priority">
+  Party system and why it changes your unlock priority
+</h2>
+
+One of the biggest mistakes players make is treating character unlocks like they only matter one at a time.
+
+That is not how Vampire Crawlers works once the **party system** starts to matter.
+
+As your account grows, unlocking more characters is not just about finding your next main. It is about building a roster that can **cover each other’s weaknesses**.
+
+That changes unlock priority in a big way.
+
+A character that looks average on its own can become much better in a party because its Crawler card offers:
+
+- free armor
+- extra mana
+- hand size
+- area
+- amount
+- draw support
+- or a passive that scales off a color package you already want to play
+
+This matters because party building pushes the game away from “Who is the strongest single crawler?” and toward “Which three crawlers create the cleanest engine together?”
+
+That means unlocking a new crawler is not always valuable because that character is individually busted.
+
+Sometimes it is valuable because that character unlocks a **better three-crawler shell**.
+
+So when you read a character unlock guide, do not just ask:
+
+- is this character strong?
+
+Also ask:
+
+- does this character improve my best party?
+- does this character add a color trigger I can actually use?
+- does this character patch armor, mana, draw, or reach problems?
+- is this a solo carry, or a party enabler?
+
+<GuideCallout title="Best party-system rule">
+Do not judge a crawler only as a solo pick.
+
+In Vampire Crawlers, a good unlock often becomes a great unlock once it gives your party a missing piece like armor, mana, hand size, or better color scaling.
+</GuideCallout>
+
+---
+
+<h2 id="currently-known-secret-characters-and-how-to-unlock-them">
+  Currently known secret characters and how to unlock them
+</h2>
+
+Vampire Crawlers also has a hidden layer of secret content that works more like a puzzle or challenge system.
+
+These unlocks are best treated as **currently known** methods.
+
+<GuideTable
+  caption="Currently known Vampire Crawlers secret characters and how to unlock them."
+  columns={secretCharacterColumns}
+  rows={secretCharacterRows}
+/>
+
+There is also a hidden boss, **The Trickster**, tied to a more extreme overkill and combo setup. That is not a normal roster unlock, but it matters because it sits in the same part of the game’s hidden challenge layer.
+
+<p>If you want the full hidden-content breakdown, use this page as your main roster hub and then move to the dedicated <Link href="/vampire-crawlers-secret-characters-how-to-unlock">secret characters guide</Link>.</p>
+
+<GuideCallout title="How to read the secret character section">
+Regular characters mostly ask, “Did you reach the right map or condition?”
+
+Secret characters ask, “Can you build one weird run on purpose and push it hard enough to break the game?”
+</GuideCallout>
+
+---
+
+<h2 id="crawler-card-effects-and-why-they-matter">
+  Crawler card effects and why they matter
+</h2>
+
+Unlock conditions tell you **how** to get a character.
+
+Crawler card effects tell you **why unlocking that character matters right now**.
+
+That is the extra layer a lot of character guides miss.
+
+In Vampire Crawlers, a character is not just a roster checkbox. It is also:
+
+- a **When Played** effect
+- a **color-trigger passive**
+- a possible **party slot upgrade**
+- and sometimes a better resource engine for your next set of runs
+
+That is why the table above includes both the unlock condition and the Crawler card information.
+
+Two characters with equally easy unlocks can have very different practical value depending on whether they add:
+
+- Armor
+- Mana
+- Hand
+- Amount
+- Area
+- draw support
+- or stronger scaling for a color package you already use
+
+<GuideCallout title="Best way to judge a new unlock">
+Do not just ask whether a character is easy to unlock.
+
+Ask whether that character improves your current deck engine, party setup, or color package immediately.
+</GuideCallout>
+
+---
+
+<h2 id="best-characters-to-unlock-for-beginners">
+  Best characters to unlock for beginners
+</h2>
+
+If you are still early in Vampire Crawlers, these are the kinds of effects that usually matter most:
+
+- easy armor or survivability
+- easier mana access
+- extra draw
+- more hand size
+- simple damage scaling that does not need a weird setup
+
+That is why newer players often get more practical value from characters like:
+
+- **Imelda**
+- **Gennaro**
+- **Pugnala**
+- **Antonio**
+- **Poe**, if you already know you want more draw support
+
+<p>For a more direct ranking and recommendation page, use the <Link href="/vampire-crawlers-best-characters-for-beginners">best beginner characters guide</Link>.</p>
+
+---
+
+<h2 id="do-you-need-specific-maps-relics-or-kill-conditions">
+  Do you need specific maps, relics, or kill conditions?
+</h2>
+
+Yes, and this is one of the biggest reasons the roster feels layered.
+
+### You need specific maps
+
+A lot of the roster is tied to the main progression maps:
+
+- **Mad Forest**
+- **Inlaid Library / Library Sanctum**
+- **Dairy Plant / Milk Factory**
+- **Gallo Tower**
+
+### You often need specific kill conditions
+
+Some unlocks require:
+
+- a boss kill
+- a specific enemy type
+- a cumulative kill total
+- or a run cleared under a special condition
+
+### Relics matter more for secret content
+
+Most regular characters do not need relic-heavy setup.
+
+But the secret side of the game often does, especially when the unlock depends on:
+
+- Wildcard-only clears
+- overdraw loops
+- glitch states
+- extreme combo or overkill setups
+
+That is why the regular roster and secret roster should not be treated as the same kind of content.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do you unlock all characters in Vampire Crawlers?
+
+You unlock characters through tutorial progress, map progression, coffins, total resource milestones, enemy or boss kill counts, card play counts, and special run conditions. Most characters still need to be bought with gold after you meet the unlock condition.
+
+### How do you unlock Imelda in Vampire Crawlers?
+
+Play a run in **Mad Forest**.
+
+### How do you unlock Pugnala Provola?
+
+<p>Find the coffin in <strong>Berserk Wood</strong>. If you want the full route, use the <Link href="/how-to-unlock-pugnala-in-vampire-crawlers">Pugnala unlock guide</Link>.</p>
+
+### How do you unlock Bianca Ramba?
+
+Defeat the **Milk Elemental** boss in **Dairy Plant**.
+
+### How do you unlock Arca Ladonna?
+
+Play the **Fire Wand** card **100 times**.
+
+### How do you unlock Poe Ratcho?
+
+Garlic must be unlocked first by picking up **5 Floor Chickens**. After that, play **Garlic** **25 times** to unlock Poe Ratcho.
+
+### How do you unlock MissingN0?
+
+<p>Trigger a <strong>Glitch State</strong> by overdrawing <strong>100 cards</strong> in one run. For the full setup, use the <Link href="/how-to-unlock-missingn0-in-vampire-crawlers">MissingN0 unlock guide</Link>.</p>
+
+### Are there secret characters in Vampire Crawlers?
+
+Yes. Vampire Crawlers has a hidden challenge layer with secret characters like **Leda The Dealer**, **Red Death**, and **MissingN0**.
+
+### What is the easiest character to unlock early?
+
+Imelda is one of the easiest early unlocks, followed by natural early progression targets like **Gennaro** and **Pugnala**.
+
+### How do you unlock Christine Davain?
+
+Pentagram only appears once you reach around level 35 in a single run; push to 40 to be safe. Once Pentagram starts appearing, find it and play it to unlock Christine Davain.
