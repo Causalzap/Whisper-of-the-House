@@ -56,7 +56,7 @@ const jsonLd = {
       description:
         "This Vampire Crawlers secret characters guide explains what counts as a hidden character, which secret-style unlocks are currently being tracked, how Leda The Dealer and MissingN0 work, why Red Death needs more caution, and how The Trickster fits into the hidden challenge layer.",
       image: [
-        `${siteUrl}/images/vampire-crawlers/characters-guide/all-characters-roster.png`,
+        `${siteUrl}/images/vampire-crawlers/all-characters-roster.png`,
       ],
       inLanguage: "en",
       dateModified: "2026-04-23",
@@ -182,15 +182,15 @@ export default function Page() {
               label: "Vampire Crawlers Guide Hub",
             },
             {
-              href: "/vampire-crawlers-all-characters-unlock-guide",
+              href: "/vampire-crawlers/all-characters-unlock-guide",
               label: "Vampire Crawlers All Characters Unlock Guide",
             },
             {
-              href: "/vampire-crawlers-best-characters-for-beginners",
+              href: "/vampire-crawlers/best-characters-for-beginners",
               label: "Vampire Crawlers Best Characters for Beginners",
             },
             {
-              href: "/vampire-crawlers-combo-guide",
+              href: "/vampire-crawlers/combo-guide",
               label: "How Combos and Wildcards Work in Vampire Crawlers",
             },
           ]}

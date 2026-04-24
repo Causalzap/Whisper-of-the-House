@@ -1,0 +1,908 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const evolutionSystemRows = [
+  {
+    item: "Core recipe",
+    value: "Base weapon + matching item + empty Gem Socket",
+    why: "The base weapon must be eligible to receive an Evolution Gem. If you fill that socket with a normal gem first, you can block the evolution.",
+  },
+  {
+    item: "What gets consumed",
+    value: "The base weapon is replaced, and the ingredient is treated as consumed or sacrificed",
+    why: "Plan as if only the evolved card remains. Do not build a strategy that requires keeping the item card after the evolution.",
+  },
+  {
+    item: "Evolution triggers",
+    value: "Chests, Gem Stations, and Evolution Statue / red-orb opportunities",
+    why: "Do not assume every evolution comes only from a chest. Later floors can give more ways to apply an Evolution Gem.",
+  },
+  {
+    item: "Destroyed after use warning",
+    value: "Do not play one-use item cards before evolving",
+    why: "If an item card is destroyed before the recipe resolves, it can no longer help complete that evolution.",
+  },
+  {
+    item: "Grim Grimoire",
+    value: "In-game recipe tracker for discovered evolutions and unions",
+    why: "After you find it, you can check discovered recipes from the pause menu instead of memorizing every pairing.",
+  },
+  {
+    item: "Best early plan",
+    value: "Finish one reliable evolution first",
+    why: "One completed evolution usually beats three half-built recipes that make your deck clunky.",
+  },
+];
+
+export const itemBehaviorColumns = [
+  { key: "question", label: "Question" },
+  { key: "answer", label: "Practical Answer" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const itemBehaviorRows = [
+  {
+    question: "Does the base weapon stay?",
+    answer: "No. Treat the base weapon as replaced by the evolved card.",
+    why: "You should judge the evolved form as the new card your deck will draw and play.",
+  },
+  {
+    question: "Does the item card stay?",
+    answer: "Plan as if it is consumed or sacrificed during the evolution.",
+    why: "Some public sources disagree, but release gameplay and sacrifice prompts support planning around the item disappearing.",
+  },
+  {
+    question: "Do normal gems carry over?",
+    answer: "Do not rely on it. Avoid socketing normal gems into an evolution target.",
+    why: "A filled socket can block the Evolution Gem, and sacrificed ingredients do not preserve your gem plan.",
+  },
+  {
+    question: "Can a Destroyed-after-use item evolve?",
+    answer: "Only if it is still available when the evolution resolves.",
+    why: "If you play and destroy the item first, the recipe piece is gone.",
+  },
+];
+
+export const earlyEvolutionColumns = [
+  { key: "rank", label: "Priority" },
+  { key: "evolution", label: "Evolution" },
+  { key: "recipe", label: "Recipe" },
+  { key: "effect", label: "What It Does" },
+  { key: "why", label: "Why It Is Good Early" },
+];
+
+export const earlyEvolutionRows = [
+  {
+    rank: "1",
+    evolution: "Holy Wand",
+    recipe: "Magic Wand + Any Tome",
+    effect: "Fires stronger seeking magic bolts and becomes a clean mid-chain payoff.",
+    why: "Magic Wand is easy to use early, and Tome-style cards help solve the mana problem that stops longer combos.",
+  },
+  {
+    rank: "2",
+    evolution: "Unholy Vespers",
+    recipe: "King Bible + Spellbinder",
+    effect: "Upgrades Bible-style repeated hits into a much stronger sustained damage card.",
+    why: "King Bible is already useful before evolving, so the recipe rarely feels like dead weight.",
+  },
+  {
+    rank: "3",
+    evolution: "Bloody Tear",
+    recipe: "Whip + Hollow Heart",
+    effect: "Turns Whip into a sustain tool with lifesteal-style healing.",
+    why: "It makes early floors safer, especially while you are still learning enemy intent and defensive timing.",
+  },
+  {
+    rank: "4",
+    evolution: "Death Spiral",
+    recipe: "Axe + Any Candelabrador",
+    effect: "Turns Axe into a stronger AOE payoff that can carry 0 -> 1 -> 2 turns.",
+    why: "Axe already wants to be played late in a combo. Evolving it makes that payoff slot much more explosive.",
+  },
+  {
+    rank: "5",
+    evolution: "Soul Eater",
+    recipe: "Garlic + Any Pummarola",
+    effect: "Upgrades Garlic into a defensive sustain evolution with healing pressure.",
+    why: "Great if you need safety more than burst, or if Garlic appears early and is already helping the run.",
+  },
+  {
+    rank: "6",
+    evolution: "Thunder Loop",
+    recipe: "Thunder Ring + Duplicator",
+    effect: "Adds strong lightning damage and can repeat at the end of the turn.",
+    why: "High ceiling with Amount and mana support, but it can feel awkward before your deck economy is stable.",
+  },
+  {
+    rank: "7",
+    evolution: "NO FUTURE",
+    recipe: "Runetracer + Any Armor",
+    effect: "Turns Runetracer into a heavy payoff that pairs well with defensive drafting.",
+    why: "Very strong if your deck already wants Armor and you understand when defense deserves the combo slot.",
+  },
+];
+
+export const allEvolutionColumns = [
+  { key: "base", label: "Base Weapon" },
+  { key: "item", label: "Required Item" },
+  { key: "result", label: "Evolution / Union" },
+  { key: "effect", label: "Effect Summary" },
+  { key: "earlyNote", label: "Early Note" },
+];
+
+export const allEvolutionRows = [
+  {
+    base: "Magic Wand",
+    item: "Any Tome",
+    result: "Holy Wand",
+    effect: "Stronger seeking magic bolts.",
+    earlyNote: "Excellent first target because Tome support helps your mana curve.",
+  },
+  {
+    base: "King Bible",
+    item: "Spellbinder",
+    result: "Unholy Vespers",
+    effect: "Stronger repeated Bible-style hits.",
+    earlyNote: "Strong if Bible is already carrying your early fights.",
+  },
+  {
+    base: "Whip",
+    item: "Hollow Heart",
+    result: "Bloody Tear",
+    effect: "Wide slash with healing / lifesteal-style sustain.",
+    earlyNote: "Good safety route for newer players.",
+  },
+  {
+    base: "Axe",
+    item: "Any Candelabrador",
+    result: "Death Spiral",
+    effect: "Large AOE-style evolved Axe payoff.",
+    earlyNote: "Best once you can support 2-cost payoff turns.",
+  },
+  {
+    base: "Garlic",
+    item: "Any Pummarola",
+    result: "Soul Eater",
+    effect: "Sustain-focused Garlic upgrade.",
+    earlyNote: "Great when survival is the problem.",
+  },
+  {
+    base: "Thunder Ring",
+    item: "Duplicator",
+    result: "Thunder Loop",
+    effect: "Lightning damage that can attack again at end of turn.",
+    earlyNote: "High ceiling with Amount, mana, and repeated-hit scaling.",
+  },
+  {
+    base: "Runetracer",
+    item: "Any Armor",
+    result: "NO FUTURE",
+    effect: "Heavy evolved Runetracer payoff with defensive synergy.",
+    earlyNote: "Strong if Armor already belongs in your deck.",
+  },
+  {
+    base: "Flame Wand / Fire Wand",
+    item: "Any Spinach",
+    result: "Hellfire",
+    effect: "High-damage fire projectile / piercing-style payoff.",
+    earlyNote: "Strong if you are already stacking Might.",
+  },
+  {
+    base: "Knife",
+    item: "Bracer",
+    result: "Thousand Edge",
+    effect: "Rapid blade barrage for focused damage.",
+    earlyNote: "Good low-cost pressure, but not always the cleanest AOE option.",
+  },
+  {
+    base: "Cross",
+    item: "Clover",
+    result: "Heaven Sword",
+    effect: "High-damage cross/sword payoff with strong burst potential.",
+    earlyNote: "Better once you understand Luck and payoff timing.",
+  },
+  {
+    base: "Santa Water",
+    item: "Attractorb",
+    result: "La Borra",
+    effect: "Large area damage zone with strong repeated damage potential.",
+    earlyNote: "Excellent later payoff if your deck supports area and setup.",
+  },
+  {
+    base: "Pentagram",
+    item: "Crown",
+    result: "Gorgeous Moon",
+    effect: "Screen-clear style payoff with XP/growth synergy.",
+    earlyNote: "Usually a later target, not the first recipe to force.",
+  },
+  {
+    base: "Peachone",
+    item: "Ebony Wings",
+    result: "Vandalier",
+    effect: "Bird union with high burst and repeated end-of-turn pressure.",
+    earlyNote: "Very strong, but asks for two weapon pieces and more setup.",
+  },
+  {
+    base: "Phiera Der Tuphello + Eight the Sparrow",
+    item: "Tirajisu",
+    result: "Phieraggi",
+    effect: "Advanced union that combines the two gun weapons with Tirajisu.",
+    earlyNote: "Three-piece recipe. Do not force before your deck is stable.",
+  },
+  {
+    base: "Shadow Pinion",
+    item: "Wings",
+    result: "Valkyrie Turner",
+    effect: "Movement/speed-flavored evolved damage route.",
+    earlyNote: "Later route; not a default first-win target.",
+  },
+  {
+    base: "Song of Mana",
+    item: "Skull O'Maniac",
+    result: "Mannajja",
+    effect: "Large mana/song-style AOE payoff.",
+    earlyNote: "Powerful but can pair with riskier curse-style scaling.",
+  },
+  {
+    base: "Gatti Amari",
+    item: "Stone Mask",
+    result: "Vicious Hunger",
+    effect: "Economy-flavored evolved damage route.",
+    earlyNote: "Better once you can survive reliably and care about money scaling.",
+  },
+];
+
+export const timingColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "bestMove", label: "Best Move" },
+  { key: "why", label: "Why" },
+];
+
+export const timingRows = [
+  {
+    situation: "You have the base weapon but not the item",
+    bestMove: "Keep the base socket empty and draft toward the item",
+    why: "A normal gem can block the Evolution Gem before the recipe appears.",
+  },
+  {
+    situation: "You have the item but not the base weapon",
+    bestMove: "Take the base weapon only if it also helps your deck",
+    why: "Do not ruin your curve for a recipe that may never finish.",
+  },
+  {
+    situation: "The item says Destroyed after use",
+    bestMove: "Do not play it before evolving",
+    why: "Once it is destroyed, it is no longer available as an ingredient.",
+  },
+  {
+    situation: "You are one card away from the recipe",
+    bestMove: "Delay optional chests if the floor is safe",
+    why: "Opening the chest after the pair is ready gives you a better evolution chance.",
+  },
+  {
+    situation: "You find a red-orb Evolution Statue or Gem Station",
+    bestMove: "Use it only if your target recipe is ready or you need immediate power",
+    why: "These are evolution opportunities, not generic rewards to spend blindly.",
+  },
+  {
+    situation: "You already finished one evolution",
+    bestMove: "Start supporting it with Mana, Hand, Draw, Might, Amount, or Area",
+    why: "A finished evolution still needs to show up, be affordable, and land in a good combo slot.",
+  },
+];
+
+export const routeColumns = [
+  { key: "route", label: "Route" },
+  { key: "recipe", label: "Recipe" },
+  { key: "plan", label: "Plan" },
+];
+
+export const routeRows = [
+  {
+    route: "Consistency route",
+    recipe: "Magic Wand -> Any Tome -> Holy Wand",
+    plan: "Best first route if you want a clean payoff and better mana flow.",
+  },
+  {
+    route: "Bible route",
+    recipe: "King Bible -> Spellbinder -> Unholy Vespers",
+    plan: "Best if Bible is already one of your strongest early cards.",
+  },
+  {
+    route: "Sustain route",
+    recipe: "Whip -> Hollow Heart -> Bloody Tear",
+    plan: "Best if you are taking too much damage or still learning enemy intent.",
+  },
+  {
+    route: "AOE payoff route",
+    recipe: "Axe -> Candelabrador -> Death Spiral",
+    plan: "Best once your deck can reliably build 0 -> 1 -> 2 turns.",
+  },
+  {
+    route: "Defensive sustain route",
+    recipe: "Garlic -> Pummarola -> Soul Eater",
+    plan: "Best when Garlic appears early and survival matters.",
+  },
+  {
+    route: "High-ceiling Amount route",
+    recipe: "Thunder Ring -> Duplicator -> Thunder Loop",
+    plan: "Best after your mana, Amount, and draw support are strong enough.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Filling the base weapon socket too early",
+    whyItHurts: "The Evolution Gem needs the socket.",
+    betterPlay: "Keep the socket empty on any weapon you plan to evolve.",
+  },
+  {
+    mistake: "Playing a Destroyed-after-use item",
+    whyItHurts: "The ingredient disappears before the recipe resolves.",
+    betterPlay: "Hold the item until you can evolve.",
+  },
+  {
+    mistake: "Opening every chest immediately",
+    whyItHurts: "You may spend the floor's best evolution chance before the recipe is ready.",
+    betterPlay: "If safe, fight and level first when you are close to a recipe.",
+  },
+  {
+    mistake: "Forcing a recipe that does not fit your curve",
+    whyItHurts: "The evolved card may be strong but awkward to play.",
+    betterPlay: "Prioritize recipes that improve your actual combo line.",
+  },
+  {
+    mistake: "Chasing too many recipes",
+    whyItHurts: "Your deck fills with unfinished plans.",
+    betterPlay: "Finish one main evolution before chasing another.",
+  },
+  {
+    mistake: "Ignoring support after evolving",
+    whyItHurts: "You have a strong card but cannot draw, afford, or multiply it consistently.",
+    betterPlay: "After evolving, draft Mana, Hand, Draw, Might, Amount, or Area.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best early evolutions in Vampire Crawlers are the ones that turn your normal combo curve into a reliable payoff.**
+
+For most early runs, prioritize:
+
+- **Holy Wand**: Magic Wand + Any Tome
+- **Unholy Vespers**: King Bible + Spellbinder
+- **Bloody Tear**: Whip + Hollow Heart
+- **Death Spiral**: Axe + Any Candelabrador
+- **Soul Eater**: Garlic + Any Pummarola
+- **Thunder Loop**: Thunder Ring + Duplicator
+- **NO FUTURE**: Runetracer + Any Armor
+
+To evolve a weapon, you usually need the base weapon, its matching item, and an empty Gem Socket on the base card. When the evolution resolves, treat the base weapon as replaced and the item as consumed or sacrificed. Plan as if the evolved card is the only recipe piece that remains.
+
+The two biggest beginner rules are:
+
+- **Do not put a normal gem on a weapon you plan to evolve.**
+- **Do not play a Destroyed-after-use item before the evolution triggers.**
+
+Once you find the **Grim Grimoire**, you can check discovered evolutions and unions from the pause menu, so you do not need to memorize every recipe.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/vampire-crawlers/early-evolutions-guide.png"
+    alt="A Vampire Crawlers evolution choice showing a weapon card and matching item card."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Evolutions are major power spikes because they turn normal weapon cards into stronger payoff cards for your best combo turns.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="evolution-system-at-a-glance">
+  Evolution system at a glance
+</h2>
+
+<GuideDataTable title="" rows={evolutionSystemRows} />
+
+---
+
+<h2 id="how-evolutions-work-in-vampire-crawlers">
+  How evolutions work in Vampire Crawlers
+</h2>
+
+Evolutions are card fusions, not simple stat upgrades.
+
+The usual pattern is:
+
+```text
+base weapon + matching item + empty Gem Socket -> evolved weapon
+```
+
+The base weapon becomes the evolved card. The ingredient item should be treated as consumed or sacrificed during the process. In other words, do not plan your deck around keeping both the item and the evolved weapon afterward.
+
+This matters because evolution planning affects three different decisions:
+
+1. **which cards you draft**
+2. **which cards you avoid playing too early**
+3. **which cards you leave unsocketed**
+
+If you want to evolve **Whip**, do not fill Whip's Gem Socket with a normal gem. If you need **Hollow Heart** for that recipe, do not play and destroy it before the evolution opportunity appears.
+
+<GuideCallout title="Patch-safety note">
+Some public guides disagree on whether the item always stays or disappears after evolution.
+
+For safe play, plan as if the ingredient is consumed or sacrificed. If your current patch leaves a specific item in your deck, that is a bonus, not something your strategy should depend on.
+</GuideCallout>
+
+---
+
+<h2 id="what-gets-consumed-after-evolution">
+  What gets consumed after evolution?
+</h2>
+
+This is one of the most important questions because it changes how you draft.
+
+<GuideTable
+  caption="What happens to base weapons, item cards, and gems after a Vampire Crawlers evolution."
+  columns={itemBehaviorColumns}
+  rows={itemBehaviorRows}
+/>
+
+The practical rule is simple:
+
+```text
+After evolution, build around the evolved card, not the old recipe pieces.
+```
+
+This also explains why evolutions can make a deck feel cleaner. A finished evolution often compresses power into fewer cards, which helps you find your best combo turns more often.
+
+---
+
+<h2 id="how-to-check-recipes-with-grim-grimoire">
+  How to check recipes with Grim Grimoire
+</h2>
+
+You do not have to memorize every recipe forever.
+
+The **Grim Grimoire** is the in-game cheat sheet for evolutions and unions. Once collected, it adds a list of discovered weapon evolutions and unions to the pause menu.
+
+This is especially useful because the game only shows what your save file has discovered. That means the Grimoire grows with your progress instead of dumping every unknown recipe on you immediately.
+
+Use Grim Grimoire when:
+
+- you forgot which item pairs with a weapon
+- you want to check discovered unions
+- you are deciding whether to delay a chest
+- you want to know which recipe your current deck is close to completing
+
+The usual early route is to progress into the **Inlaid Library** side content, find the **Grim Grimoire** relic, then use the pause menu as your in-game evolution tracker.
+
+<GuideCallout title="Best Grimoire rule">
+Use this article to plan.
+
+Use Grim Grimoire during a run to confirm what your current save file has already discovered.
+</GuideCallout>
+
+---
+
+<h2 id="best-early-evolutions-ranked">
+  Best early evolutions ranked
+</h2>
+
+These are the best early evolutions to prioritize for smoother first wins and stronger dungeon progress.
+
+<GuideTable
+  caption="Best early Vampire Crawlers evolutions, recipes, effects, and beginner priority."
+  columns={earlyEvolutionColumns}
+  rows={earlyEvolutionRows}
+/>
+
+This ranking is not just raw damage.
+
+It considers:
+
+- whether the base card is useful before evolution
+- whether the item card helps your current run
+- whether the evolved card fits common combo turns
+- how much mana and draw support the route needs
+- whether the route helps beginners survive mistakes
+
+That is why **Holy Wand**, **Unholy Vespers**, and **Bloody Tear** are such strong early targets. They are easier to justify before the evolution is finished.
+
+---
+
+<h2 id="all-known-evolution-recipes">
+  All known evolution recipes
+</h2>
+
+This is the full current recipe list for weapon evolutions and unions.
+
+<GuideTable
+  caption="All known Vampire Crawlers weapon evolutions and unions."
+  columns={allEvolutionColumns}
+  rows={allEvolutionRows}
+/>
+
+The main recipe to double-check is **Phieraggi**, because it is not a simple two-card recipe. It requires:
+
+```text
+Phiera Der Tuphello + Eight the Sparrow + Tirajisu
+```
+
+That makes it a higher-setup union, not a default beginner evolution.
+
+---
+
+<h2 id="best-first-evolution-to-get">
+  Best first evolution to get
+</h2>
+
+For most early players, the safest first evolution is **Holy Wand**.
+
+### Why Holy Wand is the safest first target
+
+Holy Wand is strong because both sides of the recipe make sense early:
+
+- **Magic Wand** is easy to use
+- **Tome-style cards** help solve mana problems
+- the evolved card becomes a clean payoff
+- the route does not require a strange deck shape
+
+A simple plan looks like:
+
+```text
+Magic Wand -> Any Tome -> Holy Wand
+```
+
+Then you support the evolved card with:
+
+- Mana
+- Hand
+- Draw
+- Might
+- Amount
+- Area
+
+### When Unholy Vespers is better
+
+Pick **Unholy Vespers** first if **King Bible** is already one of your best cards.
+
+Bible is useful before evolving, so the deck does not feel weak while you wait for Spellbinder. If Bible is already winning rooms, turning it into Unholy Vespers is a natural power spike.
+
+### When Bloody Tear is better
+
+Pick **Bloody Tear** if your main problem is health.
+
+This is the safer route. It may not always be the highest burst option, but sustain can be more valuable than damage while you are still learning enemy intent, boss patterns, and when to block.
+
+---
+
+<h2 id="evolution-trigger-sources">
+  Evolution trigger sources
+</h2>
+
+Evolutions do not only come from one type of reward.
+
+The main evolution opportunities are:
+
+- **Treasure chests**
+- **Gem Stations**
+- **Evolution Statues / red-orb opportunities**
+- **boss or floor reward moments**, depending on the dungeon
+
+The important part is that you need the recipe ready when the opportunity appears.
+
+If you open every chest before finding the item card, you may lose the best chance to evolve on that floor. If you find a red-orb statue before your recipe is ready, you may have to decide whether to take another reward or keep pushing.
+
+<GuideCallout title="Best trigger rule">
+A chest is not just loot.
+
+A chest can be an evolution trigger. If your recipe is one card away and the floor is safe, consider fighting and leveling before opening it.
+</GuideCallout>
+
+---
+
+<h2 id="when-to-delay-a-chest-gem-station-or-red-orb">
+  When to delay a chest, Gem Station, or red orb
+</h2>
+
+Delaying a reward is not always correct, but it can be run-winning.
+
+<GuideTable
+  caption="When to delay evolution opportunities in Vampire Crawlers."
+  columns={timingColumns}
+  rows={timingRows}
+/>
+
+Use this rule:
+
+```text
+Safe floor + recipe almost ready = delay
+Dangerous floor + need power now = take the reward
+```
+
+Do not die holding a perfect plan. But do not waste the only evolution trigger on a floor when you are one level-up away from finishing the recipe.
+
+---
+
+<h2 id="destroyed-after-use-item-cards">
+  Destroyed after use item cards
+</h2>
+
+Some item cards are marked **Destroyed after use**.
+
+These cards are dangerous to play if they are part of an evolution recipe.
+
+The mistake looks like this:
+
+```text
+Take Hollow Heart -> play it for its immediate effect -> Hollow Heart is destroyed -> Whip can no longer evolve
+```
+
+The safer line is:
+
+```text
+Take Hollow Heart -> keep it available -> evolve Whip into Bloody Tear
+```
+
+This does not mean every one-use item is bad. It means you need to know whether that item is part of the recipe you are chasing.
+
+Before playing an item card, ask:
+
+- Is this item part of my planned evolution?
+- Does the card say Destroyed after use?
+- Do I have another copy available?
+- Is the immediate effect worth giving up the evolution?
+
+If the answer is unclear, hold the item until you know whether the recipe is still live.
+
+---
+
+<h2 id="evolutions-and-combo-order">
+  Evolutions and combo order
+</h2>
+
+Evolved weapons are strongest when they are placed in the right combo slot.
+
+Do not automatically play an evolved card as soon as it appears.
+
+A better line is usually:
+
+```text
+0-cost starter -> 1-cost bridge -> evolved weapon
+```
+
+Or, once your mana is stronger:
+
+```text
+0-cost starter -> 1-cost bridge -> 2-cost card -> evolved finisher
+```
+
+That is why evolutions connect directly to combo planning. They are not just stronger cards. They are usually your best **payoff cards**.
+
+<p>If you are still learning the 0 -> 1 -> 2 system, read the <Link href="/vampire-crawlers/combo-guide">combo guide</Link> before forcing complicated evolution routes.</p>
+
+<GuideCallout title="Best evolved-card rule">
+Do not only ask, "Can I play this evolved card?"
+
+Ask, "Can I place this evolved card where the combo multiplier makes it run-winning?"
+</GuideCallout>
+
+---
+
+<h2 id="how-to-draft-around-evolutions">
+  How to draft around evolutions
+</h2>
+
+Good evolution drafting starts before the recipe is complete.
+
+Before taking a card, ask:
+
+1. **Does this card help my current fights?**
+2. **Does it fit my mana curve?**
+3. **Does it complete or support an evolution recipe?**
+4. **Will the evolved card become a payoff in my combo line?**
+5. **Can I afford to carry this card until the evolution happens?**
+
+A simple rule:
+
+```text
+Useful now + evolves later = high priority
+Only useful later = risky
+Bad now + uncertain later = skip or reroll
+```
+
+This is why **Any Tome** is such a good ingredient for Holy Wand. Even before the evolution, Tome-style cards can help your mana economy.
+
+It is also why some flashier recipes are worse early. A powerful result does not help if the pieces make your current deck worse for the next three floors.
+
+---
+
+<h2 id="best-support-stats-after-evolving">
+  Best support stats after evolving
+</h2>
+
+After you evolve a weapon, your goal changes.
+
+Before evolution, you are trying to finish the recipe.
+
+After evolution, you are trying to draw, afford, multiply, and scale the evolved card.
+
+The best support stats are:
+
+### Mana
+
+Mana lets you play the setup cards before your evolved payoff.
+
+### Hand
+
+Hand size makes it more likely that your starter, bridge, and evolved card appear together.
+
+### Draw
+
+Draw finds the evolved card after the combo starts.
+
+### Might
+
+Might increases the raw damage of the payoff.
+
+### Amount
+
+Amount is excellent for repeated-hit, projectile, and multi-target evolutions.
+
+### Area
+
+Area makes AOE evolutions hit more enemies or reach deeper rows.
+
+### Duration
+
+Duration matters more for effects that persist, repeat, or interact with Crawler windows.
+
+<p>For permanent stat planning, pair this page with the <Link href="/vampire-crawlers/best-early-upgrades">best early upgrades guide</Link>.</p>
+
+---
+
+<h2 id="best-early-evolution-routes">
+  Best early evolution routes
+</h2>
+
+Use these simple routes if you want a clear plan.
+
+<GuideTable
+  caption="Best early Vampire Crawlers evolution routes and when to choose them."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+Do not read this as a strict tier list for every run.
+
+Read it as a decision tree:
+
+- need consistency? go Holy Wand
+- already using Bible? go Unholy Vespers
+- losing too much health? go Bloody Tear or Soul Eater
+- have 0 -> 1 -> 2 online? go Death Spiral
+- have Amount and mana support? go Thunder Loop
+
+---
+
+<h2 id="when-not-to-force-an-evolution">
+  When not to force an evolution
+</h2>
+
+Evolutions are strong, but forcing the wrong one can still lose a run.
+
+Do not force an evolution when:
+
+- the base weapon does not fit your deck
+- the item card is dead weight
+- the item will be destroyed if you need to use it now
+- the base weapon already has its socket filled
+- your deck cannot afford the evolved card
+- you are too low on health to delay chests
+- your current deck needs defense, not future damage
+- you already have one strong evolution and need support stats instead
+
+An evolution is correct when it makes your current deck cleaner, safer, or more explosive.
+
+It is not correct just because the recipe exists.
+
+---
+
+<h2 id="common-evolution-mistakes">
+  Common evolution mistakes
+</h2>
+
+Most failed evolution plans come from one of these mistakes.
+
+<GuideTable
+  caption="Common Vampire Crawlers evolution mistakes and how to fix them."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The best fix is to pick your main evolution target early.
+
+You do not need a perfect plan on floor one, but once the run gives you a clear route, stop taking random recipe pieces that pull your deck in three directions.
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What are evolutions in Vampire Crawlers?
+
+Evolutions are stronger weapon cards created by combining a base weapon with the correct item or union piece through an Evolution Gem opportunity.
+
+### What do you need to evolve a weapon?
+
+You usually need the base weapon, the matching item card, and an empty Gem Socket on the base weapon.
+
+### What happens to the item after evolution?
+
+Plan as if the item is consumed or sacrificed. Some public sources disagree on edge behavior, but the safest strategy is to assume only the evolved card remains.
+
+### Can I use a Destroyed-after-use item before evolving?
+
+No, not if you still need it for the recipe. If the item is destroyed before the evolution resolves, the recipe piece is gone.
+
+### What is the best first evolution?
+
+For most early players, **Holy Wand** is the safest first target. **Unholy Vespers** and **Bloody Tear** are also excellent depending on your deck.
+
+### Should I put normal gems on weapons I want to evolve?
+
+Usually no. Keep the Gem Socket empty on any base weapon you plan to evolve.
+
+### Should I open chests immediately?
+
+Not always. If your recipe is ready, open the chest. If you are one card away and safe, consider fighting and leveling first.
+
+### What does Grim Grimoire do?
+
+Grim Grimoire lets you view discovered weapon evolutions and unions from the pause menu. It becomes your in-game recipe tracker.
+
+### Where do I find Grim Grimoire?
+
+Progress into the Inlaid Library side content and look for the Grim Grimoire relic. Once collected, it permanently adds the discovered recipe list to your pause menu.
+
+### Is Death Spiral good early?
+
+Yes, if you can support Axe as a 2-cost payoff. It is best in decks that can reliably create 0 -> 1 -> 2 turns.
+
+### Is Thunder Loop good for beginners?
+
+Thunder Loop is strong, but it usually wants better mana, draw, and Amount support. It is powerful, but not always the easiest first evolution.
+
+### How does Phieraggi work?
+
+Phieraggi is a three-piece union route: **Phiera Der Tuphello + Eight the Sparrow + Tirajisu**. It is stronger later, but too setup-heavy for most first-win routes.
+
+### Do evolved weapons still need combo order?
+
+Yes. Evolved weapons are strongest when played late in a clean combo chain instead of being played immediately with no multiplier.
+
+### Why did my evolution not appear?
+
+Common reasons include missing the item card, playing a Destroyed-after-use ingredient, filling the base weapon socket, opening the chest too early, or using an evolution trigger before the recipe was ready.
+
+### Should I chase more than one evolution at once?
+
+Usually not early. Finish one main evolution first, then draft support stats or begin a second recipe if your deck is already stable.

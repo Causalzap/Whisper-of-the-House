@@ -137,6 +137,48 @@ export type LatestUpdateItem = {
   hoverBorderClass: "hover:border-emerald-300",
   hoverTitleClass: "group-hover:text-emerald-700",
 },
+
+// ===== Vampire Crawlers =====
+{
+  href: "/vampire-crawlers",
+  game: "Vampire Crawlers",
+  title: "Guide Hub",
+  description:
+    "Start here for the main Vampire Crawlers guide cluster, including early upgrades, combo sequencing, weapon evolutions, beginner characters, and hidden unlocks.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/vampire-crawlers/best-early-upgrades",
+  game: "Vampire Crawlers",
+  title: "Best Early Upgrades",
+  description:
+    "What to buy first in the Power-Up shop, including Reroll, Recovery, Might, Cooldown, Greed, Arcana reminders, Bing machines, and Blacksmith traps.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/vampire-crawlers/combo-guide",
+  game: "Vampire Crawlers",
+  title: "Combo Guide",
+  description:
+    "How 0-1-2 mana order works, when skipped numbers still count, how Wildcards and combo Gems change sequencing, and when to avoid Play All.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/vampire-crawlers/early-evolutions",
+  game: "Vampire Crawlers",
+  title: "Early Evolutions Guide",
+  description:
+    "Best early weapon evolutions, full recipe planning, Grim Grimoire tracking, what gets consumed after evolving, and when to delay chests or red-orb triggers.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
     // ===== Pokemon Champions =====
     {
       href: "/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles",

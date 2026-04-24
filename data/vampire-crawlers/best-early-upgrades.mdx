@@ -1,0 +1,941 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const upgradeSystemRows = [
+  {
+    item: "Best first survival buy",
+    value: "Recovery Rank 1",
+    why: "At 500 coins, Recovery is a cheap way to heal after every encounter and stop small mistakes from ruining a floor.",
+  },
+  {
+    item: "Best first consistency buy",
+    value: "Reroll Rank 1",
+    why: "At 250 coins, Reroll is one of the cheapest ways to find better card rewards, recipe pieces, and safer picks.",
+  },
+  {
+    item: "Best first damage buy",
+    value: "Might Rank 1",
+    why: "More damage shortens fights, protects HP indirectly, and improves almost every weapon and evolution route.",
+  },
+  {
+    item: "Best economy buy",
+    value: "Greed",
+    why: "Greed is excellent if you can already clear early floors, but it does not help you survive the current fight.",
+  },
+  {
+    item: "Best mid-game combo buy",
+    value: "Cooldown",
+    why: "Cooldown gives +1 Mana per rank. It is expensive, but starting with more Mana changes how quickly you can build long combo turns.",
+  },
+  {
+    item: "Do not ignore",
+    value: "Arcana",
+    why: "Arcana are not normal Power-Ups, but they can be just as important. Over the Top, Your Shield My Liege, and Sharp Mind can reshape entire builds.",
+  },
+  {
+    item: "Big trap",
+    value: "Early Blacksmith spending",
+    why: "Adding card sockets is powerful later, but early Gold usually does more in the Power-Up shop.",
+  },
+  {
+    item: "Run economy",
+    value: "Torches, Floor Chicken, Cash Out, and Bing machines",
+    why: "Your between-run upgrades improve faster if you also manage map resources correctly during runs.",
+  },
+];
+
+export const earlyUpgradeColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "upgrade", label: "Upgrade" },
+  { key: "knownCost", label: "Known Early Cost" },
+  { key: "why", label: "Why It Matters Early" },
+  { key: "buyWhen", label: "Buy When" },
+];
+
+export const earlyUpgradeRows = [
+  {
+    priority: "S",
+    upgrade: "Reroll",
+    knownCost: "250 coins for Rank 1",
+    why: "Lets you reroll level-up and reward choices to find better cards, safer picks, and evolution ingredients.",
+    buyWhen: "Buy very early. It is cheap and useful in almost every build.",
+  },
+  {
+    priority: "S",
+    upgrade: "Recovery",
+    knownCost: "500 coins for Rank 1",
+    why: "Restores HP after encounters, making long floors and early mistakes less punishing.",
+    buyWhen: "Buy first if you are reaching bosses at low HP or dying to chip damage.",
+  },
+  {
+    priority: "S",
+    upgrade: "Might / Damage",
+    knownCost: "Check shop; scales with purchases",
+    why: "Improves every damage card and makes fights shorter.",
+    buyWhen: "Buy early in almost every route, especially after your first survival purchase.",
+  },
+  {
+    priority: "A+",
+    upgrade: "Max Health",
+    knownCost: "Check shop; scales with purchases",
+    why: "Gives more room to survive boss hits, bad hands, and routing mistakes.",
+    buyWhen: "Buy early if one bad encounter can end your run.",
+  },
+  {
+    priority: "A+",
+    upgrade: "Duration",
+    knownCost: "Cheap early; check shop",
+    why: "Keeps Crawler effects active longer, which matters for color-trigger and Crawler-loop builds.",
+    buyWhen: "Buy early if you use Imelda, Gennaro, Pasqualina, or any build built around Crawler windows.",
+  },
+  {
+    priority: "A",
+    upgrade: "Greed",
+    knownCost: "Check shop; strong early economy buy",
+    why: "Increases coin income and accelerates every future purchase.",
+    buyWhen: "Buy early only if you can already clear safe farming routes.",
+  },
+  {
+    priority: "A",
+    upgrade: "Skip",
+    knownCost: "Check shop; usually cheaper than mid-game stats",
+    why: "Lets you avoid bad cards instead of bloating the deck.",
+    buyWhen: "Buy when your biggest problem is deck clutter or failed evolution forcing.",
+  },
+  {
+    priority: "A",
+    upgrade: "Growth",
+    knownCost: "Check shop; scales with purchases",
+    why: "More XP means more card rewards and more chances to find build pieces.",
+    buyWhen: "Buy after you have Reroll or Skip so extra levels do not become extra clutter.",
+  },
+  {
+    priority: "A",
+    upgrade: "Armor",
+    knownCost: "Check shop; scales with purchases",
+    why: "Reduces chip damage and helps when attackers survive your combo.",
+    buyWhen: "Buy if you often lose to repeated small hits.",
+  },
+  {
+    priority: "A-",
+    upgrade: "Luck",
+    knownCost: "Check shop; first rank is useful",
+    why: "Improves reward quality and can help with rare finds, gems, and high-value outcomes.",
+    buyWhen: "Buy after core survival and Reroll are covered.",
+  },
+  {
+    priority: "B+ early / S mid-game",
+    upgrade: "Cooldown",
+    knownCost: "About 3,583 Gold for Rank 1",
+    why: "Grants +1 Mana per rank. More starting Mana makes longer combo chains possible earlier.",
+    buyWhen: "Buy once you can afford it and your deck has 2-cost or 3-cost payoffs.",
+  },
+  {
+    priority: "B+ mid-game",
+    upgrade: "Magnet",
+    knownCost: "About 2,091 Gold for Rank 1",
+    why: "Improves draw-related effects, giving you more options and better chain consistency.",
+    buyWhen: "Buy once your deck has enough good cards that drawing more matters.",
+  },
+  {
+    priority: "B+ mid-game",
+    upgrade: "Crawler Slot",
+    knownCost: "About 3,551 Gold for Rank 1",
+    why: "Lets you run more Crawlers and build stronger party synergies.",
+    buyWhen: "Buy after you have enough unlocked Crawlers to justify another slot.",
+  },
+  {
+    priority: "B",
+    upgrade: "Amount",
+    knownCost: "Check shop; often better after payoff cards",
+    why: "Adds extra hits or projectiles for weapons that scale with repeated effects.",
+    buyWhen: "Buy once you have a reliable payoff like Thunder Ring, Vandalier, or multi-hit builds.",
+  },
+  {
+    priority: "B",
+    upgrade: "Area",
+    knownCost: "Check shop; build-dependent",
+    why: "Makes AOE and zone effects cover more enemies.",
+    buyWhen: "Buy after you are using Axe, Garlic, Santa Water, La Borra, Death Spiral, or other AOE plans.",
+  },
+  {
+    priority: "C early / A later",
+    upgrade: "Revival",
+    knownCost: "About 4,091 Gold for Rank 1",
+    why: "A second life is powerful, but the early price competes with several cheaper upgrades.",
+    buyWhen: "Save for it once cheap survival, Reroll, and damage upgrades are covered.",
+  },
+];
+
+export const firstPathColumns = [
+  { key: "goal", label: "Your Goal" },
+  { key: "purchasePath", label: "Recommended First Path" },
+  { key: "why", label: "Why" },
+];
+
+export const firstPathRows = [
+  {
+    goal: "First clear / stop dying",
+    purchasePath: "Reroll -> Recovery -> Max Health -> Might -> Armor",
+    why: "This gives cheap consistency, healing, HP, damage, and fewer failed floors.",
+  },
+  {
+    goal: "Faster Gold farming",
+    purchasePath: "Greed -> Might -> Recovery -> Reroll -> Growth",
+    why: "Greed pays back over repeated runs, but only if you are already stable enough to farm.",
+  },
+  {
+    goal: "Combo-heavy builds",
+    purchasePath: "Reroll -> Might -> Cooldown -> Magnet -> Amount",
+    why: "You need good card choices, enough Mana, more draw, and a stronger payoff.",
+  },
+  {
+    goal: "Evolution forcing",
+    purchasePath: "Reroll -> Skip -> Growth -> Might -> Cooldown",
+    why: "Reroll and Skip help find recipe pieces while avoiding dead cards.",
+  },
+  {
+    goal: "Crawler synergy",
+    purchasePath: "Duration -> Reroll -> Might -> Crawler Slot -> Cooldown",
+    why: "Duration and extra slots make Crawler effects matter more often.",
+  },
+];
+
+export const arcanaColumns = [
+  { key: "arcana", label: "Arcana" },
+  { key: "whatItDoes", label: "Why It Matters" },
+  { key: "pairsWith", label: "Good Early Pairing" },
+];
+
+export const arcanaRows = [
+  {
+    arcana: "Over the Top",
+    whatItDoes: "Returns a Crawler to the top of your deck after it leaves.",
+    pairsWith: "Gennaro for repeated red-card damage, or Imelda for repeated XP gain.",
+  },
+  {
+    arcana: "Your Shield My Liege",
+    whatItDoes: "Lets Armor persist between turns.",
+    pairsWith: "Armor-heavy runs, defensive decks, and Armor Strike-style gem plans.",
+  },
+  {
+    arcana: "Sharp Mind",
+    whatItDoes: "Carries unused Mana into the next turn, up to its cap.",
+    pairsWith: "Cooldown, Tome cards, purple-card mana engines, and expensive payoff cards.",
+  },
+  {
+    arcana: "Chain Link",
+    whatItDoes: "Helps long-chain combo decks by preserving combo progress when available.",
+    pairsWith: "Draw-heavy decks, Wild cards, and 0 -> 1 -> 2 -> 3 combo plans.",
+  },
+];
+
+export const fieldEconomyColumns = [
+  { key: "source", label: "Source" },
+  { key: "whatItGives", label: "What It Gives" },
+  { key: "bestUse", label: "Best Use" },
+];
+
+export const fieldEconomyRows = [
+  {
+    source: "Torches / candles / braziers",
+    whatItGives: "Coins and occasional Floor Chicken drops",
+    bestUse: "Break everything you can safely reach. This is free economy and healing potential.",
+  },
+  {
+    source: "Floor Chicken",
+    whatItGives: "Usually restores 10 HP",
+    bestUse: "Leave it on the ground if you are healthy, then return after the boss or before descending.",
+  },
+  {
+    source: "Cash Out",
+    whatItGives: "Coins instead of taking a bad card or weak reward",
+    bestUse: "Use when every reward would bloat your deck or ruin your current plan.",
+  },
+  {
+    source: "Bing Upgrade machine",
+    whatItGives: "Burns a card for a permanent in-run stat bonus",
+    bestUse: "Use carefully. Do not burn your last 0-cost starter or a key evolution piece.",
+  },
+  {
+    source: "Chests and reward stations",
+    whatItGives: "Cards, gems, coins, or evolution opportunities",
+    bestUse: "Delay only if you are safe and close to a key evolution. Otherwise take the power.",
+  },
+];
+
+export const buildUpgradeColumns = [
+  { key: "build", label: "Build Type" },
+  { key: "bestUpgrades", label: "Best Upgrades" },
+  { key: "example", label: "Example" },
+];
+
+export const buildUpgradeRows = [
+  {
+    build: "Gennaro red-card damage",
+    bestUpgrades: "Might, Duration, Reroll, Over the Top, Cooldown",
+    example: "Gennaro benefits from repeated red-card triggers and low-cost spam.",
+  },
+  {
+    build: "Imelda XP / scaling",
+    bestUpgrades: "Duration, Growth, Reroll, Over the Top, Magnet",
+    example: "Imelda gets more value when her Crawler card and XP plan loop often.",
+  },
+  {
+    build: "Pasqualina hand / area plan",
+    bestUpgrades: "Duration, Area, Magnet, Cooldown, Reroll",
+    example: "Pasqualina wants more hand value and better access to purple-card sequences.",
+  },
+  {
+    build: "Arca mana combo",
+    bestUpgrades: "Cooldown, Reroll, Magnet, Might, Amount",
+    example: "Arca-style mana builds want enough Mana to cash out longer combo chains.",
+  },
+  {
+    build: "Poe / Garlic sustain",
+    bestUpgrades: "Recovery, Area, Max Health, Duration, Might",
+    example: "Poe-style sustain wants survivability plus enough area to control pressure.",
+  },
+  {
+    build: "Evolution forcing",
+    bestUpgrades: "Reroll, Skip, Growth, Might, Cooldown",
+    example: "Recipe hunting needs clean reward choices and enough power to survive while waiting.",
+  },
+];
+
+export const avoidColumns = [
+  { key: "trap", label: "Trap" },
+  { key: "whyToAvoid", label: "Why To Avoid It Early" },
+  { key: "whenItBecomesGood", label: "When It Becomes Good" },
+];
+
+export const avoidRows = [
+  {
+    trap: "Early Blacksmith slots",
+    whyToAvoid: "A single basic slot can start around 500 Gold and scale into the thousands. That Gold is usually better spent on Power-Ups early.",
+    whenItBecomesGood: "After Greed, Might, Reroll, Recovery, and your economy are stable.",
+  },
+  {
+    trap: "Burning 0-cost starters at Bing machines",
+    whyToAvoid: "0-cost cards start your combo chain. Removing too many makes every hand clunkier.",
+    whenItBecomesGood: "Only burn extras after you still have enough starters for 0 -> 1 -> 2 turns.",
+  },
+  {
+    trap: "Burning evolution pieces",
+    whyToAvoid: "A permanent stat is not worth losing a recipe you are about to complete.",
+    whenItBecomesGood: "Only if you have abandoned that evolution plan.",
+  },
+  {
+    trap: "Curse too early",
+    whyToAvoid: "It makes runs harder before you have enough damage and survivability.",
+    whenItBecomesGood: "Later for challenge clears, farming, or specific unlock conditions.",
+  },
+  {
+    trap: "Too much Growth with no Reroll / Skip",
+    whyToAvoid: "More level-ups can mean more deck clutter if you cannot reject bad picks.",
+    whenItBecomesGood: "Once you can reroll, skip, and draft toward a clear plan.",
+  },
+  {
+    trap: "Buying characters before core Power-Ups",
+    whyToAvoid: "A new Crawler does not fix weak account stats by itself.",
+    whenItBecomesGood: "When the character gives a specific Crawler effect or party synergy you need.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Buying Greed while still dying early",
+    whyItHurts: "More coin gain does not matter if the run ends before you collect much.",
+    betterPlay: "Buy Recovery, Max Health, Might, or Armor first.",
+  },
+  {
+    mistake: "Ignoring Reroll because it is not damage",
+    whyItHurts: "Bad rewards create bad decks, failed evolutions, and weak boss turns.",
+    betterPlay: "Buy Reroll Rank 1 early because it is cheap and useful.",
+  },
+  {
+    mistake: "Treating Arcana as optional flavor",
+    whyItHurts: "Arcana can reshape your whole build and may be stronger than another small stat rank.",
+    betterPlay: "Unlock the Fortune Teller and test Over the Top, Sharp Mind, and Your Shield My Liege.",
+  },
+  {
+    mistake: "Spending early Gold at Blacksmith",
+    whyItHurts: "Card slots are powerful later, but early Power-Ups improve every run immediately.",
+    betterPlay: "Delay Blacksmith until your economy and base stats are stable.",
+  },
+  {
+    mistake: "Eating Floor Chicken at full or near-full HP",
+    whyItHurts: "You waste free healing that could save you after a boss or elite.",
+    betterPlay: "Leave it on the floor and return when you actually need HP.",
+  },
+  {
+    mistake: "Never refunding",
+    whyItHurts: "You stay locked into upgrades that no longer match your goal.",
+    betterPlay: "Refund when switching between first clears, farming, combo builds, and evolution forcing.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best early upgrades in Vampire Crawlers are Reroll Rank 1, Recovery Rank 1, Might, Max Health, Duration, and then Greed if you can already farm safely.**
+
+A safe first-clear route is:
+
+```text
+Reroll -> Recovery -> Max Health -> Might -> Armor
+```
+
+A faster farming route is:
+
+```text
+Greed -> Might -> Recovery -> Reroll -> Growth
+```
+
+A combo-heavy route is:
+
+```text
+Reroll -> Might -> Cooldown -> Magnet -> Amount
+```
+
+The two most important early prices are:
+
+- **Reroll Rank 1:** 250 coins
+- **Recovery Rank 1:** 500 coins
+
+Do not stop at the Power-Up shop, though. Good progression also means unlocking Arcana, saving Floor Chicken until you need it, using Cash Out instead of taking bad cards, avoiding early Blacksmith overspending, and not burning your last 0-cost starter at a blue Bing Upgrade machine.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/vampire-crawlers/best-early-upgrades.webp"
+    alt="The Vampire Crawlers Power-Ups shop showing early permanent upgrades."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early Power-Ups matter because they apply across future runs, characters, combo builds, and evolution routes.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="early-upgrades-at-a-glance">
+  Early upgrades at a glance
+</h2>
+
+<GuideDataTable title="" rows={upgradeSystemRows} />
+
+---
+
+<h2 id="how-the-power-up-shop-works">
+  How the Power-Up shop works
+</h2>
+
+The Power-Up shop is the main permanent stat system in Vampire Crawlers.
+
+Cards, gems, and evolution rewards are temporary. Power-Ups are different because they carry into future runs and make every character stronger.
+
+The best early question is not:
+
+```text
+What is the strongest upgrade?
+```
+
+It is:
+
+```text
+What problem is ending my runs right now?
+```
+
+If you are dying, buy survivability.
+
+If you are surviving but killing too slowly, buy damage.
+
+If your deck is messy, buy Reroll or Skip.
+
+If you are stable and farming, buy Greed.
+
+The shop also has a refund system, so do not treat early purchases like permanent mistakes. Your first-clear setup, farming setup, combo setup, and evolution-forcing setup can all be different.
+
+<GuideCallout title="Best shop rule">
+Use refunds as part of progression.
+
+Buy what solves the current wall, then move Gold around when your goal changes.
+</GuideCallout>
+
+---
+
+<h2 id="best-early-upgrades-ranked-with-costs">
+  Best early upgrades ranked with costs
+</h2>
+
+This ranking is for early progression and first stable clears.
+
+Costs can scale as you buy more upgrades, and patches may adjust numbers, so always confirm in your own shop. The key early benchmarks are still useful: **Reroll Rank 1 is cheap**, **Recovery Rank 1 is affordable**, and mid-game upgrades like **Cooldown**, **Magnet**, **Crawler Slot**, and **Revival** cost much more.
+
+<GuideTable
+  caption="Best early Vampire Crawlers upgrades, known early costs, and when to buy them."
+  columns={earlyUpgradeColumns}
+  rows={earlyUpgradeRows}
+/>
+
+The most important change from a basic priority list is **Cooldown**.
+
+Cooldown is not just a late stat. In Vampire Crawlers, it grants **+1 Mana per rank**, which makes it one of the strongest upgrades for combo builds once you can afford it. The reason it is not a first purchase is price, not power.
+
+---
+
+<h2 id="best-first-purchase-paths">
+  Best first purchase paths
+</h2>
+
+Pick your route based on your goal.
+
+<GuideTable
+  caption="Best Vampire Crawlers first upgrade paths by progression goal."
+  columns={firstPathColumns}
+  rows={firstPathRows}
+/>
+
+If you are unsure, use the first-clear route:
+
+```text
+Reroll -> Recovery -> Max Health -> Might -> Armor
+```
+
+This gives you cheap consistency, healing, health, and damage.
+
+Once you can clear early floors reliably, refund into a greedier farming setup:
+
+```text
+Greed -> Might -> Recovery -> Reroll -> Growth
+```
+
+---
+
+<h2 id="recovery-vs-greed-what-should-you-buy-first">
+  Recovery vs Greed: what should you buy first?
+</h2>
+
+This is the biggest early upgrade debate because both answers can be correct.
+
+### Buy Recovery first if you are dying
+
+Recovery is best when runs end because of chip damage across long floors.
+
+Buy Recovery first if:
+
+- you reach bosses at low HP
+- you are still learning enemy intent
+- awkward hands make you take repeated hits
+- Floor Chicken drops are not enough
+- you want the safest first-clear route
+
+### Buy Greed first if you are already stable
+
+Greed is an economy upgrade. It does not help you win the current fight, but it can accelerate every future purchase.
+
+Buy Greed first if:
+
+- you already clear early floors
+- you are farming easier maps
+- your deck decisions are consistent
+- you can use Cash Out and map pickups well
+- you are comfortable refunding later
+
+<GuideCallout title="Best Recovery vs Greed rule">
+If your problem is dying, buy Recovery.
+
+If your problem is slow account growth after stable clears, buy Greed.
+</GuideCallout>
+
+---
+
+<h2 id="cooldown-magnet-and-crawler-slot">
+  Cooldown, Magnet, and Crawler Slot
+</h2>
+
+These are not always your first upgrades, but they are some of the biggest mid-game power spikes.
+
+### Cooldown
+
+Cooldown gives **+1 Mana per rank**.
+
+That means it directly changes your turn structure. More starting Mana lets you play longer chains earlier:
+
+```text
+0-cost starter -> 1-cost bridge -> 2-cost payoff -> 3-cost finisher
+```
+
+Buy Cooldown when your hands are good but too expensive. It is especially strong for Arca-style mana builds, evolved payoff cards, and any deck that wants to play multiple setup cards before a finisher.
+
+### Magnet
+
+Magnet improves draw-related effects.
+
+Draw is a combo stat because it helps you find the next card in the chain. Once your deck has strong cards, Magnet-style draw value makes those cards show up together more often.
+
+### Crawler Slot
+
+Crawler Slot is expensive, but strategy-changing.
+
+A second or third Crawler can combine effects that a single character cannot provide alone. This matters once you care about party shells instead of only solo character strength.
+
+Do not rush Crawler Slot before you have enough unlocked Crawlers to make use of it. But once your roster is deeper, it becomes one of the most important upgrades in the game.
+
+---
+
+<h2 id="arcana-are-not-power-ups-but-they-change-upgrade-priority">
+  Arcana are not Power-Ups, but they change upgrade priority
+</h2>
+
+Arcana are a separate progression layer from the Power-Up shop.
+
+They matter enough that an upgrade guide should mention them because they can change which Power-Ups are best for your build.
+
+First, unlock the Fortune Teller by finding the **Polentír Relic** in Furious Forest. After that, you can equip Arcana from the village.
+
+<GuideTable
+  caption="Early Arcana choices that change Vampire Crawlers upgrade priority."
+  columns={arcanaColumns}
+  rows={arcanaRows}
+/>
+
+### Practical examples
+
+**Gennaro + Over the Top** wants Duration, Might, Reroll, and Cooldown because repeated Crawler access means more red-card damage and more low-cost spam.
+
+**Imelda + Over the Top** wants Duration, Growth, Reroll, and Magnet because repeated Crawler access means more XP scaling and more chances to find the right cards.
+
+**Your Shield My Liege** makes Armor much more attractive because armor can persist instead of disappearing at the end of a turn.
+
+**Sharp Mind** makes Cooldown, Tome cards, and mana support better because unused Mana can carry forward into a larger future turn.
+
+<p>If this section becomes too large later, it is worth spinning out a dedicated <Link href="/vampire-crawlers/best-arcana-guide">best Arcana guide</Link>.</p>
+
+---
+
+<h2 id="field-economy-floor-chicken-cash-out-and-bing-machines">
+  Field economy: Floor Chicken, Cash Out, and Bing machines
+</h2>
+
+Not every upgrade decision happens in the village.
+
+Some of the best early economy choices happen during a run.
+
+<GuideTable
+  caption="In-run economy and resource decisions that affect early upgrades."
+  columns={fieldEconomyColumns}
+  rows={fieldEconomyRows}
+/>
+
+### Save Floor Chicken
+
+Floor Chicken is free healing, but it is easy to waste.
+
+If you are healthy, leave it on the ground. Clear the floor, fight the boss, then return for the chicken before descending.
+
+Do not eat a chicken at full HP just because it appears.
+
+### Use Cash Out
+
+If every reward is bad, do not take a bad card.
+
+Cash Out turns a weak reward into coins. A few extra coins are often better than a card that makes your deck worse for the rest of the run.
+
+### Be careful with Bing Upgrades
+
+Blue Bing Upgrade machines can burn a card for a permanent in-run stat bonus.
+
+That sounds good, but it can wreck your deck if you burn the wrong card.
+
+The biggest warning:
+
+```text
+Do not burn your last 0-cost starter.
+```
+
+0-cost cards are the foundation of your combo chain. If you remove too many, your deck becomes full of bridges and payoffs with no reliable way to start 0 -> 1 -> 2.
+
+<GuideCallout title="Best Bing rule">
+Only burn a card if your deck still works without it.
+
+A permanent stat bonus is not worth destroying your last starter, your only bridge, or a key evolution piece.
+</GuideCallout>
+
+---
+
+<h2 id="blacksmith-is-a-late-game-investment">
+  Blacksmith is a late-game investment
+</h2>
+
+The Blacksmith is powerful, but it is a common early Gold trap.
+
+Once unlocked, the Blacksmith lets you permanently add empty Gem Sockets to discovered cards. That can eventually create extremely strong cards.
+
+The problem is cost.
+
+Adding a slot can start around **500 Gold** even for basic cards and can scale into the thousands for stronger cards. Early on, that Gold usually does more in the Power-Up shop.
+
+A slotted Magic Wand is still weak if your account has low Might, no Recovery, no Reroll, and no economy.
+
+Use this rule:
+
+```text
+Early game: Power-Ups first
+Mid game: Power-Ups + key Arcana
+Late game: Blacksmith once Gold is stable
+```
+
+Blacksmith becomes much better after your Greed and damage economy are already healthy.
+
+---
+
+<h2 id="best-upgrades-by-build-type">
+  Best upgrades by build type
+</h2>
+
+Use this table once you know what kind of run you are building.
+
+<GuideTable
+  caption="Best Vampire Crawlers upgrades by build type and Crawler example."
+  columns={buildUpgradeColumns}
+  rows={buildUpgradeRows}
+/>
+
+This is where refunds become useful.
+
+A Gennaro damage setup, an Imelda XP setup, a Poe sustain setup, and an evolution-forcing setup should not always use the same Power-Ups.
+
+---
+
+<h2 id="upgrades-and-purchases-to-avoid-early">
+  Upgrades and purchases to avoid early
+</h2>
+
+Some purchases are powerful later but bad early.
+
+<GuideTable
+  caption="Vampire Crawlers upgrades and purchases to delay early."
+  columns={avoidColumns}
+  rows={avoidRows}
+/>
+
+The important idea is not that these options are bad.
+
+The idea is that early Gold is scarce. Spend it on upgrades that help every run before buying narrow or expensive systems.
+
+---
+
+<h2 id="when-to-refund-upgrades">
+  When to refund upgrades
+</h2>
+
+Refund when your goal changes.
+
+Use this pattern:
+
+```text
+First clears: Reroll / Recovery / Max Health / Might
+Gold farming: Greed / Might / Growth / Reroll
+Combo builds: Cooldown / Magnet / Reroll / Amount
+Evolution forcing: Reroll / Skip / Growth / Might
+Crawler synergy: Duration / Crawler Slot / Cooldown
+```
+
+Refunding is useful when:
+
+- you bought Greed but cannot survive
+- you bought survival but now want to farm
+- you unlocked Cooldown and need Gold for it
+- you unlocked Fortune Teller and want Arcana synergy
+- you are chasing a specific evolution
+- you are testing a new Crawler party
+
+Do not be afraid to move Gold around.
+
+The shop is designed to let you adapt.
+
+---
+
+<h2 id="characters-vs-power-ups-what-to-buy-first">
+  Characters vs Power-Ups: what to buy first?
+</h2>
+
+New Crawlers are exciting, but Power-Ups usually make your whole account stronger.
+
+A character buy is worth it early when it gives you a clear build direction:
+
+- **Imelda** for XP and scaling
+- **Gennaro** for red-card damage and Amount-style pressure
+- **Pasqualina** for hand/area-style combo plans
+- **Arca** for mana-heavy combo turns
+- **Poe** for Garlic and sustain routes
+
+A Power-Up is worth it early when it fixes a problem every run:
+
+- dying too often
+- weak damage
+- no rerolls
+- bad card choices
+- messy decks
+- poor economy
+- not enough Mana for longer combos
+
+The safe approach is:
+
+```text
+Buy a few core Power-Ups -> unlock key Crawlers -> refund around your chosen build
+```
+
+<p>For character priority, use the <Link href="/vampire-crawlers/best-characters-for-beginners">best characters for beginners guide</Link> and the <Link href="/vampire-crawlers/all-characters-unlock-guide">all characters unlock guide</Link>.</p>
+
+---
+
+<h2 id="common-upgrade-mistakes">
+  Common upgrade mistakes
+</h2>
+
+Most early shop mistakes come from buying for a future build before fixing the current wall.
+
+<GuideTable
+  caption="Common Vampire Crawlers upgrade mistakes and how to fix them."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The fix is to be honest about why your runs are ending.
+
+If you are dying, buy survival.
+
+If your deck is bad, buy Reroll or Skip.
+
+If your turns are too expensive, buy Cooldown when you can.
+
+If you are stable, buy Greed and farm.
+
+---
+
+<h2 id="best-early-upgrade-route">
+  Best early upgrade route
+</h2>
+
+Use this if you want one practical route:
+
+```text
+Reroll Rank 1
+Recovery Rank 1
+Might Rank 1
+Max Health Rank 1
+Duration Rank 1
+Armor Rank 1
+Greed Rank 1-3 if you can farm safely
+Growth Rank 1 once Reroll / Skip is online
+Cooldown Rank 1 once you can afford it
+Magnet or Crawler Slot once your build needs them
+Amount / Area after you have real payoff cards
+Blacksmith only after your economy is stable
+```
+
+This route is conservative.
+
+It gives you better card choices, healing, damage, HP, Crawler value, then economy and combo scaling.
+
+---
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Power-Ups connect every early-game system together.
+
+Use these next:
+
+- <Link href="/vampire-crawlers/combo-guide">Combo guide</Link>
+- <Link href="/vampire-crawlers/early-evolutions">Early evolutions guide</Link>
+- <Link href="/vampire-crawlers/beginner-guide">Beginner guide</Link>
+- <Link href="/vampire-crawlers/best-characters-for-beginners">Best characters for beginners</Link>
+- <Link href="/vampire-crawlers/all-characters-unlock-guide">All characters unlock guide</Link>
+
+<GuideCallout title="Best cluster rule">
+The combo guide explains how to play better.
+
+The evolution guide explains what to build toward.
+
+This guide explains what to buy between runs and what not to waste Gold on.
+</GuideCallout>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What are the best early upgrades in Vampire Crawlers?
+
+The safest early upgrades are **Reroll**, **Recovery**, **Might**, **Max Health**, and **Duration**. If you can already clear early floors, **Greed** becomes a strong economy purchase.
+
+### What should I buy first?
+
+Buy **Reroll Rank 1** and **Recovery Rank 1** early. Reroll is cheap and improves reward choices, while Recovery helps you survive long floors.
+
+### How much does Reroll cost?
+
+Reroll Rank 1 costs **250 coins**.
+
+### How much does Recovery cost?
+
+Recovery Rank 1 costs **500 coins**.
+
+### Is Cooldown good in Vampire Crawlers?
+
+Yes. Cooldown gives **+1 Mana per rank**, making it one of the best upgrades for combo-heavy builds once you can afford it.
+
+### Is Greed worth buying early?
+
+Yes, if you can already survive. Greed is excellent for farming, but it does not help you win the current fight.
+
+### Should I unlock Arcana early?
+
+Yes. Arcana are separate from Power-Ups, but they can reshape builds. Over the Top, Your Shield My Liege, and Sharp Mind are especially important early examples.
+
+### What does Sharp Mind do?
+
+Sharp Mind lets unused Mana carry into the next turn, up to its cap. It pairs well with Cooldown, Tome cards, and expensive payoff cards.
+
+### Should I use Bing Upgrade machines?
+
+Use them carefully. Do not burn your last 0-cost starter, your only bridge, or a key evolution piece just for a stat bonus.
+
+### Should I spend Gold at the Blacksmith early?
+
+Usually no. Blacksmith slots are strong later, but early Gold usually does more in the Power-Up shop.
+
+### Should I eat Floor Chicken immediately?
+
+No, not if you are healthy. Leave Floor Chicken on the ground and return when you actually need healing.
+
+### When should I refund upgrades?
+
+Refund when your goal changes: first clear, Gold farming, combo build, evolution forcing, or Crawler synergy can all prefer different setups.
+
+### What upgrades help combo builds most?
+
+**Cooldown**, **Magnet**, **Reroll**, **Might**, **Amount**, and **Hand / Draw-style support** help combo builds most.
+
+### What upgrades help evolution builds most?
+
+**Reroll**, **Skip**, **Growth**, **Might**, **Cooldown**, and later **Area / Amount** help evolution builds most.

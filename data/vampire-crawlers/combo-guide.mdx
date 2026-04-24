@@ -1,0 +1,767 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const comboSystemRows = [
+  {
+    item: "Core rule",
+    value: "Play cards in rising mana order",
+    why: "The clean beginner chain is 0 -> 1 -> 2 -> 3. Later cards get stronger because they sit deeper in the combo.",
+  },
+  {
+    item: "Practical multiplier",
+    value: "1st card normal, then roughly 2x, 3x, 4x as the chain grows",
+    why: "A card that looks average alone can become your main damage source when you save it for the right slot.",
+  },
+  {
+    item: "Skipped numbers",
+    value: "0 -> 2 can still work, but it is weaker than 0 -> 1 -> 2",
+    why: "You keep the upward direction, but you lose one multiplier step.",
+  },
+  {
+    item: "Wild cards",
+    value: "Use them as extenders, not random bonuses",
+    why: "A Wild card is strongest when it keeps the chain alive long enough to reach a real payoff card.",
+  },
+  {
+    item: "Reverse / Easy Combo Gems",
+    value: "They bend the normal mana-order rule",
+    why: "Reverse helps step down by one cost. Easy helps a valuable card connect even when your hand order is awkward.",
+  },
+  {
+    item: "Sharp Mind",
+    value: "Bank unused mana for a better next turn",
+    why: "It changes when you should stop playing. A weak hand can become a stronger future combo if you preserve mana.",
+  },
+  {
+    item: "Play All",
+    value: "Fast, not optimal",
+    why: "Use it for easy fights. Manually sequence bosses, elites, Wildcard hands, and any turn where armor or payoff timing matters.",
+  },
+];
+
+export const comboMultiplierColumns = [
+  { key: "slot", label: "Combo Slot" },
+  { key: "example", label: "Example" },
+  { key: "effect", label: "Practical Effect" },
+  { key: "use", label: "Best Use" },
+];
+
+export const comboMultiplierRows = [
+  {
+    slot: "1st card",
+    example: "0-cost starter",
+    effect: "Normal effect",
+    use: "Start the chain with a cheap attack, armor card, or utility card.",
+  },
+  {
+    slot: "2nd card",
+    example: "1-cost bridge after 0",
+    effect: "About 2x",
+    use: "Good for a reliable damage card or early utility effect.",
+  },
+  {
+    slot: "3rd card",
+    example: "2-cost payoff after 0 -> 1",
+    effect: "About 3x",
+    use: "Best early slot for Axe, evolved weapons, or AOE damage.",
+  },
+  {
+    slot: "4th card",
+    example: "3-cost finisher after 0 -> 1 -> 2",
+    effect: "About 4x",
+    use: "Boss-killing slot if you have enough mana and draw.",
+  },
+  {
+    slot: "Long chain",
+    example: "Wild cards, draw, mana support, gems",
+    effect: "Keeps climbing",
+    use: "Late-game setup for huge evolved-card turns.",
+  },
+];
+
+export const manaOrderColumns = [
+  { key: "sequence", label: "Sequence" },
+  { key: "result", label: "Result" },
+  { key: "note", label: "Note" },
+];
+
+export const manaOrderRows = [
+  {
+    sequence: "0",
+    result: "Starts the chain",
+    note: "Use a cheap card to open the turn.",
+  },
+  {
+    sequence: "0 -> 1",
+    result: "Creates the first real combo bonus",
+    note: "Your 1-cost card becomes much more valuable here.",
+  },
+  {
+    sequence: "0 -> 1 -> 2",
+    result: "Best early damage structure",
+    note: "This is the first chain most new players should build around.",
+  },
+  {
+    sequence: "0 -> 2",
+    result: "Usually still legal, but weaker",
+    note: "Fine when you miss a 1-cost card, but it skips a multiplier step.",
+  },
+  {
+    sequence: "0 -> 1 -> 2 -> 3",
+    result: "Big finisher line",
+    note: "Best for bosses, elites, and evolved cards.",
+  },
+  {
+    sequence: "0 -> 0 / 1 -> 1",
+    result: "Usually fails to advance the chain",
+    note: "Only do this if the card itself wins, blocks, or fixes the turn.",
+  },
+  {
+    sequence: "Downward lines",
+    result: "Usually break without help",
+    note: "Use Reverse Combo Gem, Easy Combo Gem, Wild cards, or Arcana support to bend the rule.",
+  },
+];
+
+export const comboRoleColumns = [
+  { key: "role", label: "Role" },
+  { key: "job", label: "Job" },
+  { key: "examples", label: "Examples" },
+  { key: "draftingTip", label: "Drafting Tip" },
+];
+
+export const comboRoleRows = [
+  {
+    role: "Starter",
+    job: "Begin the chain cheaply",
+    examples: "Knife, Magic Wand, Whip, Armor",
+    draftingTip: "Take enough 0-cost cards to start turns, then stop overfilling this slot.",
+  },
+  {
+    role: "Bridge",
+    job: "Turn the opener into a real combo",
+    examples: "King Bible, Spinach, Empty Tome, draw cards",
+    draftingTip: "This is the most important early role because weak 1-cost access makes every hand clunky.",
+  },
+  {
+    role: "Payoff",
+    job: "Receive the big multiplier",
+    examples: "Axe, evolved weapons, strong AOE cards",
+    draftingTip: "Take these once you have enough bridges and mana to support them.",
+  },
+  {
+    role: "Extender",
+    job: "Keep the chain alive",
+    examples: "Wild cards, draw effects, Easy Combo Gem lines",
+    draftingTip: "Extenders are best after your deck already has a payoff worth reaching.",
+  },
+  {
+    role: "Support",
+    job: "Make better turns possible",
+    examples: "Mana, Hand, Draw, Amount, Might, Area",
+    draftingTip: "Support stats are not filler. They decide whether your best combo actually happens.",
+  },
+];
+
+export const advancedComboColumns = [
+  { key: "tool", label: "Tool" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "example", label: "Example" },
+  { key: "bestUse", label: "Best Use" },
+];
+
+export const advancedComboRows = [
+  {
+    tool: "Wild card",
+    whatItDoes: "Continues a chain when the next clean cost is missing",
+    example: "0 -> 1 -> W -> payoff",
+    bestUse: "Save for awkward hands, bosses, and turns where one extra step unlocks a huge card.",
+  },
+  {
+    tool: "Reverse Combo Gem",
+    whatItDoes: "Lets the gemmed card connect into a card that costs one less mana",
+    example: "1-cost card with Reverse -> 0-cost card",
+    bestUse: "Good for decks with many strong low-cost cards or hands that often draw costs backward.",
+  },
+  {
+    tool: "Easy Combo Gem",
+    whatItDoes: "Lets the gemmed card connect even when the order is not clean",
+    example: "0-cost card -> 3-cost card with Easy",
+    bestUse: "Best on evolved weapons, big AOE cards, or any payoff you always want to cash out.",
+  },
+  {
+    tool: "Sharp Mind Arcana",
+    whatItDoes: "Carries unused mana into the next turn, up to its cap",
+    example: "Skip weak plays now, then spend banked mana on a longer chain next turn",
+    bestUse: "Best with mana generation, expensive finishers, and bosses that give you time to set up.",
+  },
+  {
+    tool: "Chain Link-style effects",
+    whatItDoes: "Can preserve combo progress between turns when available",
+    example: "End a turn without fully losing the chain",
+    bestUse: "Advanced long-chain decks. Do not confuse this with Sharp Mind, which carries mana.",
+  },
+];
+
+export const beginnerComboColumns = [
+  { key: "combo", label: "Beginner Combo" },
+  { key: "whyItWorks", label: "Why It Works" },
+  { key: "whenToUse", label: "When To Use" },
+];
+
+export const beginnerComboRows = [
+  {
+    combo: "Magic Wand -> King Bible",
+    whyItWorks: "A 0-cost starter lets the 1-cost card receive the first combo bonus.",
+    whenToUse: "Early Mad Forest-style fights.",
+  },
+  {
+    combo: "Whip -> Spinach -> Axe",
+    whyItWorks: "The 0-cost card starts the chain, Spinach bridges, and Axe gets the bigger payoff slot.",
+    whenToUse: "Enemy waves or fights where AOE matters.",
+  },
+  {
+    combo: "0-cost card -> Empty Tome -> 2-cost payoff",
+    whyItWorks: "The Tome-style card helps fund the payoff instead of leaving it stranded.",
+    whenToUse: "Hands where you draw more power than your mana can spend.",
+  },
+  {
+    combo: "0-cost card -> 1-cost card -> Wild card -> payoff",
+    whyItWorks: "The Wild card repairs a missing cost and extends the chain.",
+    whenToUse: "Bosses, elites, or hands that are one step away from a huge finisher.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Taking too many 0-cost cards",
+    whyItHurts: "You can start chains, but you stop reaching meaningful payoff slots.",
+    betterPlay: "After a few starters, prioritize 1-cost bridges and 2-cost payoff cards.",
+  },
+  {
+    mistake: "Playing the strongest card first",
+    whyItHurts: "Your best card misses the multiplier that would have made it explosive.",
+    betterPlay: "Use cheap cards first, then place the strongest card later in the chain.",
+  },
+  {
+    mistake: "Using Play All in hard fights",
+    whyItHurts: "It plays quickly, not perfectly.",
+    betterPlay: "Manual sequence bosses, elites, Wildcard turns, and defensive turns.",
+  },
+  {
+    mistake: "Ignoring mana, hand, and draw",
+    whyItHurts: "You may have good cards but cannot line them up or afford them.",
+    betterPlay: "Treat Mana, Hand, and Draw as core combo stats.",
+  },
+  {
+    mistake: "Scaling after the fight is already won",
+    whyItHurts: "You spend combo slots on bonuses that will not matter.",
+    betterPlay: "Scale early in long fights. In short fights, kill the enemies.",
+  },
+  {
+    mistake: "Ignoring enemy intent",
+    whyItHurts: "A big damage line can still be wrong if you take avoidable damage.",
+    betterPlay: "Kill attackers, block, freeze, or knock back before greed.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best way to combo in Vampire Crawlers is to play cards in rising mana order: 0 -> 1 -> 2 -> 3.**
+
+Think of every card as one of four roles:
+
+- **Starter:** usually a 0-cost card that begins the chain
+- **Bridge:** usually a 1-cost card that keeps the chain clean
+- **Payoff:** usually a 2-cost or 3-cost card that receives the big multiplier
+- **Extender:** a Wild card, draw effect, Gem, or Arcana that keeps the turn alive
+
+A simple beginner rule is:
+
+**Start cheap, watch the combo counter, then spend your strongest card late.**
+
+In practical terms, a card that normally deals **48 damage** can become about **96** in the second combo slot, about **144** in the third slot, and about **192** in the fourth slot before other modifiers. That is why card order matters more than simply clicking the highest damage card first.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/vampire-crawlers/combo-guide.webp"
+    alt="A Vampire Crawlers combat hand showing a 0 to 1 to 2 mana combo sequence."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vampire Crawlers combos are built around mana order, Wild cards, draw support, combo Gems, and saving your best payoff card for the right slot.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="combo-system-at-a-glance">
+  Combo system at a glance
+</h2>
+
+<GuideDataTable title="" rows={comboSystemRows} />
+
+---
+
+<h2 id="how-combos-work-in-vampire-crawlers">
+  How combos work in Vampire Crawlers
+</h2>
+
+The core Vampire Crawlers combo rule is simple:
+
+**Play cards in rising mana order.**
+
+The clean beginner chain is:
+
+```text
+0 -> 1 -> 2 -> 3
+```
+
+When the chain grows, later cards receive larger combo value. This matters for damage, but it can also matter for armor, draw, mana gain, XP Growth, Luck, coins, Might, Area, Amount, and Crawler triggers.
+
+<GuideTable
+  caption="Vampire Crawlers combo multiplier example: why card order changes damage so much."
+  columns={comboMultiplierColumns}
+  rows={comboMultiplierRows}
+/>
+
+A practical damage example:
+
+```text
+Played alone:       48 damage
+2nd combo slot:     about 96 damage
+3rd combo slot:     about 144 damage
+4th combo slot:     about 192 damage
+```
+
+The exact number can change because of Might, Gems, Crawler effects, evolved cards, enemy conditions, and other modifiers. The lesson stays the same: **the same card can be weak when played first and powerful when played late.**
+
+To confirm the combo is working, watch the **combo counter and multiplier display on the right side of the combat UI**. If the counter climbs and the next card values increase, the chain is active. If the counter resets or values stop rising, your line probably broke.
+
+<GuideCallout title="Best beginner rule">
+Do not ask, "Which card is strongest in my hand?"
+
+Ask, "Which card should receive the biggest combo bonus this turn?"
+</GuideCallout>
+
+---
+
+<h2 id="mana-order-and-skipped-numbers">
+  Mana order and skipped numbers
+</h2>
+
+Most early combo mistakes come from misunderstanding cost order.
+
+You do not need a deck made only of 0-cost cards. You need a deck that can repeatedly make clean sequences.
+
+<GuideTable
+  caption="Vampire Crawlers mana order, skipped numbers, and broken chains."
+  columns={manaOrderColumns}
+  rows={manaOrderRows}
+/>
+
+The important detail is that **skipped numbers do not always break the combo**.
+
+For example:
+
+```text
+0 -> 2
+```
+
+This can still work because the sequence moves upward. But it is weaker than:
+
+```text
+0 -> 1 -> 2
+```
+
+because you skipped one multiplier step.
+
+The usual beginner priority is:
+
+1. use **0 -> 1** to create a basic combo
+2. build toward **0 -> 1 -> 2** for real damage
+3. use **0 -> 2** only when the hand forces it
+4. use Wild cards, Gems, or Arcana when the normal order is awkward
+
+<GuideCallout title="Best skipped-number rule">
+A skipped number is a backup plan, not the dream line.
+
+Take 0 -> 2 when you must. Build your deck so 0 -> 1 -> 2 happens more often.
+</GuideCallout>
+
+---
+
+<h2 id="the-card-role-framework">
+  The card role framework
+</h2>
+
+The fastest way to improve is to stop judging cards only by name or raw damage.
+
+Judge them by role.
+
+<GuideTable
+  caption="Vampire Crawlers combo roles: starter, bridge, payoff, extender, and support."
+  columns={comboRoleColumns}
+  rows={comboRoleRows}
+/>
+
+This framework solves a lot of draft confusion.
+
+A weak deck usually has too much of one role:
+
+- many starters, but no payoff
+- expensive payoffs, but no bridges
+- Wild cards, but nothing worth extending into
+- draw, but not enough mana
+- mana, but no high-value card to spend it on
+
+A strong deck has a job for each card.
+
+For most first wins, the best shape is:
+
+```text
+0-cost starter -> 1-cost bridge -> 2-cost payoff
+```
+
+That one structure is more important than memorizing every card.
+
+---
+
+<h2 id="wildcards-gems-and-arcanas">
+  Wildcards, Gems, and Arcanas
+</h2>
+
+Once you understand normal mana order, the next step is learning what changes the rule.
+
+<GuideTable
+  caption="Advanced Vampire Crawlers combo tools and how they change normal sequencing."
+  columns={advancedComboColumns}
+  rows={advancedComboRows}
+/>
+
+### Wild cards
+
+Wild cards are best treated as **extenders**.
+
+They are strongest when they turn an awkward hand into a real payoff line:
+
+```text
+0 -> 1 -> Wild -> payoff
+```
+
+Do not take Wild cards just because they are flexible. Take them when your deck already has damage, draw, or scaling worth extending into.
+
+### Reverse Combo Gem
+
+**Reverse Combo Gem** lets the gemmed card connect into a card that costs **one less mana**.
+
+Example:
+
+```text
+1-cost card with Reverse -> 0-cost card
+```
+
+Normally, stepping down would break the flow. Reverse helps rescue hands that draw costs in the wrong order.
+
+### Easy Combo Gem
+
+**Easy Combo Gem** lets the gemmed card connect even when the normal mana order is awkward.
+
+Example:
+
+```text
+0-cost card -> 3-cost card with Easy
+```
+
+This is best on high-value cards you always want to cash out, such as evolved weapons, big AOE cards, or important draw effects.
+
+### Sharp Mind
+
+**Sharp Mind** is not a damage multiplier by itself. Its value is that it lets unused mana carry into the next turn, up to its cap.
+
+That changes your decision-making:
+
+```text
+Weak hand now + Sharp Mind = stop early and bank mana
+Strong hand later + banked mana = spend on a longer chain
+```
+
+The key distinction is:
+
+**Sharp Mind carries mana. Chain Link-style effects carry combo progress.**
+
+Do not treat them as the same effect.
+
+---
+
+<h2 id="beginner-combo-examples">
+  Beginner combo examples
+</h2>
+
+Use these patterns early. The exact card names can change, but the structure stays useful.
+
+<GuideTable
+  caption="Easy Vampire Crawlers beginner combos and when to use them."
+  columns={beginnerComboColumns}
+  rows={beginnerComboRows}
+/>
+
+The important part is not the exact card name.
+
+It is the pattern:
+
+```text
+starter -> bridge -> payoff
+```
+
+Once you learn that pattern, you can swap in different cards:
+
+- Magic Wand, Knife, Whip, or Armor can be starters
+- King Bible, Spinach, Empty Tome, or draw cards can be bridges
+- Axe, evolved weapons, and large AOE cards can be payoffs
+- Wild cards, draw, and Gems can extend the turn
+
+---
+
+<h2 id="how-to-draft-for-better-combos">
+  How to draft for better combos
+</h2>
+
+Every level-up choice should answer one question:
+
+**Does this card make my next good combo more likely?**
+
+A safe beginner drafting order is:
+
+1. **Get enough 0-cost starters.** You need cheap openers.
+2. **Add reliable 1-cost bridges.** This is where many beginner decks fail.
+3. **Add one or two 2-cost payoffs.** The deck needs something worth multiplying.
+4. **Add mana support.** A perfect hand is useless if you cannot afford it.
+5. **Add Hand and Draw.** Bigger hands and draw effects find your pieces more often.
+6. **Add Wild cards.** They become better after you already have payoff cards.
+7. **Build toward evolutions.** Evolved cards often become your best payoff slot.
+
+This is why a bigger deck is not always stronger. A 12-card deck that regularly creates 0 -> 1 -> 2 can be better than a 20-card deck that never lines up.
+
+Before taking a card, ask:
+
+- Does it fill a missing cost?
+- Does it become a payoff when played late?
+- Does it add mana, draw, or hand size?
+- Does it trigger my Crawler passive?
+- Does it help an evolution I am already building toward?
+
+If the answer is no to all of those, the card is probably filler.
+
+---
+
+<h2 id="how-to-sequence-buffs-scaling-and-defense">
+  How to sequence buffs, scaling, and defense
+</h2>
+
+Buff cards and scaling cards are powerful, but they are not always correct.
+
+The simple rule is:
+
+**If the fight ends this turn, kill. If the fight continues, scale.**
+
+For short normal fights, immediate damage usually wins. Playing Spinach, Crown, Stone Mask, or Clover-style scaling after the enemies are already dead does not help.
+
+For bosses and long fights, scaling first can be correct because the extra Might, Luck, XP Growth, coins, Amount, Area, or Duration has time to matter.
+
+Enemy intent also changes the correct order.
+
+Before playing a hand, check:
+
+- how much damage is coming in
+- whether attackers can be killed before they hit you
+- whether armor needs the combo bonus more than damage does
+- whether freeze or knockback stops the attack
+- whether the boss is shielding, walking, or attacking
+
+A damage combo is defense if it kills the attackers. If it does not, armor, freeze, knockback, or healing may deserve the better combo slot.
+
+<GuideCallout title="Best defensive rule">
+If you can kill the attackers, damage is defense.
+
+If you cannot kill them, block or control first.
+</GuideCallout>
+
+---
+
+<h2 id="play-all-button-vs-manual-play">
+  Play All button vs manual play
+</h2>
+
+The **Play All** button is useful for speed, but it is not a combo solver.
+
+Use Play All when:
+
+- the fight is already easy
+- enemy intent does not matter
+- your deck is overpowered
+- the hand has only one obvious line
+- you are farming low-risk encounters
+
+Avoid Play All when:
+
+- you need armor before enemies attack
+- you have a Wild card
+- you have Reverse or Easy Combo Gem decisions
+- you need a payoff card at the end of the chain
+- you are fighting a boss or elite
+- your hand has multiple possible lines
+
+Based on current player testing, Play All fires through the current hand quickly and skips cards it cannot play. It does **not** rebuild the hand into the best 0 -> 1 -> 2 -> 3 sequence.
+
+Use Play All for speed.
+
+Use manual sequencing for wins.
+
+---
+
+<h2 id="normal-fights-vs-boss-fights">
+  Normal fights vs boss fights
+</h2>
+
+Normal fights and boss fights should not be played the same way.
+
+### Normal fights
+
+In normal fights, the best line is usually the shortest winning line:
+
+- kill attackers
+- block if needed
+- avoid over-scaling
+- do not waste Wild cards if the fight is already won
+
+If one card clears the room, play the one card.
+
+### Boss fights
+
+Boss fights reward setup:
+
+- play scaling earlier
+- bank mana with Sharp Mind when the current hand is weak
+- extend with Wild cards when the payoff matters
+- save big evolved cards for better multiplier slots
+- use armor or control before major attacks
+
+A normal fight is about efficiency.
+
+A boss fight is about building the biggest safe turn.
+
+---
+
+<h2 id="common-combo-mistakes">
+  Common combo mistakes
+</h2>
+
+Most bad turns come from one of these mistakes.
+
+<GuideTable
+  caption="Common Vampire Crawlers combo mistakes and how to fix them."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+The fastest way to improve is to slow down only when it matters.
+
+You do not need to solve every tiny room perfectly. But when a boss, elite, dangerous enemy wave, Wild card, or evolved payoff appears, build the sequence manually.
+
+---
+
+<h2 id="how-to-know-if-your-combo-build-is-working">
+  How to know if your combo build is working
+</h2>
+
+Your combo build is working if:
+
+- you regularly create 0 -> 1 -> 2 turns
+- your best payoff card is played late
+- you can afford your good hands
+- Draw and Hand help you find missing pieces
+- Wild cards extend meaningful turns
+- evolved weapons are easy to reach
+- attackers die before they hit you
+- bosses die to one or two big payoff turns
+
+Your build is not working if:
+
+- you draw good cards but cannot afford them
+- you have mana but nothing worth spending it on
+- you have too many 0-cost cards
+- you have expensive cards but no bridge
+- Play All performs better than your manual play
+- you keep taking damage while holding strong cards
+
+When that happens, do not just add more damage.
+
+Fix the broken part of the engine: curve, mana, draw, hand size, payoff access, or defense.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do combos work in Vampire Crawlers?
+
+Combos work by playing cards in rising mana order. The clean beginner sequence is **0 -> 1 -> 2 -> 3**. Later cards receive stronger combo value, so your best card should often be played near the end of the chain.
+
+### What is the best beginner combo?
+
+The best beginner structure is **0-cost starter -> 1-cost bridge -> 2-cost payoff**. The exact card names can change, but that structure stays useful for early runs.
+
+### Do skipped numbers break combos?
+
+Not always. **0 -> 2** can still work because it moves upward, but it skips one multiplier step and is weaker than **0 -> 1 -> 2**.
+
+### Where is the combo counter?
+
+Watch the combo counter and multiplier display on the right side of the combat UI. If it climbs and card values increase, your chain is working.
+
+### Are Wild cards good?
+
+Yes, if they extend a meaningful turn. Wild cards are weaker when your deck has no payoff card worth reaching.
+
+### What does Reverse Combo Gem do?
+
+Reverse Combo Gem lets the gemmed card connect into a card that costs one less mana. It helps rescue hands where your costs appear in the wrong order.
+
+### What does Easy Combo Gem do?
+
+Easy Combo Gem lets the gemmed card connect even when the normal mana order is awkward. It is best on important payoff cards.
+
+### Is Sharp Mind good for combo builds?
+
+Yes. Sharp Mind lets unused mana carry into the next turn, making it easier to afford longer chains. It carries mana, not combo progress.
+
+### Should I use Play All?
+
+Use Play All for easy fights and farming. Use manual play for bosses, elites, Wildcard hands, defensive turns, and any turn with multiple possible combo lines.
+
+### What stats help combos most?
+
+The best support stats are **Mana**, **Hand**, and **Draw**. Damage stats like **Might**, **Amount**, and **Area** make the payoff stronger, but support stats help you reach that payoff consistently.
+
+### Why does my deck feel weak even with many cards?
+
+Your deck probably has a curve problem. You may have too many starters, too many expensive cards, not enough bridges, not enough mana, or not enough draw.
+
+### Do evolved weapons help combo builds?
+
+Yes. Evolved weapons are often excellent payoff cards because they compress more power into fewer cards and make your best turns easier to reach.

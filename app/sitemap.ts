@@ -57,6 +57,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
      { url: `${base}/vampire-crawlers/all-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/vampire-crawlers/best-characters-for-beginners`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/vampire-crawlers/secret-characters-how-to-unlock`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/vampire-crawlers/best-early-upgrades`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/vampire-crawlers/combo-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/vampire-crawlers/early-evolutions`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
      // ⬇️ 把 4 篇文章补上
      { url: `${base}/airborne-empire/jet-engine-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

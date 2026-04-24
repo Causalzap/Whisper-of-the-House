@@ -167,17 +167,21 @@ export default function Page() {
               label: "Vampire Crawlers Guide Hub",
             },
             {
-              href: "/vampire-crawlers-all-characters-unlock-guide",
+              href: "/vampire-crawlers/all-characters-unlock-guide",
               label: "Vampire Crawlers All Characters Unlock Guide",
             },
             {
-              href: "/vampire-crawlers-combo-guide",
+              href: "/vampire-crawlers/combo-guide",
               label: "How Combos and Wildcards Work in Vampire Crawlers",
             },
             {
-              href: "/vampire-crawlers-best-early-upgrades",
+              href: "/vampire-crawlers/best-early-upgrades",
               label: "Best Early Upgrades in Vampire Crawlers",
             },
+            {
+                href: "/vampire-crawlers/secret-characters-how-to-unlock",
+                label: "How to Unlock Secret Characters",
+              },
           ]}
         >
           <BestCharactersForBeginnersContent />

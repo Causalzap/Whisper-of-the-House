@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/vampire-crawlers`;
 
 export const metadata: Metadata = {
-  title: "Vampire Crawlers Guide Hub: Best Beginner, Character Unlock, and Secret Character Guides",
+  title: "Vampire Crawlers Guide Hub: Upgrades, Combos & Unlocks",
   description:
-    "Main Vampire Crawlers guide hub: start here for the best beginner character guide, the full character unlock guide, and the secret characters guide.",
+    "Start here for Vampire Crawlers guides on best early upgrades, combos, evolutions, beginner characters, all character unlocks, and secret characters.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,21 +38,20 @@ const jsonLd = {
       ],
     },
     {
-      "@type": "Article",
-      "@id": `${pageUrl}#article`,
+      "@type": "CollectionPage",
+      "@id": `${pageUrl}#collection`,
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": pageUrl,
       },
+      name: "Vampire Crawlers Guide Hub",
       headline:
-        "Vampire Crawlers Guide Hub: Best Beginner, Character Unlock, and Secret Character Guides",
+        "Vampire Crawlers Guide Hub: Upgrades, Combos, Evolutions, Characters, and Secret Unlocks",
       description:
-        "This is the main Vampire Crawlers guide hub. Start here for the best beginner character guide, the full character unlock guide, and the launch-window secret characters guide.",
-      image: [
-        `${siteUrl}/images/vampire-crawlers/vampire-crawlers-cover.webp`,
-      ],
+        "This is the main Vampire Crawlers guide hub. Start here for guides on early Power-Ups, combo sequencing, weapon evolutions, beginner characters, full roster unlocks, and secret characters.",
+      image: [`${siteUrl}/images/vampire-crawlers/vampire-crawlers-cover.webp`],
       inLanguage: "en",
-      dateModified: "2026-04-23",
+      dateModified: "2026-04-24",
       about: [
         {
           "@type": "VideoGame",
@@ -60,17 +59,67 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Character Unlocks",
+          name: "Power-Ups",
         },
         {
           "@type": "Thing",
-          name: "Best Beginner Characters",
+          name: "Combo System",
+        },
+        {
+          "@type": "Thing",
+          name: "Weapon Evolutions",
+        },
+        {
+          "@type": "Thing",
+          name: "Character Unlocks",
         },
         {
           "@type": "Thing",
           name: "Secret Characters",
         },
       ],
+      hasPart: {
+        "@type": "ItemList",
+        "@id": `${pageUrl}#guide-list`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Vampire Crawlers Best Early Upgrades",
+            url: `${pageUrl}/best-early-upgrades`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Vampire Crawlers Combo Guide",
+            url: `${pageUrl}/combo-guide`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Vampire Crawlers Early Evolutions Guide",
+            url: `${pageUrl}/early-evolutions-guide`,
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: "Vampire Crawlers Best Characters for Beginners",
+            url: `${pageUrl}/best-characters-for-beginners`,
+          },
+          {
+            "@type": "ListItem",
+            position: 5,
+            name: "Vampire Crawlers All Characters Unlock Guide",
+            url: `${pageUrl}/all-characters-unlock-guide`,
+          },
+          {
+            "@type": "ListItem",
+            position: 6,
+            name: "Vampire Crawlers Secret Characters How to Unlock",
+            url: `${pageUrl}/secret-characters-how-to-unlock`,
+          },
+        ],
+      },
       isPartOf: {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,
@@ -100,33 +149,37 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Vampire Crawlers Guide Hub: Best Beginner, Character Unlock, and Secret Character Guides"
-          description="Start here for the main Vampire Crawlers coverage: best characters for beginners, all characters unlock guide, and the launch-window secret characters guide."
+          title="Vampire Crawlers Guide Hub: Upgrades, Combos, Evolutions, Characters, and Secret Unlocks"
+          description="Start here for the main Vampire Crawlers guide cluster: best early upgrades, combo sequencing, early weapon evolutions, beginner characters, full roster unlocks, and secret characters."
           gameTitle="Vampire Crawlers"
           gameHref="/vampire-crawlers"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="April 23, 2026"
+          updatedAt="April 24, 2026"
           toc={[
             {
-              id: "what-this-vampire-crawlers-guide-hub-covers",
+              id: "vampire-crawlers-guide-map",
+              label: "Guide map",
+            },
+            {
+              id: "what-this-hub-covers",
               label: "What this hub covers",
             },
             {
-              id: "start-here-best-vampire-crawlers-guides",
-              label: "Best guides",
+              id: "start-here-by-player-goal",
+              label: "Start by goal",
             },
             {
               id: "best-reading-order-for-new-players",
-              label: "Best reading order",
+              label: "Reading order",
             },
             {
-              id: "what-to-read-if-you-care-about-specific-things",
-              label: "What to read for specific goals",
+              id: "if-you-are-stuck",
+              label: "If you are stuck",
             },
             {
-              id: "current-vampire-crawlers-guide-coverage",
-              label: "Current guide coverage",
+              id: "how-the-current-guide-cluster-fits-together",
+              label: "Cluster structure",
             },
             {
               id: "faq",
@@ -134,18 +187,30 @@ export default function Page() {
             },
           ]}
           relatedLinks={[
-            {
-              href: "/vampire-crawlers-best-characters-for-beginners",
-              label: "Vampire Crawlers Best Characters for Beginners",
-            },
-            {
-              href: "/vampire-crawlers-all-characters-unlock-guide",
-              label: "Vampire Crawlers All Characters Unlock Guide",
-            },
-            {
-              href: "/vampire-crawlers-secret-characters-how-to-unlock",
-              label: "Vampire Crawlers Secret Characters How to Unlock",
-            },
+              {
+                href: "/vampire-crawlers/combo-guide",
+                label: "Vampire Crawlers Combo Guide",
+              },
+              {
+                href: "/vampire-crawlers/best-characters-for-beginners",
+                label: "Best Characters for Beginners",
+              },
+              {
+                href: "/vampire-crawlers/best-early-upgrades",
+                label: "Best Early Upgrades in Vampire Crawlers",
+              },
+              {
+                href: "/vampire-crawlers/all-characters-unlock-guide",
+                label: "All Characters Unlock Guide",
+              },
+              {
+                href: "/vampire-crawlers/early-evolutions",
+                label: "Early Evolutions Guide",
+              },
+              {
+                href: "/vampire-crawlers/secret-characters-how-to-unlock",
+                label: "How to Unlock Secret Characters",
+              },
           ]}
         >
           <VampireCrawlersHubContent />
