@@ -43,10 +43,10 @@ const Header = () => {
               <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out w-72">
                 <div className="bg-purple-900/95 backdrop-blur-md border border-purple-700/50 rounded-xl shadow-xl overflow-hidden flex flex-col p-1">
                   <ActiveLink 
-                    href="/i-am-jesus-christ" 
+                    href="/holovillage-our-cozy-days" 
                     className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors font-medium"
                   >
-                    I Am Jesus Christ
+                    holoVillage: Our Cozy Days
                   </ActiveLink>
 
                   <ActiveLink 
@@ -194,6 +194,14 @@ const Header = () => {
                   >
                     Abnormal Points - Whisper of the house
                   </ActiveLink>
+
+                  <ActiveLink 
+                    href="/i-am-jesus-christ" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors font-medium"
+                  >
+                    I Am Jesus Christ
+                  </ActiveLink>
+
                 </div>
               </div>
             </li>

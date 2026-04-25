@@ -1,0 +1,698 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const moneySystemRows = [
+  {
+    item: "Best early money loop",
+    value: "Gather -> cook or craft -> sell through the right store",
+    why: "Raw materials are useful, but processed items and store sales become the stronger early economy once shops unlock.",
+  },
+  {
+    item: "First store choice",
+    value: "Restaurant for food and cooked dishes, Smitty for equipment",
+    why: "Both stores matter. The better first choice depends on whether you are already cooking often or crafting equipment often.",
+  },
+  {
+    item: "Store setup",
+    value: "Register, shelving, stock, and a sales clerk",
+    why: "A store is not just a building. It needs goods and a villager assigned to run sales.",
+  },
+  {
+    item: "Restaurant value",
+    value: "Cooked dishes sell for more than raw ingredients and can also give buffs",
+    why: "Fish, crops, and meat become more flexible when turned into food instead of sold immediately.",
+  },
+  {
+    item: "Smitty value",
+    value: "Smelt, craft, enhance, and sell equipment",
+    why: "Weapons, tools, and gear can be more valuable than raw ore, but enhanced gear is often better kept for personal use.",
+  },
+  {
+    item: "Villager jobs",
+    value: "Use villagers to support gathering, farming, fishing, or shopkeeping",
+    why: "Your village economy gets stronger once villagers start feeding materials into your shop loop.",
+  },
+  {
+    item: "Early mistake",
+    value: "Selling everything too early",
+    why: "Some fish, ores, broken weapons, crops, and monster drops may be better used for cooking, crafting, upgrades, or store stock.",
+  },
+];
+
+export const storeChoiceColumns = [
+  { key: "store", label: "Store" },
+  { key: "bestFor", label: "Best For" },
+  { key: "mainInputs", label: "Main Inputs" },
+  { key: "earlyAdvice", label: "Early Advice" },
+];
+
+export const storeChoiceRows = [
+  {
+    store: "Restaurant",
+    bestFor: "Turning food materials into cooked dishes",
+    mainInputs: "Fish, crops, meat, eggs, milk, and other ingredients",
+    earlyAdvice: "Choose this first if you are fishing, farming, and cooking often. It is the cleaner early money route.",
+  },
+  {
+    store: "Smitty",
+    bestFor: "Selling and improving equipment",
+    mainInputs: "Ore, ingots, broken weapons, enhancement materials, and crafted gear",
+    earlyAdvice: "Choose this first if you are mining a lot and already crafting extra weapons or armor.",
+  },
+];
+
+export const shopSetupColumns = [
+  { key: "part", label: "Shop Part" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "tip", label: "Early Tip" },
+];
+
+export const shopSetupRows = [
+  {
+    part: "Register",
+    whatItDoes: "Lets the store operate as a selling space.",
+    tip: "Set this up before worrying about perfect layout.",
+  },
+  {
+    part: "Shelving",
+    whatItDoes: "Holds the goods you want to sell.",
+    tip: "Stock items you can replace easily, not rare upgrade materials.",
+  },
+  {
+    part: "Stock",
+    whatItDoes: "The actual items placed for sale.",
+    tip: "Use cooked dishes, crafted gear, or surplus goods depending on the store.",
+  },
+  {
+    part: "Sales clerk",
+    whatItDoes: "A villager assigned to run the store.",
+    tip: "Do not forget this step. A store needs someone working the shift.",
+  },
+];
+
+export const moneyLoopColumns = [
+  { key: "loop", label: "Money Loop" },
+  { key: "howItWorks", label: "How It Works" },
+  { key: "whenToUse", label: "When To Use" },
+];
+
+export const moneyLoopRows = [
+  {
+    loop: "Fish -> Cook -> Sell",
+    howItWorks: "Catch fish, cook simple dishes such as sashimi-style recipes when available, then sell the cooked food.",
+    whenToUse: "Best when you already have reliable fishing spots and spare fish.",
+  },
+  {
+    loop: "Crops -> Cook -> Sell",
+    howItWorks: "Grow crops, combine them into food, and sell the dishes instead of dumping every crop raw.",
+    whenToUse: "Best after your farming routine is stable and rainy days save watering time.",
+  },
+  {
+    loop: "Ore -> Gear -> Sell",
+    howItWorks: "Mine ore, smelt materials, craft extra weapons or gear, then sell through the Smitty.",
+    whenToUse: "Best if you are spending a lot of time in caves and have surplus materials.",
+  },
+  {
+    loop: "Monster Drops -> Craft/Cook -> Sell",
+    howItWorks: "Use drops such as meat, broken weapons, or special materials in recipes and crafting before selling.",
+    whenToUse: "Best after early combat becomes safe and repeatable.",
+  },
+];
+
+export const sellingDecisionColumns = [
+  { key: "itemType", label: "Item Type" },
+  { key: "sellEarly", label: "Sell Early?" },
+  { key: "why", label: "Why" },
+];
+
+export const sellingDecisionRows = [
+  {
+    itemType: "Trash items",
+    sellEarly: "Usually yes",
+    why: "These are often safe early sales unless a quest later asks for them.",
+  },
+  {
+    itemType: "Small fish",
+    sellEarly: "Sometimes",
+    why: "They can be sold, cooked, or used as bait. Keep a few if you are still fishing.",
+  },
+  {
+    itemType: "Koi, catfish, and better fish",
+    sellEarly: "Not always",
+    why: "Better fish may be worth cooking or saving for quests instead of selling immediately.",
+  },
+  {
+    itemType: "Crops",
+    sellEarly: "Sometimes",
+    why: "Surplus crops are fine to sell, but some are better used in dishes or job progress.",
+  },
+  {
+    itemType: "Ore and ingots",
+    sellEarly: "Be careful",
+    why: "You need them for tools, gear, upgrades, and Smitty crafting.",
+  },
+  {
+    itemType: "Broken weapons and staffs",
+    sellEarly: "Usually no",
+    why: "They can matter for equipment crafting, so avoid dumping them before checking recipes.",
+  },
+  {
+    itemType: "Cooked dishes",
+    sellEarly: "Often yes",
+    why: "Cooked food can be a strong money source, but keep some buff food for adventuring.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Opening a store with no stock",
+    whyItHurts: "A shop building alone does not make money.",
+    betterPlay: "Prepare cooked dishes, crafted gear, or surplus goods before opening day.",
+  },
+  {
+    mistake: "Forgetting the sales clerk",
+    whyItHurts: "Stores need a villager assigned to run sales.",
+    betterPlay: "Assign a villager to shopkeeping after setting up the register and shelves.",
+  },
+  {
+    mistake: "Selling every fish immediately",
+    whyItHurts: "Fish can also be bait, cooked food, or quest progress.",
+    betterPlay: "Sell only your surplus and keep a small reserve.",
+  },
+  {
+    mistake: "Using rare materials for low-value sales",
+    whyItHurts: "Some materials are better spent on tools, armor, weapons, or abilities.",
+    betterPlay: "Use common materials for money and save rare drops until recipes are clear.",
+  },
+  {
+    mistake: "Enhancing gear just to sell it",
+    whyItHurts: "Enhancement costs can be high, and enhanced gear is often better for personal use.",
+    betterPlay: "Sell basic crafted gear first; keep strong enhanced gear for combat or mining.",
+  },
+  {
+    mistake: "Choosing a store without matching your routine",
+    whyItHurts: "A Restaurant is weak if you never cook; a Smitty is weak if you are not mining or crafting gear.",
+    betterPlay: "Pick the store that fits what you are already doing every day.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best early way to make money in holoVillage: Our Cozy Days is to stop selling every raw item immediately and start turning your daily routine into a store loop.**
+
+Early on, gather materials through **fishing, farming, adventuring, and mining**. Once stores unlock, choose between a **Restaurant** and a **Smitty**:
+
+- Pick **Restaurant** first if you are catching fish, growing crops, and cooking often.
+- Pick **Smitty** first if you are mining ore, crafting equipment, and replacing weapons or tools often.
+- Set up your store with a **register, shelves, stock, and a sales clerk**.
+- Use villagers to support the loop through jobs and shopkeeping.
+
+For most new players, the safest early route is:
+
+**Fish or farm -> cook food -> stock the Restaurant -> assign a sales clerk -> sell for bonus profit.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/shop-money-guide.webp"
+    alt="holoVillage Our Cozy Days store objective showing the choice between Restaurant and Smitty."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The early store objective asks you to open either a Restaurant or a Smitty. Choose based on what your village already produces.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="shop-and-money-system-at-a-glance">
+  Shop and money system at a glance
+</h2>
+
+<GuideDataTable title="" rows={moneySystemRows} />
+
+---
+
+<h2 id="how-money-works-in-holovillage">
+  How money works in holoVillage
+</h2>
+
+Early money in **holoVillage: Our Cozy Days** starts simply: gather materials, sell what you do not need, and use the money to build more facilities.
+
+That works at the start, but it is not the real economy.
+
+The stronger early-game money loop begins when you stop treating every item as raw cash and start asking:
+
+**Can this item become something more valuable first?**
+
+A fish can be sold, but it can also become bait or food. A crop can be sold, but it can also become an ingredient. Ore can be sold, but it can also become tools, weapons, armor, or Smitty stock. A monster drop can look useless until it appears in a recipe.
+
+The first big shift is:
+
+```text
+raw item -> processed item -> store sale
+```
+
+That is why the Restaurant and Smitty matter. They turn your normal daily actions into a repeatable village economy.
+
+<GuideCallout title="Best early rule">
+Do not sell everything just because your bag is full.
+
+Sell the items you can replace easily. Save materials that are used for cooking, crafting, tools, gear, quests, and store stock.
+</GuideCallout>
+
+---
+
+<h2 id="when-you-unlock-stores">
+  When you unlock stores
+</h2>
+
+After you invite villagers and start developing the village, the game pushes you toward opening a store. At this point, the village needs more funds and more traffic, so the next objective becomes building either a **Restaurant** or a **Smitty**.
+
+You do not have to treat this as a permanent one-time choice. The game makes it clear that you can build the other store later. The important decision is which one helps your current routine first.
+
+If you are mostly fishing, farming, and cooking, the Restaurant usually feels better first.
+
+If you are mostly mining, fighting, smelting, and crafting equipment, the Smitty may fit better.
+
+---
+
+<h2 id="restaurant-or-smitty-which-should-you-choose-first">
+  Restaurant or Smitty: which should you choose first?
+</h2>
+
+The first store choice should match what you are already producing.
+
+<GuideTable
+  caption="holoVillage Restaurant vs Smitty: which early store should you build first?"
+  columns={storeChoiceColumns}
+  rows={storeChoiceRows}
+/>
+
+For most early players, **Restaurant first is the safer choice**. It connects naturally with fishing, farming, and cooking. You can turn fish and crops into dishes, sell those dishes, and still keep a few food items for buffs before adventuring.
+
+The Smitty is stronger if your playstyle already leans into mining and combat. If you are constantly bringing back ore, broken weapons, staffs, and monster materials, the Smitty gives those items a clearer purpose.
+
+<GuideCallout title="Best first-store rule">
+Choose Restaurant if your inventory is full of food materials.
+
+Choose Smitty if your inventory is full of ore, gear parts, and equipment materials.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-open-a-store">
+  How to open a store
+</h2>
+
+To open a store, you need to buy the correct ticket and place the building, similar to how you place other village facilities.
+
+Once the building exists, the work is not over. A shop needs a proper setup before it becomes useful.
+
+You need:
+
+- a **register**
+- **shelving**
+- goods to use as **stock**
+- a villager assigned as a **sales clerk**
+
+<GuideTable
+  caption="holoVillage store setup checklist."
+  columns={shopSetupColumns}
+  rows={shopSetupRows}
+/>
+
+A common mistake is thinking the building itself makes money. It does not. The building only creates the space. The money comes from stocking items and having someone run the store.
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/store-setup-sales-clerk.webp"
+    alt="holoVillage Our Cozy Days store setup with register shelving stock and sales clerk requirements."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Stores need register setup, shelves, stock, and a villager working as the sales clerk before they become useful.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-store-sales-and-bonus-profit-work">
+  How store sales and bonus profit work
+</h2>
+
+Selling through a store is different from simply dumping items at a basic vendor.
+
+Once the store is set up, selling through the correct shop can give **bonus profit** compared to normal selling. This is why the store system becomes one of your main income sources after it unlocks.
+
+The idea is simple:
+
+```text
+normal selling = quick cash
+store selling = better long-term village income
+```
+
+That does not mean every item should go into the store. It means the right items should go into the right store.
+
+Use the Restaurant for food and dishes.
+
+Use the Smitty for equipment and crafted gear.
+
+Use direct selling only when you need quick cash or when the item is easy to replace.
+
+---
+
+<h2 id="how-the-restaurant-works">
+  How the Restaurant works
+</h2>
+
+The Restaurant is built around cooking.
+
+To cook, you need a **kitchen table**. Once you have one, you can combine ingredients into dishes. Dishes can be sold, and they can also be used as food buffs for adventuring.
+
+This makes the Restaurant valuable because it gives your fish, crops, meat, eggs, and other ingredients two possible uses:
+
+```text
+sell cooked dishes for money
+or
+eat cooked dishes for temporary buffs
+```
+
+Cooked food is often more valuable than raw ingredients, especially when sold through the Restaurant. This is why fishing and farming pair so well with the Restaurant.
+
+The best early Restaurant loop is:
+
+```text
+fish or farm
+-> cook simple dishes
+-> keep a few buff foods
+-> stock the rest
+-> sell through the Restaurant
+```
+
+If you already followed the <Link href="/holovillage-our-cozy-days/fishing-guide">Fishing Guide</Link>, the Restaurant is the natural next step. Extra fish become money, bait, or food instead of just cluttering your bag.
+
+---
+
+<h2 id="cooking-tips-for-early-money">
+  Cooking tips for early money
+</h2>
+
+Cooking is not just a flavor system. It changes the value of your materials.
+
+A few early tips:
+
+- Cook surplus fish instead of selling every fish raw.
+- Keep some buff food for caves, bosses, or dangerous areas.
+- Do not waste rare ingredients on low-value dishes unless you know the recipe is worth it.
+- Try simple repeatable dishes first before experimenting with expensive ingredients.
+- Pay attention to recipe memos when you find them outside the village.
+
+Special recipes can be stronger and more valuable than normal dishes, but early on you do not need to solve every recipe. Your first goal is to create a repeatable money loop, not complete a cookbook.
+
+<GuideCallout title="Best Restaurant rule">
+If you can turn a common ingredient into food, try cooking before selling.
+
+If the ingredient is rare or needed for a quest, save it until you know what it does.
+</GuideCallout>
+
+---
+
+<h2 id="how-the-smitty-works">
+  How the Smitty works
+</h2>
+
+The Smitty is the equipment side of your economy.
+
+It connects to:
+
+- mining
+- ore and ingots
+- weapon crafting
+- armor crafting
+- broken weapons and staffs
+- enhancement materials
+- selling crafted equipment
+
+The Smitty is useful because equipment can be worth more than raw materials. It also supports your combat progression, since stronger weapons and armor make it easier to gather better materials.
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/smitty-restaurant-explained.webp"
+    alt="holoVillage Our Cozy Days tutorial explaining Smitty equipment bonuses and Restaurant cooking bonuses."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Smitty focuses on equipment and enhancement, while the Restaurant focuses on dishes, buffs, and food sales.
+  </figcaption>
+</figure>
+
+The key difference is that Smitty materials often have competing uses. Ore may be needed for tools. Broken weapons may be needed for crafting. Enhancement materials may be better used on gear you keep.
+
+That is why the Smitty is powerful, but a little riskier for new players.
+
+---
+
+<h2 id="should-you-sell-or-keep-enhanced-gear">
+  Should you sell or keep enhanced gear?
+</h2>
+
+Be careful with enhanced gear.
+
+The game explains that enhanced equipment can gain extra abilities, but the cost can be high. That makes enhanced gear better for personal use than quick profit most of the time.
+
+A good early rule is:
+
+```text
+basic crafted gear = okay to sell
+strong enhanced gear = usually keep
+```
+
+If a weapon, staff, armor piece, or accessory has a useful effect, think twice before selling it. Better gear helps you clear caves, survive stronger enemies, and gather materials faster. That can be worth more than the one-time sale price.
+
+Sell duplicates, outdated weapons, and simple crafted gear first.
+
+Keep anything that helps your current build.
+
+---
+
+<h2 id="best-early-money-loops">
+  Best early money loops
+</h2>
+
+You do not need one perfect money method. You need a repeatable loop that matches your daily play.
+
+<GuideTable
+  caption="Best early holoVillage money loops."
+  columns={moneyLoopColumns}
+  rows={moneyLoopRows}
+/>
+
+The easiest beginner path is:
+
+```text
+Fishing Guide progress
+-> spare fish
+-> cook food
+-> Restaurant stock
+-> sales clerk sells it
+```
+
+The more combat-focused path is:
+
+```text
+mine ore
+-> smelt materials
+-> craft extra gear
+-> sell through Smitty
+```
+
+The farming path is slower but stable:
+
+```text
+plant crops
+-> water or let rain help
+-> harvest
+-> cook or sell surplus
+```
+
+All three loops are valid. The best one is the one your village can repeat without draining rare materials.
+
+---
+
+<h2 id="what-to-sell-and-what-to-keep">
+  What to sell and what to keep early
+</h2>
+
+The hardest early money question is not "How do I sell?"
+
+It is:
+
+**What should I not sell yet?**
+
+Use this table as a safe early filter.
+
+<GuideTable
+  caption="holoVillage early selling guide: what to sell and what to keep."
+  columns={sellingDecisionColumns}
+  rows={sellingDecisionRows}
+/>
+
+The main idea is simple:
+
+- sell common items when you need space
+- process food before selling if possible
+- keep rare crafting materials
+- keep gear materials until you understand recipes
+- keep some food for buffs
+- keep a small reserve of fish for bait and cooking
+
+You will make more money later if you stop panic-selling everything now.
+
+---
+
+<h2 id="how-villagers-help-your-economy">
+  How villagers help your economy
+</h2>
+
+Villagers are part of the money system.
+
+After a villager moves in, you can assign jobs such as fishing, farming, adventuring, and shopkeeping. That means villagers can help create the materials your stores need or help run the store itself.
+
+This connects directly with the villager system:
+
+- fishing jobs can support Restaurant stock
+- farming jobs can support cooking ingredients
+- adventuring jobs can bring materials for crafting
+- shopkeeping lets a villager help with sales
+- the workbox can hold supplies villagers need
+
+If you have not set this up yet, read the <Link href="/holovillage-our-cozy-days/how-to-invite-villagers">How to Invite Villagers guide</Link> first.
+
+The biggest upgrade to your economy is not one expensive item. It is turning villagers into a supply chain.
+
+---
+
+<h2 id="early-store-build-order">
+  Early store build order
+</h2>
+
+A clean early build order looks like this:
+
+```text
+1. Build your own house
+2. Start farming, fishing, and adventuring
+3. Build your first villager house
+4. Invite a villager
+5. Assign jobs and use the workbox
+6. Unlock the store objective
+7. Choose Restaurant or Smitty based on your inventory
+8. Set up register, shelves, stock, and sales clerk
+9. Sell processed goods through the store
+10. Build the second store later
+```
+
+This keeps your village from feeling scattered. Each step feeds the next one.
+
+Fishing gives food.
+
+Farming gives crops.
+
+Adventuring gives drops.
+
+Mining gives ore.
+
+Villagers give labor.
+
+Stores turn that labor into money.
+
+---
+
+<h2 id="common-money-mistakes">
+  Common money mistakes
+</h2>
+
+Most early money problems come from selling too randomly or building too early without a loop.
+
+<GuideTable
+  caption="Common holoVillage money and shop mistakes."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+A weak money setup usually has one of these problems:
+
+- no stocked shelves
+- no sales clerk
+- too many raw items sold too early
+- rare materials wasted
+- no cooking routine
+- no mining routine
+- villagers assigned without useful supplies
+- shop choice does not match your playstyle
+
+Fix the loop, not just the wallet.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best early way to make money in holoVillage?
+
+The best early method is to gather repeatable materials, process them when possible, and sell them through the correct store. Fish and crops pair well with the Restaurant. Ore and crafted gear pair better with the Smitty.
+
+### Should I choose Restaurant or Smitty first?
+
+Choose Restaurant first if you are fishing, farming, and cooking often. Choose Smitty first if you are mining and crafting equipment often. You can build the other store later.
+
+### How do I open a store?
+
+Progress through village development until the store objective appears, buy the correct store ticket, place the building, then set up the register, shelves, stock, and a sales clerk.
+
+### Why is my store not making money?
+
+Check whether you have stocked items and assigned a villager as a sales clerk. A store building alone is not enough.
+
+### What should I sell early?
+
+Sell common surplus items, trash, extra cooked food, and replaceable goods. Be careful with ore, broken weapons, better fish, rare drops, and materials used in recipes or upgrades.
+
+### Are cooked dishes better than raw ingredients?
+
+Usually, yes. Cooked dishes can sell for more than raw ingredients and can also provide food buffs for adventuring.
+
+### Should I sell all my fish?
+
+No. Some fish are useful for cooking, bait, quests, or later money loops. Sell your surplus, but keep a small reserve.
+
+### Is enhanced gear good for selling?
+
+Not usually early on. Enhanced gear can be expensive to make and is often better for personal use. Sell basic duplicates or outdated gear first.
+
+### Do villagers help with money?
+
+Yes. Villagers can support your economy through jobs and shopkeeping. They can help gather materials or run the store, depending on how you assign them.
+
+### Can I build both Restaurant and Smitty?
+
+Yes. The game indicates that you can build the other store later, so your first choice is about early priority, not a permanent lockout.

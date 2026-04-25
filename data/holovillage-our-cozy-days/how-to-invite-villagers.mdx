@@ -1,0 +1,575 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const villagerAtGlanceRows = [
+  {
+    item: "Core requirement",
+    value: "Build a vacant villager house first",
+    why: "You cannot invite a visitor to live in your village if there is nowhere for them to move in.",
+  },
+  {
+    item: "Where villagers come from",
+    value: "Visitors rotate through your village",
+    why: "You may meet a villager before you are ready to invite them, so do not panic if someone appears too early.",
+  },
+  {
+    item: "Invite currency",
+    value: "Talk to visitors to gain exchange or invite points",
+    why: "Points let you write an invitation letter to a visitor instead of relying only on random appearances.",
+  },
+  {
+    item: "Move-in timing",
+    value: "Invited villagers move in the next morning",
+    why: "The invite is not instant. Sleep and check the village again the next day.",
+  },
+  {
+    item: "Villager jobs",
+    value: "Fishing, farming, adventuring, and later shopkeeping",
+    why: "Villagers are not just cosmetic. They can help generate resources once they live in your village.",
+  },
+  {
+    item: "Workbox",
+    value: "Stores supplies for villagers to use",
+    why: "For farming jobs, the workbox is where you provide supplies such as seeds for villagers.",
+  },
+  {
+    item: "Common early mistake",
+    value: "Trying to invite a visitor before building a house",
+    why: "The visitor may be visible, but the invite cannot be completed without housing.",
+  },
+];
+
+export const inviteStepsColumns = [
+  { key: "step", label: "Step" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const inviteStepsRows = [
+  {
+    step: "1",
+    goal: "Progress the early village quests",
+    whatToDo: "Build your own house, craft basic tools, and follow Nodoka's main quest prompts.",
+    whyItMatters: "The game introduces villager recruitment only after you understand housing, crafting, and resource gathering.",
+  },
+  {
+    step: "2",
+    goal: "Save enough money and materials",
+    whatToDo: "Gather through farming, fishing, and adventuring, then sell early items or crafted goods as needed.",
+    whyItMatters: "A villager house requires a ticket and enough resources, so recruitment starts with basic economy.",
+  },
+  {
+    step: "3",
+    goal: "Buy or obtain a villager house ticket",
+    whatToDo: "Talk to the relevant village NPC and get the ticket used to place a house for a new villager.",
+    whyItMatters: "The house is the gate. Without an empty house, visitors cannot become residents.",
+  },
+  {
+    step: "4",
+    goal: "Place the house in your village",
+    whatToDo: "Use the ticket from your quick slot and place the facility in an open spot.",
+    whyItMatters: "Once the house is built, the village has a vacant slot for a visitor to move into.",
+  },
+  {
+    step: "5",
+    goal: "Talk to visitors",
+    whatToDo: "Speak with visitors when they appear in your village to gain exchange or invite points.",
+    whyItMatters: "Points let you invite a desired visitor instead of waiting only for random visits.",
+  },
+  {
+    step: "6",
+    goal: "Invite the villager",
+    whatToDo: "Use enough points to write an invitation letter or confirm the invite when the visitor is available.",
+    whyItMatters: "This turns the visitor into an incoming resident.",
+  },
+  {
+    step: "7",
+    goal: "Sleep until the next morning",
+    whatToDo: "Go to bed and check the village the following day.",
+    whyItMatters: "Invited villagers move in the next morning, not immediately.",
+  },
+  {
+    step: "8",
+    goal: "Assign a job",
+    whatToDo: "Talk to Nodoka or use the village management options to set the villager's job.",
+    whyItMatters: "A resident becomes more useful once they are assigned to fishing, farming, adventuring, or shop work.",
+  },
+];
+
+export const jobColumns = [
+  { key: "job", label: "Villager Job" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "bestUse", label: "Best Early Use" },
+  { key: "note", label: "Important Note" },
+];
+
+export const jobRows = [
+  {
+    job: "Farming",
+    whatItDoes: "Lets a villager help with crop work around your fields.",
+    bestUse: "Good when you are planting multiple crops and do not want to spend the whole day on farm chores.",
+    note: "Put seeds or required supplies in the workbox when the job needs them.",
+  },
+  {
+    job: "Fishing",
+    whatItDoes: "Lets a villager gather fish for you over time.",
+    bestUse: "Good after you unlock fishing and want extra fish for bait, cooking, or selling.",
+    note: "Check the workbox or daily results instead of expecting instant fish on screen.",
+  },
+  {
+    job: "Adventuring",
+    whatItDoes: "Sends a villager toward combat or exploration-style work.",
+    bestUse: "Useful when you need monster drops, materials, or progress outside the village.",
+    note: "Do this after you understand early combat and have enough supplies for yourself.",
+  },
+  {
+    job: "Shopkeeping",
+    whatItDoes: "Assigns a villager to help run a store once shop systems are unlocked.",
+    bestUse: "Best after you build a Restaurant or Smitty and need someone to work the sales role.",
+    note: "This becomes more important once stores become a main income source.",
+  },
+];
+
+export const visitorProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyReason", label: "Likely Reason" },
+  { key: "fix", label: "What To Do" },
+];
+
+export const visitorProblemRows = [
+  {
+    problem: "I can see a visitor, but I cannot invite them",
+    likelyReason: "You do not have a vacant villager house yet.",
+    fix: "Build a villager house first, then talk to visitors again.",
+  },
+  {
+    problem: "The villager I wanted appeared before I was ready",
+    likelyReason: "Visitors can show up before you have housing or enough points.",
+    fix: "Keep playing, earn invite points, and invite them later when they return or become available through points.",
+  },
+  {
+    problem: "The invite did not happen immediately",
+    likelyReason: "Move-in happens the next morning.",
+    fix: "Sleep, then check the village the following day.",
+  },
+  {
+    problem: "My villager is not farming or fishing much",
+    likelyReason: "The job may need supplies, time, or workbox setup.",
+    fix: "Assign the correct job and put relevant supplies, such as seeds, in the workbox.",
+  },
+  {
+    problem: "I cannot place another house",
+    likelyReason: "You may be out of space, missing the right ticket, or blocked by a village progression requirement.",
+    fix: "Clear more room, progress the village quests, and check which house ticket the game is asking for.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Treating visitors like permanent villagers",
+    whyItHurts: "A visitor is not a resident until you invite them and they move into a house.",
+    betterPlay: "Think of visitors as candidates. Build housing first, then invite the one you want.",
+  },
+  {
+    mistake: "Trying to invite before building a house",
+    whyItHurts: "The invite cannot complete without a vacant house.",
+    betterPlay: "Prioritize the villager house ticket before chasing specific visitors.",
+  },
+  {
+    mistake: "Ignoring exchange or invite points",
+    whyItHurts: "You may miss the chance to target a specific villager later.",
+    betterPlay: "Talk to visitors even if you cannot invite them yet, so you build up points.",
+  },
+  {
+    mistake: "Expecting instant move-in",
+    whyItHurts: "The game advances the villager into your village the following morning.",
+    betterPlay: "Invite, sleep, then look for the new resident after the next day begins.",
+  },
+  {
+    mistake: "Assigning jobs but leaving the workbox empty",
+    whyItHurts: "Some jobs need supplies to produce useful results.",
+    betterPlay: "Put seeds or other relevant supplies in the workbox after assigning jobs.",
+  },
+  {
+    mistake: "Building randomly with no space plan",
+    whyItHurts: "Houses, fields, shops, and work facilities all need room, and placement can get messy early.",
+    betterPlay: "Leave open space around the village office and avoid crowding every building into one corner.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To invite villagers in holoVillage: Our Cozy Days, build a vacant villager house first, talk to visitors to gain exchange or invite points, then use those points or the visitor interaction to invite someone to live in your village.**
+
+Invited villagers do **not** move in immediately. After you invite a villager, sleep and check the village the next morning. Once they become a resident, you can assign jobs such as **fishing**, **farming**, **adventuring**, and later **shopkeeping**. Use the **workbox** to store supplies for villagers, especially seeds for farming jobs.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/how-to-invite-villagers.webp"
+    alt="The villager invitation tutorial in holoVillage explaining vacant houses, visitors, exchange points, and invitation letters."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    You need a vacant villager house before a visitor can become a resident. Talking to visitors builds the points used for invitations.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="villager-system-at-a-glance">
+  Villager system at a glance
+</h2>
+
+<GuideDataTable title="" rows={villagerAtGlanceRows} />
+
+---
+
+<h2 id="how-villagers-work-in-holovillage">
+  How villagers work in holoVillage
+</h2>
+
+Villagers in **holoVillage: Our Cozy Days** are not just collectible characters. They are part of your early progression loop.
+
+The basic chain is:
+
+```text
+Build a house -> meet visitors -> gain points -> invite a villager -> wait until the next morning -> assign jobs
+```
+
+This is why the villager system can feel confusing at first. The game may show you visitors before you are ready to recruit them. Seeing a visitor does not mean you can instantly add them to the village.
+
+The most important rule is simple:
+
+**A visitor needs an empty villager house before they can move in.**
+
+Once a villager actually lives in your village, they can help with jobs like fishing, farming, adventuring, and later shopkeeping. That makes villager recruitment one of the first systems you should understand after fishing and basic resource gathering.
+
+<GuideCallout title="Best early rule">
+Do not chase every visitor immediately. Build a vacant house first, then use points to invite the villager you actually want.
+</GuideCallout>
+
+---
+
+<h2 id="why-you-cant-invite-villagers-at-the-start">
+  Why you can't invite villagers at the start
+</h2>
+
+If you meet a visitor early and the game will not let you invite them, the likely reason is that you do not have a **vacant villager house** yet.
+
+The opening hours focus on your own setup first:
+
+- build your first house
+- learn crafting
+- gather basic materials
+- start farming, fishing, and adventuring
+- save enough money and resources
+- build a house for a new villager
+
+Only after that does the invite system start to make sense.
+
+A visitor can appear before you have the right house. That does not mean you failed the game or permanently missed them. It usually means you need to keep progressing until you can build housing and gather enough invite points.
+
+---
+
+<h2 id="how-to-build-a-villager-house">
+  How to build a villager house
+</h2>
+
+To build a villager house, progress until the game points you toward inviting people into the village. The game explains that you need houses before you can invite residents, then sends you back into the normal resource loop: gather materials, sell items, and buy the right construction ticket.
+
+The process is:
+
+1. Follow the main quest until villagers are introduced.
+2. Gather materials through farming, fishing, and adventuring.
+3. Save enough money for a villager house ticket.
+4. Buy or receive the correct ticket.
+5. Place the house in an open spot in your village.
+6. Use that vacant house to invite a visitor.
+
+<GuideCallout title="Placement tip">
+Leave extra room around your early buildings. You will need space for more houses, fields, stores, and work facilities later.
+</GuideCallout>
+
+If you cannot place the house, check three things:
+
+- the area may be blocked by trees, buildings, or terrain
+- you may be using the wrong ticket
+- you may need to progress a village objective first
+
+Do not spend all your early money on random facilities before you understand what the current main quest wants. Villager houses and store buildings can get expensive as your village grows.
+
+---
+
+<h2 id="visitors-exchange-points-and-invite-points">
+  Visitors, exchange points, and invite points
+</h2>
+
+Visitors are the characters who appear in your village before they become full residents. Talk to them whenever you can, even if you are not ready to invite them yet.
+
+Talking to visitors gives you points. Depending on the menu and translation, you may see this described as **exchange points** or **invite points**. The purpose is the same: points help you target a specific visitor instead of waiting for random appearances forever.
+
+A safe way to think about the system is:
+
+```text
+Random visitor appears -> talk to them -> gain points -> use enough points to invite a desired visitor
+```
+
+Some visitors may require more points than others. The cost can also vary depending on the character or stage of progression, so always check the actual number shown in the menu before planning around a fixed price.
+
+<GuideCallout title="Do this even if you are not ready">
+If a visitor you like appears before you have a house, still talk to them. You may gain points that help you invite them later.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-invite-a-specific-villager">
+  How to invite a specific villager
+</h2>
+
+Once you have a vacant house and enough points, you can invite a specific villager instead of just hoping they randomly return.
+
+The usual steps are:
+
+<GuideTable
+  caption="holoVillage villager invitation progression."
+  columns={inviteStepsColumns}
+  rows={inviteStepsRows}
+/>
+
+The important part is that invitation is a two-part process:
+
+```text
+Prepare the house first, then invite the visitor.
+```
+
+If you try to do those in the opposite order, you may see the visitor but still fail to recruit them.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/villager-move-in.webp"
+    alt="A new villager moving into the village the next morning in holoVillage."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Invited villagers move in the next morning. If nothing happens right away, sleep and check the village the following day.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="when-invited-villagers-move-in">
+  When invited villagers move in
+</h2>
+
+Invited villagers move in **the following morning**.
+
+That means you should not expect the house to fill instantly after sending the invitation. Once you confirm the invite, finish your day, sleep, and return to the village in the morning.
+
+When the new villager arrives, the game plays a short welcome scene. After that, the villager becomes part of your village and can be assigned work.
+
+This timing is useful to remember because it affects your planning:
+
+- invite before sleeping if you want the villager tomorrow
+- do not assume the invite failed just because nothing changes immediately
+- check job options after the move-in scene, not before
+
+---
+
+<h2 id="how-to-assign-villager-jobs">
+  How to assign villager jobs
+</h2>
+
+After your first villager moves in, the game unlocks the ability to assign jobs.
+
+Early job categories include:
+
+<GuideTable
+  caption="Early villager jobs in holoVillage and when to use them."
+  columns={jobColumns}
+  rows={jobRows}
+/>
+
+The best first job depends on what you are short on.
+
+If you are building around fishing, assign a villager to fishing and keep some fish for bait, cooking, or later selling. If you are trying to grow crops, farming is useful, but it needs the right supplies. If you are pushing outside the village, adventuring may help with combat-related resources.
+
+For more detail on using fish for bait, cooking, and early progression, see the <Link href="/holovillage-our-cozy-days/fishing-guide">holoVillage Fishing Guide</Link>.
+
+---
+
+<h2 id="what-the-workbox-does">
+  What the workbox does
+</h2>
+
+The **workbox** is the shared supply box villagers use for jobs.
+
+The game specifically points out that you can store supplies such as seeds for villagers to use. This matters most for jobs like farming, where the villager cannot do useful work without the right materials.
+
+Think of the workbox like this:
+
+```text
+Your inventory = items for you
+Workbox = supplies for villagers
+```
+
+If a villager is assigned to a job but does not seem to be producing much, check whether the workbox has the supplies they need.
+
+For farming, that usually means seeds. For fishing or adventuring, the result may be checked later rather than appearing instantly on screen.
+
+<GuideCallout title="Workbox rule">
+Assigning a job is only half the system. If the job needs supplies, put those supplies in the workbox.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/villager-jobs-workbox.webp"
+    alt="Nodoka explaining villager jobs and the workbox in holoVillage."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once villagers move in, you can assign jobs such as fishing, farming, and adventuring. The workbox stores supplies they can use.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-if-the-villager-you-want-appears-too-early">
+  What if the villager you want appears too early?
+</h2>
+
+This can happen: a visitor you want may appear before you have a vacant house or enough points.
+
+Do not panic.
+
+Visitors rotate, and the point system exists so you are not forced to rely only on lucky timing. If someone appears too early, talk to them if possible, keep progressing, then invite them later once you have the housing and points required.
+
+The worst response is to spend randomly or rush a messy village layout just because a visitor appeared once. A cleaner plan is:
+
+```text
+Talk to the visitor -> keep earning points -> build the house -> invite when ready
+```
+
+This is especially important if you are waiting for a specific hololive talent. Do not turn the page into a checklist of every character. Focus on the invite system first.
+
+---
+
+<h2 id="best-early-villager-jobs">
+  Best early villager jobs
+</h2>
+
+For most players, the best early job order is:
+
+1. **Fishing** if you want food, bait, and easy selling/cooking materials.
+2. **Farming** if you are planting enough crops to justify the workbox setup.
+3. **Adventuring** if you are actively pushing combat and need more outside materials.
+4. **Shopkeeping** once you unlock stores and need a sales clerk.
+
+Fishing is the easiest job to understand early because fish feed directly into several systems: bait, cooking, selling, and quests. Farming can be just as strong, but it asks you to manage seeds and workbox supplies. Adventuring is better once you have a clearer reason to gather combat materials.
+
+If your goal is early money, the villager system connects naturally into stores later. Villagers can help gather the raw materials, and your Restaurant or Smitty can turn those materials into better profits once the shop system opens.
+
+---
+
+<h2 id="common-villager-problems">
+  Common villager problems
+</h2>
+
+Most early villager confusion comes from trying to use the system before the village is ready.
+
+<GuideTable
+  caption="Common holoVillage villager problems and how to fix them."
+  columns={visitorProblemColumns}
+  rows={visitorProblemRows}
+/>
+
+---
+
+<h2 id="common-mistakes">
+  Common mistakes
+</h2>
+
+Avoid these mistakes when building your first villager setup.
+
+<GuideTable
+  caption="Common holoVillage villager mistakes and better early-game choices."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The safest early plan is not to invite everyone as fast as possible. Build a small, functional village first:
+
+```text
+one house -> one villager -> one useful job -> one clear resource goal
+```
+
+Then expand.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do you invite villagers in holoVillage?
+
+Build a vacant villager house, talk to visitors to gain exchange or invite points, then use the invite option when you have enough points or when the visitor is available. The villager moves in the next morning.
+
+### Why can't I invite a visitor?
+
+You probably do not have a vacant villager house yet. A visitor can appear before you are ready to recruit them.
+
+### Do villagers move in immediately?
+
+No. After you invite a villager, they move in the following morning. Sleep and check the village the next day.
+
+### What are exchange points or invite points?
+
+They are points earned by talking to visitors. You can use them to invite a specific visitor instead of waiting only for random visits.
+
+### What happens if the villager I want appears before I have a house?
+
+Talk to them if possible, then keep progressing. Visitors can return, and points help you invite specific villagers later.
+
+### What jobs can villagers do?
+
+Early jobs include fishing, farming, and adventuring. Later, villagers can also help with shop systems such as sales clerk work.
+
+### What does the workbox do?
+
+The workbox stores supplies for villagers to use while working. For farming, put seeds in the workbox so the assigned villager has materials to use.
+
+### Should I assign my first villager to fishing or farming?
+
+Fishing is usually easier early because fish can be used for bait, cooking, quests, and selling. Farming is good if you already have seeds and enough fields to justify the setup.
+
+### Can I invite a specific hololive talent?
+
+Yes, the invite system lets you target specific visitors once you have the required points and housing. Exact point costs can vary, so check the in-game menu.
+
+### Is this an all-villagers list?
+
+No. This guide focuses on how the villager invitation and job systems work. For an early-game progression cluster, this is more useful than a full character database.

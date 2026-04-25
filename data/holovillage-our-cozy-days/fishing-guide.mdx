@@ -1,0 +1,577 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const fishingAtGlanceRows = [
+  {
+    item: "How to unlock fishing",
+    value: "Talk to Kuro and craft a Wooden Rod",
+    why: "Kuro gives the early fishing tutorial after you start the village job quests.",
+  },
+  {
+    item: "Where to fish",
+    value: "Only at fishing spots where fish gather",
+    why: "You cannot fish in every river, pond, or body of water. Look for a valid fishing spot prompt.",
+  },
+  {
+    item: "First fishing goal",
+    value: "Catch three carp",
+    why: "This teaches the basic fishing loop before bait and larger fish matter.",
+  },
+  {
+    item: "Fishing prompt",
+    value: "Equip the rod and look for a yellow exclamation mark",
+    why: "The prompt appears when you are close enough to a valid fishing spot.",
+  },
+  {
+    item: "Bait",
+    value: "Use smaller fish as bait for bigger fish",
+    why: "Bigger fish are worth more, but they are harder to reel in cleanly.",
+  },
+  {
+    item: "Big fish rule",
+    value: "Reel when the fish is calm; ease off when it thrashes",
+    why: "Pulling at the wrong time can snap the line and lose the catch.",
+  },
+  {
+    item: "Early rank reward",
+    value: "Fisher Rank 2 raises your job level cap and unlocks job abilities",
+    why: "Fishing is not just a side activity. It feeds into job progression.",
+  },
+  {
+    item: "Next fishing objective",
+    value: "Freshwater Crab after the northern bridge is cleared",
+    why: "Kuro points you toward a new ecosystem beyond the blocked bridge near the Ancient Ruins.",
+  },
+];
+
+export const fishingProgressionColumns = [
+  { key: "step", label: "Step" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const fishingProgressionRows = [
+  {
+    step: "1",
+    goal: "Meet Kuro",
+    whatToDo: "Find Kuro in the village and start the fishing job quest.",
+    whyItMatters: "This unlocks the first fishing tutorial instead of leaving you guessing at random water spots.",
+  },
+  {
+    step: "2",
+    goal: "Craft a Wooden Rod",
+    whatToDo: "Use the crafting table and make the Wooden Rod when you have enough wood.",
+    whyItMatters: "You need the rod equipped before fishing prompts can appear.",
+  },
+  {
+    step: "3",
+    goal: "Catch three carp",
+    whatToDo: "Stand at a valid fish-gathering spot, wait for the prompt, and land three carp.",
+    whyItMatters: "This clears the first real fishing objective and introduces the basic mini-game.",
+  },
+  {
+    step: "4",
+    goal: "Use bait",
+    whatToDo: "Attach a fish as bait when Kuro introduces bigger catches.",
+    whyItMatters: "Bait lets you target larger fish instead of only small catches or trash.",
+  },
+  {
+    step: "5",
+    goal: "Catch a koi",
+    whatToDo: "Use bait at a valid fishing spot and handle the reeling pattern carefully.",
+    whyItMatters: "Koi is the first clear step up from the basic carp task.",
+  },
+  {
+    step: "6",
+    goal: "Reach Fisher Rank 2",
+    whatToDo: "Finish Kuro's early fishing tasks.",
+    whyItMatters: "Rank 2 opens job level growth, job abilities, and a better fishing rod for sale.",
+  },
+  {
+    step: "7",
+    goal: "Prepare for Freshwater Crab",
+    whatToDo: "Progress until the northern bridge route toward the Ancient Ruins can be cleared.",
+    whyItMatters: "This moves fishing out of the starting area and into later ecosystems.",
+  },
+];
+
+export const baitColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "bestAction", label: "Best Action" },
+  { key: "note", label: "Note" },
+];
+
+export const baitRows = [
+  {
+    situation: "You only need the first three carp",
+    bestAction: "Do not overthink bait yet",
+    note: "The first task is about learning where fishing works and how to land basic fish.",
+  },
+  {
+    situation: "Kuro asks for koi",
+    bestAction: "Attach bait and go after a larger fish",
+    note: "Koi is a good time to learn the bigger-fish rhythm instead of mashing randomly.",
+  },
+  {
+    situation: "You are running low on bait",
+    bestAction: "Keep smaller fish instead of selling every catch",
+    note: "Small fish can help you chase bigger fish later.",
+  },
+  {
+    situation: "You keep catching trash",
+    bestAction: "Stay patient and make sure you are at a valid spot",
+    note: "Trash can appear early, but it does not mean fishing is broken.",
+  },
+  {
+    situation: "You want money",
+    bestAction: "Use fish for cooking or sell valuable catches",
+    note: "Once the shop and cooking systems open, fish become part of your early economy.",
+  },
+];
+
+export const miniGameColumns = [
+  { key: "phase", label: "Fishing Phase" },
+  { key: "WhatHappens", label: "What Happens" },
+  { key: "BestResponse", label: "Best Response" },
+];
+
+export const miniGameRows = [
+  {
+    phase: "Hook prompt",
+    WhatHappens: "A yellow exclamation mark appears near a valid fishing spot.",
+    BestResponse: "Press confirm to start the catch.",
+  },
+  {
+    phase: "Normal pull",
+    WhatHappens: "The fish can be reeled in safely.",
+    BestResponse: "Reel steadily and move the fish toward the landing side.",
+  },
+  {
+    phase: "Thrashing",
+    WhatHappens: "The fish resists and the line is under pressure.",
+    BestResponse: "Ease off instead of forcing the reel. Pulling here can snap the line.",
+  },
+  {
+    phase: "Pattern reading",
+    WhatHappens: "Each phase has a repeatable movement or thrashing pattern.",
+    BestResponse: "Watch the rhythm, then reel during safe windows.",
+  },
+  {
+    phase: "Bonus chance",
+    WhatHappens: "A button prompt appears during a higher-value catch.",
+    BestResponse: "Hit the prompt quickly, then mash confirm when the game asks you to finish the catch.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Trying to fish in every body of water",
+    whyItHurts: "Most water is not a valid fishing spot, so nothing happens.",
+    betterPlay: "Equip the rod and look for fish-gathering spots with a yellow prompt.",
+  },
+  {
+    mistake: "Selling every small fish immediately",
+    whyItHurts: "You may need fish as bait or ingredients later.",
+    betterPlay: "Keep some small fish until you know what the next quest or recipe needs.",
+  },
+  {
+    mistake: "Mashing through big fish",
+    whyItHurts: "Forcing the reel while the fish thrashes can snap the line.",
+    betterPlay: "Reel when calm, pause when thrashing, then finish during the button prompt.",
+  },
+  {
+    mistake: "Assuming trash means you are doing it wrong",
+    whyItHurts: "Early fishing can produce trash items, which can make the system feel confusing.",
+    betterPlay: "Stay at the valid spot, finish Kuro's carp task, and move into bait fishing afterward.",
+  },
+  {
+    mistake: "Ignoring Fisher Rank",
+    whyItHurts: "Fishing progression unlocks job abilities and better tools.",
+    betterPlay: "Treat fishing quests as job progression, not just a money activity.",
+  },
+  {
+    mistake: "Rushing Freshwater Crab before clearing the bridge",
+    whyItHurts: "The quest points to a later ecosystem beyond a blocked route.",
+    betterPlay: "Progress the bridge route first, then return to Kuro's new fishing spot objective.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To fish in holoVillage: Our Cozy Days, talk to Kuro, craft a Wooden Rod, equip it, and stand near a fishing spot where fish gather.**
+
+You **cannot fish anywhere**. When you are close enough to a valid fishing spot, a **yellow exclamation mark** appears. Press confirm to start the fishing mini-game.
+
+For bigger fish, attach bait, reel while the fish is calm, and stop pulling when it thrashes. If you keep pulling during the thrashing phase, the line can snap. Early on, Kuro asks you to catch **three carp**, then introduces bait, koi, Fisher Rank progression, and eventually the Freshwater Crab objective beyond the blocked bridge.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/fishing-guide.webp"
+    alt="Kuro explaining that you can only fish at spots where fish gather in holoVillage Our Cozy Days."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fishing starts with Kuro's tutorial: craft a Wooden Rod, find a fish-gathering spot, and catch three carp.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="fishing-at-a-glance">
+  Fishing at a glance
+</h2>
+
+<GuideDataTable title="" rows={fishingAtGlanceRows} />
+
+---
+
+<h2 id="how-to-unlock-fishing">
+  How to unlock fishing
+</h2>
+
+You unlock fishing by starting Kuro's early job quest in the village. After the first village setup steps, the game points you toward three job categories: **adventuring**, **farming**, and **fishing**. Kuro is the fishing expert, and his tutorial is the one that teaches you how to use the rod.
+
+The first thing Kuro asks you to do is simple:
+
+```text
+Craft a Wooden Rod.
+```
+
+Use the crafting table, make the Wooden Rod, then return to Kuro. If you are short on materials, chop trees first. Fishing does not properly begin until you have the rod equipped and are standing at a valid fishing spot.
+
+<GuideCallout title="Do this first">
+Before you run around testing every pond, make sure you have actually crafted and equipped the Wooden Rod. Without the rod, you will not get the correct fishing prompt.
+</GuideCallout>
+
+---
+
+<h2 id="where-to-fish">
+  Where to fish in holoVillage
+</h2>
+
+The most important fishing rule is this:
+
+**You can only fish at spots where fish gather.**
+
+That means you cannot stand beside any random river, pond, or stream and expect fishing to work. Some water is decorative or simply not a fishing spot. This is why early players often feel like fishing is broken: the rod is equipped, but nothing happens.
+
+To check whether a spot works:
+
+1. Equip your fishing rod.
+2. Walk near a fish-gathering spot.
+3. Look for the **yellow exclamation mark**.
+4. Press confirm when the prompt appears.
+
+If no prompt appears, move to another section of water. The game is not asking you to fish anywhere; it is asking you to find the correct spot.
+
+<GuideCallout title="Why you can't fish">
+If you are holding the rod and nothing happens, you are probably not at a valid fishing spot. Look for the yellow exclamation mark instead of trying to cast into every body of water.
+</GuideCallout>
+
+---
+
+<h2 id="early-fishing-progression">
+  Early fishing progression
+</h2>
+
+Fishing has a clear early-game sequence. Follow Kuro's tasks instead of trying to turn it into a full fish hunt immediately.
+
+<GuideTable
+  caption="holoVillage early fishing progression: from Wooden Rod to Freshwater Crab."
+  columns={fishingProgressionColumns}
+  rows={fishingProgressionRows}
+/>
+
+This is why the first fishing page for holoVillage should not be treated like an all-fish database. Early fishing is mostly about learning the mechanics, clearing Kuro's tasks, and opening the next fishing area.
+
+---
+
+<h2 id="how-to-catch-three-carp">
+  How to catch three carp
+</h2>
+
+Kuro's first real fishing request is to catch **three carp**. This is the task that teaches the basic loop:
+
+```text
+Find a valid spot -> wait for the prompt -> start the mini-game -> land the fish
+```
+
+Stay near the starting fishing area and keep using valid fish-gathering spots. You may catch other items along the way, including trash, but that does not mean you are in the wrong system. Keep fishing until the carp objective is complete.
+
+For this first task, do not worry too much about bait or rare fish. Your goal is to understand the prompt and land basic catches consistently.
+
+---
+
+<h2 id="how-bait-works">
+  How bait works
+</h2>
+
+After the carp task, Kuro introduces bait and larger fish.
+
+The key rule is:
+
+**You can use fish you catch as bait to go after bigger fish.**
+
+This changes how you should treat small fish. Selling everything immediately can feel good early, but keeping some fish gives you more flexibility for later fishing tasks. Bigger fish are usually more valuable, but they also require more careful reeling.
+
+<GuideTable
+  caption="When to use bait, keep fish, or sell your catches in holoVillage."
+  columns={baitColumns}
+  rows={baitRows}
+/>
+
+If you are not sure what to do with a fish, keep a few extras in storage. Fishing connects to later cooking, selling, and job progression, so fish are not just single-use collectibles.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/fishing-minigame.webp"
+    alt="The holoVillage fishing mini-game showing how to reel in bigger fish without snapping the line."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bigger fish require timing. Reel while the fish is calm, then ease off when it thrashes so the line does not snap.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-to-catch-bigger-fish-without-snapping-the-line">
+  How to catch bigger fish without snapping the line
+</h2>
+
+The fishing mini-game gets stricter once bait and bigger fish are involved. If you simply mash confirm the whole time, you can lose the catch.
+
+The safe rhythm is:
+
+```text
+Reel when the fish is calm.
+Stop or ease off when the fish thrashes.
+Watch the pattern.
+Finish the catch when the button prompt appears.
+```
+
+The important part is the **thrashing phase**. When the fish resists, your line is under pressure. If you keep pulling at the wrong time, the line can snap.
+
+<GuideTable
+  caption="holoVillage fishing mini-game phases and the safest response for each one."
+  columns={miniGameColumns}
+  rows={miniGameRows}
+/>
+
+Do not treat bigger fish like basic carp. Carp teaches the hook and reel flow. Bait fish teach timing.
+
+---
+
+<h2 id="how-to-catch-koi">
+  How to catch koi
+</h2>
+
+Koi appears early as the first step beyond the basic carp task. Kuro asks for a koi after introducing bait, which makes this a good checkpoint for whether you understand the bigger-fish system.
+
+To catch koi:
+
+1. Finish the first carp task.
+2. Let Kuro introduce bait.
+3. Attach bait at a valid fishing spot.
+4. Start the fishing mini-game.
+5. Reel carefully and stop pulling when the fish thrashes.
+
+Do not assume koi means you need an endgame fishing area. In the early quest flow, koi is part of the first fishing progression. The real difficulty is learning how bait and the line-snap timing work.
+
+<GuideCallout title="Koi tip">
+If you are losing the fish, the problem is probably not the spot. It is usually the timing: stop forcing the reel while the fish is thrashing.
+</GuideCallout>
+
+---
+
+<h2 id="fisher-rank-2-and-job-abilities">
+  Fisher Rank 2 and job abilities
+</h2>
+
+After you clear Kuro's early fishing tasks, you are promoted to **Fisher Rank 2**.
+
+This matters because Fisher Rank is not just a title. Rank 2 lets you raise your fishing job level further and start learning job abilities. A better fishing rod also becomes available for sale after this point.
+
+In other words, fishing progression has three rewards:
+
+- better access to fish
+- job level growth
+- job abilities and better tools
+
+This is why you should not ignore fishing even if your main goal is money, villagers, or combat. Fishing feeds into multiple early-game systems.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/freshwater-crab-quest.webp"
+    alt="Kuro pointing the player toward a new fishing spot beyond the blocked bridge and the Freshwater Crab quest in holoVillage."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After the starting fishing tasks, Kuro points you toward a new ecosystem beyond the blocked northern bridge.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="freshwater-crab-and-the-blocked-bridge">
+  Freshwater Crab and the blocked bridge
+</h2>
+
+After the first fishing tasks, Kuro eventually mentions a new fishing spot beyond a blocked bridge in the northern part of Hollow Grasslands. That route leads toward the Ancient Ruins, and the next fishing target is **Freshwater Crab**.
+
+At this point, do not waste time searching the starting pond forever. The Freshwater Crab objective is tied to progression beyond the blocked bridge.
+
+The basic flow is:
+
+```text
+Finish early fishing tasks
+Reach Fisher Rank 2
+Progress the bridge route
+Enter the later ecosystem
+Catch Freshwater Crab
+```
+
+If the bridge is still blocked, continue your main and adventuring progression. Kuro's hint is telling you where the next fishing stage is, not asking you to solve it from the starting village pond.
+
+---
+
+<h2 id="what-to-do-with-fish">
+  What to do with fish
+</h2>
+
+Fish have several early uses:
+
+- completing Kuro's fishing quests
+- acting as bait for bigger fish
+- selling for money
+- cooking dishes once the kitchen system is available
+- helping your early shop or restaurant economy later
+
+This is why you should avoid selling every fish the moment you catch it. Selling trash is usually safe, but fish can become more useful when cooking and shop systems open.
+
+A simple early rule:
+
+```text
+Keep a few small fish for bait.
+Keep valuable fish until you know whether you need them for cooking or quests.
+Sell extra fish when you need quick money.
+```
+
+Once you unlock the shop or restaurant, fish become more than a fishing reward. They become part of your early money loop.
+
+<Link href="/holovillage-our-cozy-days/shop-money-guide/">
+  Read next: holoVillage Shop and Money Guide
+</Link>
+
+---
+
+<h2 id="common-fishing-mistakes">
+  Common fishing mistakes
+</h2>
+
+Most early fishing problems come from misunderstanding where fishing works or how bigger fish behave.
+
+<GuideTable
+  caption="Common holoVillage fishing mistakes and how to fix them."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is treating fishing like a normal farming sim where every water tile is valid. holoVillage is stricter: the prompt matters.
+
+---
+
+<h2 id="early-fishing-route">
+  Best early fishing route
+</h2>
+
+Use this route if you want to finish fishing progression cleanly without turning it into a full fish hunt.
+
+```text
+1. Talk to Kuro.
+2. Craft the Wooden Rod.
+3. Return to Kuro.
+4. Find a fish-gathering spot.
+5. Catch three carp.
+6. Learn bait.
+7. Catch koi.
+8. Reach Fisher Rank 2.
+9. Buy a better rod if you plan to keep fishing.
+10. Progress toward the blocked bridge and Freshwater Crab.
+```
+
+This route gives you the cleanest early fishing foundation. It also sets up later pages in the guide cluster, especially money-making, villager jobs, and early progression.
+
+<Link href="/holovillage-our-cozy-days/beginner-guide/">
+  Back to: holoVillage Beginner Guide
+</Link>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do you fish in holoVillage?
+
+Talk to Kuro, craft a Wooden Rod, equip it, and stand near a fishing spot where fish gather. When the yellow exclamation mark appears, press confirm to start fishing.
+
+### Why can't I fish in holoVillage?
+
+You are probably not standing at a valid fishing spot. You cannot fish in every pond, river, or water tile. Equip the rod and look for a yellow exclamation mark near a fish-gathering spot.
+
+### Where do you catch carp?
+
+Carp is part of Kuro's first fishing task. Use the starting fishing spot in the village area and keep fishing until you catch three carp.
+
+### How does bait work?
+
+Bait lets you go after bigger fish. You can use fish you catch as bait, so do not sell every small fish immediately.
+
+### How do you catch koi?
+
+Finish the first carp task, attach bait when Kuro introduces it, then fish at a valid spot. Reel carefully and stop pulling when the fish thrashes so the line does not snap.
+
+### Why does my fishing line snap?
+
+The line can snap if you keep pulling while the fish is thrashing. Reel during calm windows, ease off during resistance, and finish the catch when the button prompt appears.
+
+### What does Fisher Rank 2 unlock?
+
+Fisher Rank 2 lets you raise your fishing job level further, learn job abilities, and buy a better fishing rod.
+
+### Where is Freshwater Crab?
+
+Freshwater Crab is tied to the later fishing objective beyond the blocked bridge in the northern Hollow Grasslands route toward the Ancient Ruins. If the bridge is still blocked, progress the main and adventuring tasks first.
+
+### Should I sell fish early?
+
+Sell extra fish if you need quick money, but keep some small fish for bait and save valuable fish until you know whether a quest, recipe, or cooking route needs them.
+
+### Is this an all fish locations guide?
+
+No. This guide focuses on early fishing mechanics: where to fish, how bait works, how to catch carp and koi, and how to progress toward Fisher Rank 2 and Freshwater Crab. A full fish database should be handled separately only if there is enough confirmed data.

@@ -138,6 +138,48 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-emerald-700",
 },
 
+// ===== holoVillage: Our Cozy Days =====
+{
+  href: "/holovillage-our-cozy-days",
+  game: "holoVillage: Our Cozy Days",
+  title: "Guide Hub",
+  description:
+    "Start here for the main holoVillage early-game guide cluster, including beginner tips, fishing, villagers, shop money systems, and early combat progression.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/holovillage-our-cozy-days/fishing-guide",
+  game: "holoVillage: Our Cozy Days",
+  title: "Fishing Guide",
+  description:
+    "Where to fish, why some water cannot be fished, how bait works, how to catch carp and koi, and what Fisher Rank unlocks in the early game.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/holovillage-our-cozy-days/how-to-invite-villagers",
+  game: "holoVillage: Our Cozy Days",
+  title: "How to Invite Villagers",
+  description:
+    "How villager houses, visitors, exchange points, invite points, next-day move-ins, villager jobs, and the workbox system work.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/holovillage-our-cozy-days/shop-money-guide",
+  game: "holoVillage: Our Cozy Days",
+  title: "Shop and Money Guide",
+  description:
+    "How to make money through Restaurant and Smitty systems, store setup, sales clerks, bonus profit, cooking, equipment sales, and what to sell early.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
 // ===== Vampire Crawlers =====
 {
   href: "/vampire-crawlers",

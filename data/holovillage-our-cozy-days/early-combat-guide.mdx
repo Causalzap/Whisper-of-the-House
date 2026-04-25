@@ -1,0 +1,650 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const combatSystemRows = [
+  {
+    item: "Main goal",
+    value: "Survive outside the village and clear early combat objectives",
+    why: "Adventuring is not just a side activity. It unlocks materials, drops, gates, job ranks, and stronger progression.",
+  },
+  {
+    item: "First combat mentor",
+    value: "Bubba",
+    why: "Bubba introduces sword basics, early enemies, error creatures, and the first adventuring quests.",
+  },
+  {
+    item: "Basic weapon",
+    value: "Sword",
+    why: "The sword is your safest early weapon because it does not require a special magic setup.",
+  },
+  {
+    item: "Magic option",
+    value: "Staff and MP-based attacks",
+    why: "Magic becomes useful once you have a staff and enough MP support, but it is easier to misread early.",
+  },
+  {
+    item: "Survival tools",
+    value: "Potions and cooked food",
+    why: "Potions restore health, while food can give useful buffs before dangerous fights.",
+  },
+  {
+    item: "Important unlock",
+    value: "Adventure Rank 2",
+    why: "Rank 2 raises your job level cap and unlocks new job abilities, making early combat progression worth doing.",
+  },
+  {
+    item: "Best beginner rule",
+    value: "Prepare before pushing deeper",
+    why: "Early enemies can look harmless, but gates, strong errors, and dungeon enemies can punish careless exploration.",
+  },
+];
+
+export const weaponColumns = [
+  { key: "option", label: "Combat Option" },
+  { key: "bestFor", label: "Best For" },
+  { key: "earlyTip", label: "Early Tip" },
+];
+
+export const weaponRows = [
+  {
+    option: "Sword",
+    bestFor: "Basic melee combat",
+    earlyTip: "Use this as your default early weapon until you understand enemy movement and attack timing.",
+  },
+  {
+    option: "Staff",
+    bestFor: "Magic attacks and ranged pressure",
+    earlyTip: "Only commit to magic after you have a staff, MP support, and enough practice aiming or timing spells.",
+  },
+  {
+    option: "Armor",
+    bestFor: "Safer exploration",
+    earlyTip: "Craft defensive gear before pushing deeper into caves, gates, or stronger enemy areas.",
+  },
+  {
+    option: "Accessories",
+    bestFor: "Small stat bonuses",
+    earlyTip: "Keep pieces that improve damage, movement, dodge, defense, MP cost, or spell speed.",
+  },
+  {
+    option: "Food",
+    bestFor: "Temporary buffs",
+    earlyTip: "Cooked dishes can help with harder fights, especially when your gear is still weak.",
+  },
+  {
+    option: "Potions",
+    bestFor: "Emergency healing",
+    earlyTip: "Carry at least one before testing a new cave, gate, or dangerous enemy group.",
+  },
+];
+
+export const enemyColumns = [
+  { key: "enemyOrThreat", label: "Enemy / Threat" },
+  { key: "whatToExpect", label: "What To Expect" },
+  { key: "howToHandle", label: "How To Handle It" },
+];
+
+export const enemyRows = [
+  {
+    enemyOrThreat: "Basic outside enemies",
+    whatToExpect: "Early creatures that interrupt gathering and exploration.",
+    howToHandle: "Keep your sword ready and avoid fighting while your bag or HP is already in bad shape.",
+  },
+  {
+    enemyOrThreat: "Boars and chickens",
+    whatToExpect: "Common early targets that can drop useful materials or food-related items.",
+    howToHandle: "Farm them only when you can take the hits safely.",
+  },
+  {
+    enemyOrThreat: "Nosagi-style errors",
+    whatToExpect: "More hostile versions of otherwise familiar creatures.",
+    howToHandle: "Treat them as combat enemies, not harmless background mascots.",
+  },
+  {
+    enemyOrThreat: "Magician / ranged enemies",
+    whatToExpect: "Enemies that can punish you while you are focused on mining or looting.",
+    howToHandle: "Move first, then attack. Do not tunnel vision on ore while projectiles are active.",
+  },
+  {
+    enemyOrThreat: "Gate / strong error",
+    whatToExpect: "A larger combat check tied to early Adventure Rank progression.",
+    howToHandle: "Bring healing, food, and upgraded gear if possible. Keep moving and avoid greedy attacks.",
+  },
+];
+
+export const preparationColumns = [
+  { key: "check", label: "Before You Fight" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "safeBeginnerAdvice", label: "Safe Beginner Advice" },
+];
+
+export const preparationRows = [
+  {
+    check: "HP",
+    whyItMatters: "Running into a gate or cave at low health can end the run quickly.",
+    safeBeginnerAdvice: "Heal before pushing deeper.",
+  },
+  {
+    check: "Potion supply",
+    whyItMatters: "Potions are your emergency button when food buffs are not enough.",
+    safeBeginnerAdvice: "Carry at least one potion before testing new combat areas.",
+  },
+  {
+    check: "Food buffs",
+    whyItMatters: "Cooked dishes can improve damage, defense, magic, or other stats.",
+    safeBeginnerAdvice: "Eat before hard fights instead of hoarding every dish forever.",
+  },
+  {
+    check: "Weapon level",
+    whyItMatters: "Weak weapons make fights longer and riskier.",
+    safeBeginnerAdvice: "Upgrade from basic wooden gear when mining and Smitty systems allow it.",
+  },
+  {
+    check: "Armor",
+    whyItMatters: "Defense makes mistakes less punishing.",
+    safeBeginnerAdvice: "Craft armor before forcing deeper combat progression.",
+  },
+  {
+    check: "Inventory space",
+    whyItMatters: "Combat and caves create lots of drops.",
+    safeBeginnerAdvice: "Store materials before leaving so you do not have to throw away useful items.",
+  },
+];
+
+export const adventureRankColumns = [
+  { key: "unlock", label: "Unlock" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "whyYouCare", label: "Why You Care" },
+];
+
+export const adventureRankRows = [
+  {
+    unlock: "Adventure Rank 2",
+    whatItDoes: "Raises your adventuring job progression and unlocks more job ability options.",
+    whyYouCare: "This makes combat more rewarding and gives you stronger tools for later areas.",
+  },
+  {
+    unlock: "Higher job level cap",
+    whatItDoes: "Lets you level the job beyond the first early cap.",
+    whyYouCare: "More levels mean more progression and better long-term scaling.",
+  },
+  {
+    unlock: "Job abilities",
+    whatItDoes: "Lets you spend ability points on useful combat or utility upgrades.",
+    whyYouCare: "Abilities can improve damage, movement, fishing, cooking, survival, or other systems depending on what you pick.",
+  },
+  {
+    unlock: "Bridge and area progression",
+    whatItDoes: "Clearing early combat objectives helps open the route toward new areas.",
+    whyYouCare: "New areas mean new materials, fish, enemies, and progression gates.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Treating holoVillage as pure farming",
+    whyItHurts: "Combat is tied to materials, gates, Adventure Rank, and later progression.",
+    betterPlay: "Do a little adventuring early so you are not underprepared later.",
+  },
+  {
+    mistake: "Leaving with no healing",
+    whyItHurts: "A bad fight can force you home or waste your day.",
+    betterPlay: "Carry potions or cooked food before exploring new combat areas.",
+  },
+  {
+    mistake: "Selling all monster drops",
+    whyItHurts: "Drops can matter for equipment, recipes, Smitty crafting, or quests.",
+    betterPlay: "Store unknown drops until you know whether a recipe uses them.",
+  },
+  {
+    mistake: "Using weak tools too long",
+    whyItHurts: "Low-tier gear makes mining, fighting, and cave exploration slower.",
+    betterPlay: "Upgrade weapons, armor, and tools once ore and Smitty systems are available.",
+  },
+  {
+    mistake: "Standing still during gate fights",
+    whyItHurts: "Strong enemies and bosses can punish greedy attacks.",
+    betterPlay: "Keep moving, attack during safe windows, and heal before you are one hit from losing.",
+  },
+  {
+    mistake: "Ignoring job abilities",
+    whyItHurts: "Rank upgrades are valuable because they unlock stronger passive and active progression.",
+    betterPlay: "Check abilities after ranking up instead of continuing with unspent points.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To survive early combat in holoVillage: Our Cozy Days, start adventuring with Bubba, keep a sword ready, carry potions or cooked food, and do not push gates or caves with weak gear.**
+
+A safe early combat route is:
+
+1. Craft a **Sword** after your basic gathering tools.
+2. Talk to **Bubba** and complete the first adventuring tasks.
+3. Fight basic outside enemies for drops and practice.
+4. Use potions or cooked food before risky areas.
+5. Mine ore and craft better weapons, armor, or a staff.
+6. Prepare before the first **gate / strong error** encounter.
+7. Clear the early combat objective to reach **Adventure Rank 2**.
+8. Spend job ability points after ranking up.
+
+The most important beginner rule is: **do not treat combat as optional.** You need adventuring for materials, progression, gates, and stronger village development.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/early-combat-guide.webp"
+    alt="holoVillage Our Cozy Days adventuring tutorial with Bubba teaching early sword combat."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bubba introduces the first adventuring tasks, including sword practice, early enemies, and the basic combat loop outside the village.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="early-combat-at-a-glance">
+  Early combat at a glance
+</h2>
+
+<GuideDataTable title="" rows={combatSystemRows} />
+
+---
+
+<h2 id="how-combat-works-in-holovillage">
+  How combat works in holoVillage
+</h2>
+
+Combat in **holoVillage: Our Cozy Days** starts earlier than you might expect.
+
+The game looks like a cozy village sim, but the areas outside the village contain enemies, materials, chests, caves, gates, and stronger errors. If you ignore combat completely, you will eventually run into progression walls.
+
+The early combat loop is:
+
+```text
+craft a sword
+-> talk to Bubba
+-> practice attacks
+-> fight basic enemies
+-> gather drops
+-> mine and craft better gear
+-> prepare for gates
+-> rank up adventuring
+```
+
+You do not need to grind combat nonstop on your first day. But you should learn the basics early, because adventuring connects to fishing areas, mining routes, Smitty materials, job abilities, and later village development.
+
+<GuideCallout title="Best beginner rule">
+holoVillage is cozy, but the outside world is not harmless.
+
+Carry a weapon, watch your HP, and bring healing before testing new areas.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-start-adventuring">
+  How to start adventuring
+</h2>
+
+To begin adventuring, talk to **Bubba**, the early adventuring mentor. Bubba introduces the basic idea: the village needs protection, the outside world has danger, and you should learn how to use your sword.
+
+Your first tasks are simple:
+
+- swing your sword
+- collect wood and stone
+- explore near the village
+- fight basic enemies
+- return when the quest objective is complete
+
+This is not just a combat tutorial. It is also the start of your material route. Early fighting overlaps with gathering, mining, cooking, and money because enemies drop useful items.
+
+If you are still setting up your first-day routine, read the <Link href="/holovillage-our-cozy-days/beginner-guide">Beginner Guide</Link> first. That guide explains how adventuring fits into farming, fishing, quests, and your first villager house.
+
+---
+
+<h2 id="sword-staff-armor-and-food">
+  Sword, staff, armor, and food
+</h2>
+
+Your early combat setup is built around weapons, defense, and consumables.
+
+<GuideTable
+  caption="holoVillage early combat options: sword, staff, armor, food, and potions."
+  columns={weaponColumns}
+  rows={weaponRows}
+/>
+
+The **Sword** is the safest beginner option. It is simple, works immediately, and teaches enemy movement.
+
+The **Staff** is interesting if you want to use magic, but magic is easier to misunderstand at the start. You need a staff, MP, and enough practice to make it feel reliable.
+
+**Armor** matters more than it seems. If enemies are taking too much health from you, do not assume the answer is only more damage. Better defense gives you more room to make mistakes.
+
+**Food** and **potions** are what let you push deeper safely. Cooked dishes can give buffs, while potions are the emergency recovery option.
+
+<GuideCallout title="Sword vs staff">
+Use the sword until combat feels comfortable.
+
+Try the staff once you have enough materials, MP support, and healing to survive mistakes.
+</GuideCallout>
+
+---
+
+<h2 id="early-enemies-and-drops">
+  Early enemies and drops
+</h2>
+
+Early enemies are useful because they teach movement and provide materials. They are also dangerous enough to punish careless gathering.
+
+<GuideTable
+  caption="Early holoVillage enemies and threats."
+  columns={enemyColumns}
+  rows={enemyRows}
+/>
+
+You will likely fight small outside enemies first, then stronger errors and dungeon-style enemies later. Some enemies drop food-related items, broken weapons, staffs, ores, accessories, or crafting materials.
+
+Do not sell every drop immediately. If something sounds like a weapon part, equipment material, or strange rare item, store it first. It may matter later for crafting, the Smitty, or equipment upgrades.
+
+For money planning, use the <Link href="/holovillage-our-cozy-days/shop-money-guide">Shop and Money Guide</Link>. That page explains what to sell, what to keep, and how the Smitty uses equipment materials.
+
+---
+
+<h2 id="how-to-prepare-before-gates-and-strong-errors">
+  How to prepare before gates and strong errors
+</h2>
+
+The first serious combat check comes when the game introduces larger distortions, gates, and stronger errors.
+
+Before you push into a gate or stronger combat area, check your setup.
+
+<GuideTable
+  caption="holoVillage early combat preparation checklist."
+  columns={preparationColumns}
+  rows={preparationRows}
+/>
+
+The safest preparation is:
+
+```text
+store extra items
+-> bring healing
+-> eat useful food
+-> equip your best weapon
+-> equip armor
+-> keep enough inventory space
+-> fight patiently
+```
+
+Do not walk into the first gate as if it is a normal tree-chopping route. Gate fights can be more chaotic than the early cozy systems suggest.
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/first-gate-strong-error.webp"
+    alt="holoVillage Our Cozy Days first gate or strong error combat encounter."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first gate or strong error encounter is a real combat check. Bring healing, keep moving, and avoid greedy attacks.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-to-fight-safely">
+  How to fight safely
+</h2>
+
+Early combat is easier if you stop trying to trade hits.
+
+Use this pattern:
+
+```text
+approach
+-> attack once or twice
+-> move away
+-> watch the enemy
+-> repeat
+```
+
+If you stand still and keep attacking, stronger enemies can punish you. Movement matters, especially when projectiles, ranged enemies, or larger attacks appear.
+
+A few safe habits:
+
+- do not fight while your inventory is full
+- do not mine while enemies are already attacking
+- do not wait until your HP is almost empty to heal
+- do not chase drops into danger
+- do not test a new area at midnight with no food
+- do not ignore ranged enemies
+
+If you are using magic, leave extra room. Staff attacks can feel safer because of distance, but they still require positioning and MP awareness.
+
+---
+
+<h2 id="potions-food-buffs-and-healing">
+  Potions, food buffs, and healing
+</h2>
+
+Potions and food solve different problems.
+
+**Potions** are emergency healing. Use them when you are already hurt and need to stay alive.
+
+**Food** is preparation. Use it before or during exploration when you want a buff for damage, defense, magic, or survival.
+
+The Restaurant makes food more important because cooked dishes can be both money and combat support. That creates a real decision:
+
+```text
+sell the dish for profit
+or
+eat the dish to survive a harder area
+```
+
+Early on, keep at least a small supply of healing or buff food before pushing into new caves or gates. Money is useful, but staying alive and clearing progression objectives is usually worth more than selling your last meal.
+
+---
+
+<h2 id="mining-and-smitty-progression">
+  Mining and Smitty progression
+</h2>
+
+Mining is part of combat progression because better gear often starts with ore.
+
+The basic progression is:
+
+```text
+mine ore
+-> smelt materials
+-> craft better tools or gear
+-> fight safer enemies
+-> gather better materials
+```
+
+The **Smitty** becomes important once equipment crafting and enhancement unlock. It lets you craft gear with bonus effects and improve equipment, but enhanced gear can be expensive. Early on, keep useful enhanced gear for yourself instead of selling it too quickly.
+
+If you want to build around Smitty money, read the <Link href="/holovillage-our-cozy-days/shop-money-guide">Shop and Money Guide</Link>. For combat, the main point is simple: better mining leads to better gear, and better gear makes deeper exploration safer.
+
+---
+
+<h2 id="what-adventure-rank-2-unlocks">
+  What Adventure Rank 2 unlocks
+</h2>
+
+Clearing early adventuring objectives eventually leads to **Adventure Rank 2**.
+
+<GuideTable
+  caption="What Adventure Rank 2 unlocks in holoVillage."
+  columns={adventureRankColumns}
+  rows={adventureRankRows}
+/>
+
+Adventure Rank 2 matters because it changes combat from a basic tutorial system into a real progression path. After ranking up, check your job abilities and decide what supports your playstyle.
+
+Good early ability priorities usually include:
+
+- safer combat
+- faster movement or better positioning
+- stronger attacks
+- better magic if using staff
+- support skills that help your daily loop
+
+Do not leave ability points unspent for too long. If the game gives you a rank upgrade, it usually expects you to use the new options.
+
+<figure className="my-8">
+  <Image
+    src="/images/holovillage-our-cozy-days/adventure-rank-2.webp"
+    alt="holoVillage Our Cozy Days Adventure Rank 2 unlock and job abilities tutorial."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Adventure Rank 2 raises your job progression and unlocks new job abilities, making early combat worth completing.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-to-do-after-adventure-rank-2">
+  What to do after Adventure Rank 2
+</h2>
+
+After Adventure Rank 2, your next goal is not just to fight more. It is to use combat progress to improve the whole village.
+
+A good post-rank plan is:
+
+```text
+check job abilities
+-> upgrade weapon or armor
+-> gather harder materials
+-> support Smitty or Restaurant loops
+-> clear blocked routes
+-> prepare for the next area
+```
+
+This is where combat starts connecting with the rest of the game.
+
+Better combat lets you gather better drops.
+
+Better drops help crafting.
+
+Crafting supports money.
+
+Money builds stores and villager houses.
+
+Villagers support jobs.
+
+The village grows faster because your combat route is no longer weak.
+
+---
+
+<h2 id="common-early-combat-mistakes">
+  Common early combat mistakes
+</h2>
+
+Most early combat mistakes come from underpreparing or misunderstanding how connected adventuring is to the rest of the village.
+
+<GuideTable
+  caption="Common holoVillage early combat mistakes and how to avoid them."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+The biggest mistake is pretending combat does not matter. You can spend a lot of time farming and fishing, but adventuring unlocks materials and progression that those systems eventually need.
+
+The second biggest mistake is pushing too deep without healing. If a new area looks suspicious, prepare before testing it.
+
+---
+
+<h2 id="best-early-combat-routine">
+  Best early combat routine
+</h2>
+
+Use this routine when you want steady combat progress without wasting the whole day:
+
+```text
+Morning:
+- water crops
+- check quests
+- store extra items
+
+Day:
+- gather wood and stone
+- mine ore
+- fight basic enemies
+- collect drops and chests
+
+Evening:
+- craft or upgrade gear
+- cook food or buy potions
+- sell only surplus materials
+
+Next day:
+- return stronger
+- push the next gate, cave, or blocked route
+```
+
+This keeps combat connected to the rest of your village. You are not just fighting for fun. You are creating materials, money, gear, and progression.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I start combat in holoVillage?
+
+Craft a sword, then talk to Bubba to begin the early adventuring tutorial. Bubba teaches the basic sword and adventuring flow.
+
+### Is combat optional in holoVillage?
+
+Not really. You can spend a lot of time farming or fishing, but combat is tied to materials, gates, Adventure Rank, job abilities, and later progression.
+
+### Should I use a sword or staff early?
+
+Use the sword first. It is simpler and more reliable. Try the staff once you have materials, MP support, and enough healing to survive mistakes.
+
+### How do I survive the first gate or strong error?
+
+Bring healing, eat useful food if available, equip your best weapon and armor, keep moving, and avoid greedy attacks.
+
+### What does Adventure Rank 2 unlock?
+
+Adventure Rank 2 raises your adventuring progression and unlocks new job ability options. Check your abilities after ranking up.
+
+### Should I sell monster drops?
+
+Be careful. Some drops may be useful for crafting, equipment, Smitty materials, cooking, or quests. Store unknown drops before selling them.
+
+### Are potions worth using?
+
+Yes. Potions are useful emergency healing, especially before you have strong armor or reliable food buffs.
+
+### Does food help in combat?
+
+Yes. Cooked dishes can provide buffs and help you survive harder fights. The tradeoff is that food can also be sold for money.
+
+### When should I upgrade gear?
+
+Upgrade when fights feel slow, enemies hit too hard, or new areas require stronger tools and weapons. Better gear makes exploration safer and faster.
+
+### What should I do after Adventure Rank 2?
+
+Spend ability points, upgrade gear, gather better materials, and use combat progress to support stores, crafting, and village development.

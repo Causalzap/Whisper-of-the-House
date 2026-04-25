@@ -172,6 +172,13 @@ export default function Home() {
                 Vampire Crawlers Guide
               </Link>
 
+              <Link
+                href="/vampire-crawlers"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                HoloVillage: Our Cozy Days Guide
+              </Link>
+
               
               
 
