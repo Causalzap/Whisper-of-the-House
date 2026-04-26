@@ -50,6 +50,13 @@ const Header = () => {
                   </ActiveLink>
 
                   <ActiveLink 
+                    href="/shapez-2" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors font-medium"
+                  >
+                    shapez 2 - Factory
+                  </ActiveLink>
+
+                  <ActiveLink 
                     href="/lucky-tower-ultimate" 
                     className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors font-medium"
                   >

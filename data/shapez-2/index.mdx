@@ -1,0 +1,617 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const shapez2SystemRows = [
+  {
+    item: "Best first mode",
+    value: "Start with Classic Mode, then move into Manufacture Mode",
+    why: "Classic Mode teaches shape production, delivery goals, upgrades, and factory rebuilding before 1.0's Manufacture Mode asks you to manage Trade Stations and longer supply chains.",
+  },
+  {
+    item: "Early goal",
+    value: "Learn a clean production loop",
+    why: "Most beginner progress comes from extracting shapes, cutting, rotating, stacking, painting, then delivering the requested result.",
+  },
+  {
+    item: "1.0 focus",
+    value: "Manufacture Mode, Trade Stations, Trading Rockets, achievements, mods, and visual updates",
+    why: "The full release added new progression pressure, so older Early Access guides can miss the systems players now search for.",
+  },
+  {
+    item: "Big beginner wall",
+    value: "Wires, Belt Filters, and Shape Readers",
+    why: "These tools are the bridge between manual factories and automated decision-making.",
+  },
+  {
+    item: "First advanced goal",
+    value: "Build a small MAM, not a perfect MAM",
+    why: "A first Make Anything Machine should teach shape selection and routing before you try to automate every shape type.",
+  },
+  {
+    item: "Logistics shift",
+    value: "Move from belts to Space Belts and Trains when distance or throughput becomes the problem",
+    why: "Late factories need stable transport between platforms, production blocks, Trade Stations, and large shape-processing areas.",
+  },
+];
+
+export const readingOrderColumns = [
+  { key: "step", label: "Step" },
+  { key: "guide", label: "Guide" },
+  { key: "useItWhen", label: "Use It When" },
+];
+
+export const readingOrderRows = [
+  {
+    step: "1",
+    guide: "This Shapez 2 Guide Hub",
+    useItWhen: "You want the full 1.0 overview and do not know which system to learn next.",
+  },
+  {
+    step: "2",
+    guide: "Manufacture Mode Guide",
+    useItWhen: "You are starting the new 1.0 mode or feel overwhelmed by Trade Stations and permanent factories.",
+  },
+  {
+    step: "3",
+    guide: "Trade Station Guide",
+    useItWhen: "You need to supply Trade Stations, understand Trading Rockets, or fix a rocket that will not launch.",
+  },
+  {
+    step: "4",
+    guide: "Wires and Belt Filter Guide",
+    useItWhen: "You do not understand signals, Shape Readers, Belt Filters, or why your filter is not working.",
+  },
+  {
+    step: "5",
+    guide: "MAM Guide",
+    useItWhen: "You are ready to build your first Make Anything Machine instead of rebuilding manually for every shape.",
+  },
+  {
+    step: "6",
+    guide: "Space Belts and Trains Guide",
+    useItWhen: "Your factory is spread across platforms and belts are no longer enough for distance or throughput.",
+  },
+];
+
+export const beginnerRouteColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const beginnerRouteRows = [
+  {
+    step: "1",
+    whatToDo: "Learn basic extraction and delivery",
+    whyItMatters: "Every later factory depends on reliably moving shapes from sources to machines and objectives.",
+  },
+  {
+    step: "2",
+    whatToDo: "Use belts, cutters, rotators, stackers, and painters",
+    whyItMatters: "These machines are the core grammar of Shapez 2. Most goals are combinations of these operations.",
+  },
+  {
+    step: "3",
+    whatToDo: "Keep factories modular",
+    whyItMatters: "Small reusable blocks are easier to expand, copy, fix, and connect to Space Belts later.",
+  },
+  {
+    step: "4",
+    whatToDo: "Upgrade only after the bottleneck is clear",
+    whyItMatters: "Adding more machines does not help if a belt, input, output, or platform connection is the real limit.",
+  },
+  {
+    step: "5",
+    whatToDo: "Try simple wires before building a MAM",
+    whyItMatters: "Belt Filters and Shape Readers are much easier to learn in a small test build than inside a giant factory.",
+  },
+  {
+    step: "6",
+    whatToDo: "Move into Manufacture Mode after you understand Classic Mode",
+    whyItMatters: "Manufacture Mode expects you to manage longer supply chains, Trade Stations, and permanent production.",
+  },
+];
+
+export const modeComparisonColumns = [
+  { key: "mode", label: "Mode" },
+  { key: "bestFor", label: "Best For" },
+  { key: "mainChallenge", label: "Main Challenge" },
+];
+
+export const modeComparisonRows = [
+  {
+    mode: "Classic Mode",
+    bestFor: "Learning the core game, testing machines, building confidence, and understanding delivery goals",
+    mainChallenge: "Producing the requested shapes efficiently without overbuilding or rebuilding everything from scratch.",
+  },
+  {
+    mode: "Manufacture Mode",
+    bestFor: "Players who want 1.0's new progression loop, Trade Stations, permanent factories, and larger logistics planning",
+    mainChallenge: "Keeping earlier Trade Stations supplied while using their output to feed later production chains.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Starting Manufacture Mode before learning Classic Mode",
+    whyItHurts: "Manufacture Mode adds Trade Stations and longer factory chains before you may understand the basic machine loop.",
+    betterPlay: "Use Classic Mode to learn production first, then treat Manufacture Mode as the 1.0 progression challenge.",
+  },
+  {
+    mistake: "Building one huge tangled factory",
+    whyItHurts: "It becomes hard to debug bottlenecks, reroute shapes, or reuse a working design.",
+    betterPlay: "Build compact modules for cutting, rotating, painting, stacking, filtering, and transport.",
+  },
+  {
+    mistake: "Ignoring throughput",
+    whyItHurts: "A factory can have enough machines but still fail because a belt, Space Belt, or platform output is clogged.",
+    betterPlay: "Check inputs, outputs, and transport lines before adding more production blocks.",
+  },
+  {
+    mistake: "Learning wires only inside a MAM",
+    whyItHurts: "A Make Anything Machine combines many hard ideas at once: signals, filters, unstacking, routing, and shape logic.",
+    betterPlay: "First test a Shape Reader, one Belt Filter, and one simple target shape.",
+  },
+  {
+    mistake: "Treating Trains as an early replacement for everything",
+    whyItHurts: "Trains are strongest when distance, bulk routing, or multi-platform logistics justify the setup cost.",
+    betterPlay: "Use belts and Space Belts for simple nearby movement, then add Trains when the network becomes large.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best way to start Shapez 2 in version 1.0 is to learn the basic production loop in Classic Mode first, then move into Manufacture Mode once belts, cutters, rotators, stackers, painters, and delivery goals feel comfortable.**
+
+For most players, the clean learning path is:
+
+1. Build simple shape production lines.
+2. Keep each factory block modular.
+3. Learn how throughput and bottlenecks work.
+4. Move into **Manufacture Mode** after Classic Mode basics.
+5. Use **Trade Stations** and **Trading Rockets** as your main 1.0 progression loop.
+6. Learn **Wires**, **Shape Readers**, and **Belt Filters** before attempting a full MAM.
+7. Build a small first **MAM** before chasing a perfect Make Anything Machine.
+8. Use **Space Belts** and **Trains** when distance, platform routing, or throughput becomes the real problem.
+
+This guide hub is the starting point. Use it to choose which deeper Shapez 2 guide to read next.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/shapez-2-guide.webp"
+    alt="Shapez 2 factory layout with belts, platforms, shape production, and large-scale automation."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shapez 2 is easiest to learn when you separate the game into basic production, Manufacture Mode progression, automation, and long-distance logistics.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="shapez-2-1-0-at-a-glance">
+  Shapez 2 1.0 at a glance
+</h2>
+
+**Shapez 2 1.0** changes the way new players should learn the game. The basics are still about extracting shapes and transforming them through machines, but the full release puts much more attention on Manufacture Mode, Trade Stations, Trading Rockets, Wires, MAM-style automation, Space Belts, Trains, achievements, mods, and visual improvements.
+
+<GuideDataTable title="" rows={shapez2SystemRows} />
+
+The important beginner rule is simple: do not try to understand every advanced system at once.
+
+Shapez 2 becomes much easier when you treat it as layers:
+
+```text
+basic shapes
+-> machine operations
+-> delivery goals
+-> platform logistics
+-> wires and filtering
+-> MAM automation
+-> Manufacture Mode supply chains
+-> large-scale Space Belt and Train networks
+```
+
+Each layer makes more sense after the previous one feels stable.
+
+<GuideCallout title="Best learning rule">
+If a factory is confusing, shrink the problem.
+
+Build one small test line, confirm the input, confirm the machine operation, confirm the output, then scale it.
+</GuideCallout>
+
+---
+
+<h2 id="recommended-reading-order">
+  Recommended reading order
+</h2>
+
+Use this hub as your map for the full guide cluster.
+
+<GuideTable
+  caption="Shapez 2 guide reading order for 1.0 beginners and returning players."
+  columns={readingOrderColumns}
+  rows={readingOrderRows}
+/>
+
+If you are completely new, start here and then read the <Link href="/shapez-2/manufacture-mode-guide">Manufacture Mode Guide</Link> only after you understand the core production loop.
+
+If you already know Classic Mode and only came back for 1.0, go straight to the <Link href="/shapez-2/trade-station-guide">Trade Station Guide</Link> and then the <Link href="/shapez-2/wires-belt-filter-guide">Wires and Belt Filter Guide</Link>.
+
+---
+
+<h2 id="beginner-route">
+  Best beginner route in Shapez 2
+</h2>
+
+A good beginner route is not about building the biggest factory as early as possible. It is about learning a repeatable method for turning a target shape into a production plan.
+
+<GuideTable
+  caption="Shapez 2 beginner route: what to learn first and why it matters."
+  columns={beginnerRouteColumns}
+  rows={beginnerRouteRows}
+/>
+
+The early game should teach you how to ask better questions:
+
+```text
+What shape do I need?
+Which operations create it?
+Where are my inputs?
+Where is the bottleneck?
+Can this factory block be reused later?
+```
+
+That mindset matters more than a perfect layout.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/early-factory-layout.webp"
+    alt="Early Shapez 2 factory layout with repeated machines and belts for a simple production chain."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A clean early factory should be easy to read. Keep inputs, machines, and outputs visible so bottlenecks are easier to find.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-to-build-first">
+  What to build first
+</h2>
+
+In Shapez 2, the best first builds are small production lines that teach one idea at a time.
+
+Start with the simplest version of the requested shape. Then add machines only when the target requires them. A safe order is:
+
+```text
+extractor
+-> belt
+-> cutter or rotator
+-> stacker if the shape needs layers
+-> painter if the shape needs color
+-> delivery line
+```
+
+Do not overbuild early. A giant factory that you do not understand is worse than a smaller one you can fix quickly.
+
+The most useful early habit is to leave room around every block. Space makes it easier to add parallel belts, split outputs, extend machines, and connect future Space Belts.
+
+<GuideCallout title="Beginner factory rule">
+Build each production line so you can answer three questions quickly: what goes in, what operation happens, and what comes out.
+</GuideCallout>
+
+---
+
+<h2 id="classic-vs-manufacture-mode">
+  Classic Mode vs Manufacture Mode
+</h2>
+
+If you are new to Shapez 2, play **Classic Mode** first. It teaches the language of the game: how shapes are produced, modified, routed, delivered, upgraded, and rebuilt.
+
+Manufacture Mode is the major 1.0 attraction, but it is not the easiest first lesson. It asks you to think in longer chains because Trade Stations need constant supply, and their output can become the input for later progression.
+
+<GuideTable
+  caption="Shapez 2 Classic Mode vs Manufacture Mode."
+  columns={modeComparisonColumns}
+  rows={modeComparisonRows}
+/>
+
+A practical rule:
+
+```text
+New player:
+Classic Mode first
+
+Returning player:
+Manufacture Mode after a short refresher
+
+Advanced factory player:
+Manufacture Mode as the main 1.0 challenge
+```
+
+For a dedicated walkthrough, read the <Link href="/shapez-2/manufacture-mode-guide">Shapez 2 Manufacture Mode Guide</Link>.
+
+---
+
+<h2 id="manufacture-mode-basics">
+  Manufacture Mode basics
+</h2>
+
+Manufacture Mode changes the feel of progression because you are not only making one requested shape and moving on. You are building a more permanent production chain around **Trade Stations**.
+
+In this mode, your Vortex has imploded, and the goal is to process dimensional waste through Trade Stations, collect refined shapes, and rebuild toward the Vortex Grand-Assembler. That means your factory has to keep supplying earlier steps instead of abandoning every old build after a single delivery goal.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/manufacture-mode-trade-station.webp"
+    alt="Shapez 2 Manufacture Mode selection screen explaining Trade Stations and the Vortex Grand-Assembler."
+    width={900}
+    height={1200}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Manufacture Mode is recommended after Classic Mode because it adds Trade Stations, longer supply chains, and more pressure to keep old production useful.
+  </figcaption>
+</figure>
+
+The biggest mistake is treating Manufacture Mode like a normal one-off delivery objective. Instead, think of it as a chain:
+
+```text
+supply Trade Station
+-> receive refined shape output
+-> feed the next production step
+-> keep earlier supply lines alive
+-> expand into a permanent factory network
+```
+
+This is why the first Manufacture Mode guide should focus on what to build first, how to keep stations supplied, and how to avoid turning the map into a tangled mess.
+
+---
+
+<h2 id="trade-stations-and-trading-rockets">
+  Trade Stations and Trading Rockets
+</h2>
+
+**Trade Stations** are one of the most important 1.0 systems to understand. In Manufacture Mode, they act like conversion points: you supply the requested shapes, and the station produces a new shape type that becomes part of the next chain.
+
+That creates a different kind of factory problem. You are no longer asking only:
+
+```text
+Can I make the target shape?
+```
+
+You are also asking:
+
+```text
+Can I keep this station supplied continuously?
+Can its output reach the next step without clogging?
+Is my Space Belt or platform output limiting the whole chain?
+```
+
+Trading Rockets are tied to this progression loop, so if a rocket is not launching, the issue is usually not solved by staring at the rocket alone. Check the full chain: required shape, station supply, output path, throughput, and whether any previous station has stopped producing.
+
+For a focused troubleshooting page, use the <Link href="/shapez-2/trade-station-guide">Shapez 2 Trade Station Guide</Link>.
+
+---
+
+<h2 id="wires-belt-filters-and-shape-readers">
+  Wires, Belt Filters and Shape Readers
+</h2>
+
+Wires are where many players first feel that Shapez 2 has become a logic game instead of only a belt game.
+
+The key idea is that wires do not need to be learned all at once. Start with the simplest useful setup:
+
+```text
+Shape Reader reads a shape
+-> signal travels through wire
+-> Belt Filter uses that signal
+-> matching shapes continue
+-> wrong shapes are redirected or blocked
+```
+
+That small loop explains why **Shape Readers** and **Belt Filters** matter. They let your factory make decisions instead of sending every shape down the same belt.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/wires-belt-filter.webp"
+    alt="Shapez 2 wires upgrade screen showing Wire Basics and wire-related automation components."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wire Basics should be learned with small test builds before you connect signals to a full factory or MAM.
+  </figcaption>
+</figure>
+
+If your Belt Filter is not working, check these first:
+
+- Is the filter receiving the right signal?
+- Is the signal a shape signal, an on/off signal, or something else?
+- Is the filter facing the correct direction?
+- Does the belt contain the exact shape the signal expects?
+- Did you accidentally block the output path?
+
+For detailed examples, read the <Link href="/shapez-2/wires-belt-filter-guide">Shapez 2 Wires and Belt Filter Guide</Link>.
+
+---
+
+<h2 id="first-mam-basics">
+  First MAM basics
+</h2>
+
+A **MAM**, or Make Anything Machine, is a factory that can produce many requested shapes by using signals, filters, routing, and reusable modules.
+
+Do not make your first MAM too ambitious.
+
+A good first MAM should teach one narrow goal:
+
+```text
+read the requested shape
+-> isolate one part of the shape
+-> route the correct inputs
+-> perform one or two operations
+-> output the result reliably
+```
+
+For most players, the best first MAM strategy is to focus on one quarter or one simple shape family before trying to automate every possible layer, color, crystal, pin, and stack.
+
+The reason is simple: a MAM is not one machine. It is a combination of many systems you already need to understand:
+
+- Shape Readers
+- wires
+- Belt Filters
+- cutters
+- rotators
+- painters
+- stackers
+- unstackers
+- input supply
+- output cleanup
+- overflow handling
+
+If any one of those systems is unclear, the full MAM becomes painful to debug.
+
+Start small, then scale. The dedicated <Link href="/shapez-2/mam-guide">Shapez 2 MAM Guide</Link> should be your next step after wires and filters.
+
+---
+
+<h2 id="space-belts-trains-and-logistics">
+  Space Belts, Trains and logistics
+</h2>
+
+Eventually, your problem stops being "can I make this shape?" and becomes "can I move enough of it to the right place?"
+
+That is when **Space Belts** and **Trains** matter.
+
+Space Belts are best when you need to move shapes between nearby platforms or connect production blocks without filling the map with normal belts. They are especially useful because one Space Belt can supply multiple machine platforms when the layout is planned well.
+
+Trains are better when the network becomes larger, the distance is longer, or multiple resources need structured transport across your factory.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/space-belts-or-trains.webp"
+    alt="Shapez 2 Space Belt connection showing shape transport between machine platforms."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Space Belts solve platform-to-platform movement, but they still need enough extraction and output capacity to avoid bottlenecks.
+  </figcaption>
+</figure>
+
+A simple rule:
+
+```text
+Use belts for local movement.
+Use Space Belts between nearby platforms.
+Use Trains when distance, volume, or network structure becomes the problem.
+```
+
+For later factories, read the <Link href="/shapez-2/space-belts-trains-guide">Shapez 2 Space Belts and Trains Guide</Link>.
+
+---
+
+<h2 id="common-beginner-mistakes">
+  Common beginner mistakes
+</h2>
+
+Most beginner problems in Shapez 2 come from scaling a factory before the small version is understandable.
+
+<GuideTable
+  caption="Common Shapez 2 beginner mistakes and what to do instead."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+The fastest way to improve is not to build bigger immediately. It is to debug better.
+
+When something stops working, check in this order:
+
+```text
+input
+-> machine direction
+-> operation result
+-> belt capacity
+-> output path
+-> platform connection
+-> Space Belt or Train throughput
+-> wire signal
+```
+
+That order catches most problems before you waste time rebuilding the wrong part of the factory.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do first in Shapez 2?
+
+Start by learning the basic production loop: extract a shape, move it with belts, modify it with machines, then deliver the requested result. Keep the first builds small and easy to debug.
+
+### Should I start with Classic Mode or Manufacture Mode?
+
+Start with Classic Mode if you are new. Manufacture Mode is a 1.0 mode built around Trade Stations and longer supply chains, so it is easier after you understand basic factories.
+
+### What is Manufacture Mode in Shapez 2?
+
+Manufacture Mode is a 1.0 progression mode where you supply Trade Stations, use their output to feed later production, process dimensional waste, and rebuild toward the Vortex Grand-Assembler.
+
+### How do Trade Stations work?
+
+Trade Stations take specific supplied shapes and output a new shape type. To keep later production running, you need to keep earlier Trade Stations supplied continuously.
+
+### Why is my Trading Rocket not launching?
+
+Check the full supply chain. The problem may be missing required shapes, insufficient Trade Station supply, a clogged output, a stopped previous station, or a throughput bottleneck.
+
+### How do Wires work in Shapez 2?
+
+Wires carry signals that let machines make decisions. A common beginner setup is a Shape Reader sending a shape signal to a Belt Filter so the filter can route matching shapes.
+
+### Why is my Belt Filter not working?
+
+The most common causes are the wrong signal, no signal, the wrong filter direction, a mismatched shape, or a blocked output path. Test one Shape Reader and one Belt Filter before using filters inside a bigger factory.
+
+### When should I build my first MAM?
+
+Build your first MAM after you understand basic wires, Shape Readers, Belt Filters, cutting, rotating, painting, stacking, and output cleanup. Start with a small MAM instead of a perfect all-shape machine.
+
+### What does MAM mean?
+
+MAM means Make Anything Machine. It is a player term for a factory that can automatically produce many requested shapes by using signals, filters, and reusable modules.
+
+### When should I use Space Belts?
+
+Use Space Belts when you need to move shapes between platforms or connect production areas without relying only on normal belts.
+
+### When should I use Trains?
+
+Use Trains when your logistics problem is distance, large-volume transport, or repeated movement between far parts of your factory network.
+
+### Is Shapez 2 1.0 different from Early Access?
+
+Yes. The 1.0 release added Manufacture Mode, full mod support, achievements, visual improvements, and quality-of-life changes, so returning players should expect new progression and new guide needs.

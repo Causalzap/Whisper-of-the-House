@@ -180,19 +180,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/airborne-empire/kingsfell-guide/",
+              href: "/airborne-empire/kingsfell-guide",
               label: "Airborne Empire Kingsfell guide",
             },
             {
-              href: "/airborne-empire/pirate-queen-guide/",
+              href: "/airborne-empire/pirate-queen-guide",
               label: "Airborne Empire Pirate Queen guide",
             },
             {
-              href: "/airborne-empire/jet-engine-guide/",
+              href: "/airborne-empire/jet-engine-guide",
               label: "Airborne Empire Jet Engine guide",
             },
             {
-              href: "/airborne-empire/guide-hub/",
+              href: "/airborne-empire/guide-hub",
               label: "Airborne Empire guide hub",
             },
           ]}

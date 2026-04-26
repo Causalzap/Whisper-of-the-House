@@ -1,0 +1,773 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const logisticsSystemRows = [
+  {
+    item: "Space Belt role",
+    value: "Short- to mid-distance high-throughput platform transport",
+    why: "Space Belts are the first major step from one platform to a multi-platform factory. They are best when you need continuous, visible, high-frequency flow between nearby platforms.",
+  },
+  {
+    item: "Train role",
+    value: "Long-distance bulk transport",
+    why: "Trains are better when the route is very long, the cargo is high volume, and building several Space Belts would create a wall of spaghetti.",
+  },
+  {
+    item: "Space Belt unlock timing",
+    value: "Early game, around Milestone 2-3",
+    why: "They appear when you start expanding away from the starting platform and need to bridge platforms in space.",
+  },
+  {
+    item: "Train unlock timing",
+    value: "Mid- to late game, around Milestone 7",
+    why: "Trains become relevant once distances, bulk inputs, and repeated logistics routes start overwhelming platform-to-platform belts.",
+  },
+  {
+    item: "Space Belt capacity model",
+    value: "Tooltip-confirmed lane / belt multiplier",
+    why: "Space Belt capacity depends on the exact launcher, catcher, layer, lane, and upgrade setup. Use the in-game tooltip as the source of truth instead of planning from an unverified fixed formula.",
+  },
+  {
+    item: "Best train cargo",
+    value: "Bulk raw shapes and bulk paint",
+    why: "Trains shine when moving huge amounts of one clean resource over long distance. They are usually poor for mixed or fragile complex outputs.",
+  },
+  {
+    item: "Most common bottleneck",
+    value: "Downstream output cannot consume what logistics deliver",
+    why: "Both Space Belts and trains usually fail at the receiving side: machines, unloaders, belts, or storage are full.",
+  },
+];
+
+export const decisionColumns = [
+  { key: "question", label: "Question" },
+  { key: "UseSpaceBeltsWhen", label: "Use Space Belts When..." },
+  { key: "UseTrainsWhen", label: "Use Trains When..." },
+];
+
+export const decisionRows = [
+  {
+    question: "How far is the route?",
+    UseSpaceBeltsWhen: "The route crosses a few nearby platforms and you want continuous flow.",
+    UseTrainsWhen: "The source is many platforms away or on the edge of the map.",
+  },
+  {
+    question: "How many item types?",
+    UseSpaceBeltsWhen: "You are moving several small or medium flows that are easier to keep visible.",
+    UseTrainsWhen: "You are moving one or two bulk resources in huge quantities.",
+  },
+  {
+    question: "How much throughput?",
+    UseSpaceBeltsWhen: "One or two Space Belt corridors can carry the required load without blocking other routes.",
+    UseTrainsWhen: "You would need several parallel Space Belt corridors, creating a wall of logistics across the map.",
+  },
+  {
+    question: "How easy is debugging?",
+    UseSpaceBeltsWhen: "You need to see every shape moving and quickly find the blocked output.",
+    UseTrainsWhen: "The route is simple enough that the only major questions are loading, unloading, and track access.",
+  },
+  {
+    question: "What are you carrying?",
+    UseSpaceBeltsWhen: "Intermediate shapes, station inputs, nearby refined outputs, or short platform handoffs.",
+    UseTrainsWhen: "Raw shapes, large paint supply, repeated single-resource imports, or bulk support for distant modules.",
+  },
+  {
+    question: "What is the main risk?",
+    UseSpaceBeltsWhen: "Downstream belts or machines cannot extract all lanes.",
+    UseTrainsWhen: "Unloaders fill up, trains wait in stations, or track layout blocks the route.",
+  },
+];
+
+export const throughputColumns = [
+  { key: "system", label: "System" },
+  { key: "PlanningValue", label: "Planning Value" },
+  { key: "HowToUseIt", label: "How To Use It" },
+];
+
+export const throughputRows = [
+  {
+    system: "Normal belt",
+    PlanningValue: "Common base value: 120 shapes/min",
+    HowToUseIt: "Use this as the unit for local modules. Confirm the actual value in your save after speed upgrades.",
+  },
+  {
+    system: "Space Belt",
+    PlanningValue: "Tooltip-shown capacity multiplier",
+    HowToUseIt: "Treat the launcher / catcher tooltip as the source of truth. Do not plan from a fixed 12-belt or 48-belt formula unless you have confirmed that number in your save.",
+  },
+  {
+    system: "Space Belt layers and lanes",
+    PlanningValue: "Layer / lane layout varies by how you connect launchers, catchers, ramps, and floors",
+    HowToUseIt: "Use the layer controls and belt lifts / ramps to inspect each floor separately before merging outputs.",
+  },
+  {
+    system: "Train wagon",
+    PlanningValue: "Large moving buffer; capacity is shown in the tooltip and changes with upgrades",
+    HowToUseIt: "Use wagons for bulk transport, but remember a full wagon is useless if the unloader cannot empty it.",
+  },
+  {
+    system: "Train loader / unloader",
+    PlanningValue: "Tooltip-driven loading and unloading rate",
+    HowToUseIt: "The station side is often the real bottleneck. Check downstream belts before adding more trains.",
+  },
+  {
+    system: "All logistics numbers",
+    PlanningValue: "Starting points only",
+    HowToUseIt: "Always hover belts, launchers, catchers, wagons, loaders, and unloaders in your current 1.0 save.",
+  },
+];
+
+export const spaceBeltDebugColumns = [
+  { key: "symptom", label: "Symptom" },
+  { key: "LikelyCause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const spaceBeltDebugRows = [
+  {
+    symptom: "The Space Belt is full for a long distance",
+    LikelyCause: "The receiving platform cannot consume or unload shapes fast enough.",
+    Fix: "Debug the output side first: catchers, splitters, machines, trash, storage, and downstream belts.",
+  },
+  {
+    symptom: "Only one lane moves while other lanes back up",
+    LikelyCause: "You are extracting from a high-capacity Space Belt through too few normal belts.",
+    Fix: "Use the tooltip to confirm incoming capacity, then access every needed layer and lane before splitting output across enough machines or belts.",
+  },
+  {
+    symptom: "One layer is jammed but other layers look fine",
+    LikelyCause: "Layer routing or layer balancing is wrong.",
+    Fix: "Inspect each layer separately and add layer balancers or separate outputs before merging.",
+  },
+  {
+    symptom: "Input keeps stopping even though the destination is far away",
+    LikelyCause: "Backpressure from the receiving side travels through the entire Space Belt.",
+    Fix: "Clear the downstream output and add extra consumption before scaling the input.",
+  },
+  {
+    symptom: "The line works until global speed upgrades",
+    LikelyCause: "The old output design no longer extracts enough after speed increases.",
+    Fix: "Recalculate lanes after upgrades. A faster upstream line can break a previously stable catcher output.",
+  },
+];
+
+export const extractionColumns = [
+  { key: "step", label: "Step" },
+  { key: "WhatToDo", label: "What To Do" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const extractionRows = [
+  {
+    step: "1",
+    WhatToDo: "Read the launcher / catcher tooltip",
+    WhyItMatters: "A Space Belt can represent many normal belts of throughput, but the exact multiplier should be confirmed in your current save.",
+  },
+  {
+    step: "2",
+    WhatToDo: "Separate layers before merging",
+    WhyItMatters: "Use belt lifts / ramp pieces at different floor heights to access each layer separately before combining output.",
+  },
+  {
+    step: "3",
+    WhatToDo: "Give each layer enough output belts",
+    WhyItMatters: "If 12 lanes enter and only 1-2 belts leave, the receiver becomes the bottleneck.",
+  },
+  {
+    step: "4",
+    WhatToDo: "Match machines to the extracted output",
+    WhyItMatters: "A clean Space Belt still clogs if the downstream machines are underbuilt.",
+  },
+  {
+    step: "5",
+    WhatToDo: "Add overflow or trash while testing",
+    WhyItMatters: "Temporary cleanup makes it easier to find whether the bottleneck is the output or the next module.",
+  },
+  {
+    step: "6",
+    WhatToDo: "Watch the line for several minutes",
+    WhyItMatters: "Large Space Belts can hide problems until the entire buffer fills.",
+  },
+];
+
+export const trainPartColumns = [
+  { key: "part", label: "Train Part" },
+  { key: "WhatItDoes", label: "What It Does" },
+  { key: "BeginnerTip", label: "Beginner Tip" },
+];
+
+export const trainPartRows = [
+  {
+    part: "Rails",
+    WhatItDoes: "Create the route between distant factory areas.",
+    BeginnerTip: "Use rails for long-distance arteries instead of covering the map with parallel Space Belts.",
+  },
+  {
+    part: "Locomotive / train",
+    WhatItDoes: "Moves wagons between loading and unloading areas.",
+    BeginnerTip: "The train itself is not the whole system. Loading, unloading, and downstream belts decide real throughput.",
+  },
+  {
+    part: "Wagon",
+    WhatItDoes: "Stores a large amount of cargo in transit.",
+    BeginnerTip: "Use wagons for clean bulk cargo. Avoid mixing complex shapes unless you have a very strong reason.",
+  },
+  {
+    part: "Train Loader",
+    WhatItDoes: "Loads cargo into the train.",
+    BeginnerTip: "Keep the input line clean. If a loader floor already contains shape A and a different shape B enters, loading progress can be reset or deleted instead of safely mixing both shapes.",
+  },
+  {
+    part: "Train Unloader",
+    WhatItDoes: "Unloads cargo from the train.",
+    BeginnerTip: "Most train jams start here because the unloader cannot empty into a full downstream line.",
+  },
+  {
+    part: "Train Stop / Wait Stop",
+    WhatItDoes: "Route-control or spacing tools depending on the unlocked train system pieces.",
+    BeginnerTip: "Use them to organize routes, but keep the first train line simple before adding complex intersections.",
+  },
+  {
+    part: "Train Launcher / Vortex delivery",
+    WhatItDoes: "Launches a train directly into the Vortex after the late-game Vortex delivery unlock.",
+    BeginnerTip: "Use this for final-shape delivery after the unlock. It changes train throughput math because the delivery train does not need a normal return trip.",
+  },
+];
+
+export const trainDebugColumns = [
+  { key: "symptom", label: "Symptom" },
+  { key: "LikelyCause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const trainDebugRows = [
+  {
+    symptom: "Train waits at the unloader",
+    LikelyCause: "The unloader output or downstream belt is full.",
+    Fix: "Clear the receiving side, add more output belts, or consume the cargo faster before adding more trains.",
+  },
+  {
+    symptom: "Several trains queue behind one station",
+    LikelyCause: "The station is blocked, unloading is too slow, or the track has no passing space.",
+    Fix: "Add unloading capacity, separate routes, or provide more room near the station.",
+  },
+  {
+    symptom: "Train cannot turn or reverse cleanly",
+    LikelyCause: "The track / station layout lacks the space the train needs.",
+    Fix: "Move the station, extend the rail, or simplify the route so the train has room to enter and leave.",
+  },
+  {
+    symptom: "The train leaves underfed or waits too long to fill",
+    LikelyCause: "The loader's capacity is larger than what the feeding belts can supply.",
+    Fix: "Add more input lanes, feed more floors / layers into the loader, increase upstream production, or let the train wait longer before departure.",
+  },
+  {
+    symptom: "Train line works but production still starves",
+    LikelyCause: "The loader is not receiving enough cargo or the train cycle time is too long.",
+    Fix: "Check loader input, wagon count, train frequency, and whether a second train or closer source is needed.",
+  },
+  {
+    symptom: "Train cargo disappears or never finishes packaging",
+    LikelyCause: "Different shapes are entering the same loader floor or package.",
+    Fix: "Do not mix shapes on one loader floor. Use separate loaders, separate wagons, or separate layers for different cargo types.",
+  },
+  {
+    symptom: "Train delivers the wrong cargo",
+    LikelyCause: "Cargo types were mixed, a loader was connected to the wrong line, or old cargo remained in the wagon.",
+    Fix: "Use trains for clean single-resource routes first. Flush or isolate mixed cargo before reconnecting.",
+  },
+  {
+    symptom: "Rail intersections keep jamming",
+    LikelyCause: "Too many trains share a tight two-way crossing.",
+    Fix: "Separate directions, simplify intersections, or use more direct routes for high-volume lines.",
+  },
+];
+
+export const longDistanceExampleColumns = [
+  { key: "option", label: "Option" },
+  { key: "Build", label: "Build" },
+  { key: "Result", label: "Result" },
+];
+
+export const longDistanceExampleRows = [
+  {
+    option: "Space Belt solution",
+    Build: "Several parallel Space Belt corridors to move a very large blue paint or raw-shape flow across 20 platforms.",
+    Result: "High continuous throughput, but huge footprint, visual spaghetti, and blocked cross-routes.",
+  },
+  {
+    option: "Train solution",
+    Build: "One rail corridor, a multi-wagon train, Train Loader at the source, and Train Unloader at the base.",
+    Result: "Cleaner long-distance bulk logistics, less platform clutter, and easier expansion if unloading is planned well.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "WhyItHurts", label: "Why It Hurts" },
+  { key: "BetterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Treating a Space Belt like one normal belt",
+    WhyItHurts: "You build a high-capacity input but extract through one or two belts.",
+    BetterPlay: "Read the tooltip, then design launchers, catchers, layers, and output belts around the confirmed capacity.",
+  },
+  {
+    mistake: "Scaling input before output",
+    WhyItHurts: "The belt or train fills faster, but the receiving side still cannot consume it.",
+    BetterPlay: "Fix the unloader, catcher, machine count, and downstream belts before adding more supply.",
+  },
+  {
+    mistake: "Using trains for fragile mixed complex shapes",
+    WhyItHurts: "A small mistake fills wagons with hard-to-clean wrong shapes.",
+    BetterPlay: "Use trains first for bulk raw shapes or paint. Keep complex outputs on cleaner, inspectable routes.",
+  },
+  {
+    mistake: "Building tight rail intersections too early",
+    WhyItHurts: "Trains queue, block each other, or fail to turn around cleanly.",
+    BetterPlay: "Start with simple point-to-point routes, then add intersections after the line is stable.",
+  },
+  {
+    mistake: "Ignoring upgrade changes",
+    WhyItHurts: "Global speed upgrades can break previously balanced belts and unloaders.",
+    BetterPlay: "After upgrades, recheck tooltip rates, buffers, and downstream extraction.",
+  },
+  {
+    mistake: "Choosing logistics by looks only",
+    WhyItHurts: "A clean-looking rail line may starve production, while a visible belt line may be easier to debug.",
+    BetterPlay: "Choose by distance, item type, throughput, and how easy the bottleneck will be to find.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Use Space Belts for short- to mid-distance high-frequency platform logistics. Use trains for long-distance bulk transport.**
+
+A practical rule is:
+
+- **Space Belts**: nearby platforms, continuous flow, several small or medium routes, easy visual debugging
+- **Trains**: very long distances, bulk raw shapes, bulk paint, repeated single-resource imports, cleaner map-wide logistics
+- **Train Launcher, unlocked late game around Milestone 10**: launches trains directly into the Vortex, eliminating the return trip and changing final-delivery throughput math
+
+For Space Belt capacity, use the in-game tooltip. Community explanations often describe the layers, lanes, slots, and belt-equivalent capacity differently, so this guide treats the tooltip as the source of truth.
+
+Most Space Belt problems are not input problems. They are **output extraction problems**. Most train problems are not rail problems. They are **unloader and downstream belt problems**.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/space-belts-trains-guide.webp"
+    alt="Shapez 2 1.0 Space Belts and Trains logistics hub with long distance factory transport."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Space Belts and trains solve different logistics problems: continuous platform flow versus long-distance bulk transport.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="logistics-at-a-glance">
+  Space Belts and Trains at a glance
+</h2>
+
+<GuideDataTable title="" rows={logisticsSystemRows} />
+
+The main mistake is treating Space Belts and trains as upgrades of the same tool. They are not.
+
+A Space Belt is a continuous high-throughput bridge between platforms. A train is a bulk transport system for long routes where building parallel Space Belts would waste platform space and create visual clutter.
+
+---
+
+<h2 id="space-belts-vs-trains">
+  Space Belts vs Trains: which should you use?
+</h2>
+
+<GuideTable
+  caption="Shapez 2 Space Belts vs Trains decision table."
+  columns={decisionColumns}
+  rows={decisionRows}
+/>
+
+The simplest rule is:
+
+**short-distance, high-frequency, multi-route logistics = Space Belts**  
+**long-distance, single-resource, bulk logistics = Trains**
+
+For example, if a pure blue paint source is 20 platforms away and you need a very large sustained flow, several parallel Space Belts can work, but they create a huge wall of logistics. A train corridor can do the same job more cleanly if loading and unloading are planned correctly.
+
+<GuideTable
+  caption="Long-distance blue paint example: Space Belts vs Train."
+  columns={longDistanceExampleColumns}
+  rows={longDistanceExampleRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/space-belts-vs-trains.webp"
+    alt="Shapez 2 Space Belts vs Trains comparison for long distance bulk logistics."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the belt route becomes a wall, it is probably time to consider trains.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-are-space-belts">
+  What are Space Belts in Shapez 2?
+</h2>
+
+Space Belts are the main early way to move shapes between platforms. They let you take output from one platform, launch it into space, and catch it on another platform.
+
+They unlock early because the game quickly asks you to move beyond a single platform. Once your factory spreads out, Space Belts become the default tool for nearby logistics.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/space-belt-basic-connection.webp"
+    alt="Shapez 2 Space Belt basic connection between platforms using launcher and catcher."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A Space Belt is a platform-to-platform bridge, not a magic infinite-throughput pipe.
+  </figcaption>
+</figure>
+
+A good Space Belt setup should make three things obvious:
+
+1. what enters the launcher
+2. which layer and lane carries it
+3. how the catcher extracts it on the receiving platform
+
+If you cannot see those three things, the belt will be painful to debug later.
+
+One extra behavior is worth testing before you rely on it: **Space Belt branches can distribute shapes across each branch**. This can be useful for balancing, but verify the split visually before using it in a critical production chain.
+
+---
+
+<h2 id="space-belt-throughput">
+  How Space Belt throughput works
+</h2>
+
+Space Belt throughput is easiest to understand in normal-belt units.
+
+<GuideTable
+  caption="Shapez 2 Space Belt and train throughput planning values."
+  columns={throughputColumns}
+  rows={throughputRows}
+/>
+
+Do not treat Space Belt capacity as a fixed number you memorized from a forum post. The useful planning question is: **how many belt-equivalent outputs does the tooltip say this launcher / catcher setup can move in your current save?**
+
+That is why a Space Belt can look underused or overpowered depending on how many layers, lanes, floors, and output belts you actually connect.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/space-belt-throughput-layers.webp"
+    alt="Shapez 2 Space Belt throughput layers showing multiple lanes and height levels."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Space Belt capacity comes from layers and lanes. If you only extract one lane, you are not using the full belt.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Tooltip rule">
+Always confirm capacity in your own save.
+
+Global speed upgrades change belt rates, and the tooltip is the source of truth for your current factory.
+</GuideCallout>
+
+---
+
+<h2 id="why-space-belt-clogged">
+  Why your Space Belt is clogged
+</h2>
+
+If a Space Belt is clogged, check the receiving side first.
+
+<GuideTable
+  caption="Shapez 2 Space Belt bottleneck troubleshooting."
+  columns={spaceBeltDebugColumns}
+  rows={spaceBeltDebugRows}
+/>
+
+The most common failure is simple: the Space Belt delivers more than the receiving platform can extract or process.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/space-belt-bottleneck.webp"
+    alt="Shapez 2 Space Belt bottleneck where downstream output cannot consume full throughput."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A full Space Belt usually points to a downstream extraction problem, not a launcher problem.
+  </figcaption>
+</figure>
+
+This is especially dangerous because a Space Belt can hold a massive moving buffer. Once the output side stops, the jam can back up across several platforms.
+
+---
+
+<h2 id="extract-full-space-belt-throughput">
+  How to extract full throughput from a Space Belt
+</h2>
+
+To extract full throughput, design the catcher side from the tooltip value backward: whatever the Space Belt can deliver must also be extracted and consumed.
+
+<GuideTable
+  caption="How to extract full Space Belt throughput in Shapez 2."
+  columns={extractionColumns}
+  rows={extractionRows}
+/>
+
+The important mindset is:
+
+```text
+tooltip capacity
+must match
+catcher output capacity
+must match
+downstream machine capacity
+```
+
+If any one of those is lower than the others, that is the real bottleneck.
+
+---
+
+<h2 id="what-are-trains">
+  What are Trains in Shapez 2?
+</h2>
+
+Trains are long-distance logistics tools. They are not just faster belts. They are moving buffers that can carry large amounts of cargo between distant areas.
+
+They usually unlock around the point where your factory has grown beyond comfortable Space Belt routes.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/train-unlock.webp"
+    alt="Shapez 2 train unlock showing rails, locomotive depot, wagon depot and train logistics tools."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Trains become valuable when distance, bulk supply, and platform space matter more than visible continuous flow.
+  </figcaption>
+</figure>
+
+Use trains when the route is long, the cargo is clean, and the source will be used for a long time.
+
+---
+
+<h2 id="train-logistics-basics">
+  Train Loader, Unloader, Wagon and Stop explained
+</h2>
+
+<GuideTable
+  caption="Shapez 2 train logistics parts."
+  columns={trainPartColumns}
+  rows={trainPartRows}
+/>
+
+The core train loop is simple: source belts feed a Train Loader, the wagon carries the cargo, the rail route moves it, and the Train Unloader must empty into belts or machines that can actually consume it.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/train-route-overview.webp"
+    alt="Shapez 2 train route overview with loader, wagon, rail route and unloader."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The route is only as strong as its loader, wagon capacity, unloader, and downstream belts.
+  </figcaption>
+</figure>
+
+Do not overcomplicate the first train line. Start with one clean source and one clean destination.
+
+---
+
+<h2 id="train-loading-unloading">
+  Train loading and unloading bottlenecks
+</h2>
+
+Train capacity is impressive, but capacity is not the same as throughput.
+
+A wagon can carry a large amount, but the route is only as strong as the loader input, train cycle time, unloader output, and consuming factory.
+
+For mixed-cargo problems, use the troubleshooting table below; the safest first train route is still one clean cargo type per loader.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/train-loading-unloading.webp"
+    alt="Shapez 2 Train Loader and Train Unloader moving bulk shapes between distant platforms."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the unloader output is full, the train system stops being a logistics solution and becomes a parking lot.
+  </figcaption>
+</figure>
+
+A useful test is to watch the unloader after one full train arrives. If it stays full for too long, your downstream factory is too slow.
+
+---
+
+<h2 id="why-train-not-working">
+  Why your train is not working
+</h2>
+
+Most train problems come from the station area, not the middle of the rail line.
+
+<GuideTable
+  caption="Shapez 2 train troubleshooting."
+  columns={trainDebugColumns}
+  rows={trainDebugRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/train-bottleneck.webp"
+    alt="Shapez 2 train bottleneck caused by station layout, blocked unloaders or not enough turning space."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the train cannot enter, unload, leave, or turn around cleanly, the route is not finished yet.
+  </figcaption>
+</figure>
+
+Debug trains from the station outward: unloader first, then station space, then loader input, then rail layout.
+
+Adding more trains before fixing unloaders usually makes the jam worse.
+
+---
+
+<h2 id="best-cargo-for-trains">
+  What should trains carry?
+</h2>
+
+The best early train cargo is **bulk raw shapes** or **bulk paint**.
+
+These are good because they are:
+
+- high volume
+- easy to identify
+- useful in many places
+- relatively safe to buffer
+- easier to flush or reroute than complex outputs
+
+Avoid using trains early for fragile mixed complex shapes, operator shapes, or high-layer outputs unless you already have a clean system. If the wrong complex shape enters a wagon, cleanup becomes annoying and error-prone.
+
+<GuideCallout title="Train cargo rule">
+Ask: **Would I be comfortable filling a giant buffer with this item?**
+
+If the answer is no, keep it on a more visible Space Belt route until your cleanup plan is reliable.
+</GuideCallout>
+
+---
+
+<h2 id="space-belts-and-trains-in-manufacture-mode">
+  Space Belts and Trains in Manufacture Mode
+</h2>
+
+Manufacture Mode gives Space Belts and trains different jobs.
+
+Use **Space Belts** inside the Trade Station chain: waste processing, nearby station inputs, refined-shape handoffs, and short platform-to-platform routing where continuous flow and visual debugging matter.
+
+Use **trains** for upstream supply: distant raw-shape sources, bulk paint, repeated imports into MAM-style modules, and long routes that would otherwise consume too much platform capacity.
+
+That split matters because Trade Stations need continuous upstream supply. If a distant raw input starves the first station, every later refined station can starve as well. Keep the station chain local and readable, then bring bulk resources to it with trains when distance becomes the bottleneck.
+
+For the full 1.0 progression path, read the <Link href="/shapez-2/manufacture-mode-guide">Manufacture Mode Guide</Link>. For station-specific routing, read the <Link href="/shapez-2/trade-station-guide">Trade Station Guide</Link>.
+
+---
+
+<h2 id="common-logistics-mistakes">
+  Common Space Belt and Train mistakes
+</h2>
+
+<GuideTable
+  caption="Common Shapez 2 logistics mistakes."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+The safest logistics habit is to debug from the receiving side backward. If the output cannot move, the entire route becomes a storage buffer.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### When do Space Belts unlock in Shapez 2?
+
+Space Belts unlock early, around Milestone 2-3, when you start expanding beyond the initial platform and need to connect platforms across space.
+
+### When do trains unlock in Shapez 2?
+
+Trains usually appear in the mid- to late game, around Milestone 7, when your factory needs long-distance bulk transport.
+
+### How much can a Space Belt carry?
+
+Check the Space Belt launcher / catcher tooltip in your save. Space Belt capacity is best planned from the tooltip because layers, lanes, floor access, and global speed upgrades all affect the practical output you can extract.
+
+### Why is my Space Belt clogged?
+
+The receiving side is probably too slow. Check catchers, output belts, machine count, storage, trash, and downstream capacity before changing the input.
+
+### Why is my Space Belt only partially used?
+
+You may only be extracting from part of the Space Belt. Read the launcher / catcher tooltip, then use belt lifts or ramp pieces to access the relevant floors and lanes before merging output.
+
+### How do I match Space Belt output to downstream machines?
+
+Confirm the belt-equivalent output in the tooltip, give each extracted layer enough output belts, and build enough downstream machines to consume that confirmed capacity.
+
+### Should I use Space Belts or trains?
+
+Use Space Belts for short- to mid-distance continuous flow. Use trains for long-distance bulk raw shapes, bulk paint, or repeated single-resource routes.
+
+### What should trains carry?
+
+Trains are best for bulk raw shapes and bulk paint. Avoid mixed complex shapes until you have a strong reason and a clean cleanup plan.
+
+### What is Train Launcher / Vortex delivery?
+
+Train Launcher or Vortex delivery is a late-game train upgrade that sends trains directly into the Vortex with their cargo. Use it for final delivery after the unlock because it removes the normal return-trip loop.
+
+### Why did my train cargo disappear while loading?
+
+Different shapes entered the same loader floor or package. Keep each loader input clean, or use separate loaders / wagons for different cargo types.
+
+### Why is my train stuck at the unloader?
+
+The unloader output or downstream belt is probably full. Clear the receiving side before adding more trains.
+
+### Are Train Loaders and Unloaders the main train buildings?
+
+Yes, they are the core cargo buildings for normal rail logistics. Depending on unlocks, you may also use train stops, wait stops, wagons, depots, rails, routing pieces, and late-game Train Launcher / Vortex delivery.

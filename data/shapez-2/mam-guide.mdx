@@ -1,0 +1,940 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const mamSystemRows = [
+  {
+    item: "What MAM means",
+    value: "Make Anything Machine",
+    why: "A MAM is a player term for a factory that can read a target shape and automatically produce many different shapes without rebuilding the whole line.",
+  },
+  {
+    item: "1.0 warning",
+    value: "Retest old blueprints",
+    why: "Shapez 2 1.0 changes progression and UI context enough that older Early Access MAM blueprints should be treated as references, not guaranteed drop-in solutions.",
+  },
+  {
+    item: "Best first goal",
+    value: "Build a small working MAM, not an ultimate MAM",
+    why: "A first MAM should teach target reading, filtering, routing, module reuse, and output cleanup before crystals, pins, and full four-layer support.",
+  },
+  {
+    item: "Main target input",
+    value: "Global Receiver or verified target signal",
+    why: "A 1.0 MAM becomes much more useful when it can receive the current objective signal instead of relying on a manually recreated target every time.",
+  },
+  {
+    item: "Main logic layer",
+    value: "Simulated buildings and normalized orientation",
+    why: "Simulated tools process shape signals on the wire layer, letting the MAM inspect layers, rotate quadrants, and decide which modules should activate.",
+  },
+  {
+    item: "Best first scope",
+    value: "One layer or one quadrant first",
+    why: "Trying to solve every color, layer, pin, crystal, and shape family at once makes debugging too hard.",
+  },
+  {
+    item: "Main scaling problem",
+    value: "Control channels and throughput",
+    why: "Copying a MAM is not enough. Multiple MAMs need separate control signals, clean train / belt supply, and enough output capacity.",
+  },
+];
+
+export const firstMamScopeColumns = [
+  { key: "version", label: "MAM Version" },
+  { key: "BuildThis", label: "Build This" },
+  { key: "AvoidForNow", label: "Avoid For Now" },
+];
+
+export const firstMamScopeRows = [
+  {
+    version: "First practical MAM",
+    BuildThis: "A small module chain that can read a target, make a limited family of shapes, and verify the final output.",
+    AvoidForNow: "Full four-layer automation, every possible shape, pins, crystals, and multiple copied factories.",
+  },
+  {
+    version: "Four-layer MAM",
+    BuildThis: "Separate layer logic, layer-specific routing, controlled inputs, and an output merge / cleanup line.",
+    AvoidForNow: "Copying the full build before the first layer works reliably.",
+  },
+  {
+    version: "Multiple MAMs",
+    BuildThis: "Separate control panels, different control channels, dedicated task/operator outputs, and tested input supply.",
+    AvoidForNow: "Using the same signals for two MAMs without changing channel identifiers.",
+  },
+  {
+    version: "Advanced 1.0 MAM",
+    BuildThis: "Pin handling, crystal handling, null checks, simulated-building logic, train-fed supply, and blueprint validation.",
+    AvoidForNow: "Assuming an Early Access blueprint still works without retesting.",
+  },
+];
+
+export const firstScopeDecisionColumns = [
+  { key: "targetSituation", label: "Target Situation" },
+  { key: "StartWith", label: "Start With" },
+  { key: "Why", label: "Why" },
+];
+
+export const firstScopeDecisionRows = [
+  {
+    targetSituation: "Target has several layers",
+    StartWith: "Build the first layer path only",
+    Why: "Layer 1 proves reading, routing, physical production, and output verification before the later layers multiply the same problems.",
+  },
+  {
+    targetSituation: "Target has four quadrants",
+    StartWith: "Normalize and solve the NE quadrant first",
+    Why: "NE gives you one reference orientation. After that works, rotate other quadrants into the same reference before comparing them.",
+  },
+  {
+    targetSituation: "Target includes pins",
+    StartWith: "Skip pins in the first test, then add a pin-specific branch",
+    Why: "Pins do not behave like normal colored quadrants, so they should not be the first thing your MAM tries to solve.",
+  },
+  {
+    targetSituation: "Target includes crystals",
+    StartWith: "Build a normal-shape MAM first",
+    Why: "Crystal handling adds another module family and should come after basic shape signals and physical routing are stable.",
+  },
+  {
+    targetSituation: "Target changes often",
+    StartWith: "Use a Global Receiver and Display before physical modules",
+    Why: "A changing objective is only useful if you can prove the signal changes correctly before it reaches filters and simulated buildings.",
+  },
+];
+
+export const buildRoadmapColumns = [
+  { key: "step", label: "Step" },
+  { key: "WhatToBuild", label: "What To Build" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const buildRoadmapRows = [
+  {
+    step: "1",
+    WhatToBuild: "Global Receiver or target reader + Display",
+    WhyItMatters: "The MAM must know what it is trying to make. In 1.0, a Global Receiver can be the first input for the current objective signal, while a Display proves the signal before it controls anything.",
+  },
+  {
+    step: "2",
+    WhatToBuild: "One filter test",
+    WhyItMatters: "A Belt Filter proves that the target signal can route a correct shape and reject a wrong one.",
+  },
+  {
+    step: "3",
+    WhatToBuild: "Simulated Unstacker / Rotator signal test",
+    WhyItMatters: "Simulated buildings operate on the shape signal, not the physical shape, so they help split target layers and normalize quadrants before routing.",
+  },
+  {
+    step: "4",
+    WhatToBuild: "Normalize one layer or quadrant to NE",
+    WhyItMatters: "Treating northeast as the default orientation makes simulated rotation and comparison logic much easier to reason about.",
+  },
+  {
+    step: "5",
+    WhatToBuild: "One physical operation module",
+    WhyItMatters: "Start with one cutter, rotator, painter, or stacker module so you can debug one transformation at a time.",
+  },
+  {
+    step: "6",
+    WhatToBuild: "Reject and trash handling",
+    WhyItMatters: "Wrong shapes inside a MAM can pollute the whole machine and make later debugging painful.",
+  },
+  {
+    step: "7",
+    WhatToBuild: "Output verification",
+    WhyItMatters: "The final shape must match the target exactly before you copy, scale, or add special-shape support.",
+  },
+];
+
+export const componentColumns = [
+  { key: "component", label: "Component" },
+  { key: "RoleInMam", label: "Role In A MAM" },
+  { key: "BeginnerWarning", label: "Beginner Warning" },
+];
+
+export const componentRows = [
+  {
+    component: "Global Sender / Global Receiver",
+    RoleInMam: "Sends target shape signals across the map so a MAM can react to the current objective without a local manual signal.",
+    BeginnerWarning: "Use a Global Receiver set to the active random / operator objective as the MAM's first input, then confirm the received signal with a Display.",
+  },
+  {
+    component: "Reader / Analyzer",
+    RoleInMam: "Reads the target shape or a part of the target shape.",
+    BeginnerWarning: "Connect it to a Display first. Do not feed an unverified signal directly into the full machine.",
+  },
+  {
+    component: "Display",
+    RoleInMam: "Shows the current wire signal.",
+    BeginnerWarning: "Use Displays while building. Remove or hide them later only after the signal is stable.",
+  },
+  {
+    component: "Simulated Buildings",
+    RoleInMam: "Process the shape signal itself on the wire layer, such as using a Simulated Unstacker to split a target shape into layer signals or a Simulated Rotator to normalize orientation.",
+    BeginnerWarning: "Simulated buildings do not move physical shapes. They transform the signal that tells the physical factory what to make.",
+  },
+  {
+    component: "Belt Filter",
+    RoleInMam: "Routes matching shapes and rejects wrong shapes.",
+    BeginnerWarning: "Shape signals, 1, 0, null, and conflict signals behave differently. Learn filters before building a MAM.",
+  },
+  {
+    component: "Signal Producer",
+    RoleInMam: "Creates a test or fixed signal.",
+    BeginnerWarning: "Use it for controlled tests before wiring a dynamic target reader.",
+  },
+  {
+    component: "Cutters / Rotators / Stackers / Painters",
+    RoleInMam: "Perform the actual physical shape transformations.",
+    BeginnerWarning: "Keep each operation as a reusable module instead of hiding several transformations in one unreadable block.",
+  },
+  {
+    component: "Trash / reject route",
+    RoleInMam: "Removes wrong shapes, outdated parts, and polluted outputs.",
+    BeginnerWarning: "A MAM without cleanup will eventually jam or output bad shapes.",
+  },
+  {
+    component: "Trains / Space Belts",
+    RoleInMam: "Feed shape, color, layer, or module supply into large MAMs.",
+    BeginnerWarning: "A correct MAM can still fail if supply trains, Space Belts, or unloaders cannot keep up.",
+  },
+];
+
+export const globalSignalColumns = [
+  { key: "part", label: "Signal Part" },
+  { key: "WhatItDoes", label: "What It Does" },
+  { key: "HowToUseIt", label: "How To Use It In A MAM" },
+];
+
+export const globalSignalRows = [
+  {
+    part: "Global Sender",
+    WhatItDoes: "Publishes a signal so it can be received elsewhere without running a local wire across the whole map.",
+    HowToUseIt: "Use it when a control panel or objective signal must drive a distant MAM.",
+  },
+  {
+    part: "Global Receiver",
+    WhatItDoes: "Receives a selected global signal, including objective-style shape signals when configured that way.",
+    HowToUseIt: "Set it to the current random / operator objective signal, then feed that into your MAM's target-reading logic.",
+  },
+  {
+    part: "Display",
+    WhatItDoes: "Shows what the receiver is actually outputting.",
+    HowToUseIt: "Place it after the Global Receiver before any simulated building, filter, or gate.",
+  },
+  {
+    part: "Objective source / receiver setting",
+    WhatItDoes: "Chooses which global target or objective signal the receiver listens to.",
+    HowToUseIt: "Set the Global Receiver to the active random / operator objective first, then use a Display to confirm the MAM is reading the correct target before you route it into simulated buildings.",
+  },
+];
+
+export const simulatedBuildingColumns = [
+  { key: "tool", label: "Simulated Tool" },
+  { key: "SignalUse", label: "Signal Use" },
+  { key: "MamTip", label: "MAM Tip" },
+];
+
+export const simulatedBuildingRows = [
+  {
+    tool: "Simulated Unstacker",
+    SignalUse: "Splits a target shape signal into layer signals.",
+    MamTip: "Use it early in the MAM logic so each layer can be routed or built separately.",
+  },
+  {
+    tool: "Simulated Rotator",
+    SignalUse: "Rotates the shape signal without moving a physical shape.",
+    MamTip: "Normalize quadrants to NE before comparing or routing them.",
+  },
+  {
+    tool: "Shape Analyzer",
+    SignalUse: "Extracts information such as color or part type from a shape signal.",
+    MamTip: "Use it after orientation is normalized so the same logic works across quadrants.",
+  },
+  {
+    tool: "Comparator / equality check",
+    SignalUse: "Checks whether a signal matches another expected signal.",
+    MamTip: "Use comparison instead of turning several shape signals into a broad 1 / On signal.",
+  },
+];
+
+export const channelRows = [
+  {
+    problem: "Copied MAM uses the same control signals",
+    WhatHappens: "Both MAMs respond to the same target or layer channel.",
+    Fix: "Change the control panel, channel identifiers, and receiver colors / markers before running the copied MAM.",
+  },
+  {
+    problem: "Operator MAM and task MAM mix outputs",
+    WhatHappens: "One machine keeps making operator shapes while the other switches tasks, causing cleanup and routing confusion.",
+    Fix: "Keep separate outputs and trash lines for operator shapes, task shapes, and test shapes.",
+  },
+  {
+    problem: "Copied receivers still point to the old channel",
+    WhatHappens: "The second MAM looks copied correctly but receives the wrong control signal.",
+    Fix: "Audit every receiver after copying. Do not assume the blueprint edit touched all copies.",
+  },
+  {
+    problem: "Same supply bus feeds too many MAMs",
+    WhatHappens: "A second MAM doubles demand and turns a stable input line into a bottleneck.",
+    Fix: "Check shape supply, color supply, trains, unloaders, and Space Belt capacity before enabling the extra MAM.",
+  },
+];
+
+export const channelColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "WhatHappens", label: "What Happens" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const pinCrystalColumns = [
+  { key: "case", label: "Special Case" },
+  { key: "WhyItBreaks", label: "Why It Breaks A MAM" },
+  { key: "BeginnerFix", label: "Beginner Fix" },
+];
+
+export const pinCrystalRows = [
+  {
+    case: "Pin shapes",
+    WhyItBreaks: "Pins do not behave like colored shape quadrants. Logic that expects color can fail when a pin appears.",
+    BeginnerFix: "Add a separate pin path or null / pin check before treating the part like a normal colored quadrant.",
+  },
+  {
+    case: "Crystal shapes",
+    WhyItBreaks: "Crystal handling can require different preparation and routing than normal shapes.",
+    BeginnerFix: "Do not add crystal support to your first MAM. Build it later as its own module after basic filtering works.",
+  },
+  {
+    case: "Null signals",
+    WhyItBreaks: "A null signal can leave parts sitting still instead of going to trash or output.",
+    BeginnerFix: "Use a Display to verify the signal and provide a clear fallback route.",
+  },
+  {
+    case: "Wrong layer count",
+    WhyItBreaks: "A MAM can send a three-layer shape into a path expecting four layers or the other way around.",
+    BeginnerFix: "Separate layer logic and test each layer path before merging outputs.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "symptom", label: "Symptom" },
+  { key: "LikelyCause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    symptom: "The MAM does not switch to the new target",
+    LikelyCause: "The Global Receiver is not connected to the right objective signal, or the copied MAM is still listening to the old channel.",
+    Fix: "Check the receiver channel, place a Display after it, and confirm the target changes before the signal enters the MAM.",
+  },
+  {
+    symptom: "The MAM outputs the wrong shape",
+    LikelyCause: "A rotated module, wrong layer path, or copied blueprint changed the expected orientation.",
+    Fix: "Check orientation at the module where the wrong part first appears, not only at the final output.",
+  },
+  {
+    symptom: "Simulated logic says the right thing but physical output is wrong",
+    LikelyCause: "The signal layer and physical factory are no longer aligned.",
+    Fix: "Check the simulated signal path, then compare it against the physical module it activates.",
+  },
+  {
+    symptom: "Pins do not pass through the logic",
+    LikelyCause: "The logic expects a colored quadrant, but a pin has no color.",
+    Fix: "Add a separate pin check or fallback path before the color-based logic.",
+  },
+  {
+    symptom: "Shapes sit still and do not go to trash",
+    LikelyCause: "A null signal is holding the line.",
+    Fix: "Display the signal, then create an explicit trash / reject route for the null case.",
+  },
+  {
+    symptom: "The second MAM starves the first one",
+    LikelyCause: "Both MAMs share the same input trains, colors, shapes, or Space Belt capacity.",
+    Fix: "Calculate total demand before duplicating. Add supply lanes or split the jobs.",
+  },
+  {
+    symptom: "Old blueprint behaves differently in 1.0",
+    LikelyCause: "The blueprint was made for an earlier build or an older progression context.",
+    Fix: "Treat old blueprints as references. Rebuild or retest each module in 1.0 before relying on it.",
+  },
+];
+
+export const scalingColumns = [
+  { key: "scalingStep", label: "Scaling Step" },
+  { key: "WhatToCheck", label: "What To Check" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const scalingRows = [
+  {
+    scalingStep: "One MAM",
+    WhatToCheck: "Can it make the target correctly and cleanly?",
+    WhyItMatters: "Correctness comes before speed.",
+  },
+  {
+    scalingStep: "One MAM with stable supply",
+    WhatToCheck: "Are shape inputs, color inputs, and module outputs stable?",
+    WhyItMatters: "A MAM that works only when buffers are full is not truly stable.",
+  },
+  {
+    scalingStep: "Second MAM copy",
+    WhatToCheck: "Can your shape, color, fluid, train, and Space Belt supply support another full machine running at the same time?",
+    WhyItMatters: "Throughput, not blueprint copying, is usually the first scaling wall.",
+  },
+  {
+    scalingStep: "Multiple task chains",
+    WhatToCheck: "Do operator shapes, task shapes, trash, and old outputs stay separated?",
+    WhyItMatters: "Mixed outputs create polluted belts and bad shapes.",
+  },
+  {
+    scalingStep: "Train-fed scaling",
+    WhatToCheck: "Can trains deliver enough shapes per batch and return without blocking?",
+    WhyItMatters: "Input logistics can become the bottleneck before the MAM itself does.",
+  },
+];
+
+export const readyChecklistColumns = [
+  { key: "question", label: "Question" },
+  { key: "IfNo", label: "If No" },
+];
+
+export const readyChecklistRows = [
+  {
+    question: "Can you explain the signal entering the first Belt Filter?",
+    IfNo: "Stop and practice the Wires and Belt Filter setup first.",
+  },
+  {
+    question: "Can you read the target signal on a Display?",
+    IfNo: "Add a Display before any filter, simulated building, or gate.",
+  },
+  {
+    question: "Can one module make the correct physical output?",
+    IfNo: "Do not copy it yet. Fix the physical module before adding MAM logic.",
+  },
+  {
+    question: "Do bad shapes have a visible reject / trash path?",
+    IfNo: "Add cleanup before you let the output merge with anything important.",
+  },
+  {
+    question: "Can you recover after a wrong shape pollutes the line?",
+    IfNo: "Keep the first MAM small until debugging feels routine.",
+  },
+];
+
+export const manufactureUseColumns = [
+  { key: "useCase", label: "Manufacture Mode Use Case" },
+  { key: "WhyMamHelps", label: "Why A MAM Helps" },
+  { key: "BestTiming", label: "Best Timing" },
+];
+
+export const manufactureUseRows = [
+  {
+    useCase: "Operator shape automation",
+    WhyMamHelps: "Operator shapes can provide long-term progress, research points, and platform capacity, so automating them reduces manual rebuilds.",
+    BestTiming: "This is often the first practical MAM target in Manufacture Mode.",
+  },
+  {
+    useCase: "Task shape switching",
+    WhyMamHelps: "A task MAM can change targets without dismantling the factory, especially when multiple tasks share modules.",
+    BestTiming: "Build after one operator-shape MAM is stable.",
+  },
+  {
+    useCase: "Multiple objective chains",
+    WhyMamHelps: "Separate MAMs can work on operator shapes and task shapes at the same time.",
+    BestTiming: "Only after control channels and supply logistics are separated.",
+  },
+  {
+    useCase: "Refined-chain support",
+    WhyMamHelps: "MAM habits help with station input modules, even if the MAM is not directly producing refined shapes.",
+    BestTiming: "Use MAM-style modules when Trade Station inputs start repeating.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "WhyItHurts", label: "Why It Hurts" },
+  { key: "BetterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Trying to build an ultimate MAM first",
+    WhyItHurts: "You combine target reading, filters, pins, crystals, layers, colors, trains, and output cleanup before any one piece is stable.",
+    BetterPlay: "Build a small 1.0-compatible MAM first, then expand feature by feature.",
+  },
+  {
+    mistake: "Copying a MAM without changing channels",
+    WhyItHurts: "Both machines can respond to the same control signals or receivers.",
+    BetterPlay: "Give every copied MAM its own control panel, signal identifiers, and output path.",
+  },
+  {
+    mistake: "Ignoring simulated-building orientation",
+    WhyItHurts: "Your signal logic and physical modules can disagree about which quadrant is being built.",
+    BetterPlay: "Normalize simulated rotation to NE before comparing or routing quadrants.",
+  },
+  {
+    mistake: "Ignoring pins and crystals",
+    WhyItHurts: "Special shapes can break logic that assumes every quadrant has a normal color or operation path.",
+    BetterPlay: "Support pins first, then add crystals as a separate advanced module.",
+  },
+  {
+    mistake: "No trash or cleanup path",
+    WhyItHurts: "Bad shapes and outdated task outputs stay inside the machine and pollute the next result.",
+    BetterPlay: "Add visible reject lanes and trash routes while testing.",
+  },
+  {
+    mistake: "Trusting old blueprints blindly",
+    WhyItHurts: "Shapez 2 1.0 changes enough context that older blueprints may need edits, retesting, or a full rebuild.",
+    BetterPlay: "Use old blueprints as design inspiration, not as guaranteed working production code.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**A MAM in Shapez 2 is a Make Anything Machine: a factory that reads a target shape signal and automatically builds that shape using wires, Global Receivers, simulated buildings, Belt Filters, reusable modules, and cleanup routing.**
+
+For Shapez 2 **1.0**, the safest first MAM is not an ultimate four-layer blueprint. Start with a small 1.0-tested loop:
+
+1. receive or read the target signal
+2. show it on a Display
+3. process the signal with simulated buildings
+4. normalize quadrant logic to NE
+5. route one correct part with a Belt Filter
+6. build one physical operation module
+7. verify output, trash bad shapes, then scale
+
+Old Early Access MAM blueprints can still teach good ideas, but in 1.0 they should be retested or rebuilt before you trust them.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/mam-guide.webp"
+    alt="Shapez 2 1.0 MAM guide showing multiple Make Anything Machines and train-fed shape supply."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A good MAM is not just a big factory. It is a readable signal-controlled system that can survive new targets.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="mam-at-a-glance">
+  Shapez 2 MAM at a glance
+</h2>
+
+<GuideDataTable title="" rows={mamSystemRows} />
+
+A MAM is the natural next step after you understand <Link href="/shapez-2/wires-belt-filter-guide">Wires and Belt Filters</Link>. It combines target reading, global signals, simulated signal processing, exact filtering, reusable shape modules, and cleanup routing into one automated system.
+
+The first lesson is restraint: your first MAM should be small enough that you can explain every signal and every belt.
+
+---
+
+<h2 id="what-is-a-mam">
+  What is a MAM in Shapez 2?
+</h2>
+
+A **MAM**, or **Make Anything Machine**, is a factory that can make different requested shapes without you rebuilding the factory each time.
+
+In 1.0, a useful MAM has four layers of logic:
+
+1. **Target logic** — receive or read what the factory should make.
+2. **Signal logic** — use simulated buildings to inspect, split, rotate, and compare the shape signal.
+3. **Routing logic** — send the right physical parts to the right modules.
+4. **Production logic** — cut, rotate, paint, stack, pin, crystallize, clean up, and output the final shape.
+
+The name is slightly misleading for beginners. A first MAM does not need to make literally everything. It only needs to prove that your factory can read a target and produce a matching output automatically.
+
+---
+
+<h2 id="shapez-2-1-0-mam-notes">
+  Shapez 2 1.0 MAM notes
+</h2>
+
+This guide is written for **Shapez 2 1.0**, not for older Early Access-only blueprint assumptions.
+
+The important 1.0 takeaway is:
+
+- use old MAM videos and blueprints as ideas
+- retest every copied module
+- rebuild signal-heavy blueprints when needed
+- confirm Global Receivers, channels, pins, crystals, simulated rotations, and layer routing in your current save
+- do not assume a pre-1.0 blueprint still handles 1.0 targets correctly
+
+A release-week MAM example explicitly planned to throw away older blueprints and rebuild them for 1.0. That does not mean every old idea is wrong, but it does mean you should validate the module before trusting it.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/mam-blueprint-rebuild-1-0.webp"
+    alt="Shapez 2 1.0 MAM blueprint rebuild warning for older Make Anything Machine designs."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In 1.0, treat older MAM blueprints as references, then rebuild or retest the modules that matter.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="when-to-build-first-mam">
+  When should you build your first MAM?
+</h2>
+
+Use this yes/no check before starting.
+
+<GuideTable
+  caption="Are you ready to build your first Shapez 2 MAM?"
+  columns={readyChecklistColumns}
+  rows={readyChecklistRows}
+/>
+
+If you answer "no" to more than one of these, stop and practice a smaller wire module first. A MAM magnifies every signal, routing, and cleanup mistake.
+
+Manufacture Mode also makes MAM-style thinking more valuable because early production affects later chains, and transport, layout, spacing, and throughput can become bottlenecks even when production itself is correct.
+
+---
+
+<h2 id="first-mam-vs-ultimate-mam">
+  First MAM vs ultimate MAM
+</h2>
+
+Do not build the ultimate MAM first.
+
+<GuideTable
+  caption="Shapez 2 first MAM vs advanced MAM scope."
+  columns={firstMamScopeColumns}
+  rows={firstMamScopeRows}
+/>
+
+The goal of your first MAM is not perfection. It is to learn the control loop: receive target, transform signal, route physical parts, build output, reject bad shapes, then verify the result.
+
+---
+
+<h2 id="first-mam-roadmap">
+  How to build your first MAM in Shapez 2
+</h2>
+
+Use this roadmap for a small 1.0-friendly MAM.
+
+<GuideTable
+  caption="Shapez 2 first MAM build roadmap."
+  columns={buildRoadmapColumns}
+  rows={buildRoadmapRows}
+/>
+
+The first version should be ugly but understandable. Leave Displays in place while testing. Keep reject lanes visible. Do not hide bad shapes until you know why they are bad.
+
+<GuideCallout title="NE orientation rule">
+When using Simulated Rotators for layer or quadrant logic, treat **NE / northeast** as the default orientation.
+
+Most MAM signal logic becomes easier when every quadrant is normalized to NE before comparison or routing.
+</GuideCallout>
+
+---
+
+<h2 id="core-mam-components">
+  Core MAM components
+</h2>
+
+<GuideTable
+  caption="Core components for a Shapez 2 MAM."
+  columns={componentColumns}
+  rows={componentRows}
+/>
+
+The most important component is not one specific building. It is the habit of testing signals before using them.
+
+A Display after a Global Receiver, reader, or simulated building can save you from rebuilding the wrong part of the MAM.
+
+---
+
+<h2 id="global-receiver-target-signal">
+  How Global Sender and Global Receiver work in a Shapez 2 MAM
+</h2>
+
+Global Sender and Global Receiver are the pieces that let a MAM react to a target without running a local wire across the whole factory.
+
+<GuideTable
+  caption="Global signal tools for Shapez 2 MAM target reading."
+  columns={globalSignalColumns}
+  rows={globalSignalRows}
+/>
+
+For a first real MAM, the important idea is:
+
+1. receive the objective / target shape signal
+2. show it on a Display
+3. split or rotate the signal with simulated buildings
+4. use the resulting signal to control physical modules
+
+If the target changes but the MAM does not, check the Global Receiver before you check the physical machines.
+
+---
+
+<h2 id="simulated-buildings">
+  Simulated Buildings in Shapez 2 MAMs
+</h2>
+
+Simulated buildings are one of the biggest differences between a simple factory and a real MAM.
+
+They do not cut, rotate, or stack physical shapes. They operate on the **shape signal**. This lets the MAM inspect the target before deciding what the physical factory should do.
+
+<GuideTable
+  caption="Simulated buildings and signal tools for Shapez 2 MAM logic."
+  columns={simulatedBuildingColumns}
+  rows={simulatedBuildingRows}
+/>
+
+The signal layer runs before the physical factory moves any real shapes. The Simulated Unstacker separates layer information from the target signal, the Simulated Rotator normalizes each piece to NE, and the Shape Analyzer reads color or part type before a physical module is triggered.
+
+That distinction matters: simulated buildings decide **what should be built**, while cutters, rotators, painters, stackers, pins, and crystal modules actually build it.
+
+---
+
+<h2 id="target-signals-and-routing">
+  Target signals and Belt Filter routing
+</h2>
+
+A MAM starts with the target signal. Without that, the factory does not know what it is trying to make.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/mam-control-panel-channels.webp"
+    alt="Shapez 2 1.0 MAM Global Receiver control panel channels for separate Make Anything Machine targets."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Separate control panels and signal channels become important once you copy a MAM or run different targets at the same time.
+  </figcaption>
+</figure>
+
+The safest target route follows the MAM build roadmap above: confirm the signal at each step before connecting the next part of the machine.
+
+If the wrong shape goes through, do not assume the MAM is broken. Put a Display after the Global Receiver, then after the simulated logic, then before the Belt Filter. This tells you whether the problem is the target signal, simulated logic, filter direction, receiver setting, or physical module.
+
+---
+
+<h2 id="one-layer-or-one-quadrant-first">
+  Start with one layer or one quadrant first
+</h2>
+
+The simplest first MAM should not solve every shape. It should solve the smallest target scope that still teaches the real MAM loop.
+
+<GuideTable
+  caption="How to choose your first Shapez 2 MAM target scope."
+  columns={firstScopeDecisionColumns}
+  rows={firstScopeDecisionRows}
+/>
+
+A practical starting point is: **one layer, one normalized NE quadrant, no pins, no crystals, and one visible output check**.
+
+This makes failures easier to locate. If a complete four-layer MAM outputs the wrong shape, the bug could be in the target signal, simulated split, rotation, layer route, physical module, or final stack. If a one-quadrant MAM outputs the wrong shape, the bug has fewer places to hide.
+
+---
+
+<h2 id="pins-crystals-and-null-logic">
+  Pins, crystals and null logic in a Shapez 2 MAM
+</h2>
+
+Pins and crystals are where beginner MAMs often break.
+
+<GuideTable
+  caption="Special shape cases that can break a Shapez 2 MAM."
+  columns={pinCrystalColumns}
+  rows={pinCrystalRows}
+/>
+
+Pins are especially tricky because a pin does not behave like a normal colored quadrant. If your logic asks "what color is this?" a pin can break that assumption.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/mam-pin-shape-logic.webp"
+    alt="Shapez 2 MAM pin shape logic using null checks and gates for Make Anything Machine routing."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pin support should be added deliberately. Do not let color-based logic silently fail on pin shapes.
+  </figcaption>
+</figure>
+
+For a first MAM, it is fine to skip crystals and pins. Add them only after the basic MAM can make normal shapes reliably.
+
+---
+
+<h2 id="why-your-mam-is-not-working">
+  Why your MAM is not working
+</h2>
+
+Most MAM problems are not random. They are usually one of these failures: wrong target signal, bad Global Receiver channel, simulated logic mismatch, wrong orientation, wrong layer, missing cleanup, or weak supply.
+
+<GuideTable
+  caption="Shapez 2 MAM troubleshooting."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+When debugging, work backward from the first wrong shape, not from the final output. The final output only tells you that something went wrong. The first wrong intermediate shape tells you where it went wrong.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/mam-wrong-output-debug.webp"
+    alt="Shapez 2 MAM not working wrong orientation and output debugging example."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Orientation bugs are common after copying or rotating modules. Check the first place where the wrong part appears.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="copying-and-multiple-mams">
+  Copying a MAM and running multiple MAMs
+</h2>
+
+Copying a MAM is not the end of the job.
+
+<GuideTable
+  caption="How to copy and run multiple MAMs in Shapez 2."
+  columns={channelColumns}
+  rows={channelRows}
+/>
+
+The most important rule is to separate the control channels. If one MAM uses one target system and the second MAM is supposed to do task shapes, operator shapes, or a separate goal, the copied MAM needs its own channel identifiers.
+
+This is especially important in 1.0 because Manufacture Mode encourages long-lived infrastructure, operator shapes, research points, and parallel goals. A copied MAM can help, but only if it does not reuse the wrong signal system.
+
+---
+
+<h2 id="scaling-mam-throughput">
+  Scaling MAM throughput with trains and supply
+</h2>
+
+A correct MAM can still be slow.
+
+<GuideTable
+  caption="How to scale a Shapez 2 MAM."
+  columns={scalingColumns}
+  rows={scalingRows}
+/>
+
+Train-fed MAMs need real throughput planning. One example calculation used 180 shapes per packet, three packets, and speed upgrades to reason about a 1,620-shape delivery, while a fully loaded train car would be much larger.
+
+Do not copy those numbers blindly. Use them as a reminder to calculate your own train load, delivery frequency, module demand, and output quota.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/mam-throughput-train-load.webp"
+    alt="Shapez 2 MAM throughput planning with train load and multiple Make Anything Machines."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Multiple MAMs can double output only if the input trains, colors, shapes, and unloaders can support the extra demand.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="mam-in-manufacture-mode">
+  Best MAM use cases in Shapez 2 Manufacture Mode
+</h2>
+
+In Manufacture Mode, the most practical early MAM use is **operator shape automation**. Operator shapes feed long-term progress, research points, and platform capacity, so a MAM that can keep producing them removes a lot of manual rebuilding.
+
+<GuideTable
+  caption="Where MAMs are most useful in Shapez 2 Manufacture Mode."
+  columns={manufactureUseColumns}
+  rows={manufactureUseRows}
+/>
+
+A second useful case is a task MAM: one machine can stay on operator shapes while another switches between task shapes. That is powerful, but it requires separate channels and enough supply to feed both machines.
+
+For the broader 1.0 mode route, read the <Link href="/shapez-2/manufacture-mode-guide">Manufacture Mode Guide</Link>.
+
+---
+
+<h2 id="common-mam-mistakes">
+  Common MAM mistakes
+</h2>
+
+<GuideTable
+  caption="Common Shapez 2 MAM mistakes and what to do instead."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+A good MAM should be easy to pause, inspect, and restart. If you cannot tell what signal a module receives, what shape it should output, or where bad shapes go, the MAM is too hard to debug.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What does MAM mean in Shapez 2?
+
+MAM means Make Anything Machine. It is a player term for a factory that can automatically build many requested shapes by reading a target and routing parts through reusable modules.
+
+### Is MAM an official building?
+
+No. A MAM is not one building. It is a factory design made from Global Receivers, readers, simulated buildings, wires, Displays, Belt Filters, physical operation modules, trash routes, and transport.
+
+### What does a Global Receiver do in a MAM?
+
+A Global Receiver can receive the current objective or target shape signal and feed it into the MAM, so the factory can switch targets without manually rebuilding the signal every time.
+
+### What are simulated buildings in Shapez 2?
+
+Simulated buildings process the shape signal on the wire layer. For example, a Simulated Unstacker can split a target shape signal into layers, and a Simulated Rotator can normalize a quadrant before comparison.
+
+### Why should I normalize to NE?
+
+Treating northeast as the default orientation makes quadrant comparison and simulated rotation logic easier. Simulated Rotators measure the signal relative to a reference direction, so the same quadrant in a different orientation can produce a different signal and break comparison logic that worked on your test shape. Normalize first, then analyze or route.
+
+### Should my first MAM support every shape?
+
+No. Your first MAM should support a small target family, one layer, or one quadrant. Add pins, crystals, multiple layers, and multiple machines later.
+
+### Do I need Wires before building a MAM?
+
+Yes. A MAM depends on target signals, filter routing, simulated buildings, Displays, rejects, and logic. Learn the <Link href="/shapez-2/wires-belt-filter-guide">Wires and Belt Filter Guide</Link> first.
+
+### Do old MAM blueprints work in Shapez 2 1.0?
+
+Treat old blueprints as references, not guaranteed working builds. Retest or rebuild each module in 1.0, especially if it uses wires, pins, crystals, Global Receivers, simulated buildings, or copied control channels.
+
+### Why does my MAM fail on pins?
+
+Pins do not behave like normal colored quadrants. If your logic expects a color signal, a pin can break that path. Add a separate pin check or pin route.
+
+### Why does my MAM output the wrong orientation?
+
+A module may have been rotated, mirrored, or copied with the wrong orientation, or the simulated signal was not normalized to NE before comparison. Find the first wrong intermediate output and fix that module.
+
+### Can I copy a MAM to make it faster?
+
+Yes, but copying is not enough. You must change control channels, receivers, outputs, and supply routing so the copied MAM does not reuse the wrong signals.
+
+### What is the best MAM use in Manufacture Mode?
+
+Operator shape automation is usually the most practical early use because operator shapes support research points and platform capacity. A task-shape MAM is useful later when your first MAM is stable.

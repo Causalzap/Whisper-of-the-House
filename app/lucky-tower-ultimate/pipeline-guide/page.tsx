@@ -198,19 +198,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/lucky-tower-ultimate/companions-guide/",
+              href: "/lucky-tower-ultimate/companions-guide",
               label: "Lucky Tower Ultimate companions guide",
             },
             {
-              href: "/lucky-tower-ultimate/potion-recipes-and-permanent-buffs-guide/",
+              href: "/lucky-tower-ultimate/potion-recipes-and-permanent-buffs-guide",
               label: "Lucky Tower Ultimate potion recipes and permanent buffs guide",
             },
             {
-              href: "/lucky-tower-ultimate/100-achievement-guide/",
+              href: "/lucky-tower-ultimate/100-achievement-guide",
               label: "Lucky Tower Ultimate 100% achievement guide",
             },
             {
-              href: "/lucky-tower-ultimate/guide-hub/",
+              href: "/lucky-tower-ultimate/guide-hub",
               label: "Lucky Tower Ultimate guide hub",
             },
           ]}

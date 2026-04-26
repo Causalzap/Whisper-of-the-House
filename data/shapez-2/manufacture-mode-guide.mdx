@@ -1,0 +1,710 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const manufactureModeSystemRows = [
+  {
+    item: "Main goal",
+    value: "Rebuild toward the Vortex through refined-shape production",
+    why: "The Vortex has imploded, so the mode turns the campaign into a permanent refined-shape supply chain instead of a simple delivery loop.",
+  },
+  {
+    item: "First material",
+    value: "Dimensional Waste",
+    why: "Dimensional Waste comes from your receiver and behaves like a shape stream: you can route it, cut it, and feed the required waste variant into Polishing Stations.",
+  },
+  {
+    item: "First station type",
+    value: "Polishing Stations",
+    why: "Polishing Stations process specific waste input variants into early refined output. They teach the first throughput lesson of the mode.",
+  },
+  {
+    item: "Core progression",
+    value: "Trade Station tiers",
+    why: "Trade Stations consume exact shapes and refined inputs, then output higher-tier refined shapes for later stations and the final assembler.",
+  },
+  {
+    item: "Research layer",
+    value: "Donation Stations and Research Stations",
+    why: "These systems turn production into research points, unlock alternate manufacturers, and help scale or reroute the refined-shape chain.",
+  },
+  {
+    item: "Mid-game choice",
+    value: "Alternate Trade Station recipes",
+    why: "Alternate recipes are not automatic upgrades. They are layout decisions based on input access, routing, station footprint, and downstream demand.",
+  },
+  {
+    item: "Final destination",
+    value: "Grand Vortex Assembler",
+    why: "The final assembler consumes high-tier refined outputs. If an early station is weak, the assembler eventually starves.",
+  },
+];
+
+export const modeComparisonColumns = [
+  { key: "mode", label: "Mode" },
+  { key: "BestFor", label: "Best For" },
+  { key: "MainDifference", label: "Main Difference" },
+];
+
+export const modeComparisonRows = [
+  {
+    mode: "Classic Mode",
+    BestFor: "New players, returning players who want a refresher, and players learning belts, platforms, trains, paint, crystals, and basic throughput.",
+    MainDifference: "You mostly deliver requested shapes to the Vortex and unlock systems step by step. Trade Stations arrive much later as an endgame challenge.",
+  },
+  {
+    mode: "Manufacture Mode",
+    BestFor: "Players who already understand the core factory loop and want the 1.0 progression challenge.",
+    MainDifference: "You process Dimensional Waste, build permanent station chains, use research infrastructure, choose alternate recipes, and work toward the Grand Vortex Assembler.",
+  },
+];
+
+export const classicTradeStationOrderColumns = [
+  { key: "order", label: "Order" },
+  { key: "ClassicModeStage", label: "Classic Mode Trade Station Stage" },
+  { key: "WhatItMeans", label: "What It Means" },
+];
+
+export const classicTradeStationOrderRows = [
+  {
+    order: "1",
+    ClassicModeStage: "Milestone 8+ unlocks red, green, and blue Trade Stations",
+    WhatItMeans: "Classic Mode uses Trade Stations as an endgame expansion after the normal factory loop is already established.",
+  },
+  {
+    order: "2",
+    ClassicModeStage: "Secondary color refined stations",
+    WhatItMeans: "Primary refined outputs start feeding more advanced refined-color chains.",
+  },
+  {
+    order: "3",
+    ClassicModeStage: "White and black refined shapes",
+    WhatItMeans: "The station chain becomes more space- and routing-intensive, especially around refined buses and output paths.",
+  },
+  {
+    order: "4",
+    ClassicModeStage: "Vortex Grand Assembler",
+    WhatItMeans: "High-tier refined shapes become inputs for the final assembler stage.",
+  },
+];
+
+export const firstHourColumns = [
+  { key: "time", label: "Time" },
+  { key: "Goal", label: "Goal" },
+  { key: "WhatToBuild", label: "What To Build" },
+];
+
+export const firstHourRows = [
+  {
+    time: "0-10 min",
+    Goal: "Understand the new start",
+    WhatToBuild: "Locate the Dimensional Waste Receiver, leave room around its output, and route waste to a small platform instead of immediately building a giant bus.",
+  },
+  {
+    time: "10-20 min",
+    Goal: "Prove the waste shape route",
+    WhatToBuild: "Cut or process the receiver output into the waste variant required by the first Polishing Station tooltip.",
+  },
+  {
+    time: "20-30 min",
+    Goal: "Run one Polishing Station",
+    WhatToBuild: "Feed one station first, confirm it accepts the input, and watch the first refined output leave cleanly.",
+  },
+  {
+    time: "30-40 min",
+    Goal: "Scale waste polishing",
+    WhatToBuild: "Expand toward a starter polishing block such as 8 Polishing Stations if the first refined output is too slow.",
+  },
+  {
+    time: "40-50 min",
+    Goal: "Connect the first Trade Station tier",
+    WhatToBuild: "Route refined output plus any ordinary shape inputs into the first real Trade Station block.",
+  },
+  {
+    time: "50-60 min",
+    Goal: "Stabilize before research",
+    WhatToBuild: "Only after the refined chain runs continuously, add a small Donation Station or Research Station loop for research points.",
+  },
+];
+
+export const progressionColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "WhatItMeans", label: "What It Means" },
+  { key: "MainRisk", label: "Main Risk" },
+];
+
+export const progressionRows = [
+  {
+    stage: "Dimensional Waste",
+    WhatItMeans: "The mode starts from a receiver output instead of normal Vortex delivery.",
+    MainRisk: "Treating the receiver output like a disposable tutorial line instead of the root of the factory.",
+  },
+  {
+    stage: "Polishing Stations",
+    WhatItMeans: "Waste variants become the first refined output.",
+    MainRisk: "Running one station successfully but never scaling enough to feed later demand.",
+  },
+  {
+    stage: "Trade Station tiers",
+    WhatItMeans: "Refined outputs and ordinary shapes combine into higher-tier refined shapes.",
+    MainRisk: "Starving later tiers because earlier refined output is unstable.",
+  },
+  {
+    stage: "Donation + Research Stations",
+    WhatItMeans: "Production turns into research points, alternate recipe unlocks, and sometimes useful byproducts.",
+    MainRisk: "Letting research consume shapes that the main progression chain still needs.",
+  },
+  {
+    stage: "Alternate recipes",
+    WhatItMeans: "Research opens different input routes for same-tier refined outputs.",
+    MainRisk: "Choosing a recipe that looks easier but creates worse routing or upstream demand.",
+  },
+  {
+    stage: "Grand Vortex Assembler",
+    WhatItMeans: "High-tier refined outputs feed the final Vortex rebuild objective.",
+    MainRisk: "The final assembler starving because one early station block is underbuilt.",
+  },
+];
+
+export const dimensionalWasteColumns = [
+  { key: "Question", label: "Question" },
+  { key: "Answer", label: "Answer" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const dimensionalWasteRows = [
+  {
+    Question: "Is Dimensional Waste a fluid?",
+    Answer: "No. Treat it like a shape stream. It moves on belts / Space Belts and can be cut or transformed like other shapes.",
+    WhyItMatters: "Your first build is a shape-processing problem, not a pipe problem.",
+  },
+  {
+    Question: "Is the first waste output already the final input?",
+    Answer: "Not always. In the early example, the receiver outputs a whole waste shape, while the first Polishing Station wants a half variant.",
+    WhyItMatters: "Check the station tooltip before feeding raw waste directly into the station.",
+  },
+  {
+    Question: "Does the Polishing Station accept any waste?",
+    Answer: "No. It accepts the specific waste variant shown by its input preview / tooltip.",
+    WhyItMatters: "If the station is not running, the problem may be shape mismatch, not throughput.",
+  },
+];
+
+export const throughputColumns = [
+  { key: "system", label: "System" },
+  { key: "planningValue", label: "Known Value / Planning Note" },
+  { key: "HowToUseIt", label: "How To Use It" },
+];
+
+export const throughputRows = [
+  {
+    system: "Normal belt, base speed",
+    planningValue: "120 shapes/min",
+    HowToUseIt: "Use this to understand local machine modules and simple input/output lines.",
+  },
+  {
+    system: "Space Belt, base speed",
+    planningValue: "480 shapes/min per lane; up to 12 normal-belt lanes when fully using available lanes / levels",
+    HowToUseIt: "Manufacture Mode stations are easier to plan around Space Belt capacity than around single normal belts.",
+  },
+  {
+    system: "Polishing Station, early example",
+    planningValue: "60 shapes/min base processing rate",
+    HowToUseIt: "One station proves the chain, but it will not support a large early Space Belt setup by itself.",
+  },
+  {
+    system: "Starter polishing scale target",
+    planningValue: "At least 8 Polishing Stations is a useful early target when the first refined-output step is too slow",
+    HowToUseIt: "Scale waste processing before expanding into too many station tiers.",
+  },
+  {
+    system: "Trade Station block example",
+    planningValue: "Some early Manufacture Mode station blocks consume / produce about half a Space Belt in observed base-speed setups",
+    HowToUseIt: "Use this as a layout reference only. Different station tiers and upgrades can change the exact count.",
+  },
+  {
+    system: "All values above",
+    planningValue: "Starting points only",
+    HowToUseIt: "Hover the station, belt, or Space Belt in your save. Global speed upgrades, station tiers, and mode differences can change actual values.",
+  },
+];
+
+export const alternateRecipeColumns = [
+  { key: "Question", label: "Question" },
+  { key: "UseAlternateWhen", label: "Use An Alternate Recipe When..." },
+  { key: "StayNormalWhen", label: "Stay With Normal Recipe When..." },
+];
+
+export const alternateRecipeRows = [
+  {
+    Question: "Are the alternate inputs closer?",
+    UseAlternateWhen: "The required shapes or paint are already near your bus or station block.",
+    StayNormalWhen: "The alternate forces a long import line or new train route.",
+  },
+  {
+    Question: "Does it improve Space Belt routing?",
+    UseAlternateWhen: "The alternate input and output sides make cleaner lanes.",
+    StayNormalWhen: "The alternate station creates awkward crossings or blocked output space.",
+  },
+  {
+    Question: "Does it reduce upstream pressure?",
+    UseAlternateWhen: "It uses shapes you can produce cheaply without starving earlier stations.",
+    StayNormalWhen: "It steals refined output from a chain that is already barely keeping up.",
+  },
+  {
+    Question: "Can research support it?",
+    UseAlternateWhen: "Donation Stations and Research Stations already provide enough research points.",
+    StayNormalWhen: "Research is scarce and the normal recipe already runs continuously.",
+  },
+];
+
+export const bottleneckColumns = [
+  { key: "symptom", label: "Symptom" },
+  { key: "LikelyCause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const bottleneckRows = [
+  {
+    symptom: "Polishing Station is idle",
+    LikelyCause: "The waste variant does not match the station input preview.",
+    Fix: "Cut or route the receiver output into the exact waste shape shown in the tooltip.",
+  },
+  {
+    symptom: "Polishing output is too slow",
+    LikelyCause: "Too few Polishing Stations or too little waste input.",
+    Fix: "Scale the polishing block and compare station rate against Space Belt capacity.",
+  },
+  {
+    symptom: "A Trade Station pulses on and off",
+    LikelyCause: "The required input is not arriving continuously.",
+    Fix: "Check the producing module, Space Belt lane, and previous refined station.",
+  },
+  {
+    symptom: "The next tier starves",
+    LikelyCause: "An earlier refined output is unstable.",
+    Fix: "Debug from the first station forward instead of starting at the final station.",
+  },
+  {
+    symptom: "Research slows progression",
+    LikelyCause: "Donation or Research Station input is pulling too much from the same refined line used for campaign progress.",
+    Fix: "Add a dedicated surplus branch, throttle or disconnect the research input temporarily, and reconnect it only when the campaign station has a visible buffer.",
+  },
+  {
+    symptom: "Grand Vortex Assembler starves",
+    LikelyCause: "The final input looks clean, but upstream station blocks cannot sustain demand.",
+    Fix: "Trace every assembler input back to its earliest source and scale the weakest block.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "WhyItHurts", label: "Why It Hurts" },
+  { key: "BetterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Starting Manufacture Mode before learning Classic Mode basics",
+    WhyItHurts: "Manufacture Mode assumes you already understand belts, platforms, machine direction, Space Belts, and throughput.",
+    BetterPlay: "Play Classic Mode first if you are new, then return to Manufacture Mode as the 1.0 challenge mode.",
+  },
+  {
+    mistake: "Treating Dimensional Waste as a generic input",
+    WhyItHurts: "The first station may require a specific waste variant, not the raw receiver output exactly as-is.",
+    BetterPlay: "Read the Polishing Station tooltip and shape preview before scaling waste input.",
+  },
+  {
+    mistake: "Mixing refined shapes with test output",
+    WhyItHurts: "Wrong shapes can pollute a refined bus and travel deep into the chain.",
+    BetterPlay: "Keep refined output separate and verify previews before merging lines.",
+  },
+  {
+    mistake: "Ignoring Donation and Research Stations",
+    WhyItHurts: "You miss the research infrastructure that unlocks alternate recipes and scaling options.",
+    BetterPlay: "Add a small research loop after your first refined chain is stable.",
+  },
+  {
+    mistake: "Choosing alternate recipes automatically",
+    WhyItHurts: "An alternate recipe can be worse if its inputs are far away or awkward to route.",
+    BetterPlay: "Choose alternates based on input access, footprint, throughput, and downstream demand.",
+  },
+  {
+    mistake: "Treating early stations as disposable",
+    WhyItHurts: "Later Trade Stations and the Grand Vortex Assembler can depend on the earliest refined outputs.",
+    BetterPlay: "Build early stations as permanent infrastructure with room to expand.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Manufacture Mode in Shapez 2 is the 1.0 progression mode where you process Dimensional Waste, polish it into refined output, feed Trade Station tiers, build research infrastructure, unlock alternate recipes, and work toward the Grand Vortex Assembler.**
+
+The clean route is:
+
+**Dimensional Waste → Polishing / first refined output → Trade Station tiers → Donation Station + Research Station research infrastructure → alternate recipes → scaled refined chains → Grand Vortex Assembler**
+
+Play Classic Mode first if you are new. Manufacture Mode is built for players who already understand belts, platforms, Space Belts, trains, painting, crystals, and throughput.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/manufacture-mode-guide.webp"
+    alt="Shapez 2 Manufacture Mode guide showing the Vortex implosion and rebuild objective."
+    width={600}
+    height={200}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Manufacture Mode changes Shapez 2 into a permanent refined-shape supply-chain challenge.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="manufacture-mode-at-a-glance">
+  Manufacture Mode at a glance
+</h2>
+
+<GuideDataTable title="" rows={manufactureModeSystemRows} />
+
+Manufacture Mode is the clearest example of what Shapez 2 becomes in version 1.0: less about one-off delivery goals, and more about long factory chains that remain useful for hours.
+
+The mode works best when you think in permanent layers: source, processing, Trade Station tiers, research, alternate recipes, and final assembler output.
+
+---
+
+<h2 id="what-is-manufacture-mode">
+  What is Manufacture Mode in Shapez 2?
+</h2>
+
+Manufacture Mode is a 1.0 mode where the Vortex is no longer the simple central delivery target from Classic Mode. The Vortex has imploded, and your job is to process damaged shapes into refined shapes, trade them upward, and rebuild toward the Grand Vortex Assembler.
+
+The important difference is permanence. In Classic Mode, many milestone factories can be deleted after their quota is complete. In Manufacture Mode, earlier production often feeds later station tiers, so deleting an old block can break the chain several steps later.
+
+For station ratios, rocket issues, alternate recipes, and refined-shape troubleshooting, read the <Link href="/shapez-2/trade-station-guide">Shapez 2 Trade Station Guide</Link>.
+
+---
+
+<h2 id="manufacture-mode-vs-classic-mode">
+  Manufacture Mode vs Classic Mode: which should you play first?
+</h2>
+
+<GuideTable
+  caption="Shapez 2 Manufacture Mode vs Classic Mode."
+  columns={modeComparisonColumns}
+  rows={modeComparisonRows}
+/>
+
+A practical rule:
+
+- choose **Classic Mode** if you are new
+- choose **Manufacture Mode** if you understand the basics and want the new 1.0 supply-chain challenge
+- return to Classic Mode if Manufacture Mode feels confusing before you understand Space Belts, trains, paint, crystals, and throughput
+
+Classic Mode also has Trade Stations, but they appear later as an endgame system rather than the main structure of the campaign.
+
+<GuideTable
+  caption="Classic Mode Trade Station order in Shapez 2 1.0."
+  columns={classicTradeStationOrderColumns}
+  rows={classicTradeStationOrderRows}
+/>
+
+This is why the same building feels different across modes. In Classic Mode, Trade Stations extend the endgame. In Manufacture Mode, they are the spine of the whole run.
+
+---
+
+<h2 id="first-60-minutes">
+  Shapez 2 Manufacture Mode first 60 minutes checklist
+</h2>
+
+The first hour matters because it teaches the core loop before the map turns into a refined-shape spaghetti chain.
+
+<GuideTable
+  caption="What to do in your first 60 minutes of Shapez 2 Manufacture Mode."
+  columns={firstHourColumns}
+  rows={firstHourRows}
+/>
+
+<GuideCallout title="First-hour rule">
+Do not copy a station block until it has run continuously.
+
+One stable block is better than eight copied bottlenecks.
+</GuideCallout>
+
+After the first hour, your goal is not to start over. Your goal is to keep the first chain readable enough that it can become permanent infrastructure.
+
+---
+
+<h2 id="manufacture-mode-progression-map">
+  Manufacture Mode progression map
+</h2>
+
+Use this as the high-level route through the mode.
+
+<GuideTable
+  caption="Shapez 2 Manufacture Mode progression route and main risk at each stage."
+  columns={progressionColumns}
+  rows={progressionRows}
+/>
+
+The most important part is the dependency chain. If a first-tier refined output stops, every later station that depends on it can starve. If your research infrastructure steals too much input, campaign progression can slow down. If the final assembler does not get enough refined output, the whole chain needs more throughput upstream.
+
+---
+
+<h2 id="dimensional-waste-receiver">
+  What is Dimensional Waste in Shapez 2 Manufacture Mode?
+</h2>
+
+Dimensional Waste is the starting material of Manufacture Mode. It is not a fluid. Treat it like a shape stream that comes from the Dimensional Waste Receiver, moves on belts or Space Belts, and can be cut or routed before entering a station.
+
+<GuideTable
+  caption="How Dimensional Waste works in Shapez 2 Manufacture Mode."
+  columns={dimensionalWasteColumns}
+  rows={dimensionalWasteRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/dimensional-waste-receiver.webp"
+    alt="Shapez 2 Manufacture Mode Dimensional Waste Receiver output setup."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Dimensional Waste Receiver is the root of your early Manufacture Mode factory, so keep the first output route clean.
+  </figcaption>
+</figure>
+
+The key detail is that the first Polishing Station may not want the receiver output exactly as it appears. In the early example, the receiver spits out a whole waste shape, while the station wants a half variant. That means your first "recipe" is often a simple waste-shape preparation step before polishing.
+
+---
+
+<h2 id="polishing-station">
+  How to scale Polishing Stations in Shapez 2
+</h2>
+
+Polishing Stations process Dimensional Waste variants into the first useful refined output. This is the first place where Manufacture Mode teaches a new lesson: one working station is not the same as enough throughput.
+
+<GuideTable
+  caption="Manufacture Mode early throughput planning values."
+  columns={throughputColumns}
+  rows={throughputRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/polishing-station.webp"
+    alt="Shapez 2 Manufacture Mode Polishing Station scale setup for Dimensional Waste."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Polishing Stations teach the first Manufacture Mode throughput lesson: prove the route, then scale the processing block.
+  </figcaption>
+</figure>
+
+These numbers are starting points, not universal rules. Hover the station or belt in your save to confirm the actual value after global speed upgrades, station tiers, or mode-specific changes.
+
+---
+
+<h2 id="trade-stations-in-manufacture-mode">
+  How Trade Stations fit into Manufacture Mode
+</h2>
+
+Trade Stations turn exact input shapes into refined shapes used by later tiers.
+
+The key difference from Classic Mode is that earlier stations often stay useful. A first real Trade Station may feed a second station, which feeds a third, which eventually feeds the final assembler. That makes station layout, Space Belt routing, and refined-output separation more important than compactness.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/first-real-trade-station.webp"
+    alt="Shapez 2 Manufacture Mode first real Trade Station Space Belt routing challenge."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first real Trade Station is where Manufacture Mode starts to become a permanent logistics puzzle.
+  </figcaption>
+</figure>
+
+A good Trade Station block needs exact input shape, stable input rate, clear Space Belt connection, unblocked refined output, enough room for copies, and a visible route to the next tier.
+
+---
+
+<h2 id="donation-station-and-research-station">
+  What do Donation Stations and Research Stations do in Manufacture Mode?
+</h2>
+
+Donation Stations and Research Stations are the research layer of Manufacture Mode.
+
+A **Donation Station** accepts shapes and turns production into operator progress and research points. This makes it the bridge between factory output and alternate recipe unlocks.
+
+A **Research Station** uses refined inputs for research progress and can provide useful output or byproducts that help scale earlier production.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/donation-station.webp"
+    alt="Shapez 2 Manufacture Mode Donation Station research point setup."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Donation Stations let your production unlock alternate manufacturers and other research options.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/research-station.webp"
+    alt="Shapez 2 Manufacture Mode Research Station refined shape byproduct loop."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Research Stations are part of the scaling loop, not a separate side system.
+  </figcaption>
+</figure>
+
+Do not build research infrastructure too early. First stabilize the main refined chain, then add Donation and Research Stations without starving campaign progression.
+
+---
+
+<h2 id="alternate-recipes">
+  Shapez 2 Manufacture Mode alternate recipes: when to use them
+</h2>
+
+Alternate recipes are research-unlocked Trade Station routes that use different inputs for same-tier refined output variants.
+
+They are not automatic upgrades. They are layout decisions.
+
+<GuideTable
+  caption="How to choose alternate recipes in Shapez 2 Manufacture Mode."
+  columns={alternateRecipeColumns}
+  rows={alternateRecipeRows}
+/>
+
+The best alternate recipe is the one that makes the whole factory cleaner, not the one that looks easiest in isolation.
+
+---
+
+<h2 id="avoid-early-bottlenecks">
+  How to fix Manufacture Mode bottlenecks
+</h2>
+
+Most Manufacture Mode bottlenecks are easier to diagnose if you treat them as symptoms, not personal failure.
+
+<GuideTable
+  caption="Common Shapez 2 Manufacture Mode bottlenecks and fixes."
+  columns={bottleneckColumns}
+  rows={bottleneckRows}
+/>
+
+Debug from the earliest source forward: receiver output, first processing station, refined output path, Trade Station input, station output, research loop, alternate recipe route, and final assembler input.
+
+---
+
+<h2 id="grand-vortex-assembler">
+  What is the Grand Vortex Assembler in Shapez 2?
+</h2>
+
+The Grand Vortex Assembler is the long-term destination of Manufacture Mode. It consumes high-tier refined outputs and represents the final reason you are building the whole Trade Station chain.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/grand-vortex-assembler.webp"
+    alt="Shapez 2 Grand Vortex Assembler final Manufacture Mode refined shape objective."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Grand Vortex Assembler turns your refined-shape infrastructure into the final Manufacture Mode objective.
+  </figcaption>
+</figure>
+
+When planning for the assembler, ask three questions:
+
+1. Which refined shapes does it consume?
+2. Which earlier station chains create those refined shapes?
+3. Can every upstream chain run continuously at the required rate?
+
+If the third answer is no, the assembler will starve even if the final input belt looks clean.
+
+---
+
+<h2 id="common-manufacture-mode-mistakes">
+  Common Manufacture Mode mistakes
+</h2>
+
+<GuideTable
+  caption="Common Shapez 2 Manufacture Mode mistakes and what to do instead."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+The best way to avoid these mistakes is to build every important block as if it will stay forever: clean input side, visible station block, separate refined output, space for copies, and room for research or alternate recipes later.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is Manufacture Mode in Shapez 2?
+
+Manufacture Mode is a 1.0 progression mode where you process Dimensional Waste, create refined shapes, feed Trade Stations, use research infrastructure, unlock alternate recipes, and work toward the Grand Vortex Assembler.
+
+### Should I play Classic Mode before Manufacture Mode?
+
+Yes, if you are new. Manufacture Mode assumes you already understand basic Shapez 2 production, belts, platforms, Space Belts, trains, paint, crystals, and throughput.
+
+### What should I do first in Manufacture Mode?
+
+Start with the Dimensional Waste Receiver, prepare the waste variant required by the first Polishing Station, run one Polishing Station, then scale the starter polishing block before connecting later Trade Station tiers.
+
+### What does Dimensional Waste look like?
+
+Dimensional Waste behaves like a shape stream, not a fluid; check the Polishing Station preview because the required waste variant may be different from the raw receiver output.
+
+### Does the Polishing Station accept any waste shape?
+
+No. Feed the specific waste variant shown in the station tooltip or input preview. If the station is idle, check shape mismatch before assuming it is a throughput problem.
+
+### How many Polishing Stations do I need?
+
+Start with one to prove the route, then scale. Early guidance points toward at least 8 Polishing Stations when the first refined-output step is too slow.
+
+### What do Trade Stations do in Manufacture Mode?
+
+Trade Stations consume exact input shapes and output refined shapes that feed later Trade Station tiers, research loops, rockets, or the Grand Vortex Assembler.
+
+### What do Donation Stations and Research Stations do?
+
+Donation Stations generate operator progress and research points. Research Stations use refined inputs for research progress and can provide useful outputs or byproducts that help scale earlier production.
+
+### What are alternate recipes?
+
+Alternate recipes are research-unlocked Trade Station routes with different inputs for same-tier refined output variants. Use them when they simplify routing or input supply.
+
+### What is the Grand Vortex Assembler?
+
+The Grand Vortex Assembler is the final destination of the refined-shape chain. It consumes high-tier refined outputs and turns the Manufacture Mode supply chain into the final objective.
+
+### Why is my Manufacture Mode factory stuck?
+
+Check the earliest source first: Dimensional Waste output, Polishing Station input, refined output route, Trade Station input, station output, research loop, alternate recipe path, and final assembler demand.
+
+### What guide should I read next?
+
+Read the <Link href="/shapez-2/trade-station-guide">Trade Station Guide</Link> for ratios, rocket issues, alternate recipe decisions, Donation Stations, Research Stations, and Grand Vortex Assembler troubleshooting. For the overall game path, return to the <Link href="/shapez-2">Shapez 2 Guide Hub</Link>.

@@ -164,19 +164,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/airborne-empire/tilt-lift-balance-guide/",
+              href: "/airborne-empire/tilt-lift-balance-guide",
               label: "Airborne Empire tilt, lift, and balance guide",
             },
             {
-              href: "/airborne-empire/jet-engine-guide/",
+              href: "/airborne-empire/jet-engine-guide",
               label: "Airborne Empire Jet Engine guide",
             },
             {
-              href: "/airborne-empire/kingsfell-guide/",
+              href: "/airborne-empire/kingsfell-guide",
               label: "Airborne Empire Kingsfell guide",
             },
             {
-              href: "/airborne-empire/pirate-queen-guide/",
+              href: "/airborne-empire/pirate-queen-guide",
               label: "Airborne Empire Pirate Queen guide",
             },
           ]}

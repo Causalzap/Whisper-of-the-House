@@ -179,6 +179,13 @@ export default function Home() {
                 HoloVillage: Our Cozy Days Guide
               </Link>
 
+              <Link
+                href="/shapez-2"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                shapez 2 - Factory Guide
+              </Link>
+
               
               
 

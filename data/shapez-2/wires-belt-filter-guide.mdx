@@ -1,0 +1,660 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const wireSystemRows = [
+  {
+    item: "What wires do",
+    value: "Carry signals instantly across wire sections",
+    why: "Wires do not make shapes by themselves. They let filters, gates, readers, and logic tools make decisions.",
+  },
+  {
+    item: "Best first tool",
+    value: "Belt Filter",
+    why: "A Belt Filter gives visible feedback: shapes pass through, get redirected, or stop.",
+  },
+  {
+    item: "Best debugging tool",
+    value: "Display",
+    why: "A Display shows the signal currently on a wire, which is the fastest way to tell whether your filter is receiving a shape, 1, 0, null, or conflict.",
+  },
+  {
+    item: "Common beginner trap",
+    value: "Using an on/off signal when you meant a shape signal",
+    why: "A 1 signal lets everything through. It does not mean 'the correct shape'.",
+  },
+  {
+    item: "Most confusing behavior",
+    value: "Null and conflict signals block Belt Filters",
+    why: "A null signal does not redirect shapes. It stops them at the filter, which can look like the filter is broken.",
+  },
+  {
+    item: "Why it matters later",
+    value: "Wires are the bridge to MAMs",
+    why: "A Make Anything Machine depends on target reading, exact filtering, logic, and clean reject routing.",
+  },
+];
+
+export const automationToolColumns = [
+  { key: "tool", label: "Tool" },
+  { key: "UseCase", label: "Use Case" },
+  { key: "BeginnerTip", label: "Beginner Tip" },
+];
+
+export const automationToolRows = [
+  {
+    tool: "Wire / Cable",
+    UseCase: "Carries a signal from one component to another.",
+    BeginnerTip: "Keep the first wire short and visible. Long hidden wire runs make debugging harder.",
+  },
+  {
+    tool: "Belt Filter",
+    UseCase: "Passes, redirects, or blocks shapes based on its input signal.",
+    BeginnerTip: "Use it as your first wire test because the result is visible immediately on the belt.",
+  },
+  {
+    tool: "Display",
+    UseCase: "Shows the current signal on a wire.",
+    BeginnerTip: "Place a Display on the wire before connecting a complex reader to a filter. If the Display shows null or conflict, fix the signal first.",
+  },
+  {
+    tool: "Belt Reader / Shape Reader / Analyzer",
+    UseCase: "Reads a belt or shape and outputs a signal. The exact UI label can vary by language or version.",
+    BeginnerTip: "Connect it to a Display first so you can see what signal it outputs before connecting it to the Belt Filter.",
+  },
+  {
+    tool: "Signal Producer",
+    UseCase: "Creates a manual test signal.",
+    BeginnerTip: "Use this to confirm the filter works before adding a reader, analyzer, or logic gate.",
+  },
+  {
+    tool: "Pipe Gate",
+    UseCase: "Controls fluid flow with a signal.",
+    BeginnerTip: "Learn Belt Filters first. Pipe Gates use similar signal ideas but fluids add another layer of confusion.",
+  },
+  {
+    tool: "Logic Gates",
+    UseCase: "Combine or invert conditions with AND, OR, XOR, NOT, transistor-style gates, and comparators.",
+    BeginnerTip: "Do not start here. Learn one filter first, then add gates when you need two conditions.",
+  },
+];
+
+export const beltFilterBehaviorColumns = [
+  { key: "inputSignal", label: "Input Signal" },
+  { key: "FilterBehavior", label: "Belt Filter Behavior" },
+  { key: "WhatItLooksLike", label: "What It Looks Like In Game" },
+  { key: "BeginnerFix", label: "Beginner Fix" },
+];
+
+export const beltFilterBehaviorRows = [
+  {
+    inputSignal: "Shape signal",
+    FilterBehavior: "Matching shapes pass through; non-matching shapes go to the side output.",
+    WhatItLooksLike: "The filter acts like a shape sorter.",
+    BeginnerFix: "Use a Display to confirm the wire contains the exact shape signal you expected.",
+  },
+  {
+    inputSignal: "1 / On",
+    FilterBehavior: "All shapes pass through.",
+    WhatItLooksLike: "The filter seems to ignore shape matching.",
+    BeginnerFix: "Do not use a plain OR/on signal when you want exact shape filtering.",
+  },
+  {
+    inputSignal: "0 / Off",
+    FilterBehavior: "All shapes are redirected to the side output.",
+    WhatItLooksLike: "Nothing goes straight through, but shapes still move to the side.",
+    BeginnerFix: "Check whether your signal source is outputting 0 instead of a shape signal.",
+  },
+  {
+    inputSignal: "null",
+    FilterBehavior: "The filter blocks and shapes stop moving.",
+    WhatItLooksLike: "The belt backs up at the filter, especially between sparse reader pulses.",
+    BeginnerFix: "Add a Display and check whether your reader only outputs while a shape is physically on it.",
+  },
+  {
+    inputSignal: "conflict",
+    FilterBehavior: "The filter blocks and shapes stop moving.",
+    WhatItLooksLike: "The setup behaves like it is jammed even though belts are clear.",
+    BeginnerFix: "Avoid putting two different non-null signals on the same wire section.",
+  },
+];
+
+export const simpleSetupColumns = [
+  { key: "step", label: "Step" },
+  { key: "WhatToDo", label: "What To Do" },
+  { key: "WhatToCheck", label: "What To Check" },
+];
+
+export const simpleSetupRows = [
+  {
+    step: "1",
+    WhatToDo: "Build one input belt with a known test shape.",
+    WhatToCheck: "Make sure the belt contains only the shape you want to test. Mixed input makes the first wire test unclear.",
+  },
+  {
+    step: "2",
+    WhatToDo: "Place one Belt Filter on the belt.",
+    WhatToCheck: "Check the filter direction before connecting wires. A rotated or mirrored build can behave differently from what you expect.",
+  },
+  {
+    step: "3",
+    WhatToDo: "Connect a Signal Producer or fixed test signal.",
+    WhatToCheck: "Start with a simple 1 or 0 signal to prove the filter is receiving signal at all.",
+  },
+  {
+    step: "4",
+    WhatToDo: "Place a Display on the wire.",
+    WhatToCheck: "Confirm the wire signal before you blame the filter. The Display should show 1, 0, a shape signal, null, or conflict.",
+  },
+  {
+    step: "5",
+    WhatToDo: "Replace the test signal with a Belt Reader / Shape Reader / Analyzer.",
+    WhatToCheck: "Check that the reader outputs the exact shape signal you want, and remember that a Belt Reader can return null when no shape is on it.",
+  },
+  {
+    step: "6",
+    WhatToDo: "Add a reject or overflow path.",
+    WhatToCheck: "If wrong shapes have nowhere to go, the filter can look broken even when the logic is correct.",
+  },
+];
+
+export const notWorkingColumns = [
+  { key: "symptom", label: "Symptom" },
+  { key: "LikelyCause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const notWorkingRows = [
+  {
+    symptom: "The Belt Filter blocks everything",
+    LikelyCause: "The signal is null or conflict, not a shape / 1 / 0 signal.",
+    Fix: "Place a Display on the wire. If it shows null, fix the reader or signal source. If it shows conflict, split the signals onto separate wire sections.",
+  },
+  {
+    symptom: "The Belt Filter lets everything through",
+    LikelyCause: "The filter is receiving a 1 / On signal.",
+    Fix: "Use a shape signal or comparison setup when you want exact filtering. 1 means pass everything, not pass the correct shape.",
+  },
+  {
+    symptom: "Everything goes to the side output",
+    LikelyCause: "The filter is receiving a 0 / Off signal, or the shape signal does not match the input shape.",
+    Fix: "Check the Display, then verify color, layers, rotation, pins, crystals, and shape code.",
+  },
+  {
+    symptom: "The filter works only when shapes are close together",
+    LikelyCause: "A Belt Reader only outputs the shape signal while a shape is physically on the reader; between shapes, the signal becomes null.",
+    Fix: "Use a Display to confirm the pulse. Move the reader, buffer the signal with the right setup, or avoid sparse reader-driven filtering until you understand the timing.",
+  },
+  {
+    symptom: "You cannot tell what signal is on the wire",
+    LikelyCause: "You are debugging blind.",
+    Fix: "Place a Display directly on the wire segment feeding the filter.",
+  },
+  {
+    symptom: "Correct shapes are rejected",
+    LikelyCause: "The signal does not match the exact shape on the belt.",
+    Fix: "Check color, layer order, rotation, pins, crystals, and whether the reader is reading the same belt you think it is reading.",
+  },
+  {
+    symptom: "The setup worked before copying but breaks after rotation",
+    LikelyCause: "Orientation matters for many shape operations and some copied modules.",
+    Fix: "Re-check direction after rotating a blueprint. Test the copied module before merging it into the main line.",
+  },
+];
+
+export const signalTypeColumns = [
+  { key: "signalType", label: "Signal Type" },
+  { key: "WhatItMeans", label: "What It Means" },
+  { key: "FilterResult", label: "Belt Filter Result" },
+];
+
+export const signalTypeRows = [
+  {
+    signalType: "Shape signal",
+    WhatItMeans: "A signal representing a specific shape code.",
+    FilterResult: "Matching shapes pass; non-matching shapes are redirected.",
+  },
+  {
+    signalType: "1 / On",
+    WhatItMeans: "A true/on signal, often created by buttons, OR logic, or manual testing.",
+    FilterResult: "All shapes pass through.",
+  },
+  {
+    signalType: "0 / Off",
+    WhatItMeans: "A false/off signal.",
+    FilterResult: "All shapes are redirected to the side output.",
+  },
+  {
+    signalType: "null",
+    WhatItMeans: "No signal. This is also what a Belt Reader can output when no shape is currently on the reader.",
+    FilterResult: "The filter blocks and shapes stop moving.",
+  },
+  {
+    signalType: "conflict",
+    WhatItMeans: "Two different non-null signals are on the same wire section.",
+    FilterResult: "The filter blocks and shapes stop moving.",
+  },
+];
+
+export const logicTrapColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "WhyItFails", label: "Why It Fails" },
+  { key: "BetterApproach", label: "Better Approach" },
+];
+
+export const logicTrapRows = [
+  {
+    Mistake: "Using OR to combine two shape signals",
+    WhyItFails: "OR outputs 1 / On, not a combined shape signal. A Belt Filter receiving 1 lets every shape through.",
+    BetterApproach: "Use two separate filters, or use comparison logic that checks the incoming shape against one expected signal at a time.",
+  },
+  {
+    Mistake: "Sending two different shape signals into one wire section",
+    WhyItFails: "Different signals on the same wire can create a conflict, and conflict blocks the filter.",
+    BetterApproach: "Keep signals separated until a specific logic component combines or compares them intentionally.",
+  },
+  {
+    Mistake: "Using a Belt Reader on a sparse belt without checking null gaps",
+    WhyItFails: "The reader outputs shape only while a shape is on it; gaps can become null and block the filter.",
+    BetterApproach: "Watch the signal with a Display before feeding it into the filter.",
+  },
+];
+
+export const mamPrepColumns = [
+  { key: "skill", label: "Skill" },
+  { key: "WhyItMattersForMAM", label: "Why It Matters For MAM" },
+  { key: "PracticeFirst", label: "Practice First" },
+];
+
+export const mamPrepRows = [
+  {
+    skill: "Reading a target shape",
+    WhyItMattersForMAM: "A MAM must know what it is supposed to make before it can route parts.",
+    PracticeFirst: "Use a reader / analyzer and Display to confirm the signal changes when the target shape changes.",
+  },
+  {
+    skill: "Filtering exact shapes",
+    WhyItMattersForMAM: "A MAM must send the right quadrants, colors, pins, and layers to the right modules.",
+    PracticeFirst: "Use one Belt Filter to separate one correct shape from one wrong shape.",
+  },
+  {
+    skill: "Reject and overflow routing",
+    WhyItMattersForMAM: "Wrong shapes inside a MAM can pollute the entire machine.",
+    PracticeFirst: "Build a visible reject lane or trash lane before merging outputs.",
+  },
+  {
+    skill: "Modular platforms",
+    WhyItMattersForMAM: "A MAM is easier to debug when each operation is a reusable block.",
+    PracticeFirst: "Build one small cutting, rotating, painting, or stacking block and copy it only after it is stable.",
+  },
+  {
+    skill: "Signal debugging",
+    WhyItMattersForMAM: "A MAM fails silently if a signal becomes null, 1, 0, or conflict at the wrong time.",
+    PracticeFirst: "Put Displays on critical wires while testing, then remove them after the module is stable.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "WhyItHurts", label: "Why It Hurts" },
+  { key: "BetterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Starting with logic gates",
+    WhyItHurts: "You add several invisible problems before learning whether one filter works.",
+    BetterPlay: "Start with one signal, one Display, and one Belt Filter. Add gates later.",
+  },
+  {
+    mistake: "Skipping the Display",
+    WhyItHurts: "You cannot tell whether the filter is receiving a shape signal, 1, 0, null, or conflict.",
+    BetterPlay: "Place a Display on the wire feeding the filter while testing.",
+  },
+  {
+    mistake: "Skipping the reject path",
+    WhyItHurts: "Wrong shapes can block the filter or pollute your main output.",
+    BetterPlay: "Always route rejected shapes somewhere visible while testing.",
+  },
+  {
+    mistake: "Using OR for shape matching",
+    WhyItHurts: "OR can turn multiple shape conditions into a 1 signal, which passes every shape.",
+    BetterPlay: "Use two filters or comparison logic instead.",
+  },
+  {
+    mistake: "Learning wires inside a full MAM",
+    WhyItHurts: "A MAM combines too many systems at once: readers, filters, shape modules, overflow, and throughput.",
+    BetterPlay: "Build a tiny sorting system first, then reuse the idea inside the MAM.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**A Belt Filter in Shapez 2 reacts differently to shape, 1, 0, null, and conflict signals.**
+
+The key behavior is:
+
+- **shape signal**: matching shapes pass; non-matching shapes go to the side output
+- **1 / On**: every shape passes
+- **0 / Off**: every shape goes to the side output
+- **null**: the filter blocks and shapes stop
+- **conflict**: the filter blocks and shapes stop
+
+The safest way to debug wires is to place a **Display** on the wire feeding the filter. It shows what signal the filter is actually receiving, so you do not have to guess whether the problem is the signal, the filter direction, the shape, or the output path.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/wires-belt-filter-guide.webp"
+    alt="Shapez 2 Wires Guide automation menu with Belt Filter, Display, Signal Producer and logic gates."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The automation menu contains wires, Belt Filters, Pipe Gates, Signal Producers, logic gates, comparators, and advanced signal tools.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="wires-system-at-a-glance">
+  Wires system at a glance
+</h2>
+
+<GuideDataTable title="" rows={wireSystemRows} />
+
+Wires are confusing because the result is not always visible like a cutter, rotator, or stacker. A belt machine changes the shape immediately. A wire setup changes the decision that a machine makes.
+
+That is why the first rule is simple: make the signal visible.
+
+A Belt Filter is the best starting point because it gives you a clear result: the correct shape passes, the wrong shape redirects, or the belt stops when the signal is null or conflict.
+
+---
+
+<h2 id="automation-menu">
+  What is in the Shapez 2 wires and automation menu?
+</h2>
+
+The automation menu can look overwhelming because it contains wires, Belt Filters, Pipe Gates, Signal Producers, logic operations, transistor-style gates, XOR, NOT, comparators, global wire tools, simulated machines, and more.
+
+<GuideTable
+  caption="Shapez 2 wire and automation tools for beginners."
+  columns={automationToolColumns}
+  rows={automationToolRows}
+/>
+
+The exact UI names can vary by language or version. Focus on the role:
+
+- one tool creates or reads a signal
+- one Display shows the signal
+- one wire carries it
+- one filter or gate reacts to it
+- one output path shows the result
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/wire-logic-tools.webp"
+    alt="Shapez 2 wire logic tools showing Belt Filters, Displays, Signal Producers, gates and comparators."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Do not learn the whole menu at once. Start with one Display and one Belt Filter.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="belt-filter-behavior">
+  Shapez 2 Belt Filter behavior: shape signal vs 1 vs 0 vs null
+</h2>
+
+This is the most important table in the guide.
+
+<GuideTable
+  caption="Shapez 2 Belt Filter signal behavior."
+  columns={beltFilterBehaviorColumns}
+  rows={beltFilterBehaviorRows}
+/>
+
+The big beginner trap is **null**. Null does not mean "send everything to the side." Null means the filter blocks and shapes stop moving.
+
+The second big trap is **1 / On**. If your filter is letting every shape through, it may not be broken. It may simply be receiving 1 instead of a shape signal.
+
+---
+
+<h2 id="simple-belt-filter-setup">
+  Simple Shape Reader and Belt Filter setup
+</h2>
+
+Use this setup before trying a MAM.
+
+<GuideTable
+  caption="Simple Shapez 2 Belt Filter test setup."
+  columns={simpleSetupColumns}
+  rows={simpleSetupRows}
+/>
+
+The first test should not be beautiful. It should be obvious. Keep the input belt, filter, Display, wire, accepted output, and rejected output visible on screen at the same time.
+
+If the test works, copy the idea into a real factory. If it fails, you only have one signal and one filter to debug.
+
+---
+
+<h2 id="why-belt-filter-not-working">
+  Why your Belt Filter is not working in Shapez 2
+</h2>
+
+Most Belt Filter problems are caused by a signal mismatch. The filter may be fine, but the wire may be carrying 1, 0, null, conflict, or the wrong shape signal.
+
+<GuideTable
+  caption="Shapez 2 Belt Filter not working troubleshooting."
+  columns={notWorkingColumns}
+  rows={notWorkingRows}
+/>
+
+A useful debugging order is:
+
+1. Put a Display on the wire.
+2. Check whether the signal is shape, 1, 0, null, or conflict.
+3. Check whether the input shape matches the signal.
+4. Check filter direction.
+5. Check the straight output.
+6. Check the side output.
+7. Check whether a Belt Reader is going null between shapes.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/wire-debugging-wrong-output.webp"
+    alt="Shapez 2 Belt Filter troubleshooting example showing wrong direction, null signal, or wrong output after a copied module."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The same debugging habit used for rotated shape modules also applies to wire modules: check direction and output before copying the design.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="signal-types">
+  Shape signal vs on/off signal vs null in Shapez 2
+</h2>
+
+A common beginner mistake is treating every signal as the same kind of signal.
+
+<GuideTable
+  caption="Shapez 2 signal types for Belt Filters and wire logic."
+  columns={signalTypeColumns}
+  rows={signalTypeRows}
+/>
+
+For a beginner Belt Filter test, a fixed 1 or 0 signal can tell you whether the filter is receiving a signal at all. But a real shape-sorting setup usually needs a shape signal or comparison signal so the filter knows what to accept.
+
+If the filter receives the wrong kind of signal, it may behave like the wire is broken even though the connection is fine.
+
+---
+
+<h2 id="belt-reader-null-output">
+  Why Belt Readers output null between shapes
+</h2>
+
+A Belt Reader only outputs a shape signal while a shape is physically on the reader. When no shape is currently on it, the signal becomes **null**.
+
+That matters because a Belt Filter receiving null blocks. On a sparse belt, the reader can output a shape signal for a moment, then null between items, then another shape signal. If you connect that directly to a filter, the filter may appear to work only sometimes.
+
+Use this test:
+
+1. place a Display after the reader
+2. watch the signal while shapes pass
+3. check whether it flickers between shape and null
+4. only then connect it to a Belt Filter
+
+If you see null gaps, the reader is not broken. It is doing exactly what it does when no shape is on it.
+
+---
+
+<h2 id="display-debugging">
+  How to use Displays to debug wires
+</h2>
+
+Displays are the fastest way to debug wire problems because they show the current wire signal.
+
+Use a Display whenever:
+
+- a Belt Filter blocks everything
+- a Belt Filter lets everything through
+- a Belt Reader seems inconsistent
+- two signals may be conflicting
+- you are not sure whether a wire contains a shape signal or on/off signal
+- a MAM module works in one case but fails in another
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/codex-and-tooltips.webp"
+    alt="Shapez 2 Codex and machine tooltip information for wire, Display and Belt Filter troubleshooting."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use Displays, tooltips, previews, and the Codex before rebuilding a wire module.
+  </figcaption>
+</figure>
+
+A good rule is to build with Displays first, then remove them after the module is stable.
+
+---
+
+<h2 id="when-to-use-logic-gates">
+  When to use logic gates in Shapez 2 wires
+</h2>
+
+Use logic gates only after a simple filter works.
+
+<GuideTable
+  caption="Common Shapez 2 logic gate traps."
+  columns={logicTrapColumns}
+  rows={logicTrapRows}
+/>
+
+The most common trap is using **OR** to combine two shape signals. OR does not create a "red circle or white circle" shape signal. It outputs **1**, and a Belt Filter receiving 1 allows every shape through.
+
+Use logic gates for multi-condition systems after you understand what signal each wire actually contains.
+
+---
+
+<h2 id="wires-and-mam">
+  How Wires connect to MAMs
+</h2>
+
+A MAM, or Make Anything Machine, is the main reason wires matter for advanced players.
+
+<GuideTable
+  caption="Wire skills to practice before building your first MAM."
+  columns={mamPrepColumns}
+  rows={mamPrepRows}
+/>
+
+Think of a MAM as many small wire problems combined:
+
+- read the target shape
+- split it into pieces
+- route the right pieces
+- filter wrong pieces
+- paint or stack when needed
+- clean the output
+- avoid polluted belts
+- keep signal timing stable
+
+If you cannot debug one Belt Filter with a Display, a full MAM will be painful. Build the tiny filter test first.
+
+For the next step, read the <Link href="/shapez-2/mam-guide">Shapez 2 MAM Guide</Link>.
+
+---
+
+<h2 id="common-wire-mistakes">
+  Common Wire and Belt Filter mistakes
+</h2>
+
+<GuideTable
+  caption="Common Shapez 2 wire and Belt Filter mistakes."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+The safest wire-building habit is to make every decision visible. If you cannot see the signal source, Display, filter, accepted output, and rejected output, the setup is too hard to debug.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do Wires work in Shapez 2?
+
+Wires carry signals between automation components. Those signals can control filters, gates, comparisons, and logic decisions.
+
+### What does a Belt Filter do?
+
+A Belt Filter reacts to its input signal. Shape signals pass matching shapes and redirect non-matching shapes; 1 passes everything; 0 redirects everything; null and conflict block the filter.
+
+### Why is my Belt Filter blocking everything?
+
+The filter is probably receiving null or conflict. Place a Display on the wire feeding the filter to confirm the signal.
+
+### Why is my Belt Filter letting everything through?
+
+The filter is probably receiving a 1 / On signal. A 1 signal passes everything; it does not filter for a specific shape.
+
+### Why does my Belt Reader work only sometimes?
+
+A Belt Reader outputs the shape signal only while a shape is physically on the reader. Between shapes, the signal becomes null, which can make a connected Belt Filter block.
+
+### What does a Display do?
+
+A Display shows the current signal on a wire. Use it to debug whether the wire contains a shape signal, 1, 0, null, or conflict.
+
+### Why should I not use OR to combine shape signals?
+
+OR outputs 1 / On, not a combined shape signal. If you feed that into a Belt Filter, every shape passes.
+
+### When should I use logic gates?
+
+Use logic gates after a simple filter works. They are for multi-condition systems, not for your first wire setup.
+
+### Do I need Wires before building a MAM?
+
+Yes. A MAM depends on target reading, filtering, routing, reject handling, and signal debugging.
+
+### What should I read next?
+
+Read the <Link href="/shapez-2/mam-guide">Shapez 2 MAM Guide</Link> after you understand Belt Filters. For 1.0 progression systems, return to the <Link href="/shapez-2">Shapez 2 Guide Hub</Link>.

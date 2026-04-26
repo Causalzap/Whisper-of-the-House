@@ -1,0 +1,701 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideDataTable from "@/components/guides/GuideDataTable";
+import GuideTable from "@/components/GuideTable";
+
+export const tradeStationSystemRows = [
+  {
+    item: "Core function",
+    value: "Turn exact input shapes into refined shapes",
+    why: "A Trade Station is a conversion building: feed the required shape, then route the refined output into the next tier.",
+  },
+  {
+    item: "Main mode",
+    value: "Manufacture Mode",
+    why: "Manufacture Mode is built around permanent factories. Earlier Trade Stations stay useful because later stations depend on their refined outputs.",
+  },
+  {
+    item: "Classic Mode role",
+    value: "Endgame challenge from Milestone 8 onward",
+    why: "Classic Mode introduces red, green, and blue Trade Stations late, then moves into secondary and monochrome refined shapes before the final assembler.",
+  },
+  {
+    item: "Required input",
+    value: "Exact shape shown by the station",
+    why: "Wrong color, rotation, layer order, missing pins, broken crystals, or partial refined pieces can block the chain.",
+  },
+  {
+    item: "Output",
+    value: "Refined / exotic shapes",
+    why: "These shapes are created by stations and then reused by later stations, rockets, or the Grand Vortex Assembler.",
+  },
+  {
+    item: "Biggest bottlenecks",
+    value: "Station rate, Space Belt lanes, output backlog, and wrong-shape contamination",
+    why: "Most Trade Station problems are logistics problems, not just recipe problems.",
+  },
+];
+
+export const knownRateColumns = [
+  { key: "system", label: "System" },
+  { key: "observedValue", label: "Known Value / Planning Note" },
+  { key: "HowToUseIt", label: "How To Use It" },
+];
+
+export const knownRateRows = [
+  {
+    system: "Normal belt, base speed",
+    observedValue: "120 shapes/min",
+    HowToUseIt: "Use this as the first sanity check when a machine says how many are needed to saturate one belt.",
+  },
+  {
+    system: "Space Belt, base speed",
+    observedValue: "480 shapes/min per lane; up to 12 normal-belt lanes when fully using available lanes / levels",
+    HowToUseIt: "Trade Station routing should be planned around Space Belt capacity, not only local belt capacity.",
+  },
+  {
+    system: "Polishing Station, early Manufacture Mode",
+    observedValue: "60 shapes/min base processing rate",
+    HowToUseIt: "A single station is not enough for a full early Space Belt setup; scale the starter waste-processing block before expanding.",
+  },
+  {
+    system: "Starter polishing scale target",
+    observedValue: "At least 8 Polishing Stations is recommended by the in-game guidance when the first refined-output step is too slow",
+    HowToUseIt: "Treat this as your first scale-up lesson: one working station proves the route, but several stations stabilize throughput.",
+  },
+  {
+    system: "Manufacture Mode Trade Station block example",
+    observedValue: "A station can consume / produce about half a Space Belt in the referenced base-speed setup",
+    HowToUseIt: "Use this as a rough layout reference, not a universal law. Pairing stations can make cleaner blocks than one tangled line.",
+  },
+  {
+    system: "Secondary refined Trade Station example",
+    observedValue: "Two stations per Space lane in the observed Classic 1.0 trading setup",
+    HowToUseIt: "Do not copy Tier 1 station counts into Tier 2 blindly. Check each station tooltip before scaling.",
+  },
+  {
+    system: "Late refined color planning example",
+    observedValue: "Six red, six green, and six blue Trade Station blocks were needed to support one eventual refined-color output block in one tested layout",
+    HowToUseIt: "This is a tested layout example, not a fixed rule. Later refined chains multiply upstream demand, so plan raw inputs and transport first.",
+  },
+  {
+    system: "Grand Vortex Assembler example",
+    observedValue: "Final refined product quota can reach 200,000 shapes in Classic 1.0 endgame examples",
+    HowToUseIt: "The final assembler is not a small delivery. Design the Trade Station chain as permanent infrastructure.",
+  },
+  {
+    system: "All values above",
+    observedValue: "Starting points only",
+    HowToUseIt: "Hover the station, belt, or Space Belt in your save. Global speed upgrades, station tiers, and mode differences can change actual values.",
+  },
+];
+
+export const progressionColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "WhatHappens", label: "What Happens" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const progressionRows = [
+  {
+    stage: "1. Dimensional Waste / first source",
+    WhatHappens: "Manufacture Mode starts from a special source instead of a normal Vortex delivery loop.",
+    WhyItMatters: "Your first job is to turn this source into a stable refined-shape supply chain.",
+  },
+  {
+    stage: "2. Polishing / first refined output",
+    WhatHappens: "You process waste into the first usable refined material.",
+    WhyItMatters: "This teaches station rates, Space Belt inputs, and why one station is usually not enough.",
+  },
+  {
+    stage: "3. Trade Station tiers",
+    WhatHappens: "Each tier consumes previous refined output plus more complex ordinary shapes.",
+    WhyItMatters: "Stopping an early station can starve every later station.",
+  },
+  {
+    stage: "4. Donation Station + Research Station",
+    WhatHappens: "Donation Stations generate research points, while Research Stations turn refined inputs into research progress and useful outputs.",
+    WhyItMatters: "This research infrastructure unlocks alternate recipes and helps scale the chain.",
+  },
+  {
+    stage: "5. Alternate Trade Station recipes",
+    WhatHappens: "Research unlocks alternate recipes for early tiers.",
+    WhyItMatters: "Alternate recipes can reduce travel distance, simplify inputs, or fit your factory layout better.",
+  },
+  {
+    stage: "6. Grand Vortex Assembler",
+    WhatHappens: "Final refined shapes feed a huge assembler that produces Vortex-related output.",
+    WhyItMatters: "This is the destination of the Trade Station chain, so early throughput decisions matter later.",
+  },
+];
+
+export const classicOrderColumns = [
+  { key: "order", label: "Order" },
+  { key: "stage", label: "Classic Mode Trade Station Stage" },
+  { key: "whatToPrepare", label: "What To Prepare" },
+];
+
+export const classicOrderRows = [
+  {
+    order: "1",
+    stage: "Red / green / blue refined stations from Milestone 8+",
+    whatToPrepare: "Primary-color refined production, clean Space Belt routing, and enough input shapes to keep the first stations running.",
+  },
+  {
+    order: "2",
+    stage: "Secondary color refined stations",
+    whatToPrepare: "Primary refined outputs feeding secondary refined chains, with enough upstream station copies to avoid starvation.",
+  },
+  {
+    order: "3",
+    stage: "White and black refined shapes",
+    whatToPrepare: "More station footprint space, separate refined buses, and careful routing for monochrome refined outputs.",
+  },
+  {
+    order: "4",
+    stage: "Vortex Grand Assembler",
+    whatToPrepare: "High-volume refined output, stable upstream chains, and final delivery capacity for a large endgame quota.",
+  },
+];
+
+export const alternateRecipeColumns = [
+  { key: "decision", label: "Decision" },
+  { key: "ChooseAlternateWhen", label: "Choose An Alternate Recipe When..." },
+  { key: "AvoidItWhen", label: "Avoid It When..." },
+];
+
+export const alternateRecipeRows = [
+  {
+    decision: "Input availability",
+    ChooseAlternateWhen: "The alternate input shapes are closer to your bus, mines, paint, or existing refined output.",
+    AvoidItWhen: "The alternate recipe forces you to import rare shapes from far away.",
+  },
+  {
+    decision: "Routing shape",
+    ChooseAlternateWhen: "The alternate station shape gives cleaner Space Belt input and output lanes.",
+    AvoidItWhen: "The station footprint creates crossing belts, awkward vertical lifts, or blocked output room.",
+  },
+  {
+    decision: "Throughput",
+    ChooseAlternateWhen: "The alternate can be fed at a stable rate with fewer stations, fewer trains, or shorter Space Belts.",
+    AvoidItWhen: "It looks easier but secretly creates an upstream shortage.",
+  },
+  {
+    decision: "Research cost",
+    ChooseAlternateWhen: "You already have Donation Station or Research Station infrastructure producing enough research points.",
+    AvoidItWhen: "Research points are still scarce and a normal recipe is already working.",
+  },
+  {
+    decision: "Long-term chain",
+    ChooseAlternateWhen: "The alternate output variant fits the next tier better or avoids rebuilding your main refined bus.",
+    AvoidItWhen: "It only helps one step but makes every later station harder.",
+  },
+];
+
+export const debugFlowColumns = [
+  { key: "step", label: "Step" },
+  { key: "Question", label: "Question" },
+  { key: "IfNo", label: "If No" },
+];
+
+export const debugFlowRows = [
+  {
+    step: "1",
+    Question: "Does the input shape exactly match the station tooltip?",
+    IfNo: "Fix the producing module before you touch the station.",
+  },
+  {
+    step: "2",
+    Question: "Is the input arriving at the expected rate?",
+    IfNo: "Add more production, more lanes, or a cleaner Space Belt connection.",
+  },
+  {
+    step: "3",
+    Question: "Is the Trade Station actually processing?",
+    IfNo: "Check the tooltip, input lane, output lane, and whether the station is waiting for a second input.",
+  },
+  {
+    step: "4",
+    Question: "Can the refined output leave continuously?",
+    IfNo: "Clear the output backlog before scaling the input side.",
+  },
+  {
+    step: "5",
+    Question: "Does the refined output reach the next tier without mixing?",
+    IfNo: "Separate refined buses from test outputs and wrong-shape cleanup lines.",
+  },
+  {
+    step: "6",
+    Question: "Is the next station or rocket accepting the shape?",
+    IfNo: "Check shape notation, layer order, pins, crystals, and station-specific requirements.",
+  },
+  {
+    step: "7",
+    Question: "Does the full chain run for several minutes without pulsing?",
+    IfNo: "The slowest upstream station, train, Space Belt, or output lane is still the real bottleneck.",
+  },
+];
+
+export const wrongShapeColumns = [
+  { key: "Check", label: "Check" },
+  { key: "CorrectExample", label: "Correct Example" },
+  { key: "WrongExample", label: "Wrong Example" },
+  { key: "WhyItFails", label: "Why It Fails" },
+];
+
+export const wrongShapeRows = [
+  {
+    Check: "Missing quadrant",
+    CorrectExample: "`CuCuCuCu`",
+    WrongExample: "`CuCu----`",
+    WhyItFails: "A partial shape is not accepted when the station expects a full one.",
+  },
+  {
+    Check: "Wrong color",
+    CorrectExample: "`RuRuRuRu`",
+    WrongExample: "`BuBuBuBu`",
+    WhyItFails: "The geometry can be right while the color is still wrong.",
+  },
+  {
+    Check: "Wrong refined variant",
+    CorrectExample: "Red refined X for a red-tier input",
+    WrongExample: "Blue or secondary refined X on the same line",
+    WhyItFails: "Refined outputs are tiered resources. The wrong refined variant pollutes the station chain.",
+  },
+  {
+    Check: "Broken crystal / wrong layer",
+    CorrectExample: "Crystal and layer order match the preview",
+    WrongExample: "Crystal breaks during cutting or top-layer stacking",
+    WhyItFails: "The preview may look similar at a glance, but the shape code and layer structure are different.",
+  },
+];
+
+export const earlySetupColumns = [
+  { key: "step", label: "Step" },
+  { key: "WhatToDo", label: "What To Do" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const earlySetupRows = [
+  {
+    step: "1",
+    WhatToDo: "Read the station tooltip first",
+    WhyItMatters: "The tooltip is the source of truth for required input, output, and processing rate.",
+  },
+  {
+    step: "2",
+    WhatToDo: "Build one input module",
+    WhyItMatters: "A single working module proves the shape recipe before you copy the mistake eight times.",
+  },
+  {
+    step: "3",
+    WhatToDo: "Connect one clean Space Belt path",
+    WhyItMatters: "Most station layouts fail at the handoff, not inside the station.",
+  },
+  {
+    step: "4",
+    WhatToDo: "Route the refined output before scaling",
+    WhyItMatters: "A blocked output stops the station even when the input is full. See Common Mistakes if this keeps happening.",
+  },
+  {
+    step: "5",
+    WhatToDo: "Match station count to actual rate",
+    WhyItMatters: "Use known values and the tooltip, then add stations until the station block consumes and outputs continuously.",
+  },
+  {
+    step: "6",
+    WhatToDo: "Only then copy the block",
+    WhyItMatters: "Copying a stable block builds a factory; copying an unstable one builds a traffic jam.",
+  },
+];
+
+export const commonMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "WhyItHurts", label: "Why It Hurts" },
+  { key: "BetterPlay", label: "Better Play" },
+];
+
+export const commonMistakeRows = [
+  {
+    mistake: "Guessing ratios",
+    WhyItHurts: "Station tiers do not all behave like the first station you built.",
+    BetterPlay: "Hover the station, write down input rate and output rate, then design around the actual numbers.",
+  },
+  {
+    mistake: "Ignoring Donation and Research Stations",
+    WhyItHurts: "You miss the systems that unlock alternate manufacturers and help scale waste production.",
+    BetterPlay: "Add research infrastructure once the first refined chain is stable.",
+  },
+  {
+    mistake: "Treating alternate recipes as automatic upgrades",
+    WhyItHurts: "An alternate recipe can be worse if its inputs are far away or awkward to route.",
+    BetterPlay: "Choose alternates based on input access, station footprint, and downstream demand.",
+  },
+  {
+    mistake: "Letting wrong shapes touch the refined bus",
+    WhyItHurts: "One polluted lane can travel all the way to a rocket or later station.",
+    BetterPlay: "Verify shape previews before merging and flush bad lines immediately.",
+  },
+  {
+    mistake: "Forgetting the final destination",
+    WhyItHurts: "Early stations are not disposable; they feed the Grand Vortex Assembler chain later.",
+    BetterPlay: "Build each station block as permanent infrastructure with room to expand.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Trade Stations in Shapez 2 are conversion buildings: they consume exact input shapes and output refined shapes that feed later tiers, rockets, and eventually the Grand Vortex Assembler.**
+
+The Manufacture Mode chain is:
+
+**Dimensional Waste → Polishing / first refined output → Trade Station tiers → Donation Station + Research Station research infrastructure → alternate recipes → Grand Vortex Assembler**
+
+At base speed, useful starting numbers are:
+
+- a normal belt is commonly **120 shapes/min**
+- a Space Belt lane is commonly **480 shapes/min**
+- the early Polishing Station example processes **60 shapes/min**
+- the first starter scale-up target is **at least 8 Polishing Stations**
+- some Manufacture Mode Trade Station blocks consume / produce about **half a Space Belt**
+- later refined chains can require **multiple copies of earlier stations** to keep one final output block supplied
+
+Always confirm the exact rate in your own save. Global speed upgrades, station tiers, and mode differences can change the values you should build around.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/trade-station-guide.webp"
+    alt="Shapez 2 Trade Station producing refined shapes in the 1.0 factory progression."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Trade Stations turn ordinary production into a permanent refined-shape chain.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="trade-station-system-at-a-glance">
+  Trade Station system at a glance
+</h2>
+
+<GuideDataTable title="" rows={tradeStationSystemRows} />
+
+A Trade Station is best understood as a permanent exchange block. You give it a precise input shape, it produces a refined output shape, and that refined output becomes a requirement for later production.
+
+This is why a Trade Station factory should be designed more like a supply chain than a one-off milestone build.
+
+---
+
+<h2 id="key-ratios-and-throughput-numbers">
+  Shapez 2 Trade Station ratios and throughput numbers
+</h2>
+
+The biggest weakness of most Trade Station explanations is that they say "watch your ratio" without giving any numbers.
+
+The values below are a mix of base-speed constants, in-game tooltip examples, and tested-layout planning examples. Treat them as starting points, then verify the exact values in your own save by hovering the relevant station, belt, or Space Belt.
+
+<GuideTable
+  caption="Useful Shapez 2 Trade Station, Space Belt, and Manufacture Mode throughput numbers. Values are planning references, not universal rules."
+  columns={knownRateColumns}
+  rows={knownRateRows}
+/>
+
+A good rule is:
+
+- use **normal belt speed** to understand local machine modules
+- use **Space Belt capacity** to understand station inputs and outputs
+- use **station processing rate** to decide how many station copies you need
+- use **refined output stability** to decide whether the next tier can run continuously
+
+Trade Stations often connect directly to Space Belts, and their ratios are easiest to understand relative to saturated Space Belts rather than single normal belts.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/trade-station-space-belt-ratio.webp"
+    alt="Shapez 2 Trade Station connected to Space Belts with ratios based on saturated Space Belt throughput."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Space Belts give Trade Station blocks much higher capacity, but station rate, station footprint, and output routing still decide whether the block runs smoothly.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Ratio rule">
+Do not design Trade Station chains from memory.
+
+Read the tooltip, write down the station's input rate and output rate, then compare it against your Space Belt lanes.
+</GuideCallout>
+
+---
+
+<h2 id="manufacture-mode-progression-map">
+  Manufacture Mode progression map
+</h2>
+
+Players often get stuck because they understand the station but not the full Manufacture Mode structure.
+
+<GuideTable
+  caption="Shapez 2 Manufacture Mode progression from dimensional waste to the Grand Vortex Assembler."
+  columns={progressionColumns}
+  rows={progressionRows}
+/>
+
+The short version:
+
+1. You start with a special source instead of a normal Vortex loop.
+2. You process that source into refined shapes.
+3. Each Trade Station tier depends on earlier refined output.
+4. Donation Stations and Research Stations form the research infrastructure.
+5. Alternate recipes let you reroute or simplify Trade Station chains.
+6. The Grand Vortex Assembler is the long-term destination.
+
+That is why deleting an early station in Manufacture Mode can hurt later. It may still be feeding the chain several tiers downstream.
+
+---
+
+<h2 id="when-do-trade-stations-unlock">
+  When do Trade Stations unlock?
+</h2>
+
+In **Manufacture Mode**, Trade Stations appear early and become the backbone of the campaign. Your factories are meant to stay alive, keep feeding station chains, and scale upward over time.
+
+In **Classic Mode**, Trade Stations are an endgame addition. By the time they appear, the game expects you to understand belts, platforms, Space Belts, trains, colors, crystals, and high-throughput production.
+
+<GuideTable
+  caption="Classic Mode Trade Station order in Shapez 2 1.0."
+  columns={classicOrderColumns}
+  rows={classicOrderRows}
+/>
+
+If you are new, learn Classic Mode first. If you already understand factory routing and throughput, Manufacture Mode is where Trade Stations become the main game.
+
+For the broader route, start with the <Link href="/shapez-2">Shapez 2 Guide Hub</Link> or read the dedicated <Link href="/shapez-2/manufacture-mode-guide">Manufacture Mode Guide</Link>.
+
+---
+
+<h2 id="how-to-supply-a-trade-station">
+  How to supply a Trade Station in Shapez 2
+</h2>
+
+To supply a Trade Station, build the requested input shape as a separate module, verify the output preview, then route it into the station with enough Space Belt capacity.
+
+<GuideTable
+  caption="Best early Trade Station setup."
+  columns={earlySetupColumns}
+  rows={earlySetupRows}
+/>
+
+The station footprint matters more than it first appears. Some stations have unusual shapes, extra output pieces, or front attachments that make routing harder. Leave room for input Space Belts, refined output Space Belts, cleanup access, parallel copies, train loaders or unloaders, and future alternate recipes.
+
+Before copying the block, watch it run. The best sign of a good Trade Station setup is not that the input is full. It is that the station processes continuously and the refined output leaves continuously.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/trade-station-supply-line.webp"
+    alt="Shapez 2 Trade Station supply line using Space Belts to feed requested shapes into a station."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A clean station block should show input, station conversion, and refined output without hiding the bottleneck.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="alternate-recipes-and-when-to-use-them">
+  Shapez 2 alternate Trade Station recipes: how to choose
+</h2>
+
+Manufacture Mode includes alternate Trade Station recipes for early tiers. These are unlocked through research and act as alternate manufacturers: they require different inputs while giving you a variant of that tier's refined output.
+
+This is a major mid-game decision because an alternate recipe can either simplify your factory or make it worse.
+
+<GuideTable
+  caption="How to decide whether to use an alternate Trade Station recipe."
+  columns={alternateRecipeColumns}
+  rows={alternateRecipeRows}
+/>
+
+The best alternate recipe is not always the one with the easiest shape on paper.
+
+Choose the recipe that makes the whole chain cleaner:
+
+- fewer long-distance imports
+- fewer awkward Space Belt crossings
+- easier refined output routing
+- better station footprint
+- less pressure on scarce raw shapes or paint
+- easier downstream connection to the next tier
+
+If an alternate recipe solves one input but creates three new train routes, it may not be an upgrade.
+
+---
+
+<h2 id="donation-station-and-research-station">
+  What do Donation Stations and Research Stations do in Shapez 2?
+</h2>
+
+Trade Stations do not exist alone. In Manufacture Mode, **Donation Stations** and **Research Stations** are what let the system expand.
+
+A **Donation Station** accepts shapes, increases operator progress, and grants research points. Those research points are important because they unlock alternate manufacturers and other station-related upgrades.
+
+A **Research Station** works similarly, but it can also output shapes or byproducts. This matters because it can help scale the earlier waste-processing chain instead of leaving your whole factory limited by the first source.
+
+A simple mid-game research loop:
+
+1. Stabilize your first refined chain.
+2. Add a Donation Station for research points.
+3. Unlock a useful alternate recipe or Research Station.
+4. Feed refined shapes into the Research Station.
+5. Route the byproducts back into earlier production.
+6. Use the extra output to support more Trade Station chains.
+
+Do not rush this before your first station chain is stable. Research infrastructure is powerful, but it can also steal shapes from the station line that is supposed to advance the campaign.
+
+---
+
+<h2 id="trade-stations-and-trading-rockets">
+  Why your Trading Rocket is not launching in Shapez 2
+</h2>
+
+Trading Rockets are larger delivery objectives tied to the station chain. If a rocket does not launch, the problem is usually upstream.
+
+Use the chain debug table instead of rebuilding the rocket first.
+
+<GuideTable
+  caption="Trade Station and Trading Rocket chain debug flow."
+  columns={debugFlowColumns}
+  rows={debugFlowRows}
+/>
+
+The most dangerous failure is wrong-shape contamination. A shape can look almost correct and still be rejected.
+
+<GuideTable
+  caption="Shape notation and wrong-shape examples for Trade Station troubleshooting."
+  columns={wrongShapeColumns}
+  rows={wrongShapeRows}
+/>
+
+Use the exact in-game shape preview and station tooltip as the final authority. The examples above are meant to show the type of mismatch to look for: missing quadrants, wrong colors, wrong refined variants, broken crystals, or wrong layer order.
+
+<figure className="my-8">
+  <Image
+    src="/images/shapez-2/trade-station-bottleneck.webp"
+    alt="Shapez 2 Trade Station bottleneck where station inputs or outputs are backed up because ratios are wrong."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If a station or rocket is stuck, debug from the earliest station forward instead of only checking the final input.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="grand-vortex-assembler">
+  What is the Grand Vortex Assembler in Shapez 2?
+</h2>
+
+The Grand Vortex Assembler is the reason the Trade Station chain matters.
+
+In Classic Mode endgame examples, the Vortex Grand Assembler appears after refined Trade Station tiers and consumes high-tier refined shapes to produce the final scenario shape. In Manufacture Mode, the long-term goal is even clearer: you are producing the pieces needed to rebuild the Vortex platform.
+
+This means a good Trade Station build is not just a way to clear the current milestone. It is infrastructure for the final objective.
+
+When you reach assembler planning, check three things:
+
+1. Which refined shapes does the assembler consume?
+2. Which earlier stations supply those refined shapes?
+3. Can every upstream station run continuously at the assembler's demand rate?
+
+If the answer to the third question is no, the assembler will starve even when the final belts look clean.
+
+---
+
+<h2 id="common-trade-station-mistakes">
+  Common Trade Station mistakes
+</h2>
+
+<GuideTable
+  caption="Common Shapez 2 Trade Station mistakes and what to do instead."
+  columns={commonMistakeColumns}
+  rows={commonMistakeRows}
+/>
+
+Most station failures come from one of four mistakes: guessing ratios, ignoring research infrastructure, choosing alternate recipes too early, or polluting the refined-shape bus.
+
+A good station block should answer four questions at a glance:
+
+1. What exact shape goes in?
+2. How fast does it go in?
+3. What refined shape comes out?
+4. Where does that refined shape go next?
+
+If you cannot answer those quickly, the design is too hard to debug.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What does a Trade Station do in Shapez 2?
+
+A Trade Station consumes exact input shapes and outputs refined shapes for later Trade Station tiers, rockets, or the Grand Vortex Assembler.
+
+### What is the most important Trade Station ratio?
+
+The most important ratio is the one shown in the tooltip for the station you are using. As a planning baseline, normal belts are commonly 120 shapes/min at base speed, Space Belt lanes are commonly 480 shapes/min, and early Manufacture Mode polishing examples process 60 shapes/min per station.
+
+### How many Polishing Stations do I need early in Manufacture Mode?
+
+The early guidance is to scale to at least 8 Polishing Stations when your first refined-output step is too slow. Build one first to prove the route, then scale the block.
+
+### Why is my Trading Rocket not launching?
+
+The rocket usually has not received enough valid payload. Check the required shape, upstream Trade Stations, Space Belt connection, station output, and whether wrong shapes have polluted the line.
+
+### Why is my Trade Station backed up?
+
+If the input is full but the station is not processing, the output may be blocked or the station may be missing another required input. If the output is clear but processing pulses, the input rate may be too low.
+
+### What are alternate recipes?
+
+Alternate recipes are research-unlocked Trade Station variants that require different inputs while producing a same-tier refined output variant. Use them when they simplify routing or input supply.
+
+### How do I unlock alternate Trade Stations?
+
+Use Donation Stations to generate research points, then invest those points into alternate manufacturers or other research options.
+
+### What does a Donation Station do?
+
+A Donation Station accepts shapes, increases operator progress, and grants research points. It is the main bridge between production and research unlocks.
+
+### What does a Research Station do?
+
+A Research Station is similar to a Donation Station, but it can also provide shape output or byproducts. This can help scale earlier production loops.
+
+### What is the Grand Vortex Assembler?
+
+The Grand Vortex Assembler is a late-game / final objective building that consumes refined Trade Station outputs to produce Vortex-related final products.
+
+### Should I use the normal recipe or an alternate recipe?
+
+Use the route that makes your entire chain easier. Input distance, station footprint, Space Belt routing, and downstream demand matter more than the recipe looking simple in isolation.
+
+### What guide should I read next?
+
+If you are learning the full 1.0 mode, read the <Link href="/shapez-2/manufacture-mode-guide">Manufacture Mode Guide</Link>. If your issue is sorting, signals, or automatic routing, read the <Link href="/shapez-2/wires-belt-filter-guide">Wires and Belt Filter Guide</Link>.

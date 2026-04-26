@@ -55,6 +55,48 @@ export type LatestUpdateItem = {
     hoverTitleClass: "group-hover:text-sky-700",
   },
 
+  // ===== Shapez 2 =====
+{
+  href: "/shapez-2/manufacture-mode-guide",
+  game: "Shapez 2",
+  title: "Manufacture Mode Guide",
+  description:
+    "Dimensional Waste, Polishing Stations, Trade Stations, Donation and Research Stations, alternate recipes, and the Grand Vortex Assembler route.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/shapez-2/trade-station-guide",
+  game: "Shapez 2",
+  title: "Trade Station Guide",
+  description:
+    "How Trade Stations work in 1.0, including refined shapes, alternate recipes, Donation and Research Stations, rocket issues, and common bottlenecks.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/shapez-2/wires-belt-filter-guide",
+  game: "Shapez 2",
+  title: "Wires and Belt Filter Guide",
+  description:
+    "Belt Filter signal behavior, Displays, Belt Reader null output, logic gate traps, shape signals, and why your filter is not working.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/shapez-2/mam-guide",
+  game: "Shapez 2",
+  title: "MAM Guide",
+  description:
+    "Build your first 1.0 Make Anything Machine with Global Receivers, simulated buildings, NE orientation, Belt Filters, pins, crystals, and multiple MAMs.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
   // ===== Airborne Empire =====
 {
   href: "/airborne-empire/kingsfell-guide/",

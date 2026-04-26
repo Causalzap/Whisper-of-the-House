@@ -53,7 +53,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/lucky-tower-ultimate`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/vampire-crawlers`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/holovillage-our-cozy-days`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/shapez-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/shapez-2/mam-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/shapez-2/manufacture-mode-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/shapez-2/trade-station-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/shapez-2/wires-belt-filter-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/shapez-2/space-belts-trains-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+ 
 
      // ⬇️ 把 4 篇文章补上
      { url: `${base}/holovillage-our-cozy-days/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
