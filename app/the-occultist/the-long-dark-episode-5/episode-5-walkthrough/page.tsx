@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import MissingPeopleLocationsContent from "@/data/the-long-dark/episode-5-missing-people-locations.mdx";
+import Episode5WalkthroughContent from "@/data/the-long-dark/episode-5-walkthrough.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-long-dark-episode-5/episode-5-missing-people-locations`;
+const pageUrl = `${siteUrl}/the-long-dark-episode-5/episode-5-walkthrough`;
 
 export const metadata: Metadata = {
-  title: "Where to Find the 3 Missing People in The Long Dark Ep 5",
+  title: "The Long Dark Episode 5 Walkthrough | Full Step-by-Step Guide",
   description:
-    "Stuck in the snow? Don't waste hours searching. Get the exact map locations for all 3 missing people in TLD Episode 5, including how to reach the Constable past the broken bridge.",
+    "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Episode 5 Missing People Locations",
+          name: "Episode 5 Walkthrough",
           item: pageUrl,
         },
       ],
@@ -50,16 +50,13 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "The Long Dark Episode 5 Missing People Locations Guide",
+      headline: "The Long Dark Episode 5 Walkthrough",
       description:
-        "This guide shows where to find all three missing people in The Long Dark Episode 5, including the basement survivor, the body behind the waterfall, and the Constable past the broken bridge.",
+                "Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, substations, the SAR station, and the ending.",
       image: [
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-1-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-2-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-3-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-basement.jpg`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-waterfall.jpg`,
-        `${siteUrl}/images/the-long-dark/episode-5/constable-fishing-pier.jpg`,
+        `${siteUrl}/images/the-long-dark/episode-5/perseverance-mills-arrival.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/cargo-ship.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/suzuki-radio-telescope.webp`,
       ],
       inLanguage: "en",
       dateModified: "2026-04-05",
@@ -74,15 +71,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Missing People objective",
-        },
-        {
-          "@type": "Thing",
           name: "Perseverance Mills",
         },
         {
           "@type": "Thing",
-          name: "Search Party achievement",
+          name: "Desperation Bay",
+        },
+        {
+          "@type": "Thing",
+          name: "Suzuki Radio Telescope",
         },
       ],
       isPartOf: {
@@ -114,8 +111,8 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Missing People Locations Guide"
-          description="Looking for all missing people in The Long Dark Episode 5? This guide shows where to find the basement survivor, the body behind the waterfall, and the Constable past the broken bridge."
+          title="The Long Dark Episode 5 Walkthrough"
+          description="Full The Long Dark Episode 5 walkthrough covering where to go first, Missing People, Terry, Desperation Bay, the mine, the substations, the SAR station, and the ending."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5"
           breadcrumbBaseHref="/"
@@ -123,32 +120,40 @@ export default function Page() {
           updatedAt="April 5, 2026"
           toc={[
             {
-              id: "where-to-find-all-missing-people-in-the-long-dark-episode-5",
-              label: "All missing people overview",
+              id: "part-1-astrid-in-perseverance-mills",
+              label: "Astrid in Perseverance Mills",
             },
             {
-              id: "missing-person-1-basement-location",
-              label: "Missing Person 1: basement",
+              id: "part-2-astrid-radio-hut-and-desperation-bay",
+              label: "Radio hut and Desperation Bay",
             },
             {
-              id: "missing-person-2-waterfall-location",
-              label: "Missing Person 2: waterfall",
+              id: "part-3-mackenzie-and-jace-through-the-wilderness",
+              label: "Mackenzie and Jace",
             },
             {
-              id: "missing-person-3-constable-location",
-              label: "Constable location",
+              id: "part-4-the-mine-walkthrough",
+              label: "Mine walkthrough",
             },
             {
-              id: "best-order-to-find-all-three-missing-people",
-              label: "Best route order",
+              id: "part-5-reach-atwood-and-start-the-substation-objective",
+              label: "Atwood and substations",
             },
             {
-              id: "search-party-achievement-how-to-get-it",
-              label: "Search Party achievement",
+              id: "part-6-the-suzuki-radio-telescope-sequence",
+              label: "Suzuki Radio Telescope",
             },
             {
-              id: "most-common-missing-people-mistakes",
-              label: "Common mistakes",
+              id: "part-7-astrids-sar-station-and-train-section",
+              label: "SAR station and train",
+            },
+            {
+              id: "part-8-mackenzie-in-occupied-perseverance-mills",
+              label: "Occupied Perseverance Mills",
+            },
+            {
+              id: "episode-5-ending-summary",
+              label: "Ending summary",
             },
             {
               id: "faq",
@@ -157,20 +162,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
-              label: "Episode 5 Walkthrough",
+              href: "/the-long-dark-episode-5",
+              label: "The Long Dark Episode 5 Guide",
             },
             {
-              href: "/the-long-dark-episode-5/",
-              label: "The Long Dark Episode 5 Guide Hub",
+              href: "/the-long-dark-episode-5/episode-5-missing-people-locations",
+              label: "Episode 5 Missing People Locations",
             },
             {
-              href: "/the-long-dark-episode-5/episode-5-ending-explained/",
+              href: "/the-long-dark-episode-5/episode-5-ending-explained",
               label: "Episode 5 Ending Explained",
             },
           ]}
         >
-          <MissingPeopleLocationsContent />
+          <Episode5WalkthroughContent />
         </GuideArticlePage>
       </main>
       <Footer />

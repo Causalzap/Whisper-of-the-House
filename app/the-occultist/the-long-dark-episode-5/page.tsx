@@ -167,19 +167,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
+              href: "/the-long-dark-episode-5/episode-5-walkthrough",
               label: "The Long Dark Episode 5 Walkthrough",
             },
             {
-              href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
+              href: "/the-long-dark-episode-5/episode-5-missing-people-locations",
               label: "Episode 5 Missing People Locations",
             },
             {
-              href: "/the-long-dark-episode-5/what-to-do-after-the-autopsy/",
+              href: "/the-long-dark-episode-5/what-to-do-after-the-autopsy",
               label: "What to Do After the Autopsy",
             },
             {
-              href: "/the-long-dark-episode-5/where-to-go-after-terry/",
+              href: "/the-long-dark-episode-5/where-to-go-after-terry",
               label: "Where to Go After Terry",
             },
           ]}

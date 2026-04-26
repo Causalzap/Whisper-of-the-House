@@ -154,15 +154,15 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-long-dark-episode-5/what-to-do-after-the-autopsy/",
+              href: "/the-long-dark-episode-5/what-to-do-after-the-autopsy",
               label: "What to Do After the Autopsy",
             },
             {
-              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
+              href: "/the-long-dark-episode-5/episode-5-walkthrough",
               label: "Episode 5 Walkthrough",
             },
             {
-              href: "/the-long-dark-episode-5/",
+              href: "/the-long-dark-episode-5",
               label: "The Long Dark Episode 5 Guide Hub",
             },
           ]}

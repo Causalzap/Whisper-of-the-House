@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import SearchPartyAchievementContent from "@/data/the-long-dark/search-party-achievement.mdx";
+import HowToGetToDesperationBayContent from "@/data/the-long-dark/how-to-get-to-desperation-bay.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-long-dark-episode-5/search-party-achievement`;
+const pageUrl = `${siteUrl}/the-long-dark-episode-5/how-to-get-to-desperation-bay`;
 
 export const metadata: Metadata = {
-  title: "How to Get Search Party in The Long Dark Ep 5",
+  title: "How to Get to Desperation Bay in The Long Dark Ep 5",
   description:
-    "Need the Search Party achievement in The Long Dark Episode 5? This guide explains the 40-minute timed run, the best route order, and the biggest time-wasting mistakes.",
+    "Stuck trying to reach Desperation Bay in The Long Dark Episode 5? This guide explains the lighthouse clue, the icy coastal route, and how to reach the cargo ship.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Search Party Achievement",
+          name: "How to Get to Desperation Bay",
           item: pageUrl,
         },
       ],
@@ -50,16 +50,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "The Long Dark Episode 5 Search Party Achievement Guide",
+      headline: "How to Get to Desperation Bay in The Long Dark Episode 5",
       description:
-        "This guide explains how to get the Search Party achievement in The Long Dark Episode 5, including the timer logic, best route order, and the most common time-wasting mistakes.",
+        "This guide explains how to get to Desperation Bay in The Long Dark Episode 5, how the lighthouse clue helps, and how to work through the icy coast route to the cargo ship.",
       image: [
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-2-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-1-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-location-3-map.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-waterfall.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/missing-person-basement.webp`,
-        `${siteUrl}/images/the-long-dark/episode-5/constable-fishing-pier.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/desperation-bay-map.webp`,
+        `${siteUrl}/images/the-long-dark/episode-5/cargo-ship.webp`,
       ],
       inLanguage: "en",
       dateModified: "2026-04-09",
@@ -74,15 +70,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Search Party achievement",
+          name: "Desperation Bay",
         },
         {
           "@type": "Thing",
-          name: "Missing People objective",
+          name: "Lighthouse clue",
         },
         {
           "@type": "Thing",
-          name: "Perseverance Mills",
+          name: "Cargo ship",
         },
       ],
       isPartOf: {
@@ -114,8 +110,8 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="The Long Dark Episode 5 Search Party Achievement Guide"
-          description="Trying to get Search Party in The Long Dark Episode 5? This guide covers the timed run, the best route order, and the mistakes that waste the most time."
+          title="How to Get to Desperation Bay in The Long Dark Episode 5"
+          description="Stuck trying to reach Desperation Bay in The Long Dark Episode 5? This guide explains the lighthouse clue, the icy coastal route, and how to reach the cargo ship."
           gameTitle="The Long Dark Episode 5"
           gameHref="/the-long-dark-episode-5"
           breadcrumbBaseHref="/"
@@ -123,40 +119,40 @@ export default function Page() {
           updatedAt="April 9, 2026"
           toc={[
             {
-              id: "what-search-party-requires-in-episode-5",
-              label: "Achievement requirements",
+              id: "how-to-get-to-desperation-bay-in-one-paragraph",
+              label: "Quick answer",
             },
             {
-              id: "when-the-search-party-timer-starts",
-              label: "When the timer starts",
+              id: "the-best-way-to-think-about-this-route",
+              label: "How to think about the route",
             },
             {
-              id: "best-search-party-route",
-              label: "Best route order",
+              id: "what-the-lighthouse-clue-is-telling-you",
+              label: "What the lighthouse clue means",
             },
             {
-              id: "stop-1-waterfall-route",
-              label: "Stop 1: waterfall",
+              id: "why-this-part-feels-like-an-ice-maze",
+              label: "Why it feels like an ice maze",
             },
             {
-              id: "stop-2-basement-route",
-              label: "Stop 2: basement",
+              id: "how-to-handle-wrong-turns-without-wasting-time",
+              label: "How to handle wrong turns",
             },
             {
-              id: "stop-3-constable-route",
-              label: "Stop 3: Constable",
+              id: "how-to-know-you-are-close-to-the-ship",
+              label: "How to know you are close",
             },
             {
-              id: "what-wastes-the-most-time-in-search-party",
-              label: "Biggest time-wasters",
+              id: "most-common-desperation-bay-route-mistakes",
+              label: "Common route mistakes",
             },
             {
-              id: "how-to-prepare-before-you-start-search-party",
-              label: "How to prepare",
+              id: "why-reaching-the-ship-matters-so-much",
+              label: "Why reaching the ship matters",
             },
             {
-              id: "search-party-vs-the-normal-missing-people-route",
-              label: "Search Party vs normal route",
+              id: "what-comes-right-after-you-get-there",
+              label: "What comes after",
             },
             {
               id: "faq",
@@ -165,20 +161,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-long-dark-episode-5/episode-5-missing-people-locations/",
-              label: "Episode 5 Missing People Locations",
+              href: "/the-long-dark-episode-5/where-to-go-after-terry",
+              label: "Where to Go After Terry",
             },
             {
-              href: "/the-long-dark-episode-5/episode-5-walkthrough/",
+              href: "/the-long-dark-episode-5/episode-5-walkthrough",
               label: "Episode 5 Walkthrough",
             },
             {
-              href: "/the-long-dark-episode-5/",
+              href: "/the-long-dark-episode-5",
               label: "The Long Dark Episode 5 Guide Hub",
             },
           ]}
         >
-          <SearchPartyAchievementContent />
+          <HowToGetToDesperationBayContent />
         </GuideArticlePage>
       </main>
       <Footer />
