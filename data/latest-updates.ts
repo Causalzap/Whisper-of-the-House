@@ -97,6 +97,48 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-sky-700",
 },
 
+// ===== Fracture Field =====
+{
+  href: "/fracture-field",
+  game: "Fracture Field",
+  title: "Complete Walkthrough & Guide",
+  description:
+    "Start here for the full route: early upgrades, World Fracture, Drone Hub automation, Reality Shatter, layer walls, known fixes, and 100% cleanup.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/fracture-field/prestige-guide",
+  game: "Fracture Field",
+  title: "Prestige Guide",
+  description:
+    "World Fracture timing, Reality Shatter rules, what you lose or keep in v1.1.0, Core Fragment benchmarks, and best prestige upgrades.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/fracture-field/progression-guide",
+  game: "Fracture Field",
+  title: "Progression Guide",
+  description:
+    "All rock layers from Stone to Chronite, Iron wall fixes, Pierce vs Hardness, Drone Hub setup, Gold, Obsidian, and late-game routing.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/fracture-field/achievements-guide",
+  game: "Fracture Field",
+  title: "Achievements & 100% Guide",
+  description:
+    "100% completion roadmap, known achievement names, Golden Touch warning, bomb and drone setups, prestige milestones, and hardest achievements.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
   // ===== Airborne Empire =====
 {
   href: "/airborne-empire/kingsfell-guide/",

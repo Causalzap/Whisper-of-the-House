@@ -1,0 +1,877 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const layerColumns = [
+  { key: "order", label: "Order" },
+  { key: "layer", label: "Rock Layer" },
+  { key: "wallType", label: "Main Wall Type" },
+  { key: "upgradeFocus", label: "Upgrade Focus" },
+];
+
+export const layerRows = [
+  {
+    order: "1",
+    layer: "Stone",
+    wallType: "Tutorial economy",
+    upgradeFocus:
+      "Basic Fracture, Dust income, Stone output, and early capacity.",
+  },
+  {
+    order: "2",
+    layer: "Clay",
+    wallType: "First transition",
+    upgradeFocus:
+      "Unlock once Stone breaks quickly. Do not over-invest if Sandstone is already reachable.",
+  },
+  {
+    order: "3",
+    layer: "Sandstone",
+    wallType: "Core Fragment starting point",
+    upgradeFocus:
+      "Start watching World Fracture value, but do not reset instantly just because Core Fragments appear.",
+  },
+  {
+    order: "4",
+    layer: "Quartz",
+    wallType: "First common slowdown",
+    upgradeFocus:
+      "Use this as the first real reset check. If progress slows and Core Fragments are useful, World Fracture.",
+  },
+  {
+    order: "5",
+    layer: "Iron",
+    wallType: "First Pierce / Hardness check",
+    upgradeFocus:
+      "Shift from only Fracture into Pierce, hardness handling, and World Fracture scaling.",
+  },
+  {
+    order: "6",
+    layer: "Silver",
+    wallType: "Automation and Reality Shard entry",
+    upgradeFocus:
+      "Scale Drone Hub, Quarry Foreman, Fracture, Pierce, and repeat World Fracture value.",
+  },
+  {
+    order: "7",
+    layer: "Gold",
+    wallType: "Deep value wall",
+    upgradeFocus:
+      "Use World Fracture routing, Local Mastery, drone scaling, and Reality Shatter preparation.",
+  },
+  {
+    order: "8",
+    layer: "Diamond",
+    wallType: "Late mid-game checkpoint",
+    upgradeFocus:
+      "Build enough economy and reset value before the Obsidian jump.",
+  },
+  {
+    order: "9",
+    layer: "Obsidian",
+    wallType: "Major late-game gate",
+    upgradeFocus:
+      "Use Mk. II scaling, Pierce, bombs, Drone Hub support, and repeated Reality Shatters.",
+  },
+  {
+    order: "10",
+    layer: "Primal",
+    wallType: "Post-Obsidian multiplier layer",
+    upgradeFocus:
+      "v1.1.0 buffed Primal multipliers, so treat it as a real scaling step instead of skipping past it.",
+  },
+  {
+    order: "11",
+    layer: "Star Metal",
+    wallType: "Late Reality Shatter scaling",
+    upgradeFocus:
+      "Improve rock economy, Reality Shard generation, and drone-assisted clearing.",
+  },
+  {
+    order: "12",
+    layer: "Void Stone",
+    wallType: "Final gate before Chronite",
+    upgradeFocus:
+      "Prioritize Pierce, Mk. II damage, rock economy, and reset breakpoints.",
+  },
+  {
+    order: "13",
+    layer: "Chronite",
+    wallType: "Final listed layer",
+    upgradeFocus:
+      "Once Chronite is consistent, reset timing should follow upgrade costs rather than fixed layer milestones.",
+  },
+];
+
+export const stuckReasonColumns = [
+  { key: "reason", label: "Stuck Reason" },
+  { key: "symptom", label: "What It Looks Like" },
+  { key: "fix", label: "Fix" },
+];
+
+export const stuckReasonRows = [
+  {
+    reason: "Damage falloff",
+    symptom:
+      "The new layer barely moves even though earlier layers explode instantly.",
+    fix:
+      "Raise Pierce, hardness handling, Fracture, and prestige multipliers.",
+  },
+  {
+    reason: "Economy stall",
+    symptom:
+      "You can break the layer, but upgrades take too long to afford.",
+    fix:
+      "Raise layer output, Local Mastery, Dust economy, and reset value.",
+  },
+  {
+    reason: "Quarry space cap",
+    symptom:
+      "Rocks stop cycling efficiently, spawns feel blocked, or the quarry looks full.",
+    fix:
+      "Use bombs, improve space control, adjust drones, and expand quarry capacity when it does not hurt achievements.",
+  },
+  {
+    reason: "Drone targeting mismatch",
+    symptom:
+      "Drones spend too much time on layers that are not your current bottleneck.",
+    fix:
+      "Adjust target layers, priorities, and drone type mix so drones support the wall you are actually solving.",
+  },
+  {
+    reason: "Wrong reset timing",
+    symptom:
+      "You wait a long time for tiny gains, or reset before the reward buys anything useful.",
+    fix:
+      "Reset around upgrade breakpoints: when the next prestige purchase makes the next run clearly faster.",
+  },
+];
+
+export const mechanicColumns = [
+  { key: "mechanic", label: "Mechanic" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "whenItMatters", label: "When It Matters Most" },
+];
+
+export const mechanicRows = [
+  {
+    mechanic: "Fracture",
+    whatItDoes:
+      "Broad damage scaling. It helps every layer when the target's Hardness is not crushing your effective damage.",
+    whenItMatters:
+      "Strong throughout the game, especially before a layer becomes a pure hardness wall.",
+  },
+  {
+    mechanic: "Pierce",
+    whatItDoes:
+      "Counters high Hardness. When Pierce is far below a layer's Hardness, damage falloff becomes severe.",
+    whenItMatters:
+      "Iron, Silver, Gold, Obsidian, and any layer where the health bar barely moves.",
+  },
+  {
+    mechanic: "Hardness",
+    whatItDoes:
+      "A defensive layer stat that reduces effective damage when Pierce is too low.",
+    whenItMatters:
+      "The moment a new layer feels impossible despite strong damage on the previous layer.",
+  },
+  {
+    mechanic: "Local Mastery",
+    whatItDoes:
+      "Layer-specific resource investment that turns a farmable layer into a stronger engine.",
+    whenItMatters:
+      "Gold and later value walls where one layer is technically breakable but still inefficient.",
+  },
+  {
+    mechanic: "Drone Hub",
+    whatItDoes:
+      "Automates damage, collection, support, and area pressure through specialized drones.",
+    whenItMatters:
+      "Silver onward, when manual clicking stops being enough and automation decides run speed.",
+  },
+  {
+    mechanic: "Bombs",
+    whatItDoes:
+      "Burst damage and space control for clusters, high-health rocks, and setup achievements.",
+    whenItMatters:
+      "Quarry space problems, Obsidian starts, bomb achievements, and late-field control.",
+  },
+];
+
+export const droneSetupColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "priority", label: "Drone Priority" },
+  { key: "targeting", label: "Targeting / Setup" },
+];
+
+export const droneSetupRows = [
+  {
+    stage: "Before Silver",
+    priority: "Hammer → Collector → Shatter if needed",
+    targeting:
+      "Clean lower layers while your main damage focuses the deepest farmable layer.",
+  },
+  {
+    stage: "Silver and Gold",
+    priority: "Shatter → Collector → Supervisor",
+    targeting:
+      "Target the deepest layer your fleet can damage efficiently, not always the deepest unlocked layer.",
+  },
+  {
+    stage: "Obsidian and beyond",
+    priority: "Shatter → Pierce → Boost → Sentry / filler",
+    targeting:
+      "Use priority rules to support the wall. Do not let the entire fleet waste time on a layer it cannot damage.",
+  },
+  {
+    stage: "Achievement setups",
+    priority: "Reduce drones → control field → bomb / capacity setup",
+    targeting:
+      "Temporarily limit drone pressure when you need controlled rock placement or bomb timing.",
+  },
+];
+
+export const resetDecisionColumns = [
+  { key: "check", label: "Reset Check" },
+  { key: "stayInRun", label: "Stay In The Run If..." },
+  { key: "resetNow", label: "Reset If..." },
+];
+
+export const resetDecisionRows = [
+  {
+    check: "Next upgrade value",
+    stayInRun:
+      "The next 5–10 minutes will unlock a key Fracture, Pierce, layer, or automation upgrade.",
+    resetNow:
+      "The next useful upgrade is far away, but your World Fracture reward already buys a clear permanent upgrade.",
+  },
+  {
+    check: "Deepest layer status",
+    stayInRun:
+      "The deepest layer is becoming more farmable and still improves your reward quickly.",
+    resetNow:
+      "The deepest layer is technically unlocked but barely moves or gives poor income.",
+  },
+  {
+    check: "Reward growth",
+    stayInRun:
+      "Core Fragments or Reality Shards are still increasing quickly.",
+    resetNow:
+      "The reward has slowed down and another short push barely changes what you can buy.",
+  },
+  {
+    check: "Upgrade breakpoint",
+    stayInRun:
+      "You are close to a specific upgrade level that changes the run, such as Pierce, Core Fragment generation, or Drone Hub support.",
+    resetNow:
+      "Resetting now already buys that breakpoint, or waiting only buys minor extra levels.",
+  },
+  {
+    check: "Automation recovery",
+    stayInRun:
+      "Drone Hub and Quarry Foreman are still ramping and will soon make the run faster.",
+    resetNow:
+      "Automation has plateaued and the current wall still is not becoming farmable.",
+  },
+];
+
+export const wallColumns = [
+  { key: "wall", label: "Wall" },
+  { key: "diagnosis", label: "Diagnosis" },
+  { key: "actionPlan", label: "Action Plan" },
+];
+
+export const wallRows = [
+  {
+    wall: "Quartz",
+    diagnosis:
+      "First real slowdown. Core Fragments are available, but the first reset may still be weak if done too early.",
+    actionPlan:
+      "Push until the reward buys useful World Fracture upgrades, then reset instead of grinding one slow layer forever.",
+  },
+  {
+    wall: "Iron",
+    diagnosis:
+      "First true Pierce / Hardness test. If the bar barely moves, raw damage is not converting well.",
+    actionPlan:
+      "Add Pierce, hardness tools, Fracture, and World Fracture upgrades. Treat Iron as a stat-routing check.",
+  },
+  {
+    wall: "Silver",
+    diagnosis:
+      "Automation check and Reality Shard entry. Manual clicking becomes inefficient.",
+    actionPlan:
+      "Scale Drone Hub, Quarry Foreman, Fracture, Pierce, and repeat World Fractures before chasing weak Reality Shatter rewards.",
+  },
+  {
+    wall: "Gold",
+    diagnosis:
+      "Deep value wall. Your first-layer prestige route and Local Mastery start to matter more.",
+    actionPlan:
+      "Improve rock economy, Local Mastery, drone support, and reset value. Prepare Reality Shatter only when shards are meaningful.",
+  },
+  {
+    wall: "Obsidian",
+    diagnosis:
+      "Late-game gate. Diamond may be easy while Obsidian still barely moves.",
+    actionPlan:
+      "Use Mk. II scaling, Pierce, bombs, Drone Hub support, and repeated Reality Shatters.",
+  },
+  {
+    wall: "Primal → Chronite",
+    diagnosis:
+      "Late Reality Shatter snowball phase. Fixed layer goals become less useful than upgrade-cost breakpoints.",
+    actionPlan:
+      "Reset when the next Reality Shatter buys a major Mk. II, rock economy, or shard-scaling level.",
+  },
+];
+
+export const versionStrategyColumns = [
+  { key: "version", label: "Version" },
+  { key: "change", label: "Progression Change" },
+  { key: "strategy", label: "Strategy Impact" },
+];
+
+export const versionStrategyRows = [
+  {
+    version: "v1.0.1",
+    change:
+      "Damage falloff was softened when Pierce is well below a layer's Hardness.",
+    strategy:
+      "Iron is less punishing than launch, but Pierce is still the key stat when damage collapses.",
+  },
+  {
+    version: "v1.0.1",
+    change:
+      "Obsidian+ had an unintentional health-scaling jump fixed.",
+    strategy:
+      "Do not assume every Obsidian wall is a bug; current Obsidian is still meant to be a late-game gate.",
+  },
+  {
+    version: "v1.1.0",
+    change:
+      "Primal rock layer multipliers were buffed from x1.3 to x1.5 per level.",
+    strategy:
+      "Primal is a stronger late-game scaling layer now and should not be ignored once you can reach it.",
+  },
+  {
+    version: "v1.1.0",
+    change:
+      "Gold through Chronite health and hardness were increased to preserve Reality Shatter depth.",
+    strategy:
+      "Late layers need stronger Mk. II scaling, rock economy, Pierce, and reset planning than early versions suggested.",
+  },
+  {
+    version: "v1.1.0",
+    change:
+      "Drone Hub stays unlocked and Quarry Foreman persists after Reality Shatter.",
+    strategy:
+      "Post-shatter recovery is smoother, so late progression should lean harder into automation and drone scaling.",
+  },
+];
+
+export const upgradeWhenStuckColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "upgradeFocus", label: "Upgrade Focus" },
+  { key: "why", label: "Why" },
+];
+
+export const upgradeWhenStuckRows = [
+  {
+    problem: "Layer takes damage but feels slow",
+    upgradeFocus: "Fracture, Local Mastery, layer output",
+    why:
+      "You need more throughput and resource scaling, not necessarily a full reset yet.",
+  },
+  {
+    problem: "Layer barely takes damage",
+    upgradeFocus: "Pierce, hardness tools, World Fracture upgrades",
+    why:
+      "This is usually damage falloff from low Pierce against high Hardness.",
+  },
+  {
+    problem: "Quarry looks full or spawns feel blocked",
+    upgradeFocus: "Bombs, space control, drone targeting, careful quarry expansion",
+    why:
+      "A full field can stop useful rocks from cycling even when your stats are strong enough.",
+  },
+  {
+    problem: "Drones feel useless",
+    upgradeFocus: "Drone slots, targeting rules, Shatter / Collector balance, Supervisor support",
+    why:
+      "Drones need enough slots and correct targets before they feel like real automation.",
+  },
+  {
+    problem: "Reality Shards grow slowly",
+    upgradeFocus: "Rock count, deeper-layer economy, Mk. II scaling",
+    why:
+      "Late shard growth depends on valuable rocks spawning, breaking, and scaling fast enough.",
+  },
+  {
+    problem: "Progression feels flat after a long run",
+    upgradeFocus: "World Fracture or Reality Shatter breakpoint",
+    why:
+      "A stalled run is often worse than a reset that buys a key upgrade.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Entering Reality Shatter without a recovery plan",
+    whyItHurts:
+      "Even after v1.1.0 made automation persist, drone upgrade levels and World Fracture progress still need to be rebuilt.",
+    betterPlay:
+      "Before shattering, make sure the shard reward buys useful Mk. II scaling, rock economy, or Drone Hub support.",
+  },
+  {
+    mistake: "Ignoring quarry space",
+    whyItHurts:
+      "A full field can look like a damage problem even when the real issue is poor rock cycling.",
+    betterPlay:
+      "Use bombs, targeting control, and capacity upgrades carefully.",
+  },
+  {
+    mistake: "Letting drones chase the deepest layer too early",
+    whyItHurts:
+      "Drones can waste time on rocks they cannot damage efficiently.",
+    betterPlay:
+      "Target the deepest farmable layer, not always the deepest unlocked layer.",
+  },
+  {
+    mistake: "Treating Gold like a normal layer",
+    whyItHurts:
+      "Gold starts the deeper value wall and exposes weak World Fracture routing.",
+    betterPlay:
+      "Improve Local Mastery, rock economy, drone scaling, and reset value.",
+  },
+  {
+    mistake: "Assuming Obsidian is always bugged",
+    whyItHurts:
+      "Obsidian is still meant to be a late-game wall after the v1.0.1 health-scaling fix.",
+    betterPlay:
+      "Check your version, then improve Mk. II scaling, Pierce, bombs, drones, and rock economy.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Fracture Field progression is about knowing whether a new layer is farmable, not just whether it is unlocked.**
+
+The full layer route is:
+
+**Stone → Clay → Sandstone → Quartz → Iron → Silver → Gold → Diamond → Obsidian → Primal → Star Metal → Void Stone → Chronite**
+
+The main walls are:
+
+- **Quartz:** first reset check
+- **Iron:** first Pierce / Hardness check
+- **Silver:** automation and Reality Shard entry
+- **Gold:** deep value wall
+- **Obsidian:** late-game gate
+- **Primal → Chronite:** Reality Shatter snowball phase
+
+If a layer barely takes damage, check **Pierce vs Hardness**. If it breaks but upgrades are slow, improve **economy and Local Mastery**. If the quarry is full, fix **space control and drone targeting**. If the run is flat, reset around the next World Fracture or Reality Shatter purchase that will clearly speed up the next run.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/obsidian-wall-progression.webp"
+    alt="Fracture Field Obsidian wall with late-game drones and slow Obsidian progress despite strong earlier-layer damage."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If Obsidian looks like this while Diamond breaks instantly, the problem is usually late-layer scaling, Pierce, and hardness handling — not simply a lack of idle time.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="progression-route">
+  Fracture Field progression route
+</h2>
+
+<GuideTable
+  caption="Complete Fracture Field layer route, wall type, and upgrade focus."
+  columns={layerColumns}
+  rows={layerRows}
+/>
+
+Fracture Field is not a straight line where every new layer should be unlocked immediately. A layer is only useful when it improves your income, reset value, or next upgrade path.
+
+Use this route:
+
+1. stabilize the current layer
+2. unlock the next layer
+3. test whether the new layer is farmable
+4. identify the wall type
+5. buy the matching upgrade category
+6. reset if the next prestige purchase beats waiting
+
+Sandstone starts Core Fragment generation. Silver starts Reality Shard generation. Gold through Chronite are tuned around deeper Reality Shatter scaling, so late-game walls should be handled with prestige upgrades, not only local grinding.
+
+For reset benchmarks, use the <Link href="/fracture-field/prestige-guide">Fracture Field Prestige Guide</Link>.
+
+---
+
+<h2 id="why-new-layers-feel-impossible">
+  Why new layers feel impossible at first
+</h2>
+
+<GuideTable
+  caption="Why you get stuck in Fracture Field and what each type of wall means."
+  columns={stuckReasonColumns}
+  rows={stuckReasonRows}
+/>
+
+A new layer can feel impossible for different reasons.
+
+If the health bar barely moves, you are probably facing **damage falloff** from low Pierce against high Hardness.
+
+If the layer breaks but upgrades take forever, you have an **economy stall**.
+
+If useful rocks stop appearing or the field feels clogged, you may have a **quarry space** problem.
+
+If drones keep attacking the wrong layer, you have a **targeting** problem.
+
+The right fix depends on which problem you actually have.
+
+<GuideCallout title="Layer unlock rule">
+A layer is not truly unlocked when the button appears. It is unlocked when you can break it fast enough to improve your income, reset value, or next upgrade path.
+</GuideCallout>
+
+---
+
+<h2 id="pierce-vs-hardness">
+  Pierce vs Hardness explained
+</h2>
+
+<GuideTable
+  caption="Core progression mechanics behind Fracture Field layer walls."
+  columns={mechanicColumns}
+  rows={mechanicRows}
+/>
+
+**Pierce vs Hardness is the main reason Iron and later layers feel different from early rocks.**
+
+When your Pierce is far below a layer's Hardness, your damage suffers heavy falloff. The v1.0.1 update softened that falloff, so Iron and similar walls are less punishing than launch, but Pierce is still the stat to check when the health bar barely moves.
+
+Use this rule:
+
+- if the layer takes damage but feels slow, buy Fracture and economy
+- if the layer barely takes damage, buy Pierce and hardness tools
+- if the layer is farmable but inefficient, buy Local Mastery and automation
+- if none of those upgrades are affordable, reset
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/pierce-hardness-tooltip.webp"
+    alt="Fracture Field Pierce and Hardness stats panel used to diagnose why a new layer barely takes damage."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the Quarry Stats panel to compare your Pierce plan against the layer that is blocking you. If the bar barely moves, upgrade Pierce before blaming drones or bombs.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Hardness data note">
+Exact Hardness values can change with patches and layer upgrades. If you want a numeric Pierce table, use the Quarry Stats panel in your current version and record each layer's base stats before writing fixed thresholds.
+</GuideCallout>
+
+---
+
+<h2 id="drone-hub-setup">
+  Drone Hub setup for progression walls
+</h2>
+
+<GuideTable
+  caption="Basic Drone Hub setup by progression stage."
+  columns={droneSetupColumns}
+  rows={droneSetupRows}
+/>
+
+Drone Hub does not become powerful just because it is unlocked. It becomes powerful when your drone slots, targeting rules, and drone roles match the wall you are solving.
+
+Before Silver, drones are support. Let them clean lower layers, collect resources, or help your current farmable layer while your strongest damage focuses the wall.
+
+Around Silver and Gold, drones become part of the main engine. Shatter Drones help with clustered or tough layers, Collector Drones keep resources moving, and Supervisor support reduces downtime.
+
+At Obsidian and later, your fleet should not blindly attack the deepest unlocked layer. The best target is the deepest layer that your current setup can damage efficiently.
+
+---
+
+<h2 id="quartz-and-first-reset">
+  Quartz wall: when to reset
+</h2>
+
+Quartz is usually the first point where Fracture Field stops feeling like a simple clicker and starts feeling like a prestige game.
+
+Do not reset the moment Sandstone appears. Sandstone starts Core Fragment generation, but the first World Fracture usually feels better once the reward can buy visible power.
+
+<GuideTable
+  caption="How to decide whether to reset at Quartz or keep pushing."
+  columns={resetDecisionColumns}
+  rows={resetDecisionRows}
+/>
+
+A practical reset test is:
+
+1. **What can I buy immediately after resetting?**
+2. **Will another 5–10 minutes change that purchase?**
+3. **Is my deepest layer farmable or only technically unlocked?**
+
+If resetting buys a key upgrade and another short push does not change the answer, World Fracture is usually better than waiting.
+
+For exact reset numbers, use the <Link href="/fracture-field/prestige-guide">Fracture Field Prestige Guide</Link>.
+
+---
+
+<h2 id="iron-wall">
+  Iron wall: how to break through
+</h2>
+
+Iron is the first real mechanics check.
+
+If Iron barely takes damage, do not keep buying only raw Fracture. Iron is where the game starts testing whether your Pierce and reset upgrades can handle higher Hardness.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/iron-wall-stuck.webp"
+    alt="Fracture Field Iron wall where Iron barely takes damage after the player first reaches the layer."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If Iron barely moves, treat it as a Pierce and Hardness problem. Add Pierce and World Fracture scaling before forcing a long manual grind.
+  </figcaption>
+</figure>
+
+To break Iron:
+
+1. add Pierce or hardness tools
+2. keep Fracture high enough to support that Pierce
+3. improve World Fracture upgrades if local costs stall
+4. use drones to clear lower layers instead of wasting all attention on Iron
+5. reset if Core Fragment gain is more useful than another slow Iron push
+
+---
+
+<h2 id="silver-wall">
+  Silver wall: automation and Reality Shards
+</h2>
+
+Silver is where Reality Shards begin, but it is also where manual pushing starts to feel inefficient.
+
+The jump into Silver can be sharp. If your drones, Quarry Foreman, and World Fracture upgrades are weak, Silver may technically unlock before it is actually farmable.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/silver-hp-jump.webp"
+    alt="Fracture Field Silver layer showing a major HP jump after Iron and the start of Reality Shard progression."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Silver starts Reality Shard generation, but weak shard income is a sign to improve automation and World Fracture scaling before using Reality Shatter.
+  </figcaption>
+</figure>
+
+If Silver is too slow, focus on:
+
+- Drone Hub slots and role balance
+- Quarry Foreman automation
+- Fracture and Pierce
+- Core Fragment generation
+- repeat World Fracture value
+
+Reality Shatter begins here, but a tiny shard reward is usually not enough. Use Silver to build the scaling that makes the first serious Reality Shatter worthwhile.
+
+---
+
+<h2 id="gold-wall">
+  Gold wall: deep value check
+</h2>
+
+Gold is where your first-layer prestige route starts to show whether it is strong enough.
+
+If Gold is unlocked but barely farmable, the problem is rarely one missing upgrade. It is usually your whole scaling stack: World Fracture, Local Mastery, Drone Hub, automation, and Reality Shatter preparation.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/gold-wall-stuck.webp"
+    alt="Fracture Field Gold wall where drones attack Gold but progress remains slow."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If Gold is unlocked but slow, use the run to improve reset value and Local Mastery instead of waiting forever on weak shard income.
+  </figcaption>
+</figure>
+
+Gold is also where achievement planning starts to matter. If you care about 100% completion, finish capacity achievements before buying upgrades that massively expand rock capacity.
+
+For achievement routing, use the <Link href="/fracture-field/achievements-guide">Fracture Field Achievements Guide</Link>.
+
+---
+
+<h2 id="obsidian-wall">
+  Obsidian wall: the late-game gate
+</h2>
+
+Obsidian is the late-game wall that makes earlier layers feel misleading.
+
+You may reach a point where Diamond breaks instantly, but Obsidian still barely takes damage. That usually means your late-layer multipliers are not ready yet.
+
+Obsidian asks for:
+
+- stronger Reality Shatter upgrades
+- more Pierce and hardness handling
+- better rock economy
+- advanced Drone Hub support
+- bomb usage for starts, clusters, or hardness support
+- repeated resets for Mk. II scaling
+
+Do not assume that easy Diamond means easy Obsidian. Obsidian is the gate into Primal, Star Metal, Void Stone, and Chronite progression.
+
+---
+
+<h2 id="primal-star-metal-void-stone-chronite">
+  Primal, Star Metal, Void Stone, and Chronite progression
+</h2>
+
+After Obsidian, progression becomes less about one clean wall and more about Reality Shatter snowballing.
+
+Primal matters more after v1.1.0 because its rock layer multipliers were buffed. Gold through Chronite also received health and hardness increases to preserve the depth of the Reality Shatter system, so late layers require real Mk. II scaling instead of only time.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/chronite-late-layer.webp"
+    alt="Fracture Field late-game progression reaching Chronite after Void Stone and other deep layers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once you can reach Chronite consistently, stop using fixed layer milestones and start resetting around upgrade-cost breakpoints.
+  </figcaption>
+</figure>
+
+For late layers:
+
+1. push until the next layer is reachable
+2. test whether it is farmable
+3. if it is not, buy Mk. II damage, Pierce, rock economy, or Drone Hub support
+4. use Reality Shatter when the next shard reward buys a key level
+5. repeat until Chronite becomes consistent
+
+---
+
+<h2 id="version-changes-and-strategy">
+  Version changes and progression strategy
+</h2>
+
+<GuideTable
+  caption="How Fracture Field patches changed progression strategy."
+  columns={versionStrategyColumns}
+  rows={versionStrategyRows}
+/>
+
+The important takeaway is simple: current Fracture Field is less punishing than launch around some early walls, but deeper layers are now tuned to require stronger Reality Shatter scaling.
+
+That means you should not use old advice blindly. Iron is easier to scrape through than before, but Gold through Chronite are designed to be deeper walls.
+
+---
+
+<h2 id="what-to-upgrade-when-stuck">
+  What to upgrade when stuck
+</h2>
+
+<GuideTable
+  caption="What to upgrade when you are stuck in Fracture Field."
+  columns={upgradeWhenStuckColumns}
+  rows={upgradeWhenStuckRows}
+/>
+
+The fastest diagnosis is:
+
+**Is this a damage falloff problem, an economy problem, a space problem, a drone problem, or a reset problem?**
+
+If the layer barely moves, start with Pierce.  
+If it moves but feels slow, start with economy.  
+If the field clogs, fix space.  
+If drones waste time, fix targeting.  
+If the run is flat, reset around the next upgrade breakpoint.
+
+---
+
+<h2 id="common-progression-mistakes">
+  Common progression mistakes
+</h2>
+
+<GuideTable
+  caption="Common Fracture Field progression mistakes and what to do instead."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Fracture Field rewards patience, but not passive waiting.
+
+The best route is to identify the wall type, buy the matching upgrade category, and reset when the next prestige purchase creates more progress than the current run.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the full Fracture Field layer order?
+
+The full recommended layer sequence is **Stone → Clay → Sandstone → Quartz → Iron → Silver → Gold → Diamond → Obsidian → Primal → Star Metal → Void Stone → Chronite**.
+
+### Why am I stuck at Iron in Fracture Field?
+
+Iron is the first serious Pierce and Hardness check. If the bar barely moves, buy Pierce, hardness tools, Fracture, and World Fracture upgrades instead of only waiting longer.
+
+### How much Pierce do I need for each layer?
+
+Use the Quarry Stats panel in your current version to compare Pierce against the layer's Hardness. Exact thresholds can shift with patches and upgrades, so avoid relying on old static numbers.
+
+### Why does my quarry stop progressing even when my damage is good?
+
+Your quarry may be full or badly targeted. Use bombs, adjust drones, and make sure the field is cycling useful rocks instead of clogging.
+
+### Which drones should I use for progression?
+
+Before Silver, use **Hammer → Collector → Shatter if needed**. Around Silver and Gold, use **Shatter → Collector → Supervisor**. In late game, add **Shatter → Pierce → Boost → Sentry / filler** once you have enough slots.
+
+### When exactly should I do my first Reality Shatter?
+
+Do your first Reality Shatter when Silver, Gold, or a deeper layer has slowed down and the shard reward can buy several meaningful upgrades. As a practical benchmark, under 100 Reality Shards is usually early, 200–500 is workable, and 500–1,000+ is smoother.
+
+### Why is Gold so slow?
+
+Gold is a deep value wall. It tests your World Fracture routing, Local Mastery, Drone Hub scaling, and Reality Shatter preparation.
+
+### Is Obsidian bugged?
+
+Usually no. Obsidian is meant to be a major late-game gate, although early versions had rougher scaling. Check your version, then improve Pierce, Mk. II scaling, bombs, drones, and rock economy.
+
+### How do I reach Chronite?
+
+Build Reality Shatter scaling, improve Pierce and rock economy, push through Obsidian, Primal, Star Metal, and Void Stone, then reset around upgrade breakpoints instead of fixed layer milestones.

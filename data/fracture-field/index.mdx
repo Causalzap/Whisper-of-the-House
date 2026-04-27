@@ -1,0 +1,568 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const walkthroughColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const walkthroughRows = [
+  {
+    stage: "1. First Stone upgrades",
+    goal: "Start earning Dust and Stone quickly",
+    whatToDo:
+      "Buy early damage, Stone output, and Stone capacity upgrades. Hold the mouse button instead of clicking one hit at a time.",
+  },
+  {
+    stage: "2. Clay and Sandstone",
+    goal: "Unlock deeper layers without rushing too far",
+    whatToDo:
+      "Unlock Clay, then Sandstone once your Stone income and damage are stable. Use bombs on clusters, but do not overbuild around bombs.",
+  },
+  {
+    stage: "3. Quartz push",
+    goal: "Reach the first real slowdown",
+    whatToDo:
+      "Push into Quartz until progress feels slow. This is usually where your first World Fracture starts to make sense.",
+  },
+  {
+    stage: "4. First World Fracture",
+    goal: "Convert the first run into permanent power",
+    whatToDo:
+      "Do not wait forever for a perfect first reset. World Fracture once progress slows and you can buy meaningful Core Fragment upgrades.",
+  },
+  {
+    stage: "5. Drone Hub and automation",
+    goal: "Turn active mining into idle automation",
+    whatToDo:
+      "Unlock Drone Hub, add basic drones, then improve drone uptime, slots, targeting, and Quarry Foreman automation.",
+  },
+  {
+    stage: "6. Iron, Silver, and Gold walls",
+    goal: "Break through layer walls with better scaling",
+    whatToDo:
+      "When a new layer feels impossible, stop forcing it. Buy Fracture, Pierce, layer-specific upgrades, and reset when the run stalls.",
+  },
+  {
+    stage: "7. First Reality Shatter",
+    goal: "Enter the deeper prestige loop",
+    whatToDo:
+      "Wait until Reality Shatter gives enough shards to buy several useful upgrades. Check what your version keeps and resets before clicking.",
+  },
+  {
+    stage: "8. Late-game cleanup",
+    goal: "Finish progression and achievement goals",
+    whatToDo:
+      "Use repeated World Fractures, Reality Shatters, rock expansion, drone scaling, and achievement-specific setups to finish the last goals.",
+  },
+];
+
+export const earlyUpgradeColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "upgradeFocus", label: "Upgrade Focus" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const earlyUpgradeRows = [
+  {
+    priority: "1",
+    upgradeFocus: "Fracture / raw damage",
+    whyItMatters:
+      "Damage lets you clear the current layer faster and reach the next resource tier.",
+  },
+  {
+    priority: "2",
+    upgradeFocus: "Layer output and capacity",
+    whyItMatters:
+      "More resources and more rocks on screen make every later upgrade easier to afford.",
+  },
+  {
+    priority: "3",
+    upgradeFocus: "Pierce and hardness reduction",
+    whyItMatters:
+      "These matter when a new layer has high hardness and your hits barely move the bar.",
+  },
+  {
+    priority: "4",
+    upgradeFocus: "Chain Reaction / pass-through effects",
+    whyItMatters:
+      "Once lower layers are easy, pass-through damage helps clear multiple layers at once.",
+  },
+  {
+    priority: "5",
+    upgradeFocus: "Drones and automation",
+    whyItMatters:
+      "Drones are useful early, but they become much stronger after resets, slot upgrades, and better targeting rules.",
+  },
+  {
+    priority: "6",
+    upgradeFocus: "Bombs",
+    whyItMatters:
+      "Bombs help with clusters, achievements, and some wall-breaking moments, but they are not your main long-term scaling source.",
+  },
+];
+
+export const resetColumns = [
+  { key: "resetType", label: "Reset Type" },
+  { key: "whenToUseIt", label: "When To Use It" },
+  { key: "mainReward", label: "Main Reward" },
+];
+
+export const resetRows = [
+  {
+    resetType: "World Fracture",
+    whenToUseIt:
+      "Use it when your current layer progress slows down and the pending Core Fragments can buy meaningful upgrades.",
+    mainReward:
+      "Core Fragments for stronger Fracture, Pierce, rock generation, drone scaling, and automation upgrades.",
+  },
+  {
+    resetType: "Quick World Fractures",
+    whenToUseIt:
+      "Use them later when each reset becomes very fast or when upgrades reward repeated World Fractures.",
+    mainReward:
+      "Faster stacking of World Fracture bonuses and achievement progress.",
+  },
+  {
+    resetType: "Reality Shatter",
+    whenToUseIt:
+      "Use it after you have enough Reality Shards to buy several important upgrades, not the moment it first appears.",
+    mainReward:
+      "A deeper prestige tree with stronger multipliers, drone scaling, retention behavior, and long-term progression boosts.",
+  },
+];
+
+export const wallColumns = [
+  { key: "wall", label: "Progression Wall" },
+  { key: "symptom", label: "What It Feels Like" },
+  { key: "fix", label: "Best Response" },
+];
+
+export const wallRows = [
+  {
+    wall: "Quartz",
+    symptom:
+      "The first time rocks feel much slower than the earlier layers.",
+    fix:
+      "Push a little, then consider your first World Fracture instead of grinding one slow layer for too long.",
+  },
+  {
+    wall: "Iron",
+    symptom:
+      "Your hits barely move the bar and drones feel weak against the new layer.",
+    fix:
+      "Invest in Fracture, Pierce, hardness-related upgrades, and reset timing. Do not judge drones only by their first few minutes.",
+  },
+  {
+    wall: "Silver",
+    symptom:
+      "The HP jump feels huge and early damage upgrades stop feeling enough.",
+    fix:
+      "Use World Fracture upgrades, automation, and targeted layer upgrades before trying to force long Silver runs.",
+  },
+  {
+    wall: "Gold",
+    symptom:
+      "Gold unlocks, but actually farming it takes far longer than expected.",
+    fix:
+      "Treat Gold as a reset checkpoint. Spend Core Fragments and drone cores before trying to sit on Gold for hours.",
+  },
+  {
+    wall: "Obsidian and beyond",
+    symptom:
+      "Earlier layers explode instantly, but Obsidian barely takes damage.",
+    fix:
+      "Use Reality Shatter upgrades, rock expansion, hardness reduction, and repeated resets. Bombs can help start the layer but are not the whole solution.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**This Fracture Field walkthrough and guide takes you from your first Stone upgrades to World Fracture, Drone Hub automation, Reality Shatter, late-game layer progression, and 100% completion goals.**
+
+The basic route is:
+
+**Stone upgrades → Clay → Sandstone → Quartz → first World Fracture → Drone Hub automation → Iron / Silver / Gold walls → Reality Shatter → Obsidian and late-game layers → achievement cleanup**
+
+The biggest mistakes are:
+
+- waiting too long before the first World Fracture
+- unlocking deeper layers before your damage and Pierce can support them
+- judging drones too early before you have enough slots and uptime
+- using Reality Shatter the moment it appears instead of waiting for useful shard upgrades
+- treating every wall as a pure idle-time problem instead of a reset and upgrade-routing problem
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/fracture-field-walkthrough-guide.webp"
+    alt="Fracture Field walkthrough and guide showing the Drone Hub, drone slots, targeting rules, and automation setup."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Drone Hub is one of the biggest turning points in Fracture Field, but the full walkthrough still depends on reset timing, layer progression, and long-term scaling.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="fracture-field-walkthrough-route">
+  Fracture Field walkthrough route
+</h2>
+
+<GuideTable
+  caption="Fracture Field walkthrough route from early upgrades to Reality Shatter and achievement cleanup."
+  columns={walkthroughColumns}
+  rows={walkthroughRows}
+/>
+
+This complete Fracture Field walkthrough is built around the full route: early mining, first World Fracture, Drone Hub automation, Reality Shatter, layer walls, and achievement cleanup.
+
+Fracture Field looks simple at first: hit rocks, earn Dust, buy upgrades, and unlock deeper layers. The real game starts when those deeper layers stop breaking cleanly.
+
+At that point, the answer is usually not "wait longer." The answer is to use the right reset, buy the right permanent upgrades, and return to the same layer with better scaling.
+
+This hub gives you the full route in one place. When one system becomes the blocker, use the focused guides linked below for the detailed decision tables, benchmarks, and setup advice.
+
+<GuideCallout title="Walkthrough rule">
+If a new layer takes much longer than the previous layer, do not assume you are playing wrong. Fracture Field is built around walls. Your job is to turn each wall into a reset, upgrade, or automation decision.
+</GuideCallout>
+
+---
+
+<h2 id="what-to-do-first">
+  Fracture Field walkthrough: what to do first
+</h2>
+
+In the first few minutes, focus on making Stone disappear faster. Buy early upgrades that increase damage, Stone income, and Stone capacity. You want enough basic income to unlock Clay and Sandstone without sitting on one screen for too long.
+
+Your first route should look like this:
+
+1. raise basic damage so Stone breaks quickly
+2. increase Stone resource output
+3. increase Stone capacity when it helps spawn more rocks
+4. unlock Clay once Stone is stable
+5. unlock Sandstone when Clay no longer slows you down
+6. push toward Quartz as your first major slowdown point
+
+Drones can help early, but they are not the entire early game. A basic drone is useful because it keeps hitting while you focus elsewhere, but Drone Hub scaling becomes much better after you have more drone cores, more slots, and reset upgrades.
+
+If you are still before your first reset, keep your goal simple: reach the first meaningful World Fracture.
+
+This section gives the quick opening route. For Timed Swing, Dust flow, Collector Drone timing, and the first reset benchmark, use the <Link href="/fracture-field/beginner-walkthrough">Fracture Field Beginner Walkthrough</Link>.
+
+---
+
+<h2 id="best-early-upgrades">
+  Best early upgrades in Fracture Field
+</h2>
+
+<GuideTable
+  caption="Best early Fracture Field upgrade priorities."
+  columns={earlyUpgradeColumns}
+  rows={earlyUpgradeRows}
+/>
+
+The safest early upgrade pattern is:
+
+**damage first, then resource output, then capacity, then Pierce or hardness tools when the next layer resists you.**
+
+Do not over-specialize too early. A small amount of drone investment is good, but spending too much on a system that is still slot-limited can delay the upgrades that actually get you to your first prestige.
+
+The same rule applies to bombs. Bombs are useful when rocks are clustered or when you are working on bomb achievements, but they are not your main source of long-term scaling.
+
+This hub gives the upgrade direction. If you need exact early-game routing from Stone to Quartz, read the <Link href="/fracture-field/beginner-walkthrough">Beginner Walkthrough</Link>. If you are already stuck at Iron or later, use the <Link href="/fracture-field/progression-guide">Progression Guide</Link>.
+
+<GuideCallout title="Best upgrade rule">
+When in doubt, buy the upgrade that helps you break the current wall faster on the next run, not the upgrade that only looks good after another hour of waiting.
+</GuideCallout>
+
+---
+
+<h2 id="when-to-unlock-new-layers">
+  When to unlock Clay, Sandstone, Quartz, Iron, and deeper layers
+</h2>
+
+Unlock new layers when the current layer is easy enough that your income will not collapse.
+
+A common mistake is unlocking a deeper layer simply because the button is available. If the new layer has much higher HP or hardness, your drones and hammer may waste time on rocks they cannot efficiently break.
+
+Use this rule:
+
+- unlock the next layer when the current one is breaking quickly
+- delay the next layer if it steals too much focus from your best income layer
+- if the new layer barely takes damage, stop forcing it and buy reset upgrades
+- after a reset, re-test the same layer before pushing deeper
+
+Early layers teach the loop. Later layers test whether your permanent upgrades are strong enough.
+
+This section gives the unlock principle. For the full layer order, Iron wall, Gold wall, Obsidian wall, Pierce, Hardness, and Chronite routing, use the <Link href="/fracture-field/progression-guide">Fracture Field Progression Guide</Link>.
+
+---
+
+<h2 id="first-world-fracture">
+  When to World Fracture for the first time
+</h2>
+
+**You should usually do your first World Fracture when progress into Quartz or the next layer slows down and you have enough Core Fragments to buy useful permanent upgrades.**
+
+Do not wait for a perfect first run. Your first World Fracture is not supposed to finish the game. It is supposed to make the second run dramatically faster.
+
+A good first World Fracture should let you buy upgrades that improve:
+
+- Fracture
+- Pierce
+- rock count or capacity
+- resource generation
+- drone usefulness
+- automation speed or unlocks
+
+After your first reset, the same path back to Quartz should be much faster. If it is not, you probably spent too narrowly or pushed too deep before resetting.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/first-world-fracture.webp"
+    alt="Fracture Field World Fracture screen showing pending Core Fragments before the first reset."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    World Fracture resets the current run in exchange for Core Fragments, which are the first major source of permanent power.
+  </figcaption>
+</figure>
+
+This walkthrough gives the simple rule. For reset benchmarks, first-run fragment targets, Reality Shatter timing, and v1.1.0 reset behavior, read the dedicated <Link href="/fracture-field/prestige-guide">Fracture Field Prestige Guide</Link>.
+
+---
+
+<h2 id="world-fracture-vs-reality-shatter">
+  World Fracture vs Reality Shatter
+</h2>
+
+<GuideTable
+  caption="World Fracture and Reality Shatter compared."
+  columns={resetColumns}
+  rows={resetRows}
+/>
+
+Fracture Field has two major reset layers.
+
+**World Fracture** is the first prestige system. It resets the run and gives Core Fragments. These upgrades make normal progression faster and help you return to deeper layers with better damage, Pierce, rock generation, drones, and automation.
+
+**Reality Shatter** is the deeper prestige system. It is more powerful, but it also has a bigger reset impact. Do not click it just because it appears. Wait until your pending Reality Shards can buy upgrades that meaningfully improve your next cycle.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/reality-shatter-guide.webp"
+    alt="Fracture Field Reality Shatter screen showing pending Reality Shards and the second prestige upgrade tree."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Reality Shatter is the deeper prestige loop. Before using it, check the reward amount, your upgrade options, and what the current version keeps after reset.
+  </figcaption>
+</figure>
+
+Before using Reality Shatter, check the in-game confirmation and your current version. Reset behavior can change with patches, so the safest play is to confirm what your save will keep before you reset.
+
+This hub explains the difference between the two reset layers. For “what do you lose,” “how many shards are enough,” and which upgrades to buy first, use the <Link href="/fracture-field/prestige-guide">Prestige Guide</Link>.
+
+<GuideCallout title="Reality Shatter warning">
+Reality Shatter is not just a bigger World Fracture. Treat it as a new loop. If the reward number is small and you cannot buy several good upgrades, one more World Fracture may be better.
+</GuideCallout>
+
+---
+
+<h2 id="drone-hub-basics">
+  Drone Hub basics and automation tips
+</h2>
+
+Drone Hub turns Fracture Field from a mostly active mining game into a much more automated idle game.
+
+The important ideas are:
+
+- drone cores drop as you destroy rocks
+- deeper layers can improve drone core opportunities
+- each drone type uses a number of available slots
+- higher priority drones spawn first
+- target percentages control when specific drone types appear
+- hammer drones are good filler
+- supervisors help wake resting drones
+- boost drones are strong but take many slots
+
+Early drones may feel underwhelming because you do not yet have enough slots, uptime, or priority control. That changes later. Once your fleet is large enough, drones can wake each other up and handle much of the quarry without constant manual input.
+
+For the Hub page, keep the setup simple:
+
+1. use hammer drones as basic workers
+2. add collectors once resource pickup matters
+3. add Pierce or shatter drones when walls appear
+4. add supervisors when idle drones become a problem
+5. add boost drones only when you can afford the slot cost
+6. improve Drone Hub through World Fracture and Reality Shatter upgrades
+
+For beginner drone timing, including why a Collector Drone is often the easiest first drone, use the <Link href="/fracture-field/beginner-walkthrough">Beginner Walkthrough</Link>. For progression walls where drone targeting matters, use the <Link href="/fracture-field/progression-guide">Progression Guide</Link>.
+
+---
+
+<h2 id="progression-walls">
+  Fracture Field progression guide: Quartz, Iron, Gold, and Obsidian walls
+</h2>
+
+<GuideTable
+  caption="Common Fracture Field progression walls and how to respond."
+  columns={wallColumns}
+  rows={wallRows}
+/>
+
+Every wall has two parts:
+
+1. the layer itself has higher HP or hardness
+2. your current upgrade mix is no longer enough
+
+That is why waiting is often worse than resetting. If your current run produces very little progress per minute, World Fracture or Reality Shatter may improve the next run more than another hour of slow mining.
+
+For Iron and later layers, pay attention to:
+
+- Fracture for raw damage
+- Pierce for pushing through hardness
+- layer-specific damage or output upgrades
+- soften or hardness reduction effects
+- chain reaction strength
+- drone targeting
+- whether the new layer is stealing time from better income layers
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/obsidian-wall-progression.webp"
+    alt="Fracture Field Obsidian progression wall with high damage numbers, drones, and late-game rock upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Obsidian and later layers can feel impossible even after earlier layers explode instantly. That is usually a sign to improve reset scaling, hardness handling, and rock upgrades.
+  </figcaption>
+</figure>
+
+This hub identifies the common walls. If you are stuck at Iron, Gold, Obsidian, Chronite, or need Pierce vs Hardness explained, read the dedicated <Link href="/fracture-field/progression-guide">Fracture Field Progression Guide</Link>.
+
+---
+
+<h2 id="achievement-and-100-percent-route">
+  Fracture Field achievements and 100% completion route
+</h2>
+
+Fracture Field achievements fall into several groups:
+
+- early mining achievements
+- manual hit and tool achievements
+- layer capacity achievements
+- drone deployment achievements
+- bomb achievements
+- World Fracture achievements
+- Reality Shatter achievements
+- late-game speed and layer-transition achievements
+
+Do not leave every achievement until the end. Some capacity achievements are easier before you massively expand rock capacity or push too far into late-game scaling. Likewise, some bomb achievements are easier when you can control the quarry instead of letting drones instantly clear everything.
+
+A clean 100% route is:
+
+1. get early mining and upgrade achievements naturally
+2. finish basic capacity achievements as you progress through layers
+3. unlock and scale Drone Hub
+4. get drone count and drone type achievements
+5. use controlled setups for bomb achievements
+6. grind World Fracture and Reality Shatter milestones later
+7. finish max hit speed, all-layer transition, and other late-game checks last
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/fracture-field-achievements.webp"
+    alt="Fracture Field achievements screen showing late-game hidden achievements remaining before 100% completion."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The 100% route is mostly about cleanup: capacity goals, drone goals, bomb setups, repeated resets, and late-game speed or layer-transition achievements.
+  </figcaption>
+</figure>
+
+This section gives the high-level 100% route. For the full achievement name index, Golden Touch warning, bomb setup, drone achievements, and idle vs active cleanup plan, use the <Link href="/fracture-field/achievements-guide">Fracture Field Achievements Guide</Link>.
+
+---
+
+<h2 id="known-bugs-and-fixes">
+  Known bugs and fixes
+</h2>
+
+This section covers common technical and patch-related searches. Use these as quick checks before assuming your save or build is broken.
+
+### How do I fix a Fracture Field corrupted save?
+
+First, update Fracture Field to the latest version, then restart the game and check whether the save loads normally. If you are experimenting with resets or long idle sessions, back up your save before making major prestige decisions.
+
+### How do I back up my Fracture Field save file?
+
+Back up your save before major resets, especially before Reality Shatter or long idle sessions. The exact save location can vary by operating system and Steam setup, so check the game's local files, Steam userdata folder, or any in-game export / save option if available.
+
+### Why is currency not zero after prestige in Fracture Field?
+
+If currency remains after a prestige reset, update to the latest version first. This was one of the early reset-related issues players searched for, and the safest fix is to confirm you are not playing an outdated build.
+
+### Why is my Drone Hub not resetting correctly?
+
+Check your current version and whether you have any persistence or retention behavior active. Drone Hub behavior can change after patches or Reality Shatter upgrades, so compare the reset result against your current upgrade tree before assuming the save is broken.
+
+### How do I fix black pillars or widescreen display issues in Fracture Field?
+
+Try changing resolution, toggling fullscreen / windowed mode, and updating to the latest build. If the issue remains, use a standard 16:9 resolution as a temporary workaround.
+
+### How do I fix low FPS or performance issues in Fracture Field?
+
+Disable floating damage numbers or reduce visual clutter if the screen is full of drones, rocks, and currency text. Late-game runs can create heavy visual spam, so reducing display effects can make the game easier to read and smoother to run.
+
+### Was the Obsidian health scaling bug fixed?
+
+Update to the latest version before judging Obsidian progression. Obsidian is also a real late-game wall, so if the layer feels impossible, compare your version, Reality Shatter upgrades, Pierce, hardness reduction, and rock scaling before assuming it is only a bug.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is this a complete Fracture Field walkthrough?
+
+Yes. This is a complete Fracture Field walkthrough and guide for the main progression route, covering early upgrades, World Fracture, Drone Hub automation, Reality Shatter, late-game progression, and 100% completion goals.
+
+### What should I do first in Fracture Field?
+
+Start by improving basic damage, Stone income, and Stone capacity. Then unlock Clay, Sandstone, and Quartz when the previous layer is stable.
+
+### When should I do my first World Fracture?
+
+Do your first World Fracture when your current layer progress slows and your pending Core Fragments can buy useful permanent upgrades. Do not wait forever for a perfect first reset.
+
+### What is Reality Shatter in Fracture Field?
+
+Reality Shatter is a deeper prestige reset that gives Reality Shards. It is powerful, but you should wait until you can afford useful upgrades before using it.
+
+### Are drones worth it in Fracture Field?
+
+Yes, but drones are much better after you have more drone slots, better uptime, priority control, and reset upgrades. Early drones can feel weak because the system has not scaled yet.
+
+### Why am I stuck at Iron?
+
+Iron is usually a damage and hardness wall. Buy more Fracture, Pierce, layer upgrades, and reset upgrades instead of forcing a slow run forever.

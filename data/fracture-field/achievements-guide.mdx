@@ -1,0 +1,1040 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const roadmapColumns = [
+  { key: "phase", label: "Phase" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const roadmapRows = [
+  {
+    phase: "1. Natural early unlocks",
+    goal: "Clear first-action, early mining, Dust, tool, bomb, and drone achievements",
+    whatToDo:
+      "Play normally through Stone, Clay, Sandstone, and Quartz. Do not stall progression just to farm early achievements.",
+  },
+  {
+    phase: "2. First World Fractures",
+    goal: "Start Core Fragment and reset milestones",
+    whatToDo:
+      "World Fracture when the reward buys real upgrades. Let early reset achievements happen through normal prestige routing.",
+  },
+  {
+    phase: "3. Capacity check",
+    goal: "Check setup-sensitive capacity achievements before quarry expansion",
+    whatToDo:
+      "Review unfinished capacity achievements before major quarry expansion. See the Golden Touch warning below.",
+  },
+  {
+    phase: "4. Drone scaling",
+    goal: "Complete drone count, drone type, and drone damage achievements",
+    whatToDo:
+      "Wait until Drone Hub has enough slots, drone cores, upgrade levels, and prestige support.",
+  },
+  {
+    phase: "5. Bomb setup cleanup",
+    goal: "Finish multi-rock bomb and controlled-field achievements",
+    whatToDo:
+      "Reduce drone pressure, let rocks cluster, then bomb the densest field area.",
+  },
+  {
+    phase: "6. Prestige milestones",
+    goal: "Complete repeated World Fracture, Reality Shatter, Core Fragment, and Reality Shard goals",
+    whatToDo:
+      "Clean these up once reset cycles are fast. Do not use weak Reality Shatters just to tick an achievement.",
+  },
+  {
+    phase: "7. Late-game and idle cleanup",
+    goal: "Finish Chronite, max speed, repeated reset, and long playtime achievements",
+    whatToDo:
+      "Treat these as long-term goals. Some need active setup, while time-based achievements are mostly idle.",
+  },
+];
+
+export const categoryColumns = [
+  { key: "category", label: "Category" },
+  { key: "mainIntent", label: "Main Intent" },
+  { key: "section", label: "Where To Use This Guide" },
+];
+
+export const categoryRows = [
+  {
+    category: "First actions",
+    mainIntent: "First hit, first rock, first upgrade, first drone, first bomb",
+    section: "Early-game achievements",
+  },
+  {
+    category: "Mining totals",
+    mainIntent: "Rocks destroyed and resource totals",
+    section: "Idle vs active plan",
+  },
+  {
+    category: "Clicks and damage",
+    mainIntent: "Manual hits, crits, hit speed, damage milestones",
+    section: "Known achievement index and hardest achievements",
+  },
+  {
+    category: "Layer capacity",
+    mainIntent: "Stone, Clay, Sandstone, Quartz, Iron, Silver, Gold, Diamond capacity",
+    section: "Capacity warning and Golden Touch",
+  },
+  {
+    category: "Tool mastery",
+    mainIntent: "Specific tools used for mastery-style goals",
+    section: "Known achievement index",
+  },
+  {
+    category: "Drone fleet",
+    mainIntent: "Drone deployment, fleet size, specialized drones",
+    section: "Drone achievements",
+  },
+  {
+    category: "Bombs",
+    mainIntent: "Bomb usage and multi-rock bomb setup",
+    section: "Bomb achievements",
+  },
+  {
+    category: "Prestige",
+    mainIntent: "World Fracture, Reality Shatter, Core Fragments, Reality Shards",
+    section: "Prestige achievements",
+  },
+  {
+    category: "Time-based",
+    mainIntent: "30 minutes, long playtime, idle playtime",
+    section: "Time-based achievements",
+  },
+];
+
+export const idleActiveColumns = [
+  { key: "type", label: "Achievement Type" },
+  { key: "examples", label: "Examples" },
+  { key: "plan", label: "Best Plan" },
+];
+
+export const idleActiveRows = [
+  {
+    type: "Mostly idle",
+    examples:
+      "Mining totals, resource totals, drone hits, long playtime, late resource accumulation",
+    plan:
+      "Set up stable automation, leave the game running, then return to spend upgrades or reset.",
+  },
+  {
+    type: "Semi-idle",
+    examples:
+      "World Fractures, Reality Shatters, Core Fragment milestones, Reality Shard milestones",
+    plan:
+      "Let automation build value, then manually reset when the next upgrade breakpoint is ready.",
+  },
+  {
+    type: "Active precision",
+    examples:
+      "Never Miss, manual hit streaks, focused clicking goals",
+    plan:
+      "Do these during a short focused session. They need attention and clean clicking, not quarry planning.",
+  },
+  {
+    type: "Active setup",
+    examples:
+      "Multi-rock bomb achievements, controlled-field achievements, tool-specific mastery",
+    plan:
+      "Do these deliberately when the quarry is controllable and drones are not clearing the setup too quickly.",
+  },
+  {
+    type: "Timing-sensitive",
+    examples:
+      "Golden Touch, layer capacity achievements, capacity max achievements",
+    plan:
+      "Check these before buying quarry expansion or before your maximum rock count increases.",
+  },
+  {
+    type: "Late-game routing",
+    examples:
+      "Chronite, max hit speed, repeated Reality Shatters, very high damage milestones",
+    plan:
+      "Use Reality Shatter scaling, Mk. II upgrades, Pierce, rock economy, and reset breakpoints.",
+  },
+];
+
+export const knownAchievementColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "category", label: "Category" },
+  { key: "howToUnlock", label: "How To Unlock / Note" },
+  { key: "status", label: "Status" },
+];
+
+export const knownAchievementRows = [
+  {
+    achievement: "First Strike",
+    category: "First action",
+    howToUnlock: "Deal damage to a rock for the first time.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Rock Bottom",
+    category: "First action",
+    howToUnlock: "Destroy your first rock completely.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Tool Time",
+    category: "First action",
+    howToUnlock: "Buy your first tool upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Dust to Dust",
+    category: "Resource",
+    howToUnlock: "Collect your first 100 Dust.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Critical Thinking",
+    category: "Damage",
+    howToUnlock: "Land your first critical hit.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Automated Mining",
+    category: "Drone",
+    howToUnlock: "Deploy your first drone.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Explosive Entry",
+    category: "Bomb",
+    howToUnlock: "Use your first bomb.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Layer Cake",
+    category: "Layer",
+    howToUnlock: "Reach the Clay layer.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Upgrade Path",
+    category: "Upgrade",
+    howToUnlock: "Buy 10 upgrades.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Time Flies",
+    category: "Time",
+    howToUnlock: "Play for 30 minutes.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Novice Miner",
+    category: "Mining total",
+    howToUnlock: "Destroy 100 rocks.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Experienced Miner",
+    category: "Mining total",
+    howToUnlock: "Destroy 1,000 rocks.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Expert Miner",
+    category: "Mining total",
+    howToUnlock: "Destroy 10,000 rocks.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Master Miner",
+    category: "Mining total",
+    howToUnlock: "Destroy 100,000 rocks.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Legendary Miner",
+    category: "Mining total",
+    howToUnlock: "Destroy 1,000,000 rocks.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Clicker",
+    category: "Manual hits",
+    howToUnlock: "Perform 100 manual hits.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Click Sprint",
+    category: "Manual hits",
+    howToUnlock: "Perform 1,000 manual hits.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Click Marathon",
+    category: "Manual hits",
+    howToUnlock: "Perform 10,000 manual hits.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Precision Striker",
+    category: "Critical hits",
+    howToUnlock: "Land 1,000 critical hits.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Mega Critical",
+    category: "Critical hits",
+    howToUnlock: "Land 100 Mega Critical hits.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Never Miss",
+    category: "Active precision",
+    howToUnlock: "Hit 100 rocks in a row without missing.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Speed Demon",
+    category: "Hit speed",
+    howToUnlock: "Reach 0.1 second hit speed.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Maximum Velocity",
+    category: "Hit speed",
+    howToUnlock: "Reach the maximum hit speed cap.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Damage Dealer",
+    category: "Damage",
+    howToUnlock: "Deal 1 million damage in a single hit.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Billion Damage Club",
+    category: "Damage total",
+    howToUnlock: "Deal 1 billion total damage.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Trillion Damage Club",
+    category: "Damage total",
+    howToUnlock: "Deal 1 trillion total damage.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Quadrillion Damage Club",
+    category: "Damage total",
+    howToUnlock: "Deal 1 quadrillion total damage.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Stone Age",
+    category: "Capacity",
+    howToUnlock: "Max the Stone capacity upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Clay Sculptor",
+    category: "Capacity",
+    howToUnlock: "Max the Clay capacity upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Sand Castle",
+    category: "Capacity",
+    howToUnlock: "Max the Sandstone capacity upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Crystal Clear",
+    category: "Capacity",
+    howToUnlock: "Max the Quartz capacity upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Iron Will",
+    category: "Capacity",
+    howToUnlock: "Max the Iron capacity upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Silver Lining",
+    category: "Capacity",
+    howToUnlock: "Max the Silver capacity upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Golden Touch",
+    category: "Capacity",
+    howToUnlock: "Max the Gold capacity upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Diamond Dreams",
+    category: "Capacity",
+    howToUnlock: "Max the Diamond capacity upgrade.",
+    status: "Public DB name + description listed",
+  },
+  {
+    achievement: "Stick Fighter",
+    category: "Tool mastery",
+    howToUnlock:
+      "Listed as a tool-related achievement. Check the in-game panel for the exact mastery condition.",
+    status: "Name listed; condition may be abbreviated publicly",
+  },
+  {
+    achievement: "Hammer Time",
+    category: "Tool mastery",
+    howToUnlock:
+      "Listed as a tool-related achievement. Check the in-game panel for the exact mastery condition.",
+    status: "Name listed; condition may be abbreviated publicly",
+  },
+  {
+    achievement: "Pick Professional",
+    category: "Tool mastery",
+    howToUnlock:
+      "Listed as a tool-related achievement. Check the in-game panel for the exact mastery condition.",
+    status: "Name listed; condition may be abbreviated publicly",
+  },
+  {
+    achievement: "Sledge Sergeant",
+    category: "Tool mastery",
+    howToUnlock:
+      "Listed as a tool-related achievement. Check the in-game panel for the exact mastery condition.",
+    status: "Name listed; condition may be abbreviated publicly",
+  },
+  {
+    achievement: "Mallet Monarch",
+    category: "Tool mastery",
+    howToUnlock:
+      "Listed by public achievement trackers, but the public description may not show the full condition.",
+    status: "Name confirmed; condition unclear",
+  },
+  {
+    achievement: "Solid Steel",
+    category: "Tool mastery",
+    howToUnlock:
+      "Listed by public achievement trackers, but the public description may not show the full condition.",
+    status: "Name confirmed; condition unclear",
+  },
+  {
+    achievement: "Tungsten Titan",
+    category: "Tool mastery",
+    howToUnlock:
+      "Listed by public achievement trackers, but the public description may not show the full condition.",
+    status: "Name confirmed; condition unclear",
+  },
+  {
+    achievement: "Drone Pilot",
+    category: "Drone",
+    howToUnlock:
+      "Listed by public achievement trackers. Check the in-game panel for the exact drone requirement.",
+    status: "Name confirmed; condition unclear",
+  },
+  {
+    achievement: "Drone Commander",
+    category: "Drone",
+    howToUnlock:
+      "Listed by public achievement trackers. Check the in-game panel for the exact drone requirement.",
+    status: "Name confirmed; condition unclear",
+  },
+  {
+    achievement: "Drone Overlord",
+    category: "Drone",
+    howToUnlock:
+      "Listed by public achievement trackers. Check the in-game panel for the exact drone requirement.",
+    status: "Name confirmed; condition unclear",
+  },
+  {
+    achievement: "Hammer Squadron",
+    category: "Drone",
+    howToUnlock:
+      "Listed by public achievement trackers. Check the in-game panel for the exact drone type or squadron requirement.",
+    status: "Name confirmed; condition unclear",
+  },
+];
+
+export const capacityColumns = [
+  { key: "achievementType", label: "Achievement Type" },
+  { key: "risk", label: "Why It Gets Harder" },
+  { key: "safePlay", label: "Safer Play" },
+];
+
+export const capacityRows = [
+  {
+    achievementType: "Layer capacity achievements",
+    risk:
+      "Any achievement that asks you to max a layer's capacity can take more upgrades after maximum capacity increases.",
+    safePlay:
+      "Check the achievement list before buying upgrades that increase the capacity ceiling.",
+  },
+  {
+    achievementType: "Golden Touch / Gold capacity",
+    risk:
+      "This is the main capacity trap because Gold capacity can become more expensive after quarry expansion.",
+    safePlay:
+      "See the Golden Touch warning section below before buying Quarry Expansion Mk. II.",
+  },
+  {
+    achievementType: "Bomb field-control achievements",
+    risk:
+      "Late-game quarry expansion and strong drones can make the field hard to control for bomb setups.",
+    safePlay:
+      "Do controlled bomb achievements before your drones instantly clear every cluster.",
+  },
+];
+
+export const droneColumns = [
+  { key: "achievementGoal", label: "Drone Goal" },
+  { key: "bestTiming", label: "Best Timing" },
+  { key: "setup", label: "Setup" },
+];
+
+export const droneRows = [
+  {
+    achievementGoal: "Basic drone deployment",
+    bestTiming: "Soon after Drone Hub unlock",
+    setup:
+      "Use basic Hammer-style drones as filler and add Collector support when manual collection becomes annoying.",
+  },
+  {
+    achievementGoal: "Large drone count",
+    bestTiming: "After multiple slot upgrades",
+    setup:
+      "Wait until Drone Hub slots and drone core income are strong. High-count drone achievements are inefficient immediately after unlock.",
+  },
+  {
+    achievementGoal: "Drone damage / drone hits",
+    bestTiming: "Mid-game and later",
+    setup:
+      "Let drones handle lower layers while you focus the current wall. Long idle sessions help these achievements stack naturally.",
+  },
+  {
+    achievementGoal: "Specialized drone deployment",
+    bestTiming: "After the fleet has enough slots",
+    setup:
+      "Use Shatter, Collector, Pierce, Supervisor, Boost, or Sentry-style drones when they solve a real progression problem.",
+  },
+  {
+    achievementGoal: "Boost or high-cost drone achievements",
+    bestTiming: "Late game",
+    setup:
+      "High-slot drones are much easier after slot upgrades. Do not force them while they crowd out the rest of your fleet.",
+  },
+];
+
+export const bombColumns = [
+  { key: "step", label: "Step" },
+  { key: "action", label: "Action" },
+  { key: "why", label: "Why It Works" },
+];
+
+export const bombRows = [
+  {
+    step: "1",
+    action: "Move drone targets away from the setup layer",
+    why:
+      "This stops drones from instantly clearing the exact rocks you want to cluster.",
+  },
+  {
+    step: "2",
+    action: "Lower Shatter / high-damage drone priority if needed",
+    why:
+      "Area damage drones can ruin a multi-rock bomb setup before the field is dense enough.",
+  },
+  {
+    step: "3",
+    action: "Let rocks fill the field",
+    why:
+      "Multi-rock bomb achievements need density. A half-empty quarry is harder to use.",
+  },
+  {
+    step: "4",
+    action: "Stop manual over-clearing",
+    why:
+      "If you keep clicking everything, the bomb never gets a good cluster.",
+  },
+  {
+    step: "5",
+    action: "Place the bomb on the densest group",
+    why:
+      "The achievement usually depends on how many rocks the bomb hits, not just whether you used a bomb.",
+  },
+  {
+    step: "6",
+    action: "Restore normal drone rules afterward",
+    why:
+      "The controlled setup is for the achievement. Normal progression needs your automation back.",
+  },
+];
+
+export const prestigeAchievementColumns = [
+  { key: "prestigeType", label: "Prestige Type" },
+  { key: "achievementFocus", label: "Achievement Focus" },
+  { key: "bestApproach", label: "Best Approach" },
+];
+
+export const prestigeAchievementRows = [
+  {
+    prestigeType: "World Fracture",
+    achievementFocus:
+      "First World Fracture, repeated World Fractures, Core Fragment milestones",
+    bestApproach:
+      "Use normal progression for the first few. Later, fast repeat World Fractures can clean up repeated-reset achievements.",
+  },
+  {
+    prestigeType: "Core Fragment upgrades",
+    achievementFocus:
+      "Buying permanent upgrades and improving future reset value",
+    bestApproach:
+      "Prioritize Fracture, Pierce, Core Fragment generation, rock economy, Drone Hub scaling, and automation.",
+  },
+  {
+    prestigeType: "Reality Shatter",
+    achievementFocus:
+      "First Reality Shatter, repeated Reality Shatters, Reality Shard milestones",
+    bestApproach:
+      "Wait until the shard reward buys meaningful upgrades. Weak shatters slow the 100% route.",
+  },
+  {
+    prestigeType: "Post-shatter recovery",
+    achievementFocus:
+      "Rebuilding fast enough to continue deep progression",
+    bestApproach:
+      "Use v1.1.0 persistence rules: Drone Hub stays unlocked, drone rules persist, and Quarry Foreman fully persists.",
+  },
+];
+
+export const hardestColumns = [
+  { key: "achievementType", label: "Hard Achievement Type" },
+  { key: "whyHard", label: "Why It Is Hard" },
+  { key: "bestPlan", label: "Best Plan" },
+];
+
+export const hardestRows = [
+  {
+    achievementType: "1000 hours / long playtime",
+    whyHard:
+      "It is a time requirement, not a skill check.",
+    bestPlan:
+      "Treat it as background idle progress. See the time-based achievements section.",
+  },
+  {
+    achievementType: "Golden Touch / Gold capacity",
+    whyHard:
+      "It can become much harder after quarry expansion raises the capacity ceiling.",
+    bestPlan:
+      "See the Golden Touch warning section before buying major quarry expansion.",
+  },
+  {
+    achievementType: "Multi-rock bomb achievements",
+    whyHard:
+      "They need a dense field, but late-game drones may clear rocks too quickly.",
+    bestPlan:
+      "See the bomb achievements section for the controlled setup.",
+  },
+  {
+    achievementType: "High drone count / special drone deployment",
+    whyHard:
+      "High-cost drones need enough slots and drone cores.",
+    bestPlan:
+      "See the drone achievements section and wait for stronger Drone Hub scaling.",
+  },
+  {
+    achievementType: "Repeated Reality Shatters",
+    whyHard:
+      "Early Reality Shatters are expensive and can slow recovery if the shard reward is weak.",
+    bestPlan:
+      "See the prestige achievements section and wait for fast reset loops.",
+  },
+  {
+    achievementType: "Chronite / late-layer progression",
+    whyHard:
+      "Late layers require Mk. II scaling, Pierce, rock economy, and reset planning.",
+    bestPlan:
+      "Use the Progression Guide for the late-layer route.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Buying Quarry Expansion Mk. II before capacity cleanup",
+    whyItHurts:
+      "Capacity achievements can require more work after the maximum rock count increases.",
+    betterPlay:
+      "Check Golden Touch and other layer capacity achievements before major quarry expansion.",
+  },
+  {
+    mistake: "Trying bomb achievements with full drone pressure",
+    whyItHurts:
+      "Drones can clear the field before rocks cluster.",
+    betterPlay:
+      "Move drone targets, lower high-damage drone priority, or temporarily reduce drone pressure before bomb attempts.",
+  },
+  {
+    mistake: "Forcing high drone achievements too early",
+    whyItHurts:
+      "Drone Hub may be unlocked, but slot count and upgrade levels may still be too low.",
+    betterPlay:
+      "Wait for more slots, drone cores, and prestige upgrades.",
+  },
+  {
+    mistake: "Using weak Reality Shatters for achievement progress",
+    whyItHurts:
+      "A weak shatter can slow your rebuild and delay other achievements.",
+    betterPlay:
+      "Use Reality Shatter when the shard reward buys real power or when repeated shatters become fast.",
+  },
+  {
+    mistake: "Leaving all setup achievements until the end",
+    whyItHurts:
+      "Some achievements are easier before the quarry becomes huge and drones become too strong.",
+    betterPlay:
+      "Do capacity and bomb setup achievements at controlled points in the route.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The safest Fracture Field 100% route is to progress normally, but clean up capacity and setup-sensitive achievements before late-game quarry expansion and overpowered drones make them harder.**
+
+The roadmap is:
+
+**Early mining → first World Fractures → capacity check → Drone Hub achievements → bomb setup cleanup → prestige milestones → late-game layers → idle playtime**
+
+The biggest warning is **Golden Touch / Gold capacity**. If you buy **Quarry Expansion Mk. II** or similar maximum-rock upgrades too early, capacity achievements can become much more expensive because the max capacity requirement increases.
+
+This guide includes a working index of publicly listed achievement names. Public trackers currently show **98 Steam achievements**, but some entries have incomplete public descriptions, so use your in-game achievement panel as the final checklist.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/fracture-field-achievements.webp"
+    alt="Fracture Field achievements screen showing hidden and late-game achievements remaining before 100% completion."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Treat Fracture Field 100% completion as a route, not just a checklist. Some achievements are easier before quarry expansion and drone automation take over.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="achievement-roadmap">
+  Fracture Field 100% achievement roadmap
+</h2>
+
+<GuideTable
+  caption="Fracture Field 100% achievement roadmap."
+  columns={roadmapColumns}
+  rows={roadmapRows}
+/>
+
+Most achievements fall into two groups:
+
+1. achievements that unlock naturally as you progress
+2. achievements that become easier or harder depending on when you attempt them
+
+Early mining, damage, resource, and first reset achievements mostly happen naturally. The achievements that need planning are capacity achievements, bomb setup achievements, high drone requirements, repeated prestige goals, and long playtime achievements.
+
+For the main game route, start with the <Link href="/fracture-field">Fracture Field Complete Walkthrough & Guide</Link>. For reset timing, use the <Link href="/fracture-field/prestige-guide">Fracture Field Prestige Guide</Link>.
+
+<GuideCallout title="100% route rule">
+If an achievement needs a small quarry, controlled rocks, or careful drone behavior, do it before the game becomes too automated.
+</GuideCallout>
+
+---
+
+<h2 id="idle-vs-active-achievements">
+  Idle vs active achievements
+</h2>
+
+<GuideTable
+  caption="Which Fracture Field achievements can be idled and which need active setup."
+  columns={idleActiveColumns}
+  rows={idleActiveRows}
+/>
+
+This is the most important planning split.
+
+Mining totals, long playtime, and many drone-hit achievements can be handled by stable automation. Active precision achievements such as **Never Miss** need attention, but not a special field setup. Capacity, bomb, and field-control achievements need more planning because late-game automation can make the field harder to control.
+
+If you are planning 100%, do not leave every achievement until the end. Save idle achievements for the background, but handle setup-sensitive achievements while the quarry is still manageable.
+
+---
+
+<h2 id="achievement-categories">
+  Achievement categories at a glance
+</h2>
+
+<GuideTable
+  caption="Fracture Field achievement categories and where each is covered in this guide."
+  columns={categoryColumns}
+  rows={categoryRows}
+/>
+
+The category table is only a navigation layer. The real 100% route depends on timing: natural achievements first, setup-sensitive achievements before the field gets too chaotic, and long idle goals later.
+
+---
+
+<h2 id="known-achievement-name-index">
+  Known Fracture Field achievement name index
+</h2>
+
+<GuideTable
+  caption="Known Fracture Field achievement names and quick notes. This is a working index, not a full 98-achievement checklist."
+  columns={knownAchievementColumns}
+  rows={knownAchievementRows}
+/>
+
+Specific achievement names matter because players often search the name they see in Steam or in the in-game achievement panel.
+
+Use this table as a working index for publicly surfaced achievements. The **Status** column is important: some achievements have clear public descriptions, while others have a listed name but incomplete public condition text. If a condition is unclear, trust the in-game achievement panel over any public tracker summary.
+
+---
+
+<h2 id="early-game-achievements">
+  Early-game achievements you get naturally
+</h2>
+
+Early achievements usually come from playing normally:
+
+- first damage
+- first rock destroyed
+- first Dust
+- first upgrades
+- first crit
+- first manual hits
+- first bomb use
+- first drone deployment
+- first layer unlocks
+- first tool upgrades
+
+Do not stay in the early game just to farm small milestones. Most early achievements complete naturally while you push toward Sandstone, Quartz, and your first World Fracture.
+
+The only early-game achievement type worth watching is **capacity**. If a capacity achievement appears for a layer, consider finishing it before you expand the quarry too much later.
+
+---
+
+<h2 id="capacity-achievements-warning">
+  Capacity achievements and make-harder warnings
+</h2>
+
+<GuideTable
+  caption="Capacity and setup-sensitive achievements that can become harder later."
+  columns={capacityColumns}
+  rows={capacityRows}
+/>
+
+These achievements are not always truly missable, but they can become much harder.
+
+When the maximum number of rocks increases, "max capacity" can require more upgrades than it did earlier. That means a capacity achievement that was easy in a smaller quarry can become expensive after Reality Shatter quarry expansion.
+
+---
+
+<h2 id="gold-capacity-achievement">
+  Golden Touch / Gold capacity achievement warning
+</h2>
+
+**Golden Touch** is the achievement to watch most carefully because it asks you to max the Gold capacity upgrade.
+
+If your quarry is still small, maxing Gold capacity may require fewer upgrades. After buying major quarry expansion upgrades, the maximum capacity ceiling increases, so the same achievement can take much more investment.
+
+A safer plan is:
+
+1. reach Gold
+2. stabilize Gold income
+3. check whether **Golden Touch** is still unfinished
+4. finish Gold capacity while the quarry is still manageable
+5. then buy major quarry expansion upgrades such as Quarry Expansion Mk. II
+
+<GuideCallout title="Golden Touch warning">
+Before buying Quarry Expansion Mk. II or similar maximum-rock upgrades, check whether you still need Golden Touch or other layer capacity achievements.
+</GuideCallout>
+
+---
+
+<h2 id="drone-achievements">
+  Drone achievements
+</h2>
+
+<GuideTable
+  caption="How to approach Drone Hub achievements in Fracture Field."
+  columns={droneColumns}
+  rows={droneRows}
+/>
+
+Drone achievements are much easier after Drone Hub has scaled.
+
+A good drone achievement route is:
+
+1. unlock Drone Hub naturally
+2. use simple drones for early support
+3. gain more drone cores through normal progression
+4. increase drone slots through prestige upgrades
+5. deploy specialized drones once the fleet has room
+6. finish high-count or high-cost drone achievements later
+
+As of v1.1.0, Drone Hub stays unlocked after Reality Shatter and drone rules are preserved, but drone upgrade levels reset. That means drone achievements are best attempted when the current loop has enough upgraded drone power.
+
+---
+
+<h2 id="bomb-achievements">
+  Bomb achievements
+</h2>
+
+<GuideTable
+  caption="How to set up Fracture Field bomb achievements."
+  columns={bombColumns}
+  rows={bombRows}
+/>
+
+Bomb achievements are mostly about field control.
+
+"Reduce drone pressure" means you should stop drones from clearing the exact field you are trying to build. In practice, that can mean moving drone targets away from the setup layer, lowering high-damage drone priority, disabling aggressive drone rules if your setup allows it, or simply waiting for a loop where your drones are not instantly wiping the quarry.
+
+Bombs also help with some progression walls, but achievement setups are different from progression usage. For progression, use bombs to start damage on a tough wall. For achievements, use bombs when the field shape is right.
+
+---
+
+<h2 id="prestige-achievements">
+  World Fracture and Reality Shatter achievements
+</h2>
+
+<GuideTable
+  caption="Fracture Field prestige achievement planning."
+  columns={prestigeAchievementColumns}
+  rows={prestigeAchievementRows}
+/>
+
+Prestige achievements are easiest when your reset loops are already efficient.
+
+For **World Fracture**, let early achievements happen through normal progression, then clean up repeated reset counts once your early loop is fast.
+
+For **Reality Shatter**, do not shatter early just to tick an achievement. A weak shatter can slow your 100% route because it resets progress without buying enough power.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/reality-shatter-guide.webp"
+    alt="Fracture Field Reality Shatter screen showing pending Reality Shards and upgrades for deeper prestige achievements."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Do Reality Shatter achievements when the shard reward buys real power. A weak shatter can slow the rest of your 100% route.
+  </figcaption>
+</figure>
+
+As of v1.1.0, Reality Shatter is less punishing because Drone Hub stays unlocked and Quarry Foreman fully persists. This makes repeated shatter achievements more manageable once your Reality Shard income is strong.
+
+For exact reset advice, use the <Link href="/fracture-field/prestige-guide">Fracture Field Prestige Guide</Link>.
+
+---
+
+<h2 id="time-based-achievements">
+  Time-based achievements
+</h2>
+
+Time-based achievements are not skill checks.
+
+If the game asks for long playtime milestones such as 10 hours, 100 hours, or 1000 hours, treat them as idle goals. You will not solve these through better routing; you solve them by leaving the game running safely over time.
+
+A few tips:
+
+- use stable automation before long idle sessions
+- avoid leaving the game in a state where the field clogs immediately
+- check performance if late-game visual clutter lowers FPS
+- return occasionally to spend upgrades or reset
+- do not build your active 100% route around time achievements
+
+Some idle-style achievements may only award after you interact again. If an idle achievement does not pop during the idle period, click or interact once after returning.
+
+---
+
+<h2 id="hardest-achievements">
+  Hardest achievements in Fracture Field
+</h2>
+
+<GuideTable
+  caption="Hardest Fracture Field achievement types and where to solve them."
+  columns={hardestColumns}
+  rows={hardestRows}
+/>
+
+The hardest achievements are not all hard for the same reason.
+
+Some take time. Some require field control. Some require late-game reset scaling. Some become harder if you buy the wrong upgrade too early.
+
+Use this table as a difficulty index, then jump to the matching section for the actual setup.
+
+---
+
+<h2 id="common-100-percent-mistakes">
+  Common 100% completion mistakes
+</h2>
+
+<GuideTable
+  caption="Common Fracture Field 100% completion mistakes and what to do instead."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most mistakes happen because players assume achievements are always easier later.
+
+That is true for damage, resource, reset, and late-layer achievements. It is not always true for capacity, bomb setup, or field-control achievements.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many achievements are in Fracture Field?
+
+Fracture Field currently has **98 Steam achievements** listed by public achievement trackers and Steam profile data. SteamDB confirms Steam Achievements support for the app, but the SteamDB achievement list itself may require JavaScript to load, so use your in-game achievement panel as the final checklist.
+
+### Are there missable achievements in Fracture Field?
+
+Most achievements are better described as **make-harder** rather than truly missable. Capacity achievements can become much harder after quarry expansion upgrades increase the maximum capacity requirement.
+
+### Should I finish Golden Touch before Quarry Expansion Mk. II?
+
+Yes. If you care about 100% completion, finish **Golden Touch** before buying major quarry expansion upgrades such as Quarry Expansion Mk. II.
+
+### How do I complete bomb achievements?
+
+Move drone targets away from the setup layer, lower high-damage drone priority if needed, let rocks cluster, and place bombs on dense groups.
+
+### When should I do drone achievements?
+
+Do basic drone achievements after Drone Hub unlock, but save high-count and expensive drone-type achievements for later when you have more slots, drone cores, and upgrade levels.
+
+### Do Reality Shatter resets ruin drone achievements?
+
+Reality Shatter keeps Drone Hub unlocked in v1.1.0 and preserves drone rules, but drone upgrade levels still reset. Do high drone achievements during a loop where your drone upgrades are already strong.
+
+### When should I start Reality Shatter achievements?
+
+Start serious Reality Shatter achievement progress when your shard reward buys meaningful upgrades. Weak shatters can slow your overall 100% route.
+
+### How do I get long playtime achievements?
+
+Leave the game running with stable automation. Treat 10-hour, 100-hour, and 1000-hour achievements as idle-time goals, not routing challenges.
+
+### What is the hardest achievement type?
+
+The hardest types are usually long playtime, Golden Touch after expansion, multi-rock bomb setups, high drone-count goals, repeated Reality Shatters, and late-layer progression achievements.

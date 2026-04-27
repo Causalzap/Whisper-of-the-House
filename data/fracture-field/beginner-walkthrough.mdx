@@ -1,0 +1,674 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const routeColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const routeRows = [
+  {
+    stage: "1. Stone start",
+    goal: "Learn timed swings, Dust, and basic upgrades",
+    whatToDo:
+      "Use reliable swing timing instead of frantic clicking. Break rocks consistently to earn Dust, then buy early Fracture, Stone output, and capacity upgrades.",
+  },
+  {
+    stage: "2. Clay unlock",
+    goal: "Move past the tutorial layer",
+    whatToDo:
+      "Unlock Clay once Stone breaks quickly. Do not over-invest in Stone if Clay and Sandstone are already reachable.",
+  },
+  {
+    stage: "3. Sandstone push",
+    goal: "Start the Core Fragment path",
+    whatToDo:
+      "Sandstone begins World Fracture value, but do not reset instantly. Push until the reward is actually useful.",
+  },
+  {
+    stage: "4. Quartz slowdown",
+    goal: "Find your first real wall",
+    whatToDo:
+      "Quartz is often the first point where the run slows down enough to consider your first World Fracture.",
+  },
+  {
+    stage: "5. First World Fracture",
+    goal: "Convert the first run into permanent power",
+    whatToDo:
+      "Aim for a useful Core Fragment reward. Around 30+ Core Fragments is a good first-reset benchmark, while under 20 often feels weak.",
+  },
+  {
+    stage: "6. Faster second run",
+    goal: "Return to Quartz faster",
+    whatToDo:
+      "Spend Core Fragments on Fracture, Pierce, economy, and early automation so the second run reaches the same wall much faster.",
+  },
+];
+
+export const swingColumns = [
+  { key: "mechanic", label: "Mechanic" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "beginnerTip", label: "Beginner Tip" },
+];
+
+export const swingRows = [
+  {
+    mechanic: "Timed Swing",
+    whatItMeans:
+      "Your hits are stronger when you swing with good timing instead of clicking randomly.",
+    beginnerTip:
+      "Aim for reliable Good swings first. Chasing perfect timing is not worth it if it breaks your rhythm.",
+  },
+  {
+    mechanic: "Holding / rhythmic clicking",
+    whatItMeans:
+      "You can keep attacking without clicking every single hit manually.",
+    beginnerTip:
+      "Use a steady rhythm so early rocks break consistently and manual-hit achievements still progress naturally.",
+  },
+  {
+    mechanic: "Hit Speed upgrades",
+    whatItMeans:
+      "Faster hit speed can make the timing rhythm feel tighter.",
+    beginnerTip:
+      "After buying Hit Speed, re-learn the new rhythm instead of assuming your old timing still works.",
+  },
+  {
+    mechanic: "Shatters",
+    whatItMeans:
+      "Actually breaking rocks is what drives early Dust and progress.",
+    beginnerTip:
+      "Consistent breaks are better than endlessly chipping a layer you cannot farm yet.",
+  },
+];
+
+export const dustColumns = [
+  { key: "concept", label: "Concept" },
+  { key: "meaning", label: "Meaning" },
+  { key: "beginnerRule", label: "Beginner Rule" },
+];
+
+export const dustRows = [
+  {
+    concept: "Dust",
+    meaning:
+      "The core early currency used for broad upgrades such as damage, output, speed, and other base stats.",
+    beginnerRule:
+      "If upgrades feel expensive, you usually need more consistent rock breaks, not just more chip damage.",
+  },
+  {
+    concept: "Shatter value",
+    meaning:
+      "Breaking or shattering rocks is what turns your damage into real economy.",
+    beginnerRule:
+      "Farm the deepest layer you can break reliably, not always the deepest layer you can barely damage.",
+  },
+  {
+    concept: "Global Power",
+    meaning:
+      "Broad upgrades that improve your whole run, such as Fracture, Pierce, and Hit Speed.",
+    beginnerRule:
+      "Use Global Power to make the route faster before over-focusing on one narrow system.",
+  },
+  {
+    concept: "Local resources",
+    meaning:
+      "Layer-specific resources that improve a layer's output or capacity.",
+    beginnerRule:
+      "Use local upgrades when a layer is farmable but still inefficient.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "upgradeFocus", label: "Upgrade Focus" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const upgradeRows = [
+  {
+    priority: "1",
+    upgradeFocus: "Fracture / raw damage",
+    why:
+      "Damage makes Stone, Clay, and Sandstone disappear faster and helps you reach Quartz sooner.",
+  },
+  {
+    priority: "2",
+    upgradeFocus: "Resource output",
+    why:
+      "More Stone, Clay, and Sandstone income makes every early upgrade easier to afford.",
+  },
+  {
+    priority: "3",
+    upgradeFocus: "Capacity",
+    why:
+      "More rocks can improve income, but only if you can break the extra rocks efficiently.",
+  },
+  {
+    priority: "4",
+    upgradeFocus: "Pierce",
+    why:
+      "Start caring about Pierce when Quartz slows down and before Iron becomes your main wall.",
+  },
+  {
+    priority: "5",
+    upgradeFocus: "Collector Drone / basic Drone Hub support",
+    why:
+      "A Collector Drone helps stop resource value from sitting uncollected while you focus on timed swings and upgrades.",
+  },
+  {
+    priority: "6",
+    upgradeFocus: "Bombs",
+    why:
+      "Bombs help with clusters and field control. Use them as support, then follow the bomb section below.",
+  },
+];
+
+export const layerUnlockColumns = [
+  { key: "layer", label: "Layer" },
+  { key: "unlockWhen", label: "Unlock When..." },
+  { key: "warning", label: "Beginner Warning" },
+];
+
+export const layerUnlockRows = [
+  {
+    layer: "Clay",
+    unlockWhen:
+      "Stone breaks quickly and basic upgrades are no longer expensive.",
+    warning:
+      "Do not sit on Stone forever. Clay is the first normal transition.",
+  },
+  {
+    layer: "Sandstone",
+    unlockWhen:
+      "Clay is not slowing your income and you can keep buying upgrades steadily.",
+    warning:
+      "Sandstone starts Core Fragment value, but the first reset is usually still too early here.",
+  },
+  {
+    layer: "Quartz",
+    unlockWhen:
+      "Sandstone is farmable and your damage / income can support a deeper layer.",
+    warning:
+      "Quartz is often your first real slowdown. Use it to judge your first World Fracture.",
+  },
+  {
+    layer: "Iron",
+    unlockWhen:
+      "You have already done at least one useful World Fracture or have enough Pierce to test it.",
+    warning:
+      "Iron is your first serious Pierce check. For the full wall breakdown, use the Progression Guide.",
+  },
+];
+
+export const resetColumns = [
+  { key: "signal", label: "Signal" },
+  { key: "keepPushing", label: "Keep Pushing If..." },
+  { key: "worldFracture", label: "World Fracture If..." },
+];
+
+export const resetRows = [
+  {
+    signal: "Core Fragment reward",
+    keepPushing:
+      "The reward is still tiny and another few minutes clearly increases it.",
+    worldFracture:
+      "You can buy useful permanent upgrades. Around 30+ Core Fragments is a strong first target.",
+  },
+  {
+    signal: "Quartz progress",
+    keepPushing:
+      "Quartz is slow but still improving and upgrades are still coming quickly.",
+    worldFracture:
+      "Quartz barely improves and the next local upgrade feels too far away.",
+  },
+  {
+    signal: "Upgrade value",
+    keepPushing:
+      "Another 5–10 minutes unlocks a clear damage, Pierce, economy, or automation upgrade.",
+    worldFracture:
+      "Resetting now already buys the important upgrade and waiting only adds a small extra reward.",
+  },
+  {
+    signal: "Second-run speed",
+    keepPushing:
+      "Your current run is still accelerating and deeper layers are becoming easier.",
+    worldFracture:
+      "The next run would clearly reach this same point faster with Core Fragment upgrades.",
+  },
+];
+
+export const droneColumns = [
+  { key: "timing", label: "Timing" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "beginnerRule", label: "Beginner Rule" },
+];
+
+export const droneRows = [
+  {
+    timing: "First drone",
+    whatToDo:
+      "Prioritize a Collector-style drone if you are losing value while focusing on timed swings and upgrades.",
+    beginnerRule:
+      "Collector solves a real beginner problem: resources sitting around while you are busy timing hits.",
+  },
+  {
+    timing: "Before first World Fracture",
+    whatToDo:
+      "Use simple drones as support, but do not build your entire route around Drone Hub yet.",
+    beginnerRule:
+      "Early drones help, but Fracture, Dust flow, and resource output usually matter more before your first reset.",
+  },
+  {
+    timing: "After first World Fracture",
+    whatToDo:
+      "Invest more into Drone Hub once you have better income, more drone cores, and faster rebuilds.",
+    beginnerRule:
+      "Drones feel much better after permanent upgrades support them.",
+  },
+  {
+    timing: "Around Silver and later",
+    whatToDo:
+      "Use Drone Hub as part of the main automation engine.",
+    beginnerRule:
+      "This is when drones become central, but that is beyond the beginner route.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Beginner Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Ignoring timed swings",
+    whyItHurts:
+      "Random clicking can make early damage feel inconsistent and slow down Dust income.",
+    betterPlay:
+      "Aim for reliable Good timing before chasing perfect swings.",
+  },
+  {
+    mistake: "Resetting the moment Sandstone appears",
+    whyItHurts:
+      "Your first Core Fragment reward may be too small to buy useful upgrades.",
+    betterPlay:
+      "Push toward Quartz and reset when the reward can actually improve your second run.",
+  },
+  {
+    mistake: "Waiting forever before the first World Fracture",
+    whyItHurts:
+      "A slow first run can waste more time than resetting and rebuilding faster.",
+    betterPlay:
+      "Use around 30+ Core Fragments as a practical first-reset benchmark.",
+  },
+  {
+    mistake: "Buying capacity before damage and output",
+    whyItHurts:
+      "More rocks do not help if they sit on the field unbroken.",
+    betterPlay:
+      "Balance capacity with Fracture, output, and reliable shatters.",
+  },
+  {
+    mistake: "Over-investing in drones too early",
+    whyItHurts:
+      "Early Drone Hub is limited by slots, cores, and upgrade levels.",
+    betterPlay:
+      "Use Collector and simple drones as support before the first reset, then scale Drone Hub later.",
+  },
+  {
+    mistake: "Forcing Iron without a reset plan",
+    whyItHurts:
+      "Iron is where early damage routing starts to break down.",
+    betterPlay:
+      "Use your first World Fracture and the Progression Guide before brute-forcing Iron.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best beginner route in Fracture Field is:**
+
+**Stone → Clay → Sandstone → Quartz → first World Fracture → faster second run**
+
+In the early game, learn **Timed Swing** rhythm, break rocks consistently for **Dust**, and prioritize **Fracture**, resource output, useful capacity, and then **Pierce** when Quartz or Iron starts resisting your damage.
+
+Do not reset the moment Sandstone appears. For your first World Fracture, a practical target is around **30+ Core Fragments**. Under **20 Core Fragments** often feels weak unless your run is already completely stalled.
+
+For drones, your first useful drone is often a **Collector Drone**, because it keeps resource value moving while you focus on timed swings, upgrades, and early progression.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/first-world-fracture.webp"
+    alt="Fracture Field beginner walkthrough showing the first World Fracture screen and pending Core Fragments."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first World Fracture is the main early-game goal. Reset when Core Fragments can make the next run clearly faster, not the moment the button appears.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="beginner-route">
+  Fracture Field beginner route
+</h2>
+
+<GuideTable
+  caption="Fracture Field beginner walkthrough route from Stone to the first World Fracture."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The beginner route is not about reaching every layer as fast as possible. It is about reaching the first useful reset without wasting time on a dead run.
+
+Your first goal is to make Stone, Clay, and Sandstone fast enough that Quartz becomes your first real test. Once Quartz slows down and your Core Fragment reward becomes useful, World Fracture turns the first run into permanent power.
+
+For the full game route after your first reset, use the <Link href="/fracture-field">Fracture Field Complete Walkthrough & Guide</Link>.
+
+---
+<h2 id="timed-swings-and-dust">
+  Timed Swing and Dust basics
+</h2>
+
+<GuideTable
+  caption="Timed Swing, Dust, and early damage basics."
+  columns={swingColumns}
+  rows={swingRows}
+/>
+
+Dust is the other half of the early loop. You need Dust for broad upgrades, but Dust comes from turning damage into actual rock breaks. If you are endlessly chipping a rock that barely breaks, your economy will feel terrible even if your damage numbers look busy.
+
+<GuideCallout title="Beginner timing rule">
+Consistent shatters beat messy speed. Learn the swing rhythm, break rocks reliably, then use Dust to make the next layer faster.
+</GuideCallout>
+
+---
+
+<h2 id="dust-and-early-economy">
+  How Dust and early economy work
+</h2>
+
+<GuideTable
+  caption="Fracture Field Dust and early economy basics."
+  columns={dustColumns}
+  rows={dustRows}
+/>
+
+Dust is your main early-game currency. It feeds the broad upgrades that make the whole run faster, especially Fracture, output, speed, and other run-wide power.
+
+The key beginner mistake is confusing damage with economy. Damage only becomes economy when rocks actually break. If you are spending too much time chipping a layer that does not shatter consistently, your Dust flow will stall and every upgrade will feel expensive.
+
+This is why early progression should be judged by **reliable breaks**, not only by the deepest layer you have technically unlocked.
+
+---
+
+<h2 id="what-to-upgrade-first">
+  What to upgrade first in Fracture Field
+</h2>
+
+<GuideTable
+  caption="Best early upgrades in Fracture Field."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+The safest beginner upgrade order is:
+
+**Fracture → resource output → useful capacity → Pierce timing → Collector Drone support → bombs for field control**
+
+Fracture and output carry the first part of the game because they make each layer break faster and pay for the next upgrade. Capacity is useful only when you can clear the extra rocks. If the screen fills with rocks you cannot break efficiently, capacity is not solving your main problem.
+
+Pierce becomes more important as Quartz slows down and Iron approaches. Do not over-focus on it in the first few minutes, but do not ignore it once your damage starts falling off.
+
+<GuideCallout title="Beginner upgrade rule">
+If rocks break slowly, buy Fracture and output. If rocks barely take damage, start checking Pierce and hardness tools.
+</GuideCallout>
+
+---
+
+<h2 id="stone-to-quartz-walkthrough">
+  Stone to Quartz walkthrough
+</h2>
+
+The first run should be simple:
+
+1. Use steady timed swings instead of frantic clicking.
+2. Break Stone consistently to generate early Dust.
+3. Buy basic Fracture and Dust-related upgrades.
+4. Increase Stone output until early purchases are smooth.
+5. Unlock Clay once Stone breaks quickly.
+6. Unlock Sandstone once Clay is stable.
+7. Push into Quartz as your first serious slowdown.
+8. Use Quartz slowdown to judge your first World Fracture.
+
+Manual play matters early because it speeds up your first resources, first upgrades, and manual-hit achievements. But the goal is not to click forever. The goal is to reach the point where your upgrades and first World Fracture carry the route.
+
+Do not over-optimize Stone. Stone is only the tutorial layer. Once Stone breaks quickly and upgrades are no longer difficult to afford, Clay and Sandstone should become your focus.
+
+Sandstone is important because it starts Core Fragment generation, but that does not mean the first World Fracture is immediately worth it. The first reset should buy visible permanent power.
+
+---
+
+<h2 id="when-to-unlock-layers">
+  When to unlock Clay, Sandstone, Quartz, and Iron
+</h2>
+
+<GuideTable
+  caption="Beginner layer unlock timing in Fracture Field."
+  columns={layerUnlockColumns}
+  rows={layerUnlockRows}
+/>
+
+Unlocking a layer is not the same as farming it.
+
+If a new layer appears but barely takes damage, it may be better to improve your current layer, buy the right broad upgrade, or use World Fracture instead of forcing the new layer immediately.
+
+The beginner rule is:
+
+**Unlock the next layer when the current layer is stable, not just when the button is available.**
+
+Quartz is the first layer where this matters for most players. Iron makes it even more obvious because Iron tests your early build much harder than the first layers.
+
+For a deeper layer-by-layer breakdown, use the <Link href="/fracture-field/progression-guide">Fracture Field Progression Guide</Link>.
+
+---
+
+<h2 id="when-to-world-fracture-first">
+  When to World Fracture for the first time
+</h2>
+
+<GuideTable
+  caption="How to decide when to do your first World Fracture."
+  columns={resetColumns}
+  rows={resetRows}
+/>
+
+**Do your first World Fracture when the current run has slowed down and the Core Fragment reward can buy useful permanent upgrades.**
+
+A good beginner benchmark is:
+
+- **Under 20 Core Fragments:** usually weak
+- **20–30 Core Fragments:** usable if the run is already slow
+- **30+ Core Fragments:** strong first-reset target
+- **Much higher than 30:** fine if the run is still accelerating, but do not wait forever
+
+Your first World Fracture should make the second run noticeably faster. If you reset and buy only a tiny upgrade, it will feel bad. If you wait too long, you waste time that could have been spent snowballing permanent upgrades.
+
+<GuideCallout title="First World Fracture rule">
+Ask one question: will the upgrades I buy after resetting make the second run faster than staying in this slow run? If yes, World Fracture.
+</GuideCallout>
+
+For more detailed reset math, use the <Link href="/fracture-field/prestige-guide">Fracture Field Prestige Guide</Link>.
+
+---
+
+<h2 id="best-first-world-fracture-upgrades">
+  Best first World Fracture upgrades
+</h2>
+
+After your first World Fracture, buy upgrades that make the second run recover faster.
+
+Prioritize:
+
+1. **Fracture** for broad damage
+2. **Pierce** if Quartz or Iron was the wall
+3. **Core Fragment generation** if available
+4. **Rock economy** if resource gain felt slow
+5. **Drone Hub support** if drones are already unlocked
+6. **Quarry Foreman / automation** when it reduces manual rebuilding
+
+Avoid spending everything on one category. Pure damage can still struggle against hardness. Pure economy can still fail if you cannot break the new layer. Pure drones can feel weak if slots and upgrade levels are still low.
+
+The best first reset is balanced: enough damage, enough income, and enough Pierce to make the next wall less painful.
+
+---
+
+<h2 id="drone-hub-beginner-timing">
+  Should you unlock Drone Hub early?
+</h2>
+
+<GuideTable
+  caption="Drone Hub timing for beginners."
+  columns={droneColumns}
+  rows={droneRows}
+/>
+
+Drone Hub is a real system in the release version, but it is not the whole early game.
+
+The first drone that often feels useful for beginners is a **Collector Drone**, because it solves a specific problem: you may be busy timing swings, checking upgrades, or pushing a layer while resources sit around uncollected. Collector support keeps more value moving without forcing you to stop every few seconds.
+
+Early drones are still limited by slots, drone cores, targeting rules, and upgrade levels. Before your first World Fracture, use drones as support rather than your main plan.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/fracture-field-walkthrough-guide.webp"
+    alt="Fracture Field Drone Hub interface showing drone slots, rules, and early automation options for beginners."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Collector Drones help beginners keep resources moving while they focus on timed swings and upgrades. Serious Drone Hub scaling becomes stronger after your first reset.
+  </figcaption>
+</figure>
+
+A good beginner drone rule is:
+
+**Use Collector and simple drones early, but spend serious resources on Drone Hub after your first reset makes the whole route faster.**
+
+If drones feel weak early, that does not mean the system is bad. It usually means you have not reached the upgrades that make drones scale.
+
+---
+
+<h2 id="bombs-for-beginners">
+  How to use bombs early
+</h2>
+
+Bombs are field-control tools.
+
+Use bombs when:
+
+- rocks are clustered
+- the field is crowded
+- a tough layer needs a burst of help
+- you are setting up a bomb achievement later
+
+Do not rely on bombs as your main progression engine. Bombs are temporary power. Fracture, Pierce, resource output, Drone Hub scaling, and World Fracture upgrades are long-term power.
+
+In the first run, bombs are best used to clear awkward clusters and keep the field moving.
+
+---
+
+<h2 id="early-game-too-slow">
+  What to do if the early game feels too slow
+</h2>
+
+If Fracture Field feels too slow in the first hour, diagnose the problem:
+
+- If your timing is inconsistent, slow down and aim for reliable Good swings.
+- If rocks break slowly, buy Fracture.
+- If upgrades are too expensive, improve Dust flow and resource output.
+- If the field is crowded, use bombs or useful capacity.
+- If Quartz barely improves, prepare for World Fracture.
+- If drones feel weak, treat them as support until more slots and upgrades arrive.
+
+The biggest beginner mistake is assuming every slow moment should be solved by waiting. Sometimes waiting helps. More often, you need to change upgrade focus, improve swing consistency, or reset.
+
+---
+
+<h2 id="common-beginner-mistakes">
+  Common beginner mistakes
+</h2>
+
+<GuideTable
+  caption="Common Fracture Field beginner mistakes and what to do instead."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most beginner mistakes come from treating Fracture Field like a normal clicker.
+
+It is an idle and incremental game, but it is also a timing, economy, and reset-routing game. The point is not to make the first run perfect. The point is to make each run faster than the last.
+
+Once your first World Fracture makes the second run faster, the early game starts to make much more sense.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do first in Fracture Field?
+
+Learn the timed swing rhythm, break Stone consistently for Dust, then buy early Fracture, resource output, and useful capacity upgrades.
+
+### How do timed swings work in Fracture Field?
+
+Timed swings reward consistent timing. Reliable Good swings are better than frantic clicking, especially early when every clean break improves Dust flow and upgrade speed.
+
+### What is Dust used for?
+
+Dust is the core early currency for broad upgrades. You use it to improve stats such as damage, output, speed, and other run-wide power.
+
+### What are the best early upgrades in Fracture Field?
+
+The best early upgrades are Fracture, resource output, useful capacity, and then Pierce once Quartz or Iron starts resisting your damage.
+
+### When should I unlock Clay?
+
+Unlock Clay when Stone breaks quickly and your Stone upgrades are no longer difficult to afford.
+
+### Should I reset as soon as Sandstone appears?
+
+No. Sandstone starts Core Fragment generation, but your first World Fracture is usually better once the reward can buy useful upgrades.
+
+### When should I do my first World Fracture?
+
+Do your first World Fracture when Quartz or the next layer slows down and you can buy meaningful Core Fragment upgrades. Around 30+ Core Fragments is a good first-reset benchmark.
+
+### Which drone should I get first?
+
+A Collector Drone is often the most beginner-friendly first drone because it keeps resources moving while you focus on timed swings, upgrades, and early layer progression.
+
+### Are drones worth it early?
+
+Yes, but only as support. Early drones are limited by slots, cores, and upgrade levels. They become much stronger after World Fracture and later prestige upgrades.
+
+### Should I buy bombs early?
+
+Buy bombs when they help with clusters or field control, but do not build your entire early route around them.
+
+### Why does Quartz feel so slow?
+
+Quartz is often the first real slowdown. It is a normal point to start thinking about your first World Fracture.

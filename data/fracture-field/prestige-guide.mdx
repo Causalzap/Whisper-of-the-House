@@ -1,0 +1,777 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const versionColumns = [
+  { key: "version", label: "Version" },
+  { key: "change", label: "Prestige Change" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const versionRows = [
+  {
+    version: "v1.1.0",
+    change:
+      "Drone Hub stays unlocked after Reality Shatter, and configured drone rules are preserved. Drone upgrade levels still reset.",
+    whyItMatters:
+      "Old advice that says Drone Hub is fully lost after Reality Shatter is outdated.",
+  },
+  {
+    version: "v1.1.0",
+    change:
+      "Quarry Foreman fully persists after Reality Shatter, including upgrade levels and automation settings.",
+    whyItMatters:
+      "You no longer need to rebuild Foreman automation from zero after every Reality Shatter.",
+  },
+  {
+    version: "v1.1.0",
+    change:
+      "Persistent Hub, Persistent Foreman, and Foreman Memory were removed because the systems they protected now persist by default.",
+    whyItMatters:
+      "If you see older guides recommending these upgrades, they are from an outdated build.",
+  },
+  {
+    version: "v1.1.0",
+    change:
+      "Fractured Mind and Geologist's Insight, the World Fracture upgrades, were buffed from x1.5 to x2 per level.",
+    whyItMatters:
+      "These first-layer prestige upgrades are stronger than they were at launch, so early Core Fragments are more valuable.",
+  },
+  {
+    version: "v1.1.0",
+    change:
+      "Fractured Mind Mk. II and Geologist's Insight Mk. II, the Reality Shatter upgrades, were buffed from x2 to x3 per level.",
+    whyItMatters:
+      "These are high-priority Reality Shatter upgrades because their second-layer scaling is now much stronger.",
+  },
+  {
+    version: "v1.1.0",
+    change:
+      "Primal rock layer multipliers were buffed, while Gold through Chronite received health and hardness adjustments.",
+    whyItMatters:
+      "Late-game prestige timing should account for deeper-layer scaling, not only Silver or Gold.",
+  },
+];
+
+export const prestigeOverviewColumns = [
+  { key: "system", label: "Prestige System" },
+  { key: "currency", label: "Currency" },
+  { key: "earnedFrom", label: "Earned From" },
+  { key: "mainUse", label: "Main Use" },
+];
+
+export const prestigeOverviewRows = [
+  {
+    system: "World Fracture",
+    currency: "Core Fragments",
+    earnedFrom: "Resources gained from Sandstone or higher",
+    mainUse:
+      "First-layer permanent upgrades for Fracture, Pierce, rock generation, Drone Hub scaling, and repeat-run speed.",
+  },
+  {
+    system: "Reality Shatter",
+    currency: "Reality Shards",
+    earnedFrom: "Resources gained from Silver or higher",
+    mainUse:
+      "Second-layer prestige upgrades for Mk. II scaling, deeper rock progression, Drone Hub support, and long-term reset growth.",
+  },
+];
+
+export const benchmarkColumns = [
+  { key: "moment", label: "Moment" },
+  { key: "benchmark", label: "Practical Benchmark" },
+  { key: "decision", label: "What To Do" },
+];
+
+export const benchmarkRows = [
+  {
+    moment: "First World Fracture",
+    benchmark: "20 Core Fragments = usually weak; 30+ = common first-reset target",
+    decision:
+      "If Quartz has slowed down and you can reach around 30+ fragments, resetting is usually reasonable.",
+  },
+  {
+    moment: "Early repeat World Fractures",
+    benchmark: "Aim for a clearly larger reward than your previous reset",
+    decision:
+      "Reset when the next run will buy a meaningful upgrade, not just a tiny level.",
+  },
+  {
+    moment: "First Reality Shatter appears",
+    benchmark: "Under 100 Reality Shards is usually too early unless you are testing",
+    decision:
+      "Do another World Fracture or push deeper unless the run is completely stalled.",
+  },
+  {
+    moment: "First serious Reality Shatter",
+    benchmark: "200–500 Reality Shards = workable; 500–1,000+ = much smoother",
+    decision:
+      "Use the deeper reset when it buys several upgrades, especially damage, Core Fragment scaling, or rock economy.",
+  },
+  {
+    moment: "Late Reality Shatter loops",
+    benchmark: "Use upgrade cost, not a fixed number",
+    decision:
+      "Reset when the next Reality Shatter buys a key Mk. II level, rock-scaling level, or major progression breakpoint.",
+  },
+];
+
+export const worldFractureUpgradeColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "upgradeType", label: "Upgrade Type" },
+  { key: "examples", label: "Examples / Notes" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const worldFractureUpgradeRows = [
+  {
+    priority: "1",
+    upgradeType: "Damage and Pierce multipliers",
+    examples: "Fractured Mind, Geologist's Insight",
+    whyItMatters:
+      "These World Fracture upgrades were buffed in v1.1.0 and help every future run break through Quartz, Iron, Silver, and later walls faster.",
+  },
+  {
+    priority: "2",
+    upgradeType: "Core Fragment generation",
+    examples: "Core Saturation-style upgrades",
+    whyItMatters:
+      "More Core Fragments makes every future World Fracture more valuable.",
+  },
+  {
+    priority: "3",
+    upgradeType: "Rock count and layer economy",
+    examples: "Quarry expansion, layer purity, layer output upgrades",
+    whyItMatters:
+      "This is where Global Power and Local Mastery meet: Dust-based upgrades improve broad stats, while layer resources improve the specific rocks that are slowing your run.",
+  },
+  {
+    priority: "4",
+    upgradeType: "Drone Hub scaling",
+    examples: "Drone slots, drone uptime, drone core gain",
+    whyItMatters:
+      "The release version has a full Drone Hub system, and drones become much better once slots and automation catch up.",
+  },
+  {
+    priority: "5",
+    upgradeType: "Quarry Foreman automation",
+    examples: "Auto-upgrade interval and unlock coverage",
+    whyItMatters:
+      "Automation makes repeat runs faster and reduces manual rebuilding between World Fractures.",
+  },
+];
+
+export const realityShatterUpgradeColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "upgradeType", label: "Upgrade Type" },
+  { key: "examples", label: "Examples / Notes" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const realityShatterUpgradeRows = [
+  {
+    priority: "1",
+    upgradeType: "Mk. II damage and Pierce scaling",
+    examples: "Fractured Mind Mk. II, Geologist's Insight Mk. II",
+    whyItMatters:
+      "These Reality Shatter upgrades were buffed from x2 to x3 per level in v1.1.0, making them some of the most important second-layer upgrades.",
+  },
+  {
+    priority: "2",
+    upgradeType: "Core Fragment and World Fracture scaling",
+    examples: "Core Saturation Mk. II, World Fracture value upgrades",
+    whyItMatters:
+      "Reality Shatter should make future World Fractures stronger, not just reset the same loop.",
+  },
+  {
+    priority: "3",
+    upgradeType: "Rock and layer economy",
+    examples: "Dust Multiplier Mk. II, rock purity, deeper-layer output",
+    whyItMatters:
+      "Late Reality Shard production depends heavily on how many valuable rocks you can spawn, damage, and collect.",
+  },
+  {
+    priority: "4",
+    upgradeType: "Drone Hub support",
+    examples: "Drone damage, drone cores, drone slot scaling",
+    whyItMatters:
+      "Drone Hub now stays unlocked after Reality Shatter, so drone scaling resumes faster even though drone upgrade levels reset.",
+  },
+  {
+    priority: "5",
+    upgradeType: "Hit Speed and late achievement support",
+    examples: "Swift Strikes Mk. II",
+    whyItMatters:
+      "Useful later for maximum hit speed and fast reset loops, but it can become expensive, so do not tunnel on it too early.",
+  },
+  {
+    priority: "6",
+    upgradeType: "Bomb upgrades",
+    examples: "Bomb damage, recharge, hardness reduction effects",
+    whyItMatters:
+      "Bombs can help start tough layers and finish achievements, but they are usually not the first Reality Shatter priority.",
+  },
+];
+
+export const loseKeepColumns = [
+  { key: "category", label: "Category" },
+  { key: "v110Behavior", label: "v1.1.0 Behavior" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const loseKeepRows = [
+  {
+    category: "Drone Hub unlock",
+    v110Behavior:
+      "Kept. Drone Hub stays unlocked across Reality Shatter.",
+    whatItMeans:
+      "You do not need to re-unlock the Drone Hub from scratch after shattering reality.",
+  },
+  {
+    category: "Drone rules",
+    v110Behavior:
+      "Kept. Your configured drone rules are preserved.",
+    whatItMeans:
+      "Priority and targeting setup should remain, making post-shatter recovery smoother.",
+  },
+  {
+    category: "Drone upgrade levels",
+    v110Behavior:
+      "Reset. Drone upgrade levels still go back down.",
+    whatItMeans:
+      "Your fleet exists sooner, but you still need to rebuild drone power and upgrade levels.",
+  },
+  {
+    category: "Drone Core earnings",
+    v110Behavior:
+      "Resume immediately after Reality Shatter.",
+    whatItMeans:
+      "You no longer need to wait for the old Quartz upgrade requirement before earning Drone Cores again.",
+  },
+  {
+    category: "Quarry Foreman",
+    v110Behavior:
+      "Kept. Quarry Foreman persists across Reality Shatter.",
+    whatItMeans:
+      "Automation no longer disappears after Reality Shatter.",
+  },
+  {
+    category: "Quarry Foreman upgrade levels",
+    v110Behavior:
+      "Kept. Upgrade levels and automation settings are retained.",
+    whatItMeans:
+      "Reality Shatter is much less punishing than it was at launch.",
+  },
+  {
+    category: "World Fracture progress",
+    v110Behavior:
+      "Reset by Reality Shatter.",
+    whatItMeans:
+      "You still need to rebuild World Fracture upgrades after shattering reality, though Reality upgrades make that faster.",
+  },
+  {
+    category: "Reality Shatter upgrades",
+    v110Behavior:
+      "Kept as the deeper prestige layer.",
+    whatItMeans:
+      "These are the long-term reason to use Reality Shatter.",
+  },
+];
+
+export const achievementWarningColumns = [
+  { key: "achievementType", label: "Achievement Type" },
+  { key: "risk", label: "Prestige Risk" },
+  { key: "safePlay", label: "Safer Play" },
+];
+
+export const achievementWarningRows = [
+  {
+    achievementType: "Capacity achievements",
+    risk:
+      "Upgrades such as Quarry Expansion Mk. II can increase the maximum number of rocks, making capacity-max achievements take more upgrades.",
+    safePlay:
+      "Finish capacity achievements such as Gold capacity before heavily expanding quarry capacity in the Reality Shatter tree.",
+  },
+  {
+    achievementType: "Bomb achievements",
+    risk:
+      "Late-game drones may clear the quarry too quickly, making controlled bomb setups harder.",
+    safePlay:
+      "Do bomb setup achievements when you can disable or reduce drone pressure and control the field.",
+  },
+  {
+    achievementType: "Drone achievements",
+    risk:
+      "Reality Shatter resets drone upgrade levels, even though Drone Hub itself stays unlocked.",
+    safePlay:
+      "Do drone-count achievements when slot count and drone upgrades are high enough in the current loop.",
+  },
+  {
+    achievementType: "Hit speed achievements",
+    risk:
+      "Hit speed upgrades can become extremely expensive in the Reality Shatter tree.",
+    safePlay:
+      "Treat max hit speed as a late-game goal after your Reality Shard income is strong.",
+  },
+];
+
+export const deepLayerColumns = [
+  { key: "layerRange", label: "Layer Range" },
+  { key: "prestigeSignal", label: "Prestige Signal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const deepLayerRows = [
+  {
+    layerRange: "Stone → Sandstone",
+    prestigeSignal:
+      "This is the first route toward Core Fragment generation.",
+    whatToDo:
+      "Do not rush the reset button too early. Sandstone starts the Core Fragment path, but the first World Fracture usually feels better once you have a usable fragment reward.",
+  },
+  {
+    layerRange: "Sandstone → Quartz",
+    prestigeSignal:
+      "Core Fragments are available, and Quartz often becomes the first real slowdown.",
+    whatToDo:
+      "Use this stage to judge your first World Fracture. If Quartz slows down and you can reach around 30+ fragments, resetting is usually reasonable.",
+  },
+  {
+    layerRange: "Quartz → Iron",
+    prestigeSignal:
+      "The first serious hardness wall appears.",
+    whatToDo:
+      "Use World Fracture to improve Fracture, Pierce, and early rebuild speed.",
+  },
+  {
+    layerRange: "Silver",
+    prestigeSignal:
+      "Reality Shard generation begins, but early shard gain may be low.",
+    whatToDo:
+      "Do not Reality Shatter too early. Push only if the shard reward buys real upgrades.",
+  },
+  {
+    layerRange: "Gold → Diamond",
+    prestigeSignal:
+      "The run can stall even with automation active.",
+    whatToDo:
+      "Use World Fractures to increase Core Fragment value, then Reality Shatter when shard value is meaningful.",
+  },
+  {
+    layerRange: "Obsidian and Primal",
+    prestigeSignal:
+      "Earlier layers may explode instantly while the new layer barely moves.",
+    whatToDo:
+      "Prioritize Mk. II scaling, rock economy, Pierce, and hardness tools. Primal scaling is stronger after v1.1.0.",
+  },
+  {
+    layerRange: "Chronite",
+    prestigeSignal:
+      "Reality Shard income can snowball once Chronite is broken consistently.",
+    whatToDo:
+      "Shift from fixed reset thresholds to upgrade-cost planning: reset when the next Reality Shatter buys the next key level.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Following launch-version Reality Shatter advice",
+    whyItHurts:
+      "Old guides say automation is lost, but v1.1.0 changed Drone Hub and Quarry Foreman persistence.",
+    betterPlay:
+      "Use current-version rules: Drone Hub stays unlocked, drone rules persist, drone levels reset, and Quarry Foreman fully persists.",
+  },
+  {
+    mistake: "Buying Quarry Expansion Mk. II before capacity achievements",
+    whyItHurts:
+      "Capacity achievements can require more work after your maximum rock count increases.",
+    betterPlay:
+      "Finish important capacity achievements before heavily expanding quarry capacity.",
+  },
+  {
+    mistake: "Using Reality Shatter for one weak upgrade",
+    whyItHurts:
+      "A tiny shard reward can make the rebuild feel worse than another World Fracture.",
+    betterPlay:
+      "Wait until the reset buys several upgrades or one major breakpoint.",
+  },
+  {
+    mistake: "Ignoring actual upgrade names",
+    whyItHurts:
+      "The upgrade tree is large, and vague categories are hard to match in-game.",
+    betterPlay:
+      "Look for high-impact names such as Fractured Mind, Geologist's Insight, Core Saturation Mk. II, Fractured Mind Mk. II, and Geologist's Insight Mk. II.",
+  },
+  {
+    mistake: "Chasing max hit speed too early",
+    whyItHurts:
+      "Hit speed upgrades can become very expensive before your Reality Shard income is ready.",
+    betterPlay:
+      "Build Reality Shard income first through damage, rock scaling, and deeper-layer progress.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Prestige in Fracture Field has two layers: World Fracture and Reality Shatter.**
+
+Use **World Fracture** when your current run slows down and your pending **Core Fragments** can buy useful permanent upgrades. As a practical first-reset benchmark, **30+ Core Fragments** is a good target, while **under 20** often feels weak.
+
+Use **Reality Shatter** later, after you can earn enough **Reality Shards** to buy several strong upgrades. As a community-and-upgrade-cost benchmark, **200–500 Reality Shards** is workable for a first serious shatter, while **500–1,000+** usually feels smoother.
+
+As of **v1.1.0**, Reality Shatter is much less punishing than older guides suggest: **Drone Hub stays unlocked, drone rules are preserved, Drone upgrade levels reset, and Quarry Foreman fully persists with upgrade levels and automation settings.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/first-world-fracture.webp"
+    alt="Fracture Field World Fracture screen showing pending Core Fragments before the first prestige reset."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    World Fracture is the first prestige layer. The goal is not to wait forever, but to reset when Core Fragments make the next run clearly faster.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="version-history-and-prestige-changes">
+  Version history and prestige changes
+</h2>
+
+<GuideTable
+  caption="Important Fracture Field prestige changes to know before following reset advice."
+  columns={versionColumns}
+  rows={versionRows}
+/>
+
+This matters because many early Reality Shatter complaints and older guides were written before the v1.1.0 change.
+
+If a guide says Reality Shatter removes your Drone Hub or makes you rebuild Quarry Foreman automation from zero, treat that advice as outdated. The current version is much more forgiving.
+
+<GuideCallout title="Current-version rule">
+In v1.1.0, Reality Shatter keeps Drone Hub unlocked, preserves drone rules, resets Drone upgrade levels, and fully preserves Quarry Foreman upgrade levels and automation settings.
+</GuideCallout>
+
+---
+
+<h2 id="how-prestige-works">
+  How prestige works in Fracture Field
+</h2>
+
+<GuideTable
+  caption="Fracture Field prestige systems at a glance."
+  columns={prestigeOverviewColumns}
+  rows={prestigeOverviewRows}
+/>
+
+Fracture Field is built around repeated escalation. You push into a new rock layer, hit a wall, reset, buy permanent upgrades, and return faster.
+
+The two prestige systems do different jobs:
+
+- **World Fracture** is the reset you use often.
+- **Reality Shatter** is the deeper reset you use when Reality Shards can buy real long-term power.
+
+For the full route from early upgrades to late-game cleanup, start with the <Link href="/fracture-field">Fracture Field Complete Walkthrough & Guide</Link>.
+
+---
+
+<h2 id="world-fracture-explained">
+  World Fracture explained
+</h2>
+
+World Fracture resets your current run and gives **Core Fragments**. Core Fragments are earned by gaining resources from **Sandstone or higher**.
+
+This is the first point where Fracture Field stops being about one long run and becomes a reset loop. A good World Fracture should make the next run faster through stronger damage, better Pierce, improved rock economy, stronger drones, or better automation.
+
+The mechanism is simple:
+
+1. Push into Sandstone, Quartz, or deeper layers.
+2. Earn a Core Fragment reward.
+3. Reset with World Fracture.
+4. Spend Core Fragments on permanent upgrades.
+5. Return to the same wall faster.
+
+---
+
+<h2 id="when-to-world-fracture-first">
+  When to World Fracture for the first time
+</h2>
+
+**You should usually World Fracture for the first time when Quartz or the next layer becomes slow and you can reach around 30+ Core Fragments.**
+
+Use this as a benchmark, not a hard rule:
+
+- **Under 20 Core Fragments:** usually weak unless you are experimenting.
+- **20–30 Core Fragments:** usable if the run is already slow.
+- **30+ Core Fragments:** common first-reset target.
+- **Much higher than 30:** fine if your run is still accelerating, but do not wait forever.
+
+The first World Fracture is a tempo reset. It does not need to be perfect. It only needs to make your second run faster.
+
+<GuideCallout title="First World Fracture rule">
+Reset when the next 10–20 minutes would only add a small reward, but the Core Fragment upgrades you can buy now would noticeably speed up the next run.
+</GuideCallout>
+
+---
+
+<h2 id="best-world-fracture-upgrades">
+  Best World Fracture upgrades to buy first
+</h2>
+
+<GuideTable
+  caption="Best World Fracture upgrade priorities in Fracture Field."
+  columns={worldFractureUpgradeColumns}
+  rows={worldFractureUpgradeRows}
+/>
+
+Do not spend all Core Fragments on one idea.
+
+Pure damage can still fail against hardness. Pure economy can still fail if you cannot break the new layer. Pure drones can feel weak if slots and uptime are limited.
+
+The safest early prestige pattern is:
+
+**Fracture / Pierce → Core Fragment generation → rock economy → Drone Hub scaling → Quarry Foreman automation**
+
+---
+
+<h2 id="reset-benchmarks">
+  Reset benchmarks: how many Core Fragments or Reality Shards do you need?
+</h2>
+
+<GuideTable
+  caption="Practical reset benchmarks for World Fracture and Reality Shatter."
+  columns={benchmarkColumns}
+  rows={benchmarkRows}
+/>
+
+These benchmarks combine community-facing first-reset guidance, observed upgrade-cost ranges, and practical route testing. They are not universal rules, because your upgrade path, idle time, drone setup, and current layer all matter.
+
+Use them as decision support:
+
+- If the reward buys nothing important, wait.
+- If the run has stalled and the reward buys multiple upgrades, reset.
+- If you are near a major upgrade breakpoint, push a little longer.
+- If a deeper layer is technically unlocked but not farmable, another reset is often better.
+
+---
+
+<h2 id="reality-shatter-explained">
+  Reality Shatter explained
+</h2>
+
+Reality Shatter is the second prestige layer. It gives **Reality Shards**, which are earned from **Silver or higher** resources.
+
+Reality Shatter is not just a stronger World Fracture. It is a deeper reset loop, and the early version of the game made it feel very punishing. v1.1.0 softened the pain by preserving Drone Hub and Quarry Foreman, but Reality Shatter still resets enough progress that you should use it with a plan.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/reality-shatter-guide.webp"
+    alt="Fracture Field Reality Shatter screen showing pending Reality Shards and Reality Shatter upgrade options."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Reality Shatter should wait until the shard reward can buy real upgrades, especially Mk. II scaling, Core Fragment scaling, or rock economy.
+  </figcaption>
+</figure>
+
+A good first Reality Shatter should buy more than one minor upgrade. If it only buys a tiny improvement, another World Fracture is usually better.
+
+---
+
+<h2 id="what-do-you-lose-after-reality-shatter">
+  What do you lose after Reality Shatter in v1.1.0?
+</h2>
+
+<GuideTable
+  caption="What you lose and keep after Reality Shatter in Fracture Field v1.1.0."
+  columns={loseKeepColumns}
+  rows={loseKeepRows}
+/>
+
+The most important current-version answer is:
+
+**You keep Drone Hub unlocked and you keep Quarry Foreman automation. Drone upgrade levels reset, but Quarry Foreman upgrade levels and automation settings are retained.**
+
+This is the biggest difference between v1.1.0 and older launch-version advice. Reality Shatter is still a major reset, but it no longer destroys the core automation setup that made many players quit.
+
+<GuideCallout title="Outdated guide warning">
+If an older Fracture Field guide tells you that Reality Shatter removes Drone Hub or forces you to rebuild Quarry Foreman automation from scratch, it is probably using pre-v1.1.0 information.
+</GuideCallout>
+
+---
+
+<h2 id="when-to-reality-shatter-first">
+  When to Reality Shatter for the first time
+</h2>
+
+**Do your first Reality Shatter when the reward buys several useful upgrades, not when the button first appears.**
+
+Use this rough range:
+
+- **Under 100 Reality Shards:** usually too early.
+- **100–200 Reality Shards:** possible, but often weak.
+- **200–500 Reality Shards:** workable if your run is heavily stalled.
+- **500–1,000+ Reality Shards:** much smoother for a first serious shatter.
+- **Beyond 1,000:** good if you can still earn shards quickly before resetting.
+
+The right moment is usually after Silver or Gold slows down and another World Fracture no longer gives enough progress.
+
+<figure className="my-8">
+  <Image
+    src="/images/fracture-field/first-reality-shatter.webp"
+    alt="Fracture Field Gold progression before the first Reality Shatter with drones and late-run upgrades visible."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A good first Reality Shatter usually comes after a serious Silver or Gold slowdown, when the shard reward can buy multiple upgrades.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="best-reality-shatter-upgrades">
+  Best Reality Shatter upgrades to prioritize
+</h2>
+
+<GuideTable
+  caption="Best Reality Shatter upgrade priorities in Fracture Field."
+  columns={realityShatterUpgradeColumns}
+  rows={realityShatterUpgradeRows}
+/>
+
+The strongest early Reality Shatter route is:
+
+**Fractured Mind Mk. II / Geologist's Insight Mk. II → Core Saturation Mk. II → Dust and rock economy → Drone Hub support → late hit speed and bomb utility**
+
+Do not tunnel on hit speed or bomb upgrades too early. They matter, but the first goal is to make the next World Fracture and next layer push much faster.
+
+---
+
+<h2 id="achievement-warning-before-prestige-upgrades">
+  Achievement warning before Reality Shatter upgrades
+</h2>
+
+<GuideTable
+  caption="Prestige upgrades that can make some Fracture Field achievements harder."
+  columns={achievementWarningColumns}
+  rows={achievementWarningRows}
+/>
+
+The biggest warning is capacity achievements.
+
+Some achievements ask you to max the capacity upgrade for a specific rock, such as Gold. If you buy Reality Shatter quarry upgrades that increase the maximum number of rocks on the field, the number of capacity upgrades required can increase too.
+
+If you care about 100% completion, finish important capacity achievements before heavily investing in quarry expansion upgrades.
+
+<GuideCallout title="Achievement safety rule">
+Before buying Quarry Expansion Mk. II or similar rock-capacity upgrades, check whether you still need capacity achievements for Gold or other layers.
+</GuideCallout>
+
+---
+
+<h2 id="drone-hub-and-prestige">
+  Drone Hub and prestige timing
+</h2>
+
+Drone Hub is now a complete release-version system, not just a demo preview. It matters for prestige because automation changes how quickly you can recover after each reset.
+
+The current-version rules are simple:
+
+- Drone Hub stays unlocked after Reality Shatter.
+- Drone rules are preserved.
+- Drone upgrade levels reset.
+- Drone Core earnings resume immediately.
+- Quarry Foreman fully persists, so automation recovery is much smoother.
+
+That means your post-shatter goal is not to re-unlock Drone Hub. Your goal is to rebuild drone power quickly through upgrades and let automation resume the loop.
+
+Shatter Drones and Collector Drones are especially important because they solve different problems: Shatter Drones help clear tough clusters, while Collector Drones reduce manual cleanup and keep the economy moving.
+
+---
+
+<h2 id="deep-layer-prestige-timing">
+  Deep-layer prestige timing: Stone, Sandstone, Gold, Obsidian, Primal, and Chronite
+</h2>
+
+<GuideTable
+  caption="How deeper layers change prestige timing in Fracture Field."
+  columns={deepLayerColumns}
+  rows={deepLayerRows}
+/>
+
+Sandstone starts the Core Fragment path, but that does not mean you should reset immediately. The first World Fracture usually feels better once the reward is large enough to buy visible power.
+
+Silver unlocks Reality Shard generation, but the deeper layers decide whether Reality Shatter snowballs.
+
+Gold through Chronite received deeper-layer health and hardness adjustments in v1.1.0, so late-game walls are not just bugs or bad routing. You need enough Mk. II scaling, rock economy, Pierce, and hardness handling to make those layers farmable.
+
+Once you can consistently break Chronite, fixed shard benchmarks matter less. At that point, reset timing should be based on upgrade costs: shatter when the next reset buys the next meaningful level.
+
+---
+
+<h2 id="common-prestige-mistakes">
+  Common prestige mistakes
+</h2>
+
+<GuideTable
+  caption="Common Fracture Field prestige mistakes and what to do instead."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most prestige mistakes come from using old information or resetting without a specific purchase plan.
+
+Before you click either reset button, know three things:
+
+1. what you are buying
+2. what wall that upgrade solves
+3. how much faster the next run should become
+
+If you cannot answer those, wait or check the upgrade tree again.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is 30 Core Fragments enough for the first World Fracture?
+
+Yes, **30+ Core Fragments** is a good practical benchmark for the first World Fracture. Under 20 often feels weak, while 20–30 can work if the run has clearly stalled.
+
+### How many Reality Shards should I have before my first Reality Shatter?
+
+For a first serious Reality Shatter, **200–500 Reality Shards** is workable and **500–1,000+** usually feels smoother. Under 100 is usually too early unless you are testing.
+
+### Does Reality Shatter reset Drone Hub or Quarry Foreman?
+
+No. In v1.1.0, Drone Hub stays unlocked, configured drone rules are preserved, and Quarry Foreman fully persists with upgrade levels and automation settings. Drone upgrade levels still reset.
+
+### Which Reality Shatter upgrades should I buy first?
+
+Prioritize high-impact scaling such as **Fractured Mind Mk. II**, **Geologist's Insight Mk. II**, **Core Saturation Mk. II**, Dust or rock economy, and then Drone Hub support.
+
+### Can prestige upgrades make achievements harder?
+
+Yes. Quarry expansion upgrades can make capacity achievements harder by increasing the maximum rock count. If you want 100% completion, finish important capacity achievements before heavily expanding quarry capacity.
+
+### Should I follow older Reality Shatter guides?
+
+Be careful. Any guide written before v1.1.0 may be wrong about Drone Hub and Quarry Foreman persistence. Always check whether the guide mentions the v1.1.0 Reality Shatter changes.
