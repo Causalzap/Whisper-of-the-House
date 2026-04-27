@@ -167,16 +167,16 @@ export default function Page() {
               label: "Sol Cesto Guide Hub",
             },
             {
-              href: "/sol-cesto/flute-guide/",
+              href: "/sol-cesto/flute-guide",
               label: "Flute Guide",
             },
             {
-              href: "/sol-cesto/how-to-unlock-huntress/",
+              href: "/sol-cesto/how-to-unlock-huntress",
               label: "How to Unlock Huntress",
             },
             {
-              href: "/sol-cesto/beginner-guide/",
-              label: "Beginner Guide",
+              href: "/sol-cesto/all-characters-unlock-guide",
+              label: "All Characters Unlock Guide",
             },
           ]}
         >

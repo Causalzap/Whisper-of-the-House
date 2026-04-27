@@ -183,7 +183,7 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/airborne-empire/guide-hub",
+              href: "/airborne-empire",
               label: "Airborne Empire guide hub",
             },
             {

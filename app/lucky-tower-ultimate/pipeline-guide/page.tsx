@@ -210,7 +210,7 @@ export default function Page() {
               label: "Lucky Tower Ultimate 100% achievement guide",
             },
             {
-              href: "/lucky-tower-ultimate/guide-hub",
+              href: "/lucky-tower-ultimate",
               label: "Lucky Tower Ultimate guide hub",
             },
           ]}

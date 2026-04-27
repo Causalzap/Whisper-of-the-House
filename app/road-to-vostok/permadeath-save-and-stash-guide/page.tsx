@@ -194,15 +194,15 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/road-to-vostok/area-05-guide/",
+              href: "/road-to-vostok/area-05-guide",
               label: "Road to Vostok Area 05 Guide",
             },
             {
-              href: "/road-to-vostok/generalist-and-doctor-locations/",
+              href: "/road-to-vostok/generalist-and-doctor-locations",
               label: "Generalist and Doctor Locations in Road to Vostok",
             },
             {
-              href: "/road-to-vostok/all-shelter-locations/",
+              href: "/road-to-vostok/all-shelter-locations",
               label: "All Shelter Locations in Road to Vostok",
             },
             {

@@ -180,19 +180,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/i-am-jesus-christ/",
+              href: "/i-am-jesus-christ",
               label: "I Am Jesus Christ Guide Hub",
             },
             {
-              href: "/i-am-jesus-christ/miracles-list/",
+              href: "/i-am-jesus-christ/miracles-list",
               label: "I Am Jesus Christ all 30+ miracles list: unlock conditions and uses",
             },
             {
-              href: "/i-am-jesus-christ/apostles-locations/",
+              href: "/i-am-jesus-christ/apostles-locations",
               label: "I Am Jesus Christ 12 apostles locations: full recruitment order and map guide",
             },
             {
-              href: "/i-am-jesus-christ/worth-it-who-should-play/",
+              href: "//i-am-jesus-christ/who-should-play",
               label: "Is I Am Jesus Christ worth it for Christians and non-Christians?",
             },
           ]}

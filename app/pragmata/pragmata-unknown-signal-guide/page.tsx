@@ -170,7 +170,7 @@ export default function Page() {
               label: "Pragmata Best Early Upgrades",
             },
             {
-              href: "/pragmata/pragmata-pure-lunum-farming",
+              href: "/pragmata/pragmata-pure-lunum-guide",
               label: "Pragmata Pure Lunum Farming Guide",
             },
           ]}

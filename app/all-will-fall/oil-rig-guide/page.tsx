@@ -178,20 +178,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/all-will-fall/guide-hub/",
+              href: "/all-will-fall",
               label: "All Will Fall guide hub",
             },
             {
-              href: "/all-will-fall/beginners-guide/",
-              label: "All Will Fall beginner guide",
+              href: "/all-will-fall/collapse-troubleshooting",
+              label: "All Will Fall Collapse Troubleshooting",
             },
             {
-              href: "/all-will-fall/broken-tanker-guide/",
-              label: "All Will Fall Broken Tanker guide",
+              href: "/all-will-fall/tornado-race-guide",
+              label: "All Will Fall Tornado Race guide",
             },
             {
-              href: "/all-will-fall/collapse-troubleshooting/",
-              label: "All Will Fall collapse troubleshooting guide",
+              href: "/all-will-fall/tanker-truck-guide",
+              label: "All Will Fall Tanker Truck guide",
             },
           ]}
         >

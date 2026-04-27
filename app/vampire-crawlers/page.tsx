@@ -98,7 +98,7 @@ const jsonLd = {
             "@type": "ListItem",
             position: 3,
             name: "Vampire Crawlers Early Evolutions Guide",
-            url: `${pageUrl}/early-evolutions-guide`,
+            url: `${pageUrl}/early-evolutions`,
           },
           {
             "@type": "ListItem",

@@ -5,7 +5,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import BuyBackGuideContent from "@/data/mouse-pi-for-hire/buy-back-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/mouse-p-i-for-hire/buy-back-guide`;
+const pageUrl = `${siteUrl}/mouse-pi-for-hire/buy-back-guide`;
 
 export const metadata: Metadata = {
     title: "Missed Collectibles Buy-Back Guide | MOUSE: P.I. For Hire",

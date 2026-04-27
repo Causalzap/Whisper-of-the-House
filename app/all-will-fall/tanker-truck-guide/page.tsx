@@ -199,20 +199,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/all-will-fall/",
+              href: "/all-will-fall",
               label: "All Will Fall guide hub",
             },
             {
-              href: "/all-will-fall/beginner-guide/",
-              label: "All Will Fall beginner guide",
+              href: "/all-will-fall/collapse-troubleshooting",
+              label: "All Will Fall Collapse Troubleshooting",
             },
             {
-              href: "/all-will-fall/collapse-troubleshooting/",
-              label: "All Will Fall collapse troubleshooting guide",
-            },
-            {
-              href: "/all-will-fall/oil-rig-guide/",
+              href: "/all-will-fall/oil-rig-guide",
               label: "All Will Fall Oil Rig guide",
+            },
+            {
+              href: "/all-will-fall/tornado-race-guide",
+              label: "All Will Fall Tornado Race guide",
             },
           ]}
         >

@@ -180,12 +180,16 @@ export default function Page() {
               label: "Shifting Sands Guide Hub",
             },
             {
-              href: "/soulmask/shifting-sands-beginner-guide/",
+              href: "/soulmask/shifting-sands-beginner-guide",
               label: "Shifting Sands Beginner Guide",
             },
             {
-              href: "/soulmask/airship-guide/",
+              href: "/soulmask/airship-guide",
               label: "Airship Guide",
+            },
+            {
+              href: "/soulmask/cross-map-transfer-guide",
+              label: "Cross-Map Transfer Guide",
             },
 
           ]}

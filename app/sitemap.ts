@@ -123,7 +123,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
      { url: `${base}/grime-2/blade-mammoth-boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/grime-2/kankan-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/grime-2/vs-grime-1-differences`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/grime-2/hozy`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/grime-2/best-early-weapons`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/sol-cesto/all-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

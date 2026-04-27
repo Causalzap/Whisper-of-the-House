@@ -176,19 +176,15 @@ export default function Page() {
               label: "Crystalfall Guide Hub",
             },
             {
-              href: "/crystalfall/lootable-skills-guide/",
-              label: "Lootable Skills Guide",
-            },
-            {
-              href: "/crystalfall/fireball-build-guide/",
+              href: "/crystalfall/fireball-build-guide",
               label: "Fireball Build Guide",
             },
             {
-              href: "/crystalfall/crafting-sockets-gem-fusion-guide/",
+              href: "/crystalfall/crafting-sockets-gem-fusion-guide",
               label: "Crafting, Sockets, and Gem Fusion Guide",
             },
             {
-              href: "/crystalfall/inventory-stash-guide/",
+              href: "/crystalfall/inventory-stash-guide",
               label: "Inventory and Stash Guide",
             },
           ]}

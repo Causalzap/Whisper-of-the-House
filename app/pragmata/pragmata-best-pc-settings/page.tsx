@@ -156,7 +156,7 @@ export default function Page() {
               label: "Pragmata Unknown Signal Guide",
             },
             {
-              href: "/pragmata/pragmata-pure-lunum-farming",
+              href: "/pragmata/pragmata-pure-lunum-guide",
               label: "Pragmata Pure Lunum Farming Guide",
             },
           ]}

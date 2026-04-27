@@ -191,16 +191,20 @@ export default function Page() {
               label: "Crystalfall Guide Hub",
             },
             {
-              href: "/crystalfall/beginner-guide/",
+              href: "/crystalfall/beginner-guide",
               label: "Crystalfall Beginner Guide",
             },
             {
-              href: "/crystalfall/lootable-skills-guide/",
-              label: "Lootable Skills Guide",
+              href: "/crystalfall/crafting-sockets-gem-fusion-guide",
+              label: "Crafting, Sockets, and Gem Fusion Guide",
             },
             {
-              href: "/crystalfall/crafting-sockets-gem-fusion-guide/",
+              href: "/crystalfall/crafting-sockets-gem-fusion-guide",
               label: "Crafting, Sockets, and Gem Fusion Guide",
+            },
+            {
+              href: "/crystalfall/inventory-stash-guide",
+              label: "Inventory and Stash Guide",
             },
           ]}
         >

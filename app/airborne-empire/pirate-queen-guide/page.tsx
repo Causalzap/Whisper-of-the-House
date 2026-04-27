@@ -184,7 +184,7 @@ export default function Page() {
               label: "Airborne Empire tilt, lift, and balance guide",
             },
             {
-              href: "/airborne-empire/guide-hub",
+              href: "/airborne-empire",
               label: "Airborne Empire guide hub",
             },
           ]}

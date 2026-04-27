@@ -164,20 +164,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/all-will-fall/",
-              label: "All Will Fall Guide Hub",
+              href: "/all-will-fall",
+              label: "All Will Fall guide hub",
             },
             {
-              href: "/all-will-fall/oil-rig-guide/",
-              label: "All Will Fall Oil Rig guide: best early build order and 500% Rain Catcher setup",
+              href: "/all-will-fall/collapse-troubleshooting",
+              label: "All Will Fall Collapse Troubleshooting",
             },
             {
-              href: "/all-will-fall/tanker-truck-guide/",
-              label: "All Will Fall Tanker Truck guide: best early build order, fuel math, and zone progression",
+              href: "/all-will-fall/oil-rig-guide",
+              label: "All Will Fall Oil Rig guide",
             },
             {
-              href: "/all-will-fall/collapse-troubleshooting/",
-              label: "All Will Fall collapse troubleshooting guide: why buildings fall and how to fix them",
+              href: "/all-will-fall/tanker-truck-guide",
+              label: "All Will Fall Tanker Truck guide",
             },
           ]}
         >

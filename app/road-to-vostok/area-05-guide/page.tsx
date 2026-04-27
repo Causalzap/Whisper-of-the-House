@@ -5,7 +5,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import RoadToVostokArea05GuideContent from "@/data/road-to-vostok/road-to-vostok-area-05-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/road-to-vostok/road-to-vostok-area-05-guide`;
+const pageUrl = `${siteUrl}/road-to-vostok/area-05-guide`;
 
 export const metadata: Metadata = {
   title: "Road to Vostok Area 05 Guide: Best Early Routes & Loot Loop",

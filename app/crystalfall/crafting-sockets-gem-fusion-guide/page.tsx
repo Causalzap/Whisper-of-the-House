@@ -206,15 +206,15 @@ export default function Page() {
               label: "Crystalfall Guide Hub",
             },
             {
-              href: "/crystalfall/beginner-guide/",
+              href: "/crystalfall/beginner-guide",
               label: "Crystalfall Beginner Guide",
             },
             {
-              href: "/crystalfall/fireball-build-guide/",
+              href: "/crystalfall/fireball-build-guide",
               label: "Best Fireball Build in Crystalfall for Beginners",
             },
             {
-              href: "/crystalfall/inventory-stash-guide/",
+              href: "/crystalfall/inventory-stash-guide",
               label: "Inventory and Stash Guide",
             },
           ]}

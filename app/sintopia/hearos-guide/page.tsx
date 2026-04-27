@@ -168,12 +168,12 @@ export default function Page() {
               label: "Sintopia Best Hell Layout Guide",
             },
             {
-              href: "/sintopia/overworld-spells-cultists-demon-invasion-guide",
+              href: "/sintopia/overworld-guide",
               label: "Sintopia Overworld Guide",
             },
             {
-              href: "/sintopia/campaign-progression-hard-mode-guide",
-              label: "Sintopia Campaign and Hard Mode Guide",
+              href: "/sintopia/saints-guide",
+              label: "Sintopia Saints Guide",
             },
           ]}
         >

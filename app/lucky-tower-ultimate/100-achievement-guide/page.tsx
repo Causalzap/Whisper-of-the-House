@@ -226,7 +226,7 @@ export default function Page() {
               label: "Lucky Tower Ultimate pipeline guide",
             },
             {
-              href: "/lucky-tower-ultimate/guide-hub",
+              href: "/lucky-tower-ultimate",
               label: "Lucky Tower Ultimate guide hub",
             },
           ]}

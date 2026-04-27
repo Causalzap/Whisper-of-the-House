@@ -186,15 +186,15 @@ export default function Page() {
               label: "Crystalfall Guide Hub",
             },
             {
-              href: "/crystalfall/beginner-guide/",
+              href: "/crystalfall/beginner-guide",
               label: "Crystalfall Beginner Guide",
             },
             {
-              href: "/crystalfall/crafting-sockets-gem-fusion-guide/",
+              href: "/crystalfall/crafting-sockets-gem-fusion-guide",
               label: "Crafting, Sockets, and Gem Fusion Guide",
             },
             {
-              href: "/crystalfall/fireball-build-guide/",
+              href: "/crystalfall/fireball-build-guide",
               label: "Best Fireball Build in Crystalfall for Beginners",
             },
           ]}

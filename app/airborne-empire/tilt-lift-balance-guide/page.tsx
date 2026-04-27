@@ -192,7 +192,7 @@ export default function Page() {
               label: "Airborne Empire Jet Engine guide",
             },
             {
-              href: "/airborne-empire/guide-hub",
+              href: "/airborne-empire",
               label: "Airborne Empire guide hub",
             },
           ]}

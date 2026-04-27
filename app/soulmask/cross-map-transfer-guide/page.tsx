@@ -184,17 +184,17 @@ export default function Page() {
               label: "Shifting Sands Guide Hub",
             },
             {
-              href: "/soulmask/how-to-start-shifting-sands/",
-              label: "How to Start Shifting Sands",
+              href: "/soulmask/tribesmen-guide",
+              label: "Tribesmen Guide",
             },
             {
-              href: "/soulmask/shifting-sands-beginner-guide/",
+              href: "/soulmask/airship-guide",
+              label: "Airship Guide",
+            },
+            {
+              href: "/soulmask/shifting-sands-beginner-guide",
               label: "Shifting Sands Beginner Guide",
             },
-            {
-                href: "/soulmask/cross-map-transfer-guide/",
-                label: "Cross-Map Transfer Guide",
-              },
           ]}
         >
           <CrossMapTransferGuideContent />

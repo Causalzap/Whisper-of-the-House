@@ -137,15 +137,15 @@ export default function Page() {
               label: "Sol Cesto Guide Hub",
             },
             {
-              href: "/sol-cesto/how-to-unlock-lizard/",
+              href: "/sol-cesto/how-to-unlock-lizard",
               label: "How to Unlock Lizard",
             },
             {
-              href: "/sol-cesto/flute-guide/",
+              href: "/sol-cesto/flute-guide",
               label: "Flute Guide",
             },
             {
-              href: "/sol-cesto/all-characters-unlock-guide/",
+              href: "/sol-cesto/all-characters-unlock-guide",
               label: "All Characters Unlock Guide",
             },
           ]}

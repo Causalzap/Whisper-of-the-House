@@ -143,20 +143,20 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/sintopia/best-hell-layout-guide",
-              label: "How To Create The Best Hell Layout In Sintopia",
+              href: "/sintopia/saints-guide",
+              label: "Sintopia Saints Hub",
             },
             {
-              href: "/sintopia/hearos-guide",
-              label: "How to Get Hearos in Sintopia",
+              href: "/sintopia/best-hell-layout-guide",
+              label: "Sintopia Best Hell Layout Guide",
             },
             {
               href: "/sintopia/overworld-guide",
               label: "Sintopia Overworld Guide",
             },
             {
-              href: "/sintopia/saints-guide",
-              label: "Sintopia Saints Guide",
+              href: "/sintopia/hearos-guide",
+              label: "Sintopia Hearos Guide",
             },
           ]}
         >

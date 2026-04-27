@@ -6,7 +6,7 @@ import EarlyEvolutionsGuideContent from "@/data/vampire-crawlers/early-evolution
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const gameUrl = `${siteUrl}/vampire-crawlers`;
-const pageUrl = `${gameUrl}/early-evolutions-guide`;
+const pageUrl = `${gameUrl}/early-evolutions`;
 
 export const metadata: Metadata = {
   title: "Vampire Crawlers Early Evolutions Guide: Best Weapon Combos",

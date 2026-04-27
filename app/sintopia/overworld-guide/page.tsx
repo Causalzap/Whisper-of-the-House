@@ -174,8 +174,8 @@ export default function Page() {
               label: "How to Get Hearos in Sintopia",
             },
             {
-              href: "/sintopia/campaign-progression-hard-mode-guide",
-              label: "Sintopia Campaign and Hard Mode Guide",
+              href: "/sintopia/saints-guide",
+              label: "Sintopia Saints Guide",
             },
           ]}
         >

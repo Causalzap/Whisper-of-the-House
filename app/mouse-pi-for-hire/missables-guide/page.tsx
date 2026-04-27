@@ -5,7 +5,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import MissablesGuideContent from "@/data/mouse-pi-for-hire/missables-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/mouse-p-i-for-hire/missables-guide`;
+const pageUrl = `${siteUrl}/mouse-pi-for-hire/missables-guide`;
 
 export const metadata: Metadata = {
   title: "MOUSE: P.I. For Hire Missables Guide",

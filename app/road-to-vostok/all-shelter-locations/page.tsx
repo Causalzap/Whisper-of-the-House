@@ -191,15 +191,15 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/road-to-vostok/area-05-guide/",
+              href: "/road-to-vostok/area-05-guide",
               label: "Road to Vostok Area 05 Guide",
             },
             {
-              href: "/road-to-vostok/generalist-and-doctor-locations/",
+              href: "/road-to-vostok/generalist-and-doctor-locations",
               label: "Generalist and Doctor Locations in Road to Vostok",
             },
             {
-              href: "/road-to-vostok/permadeath-save-and-stash-guide/",
+              href: "/road-to-vostok/permadeath-save-and-stash-guide",
               label: "Road to Vostok Permadeath, Save, and Stash Guide",
             },
             {

@@ -183,15 +183,15 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/road-to-vostok/road-to-vostok-area-05-guide/",
+              href: "/road-to-vostok/roarea-05-guide",
               label: "Road to Vostok Area 05 Guide",
             },
             {
-              href: "/road-to-vostok/permadeath-save-and-stash-guide/",
+              href: "/road-to-vostok/permadeath-save-and-stash-guide",
               label: "Road to Vostok Permadeath, Save, and Stash Guide",
             },
             {
-              href: "/road-to-vostok/all-shelter-locations/",
+              href: "/road-to-vostok/all-shelter-locations",
               label: "All Shelter Locations in Road to Vostok",
             },
             {

@@ -147,19 +147,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/sol-cesto/how-to-unlock-lizard/",
+              href: "/sol-cesto/how-to-unlock-lizard",
               label: "How to Unlock Lizard",
             },
             {
-              href: "/sol-cesto/how-to-unlock-huntress/",
+              href: "/sol-cesto/how-to-unlock-huntress",
               label: "How to Unlock Huntress",
             },
             {
-              href: "/sol-cesto/flute-guide/",
+              href: "/sol-cesto/flute-guide",
               label: "Flute Guide",
             },
             {
-              href: "/sol-cesto/all-characters-unlock-guide/",
+              href: "/sol-cesto/all-characters-unlock-guide",
               label: "All Characters Unlock Guide",
             },
           ]}

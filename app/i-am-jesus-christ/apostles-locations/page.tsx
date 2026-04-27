@@ -151,19 +151,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/i-am-jesus-christ/",
+              href: "/i-am-jesus-christ",
               label: "I Am Jesus Christ Guide Hub",
             },
             {
-              href: "/i-am-jesus-christ/walkthrough/",
+              href: "/i-am-jesus-christ/walkthrough",
               label: "I Am Jesus Christ full walkthrough: story route and ending guide",
             },
             {
-              href: "/i-am-jesus-christ/miracles-list/",
+              href: "/i-am-jesus-christ/miracles-list",
               label: "I Am Jesus Christ miracles list: categories, uses, and system guide",
             },
             {
-              href: "/i-am-jesus-christ/worth-it-who-should-play/",
+              href: "/i-am-jesus-christ/who-should-play",
               label: "Is I Am Jesus Christ worth it for Christians and non-Christians?",
             },
           ]}
