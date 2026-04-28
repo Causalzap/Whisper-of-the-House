@@ -1,0 +1,1126 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const vaseChecklistColumns = [
+  { key: "piece", label: "Piece" },
+  { key: "area", label: "Area" },
+  { key: "type", label: "Type" },
+  { key: "requirement", label: "Requirement" },
+  { key: "quickNote", label: "Quick Note" },
+];
+
+export const vaseChecklistRows = [
+  {
+    piece: "#01",
+    area: "Moominhouse",
+    type: "Story pickup",
+    requirement: "Matches",
+    quickNote: "First piece after the vase breaks.",
+  },
+  {
+    piece: "#02",
+    area: "Moominhouse / basement",
+    type: "House pickup",
+    requirement: "Matches",
+    quickNote: "Check the early furnace route.",
+  },
+  {
+    piece: "#03",
+    area: "Bathing House",
+    type: "Early outside pickup",
+    requirement: "Mittens",
+    quickNote: "Search after recovering the mittens.",
+  },
+  {
+    piece: "#04",
+    area: "Crossroads",
+    type: "Route pickup",
+    requirement: "Mittens",
+    quickNote: "Use snowballs to clear the early outside route.",
+  },
+  {
+    piece: "#05",
+    area: "Fillyjonk route",
+    type: "Snow cleanup",
+    requirement: "Shovel",
+    quickNote: "Clear snow after beating Little My.",
+  },
+  {
+    piece: "#06",
+    area: "Mountain",
+    type: "Mountain route pickup",
+    requirement: "Snowball",
+    quickNote: "Easy to miss during the Little My chase.",
+  },
+  {
+    piece: "#07",
+    area: "Mountain summit",
+    type: "Shortcut pickup",
+    requirement: "Rope / mittens",
+    quickNote: "Check the shortcut route before leaving the mountain.",
+  },
+  {
+    piece: "#08",
+    area: "Moominhouse",
+    type: "Interior pickup",
+    requirement: "Matches",
+    quickNote: "Found during the house guest chain.",
+  },
+  {
+    piece: "#09",
+    area: "Moominhouse",
+    type: "Interior pickup",
+    requirement: "Matches",
+    quickNote: "Check the upper rooms during interior cleanup.",
+  },
+  {
+    piece: "#10",
+    area: "Joxter camp",
+    type: "Camp pickup",
+    requirement: "Dash",
+    quickNote: "Collect after learning dash.",
+  },
+  {
+    piece: "#11",
+    area: "Joxter camp",
+    type: "Camp side pickup",
+    requirement: "Dash",
+    quickNote: "Near the same camp route as #10.",
+  },
+  {
+    piece: "#12",
+    area: "Winter being quest",
+    type: "Side quest reward",
+    requirement: "Winter being quest",
+    quickNote: "Reward piece, not a normal ground pickup.",
+  },
+  {
+    piece: "#13",
+    area: "Bathing House cleanup",
+    type: "Tool-gated pickup",
+    requirement: "Axe",
+    quickNote: "Return after getting the axe.",
+  },
+  {
+    piece: "#14",
+    area: "Forest",
+    type: "Child rescue route",
+    requirement: "Shovel / axe",
+    quickNote: "Check side paths while rescuing Fillyjonk's children.",
+  },
+  {
+    piece: "#15",
+    area: "Forest",
+    type: "Upper route pickup",
+    requirement: "Axe",
+    quickNote: "Search the elevated forest route.",
+  },
+  {
+    piece: "#16",
+    area: "Forest",
+    type: "Bird drop",
+    requirement: "Snowball",
+    quickNote: "Hit the bird with a snowball.",
+  },
+  {
+    piece: "#17",
+    area: "Forest",
+    type: "Snow cleanup",
+    requirement: "Shovel",
+    quickNote: "Clear snow during forest cleanup.",
+  },
+  {
+    piece: "#18",
+    area: "Forest / bonfire approach",
+    type: "Route pickup",
+    requirement: "Shovel / axe",
+    quickNote: "Sweep the route before leaving the forest.",
+  },
+  {
+    piece: "#19",
+    area: "Sorry-oo route",
+    type: "Wind route pickup",
+    requirement: "Axe",
+    quickNote: "Collect during the rescue route.",
+  },
+  {
+    piece: "#20",
+    area: "Sorry-oo route",
+    type: "Wind route pickup",
+    requirement: "Axe / shovel",
+    quickNote: "Put Sorry-oo down safely if you need your hands free.",
+  },
+  {
+    piece: "#21",
+    area: "Herb cave",
+    type: "Cave pickup",
+    requirement: "Sharp axe",
+    quickNote: "Enter after sharpening the axe.",
+  },
+  {
+    piece: "#22",
+    area: "Herb cave",
+    type: "Cave pickup",
+    requirement: "Sharp axe",
+    quickNote: "Search the cave interior before leaving.",
+  },
+  {
+    piece: "#23",
+    area: "Late cave / ice route",
+    type: "Ice cleanup",
+    requirement: "Sharp axe",
+    quickNote: "Break the stronger ice route.",
+  },
+  {
+    piece: "#24",
+    area: "Snow fort",
+    type: "Side quest reward",
+    requirement: "Reinforced mittens",
+    quickNote: "Complete the snow fort / friend quest.",
+  },
+  {
+    piece: "#25",
+    area: "Winter being diary quest",
+    type: "Side quest reward",
+    requirement: "Diary quest / matches",
+    quickNote: "Finish the diary-related winter being quest.",
+  },
+];
+
+export const toolIndexColumns = [
+  { key: "tool", label: "Tool / Progress Point" },
+  { key: "pieces", label: "Vase Pieces To Check" },
+  { key: "why", label: "Why These Matter" },
+];
+
+export const toolIndexRows = [
+  {
+    tool: "Matches",
+    pieces: "#01, #02, #08, #09, #25",
+    why:
+      "Matches are needed for early house pickups, dark rooms, and some late winter being objectives.",
+  },
+  {
+    tool: "Mittens / snowballs",
+    pieces: "#03, #04, #06, #16",
+    why:
+      "Snowballs clear icicles and knock items from birds. Bird-held pieces are easy to miss.",
+  },
+  {
+    tool: "Shovel",
+    pieces: "#05, #14, #17, #18, #20",
+    why:
+      "The shovel opens deep snow routes around Fillyjonk, the forest, and rescue sections.",
+  },
+  {
+    tool: "Mountain access",
+    pieces: "#06, #07",
+    why:
+      "The mountain route has quick pickups that are easy to skip while chasing Little My.",
+  },
+  {
+    tool: "Dash",
+    pieces: "#10, #11",
+    why:
+      "Dash opens the Joxter camp side paths and snow-clump routes.",
+  },
+  {
+    tool: "Axe",
+    pieces: "#13, #14, #15, #18, #19, #20",
+    why:
+      "The axe clears dead trees and opens several mid-game cleanup paths.",
+  },
+  {
+    tool: "Sharp axe",
+    pieces: "#21, #22, #23",
+    why:
+      "The sharp axe opens stronger ice obstacles and late cave routes.",
+  },
+  {
+    tool: "Reinforced mittens",
+    pieces: "#24",
+    why:
+      "Large snowball puzzles are needed for the snow fort / friend quest reward.",
+  },
+];
+
+export const cleanupRouteColumns = [
+  { key: "route", label: "Cleanup Route" },
+  { key: "pieces", label: "Pieces" },
+  { key: "bestTime", label: "Best Time To Do It" },
+];
+
+export const cleanupRouteRows = [
+  {
+    route: "Moominhouse cleanup",
+    pieces: "#01, #02, #08, #09",
+    bestTime:
+      "Collect #01 and #02 early, then return for #08 and #09 during the guest-chain rooms.",
+  },
+  {
+    route: "Mountain cleanup",
+    pieces: "#06, #07",
+    bestTime:
+      "Collect both during the Little My silver tray chase before returning to Moominhouse.",
+  },
+  {
+    route: "Joxter camp cleanup",
+    pieces: "#10, #11",
+    bestTime:
+      "Do both immediately after learning dash, before leaving the camp route.",
+  },
+  {
+    route: "Forest rescue cleanup",
+    pieces: "#14, #15, #16, #17, #18",
+    bestTime:
+      "Clear these during the Fillyjonk children rescue route once you have shovel and axe access.",
+  },
+  {
+    route: "Sorry-oo cleanup",
+    pieces: "#19, #20",
+    bestTime:
+      "Collect both during the wind rescue route. Place Sorry-oo down safely when you need to use tools.",
+  },
+  {
+    route: "Herb cave / sharp axe cleanup",
+    pieces: "#21, #22, #23",
+    bestTime:
+      "Do these after getting the whetstone and sharpening the axe with Too-ticky.",
+  },
+  {
+    route: "Side quest reward cleanup",
+    pieces: "#12, #24, #25",
+    bestTime:
+      "Do these before the Great Winter Bonfire. They are easy to miss because they are rewards, not simple pickups.",
+  },
+];
+
+export const areaColumns = [
+  { key: "area", label: "Area" },
+  { key: "pieces", label: "Pieces" },
+  { key: "note", label: "Note" },
+];
+
+export const areaRows = [
+  {
+    area: "Moominhouse",
+    pieces: "#01, #02, #08, #09",
+    note: "Check both the opening route and later guest-chain rooms.",
+  },
+  {
+    area: "Bathing House / crossroads",
+    pieces: "#03, #04, #13",
+    note: "Return after getting the axe for the cleanup piece.",
+  },
+  {
+    area: "Fillyjonk route",
+    pieces: "#05",
+    note: "Requires the shovel from Little My.",
+  },
+  {
+    area: "Mountain",
+    pieces: "#06, #07",
+    note: "Easy to miss while chasing Little My and the silver tray.",
+  },
+  {
+    area: "Joxter camp",
+    pieces: "#10, #11",
+    note: "Clear both after learning dash.",
+  },
+  {
+    area: "Forest",
+    pieces: "#14, #15, #16, #17, #18",
+    note: "This is one of the densest vase piece areas.",
+  },
+  {
+    area: "Sorry-oo route",
+    pieces: "#19, #20",
+    note: "Collect carefully during the wind rescue section.",
+  },
+  {
+    area: "Herb cave / late cave",
+    pieces: "#21, #22, #23",
+    note: "Requires the sharp axe.",
+  },
+  {
+    area: "Side quests",
+    pieces: "#12, #24, #25",
+    note: "Reward pieces are the easiest to overlook.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**There are 25 vase pieces in Moomintroll Winter's Warmth. The easiest way to collect them all is to follow the main story, unlock the key tools, then do final cleanup before lighting the Great Winter Bonfire.**
+
+The most common pieces to miss are:
+
+- bird-held vase pieces
+- winter being reward pieces
+- sharp axe cave pieces
+- mountain pieces during the Little My chase
+- late side quest rewards such as the snow fort and diary quest
+
+Use the checklist if you need a specific number. Use the tool index if you are asking, **"I just got the axe, sharp axe, dash, or reinforced mittens — which pieces can I collect now?"**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/moomintroll-all-vase-pieces.webp"
+    alt="Moomintroll Winter's Warmth all 25 vase piece locations guide."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Moominmamma's vase breaks early in the story. Some pieces are simple pickups, but others come from birds, caves, tool-gated paths, and side quest rewards.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="all-vase-pieces-checklist">
+  All 25 vase pieces checklist
+</h2>
+
+<GuideTable
+  caption="All 25 Moomintroll Winter's Warmth vase pieces in recommended collection order."
+  columns={vaseChecklistColumns}
+  rows={vaseChecklistRows}
+/>
+
+This table is the fastest way to compare your missing piece against the full route.
+
+If you are following the story normally, collect pieces in this order. If you are already near the end, use the tool index and cleanup route sections below instead.
+
+<GuideCallout title="Missable note">
+Unless a section says otherwise, vase pieces do not appear to be permanently missable. The safest completion route is still to collect all 25 before lighting the Great Winter Bonfire, because the bonfire pushes the story toward the ending sequence.
+</GuideCallout>
+
+---
+
+<h2 id="vase-pieces-by-tool">
+  Vase pieces by tool unlock
+</h2>
+
+<GuideTable
+  caption="Which vase pieces to collect after each tool or ability unlock."
+  columns={toolIndexColumns}
+  rows={toolIndexRows}
+/>
+
+This is the most useful section if you are not following the route from the beginning.
+
+For example, if you just got the **axe**, do not only continue forward. Recheck Bathing House cleanup, forest paths, and the Sorry-oo route. If you just got the **sharp axe**, prioritize the herb cave and late ice cleanup pieces.
+
+<GuideCallout title="Tool-gated cleanup rule">
+When you get a new tool, think of it as a reason to revisit old areas. Moomintroll Winter's Warmth hides several vase pieces behind routes that looked impossible earlier.
+</GuideCallout>
+
+---
+
+<h2 id="fast-cleanup-route">
+  Fast cleanup route for missing vase pieces
+</h2>
+
+<GuideTable
+  caption="Fast cleanup route for players missing one or more vase pieces."
+  columns={cleanupRouteColumns}
+  rows={cleanupRouteRows}
+/>
+
+If you are at 23/25 or 24/25, do not restart the whole checklist from #01.
+
+Check in this order:
+
+1. winter being side quest rewards
+2. bird-held vase pieces
+3. forest rescue route
+4. herb cave / sharp axe route
+5. Joxter camp side route
+6. Moominhouse guest-chain rooms
+7. mountain chase route
+
+Most missing final pieces come from places that are not normal ground pickups.
+
+---
+
+<h2 id="vase-pieces-by-area">
+  Vase pieces by area
+</h2>
+
+<GuideTable
+  caption="Moomintroll Winter's Warmth vase pieces grouped by area."
+  columns={areaColumns}
+  rows={areaRows}
+/>
+
+Area grouping is useful once you are revisiting the map late in the game.
+
+The forest and cave routes are the most important cleanup zones. Moominhouse has several early pieces, but the later hard-to-find pieces are more likely to be outside, inside caves, or attached to winter being quests.
+
+---
+
+<h2 id="bird-vase-pieces">
+  Bird-held vase pieces
+</h2>
+
+Bird-held vase pieces are easy to miss because they do not behave like normal collectibles. Instead of simply picking up a sparkling item, you need to find the bird and hit it with a snowball.
+
+The clearest bird-held vase piece in this guide is:
+
+- **Vase Piece #16** in the forest route
+
+To handle bird pieces:
+
+1. equip the mittens
+2. aim a snowball at the bird
+3. hit it once to make the item drop
+4. follow the bird if it moves to another perch
+5. pick up the dropped vase piece before leaving the area
+
+<GuideCallout title="Bird piece tip">
+If a bird flies away, keep following the nearby route instead of assuming the piece is gone. Birds usually move between nearby perches, and the item can still be recovered by hitting the bird with a snowball.
+</GuideCallout>
+
+---
+
+<h2 id="side-quest-vase-pieces">
+  Side quest reward vase pieces
+</h2>
+
+The most important non-obvious vase pieces are the reward pieces.
+
+Watch especially for:
+
+- **Vase Piece #12** from a winter being quest
+- **Vase Piece #24** from the snow fort / friend quest
+- **Vase Piece #25** from the winter being diary quest
+
+These are easy to miss because they do not always appear as normal map pickups. You may need to finish the objective, then return to the winter being or quest-giver to receive the piece.
+
+If your counter is stuck at 24/25, check side quest rewards before rechecking every snow pile.
+
+---
+
+<h2 id="moominhouse-vase-pieces">
+  Moominhouse vase pieces: #01, #02, #08, #09
+</h2>
+
+Moominhouse has two early vase pieces and two later interior cleanup pieces.
+
+Do the first two during the opening, then return for the later pieces during the house guest chain.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-01.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 01 location in Moominhouse."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #01. First Moominhouse piece after the broken vase objective begins.
+  </figcaption>
+</figure>
+
+### Vase Piece #01
+
+**Area:** Moominhouse  
+**Requirement:** Matches  
+**Route note:** Start the broken vase side quest, then collect this first piece before leaving the house route.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-02.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 02 location in the Moominhouse basement route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #02. Second early Moominhouse piece near the furnace / basement cleanup route.
+  </figcaption>
+</figure>
+
+### Vase Piece #02
+
+**Area:** Moominhouse / basement route  
+**Requirement:** Matches  
+**Route note:** Check the early house cleanup route while gathering firewood and restarting the furnace.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-08.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 08 location during Moominhouse interior cleanup."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #08. Later Moominhouse piece during guest-chain cleanup.
+  </figcaption>
+</figure>
+
+### Vase Piece #08
+
+**Area:** Moominhouse  
+**Requirement:** Matches  
+**Route note:** Collect this while moving through the house during the Misabel / Fillyjonk guest chain.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-09.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 09 location in Moominhouse."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #09. Another later Moominhouse interior piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #09
+
+**Area:** Moominhouse  
+**Requirement:** Matches  
+**Route note:** Check the upper rooms before leaving the house again.
+
+---
+
+<h2 id="bathing-house-and-crossroads-vase-pieces">
+  Bathing House and crossroads vase pieces: #03, #04, #13
+</h2>
+
+The Bathing House area has one early mittens piece, one outside route piece, and one later axe cleanup piece.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-03.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 03 near the Bathing House."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #03. Check the Bathing House / ancestor route after recovering the mittens.
+  </figcaption>
+</figure>
+
+### Vase Piece #03
+
+**Area:** Bathing House  
+**Requirement:** Mittens  
+**Route note:** After the ancestor drops the mittens, check the nearby route before heading fully back toward Moominhouse.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-04.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 04 near the crossroads."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #04. Early outside route piece after snowballs are unlocked.
+  </figcaption>
+</figure>
+
+### Vase Piece #04
+
+**Area:** Crossroads / early outside route  
+**Requirement:** Mittens  
+**Route note:** Use snowballs to clear icicles and check the side path near the early outside route.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-13.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 13 during Bathing House axe cleanup."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #13. Return to the Bathing House area after getting the axe.
+  </figcaption>
+</figure>
+
+### Vase Piece #13
+
+**Area:** Bathing House cleanup  
+**Requirement:** Axe  
+**Route note:** Once the axe is available, cut through the blocked cleanup route around the Bathing House.
+
+---
+
+<h2 id="fillyjonk-route-vase-piece">
+  Fillyjonk route vase piece: #05
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-05.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 05 on the Fillyjonk route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #05. Clear snow around the Fillyjonk route after getting the shovel.
+  </figcaption>
+</figure>
+
+### Vase Piece #05
+
+**Area:** Fillyjonk route  
+**Requirement:** Shovel  
+**Route note:** Beat Little My to get the shovel, then clear the deep snow around the route to Fillyjonk's house.
+
+---
+
+<h2 id="mountain-vase-pieces">
+  Mountain vase pieces: #06, #07
+</h2>
+
+The mountain pieces are easy to rush past because the story is pushing you to chase Little My and recover the silver tray.
+
+Slow down before leaving the mountain route.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-06.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 06 on the mountain chase route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #06. Mountain chase route piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #06
+
+**Area:** Mountain  
+**Requirement:** Snowball / mountain access  
+**Route note:** Check the mountain path carefully while following Little My. If a bird is holding the piece, hit the bird with a snowball.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-07.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 07 near the mountain summit route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #07. Mountain shortcut / summit route piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #07
+
+**Area:** Mountain summit / shortcut route  
+**Requirement:** Rope / mittens  
+**Route note:** After the shortcut route opens, search the upper path before returning to Moominhouse.
+
+---
+
+<h2 id="joxter-camp-vase-pieces">
+  Joxter camp vase pieces: #10, #11
+</h2>
+
+The Joxter camp has two pieces close together. Do both right after learning dash.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-10.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 10 near Joxter camp."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #10. First Joxter camp route piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #10
+
+**Area:** Joxter camp  
+**Requirement:** Dash  
+**Route note:** After the Joxter teaches dash, use it to pass through the snow clumps and check the camp side path.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-11.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 11 near Joxter camp side path."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #11. Second Joxter camp route piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #11
+
+**Area:** Joxter camp side path  
+**Requirement:** Dash  
+**Route note:** This is near #10, so collect it before leaving the camp route.
+
+---
+
+<h2 id="forest-vase-pieces">
+  Forest vase pieces: #14, #15, #16, #17, #18
+</h2>
+
+The forest is the densest vase piece area. You should clear it during the Fillyjonk children rescue route, once you have the shovel and axe.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-14.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 14 during the forest child rescue route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #14. Forest child rescue route.
+  </figcaption>
+</figure>
+
+### Vase Piece #14
+
+**Area:** Forest  
+**Requirement:** Shovel / axe  
+**Route note:** Follow the children's trail and check side paths instead of only chasing the main objective.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-15.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 15 on the upper forest route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #15. Upper forest route.
+  </figcaption>
+</figure>
+
+### Vase Piece #15
+
+**Area:** Forest upper route  
+**Requirement:** Axe  
+**Route note:** Check the elevated forest route before returning to the bonfire area.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-16.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 16 bird drop in the forest."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #16. Bird-held forest piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #16
+
+**Area:** Forest  
+**Requirement:** Snowball  
+**Route note:** Hit the bird with a snowball, then pick up the dropped vase piece.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-17.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 17 during forest cleanup."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #17. Forest cleanup piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #17
+
+**Area:** Forest cleanup route  
+**Requirement:** Shovel  
+**Route note:** Clear the snow in the forest route and check the newly opened path.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-18.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 18 near the bonfire approach."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #18. Forest / bonfire approach piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #18
+
+**Area:** Forest / bonfire approach  
+**Requirement:** Shovel / axe  
+**Route note:** Before leaving the forest rescue section, sweep the route toward the bonfire site.
+
+---
+
+<h2 id="sorry-oo-route-vase-pieces">
+  Sorry-oo route vase pieces: #19, #20
+</h2>
+
+The Sorry-oo pieces are easy to miss because the route feels like an urgent rescue.
+
+You can still stop and collect safely. Put Sorry-oo down when you need your hands free.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-19.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 19 on the Sorry-oo rescue route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #19. Sorry-oo rescue route piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #19
+
+**Area:** Sorry-oo route  
+**Requirement:** Axe  
+**Route note:** Collect it while moving through the wind route. Do not rush past side pickups while carrying Sorry-oo.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-20.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 20 on the Sorry-oo wind route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #20. Second Sorry-oo route piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #20
+
+**Area:** Sorry-oo wind route  
+**Requirement:** Axe / shovel  
+**Route note:** If an obstacle blocks the way, place Sorry-oo in a safe spot, clear the route, then pick him back up.
+
+---
+
+<h2 id="herb-cave-and-late-cave-vase-pieces">
+  Herb cave and late cave vase pieces: #21, #22, #23
+</h2>
+
+These three are best collected together after you have the sharp axe.
+
+Do not search the cave too early. If the ice blocks do not break yet, continue the story until Too-ticky sharpens the axe.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-21.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 21 at the herb cave entrance."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #21. Herb cave entrance.
+  </figcaption>
+</figure>
+
+### Vase Piece #21
+
+**Area:** Herb cave entrance  
+**Requirement:** Sharp axe  
+**Route note:** Enter the herb cave after sharpening the axe and check the entrance route before going deeper.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-22.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 22 inside the herb cave."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #22. Herb cave interior.
+  </figcaption>
+</figure>
+
+### Vase Piece #22
+
+**Area:** Herb cave  
+**Requirement:** Sharp axe  
+**Route note:** Search the interior side path before leaving the cave with the herbs.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-23.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 23 in the late cave ice route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #23. Late cave / ice cleanup route.
+  </figcaption>
+</figure>
+
+### Vase Piece #23
+
+**Area:** Late cave / ice cleanup  
+**Requirement:** Sharp axe  
+**Route note:** Break through the stronger ice route and collect the final cave piece before returning outside.
+
+---
+
+<h2 id="side-quest-reward-vase-pieces">
+  Side quest reward vase pieces: #12, #24, #25
+</h2>
+
+These are the pieces most likely to be missing at the end because they come from side quest completion.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-12.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 12 side quest reward."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #12. Winter being side quest reward.
+  </figcaption>
+</figure>
+
+### Vase Piece #12
+
+**Area:** Winter being quest  
+**Requirement:** Side quest progress  
+**Route note:** Finish the winter being request and talk to the quest-giver again if the reward does not appear immediately.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-24.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 24 snow fort side quest reward."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #24. Snow fort / friend quest reward.
+  </figcaption>
+</figure>
+
+### Vase Piece #24
+
+**Area:** Snow fort / friend quest  
+**Requirement:** Reinforced mittens  
+**Route note:** Use large snowballs to complete the snow fort objective, then collect the house-warming gift / reward.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/vase-piece-25.webp"
+    alt="Moomintroll Winter's Warmth Vase Piece 25 final diary quest reward."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vase Piece #25. Final diary / winter being reward piece.
+  </figcaption>
+</figure>
+
+### Vase Piece #25
+
+**Area:** Winter being diary quest  
+**Requirement:** Diary quest / matches  
+**Route note:** Finish the diary-related objective and return to the winter being for the final reward piece.
+
+---
+
+<h2 id="what-happens-when-you-collect-all-vase-pieces">
+  What happens when you collect all 25 vase pieces?
+</h2>
+
+After collecting all 25 vase pieces, return to the broken vase objective in Moominhouse and complete the side quest before lighting the Great Winter Bonfire.
+
+This works as a natural completion checkpoint. If you have all 25 pieces, you have likely cleared the major side routes, caves, winter being rewards, bird drops, and tool-gated cleanup paths.
+
+At this point, you should also check:
+
+- tool upgrades
+- winter being quests
+- firewood count
+- side quest rewards
+- any remaining Steam achievements
+
+<GuideCallout title="Best cleanup point">
+The best time to finish the vase is after getting the sharp axe and reinforced mittens, but before lighting the Great Winter Bonfire.
+</GuideCallout>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many vase pieces are in Moomintroll Winter's Warmth?
+
+There are 25 vase pieces in Moomintroll Winter's Warmth.
+
+### Where does the broken vase quest start?
+
+The broken vase quest starts in Moominhouse early in the story after Moominmamma's vase is knocked over.
+
+### Are all vase pieces found on the ground?
+
+No. Some are ground pickups, but others are bird drops, cave pickups, tool-gated pieces, or side quest rewards.
+
+### Which vase pieces are easiest to miss?
+
+The easiest pieces to miss are bird-held pieces, winter being reward pieces, snow fort rewards, and sharp axe cave pieces.
+
+### What should I check if I am missing one vase piece?
+
+Check side quest rewards first, especially the diary quest, snow fort / friend quest, and winter being rewards. Then recheck bird drops, the forest route, and the sharp axe cave route.
+
+### Do birds with vase pieces come back?
+
+If a bird moves, follow the nearby route and look for its next perch. Bird-held items are recovered by hitting the bird with a snowball.
+
+### Do I need the axe for every vase piece?
+
+You do not need the axe for every piece, but several mid-to-late cleanup pieces require the axe or sharp axe.
+
+### Do I need the sharp axe?
+
+Yes. The sharp axe is needed for the herb cave and late ice cleanup pieces.
+
+### Can I collect vase pieces after lighting the Great Winter Bonfire?
+
+The safest route is to collect all 25 before lighting the Great Winter Bonfire. Treat the bonfire as your final cleanup checkpoint.
+
+### Is there an achievement for collecting all vase pieces?
+
+This guide treats the vase as a completion objective. Check your achievement list after turning in all 25 pieces, then use the achievements guide for any remaining cleanup.

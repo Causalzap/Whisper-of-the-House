@@ -55,6 +55,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/holovillage-our-cozy-days`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/shapez-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/fracture-field`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/moomintroll`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/moomintroll/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/moomintroll/ending-explained`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/moomintroll/great-winter-bonfire`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/moomintroll/little-my-snowball-fight`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/moomintroll/side-quests`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/moomintroll/tool-upgrades`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/moomintroll/vase-piece-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
      // ⬇️ 把 4 篇文章补上
      { url: `${base}/fracture-field/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

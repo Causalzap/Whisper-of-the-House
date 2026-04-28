@@ -97,6 +97,48 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-sky-700",
 },
 
+// ===== Moomintroll Winter's Warmth =====
+{
+  href: "/moomintroll",
+  game: "Moomintroll Winter's Warmth",
+  title: "Complete Walkthrough & Guide",
+  description:
+    "Start here for the full winter route, including tools, vase pieces, side quests, the Great Winter Bonfire, achievements, and ending cleanup.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/moomintroll/vase-piece-locations",
+  game: "Moomintroll Winter's Warmth",
+  title: "All 25 Vase Piece Locations",
+  description:
+    "Every Moominmamma vase piece location, including tool requirements, quest rewards, bird drops, cave pieces, and final cleanup checks.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/moomintroll/tool-upgrades",
+  game: "Moomintroll Winter's Warmth",
+  title: "All Tool Upgrades Guide",
+  description:
+    "How to get and upgrade every tool, including the shovel, reinforced mittens, axe, lamp oil, whetstone, sharp axe, and upgraded shovel.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/moomintroll/great-winter-bonfire",
+  game: "Moomintroll Winter's Warmth",
+  title: "Great Winter Bonfire Guide",
+  description:
+    "How to prepare the Great Winter Bonfire, collect 125 firewood, invite five guests, find the musician, help winter beings, and fix blockers.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
 // ===== Fracture Field =====
 {
   href: "/fracture-field",

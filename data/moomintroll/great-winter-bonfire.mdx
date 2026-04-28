@@ -1,0 +1,707 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const requirementColumns = [
+  { key: "requirement", label: "Requirement" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "bestTip", label: "Best Tip" },
+];
+
+export const requirementRows = [
+  {
+    requirement: "125 firewood",
+    whatItMeans:
+      "You need enough wood from loose pickups, snow piles, trees, caves, side paths, and quest rewards.",
+    bestTip:
+      "Do not force this too early. The shovel, axe, and sharp axe each open better firewood sources.",
+  },
+  {
+    requirement: "Five guests",
+    whatItMeans:
+      "You need to progress five key guest routes until the characters are actually ready to attend.",
+    bestTip:
+      "Helping someone once may not be enough. Return and talk to them again after their problem is solved.",
+  },
+  {
+    requirement: "One musician",
+    whatItMeans:
+      "You need to complete the musician / lunchbox route so the bonfire has music.",
+    bestTip:
+      "Follow the bird toward the Bathing House / beach route and recover the lunchbox.",
+  },
+  {
+    requirement: "Three winter beings",
+    whatItMeans:
+      "The bonfire objective asks you to complete three qualifying winter-being tasks.",
+    bestTip:
+      "These are small side quests, but they count toward main bonfire progress.",
+  },
+];
+
+export const firewoodPlanColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "roughAmount", label: "Rough Amount" },
+  { key: "bestSources", label: "Best Sources" },
+  { key: "whatToCheckIfShort", label: "If You Are Short" },
+];
+
+export const firewoodPlanRows = [
+  {
+    stage: "Before the axe",
+    roughAmount: "About 40-50 if you are thorough",
+    bestSources:
+      "Loose wood, early snow piles, Moominhouse routes, Bathing House paths, and early side areas.",
+    whatToCheckIfShort:
+      "Do not grind too hard yet. Many firewood sources are still locked behind later tools.",
+  },
+  {
+    stage: "After getting the shovel",
+    roughAmount: "Small-to-medium boost",
+    bestSources:
+      "Deep snow piles near Fillyjonk, Moominhouse garden, early forest paths, and side routes.",
+    whatToCheckIfShort:
+      "Clear suspicious snow piles, especially near routes you passed before getting the shovel.",
+  },
+  {
+    stage: "After getting the axe",
+    roughAmount: "Another 50-60 from cleanup",
+    bestSources:
+      "Dead trees, blocked log routes, forest paths, Bathing House cleanup, and bonfire approach routes.",
+    whatToCheckIfShort:
+      "This is the biggest firewood jump. Revisit old paths with fallen trees before looking elsewhere.",
+  },
+  {
+    stage: "After getting the sharp axe",
+    roughAmount: "Another 20-30 from late routes",
+    bestSources:
+      "Herb cave, stronger ice routes, late cave exits, hidden paths, and tool-gated cleanup areas.",
+    whatToCheckIfShort:
+      "Check cave exits and stronger ice routes if you are stuck around 80-100 firewood.",
+  },
+  {
+    stage: "Late side quests",
+    roughAmount: "Variable final top-up",
+    bestSources:
+      "Winter beings, Little My's hidden stash, character rewards, and skipped optional paths.",
+    whatToCheckIfShort:
+      "Finish winter being tasks and any quest route that opened a new side area.",
+  },
+];
+
+export const routeColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const routeRows = [
+  {
+    stage: "1. Reach the bonfire site",
+    goal: "Start the Great Winter Bonfire objective",
+    whatToDo:
+      "Meet Too-ticky at the old bonfire site after the Bathing House section.",
+  },
+  {
+    stage: "2. Learn the requirements",
+    goal: "Track what the valley needs",
+    whatToDo:
+      "The objective asks for 125 firewood, five guests, one musician, and three winter beings.",
+  },
+  {
+    stage: "3. Get the shovel",
+    goal: "Open the route to Fillyjonk",
+    whatToDo:
+      "Beat Little My in the first snowball fight, then use the shovel to clear deep snow.",
+  },
+  {
+    stage: "4. Progress guest routes",
+    goal: "Wake up and prepare the people of Moominvalley",
+    whatToDo:
+      "Help Fillyjonk, Misabel, Little My, the musician, and Too-ticky-related objectives until the guest counter updates.",
+  },
+  {
+    stage: "5. Unlock the axe",
+    goal: "Start serious firewood cleanup",
+    whatToDo:
+      "Follow the musician lunchbox route until you get Moominpappa's axe.",
+  },
+  {
+    stage: "6. Help winter beings",
+    goal: "Complete three qualifying winter-being tasks",
+    whatToDo:
+      "Solve nearby warmth, food, light, rescue, or item puzzles for winter beings.",
+  },
+  {
+    stage: "7. Finish late route cleanup",
+    goal: "Prepare for the final bonfire state",
+    whatToDo:
+      "Use the axe, sharp axe, shovel, and upgraded routes to finish firewood and optional cleanup.",
+  },
+  {
+    stage: "8. Light the bonfire",
+    goal: "Start the celebration",
+    whatToDo:
+      "Return to the bonfire site once every objective is complete.",
+  },
+];
+
+export const guestColumns = [
+  { key: "guestRoute", label: "Guest / Route" },
+  { key: "howToProgress", label: "How To Progress" },
+  { key: "whenItCounts", label: "When It Usually Counts" },
+];
+
+export const guestRows = [
+  {
+    guestRoute: "Fillyjonk and her children",
+    howToProgress:
+      "Reach Fillyjonk's house, help with the porcelain cat, then continue the children rescue route later.",
+    whenItCounts:
+      "After the family is safe and the related quest chain has been followed up.",
+  },
+  {
+    guestRoute: "Misabel / house guest chain",
+    howToProgress:
+      "Help Misabel settle her problem in Moominhouse and continue the guest-chain objectives.",
+    whenItCounts:
+      "After her issue is resolved and you return to the correct conversation.",
+  },
+  {
+    guestRoute: "Little My",
+    howToProgress:
+      "Beat her later pond snowball fights, not just the first shovel fight.",
+    whenItCounts:
+      "After the later rematches move her bonfire involvement forward.",
+  },
+  {
+    guestRoute: "Musician",
+    howToProgress:
+      "Follow the lunchbox quest and recover what the bird took.",
+    whenItCounts:
+      "After the musician can actually continue toward the bonfire role.",
+  },
+  {
+    guestRoute: "Too-ticky",
+    howToProgress:
+      "Return to Too-ticky near the end and talk to her when the other preparation is close.",
+    whenItCounts:
+      "After the bonfire preparation has progressed enough for her invitation to register.",
+  },
+];
+
+export const winterBeingColumns = [
+  { key: "winterBeingType", label: "Winter Being Task" },
+  { key: "whatItUsuallyNeeds", label: "What It Usually Needs" },
+  { key: "tip", label: "Tip" },
+];
+
+export const winterBeingRows = [
+  {
+    winterBeingType: "Cold winter being",
+    whatItUsuallyNeeds:
+      "A fire, torch, or nearby source of warmth.",
+    tip:
+      "If a winter being is freezing, look for a fire, candle, or warmth-related interaction nearby.",
+  },
+  {
+    winterBeingType: "Hungry winter being",
+    whatItUsuallyNeeds:
+      "Food or a nearby item that solves its hunger request.",
+    tip:
+      "Search the same area before leaving. These tasks usually have nearby solutions.",
+  },
+  {
+    winterBeingType: "Scared winter being",
+    whatItUsuallyNeeds:
+      "Light, torches, or removal of something frightening.",
+    tip:
+      "If the being mentions fear or darkness, check for candles, lamps, or torches.",
+  },
+  {
+    winterBeingType: "Trapped winter being",
+    whatItUsuallyNeeds:
+      "A later tool such as the axe, shovel, or sharp axe.",
+    tip:
+      "Come back after upgrades if you cannot free it immediately.",
+  },
+  {
+    winterBeingType: "Reward winter being",
+    whatItUsuallyNeeds:
+      "Completing the request and talking again.",
+    tip:
+      "Always finish the follow-up conversation. Some rewards include firewood or vase pieces.",
+  },
+];
+
+export const sorryOoColumns = [
+  { key: "step", label: "Sorry-oo Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const sorryOoRows = [
+  {
+    step: "Find Sorry-oo",
+    whatToDo:
+      "Follow the forest / children route until Sorry-oo becomes part of the late main quest chain.",
+    whyItMatters:
+      "This connects the family route to late-game forest and cave progression.",
+  },
+  {
+    step: "Handle the wind route",
+    whatToDo:
+      "Carry or guide Sorry-oo carefully through the dangerous wind section. Put him down safely when you need to use tools.",
+    whyItMatters:
+      "This route can contain cleanup items and leads toward the next story step.",
+  },
+  {
+    step: "Get help when Sorry-oo is sick",
+    whatToDo:
+      "Continue the quest until the group points you toward herbs that can help him.",
+    whyItMatters:
+      "This sends you toward the herb cave route.",
+  },
+  {
+    step: "Get the whetstone",
+    whatToDo:
+      "Receive the whetstone from Fillyjonk's children, then bring it to Too-ticky.",
+    whyItMatters:
+      "The whetstone gives you the sharp axe, which opens stronger ice and herb cave progress.",
+  },
+  {
+    step: "Collect the herbs",
+    whatToDo:
+      "Use the sharp axe to enter the cave route and gather the herbs.",
+    whyItMatters:
+      "This moves Sorry-oo's quest forward and helps the bonfire route reach its late-game state.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyMissing", label: "Likely Missing" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "Firewood is complete, but the bonfire still is not ready.",
+    likelyMissing:
+      "Guests, musician progress, or winter being progress.",
+    fix:
+      "Check the guest counter, finish the musician lunchbox route, and make sure three winter being tasks are completed.",
+  },
+  {
+    problem: "A guest did not count after I helped them.",
+    likelyMissing:
+      "A follow-up conversation or later step in that guest route.",
+    fix:
+      "Return to the character after solving their problem and talk again about the Great Winter Bonfire.",
+  },
+  {
+    problem: "I have around 80 firewood and cannot find enough more.",
+    likelyMissing:
+      "Axe cleanup or sharp axe cleanup.",
+    fix:
+      "Revisit dead tree routes, Bathing House cleanup, forest paths, cave exits, and stronger ice routes.",
+  },
+  {
+    problem: "The musician objective is incomplete.",
+    likelyMissing:
+      "Lunchbox route progress.",
+    fix:
+      "Follow the bird toward the Bathing House / beach route, recover the lunchbox, and continue the musician chain.",
+  },
+  {
+    problem: "Winter beings still show incomplete.",
+    likelyMissing:
+      "Three completed qualifying winter-being tasks.",
+    fix:
+      "Look for cold, hungry, scared, or trapped winter beings and finish the follow-up conversation after helping.",
+  },
+  {
+    problem: "Little My still has not helped.",
+    likelyMissing:
+      "Later pond snowball fights.",
+    fix:
+      "The first fight only gives the shovel. Continue to the pond route and beat the later rematches.",
+  },
+];
+
+export const cleanupColumns = [
+  { key: "check", label: "Before Lighting The Bonfire" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "relatedGuide", label: "Related Guide" },
+];
+
+export const cleanupRows = [
+  {
+    check: "Collect all 25 vase pieces",
+    whyItMatters:
+      "Some vase pieces require late tools or side quest rewards.",
+    relatedGuide: "All 25 Vase Piece Locations",
+  },
+  {
+    check: "Finish tool upgrades",
+    whyItMatters:
+      "Sharp axe, reinforced mittens, longer matches, and shovel upgrades make cleanup easier.",
+    relatedGuide: "All Tool Upgrades Guide",
+  },
+  {
+    check: "Check winter beings",
+    whyItMatters:
+      "The bonfire objective requires three winter being tasks, and extra ones may reward useful items.",
+    relatedGuide: "Side Quests Guide",
+  },
+  {
+    check: "Confirm firewood count",
+    whyItMatters:
+      "You need 125 firewood before the bonfire can be lit.",
+    relatedGuide: "This guide",
+  },
+  {
+    check: "Talk to key characters",
+    whyItMatters:
+      "Some guest progress only completes after a follow-up conversation.",
+    relatedGuide: "Complete Walkthrough",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To prepare the Great Winter Bonfire in Moomintroll Winter's Warmth, you need 125 firewood, five guests, one musician, and three winter being tasks.**
+
+Do not try to finish everything the moment the quest appears. Follow the story until you have the shovel, axe, sharp axe, and key guest routes open, then do your firewood and side quest cleanup before lighting the bonfire.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/great-winter-bonfire.webp"
+    alt="Great Winter Bonfire site in Moomintroll Winter's Warmth with Too-ticky explaining the winter tradition."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Great Winter Bonfire becomes the central objective after Too-ticky explains why spring has not returned.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="great-winter-bonfire-requirements">
+  Great Winter Bonfire requirements checklist
+</h2>
+
+<GuideTable
+  caption="Great Winter Bonfire requirements in Moomintroll Winter's Warmth."
+  columns={requirementColumns}
+  rows={requirementRows}
+/>
+
+The Great Winter Bonfire is the main quest hub for the middle and late parts of the game. If it is not ready, check which requirement has not updated yet: firewood, guests, musician, or winter beings.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/great-winter-bonfire-requirements.webp"
+    alt="Moomintroll Winter's Warmth Great Winter Bonfire requirements showing firewood, guests, musician, and winter beings."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The bonfire objective tracks 125 firewood, five guests, one musician, and three winter beings.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Bonfire rule">
+If the Great Winter Bonfire is not ready yet, you are missing at least one tracked requirement. Do not guess randomly; check the quest objective and use the troubleshooting table below.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-collect-firewood">
+  How to collect 125 firewood
+</h2>
+
+<GuideTable
+  caption="How to collect 125 firewood for the Great Winter Bonfire."
+  columns={firewoodPlanColumns}
+  rows={firewoodPlanRows}
+/>
+
+Firewood comes from many small sources, but the important thing is tool timing. You are not expected to reach 125 firewood the moment the bonfire quest appears.
+
+If you are short, check your newest tool first:
+
+- shovel opens snow pile cleanup
+- axe opens the biggest dead tree cleanup routes
+- sharp axe opens late cave and stronger ice routes
+- side quests can provide the final top-up
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/firewood-collection.webp"
+    alt="Moomintroll collecting firewood for the Great Winter Bonfire in Moomintroll Winter's Warmth."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Firewood adds up across the whole route. Serious cleanup becomes much easier after the axe.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Firewood tip">
+If you are stuck around 80 firewood, you probably still have axe or sharp axe cleanup left. Recheck dead tree routes, cave exits, stronger ice paths, and side quest rewards.
+</GuideCallout>
+
+---
+
+<h2 id="bonfire-route">
+  Great Winter Bonfire route
+</h2>
+
+<GuideTable
+  caption="Recommended Great Winter Bonfire route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+This route follows the tool order. It is more efficient than trying to brute-force the bonfire requirements immediately.
+
+---
+
+<h2 id="how-to-invite-guests">
+  How to invite five guests
+</h2>
+
+<GuideTable
+  caption="Main guest routes for the Great Winter Bonfire."
+  columns={guestColumns}
+  rows={guestRows}
+/>
+
+The five guest requirement is route-based. Helping a character once does not always update the objective immediately.
+
+If a guest does not count, finish their current problem, then return for a follow-up conversation. This is especially important for character chains that continue across several scenes.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/five-guests-invited.webp"
+    alt="Moomintroll Winter's Warmth showing five guests invited for the Great Winter Bonfire."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some guest progress completes only after you return and talk to the character again.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-to-find-the-musician">
+  How to find the musician
+</h2>
+
+The musician route begins after the Moominhouse guest chain brings music into the story.
+
+The musician can help with the Great Winter Bonfire, but he needs provisions first. Follow his lunchbox quest: the bird takes the lunchbox toward the Bathing House / beach route, and you need to recover it before the musician can continue.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/musician-lunchbox.webp"
+    alt="The musician asking Moomintroll to recover his lunchbox for the Great Winter Bonfire in Moomintroll Winter's Warmth."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The musician route is part of the bonfire objective and also leads into important tool progression.
+  </figcaption>
+</figure>
+
+This route connects several systems: bird item retrieval, Bathing House / beach progress, the axe unlock, and later firewood cleanup.
+
+---
+
+<h2 id="how-to-get-little-my-to-help">
+  How to get Little My to help
+</h2>
+
+Little My appears early, but her first snowball fight is mainly about the shovel.
+
+For the bonfire, the important part comes later around the pond / slide route. After the Joxter camp and reinforced mittens progress, you find Little My again. She challenges you to more snowball fights before agreeing to help.
+
+For detailed fight strategy, use the <Link href="/moomintroll/little-my-snowball-fight">Little My Snowball Fight Guide</Link>.
+
+---
+
+<h2 id="how-to-help-winter-beings">
+  How to help three winter beings
+</h2>
+
+<GuideTable
+  caption="Common winter being tasks for the Great Winter Bonfire."
+  columns={winterBeingColumns}
+  rows={winterBeingRows}
+/>
+
+The main objective asks for three winter being tasks. They do not all work the same way, but most follow a simple clue: cold needs warmth, darkness needs light, hunger needs food, and trapped beings need the right tool.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/winter-being-quest.webp"
+    alt="Moomintroll helping a winter being with warmth before the Great Winter Bonfire."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Winter being tasks often use nearby tools, fire, food, light, or simple route puzzles.
+  </figcaption>
+</figure>
+
+For a full list of optional tasks, use the <Link href="/moomintroll/side-quests">All Side Quests Guide</Link>.
+
+---
+
+<h2 id="sorry-oo-and-the-bonfire-route">
+  How Sorry-oo fits into the bonfire route
+</h2>
+
+<GuideTable
+  caption="Sorry-oo route steps in Moomintroll Winter's Warmth."
+  columns={sorryOoColumns}
+  rows={sorryOoRows}
+/>
+
+Sorry-oo is not just a side distraction. His route helps move the late game toward the sharp axe, herb cave, and final bonfire readiness.
+
+If you are stuck during Sorry-oo's section, check whether you need to carry him safely, put him down to use a tool, or continue toward the herb cave after receiving the whetstone.
+
+---
+
+<h2 id="bonfire-not-ready-troubleshooting">
+  Why is the Great Winter Bonfire not ready?
+</h2>
+
+<GuideTable
+  caption="Great Winter Bonfire troubleshooting."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+Most bonfire blockers come from an objective that looks finished emotionally but has not actually updated mechanically.
+
+The two most common causes are:
+
+- you helped a character but did not return for the follow-up conversation
+- you collected a lot of firewood but still need guest, musician, or winter being progress
+
+---
+
+<h2 id="what-to-do-before-lighting-the-bonfire">
+  What to do before lighting the bonfire
+</h2>
+
+<GuideTable
+  caption="Final cleanup checklist before lighting the Great Winter Bonfire."
+  columns={cleanupColumns}
+  rows={cleanupRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/bonfire-final-cleanup.webp"
+    alt="Moomintroll Winter's Warmth final cleanup moment before lighting the Great Winter Bonfire."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Treat the bonfire as your final cleanup checkpoint before the story moves into the ending stretch.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Final cleanup warning">
+Do not rush to light the Great Winter Bonfire if you still care about collectibles. Finish vase pieces, tool upgrades, and side quests first.
+</GuideCallout>
+
+---
+
+<h2 id="does-lighting-the-bonfire-start-the-ending">
+  Does lighting the bonfire start the ending?
+</h2>
+
+Lighting the Great Winter Bonfire starts the celebration and pushes the story into its final stretch.
+
+That does not mean every small interaction instantly disappears, but it is the natural point where the game changes from preparation into ending momentum.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/great-winter-bonfire-lit.webp"
+    alt="The Great Winter Bonfire lit in Moomintroll Winter's Warmth with everyone celebrating."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the Great Winter Bonfire is lit, the story shifts from preparation to celebration and ending momentum.
+  </figcaption>
+</figure>
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What does the Great Winter Bonfire require?
+
+The Great Winter Bonfire requires 125 firewood, five guests, one musician, and three winter being tasks.
+
+### Where does the Great Winter Bonfire quest start?
+
+It starts at the old bonfire site after Too-ticky asks you to meet her east of Moominhouse.
+
+### How do I get enough firewood?
+
+Follow the 125 firewood table above: collect early loose wood first, then use the shovel, axe, sharp axe, and side quests for the remaining cleanup.
+
+### Why can I not light the Great Winter Bonfire yet?
+
+You are probably missing one tracked requirement: firewood, guests, musician progress, or winter being progress. Use the troubleshooting table above to find the blocker.
+
+### How do I invite guests?
+
+Finish the character's problem, then return for the follow-up conversation. Some guest routes do not count immediately after the first interaction.
+
+### Who is the musician?
+
+The musician is recruited through the music / lunchbox route. Follow the bird toward the Bathing House / beach route and recover the lunchbox.
+
+### Do I need Little My for the bonfire?
+
+Yes. The first Little My fight gives the shovel, but the later pond fights move her bonfire involvement forward.
+
+### How many winter beings do I need to help?
+
+The main bonfire objective asks you to help three winter beings.
+
+### What do I do with Sorry-oo?
+
+Follow the forest and rescue route, help him through the wind section, then continue until you can get the whetstone, sharpen the axe, enter the herb cave, and gather herbs.
+
+### Should I collect all vase pieces before lighting the bonfire?
+
+Yes, that is the safest route if you care about completion.
+
+### Does lighting the Great Winter Bonfire start the ending?
+
+It starts the celebration and pushes the story toward the ending stretch, so finish important cleanup first.

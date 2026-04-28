@@ -1,0 +1,873 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const sideQuestColumns = [
+  { key: "quest", label: "Side Quest / Chain" },
+  { key: "requiredStatus", label: "Required / Optional" },
+  { key: "where", label: "Where It Starts" },
+  { key: "requirement", label: "Requirement" },
+  { key: "rewardOrProgress", label: "Reward / Progress" },
+];
+
+export const sideQuestRows = [
+  {
+    quest: "Winter being light quest",
+    requiredStatus: "Bonfire required",
+    where: "Near the bonfire approach / early outside routes",
+    requirement: "Matches",
+    rewardOrProgress:
+      "Counts toward the three winter being tasks required for the Great Winter Bonfire.",
+  },
+  {
+    quest: "Hungry winter being",
+    requiredStatus: "Bonfire / optional reward",
+    where: "Winter being route near bonfire or cave cleanup",
+    requirement: "Food item",
+    rewardOrProgress:
+      "Can count toward winter being progress and may reward firewood or open cleanup routes.",
+  },
+  {
+    quest: "Diary quest",
+    requiredStatus: "Completion recommended",
+    where: "Mountain / winter being route",
+    requirement: "Snowballs, bird retrieval, matches",
+    rewardOrProgress:
+      "Rewards a vase piece after the diary objective is fully completed.",
+  },
+  {
+    quest: "Snow fort / friend quest",
+    requiredStatus: "Completion recommended",
+    where: "Near Moominhouse after guest-chain progress",
+    requirement: "Reinforced mittens",
+    rewardOrProgress:
+      "Rewards a vase piece and helps with optional winter being / friend cleanup.",
+  },
+  {
+    quest: "Fillyjonk children rescue",
+    requiredStatus: "Main route / guest progress",
+    where: "Fillyjonk's house",
+    requirement: "Shovel, mittens",
+    rewardOrProgress:
+      "Moves the guest route forward and opens later family-chain objectives.",
+  },
+  {
+    quest: "Misabel briefcase and lights",
+    requiredStatus: "Guest progress",
+    where: "Outside Moominhouse / Moominhouse interior",
+    requirement: "Shovel, matches",
+    rewardOrProgress:
+      "Progresses the house guest chain and leads into the silver tray / Little My route.",
+  },
+  {
+    quest: "Musician lunchbox",
+    requiredStatus: "Bonfire required",
+    where: "Musician route after Moominhouse progress",
+    requirement: "Snowballs, route access",
+    rewardOrProgress:
+      "Progresses the musician objective and leads toward the axe route.",
+  },
+  {
+    quest: "Little My pond rematches",
+    requiredStatus: "Bonfire progress",
+    where: "Pond / slide route",
+    requirement: "Reinforced mittens and story progress",
+    rewardOrProgress:
+      "Moves Little My's Great Winter Bonfire involvement forward.",
+  },
+  {
+    quest: "Sorry-oo rescue and herbs",
+    requiredStatus: "Main route / late progress",
+    where: "Forest / late family route",
+    requirement: "Axe, whetstone, sharp axe",
+    rewardOrProgress:
+      "Leads to the herb cave, sharp axe usage, and late bonfire readiness.",
+  },
+  {
+    quest: "Message / letter winter being",
+    requiredStatus: "Completion recommended",
+    where: "Late cave or bottle / letter cleanup route",
+    requirement: "Sharp axe and exploration",
+    rewardOrProgress:
+      "Can reward a vase piece or count toward optional winter being cleanup.",
+  },
+  {
+    quest: "Hide-and-seek winter being",
+    requiredStatus: "Optional",
+    where: "Early outside / snowman routes",
+    requirement: "Usually later tools or return visits",
+    rewardOrProgress:
+      "Optional winter being interaction that may require revisiting after tools.",
+  },
+];
+
+export const dependencyColumns = [
+  { key: "chain", label: "Quest Chain" },
+  { key: "dependsOn", label: "Depends On" },
+  { key: "unlocks", label: "Unlocks / Leads To" },
+];
+
+export const dependencyRows = [
+  {
+    chain: "Little My → Shovel → Fillyjonk",
+    dependsOn: "Mittens and the first Little My snowball fight.",
+    unlocks:
+      "Shovel access, Fillyjonk's house, early guest progress, and snow cleanup.",
+  },
+  {
+    chain: "Fillyjonk → Misabel → House guest chain",
+    dependsOn:
+      "Rescuing Fillyjonk's children and bringing the family to Moominhouse.",
+    unlocks:
+      "Misabel's briefcase, house lights, drawing room closet scene, and silver tray route.",
+  },
+  {
+    chain: "Fillyjonk children → Sorry-oo → Herbs",
+    dependsOn:
+      "Later family / forest progress and the axe route.",
+    unlocks:
+      "Sorry-oo rescue, whetstone, sharp axe, herb cave, and late bonfire progress.",
+  },
+  {
+    chain: "Musician → Lunchbox → Axe",
+    dependsOn:
+      "Moominhouse guest progress and the bird lunchbox route.",
+    unlocks:
+      "Musician progress, axe access, and major firewood cleanup.",
+  },
+  {
+    chain: "Joxter / Hemulen → Reinforced Mittens",
+    dependsOn:
+      "Mid-story guest-chain progress and sturdy yarn.",
+    unlocks:
+      "Large snowball puzzles, snow fort quest, and later Little My progress.",
+  },
+  {
+    chain: "Winter beings → Bonfire readiness",
+    dependsOn:
+      "Finding winter beings and solving their warmth, food, light, or rescue tasks.",
+    unlocks:
+      "Three winter being tasks for the Great Winter Bonfire, plus optional rewards.",
+  },
+];
+
+export const diagnosisColumns = [
+  { key: "ifYouAreMissing", label: "If You Are Missing" },
+  { key: "checkFirst", label: "Check First" },
+  { key: "why", label: "Why" },
+];
+
+export const diagnosisRows = [
+  {
+    ifYouAreMissing: "One or two vase pieces",
+    checkFirst:
+      "Diary quest, snow fort / friend quest, message or letter winter being rewards.",
+    why:
+      "Several vase pieces come from quest rewards, not visible map pickups.",
+  },
+  {
+    ifYouAreMissing: "Winter being progress",
+    checkFirst:
+      "Light task, hungry winter being, diary quest, snow fort / friend quest, trapped friend tasks.",
+    why:
+      "The Great Winter Bonfire needs three qualifying winter being tasks.",
+  },
+  {
+    ifYouAreMissing: "Firewood",
+    checkFirst:
+      "Axe cleanup, sharp axe cave cleanup, winter being rewards, Little My's hidden stash.",
+    why:
+      "The last firewood usually comes from late tool-gated cleanup or small quest rewards.",
+  },
+  {
+    ifYouAreMissing: "Guest progress",
+    checkFirst:
+      "Fillyjonk follow-up, Misabel house chain, Little My pond rematches, musician lunchbox, Too-ticky invitation.",
+    why:
+      "Guest routes often require a second step after the first problem is solved.",
+  },
+  {
+    ifYouAreMissing: "Sorry-oo progress",
+    checkFirst:
+      "Wind route, whetstone, Too-ticky sharp axe upgrade, herb cave.",
+    why:
+      "Sorry-oo's route is tied to the late sharp axe and herb objective.",
+  },
+];
+
+export const rewardColumns = [
+  { key: "rewardType", label: "Reward Type" },
+  { key: "quests", label: "Quests To Check" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const rewardRows = [
+  {
+    rewardType: "Vase pieces",
+    quests:
+      "Diary quest, snow fort / friend quest, message or letter winter being rewards",
+    whyItMatters:
+      "Some vase pieces are quest rewards, not normal ground pickups.",
+  },
+  {
+    rewardType: "Firewood",
+    quests:
+      "Winter beings, Fillyjonk garden cleanup, Little My hidden stash, late cave cleanup",
+    whyItMatters:
+      "Side quests can provide the final top-up toward 125 firewood.",
+  },
+  {
+    rewardType: "Guest progress",
+    quests:
+      "Fillyjonk family route, Misabel house chain, Little My rematches, musician lunchbox",
+    whyItMatters:
+      "These routes help complete the five-guest and musician requirements for the Great Winter Bonfire.",
+  },
+  {
+    rewardType: "Tool progression",
+    quests:
+      "Little My shovel fight, musician lunchbox route, Sorry-oo herbs route",
+    whyItMatters:
+      "Several side-style quest chains unlock or require major tools.",
+  },
+];
+
+export const winterBeingColumns = [
+  { key: "taskType", label: "Winter Being Task" },
+  { key: "clue", label: "Clue" },
+  { key: "solution", label: "Likely Solution" },
+];
+
+export const winterBeingRows = [
+  {
+    taskType: "Light / darkness task",
+    clue: "The winter being mentions dark, scared, torch, or light.",
+    solution:
+      "Use matches to light nearby torches, candles, lamps, or fire spots.",
+  },
+  {
+    taskType: "Hungry winter being",
+    clue:
+      "The winter being says it feels empty, hungry, or needs food.",
+    solution:
+      "Search the nearby route or cave for a food item, then return.",
+  },
+  {
+    taskType: "Diary / bad book quest",
+    clue:
+      "The winter being says a bird took its book or diary.",
+    solution:
+      "Follow the bird route, recover the diary, then return and finish the follow-up.",
+  },
+  {
+    taskType: "Trapped friend",
+    clue:
+      "The winter being mentions a friend trapped by a tree, ice, or obstacle.",
+    solution:
+      "Return after getting the correct tool, usually axe or sharp axe.",
+  },
+  {
+    taskType: "Friend / snow fort quest",
+    clue:
+      "Two winter beings argue, mention friendship, or need a fort completed.",
+    solution:
+      "Use reinforced mittens to roll large snowballs, then finish the light interaction.",
+  },
+];
+
+export const questTimingColumns = [
+  { key: "stage", label: "Story Stage" },
+  { key: "sideQuestsToPrioritize", label: "Side Quests To Prioritize" },
+  { key: "why", label: "Why" },
+];
+
+export const questTimingRows = [
+  {
+    stage: "Early story",
+    sideQuestsToPrioritize:
+      "Light winter beings, first Fillyjonk route, Misabel briefcase, first Little My fight",
+    why:
+      "These open the main guest chain, shovel route, and early bonfire preparation.",
+  },
+  {
+    stage: "After shovel",
+    sideQuestsToPrioritize:
+      "Fillyjonk garden cleanup, snow-covered side routes, early winter beings",
+    why:
+      "The shovel reveals hidden firewood and opens routes that were blocked by deep snow.",
+  },
+  {
+    stage: "After reinforced mittens",
+    sideQuestsToPrioritize:
+      "Snow fort / friend quest, Little My pond route, large snowball puzzles",
+    why:
+      "Large snowballs are required for several optional and quest-related tasks.",
+  },
+  {
+    stage: "After axe",
+    sideQuestsToPrioritize:
+      "Dead tree routes, forest rescue route, Sorry-oo route, firewood cleanup",
+    why:
+      "The axe opens the largest set of mid-game cleanup paths.",
+  },
+  {
+    stage: "After sharp axe",
+    sideQuestsToPrioritize:
+      "Herb cave, late cave cleanup, letter / bottle winter being tasks",
+    why:
+      "Sharp axe routes often contain late collectibles, firewood, or quest rewards.",
+  },
+  {
+    stage: "Before Great Winter Bonfire",
+    sideQuestsToPrioritize:
+      "Diary quest, snow fort reward, winter being tasks, guest-chain follow-ups",
+    why:
+      "This is the safest time to finish side quest rewards and completion cleanup.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "A side quest did not update.",
+    likelyCause:
+      "The task may need a later tool, a return visit, or the next step in a longer chain.",
+    fix:
+      "Check the quest's required tool, then revisit the quest-giver or nearby route.",
+  },
+  {
+    problem: "A winter being is still waiting.",
+    likelyCause:
+      "You do not have the correct tool yet.",
+    fix:
+      "Return after getting the shovel, axe, sharp axe, reinforced mittens, or longer-lasting matches.",
+  },
+  {
+    problem: "The diary quest is stuck.",
+    likelyCause:
+      "You have not recovered the diary from the bird or have not finished the final interaction.",
+    fix:
+      "Find the bird-held diary, return it, then complete the diary follow-up.",
+  },
+  {
+    problem: "The snow fort is not complete.",
+    likelyCause:
+      "You are missing reinforced mittens or have not placed all large snowballs.",
+    fix:
+      "Get sturdy yarn, upgrade the mittens with Too-ticky, then finish the snowball placements.",
+  },
+  {
+    problem: "Sorry-oo's route is not progressing.",
+    likelyCause:
+      "You may need the whetstone, sharp axe, or herb cave objective.",
+    fix:
+      "Follow the forest rescue route, get the whetstone, sharpen the axe, then enter the herb cave.",
+  },
+  {
+    problem: "The Great Winter Bonfire still needs winter beings.",
+    likelyCause:
+      "You have not finished three qualifying winter being tasks.",
+    fix:
+      "Prioritize light, food, trapped-friend, diary, or snow fort winter being tasks.",
+  },
+];
+
+export const beforeBonfireColumns = [
+  { key: "check", label: "Before Lighting The Bonfire" },
+  { key: "why", label: "Why It Matters" },
+  { key: "relatedGuide", label: "Related Guide" },
+];
+
+export const beforeBonfireRows = [
+  {
+    check: "Finish winter being tasks",
+    why:
+      "The bonfire objective requires three winter being tasks, and extra ones can give useful rewards.",
+    relatedGuide: "Great Winter Bonfire Guide",
+  },
+  {
+    check: "Turn in reward quests",
+    why:
+      "Some vase pieces come from quest rewards, not map pickups.",
+    relatedGuide: "All 25 Vase Piece Locations",
+  },
+  {
+    check: "Finish guest-chain follow-ups",
+    why:
+      "Some guest routes only count after a return conversation.",
+    relatedGuide: "Great Winter Bonfire Guide",
+  },
+  {
+    check: "Clean up sharp axe routes",
+    why:
+      "Late cave and ice paths can hide side quest items, firewood, and collectibles.",
+    relatedGuide: "All Tool Upgrades Guide",
+  },
+  {
+    check: "Check Little My and Sorry-oo routes",
+    why:
+      "Both are connected to late bonfire progress.",
+    relatedGuide: "Little My / Great Winter Bonfire",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Moomintroll Winter's Warmth side quests are a mix of required quest chains and optional completion tasks.** Some are needed for Great Winter Bonfire progress, while others mainly reward vase pieces, firewood, tool access, or cleanup progress.
+
+Use the checklist to see what is required, the dependency table to understand what unlocks what, and the quick diagnosis table if you are missing a reward or objective near the end.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/side-quests-overview.webp"
+    alt="Moomintroll Winter's Warmth side quests overview showing the quest and inventory interface."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Side quests in Moomintroll Winter's Warmth often overlap with main progress, collectibles, firewood, and Great Winter Bonfire requirements.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="all-side-quests-checklist">
+  All side quests checklist
+</h2>
+
+<GuideTable
+  caption="Important side quests and quest chains in Moomintroll Winter's Warmth."
+  columns={sideQuestColumns}
+  rows={sideQuestRows}
+/>
+
+Moomintroll Winter's Warmth does not always separate side quests from main progress cleanly. Some objectives behave like optional tasks, but still help with guests, winter beings, firewood, tools, or collectibles.
+
+Use the **Required / Optional** column to decide what matters for your current run. If you only want to finish the main story, prioritize bonfire-required and guest-progress routes. If you want completion, also finish reward quests and optional winter being cleanup.
+
+<GuideCallout title="Side quest rule">
+Always check for a follow-up after solving a side quest. Several rewards and objective updates happen after the final conversation, not at the moment you solve the puzzle.
+</GuideCallout>
+
+---
+
+<h2 id="quest-dependency-chains">
+  Side quest dependency chains
+</h2>
+
+<GuideTable
+  caption="How major side quest chains depend on each other."
+  columns={dependencyColumns}
+  rows={dependencyRows}
+/>
+
+This table explains **unlock order and dependencies**. For when to prioritize each route during a normal playthrough, use the **Best time to finish side quests** table below.
+
+The most important dependency chain is:
+
+**Little My's first fight → shovel → Fillyjonk → Misabel → family follow-ups → Sorry-oo → whetstone → sharp axe → herb cave**
+
+---
+
+<h2 id="quick-missing-quest-diagnosis">
+  Quick diagnosis: what are you missing?
+</h2>
+
+<GuideTable
+  caption="Fast side quest diagnosis for missing rewards or progress."
+  columns={diagnosisColumns}
+  rows={diagnosisRows}
+/>
+
+Use this table if you are near the end and something still feels incomplete.
+
+It is faster than rechecking every side quest from the start. Most late missing progress is tied to reward quests, winter beings, sharp axe cleanup, or a character route that still needs one more step.
+
+---
+
+<h2 id="side-quest-rewards">
+  Which side quests reward vase pieces, firewood, or bonfire progress?
+</h2>
+
+<GuideTable
+  caption="Side quest rewards and why they matter."
+  columns={rewardColumns}
+  rows={rewardRows}
+/>
+
+The most important thing to understand is that not every reward is a normal pickup.
+
+If you are missing one vase piece, do not only search the ground. Recheck side quest rewards, especially the diary quest and snow fort / friend quest.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/side-quest-reward.webp"
+    alt="Moomintroll Winter's Warmth side quest reward giving a piece of Moominmamma's vase."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some side quests reward vase pieces, so completion cleanup is not only about searching the map.
+  </figcaption>
+</figure>
+
+For collectible cleanup, use the <Link href="/moomintroll/vase-piece-locations">All 25 Vase Piece Locations guide</Link>.
+
+---
+
+<h2 id="winter-being-side-quests">
+  Winter being side quests
+</h2>
+
+<GuideTable
+  caption="Common winter being side quest types."
+  columns={winterBeingColumns}
+  rows={winterBeingRows}
+/>
+
+Winter being tasks are short, but they matter because the Great Winter Bonfire requires three qualifying winter being tasks. Use the clue in the dialogue, then match it to the likely solution in the table.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/winter-being-quest.webp"
+    alt="Moomintroll helping a winter being with a light or torch side quest."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Winter being quests usually use nearby tools, fire, food, light, or a simple route puzzle.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Winter being tip">
+If a winter being does not progress, do not assume the quest is broken. You may need a later tool or a different nearby interaction.
+</GuideCallout>
+
+---
+
+<h2 id="diary-quest">
+  Diary quest
+</h2>
+
+The diary quest begins when a winter being says a bird took its bad book or secret book.
+
+The route is:
+
+1. talk to the winter being
+2. learn that a bird took the diary
+3. follow the bird route
+4. recover the mysterious diary
+5. return to the winter being
+6. finish the diary follow-up
+7. collect the reward
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/diary-quest.webp"
+    alt="Moomintroll Winter's Warmth diary quest with a winter being whose book was taken by a bird."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The diary quest starts when a winter being tells you that a bird took its book.
+  </figcaption>
+</figure>
+
+This is one of the most important side quests because it can reward a vase piece. If your vase counter is stuck near the end, check whether you fully finished this quest.
+
+---
+
+<h2 id="snow-fort-friend-quest">
+  Snow fort / friend quest
+</h2>
+
+The snow fort / friend quest happens later, after you have reinforced mittens and can roll large snowballs.
+
+The route is:
+
+1. find the winter beings near the snow fort
+2. listen to their friendship problem
+3. roll the missing large snowballs into place
+4. light the fort or final interaction if needed
+5. talk to them again
+6. collect the reward
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/snow-fort-quest.webp"
+    alt="Moomintroll Winter's Warmth snow fort side quest with large snowball placements."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The snow fort quest needs reinforced mittens because it uses large snowballs.
+  </figcaption>
+</figure>
+
+This quest is easy to miss because it looks like a small character interaction, but it can give a vase piece reward.
+
+If you cannot move the large snowballs, use the <Link href="/moomintroll/tool-upgrades">All Tool Upgrades Guide</Link> and get reinforced mittens first.
+
+---
+
+<h2 id="fillyjonk-children-quest">
+  Fillyjonk children quest chain
+</h2>
+
+Fillyjonk's family route starts when the path to her house is blocked by deep snow and her children are in danger.
+
+The route is:
+
+1. get the shovel from Little My
+2. clear the deep snow to reach Fillyjonk's house
+3. rescue the children from the snow and house danger
+4. bring the family toward Moominhouse
+5. continue later follow-up steps such as the porcelain cat and children rescue routes
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/fillyjonk-children.webp"
+    alt="Moomintroll rescuing Fillyjonk's children from snow in Moomintroll Winter's Warmth."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fillyjonk's children route starts early but continues through several follow-up objectives.
+  </figcaption>
+</figure>
+
+This route matters because it connects to guest progress, Misabel's house chain, later forest rescue, Sorry-oo, the whetstone, and sharp axe progress.
+
+For the main route order, use the <Link href="/moomintroll">Complete Walkthrough & Guide</Link>.
+
+---
+
+<h2 id="misabel-briefcase-and-lights">
+  Misabel briefcase and lights
+</h2>
+
+Misabel's route starts outside Moominhouse after Fillyjonk and her children come inside.
+
+The route is:
+
+1. hear crying outside Moominhouse
+2. talk to Misabel
+3. search the nearby snow for her briefcase
+4. return the briefcase and bring her inside
+5. relight the lamps after she turns the house dark
+6. listen for crying after the lights are restored
+7. check the drawing room
+8. find Misabel hiding in the closet
+9. talk to her about the Great Winter Bonfire
+10. continue into the silver tray / Little My route
+
+The easiest place to get stuck is after relighting the house. Once the lights are back on, do not keep searching random rooms. Follow the crying sound to the drawing room and check the closet.
+
+This quest chain matters because it pushes the Moominhouse guest route forward and leads into later objectives.
+
+<GuideCallout title="Misabel tip">
+If Misabel seems missing after the lights are restored, check the drawing room closet. The crying sound is the clue.
+</GuideCallout>
+
+---
+
+<h2 id="musician-lunchbox-quest">
+  Musician lunchbox quest
+</h2>
+
+The musician lunchbox quest is part side quest, part main bonfire requirement.
+
+The musician can help with the Great Winter Bonfire, but a bird takes the lunchbox. Follow the bird toward the Bathing House / beach route and recover the lunchbox.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/musician-lunchbox.webp"
+    alt="Moomintroll Winter's Warmth musician lunchbox side quest with the bird route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The musician lunchbox quest progresses the bonfire objective and leads toward the axe route.
+  </figcaption>
+</figure>
+
+This quest matters because it connects to musician progress, bird item retrieval, Bathing House / beach routes, axe unlock, and firewood cleanup.
+
+For the bonfire requirements, use the <Link href="/moomintroll/great-winter-bonfire">Great Winter Bonfire Guide</Link>.
+
+---
+
+<h2 id="little-my-side-quest-chain">
+  Little My side quest chain
+</h2>
+
+Little My has two important quest moments.
+
+The first is the snowball fight for Moominmamma's shovel. This opens the route to Fillyjonk and several snow cleanup areas.
+
+The later part is the pond / slide route. These rematches help move Little My's bonfire involvement forward.
+
+You should complete Little My's route if:
+
+- you need the shovel
+- deep snow blocks your progress
+- the bonfire still needs guest or character progress
+- you are cleaning up shovel-gated vase pieces or firewood
+
+For fight strategy, use the <Link href="/moomintroll/little-my-snowball-fight">Little My Snowball Fight Guide</Link>.
+
+---
+
+<h2 id="sorry-oo-quest-chain">
+  Sorry-oo quest chain
+</h2>
+
+Sorry-oo's route appears later in the family / forest section and becomes important for late-game progression.
+
+The route is:
+
+1. progress the Fillyjonk family and children route
+2. find Sorry-oo during the forest / rescue chain
+3. guide or carry Sorry-oo through the dangerous wind route
+4. continue when Sorry-oo becomes sick
+5. receive the herb cave objective
+6. get the whetstone from Fillyjonk's children
+7. sharpen the axe with Too-ticky
+8. enter the herb cave and gather herbs
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/sorry-oo-quest.webp"
+    alt="Moomintroll Winter's Warmth Sorry-oo herb rescue quest with the cave and whetstone route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Sorry-oo's route leads into the whetstone, sharp axe, herb cave, and late bonfire progress.
+  </figcaption>
+</figure>
+
+If this quest feels stuck, check whether you have the sharp axe. The herb cave route depends on getting the whetstone and returning to Too-ticky.
+
+---
+
+<h2 id="best-time-to-finish-side-quests">
+  Best time to finish side quests
+</h2>
+
+<GuideTable
+  caption="When to finish side quests in Moomintroll Winter's Warmth."
+  columns={questTimingColumns}
+  rows={questTimingRows}
+/>
+
+This table is about **timing**, not dependencies. Use it to decide when a quest is worth prioritizing during a normal route.
+
+The best cleanup point is after you have the sharp axe and reinforced mittens, but before lighting the Great Winter Bonfire.
+
+At that point, you can finish most blocked routes, large snowball puzzles, cave paths, reward turn-ins, and winter being tasks without needing to backtrack repeatedly.
+
+---
+
+<h2 id="side-quest-troubleshooting">
+  Side quest troubleshooting
+</h2>
+
+<GuideTable
+  caption="Common side quest problems and fixes."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+Most side quest problems are caused by one of three things: a missing tool, an unfinished follow-up, or a longer quest chain that has not reached its next step.
+
+---
+
+<h2 id="before-great-winter-bonfire">
+  What to finish before the Great Winter Bonfire
+</h2>
+
+<GuideTable
+  caption="Side quest cleanup before lighting the Great Winter Bonfire."
+  columns={beforeBonfireColumns}
+  rows={beforeBonfireRows}
+/>
+
+Do not treat every side quest as optional if you care about completion.
+
+The Great Winter Bonfire requires winter being progress, and several side quests affect vase pieces, firewood, guest routes, or late tools.
+
+<GuideCallout title="Before the bonfire">
+Before lighting the Great Winter Bonfire, finish reward quests first. The diary quest, snow fort, winter beings, and sharp axe routes are especially important for completion cleanup.
+</GuideCallout>
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Are side quests required in Moomintroll Winter's Warmth?
+
+Some are required for main progress, especially guest routes, winter being tasks, Little My's route, the musician route, and Sorry-oo's route. Others are optional but useful for vase pieces, firewood, and completion.
+
+### Which side quests can I skip?
+
+For a story-focused route, you can skip most completion-only reward quests. Do not skip bonfire-required winter being tasks, guest routes, the musician lunchbox route, Little My's later route, or Sorry-oo's late route.
+
+### How many winter beings do I need to help?
+
+The Great Winter Bonfire objective asks for three winter being tasks, but helping extra winter beings can still be useful for rewards and cleanup.
+
+### Which side quests reward vase pieces?
+
+The diary quest, snow fort / friend quest, and some winter being reward quests can give vase pieces. If you are missing a vase piece, check quest rewards before rechecking every map route.
+
+### Why did my side quest not complete?
+
+Check the side quest troubleshooting section above. Most blockers are missing tools, unfinished follow-ups, or longer quest chains.
+
+### How do I finish the diary quest?
+
+Recover the diary from the bird route, return it to the winter being, then finish the final diary interaction.
+
+### How do I complete the snow fort quest?
+
+You need reinforced mittens to roll large snowballs. Place the missing snowballs, finish the light interaction if needed, then collect the reward.
+
+### Where is Misabel hiding?
+
+After you return her briefcase and relight the house, follow the crying sound to the drawing room and check the closet.
+
+### Is Little My's first fight a side quest?
+
+It works like a progression quest. The first fight gives you the shovel, while the later pond rematches help move her bonfire involvement forward.
+
+### What do I do with Sorry-oo?
+
+Use the Sorry-oo quest chain section above. The route connects forest rescue, the wind section, whetstone, sharp axe, herb cave, and herbs.
+
+### Should I finish side quests before lighting the Great Winter Bonfire?
+
+Yes, especially if you care about completion. Finish vase piece rewards, winter being tasks, tool-gated routes, and guest-chain follow-ups first.
+
+### What should I check if I am stuck at the end?
+
+Use the quick diagnosis table above. Missing endgame progress is usually tied to reward quests, winter beings, firewood cleanup, guest follow-ups, Little My, or Sorry-oo.

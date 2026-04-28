@@ -1,0 +1,1026 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const achievementColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "requirement", label: "Requirement" },
+  { key: "earliestPossible", label: "Earliest Possible" },
+  { key: "type", label: "Type" },
+  { key: "missableRisk", label: "Missable Risk" },
+];
+
+export const achievementRows = [
+  {
+    achievement: "Darkness, Meet Your Match!",
+    requirement: "Pick up the matches and light your first match during the opening.",
+    earliestPossible: "Opening / Moominhouse",
+    type: "Story / early tool",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Catch!",
+    requirement: "Throw a snowball at any character after getting the mittens.",
+    earliestPossible: "After mittens",
+    type: "Snowball action",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Great Shot",
+    requirement: "Throw a snowball at every snowball-valid character or character group.",
+    earliestPossible: "Late cleanup",
+    type: "Completion / character interaction",
+    missableRisk: "Medium",
+  },
+  {
+    achievement: "Cold Critter",
+    requirement: "Throw a snowball at the squirrel when you get a valid chance.",
+    earliestPossible: "Early snowball route",
+    type: "Early interaction",
+    missableRisk: "Medium",
+  },
+  {
+    achievement: "Warming Up",
+    requirement: "Restart the furnace and warm Moominhouse.",
+    earliestPossible: "Opening / basement",
+    type: "Story",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Frozen Farewell",
+    requirement: "Progress the early squirrel and storm sequence.",
+    earliestPossible: "Early story",
+    type: "Story",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Nicest of Neighbours",
+    requirement: "Help Fillyjonk and her family during the first major guest route.",
+    earliestPossible: "After shovel",
+    type: "Story / guest route",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Silver Linings",
+    requirement: "Complete the silver tray chase route involving Little My.",
+    earliestPossible: "After Misabel route",
+    type: "Story / Little My route",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Little Miss Moominvalley",
+    requirement: "Progress Misabel's makeover / confidence route.",
+    earliestPossible: "Moominhouse guest chain",
+    type: "Story / Misabel route",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Cozy Camper",
+    requirement: "Meet Joxter and progress his camp route.",
+    earliestPossible: "Mid story",
+    type: "Story",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Family Reunion",
+    requirement: "Find and rescue Fillyjonk's children.",
+    earliestPossible: "Forest family route",
+    type: "Story / Fillyjonk children",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Part of the Pack",
+    requirement: "Save Sorry-oo during the forest / wolves route.",
+    earliestPossible: "Late family route",
+    type: "Story / Sorry-oo route",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Firestarter",
+    requirement: "Light the Great Winter Bonfire after completing its requirements.",
+    earliestPossible: "Late story",
+    type: "Main story",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Darkest Depths Delver",
+    requirement: "Enter the late underground / depths route after the bonfire sequence.",
+    earliestPossible: "After Great Winter Bonfire",
+    type: "Story / late route",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "What Friends Are For",
+    requirement: "Complete the late rescue sequence involving Too-ticky.",
+    earliestPossible: "Late story / underground",
+    type: "Story / late route",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Winter's Warmth",
+    requirement: "Complete the game.",
+    earliestPossible: "Ending",
+    type: "Ending",
+    missableRisk: "Low",
+  },
+  {
+    achievement: "Spelunker",
+    requirement: "Light all candles in the cave / underground routes.",
+    earliestPossible: "Herb cave / late cave",
+    type: "Cave completion",
+    missableRisk: "Medium",
+  },
+  {
+    achievement: "All Fired Up",
+    requirement: "Light all bonfires and small fire spots.",
+    earliestPossible: "Late cleanup",
+    type: "Winter being / fire cleanup",
+    missableRisk: "Medium",
+  },
+  {
+    achievement: "Friend of Winter",
+    requirement: "Help every winter being, not just the three needed for the bonfire.",
+    earliestPossible: "Late cleanup",
+    type: "Side quest completion",
+    missableRisk: "Medium",
+  },
+  {
+    achievement: "You've Got Mail!",
+    requirement: "Read or find every letter / note in the letter chain and related routes.",
+    earliestPossible: "Late cleanup",
+    type: "Collectible",
+    missableRisk: "Medium",
+  },
+  {
+    achievement: "Upgrades!",
+    requirement: "Improve every tool through Too-ticky.",
+    earliestPossible: "After scrap metal",
+    type: "Tool completion",
+    missableRisk: "Medium",
+  },
+  {
+    achievement: "Moominmamma's Favorite",
+    requirement: "Collect all 25 vase pieces and fix Moominmamma's vase.",
+    earliestPossible: "Late cleanup",
+    type: "Collectible completion",
+    missableRisk: "Medium",
+  },
+  {
+    achievement: "Snufkin Would Be Proud",
+    requirement: "Complete all other achievements.",
+    earliestPossible: "After all achievements",
+    type: "100% completion",
+    missableRisk: "Depends on cleanup",
+  },
+];
+
+export const completionColumns = [
+  { key: "category", label: "100% Category" },
+  { key: "whatToFinish", label: "What To Finish" },
+  { key: "relatedGuide", label: "Related Guide" },
+];
+
+export const completionRows = [
+  {
+    category: "Main story",
+    whatToFinish:
+      "Complete the full story route through the Great Winter Bonfire, underground, Too-ticky rescue, and ending.",
+    relatedGuide: "Complete Walkthrough",
+  },
+  {
+    category: "Vase pieces",
+    whatToFinish:
+      "Collect all 25 vase pieces and fix Moominmamma's vase.",
+    relatedGuide: "All 25 Vase Piece Locations",
+  },
+  {
+    category: "Winter beings",
+    whatToFinish:
+      "Help every winter being, not just the three required for the bonfire.",
+    relatedGuide: "Side Quests Guide",
+  },
+  {
+    category: "Letters",
+    whatToFinish:
+      "Complete the full letter / note chain, including mailbox notes, water notes, mountain notes, forest notes, cave notes, and late follow-ups.",
+    relatedGuide: "This guide",
+  },
+  {
+    category: "Tools",
+    whatToFinish:
+      "Upgrade all tools, including matches, mittens, axe, and shovel.",
+    relatedGuide: "All Tool Upgrades Guide",
+  },
+  {
+    category: "Cave candles",
+    whatToFinish:
+      "Light every candle in the herb cave, cave side rooms, and late cave / underground routes.",
+    relatedGuide: "This guide",
+  },
+  {
+    category: "Bonfires",
+    whatToFinish:
+      "Light every small bonfire or fire spot, not only the Great Winter Bonfire.",
+    relatedGuide: "Great Winter Bonfire Guide",
+  },
+  {
+    category: "Snowball targets",
+    whatToFinish:
+      "Throw a snowball at every valid character or character group before the final stretch.",
+    relatedGuide: "This guide",
+  },
+];
+
+export const missableColumns = [
+  { key: "thing", label: "Easy To Miss" },
+  { key: "why", label: "Why Players Miss It" },
+  { key: "howToAvoidMissingIt", label: "How To Avoid Missing It" },
+];
+
+export const missableRows = [
+  {
+    thing: "Great Shot",
+    why:
+      "The game does not give you a visible checklist for every snowball target.",
+    howToAvoidMissingIt:
+      "Use the snowball target checklist below and hit every character or character group when possible.",
+  },
+  {
+    thing: "Cold Critter",
+    why:
+      "The squirrel appears early, before many players think about achievements.",
+    howToAvoidMissingIt:
+      "Throw a snowball at the squirrel during an early valid snowball opportunity.",
+  },
+  {
+    thing: "Spelunker",
+    why:
+      "Cave candles blend into the background while you are following the herb or underground route.",
+    howToAvoidMissingIt:
+      "Use the cave candle checklist below and sweep every cave room before leaving.",
+  },
+  {
+    thing: "All Fired Up",
+    why:
+      "Small bonfires for winter beings can look like normal scenery.",
+    howToAvoidMissingIt:
+      "Light every small fire spot you find while helping winter beings.",
+  },
+  {
+    thing: "Friend of Winter",
+    why:
+      "The Great Winter Bonfire only requires three winter being tasks, but the achievement asks for every winter being.",
+    howToAvoidMissingIt:
+      "Do not stop after three. Keep checking winter beings before the ending stretch.",
+  },
+  {
+    thing: "You've Got Mail!",
+    why:
+      "Letters and notes are spread across mailboxes, water routes, mountain clues, forest clues, and cave routes.",
+    howToAvoidMissingIt:
+      "Follow the letter route checklist below instead of searching randomly.",
+  },
+  {
+    thing: "Upgrades!",
+    why:
+      "Scrap metal and other upgrade items can be found late, after you may think tool upgrades are finished.",
+    howToAvoidMissingIt:
+      "Bring every odd material to Too-ticky and confirm all tools are upgraded.",
+  },
+  {
+    thing: "Moominmamma's Favorite",
+    why:
+      "Some vase pieces are side quest rewards, not ground pickups.",
+    howToAvoidMissingIt:
+      "Finish diary quest, snow fort quest, winter being rewards, and all 25 vase pieces.",
+  },
+];
+
+export const letterColumns = [
+  { key: "step", label: "Letter / Note Step" },
+  { key: "whereToCheck", label: "Where To Check" },
+  { key: "clueOrTrigger", label: "Clue / Trigger" },
+  { key: "tip", label: "Tip" },
+];
+
+export const letterRows = [
+  {
+    step: "First mailbox letter",
+    whereToCheck: "Mailbox near Moominhouse after getting the shovel",
+    clueOrTrigger:
+      "You can dig out the nearby route and check the mailbox after the first Little My fight.",
+    tip:
+      "This starts the friend-note chain. Do not ignore the mailbox after getting the shovel.",
+  },
+  {
+    step: "Pond / early water letter",
+    whereToCheck: "Pond route after reinforced mittens / mid-story access",
+    clueOrTrigger:
+      "A note points you toward where sea and timbers meet.",
+    tip:
+      "Check the pond and bridge routes when the story sends you toward Little My and larger snowball puzzles.",
+  },
+  {
+    step: "Message in a bottle / water letter",
+    whereToCheck: "Water or shore route near the Bathing House / sea path",
+    clueOrTrigger:
+      "A winter being mentions a missing family letter and a bottle.",
+    tip:
+      "Look along the water before leaving the area. This clue points toward the mountain.",
+  },
+  {
+    step: "Mountain summit note",
+    whereToCheck: "Mountain top / high viewpoint",
+    clueOrTrigger:
+      "The previous letter mentions where land and sky meet.",
+    tip:
+      "Climb to the high viewpoint and check the summit route carefully.",
+  },
+  {
+    step: "Icy pond note",
+    whereToCheck: "Icy pond / lower pond route",
+    clueOrTrigger:
+      "The mountain note points toward icy waters.",
+    tip:
+      "Search near the pond edge and sliding route, not only the main path.",
+  },
+  {
+    step: "Silent branches note",
+    whereToCheck: "Forest route where the silent branches part",
+    clueOrTrigger:
+      "The icy pond note points toward silent branches.",
+    tip:
+      "Check the forest path near branches, torches, and winter being cleanup.",
+  },
+  {
+    step: "Dancing shadow / cave depths note",
+    whereToCheck: "Cave depths / shadow creature route",
+    clueOrTrigger:
+      "The forest note points toward a shadow or dancing shadow.",
+    tip:
+      "Search the deeper cave area and side paths before leaving.",
+  },
+  {
+    step: "Return mailbox letter",
+    whereToCheck: "Return to the original mailbox / letterbox",
+    clueOrTrigger:
+      "The final clue points back to where the letter chain began.",
+    tip:
+      "This can reward a vase piece, so do not stop after the cave note.",
+  },
+  {
+    step: "Mabel / Misabel letter",
+    whereToCheck: "Moominhouse / Misabel-related follow-up",
+    clueOrTrigger:
+      "A tear-stained letter appears during or after Misabel's route.",
+    tip:
+      "Check the house again after the Misabel chain progresses.",
+  },
+  {
+    step: "Post-bonfire mailbox",
+    whereToCheck: "Mailbox after the Great Winter Bonfire / late route",
+    clueOrTrigger:
+      "A winter being mentions a letter in the mailbox.",
+    tip:
+      "Check the mailbox again after the celebration if the achievement has not unlocked.",
+  },
+];
+
+export const candleColumns = [
+  { key: "area", label: "Cave Candle Area" },
+  { key: "whenToCheck", label: "When To Check" },
+  { key: "whatToLookFor", label: "What To Look For" },
+];
+
+export const candleRows = [
+  {
+    area: "Cave entrance",
+    whenToCheck: "When entering the cave for lamp oil or herbs",
+    whatToLookFor:
+      "Candles near the entrance, first lamps, and early cave side objects.",
+  },
+  {
+    area: "Lamp oil room",
+    whenToCheck: "Before returning to Too-ticky with lamp oil",
+    whatToLookFor:
+      "Candles near containers, boxes, and side corners.",
+  },
+  {
+    area: "Herb cave main rooms",
+    whenToCheck: "During the Sorry-oo herbs route",
+    whatToLookFor:
+      "Candles near herbs, ice blocks, snowball spots, and shadow creature paths.",
+  },
+  {
+    area: "Side rooms and bridges",
+    whenToCheck: "Before following the main route out",
+    whatToLookFor:
+      "Candles near rickety bridges, side exits, and optional firewood paths.",
+  },
+  {
+    area: "Late cave / underground",
+    whenToCheck: "After the Great Winter Bonfire and late rescue sequence",
+    whatToLookFor:
+      "Any candle or fire spot in darker underground rooms.",
+  },
+];
+
+export const snowballTargetColumns = [
+  { key: "target", label: "Snowball Target" },
+  { key: "whenToTry", label: "When To Try" },
+  { key: "easyToMiss", label: "Easy To Miss?" },
+];
+
+export const snowballTargetRows = [
+  {
+    target: "Squirrel",
+    whenToTry: "Early snow route after getting mittens",
+    easyToMiss: "Yes — early and easy to forget.",
+  },
+  {
+    target: "Ancestor",
+    whenToTry: "Bathing House / Moominhouse early route",
+    easyToMiss: "Yes — appears before you think about Great Shot.",
+  },
+  {
+    target: "Too-ticky",
+    whenToTry: "Bathing House or upgrade visits",
+    easyToMiss: "Medium — available often, but easy to overlook.",
+  },
+  {
+    target: "Little My",
+    whenToTry: "First shovel fight and later pond rematches",
+    easyToMiss: "Low — she is part of required fights.",
+  },
+  {
+    target: "Fillyjonk",
+    whenToTry: "Fillyjonk house / Moominhouse guest route",
+    easyToMiss: "Medium.",
+  },
+  {
+    target: "Fillyjonk's children",
+    whenToTry: "Children rescue and house guest chain",
+    easyToMiss: "Yes — check each child if the game allows individual hits.",
+  },
+  {
+    target: "Misabel",
+    whenToTry: "Moominhouse guest chain",
+    easyToMiss: "Medium — do it after she joins the house route.",
+  },
+  {
+    target: "Hemulen",
+    whenToTry: "Guest-chain / reinforced mittens route",
+    easyToMiss: "Medium.",
+  },
+  {
+    target: "Joxter",
+    whenToTry: "Joxter camp route",
+    easyToMiss: "Yes — he leaves after the camp sequence.",
+  },
+  {
+    target: "Musician",
+    whenToTry: "Musician / lunchbox route",
+    easyToMiss: "Medium.",
+  },
+  {
+    target: "Sorry-oo",
+    whenToTry: "Forest rescue / wind route",
+    easyToMiss: "Yes — story movement can distract you.",
+  },
+  {
+    target: "Winter beings",
+    whenToTry: "Any winter being task",
+    easyToMiss: "Yes — hit at least one of each unique winter being you can interact with.",
+  },
+  {
+    target: "Shadow / cave friend",
+    whenToTry: "Herb cave or late cave route",
+    easyToMiss: "Yes — appears during cave objectives.",
+  },
+  {
+    target: "Late party characters",
+    whenToTry: "Great Winter Bonfire celebration",
+    easyToMiss: "Yes — use the party as a final snowball sweep.",
+  },
+];
+
+export const routeColumns = [
+  { key: "order", label: "Order" },
+  { key: "goal", label: "Goal" },
+  { key: "why", label: "Why This Order Works" },
+];
+
+export const routeRows = [
+  {
+    order: "1",
+    goal: "Play the story normally until the Great Winter Bonfire objective opens.",
+    why:
+      "Many achievements are story-based, and the bonfire objective unlocks the main completion structure.",
+  },
+  {
+    order: "2",
+    goal: "Unlock core tools: mittens, shovel, reinforced mittens, axe, and sharp axe.",
+    why:
+      "Most optional cleanup depends on tool access.",
+  },
+  {
+    order: "3",
+    goal: "Finish guest and side quest chains.",
+    why:
+      "Fillyjonk, Misabel, Little My, musician, Sorry-oo, and winter beings connect to story and achievements.",
+  },
+  {
+    order: "4",
+    goal: "Finish letters, cave candles, small bonfires, and winter beings.",
+    why:
+      "These are the most likely achievements to remain incomplete near the end.",
+  },
+  {
+    order: "5",
+    goal: "Collect all 25 vase pieces and fix the vase.",
+    why:
+      "The vase is the largest collectible objective and can require late side quest rewards.",
+  },
+  {
+    order: "6",
+    goal: "Upgrade every tool with Too-ticky.",
+    why:
+      "The final tool upgrade can be easy to overlook during late cleanup.",
+  },
+  {
+    order: "7",
+    goal: "Do one last snowball check for Great Shot.",
+    why:
+      "Throwing a snowball at every character is easier to miss than story achievements.",
+  },
+  {
+    order: "8",
+    goal: "Light the Great Winter Bonfire and finish the ending route.",
+    why:
+      "This completes the main story and pushes you toward the final achievements.",
+  },
+];
+
+export const finalCheckColumns = [
+  { key: "ifMissing", label: "If You Are Missing" },
+  { key: "checkFirst", label: "Check First" },
+  { key: "relatedGuide", label: "Related Guide" },
+];
+
+export const finalCheckRows = [
+  {
+    ifMissing: "One vase achievement",
+    checkFirst:
+      "Diary quest, snow fort / friend quest, bird drops, sharp axe cave pieces, and side quest reward pieces.",
+    relatedGuide: "All 25 Vase Piece Locations",
+  },
+  {
+    ifMissing: "One winter being achievement",
+    checkFirst:
+      "Cold, hungry, scared, trapped, diary, snow fort, and hide-and-seek winter beings.",
+    relatedGuide: "Side Quests Guide",
+  },
+  {
+    ifMissing: "Tool upgrade achievement",
+    checkFirst:
+      "Lamp oil, sturdy yarn, whetstone, scrap metal, and Too-ticky upgrades.",
+    relatedGuide: "All Tool Upgrades Guide",
+  },
+  {
+    ifMissing: "Letter achievement",
+    checkFirst:
+      "Mailbox, water / bottle letter, mountain note, icy pond note, forest note, cave depths note, return mailbox, and Misabel / Mabel letter.",
+    relatedGuide: "This guide",
+  },
+  {
+    ifMissing: "Candle / bonfire achievement",
+    checkFirst:
+      "Herb cave candles, underground candles, winter being bonfires, and small fire spots.",
+    relatedGuide: "This guide",
+  },
+  {
+    ifMissing: "Snowball achievement",
+    checkFirst:
+      "Squirrel, Ancestor, Joxter, musician, Fillyjonk's children, winter beings, Sorry-oo, cave friend, and late party characters.",
+    relatedGuide: "This guide",
+  },
+  {
+    ifMissing: "Final 100% achievement",
+    checkFirst:
+      "Any achievement except Snufkin Would Be Proud. It should unlock after the rest are complete.",
+    relatedGuide: "This guide",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Moomintroll Winter's Warmth has 23 achievements. Most unlock through story progress, but 100% completion also requires all vase pieces, every winter being, every letter, all tool upgrades, all cave candles, all bonfires, and snowballing every valid character.**
+
+Use this page as the final 100% checklist. The achievements most likely to block completion are **Great Shot**, **You've Got Mail!**, **Spelunker**, **All Fired Up**, **Friend of Winter**, **Upgrades!**, and **Moominmamma's Favorite**.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/achievements-overview.webp"
+    alt="Moomintroll Winter's Warmth achievements overview."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Moomintroll Winter's Warmth has story achievements, collectible achievements, side quest achievements, tool achievements, and one final 100% achievement.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="all-achievements-checklist">
+  All achievements checklist
+</h2>
+
+<GuideTable
+  caption="All Moomintroll Winter's Warmth achievements."
+  columns={achievementColumns}
+  rows={achievementRows}
+/>
+
+Most story achievements unlock naturally. The achievements to actively track are the interaction and completion achievements, especially letters, cave candles, small bonfires, snowball targets, winter beings, tool upgrades, and vase pieces.
+
+---
+
+<h2 id="are-any-achievements-missable">
+  Are any achievements missable?
+</h2>
+
+There do not appear to be many hard fail-state achievements, but several can feel missable because they depend on optional interactions or cleanup.
+
+<GuideTable
+  caption="Achievements most likely to be missed."
+  columns={missableColumns}
+  rows={missableRows}
+/>
+
+---
+
+<h2 id="hundred-percent-completion-checklist">
+  100% completion checklist
+</h2>
+
+<GuideTable
+  caption="Everything to finish for 100% completion."
+  columns={completionColumns}
+  rows={completionRows}
+/>
+
+This table replaces the need for a second before-ending checklist. Use it as your final completion overview, then jump into the detailed sections below for letters, candles, bonfires, and snowball targets.
+
+---
+
+<h2 id="story-achievements">
+  Story achievements
+</h2>
+
+The following achievements should unlock naturally as you progress through the main story:
+
+- **Darkness, Meet Your Match!**
+- **Warming Up**
+- **Frozen Farewell**
+- **Nicest of Neighbours**
+- **Silver Linings**
+- **Little Miss Moominvalley**
+- **Cozy Camper**
+- **Family Reunion**
+- **Part of the Pack**
+- **Firestarter**
+- **Darkest Depths Delver**
+- **What Friends Are For**
+- **Winter's Warmth**
+
+You usually do not need to route these separately. If one is missing, continue the story or check whether the related character route is unfinished.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/first-match-achievement.webp"
+    alt="Moomintroll Winter's Warmth first match achievement moment."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early story achievements begin with basic progression, such as using matches and heating the house.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="collectible-achievements">
+  Collectible achievements
+</h2>
+
+The main collectible achievements are:
+
+- **Moominmamma's Favorite** — fix the vase
+- **You've Got Mail!** — read or find every letter
+- **Friend of Winter** — help every winter being
+
+The vase achievement is the biggest collectible check because there are 25 vase pieces, and several are not simple ground pickups.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/moomintroll-vase-pieces-complete.webp"
+    alt="Moomintroll Winter's Warmth vase piece reward from a side quest."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some vase pieces come from side quest rewards, so check quests as well as map pickups.
+  </figcaption>
+</figure>
+
+For the full route, use the <Link href="/moomintroll/vase-piece-locations">All 25 Vase Piece Locations guide</Link>.
+
+---
+
+<h2 id="letters-achievement">
+  You've Got Mail: letters and notes checklist
+</h2>
+
+<GuideTable
+  caption="Letters and notes to check for You've Got Mail."
+  columns={letterColumns}
+  rows={letterRows}
+/>
+
+**You've Got Mail!** is one of the most likely achievements to block 100% because the letter chain sends you between areas instead of keeping everything in one route.
+
+Use the table above as your route-order checklist. Start at the mailbox, follow each clue as it points to the next area, and return to the mailbox when the chain loops back.
+
+<GuideCallout title="Letter cleanup tip">
+If you are missing You've Got Mail!, do not search randomly. Start at the mailbox, then follow the clue chain through water, mountain, icy pond, forest, cave depths, and back to the mailbox.
+</GuideCallout>
+
+---
+
+<h2 id="tool-upgrade-achievement">
+  Upgrades: improve every tool
+</h2>
+
+**Upgrades!** requires you to improve all tools.
+
+The upgrades to check include:
+
+- reinforced mittens from sturdy yarn
+- longer-lasting matches from lamp oil
+- sharp axe from whetstone
+- upgraded shovel from scrap metal
+
+If this achievement is missing near the end, return to Too-ticky and check whether you still have an upgrade material in your inventory.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/all-tools-upgraded.webp"
+    alt="Moomintroll Winter's Warmth tool upgrade moment with scrap metal and Too-ticky."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scrap metal is easy to find late, so the upgraded shovel can be the final missing tool upgrade.
+  </figcaption>
+</figure>
+
+For every tool and upgrade item, use the <Link href="/moomintroll/tool-upgrades">All Tool Upgrades Guide</Link>.
+
+---
+
+<h2 id="cave-candles-achievement">
+  Spelunker: cave candles checklist
+</h2>
+
+<GuideTable
+  caption="Where to check for cave candles."
+  columns={candleColumns}
+  rows={candleRows}
+/>
+
+**Spelunker** unlocks when you light all cave candles. The easiest way to miss it is to follow the herb route too quickly and leave a side room or bridge candle behind.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/all-candles-cave.webp"
+    alt="Moomintroll Winter's Warmth cave candle achievement route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Light every cave candle before leaving the herb cave or underground route.
+  </figcaption>
+</figure>
+
+If you think you lit them all but the achievement did not unlock, recheck:
+
+- cave entrance
+- lamp oil room
+- herb cave rooms
+- side rooms
+- bridge exits
+- ice-block side paths
+- late underground rooms
+
+---
+
+<h2 id="all-bonfires-achievement">
+  All Fired Up: light all bonfires
+</h2>
+
+**All Fired Up** requires lighting all bonfires, not just the Great Winter Bonfire.
+
+Small bonfires appear during winter being quests and warmth tasks. If a winter being is cold, freezing, or asking for fire, look for a nearby fire spot.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/all-bonfires-lit.webp"
+    alt="Moomintroll Winter's Warmth lighting a small bonfire for a winter being."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Small winter being bonfires count separately from the Great Winter Bonfire.
+  </figcaption>
+</figure>
+
+If this achievement is missing, recheck winter being side quests and any fire spot you ignored because you were saving firewood.
+
+---
+
+<h2 id="snowball-achievements">
+  Great Shot: snowball target checklist
+</h2>
+
+<GuideTable
+  caption="Great Shot snowball target checklist — 14 targets total, including character groups."
+  columns={snowballTargetColumns}
+  rows={snowballTargetRows}
+/>
+
+There are three snowball-related achievements to watch:
+
+- **Catch!** — throw a snowball at a character
+- **Cold Critter** — throw a snowball at the squirrel
+- **Great Shot** — throw a snowball at every valid character or character group
+
+For this guide, use the table above as a practical **14-target checklist**. Some entries are character groups rather than single characters, such as Fillyjonk's children, winter beings, and late party characters.
+
+The most commonly missed targets are:
+
+- squirrel
+- Ancestor
+- Joxter
+- musician
+- Fillyjonk's children
+- winter beings
+- cave friend
+- late party characters
+
+<GuideCallout title="Great Shot tip">
+When you enter a new character route, throw a snowball once if the game allows it. This is safer than trying to remember every target at the end.
+</GuideCallout>
+
+---
+
+<h2 id="best-order-for-100-percent">
+  Best order for 100% completion
+</h2>
+
+<GuideTable
+  caption="Recommended order for 100% completion."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+This order prevents the biggest waste of time: trying to clean up areas before you have the tools needed to access them.
+
+---
+
+<h2 id="before-ending-checklist">
+  What to do before finishing the ending
+</h2>
+
+Use the **100% completion checklist** above as your main before-ending checklist. The key rule is simple: finish collectible, side quest, tool, candle, bonfire, letter, and snowball cleanup before treating the final story route as your last objective.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/great-winter-bonfire.webp"
+    alt="Moomintroll Winter's Warmth Great Winter Bonfire achievement moment."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lighting the Great Winter Bonfire pushes the story forward, so finish major cleanup before committing to the final route.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Final cleanup warning">
+If you care about 100%, do not rush the ending after lighting the Great Winter Bonfire. Check letters, cave candles, small bonfires, winter beings, vase pieces, tool upgrades, and snowball targets first.
+</GuideCallout>
+
+---
+
+<h2 id="missing-achievement-checklist">
+  Missing one achievement? Check this first
+</h2>
+
+<GuideTable
+  caption="What to check when one achievement is missing."
+  columns={finalCheckColumns}
+  rows={finalCheckRows}
+/>
+
+The final achievement, **Snufkin Would Be Proud**, should unlock after all other achievements are complete.
+
+If it does not, one requirement is still missing. The usual culprits are snowballing every character, a missed letter, a cave candle, a small bonfire, a winter being, or a vase piece from a side quest reward.
+
+---
+
+<h2 id="ending-achievement">
+  Winter's Warmth and the ending achievement
+</h2>
+
+**Winter's Warmth** unlocks for completing the game.
+
+The ending route follows late story progress after the Great Winter Bonfire and the final rescue sequence. If you are missing completion achievements, finish cleanup before treating the ending as your final objective.
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/ending-achievement.webp"
+    alt="Moomintroll Winter's Warmth ending achievement route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The ending achievement is story-based, but 100% completion depends on optional cleanup before the end.
+  </figcaption>
+</figure>
+
+For story interpretation, use the <Link href="/moomintroll/ending-explained">Ending Explained guide</Link>.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many achievements are in Moomintroll Winter's Warmth?
+
+There are 23 achievements in Moomintroll Winter's Warmth.
+
+### Are any achievements missable?
+
+Most achievements are safe if you do completion cleanup before the ending stretch, but Great Shot, Friend of Winter, You've Got Mail!, Spelunker, All Fired Up, Upgrades!, and Moominmamma's Favorite are the easiest to overlook.
+
+### What is the hardest achievement?
+
+The hardest achievement is likely **Snufkin Would Be Proud**, because it requires every other achievement. The most annoying individual check is usually **Great Shot**, because you need to snowball every valid character or character group.
+
+### How do I unlock Moominmamma's Favorite?
+
+Collect all 25 vase pieces, return to the vase objective, and fix Moominmamma's vase.
+
+### How do I unlock Friend of Winter?
+
+Help every winter being. The Great Winter Bonfire only needs three winter being tasks, but this achievement requires full winter being cleanup.
+
+### How do I unlock You've Got Mail?
+
+Follow the full letter chain: mailbox, water / bottle route, mountain note, icy pond note, forest note, cave depths note, return mailbox, and late letter follow-ups.
+
+### How do I unlock Upgrades?
+
+Improve every tool by bringing upgrade materials to Too-ticky, including sturdy yarn, lamp oil, whetstone, and scrap metal.
+
+### How do I unlock Spelunker?
+
+Light every candle in the cave and underground routes. Recheck side rooms, bridge exits, ice-block paths, and cave exits if it does not unlock.
+
+### How do I unlock All Fired Up?
+
+Light every bonfire, including smaller winter being bonfires and fire spots, not only the Great Winter Bonfire.
+
+### How do I unlock Great Shot?
+
+Throw a snowball at every valid character or character group. Use the snowball target checklist above and do a final sweep during the Great Winter Bonfire celebration.
+
+### What does Snufkin Would Be Proud require?
+
+Snufkin Would Be Proud requires completing all other achievements.
+
+### What should I check if I am missing one final achievement?
+
+Check snowball targets, letters, winter beings, cave candles, small bonfires, tool upgrades, and vase piece side quest rewards first.

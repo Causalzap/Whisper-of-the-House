@@ -1,0 +1,810 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const toolChecklistColumns = [
+  { key: "tool", label: "Tool / Upgrade" },
+  { key: "stage", label: "Story Stage" },
+  { key: "howToGetIt", label: "How To Get It" },
+  { key: "whatItUnlocks", label: "What It Unlocks" },
+];
+
+export const toolChecklistRows = [
+  {
+    tool: "Matches",
+    stage: "Opening",
+    howToGetIt: "Pick them up in Moomintroll's bedroom during the opening.",
+    whatItUnlocks:
+      "Light lamps, candles, dark rooms, cave paths, and some winter being objectives.",
+  },
+  {
+    tool: "Scarf",
+    stage: "Early story",
+    howToGetIt: "Too-ticky gives it to you after the first storm sequence.",
+    whatItUnlocks:
+      "Unlocks safer outdoor exploration after the storm. It is a story progression item, not an active-use tool.",
+  },
+  {
+    tool: "Mittens",
+    stage: "Early story",
+    howToGetIt:
+      "Recover them from the ancestor inside the Bathing House.",
+    whatItUnlocks:
+      "Lets you throw snowballs, knock down icicles, hit birds, and start snowball fights.",
+  },
+  {
+    tool: "Shovel",
+    stage: "Early / mid story",
+    howToGetIt:
+      "Beat Little My in the first snowball fight near Moominhouse.",
+    whatItUnlocks:
+      "Clears deep snow piles, opens the route to Fillyjonk, and reveals hidden wood or collectibles.",
+  },
+  {
+    tool: "Reinforced Mittens",
+    stage: "Mid story",
+    howToGetIt:
+      "Get sturdy yarn from the Hemulen, then bring it to Too-ticky.",
+    whatItUnlocks:
+      "Lets you roll large snowballs for bridges, platforms, and snow fort puzzles.",
+  },
+  {
+    tool: "Dash",
+    stage: "Mid story",
+    howToGetIt:
+      "Learn it from the Joxter while helping with his camp meal route.",
+    whatItUnlocks:
+      "Lets you push through snow clumps and cross some routes more quickly.",
+  },
+  {
+    tool: "Axe",
+    stage: "Mid story",
+    howToGetIt:
+      "Get it during the musician / lunchbox route after a fallen tree blocks the path.",
+    whatItUnlocks:
+      "Cuts dead trees, opens blocked routes, and gives extra firewood.",
+  },
+  {
+    tool: "Longer-lasting Matches",
+    stage: "Mid story",
+    howToGetIt:
+      "Find lamp oil in the cave, then bring it to Too-ticky.",
+    whatItUnlocks:
+      "Makes dark areas and cave exploration easier by improving your matches.",
+  },
+  {
+    tool: "Sharp Axe",
+    stage: "Late story",
+    howToGetIt:
+      "Get the whetstone from Fillyjonk's children, then ask Too-ticky to sharpen the axe.",
+    whatItUnlocks:
+      "Breaks stronger ice blocks and opens the herb cave / late cave cleanup routes.",
+  },
+  {
+    tool: "Upgraded Shovel",
+    stage: "Late cleanup",
+    howToGetIt:
+      "Find scrap metal during late cleanup, then bring it to Too-ticky.",
+    whatItUnlocks:
+      "Improves snow cleanup for remaining optional routes, firewood, and late collectibles.",
+  },
+];
+
+export const tooTickyColumns = [
+  { key: "item", label: "Bring To Too-ticky" },
+  { key: "upgrade", label: "Upgrade" },
+  { key: "result", label: "What It Does" },
+];
+
+export const tooTickyRows = [
+  {
+    item: "Sturdy Yarn",
+    upgrade: "Reinforced Mittens",
+    result:
+      "Lets you push and roll large snowballs for bridge, platform, and snow fort puzzles.",
+  },
+  {
+    item: "Lamp Oil",
+    upgrade: "Longer-lasting Matches",
+    result:
+      "Makes matches last longer, which helps with caves, lamps, candles, and dark routes.",
+  },
+  {
+    item: "Whetstone",
+    upgrade: "Sharp Axe",
+    result:
+      "Lets the axe break stronger ice blocks and opens the herb cave route.",
+  },
+  {
+    item: "Scrap Metal",
+    upgrade: "Upgraded Shovel",
+    result:
+      "Improves late snow cleanup for optional paths, remaining firewood, and collectibles.",
+  },
+];
+
+export const upgradeItemColumns = [
+  { key: "upgradeItem", label: "Upgrade Item" },
+  { key: "usedFor", label: "Used For" },
+  { key: "whereToFindIt", label: "Where To Find It" },
+];
+
+export const upgradeItemRows = [
+  {
+    upgradeItem: "Sturdy Yarn",
+    usedFor: "Reinforced Mittens",
+    whereToFindIt:
+      "Given by the Hemulen after the Misabel / house guest chain progresses.",
+  },
+  {
+    upgradeItem: "Lamp Oil",
+    usedFor: "Longer-lasting Matches",
+    whereToFindIt:
+      "Found in the cave before the musician lunchbox route.",
+  },
+  {
+    upgradeItem: "Whetstone",
+    usedFor: "Sharp Axe",
+    whereToFindIt:
+      "Given by Fillyjonk's children before the herb cave route.",
+  },
+  {
+    upgradeItem: "Scrap Metal",
+    usedFor: "Upgraded Shovel",
+    whereToFindIt:
+      "Found during late cleanup after you have more route access. Bring it to Too-ticky once you find it.",
+  },
+];
+
+export const obstacleColumns = [
+  { key: "obstacle", label: "Obstacle" },
+  { key: "toolNeeded", label: "Tool Needed" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const obstacleRows = [
+  {
+    obstacle: "Dark rooms and caves",
+    toolNeeded: "Matches / longer-lasting matches",
+    whatToDo:
+      "Light nearby lamps, candles, or torches. Bring lamp oil to Too-ticky once you find it.",
+  },
+  {
+    obstacle: "Icicles",
+    toolNeeded: "Mittens",
+    whatToDo:
+      "Throw snowballs to knock icicles down and make bridges or clear paths.",
+  },
+  {
+    obstacle: "Deep snow piles",
+    toolNeeded: "Shovel",
+    whatToDo:
+      "Clear snow piles to open paths, reveal items, or uncover firewood.",
+  },
+  {
+    obstacle: "Large snowball puzzles",
+    toolNeeded: "Reinforced Mittens",
+    whatToDo:
+      "Roll large snowballs into holes, gaps, or marked puzzle spots.",
+  },
+  {
+    obstacle: "Snow clumps / dash routes",
+    toolNeeded: "Dash",
+    whatToDo:
+      "Dash through clumps that block narrow routes.",
+  },
+  {
+    obstacle: "Fallen trees",
+    toolNeeded: "Axe",
+    whatToDo:
+      "Chop dead trees to open paths and collect firewood.",
+  },
+  {
+    obstacle: "Stronger ice blocks",
+    toolNeeded: "Sharp Axe",
+    whatToDo:
+      "Sharpen the axe with the whetstone, then return to ice-blocked cave routes.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyReason", label: "Likely Reason" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "The axe will not break ice.",
+    likelyReason:
+      "You are trying to break stronger ice with the normal axe.",
+    fix:
+      "Continue until you get the whetstone, then bring it to Too-ticky for the sharp axe.",
+  },
+  {
+    problem: "You cannot push a large snowball.",
+    likelyReason:
+      "You only have the normal mittens.",
+    fix:
+      "Get sturdy yarn from the Hemulen and bring it to Too-ticky for reinforced mittens.",
+  },
+  {
+    problem: "Your matches go out too quickly.",
+    likelyReason:
+      "You have not upgraded them with lamp oil yet.",
+    fix:
+      "Find lamp oil in the cave and bring it to Too-ticky.",
+  },
+  {
+    problem: "The shovel clears some snow but not everything quickly.",
+    likelyReason:
+      "You may be missing the upgraded shovel.",
+    fix:
+      "Look for scrap metal during late cleanup and bring it to Too-ticky.",
+  },
+  {
+    problem: "A path looks blocked by soft snow clumps, but the shovel does not work.",
+    likelyReason:
+      "This is probably a dash route, not a shovel route.",
+    fix:
+      "Progress through the Joxter camp route until you learn dash.",
+  },
+  {
+    problem: "A bird is holding an item and you cannot reach it.",
+    likelyReason:
+      "Bird-held items are not picked up directly.",
+    fix:
+      "Use the mittens to throw a snowball at the bird, then collect the dropped item.",
+  },
+];
+
+export const cleanupColumns = [
+  { key: "unlock", label: "After You Unlock" },
+  { key: "goBackTo", label: "Go Back To" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const cleanupRows = [
+  {
+    unlock: "Shovel",
+    goBackTo: "Fillyjonk route, Moominhouse garden, deep snow piles",
+    why:
+      "The shovel reveals hidden firewood, side paths, and early cleanup items.",
+  },
+  {
+    unlock: "Reinforced Mittens",
+    goBackTo: "Pond route, large snowball puzzles, snow fort quest",
+    why:
+      "Large snowballs are used for bridges, platforms, and at least one side quest reward.",
+  },
+  {
+    unlock: "Dash",
+    goBackTo: "Joxter camp and snow-clump side paths",
+    why:
+      "Dash opens routes that look blocked the first time you see them.",
+  },
+  {
+    unlock: "Axe",
+    goBackTo: "Bathing House cleanup, forest routes, dead tree paths",
+    why:
+      "The axe is one of the biggest cleanup tools because it opens many blocked routes.",
+  },
+  {
+    unlock: "Sharp Axe",
+    goBackTo: "Herb cave, late cave routes, strong ice blocks",
+    why:
+      "Sharp axe cleanup is required for several late collectibles and story routes.",
+  },
+  {
+    unlock: "Upgraded Shovel",
+    goBackTo: "Any remaining heavy snow cleanup",
+    why:
+      "The upgraded shovel makes late cleanup faster before the Great Winter Bonfire.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Moomintroll Winter's Warmth tools unlock in this general order: matches, scarf, mittens, shovel, reinforced mittens, dash, axe, longer-lasting matches, sharp axe, and upgraded shovel.**
+
+If a path is blocked, do not force it. The answer is usually a later tool, an upgrade from Too-ticky, or a story objective that has not unlocked yet.
+
+The most important upgrade rule is: **bring unusual items like sturdy yarn, lamp oil, whetstone, and scrap metal to Too-ticky.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/moomintroll-tools-overview.webp"
+    alt="Moomintroll Winter's Warmth tools overview showing the inventory and tool system."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Tools are the main progression gates in Moomintroll Winter's Warmth. When a path is blocked, you usually need a new tool or an upgrade from Too-ticky.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="all-tools-and-upgrades-checklist">
+  All tools and upgrades checklist
+</h2>
+
+<GuideTable
+  caption="All Moomintroll Winter's Warmth tools and upgrades."
+  columns={toolChecklistColumns}
+  rows={toolChecklistRows}
+/>
+
+This checklist covers both normal tools and upgraded tools.
+
+Use the **Story Stage** column to understand where you are in the route. If you are still early in the story, do not worry about sharp axe or upgraded shovel cleanup yet. If you are already near the Great Winter Bonfire, check whether you have finished the Too-ticky upgrades before starting the ending sequence.
+
+<GuideCallout title="Tool progression rule">
+If Moomintroll says he cannot break, clear, push, or reach something, leave it for later. Most blocked routes are designed for a later tool or upgrade.
+</GuideCallout>
+
+---
+
+<h2 id="where-is-too-ticky">
+  Where is Too-ticky?
+</h2>
+
+Too-ticky is your main upgrade helper. She is usually found at or near the Bathing House on the ice, which you reach from the early outside route after leaving Moominhouse.
+
+If a quest temporarily moves her or points you somewhere else, follow the current quest marker first. For upgrades, return to Too-ticky when you have an item that sounds useful but does not work on its own.
+
+You should go back to Too-ticky when you find:
+
+- sturdy yarn
+- lamp oil
+- whetstone
+- scrap metal
+
+<GuideCallout title="Too-ticky tip">
+When in doubt, bring strange materials to Too-ticky. She is the closest thing Moomintroll Winter's Warmth has to an upgrade station.
+</GuideCallout>
+
+---
+
+<h2 id="what-too-ticky-upgrades">
+  What Too-ticky can upgrade for you
+</h2>
+
+<GuideTable
+  caption="Too-ticky upgrades in Moomintroll Winter's Warmth."
+  columns={tooTickyColumns}
+  rows={tooTickyRows}
+/>
+
+Too-ticky upgrades are important because the raw item usually does nothing by itself. Lamp oil does not automatically fix your matches. The whetstone does not automatically sharpen the axe. Bring the item to Too-ticky to convert it into a real progression upgrade.
+
+---
+
+<h2 id="upgrade-items">
+  Upgrade items and what they are for
+</h2>
+
+<GuideTable
+  caption="Important upgrade items in Moomintroll Winter's Warmth."
+  columns={upgradeItemColumns}
+  rows={upgradeItemRows}
+/>
+
+Upgrade items are easy to overlook because they often appear during another quest.
+
+For example, lamp oil appears before you may fully understand what it upgrades, and the whetstone appears right before the herb cave route. Do not leave these in your inventory for long. Bring them to Too-ticky.
+
+---
+
+<h2 id="how-to-get-matches">
+  How to get matches
+</h2>
+
+Matches are the first tool in the game. You find them in Moomintroll's bedroom during the opening, before leaving the room.
+
+Use matches to:
+
+- light lamps
+- explore dark rooms
+- light candles
+- make cave routes safer
+- complete some winter being objectives
+
+Later, the lamp oil upgrade makes your matches last longer.
+
+**Vase pieces this helps with:** #01, #02, #08, #09, #25.  
+For the full collectible route, use the <Link href="/moomintroll/vase-piece-locations">All 25 Vase Piece Locations guide</Link>.
+
+---
+
+<h2 id="how-to-get-the-scarf">
+  How to get the scarf
+</h2>
+
+Too-ticky gives you the scarf after the first storm sequence outside Moominhouse.
+
+The scarf is a story progression item rather than an active tool. You do not equip it to solve puzzles. Instead, it marks the point where Moomintroll can safely continue outdoor exploration after the dangerous opening storm.
+
+Before this point, the storm sequence limits where you can go. After receiving the scarf, the game opens the early outside route toward the Bathing House, crossroads, and later the bonfire site.
+
+**Vase pieces this helps with:** It does not directly unlock a vase piece, but it opens the outdoor route toward #03 and #04.
+
+---
+
+<h2 id="how-to-get-mittens">
+  How to get the mittens
+</h2>
+
+You get the mittens inside the Bathing House.
+
+To get them:
+
+1. follow Too-ticky into the Bathing House
+2. search the room for the mittens
+3. chase the ancestor after it runs away with them
+4. pick up the mittens when the ancestor drops them
+5. return to Too-ticky
+6. practice throwing snowballs at icicles
+
+Mittens unlock snowballs, which are used constantly for the rest of the game.
+
+You can use snowballs to:
+
+- knock down icicles
+- create snow bridges
+- hit birds carrying items
+- fight Little My
+- solve small route puzzles
+
+**Vase pieces this unlocks:** #03, #04, #06, #16.  
+For bird-held vase pieces, use the <Link href="/moomintroll/vase-piece-locations">vase piece locations guide</Link>.
+
+---
+
+<h2 id="how-to-get-the-shovel">
+  How to get the shovel
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/moomintroll-shovel.webp"
+    alt="Moomintroll Winter's Warmth shovel location after beating Little My in the snowball fight."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Beat Little My in the first snowball fight to get Moominmamma's shovel.
+  </figcaption>
+</figure>
+
+You get the shovel from Little My.
+
+When the route to Fillyjonk is blocked by deep snow, Moomintroll realizes he needs Moominmamma's shovel. Little My has it, and she will only give it back if you beat her in a snowball fight.
+
+To get the shovel:
+
+1. try to reach Fillyjonk
+2. return toward Moominmamma's garden
+3. meet Little My
+4. accept the snowball fight
+5. hit her enough times to win
+6. pick up Moominmamma's shovel
+
+After you get the shovel, you can clear deep snow piles. This opens the Fillyjonk route and many optional cleanup spots.
+
+**Vase pieces this unlocks:** #05, #14, #17, #18, #20.
+
+For the fight itself, use the <Link href="/moomintroll/little-my-snowball-fight">Little My Snowball Fight Guide</Link>.
+
+---
+
+<h2 id="how-to-get-reinforced-mittens">
+  How to get reinforced mittens
+</h2>
+
+Reinforced mittens are the first major tool upgrade.
+
+The Hemulen gives you sturdy yarn after the Moominhouse guest chain progresses. Bring the yarn to Too-ticky, and she will reinforce your mittens.
+
+Reinforced mittens let you roll large snowballs. These are used for:
+
+- large snowball bridges
+- snow platforms
+- pond route puzzles
+- snow fort / friend quest progress
+- some late cleanup routes
+
+If you see a big snow pile that looks like it should become a huge snowball, you probably need reinforced mittens first.
+
+**Vase pieces this unlocks:** #24.
+
+<GuideCallout title="Why can't I roll this snowball?">
+If Moomintroll can throw normal snowballs but cannot push a large one, you probably need reinforced mittens. Get sturdy yarn from the Hemulen and bring it to Too-ticky.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-get-dash">
+  How to get dash
+</h2>
+
+You learn dash from the Joxter during the camp meal route.
+
+The Joxter asks for help around his camp, including food, bark, snow cleanup, and a cooking pot. During this route, he teaches Moomintroll how to move through snow clumps.
+
+Dash lets you pass through certain snow-blocked routes that cannot be cleared with the shovel.
+
+Use dash for:
+
+- Joxter camp side paths
+- snow clump shortcuts
+- route cleanup after the camp sequence
+
+**Vase pieces this unlocks:** #10, #11.
+
+---
+
+<h2 id="how-to-get-the-axe">
+  How to get the axe
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/moomintroll-axe.webp"
+    alt="Moomintroll Winter's Warmth axe location during the musician lunchbox quest."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The axe is unlocked during the musician route after a fallen tree blocks the way.
+  </figcaption>
+</figure>
+
+You get the axe during the musician / lunchbox quest.
+
+After the musician leaves Moominhouse, he asks you to recover his lunchbox from a bird near the Bathing House. Once you return the lunchbox and continue the route, a tree blocks the path. At that point, you receive Moominpappa's axe.
+
+Use the axe to:
+
+- chop fallen trees
+- open blocked forest paths
+- collect more firewood
+- progress toward the Great Winter Bonfire
+
+**Vase pieces this unlocks:** #13, #14, #15, #18, #19, #20.
+
+<GuideCallout title="Why can't the axe break this?">
+If the axe cannot break an obstacle, it is probably stronger ice, not a normal tree or log. Continue the story until you get the whetstone, then ask Too-ticky to sharpen the axe.
+</GuideCallout>
+
+---
+
+<h2 id="where-to-find-lamp-oil">
+  Where to find lamp oil
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/moomintroll-lamp-oil.webp"
+    alt="Moomintroll Winter's Warmth lamp oil location in the cave."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lamp oil is found in the cave and should be brought to Too-ticky to upgrade your matches.
+  </figcaption>
+</figure>
+
+Lamp oil is found in the cave before the musician lunchbox route.
+
+Once you have the lamp oil, bring it to Too-ticky. She upgrades your matches so they last longer.
+
+This is useful because several later routes involve:
+
+- caves
+- dark interiors
+- candles
+- winter being light objectives
+- paths where normal match duration feels short
+
+**Vase pieces this helps with:** #25 and any dark-route cleanup pieces.
+
+<GuideCallout title="Lamp oil tip">
+Do not ignore lamp oil just because it does not immediately solve the cave. It is an upgrade item for your matches, and Too-ticky can use it.
+</GuideCallout>
+
+---
+
+<h2 id="where-to-find-the-whetstone">
+  Where to find the whetstone
+</h2>
+
+The whetstone comes from Fillyjonk's children before the herb cave route.
+
+After Sorry-oo gets sick, the group points you toward a cave where herbs can grow during winter. Before you leave, Fillyjonk's children give you a whetstone and suggest sharpening the axe.
+
+Bring the whetstone to Too-ticky. She can sharpen Moominpappa's axe.
+
+**Vase pieces this unlocks after upgrading:** #21, #22, #23.
+
+---
+
+<h2 id="how-to-get-the-sharp-axe">
+  How to get the sharp axe
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/moomintroll/moomintroll-sharp-axe.webp"
+    alt="Moomintroll Winter's Warmth sharp axe upgrade from Too-ticky after finding the whetstone."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Give the whetstone to Too-ticky to sharpen the axe.
+  </figcaption>
+</figure>
+
+To get the sharp axe:
+
+1. progress until Sorry-oo needs herbs
+2. receive the whetstone from Fillyjonk's children
+3. go to Too-ticky at the Bathing House
+4. ask her to sharpen the axe
+5. return to strong ice obstacles and cave routes
+
+The sharp axe lets you break stronger ice blocks. This opens the herb cave and several late cleanup paths.
+
+If you tried to break ice earlier and the axe was too blunt, this is the upgrade you were missing.
+
+**Vase pieces this unlocks:** #21, #22, #23.
+
+<GuideCallout title="Why can't I break the ice?">
+If Moomintroll has the axe but still cannot break an ice block, you need the sharp axe. Get the whetstone from Fillyjonk's children and bring it to Too-ticky.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-get-the-upgraded-shovel">
+  How to get the upgraded shovel
+</h2>
+
+The upgraded shovel comes from scrap metal.
+
+This is a late cleanup upgrade, so do not worry about it during the opening or early Fillyjonk route. Continue the story until you have broader access to blocked paths, then look for scrap metal during cleanup and bring it to Too-ticky.
+
+The upgraded shovel is less central than the axe or sharp axe, but it helps with late snow cleanup before the Great Winter Bonfire.
+
+Use it when you are:
+
+- clearing remaining snow piles
+- searching for leftover firewood
+- checking optional paths
+- finishing completion cleanup
+
+**Vase pieces this helps with:** late cleanup pieces that involve snow piles, especially if you are checking remaining forest or side routes.
+
+<GuideCallout title="Scrap metal note">
+If you have not found scrap metal yet, you are probably not far enough into late cleanup. Focus on axe, sharp axe, and Great Winter Bonfire progress first.
+</GuideCallout>
+
+---
+
+<h2 id="obstacles-and-tools">
+  Which tool do you need for each obstacle?
+</h2>
+
+<GuideTable
+  caption="Moomintroll Winter's Warmth obstacles and the tools that solve them."
+  columns={obstacleColumns}
+  rows={obstacleRows}
+/>
+
+When you are stuck, identify the obstacle instead of wandering the whole map.
+
+Most blocked paths are readable:
+
+- ice hanging above a gap usually means snowball
+- deep snow means shovel
+- logs and dead trees mean axe
+- stronger ice means sharp axe
+- snow clumps mean dash
+- huge snowball puzzles mean reinforced mittens
+
+---
+
+<h2 id="why-tool-not-working">
+  Why is my tool not working?
+</h2>
+
+<GuideTable
+  caption="Common tool problems and how to fix them."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+Most tool problems happen because two obstacles look similar but require different solutions.
+
+The common example is ice. Some ice-related obstacles are solved with snowballs, while stronger ice blocks require the sharp axe. If the normal axe does nothing, that is usually not a bug. It means you need the whetstone upgrade.
+
+---
+
+<h2 id="cleanup-after-upgrades">
+  Best cleanup route after each upgrade
+</h2>
+
+<GuideTable
+  caption="Where to return after each major tool unlock."
+  columns={cleanupColumns}
+  rows={cleanupRows}
+/>
+
+Every new tool should trigger a short cleanup loop.
+
+The best pattern is:
+
+1. unlock the tool
+2. continue the current story objective
+3. return to nearby blocked routes
+4. collect firewood, vase pieces, notes, or side quest rewards
+5. then move back to the Great Winter Bonfire objective
+
+This is especially important after the axe and sharp axe, because many earlier blocked paths become useful again.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many tools are in Moomintroll Winter's Warmth?
+
+The main progression tools and abilities are matches, scarf, mittens, shovel, reinforced mittens, dash, axe, longer-lasting matches, sharp axe, and upgraded shovel.
+
+### Where is Too-ticky?
+
+Too-ticky is usually at or near the Bathing House on the ice, reached from the early outside route after leaving Moominhouse. Return to her when you find upgrade items such as sturdy yarn, lamp oil, whetstone, or scrap metal.
+
+### How do I get the shovel?
+
+Beat Little My in the first snowball fight near Moominhouse. After you win, you get Moominmamma's shovel.
+
+### How do I get the axe?
+
+You get the axe during the musician / lunchbox route. After a tree blocks the path, the musician gives you Moominpappa's axe.
+
+### Why can't my axe break ice?
+
+You probably need the sharp axe. Get the whetstone from Fillyjonk's children and bring it to Too-ticky.
+
+### Where is the lamp oil?
+
+Lamp oil is found in the cave. Bring it to Too-ticky to upgrade your matches.
+
+### What does lamp oil do?
+
+Lamp oil lets Too-ticky make your matches last longer.
+
+### Where is the whetstone?
+
+The whetstone is given by Fillyjonk's children before the herb cave route.
+
+### How do I sharpen the axe?
+
+Bring the whetstone to Too-ticky. She will sharpen Moominpappa's axe into the sharp axe.
+
+### How do I roll large snowballs?
+
+You need reinforced mittens. Get sturdy yarn from the Hemulen and bring it to Too-ticky.
+
+### What should I do after getting a new tool?
+
+Return to earlier blocked routes. Many vase pieces, firewood piles, notes, winter being quests, and side paths are locked behind tools.
