@@ -56,6 +56,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/shapez-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/fracture-field`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/moomintroll`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/far-far-west/secret-missions`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+
+
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/far-far-west/area-41-symbol-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/far-far-west/cactus-day-joker-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/far-far-west/canyon-secret-medallion-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/far-far-west/ghost-bell-shard-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/far-far-west/snowman-parts-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/far-far-west/woodlands-mushroom-sequence`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/moomintroll/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

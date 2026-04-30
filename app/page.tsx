@@ -200,6 +200,13 @@ export default function Home() {
                 Moomintroll: Winter's Warmth Guide
               </Link>
 
+              <Link
+                href="/far-far-west"
+                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              >
+                Far Far West Guide
+              </Link>
+
             </div>
           </div>
         </div>

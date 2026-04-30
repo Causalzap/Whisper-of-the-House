@@ -1,0 +1,557 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const mapMarkerColumns = [
+  { key: "marker", label: "Map Marker" },
+  { key: "meaning", label: "Meaning" },
+  { key: "note", label: "Note" },
+];
+
+export const mapMarkerRows = [
+  {
+    marker: "Orange cave icon",
+    meaning: "Snowman Cave / return point",
+    note:
+      "This is where you return the Head, Chest, and Body. It is on the west side of the map.",
+  },
+  {
+    marker: "Green star",
+    meaning: "Start / anchor point",
+    note:
+      "Use this as your orientation point. The parts are mostly north, east, and southwest of this marker.",
+  },
+  {
+    marker: "Yellow X markers",
+    meaning: "Snowman parts",
+    note:
+      "These mark the Head, Chest, and Body locations.",
+  },
+  {
+    marker: "Question marks",
+    meaning: "Unknown / optional points",
+    note:
+      "Ignore these for the Snowman Parts route. They are not required for rebuilding the snowman.",
+  },
+  {
+    marker: "Red boss marker",
+    meaning: "Boss area",
+    note:
+      "This is not the Snowman Cave. Finish the snowman route before starting boss pressure if possible.",
+  },
+];
+
+export const snowmanPartColumns = [
+  { key: "part", label: "Part" },
+  { key: "mapMarker", label: "Map Marker" },
+  { key: "visualAnchor", label: "Visual Anchor" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const snowmanPartRows = [
+  {
+    part: "Snowman Cave",
+    mapMarker: "Orange cave icon",
+    visualAnchor:
+      "West side of the map, just southwest of the red boss marker.",
+    whatToDo:
+      "Use this as the return point. Every snowman part must be brought back here.",
+  },
+  {
+    part: "Snowman Head",
+    mapMarker: "Upper-right yellow X",
+    visualAnchor:
+      "Northern / upper-right area of the map, above the Chest marker.",
+    whatToDo:
+      "Bring the Head back to the cave first if you want the easiest route practice.",
+  },
+  {
+    part: "Snowman Chest",
+    mapMarker: "Right-side yellow X",
+    visualAnchor:
+      "Right side of the map, below the Head marker and east of the green star.",
+    whatToDo:
+      "Return the Chest after the Head. It uses the same general delivery logic.",
+  },
+  {
+    part: "Snowman Body",
+    mapMarker: "Lower-middle yellow X",
+    visualAnchor:
+      "Middle-lower area of the map, southwest of the Start / Anchor marker.",
+    whatToDo:
+      "Use the widest safe route back to the cave. This is the part most likely to get stuck.",
+  },
+];
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "objective", label: "Objective" },
+  { key: "tip", label: "Tip" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    objective: "Start on Far Far North.",
+    tip:
+      "With a marked map, the Snowman Parts route usually takes about 8-12 minutes.",
+  },
+  {
+    step: "2",
+    objective: "Find the Snowman Cave.",
+    tip:
+      "The cave is the orange icon on the west side. Do not confuse it with the red boss marker.",
+  },
+  {
+    step: "3",
+    objective: "Return the Head and Chest.",
+    tip:
+      "These two parts are easier than the Body and help you learn the route back to the cave.",
+  },
+  {
+    step: "4",
+    objective: "Return the Body.",
+    tip:
+      "The Body is in the lower-middle area and needs the cleanest, widest path back.",
+  },
+  {
+    step: "5",
+    objective: "Rebuild the snowman.",
+    tip:
+      "After the Head, Chest, and Body are returned to the cave, finish the rebuild interaction.",
+  },
+];
+
+export const movementColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "bestMove", label: "Best Move" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const movementRows = [
+  {
+    situation: "Before moving any part",
+    bestMove:
+      "Clear enemies between the part and the cave.",
+    whyItMatters:
+      "Stopping mid-route makes it easier to lose control of a part or waste time in bad terrain.",
+  },
+  {
+    situation: "Moving the Head",
+    bestMove:
+      "Use it to learn the return path to the cave.",
+    whyItMatters:
+      "The Head is the safest part to move and works well as route practice.",
+  },
+  {
+    situation: "Moving the Chest",
+    bestMove:
+      "Use the same delivery logic as the Head.",
+    whyItMatters:
+      "The Chest is still manageable, but it is farther right, so the return route is longer.",
+  },
+  {
+    situation: "Moving the Body",
+    bestMove:
+      "Take wide paths around rocks, trees, slopes, and narrow terrain.",
+    whyItMatters:
+      "The Body is the part most likely to get stuck.",
+  },
+  {
+    situation: "Body starts drifting into terrain",
+    bestMove:
+      "Stop pushing forward, reposition, and nudge it from the open side.",
+    whyItMatters:
+      "Pushing directly into an obstacle usually makes the Body more wedged.",
+  },
+  {
+    situation: "Body is fully stuck",
+    bestMove:
+      "Try backing it out from another angle. If it still will not move, a fresh run may be the only reliable recovery.",
+    whyItMatters:
+      "There may be no consistent fix once the Body is fully trapped, so prevention matters most.",
+  },
+];
+
+export const rewardColumns = [
+  { key: "reward", label: "Reward" },
+  { key: "type", label: "Type" },
+  { key: "verdict", label: "Verdict" },
+];
+
+export const rewardRows = [
+  {
+    reward: "Caribou / Carriable Skin",
+    type: "Cosmetic skin",
+    verdict:
+      "Worth doing for completion or cosmetics, but not a combat priority.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "I cannot find the Snowman Cave.",
+    likelyCause:
+      "You may be looking at the red boss marker instead of the orange cave icon.",
+    fix:
+      "Look for the orange cave icon on the west side of the map, just southwest of the red boss marker.",
+  },
+  {
+    problem: "The large Body got stuck.",
+    likelyCause:
+      "It was pushed into rocks, trees, slopes, narrow terrain, or uneven geometry.",
+    fix:
+      "Stop pushing into the obstacle. Reposition and nudge it from the open side. If it is fully wedged and cannot move, a fresh run may be the only reliable fix.",
+  },
+  {
+    problem: "The secret did not complete after one part.",
+    likelyCause:
+      "The snowman needs all required parts, not just one.",
+    fix:
+      "Return the Head, Chest, and Body to the Snowman Cave, then finish the rebuild interaction.",
+  },
+  {
+    problem: "Enemies keep interrupting the delivery.",
+    likelyCause:
+      "You are moving parts through uncleared areas.",
+    fix:
+      "Clear the route first, then move each part directly back to the cave.",
+  },
+  {
+    problem: "I went to a question mark marker and got confused.",
+    likelyCause:
+      "The question marks are unknown or optional points, not required snowman parts.",
+    fix:
+      "Ignore question marks for this secret. Follow only the Cave, Head, Chest, and Body markers.",
+  },
+  {
+    problem: "I finished the secret but did not get a Joker.",
+    likelyCause:
+      "This secret gives a cosmetic skin, not a weapon Joker.",
+    fix:
+      "Check your cosmetic or skin unlocks. For combat rewards, do Bellshot, Canyon, Cactus Day, Woodlands, or Area 41 instead.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To complete the Snowman Parts secret in Far Far West, go to Far Far North, find the Snowman Cave on the west side, then return the Head, Chest, and Body to that cave.**
+
+The route usually takes about **8-12 minutes** with a marked map. The **Head** is in the upper-right / northern area, the **Chest** is on the right side below it, and the **Body** is in the lower-middle area near the Start / Anchor marker. Completing the secret unlocks the **Caribou / Carriable skin**, which is a cosmetic reward.
+</GuideQuickAnswer>
+
+---
+
+<GuideCallout title="Completion reward, not a combat Joker">
+The Snowman Parts secret rewards a skin, not a weapon Joker. Do it for completion or cosmetics. If you want combat power first, prioritize Bellshot, Pigpick / Pick Pick, Cactus Day, Shroom Grave, or Anti-Gravity Falls.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/far-far-north-snowman-parts-map.webp"
+    alt="Far Far West Far Far North snowman parts map showing Snowman Cave, Head, Chest, Body, Start marker, and optional question mark locations."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cave is on the west side at the orange cave icon. Head and Chest are on the right side of the map, while Body is in the lower-middle area near the Start / Anchor marker. Collect the parts from the right and lower areas, then deliver them west to the cave.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-to-read-the-snowman-map">
+  How to read the Snowman Parts map
+</h2>
+
+<GuideTable
+  caption="Snowman Parts map markers and what they mean."
+  columns={mapMarkerColumns}
+  rows={mapMarkerRows}
+/>
+
+The most important correction is that the **Snowman Cave is the orange cave icon**, not the red boss marker.
+
+The red marker is useful because it helps you orient yourself, but it is not where you return the parts. Return the Head, Chest, and Body to the orange cave icon on the west side of the map.
+
+---
+
+<h2 id="snowman-parts-checklist">
+  Snowman parts checklist
+</h2>
+
+<GuideTable
+  caption="All parts needed for the Far Far North snowman secret."
+  columns={snowmanPartColumns}
+  rows={snowmanPartRows}
+/>
+
+The route is simple once the map is marked:
+
+**Find Cave → return Head → return Chest → return Body → rebuild snowman**
+
+The Head and Chest are mostly route setup. The **Body** is the only part that usually causes problems because it can get stuck on terrain.
+
+---
+
+<h2 id="snowman-route-summary">
+  Snowman route summary
+</h2>
+
+<GuideTable
+  caption="Fast route summary for the Snowman Parts secret."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The overall route moves from the **right side and lower-middle part locations** back toward the **west-side cave**.
+
+This secret is not difficult because of a puzzle. It is difficult because the Body can waste a lot of time if it gets stuck.
+
+---
+
+<h2 id="snowman-cave-location">
+  Snowman cave location
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/snowman-cave-location.webp"
+    alt="Far Far West Snowman Cave location on the west side of Far Far North."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Snowman Cave is the orange cave icon on the west side of Far Far North, just southwest of the red boss marker.
+  </figcaption>
+</figure>
+
+Start by finding the **Snowman Cave**. This is your anchor point for the entire secret.
+
+Before moving any part, make sure you know the return route back to the cave. If you confuse the cave with the red boss marker, the whole route becomes slower.
+
+---
+
+<h2 id="snowman-head-and-chest">
+  Snowman Head and Chest locations
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/snowman-head-location.webp"
+    alt="Far Far West Snowman Head location in the upper-right area of Far Far North."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Head is the upper-right marker in the northern area of the map.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/snowman-chest-location.webp"
+    alt="Far Far West Snowman Chest location on the right side of Far Far North."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Chest is the right-side marker below the Head and east of the Start / Anchor marker.
+  </figcaption>
+</figure>
+
+The Head and Chest use the same basic delivery loop, so the important part is not the mechanics — it is knowing where they are on the map.
+
+**Steps:**
+
+1. Go to the Head or Chest marker.
+2. Clear enemies around the part.
+3. Face back toward the west-side Snowman Cave.
+4. Move the part directly back to the cave.
+5. Confirm the part is placed before going for the next one.
+
+Do the Head first if you are learning the route, then the Chest.
+
+---
+
+<h2 id="snowman-body-location">
+  Snowman Body location
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/snowman-body-location.webp"
+    alt="Far Far West Snowman Body location in the lower-middle area near the Start marker."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Body is the lower-middle marker southwest of the Start / Anchor marker. It is the part most likely to get stuck.
+  </figcaption>
+</figure>
+
+The **Body** is the main challenge of this secret. It can get stuck if you push it through rocks, trees, slopes, tight corners, or uneven terrain.
+
+**Steps:**
+
+1. Go to the Body marker in the lower-middle area.
+2. Clear enemies before touching the Body.
+3. Choose the widest route back toward the west-side Snowman Cave.
+4. Avoid rocks, trees, tight corners, and rough slopes.
+5. If it starts drifting into an obstacle, stop and reposition before pushing again.
+6. Return the Body to the cave and finish the rebuild.
+
+<GuideCallout title="Body route tip">
+Take the clean route, not the shortest route. A wide path that works is faster than a shortcut that gets the Body stuck.
+</GuideCallout>
+
+---
+
+<h2 id="best-return-route">
+  Best return route for snowman parts
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/snowman-return-route.webp"
+    alt="Far Far West Snowman Parts return route showing delivery paths back to the Snowman Cave."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The route moves from the right and lower areas back to the west-side Snowman Cave. Use the widest safe path for the Body.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Movement tips for returning snowman parts."
+  columns={movementColumns}
+  rows={movementRows}
+/>
+
+The most important thing to annotate is the **Body return route**. The Head and Chest are more forgiving, but the Body needs a clean path.
+
+If the Body gets close to a tree, rock, or slope, stop pushing directly forward. Move to the open side and nudge it back toward the safe route before it becomes fully stuck.
+
+---
+
+<h2 id="snowman-skin-reward">
+  Snowman secret reward: Caribou / Carriable skin
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/snowman-skin-reward.webp"
+    alt="Far Far West Caribou or Carriable skin reward from the Snowman Parts secret."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Completing the Far Far North snowman secret unlocks the Caribou / Carriable cosmetic skin.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Snowman Parts reward and whether it is worth doing."
+  columns={rewardColumns}
+  rows={rewardRows}
+/>
+
+This is a completion-focused secret. The reward is not a weapon Joker, so it will not improve your damage, healing, or AoE clear.
+
+Do Snowman Parts if you want the skin or want to fully clear every secret mission. If you are still building combat power, do the other secret rewards first.
+
+---
+
+<h2 id="snowman-troubleshooting">
+  Snowman Parts troubleshooting
+</h2>
+
+<GuideTable
+  caption="Common Snowman Parts problems and fixes."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+Most problems come from one of three things:
+
+1. confusing the orange cave icon with the red boss marker  
+2. getting the Body stuck  
+3. visiting question mark locations instead of the required parts
+
+For the core route, ignore question marks and focus on:
+
+**Cave → Head → Chest → Body → Cave**
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What map is the Snowman Parts secret on?
+
+The Snowman Parts secret is on the **Far Far North** map.
+
+### Where is the Snowman Cave?
+
+The Snowman Cave is the **orange cave icon on the west side** of the map, near but separate from the red boss marker.
+
+### Where is the Head?
+
+The Head is the **upper-right marker** in the northern area of the map.
+
+### Where is the Chest?
+
+The Chest is the **right-side marker below the Head**, east of the Start / Anchor marker.
+
+### Where is the Body?
+
+The Body is the **lower-middle marker southeast of the Start / Anchor marker**.
+
+### Are the question mark markers required?
+
+No. The question mark markers are unknown or optional points. They are not required for the core Snowman Parts route.
+
+### How long does the Snowman Parts secret take?
+
+With a marked map, expect about **8-12 minutes**. It can take longer if the Body gets stuck.
+
+### Which snowman part is hardest to move?
+
+The **Body** is the hardest because it can get stuck on rocks, trees, slopes, and rough terrain.
+
+### What should I do if the Body gets stuck?
+
+Stop pushing it into the obstacle. Reposition and nudge it from the open side. If it is fully wedged and will not move, a fresh run may be the only reliable fix.
+
+### What reward do you get from Snowman Parts?
+
+You unlock the **Caribou / Carriable skin**.
+
+### Is Snowman Parts a weapon Joker secret?
+
+No. Snowman Parts gives a cosmetic skin, not a weapon Joker.
+
+### Is the Snowman Parts secret worth doing?
+
+Yes for completion and cosmetics. No if you only care about combat upgrades.
+
+### Should I do Snowman Parts before the boss?
+
+Yes. Finish it before killing the boss or starting extraction because moving the parts is much harder under pressure.

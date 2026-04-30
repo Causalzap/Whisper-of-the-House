@@ -1,0 +1,455 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const mapMarkerColumns = [
+  { key: "marker", label: "Map Marker" },
+  { key: "meaning", label: "Meaning" },
+  { key: "howToUseIt", label: "How To Use It" },
+];
+
+export const mapMarkerRows = [
+  {
+    marker: "X",
+    meaning: "Child cactus",
+    howToUseIt:
+      "Go to an X marker, pick up the child cactus, then check the matching color or letter.",
+  },
+  {
+    marker: "Circle",
+    meaning: "Parent cactus",
+    howToUseIt:
+      "Bring the child cactus to the parent with the same color or letter.",
+  },
+  {
+    marker: "Same color / same letter",
+    meaning: "Correct pair",
+    howToUseIt:
+      "A red A child belongs to the red A parent. A blue B child belongs to the blue B parent.",
+  },
+  {
+    marker: "Route arrows",
+    meaning: "Suggested delivery path",
+    howToUseIt:
+      "Use arrows to reduce backtracking and avoid carrying a child cactus across the Desert more than necessary.",
+  },
+];
+
+export const cactusPairColumns = [
+  { key: "pair", label: "Pair" },
+  { key: "childMarker", label: "Child Marker" },
+  { key: "parentMarker", label: "Parent Marker" },
+  { key: "routeTip", label: "Route Tip" },
+];
+
+export const cactusPairRows = [
+  {
+    pair: "Pair A",
+    childMarker: "X-A",
+    parentMarker: "Circle-A",
+    routeTip:
+      "Child A — Located near the northwest rocks, carry it to Parent A at the south of the desert.",
+  },
+  {
+    pair: "Pair B",
+    childMarker: "X-B",
+    parentMarker: "Circle-B",
+    routeTip:
+      "Child B — Found near the northeast, bring it to Parent B, located in the eastern valley.",
+  },
+  {
+    pair: "Pair C",
+    childMarker: "X-C",
+    parentMarker: "Circle-C",
+    routeTip:
+      "Child C — Located near the central oasis, deliver it to Parent C which is close to the southern path.",
+  },
+  {
+    pair: "Pair D",
+    childMarker: "X-D",
+    parentMarker: "Circle-D",
+    routeTip:
+      "Child D — Found at the western ridge, deliver it to Parent D in the southwestern canyon.",
+  },
+  {
+    pair: "Pair E",
+    childMarker: "X-E",
+    parentMarker: "Circle-E",
+    routeTip:
+      "Child E — Located near the eastern cliff, deliver it to Parent E, which is in the lower east corner.",
+  },
+  {
+    pair: "Pair F",
+    childMarker: "X-F",
+    parentMarker: "Circle-F",
+    routeTip:
+      "Child F — Found in the southern tip of the desert, bring it to Parent F at the bottom of the canyon.",
+  },
+];
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "objective", label: "Objective" },
+  { key: "tip", label: "Tip" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    objective: "Start on the Desert map.",
+    tip:
+      "Cactus Day is the Desert secret mission. Finish it before killing the boss or starting extraction.",
+  },
+  {
+    step: "2",
+    objective: "Open the annotated Cactus Day map.",
+    tip:
+      "Use the X markers for children and the circle markers for parents.",
+  },
+  {
+    step: "3",
+    objective: "Choose the closest child-parent pair.",
+    tip:
+      "Do not pick up a child cactus until you know which parent it belongs to.",
+  },
+  {
+    step: "4",
+    objective: "Clear the delivery route.",
+    tip:
+      "You cannot use your horse while carrying a child cactus, so clear enemies first.",
+  },
+  {
+    step: "5",
+    objective: "Carry the child cactus to the matching parent.",
+    tip:
+      "Child A goes to Parent A, Child B goes to Parent B, and so on.",
+  },
+  {
+    step: "6",
+    objective: "Repeat until all six pairs are complete.",
+    tip:
+      "The secret completes after all six child cactuses are returned to the correct parents.",
+  },
+];
+
+export const rewardColumns = [
+  { key: "reward", label: "Reward" },
+  { key: "effect", label: "Effect" },
+  { key: "verdict", label: "Verdict" },
+];
+
+export const rewardRows = [
+  {
+    reward: "Cactus Day Joker",
+    effect:
+      "Based on current testing, Cactus Day has a chance on kill to spawn cactus mines near where the enemy died.",
+    verdict:
+      "Good AoE clear reward, especially when fighting enemy packs.",
+  },
+  {
+    reward: "Cactus mines",
+    effect:
+      "Cactus mines add area damage around defeated enemies.",
+    verdict:
+      "Useful for group clearing, but less important for single-target boss damage.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "The parent cactus says this is not their child.",
+    likelyCause:
+      "You carried the child cactus to the wrong parent.",
+    fix:
+      "Check the map again. Child A must go to Parent A, Child B to Parent B, and so on.",
+  },
+  {
+    problem: "I picked up a child cactus but do not know where to take it.",
+    likelyCause:
+      "You picked up the child before checking the matching parent marker.",
+    fix:
+      "Open the annotated map and match the child's X marker to the parent circle with the same color or label.",
+  },
+  {
+    problem: "I cannot use my horse while carrying a child cactus.",
+    likelyCause:
+      "Carrying a child cactus prevents normal mounted travel.",
+    fix:
+      "Plan the delivery path before picking up the child, clear enemies first, and use the shortest safe walking route.",
+  },
+  {
+    problem: "Cactus Day is taking too long.",
+    likelyCause:
+      "You are crossing the Desert repeatedly without grouping nearby pairs.",
+    fix:
+      "Complete nearby pairs together and avoid carrying a child across the map unless its parent is already confirmed.",
+  },
+  {
+    problem: "Enemies keep killing me while I carry the cactus.",
+    likelyCause:
+      "You are trying to deliver the child through uncleared enemy areas.",
+    fix:
+      "Clear the route first, then pick up the child cactus and move directly to its parent.",
+  },
+  {
+    problem: "The secret did not complete.",
+    likelyCause:
+      "At least one child cactus is still missing or was brought to the wrong parent.",
+    fix:
+      "Recheck all six pairs on the map and confirm every child has been returned to the matching parent.",
+  },
+  {
+    problem: "I killed the boss before finishing Cactus Day.",
+    likelyCause:
+      "The run has moved toward extraction and exploration becomes more dangerous.",
+    fix:
+      "Do Cactus Day before the boss. If the map is too chaotic, extract and retry in a fresh Desert run.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To complete Cactus Day in Far Far West, find all six child cactuses on the Desert map and return each one to its correct parent cactus.**
+
+Use the annotated map: **X markers are child cactuses**, **circle markers are parent cactuses**, and matching colors or letters show the correct pairs. After all six pairs are matched, you complete the Desert secret and unlock the **Cactus Day Joker**.
+</GuideQuickAnswer>
+
+---
+
+<GuideCallout title="Important route note">
+You cannot use your horse while carrying a child cactus. Check the matching parent first, clear the path, then pick up the child and walk it to the correct parent.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/cactus-day-locations-map.webp"
+    alt="Far Far West Cactus Day map showing all six child cactus and parent cactus pairs with matching colors and letters."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use this map as the main Cactus Day solution: X markers are child cactuses, circles are parent cactuses, and matching colors or letters show the correct pairs.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="cactus-day-map-markers">
+  How to read the Cactus Day map
+</h2>
+
+<GuideTable
+  caption="Cactus Day map markers and what they mean."
+  columns={mapMarkerColumns}
+  rows={mapMarkerRows}
+/>
+
+Cactus Day is a child-parent matching puzzle. There are **12 cactuses** involved: six children and six parents.
+
+The fastest way to solve it is to use both **colors and letters** on the map. Colors make the pairs easy to scan quickly, while letters help if two colors look similar or if the screenshot is compressed.
+
+For example:
+
+- **Child A → Parent A**
+- **Child B → Parent B**
+- **Child C → Parent C**
+- **Child D → Parent D**
+- **Child E → Parent E**
+- **Child F → Parent F**
+
+Do not pick up a child cactus until you know where its matching parent is. Since you cannot ride your horse while carrying a child cactus, every wrong delivery wastes a lot of time.
+
+---
+
+<h2 id="all-cactus-pairings">
+  All child and parent cactus pairings
+</h2>
+
+<GuideTable
+  caption="All six Cactus Day child-parent pairings."
+  columns={cactusPairColumns}
+  rows={cactusPairRows}
+/>
+
+Use this table with the map above. The table tells you how to think about the route, while the map gives you the exact locations.
+
+If a pair is far apart, clear the path before picking up the child. If a pair is close together, finish it immediately while you are already nearby.
+
+---
+
+<h2 id="cactus-day-route-summary">
+  Cactus Day route summary
+</h2>
+
+<GuideTable
+  caption="Fast route summary for the Cactus Day secret."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+Cactus Day usually takes about **10-14 minutes** with a marked map. It can take much longer if you solve it only from dialogue hints or deliver children to the wrong parents.
+
+The route rule is simple:
+
+**Check the pair → clear the path → pick up the child → walk to the parent → confirm the match.**
+
+---
+
+<h2 id="how-cactus-day-works">
+  How the Cactus Day secret works
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/cactus-day-child-cactus.webp"
+    alt="Far Far West child cactus that must be carried back to the correct parent cactus."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Child cactuses can be picked up and carried, but you should know the matching parent before picking one up.
+  </figcaption>
+</figure>
+
+The secret works the same way for all six pairs:
+
+1. Find a child cactus on an **X** marker.
+2. Check the matching parent circle on the map.
+3. Clear enemies along the delivery path.
+4. Pick up the child cactus.
+5. Walk it to the matching parent.
+6. Confirm the parent accepts the child.
+7. Repeat until all six children are returned.
+
+The most common mistake is trying to solve the route by guessing from dialogue. Dialogue can help, but the marked map is faster and safer.
+
+---
+
+<h2 id="cactus-day-route-planning">
+  Best way to plan the Cactus Day route
+</h2>
+
+Because you cannot ride while carrying a child cactus, Cactus Day is mostly a route-planning task.
+
+Before each delivery, ask three questions:
+
+1. **Where is the matching parent?**
+2. **Is the path clear?**
+3. **Is there another nearby pair I should do next?**
+
+Do not carry a child cactus across the Desert just because you found it first. It is usually better to complete nearby pairs together, then move to the next cluster.
+
+If your map has route arrows, follow them. If your map only has pair labels, start with the pairs closest to your current position and avoid long cross-map deliveries until the nearby area is finished.
+
+---
+
+<h2 id="cactus-day-joker-reward">
+  Cactus Day Joker reward explained
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/cactus-day-joker-reward.webp"
+    alt="Far Far West Cactus Day Joker reward tooltip showing cactus mine effect."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cactus Day is a weapon Joker reward from the Desert secret mission.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Cactus Day Joker reward and why it is useful."
+  columns={rewardColumns}
+  rows={rewardRows}
+/>
+
+Cactus Day is best for **AoE clear**. Based on current testing, it can spawn cactus mines after kills, which makes it more useful against groups of enemies than against a single boss.
+
+It is not as universally useful as Bellshot for survival, and it is not as direct as Pigpick / Pick Pick for damage, but it is a good Desert secret reward if you want more area control.
+
+<GuideCallout title="Tooltip note">
+Far Far West is still in Early Access, so check the current in-game Cactus Day tooltip before building around exact trigger rates or stacking behavior.
+</GuideCallout>
+
+---
+
+<h2 id="cactus-day-troubleshooting">
+  Cactus Day troubleshooting
+</h2>
+
+<GuideTable
+  caption="Common Cactus Day problems and fixes."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+The most common Cactus Day mistake is carrying a child cactus to the wrong parent. The parent rejection is not a bug; it means the child-parent pair is wrong.
+
+If this happens, go back to the annotated map and match the child marker to the parent marker with the same color or label.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many cactuses are in Cactus Day?
+
+There are 12 cactuses involved: six child cactuses and six parent cactuses.
+
+### What do the X markers mean on the Cactus Day map?
+
+X markers show child cactus locations. Pick up the child cactus from the X marker and carry it to the matching parent.
+
+### What do the circle markers mean on the Cactus Day map?
+
+Circle markers show parent cactus locations. Each parent should match one child with the same color or label.
+
+### How do I know which child cactus belongs to which parent?
+
+Use the matching colors or letters on the annotated map. Child A goes to Parent A, Child B goes to Parent B, and so on.
+
+### Why does the parent cactus say this is not their child?
+
+You brought the wrong child cactus. Check the map again and match the child to the parent with the same color or letter.
+
+### Can I solve Cactus Day from dialogue hints?
+
+Yes, but it is slower. The marked map is much faster and less confusing.
+
+### How long does Cactus Day take?
+
+With a marked map, expect about 10-14 minutes. It can take much longer if you solve it only from dialogue hints or deliver children to the wrong parents.
+
+### Can I use my horse while carrying a child cactus?
+
+No. While carrying a child cactus, you cannot use your horse normally, so plan the route before picking it up.
+
+### What reward do you get from Cactus Day?
+
+You unlock the Cactus Day Joker.
+
+### What does the Cactus Day Joker do?
+
+Based on current testing, Cactus Day has a chance on kill to spawn cactus mines near where the enemy died. It is useful for AoE clear.
+
+### Is Cactus Day worth doing?
+
+Yes, especially if you want more area control. It is not as universally useful as Bellshot, but it is a good secret Joker for clearing enemy packs.
+
+### Should I do Cactus Day before the boss?
+
+Yes. Finish Cactus Day before killing the boss or starting extraction, because the route requires carrying multiple child cactuses across the Desert map.

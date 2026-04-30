@@ -1,0 +1,616 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const mapLegendColumns = [
+  { key: "marker", label: "Map Marker" },
+  { key: "meaning", label: "Meaning" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const mapLegendRows = [
+  {
+    marker: "Green star",
+    meaning: "Start / Large Tree",
+    whatToDo:
+      "Use the Large Tree as the route anchor before starting the mushroom sequence.",
+  },
+  {
+    marker: "Orange marker",
+    meaning: "Sequence Start",
+    whatToDo:
+      "Go here before touching the mushrooms. This is where the Woodlands sequence begins.",
+  },
+  {
+    marker: "Yellow mushrooms 1-7",
+    meaning: "Required mushrooms",
+    whatToDo:
+      "Touch all seven mushrooms in the numbered order shown on the map.",
+  },
+  {
+    marker: "Red marker",
+    meaning: "Return to Stone / Sequence finish",
+    whatToDo:
+      "Return here after Mushroom 7 to complete the Woodlands secret.",
+  },
+  {
+    marker: "Question mark",
+    meaning: "Unknown / optional",
+    whatToDo:
+      "Ignore these for the main Shroom Grave route unless future testing confirms another secret.",
+  },
+];
+
+export const sequenceColumns = [
+  { key: "order", label: "Order" },
+  { key: "mapMarker", label: "Map Marker" },
+  { key: "location", label: "Location" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const sequenceRows = [
+  {
+    order: "Start",
+    mapMarker: "Green star",
+    location: "Large Tree",
+    whatToDo:
+      "Begin at the Large Tree and use it as the route anchor.",
+  },
+  {
+    order: "Setup",
+    mapMarker: "Orange marker",
+    location: "Sequence Start",
+    whatToDo:
+      "Go to the Sequence Start marker before touching Mushroom 1.",
+  },
+  {
+    order: "1",
+    mapMarker: "Mushroom 1",
+    location: "Southeast side, near the red Return to Stone area",
+    whatToDo:
+      "Touch Mushroom 1 first, then continue along the lower route.",
+  },
+  {
+    order: "2",
+    mapMarker: "Mushroom 2",
+    location: "Lower southeast / south route",
+    whatToDo:
+      "Touch Mushroom 2 second.",
+  },
+  {
+    order: "3",
+    mapMarker: "Mushroom 3",
+    location: "Southwest edge of the map",
+    whatToDo:
+      "Touch Mushroom 3 third before moving up the west side.",
+  },
+  {
+    order: "4",
+    mapMarker: "Mushroom 4",
+    location: "Western edge, below the Sequence Start area",
+    whatToDo:
+      "Touch Mushroom 4 fourth.",
+  },
+  {
+    order: "5",
+    mapMarker: "Mushroom 5",
+    location: "Northwest cliff / upper-left route",
+    whatToDo:
+      "Touch Mushroom 5 fifth.",
+  },
+  {
+    order: "6",
+    mapMarker: "Mushroom 6",
+    location: "Northern ridge above the Large Tree",
+    whatToDo:
+      "Touch Mushroom 6 sixth.",
+  },
+  {
+    order: "7",
+    mapMarker: "Mushroom 7",
+    location: "Northeast edge of the map",
+    whatToDo:
+      "Touch Mushroom 7 last, then return to the red marker.",
+  },
+  {
+    order: "Finish",
+    mapMarker: "Red marker",
+    location: "Return to Stone",
+    whatToDo:
+      "Return to the stone after Mushroom 7 to complete the secret.",
+  },
+];
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "objective", label: "Objective" },
+  { key: "tip", label: "Tip" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    objective: "Start at the Large Tree.",
+    tip:
+      "Use the green star as your route anchor.",
+  },
+  {
+    step: "2",
+    objective: "Go to the Sequence Start marker.",
+    tip:
+      "The sequence should begin at the orange marker before you touch Mushroom 1.",
+  },
+  {
+    step: "3",
+    objective: "Follow Mushrooms 1-3 along the lower route.",
+    tip:
+      "Touch 1 near the southeast side, then 2 on the lower southeast route, then 3 on the southwest edge.",
+  },
+  {
+    step: "4",
+    objective: "Continue up the west side to Mushrooms 4 and 5.",
+    tip:
+      "Mushroom 4 is on the western edge, and Mushroom 5 is farther northwest.",
+  },
+  {
+    step: "5",
+    objective: "Cross the north side for Mushrooms 6 and 7.",
+    tip:
+      "Mushroom 6 is on the northern ridge, and Mushroom 7 is at the northeast edge.",
+  },
+  {
+    step: "6",
+    objective: "Return to the red stone marker.",
+    tip:
+      "After Mushroom 7, go back to the red Return to Stone marker to finish the secret.",
+  },
+];
+
+export const rewardColumns = [
+  { key: "reward", label: "Reward" },
+  { key: "effect", label: "Effect" },
+  { key: "verdict", label: "Verdict" },
+];
+
+export const rewardRows = [
+  {
+    reward: "Shroom Grave Joker",
+    effect:
+      "Unlocks a sustain-focused Joker tied to healing mushroom generation.",
+    verdict:
+      "Useful if you want extra healing or recovery during longer runs.",
+  },
+  {
+    reward: "Healing mushrooms",
+    effect:
+      "Based on current footage, Shroom Grave can generate healing mushrooms rather than direct damage effects.",
+    verdict:
+      "Better for survivability than for pure boss DPS.",
+  },
+];
+
+export const optionalColumns = [
+  { key: "marker", label: "Marker" },
+  { key: "status", label: "Status" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const optionalRows = [
+  {
+    marker: "Question mark near center",
+    status: "Unknown / optional",
+    whatToDo:
+      "Skip it for the main Shroom Grave route unless future testing proves it is required.",
+  },
+  {
+    marker: "Question mark near northeast",
+    status: "Unknown / optional",
+    whatToDo:
+      "Do not include it in the required 1-7 mushroom sequence.",
+  },
+  {
+    marker: "Other side markers",
+    status: "Unknown / optional",
+    whatToDo:
+      "Treat these as separate discoveries, not part of the core Woodlands mushroom sequence.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "The Woodlands mushroom secret did not complete.",
+    likelyCause:
+      "You may have skipped the Sequence Start, touched the mushrooms out of order, or failed to return to the red stone marker.",
+    fix:
+      "Restart from the Large Tree, go to Sequence Start, touch Mushrooms 1-7 in order, then return to the red marker.",
+  },
+  {
+    problem: "I touched all seven mushrooms but nothing happened.",
+    likelyCause:
+      "You may not have gone back to the Return to Stone marker after Mushroom 7.",
+    fix:
+      "After Mushroom 7, go to the red Return to Stone marker to finish the sequence.",
+  },
+  {
+    problem: "The sequence reset or failed.",
+    likelyCause:
+      "One mushroom was touched out of order.",
+    fix:
+      "Follow the numbered map exactly: 1 → 2 → 3 → 4 → 5 → 6 → 7.",
+  },
+  {
+    problem: "I cannot find Mushroom 6 or Mushroom 7.",
+    likelyCause:
+      "Both are on the upper / northern side of the map and are easy to miss if you stay near the center.",
+    fix:
+      "After Mushroom 5, follow the top route to Mushroom 6 on the northern ridge, then Mushroom 7 on the northeast edge.",
+  },
+  {
+    problem: "I went to a question mark marker and got confused.",
+    likelyCause:
+      "The question marks are unknown or optional locations, not required mushrooms.",
+    fix:
+      "Ignore question marks for this route. Follow only the numbered mushroom markers and the red return marker.",
+  },
+  {
+    problem: "I got the reward once but cannot repeat the route cleanly.",
+    likelyCause:
+      "The Woodlands route covers most of the map edge, so it is easy to lose the clockwise path.",
+    fix:
+      "Use the Large Tree as your anchor, then follow the bottom route to 1-3, west side to 4-5, north side to 6-7, and return to the red marker.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To complete the Woodlands mushroom secret in Far Far West, start at the Large Tree, go to the Sequence Start marker, touch all seven mushrooms in order, then return to the red Return to Stone marker.**
+
+The correct route is:
+
+**Large Tree → Sequence Start → Mushroom 1 → 2 → 3 → 4 → 5 → 6 → 7 → Return to Stone**
+
+Completing the sequence unlocks the **Shroom Grave Joker**.
+</GuideQuickAnswer>
+
+---
+
+<GuideCallout title="Most important rule">
+The Woodlands secret uses **7 required mushrooms**. Do not follow the question mark markers for the main sequence. Touch Mushrooms **1-7 in order**, then return to the red stone marker.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/woodlands-mushroom-sequence-map.webp"
+    alt="Far Far West Woodlands Mushroom Sequence Map showing all 7 required mushrooms, Large Tree start, Sequence Start, and Return to Stone marker."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Follow the numbered route: Large Tree → Sequence Start → Mushrooms 1-7 → Return to Stone.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="woodlands-map-legend">
+  How to read the Woodlands mushroom map
+</h2>
+
+<GuideTable
+  caption="Woodlands mushroom map markers and what they mean."
+  columns={mapLegendColumns}
+  rows={mapLegendRows}
+/>
+
+The map is the main solution for this secret. The important markers are:
+
+- **Green star** = start at the Large Tree
+- **Orange marker** = Sequence Start
+- **Mushrooms 1-7** = required mushrooms
+- **Red marker** = Return to Stone
+- **Question marks** = unknown or optional locations
+
+For the main Shroom Grave route, ignore the question marks and follow only the numbered mushroom route.
+
+---
+
+<h2 id="woodlands-mushroom-sequence">
+  Woodlands mushroom sequence
+</h2>
+
+<GuideTable
+  caption="Correct Woodlands mushroom sequence."
+  columns={sequenceColumns}
+  rows={sequenceRows}
+/>
+
+The route moves around the map edge in a wide loop. Start from the Large Tree, begin at the Sequence Start marker, then follow the mushroom numbers in order.
+
+Do not skip from Mushroom 3 to Mushroom 6 or chase question marks during the route. The sequence is meant to be followed as a clean 1-7 path.
+
+---
+
+<h2 id="woodlands-route-summary">
+  Woodlands route summary
+</h2>
+
+<GuideTable
+  caption="Fast route summary for the Woodlands mushroom secret."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+This route is longer than it looks because it sends you around the outer edge of the Woodlands map.
+
+The simplest mental model is:
+
+**Start center → go southeast to 1 → sweep the bottom edge to 3 → climb the west side to 5 → cross the north to 7 → return east to the stone.**
+
+---
+
+<h2 id="sequence-start">
+  Sequence Start marker
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/woodlands-sequence-start.webp"
+    alt="Far Far West Woodlands Sequence Start marker for the mushroom secret."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Go to the orange Sequence Start marker before touching Mushroom 1.
+  </figcaption>
+</figure>
+
+Start at the Large Tree, then go to the orange Sequence Start marker.
+
+This step matters because the mushroom route is a sequence, not just a collection route. If the mushrooms do not register, restart from the Sequence Start marker and follow the route again.
+
+---
+
+<h2 id="mushrooms-1-to-3">
+  Mushrooms 1-3: lower route
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/woodlands-mushrooms-1-3.webp"
+    alt="Far Far West Woodlands mushrooms 1 to 3 along the lower route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mushrooms 1-3 take you from the southeast side toward the southwest edge of the map.
+  </figcaption>
+</figure>
+
+After Sequence Start, begin the numbered route.
+
+**Mushroom 1** is on the southeast side near the return area.  
+**Mushroom 2** is farther along the lower southeast route.  
+**Mushroom 3** is on the southwest edge.
+
+Touch them in this order:
+
+**1 → 2 → 3**
+
+Do not go to the red marker yet. The red marker is for the end of the sequence.
+
+---
+
+<h2 id="mushrooms-4-to-5">
+  Mushrooms 4-5: western route
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/woodlands-mushrooms-4-5.webp"
+    alt="Far Far West Woodlands mushrooms 4 and 5 on the western side of the map."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mushrooms 4 and 5 continue the sequence up the western side of the Woodlands map.
+  </figcaption>
+</figure>
+
+After Mushroom 3, move north along the west side.
+
+**Mushroom 4** is on the western edge.  
+**Mushroom 5** is farther northwest near the upper-left route.
+
+Touch them in this order:
+
+**4 → 5**
+
+---
+
+<h2 id="mushrooms-6-to-7">
+  Mushrooms 6-7: northern route
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/woodlands-mushrooms-6-7.webp"
+    alt="Far Far West Woodlands mushrooms 6 and 7 on the northern and northeast side of the map."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mushrooms 6 and 7 are on the northern side of the map and are easy to miss if you stay near the center.
+  </figcaption>
+</figure>
+
+After Mushroom 5, follow the top side of the map.
+
+**Mushroom 6** is on the northern ridge above the Large Tree.  
+**Mushroom 7** is on the northeast edge.
+
+Touch them in this order:
+
+**6 → 7**
+
+After Mushroom 7, your next step is the red Return to Stone marker.
+
+---
+
+<h2 id="return-to-stone">
+  Return to Stone marker
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/woodlands-return-to-stone.webp"
+    alt="Far Far West Woodlands Return to Stone marker after completing all 7 mushrooms."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After Mushroom 7, return to the red stone marker to complete the Woodlands secret.
+  </figcaption>
+</figure>
+
+The Woodlands mushroom route does not end at Mushroom 7.
+
+After touching Mushroom 7:
+
+1. Stop following the outer route.
+2. Go back to the red Return to Stone marker.
+3. Complete the sequence there.
+4. Finish the run normally to keep the unlock.
+
+If you touch all seven mushrooms but skip the red marker, the secret may not complete.
+
+---
+
+<h2 id="unknown-optional-markers">
+  Are the question mark markers required?
+</h2>
+
+<GuideTable
+  caption="Unknown or optional Woodlands markers."
+  columns={optionalColumns}
+  rows={optionalRows}
+/>
+
+The question mark markers should not be treated as required for the main Shroom Grave route.
+
+For this guide, the required route is:
+
+**Large Tree → Sequence Start → 1 → 2 → 3 → 4 → 5 → 6 → 7 → Return to Stone**
+
+If future testing proves that the question marks unlock a separate secret, they should become a separate section or a separate guide.
+
+---
+
+<h2 id="shroom-grave-reward">
+  Shroom Grave Joker reward explained
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/far-far-west/shroom-grave-joker-reward.webp"
+    alt="Far Far West Shroom Grave Joker reward tooltip."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Woodlands mushroom secret unlocks the Shroom Grave Joker.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Shroom Grave reward and why it matters."
+  columns={rewardColumns}
+  rows={rewardRows}
+/>
+
+The reward is **Shroom Grave**, a sustain-focused Joker associated with healing mushrooms.
+
+It is more useful for staying alive during runs than for pure single-target boss damage. If you want raw damage, Pigpick / Pick Pick is usually the stronger secret reward. If you want sustain, Shroom Grave is worth unlocking.
+
+<GuideCallout title="Tooltip note">
+Far Far West is still in Early Access, so check the current in-game Shroom Grave tooltip for exact trigger wording and numbers.
+</GuideCallout>
+
+---
+
+<h2 id="woodlands-troubleshooting">
+  Woodlands troubleshooting
+</h2>
+
+<GuideTable
+  caption="Common Woodlands mushroom problems and fixes."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+Most failures come from sequence mistakes. If the secret does not complete, restart from the Large Tree route and follow the numbered path exactly.
+
+The safe route is:
+
+**Large Tree → Sequence Start → 1 → 2 → 3 → 4 → 5 → 6 → 7 → Return to Stone**
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many mushrooms are required for the Woodlands secret?
+
+The Woodlands secret requires **7 mushrooms**, touched in the numbered order shown on the map.
+
+### What is the correct Woodlands mushroom order?
+
+The correct order is **Mushroom 1 → 2 → 3 → 4 → 5 → 6 → 7**, then return to the stone marker.
+
+### Where do I start the Woodlands mushroom sequence?
+
+Start at the **Large Tree**, then go to the orange **Sequence Start** marker before touching Mushroom 1.
+
+### What do I do after Mushroom 7?
+
+Return to the red **Return to Stone** marker. The secret does not end at Mushroom 7.
+
+### Are the question mark markers required?
+
+No. Treat the question marks as unknown or optional. They are not required for the main Shroom Grave route.
+
+### Why did the Woodlands secret not complete?
+
+You probably skipped the Sequence Start, touched a mushroom out of order, or forgot to return to the red stone marker after Mushroom 7.
+
+### What reward do you get from the Woodlands mushroom secret?
+
+You unlock the **Shroom Grave Joker**.
+
+### What does Shroom Grave do?
+
+Shroom Grave is associated with healing mushrooms, making it a sustain-focused reward.
+
+### Is Shroom Grave worth unlocking?
+
+Yes, especially if you want more sustain. It is less direct than Pigpick for damage, but useful for staying alive.
+
+### Should I do the Woodlands secret before the boss?
+
+Yes. Complete the mushroom route before killing the boss or starting extraction so you can follow the full map route without late-run pressure.

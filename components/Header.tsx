@@ -50,6 +50,13 @@ const Header = () => {
                   </ActiveLink>
 
                   <ActiveLink 
+                    href="/far-far-west/secret-missions" 
+                    className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors font-medium"
+                  >
+                    Far Far West
+                  </ActiveLink>
+
+                  <ActiveLink 
                     href="/shapez-2" 
                     className="block px-4 py-2.5 text-sm text-slate-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors font-medium"
                   >
@@ -236,6 +243,7 @@ const Header = () => {
                 Collection
               </ActiveLink>
             </li>
+            
             <li>
               <ActiveLink 
                 href="/play-online" 
@@ -244,6 +252,7 @@ const Header = () => {
                 Play Online
               </ActiveLink>
             </li>
+
             <li>
               <ActiveLink 
                 href="/download-and-news" 

@@ -139,6 +139,48 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-sky-700",
 },
 
+// ===== Far Far West =====
+{
+  href: "/far-far-west/secret-missions",
+  game: "Far Far West",
+  title: "All Secret Missions & Secret Jokers Guide",
+  description:
+    "Start here for every Far Far West secret mission: Ghost Bells, Canyon Medallions, Cactus Day, Woodlands Mushrooms, Area 41 symbols, and Snowman Parts.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+{
+  href: "/far-far-west/canyon-secret-medallion-locations",
+  game: "Far Far West",
+  title: "Canyon Secret Medallion Locations",
+  description:
+    "Find all 4 Canyon medallions, complete the Hawkeye targets, open the secret cave, and unlock Pigpick / Pick Pick plus the Elder Pickaxe reward.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+{
+  href: "/far-far-west/ghost-bell-shard-locations",
+  game: "Far Far West",
+  title: "Ghost Bell Shard Locations & Bellshot Guide",
+  description:
+    "Find all 3 Ghost Bell Shards, complete each bell order mini-game, return to the Great Bell, and unlock the Bellshot weapon Joker.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+{
+  href: "/far-far-west/area-41-symbol-order",
+  game: "Far Far West",
+  title: "Area 41 Symbol Order Guide",
+  description:
+    "Solve the Area 41 alien symbol puzzle, rotate the four pillars in the correct order, press the button, and unlock Anti-Gravity Falls.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
 // ===== Fracture Field =====
 {
   href: "/fracture-field",
