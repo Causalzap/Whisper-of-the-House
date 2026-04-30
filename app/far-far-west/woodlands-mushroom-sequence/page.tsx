@@ -209,7 +209,7 @@ export default function Page() {
           title="Far Far West Woodlands Mushroom Sequence Guide"
           description="Follow the full Woodlands mushroom route in Far Far West: start at the Large Tree, touch all 7 mushrooms in order, return to the stone marker, and unlock Shroom Grave."
           gameTitle="Far Far West"
-          gameHref="/far-far-west"
+          gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="April 30, 2026"

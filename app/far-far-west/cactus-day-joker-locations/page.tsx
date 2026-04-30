@@ -197,7 +197,7 @@ export default function Page() {
           title="Far Far West Cactus Day Joker Locations Guide"
           description="Find every child cactus and parent cactus in Far Far West, complete the Desert Cactus Day secret, and unlock the Cactus Day Joker."
           gameTitle="Far Far West"
-          gameHref="/far-far-west"
+          gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="April 30, 2026"

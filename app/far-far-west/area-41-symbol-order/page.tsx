@@ -211,7 +211,7 @@ export default function Page() {
           title="Far Far West Area 41 Symbol Order Guide"
           description="Solve the Area 41 alien symbol puzzle in Far Far West, rotate the four pillars in the correct order, press the button, and unlock Anti-Gravity Falls."
           gameTitle="Far Far West"
-          gameHref="/far-far-west"
+          gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="April 30, 2026"

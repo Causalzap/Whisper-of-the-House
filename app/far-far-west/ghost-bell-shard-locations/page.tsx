@@ -228,7 +228,7 @@ export default function Page() {
           title="Far Far West Ghost Bell Shard Locations: How to Unlock Bellshot"
           description="Find all three Ghost Bell Shards in Far Far West, complete the bell order mini-games, return to the Great Bell, and unlock Bellshot."
           gameTitle="Far Far West"
-          gameHref="/far-far-west"
+          gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="April 30, 2026"

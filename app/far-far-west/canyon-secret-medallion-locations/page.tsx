@@ -246,7 +246,7 @@ export default function Page() {
           title="Far Far West Canyon Secret Guide: All 4 Medallion Locations"
           description="Find every Canyon medallion in Far Far West, solve the Johnny Hawkeye 10-target puzzle, open the secret cave, and claim the Pigpick Joker and Elder Pickaxe rewards."
           gameTitle="Far Far West"
-          gameHref="/far-far-west"
+          gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="April 30, 2026"

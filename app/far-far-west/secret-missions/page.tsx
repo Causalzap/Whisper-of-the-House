@@ -33,7 +33,7 @@ const jsonLd = {
           "@type": "ListItem",
           position: 2,
           name: "Far Far West Guide",
-          item: `${siteUrl}/far-far-west`,
+          item: `${siteUrl}/far-far-west/secret-missions`,
         },
         {
           "@type": "ListItem",
@@ -233,7 +233,7 @@ export default function Page() {
           title="Far Far West All Secret Missions & Secret Jokers Guide"
           description="Find every secret mission in Far Far West, compare all secret Joker rewards, and learn which hidden objectives to complete first."
           gameTitle="Far Far West"
-          gameHref="/far-far-west"
+          gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="April 30, 2026"

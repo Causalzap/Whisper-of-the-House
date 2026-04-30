@@ -233,7 +233,7 @@ export default function Page() {
           title="Far Far West Snowman Parts Locations Guide"
           description="Find the Snowman Cave, Head, Chest, and Body in Far Far North, return each part safely, and unlock the Caribou / Carriable skin."
           gameTitle="Far Far West"
-          gameHref="/far-far-west"
+          gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="April 30, 2026"
