@@ -1,0 +1,859 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const heroColumns = [
+  { key: "hero", label: "Hero" },
+  { key: "startsWith", label: "Starts With" },
+  { key: "bestFor", label: "Best For" },
+  { key: "whyPick", label: "Why Pick This Hero" },
+];
+
+export const heroRows = [
+  {
+    hero: "Onkos",
+    startsWith: "Necromancy + Offence; Skeleton specialty",
+    bestFor: "Skeleton Archer snowball",
+    whyPick:
+      "The cleanest pick if you want a direct Skeleton plan. Onkos improves Skeleton growth and combat value, which makes the Skeleton Archer opening easier to execute.",
+  },
+  {
+    hero: "Marl",
+    startsWith: "Necromancy + Logistics; Masterful Web",
+    bestFor: "Safe clearing and tempo",
+    whyPick:
+      "One of the best practical Necropolis starts. Web slows enemy armies, while Logistics improves map movement and helps you take more useful objectives in Week 1.",
+  },
+  {
+    hero: "Mag",
+    startsWith: "Necromancy + Arcane Magic; Impending Fate",
+    bestFor: "Magic-heavy Necropolis",
+    whyPick:
+      "Pick Mag if you want a caster-style Necropolis route. Arcane Magic gives him a stronger spell identity than the pure Skeleton mass heroes.",
+  },
+  {
+    hero: "Funerella",
+    startsWith: "Advanced Necromancy; Shackles",
+    bestFor: "Necromancy scaling",
+    whyPick:
+      "Funerella starts ahead on the faction's core snowball skill. She is a strong pick when your plan is repeated low-loss fights and long-term undead growth.",
+  },
+  {
+    hero: "Shadespinner Oona",
+    startsWith: "Necromancy + Nightshade Magic; Sleep",
+    bestFor: "Control and spell disruption",
+    whyPick:
+      "Oona is a control-oriented Necromancer. Sleep helps disable dangerous stacks, which can reduce early losses and make harder fights safer.",
+  },
+  {
+    hero: "King-of-Kings",
+    startsWith: "Necromancy + Diplomacy",
+    bestFor: "Diplomacy + Undead Transformer snowball",
+    whyPick:
+      "The current high-priority Necropolis pick for conversion economy. King-of-Kings uses Diplomacy to recruit or preserve neutral creature value, then turns that value into undead power through the Undead Transformer. This route can scale faster than battle-only Necromancy when the map supports it.",
+  },
+];
+
+export const numberColumns = [
+  { key: "number", label: "Number" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "howToUseIt", label: "How To Use It" },
+];
+
+export const numberRows = [
+  {
+    number: "30 Skeletons per week",
+    whatItMeans:
+      "Skeletons have high weekly growth, which is the foundation of the Necropolis mass-army plan.",
+    howToUseIt:
+      "Do not throw Skeletons away in bad trades. They are cheap, but they are also your main snowball body.",
+  },
+  {
+    number: "10 gold per Skeleton upgrade",
+    whatItMeans:
+      "Turning Skeletons into Skeleton Archers costs 10 gold per unit in the current Early Access data.",
+    howToUseIt:
+      "If you have 100 Skeletons, budget 1000 gold for the upgrade. This is often worth it because ranged damage reduces early losses.",
+  },
+  {
+    number: "Skeleton Archer price: 50 gold",
+    whatItMeans:
+      "Skeleton Archers are still cheap Tier 1 units, but the ranged attack changes your opening fights.",
+    howToUseIt:
+      "Use them to clear weaker armies before those armies can force melee trades.",
+  },
+  {
+    number: "100–200 Skeleton Archers by Week 2",
+    whatItMeans:
+      "A strong snowball start can move toward a large ranged stack by Week 2, depending on hero, laws, conversion, and losses.",
+    howToUseIt:
+      "Use this as a target range, not a guaranteed number. If you are far below it, you probably lost too many units or delayed your growth engine.",
+  },
+  {
+    number: "4% / 6% / 8% of defeated enemy HP",
+    whatItMeans:
+      "Basic, Advanced, and Expert Necromancy convert a percentage of defeated enemy HP into allied Undead HP. It is not based on enemy unit count.",
+    howToUseIt:
+      "Do not expect huge Skeleton waves from weak enemies. Necromancy scales better when you beat higher-HP armies while keeping your own losses low.",
+  },
+];
+
+export const timelineColumns = [
+  { key: "timing", label: "Timing" },
+  { key: "goal", label: "Goal" },
+  { key: "check", label: "What To Check" },
+];
+
+export const timelineRows = [
+  {
+    timing: "Day 1",
+    goal:
+      "Recruit your starting army, inspect your hero, and decide whether you are playing Skeleton mass, spell control, or Diplomacy conversion.",
+    check:
+      "Onkos wants Skeleton tempo. Marl and Oona want safer control fights. King-of-Kings wants creature huts, neutral recruitment, and conversion.",
+  },
+  {
+    timing: "Days 1–3",
+    goal:
+      "Upgrade Skeletons into Skeleton Archers when the upgrade improves your next fights.",
+    check:
+      "Count your Skeletons and gold. At 10 gold per Skeleton, 100 Skeletons require 1000 gold to upgrade.",
+  },
+  {
+    timing: "Days 3–5",
+    goal:
+      "Take repeated low-loss fights to feed Necromancy and build toward Marketplace, Graverobbers, Liches, Vampires, or Mage Guild.",
+    check:
+      "Do not take lethal fights unless the reward directly unlocks a major timing.",
+  },
+  {
+    timing: "End of Week 1",
+    goal:
+      "Stabilize before weekly creature growth if you need new units.",
+    check:
+      "If your army is damaged, stop forcing fights and use the town, Marketplace, or safer objectives.",
+  },
+  {
+    timing: "Week 2",
+    goal:
+      "Reach a larger Skeleton Archer stack and start converting map value into undead snowball.",
+    check:
+      "A strong start may be moving toward 100–200 Skeleton Archers, depending on hero, fights, laws, conversion, and losses.",
+  },
+];
+
+export const buildOrderColumns = [
+  { key: "day", label: "Day" },
+  { key: "mainBuild", label: "Main Build" },
+  { key: "ifBlocked", label: "If Blocked" },
+  { key: "why", label: "Why This Matters" },
+];
+
+export const buildOrderRows = [
+  {
+    day: "Day 1",
+    mainBuild:
+      "Upgrade your town economy or unlock the Skeleton Archer path if the building route is available.",
+    ifBlocked:
+      "Take the economy option that gives immediate compounding value: gold, Law Points, or the resource you are missing.",
+    why:
+      "Your first build should either make your Skeleton plan safer or make every following day stronger.",
+  },
+  {
+    day: "Day 2",
+    mainBuild:
+      "Upgrade Skeletons into Skeleton Archers if you have enough gold and the upgrade improves your next fights.",
+    ifBlocked:
+      "Build Marketplace or a low-tier creature/economy building if you are short on the exact resource or gold timing.",
+    why:
+      "The Archer upgrade is the biggest early combat shift. At 10 gold per Skeleton, count the stack before committing.",
+  },
+  {
+    day: "Day 3",
+    mainBuild:
+      "Add Marketplace, Mage Guild, or the next creature dwelling depending on your map rewards.",
+    ifBlocked:
+      "If your army is already safe, choose economy. If your fights are unsafe, choose the building that reduces losses.",
+    why:
+      "Necropolis can stall if it has gold but lacks the right resource, spell access, or creature support.",
+  },
+  {
+    day: "Day 4",
+    mainBuild:
+      "Start moving toward Graverobbers, Liches, or Vampires based on your hero plan.",
+    ifBlocked:
+      "On Onkos, keep reinforcing Skeleton Archer tempo. On King-of-Kings, prioritize conversion support and creature collection.",
+    why:
+      "This is where your hero choice should start changing the build order instead of following a generic path.",
+  },
+  {
+    day: "Day 5",
+    mainBuild:
+      "Take the building or law route that improves your army engine: Skeleton growth, Necromancy power, or resource access.",
+    ifBlocked:
+      "Use Marketplace trades or safer map rewards before forcing a high-tier building you cannot support.",
+    why:
+      "A delayed but stable Necropolis engine is better than a rushed building that leaves your army too weak to clear.",
+  },
+  {
+    day: "Day 6",
+    mainBuild:
+      "Commit to your first major power target: larger Skeleton Archer stack, Lich utility, Vampire sustain, or Undead Transformer setup.",
+    ifBlocked:
+      "If you took heavy losses, rebuild and recruit instead of chasing a greedy high-tier timing.",
+    why:
+      "The end of Week 1 should prepare your Week 2 snowball, not leave you with an expensive but fragile army.",
+  },
+  {
+    day: "Day 7",
+    mainBuild:
+      "Recruit before weekly growth refresh if needed, consolidate stacks, and prepare your Week 2 route.",
+    ifBlocked:
+      "Use a secondary hero for pickup, delivery, creature huts, and Undead Transformer setup.",
+    why:
+      "Week 2 is where Necropolis should start converting early planning into visible army size.",
+  },
+];
+
+export const necromancyColumns = [
+  { key: "level", label: "Necromancy Level" },
+  { key: "effect", label: "Effect" },
+  { key: "priority", label: "Priority" },
+];
+
+export const necromancyRows = [
+  {
+    level: "Basic Necromancy",
+    effect:
+      "Converts 4% of defeated enemies' HP into allied Undead HP after each victory.",
+    priority:
+      "Good baseline. Every Necropolis hero wants value from this, but it is only the start of the snowball.",
+  },
+  {
+    level: "Advanced Necromancy",
+    effect:
+      "Converts 6% of defeated enemies' HP into allied Undead HP after each victory.",
+    priority:
+      "High priority if your hero can reach it early. This is where repeated safe fights start feeling more rewarding.",
+  },
+  {
+    level: "Expert Necromancy",
+    effect:
+      "Converts 8% of defeated enemies' HP into allied Undead HP after each victory.",
+    priority:
+      "Best for dedicated Necromancy scaling. Prioritize it when your route is built around army growth instead of short-term spell damage.",
+  },
+  {
+    level: "Soul Harvest",
+    effect:
+      "Restores mana after battle victory.",
+    priority:
+      "Useful for magic-heavy Necropolis starts that want to keep casting while clearing.",
+  },
+  {
+    level: "Lord of the Dead",
+    effect:
+      "Adds extra Necromancy power.",
+    priority:
+      "Strong when your goal is maximum undead growth from repeated fights.",
+  },
+  {
+    level: "Eternal Service",
+    effect:
+      "Grants an ability that restores HP to a friendly target and can revive fallen units.",
+    priority:
+      "Very strong when you are trying to preserve important stacks during harder fights.",
+  },
+];
+
+export const focusColumns = [
+  { key: "unit", label: "Unit / Mechanic" },
+  { key: "focusUse", label: "Focus Use" },
+  { key: "howToPlay", label: "How To Play Around It" },
+];
+
+export const focusRows = [
+  {
+    unit: "Liches",
+    focusUse:
+      "Rewind Death restores HP to a friendly unit and can revive fallen units.",
+    howToPlay:
+      "Do not spend Focus randomly before your Lich turn if a key stack may need a revive.",
+  },
+  {
+    unit: "Graverobbers",
+    focusUse:
+      "Dig Up Bones summons Skeletons on an adjacent hex.",
+    howToPlay:
+      "Use Graverobbers to create bodies, block paths, and add Skeleton value during fights.",
+  },
+  {
+    unit: "Necromancy route",
+    focusUse:
+      "Focus does not replace Necromancy, but it helps your army survive the fights that feed Necromancy.",
+    howToPlay:
+      "Preserve Focus for the turn where it prevents losses, not the first turn where a button is available.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Picking a hero without a plan",
+    whyItHurts:
+      "Necropolis heroes push different openings. Onkos, Marl, Mag, Funerella, Oona, and King-of-Kings do not want the same first week.",
+    betterPlay:
+      "Choose the hero based on your route: Skeleton mass, Web tempo, spell control, Necromancy scaling, or Diplomacy conversion.",
+  },
+  {
+    mistake: "Delaying Skeleton Archers",
+    whyItHurts:
+      "Without a ranged Tier 1 stack, early fights cost more melee losses.",
+    betterPlay:
+      "Upgrade Skeletons when the 10 gold per unit cost lets you clear several fights more safely.",
+  },
+  {
+    mistake: "Misreading Necromancy",
+    whyItHurts:
+      "Necromancy is based on defeated enemy HP, not enemy unit count. Weak enemies do not create huge reanimation value.",
+    betterPlay:
+      "Use Necromancy as a steady snowball tool, not as your only source of army growth.",
+  },
+  {
+    mistake: "Ignoring Undead Transformer",
+    whyItHurts:
+      "You miss one of Necropolis' strongest ways to turn neutral creatures and map pickups into faction value.",
+    betterPlay:
+      "Use a secondary hero or Diplomacy hero to collect creature huts and feed conversion.",
+  },
+  {
+    mistake: "Wasting Focus before Lich or Graverobber turns",
+    whyItHurts:
+      "Necropolis-specific Focus abilities can revive, preserve, summon, or protect value.",
+    betterPlay:
+      "Save Focus when a Lich revive or Graverobber summon will prevent losses or create a tactical block.",
+  },
+  {
+    mistake: "Taking every fight",
+    whyItHurts:
+      "A bad early fight can erase the unit count that your Skeleton Archer and Necromancy engine is trying to multiply.",
+    betterPlay:
+      "Use the fight checklist in the When to Fight section instead of clicking every available battle.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Necropolis is a snowball faction in Heroes of Might and Magic: Olden Era. The safe plan is to turn Skeleton growth, Necromancy, Skeleton Archers, Diplomacy, and Undead Transformer value into a bigger army every week.**
+
+For most starts:
+
+1. **Pick a hero with a clear plan**: Onkos for Skeletons, Marl for Web tempo, Mag for Arcane Magic, Funerella for Necromancy scaling, Oona for Sleep control, or King-of-Kings for Diplomacy and conversion.
+2. **Upgrade Skeletons into Skeleton Archers early** when the gold cost improves your next fights.
+3. **Level Necromancy**, but remember that Basic / Advanced / Expert converts **4% / 6% / 8% of defeated enemy HP**, not enemy unit count.
+4. **Use the Undead Transformer aggressively** because Diplomacy and creature hut pickups can become Necropolis army value faster than battle-only Necromancy.
+5. **Save Focus for Necropolis-specific abilities**, especially Lich revive and Graverobber summons.
+6. **Avoid bad early losses** because Necropolis wins by multiplying army value, not by trading evenly.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-skeletal-archers.webp"
+    alt="Necropolis Skeletons upgraded into Skeleton Archers in Heroes Olden Era."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Skeleton Archers are the cleanest early Necropolis direction because ranged damage turns Skeleton growth into safer map clearing.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="is-necropolis-good">
+  Is Necropolis good for beginners?
+</h2>
+
+Necropolis is strong, but it is not a careless beginner faction. It rewards planning because your early choices decide whether your army starts multiplying or collapses after a few expensive fights.
+
+The faction's core idea is simple:
+
+**win fights with low losses, convert battle value through Necromancy, upgrade Skeletons into ranged damage, and use conversion mechanics to keep growing.**
+
+That means Necropolis is beginner-playable if you follow a structure. It is much harder if you click every fight, delay Skeleton Archer upgrades, misunderstand Necromancy, or never use the Undead Transformer.
+
+<GuideCallout title="Beginner verdict">
+Necropolis is best for players who like snowballing armies. Start with a hero plan, upgrade Skeletons into Skeleton Archers, level Necromancy, use conversion mechanics, and avoid fights that damage your main stack before the snowball starts.
+</GuideCallout>
+
+Use the full <Link href="/olden-era/beginner-economy-guide">Beginner Economy Guide</Link> if you are still learning buildings, resources, Law Points, Astrology Points, Focus, and first-week priorities.
+
+---
+
+<h2 id="best-necropolis-heroes">
+  Best Necropolis heroes
+</h2>
+
+<GuideTable
+  caption="Best Heroes Olden Era Necropolis heroes by opening plan."
+  columns={heroColumns}
+  rows={heroRows}
+/>
+
+The best Necropolis hero depends on what kind of snowball you want.
+
+**Onkos** is the easiest hero to recommend for a Skeleton-focused opening. He directly supports the unit that most Necropolis players want to scale first, and he makes the Skeleton Archer plan easier to execute.
+
+**Marl** is the best tempo pick if you want safer clearing. Web gives you more control over enemy movement, and Logistics makes your map route smoother.
+
+**Mag** is the magic route. Pick Mag when you want Necropolis to feel more like a spellcasting faction instead of a pure Skeleton engine.
+
+**Funerella** is the Necromancy scaling pick. Advanced Necromancy gives her a head start on the faction's main snowball system.
+
+**Shadespinner Oona** is a control pick. Sleep and Nightshade Magic help you disable dangerous stacks and reduce early losses.
+
+**King-of-Kings** is the conversion economy pick. Diplomacy pairs naturally with creature huts, neutral creature recruitment, and the Undead Transformer. In the current Early Access version, this route can be stronger than relying only on post-battle Necromancy.
+
+<GuideCallout title="Hero rule">
+Do not choose a Necropolis hero only by raw strength. Choose the hero that matches your first-week plan: Skeleton mass, Web tempo, spell control, Necromancy scaling, or Diplomacy conversion.
+</GuideCallout>
+
+<GuideCallout title="Early Access balance warning">
+This Necropolis guide is based on the April 30, 2026 Early Access version. King-of-Kings, Diplomacy recruitment, Undead Transformer conversion, and Necromancy HP conversion are high-impact systems and should be rechecked after balance patches.
+</GuideCallout>
+
+---
+
+<h2 id="key-numbers">
+  Key Necropolis numbers
+</h2>
+
+<GuideTable
+  caption="Important Necropolis numbers for early decisions."
+  columns={numberColumns}
+  rows={numberRows}
+/>
+
+The most important opening number is the **Skeleton upgrade cost**.
+
+Skeletons upgrade for **10 gold per unit**, so the real cost depends on your stack size:
+
+- 50 Skeletons → 500 gold
+- 100 Skeletons → 1000 gold
+- 150 Skeletons → 1500 gold
+- 200 Skeletons → 2000 gold
+
+This is why “upgrade when affordable” is too vague. Count your Skeletons, check your gold, and ask whether the upgrade will save more units than the same gold would buy elsewhere.
+
+<GuideCallout title="Skeleton Archer rule">
+If upgrading Skeletons into Skeleton Archers lets you take several fights with fewer losses, the upgrade is usually worth the gold.
+</GuideCallout>
+
+Use the dedicated <Link href="/olden-era/necropolis-skeletal-archers">Necropolis Skeleton Archers Guide</Link> once it is live.
+
+---
+
+<h2 id="week-one-timeline">
+  Necropolis Week 1 timeline
+</h2>
+
+<GuideTable
+  caption="Safe Necropolis Week 1 and Week 2 timing."
+  columns={timelineColumns}
+  rows={timelineRows}
+/>
+
+Your goal is not simply to reach Vampires or Liches as fast as possible. Your goal is to make sure every turn supports one of these engines:
+
+- Skeleton Archer ranged clearing
+- Necromancy HP conversion after victories
+- Undead Transformer conversion
+- creature hut collection
+- Marketplace resource fixing
+- Lich or Graverobber Focus value
+- Law Points that improve army growth or Necromancy power
+
+If your first week does not improve one of these engines, you are probably drifting.
+
+---
+
+<h2 id="week-one-build-order">
+  Necropolis Week 1 build order
+</h2>
+
+<GuideTable
+  caption="Recommended Necropolis Day 1 to Day 7 build order."
+  columns={buildOrderColumns}
+  rows={buildOrderRows}
+/>
+
+This is a **safe build order**, not a fixed script. Olden Era maps, starting resources, nearby rewards, and Early Access patches can change the correct decision.
+
+The main rule is:
+
+**build for the next fight, not for a perfect town screen.**
+
+If your Skeleton Archers let you clear three extra fights safely, upgrade them. If your army is already safe but your resources are awkward, build Marketplace. If your hero is King-of-Kings, prioritize creature huts and Undead Transformer setup sooner than an Onkos player would.
+
+<GuideCallout title="Build order rule">
+Necropolis Week 1 is successful when your Week 2 army is larger, safer, and easier to multiply. A greedy Vampire or Lich rush is only good if it does not break your Skeleton, Necromancy, or conversion engine.
+</GuideCallout>
+
+---
+
+<h2 id="skeletal-archers">
+  Skeletons into Skeleton Archers
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-starting-skeletons.webp"
+    alt="Necropolis starting Skeletons before upgrading into Skeleton Archers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Skeletons are the body of the Necropolis army. The Archer upgrade decides whether that body trades in melee or clears safely from range.
+  </figcaption>
+</figure>
+
+Skeletons are cheap and grow quickly, but basic melee Skeletons still take damage when they trade. The upgrade into **Skeleton Archers** changes the opening because it lets your largest early stack contribute damage without walking into every threat.
+
+This matters most on heroes like **Onkos**, because his Skeleton-focused identity makes every preserved Skeleton more valuable.
+
+Prioritize the upgrade when:
+
+- you have enough gold for the stack size
+- your next fights are easier with ranged damage
+- you are trying to preserve Wights, Undead Pets, or higher-tier units
+- you already have enough economy to keep building
+- your route wants 100–200 Skeleton Archers by Week 2
+
+Delay it when:
+
+- the gold blocks a key building
+- you have too few Skeletons for the upgrade to matter
+- you need Marketplace or Mage Guild first
+- a different immediate timing is more important
+
+---
+
+<h2 id="necromancy">
+  How Necromancy works
+</h2>
+
+<GuideTable
+  caption="Necromancy levels and why they matter."
+  columns={necromancyColumns}
+  rows={necromancyRows}
+/>
+
+<GuideCallout title="Necromancy rule">
+Necromancy is based on defeated enemy HP, not enemy unit count. A high-HP neutral army gives more potential reanimation value than a large group of fragile units.
+</GuideCallout>
+
+A fight that costs too many units can still be bad even if you win, because it slows the army growth that Necromancy is supposed to create.
+
+---
+
+<h2 id="undead-transformer">
+  How the Undead Transformer works
+</h2>
+
+The **Undead Transformer** is one of Necropolis' strongest Early Access mechanics because it turns outside creature value into Necropolis-compatible army value.
+
+The important idea is:
+
+**Necromancy grows from battle victories, but the Undead Transformer grows from map conversion.**
+
+That difference matters. Necromancy is limited by defeated enemy HP and by how cleanly you win fights. The Undead Transformer can instead turn recruited neutral creatures, creature hut pickups, and off-faction stacks into undead army value.
+
+This is why **King-of-Kings** is so important in the current Necropolis meta. His Diplomacy start makes it easier to turn neutral creature value into a conversion economy instead of relying only on post-battle Necromancy.
+
+A strong conversion plan looks like this:
+
+1. your main hero clears safe fights
+2. a second hero collects creature huts, loose units, and map resources
+3. Diplomacy helps recruit or preserve neutral creature value
+4. unneeded living creatures go into the Undead Transformer
+5. your main army receives more Necropolis-compatible value
+
+<GuideCallout title="Transformer rule">
+Do not treat neutral creatures as random extras. In Necropolis, they can become undead economy fuel. This is especially important for King-of-Kings and second-hero routes.
+</GuideCallout>
+
+---
+
+<h2 id="multi-hero-strategy">
+  Multi-hero Necropolis strategy
+</h2>
+
+Necropolis benefits heavily from multi-hero play because the faction has more to collect than one hero can efficiently handle.
+
+Use your **main hero** for:
+
+- safe fights
+- Necromancy growth
+- key objectives
+- high-value combat rewards
+- Skeleton Archer snowballing
+- major army timing
+
+Use your **second hero** for:
+
+- creature huts
+- loose resources
+- army delivery
+- scouting
+- town pickup
+- Undead Transformer setup
+- neutral creature collection
+
+This is especially useful with a King-of-Kings or Diplomacy plan. Your second hero can collect units while your main hero keeps fighting, so the faction grows from both combat and conversion at the same time.
+
+---
+
+<h2 id="focus-points">
+  Focus Points for Necropolis
+</h2>
+
+<GuideTable
+  caption="Necropolis-specific Focus uses."
+  columns={focusColumns}
+  rows={focusRows}
+/>
+
+Focus is not just a generic battle resource for Necropolis. It directly affects whether some of your most important tactical tools are available when you need them.
+
+The two most important early examples are:
+
+**Liches** can use Rewind Death to restore HP and revive fallen units. This is valuable when an important stack is about to be permanently reduced.
+
+**Graverobbers** can use Dig Up Bones to summon Skeletons. This can create blockers, add bodies, and support the Skeleton mass plan.
+
+<GuideCallout title="Focus rule">
+Do not spend Focus just because an ability is available. Save it for the turn where a revive, summon, or body block prevents real losses.
+</GuideCallout>
+
+Use <Link href="/olden-era/focus-points">Focus Points Explained</Link> if you need the general system first.
+
+---
+
+<h2 id="marketplace">
+  Marketplace and resource pressure
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-mage-guild-marketplace.webp"
+    alt="Necropolis considering Mage Guild and Marketplace during the early economy."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Marketplace is strongest when it turns the wrong resources into your next real Necropolis timing.
+  </figcaption>
+</figure>
+
+Marketplace is worth building when it unlocks something immediately useful:
+
+- Skeleton Archer upgrades
+- Mage Guild timing
+- a creature building
+- a key resource bottleneck
+- a Vampire or Lich path
+- a conversion or economy timing
+
+It is weaker when you build it just because it is cheap.
+
+<GuideCallout title="Marketplace rule">
+Build Marketplace when trading resources solves your next bottleneck. Do not build it as a habit if it does not unlock anything.
+</GuideCallout>
+
+---
+
+<h2 id="law-points">
+  Law Points and Necropolis growth
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-law-points.webp"
+    alt="Necropolis Law Points screen in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Law Points matter because Necropolis laws can improve army growth, Necromancy power, resource access, and unit scaling.
+  </figcaption>
+</figure>
+
+Law Points are not just a side system for Necropolis. They can support the same army-scaling plan that Skeletons, Necromancy, and the Undead Transformer already want.
+
+Before spending Law Points, ask:
+
+- does this increase Skeleton or key unit growth?
+- does this improve Necromancy power?
+- does this fix a resource bottleneck?
+- does this help my next two fights?
+- is this stronger than saving for the next law tier?
+
+For a broader explanation, use <Link href="/olden-era/law-points-astrology-points">Law Points and Astrology Points Explained</Link>.
+
+---
+
+<h2 id="arcane-dust">
+  Arcane Dust and upgrade bottlenecks
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-arcane-dust.webp"
+    alt="Necropolis checking Arcane Dust during the early game."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Arcane Dust can still block spell, building, upgrade, or artifact choices even when your gold economy looks fine.
+  </figcaption>
+</figure>
+
+Skeleton Archer upgrades are mainly a gold question, but Necropolis as a whole still cares about Arcane Dust.
+
+Check Arcane Dust before you commit to:
+
+- spell upgrades
+- Mage Guild plans
+- specific unit upgrades
+- artifact decisions
+- higher-value city paths
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-arcane-dust-upgrade.webp"
+    alt="Necropolis upgrade blocked by Arcane Dust requirements."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When an upgrade is blocked by Arcane Dust, route for dust before forcing another fight that does not solve the bottleneck.
+  </figcaption>
+</figure>
+
+For the dedicated resource page, use <Link href="/olden-era/alchemical-dust">How to Get Alchemical Dust</Link>.
+
+---
+
+<h2 id="when-to-fight">
+  When to fight and when to let enemies run
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-lethal-battle.webp"
+    alt="Necropolis facing a lethal battle warning in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A lethal battle can be technically winnable but still wrong if it destroys the army that your Necromancy snowball needs.
+  </figcaption>
+</figure>
+
+Necropolis wants to fight often, but not recklessly.
+
+Take a fight when:
+
+- it is easy or normal
+- your Skeleton Archers can deal damage safely
+- the reward unlocks your next building or upgrade
+- Necromancy value should outweigh losses
+- Lich, Graverobber, or spell tools can prevent damage
+
+Skip or delay a fight when:
+
+- it is lethal or impossible
+- it threatens your main Skeleton Archer stack
+- you need weekly growth first
+- the reward does not solve a bottleneck
+- your Focus tools are not ready
+
+The best Necropolis play is not proving you can win one hard fight. It is preserving enough army to win the next ten fights.
+
+---
+
+<h2 id="common-mistakes">
+  Common Necropolis mistakes
+</h2>
+
+<GuideTable
+  caption="Common Heroes Olden Era Necropolis mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest Necropolis mistake is treating it like a normal faction.
+
+Necropolis does not only build units. It multiplies them through Skeleton growth, Necromancy, conversion, creature huts, and low-loss fights. If your decisions do not support that engine, your faction advantage becomes much weaker.
+
+Use <Link href="/olden-era/necropolis-common-mistakes">Necropolis Common Mistakes</Link> for the full mistake breakdown once that page is live.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Who is the best Necropolis hero?
+
+For a simple Skeleton Archer snowball, start with Onkos. For safe clearing, Marl is excellent. For conversion economy, King-of-Kings is the key Diplomacy pick. See <Link href="#best-necropolis-heroes">Best Necropolis heroes</Link>.
+
+### What is the best Necropolis build order?
+
+A safe Week 1 route is economy or Skeleton Archer access first, then Skeleton Archer upgrade, Marketplace or Mage Guild if blocked, then Graverobber, Lich, Vampire, or conversion setup depending on hero. See <Link href="#week-one-build-order">Necropolis Week 1 build order</Link>.
+
+### How much does it cost to upgrade Skeletons into Skeleton Archers?
+
+The upgrade is 10 gold per Skeleton. For example, 100 Skeletons cost 1000 gold to upgrade. See <Link href="#key-numbers">Key Necropolis numbers</Link>.
+
+### How many Skeleton Archers should I have by Week 2?
+
+A strong start can move toward 100–200 Skeleton Archers by Week 2, depending on hero, fights, laws, conversion, and losses. See <Link href="#week-one-timeline">Necropolis Week 1 timeline</Link>.
+
+### How does Necromancy work?
+
+Necromancy converts defeated enemy HP into allied Undead HP after battle victories. Basic, Advanced, and Expert Necromancy convert 4%, 6%, and 8%. See <Link href="#necromancy">How Necromancy works</Link>.
+
+### Is Necromancy based on unit count or HP?
+
+Necromancy is based on defeated enemy HP, not unit count. A large number of fragile enemies may give less reanimation value than a smaller group of high-HP enemies. See <Link href="#necromancy">How Necromancy works</Link>.
+
+### What does the Undead Transformer do?
+
+It turns collected or recruited creature value into Necropolis-compatible army value, especially with Diplomacy and creature hut routes. See <Link href="#undead-transformer">How the Undead Transformer works</Link>.
+
+### Is King-of-Kings good?
+
+Yes. In the current Early Access version, King-of-Kings is one of the strongest Necropolis picks if you want a Diplomacy and Undead Transformer strategy. See <Link href="#best-necropolis-heroes">Best Necropolis heroes</Link>.
+
+### How should Necropolis use Focus?
+
+Save Focus for meaningful Necropolis abilities, especially Lich revive and Graverobber Skeleton summons. See <Link href="#focus-points">Focus Points for Necropolis</Link>.
+
+### Should I rush Vampires or Liches?
+
+Only if your Skeleton Archer, Necromancy, and conversion engine is already stable. Otherwise, follow the Week 1 build order first. See <Link href="#week-one-build-order">Necropolis Week 1 build order</Link>.

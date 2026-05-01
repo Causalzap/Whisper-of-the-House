@@ -1,0 +1,795 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const keyNumberColumns = [
+  { key: "item", label: "Item" },
+  { key: "number", label: "Number" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const keyNumberRows = [
+  {
+    item: "Skeleton weekly growth",
+    number: "30 per week",
+    whyItMatters:
+      "Necropolis can build a large ranged stack quickly if you avoid early losses.",
+  },
+  {
+    item: "Skeleton Archer hiring cost",
+    number: "50 gold",
+    whyItMatters:
+      "This gives the upgraded unit a clear early economy profile when planning Week 1 and Week 2 recruitment.",
+  },
+  {
+    item: "Strong Week 2 target",
+    number: "100–200 Skeleton Archers",
+    whyItMatters:
+      "A strong start can move toward this range depending on hero, fights, losses, laws, and conversion value.",
+  },
+  {
+    item: "Long-range damage penalty",
+    number: "-10% per hex from 3+ hexes, up to -50%",
+    whyItMatters:
+      "Skeleton Archers can shoot far, but positioning still affects damage efficiency.",
+  },
+  {
+    item: "Necromancy value",
+    number: "Based on defeated enemy HP",
+    whyItMatters:
+      "Clean fights matter more than simply taking every fight. Heavy losses can ruin the snowball.",
+  },
+];
+
+export const statColumns = [
+  { key: "unit", label: "Unit" },
+  { key: "range", label: "Range" },
+  { key: "hp", label: "HP" },
+  { key: "attack", label: "Attack" },
+  { key: "defense", label: "Defense" },
+  { key: "damage", label: "Damage" },
+  { key: "speed", label: "Speed" },
+  { key: "initiative", label: "Initiative" },
+  { key: "cost", label: "Cost" },
+  { key: "growth", label: "Growth" },
+];
+
+export const statRows = [
+  {
+    unit: "Skeleton",
+    range: "Melee",
+    hp: "6",
+    attack: "4",
+    defense: "1",
+    damage: "1–3",
+    speed: "3",
+    initiative: "4",
+    cost: "40 gold",
+    growth: "30",
+  },
+  {
+    unit: "Skeleton Archer",
+    range: "Ranged",
+    hp: "6",
+    attack: "4",
+    defense: "2",
+    damage: "1–3",
+    speed: "3",
+    initiative: "4",
+    cost: "50 gold",
+    growth: "30",
+  },
+];
+
+export const mechanicColumns = [
+  { key: "mechanic", label: "Mechanic" },
+  { key: "HowItWorks", label: "How It Works" },
+  { key: "WhatItMeans", label: "What It Means In Fights" },
+];
+
+export const mechanicRows = [
+  {
+    mechanic: "Ranged attack",
+    HowItWorks:
+      "Skeleton Archers can attack enemies at any range.",
+    WhatItMeans:
+      "You can start dealing damage before slow melee enemies reach your main stack.",
+  },
+  {
+    mechanic: "Long-range penalty",
+    HowItWorks:
+      "At 3 or more hexes away, ranged attacks deal -10% damage per hex, up to -50%.",
+    WhatItMeans:
+      "Far shots are still useful, but closer safe shots are more efficient.",
+  },
+  {
+    mechanic: "Adjacent enemy",
+    HowItWorks:
+      "If an enemy is adjacent, the ranged attack is replaced with a melee attack at -50% melee damage.",
+    WhatItMeans:
+      "Do not let fast enemies reach the Archer stack. Once engaged, the unit loses its main advantage.",
+  },
+  {
+    mechanic: "Attack cadence",
+    HowItWorks:
+      "Current public unit data lists a normal Ranged Attack, not a double-shot passive.",
+    WhatItMeans:
+      "Treat the unit as one reliable ranged attack per activation unless another spell, law, hero effect, or patch changes it.",
+  },
+  {
+    mechanic: "Undead trait",
+    HowItWorks:
+      "Skeleton Archers are Undead, with neutral morale behavior.",
+    WhatItMeans:
+      "They fit Necropolis systems, but dead friendly Undead are not something you want to trade away casually.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "skeletons", label: "Skeletons" },
+  { key: "goldCost", label: "Upgrade Cost" },
+  { key: "upgradeDecision", label: "Upgrade Decision" },
+];
+
+export const upgradeRows = [
+  {
+    skeletons: "30",
+    goldCost: "300 gold",
+    upgradeDecision:
+      "Usually cheap, but the stack may be too small to change your fight plan unless the nearby fights are easy.",
+  },
+  {
+    skeletons: "50",
+    goldCost: "500 gold",
+    upgradeDecision:
+      "Often reasonable if ranged damage lets you take several low-loss fights immediately.",
+  },
+  {
+    skeletons: "100",
+    goldCost: "1000 gold",
+    upgradeDecision:
+      "A strong early breakpoint. This is often the cleanest first big upgrade target.",
+  },
+  {
+    skeletons: "150",
+    goldCost: "1500 gold",
+    upgradeDecision:
+      "Good when your economy is stable and the upgrade does not delay a key building.",
+  },
+  {
+    skeletons: "200",
+    goldCost: "2000 gold",
+    upgradeDecision:
+      "Strong Week 2 pressure, but make sure it does not block your next army engine or resource fix.",
+  },
+];
+
+export const timingColumns = [
+  { key: "timing", label: "Timing" },
+  { key: "upgradeIf", label: "Upgrade If" },
+  { key: "delayIf", label: "Delay If" },
+];
+
+export const timingRows = [
+  {
+    timing: "Day 1–2",
+    upgradeIf:
+      "The gold cost lets you clear multiple nearby fights with fewer losses.",
+    delayIf:
+      "The stack is too small or the gold blocks your first important building.",
+  },
+  {
+    timing: "Day 3–4",
+    upgradeIf:
+      "You have enough Skeletons for ranged damage to become your main clearing tool.",
+    delayIf:
+      "Marketplace, Mage Guild, or a required resource fix is more urgent.",
+  },
+  {
+    timing: "Day 5–7",
+    upgradeIf:
+      "You are consolidating for Week 2 and want your main stack ready before growth refresh.",
+    delayIf:
+      "You took losses and need to recruit, rebuild, or avoid another greedy spend.",
+  },
+  {
+    timing: "Start of Week 2",
+    upgradeIf:
+      "New growth pushes you toward a large 100–200 Archer stack.",
+    delayIf:
+      "A high-value building or resource bottleneck gives a better immediate payoff.",
+  },
+];
+
+export const fightColumns = [
+  { key: "fightType", label: "Fight Type" },
+  { key: "takeIt", label: "Take It?" },
+  { key: "why", label: "Why" },
+];
+
+export const fightRows = [
+  {
+    fightType: "Slow melee guards",
+    takeIt: "Usually yes",
+    why:
+      "Skeleton Archers can shoot while melee enemies spend turns closing the gap.",
+  },
+  {
+    fightType: "Weak guards with useful resource reward",
+    takeIt: "Yes",
+    why:
+      "These fights feed gold, resources, experience, and Necromancy value without threatening the stack.",
+  },
+  {
+    fightType: "Fast enemies that reach your Archers quickly",
+    takeIt: "Be careful",
+    why:
+      "If the Archer stack gets pinned in melee, it loses ranged efficiency and can take expensive losses.",
+  },
+  {
+    fightType: "Enemy ranged stacks",
+    takeIt: "Depends",
+    why:
+      "Ranged trades can damage your main stack. Use spells, blocking, or positioning before committing.",
+  },
+  {
+    fightType: "Lethal fight with minor reward",
+    takeIt: "No",
+    why:
+      "A bad early trade can ruin your Skeleton Archer snowball.",
+  },
+];
+
+export const protectionColumns = [
+  { key: "tool", label: "Protection Tool" },
+  { key: "howItHelps", label: "How It Helps" },
+  { key: "useWhen", label: "Use When" },
+];
+
+export const protectionRows = [
+  {
+    tool: "Positioning",
+    howItHelps:
+      "Keeps Skeleton Archers away from melee contact for as many turns as possible.",
+    useWhen:
+      "The enemy needs time to cross the battlefield.",
+  },
+  {
+    tool: "Cheap blockers",
+    howItHelps:
+      "Prevents fast melee units from reaching your Archer stack immediately.",
+    useWhen:
+      "The enemy can close the gap quickly.",
+  },
+  {
+    tool: "Web or control spells",
+    howItHelps:
+      "Stops or delays dangerous stacks so Archers keep firing safely.",
+    useWhen:
+      "You use Marl, Oona, or a spell-control opening.",
+  },
+  {
+    tool: "Second hero delivery",
+    howItHelps:
+      "Keeps your main hero supplied with new weekly Skeleton growth.",
+    useWhen:
+      "Your main hero is far from town or pushing into Week 2.",
+  },
+  {
+    tool: "Skipping bad fights",
+    howItHelps:
+      "Protects the main stack from trades that break the snowball.",
+    useWhen:
+      "The reward does not justify the expected losses.",
+  },
+];
+
+export const heroColumns = [
+  { key: "hero", label: "Hero" },
+  { key: "fit", label: "Skeleton Archer Fit" },
+  { key: "howToPlay", label: "How To Play" },
+];
+
+export const heroRows = [
+  {
+    hero: "Onkos",
+    fit: "Best pure Skeleton Archer snowball",
+    howToPlay:
+      "Prioritize Skeleton count, early upgrade timing, and low-loss ranged fights.",
+  },
+  {
+    hero: "Marl",
+    fit: "Safe clear and control",
+    howToPlay:
+      "Use Web-style control and movement tempo to keep enemies away from your Archer stack.",
+  },
+  {
+    hero: "Funerella",
+    fit: "Necromancy scaling",
+    howToPlay:
+      "Take repeated clean fights so Skeleton Archers support Necromancy growth without bleeding units.",
+  },
+  {
+    hero: "King-of-Kings",
+    fit: "Conversion economy support",
+    howToPlay:
+      "Use Diplomacy, creature huts, second heroes, and Undead Transformer value to support the Archer core.",
+  },
+  {
+    hero: "Mag or Oona",
+    fit: "Spell-control fallback",
+    howToPlay:
+      "Use spells to reduce losses when raw Archer damage is not enough.",
+  },
+];
+
+export const weekTwoColumns = [
+  { key: "archerCount", label: "Skeleton Archer Count" },
+  { key: "status", label: "Status" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const weekTwoRows = [
+  {
+    archerCount: "Under 50",
+    status: "Weak start",
+    whatItMeans:
+      "You probably took losses, delayed growth, or upgraded too late. Stabilize before greedy buildings.",
+  },
+  {
+    archerCount: "50–100",
+    status: "Playable",
+    whatItMeans:
+      "You can keep clearing if fights are safe, but avoid overextending into lethal battles.",
+  },
+  {
+    archerCount: "100–150",
+    status: "Good start",
+    whatItMeans:
+      "This is a strong Week 2 base for safe clearing and resource expansion.",
+  },
+  {
+    archerCount: "150–200+",
+    status: "Strong snowball",
+    whatItMeans:
+      "You can pressure harder, but still protect the stack from fast melee and ranged trades.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItFails", label: "Why It Fails" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Upgrading too late",
+    whyItFails:
+      "Basic Skeletons take more melee losses and slow the early snowball.",
+    fix:
+      "Upgrade when ranged damage will protect the stack across several fights.",
+  },
+  {
+    mistake: "Upgrading every Skeleton automatically",
+    whyItFails:
+      "The upgrade is good, but spending all gold can block a key building or resource fix.",
+    fix:
+      "Calculate the cost and compare it to your next building need.",
+  },
+  {
+    mistake: "Letting enemies pin the Archer stack",
+    whyItFails:
+      "Adjacent enemies force Skeleton Archers into weaker melee behavior.",
+    fix:
+      "Use positioning, blockers, control spells, or safer fight selection.",
+  },
+  {
+    mistake: "Taking every fight",
+    whyItFails:
+      "Skeleton Archers are strong only if the main stack survives.",
+    fix:
+      "Skip fights that threaten the core stack.",
+  },
+  {
+    mistake: "Rushing Vampires or Liches too early",
+    whyItFails:
+      "High-tier goals can drain resources before your Archer engine is stable.",
+    fix:
+      "Use Skeleton Archers as the core, then add Vampires or Liches when the economy supports them.",
+  },
+  {
+    mistake: "Ignoring second hero delivery",
+    whyItFails:
+      "New growth does not matter if it never reaches the clearing hero.",
+    fix:
+      "Use a second hero to deliver units and collect pickups.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Skeleton Archers are the safest early Necropolis engine in Heroes of Might and Magic: Olden Era. They matter because they turn Skeleton growth into ranged damage, but they must be protected from melee contact and bad ranged trades.**
+
+Key rules:
+
+1. **Upgrade cost:** 10 gold per Skeleton.
+2. **100 Skeletons → 1000 gold upgrade cost.**
+3. **Skeleton weekly growth:** 30 per week in current Early Access data.
+4. **Strong Week 2 target:** roughly 100–200 Skeleton Archers if the opening is clean.
+5. **Ranged mechanics matter:** far shots lose damage, and adjacent enemies force weaker melee attacks.
+6. **Main rule:** protect the Archer stack. A bad fight can ruin the whole Necropolis snowball.
+
+Skeleton Archers are not just a cheap upgrade. They are the unit that lets Necropolis clear early fights without bleeding its core stack.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-skeletal-archers.webp"
+    alt="Necropolis Skeletons upgraded into Skeleton Archers in Heroes Olden Era."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Skeleton Archers turn Necropolis' early body count into ranged clearing power.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="early-access-note">
+  Early Access note
+</h2>
+
+Heroes of Might and Magic: Olden Era entered Early Access on April 30, 2026. Unit costs, upgrade costs, growth values, ranged penalties, Necromancy behavior, and Necropolis building paths can change during balance patches.
+
+<GuideCallout title="Version warning">
+Use these Skeleton Archer numbers as Early Access planning data. Recheck upgrade costs, weekly growth, and ranged attack rules after major patches.
+</GuideCallout>
+
+For the full faction route, use the <Link href="/olden-era/necropolis-guide">Necropolis Guide</Link>. For the Day 1–7 town plan, use the <Link href="/olden-era/necropolis-week-1-build-order">Necropolis Week 1 Build Order</Link>.
+
+---
+
+<h2 id="why-skeleton-archers-matter">
+  Why Skeleton Archers matter
+</h2>
+
+Necropolis wants to snowball from repeated low-loss fights. Skeleton Archers are the safest early way to do that because they let your main stack deal damage before melee enemies can trade back.
+
+That matters for three reasons:
+
+- fewer losses means stronger future fights
+- a larger stack makes each upgrade more valuable
+- clean victories support Necromancy and Week 2 pressure
+
+<GuideCallout title="Core rule">
+Skeleton Archers are valuable because they reduce losses. If a fight still damages your main stack heavily, the upgrade is not doing its job.
+</GuideCallout>
+
+---
+
+<h2 id="unit-stats">
+  Skeleton Archer stats and unit comparison
+</h2>
+
+<GuideTable
+  caption="Skeleton vs Skeleton Archer current Early Access stats."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+The important difference is not raw damage. Skeleton Archer keeps the same 1–3 damage range as the base Skeleton, but gains ranged attack and slightly better defense.
+
+That changes the unit's role completely. The Archer upgrade is valuable because it changes **when** your stack deals damage: before enemies can reach it.
+
+---
+
+<h2 id="ranged-mechanics">
+  Ranged attack mechanics
+</h2>
+
+<GuideTable
+  caption="Skeleton Archer ranged attack mechanics."
+  columns={mechanicColumns}
+  rows={mechanicRows}
+/>
+
+Skeleton Archers can attack from anywhere, but “any range” does not mean “full damage from anywhere.”
+
+The two positioning rules are:
+
+- do not let enemies become adjacent
+- avoid unnecessary max-range shots when a safer closer shot is possible
+
+<GuideCallout title="Range rule">
+The safest Skeleton Archer fight is not always the farthest fight. It is the fight where enemies cannot touch the Archer stack, while your shots still deal efficient damage.
+</GuideCallout>
+
+---
+
+<h2 id="key-numbers">
+  Key Skeleton Archer numbers
+</h2>
+
+<GuideTable
+  caption="Important Skeleton Archer numbers."
+  columns={keyNumberColumns}
+  rows={keyNumberRows}
+/>
+
+Use these numbers as a quick check before you commit gold or fights.
+
+The unit is cheap enough to mass, but fragile enough that losing the main stack is still devastating. Your goal is not simply to have many Skeleton Archers; it is to keep them alive long enough for the stack to become dangerous.
+
+---
+
+<h2 id="upgrade-cost-table">
+  Skeleton Archer upgrade cost table
+</h2>
+
+<GuideTable
+  caption="Skeleton to Skeleton Archer upgrade cost examples."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+This table is the practical reason Skeleton Archers are strong. The cost scales directly with stack size, so you can decide whether the upgrade is a tempo play or a greed trap.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-starting-skeletons.webp"
+    alt="Necropolis starting Skeleton stack before upgrading into Skeleton Archers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Count your Skeletons before upgrading. A small stack may not justify delaying your next building.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="when-to-upgrade">
+  When to upgrade Skeletons
+</h2>
+
+<GuideTable
+  caption="When to upgrade Skeletons into Skeleton Archers."
+  columns={timingColumns}
+  rows={timingRows}
+/>
+
+Upgrade when ranged damage changes your next few fights.
+
+Do not upgrade only because the button is available. Upgrade because it lets you protect the stack, clear faster, or take a resource reward that moves the entire Necropolis plan forward.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-skeleton-archer-upgrade.webp"
+    alt="Necropolis upgrading Skeletons into Skeleton Archers after choosing early resources."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The best upgrade timing is when the next few fights become safer immediately.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-to-use-in-fights">
+  How to use Skeleton Archers in fights
+</h2>
+
+<GuideTable
+  caption="Best and worst fight types for Skeleton Archers."
+  columns={fightColumns}
+  rows={fightRows}
+/>
+
+Skeleton Archers are strongest when they get extra turns to shoot before enemies reach them.
+
+That means your fight selection matters as much as your upgrade timing. Slow melee guards and resource fights are ideal. Fast enemies, enemy ranged units, and lethal battles are much more dangerous.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-lethal-battle.webp"
+    alt="Necropolis facing a lethal battle that threatens the Skeleton Archer snowball."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A lethal fight can erase the value of the upgrade if it damages your main Archer stack.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-to-protect">
+  How to protect your Skeleton Archer stack
+</h2>
+
+<GuideTable
+  caption="How to protect Skeleton Archers."
+  columns={protectionColumns}
+  rows={protectionRows}
+/>
+
+The main mistake is treating Skeleton Archers like a disposable stack.
+
+They are not disposable. They are your early engine. Every Skeleton Archer you lose makes the next upgrade, the next fight, and the next Necromancy snowball weaker.
+
+<GuideCallout title="Protection rule">
+Protect the main Archer stack first. It is better to skip one bad fight than to win it and lose the stack that carries Week 2.
+</GuideCallout>
+
+---
+
+<h2 id="best-heroes">
+  Best heroes for Skeleton Archers
+</h2>
+
+<GuideTable
+  caption="Best Necropolis heroes for Skeleton Archer openings."
+  columns={heroColumns}
+  rows={heroRows}
+/>
+
+**Onkos** is the cleanest Skeleton Archer hero because the plan is simple: grow the stack, upgrade it, and take low-loss ranged fights.
+
+**Marl** is excellent when you need safer fights because control and movement tempo can protect the Archer stack. **Funerella** wants clean fights because Necromancy scaling rewards repeated victories. **King-of-Kings** changes the plan by adding Diplomacy and Undead Transformer value around the Archer core.
+
+---
+
+<h2 id="week-two-targets">
+  How many Skeleton Archers should you have by Week 2?
+</h2>
+
+<GuideTable
+  caption="Skeleton Archer Week 2 benchmarks."
+  columns={weekTwoColumns}
+  rows={weekTwoRows}
+/>
+
+A strong Necropolis opening can move toward **100–200 Skeleton Archers by Week 2**, but this depends on the map, losses, hero, laws, conversion, and how quickly you stabilize the upgrade.
+
+Do not chase the number blindly. A clean 120-Archer stack with good positioning is better than a larger stack created after wasting your whole economy.
+
+---
+
+<h2 id="vampires-liches-and-archers">
+  How Skeleton Archers fit with Vampires and Liches
+</h2>
+
+Vampires and Liches are follow-up engines, not a reason to neglect the Skeleton Archer core. If you need a full town sequence for when to add them, use the <Link href="/olden-era/necropolis-week-1-build-order">Necropolis Week 1 Build Order</Link>.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-vampires-liches.webp"
+    alt="Necropolis considering Vampires and Liches after Skeleton Archer stabilization."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Add Vampires or Liches after the Archer engine is stable, not instead of stabilizing it.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="necromancy-and-transformer">
+  Necromancy and Undead Transformer value
+</h2>
+
+Skeleton Archers support Necromancy because they make low-loss victories easier.
+
+They also give the rest of your Necropolis plan time to come online:
+
+- Necromancy adds value after clean fights
+- Undead Transformer rewards creature collection and conversion planning
+- second heroes can collect huts and resources while the main Archer stack clears
+- Diplomacy routes can add conversion value without forcing bad battles
+
+<GuideCallout title="Engine rule">
+Skeleton Archers are not the whole Necropolis plan. They are the safe engine that gives Necromancy, conversion, Vampires, and Liches time to work.
+</GuideCallout>
+
+---
+
+<h2 id="what-if-you-took-losses">
+  What if you lose too many Skeleton Archers?
+</h2>
+
+If your Archer stack gets damaged early, stop playing as if the snowball is still perfect.
+
+Recover by:
+
+- skipping hard fights
+- recruiting before pushing
+- delaying Vampires or Liches
+- using a second hero for delivery
+- taking gold or resource rewards
+- rebuilding the stack before the next big objective
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-week-1-recovery.webp"
+    alt="Necropolis recovering after losing too many units before the Skeleton Archer snowball stabilizes."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When the main stack takes losses, rebuild the engine before chasing greedy timings.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="common-mistakes">
+  Common Skeleton Archer mistakes
+</h2>
+
+<GuideTable
+  caption="Common Necropolis Skeleton Archer mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most Skeleton Archer mistakes come from forgetting what the unit is for.
+
+It is not there to win every fight on the map. It is there to win the right fights cleanly, protect your early growth, and let Necropolis enter Week 2 with a real army.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Are Skeleton Archers good in Heroes Olden Era?
+
+Yes. Skeleton Archers are one of the safest early Necropolis engines because they turn Skeleton growth into ranged damage and reduce melee losses.
+
+### What are Skeleton Archer stats?
+
+Skeleton Archers are Tier 1 Necropolis ranged Undead with 6 HP, 4 Attack, 2 Defense, 1–3 Damage, 3 Speed, 4 Initiative, 30 weekly growth, and 50 gold cost in current Early Access data.
+
+### How does Skeleton Archer ranged attack work?
+
+Skeleton Archers can attack at any range, but attacks at 3 or more hexes lose damage by distance, up to -50%. If an enemy is adjacent, the attack becomes a weaker melee attack.
+
+### How much does it cost to upgrade Skeletons into Skeleton Archers?
+
+The current Early Access cost is 10 gold per Skeleton. For example, 100 Skeletons cost 1000 gold to upgrade.
+
+### When should I upgrade Skeletons?
+
+Upgrade when the gold cost lets you clear several nearby fights with fewer losses. Delay if the stack is too small or the gold blocks a key building.
+
+### How many Skeleton Archers should I have by Week 2?
+
+A strong start can move toward 100–200 Skeleton Archers by Week 2, depending on hero, losses, map rewards, laws, and conversion value.
+
+### Who is the best hero for Skeleton Archers?
+
+Onkos is the cleanest pure Skeleton Archer snowball hero. Marl is excellent for safer control, while Funerella supports Necromancy scaling.
+
+### Should I rush Vampires instead of Skeleton Archers?
+
+Usually no. Vampires are strong, but they should not delay your early Skeleton Archer engine unless your economy already supports the rush.
+
+### Should I take every fight with Skeleton Archers?
+
+No. Take fights that your Archers can win safely. Skip lethal fights or fights that threaten your main Archer stack.
+
+### What should I do if I lose too many Skeleton Archers?
+
+Stop forcing fights, recruit, use a second hero for delivery, and rebuild the main stack before chasing greedy buildings.

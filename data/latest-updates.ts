@@ -139,6 +139,48 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-sky-700",
 },
 
+// ===== Heroes Olden Era =====
+{
+  href: "/olden-era",
+  game: "Heroes of Might and Magic: Olden Era",
+  title: "Complete Guide: Subclasses, Factions, Economy, and Early Game Tips",
+  description:
+    "Start here for Heroes of Might and Magic: Olden Era guides, including subclasses, Necropolis, early economy, Focus Points, Law Points, and beginner routes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/olden-era/subclass-guide",
+  game: "Heroes of Might and Magic: Olden Era",
+  title: "Subclass Guide: How to Unlock Advanced Classes",
+  description:
+    "Learn how subclasses and Advanced Classes work, including skill requirements, unlock mistakes, route planning, and when to force or abandon a subclass.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/olden-era/necropolis-guide",
+  game: "Heroes of Might and Magic: Olden Era",
+  title: "Necropolis Guide: Heroes, Skeleton Archers, Necromancy, and Build Order",
+  description:
+    "Play Necropolis with a stronger Week 1 plan, including best heroes, Skeleton Archer timing, Necromancy scaling, Focus usage, and safe early build order.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/olden-era/focus-points",
+  game: "Heroes of Might and Magic: Olden Era",
+  title: "Focus Points Explained: Focus Charges, Costs, and Combat Timing",
+  description:
+    "Understand Focus Points, Focus Charges, the 3 Charge cap, ability costs, generation rules, turn order, Necropolis Focus, and Schism Focus.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
 // ===== Far Far West =====
 {
   href: "/far-far-west/secret-missions",

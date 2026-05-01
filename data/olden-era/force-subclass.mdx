@@ -1,0 +1,661 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const decisionColumns = [
+  { key: "decision", label: "Decision" },
+  { key: "whenToDoIt", label: "When To Do It" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const decisionRows = [
+  {
+    decision: "Force",
+    whenToDoIt:
+      "You already have the rare bottleneck skill, at least two or three route skills, and enough open skill slots.",
+    whatItMeans:
+      "Commit upgrades toward Expert and avoid new off-route skills unless they are essential.",
+  },
+  {
+    decision: "Watch",
+    whenToDoIt:
+      "You have one or two useful route skills, but the rare bottleneck skill has not appeared yet.",
+    whatItMeans:
+      "Keep the route in mind, but do not sacrifice map tempo or take weak skills just to chase the passive.",
+  },
+  {
+    decision: "Pivot",
+    whenToDoIt:
+      "The rare skill never appeared, you have too many off-route skills, or the passive would arrive too late.",
+    whatItMeans:
+      "Stop chasing the Advanced Class and build the strongest normal hero from your current skills.",
+  },
+];
+
+export const forceSignalColumns = [
+  { key: "signal", label: "Force Signal" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "example", label: "Example" },
+];
+
+export const forceSignalRows = [
+  {
+    signal: "The rare bottleneck skill appears early",
+    whyItMatters:
+      "Rare skills confirm that the route is actually possible in this run.",
+    example:
+      "Economy appears early for Chronomancer, or Logistics appears early for Soulweaver.",
+  },
+  {
+    signal: "Your starting hero already has a route skill",
+    whyItMatters:
+      "A starting skill reduces the number of level-up rolls needed to complete the formula.",
+    example:
+      "A hero with Basic Tactics is cleaner for a route that requires Tactics.",
+  },
+  {
+    signal: "You have three route skills by Level 8–10",
+    whyItMatters:
+      "This is the main checkpoint for whether the chase is still realistic.",
+    example:
+      "If Soulweaver already has Arcane Magic, Battlecraft, and Logistics, the route is alive.",
+  },
+  {
+    signal: "The required skills are also good now",
+    whyItMatters:
+      "A route is much safer when the skills help your map clear before the passive unlocks.",
+    example:
+      "Tactics, Battlecraft, Offence, or Logistics can support tempo while also moving toward a route.",
+  },
+  {
+    signal: "The passive will matter before the decisive fights",
+    whyItMatters:
+      "A subclass that unlocks after the game is decided is not worth the cost.",
+    example:
+      "Soulweaver before major mid-game battles is valuable; Soulweaver after the final fight is not.",
+  },
+];
+
+export const pivotSignalColumns = [
+  { key: "signal", label: "Pivot Signal" },
+  { key: "whyItIsBad", label: "Why It Is Bad" },
+  { key: "whatToDoInstead", label: "What To Do Instead" },
+];
+
+export const pivotSignalRows = [
+  {
+    signal: "The bottleneck skill has not appeared by Level 8–10",
+    whyItIsBad:
+      "The route may still be possible in theory, but it is no longer a reliable plan.",
+    whatToDoInstead:
+      "Take the best available combat, mobility, economy, or magic upgrades.",
+  },
+  {
+    signal: "You already picked too many off-route skills",
+    whyItIsBad:
+      "A five-skill formula cannot fit if your limited skill slots are already crowded.",
+    whatToDoInstead:
+      "Build around the skills you already have instead of chasing a dead formula.",
+  },
+  {
+    signal: "The route skills are hurting your early clear",
+    whyItIsBad:
+      "A powerful passive is not worth losing map tempo for several levels.",
+    whatToDoInstead:
+      "Prioritize safe fights, army preservation, and map movement.",
+  },
+  {
+    signal: "You need multiple new skills and multiple Expert upgrades",
+    whyItIsBad:
+      "The route is too far away and may arrive after the important fights.",
+    whatToDoInstead:
+      "Upgrade your current strongest skills instead of adding more unfinished requirements.",
+  },
+  {
+    signal: "The route depends on an ultra-rare skill",
+    whyItIsBad:
+      "Skills around 1–2% sample chance should confirm a route early, not be assumed later.",
+    whatToDoInstead:
+      "Only chase if the rare skill already appeared.",
+  },
+];
+
+export const forceRouteColumns = [
+  { key: "faction", label: "Faction" },
+  { key: "route", label: "Route" },
+  { key: "forceRating", label: "Force Rating" },
+  { key: "forceIf", label: "Force If" },
+  { key: "pivotIf", label: "Pivot If" },
+];
+
+export const forceRouteRows = [
+  {
+    faction: "Temple",
+    route: "Ascendant",
+    forceRating: "Conditional force",
+    forceIf:
+      "Economy and Logistics both appear early enough to support the 0 mana payoff.",
+    pivotIf:
+      "Only the magic side of the route appears while the economy or mobility checkpoint is missing.",
+  },
+  {
+    faction: "Temple",
+    route: "Swashbuckler",
+    forceRating: "Lucky-run route",
+    forceIf:
+      "Nightshade Magic appears very early and Luck or Intelligence also appears before your skill slots get crowded.",
+    pivotIf:
+      "Nightshade Magic is still missing after the first several level-ups.",
+  },
+  {
+    faction: "Necropolis",
+    route: "Soulweaver",
+    forceRating: "Best Necromancer chase",
+    forceIf:
+      "Logistics appears early and you already have at least one or two other route skills.",
+    pivotIf:
+      "Logistics never appears and the hero is falling behind in map tempo.",
+  },
+  {
+    faction: "Necropolis",
+    route: "Chronomancer",
+    forceRating: "Only if Economy appears",
+    forceIf:
+      "Economy appears early and the route skills do not weaken your clearing plan.",
+    pivotIf:
+      "Economy is missing or you need too many off-route picks to stay alive.",
+  },
+  {
+    faction: "Hive",
+    route: "Progenitor",
+    forceRating: "High-value late-game chase",
+    forceIf:
+      "Diplomacy, Tactics, or another route skill appears early and your army tempo remains stable.",
+    pivotIf:
+      "The route forces too many non-tempo picks before your army can scale.",
+  },
+  {
+    faction: "Schism",
+    route: "Riftspeaker routes",
+    forceRating: "Conditional force",
+    forceIf:
+      "The route skills appear naturally and the passive will matter before major mid-game fights.",
+    pivotIf:
+      "The route data is uncertain, patch-sensitive, or the required skills slow your early tempo.",
+  },
+  {
+    faction: "Dungeon",
+    route: "Amelchia's Heir",
+    forceRating: "Good if natural",
+    forceIf:
+      "The magic route forms naturally and you can reach +100% Spell Power before decisive fights.",
+    pivotIf:
+      "The route asks you to skip too much early tempo or the spell-power payoff will arrive too late.",
+  },
+  {
+    faction: "Grove / Sylvan",
+    route: "Warden / Druid routes",
+    forceRating: "Wait for confirmed EA data",
+    forceIf:
+      "Only force after the current Early Access requirements are confirmed and the key route skills appear naturally.",
+    pivotIf:
+      "The route formula is incomplete, patch-sensitive, or the required skills are not clearly confirmed in your current build.",
+  },
+];
+
+export const opportunityColumns = [
+  { key: "cost", label: "Opportunity Cost" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "question", label: "Question To Ask" },
+];
+
+export const opportunityRows = [
+  {
+    cost: "Map tempo",
+    whyItMatters:
+      "Skipping Logistics, Offence, Tactics, or another immediate power skill can slow your clearing.",
+    question:
+      "Will this route skill help me win the next few fights or only the future passive?",
+  },
+  {
+    cost: "Skill slots",
+    whyItMatters:
+      "Every off-route skill reduces the space left for a five-skill formula.",
+    question:
+      "Can my hero still fit all five required skills?",
+  },
+  {
+    cost: "Expert upgrades",
+    whyItMatters:
+      "Learning a required skill is not enough. It still needs upgrades to Expert.",
+    question:
+      "Do I have enough future level-ups to finish every required skill?",
+  },
+  {
+    cost: "Combat safety",
+    whyItMatters:
+      "A weak mid-game can cost more units than the subclass will ever repay.",
+    question:
+      "Am I losing fights or units because I am chasing the route?",
+  },
+  {
+    cost: "Timing",
+    whyItMatters:
+      "A late subclass is not useful if the decisive fights already happened.",
+    question:
+      "Will this passive matter before the game is decided?",
+  },
+];
+
+export const pivotColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "bestPivot", label: "Best Pivot" },
+  { key: "why", label: "Why" },
+];
+
+export const pivotRows = [
+  {
+    situation: "Combat skills already started",
+    bestPivot:
+      "Upgrade Offence, Defence, Tactics, Battlecraft, or other current combat tools.",
+    why:
+      "A stronger normal hero can keep clearing instead of waiting for a failed passive.",
+  },
+  {
+    situation: "Mobility skill appeared",
+    bestPivot:
+      "Take Logistics or map-tempo skills if they improve your route and resource control.",
+    why:
+      "Movement often wins more value than a delayed subclass chase.",
+  },
+  {
+    situation: "Economy or resource pressure",
+    bestPivot:
+      "Take Economy or build toward gold, resources, Law Points, or Astrology Points.",
+    why:
+      "A stable economy can support more units and safer fights.",
+  },
+  {
+    situation: "Magic route partially formed",
+    bestPivot:
+      "Build around your best spell school instead of forcing all five subclass requirements.",
+    why:
+      "A focused caster is better than a half-finished Advanced Class route.",
+  },
+  {
+    situation: "Skill slots are crowded",
+    bestPivot:
+      "Stop adding new weak skills and upgrade what already works.",
+    why:
+      "When the formula is dead, upgrades are usually better than more unfinished branches.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItFails", label: "Why It Fails" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Forcing because the passive looks strong",
+    whyItFails:
+      "A powerful passive does not matter if it arrives too late or ruins your mid game.",
+    fix:
+      "Force only when the early rolls confirm the route.",
+  },
+  {
+    mistake: "Ignoring the bottleneck skill",
+    whyItFails:
+      "A route can be dead if the rare skill never appears, even if the other skills look easy.",
+    fix:
+      "Treat rare skills as confirmation signals.",
+  },
+  {
+    mistake: "Taking too many off-route skills",
+    whyItFails:
+      "A five-skill formula needs space, and off-route skills can make it impossible.",
+    fix:
+      "Count skill slots before picking a new skill.",
+  },
+  {
+    mistake: "Forcing after Level 8–10 with weak progress",
+    whyItFails:
+      "If you do not have enough route skills by then, the passive may arrive too late or never arrive.",
+    fix:
+      "Pivot to immediate strength.",
+  },
+  {
+    mistake: "Refusing to pivot",
+    whyItFails:
+      "Every extra level spent chasing a dead route delays a useful hero build.",
+    fix:
+      "Build around your best existing skills.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**You should not force a subclass in most Heroes of Might and Magic: Olden Era games. Force an Advanced Class only when your early skill rolls prove the route is real.**
+
+Use this rule:
+
+1. **Force** if the rare bottleneck skill appears early, you have several route skills, and your skill slots are still open.
+2. **Watch** if the route has started but the bottleneck skill is still missing.
+3. **Pivot** if the rare skill never appears, your skill slots are crowded, or the passive would arrive too late.
+
+The safest answer is: **plan a subclass, but do not sacrifice map tempo to force one after bad rolls.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-hero-selection.webp"
+    alt="Heroes Olden Era hero selection screen used to decide whether a subclass route is worth forcing."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The force-or-pivot decision starts at hero selection. A starting route skill can make an Advanced Class more realistic, but it does not guarantee the unlock.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="early-access-note">
+  Early Access note
+</h2>
+
+Heroes of Might and Magic: Olden Era entered Early Access on April 30, 2026. Subclass routes, skill pools, skill roll chances, and passive strength can change during patches.
+
+<GuideCallout title="Version warning">
+Use this as an Early Access decision guide. Recheck subclass requirements and skill roll data after major balance patches.
+</GuideCallout>
+
+For exact formulas, use the <Link href="/olden-era/subclass-guide">Subclass and Advanced Class Guide</Link>. For unlock troubleshooting, use <Link href="/olden-era/cant-unlock-subclass">Why You Can’t Unlock a Subclass</Link>.
+
+---
+
+<h2 id="should-you-force">
+  Should you force a subclass?
+</h2>
+
+Usually, no.
+
+A subclass can be powerful, but forcing one has a real cost. You may skip stronger early skills, fill your limited skill slots, delay combat upgrades, or wait for a rare skill that never appears.
+
+The better mindset is:
+
+**Do not force the passive. Let the early skill rolls prove whether the route is worth chasing.**
+
+<GuideTable
+  caption="Force, watch, or pivot decision."
+  columns={decisionColumns}
+  rows={decisionRows}
+/>
+
+<GuideCallout title="Main rule">
+A subclass route is worth forcing only when it improves your future without destroying your present.
+</GuideCallout>
+
+---
+
+<h2 id="when-to-force">
+  When a subclass route is worth forcing
+</h2>
+
+<GuideTable
+  caption="Signs that a subclass route is worth forcing."
+  columns={forceSignalColumns}
+  rows={forceSignalRows}
+/>
+
+The most important signal is the bottleneck skill.
+
+If the hardest skill appears early, the route changes from a dream into a plan. If the rest of the route also supports your current fights, you can start committing upgrades toward Expert.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-starting-skills.webp"
+    alt="Heroes Olden Era hero panel showing starting skills used for subclass route planning."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Starting skills matter because they reduce the number of level-up rolls needed to complete an Advanced Class route.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="when-to-pivot">
+  When you should stop forcing
+</h2>
+
+<GuideTable
+  caption="Signs that you should stop forcing a subclass route."
+  columns={pivotSignalColumns}
+  rows={pivotSignalRows}
+/>
+
+The cleanest abandon point is the early-mid checkpoint.
+
+If you reach Level 8–10 without enough route progress, stop treating the subclass as the main plan. Your hero can still become strong, but probably not through that Advanced Class.
+
+<GuideCallout title="Pivot rule">
+If the route needs five skills and you still do not have the rare bottleneck skill by Level 8–10, pivot unless you have a reliable way to learn it.
+</GuideCallout>
+
+---
+
+<h2 id="skill-roll-probability">
+  Skill roll probability makes most routes conditional
+</h2>
+
+Some subclass routes look simple until you see the roll chance.
+
+The best example is **Knight → Swashbuckler**. The route requires Nightshade Magic, Leadership, Offence, Luck, and Intelligence. But sample data puts Nightshade Magic at only **0.91%** for Knight, while Luck and Intelligence are also low at **2.27%**.
+
+That changes the decision:
+
+- Swashbuckler is not a normal plan
+- Swashbuckler is a lucky-run plan
+- Nightshade Magic must appear early before you commit
+
+<GuideCallout title="Probability rule">
+A 1% skill is not something you wait for forever. If it appears early, the route is real. If it does not, play a strong normal hero.
+</GuideCallout>
+
+---
+
+<h2 id="route-force-rating">
+  Route force rating: force or pivot
+</h2>
+
+<GuideTable
+  caption="Which subclass routes are worth forcing, watching, or abandoning."
+  columns={forceRouteColumns}
+  rows={forceRouteRows}
+/>
+
+This table is not a full requirements list. It is a decision table.
+
+Use it when you already know the route but are not sure whether the early rolls justify committing. The route with the biggest passive is not always the route you should force.
+
+<GuideCallout title="Route rating rule">
+The bottleneck skill decides whether the route deserves commitment. If the bottleneck appears early, you can build around it. If it does not, every extra level spent waiting makes the hero weaker.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-basic-economy.webp"
+    alt="Heroes Olden Era Basic Economy skill choice used as a subclass bottleneck example."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Economy can be a route-confirming skill for routes like Chronomancer or Ascendant.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-arena-logistics.webp"
+    alt="Heroes Olden Era Basic Logistics skill choice used as a subclass route signal."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Logistics is both a map-tempo skill and a route checkpoint for several Advanced Classes.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="opportunity-cost">
+  Opportunity cost: what you give up by forcing
+</h2>
+
+<GuideTable
+  caption="What you give up when forcing a subclass."
+  columns={opportunityColumns}
+  rows={opportunityRows}
+/>
+
+The hidden cost of forcing a subclass is not only the final skill formula.
+
+It is every useful skill you skip while waiting for that formula to work.
+
+If a route asks you to take a weak short-term choice while your army is struggling, the route may be mathematically possible but strategically wrong.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-tactics-battlecraft.webp"
+    alt="Heroes Olden Era level-up choices showing Tactics, Battlecraft, and Logistics opportunity cost."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A level-up choice is not only about the subclass formula. It is also about what your hero needs right now.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="skill-slot-pressure">
+  Skill slot pressure
+</h2>
+
+Skill slot pressure is one of the clearest warning signs that a subclass route should be abandoned. If your hero already has several off-route skills, check the <Link href="#opportunity-cost">opportunity cost table</Link> before spending another level on the chase.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-skill-pool.webp"
+    alt="Heroes Olden Era hero skill bar showing several learned secondary skills and skill slot pressure."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A crowded skill bar means the five-skill formula may no longer fit.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-to-pick-instead">
+  What to pick instead if you pivot
+</h2>
+
+<GuideTable
+  caption="What to pick after abandoning a subclass route."
+  columns={pivotColumns}
+  rows={pivotRows}
+/>
+
+Pivoting does not mean the hero is ruined.
+
+It means you stop chasing a future passive and start building around the strongest tools already available. This is often the better play in real games.
+
+<GuideCallout title="Fallback rule">
+A strong normal hero is better than a failed Advanced Class project.
+</GuideCallout>
+
+---
+
+<h2 id="common-mistakes">
+  Common mistakes when forcing subclasses
+</h2>
+
+<GuideTable
+  caption="Common mistakes when forcing Advanced Classes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is refusing to pivot.
+
+A subclass route should be a plan with checkpoints, not a promise you keep after the game tells you it is failing.
+
+---
+
+<h2 id="final-rule">
+  Final rule
+</h2>
+
+Use this final decision:
+
+**Force only when the route appears naturally. Watch when it is partially open. Pivot when the bottleneck skill, skill slots, or timing says no.**
+
+That rule prevents most failed subclass chases.
+
+Use <Link href="/olden-era/how-to-unlock-subclasses">How to Unlock Subclasses</Link> if you need the in-game unlock checklist. Use <Link href="/olden-era/cant-unlock-subclass">Why You Can’t Unlock a Subclass</Link> if the route already failed.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Should I force a subclass every game?
+
+No. Most games should not force a subclass. Force only when early skill rolls confirm the route.
+
+### When should I force a subclass?
+
+Force when the rare bottleneck skill appears early, you have multiple route skills, your skill slots are open, and the passive will matter before decisive fights.
+
+### When should I stop forcing a subclass?
+
+Stop when the bottleneck skill never appears, your skill slots are crowded, or the route is hurting your map tempo.
+
+### Is a strong subclass always worth chasing?
+
+No. A strong passive can still be wrong if the required skills weaken your early and mid game.
+
+### What is a lucky-run subclass route?
+
+A lucky-run route is a route that depends on an extremely rare skill. Knight → Swashbuckler is an example because Nightshade Magic can be around 0.91% in sample data.
+
+### Is Soulweaver worth forcing?
+
+Soulweaver is one of the best Necromancer routes if Logistics appears early. Without Logistics, it becomes risky.
+
+### Is Chronomancer worth forcing?
+
+Chronomancer is worth considering only if Economy appears early. Economy is the main bottleneck.
+
+### What about Grove or Sylvan subclasses?
+
+Grove / Sylvan subclass data is still patch-sensitive and should not be hard-forced until Warden and Druid route requirements are confirmed for your current Early Access build.
+
+### What should I do if I abandon the route?
+
+Build around your strongest current skills: combat upgrades, movement, economy, spell power, or army preservation. A strong normal hero is better than a failed subclass project.

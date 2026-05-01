@@ -1,0 +1,839 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const dayColumns = [
+  { key: "day", label: "Day" },
+  { key: "buildingTarget", label: "Building / Button To Click" },
+  { key: "mainBuild", label: "Main Build" },
+  { key: "mapGoal", label: "Map Goal" },
+  { key: "ifBlocked", label: "If Blocked" },
+];
+
+export const dayRows = [
+  {
+    day: "Day 1",
+    buildingTarget:
+      "Skeleton dwelling / Skeleton Archer upgrade path",
+    mainBuild:
+      "Start your Skeleton Archer plan. If the upgrade button is available, prepare to turn Skeletons into Skeleton Archers immediately.",
+    mapGoal:
+      "Take only low-loss fights and collect the resource or gold pile that supports your first upgrade.",
+    ifBlocked:
+      "Choose the strongest compounding economy option: gold, resource income, Law Points, or the missing resource for your next build.",
+  },
+  {
+    day: "Day 2",
+    buildingTarget:
+      "Skeleton Archer upgrade",
+    mainBuild:
+      "Upgrade Skeletons into Skeleton Archers if the gold cost lets you clear multiple fights more safely.",
+    mapGoal:
+      "Use ranged damage to reduce melee losses and keep your main stack alive.",
+    ifBlocked:
+      "Delay the upgrade only if the gold blocks a key building or you have too few Skeletons for the upgrade to matter.",
+  },
+  {
+    day: "Day 3",
+    buildingTarget:
+      "Marketplace, Mage Guild, or low-tier creature dwelling",
+    mainBuild:
+      "Build the structure that fixes your current bottleneck: trading, spell access, or extra low-tier army count.",
+    mapGoal:
+      "Convert early map pickups into the next real timing: Skeleton Archer mass, spell access, or safer clearing.",
+    ifBlocked:
+      "If your army is already safe, choose economy. If fights are unsafe, choose the building that reduces losses.",
+  },
+  {
+    day: "Day 4",
+    buildingTarget:
+      "Graverobber dwelling, Vampire path, Lich path, or Undead Transformer setup",
+    mainBuild:
+      "Start moving toward your first major engine based on hero and resources.",
+    mapGoal:
+      "Do not blind-rush high-tier units. Keep clearing only if losses stay low.",
+    ifBlocked:
+      "Use Marketplace trades, safer fights, or a second hero pickup route before forcing an expensive building.",
+  },
+  {
+    day: "Day 5",
+    buildingTarget:
+      "Skeleton Archer mass, Lich utility, Vampire sustain, or conversion setup",
+    mainBuild:
+      "Commit to the Week 2 engine that your resources actually support.",
+    mapGoal:
+      "Secure mines, creature huts, and resource rewards that directly support the chosen engine.",
+    ifBlocked:
+      "If Arcane Dust, wood, ore, or gold is missing, route for that resource instead of taking random fights.",
+  },
+  {
+    day: "Day 6",
+    buildingTarget:
+      "Recruitment, upgrade, or bottleneck-fixing building",
+    mainBuild:
+      "Recruit and consolidate. Build the option that helps your next two fights, not the prettiest town screen.",
+    mapGoal:
+      "Avoid major losses before weekly growth. Let weak enemies run if the reward is not worth the damage.",
+    ifBlocked:
+      "If you took losses, rebuild army count instead of chasing Vampires, Liches, or another greedy timing.",
+  },
+  {
+    day: "Day 7",
+    buildingTarget:
+      "Recruitment, army delivery, or Week 2 setup",
+    mainBuild:
+      "Recruit before the weekly growth refresh if needed, move army pieces, and prepare your Week 2 route.",
+    mapGoal:
+      "End the week with a stable army, open route, and clear Week 2 priority.",
+    ifBlocked:
+      "Use a secondary hero for pickups, army delivery, creature huts, and Undead Transformer setup.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "skeletonCount", label: "Skeleton Count" },
+  { key: "upgradeCost", label: "Upgrade Cost" },
+  { key: "decision", label: "Decision" },
+];
+
+export const upgradeRows = [
+  {
+    skeletonCount: "50 Skeletons",
+    upgradeCost: "500 gold",
+    decision:
+      "Usually affordable if the upgrade lets you clear several nearby fights safely.",
+  },
+  {
+    skeletonCount: "100 Skeletons",
+    upgradeCost: "1000 gold",
+    decision:
+      "A strong early target. This is often worth it because ranged damage protects your core stack.",
+  },
+  {
+    skeletonCount: "150 Skeletons",
+    upgradeCost: "1500 gold",
+    decision:
+      "Good if your economy is stable. Delay only if it blocks a key building or Marketplace fix.",
+  },
+  {
+    skeletonCount: "200 Skeletons",
+    upgradeCost: "2000 gold",
+    decision:
+      "Powerful but expensive. Make sure this does not delay the building that solves your next bottleneck.",
+  },
+];
+
+export const buildingColumns = [
+  { key: "buildingName", label: "Building / Button" },
+  { key: "role", label: "Role" },
+  { key: "buildWhen", label: "Build When" },
+  { key: "delayWhen", label: "Delay When" },
+];
+
+export const buildingRows = [
+  {
+    buildingName: "Skeleton Archer upgrade",
+    role:
+      "Turns your main Week 1 body stack into ranged damage.",
+    buildWhen:
+      "Ranged damage lets you take multiple low-loss fights immediately.",
+    delayWhen:
+      "You have too few Skeletons, too little gold, or the upgrade blocks a more important bottleneck fix.",
+  },
+  {
+    buildingName: "Mage Guild",
+    role:
+      "Adds spell access for safer fights or spell-control hero plans.",
+    buildWhen:
+      "Your hero needs spell access to clear safely or your route already supports magic.",
+    delayWhen:
+      "Your army wins without spells and resources are needed for creature growth or upgrades.",
+  },
+  {
+    buildingName: "Graverobber dwelling",
+    role:
+      "Adds a mid-tier body-generation option and supports summon-style tactical play.",
+    buildWhen:
+      "You want bodies, blocking tools, and a bridge toward a stronger Week 2 army.",
+    delayWhen:
+      "Your current problem is gold, Skeleton Archer timing, or missing resources.",
+  },
+  {
+    buildingName: "Vampire path",
+    role:
+      "Adds sustain and a stronger high-value unit direction.",
+    buildWhen:
+      "Your economy can support it without weakening Skeleton Archer tempo.",
+    delayWhen:
+      "You are using Vampires as a panic rush after losing too many units.",
+  },
+  {
+    buildingName: "Lich path",
+    role:
+      "Adds ranged pressure, utility, and later revive-style value.",
+    buildWhen:
+      "You can afford the route and want stronger utility, spell pressure, or revive value.",
+    delayWhen:
+      "Arcane Dust or another rare resource is blocking the plan.",
+  },
+  {
+    buildingName: "Undead Transformer setup",
+    role:
+      "Turns outside creature value into Necropolis-compatible army value.",
+    buildWhen:
+      "You have Diplomacy, creature huts, neutral creature pickups, or a second hero ready to feed conversion.",
+    delayWhen:
+      "You are not collecting outside creature value yet.",
+  },
+];
+
+export const resourceColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "whatItBlocks", label: "What It Blocks" },
+  { key: "fix", label: "Fix" },
+];
+
+export const resourceRows = [
+  {
+    problem: "Not enough gold",
+    whatItBlocks:
+      "Skeleton Archer upgrades, recruitment, Marketplace timing, and early buildings.",
+    fix:
+      "Take gold rewards, build economy, or delay expensive high-tier paths until your core stack is stable.",
+  },
+  {
+    problem: "Wrong resources",
+    whatItBlocks:
+      "Mage Guild, creature buildings, Vampire path, Lich path, and upgrades.",
+    fix:
+      "Build Marketplace only when trading immediately unlocks a real timing.",
+  },
+  {
+    problem: "Not enough Arcane Dust",
+    whatItBlocks:
+      "Some spell, upgrade, artifact, or higher-value city decisions.",
+    fix:
+      "Route toward Arcane Dust before forcing fights that do not solve the bottleneck.",
+  },
+  {
+    problem: "Too many early losses",
+    whatItBlocks:
+      "Necromancy snowball, Skeleton Archer mass, and Week 2 pressure.",
+    fix:
+      "Recruit, stabilize, skip lethal fights, and stop chasing greedy buildings for one or two turns.",
+  },
+  {
+    problem: "No good fights nearby",
+    whatItBlocks:
+      "Experience, resource income, and Necromancy value.",
+    fix:
+      "Use a second hero, scout safer branches, or return to town instead of forcing a bad battle.",
+  },
+];
+
+export const heroColumns = [
+  { key: "hero", label: "Hero" },
+  { key: "week1Plan", label: "Week 1 Plan" },
+  { key: "whatChanges", label: "What Changes" },
+];
+
+export const heroRows = [
+  {
+    hero: "Onkos",
+    week1Plan: "Skeleton Archer snowball",
+    whatChanges:
+      "Prioritize Skeleton count, Skeleton Archer upgrade timing, and low-loss ranged clearing.",
+  },
+  {
+    hero: "Marl",
+    week1Plan: "Safe tempo with Web and movement",
+    whatChanges:
+      "Take safer fights, use control to reduce losses, and value Logistics-style tempo more highly.",
+  },
+  {
+    hero: "Funerella",
+    week1Plan: "Necromancy scaling",
+    whatChanges:
+      "Prioritize repeated low-loss fights because stronger Necromancy value needs clean victories.",
+  },
+  {
+    hero: "King-of-Kings",
+    week1Plan: "Diplomacy + Undead Transformer setup",
+    whatChanges:
+      "Recruit or collect outside creature value, use a second hero earlier, and prepare conversion routes.",
+  },
+  {
+    hero: "Mag or Oona",
+    week1Plan: "Spell-control opening",
+    whatChanges:
+      "Mage Guild and spell access can matter earlier if spells reduce losses or disable dangerous stacks.",
+  },
+];
+
+export const secondHeroColumns = [
+  { key: "job", label: "Second Hero Job" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "whenToPrioritize", label: "When To Prioritize" },
+];
+
+export const secondHeroRows = [
+  {
+    job: "Creature hut pickup",
+    whyItMatters:
+      "Necropolis can turn extra creature value into better army tempo, especially with conversion plans.",
+    whenToPrioritize:
+      "Prioritize when your main hero must keep fighting and cannot afford to detour.",
+  },
+  {
+    job: "Resource pickup",
+    whyItMatters:
+      "Missing one resource can delay Skeleton Archer upgrades, Marketplace timing, Liches, or Vampires.",
+    whenToPrioritize:
+      "Prioritize when the main hero would lose too much movement collecting loose resources.",
+  },
+  {
+    job: "Army delivery",
+    whyItMatters:
+      "New weekly growth matters only if it reaches the hero who can use it.",
+    whenToPrioritize:
+      "Prioritize near the end of Week 1 or before a Week 2 push.",
+  },
+  {
+    job: "Undead Transformer fuel",
+    whyItMatters:
+      "A second hero can collect neutral or off-faction value while the main hero clears.",
+    whenToPrioritize:
+      "Prioritize with King-of-Kings, Diplomacy, creature huts, or conversion-heavy plans.",
+  },
+  {
+    job: "Scouting",
+    whyItMatters:
+      "Finding safer fights is often better than forcing the nearest lethal fight.",
+    whenToPrioritize:
+      "Prioritize when the main route has no good fights or the map branch is uncertain.",
+  },
+];
+
+export const fightColumns = [
+  { key: "fightType", label: "Fight Type" },
+  { key: "takeIt", label: "Take It?" },
+  { key: "reason", label: "Reason" },
+];
+
+export const fightRows = [
+  {
+    fightType: "Easy fight with useful reward",
+    takeIt: "Yes",
+    reason:
+      "Feeds experience, resources, and Necromancy value without damaging your core stack.",
+  },
+  {
+    fightType: "Normal fight where Skeleton Archers can shoot safely",
+    takeIt: "Usually yes",
+    reason:
+      "This is exactly why the Archer upgrade matters: more damage with fewer melee losses.",
+  },
+  {
+    fightType: "Fight that unlocks a key building or upgrade",
+    takeIt: "Maybe",
+    reason:
+      "Take it if the reward solves a real bottleneck and the losses stay controlled.",
+  },
+  {
+    fightType: "Lethal fight with minor reward",
+    takeIt: "No",
+    reason:
+      "A bad early trade can ruin the entire Week 1 snowball.",
+  },
+  {
+    fightType: "Fight that threatens your main Skeleton Archer stack",
+    takeIt: "Usually no",
+    reason:
+      "Your main stack is the engine. Protect it until the snowball is stable.",
+  },
+];
+
+export const recoveryColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "bestRecovery", label: "Best Recovery" },
+  { key: "why", label: "Why" },
+];
+
+export const recoveryRows = [
+  {
+    situation: "You lost too many Skeletons",
+    bestRecovery:
+      "Stop forcing fights, recruit, and delay greedy Vampire or Lich paths.",
+    why:
+      "Your Skeleton Archer mass is the Week 1 engine. Rebuild the engine first.",
+  },
+  {
+    situation: "You are gold blocked",
+    bestRecovery:
+      "Take gold rewards, build economy, or use Marketplace only if it unlocks a real timing.",
+    why:
+      "Gold controls upgrades, recruitment, and early tempo.",
+  },
+  {
+    situation: "You are resource blocked",
+    bestRecovery:
+      "Route toward the missing resource or trade through Marketplace if the exchange is worth it.",
+    why:
+      "Forcing random fights does not help if the bottleneck is a specific resource.",
+  },
+  {
+    situation: "You cannot build Vampires or Liches yet",
+    bestRecovery:
+      "Stabilize with Skeleton Archers, spells, Necromancy, or conversion instead.",
+    why:
+      "High-tier goals are good only if they do not break the Week 1 engine.",
+  },
+  {
+    situation: "Nearby fights are too hard",
+    bestRecovery:
+      "Scout another branch, use a second hero, or return to town.",
+    why:
+      "Skipping a bad fight is often better than winning it with heavy losses.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItFails", label: "Why It Fails" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Rushing Vampires or Liches before the army engine is stable",
+    whyItFails:
+      "A high-tier building does not help if your core army is too weak to clear safely.",
+    fix:
+      "Stabilize Skeleton Archers, economy, and low-loss fights first.",
+  },
+  {
+    mistake: "Upgrading Skeletons too late",
+    whyItFails:
+      "Basic Skeletons take more melee losses and slow your first-week snowball.",
+    fix:
+      "Upgrade when the gold cost lets you clear several fights safely.",
+  },
+  {
+    mistake: "Building Marketplace without a bottleneck",
+    whyItFails:
+      "Marketplace is useful only when trading unlocks something important.",
+    fix:
+      "Build it when it solves gold, resource, Mage Guild, Vampire, Lich, or upgrade timing.",
+  },
+  {
+    mistake: "Taking lethal fights because they are nearby",
+    whyItFails:
+      "Winning one bad fight can still destroy your Week 2 army.",
+    fix:
+      "Skip lethal fights unless the reward is critical and losses are controlled.",
+  },
+  {
+    mistake: "Ignoring the second hero",
+    whyItFails:
+      "Necropolis has too many pickups, creature huts, and conversion routes for one hero to handle efficiently.",
+    fix:
+      "Use a second hero for resources, creature huts, army delivery, and Undead Transformer setup.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The safest Necropolis Week 1 build order in Heroes of Might and Magic: Olden Era is to stabilize Skeleton Archers first, build economy only when it supports your next timing, and delay Vampires or Liches unless your resources already support them.**
+
+Use this opening rule:
+
+1. **Day 1–2:** build toward Skeleton Archers and take only low-loss fights.
+2. **Day 3–4:** add Marketplace, Mage Guild, or a creature/economy building based on your bottleneck.
+3. **Day 4–6:** choose your first major engine: Skeleton Archer mass, Vampires, Liches, or Undead Transformer setup.
+4. **Day 7:** recruit, consolidate, and prepare your Week 2 route.
+5. **Never force lethal fights** just because they are nearby.
+
+The goal is not a perfect town screen. The goal is a Week 2 army that can keep clearing without bleeding your core stacks.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-skeletal-archers.webp"
+    alt="Necropolis Skeletons upgraded into Skeleton Archers during the Week 1 build order in Heroes Olden Era."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Skeleton Archers are the safest Week 1 anchor because ranged damage turns early Skeleton growth into lower-loss clearing.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="early-access-note">
+  Early Access note
+</h2>
+
+Heroes of Might and Magic: Olden Era entered Early Access on April 30, 2026. Building names, costs, unit costs, creature growth, resource requirements, and faction mechanics can change during balance patches.
+
+<GuideCallout title="Version warning">
+Use this as an Early Access build order. Recheck Skeleton Archer upgrade costs, Marketplace value, Vampire and Lich paths, and Undead Transformer behavior after major patches.
+</GuideCallout>
+
+For the full faction overview, use the <Link href="/olden-era/necropolis-guide">Necropolis Guide</Link>.
+
+---
+
+<h2 id="week-one-goal">
+  Core Week 1 goal
+</h2>
+
+Necropolis wins the first week by building an army engine, not by rushing the most expensive unit as fast as possible.
+
+Your engine can be:
+
+- Skeleton Archer ranged clearing
+- Necromancy value from repeated low-loss fights
+- Marketplace resource fixing
+- Mage Guild support
+- Vampire or Lich timing
+- Undead Transformer conversion
+- second hero pickups and delivery
+
+The safest default is:
+
+**Skeleton Archers first, then build whatever makes the next two fights safer.**
+
+<GuideCallout title="Week 1 rule">
+Build for the next fight, not for a perfect town screen. If a building does not help your next fights, your next resource bottleneck, or your Week 2 army, delay it.
+</GuideCallout>
+
+---
+
+<h2 id="day-1-7-build-order">
+  Day 1–7 Necropolis build order
+</h2>
+
+<GuideTable
+  caption="Recommended Necropolis Week 1 build order."
+  columns={dayColumns}
+  rows={dayRows}
+/>
+
+This is a safe build order, not a fixed script.
+
+Maps, starting resources, nearby rewards, enemy pressure, and hero choice can all change the right move. The important part is the order of priorities:
+
+**Skeleton Archer safety → resource fixing → first major engine → Week 2 consolidation.**
+
+---
+
+<h2 id="skeleton-archer-upgrade">
+  Skeleton Archer upgrade timing
+</h2>
+
+<GuideTable
+  caption="Skeleton to Skeleton Archer upgrade cost examples."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+Skeletons upgrade into Skeleton Archers for **10 gold per Skeleton** in the current Early Access data. That makes the upgrade easy to calculate: 100 Skeletons means 1000 gold.
+
+Upgrade early when:
+
+- the ranged attack prevents losses
+- you can take several fights safely afterward
+- your Skeleton stack is already large enough to matter
+- your next building does not need the same gold immediately
+
+Delay when:
+
+- the upgrade blocks a key building
+- the stack is too small
+- you need Marketplace or a resource fix first
+- nearby fights do not require ranged damage yet
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-starting-skeletons.webp"
+    alt="Necropolis starting Skeleton stack before the Skeleton Archer upgrade in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Count the stack before upgrading. The real upgrade cost depends on how many Skeletons you have.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="building-priorities">
+  Building priorities by name
+</h2>
+
+<GuideTable
+  caption="Necropolis Week 1 buildings and what each one is for."
+  columns={buildingColumns}
+  rows={buildingRows}
+/>
+
+The most common mistake is treating Vampires or Liches as the only correct Week 1 goal.
+
+They are strong, but they are not always first. If rushing them delays Skeleton Archer tempo, leaves your army too weak, or ignores a resource bottleneck, the rush can backfire.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-vampires-liches.webp"
+    alt="Necropolis considering Vampires and Liches during Week 1 in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vampires and Liches are good goals, but they should come after your Week 1 engine is stable.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="marketplace-timing">
+  When to build Marketplace
+</h2>
+
+Marketplace is a fix, not a habit.
+
+Build it when trading resources immediately unlocks something important:
+
+- Skeleton Archer upgrade
+- Mage Guild
+- Vampire path
+- Lich path
+- creature building
+- resource bottleneck
+- Undead Transformer or conversion setup
+
+Do not build it just because it is cheap.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-mage-guild-marketplace.webp"
+    alt="Necropolis Mage Guild and Marketplace decision during Week 1 in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Marketplace is strongest when it turns the wrong resources into the exact building or upgrade you need next.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Marketplace rule">
+Build Marketplace when it solves your next bottleneck. Skip it when it only delays army growth.
+</GuideCallout>
+
+---
+
+<h2 id="resources-and-arcane-dust">
+  Resources and Arcane Dust
+</h2>
+
+<GuideTable
+  caption="Common Necropolis Week 1 resource problems."
+  columns={resourceColumns}
+  rows={resourceRows}
+/>
+
+Necropolis can look rich in gold and still be blocked by one specific resource.
+
+Arcane Dust is especially important because it can block spell, upgrade, artifact, or higher-value city decisions. Before you force another fight, check whether the reward solves the resource you actually need.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-arcane-dust.webp"
+    alt="Necropolis checking Arcane Dust during the Week 1 build order in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Arcane Dust can become the real bottleneck even when your gold looks fine.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-arcane-dust-upgrade.webp"
+    alt="Necropolis upgrade or building blocked by Arcane Dust in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If a building or upgrade is blocked by Arcane Dust, route toward dust before taking fights that do not solve the bottleneck.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="hero-adjustments">
+  Adjust the build order by hero
+</h2>
+
+<GuideTable
+  caption="How Necropolis heroes change the Week 1 build order."
+  columns={heroColumns}
+  rows={heroRows}
+/>
+
+The build order should change with your hero.
+
+Onkos wants the cleanest Skeleton Archer snowball. Marl can take safer fights with control and tempo. Funerella wants repeated clean fights to benefit from Necromancy scaling. King-of-Kings changes the route completely because Diplomacy and Undead Transformer value make creature huts and second heroes more important.
+
+<GuideCallout title="Hero rule">
+Do not copy the same Day 1–7 route for every Necropolis hero. Your hero decides whether Week 1 is Skeleton tempo, spell control, Necromancy scaling, or conversion economy.
+</GuideCallout>
+
+---
+
+<h2 id="undead-transformer-setup">
+  Undead Transformer and second hero setup
+</h2>
+
+<GuideTable
+  caption="Second hero jobs for Necropolis Week 1."
+  columns={secondHeroColumns}
+  rows={secondHeroRows}
+/>
+
+A second hero is not only a scout for Necropolis.
+
+The second hero can collect creature huts, bring reinforcements, pick up loose resources, and prepare Undead Transformer value while your main hero keeps clearing. This matters most with King-of-Kings or any route that uses Diplomacy and conversion economy.
+
+<GuideCallout title="Second hero rule">
+Your main hero should win fights. Your second hero should save movement, collect value, and feed the Week 2 engine.
+</GuideCallout>
+
+---
+
+<h2 id="when-to-fight">
+  When to fight and when to skip
+</h2>
+
+<GuideTable
+  caption="Necropolis Week 1 fight selection."
+  columns={fightColumns}
+  rows={fightRows}
+/>
+
+Necropolis wants many fights, but only if they are clean.
+
+A fight that costs too many Skeletons can still be wrong even if you win. It weakens Skeleton Archer mass, slows Necromancy value, and may force you to delay your Week 2 plan.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-lethal-battle.webp"
+    alt="Necropolis facing a lethal battle during Week 1 in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lethal fights are usually not Week 1 value unless the reward is critical and losses are controlled.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="recovery-plans">
+  Recovery plans if Week 1 goes wrong
+</h2>
+
+<GuideTable
+  caption="How to recover a bad Necropolis Week 1."
+  columns={recoveryColumns}
+  rows={recoveryRows}
+/>
+
+A bad Week 1 is not always over, but you must stop pretending the original plan still works.
+
+If you lose too many units, delay greedy buildings. If you are blocked by one resource, route for that resource. If nearby fights are too hard, scout another branch or return to town.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-week-1-recovery.webp"
+    alt="Necropolis recovering after taking too many losses during Week 1 in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If you lose too many units early, rebuild the army engine before chasing greedy timings.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="common-mistakes">
+  Common Necropolis Week 1 mistakes
+</h2>
+
+<GuideTable
+  caption="Common Necropolis Week 1 build order mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most bad Necropolis openings fail for the same reason: they chase a future payoff while the current army is bleeding.
+
+Your first week should make the next week easier. If it does not, the build order is probably too greedy.
+
+---
+
+<h2 id="final-week-one-plan">
+  Final Week 1 reference
+</h2>
+
+Use the <Link href="#day-1-7-build-order">Day 1–7 build order table</Link> as your main reference, then adjust with the <Link href="#hero-adjustments">hero-specific plan</Link> and <Link href="#recovery-plans">recovery table</Link> if the map or resource rolls go wrong.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best Necropolis Week 1 build order?
+
+The safest plan is Skeleton Archer access first, then Marketplace, Mage Guild, creature buildings, Vampires, Liches, or Undead Transformer setup depending on your resource bottleneck and hero.
+
+### Should I upgrade Skeletons into Skeleton Archers on Day 1?
+
+Upgrade early if the gold cost lets you clear several fights with fewer losses. Delay only if the stack is too small or the gold blocks a key building.
+
+### How much does the Skeleton Archer upgrade cost?
+
+The current Early Access upgrade cost is 10 gold per Skeleton. For example, 100 Skeletons cost 1000 gold to upgrade.
+
+### Should I rush Vampires?
+
+Only rush Vampires if your Skeleton Archer, economy, and resource situation are already stable. Do not use Vampires as a panic rush after bad early losses.
+
+### Should I rush Liches?
+
+Only if the resource path supports it. If Arcane Dust or another resource blocks the plan, stabilize first.
+
+### When should Necropolis build Marketplace?
+
+Build Marketplace when it immediately solves a resource bottleneck. Do not build it just because it is cheap.
+
+### Do I need a second hero as Necropolis?
+
+Usually yes. A second hero helps with resource pickups, creature huts, army delivery, scouting, and Undead Transformer setup.
+
+### What if I take too many losses in Week 1?
+
+Stop forcing fights, recruit, delay greedy buildings, and rebuild your Skeleton Archer engine before pushing into harder objectives.

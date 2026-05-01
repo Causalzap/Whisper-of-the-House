@@ -1,0 +1,753 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const coreColumns = [
+  { key: "concept", label: "Focus Concept" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "howToUseIt", label: "How To Use It" },
+];
+
+export const coreRows = [
+  {
+    concept: "Focus Points",
+    whatItMeans:
+      "Focus Points are the small points generated during combat. When you reach 6 Focus Points, they convert into 1 Focus Charge.",
+    howToUseIt:
+      "Think of Focus Points as the buildup stage. You usually need several attacks or hits before a Charge is ready.",
+  },
+  {
+    concept: "Focus Charges",
+    whatItMeans:
+      "Focus Charges are the spendable resource used by creature and hero abilities.",
+    howToUseIt:
+      "Do not spend your first Charge automatically. Check which unit ability or hero ability will matter most.",
+  },
+  {
+    concept: "Charge cap",
+    whatItMeans:
+      "Your Focus bar can hold up to 3 Focus Charges at once.",
+    howToUseIt:
+      "If you are near the cap, spending a cheaper ability can be correct. If you are not near the cap, saving for a stronger ability may be better.",
+  },
+  {
+    concept: "Ability cost",
+    whatItMeans:
+      "Creature abilities can require 1–3 Focus Charges. Hero abilities can also use Focus Charges.",
+    howToUseIt:
+      "Plan whether you are saving for a 2–3 Charge ability or spending a cheaper 1 Charge ability now.",
+  },
+  {
+    concept: "Turn ending",
+    whatItMeans:
+      "Most Focus abilities end the unit's turn unless the description says otherwise.",
+    howToUseIt:
+      "Before using Focus, check whether the unit still needs to move, attack, or block after the ability.",
+  },
+];
+
+export const numberColumns = [
+  { key: "rule", label: "Focus Rule" },
+  { key: "number", label: "Number" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const numberRows = [
+  {
+    rule: "Melee attack",
+    number: "2 Focus Points",
+    whyItMatters:
+      "Melee stacks can build Focus faster, but they also risk retaliation and bad trades.",
+  },
+  {
+    rule: "Ranged attack",
+    number: "1 Focus Point",
+    whyItMatters:
+      "Ranged stacks can build Focus safely, especially if split into smaller stacks.",
+  },
+  {
+    rule: "Being attacked",
+    number: "1 Focus Point",
+    whyItMatters:
+      "A stack that survives enemy contact may become more dangerous on its next turn.",
+  },
+  {
+    rule: "Per strike",
+    number: "Each strike counts",
+    whyItMatters:
+      "Multi-strike units can generate Focus faster than single-hit units.",
+  },
+  {
+    rule: "Focus conversion",
+    number: "6 Focus Points = 1 Focus Charge",
+    whyItMatters:
+      "You need to count buildup, not just wait for the Charge icon to appear.",
+  },
+  {
+    rule: "Maximum storage",
+    number: "3 Focus Charges",
+    whyItMatters:
+      "If you hit the cap, extra Focus buildup may be wasted unless you spend.",
+  },
+  {
+    rule: "Ability cost",
+    number: "Usually 1–3 Focus Charges",
+    whyItMatters:
+      "Saving for a stronger ability can be correct, but only if the fight lasts long enough.",
+  },
+  {
+    rule: "Battle March",
+    number: "+1 Focus Point on attack",
+    whyItMatters:
+      "The Offence subskill can make attacking stacks generate Focus faster.",
+  },
+];
+
+export const generationColumns = [
+  { key: "source", label: "Focus Source" },
+  { key: "example", label: "Example" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const generationRows = [
+  {
+    source: "Melee attacks",
+    example:
+      "A melee attack generates 2 Focus Points, before counting extra effects or multi-strike behavior.",
+    whyItMatters:
+      "Melee units can reach Charges quickly, but only if they survive the trade.",
+  },
+  {
+    source: "Ranged attacks",
+    example:
+      "A ranged attack generates 1 Focus Point.",
+    whyItMatters:
+      "Ranged units can build Focus without taking retaliation, especially when split into smaller stacks.",
+  },
+  {
+    source: "Being attacked",
+    example:
+      "A unit generates 1 Focus Point when attacked by another unit.",
+    whyItMatters:
+      "A tanky stack can generate value by absorbing contact, not only by attacking.",
+  },
+  {
+    source: "Multiple strikes",
+    example:
+      "Focus Points are awarded per strike, so multi-hit units can generate more Focus.",
+    whyItMatters:
+      "A unit’s hit pattern matters. Do not judge Focus generation only by stack size.",
+  },
+  {
+    source: "Skills and subskills",
+    example:
+      "Battle March from Offence gives friendly units +1 Focus Point when they attack.",
+    whyItMatters:
+      "Hero build choices can turn ordinary attacks into faster Focus generation.",
+  },
+];
+
+export const spendColumns = [
+  { key: "spendFocusWhen", label: "Spend Focus When" },
+  { key: "saveFocusWhen", label: "Save Focus When" },
+];
+
+export const spendRows = [
+  {
+    spendFocusWhen:
+      "The ability prevents real losses, revives units, creates a blocker, disables a dangerous stack, or wins the fight faster.",
+    saveFocusWhen:
+      "The effect is only small damage and a stronger defensive, control, or revive use may happen soon.",
+  },
+  {
+    spendFocusWhen:
+      "You are close to the 3 Charge cap and would waste future Focus generation by waiting.",
+    saveFocusWhen:
+      "You are still building toward a 2–3 Charge ability that will matter more.",
+  },
+  {
+    spendFocusWhen:
+      "The target will act before you get another chance to stop it.",
+    saveFocusWhen:
+      "The enemy is already controlled, blocked, slowed, or unlikely to damage your key stack.",
+  },
+  {
+    spendFocusWhen:
+      "The ability protects your main damage stack or enables a safe clear.",
+    saveFocusWhen:
+      "The ability only improves a side stack that is not deciding the fight.",
+  },
+  {
+    spendFocusWhen:
+      "The ability does not end the turn, or ending the turn is still worth it.",
+    saveFocusWhen:
+      "The unit still needs to move, attack, block, or finish a target this turn.",
+  },
+];
+
+export const factionColumns = [
+  { key: "faction", label: "Faction" },
+  { key: "focusPlan", label: "How Focus Usually Matters" },
+  { key: "commonMistake", label: "Common Mistake" },
+];
+
+export const factionRows = [
+  {
+    faction: "Necropolis",
+    focusPlan:
+      "Preservation Focus route. See the Necropolis Focus section below.",
+    commonMistake:
+      "Spending before a revive, summon, or body block would prevent real losses.",
+  },
+  {
+    faction: "Schism",
+    focusPlan:
+      "Summon, control, and denial Focus route. See the Schism Focus section below.",
+    commonMistake:
+      "Spending before a summon, bind, disable, or tempo swing matters.",
+  },
+  {
+    faction: "Temple",
+    focusPlan:
+      "Use Focus to protect ranged tempo, support frontline stability, and keep Crossbowmen / Marksmen-style plans safe.",
+    commonMistake:
+      "Spending Focus on damage while the frontline is about to collapse.",
+  },
+  {
+    faction: "Grove",
+    focusPlan:
+      "Use Focus with buffs, tempo, and positioning so ranged or fast units can keep fighting cleanly.",
+    commonMistake:
+      "Using Focus after the key unit has already taken losses instead of before the bad trade happens.",
+  },
+  {
+    faction: "Dungeon",
+    focusPlan:
+      "Use Focus around high-impact creature abilities and control turns. Exact routing needs more Dungeon-specific testing.",
+    commonMistake:
+      "Treating Dungeon Focus as generic damage instead of a timing resource.",
+  },
+  {
+    faction: "Hive",
+    focusPlan:
+      "Use Focus to survive early fights and reach stronger mid-game ability turns. Exact routing needs more Hive-specific testing.",
+    commonMistake:
+      "Spending too early before the army’s key ability chain is ready.",
+  },
+];
+
+export const examplesColumns = [
+  { key: "example", label: "Example" },
+  { key: "focusUse", label: "Focus Use" },
+  { key: "lesson", label: "Lesson" },
+];
+
+export const examplesRows = [
+  {
+    example: "Necropolis Liches",
+    focusUse:
+      "Rewind Death restores HP to a friendly unit and can revive fallen units.",
+    lesson:
+      "Focus can be a preservation tool, not just an offensive resource.",
+  },
+  {
+    example: "Necropolis Graverobbers",
+    focusUse:
+      "Dig Up Bones summons Skeletons on an adjacent hex.",
+    lesson:
+      "A Focus summon can block paths, add bodies, and protect the snowball.",
+  },
+  {
+    example: "Schism summoning units",
+    focusUse:
+      "Some Schism units can summon a stack in place of a friendly corpse.",
+    lesson:
+      "Focus can turn deaths and positioning into new board presence.",
+  },
+  {
+    example: "Focus-to-mana effect",
+    focusUse:
+      "One shown effect spends all Focus Charges to restore hero mana.",
+    lesson:
+      "Some Focus decisions affect the hero’s spell plan beyond the current unit action.",
+  },
+  {
+    example: "Focus denial effects",
+    focusUse:
+      "Some effects prevent enemies from gaining Focus or prevent active ability use.",
+    lesson:
+      "Stopping enemy Focus can be as important as building your own Focus.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Spending Focus as soon as it appears",
+    whyItHurts:
+      "The first available Focus ability is not always the most important one.",
+    betterPlay:
+      "Check the next few turns and save Focus if a revive, summon, disable, or block will matter more.",
+  },
+  {
+    mistake: "Using Focus only for damage",
+    whyItHurts:
+      "Focus often creates more value through preservation, control, positioning, and summons.",
+    betterPlay:
+      "Spend Focus when it prevents losses or changes the board state.",
+  },
+  {
+    mistake: "Ignoring the 3 Charge cap",
+    whyItHurts:
+      "If you sit at maximum Charges, future Focus generation can be wasted.",
+    betterPlay:
+      "Spend before capping if the current ability is useful and more Focus generation is coming.",
+  },
+  {
+    mistake: "Ignoring turn order",
+    whyItHurts:
+      "A perfect Focus ability is useless if the enemy acts first and kills the stack you wanted to save.",
+    betterPlay:
+      "Look at turn order before deciding whether to spend now or wait.",
+  },
+  {
+    mistake: "Forgetting that abilities often end the turn",
+    whyItHurts:
+      "Using Focus may stop the unit from moving, attacking, or blocking afterward.",
+    betterPlay:
+      "Read whether the ability ends the turn before spending.",
+  },
+  {
+    mistake: "Forgetting enemy Focus",
+    whyItHurts:
+      "Dangerous enemy stacks may unlock abilities after attacking or taking damage.",
+    betterPlay:
+      "Disable, block, kill, or Focus-deny the unit before its ability turn.",
+  },
+  {
+    mistake: "Not adjusting by faction",
+    whyItHurts:
+      "Necropolis, Schism, Temple, Grove, Dungeon, and Hive do not use Focus the same way.",
+    betterPlay:
+      "Identify the key Focus user in your current army and play around that unit.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Focus Points in Heroes of Might and Magic: Olden Era are combat points that build into Focus Charges. Every 6 Focus Points become 1 Focus Charge, and your Focus bar can hold up to 3 Charges.**
+
+Focus Points are generated during battle. A melee attack gives **2 Focus Points**, a ranged attack gives **1 Focus Point**, and being attacked gives **1 Focus Point**. Focus is awarded per strike, so multi-strike units can build Focus faster.
+
+Focus Charges are spent on creature and hero abilities. Creature abilities usually cost **1–3 Focus Charges**, and most Focus abilities end the unit’s turn unless their description says otherwise.
+
+The simple rule is:
+
+**do not spend Focus because a button is available. Spend Focus when it prevents losses, creates a blocker, revives a key stack, disables a dangerous enemy, avoids wasting the 3-Charge cap, or changes the next turn.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-focus-points-battle-ability.webp"
+    alt="Focus ability being checked during a battle in Heroes Olden Era."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Focus is a combat timing resource. The best use is usually the turn where it changes the fight, not the first turn where it becomes available.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-are-focus-points">
+  What are Focus Points?
+</h2>
+
+Focus has two layers: **Focus Points** and **Focus Charges**.
+
+Focus Points are the small points you build during battle. Once you collect 6 Focus Points, they convert into 1 Focus Charge. Focus Charges are the spendable resource used by many creature and hero abilities.
+
+They are not town resources like gold, Law Points, or Astrology Points. You use Focus during battle.
+
+<GuideTable
+  caption="Core Focus concepts in Heroes Olden Era."
+  columns={coreColumns}
+  rows={coreRows}
+/>
+
+<GuideCallout title="Focus rule">
+Focus is not just “extra damage.” It is often a timing resource for revives, summons, disables, body blocks, mana recovery, and loss prevention.
+</GuideCallout>
+
+Use <Link href="/olden-era/beginner-economy-guide">Beginner Economy Guide</Link> if you want the full first-week mechanics overview.
+
+---
+
+<h2 id="focus-numbers">
+  Focus numbers: Points, Charges, cap, and costs
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-focus-points-focus-charges.webp"
+    alt="Focus Charges tooltip explaining Focus generation in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Focus is easier to use once you separate Focus Points from Focus Charges.
+  </figcaption>
+</figure>
+
+The most important number is **6**.
+
+You need 6 Focus Points to create 1 Focus Charge. Your Focus bar can hold up to 3 Focus Charges, and many abilities spend 1–3 Charges. That creates the main Focus decision: spend a cheaper ability now, or save toward a stronger ability later.
+
+<GuideTable
+  caption="Important Focus numbers in Heroes Olden Era."
+  columns={numberColumns}
+  rows={numberRows}
+/>
+
+<GuideCallout title="Charge cap rule">
+If you are close to 3 Focus Charges, spending can be correct because future Focus generation may be wasted. If you are not close to the cap, saving for a stronger ability may be better.
+</GuideCallout>
+
+---
+
+<h2 id="how-focus-is-generated">
+  How Focus is generated
+</h2>
+
+Focus is generated through combat actions and can be improved by skills and effects.
+
+The key point is that Focus is awarded **per strike**, not just per unit. That means a multi-strike unit, a split ranged stack, or a unit supported by a Focus-generating subskill can build Charges faster than a single large stack with fewer actions.
+
+<GuideTable
+  caption="Common ways Focus can be generated or enabled."
+  columns={generationColumns}
+  rows={generationRows}
+/>
+
+<GuideCallout title="Generation rule">
+If a unit needs Focus to use its best ability, plan how that unit will safely attack, take damage, or trigger its Focus source before the ability turn.
+</GuideCallout>
+
+---
+
+<h2 id="when-to-spend-focus">
+  When to spend Focus
+</h2>
+
+The best Focus use is usually the one that changes the board.
+
+A Focus ability is worth spending when it does at least one of these things:
+
+- saves an important stack
+- revives fallen units
+- summons a blocker
+- denies an enemy ability
+- prevents incoming damage
+- restores mana at a meaningful timing
+- avoids wasting Focus at the 3-Charge cap
+- lets your main stack survive and keep clearing
+- wins the fight before the enemy can punish you
+
+<GuideTable
+  caption="When to spend Focus and when to save it."
+  columns={spendColumns}
+  rows={spendRows}
+/>
+
+<GuideCallout title="Spend rule">
+Spend Focus when it changes what happens next. Save Focus when the current use is only small value and a stronger timing is coming.
+</GuideCallout>
+
+---
+
+<h2 id="turn-order">
+  Check turn order before using Focus
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-focus-points-turn-order.webp"
+    alt="Turn order during a Heroes Olden Era battle."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Focus decisions are tied to turn order. A perfect ability used one turn late may not save the stack you wanted to protect.
+  </figcaption>
+</figure>
+
+Focus is strongest when it is timed before the enemy’s important action.
+
+Before spending Focus, ask:
+
+1. Which enemy stack acts next?
+2. Which friendly stack is in danger?
+3. Can Focus prevent that damage?
+4. Can Focus create a body block?
+5. Can Focus revive or preserve a key stack?
+6. Will waiting give me a stronger use?
+7. Will waiting get the Focus user killed?
+
+If the enemy acts before your Focus user, you may need to spend earlier. If your important Focus user acts before the danger appears, you may need to save.
+
+<GuideCallout title="Turn order rule">
+Focus is not only about what the ability does. It is about whether the ability happens before the enemy’s important turn.
+</GuideCallout>
+
+---
+
+<h2 id="focus-uses-by-faction">
+  Focus uses by faction
+</h2>
+
+Focus is faction-dependent. A good Focus decision for Necropolis may be a bad decision for Schism or Temple.
+
+<GuideTable
+  caption="How Focus usually matters by faction."
+  columns={factionColumns}
+  rows={factionRows}
+/>
+
+<GuideCallout title="Faction rule">
+Before every fight, identify your main Focus user. That is the unit whose ability you should protect and plan around.
+</GuideCallout>
+
+Use the faction pages for more specific routing:
+
+- <Link href="/olden-era/necropolis-guide">Necropolis Guide</Link>
+- <Link href="/olden-era/schism-guide">Schism Guide</Link>
+- <Link href="/olden-era/temple-guide">Temple Guide</Link>
+
+---
+
+<h2 id="necropolis-focus">
+  Necropolis Focus: revives and Skeleton summons
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-skeletal-archers.webp"
+    alt="Necropolis army using Skeleton Archers in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Necropolis should usually save Focus for value preservation: revives, summons, and body blocking.
+  </figcaption>
+</figure>
+
+Necropolis is the easiest faction for explaining why Focus should not be spent randomly.
+
+The faction wants to preserve and multiply army value. That makes Focus valuable when it keeps a key stack alive, revives fallen units, or creates Skeleton bodies that block enemies and support the snowball.
+
+Important examples:
+
+- **Liches** can use Focus for Rewind Death, restoring HP and reviving fallen units.
+- **Graverobbers** can use Focus for Dig Up Bones, summoning Skeletons on an adjacent hex.
+- **Skeleton-focused routes** benefit when Focus prevents losses instead of chasing small damage.
+
+<GuideCallout title="Necropolis Focus rule">
+For Necropolis, Focus is strongest when it protects the snowball. Save it for revive, summon, or body-block turns that prevent real losses.
+</GuideCallout>
+
+Use <Link href="/olden-era/necropolis-common-mistakes">Necropolis Common Mistakes</Link> if you are losing fights after spending Focus too early.
+
+---
+
+<h2 id="schism-focus">
+  Schism Focus: summons, control, and denial
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-focus-points-schism-summon.webp"
+    alt="Schism unit ability and summoning interaction in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Schism Focus often matters because the faction can create bodies, deny actions, and pressure enemy ability timing.
+  </figcaption>
+</figure>
+
+Schism has several mechanics that make Focus interesting: summons, control effects, ability denial, corpse-based summons, and effects that interfere with enemy Focus.
+
+That means Schism Focus is not only about damage. It is about board control.
+
+Use Focus to:
+
+- summon at the right corpse or position
+- deny a dangerous enemy active ability
+- create a blocker before the enemy acts
+- protect a fragile ranged or caster unit
+- support Abyssal Communion tempo
+- convert a messy fight into a stable board
+
+<GuideCallout title="Schism Focus rule">
+With Schism, ask whether Focus can create or deny an action. A summon, bind, disable, or body block can be worth more than raw damage.
+</GuideCallout>
+
+Use <Link href="/olden-era/schism-guide">Schism Guide</Link> when that page is live.
+
+---
+
+<h2 id="focus-examples">
+  Practical Focus examples
+</h2>
+
+<GuideTable
+  caption="Practical Focus examples and the lesson behind each one."
+  columns={examplesColumns}
+  rows={examplesRows}
+/>
+
+The pattern is consistent:
+
+**Focus is strongest when it changes the next turn.**
+
+Small damage is sometimes correct, but the best Focus uses usually protect value, deny enemy tempo, or create a tactical position that ordinary attacks cannot create.
+
+---
+
+<h2 id="focus-vs-mana">
+  Focus vs mana
+</h2>
+
+Focus and mana are different systems.
+
+**Mana** belongs to the hero and fuels spells.
+
+**Focus** belongs to the battle state and fuels creature abilities or Focus-based effects.
+
+Sometimes they interact. Some effects can spend all Focus Charges to restore hero mana, which means a Focus decision can affect your spell plan after the unit’s action.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-focus-points-spend-all-focus-mana.webp"
+    alt="Focus effect spending all Focus Charges to restore hero mana in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some Focus effects can connect creature turns to hero resources, such as restoring mana.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Focus vs mana rule">
+Do not confuse Focus with mana. Mana fuels hero spells. Focus fuels unit abilities and battle effects, though some abilities can convert one kind of value into the other.
+</GuideCallout>
+
+Use <Link href="/olden-era/law-points-astrology-points">Law Points and Astrology Points Explained</Link> if you need the broader resource-system split.
+
+---
+
+<h2 id="common-mistakes">
+  Common Focus mistakes
+</h2>
+
+<GuideTable
+  caption="Common Focus mistakes in Heroes Olden Era."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The most common Focus mistake is treating it like a bonus attack.
+
+Focus is often more important than that. It is the difference between losing a key stack and reviving it, wasting generation at the Charge cap and converting it into value, leaving a path open and blocking it, or letting an enemy ability happen and denying it before the enemy turn.
+
+---
+
+<h2 id="final-focus-check">
+  Final Focus check
+</h2>
+
+Before spending Focus, make these final three checks:
+
+1. **Will waiting get the Focus user killed?**
+2. **Will I waste Focus by staying at the 3-Charge cap?**
+3. **Will this ability end the unit’s turn when I still need that unit to move, attack, or block?**
+
+If none of those are urgent, save Focus unless the current use clearly wins tempo.
+
+<GuideCallout title="Final Focus rule">
+Focus is best spent with a purpose. If you cannot explain what the Focus use changes, it is probably better to wait.
+</GuideCallout>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What are Focus Points in Heroes Olden Era?
+
+Focus Points are combat points that build into Focus Charges. Every 6 Focus Points become 1 Focus Charge, and Focus Charges are spent on creature and hero abilities.
+
+### What is the difference between Focus Points and Focus Charges?
+
+Focus Points are the buildup. Focus Charges are the spendable resource. You gain Points through combat actions, then convert 6 Points into 1 Charge.
+
+### How many Focus Charges can you hold?
+
+Your Focus bar can hold up to 3 Focus Charges.
+
+### How many Focus Charges do abilities cost?
+
+Creature abilities can require 1–3 Focus Charges. Hero abilities can also use Focus Charges.
+
+### How do you generate Focus Points?
+
+Melee attacks generate 2 Focus Points, ranged attacks generate 1 Focus Point, and being attacked generates 1 Focus Point. Focus is awarded per strike, so multi-strike units can generate more Focus.
+
+### Does Offence help generate Focus?
+
+Yes. The Battle March subskill from Offence makes friendly units generate +1 Focus Point when they attack.
+
+### Should I spend Focus as soon as I can?
+
+No. Spend Focus when it changes the fight. Save it if a later revive, summon, disable, block, or preservation effect will matter more.
+
+### What is the best use of Focus?
+
+The best Focus use is usually the one that prevents real losses or changes board state. Reviving a key stack, summoning a blocker, disabling a dangerous enemy, or denying an ability is often better than small damage.
+
+### Is Focus the same as mana?
+
+No. Mana fuels hero spells, while Focus fuels creature abilities and battle effects. Some Focus abilities can interact with mana, but they are separate systems.
+
+### Why does Necropolis care about Focus?
+
+Necropolis cares about Focus because Liches can revive or restore units and Graverobbers can summon Skeletons. These abilities help preserve the army and support the undead snowball.
+
+### Why does Schism care about Focus?
+
+Schism cares about Focus because many of its strongest turns involve summons, control, ability denial, and board presence. Focus can help Schism create or deny actions at the right timing.
+
+### Can enemies use Focus too?
+
+Yes. Enemy units can also benefit from Focus or active abilities. Some effects can deny Focus generation or prevent enemies from using active abilities, which can be very strong against dangerous stacks.
+
+### What is the biggest Focus mistake?
+
+The biggest mistake is spending Focus just because the ability is available. Focus should be saved for the turn where it prevents losses, creates a blocker, revives units, denies an enemy, avoids wasting the 3-Charge cap, or wins the fight.

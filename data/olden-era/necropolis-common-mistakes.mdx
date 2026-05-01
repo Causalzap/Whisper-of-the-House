@@ -1,0 +1,533 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Picking a Necropolis hero without a plan",
+    whyItHurts:
+      "Necropolis heroes push different openings. Skeleton mass, spell control, Necromancy scaling, and Diplomacy conversion do not want the same Week 1.",
+    betterPlay:
+      "Pick the hero for the route you actually want before you start building and fighting.",
+  },
+  {
+    mistake: "Delaying Skeleton Archers",
+    whyItHurts:
+      "Basic Skeletons can snowball, but early melee trades damage the stack before it becomes your main engine.",
+    betterPlay:
+      "Upgrade Skeletons when ranged damage will save units across several fights.",
+  },
+  {
+    mistake: "Taking fights just because they are nearby",
+    whyItHurts:
+      "Necropolis needs repeated clean wins. One expensive fight can slow the entire undead snowball.",
+    betterPlay:
+      "Take fights that unlock resources, buildings, mines, spells, or safe Necromancy value.",
+  },
+  {
+    mistake: "Rushing Vampires or Liches before the engine is stable",
+    whyItHurts:
+      "High-tier units are strong, but they do not fix a weak Skeleton Archer stack, bad resource routing, or poor fight selection.",
+    betterPlay:
+      "Use Vampires and Liches as power targets after your early army and economy are functional.",
+  },
+  {
+    mistake: "Building Marketplace without a bottleneck",
+    whyItHurts:
+      "Marketplace is useful only when it converts spare resources into a real timing. Otherwise it delays stronger buildings.",
+    betterPlay:
+      "Build Marketplace when it immediately unlocks Skeleton upgrades, Mage Guild, Vampires, Liches, or another blocked timing.",
+  },
+  {
+    mistake: "Ignoring Arcane Dust and exact resources",
+    whyItHurts:
+      "Necropolis can have enough gold but still be blocked by Arcane Dust, wood, ore, mercury, gems, or prerequisites.",
+    betterPlay:
+      "Check the exact missing resource before choosing your next fight or building.",
+  },
+  {
+    mistake: "Spending Law Points without a route",
+    whyItHurts:
+      "Random laws can delay the bonus that actually supports your Skeleton, Necromancy, economy, or conversion plan.",
+    betterPlay:
+      "Spend Law Points only when the law improves your next few turns or your chosen Necropolis route.",
+  },
+  {
+    mistake: "Wasting Focus before important turns",
+    whyItHurts:
+      "Necropolis Focus can preserve units, revive value, summon blockers, or protect the snowball.",
+    betterPlay:
+      "Save Focus for the turn where it prevents losses, not the first turn where a button is available.",
+  },
+  {
+    mistake: "Expecting Necromancy to fix bad trades",
+    whyItHurts:
+      "Necromancy converts defeated enemy HP into Undead value, but it does not refund a damaged main stack.",
+    betterPlay:
+      "Use Necromancy to multiply clean victories, not to justify careless fights.",
+  },
+];
+
+export const loopColumns = [
+  { key: "step", label: "Step" },
+  { key: "action", label: "Necropolis Loop" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const loopRows = [
+  {
+    step: "1",
+    action: "Pick a hero route.",
+    whyItMatters:
+      "Your first week changes depending on whether you play Skeleton mass, control, Necromancy scaling, or Diplomacy conversion.",
+  },
+  {
+    step: "2",
+    action: "Recruit and preserve your starting army.",
+    whyItMatters:
+      "Early losses reduce every later snowball tool.",
+  },
+  {
+    step: "3",
+    action: "Upgrade Skeletons into Skeleton Archers when the timing is right.",
+    whyItMatters:
+      "Ranged damage helps you clear without taking as many melee trades.",
+  },
+  {
+    step: "4",
+    action: "Take low-loss fights.",
+    whyItMatters:
+      "Necropolis needs repeated clean wins more than one risky victory.",
+  },
+  {
+    step: "5",
+    action: "Convert value through Necromancy.",
+    whyItMatters:
+      "Necromancy rewards safe victories and higher enemy HP value.",
+  },
+  {
+    step: "6",
+    action: "Use Marketplace only to fix a real bottleneck.",
+    whyItMatters:
+      "Marketplace is strongest when it unlocks the next building, spell, or upgrade immediately.",
+  },
+  {
+    step: "7",
+    action: "Route toward exact missing resources.",
+    whyItMatters:
+      "Arcane Dust, wood, ore, mercury, gems, and crystals can block your timing even when you have gold.",
+  },
+  {
+    step: "8",
+    action: "Unlock Vampires, Liches, Graverobbers, Mage Guild, or conversion tools.",
+    whyItMatters:
+      "These are power targets, not replacements for a stable early engine.",
+  },
+  {
+    step: "9",
+    action: "Save Focus for loss prevention.",
+    whyItMatters:
+      "Revives, summons, and body-blocking often matter more than early small damage.",
+  },
+  {
+    step: "10",
+    action: "Enter Week 2 with a larger, safer army.",
+    whyItMatters:
+      "Necropolis becomes dangerous when it keeps multiplying instead of rebuilding.",
+  },
+];
+
+export const reviewColumns = [
+  { key: "question", label: "Review Question" },
+  { key: "whatItUsuallyMeans", label: "What It Usually Means" },
+];
+
+export const reviewRows = [
+  {
+    question: "Did I choose a hero route?",
+    whatItUsuallyMeans:
+      "If not, your buildings and fights probably pulled in different directions.",
+  },
+  {
+    question: "Did I upgrade Skeletons too late?",
+    whatItUsuallyMeans:
+      "If your early army bled in melee, the Skeleton Archer timing was probably delayed.",
+  },
+  {
+    question: "Did I take a fight that damaged my snowball?",
+    whatItUsuallyMeans:
+      "If one fight left you unable to clear the next area, it was probably a bad Necropolis fight.",
+  },
+  {
+    question: "Did I rush high-tier units before stabilizing?",
+    whatItUsuallyMeans:
+      "If Vampires or Liches arrived but your map tempo collapsed, you rushed the power target too early.",
+  },
+  {
+    question: "Did I miss an exact resource bottleneck?",
+    whatItUsuallyMeans:
+      "If you had gold but could not build, Arcane Dust or another specific resource was probably ignored.",
+  },
+  {
+    question: "Did I build Marketplace without using it?",
+    whatItUsuallyMeans:
+      "If Marketplace did not unlock your next timing, it was probably just a delay.",
+  },
+  {
+    question: "Did I spend Law Points on the wrong bonus?",
+    whatItUsuallyMeans:
+      "If the law did not support your next few turns, saving or choosing a route-specific law may have been better.",
+  },
+  {
+    question: "Did I waste Focus before a revive, summon, or block mattered?",
+    whatItUsuallyMeans:
+      "If a key stack died after you spent Focus early, the mistake was timing, not the unit.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The most common Necropolis mistakes in Heroes of Might and Magic: Olden Era are delaying Skeleton Archers, taking too many early losses, rushing Vampires or Liches before your engine is stable, ignoring exact resource bottlenecks, and treating Necromancy like a refund button.**
+
+Necropolis wins by preserving and multiplying value. Your goal is not to trade evenly. Your goal is to build a stack, protect it, convert victories into more Undead value, and enter Week 2 with an army that is easier to snowball than it is to rebuild.
+
+If your Necropolis game feels weak, check this first:
+
+1. Did your hero choice match your opening route?
+2. Did Skeleton Archers arrive early enough to reduce losses?
+3. Did you take one expensive fight that slowed everything down?
+4. Did you rush Vampires or Liches before your economy and army were ready?
+5. Did Arcane Dust or another exact resource block your timing?
+6. Did you spend Law Points or Focus without a clear purpose?
+7. Did you expect Necromancy to make up for bad trades?
+</GuideQuickAnswer>
+
+<h2 id="mistake-checklist">
+  Necropolis common mistakes checklist
+</h2>
+
+<GuideTable
+  caption="Common Heroes Olden Era Necropolis mistakes and what to do instead."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The main rule is simple:
+
+**Necropolis should not trade evenly. Necropolis should preserve, convert, and multiply.**
+
+Use the full <Link href="/olden-era/necropolis-guide">Necropolis Guide</Link> for the broader hero, build order, Necromancy, Undead Transformer, and Focus overview.
+
+---
+
+<h2 id="correct-necropolis-loop">
+  The correct Necropolis loop
+</h2>
+
+Most Necropolis losses happen because the player knows the individual pieces but not the order. Skeleton Archers, Necromancy, Marketplace, Law Points, Focus, Vampires, Liches, and Undead Transformer are all useful, but they are not equally urgent on every turn.
+
+Use this loop as your self-check before blaming the faction.
+
+<GuideTable
+  caption="The correct Necropolis loop from Day 1 into Week 2."
+  columns={loopColumns}
+  rows={loopRows}
+/>
+
+<GuideCallout title="Necropolis loop rule">
+A good Necropolis opening does not ask “what is the strongest thing I can build?” first. It asks “what keeps my army alive long enough to multiply?”
+</GuideCallout>
+
+---
+
+<h2 id="review-your-game">
+  Review your Necropolis game
+</h2>
+
+If you lost with Necropolis even though the plan looked correct, review the game in this order.
+
+<GuideTable
+  caption="Necropolis self-review checklist after a failed game."
+  columns={reviewColumns}
+  rows={reviewRows}
+/>
+
+This checklist is the fastest way to find the real mistake. In most losing Necropolis games, the problem is not one missing building. It is usually one early trade, one delayed upgrade, or one resource bottleneck that breaks the snowball before it starts.
+
+---
+
+<h2 id="hero-without-plan">
+  Mistake 1: Picking a hero without a route
+</h2>
+
+Necropolis heroes are not interchangeable. A Skeleton specialist, a control hero, a spell hero, a Necromancy scaler, and a Diplomacy converter all create different first-week priorities.
+
+The mistake is picking a hero and then playing a generic build order.
+
+<GuideCallout title="Hero planning rule">
+Before Day 1 ends, decide whether your Necropolis game is built around Skeleton mass, spell control, Necromancy scaling, or Diplomacy conversion.
+</GuideCallout>
+
+Better route examples:
+
+- **Onkos** for a direct Skeleton Archer snowball
+- **Marl** for safer Web tempo and map movement
+- **Mag** for a spell-heavy route
+- **Funerella** for earlier Necromancy scaling
+- **Shadespinner Oona** for control through Sleep and Nightshade Magic
+- **King-of-Kings** for Diplomacy and Undead Transformer conversion
+
+For more detail, use <Link href="/olden-era/necropolis-guide#best-necropolis-heroes">Best Necropolis heroes</Link>.
+
+---
+
+<h2 id="delaying-skeleton-archers">
+  Mistake 2: Delaying Skeleton Archers
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-common-mistakes-starting-skeletons.webp"
+    alt="Necropolis starting with Skeletons before upgrading them into Skeleton Archers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Basic Skeletons are the body of your early army, but Skeleton Archers are what make that body safer to use.
+  </figcaption>
+</figure>
+
+Skeletons are cheap, but early melee trades still hurt. If your main stack loses bodies before the snowball begins, Necromancy has less to protect and your Week 2 army becomes smaller.
+
+Upgrade when ranged damage saves units across several fights. Delay only when the gold blocks your next key building.
+
+<GuideCallout title="Skeleton Archer rule">
+Do not ask only “can I afford the upgrade?” Ask “will this upgrade save enough units over the next few fights?”
+</GuideCallout>
+
+Use <Link href="/olden-era/necropolis-skeletal-archers">Necropolis Skeleton Archers Guide</Link> for the full upgrade timing page.
+
+---
+
+<h2 id="taking-too-many-fights">
+  Mistake 3: Taking every fight on the map
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-common-mistakes-lethal-battle.webp"
+    alt="Necropolis facing a lethal battle warning in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A lethal fight can still be a mistake even if you can win it, because Necropolis needs the army after the fight too.
+  </figcaption>
+</figure>
+
+Necropolis wants to fight often, but not carelessly. A nearby fight is not automatically a good fight, and a winnable fight can still be bad if it damages the stack that your whole route depends on.
+
+A good Necropolis fight gives a useful reward while preserving your army. A bad Necropolis fight gives you a short-term reward but breaks your next three turns.
+
+<GuideCallout title="Fight selection rule">
+Necropolis does not need to prove it can win one hard battle. It needs enough army left to win the next ten battles.
+</GuideCallout>
+
+For the broader early-game route, use <Link href="/olden-era/necropolis-week-1-build-order">Necropolis Week 1 Build Order</Link>.
+
+---
+
+<h2 id="rushing-vampires-liches">
+  Mistake 4: Rushing Vampires or Liches too early
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-common-mistakes-vampires-liches.webp"
+    alt="Necropolis planning toward Vampires and Liches in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vampires and Liches are strong, but rushing them before your early engine is stable can leave you with an expensive army that cannot clear safely.
+  </figcaption>
+</figure>
+
+Vampires and Liches are power targets, not emergency repairs. If your Skeleton Archer stack is late, your resource route is blocked, or your army has already taken heavy losses, a rushed high-tier building will not automatically fix the game.
+
+Get them when they strengthen a stable route. Do not use them as a substitute for one.
+
+<GuideCallout title="High-tier unit rule">
+Rush Vampires or Liches only when your early army, economy, and clearing route are already stable enough to support them.
+</GuideCallout>
+
+For a safer sequence, use <Link href="/olden-era/necropolis-week-1-build-order">Necropolis Week 1 Build Order</Link>.
+
+---
+
+<h2 id="marketplace-mistake">
+  Mistake 5: Building Marketplace without a bottleneck
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-common-mistakes-marketplace.webp"
+    alt="Necropolis considering Marketplace during the early economy."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Marketplace is strongest when it turns spare resources into the exact building, spell, or upgrade your Necropolis route needs next.
+  </figcaption>
+</figure>
+
+Marketplace is useful, but “cheap” is not the same as “correct.” If Marketplace does not unlock your next upgrade, spell, dwelling, or power timing, it may simply delay the building that would have made your army stronger.
+
+Build Marketplace when you already know what bottleneck it solves.
+
+<GuideCallout title="Marketplace rule">
+Marketplace is not a default answer. It is a tool for converting the wrong resources into the next correct Necropolis timing.
+</GuideCallout>
+
+Use <Link href="/olden-era/beginner-economy-guide">Beginner Economy Guide</Link> for the general building and resource framework.
+
+---
+
+<h2 id="arcane-dust">
+  Mistake 6: Forgetting Arcane Dust and exact costs
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-common-mistakes-arcane-dust.webp"
+    alt="Necropolis checking Arcane Dust during an early upgrade bottleneck."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gold is not the only bottleneck. Arcane Dust and other exact resources can decide whether your next Necropolis timing actually happens.
+  </figcaption>
+</figure>
+
+One of the easiest ways to lose tempo is to assume that gold income means your build order is fine. Necropolis can still get blocked by Arcane Dust, wood, ore, mercury, gems, crystals, or prerequisites.
+
+Before choosing your next objective, check the exact missing cost.
+
+<GuideCallout title="Resource rule">
+When your build is blocked, do not ask “what can I fight?” first. Ask “which reward unlocks the thing I am actually missing?”
+</GuideCallout>
+
+---
+
+<h2 id="law-points">
+  Mistake 7: Spending Law Points without a Necropolis growth plan
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-necropolis-common-mistakes-law-points.webp"
+    alt="Necropolis checking Law Points in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Law Points should support your route, not distract from it.
+  </figcaption>
+</figure>
+
+Law Points are powerful because they can push growth, combat, economy, or scaling. They are also easy to waste if you spend them on a bonus that looks good but does not match your next few turns.
+
+A strong law either supports your route now or justifies saving for a stronger tier later.
+
+<GuideCallout title="Law Points rule">
+Spend Law Points on the bonus that improves your next few Necropolis turns, not the bonus that looks best in isolation.
+</GuideCallout>
+
+For the full mechanic, use <Link href="/olden-era/law-points-astrology-points">Law Points and Astrology Points Explained</Link>.
+
+---
+
+<h2 id="focus-mistake">
+  Mistake 8: Spending Focus too early
+</h2>
+
+Focus is easy to waste because the button feels good to press. For Necropolis, that can be costly because Focus often matters most when it prevents a real loss.
+
+If a Lich revive, Graverobber summon, or tactical block would save your main stack later in the fight, early low-impact Focus spending is usually a mistake.
+
+<GuideCallout title="Focus rule">
+For Necropolis, Focus is strongest when it preserves the snowball. A revive, summon, or tactical block is often better than early small value.
+</GuideCallout>
+
+Use <Link href="/olden-era/focus-points">Focus Points Explained</Link> for the general Focus system.
+
+---
+
+<h2 id="necromancy-mistake">
+  Mistake 9: Expecting Necromancy to fix bad trades
+</h2>
+
+Necromancy is a snowball tool, not a refund button.
+
+The important detail is that Necromancy scales from defeated enemy HP, not from how many units were on the screen. A fight with many fragile enemies may give less value than expected, and a fight that kills too many of your own key units can still be a bad trade.
+
+<GuideCallout title="Necromancy rule">
+The best Necromancy fight is not the fight with the most enemies. It is the fight where enemy HP becomes your value while your own key stacks stay alive.
+</GuideCallout>
+
+Use <Link href="/olden-era/necropolis-guide#necromancy">Necromancy</Link> in the main Necropolis guide for the full mechanic breakdown.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the biggest Necropolis mistake in Heroes Olden Era?
+
+The biggest mistake is taking too many early losses. Necropolis needs bodies to multiply through Skeleton Archers, Necromancy, Focus tools, and conversion mechanics. If your army is damaged before the snowball starts, the faction feels much weaker.
+
+### Why does my Necropolis start feel weak?
+
+Usually because one part of the loop broke early. You may have delayed Skeleton Archers, taken a bad fight, missed a resource bottleneck, rushed high-tier units too early, or spent Focus and Law Points without supporting your route.
+
+### Should I upgrade Skeletons into Skeleton Archers early?
+
+Yes, if the upgrade makes your next fights safer. Skeleton Archers are usually worth it when ranged damage prevents several melee trades. Do not upgrade blindly if the gold blocks a more important immediate building.
+
+### Should Necropolis rush Vampires or Liches?
+
+Only when your early engine is stable. Vampires and Liches are strong, but they should support your Skeleton Archer, Necromancy, and conversion plan instead of replacing it too early.
+
+### Is Marketplace always good for Necropolis?
+
+No. Marketplace is good when it fixes a real bottleneck. Build it when trading resources unlocks Skeleton upgrades, Mage Guild, Vampires, Liches, or another important timing.
+
+### Why does Necropolis still lose fights after taking Necromancy?
+
+Because Necromancy does not erase bad trades. It gives value after victories, but if you lose too many important units, your army can still shrink in practice.
+
+### How should Necropolis use Focus?
+
+Save Focus for meaningful turns. Lich revive, Graverobber summons, and tactical body blocking are usually more important than spending Focus immediately for small value.
+
+### Are lethal battles worth taking as Necropolis?
+
+Usually no, unless the reward unlocks a major timing and you can win without crippling your main stack. Necropolis wants repeated clean wins, not one expensive victory.
+
+### What should I check when my Necropolis build is blocked?
+
+Check exact resource costs first: gold, Arcane Dust, wood, ore, mercury, gems, crystals, and building prerequisites. Then decide whether Marketplace, a safer fight, or a resource pickup solves the problem fastest.

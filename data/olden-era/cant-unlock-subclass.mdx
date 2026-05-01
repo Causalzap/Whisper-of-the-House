@@ -1,0 +1,699 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const diagnosisColumns = [
+  { key: "reason", label: "Reason" },
+  { key: "whatItLooksLike", label: "What It Looks Like" },
+  { key: "fix", label: "Fix" },
+];
+
+export const diagnosisRows = [
+  {
+    reason: "One required skill is missing",
+    whatItLooksLike:
+      "You have several correct skills, but the Advanced Class still does not appear.",
+    fix:
+      "Check the exact requirement list. A similar skill, class-themed skill, or useful off-route skill does not count.",
+  },
+  {
+    reason: "One required skill is not Expert",
+    whatItLooksLike:
+      "You learned the right skill, but it is still Basic or Advanced.",
+    fix:
+      "Upgrade every required skill to Expert. Basic and Advanced are progress, not completion.",
+  },
+  {
+    reason: "You followed the wrong base class route",
+    whatItLooksLike:
+      "The faction is correct, but the formula belongs to another class in the same faction.",
+    fix:
+      "Open the hero information panel and check the base class shown near the hero name or class details.",
+  },
+  {
+    reason: "Your skill slots are full",
+    whatItLooksLike:
+      "The last required skill never appears, or you cannot add it because your hero already has too many secondary skills.",
+    fix:
+      "Count learned secondary skills. If the route needs more skills than your remaining slots allow, the route is dead.",
+  },
+  {
+    reason: "The rare bottleneck skill never appeared",
+    whatItLooksLike:
+      "You keep leveling, but the one key requirement such as Economy, Logistics, Nightshade Magic, or Scouting never shows up.",
+    fix:
+      "Stop forcing. Rare skills should confirm a route early, not be assumed later.",
+  },
+  {
+    reason: "You are using outdated Early Access data",
+    whatItLooksLike:
+      "A formula that used to work no longer unlocks after a patch.",
+    fix:
+      "Recheck the latest Advanced Class requirements, skill pool behavior, and patch notes.",
+  },
+];
+
+export const skillLevelColumns = [
+  { key: "skillState", label: "Skill State" },
+  { key: "counts", label: "Counts For Unlock?" },
+  { key: "meaning", label: "Meaning" },
+];
+
+export const skillLevelRows = [
+  {
+    skillState: "Required skill missing",
+    counts: "No",
+    meaning:
+      "The route is incomplete. You still need to learn this secondary skill.",
+  },
+  {
+    skillState: "Required skill at Basic",
+    counts: "No",
+    meaning:
+      "You found the right skill, but it needs two more upgrades.",
+  },
+  {
+    skillState: "Required skill at Advanced",
+    counts: "No",
+    meaning:
+      "You are close, but the skill still needs one more upgrade.",
+  },
+  {
+    skillState: "Required skill at Expert",
+    counts: "Yes",
+    meaning:
+      "This requirement is complete.",
+  },
+];
+
+export const baseClassColumns = [
+  { key: "faction", label: "Faction" },
+  { key: "baseClassExample", label: "Base Class Example" },
+  { key: "whyItCanFail", label: "Why It Can Fail" },
+];
+
+export const baseClassRows = [
+  {
+    faction: "Necropolis",
+    baseClassExample: "Necromancer vs Death Knight",
+    whyItCanFail:
+      "Chronomancer and Soulweaver belong to Necromancer, while Walking Rot and Harbinger of Doom belong to Death Knight.",
+  },
+  {
+    faction: "Temple",
+    baseClassExample: "Knight vs Cleric",
+    whyItCanFail:
+      "Swashbuckler and Paragon belong to Knight, while Grand Inquisitor and Ascendant belong to Cleric.",
+  },
+  {
+    faction: "Hive",
+    baseClassExample: "Enforcer vs Herald",
+    whyItCanFail:
+      "Broodmother and Soul Eater belong to Enforcer, while Progenitor and Lord of Chaos belong to Herald.",
+  },
+  {
+    faction: "Dungeon",
+    baseClassExample: "Overlord vs Warlock",
+    whyItCanFail:
+      "Balthazzar's Bodyguard and Silvertongue's Envoy belong to Overlord, while Amelchia's Heir and Merchant belong to Warlock.",
+  },
+];
+
+export const slotColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "routeStatus", label: "Route Status" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const slotRows = [
+  {
+    situation: "0–2 off-route skills",
+    routeStatus: "Usually still possible",
+    whatToDo:
+      "Keep checking required skills and upgrade progress. Do not add random new skills unless they help the route or your tempo.",
+  },
+  {
+    situation: "3 off-route skills",
+    routeStatus: "Danger zone",
+    whatToDo:
+      "Count carefully. A five-skill formula leaves almost no room for mistakes.",
+  },
+  {
+    situation: "4+ off-route skills",
+    routeStatus: "Usually dead",
+    whatToDo:
+      "Stop forcing unless some required skills are already learned and you still have enough open slots.",
+  },
+  {
+    situation: "Skill bar full",
+    routeStatus: "Dead if a required skill is missing",
+    whatToDo:
+      "Pivot to the strongest normal hero build. You cannot finish a missing five-skill formula with no slots.",
+  },
+];
+
+export const bottleneckColumns = [
+  { key: "skill", label: "Bottleneck Skill" },
+  { key: "routeExample", label: "Route Example" },
+  { key: "failurePattern", label: "Failure Pattern" },
+];
+
+export const bottleneckRows = [
+  {
+    skill: "Economy",
+    routeExample: "Necromancer → Chronomancer, Cleric → Ascendant",
+    failurePattern:
+      "The route looks good on paper, but Economy does not appear before you must commit elsewhere.",
+  },
+  {
+    skill: "Logistics",
+    routeExample: "Necromancer → Soulweaver, Cleric → Ascendant",
+    failurePattern:
+      "The route needs Logistics, but the class may not offer it early enough.",
+  },
+  {
+    skill: "Nightshade Magic",
+    routeExample: "Knight → Swashbuckler",
+    failurePattern:
+      "The route can die because the rare magic skill never appears. Knight sample data puts Nightshade Magic at 0.91%.",
+  },
+  {
+    skill: "Scouting",
+    routeExample: "Grand Inquisitor, Harbinger of Doom, Lord of Chaos",
+    failurePattern:
+      "You skip Scouting because it feels weak early, then realize it was required.",
+  },
+  {
+    skill: "Diplomacy",
+    routeExample: "Paragon, Walking Rot, Progenitor",
+    failurePattern:
+      "You assume the class wants only combat skills, but the formula requires Diplomacy.",
+  },
+];
+
+export const sampleProbabilityColumns = [
+  { key: "route", label: "Sample Route" },
+  { key: "skill", label: "Required Skill" },
+  { key: "sampleChance", label: "Sample Chance" },
+  { key: "meaning", label: "Meaning" },
+];
+
+export const sampleProbabilityRows = [
+  {
+    route: "Knight → Swashbuckler",
+    skill: "Nightshade Magic",
+    sampleChance: "0.91%",
+    meaning:
+      "This is the route-killer. If it does not appear early, do not keep forcing Swashbuckler.",
+  },
+  {
+    route: "Knight → Swashbuckler",
+    skill: "Luck",
+    sampleChance: "2.27%",
+    meaning:
+      "Very rare. Waiting for it can waste several levels.",
+  },
+  {
+    route: "Knight → Swashbuckler",
+    skill: "Intelligence",
+    sampleChance: "2.27%",
+    meaning:
+      "Also very rare. Missing both Luck and Intelligence is a strong pivot signal.",
+  },
+  {
+    route: "Knight → Swashbuckler",
+    skill: "Leadership",
+    sampleChance: "6.82%",
+    meaning:
+      "Uncommon but more realistic than Nightshade Magic.",
+  },
+  {
+    route: "Knight → Swashbuckler",
+    skill: "Offence",
+    sampleChance: "6.82%",
+    meaning:
+      "Useful even outside the route, so taking it is less punishing.",
+  },
+];
+
+export const recoveryColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "canRecover", label: "Can You Recover?" },
+  { key: "bestMove", label: "Best Move" },
+];
+
+export const recoveryRows = [
+  {
+    problem: "One required skill is Basic or Advanced",
+    canRecover: "Yes",
+    bestMove:
+      "Keep upgrading the required skill until Expert if the route still matters.",
+  },
+  {
+    problem: "One required skill is missing but slots are open",
+    canRecover: "Maybe",
+    bestMove:
+      "Continue only if the missing skill is not ultra-rare or you have a way to learn it.",
+  },
+  {
+    problem: "Rare bottleneck skill never appeared",
+    canRecover: "Usually no",
+    bestMove:
+      "Pivot to immediate strength and stop damaging your map tempo.",
+  },
+  {
+    problem: "Too many off-route skills",
+    canRecover: "Usually no",
+    bestMove:
+      "Stop forcing the Advanced Class and build around your current skill set.",
+  },
+  {
+    problem: "Wrong base class formula",
+    canRecover: "No for that route",
+    bestMove:
+      "Switch to a route that actually belongs to your hero's base class.",
+  },
+  {
+    problem: "Outdated Early Access data",
+    canRecover: "Depends",
+    bestMove:
+      "Recheck the current formula and update your route plan.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItFails", label: "Why It Fails" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Checking only the faction",
+    whyItFails:
+      "Faction is not enough. The same faction can have multiple base classes with different Advanced Classes.",
+    fix:
+      "Check hero base class first.",
+  },
+  {
+    mistake: "Counting Advanced as complete",
+    whyItFails:
+      "Advanced is still one level short of Expert.",
+    fix:
+      "Upgrade every required skill to Expert.",
+  },
+  {
+    mistake: "Taking too many off-route skills",
+    whyItFails:
+      "A five-skill formula cannot fit if your hero already filled too many secondary skill slots.",
+    fix:
+      "Count skill slots before selecting a new skill.",
+  },
+  {
+    mistake: "Waiting forever for a 1% skill",
+    whyItFails:
+      "Ultra-rare skills may not appear before the game is decided.",
+    fix:
+      "Treat rare skills as early confirmation signals, not future guarantees.",
+  },
+  {
+    mistake: "Ignoring Early Access changes",
+    whyItFails:
+      "A patch can change requirements, skill pools, or passive behavior.",
+    fix:
+      "Recheck the formula after major updates.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Your subclass is not unlocking in Heroes of Might and Magic: Olden Era because the game has not detected the exact Advanced Class formula yet.**
+
+The usual causes are:
+
+1. **One required skill is missing.**
+2. **One required skill is not Expert.**
+3. **You are following the wrong base class route.**
+4. **Your secondary skill slots are already full.**
+5. **The rare bottleneck skill never appeared.**
+6. **The Early Access data you are using is outdated.**
+
+Check in this order: **base class → five skill names → Expert level → open slots → bottleneck skill → patch data.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-cant-unlock-subclass-hero-selection.webp"
+    alt="Heroes Olden Era hero selection screen used to check base class and subclass route."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Many failed subclass routes start at hero selection: the faction may be right, but the base class route may be wrong.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="quick-diagnosis">
+  Quick diagnosis
+</h2>
+
+<GuideTable
+  caption="Why your subclass is not unlocking."
+  columns={diagnosisColumns}
+  rows={diagnosisRows}
+/>
+
+Most failed Advanced Class unlocks come from a missing skill, a non-Expert skill, a wrong base class formula, or a dead skill-slot situation.
+
+<GuideCallout title="Fast rule">
+If the subclass does not unlock, check the formula before you keep leveling. More hero levels do not help if the route is already impossible.
+</GuideCallout>
+
+---
+
+<h2 id="wrong-base-class">
+  Wrong base class route
+</h2>
+
+<GuideTable
+  caption="Same faction, different base class, different subclass route."
+  columns={baseClassColumns}
+  rows={baseClassRows}
+/>
+
+A common mistake is checking only the faction.
+
+That is not enough. Advanced Class formulas are tied to the hero's **base class**. A Necropolis hero is not automatically using every Necropolis subclass formula.
+
+To find your base class in-game, open the **hero information panel** and check the class line near the hero name and starting skills. That class label is the route filter you should use before following any Advanced Class formula.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-cant-unlock-subclass-starting-skills.webp"
+    alt="Heroes Olden Era hero information panel showing base class and starting skills."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The hero information panel is where you confirm base class, starting skills, and whether the route formula actually belongs to this hero.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Base class rule">
+Check the base class before checking the five skills. If the route belongs to another class, the subclass will not unlock no matter how many similar skills you take.
+</GuideCallout>
+
+---
+
+<h2 id="not-expert">
+  Required skill is not Expert
+</h2>
+
+<GuideTable
+  caption="Basic, Advanced, and Expert skill states."
+  columns={skillLevelColumns}
+  rows={skillLevelRows}
+/>
+
+This is the most common “I have the right skills, why did nothing happen?” problem.
+
+You may have all five required skill names, but the route still fails because one of them is not Expert.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-cant-unlock-subclass-skill-upgrade.webp"
+    alt="Heroes Olden Era skill upgrade screen showing Basic and Advanced skill progress."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Basic and Advanced are progress states. They do not finish an Advanced Class requirement.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-cant-unlock-subclass-expert-skill.webp"
+    alt="Heroes Olden Era Expert skill upgrade screen used for subclass requirements."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Expert is the required endpoint. If one route skill is still Advanced, the subclass remains locked.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="missing-required-skill">
+  Missing required skill
+</h2>
+
+A required skill cannot be replaced by a similar skill.
+
+This is where many players get trapped. They pick a skill that sounds right for the class, but the formula asks for something else.
+
+Examples:
+
+- a Death Knight route may ask for Intelligence or Diplomacy
+- a Necromancer route may ask for Economy or Logistics
+- a Temple route may ask for a magic school that does not match your current spell plan
+- a route may need Scouting even if you wanted a direct combat skill
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-cant-unlock-subclass-nightshade-icons.webp"
+    alt="Heroes Olden Era skill icons including Nightshade, Diplomacy, and Economy."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Similar-looking or class-themed skills do not count unless the exact skill name matches the Advanced Class formula.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Formula rule">
+Advanced Classes check exact skill names. A useful skill is not the same thing as a required skill.
+</GuideCallout>
+
+---
+
+<h2 id="skill-slots-full">
+  Skill slots are full
+</h2>
+
+<GuideTable
+  caption="How off-route skills can kill a subclass route."
+  columns={slotColumns}
+  rows={slotRows}
+/>
+
+A subclass route can become impossible before you notice.
+
+The danger is not only missing a skill. The danger is filling your limited secondary skill slots with off-route picks before the missing requirement appears.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-how-to-unlock-subclasses-skill-pool.webp"
+    alt="Heroes Olden Era hero skill bar showing multiple learned secondary skills."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A crowded skill bar is a warning sign. If the route still needs new skills, the Advanced Class may already be impossible.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="rare-bottleneck-skill">
+  Rare bottleneck skill never appeared
+</h2>
+
+<GuideTable
+  caption="Common bottleneck skills that can block Advanced Class unlocks."
+  columns={bottleneckColumns}
+  rows={bottleneckRows}
+/>
+
+Some subclass routes fail because one required skill is simply too rare for that class in that game.
+
+That does not mean the route is bugged. It means the route was never confirmed.
+
+<GuideCallout title="Bottleneck rule">
+A rare skill is not something you wait for forever. If the bottleneck skill does not appear early, stop forcing the route and build a strong normal hero.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-cant-unlock-subclass-basic-economy.webp"
+    alt="Heroes Olden Era level-up choice showing Basic Economy as a bottleneck skill."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Economy can decide routes such as Chronomancer or Ascendant. If it appears early, the route becomes more realistic.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-cant-unlock-subclass-logistics-roll.webp"
+    alt="Heroes Olden Era level-up or draft choice showing Basic Logistics as a key route skill."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Logistics is both a strong map-tempo skill and a route checkpoint for several Advanced Classes.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="sample-roll-probability">
+  Sample roll probability: why waiting can fail
+</h2>
+
+Nightshade Magic is the main route-killer in the Knight → Swashbuckler example above. For the full sample probability breakdown of that route, use this table:
+
+<GuideTable
+  caption="Knight to Swashbuckler sample roll probability."
+  columns={sampleProbabilityColumns}
+  rows={sampleProbabilityRows}
+/>
+
+This sample is useful because it explains why some routes feel impossible even when the requirement list is correct.
+
+If a required skill is around 1%, it is not a normal plan. It is a lucky confirmation roll.
+
+<GuideCallout title="Probability rule">
+If your route depends on an ultra-rare skill, the route should begin only after that skill appears. Do not build your whole game around seeing it later.
+</GuideCallout>
+
+---
+
+<h2 id="can-you-recover">
+  Can you recover the route?
+</h2>
+
+<GuideTable
+  caption="When a failed subclass route can still be recovered."
+  columns={recoveryColumns}
+  rows={recoveryRows}
+/>
+
+The route is recoverable when the problem is only skill level.
+
+The route is usually not recoverable when the problem is missing slots, wrong base class, or an ultra-rare skill that never appeared.
+
+That is why early diagnosis matters.
+
+---
+
+<h2 id="early-access-data">
+  Early Access data changed
+</h2>
+
+Olden Era entered Early Access on April 30, 2026, so subclass data should be treated as patch-sensitive.
+
+Recheck after major updates if:
+
+- the formula no longer unlocks
+- a required skill stopped appearing
+- a passive behaves differently
+- UI route markers changed
+- class skill pools changed
+- patch notes mention skills or Advanced Classes
+
+<GuideCallout title="Early Access rule">
+If a route worked before and no longer works, check patch data before rewriting your whole build plan.
+</GuideCallout>
+
+---
+
+<h2 id="common-mistakes">
+  Common mistakes
+</h2>
+
+<GuideTable
+  caption="Common mistakes that stop Advanced Class unlocks."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most failed subclass routes are not one big mistake. They are a chain of small mistakes: one off-route skill, one missed bottleneck, one Advanced skill counted as Expert, then one level too late to pivot.
+
+---
+
+<h2 id="what-to-do-instead">
+  What to do if the subclass route is dead
+</h2>
+
+If the route is dead, stop spending levels trying to save it.
+
+A strong fallback plan is:
+
+- take the best combat skill upgrades available
+- improve map tempo with movement or economy
+- focus on army preservation
+- build around your current skill set
+- stop chasing the passive
+- use the next hero or next map for a cleaner route
+
+<GuideCallout title="Pivot rule">
+A strong normal hero is better than a failed Advanced Class project. Once the formula is impossible, every extra level spent forcing it is a tempo loss.
+</GuideCallout>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Why can’t I unlock my subclass?
+
+Usually one required skill is missing, one required skill is not Expert, the formula belongs to the wrong base class, your skill slots are full, or the rare bottleneck skill never appeared.
+
+### Do Basic or Advanced skills count?
+
+No. Only Expert counts as a completed Advanced Class requirement.
+
+### Can I unlock a subclass with four required skills?
+
+No. You need all five required secondary skills, and all five must be Expert.
+
+### Where do I check my hero's base class?
+
+Open the hero information panel and look near the hero name, starting skills, or class details. The base class decides which Advanced Class formulas can unlock.
+
+### Can the same faction have different subclass routes?
+
+Yes. Subclass routes depend on base class, not only faction. For example, Necromancer and Death Knight have different Advanced Classes.
+
+### What if the missing skill never appears?
+
+Stop forcing if the missing skill is a rare bottleneck and the route is hurting your tempo.
+
+### Can I recover a failed subclass route?
+
+You can recover if the only problem is upgrading a required skill to Expert. You usually cannot recover if the base class is wrong, slots are full, or the bottleneck skill never appeared.
+
+### Is the subclass system bugged?
+
+Usually no. Most failed unlocks are caused by missing requirements or non-Expert skills. But because Olden Era is in Early Access, patch changes can affect formulas and skill behavior.
+
+### Should I keep leveling until the subclass unlocks?
+
+Only if the route is still mathematically possible and the passive will matter in time. Otherwise, pivot to a strong normal build.

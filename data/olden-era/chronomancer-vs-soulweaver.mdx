@@ -1,0 +1,716 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const comparisonColumns = [
+  { key: "route", label: "Route" },
+  { key: "passive", label: "Passive Bonus" },
+  { key: "requiredSkills", label: "Required Expert Skills" },
+  { key: "bottleneck", label: "Main Bottleneck" },
+  { key: "verdict", label: "Verdict" },
+];
+
+export const comparisonRows = [
+  {
+    route: "Chronomancer",
+    passive:
+      "Necromancy can affect all creatures, not only Undead.",
+    requiredSkills:
+      "Daylight Magic, Tactics, Battle Magic, Offence, Economy",
+    bottleneck:
+      "Economy",
+    verdict:
+      "Only chase if Economy appears early and the game gives you enough time to benefit from wider Necromancy value.",
+  },
+  {
+    route: "Soulweaver",
+    passive:
+      "When an enemy stack dies, summon a temporary Wight stack at its position.",
+    requiredSkills:
+      "Summon Avatar, Arcane Magic, Battlecraft, Insight, Logistics",
+    bottleneck:
+      "Logistics",
+    verdict:
+      "Usually the better Necromancer chase because the payoff affects battles immediately.",
+  },
+];
+
+export const heroColumns = [
+  { key: "hero", label: "Hero" },
+  { key: "bestRoute", label: "Best Route" },
+  { key: "why", label: "Why This Hero Fits" },
+  { key: "warning", label: "Warning" },
+];
+
+export const heroRows = [
+  {
+    hero: "Marl",
+    bestRoute: "Soulweaver",
+    why:
+      "Marl is the cleanest Soulweaver candidate because Logistics is the key Soulweaver bottleneck. Starting closer to Logistics makes the route much more realistic.",
+    warning:
+      "Do not force Soulweaver only because Marl is a good fit. You still need Summon Avatar, Arcane Magic, Battlecraft, and Insight at Expert.",
+  },
+  {
+    hero: "Funerella",
+    bestRoute: "Flexible Necromancer route",
+    why:
+      "Funerella starts ahead on Necromancy scaling, which makes her a strong Necromancer candidate when the route skills appear naturally.",
+    warning:
+      "Advanced Necromancy does not replace the subclass formula. Chronomancer and Soulweaver still require five exact Expert skills.",
+  },
+  {
+    hero: "Mag",
+    bestRoute: "Spell-leaning route",
+    why:
+      "Mag is better when your run is already moving toward a magic-heavy Necromancer. He can fit routes that want spell investment more naturally than a pure army hero.",
+    warning:
+      "Do not chase Chronomancer unless Economy appears early, and do not chase Soulweaver unless Logistics appears early.",
+  },
+  {
+    hero: "Oona",
+    bestRoute: "Control fallback",
+    why:
+      "Oona is useful when the subclass route does not fully form because control magic can still support a strong normal Necromancer build.",
+    warning:
+      "Oona is not an automatic Chronomancer or Soulweaver pick. Let the bottleneck skill decide.",
+  },
+  {
+    hero: "Onkos",
+    bestRoute: "Normal Skeleton tempo fallback",
+    why:
+      "Onkos is excellent for Skeleton tempo, but that does not automatically make either Necromancer subclass route easier.",
+    warning:
+      "Pick Onkos for Skeleton scaling, not because you expect a clean Chronomancer or Soulweaver route.",
+  },
+];
+
+export const decisionColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "pick", label: "Pick" },
+  { key: "why", label: "Why" },
+];
+
+export const decisionRows = [
+  {
+    situation:
+      "Logistics appears early and you already have one or two Soulweaver skills",
+    pick: "Soulweaver",
+    why:
+      "The route is confirmed early, and the Wight summon payoff helps current battles instead of only future scaling.",
+  },
+  {
+    situation:
+      "Economy appears early and your route already has Tactics, Offence, or Battle Magic support",
+    pick: "Chronomancer",
+    why:
+      "Economy is the main checkpoint. If it appears early, Chronomancer becomes a real plan instead of a dream route.",
+  },
+  {
+    situation:
+      "Neither Economy nor Logistics appears early",
+    pick: "Neither",
+    why:
+      "Do not force either route. Build the strongest normal Necromancer from your actual rolls.",
+  },
+  {
+    situation:
+      "You need immediate battlefield pressure",
+    pick: "Soulweaver",
+    why:
+      "Temporary Wights after enemy stack deaths can change the current fight.",
+  },
+  {
+    situation:
+      "You expect a longer map and clean Necromancy scaling",
+    pick: "Chronomancer",
+    why:
+      "Chronomancer has a broader Necromancy payoff, but it needs time and the Economy roll.",
+  },
+  {
+    situation:
+      "Your skill slots are already crowded",
+    pick: "Pivot",
+    why:
+      "Both routes require five exact Expert skills. A crowded skill bar can kill the route before the passive matters.",
+  },
+];
+
+export const chronomancerColumns = [
+  { key: "requiredSkill", label: "Chronomancer Skill" },
+  { key: "role", label: "Role In The Route" },
+  { key: "risk", label: "Risk" },
+];
+
+export const chronomancerRows = [
+  {
+    requiredSkill: "Daylight Magic",
+    role:
+      "Magic school requirement that pushes Chronomancer away from a pure combat route.",
+    risk:
+      "Can be awkward if your spell plan is already moving elsewhere.",
+  },
+  {
+    requiredSkill: "Tactics",
+    role:
+      "Useful combat and formation skill that can still help map clearing.",
+    risk:
+      "Low. Tactics is rarely a bad pick if your army benefits from positioning.",
+  },
+  {
+    requiredSkill: "Battle Magic",
+    role:
+      "Supports hero spell damage and helps keep the route combat-relevant.",
+    risk:
+      "Medium. Stronger if your hero is already casting often.",
+  },
+  {
+    requiredSkill: "Offence",
+    role:
+      "Immediate army damage skill that helps the route stay useful before unlock.",
+    risk:
+      "Low. Offence is usually a good tempo skill.",
+  },
+  {
+    requiredSkill: "Economy",
+    role:
+      "The key bottleneck that confirms whether Chronomancer is realistic.",
+    risk:
+      "High. If Economy does not appear early, stop forcing Chronomancer.",
+  },
+];
+
+export const soulweaverColumns = [
+  { key: "requiredSkill", label: "Soulweaver Skill" },
+  { key: "role", label: "Role In The Route" },
+  { key: "risk", label: "Risk" },
+];
+
+export const soulweaverRows = [
+  {
+    requiredSkill: "Summon Avatar",
+    role:
+      "Summoning requirement that fits the route's battlefield-body identity.",
+    risk:
+      "Medium. Good if your build already benefits from summons or extra bodies.",
+  },
+  {
+    requiredSkill: "Arcane Magic",
+    role:
+      "Magic school requirement that supports a more spell-oriented Necromancer.",
+    risk:
+      "Medium. Stronger when your spell options justify the investment.",
+  },
+  {
+    requiredSkill: "Battlecraft",
+    role:
+      "Practical combat skill that can help before the passive unlocks.",
+    risk:
+      "Low to medium. Often useful, but still needs upgrades to Expert.",
+  },
+  {
+    requiredSkill: "Insight",
+    role:
+      "Route requirement that supports long-term hero development.",
+    risk:
+      "Medium. It may be weaker than direct combat if your army is under pressure.",
+  },
+  {
+    requiredSkill: "Logistics",
+    role:
+      "The key bottleneck and route-confirming roll for Soulweaver.",
+    risk:
+      "High. If Logistics never appears, Soulweaver becomes dangerous to force.",
+  },
+];
+
+export const timingColumns = [
+  { key: "timing", label: "Timing" },
+  { key: "chronomancerCheck", label: "Chronomancer Check" },
+  { key: "soulweaverCheck", label: "Soulweaver Check" },
+];
+
+export const timingRows = [
+  {
+    timing: "Hero selection",
+    chronomancerCheck:
+      "Does the hero start with Tactics, Offence, Battle Magic, Daylight Magic, or Economy?",
+    soulweaverCheck:
+      "Does the hero start with Logistics, Battlecraft, Arcane Magic, Insight, or Summon Avatar?",
+  },
+  {
+    timing: "First few level-ups",
+    chronomancerCheck:
+      "Economy appearing early is the strongest confirmation signal.",
+    soulweaverCheck:
+      "Logistics appearing early is the strongest confirmation signal.",
+  },
+  {
+    timing: "Level 8–10",
+    chronomancerCheck:
+      "Continue only if you have several route skills and Economy is solved.",
+    soulweaverCheck:
+      "Continue only if you have several route skills and Logistics is solved.",
+  },
+  {
+    timing: "Mid game",
+    chronomancerCheck:
+      "Finish Expert upgrades only if the broader Necromancy payoff will matter.",
+    soulweaverCheck:
+      "Finish Expert upgrades if Wight summons will affect upcoming major battles.",
+  },
+  {
+    timing: "Late game",
+    chronomancerCheck:
+      "Do not chase if the passive arrives after decisive fights.",
+    soulweaverCheck:
+      "Do not chase if the passive arrives after decisive fights.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItFails", label: "Why It Fails" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Forcing Chronomancer without Economy",
+    whyItFails:
+      "Economy is the route bottleneck. Without it, the route can waste too many levels.",
+    fix:
+      "Only chase Chronomancer if Economy appears early.",
+  },
+  {
+    mistake: "Forcing Soulweaver without Logistics",
+    whyItFails:
+      "Soulweaver needs Logistics. Missing it can leave you with a half-finished route.",
+    fix:
+      "Only chase Soulweaver if Logistics appears early or you have a reliable way to learn it.",
+  },
+  {
+    mistake: "Trying to chase both routes",
+    whyItFails:
+      "Chronomancer and Soulweaver share no required skills, so splitting your picks can kill both routes.",
+    fix:
+      "Choose one route after the first bottleneck skill appears.",
+  },
+  {
+    mistake: "Ignoring Expert upgrades",
+    whyItFails:
+      "Learning the right skill is not enough. All five required skills must be Expert.",
+    fix:
+      "Prioritize upgrades once the route is confirmed.",
+  },
+  {
+    mistake: "Choosing the passive instead of the game state",
+    whyItFails:
+      "A strong passive can still be wrong if it arrives too late or hurts your map tempo.",
+    fix:
+      "Pick the route your early rolls support.",
+  },
+];
+
+export const fallbackColumns = [
+  { key: "currentRolls", label: "Your Current Rolls" },
+  { key: "fallbackPlan", label: "Fallback Plan" },
+  { key: "why", label: "Why" },
+];
+
+export const fallbackRows = [
+  {
+    currentRolls:
+      "Offence, Tactics, or Battlecraft but no Economy or Logistics",
+    fallbackPlan:
+      "Build a normal combat Necromancer",
+    why:
+      "Your hero already has tempo tools. Do not weaken the build waiting for a missing bottleneck.",
+  },
+  {
+    currentRolls:
+      "Arcane Magic or Battle Magic but no route confirmation",
+    fallbackPlan:
+      "Build a spell-focused Necromancer",
+    why:
+      "A clean caster plan is better than a half-finished Advanced Class.",
+  },
+  {
+    currentRolls:
+      "Economy without enough Chronomancer support",
+    fallbackPlan:
+      "Use Economy for town tempo and keep watching",
+    why:
+      "Economy can still be useful even if Chronomancer does not fully form.",
+  },
+  {
+    currentRolls:
+      "Logistics without enough Soulweaver support",
+    fallbackPlan:
+      "Use Logistics for map tempo and keep watching",
+    why:
+      "Logistics is valuable even if the route never completes.",
+  },
+  {
+    currentRolls:
+      "Too many off-route skills",
+    fallbackPlan:
+      "Stop chasing and upgrade what already works",
+    why:
+      "Skill slots are limited. Once the route is dead, upgrades are usually better than new weak branches.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Soulweaver is usually the better Necromancer subclass route in Heroes of Might and Magic: Olden Era if Logistics appears early. Chronomancer is worth chasing only when Economy appears early and the game gives you enough time to use the broader Necromancy payoff.**
+
+Use this rule:
+
+1. **Pick Soulweaver** if Logistics appears early and you want immediate battlefield pressure from temporary Wight summons.
+2. **Pick Chronomancer** if Economy appears early and your build can turn broader Necromancy value into long-term scaling.
+3. **Pick neither** if neither bottleneck appears early.
+4. **Do not chase both routes** because they share no required skills.
+
+For most real games, **Soulweaver is the safer Necromancer chase.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-hero-selection.webp"
+    alt="Heroes Olden Era hero selection screen used to compare Necromancer subclass routes."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Chronomancer vs Soulweaver decision starts before the route is complete. Your starting skills and first few rolls decide which path is realistic.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="early-access-note">
+  Early Access note
+</h2>
+
+Heroes of Might and Magic: Olden Era entered Early Access on April 30, 2026. Subclass formulas, skill roll chances, Necromancy behavior, Wight summons, and route strength can change during patches.
+
+<GuideCallout title="Version warning">
+Use this as an Early Access route guide. Recheck Chronomancer and Soulweaver requirements after major balance patches.
+</GuideCallout>
+
+For the full Advanced Class table, use the <Link href="/olden-era/subclass-guide">Subclass and Advanced Class Guide</Link>. For general Necropolis play, use the <Link href="/olden-era/necropolis-guide">Necropolis Guide</Link>.
+
+---
+
+<h2 id="quick-comparison">
+  Chronomancer vs Soulweaver comparison
+</h2>
+
+<GuideTable
+  caption="Chronomancer vs Soulweaver route comparison."
+  columns={comparisonColumns}
+  rows={comparisonRows}
+/>
+
+The comparison is simple:
+
+**Chronomancer is the broader Necromancy-scaling route. Soulweaver is the immediate battlefield-pressure route.**
+
+That means Soulweaver is usually easier to justify in real games. It gives a visible tactical payoff when enemy stacks die. Chronomancer can be strong, but only when the Economy roll appears early and the game lasts long enough for the expanded Necromancy value to matter.
+
+---
+
+<h2 id="best-heroes">
+  Best heroes for Chronomancer and Soulweaver
+</h2>
+
+<GuideTable
+  caption="Best Necromancer heroes for Chronomancer and Soulweaver routes."
+  columns={heroColumns}
+  rows={heroRows}
+/>
+
+The best route is not only about the passive. It also depends on your starting hero.
+
+**Marl** is the cleanest Soulweaver candidate because Logistics is the Soulweaver bottleneck. If Marl starts close to that route and your early level-ups support the rest of the formula, Soulweaver becomes much more realistic.
+
+**Funerella** is strong for Necromancer scaling because she starts ahead on the faction's core Necromancy identity. She is not automatically locked into either route, but she benefits more than most heroes when the subclass path forms naturally.
+
+**Mag** is the better spell-leaning option when your run naturally points toward magic skills. **Oona** and **Onkos** can still become strong normal Necromancers if neither Advanced Class route comes together.
+
+<GuideCallout title="Hero rule">
+Pick the route that your hero and early rolls support. Marl makes Soulweaver easier to justify, but Logistics alone does not complete the route.
+</GuideCallout>
+
+---
+
+<h2 id="which-should-you-pick">
+  Which Necromancer subclass should you pick?
+</h2>
+
+<GuideTable
+  caption="When to pick Chronomancer, Soulweaver, or neither."
+  columns={decisionColumns}
+  rows={decisionRows}
+/>
+
+The biggest mistake is choosing by passive text alone.
+
+Choose based on the route the game gives you. If Logistics appears early, Soulweaver becomes realistic. If Economy appears early, Chronomancer becomes possible. If neither appears, build a strong normal Necromancer instead.
+
+<GuideCallout title="Decision rule">
+Do not decide Chronomancer vs Soulweaver before the bottleneck skill appears. Economy confirms Chronomancer. Logistics confirms Soulweaver.
+</GuideCallout>
+
+---
+
+<h2 id="chronomancer-route">
+  Chronomancer route
+</h2>
+
+<GuideTable
+  caption="Chronomancer required Expert skills."
+  columns={chronomancerColumns}
+  rows={chronomancerRows}
+/>
+
+Chronomancer requires:
+
+**Daylight Magic, Tactics, Battle Magic, Offence, Economy**
+
+The route has some useful tempo pieces. Tactics and Offence can help your army before the passive unlocks, and Battle Magic can support a caster direction. The danger is **Economy**. If Economy does not appear early, the route becomes unreliable.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-basic-economy.webp"
+    alt="Heroes Olden Era Basic Economy skill choice used as the Chronomancer bottleneck."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Economy is the Chronomancer checkpoint. If it appears early, the route becomes realistic; if it does not, stop forcing.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Chronomancer rule">
+Only chase Chronomancer when Economy appears early. Without Economy, the route can cost too many levels for a payoff that may arrive too late.
+</GuideCallout>
+
+---
+
+<h2 id="soulweaver-route">
+  Soulweaver route
+</h2>
+
+<GuideTable
+  caption="Soulweaver required Expert skills."
+  columns={soulweaverColumns}
+  rows={soulweaverRows}
+/>
+
+Soulweaver requires:
+
+**Summon Avatar, Arcane Magic, Battlecraft, Insight, Logistics**
+
+Soulweaver's payoff is easier to feel immediately. When enemy stacks die, the temporary Wight summon can create pressure, bodies, and tactical disruption during the battle itself.
+
+The danger is **Logistics**. If Logistics does not appear early, the route becomes much harder to justify.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide=arena-logistics.webp"
+    alt="Heroes Olden Era Basic Logistics skill choice used as the Soulweaver bottleneck."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Logistics is the Soulweaver checkpoint. It is also useful even if the route later fails because map tempo is always valuable.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Soulweaver rule">
+Soulweaver is usually the better Necromancer chase if Logistics appears early. Without Logistics, do not keep forcing unless the rest of the route is already extremely clean.
+</GuideCallout>
+
+---
+
+<h2 id="timing-checkpoints">
+  Timing checkpoints
+</h2>
+
+<GuideTable
+  caption="When to continue or abandon each Necromancer route."
+  columns={timingColumns}
+  rows={timingRows}
+/>
+
+By Level 8–10, you should usually know which route is real.
+
+If Economy appeared, consider Chronomancer. If Logistics appeared, consider Soulweaver. If neither appeared, stop trying to force an Advanced Class and build from your strongest current skills.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-how-to-unlock-subclass-starting-skills.webp"
+    alt="Heroes Olden Era hero information panel showing starting skills for subclass planning."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Starting skills can make one route cleaner, but the route still needs all five required skills at Expert.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="do-not-chase-both">
+  Do not chase both routes
+</h2>
+
+Chronomancer and Soulweaver are two different five-skill formulas, and they share no required skills.
+
+Trying to chase both usually means you finish neither. Once Economy or Logistics appears, let that bottleneck decide the route instead of splitting your skill slots.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-how-to-unlock-subclass-skill-pool.webp"
+    alt="Heroes Olden Era hero skill bar showing skill slot pressure for subclass routes."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Skill slots are limited. Splitting between Chronomancer and Soulweaver can leave you with neither Advanced Class.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Route lock rule">
+Pick the route confirmed by the first bottleneck skill. Do not split your skill slots between Economy and Logistics routes unless the rolls are unusually perfect.
+</GuideCallout>
+
+---
+
+<h2 id="opportunity-cost">
+  Opportunity cost
+</h2>
+
+The cost of chasing Chronomancer or Soulweaver is not only the five required skills.
+
+It is also what you give up:
+
+- immediate combat upgrades
+- safer map clearing
+- extra movement
+- economy and town tempo
+- spell schools that fit your current map
+- upgrades to skills you already have
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-tactics-battlecraft.webp"
+    alt="Heroes Olden Era level-up choices showing Tactics, Battlecraft, and Logistics opportunity cost."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A level-up choice is both a route decision and a tempo decision. Do not choose a future passive if your current army needs power now.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Tempo rule">
+If the route skills make your Necromancer weaker for the next several fights, the Advanced Class may be strategically wrong even if it is technically possible.
+</GuideCallout>
+
+---
+
+<h2 id="fallback-plan">
+  Fallback plan if neither route works
+</h2>
+
+<GuideTable
+  caption="What to do if neither Necromancer route is confirmed."
+  columns={fallbackColumns}
+  rows={fallbackRows}
+/>
+
+A failed subclass route does not mean the hero is dead.
+
+If Chronomancer and Soulweaver do not come together, build around the skills you actually rolled. A normal Necromancer with strong combat, magic, economy, or map tempo can outperform a half-finished Advanced Class chase.
+
+---
+
+<h2 id="common-mistakes">
+  Common mistakes
+</h2>
+
+<GuideTable
+  caption="Common Chronomancer vs Soulweaver mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is deciding too early.
+
+Do not say “I am going Soulweaver” before Logistics appears. Do not say “I am going Chronomancer” before Economy appears. Let the first few skill rolls tell you which route is actually available.
+
+---
+
+<h2 id="final-verdict">
+  Final verdict
+</h2>
+
+For most Necromancer games:
+
+**Soulweaver is the better route if Logistics appears early. Chronomancer is a conditional route that needs early Economy. If neither bottleneck appears, chase neither.**
+
+That verdict is not because Chronomancer is weak. It is because Soulweaver's payoff is more immediate, while Chronomancer depends more heavily on timing and route confirmation.
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is Chronomancer or Soulweaver better?
+
+Soulweaver is usually better if Logistics appears early because its Wight summons affect battles immediately. Chronomancer is worth chasing only when Economy appears early.
+
+### Which hero is best for Soulweaver?
+
+Marl is the cleanest Soulweaver candidate because Logistics is the Soulweaver bottleneck. Still, he needs all five Soulweaver skills at Expert.
+
+### Which hero is best for Chronomancer?
+
+Chronomancer is less about a fixed hero and more about the Economy roll. Chase it only when Economy appears early and the rest of the route supports your game state.
+
+### What skills does Chronomancer need?
+
+Chronomancer needs Daylight Magic, Tactics, Battle Magic, Offence, and Economy, all upgraded to Expert.
+
+### What skills does Soulweaver need?
+
+Soulweaver needs Summon Avatar, Arcane Magic, Battlecraft, Insight, and Logistics, all upgraded to Expert.
+
+### What is the biggest Chronomancer bottleneck?
+
+Economy. If Economy does not appear early, Chronomancer becomes risky to force.
+
+### What is the biggest Soulweaver bottleneck?
+
+Logistics. If Logistics does not appear early, Soulweaver becomes risky to force.
+
+### Should I chase both Chronomancer and Soulweaver?
+
+No. They share no required skills. Trying to chase both can leave you with neither route completed.
+
+### What should I do if neither route works?
+
+Build a strong normal Necromancer around your current skills: combat, magic, economy, or Logistics-based map tempo.

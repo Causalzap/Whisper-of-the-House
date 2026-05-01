@@ -1,0 +1,700 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const priorityColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "buildType", label: "Build Type" },
+  { key: "pickItWhen", label: "Pick It When" },
+  { key: "avoidItWhen", label: "Avoid It When" },
+];
+
+export const priorityRows = [
+  {
+    priority: "1",
+    buildType: "Immediate army upgrade or key dwelling",
+    pickItWhen:
+      "Your next fights become much safer because of the unit, upgrade, or weekly growth.",
+    avoidItWhen:
+      "The unit does not change your next fights or you cannot afford to recruit it.",
+  },
+  {
+    priority: "2",
+    buildType: "Compounding economy",
+    pickItWhen:
+      "The building gives gold, resources, Law Points, Astrology Points, or long-term value from early in the week.",
+    avoidItWhen:
+      "You need combat power right now and the economy building does not help you clear.",
+  },
+  {
+    priority: "3",
+    buildType: "Mage Guild",
+    pickItWhen:
+      "Spells immediately improve your clearing, mobility, buffs, damage, or survival.",
+    avoidItWhen:
+      "You lack mana, spell scaling, or the resources needed for more urgent buildings.",
+  },
+  {
+    priority: "4",
+    buildType: "Marketplace",
+    pickItWhen:
+      "Trading resources immediately unlocks your next building, spell, upgrade, or recruitment timing.",
+    avoidItWhen:
+      "You are building it only because it is cheap and you have no bottleneck to fix.",
+  },
+  {
+    priority: "5",
+    buildType: "Fortifications and defensive buildings",
+    pickItWhen:
+      "Enemy pressure is close, the map is aggressive, or you need to protect a town.",
+    avoidItWhen:
+      "You are safe and still need economy, dwellings, Mage Guild, or core army growth.",
+  },
+];
+
+export const firstBuildColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "bestFirstBuild", label: "Best First Build" },
+  { key: "why", label: "Why" },
+];
+
+export const firstBuildRows = [
+  {
+    situation: "You are still weak in early fights",
+    bestFirstBuild: "Unit dwelling, unit upgrade, or growth support",
+    why:
+      "The best economy is the economy you can actually clear toward. If your army cannot take fights, pure income may be too slow.",
+  },
+  {
+    situation: "Your army is safe enough for easy fights",
+    bestFirstBuild: "Gold or resource economy",
+    why:
+      "Early compounding value matters more when your hero can keep clearing while the town scales.",
+  },
+  {
+    situation: "Your faction has a strong early law",
+    bestFirstBuild: "Law Point economy",
+    why:
+      "Faction laws can turn into unit growth, combat power, or resource access if they match your route.",
+  },
+  {
+    situation: "You need map spells, Town Portal, or spell access",
+    bestFirstBuild: "Astrology or Mage Guild path",
+    why:
+      "Magic infrastructure is worth it when it changes your route, movement, or combat outcomes quickly.",
+  },
+  {
+    situation: "You are blocked by one exact resource",
+    bestFirstBuild: "Marketplace or the missing resource source",
+    why:
+      "A generic strong building is worse than the building that unlocks your next real timing.",
+  },
+  {
+    situation: "It is close to the end of the week",
+    bestFirstBuild: "Creature growth or dwelling before weekly growth",
+    why:
+      "Buildings that increase recruitable units are much stronger before the weekly refresh than after it.",
+  },
+];
+
+export const factionColumns = [
+  { key: "faction", label: "Faction" },
+  { key: "dayOneToThree", label: "Day 1–3 Priority Buildings / Targets" },
+  { key: "earlyRoute", label: "Early Route" },
+  { key: "avoid", label: "Avoid This" },
+];
+
+export const factionRows = [
+  {
+    faction: "Temple",
+    dayOneToThree:
+      "Solar Temple economy upgrade, Muse Level 2 for Augur Ringers / Marksmen, then Mage Guild, Marketplace, or Golden Calf when the resources line up.",
+    earlyRoute:
+      "Use early economy or Law Points to support a ranged plan built around Crossbowmen / Marksmen and a stable frontline.",
+    avoid:
+      "Do not chase Golden Calf too early if the prerequisite or resource cost stops you from clearing.",
+  },
+  {
+    faction: "Necropolis",
+    dayOneToThree:
+      "Skeleton Archer upgrade, gold or Tax Collectors-style economy, Mage Guild or Marketplace if blocked, then Liches, Vampires, Kennels, or Chamber of Feasts depending on resources.",
+    earlyRoute:
+      "Upgrade Skeletons into Skeleton Archers, take low-loss fights, then build toward Necromancy scaling or a Vampire / Lich timing.",
+    avoid:
+      "Do not rush Vampires or Liches before your Skeleton Archer stack and resource route are stable.",
+  },
+  {
+    faction: "Schism",
+    dayOneToThree:
+      "Abyssal Remnant, Lesser Summoning Rites, Cultist Bower, Stables, and Mage Guild are the main early checks shown in current footage.",
+    earlyRoute:
+      "Start with Abyssal Remnant for economy choice, then decide between summoning, Cultist / Agshot Rider growth, or early spell access.",
+    avoid:
+      "Do not ignore mercury and other rare resources; Schism can look ready to build while still being blocked by exact costs.",
+  },
+  {
+    faction: "Grove",
+    dayOneToThree:
+      "Blooming Pond, Fawn growth / strength, Mage Guild, Bank, and lumber access are the early targets shown most clearly in current footage.",
+    earlyRoute:
+      "Use early unit growth and buffs to keep clearing, then add Mage Guild or Bank when the map route is safe.",
+    avoid:
+      "Do not skip wood and lumber routing if the next Grove building is blocked by basic resources.",
+  },
+  {
+    faction: "Dungeon",
+    dayOneToThree:
+      "Early creature dwelling, Mage Guild if spells change fights, then economy once the army can keep clearing. Exact building-name routing needs a dedicated Dungeon capture.",
+    earlyRoute:
+      "Play for safe early fights first; treat Black Dragon and other high-tier paths as later goals, not first-week defaults.",
+    avoid:
+      "Do not rush late-game fantasy units before the first-week army and resource route are stable.",
+  },
+  {
+    faction: "Hive",
+    dayOneToThree:
+      "Early unit production, Mage Guild or Haste support when hero and mana allow it, then economy for mid-game scaling. Exact building-name routing needs a dedicated Hive capture.",
+    earlyRoute:
+      "Hive appears stronger after the opening, so prioritize surviving the first week and reaching the mid-game with enough army.",
+    avoid:
+      "Do not play Hive like a pure Day 1 snowball faction if the opening army cannot clear safely yet.",
+  },
+];
+
+export const resourceColumns = [
+  { key: "resource", label: "Resource / System" },
+  { key: "whatItUsuallyUnlocks", label: "What It Usually Unlocks" },
+  { key: "earlyRule", label: "Early Rule" },
+];
+
+export const resourceRows = [
+  {
+    resource: "Gold",
+    whatItUsuallyUnlocks:
+      "Recruitment, upgrades, economy buildings, Mage Guild, and recovery after losses.",
+    earlyRule:
+      "Take gold when it lets you recruit, upgrade, or build again without losing tempo.",
+  },
+  {
+    resource: "Wood and Ore",
+    whatItUsuallyUnlocks:
+      "Core buildings, dwellings, fortifications, and several early town paths.",
+    earlyRule:
+      "Do not ignore wood and ore just because they look basic. They often block the next building.",
+  },
+  {
+    resource: "Rare resources",
+    whatItUsuallyUnlocks:
+      "Faction buildings, higher-tier dwellings, special upgrades, and stronger magic paths.",
+    earlyRule:
+      "Route toward the rare resource your next building needs, not the rare resource that happens to be closest.",
+  },
+  {
+    resource: "Alchemical Dust",
+    whatItUsuallyUnlocks:
+      "Spells, upgrades, artifacts, and special progression points.",
+    earlyRule:
+      "Check Dust before committing to Mage Guild or upgrade-heavy routes.",
+  },
+  {
+    resource: "Law Points",
+    whatItUsuallyUnlocks:
+      "Faction laws, unit growth, combat bonuses, economy bonuses, and route-specific scaling.",
+    earlyRule:
+      "Use the Gold vs Law vs Astrology section below. Law Points are route-specific, not a universal default.",
+  },
+  {
+    resource: "Astrology Points",
+    whatItUsuallyUnlocks:
+      "Global magic, map utility, mobility, and spell-related progression.",
+    earlyRule:
+      "Use the Gold vs Law vs Astrology section below. Astrology is strongest when map magic or mobility matters soon.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Building the prettiest high-tier option first",
+    whyItHurts:
+      "Expensive buildings can leave you unable to recruit, upgrade, or clear the next area.",
+    betterPlay:
+      "Build for the next fight and the next two turns, not for a perfect town screen.",
+  },
+  {
+    mistake: "Always choosing gold",
+    whyItHurts:
+      "Gold is flexible, but it does not help if you are blocked by wood, ore, Dust, Law Points, or unit growth.",
+    betterPlay:
+      "Choose gold when it immediately converts into recruitment, upgrades, or another building.",
+  },
+  {
+    mistake: "Always choosing Law Points",
+    whyItHurts:
+      "Law Points are strong only when the law you are chasing matches your faction route.",
+    betterPlay:
+      "Pick Law Points when a specific law will improve your army, economy, or next fights.",
+  },
+  {
+    mistake: "Building Mage Guild too early",
+    whyItHurts:
+      "Mage Guild is weak if you do not have mana, spell scaling, or a fight where the spell changes the result.",
+    betterPlay:
+      "Build Mage Guild when its spells immediately improve clearing, buffs, damage, or map routing.",
+  },
+  {
+    mistake: "Building Marketplace as a habit",
+    whyItHurts:
+      "Marketplace can delay better buildings if you do not have a real resource bottleneck.",
+    betterPlay:
+      "Build Marketplace when trading solves your next blocked timing.",
+  },
+  {
+    mistake: "Missing weekly growth timing",
+    whyItHurts:
+      "A dwelling or growth building built after the weekly refresh can miss a full week of value.",
+    betterPlay:
+      "Prioritize creature growth before week end when your army needs more bodies.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best first buildings in Heroes of Might and Magic: Olden Era are the buildings that improve your next few turns, not the buildings that look strongest on the town screen.**
+
+In most games, your first building should be one of these:
+
+1. **A key unit dwelling or upgrade** if your army needs safer fights.
+2. **A compounding economy building** if your army can already clear.
+3. **Gold, Law Points, or Astrology Points** depending on what your route needs.
+4. **Mage Guild** if spells immediately improve combat, buffs, movement, or map routing.
+5. **Marketplace** only if it fixes a real resource bottleneck.
+6. **Creature growth before week end** if the weekly refresh is close.
+
+The simple rule is:
+
+**build for the next fight, the next building, and the next weekly growth cycle.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-best-buildings-first-city-buildings.webp"
+    alt="City building screen in Heroes of Might and Magic Olden Era showing early building choices."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first building should solve an immediate problem: army safety, income, resource access, spells, or weekly growth.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="best-first-building">
+  What should you build first?
+</h2>
+
+The best first building is not the same for every faction, hero, or map. Olden Era gives you several early directions: economy, military buildings, Mage Guild, Marketplace, Law Points, Astrology Points, and faction-specific growth.
+
+The mistake is thinking of the town screen as a fixed build order.
+
+Instead, ask three questions:
+
+1. **What lets me win the next fight with fewer losses?**
+2. **What unlocks my next important building or upgrade?**
+3. **What gives value before the end of the week?**
+
+<GuideCallout title="First building rule">
+If a building does not improve your next fight, next building, next route, or next weekly growth cycle, it is probably not your best first build.
+</GuideCallout>
+
+Use the broader <Link href="/olden-era/beginner-economy-guide">Beginner Economy Guide</Link> if you want the full economy and first-week framework.
+
+---
+
+<h2 id="building-priority-table">
+  Best building priority table
+</h2>
+
+<GuideTable
+  caption="General early building priority in Heroes Olden Era."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+This is not a rigid order. It is a decision filter.
+
+For example, a Mage Guild can be the best early building if it unlocks a spell that lets you clear safely. But if your army has no mana support and cannot use the spells well, the same Mage Guild may be worse than a dwelling, economy upgrade, or Marketplace.
+
+Likewise, Marketplace is excellent when it fixes a blocked timing. It is weak when you build it only because it is cheap.
+
+---
+
+<h2 id="first-build-by-situation">
+  Best first building by situation
+</h2>
+
+<GuideTable
+  caption="What to build first depending on your current situation."
+  columns={firstBuildColumns}
+  rows={firstBuildRows}
+/>
+
+The strongest early players are not following one universal build order. They are reading the map.
+
+If your next fights are safe, economy becomes stronger. If your next fights are dangerous, army buildings become stronger. If your next building is blocked by one resource, Marketplace or a resource pickup becomes stronger than almost anything else.
+
+<GuideCallout title="Tempo rule">
+A building is only “fast” if it helps you keep moving. A greedy building that stops your hero from clearing is usually slower than a practical building that keeps the route alive.
+</GuideCallout>
+
+---
+
+<h2 id="faction-building-priorities">
+  Best early buildings by faction
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-best-buildings-first-faction-priorities.webp"
+    alt="Faction-specific early building priorities in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Each faction uses the same building logic, but the first targets change because each faction wins early fights in a different way.
+  </figcaption>
+</figure>
+
+A general priority table is useful, but the actual answer changes by faction. Temple can justify early ranged support. Necropolis often cares about Skeleton Archers before greedier high-tier buildings. Schism may need Abyssal Remnant, summoning access, Cultist / Stables routes, or Mage Guild depending on resources. Grove can lean on growth, buffs, and Bank timing once the route is safe.
+
+Use this as a starter table, not a full wiki build order. Early Access values and prerequisites can change, and some factions still need deeper dedicated captures.
+
+<GuideTable
+  caption="Faction-specific Day 1–3 building priorities in Heroes Olden Era."
+  columns={factionColumns}
+  rows={factionRows}
+/>
+
+<GuideCallout title="Faction rule">
+Do not copy another faction’s first building blindly. Copy the logic: build the thing that makes that faction’s next fights safer or unlocks its next real timing.
+</GuideCallout>
+
+For faction-specific routes, use:
+
+- <Link href="/olden-era/necropolis-guide">Necropolis Guide</Link>
+- <Link href="/olden-era/schism-guide">Schism Guide</Link>
+- <Link href="/olden-era/temple-guide">Temple Guide</Link>
+
+---
+
+<h2 id="gold-law-astrology">
+  Gold vs Law Points vs Astrology Points
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-best-buildings-first-gold-law-astrology.webp"
+    alt="Olden Era town upgrade choice between gold, Law Points, and Astrology Points."
+    width={300}
+    height={100}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gold, Law Points, and Astrology Points are not equal in every opening. Pick the one that supports your route fastest.
+  </figcaption>
+</figure>
+
+Many early town upgrades ask you to choose between direct income and progression resources. The safest beginner choice is often **gold**, because gold recruits units, upgrades stacks, and keeps buildings flowing.
+
+But gold is not always best.
+
+Choose **gold** when:
+
+- you need to recruit immediately
+- you need to upgrade a key unit
+- your next building is gold-blocked
+- you are recovering from losses
+- your faction does not need a specific early law yet
+
+Choose **Law Points** when:
+
+- your faction has a strong early law
+- the law improves unit growth or combat
+- the law supports your hero route
+- saving for a higher-tier law is part of your plan
+
+Choose **Astrology Points** when:
+
+- map spells matter soon
+- Town Portal or mobility planning matters
+- your route depends on global magic
+- you already have enough army and gold to keep clearing
+
+<GuideCallout title="Gold vs Law vs Astrology rule">
+Gold is the safest default. Law Points are best when you know which law you are chasing. Astrology Points are best when map magic or mobility will change your route soon.
+</GuideCallout>
+
+For the dedicated mechanic page, use <Link href="/olden-era/law-points-astrology-points">Law Points and Astrology Points Explained</Link>.
+
+---
+
+<h2 id="mage-guild">
+  When to build Mage Guild
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-best-buildings-first-mage-guild.webp"
+    alt="Mage Guild and spell unlocks in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mage Guild is strongest when the spells immediately change combat, movement, buffs, or safe clearing.
+  </figcaption>
+</figure>
+
+Mage Guild is not automatically early or late. It depends on whether spells solve a real problem.
+
+Build Mage Guild early when:
+
+- you need damage spells to clear safely
+- you need buffs like initiative, speed, protection, or ranged support
+- you have mana and a hero that can use spells well
+- the Mage Guild unlocks the next spell tier or constellation path
+- your route needs Town Portal or map magic support
+
+Delay Mage Guild when:
+
+- you cannot afford the spell path
+- your hero has poor spell usage
+- your next fights are already safe
+- a unit dwelling or growth building would help more
+- a missing resource blocks a more important timing
+
+<GuideCallout title="Mage Guild rule">
+Do not build Mage Guild because “spells are good.” Build it when the specific spells you unlock will change the next fight or the next route.
+</GuideCallout>
+
+---
+
+<h2 id="marketplace">
+  When to build Marketplace
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-best-buildings-first-marketplace.webp"
+    alt="Marketplace building decision in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Marketplace is a bottleneck fixer, not a default early building.
+  </figcaption>
+</figure>
+
+Marketplace is good when it turns spare resources into the exact building, spell, upgrade, or recruitment timing you were already blocked from reaching.
+
+It is weak when you build it only because it is cheap.
+
+<GuideCallout title="Marketplace rule">
+Build Marketplace when trading solves your next bottleneck. Do not build it as a habit if it does not unlock anything.
+</GuideCallout>
+
+Use <Link href="/olden-era/beginner-economy-guide">Beginner Economy Guide</Link> for the broader resource framework.
+
+---
+
+<h2 id="creature-growth">
+  Build creature growth before week end
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-best-buildings-first-creature-growth-week-end.webp"
+    alt="Creature growth building timing before weekly unit refresh in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Creature growth buildings become much more urgent when the weekly refresh is close.
+  </figcaption>
+</figure>
+
+Weekly creature growth changes building priority.
+
+A dwelling built before the weekly refresh may give you more units immediately or preserve a full week of growth. The same building built after the refresh may still be useful, but it misses an important timing window.
+
+Prioritize creature growth before week end when:
+
+- your army is damaged
+- your next route needs more bodies
+- the building unlocks a key ranged or tank unit
+- the faction depends on unit count
+- you can still afford recruitment afterward
+
+Delay creature growth when:
+
+- you cannot recruit the units anyway
+- a resource building unlocks more important progress
+- your hero is already strong enough to clear
+- the building does not affect the upcoming week
+
+<GuideCallout title="Weekly growth rule">
+If the week is about to roll over, ask whether a dwelling or growth building will produce value before the refresh. Timing can matter as much as the building itself.
+</GuideCallout>
+
+---
+
+<h2 id="resource-buildings">
+  Do not ignore resource buildings and mines
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-best-buildings-first-resource-mine.webp"
+    alt="Resource mine and daily resource production in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Daily resource production can be more important than one flashy building if that resource unlocks your route.
+  </figcaption>
+</figure>
+
+A common beginner mistake is treating resources as secondary to town buildings. In practice, the building and the resource route are the same decision.
+
+If your next building needs wood, a lumber source may be better than a fight for gold. If your next spell or upgrade needs Alchemical Dust, a Dust reward may matter more than experience. If your faction needs crystals, mercury, or gems, a mine can change your entire Week 2.
+
+<GuideTable
+  caption="Early resources and what they usually unlock."
+  columns={resourceColumns}
+  rows={resourceRows}
+/>
+
+<GuideCallout title="Resource route rule">
+Do not ask “what reward is biggest?” Ask “which reward unlocks my next timing?”
+</GuideCallout>
+
+Use <Link href="/olden-era/alchemical-dust">How to Get Alchemical Dust</Link> if Dust is the resource blocking your route.
+
+---
+
+<h2 id="bank-and-income">
+  When income buildings are worth it
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-best-buildings-first-bank-gold.webp"
+    alt="Gold income building decision in Heroes Olden Era."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Income buildings are strongest when built early enough to pay you back across several turns.
+  </figcaption>
+</figure>
+
+Gold income buildings are not exciting, but they can be correct because they start paying every day. The earlier you build them, the more turns they have to matter.
+
+Build income when:
+
+- your army can already clear easy fights
+- you need gold for recruitment
+- you are early enough for the income to compound
+- the building does not delay a key dwelling
+- your next power spike is gold-heavy
+
+Delay income when:
+
+- your army cannot take safe fights
+- the next week’s growth is about to be missed
+- the building blocks Mage Guild or a key unit
+- you need a specific non-gold resource instead
+
+<GuideCallout title="Income rule">
+Gold income is strongest when it lets you keep building and recruiting every turn. It is weakest when it delays the combat power you need to keep clearing.
+</GuideCallout>
+
+---
+
+<h2 id="common-mistakes">
+  Common first-building mistakes
+</h2>
+
+<GuideTable
+  caption="Common early building mistakes in Heroes Olden Era."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most building mistakes come from one problem:
+
+**you built what looked good instead of what solved the next bottleneck.**
+
+Olden Era rewards practical sequencing. A simple dwelling before week end, a cheap Marketplace that unlocks the exact missing resource, or a basic income building placed early enough can outperform a flashy high-tier rush.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best first building in Heroes Olden Era?
+
+The best first building is usually the one that improves your next few turns. Build a unit dwelling or upgrade if your army needs safer fights, build economy if your army can already clear, build Mage Guild if spells immediately help, and build Marketplace only when it fixes a real bottleneck.
+
+### Should I build gold income first?
+
+Gold income is a safe early choice when your army can already clear and you need money for recruitment, upgrades, and buildings. Do not choose gold automatically if you are blocked by wood, ore, Alchemical Dust, Law Points, or unit growth.
+
+### Should I choose Law Points or gold first?
+
+Choose gold when you need immediate recruitment or buildings. Choose Law Points when you know the law you are chasing and it supports your faction route. If you are unsure, gold is usually safer.
+
+### When should I choose Astrology Points?
+
+Choose Astrology Points when map spells, Town Portal, or global magic will matter soon. Do not choose Astrology only because it is available if your army still needs gold, units, or resources.
+
+### When should I build Mage Guild?
+
+Build Mage Guild when the spells immediately improve your fights, mobility, buffs, damage, or survival. Delay it if you do not have mana, spell scaling, or a fight where the spells matter.
+
+### Is Marketplace worth building early?
+
+Marketplace is worth building early only if it solves a bottleneck. If trading resources unlocks a key building, unit upgrade, Mage Guild, or recruitment timing, it is good. If not, it may just delay stronger buildings.
+
+### Should I build creature dwellings before the end of the week?
+
+Usually yes if the dwelling affects weekly growth or gives units you can use immediately. A dwelling built before the weekly refresh can be much stronger than the same dwelling built after it.
+
+### What should I do if I cannot build the thing I want?
+
+Check the exact missing cost first. You may need a mine, resource pickup, Marketplace trade, Alchemical Dust source, or cheaper tempo building before forcing the original plan.
+
+### Is there one fixed build order for every faction?
+
+No. Each faction and hero changes the answer. Use the same rule for all factions: build for your next fight, next bottleneck, and next weekly growth cycle.
+
+### Which faction has the clearest early building route?
+
+Necropolis and Temple currently have the clearest early routes from available footage. Necropolis usually checks Skeleton Archers, Marketplace, Mage Guild, Vampires, and Liches. Temple often checks Solar Temple, Muse Level 2, ranged growth, Mage Guild, and economy.

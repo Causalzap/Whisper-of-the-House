@@ -1,0 +1,964 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const requirementColumns = [
+  { key: "faction", label: "Faction" },
+  { key: "baseClass", label: "Base Class" },
+  { key: "subclass", label: "Advanced Class" },
+  { key: "passive", label: "Passive Bonus" },
+  { key: "requirements", label: "Required Expert Skills" },
+  { key: "routeValue", label: "Route Value" },
+  { key: "rollRisk", label: "Roll Risk" },
+];
+
+export const requirementRows = [
+  {
+    faction: "Temple",
+    baseClass: "Knight",
+    subclass: "Swashbuckler",
+    passive: "Heroic Strike deals +200 base damage.",
+    requirements:
+      "Nightshade Magic, Leadership, Offence, Luck, Intelligence",
+    routeValue:
+      "High damage payoff, but not a reliable route unless Nightshade Magic appears early.",
+    rollRisk:
+      "Very high. Knight sample data puts Nightshade Magic at only 0.91%, while Luck and Intelligence are also low at 2.27%.",
+  },
+  {
+    faction: "Temple",
+    baseClass: "Knight",
+    subclass: "Paragon",
+    passive:
+      "Friendly damage rolls always use maximum damage, while incoming damage rolls use minimum damage.",
+    requirements:
+      "Daylight Magic, Battlecraft, Tactics, Diplomacy, Summon Avatar",
+    routeValue:
+      "Strong late-game combat route if you naturally hit Tactics and Battlecraft early.",
+    rollRisk:
+      "Medium to high. Diplomacy and Summon Avatar can be awkward if they compete with immediate combat tempo.",
+  },
+  {
+    faction: "Temple",
+    baseClass: "Cleric",
+    subclass: "Grand Inquisitor",
+    passive:
+      "Enemy heroes can cast each spell only once per battle.",
+    requirements:
+      "Arcane Magic, Battle Magic, Defence, Insight, Scouting",
+    routeValue:
+      "Good anti-caster route, especially if your starting hero already has Insight.",
+    rollRisk:
+      "Medium. Scouting can feel weak during early clearing, so taking it only makes sense if the route is already live.",
+  },
+  {
+    faction: "Temple",
+    baseClass: "Cleric",
+    subclass: "Ascendant",
+    passive:
+      "All hero spells cost 0 mana.",
+    requirements:
+      "Primal Magic, Economy, Logistics, Resistance, Sorcery",
+    routeValue:
+      "One of the best Temple chase routes because 0 mana cost can decide long fights.",
+    rollRisk:
+      "High. Economy and Logistics are the route checkpoints; if one does not appear early, stop forcing it.",
+  },
+  {
+    faction: "Necropolis",
+    baseClass: "Necromancer",
+    subclass: "Chronomancer",
+    passive:
+      "Necromancy can affect all creatures, not only Undead.",
+    requirements:
+      "Daylight Magic, Tactics, Battle Magic, Offence, Economy",
+    routeValue:
+      "Powerful if Economy appears early, but less immediately threatening than Soulweaver.",
+    rollRisk:
+      "High. Economy is the main bottleneck for Necromancer.",
+  },
+  {
+    faction: "Necropolis",
+    baseClass: "Necromancer",
+    subclass: "Soulweaver",
+    passive:
+      "When an enemy stack dies, summon a temporary Wight stack at its position.",
+    requirements:
+      "Summon Avatar, Arcane Magic, Battlecraft, Insight, Logistics",
+    routeValue:
+      "Best Necromancer chase for immediate battlefield pressure.",
+    rollRisk:
+      "High. Logistics is the main bottleneck; if it does not appear early, the route becomes risky.",
+  },
+  {
+    faction: "Necropolis",
+    baseClass: "Death Knight",
+    subclass: "Walking Rot",
+    passive:
+      "Enemy morale is reduced to the minimum.",
+    requirements:
+      "Resistance, Tactics, Diplomacy, Nightshade Magic, Intelligence",
+    routeValue:
+      "Strong disruption route against morale-based armies.",
+    rollRisk:
+      "High. Nightshade Magic, Diplomacy, and Intelligence can be awkward if you expected a pure combat route.",
+  },
+  {
+    faction: "Necropolis",
+    baseClass: "Death Knight",
+    subclass: "Harbinger of Doom",
+    passive:
+      "Enemy luck is reduced to the minimum, and enemy attacks trigger doom strikes.",
+    requirements:
+      "Defence, Luck, Primal Magic, Scouting, Sorcery",
+    routeValue:
+      "Useful anti-luck route with strong defensive identity.",
+    rollRisk:
+      "Medium to high. Scouting and Sorcery can be hard to justify if your army needs immediate combat power.",
+  },
+  {
+    faction: "Schism",
+    baseClass: "Oathkeeper",
+    subclass: "Unbound",
+    passive:
+      "All hero spells are upgraded to maximum level.",
+    requirements:
+      "Early Access data still incomplete.",
+    routeValue:
+      "Potentially very strong spell-scaling route.",
+    rollRisk:
+      "Unknown. Do not build a hard strategy around this until requirement data is confirmed.",
+  },
+  {
+    faction: "Schism",
+    baseClass: "Oathkeeper",
+    subclass: "Unfeeling",
+    passive:
+      "Enemies lose all Focus charges at the start of each turn.",
+    requirements:
+      "Early Access data still incomplete.",
+    routeValue:
+      "Potentially powerful against Focus-heavy armies.",
+    rollRisk:
+      "Unknown. Treat as a future route until requirements are stable.",
+  },
+  {
+    faction: "Schism",
+    baseClass: "Riftspeaker",
+    subclass: "Unfathomable",
+    passive:
+      "Enemies deal minimum damage and take maximum damage.",
+    requirements:
+      "Arcane Magic, Summon Avatar, Defence, Luck, Logistics",
+    routeValue:
+      "Very strong combat-control route if Logistics appears early.",
+    rollRisk:
+      "Medium to high. Logistics is the checkpoint skill.",
+  },
+  {
+    faction: "Schism",
+    baseClass: "Riftspeaker",
+    subclass: "Unstoppable",
+    passive:
+      "Hero gains +10 Attack, +10 Defence, +10 Spell Power, and +10 Knowledge.",
+    requirements:
+      "Battle Magic, Insight, Battlecraft, Tactics, Primal Magic",
+    routeValue:
+      "Direct stat route with a huge universal payoff.",
+    rollRisk:
+      "Medium. The required skills are useful, but you still need all five at Expert.",
+  },
+  {
+    faction: "Hive",
+    baseClass: "Enforcer",
+    subclass: "Broodmother",
+    passive:
+      "Summoned Fire Larvae have doubled base stats.",
+    requirements:
+      "Nightshade Magic, Battlecraft, Economy, Intelligence, Leadership",
+    routeValue:
+      "Good summon route if your build already wants Fire Larvae.",
+    rollRisk:
+      "High. Nightshade Magic and Economy can make the route unstable.",
+  },
+  {
+    faction: "Hive",
+    baseClass: "Enforcer",
+    subclass: "Soul Eater",
+    passive:
+      "Devour a corpse to gain Attack, Defence, and Spell Power until the end of battle.",
+    requirements:
+      "Daylight Magic, Battle Magic, Insight, Logistics, Resistance",
+    routeValue:
+      "Good combat scaling route if you naturally roll Logistics.",
+    rollRisk:
+      "Medium to high. Logistics is the main checkpoint.",
+  },
+  {
+    faction: "Hive",
+    baseClass: "Herald",
+    subclass: "Progenitor",
+    passive:
+      "Creature growth in all your cities is increased by +200%.",
+    requirements:
+      "Insight, Defence, Diplomacy, Summon Avatar, Tactics",
+    routeValue:
+      "One of the best late-game army-scaling routes in the current data.",
+    rollRisk:
+      "Medium. The payoff is huge, but forcing five Expert skills can still weaken mid-game tempo.",
+  },
+  {
+    faction: "Hive",
+    baseClass: "Herald",
+    subclass: "Lord of Chaos",
+    passive:
+      "Heroic Strike deals +5 damage for each point of hero primary stats.",
+    requirements:
+      "Primal Magic, Luck, Offence, Scouting, Sorcery",
+    routeValue:
+      "Heroic Strike burst route for stat-heavy heroes.",
+    rollRisk:
+      "Medium to high. Scouting and Sorcery should not be forced unless the route is already progressing.",
+  },
+  {
+    faction: "Dungeon",
+    baseClass: "Overlord",
+    subclass: "Balthazzar's Bodyguard",
+    passive:
+      "Hero gains +100% Attack.",
+    requirements:
+      "Offence, Nightshade Magic, Leadership, Diplomacy, Intelligence",
+    routeValue:
+      "Very direct Might payoff if the route comes together.",
+    rollRisk:
+      "High. Nightshade Magic is the key danger skill.",
+  },
+  {
+    faction: "Dungeon",
+    baseClass: "Overlord",
+    subclass: "Silvertongue's Envoy",
+    passive:
+      "Hero gains +100% Defence.",
+    requirements:
+      "Defence, Daylight Magic, Luck, Sorcery, Scouting",
+    routeValue:
+      "Defensive stat-doubling route with strong late-game durability.",
+    rollRisk:
+      "Medium to high. Scouting and Sorcery may slow your early pressure.",
+  },
+  {
+    faction: "Dungeon",
+    baseClass: "Warlock",
+    subclass: "Amelchia's Heir",
+    passive:
+      "Hero gains +100% Spell Power.",
+    requirements:
+      "Primal Magic, Summon Avatar, Insight, Battlecraft, Tactics",
+    routeValue:
+      "One of the clearest magic payoff routes for Dungeon.",
+    rollRisk:
+      "Medium. The skills are useful, but the route still needs all five Expert skills.",
+  },
+  {
+    faction: "Dungeon",
+    baseClass: "Warlock",
+    subclass: "Merchant",
+    passive:
+      "Instantly gain 10,000 gold.",
+    requirements:
+      "Arcane Magic, Resistance, Battle Magic, Economy, Logistics",
+    routeValue:
+      "Economy spike route, but the payoff may arrive too late if the game is already decided.",
+    rollRisk:
+      "High. Economy and Logistics are both route checkpoints.",
+  },
+];
+
+export const probabilityColumns = [
+  { key: "skill", label: "Skill" },
+  { key: "sampleChance", label: "Sample Roll Chance" },
+  { key: "riskLevel", label: "Risk Level" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const probabilityRows = [
+  {
+    skill: "Nightshade Magic",
+    sampleChance: "0.91%",
+    riskLevel: "Route-killer rare",
+    whatItMeans:
+      "For Knight into Swashbuckler, this is the danger skill. Do not plan around this route unless Nightshade Magic appears very early.",
+  },
+  {
+    skill: "Intelligence",
+    sampleChance: "2.27%",
+    riskLevel: "Very rare",
+    whatItMeans:
+      "A required Swashbuckler skill that can still fail to appear for a long time.",
+  },
+  {
+    skill: "Luck",
+    sampleChance: "2.27%",
+    riskLevel: "Very rare",
+    whatItMeans:
+      "Another low-probability Swashbuckler requirement. If both Luck and Intelligence are missing, stop forcing.",
+  },
+  {
+    skill: "Leadership",
+    sampleChance: "6.82%",
+    riskLevel: "Uncommon",
+    whatItMeans:
+      "More realistic than Nightshade Magic, but still not guaranteed early.",
+  },
+  {
+    skill: "Offence",
+    sampleChance: "6.82%",
+    riskLevel: "Uncommon",
+    whatItMeans:
+      "Useful even outside the route, so this is less painful to take than a low-tempo rare skill.",
+  },
+];
+
+export const unlockColumns = [
+  { key: "rule", label: "Rule" },
+  { key: "number", label: "Number" },
+  { key: "meaning", label: "What It Means" },
+];
+
+export const unlockRows = [
+  {
+    rule: "Required skills",
+    number: "5",
+    meaning:
+      "Each advanced class requires five specific secondary skills.",
+  },
+  {
+    rule: "Required skill level",
+    number: "Expert",
+    meaning:
+      "Having the right skills is not enough. All five required skills must be upgraded to Expert.",
+  },
+  {
+    rule: "Secondary skill cap",
+    number: "8",
+    meaning:
+      "A hero can learn only eight unique secondary skills, so wrong early picks can permanently block a route.",
+  },
+  {
+    rule: "Theoretical earliest unlock",
+    number: "Around Level 15",
+    meaning:
+      "This assumes perfect skill rolls and no wasted choices. Some sources list Level 14 in ideal cases, but practical planning should not depend on that.",
+  },
+  {
+    rule: "Realistic unlock timing",
+    number: "Level 20–25+",
+    meaning:
+      "Most real games unlock later because level-up choices are random and route skills may not appear.",
+  },
+  {
+    rule: "Abandon check",
+    number: "Level 8–10",
+    meaning:
+      "Use this as your main route check. See the abandon rule below before spending more levels on a failing route.",
+  },
+];
+
+export const necromancerColumns = [
+  { key: "route", label: "Route" },
+  { key: "requires", label: "Required Expert Skills" },
+  { key: "bottleneck", label: "Main Bottleneck" },
+  { key: "bestWhen", label: "Best When" },
+];
+
+export const necromancerRows = [
+  {
+    route: "Chronomancer",
+    requires:
+      "Daylight Magic, Tactics, Battle Magic, Offence, Economy",
+    bottleneck:
+      "Economy",
+    bestWhen:
+      "You already rolled Economy early and want a broader Necromancy route that can affect all creatures.",
+  },
+  {
+    route: "Soulweaver",
+    requires:
+      "Summon Avatar, Arcane Magic, Battlecraft, Insight, Logistics",
+    bottleneck:
+      "Logistics",
+    bestWhen:
+      "You want immediate battlefield pressure from temporary Wight summons after enemy stacks die.",
+  },
+];
+
+export const bottleneckColumns = [
+  { key: "skill", label: "Bottleneck Skill" },
+  { key: "probabilityRisk", label: "Probability Risk" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const bottleneckRows = [
+  {
+    skill: "Nightshade Magic",
+    probabilityRisk:
+      "Can be below 1% on some class routes, such as Knight into Swashbuckler sample data.",
+    whyItMatters:
+      "A route can look simple on paper but be nearly impossible if the rarest required skill never appears.",
+    whatToDo:
+      "Do not pre-plan a Nightshade route unless the skill appears in the first few levels.",
+  },
+  {
+    skill: "Economy",
+    probabilityRisk:
+      "Often a low-probability checkpoint for magic or combat-focused classes.",
+    whyItMatters:
+      "Routes like Chronomancer and Ascendant may fail entirely if Economy never appears.",
+    whatToDo:
+      "Take it immediately if it appears and your route requires it. Do not assume it will come back later.",
+  },
+  {
+    skill: "Logistics",
+    probabilityRisk:
+      "Can be difficult for some magic routes despite being extremely valuable.",
+    whyItMatters:
+      "Soulweaver and Ascendant both care about Logistics, and missing it can kill the route.",
+    whatToDo:
+      "If Logistics appears early on a route that needs it, treat it as a route-confirming roll.",
+  },
+  {
+    skill: "Scouting",
+    probabilityRisk:
+      "Route-dependent and often painful to take if your army needs combat strength.",
+    whyItMatters:
+      "Several routes require it, but it may feel weaker than direct combat skills during early clearing.",
+    whatToDo:
+      "Take it only if it is part of your planned route or you already have enough combat power.",
+  },
+  {
+    skill: "Diplomacy",
+    probabilityRisk:
+      "Not always rare, but often awkward because it competes with immediate combat tempo.",
+    whyItMatters:
+      "Some routes require it even when the class fantasy suggests a different combat skill.",
+    whatToDo:
+      "Check the actual requirement table instead of guessing based on class name.",
+  },
+];
+
+export const starterColumns = [
+  { key: "hero", label: "Hero" },
+  { key: "startsWith", label: "Starting Skill" },
+  { key: "route", label: "Useful Route" },
+  { key: "why", label: "Why It Helps" },
+];
+
+export const starterRows = [
+  {
+    hero: "Adahn",
+    startsWith: "Basic Insight",
+    route: "Grand Inquisitor",
+    why:
+      "Starting with a required route skill means one fewer skill slot and level-up roll to solve.",
+  },
+  {
+    hero: "Kel'Ghul",
+    startsWith: "Basic Tactics",
+    route: "Paragon",
+    why:
+      "Tactics is already part of the Paragon formula, so the route begins one step closer.",
+  },
+  {
+    hero: "Iron Master",
+    startsWith: "Basic Diplomacy",
+    route: "Progenitor",
+    why:
+      "Diplomacy is one of the required Progenitor skills, making the route less awkward.",
+  },
+  {
+    hero: "Blackhorn",
+    startsWith: "Basic Sorcery",
+    route: "Lord of Chaos",
+    why:
+      "Sorcery is required for Lord of Chaos, so Blackhorn has a cleaner opening toward that route.",
+  },
+];
+
+export const abandonColumns = [
+  { key: "checkpoint", label: "Checkpoint" },
+  { key: "continueIf", label: "Continue If" },
+  { key: "giveUpIf", label: "Give Up If" },
+];
+
+export const abandonRows = [
+  {
+    checkpoint: "Levels 1–5",
+    continueIf:
+      "You already have one or two required route skills, especially a rare bottleneck skill.",
+    giveUpIf:
+      "You picked multiple off-route skills and still have no rare route skill.",
+  },
+  {
+    checkpoint: "Levels 8–10",
+    continueIf:
+      "The route has at least three required skills and still has open skill slots.",
+    giveUpIf:
+      "The route fails the abandon rule below.",
+  },
+  {
+    checkpoint: "Mid game",
+    continueIf:
+      "Only one bottleneck skill is missing and you have a way to force or fish for it.",
+    giveUpIf:
+      "Two or more required skills are missing and your hero is falling behind in combat or map tempo.",
+  },
+  {
+    checkpoint: "Late game",
+    continueIf:
+      "The passive will still matter before the decisive fight.",
+    giveUpIf:
+      "The subclass would unlock too late to change the game.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItFails", label: "Why It Fails" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Ignoring skill roll probability",
+    whyItFails:
+      "A route with a 0.91% key skill is not a normal plan. It is a lucky-run plan.",
+    fix:
+      "Treat ultra-rare skills as confirmation signals, not assumptions.",
+  },
+  {
+    mistake: "Picking skills by class fantasy",
+    whyItFails:
+      "Death Knight routes may require Intelligence or Diplomacy instead of the obvious Offence-style skills.",
+    fix:
+      "Check the formula before picking. The subclass system rewards exact requirements, not intuition.",
+  },
+  {
+    mistake: "Stopping at Advanced",
+    whyItFails:
+      "A required skill at Advanced does not count. The route needs Expert.",
+    fix:
+      "Plan two upgrades per required skill after learning it.",
+  },
+  {
+    mistake: "Ignoring the 8-skill cap",
+    whyItFails:
+      "If you take four off-route skills, a five-skill subclass route can become mathematically impossible.",
+    fix:
+      "Count open slots before committing to a route.",
+  },
+  {
+    mistake: "Confusing hero level with skill level",
+    whyItFails:
+      "A Level 15 hero does not automatically unlock anything unless the five required skills are Expert.",
+    fix:
+      "Track skill levels, not only hero level.",
+  },
+  {
+    mistake: "Forcing after bad rolls",
+    whyItFails:
+      "Chasing a route after the skill pool has already gone wrong delays your actual army strength.",
+    fix:
+      "At Level 8–10, abandon the route if you do not have enough required skills or the bottleneck skill is still missing.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Subclasses, also called Advanced Classes, are powerful late-game hero upgrades in Heroes of Might and Magic: Olden Era. To unlock one, your hero needs five specific secondary skills, and all five must be upgraded to Expert.**
+
+The important rules are:
+
+1. **Each Advanced Class needs exactly five required secondary skills.**
+2. **All five required skills must be Expert**, not Basic or Advanced.
+3. **Each hero can learn only eight unique secondary skills**, so wrong early choices can lock you out.
+4. **Skill roll probability is the real gate.** Some route skills can be around 2% or even below 1% in sample data.
+5. **At Level 8–10, stop forcing a route if you do not have at least three required skills.**
+6. **Do not plan around ultra-rare skills.** Treat them as lucky confirmation rolls.
+
+The best rule is simple: **plan a subclass early, but only chase it when the skill rolls prove the route is real.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-hero-selection.webp"
+    alt="Heroes Olden Era hero selection screen showing different starting heroes and skills."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Subclass planning starts before the first fight. Your starting hero and starting skills decide whether a route is realistic.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="early-access-warning">
+  Early Access warning
+</h2>
+
+Heroes of Might and Magic: Olden Era entered Early Access on April 30, 2026. This guide is based on launch-version data, current community-tested subclass formulas, and sample skill roll probability data.
+
+<GuideCallout title="Version warning">
+Subclass requirements, skill roll weights, class skill pools, and passive values can change during Early Access. Recheck this guide after major balance patches, especially if a route suddenly stops appearing in your level-up options.
+</GuideCallout>
+
+Some formulas are already useful for planning, but a few route details are still being tested. In this guide, incomplete routes are clearly marked as Early Access data still incomplete.
+
+---
+
+<h2 id="how-subclasses-work">
+  How subclasses work
+</h2>
+
+Subclasses are not picked directly from a menu. They are unlocked by building your hero into a specific skill formula.
+
+The formula is always:
+
+**five specific secondary skills → all five at Expert → Advanced Class unlock**
+
+That means four things matter more than the passive itself:
+
+- which skills the route requires
+- whether your class can realistically roll those skills
+- whether your hero still has enough open skill slots
+- whether the rarest skill appeared early enough to justify the chase
+
+<GuideTable
+  caption="Heroes Olden Era subclass unlock rules."
+  columns={unlockColumns}
+  rows={unlockRows}
+/>
+
+<GuideCallout title="Subclass rule">
+Do not ask only “which subclass is strongest?” Ask “can this hero realistically roll five required Expert skills before the game is decided?”
+</GuideCallout>
+
+---
+
+<h2 id="advanced-class-requirements">
+  Advanced Class requirements table
+</h2>
+
+<GuideTable
+  caption="Heroes Olden Era Advanced Class requirements, route value, and roll risk in Early Access."
+  columns={requirementColumns}
+  rows={requirementRows}
+/>
+
+Use this table as a planning tool, not as a blind checklist.
+
+A passive can look broken on paper, but the route may still be bad if it requires low-probability skills or forces you to skip important early tempo skills. In practice, the **Roll Risk** column is often more important than the passive.
+
+---
+
+<h2 id="skill-roll-probability">
+  Skill roll probability: why routes fail
+</h2>
+
+The hidden difficulty of subclasses is not the requirement list. It is the probability of seeing the required skills at all.
+
+The level-up system gives you three skill choices, but those choices are not equally random. They depend on your class, existing skills, open slots, and the game's skill offering logic. That means a required skill can be theoretically possible but practically unreliable.
+
+<GuideTable
+  caption="Knight to Swashbuckler sample skill roll probabilities."
+  columns={probabilityColumns}
+  rows={probabilityRows}
+/>
+
+The important lesson is not only that Swashbuckler is hard. The lesson is that **one ultra-rare required skill can ruin the entire route**.
+
+If a subclass needs a skill with a roll chance around 1–2%, you should not build your whole game around seeing it later. You should chase that route only if the rare skill appears early.
+
+<GuideCallout title="Probability rule">
+A rare skill is not something you “plan to get later.” It is a signal. If the rare skill appears early, the route becomes real. If it does not, play a normal strong hero instead.
+</GuideCallout>
+
+---
+
+<h2 id="why-expert-skills-matter">
+  Why five Expert skills matter
+</h2>
+
+The most common subclass mistake is thinking that learning the correct skills is enough.
+
+It is not.
+
+Each required skill must reach **Expert**, which means you need the base skill and then enough future level-up choices to upgrade it. A route with five required skills is really a long-term investment, not a quick bonus.
+
+For example:
+
+- learning Logistics is only the first step
+- upgrading Logistics to Advanced is still not enough
+- the route needs Expert Logistics
+- the same is true for the other four required skills
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-skill-upgrade.webp"
+    alt="Heroes Olden Era skill upgrade screen showing Basic, Advanced, and Expert skill progression."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A required skill does not count until it reaches Expert, so every route needs both skill selection and skill upgrades.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="eight-skill-limit">
+  The 8-skill limit
+</h2>
+
+Every hero can learn only **eight unique secondary skills**.
+
+This is the number that makes subclass planning dangerous. Since a subclass requires five exact skills, your remaining margin is small.
+
+If you take too many off-route skills, you may mathematically block the subclass.
+
+Example:
+
+- your target route needs 5 specific skills
+- your hero can hold 8 total secondary skills
+- you already picked 4 off-route skills
+- 4 + 5 = 9
+- the route is impossible
+
+<GuideCallout title="Skill slot rule">
+Before you click a tempting off-route skill, count your remaining open slots. The strongest subclass passive does not matter if your skill bar can no longer fit the formula.
+</GuideCallout>
+
+---
+
+<h2 id="unlock-levels">
+  Earliest unlock level vs realistic unlock level
+</h2>
+
+The theoretical earliest unlock is around **Level 15**. Some databases describe an even earlier ideal case around Level 14 if the hero starts with a required skill and every following roll is perfect.
+
+That is not a practical plan.
+
+In real games, subclass unlocks are usually later. A more realistic timing is **Level 20–25+**, and many games should not force a subclass at all.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-tactics-battlecraft.webp"
+    alt="Heroes Olden Era level-up choices showing Tactics, Battlecraft, and Logistics decisions."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Real subclass planning depends on level-up choices. A single Logistics, Tactics, or Battlecraft roll can change the route.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="necromancer-routes">
+  Necromancer: Chronomancer vs Soulweaver
+</h2>
+
+<GuideTable
+  caption="Necromancer subclass route comparison."
+  columns={necromancerColumns}
+  rows={necromancerRows}
+/>
+
+For Necromancer, **Soulweaver is usually the more immediately threatening route** because summoning temporary Wights after kills affects the current battle. Chronomancer can be powerful, but Economy is the route bottleneck and may be difficult to roll naturally.
+
+<GuideCallout title="Necromancer rule">
+If you are chasing Chronomancer, Economy is the key checkpoint. If you are chasing Soulweaver, Logistics is the key checkpoint. Missing the bottleneck skill is usually a stronger reason to abandon the route than missing a common combat skill.
+</GuideCallout>
+
+Use <Link href="/olden-era/chronomancer-vs-soulweaver">Chronomancer vs Soulweaver</Link> for the dedicated Necromancer route comparison once that page is live.
+
+---
+
+<h2 id="skill-roll-bottlenecks">
+  Skill roll bottlenecks
+</h2>
+
+<GuideTable
+  caption="Common subclass bottleneck skills and probability risks."
+  columns={bottleneckColumns}
+  rows={bottleneckRows}
+/>
+
+Skill roll chance is one of the least visible parts of subclass planning. Some skills may be easy for one class and painful for another.
+
+This is why a route can fail even when it looks simple on paper.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-basic-economy.webp"
+    alt="Heroes Olden Era skill choice showing Basic Economy as a valuable bottleneck skill."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Economy can be a route-defining roll. If your planned Advanced Class needs it, do not assume it will appear again later.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-arena-logistics.webp"
+    alt="Heroes Olden Era arena draft moment highlighting Basic Logistics as an important skill."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Logistics is both a powerful tempo skill and a subclass bottleneck for several routes.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="best-heroes-for-subclass-routes">
+  Best heroes for subclass routes
+</h2>
+
+<GuideTable
+  caption="Starting skills that help subclass routes."
+  columns={starterColumns}
+  rows={starterRows}
+/>
+
+A good starting hero can make a subclass route feel much easier because one required skill is already solved.
+
+That does not mean the route is guaranteed. You still need to upgrade the skill to Expert and find the other four required skills. But starting with a route skill gives you a cleaner path and one fewer bad early decision.
+
+<figure className="my-8">
+  <Image
+    src="/images/olden-era/olden-era-subclass-guide-starting-skills.webp"
+    alt="Heroes Olden Era hero information panel showing starting skills and class details."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Starting skills matter because they reduce the number of level-up rolls needed to finish a subclass formula.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="when-to-abandon">
+  When to abandon a subclass route
+</h2>
+
+<GuideTable
+  caption="When to keep or abandon a subclass route."
+  columns={abandonColumns}
+  rows={abandonRows}
+/>
+
+The cleanest rule is:
+
+**At Level 8–10, you should usually have at least three required route skills, including the rarest bottleneck skill if the route has one.**
+
+If you do not, the subclass is probably becoming a trap. Your hero may still become strong, but it should stop chasing the advanced class and start taking the best available combat, economy, mobility, or magic skills.
+
+<GuideCallout title="Abandon rule">
+If your target route needs five skills and you have fewer than three of them by Level 8–10, stop forcing it unless you have a reliable way to learn the missing skills.
+</GuideCallout>
+
+---
+
+<h2 id="common-mistakes">
+  Common subclass mistakes
+</h2>
+
+<GuideTable
+  caption="Common Heroes Olden Era subclass mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most failed subclass routes are not caused by one bad level-up. They are caused by three small mistakes:
+
+1. ignoring the probability of the rarest required skill
+2. picking off-route skills early
+3. refusing to abandon the route after the skill pool is already ruined
+
+A subclass is a reward for disciplined planning and good rolls. It should not become an excuse to play a weak mid game.
+
+---
+
+<h2 id="how-to-use-this-guide">
+  How to use this guide while playing
+</h2>
+
+Before you start a map, choose one target route and one backup plan.
+
+During the game, check these questions:
+
+1. Did my starting hero already have a route skill?
+2. Did I roll the rarest bottleneck skill early?
+3. Do I have at least two route skills by the early levels?
+4. Do I have at least three route skills by Level 8–10?
+5. Do I still have enough open skill slots?
+6. Will the passive matter before the decisive fight?
+7. Am I sacrificing too much map tempo to force this?
+
+If the answer turns bad, pivot. A strong normal hero is better than a failed subclass project.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do you unlock subclasses in Heroes Olden Era?
+
+You unlock a subclass by getting five specific secondary skills and upgrading all five to Expert. See <Link href="#advanced-class-requirements">Advanced Class requirements table</Link>.
+
+### Do subclass skills need to be Expert?
+
+Yes. Basic or Advanced is not enough. Every required skill must be Expert.
+
+### What is the hardest part of unlocking a subclass?
+
+The hardest part is skill roll probability. Some required skills can have extremely low roll chances, so the route may fail even if you know the correct formula. See <Link href="#skill-roll-probability">Skill roll probability</Link>.
+
+### What is the earliest level to unlock a subclass?
+
+The theoretical timing is around Level 15, with some perfect cases listed around Level 14. Most real games unlock much later, usually Level 20–25+ or not at all.
+
+### How many secondary skills can a hero learn?
+
+A hero can learn up to eight unique secondary skills. This makes early off-route picks dangerous.
+
+### When should I stop forcing a subclass?
+
+If you reach Level 8–10 without at least three required route skills, especially without the rare bottleneck skill, you should usually stop forcing the route. See <Link href="#when-to-abandon">When to abandon a subclass route</Link>.
+
+### Which Necromancer subclass is better?
+
+Soulweaver is usually better for immediate battlefield pressure, while Chronomancer depends heavily on whether you can roll Economy. See <Link href="#necromancer-routes">Necromancer: Chronomancer vs Soulweaver</Link>.
+
+### Why can’t I unlock my subclass?
+
+You are probably missing a required skill, one skill is not Expert, your hero has no open skill slots, the rare skill never appeared, or the route data changed during Early Access.
+
+### What is the biggest subclass mistake?
+
+The biggest mistake is treating a rare route as guaranteed. If a key skill has a very low roll chance, you should wait for it to appear early before committing.

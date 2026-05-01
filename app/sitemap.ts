@@ -57,8 +57,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/fracture-field`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/moomintroll`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/far-far-west/secret-missions`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/olden-era`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
 
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/olden-era/best-buildings-first`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/cant-unlock-subclass`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/chronomancer-vs-soulweaver`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/focus-points`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/force-subclass`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/how-to-unlock-subclasses`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+
+    { url: `${base}/olden-era/law-points-astrology-points`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/necropolis-common-mistakes`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/necropolis-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/necropolis-skeletal-archers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/necropolis-week-1-build-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/olden-era/subclass-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/far-far-west/area-41-symbol-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
