@@ -1,0 +1,993 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const categoryColumns = [
+  { key: "category", label: "Category" },
+  { key: "whatItCovers", label: "What It Covers" },
+  { key: "oldPlayerAdvice", label: "Old Player Advice" },
+];
+
+export const categoryRows = [
+  {
+    category: "General and special",
+    whatItCovers:
+      "The Gambler’s Blessing, Unlucky :(, You reached...PEAK!, Not Feeling It, Real Gambling Is Not Cool.",
+    oldPlayerAdvice:
+      "These are not normal floor-route achievements. Track them separately from game-specific clears.",
+  },
+  {
+    category: "Floor progression",
+    whatItCovers:
+      "High Roller, Big Spender, Lucky Streak, and floor-number variants.",
+    oldPlayerAdvice:
+      "Do these naturally while climbing. Do not tunnel one achievement if the quota is already safe.",
+  },
+  {
+    category: "Floor 1 games",
+    whatItCovers:
+      "Roulette, Duck Race, Wheel of Fortune, Street Craps, Blackjack, and Slot Machine.",
+    oldPlayerAdvice:
+      "Floor 1 is where you farm the easy game-specific achievements before the game starts asking for huge bankrolls.",
+  },
+  {
+    category: "Floor 2 games",
+    whatItCovers:
+      "Penguin Cross, Keno, Crash, Plinko, HiLo, and Money Wheel.",
+    oldPlayerAdvice:
+      "Bring items before chasing these. Floor 2 achievements start punishing blind max bets.",
+  },
+  {
+    category: "Floor 3 games",
+    whatItCovers:
+      "Penguin Cross, Wheel of Fortune, Street Craps, Dragon Tower, 1P Poker, Mine Sweeper, and HiLo.",
+    oldPlayerAdvice:
+      "This is where you stop achievement hunting casually. Pick one target per run.",
+  },
+  {
+    category: "Floor 4 games",
+    whatItCovers:
+      "Roulette, Penguin Cross, Keno, Plinko, Blackjack, Crash, Dragon Tower, Duck Race, Mine Sweeper, and Money Wheel.",
+    oldPlayerAdvice:
+      "Treat Floor 4 achievements as late-run attempts. The deliberate loss-chain achievements should get dedicated throwaway runs.",
+  },
+  {
+    category: "Money milestones",
+    whatItCovers:
+      "Collect $10M, $100M, $1B, $10B, and $100B.",
+    oldPlayerAdvice:
+      "Do not grind these early. They become realistic only after you understand items, floors, and high-value games.",
+  },
+  {
+    category: "Endings",
+    whatItCovers:
+      "Let It Ride!, End of the Line, and ...And They Lived Happily After.",
+    oldPlayerAdvice:
+      "All three are hidden on Steam in the captured list and have under 1% completion. Do not fake routes from names alone.",
+  },
+];
+
+export const skipColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "skipThis", label: "Skip This For Now" },
+  { key: "why", label: "Why" },
+  { key: "doInstead", label: "Do Instead" },
+];
+
+export const skipRows = [
+  {
+    stage: "First few runs",
+    skipThis:
+      "Floor 3/Floor 4 achievements, $1B+ money milestones, and deliberate loss chains.",
+    why:
+      "You still need to learn quota, items, table rules, and shared-bank discipline.",
+    doInstead:
+      "Clear Floor 1 basics: Roulette, Duck Race, Blackjack, Slots, Street Craps, Wheel, and early streaks.",
+  },
+  {
+    stage: "After Floor 2 unlock",
+    skipThis:
+      "Floor 4 rare achievements and late-game specialist games.",
+    why:
+      "Floor 2 already introduces Crash, Plinko, HiLo, Keno, Money Wheel, and Penguin Cross pressure.",
+    doInstead:
+      "Pick one Floor 2 target per run and bring item support for high-variance tables.",
+  },
+  {
+    stage: "After item routes are understood",
+    skipThis:
+      "Ending achievements unless you are specifically routing them.",
+    why:
+      "The ending achievements are hidden in the captured Steam list and do not show public trigger text.",
+    doInstead:
+      "Use item-supported routes for High Roller 2/3/4, Big Spender variants, and hard table goals.",
+  },
+  {
+    stage: "Late-game achievement hunting",
+    skipThis:
+      "Random table hopping.",
+    why:
+      "Late floors punish unfocused runs. You can spend a lot of money and still get no achievement.",
+    doInstead:
+      "Pick one target: Dragon Tower, 1P Poker, Mine Sweeper, Floor 4 streaks, or money milestones.",
+  },
+];
+
+export const generalColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "steamRequirement", label: "Steam Requirement" },
+  { key: "completionRate", label: "Steam Completion" },
+  { key: "routeNote", label: "Route Note" },
+];
+
+export const generalRows = [
+  {
+    achievement: "The Gambler’s Blessing",
+    steamRequirement:
+      "No public requirement text shown in the captured Steam list.",
+    completionRate: "100.0%",
+    routeNote:
+      "Very common unlock. Treat it as a general early-game achievement, not a route target.",
+  },
+  {
+    achievement: "Unlucky :(",
+    steamRequirement:
+      "No public requirement text shown in the captured Steam list.",
+    completionRate: "68.1%",
+    routeNote:
+      "Track naturally during failed runs. Do not throw a good run unless the exact trigger is confirmed.",
+  },
+  {
+    achievement: "You reached...PEAK!",
+    steamRequirement:
+      "No public requirement text shown in the captured Steam list.",
+    completionRate: "54.8%",
+    routeNote:
+      "Likely progression-related from the name, but do not publish a fake trigger without completed-run confirmation.",
+  },
+  {
+    achievement: "Not Feeling It",
+    steamRequirement:
+      "No public requirement text shown in the captured Steam list.",
+    completionRate: "48.5%",
+    routeNote:
+      "Track separately until the actual trigger is confirmed.",
+  },
+  {
+    achievement: "Real Gambling Is Not Cool.",
+    steamRequirement:
+      "Check out The Gambling Support Services around the world and educate yourself.",
+    completionRate: "29.1%",
+    routeNote:
+      "This is a special awareness-style achievement. It is not part of the normal floor route.",
+  },
+];
+
+export const floorOneColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "steamRequirement", label: "Steam Requirement" },
+  { key: "completionRate", label: "Steam Completion" },
+  { key: "bestApproach", label: "Best Approach" },
+];
+
+export const floorOneRows = [
+  {
+    achievement: "High Roller",
+    steamRequirement:
+      "Place a very big bet on Floor 1.",
+    completionRate: "72.6%",
+    bestApproach:
+      "Attempt after the team understands a Floor 1 table. Roulette or Blackjack is cleaner than blind Duck Race spam.",
+  },
+  {
+    achievement: "Big Spender",
+    steamRequirement:
+      "Spend a lot of money on Floor 1.",
+    completionRate: "71.8%",
+    bestApproach:
+      "Usually comes naturally if the group survives multiple Floor 1 bets. Do not chase it while under quota pressure.",
+  },
+  {
+    achievement: "Lucky Streak",
+    steamRequirement:
+      "Win 3 games in a row on Floor 1.",
+    completionRate: "60.7%",
+    bestApproach:
+      "Use familiar tables. Do not switch to a game nobody understands just because it is nearby.",
+  },
+  {
+    achievement: "All on Red",
+    steamRequirement:
+      "Bet a lot of money on Roulette on Floor 1.",
+    completionRate: "52.2%",
+    bestApproach:
+      "Use Roulette after the team agrees on a single planned push. Do not Martingale blindly with the shared bank.",
+  },
+  {
+    achievement: "YARLL!!!",
+    steamRequirement:
+      "Bet on YARL and win on Duck Race on Floor 1.",
+    completionRate: "43.8%",
+    bestApproach:
+      "Take small attempts until YARL wins. Do not let the duck become a bankroll sink.",
+  },
+  {
+    achievement: "Spin The Wheel",
+    steamRequirement:
+      "Win 3 games by betting a lot of money on Wheel of Fortune on Floor 1.",
+    completionRate: "36.4%",
+    bestApproach:
+      "Use item support or controlled attempts. Wheel is a swing tool, not a safe grinding table.",
+  },
+  {
+    achievement: "Lucky 7",
+    steamRequirement:
+      "Get 7 on your first roll on Street Craps on Floor 1.",
+    completionRate: "34.1%",
+    bestApproach:
+      "Assign one roller and one caller. Read the table before touching the dice.",
+  },
+  {
+    achievement: "Risky Move",
+    steamRequirement:
+      "Win on Blackjack with a hand value less than 10 on Floor 1.",
+    completionRate: "30.7%",
+    bestApproach:
+      "Attempt only with small bets. This is a challenge achievement, not smart bankroll play.",
+  },
+  {
+    achievement: "No Bust Run",
+    steamRequirement:
+      "Win 4 games in a row on Blackjack on Floor 1.",
+    completionRate: "26.8%",
+    bestApproach:
+      "Let one player lead Blackjack decisions. Minimum bet while learning; do not let the timer force bad hits.",
+  },
+  {
+    achievement: "Jackpot Hunter",
+    steamRequirement:
+      "Win with 10X on Slot Machine on Floor 1.",
+    completionRate: "25.8%",
+    bestApproach:
+      "Use small bets or Holy Statue support. Slots are dangerous when multiple players spam the shared bank.",
+  },
+];
+
+export const floorTwoColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "steamRequirement", label: "Steam Requirement" },
+  { key: "completionRate", label: "Steam Completion" },
+  { key: "bestApproach", label: "Best Approach" },
+];
+
+export const floorTwoRows = [
+  {
+    achievement: "Winner Winner Penguin Dinner",
+    steamRequirement:
+      'Win at least "3X" 2 times in a row on Penguin Cross on Floor 2.',
+    completionRate: "11.0%",
+    bestApproach:
+      "Start with controlled bets. This is the first big completion-rate drop after Floor 1 cleanup.",
+  },
+  {
+    achievement: "Spot On",
+    steamRequirement:
+      "Bet a lot of money on Keno on Floor 2.",
+    completionRate: "6.1%",
+    bestApproach:
+      "Use this as a planned high-risk target, not a default quota route.",
+  },
+  {
+    achievement: "Greed Test",
+    steamRequirement:
+      "Win at least 10X on Crash on Floor 2.",
+    completionRate: "4.1%",
+    bestApproach:
+      "Pick a cash-out target before the round starts. Crash punishes greed.",
+  },
+  {
+    achievement: "Clean Fall",
+    steamRequirement:
+      "Win 24X on Plinko on Floor 2.",
+    completionRate: "2.9%",
+    bestApproach:
+      "Treat as a rare high-variance achievement. Use only money the team can afford to lose.",
+  },
+  {
+    achievement: "Roll the Odds",
+    steamRequirement:
+      "Profit a lot of money on HiLo on Floor 2.",
+    completionRate: "2.9%",
+    bestApproach:
+      "Stop after the planned profit window. HiLo becomes dangerous when you force one more call.",
+  },
+  {
+    achievement: "Spin Streak",
+    steamRequirement:
+      "Win 3 games in a row with a lot of money on Money Wheel on Floor 2.",
+    completionRate: "1.8%",
+    bestApproach:
+      "Use a clear stop point. Money Wheel can swing hard, but repeated spins can erase a good day.",
+  },
+  {
+    achievement: "High Roller 2",
+    steamRequirement:
+      "Place a very big bet on Floor 2.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Use Taser + Golden Chip or another planned item route. At 0.1%, this is not a casual Floor 2 bet.",
+  },
+  {
+    achievement: "Big Spender 2",
+    steamRequirement:
+      "Spend a lot of money on Floor 2.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Usually comes while chasing Floor 2 game achievements. Keep quota first.",
+  },
+  {
+    achievement: "Lucky Streak 2",
+    steamRequirement:
+      "Win 4 games in a row on Floor 2.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Choose the most familiar Floor 2 table and avoid high-variance games during the streak.",
+  },
+];
+
+export const floorThreeColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "steamRequirement", label: "Steam Requirement" },
+  { key: "completionRate", label: "Steam Completion" },
+  { key: "bestApproach", label: "Best Approach" },
+];
+
+export const floorThreeRows = [
+  {
+    achievement: "Traffic Monster",
+    steamRequirement:
+      'Win at least 4X on Penguin Cross on Floor 3.',
+    completionRate: "1.8%",
+    bestApproach:
+      "Use Floor 3 attempts only after you can survive Penguin Cross on Floor 2.",
+  },
+  {
+    achievement: "Keep It Spinning",
+    steamRequirement:
+      "Spend a lot of money on Wheel of Fortune on Floor 3.",
+    completionRate: "1.4%",
+    bestApproach:
+      "Only chase with a bankroll cushion or item support.",
+  },
+  {
+    achievement: "Natural Roller",
+    steamRequirement:
+      "Win on Street Craps during the point phase on Floor 3.",
+    completionRate: "1.3%",
+    bestApproach:
+      "Use the Craps cheese route: one roller, one caller, controlled dice movement.",
+  },
+  {
+    achievement: "Step Into Fire (deliberate loss)",
+    steamRequirement:
+      "Lose 4 times in a row on Dragon Tower on Floor 3.",
+    completionRate: "1.1%",
+    bestApproach:
+      "This is a failure-chain achievement. Do it on a dedicated attempt, not during a serious money push.",
+  },
+  {
+    achievement: "Poker Face",
+    steamRequirement:
+      "Do not lock cards and win with a hand equal to or better than Two of a Kind on 1P Poker on Floor 3.",
+    completionRate: "0.4%",
+    bestApproach:
+      "Attempt with small bets until you understand the Poker table. Do not burn a run learning hand logic.",
+  },
+  {
+    achievement: "Perfect Sweep",
+    steamRequirement:
+      "Win at least 20X on Mine Sweeper on Floor 3.",
+    completionRate: "0.2%",
+    bestApproach:
+      "Treat this as a late-floor specialist achievement. Avoid panic clicking.",
+  },
+  {
+    achievement: "No Safe Rolls",
+    steamRequirement:
+      "Win 10X on HiLo on Floor 3.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Decide the stop point before climbing. The 10X goal is bait if the bankroll is thin.",
+  },
+  {
+    achievement: "High Roller 3",
+    steamRequirement:
+      "Place a very big bet on Floor 3.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Use a known table and item setup. Floor 3 is too expensive for blind bravery.",
+  },
+  {
+    achievement: "Big Spender 3",
+    steamRequirement:
+      "Bet a lot of money across all games on Floor 3.",
+    completionRate: "0.1%",
+    bestApproach:
+      "This can happen naturally while chasing Floor 3 game achievements.",
+  },
+  {
+    achievement: "Lucky Streak 3",
+    steamRequirement:
+      "Win 5 games in a row on Floor 3.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Pick one table you understand. Do not hop between unknown games during a streak.",
+  },
+];
+
+export const floorFourColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "steamRequirement", label: "Steam Requirement" },
+  { key: "completionRate", label: "Steam Completion" },
+  { key: "bestApproach", label: "Best Approach" },
+];
+
+export const floorFourRows = [
+  {
+    achievement: "Ball in Motion",
+    steamRequirement:
+      "Spend a lot of money on Roulette on Floor 4.",
+    completionRate: "0.6%",
+    bestApproach:
+      "Use only as a planned Floor 4 push. Roulette is simple, but Floor 4 stakes are not.",
+  },
+  {
+    achievement: "No Hesitation",
+    steamRequirement:
+      "Spend a lot of money on Penguin Cross on Floor 4.",
+    completionRate: "0.5%",
+    bestApproach:
+      "Do not chase until Penguin Cross is comfortable on lower floors.",
+  },
+  {
+    achievement: "Marked to Win",
+    steamRequirement:
+      "Profit a lot of money on Keno on Floor 4.",
+    completionRate: "0.4%",
+    bestApproach:
+      "Treat as a late-game Keno target, not a safe quota route.",
+  },
+  {
+    achievement: "Straight Down (deliberate loss)",
+    steamRequirement:
+      "Lose 7 games in a row on Plinko on Floor 4.",
+    completionRate: "0.3%",
+    bestApproach:
+      "This is a deliberate loss-chain achievement. Do it on a dedicated throwaway attempt.",
+  },
+  {
+    achievement: "Flameproof",
+    steamRequirement:
+      'Win at least "3X" 3 times in a row on Dragon Tower on Floor 4.',
+    completionRate: "0.2%",
+    bestApproach:
+      "Plan a controlled Dragon Tower run. Do not learn Dragon Tower with Floor 4 money.",
+  },
+  {
+    achievement: "House Breaker",
+    steamRequirement:
+      "Win a lot of money on Blackjack on Floor 4.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Use a Blackjack player who already understands the table. Avoid panic hits.",
+  },
+  {
+    achievement: "Safe Exit",
+    steamRequirement:
+      "Win 4 times in a row on Crash on Floor 4.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Cash out early. This is about repeat wins, not one huge multiplier.",
+  },
+  {
+    achievement: "Unstoppable Quack",
+    steamRequirement:
+      "Win 2 games in a row on Duck Race on Floor 4.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Keep the attempts small unless the team is specifically achievement hunting.",
+  },
+  {
+    achievement: "High Roller 4",
+    steamRequirement:
+      "Place a very big bet on Floor 4.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Use item support or a table your team already knows.",
+  },
+  {
+    achievement: "Big Spender 4",
+    steamRequirement:
+      "Bet a lot of money across all games on Floor 4.",
+    completionRate: "0.1%",
+    bestApproach:
+      "This usually comes while chasing other Floor 4 achievements.",
+  },
+  {
+    achievement: "Lucky Streak 4",
+    steamRequirement:
+      "Win 5 games in a row on Floor 4.",
+    completionRate: "0.1%",
+    bestApproach:
+      "Avoid learning new games during the streak. Use the safest available known table.",
+  },
+  {
+    achievement: "No Detonations",
+    steamRequirement:
+      'Win "5X" 3 times in a row on Mine Sweeper on Floor 4.',
+    completionRate: "0.1%",
+    bestApproach:
+      "Play slowly. Floor 4 Mine Sweeper is not a timer-panic achievement.",
+  },
+  {
+    achievement: "High Risk Wedge (deliberate loss)",
+    steamRequirement:
+      "Lose 5 games in a row on Money Wheel on Floor 4.",
+    completionRate: "0.1%",
+    bestApproach:
+      "This is a deliberate loss-chain achievement. Do it on a dedicated attempt, not a money run.",
+  },
+];
+
+export const moneyColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "steamRequirement", label: "Steam Requirement" },
+  { key: "completionRate", label: "Steam Completion" },
+  { key: "advice", label: "Advice" },
+];
+
+export const moneyRows = [
+  {
+    achievement: "HARDER",
+    steamRequirement: "Collect $10M.",
+    completionRate: "9.3%",
+    advice:
+      "This is the first serious money milestone. Do not chase it before you understand item combos.",
+  },
+  {
+    achievement: "BETTER",
+    steamRequirement: "Collect $100M.",
+    completionRate: "5.7%",
+    advice:
+      "Use higher-floor routes and planned high-value plays. Floor 1 grinding is too slow.",
+  },
+  {
+    achievement: "FASTER",
+    steamRequirement: "Collect $1B.",
+    completionRate: "3.3%",
+    advice:
+      "At this point, item-supported big bets matter more than small safe play.",
+  },
+  {
+    achievement: "STRONGER",
+    steamRequirement: "Collect $10B.",
+    completionRate: "1.5%",
+    advice:
+      "This is late-run territory. Expect to combine floor knowledge, items, and stop discipline.",
+  },
+  {
+    achievement: "WORK IS NEVER OVER!",
+    steamRequirement: "Collect $100B.",
+    completionRate: "1.1%",
+    advice:
+      "Only a tiny share of players have this in the captured Steam list. Treat it as a real endgame grind.",
+  },
+];
+
+export const endingColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "steamRequirement", label: "Steam Requirement" },
+  { key: "completionRate", label: "Steam Completion" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const endingRows = [
+  {
+    achievement: "Let It Ride!",
+    steamRequirement:
+      "Hidden / no public description shown in the captured Steam list.",
+    completionRate: "0.8%",
+    whatToDo:
+      "Track as an ending-style achievement, but do not publish a trigger until a completed route confirms it.",
+  },
+  {
+    achievement: "End of the Line",
+    steamRequirement:
+      "Hidden / no public description shown in the captured Steam list.",
+    completionRate: "0.7%",
+    whatToDo:
+      "Keep separate from normal achievement cleanup. This likely belongs in the endings route once confirmed.",
+  },
+  {
+    achievement: "...And They Lived Happily After",
+    steamRequirement:
+      "Hidden / no public description shown in the captured Steam list.",
+    completionRate: "0.6%",
+    whatToDo:
+      "Treat as a late-run ending achievement. Do not infer the exact route from the title alone.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Gamble With Your Friends has 55 Steam achievements. The easiest way to clear them is not to chase the rarest ones first: start with Floor 1 game achievements, then move to Floor 2 game targets, then use item-supported runs for high rollers, Floor 3/Floor 4 goals, and money milestones.**
+
+Do this first:
+
+1. **Clear Floor 1 basics** — Roulette, Duck Race, Blackjack, Slots, Street Craps, and Wheel.
+2. **Move to Floor 2 once items make sense** — Penguin Cross, Crash, HiLo, Keno, Plinko, and Money Wheel.
+3. **Use specialist routes for hard games** — Craps, Dragon Tower, Poker, Mine Sweeper, and Floor 4 games.
+4. **Run deliberate loss achievements separately** — do not mix them with serious quota or money runs.
+5. **Save money milestones and ending achievements for late runs.**
+
+The old-player rule is simple:
+
+**Pick one achievement target per casino day. A team that chases five achievements at once usually gets none of them and loses the bank.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-achievements-overview.webp"
+    alt="Gamble With Your Friends Steam achievements overview showing 55 total achievements."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The achievement list is also a floor map: it reveals which games matter on each floor.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="source-note">
+  Source note
+</h2>
+
+This is a launch-version achievement guide built from the public Steam achievement list, confirmed game footage, item screenshots, and practical route planning.
+
+The goal is not to invent hidden triggers. The goal is to tell you:
+
+- which achievements are easy first
+- which achievements require specific floors
+- which achievements are rare
+- which achievements are deliberate loss chains
+- which achievements should not be chased during serious quota runs
+
+<GuideCallout title="Launch-version note">
+Steam lists 55 total achievements for Gamble With Your Friends. This guide keeps the Steam requirement wording intact and adds route advice plus completion-rate context from the captured Steam achievement page. Completion rates can change over time.
+</GuideCallout>
+
+---
+
+<h2 id="achievement-categories">
+  Achievement categories
+</h2>
+
+<GuideTable
+  caption="Gamble With Your Friends achievement categories."
+  columns={categoryColumns}
+  rows={categoryRows}
+/>
+
+The important thing is not memorizing all 55 at once. The important thing is knowing which category you are working on **before** the casino day starts.
+
+---
+
+<h2 id="general-achievements">
+  General and special achievements
+</h2>
+
+<GuideTable
+  caption="General and special Gamble With Your Friends achievements."
+  columns={generalColumns}
+  rows={generalRows}
+/>
+
+These should not be mixed into the normal floor route unless the trigger is already clear. If the public achievement text does not show a requirement, track the achievement separately until a completed run confirms it.
+
+---
+
+<h2 id="best-achievement-route">
+  What to skip early
+</h2>
+
+<GuideTable
+  caption="What to skip while achievement hunting."
+  columns={skipColumns}
+  rows={skipRows}
+/>
+
+The fastest way to slow down achievement progress is chasing late-game achievements before the team can survive the floor.
+
+---
+
+<h2 id="floor-one-achievements">
+  Floor 1 achievements
+</h2>
+
+Floor 1 is where you should clean up the easy and medium achievements. The table pool is easier, stakes are lower, and most players can learn the basic games here.
+
+<GuideTable
+  caption="Floor 1 achievements and best routes."
+  columns={floorOneColumns}
+  rows={floorOneRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-achievement-no-bust-run.webp"
+    alt="Gamble With Your Friends Blackjack achievement attempt for No Bust Run on Floor 1."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Blackjack streak achievements are easier when one player leads the table and everyone else stops yelling.
+  </figcaption>
+</figure>
+
+For Floor 1, the best early targets are:
+
+- **Lucky 7**
+- **YARLL!!!**
+- **All on Red**
+- **No Bust Run**
+- **Jackpot Hunter**
+
+The worst beginner mistake is chasing **Spin The Wheel** or big Roulette bets while the quota is still unsafe. Finish the day first, then gamble with the extra cushion.
+
+---
+
+<h2 id="lucky-7-craps">
+  Lucky 7 and Street Craps achievements
+</h2>
+
+**Lucky 7** asks you to get 7 on your first roll on Street Craps on Floor 1. Later, **Natural Roller** asks for a Street Craps point-phase win on Floor 3.
+
+Craps achievements are much easier if you use the same old-player setup:
+
+1. one roller
+2. one caller
+3. everyone else backs up
+4. read the target before touching dice
+5. use small adjustments when possible
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-achievement-lucky-7-craps.webp"
+    alt="Gamble With Your Friends Lucky 7 Street Craps achievement attempt on Floor 1."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Street Craps achievements are about control, not panic throwing.
+  </figcaption>
+</figure>
+
+For the full route, use <Link href="/gamble-with-your-friends/craps-cheese-guide">Street Craps Cheese Guide</Link>.
+
+---
+
+<h2 id="floor-two-achievements">
+  Floor 2 achievements
+</h2>
+
+Floor 2 achievements are where the game starts checking whether you understand high-variance tables.
+
+<GuideTable
+  caption="Floor 2 achievements and best routes."
+  columns={floorTwoColumns}
+  rows={floorTwoRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-achievement-floor-two-unlock.webp"
+    alt="Gamble With Your Friends Floor 2 unlock and later-floor achievement route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once Floor 2 opens, achievements stop being simple Floor 1 cleanup and start asking for table-specific goals.
+  </figcaption>
+</figure>
+
+The two big traps are **Crash** and **Plinko**. Crash wants greed control. Plinko wants a big outcome. Do not chase either one with money you need for quota.
+
+---
+
+<h2 id="floor-three-achievements">
+  Floor 3 achievements
+</h2>
+
+Floor 3 is where you stop doing random achievement hunting. Pick one target and build the day around it.
+
+<GuideTable
+  caption="Floor 3 achievements and best routes."
+  columns={floorThreeColumns}
+  rows={floorThreeRows}
+/>
+
+Good Floor 3 targets with dedicated preparation:
+
+- **Natural Roller** if your team understands Craps
+- **No Safe Rolls** if someone understands HiLo
+- **Poker Face** if someone understands 1P Poker
+- **Perfect Sweep** if someone understands Mine Sweeper
+
+Bad Floor 3 plan:
+
+**“Let’s just walk around and see what happens.”**
+
+That is how you spend a lot of money and get no achievement.
+
+---
+
+<h2 id="floor-four-achievements">
+  Floor 4 achievements
+</h2>
+
+Floor 4 achievements are late-run goals. Several of them sit at **0.1%–0.6% completion** in the captured Steam list, so treat Floor 4 as planned achievement-hunt territory, not casual cleanup.
+
+<GuideTable
+  caption="Floor 4 achievements and best routes."
+  columns={floorFourColumns}
+  rows={floorFourRows}
+/>
+
+The clean Floor 4 mindset:
+
+- pick one achievement target
+- bring item support if possible
+- avoid learning the table with max bets
+- keep deliberate loss achievements on separate attempts
+- leave if the run is already safe and the achievement attempt is getting expensive
+
+---
+
+<h2 id="money-achievements">
+  Money milestone achievements
+</h2>
+
+The money achievements are not early goals. They are proof that your group can survive higher floors and use high-value plays.
+
+<GuideTable
+  caption="Money milestone achievements."
+  columns={moneyColumns}
+  rows={moneyRows}
+/>
+
+The fastest way to delay these achievements is to chase them too early. Learn the tables first. Learn item strategies second. Then push money.
+
+For item routes, use <Link href="/gamble-with-your-friends/best-item-combos">Best Item Combos and Strategies</Link>.
+
+---
+
+<h2 id="ending-achievements">
+  Ending achievements
+</h2>
+
+The Steam achievement list includes three ending-style achievements:
+
+<GuideTable
+  caption="Ending-style achievements and current route status."
+  columns={endingColumns}
+  rows={endingRows}
+/>
+
+All three ending achievements are hidden in the captured Steam list and have **under 1% completion**. That is useful information, but it is not enough to publish exact routes.
+
+Use <Link href="/gamble-with-your-friends/endings">Endings Guide</Link> when the routes are ready.
+
+<GuideCallout title="Do not fake ending triggers">
+Achievement names can hint at endings, but they are not enough to publish exact ending routes. Keep ending triggers separate from this achievement checklist until they are confirmed by a completed run.
+</GuideCallout>
+
+---
+
+<h2 id="achievements-to-avoid-early">
+  Achievements to avoid early
+</h2>
+
+Avoid these on your first serious runs:
+
+- **Clean Fall** — 24X Plinko is high variance.
+- **Step Into Fire** — deliberate Dragon Tower loss chain.
+- **Straight Down** — deliberate Plinko loss chain on Floor 4.
+- **High Risk Wedge** — deliberate Money Wheel loss chain on Floor 4.
+- **WORK IS NEVER OVER!** — $100B is not a beginner goal.
+- **Floor 4 streak achievements** — expensive if you do not know the tables.
+
+These are not bad achievements. They are bad **early** achievements.
+
+---
+
+<h2 id="old-player-tips">
+  Old-player achievement tips
+</h2>
+
+Use these rules:
+
+1. **One target per day.** Do not chase five achievements in one 5-minute casino day.
+2. **Quota first.** If quota is unsafe, stop achievement hunting.
+3. **Deliberate loss achievements get their own run.** Do not mix them with a money push.
+4. **Use minimum bets to learn tables.** Achievements do not require you to learn with max stakes.
+5. **Use item routes for high rollers.** Taser, Golden Chip, Holy Statue, Drink, Insurance, and profit tools matter.
+6. **Use dedicated guides for specialist tables.** Craps, Dragon Tower, Poker, Mine Sweeper, and HiLo should not be improvised.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many achievements are in Gamble With Your Friends?
+
+Gamble With Your Friends has **55 Steam achievements**.
+
+### What achievements should I do first?
+
+Start with Floor 1 achievements: High Roller, Big Spender, Lucky Streak, All on Red, YARLL!!!, Lucky 7, Risky Move, No Bust Run, and Jackpot Hunter.
+
+### Do High Roller and Big Spender have exact dollar amounts?
+
+The Steam requirement text uses wording like “very big bet” and “a lot of money.” This guide keeps the official wording instead of inventing hidden dollar thresholds.
+
+### What is the easiest achievement route?
+
+Clear Floor 1 game achievements first, then move to Floor 2 game achievements, then save Floor 3/Floor 4 and money milestones for later.
+
+### Is Lucky 7 hard?
+
+Lucky 7 depends on your first Street Craps roll on Floor 1. It is easier if one player controls the dice and another player calls the target.
+
+### How do you get No Bust Run?
+
+Win 4 games in a row on Blackjack on Floor 1. Let one player lead decisions and use small bets while learning.
+
+### How do you get Greed Test?
+
+Win at least 10X on Crash on Floor 2. Pick a cash-out target before greed takes over.
+
+### How do you get Natural Roller?
+
+Win on Street Craps during the point phase on Floor 3. Use the Craps guide instead of improvising.
+
+### How do you get Poker Face?
+
+Win on 1P Poker on Floor 3 without locking cards, with a hand equal to or better than Two of a Kind.
+
+### How do you get Perfect Sweep?
+
+Win at least 20X on Mine Sweeper on Floor 3. Treat it as a specialist achievement, not a panic table.
+
+### How do you get Flameproof?
+
+Win at least 3X three times in a row on Dragon Tower on Floor 4.
+
+### Which achievements are deliberate loss achievements?
+
+The captured Steam list confirms at least these deliberate loss-chain achievements: Step Into Fire, Straight Down, and High Risk Wedge. Do these on dedicated attempts, not serious money runs.
+
+### Should I chase deliberate loss achievements early?
+
+No. Achievements like Step Into Fire, Straight Down, and High Risk Wedge should be done on dedicated attempts, not during serious quota or money runs.
+
+### Are ending achievements solved?
+
+Not from the public achievement descriptions alone. Let It Ride!, End of the Line, and ...And They Lived Happily After are hidden in the captured Steam list and should be handled in the separate endings guide once exact triggers are confirmed.

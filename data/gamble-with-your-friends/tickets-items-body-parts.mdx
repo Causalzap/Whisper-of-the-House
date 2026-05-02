@@ -1,0 +1,883 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const ticketSourceColumns = [
+  { key: "source", label: "Ticket Source" },
+  { key: "howItWorks", label: "How It Works" },
+  { key: "beginnerRead", label: "Beginner Read" },
+];
+
+export const ticketSourceRows = [
+  {
+    source: "Hit quota",
+    howItWorks:
+      "Survive the casino day and resolve the quota successfully.",
+    beginnerRead:
+      "This is the cleanest ticket path because it does not cost body parts or rely on side-risk.",
+  },
+  {
+    source: "Complete challenges",
+    howItWorks:
+      "Runs can show side objectives such as streaks, big bets, game goals, or floor-specific tasks.",
+    beginnerRead:
+      "Good when the challenge matches your plan. Bad when it baits the team into a table it cannot control.",
+  },
+  {
+    source: "Overshoot quota",
+    howItWorks:
+      "Community footage shows quota excess reward lines after successful days.",
+    beginnerRead:
+      "Extra value is useful, but only if the team can preserve the profit until the day resolves.",
+  },
+  {
+    source: "Sell or lose body parts",
+    howItWorks:
+      "The game allows body parts to become part of the ticket/quota economy.",
+    beginnerRead:
+      "Use this as emergency economy, not as your default ticket source.",
+  },
+  {
+    source: "Bonus Draw",
+    howItWorks:
+      "Bonus Draw is an 8-ticket item that gets ticket on profit.",
+    beginnerRead:
+      "Better for stable runs where the team can repeatedly profit without risking the whole bank.",
+  },
+];
+
+export const itemPriorityColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "item", label: "Item" },
+  { key: "ticketCost", label: "Cost" },
+  { key: "buyingRole", label: "Buying Role" },
+];
+
+export const itemPriorityRows = [
+  {
+    priority: "1",
+    item: "Golden Chip",
+    ticketCost: "4 tickets",
+    buyingRole:
+      "Best cheap power buy. Gives one single free all-in and works well with Taser or profit buffs.",
+  },
+  {
+    priority: "2",
+    item: "Holy Statue",
+    ticketCost: "7 tickets",
+    buyingRole:
+      "Best defensive team item. Prevents all loss nearby while active, so it is ideal for coordinated group betting.",
+  },
+  {
+    priority: "3",
+    item: "Taser",
+    ticketCost: "4 tickets",
+    buyingRole:
+      "Best setup item. Use it on a keypad to increase maximum bet before a Golden Chip or protected push.",
+  },
+  {
+    priority: "4",
+    item: "Time Machine",
+    ticketCost: "Price not captured",
+    buyingRole:
+      "Potentially essential recovery item. Rolls back time, but its ticket cost still needs confirmation.",
+  },
+  {
+    priority: "5",
+    item: "Drink",
+    ticketCost: "5 tickets",
+    buyingRole:
+      "Cheap profit boost for a player who can still control the table while drunk.",
+  },
+  {
+    priority: "6",
+    item: "Microphone",
+    ticketCost: "6 tickets",
+    buyingRole:
+      "Team profit item. Best when several players are grouped near the same table.",
+  },
+  {
+    priority: "7",
+    item: "Insurance",
+    ticketCost: "7 tickets",
+    buyingRole:
+      "Safe defensive buy when the team expects to keep betting and wants reduced losses.",
+  },
+  {
+    priority: "8",
+    item: "Quota Gun",
+    ticketCost: "5 tickets",
+    buyingRole:
+      "Emergency quota tool. Strong when the team needs immediate value and accepts the body-part penalty.",
+  },
+  {
+    priority: "9",
+    item: "Angel’s Reel",
+    ticketCost: "3 tickets",
+    buyingRole:
+      "Cheap recovery gamble. Consider it after a meaningful loss, not as a main strategy.",
+  },
+  {
+    priority: "10",
+    item: "Devil’s Reel",
+    ticketCost: "3 tickets",
+    buyingRole:
+      "Cheap high-risk snowball item. Only use when the team is willing to risk the last win.",
+  },
+  {
+    priority: "11",
+    item: "Bonus Draw",
+    ticketCost: "8 tickets",
+    buyingRole:
+      "Ticket-farming option. Better once the team is stable and can repeatedly profit.",
+  },
+  {
+    priority: "12",
+    item: "Mystery Box",
+    ticketCost: "4 tickets",
+    buyingRole:
+      "Random value. Buy only after the team already has a reliable item plan.",
+  },
+  {
+    priority: "13",
+    item: "Stake Holder",
+    ticketCost: "6 tickets",
+    buyingRole:
+      "Item amplifier. Better when the team already has multiple useful items, not as a first buy.",
+  },
+];
+
+export const itemDetailColumns = [
+  { key: "item", label: "Item" },
+  { key: "ticketCost", label: "Ticket Cost" },
+  { key: "effect", label: "Effect" },
+  { key: "bestUse", label: "Best Use" },
+  { key: "status", label: "Status" },
+];
+
+export const itemDetailRows = [
+  {
+    item: "Angel’s Reel",
+    ticketCost: "3 tickets",
+    effect:
+      "Spin for a chance to revert your last loss.",
+    bestUse:
+      "Use after a meaningful loss, not after a tiny minimum bet.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Devil’s Reel",
+    ticketCost: "3 tickets",
+    effect:
+      "Triple or lose your last win.",
+    bestUse:
+      "Use only after a win that is large enough to matter and when the team accepts the risk.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Mystery Box",
+    ticketCost: "4 tickets",
+    effect:
+      "Gives random item.",
+    bestUse:
+      "Buy after reliable items or body recovery are covered.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Golden Chip",
+    ticketCost: "4 tickets",
+    effect:
+      "Spend it for a single free all-in.",
+    bestUse:
+      "Pair with Taser, profit buffs, or a high-value table.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Taser",
+    ticketCost: "4 tickets",
+    effect:
+      "Use on keypad to increase maximum bet.",
+    bestUse:
+      "Use before Golden Chip, profit buffs, or a protected high-value play.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Quota Gun",
+    ticketCost: "5 tickets",
+    effect:
+      "Pays 33% of quota for each body part it shoots off.",
+    bestUse:
+      "Emergency quota recovery when normal gambling is too slow or the shared bank is nearly dead.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Drink",
+    ticketCost: "5 tickets",
+    effect:
+      "Increase profit while drunk.",
+    bestUse:
+      "Give it to the player who understands the table and can still play while drunk.",
+    status: "Name, cost, and effect confirmed from screenshot/user capture.",
+  },
+  {
+    item: "Camera",
+    ticketCost: "6 tickets",
+    effect:
+      "Capture a winning player for extra profit.",
+    bestUse:
+      "Use when one player has a strong win window or is carrying a high-value play.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Stake Holder",
+    ticketCost: "6 tickets",
+    effect:
+      "Increase power of each item.",
+    bestUse:
+      "Use when the team already has several useful items and wants to amplify a planned item-based day.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Microphone",
+    ticketCost: "6 tickets",
+    effect:
+      "While active, increase profit nearby by singing.",
+    bestUse:
+      "Use near clustered players before a coordinated table push.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Holy Statue",
+    ticketCost: "7 tickets",
+    effect:
+      "While active, prevent all loss nearby.",
+    bestUse:
+      "Group players near fast machines or one planned table, then bet during the protected window.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Insurance",
+    ticketCost: "7 tickets",
+    effect:
+      "Decrease loss amount.",
+    bestUse:
+      "Use when the team must keep betting but cannot survive a full loss.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Bonus Draw",
+    ticketCost: "8 tickets",
+    effect:
+      "Get ticket on profit.",
+    bestUse:
+      "Use for stable ticket farming when the team can make repeated profit without wiping the bank.",
+    status: "Name, cost, and effect confirmed from screenshot.",
+  },
+  {
+    item: "Screwdriver",
+    ticketCost: "3 tickets",
+    effect:
+      "Effect not captured in current screenshot.",
+    bestUse:
+      "Do not prioritize until the effect is confirmed.",
+    status: "Cost confirmed; effect still unknown.",
+  },
+  {
+    item: "Time Machine",
+    ticketCost: "Price not captured",
+    effect:
+      "Rolls back time.",
+    bestUse:
+      "Use after a failed large bet or failed item combo, then repeat the play with better information.",
+    status: "Name and effect confirmed; price not captured.",
+  },
+];
+
+export const useItemColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const useItemRows = [
+  {
+    step: "1. Buy the item",
+    whatToDo:
+      "Place or confirm the item in the shop area, then press the buy button.",
+    whyItMatters:
+      "Some players think they bought an item but never actually confirm the purchase.",
+  },
+  {
+    step: "2. Pick it up",
+    whatToDo:
+      "The shop screenshots show an E Pick Up prompt on items.",
+    whyItMatters:
+      "Buying the item is not enough. A player needs to physically pick it up before the casino day.",
+  },
+  {
+    step: "3. Assign a holder",
+    whatToDo:
+      "Have one player carry the item and call when they are ready.",
+    whyItMatters:
+      "The item holder needs to activate it, aim it, or bring it near the table it affects.",
+  },
+  {
+    step: "4. Use it in the right place",
+    whatToDo:
+      "Use nearby effects near the team, use keypad modifiers on the keypad, and aim body-part tools at the target.",
+    whyItMatters:
+      "Many items are location-sensitive. They may look broken if used too far away or on the wrong target.",
+  },
+  {
+    step: "5. Follow the item prompt",
+    whatToDo:
+      "After pickup, follow the active item’s on-screen use prompt. E is confirmed for pickup, but activation can depend on the held item.",
+    whyItMatters:
+      "Do not assume every item activates the same way.",
+  },
+  {
+    step: "6. Stop after the effect ends",
+    whatToDo:
+      "Once a protected or profit window ends, stop the coordinated play.",
+    whyItMatters:
+      "Teams often lose the item’s value by continuing to bet after the protection or profit window is gone.",
+  },
+];
+
+export const bodyPartColumns = [
+  { key: "bodyPart", label: "Body Part" },
+  { key: "observedImpact", label: "Observed Impact" },
+  { key: "whenToTradeIt", label: "When To Trade It" },
+  { key: "avoidWhen", label: "Avoid When" },
+];
+
+export const bodyPartRows = [
+  {
+    bodyPart: "Eye",
+    observedImpact:
+      "Losing an eye can affect screen visibility.",
+    whenToTradeIt:
+      "When the team needs emergency value and the player can still function with reduced vision.",
+    avoidWhen:
+      "The player is carrying an item, navigating, or already struggling with visibility.",
+  },
+  {
+    bodyPart: "Mouth",
+    observedImpact:
+      "Losing a mouth can make voice communication muffled or harder to understand.",
+    whenToTradeIt:
+      "When the player does not need to call bets, coordinate item timing, or lead the team.",
+    avoidWhen:
+      "The player is the shot-caller, item holder, or table expert.",
+  },
+  {
+    bodyPart: "Body",
+    observedImpact:
+      "Losing the body can heavily affect movement and may force other players to carry the player.",
+    whenToTradeIt:
+      "Only when the run is in serious trouble or the quota value is clearly worth it.",
+    avoidWhen:
+      "The team still needs that player to move, retrieve items, play tables, or carry tools.",
+  },
+];
+
+export const purchaseMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "fix", label: "Fix" },
+];
+
+export const purchaseMistakeRows = [
+  {
+    mistake: "Buying random items before the team talks",
+    whyItHurts:
+      "Tickets are limited, and a random purchase can block a stronger planned item.",
+    fix: "Call the purchase before spending tickets.",
+  },
+  {
+    mistake: "Forgetting to pick up the item",
+    whyItHurts:
+      "The team may enter the casino without the item it paid for.",
+    fix: "Confirm who picked up the item before entering the limo.",
+  },
+  {
+    mistake: "Not knowing how to activate the item",
+    whyItHurts:
+      "The item becomes dead weight during the 5-minute casino day.",
+    fix: "Use the on-screen prompt and test the item before relying on it for the run-saving play.",
+  },
+  {
+    mistake: "Using a powerful item on a tiny bet",
+    whyItHurts:
+      "A one-use item gets wasted on a result that would not have changed the run.",
+    fix: "Save strong items for meaningful bets or emergencies.",
+  },
+  {
+    mistake: "Giving the risky item to the tilted player",
+    whyItHurts:
+      "The player most desperate to recover losses is most likely to waste the item.",
+    fix: "Give Golden Chip, Time Machine, Holy Statue, and Quota Gun to the calmest player.",
+  },
+  {
+    mistake: "Selling body parts for comedy",
+    whyItHurts:
+      "The penalty can affect vision, voice, movement, or interaction on the next day.",
+    fix: "Trade body parts only when the value helps the run.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Tickets, items, and body parts are the real economy layer in Gamble With Your Friends. Use tickets to buy run-changing items, pick them up before entering the casino, and treat body parts as emergency resources instead of free money.**
+
+The best early item purchases are usually:
+
+1. **Golden Chip** — 4 tickets, gives a single free all-in.
+2. **Holy Statue** — 7 tickets, prevents all loss nearby while active.
+3. **Taser** — 4 tickets, increases maximum bet when used on a keypad.
+4. **Time Machine** — rolls back time, but its ticket price was not captured.
+5. **Drink** — 5 tickets, increases profit while drunk.
+6. **Microphone** — 6 tickets, increases nearby profit while singing.
+7. **Quota Gun** — 5 tickets, pays 33% of quota for each body part it shoots off.
+
+Cheap situational items like **Angel’s Reel** and **Devil’s Reel** cost 3 tickets, but they are risk tools, not default first buys.
+
+If you only remember one rule:
+
+**Buy the item for a specific plan, not because it looks funny.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-lobby-items.webp"
+    alt="Gamble With Your Friends lobby item shop with tickets, cosmetics, and item pickup prompts."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Tickets are not just cosmetic currency. The lobby is where your next run’s item plan starts.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="source-note">
+  Source note
+</h2>
+
+This is a **launch-version community wiki style guide**.
+
+The structure uses:
+
+- official Steam information for shared bank, tickets, body-part trades, 15+ sketchy items, 17 games, 4 casino floors, and the 5-minute daily quota loop
+- Steam achievement data for floor and game clues
+- day-one creator footage, transcripts, forum/wiki-style observations, and community notes for observed item behavior
+- item shop screenshots that show item names, ticket prices, and tooltips
+
+<GuideCallout title="Data integrity note">
+The item prices in this guide are based on captured shop screenshots. Time Machine has a confirmed name and effect, but its ticket price was not captured. Screwdriver has a confirmed 3-ticket price, but its effect was not captured.
+</GuideCallout>
+
+---
+
+<h2 id="how-tickets-work">
+  How tickets work
+</h2>
+
+Tickets are the between-day resource that lets your team buy items, rerolls, cosmetics, and body-part recovery. The official Steam description says you can earn tickets by hitting quota, completing unique challenges, or even selling body parts.
+
+That means tickets are not a side system. They decide how strong your next casino day can be.
+
+<GuideTable
+  caption="How to earn tickets in Gamble With Your Friends."
+  columns={ticketSourceColumns}
+  rows={ticketSourceRows}
+/>
+
+<GuideCallout title="Beginner ticket rule">
+Spend tickets on power before style. Cosmetics are funny, but a good item can save the next day.
+</GuideCallout>
+
+---
+
+<h2 id="best-items-first">
+  Best items to buy first
+</h2>
+
+The best first item is not always the funniest item. It is the item that gives your group a clear casino plan.
+
+<GuideTable
+  caption="Best Gamble With Your Friends item priorities for beginners."
+  columns={itemPriorityColumns}
+  rows={itemPriorityRows}
+/>
+
+The safest early shopping order is:
+
+1. buy one reliable run-changing item
+2. decide who carries it
+3. choose the table it supports
+4. enter the casino only after the item is picked up
+5. use the item during a planned bet, not during panic
+
+---
+
+<h2 id="ticket-costs">
+  Ticket costs
+</h2>
+
+Use this quick price list when deciding what your team can afford:
+
+- **Angel’s Reel** — 3 tickets
+- **Devil’s Reel** — 3 tickets
+- **Screwdriver** — 3 tickets
+- **Mystery Box** — 4 tickets
+- **Golden Chip** — 4 tickets
+- **Taser** — 4 tickets
+- **Quota Gun** — 5 tickets
+- **Drink** — 5 tickets
+- **Camera** — 6 tickets
+- **Stake Holder** — 6 tickets
+- **Microphone** — 6 tickets
+- **Holy Statue** — 7 tickets
+- **Insurance** — 7 tickets
+- **Bonus Draw** — 8 tickets
+- **Time Machine** — Obtainable from the Mystery Box with a certain probability. Time Rewind can rewind up to 60 seconds.
+
+The practical takeaway:
+
+**With 4 tickets, Golden Chip is the cleanest power buy. With 7 tickets, Holy Statue and Insurance are the safest defensive buys. With 8 tickets, Bonus Draw becomes a ticket-farming option.**
+
+---
+
+<h2 id="how-to-buy-pick-up-use-items">
+  How to buy, pick up, and use items
+</h2>
+
+This is one of the most common early questions: **“I bought an item with tickets. How do I use it?”**
+
+The current launch-version answer is:
+
+<GuideTable
+  caption="How to buy and use items in Gamble With Your Friends."
+  columns={useItemColumns}
+  rows={useItemRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-buy-retrieve-items.webp"
+    alt="Gamble With Your Friends item buying and pickup flow in the lobby before entering the casino."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Buying an item is not enough. Make sure someone actually picks it up before the casino day starts.
+  </figcaption>
+</figure>
+
+Practical rules:
+
+- **E Pick Up** is confirmed by shop screenshots.
+- **Held active items** may need a separate item-use prompt after pickup.
+- **Nearby aura items** need the holder close to the affected players or table.
+- **Taser** must be used on a keypad to increase maximum bet.
+- **Quota Gun** must be aimed at the body part it shoots off.
+- **Mystery Box** gives a random item, so make sure someone picks up the result.
+
+<GuideCallout title="Item activation rule">
+If an item does nothing, check three things first: did someone pick it up, are they using it near the correct target, and are they following the held item’s on-screen prompt?
+</GuideCallout>
+
+---
+
+<h2 id="item-effects-table">
+  Item effects table
+</h2>
+
+The table below lists the item prices and effects confirmed or partially confirmed from shop screenshots.
+
+<GuideTable
+  caption="Gamble With Your Friends item prices and effects."
+  columns={itemDetailColumns}
+  rows={itemDetailRows}
+/>
+
+---
+
+<h2 id="high-priority-items">
+  High-priority items explained
+</h2>
+
+These are the items worth explaining beyond a table row because they change how the team plays the next casino day.
+
+<h3 id="holy-statue">
+  Holy Statue
+</h3>
+
+Holy Statue costs **7 tickets** and says:
+
+**While active, prevent all loss nearby.**
+
+This is one of the best beginner items because it gives the team a simple plan:
+
+1. pick the table first
+2. group near the item holder
+3. activate the item
+4. bet only during the protected window
+5. stop when the protection ends
+
+The common mistake is continuing to gamble after the protection window is gone.
+
+<h3 id="golden-chip-and-taser">
+  Golden Chip and Taser
+</h3>
+
+Golden Chip costs **4 tickets** and gives a single free all-in. Taser costs **4 tickets** and increases maximum bet when used on a keypad.
+
+Together, they form the cleanest early combo:
+
+1. use Taser on the keypad
+2. raise the maximum bet
+3. spend Golden Chip for a larger free all-in
+4. avoid extra unprotected bets afterward
+
+This is only a preview. Full routing belongs in the <Link href="/gamble-with-your-friends/best-item-combos">Best Item Combos and Strategies</Link> guide.
+
+<h3 id="time-machine">
+  Time Machine
+</h3>
+
+Time Machine says:
+
+**Rolls back time.**
+
+Its price was not captured, but the effect is strong enough to track. It is best after a meaningful failed play, not as a random panic button.
+
+Use it after:
+
+- a planned large bet fails
+- a protected strategy goes wrong
+- the team burns money too quickly
+- the team can repeat the play with better information
+
+Do not use it after tiny losses or when nobody knows what should change.
+
+<h3 id="profit-items">
+  Profit items
+</h3>
+
+Several items increase profit in different ways:
+
+- **Drink** — 5 tickets, increase profit while drunk.
+- **Microphone** — 6 tickets, while active, increase profit nearby by singing.
+- **Camera** — 6 tickets, capture a winning player for extra profit.
+- **Bonus Draw** — 8 tickets, get ticket on profit.
+- **Stake Holder** — 6 tickets, increases the power of each item. Treat it as an item amplifier, not a first-buy core plan.
+
+These are strongest when the team already has a realistic win attempt. They are weak when everyone is scattered across random tiny bets.
+
+<h3 id="risk-reward-reels">
+  Angel’s Reel and Devil’s Reel
+</h3>
+
+Angel’s Reel and Devil’s Reel both cost **3 tickets**, but they serve opposite moods.
+
+**Angel’s Reel** gives a chance to revert your last loss. Use it after a meaningful loss.
+
+**Devil’s Reel** can triple or lose your last win. Use it only when the team accepts the risk and the previous win is large enough to matter.
+---
+
+<h2 id="item-combos-preview">
+  Item combos preview
+</h2>
+
+This page is about tickets, item prices, item use, and body parts. Full combo routing belongs in the separate combo guide.
+
+For now, remember these basic pairings:
+
+- **Taser + Golden Chip**
+- **Holy Statue + fast machines**
+- **Time Machine + planned big bet**
+- **Drink or Microphone + high-multiplier play**
+- **Quota Gun + emergency quota push**
+
+For the full routing, use <Link href="/gamble-with-your-friends/best-item-combos">Best Item Combos and Strategies</Link>.
+
+---
+
+<h2 id="body-parts-explained">
+  Body parts explained
+</h2>
+
+Body parts are not just cosmetic penalties. They are part of the game’s economy.
+
+Body parts can affect:
+
+- vision
+- voice clarity
+- movement
+- interaction
+- team coordination
+- how easily the player can contribute next day
+
+In observed footage, losing a mouth made communication harder, losing an eye affected the screen, and losing the body made movement so bad that other players had to carry the person around.
+
+<GuideTable
+  caption="Observed body part effects and trade advice."
+  columns={bodyPartColumns}
+  rows={bodyPartRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-tickets-body-parts.webp"
+    alt="Gamble With Your Friends tickets and body parts system showing how body parts can become part of the run economy."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Body parts can help the economy, but the penalty can follow the team into the next casino day.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Unconfirmed body part note">
+Hands, arms, and legs are mentioned or implied in community footage, but the current material does not clearly separate their exact effects from general movement or interaction penalties. Add them only after direct testing.
+</GuideCallout>
+
+---
+
+<h2 id="gun-and-body-part-value">
+  Quota Gun and body part value
+</h2>
+
+Quota Gun costs **5 tickets** and says:
+
+**Pays 33% of quota for each body part it shoots off.**
+
+That makes it one of the clearest emergency economy tools in the game. It does not depend on winning a table, and it can convert body parts into immediate quota progress.
+
+Use Quota Gun when:
+
+- the team is short on quota
+- the timer is low
+- normal bets are too slow
+- the group agrees who is losing the part
+- the lost part will not ruin the next day
+
+Do not use Quota Gun when:
+
+- the team is stable
+- the target player is carrying an important item
+- the player needs voice, vision, or movement
+- the group is only doing it for comedy
+
+<GuideCallout title="Body part rule">
+A body part is not free money. It is borrowed power with a penalty attached.
+</GuideCallout>
+
+---
+
+<h2 id="common-ticket-mistakes">
+  Common ticket and item mistakes
+</h2>
+
+<GuideTable
+  caption="Common ticket, item, and body part mistakes."
+  columns={purchaseMistakeColumns}
+  rows={purchaseMistakeRows}
+/>
+
+Most item mistakes happen before the casino day even begins. The team spends tickets, loses track of the item, enters the limo, and only realizes the plan was broken once the timer is already running.
+
+---
+
+<h2 id="recommended-shopping-rules">
+  Recommended shopping rules
+</h2>
+
+Use these rules before each casino day:
+
+1. **One person calls ticket spending.**
+2. **No Mystery Box until the main item is covered.**
+3. **No body-part sale unless it saves the run or buys a key item.**
+4. **No Golden Chip before checking whether Taser can raise the max bet.**
+5. **No Time Machine unless the team knows what mistake it is fixing.**
+6. **No item activation until the table and players are ready.**
+
+These rules keep the chaos fun without burning all your tickets before the run starts.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do you get tickets in Gamble With Your Friends?
+
+You can earn tickets by hitting quota, completing challenges, overshooting goals, and selling or losing body parts. Bonus Draw can also get ticket on profit.
+
+### What should I buy first with tickets?
+
+For most beginner groups, the best first buys are Holy Statue, Golden Chip, Taser, Microphone, Drink, Insurance, or Quota Gun.
+
+### How much do items cost?
+
+Confirmed prices include Angel’s Reel for 3 tickets, Devil’s Reel for 3 tickets, Mystery Box for 4, Golden Chip for 4, Taser for 4, Quota Gun for 5, Drink for 5, Camera for 6, Stake Holder for 6, Microphone for 6, Holy Statue for 7, Insurance for 7, and Bonus Draw for 8. Time Machine’s price was not captured.
+
+### Are cosmetics worth buying?
+
+Not early. Cosmetics are fun, but your first tickets should usually go toward items that help the team survive the next casino day.
+
+### Are mystery boxes worth it?
+
+Sometimes, but not as a first priority. Mystery Box costs 4 tickets and gives a random item, so buy it only after your team already has a useful item plan or extra tickets.
+
+### How do you pick up items?
+
+Shop screenshots show an **E Pick Up** prompt. After buying, make sure one player actually picks up the item before entering the casino.
+
+### How do you use items after buying them?
+
+Pick up the item first, carry it to the right place, then follow the held item’s on-screen prompt. Some items affect nearby players, while others must be used on a specific target, such as Taser on a keypad or Quota Gun on a body part.
+
+### Why is my item not working?
+
+The item may not have been picked up, the wrong player may be holding it, the holder may be too far from the target, the item may need a specific table/keypad/body part, or the team may be using it outside its active window.
+
+### What does Holy Statue do?
+
+Holy Statue costs 7 tickets and prevents all loss nearby while active.
+
+### What does Golden Chip do?
+
+Golden Chip costs 4 tickets and gives a single free all-in.
+
+### What does Taser do?
+
+Taser costs 4 tickets and is used on a keypad to increase maximum bet.
+
+### What does Time Machine do?
+
+Time Machine rolls back time. Its effect is confirmed, but its ticket price was not captured.
+
+### What does Quota Gun do?
+
+Quota Gun costs 5 tickets and pays 33% of quota for each body part it shoots off.
+
+### Should you sell or shoot off body parts?
+
+Only when the value saves the run or enables a key purchase. Do not trade body parts casually, because the penalty can affect voice, vision, movement, or interaction.
+
+### Which body part is safest to lose?
+
+There is no universally safe body part. Eye loss can hurt vision, mouth loss can hurt communication, and body loss can hurt movement. Choose based on the player’s role.
+
+### What is the biggest ticket mistake?
+
+The biggest mistake is spending tickets before the team agrees on a plan. A random purchase can block a stronger item or body recovery.

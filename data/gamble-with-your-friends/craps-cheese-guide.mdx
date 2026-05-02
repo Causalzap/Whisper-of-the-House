@@ -1,0 +1,740 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const roleColumns = [
+  { key: "role", label: "Role" },
+  { key: "job", label: "Job" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const roleRows = [
+  {
+    role: "Roller",
+    job:
+      "Controls the dice and only throws when the caller says the target is clear.",
+    whyItMatters:
+      "Street Craps gets messy when the roller panics or throws before the table is ready.",
+  },
+  {
+    role: "Caller",
+    job:
+      "Reads the target number, calls what the next throw needs, and tells the roller when to stop.",
+    whyItMatters:
+      "Most bad Craps runs happen because nobody knows what number the table actually wants.",
+  },
+  {
+    role: "Spotter",
+    job:
+      "Watches the dice position, blocks bad visibility, and keeps other players from crowding the table.",
+    whyItMatters:
+      "A clean view of the dice matters more than having everyone yelling at once.",
+  },
+  {
+    role: "Item holder",
+    job:
+      "Uses Taser, Golden Chip, Drink, Insurance, or Time Machine only after the table plan is called.",
+    whyItMatters:
+      "Craps is one of the best item-supported games, but item order matters.",
+  },
+];
+
+export const crapsFlowColumns = [
+  { key: "phase", label: "Phase" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "oldPlayerTip", label: "Old Player Tip" },
+];
+
+export const crapsFlowRows = [
+  {
+    phase: "Before the bet",
+    whatToDo:
+      "Decide who rolls, who calls numbers, and whether the team is using item support.",
+    oldPlayerTip:
+      "Do not let the drunkest player become the roller unless the whole point is chaos.",
+  },
+  {
+    phase: "First roll",
+    whatToDo:
+      "Watch the table prompt and identify what the dice result means before throwing again.",
+    oldPlayerTip:
+      "Slow down here. The first mistake is usually throwing before anyone reads the target.",
+  },
+  {
+    phase: "Target phase",
+    whatToDo:
+      "Call the needed number clearly, then use controlled throws or small adjustments to work toward it.",
+    oldPlayerTip:
+      "One caller is enough. Five people yelling different numbers loses runs.",
+  },
+  {
+    phase: "After a good hit",
+    whatToDo:
+      "Re-check the table before touching the dice again.",
+    oldPlayerTip:
+      "A good hit can turn into a loss if the roller immediately throws the next die blind.",
+  },
+  {
+    phase: "After a bad hit",
+    whatToDo:
+      "Stop, read the table, and decide whether to recover, use a reel, or leave the table.",
+    oldPlayerTip:
+      "Do not revenge-throw. Craps punishes panic more than most Floor 1 games.",
+  },
+];
+
+export const cheeseColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItWorks", label: "Why It Works" },
+];
+
+export const cheeseRows = [
+  {
+    step: "1. Control the table",
+    whatToDo:
+      "Keep only the roller and caller focused on the dice. Everyone else should back up.",
+    whyItWorks:
+      "Less body blocking means the caller can actually read the dice and target.",
+  },
+  {
+    step: "2. Call the number",
+    whatToDo:
+      "Say the number the table needs before the roller touches anything.",
+    whyItWorks:
+      "The roller should not be guessing. The caller should drive the play.",
+  },
+  {
+    step: "3. Use small adjustments",
+    whatToDo:
+      "When a die is close to the target setup, nudge or short-throw instead of full-sending both dice.",
+    whyItWorks:
+      "Small inputs give the team a chance to preserve a useful die position instead of resetting the whole table.",
+  },
+  {
+    step: "4. Work one die at a time",
+    whatToDo:
+      "If one die is already useful, leave it alone and adjust the other die.",
+    whyItWorks:
+      "One-die corrections are easier to manage than chaotic double throws.",
+  },
+  {
+    step: "5. Stop after the window",
+    whatToDo:
+      "After the planned hit or payout, decide whether to leave instead of chaining blind throws.",
+    whyItWorks:
+      "Craps can win big, but it can also eat the bank if the team refuses to stop.",
+  },
+];
+
+export const itemColumns = [
+  { key: "item", label: "Item" },
+  { key: "BestUseOnCraps", label: "Best Use On Craps" },
+  { key: "DoNotUseWhen", label: "Do Not Use When" },
+];
+
+export const itemRows = [
+  {
+    item: "Taser",
+    BestUseOnCraps:
+      "Use on the keypad to increase maximum bet before a serious Craps push.",
+    DoNotUseWhen:
+      "The roller does not understand the table yet.",
+  },
+  {
+    item: "Golden Chip",
+    BestUseOnCraps:
+      "Use for a larger free all-in after the max bet has been raised.",
+    DoNotUseWhen:
+      "The team has not chosen the target bet or roller.",
+  },
+  {
+    item: "Drink",
+    BestUseOnCraps:
+      "Give to the roller only if they can still control the dice while drunk.",
+    DoNotUseWhen:
+      "The player already struggles with the table sober.",
+  },
+  {
+    item: "Insurance",
+    BestUseOnCraps:
+      "Use when the team wants a risky Craps push but needs softer losses.",
+    DoNotUseWhen:
+      "The team is safe and does not need to keep gambling.",
+  },
+  {
+    item: "Angel’s Reel",
+    BestUseOnCraps:
+      "Use after a meaningful Craps loss when reverting the last loss could save the run.",
+    DoNotUseWhen:
+      "The loss was tiny or the team is already safe.",
+  },
+  {
+    item: "Time Machine",
+    BestUseOnCraps:
+      "If obtained, save it for a bad high-value Craps result or a major table mistake.",
+    DoNotUseWhen:
+      "The team does not know what it will change after rollback.",
+  },
+];
+
+export const betSizeColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "betSize", label: "Recommended Bet Size" },
+  { key: "reason", label: "Reason" },
+];
+
+export const betSizeRows = [
+  {
+    situation: "First time touching Street Craps",
+    betSize: "Minimum or small bet",
+    reason:
+      "You are learning the roll flow. Do not pay tuition with the whole bank.",
+  },
+  {
+    situation: "Caller understands the target",
+    betSize: "Medium bet",
+    reason:
+      "Once the team can read the table, Craps becomes much more playable.",
+  },
+  {
+    situation: "Taser + Golden Chip ready",
+    betSize: "Large planned bet",
+    reason:
+      "This is the cleanest way to turn Craps into a high-value play.",
+  },
+  {
+    situation: "Drink + Insurance ready",
+    betSize: "Medium to large bet",
+    reason:
+      "Profit and loss reduction support a risky table push, but the roller still needs control.",
+  },
+  {
+    situation: "Nobody can see the dice",
+    betSize: "Do not increase",
+    reason:
+      "Visibility problems turn Craps into pure chaos.",
+  },
+  {
+    situation: "Timer is almost gone",
+    betSize: "Only bet if it can save quota",
+    reason:
+      "Craps is not a good panic table unless the target and payout are already clear.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItLosesMoney", label: "Why It Loses Money" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Throwing before reading the table",
+    whyItLosesMoney:
+      "The roller may move the dice away from the number the table actually needs.",
+    fix:
+      "Caller reads first, roller throws second.",
+  },
+  {
+    mistake: "Everyone crowding the dice",
+    whyItLosesMoney:
+      "The caller cannot see the dice or target clearly.",
+    fix:
+      "Only the roller and caller should be close to the table.",
+  },
+  {
+    mistake: "Full-throwing every time",
+    whyItLosesMoney:
+      "Some positions need a small adjustment, not a reset.",
+    fix:
+      "Use small taps or short throws when the dice are already close.",
+  },
+  {
+    mistake: "Using Drink on a bad roller",
+    whyItLosesMoney:
+      "The profit boost does not matter if the player loses control.",
+    fix:
+      "Give Drink to the player who already understands Craps.",
+  },
+  {
+    mistake: "Spending Golden Chip before Taser",
+    whyItLosesMoney:
+      "The free all-in happens before the max bet is raised.",
+    fix:
+      "Taser first, Golden Chip second.",
+  },
+  {
+    mistake: "Trying to recover every loss on Craps",
+    whyItLosesMoney:
+      "A strong table becomes a trap when the team refuses to leave.",
+    fix:
+      "Set a stop point before the first serious bet.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Street Craps is one of the strongest games in Gamble With Your Friends if your team plays it like a controlled table instead of a panic table. Pick one roller, one caller, read the target number, move the dice carefully, and only use big bets when the team understands the roll.**
+
+The best Craps strategy is:
+
+1. **Assign a roller and caller.**
+2. **Read the target before touching the dice.**
+3. **Use small controlled adjustments instead of full panic throws.**
+4. **Work one die at a time when one die is already useful.**
+5. **Use Taser before Golden Chip if you are going for a big all-in.**
+6. **Use Drink + Insurance only when the roller can still control the table.**
+7. **Leave or stop after the planned win window.**
+
+The old-player rule is simple:
+
+**Craps is not hard because the table is complicated. Craps is hard because your team will not shut up and let one person call the number.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-craps-first-table.webp"
+    alt="Gamble With Your Friends Street Craps table with players learning the first roll and target number."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Street Craps becomes much easier once one player calls the target and one player controls the dice.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="source-note">
+  Source note
+</h2>
+
+This is a launch-version Street Craps strategy guide written from real run behavior, item tooltips, and repeated table attempts.
+
+The goal is not to explain real-world casino craps. The goal is to explain how to win more often at **Gamble With Your Friends Street Craps**:
+
+- how to read the table
+- who should roll
+- how to control dice movement
+- when to use items
+- when to stop before Craps eats the bank
+
+<GuideCallout title="Launch-version note">
+Use this as a practical in-game Craps guide. The strategy here is based on how Street Craps behaves in Gamble With Your Friends, not on real casino craps rules.
+</GuideCallout>
+
+---
+
+<h2 id="why-craps-is-good">
+  Why Street Craps is worth learning
+</h2>
+
+Street Craps is not the safest beginner game, but it is one of the most valuable games to learn because it rewards team control.
+
+Roulette is easy. Duck Race is simple. Slots are fast. But Street Craps gives you something those games do not: **a table where coordination and dice handling can matter.**
+
+Craps is good when:
+
+- one player understands the target
+- one player controls the dice
+- the team stays out of the way
+- items are used before the big bet
+- the group knows when to stop
+
+Craps is bad when:
+
+- everyone crowds the table
+- the roller throws before reading
+- players yell different numbers
+- the team max bets before learning the flow
+- someone tries to recover every loss with one more throw
+
+If your group is chaotic, learn Roulette first. If your group can actually listen, Craps can carry runs.
+
+<GuideCallout title="Physics note">
+Gamble With Your Friends is built around physics-heavy chaos, and Street Craps is one of the tables where dice handling visibly matters. That does not mean every die face can be perfectly controlled. Start with minimum bets, try small adjustments, and only scale up once your team can see that controlled movement is helping the result.
+</GuideCallout>
+
+---
+
+<h2 id="roles">
+  Assign roles before playing Craps
+</h2>
+
+Do not let everyone “help.” That is how Craps turns into a mess.
+
+Use these roles:
+
+<GuideTable
+  caption="Best team roles for Street Craps."
+  columns={roleColumns}
+  rows={roleRows}
+/>
+
+For a serious Craps push, the most important role is the **caller**. The roller should not be deciding everything while also moving the dice. The caller reads the target, tells the roller what number matters, and stops the team from panic throwing.
+
+<GuideCallout title="Old player rule">
+If two people are calling different numbers, pause. One caller, one target, one throw.
+</GuideCallout>
+
+---
+
+<h2 id="basic-flow">
+  Street Craps basic flow
+</h2>
+
+Street Craps is easiest when you slow the table down.
+
+<GuideTable
+  caption="How to play Street Craps without throwing the run."
+  columns={crapsFlowColumns}
+  rows={crapsFlowRows}
+/>
+
+The basic flow is:
+
+1. choose the roller
+2. choose the caller
+3. place a controlled bet
+4. read the target
+5. move the dice carefully
+6. re-check the table after every good or bad hit
+7. stop after the planned win or loss limit
+
+New players lose on Craps because they treat every throw like a reaction test. It is not. Read first, throw second.
+
+---
+
+<h2 id="cheese-strategy">
+  The dice cheese strategy
+</h2>
+
+The reason players call this a cheese table is simple: you can influence the dice more than you can influence a normal pure RNG table.
+
+That does not mean every throw is free money. It means the team should stop full-sending dice blindly.
+
+<GuideTable
+  caption="Street Craps dice cheese strategy."
+  columns={cheeseColumns}
+  rows={cheeseRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-craps-target-number.webp"
+    alt="Gamble With Your Friends Street Craps target number setup with players controlling dice one at a time."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The best Craps attempts are slow and deliberate: call the number, adjust the dice, then throw.
+  </figcaption>
+</figure>
+
+The most important habit is this:
+
+**Do not move both dice if one die is already good.**
+
+If the table wants a target and one die is already helping, protect that die. Work the other die. Craps gets much easier when the roller stops resetting both dice every time.
+
+---
+
+<h2 id="one-die-at-a-time">
+  One die at a time
+</h2>
+
+This is the single best Craps habit.
+
+When both dice are wrong, a full throw can make sense. But when one die is close or already useful, do not ruin it. Move the other die carefully.
+
+A practical one-die adjustment looks like this:
+
+1. **Caller reads the target.**
+2. **Caller says which die is already useful.**
+3. **Roller avoids touching the useful die.**
+4. **Roller gives the other die a short tap, small push, or low-power throw.**
+5. **Team re-checks the table before touching either die again.**
+
+Use one-die control when:
+
+- the caller says one die is already good
+- the table needs a small adjustment
+- the dice are near the target
+- the team is on a high bet
+- the roller is getting nervous
+
+Do not use one-die control when:
+
+- the dice are completely scattered
+- nobody can read the table
+- the timer is too low for careful setup
+- the team is only minimum betting for practice
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-craps-one-die-control.webp"
+    alt="Gamble With Your Friends Street Craps one die control example with a target number callout."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When one die is already useful, avoid resetting the whole table. Adjust the other die first.
+  </figcaption>
+</figure>
+
+A good Craps team sounds boring:
+
+> “Need a four.”  
+> “That die is fine.”  
+> “Move the other one.”  
+> “Stop.”
+
+A bad Craps team sounds like six people screaming at a table while the money disappears.
+
+---
+
+<h2 id="bet-sizing">
+  Bet sizing for Street Craps
+</h2>
+
+Craps can handle big bets, but only after the team proves it can read the table.
+
+<GuideTable
+  caption="Recommended bet sizing for Street Craps."
+  columns={betSizeColumns}
+  rows={betSizeRows}
+/>
+
+My default rule:
+
+**Minimum bet to learn. Medium bet to confirm. Big bet only with items or a clean roller.**
+
+If the team is still asking what the target number means, do not use Golden Chip. If the caller cannot see the dice, do not max bet. If the roller is drunk and out of control, do not pretend Drink is a strategy.
+
+---
+
+<h2 id="taser-golden-chip-craps">
+  Taser + Golden Chip on Craps
+</h2>
+
+Craps is one of the best places to use **Taser + Golden Chip** because the table can support a big planned push.
+
+The order matters:
+
+1. choose Street Craps as the target table
+2. use **Taser** on the keypad to raise the maximum bet
+3. confirm the roller and caller
+4. use **Golden Chip** for the free all-in
+5. play the roll carefully
+6. stop the follow-up gambling unless the team agrees
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-craps-600k-max-bet.webp"
+    alt="Gamble With Your Friends Street Craps high max bet setup with Taser and Golden Chip."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Taser + Golden Chip can turn Craps into a huge table push, but only if the team already knows the roll.
+  </figcaption>
+</figure>
+
+Do not use this combo if the roller is still learning. Taser + Golden Chip is not a tutorial tool. It is a payoff tool.
+
+For the full item route, use <Link href="/gamble-with-your-friends/best-item-combos">Best Item Combos and Strategies</Link>.
+
+---
+
+<h2 id="drink-insurance-craps">
+  Drink + Insurance + Craps
+</h2>
+
+This is the risky old-player setup.
+
+**Drink** increases profit while drunk. **Insurance** decreases loss amount. Together, they make sense on Craps because Craps can produce a big payout but can also punish a bad throw.
+
+Use this setup when:
+
+- the roller already knows Craps
+- the team accepts the risk
+- the bet is large enough to matter
+- Insurance is active or ready
+- the Drink player can still control the table
+
+Avoid this setup when:
+
+- the roller panics
+- the team has no caller
+- the player cannot aim while drunk
+- the table is being played blind
+- the team is already safe and does not need risk
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-drink-insurance-craps.webp"
+    alt="Gamble With Your Friends Drink and Insurance strategy during a Street Craps push."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Drink + Insurance is strong on Craps only when the roller can still control the table.
+  </figcaption>
+</figure>
+
+The trap is thinking Drink makes any player good at Craps. It does not. It makes a good Craps player more profitable. It makes a bad Craps player more expensive.
+
+---
+
+<h2 id="time-machine-craps">
+  Time Machine with Craps
+</h2>
+
+Time Machine is not a normal Craps shopping plan. If your team gets one from a random item source, save it for a real Craps mistake.
+
+Use it after a bad high-value throw, a failed all-in attempt, or a missed target where the team knows exactly what it would change on the second try.
+
+For the full Time Machine item route, use <Link href="/gamble-with-your-friends/best-item-combos">Best Item Combos and Strategies</Link>.
+
+---
+
+<h2 id="quota-gun-after-craps">
+  Quota Gun after a failed Craps push
+</h2>
+
+Quota Gun is not part of the Craps table. It is the fallback when Craps fails, the timer is low, and the team still needs immediate quota value.
+
+Quota Gun pays **33% of quota for each body part it shoots off**, but the penalty can carry into the next day. For body-part details, use <Link href="/gamble-with-your-friends/tickets-items-body-parts">Tickets, Items, and Body Parts Guide</Link>.
+
+---
+
+<h2 id="recovery-craps">
+  Recovering after a bad Craps throw
+</h2>
+
+The best Craps players do not panic after one bad throw.
+
+Use this recovery order:
+
+1. stop touching the dice
+2. read the table again
+3. check whether one die is still useful
+4. call the next target clearly
+5. use one-die control if possible
+6. only add items if the bet is worth saving
+7. leave the table if the team is spiraling
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-craps-recovery-hit.webp"
+    alt="Gamble With Your Friends Street Craps recovery after a bad throw with players trying to hit the next target."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A bad Craps throw is not always the end. Stop, read the target again, and recover with control.
+  </figcaption>
+</figure>
+
+The worst recovery plan is “throw faster.” Craps does not reward panic.
+
+---
+
+<h2 id="common-mistakes">
+  Common Street Craps mistakes
+</h2>
+
+<GuideTable
+  caption="Common Street Craps mistakes and how to fix them."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most Craps losses come from three bad habits:
+
+1. no caller
+2. no stop point
+3. too many people touching the table
+
+Fix those and Craps becomes one of the best tables in the game.
+
+---
+
+<h2 id="recommended-craps-route">
+  Recommended Craps route
+</h2>
+
+Use this route when your team wants to make Street Craps a real strategy:
+
+1. **Practice with a small bet.**
+2. **Assign one roller and one caller.**
+3. **Learn how the table displays the target.**
+4. **Use small adjustments and one-die control.**
+5. **Move to medium bets once the caller can read the table.**
+6. **Use Drink + Insurance only with a stable roller.**
+7. **Use Taser + Golden Chip only after the team knows the table.**
+8. **Leave after the planned payout or stop point.**
+9. **Use Quota Gun only if Craps fails and quota is still short.**
+
+This is how you turn Craps from a funny table into a run-winning table.
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is Street Craps good in Gamble With Your Friends?
+
+Yes. Street Craps is one of the best games if your team can read the target, control the dice, and stop after the planned win.
+
+### Is Street Craps good for beginners?
+
+Not as a first serious table. Beginners should practice with small bets first, then increase bet size once one player can call the target clearly.
+
+### How do you cheese Street Craps?
+
+Assign one caller, read the target, use small controlled adjustments, and move one die at a time when possible. Do not let everyone crowd the table.
+
+### Does the dice cheese always work?
+
+No. Treat it as a physics-based control tactic, not a guaranteed result. Test with minimum bets first and scale up only when your team can see that small adjustments are helping.
+
+### What is the biggest Street Craps mistake?
+
+The biggest mistake is throwing before reading the target. The caller should read first, then the roller should move the dice.
+
+### Should I use Taser and Golden Chip on Craps?
+
+Yes, but only after your team understands the table. Use Taser first to increase maximum bet, then Golden Chip for the free all-in.
+
+### Is Drink good with Craps?
+
+Drink is good if the roller can still control the table while drunk. It is bad if the player becomes too chaotic to aim.
+
+### Is Insurance good with Craps?
+
+Insurance is useful when you want to take a risky Craps push but reduce the downside of a failed bet.
+
+### Should I use Time Machine on Craps?
+
+Use Time Machine only after a meaningful failed Craps play. Do not waste it on small practice bets.
+
+### What should I do after a bad Craps throw?
+
+Stop, read the table again, check whether one die is still useful, and recover with controlled movement instead of throwing faster.
+
+### When should I leave the Craps table?
+
+Leave after the planned payout, after the item window ends, or when the team starts panic throwing without reading the table.

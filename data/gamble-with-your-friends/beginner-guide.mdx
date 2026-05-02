@@ -1,0 +1,983 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const quickFactsColumns = [
+  { key: "system", label: "System" },
+  { key: "LaunchVersionInfo", label: "Launch-Version Info" },
+  { key: "BeginnerTakeaway", label: "Beginner Takeaway" },
+];
+
+export const quickFactsRows = [
+  {
+    system: "Players",
+    LaunchVersionInfo: "1-6 player online co-op. Solo play is possible, but the Steam page says it is not advised.",
+    BeginnerTakeaway:
+      "Solo works for learning controls, but the game is clearly built around co-op coordination and shared-bank chaos.",
+  },
+  {
+    system: "Day timer",
+    LaunchVersionInfo: "Each casino day gives your team 5 minutes inside the casino.",
+    BeginnerTakeaway:
+      "Know your first table and item plan before entering. The timer is short enough that confusion becomes expensive.",
+  },
+  {
+    system: "Shared bank",
+    LaunchVersionInfo:
+      "Your group shares one bank account and one massive debt.",
+    BeginnerTakeaway:
+      "One bad all-in can damage the entire team, even if another player was playing well.",
+  },
+  {
+    system: "Quota",
+    LaunchVersionInfo:
+      "Day-one footage and community notes show early quotas starting low, with one visible first run around a $1.2K target from a $1,000 bank.",
+    BeginnerTakeaway:
+      "Use early runs to learn bankroll control before pushing higher floors.",
+  },
+  {
+    system: "Floors",
+    LaunchVersionInfo: "The casino tower has 4 themed floors.",
+    BeginnerTakeaway:
+      "Higher floors bring larger opportunities, but also larger ways to throw the run.",
+  },
+  {
+    system: "Games",
+    LaunchVersionInfo: "The game has 17 games of chance.",
+    BeginnerTakeaway:
+      "Learn the early tables first. Do not pretend every game has been solved on day one.",
+  },
+  {
+    system: "Items",
+    LaunchVersionInfo: "There are 15+ sketchy items.",
+    BeginnerTakeaway:
+      "Items are real strategy tools, not just jokes. Many beginner wins come from using one strong item correctly.",
+  },
+  {
+    system: "Endings",
+    LaunchVersionInfo: "The game has around 2-3 hours of playtime and 3 endings.",
+    BeginnerTakeaway:
+      "Ignore endings until you understand quotas, tickets, items, and floor progression.",
+  },
+  {
+    system: "Achievements",
+    LaunchVersionInfo: "Steam currently lists 55 achievements.",
+    BeginnerTakeaway:
+      "Achievements are useful for discovering floor-specific games, but full unlock routes deserve a separate guide.",
+  },
+];
+
+export const firstRunColumns = [
+  { key: "phase", label: "Phase" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const firstRunRows = [
+  {
+    phase: "Lobby setup",
+    whatToDo:
+      "Check tickets, body parts, available items, and whether anyone bought something that needs to be retrieved.",
+    whyItMatters:
+      "The lobby decides your starting tools. A wasted ticket can matter more than a small casino loss.",
+  },
+  {
+    phase: "Item decision",
+    whatToDo:
+      "Pick one planned item strategy instead of buying several random things at once.",
+    whyItMatters:
+      "New groups often lose track of who bought what, where it went, and when it should be used.",
+  },
+  {
+    phase: "Enter together",
+    whatToDo:
+      "Talk to the loan shark, enter the limo, and make sure the item holder is ready.",
+    whyItMatters:
+      "Once the day starts, the 5-minute timer makes slow setup painful.",
+  },
+  {
+    phase: "First table",
+    whatToDo:
+      "Start with one table your group understands: Roulette, Duck Race, Blackjack, Slots, Street Craps, or Wheel of Fortune.",
+    whyItMatters:
+      "A single coordinated plan is easier to control than six people draining the shared bank at different machines.",
+  },
+  {
+    phase: "Money push",
+    whatToDo:
+      "Use medium bets or an item-backed big bet only after the team understands the table.",
+    whyItMatters:
+      "Blind max bets are how a beginner group loses the run before learning anything.",
+  },
+  {
+    phase: "End-of-day review",
+    whatToDo:
+      "Check who gained, who lost, how many tickets you earned, and whether body parts need to be restored.",
+    whyItMatters:
+      "The next day is easier when your ticket spending responds to the previous day’s failure pattern.",
+  },
+];
+
+export const quotaColumns = [
+  { key: "topic", label: "Quota Topic" },
+  { key: "whatWeKnow", label: "What We Know So Far" },
+  { key: "beginnerRule", label: "Beginner Rule" },
+];
+
+export const quotaRows = [
+  {
+    topic: "Timer",
+    whatWeKnow:
+      "Each casino day lasts 5 minutes.",
+    beginnerRule:
+      "Choose your first table quickly instead of wandering between machines.",
+  },
+  {
+    topic: "Early target",
+    whatWeKnow:
+      "One day-one footage run shows about $1,000 starting money and a $1.2K quota.",
+    beginnerRule:
+      "Treat early numbers as launch-version observations, not permanent wiki constants.",
+  },
+  {
+    topic: "Scaling",
+    whatWeKnow:
+      "Higher floors unlock as the group gets richer and bolder, but exact threshold values still need cleaner testing.",
+    beginnerRule:
+      "Expect later days to require stronger items, larger bets, or better coordination.",
+  },
+  {
+    topic: "Excess value",
+    whatWeKnow:
+      "Community footage shows an over-quota reward line, including one visible 17% quota excess reward.",
+    beginnerRule:
+      "Overshooting can help, but only if the team can actually preserve the result until the day resolves.",
+  },
+  {
+    topic: "Failure",
+    whatWeKnow:
+      "Missing quota can trigger a punishment scene, including grave / execution-style failure moments in day-one footage.",
+    beginnerRule:
+      "Use emergency tools when the timer is low instead of slowly grinding tiny bets.",
+  },
+  {
+    topic: "Body part conversion",
+    whatWeKnow:
+      "A gun/body-part interaction was observed paying about 33% of quota for a shot-off body part.",
+    beginnerRule:
+      "Treat body parts as emergency economy, not the default plan.",
+  },
+];
+
+export const itemColumns = [
+  { key: "item", label: "Item / Effect" },
+  { key: "observedEffect", label: "Observed Effect" },
+  { key: "bestUse", label: "Best Beginner Use" },
+  { key: "status", label: "Status" },
+];
+
+export const itemRows = [
+  {
+    item: "Time Machine / Rewind",
+    observedEffect:
+      "Can rewind time by about 60 seconds in observed day-one footage.",
+    bestUse:
+      "Use after a failed large bet or failed item combo, not randomly at the start of a floor.",
+    status: "Observed; edge cases need testing.",
+  },
+  {
+    item: "Prevent Loss Nearby",
+    observedEffect:
+      "While active, it can prevent nearby losses.",
+    bestUse:
+      "Group players around fast tables or slots before activating it.",
+    status: "Observed; range and duration need testing.",
+  },
+  {
+    item: "Free All-In Coin",
+    observedEffect:
+      "Allows a single free all-in style bet.",
+    bestUse:
+      "Pair with Increase Max Bet or a high-multiplier table.",
+    status: "Observed.",
+  },
+  {
+    item: "Increase Maximum Bet",
+    observedEffect:
+      "Raises the maximum bet on a selected table or keypad.",
+    bestUse:
+      "Use before a protected or free large bet.",
+    status: "Observed.",
+  },
+  {
+    item: "Increase Profit / Profit Aura",
+    observedEffect:
+      "Increases profit while active or near the active player.",
+    bestUse:
+      "Activate before a planned high-value win attempt.",
+    status: "Observed.",
+  },
+  {
+    item: "Alcohol / Drunk Profit Buff",
+    observedEffect:
+      "Increases profit while drunk, but makes control harder.",
+    bestUse:
+      "Give it to the player who already understands the table.",
+    status: "Observed.",
+  },
+  {
+    item: "Loss Reduction / Insurance",
+    observedEffect:
+      "One observed run mentions losing 25% less money.",
+    bestUse:
+      "Use when the team must keep gambling but cannot afford a full loss.",
+    status: "Observed; exact item name needs confirmation.",
+  },
+  {
+    item: "Chance to Revert Last Loss",
+    observedEffect:
+      "Can give a chance to reverse the most recent loss.",
+    bestUse:
+      "Use after a meaningful loss, not after a tiny minimum bet.",
+    status: "Observed.",
+  },
+  {
+    item: "Get Ticket on Profit",
+    observedEffect:
+      "Appears to grant tickets when profit is made.",
+    bestUse:
+      "Best for longer-term ticket farming when the run is stable.",
+    status: "Observed; exact trigger rules need testing.",
+  },
+  {
+    item: "Mystery Box / Random Item",
+    observedEffect:
+      "Gives a random item.",
+    bestUse:
+      "Buy only after the team has covered essential items or body recovery.",
+    status: "Observed.",
+  },
+  {
+    item: "Gun / Body Part Tool",
+    observedEffect:
+      "Can remove body parts and convert them into quota or ticket value.",
+    bestUse:
+      "Emergency recovery when normal gambling options are failing.",
+    status: "Observed; exact values need testing.",
+  },
+  {
+    item: "Screwdriver",
+    observedEffect:
+      "Seen as a purchasable item with a 3-ticket requirement.",
+    bestUse:
+      "Do not prioritize until the effect is verified.",
+    status: "Name and cost observed; effect not confirmed.",
+  },
+];
+
+export const floorClueColumns = [
+  { key: "floor", label: "Floor" },
+  { key: "confirmedClues", label: "Confirmed Clues From Achievements / Footage" },
+  { key: "beginnerAdvice", label: "Beginner Advice" },
+];
+
+export const floorClueRows = [
+  {
+    floor: "Floor 1",
+    confirmedClues:
+      "Steam achievements reference Roulette, Duck Race, Wheel of Fortune, Street Craps, Blackjack, and Slot Machine on Floor 1.",
+    beginnerAdvice:
+      "This is the best learning floor. Test games here before gambling aggressively on later floors.",
+  },
+  {
+    floor: "Floor 2",
+    confirmedClues:
+      "Steam achievements reference Penguin Cross, Keno, Crash, HiLo, Plinko, and Money Wheel on Floor 2.",
+    beginnerAdvice:
+      "Bring stronger items before experimenting. Floor 2 already introduces higher-risk specialist games.",
+  },
+  {
+    floor: "Floor 3",
+    confirmedClues:
+      "Steam achievements reference Penguin Cross, Wheel of Fortune, Street Craps, Dragon Tower, 1P Poker, Mine Sweeper, and HiLo on Floor 3.",
+    beginnerAdvice:
+      "Do not treat Floor 3 as a beginner target. Save detailed play for the Best Games and Achievements guides.",
+  },
+  {
+    floor: "Floor 4",
+    confirmedClues:
+      "Steam achievements reference Roulette, Penguin Cross, Keno, Plinko, and Dragon Tower on Floor 4.",
+    beginnerAdvice:
+      "Floor 4 is late-run territory. This beginner guide should only explain the existence of the floor, not pretend to solve it.",
+  },
+];
+
+export const beginnerGamesColumns = [
+  { key: "game", label: "Game" },
+  { key: "whereItAppears", label: "Where It Appears" },
+  { key: "beginnerRead", label: "Beginner Read" },
+  { key: "risk", label: "Risk" },
+];
+
+export const beginnerGamesRows = [
+  {
+    game: "Roulette",
+    whereItAppears: "Floor 1 and Floor 4 achievement clues",
+    beginnerRead:
+      "Simple to understand and useful for fast red/black or number bets.",
+    risk: "High if players chase losses.",
+  },
+  {
+    game: "Duck Race",
+    whereItAppears: "Floor 1 achievement clues",
+    beginnerRead:
+      "Easy to play and easy to over-spam. Good for learning the shared-bank pressure.",
+    risk: "High tilt risk.",
+  },
+  {
+    game: "Blackjack",
+    whereItAppears: "Floor 1 achievement clues",
+    beginnerRead:
+      "More controllable if one player knows basic hit/stand logic.",
+    risk: "Medium to high.",
+  },
+  {
+    game: "Slot Machine",
+    whereItAppears: "Floor 1 achievement clues",
+    beginnerRead:
+      "Best with small bets, jackpot attempts, or prevent-loss effects.",
+    risk: "Can drain money quickly if several players spam machines.",
+  },
+  {
+    game: "Street Craps",
+    whereItAppears: "Floor 1 and Floor 3 achievement clues",
+    beginnerRead:
+      "Strong once your group understands the dice flow, but confusing for first-timers.",
+    risk: "Medium to high until learned.",
+  },
+  {
+    game: "Wheel of Fortune / Money Wheel",
+    whereItAppears: "Floor 1, Floor 2, and Floor 3 achievement clues",
+    beginnerRead:
+      "Useful for high-variance recovery attempts and achievement goals.",
+    risk: "High variance.",
+  },
+  {
+    game: "Penguin Cross",
+    whereItAppears: "Floor 2, Floor 3, and Floor 4 achievement clues",
+    beginnerRead:
+      "A later-floor game. Learn it with controlled bets before pushing multipliers.",
+    risk: "Unclear until more testing.",
+  },
+  {
+    game: "Keno",
+    whereItAppears: "Floor 2 and Floor 4 achievement clues",
+    beginnerRead:
+      "Do not prioritize on a first run unless a challenge or achievement specifically points you there.",
+    risk: "Needs separate testing.",
+  },
+  {
+    game: "Crash",
+    whereItAppears: "Floor 2 achievement clues",
+    beginnerRead:
+      "Potentially strong but dangerous because greed is built into the cash-out timing.",
+    risk: "High.",
+  },
+  {
+    game: "HiLo",
+    whereItAppears: "Floor 2 and Floor 3 achievement clues",
+    beginnerRead:
+      "Probably better for players who understand risk ladders and can stop after a profit window.",
+    risk: "Medium to high.",
+  },
+  {
+    game: "Plinko",
+    whereItAppears: "Floor 2 and Floor 4 achievement clues",
+    beginnerRead:
+      "Fast, fun, and dangerous when max-bet spammed.",
+    risk: "High bankroll bleed.",
+  },
+  {
+    game: "Dragon Tower",
+    whereItAppears: "Floor 3 and Floor 4 achievement clues",
+    beginnerRead:
+      "Late-floor game. Avoid blind large bets until you understand the pathing/risk structure.",
+    risk: "High.",
+  },
+  {
+    game: "1P Poker",
+    whereItAppears: "Floor 3 achievement clues",
+    beginnerRead:
+      "Avoid serious bets until you understand card locking and hand requirements.",
+    risk: "High for blind first attempts.",
+  },
+  {
+    game: "Mine Sweeper",
+    whereItAppears: "Floor 3 achievement clues",
+    beginnerRead:
+      "Potentially skill-influenced, but not a beginner priority.",
+    risk: "Medium to high.",
+  },
+  {
+    game: "Other games",
+    whereItAppears: "Official count says 17 total games of chance",
+    beginnerRead:
+      "Leave the remaining games for the Best Games guide after direct testing.",
+    risk: "Do not invent odds before testing.",
+  },
+];
+
+export const soloColumns = [
+  { key: "mode", label: "Mode" },
+  { key: "howItFeels", label: "How It Feels" },
+  { key: "bestRule", label: "Best Rule" },
+];
+
+export const soloRows = [
+  {
+    mode: "Solo",
+    howItFeels:
+      "Cleaner decision-making, but less recovery because you cannot split roles or stack group coordination.",
+    bestRule:
+      "Use conservative bets, prioritize reliable items, and avoid body-part loss unless the run is about to fail.",
+  },
+  {
+    mode: "2-3 players",
+    howItFeels:
+      "The best learning setup. Enough people to coordinate, not enough to instantly erase the bank.",
+    bestRule:
+      "Assign one main bettor and one item holder.",
+  },
+  {
+    mode: "4-6 players",
+    howItFeels:
+      "The funniest and most dangerous setup. Several people can spend the same shared bank at once.",
+    bestRule:
+      "Call out big bets before placing them.",
+  },
+];
+
+export const mistakesColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItLosesRuns", label: "Why It Loses Runs" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakesRows = [
+  {
+    mistake: "Max betting a game you just discovered",
+    whyItLosesRuns:
+      "Later-floor games can burn thousands before the player understands the rules.",
+    fix: "Minimum bet every new table once before committing real money.",
+  },
+  {
+    mistake: "Everyone gambling at once",
+    whyItLosesRuns:
+      "The shared bank can disappear faster than anyone can call out what happened.",
+    fix: "Pick one main bettor for risky plays.",
+  },
+  {
+    mistake: "Spending tickets instantly",
+    whyItLosesRuns:
+      "Tickets buy run-changing items and body recovery. Wasting them weakens the next day.",
+    fix: "Agree on purchases before buying mystery boxes, rerolls, or cosmetics.",
+  },
+  {
+    mistake: "Using Time Machine without a plan",
+    whyItLosesRuns:
+      "A rewind only helps if the team knows what mistake it is rewinding and what to do differently.",
+    fix: "Call the target bet before using it.",
+  },
+  {
+    mistake: "Ignoring body part penalties",
+    whyItLosesRuns:
+      "Losing a mouth, eye, or body can affect communication, vision, or movement.",
+    fix: "Use body parts as emergency economy, not casual comedy.",
+  },
+  {
+    mistake: "Chasing a personal comeback",
+    whyItLosesRuns:
+      "A player who is negative can keep risking the group bankroll to fix their own graph.",
+    fix: "Use the end-of-day graph to adjust roles, not to justify revenge betting.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To survive your first runs in Gamble With Your Friends, learn the shared-bank loop first: set up in the lobby, enter the casino together, build enough money for the daily quota, use tickets on real items, and stop making dangerous bets once your team is safe.**
+
+In the launch version, the core beginner loop is:
+
+1. **Start in the lobby** with tickets, items, cosmetics, and body-part decisions.
+2. **Enter the limo together** and begin a 5-minute casino day.
+3. **Build the shared bank above quota.** Day-one footage shows one early run around a **$1.2K** target from a **$1,000** bank.
+4. **Use items deliberately**, especially Rewind, Prevent Loss, Free All-In, Increase Max Bet, and Profit buffs.
+5. **Treat body parts as emergency economy.** One observed gun/body-part interaction paid about **33% of quota**.
+6. **Treat solo as hard mode.** Solo play is possible, but the game is built around co-op chaos."Stop dangerous bets once the quota is safe.
+
+The beginner rule is simple:
+
+**Learn the money loop before chasing endings, achievements, or high-floor bets.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-lobby-items.webp"
+    alt="Gamble With Your Friends lobby with tickets, items, cosmetics, and pre-run preparation."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The lobby is where tickets, items, body parts, and the next run plan come together.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="source-note">
+  Source note
+</h2>
+
+This is a **launch-version community wiki style guide**, not a final odds database.
+
+The structure uses:
+
+- official Steam store information for player count, shared-bank structure, daily timer, number of games, items, floors, solo support, and endings
+- Steam achievement data for floor-specific game clues
+- day-one creator footage, transcripts, forum/wiki-style observations, and community notes for observed item behavior and early-run examples
+
+<GuideCallout title="Data integrity note">
+Numbers marked as “observed” are early community/footage observations, not final tested constants. We will replace them with cleaner direct-test data when quota scaling, item durations, item costs, table pools, and exact game odds are verified.
+</GuideCallout>
+
+---
+
+<h2 id="launch-version-basics">
+  Launch-version basics
+</h2>
+
+<GuideTable
+  caption="Gamble With Your Friends beginner facts for the launch version."
+  columns={quickFactsColumns}
+  rows={quickFactsRows}
+/>
+
+---
+
+<h2 id="first-run-plan">
+  First run plan
+</h2>
+
+Your first goal is not to see every table. Your first goal is to understand the loop without letting the shared bank collapse.
+
+<GuideTable
+  caption="Best first-run route in Gamble With Your Friends."
+  columns={firstRunColumns}
+  rows={firstRunRows}
+/>
+
+A practical first run looks like this:
+
+1. check tickets and body parts
+2. buy one planned item if you can afford it
+3. retrieve the item before entering the limo
+4. choose one first table as a group
+5. use small bets to learn controls
+6. move to medium bets once the table is understood
+7. use one item-backed push if the team needs a bigger swing
+8. review the graph before spending tickets for the next day
+
+<GuideCallout title="Beginner coordination rule">
+Do not let every player freestyle at the same time. In a shared-bank game, six small bad decisions can be worse than one obvious all-in mistake.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-first-floor-casino.webp"
+    alt="Gamble With Your Friends first casino floor with players choosing early games and learning the shared money system."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Floor 1 teaches the core loop: choose a game, manage the shared bank, and survive the daily target.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="quota-explained">
+  Quota explained
+</h2>
+
+Each casino day gives your group **5 minutes** to make enough money for the loan shark’s quota. If you miss the target, the game can send the group into a punishment scene instead of simply rolling into the next day.
+
+<GuideTable
+  caption="How quota works in Gamble With Your Friends."
+  columns={quotaColumns}
+  rows={quotaRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-failed-quota-grave.webp"
+    alt="Gamble With Your Friends failed quota scene where players are punished after missing the daily target."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Missing quota can lead to a punishment scene, so the timer matters as much as the table choice.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="shared-bank">
+  The shared bank is the real enemy
+</h2>
+
+Gamble With Your Friends is a co-op game, but the most dangerous opponent is usually your own team.
+
+The bank is shared. If one player wins a big Roulette bet and another player immediately spends it on Duck Race, the team has not really stabilized. The money only passed through your hands before returning to the casino.
+
+A good team setup is:
+
+- one player calls the current target
+- one player carries the strongest item
+- one player handles complicated tables
+- one player watches the timer
+- everyone else uses low-risk bets or waits during large plays
+
+For 4-6 player groups, make one rule before the floor starts:
+
+**No large bets unless the team calls it.**
+
+---
+
+<h2 id="best-beginner-games">
+  Best beginner games
+</h2>
+
+The game has **17 games of chance**, but this beginner guide should not pretend that every table is fully solved. The list below combines day-one footage with floor clues from the Steam achievement list.
+
+<GuideTable
+  caption="Beginner game recommendations for Gamble With Your Friends."
+  columns={beginnerGamesColumns}
+  rows={beginnerGamesRows}
+/>
+
+For your first serious run:
+
+- use **Roulette** when the team wants simple, fast outcomes
+- use **Duck Race** only if the group can control repeated bets
+- use **Blackjack** only with someone who understands basic decisions
+- use **Slots** with tiny bets or item support
+- save **Street Craps** for the dedicated craps guide
+- avoid blind serious bets on **Keno, Crash, HiLo, Plinko, Dragon Tower, Poker, and Mine Sweeper**
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-shared-money-duck-race.webp"
+    alt="Gamble With Your Friends Duck Race showing how repeated quick bets can drain the shared team bankroll."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Duck Race is beginner-friendly mechanically, but risky psychologically because repeated bets are so fast.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="tickets-items">
+  Tickets and items: what to buy first
+</h2>
+
+Tickets are one of the most important resources in Gamble With Your Friends. You can earn them by hitting quota, completing challenges, overshooting goals, and trading body parts.
+
+For beginners, the best item priorities are:
+
+1. **Prevent Loss Nearby**
+2. **Free All-In Coin**
+3. **Time Machine / Rewind**
+4. **Increase Max Bet**
+5. **Increase Profit**
+6. **Loss Reduction / Insurance**
+7. **Ticket-on-Profit tools**
+8. **Mystery Box only when the team can afford chaos**
+
+<GuideTable
+  caption="Observed Gamble With Your Friends item effects and best beginner uses."
+  columns={itemColumns}
+  rows={itemRows}
+/>
+
+### Buying and retrieving items
+
+Use this checklist before entering the limo:
+
+1. pick the item
+2. place or confirm it in the buying area
+3. press the buy button
+4. check whether the item moved to the retrieve area
+5. have one player physically carry the item
+6. say when the item should be used
+
+<GuideCallout title="Item-buying rule">
+Do not buy an item unless the team can answer three questions: who carries it, which table it supports, and when it gets used.
+</GuideCallout>
+
+For a deeper breakdown, use <Link href="/gamble-with-your-friends/tickets-items-body-parts">Tickets, Items, and Body Parts Guide</Link>.
+
+---
+
+<h2 id="body-parts">
+  Body parts are emergency economy
+</h2>
+
+Body parts are funny, but they are also part of the run economy.
+
+You can lose, sell, or trade body parts depending on the run state. In day-one footage, losing a mouth made voice harder to understand, losing an eye affected vision, and losing the body affected movement badly enough that other players had to carry the person.
+
+One early observed value:
+
+**A gun/body-part interaction can pay about 33% of the quota for shooting off a body part.**
+
+Use body parts when:
+
+- the team is under heavy pressure
+- normal gambling options are failing
+- a key ticket purchase would change the next day
+- the player agrees to the trade
+- the run would likely fail without it
+
+Do not use body parts when:
+
+- the group is only doing it for comedy
+- the player needs vision, voice, or movement for the next floor
+- the team has not agreed who is losing what
+- you have a safer item-based recovery option
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-tickets-body-parts.webp"
+    alt="Gamble With Your Friends tickets and body parts system after a casino day."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Body parts can save a bad day, but the penalty can carry into the next one.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="floors">
+  Floor clues and progression
+</h2>
+
+Gamble With Your Friends has **4 themed casino floors**. Higher floors unlock as the group gets richer, and each entry randomizes the available games.
+
+Instead of pretending the full floor pool is solved, use the confirmed floor clues below:
+
+<GuideTable
+  caption="Known floor clues from Steam achievements and day-one footage."
+  columns={floorClueColumns}
+  rows={floorClueRows}
+/>
+
+<GuideCallout title="Floor testing status">
+The floor table above uses confirmed clues from achievements and footage. Exact unlock thresholds, full game pools, and best routes for Floors 3-4 should be handled in the Best Games, Achievements, and Endings guides after more testing.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-floor-two-penguin.webp"
+    alt="Gamble With Your Friends Floor 2 footage showing Penguin Cross and higher floor access."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Later floors introduce bigger swings and more specialized games, so item planning becomes more important.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="solo-play">
+  Solo play versus co-op
+</h2>
+
+Solo play is possible, but the game is clearly built around friends, voice, coordination, and shared-bank chaos.
+
+<GuideTable
+  caption="Solo and co-op beginner recommendations."
+  columns={soloColumns}
+  rows={soloRows}
+/>
+
+Solo tips:
+
+- play slower
+- avoid high-variance games until you understand them
+- protect body parts early
+- save tickets for reliable items
+- use Rewind only when you know exactly what changed
+- treat the quota as the only objective
+
+Co-op tips:
+
+- call every large bet
+- assign item roles
+- agree before body-part trades
+- avoid six people betting at once
+- use the end-of-day graph to decide who should take fewer risks next day
+
+---
+
+<h2 id="when-to-stop">
+  When to stop gambling
+</h2>
+
+Stopping is the strongest beginner skill.
+
+Stop gambling when:
+
+- the team is over the required target
+- the timer is almost over
+- multiple people are betting at once
+- someone just won a large amount
+- someone is chasing losses
+- the team has no item backup
+- a player is max betting a game they do not understand
+
+Keep gambling only when:
+
+- you are still below the target
+- you have a protected item combo
+- you are completing a low-risk challenge
+- the team agrees to one final push
+- the bet size cannot kill the run
+
+<GuideCallout title="The best beginner strategy">
+**PRO TIP: THE SURVIVAL RULE**
+After hitting quota, the default move is not "one more spin." The default move is "**protect the money.**" The casino wins when you turn a safe win into a wipe.
+</GuideCallout>
+
+---
+
+<h2 id="common-mistakes">
+  Common beginner mistakes
+</h2>
+
+<GuideTable
+  caption="Common beginner mistakes in Gamble With Your Friends."
+  columns={mistakesColumns}
+  rows={mistakesRows}
+/>
+
+The fastest way to improve is to add team rules before the next day:
+
+- no one spends tickets silently
+- no serious bets on unknown games
+- one player carries the strongest item
+- one player watches the timer
+- body parts are emergency resources, not automatic punishments
+
+---
+
+<h2 id="achievements-and-endings">
+  Achievements and endings
+</h2>
+
+Gamble With Your Friends has **55 Steam achievements** and **3 endings**.
+
+For a beginner page, the important point is not to list every achievement. The useful point is that achievements reveal which games matter by floor.
+
+Examples from the Steam achievement list include:
+
+- Floor 1: Roulette, Duck Race, Wheel of Fortune, Street Craps, Blackjack, Slot Machine
+- Floor 2: Penguin Cross, Keno, Crash, HiLo, Plinko, Money Wheel
+- Floor 3: Dragon Tower, 1P Poker, Mine Sweeper, HiLo, Street Craps
+- Floor 4: Roulette, Penguin Cross, Keno, Plinko, Dragon Tower
+
+<GuideCallout title="Do not fake ending data">
+While the game features 3 distinct endings, the specific trigger conditions are currently being stress-tested to ensure accuracy. To maintain the reliability of this guide, we will update this section with confirmed routes only after direct verification is complete. Stay tuned.
+</GuideCallout>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the first quota in Gamble With Your Friends?
+
+One day-one footage run shows about **$1,000** starting money and a **$1.2K** target. Treat this as an observed launch-version example, not a permanent formula.
+
+### How long is each casino day?
+
+Each casino day lasts **5 minutes**.
+
+### What happens if you miss quota?
+
+Missing quota can trigger a punishment scene and may cost the group momentum, body parts, or the run state depending on the situation.
+
+### Is money shared?
+
+Yes. The group shares one bank account and one debt. A reckless player can spend money that another player just earned.
+
+### Can you play solo?
+
+Yes. Solo play is possible, but the Steam page says it is not advised unless you are feeling lucky.
+
+### What should I buy first with tickets?
+
+Start with reliable run-changing tools: **Prevent Loss Nearby**, **Free All-In**, **Time Machine / Rewind**, **Increase Max Bet**, or **Increase Profit**. Avoid mystery boxes until your group can afford randomness.
+
+### Are mystery boxes worth buying?
+
+They can be, but they are not reliable first purchases. Buy them after the team has handled important items, body recovery, or a clear next-floor plan.
+
+### What does the gun do?
+
+In early community footage, the gun/body-part interaction can remove body parts and convert them into quota value. One observed value was about **33% of quota**.
+
+### Duck Race or Roulette: which is better for a fast quota push?
+
+Roulette is cleaner for a planned fast push **when the team commits to 1:1 bets (Red/Black) and ignores high-risk numbers.** While Duck Race is easier to spam, its randomness makes it more dangerous for undisciplined groups.
+
+### Which Floor 1 game should beginners learn first?
+
+Roulette is the easiest to understand. Blackjack is better for players who know basic card decisions. Street Craps may become strong, but it needs its own guide.
+
+### How do you unlock Floor 2?
+
+The Steam page says higher floors unlock as you get richer and bolder. Exact launch-version thresholds still need cleaner testing.
+
+### How many floors are there?
+
+There are **4 themed casino floors**.
+
+### How many games are there?
+
+There are **17 games of chance**.
+
+### How many endings are there?
+
+There are **3 endings**.
+
+### How many achievements are there?
+
+Steam currently lists **55 achievements**.
+
+### What is the biggest beginner mistake?
+
+The biggest mistake is treating the shared bank like personal spending money. In this game, one player’s bad bet can become everyone’s problem.

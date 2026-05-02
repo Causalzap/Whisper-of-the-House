@@ -1,0 +1,864 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const recommendationColumns = [
+  { key: "rank", label: "Rank" },
+  { key: "game", label: "Game" },
+  { key: "bestFor", label: "Best For" },
+  { key: "beginnerRead", label: "Beginner Read" },
+];
+
+export const recommendationRows = [
+  {
+    rank: "1",
+    game: "Roulette",
+    bestFor: "Simple fast quota pushes",
+    beginnerRead:
+      "The easiest game to understand quickly. Good for planned red/black or number bets, but dangerous if the team starts chasing losses.",
+  },
+  {
+    rank: "2",
+    game: "Blackjack",
+    bestFor: "Controlled play with one table leader",
+    beginnerRead:
+      "Better than pure chaos if one player knows when to hit, stand, or stop. Bad when streak challenges bait the group into weak hands.",
+  },
+  {
+    rank: "3",
+    game: "Slot Machine",
+    bestFor: "Item-supported betting",
+    beginnerRead:
+      "Weak as blind spam, but much better with Holy Statue, Bonus Draw, or small-bet jackpot attempts.",
+  },
+  {
+    rank: "4",
+    game: "Street Craps",
+    bestFor: "Skilled groups and cheese strategies",
+    beginnerRead:
+      "Potentially strong, but not beginner-clean. Save serious play for the dedicated Craps Cheese Guide.",
+  },
+  {
+    rank: "5",
+    game: "Duck Race",
+    bestFor: "Simple learning and quick low-complexity bets",
+    beginnerRead:
+      "Very easy to play, which is also the problem. Players can spam it and drain the shared bank before the team reacts.",
+  },
+  {
+    rank: "6",
+    game: "Wheel of Fortune / Money Wheel",
+    bestFor: "Emergency multiplier attempts",
+    beginnerRead:
+      "Useful when the team needs a fast swing, but too high-variance to be the default plan.",
+  },
+  {
+    rank: "7",
+    game: "Penguin Cross",
+    bestFor: "Floor 2+ controlled testing",
+    beginnerRead:
+      "Confirmed by achievements and footage as a later-floor game. Fun, but do not blind max bet it on first contact.",
+  },
+];
+
+export const floorGameColumns = [
+  { key: "floor", label: "Floor" },
+  { key: "confirmedGames", label: "Confirmed Game Clues" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const floorGameRows = [
+  {
+    floor: "Floor 1",
+    confirmedGames:
+      "Roulette, Duck Race, Wheel of Fortune, Street Craps, Blackjack, Slot Machine",
+    whatItMeans:
+      "This is the learning floor. Most core table types appear here in simpler form, and it is the safest place to test controls.",
+  },
+  {
+    floor: "Floor 2",
+    confirmedGames:
+      "Penguin Cross, Keno, Crash, HiLo, Plinko, Money Wheel",
+    whatItMeans:
+      "Floor 2 starts adding higher-variance and specialist games. Bring items before experimenting.",
+  },
+  {
+    floor: "Floor 3",
+    confirmedGames:
+      "Penguin Cross, Wheel of Fortune, Street Craps, Dragon Tower, 1P Poker, Mine Sweeper, HiLo",
+    whatItMeans:
+      "Floor 3 is not a beginner testing floor. Table knowledge and item planning matter much more.",
+  },
+  {
+    floor: "Floor 4",
+    confirmedGames:
+      "Roulette, Penguin Cross, Keno, Plinko, Dragon Tower, Blackjack, Crash, Duck Race, Mine Sweeper, Money Wheel",
+    whatItMeans:
+      "Floor 4 should be treated as late-run territory. The known pool already includes several high-variance games, so do not enter without item planning.",
+  },
+];
+
+export const gameRiskColumns = [
+  { key: "game", label: "Game" },
+  { key: "floorClues", label: "Floor Clues" },
+  { key: "riskLevel", label: "Risk Level" },
+  { key: "status", label: "Status" },
+];
+
+export const gameRiskRows = [
+  {
+    game: "Roulette",
+    floorClues: "Floor 1, Floor 4",
+    riskLevel: "Medium to High",
+    status: "Core beginner game.",
+  },
+  {
+    game: "Duck Race",
+    floorClues: "Floor 1, Floor 4",
+    riskLevel: "Medium",
+    status: "Easy to learn, easy to overplay.",
+  },
+  {
+    game: "Blackjack",
+    floorClues: "Floor 1, Floor 4",
+    riskLevel: "Medium",
+    status: "Good if one player knows basic decisions.",
+  },
+  {
+    game: "Slot Machine",
+    floorClues: "Floor 1",
+    riskLevel: "Medium to High",
+    status: "Best with item support.",
+  },
+  {
+    game: "Street Craps",
+    floorClues: "Floor 1, Floor 3",
+    riskLevel: "Medium",
+    status: "Strong but needs a dedicated guide.",
+  },
+  {
+    game: "Wheel of Fortune / Money Wheel",
+    floorClues: "Floor 1, Floor 2, Floor 3, Floor 4",
+    riskLevel: "High",
+    status: "Emergency multiplier game.",
+  },
+  {
+    game: "Penguin Cross",
+    floorClues: "Floor 2, Floor 3, Floor 4",
+    riskLevel: "Medium to High",
+    status: "Later-floor testing game.",
+  },
+  {
+    game: "Keno",
+    floorClues: "Floor 2, Floor 4",
+    riskLevel: "Unknown to High",
+    status: "Needs more direct testing.",
+  },
+  {
+    game: "Crash",
+    floorClues: "Floor 2, Floor 4",
+    riskLevel: "High",
+    status: "Cash-out timing game.",
+  },
+  {
+    game: "HiLo",
+    floorClues: "Floor 2, Floor 3",
+    riskLevel: "Medium to High",
+    status: "Risk-ladder guessing game.",
+  },
+  {
+    game: "Plinko",
+    floorClues: "Floor 2, Floor 4",
+    riskLevel: "High",
+    status: "Fast high-variance game.",
+  },
+  {
+    game: "Dragon Tower",
+    floorClues: "Floor 3, Floor 4",
+    riskLevel: "High",
+    status: "Late-floor path/risk game.",
+  },
+  {
+    game: "1P Poker",
+    floorClues: "Floor 3",
+    riskLevel: "High for blind players",
+    status: "Requires hand knowledge.",
+  },
+  {
+    game: "Mine Sweeper",
+    floorClues: "Floor 3, Floor 4",
+    riskLevel: "Medium to High",
+    status: "Logic-based but dangerous under time pressure.",
+  },
+];
+
+export const itemSupportColumns = [
+  { key: "item", label: "Item" },
+  { key: "bestGames", label: "Best Games To Pair With" },
+  { key: "why", label: "Why It Helps" },
+];
+
+export const itemSupportRows = [
+  {
+    item: "Golden Chip",
+    bestGames: "Roulette, Street Craps, Blackjack, Wheel",
+    why:
+      "A single free all-in is strongest on a table where the group understands the payout and can choose a meaningful bet.",
+  },
+  {
+    item: "Taser",
+    bestGames: "Any keypad-based high-value table",
+    why:
+      "Increasing maximum bet matters most before a free all-in, protected bet, or profit-buffed push.",
+  },
+  {
+    item: "Holy Statue",
+    bestGames: "Slots, Wheel, Roulette, fast-repeat games",
+    why:
+      "Preventing nearby loss is strongest when players can cluster and produce several outcomes during the active window.",
+  },
+  {
+    item: "Microphone / Drink / Camera",
+    bestGames: "Roulette, Blackjack, Wheel, Street Craps",
+    why:
+      "Profit buffs are best when the team already has a realistic win attempt instead of random tiny bets.",
+  },
+  {
+    item: "Time Machine",
+    bestGames: "Roulette, Wheel, Street Craps, Dragon Tower",
+    why:
+      "Rollback is best after a planned high-impact mistake, not after a tiny loss.",
+  },
+  {
+    item: "Quota Gun",
+    bestGames: "None directly",
+    why:
+      "Quota Gun is not a table item. It is an emergency quota tool when normal games are too slow or the bank is nearly dead.",
+  },
+];
+
+export const beginnerMistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "fix", label: "Fix" },
+];
+
+export const beginnerMistakeRows = [
+  {
+    mistake: "Using Wheel as the anchor game",
+    whyItHurts:
+      "Wheel games are high-variance. They are useful for emergency swings, but unstable as the main bankroll plan.",
+    fix:
+      "Use Wheel when the team agrees to a multiplier push, not as the default table.",
+  },
+  {
+    mistake: "Choosing a later-floor game before learning its fail condition",
+    whyItHurts:
+      "Crash, HiLo, Dragon Tower, Poker, and Mine Sweeper all punish players who do not understand when the risk escalates.",
+    fix:
+      "Minimum bet once, identify how the game loses money, then decide whether it deserves a real bet.",
+  },
+  {
+    mistake: "Using the same strategy on every floor",
+    whyItHurts:
+      "Floor 2+ adds games with different risk structures. Floor 1 habits do not automatically transfer.",
+    fix:
+      "Re-evaluate the game pool after every floor unlock.",
+  },
+  {
+    mistake: "Pairing the wrong item with the wrong game",
+    whyItHurts:
+      "A good item can be wasted if the table does not support the effect.",
+    fix:
+      "Use Golden Chip on meaningful all-ins, Holy Statue near clustered bets, and profit buffs before realistic win attempts.",
+  },
+  {
+    mistake: "Learning late-floor games with the biggest available bet",
+    whyItHurts:
+      "The higher the floor, the more expensive ignorance becomes.",
+    fix:
+      "Treat every new game as a test table until the rules are clear.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best beginner games in Gamble With Your Friends are Roulette, Blackjack, Slot Machine with item support, Street Craps if your group understands it, and Duck Race only if the team can stop spamming it.**
+
+For most groups:
+
+1. **Roulette** is the cleanest fast quota game.
+2. **Blackjack** is the best controlled game if one player knows basic decisions.
+3. **Slot Machine** becomes much better with Holy Statue, Bonus Draw, or small-bet jackpot goals.
+4. **Street Craps** has strong cheese potential, but it needs its own guide.
+5. **Duck Race** is easy to understand but easy to overplay.
+6. **Wheel of Fortune / Money Wheel** is for emergency multiplier attempts, not stable bankroll building.
+7. **Crash and HiLo** are later-floor risk games: learn the cash-out or risk-ladder rules before betting seriously.
+8. **Dragon Tower, 1P Poker, and Mine Sweeper** should not be blind max-bet games.
+
+The most important rule:
+
+**Do not max bet a game you do not understand yet.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-first-floor-casino.webp"
+    alt="Gamble With Your Friends first casino floor with multiple early games and shared-bank betting."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Floor 1 is the best place to learn table behavior before later floors start asking for much larger bets.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="source-note">
+  Source note
+</h2>
+
+This is a **launch-version community wiki style guide**, not a final odds database.
+
+The structure uses:
+
+- official Steam information for the 17 games of chance, 4 themed floors, 5-minute casino day, shared bank, and randomized floor entries
+- Steam achievement data for floor-specific game clues
+- day-one creator footage, transcripts, forum/wiki-style notes, and shop screenshots for observed table behavior and item-supported strategies
+
+<GuideCallout title="Data integrity note">
+This page ranks games by beginner usefulness, clarity, item synergy, and observed risk. It does not claim final mathematical EV or full odds yet. We currently have strong names or floor clues for **14 of the 17 games**. The remaining **3 games still need confirmation** before this page should be treated as a complete all-games wiki.
+</GuideCallout>
+
+---
+
+<h2 id="best-games-ranking">
+  Best games ranking
+</h2>
+
+<GuideTable
+  caption="Best Gamble With Your Friends games for early runs."
+  columns={recommendationColumns}
+  rows={recommendationRows}
+/>
+
+This ranking favors three things:
+
+1. easy decision-making under a 5-minute timer
+2. low chance of one player instantly deleting the shared bank
+3. clear item synergy with Golden Chip, Taser, Holy Statue, Microphone, Drink, Camera, or Time Machine
+
+It does **not** mean the lower-ranked games are bad. It means they need more testing, better item support, or more player knowledge.
+
+---
+
+<h2 id="floor-game-map">
+  Floor game map
+</h2>
+
+The official Steam page says the game has **17 different games of chance** and **4 distinctly themed casino floors**. The floor clues below come from the Steam achievement list and observed footage.
+
+<GuideTable
+  caption="Known Gamble With Your Friends floor and game clues."
+  columns={floorGameColumns}
+  rows={floorGameRows}
+/>
+
+<GuideCallout title="Confirmed game count">
+Current guide status: **14 of 17 games confirmed by achievement clues, shop/footage review, or direct footage references.** The confirmed list is Roulette, Duck Race, Blackjack, Slot Machine, Street Craps, Wheel of Fortune / Money Wheel, Penguin Cross, Keno, Crash, HiLo, Plinko, Dragon Tower, 1P Poker, and Mine Sweeper. The remaining 3 game names should be added only after screenshot or achievement confirmation.
+</GuideCallout>
+
+---
+
+<h2 id="game-risk-table">
+  Game risk table
+</h2>
+
+Use this table to decide which games are safe to test, which need item support, and which should wait until later.
+
+<GuideTable
+  caption="Gamble With Your Friends game risk and confirmation table."
+  columns={gameRiskColumns}
+  rows={gameRiskRows}
+/>
+
+---
+
+<h2 id="roulette">
+  Roulette
+</h2>
+
+Roulette is the cleanest beginner game because the decision is simple: pick a color, number, or betting zone, then accept the result.
+
+Use Roulette when:
+
+- the team needs a fast quota push
+- you have Golden Chip ready
+- you are using Taser to increase the max bet
+- the group agrees on a single planned swing
+- you need a simple table for a new player
+
+Avoid Roulette when:
+
+- someone is using Martingale-style doubling without a hard stop
+- the group is chasing losses
+- several people are placing conflicting bets with shared money
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-roulette-red-black.webp"
+    alt="Gamble With Your Friends Roulette table with players betting red or black for a fast quota push."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Roulette is simple, which makes it useful for fast decisions. The danger is chasing losses after the first bad spin.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="duck-race">
+  Duck Race
+</h2>
+
+Duck Race is one of the easiest games to understand. Pick a duck, watch it race, and hope your duck wins.
+
+That makes it a good teaching game, but a risky bankroll game.
+
+Use Duck Race when:
+
+- the group is learning shared-bank pressure
+- the bet size is small
+- the team sets a hard attempt limit
+- a challenge or achievement points you there
+
+Avoid Duck Race when:
+
+- players are emotionally attached to one duck
+- the team keeps saying “one more”
+- the bankroll is already low
+- someone is using shared money to chase personal losses
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-shared-money-duck-race.webp"
+    alt="Gamble With Your Friends Duck Race showing quick bets and shared-bank pressure."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Duck Race is mechanically simple but psychologically dangerous because repeated bets happen quickly.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="blackjack">
+  Blackjack
+</h2>
+
+Blackjack is one of the better controlled games if one player understands basic card decisions.
+
+Use Blackjack when:
+
+- one player leads the table
+- the team can avoid panic hits
+- you are playing for a Blackjack-specific challenge
+- the bet size is controlled
+
+Avoid Blackjack when:
+
+- the team is forcing a streak
+- nobody knows when to stand
+- the player is hitting because the timer is stressful
+- the group is betting too much on weak hands
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-blackjack-floor-one.webp"
+    alt="Gamble With Your Friends Blackjack on Floor 1 with players trying to win multiple hands."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Blackjack can be controlled, but streak challenges can bait beginners into bad hands.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="slot-machine">
+  Slot Machine
+</h2>
+
+Slot Machine is not the best blind bankroll builder, but it becomes more interesting with item support.
+
+Use Slot Machine when:
+
+- you have Holy Statue active nearby
+- you are trying for jackpot-style goals
+- the team is using tiny bets
+- Bonus Draw or ticket-on-profit effects are part of the plan
+
+Avoid Slot Machine when:
+
+- several players are spamming machines at once
+- the group does not know when Holy Statue ends
+- the shared bank is already low
+- you are only playing because it is fast
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-prevent-loss-slots.webp"
+    alt="Gamble With Your Friends players using item support around Slot Machines."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Slots are much stronger when the team has item support instead of blind spam.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="street-craps">
+  Street Craps
+</h2>
+
+Street Craps may be one of the strongest games once your group understands it, but it is not the cleanest first-table recommendation.
+
+Use Street Craps when:
+
+- someone understands the roll flow
+- the team can read the target number
+- you have Taser, Golden Chip, or profit buffs ready
+- the group wants to use physics/positioning carefully
+
+Avoid Street Craps when:
+
+- nobody understands the point phase
+- players are throwing too quickly
+- the table is blocking visibility
+- you are using it as a blind panic option
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-street-craps-cheese.webp"
+    alt="Gamble With Your Friends Street Craps setup with players coordinating dice rolls."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Street Craps has strong strategy potential, but it deserves its own dedicated cheese guide.
+  </figcaption>
+</figure>
+
+For the full breakdown, use <Link href="/gamble-with-your-friends/craps-cheese-guide">Craps Cheese Guide</Link>.
+
+---
+
+<h2 id="wheel-games">
+  Wheel of Fortune and Money Wheel
+</h2>
+
+Wheel games are high-variance tools. They are useful when the team needs a multiplier, but they should not become your default plan.
+
+Use Wheel games when:
+
+- the timer is low
+- you need a fast swing
+- you have profit buffs
+- you are chasing a specific Wheel achievement
+- the team agrees to the risk
+
+Avoid Wheel games when:
+
+- the team is already stable
+- everyone is tilted
+- the bet size would wipe the bank
+- players keep asking for “one more spin”
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-wheel-of-fortune.webp"
+    alt="Gamble With Your Friends Wheel of Fortune style game with a high-variance multiplier bet."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wheel games are useful comeback tools, but they are unstable without a clear stop point.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="crash">
+  Crash
+</h2>
+
+Crash is a later-floor risk game built around **cash-out timing**. The basic idea is usually simple: the value rises, but waiting too long can erase the bet. The skill is not “always wait for the biggest multiplier.” The skill is deciding your cash-out target before greed takes over.
+
+Use Crash when:
+
+- the player can cash out early
+- the team agrees on a target multiplier
+- you are not relying on one huge late cash-out
+- the bankroll can survive a failed attempt
+
+Avoid Crash when:
+
+- the team is already tilted
+- the player keeps saying “just a little longer”
+- the quota needs reliable progress
+- no one understands when the round ends
+
+---
+
+<h2 id="hilo">
+  HiLo
+</h2>
+
+HiLo is a risk-ladder game. You are usually deciding whether the next result will be higher or lower, then choosing whether to keep going or stop with the current value. The danger is that every correct step makes the next step feel tempting. A good HiLo player stops after the planned profit window instead of treating every win as permission to push again.
+
+Use HiLo when:
+
+- the bet size is controlled
+- the player understands the risk ladder
+- the team has a clear stop point
+- you are testing later-floor game rules
+
+Avoid HiLo when:
+
+- you are trying to force one more correct call
+- the team needs stable quota progress
+- the player is guessing without a plan
+- the bankroll cannot handle a full loss
+
+---
+
+<h2 id="other-later-floor-games">
+  Other later-floor games
+</h2>
+
+Later floors add games that should not be blind max-bet targets.
+
+Treat these as testing games first:
+
+- **Keno**
+- **Plinko**
+- **Dragon Tower**
+- **1P Poker**
+- **Mine Sweeper**
+
+Some of these may become strong after more testing, but the current beginner rule is simple:
+
+**Minimum bet first. Learn the rules. Then decide if the table deserves real money.**
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-late-floor-games.webp"
+    alt="Gamble With Your Friends late-floor games including Dragon Tower, Poker, and Mine Sweeper."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Later-floor games can spend huge amounts quickly. Do not learn them with your largest bet.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="penguin-cross">
+  Penguin Cross
+</h2>
+
+Penguin Cross appears in Floor 2, Floor 3, and Floor 4 achievement clues, so it is not a one-off novelty game.
+
+Use Penguin Cross when:
+
+- the team has unlocked Floor 2
+- the bet size is controlled
+- someone is testing the multiplier structure
+- the group is working toward Penguin-specific achievements
+
+Avoid Penguin Cross when:
+
+- the player wants to max bet immediately
+- the group does not understand the rules
+- the team is already under quota pressure
+- the table is being played because it looks funny, not because it fits the plan
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-floor-two-penguin.webp"
+    alt="Gamble With Your Friends Floor 2 Penguin Cross game and higher-floor access."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Penguin Cross becomes relevant from Floor 2 onward, but it should still be tested with controlled bets first.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="item-supported-games">
+  Best item-supported games
+</h2>
+
+Items can change which game is best. A weak blind table can become strong if the item plan fits it.
+
+<GuideTable
+  caption="Best game and item pairings in Gamble With Your Friends."
+  columns={itemSupportColumns}
+  rows={itemSupportRows}
+/>
+
+For full item routing, use <Link href="/gamble-with-your-friends/best-item-combos">Best Item Combos and Strategies</Link>.
+
+---
+
+<h2 id="games-to-avoid-blind">
+  Games to avoid blind max betting
+</h2>
+
+Avoid serious blind bets on:
+
+- **Crash**
+- **HiLo**
+- **Plinko**
+- **Dragon Tower**
+- **1P Poker**
+- **Mine Sweeper**
+- **Keno**
+
+This does not mean they are bad. It means they are bad **first-contact games**.
+
+A first-contact game is any table where the player is still asking:
+
+- what do I press?
+- what does this number mean?
+- how do I cash out?
+- what counts as a win?
+- why did I just lose?
+
+If those questions are still happening, the bet should be tiny.
+
+---
+
+<h2 id="common-mistakes">
+  Common game-picking mistakes
+</h2>
+
+<GuideTable
+  caption="Common Gamble With Your Friends game selection mistakes."
+  columns={beginnerMistakeColumns}
+  rows={beginnerMistakeRows}
+/>
+
+The best teams do not just pick “the best game.” They pick the game that fits the timer, bankroll, item loadout, floor, and player skill.
+
+---
+
+<h2 id="recommended-route">
+  Recommended decision route
+</h2>
+
+Use this route to decide what to play, not just where to click first.
+
+First, classify the available pool:
+
+- **Simple pool:** mostly Floor 1-style games such as Roulette, Blackjack, Duck Race, Slot Machine, Street Craps, or Wheel.
+- **High-variance pool:** games with fast multipliers, cash-out pressure, ladder risk, or late-floor payouts, such as Crash, HiLo, Plinko, Dragon Tower, Money Wheel, or Penguin Cross.
+- **Unknown pool:** any table where the player still does not know how to win, cash out, stop, or lose.
+
+Use this route:
+
+1. **Before the floor starts:** check whether you have Golden Chip, Taser, Holy Statue, profit items, or Time Machine.
+2. **When you enter:** compare the available games with the <a href="#floor-game-map">floor game map</a>.
+3. **If the pool is simple:** use Roulette, Blackjack, or another controlled Floor 1-style table.
+4. **If the pool is high-variance:** use one planned item-backed push instead of repeated blind bets.
+5. **If the pool is unknown:** minimum bet once and learn the fail condition.
+6. **If the team is under time pressure:** choose a fast game only if everyone agrees on the risk.
+7. **After unlocking a new floor:** treat every new game as untested until the table rules are clear.
+
+This route keeps the team from learning the most expensive tables with the biggest possible bet.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best game in Gamble With Your Friends?
+
+For beginners, Roulette is the cleanest fast game, Blackjack is the best controlled game if someone knows basic decisions, and Slot Machine becomes better with item support. Street Craps may be stronger for skilled groups, but it needs more setup.
+
+### What is the safest Floor 1 game?
+
+Roulette is the easiest to understand. Blackjack can be safer if one player knows how to play. Duck Race is simple, but easy to spam.
+
+### How many games are confirmed so far?
+
+This guide currently has strong names or floor clues for **14 of the 17 games**. The remaining 3 game names still need screenshot, achievement, or direct footage confirmation.
+
+### Is Duck Race good?
+
+Duck Race is good for learning and simple bets, but it is dangerous for undisciplined groups because players can repeat bets quickly and drain shared money.
+
+### Is Blackjack good?
+
+Yes, if one player knows basic card decisions. It becomes risky when the team forces streak challenges or panics under the timer.
+
+### Is Street Craps worth playing?
+
+Yes, but not as a blind beginner table. Street Craps has strong strategy and cheese potential, but the group needs to understand the roll flow.
+
+### Is Crash good?
+
+Crash can be good if the player can cash out early and follow a target multiplier. It is bad when the player waits too long because they want one bigger payout.
+
+### Is HiLo good?
+
+HiLo can be useful for controlled later-floor testing, but it becomes dangerous when players keep climbing the risk ladder after they already have a good result.
+
+### Is Roulette better than Duck Race?
+
+Roulette is usually better for a planned quota push because the bet structure is clearer. Duck Race is easier to spam, which makes it riskier for chaotic groups.
+
+### What game should I use Golden Chip on?
+
+Use Golden Chip on a table with a meaningful all-in opportunity, especially after checking whether Taser can increase the maximum bet.
+
+### What game works best with Holy Statue?
+
+Holy Statue works best near fast-repeat betting setups, such as slots or clustered table plays, because it prevents nearby loss while active.
+
+### What games should beginners avoid blind max betting?
+
+Beginners should avoid serious blind bets on Crash, HiLo, Plinko, Dragon Tower, 1P Poker, Mine Sweeper, and Keno until the table rules are clear.
+
+### How many games are there?
+
+The Steam page says Gamble With Your Friends has 17 different games of chance.
+
+### Are all 17 games fully mapped yet?
+
+No. This page currently confirms 14 of 17 games. The final 3 should be added after direct confirmation.
+
+### Which guide should I read next?
+
+Read <Link href="/gamble-with-your-friends/best-item-combos">Best Item Combos and Strategies</Link> next if you want to pair games with items, or <Link href="/gamble-with-your-friends/craps-cheese-guide">Craps Cheese Guide</Link> if your group wants to push Street Craps.

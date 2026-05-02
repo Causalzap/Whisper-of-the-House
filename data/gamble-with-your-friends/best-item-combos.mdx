@@ -1,0 +1,810 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const comboRankingColumns = [
+  { key: "rank", label: "Rank" },
+  { key: "combo", label: "Combo" },
+  { key: "bestFor", label: "Best For" },
+  { key: "difficulty", label: "Difficulty" },
+];
+
+export const comboRankingRows = [
+  {
+    rank: "1",
+    combo: "Taser + Golden Chip",
+    bestFor:
+      "The cleanest high-value play: raise the maximum bet with Taser, then use Golden Chip for a free all-in.",
+    difficulty: "Easy to Medium",
+  },
+  {
+    rank: "2",
+    combo: "Holy Statue + fast-repeat betting",
+    bestFor:
+      "Protected group betting while Holy Statue prevents nearby losses.",
+    difficulty: "Medium",
+  },
+  {
+    rank: "3",
+    combo: "Drink / Microphone / Camera + planned win",
+    bestFor:
+      "Profit-boosted table plays where the team already knows where the win is coming from.",
+    difficulty: "Medium",
+  },
+  {
+    rank: "4",
+    combo: "Drink + Insurance + Street Craps",
+    bestFor:
+      "A risky but strong Craps setup: Drink increases profit, Insurance reduces the pain if the bet fails.",
+    difficulty: "Medium to Hard",
+  },
+  {
+    rank: "5",
+    combo: "Time Machine + big mistake recovery",
+    bestFor:
+      "A strong recovery play if your team pulls Time Machine from a random item source. Save it for a real failed play.",
+    difficulty: "Medium, conditional",
+  },
+  {
+    rank: "6",
+    combo: "Quota Gun + emergency quota push",
+    bestFor:
+      "Turning body parts into immediate quota value when gambling is too slow.",
+    difficulty: "Easy mechanically, costly strategically",
+  },
+  {
+    rank: "7",
+    combo: "Angel’s Reel / Devil’s Reel + recent result",
+    bestFor:
+      "Cheap 3-ticket tools for a meaningful last loss or last win.",
+    difficulty: "Medium",
+  },
+  {
+    rank: "8",
+    combo: "Stake Holder + item-heavy day",
+    bestFor:
+      "Amplifying a run where the team already has several useful items.",
+    difficulty: "Hard",
+  },
+];
+
+export const comboPrereqColumns = [
+  { key: "combo", label: "Combo" },
+  { key: "items", label: "Items Needed" },
+  { key: "bestUse", label: "Best Use" },
+  { key: "doNotUseWhen", label: "Do Not Use When" },
+];
+
+export const comboPrereqRows = [
+  {
+    combo: "Taser + Golden Chip",
+    items: "Taser, Golden Chip",
+    bestUse:
+      "Use on a table where a larger max bet makes the free all-in worth much more.",
+    doNotUseWhen:
+      "Nobody knows which table deserves the all-in.",
+  },
+  {
+    combo: "Holy Statue + fast-repeat betting",
+    items: "Holy Statue",
+    bestUse:
+      "Use near slots, wheels, roulette, or any fast table where players can group together.",
+    doNotUseWhen:
+      "Players are spread across the room or will keep betting after the protection ends.",
+  },
+  {
+    combo: "Profit boost + planned win",
+    items: "Drink, Microphone, Camera, or Bonus Draw",
+    bestUse:
+      "Use before a planned win attempt, not after the team has already started gambling randomly.",
+    doNotUseWhen:
+      "The team has not chosen a table or main bettor.",
+  },
+  {
+    combo: "Drink + Insurance + Street Craps",
+    items: "Drink, Insurance, optional Angel’s Reel",
+    bestUse:
+      "Use when the roller understands Street Craps and the team wants a high-upside push.",
+    doNotUseWhen:
+      "The roller cannot control the table while drunk.",
+  },
+  {
+    combo: "Time Machine + big mistake recovery",
+    items: "Time Machine, if obtained from a random item source",
+    bestUse:
+      "Use after a failed big bet, bad cash-out decision, or high-impact table mistake.",
+    doNotUseWhen:
+      "The team does not know what it will do differently after the rollback.",
+  },
+  {
+    combo: "Quota Gun + emergency quota",
+    items: "Quota Gun",
+    bestUse:
+      "Use when the team is short on quota and normal gambling is too slow.",
+    doNotUseWhen:
+      "The target player needs vision, voice, movement, or is holding an important item.",
+  },
+  {
+    combo: "Stake Holder + item-heavy day",
+    items: "Stake Holder plus useful items",
+    bestUse:
+      "Use when the team already has multiple items and wants one strong item-based day.",
+    doNotUseWhen:
+      "Stake Holder is the only meaningful item.",
+  },
+];
+
+export const executionColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const taserChipRows = [
+  {
+    step: "1. Pick the table first",
+    whatToDo:
+      "Choose the table before using either item.",
+    whyItMatters:
+      "The combo is wasted if the team boosts the wrong keypad or plays the wrong game.",
+  },
+  {
+    step: "2. Use Taser on the keypad",
+    whatToDo:
+      "Use Taser to increase the maximum bet.",
+    whyItMatters:
+      "Golden Chip is much stronger after the max bet is raised.",
+  },
+  {
+    step: "3. Use Golden Chip",
+    whatToDo:
+      "Spend Golden Chip for the free all-in on the larger bet.",
+    whyItMatters:
+      "The whole point is turning one free all-in into a bigger swing.",
+  },
+  {
+    step: "4. Stop random follow-up bets",
+    whatToDo:
+      "After the combo resolves, do not let everyone keep gambling blindly.",
+    whyItMatters:
+      "A clean win can disappear if the team gives it back immediately.",
+  },
+];
+
+export const holyStatueRows = [
+  {
+    step: "1. Choose one betting area",
+    whatToDo:
+      "Pick slots, wheel, roulette, or another fast-repeat table.",
+    whyItMatters:
+      "Holy Statue works best when the team plays together.",
+  },
+  {
+    step: "2. Group near the holder",
+    whatToDo:
+      "Have players stand near the Holy Statue holder before activating it.",
+    whyItMatters:
+      "The item prevents nearby losses, so the team needs to be together.",
+  },
+  {
+    step: "3. Bet during the active window",
+    whatToDo:
+      "Place the heavy bets while loss prevention is active.",
+    whyItMatters:
+      "This is the safe value window.",
+  },
+  {
+    step: "4. Stop when the window ends",
+    whatToDo:
+      "End the play when protection is gone.",
+    whyItMatters:
+      "Most Holy Statue throws happen because players keep betting afterward.",
+  },
+];
+
+export const timeMachineRows = [
+  {
+    step: "1. Protect a real decision",
+    whatToDo:
+      "Use Time Machine around a big bet, cash-out decision, or high-risk table play.",
+    whyItMatters:
+      "Rollback is wasted on tiny losses.",
+  },
+  {
+    step: "2. Watch what went wrong",
+    whatToDo:
+      "After the bad result, identify the decision that needs to change.",
+    whyItMatters:
+      "The item is only useful if the team learns from the first attempt.",
+  },
+  {
+    step: "3. Roll back",
+    whatToDo:
+      "Use Time Machine after the failed play.",
+    whyItMatters:
+      "The item gives the team a second chance at the same moment.",
+  },
+  {
+    step: "4. Change the play",
+    whatToDo:
+      "Cash out earlier, choose a different bet, or stop the table completely.",
+    whyItMatters:
+      "Rolling back into the same mistake gives no value.",
+  },
+];
+
+export const profitItemColumns = [
+  { key: "item", label: "Item" },
+  { key: "UseItFor", label: "Use It For" },
+  { key: "BestPlayer", label: "Best Player To Hold It" },
+];
+
+export const profitItemRows = [
+  {
+    item: "Drink",
+    UseItFor:
+      "Increasing profit while drunk during one player’s table push.",
+    BestPlayer:
+      "The player who already understands the table and can still control the play.",
+  },
+  {
+    item: "Microphone",
+    UseItFor:
+      "Increasing nearby profit while players are grouped close enough to benefit.",
+    BestPlayer:
+      "A support player who can stay near the main betting group.",
+  },
+  {
+    item: "Camera",
+    UseItFor:
+      "Capturing a winning player for extra profit.",
+    BestPlayer:
+      "A player watching the main bettor or expected winner.",
+  },
+  {
+    item: "Bonus Draw",
+    UseItFor:
+      "Getting ticket value from profit.",
+    BestPlayer:
+      "A stable player on a table that can produce repeated profit.",
+  },
+];
+
+export const badComboColumns = [
+  { key: "badCombo", label: "Bad Item Play" },
+  { key: "quickFix", label: "Quick Fix" },
+];
+
+export const badComboRows = [
+  {
+    badCombo: "Golden Chip before Taser",
+    quickFix:
+      "Use Taser first, then spend Golden Chip on the raised max bet.",
+  },
+  {
+    badCombo: "Holy Statue while players are spread out",
+    quickFix:
+      "Group up before activating it.",
+  },
+  {
+    badCombo: "Time Machine after a tiny loss",
+    quickFix:
+      "Save it for a real failed play.",
+  },
+  {
+    badCombo: "Drink on the wrong player",
+    quickFix:
+      "Give Drink to the player who can still control the table.",
+  },
+  {
+    badCombo: "Quota Gun on the item holder",
+    quickFix:
+      "Use it on someone who can afford the body-part penalty.",
+  },
+  {
+    badCombo: "Stake Holder with no other items",
+    quickFix:
+      "Use Stake Holder only on item-heavy days.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best item strategy in Gamble With Your Friends is Taser + Golden Chip: use Taser on a keypad to raise the maximum bet, then use Golden Chip for a larger free all-in.**
+
+The best practical item strategies are:
+
+1. **Taser + Golden Chip** — the cleanest high-value all-in setup.
+2. **Holy Statue + fast-repeat betting** — group up and bet while nearby loss prevention is active.
+3. **Drink / Microphone / Camera + planned win** — use profit tools before the table that is supposed to win.
+4. **Drink + Insurance + Street Craps** — a risky but strong Craps push when the roller knows what they are doing.
+5. **Time Machine + big mistake recovery** — if you pull one from a random item source, save it for a meaningful failed play.
+6. **Quota Gun + emergency quota push** — convert body parts into quota value when gambling is too slow.
+7. **Angel’s Reel / Devil’s Reel + recent result** — cheap 3-ticket tools for a meaningful last loss or win.
+
+The rule is simple:
+
+**Do not use an item because you have it. Use it because the team already knows the table, the bet, and the stop point.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-taser-golden-chip-combo.webp"
+    alt="Gamble With Your Friends Taser and Golden Chip combo for increasing max bet before a free all-in."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Taser + Golden Chip is the cleanest early item strategy: raise the max bet, then spend the free all-in.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="source-note">
+  Source note
+</h2>
+
+This is a launch-version strategy guide built from confirmed item tooltips, shop screenshots, and real run examples.
+
+The goal is practical routing:
+
+- which item to pair with which table
+- what order to use the items in
+- when to stop the play
+- what mistakes waste the combo
+
+<GuideCallout title="Launch-version note">
+Use this as a practical item strategy guide, not a final mathematical odds sheet. Shop items use confirmed launch-version screenshots; Time Machine is treated as a random / obtained item strategy because the available run material shows it being obtained and used, not bought from the normal item shop.
+</GuideCallout>
+
+---
+
+<h2 id="best-combos-ranking">
+  Best item strategies ranking
+</h2>
+
+<GuideTable
+  caption="Best Gamble With Your Friends item strategies for early and mid runs."
+  columns={comboRankingColumns}
+  rows={comboRankingRows}
+/>
+
+This ranking favors strategies that are:
+
+1. easy to understand
+2. useful under the 5-minute casino timer
+3. strong with shared-bank coordination
+4. based on clear item effects
+5. easy for one player to call out before the run starts
+
+---
+
+<h2 id="combo-requirements">
+  Strategy requirements
+</h2>
+
+Before using an item strategy, check the required items, the table, and the failure condition.
+
+<GuideTable
+  caption="Gamble With Your Friends item strategy requirements."
+  columns={comboPrereqColumns}
+  rows={comboPrereqRows}
+/>
+
+<GuideCallout title="Strategy rule">
+A good item play has three parts: the right table, the right item order, and a clear stop point.
+</GuideCallout>
+
+---
+
+<h2 id="taser-golden-chip">
+  Taser + Golden Chip
+</h2>
+
+This is the cleanest item strategy because both items have obvious jobs.
+
+- **Taser** is used on a keypad to increase the maximum bet.
+- **Golden Chip** gives a single free all-in.
+
+Use Taser first. Use Golden Chip second.
+
+<GuideTable
+  caption="How to use Taser + Golden Chip."
+  columns={executionColumns}
+  rows={taserChipRows}
+/>
+
+Use this strategy on:
+
+- Roulette
+- Blackjack
+- Street Craps
+- Wheel games
+- any table where a higher max bet makes the free all-in worth more
+
+Avoid it when:
+
+- nobody understands the table
+- the team has not picked the bet
+- the table does not support a meaningful max-bet increase
+- people plan to keep gambling normally after the item play
+
+<GuideCallout title="Order matters">
+Taser first. Golden Chip second. If you use Golden Chip before raising the max bet, you waste the strongest part of the combo.
+</GuideCallout>
+
+---
+
+<h2 id="holy-statue-fast-betting">
+  Holy Statue + fast-repeat betting
+</h2>
+
+Holy Statue costs 7 tickets and prevents nearby loss while active.
+
+The best use is not complicated: put the team near one betting area, activate Holy Statue, bet during the window, and stop when the window ends.
+
+Good targets include:
+
+- Slot Machine
+- Roulette
+- Wheel-style games
+- fast table clusters where players can stand together
+
+<GuideTable
+  caption="How to use Holy Statue with fast-repeat betting."
+  columns={executionColumns}
+  rows={holyStatueRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-prevent-loss-slots.webp"
+    alt="Gamble With Your Friends Holy Statue prevent loss strategy near Slot Machines."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Holy Statue works best when the team groups up before the betting starts.
+  </figcaption>
+</figure>
+
+The mistake is continuing after the protection is gone. Treat Holy Statue like a timed window, not a permanent safety net.
+
+---
+
+<h2 id="profit-combos">
+  Drink, Microphone, Camera, and profit tools
+</h2>
+
+Profit items are strong when they support a planned win. They are weak when the team activates them and then starts improvising.
+
+<GuideTable
+  caption="How to use profit items in Gamble With Your Friends."
+  columns={profitItemColumns}
+  rows={profitItemRows}
+/>
+
+Use profit tools with:
+
+- Roulette
+- Blackjack
+- Street Craps
+- Wheel games
+- Golden Chip plays
+
+Do not waste them on:
+
+- scattered low bets
+- a player who does not know the table
+- a table the team has not chosen yet
+- a moment where nobody knows who is supposed to win
+
+---
+
+<h2 id="drink-insurance-craps">
+  Drink + Insurance + Street Craps
+</h2>
+
+This is one of the strongest risky table setups when the roller understands Street Craps.
+
+The plan is:
+
+1. use **Drink** to increase profit while drunk
+2. use **Insurance** to reduce loss amount
+3. play Street Craps only if the roller understands the target
+4. take the planned shot
+5. stop after the win window
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-drink-insurance-craps.webp"
+    alt="Gamble With Your Friends Drink and Insurance strategy during a Street Craps push."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Drink + Insurance is powerful on risky tables, but only if the player can still control the play.
+  </figcaption>
+</figure>
+
+Use this strategy when:
+
+- the roller knows Street Craps
+- the team accepts the risk
+- Insurance is already active or ready
+- the Drink player can still control the table
+- the team has agreed on the stop point
+
+Avoid it when:
+
+- nobody understands Craps
+- the player gets too chaotic while drunk
+- the team is relying on one blind throw
+- the group has no plan after a miss
+
+For detailed Street Craps routing, use <Link href="/gamble-with-your-friends/craps-cheese-guide">Craps Cheese Guide</Link>.
+
+---
+
+<h2 id="time-machine-big-bet">
+  Time Machine + big mistake recovery
+</h2>
+
+Time Machine rolls back time. In the available run material, treat it as a random / obtained item rather than a normal shop purchase.
+
+That changes how you should think about it:
+
+**Do not plan your ticket route around Time Machine. If you get one, save it for a real mistake.**
+
+Use Time Machine after:
+
+- a bad all-in result
+- a failed cash-out decision
+- a bad Wheel result
+- a failed Street Craps setup
+- a late-floor mistake that cost real money
+
+<GuideTable
+  caption="How to use Time Machine for big mistake recovery."
+  columns={executionColumns}
+  rows={timeMachineRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-time-machine-crash.webp"
+    alt="Gamble With Your Friends Time Machine rollback during a risky cash-out style play."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Time Machine is strongest when the team changes the decision after the rollback.
+  </figcaption>
+</figure>
+
+Bad Time Machine use:
+
+- using it after a tiny loss
+- using it before the result matters
+- using it when nobody knows what changed
+- rewinding and making the same mistake again
+
+Good Time Machine use:
+
+- decide what risk is being protected
+- let the play resolve
+- rewind after the bad result
+- change the bet, cash-out, or stop decision
+
+---
+
+<h2 id="quota-gun-emergency">
+  Quota Gun + emergency quota push
+</h2>
+
+Quota Gun costs 5 tickets and pays **33% of quota for each body part it shoots off**.
+
+This is not a normal gambling combo. It is a quota tool.
+
+Use Quota Gun when:
+
+- the team is short on quota
+- the timer is low
+- normal games are too slow
+- the target player agrees
+- the lost body part will not ruin the next day
+
+Do not use Quota Gun when:
+
+- the team is stable
+- the target player is holding an important item
+- the player needs voice, vision, or movement
+- the group is only doing it because it is funny
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-item-quota-gun-price.webp"
+    alt="Gamble With Your Friends Quota Gun item tooltip showing 33 percent quota value per body part."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Quota Gun is emergency economy. It can save a run, but the body-part penalty is real.
+  </figcaption>
+</figure>
+
+For body part effects, use <Link href="/gamble-with-your-friends/tickets-items-body-parts">Tickets, Items, and Body Parts Guide</Link>.
+
+---
+
+<h2 id="reel-combos">
+  Angel’s Reel and Devil’s Reel
+</h2>
+
+Angel’s Reel and Devil’s Reel are both 3-ticket result tools.
+
+- **Angel’s Reel** gives a chance to revert your last loss.
+- **Devil’s Reel** can triple or lose your last win.
+
+Use **Angel’s Reel** after:
+
+- a meaningful loss
+- a failed medium or large bet
+- a mistake that is worth trying to undo
+
+Use **Devil’s Reel** after:
+
+- a win that is large enough to matter
+- the team agrees to risk the last win
+- the next quota needs a snowball
+
+Avoid both when:
+
+- the last result was tiny
+- the team is already safe
+- the player is tilted
+- nobody agrees on whether the last result is worth risking
+
+<GuideCallout title="Reel rule">
+Angel’s Reel is for trying to undo a bad result. Devil’s Reel is for gambling a good result. Do not use them the same way.
+</GuideCallout>
+
+---
+
+<h2 id="stake-holder">
+  Stake Holder + item-heavy day
+</h2>
+
+Stake Holder costs 6 tickets and increases the power of each item.
+
+Do not buy it as your only plan. Buy it when the team already has useful items and wants to make one casino day revolve around item power.
+
+Good Stake Holder days look like this:
+
+- Stake Holder + Holy Statue + fast-repeat table
+- Stake Holder + Microphone + grouped profit play
+- Stake Holder + Taser + Golden Chip
+- Stake Holder + reels when the team accepts risk
+
+Bad Stake Holder days look like this:
+
+- Stake Holder as the only item
+- no chosen table
+- no item holder roles
+- everyone improvising after entering the casino
+
+<GuideCallout title="Stake Holder rule">
+Stake Holder is an amplifier. It makes a real item plan better; it does not create a plan by itself.
+</GuideCallout>
+
+---
+
+<h2 id="combo-day-roles">
+  Combo-day roles
+</h2>
+
+For full role assignments, use the <Link href="/gamble-with-your-friends/tickets-items-body-parts">Tickets, Items, and Body Parts Guide</Link>.
+
+For this combo page, the important rule is simpler:
+
+**The setup holder should already be in position before the shot-caller starts the combo.**
+
+That means:
+
+- Taser holder stands at the keypad before Golden Chip is used.
+- Holy Statue holder stands near the betting group before activation.
+- Microphone holder stays close to the players who need the profit boost.
+- Quota Gun holder does not target the player carrying the important item.
+- Time Machine holder waits until a real mistake happens, not a tiny loss.
+
+Most combo failures are not caused by bad items. They happen because the item holder is late, too far away, or unsure what the combo is supposed to do.
+
+---
+
+<h2 id="bad-combos">
+  Bad item plays quick reference
+</h2>
+
+<GuideTable
+  caption="Common bad item plays and quick fixes."
+  columns={badComboColumns}
+  rows={badComboRows}
+/>
+
+Use this table as a final check before entering the limo.
+
+---
+
+<h2 id="recommended-combo-route">
+  In-casino item route
+</h2>
+
+Once the casino day starts, use this route:
+
+1. **Call the target table.** Do not activate items while people are still choosing games.
+2. **Move the item holder into position.** Taser goes to the keypad, Holy Statue goes to the group, Microphone goes near the bettors.
+3. **Confirm the main bettor.** Do not let three players place serious bets at once.
+4. **Use setup items before payoff items.** Taser before Golden Chip, grouping before Holy Statue, table choice before Drink.
+5. **Make the planned play.** One clean combo is better than five random item activations.
+6. **Stop when the item window ends.** Do not turn a successful item play into normal gambling.
+7. **Save emergency tools for emergencies.** Time Machine and Quota Gun should fix real problems, not tiny mistakes.
+
+This keeps items from becoming random ticket spam.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best item combo in Gamble With Your Friends?
+
+The best clean combo is **Taser + Golden Chip**. Use Taser first to increase maximum bet, then use Golden Chip for a larger free all-in.
+
+### What should I pair Golden Chip with?
+
+Pair Golden Chip with Taser, profit items, or a table where a free all-in has meaningful value.
+
+### What should I pair Holy Statue with?
+
+Pair Holy Statue with fast-repeat betting setups such as slots, wheel games, roulette, or clustered table plays.
+
+### Can you buy Time Machine?
+
+In the available run material, Time Machine appears as a random / obtained item rather than a confirmed normal shop purchase. Do not plan your ticket spending around it unless you actually get one.
+
+### Is Time Machine good?
+
+Yes. Time Machine is best when it protects a meaningful mistake, such as a failed big bet, bad cash-out, or late-floor table mistake.
+
+### What is the best profit strategy?
+
+Use Drink on the main bettor, Microphone when players are grouped, Camera when one player is expected to win, and Bonus Draw when the team wants ticket value from profit.
+
+### Is Drink + Insurance + Street Craps good?
+
+Yes, if the roller understands Street Craps. Drink raises the upside, and Insurance softens the downside, but the combo is risky if the player loses control.
+
+### Is Quota Gun a combo item?
+
+Quota Gun is an emergency quota strategy. It pays 33% of quota for each body part it shoots off, but the penalty can affect the next day.
+
+### Are Angel’s Reel and Devil’s Reel worth buying?
+
+They are cheap and useful when the last result matters. Angel’s Reel is for a meaningful loss. Devil’s Reel is for a meaningful win that the team agrees to risk.
+
+### Should I buy Stake Holder first?
+
+Usually no. Stake Holder is best when the team already has multiple useful items and a clear item-heavy plan.
+
+### What is the biggest item combo mistake?
+
+The biggest mistake is using items out of order, especially spending Golden Chip before Taser or activating Holy Statue before players are grouped.

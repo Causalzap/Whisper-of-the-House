@@ -139,6 +139,48 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-sky-700",
 },
 
+// ===== Gamble With Your Friends =====
+{
+  href: "/gamble-with-your-friends",
+  game: "Gamble With Your Friends",
+  title: "Complete Guide: Beginner Tips, Items, Best Games, and Achievements",
+  description:
+    "Start here for Gamble With Your Friends guides, including beginner routes, tickets, items, body parts, best games, item combos, Street Craps, and achievements.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
+{
+  href: "/gamble-with-your-friends/beginner-guide",
+  game: "Gamble With Your Friends",
+  title: "Beginner Guide: Shared Bank, Quota, Floors, and First Run Tips",
+  description:
+    "Learn how to survive your first Gamble With Your Friends runs, including shared-bank mistakes, quota priorities, Floor 1 routes, safe games, and when to stop betting.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
+{
+  href: "/gamble-with-your-friends/tickets-items-body-parts",
+  game: "Gamble With Your Friends",
+  title: "Items Guide: Tickets, Body Parts, Prices, and Best Purchases",
+  description:
+    "Understand tickets, item prices, pickup flow, body-part value, Golden Chip, Holy Statue, Taser, Quota Gun, Insurance, Drink, and other key items.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
+{
+  href: "/gamble-with-your-friends/best-games",
+  game: "Gamble With Your Friends",
+  title: "Best Games Guide: Roulette, Blackjack, Craps, Duck Race, and Later Floors",
+  description:
+    "Find the best games to play in Gamble With Your Friends, including safe Floor 1 picks, high-risk later-floor games, item-supported tables, and blind max-bet traps.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
+
 // ===== Heroes Olden Era =====
 {
   href: "/olden-era",
