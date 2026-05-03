@@ -71,7 +71,7 @@ The correct placement method involves switching to the **Overground Basement Rep
 <img src="/images/winter-burrow/repair-basement-entry.webp" alt="Player repairs the basement entrance to unlock new space and features." loading="lazy" />
 
 New materials gathered during this chapter allow players to **repair the basement entrance**, opening an expanded underground area for storage and future upgrades (K14).
-<img src="/images/winter-burrow/craft-wool-trouserswebp" alt="Player crafts Wool Trousers at the workbench to improve cold resistance." loading="lazy" />
+<img src="/images/winter-burrow/craft-wool-trousers.webp" alt="Player crafts Wool Trousers at the workbench to improve cold resistance." loading="lazy" />
 
 This progress also enables the crafting of **Wool Trousers**, an important Warmth-protective clothing item that greatly improves outdoor survivability (K15). These trousers serve as a significant defensive upgrade before entering colder regions later in the story.
 

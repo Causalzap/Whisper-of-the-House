@@ -71,7 +71,7 @@ const getBaseUrl = () => {
 // 生成规范的 canonical URL
 const generateCanonicalUrl = () => {
   const baseUrl = getBaseUrl();
-  return `${baseUrl}/winter-burrow/${articleContent.slug}`;
+  return `${baseUrl}/i-am-alone/${articleContent.slug}`;
 };
 
 // 简化版本：不尝试合并 openGraph，直接重新定义
