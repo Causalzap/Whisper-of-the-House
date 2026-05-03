@@ -1,0 +1,663 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    whatToDo:
+      "Progress the Red Moon / Crimson Moon secret story route until you reach Blackburn.",
+    whyItMatters:
+      "Golden Ending does not start from normal graduation. Blackburn is the late story gate that pushes you into the Cornet route chain.",
+  },
+  {
+    step: "2",
+    whatToDo:
+      "Defeat Blackburn, then clear the Cornet fight / route scene.",
+    whyItMatters:
+      "Cornet is the Golden Ending route character. This is where you obtain the necklace that matters for NG+.",
+  },
+  {
+    step: "3",
+    whatToDo:
+      "Receive Cornet's necklace.",
+    whyItMatters:
+      "The necklace is the key item that carries into NG+ and changes the Royal Library route.",
+  },
+  {
+    step: "4",
+    whatToDo:
+      "Start the next NG+ loop while carrying Cornet's necklace.",
+    whyItMatters:
+      "You cannot finish Golden Ending in the same loop where you first receive the necklace. The Library change happens in the next loop.",
+  },
+  {
+    step: "5",
+    whatToDo:
+      "Return to the Royal Library and unlock Forbidden Research.",
+    whyItMatters:
+      "Decipher Literature is replaced by Forbidden Research. Maxing Decipher Literature does not unlock the Golden Ending route.",
+  },
+  {
+    step: "6",
+    whatToDo:
+      "Raise Forbidden Research to Level 5.",
+    whyItMatters:
+      "At Level 5, Anna points you toward the Infinite Mirror Labyrinth.",
+  },
+  {
+    step: "7",
+    whatToDo:
+      "Enter the Labyrinth special adventure route.",
+    whyItMatters:
+      "Golden Ending is triggered through the Labyrinth route, not through the normal graduation ending screen.",
+  },
+];
+
+export const earliestLoopColumns = [
+  { key: "question", label: "Question" },
+  { key: "answer", label: "Answer" },
+  { key: "note", label: "Note" },
+];
+
+export const earliestLoopRows = [
+  {
+    question: "Can you get Golden Ending on a first playthrough?",
+    answer: "No.",
+    note:
+      "You need NG+ carry-over because Cornet's necklace must be brought into a later loop.",
+  },
+  {
+    question: "Can you get Golden Ending in the same loop where you get Cornet's necklace?",
+    answer: "No.",
+    note:
+      "The necklace changes the Royal Library in the next NG+ loop, not immediately in the same run.",
+  },
+  {
+    question: "What is the earliest possible Golden Ending attempt?",
+    answer: "Loop 3 / NG+2 on a very fast route.",
+    note:
+      "This assumes you complete the required true-ending / key-item setup by Loop 2. If your file gets Cornet's necklace later, Golden Ending shifts later too.",
+  },
+  {
+    question: "Does Golden Ending require Two Queens first?",
+    answer: "Not as its main route item.",
+    note:
+      "Two Queens gives the Inheritance Fragment for Heir of the Stargazer. Golden Ending depends on Cornet's necklace and Forbidden Research.",
+  },
+];
+
+export const researchCostColumns = [
+  { key: "check", label: "Research Planning Check" },
+  { key: "whatToPlan", label: "What To Plan" },
+  { key: "playerAdvice", label: "Player Advice" },
+];
+
+export const researchCostRows = [
+  {
+    check: "Required level",
+    whatToPlan:
+      "Forbidden Research must reach Level 5.",
+    playerAdvice:
+      "Do not stop after the option appears. Level 5 is the real route gate.",
+  },
+  {
+    check: "Schedule pressure",
+    whatToPlan:
+      "Reserve a dedicated Library block after Forbidden Research appears.",
+    playerAdvice:
+      "Do not leave this for the final month, especially if you still need combat prep for the Labyrinth.",
+  },
+  {
+    check: "Next route cue",
+    whatToPlan:
+      "Anna tells you about the Infinite Mirror Labyrinth after Forbidden Research reaches Level 5.",
+    playerAdvice:
+      "Once Anna gives the Labyrinth cue, stop looking for another Library upgrade and prepare for the special route.",
+  },
+];
+
+export const consequenceColumns = [
+  { key: "consequence", label: "Golden Ending Consequence" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "playerAdvice", label: "Player Advice" },
+];
+
+export const consequenceRows = [
+  {
+    consequence: "No normal graduation ending choice",
+    whatItMeans:
+      "Golden Ending skips the usual final flow where you choose a career or partner outcome.",
+    playerAdvice:
+      "Do not expect Golden Ending to appear beside normal endings on the graduation screen.",
+  },
+  {
+    consequence: "No career ending",
+    whatItMeans:
+      "You will not receive a normal job / profession result from that loop.",
+    playerAdvice:
+      "Do career ending cleanup on a different save or later loop.",
+  },
+  {
+    consequence: "No marriage / partner ending",
+    whatItMeans:
+      "The Golden Ending route overrides normal partner-route payoff.",
+    playerAdvice:
+      "Do not combine this with romance completion unless you already know the route priority.",
+  },
+  {
+    consequence: "No Flying Solo / no-partner style completion",
+    whatItMeans:
+      "Because the loop does not resolve through normal graduation, no-partner checks may not count.",
+    playerAdvice:
+      "Save before committing if you still need completion achievements.",
+  },
+  {
+    consequence: "No normal reward flow",
+    whatItMeans:
+      "Golden Ending can feel like giving up the whole loop for one special route flag.",
+    playerAdvice:
+      "Treat it as a separate experimental / completion route, not your main story-clear route.",
+  },
+];
+
+export const cornetColumns = [
+  { key: "name", label: "Name" },
+  { key: "role", label: "Role" },
+  { key: "routeUse", label: "Route Use" },
+];
+
+export const cornetRows = [
+  {
+    name: "Cornelia",
+    role: "Queen / social route character",
+    routeUse:
+      "Outings, affinity, Two Queens, and the Inheritance Fragment.",
+  },
+  {
+    name: "Cornet",
+    role: "Late-route / endgame character",
+    routeUse:
+      "Blackburn follow-up, necklace, NG+, Forbidden Research, and Golden Ending.",
+  },
+  {
+    name: "Corone",
+    role: "Community / translation variant",
+    routeUse:
+      "Usually refers to Cornet in community posts or translated discussion.",
+  },
+];
+
+export const labyrinthColumns = [
+  { key: "route", label: "Route" },
+  { key: "usesLabyrinth", label: "Uses Infinite Mirror Labyrinth?" },
+  { key: "routeItem", label: "Key Route Item" },
+  { key: "payoff", label: "Payoff" },
+];
+
+export const labyrinthRows = [
+  {
+    route: "Heir of the Stargazer",
+    usesLabyrinth: "Yes",
+    routeItem:
+      "Inheritance Fragment from Two Queens, plus Forbidden Research progression.",
+    payoff: "True ending route.",
+  },
+  {
+    route: "Golden Ending",
+    usesLabyrinth: "Yes",
+    routeItem:
+      "Cornet's necklace, plus Forbidden Research progression.",
+    payoff:
+      "Special ending route that skips normal graduation rewards.",
+  },
+];
+
+export const coexistColumns = [
+  { key: "question", label: "Question" },
+  { key: "answer", label: "Answer" },
+  { key: "advice", label: "Advice" },
+];
+
+export const coexistRows = [
+  {
+    question: "Can one save file prepare both Heir and Golden?",
+    answer: "Probably yes, if the required route flags are present.",
+    advice:
+      "Use separate saves before the Labyrinth so you can test which payoff your current route state triggers.",
+  },
+  {
+    question: "Can one final loop give both endings at once?",
+    answer: "Do not assume so.",
+    advice:
+      "Golden Ending can override the normal ending flow, so treat it as a separate route commitment.",
+  },
+  {
+    question: "Should I do Heir first?",
+    answer: "Yes.",
+    advice:
+      "Heir of the Stargazer is the safer story-completion route. Do Golden Ending afterward on a separate save or cleanup loop.",
+  },
+];
+
+export const labyrinthPrepColumns = [
+  { key: "prep", label: "Labyrinth Prep" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const labyrinthPrepRows = [
+  {
+    prep: "Make a separate save before entering.",
+    why:
+      "Golden Ending can skip normal graduation rewards, and Labyrinth payoff may depend on active route flags.",
+  },
+  {
+    prep: "Bring a real combat build.",
+    why:
+      "Do not rely on social stats or normal ending prep for the final special route.",
+  },
+  {
+    prep: "Expect allies to matter.",
+    why:
+      "Player reports mention alternate-time lovers / allies helping during the hidden boss route, so past relationship completion may make the fight safer.",
+  },
+  {
+    prep: "Use your best gear and recovery.",
+    why:
+      "Even if the fight is not impossible, arriving underbuilt turns the route into save-scumming.",
+  },
+];
+
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "Golden Ending does not appear at graduation.",
+    likelyCause:
+      "You are looking in the wrong place. Golden Ending is not a normal graduation ending.",
+    fix:
+      "Follow the Labyrinth special adventure route instead of waiting for a final graduation option.",
+  },
+  {
+    problem: "The Library still shows Decipher Literature.",
+    likelyCause:
+      "You have not carried Cornet's necklace into NG+.",
+    fix:
+      "Defeat Blackburn, complete the Cornet route scene, receive the necklace, start NG+, then check the Royal Library again.",
+  },
+  {
+    problem: "You maxed Decipher Literature but nothing happened.",
+    likelyCause:
+      "Decipher Literature is not the Golden Ending unlock.",
+    fix:
+      "Unlock Forbidden Research through Cornet's necklace. Do not grind Decipher as the trigger.",
+  },
+  {
+    problem: "You finished Two Queens but cannot reach Golden Ending.",
+    likelyCause:
+      "Two Queens gives the Inheritance Fragment, but Golden Ending needs Cornet's necklace and the Forbidden Research / Labyrinth chain.",
+    fix:
+      "Do not confuse Cornelia's Two Queens route with Cornet's Golden Ending route.",
+  },
+  {
+    problem: "Forbidden Research is Level 5 but you are stuck.",
+    likelyCause:
+      "You may not have followed Anna's Labyrinth cue yet, or you are still treating the route like normal graduation.",
+    fix:
+      "Prepare for the Infinite Mirror Labyrinth special adventure and push the Labyrinth route.",
+  },
+  {
+    problem: "You lost your normal ending reward.",
+    likelyCause:
+      "That is expected if you committed to Golden Ending.",
+    fix:
+      "Reload a separate save if you still want career, marriage, partner, or Flying Solo completion.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To get the Golden Ending in Magical Princess, follow the Red Moon / Crimson Moon secret route, defeat Blackburn, complete the Cornet route sequence, receive Cornet's necklace, then carry that necklace into NG+.**
+
+In the next loop, go to the **Royal Library**. Cornet's necklace changes the Library route so **Decipher Literature** is replaced by **Forbidden Research**. Raise Forbidden Research to **Level 5**, follow **Anna's Infinite Mirror Labyrinth** cue, then push the Labyrinth special adventure route.
+
+Golden Ending is **not** a normal graduation ending. Once you commit to it, you do not get the usual career, marriage, partner, or no-partner ending flow from that loop.
+</GuideQuickAnswer>
+
+---
+
+<GuideCallout title="Before you enter the Labyrinth">
+Make a separate save, confirm that Forbidden Research is Level 5, and make sure you are ready to give up the normal graduation reward flow. Golden Ending is a route commitment, not a normal ending choice.
+</GuideCallout>
+
+---
+
+<h2 id="golden-ending-route-overview">
+  Golden Ending Route Overview
+</h2>
+
+The Golden Ending route is: **Red Moon / Crimson Moon route → Blackburn → Cornet → Cornet's necklace → NG+ → Forbidden Research → Anna's Labyrinth cue → Infinite Mirror Labyrinth special route → Golden Ending.**
+
+<GuideTable
+  caption="Golden Ending route steps in Magical Princess."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The key difference from the true ending route is the item chain. **Two Queens gives the Inheritance Fragment through Cornelia. Golden Ending uses Cornet's necklace to change the Library route in NG+.**
+
+---
+
+<h2 id="earliest-golden-ending-loop">
+  Earliest Loop for Golden Ending
+</h2>
+
+Golden Ending cannot be completed on a fresh first playthrough, and it cannot be completed in the same loop where you first receive Cornet's necklace.
+
+<GuideTable
+  caption="Earliest possible Golden Ending timing."
+  columns={earliestLoopColumns}
+  rows={earliestLoopRows}
+/>
+
+The clean rule is: **Golden Ending starts for real in the NG+ loop after Cornet's necklace is obtained.**
+
+On a fast route, that can mean **Loop 3 / NG+2**, assuming the required true-ending setup happened in Loop 2. If you get the necklace later, your Golden Ending attempt also shifts later.
+
+---
+
+<h2 id="cornet-vs-cornelia">
+  Cornet vs Cornelia: Which One Matters for Golden Ending?
+</h2>
+
+This is the biggest naming trap in the endgame routes.
+
+<GuideTable
+  caption="Cornet, Cornelia, and Corone route meanings."
+  columns={cornetColumns}
+  rows={cornetRows}
+/>
+
+For Golden Ending, focus on **Cornet**, not Cornelia.
+
+Cornelia is important for **Two Queens** and **Heir of the Stargazer**. Cornet is important for **Blackburn**, **the necklace**, **Forbidden Research**, and **Golden Ending**.
+
+If you already completed Two Queens but the Library still shows Decipher Literature, you are probably missing the Cornet side of the route.
+
+---
+
+<h2 id="blackburn-and-cornet-necklace">
+  Step 1: Defeat Blackburn and Get Cornet's Necklace
+</h2>
+
+Blackburn is the boss gate for the Golden Ending route.
+
+After you progress the Red Moon / Crimson Moon secret story far enough, you need to defeat Blackburn and continue into the Cornet route sequence. This is where you get **Cornet's necklace**.
+
+That necklace is not just story flavor. It is the key item that changes the next loop.
+
+If you have not fought Blackburn yet, you are too early. If you have fought Blackburn but did not receive Cornet's necklace, the Golden Ending route is not ready.
+
+---
+
+<h2 id="ng-plus-necklace-trigger">
+  Step 2: Carry Cornet's Necklace into NG+
+</h2>
+
+After getting Cornet's necklace, start the next NG+ loop.
+
+Do not treat this as a normal cleanup run. Your first job is to confirm that the Library changed. If the necklace carried correctly, the Royal Library should no longer behave like the normal Decipher Literature route.
+
+The practical check is simple:
+
+- If the Library still shows **Decipher Literature**, you are missing the Golden Ending route trigger.
+- If the Library shows **Forbidden Research**, you are on the correct hidden research path.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/ng-plus-replay-blessings.webp"
+    alt="Magical Princess NG+ carry over screen showing replay bonuses and route carry-over."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The necklace matters because Golden Ending depends on NG+ carry-over.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="forbidden-research-step">
+  Step 3: Unlock and Max Forbidden Research
+</h2>
+
+With Cornet's necklace carried into NG+, return to the **Royal Library**.
+
+The normal **Decipher Literature** option should be replaced by **Forbidden Research**. Push Forbidden Research to **Level 5**. At Level 5, Anna tells you about the **Infinite Mirror Labyrinth**. That scene is your next route cue.
+
+Full guide: <Link href="/magical-princess/forbidden-research-guide/">How to Unlock Forbidden Research</Link>
+
+---
+
+<h2 id="forbidden-research-time-cost">
+  Forbidden Research Time Cost
+</h2>
+
+<GuideTable
+  caption="How to plan Forbidden Research before Golden Ending."
+  columns={researchCostColumns}
+  rows={researchCostRows}
+/>
+
+The safest approach is to start Forbidden Research as soon as it appears in the correct NG+ loop. Treat Level 5 as a main route objective, not a side activity. If you wait until the final month, you risk reaching the Labyrinth cue too late to prepare properly.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/forbidden-research-library-option.webp"
+    alt="Magical Princess Forbidden Research option at the Royal Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Forbidden Research replaces Decipher Literature after the correct Cornet necklace trigger.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="labyrinth-route-branch">
+  Does Golden Ending Use the Same Labyrinth as Heir of the Stargazer?
+</h2>
+
+Both late routes point through the same broad gateway: **Forbidden Research → Anna's cue → Infinite Mirror Labyrinth**.
+
+The difference is the route state you bring into that Labyrinth step.
+
+<GuideTable
+  caption="How Infinite Mirror Labyrinth connects to Heir of the Stargazer and Golden Ending."
+  columns={labyrinthColumns}
+  rows={labyrinthRows}
+/>
+
+The safe assumption is this: **the Labyrinth is the shared endgame gateway, but the ending payoff depends on your active route flags.**
+
+If your file has both true-ending and Golden Ending conditions available, make a separate save before entering or committing to the Labyrinth special route. Do not overwrite your only save until you know which payoff your current route state is going to trigger.
+
+---
+
+<h2 id="can-heir-and-golden-coexist">
+  Can Heir of the Stargazer and Golden Ending Coexist on One Save?
+</h2>
+
+<GuideTable
+  caption="How to think about Heir of the Stargazer and Golden Ending on the same file."
+  columns={coexistColumns}
+  rows={coexistRows}
+/>
+
+The safest route order is:
+
+1. Finish **Heir of the Stargazer** first.
+2. Save before experimenting with Golden Ending.
+3. Use Golden Ending as a separate completion / secret-route branch.
+
+This avoids losing a clean true-ending clear to a special route payoff you did not mean to trigger.
+
+---
+
+<h2 id="infinite-mirror-labyrinth">
+  Step 4: Enter the Infinite Mirror Labyrinth Route
+</h2>
+
+Once Anna points you toward the Infinite Mirror Labyrinth, stop thinking like you are preparing for a normal ending.
+
+The Labyrinth route is the actual Golden Ending path. Prepare Alice like you would for an endgame route.
+
+<GuideTable
+  caption="What to prepare before entering the Labyrinth route."
+  columns={labyrinthPrepColumns}
+  rows={labyrinthPrepRows}
+/>
+
+Player reports suggest the fight may include help from allies or alternate-time lovers, and that past relationship completion may make the hidden boss route easier. Treat that as useful extra support, not a reason to enter underbuilt.
+
+If you clear the Labyrinth special route and commit to Golden Ending, the loop no longer resolves like a normal graduation route.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/royal-library-secret-room.webp"
+    alt="Magical Princess Royal Library hidden research route leading toward the Infinite Mirror Labyrinth."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Forbidden Research and the Library route point you toward the Labyrinth special route.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="golden-ending-consequences">
+  What Golden Ending Locks You Out Of
+</h2>
+
+Golden Ending is powerful, but it is also the most punishing route to commit to.
+
+<GuideTable
+  caption="What you lose when committing to Golden Ending."
+  columns={consequenceColumns}
+  rows={consequenceRows}
+/>
+
+This is why I do not recommend doing Golden Ending on your only active save. If you still need career endings, partner endings, marriage endings, or no-partner completion, finish those on a different loop or keep a backup save.
+
+---
+
+<h2 id="golden-ending-vs-heir-of-the-stargazer">
+  Golden Ending vs Heir of the Stargazer
+</h2>
+
+Do not confuse **Golden Ending** with **Heir of the Stargazer**.
+
+**Heir of the Stargazer** is the true ending route tied to Cornelia, Two Queens, the Inheritance Fragment, Forbidden Research, and the Infinite Mirror Labyrinth.
+
+**Golden Ending** is the Cornet / necklace route that uses Forbidden Research and the Labyrinth special route, but it does not resolve through normal graduation.
+
+If your goal is story completion, do **Heir of the Stargazer** first. If your goal is completion cleanup or secret-route experimentation, do Golden Ending later with a separate save.
+
+Full guide: <Link href="/magical-princess/true-ending-heir-of-the-stargazer/">True Ending / Heir of the Stargazer Guide</Link>
+
+---
+
+<h2 id="why-golden-ending-is-not-unlocking">
+  Why Golden Ending Is Not Unlocking
+</h2>
+
+<GuideTable
+  caption="Common problems that block Golden Ending."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+The fastest way to troubleshoot is to ask these questions in order:
+
+1. Have you reached and defeated Blackburn?
+2. Did you complete the Cornet sequence and get the necklace?
+3. Did you start NG+ with Cornet's necklace?
+4. Did the Library change from Decipher Literature to Forbidden Research?
+5. Did you raise Forbidden Research to Level 5?
+6. Did Anna point you toward the Labyrinth?
+7. Are you following the Labyrinth special route instead of normal graduation?
+
+If the answer to any of those is no, that is where your route is broken.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is Golden Ending a normal graduation ending?
+
+No. Golden Ending does not appear as a normal career, partner, or marriage ending on the standard graduation screen.
+
+### What starts the Golden Ending route?
+
+The route starts from the Red Moon / Crimson Moon secret story chain, then moves through Blackburn, Cornet, Cornet's necklace, NG+, Forbidden Research, and the Labyrinth route.
+
+### What is the earliest loop for Golden Ending?
+
+The earliest Golden Ending attempt is usually **Loop 3 / NG+2** on a very fast route, assuming you complete the required true-ending / key-item setup in Loop 2. If you get Cornet's necklace later, Golden Ending shifts later too.
+
+### Who gives the necklace for Golden Ending?
+
+Cornet gives the necklace. Do not confuse this with Cornelia, who is tied to Two Queens and the Inheritance Fragment.
+
+### Is Cornelia required for Golden Ending?
+
+Cornelia is mainly tied to Two Queens and Heir of the Stargazer. Golden Ending is tied to Cornet's necklace, Forbidden Research, and the Labyrinth special route.
+
+### Does Golden Ending use the same Labyrinth as Heir of the Stargazer?
+
+Both routes use the Forbidden Research → Anna → Infinite Mirror Labyrinth gateway, but the payoff depends on your active route state. Make a save before entering if your file has multiple secret-route flags.
+
+### Does the Labyrinth fight have allies?
+
+Player reports suggest allies or alternate-time lovers can appear during the hidden boss route. Treat allies as helpful support, but still prepare Alice properly before entering.
+
+### Does Golden Ending block career endings?
+
+Yes. Once you commit to Golden Ending, you do not get the normal career ending flow from that loop.
+
+### Does Golden Ending block marriage or partner endings?
+
+Yes. Treat Golden Ending as a separate special route. Do partner and marriage endings on another save or cleanup loop.
+
+### Should I do Golden Ending before Heir of the Stargazer?
+
+No. I recommend doing Heir of the Stargazer first, then Golden Ending later with a separate save.
+
+### Should I make a backup save before Golden Ending?
+
+Yes. Make a separate save before the Labyrinth special route so you can return to normal ending cleanup if needed.

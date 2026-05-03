@@ -1,0 +1,616 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    whatToDo:
+      "Finish any first playthrough and start NG+.",
+    whyItMatters:
+      "The true ending route depends on carry-over route flags. Use the first run to learn the calendar, combat, festivals, and ending priority.",
+  },
+  {
+    step: "2",
+    whatToDo:
+      "In NG+2 or later, make Queen Cornelia your main route target.",
+    whyItMatters:
+      "Cornelia is the route anchor for Two Queens, and Two Queens gives the Inheritance Fragment needed for the true ending route.",
+  },
+  {
+    step: "3",
+    whatToDo:
+      "Avoid locking into a companion partner ending before the final day.",
+    whyItMatters:
+      "A committed partner route can take priority over Cornelia's final invitation.",
+  },
+  {
+    step: "4",
+    whatToDo:
+      "Accept Cornelia's final-day invitation.",
+    whyItMatters:
+      "This is the route gate for Two Queens. If the invitation does not appear, your Cornelia route state is not ready.",
+  },
+  {
+    step: "5",
+    whatToDo:
+      "Win the Red Moon Eve battle with Cornelia.",
+    whyItMatters:
+      "Winning this battle unlocks Two Queens and gives you the Inheritance Fragment.",
+  },
+  {
+    step: "6",
+    whatToDo:
+      "Carry the Inheritance Fragment into NG+3 or later.",
+    whyItMatters:
+      "The Fragment is the true-ending key item. Confirm it carried over before you invest the whole loop.",
+  },
+  {
+    step: "7",
+    whatToDo:
+      "Complete Forbidden Research at the Royal Library.",
+    whyItMatters:
+      "Forbidden Research is the Library gate that points you toward Infinite Mirror Labyrinth.",
+  },
+  {
+    step: "8",
+    whatToDo:
+      "Clear Infinite Mirror Labyrinth.",
+    whyItMatters:
+      "Clearing the Labyrinth triggers Heir of the Stargazer, the true ending route.",
+  },
+];
+
+export const corneliaColumns = [
+  { key: "stage", label: "Route Stage" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "goodSign", label: "Good Sign" },
+  { key: "dangerSign", label: "Danger Sign" },
+];
+
+export const corneliaRows = [
+  {
+    stage: "After Cornelia becomes available",
+    whatToDo:
+      "Talk to Cornelia or choose the Cornelia hangout whenever she appears.",
+    goodSign:
+      "Cornelia appears as a Queen / route event target instead of only background story flavor.",
+    dangerSign:
+      "You keep skipping Queen-related events to chase normal stat gains.",
+  },
+  {
+    stage: "Mid-run route building",
+    whatToDo:
+      "Prioritize Cornelia events over casual companion dates.",
+    goodSign:
+      "You repeatedly get Cornelia scenes, Queen visits, or Cornelia-related dialogue.",
+    dangerSign:
+      "Most of your special scenes are now focused on a normal companion.",
+  },
+  {
+    stage: "Before final stretch",
+    whatToDo:
+      "Stop accepting partner-style scenes if your target is Two Queens.",
+    goodSign:
+      "No companion has taken over the route with a confession / date / partner-ending-style event.",
+    dangerSign:
+      "You see a confession, romance activation, special date, or final partner commitment prompt.",
+  },
+  {
+    stage: "Final day",
+    whatToDo:
+      "Wait for Cornelia's invitation and accept it.",
+    goodSign:
+      "Cornelia invites Alice into the final route sequence.",
+    dangerSign:
+      "Only normal career / partner ending choices appear.",
+  },
+  {
+    stage: "Red Moon Eve",
+    whatToDo:
+      "Win the battle after accepting Cornelia's invitation.",
+    goodSign:
+      "You clear the battle and receive the Two Queens route payoff.",
+    dangerSign:
+      "Alice is too weak to survive the fight, or you lose the route battle.",
+  },
+];
+
+export const twoQueensColumns = [
+  { key: "requirement", label: "Two Queens Requirement" },
+  { key: "howToHandleIt", label: "How To Handle It" },
+  { key: "commonFailure", label: "Common Failure" },
+];
+
+export const twoQueensRows = [
+  {
+    requirement: "NG+2 or later",
+    howToHandleIt:
+      "Finish any first ending, then start your second playthrough with Cornelia as your main target.",
+    commonFailure:
+      "Trying to force Two Queens on a first run.",
+  },
+  {
+    requirement: "Maximum Cornelia route state",
+    howToHandleIt:
+      "Take every Cornelia story event when it appears. Treat these as route flags, not optional flavor scenes.",
+    commonFailure:
+      "Only raising stats while ignoring Queen-related events.",
+  },
+  {
+    requirement: "No committed partner ending",
+    howToHandleIt:
+      "You can interact with companions, but do not accept partner-lock scenes before the final day.",
+    commonFailure:
+      "Triggering a companion confession or romance route and losing Cornelia's final invitation.",
+  },
+  {
+    requirement: "Cornelia's final-day invitation",
+    howToHandleIt:
+      "On the final day, wait for Cornelia's private invitation and accept it.",
+    commonFailure:
+      "Choosing a normal ending or partner ending too early.",
+  },
+  {
+    requirement: "Red Moon Eve battle victory",
+    howToHandleIt:
+      "Bring a build that can actually win a late-route fight, not just pass social checks.",
+    commonFailure:
+      "Running a pure social build with no combat preparation.",
+  },
+];
+
+export const trueEndingColumns = [
+  { key: "requirement", label: "Heir of the Stargazer Requirement" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "check", label: "Check Before Continuing" },
+];
+
+export const trueEndingRows = [
+  {
+    requirement: "NG+3 or later",
+    whatItMeans:
+      "You need a later loop after completing Two Queens.",
+    check:
+      "Do not start a normal ending cleanup run if your target is Heir of the Stargazer.",
+  },
+  {
+    requirement: "Inheritance Fragment",
+    whatItMeans:
+      "This is the key item from the Two Queens route.",
+    check:
+      "Confirm the Fragment carried into the new loop before investing the whole run.",
+  },
+  {
+    requirement: "Forbidden Research",
+    whatItMeans:
+      "The Royal Library research chain must be completed before the Labyrinth step.",
+    check:
+      "If the Library still shows Decipher Literature, fix Forbidden Research first.",
+  },
+  {
+    requirement: "Infinite Mirror Labyrinth",
+    whatItMeans:
+      "The final true-ending dungeon / special route.",
+    check:
+      "Prepare combat stats, gear, healing, and party support before entering.",
+  },
+];
+
+export const combatColumns = [
+  { key: "check", label: "Combat Check" },
+  { key: "safeBaseline", label: "Safe Baseline" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const combatRows = [
+  {
+    check: "Battle Rank",
+    safeBaseline:
+      "Aim for at least B / B+ before Red Moon Eve. For Infinite Mirror Labyrinth, aim for A- or better if you want a safer run.",
+    why:
+      "Battle Rank works like RPG combat level and rises through combat, not normal classes. If you have barely fought monsters, your route can reach the ending gate but fail the battle.",
+  },
+  {
+    check: "Main combat build",
+    safeBaseline:
+      "Have at least one A-rank main combat path: Strength / physical build, Magic / black magic build, or a support build with strong recovery.",
+    why:
+      "The game lets different academy paths fight differently. A social or charm-heavy build can reach Cornelia route events, but it still needs a real battle plan.",
+  },
+  {
+    check: "HP and survivability",
+    safeBaseline:
+      "Do not rely on burst only. Raise broad stats enough that Alice can survive several hits, not just one lucky turn.",
+    why:
+      "All primary growth contributes to HP, while physical and intelligence substats affect defense, speed, magic resistance, healing, and casting speed.",
+  },
+  {
+    check: "Equipment",
+    safeBaseline:
+      "Use your best weapon and defensive gear before Red Moon Eve or the Labyrinth. Do not enter with festival / social gear by accident.",
+    why:
+      "Weapons define your practical damage plan: swords support physical attacks, staves support magic, and bows keep damage safer from the back row.",
+  },
+  {
+    check: "Party support",
+    safeBaseline:
+      "Bring two usable companions when the route allows it. Prioritize at least one recovery or stabilizing support option.",
+    why:
+      "Red Moon and monster-hunt battles can use up to two friends, but companions need enough relationship progress to join. Recovery support makes route fights much less volatile.",
+  },
+  {
+    check: "Readiness test",
+    safeBaseline:
+      "If normal Red Moon defense on NORMAL feels dangerous, delay the true-ending push and train more before Labyrinth.",
+    why:
+      "Red Moon Eve should not feel like a coin flip. If it does, Infinite Mirror Labyrinth is likely underprepared.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    problem: "Cornelia's invitation does not appear.",
+    likelyCause:
+      "Cornelia route state is not high enough, or a partner route has already taken priority.",
+    fix:
+      "Reload before the final stretch, avoid companion commitment, and make sure every Cornelia story event has been taken.",
+  },
+  {
+    problem: "You got a partner ending instead of Two Queens.",
+    likelyCause:
+      "You accepted or triggered a companion partner route.",
+    fix:
+      "Keep companion affection safe, but do not accept confession / partner-lock scenes on the Two Queens run.",
+  },
+  {
+    problem: "You completed Two Queens but cannot start Heir of the Stargazer.",
+    likelyCause:
+      "You are missing the Inheritance Fragment in the next loop, or you have not completed the Library research chain.",
+    fix:
+      "Confirm the Fragment carried into NG+3, then complete Forbidden Research before looking for the Labyrinth step.",
+  },
+  {
+    problem: "The Library still shows Decipher Literature.",
+    likelyCause:
+      "Forbidden Research has not unlocked yet.",
+    fix:
+      "Use the Forbidden Research guide and fix the Library route before trying to continue the true ending.",
+  },
+  {
+    problem: "The Labyrinth is too hard.",
+    likelyCause:
+      "Alice is underbuilt for the final route.",
+    fix:
+      "Improve combat stats, upgrade equipment, bring recovery, and retry from a save before the final push.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To get the True Ending in Magical Princess, unlock Heir of the Stargazer.**
+
+The route has two halves. First, get **Two Queens** in NG+2 or later by making **Queen Cornelia** your main route target, avoiding committed partner endings, accepting Cornelia's final-day invitation, and winning the **Red Moon Eve** battle. That gives you the **Inheritance Fragment**.
+
+Then start NG+3 or later with the Fragment, complete **Forbidden Research** at the Royal Library, follow Anna's cue toward the **Infinite Mirror Labyrinth**, and clear the Labyrinth to trigger **Heir of the Stargazer**.
+</GuideQuickAnswer>
+
+---
+
+<GuideCallout title="The route has two halves">
+Do not treat Heir of the Stargazer as one long stat check.
+
+The first half is **Cornelia → Two Queens → Inheritance Fragment**. The second half is **Forbidden Research → Anna's Labyrinth cue → Infinite Mirror Labyrinth**. If either half is missing, the true ending route stalls.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/cornelia-queen-intro.webp"
+    alt="Queen Cornelia in Magical Princess, the key NPC for the Two Queens and Heir of the Stargazer route."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Queen Cornelia is the route anchor for Two Queens, which leads into Heir of the Stargazer.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="true-ending-route-overview">
+  True Ending Route Overview
+</h2>
+
+<GuideTable
+  caption="Full route for Heir of the Stargazer, the true ending of Magical Princess."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The clean way to think about the true ending is this:
+
+**Two Queens gives you the Inheritance Fragment. Forbidden Research points you toward the Labyrinth. The Labyrinth triggers Heir of the Stargazer.**
+
+If you have the Fragment but no Labyrinth cue, your Library side is broken. If you have Forbidden Research but no Fragment, your Cornelia side is broken.
+
+---
+
+<h2 id="cornelia-route-checklist">
+  Cornelia Route Checklist
+</h2>
+
+This is the part most ending lists do not explain well: Cornelia is not just another companion to date. Her route is built through Queen-related story events, final-day route priority, and the Red Moon Eve battle.
+
+<GuideTable
+  caption="Cornelia route checklist for Two Queens and Heir of the Stargazer."
+  columns={corneliaColumns}
+  rows={corneliaRows}
+/>
+
+The safest rule is simple: whenever Cornelia or the Queen route appears, take it. If the game is offering you a partner-style moment with another companion, be careful. That may be the point where you stop being on the Cornelia route and start being on a partner ending route.
+
+---
+
+<h2 id="two-queens-requirements">
+  Step 1: Get Two Queens in NG+2
+</h2>
+
+Two Queens is the bridge into the true ending route.
+
+<GuideTable
+  caption="Two Queens requirements before you can start the true ending route."
+  columns={twoQueensColumns}
+  rows={twoQueensRows}
+/>
+
+The most important warning is partner route priority. A companion can be useful in normal play, but if you are seeing confession-style scenes, special dates, or obvious partner-ending commitment prompts, assume your Two Queens run is at risk.
+
+Full guide: <Link href="/magical-princess/two-queens-ending-guide/">Two Queens Ending Guide</Link>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/cornelia-hangout-event.webp"
+    alt="Magical Princess Cornelia event or hangout route scene used to build the Two Queens route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Take Cornelia story events whenever they appear. Her route is story-driven, not a normal companion cleanup route.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="red-moon-eve-battle">
+  Red Moon Eve Battle: When It Happens and How to Prepare
+</h2>
+
+The **Red Moon Eve** battle happens after Cornelia's final-day route invitation. It is not the same thing as every recurring Blood Moon / Crimson Moon city event during normal play.
+
+Think of it as the combat gate at the end of the Two Queens route:
+
+- If Cornelia's final invitation appears, you are on the route.
+- If you accept it, you move into the Red Moon Eve sequence.
+- If you win the battle, you complete Two Queens and receive the Inheritance Fragment.
+- If you lose, the route fails even if your Cornelia setup was correct.
+
+For preparation, do not run a pure social build. Cornelia needs route priority, but Alice still needs enough combat power to win the final battle.
+
+<GuideTable
+  caption="Combat preparation for Red Moon Eve and Infinite Mirror Labyrinth."
+  columns={combatColumns}
+  rows={combatRows}
+/>
+
+I would treat Red Moon Eve as the readiness check. If that fight feels shaky, do not rush straight into the later Labyrinth route without improving Alice first.
+
+---
+
+<h2 id="inheritance-fragment">
+  Step 2: Carry the Inheritance Fragment into NG+3
+</h2>
+
+After you complete Two Queens, you should receive the **Inheritance Fragment**.
+
+That Fragment is the reason the next loop matters. Start NG+3 or later and confirm that the Fragment carried over before you spend the whole run preparing for Heir of the Stargazer.
+
+If you do not have the Fragment, stop here and go back to Two Queens. Forbidden Research and Labyrinth prep will not fix a missing Fragment.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/ng-plus-replay-blessings.webp"
+    alt="Magical Princess NG+ screen showing carry-over progression after an ending."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Heir of the Stargazer is a multi-loop route, so NG+ carry-over checks matter.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="forbidden-research-step">
+  Step 3: Complete Forbidden Research
+</h2>
+
+Once you are in the correct later loop, your next major gate is **Forbidden Research** at the Royal Library.
+
+This is where many players get stuck. If the Library still shows **Decipher Literature**, you are not on the correct hidden research step yet. Do not keep grinding Decipher Literature and hope it turns into the true ending route.
+
+For Heir of the Stargazer, you need to push the hidden Library research chain until the game points you toward the Infinite Mirror Labyrinth.
+
+Full guide: <Link href="/magical-princess/forbidden-research-guide/">How to Unlock Forbidden Research</Link>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/forbidden-research-library-option.webp"
+    alt="Magical Princess Forbidden Research option at the Royal Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Forbidden Research is the Library gate between Two Queens and the Labyrinth route.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="infinite-mirror-labyrinth">
+  Step 4: Clear Infinite Mirror Labyrinth
+</h2>
+
+The **Infinite Mirror Labyrinth** is the final route gate for Heir of the Stargazer.
+
+Do not enter it underprepared. Treat it like the endgame check for the whole secret route. If you barely survived Red Moon Eve, delay the Labyrinth attempt and strengthen Alice first.
+
+Before committing, make sure Alice has:
+
+- A reliable main damage plan.
+- Enough survivability to handle more than one bad turn.
+- Your best weapon and defensive gear equipped.
+- A recovery or support plan.
+- A separate save before entering.
+
+Clearing the Labyrinth is what turns the route from “I have the true-ending pieces” into **Heir of the Stargazer**.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/royal-library-secret-room.webp"
+    alt="Magical Princess Royal Library secret room and hidden research route context."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Library research chain eventually points you toward Infinite Mirror Labyrinth.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="why-heir-of-the-stargazer-is-not-unlocking">
+  Why Heir of the Stargazer Is Not Unlocking
+</h2>
+
+<GuideTable
+  caption="Common problems that block Heir of the Stargazer."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most failed true-ending attempts come from one of three mistakes:
+
+1. Missing Two Queens and therefore missing the Inheritance Fragment.
+2. Accidentally taking a companion partner ending instead of Cornelia's final route.
+3. Reaching NG+3 but not completing the Forbidden Research / Labyrinth half of the route.
+
+If you are not sure which half is broken, check the route in this order: **Two Queens → Inheritance Fragment → Forbidden Research → Labyrinth**.
+
+---
+
+<h2 id="heir-vs-golden-ending">
+  Heir of the Stargazer vs Golden Ending
+</h2>
+
+Heir of the Stargazer and Golden Ending are both late-route endings, but they are not the same target.
+
+**Heir of the Stargazer** is the true ending route tied to Two Queens, the Inheritance Fragment, Forbidden Research, and Infinite Mirror Labyrinth.
+
+**Golden Ending** is a separate special ending path. It is more punishing because it does not behave like a normal graduation reward.
+
+If your target is story completion, do **Heir of the Stargazer** first. If your target is total completion, make a separate save before experimenting with Golden Ending.
+
+Full guide: <Link href="/magical-princess/golden-ending-guide/">Golden Ending Guide</Link>
+
+---
+
+<GuideCallout title="Make a safety save">
+Make a separate save before Cornelia's final-day invitation, before entering Infinite Mirror Labyrinth, and before experimenting with Golden Ending. This route has too many multi-loop checks to risk overwriting your only file.
+</GuideCallout>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is Heir of the Stargazer the true ending?
+
+Yes. Heir of the Stargazer is the true ending route for Magical Princess.
+
+### Can I get Heir of the Stargazer on the first playthrough?
+
+No. You need at least a later NG+ loop because the route depends on Two Queens and the Inheritance Fragment.
+
+### What ending do I need before Heir of the Stargazer?
+
+You need **Two Queens** first. Two Queens gives you the **Inheritance Fragment**, which carries into the later true ending route.
+
+### How do I get the Inheritance Fragment?
+
+Complete the Two Queens route by raising Queen Cornelia's route state, accepting her final-day invitation, and winning the Red Moon Eve battle.
+
+### Why did Cornelia's invitation not appear?
+
+You probably did not reach the required Cornelia route state, or you committed to another companion partner ending before the final day.
+
+### How do I know if I accidentally locked a partner route?
+
+If you see a confession-style scene, special date, romance activation, or final partner commitment prompt, assume the partner route may take priority. Reload if your target is Two Queens.
+
+### Can I date companions during the Two Queens run?
+
+You can interact with companions, but do not lock into a partner ending. Keep the route clean until Cornelia's final-day event is secured.
+
+### When does the Red Moon Eve battle happen?
+
+It happens after you accept Cornelia's final-day invitation on the Two Queens route. Do not confuse it with normal Blood Moon / Crimson Moon city events.
+
+### How strong should Alice be for Red Moon Eve and the Labyrinth?
+
+As a practical baseline, aim for at least **B / B+ Battle Rank** before Red Moon Eve, one **A-rank main combat path**, updated gear, and a support or recovery plan. For Infinite Mirror Labyrinth, push closer to **A- or A Battle Rank** if you want a safer clear. Treat these as route-planning baselines, not confirmed hard requirements.
+
+### Is Forbidden Research required for Heir of the Stargazer?
+
+Yes. Forbidden Research is the Royal Library gate that leads toward Infinite Mirror Labyrinth.
+
+### What should I do after Forbidden Research Level 5?
+
+Follow Anna's cue toward Infinite Mirror Labyrinth, then prepare for the final dungeon route.
+
+### Is Infinite Mirror Labyrinth required?
+
+Yes. Clearing Infinite Mirror Labyrinth is the final step before Heir of the Stargazer.
+
+### Should I do Golden Ending before Heir of the Stargazer?
+
+No. Do Heir of the Stargazer first unless you already understand the Golden Ending consequences and have a separate save.

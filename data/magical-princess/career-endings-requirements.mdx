@@ -1,0 +1,818 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const statSystemColumns = [
+  { key: "system", label: "System" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const statSystemRows = [
+  {
+    system: "STA",
+    whatItMeans:
+      "Stamina. Built from Strength, Vigor, Speed, and Vitality.",
+    whyItMatters:
+      "Main route stat for combat and military endings such as Brave Hero, General, Hero, Queen's Knight, Sword Master, Dark Knight, and Mercenary Leader.",
+  },
+  {
+    system: "INT",
+    whatItMeans:
+      "Intelligence. Built from Magic, Piety, Math, and Literature.",
+    whyItMatters:
+      "Main route stat for magic, scholar, clergy, and forbidden / dark magic endings.",
+  },
+  {
+    system: "CHA",
+    whatItMeans:
+      "Charm. Built from Beauty, Social, Manners, and Virtue.",
+    whyItMatters:
+      "Main route stat for social, royal, idol, maid, business, and some underworld endings.",
+  },
+  {
+    system: "SEN",
+    whatItMeans:
+      "Sensitivity. Built from Imagination, Creativity, Music, and Art.",
+    whyItMatters:
+      "Important for arts, fashion, social, luck-adjacent, and festival-related routes.",
+  },
+  {
+    system: "Renown / Reputation",
+    whatItMeans:
+      "Raised by actions that benefit the kingdom and earn public respect.",
+    whyItMatters:
+      "Many honorable or high-status endings require Renown / Reputation in addition to raw stats.",
+  },
+  {
+    system: "Morality / G-E",
+    whatItMeans:
+      "The good / evil alignment axis. Night jobs, gambling, street fights, and church actions can shift it.",
+    whyItMatters:
+      "Good-aligned endings often require high morality, while dark endings require low morality or evil-route actions.",
+  },
+  {
+    system: "Special condition",
+    whatItMeans:
+      "A required route action, battle, event, item, tournament, job command, or festival result.",
+    whyItMatters:
+      "High stats alone are not enough for many endings. Missing the special condition can send Alice to a lower or different career ending.",
+  },
+];
+
+export const careerColumns = [
+  { key: "ending", label: "Ending" },
+  { key: "family", label: "Route Family" },
+  { key: "statRequirement", label: "Main Requirement" },
+  { key: "renownMorality", label: "Renown / Morality" },
+  { key: "specialCondition", label: "Special Condition" },
+];
+
+export const careerRows = [
+  {
+    ending: "Brave Hero",
+    family: "Combat / 5-star",
+    statRequirement:
+      "STA 5000, INT 2000, CHA 2000, SEN 2000",
+    renownMorality:
+      "Reputation 400, Good / Evil 60↑",
+    specialCondition:
+      "Defeat Demon / Illusion Dragon.",
+  },
+  {
+    ending: "General",
+    family: "Combat / military",
+    statRequirement:
+      "STA 4000",
+    renownMorality:
+      "Reputation 350, Good / Evil 30↑",
+    specialCondition:
+      "Participate in every Red Moon battle.",
+  },
+  {
+    ending: "Hero",
+    family: "Combat",
+    statRequirement:
+      "STA 3000",
+    renownMorality:
+      "Good / Evil 50↑",
+    specialCondition:
+      "No extra special condition listed.",
+  },
+  {
+    ending: "Queen's Knight",
+    family: "Combat / royal service",
+    statRequirement:
+      "STA 3000",
+    renownMorality:
+      "Reputation 300, Good / Evil 50↑",
+    specialCondition:
+      "Win the School Sword Tournament.",
+  },
+  {
+    ending: "Sword Master",
+    family: "Combat / weapon mastery",
+    statRequirement:
+      "STA 3000",
+    renownMorality:
+      "Reputation 200, Good / Evil 30↑",
+    specialCondition:
+      "Knight's Gym: Advanced Training MAX.",
+  },
+  {
+    ending: "Dark Knight",
+    family: "Combat / dark",
+    statRequirement:
+      "STA 3000, INT 1000",
+    renownMorality:
+      "Good / Evil 30↓",
+    specialCondition:
+      "Defeat 100 enemies.",
+  },
+  {
+    ending: "Mercenary Leader",
+    family: "Combat / underworld",
+    statRequirement:
+      "STA 2500, CHA 2500",
+    renownMorality:
+      "No Renown / Morality value listed.",
+    specialCondition:
+      "Street Fight: defeat Belzer.",
+  },
+  {
+    ending: "Archmage",
+    family: "Magic / 5-star",
+    statRequirement:
+      "INT 5000, Magic 1500",
+    renownMorality:
+      "Reputation 350, Good / Evil 30↑",
+    specialCondition:
+      "Win the School Magic Tournament.",
+  },
+  {
+    ending: "Sage / Hermit",
+    family: "Magic / scholar",
+    statRequirement:
+      "INT 4000, SEN 2000",
+    renownMorality:
+      "Good / Evil 30↑",
+    specialCondition:
+      "No extra special condition listed.",
+  },
+  {
+    ending: "Clergy",
+    family: "Faith / religious",
+    statRequirement:
+      "Faith 500, Morality 500",
+    renownMorality:
+      "Reputation 200, Good / Evil 60↑",
+    specialCondition:
+      "Pray at Church 5 times.",
+  },
+  {
+    ending: "Evil Cultist",
+    family: "Dark / magic",
+    statRequirement:
+      "INT 1000, CHA 500, SEN 500",
+    renownMorality:
+      "Good / Evil 45↓",
+    specialCondition:
+      "Consumed Magic Bread.",
+  },
+  {
+    ending: "Sect Leader",
+    family: "Magic / dark faith",
+    statRequirement:
+      "INT 2000, Faith 1000, CHA 1000",
+    renownMorality:
+      "No Renown / Morality value listed.",
+    specialCondition:
+      "Consumed 10 Spindle Breads.",
+  },
+  {
+    ending: "Legendary Teacher",
+    family: "Education / social",
+    statRequirement:
+      "STA 1000, INT 2000",
+    renownMorality:
+      "Reputation 300",
+    specialCondition:
+      "Complete 50 courses.",
+  },
+  {
+    ending: "Fashion Designer",
+    family: "Arts / social",
+    statRequirement:
+      "SEN 2000",
+    renownMorality:
+      "Reputation 150",
+    specialCondition:
+      "Purchase 5 pieces of clothing.",
+  },
+  {
+    ending: "Idol",
+    family: "Performance / social",
+    statRequirement:
+      "Charm 500 + Social 500, Music 500",
+    renownMorality:
+      "No Renown / Morality value listed.",
+    specialCondition:
+      "Bar: Theme Costume Command MAX.",
+  },
+  {
+    ending: "Princess",
+    family: "Social / royal",
+    statRequirement:
+      "CHA 5000",
+    renownMorality:
+      "Reputation 400",
+    specialCondition:
+      "Childhood Promise Event in second playthrough.",
+  },
+  {
+    ending: "Maid",
+    family: "Work / service",
+    statRequirement:
+      "STA 800, INT 800, CHA 800, SEN 800",
+    renownMorality:
+      "Good / Evil 45↑",
+    specialCondition:
+      "Childhood Promise + Maid Outfit.",
+  },
+  {
+    ending: "Magnate",
+    family: "Business / wealth",
+    statRequirement:
+      "No main stat value listed.",
+    renownMorality:
+      "No Renown / Morality value listed.",
+    specialCondition:
+      "Accumulate 50,000 Gold.",
+  },
+  {
+    ending: "Merchant",
+    family: "Business / trade",
+    statRequirement:
+      "STA 1000, CHA 1000",
+    renownMorality:
+      "No Renown / Morality value listed.",
+    specialCondition:
+      "Purchase Sophie's items on Red Moon.",
+  },
+  {
+    ending: "Mafia Boss",
+    family: "Underworld / dark social",
+    statRequirement:
+      "INT 1000, CHA 2000",
+    renownMorality:
+      "Good / Evil 30↓",
+    specialCondition:
+      "Street fights and gambling.",
+  },
+  {
+    ending: "Gambler",
+    family: "Money / risk",
+    statRequirement:
+      "INT 500, CHA 1000, SEN 500",
+    renownMorality:
+      "No Renown / Morality value listed.",
+    specialCondition:
+      "3 consecutive wins at School Fest.",
+  },
+  {
+    ending: "Thief",
+    family: "Crime / dark",
+    statRequirement:
+      "No main stat value listed.",
+    renownMorality:
+      "Good / Evil 40↓",
+    specialCondition:
+      "Committed theft.",
+  },
+];
+
+export const statRouteColumns = [
+  { key: "route", label: "Stat Route" },
+  { key: "bestTargets", label: "Best Career Targets" },
+  { key: "whatToWatch", label: "What To Watch" },
+];
+
+export const statRouteRows = [
+  {
+    route: "STA / combat route",
+    bestTargets:
+      "Brave Hero, General, Hero, Queen's Knight, Sword Master, Dark Knight, Mercenary Leader.",
+    whatToWatch:
+      "Combat endings often need Red Moon participation, tournaments, enemy defeats, or special boss clears. Do not rely on STA alone.",
+  },
+  {
+    route: "INT / magic route",
+    bestTargets:
+      "Archmage, Sage / Hermit, Clergy, Evil Cultist, Sect Leader.",
+    whatToWatch:
+      "Magic routes can split into good faith, scholar, tournament, and dark food / item routes depending on morality and special actions.",
+  },
+  {
+    route: "CHA / social route",
+    bestTargets:
+      "Princess, Idol, Maid, Mafia Boss, Mercenary Leader, Merchant.",
+    whatToWatch:
+      "CHA can push both high-status and underworld routes. Morality and special conditions decide where the route lands.",
+  },
+  {
+    route: "SEN / arts route",
+    bestTargets:
+      "Fashion Designer, Sage / Hermit, Gambler, Maid.",
+    whatToWatch:
+      "SEN often appears as a supporting requirement. It matters for arts, luck-adjacent, and festival routes.",
+  },
+  {
+    route: "Gold / business route",
+    bestTargets:
+      "Magnate, Merchant, Gambler, Mafia Boss.",
+    whatToWatch:
+      "Do not describe this as an Income stat. The confirmed requirement for Magnate is accumulated Gold.",
+  },
+  {
+    route: "Dark / morality route",
+    bestTargets:
+      "Dark Knight, Evil Cultist, Mafia Boss, Thief.",
+    whatToWatch:
+      "Low morality can redirect Alice into dark endings. If you want an honorable ending, avoid dropping too far into evil state.",
+  },
+];
+
+export const starColumns = [
+  { key: "starType", label: "Ending Tier / Pattern" },
+  { key: "whatItUsuallyNeeds", label: "What It Usually Needs" },
+  { key: "examples", label: "Examples" },
+];
+
+export const starRows = [
+  {
+    starType: "5-star / legendary career pattern",
+    whatItUsuallyNeeds:
+      "Very high main stat, strong supporting stats, Renown / Reputation, morality alignment, and a major special condition.",
+    examples:
+      "Brave Hero needs broad high stats plus Demon / Illusion Dragon. Archmage needs INT 5000, Magic 1500, reputation, and Magic Tournament victory.",
+  },
+  {
+    starType: "High-status career pattern",
+    whatItUsuallyNeeds:
+      "A strong primary stat plus reputation, gold, or royal / social special conditions.",
+    examples:
+      "Princess, Queen's Knight, Magnate.",
+  },
+  {
+    starType: "Standard career pattern",
+    whatItUsuallyNeeds:
+      "A dominant stat route and fewer special gates than the legendary endings.",
+    examples:
+      "Hero, Scholar-style routes, Merchant, Fashion Designer.",
+  },
+  {
+    starType: "Dark / failure-prone pattern",
+    whatItUsuallyNeeds:
+      "Low morality, crime, gambling, forbidden food, theft, or underworld actions.",
+    examples:
+      "Dark Knight, Evil Cultist, Mafia Boss, Thief.",
+  },
+];
+
+export const reputationColumns = [
+  { key: "system", label: "System" },
+  { key: "howItAffectsEndings", label: "How It Affects Endings" },
+  { key: "examples", label: "Examples" },
+];
+
+export const reputationRows = [
+  {
+    system: "Renown / Reputation",
+    howItAffectsEndings:
+      "Many honorable and high-status endings require public recognition in addition to stats.",
+    examples:
+      "Brave Hero 400, General 350, Queen's Knight 300, Archmage 350, Legendary Teacher 300, Princess 400.",
+  },
+  {
+    system: "Morality / alignment",
+    howItAffectsEndings:
+      "Good-aligned endings require high G/E values, while dark endings require low G/E values or evil actions.",
+    examples:
+      "Brave Hero 60↑, Clergy 60↑, Dark Knight 30↓, Evil Cultist 45↓, Mafia Boss 30↓, Thief 40↓.",
+  },
+  {
+    system: "Special actions",
+    howItAffectsEndings:
+      "Some endings are impossible even with the right stat route if you miss the required action.",
+    examples:
+      "General requires every Red Moon battle. Queen's Knight requires Sword Tournament. Magnate requires 50,000 Gold.",
+  },
+];
+
+export const wrongEndingColumns = [
+  { key: "problem", label: "What Happened?" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const wrongEndingRows = [
+  {
+    problem: "You had high STA but did not get General.",
+    likelyCause:
+      "General requires more than STA. Missing even one Red Moon battle can disqualify the route.",
+    fix:
+      "Participate in every Red Moon defense battle and keep Renown high.",
+  },
+  {
+    problem: "You had high STA but got a lower combat ending.",
+    likelyCause:
+      "You met the stat direction but missed the special condition for a higher combat ending.",
+    fix:
+      "Check whether you won the Sword Tournament, completed Advanced Training, defeated required enemies, or cleared the required boss.",
+  },
+  {
+    problem: "You aimed for Archmage but got another INT ending.",
+    likelyCause:
+      "Archmage needs INT 5000, Magic 1500, reputation, morality, and Magic Tournament victory.",
+    fix:
+      "Treat tournament victory as mandatory, not optional flavor.",
+  },
+  {
+    problem: "You accidentally got a dark ending.",
+    likelyCause:
+      "Morality fell too low, or you used dark / crime / forbidden actions.",
+    fix:
+      "Avoid theft, gambling-heavy routes, street-fight routes, forbidden food routes, and use Church actions if you need to recover morality.",
+  },
+  {
+    problem: "You got Merchant instead of Magnate.",
+    likelyCause:
+      "Magnate is Gold-based, while Merchant uses STA / CHA and Sophie's Red Moon item route.",
+    fix:
+      "For Magnate, focus on accumulating 50,000 Gold. For Merchant, follow the Sophie Red Moon purchase condition.",
+  },
+  {
+    problem: "You met multiple career requirements.",
+    likelyCause:
+      "The game can offer a choice when multiple ending conditions are met.",
+    fix:
+      "Save before graduation and choose the ending you want if the game presents multiple valid outcomes.",
+  },
+  {
+    problem: "A partner or secret route interrupted your career ending.",
+    likelyCause:
+      "Relationship or secret-route priority can override a normal graduation plan.",
+    fix:
+      "Use separate saves for partner endings, Two Queens, Heir of the Stargazer, and Golden Ending cleanup.",
+  },
+];
+
+export const routeConflictColumns = [
+  { key: "routeType", label: "Route Type" },
+  { key: "canItOverrideCareer", label: "Can It Override Career Planning?" },
+  { key: "advice", label: "Advice" },
+];
+
+export const routeConflictRows = [
+  {
+    routeType: "Partner endings",
+    canItOverrideCareer:
+      "Yes, if a committed partner route takes priority at the end.",
+    advice:
+      "Use separate saves for romance cleanup if your target is a specific career ending.",
+  },
+  {
+    routeType: "Two Queens",
+    canItOverrideCareer:
+      "Yes. It is a secret Cornelia route, not a career ending.",
+    advice:
+      "Do not combine a serious Two Queens attempt with career cleanup.",
+  },
+  {
+    routeType: "Heir of the Stargazer",
+    canItOverrideCareer:
+      "Yes. It is the true ending route.",
+    advice:
+      "Finish career endings separately from the true-ending loop.",
+  },
+  {
+    routeType: "Golden Ending",
+    canItOverrideCareer:
+      "Yes. It can skip the normal graduation reward flow.",
+    advice:
+      "Always use a separate save before committing to Golden Ending.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Career endings in Magical Princess are decided by your stat route, Renown / Reputation, Morality, and special conditions.**
+
+Do not plan only around “high STA” or “high INT.” Many career endings require exact stat thresholds and an extra gate. For example, **Brave Hero** needs STA 5000 plus high supporting stats, reputation, morality, and a Demon / Illusion Dragon clear. **General** needs STA 4000 and participation in every Red Moon battle. **Magnate** is not an “income stat” route; it requires **50,000 Gold**.
+
+If you got the wrong career ending, check in this order: **main stat → Renown / Reputation → Morality → special condition → partner or secret-route override**.
+</GuideQuickAnswer>
+
+---
+
+<GuideCallout title="Use the Gallery before committing a run">
+The in-game **Gallery → Professions** screen is the safest place to check exact ending requirements on your current build. Use this page as a routing guide, then confirm the target in your Gallery before spending the whole loop.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/lord-ending-result.webp"
+    alt="Magical Princess normal graduation career ending result screen."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Career endings resolve through the normal graduation / profession flow, unlike Golden Ending.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-career-endings-work">
+  How Career Endings Work
+</h2>
+
+Career endings are normal graduation outcomes. They are separate from partner endings, Two Queens, Heir of the Stargazer, and Golden Ending.
+
+<GuideTable
+  caption="Systems that decide career endings in Magical Princess."
+  columns={statSystemColumns}
+  rows={statSystemRows}
+/>
+
+The most important rule is that career endings are not decided by one number alone. A strong route usually needs:
+
+1. The correct main stat.
+2. Enough Renown / Reputation if the ending is honorable or high-status.
+3. The correct Morality / alignment.
+4. The required special condition.
+5. No partner or secret route overriding your graduation result.
+
+---
+
+<h2 id="all-career-ending-requirements">
+  Career Ending Requirements Table
+</h2>
+
+This table covers the confirmed career endings and requirements from the current public career-route data set.
+
+<GuideTable
+  caption="Magical Princess career ending requirements."
+  columns={careerColumns}
+  rows={careerRows}
+/>
+
+If your in-game Gallery shows a different number, treat the Gallery as the source of truth for your current patch.
+
+---
+
+<h2 id="stat-routes">
+  Career Routes by Main Stat
+</h2>
+
+Use this section when you know which stat Alice is strongest in but do not know which ending family that points toward.
+
+<GuideTable
+  caption="Career ending families by stat route."
+  columns={statRouteColumns}
+  rows={statRouteRows}
+/>
+
+A route can move sideways if morality or special conditions are wrong. For example, a high STA run can become Hero, Queen's Knight, Sword Master, General, Brave Hero, or Dark Knight depending on reputation, morality, tournaments, enemy defeats, and Red Moon participation.
+
+---
+
+<h2 id="five-star-endings">
+  5-Star and High-Tier Career Endings
+</h2>
+
+High-tier endings usually combine a strong primary route with supporting stats and a special gate.
+
+<GuideTable
+  caption="How to think about career ending tiers."
+  columns={starColumns}
+  rows={starRows}
+/>
+
+The important lesson is that a 5-star style ending is not simply “raise the biggest stat.” It usually requires a clean build plus a mandatory route achievement.
+
+---
+
+<h2 id="renown-and-morality">
+  Renown, Reputation, and Morality
+</h2>
+
+Renown / Reputation and Morality are the two systems most likely to explain why you got a different career ending than expected.
+
+<GuideTable
+  caption="How reputation and morality affect career endings."
+  columns={reputationColumns}
+  rows={reputationRows}
+/>
+
+If you want honorable endings like Brave Hero, General, Queen's Knight, Archmage, Clergy, Legendary Teacher, or Princess, do not ignore reputation and morality. If you want dark endings, you usually need low morality or dark-route actions on purpose.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/red-moon-protect-city-choice.webp"
+    alt="Magical Princess Red Moon event with Protect the City and Check the Plaza choices."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Red Moon battles matter for combat career routing, especially General.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="combat-endings">
+  Combat and Military Endings
+</h2>
+
+Combat endings usually start from high STA, but each ending has a different extra gate.
+
+Key examples:
+
+- **Brave Hero:** the broadest combat check, with very high stats and Demon / Illusion Dragon clear.
+- **General:** requires every Red Moon battle, so missing one can break the route.
+- **Queen's Knight:** requires the School Sword Tournament.
+- **Sword Master:** requires Knight's Gym Advanced Training MAX.
+- **Dark Knight:** needs low morality and 100 enemy defeats.
+- **Mercenary Leader:** uses STA + CHA and the Belzer street fight route.
+
+If you only raise STA and ignore the special condition, the game may send you to a lower or different combat ending.
+
+---
+
+<h2 id="magic-and-faith-endings">
+  Magic and Faith Endings
+</h2>
+
+Magic endings split into honorable, academic, faith-based, and dark routes.
+
+Key examples:
+
+- **Archmage:** INT 5000, Magic 1500, reputation, morality, and School Magic Tournament victory.
+- **Sage / Hermit:** INT 4000 plus SEN 2000.
+- **Clergy:** Faith, Morality, Church prayers, and high good alignment.
+- **Evil Cultist:** lower morality plus Magic Bread.
+- **Sect Leader:** Faith and Spindle Bread route.
+
+Do not treat all INT endings as the same. The difference between Archmage, Clergy, Sage / Hermit, and Evil Cultist is usually reputation, morality, faith, and special actions.
+
+---
+
+<h2 id="social-and-arts-endings">
+  Social, Arts, and Royal Endings
+</h2>
+
+Social endings use CHA, SEN, reputation, clothing, events, and performance routes.
+
+Key examples:
+
+- **Princess:** CHA 5000, reputation, and the Childhood Promise Event in second playthrough.
+- **Idol:** Charm / Social, Music, and Bar Theme Costume Command MAX.
+- **Fashion Designer:** SEN 2000, reputation, and clothing purchases.
+- **Legendary Teacher:** STA + INT, reputation, and 50 completed courses.
+- **Maid:** balanced stats, good alignment, Childhood Promise, and Maid Outfit.
+
+If you are trying for Princess or Maid, do not ignore event requirements. These endings are not just raw CHA checks.
+
+---
+
+<h2 id="business-and-underworld-endings">
+  Business and Underworld Endings
+</h2>
+
+Business and underworld endings are where players often make the worst assumptions.
+
+<GuideCallout title="Gold is not the same as an Income stat">
+For Magnate, the confirmed requirement is **50,000 Gold**. Do not describe this as “high income” unless your current build shows a separate income stat.
+</GuideCallout>
+
+Key examples:
+
+- **Magnate:** accumulate 50,000 Gold.
+- **Merchant:** STA + CHA and Sophie's Red Moon item route.
+- **Mafia Boss:** INT + CHA, low morality, street fights, and gambling.
+- **Gambler:** INT + CHA + SEN and 3 consecutive School Fest wins.
+- **Thief:** low morality and theft.
+
+If your route includes gambling, street fights, theft, or low morality, you may be drifting away from honorable careers and into underworld endings.
+
+---
+
+<h2 id="why-you-got-the-wrong-career-ending">
+  Why You Got the Wrong Career Ending
+</h2>
+
+<GuideTable
+  caption="Career ending troubleshooting."
+  columns={wrongEndingColumns}
+  rows={wrongEndingRows}
+/>
+
+The fastest debugging order is:
+
+1. Did your main stat meet the target?
+2. Did your supporting stat meet the target?
+3. Did your Renown / Reputation meet the target?
+4. Did your Morality / alignment match the route?
+5. Did you complete the special condition?
+6. Did a partner or secret route override the career ending?
+
+---
+
+<h2 id="career-vs-secret-routes">
+  Career Endings vs Partner and Secret Routes
+</h2>
+
+Career endings are normal graduation outcomes. Partner and secret routes can interfere if they take priority.
+
+<GuideTable
+  caption="Routes that can override normal career planning."
+  columns={routeConflictColumns}
+  rows={routeConflictRows}
+/>
+
+The clean approach is to use separate saves:
+
+- One save family for career endings.
+- One save family for partner endings.
+- One save family for Two Queens and Heir of the Stargazer.
+- One backup save before Golden Ending.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/ng-plus-replay-blessings.webp"
+    alt="Magical Princess NG+ carry-over screen after completing an ending."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use later loops and backup saves to clean up career endings without breaking secret-route progress.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What decides career endings in Magical Princess?
+
+Career endings are decided by main stats, Renown / Reputation, Morality, and special conditions. For some endings, the special condition matters as much as the stat threshold.
+
+### What are the four main career stats?
+
+The four main stats are **STA**, **INT**, **CHA**, and **SEN**. STA supports combat routes, INT supports magic and scholar routes, CHA supports social and royal routes, and SEN supports arts, luck-adjacent, and festival-related routes.
+
+### Why did I get General wrong even with high STA?
+
+General requires participation in every Red Moon battle. High STA alone is not enough if you missed the Red Moon battle condition.
+
+### How do I get Brave Hero?
+
+Brave Hero requires STA 5000, INT 2000, CHA 2000, SEN 2000, Reputation 400, Good / Evil 60↑, and Demon / Illusion Dragon clear.
+
+### How do I get Archmage?
+
+Archmage requires INT 5000, Magic 1500, Reputation 350, Good / Evil 30↑, and School Magic Tournament victory.
+
+### How do I get Magnate?
+
+Magnate requires accumulating **50,000 Gold**. Do not confuse this with a separate income stat.
+
+### How do I avoid dark endings?
+
+Avoid pushing morality too low, and avoid dark-route actions such as theft, gambling-heavy routes, street-fight routes, forbidden food routes, or evil-state routing unless you are aiming for a dark ending.
+
+### Can partner endings block career endings?
+
+Yes. If a partner route takes final priority, it can override normal career cleanup. Use separate saves for romance endings.
+
+### Do career endings need Forbidden Research?
+
+No. Forbidden Research is part of the hidden Library / Labyrinth route, not normal career endings.
+
+### What should I check before graduation?
+
+Check your target career in the in-game Gallery / Professions screen, confirm the main stat, Renown / Reputation, Morality, and special condition, then save before the final result.

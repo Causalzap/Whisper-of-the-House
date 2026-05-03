@@ -1,0 +1,658 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    whatToDo:
+      "Finish Loop 1, then start Loop 2 / your first NG+.",
+    whyItMatters:
+      "Two Queens is a NG+ secret ending. The earliest practical attempt is Loop 2.",
+  },
+  {
+    step: "2",
+    whatToDo:
+      "Make Queen Cornelia your main route target in Loop 2 or later.",
+    whyItMatters:
+      "Two Queens depends on Cornelia's Queen-route state, not on a normal career stat check.",
+  },
+  {
+    step: "3",
+    whatToDo:
+      "Build Cornelia affinity through outings and Queen-related events.",
+    whyItMatters:
+      "Royal Rendezvous and Side-by-Side with Her Majesty are your best progress checks.",
+  },
+  {
+    step: "4",
+    whatToDo:
+      "Avoid committing to any normal companion partner route before the final day.",
+    whyItMatters:
+      "A committed partner route can take priority and block Cornelia's final-day invitation.",
+  },
+  {
+    step: "5",
+    whatToDo:
+      "Accept Cornelia's final-day invitation.",
+    whyItMatters:
+      "This is the route gate that moves Alice into the Two Queens ending sequence.",
+  },
+  {
+    step: "6",
+    whatToDo:
+      "Win the Red Moon Eve battle.",
+    whyItMatters:
+      "Winning this fight completes Two Queens and gives you the Inheritance Fragment.",
+  },
+];
+
+export const loopColumns = [
+  { key: "loop", label: "Loop" },
+  { key: "meaning", label: "Meaning" },
+  { key: "goal", label: "Goal" },
+];
+
+export const loopRows = [
+  {
+    loop: "Loop 1",
+    meaning: "First playthrough",
+    goal:
+      "Finish any ending and learn the calendar, combat, affinity, and ending systems.",
+  },
+  {
+    loop: "Loop 2",
+    meaning: "First NG+",
+    goal:
+      "Earliest practical Two Queens attempt. Focus Cornelia, avoid partner lock, win Red Moon Eve, and get the Inheritance Fragment.",
+  },
+  {
+    loop: "Loop 3",
+    meaning: "Second NG+",
+    goal:
+      "Earliest practical Heir of the Stargazer attempt, if the Inheritance Fragment is confirmed and the Library / Forbidden Research route is ready.",
+  },
+  {
+    loop: "Later loops",
+    meaning: "Delayed cleanup",
+    goal:
+      "Use these if you missed Cornelia's invitation, lost Red Moon Eve, failed to confirm the Fragment, or need more combat preparation.",
+  },
+];
+
+export const corneliaChecklistColumns = [
+  { key: "stage", label: "Route Stage" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "progressCheck", label: "Progress Check" },
+  { key: "dangerSign", label: "Danger Sign" },
+];
+
+export const corneliaChecklistRows = [
+  {
+    stage: "Loop 2 / first NG+",
+    whatToDo:
+      "Start treating Cornelia as your main route target as soon as the new loop begins.",
+    progressCheck:
+      "Two Queens is a NG+ secret ending, so this is the earliest practical loop to aim for it.",
+    dangerSign:
+      "Trying to force Two Queens on Loop 1.",
+  },
+  {
+    stage: "Cornelia outings",
+    whatToDo:
+      "Choose Cornelia outings whenever they are available.",
+    progressCheck:
+      "Royal Rendezvous is the practical milestone: go on 5 outings with Cornelia.",
+    dangerSign:
+      "You only visit Cornelia once or twice, then ignore her until the final stretch.",
+  },
+  {
+    stage: "Affinity push",
+    whatToDo:
+      "Keep choosing Queen / Cornelia events after the 5-outing milestone.",
+    progressCheck:
+      "Side-by-Side with Her Majesty is the max-affinity check for Cornelia.",
+    dangerSign:
+      "You stop once Royal Rendezvous is done and never push Cornelia to max affinity.",
+  },
+  {
+    stage: "Companion management",
+    whatToDo:
+      "Stay friendly with companions, but do not accept obvious partner-lock scenes.",
+    progressCheck:
+      "No companion has taken over the file with a confession, final date, or partner commitment.",
+    dangerSign:
+      "You see a confession-style scene, special date, romance activation, or final partner prompt.",
+  },
+  {
+    stage: "Final day",
+    whatToDo:
+      "Wait for Cornelia's invitation and accept it.",
+    progressCheck:
+      "Cornelia personally invites Alice into the final route sequence.",
+    dangerSign:
+      "Only normal career endings or companion partner endings appear.",
+  },
+  {
+    stage: "Red Moon Eve",
+    whatToDo:
+      "Win the battle after accepting Cornelia's invitation.",
+    progressCheck:
+      "The ending completes and you receive the Inheritance Fragment.",
+    dangerSign:
+      "Alice reaches the route but loses because the build has no combat plan.",
+  },
+];
+
+export const partnerLockColumns = [
+  { key: "signal", label: "Possible Partner-Lock Signal" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const partnerLockRows = [
+  {
+    signal: "Confession-style scene",
+    whatItMeans:
+      "A companion may be trying to move into a committed partner route.",
+    whatToDo:
+      "Do not accept it on a Two Queens run unless you have a backup save.",
+  },
+  {
+    signal: "Special date or romance activation",
+    whatItMeans:
+      "The game may be prioritizing that companion as your final partner.",
+    whatToDo:
+      "Reload if Cornelia is your target and you are close to the final stretch.",
+  },
+  {
+    signal: "Final partner commitment prompt",
+    whatItMeans:
+      "This is likely too late to safely keep Two Queens as the priority.",
+    whatToDo:
+      "Use an earlier save and avoid committing to that route.",
+  },
+  {
+    signal: "Cornelia invitation missing despite high affinity",
+    whatItMeans:
+      "Cornelia may be maxed, but another route has priority.",
+    whatToDo:
+      "Check whether you triggered a companion route, special date, or final partner prompt earlier.",
+  },
+];
+
+export const battleColumns = [
+  { key: "check", label: "Battle Check" },
+  { key: "safeBaseline", label: "Safe Baseline" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const battleRows = [
+  {
+    check: "Main combat plan",
+    safeBaseline:
+      "Have one reliable combat path instead of a pure social build.",
+    whyItMatters:
+      "Cornelia route progress gets you to Red Moon Eve, but combat strength lets you finish it.",
+  },
+  {
+    check: "Battle Rank",
+    safeBaseline:
+      "Aim for a comfortable mid-to-high battle rank before the final stretch.",
+    whyItMatters:
+      "If normal Red Moon / Crimson Moon fights already feel dangerous, Red Moon Eve is risky.",
+  },
+  {
+    check: "Equipment",
+    safeBaseline:
+      "Equip your best weapon and defensive gear before accepting Cornelia's final invitation.",
+    whyItMatters:
+      "Do not enter a route battle with social or festival gear by accident.",
+  },
+  {
+    check: "Allies and support",
+    safeBaseline:
+      "Expect Cornelia's route to provide story support, but do not rely on allies to carry an underbuilt Alice.",
+    whyItMatters:
+      "Late-route battles may include allies or route support, but Alice still needs enough combat power to survive.",
+  },
+];
+
+export const rewardColumns = [
+  { key: "reward", label: "Reward / Unlock" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "nextUse", label: "Next Use" },
+];
+
+export const rewardRows = [
+  {
+    reward: "Two Queens Ending",
+    whatItDoes:
+      "Completes Cornelia's Queen-route secret ending.",
+    nextUse:
+      "Counts as the route payoff before moving into the true ending chain.",
+  },
+  {
+    reward: "Inheritance Fragment",
+    whatItDoes:
+      "The key item that makes the next true-ending loop possible.",
+    nextUse:
+      "Check your NG+ carry-over / inherited items state before committing the next run to Heir of the Stargazer.",
+  },
+  {
+    reward: "Cornelia route completion",
+    whatItDoes:
+      "Confirms that Cornelia's route state was high enough for the final invitation.",
+    nextUse:
+      "Use the cleared route as the base for true-ending cleanup.",
+  },
+];
+
+export const endingDifferenceColumns = [
+  { key: "ending", label: "Ending" },
+  { key: "routeType", label: "Route Type" },
+  { key: "mainRequirement", label: "Main Requirement" },
+  { key: "result", label: "Result" },
+];
+
+export const endingDifferenceRows = [
+  {
+    ending: "Two Queens",
+    routeType: "Cornelia secret ending",
+    mainRequirement:
+      "Cornelia affinity / Queen route state, final-day invitation, and Red Moon Eve victory.",
+    result:
+      "Unlocks the Inheritance Fragment for the true ending route.",
+  },
+  {
+    ending: "Normal partner ending",
+    routeType: "Companion romance / partner route",
+    mainRequirement:
+      "Committing to any normal companion partner route through confession, special date, romance activation, or final partner prompt.",
+    result:
+      "Can take priority over Two Queens and block Cornelia's final invitation.",
+  },
+  {
+    ending: "Heir of the Stargazer",
+    routeType: "True ending route",
+    mainRequirement:
+      "Inheritance Fragment, Forbidden Research, and Infinite Mirror Labyrinth.",
+    result:
+      "The true ending payoff after Two Queens.",
+  },
+  {
+    ending: "Golden Ending",
+    routeType: "Cornet / Labyrinth special route",
+    mainRequirement:
+      "Cornet's necklace, Forbidden Research, and Labyrinth special route.",
+    result:
+      "Separate special ending that is not the same as Two Queens.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "Cornelia's final invitation does not appear.",
+    likelyCause:
+      "Cornelia affinity / route state is not high enough, or another route has priority.",
+    fix:
+      "Reload before the final stretch, push Cornelia outings / affinity, and avoid companion partner-lock scenes.",
+  },
+  {
+    problem: "Cornelia is maxed, but Two Queens still does not trigger.",
+    likelyCause:
+      "Another route may have taken priority despite Cornelia's affinity being high.",
+    fix:
+      "Check for confession scenes, special dates, or partner commitment prompts from companions. Use an earlier save if needed.",
+  },
+  {
+    problem: "You get a partner ending instead of Two Queens.",
+    likelyCause:
+      "You committed to a companion route before Cornelia's final-day invitation.",
+    fix:
+      "Use an earlier save and stop accepting confession, romance activation, or final partner prompts.",
+  },
+  {
+    problem: "You reach Red Moon Eve but lose the battle.",
+    likelyCause:
+      "Your Cornelia route is correct, but Alice is underbuilt for combat.",
+    fix:
+      "Train combat earlier, upgrade equipment, and do not run a pure social file.",
+  },
+  {
+    problem: "You completed Two Queens but cannot get Heir of the Stargazer.",
+    likelyCause:
+      "You have the Cornelia half, but still need the Library / Forbidden Research half.",
+    fix:
+      "Confirm the Inheritance Fragment in the next NG+ carry-over state, then complete Forbidden Research and the Labyrinth route.",
+  },
+];
+
+
+<GuideQuickAnswer title="Quick Answer">
+**To get the Two Queens Ending in Magical Princess, reach Loop 2 / your first NG+ or later, make Queen Cornelia your main route target, build her affinity through outings and Queen events, avoid committed companion partner endings, accept Cornelia's final-day invitation, and win the Red Moon Eve battle.**
+
+Use two progress checks while building the route: **Royal Rendezvous** means you have gone on 5 outings with Cornelia, while **Side-by-Side with Her Majesty** means Cornelia's affinity is maxed. Two Queens gives you the **Inheritance Fragment**.
+
+After Two Queens, the earliest practical Heir of the Stargazer attempt is **Loop 3 / your second NG+**, but only after you confirm the Inheritance Fragment in the next carry-over state.
+</GuideQuickAnswer>
+
+---
+
+<GuideCallout title="Make a save before final-day route choices">
+If Cornelia's final invitation appears, save before accepting it. If a companion confession, special date, or final partner prompt appears instead, save before answering. Two Queens can be blocked by another route taking priority even when Cornelia's affinity is high.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/cornelia-queen-intro.webp"
+    alt="Queen Cornelia in Magical Princess, the key character for the Two Queens ending."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Queen Cornelia is the route anchor for Two Queens and the Inheritance Fragment.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="two-queens-route-overview">
+  Two Queens Route Overview
+</h2>
+
+Two Queens is Cornelia's NG+ secret ending. It is not a first-run career ending, and it is not the same thing as a normal companion partner ending.
+
+<GuideTable
+  caption="Two Queens route steps in Magical Princess."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The route has three checks: **Cornelia affinity**, **route priority**, and **Red Moon Eve victory**. If any one of those fails, Two Queens can fail.
+
+---
+
+<h2 id="loop-order">
+  Loop Order: Two Queens, Inheritance Fragment, and Heir of the Stargazer
+</h2>
+
+Two Queens is the Cornelia half of the true-ending route, but it is not the final true ending by itself.
+
+<GuideTable
+  caption="Recommended loop order for Two Queens and Heir of the Stargazer."
+  columns={loopColumns}
+  rows={loopRows}
+/>
+
+The important rule is: **do Two Queens first, then check the Inheritance Fragment in the next loop before committing to Heir of the Stargazer.**
+
+---
+
+<h2 id="cornelia-route-checklist">
+  Cornelia Route Checklist
+</h2>
+
+Cornelia is the most important part of this route. If her route state is not ready, the final-day invitation will not appear.
+
+<GuideTable
+  caption="Cornelia route checklist for Two Queens."
+  columns={corneliaChecklistColumns}
+  rows={corneliaChecklistRows}
+/>
+
+The two practical checkpoints are:
+
+- **Royal Rendezvous:** 5 outings with Cornelia.
+- **Side-by-Side with Her Majesty:** Cornelia affinity maxed.
+
+Do not stop at 5 outings if you have not maxed her affinity yet. Royal Rendezvous is a useful milestone, but **Side-by-Side with Her Majesty** is the safer route target.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/cornelia-hangout-event.webp"
+    alt="Magical Princess Cornelia hangout event for building the Two Queens route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cornelia outings are the clearest progress signal for Royal Rendezvous and her max-affinity route.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="two-queens-vs-cornelia-partner-ending">
+  Two Queens vs Cornelia Partner Ending
+</h2>
+
+This is the route confusion most players should watch for.
+
+<GuideTable
+  caption="How Two Queens differs from normal partner endings and other secret endings."
+  columns={endingDifferenceColumns}
+  rows={endingDifferenceRows}
+/>
+
+The simple answer: **Two Queens is Cornelia's secret Queen-route ending, not a normal partner ending.** Raising Cornelia affinity is required, but the route payoff is the secret ending that gives the Inheritance Fragment.
+
+If another companion route takes priority, you can miss Two Queens even with strong Cornelia progress.
+
+---
+
+<h2 id="avoid-partner-route-lock">
+  Avoid Partner Route Lock
+</h2>
+
+The biggest way to ruin a Two Queens run is to let a normal partner route take priority.
+
+<GuideTable
+  caption="Possible partner-lock signals to watch for before the Two Queens final day."
+  columns={partnerLockColumns}
+  rows={partnerLockRows}
+/>
+
+Do not treat every friendship scene as dangerous. The danger is commitment. If the game starts asking for final partner-style choices, stop and save before answering.
+
+---
+
+<h2 id="final-day-invitation">
+  Cornelia's Final-Day Invitation
+</h2>
+
+The final-day invitation is the real route check.
+
+If your Cornelia route state is ready, Cornelia invites Alice into the Two Queens ending sequence. Accepting that invitation moves you toward Red Moon Eve.
+
+If the invitation does not appear, one of these is usually true:
+
+1. Cornelia affinity is not high enough.
+2. You stopped after the 5-outing milestone but did not max affinity.
+3. A companion partner route has taken priority.
+4. You are trying to force the route before the NG+ secret ending state is available.
+
+Do not try to fix this at the last second. Reload from before the final stretch and check **Cornelia affinity → partner route lock → final invitation** in that order.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/cornelia-second-hangout.webp"
+    alt="Magical Princess second Cornelia route event or Queen visit scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Repeated Cornelia scenes are a good sign that the Queen route is still moving.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="red-moon-eve-battle">
+  Red Moon Eve Battle
+</h2>
+
+After accepting Cornelia's invitation, the route moves into the **Red Moon Eve** battle.
+
+This is not the same as every normal Red Moon / Crimson Moon city event. Think of it as the Two Queens route's final combat gate. You can do the social side correctly and still fail if Alice cannot win the fight.
+
+<GuideTable
+  caption="How to prepare for the Red Moon Eve battle."
+  columns={battleColumns}
+  rows={battleRows}
+/>
+
+Late-route battles may include allies or route support, but do not rely on that to carry a weak file. If normal Red Moon / Crimson Moon fights feel risky, train more before committing to Cornelia's final invitation.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/red-moon-protect-city-choice.webp"
+    alt="Magical Princess Red Moon event with Protect the City and Check the Plaza choices."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Red Moon events are the story context for the final Red Moon Eve route battle.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="inheritance-fragment">
+  Inheritance Fragment Reward
+</h2>
+
+The reason Two Queens matters is the **Inheritance Fragment**.
+
+<GuideTable
+  caption="What Two Queens unlocks."
+  columns={rewardColumns}
+  rows={rewardRows}
+/>
+
+The Inheritance Fragment is the key item that makes the next true-ending loop possible.
+
+After completing Two Queens, check the next NG+ carry-over / inherited items state before committing the whole run. If you cannot confirm the Fragment, do not spend the loop grinding Forbidden Research or preparing for the Labyrinth yet.
+
+Full guide: <Link href="/magical-princess/true-ending-heir-of-the-stargazer/">True Ending / Heir of the Stargazer Guide</Link>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/ng-plus-replay-blessings.webp"
+    alt="Magical Princess NG+ carry over screen after an ending route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check the carry-over state before committing the next loop to Heir of the Stargazer.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="two-queens-to-true-ending">
+  How Two Queens Leads to Heir of the Stargazer
+</h2>
+
+Two Queens gives you the **Inheritance Fragment**. After that, the remaining true-ending work moves to the Library / Labyrinth side of the route.
+
+Full guide: <Link href="/magical-princess/forbidden-research-guide/">Forbidden Research Guide</Link>
+
+---
+
+<h2 id="why-two-queens-is-not-unlocking">
+  Why Two Queens Is Not Unlocking
+</h2>
+
+<GuideTable
+  caption="Common problems that block Two Queens."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+Most failed Two Queens attempts come from one of three mistakes:
+
+1. Cornelia route state is too low.
+2. A partner route takes priority.
+3. Alice reaches Red Moon Eve but cannot win the battle.
+
+Check the route in this order: **Cornelia affinity → partner route lock → final invitation → Red Moon Eve battle → Inheritance Fragment.**
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is Two Queens required for the true ending?
+
+Yes. Two Queens gives the Inheritance Fragment, which is required for the Heir of the Stargazer true ending route.
+
+### Can I get Two Queens on the first playthrough?
+
+No. Two Queens is a NG+ secret ending. The earliest practical attempt is **Loop 2 / your first NG+**.
+
+### What loop is Heir of the Stargazer?
+
+If you get Two Queens in Loop 2 and confirm the Inheritance Fragment in the next carry-over state, the earliest practical Heir of the Stargazer attempt is **Loop 3 / your second NG+**.
+
+### How do I raise Cornelia affinity?
+
+Choose Cornelia outings, Queen visits, and Cornelia-related route events whenever they appear. Use Royal Rendezvous and Side-by-Side with Her Majesty as your progress checks.
+
+### How many Cornelia outings do I need?
+
+Five Cornelia outings are the Royal Rendezvous milestone. For Two Queens, keep going until Cornelia affinity is maxed and Side-by-Side with Her Majesty is secured.
+
+### Is Two Queens the same as a Cornelia partner ending?
+
+No. Two Queens is Cornelia's secret Queen-route ending. It uses Cornelia affinity, but it is not the same as a normal companion partner ending.
+
+### Why did Cornelia's final invitation not appear even though her affinity was high?
+
+Another route may have taken priority, or Cornelia may not be fully maxed. Check whether you accepted a confession, special date, romance activation, or final partner prompt from another companion.
+
+### Can I date companions while going for Two Queens?
+
+You can interact with companions, but do not accept confession, special date, or final partner commitment prompts if your target is Two Queens.
+
+### What is Red Moon Eve?
+
+Red Moon Eve is the final battle sequence after Cornelia's final-day invitation. Winning it completes Two Queens and gives the Inheritance Fragment.
+
+### Does the Inheritance Fragment carry over to NG+?
+
+After completing Two Queens, check your NG+ carry-over / inherited items screen before committing the next run. The Fragment is the key item for Heir of the Stargazer, so confirm it before starting the Library / Labyrinth half.
+
+### Is Two Queens the same as Golden Ending?
+
+No. Two Queens is Cornelia's secret route and leads toward Heir of the Stargazer. Golden Ending is tied to Cornet's necklace, Forbidden Research, and the Labyrinth special route.

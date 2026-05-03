@@ -181,6 +181,49 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-yellow-700",
 },
 
+
+// ===== Magical Princess =====
+{
+  href: "/magical-princess/endings-guide",
+  game: "Magical Princess",
+  title: "Endings Guide: Career, Partner, Secret, True, and Golden Routes",
+  description:
+    "Start here for Magical Princess endings, including 50+ career, partner, and secret routes, Two Queens, Heir of the Stargazer, Golden Ending, and route order.",
+  tagClass: "text-pink-500",
+  hoverBorderClass: "hover:border-pink-300",
+  hoverTitleClass: "group-hover:text-pink-700",
+},
+{
+  href: "/magical-princess/forbidden-research-guide",
+  game: "Magical Princess",
+  title: "Forbidden Research Guide: Unlock the Hidden Library Route",
+  description:
+    "Learn how to unlock Forbidden Research, why Decipher Literature does not work, how Cornet's necklace changes the Library in NG+, and what to do after Level 5.",
+  tagClass: "text-pink-500",
+  hoverBorderClass: "hover:border-pink-300",
+  hoverTitleClass: "group-hover:text-pink-700",
+},
+{
+  href: "/magical-princess/true-ending-heir-of-the-stargazer",
+  game: "Magical Princess",
+  title: "True Ending Guide: How to Get Heir of the Stargazer",
+  description:
+    "Follow the full true ending route through Two Queens, Cornelia, the Inheritance Fragment, Forbidden Research, Anna's cue, and Infinite Mirror Labyrinth.",
+  tagClass: "text-pink-500",
+  hoverBorderClass: "hover:border-pink-300",
+  hoverTitleClass: "group-hover:text-pink-700",
+},
+{
+  href: "/magical-princess/golden-ending-guide",
+  game: "Magical Princess",
+  title: "Golden Ending Guide: Cornet's Necklace, NG+, and Labyrinth Route",
+  description:
+    "Get the Golden Ending by defeating Blackburn, receiving Cornet's necklace, unlocking Forbidden Research, entering the Labyrinth route, and avoiding normal ending lockouts.",
+  tagClass: "text-pink-500",
+  hoverBorderClass: "hover:border-pink-300",
+  hoverTitleClass: "group-hover:text-pink-700",
+},
+
 // ===== Heroes Olden Era =====
 {
   href: "/olden-era",

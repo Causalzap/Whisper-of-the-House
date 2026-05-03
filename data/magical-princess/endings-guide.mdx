@@ -1,0 +1,947 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const routeTypeColumns = [
+  { key: "type", label: "Ending Type" },
+  { key: "whatItCovers", label: "What It Covers" },
+  { key: "bestFor", label: "Best For" },
+];
+
+export const routeTypeRows = [
+  {
+    type: "Career endings",
+    whatItCovers:
+      "Normal graduation outcomes based on stats, classes, morality, reputation, jobs, money, and activity focus.",
+    bestFor:
+      "Players trying to get job endings, 5-star endings, dark endings, political endings, wealth endings, or weird career results.",
+  },
+  {
+    type: "Partner / romance endings",
+    whatItCovers:
+      "Relationship-based endings tied to companion affinity, romance choices, dates, and final partner priority.",
+    bestFor:
+      "Players doing Crois, Fran, Chocolat, Shail, Hasis, Noah, or other romance cleanup.",
+  },
+  {
+    type: "Cornelia / Two Queens route",
+    whatItCovers:
+      "Queen Cornelia's NG+ secret ending, final-day invitation, Red Moon Eve battle, and the Inheritance Fragment.",
+    bestFor:
+      "Players preparing for Heir of the Stargazer.",
+  },
+  {
+    type: "Forbidden Research route",
+    whatItCovers:
+      "Cornet's necklace, NG+, Royal Library changes, Forbidden Research Level 5, and Anna's Labyrinth cue.",
+    bestFor:
+      "Players stuck because the Library still shows Decipher Literature.",
+  },
+  {
+    type: "True / Golden routes",
+    whatItCovers:
+      "Heir of the Stargazer, Golden Ending, Infinite Mirror Labyrinth, and late-route payoff decisions.",
+    bestFor:
+      "Players trying to finish major secret routes after normal endings.",
+  },
+];
+
+export const routeOrderColumns = [
+  { key: "order", label: "Order" },
+  { key: "target", label: "Target" },
+  { key: "why", label: "Why This Order Works" },
+];
+
+export const routeOrderRows = [
+  {
+    order: "1",
+    target: "Finish any first ending",
+    why:
+      "Use Loop 1 to learn the calendar, stats, classes, combat, stress, morality, and ending priority.",
+  },
+  {
+    order: "2",
+    target: "Do Two Queens in Loop 2 / first NG+",
+    why:
+      "Two Queens gives the Inheritance Fragment, which is needed before the true ending route can move forward.",
+  },
+  {
+    order: "3",
+    target: "Do Heir of the Stargazer in Loop 3 / second NG+",
+    why:
+      "After Two Queens, check the Inheritance Fragment, complete Forbidden Research, and clear the Labyrinth.",
+  },
+  {
+    order: "4",
+    target: "Do Golden Ending on a separate save",
+    why:
+      "Golden Ending is a special route that skips the normal graduation reward flow.",
+  },
+  {
+    order: "5",
+    target: "Clean up career and partner endings",
+    why:
+      "Once the secret routes are understood, normal endings are easier to route by stat focus and relationship priority.",
+  },
+];
+
+export const loopColumns = [
+  { key: "loop", label: "Loop" },
+  { key: "meaning", label: "Meaning" },
+  { key: "bestTarget", label: "Best Target" },
+];
+
+export const loopRows = [
+  {
+    loop: "Loop 1",
+    meaning: "First playthrough",
+    bestTarget:
+      "Learn the systems and finish any normal ending.",
+  },
+  {
+    loop: "Loop 2",
+    meaning: "First NG+",
+    bestTarget:
+      "Earliest practical Two Queens attempt.",
+  },
+  {
+    loop: "Loop 3",
+    meaning: "Second NG+",
+    bestTarget:
+      "Earliest practical Heir of the Stargazer attempt, if the Inheritance Fragment is confirmed.",
+  },
+  {
+    loop: "Later loops",
+    meaning: "Cleanup / delayed routing",
+    bestTarget:
+      "Golden Ending, career endings, partner endings, and missed secret routes.",
+  },
+];
+
+export const secretRouteColumns = [
+  { key: "route", label: "Route" },
+  { key: "keyItem", label: "Key Item / Gate" },
+  { key: "mainProblem", label: "Common Problem" },
+  { key: "guide", label: "Detailed Guide" },
+];
+
+export const secretRouteRows = [
+  {
+    route: "Two Queens",
+    keyItem:
+      "Inheritance Fragment from Queen Cornelia's route.",
+    mainProblem:
+      "Cornelia's final-day invitation does not appear, or a partner route takes priority.",
+    guide:
+      "Two Queens Ending Guide",
+  },
+  {
+    route: "Heir of the Stargazer",
+    keyItem:
+      "Inheritance Fragment, Forbidden Research, and Infinite Mirror Labyrinth.",
+    mainProblem:
+      "Players finish Two Queens but do not complete the Library / Labyrinth half.",
+    guide:
+      "True Ending Guide",
+  },
+  {
+    route: "Forbidden Research",
+    keyItem:
+      "Cornet's necklace carried into NG+.",
+    mainProblem:
+      "The Library still shows Decipher Literature.",
+    guide:
+      "Forbidden Research Guide",
+  },
+  {
+    route: "Golden Ending",
+    keyItem:
+      "Cornet's necklace, Forbidden Research Level 5, and the Labyrinth special route.",
+    mainProblem:
+      "Players expect Golden Ending on the normal graduation screen.",
+    guide:
+      "Golden Ending Guide",
+  },
+  {
+    route: "Inherit the Stars",
+    keyItem:
+      "Rare secret-route achievement tracking.",
+    mainProblem:
+      "Trigger condition unknown. Possibly tied to full secret-route completion. Track after clearing Heir of the Stargazer and Golden Ending.",
+    guide:
+      "Track after secret-route clears",
+  },
+];
+
+export const knownEndingColumns = [
+  { key: "ending", label: "Ending" },
+  { key: "type", label: "Type" },
+  { key: "hubUse", label: "Where To Go Next" },
+];
+
+export const knownEndingRows = [
+  {
+    ending: "Brave Hero",
+    type: "Combat / 5-star career ending",
+    hubUse:
+      "Use the career endings guide for combat-stat planning.",
+  },
+  {
+    ending: "General",
+    type: "Combat career ending",
+    hubUse:
+      "Track under high stamina / combat career cleanup.",
+  },
+  {
+    ending: "Queen's Knight",
+    type: "Combat / royal service ending",
+    hubUse:
+      "Track under combat and royal-aligned career endings.",
+  },
+  {
+    ending: "Hero",
+    type: "Combat career ending",
+    hubUse:
+      "Use combat-focused planning and avoid route overrides.",
+  },
+  {
+    ending: "Sword Master",
+    type: "Combat career ending",
+    hubUse:
+      "Track under weapon / physical combat outcomes.",
+  },
+  {
+    ending: "Dark Knight",
+    type: "Combat / dark ending",
+    hubUse:
+      "Track under dark combat or morality-influenced outcomes.",
+  },
+  {
+    ending: "Mercenary Leader",
+    type: "Combat / money route ending",
+    hubUse:
+      "Track under combat plus money / work-route planning.",
+  },
+  {
+    ending: "Archmage",
+    type: "Magic / 5-star career ending",
+    hubUse:
+      "Use the career guide for high INT and magic tournament planning.",
+  },
+  {
+    ending: "Sage / Hermit",
+    type: "Magic / scholar-style ending",
+    hubUse:
+      "Track under intelligence and magic-focused outcomes.",
+  },
+  {
+    ending: "Clergy",
+    type: "Faith / magic route ending",
+    hubUse:
+      "Track under faith, morality, and church-related conditions.",
+  },
+  {
+    ending: "Scholar",
+    type: "Intelligence career ending",
+    hubUse:
+      "Track under study-heavy career planning.",
+  },
+  {
+    ending: "Sect Leader",
+    type: "Magic / dark or belief route ending",
+    hubUse:
+      "Track under faith, alignment, and special-item conditions.",
+  },
+  {
+    ending: "Evil Cultist",
+    type: "Dark / magic ending",
+    hubUse:
+      "Track under dark alignment and forbidden-item routes.",
+  },
+  {
+    ending: "Princess",
+    type: "Social / high-status ending",
+    hubUse:
+      "Track under charm, reputation, and high-status planning.",
+  },
+  {
+    ending: "Idol",
+    type: "Social / performance ending",
+    hubUse:
+      "Track under charm, beauty, and performance events.",
+  },
+  {
+    ending: "Fashion Designer",
+    type: "Social / creative career ending",
+    hubUse:
+      "Track under beauty, social, and creative route cleanup.",
+  },
+  {
+    ending: "Maid",
+    type: "Social / work ending",
+    hubUse:
+      "Track under work-route and service-type outcomes.",
+  },
+  {
+    ending: "Legendary Teacher",
+    type: "Social / education ending",
+    hubUse:
+      "Track under teaching, study, and reputation outcomes.",
+  },
+  {
+    ending: "Magnate",
+    type: "Wealth / high-status ending",
+    hubUse:
+      "Track under money, gold, and business planning.",
+  },
+  {
+    ending: "Merchant",
+    type: "Trade / work ending",
+    hubUse:
+      "Track under money, trade, and work-route cleanup.",
+  },
+  {
+    ending: "Mafia Boss",
+    type: "Crime / dark social ending",
+    hubUse:
+      "Track under crime, money, and morality-influenced routes.",
+  },
+  {
+    ending: "Gambler",
+    type: "Money / risk ending",
+    hubUse:
+      "Track under gambling, money, and luck-style cleanup.",
+  },
+  {
+    ending: "Thief",
+    type: "Crime ending",
+    hubUse:
+      "Track under crime and morality-influenced career routes.",
+  },
+  {
+    ending: "Two Queens",
+    type: "Cornelia secret ending",
+    hubUse:
+      "Do this before Heir of the Stargazer. It gives the Inheritance Fragment.",
+  },
+  {
+    ending: "Heir of the Stargazer",
+    type: "True ending",
+    hubUse:
+      "Requires Two Queens, Forbidden Research, and Infinite Mirror Labyrinth.",
+  },
+  {
+    ending: "Golden Ending",
+    type: "Special Labyrinth route",
+    hubUse:
+      "Do this on a separate save because it skips the normal graduation flow.",
+  },
+  {
+    ending: "Crois Romance",
+    type: "Partner ending",
+    hubUse:
+      "Do this as romance cleanup, separate from Two Queens if route priority interferes.",
+  },
+  {
+    ending: "Fran Romance",
+    type: "Partner ending",
+    hubUse:
+      "Track under companion romance cleanup.",
+  },
+  {
+    ending: "Chocolat Romance",
+    type: "Partner ending",
+    hubUse:
+      "Track under companion romance cleanup.",
+  },
+  {
+    ending: "Shail Romance",
+    type: "Partner ending",
+    hubUse:
+      "Do this separately from Two Queens if partner routes interfere with Cornelia priority.",
+  },
+  {
+    ending: "Hasis Romance",
+    type: "Partner ending",
+    hubUse:
+      "Do this as romance cleanup, not during a serious Two Queens attempt.",
+  },
+  {
+    ending: "Noah Romance",
+    type: "Partner ending",
+    hubUse:
+      "Track under companion romance cleanup.",
+  },
+  {
+    ending: "Recluse",
+    type: "Lifestyle / bad-ish ending",
+    hubUse:
+      "Use the career endings guide if Alice becomes a shut-in.",
+  },
+  {
+    ending: "Apologist",
+    type: "Weird career ending",
+    hubUse:
+      "Track under odd jobs and weird career outcomes.",
+  },
+  {
+    ending: "Assassin",
+    type: "Dark career ending",
+    hubUse:
+      "Likely belongs in the dark / crime career group.",
+  },
+  {
+    ending: "Heretic",
+    type: "Dark / belief ending",
+    hubUse:
+      "Track under dark or belief-based ending groups.",
+  },
+  {
+    ending: "Mad Scientist",
+    type: "Science / intelligence career ending",
+    hubUse:
+      "Track this under intelligence / research-heavy career planning.",
+  },
+  {
+    ending: "Chancellor",
+    type: "Political ending",
+    hubUse:
+      "Track this under high-status / political career planning.",
+  },
+  {
+    ending: "Oligarch",
+    type: "Wealth / power ending",
+    hubUse:
+      "Track this under wealth, social, or high-status career planning.",
+  },
+  {
+    ending: "Traveling Merchant",
+    type: "Merchant / work ending",
+    hubUse:
+      "Track this under money, trade, and work-route cleanup.",
+  },
+  {
+    ending: "Underground Doctor",
+    type: "Dark career ending",
+    hubUse:
+      "Track under dark work / illegal medicine outcomes.",
+  },
+  {
+    ending: "Vigilante",
+    type: "Dark justice ending",
+    hubUse:
+      "Track under combat, justice, and crime-route outcomes.",
+  },
+  {
+    ending: "Outlaw Baker",
+    type: "Weird / crime career ending",
+    hubUse:
+      "Track under odd career and crime-route cleanup.",
+  },
+  {
+    ending: "Paparazzo",
+    type: "Media / social career ending",
+    hubUse:
+      "Track under social, gossip, and media outcomes.",
+  },
+  {
+    ending: "Robber",
+    type: "Crime ending",
+    hubUse:
+      "Track under crime and morality-influenced endings.",
+  },
+  {
+    ending: "Dealer",
+    type: "Dark / crime ending",
+    hubUse:
+      "Track under crime and dark-route cleanup.",
+  },
+];
+
+export const partnerColumns = [
+  { key: "partner", label: "Partner Ending" },
+  { key: "routeNote", label: "Route Note" },
+];
+
+export const partnerRows = [
+  {
+    partner: "Crois",
+    routeNote:
+      "Companion romance / partner cleanup route.",
+  },
+  {
+    partner: "Fran",
+    routeNote:
+      "Companion romance / partner cleanup route.",
+  },
+  {
+    partner: "Chocolat",
+    routeNote:
+      "Companion romance / partner cleanup route.",
+  },
+  {
+    partner: "Shail",
+    routeNote:
+      "Companion romance / partner cleanup route.",
+  },
+  {
+    partner: "Hasis",
+    routeNote:
+      "Companion romance / partner cleanup route.",
+  },
+  {
+    partner: "Noah",
+    routeNote:
+      "Companion romance / partner cleanup route.",
+  },
+  {
+    partner: "Cornelia / Two Queens",
+    routeNote:
+      "Secret Queen-route ending, not a normal companion partner ending.",
+  },
+];
+
+export const diagnosisColumns = [
+  { key: "problem", label: "What Happened?" },
+  { key: "likelyReason", label: "Likely Reason" },
+  { key: "nextGuide", label: "Where To Go Next" },
+];
+
+export const diagnosisRows = [
+  {
+    problem: "The Library only shows Decipher Literature.",
+    likelyReason:
+      "You have not unlocked Forbidden Research through Cornet's necklace in NG+.",
+    nextGuide:
+      "Forbidden Research Guide",
+  },
+  {
+    problem: "Cornelia's final-day invitation does not appear.",
+    likelyReason:
+      "Cornelia affinity / route state is not high enough, or a partner route has priority.",
+    nextGuide:
+      "Two Queens Ending Guide",
+  },
+  {
+    problem: "You completed Two Queens but cannot get the true ending.",
+    likelyReason:
+      "You have the Inheritance Fragment side, but still need the Library / Labyrinth side.",
+    nextGuide:
+      "True Ending Guide",
+  },
+  {
+    problem: "Golden Ending does not appear at graduation.",
+    likelyReason:
+      "Golden Ending is not a normal graduation ending.",
+    nextGuide:
+      "Golden Ending Guide",
+  },
+  {
+    problem: "You got a partner ending instead of a secret ending.",
+    likelyReason:
+      "A romance / companion route took priority before the final secret-route gate.",
+    nextGuide:
+      "Two Queens or partner-ending cleanup",
+  },
+  {
+    problem: "Alice became a shut-in.",
+    likelyReason:
+      "You likely triggered the Recluse ending or a lifestyle-type low-route outcome.",
+    nextGuide:
+      "Career Endings Requirements Guide",
+  },
+  {
+    problem: "Alice became a Heretic or Evil Cultist.",
+    likelyReason:
+      "Your faith, alignment, morality, or dark-item route likely pushed a belief-based dark ending.",
+    nextGuide:
+      "Career Endings Requirements Guide",
+  },
+  {
+    problem: "Alice became Assassin, Robber, Dealer, Thief, or Mafia Boss.",
+    likelyReason:
+      "Your crime, morality, money, or dark activity route likely overrode a safer career ending.",
+    nextGuide:
+      "Career Endings Requirements Guide",
+  },
+  {
+    problem: "Alice became Chancellor, Oligarch, Princess, or Magnate.",
+    likelyReason:
+      "Your high-status, money, charm, reputation, or political route likely took priority.",
+    nextGuide:
+      "Career Endings Requirements Guide",
+  },
+  {
+    problem: "You got the wrong career ending.",
+    likelyReason:
+      "Your highest stats, morality, reputation, activity focus, or final route priority pointed to another result.",
+    nextGuide:
+      "Career Endings Requirements Guide",
+  },
+];
+
+export const relatedColumns = [
+  { key: "guide", label: "Guide" },
+  { key: "useThisWhen", label: "Use This When" },
+];
+
+export const relatedRows = [
+  {
+    guide: "Two Queens Ending Guide",
+    useThisWhen:
+      "Cornelia's invitation is missing, you need the Inheritance Fragment, or partner routes keep taking priority.",
+  },
+  {
+    guide: "True Ending / Heir of the Stargazer Guide",
+    useThisWhen:
+      "You already know Two Queens and want the full true-ending route.",
+  },
+  {
+    guide: "Forbidden Research Guide",
+    useThisWhen:
+      "The Library still shows Decipher Literature or you cannot trigger Anna's Labyrinth cue.",
+  },
+  {
+    guide: "Golden Ending Guide",
+    useThisWhen:
+      "You are ready to do the special Labyrinth route and understand the normal-ending lockouts.",
+  },
+  {
+    guide: "Career Endings Requirements Guide",
+    useThisWhen:
+      "You want normal job, dark, political, wealth, or weird career endings.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Magical Princess has 50+ endings across career, partner, and secret routes.**
+
+If you only want a normal graduation result, focus on stats, jobs, morality, classes, and final route priority. If you want the secret route, the clean order is: finish any first ending, get **Two Queens** in Loop 2 / first NG+, confirm the **Inheritance Fragment**, complete **Forbidden Research**, clear the **Infinite Mirror Labyrinth**, and then move into **Heir of the Stargazer** or the **Golden Ending** route.
+
+This hub is a route planner, not a wiki dump. Use the detailed guides when you need exact troubleshooting for Cornelia, Forbidden Research, the Labyrinth, Golden Ending, or career requirements.
+</GuideQuickAnswer>
+
+---
+
+<GuideCallout title="Use this page as a route map">
+Start here if you are asking “which ending did I get?” or “which route am I missing?” Then jump into the focused guide for the route gate that is blocking you.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/ng-plus-replay-blessings.webp"
+    alt="Magical Princess NG+ replay blessings and carry-over screen."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The biggest endings are built around NG+ routing, carry-over checks, and secret-route flags.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-many-endings">
+  How Many Endings Are in Magical Princess?
+</h2>
+
+Magical Princess has **50+ endings** when you count career endings, partner endings, secret endings, and special late-route endings.
+
+The main ending families are:
+
+- **Career endings:** Brave Hero, Archmage, Princess, Magnate, Scholar, Thief, Evil Cultist, and other graduation outcomes.
+- **Partner endings:** Crois, Fran, Chocolat, Shail, Hasis, Noah, and other companion romance outcomes.
+- **Secret endings:** Two Queens, Heir of the Stargazer, Golden Ending, and related Labyrinth routes.
+
+This page lists the major known endings and points you to the right focused guide instead of trying to cram every route detail into one article.
+
+---
+
+<h2 id="ending-types">
+  Ending Types in Magical Princess
+</h2>
+
+Magical Princess endings are easier to understand if you split them into route families instead of treating all endings the same.
+
+<GuideTable
+  caption="Main ending types in Magical Princess."
+  columns={routeTypeColumns}
+  rows={routeTypeRows}
+/>
+
+The mistake most players make is mixing these systems together. A career ending is usually about Alice's build. A partner ending is about relationship priority. A secret ending is about multi-loop route flags and key items.
+
+---
+
+<h2 id="recommended-ending-order">
+  Recommended Ending Order
+</h2>
+
+If you care about secret endings, do not chase every romance and career route first. It is cleaner to establish the secret-route foundation early.
+
+<GuideTable
+  caption="Recommended route order for Magical Princess endings."
+  columns={routeOrderColumns}
+  rows={routeOrderRows}
+/>
+
+This order keeps your secret-route progress clean while still leaving career and romance cleanup for later.
+
+---
+
+<h2 id="loop-order">
+  Loop Order: Loop 1, Loop 2, and Loop 3
+</h2>
+
+Use this naming consistently:
+
+<GuideTable
+  caption="Loop order for major Magical Princess secret endings."
+  columns={loopColumns}
+  rows={loopRows}
+/>
+
+The important rule is simple: **Two Queens first, then Heir of the Stargazer, then Golden Ending on a backup save.**
+
+If your run misses a key item or route flag, do not force the next step. Use a later loop instead.
+
+---
+
+<h2 id="secret-endings">
+  Secret Endings and Route Gates
+</h2>
+
+The secret endings are not just final choices. They depend on earlier route gates.
+
+<GuideTable
+  caption="Secret ending route gates."
+  columns={secretRouteColumns}
+  rows={secretRouteRows}
+/>
+
+If you are stuck, identify which gate is missing: Cornelia route state, Inheritance Fragment, Cornet's necklace, Forbidden Research, Anna's Labyrinth cue, or Infinite Mirror Labyrinth clear.
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/cornelia-queen-intro.webp"
+    alt="Queen Cornelia in Magical Princess."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cornelia is the key route character for Two Queens and the Inheritance Fragment.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="two-queens-and-true-ending">
+  Two Queens and Heir of the Stargazer
+</h2>
+
+**Two Queens** gives the **Inheritance Fragment**. **Heir of the Stargazer** is the true ending route that continues after you bring the Fragment into the Library / Labyrinth route.
+
+Use these guides:
+
+- <Link href="/magical-princess/two-queens-ending-guide/">Two Queens Ending Guide</Link>
+- <Link href="/magical-princess/true-ending-heir-of-the-stargazer/">True Ending / Heir of the Stargazer Guide</Link>
+
+---
+
+<h2 id="forbidden-research-and-golden-ending">
+  Forbidden Research and Golden Ending
+</h2>
+
+Forbidden Research is the biggest late-route bottleneck.
+
+If the Royal Library still shows **Decipher Literature**, you are not on the hidden research route yet. You need the Cornet / Blackburn necklace chain before the Library changes in NG+.
+
+Golden Ending is even more specific. It is not a normal graduation option and can skip the usual career, marriage, partner, and no-partner ending flow.
+
+Use these guides:
+
+- <Link href="/magical-princess/forbidden-research-guide/">Forbidden Research Guide</Link>
+- <Link href="/magical-princess/golden-ending-guide/">Golden Ending Guide</Link>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/forbidden-research-library-option.webp"
+    alt="Magical Princess Forbidden Research option at the Royal Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If you are stuck at the Library, check whether Decipher Literature has been replaced by Forbidden Research.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="known-endings-list">
+  All Known Endings List
+</h2>
+
+This is a hub-level list, not a full requirements table. Use it to identify which guide family you need next.
+
+<GuideTable
+  caption="Known Magical Princess endings and route families."
+  columns={knownEndingColumns}
+  rows={knownEndingRows}
+/>
+
+For exact stat thresholds, use the dedicated career guide instead of trying to force every number into this hub.
+
+---
+
+<h2 id="partner-endings">
+  Partner and Romance Endings
+</h2>
+
+Known partner / romance routes include **Crois, Fran, Chocolat, Shail, Hasis, and Noah**.
+
+<GuideTable
+  caption="Known partner endings and romance cleanup routes."
+  columns={partnerColumns}
+  rows={partnerRows}
+/>
+
+Partner endings are separate from Cornelia's Two Queens route. You can interact with companions during a secret-ending run, but committed romance routes can take priority. This matters most when going for Two Queens, because a normal partner route can block Cornelia's final-day invitation.
+
+---
+
+<h2 id="which-ending-did-you-get">
+  Which Ending Did You Get?
+</h2>
+
+A lot of players search by outcome instead of ending name.
+
+If Alice becomes a shut-in, starts a strange career, becomes a dark-route professional, or lands in a high-status political outcome, you are probably dealing with a career ending rather than a secret ending.
+
+Common examples:
+
+- **Dark / crime endings:** Assassin, Robber, Dealer, Thief, Mafia Boss.
+- **Dark belief endings:** Heretic, Evil Cultist, Sect Leader.
+- **High-status endings:** Princess, Chancellor, Oligarch, Magnate.
+- **Combat endings:** Brave Hero, General, Queen's Knight, Hero, Sword Master, Dark Knight, Mercenary Leader.
+- **Magic / intelligence endings:** Archmage, Sage / Hermit, Clergy, Scholar, Mad Scientist.
+- **Work / odd career endings:** Merchant, Traveling Merchant, Maid, Apologist, Underground Doctor, Outlaw Baker, Paparazzo.
+- **Lifestyle endings:** Recluse.
+
+If the ending involves Cornelia, Red Moon Eve, the Inheritance Fragment, Forbidden Research, or Infinite Mirror Labyrinth, you are probably dealing with the secret route chain.
+
+---
+
+<h2 id="why-you-got-the-wrong-ending">
+  Why You Got the Wrong Ending
+</h2>
+
+<GuideTable
+  caption="Common ending problems and where to go next."
+  columns={diagnosisColumns}
+  rows={diagnosisRows}
+/>
+
+When debugging an ending, do not start by changing everything. Check one layer at a time:
+
+1. Did you reach the correct loop?
+2. Did the right route character take priority?
+3. Did the key item carry into the next loop?
+4. Did the Library or Labyrinth gate open?
+5. Did another partner or career ending override your target?
+
+---
+
+<h2 id="career-endings">
+  Career Endings
+</h2>
+
+Career endings are the normal graduation outcomes. These are usually shaped by Alice's stats, classes, jobs, morality, money, reputation, activities, and final ending priority.
+
+Examples include Brave Hero, Archmage, Princess, Magnate, Scholar, Thief, Evil Cultist, Mad Scientist, Chancellor, Oligarch, Assassin, Apologist, Traveling Merchant, Recluse, and other job or lifestyle outcomes.
+
+Full guide: <Link href="/magical-princess/career-endings-requirements/">Career Endings Requirements Guide</Link>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/magical-princess/red-moon-protect-city-choice.webp"
+    alt="Magical Princess Red Moon event choices."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Red Moon / Crimson Moon events are part of the larger secret-route context.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="related-guides-table">
+  Related Guides
+</h2>
+
+<GuideTable
+  caption="Main Magical Princess ending guides."
+  columns={relatedColumns}
+  rows={relatedRows}
+/>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many endings are in Magical Princess?
+
+Magical Princess has 50+ endings across career, partner, secret, and special late-route endings.
+
+### What is the best ending order in Magical Princess?
+
+A clean order is: finish any first ending, do Two Queens in Loop 2 / first NG+, do Heir of the Stargazer in Loop 3 / second NG+ if the Inheritance Fragment is confirmed, then do Golden Ending and career / partner cleanup on separate saves.
+
+### Is Two Queens required for the true ending?
+
+Yes. Two Queens gives the Inheritance Fragment, which is needed for the Heir of the Stargazer route.
+
+### Is Golden Ending the same as Heir of the Stargazer?
+
+No. Heir of the Stargazer is the true ending route. Golden Ending is a separate special route tied to Cornet's necklace, Forbidden Research, and the Labyrinth.
+
+### What are the partner endings?
+
+Known partner routes include Crois, Fran, Chocolat, Shail, Hasis, and Noah. Cornelia's Two Queens route is a secret Queen-route ending, not a normal partner ending.
+
+### Why does the Library only show Decipher Literature?
+
+You have not unlocked Forbidden Research yet. The hidden Library route requires Cornet's necklace carried into NG+.
+
+### Should I do romance endings before Two Queens?
+
+Not on the same serious route attempt. Partner endings can take priority and block Cornelia's final-day invitation.
+
+### Do career endings need Forbidden Research?
+
+No. Forbidden Research is for the hidden Library / Labyrinth route, not normal career endings.
+
+### Why did I get the wrong career ending?
+
+Your highest stats, morality, reputation, activity focus, or final route priority likely pointed to a different result. Use the career endings guide for stat-specific cleanup.
+
+### Should I make backup saves?
+
+Yes. Make backup saves before final-day route choices, before committing to Labyrinth routes, and before Golden Ending.
