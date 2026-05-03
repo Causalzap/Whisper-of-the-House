@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/far-far-west/ghost-bell-shard-locations`;
 
 export const metadata: Metadata = {
-  title: "Far Far West Ghost Bell Shard Locations & Bellshot Guide",
+  title: "Far Far West Bell Locations & Bell Order: Bellshot Guide",
   description:
-    "Find all 3 Ghost Bell Shards in Far Far West, complete the bell order mini-games, return to the Great Bell, and unlock the Bellshot weapon Joker.",
+    "Find all 3 bell locations in Far Far West, solve each bell order puzzle, return to the Great Bell, and unlock the Bellshot / Bell Shot Joker.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Ghost Bell Shard Locations",
+          name: "Bell Locations & Bell Order",
           item: pageUrl,
         },
       ],
@@ -50,9 +50,9 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "Far Far West Ghost Bell Shard Locations: How to Unlock Bellshot",
+      headline: "Far Far West Bell Locations & Bell Order: How to Unlock Bellshot",
       description:
-        "This Far Far West Ghost Bell guide shows where to find all 3 Ghost Bell Shards, how the bell order mini-games work, where to ring the Great Bell, and how to unlock the Bellshot weapon Joker.",
+        "This Far Far West bell guide shows all 3 bell locations, how to solve each bell order puzzle, where to ring the Great Bell, and how to unlock Bellshot / Bell Shot Joker.",
       image: [
         `${siteUrl}/images/far-far-west/ghost-bell-route-map.webp`,
         `${siteUrl}/images/far-far-west/ghost-bell-shard-1-church.webp`,
@@ -63,7 +63,7 @@ const jsonLd = {
       ],
       inLanguage: "en",
       datePublished: "2026-04-30",
-      dateModified: "2026-04-30",
+      dateModified: "2026-05-03",
       about: [
         {
           "@type": "VideoGame",
@@ -71,7 +71,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Far Far West Ghost Bells",
+          name: "Far Far West bell locations",
+        },
+        {
+          "@type": "Thing",
+          name: "Far Far West bell order",
+        },
+        {
+          "@type": "Thing",
+          name: "Bell order puzzle",
         },
         {
           "@type": "Thing",
@@ -83,15 +91,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Bell Shot Joker",
+        },
+        {
+          "@type": "Thing",
           name: "Great Bell",
         },
         {
           "@type": "Thing",
           name: "Far West secret",
-        },
-        {
-          "@type": "Thing",
-          name: "Bell order mini-game",
         },
       ],
       isPartOf: {
@@ -116,98 +124,74 @@ const jsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "How many Ghost Bell Shards do I need in Far Far West?",
+          name: "Where are all bell locations in Far Far West?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "You need three Ghost Bell Shards to complete the Far West Ghost Bell secret and unlock Bellshot.",
+            text: "There are three bell locations on the Far West map: the church-side floor bell, the northwest zipline cliff bell, and the northern beach bell. Complete the bell order puzzle at each one, then return to the Great Bell.",
           },
         },
         {
           "@type": "Question",
-          name: "How long does the Ghost Bell secret take in Far Far West?",
+          name: "What is the bell order in Far Far West?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Once your route map is marked, the Ghost Bell route usually takes about 5-8 minutes.",
+            text: "The bell order is shown by the ghost bells during each puzzle attempt. Watch the full sequence first, then shoot the bells in the same order they appeared.",
           },
         },
         {
           "@type": "Question",
-          name: "Where is the first Ghost Bell Shard in Far Far West?",
+          name: "How do you unlock Bellshot in Far Far West?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The first Ghost Bell Shard comes from the church-side floor bell. Do not confuse it with the Great Bell on the church tower.",
+            text: "Complete all three bell order puzzles, collect the three Ghost Bell Shards, then return to the Great Bell on the church tower to unlock Bellshot.",
           },
         },
         {
           "@type": "Question",
-          name: "Where is the second Ghost Bell Shard in Far Far West?",
+          name: "Why did Bellshot not unlock after collecting three shards?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The second Ghost Bell Shard is at the northwest zipline cliff. From the church anchor, follow the marked northwest route and take the zipline path up the cliff face.",
+            text: "After collecting all three Ghost Bell Shards, you still need to return to the church tower and ring the Great Bell. Bellshot unlocks after this final step.",
           },
         },
         {
           "@type": "Question",
-          name: "Where is the third Ghost Bell Shard in Far Far West?",
+          name: "Can you retry the bell order puzzle?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The third Ghost Bell Shard is on the northern beach near the top edge of the Far West map. From the church, ride north toward Marker 3.",
+            text: "Yes. If you fail the bell order puzzle, interact with the floor bell again, watch the sequence, and shoot the bells in the same order.",
           },
         },
         {
           "@type": "Question",
-          name: "How many bells appear in the Ghost Bell mini-game?",
+          name: "Where is the first bell location in Far Far West?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The exact order is shown by the floor bell during your current attempt. Watch the full sequence, count the spawned bells, then shoot them in that same order.",
+            text: "The first bell location is the church-side floor bell. Do not confuse it with the Great Bell on the church tower.",
           },
         },
         {
           "@type": "Question",
-          name: "Can I retry the Ghost Bell mini-game?",
+          name: "Where is the second bell location in Far Far West?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. If you fail the bell order, interact with the floor bell again to replay the sequence.",
+            text: "The second bell location is at the northwest zipline cliff. From the church anchor, follow the marked northwest route and take the zipline path up the cliff face.",
           },
         },
         {
           "@type": "Question",
-          name: "Why did Bellshot not unlock after I collected three shards?",
+          name: "Where is the third bell location in Far Far West?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "You probably forgot to return to the Great Bell. After collecting all three shards, go back to the church and ring the Great Bell on top of the tower.",
+            text: "The third bell location is on the northern beach near the top edge of the Far West map. From the church, ride north toward Marker 3.",
           },
         },
         {
           "@type": "Question",
-          name: "What does Bellshot do in Far Far West?",
+          name: "Is Bellshot the same as Bell Shot Joker?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Based on current testing, Bellshot has a chance on weak spot hits to summon a healing ghost bell. Shoot the ghost bell to recover health.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Is Bellshot worth unlocking in Far Far West?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. Bellshot is one of the best early secret rewards because healing is useful in solo runs, co-op support, and general progression.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Should I do Ghost Bells before the boss?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. Complete the Ghost Bell route before killing the boss or starting extraction. It is much easier to travel between the church, zipline cliff, and northern beach before the run becomes chaotic.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Can I repeat the Ghost Bell secret?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. After unlocking Bellshot, you can still complete the Ghost Bell route again during Far West runs.",
+            text: "Players may search for it as Bellshot, Bell Shot, or Bell Shot Joker. This guide covers the secret bell route that unlocks that reward.",
           },
         },
       ],
@@ -225,37 +209,37 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Far Far West Ghost Bell Shard Locations: How to Unlock Bellshot"
-          description="Find all three Ghost Bell Shards in Far Far West, complete the bell order mini-games, return to the Great Bell, and unlock Bellshot."
+          title="Far Far West Bell Locations & Bell Order: How to Unlock Bellshot"
+          description="Find all 3 bell locations in Far Far West, solve each bell order puzzle, return to the Great Bell, and unlock the Bellshot / Bell Shot Joker."
           gameTitle="Far Far West"
           gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="April 30, 2026"
+          updatedAt="May 3, 2026"
           toc={[
             {
               id: "all-3-ghost-bell-shards-checklist",
-              label: "Shard checklist",
+              label: "All bell locations",
             },
             {
               id: "ghost-bell-route-summary",
-              label: "Route summary",
+              label: "Quick route",
             },
             {
               id: "how-the-bell-mini-game-works",
-              label: "Bell mini-game",
+              label: "Bell order puzzle",
             },
             {
               id: "bell-shard-1-church",
-              label: "Bell Shard 1",
+              label: "Bell Location 1",
             },
             {
               id: "bell-shard-2-zipline",
-              label: "Bell Shard 2",
+              label: "Bell Location 2",
             },
             {
               id: "bell-shard-3-beach",
-              label: "Bell Shard 3",
+              label: "Bell Location 3",
             },
             {
               id: "return-to-the-great-bell",
@@ -285,16 +269,16 @@ export default function Page() {
             },
             {
               href: "/far-far-west/canyon-secret-medallion-locations",
-              label: "Canyon Secret: All 4 Medallion Locations",
+              label: "Canyon Medallion Locations & Pick Pick Joker",
             },
             {
               href: "/far-far-west/cactus-day-joker-locations",
               label: "Cactus Day Joker Locations",
             },
             {
-                href: "/far-far-west/snowman-parts-locations",
-                label: "Snowman Parts Locations",
-              },
+              href: "/far-far-west/snowman-parts-locations",
+              label: "Snowman Parts Locations",
+            },
             {
               href: "/far-far-west/woodlands-mushroom-sequence",
               label: "Woodlands Mushroom Sequence Guide",
@@ -302,6 +286,10 @@ export default function Page() {
             {
               href: "/far-far-west/area-41-symbol-order",
               label: "Area 41 Symbol Order Guide",
+            },
+            {
+              href: "/far-far-west/all-secret-jokers",
+              label: "All Secret Jokers & Rewards Guide",
             },
           ]}
         >

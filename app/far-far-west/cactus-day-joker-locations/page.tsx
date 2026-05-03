@@ -256,6 +256,10 @@ export default function Page() {
               href: "/far-far-west/area-41-symbol-order",
               label: "Area 41 Symbol Order Guide",
             },
+            {
+              href: "/far-far-west/all-secret-jokers",
+              label: "All Secret Jokers & Rewards Guide",
+            },
           ]}
         >
           <FarFarWestCactusDayContent />

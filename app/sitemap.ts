@@ -90,6 +90,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/far-far-west/ghost-bell-shard-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/far-far-west/snowman-parts-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/far-far-west/woodlands-mushroom-sequence`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/far-far-west/all-secret-jokers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
 
     // ⬇️ 把 4 篇文章补上

@@ -292,6 +292,10 @@ export default function Page() {
                 href: "/far-far-west/snowman-parts-locations",
                 label: "Snowman Parts Locations",
               },
+              {
+                href: "/far-far-west/all-secret-jokers",
+                label: "All Secret Jokers & Rewards Guide",
+              },
           ]}
         >
           <FarFarWestWoodlandsMushroomContent />

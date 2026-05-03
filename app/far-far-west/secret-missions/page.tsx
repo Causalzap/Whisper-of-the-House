@@ -297,6 +297,10 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
+              href: "/far-far-west/all-secret-jokers",
+              label: "All Secret Jokers & Rewards Guide",
+            },
+            {
               href: "/far-far-west/ghost-bell-shard-locations",
               label: "Ghost Bell Shard Locations",
             },
@@ -320,6 +324,7 @@ export default function Page() {
               href: "/far-far-west/area-41-symbol-order",
               label: "Area 41 Symbol Order Guide",
             },
+            
           ]}
         >
           <FarFarWestSecretMissionsContent />

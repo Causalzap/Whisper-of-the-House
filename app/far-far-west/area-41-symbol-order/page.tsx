@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/far-far-west/area-41-symbol-order`;
 
 export const metadata: Metadata = {
-  title: "Far Far West Area 41 Symbol Order Guide",
+  title: "Far Far West Area 41 Symbol Order & Purple Rock Symbols",
   description:
-    "Solve the Area 41 alien symbol puzzle in Far Far West. Learn the correct symbol order, how to rotate the pillars, where to press the button, and how to unlock Anti-Gravity Falls.",
+    "Solve the Far Far West Area 41 symbol order using the purple rock / alien symbols from Far West, Desert, Canyon, and Woodlands. Includes the clue order, input panel, and Anti-Gravity Falls reward.",
   alternates: {
     canonical: pageUrl,
   },
@@ -208,8 +208,8 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Far Far West Area 41 Symbol Order Guide"
-          description="Solve the Area 41 alien symbol puzzle in Far Far West, rotate the four pillars in the correct order, press the button, and unlock Anti-Gravity Falls."
+          title="Far Far West Area 41 Symbol Order & Purple Rock Symbols"
+          description="Solve the Far Far West Area 41 symbol order using the purple rock / alien symbols from Far West, Desert, Canyon, and Woodlands. Includes the clue order, input panel, and Anti-Gravity Falls reward."
           gameTitle="Far Far West"
           gameHref="/far-far-west/secret-missions"
           breadcrumbBaseHref="/"
@@ -219,6 +219,10 @@ export default function Page() {
             {
               id: "area-41-symbol-order",
               label: "Symbol order",
+            },
+            {
+              id: "purple-rock-symbols",
+              label: "Purple rock symbols",
             },
             {
               id: "how-the-area-41-clue-works",
@@ -239,10 +243,6 @@ export default function Page() {
             {
               id: "area-41-troubleshooting",
               label: "Troubleshooting",
-            },
-            {
-              id: "related-guides",
-              label: "Related guides",
             },
             {
               id: "faq",
@@ -273,6 +273,10 @@ export default function Page() {
             {
               href: "/far-far-west/woodlands-mushroom-sequence",
               label: "Woodlands Mushroom Sequence Guide",
+            },
+            {
+              href: "/far-far-west/all-secret-jokers",
+              label: "All Secret Jokers & Rewards Guide",
             },
           ]}
         >
