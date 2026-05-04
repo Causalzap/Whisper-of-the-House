@@ -59,6 +59,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/far-far-west/secret-missions`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/olden-era`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/gamble-with-your-friends`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/magical-princess/endings-guide`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/magical-princess/forbidden-research-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/magical-princess/two-queens-ending-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/magical-princess/true-ending-heir-of-the-stargazer`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/magical-princess/golden-ending-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/magical-princess/career-endings-requirements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+
 
      // ⬇️ 把 4 篇文章补上
      { url: `${base}/gamble-with-your-friends/achievements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
