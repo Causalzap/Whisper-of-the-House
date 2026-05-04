@@ -5,11 +5,11 @@ import "../styles/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Whisper of the House - Fansite",
+    default: "Whisper of the House - Game Guides & Walkthroughs",
     template: "%s",
   },
   description:
-    "Explore Beginner's Guide, Progression Guide, Top Tips & Tricks, Hidden Secrets Guide , Organize and Discover Secrets and the full story of Whisper of the House",
+    "Find game guides, walkthroughs, puzzle solutions, endings, collectibles, hidden secrets, beginner tips, and updates for indie, cozy, adventure, survival, RPG, and strategy games.",
   icons: {
     icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
   },

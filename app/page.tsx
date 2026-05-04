@@ -5,245 +5,331 @@ import WhisperOfTheHouseGuide from '@/components/WhisperOfTheHouseGuide';
 import LatestUpdates from '@/components/LatestUpdates';
 
 export const metadata: Metadata = {
-  title: 'Whisper of the House Game Guides: Cozy Games, GRIME II & The Long Dark Episode 5',
+  title: 'Game Guides, Walkthroughs & Tips | Whisper of the House',
   description:
-    'Explore Whisper of the House guides, hidden secrets, furniture lists, and story details, plus tips and updates for Retro Rewind, GRIME II,The Long Dark Episode 5 and other games.',
+    'Find game guides, walkthroughs, puzzle solutions, endings, collectibles, hidden secrets, beginner tips, and updates for indie, cozy, adventure, survival, RPG, and strategy games.',
   alternates: {
     canonical: 'https://www.whisperofthehouse.com/',
   },
 };
 
+const guideTypeLabels = [
+  'Walkthroughs',
+  'Puzzle Solutions',
+  'Endings',
+  'Beginner Tips',
+  'Collectibles',
+  'Hidden Secrets',
+];
+
+const featuredGameHubs = [
+  {
+    title: 'Whisper of the House',
+    href: '/guides',
+    description: 'Complete guides, hidden secrets, furniture lists, scoring tips, and story details.',
+    tag: 'Featured',
+  },
+  {
+    title: 'Retro Rewind',
+    href: '/retro-rewind',
+    description: 'Fresh tips, strategy notes, and community-focused guide updates.',
+    tag: 'New',
+  },
+  {
+    title: 'Moomintroll Winter’s Warmth',
+    href: '/moomintroll',
+    description: 'Cozy adventure guides, story tips, exploration help, and warm winter walkthrough notes.',
+    tag: 'Cozy',
+  },
+  {
+    title: 'The Long Dark Episode 5',
+    href: '/the-long-dark-episode-5',
+    description: 'Walkthroughs, missing people locations, ending help, and quest answers.',
+    tag: 'Survival',
+  },
+  {
+    title: 'Road To Vostok',
+    href: '/road-to-vostok',
+    description: 'Beginner tips, survival preparation, route planning, and useful guide notes.',
+    tag: 'Survival',
+  },
+  {
+    title: 'Sol Cesto',
+    href: '/sol-cesto',
+    description: 'Item tips, progression help, mechanics, and quick reference guides.',
+    tag: 'Strategy',
+  },
+  {
+    title: 'Gamble With Your Friends',
+    href: '/gamble-with-your-friends',
+    description: 'Co-op party game guides, casino crawler tips, item choices, and multiplayer strategy notes.',
+    tag: 'Party',
+  },
+  {
+    title: 'Far Far West',
+    href: '/far-far-west/secret-missions',
+    description: 'Secret missions, adventure walkthroughs, hidden objectives, and useful progression tips.',
+    tag: 'Hot',
+  },
+];
+
+const allGameGuides = [
+  { title: 'Whisper of the House', href: '/guides' },
+  { title: 'Retro Rewind', href: '/retro-rewind' },
+  { title: 'Hozy', href: '/guides/hozy' },
+  { title: 'GRIME II', href: '/grime-2' },
+  { title: 'The Long Dark Episode 5', href: '/the-long-dark-episode-5' },
+  { title: 'I Am Jesus Christ', href: '/i-am-jesus-christ' },
+
+  // 你原代码里 All Will Fall 指向 /i-am-jesus-christ。
+  // 如果你已经有真实页面，建议改成 /all-will-fall。
+  { title: 'All Will Fall', href: '/i-am-jesus-christ' },
+
+  { title: 'The Occultist', href: '/the-occultist' },
+  { title: 'Soulmask', href: '/soulmask' },
+  { title: 'Crystalfall', href: '/crystalfall' },
+  { title: 'Sol Cesto', href: '/sol-cesto' },
+  { title: 'Pokemon Champions', href: '/pokemon-champions' },
+  { title: 'Road To Vostok', href: '/road-to-vostok' },
+  { title: 'MOUSE: P.I. For Hire', href: '/mouse-pi-for-hire' },
+  { title: 'Pragmata', href: '/pragmata' },
+  { title: 'Sintopia', href: '/sintopia' },
+  { title: 'Airborne Empire', href: '/airborne-empire' },
+  { title: 'Lucky Tower Ultimate', href: '/lucky-tower-ultimate' },
+  { title: 'Vampire Crawlers', href: '/vampire-crawlers' },
+
+  // 你原代码里 HoloVillage 指向 /vampire-crawlers。
+  // 如果你已经有真实页面，建议改成 /holovillage 或对应真实路径。
+  { title: 'HoloVillage: Our Cozy Days', href: '/vampire-crawlers' },
+
+  { title: 'shapez 2 - Factory', href: '/shapez-2' },
+  { title: 'Fracture Field', href: '/fracture-field' },
+  { title: "Moomintroll: Winter's Warmth", href: '/moomintroll' },
+  { title: 'Far Far West', href: '/far-far-west' },
+  { title: 'Heroes of Might and Magic: Olden Era', href: '/olden-era' },
+  { title: 'Gamble With Your Friends', href: '/gamble-with-your-friends' },
+  { title: 'Magical Princess', href: '/magical-princess/endings-guide' },
+];
+
+const exploreCards = [
+  {
+    title: 'All Guides',
+    href: '/guides',
+    description:
+      'Browse step-by-step walkthroughs, puzzle answers, endings, tips, and practical strategies across multiple games.',
+    cta: 'View Guides',
+    buttonClass: 'bg-blue-500 hover:bg-blue-600',
+  },
+  {
+    title: 'Collections',
+    href: '/collection',
+    description:
+      'Explore furniture, collectibles, useful in-game items, hidden details, and completion-focused reference pages.',
+    cta: 'Explore Collection',
+    buttonClass: 'bg-green-500 hover:bg-green-600',
+  },
+  {
+    title: 'Play Online',
+    href: '/play-online',
+    description:
+      'Discover browser-friendly games and enjoy cozy, casual, and quick-play experiences directly online.',
+    cta: 'Play Now',
+    buttonClass: 'bg-orange-500 hover:bg-orange-600',
+  },
+  {
+    title: 'Hidden Secrets',
+    href: '/abnormal-points-collection',
+    description:
+      'Find unusual discoveries, secret rooms, abnormal points, and mysterious details worth collecting.',
+    cta: 'Discover Secrets',
+    buttonClass: 'bg-purple-500 hover:bg-purple-600',
+  },
+  {
+    title: 'News & Updates',
+    href: '/news',
+    description:
+      'Stay updated with the latest guide additions, game news, content updates, and notable discoveries.',
+    cta: 'Read News',
+    buttonClass: 'bg-red-500 hover:bg-red-600',
+  },
+  {
+    title: 'Retro Rewind',
+    href: '/retro-rewind',
+    description:
+      'Explore fresh Retro Rewind tips, community insights, and strategy guide updates in one place.',
+    cta: 'View Retro Rewind',
+    buttonClass: 'bg-indigo-500 hover:bg-indigo-600',
+  },
+];
+
 export default function Home() {
   return (
     <Layout>
+      <section className="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 px-4 pt-20 pb-16 md:pt-24 md:pb-20">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div className="space-y-6 text-center text-white lg:text-left">
+              <div className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-purple-100 backdrop-blur-sm">
+                Indie, cozy, puzzle, adventure, survival, RPG, and strategy guides
+              </div>
 
-      <section className="flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 px-4 pt-20 pb-20 md:pt-24 md:pb-24">
-        <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-          <div className="flex-1 flex justify-center">
-            <img
-              src="/images/whisper-of-the-house-game-cover.webp"
-              alt="Whisper of the House guide and game tips"
-              className="w-full max-w-md rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105"
-            />
-          </div>
+              <h1 className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+                Game Guides, Walkthroughs & Tips
+              </h1>
 
-          <div className="flex-1 space-y-6 text-white">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Whisper of the House Game Guides & Tips
-            </h1>
+              <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-200 md:text-xl lg:mx-0">
+                Find walkthroughs, puzzle solutions, endings, collectibles, hidden secrets, and beginner tips for
+                Whisper of the House and more games.
+              </p>
 
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
-              Explore in-depth guides, hidden secrets, furniture collections, and story details for
-              Whisper of the House, along with fresh tips and updates for Retro Rewind, GRIME II,
-              The Long Dark Episode 5, Road To Vostok, Soulmask, Sol Cesto , The Occultist and other games.
-            </p>
+              <form action="/guides" method="get" className="mx-auto flex max-w-xl flex-col gap-3 sm:flex-row lg:mx-0">
+                <input
+                  type="search"
+                  name="q"
+                  placeholder="Search game guides..."
+                  className="min-h-12 flex-1 rounded-xl border border-white/20 bg-white px-4 text-gray-900 outline-none ring-0 placeholder:text-gray-500 focus:border-purple-300"
+                />
+                <button
+                  type="submit"
+                  className="min-h-12 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-700"
+                >
+                  Search
+                </button>
+              </form>
 
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start">
-              <Link
-                href="/guides"
-                className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1"
-              >
-                Explore Whisper Guides
-              </Link>
+              <div className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
+                <a
+                  href="#latest-updates"
+                  className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-3 font-semibold text-purple-900 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-purple-50"
+                >
+                  Latest Updates
+                </a>
 
-              <Link
-                href="/retro-rewind"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Browse Retro Rewind
-              </Link>
+                <a
+                  href="#all-game-guides"
+                  className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/10 px-8 py-3 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+                >
+                  Browse All Games
+                </a>
+              </div>
 
-              <Link
-                href="/guides/hozy"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Explore Hozy
-              </Link>
+              <div className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start">
+                {guideTypeLabels.map((label) => (
+                  <span
+                    key={label}
+                    className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white/90"
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-              <Link
-                href="/grime-2"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Explore GRIME II
-              </Link>
+            <div className="flex justify-center lg:justify-end">
+              <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/10 p-4 shadow-2xl backdrop-blur-sm">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="rounded-full bg-purple-500 px-3 py-1 text-sm font-semibold text-white">
+                    Featured Guide
+                  </span>
+                  <span className="text-sm text-purple-100">Whisper of the House</span>
+                </div>
 
-              <Link
-                href="/the-long-dark-episode-5"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Explore The Long Dark Episode 5
-              </Link>
+                <img
+                  src="/images/whisper-of-the-house-game-cover.webp"
+                  alt="Whisper of the House featured game guide"
+                  className="w-full rounded-2xl shadow-xl transition-transform duration-300 hover:scale-[1.02]"
+                />
 
-              <Link
-                href="/i-am-jesus-christ"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Explore I Am Jesus Christ
-              </Link>
-
-              <Link
-                href="/i-am-jesus-christ"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                All Will Fall Guides
-              </Link>
-
-              <Link
-                href="/the-occultist"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                View The Occultist Guides
-              </Link>
-
-              <Link
-                href="/soulmask"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                View Soulmask Guides
-              </Link>
-
-              <Link
-                href="/crystalfall"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                View Crystalfall Guides
-              </Link>
-
-              <Link
-                href="/sol-cesto"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                View Sol Cesto Guides
-              </Link>
-   
-              <Link
-                href="/pokemon-champions"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Pokemon Champions
-              </Link>
-
-              <Link
-                href="/road-to-vostok"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Road To Vostok Guide
-              </Link>
-
-              <Link
-                href="/mouse-pi-for-hire"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Mouse P.I. For Hire Collectibles Guide
-              </Link>
-
-              <Link
-                href="/pragmata"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Pragmata Guide
-              </Link>
-
-              <Link
-                href="/sintopia"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Sintopia Guide
-              </Link>
-
-              <Link
-                href="/airborne-empire"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Airborne Empire Guide
-              </Link>
-
-              <Link
-                href="/lucky-tower-ultimate"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Lucky Tower Ultimate Guide
-              </Link>
-              
-              <Link
-                href="/vampire-crawlers"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Vampire Crawlers Guide
-              </Link>
-
-              <Link
-                href="/vampire-crawlers"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                HoloVillage: Our Cozy Days Guide
-              </Link>
-
-              <Link
-                href="/shapez-2"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                shapez 2 - Factory Guide
-              </Link>
-
-              <Link
-                href="/fracture-field"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Fracture Field Walkthrough
-              </Link>
-
-              <Link
-                href="/moomintroll"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Moomintroll: Winter's Warmth Guide
-              </Link>
-
-              <Link
-                href="/far-far-west"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Far Far West Guide
-              </Link>
-
-              <Link
-                href="/olden-era"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Heroes of Might and Magic: Olden Era Guide
-              </Link>
-
-              <Link
-                href="/gamble-with-your-friends"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Gamble With Your Friends Guide
-              </Link>
-
-              <Link
-                href="/magical-princess/endings-guide"
-                className="inline-block bg-white/10 border border-white/20 text-white font-semibold px-8 py-3 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              >
-                Magical Princess Guide
-              </Link>
-
+                <div className="mt-5 space-y-3 text-white">
+                  <h2 className="text-2xl font-bold">Whisper of the House Complete Guide</h2>
+                  <p className="text-sm leading-relaxed text-gray-200">
+                    Start with the featured complete guide, then browse newer walkthroughs and game hubs below.
+                  </p>
+                  <a
+                    href="#guide-content"
+                    className="inline-flex rounded-lg bg-white/15 px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/25"
+                  >
+                    Read Featured Guide
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. 直接用这短短一行，替换掉之前几百行的那段 section */}
-      <LatestUpdates />
+      <section id="featured-games" className="bg-white px-4 py-16">
+        <div className="container mx-auto max-w-6xl">
+          <div className="mb-10 text-center">
+            <h2 className="mb-3 text-3xl font-bold text-gray-900">Featured Game Guides</h2>
+            <p className="mx-auto max-w-2xl text-lg text-gray-600">
+              Start from the most important game hubs, then jump into the latest walkthroughs and updates.
+            </p>
+          </div>
 
-      <section id="guide-content" className="pt-20 pb-16 bg-white px-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredGameHubs.map((game) => (
+              <Link
+                key={game.title}
+                href={game.href}
+                className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-lg"
+              >
+                <div className="mb-4 inline-flex rounded-full bg-purple-50 px-3 py-1 text-xs font-semibold text-purple-700">
+                  {game.tag}
+                </div>
+                <h3 className="mb-3 text-xl font-bold text-gray-900 group-hover:text-purple-700">
+                  {game.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-gray-600">{game.description}</p>
+                <div className="mt-4 text-sm font-semibold text-purple-600">View Guides →</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div id="latest-updates" className="scroll-mt-24">
+        <LatestUpdates />
+      </div>
+
+      <section id="all-game-guides" className="bg-gray-50 px-4 py-16 scroll-mt-24">
+        <div className="container mx-auto max-w-6xl">
+          <div className="mb-10 text-center">
+            <h2 className="mb-3 text-3xl font-bold text-gray-900">All Game Guides</h2>
+            <p className="mx-auto max-w-2xl text-lg text-gray-600">
+              Looking for a specific game? Browse all available game guide hubs and walkthrough pages from one place.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {allGameGuides.map((game) => (
+              <Link
+                key={`${game.title}-${game.href}`}
+                href={game.href}
+                className="group flex items-center justify-between rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-200 hover:shadow-md"
+              >
+                <span className="font-semibold text-gray-800 group-hover:text-purple-700">
+                  {game.title}
+                </span>
+                <span className="text-sm font-semibold text-purple-500">View →</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="guide-content" className="bg-white px-4 pb-16 pt-20 scroll-mt-24">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              The Ultimate Guide to Whisper of the House
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-purple-600">
+              Featured Complete Guide
+            </p>
+            <h2 className="mb-4 text-3xl font-bold text-gray-900">
+              Whisper of the House Complete Guide
             </h2>
             <p className="text-lg text-gray-600">
-              Master organization, uncover hidden secrets, collect furniture, and achieve better scores.
+              Master organization, uncover hidden secrets, collect furniture, improve scores, and understand the
+              core systems of Whisper of the House.
             </p>
           </div>
 
@@ -251,119 +337,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-100 px-4">
+      <section className="bg-gray-100 px-4 py-16">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Explore More</h2>
-            <p className="text-lg text-gray-600">
-              Browse game guides, collections, secrets, and updates across Whisper of the House and other games.
+            <h2 className="mb-3 text-3xl font-bold text-gray-900">Explore More</h2>
+            <p className="mx-auto max-w-2xl text-lg text-gray-600">
+              Browse guides, collections, secrets, news, and game-specific hubs across the site.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">Guides</h3>
-              <p className="text-gray-600 flex-grow">
-                Step-by-step walkthroughs, tips, and strategies to help you progress faster and play smarter.
-              </p>
-              <Link
-                href="/guides"
-                className="mt-4 bg-blue-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {exploreCards.map((card) => (
+              <div
+                key={card.title}
+                className="flex flex-col rounded-xl bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg"
               >
-                View Guides
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">Collection</h3>
-              <p className="text-gray-600 flex-grow">
-                Explore furniture, collectibles, and useful in-game items with details and practical tips.
-              </p>
-              <Link
-                href="/collection"
-                className="mt-4 bg-green-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-300"
-              >
-                Explore Collection
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">Play Online</h3>
-              <p className="text-gray-600 flex-grow">
-                Discover browser-friendly games and enjoy fun, cozy experiences directly online.
-              </p>
-              <Link
-                href="/play-online"
-                className="mt-4 bg-orange-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors duration-300"
-              >
-                Play Now
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">Abnormal Points Collection</h3>
-              <p className="text-gray-600 flex-grow">
-                Find hidden items, unusual discoveries, secret rooms, and mysterious details worth collecting.
-              </p>
-              <Link
-                href="/abnormal-points-collection"
-                className="mt-4 bg-purple-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors duration-300"
-              >
-                Discover Secrets
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">News & Updates</h3>
-              <p className="text-gray-600 flex-grow">
-                Stay updated with the latest guides, news, and notable content across your favorite games.
-              </p>
-              <Link
-                href="/news"
-                className="mt-4 bg-red-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300"
-              >
-                Read News
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">Retro Rewind</h3>
-              <p className="text-gray-600 flex-grow">
-                Explore fresh Retro Rewind tips, community insights, and strategy guides in one place.
-              </p>
-              <Link
-                href="/retro-rewind"
-                className="mt-4 bg-indigo-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-indigo-600 transition-colors duration-300"
-              >
-                View Retro Rewind
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">GRIME II</h3>
-              <p className="text-gray-600 flex-grow">
-                Boss guides, early weapons, route help, and sequel comparisons in one place.
-              </p>
-              <Link
-                href="/grime-2"
-                className="mt-4 bg-emerald-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-emerald-600 transition-colors duration-300"
-              >
-                Explore GRIME II
-              </Link>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">The Long Dark Episode 5</h3>
-              <p className="text-gray-600 flex-grow">
-                Walkthroughs, missing people locations, ending help, and Astrid&apos;s hardcase answers.
-              </p>
-              <Link
-                href="/the-long-dark-episode-5"
-                className="mt-4 bg-sky-500 text-white text-center font-medium py-2 px-4 rounded-lg hover:bg-sky-600 transition-colors duration-300"
-              >
-                Explore Episode 5
-              </Link>
-            </div>
+                <h3 className="mb-3 text-2xl font-bold text-gray-800">{card.title}</h3>
+                <p className="flex-grow text-gray-600">{card.description}</p>
+                <Link
+                  href={card.href}
+                  className={`mt-4 rounded-lg px-4 py-2 text-center font-medium text-white transition-colors duration-300 ${card.buttonClass}`}
+                >
+                  {card.cta}
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
