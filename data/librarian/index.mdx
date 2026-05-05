@@ -1,0 +1,697 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const quickFactsColumns = [
+  { key: "system", label: "System" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "beginnerTakeaway", label: "Beginner Takeaway" },
+];
+
+export const quickFactsRows = [
+  {
+    system: "Main objective",
+    whatItMeans:
+      "Sort all 3,072 scattered books back into the correct shelves, series, and volume order.",
+    beginnerTakeaway:
+      "Think in rows and series, not individual books. Completing rows is how you unlock the tools that make the library manageable.",
+  },
+  {
+    system: "Full completion",
+    whatItMeans:
+      "A complete main-library clear means 400 completed rows and 3,072 books sorted.",
+    beginnerTakeaway:
+      "The 400-row count is your real progress target. Do not judge progress only by how clean the floor looks.",
+  },
+  {
+    system: "Shelf sections",
+    whatItMeans:
+      "Books belong to category sections such as 1A, 1C, 1E, 1H, 1K, 1L, 2J, 2L, 2M, and 2Q.",
+    beginnerTakeaway:
+      "Use the maps posted at the base of the main staircase instead of guessing every shelf by color.",
+  },
+  {
+    system: "Volume order",
+    whatItMeans:
+      "Books in the same series must be grouped together and placed in volume-number order from left to right.",
+    beginnerTakeaway:
+      "A book can be in the right section but still fail the row if the volume order is broken.",
+  },
+  {
+    system: "Shelf indicator",
+    whatItMeans:
+      "A completed shelf row/section indicator turns blue or visibly lights up and plays a sound. A dark indicator means at least one book is missing, wrong, or out of order.",
+    beginnerTakeaway:
+      "If a shelf is not blue, check the row before assuming the game is bugged.",
+  },
+  {
+    system: "Keys and chests",
+    whatItMeans:
+      "Four hidden keys open four chests that unlock Jump, Sprint, and extra carrying capacity.",
+    beginnerTakeaway:
+      "Get the chest upgrades early. Jump, Sprint, and more carry slots save time for the entire run.",
+  },
+  {
+    system: "Major magic",
+    whatItMeans:
+      "Major magic includes active sorting tools such as Assemble, Insight, Shelf Guide, Sorting, and Auto-Shelving.",
+    beginnerTakeaway:
+      "Assemble is the best efficiency skill. Insight helps early. Shelf Guide is optional if you already have a map open.",
+  },
+  {
+    system: "Achievements",
+    whatItMeans:
+      "There are 12 Steam achievements, including progress, magic, speedrun, no-magic, special-stage, and joke-ending challenges.",
+    beginnerTakeaway:
+      "Plan achievements across multiple runs. Efficiency Librarian, Anti-Magic Master, and You Are Fired conflict with a normal blind clear.",
+  },
+];
+
+export const firstRunColumns = [
+  { key: "phase", label: "Phase" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const firstRunRows = [
+  {
+    phase: "Opening minutes",
+    whatToDo:
+      "Check the category maps posted at the base of the main staircase on the first floor, then place a few obvious books from the starting pile.",
+    whyItMatters:
+      "The maps tell you where sections are. Without them, early sorting turns into random shelf testing.",
+  },
+  {
+    phase: "First easy rows",
+    whatToDo:
+      "Start with repeated titles, obvious spell books, white books, and black books with red text.",
+    whyItMatters:
+      "These groups are easier to recognize and can give you early row completions.",
+  },
+  {
+    phase: "Chest upgrades",
+    whatToDo:
+      "Find the Crimson Octagon Key first, then collect the other keys once Jump is unlocked.",
+    whyItMatters:
+      "Jump, Sprint, and extra carry slots reduce every later route.",
+  },
+  {
+    phase: "First spell points",
+    whatToDo:
+      "Put early points into Assemble, then add Insight or Sorting depending on whether you are searching piles or placing full series.",
+    whyItMatters:
+      "Assemble turns one known book into a full-series cleanup tool.",
+  },
+  {
+    phase: "Midgame cleanup",
+    whatToDo:
+      "Use Assemble on a known book, sort the gathered series by volume, then place the whole set in one shelf section.",
+    whyItMatters:
+      "Clearing complete series is faster than handling single books one by one.",
+  },
+  {
+    phase: "Endgame check",
+    whatToDo:
+      "Use blue shelf indicators, dark sections, and remaining short shelves to find missing or misplaced books.",
+    whyItMatters:
+      "Most late-game stalls come from one wrong volume, one split series, or one short shelf you skipped.",
+  },
+];
+
+export const keyColumns = [
+  { key: "key", label: "Key" },
+  { key: "location", label: "Location" },
+  { key: "unlock", label: "Unlock" },
+  { key: "routeNote", label: "Route Note" },
+];
+
+export const keyRows = [
+  {
+    key: "Crimson Octagon Key",
+    location:
+      "At the start, hanging near the crest directly ahead when you load into the library.",
+    unlock: "Jump",
+    routeNote:
+      "Get this first. Jump is required or strongly recommended for the other key routes.",
+  },
+  {
+    key: "Golden Diamond Key",
+    location:
+      "Near the crimson chest, hidden inside a decorative vase on the stair railing. Jump onto the vase and check inside it, not just on top of it.",
+    unlock: "Carry Capacity +3",
+    routeNote:
+      "This is the easiest key to miss because the vase hides it from normal view.",
+  },
+  {
+    key: "Azure Star Key",
+    location:
+      "On the far side of the second-floor room, on top of the right-side bookshelf.",
+    unlock: "Carry Capacity +2",
+    routeNote:
+      "Get it after Jump. The extra carry slots make every Assemble route faster.",
+  },
+  {
+    key: "Emerald Club Key",
+    location:
+      "On the bench to the right of the scale table, buried under a pile of books.",
+    unlock: "Sprint / Run",
+    routeNote:
+      "Clear the pile completely. The key can be fully covered by books.",
+  },
+];
+
+export const glowColumns = [
+  { key: "signal", label: "Signal" },
+  { key: "meaning", label: "Meaning" },
+  { key: "whatToCheck", label: "What To Check" },
+];
+
+export const glowRows = [
+  {
+    signal: "Blue / lit shelf indicator",
+    meaning:
+      "That row or shelf group is complete and accepted by the game.",
+    whatToCheck:
+      "Move on. This is the completion signal you want.",
+  },
+  {
+    signal: "Dark indicator",
+    meaning:
+      "At least one book is missing, wrong, split into another row, or out of volume order.",
+    whatToCheck:
+      "Check volume order, same-title grouping, and whether one book is stored on another shelf.",
+  },
+  {
+  signal: "Book snaps into a shelf slot",
+  meaning:
+    "The placement was accepted, but the row may still be incomplete.",
+  whatToCheck:
+    "Check the row indicator. One accepted book does not mean the full row is done.",
+},
+  {
+    signal: "Assemble does not grab a book",
+    meaning:
+      "The book may already be placed on a shelf, or Assemble may only be searching loose books depending on the situation.",
+    whatToCheck:
+      "Do not use shelves as temporary storage if you expect Assemble to collect those books later.",
+  },
+];
+
+export const sortingClueColumns = [
+  { key: "visualClue", label: "Visual Clue" },
+  { key: "likelySections", label: "Likely Sections" },
+  { key: "exampleTitles", label: "Example Titles / Keywords" },
+  { key: "warning", label: "Warning" },
+];
+
+export const sortingClueRows = [
+  {
+    visualClue: "White or pale books",
+    likelySections: "2J Philosophy, 1K Healing, 1L Holy / Priest-style books",
+    exampleTitles:
+      "Philosophical studies, Healing Magic, Holy Light, Sacred Purification",
+    warning:
+      "White is useful but dangerous. Philosophy, Healing, and Holy books can look similar.",
+  },
+  {
+    visualClue: "Black or dark books with red text",
+    likelySections: "1E Necromancy, 1C Curses and Dispels",
+    exampleTitles:
+      "Beginner's Guide to Necromancy, Army of the Dead, Birth of Curses",
+    warning:
+      "Necromancy and curse books overlap visually. Confirm the title before placing.",
+  },
+  {
+    visualClue: "Spell books with elemental words",
+    likelySections: "Spell / magic sections across the first floor",
+    exampleTitles:
+      "Book of Spells: Fire, Water, Wind, Shadow, Time, Dimensional Rift",
+    warning:
+      "Elemental spell books are often easy wins, but some series are longer than they look.",
+  },
+  {
+    visualClue: "Purple, blue, or illusion-like covers",
+    likelySections: "1I Illusion, 1J Summoning, related magic sections",
+    exampleTitles:
+      "Illusionary Spells, Dragon Summoning, Summoning and Contracts",
+    warning:
+      "Do not assume every purple book is the same category.",
+  },
+  {
+    visualClue: "Short 1-3 or 1-5 series",
+    likelySections: "Small side shelves",
+    exampleTitles:
+      "Short title groups with only three or five volumes",
+    warning:
+      "If a series will not fit a long row correctly, check the smaller shelves.",
+  },
+];
+
+export const abilityColumns = [
+  { key: "ability", label: "Ability" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "cooldownNotes", label: "Cooldown / Notes" },
+  { key: "hubAdvice", label: "Hub Recommendation" },
+];
+
+export const abilityRows = [
+  {
+    ability: "Assemble",
+    whatItDoes:
+      "Uses the top book as a base and gathers books from the same series into your hands.",
+    cooldownNotes:
+      "Has a cooldown and improves with levels. It is strongest when used on loose books from a series you already know where to place.",
+    hubAdvice:
+      "Best overall skill. Prioritize this for speed, 3-hour attempts, and reducing pile searching.",
+  },
+  {
+    ability: "Insight",
+    whatItDoes:
+      "Makes matching books glow in the room so they are easier to spot in piles.",
+    cooldownNotes:
+      "Useful while the floor is still messy. Loses value once Assemble can pull most of the series for you.",
+    hubAdvice:
+      "Good early. Upgrade if you are still digging through piles manually.",
+  },
+  {
+    ability: "Sorting",
+    whatItDoes:
+      "Automatically arranges the books in your possession in numerical order.",
+    cooldownNotes:
+      "Not exciting early, but it gets better when you carry larger groups after chest upgrades.",
+    hubAdvice:
+      "Low early priority, useful mid-to-late when placing full series quickly.",
+  },
+  {
+    ability: "Auto-Shelving",
+    whatItDoes:
+      "Instantly shelves matching books from your hand onto the targeted bookshelf.",
+    cooldownNotes:
+      "Works on the shelf you are targeting. Avoid moving books manually while the effect is resolving.",
+    hubAdvice:
+      "A time-saver after you already know the correct shelf. Do not prioritize it over Assemble.",
+  },
+  {
+    ability: "Shelf Guide",
+    whatItDoes:
+      "Highlights the correct bookshelf for the top book you are holding.",
+    cooldownNotes:
+      "Can save blind players, but external maps reduce its value.",
+    hubAdvice:
+      "Use it if you refuse maps. Otherwise spend points elsewhere.",
+  },
+];
+
+export const achievementColumns = [
+  { key: "group", label: "Achievement Group" },
+  { key: "examples", label: "Examples" },
+  { key: "routeAdvice", label: "Route Advice" },
+];
+
+export const achievementRows = [
+  {
+    group: "Progress",
+    examples:
+      "The First Step of Organizing, Intermediate Librarian, Veteran Librarian, The Grand Librarian",
+    routeAdvice:
+      "Complete 1, 50, 200, and 400 rows. These unlock naturally during a normal clear.",
+  },
+  {
+    group: "Magic",
+    examples:
+      "Novice Mage, Sage of the Library, Life Hack Wizard, The Archmage",
+    routeAdvice:
+      "Unlock major magic, open all chests for minor magic, and max spell levels during a magic-enabled run.",
+  },
+  {
+    group: "Special Stage",
+    examples: "Overtime Avoider",
+    routeAdvice:
+      "After the main library is finished, enter the Special Stage and use the ultimate skill to clear it.",
+  },
+  {
+    group: "Joke ending",
+    examples: "You Are Fired!",
+    routeAdvice:
+      "Fill the library incorrectly without completing a row, then leave. Do this separately from a normal clear.",
+  },
+  {
+    group: "Challenge",
+    examples: "Efficiency Librarian, Anti-Magic Master",
+    routeAdvice:
+      "Efficiency needs a fast magic route. Anti-Magic needs a separate no-major-magic manual route.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    problem: "Shelf does not turn blue",
+    likelyCause:
+      "One book is missing, out of order, in the wrong section, or split into another row.",
+    fix:
+      "Check the shelf indicator, then verify volume order and same-title grouping before reloading.",
+  },
+  {
+    problem: "Assemble does not collect a book",
+    likelyCause:
+      "The book may already be sitting on a shelf or the selected top book is not the series you think it is.",
+    fix:
+      "Keep temporary storage books on the floor if you plan to use Assemble later.",
+  },
+  {
+    problem: "One last book is missing",
+    likelyCause:
+      "The book may be buried under piles, hidden behind a stack, or already placed on another shelf.",
+    fix:
+      "Use Insight or Assemble on a known book from that series, then check every dark shelf indicator.",
+  },
+  {
+    problem: "Invisible or stuck book",
+    likelyCause:
+      "A physics or shelf-grid issue can leave a book visually stuck.",
+    fix:
+      "Remove nearby books, place them on the floor, return to the main menu, then Continue.",
+  },
+  {
+    problem: "Special Stage confusion",
+    likelyCause:
+      "After the main clear, the Special Stage is not a normal sorting stage for Overtime Avoider.",
+    fix:
+      "Use the ultimate skill in the Special Stage to clear it and trigger the achievement.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Start with maps, keys, and Assemble.**
+
+Check the stair maps, complete easy rows, collect all four key upgrades, then use **Assemble** to gather full book series. If a shelf does not turn **blue**, one book is probably missing, misplaced, split, or out of order.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-library-overview.webp"
+    alt="Librarian Tidy Up the Arcane Library overview showing the messy magical library filled with unsorted books."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The library looks overwhelming at first, but it becomes manageable once you read the maps, finish early rows, and unlock magic.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="quick-facts">
+  Quick facts
+</h2>
+
+<GuideTable
+  caption="Librarian: Tidy Up the Arcane Library beginner facts."
+  columns={quickFactsColumns}
+  rows={quickFactsRows}
+/>
+
+---
+
+<h2 id="first-run-route">
+  Best first-run route
+</h2>
+
+Your first run should not be a speedrun. Learn the shelf maps, finish easy rows, unlock chest upgrades, and let Assemble handle the midgame.
+
+<GuideTable
+  caption="Recommended first-run plan for Librarian: Tidy Up the Arcane Library."
+  columns={firstRunColumns}
+  rows={firstRunRows}
+/>
+
+<GuideCallout title="Beginner rule">
+Do not clear piles randomly. Pick one recognizable series, gather its volumes, place it correctly, then move to the next series.
+</GuideCallout>
+
+---
+
+<h2 id="keys-and-chests">
+  Keys and chests
+</h2>
+
+There are **four hidden keys** in the library. They are worth getting early because the chest rewards make every later route faster.
+
+<GuideTable
+  caption="All key locations and chest unlocks in Librarian: Tidy Up the Arcane Library."
+  columns={keyColumns}
+  rows={keyRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-key-chests.webp"
+    alt="Librarian Tidy Up the Arcane Library chest rewards for keys, including carrying capacity and sprint upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The four chests unlock basic movement and carrying upgrades, so they should be part of your early route.
+  </figcaption>
+</figure>
+
+For exact screenshots and step-by-step locations, use the dedicated <Link href="/librarian/key-locations">All Key Locations Guide</Link>.
+
+---
+
+<h2 id="shelf-glow">
+  Shelf glow and blue indicator explained
+</h2>
+
+The most important completion signal is the **blue / lit shelf indicator**, not just a single book glowing.
+
+<GuideTable
+  caption="Shelf glow and indicator meanings."
+  columns={glowColumns}
+  rows={glowRows}
+/>
+
+<GuideCallout title="Blue shelf rule">
+If the shelf indicator is not blue, treat the row as unfinished. Check for one wrong volume, one duplicate-title split, or one book stored on a different shelf.
+</GuideCallout>
+
+---
+
+<h2 id="best-abilities">
+  Best abilities and upgrade order
+</h2>
+
+For most players, the best first major ability is **Assemble**. It turns one found book into a full-series cleanup route and removes a lot of pile searching.
+
+<GuideTable
+  caption="Best abilities and upgrade priorities."
+  columns={abilityColumns}
+  rows={abilityRows}
+/>
+
+Recommended upgrade logic:
+
+1. **Assemble** for speed and fewer searches.
+2. **Insight** if you are still digging through piles.
+3. **Sorting** once you are carrying larger book groups.
+4. **Auto-Shelving** when you already know the shelf and want faster placement.
+5. **Shelf Guide** only if you do not want to use maps.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-ability-menu.webp"
+    alt="Librarian Tidy Up the Arcane Library ability menu showing major magic options such as Assemble, Insight, Sorting, and Auto-Shelving."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Assemble is the strongest general-purpose skill because it turns one found book into a full-series cleanup route.
+  </figcaption>
+</figure>
+
+For a deeper route, use <Link href="/librarian/best-abilities">Best Abilities and Upgrade Order</Link>.
+
+---
+
+<h2 id="book-sorting">
+  Book sorting basics
+</h2>
+
+The sorting system has three layers:
+
+1. **Category section**: the book must be in the right area, such as 1A, 1C, 1E, 1K, 1L, 2J, or 2Q.
+2. **Series grouping**: books with the same title must stay together.
+3. **Volume order**: volumes go from left to right in number order.
+
+Color helps, but it is not enough. Use this table as a fast opening clue, not as a final database.
+
+<GuideTable
+  caption="Fast book sorting clues for early routes."
+  columns={sortingClueColumns}
+  rows={sortingClueRows}
+/>
+
+<GuideCallout title="Do not sort by color alone">
+Color is a clue, not the answer. Always confirm the title, category, section, and volume number.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-shelf-glow.webp"
+    alt="Librarian Tidy Up the Arcane Library shelf indicator showing completed or incorrect rows."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Finished shelf areas light up. If an indicator stays dark, at least one book is missing, misplaced, or out of order.
+  </figcaption>
+</figure>
+
+For section maps and sorting examples, use <Link href="/librarian/book-sorting">Book Sorting, Sections, and Color Guide</Link>.
+
+---
+
+<h2 id="achievements">
+  Achievements and endings
+</h2>
+
+There are **12 achievements**, and the important ones fall into five groups.
+
+<GuideTable
+  caption="Achievement route overview."
+  columns={achievementColumns}
+  rows={achievementRows}
+/>
+
+The main conflict is simple: **Efficiency Librarian wants a fast magic route, while Anti-Magic Master requires a separate manual no-major-magic run.**
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-completion-results.webp"
+    alt="Librarian Tidy Up the Arcane Library completion screen after finishing 400 rows and 3072 books."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Full completion means all 400 rows and all 3,072 books are sorted, but challenge achievements need separate planning.
+  </figcaption>
+</figure>
+
+For the full route, use <Link href="/librarian/achievements">All Achievements and Endings Guide</Link>.
+
+---
+
+<h2 id="troubleshooting">
+  Common bugs and troubleshooting
+</h2>
+
+Most problems are not true bugs. They are usually one missing book, one misplaced volume, or one series split across shelves.
+
+<GuideTable
+  caption="Common problems and fixes."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+<GuideCallout title="Reload rule">
+If a book is physically stuck or invisible, remove nearby books from the shelf, put them on the floor, return to the main menu, and press Continue.
+</GuideCallout>
+
+For now, this Hub keeps troubleshooting as a section rather than a separate page. A dedicated bugs page only makes sense after there is enough search data around “invisible book,” “last book missing,” “book stuck in ground,” or “shelf not turning blue.”
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do first in Librarian: Tidy Up the Arcane Library?
+
+Check the stair maps, complete easy rows, and collect the four hidden keys. Early rows unlock magic, while chests unlock Jump, Sprint, and carry upgrades.
+
+### What is the best ability to unlock first?
+
+**Assemble** is the best first major ability for efficiency. It gathers books from the same series and reduces pile searching.
+
+### Should I use Shelf Guide?
+
+Use Shelf Guide if you are playing blind. If you already have a map open, spend points on Assemble, Insight, Sorting, or Auto-Shelving instead.
+
+### Can I sort books by color?
+
+Not reliably. Color helps, but white books can be Philosophy, Healing, Holy, or Priest-style books, so always confirm the title and section.
+
+### What does it mean when the shelf does not turn blue?
+
+Usually one book is missing, out of order, in the wrong section, or placed in a duplicate row. Check volume order and the shelf indicator before reloading.
+
+### I placed all the books but the shelf still will not turn blue — what am I missing?
+The most common cause is a volume order mistake or a split series. The game requires books in the same series to be grouped together AND placed in correct volume order from left to right. A single book out of sequence or one volume sitting in a neighboring row will keep the indicator dark even if every book is technically on the correct shelf.
+
+### What does a dark shelf indicator mean?
+
+A dark indicator means the row or shelf group is unfinished. Look for a missing book, wrong volume order, or a series split across shelves.
+
+### Why does Assemble not grab a book?
+
+Assemble may not pull books already placed on shelves. Keep temporary storage books on the floor if you plan to collect them later with Assemble.
+
+### How many books are in the game?
+
+The full library contains **3,072 books**.
+
+### How many rows do I need to complete?
+
+A full completion requires **400 completed rows**.
+
+### How many keys are there?
+
+There are **four hidden keys**: Crimson Octagon, Golden Diamond, Azure Star, and Emerald Club.
+
+### Which key should I get first?
+
+Get the **Crimson Octagon Key** first because it unlocks Jump, which helps you reach other key locations.
+
+### Where is the Golden Diamond Key?
+
+The Golden Diamond Key is hidden **inside** a decorative vase on the stair railing near the crimson chest. Jump up and look inside the vase.
+
+### How do I unlock Sprint?
+
+Sprint is unlocked from the chest tied to the **Emerald Club Key**. The key is buried under books near the scale table bench.
+
+### How do I get Efficiency Librarian?
+
+Finish the entire game in under 3 hours. Learn the layout first, collect chest upgrades early, and rush Assemble.
+
+### Do chest upgrades count as magic for Anti-Magic Master?
+
+Chest upgrades such as Jump, Sprint, and Carry Capacity are passive minor upgrades, not active major magic. For Anti-Magic Master, avoid active major spells such as Assemble, Insight, Shelf Guide, Sorting, and Auto-Shelving.
+
+### How do I clear the Special Stage?
+
+After finishing the main library, enter the Special Stage and use the ultimate skill. That is the route for Overtime Avoider.
+
+### Is You Are Fired part of a normal completion route?
+
+No. You Are Fired is a joke route where the library is filled incorrectly without completing a single row. Do it separately.
+
+### I placed all the books but the shelf still will not turn blue — what am I missing?
+The most common cause is a volume order mistake or a split series. The game requires books in the same series to be grouped together AND placed in correct volume order from left to right. A single book out of sequence or one volume sitting in a neighboring row will keep the indicator dark even if every book is technically on the correct shelf.
+

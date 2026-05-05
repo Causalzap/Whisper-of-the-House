@@ -1,0 +1,604 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const achievementColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "requirement", label: "Requirement" },
+  { key: "type", label: "Type" },
+  { key: "bestRun", label: "Best Run" },
+];
+
+export const achievementRows = [
+  {
+    achievement: "The First Step of Organizing",
+    requirement: "Complete your first correctly arranged bookshelf row.",
+    type: "Progress",
+    bestRun: "Normal magic run",
+  },
+  {
+    achievement: "Intermediate Librarian",
+    requirement: "Complete 50 correctly arranged rows.",
+    type: "Progress",
+    bestRun: "Normal magic run",
+  },
+  {
+    achievement: "Veteran Librarian",
+    requirement: "Complete 200 correctly arranged rows.",
+    type: "Progress",
+    bestRun: "Normal magic run",
+  },
+  {
+    achievement: "The Grand Librarian",
+    requirement: "Complete all 400 rows and finish the main library.",
+    type: "Progress / Completion",
+    bestRun: "Normal magic run",
+  },
+  {
+    achievement: "Novice Mage",
+    requirement: "Unlock your first major magic ability.",
+    type: "Magic",
+    bestRun: "Normal magic run",
+  },
+  {
+    achievement: "Sage of the Library",
+    requirement: "Unlock all major magic abilities.",
+    type: "Magic",
+    bestRun: "Normal magic run",
+  },
+  {
+    achievement: "Life Hack Wizard",
+    requirement: "Unlock all minor magic / chest upgrade powers.",
+    type: "Keys / Minor magic",
+    bestRun: "Normal magic run",
+  },
+  {
+    achievement: "The Archmage",
+    requirement: "Max out all major magic levels.",
+    type: "Magic",
+    bestRun: "Normal magic run",
+  },
+  {
+    achievement: "Overtime Avoider",
+    requirement: "Use the ultimate skill in the Special Stage after finishing the main library.",
+    type: "Special Stage",
+    bestRun: "Normal magic run after main completion",
+  },
+  {
+    achievement: "You Are Fired!",
+    requirement: "Arrange the library incorrectly without completing a single row, then leave.",
+    type: "Joke / Bad ending",
+    bestRun: "Separate joke run or save-copy route",
+  },
+  {
+    achievement: "Efficiency Librarian",
+    requirement: "Complete the game in under 3 hours.",
+    type: "Speedrun",
+    bestRun: "Separate optimized magic run",
+  },
+  {
+    achievement: "Anti-Magic Master",
+    requirement: "Complete the game without using active major magic.",
+    type: "No-magic challenge",
+    bestRun: "Separate manual run",
+  },
+];
+
+export const runPlanColumns = [
+  { key: "run", label: "Run" },
+  { key: "mainGoal", label: "Main Goal" },
+  { key: "Achievements", label: "Achievements Covered" },
+  { key: "rules", label: "Rules" },
+];
+
+export const runPlanRows = [
+  {
+    run: "Run 1",
+    mainGoal: "Normal magic completion",
+    Achievements:
+      "Progress achievements, major magic unlocks, minor magic, Archmage, Grand Librarian, Overtime Avoider",
+    rules:
+      "Use keys, chest upgrades, Assemble, Insight, Sorting, and Auto-Shelving freely. Learn the library and finish 400 rows.",
+  },
+  {
+    run: "Run 2",
+    mainGoal: "Efficiency Librarian",
+    Achievements: "Efficiency Librarian",
+    rules:
+      "Use an optimized magic route. Get all key upgrades early, rush Assemble, add Sorting after carry upgrades, and avoid blind searching.",
+  },
+  {
+    run: "Run 3",
+    mainGoal: "Anti-Magic Master",
+    Achievements: "Anti-Magic Master",
+    rules:
+      "Do not use active major magic. Sort manually with maps, memory, and careful volume order.",
+  },
+  {
+    run: "Optional / save-copy route",
+    mainGoal: "You Are Fired!",
+    Achievements: "You Are Fired!",
+    rules:
+      "Use a separate save or throwaway route. Fill the library incorrectly without completing a row, then leave.",
+  },
+];
+
+export const hardAchievementColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "whyItIsHard", label: "Why It Is Hard" },
+  { key: "bestAdvice", label: "Best Advice" },
+];
+
+export const hardAchievementRows = [
+  {
+    achievement: "Efficiency Librarian",
+    whyItIsHard:
+      "The 3-hour timer punishes slow searching, late keys, weak Assemble routing, and repeated travel.",
+    bestAdvice:
+      "Do not attempt it blind. Get all keys early, prioritize carry capacity and Assemble, and use Sorting once you hold 7+ books.",
+  },
+  {
+    achievement: "Anti-Magic Master",
+    whyItIsHard:
+      "You lose the tools that normally solve the largest problem: finding and gathering full series.",
+    bestAdvice:
+      "Use maps, sort by section, keep series together manually, and avoid active major magic.",
+  },
+  {
+    achievement: "You Are Fired!",
+    whyItIsHard:
+      "It is the opposite of a normal run: you must avoid completing even one correct row.",
+    bestAdvice:
+      "Do it separately. Do not risk ruining a serious completion save unless you have a backup.",
+  },
+  {
+    achievement: "Overtime Avoider",
+    whyItIsHard:
+      "Players may finish the main library and then not understand what the Special Stage wants.",
+    bestAdvice:
+      "After main completion, enter the Special Stage and use the ultimate skill instead of manually clearing it.",
+  },
+];
+
+export const magicColumns = [
+  { key: "category", label: "Magic Category" },
+  { key: "examples", label: "Examples" },
+  { key: "antiMagicRule", label: "Anti-Magic Master Rule" },
+];
+
+export const magicRows = [
+  {
+    category: "Active major magic",
+    examples: "Assemble, Insight, Shelf Guide, Sorting, Auto-Shelving",
+    antiMagicRule:
+      "Avoid these during Anti-Magic Master. They are active spell tools that help sorting.",
+  },
+  {
+    category: "Minor magic / chest upgrades",
+    examples: "Jump, Sprint, Carry Capacity +3, Carry Capacity +2",
+    antiMagicRule:
+      "Based on community testing, these are passive minor upgrades rather than active major magic.",
+  },
+  {
+    category: "Ultimate skill",
+    examples: "Special Stage ultimate clear",
+    antiMagicRule:
+      "Use for Overtime Avoider on a magic-enabled route, not during a no-major-magic challenge route.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Trying to 100% everything in one blind run",
+    whyItHurts:
+      "Efficiency, Anti-Magic, and You Are Fired have conflicting route requirements.",
+    fix:
+      "Plan at least two serious runs plus a separate You Are Fired route.",
+  },
+  {
+    mistake: "Starting Efficiency Librarian before learning the library",
+    whyItHurts:
+      "You lose too much time on keys, shelf sections, and missing volumes.",
+    fix:
+      "Do a normal completion first, then speedrun with a planned key and Assemble route.",
+  },
+  {
+    mistake: "Using active magic in Anti-Magic Master",
+    whyItHurts:
+      "Active spell tools can invalidate the no-major-magic challenge.",
+    fix:
+      "Avoid Assemble, Insight, Shelf Guide, Sorting, and Auto-Shelving.",
+  },
+  {
+    mistake: "Doing You Are Fired on your serious save",
+    whyItHurts:
+      "The route intentionally ruins the library arrangement.",
+    fix:
+      "Use a separate save-copy route or do it as a throwaway run.",
+  },
+  {
+    mistake: "Forgetting the Special Stage",
+    whyItHurts:
+      "You can finish the main library and still miss Overtime Avoider.",
+    fix:
+      "After the main clear, enter the Special Stage and use the ultimate skill.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+There are **12 achievements** in Librarian: Tidy Up the Arcane Library.
+
+The cleanest 100% route is:
+
+1. **Normal magic run** — complete 400 rows, unlock all major magic, unlock all minor magic, max spell levels, and clear the Special Stage.
+2. **Efficiency run** — finish the game in under 3 hours with an optimized key + Assemble route.
+3. **Anti-Magic run** — complete the game manually without active major magic.
+4. **You Are Fired route** — arrange the library incorrectly without completing a row, then leave.
+
+Do not try to force all challenge achievements into one blind run.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-achievements-overview.webp"
+    alt="Librarian Tidy Up the Arcane Library achievement overview showing the main progress, magic, speedrun, anti-magic, and joke achievements."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The 12 achievements fall into progress, magic, special-stage, speedrun, no-magic, and joke-route categories.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="all-achievements">
+  All 12 achievements
+</h2>
+
+Most achievements unlock naturally during a normal magic run, but the challenge achievements need separate planning.
+
+<GuideTable
+  caption="All achievements in Librarian: Tidy Up the Arcane Library."
+  columns={achievementColumns}
+  rows={achievementRows}
+/>
+
+<GuideCallout title="Important route conflict">
+**Efficiency Librarian** wants fast magic use. **Anti-Magic Master** avoids active major magic. **You Are Fired!** intentionally ruins the library. Treat them as separate goals.
+</GuideCallout>
+
+---
+
+<h2 id="recommended-route">
+  Recommended 100% route
+</h2>
+
+The safest 100% route is not one run. Use a normal completion to learn the library, then split the challenge achievements into dedicated routes.
+
+<GuideTable
+  caption="Recommended 100% achievement route."
+  columns={runPlanColumns}
+  rows={runPlanRows}
+/>
+
+---
+
+<h2 id="normal-magic-run">
+  Run 1: normal magic completion
+</h2>
+
+Your first serious run should be a normal magic completion.
+
+This run covers:
+
+- The First Step of Organizing
+- Intermediate Librarian
+- Veteran Librarian
+- The Grand Librarian
+- Novice Mage
+- Sage of the Library
+- Life Hack Wizard
+- The Archmage
+- Overtime Avoider
+
+Progress achievements unlock naturally at **row 1, row 50, row 200, and row 400**. Magic achievements unlock as you buy your first major spell, unlock all major spells, open all chest upgrades, and eventually max every major spell level.
+
+The goal is simple: learn the library, collect all keys, use magic freely, complete all 400 rows, then clear the Special Stage.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-400-rows-complete.webp"
+    alt="Librarian Tidy Up the Arcane Library completion message after finishing 400 rows and 3072 books."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Grand Librarian route is the full main-library completion: 400 rows and 3,072 books.
+  </figcaption>
+</figure>
+
+For a normal clear, the core flow is:
+
+**maps → keys → Assemble → 400 rows → Special Stage**
+
+For the full route, use the <Link href="/librarian">Complete Guide Hub</Link>, <Link href="/librarian/key-locations">All Key Locations and Chest Unlocks</Link>, and <Link href="/librarian/best-abilities">Best Abilities and Upgrade Order</Link>.
+
+---
+
+<h2 id="overtime-avoider">
+  Overtime Avoider and the Special Stage
+</h2>
+
+**Overtime Avoider** is unlocked after the main library is finished.
+
+Once you reach the Special Stage, do not treat it like a normal manual sorting section. Use the **ultimate skill** to clear it.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-special-stage-entry.webp"
+    alt="Librarian Tidy Up the Arcane Library Special Stage after completing the main library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After the main library clear, the Special Stage is where Overtime Avoider is triggered.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Special Stage rule">
+For Overtime Avoider, enter the Special Stage after finishing the main library and use the ultimate skill. This is a magic-enabled achievement route, not an Anti-Magic route.
+</GuideCallout>
+
+---
+
+<h2 id="efficiency-librarian">
+  Efficiency Librarian under 3 hours
+</h2>
+
+**Efficiency Librarian** requires completing the game in under 3 hours.
+
+Do not attempt this blind. A normal first completion can take much longer while you learn sections, keys, and spell routing.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-clear-time-results.webp"
+    alt="Librarian Tidy Up the Arcane Library clear time and magic usage results screen."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A learning run can be far slower than the 3-hour requirement, so Efficiency Librarian needs a planned route.
+  </figcaption>
+</figure>
+
+Recommended Efficiency route:
+
+1. Start with easy rows only if they are directly in front of you.
+2. Get the **Crimson Octagon Key** and unlock Jump.
+3. Collect the remaining key upgrades before serious sorting.
+4. Prioritize **Carry Capacity +3** and **Carry Capacity +2** because they improve Assemble routes.
+5. Rush **Assemble**.
+6. Add **Sorting** once you can regularly carry 7+ books.
+7. Use **Insight** only when searching still costs time.
+8. Use **Auto-Shelving** when the target shelf is already obvious.
+9. Avoid wandering between random sections.
+
+With both carry upgrades, a 10-book Assemble route takes fewer trips. Across hundreds of rows, this is one of the biggest time saves in the game.
+
+---
+
+<h2 id="anti-magic-master">
+  Anti-Magic Master no-magic route
+</h2>
+
+**Anti-Magic Master** is the manual challenge route. Do not use active major magic.
+
+<GuideTable
+  caption="What counts as magic for Anti-Magic Master."
+  columns={magicColumns}
+  rows={magicRows}
+/>
+
+For Anti-Magic Master, avoid:
+
+- Assemble
+- Insight
+- Shelf Guide
+- Sorting
+- Auto-Shelving
+
+Based on community testing, chest upgrades such as **Jump**, **Sprint**, and **Carry Capacity** are passive minor upgrades rather than active major magic. The safest interpretation is still: do all actual sorting manually and avoid active spell assistance.
+
+Without active sorting magic, expect this run to take much longer than a normal clear. Community reports suggest **8 to 12 hours or more**, depending on how well you know the shelf sections and book series.
+
+Recommended Anti-Magic route:
+
+1. Open maps or screenshots before starting.
+2. Collect passive chest upgrades early.
+3. Sort by section, not by random piles.
+4. Keep each title series together.
+5. Check volume order from left to right.
+6. Use shelf indicators to catch incomplete rows.
+7. Expect this to take much longer than a magic run.
+
+<GuideCallout title="Anti-Magic rule">
+Anti-Magic Master is not a speed route. It is a patience route. Your main tools are maps, memory, section knowledge, and careful volume order.
+</GuideCallout>
+
+---
+
+<h2 id="you-are-fired">
+  You Are Fired route
+</h2>
+
+**You Are Fired!** is the joke / bad-ending achievement.
+
+The requirement is to arrange the library incorrectly without completing a single row, then leave.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-you-are-fired-setup.webp"
+    alt="Librarian Tidy Up the Arcane Library You Are Fired achievement setup with intentionally incorrect book arrangement."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    You Are Fired is the opposite of a normal run: the goal is to avoid completing rows.
+  </figcaption>
+</figure>
+
+Recommended approach:
+
+1. Do this on a separate route or save-copy route.
+2. Fill shelves with books placed in the wrong rows or wrong series groups.
+3. Make sure **no shelf row turns blue** and no row is completed.
+4. If a row completes by accident, break it before leaving.
+5. Exit through the library exit / barrier after the library is filled incorrectly.
+6. Do not just close the game or quit to menu. Use the in-game exit route.
+
+<GuideCallout title="You Are Fired trigger check">
+If You Are Fired does not unlock, confirm two things: **no row is completed** and you are leaving through the library exit, not just closing the game or quitting to the menu.
+</GuideCallout>
+
+---
+
+<h2 id="hardest-achievements">
+  Hardest achievements
+</h2>
+
+The four achievements that deserve the most planning are:
+
+<GuideTable
+  caption="Hardest achievements and how to approach them."
+  columns={hardAchievementColumns}
+  rows={hardAchievementRows}
+/>
+
+---
+
+<h2 id="normal-ending">
+  Normal completion ending
+</h2>
+
+After finishing all 400 rows and 3,072 books, you can leave the library and receive the normal completion evaluation.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-pizza-ending.webp"
+    alt="Librarian Tidy Up the Arcane Library normal completion ending and pizza reward."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The normal completion route rewards you after the full library is restored.
+  </figcaption>
+</figure>
+
+This route is also the best preparation for Efficiency Librarian because it teaches:
+
+- shelf sections
+- key locations
+- ability timing
+- common missing-book patterns
+- which book colors are misleading
+- where late-game cleanup usually slows down
+
+---
+
+<h2 id="common-mistakes">
+  Common achievement mistakes
+</h2>
+
+<GuideTable
+  caption="Common achievement mistakes and fixes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many achievements are in Librarian: Tidy Up the Arcane Library?
+
+There are **12 achievements**.
+
+### Can I get every achievement in one run?
+
+No practical route should try that. Efficiency Librarian, Anti-Magic Master, and You Are Fired have conflicting requirements.
+
+### What is the best 100% achievement route?
+
+Do a normal magic completion first, then a separate Efficiency run, a separate Anti-Magic run, and a separate You Are Fired route.
+
+### How do I unlock The Grand Librarian?
+
+Complete all **400 rows** and finish the main library.
+
+### How do I unlock Overtime Avoider?
+
+Finish the main library, enter the Special Stage, and use the ultimate skill.
+
+### How do I unlock Efficiency Librarian?
+
+Complete the game in under **3 hours**. Learn the library first, collect all key upgrades early, rush Assemble, and add Sorting after carry upgrades.
+
+### Should I try Efficiency Librarian on my first run?
+
+No. Learn the key route, shelf sections, and Assemble loop first. A blind run wastes too much time.
+
+### How do I unlock Anti-Magic Master?
+
+Complete the game without active major magic. Avoid Assemble, Insight, Shelf Guide, Sorting, and Auto-Shelving.
+
+### Do chest upgrades count against Anti-Magic Master?
+
+Based on community testing, chest upgrades such as Jump, Sprint, and Carry Capacity are passive minor upgrades, not active major magic.
+
+### Can I use Assemble for Anti-Magic Master?
+
+No. Treat Assemble as active major magic and avoid it during Anti-Magic Master.
+
+### Can I use Sorting for Anti-Magic Master?
+
+No. Sorting is an active major magic tool, so avoid it for Anti-Magic Master.
+
+### How do I unlock You Are Fired?
+
+Fill the library incorrectly without completing any row, then leave through the library exit / barrier. Do not just quit to menu or close the game. If any row turns blue, break that row before leaving.
+
+### Should I do You Are Fired on my main save?
+
+No. Do it on a separate route or save-copy route because it intentionally ruins the library arrangement.
+
+### What achievement should I do last?
+
+Do **Anti-Magic Master** last if you dislike long manual sorting. It is the most grind-heavy route because you cannot use active sorting magic.
+
+### How long does Anti-Magic Master take?
+
+Expect Anti-Magic Master to take much longer than a normal magic run. Community reports commonly put no-magic routes in the **8 to 12+ hour** range depending on section knowledge, routing, and how often you need to check maps.
+
+### Are achievements missable?
+
+Progress and magic achievements are easy to recover during normal play. Challenge achievements are route-specific, so plan separate runs for Efficiency, Anti-Magic, and You Are Fired.

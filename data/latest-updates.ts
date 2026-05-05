@@ -308,6 +308,48 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-amber-700",
 },
 
+// ===== Librarian: Tidy Up the Arcane Library! =====
+{
+  href: "/librarian",
+  game: "Librarian: Tidy Up the Arcane Library!",
+  title: "Complete Guide: Keys, Abilities, Sorting, Achievements, and Fixes",
+  description:
+    "Start here for Librarian guides, including all key locations, chest unlocks, best abilities, blue shelf indicators, book sorting, achievements, and common missing-book fixes.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/librarian/key-locations",
+  game: "Librarian: Tidy Up the Arcane Library!",
+  title: "All Key Locations: Crimson, Golden, Azure, and Emerald Keys",
+  description:
+    "Find every hidden key and chest reward, including the Crimson Octagon Key, Golden Diamond Key, Azure Star Key, Emerald Club Key, Jump, Sprint, and Carry Capacity upgrades.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/librarian/best-abilities",
+  game: "Librarian: Tidy Up the Arcane Library!",
+  title: "Best Abilities Guide: Assemble, Insight, Sorting, and Auto-Shelving",
+  description:
+    "Learn the best ability upgrade order, why Assemble is the strongest skill, when Sorting becomes worth it, how Auto-Shelving fits in, and what to avoid for Anti-Magic Master.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/librarian/book-sorting",
+  game: "Librarian: Tidy Up the Arcane Library!",
+  title: "Book Sorting Guide: Sections, Color Clues, and Blue Shelf Indicators",
+  description:
+    "Learn how book sorting works with section maps, title clues, color traps, volume order, small shelves, blue shelf indicators, and missing-book troubleshooting.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+
 // ===== Fracture Field =====
 {
   href: "/fracture-field",

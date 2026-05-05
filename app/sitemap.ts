@@ -60,7 +60,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/olden-era`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/gamble-with-your-friends`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/magical-princess/endings-guide`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/librarian`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/librarian/achievements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/librarian/best-abilities`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/librarian/book-sorting`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/librarian/key-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/magical-princess/forbidden-research-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

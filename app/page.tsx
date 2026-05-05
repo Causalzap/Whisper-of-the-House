@@ -109,6 +109,8 @@ const allGameGuides = [
   { title: 'Heroes of Might and Magic: Olden Era', href: '/olden-era' },
   { title: 'Gamble With Your Friends', href: '/gamble-with-your-friends' },
   { title: 'Magical Princess', href: '/magical-princess/endings-guide' },
+
+  { title: 'Librarian: Tidy Up the Arcane Library!', href: '/librarian' },
 ];
 
 const exploreCards = [

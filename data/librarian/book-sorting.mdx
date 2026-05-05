@@ -1,0 +1,819 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const sortingSystemColumns = [
+  { key: "layer", label: "Sorting Layer" },
+  { key: "rule", label: "Rule" },
+  { key: "whatToCheck", label: "What To Check" },
+];
+
+export const sortingSystemRows = [
+  {
+    layer: "Section",
+    rule:
+      "Each book belongs to a category section, such as 1A, 1B, 1E, 2D, 2E, 2G, or 2J.",
+    whatToCheck:
+      "Use the stair maps, Shelf Guide, or the book title keywords before trusting color.",
+  },
+  {
+    layer: "Series",
+    rule:
+      "Books with the same title or same series name must be grouped together.",
+    whatToCheck:
+      "Do not split one title series across neighboring rows unless the game clearly expects separate rows.",
+  },
+  {
+    layer: "Volume order",
+    rule:
+      "Volumes must be placed in correct number order from left to right.",
+    whatToCheck:
+      "Check the actual volume number on the book. A correct section can still fail if volume order is wrong.",
+  },
+  {
+    layer: "Shelf size",
+    rule:
+      "Some short series belong on smaller shelves instead of long rows.",
+    whatToCheck:
+      "If a 3-book or 5-book series feels awkward in a long row, check the small side shelves.",
+  },
+  {
+    layer: "Completion signal",
+    rule:
+      "A completed shelf row or group turns blue / lights up and plays a sound.",
+    whatToCheck:
+      "If the indicator stays dark, at least one book is missing, misplaced, split, or out of order.",
+  },
+];
+
+export const colorClueColumns = [
+  { key: "visualClue", label: "Visual Clue" },
+  { key: "possibleSections", label: "Possible Sections" },
+  { key: "exampleKeywords", label: "Example Keywords" },
+  { key: "warning", label: "Warning" },
+];
+
+export const colorClueRows = [
+  {
+    visualClue: "Brown or dark earthy books",
+    possibleSections: "1A Monsterology",
+    exampleKeywords:
+      "Monster, beast, creature, catalog, species, monster behavior",
+    warning:
+      "One of the easiest early targets. Look near the starting area for monster-related series.",
+  },
+  {
+    visualClue: "White / pale books",
+    possibleSections: "2J Philosophy, Healing, Holy / Priest-style sections",
+    exampleKeywords:
+      "Philosophy, healing, priest, holy, sacred, purification",
+    warning:
+      "White is the biggest trap. Multiple categories can share pale covers.",
+  },
+  {
+    visualClue: "Black or dark books with red text",
+    possibleSections: "1E Necromancy, Curses / Dispels",
+    exampleKeywords:
+      "Necromancy, dead, undead, curse, dispel, forbidden rites",
+    warning:
+      "Good early target, but confirm title keywords before placing.",
+  },
+  {
+    visualClue: "Crystal / star / prophecy themes",
+    possibleSections: "1B Astrology & Divination",
+    exampleKeywords:
+      "Crystal, prophecy, oracle, divination, stars, witches",
+    warning:
+      "Some prophecy-looking books may still belong to other magic categories.",
+  },
+  {
+    visualClue: "Music, chanting, voice, performance themes",
+    possibleSections: "1D Bard / Music",
+    exampleKeywords:
+      "Bard, music, chanting, voice, song, performance",
+    warning:
+      "Some chanting books may look like magic theory, so confirm the title theme.",
+  },
+  {
+    visualClue: "Stealth, shadow, hidden movement themes",
+    possibleSections: "1H Stealth Magic",
+    exampleKeywords:
+      "Stealth, hide, shadow, concealment, silent movement",
+    warning:
+      "Do not confuse stealth titles with illusion titles unless the section clue matches.",
+  },
+  {
+    visualClue: "Illusion, vision, mirage themes",
+    possibleSections: "1I Illusion",
+    exampleKeywords:
+      "Illusion, mirage, visual trick, false image, deception",
+    warning:
+      "Illusion and stealth can overlap visually. Use the exact title keywords.",
+  },
+  {
+    visualClue: "Summoning and contract themes",
+    possibleSections: "1J Summoning Magic",
+    exampleKeywords:
+      "Summoning, contract, grimoire, called beings, ritual pact",
+    warning:
+      "Summoning books can look like general magic books, so title keywords matter.",
+  },
+  {
+    visualClue: "Healing or recovery themes",
+    possibleSections: "1K Healing Magic",
+    exampleKeywords:
+      "Healing, cure, recovery, potion, restoration",
+    warning:
+      "Healing books can be pale or white, which makes them easy to confuse with Philosophy or Holy books.",
+  },
+  {
+    visualClue: "Holy, sacred, priest-style themes",
+    possibleSections: "1L Holy / Priest-style books",
+    exampleKeywords:
+      "Holy, sacred, priest, purification, divine light",
+    warning:
+      "Another white-book trap. Do not send every pale cover to Philosophy.",
+  },
+  {
+    visualClue: "Art / definition / aesthetics themes",
+    possibleSections: "2E Art",
+    exampleKeywords:
+      "Art, aesthetics, sublime, definition, beauty",
+    warning:
+      "Use the title. Color alone is not enough.",
+  },
+  {
+    visualClue: "Economics / currency / management themes",
+    possibleSections: "2G Economics",
+    exampleKeywords:
+      "Currency, market, management, resource allocation",
+    warning:
+      "These can look like generic academic books, so title keywords matter more than color.",
+  },
+  {
+    visualClue: "Math / formula / equation themes",
+    possibleSections: "2D Mathematics",
+    exampleKeywords:
+      "Equation, geometry, theorem, formula, equivalent exchange",
+    warning:
+      "Do not confuse math-looking magic books with alchemy or economics.",
+  },
+];
+
+export const sectionExampleColumns = [
+  { key: "section", label: "Section" },
+  { key: "theme", label: "Observed Theme" },
+  { key: "exampleClues", label: "Example Clues" },
+  { key: "confidence", label: "Use It As" },
+];
+
+export const sectionExampleRows = [
+  {
+    section: "1A",
+    theme: "Monsterology",
+    exampleClues:
+      "Monster, beast, creature, species, monster behavior, monster catalog",
+    confidence: "Strong early-game clue",
+  },
+  {
+    section: "1B",
+    theme: "Astrology & Divination",
+    exampleClues:
+      "Crystal ball, prophecy, witches, divination, oracle-style titles",
+    confidence: "Strong starter example",
+  },
+  {
+    section: "1C",
+    theme: "Curses and Dispels",
+    exampleClues:
+      "Curse breaking, dispel, cursed objects, forbidden rites",
+    confidence: "Useful first-floor clue",
+  },
+  {
+    section: "1D",
+    theme: "Bard / Music",
+    exampleClues:
+      "Music, chanting, voice, bard, performance, song",
+    confidence: "Useful first-floor clue",
+  },
+  {
+    section: "1E",
+    theme: "Necromancy",
+    exampleClues:
+      "Necromancy, dead, undead, dark rites, black books with red text",
+    confidence: "Good early sorting target",
+  },
+  {
+    section: "1F",
+    theme: "Transfiguration",
+    exampleClues:
+      "Transformation, transfiguration, changing form, altered bodies",
+    confidence: "Working section clue",
+  },
+  {
+    section: "1G",
+    theme: "Magical Artifacts",
+    exampleClues:
+      "Artifact, relic, magical item, crafting, enchanted objects",
+    confidence: "Working section clue",
+  },
+  {
+    section: "1H",
+    theme: "Stealth Magic",
+    exampleClues:
+      "Stealth, hide, concealment, shadow movement, silent steps",
+    confidence: "Useful first-floor clue",
+  },
+  {
+    section: "1I",
+    theme: "Illusion",
+    exampleClues:
+      "Illusion, mirage, false image, deception, visual trick",
+    confidence: "Useful first-floor clue",
+  },
+  {
+    section: "1J",
+    theme: "Summoning Magic",
+    exampleClues:
+      "Summoning, contracts, grimoire, called beings, ritual pact",
+    confidence: "Useful when magic books overlap",
+  },
+  {
+    section: "1K",
+    theme: "Healing Magic",
+    exampleClues:
+      "Healing, cure, recovery, restoration, healing potions",
+    confidence: "Important white-book clue",
+  },
+  {
+    section: "1L",
+    theme: "Holy / Priest-style Magic",
+    exampleClues:
+      "Holy, sacred, priest, divine light, purification",
+    confidence: "Important white-book clue",
+  },
+  {
+    section: "1M",
+    theme: "Destruction Magic",
+    exampleClues:
+      "Destruction, destructive spells, combat magic, explosive force",
+    confidence: "Check against similar first-floor magic sections",
+  },
+  {
+    section: "2D",
+    theme: "Mathematics",
+    exampleClues:
+      "Equation, geometry, formula, theorem",
+    confidence: "Strong second-floor academic clue",
+  },
+  {
+    section: "2E",
+    theme: "Art",
+    exampleClues:
+      "Art, definition, aesthetics, sublime",
+    confidence: "Strong second-floor academic clue",
+  },
+  {
+    section: "2G",
+    theme: "Economics",
+    exampleClues:
+      "Currency, market, management, resource allocation",
+    confidence: "Strong second-floor academic clue",
+  },
+  {
+    section: "2J",
+    theme: "Philosophy",
+    exampleClues:
+      "Philosophy, ethics, willpower, abstract concepts",
+    confidence: "Important white-book clue",
+  },
+];
+
+export const indicatorColumns = [
+  { key: "signal", label: "Signal" },
+  { key: "meaning", label: "Meaning" },
+  { key: "fix", label: "What To Do" },
+];
+
+export const indicatorRows = [
+  {
+    signal: "Shelf row turns blue / lights up",
+    meaning:
+      "The row or shelf group is complete and accepted.",
+    fix:
+      "Move on. This is the completion signal you want.",
+  },
+  {
+    signal: "Shelf indicator stays dark",
+    meaning:
+      "At least one book is missing, wrong, split across rows, or out of volume order.",
+    fix:
+      "Check same-title grouping and volume order before assuming a bug.",
+  },
+  {
+    signal: "Book snaps into a shelf slot",
+    meaning:
+      "The placement was accepted, but the row may still be incomplete.",
+    fix:
+      "Check the row indicator. One accepted book does not mean the full row is done.",
+  },
+  {
+    signal: "All books seem placed but row is not blue",
+    meaning:
+      "Most often, one volume is out of order or one book from the series is sitting in a neighboring row.",
+    fix:
+      "Rebuild the series left to right, then check nearby rows for duplicate-title books.",
+  },
+  {
+    signal: "Assemble does not find the missing book",
+    meaning:
+      "The missing book may already be on a shelf or not loose in a pile.",
+    fix:
+      "Check temporary shelf storage and neighboring rows. Keep temporary books on the floor if you plan to use Assemble.",
+  },
+];
+
+export const workflowColumns = [
+  { key: "step", label: "Step" },
+  { key: "action", label: "Action" },
+  { key: "whyItWorks", label: "Why It Works" },
+];
+
+export const workflowRows = [
+  {
+    step: "1",
+    action:
+      "Pick one recognizable title or keyword, not a random color pile.",
+    whyItWorks:
+      "Titles point to sections more reliably than cover colors.",
+  },
+  {
+    step: "2",
+    action:
+      "Use the map, Shelf Guide, or known examples to identify the section.",
+    whyItWorks:
+      "The correct section is the first requirement. Volume order only matters after the section is right.",
+  },
+  {
+    step: "3",
+    action:
+      "Gather all books from that same series with Assemble or manual search.",
+    whyItWorks:
+      "Completing full rows is faster than placing scattered single books.",
+  },
+  {
+    step: "4",
+    action:
+      "Sort the series by volume number from left to right.",
+    whyItWorks:
+      "Wrong order keeps the shelf indicator dark even if the books belong to the right section.",
+  },
+  {
+    step: "5",
+    action:
+      "Check the shelf indicator after placement.",
+    whyItWorks:
+      "Blue / lit means complete. Dark means something is still missing or wrong.",
+  },
+];
+
+export const shortShelfColumns = [
+  { key: "seriesType", label: "Series Type" },
+  { key: "whereItUsuallyGoes", label: "Where It Usually Goes" },
+  { key: "whatToCheck", label: "What To Check" },
+];
+
+export const shortShelfRows = [
+  {
+    seriesType: "3-volume series",
+    whereItUsuallyGoes:
+      "Small shelf panels or side shelves",
+    whatToCheck:
+      "If volumes 1-3 do not fit naturally into a long row, look for nearby small shelves.",
+  },
+  {
+    seriesType: "5-volume series",
+    whereItUsuallyGoes:
+      "Small or medium shelf panels",
+    whatToCheck:
+      "Confirm that volumes 1-5 stay together and are not mixed into a 10-book row.",
+  },
+  {
+    seriesType: "10-volume series",
+    whereItUsuallyGoes:
+      "Standard long shelf rows",
+    whatToCheck:
+      "Use Sorting once you can carry 7+ books, then place the series left to right.",
+  },
+  {
+    seriesType: "Partial series in hand",
+    whereItUsuallyGoes:
+      "Do not place permanently until you know the section",
+    whatToCheck:
+      "Avoid using shelves as temporary storage if you plan to use Assemble later.",
+  },
+];
+
+export const missingBookColumns = [
+  { key: "check", label: "Check" },
+  { key: "howToVerify", label: "How To Verify" },
+];
+
+export const missingBookRows = [
+  {
+    check: "Volume order",
+    howToVerify:
+      "Rebuild the row from left to right by volume number. One wrong number can keep the row dark.",
+  },
+  {
+    check: "Neighboring row",
+    howToVerify:
+      "Look for one volume from the same title sitting in the row above, below, or beside the target row.",
+  },
+  {
+    check: "Split series",
+    howToVerify:
+      "Search nearby shelves for duplicate title fragments. Same-title books usually need to stay grouped.",
+  },
+  {
+    check: "Loose or hidden book",
+    howToVerify:
+      "Check the floor, piles, benches, tables, and behind visible stacks for a missing volume.",
+  },
+  {
+    check: "Temporary shelf storage",
+    howToVerify:
+      "If you used shelves as storage, Assemble may not pull those books. Check every temporary row manually.",
+  },
+  {
+    check: "Short shelf mismatch",
+    howToVerify:
+      "If the series has only 3 or 5 volumes, check small panels instead of forcing it into a long row.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItFails", label: "Why It Fails" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Sorting by color only",
+    whyItFails:
+      "Many categories share similar colors, especially white or pale books.",
+    fix:
+      "Use color as a clue, then confirm title keywords and section.",
+  },
+  {
+    mistake: "Ignoring volume order",
+    whyItFails:
+      "A correct section still fails if volume numbers are not left-to-right.",
+    fix:
+      "Use Sorting or manually rebuild the row from volume 1 upward.",
+  },
+  {
+    mistake: "Splitting one title series across two rows",
+    whyItFails:
+      "The game may require the same title group to stay together.",
+    fix:
+      "Search nearby rows for duplicate title fragments and regroup them.",
+  },
+  {
+    mistake: "Using shelves as temporary storage",
+    whyItFails:
+      "Assemble may not pull books that are already placed on shelves.",
+    fix:
+      "Use the floor or tables for temporary storage instead.",
+  },
+  {
+    mistake: "Assuming dark indicator means bug",
+    whyItFails:
+      "A dark shelf indicator usually means missing, wrong, or out-of-order books.",
+    fix:
+      "Check the row before reloading. Only troubleshoot as a bug after the row logic is clean.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To sort books in **Librarian: Tidy Up the Arcane Library**, use this order:
+
+1. **Find the section** from the title, map, or Shelf Guide.
+2. **Group the same series** together.
+3. **Place volumes left to right** in number order.
+4. **Check the shelf indicator** — blue / lit means complete, dark means something is still wrong.
+5. **Do not trust color alone.** White books can be Philosophy, Healing, Holy, or Priest-style books.
+
+The fastest beginner route is to start with obvious Monsterology books, white-book groups, black/red necromancy books, and repeated title groups, then use Assemble once you have enough early rows.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-book-sorting-map.webp"
+    alt="Librarian Tidy Up the Arcane Library section map used to find where book categories belong."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start with the maps and section labels. Guessing by color alone wastes time.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="sorting-system">
+  How book sorting works
+</h2>
+
+Book sorting has three main rules: correct **section**, correct **series**, and correct **volume order**.
+
+<GuideTable
+  caption="The core sorting system."
+  columns={sortingSystemColumns}
+  rows={sortingSystemRows}
+/>
+
+---
+
+<h2 id="maps-and-sections">
+  Maps and sections
+</h2>
+
+The section maps are your best early tool. Use them before spending too many points on Shelf Guide.
+
+A practical way to read the library is:
+
+- first floor sections are usually magic-heavy
+- second floor sections are often academic, fiction, language, art, economics, math, or philosophy-style categories
+- title keywords are more reliable than book color
+- if a section feels wrong, check whether the title belongs to a broader theme
+
+This table shows **confirmed examples**, not a complete section list. A full **1A–1N and second-floor book index** should be handled on a dedicated long-term page such as <Link href="/librarian/book-sections">Book Sections and Full Index</Link>.
+
+<GuideTable
+  caption="Confirmed section examples and title clues, not a full 1A-1N database."
+  columns={sectionExampleColumns}
+  rows={sectionExampleRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-section-1b-divination.webp"
+    alt="1B Astrology and Divination section example in Librarian Tidy Up the Arcane Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Crystal and prophecy titles are strong clues for 1B Astrology & Divination.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-section-2j-philosophy.webp"
+    alt="2J Philosophy section example in Librarian Tidy Up the Arcane Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Philosophy is one of the most important white-book traps because other pale books can belong elsewhere.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="color-clues">
+  Color clues and common traps
+</h2>
+
+Color helps, but it is not the answer. The biggest beginner mistake is sorting by cover color without checking the title.
+
+<GuideTable
+  caption="Fast color and title clues for early sorting."
+  columns={colorClueColumns}
+  rows={colorClueRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-white-books-color-trap.webp"
+    alt="White book color examples in Librarian Tidy Up the Arcane Library showing why philosophy, healing, and priest books can be confused."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    White books are easy to spot, but they are not one category. Always confirm the title.
+  </figcaption>
+</figure>
+
+<GuideCallout title="White book warning">
+Do not send every white book to Philosophy. Some white books can belong to Healing, Holy, Priest-style, or other pale-cover categories.
+</GuideCallout>
+
+---
+
+<h2 id="volume-order">
+  Volume order
+</h2>
+
+After you find the correct section, the next common failure is volume order.
+
+Books in the same series need to be placed from left to right by volume number. If the row looks complete but will not turn blue, check the numbers before moving the whole row.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-volume-order-example.webp"
+    alt="Volume order example in Librarian Tidy Up the Arcane Library showing books that need to be arranged by number."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Always check the actual volume number. A correct shelf can still fail if the order is wrong.
+  </figcaption>
+</figure>
+
+Use this rule:
+
+**Volume 1 → Volume 2 → Volume 3 → ... → Volume 10**
+
+If you have the Sorting ability, it becomes most useful once you regularly carry 7 or more books at once.
+
+---
+
+<h2 id="shelf-indicators">
+  Shelf indicators and blue completion
+</h2>
+
+The shelf indicator is the final judge. A single accepted book is not enough.
+
+<GuideTable
+  caption="Shelf indicator meanings."
+  columns={indicatorColumns}
+  rows={indicatorRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-shelf-blue-indicator.webp"
+    alt="Shelf indicator in Librarian Tidy Up the Arcane Library showing when a shelf row is complete or still dark."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the shelf indicator stays dark, the row is not complete yet.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Blue indicator rule">
+If the shelf does not turn blue, assume the row is unfinished. The usual cause is a missing book, wrong volume order, or a series split into a neighboring row.
+</GuideCallout>
+
+---
+
+<h2 id="short-shelves">
+  Small shelves and short series
+</h2>
+
+Not every title is a 10-book row. Some series only have three or five volumes, and those can belong in smaller shelf panels.
+
+<GuideTable
+  caption="How to handle short series and small shelves."
+  columns={shortShelfColumns}
+  rows={shortShelfRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-small-shelf-series.webp"
+    alt="Small shelf series example in Librarian Tidy Up the Arcane Library showing a short 3-volume or 5-volume book group."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Short series can be confusing because they do not behave like full 10-book rows.
+  </figcaption>
+</figure>
+
+If a 3-book series keeps feeling wrong in a long row, stop forcing it and check nearby small panels.
+
+---
+
+<h2 id="best-sorting-workflow">
+  Best sorting workflow
+</h2>
+
+The safest workflow is section first, then series, then volume order.
+
+<GuideTable
+  caption="Recommended book sorting workflow."
+  columns={workflowColumns}
+  rows={workflowRows}
+/>
+
+For speed, combine this with the ability route from <Link href="/librarian/best-abilities">Best Abilities and Upgrade Order</Link>.
+
+---
+
+<h2 id="missing-book-fixes">
+  Missing book and dark shelf fixes
+</h2>
+
+If a row looks complete but will not turn blue, check these in order:
+
+<GuideTable
+  caption="Missing book and dark shelf troubleshooting checklist."
+  columns={missingBookColumns}
+  rows={missingBookRows}
+/>
+
+If the logic is correct and a book seems physically stuck or invisible, use the troubleshooting advice from the <Link href="/librarian">Complete Guide Hub</Link>.
+
+---
+
+<h2 id="common-mistakes">
+  Common sorting mistakes
+</h2>
+
+<GuideTable
+  caption="Common sorting mistakes and fixes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I know where a book goes?
+
+Use the title keywords first, then confirm the section on the map or with Shelf Guide. Color is only a clue.
+
+### Can I sort books by color?
+
+Not reliably. White books can be Philosophy, Healing, Holy, or Priest-style books, so always check the title and section.
+
+### Where do white books go?
+
+White books can go to several sections, including Philosophy, Healing, Holy, and Priest-style areas. Do not send every white book to 2J Philosophy.
+
+### Where do black books with red text go?
+
+Many black or dark books with red text are Necromancy or Curse-related books. Check 1E Necromancy and curse / dispel sections first.
+
+### Where do monster books go?
+
+Monster, beast, creature, and species-related books usually point toward **1A Monsterology**. This is one of the easiest early categories to check.
+
+### What does it mean when a shelf does not turn blue?
+
+Usually one book is missing, out of order, in the wrong section, or split into a neighboring row. Recheck the full series and volume order.
+
+### I placed all the books but the shelf still will not turn blue — what am I missing?
+
+The most common cause is a volume order mistake or a split series. Books in the same series must stay together and be placed left to right by volume number.
+
+### Does a book snapping into the shelf mean it is correct?
+
+It means the placement was accepted, not that the row is complete. The row only counts when the shelf indicator turns blue or lights up.
+
+### Why is volume order important?
+
+The game expects books in the same series to be ordered by volume number. A single wrong number can keep the shelf incomplete.
+
+### What should I sort first?
+
+Start with easy visual groups: Monsterology books, white books, black/red necromancy books, repeated title groups, and short series that are easy to complete.
+
+### Are small shelves important?
+
+Yes. Some 3-volume or 5-volume series belong on smaller shelf panels. Do not force every short series into a long row.
+
+### Should I use Shelf Guide?
+
+Use Shelf Guide if you are playing blind. If you already have the map open, prioritize Assemble and Sorting instead.
+
+### Why does Assemble not find my missing book?
+
+The book may already be sitting on a shelf. Assemble is strongest when books are loose in piles or on the floor.
+
+### Is this a full 3,072-book list?
+
+No. This is a sorting system and section guide. A full 3,072-book database should be a separate long-term page or interactive index.
+
+### Will there be a full 1A-1N section index?
+
+That should be a separate page. This guide gives confirmed section examples and sorting rules, while a full 1A-1N and second-floor index needs a dedicated searchable table.

@@ -1,0 +1,623 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const abilityColumns = [
+  { key: "rank", label: "Rank" },
+  { key: "ability", label: "Ability" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "bestUse", label: "Best Use" },
+  { key: "priority", label: "Priority" },
+];
+
+export const abilityRows = [
+  {
+    rank: "1",
+    ability: "Assemble",
+    whatItDoes:
+      "Uses the top book in your hand as a base and gathers books from the same series into your hands.",
+    bestUse:
+      "Full-series cleanup, speed routes, Efficiency Librarian attempts, and reducing pile searching.",
+    priority: "Highest priority for most players.",
+  },
+  {
+    rank: "2",
+    ability: "Insight",
+    whatItDoes:
+      "Highlights matching books in the room so you can spot them inside messy piles.",
+    bestUse:
+      "Early game searching, messy floor cleanup, and finding books before Assemble is upgraded.",
+    priority: "High early, lower once Assemble is strong.",
+  },
+  {
+    rank: "3",
+    ability: "Sorting",
+    whatItDoes:
+      "Automatically arranges the books in your possession in numerical order.",
+    bestUse:
+      "Placing full 10-book series quickly after Assemble gathers them.",
+    priority: "Medium. Weak early, useful later.",
+  },
+  {
+    rank: "4",
+    ability: "Auto-Shelving",
+    whatItDoes:
+      "Places matching books from your hand onto the bookshelf you are targeting.",
+    bestUse:
+      "Fast placement when you already know the correct shelf.",
+    priority: "Medium to low. Good time-saver, not your main search tool.",
+  },
+  {
+    rank: "5",
+    ability: "Shelf Guide",
+    whatItDoes:
+      "Highlights the correct bookshelf for the top book you are holding.",
+    bestUse:
+      "Blind play, no-map play, and learning sections without external help.",
+    priority: "Optional if you use maps.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "upgradePlan", label: "Upgrade Plan" },
+  { key: "why", label: "Why" },
+];
+
+export const upgradeRows = [
+  {
+    stage: "Opening rows",
+    upgradePlan:
+      "Unlock Assemble as soon as you can. Add Insight only if you are still searching piles manually.",
+    why:
+      "Assemble turns one known book into a series route. Insight helps before Assemble is strong enough to carry the run.",
+  },
+  {
+    stage: "Early midgame",
+    upgradePlan:
+      "Keep upgrading Assemble. Add Sorting once you are carrying larger book groups.",
+    why:
+      "Assemble finds the books; Sorting makes the gathered books faster to place in volume order.",
+  },
+  {
+    stage: "Midgame cleanup",
+    upgradePlan:
+      "Use Assemble on a known book, Sorting to order the series, then place the row manually or with Auto-Shelving.",
+    why:
+      "This creates a repeatable loop: find series, order series, place series, repeat.",
+  },
+  {
+    stage: "Late game",
+    upgradePlan:
+      "Use Auto-Shelving and Shelf Guide only where they remove real friction.",
+    why:
+      "At this point, your biggest problems are usually missing books, split series, and dark shelf indicators.",
+  },
+  {
+    stage: "Efficiency route",
+    upgradePlan:
+      "Use this table as the overview, then follow the dedicated Efficiency Librarian section below.",
+    why:
+      "The full route depends on key order, carry capacity, Assemble timing, and when to add Sorting.",
+  },
+];
+
+export const useCaseColumns = [
+  { key: "goal", label: "Goal" },
+  { key: "bestAbilities", label: "Best Abilities" },
+  { key: "routeAdvice", label: "Route Advice" },
+];
+
+export const useCaseRows = [
+  {
+    goal: "Casual first clear",
+    bestAbilities: "Assemble + Insight",
+    routeAdvice:
+      "Use Insight to learn the library and Assemble to clean full series. Do not worry about perfect speed.",
+  },
+  {
+    goal: "Fast clear / Efficiency Librarian",
+    bestAbilities: "Assemble + Sorting + key upgrades",
+    routeAdvice:
+      "Get Jump and carry upgrades early, rush Assemble, then use Sorting to place full series quickly.",
+  },
+  {
+    goal: "No-map play",
+    bestAbilities: "Shelf Guide + Insight",
+    routeAdvice:
+      "Shelf Guide is useful if you refuse external maps. Otherwise, it is usually lower priority.",
+  },
+  {
+    goal: "Late-game cleanup",
+    bestAbilities: "Assemble + Auto-Shelving + Sorting",
+    routeAdvice:
+      "Use Assemble to find remaining series, Sorting to order them, and Auto-Shelving only when the target shelf is obvious.",
+  },
+  {
+    goal: "Anti-Magic Master",
+    bestAbilities: "None",
+    routeAdvice:
+      "Avoid active major magic. Do this on a separate manual run.",
+  },
+];
+
+export const cooldownColumns = [
+  { key: "ability", label: "Ability" },
+  { key: "cooldownNotes", label: "Cooldown / Level Notes" },
+  { key: "importantLimitation", label: "Important Limitation" },
+];
+
+export const cooldownRows = [
+  {
+    ability: "Assemble",
+    cooldownNotes:
+      "Has a cooldown and becomes much stronger as it is upgraded. Launch footage shows upgraded Assemble becoming available very frequently.",
+    importantLimitation:
+      "Do not rely on it to pull books that are already placed on shelves. Keep temporary books on the floor if you want Assemble to find them later.",
+  },
+  {
+    ability: "Insight",
+    cooldownNotes:
+      "Best when piles are still messy and you need visual help finding matching books.",
+    importantLimitation:
+      "Insight helps you find books, but it does not solve shelf placement or volume order by itself.",
+  },
+  {
+    ability: "Sorting",
+    cooldownNotes:
+      "Its value rises once you can carry larger groups after chest upgrades.",
+    importantLimitation:
+      "It orders the books in your hand, but you still need to place them in the correct section.",
+  },
+  {
+    ability: "Auto-Shelving",
+    cooldownNotes:
+      "Useful after you already know the target shelf and have matching books in hand.",
+    importantLimitation:
+      "Older launch builds had Auto-Shelving-related visual issues, so avoid moving other books while it resolves.",
+  },
+  {
+    ability: "Shelf Guide",
+    cooldownNotes:
+      "Useful for blind routing and learning sections.",
+    importantLimitation:
+      "It loses value if you keep a section map open on another screen.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Maxing Shelf Guide before Assemble",
+    whyItHurts:
+      "Shelf Guide tells you where a book goes, but it does not gather the rest of the series.",
+    fix:
+      "Use maps for section location and put early points into Assemble instead.",
+  },
+  {
+    mistake: "Using shelves as temporary storage",
+    whyItHurts:
+      "Assemble may not pull books that are already placed on shelves.",
+    fix:
+      "Keep temporary storage books on the floor or table if you plan to gather them later.",
+  },
+  {
+    mistake: "Ignoring carry capacity upgrades",
+    whyItHurts:
+      "Assemble is weaker when you cannot carry enough books from the series it finds.",
+    fix:
+      "Get the Golden Diamond and Azure Star chest rewards early for +5 total capacity.",
+  },
+  {
+    mistake: "Using Auto-Shelving too early",
+    whyItHurts:
+      "Auto-Shelving saves placement time, but it does not help much if you do not know where the books belong.",
+    fix:
+      "Use Auto-Shelving after you understand the shelf and already have the right series in hand.",
+  },
+  {
+    mistake: "Trying Efficiency Librarian blind",
+    whyItHurts:
+      "The 3-hour route depends on knowing keys, sections, and the Assemble loop.",
+    fix:
+      "Do a normal clear first, then attempt Efficiency with a planned key and ability route.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The best ability in **Librarian: Tidy Up the Arcane Library** is **Assemble**.
+
+For most players, the best upgrade order is:
+
+1. **Assemble** — best overall search and speed tool.
+2. **Insight** — useful early for finding matching books.
+3. **Sorting** — useful once you carry full series.
+4. **Auto-Shelving** — good time-saver after you know the shelf.
+5. **Shelf Guide** — optional if you already use maps.
+
+For speed or **Efficiency Librarian**, rush **Assemble** and collect all key upgrades early, especially the carry capacity chests.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-ability-menu-overview.webp"
+    alt="Librarian Tidy Up the Arcane Library ability menu showing Assemble, Insight, Sorting, Auto-Shelving, and Shelf Guide."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The ability menu is where your run changes from manual sorting into full-series cleanup.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="best-ability-order">
+  Best ability order
+</h2>
+
+The ability system looks flexible, but the most efficient route is simple: **find full series faster, then place them faster**.
+
+That means **Assemble** should usually come first.
+
+<GuideTable
+  caption="Best abilities and upgrade priorities."
+  columns={abilityColumns}
+  rows={abilityRows}
+/>
+
+---
+
+<h2 id="upgrade-route">
+  Recommended upgrade route
+</h2>
+
+Use this route if you want a strong normal clear or a future Efficiency Librarian attempt.
+
+<GuideTable
+  caption="Recommended ability upgrade route."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-assemble-series-pull.webp"
+    alt="Assemble ability pulling books from the same series in Librarian Tidy Up the Arcane Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Assemble is powerful because one known book can lead you to the rest of the series.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="assemble">
+  Assemble: why it is the best skill
+</h2>
+
+**Assemble** uses the top book in your hand as a base and gathers books from the same series. This is the strongest ability because the main bottleneck in Librarian is not placing one book — it is finding every volume in a series across huge piles.
+
+What Assemble does:
+
+- gathers books from the same series
+- helps locate missing volumes from a known series
+- reduces random pile searching
+- turns one known book into a repeatable cleanup route
+
+When Assemble is most valuable:
+
+- during midgame and late-game cleanup
+- after you unlock extra carry capacity
+- when preparing for Efficiency Librarian
+- when clearing long 10-book series
+
+<GuideCallout title="Important Assemble limitation">
+Do not use shelves as temporary storage if you expect Assemble to collect those books later. If a book is already placed on a shelf, Assemble may not pull it back into your hands.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-assemble-cooldown-upgrade.webp"
+    alt="Assemble ability cooldown improving after upgrades in Librarian Tidy Up the Arcane Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Upgraded Assemble becomes available often enough to define your main cleanup loop.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="insight">
+  Insight: best early search helper
+</h2>
+
+**Insight** is useful when the library is still messy and you are trying to locate books inside piles. It makes matching books easier to spot, which is especially helpful before Assemble is upgraded.
+
+Insight is best when:
+
+- the floor is still covered in piles
+- you know a series but cannot find the remaining volumes
+- you are still learning book covers and colors
+- you want to avoid checking every pile manually
+
+Insight is weaker when:
+
+- Assemble is already upgraded
+- most loose books are cleared
+- your main problem is shelf order, not finding books
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-insight-highlight-books.webp"
+    alt="Insight highlighting matching books in Librarian Tidy Up the Arcane Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Insight is strongest while the floor is still messy and you need visual search help.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="sorting">
+  Sorting: weak early, useful later
+</h2>
+
+**Sorting** automatically arranges the books in your possession in numerical order.
+
+At first, this can feel unnecessary because you may only be carrying a few books. Sorting becomes worth upgrading once you have both carry capacity chests unlocked and can regularly hold **7 or more books** at once. Before that, you usually hold too few books for auto-ordering to save meaningful time.
+
+Use Sorting when:
+
+- you have many books in hand
+- you are placing a 10-book series
+- you keep misplacing volume order
+- you are trying to reduce late-game mistakes
+
+Do not overvalue Sorting early. It does not find the shelf, does not find missing books, and does not complete the row by itself.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-sorting-auto-order.webp"
+    alt="Sorting ability arranging books in numerical order in Librarian Tidy Up the Arcane Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Sorting becomes stronger once you are carrying full series after Assemble and chest upgrades.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="auto-shelving">
+  Auto-Shelving: good, but not first priority
+</h2>
+
+**Auto-Shelving** instantly places matching books from your hand onto the bookshelf you are targeting. This is useful, but only after you already know where the books belong.
+
+Auto-Shelving is best for:
+
+- rows where you already know the correct shelf
+- repeated late-game placement
+- reducing manual clicks
+- turning gathered series into completed rows faster
+
+Auto-Shelving is not the best first skill because it does not solve the bigger early problem: finding all volumes and learning sections.
+
+<figure className="my-8">
+  <Image
+    src="/images/librarian/librarian-auto-shelving-target.webp"
+    alt="Auto-Shelving targeting a shelf in Librarian Tidy Up the Arcane Library."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Auto-Shelving is a placement tool, not a search tool. Use it after Assemble and section knowledge.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Auto-Shelving caution">
+Avoid moving other books manually while Auto-Shelving is resolving. Older launch builds had visual or progress issues around Auto-Shelving and manual book movement.
+</GuideCallout>
+
+---
+
+<h2 id="shelf-guide">
+  Shelf Guide: useful only if you do not use maps
+</h2>
+
+**Shelf Guide** highlights the correct bookshelf for the top book you are holding. It is useful for blind players, but it is not always worth heavy investment.
+
+Use Shelf Guide if:
+
+- you refuse external maps
+- you are playing fully blind
+- you keep forgetting section locations
+- you want in-game routing help
+
+Skip or delay Shelf Guide if:
+
+- you already keep the stair map open
+- you are following a guide
+- you need more Assemble power
+- you are trying to speedrun
+
+The category maps are posted at the base of the main staircase. If you use those maps or an external screenshot, Shelf Guide becomes much less important.
+
+---
+
+<h2 id="best-builds">
+  Best ability builds by goal
+</h2>
+
+Different goals need different ability priorities.
+
+<GuideTable
+  caption="Best ability builds by route goal."
+  columns={useCaseColumns}
+  rows={useCaseRows}
+/>
+
+For a normal first clear, do not overthink it:
+
+**Assemble + Insight** is the most comfortable route.
+
+For a fast clear:
+
+**Assemble + Carry Capacity + Sorting** is the route that scales best.
+
+---
+
+<h2 id="cooldown-and-levels">
+  Cooldowns, levels, and limitations
+</h2>
+
+Ability upgrades matter because cooldowns and usability improve over time. The exact feel changes as you level skills, but the practical priority stays the same: Assemble gives the biggest return.
+
+<GuideTable
+  caption="Ability cooldown notes and important limitations."
+  columns={cooldownColumns}
+  rows={cooldownRows}
+/>
+
+<GuideCallout title="Carry capacity matters">
+Carry upgrades make Assemble stronger. If a 10-book series takes fewer trips because you have more slots, every Assemble use becomes more valuable.
+</GuideCallout>
+
+---
+
+<h2 id="efficiency-route">
+  Best ability route for Efficiency Librarian
+</h2>
+
+For **Efficiency Librarian**, your goal is to finish the game under 3 hours. Do not attempt this blind.
+
+Recommended setup:
+
+1. Get the **Crimson Octagon Key** and unlock Jump.
+2. Collect the other key upgrades before serious sorting.
+3. Prioritize **Carry Capacity +3** and **Carry Capacity +2** because they improve Assemble routes.
+4. Rush **Assemble** upgrades.
+5. Add **Sorting** once you are carrying larger series.
+6. Use **Insight** only when you are still losing time searching piles.
+7. Use **Auto-Shelving** when you already know the target shelf.
+
+With +5 total carry capacity, a 10-book series can take about two trips instead of several smaller trips. Across hundreds of rows, that matters more than it looks.
+
+For the key route, use <Link href="/librarian/key-locations">All Key Locations and Chest Unlocks</Link>.
+
+---
+
+<h2 id="anti-magic-master">
+  Anti-Magic Master and major magic
+</h2>
+
+For **Anti-Magic Master**, do not use active major magic.
+
+Treat these as major magic tools to avoid:
+
+- Assemble
+- Insight
+- Shelf Guide
+- Sorting
+- Auto-Shelving
+
+Chest upgrades such as **Jump**, **Sprint**, and **Carry Capacity** are passive minor upgrades based on community testing, but the safest Anti-Magic route is still simple: avoid active sorting spells and do the run manually.
+
+For the full no-magic run order and how Anti-Magic Master interacts with You Are Fired and other achievement routes, use <Link href="/librarian/achievements">All Achievements and Endings Guide</Link>.
+---
+
+<h2 id="common-mistakes">
+  Common ability mistakes
+</h2>
+
+<GuideTable
+  caption="Common ability mistakes and how to fix them."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best ability in Librarian: Tidy Up the Arcane Library?
+
+**Assemble** is the best overall ability because it gathers books from the same series and reduces pile searching.
+
+### What ability should I unlock first?
+
+Unlock **Assemble** first if you want efficiency. Choose **Insight** early only if you are still struggling to find matching books in piles.
+
+### Is Insight better than Assemble?
+
+Insight is better for visual searching early, but Assemble is stronger overall because it brings matching books to you instead of only highlighting them.
+
+### Is Shelf Guide worth it?
+
+Shelf Guide is worth it if you are playing blind or refuse external maps. If you already use a section map, it is usually lower priority than Assemble.
+
+### Is Sorting worth upgrading?
+
+Sorting is worth upgrading once you have both carry capacity chests unlocked and regularly hold **7 or more books** at once. Before that point, the books in your hand are usually too few for auto-ordering to save meaningful time.
+
+### Is Auto-Shelving worth using?
+
+Yes, but it is not a first priority. Auto-Shelving is best when you already know the correct shelf and want to place matching books faster.
+
+### Why does Assemble not grab a book?
+
+Assemble may not pull books that are already placed on shelves. Keep temporary books on the floor if you plan to gather them later.
+
+### Does Assemble have a cooldown?
+
+Yes. Assemble has a cooldown, and upgrades make it available more often. Upgraded Assemble becomes the core loop for fast cleanup.
+
+### What is the best ability route for Efficiency Librarian?
+
+Collect all key upgrades early, rush Assemble, add Sorting once you carry larger groups, and use Insight only when searching piles still costs time.
+
+### Do carry capacity upgrades help Assemble?
+
+Yes. Carry capacity upgrades let you hold more books from the series Assemble gathers, which reduces trips and speeds up full-row cleanup.
+
+### What counts as major magic for Anti-Magic Master?
+
+Avoid active spell tools such as Assemble, Insight, Shelf Guide, Sorting, and Auto-Shelving. Chest upgrades like Jump, Sprint, and Carry Capacity are passive minor upgrades based on community testing.
+
+### Can I use abilities in an Anti-Magic Master run?
+
+Do not use active major abilities in an Anti-Magic Master run. Keep that run manual.
+
+### Should I max every ability?
+
+For a normal magic run, yes, eventually. For efficiency, prioritize Assemble first, then only invest in tools that reduce real time loss.
+
+### What is the biggest ability mistake?
+
+The biggest mistake is spending too much early on Shelf Guide or Auto-Shelving before upgrading Assemble. Assemble solves the main problem: finding full series.
