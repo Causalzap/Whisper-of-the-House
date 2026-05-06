@@ -293,6 +293,18 @@ export default function Page() {
               label: "Achievements",
             },
             {
+              id: "bugged-achievements-warning",
+              label: "Bugged achievements",
+            },
+            {
+              id: "endings-overview",
+              label: "Endings",
+            },
+            {
+              id: "save-scum-overview",
+              label: "Save scum / RNG",
+            },
+            {
               id: "common-mistakes",
               label: "Common mistakes",
             },
@@ -307,6 +319,10 @@ export default function Page() {
               label: "Beginner Guide",
             },
             {
+              href: "/gamble-with-your-friends/quota-guide",
+              label: "Quota Guide",
+            },
+            {
               href: "/gamble-with-your-friends/tickets-items-body-parts",
               label: "Tickets, Items, and Body Parts Guide",
             },
@@ -319,12 +335,24 @@ export default function Page() {
               label: "Best Item Combos and Strategies",
             },
             {
+              href: "/gamble-with-your-friends/save-scum-guide",
+              label: "Save Scum Guide",
+            },
+            {
               href: "/gamble-with-your-friends/craps-cheese-guide",
               label: "Street Craps Cheese Guide",
             },
             {
               href: "/gamble-with-your-friends/achievements",
               label: "Achievements Guide",
+            },
+            {
+              href: "/gamble-with-your-friends/bugged-achievements",
+              label: "Bugged Achievements Guide",
+            },
+            {
+              href: "/gamble-with-your-friends/all-endings-guide",
+              label: "All Endings Guide",
             },
           ]}
         >

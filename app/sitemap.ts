@@ -84,6 +84,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
      { url: `${base}/gamble-with-your-friends/craps-cheese-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
      { url: `${base}/gamble-with-your-friends/tickets-items-body-parts`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
+     { url: `${base}/gamble-with-your-friends/all-endings-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/gamble-with-your-friends/bugged-achievements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/gamble-with-your-friends/quota-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/gamble-with-your-friends/save-scum-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/olden-era/best-buildings-first`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/olden-era/cant-unlock-subclass`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

@@ -392,22 +392,25 @@ export default function Page() {
               label: "Beginner Guide",
             },
             {
-              href: "/gamble-with-your-friends/tickets-items-body-parts",
-              label: "Tickets, Items, and Body Parts Guide",
+              href: "/gamble-with-your-friends/quota-guide",
+              label: "Quota Guide",
             },
             {
               href: "/gamble-with-your-friends/best-item-combos",
               label: "Best Item Combos and Strategies",
             },
             {
+              href: "/gamble-with-your-friends/save-scum-guide",
+              label: "Save Scum Guide",
+            },
+            {
               href: "/gamble-with-your-friends/craps-cheese-guide",
-              label: "Craps Cheese Guide",
+              label: "Street Craps Cheese Guide",
             },
             {
               href: "/gamble-with-your-friends/achievements",
               label: "Achievements Guide",
             },
-           
           ]}
         >
           <BestGamesContent />

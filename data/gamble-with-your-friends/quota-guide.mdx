@@ -1,0 +1,676 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const phaseColumns = [
+  { key: "phase", label: "Quota Phase" },
+  { key: "mainGoal", label: "Main Goal" },
+  { key: "correctPlay", label: "Correct Play" },
+  { key: "oldPlayerAdvice", label: "Old Player Advice" },
+];
+
+export const phaseRows = [
+  {
+    phase: "Before anyone bets",
+    mainGoal: "Read the quota and check the shared bank.",
+    correctPlay:
+      "Decide whether today is a safe-build day, recovery day, achievement day, or emergency push day.",
+    oldPlayerAdvice:
+      "If nobody knows the number, nobody is allowed to touch a table.",
+  },
+  {
+    phase: "First 60 seconds",
+    mainGoal: "Route the casino instead of panic betting.",
+    correctPlay:
+      "Find safe tables, locate the shop, assign a caller, and decide who is allowed to take risk.",
+    oldPlayerAdvice:
+      "The first minute is for information. A blind first-minute all-in is how good runs become organ runs.",
+  },
+  {
+    phase: "Middle of the day",
+    mainGoal: "Build quota without creating a new disaster.",
+    correctPlay:
+      "Use familiar low-volatility tables and stop random table hopping.",
+    oldPlayerAdvice:
+      "You are not trying to become rich here. You are trying to make tomorrow possible.",
+  },
+  {
+    phase: "Last 60 seconds",
+    mainGoal: "Choose one emergency route if quota is still unsafe.",
+    correctPlay:
+      "If the remaining gap is large, approve one high-variance push instead of letting everyone spend the bank separately.",
+    oldPlayerAdvice:
+      "One bad plan is better than six players independently losing the same money.",
+  },
+  {
+    phase: "Quota is safe",
+    mainGoal: "Leave before greed resets the day.",
+    correctPlay:
+      "Walk out unless the team is deliberately routing a money milestone, achievement, or item-supported strategy.",
+    oldPlayerAdvice:
+      "The cleanest win is the one you do not gamble away afterward.",
+  },
+];
+
+export const decisionColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "recommendedMove", label: "Recommended Move" },
+  { key: "why", label: "Why" },
+];
+
+export const decisionRows = [
+  {
+    situation: "Quota gap is under 10% with more than 60 seconds left",
+    recommendedMove: "Use safe cleanup bets or leave if already covered.",
+    why:
+      "Small gaps do not justify full-bank panic plays. Blackjack, low-risk Roulette, or any familiar table is enough.",
+  },
+  {
+    situation: "Quota gap is 10%–30% with more than 90 seconds left",
+    recommendedMove: "Stay controlled and keep using familiar tables.",
+    why:
+      "You still have time to build. Do not switch to miracle bets too early.",
+  },
+  {
+    situation: "Quota gap is over 30% with healthy time left",
+    recommendedMove: "Use structured risk, not full panic.",
+    why:
+      "Keep one safe earner building the base while one approved risk player looks for a bigger swing.",
+  },
+  {
+    situation: "Quota gap is over 30% with around 60 seconds left",
+    recommendedMove: "Switch to one planned emergency push.",
+    why:
+      "At this point, slow grinding usually loses to the clock. Pick one high-variance route and commit.",
+  },
+  {
+    situation: "Quota is reached with time left",
+    recommendedMove: "Leave by default.",
+    why:
+      "More gambling can erase the day, and heavy over-quota profit may make the next quota feel much harsher.",
+  },
+];
+
+export const gapGameColumns = [
+  { key: "quotaState", label: "Quota State" },
+  { key: "bestGameType", label: "Best Game Type" },
+  { key: "goodPicks", label: "Good Picks" },
+  { key: "avoid", label: "Avoid" },
+];
+
+export const gapGameRows = [
+  {
+    quotaState: "Gap under 10%",
+    bestGameType: "Small cleanup",
+    goodPicks:
+      "Blackjack minimum bets, low-risk Roulette, or any familiar low-stake table.",
+    avoid:
+      "Full-bank all-ins. You do not need a miracle to cover a tiny gap.",
+  },
+  {
+    quotaState: "Gap around 10%–30%",
+    bestGameType: "Controlled building",
+    goodPicks:
+      "Blackjack, practiced Street Craps, or the safest table your team already understands.",
+    avoid:
+      "Switching to a new high-variance table just because it is nearby.",
+  },
+  {
+    quotaState: "Gap over 30% with healthy time",
+    bestGameType: "Structured risk",
+    goodPicks:
+      "One safe earner plus one approved risk player. Use item support if available.",
+    avoid:
+      "Letting every player independently chase a comeback.",
+  },
+  {
+    quotaState: "Gap over 30% with about 60 seconds left",
+    bestGameType: "Emergency push",
+    goodPicks:
+      "Slots, single-number Roulette, or one planned item-supported big bet.",
+    avoid:
+      "Slow grinding. At this point, the timer is the main enemy.",
+  },
+  {
+    quotaState: "Quota already reached",
+    bestGameType: "Exit",
+    goodPicks:
+      "Leave the casino unless the team has a planned milestone, achievement, or late-game route.",
+    avoid:
+      "One more spin, one more hand, or one more 'trust me' bet.",
+  },
+];
+
+export const overQuotaColumns = [
+  { key: "finishState", label: "End-of-Day State" },
+  { key: "nextDayRisk", label: "Next-Day Risk" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const overQuotaRows = [
+  {
+    finishState: "Barely reaches quota",
+    nextDayRisk:
+      "Usually the cleanest survival state. The next day still gets harder, but you did not create much extra pressure.",
+    whatToDo:
+      "Accept the win and leave. This is often better than trying to pad the bank.",
+  },
+  {
+    finishState: "Moderately over quota",
+    nextDayRisk:
+      "Can be fine if the extra money supports items, floor progression, or a planned route.",
+    whatToDo:
+      "Leave unless the extra cash has a clear purpose.",
+  },
+  {
+    finishState: "Far over quota, around 200%+ of the target",
+    nextDayRisk:
+      "Player reports and test runs suggest the next quota can jump sharply, often feeling like a 2x–3x punishment curve.",
+    whatToDo:
+      "Treat this as dangerous unless you are deliberately pushing a milestone or late-game setup.",
+  },
+  {
+    finishState: "Huge lucky spike followed by more gambling",
+    nextDayRisk:
+      "Worst-case scenario: the team risks losing the current day and may also inflate future pressure.",
+    whatToDo:
+      "Bank the miracle. Do not let one lucky hit become three more bets.",
+  },
+];
+
+export const floorPressureColumns = [
+  { key: "floor", label: "Floor" },
+  { key: "quotaPressure", label: "Quota Pressure" },
+  { key: "howToPlay", label: "How To Play It" },
+];
+
+export const floorPressureRows = [
+  {
+    floor: "Floor 1",
+    quotaPressure:
+      "Lowest pressure, best learning space, and the safest place to stabilize early quota.",
+    howToPlay:
+      "Use familiar games, learn table rules, and avoid turning easy quota days into ego fights.",
+  },
+  {
+    floor: "Floor 2",
+    quotaPressure:
+      "The first real shift. Higher-variance games like Crash, Plinko, HiLo, Keno, Money Wheel, and Penguin Cross start tempting the team.",
+    howToPlay:
+      "Do not chase every new table. Use one safe earner and one controlled risk player.",
+  },
+  {
+    floor: "Floor 3",
+    quotaPressure:
+      "Specialist territory. Dragon Tower, Mine Sweeper, Poker, and higher-stakes routes make random table hopping expensive.",
+    howToPlay:
+      "Pick a plan before the day starts. If you are here for quota, do not improvise achievement routes.",
+  },
+  {
+    floor: "Floor 4",
+    quotaPressure:
+      "Late-run pressure. The games are not just harder; the cost of a bad shared-bank decision is much higher.",
+    howToPlay:
+      "Use item support, leave once safe, and treat every max bet as a team decision.",
+  },
+];
+
+export const roleColumns = [
+  { key: "role", label: "Co-op Role" },
+  { key: "job", label: "Job" },
+  { key: "badVersion", label: "Bad Version" },
+];
+
+export const roleRows = [
+  {
+    role: "Caller",
+    job:
+      "Watches quota, time, and bank value. Makes the leave call when the day is safe.",
+    badVersion:
+      "Nobody watches the number, then everyone is surprised when the bank is gone.",
+  },
+  {
+    role: "Safe earner",
+    job:
+      "Plays the most familiar low-volatility table to build the main quota base.",
+    badVersion:
+      "A careful player gets erased by three other people making silent all-ins.",
+  },
+  {
+    role: "Risk pusher",
+    job:
+      "Takes approved high-variance bets only when the team needs a comeback.",
+    badVersion:
+      "Decides every minute is an emergency and keeps yelling 'let it ride.'",
+  },
+  {
+    role: "Shop runner",
+    job:
+      "Checks items, tickets, and recovery options while the money makers keep working.",
+    badVersion:
+      "Buys random fun items while the team is under quota.",
+  },
+  {
+    role: "Table specialist",
+    job:
+      "Handles specialist games like Craps, Dragon Tower, Mine Sweeper, or Poker.",
+    badVersion:
+      "Learns a new table with the entire shared bank on the line.",
+  },
+];
+
+export const quotaMistakeColumns = [
+  { key: "mistake", label: "Quota Mistake" },
+  { key: "whyItKillsRuns", label: "Why It Kills Runs" },
+  { key: "fix", label: "Fix" },
+];
+
+export const quotaMistakeRows = [
+  {
+    mistake: "Staying after quota is safe",
+    whyItKillsRuns:
+      "The team has already won the day, but one extra bet can erase the shared bank.",
+    fix:
+      "Leave unless the team agreed on a specific achievement, milestone, or late-game route.",
+  },
+  {
+    mistake: "Going far over quota for no reason",
+    whyItKillsRuns:
+      "Over-quota profit may increase next-day pressure instead of making the run safer.",
+    fix:
+      "Stop once the money has no clear purpose.",
+  },
+  {
+    mistake: "Emergency betting too early",
+    whyItKillsRuns:
+      "The team starts making desperate plays while there is still enough time to build safely.",
+    fix:
+      "Save emergency pushes for large gaps with low time, especially around the final 60 seconds.",
+  },
+  {
+    mistake: "No caller",
+    whyItKillsRuns:
+      "Nobody owns the decision to stop, so everyone keeps gambling until the bank disappears.",
+    fix:
+      "Assign one player to call the leave, push, or regroup decision.",
+  },
+  {
+    mistake: "Secret all-ins",
+    whyItKillsRuns:
+      "One player can turn a safe day into a failed day before the rest of the team reacts.",
+    fix:
+      "Ban silent max bets. Big bets need a callout.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To hit every daily quota in Gamble With Your Friends, do not simply gamble harder. Read the quota first, spend the first 60 seconds routing the day, switch to emergency plays only when the gap is still large near the final minute, and leave as soon as quota is safe.**
+
+The old-player rule is simple:
+
+**Quota is not about making the most money. It is about making enough money without creating tomorrow’s disaster.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-quota-guide.webp"
+    alt="Gamble With Your Friends shared bank and quota pressure during a casino run."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Quota pressure is the whole game: one shared bank, one short timer, and several friends who should not be trusted with an all-in button.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="quota-day-plan">
+  The quota day plan
+</h2>
+
+Quota runs are not won by gambling harder. They are won by changing your decision based on the timer, the remaining gap, and the state of the shared bank.
+
+Before anyone touches a table, the team should answer three questions:
+
+1. **How much do we still need?**
+2. **How much time is left?**
+3. **Who is allowed to take risk today?**
+
+If nobody can answer those questions, nobody should be placing the first bet.
+
+<GuideTable
+  caption="Gamble With Your Friends quota day phases."
+  columns={phaseColumns}
+  rows={phaseRows}
+/>
+
+This table is the whole guide in one place. If your team only follows one rule, follow this:
+
+**Do not play the same way at 4:30, 1:00, and after quota is already safe.**
+
+---
+
+<h2 id="when-to-switch">
+  When to switch from safe play to emergency play
+</h2>
+
+The biggest practical mistake is switching to emergency games too early. Emergency games are useful, but only when the clock and the remaining gap justify them.
+
+<GuideTable
+  caption="When to play safe, push, or leave."
+  columns={decisionColumns}
+  rows={decisionRows}
+/>
+
+As a simple rule:
+
+**If you are still missing more than 30% of quota with about 60 seconds left, stop pretending this is a normal day. Pick one emergency route.**
+
+But if the gap is small, do not panic. The team does not need a heroic 35:1 hit to cover a tiny shortfall. Use a familiar table, finish the quota, and leave.
+
+---
+
+<h2 id="best-games-by-quota-gap">
+  Best games by quota gap
+</h2>
+
+Do not pick games from a fixed tier list during quota runs. Pick them based on the gap.
+
+A table that is smart when you are missing 8% of quota can be useless when you are missing 40% with one minute left.
+
+<GuideTable
+  caption="Best game types by remaining quota gap."
+  columns={gapGameColumns}
+  rows={gapGameRows}
+/>
+
+For the full table-by-table breakdown, use <Link href="/gamble-with-your-friends/best-games">Best Games to Play</Link>. The quota version is simpler: small gap means controlled cleanup, large late gap means one planned emergency push, and safe quota means leave.
+
+---
+
+<h2 id="over-quota-penalty">
+  Why going far over quota can be bad
+</h2>
+
+This is the part most beginner guides skip.
+
+Many players report the same pattern: if the team finishes far above the daily quota, especially around **200%+ of the target**, the next day can feel brutally inflated. The game does not always let a huge lucky day become a permanent advantage. In practice, large over-quota finishes often feel like they push the next quota into a much harsher bracket.
+
+The exact formula is still not confirmed. Do not treat any single multiplier as final. But the practical rule is clear:
+
+**Huge over-quota profit is not always safety. Sometimes it is tomorrow’s debt.**
+
+<GuideTable
+  caption="How over-quota finishes affect your next-day risk."
+  columns={overQuotaColumns}
+  rows={overQuotaRows}
+/>
+
+<GuideCallout title="Formula note">
+This guide does not claim a final quota formula. The useful player-facing rule is simpler: if you are already safe and the extra money has no specific purpose, leave. Over-earning for no reason can create a harder next day.
+</GuideCallout>
+
+<h3 id="time-after-quota">
+  Time after quota is also risk
+</h3>
+
+The danger is not only how much extra money you earn. It is how long the team stays in the casino after the day is already safe.
+
+If quota is reached with a lot of time left, the shared bank is exposed to more unnecessary decisions:
+
+- one more Roulette spin
+- one more Blackjack hand
+- one friend wandering into Slots
+- one player trying to double the “extra” money
+- one emergency item wasted on a non-emergency
+
+A useful rule:
+
+**If quota is safe and there is no planned route, every extra 30 seconds in the casino is another chance for the team to lose its plan.**
+
+That is why leaving early is not passive. It is the strongest quota decision.
+
+---
+
+<h2 id="when-to-stop">
+  When to stop gambling after hitting quota
+</h2>
+
+Once quota is safe, the default move is to leave.
+
+Not “one more spin.”  
+Not “one more Blackjack hand.”  
+Not “let me double it and then we go.”
+
+Leave.
+
+The only good reasons to keep gambling after quota are specific ones:
+
+- you are routing a money milestone
+- you are chasing one planned achievement
+- you need a higher-floor unlock or late-game setup
+- you have an item-supported strategy that requires extra cash
+- the team agreed before the day started that this was a push day
+
+If none of those are true, more gambling is usually just a way to turn success into organ debt.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-leave-after-quota.webp"
+    alt="Gamble With Your Friends players decide to leave after reaching quota."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The cleanest quota win is the one your team does not gamble away afterward.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="floor-pressure">
+  How quota pressure changes by floor
+</h2>
+
+Quota does not feel the same on every floor. The higher you climb, the more tempting it becomes to use risky games as shortcuts, and the more expensive one bad shared-bank decision becomes.
+
+<GuideTable
+  caption="Floor-by-floor quota pressure."
+  columns={floorPressureColumns}
+  rows={floorPressureRows}
+/>
+
+Floor 1 is where you learn how not to lose together.  
+Floor 2 is where greed starts looking like a strategy.  
+Floor 3 is where specialist games punish random wandering.  
+Floor 4 is where every bad max bet feels like a team vote.
+
+For a full breakdown of which games are worth playing, use <Link href="/gamble-with-your-friends/best-games">Best Games to Play</Link>.
+
+---
+
+<h2 id="shared-bank-roles">
+  How to manage the shared bank in co-op
+</h2>
+
+The shared bank is the funniest mechanic in Gamble With Your Friends, but it is also why most quota days collapse.
+
+The rule is not “be careful.” That is too vague. Give players jobs.
+
+<GuideTable
+  caption="Co-op roles for quota runs."
+  columns={roleColumns}
+  rows={roleRows}
+/>
+
+A good team sounds boring for most of the day:
+
+- caller watches quota
+- safe earner builds the base
+- shop runner checks recovery tools
+- specialist handles the weird table
+- risk pusher waits until risk is actually needed
+
+A bad team sounds exciting for about 20 seconds and then starts discussing whose body parts are still available.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-shared-bank-chaos.webp"
+    alt="Gamble With Your Friends shared bank swings under and over quota after reckless all-in bets."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In co-op, one reckless all-in can move the whole team from safe to under quota in seconds.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="tickets-items-and-recovery">
+  Tickets, items, and recovery
+</h2>
+
+Items matter, but this page is not the item guide. The quota version is simple:
+
+**Use recovery tools before the bank is completely dead.**
+
+Tickets and Sketchy Items can create one more controlled chance through protection, multipliers, free bets, or special effects. Body parts can help after things go wrong, but relying on them means the team already made expensive mistakes.
+
+For the full system, use <Link href="/gamble-with-your-friends/tickets-items-body-parts">Tickets, Items, and Body Parts Guide</Link>.  
+For stronger item routes, use <Link href="/gamble-with-your-friends/best-item-combos">Best Item Combos and Strategies</Link>.
+
+---
+
+<h2 id="quota-mistakes">
+  Quota mistakes that actually matter
+</h2>
+
+Do not treat every beginner mistake as a quota mistake. These are the ones that specifically kill quota runs.
+
+<GuideTable
+  caption="Common quota mistakes and how to fix them."
+  columns={quotaMistakeColumns}
+  rows={quotaMistakeRows}
+/>
+
+Most of these mistakes share the same cause: nobody is willing to say the day is over.
+
+The best quota player is not always the person who wins the biggest hand. Sometimes it is the person who yells, “We are leaving,” before the team loses its plan again.
+
+---
+
+<h2 id="recovery-day-plan">
+  How to play the day after missing quota
+</h2>
+
+A missed quota day should change the next day’s plan. Do not start the next run like nothing happened.
+
+If the team lost money, tickets, body parts, or player mobility, the next day is a **recovery day**, not a normal greed day.
+
+Use this recovery plan:
+
+1. **Lower the risk ceiling.** Nobody opens with a max bet.
+2. **Assign a caller immediately.** The team already proved it needs one.
+3. **Use one safe earner first.** Build a base before approving any miracle play.
+4. **Spend tickets on survival value.** Items that protect, multiply, or stabilize a bet matter more than cosmetics.
+5. **Do not chase achievements.** A recovery day has one job: survive.
+6. **Leave as soon as quota is safe.** Do not try to “make back” the failed day.
+
+The biggest mistake after missing quota is emotional recovery gambling. The team tries to win back pride, not just money, and that usually creates another failed day.
+
+For the full ticket and body-part system, use <Link href="/gamble-with-your-friends/tickets-items-body-parts">Tickets, Items, and Body Parts Guide</Link>.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-missed-quota.webp"
+    alt="Gamble With Your Friends team misses quota after running out of time."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Missing quota is usually not one unlucky roll. It is a chain of bad shared-bank decisions.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="quota-vs-achievements">
+  Quota vs achievements
+</h2>
+
+Do not chase five goals in one casino day.
+
+If today is a quota recovery day, recover quota.  
+If today is an achievement day, pick one achievement.  
+If today is a money milestone day, accept that the quota plan will be riskier.
+
+The clean rule:
+
+**One main goal per day.**
+
+For achievement routing, use <Link href="/gamble-with-your-friends/achievements">Achievements Guide</Link>.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is quota in Gamble With Your Friends?
+
+Quota is the amount of money your team must bring back before the casino day ends. It is the main survival target for each workday.
+
+### Does quota scale every day?
+
+Yes. Quota gets harder as the run continues. Player reports also suggest that finishing far above quota can make the next day feel much harsher.
+
+### Is there a confirmed quota formula?
+
+Not yet. Treat any exact multiplier as unconfirmed unless you have controlled test data. The practical rule is to avoid unnecessary over-quota gambling.
+
+### Is going over quota bad?
+
+A little extra money can be useful. Going far over quota for no reason is dangerous because it may increase next-day pressure and also gives the team more chances to lose the bank.
+
+### When should I switch to emergency games?
+
+A useful rule is: if you are still missing more than 30% of quota with around 60 seconds left, choose one emergency route. If the gap is small, keep playing controlled bets.
+
+### What should I do once quota is reached?
+
+Leave by default. Keep gambling only if the team has a specific plan for achievements, money milestones, floor progression, or item-supported late-game routing.
+
+### What is the safest game for quota?
+
+Blackjack is one of the safest options if one player understands the table. Familiar low-risk games are better than theoretically strong games nobody knows how to play.
+
+### What is the best emergency quota game?
+
+Slots, single-number Roulette, or one item-supported big bet can work as emergency options. They are not normal quota routes.
+
+### How do I stop teammates from wasting money?
+
+Assign a caller, ban silent all-ins, and make the leave decision before the day starts. The shared bank needs rules.
+
+### Should I use tickets to recover quota?
+
+Yes, if the run needs help. Tickets and items should create survival value during serious quota attempts.
+
+### Should I sell body parts for tickets?
+
+Only as an emergency or punishment route. If body parts are part of the plan, something already went wrong.
+
+### Should I chase achievements while doing quota?
+
+Only if the achievement fits the day. If quota is unsafe, stop achievement hunting and survive first.

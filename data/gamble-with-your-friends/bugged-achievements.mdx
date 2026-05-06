@@ -1,0 +1,543 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const buggedColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "floor", label: "Floor" },
+  { key: "currentStatus", label: "Current Status" },
+  { key: "requirement", label: "Requirement" },
+  { key: "safeVersion", label: "Safe Floor 1 Version" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const buggedRows = [
+  {
+    achievement: "Big Spender 2",
+    floor: "Floor 2",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Spend a lot of money on Floor 2.",
+    safeVersion: "Big Spender ✓",
+    whatToDo:
+      "Complete Big Spender on Floor 1, then skip this Floor 2 variant until a patch confirms it works.",
+  },
+  {
+    achievement: "High Roller 2",
+    floor: "Floor 2",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Place a very big bet on Floor 2.",
+    safeVersion: "High Roller ✓",
+    whatToDo:
+      "Complete High Roller on Floor 1. Do not waste a clean Floor 2 run trying to force this one right now.",
+  },
+  {
+    achievement: "Lucky Streak 2",
+    floor: "Floor 2",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Win 4 games in a row on Floor 2.",
+    safeVersion: "Lucky Streak ✓",
+    whatToDo:
+      "Complete Lucky Streak on Floor 1. Skip Floor 2 streak grinding until the unlock is confirmed fixed.",
+  },
+  {
+    achievement: "Big Spender 3",
+    floor: "Floor 3",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Bet a lot of money across all games on Floor 3.",
+    safeVersion: "Big Spender ✓",
+    whatToDo:
+      "Use Floor 3 for working achievements like Dragon Tower, HiLo, Mine Sweeper, Poker, or Street Craps instead.",
+  },
+  {
+    achievement: "High Roller 3",
+    floor: "Floor 3",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Place a very big bet on Floor 3.",
+    safeVersion: "High Roller ✓",
+    whatToDo:
+      "Save your money and tickets for working Floor 3 achievements or money milestones.",
+  },
+  {
+    achievement: "Lucky Streak 3",
+    floor: "Floor 3",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Win 5 games in a row on Floor 3.",
+    safeVersion: "Lucky Streak ✓",
+    whatToDo:
+      "Do not confuse a successful Floor 3 streak with a working unlock. Mark it as skipped until patched.",
+  },
+  {
+    achievement: "Big Spender 4",
+    floor: "Floor 4",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Bet a lot of money across all games on Floor 4.",
+    safeVersion: "Big Spender ✓",
+    whatToDo:
+      "Floor 4 is too expensive to waste on a known bugged spender variant. Route other Floor 4 achievements instead.",
+  },
+  {
+    achievement: "High Roller 4",
+    floor: "Floor 4",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Place a very big bet on Floor 4.",
+    safeVersion: "High Roller ✓",
+    whatToDo:
+      "Skip until patched. Use large bets for working achievements or final money goals instead.",
+  },
+  {
+    achievement: "Lucky Streak 4",
+    floor: "Floor 4",
+    currentStatus: "Reported bugged / skip for now",
+    requirement: "Win 5 games in a row on Floor 4.",
+    safeVersion: "Lucky Streak ✓",
+    whatToDo:
+      "Do not burn a late-game run chasing this unless a newer patch confirms the fix.",
+  },
+];
+
+export const challengeColumns = [
+  { key: "rule", label: "Rule" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "mistake", label: "Common Mistake" },
+];
+
+export const challengeRows = [
+  {
+    rule: "Challenge must be active",
+    whatItMeans:
+      "For many game-specific achievements, the Lone Shark challenge must be accepted before the action happens.",
+    mistake:
+      "Winning the right game first, then realizing the matching challenge was not active.",
+  },
+  {
+    rule: "The correct player should perform the action",
+    whatItMeans:
+      "In co-op, the player who accepts, bets, or wins may matter for the unlock state.",
+    mistake:
+      "One player tracks the challenge while another player completes the condition.",
+  },
+  {
+    rule: "Challenge must match the floor",
+    whatItMeans:
+      "Floor 1, Floor 2, Floor 3, and Floor 4 variants are separate achievement routes.",
+    mistake:
+      "Doing a Floor 1-style route and expecting a Floor 2+ unlock.",
+  },
+  {
+    rule: "A clean win is safer than a push or refund",
+    whatItMeans:
+      "If the text says win, assume push and refund results are not valid unless the achievement actually fires.",
+    mistake:
+      "Counting a returned bet as a win streak.",
+  },
+];
+
+export const notBuggedColumns = [
+  { key: "problem", label: "Looks Bugged" },
+  { key: "likelyReason", label: "Likely Reason" },
+  { key: "fix", label: "Fix" },
+];
+
+export const notBuggedRows = [
+  {
+    problem: "I did the right action but no achievement unlocked",
+    likelyReason:
+      "The matching Lone Shark challenge may not have been active before the action happened.",
+    fix:
+      "Accept or reroll the correct challenge first, then complete the route.",
+  },
+  {
+    problem: "My streak did not count",
+    likelyReason:
+      "You may have counted a push, refund, table switch, or wrong-floor win.",
+    fix:
+      "Use one table, one player, one floor, and clean wins only.",
+  },
+  {
+    problem: "Duck Race did not unlock",
+    likelyReason:
+      "The wrong duck, wrong player, inactive challenge, or co-op state may have broken the route.",
+    fix:
+      "Have one player accept the challenge, place the bet, and finish the race.",
+  },
+  {
+    problem: "A high bet did not unlock High Roller",
+    likelyReason:
+      "The working Floor 1 version and reported bugged Floor 2–4 versions are easy to confuse.",
+    fix:
+      "Do High Roller on Floor 1. Skip High Roller 2/3/4 until patched.",
+  },
+  {
+    problem: "Body part, ticket, or item route did not unlock anything",
+    likelyReason:
+      "Selling body parts, buying items, recovering parts, or spending tickets may have changed the route context, especially if the challenge was not active.",
+    fix:
+      "Record what was sold, bought, used, and recovered. For the full system, use the Tickets, Items, and Body Parts Guide.",
+  },
+  {
+    problem: "The Steam achievement says one thing but the in-game challenge looks different",
+    likelyReason:
+      "Some in-game labels can be vague or inconsistent with Steam wording.",
+    fix:
+      "Trust the achievement name, floor, challenge state, and clean result. Capture screenshots if reporting.",
+  },
+  {
+    problem: "Ending achievement did not unlock",
+    likelyReason:
+      "The route may be unclear, or the ending state may be determined earlier than the final action.",
+    fix:
+      "Do not mark it bugged from one guessed route. Preserve earlier states and confirm the full route.",
+  },
+];
+
+export const retestColumns = [
+  { key: "step", label: "Retest Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "why", label: "Why" },
+];
+
+export const retestRows = [
+  {
+    step: "1",
+    whatToDo: "Repeat the same route with the same host.",
+    why:
+      "This checks whether the first failure was noise, timing, or a messy attempt.",
+  },
+  {
+    step: "2",
+    whatToDo: "Repeat the route as host.",
+    why:
+      "Some co-op unlocks may care who owns the lobby or completes the key action.",
+  },
+  {
+    step: "3",
+    whatToDo: "Repeat the route solo.",
+    why:
+      "Solo removes shared-bank spending, teammate actions, and client/host ambiguity.",
+  },
+  {
+    step: "4",
+    whatToDo: "Use one active player while everyone else waits.",
+    why:
+      "If you must test in co-op, reduce the run to one actor and one caller.",
+  },
+];
+
+export const reportColumns = [
+  { key: "field", label: "Report Field" },
+  { key: "whatToCapture", label: "What To Capture" },
+];
+
+export const reportRows = [
+  {
+    field: "Patch / date",
+    whatToCapture:
+      "The version or date of the test. If the game patched after the report, retest first.",
+  },
+  {
+    field: "Achievement name",
+    whatToCapture:
+      "The exact achievement name, especially if it is Big Spender 2/3/4, High Roller 2/3/4, or Lucky Streak 2/3/4.",
+  },
+  {
+    field: "Floor",
+    whatToCapture:
+      "The exact floor where the attempt happened. Floor-specific achievements need floor-specific proof.",
+  },
+  {
+    field: "Challenge state",
+    whatToCapture:
+      "Whether the Lone Shark challenge was active before the condition was completed.",
+  },
+  {
+    field: "Player role",
+    whatToCapture:
+      "Who hosted, who accepted the challenge, who placed the bet, and who completed the condition.",
+  },
+  {
+    field: "Outcome proof",
+    whatToCapture:
+      "Screenshots or a clip showing the bet, win/streak/spend result, and no achievement unlock.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**As of the current launch-window reports, the nine achievements you should skip are Big Spender 2, Big Spender 3, Big Spender 4, High Roller 2, High Roller 3, High Roller 4, Lucky Streak 2, Lucky Streak 3, and Lucky Streak 4.**
+
+Do this instead:
+
+1. **Complete the Floor 1 versions first:** Big Spender, High Roller, and Lucky Streak.
+2. **Skip the Floor 2–4 versions until a patch confirms they work.**
+3. **For everything else, make sure the Lone Shark challenge is active before doing the requirement.**
+
+The old-player rule is simple:
+
+**If it is one of the nine Floor 2–4 spender / roller / streak achievements, skip it. If it is not, check the challenge state before blaming a bug.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-bugged-achievements.webp"
+    alt="Gamble With Your Friends bugged achievements status showing challenges and achievement tracking."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The fastest 100% route is knowing which achievements to skip before you waste a perfect run.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="bugged-achievements-list">
+  The nine bugged achievements to skip
+</h2>
+
+This is the main reason this page exists.
+
+Current launch-window reports point to the same broken pattern:
+
+**Big Spender, High Roller, and Lucky Streak work on Floor 1, but their Floor 2, Floor 3, and Floor 4 variants are reported bugged.**
+
+That gives you nine achievements to skip for now.
+
+<GuideTable
+  caption="Reported bugged achievements in Gamble With Your Friends."
+  columns={buggedColumns}
+  rows={buggedRows}
+/>
+
+<GuideCallout title="Patch status">
+This table should be treated as a current-status tracker, not permanent truth. Retest these achievements after every patch. If a patch fixes them, move them from “skip” to the normal achievement route.
+</GuideCallout>
+
+---
+
+<h2 id="what-to-do-instead">
+  What to do instead
+</h2>
+
+Do not waste Floor 2, Floor 3, or Floor 4 runs trying to force the broken variants.
+
+The working route is simple:
+
+1. Clear **Big Spender**, **High Roller**, and **Lucky Streak** on Floor 1.
+2. Treat **Big Spender 2/3/4**, **High Roller 2/3/4**, and **Lucky Streak 2/3/4** as skipped.
+3. Use later floors for working table-specific achievements, money milestones, endings, and specialist routes.
+
+For the full normal route, use <Link href="/gamble-with-your-friends/achievements">Achievements Guide</Link>.
+
+---
+
+<h2 id="challenge-active-rule">
+  Challenge must be active first
+</h2>
+
+This is the most important rule for achievements that are not in the bugged nine.
+
+Many game-specific achievements are tied to Lone Shark challenges. If you complete the condition without the matching challenge active, the achievement may not unlock.
+
+That means a random lucky win is not always enough.
+
+<GuideTable
+  caption="Achievement challenge rules."
+  columns={challengeColumns}
+  rows={challengeRows}
+/>
+
+A clean achievement attempt starts before the bet:
+
+- answer the phone
+- check the challenge
+- confirm the floor
+- confirm the game
+- then complete the condition
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-achievement-challenge-active.webp"
+    alt="Gamble With Your Friends Lone Shark challenge active before an achievement attempt."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the challenge is not active first, the same action may not count for the achievement.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="not-bugged">
+  Not unlocking does not always mean bugged
+</h2>
+
+The nine achievements above are the ones to skip. For most other achievements, a failed unlock usually means the test was messy.
+
+<GuideTable
+  caption="Common not-unlocking causes that are not confirmed bugs."
+  columns={notBuggedColumns}
+  rows={notBuggedRows}
+/>
+
+The useful split is:
+
+**Known bugged:** the nine Floor 2–4 Big Spender / High Roller / Lucky Streak achievements.  
+**Unclear:** hidden endings, vague thresholds, co-op state, wrong floor, inactive challenge, body part routes, item routes, push/refund outcomes.  
+**Working route issue:** you did the right-looking thing, but not in the exact state the game wanted.
+
+For ending tests, preserve earlier route states and avoid relying only on a final-moment reload. Use <Link href="/gamble-with-your-friends/save-scum-guide">Save Scum Guide</Link> if you are testing ending states.
+
+For ticket, item, and body part mechanics, use <Link href="/gamble-with-your-friends/tickets-items-body-parts">Tickets, Items, and Body Parts Guide</Link>.
+
+---
+
+<h2 id="push-refund-results">
+  Push, refund, and win confusion
+</h2>
+
+A push or refund can protect your bank, but it may not count as a win.
+
+This matters for streak achievements and “win X games” challenges. If the achievement text says **win**, do not count these unless the achievement actually fires:
+
+- Blackjack pushes
+- refunded bets
+- returned end-of-day table bets
+- partial protection from items
+- “we did not lose money” outcomes
+
+If the game gives your money back, that is useful. It is not automatically a win.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-achievement-push-not-win.webp"
+    alt="Gamble With Your Friends push or refunded bet example that may not count as an achievement win."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Safe money is not the same as a clean win. Be careful when counting streak achievements.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="host-solo-coop">
+  Host, solo, and co-op unlock problems
+</h2>
+
+Co-op makes achievement testing harder because the game may care about:
+
+- who hosted
+- who accepted the challenge
+- who placed the bet
+- who completed the condition
+- whether another player changed the shared bank state
+
+If a non-bugged achievement fails in co-op, use this retest order.
+
+<GuideTable
+  caption="How to retest a non-bugged achievement."
+  columns={retestColumns}
+  rows={retestRows}
+/>
+
+The cleanest co-op test is:
+
+**one active player, one caller, everyone else waits.**
+
+If four players are gambling at the same time, the result may be fun, but it is not a clean achievement test.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-coop-achievement-context.webp"
+    alt="Gamble With Your Friends co-op achievement context showing why host and player role can affect unlock testing."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Co-op chaos can make a working achievement look broken. Clean the test before blaming the unlock.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="before-reporting">
+  What to capture before reporting a bug
+</h2>
+
+If the achievement is one of the nine bugged achievements, the best move is usually to skip it and wait for a patch.
+
+If another achievement appears broken, capture enough information for someone else to reproduce it.
+
+<GuideTable
+  caption="What to capture before reporting an achievement bug."
+  columns={reportColumns}
+  rows={reportRows}
+/>
+
+A bad report:
+
+**“Lucky Streak is broken.”**
+
+A useful report:
+
+**“Lucky Streak 2 did not unlock on Floor 2 after four clean wins in a row, with the Lone Shark challenge active, as host, current patch, no pushes or refunds, screenshot attached.”**
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Which achievements are bugged in Gamble With Your Friends?
+
+The currently reported bugged achievements are Big Spender 2, Big Spender 3, Big Spender 4, High Roller 2, High Roller 3, High Roller 4, Lucky Streak 2, Lucky Streak 3, and Lucky Streak 4.
+
+### How many achievements are bugged?
+
+Current launch-window reports point to nine bugged achievements.
+
+### Are the Floor 1 versions bugged?
+
+No. The Floor 1 versions — Big Spender, High Roller, and Lucky Streak — are the versions you should complete normally.
+
+### Should I skip the Floor 2–4 Big Spender, High Roller, and Lucky Streak achievements?
+
+Yes. Skip all nine Floor 2–4 Big Spender, High Roller, and Lucky Streak variants until a patch confirms they work.
+
+### Why did my achievement not unlock even though I did the action?
+
+The matching Lone Shark challenge may not have been active, the wrong player may have completed the condition, the result may have been a push or refund, or the attempt may have happened on the wrong floor.
+
+### Do I need the Lone Shark challenge active?
+
+For many game-specific achievements, yes. If the matching challenge is not active first, the action may not count.
+
+### Do pushes or refunds count as wins?
+
+Do not assume they count. If an achievement says win, treat pushes and refunds as unconfirmed unless the achievement actually unlocks.
+
+### Should I test achievements solo or co-op?
+
+If an achievement fails in co-op, retest as host or solo. Co-op adds shared-bank noise, timing changes, and possible actor/host issues.
+
+### Are hidden ending achievements bugged?
+
+Not automatically. Hidden ending achievements need confirmed routes. A failed guessed route does not prove the achievement is broken.
+
+### Can body parts, tickets, or items affect achievement testing?
+
+Yes. Selling body parts, buying items, recovering parts, or spending tickets can change the route context. If the unlock fails, record what changed before calling it bugged.
+
+### Where should I go for the full achievement route?
+
+Use the main <Link href="/gamble-with-your-friends/achievements">Achievements Guide</Link> for the full achievement list and normal route.

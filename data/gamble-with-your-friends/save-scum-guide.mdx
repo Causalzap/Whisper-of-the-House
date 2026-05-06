@@ -1,0 +1,687 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const fastMethodColumns = [
+  { key: "method", label: "Method" },
+  { key: "bestFor", label: "Best For" },
+  { key: "howItWorks", label: "How It Works" },
+  { key: "warning", label: "Warning" },
+];
+
+export const fastMethodRows = [
+  {
+    method: "Duck Race reload",
+    bestFor: "Finding the winning duck before committing a real bet.",
+    howItWorks:
+      "Place a small test bet, record which duck wins, reload, then bet on the winning duck if the result repeats.",
+    warning:
+      "Only works if the same route repeats. Co-op actions, timing, or route changes can break the repeat.",
+  },
+  {
+    method: "Dragon Tower route memory",
+    bestFor: "Repeating a safe path after checking danger positions.",
+    howItWorks:
+      "Enter with a small test, record the safe or dangerous choices, reload, then follow the known route instead of guessing.",
+    warning:
+      "Treat each floor, day, and route state as separate until you confirm the same tower pattern repeats.",
+  },
+  {
+    method: "Shop action seed push",
+    bestFor: "Changing a repeated bad result.",
+    howItWorks:
+      "If the same action keeps losing after reload, buy an item, reroll the shop if available, or interact with the shop before the target bet.",
+    warning:
+      "Change one thing at a time or you will not know what actually moved the result.",
+  },
+  {
+    method: "Roulette repeat check",
+    bestFor: "Testing whether a result is locked to the current route.",
+    howItWorks:
+      "Make the same bet after reload once. If it repeats, stop repeating the same bet and change the sequence first.",
+    warning:
+      "Roulette is good for testing. It is dangerous for blind all-ins.",
+  },
+];
+
+export const seedChangeColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "method", label: "Seed / Sequence Change" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "useWhen", label: "Use When" },
+];
+
+export const seedChangeRows = [
+  {
+    priority: "Best first try",
+    method: "Buy an item or interact with the shop",
+    whyItMatters:
+      "Shop actions are one of the cleanest ways to change the route before the next target bet.",
+    useWhen:
+      "The same result keeps repeating and you need to move the sequence before trying again.",
+  },
+  {
+    priority: "Best first try",
+    method: "Reroll shop inventory if available",
+    whyItMatters:
+      "A shop reroll can advance the run state without needing to risk a large table bet.",
+    useWhen:
+      "You want to change the seed or RNG tracker while keeping the main table attempt intact.",
+  },
+  {
+    priority: "Good backup",
+    method: "Play a small different table first",
+    whyItMatters:
+      "A low-cost action can move the sequence before the target gamble.",
+    useWhen:
+      "The shop is not available or you do not want to spend tickets or items.",
+  },
+  {
+    priority: "Situational",
+    method: "Change the bet size or target",
+    whyItMatters:
+      "Some games may resolve different bet types or targets differently.",
+    useWhen:
+      "The same target keeps losing and you are willing to test a different outcome.",
+  },
+  {
+    priority: "Situational",
+    method: "Change timing or interaction rhythm",
+    whyItMatters:
+      "Timing matters more on cash-out or physics-influenced games.",
+    useWhen:
+      "Testing Crash, Penguin Cross, Plinko, Street Craps, or other interaction-sensitive games.",
+  },
+];
+
+export const gameColumns = [
+  { key: "game", label: "Game" },
+  { key: "saveScumValue", label: "Save Scum Value" },
+  { key: "bestMethod", label: "Best Method" },
+  { key: "stability", label: "Result Stability" },
+  { key: "warning", label: "Warning" },
+];
+
+export const gameRows = [
+  {
+    game: "Duck Race",
+    saveScumValue: "High",
+    bestMethod:
+      "Small test bet, record the winner, reload, then bet the recorded winner if the result repeats.",
+    stability:
+      "Good if the same route repeats.",
+    warning:
+      "Best with one tester. Co-op actions may change timing or sequence before the race resolves.",
+  },
+  {
+    game: "Dragon Tower",
+    saveScumValue: "High",
+    bestMethod:
+      "Record safe and dangerous choices, reload, then follow the known route.",
+    stability:
+      "Good if danger positions repeat.",
+    warning:
+      "Treat each floor and day state separately until tested. Do not assume a Floor 3 route applies to Floor 4.",
+  },
+  {
+    game: "Roulette",
+    saveScumValue: "High for testing, dangerous for bankroll",
+    bestMethod:
+      "Repeat the same bet once to check if the result is locked, then change sequence if needed.",
+    stability:
+      "Clear result, easy to compare.",
+    warning:
+      "A repeated losing result means change the route, not bet bigger.",
+  },
+  {
+    game: "Crash",
+    saveScumValue: "Medium to high",
+    bestMethod:
+      "Test same cash-out timing, then test different cash-out timing.",
+    stability:
+      "Timing-sensitive.",
+    warning:
+      "Pick the cash-out target before greed starts.",
+  },
+  {
+    game: "Penguin Cross",
+    saveScumValue: "Medium",
+    bestMethod:
+      "Test whether the same platform or cash-out route repeats.",
+    stability:
+      "May depend on timing and route.",
+    warning:
+      "Use small tests before serious bets.",
+  },
+  {
+    game: "Blackjack",
+    saveScumValue: "Medium",
+    bestMethod:
+      "Use reload to compare card and decision sequences, but still play correctly.",
+    stability:
+      "Mixed RNG plus player decisions.",
+    warning:
+      "Repeating the same bad hit or stand decision can still lose.",
+  },
+  {
+    game: "Slots",
+    saveScumValue: "Low to medium",
+    bestMethod:
+      "Fast repeat checks with small bets only.",
+    stability:
+      "Easy to repeat, but low strategic control.",
+    warning:
+      "Can drain the shared bank before the test teaches anything.",
+  },
+  {
+    game: "Plinko",
+    saveScumValue: "Low",
+    bestMethod:
+      "Avoid relying on exact repeat outcomes.",
+    stability:
+      "Physics-dependent and hard to stabilize.",
+    warning:
+      "Ball drops and small physical differences can change the result. Use small tests or item support instead of expecting a perfect reload.",
+  },
+  {
+    game: "Street Craps",
+    saveScumValue: "Low for pure reload, higher for practiced physical control",
+    bestMethod:
+      "Use practiced dice control routes instead of expecting reload to solve the table.",
+    stability:
+      "Physics-dependent.",
+    warning:
+      "Dice physics, throw angle, and object movement matter. The better route is table mastery, not blind save scum.",
+  },
+];
+
+export const reloadPointColumns = [
+  { key: "reloadPoint", label: "Reload Point" },
+  { key: "bestFor", label: "Best For" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const reloadPointRows = [
+  {
+    reloadPoint: "Before entering the casino",
+    bestFor:
+      "Testing a full day route, quota recovery plan, or shop sequence.",
+    whyItMatters:
+      "Earlier states give you more ways to change the sequence before the target gamble.",
+  },
+  {
+    reloadPoint: "Before shop actions",
+    bestFor:
+      "Testing item purchases, shop rerolls, and seed movement.",
+    whyItMatters:
+      "Shop interactions are often the cleanest way to change a repeated result.",
+  },
+  {
+    reloadPoint: "Before the target table",
+    bestFor:
+      "Testing one specific game like Duck Race, Dragon Tower, Roulette, or Crash.",
+    whyItMatters:
+      "Good for quick comparisons, but less useful if the result was locked earlier.",
+  },
+  {
+    reloadPoint: "Before a late achievement or ending setup",
+    bestFor:
+      "Preserving rare floor, item, money, or route states.",
+    whyItMatters:
+      "If the ending or achievement result is determined earlier, a last-second reload may be too late.",
+  },
+];
+
+export const coopColumns = [
+  { key: "rule", label: "Co-op Rule" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const coopRows = [
+  {
+    rule: "One tester",
+    whatItMeans:
+      "Only one player performs the target route during the test.",
+    whyItMatters:
+      "Extra players can change timing, spend money, or alter the action sequence.",
+  },
+  {
+    rule: "One caller",
+    whatItMeans:
+      "One player tracks the result, bank, reload plan, and next change.",
+    whyItMatters:
+      "Save scum fails when nobody knows what changed.",
+  },
+  {
+    rule: "Everyone else waits",
+    whatItMeans:
+      "Other players do not touch tables, spend tickets, or buy items during the test.",
+    whyItMatters:
+      "Co-op noise ruins clean comparison.",
+  },
+  {
+    rule: "Small test first",
+    whatItMeans:
+      "The first attempt is for information, not profit.",
+    whyItMatters:
+      "A failed test should not destroy the shared bank.",
+  },
+];
+
+export const goalColumns = [
+  { key: "goal", label: "Goal" },
+  { key: "bestUse", label: "Best Use" },
+  { key: "linkOut", label: "Use This With" },
+];
+
+export const goalRows = [
+  {
+    goal: "Quota recovery",
+    bestUse:
+      "Use save scum to test one emergency route before committing the shared bank.",
+    linkOut:
+      "Quota Guide",
+  },
+  {
+    goal: "Achievements",
+    bestUse:
+      "Use save scum to repeat a specific floor, game, streak, or multiplier setup.",
+    linkOut:
+      "Achievements Guide",
+  },
+  {
+    goal: "Endings",
+    bestUse:
+      "Preserve earlier route states instead of assuming the final moment can always be rerolled.",
+    linkOut:
+      "Endings Guide when routes are confirmed",
+  },
+];
+
+export const badUseColumns = [
+  { key: "badUse", label: "Bad Use" },
+  { key: "whyItFails", label: "Why It Fails" },
+  { key: "betterUse", label: "Better Use" },
+];
+
+export const badUseRows = [
+  {
+    badUse: "Reloading and repeating the exact same losing bet",
+    whyItFails:
+      "If the result is pre-generated or sequence-based, the same action can lead to the same loss.",
+    betterUse:
+      "Change the action order, use the shop, play a small different table first, or abandon the route.",
+  },
+  {
+    badUse: "Testing with max bets first",
+    whyItFails:
+      "A failed test can destroy the shared bank before you learn anything.",
+    betterUse:
+      "Use small bets to confirm the repeat, then scale only after the route is proven.",
+  },
+  {
+    badUse: "Letting every teammate keep playing during the test",
+    whyItFails:
+      "Co-op actions can change the bank, timing, and action sequence.",
+    betterUse:
+      "One tester, one caller, everyone else waits.",
+  },
+  {
+    badUse: "Trying to save scum physics-heavy games",
+    whyItFails:
+      "Physics-dependent results may not repeat cleanly even from a similar state.",
+    betterUse:
+      "Use table mastery, item support, or controlled physical play instead of expecting a perfect reload.",
+  },
+  {
+    badUse: "Chasing quota, achievements, and endings at the same time",
+    whyItFails:
+      "Different goals need different routes and different save points.",
+    betterUse:
+      "Pick one target before the test starts.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The fastest save scum methods in Gamble With Your Friends are Duck Race winner checks, Dragon Tower route memory, and shop interactions to push the RNG sequence. Reloading alone is not enough: if you repeat the same losing action, you may get the same losing result.**
+
+Use this order:
+
+1. **Test small.**
+2. **Record the result.**
+3. **Reload and repeat once.**
+4. **If it repeats, use the known result or change the sequence with a shop action, item purchase, shop reroll, small table action, or different timing.**
+5. **Only scale up after the route is proven.**
+
+The old-player rule is simple:
+
+**Save scum is not “reload for new luck.” It is “learn the locked result, then change or abuse the sequence.”**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-save-scum-rng-guide.webp"
+    alt="Gamble With Your Friends save scum and RNG guide showing a casino run with pre-generated outcomes."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the casino already knows your next loss, reloading and doing the same thing again is not a plan.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="core-rule">
+  The core rule before every save scum method
+</h2>
+
+Before you try any method, understand the loop: start from the same save point, repeat the same action once, and see whether the result repeats. If it repeats, you can either abuse the known result or change the sequence before the target bet. If it does not repeat, treat that game or route as unstable and do not risk serious money until you understand why.
+
+That one rule explains Duck Race, Dragon Tower, Roulette, shop seed changes, and most failed save scum attempts.
+
+<GuideCallout title="Testing note">
+Do not change five things at once. If you change the table, the bet, the shop action, the item, and the timing together, you will not know which part mattered.
+</GuideCallout>
+
+---
+
+<h2 id="fast-methods">
+  Fast save scum methods that actually matter
+</h2>
+
+If you only want the practical answer, start here.
+
+<GuideTable
+  caption="Fast save scum methods in Gamble With Your Friends."
+  columns={fastMethodColumns}
+  rows={fastMethodRows}
+/>
+
+The key idea is simple: **reload is only half of the method**. The other half is knowing whether to repeat the locked result or change the route before trying again.
+
+---
+
+<h2 id="duck-race-method">
+  Duck Race save scum method
+</h2>
+
+Duck Race is the cleanest beginner test because the information is obvious: one duck wins. Make the first attempt cheap, record the winner, reload, and try to reach the race through the same route. If the same duck wins again, the result is useful. If the winner changes, something in the route, timing, or co-op state changed.
+
+The main Duck Race mistake is going straight to a serious bet before scouting. The first race is not supposed to make money. It is supposed to tell you whether the race can be repeated.
+
+In co-op, Duck Race is easier to break than it looks. A teammate spending the shared bank, buying something, touching another table, or changing the timing before the race may move the sequence. Use one tester and one caller if you want a clean result.
+
+<GuideCallout title="Duck Race rule">
+The first bet is the scout. The second bet is the attempt. If your team skips the scout and goes all-in first, that is not save scum. That is just gambling with extra steps.
+</GuideCallout>
+
+---
+
+<h2 id="dragon-tower-method">
+  Dragon Tower save scum method
+</h2>
+
+Dragon Tower is valuable because it can turn route memory into money. Use a small attempt to learn safe choices, danger positions, or the path that failed. Then reload from the same state and check whether the same tower behavior repeats.
+
+If it repeats, stop guessing and follow the known route. If it does not repeat, change the sequence before trying again or treat that tower state as unstable.
+
+The important edge case is floor and day state. Do not assume a Dragon Tower pattern from one floor, one day, or one route state automatically applies somewhere else. Until you have tested it, treat Floor 3 Dragon Tower, Floor 4 Dragon Tower, and different day states as separate patterns.
+
+For a dedicated route breakdown, use the Dragon Tower guide once it is published.
+
+---
+
+<h2 id="shop-seed-change">
+  The best way to change the RNG sequence: shop actions
+</h2>
+
+If a result keeps repeating, the first thing to try is not another identical bet. The first thing to try is a **shop interaction**.
+
+Buying an item, rerolling shop inventory if available, or changing your item route before the target gamble can move the run forward before the next result is checked.
+
+<GuideTable
+  caption="Best ways to change the RNG sequence."
+  columns={seedChangeColumns}
+  rows={seedChangeRows}
+/>
+
+Use shop actions first because they are usually cleaner than risking another large table bet. A shop interaction can change the route without immediately putting the full shared bank on the line.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-rng-seed-change-shop.webp"
+    alt="Gamble With Your Friends shop or item action used to change the RNG sequence before a target bet."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shop actions are one of the cleanest ways to move the sequence before a target bet.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="best-and-worst-games">
+  Best and worst games for save scumming
+</h2>
+
+The best save scum games have clear repeatable information: a winning duck, a Dragon Tower path, a Roulette result, or a cash-out timing.
+
+The worst save scum games depend heavily on physical simulation or noisy co-op interaction.
+
+<GuideTable
+  caption="Best and worst games for save scumming."
+  columns={gameColumns}
+  rows={gameRows}
+/>
+
+<GuideCallout title="Physics-heavy game rule">
+Physics-heavy games need table mastery, item support, or controlled physical play more than blind reload abuse. Plinko and Street Craps can still be worth playing, but they are weak targets for stable save scum.
+</GuideCallout>
+
+The short version:
+
+- **Best direct targets:** Duck Race, Dragon Tower, Roulette.
+- **Best timing tests:** Crash, Penguin Cross.
+- **Mixed:** Blackjack, Slots.
+- **Weak for stable reloads:** Plinko, Street Craps, other physics-heavy outcomes.
+
+For the full game ranking, use <Link href="/gamble-with-your-friends/best-games">Best Games to Play</Link>.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-crash-penguin-rng-games.webp"
+    alt="Gamble With Your Friends Crash and Penguin Cross games used for RNG and cash-out timing tests."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cash-out games are useful test targets because timing is a real variable.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="roulette-repeat-check">
+  Roulette repeat check
+</h2>
+
+Roulette is not automatically the best money route, but it is one of the easiest games for checking whether a result is locked.
+
+Use a small or controlled test first. Make the same bet once after reload. If the result repeats, you have learned something useful: the route may be locked. That does not mean you should bet bigger on the same losing target. It means you should either use the known result or change the sequence before trying again.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-roulette-rng-outcome.webp"
+    alt="Gamble With Your Friends Roulette outcome used to test whether RNG repeats after reload."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Roulette is useful because the result is easy to compare. That does not make blind all-ins safe.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="reload-points">
+  Best reload points to use
+</h2>
+
+The best save scum setup is not always right before the bet. Often, earlier is better.
+
+<GuideTable
+  caption="Best reload points for save scum routes."
+  columns={reloadPointColumns}
+  rows={reloadPointRows}
+/>
+
+The practical rule:
+
+**Use early save points for routing, shop changes, and endings. Use late save points for one-table tests.**
+
+---
+
+<h2 id="coop-save-scum">
+  Co-op save scum rules
+</h2>
+
+Save scum is harder in co-op because every teammate can accidentally change the test.
+
+The rule is simple:
+
+**One tester. One caller. Everyone else waits.**
+
+<GuideTable
+  caption="Co-op save scum rules."
+  columns={coopColumns}
+  rows={coopRows}
+/>
+
+A reload plan does not fix bad shared-bank discipline. If someone keeps spending the bank while another player is testing Duck Race, Dragon Tower, or Roulette, the test is already broken.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-all-in-rng-risk.webp"
+    alt="Gamble With Your Friends all-in bet showing why save scum does not protect the shared bank."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Save scum can test a route. It cannot fix a team that keeps all-in betting before the test is done.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="quota-achievements-endings">
+  Save scum for quota, achievements, and endings
+</h2>
+
+Save scum is useful for different goals, but you should not mix every goal into one noisy run.
+
+<GuideTable
+  caption="How to use save scum by goal."
+  columns={goalColumns}
+  rows={goalRows}
+/>
+
+For quota, use save scum to test one emergency recovery route before risking the bank. Use <Link href="/gamble-with-your-friends/quota-guide">Quota Guide</Link> for the main survival plan.
+
+For achievements, use save scum to repeat a specific floor, game, streak, or multiplier condition. Use <Link href="/gamble-with-your-friends/achievements">Achievements Guide</Link> for routing.
+
+For endings, preserve earlier states. Do not assume the final moment can always be rerolled.
+
+---
+
+<h2 id="bad-save-scum-habits">
+  Bad save scum habits
+</h2>
+
+Save scum becomes dangerous when the team treats it like permission to play worse.
+
+<GuideTable
+  caption="Bad save scum habits and better alternatives."
+  columns={badUseColumns}
+  rows={badUseRows}
+/>
+
+The point is not to reload forever. The point is to learn whether the route is fixed, then either use the known result or move the sequence.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Does save scumming work in Gamble With Your Friends?
+
+Yes, but not as a simple reroll button. Some results may repeat if you reload and take the exact same actions.
+
+### What is the fastest save scum method?
+
+Duck Race and Dragon Tower are the easiest practical methods: record the result or route, reload, then use the known information if it repeats.
+
+### How do you save scum Duck Race?
+
+Place a small test bet, record which duck wins, reload, then bet on the recorded winner if the race repeats.
+
+### How do you save scum Dragon Tower?
+
+Use a small attempt to record safe or dangerous choices, reload, then follow the known route if the tower repeats.
+
+### How do you change the RNG seed?
+
+The best first attempt is a shop interaction: buy an item, reroll the shop if available, or change your item route before the target bet. You can also try a small different table action, a different bet, or different timing.
+
+### Why do I get the same result after reloading?
+
+The result may already be tied to the current run state or action sequence. Change something before the target bet and test again.
+
+### What games are best for save scumming?
+
+Duck Race, Dragon Tower, and Roulette are the clearest test targets. Crash and Penguin Cross can also work for timing tests.
+
+### What games are bad for save scumming?
+
+Physics-heavy games like Plinko and Street Craps are less stable because tiny physical differences can change the result.
+
+### Is Roulette good for save scumming?
+
+Roulette is good for testing whether a result repeats, but dangerous for bankroll. If the same losing result repeats, change the sequence instead of betting bigger.
+
+### Is Blackjack good for save scumming?
+
+Blackjack is mixed. Reload testing can help, but player decisions still matter. Repeating the same bad decision can still lose.
+
+### Can save scum help with quota?
+
+Yes, especially for testing one emergency recovery route. It only works if the team controls the shared bank.
+
+### Can save scum help with achievements?
+
+Yes. It is useful for repeating specific floor, game, streak, or multiplier conditions after you set up the right route.
+
+### Can save scum help with endings?
+
+Maybe, but preserve earlier states. If an ending result is determined before the final moment, a last-second reload may repeat the same result.
+
+### Should I use save scum in co-op?
+
+Only if the team follows one tester, one caller, everyone else waits. Co-op noise can ruin the test.
+
+### What is the biggest save scum mistake?
+
+Reloading and repeating the exact same losing action. If the result repeats, change the sequence instead of blaming luck.

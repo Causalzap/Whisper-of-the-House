@@ -358,6 +358,10 @@ export default function Page() {
               label: "Gamble With Your Friends Guide Hub",
             },
             {
+              href: "/gamble-with-your-friends/quota-guide",
+              label: "Quota Guide",
+            },
+            {
               href: "/gamble-with-your-friends/tickets-items-body-parts",
               label: "Tickets, Items, and Body Parts Guide",
             },
@@ -371,7 +375,7 @@ export default function Page() {
             },
             {
               href: "/gamble-with-your-friends/craps-cheese-guide",
-              label: "Craps Cheese Guide",
+              label: "Street Craps Cheese Guide",
             },
             {
               href: "/gamble-with-your-friends/achievements",

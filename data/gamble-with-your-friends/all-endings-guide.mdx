@@ -1,0 +1,438 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const oneRunColumns = [
+  { key: "step", label: "Step" },
+  { key: "action", label: "Action" },
+  { key: "achievement", label: "Achievement Target" },
+  { key: "criticalNote", label: "Critical Note" },
+];
+
+export const oneRunRows = [
+  {
+    step: "1",
+    action:
+      "Reach the final debt state with enough money to pay off the debt. Choose the safe payoff option first.",
+    achievement:
+      "...And They Lived Happily After",
+    criticalNote:
+      "After the achievement pops, press Esc and quit before the game overwrites your useful late-run save.",
+  },
+  {
+    step: "2",
+    action:
+      "Reload the late-run state, choose the risky double-or-nothing / coin-flip option, and record whether you win or lose.",
+    achievement:
+      "Let It Ride! or End of the Line",
+    criticalNote:
+      "Take whichever coin-flip achievement you get first. Do not keep clicking the same choice if the result repeats.",
+  },
+  {
+    step: "3",
+    action:
+      "Reload back to the lobby or final-day state, then change the RNG route with a shop action: buy an item, reroll the shop if available, or change the item route.",
+    achievement:
+      "Setup for the missing coin-flip achievement",
+    criticalNote:
+      "Change one thing only. Shop interaction is usually the cleanest way to move the sequence before the final result.",
+  },
+  {
+    step: "4",
+    action:
+      "Return to the final choice and pick the risky coin-flip option again.",
+    achievement:
+      "The remaining coin-flip ending achievement",
+    criticalNote:
+      "If the route changed correctly, the result should differ. If it repeats, reload earlier and change a different pre-choice action.",
+  },
+];
+
+export const orderColumns = [
+  { key: "order", label: "Order" },
+  { key: "ending", label: "Ending" },
+  { key: "linkedAchievement", label: "Achievement" },
+  { key: "why", label: "Why This Order Works" },
+  { key: "exitTiming", label: "Exit Timing" },
+];
+
+export const orderRows = [
+  {
+    order: "1",
+    ending: "Safe payoff ending",
+    linkedAchievement: "...And They Lived Happily After",
+    why:
+      "This protects the run and gives you the clean ending before you risk double-or-nothing.",
+    exitTiming:
+      "Quit immediately after the achievement pops so you can reload the late-run state for the other endings.",
+  },
+  {
+    order: "2",
+    ending: "First coin-flip ending",
+    linkedAchievement: "Let It Ride! or End of the Line",
+    why:
+      "Reload and take whichever risky result the locked route gives you first.",
+    exitTiming:
+      "Quit after the achievement pops if you still need the opposite coin-flip result.",
+  },
+  {
+    order: "3",
+    ending: "Opposite coin-flip ending",
+    linkedAchievement: "The remaining Let It Ride! / End of the Line achievement",
+    why:
+      "Use shop interaction or another pre-choice change to move the route, then claim the remaining result.",
+    exitTiming:
+      "Do this after preserving the safe ending and the first coin-flip achievement.",
+  },
+];
+
+export const coinFlipColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const coinFlipRows = [
+  {
+    situation: "Reloading gives the same coin-flip result",
+    whatItMeans:
+      "The final result may already be locked when you wake up in the final-day lobby or enter the late-run state.",
+    whatToDo:
+      "Do not repeat the same final click. Change something before the final choice.",
+  },
+  {
+    situation: "You need the opposite coin-flip achievement",
+    whatItMeans:
+      "You need to move the route or RNG sequence before choosing double-or-nothing again.",
+    whatToDo:
+      "Reload earlier, buy an item, reroll the shop if available, or change the item route before returning to the final choice.",
+  },
+  {
+    situation: "Shop action changes the final result",
+    whatItMeans:
+      "The shop interaction likely advanced the route state enough to produce the other coin-flip outcome.",
+    whatToDo:
+      "Record what changed, then use the new final result to claim the missing achievement.",
+  },
+  {
+    situation: "Shop action does not change the result",
+    whatItMeans:
+      "That action may not have moved the relevant state, or your save point may already be too late.",
+    whatToDo:
+      "Reload earlier and change a different pre-choice action. Do not change five things at once.",
+  },
+];
+
+export const savePointColumns = [
+  { key: "savePoint", label: "Save Point" },
+  { key: "bestFor", label: "Best For" },
+  { key: "risk", label: "Risk" },
+];
+
+export const savePointRows = [
+  {
+    savePoint: "Before the final day starts",
+    bestFor:
+      "Routing all three endings from one strong late-run setup.",
+    risk:
+      "Requires replaying more actions, but gives the most control if the final result is locked early.",
+  },
+  {
+    savePoint: "Final-day lobby / before shop actions",
+    bestFor:
+      "Changing the coin-flip result with item purchases, shop rerolls, or item route changes.",
+    risk:
+      "You must quit before the ending saves over the useful state.",
+  },
+  {
+    savePoint: "Before the final debt choice",
+    bestFor:
+      "Quickly checking the visible final options.",
+    risk:
+      "May be too late if the coin flip was locked earlier.",
+  },
+  {
+    savePoint: "After choosing the risky route",
+    bestFor:
+      "Almost nothing beyond confirming that the result repeats.",
+    risk:
+      "Usually too late for all-ending routing.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Not quitting after the achievement pop-up",
+    whyItHurts:
+      "The game may overwrite your useful late-run state, forcing another full run.",
+    fix:
+      "After each ending achievement pops, press Esc and quit before continuing.",
+  },
+  {
+    mistake: "Only saving at the final second",
+    whyItHurts:
+      "The coin flip may already be locked before the visible final choice.",
+    fix:
+      "Preserve a final-day lobby or earlier late-run state.",
+  },
+  {
+    mistake: "Repeating the same double-or-nothing choice after reload",
+    whyItHurts:
+      "If the route state is unchanged, you may get the same result every time.",
+    fix:
+      "Use shop interaction, item route changes, or another pre-choice action to move the sequence.",
+  },
+  {
+    mistake: "Doing the bad ending first",
+    whyItHurts:
+      "You may destroy or close the best late-run state before collecting the safer ending.",
+    fix:
+      "Safe ending first, coin-flip endings after.",
+  },
+  {
+    mistake: "Mixing endings with bugged achievement cleanup",
+    whyItHurts:
+      "You may waste a late-run state chasing achievements that currently do not unlock.",
+    fix:
+      "Use the bugged achievements guide first, then route endings separately.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The fastest way to get all three Gamble With Your Friends ending achievements is to use one strong late-run save: pay off the debt first for ...And They Lived Happily After, quit immediately after the achievement pops, reload and choose double-or-nothing for one coin-flip ending, then reload again, use a shop action or reroll to move the RNG sequence, and choose double-or-nothing again for the other coin-flip ending.**
+
+The key rule:
+
+**Do not just reload and click the same final choice. The coin flip may already be locked when you wake up in the final-day lobby. Use shop actions or item route changes to move the result.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-all-endings-guide.webp"
+    alt="Gamble With Your Friends all endings guide showing final route and ending decision context."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The ending route is not just the final click. The late-run state before the choice matters.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="one-save-three-endings">
+  How to get all three endings from one late-run save
+</h2>
+
+This is the practical route most players want.
+
+You need one strong late-run state where you can reach the final debt choice, pay off the debt, or choose the risky double-or-nothing option. From there, the goal is to branch into all three ending achievements without replaying the entire game from scratch.
+
+<GuideTable
+  caption="One-save route for all three ending achievements."
+  columns={oneRunColumns}
+  rows={oneRunRows}
+/>
+
+<GuideCallout title="Do not miss the Esc timing">
+The important part is quitting after each achievement pop-up. If you continue too far after an ending, the game may overwrite the save state you needed for the other endings.
+</GuideCallout>
+
+For the full achievement route, use <Link href="/gamble-with-your-friends/achievements">Achievements Guide</Link>.  
+For achievements that currently may not unlock, use <Link href="/gamble-with-your-friends/bugged-achievements">Bugged Achievements Guide</Link>.
+
+---
+
+<h2 id="best-ending-order">
+  Best order to get all endings
+</h2>
+
+Do the safe ending first. Do not throw the run before collecting the ending that depends on paying off the debt.
+
+<GuideTable
+  caption="Best ending order and exit timing."
+  columns={orderColumns}
+  rows={orderRows}
+/>
+
+The logic is simple:
+
+**Protect the run first. Break it last.**
+
+---
+
+<h2 id="final-coin-flip">
+  How to change the final coin flip result
+</h2>
+
+The risky double-or-nothing result should not be treated like a fresh 50/50 every time you reload.
+
+If you reload from the same final-day state and choose the same option, the same result may repeat. That means the coin flip may already be tied to the current lobby state, route state, or RNG sequence.
+
+<GuideTable
+  caption="How to test and change the final coin flip result."
+  columns={coinFlipColumns}
+  rows={coinFlipRows}
+/>
+
+The cleanest sequence change is usually a shop interaction: buy an item, reroll the shop if available, or change the item route before choosing the risky option again.
+
+For deeper RNG testing, use <Link href="/gamble-with-your-friends/save-scum-guide">Save Scum Guide</Link>.
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-final-coin-flip.webp"
+    alt="Gamble With Your Friends final coin flip or double-or-nothing ending choice."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the same final result repeats, change the route before the choice instead of clicking the same option again.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-ending-rng-shop-reroll.webp"
+    alt="Gamble With Your Friends shop reroll used to change the ending RNG or route state."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shop rerolls and item choices are cleaner route changes than repeating the same final gamble.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="save-points">
+  Best save points for ending routes
+</h2>
+
+The best ending route starts earlier than the final click.
+
+If your only save point is after the route is already locked, you may not be able to branch cleanly into all three endings.
+
+<GuideTable
+  caption="Best save points for ending tests."
+  columns={savePointColumns}
+  rows={savePointRows}
+/>
+
+The practical rule:
+
+**Use the final-day lobby or earlier for all-ending routing. Use final-moment reloads only for quick checks.**
+
+<figure className="my-8">
+  <Image
+    src="/images/gamble-with-your-friends/gamble-with-your-friends-ending-route-state.webp"
+    alt="Gamble With Your Friends wake-up or final-day lobby state before an ending route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Earlier route states give you more control than a final-second reload.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="common-ending-mistakes">
+  Common ending mistakes
+</h2>
+
+<GuideTable
+  caption="Common mistakes while routing all endings."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+A clean ending route should tell you:
+
+**which late-run state you loaded, which choice you made, whether you changed the shop/item route, and which achievement popped.**
+
+---
+
+<h2 id="ending-achievements-and-bugs">
+  Are ending achievements bugged?
+</h2>
+
+Not automatically.
+
+Ending achievements are hidden, route-dependent, and easy to misread. A failed guessed route does not prove the achievement is broken.
+
+Before calling an ending achievement bugged, check:
+
+- did you get the achievement pop-up and quit immediately?
+- did you reload from the correct late-run state?
+- did the same double-or-nothing result repeat?
+- did you try a shop interaction or item-route change?
+- did you accidentally overwrite the useful save?
+- did the game patch after the route was posted?
+
+For confirmed not-unlocking issues, use <Link href="/gamble-with-your-friends/bugged-achievements">Bugged Achievements Guide</Link>.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many endings are in Gamble With Your Friends?
+
+There are three ending-style achievements: Let It Ride!, End of the Line, and ...And They Lived Happily After.
+
+### Can I get all endings from one save?
+
+Yes, if you preserve a late-run save before the final debt choice and quit immediately after each ending achievement pops.
+
+### What is the best order to get all endings?
+
+Get ...And They Lived Happily After first by paying off the debt, then use double-or-nothing for one coin-flip ending, then change the RNG sequence and do double-or-nothing again for the final ending.
+
+### When should I press Esc?
+
+Press Esc and quit immediately after the ending achievement pops. This helps avoid overwriting the late-run save you need for the other endings.
+
+### Does the final coin flip reroll when I reload?
+
+Not always. If you reload from the same final-day state and make the same choice, the same result may repeat.
+
+### How do I change the final coin flip result?
+
+Reload earlier, then use a shop action, buy an item, reroll the shop if available, or change your item route before choosing double-or-nothing again.
+
+### What achievement is tied to paying off the debt?
+
+The safe payoff-style route is tied to ...And They Lived Happily After.
+
+### What achievements are tied to double-or-nothing?
+
+The risky double-or-nothing route is tied to Let It Ride! and End of the Line, depending on whether the final gamble succeeds or fails.
+
+### Are ending achievements bugged?
+
+Not automatically. Hidden ending achievements need clean route confirmation. A repeated coin-flip result usually means the route state did not change.
+
+### Should I use save scum for endings?
+
+Yes. Ending routing is one of the best uses for save scum, but you need an early enough late-run save and clean route changes.
+
+### Should I chase endings before other achievements?
+
+No. Finish normal achievements first, skip currently bugged achievements, then route endings as late-run targets.
