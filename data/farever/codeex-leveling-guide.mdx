@@ -1,0 +1,718 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const levelingPriorityColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "WhatToDo", label: "What To Do" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const levelingPriorityRows = [
+  {
+    priority: "1",
+    WhatToDo: "Open the map and check gray question marks",
+    WhyItMatters:
+      "Map objectives are one of the cleanest early XP routes and tell you where to go when there is no normal quest log.",
+  },
+  {
+    priority: "2",
+    WhatToDo: "Unlock the nearest obelisk",
+    WhyItMatters:
+      "Obelisks reveal the zone, set respawn points, and unlock automatic travel routes.",
+  },
+  {
+    priority: "3",
+    WhatToDo: "Open Codeex with L",
+    WhyItMatters:
+      "The Monsters section shows which enemies still have kill milestones or rewards waiting.",
+  },
+  {
+    priority: "4",
+    WhatToDo: "Finish nearby 4-kill and 8-kill milestones",
+    WhyItMatters:
+      "These are efficient early XP checkpoints while you are already moving through an area.",
+  },
+  {
+    priority: "5",
+    WhatToDo: "Kill local mini bosses once",
+    WhyItMatters:
+      "Some Codeex entries are completed by killing a specific elite, sparkling creature, or mini boss.",
+  },
+  {
+    priority: "6",
+    WhatToDo: "Open chests and clear side objectives",
+    WhyItMatters:
+      "Chests can give XP, gear, recipes, materials, and items that help your next route.",
+  },
+  {
+    priority: "7",
+    WhatToDo: "Move on when local value slows down",
+    WhyItMatters:
+      "Do not stay in one area just because a counter can continue higher. Check the reward first.",
+  },
+];
+
+export const starterCreatureColumns = [
+  { key: "enemy", label: "Enemy / Entry" },
+  { key: "type", label: "Type" },
+  { key: "CodeexAngle", label: "Codeex Angle" },
+  { key: "RouteTip", label: "Route Tip" },
+];
+
+export const starterCreatureRows = [
+  {
+    enemy: "Crabs",
+    type: "Starter-area mob",
+    CodeexAngle:
+      "Useful first example of the 4-kill / 8-kill Codeex loop. One early Codeex screen shows a 120 XP reward tied to killing more crabs.",
+    RouteTip:
+      "Finish the early crab entry while you are still near the beach or start route, then move toward the next map marker.",
+  },
+  {
+  enemy: "Blob Dylan",
+  type: "Named slime-style enemy",
+  CodeexAngle:
+    "Confirmed objective target for At the Island's Tip: 0/1 Blob Dylan slain.",
+  RouteTip:
+    "Fight it at Imago Cliff, stay close enough for credit, then check the objective tracker and map progress before leaving.",
+},
+  {
+    enemy: "Slimes",
+    type: "Starter-area mob",
+    CodeexAngle:
+      "Good early counter-check enemy. Slime entries can show partial progress such as 2/8 and continue toward higher rewards.",
+    RouteTip:
+      "Clear nearby slimes while moving between objectives, but do not turn the area into a long grind unless the next reward is still useful.",
+  },
+  {
+    enemy: "Sparkling Slime",
+    type: "Special creature",
+    CodeexAngle:
+      "Sparkling creatures can be tied to NPC requests, local activity progress, or Codeex completion.",
+    RouteTip:
+      "If an NPC asks for sparkling creatures, look for special versions before leaving the zone.",
+  },
+  {
+    enemy: "Bees",
+    type: "Next-section mob",
+    CodeexAngle:
+      "A natural second target after the first crab/slime route.",
+    RouteTip:
+      "Do bees while you are already heading toward nearby markers, chests, or the local mini boss.",
+  },
+  {
+    enemy: "Bee mini boss",
+    type: "Mini boss entry",
+    CodeexAngle:
+      "Mini boss entries may update Codeex once killed, but credit can be missed if you are too far away or do not participate.",
+    RouteTip:
+      "Stay close and tag the fight. If someone else kills it first, keep routing and return after respawn.",
+  },
+  {
+    enemy: "Fish guys",
+    type: "Local mob group",
+    CodeexAngle:
+      "Another area-based mob group that can be cleared while filling Codeex before moving deeper.",
+    RouteTip:
+      "Use them as part of a route, not as a standalone grind spot.",
+  },
+  {
+    enemy: "Skunk boss",
+    type: "Mini boss",
+    CodeexAngle:
+      "Mini bosses can drop gear and update local progress, but you may need to tag or be close enough for credit.",
+    RouteTip:
+      "Do not assume party members killing it off-screen will always count for you.",
+  },
+  {
+    enemy: "Golems",
+    type: "Higher-route mob group",
+    CodeexAngle:
+      "Useful later when your route naturally reaches the golem area, but not worth forcing too early.",
+    RouteTip:
+      "Come back when your map route or level points you there.",
+  },
+  {
+    enemy: "Rat dungeon / Rat boss",
+    type: "Dungeon / boss objective",
+    CodeexAngle:
+      "Dungeon and boss objectives belong to the next layer of progression after early map and monster entries.",
+    RouteTip:
+      "Use dungeons after you have cleaned up nearby Codeex, gear, and map objectives.",
+  },
+];
+
+export const milestoneColumns = [
+  { key: "milestone", label: "Milestone" },
+  { key: "WhatItMeans", label: "What It Means" },
+  { key: "WhatToDo", label: "What To Do" },
+];
+
+export const milestoneRows = [
+  {
+    milestone: "2/8",
+    WhatItMeans:
+      "You have started the monster entry, but the main 8-kill checkpoint is not finished.",
+    WhatToDo:
+      "Keep killing that monster if it is nearby and safe.",
+  },
+  {
+    milestone: "4 kills",
+    WhatItMeans:
+      "Some early entries give XP around this point.",
+    WhatToDo:
+      "Finish this if you are already in the area.",
+  },
+  {
+    milestone: "8/8",
+    WhatItMeans:
+      "The main early Codeex checkpoint is complete for that monster.",
+    WhatToDo:
+      "Check the reward, then decide whether to move on.",
+  },
+  {
+    milestone: "20 kills",
+    WhatItMeans:
+      "The counter can continue toward mastery, resources, or extra rewards.",
+    WhatToDo:
+      "Treat this as optional. Check the reward before committing.",
+  },
+  {
+    milestone: "Mini boss entry",
+    WhatItMeans:
+      "Some entries ask for one named, elite, or sparkling enemy instead of repeated normal kills.",
+    WhatToDo:
+      "Tag the fight, stay close, then check whether the entry completed.",
+  },
+];
+
+export const xpColumns = [
+  { key: "source", label: "Progress Source" },
+  { key: "KnownValue", label: "Known Value / Signal" },
+  { key: "HowToUseIt", label: "How To Use It" },
+];
+
+export const xpRows = [
+  {
+    source: "Map completion objectives",
+    KnownValue:
+      "Gray question marks on the map are one of the strongest early progress signals. The first region can reach 13/13 completion.",
+    HowToUseIt:
+      "Use these as your main route when you do not know where to go next.",
+  },
+  {
+    source: "Crab Codeex entry",
+    KnownValue:
+      "One early Codeex screen shows a 120 XP reward tied to killing more crabs.",
+    HowToUseIt:
+      "Good first entry to finish while learning how Codeex counters work.",
+  },
+  {
+    source: "Mini bosses and special enemies",
+    KnownValue:
+      "Some Codeex entries are completed by killing one named, elite, or sparkling enemy.",
+    HowToUseIt:
+      "Kill once when nearby, then check whether Codeex or map progress updated.",
+  },
+  {
+    source: "Chests",
+    KnownValue:
+      "Chests can give XP, gear, recipes, and materials.",
+    HowToUseIt:
+      "Open them while routing through map objectives instead of skipping side paths.",
+  },
+];
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "Action", label: "Action" },
+  { key: "CheckBeforeLeaving", label: "Check Before Leaving" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    Action: "Talk to nearby NPCs and read what they ask for.",
+    CheckBeforeLeaving:
+      "Watch for requests about Codeex entries, sparkling creatures, monsters, or map objectives.",
+  },
+  {
+    step: "2",
+    Action: "Open the map and look for gray question marks.",
+    CheckBeforeLeaving:
+      "Clear nearby objectives before wandering into a higher-level area.",
+  },
+  {
+    step: "3",
+    Action: "Unlock the local obelisk.",
+    CheckBeforeLeaving:
+      "Make sure the zone is revealed and the respawn/teleport point is set if needed.",
+  },
+  {
+    step: "4",
+    Action: "Open Codeex with L and check Monsters.",
+    CheckBeforeLeaving:
+      "Look for unfinished entries like 2/8, 4/8, 7/8, or counters moving toward 20.",
+  },
+  {
+    step: "5",
+    Action: "Finish nearby crab, slime, bee, or fish-guy entries.",
+    CheckBeforeLeaving:
+      "Finish the easy 4-kill and 8-kill checkpoints while you are already in that pocket of the map.",
+  },
+  {
+    step: "6",
+    Action: "Kill local mini bosses and special enemies once.",
+    CheckBeforeLeaving:
+      "Check whether the boss entry, chest reward, or map completion updated.",
+  },
+  {
+    step: "7",
+    Action: "Open nearby chests before moving on.",
+    CheckBeforeLeaving:
+      "Chests can give gear, recipes, materials, and XP that make the next area easier.",
+  },
+  {
+    step: "8",
+    Action: "Move to the next marker or region.",
+    CheckBeforeLeaving:
+      "Move on when Codeex, map completion, and local chest/boss value have slowed down.",
+  },
+];
+
+export const partyColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "WhatHappens", label: "What Happens" },
+  { key: "BestPractice", label: "Best Practice" },
+];
+
+export const partyRows = [
+  {
+    Situation: "Party member kills normal mobs nearby",
+    WhatHappens:
+      "Codeex can update from party kills, and drops may still appear.",
+    BestPractice:
+      "Stay close enough to the group and check Codeex after each mob pocket.",
+  },
+  {
+    Situation: "A stronger friend clears mobs for you",
+    WhatHappens:
+      "This can speed up Codeex progress and early leveling.",
+    BestPractice:
+      "Use it to catch up, but still watch what entries are completing.",
+  },
+  {
+    Situation: "Mini boss dies while you are too far away",
+    WhatHappens:
+      "You may miss Codeex or loot credit.",
+    BestPractice:
+      "Tag the boss or stand close before it dies.",
+  },
+  {
+    Situation: "Random player kills the same mini boss",
+    WhatHappens:
+      "You may still get loot or credit if you participate, but do not rely on passive proximity.",
+    BestPractice:
+      "Hit the boss once, stay in range, then check the entry.",
+  },
+  {
+    Situation: "Party invite or instance bugs happen",
+    WhatHappens:
+      "Players may end up in different layers or crash during invites.",
+    BestPractice:
+      "Use Steam invites when possible and regroup near the same marker before starting a dungeon.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "WhyItHurts", label: "Why It Hurts" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Ignoring gray question marks on the map",
+    WhyItHurts:
+      "You miss the main route for map completion and early XP.",
+    Fix:
+      "Open the map when you feel lost and clear nearby question-mark objectives.",
+  },
+  {
+    mistake: "Running past obelisks",
+    WhyItHurts:
+      "You miss zone reveal, respawn setup, and automatic travel routes.",
+    Fix:
+      "Interact with every obelisk when entering a new area.",
+  },
+  {
+    mistake: "Treating Codeex as flavor text",
+    WhyItHurts:
+      "You miss XP, monster rewards, and progression clues.",
+    Fix:
+      "Press L and check the monster section whenever you enter a new area.",
+  },
+  {
+    mistake: "Leaving before checking mini bosses",
+    WhyItHurts:
+      "Some entries are tied to named enemies, and you may have to backtrack later.",
+    Fix:
+      "Look for local elites, sparkling creatures, or named enemies before leaving a zone.",
+  },
+  {
+    mistake: "Fighting enemies far above your route too early",
+    WhyItHurts:
+      "You may survive, but the XP/time value can be worse than simply following local objectives.",
+    Fix:
+      "Use underleveled fights only when the reward is obvious. Otherwise return to map objectives.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best early leveling route in Farever is map completion first, Codeex second, and random mob grinding last. Open the map, clear gray question marks, unlock obelisks, then use the Codeex to finish nearby monster milestones.**
+
+Use this loop:
+
+1. Open the map and check nearby gray question marks.
+2. Unlock the local obelisk before going deeper.
+3. Press **L** to open the Codeex.
+4. Check the **Monsters** section.
+5. Finish efficient **4-kill** and **8-kill** milestones on nearby mobs such as crabs, slimes, bees, and fish guys.
+6. Kill local mini bosses or sparkling creatures once when they are on your route.
+7. Check rewards before pushing any monster counter to **20**.
+8. Move on when map completion, Codeex, chests, and mini boss value slow down.
+
+If you are lost, do not stand still farming random mobs. Check **map completion → obelisk → Codeex** in that order.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-codeex-monster-counter.webp"
+    alt="Farever Codeex monster section with monster counter, XP milestone, and 20-kill progress marked."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The marked counter is the part that matters: check the current kill count, the next XP milestone, and whether the entry still has a useful reward.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="leveling-loop">
+  Best early leveling loop
+</h2>
+
+Farever does not level like a normal quest-log MMO. You can follow NPC hints, but the real early route is split between **map completion**, **Codeex milestones**, **chests**, **mini bosses**, and **obelisks**.
+
+Use this priority order:
+
+<GuideTable
+  caption="Farever early leveling priority."
+  columns={levelingPriorityColumns}
+  rows={levelingPriorityRows}
+/>
+
+The biggest mistake is treating Farever like a pure mob grinder. You can grind enemies, but the efficient early route is to finish useful entries, collect local rewards, then move to the next objective.
+
+---
+
+<h2 id="starter-creatures">
+  Starter creature examples
+</h2>
+
+This table gives you concrete early examples instead of only saying “kill 8 of each mob.” Exact UI spelling can vary by patch or transcript, but these are the early enemy groups and named targets worth checking in your Codeex route.
+
+<GuideTable
+  caption="Early Farever Codeex examples and route notes."
+  columns={starterCreatureColumns}
+  rows={starterCreatureRows}
+/>
+
+---
+
+<h2 id="map-completion">
+  Map completion: what to do when you feel lost
+</h2>
+
+When you do not know what to do next, open the map first. Look at the right side for **gray question marks** and local completion objectives. These are not decoration; they are one of the main ways the game tells you where the next useful activity is.
+
+A good early pattern is:
+
+- open the map after every new area
+- look for gray question marks
+- zoom or pan until you understand nearby objectives
+- complete local markers before wandering far away
+- check the completion count before leaving
+
+The first region can be completed to **13/13**, so do not assume an area is done just because the main path looks clear.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-map-completion-question-marks.webp"
+    alt="Farever map screen with gray question marks and region completion counter marked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The marked gray question marks are your route when the game does not give you a normal quest-log path.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="codeex-basics">
+  Codeex basics
+</h2>
+
+Press **L** to open the Codeex, then go to the **Monsters** section. This is where you can see how many enemies of each type you have killed.
+
+The important part is the counter. If a monster says something like **2/8**, that means the entry still has progress left. In early areas, this usually starts with simple local enemies: finish nearby **crabs** and **slimes** first, then check **bees**, **fish guys**, sparkling creatures, or mini bosses as the map route pushes you outward.
+
+Use this rule:
+
+- **2/8 or 3/8**: keep going if the enemy is nearby
+- **4 kills**: check for an XP milestone
+- **7/8**: finish the entry before leaving
+- **8/8**: the main early entry is done
+- **20 kills**: check the reward before committing
+- **Named or sparkling enemy**: tag it once, then check Codeex and map completion
+
+The Codeex is a routing tool. Use it to decide whether the next few kills are still valuable, not as an excuse to overfarm one safe monster forever.
+
+---
+
+<h2 id="xp-rewards">
+  XP and reward notes
+</h2>
+
+Not every progress source gives value in the same way. Map objectives, Codeex entries, mini bosses, and chests all matter, but you should check what the next reward actually is before staying in one spot.
+
+<GuideTable
+  caption="Farever early XP and reward signals."
+  columns={xpColumns}
+  rows={xpRows}
+/>
+
+---
+
+<h2 id="milestones">
+  Codeex kill milestones
+</h2>
+
+<GuideTable
+  caption="How to read early Farever Codeex milestones."
+  columns={milestoneColumns}
+  rows={milestoneRows}
+/>
+
+<GuideCallout title="Simple rule">
+Finish nearby 4-kill and 8-kill milestones first. Treat 20-kill mastery as a reward check, not an automatic grind.
+</GuideCallout>
+
+---
+
+<h2 id="mini-bosses">
+  Mini bosses and special entries
+</h2>
+
+Not every Codeex entry is a normal mob counter. Some entries are tied to **mini bosses**, elite enemies, or sparkling creatures. If an NPC asks you to show a Codeex with several monsters in it, do not only farm basic crabs or slimes. Check for named enemies in the area too.
+
+Mini bosses are worth checking because they can:
+
+- complete a Codeex entry
+- drop gear
+- give XP
+- update local activity progress
+- count toward map completion
+- unlock rewards that normal enemies do not
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-codeex-mini-boss-entry.webp"
+    alt="Farever Codeex entry with mini boss requirement and completion state marked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mini boss entries are the reason you should scan the area before leaving, not only farm normal mobs.
+  </figcaption>
+</figure>
+
+If a mini boss was just killed by someone else, wait for the respawn only if the entry matters now. Otherwise, continue the route and return later.
+
+---
+
+<h2 id="obelisk-route">
+  Obelisks, respawn, and fast travel
+</h2>
+
+Obelisks are part of leveling because they make the map usable. When you enter a new area, look for the big glowing stone and interact with it.
+
+Obelisks can:
+
+- reveal the local map
+- show hidden locations and points of interest
+- set a respawn or teleport point
+- unlock automatic travel to another obelisk
+- reduce backtracking when you move between objectives
+
+Fast travel is not instant. Your character travels automatically through the air, but it is still much faster than running back manually.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-obelisk-zone-reveal.webp"
+    alt="Farever obelisk menu with zone reveal, respawn point, and travel option marked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If your map looks empty or grayed out, find the obelisk before assuming the area has no objectives.
+  </figcaption>
+</figure>
+
+A common mistake is skipping the first obelisk, then realizing later you cannot fly back to that area. Interact with every obelisk as soon as you reach it.
+
+---
+
+<h2 id="early-route">
+  Recommended early route
+</h2>
+
+Follow this route when you enter a new zone or sub-area:
+
+<GuideTable
+  caption="Recommended Farever early leveling route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+This route works because it prevents three common problems:
+
+1. grinding enemies after the useful Codeex milestone is already done
+2. walking past map objectives that give better XP
+3. missing obelisks and forcing yourself to backtrack later
+
+---
+
+<h2 id="when-to-stop-grinding">
+  When should you stop grinding a monster?
+</h2>
+
+This is the only place the “stop grinding” rule needs a full explanation.
+
+Use this checklist:
+
+- Is the monster entry still before its 4-kill or 8-kill XP milestone?
+- Is the monster dense enough that the next milestone will take less than a minute or two?
+- Does the 20-kill reward show something useful, like a resource you need?
+- Is there a nearby mini boss, chest, or gray question mark that gives better progress?
+- Are you underleveled for this enemy group?
+- Are you only grinding because you do not know where to go?
+
+If the next reward is not clear, move on. Farever rewards routing through **map objectives + Codeex + chests + elites** more than standing in one spot forever.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-codeex-resource-reward.webp"
+    alt="Farever Codeex screen with monster progress and resource reward marked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Before pushing toward 20 kills, check the marked reward area. If the next reward is weak, move to the next objective.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="party-credit">
+  Party leveling and Codeex credit
+</h2>
+
+Party play can speed up Codeex, but it also makes credit easier to miss if everyone spreads out.
+
+<GuideTable
+  caption="How party play affects Farever Codeex and leveling."
+  columns={partyColumns}
+  rows={partyRows}
+/>
+
+The safest habit is simple: stay near your group, hit mini bosses yourself, then open Codeex after each mob pocket. If the entry did not update, you probably missed credit or were too far away.
+
+---
+
+<h2 id="mistakes">
+  Common Codeex and leveling mistakes
+</h2>
+
+<GuideTable
+  caption="Common Farever Codeex and leveling mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the fastest way to level early in Farever?
+
+The fastest early route is to combine map completion, Codeex milestones, chests, mini bosses, and dungeons. Do not just grind one enemy forever.
+
+### What key opens the Codeex in Farever?
+
+Press **L** to open the Codeex by default.
+
+### Where are monster entries in the Codeex?
+
+Open Codeex, then check the **Monsters** section. This is where you can see kill counters and monster progress.
+
+### What does 2/8 mean in Farever?
+
+It means you have killed 2 enemies toward an 8-kill monster entry. If that monster is nearby, it is usually worth finishing the entry before leaving.
+
+### What happens at 4 kills?
+
+Some early Codeex entries give XP around 4 kills. This makes partial entry progress valuable even before the full 8-kill entry is done.
+
+### What happens at 8 kills?
+
+8 kills usually completes the main early monster entry. After that, check whether continuing toward 20 is worth the time.
+
+### Do mini bosses count for Codeex?
+
+Yes. Some Codeex entries are tied to mini bosses, sparkling creatures, or special enemies instead of normal kill counters.
+
+### Does party play share Codeex progress?
+
+Party kills can update your Codeex, but you should stay close and tag mini bosses yourself. If you are too far away, you may miss credit or loot.
+
+### What should I do if I feel lost?
+
+Open the map, check gray question marks, unlock the nearest obelisk, then open Codeex and check unfinished monster entries.
+
+### How do obelisks help leveling?
+
+Obelisks reveal zones, set respawn or teleport points, and unlock automatic travel routes. They reduce backtracking and make map completion easier.
+
+### Should I level by grinding mobs or exploring?
+
+Do both, but do not only grind. The best route is map objective → Codeex entry → chest or mini boss → obelisk → next area.
+
+### Which Farever guide should I read next?
+
+Read <Link href="/farever/beginner-guide">Farever Beginner Guide</Link> if you are still learning the first-hour route, or <Link href="/farever/weapon-skills-guide">Farever Weapon Skills Guide</Link> if your weapon changed your abilities.

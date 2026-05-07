@@ -266,6 +266,48 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-emerald-700",
 },
 
+// ===== Farever =====
+{
+  href: "/farever",
+  game: "Farever",
+  title: "Farever Guide Hub",
+  description:
+    "Start here for Farever early access guides: beginner route, Codeex leveling, weapon skills, classes, mounts, and the first Mine Estrone dungeon.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/farever/beginner-guide",
+  game: "Farever",
+  title: "Beginner Guide: What to Do First",
+  description:
+    "Learn the best first-hour route in Farever: claim your free mount, follow map objectives, use Codeex, upgrade weapon skills, manage inventory, and prepare for your first dungeon.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/farever/codeex-leveling-guide",
+  game: "Farever",
+  title: "Codeex & Leveling Guide",
+  description:
+    "Use Codeex monster entries, 4-kill and 8-kill milestones, map completion, obelisks, mini bosses, and party credit to level efficiently in early Farever.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+{
+  href: "/farever/first-dungeon-guide",
+  game: "Farever",
+  title: "First Dungeon Guide: Mine Estrone & Reblochonk",
+  description:
+    "Clear Farever's early Mine Estrone dungeon route: choose Basic difficulty, track Secret Orbs, clear special foes, beat Reblochonk, and avoid confusing it with Crabgantua.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
 // ===== Far Far West =====
 {
   href: "/far-far-west/secret-missions",

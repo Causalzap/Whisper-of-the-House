@@ -1,0 +1,847 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const routeColumns = [
+  { key: "problem", label: "If You Are Stuck On..." },
+  { key: "goTo", label: "Go To" },
+  { key: "why", label: "Why" },
+];
+
+export const routeRows = [
+  {
+    problem: "I made a character and do not know what to do next.",
+    goTo: "Beginner Guide",
+    why:
+      "Use this for the first-hour route: nearby objectives, Codeex, map completion, mount setup, gliding, and basic combat.",
+  },
+  {
+    problem: "I do not understand the 2/8, 4/8, 8/8, or 20/20 monster counters.",
+    goTo: "Codeex and Leveling Guide",
+    why:
+      "Those counters are part of early progression. The Codeex page should track kill milestones, XP, and which entries are worth finishing.",
+  },
+  {
+    problem: "I want to know which class to start with.",
+    goTo: "Classes Guide",
+    why:
+      "Farever starts with four classes, so one focused comparison page is more useful than separate thin class pages.",
+  },
+  {
+    problem: "My skills changed after equipping a different weapon.",
+    goTo: "Weapon Skills Guide",
+    why:
+      "Weapons can change your active skills, and the Arsenal slot adds another layer of skill flexibility.",
+  },
+  {
+    problem: "I claimed a mount but cannot summon it.",
+    goTo: "Mount Guide",
+    why:
+      "Claiming the mount is only the first step. You still need to equip it from Collections and check your mount keybind.",
+  },
+  {
+    problem: "My inventory is full and I do not know what to drop.",
+    goTo: "Inventory and salvage section",
+    why:
+      "Old gear, lost packages, bank storage, pouches, and the Spark Recycler all matter before you start throwing items away.",
+  },
+  {
+    problem: "I missed one of the first dungeon orbs.",
+    goTo: "First Dungeon Guide",
+    why:
+      "The first dungeon has 5 orbs, and the route is easier to explain with screenshots than with text only.",
+  },
+  {
+    problem: "I keep disconnecting or getting stuck connecting.",
+    goTo: "Disconnecting section",
+    why:
+      "Use the hub troubleshooting steps first before assuming your PC is the problem.",
+  },
+  {
+    problem: "My FPS drops or the game stutters.",
+    goTo: "FPS and stutter section",
+    why:
+      "Performance problems need a quick testing order: quiet area, dungeon, fullscreen/borderless, overlays, and FPS cap.",
+  },
+];
+
+export const guideIndexColumns = [
+  { key: "guide", label: "Guide" },
+  { key: "whenToRead", label: "When To Read It" },
+  { key: "whatItSolves", label: "What It Solves" },
+];
+
+export const guideIndexRows = [
+  {
+    guide: "Beginner Guide",
+    whenToRead: "Right after character creation",
+    whatItSolves:
+      "What to do first, how to read early objectives, when to move on, and which beginner mistakes waste the most time.",
+  },
+  {
+    guide: "Codeex and Leveling Guide",
+    whenToRead: "When monster counters start showing 2/8, 4/8, 8/8, or 20/20",
+    whatItSolves:
+      "Codeex entries, early XP milestones, 20-kill mastery, map completion, and leveling routes.",
+  },
+  {
+    guide: "Classes Guide",
+    whenToRead: "Before locking in your first character",
+    whatItSolves:
+      "Which starting class fits solo play, co-op, safe leveling, speed, and weapon flexibility.",
+  },
+  {
+    guide: "Weapon Skills Guide",
+    whenToRead: "When a new weapon changes your skill bar",
+    whatItSolves:
+      "Weapon skills, class skills, Arsenal skills, runes, upgrades, and why builds are not only class-based.",
+  },
+  {
+    guide: "Mount Guide",
+    whenToRead: "When the mount key does nothing",
+    whatItSolves:
+      "Free mount claim, Collections equip step, glider use, keybinds, vendor prices, and mount restrictions.",
+  },
+  {
+    guide: "First Dungeon Guide",
+    whenToRead: "Before or during your first dungeon run",
+    whatItSolves:
+      "5-orb route, platforming, boss shield timing, rewards, and easy-to-miss paths.",
+  },
+];
+
+export const earlyFactsColumns = [
+  { key: "topic", label: "System" },
+  { key: "value", label: "Current Early Access Value" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const earlyFactsRows = [
+  {
+    topic: "Starting classes",
+    value: "4 classes: Warrior, Rogue, Mage, Cleric/Priest",
+    whyItMatters:
+      "One class comparison page is enough for the first wave. Players need a starting recommendation, not four thin class pages.",
+  },
+  {
+    topic: "Level cap",
+    value: "Level 20",
+    whyItMatters:
+      "Early content should focus on leveling, Codeex, weapon skills, professions, and first dungeons instead of endgame claims.",
+  },
+  {
+    topic: "Weapons and skills",
+    value: "25+ weapons and 100+ skills",
+    whyItMatters:
+      "Weapons can change your active kit, so build advice should start with weapon skills before final build rankings.",
+  },
+  {
+    topic: "Codeex progress",
+    value: "Early XP milestones such as 4 kills and 8 kills, with counters up to 20",
+    whyItMatters:
+      "This is one of the best early leveling hooks and deserves a dedicated Codeex Guide.",
+  },
+  {
+    topic: "Map completion",
+    value: "Region objectives appear as gray question marks; the first region can reach 13/13",
+    whyItMatters:
+      "This is the main answer for players who do not know what to do without a normal quest log.",
+  },
+  {
+    topic: "First dungeon",
+    value: "5 orbs",
+    whyItMatters:
+      "A strong early guide topic because players can kill the boss and still miss completion.",
+  },
+  {
+    topic: "Inventory",
+    value: "Small pouches add 6 inventory slots",
+    whyItMatters:
+      "Bag space becomes a problem quickly, so this is a useful early fix.",
+  },
+  {
+    topic: "Gear recycling",
+    value: "Spark Recycler converts old gear into useful materials",
+    whyItMatters:
+      "Players should stop discarding junk gear once they reach the village hub.",
+  },
+  {
+    topic: "Jobs and potions",
+    value: "6 professions; Alchemist can craft early healing potions",
+    whyItMatters:
+      "Alchemist is a practical first profession, especially for squishy classes without self-healing.",
+  },
+  {
+    topic: "Fast travel",
+    value: "Obelisks reveal zones, set respawn points, and enable automatic travel",
+    whyItMatters:
+      "Players should unlock obelisks early instead of running everywhere manually.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "First-Run Mistake" },
+  { key: "whatHappens", label: "What Happens" },
+  { key: "fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Claiming the free mount but not equipping it",
+    whatHappens:
+      "The mount key does nothing, so it feels like the reward is bugged.",
+    fix:
+      "Open Collections, equip the mount there, then check the mount/dismount keybind.",
+  },
+  {
+    mistake: "Treating Codeex as a collection menu only",
+    whatHappens:
+      "You miss easy early XP because monster entries are tied to kill counters.",
+    fix:
+      "Open the Codeex in every new area and finish nearby 4-kill or 8-kill milestones before moving on.",
+  },
+  {
+    mistake: "Grinding every monster to 20 kills automatically",
+    whatHappens:
+      "You spend too long in low-value areas after the useful XP milestones are already done.",
+    fix:
+      "Use 20-kill mastery selectively. Finish it when the reward or route makes sense.",
+  },
+  {
+    mistake: "Ignoring the green plus on weapon skills",
+    whatHappens:
+      "Your damage, support, or cooldown options lag behind even though upgrades are available.",
+    fix:
+      "Open the skill screen when the plus appears and spend the available weapon skill point.",
+  },
+  {
+    mistake: "Upgrading low-level weapons too aggressively",
+    whatHappens:
+      "You spend upgrade materials on small stat gains that may not matter for long.",
+    fix:
+      "Upgrade skills first. Save weapon enhancement materials unless the weapon effect is worth keeping.",
+  },
+  {
+    mistake: "Forgetting the Arsenal slot",
+    whatHappens:
+      "You miss an extra tool such as a heal, shield, or utility skill from a backup weapon.",
+    fix:
+      "Put a spare weapon in the Arsenal slot and choose the skill you actually want to use.",
+  },
+  {
+    mistake: "Discarding junk gear before reaching the recycler",
+    whatHappens:
+      "You lose materials that could have been used for crafting or upgrades.",
+    fix:
+      "Hold old gear until you reach the village hub, then use the Spark Recycler.",
+  },
+  {
+    mistake: "Ignoring small pouches at the guild merchant",
+    whatHappens:
+      "Your inventory fills up and you start dropping useful materials.",
+    fix:
+      "Buy small pouches and slot them into your bag slots for 6 extra spaces each.",
+  },
+  {
+    mistake: "Running past obelisks",
+    whatHappens:
+      "You miss map reveal, respawn setup, and fast-travel routes.",
+    fix:
+      "Interact with every obelisk when entering a new zone.",
+  },
+  {
+    mistake: "Not using runes after the first dungeon",
+    whatHappens:
+      "Your class skills miss free bonuses even though the rune is already in your bag.",
+    fix:
+      "Right-click the rune in your inventory, then select the unlocked bonus on the skill screen.",
+  },
+  {
+    mistake: "Expecting a normal quest log",
+    whatHappens:
+      "You forget what an NPC asked for and wander without checking the map or Codeex.",
+    fix:
+      "Read the NPC text, check map completion, and use Codeex entries as your route.",
+  },
+  {
+    mistake: "Leaving the first dungeon with missing orbs",
+    whatHappens:
+      "The boss may be dead, but completion still feels unfinished.",
+    fix:
+      "Check side platforms, vertical routes, grapple paths, and early ledges before exiting.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Farever is easiest to understand if you treat the first hour as a systems check: claim your mount, learn the Codeex, follow map completion, use obelisks, manage inventory early, and watch your weapon skills.**
+
+The early rules that matter most:
+
+1. **4 starting classes**: Warrior, Rogue, Mage, and Cleric/Priest.
+2. **Level 20** is the current Early Access cap.
+3. **25+ weapons** and **100+ skills** make weapon choice a real build system.
+4. Codeex entries can reward early milestones like **4 kills** and **8 kills**, while some counters continue toward **20 kills**.
+5. The first dungeon has **5 orbs**, and missing one is easy if you rush the route.
+6. Do not discard old gear too early. Use the **Spark Recycler** once you reach the village hub.
+7. If your bag fills up, buy **small pouches** for **+6 inventory slots** each.
+8. Unlock **obelisks** early because they reveal zones, set respawn points, and enable automatic travel.
+
+Start with the Beginner Guide if you are lost, the Codeex Guide if you are trying to level faster, and the Weapon Skills Guide if a new weapon changed your abilities.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-class-selection.webp"
+    alt="Farever class selection screen showing Warrior, Rogue, Mage, and Priest or Cleric options."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first choice is simple on paper: Warrior, Rogue, Mage, or Cleric/Priest. The harder part is remembering that weapons will also change how your class feels.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="start-here">
+  Start here: choose your problem
+</h2>
+
+Most players do not need a full wiki first. They need to know what is blocking them. Use this table to jump into the right guide or section.
+
+<GuideTable
+  caption="Where to go next based on your Farever problem."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+---
+
+<h2 id="common-first-run-mistakes">
+  Common first-run mistakes
+</h2>
+
+These are the mistakes that make Farever feel more confusing than it needs to be. Most of them happen because the game expects you to check menus, counters, map completion, inventory tools, and weapon skills more than a normal quest-log MMO.
+
+<GuideTable
+  caption="Common Farever first-run mistakes and how to fix them."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<GuideCallout title="Best early habit">
+Whenever you enter a new area, check four things before grinding: the map completion panel, the Codeex monster counters, nearby obelisks, and whether your weapon skills have a green upgrade plus.
+</GuideCallout>
+
+---
+
+<h2 id="guide-index">
+  Farever guide index
+</h2>
+
+Use this hub as the entry point for the Farever guide cluster. The first wave should stay focused: one hub plus a few early-game pages that solve real player problems.
+
+<GuideTable
+  caption="Farever guide cluster."
+  columns={guideIndexColumns}
+  rows={guideIndexRows}
+/>
+
+<div className="not-prose my-8 grid gap-4 md:grid-cols-2">
+  <Link
+    href="/farever/beginner-guide"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-slate-600"
+  >
+    <h3 className="text-lg font-semibold text-slate-100">Beginner Guide</h3>
+    <p className="mt-2 text-sm text-slate-400">
+      What to do first, how to read early objectives, and how to avoid wasting time in the starter areas.
+    </p>
+  </Link>
+
+  <Link
+    href="/farever/codeex-leveling-guide"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-slate-600"
+  >
+    <h3 className="text-lg font-semibold text-slate-100">Codeex and Leveling Guide</h3>
+    <p className="mt-2 text-sm text-slate-400">
+      4-kill and 8-kill XP milestones, 20-kill mastery, monster tracking, and map completion.
+    </p>
+  </Link>
+
+  <Link
+    href="/farever/classes-guide"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-slate-600"
+  >
+    <h3 className="text-lg font-semibold text-slate-100">Classes Guide</h3>
+    <p className="mt-2 text-sm text-slate-400">
+      Warrior, Rogue, Mage, and Cleric/Priest compared for early solo and co-op play.
+    </p>
+  </Link>
+
+  <Link
+    href="/farever/weapon-skills-guide"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-slate-600"
+  >
+    <h3 className="text-lg font-semibold text-slate-100">Weapon Skills Guide</h3>
+    <p className="mt-2 text-sm text-slate-400">
+      Weapon skills, Arsenal skills, runes, upgrades, and early build logic.
+    </p>
+  </Link>
+
+  <Link
+    href="/farever/mount-guide"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-slate-600"
+  >
+    <h3 className="text-lg font-semibold text-slate-100">Mount Guide</h3>
+    <p className="mt-2 text-sm text-slate-400">
+      Free mount claim, Collections equip step, gliding, keybinds, vendor prices, and mount restrictions.
+    </p>
+  </Link>
+
+  <Link
+    href="/farever/first-dungeon-guide"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-slate-600"
+  >
+    <h3 className="text-lg font-semibold text-slate-100">First Dungeon Guide</h3>
+    <p className="mt-2 text-sm text-slate-400">
+      5-orb route, platforming, boss shield, rewards, and screenshots.
+    </p>
+  </Link>
+</div>
+
+---
+
+<h2 id="key-early-game-facts">
+  Key early-game facts
+</h2>
+
+These are the early numbers and systems that matter most when you are deciding what to do first in Farever.
+
+<GuideTable
+  caption="Farever Early Access systems and why they matter."
+  columns={earlyFactsColumns}
+  rows={earlyFactsRows}
+/>
+
+---
+
+<h2 id="codeex-leveling">
+  Codeex and leveling
+</h2>
+
+The Codeex is where a lot of early progression starts to make sense. Press **L** and open the monster section when you enter a new area. If a monster shows a counter like **2/8**, that entry still has XP waiting.
+
+Some entries reward early milestones such as **4 kills** and **8 kills**, while the counter can continue toward **20 kills** for mastery or extra reward behavior. Some entries are simpler and only ask you to kill a mini boss.
+
+The clean early rule is:
+
+- check the Codeex whenever you enter a new area
+- finish nearby 4-kill or 8-kill XP milestones before moving on
+- only push to 20 kills when the reward or route makes sense
+- use map completion and Codeex together
+- do not treat every enemy like an endless XP farm
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-codeex-monster-counter.webp"
+    alt="Farever Codeex monster section showing monster kill counters and early XP progress."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the Codeex whenever you feel lost. Monster counters show which entries still have early XP waiting.
+  </figcaption>
+</figure>
+
+Read <Link href="/farever/codeex-leveling-guide">Farever Codeex and Leveling Guide</Link> for kill counts, XP routing, and map completion.
+
+---
+
+<h2 id="map-completion">
+  Map completion and obelisks
+</h2>
+
+When you do not know what to do next, open the map and look at the right side. Gray question marks point toward local objectives, and clearing those objectives gives strong early XP. The first region can be completed to **13/13**, so do not leave only because the main path looks finished.
+
+Obelisks are just as important. They are not only landmarks. They can:
+
+- reveal a new zone
+- show a short area preview
+- act as respawn points
+- enable automatic travel to another unlocked obelisk
+- help you route back without running the full distance manually
+
+Fast travel is not instant teleporting. Your character travels automatically, but it still saves time and prevents a lot of backtracking.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-obelisk-fast-travel.webp"
+    alt="Farever obelisk menu showing zone reveal, respawn setup, and fast travel options."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If you run past obelisks, you make the early game slower. Unlock them as soon as you reach a new area.
+  </figcaption>
+</figure>
+
+---
+<h2 id="classes">
+  Classes
+</h2>
+
+Farever starts with **four classes**: Warrior, Rogue, Mage, and Cleric/Priest. Your class matters, but it does not lock your whole playstyle because weapons can change a large part of your active kit.
+
+For a first character:
+
+- choose **Cleric/Priest** if you want the most forgiving solo route. Self-healing makes early mistakes easier to recover from, especially before you understand boss tells and Codeex routing.
+- choose **Rogue** if you like fast movement, dodging, and control. Rogue starts feeling good once you lean into tools like teleport-style movement, backstab-style attacks, stuns, and later ranged options such as bows.
+- choose **Warrior** if you want a direct melee route with heavier damage pressure. Warrior is the better fit if you want to build around raw power, rage-style damage windows, and weapons such as axes that can give AoE-focused skills like **Berserk Attack** and **Smash Attack**.
+- choose **Mage** if you want ranged magic with more forgiving aim than a pure shooter. Mage-style play benefits from scepter and staff weapons: a fire scepter can swap you into fire abilities, while other magic weapons can add healing or magic-damage tools.
+
+The important mistake to avoid: do not judge a class only by the starter weapon. A Rogue with daggers, a Rogue with a bow, a Cleric/Priest with sword and shield, or a Mage-style build with a different scepter can feel like a different setup.
+
+Read <Link href="/farever/classes-guide">Farever Classes Guide</Link> for the full comparison.
+---
+
+<h2 id="weapon-skills">
+  Weapon skills, runes, and Arsenal
+</h2>
+
+Farever’s weapon system is easy to underestimate. With **25+ weapons** and **100+ skills**, weapons are not just stat upgrades. A new weapon can change your active skills, your healing pattern, your AoE, or your support role.
+
+Your class unlocks its own skills as you level, but a large part of your active kit comes from your equipped weapon. A one-handed weapon may give a basic attack and a cooldown skill. A two-handed weapon can give a larger set, such as multiple actives plus a passive.
+
+The first thing to check after equipping a new weapon is your skill bar. If the abilities changed, that is normal. If a green plus appears on a skill, open the skill screen before continuing; an early skill rank can matter more than a small gear stat bump.
+
+Do not ignore the **Arsenal** slot either. Once extra weapons start dropping, you can place a weapon in the Arsenal slot and use one of that weapon’s skills as an extra tool. If the selected Arsenal skill is not the one you want, hold **Control** and left-click the weapon to choose a different skill.
+
+Runes are another early upgrade layer. After your first dungeon and later chests, you can get runes that unlock bonuses for class skills. Right-click the rune in your inventory first, then pick the unlocked bonus on the skill screen.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-weapon-skill-upgrade.webp"
+    alt="Farever weapon skill screen showing active weapon skills and upgrade choices."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After a weapon swap, check this screen before judging the class. The same character can feel very different once the active skills change.
+  </figcaption>
+</figure>
+
+Read <Link href="/farever/weapon-skills-guide">Farever Weapon Skills Guide</Link> for weapons, runes, Arsenal skills, upgrades, and early build logic.
+
+---
+
+<h2 id="mounts-glider">
+  Mounts and glider
+</h2>
+
+The mount flow is one of the first places players can think the game is bugged. Claiming the mount does not automatically mean it is ready to use.
+
+Use this order:
+
+1. Press **Esc** and open the shop.
+2. Claim the free launch items if they are available.
+3. Press **Y** to open Collections.
+4. Select the mount tab at the bottom.
+5. Equip the mount.
+6. Change your mount/dismount key in **Options → Hotkeys** if needed.
+
+Later, you may also see movement vendors. A basic mount price of **1000 gold** and a glider price of **500 gold** appear early, so do not waste gold if you already claimed the free mount.
+
+You can also chain movement with the glider. If you jump while moving and then trigger the glider, travel feels much smoother than running everywhere. In dungeons, though, do not expect the mount to work; plan around jumping, gliding, grapple points, and route timing.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-free-mount-shop.webp"
+    alt="Farever shop and Collections screens used to claim and equip a free mount."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the mount key does nothing, check Collections first. Owning the mount and equipping the mount are two different steps.
+  </figcaption>
+</figure>
+
+Read <Link href="/farever/mount-guide">How to Get a Mount in Farever</Link> for the step-by-step version.
+
+---
+<h2 id="inventory-salvage">
+  Inventory, salvage, and potions
+</h2>
+
+Inventory fills up quickly in Farever because you pick up gear, materials, lost packages, runes, recipes, and crafting items before you know what most of them do. The early mistake is dropping items too soon.
+
+Once you reach the village hub in the second map, start using the resource tools instead of treating everything as junk.
+
+Do this first:
+
+- use the **Spark Recycler** to turn old gear into crafting or upgrade materials
+- buy **small pouches** from the guild merchant and place them into your bag slots
+- each small pouch adds **6 inventory slots**
+- use the guild merchant’s **bank** for training manuals, runes, materials, and gear you do not need right now
+- right-click **lost packages** to turn them into completed packages
+- hand completed packages to the guild merchant for **100 gold**
+- keep early runes until you know which skill they enhance
+- avoid spending upgrade materials too aggressively on low-level weapons
+
+For crafting, the first practical job is **Alchemist**. It lets you craft minor healing potions early, which is useful if your class or weapon setup does not have easy self-healing. Vials can be bought from the guild merchant, and early healing potions can cover a large chunk of your starter HP.
+
+This section is not trying to be a full crafting guide. The early goal is simpler: stop wasting gear, make space, store useful items, and get a basic healing option before you start harder fights.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-spark-recycler.webp"
+    alt="Farever Spark Recycler used to turn old gear into crafting and upgrade materials."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Do not throw away every old item. The Spark Recycler turns junk gear into materials you can actually use.
+  </figcaption>
+</figure>
+---
+
+<h2 id="dungeons">
+  First dungeon
+</h2>
+
+The first dungeon has **5 orbs**, and it is very easy to treat the boss as the only objective. Do not rush straight to the exit after the fight. Check side platforms, vertical routes, and any path that looks like it loops away from the main line.
+
+Before entering:
+
+- clear inventory space
+- upgrade available weapon skills
+- use any useful runes you already have
+- practice gliding before long gaps
+- check side platforms for orbs
+- watch for grapple points or vertical routes
+- learn the boss shield timing before wasting cooldowns
+
+The most common first-dungeon mistake is assuming every orb is on the main path. If the counter is still missing one, look backward from the boss route instead of only pushing forward.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-first-dungeon-orbs.webp"
+    alt="Farever first dungeon route with orb collection, platforming, and an early boss fight."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first dungeon is not just a boss hallway. The missing orb is usually a route problem, not a combat problem.
+  </figcaption>
+</figure>
+
+Read <Link href="/farever/first-dungeon-guide">Farever First Dungeon Guide</Link> for orb locations, boss shield tips, and rewards.
+
+---
+
+<h2 id="underwater-exploration">
+  Underwater exploration
+</h2>
+
+Farever does not use normal swimming. When you enter water, you walk underwater instead. That can feel strange at first, but some objectives and chests are built around it.
+
+Remember these rules:
+
+- there is no normal swimming movement
+- you can walk under the water
+- a blue breath bar limits how long you can stay under
+- when the bar runs out, you start losing HP
+- you can still double jump underwater
+- self-healing can help you survive longer if you push too far
+
+This is not a full exploration guide, but it is worth knowing before you skip underwater paths that may hide objectives or chests.
+
+---
+
+<h2 id="multiplayer">
+  Multiplayer and parties
+</h2>
+
+Farever is online and instance-based. You can see random players in the world, but that does not mean every player is in the same copy of the map.
+
+Quick notes:
+
+- parties support **4 players**
+- nearby players can be invited
+- Steam friends can be invited
+- map instances are small
+- you may not naturally land in the same instance as a friend
+- PvP is planned later, but the early flow is mainly PvE
+- friend list, guilds, auction house, player trading, and deeper social tools are planned later rather than fully present now
+
+If you want to play together, use the party menu or Steam invite. Do not rely on meeting randomly in the same world copy.
+
+---
+
+<h2 id="disconnecting">
+  Why does Farever keep disconnecting?
+</h2>
+
+If Farever shows **lost connection to server**, **stuck connecting**, or repeated disconnects, do not immediately assume your PC is the problem. Launch-window server instability can look exactly like a local issue.
+
+Try this order:
+
+1. **Check whether your region is down.** If many players report the same region failing, wait before changing local settings.
+2. **Restart the game after maintenance or a patch.** A clean reconnect often matters after server changes.
+3. **Check Steam for a client update.** If the client is behind the server, reconnecting may fail.
+4. **Try another region only as a test.** If another region loads, your original region may be the issue.
+5. **Avoid starting dungeons during unstable windows.** A disconnect inside a dungeon can waste the run.
+6. **Stop troubleshooting locally if every region is down.** At that point, there is no local fix.
+
+If your character stays connected but skills feel delayed, treat it as latency or FPS troubleshooting instead.
+
+---
+
+<h2 id="fps-stutter">
+  How do you fix FPS drops or stutter in Farever?
+</h2>
+
+Open-world areas can feel worse than dungeons because more players and effects are nearby. Test performance in a quiet area before deciding the whole game runs badly.
+
+Try these steps:
+
+1. **Test in a dungeon or quiet area.** If FPS improves, the problem is probably open-world density.
+2. **Switch between borderless window and fullscreen.** Use whichever gives smoother frame pacing.
+3. **Disable unnecessary overlays.** Turn off Discord overlay, recording overlays, and extra FPS counters while testing.
+4. **Cap FPS externally if needed.** A stable 60 FPS can feel better than unstable higher FPS.
+5. **Lower settings even if the art style looks simple.** Simple visuals do not guarantee perfect Early Access optimization.
+6. **Retest after patches.** Performance may change quickly during Early Access.
+
+If the game feels smooth in dungeons but drops near crowded hubs, avoid crowded areas when testing combat, recording footage, or tuning settings.
+
+---
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do first in Farever?
+
+Claim your free mount if available, equip it from Collections, check map completion, fill nearby Codeex entries, unlock obelisks, upgrade weapon skills, and avoid discarding old gear before you reach the recycler.
+
+### What is the best beginner class in Farever?
+
+Cleric/Priest is the safest early solo pick because it has self-healing. Rogue is better if you like fast movement, dodging, Shadow Step-style mobility, and control. Warrior is better if you want a direct melee route with heavier damage pressure. Mage is better if you want ranged magic and scepter-based skill swaps.
+
+### How many classes are in Farever?
+
+Farever currently starts with four classes: Warrior, Rogue, Mage, and Cleric/Priest.
+
+### What is the level cap in Farever Early Access?
+
+The current Early Access cap is level 20.
+
+### How do you level in Farever?
+
+Use map completion, Codeex milestones, nearby activities, chests, bosses, and dungeons. Codeex entries can reward early milestones such as 4 kills and 8 kills, while some counters continue toward 20.
+
+### What is the Codeex in Farever?
+
+The Codeex tracks discoveries and monster entries. If a monster shows a counter like 2/8, finish that entry before leaving the area unless you have a better route.
+
+### Does Farever have a normal quest log?
+
+Not in the usual MMO way. You should read NPC text, open the map, follow gray question marks, unlock obelisks, and use Codeex/map completion to guide your route.
+
+### How do weapon skills work in Farever?
+
+Weapons can provide active skills, and switching weapons can change your kit. One-handed weapons may give fewer skills, while larger weapons can give a bigger active/passive package. Because Farever has 25+ weapons and 100+ skills, weapon testing matters before final build rankings.
+
+### What is the Arsenal slot in Farever?
+
+The Arsenal slot lets you equip an extra weapon and use one of its skills as an additional tool. Hold Control and left-click the Arsenal weapon if you want to choose a different skill from it.
+
+### How do runes work in Farever?
+
+Runes unlock extra bonuses for class skills. Right-click the rune in your inventory first, then choose the unlocked bonus on the relevant skill screen.
+
+### Should I upgrade low-level weapons?
+
+Do not spend too many materials on low-level weapon enhancement unless the weapon effect is worth keeping. Early weapon skill upgrades are usually more important than tiny stat gains on a weapon you may replace soon.
+
+### How do you get a mount in Farever?
+
+Open the shop, claim the free reward if available, then equip the mount from Collections. If your mount key does nothing, the mount may not be equipped yet.
+
+### Can you use a mount in dungeons?
+
+The first dungeon disables mount use. Use gliding, jumping, grapple points, and dungeon movement tools instead.
+
+### How many orbs are in the first dungeon?
+
+The first dungeon has 5 orbs. If you leave with fewer, check side paths, vertical routes, grapple points, or early platforms.
+
+### How do you get more inventory space in Farever?
+
+Buy small pouches from the guild merchant and place them into your inventory bag slots. Each small pouch adds 6 slots. Use the bank for materials, runes, manuals, recipes, and gear you do not need immediately.
+
+### What should I do with old gear in Farever?
+
+Do not discard old gear once you can reach the village hub. Use the Spark Recycler to turn junk gear into useful crafting or upgrade materials.
+
+### What are lost packages for in Farever?
+
+Right-click lost packages to turn them into completed packages, then hand them to the guild merchant for 100 gold.
+
+### What is the best first profession in Farever?
+
+Alchemist is the safest early recommendation because it lets you craft minor healing potions. It is especially useful for Rogue, Mage, or any weapon setup without reliable self-healing.
+
+### How do you fast travel in Farever?
+
+Unlock obelisks in each area. Obelisks reveal the zone, set respawn points, and let you travel automatically to other unlocked obelisks.
+
+### Can you swim in Farever?
+
+There is no normal swimming. You walk underwater, watch the blue breath bar, and take damage if it runs out. You can still double jump underwater.
+
+### Is Farever free to play?
+
+No. Farever is buy-to-play.
+
+### Is Farever pay to win?
+
+Right now, the shop items you run into are cosmetics such as mounts, pets, gliders, and appearance items. There is no buy-power item in the early route.
+
+### Does Farever have PvP?
+
+PvP is planned later, but the current early flow is mainly PvE-focused.
+
+### Can you play Farever solo?
+
+You can handle much of the early game solo, but Farever is still online. You will see other players and can group for content.
+
+### How do you play with friends in Farever?
+
+Use Steam friend invites or invite nearby players through the party menu. Randomly meeting in the same instance may be unreliable.
+
+### Does Farever have guilds?
+
+A full guild system is not available yet. Friend list, guilds, auction house, and player trading are planned later.
+
+### Why does Farever keep disconnecting?
+
+Check region status, restart after patches, update through Steam, and avoid starting dungeons during unstable windows. If all regions are down, there is no local fix.
+
+### Why is Farever stuttering or dropping FPS?
+
+Open-world areas with more nearby players may run worse than dungeons or quiet areas. Test fullscreen vs borderless, disable overlays, cap FPS externally, and update after performance patches.
+
+### Which Farever guide should I read next?
+
+Start with <Link href="/farever/beginner-guide">Beginner Guide</Link>, then read <Link href="/farever/codeex-leveling-guide">Codeex and Leveling Guide</Link>, <Link href="/farever/classes-guide">Classes Guide</Link>, and <Link href="/farever/weapon-skills-guide">Weapon Skills Guide</Link>.

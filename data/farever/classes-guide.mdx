@@ -1,0 +1,543 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const classOverviewColumns = [
+  { key: "Class", label: "Class" },
+  { key: "PickIf", label: "Pick This If..." },
+  { key: "EarlyEvidence", label: "Early Skill / Weapon Evidence" },
+  { key: "SoloCoopNote", label: "Solo / Co-op Note" },
+];
+
+export const classOverviewRows = [
+  {
+    Class: "Cleric / Priest",
+    PickIf:
+      "You want the safest first character and a forgiving solo route.",
+    EarlyEvidence:
+      "Judgment releases a prayer-based nova and can heal. Later Cleric/Priest class skills include ally buffs, healing totems, and Judgment-focused cooldown value.",
+    SoloCoopNote:
+      "Best solo safety and naturally useful in co-op because healing and support stay valuable even when your damage is not optimized.",
+  },
+  {
+    Class: "Rogue",
+    PickIf:
+      "You want mobility, dodging, control, and a faster action-combat feel.",
+    EarlyEvidence:
+      "Shadow Step teleports behind the target and stuns for 2 seconds. Bow also appears as a Rogue-friendly ranged option.",
+    SoloCoopNote:
+      "Fast and fun solo, but less forgiving. Easier in co-op when another player helps with pressure or healing.",
+  },
+  {
+    Class: "Warrior",
+    PickIf:
+      "You want direct melee pressure and a simple close-range route.",
+    EarlyEvidence:
+      "Double axes can unlock Berserk Attack and Smash Attack. These are weapon-skill examples, not confirmed Warrior class skills.",
+    SoloCoopNote:
+      "Straightforward solo if you like melee. In co-op, Warrior becomes easier to play when others help with healing, control, or ranged pressure.",
+  },
+  {
+    Class: "Mage",
+    PickIf:
+      "You want ranged magic and spell packages shaped by magic weapons.",
+    EarlyEvidence:
+      "Fire scepter swaps the kit into fire abilities, while another scepter can add healing and magic damage.",
+    SoloCoopNote:
+      "Safer when you can play at range, but weapon choice matters heavily. In co-op, Mage benefits from staying back while others hold pressure.",
+  },
+];
+
+export const technicalSkillColumns = [
+  { key: "ClassOrSetup", label: "Class / Setup" },
+  { key: "SkillOrSystem", label: "Skill / System" },
+  { key: "ConfirmedDetail", label: "Confirmed Detail" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const technicalSkillRows = [
+  {
+    ClassOrSetup: "Rogue",
+    SkillOrSystem: "Shadow Step",
+    ConfirmedDetail:
+      "Teleports behind the target and stuns for 2 seconds.",
+    WhyItMatters:
+      "This is the strongest confirmed Rogue identity signal: mobility plus short control.",
+  },
+  {
+    ClassOrSetup: "Cleric / Priest",
+    SkillOrSystem: "Judgment",
+    ConfirmedDetail:
+      "Releases a prayer-based nova and can heal.",
+    WhyItMatters:
+      "This explains why Cleric/Priest is the safest beginner class rather than just saying it has self-healing.",
+  },
+  {
+    ClassOrSetup: "Cleric / Priest",
+    SkillOrSystem: "Later class skill path",
+    ConfirmedDetail:
+      "Later class skills include ally buffing, healing totems, and a holy state that can grant 50% cooldown reduction to Judgment.",
+    WhyItMatters:
+      "Cleric/Priest has support scaling beyond the first heal button.",
+  },
+  {
+    ClassOrSetup: "Warrior / double axes",
+    SkillOrSystem: "Berserk Attack + Smash Attack",
+    ConfirmedDetail:
+      "Double axes can unlock Berserk Attack and Smash Attack.",
+    WhyItMatters:
+      "This gives Warrior a concrete melee weapon identity without claiming these are Warrior class skills.",
+  },
+  {
+    ClassOrSetup: "Mage-style scepter",
+    SkillOrSystem: "Fire scepter",
+    ConfirmedDetail:
+      "Switching to a fire scepter changes the kit into fire abilities.",
+    WhyItMatters:
+      "Mage-style play is weapon-shaped; the magic weapon matters as much as the class label.",
+  },
+  {
+    ClassOrSetup: "Mage-style scepter",
+    SkillOrSystem: "Healing / magic scepter",
+    ConfirmedDetail:
+      "Another scepter can add healing abilities along with magic damage.",
+    WhyItMatters:
+      "Mage-style builds can lean safer or more supportive depending on the scepter.",
+  },
+  {
+    ClassOrSetup: "Rune system",
+    SkillOrSystem: "Class skill bonuses",
+    ConfirmedDetail:
+      "Runes unlock extra bonuses for class skills after being right-clicked and selected on the skill screen.",
+    WhyItMatters:
+      "Class identity changes again once rune bonuses are available.",
+  },
+];
+
+export const weaponAccessColumns = [
+  { key: "Class", label: "Class" },
+  { key: "EarlyWeaponExamples", label: "Early Weapon Examples" },
+  { key: "WhatThisMeans", label: "What This Means" },
+];
+
+export const weaponAccessRows = [
+  {
+    Class: "Cleric / Priest",
+    EarlyWeaponExamples:
+      "Healing scepter, magic/priest weapons, throwing star-style ranged option, sword-and-shield style setup",
+    WhatThisMeans:
+      "Cleric/Priest can lean into healing, support, defensive solo play, or a more paladin-like setup depending on the weapon.",
+  },
+  {
+    Class: "Rogue",
+    EarlyWeaponExamples:
+      "Rusty knives / daggers, bow, Rogue-compatible gear, some Warrior/Rogue melee drops",
+    WhatThisMeans:
+      "Rogue can stay melee and mobile, or move into bow play for safer ranged damage.",
+  },
+  {
+    Class: "Warrior",
+    EarlyWeaponExamples:
+      "One-handed sword, Warrior-only swords, axes / double axes, Warrior/Rogue melee gear",
+    WhatThisMeans:
+      "Warrior is the most direct melee class, and axe-style weapons make its AoE pressure clearer.",
+  },
+  {
+    Class: "Mage",
+    EarlyWeaponExamples:
+      "Fire scepter, magic scepter, Mage/Priest weapons, staff-style magic weapons",
+    WhatThisMeans:
+      "Mage depends heavily on magic weapon choice. Scepter swaps can change the spell package more than the class label suggests.",
+  },
+];
+
+export const statColumns = [
+  { key: "StatOrTerm", label: "Stat / Term" },
+  { key: "WhatItAffects", label: "What It Affects" },
+  { key: "WhoCares", label: "Who Cares Early" },
+];
+
+export const statRows = [
+  {
+    StatOrTerm: "Strength",
+    WhatItAffects:
+      "Physical damage scaling for some skills and melee setups.",
+    WhoCares:
+      "Warrior and physical melee builds care most.",
+  },
+  {
+    StatOrTerm: "Dexterity",
+    WhatItAffects:
+      "Damage scaling for dex-based skills and some Rogue-style setups.",
+    WhoCares:
+      "Rogue, bow, and light weapon setups care most.",
+  },
+  {
+    StatOrTerm: "Faith",
+    WhatItAffects:
+      "Damage, healing, and shielding value for faith-based skills.",
+    WhoCares:
+      "Cleric/Priest and healing/support weapons care most.",
+  },
+  {
+    StatOrTerm: "Intellect",
+    WhatItAffects:
+      "Magic skill value and magic-damage setups.",
+    WhoCares:
+      "Mage-style scepter and staff users care most.",
+  },
+  {
+    StatOrTerm: "Vitality",
+    WhatItAffects:
+      "Maximum health.",
+    WhoCares:
+      "Every beginner benefits, especially Rogue and Mage while learning.",
+  },
+  {
+    StatOrTerm: "Block amount",
+    WhatItAffects:
+      "How much damage you block.",
+    WhoCares:
+      "Defensive melee, Cleric/Priest, Warrior, and shield users.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "WhyItHurts", label: "Why It Hurts" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Judging a class by the starter weapon",
+    WhyItHurts:
+      "The starter weapon may not show what the class can actually do.",
+    Fix:
+      "Try at least one different weapon before rerolling.",
+  },
+  {
+    Mistake: "Calling Warrior or Mage bad before testing weapons",
+    WhyItHurts:
+      "Warrior and Mage-style builds depend heavily on weapon skills such as axes or scepters.",
+    Fix:
+      "Check weapon drops and skill bar changes before deciding.",
+  },
+  {
+    Mistake: "Picking Rogue and trying to tank everything",
+    WhyItHurts:
+      "Rogue is less forgiving if you ignore dodge, movement, and control.",
+    Fix:
+      "Use mobility, Shadow Step-style repositioning, potions, and ranged options when available.",
+  },
+  {
+    Mistake: "Picking Cleric/Priest and ignoring weapon choices",
+    WhyItHurts:
+      "Healing helps, but weapons still define much of your active combat kit.",
+    Fix:
+      "Try healing, defensive, and magic weapons before assuming Cleric/Priest is only a healer.",
+  },
+  {
+    Mistake: "Following a tier list too early",
+    WhyItHurts:
+      "Early Access balance and weapon access can change quickly.",
+    Fix:
+      "Pick the class that fits how you want to learn the first 10-20 levels.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best beginner class in Farever is Cleric/Priest if you want the safest solo start, Rogue if you want fast movement and control, Warrior if you want direct melee pressure, and Mage if you want ranged magic shaped by scepter weapon swaps.**
+
+The important rule is that Farever is not only class-based:
+
+1. Your class gives you class skills.
+2. Your weapon gives a large part of your active skill bar.
+3. Runes can modify class skills.
+4. Arsenal can add one skill from another weapon later.
+5. A class can feel very different after a weapon swap.
+
+For a first character, pick comfort over meta. Cleric/Priest is safest, Rogue is fastest, Warrior is simplest for melee pressure, and Mage is best if you want magic weapon play.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-class-selection.webp"
+    alt="Farever class selection screen showing Cleric, Mage, Rogue, and Warrior."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Farever currently starts with four playable classes, but your weapon will change a large part of how that class actually plays.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="best-starting-class">
+  Best starting class
+</h2>
+
+For most new players, **Cleric/Priest** is the safest starting class because self-healing makes early mistakes easier to recover from. If you are learning Farever’s block, dodge, Codeex routing, and first dungeon movement, that extra safety matters.
+
+The other three classes are not bad; they simply ask for different habits. Rogue rewards movement and control, Warrior rewards direct melee pressure, and Mage depends heavily on magic weapon packages.
+
+<GuideTable
+  caption="Farever class picks, early skill evidence, and solo/co-op value."
+  columns={classOverviewColumns}
+  rows={classOverviewRows}
+/>
+
+---
+
+<h2 id="current-and-planned-classes">
+  Current and planned classes
+</h2>
+
+Farever currently has **four playable starting classes**:
+
+- Cleric / Priest
+- Rogue
+- Warrior
+- Mage
+
+**Monk** and **Druid** are planned for later updates, but they are not part of the current starting class choice. Treat them as roadmap classes, not classes you can build around right now.
+
+<GuideCallout title="Current class choice">
+Pick from the four playable classes first. Monk and Druid are worth watching, but they should not affect your first-character decision until they are actually added.
+</GuideCallout>
+
+---
+
+<h2 id="cleric-priest">
+  Cleric / Priest
+</h2>
+
+Cleric/Priest is the safest first pick because its early kit can recover from mistakes. The important confirmed skill is **Judgment**: it releases a prayer-based nova and can heal.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-cleric-judgment-skills.webp"
+    alt="Farever Cleric or Priest skill screen with Judgment name, heal effect, and skill description marked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Judgment is the key early Cleric/Priest example because it gives the class a forgiving recovery tool while you learn enemy timing.
+  </figcaption>
+</figure>
+
+Pick Cleric/Priest when you want safety first. It is the best starting point for players still learning block timing, dodge timing, Codeex pulls, and first dungeon mistakes.
+
+---
+
+<h2 id="rogue">
+  Rogue
+</h2>
+
+Rogue is the mobility and control pick. Its strongest confirmed early skill is **Shadow Step**, which teleports behind the target and stuns for **2 seconds**.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-rogue-shadow-step.webp"
+    alt="Farever Rogue Shadow Step skill with teleport text, 2 second stun, and skill tooltip marked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shadow Step gives Rogue its clearest early identity: quick target access, repositioning, and a short 2-second stun window.
+  </figcaption>
+</figure>
+
+Pick Rogue when you want fast movement and active positioning. It is less forgiving than Cleric/Priest, so potions, bow access, or Arsenal safety tools matter more.
+
+---
+
+<h2 id="warrior">
+  Warrior
+</h2>
+
+Warrior is the direct melee pick. The current strongest concrete example is not a class skill list yet, but a weapon-skill setup: **double axes** can unlock **Berserk Attack** and **Smash Attack**.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-warrior-axes-berserk-smash.webp"
+    alt="Farever double axes skill screen with Berserk Attack and Smash Attack marked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Berserk Attack and Smash Attack show why Warrior feels more complete once heavier melee weapon skills open up.
+  </figcaption>
+</figure>
+
+Pick Warrior when you want simple close-range pressure. Do not judge Warrior only from the first few minutes; heavier weapon skills are what make the class feel clearer.
+
+---
+
+<h2 id="mage">
+  Mage
+</h2>
+
+Mage is the ranged magic pick, but Mage-style play depends heavily on the magic weapon. A **fire scepter** gives fire abilities, while another scepter can add healing and magic damage.
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-fire-scepter-skills.webp"
+    alt="Farever fire scepter and magic scepter skill packages with fire ability and healing tooltips marked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scepter choice shapes Mage-style play: one magic weapon can push you into fire abilities, while another can add healing and magic damage.
+  </figcaption>
+</figure>
+
+Pick Mage when you want ranged magic and are comfortable letting weapon drops shape your spell package.
+
+---
+
+<h2 id="technical-skill-notes">
+  Technical skill notes
+</h2>
+
+This table keeps confirmed skill details separate from general class advice. That matters because some named abilities are class skills, while others come from weapons, runes, or weapon packages.
+
+<GuideTable
+  caption="Confirmed Farever class, weapon, and rune skill details."
+  columns={technicalSkillColumns}
+  rows={technicalSkillRows}
+/>
+
+---
+
+<h2 id="weapons-by-class">
+  Early weapons by class
+</h2>
+
+This is not a complete weapon matrix. It is an early access guide to weapon access examples that appear in the available footage and UI.
+
+<GuideTable
+  caption="Early Farever weapon examples by class."
+  columns={weaponAccessColumns}
+  rows={weaponAccessRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-class-weapon-requirement.webp"
+    alt="Farever item tooltip showing class restrictions and weapon requirements."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Always check class and level requirements before building around a weapon drop.
+  </figcaption>
+</figure>
+
+The main takeaway: **your class starts the build, but your weapon shapes the build**. If a class feels weak, try a different weapon before rerolling.
+
+---
+
+<h2 id="stats-to-watch">
+  Stats to watch
+</h2>
+
+You do not need a full stat spreadsheet on day one, but you should understand which stat words match which class or weapon direction.
+
+<GuideTable
+  caption="Early Farever stats and who cares about them."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+Do not equip an item only because the number is higher. Check whether the stat matches your class, weapon, and skill package.
+
+---
+
+<h2 id="common-mistakes">
+  Common class choice mistakes
+</h2>
+
+<GuideTable
+  caption="Common Farever class choice mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best beginner class in Farever?
+
+Cleric/Priest is the safest beginner class because Judgment can heal and the class gives you more room to recover from mistakes.
+
+### How many classes are in Farever?
+
+Farever currently has four playable starting classes: Cleric/Priest, Rogue, Warrior, and Mage.
+
+### Are Monk and Druid in Farever?
+
+Not yet. Monk and Druid are planned for later updates, but they are not current starting classes.
+
+### Is Rogue good for beginners?
+
+Rogue is good if you like mobility and control. Shadow Step teleports behind the target and stuns for 2 seconds, but Rogue is less forgiving than Cleric/Priest.
+
+### Is Warrior good in Farever?
+
+Warrior is good if you want direct melee pressure. Its early identity becomes clearer once weapon skills such as Berserk Attack and Smash Attack appear on axe setups.
+
+### Is Mage good in Farever?
+
+Mage is good if you want ranged magic. The key is the weapon: fire scepter gives fire abilities, while another scepter can add healing and magic damage.
+
+### What does Cleric/Priest do?
+
+Cleric/Priest is the safest support-style class. Judgment is the key early example because it releases a prayer-based nova and can heal.
+
+### What does Rogue do?
+
+Rogue focuses on mobility, control, and positioning. Read the Rogue section above for Shadow Step and bow notes.
+
+### What weapons can Rogue use?
+
+Early examples show Rogue using dagger-style weapons and bow. Bow is the clearest ranged option tied to Rogue so far.
+
+### What weapons can Warrior use?
+
+Early examples point Warrior toward swords and axes. Axe-style setups can unlock Berserk Attack and Smash Attack.
+
+### What weapons can Mage use?
+
+Mage-style builds lean on magic weapons such as scepters. A fire scepter changes the skill package into fire abilities.
+
+### What weapons can Cleric/Priest use?
+
+Cleric/Priest can use healing or magic weapons, and some setups can push it toward a defensive or paladin-style route. Always check the weapon tooltip.
+
+### Should I pick a class based on a tier list?
+
+Not yet. Farever builds depend on class, weapon, runes, and Arsenal together. Pick the class that fits how you want to learn the game first.
+
+### Which class is best for solo play?
+
+Cleric/Priest is the safest solo pick. Rogue is faster but squishier, Warrior is direct melee, and Mage is ranged but weapon-dependent.
+
+### Which class is best for co-op?
+
+Cleric/Priest is the easiest co-op recommendation because healing and support are always useful. Rogue, Warrior, and Mage all become easier to play when another player helps with pressure or control.

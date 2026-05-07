@@ -111,6 +111,8 @@ const allGameGuides = [
   { title: 'Magical Princess', href: '/magical-princess/endings-guide' },
 
   { title: 'Librarian: Tidy Up the Arcane Library!', href: '/librarian' },
+
+  { title: 'Farever', href: '/farever' },
 ];
 
 const exploreCards = [

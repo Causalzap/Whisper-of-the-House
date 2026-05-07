@@ -61,6 +61,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/gamble-with-your-friends`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/magical-princess/endings-guide`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/librarian`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/farever`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+
+     // ⬇️ 把 4 篇文章补上
+     { url: `${base}/farever/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/farever/classes-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/farever/codeex-leveling-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/farever/mount-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/farever/weapon-skills-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/librarian/achievements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

@@ -1,0 +1,807 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+
+export const skillSourceColumns = [
+  { key: "Source", label: "Skill Source" },
+  { key: "WhatItDoes", label: "What It Does" },
+  { key: "BeginnerTip", label: "Beginner Tip" },
+];
+
+export const skillSourceRows = [
+  {
+    Source: "Class skills",
+    WhatItDoes:
+      "Skills unlocked by your class as you level, such as Rogue mobility or Cleric/Priest support tools.",
+    BeginnerTip:
+      "Do not judge class strength only by these. Your weapon can change a large part of the active kit.",
+  },
+  {
+    Source: "Weapon skills",
+    WhatItDoes:
+      "Skills granted by your equipped weapon. This is where much of your active combat flow comes from.",
+    BeginnerTip:
+      "Check your skill bar after every weapon swap. If the bar changes, that is normal.",
+  },
+  {
+    Source: "Weapon skill ranks",
+    WhatItDoes:
+      "Skill upgrades unlocked through XP, shown by a green blinking plus on the skill screen.",
+    BeginnerTip:
+      "Spend these early. A rank upgrade can matter more than a tiny stat bump on a low-level weapon.",
+  },
+  {
+    Source: "Runes",
+    WhatItDoes:
+      "Bonuses that unlock extra effects for class skills.",
+    BeginnerTip:
+      "Right-click the rune in your inventory first, then choose the bonus on the skill screen.",
+  },
+  {
+    Source: "Arsenal weapon",
+    WhatItDoes:
+      "A secondary weapon slot that lets you use one skill from another weapon.",
+    BeginnerTip:
+      "Use it for a heal, shield, cooldown tool, or extra damage option that your main weapon lacks.",
+  },
+  {
+  Source: "Weapon enhancement",
+  WhatItDoes:
+    "A station-based upgrade for the weapon itself.",
+  BeginnerTip:
+    "Treat this separately from skill ranks; the enhancement section below explains when it is worth doing.",
+},
+];
+
+export const weaponAccessColumns = [
+  { key: "Class", label: "Class" },
+  { key: "EarlyWeaponExamples", label: "Early Weapon Examples" },
+  { key: "WhatThisMeans", label: "What This Means" },
+];
+
+export const weaponAccessRows = [
+  {
+    Class: "Rogue",
+    EarlyWeaponExamples:
+      "Daggers / knives, bow, some Rogue-compatible gear drops",
+    WhatThisMeans:
+      "Rogue is not locked into melee. Bow is the clearest early ranged option tied to Rogue, while dagger-style play keeps the mobility/control feel.",
+  },
+  {
+    Class: "Warrior",
+    EarlyWeaponExamples:
+      "One-handed sword, axes / double axes, some Warrior-compatible melee gear",
+    WhatThisMeans:
+      "Warrior is the cleanest direct melee route. Axe-style weapons are where skills like Berserk Attack and Smash Attack make the class feel more defined.",
+  },
+  {
+    Class: "Mage",
+    EarlyWeaponExamples:
+      "Fire scepter, magic scepter, staff-style magic weapons",
+    WhatThisMeans:
+      "Mage-style play depends heavily on the magic weapon. A fire scepter can change the kit into fire abilities, while another scepter can add healing and magic damage.",
+  },
+  {
+    Class: "Cleric / Priest",
+    EarlyWeaponExamples:
+      "Healing scepter, sword-and-shield style setup, defensive or support weapons",
+    WhatThisMeans:
+      "Cleric/Priest is not only a backline healer. Weapon choice can push it toward healing, support, or safer paladin-style solo play.",
+  },
+];
+
+export const weaponExampleColumns = [
+  { key: "WeaponOrSetup", label: "Weapon / Setup" },
+  { key: "WhatChanges", label: "What Changes" },
+  { key: "BestUse", label: "Best Use" },
+];
+
+export const weaponExampleRows = [
+  {
+    WeaponOrSetup: "One-handed sword",
+    WhatChanges:
+      "A simple early example: one skill acts like a basic attack, while another is a cooldown skill.",
+    BestUse:
+      "Good for learning how weapon skills appear on your bar without overwhelming yourself.",
+  },
+  {
+    WeaponOrSetup: "Two-handed weapon",
+    WhatChanges:
+      "Can provide a larger package, such as three active skills and one passive.",
+    BestUse:
+      "Good when you want more of your combat identity to come from the weapon itself.",
+  },
+  {
+    WeaponOrSetup: "Fire scepter",
+    WhatChanges:
+      "Swapping into a fire scepter can give you fire abilities instead of your previous weapon kit.",
+    BestUse:
+      "Good for players who want ranged magic damage and a clearer spell identity.",
+  },
+  {
+    WeaponOrSetup: "Healing / magic scepter",
+    WhatChanges:
+      "Another scepter setup can add healing abilities along with magic damage.",
+    BestUse:
+      "Good if you want more safety, especially while leveling solo or learning bosses.",
+  },
+  {
+    WeaponOrSetup: "Double axes",
+    WhatChanges:
+      "Axe-style upgrades can feel more AoE-focused and can include skills such as Berserk Attack and Smash Attack.",
+    BestUse:
+      "Good for Warrior-style melee pressure or Arsenal setups that want an extra aggressive skill.",
+  },
+  {
+    WeaponOrSetup: "Bow",
+    WhatChanges:
+      "Bow is a Rogue-friendly ranged option in the available early examples.",
+    BestUse:
+      "Good if you like Rogue mobility but want more range than dagger-style play.",
+  },
+  {
+    WeaponOrSetup: "Sword and shield style setup",
+    WhatChanges:
+      "Can push a Cleric/Priest-style character toward a paladin or defensive direction.",
+    BestUse:
+      "Good if you want a safer solo route or a more defensive build idea.",
+  },
+  {
+    WeaponOrSetup: "Arsenal healing weapon",
+    WhatChanges:
+      "A secondary weapon can provide a heal, shield, or weapon-skill cooldown utility without being your main weapon.",
+    BestUse:
+      "Good for squishy classes or aggressive weapons that lack sustain.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "UpgradeType", label: "Upgrade Type" },
+  { key: "HowItWorks", label: "How It Works" },
+  { key: "BeginnerPriority", label: "Beginner Priority" },
+];
+
+export const upgradeRows = [
+  {
+    UpgradeType: "Weapon skill rank",
+    HowItWorks:
+      "When a weapon skill can be upgraded, the skill screen shows a green blinking plus. Click the skill and increase its rank.",
+    BeginnerPriority:
+      "High. This directly improves your active combat tools.",
+  },
+  {
+    UpgradeType: "Skill synergy",
+    HowItWorks:
+      "Some upgrades improve how skills interact, such as slowing enemies and then dealing more damage to slowed targets.",
+    BeginnerPriority:
+      "High if the synergy matches your current weapon kit.",
+  },
+  {
+  UpgradeType: "Weapon enhancement station",
+  HowItWorks:
+    "You can enhance the weapon itself at a station, but early upgrades may be small, such as +1 Faith or +1 Critical.",
+  BeginnerPriority:
+    "Low to medium. Do not burn rare materials on weapons you will replace soon.",
+},
+  {
+  UpgradeType: "Enhanced weapon effect",
+  HowItWorks:
+    "After enough enhancement, a weapon may gain an extra effect, such as a 5% chance to reduce weapon skill cooldowns.",
+  BeginnerPriority:
+    "Medium. Worth considering only if you plan to keep the weapon for a while.",
+},
+  {
+    UpgradeType: "Training manual / skill point item",
+    HowItWorks:
+      "Some items can give a weapon skill point or help with skill progression.",
+    BeginnerPriority:
+      "Medium. Store manuals in the bank if you are not ready to use them.",
+  },
+  {
+    UpgradeType: "Rune bonus",
+    HowItWorks:
+      "Runes unlock class skill bonuses, such as extra cooldown value, movement speed, or damage.",
+    BeginnerPriority:
+      "High once you have the right rune for a skill you actually use.",
+  },
+];
+
+export const rankChoiceColumns = [
+  { key: "SkillOrUpgrade", label: "Skill / Upgrade Example" },
+  { key: "WhatItDoes", label: "What It Does" },
+  { key: "HowToChoose", label: "How To Choose" },
+];
+
+export const rankChoiceRows = [
+  {
+    SkillOrUpgrade: "Stun-duration upgrade",
+    WhatItDoes:
+      "One early upgrade example increases stun duration to 1.5 seconds.",
+    HowToChoose:
+      "Better if you need safer control windows, especially on squishy melee or Rogue-style play.",
+  },
+  {
+    SkillOrUpgrade: "Next weapon skill damage bonus",
+    WhatItDoes:
+      "One upgrade example increases the damage of your next weapon skill by 50%.",
+    HowToChoose:
+      "Better if your weapon has a strong follow-up skill and you can reliably chain the combo.",
+  },
+  {
+    SkillOrUpgrade: "Sinister Strike",
+    WhatItDoes:
+      "An early skill example strikes with both weapons, deals physical damage, and can gain damage or penetration value.",
+    HowToChoose:
+      "Good if you are actually using that attack as part of your main damage loop.",
+  },
+  {
+    SkillOrUpgrade: "Slow into bonus damage",
+    WhatItDoes:
+      "Some skill upgrades create synergy, such as slowing enemies and then dealing more damage to slowed targets.",
+    HowToChoose:
+      "Pick this when your current weapon kit can apply the setup and consume the payoff consistently.",
+  },
+  {
+    SkillOrUpgrade: "Weapon enhancement effect",
+    WhatItDoes:
+      "A later enhancement example gives attacks a 5% chance to reduce weapon skill cooldowns.",
+    HowToChoose:
+      "Only chase this if the weapon is worth keeping. Do not burn materials just for tiny early stat gains.",
+  },
+];
+
+export const runeColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Action", label: "Action" },
+  { key: "Tip", label: "Tip" },
+];
+
+export const runeRows = [
+  {
+    Step: "1",
+    Action: "Get a rune from dungeon rewards, chests, or later activities.",
+    Tip:
+      "Do not sell or discard runes just because you cannot use them immediately.",
+  },
+  {
+    Step: "2",
+    Action: "Right-click the rune in your inventory.",
+    Tip:
+      "This consumes/unlocks the rune for the related skill bonus.",
+  },
+  {
+    Step: "3",
+    Action: "Open the relevant class skill screen.",
+    Tip:
+      "Runes are for class skill bonuses, not normal weapon skill ranks.",
+  },
+  {
+    Step: "4",
+    Action: "Select the unlocked bonus.",
+    Tip:
+      "Later, one active skill may have multiple bonus options, such as cooldown, movement speed, or damage.",
+  },
+  {
+    Step: "5",
+    Action: "Recheck your build after changing weapons.",
+    Tip:
+      "A rune bonus may be strong, but your current weapon kit still decides much of your active playstyle.",
+  },
+];
+
+export const arsenalColumns = [
+  { key: "Question", label: "Arsenal Question" },
+  { key: "Answer", label: "Answer" },
+];
+
+export const arsenalRows = [
+  {
+    Question: "What is Arsenal?",
+    Answer:
+      "Arsenal is a secondary weapon slot that lets you use one skill from another weapon.",
+  },
+  {
+    Question: "When should I use it?",
+    Answer:
+      "Use it when your main weapon lacks healing, shielding, burst, AoE, or cooldown utility.",
+  },
+  {
+    Question: "Can Arsenal add healing?",
+    Answer:
+      "Yes. One early example uses a healing weapon in Arsenal for extra heals and shielding.",
+  },
+  {
+    Question: "Can Arsenal add damage?",
+    Answer:
+      "Yes. An early dungeon example uses a Berserker-style skill from the Arsenal weapon.",
+  },
+  {
+    Question: "How do I change the Arsenal skill?",
+    Answer:
+      "Hold Control and left-click the Arsenal weapon, then choose a different skill from that weapon.",
+  },
+  {
+    Question: "Is Arsenal the same as the pet net?",
+    Answer:
+      "No. The pet net takes an active weapon slot and should only be used when you are not planning to fight.",
+  },
+];
+
+export const classExampleColumns = [
+  { key: "ClassOrSetup", label: "Class / Setup" },
+  { key: "ConfirmedExample", label: "Confirmed Example" },
+  { key: "Type", label: "Type" },
+  { key: "WhatItTellsYou", label: "What It Tells You" },
+];
+
+export const classExampleRows = [
+  {
+    ClassOrSetup: "Rogue",
+    ConfirmedExample:
+      "Shadow Step teleports behind the target and stuns for 2 seconds.",
+    Type: "Class-style mobility / control skill",
+    WhatItTellsYou:
+      "Rogue is not just damage. It leans into mobility, control, and positioning.",
+  },
+  {
+    ClassOrSetup: "Rogue / bow",
+    ConfirmedExample:
+      "Bow appears as a Rogue-friendly ranged weapon in early examples.",
+    Type: "Weapon access example",
+    WhatItTellsYou:
+      "Rogue does not have to stay locked into melee dagger-style play.",
+  },
+  {
+    ClassOrSetup: "Warrior / axes",
+    ConfirmedExample:
+      "Double axes can unlock Berserk Attack and Smash Attack.",
+    Type: "Weapon skill example",
+    WhatItTellsYou:
+      "Warrior-style play becomes clearer once heavier weapon skills open up.",
+  },
+  {
+    ClassOrSetup: "Cleric / Priest",
+    ConfirmedExample:
+      "Judgment can be enhanced by rune bonuses, including movement-speed style value in one example.",
+    Type: "Class skill + rune bonus example",
+    WhatItTellsYou:
+      "Cleric/Priest can be more than a basic healer when runes and weapons start changing the kit.",
+  },
+  {
+    ClassOrSetup: "Mage-style scepter",
+    ConfirmedExample:
+      "A fire scepter changes the kit into fire abilities, while another scepter can add healing and magic damage.",
+    Type: "Weapon skill package",
+    WhatItTellsYou:
+      "Mage-style builds depend heavily on which magic weapon you are using.",
+  },
+  {
+    ClassOrSetup: "Arsenal healing setup",
+    ConfirmedExample:
+      "A secondary weapon can provide a heal, shield, or weapon-skill cooldown utility.",
+    Type: "Arsenal utility example",
+    WhatItTellsYou:
+      "You can patch a build weakness without replacing your main weapon.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "WhyItHurts", label: "Why It Hurts" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Judging a class by the starter weapon",
+    WhyItHurts:
+      "The starter weapon may not show what the class can actually do with another weapon setup.",
+    Fix:
+      "Test at least one different weapon before deciding the class feels bad.",
+  },
+  {
+  Mistake: "Ignoring the green plus",
+  WhyItHurts:
+    "You skip an available skill rank.",
+  Fix:
+    "Open the skill screen and check the upgrade before the next hard fight.",
+},
+  {
+    Mistake: "Enhancing low-level weapons too aggressively",
+    WhyItHurts:
+      "Early enhancement stats can be tiny, and you may replace the weapon quickly.",
+    Fix:
+      "Prioritize skill ranks first. Save enhancement materials for weapons you plan to keep.",
+  },
+  {
+    Mistake: "Not using runes after getting them",
+    WhyItHurts:
+      "Your class skills miss free bonuses from dungeon or chest rewards.",
+    Fix:
+      "Right-click the rune, then pick the unlocked bonus on the relevant skill screen.",
+  },
+  {
+    Mistake: "Forgetting Arsenal",
+    WhyItHurts:
+      "You miss an extra heal, shield, cooldown tool, or damage skill from a backup weapon.",
+    Fix:
+      "Equip a useful spare weapon in Arsenal and choose the skill you want.",
+  },
+  {
+    Mistake: "Using the pet net before combat",
+    WhyItHurts:
+      "The net takes an active weapon slot, so you can accidentally weaken yourself before a fight.",
+    Fix:
+      "Use the net only when catching pets, not when you are about to fight.",
+  },
+  {
+    Mistake: "Assuming every weapon is for every class",
+    WhyItHurts:
+      "Some gear and weapons are class-restricted or level-gated.",
+    Fix:
+      "Check the class and level requirement before planning around a weapon drop.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Farever builds are not only class-based. A large part of your active kit comes from your weapon, and later your build also depends on skill ranks, runes, and the Arsenal slot.**
+
+The most important rules:
+
+1. Your class unlocks skills as you level, but **weapon skills make up a huge part of your combat kit**.
+2. A simple one-handed weapon may give a basic attack plus a cooldown skill.
+3. A two-handed weapon can give a larger package, such as **three active skills and one passive**.
+4. A **green blinking plus** means a skill rank upgrade is available.
+5. Early weapon enhancement stats can be small, so do not spend all materials on low-level weapons.
+6. **Runes** unlock class skill bonuses after you right-click them in your inventory.
+7. **Arsenal** lets you equip an extra weapon and use one of its skills.
+8. If a class feels weak, try another weapon before rerolling.
+
+Start with weapon skill ranks first, use runes when you get them, then use Arsenal to cover what your main weapon is missing.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-weapon-skill-upgrade.webp"
+    alt="Farever weapon skill screen showing weapon skills, a green upgrade plus, and skill rank choices."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The green plus is the first thing to check. If a weapon skill can rank up, upgrade it before pushing into harder fights.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-weapon-skills-work">
+  How weapon skills work
+</h2>
+
+Farever does something many new players miss: your class is only part of your build. A large part of your active combat kit comes from the weapon you equip.
+
+That means a new weapon can change:
+
+- your basic attack flow
+- your cooldown skills
+- your AoE pattern
+- your healing or shielding options
+- your passive effects
+- your support value
+- your safety while soloing
+
+<GuideTable
+  caption="Where your skills come from in Farever."
+  columns={skillSourceColumns}
+  rows={skillSourceRows}
+/>
+
+The most important habit is simple: **after every weapon swap, look at your skill bar before judging the class**. If your abilities changed, that is the system working.
+
+---
+
+<h2 id="weapon-examples">
+  Early weapon examples
+</h2>
+
+Weapon types matter because they can change both your active skills and the role your character feels like it is playing.
+
+<GuideTable
+  caption="Early Farever weapon examples and what they change."
+  columns={weaponExampleColumns}
+  rows={weaponExampleRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-fire-scepter-skills.webp"
+    alt="Farever fire scepter and magic scepter examples showing different weapon skill packages."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scepters are a good early example: one can push you into fire abilities, while another can add healing and magic damage.
+  </figcaption>
+</figure>
+
+Do not build your first opinion around the starting weapon. A class can feel slow, unsafe, or boring until a different weapon changes the kit.
+
+---
+
+<h2 id="weapon-access">
+  Early weapon access by class
+</h2>
+
+Not every weapon example should be treated as a full class weapon list yet. The safer way to read early gear is: check the class requirement, check the level requirement, then check whether the skill package actually fits your build.
+
+<GuideTable
+  caption="Early Farever weapon access examples by class."
+  columns={weaponAccessColumns}
+  rows={weaponAccessRows}
+/>
+
+The main takeaway is simple: **class choice starts the build, but weapon access shapes the build**. Rogue can move toward bow play, Warrior becomes clearer with heavier melee weapons, Mage-style setups depend on scepters, and Cleric/Priest can lean into healing, support, or defensive weapon setups.
+
+<h2 id="skill-ranks">
+  Skill ranks and the green plus
+</h2>
+
+When a weapon skill can be upgraded, the game shows a **green blinking plus**. Click the skill, read the upgrade, and spend the rank point if the upgrade fits your current route.
+
+Do not treat every upgrade as a blind damage button. Some upgrades improve control, some improve combo damage, and some only matter if your current weapon kit can trigger the synergy.
+
+<GuideTable
+  caption="Early Farever skill rank and upgrade examples."
+  columns={rankChoiceColumns}
+  rows={rankChoiceRows}
+/>
+
+<GuideCallout title="Beginner priority">
+Upgrade the weapon skills you are actively using before spending too many materials on low-level weapon enhancement.
+</GuideCallout>
+
+---
+
+<h2 id="weapon-enhancement">
+  Weapon enhancement vs skill upgrades
+</h2>
+
+Weapon enhancement is separate from weapon skill ranks. You can take a weapon to an enhancement station and improve the weapon itself, but early upgrades may be small.
+
+<GuideTable
+  caption="Farever weapon upgrade types and beginner priority."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-weapon-enhancement-station.webp"
+    alt="Farever weapon enhancement station showing small early stat upgrades and weapon effect progress."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early weapon enhancement can be minor. Save materials unless the weapon effect or skill package is worth keeping.
+  </figcaption>
+</figure>
+
+The clean rule is:
+
+- **skill rank upgrade** = usually worth checking immediately
+- **weapon enhancement** = only worth pushing if you plan to keep the weapon
+- **special weapon effect** = worth evaluating once it changes combat, such as cooldown reduction
+
+Do not confuse a small stat upgrade with a build-defining skill upgrade.
+
+---
+
+<h2 id="runes">
+  Runes and class skill bonuses
+</h2>
+
+Runes are not normal weapon ranks. They unlock extra bonuses for class skills. You can get runes from dungeon rewards and other chests as you progress.
+
+Use this order:
+
+<GuideTable
+  caption="How to use runes in Farever."
+  columns={runeColumns}
+  rows={runeRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-runes-skill-bonus.webp"
+    alt="Farever rune screen showing class skill bonuses such as cooldown, movement speed, and damage options."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Runes change class skills, not just weapon skills. Right-click the rune first, then choose the bonus on the skill screen.
+  </figcaption>
+</figure>
+
+A good rune can change how a familiar class skill feels. For example, a Judgment rune bonus can turn a skill into a movement-speed tool for a few seconds, which makes it useful even outside simple damage or healing.
+
+---
+
+<h2 id="arsenal">
+  Arsenal weapon slot
+</h2>
+
+The Arsenal slot is one of the easiest systems to miss. Once it becomes available, you can place a weapon there and use one of that weapon’s skills as an extra tool.
+
+<GuideTable
+  caption="Farever Arsenal basics."
+  columns={arsenalColumns}
+  rows={arsenalRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-arsenal-slot.webp"
+    alt="Farever Arsenal slot showing a secondary weapon skill used as an extra heal or utility tool."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Arsenal is where you fix gaps in your main weapon. Add a heal, shield, utility skill, or extra damage tool.
+  </figcaption>
+</figure>
+
+If the Arsenal weapon is not giving the skill you want, hold **Control** and left-click the Arsenal weapon to select another skill from that weapon.
+
+This matters because your main weapon does not need to solve every problem. A damage weapon can use Arsenal for safety. A defensive weapon can use Arsenal for burst. A mobile class can use Arsenal for healing or shielding.
+
+---
+
+<h2 id="class-examples">
+  Class and weapon examples
+</h2>
+
+The safest way to think about builds is **class + weapon + rune + Arsenal**, not class alone.
+
+<GuideTable
+  caption="Early class and weapon examples in Farever."
+  columns={classExampleColumns}
+  rows={classExampleRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/farever/farever-warrior-axes-berserk-smash.webp"
+    alt="Farever double axes showing Berserk Attack and Smash Attack weapon skills."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Warrior-style play becomes easier to judge once axe skills such as Berserk Attack and Smash Attack appear.
+  </figcaption>
+</figure>
+
+These examples are not a final tier list. They are early proof that the same class can feel very different when the weapon, rune, or Arsenal tool changes.
+
+---
+
+<h2 id="pet-net">
+  Pet net warning
+</h2>
+
+There is a pet net used for catching small pets in the world. Do not confuse it with Arsenal.
+
+The pet net:
+
+- is used for catching companions
+- is bought from the guild merchant
+- takes an active weapon slot
+- should not be equipped right before a fight
+- is not your normal Arsenal utility tool
+
+Use the net when you are exploring or collecting pets. Swap back to a real weapon before fighting.
+
+---
+
+<h2 id="build-priority">
+  Beginner build priority
+</h2>
+
+If you are not sure what to upgrade first, use this order:
+
+1. **Check your active weapon skills** after every weapon swap.
+2. **Spend green-plus skill rank upgrades** on skills you are actually using.
+3. **Use runes** that affect important class skills.
+4. **Equip an Arsenal weapon** that fixes a real weakness.
+5. **Save weapon enhancement materials** unless the weapon is worth keeping.
+6. **Only chase “best build” ideas** after you know which weapon package you like.
+
+A strong early build is not always the one with the highest weapon stat. It is the one where your active skills, cooldowns, rune bonuses, and Arsenal tool solve the fights you are actually doing.
+
+---
+
+<h2 id="common-mistakes">
+  Common weapon skill mistakes
+</h2>
+
+<GuideTable
+  caption="Common Farever weapon skill mistakes and how to fix them."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do weapon skills work in Farever?
+
+Weapons provide active skills, and switching weapons can change your skill bar. Your class has its own skills, but a large part of your active combat kit comes from your equipped weapon.
+
+### Do all weapons give the same number of skills?
+
+No. A simple one-handed weapon may give fewer skills, while a two-handed weapon can give a larger package such as multiple active skills plus a passive.
+
+### What does the green plus mean on a skill?
+
+A green blinking plus means that skill can be upgraded. Open the skill screen, click the skill, and spend the rank point if the upgrade fits your current weapon kit.
+
+### Should I upgrade weapon skills or the weapon itself first?
+
+Upgrade active weapon skills first. Early weapon enhancement can give small stat gains, while skill ranks directly improve the buttons you are pressing in combat.
+
+### Should I enhance low-level weapons?
+
+Only if you plan to keep the weapon or the effect is strong. Early station upgrades can be minor, so save materials for weapons you will actually use.
+
+### What is Arsenal in Farever?
+
+Arsenal is a secondary weapon slot that lets you use one skill from another weapon. It is useful for adding healing, shielding, utility, or extra damage.
+
+### How do I change my Arsenal skill?
+
+Hold **Control** and left-click the Arsenal weapon, then select the skill you want from that weapon.
+
+### How do runes work?
+
+Runes unlock class skill bonuses. Right-click the rune in your inventory first, then choose the unlocked bonus on the related skill screen.
+
+### Are runes for weapon skills or class skills?
+
+Runes are mainly for class skill bonuses. Weapon skills are upgraded separately through skill ranks.
+
+### What is a good early Arsenal choice?
+
+Use Arsenal to cover your weakness. If your main weapon has damage but no safety, add a healing or shield tool. If your main weapon is safe but slow, add a burst or AoE tool.
+
+### Can Rogue use a bow?
+
+Bow appears as a Rogue-friendly ranged option in early examples. Use it if you like Rogue mobility but want more range than dagger-style play.
+
+### What are Berserk Attack and Smash Attack?
+
+They are early axe-style skills seen with a Warrior-style double-axe setup. They make the weapon feel more direct and AoE-focused.
+
+### Is Shadow Step a weapon skill?
+
+Shadow Step is a Rogue-style mobility/control skill that teleports behind the target and stuns. It is a good example of why class skills and weapon skills both matter.
+
+### What weapons can Rogue use in Farever?
+
+Early examples show Rogue using dagger-style weapons and bow. Bow is the clearest ranged option tied to Rogue so far.
+
+### What weapons can Mage use in Farever?
+
+Mage-style builds lean heavily on magic weapons such as scepters. A fire scepter can swap you into fire abilities, while another scepter can add healing and magic damage.
