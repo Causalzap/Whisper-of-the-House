@@ -13,6 +13,49 @@ export type LatestUpdateItem = {
   
   export const latestUpdates: LatestUpdateItem[] = [
 
+    // ===== Everything Is Crab =====
+{
+  href: "/everything-is-crab",
+  game: "Everything Is Crab",
+  title: "Complete Beginner Guide",
+  description:
+    "Core mechanics, first-clear route, Cheek Pouch, Trunk scaling, Carcinisation, biomes, genetics, bosses, and what to do after your first clear.",
+  tagClass: "text-orange-500",
+  hoverBorderClass: "hover:border-orange-300",
+  hoverTitleClass: "group-hover:text-orange-700",
+},
+{
+  href: "/everything-is-crab/best-builds",
+  game: "Everything Is Crab",
+  title: "Best Builds Guide",
+  description:
+    "Best first-clear builds, Trunk Hybrid, Body Slam Tank, Big Physical, Spines Reflect, Social Pack, evolution timing, and pivot rules.",
+  tagClass: "text-orange-500",
+  hoverBorderClass: "hover:border-orange-300",
+  hoverTitleClass: "group-hover:text-orange-700",
+},
+{
+  href: "/everything-is-crab/boss-guide",
+  game: "Everything Is Crab",
+  title: "Boss Guide",
+  description:
+    "How to beat Crabaroo, Aquaconda, Clawdia, Shellephant, Crabtaur, Crab Kin, Cataclysm, Final Challenge, and boss-ready builds.",
+  tagClass: "text-orange-500",
+  hoverBorderClass: "hover:border-orange-300",
+  hoverTitleClass: "group-hover:text-orange-700",
+},
+{
+  href: "/everything-is-crab/progression-guide",
+  game: "Everything Is Crab",
+  title: "Progression Guide",
+  description:
+    "Pressure levels, genetics, Codex checks, unlock tracking, Endless Mode preparation, milestone order, and what to test after each run.",
+  tagClass: "text-orange-500",
+  hoverBorderClass: "hover:border-orange-300",
+  hoverTitleClass: "group-hover:text-orange-700",
+},
+
+
       // ===== Road to Vostok =====
   {
     href: "/road-to-vostok/area-05-guide",

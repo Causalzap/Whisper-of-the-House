@@ -1,0 +1,975 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const bossOrderColumns = [
+  { key: "fight", label: "Boss Fight" },
+  { key: "howItWorks", label: "How It Works" },
+  { key: "playerFocus", label: "What To Focus On" },
+];
+
+export const bossOrderRows = [
+  {
+    fight: "Boss 1",
+    howItWorks:
+      "Usually the first real check of your movement, early damage, and food tempo. The boss can be selected from the early boss pool.",
+    playerFocus:
+      "Do not enter underleveled. Have one attack, one movement answer, and enough HP or defense to survive mistakes.",
+  },
+  {
+    fight: "Boss 2",
+    howItWorks:
+      "The second boss is another build check and can punish runs that survived the first fight only through luck.",
+    playerFocus:
+      "Convert your early food and stats into a real build before this fight. Do not stay in random-upgrade mode.",
+  },
+  {
+    fight: "Late boss check",
+    howItWorks:
+      "Later boss fights are less forgiving because biome pressure, enemy pressure, and build weaknesses start stacking.",
+    playerFocus:
+      "Bring sustained damage, movement, defense, and a clean arena. Do not rely only on burst damage.",
+  },
+  {
+    fight: "Final boss",
+    howItWorks:
+      "The final boss is commonly searched as Crab Kin, Crabin, Krabken, or simply the Everything Is Crab final boss.",
+    playerFocus:
+      "Prepare for Cataclysm, meteorites, arena chaos, and any extra danger from Carcinisation.",
+  },
+];
+
+export const bossIndexColumns = [
+  { key: "boss", label: "Boss" },
+  { key: "mainThreat", label: "Main Threat" },
+  { key: "bestAnswer", label: "Best Answer" },
+  { key: "watchOutFor", label: "Watch Out For" },
+];
+
+export const bossIndexRows = [
+  {
+    boss: "Crabaroo / Krabaroo",
+    mainThreat:
+      "Fast movement, awkward spacing, and punishing terrain if you are too slow.",
+    bestAnswer:
+      "Keep medium distance, move diagonally, and punish after it commits to movement.",
+    watchOutFor:
+      "Trying to damage race while stuck in snow, water, obstacles, or enemy clutter.",
+  },
+  {
+    boss: "Aquaconda",
+    mainThreat:
+      "Arena-wide shallow water, movement loss, and bad food routes.",
+    bestAnswer:
+      "Bring movement, wings, terrain adaptation, or enough damage to avoid a long flooded-arena fight.",
+    watchOutFor:
+      "Building as if water is only a small local terrain problem.",
+  },
+  {
+    boss: "Clawdia",
+    mainThreat:
+      "Large claw arcs and dangerous mid-range trades.",
+    bestAnswer:
+      "Bait the swing, leave the front arc, then punish from the side or back.",
+    watchOutFor:
+      "Standing at the exact range where the claw arc catches you repeatedly.",
+  },
+  {
+    boss: "Shellephant",
+    mainThreat:
+      "Charge pressure, wide body control, and punishing close-range patterns.",
+    bestAnswer:
+      "Keep open lanes, sidestep charges, and attack after the boss finishes a committed move.",
+    watchOutFor:
+      "Getting pinned against terrain or attacking during the wrong part of the charge cycle.",
+  },
+  {
+    boss: "Crabtaur",
+    mainThreat:
+      "Rushdown pressure, close-range body contact, and charge collision windows.",
+    bestAnswer:
+      "Guide the charge into a tree or boss arena boundary, then punish the stun or recovery window.",
+    watchOutFor:
+      "Backing straight away and missing the chance to turn terrain into a punish tool.",
+  },
+  {
+    boss: "Crab Kin / Krabken",
+    mainThreat:
+      "Final boss pressure, Cataclysm, meteorites, arena chaos, and Carcinisation risk.",
+    bestAnswer:
+      "Arrive with movement, HP or defense, reliable damage, recovery, and a plan to survive Cataclysm.",
+    watchOutFor:
+      "Tunneling on the boss health bar while meteorites and arena danger stack up.",
+  },
+];
+
+export const preBossTimingColumns = [
+  { key: "timing", label: "Timing" },
+  { key: "priority", label: "Priority" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const preBossTimingRows = [
+  {
+    timing: "Early run",
+    priority: "Choose one boss-ready damage plan.",
+    whatToDo:
+      "Pick a main attack and support the stats it actually uses. Do not split into five weak attacks.",
+  },
+  {
+    timing: "Before the boss timer gets urgent",
+    priority: "Fix movement and terrain.",
+    whatToDo:
+      "Take speed, legs, wings, terrain adaptation, or dodge if the current biome or boss arena feels bad.",
+  },
+  {
+    timing: "Last few upgrades before the boss",
+    priority: "Take practical value, not future greed.",
+    whatToDo:
+      "If you are fragile, take HP or defense. If you cannot hit the boss, upgrade damage. If you are slow, take movement.",
+  },
+  {
+    timing: "Right before spawn",
+    priority: "Choose the arena when possible.",
+    whatToDo:
+      "Move out of snow, tight spaces, night pressure, heavy enemy clutter, or bad water positions. Against Aquaconda, prepare for the arena itself to become water.",
+  },
+  {
+    timing: "After the boss",
+    priority: "Use the fight as a build check.",
+    whatToDo:
+      "If the last boss took too long, fix damage, scaling, cooldown, uptime, or safe attack range before the next boss instead of only adding more defense.",
+  },
+];
+
+export const crabarooColumns = [
+  { key: "problem", label: "Crabaroo Problem" },
+  { key: "whyItKills", label: "Why It Kills Runs" },
+  { key: "answer", label: "Player Answer" },
+];
+
+export const crabarooRows = [
+  {
+    problem: "You cannot keep distance",
+    whyItKills:
+      "Crabaroo punishes slow builds that let the fight become a close-range scramble.",
+    answer:
+      "Take movement before the fight and move diagonally instead of backing straight away.",
+  },
+  {
+    problem: "Terrain slows you down",
+    whyItKills:
+      "Snow, water, obstacles, and clutter make dodging harder than the boss pattern itself.",
+    answer:
+      "Reposition before the boss spawns. Fight in open ground whenever the timer allows.",
+  },
+  {
+    problem: "Your slow attack gets punished",
+    whyItKills:
+      "Trunk, Body Slam, and big physical attacks can leave you exposed if you swing at the wrong time.",
+    answer:
+      "Attack after Crabaroo commits to movement. Do not swing just because it is nearby.",
+  },
+  {
+    problem: "You chase the final hit",
+    whyItKills:
+      "Low boss HP makes players overcommit and eat unnecessary contact damage.",
+    answer:
+      "Wait for one clean opening. The last hit is only safe if your escape path is clear.",
+  },
+];
+
+export const aquacondaColumns = [
+  { key: "problem", label: "Aquaconda Problem" },
+  { key: "whyItKills", label: "Why It Kills Runs" },
+  { key: "answer", label: "Player Answer" },
+];
+
+export const aquacondaRows = [
+  {
+    problem: "You built no terrain answer",
+    whyItKills:
+      "Once the arena is flooded, slow builds lose spacing, dodge timing, and safe food routes.",
+    answer:
+      "Bring wings, terrain adaptation, speed, dash tools, or enough damage to shorten the fight.",
+  },
+  {
+    problem: "You are too slow to reposition",
+    whyItKills:
+      "Slow builds lose safe damage windows and get forced into bad paths once movement becomes the main problem.",
+    answer:
+      "Take movement before the boss timer ends. Do not rely only on damage.",
+  },
+  {
+    problem: "The fight lasts too long",
+    whyItKills:
+      "Long water fights expose weak sustain, bad movement, and underbuilt damage.",
+    answer:
+      "Use sustained damage, wide attacks, or boss-safe ranged / reach tools.",
+  },
+  {
+    problem: "Food pulls you into danger",
+    whyItKills:
+      "Trying to recover across flooded terrain can be more dangerous than staying low for a few seconds.",
+    answer:
+      "Recover only when the route is safe. Do not cross the arena for one food pickup.",
+  },
+];
+
+export const clawdiaColumns = [
+  { key: "problem", label: "Clawdia Problem" },
+  { key: "whyItKills", label: "Why It Kills Runs" },
+  { key: "answer", label: "Player Answer" },
+];
+
+export const clawdiaRows = [
+  {
+    problem: "You stand in the claw arc",
+    whyItKills:
+      "Clawdia punishes players who stay in front or hover at mid-range.",
+    answer:
+      "Bait the swing, move outside the arc, then punish from the side or behind.",
+  },
+  {
+    problem: "You try to trade hits",
+    whyItKills:
+      "Repeated claw hits drain HP faster than most early builds can recover.",
+    answer:
+      "Use movement and short damage windows. Do not facetank unless your build is a real tank.",
+  },
+  {
+    problem: "Your build has no reach",
+    whyItKills:
+      "Short-range builds must enter dangerous space to deal damage.",
+    answer:
+      "Use attack area, size, Trunk reach, or safer timing before committing.",
+  },
+  {
+    problem: "You panic after the first hit",
+    whyItKills:
+      "Running in a straight line can keep you inside the next attack angle.",
+    answer:
+      "Move diagonally, reset spacing, and wait for the next safe punish window.",
+  },
+];
+
+export const shellephantColumns = [
+  { key: "problem", label: "Shellephant Problem" },
+  { key: "whyItKills", label: "Why It Kills Runs" },
+  { key: "answer", label: "Player Answer" },
+];
+
+export const shellephantRows = [
+  {
+    problem: "You get hit by charges",
+    whyItKills:
+      "Shellephant can punish straight-line movement and bad terrain with heavy pressure.",
+    answer:
+      "Keep open lanes and sidestep instead of running directly away.",
+  },
+  {
+    problem: "You fight near obstacles",
+    whyItKills:
+      "A charge is much harder to dodge if terrain blocks your escape.",
+    answer:
+      "Move to open ground before the boss spawns when possible.",
+  },
+  {
+    problem: "You attack during the danger window",
+    whyItKills:
+      "Slow or contact attacks can get punished if you swing while the boss is still active.",
+    answer:
+      "Punish after a committed move, not during the approach.",
+  },
+  {
+    problem: "You rely only on burst",
+    whyItKills:
+      "If the boss does not die quickly, the fight becomes a movement and endurance check.",
+    answer:
+      "Bring sustained damage, HP, defense, and recovery instead of pure burst.",
+  },
+];
+
+export const crabtaurColumns = [
+  { key: "problem", label: "Crabtaur Problem" },
+  { key: "whyItKills", label: "Why It Kills Runs" },
+  { key: "answer", label: "Player Answer" },
+];
+
+export const crabtaurRows = [
+  {
+    problem: "You only run away",
+    whyItKills:
+      "Crabtaur-style rushdown pressure can chase you into bad terrain if you retreat in a straight line.",
+    answer:
+      "Move diagonally and guide the charge toward a tree or boss arena boundary when possible.",
+  },
+  {
+    problem: "You miss the stun window",
+    whyItKills:
+      "If Crabtaur collides with terrain and you keep running, you lose one of the safest damage windows in the fight.",
+    answer:
+      "Punish during the stun or recovery window, then reset spacing before the next charge.",
+  },
+  {
+    problem: "You let it stay close",
+    whyItKills:
+      "Close-range pressure makes food, slow attacks, and rerolls dangerous.",
+    answer:
+      "Keep medium spacing and clear normal enemies so you have room to move.",
+  },
+  {
+    problem: "You have no defensive layer",
+    whyItKills:
+      "Rushdown bosses punish one-mistake fragile builds.",
+    answer:
+      "Bring HP, Shell, Plating, regeneration, or damage resistance before the fight.",
+  },
+];
+
+export const finalBossColumns = [
+  { key: "problem", label: "Final Boss Problem" },
+  { key: "whyItKills", label: "Why It Kills Runs" },
+  { key: "answer", label: "Player Answer" },
+];
+
+export const finalBossRows = [
+  {
+    problem: "Cataclysm starts",
+    whyItKills:
+      "Meteorites and boss attacks split your attention and punish stationary damage.",
+    answer:
+      "Keep moving, watch the arena, and attack only when the escape path is clear.",
+  },
+  {
+    problem: "You enter with low HP",
+    whyItKills:
+      "The final boss gives fewer safe chances to recover than normal waves.",
+    answer:
+      "Recover before the fight, and do not enter after taking unnecessary greed.",
+  },
+  {
+    problem: "Carcinisation added too much danger",
+    whyItKills:
+      "Extra boss danger can stack with Cataclysm and final boss pressure.",
+    answer:
+      "Use fewer crab points unless your build is clearly ahead.",
+  },
+  {
+    problem: "Your build only has damage",
+    whyItKills:
+      "Damage does not help if you cannot survive long enough to use it.",
+    answer:
+      "Arrive with movement, HP or defense, recovery, and reliable damage.",
+  },
+  {
+    problem: "You tunnel on the boss health bar",
+    whyItKills:
+      "Players often die trying to force the last few hits while the arena is unsafe.",
+    answer:
+      "Treat the last 10% like the most dangerous part of the fight.",
+  },
+];
+
+export const bossBuildColumns = [
+  { key: "boss", label: "Boss / Build Problem" },
+  { key: "strongBuilds", label: "Strong Builds" },
+  { key: "why", label: "Why They Work" },
+  { key: "badPlan", label: "Bad Plan" },
+];
+
+export const bossBuildRows = [
+  {
+    boss: "Crabaroo / Krabaroo",
+    strongBuilds:
+      "Trunk Hybrid with movement, Big Physical with speed, Body Slam Tank with HP",
+    why:
+      "These builds can punish movement windows while still surviving mistakes.",
+    badPlan:
+      "Slow damage with no speed, no HP, and no clean arena.",
+  },
+  {
+    boss: "Aquaconda",
+    strongBuilds:
+      "Trunk with feeding distance, Big Physical with movement, builds with wings or terrain adaptation",
+    why:
+      "Aquaconda can flood the arena, so movement and reach become more valuable than greed.",
+    badPlan:
+      "Short-range slow builds with no answer to shallow-water movement.",
+  },
+  {
+    boss: "Clawdia",
+    strongBuilds:
+      "Reach builds, Trunk, attack-area builds, tank builds with real defense",
+    why:
+      "You want to punish outside the claw arc instead of trading in front.",
+    badPlan:
+      "Fragile close-range builds with no timing discipline.",
+  },
+  {
+    boss: "Shellephant",
+    strongBuilds:
+      "Movement-heavy builds, Body Slam Tank, Big Physical with open space",
+    why:
+      "You need to survive charges and punish after committed movement.",
+    badPlan:
+      "Slow builds trapped near obstacles or terrain.",
+  },
+  {
+    boss: "Crabtaur",
+    strongBuilds:
+      "Medium-range builds, movement builds, tank builds with recovery",
+    why:
+      "You can control spacing, guide charges into trees or arena boundaries, and punish the stun or recovery window.",
+    badPlan:
+      "Backing straight away and ignoring collision-stun opportunities.",
+  },
+  {
+    boss: "Social / Follower Build",
+    strongBuilds:
+      "Follower-heavy Social builds with movement, self-defense, and one backup personal damage tool",
+    why:
+      "Followers can split pressure, distract enemies, and create safer spacing while you stay out of direct boss patterns.",
+    badPlan:
+      "Expecting followers to kill bosses alone while you stand still, skip defense, or enter with no personal boss damage.",
+  },
+  {
+    boss: "Crab Kin / Krabken",
+    strongBuilds:
+      "Body Slam Tank, Trunk Hybrid with defense, Big Physical with movement, Spines / Reflect with sustain",
+    why:
+      "The final boss requires a complete build: damage, movement, defense, recovery, and Cataclysm survival.",
+    badPlan:
+      "Glass cannon damage with no movement or recovery.",
+  },
+];
+
+export const prepTimingColumns = [
+  { key: "timing", label: "Fight Moment" },
+  { key: "danger", label: "Main Danger" },
+  { key: "answer", label: "Player Answer" },
+];
+
+export const prepTimingRows = [
+  {
+    timing: "Opening seconds",
+    danger:
+      "You panic and try to damage race before reading the pattern.",
+    answer:
+      "Watch the first movement, keep space, and attack only when your exit path is clear. If the boss health barely moves after 20–30 seconds, treat the run as under-DPS and fix damage, scaling, cooldown, or uptime before the next boss.",
+  },
+  {
+    timing: "Mid-fight",
+    danger:
+      "Normal enemies, biome effects, and poor spacing start stacking.",
+    answer:
+      "Clear space, keep circling, and avoid getting pushed into obstacles.",
+  },
+  {
+    timing: "Low boss HP",
+    danger: "You overcommit for the last hit.",
+    answer:
+      "Stay safe until the kill is free. Low boss HP is not permission to throw the run.",
+  },
+  {
+    timing: "After the boss",
+    danger:
+      "You survive the boss but die while eating, choosing upgrades, or moving into the next biome.",
+    answer:
+      "Recover first, clear nearby threats, then plan the next section.",
+  },
+];
+
+export const bossMistakeColumns = [
+  { key: "mistake", label: "Boss Mistake" },
+  { key: "whyItKillsRuns", label: "Why It Kills Runs" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const bossMistakeRows = [
+  {
+    mistake: "Entering the fight too slow",
+    whyItKillsRuns:
+      "If you cannot create space, even simple boss patterns become dangerous.",
+    betterPlay:
+      "Take speed, dash, dodge, wings, terrain adaptation, or a safer arena before the boss arrives.",
+  },
+  {
+    mistake: "Fighting in bad terrain",
+    whyItKillsRuns:
+      "Water, snow, night, heat, tight paths, and obstacles can be worse than the boss itself.",
+    betterPlay:
+      "Move toward safer ground before the boss timer finishes. Against Aquaconda, remember that the arena can become water even if you started on dry ground.",
+  },
+  {
+    mistake: "Having no main attack",
+    whyItKillsRuns:
+      "Bosses expose builds that have random stats but no real damage plan.",
+    betterPlay:
+      "Choose one attack and support it with the stats, size, cooldown, or defense it needs.",
+  },
+  {
+    mistake: "Greeding Carcinisation before a boss",
+    whyItKillsRuns:
+      "The extra danger can arrive before the better food pays off.",
+    betterPlay:
+      "Take crab points only when your build is already ready for the next fight.",
+  },
+  {
+    mistake: "Relying only on burst",
+    whyItKillsRuns:
+      "Boss protection, terrain, and final boss chaos can punish burst-only builds.",
+    betterPlay:
+      "Add sustained damage, movement, HP, and defensive layers.",
+  },
+  {
+    mistake: "Ignoring boss-specific mechanics",
+    whyItKillsRuns:
+      "Some bosses have exploitable behavior, like Crabtaur charge collisions or Aquaconda's arena-wide water pressure.",
+    betterPlay:
+      "Use the mechanic instead of only applying generic movement rules.",
+  },
+  {
+    mistake: "Ignoring post-boss recovery",
+    whyItKillsRuns:
+      "Surviving the boss at low HP can still lead to death immediately after.",
+    betterPlay:
+      "Keep food access, regeneration, movement, or safe routing ready after the fight.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Bosses in Everything Is Crab punish incomplete builds and players who ignore boss-specific mechanics. Before every boss, you need one reliable attack, enough movement to dodge, enough HP or defense to survive mistakes, and a plan for the arena.**
+
+Early bosses can be random, so do not build for only one pattern. Learn the boss pool: **Crabaroo / Krabaroo**, **Aquaconda**, **Clawdia**, **Shellephant**, and **Crabtaur** all punish different weaknesses.
+
+The two most important mechanic checks are simple: **Aquaconda can turn the arena into shallow water**, and **Crabtaur can be stunned if its charge hits a tree or the boss arena boundary**.
+
+For the final boss, searched as **Crab Kin**, **Crabin**, or **Krabken**, bring a complete build: **damage, movement, defense, recovery, and Cataclysm awareness**.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-boss-guide-final-boss-crab-kin.webp"
+    alt="Player reaching the Crab Kin final boss and preparing for Cataclysm during an Everything Is Crab run."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Boss fights are where your build gets checked. Damage matters, but movement, terrain, defense, recovery, and boss-specific mechanics decide whether you survive long enough to use that damage.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-boss-fights-work">
+  How boss fights work in Everything Is Crab
+</h2>
+
+A normal clear is built around a sequence of boss checks. The early fights can roll from a boss pool, so two runs may not give you the same boss order.
+
+That means the best boss strategy is not memorizing one exact fight. It is building a creature that can answer several boss types:
+
+- a movement boss,
+- a terrain boss,
+- a wide-arc boss,
+- a charge boss,
+- a rushdown boss,
+- and the final boss.
+
+<GuideTable
+  caption="Boss fight structure in Everything Is Crab."
+  columns={bossOrderColumns}
+  rows={bossOrderRows}
+/>
+
+<GuideTable
+  caption="Boss pool and quick answers."
+  columns={bossIndexColumns}
+  rows={bossIndexRows}
+/>
+
+<GuideCallout title="Boss rule">
+Do not enter boss fights with only damage. A boss-ready build needs damage, movement, defense, enough food progress to avoid being underleveled, and awareness of the boss mechanic you are about to face.
+</GuideCallout>
+
+Use <Link href="/everything-is-crab/best-builds">Best Builds</Link> if your boss problem starts before the fight because your build has no clear direction.
+
+<AdUnit placement="article_after_first_h2" />
+
+---
+
+<h2 id="boss-prep">
+  What to do before a boss spawns
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-boss-guide-first-boss-prep.webp"
+    alt="Player preparing for the first boss while checking regeneration, ability damage, and rerolls in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The boss fight starts before the boss appears. Your last few upgrade choices often decide whether the fight is safe.
+  </figcaption>
+</figure>
+
+When the boss timer is close, your priorities change. Stop chasing future synergy and fix the problem that matters in the next fight.
+
+A good pre-boss route is:
+
+**safe food → one attack → movement → HP or defense → better arena → only then greed**
+
+<GuideTable
+  caption="Boss preparation timing."
+  columns={preBossTimingColumns}
+  rows={preBossTimingRows}
+/>
+
+<GuideCallout title="DPS check">
+Use the first 20–30 seconds of a boss fight as feedback for your next decisions. If the boss health bar barely moved, the answer is usually not more patience. Before the next boss, fix your main attack, scaling stat, cooldown, uptime, or safe attack range.
+</GuideCallout>
+
+---
+
+<h2 id="crabaroo">
+  How to beat Crabaroo / Krabaroo
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-boss-guide-crabaroo-snow-fight.webp"
+    alt="Player fighting Crabaroo in the snow and trying to avoid getting pinned down during an Everything Is Crab boss fight."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Crabaroo is a movement and spacing check. The fight becomes much harder if terrain slows you down.
+  </figcaption>
+</figure>
+
+Crabaroo, also searched as **Krabaroo**, punishes slow early builds. The fight is easiest when you keep medium spacing, move diagonally, and attack after it commits.
+
+<GuideCallout title="Mechanic tip">
+There is no special stun setup you need to force here. The real mechanic is terrain pressure: snow, water, trees, tight paths, and enemy clutter make the same movement pattern much harder to dodge.
+</GuideCallout>
+
+<GuideTable
+  caption="Crabaroo problems and fixes."
+  columns={crabarooColumns}
+  rows={crabarooRows}
+/>
+
+---
+
+<h2 id="aquaconda">
+  How to beat Aquaconda
+</h2>
+
+Aquaconda can turn the whole boss arena into shallow water. This is the core mechanic of the fight: water is not just a local obstacle, and the fight is not only difficult because you happened to spawn near a bad biome.
+
+<GuideCallout title="Mechanic tip">
+Build as if the arena itself will become part of the boss. Movement, terrain adaptation, wings, dash tools, and shorter kill time all become defensive tools here.
+</GuideCallout>
+
+<GuideTable
+  caption="Aquaconda problems and fixes."
+  columns={aquacondaColumns}
+  rows={aquacondaRows}
+/>
+
+---
+
+<h2 id="clawdia">
+  How to beat Clawdia
+</h2>
+
+Clawdia punishes players who stand in front of the boss or hover at the wrong mid-range distance. You want to bait the claw arc, leave the danger zone, then punish from a safer angle.
+
+<GuideCallout title="Mechanic tip">
+Think of the unsafe zone as a cone or arc in front of the boss, not just the boss body. If your attack is short-range, wait for the swing to finish before stepping in.
+</GuideCallout>
+
+<GuideTable
+  caption="Clawdia problems and fixes."
+  columns={clawdiaColumns}
+  rows={clawdiaRows}
+/>
+
+---
+
+<h2 id="shellephant">
+  How to beat Shellephant
+</h2>
+
+Shellephant is a charge and space-control fight. It is much easier in open ground and much harder if you get pinned against terrain.
+
+<GuideCallout title="Mechanic tip">
+Do not only watch the boss. Watch your sidestep lane. Trees, rocks, biome edges, normal enemies, and food greed can all remove the lane you needed to dodge the charge.
+</GuideCallout>
+
+<GuideTable
+  caption="Shellephant problems and fixes."
+  columns={shellephantColumns}
+  rows={shellephantRows}
+/>
+
+---
+
+<h2 id="crabtaur">
+  How to beat Crabtaur
+</h2>
+
+Crabtaur is a spacing and collision-mechanic check. If you only back straight away, it can chase you into bad terrain and turn the fight into a panic run.
+
+<GuideCallout title="Mechanic tip">
+Crabtaur can be stunned when its charge collides with a tree or the boss arena boundary. Use diagonal movement to guide the charge into terrain, then attack during the stun or recovery window.
+</GuideCallout>
+
+<GuideTable
+  caption="Crabtaur problems and fixes."
+  columns={crabtaurColumns}
+  rows={crabtaurRows}
+/>
+
+---
+
+<h2 id="best-boss-builds">
+  Best builds for each boss
+</h2>
+
+This table is not a general build ranking. It replaces the repeated upgrade lists that could appear under every boss: use the individual boss sections for fight mechanics, and use this table for build planning.
+
+<GuideTable
+  caption="Best builds by boss."
+  columns={bossBuildColumns}
+  rows={bossBuildRows}
+/>
+
+Social builds deserve their own boss rule: followers help you survive the fight, but they should not be your only damage source. Use them to split pressure and keep the boss busy while you stay at medium range, keep moving, and use a reliable personal attack during safe windows.
+
+Use <Link href="/everything-is-crab/best-builds">Best Builds</Link> for full evolution timelines and pivot rules.
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="final-boss">
+  How to beat the final boss: Crab Kin / Krabken
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-boss-guide-final-boss-silhouette.webp"
+    alt="Player spotting the final boss silhouette after several bosses in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The final boss is where the run stops being only about your current damage number. You need a complete build.
+  </figcaption>
+</figure>
+
+The final boss is commonly searched as **Crab Kin**, **Crabin**, **Krabken**, or simply the **Everything Is Crab final boss**. This guide uses those names for the same final-boss search intent.
+
+To beat the final boss, arrive with reliable damage, movement speed, enough HP or damage resistance, recovery or safe food access, safe attack timing, and controlled Carcinisation risk.
+
+<GuideCallout title="Mechanic tip">
+Cataclysm turns the fight into an arena-awareness check. Once meteorites and boss pressure overlap, every attack window needs an exit path.
+</GuideCallout>
+
+<GuideTable
+  caption="Final boss problems and fixes."
+  columns={finalBossColumns}
+  rows={finalBossRows}
+/>
+
+The safest final boss plan is:
+
+1. enter with full or near-full HP,
+2. avoid new greed right before the fight,
+3. keep moving when Cataclysm begins,
+4. attack only during safe windows,
+5. do not chase food into danger,
+6. finish the boss when the arena is safe enough.
+
+During Cataclysm, your priorities are simple: keep moving, watch meteorite danger, keep an exit path open, skip unsafe food routes, and take only short damage windows. The final boss becomes less about perfect uptime and more about surviving the arena long enough to finish the fight.
+
+<GuideCallout title="Cataclysm rule">
+When meteorites start falling, survival comes first. You can only finish the boss if you are still alive after the arena becomes chaotic.
+</GuideCallout>
+
+---
+
+<h2 id="carcinisation-and-final-boss">
+  Carcinisation and boss risk
+</h2>
+
+Carcinisation is a boss-risk decision, not only a food-reward decision.
+
+Better food can help you scale, but extra danger becomes much more serious when a boss is about to spawn or when the final boss is next. For the full mechanic, use the <Link href="/everything-is-crab#carcinisation">Carcinisation section in the main guide</Link>.
+
+Boss-specific rule:
+
+**if your build is not ready for the next boss right now, do not add more danger just for better food.**
+
+---
+
+<h2 id="pressure-boss-modifiers">
+  Pressure boss modifiers
+</h2>
+
+Higher Pressure can change boss fights, especially when bosses gain protection, deal more damage, or overlap with harder environmental pressure.
+
+For the full Pressure path, use <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link>. On this page, the boss-specific answer is simple:
+
+**Pressure bosses reward sustained damage, movement, HP, defense, and patience. Burst-only builds become less reliable.**
+
+---
+
+<h2 id="final-challenge-multiple-bosses">
+  Final Challenge and multiple bosses
+</h2>
+
+Final Challenge and multi-boss fights are not just normal boss fights with more health bars. If Shellephant is active with other bosses, its charge can remove your dodge lane while another boss attacks from a different angle. Do not assume bosses will solve the fight for you by hitting each other; plan as if every active boss is still your problem.
+
+<GuideCallout title="Final Challenge note">
+This section should become a full matchup table once you have more confirmed data, including which boss pairs are most dangerous, which boss should be killed first, and which combinations create unavoidable-looking movement traps.
+</GuideCallout>
+
+---
+
+<h2 id="boss-fight-flow">
+  Boss fight flow
+</h2>
+
+<GuideTable
+  caption="How to think through each boss fight."
+  columns={prepTimingColumns}
+  rows={prepTimingRows}
+/>
+
+Bosses become much easier when you treat the fight as a rhythm:
+
+**move → bait → punish → recover → reposition → repeat**
+
+The best boss players are not always the players with the highest damage. They are the players who know when not to attack.
+
+---
+
+<h2 id="common-mistakes">
+  Common boss mistakes
+</h2>
+
+<GuideTable
+  caption="Common boss mistakes in Everything Is Crab."
+  columns={bossMistakeColumns}
+  rows={bossMistakeRows}
+/>
+
+The most common boss mistake is blaming the boss when the real problem started two minutes earlier.
+
+If you enter the fight slow, underleveled, fragile, and in bad terrain, the boss will feel unfair. Fixing boss fights usually means fixing the run before the fight starts.
+
+---
+
+<h2 id="next-steps">
+  What to read next
+</h2>
+
+If bosses are killing you because your build has no damage plan, read <Link href="/everything-is-crab/best-builds">Best Builds</Link>.
+
+If bosses are killing you because you are underleveled or confused about unlocks, read <Link href="/everything-is-crab/progression-guide">Progression Guide</Link>.
+
+If bosses are killing you because Pressure modifiers are changing the fight, read <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link>.
+
+If you are trying to complete boss-specific unlocks or challenge goals, read <Link href="/everything-is-crab/achievements-challenges-guide">Achievements and Challenges Guide</Link>.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do you beat bosses in Everything Is Crab?
+
+Enter with one reliable attack, movement speed, enough HP or defense, and a plan for the boss mechanic. Bosses punish incomplete builds, bad terrain, and players who ignore boss-specific mechanics.
+
+### How many boss fights are in a run?
+
+A clear is structured around multiple boss checks, with early bosses selected from a boss pool and a final boss at the end. Because early bosses can vary, two runs may not show the same boss order.
+
+### Which bosses can appear in Everything Is Crab?
+
+Players commonly search for Crabaroo / Krabaroo, Aquaconda, Clawdia, Shellephant, Crabtaur, and the final boss Crab Kin / Krabken.
+
+### How do you beat Crabaroo?
+
+Keep medium distance, avoid bad terrain, move diagonally, and punish after it commits to movement. Crabaroo punishes slow builds that get pinned down by snow, water, obstacles, or enemy clutter.
+
+### Why is Aquaconda so hard compared to other bosses?
+
+Aquaconda is hard because it exposes every movement weakness at once. The problem is not a small patch of bad terrain; the arena can become shallow water, so slow builds lose spacing, safe food routes, and dodge timing at the same time.
+
+### How do you beat Clawdia?
+
+Do not stand in front of the claw arc. Bait the swing, move outside the danger zone, and punish from a safer angle.
+
+### How do you beat Shellephant?
+
+Keep open lanes, sidestep charges, and attack after committed movement. Do not fight Shellephant near obstacles if you can move away first.
+
+### What is the final boss called?
+
+Players search for the final boss as Crab Kin, Crabin, Krabken, or simply the Everything Is Crab final boss. This guide covers that final boss under Crab Kin / Krabken.
+
+### How do you beat Crab Kin / Krabken?
+
+Arrive with reliable damage, movement, HP or defense, recovery, and a plan for Cataclysm. Do not tunnel on damage when meteorites and arena chaos begin.
+
+### What is the Cataclysm event?
+
+Cataclysm is a final boss event where meteorites and arena danger make movement more important than greed. Watch the arena, not only the boss.
+
+### Does Carcinisation make bosses harder?
+
+Carcinisation can improve food value, but it also adds danger. Treat it as a boss-risk decision, especially before the final boss.
+
+### What is the best build for bosses?
+
+The safest boss builds are Trunk Hybrid with movement, Body Slam Tank, Big Physical with speed, Spines / Reflect with sustain, and Social builds with backup personal boss damage.
+
+### Are Social builds good against bosses?
+
+Social builds can be strong against bosses because followers split pressure and create space, but you still need backup personal damage. Treat followers as pressure control, not as a full replacement for your own boss-killing plan.
+
+### Is Trunk good against bosses?
+
+Trunk can be good because it has reach and wide swings, but it needs movement, spacing, and balanced Physical / Ability support.
+
+### Is Body Slam good against bosses?
+
+Body Slam is good when you already have HP, Mass, Plating, Shell, or Revenge. Do not force it on a fragile build.
+
+### How do I know if my boss DPS is too low?
+
+Use the first 20–30 seconds as a quick check. If the boss health bar barely moves, your main attack, scaling stat, cooldown, or uptime is probably too weak. Do not assume you can always win by dragging the fight longer.
+
+### Should I fight bosses in any biome?
+
+No. If the timer allows, move toward safer terrain before the boss spawns. Bad terrain can make a manageable boss much harder, and some bosses add their own arena pressure.
+
+### What changes at higher Pressure?
+
+Higher Pressure makes boss fights less forgiving. Boss protection, higher damage, environmental pressure, and final boss chaos make movement and sustained damage more important.

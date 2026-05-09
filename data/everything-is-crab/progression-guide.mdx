@@ -1,0 +1,911 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const progressionLoopColumns = [
+  { key: "layer", label: "Progression Layer" },
+  { key: "whatChanges", label: "What Changes" },
+  { key: "whatToCheck", label: "What To Check After The Run" },
+];
+
+export const progressionLoopRows = [
+  {
+    layer: "Inside a run",
+    whatChanges:
+      "You gain food progress, choose evolutions, spend mutagen, take or skip Carcinisation, fight bosses, and shape one creature.",
+    whatToCheck:
+      "Which evolution carried the run, where the build failed, and whether food, movement, boss prep, or sustain was the weak point.",
+  },
+  {
+    layer: "After a clear",
+    whatChanges:
+      "New Pressure levels, genetics, Codex entries, evolutions, cosmetics, or challenge goals can become available.",
+    whatToCheck:
+      "Open the Codex before starting again. Read new genetics and decide which route is worth testing next.",
+  },
+  {
+    layer: "After a death",
+    whatChanges:
+      "You may keep discoveries and Codex progress even after a failed run, depending on what was discovered or unlocked.",
+    whatToCheck:
+      "Check the Codex, then identify the failure point: food, damage, movement, sustain, boss timing, biome, or greed.",
+  },
+  {
+    layer: "After Pressure progression",
+    whatChanges:
+      "The next Pressure level can add harsher rules, biome starts, boss modifiers, or environmental pressure.",
+    whatToCheck:
+      "Read the new modifier, then decide whether your current build route still works.",
+  },
+  {
+    layer: "After unlock farming",
+    whatChanges:
+      "Specific goals such as poison damage, reflect damage, boss conditions, or Carcinisation milestones can add new tools.",
+    whatToCheck:
+      "Check whether the new tool changes your next build or only adds a new optional route.",
+  },
+];
+
+export const milestoneColumns = [
+  { key: "milestone", label: "Milestone" },
+  { key: "whatChanges", label: "What Changes" },
+  { key: "nextStep", label: "What To Do Next" },
+];
+
+export const milestoneRows = [
+  {
+    milestone: "1.0 progression",
+    whatChanges:
+      "Pressure goes beyond the demo cap and reaches Pressure 20.",
+    nextStep:
+      "Treat Pressure 20 as a late progression target, not something to rush with an unstable build.",
+  },
+  {
+    milestone: "Pressure 6",
+    whatChanges:
+      "Adds random biome starts.",
+    nextStep:
+      "Adapt your opening to the biome instead of forcing the same first picks every run.",
+  },
+  {
+    milestone: "Clearing Pressure 6",
+    whatChanges:
+      "Unlocks Pressure 7.",
+    nextStep:
+      "Prepare for stronger boss and environment pressure before pushing the next run.",
+  },
+  {
+    milestone: "Pressure 7",
+    whatChanges:
+      "Bosses are protected at the start of the fight and after each enragement; environmental damage is increased.",
+    nextStep:
+      "Build for longer boss fights. Do not rely only on burst damage.",
+  },
+  {
+    milestone: "Stinger unlock route",
+    whatChanges:
+      "Stinger is tied to dealing over 200 poison damage in a single run.",
+    nextStep:
+      "Use poison tools with movement, sustain, and enough survival for poison damage to stack.",
+  },
+  {
+    milestone: "Carcinisation 7",
+    whatChanges:
+      "Reaching 7 crab points is a dedicated high-risk milestone / challenge-style goal.",
+    nextStep:
+      "Plan the whole run around food, HP, defense, movement, and final boss survival.",
+  },
+  {
+    milestone: "Pressure clears",
+    whatChanges:
+      "Pressure clears can unlock new genetics and Codex entries.",
+    nextStep:
+      "Open the Codex after each Pressure clear and read the new genetic before using it.",
+  },
+  {
+    milestone: "Cosmetic / visual unlocks",
+    whatChanges:
+      "Cosmetics and evolution visuals can unlock as long-term collection rewards.",
+    nextStep:
+      "Treat them as collection goals, not power progression.",
+  },
+];
+
+export const unlockTrackerColumns = [
+  { key: "unlockType", label: "Unlock Type" },
+  { key: "howItUnlocks", label: "How It Unlocks" },
+  { key: "howToTrack", label: "How To Track It" },
+  { key: "playerAdvice", label: "Player Advice" },
+];
+
+export const unlockTrackerRows = [
+  {
+    unlockType: "Pressure levels",
+    howItUnlocks:
+      "Clearing your current run or current Pressure level.",
+    howToTrack:
+      "Check the Pressure select screen after each clear.",
+    playerAdvice:
+      "Push one Pressure level at a time with your safest build before testing new genetics.",
+  },
+  {
+    unlockType: "Genetics",
+    howItUnlocks:
+      "Pressure clears, run milestones, and Codex progression.",
+    howToTrack:
+      "Open the Codex immediately after the run and read the new genetic tooltip.",
+    playerAdvice:
+      "Match each genetic to a clear goal instead of equipping it just because it is new.",
+  },
+  {
+    unlockType: "Evolutions",
+    howItUnlocks:
+      "Run discoveries, evolution branches, specific damage goals, and special conditions.",
+    howToTrack:
+      "Check the Codex evolution entries and note any new attack or route piece.",
+    playerAdvice:
+      "If a new evolution supports your favorite build, test it in a normal run before using it in Pressure.",
+  },
+  {
+    unlockType: "Poison tools",
+    howItUnlocks:
+      "Stinger is tied to 200+ poison damage in one run.",
+    howToTrack:
+      "Start a poison-focused run and check whether the Codex updates after the run.",
+    playerAdvice:
+      "Poison unlocks need survival. Build movement, HP, or regeneration so poison has time to work.",
+  },
+  {
+    unlockType: "Challenge goals",
+    howItUnlocks:
+      "Harder clears, special run conditions, boss conditions, Pressure goals, or build-specific objectives.",
+    howToTrack:
+      "Use the challenge / achievement screen and Codex after each focused attempt.",
+    playerAdvice:
+      "Pick one challenge goal per run. Do not combine poison, Pacifist, Pressure, and Carcinisation goals unless the build is already stable.",
+  },
+  {
+    unlockType: "Cosmetics",
+    howItUnlocks:
+      "Progression, collection, cosmetic unlocks, and visual systems.",
+    howToTrack:
+      "Check the cosmetics and evolution visual screen after clears.",
+    playerAdvice:
+      "Cosmetics do not make runs stronger. Farm them after your clear route is reliable.",
+  },
+];
+
+export const geneticsColumns = [
+  { key: "genetic", label: "Genetic" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "whenToUse", label: "When To Use It" },
+  { key: "avoidWhen", label: "Avoid When" },
+];
+
+export const geneticsRows = [
+  {
+    genetic: "Standard / baseline start",
+    whatItDoes:
+      "Keeps the run closest to the normal rules.",
+    whenToUse:
+      "Use this for your first clear, first boss learning, and your first stable Pressure attempt.",
+    avoidWhen:
+      "Do not avoid it too early. Baseline runs are useful for learning what normal progression should feel like.",
+  },
+  {
+    genetic: "Pacifist",
+    whatItDoes:
+      "Reduces damage but lowers evolution progress requirement.",
+    whenToUse:
+      "Use after you understand food routing, movement, survival, and non-combat scaling.",
+    avoidWhen:
+      "Avoid as your first-clear route. It changes too much before you know the normal damage curve.",
+  },
+  {
+    genetic: "Grandiose",
+    whatItDoes:
+      "Supports large-body or bigger-scaling routes.",
+    whenToUse:
+      "Use with Mass, Alpha, Trunk reach, Body Slam, HP scaling, or big physical builds.",
+    avoidWhen:
+      "Avoid if you are still dying because you are too slow or cannot handle boss movement.",
+  },
+  {
+    genetic: "Minimalist",
+    whatItDoes:
+      "Changes how much comfort or build flexibility you can rely on.",
+    whenToUse:
+      "Use only after a stable clear, when you can tell whether the genetic is helping or hurting.",
+    avoidWhen:
+      "Avoid when also testing a new build, new biome route, or new Pressure level.",
+  },
+  {
+    genetic: "Challenger",
+    whatItDoes:
+      "Pushes the run toward a harder or more specialized start.",
+    whenToUse:
+      "Use after you have a safe build route and want a harder progression test.",
+    avoidWhen:
+      "Avoid when still learning boss patterns or food routing.",
+  },
+  {
+    genetic: "New Codex genetics",
+    whatItDoes:
+      "Unlocked genetics can change opening stats, evolution behavior, risk level, or build direction.",
+    whenToUse:
+      "Read the Codex, then test the genetic in a run where the rest of your route is familiar.",
+    avoidWhen:
+      "Avoid stacking a new genetic, new build, new Pressure level, and a new challenge goal in one attempt.",
+  },
+];
+
+export const geneticOrderColumns = [
+  { key: "order", label: "Testing Order" },
+  { key: "goal", label: "Goal" },
+  { key: "recommendedChoice", label: "Recommended Choice" },
+];
+
+export const geneticOrderRows = [
+  {
+    order: "1",
+    goal:
+      "Learn normal food, evolution, boss, and final boss progression.",
+    recommendedChoice:
+      "Use Standard / baseline start.",
+  },
+  {
+    order: "2",
+    goal:
+      "Push your first early Pressure levels with minimal confusion.",
+    recommendedChoice:
+      "Use the same genetic that got your first clear.",
+  },
+  {
+    order: "3",
+    goal:
+      "Test a body-plan route.",
+    recommendedChoice:
+      "Try Grandiose if you are building Mass, Alpha, Trunk, Body Slam, or big physical.",
+  },
+  {
+    order: "4",
+    goal:
+      "Test non-combat or low-damage progression.",
+    recommendedChoice:
+      "Try Pacifist only after you can already clear normal runs.",
+  },
+  {
+    order: "5",
+    goal:
+      "Push harder conditions or specialized unlocks.",
+    recommendedChoice:
+      "Try Challenger, Minimalist, or later Codex genetics after you know your baseline route.",
+  },
+];
+
+export const codexColumns = [
+  { key: "codexArea", label: "Codex Area" },
+  { key: "whatToCheck", label: "What To Check" },
+  { key: "decision", label: "Decision It Should Create" },
+];
+
+export const codexRows = [
+  {
+    codexArea: "Genetics",
+    whatToCheck:
+      "New starting modifiers, penalties, and build direction changes.",
+    decision:
+      "Should your next run use this genetic, or should you stay with your stable setup?",
+  },
+  {
+    codexArea: "Evolutions",
+    whatToCheck:
+      "Newly discovered attacks, support pieces, food tools, poison tools, or body-plan upgrades.",
+    decision:
+      "Which build should test this evolution first?",
+  },
+  {
+    codexArea: "Enemies",
+    whatToCheck:
+      "Enemy types that killed you, starred enemies, poison threats, night threats, and biome-specific problems.",
+    decision:
+      "What do you need next run: speed, sustain, ranged reach, poison resistance, or boss prep?",
+  },
+  {
+    codexArea: "Creations",
+    whatToCheck:
+      "Previous creatures, run outcomes, and builds that actually cleared.",
+    decision:
+      "Which build is stable enough to push Pressure, and which was only funny?",
+  },
+  {
+    codexArea: "Cosmetics",
+    whatToCheck:
+      "Locked and unlocked visuals.",
+    decision:
+      "Is the next run a power run or a collection run?",
+  },
+];
+
+export const endlessColumns = [
+  { key: "topic", label: "Endless Mode Question" },
+  { key: "answer", label: "Practical Answer" },
+  { key: "buildImplication", label: "Build Implication" },
+];
+
+export const endlessRows = [
+  {
+    topic: "What is Endless Mode for?",
+    answer:
+      "Treat Endless Mode as the late progression test after normal clears, where the goal shifts from simply clearing a run to seeing how long your build can keep scaling.",
+    buildImplication:
+      "You need sustain, food access, movement, and scalable damage, not just a build that barely beats the final boss.",
+  },
+  {
+    topic: "When should I start it?",
+    answer:
+      "Do not focus on Endless Mode before you can clear normal runs and early Pressure consistently.",
+    buildImplication:
+      "Use your stable clear build first, then replace weak pieces with longer-scaling tools.",
+  },
+  {
+    topic: "How is it different from normal runs?",
+    answer:
+      "A normal run is about reaching and beating the end condition. Endless-style progression is about long-term scaling, recovery, and surviving repeated danger.",
+    buildImplication:
+      "Short burst builds are weaker if they cannot heal, move, or keep leveling.",
+  },
+  {
+    topic: "What builds fit Endless Mode?",
+    answer:
+      "Safe food scaling, big HP / Body Slam, Trunk with size and cooldown, poison with sustain, and social / pack routes can all work if they keep scaling.",
+    buildImplication:
+      "The build must answer food, damage, movement, and sustain at the same time.",
+  },
+  {
+    topic: "What should I check in-game?",
+    answer:
+      "Check the Endless Mode unlock condition in the Codex or mode screen when it appears in your run.",
+    buildImplication:
+      "Use the in-game tooltip or Codex entry to decide whether your next run should focus on unlocks, scaling, rewards, or survival.",
+  },
+];
+
+export const pressurePathColumns = [
+  { key: "stage", label: "Progression Stage" },
+  { key: "goal", label: "Main Goal" },
+  { key: "recommendedAction", label: "Recommended Action" },
+];
+
+export const pressurePathRows = [
+  {
+    stage: "Normal first clear",
+    goal:
+      "Learn the fixed run structure, bosses, food progress, and final boss.",
+    recommendedAction:
+      "Use your safest build, low Carcinisation, and avoid challenge routing.",
+  },
+  {
+    stage: "Early Pressure",
+    goal:
+      "Find which part of your build fails first.",
+    recommendedAction:
+      "Repeat the same stable build and change only one thing at a time.",
+  },
+  {
+    stage: "Pressure 6",
+    goal:
+      "Adapt to random biome starts.",
+    recommendedAction:
+      "Choose opening evolutions based on the biome instead of forcing your usual opener.",
+  },
+  {
+    stage: "Pressure 7",
+    goal:
+      "Handle protected bosses and higher environmental damage.",
+    recommendedAction:
+      "Bring sustained damage, movement, HP, and defense instead of only burst.",
+  },
+  {
+    stage: "Pressure 10+",
+    goal:
+      "Refine genetics, build route, Carcinisation timing, and final boss survival.",
+    recommendedAction:
+      "Use Codex-tested genetics and avoid mixing new challenge goals with new Pressure pushes.",
+  },
+  {
+    stage: "Pressure 20",
+    goal:
+      "Late progression target.",
+    recommendedAction:
+      "Attempt only after stable clears, known genetics, and final boss consistency.",
+  },
+];
+
+export const unlockPriorityColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "target", label: "Target" },
+  { key: "whyFirst", label: "Why This Comes First" },
+];
+
+export const unlockPriorityRows = [
+  {
+    priority: "1",
+    target: "First normal clear",
+    whyFirst:
+      "It teaches the run structure and opens the path to higher progression.",
+  },
+  {
+    priority: "2",
+    target: "Early Pressure levels",
+    whyFirst:
+      "Pressure unlocks new difficulty layers and can lead to new genetics or Codex entries.",
+  },
+  {
+    priority: "3",
+    target: "One new genetic",
+    whyFirst:
+      "Testing one genetic at a time tells you whether it actually improves your route.",
+  },
+  {
+    priority: "4",
+    target: "One build-specific unlock",
+    whyFirst:
+      "Poison, reflect, size, social, and boss goals require different build plans.",
+  },
+  {
+    priority: "5",
+    target: "More build-specific unlocks",
+    whyFirst:
+      "Poison, reflect, social, size, boss, and Carcinisation goals give you more route options before Endless attempts.",
+  },
+  {
+    priority: "6",
+    target: "Endless Mode preparation",
+    whyFirst:
+      "Endless needs a scaling build, not just a normal clear build.",
+  },
+  {
+    priority: "7",
+    target: "Pressure 20 and challenge goals",
+    whyFirst:
+      "These are late goals that punish weak routing, untested genetics, and unstable unlock farming.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Progression Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Testing too many new systems at once",
+    whyItHurts:
+      "If the run fails, you will not know whether the problem was the genetic, Pressure level, build, biome, or challenge goal.",
+    betterPlay:
+      "Change one major variable per run.",
+  },
+  {
+    mistake: "Using a new genetic without checking the Codex",
+    whyItHurts:
+      "Some genetics change your opening or risk profile enough to break a normal build route.",
+    betterPlay:
+      "Read the tooltip and pick a build that matches the genetic.",
+  },
+  {
+    mistake: "Rushing Pressure with an unproven build",
+    whyItHurts:
+      "Higher Pressure exposes food, movement, sustain, and boss weaknesses faster.",
+    betterPlay:
+      "Push early Pressure with the same build that got your first clear.",
+  },
+  {
+    mistake: "Treating Endless Mode like a normal clear",
+    whyItHurts:
+      "A build that barely reaches the final boss may not scale long enough for Endless-style progression.",
+    betterPlay:
+      "Add sustain, scalable damage, food access, and movement before chasing Endless.",
+  },
+  {
+    mistake: "Farming unlocks without a target",
+    whyItHurts:
+      "Poison, reflect, social, size, and boss goals pull your build in different directions.",
+    betterPlay:
+      "Choose one unlock target before starting the run.",
+  },
+  {
+    mistake: "Confusing cosmetics with power",
+    whyItHurts:
+      "Cosmetics are collection goals, not stronger builds.",
+    betterPlay:
+      "Separate power progression from visual collection.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Progression in Everything Is Crab has two layers: run progression and account progression.**
+
+Inside a run, you progress through food, evolutions, mutagen, bosses, and Carcinisation. Between runs, you progress through **Pressure levels, genetics, Codex entries, evolution unlocks, challenge goals, cosmetics, and eventually Endless Mode preparation**.
+
+The best progression order is:
+
+**first clear → early Pressure → Codex check → test one genetic → farm one build-specific unlock → prepare for Endless Mode → push harder Pressure and challenges.**
+
+Do not test everything at once. If you unlock a new genetic, use it in a controlled run. If you push Pressure, use a stable build. If you farm poison, reflect, social, or boss goals, build around that one target.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-progression-pressure-20-unlocks.webp"
+    alt="Player seeing that Everything Is Crab 1.0 adds Pressure 20, a final boss, more challenges, and new evolutions."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Progression in Everything Is Crab is not only about one clear. Pressure, genetics, Codex entries, challenge goals, cosmetics, and Endless Mode all create the long-term route.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="progression-loop">
+  How progression works
+</h2>
+
+Everything Is Crab has two different progression layers.
+
+**Run progression** is what happens inside one run: food, evolutions, mutagen, bosses, Carcinisation, and your current creature.
+
+**Account progression** is what changes after the run: Pressure levels, genetics, Codex entries, new evolutions, cosmetics, challenge routes, and long-term goals like Endless Mode.
+
+<GuideTable
+  caption="Run progression versus account progression."
+  columns={progressionLoopColumns}
+  rows={progressionLoopRows}
+/>
+
+<GuideCallout title="Progression rule">
+After every run, ask what changed. If nothing unlocked, ask what you learned. If something unlocked, check the Codex before starting again.
+</GuideCallout>
+
+Use <Link href="/everything-is-crab">Everything Is Crab Guide</Link> if you need the general beginner hub.
+
+<AdUnit placement="article_after_first_h2" />
+
+---
+
+<h2 id="progression-milestones">
+  Progression milestones
+</h2>
+
+Use this table to understand what each major progression step changes and what your next run should focus on.
+
+<GuideTable
+  caption="Major Everything Is Crab progression milestones."
+  columns={milestoneColumns}
+  rows={milestoneRows}
+/>
+
+The most important habit for progression is simple: **write down what each clear actually unlocked**. The Codex is not just flavor text. It is how you turn one run into the next plan.
+
+---
+
+<h2 id="unlock-tracker">
+  Unlock tracker: what to check after every run
+</h2>
+
+Most players lose progression value because they instantly start another run without checking what changed.
+
+Use this tracker after every clear, death, Pressure push, or unlock attempt.
+
+<GuideTable
+  caption="Everything Is Crab unlock tracker."
+  columns={unlockTrackerColumns}
+  rows={unlockTrackerRows}
+/>
+
+<GuideCallout title="Unlock tracking rule">
+If you cannot say what the next run is testing, you are probably wasting progression time.
+</GuideCallout>
+
+---
+
+<h2 id="genetics">
+  Genetics: what to pick and when
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-progression-starting-genetics.webp"
+    alt="Player choosing starting genetics before a Pressure run in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Genetics change the starting rules of a run, so use them with a clear goal instead of equipping every new option immediately.
+  </figcaption>
+</figure>
+
+Genetics are one of the main between-run progression systems. They can change how your run starts, what your build wants, how risky the early game feels, or which route makes sense.
+
+The mistake is equipping a new genetic just because it unlocked.
+
+<GuideTable
+  caption="Early genetics and when to use them."
+  columns={geneticsColumns}
+  rows={geneticsRows}
+/>
+
+A useful genetic is not always the strongest-looking one. A useful genetic is the one that matches your next goal.
+
+---
+
+<h2 id="genetics-order">
+  Recommended genetics testing order
+</h2>
+
+If you are unsure which genetic to use next, follow this order.
+
+<GuideTable
+  caption="Recommended genetics testing order."
+  columns={geneticOrderColumns}
+  rows={geneticOrderRows}
+/>
+
+The key is to keep the test readable. If you try Pacifist, do not also test a new Pressure level and a new poison route. If you try Grandiose, give it a build that actually wants size.
+
+<GuideCallout title="Genetics rule">
+A new genetic should answer one question: does it improve the route you are trying to play?
+</GuideCallout>
+
+---
+
+<h2 id="codex">
+  How to use the Codex
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-progression-codex-genetics-hibborn.webp"
+    alt="Player opening the Codex to check a newly unlocked genetic after a Pressure clear in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Codex is where you turn a finished run into a useful next run.
+  </figcaption>
+</figure>
+
+The Codex should decide your next run.
+
+Do not use it only as a collection screen. Use it to check genetics, evolutions, enemies, previous creations, cosmetics, and unlock gaps.
+
+<GuideTable
+  caption="How to use the Codex after a run."
+  columns={codexColumns}
+  rows={codexRows}
+/>
+
+The best time to check the Codex is right after a clear or unlock. If you start another run without reading the new entry, you may miss the reason it matters.
+
+---
+
+<h2 id="pressure-path">
+  Pressure progression path
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-progression-pressure-seven-unlock.webp"
+    alt="Player unlocking Pressure 7 after clearing Pressure 6 in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pressure clears are progression milestones. Each new level changes what your build must prove.
+  </figcaption>
+</figure>
+
+Pressure is the long-term difficulty ladder. The point is not to rush the highest number. The point is to use each tier to test a specific weakness.
+
+<GuideTable
+  caption="Recommended Pressure progression path."
+  columns={pressurePathColumns}
+  rows={pressurePathRows}
+/>
+
+Use <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link> when you want the full difficulty breakdown.
+
+---
+
+<h2 id="endless-mode">
+  Endless Mode: what it is for
+</h2>
+
+Endless Mode should be treated as a late progression goal.
+
+A normal run is about reaching and beating the end condition. Endless-style progression is about testing how long your build can keep scaling after a normal clear route is already reliable.
+
+Use the Codex or mode screen to check the exact Endless Mode unlock condition when it appears. For planning, the important point is simple: **Endless Mode needs a build that scales longer than a normal clear build.**
+
+<GuideTable
+  caption="Endless Mode planning guide."
+  columns={endlessColumns}
+  rows={endlessRows}
+/>
+
+Good Endless Mode candidates are builds that can keep solving four problems:
+
+1. food access,
+2. scalable damage,
+3. movement,
+4. sustain.
+
+A build that barely survives the final boss is not an Endless build yet. Before focusing on Endless Mode, clear normal runs, push early Pressure, test genetics, and make sure your final boss route is consistent.
+
+<GuideCallout title="Endless rule">
+Endless Mode is not where you fix a weak build. It is where you test a build that already clears.
+</GuideCallout>
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="unlock-priorities">
+  What to unlock first
+</h2>
+
+Your first unlock target should make future runs easier to understand.
+
+<GuideTable
+  caption="Recommended unlock order in Everything Is Crab."
+  columns={unlockPriorityColumns}
+  rows={unlockPriorityRows}
+/>
+
+Do not try to unlock everything in one run. Pick one target:
+
+- a Pressure clear,
+- one new genetic,
+- one poison goal,
+- one reflect goal,
+- one boss goal,
+- one cosmetic / collection goal,
+- one Endless Mode preparation run.
+
+The more focused the goal, the easier it is to understand why the run worked or failed.
+
+---
+
+<h2 id="build-specific-unlocks">
+  Build-specific unlocks
+</h2>
+
+Build-specific unlocks are where progression becomes more interesting.
+
+Instead of asking “what is generally strong,” ask “what unlock am I trying to trigger?”
+
+Good examples:
+
+- For poison goals, build around Stinger, poison effects, survival, and enough time for poison damage to stack.
+- For reflect goals, build around Spines, Plating, Revenge, HP, and recovery.
+- For size goals, build around Mass, Alpha, Trunk reach, Body Slam, and movement.
+- For social goals, build around charm, allies, pack damage, and a backup boss plan.
+- For Carcinisation goals, build around food, HP, defense, movement, and final boss readiness.
+
+Use <Link href="/everything-is-crab/achievements-challenges-guide">Achievements and Challenges Guide</Link> for challenge and achievement routing.
+
+---
+
+<h2 id="cosmetics-and-collection">
+  Cosmetics and collection progress
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-progression-cosmetics-unlocks.webp"
+    alt="Player checking locked cosmetics and evolution visuals after a run in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cosmetics are part of long-term collection, but they do not replace power progression.
+  </figcaption>
+</figure>
+
+Cosmetics and evolution visuals are long-term collection rewards.
+
+They matter because Everything Is Crab is built around creating strange creatures, but they do not make a run stronger. Keep power progression and collection progression separate.
+
+A clean collection plan is:
+
+1. clear with a stable build,
+2. check locked cosmetics,
+3. pick one visual or collection target,
+4. build a safe run,
+5. farm that target without ruining the clear.
+
+---
+
+<h2 id="common-mistakes">
+  Common progression mistakes
+</h2>
+
+<GuideTable
+  caption="Common progression mistakes in Everything Is Crab."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is turning every new unlock into a new run at the same time.
+
+A better approach is:
+
+**one new genetic, one new Pressure level, one unlock goal, or one challenge route per run.**
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do after my first clear?
+
+Check the Codex, read any new genetics, push one early Pressure level with your safest build, and pick one unlock target instead of testing everything at once.
+
+### What is the main progression system in Everything Is Crab?
+
+The main progression systems are food and evolutions inside a run, then Pressure levels, genetics, Codex entries, challenge goals, cosmetics, and Endless Mode preparation between runs.
+
+### How do I unlock new Pressure levels?
+
+Clear your current run or current Pressure level. For example, clearing Pressure 6 unlocks Pressure 7.
+
+### What changes at Pressure 6?
+
+Pressure 6 adds random biome starts, which makes your opening more dependent on the biome you spawn in.
+
+### What changes at Pressure 7?
+
+Pressure 7 adds boss protection at the start of fights and after each enragement, while environmental damage increases.
+
+### Which genetic should I use first?
+
+Use the baseline / Standard start for your first clear and early learning. After that, test one new genetic at a time.
+
+### Is Pacifist a good first genetic?
+
+No. Pacifist is better after you understand food routing, movement, boss patterns, and non-combat scaling.
+
+### When should I try Grandiose?
+
+Try Grandiose when you want a large-body route with Mass, Alpha, Trunk reach, Body Slam, HP scaling, or big physical damage.
+
+### What is Endless Mode for?
+
+Endless Mode is a late progression target where your build needs to keep scaling longer than a normal clear build. Focus on it after stable clears and early Pressure progression.
+
+### Is Endless Mode important early?
+
+No. First learn normal clears, early Pressure, genetics, and final boss consistency. Endless Mode becomes useful when you already have builds that can clear.
+
+### How do I track unlocks?
+
+Use the Codex after each clear or death. Check genetics, evolutions, enemies, creations, cosmetics, and any new entries before starting another run.
+
+### What should I unlock first?
+
+First clear normal runs, then early Pressure levels, then test one new genetic, then farm one build-specific unlock such as poison, reflect, size, boss, or social goals.

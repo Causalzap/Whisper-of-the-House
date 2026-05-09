@@ -113,6 +113,8 @@ const allGameGuides = [
   { title: 'Librarian: Tidy Up the Arcane Library!', href: '/librarian' },
 
   { title: 'Farever', href: '/farever' },
+
+  { title: 'Everything is Crab: The Animal Evolution Roguelite', href: '/everything-is-crab' },
 ];
 
 const exploreCards = [

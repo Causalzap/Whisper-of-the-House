@@ -1,0 +1,1023 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const knownColumns = [
+  { key: "thing", label: "Mechanic / Number" },
+  { key: "confirmedInfo", label: "What It Does" },
+  { key: "playerUse", label: "How To Use It" },
+];
+
+export const knownRows = [
+  {
+    thing: "Cheek Pouch",
+    confirmedInfo:
+      "Stores nearby food inside your cheeks. Stored food is consumed at the same rate. Capacity: 2.",
+    playerUse:
+      "Use it as a first-clear food solution. It lets you keep moving while food is being handled, which reduces deaths from standing still to eat.",
+  },
+  {
+    thing: "Trunk",
+    confirmedInfo:
+      "Swiping, slow hybrid attack. Damage: 1-1.4x Physical or Ability, using the lowest value. Cooldown: 1.5s. Feeding Distance: +0.66.",
+    playerUse:
+      "Balance Physical and Ability instead of stacking only one stat. Add size, cooldown help, and movement so the slow swing becomes safer.",
+  },
+  {
+    thing: "Stinger",
+    confirmedInfo:
+      "Unlocks after dealing over 200 poison damage in a single run.",
+    playerUse:
+      "Plan a poison route with survival, not only poison damage. You need enough time for poison to tick.",
+  },
+  {
+    thing: "Starred enemies",
+    confirmedInfo:
+      "Can give mutagen points.",
+    playerUse:
+      "Kill them when safe, then spend mutagen on your main attack, food tool, defense, or build-specific goal.",
+  },
+  {
+    thing: "Mutagen points",
+    confirmedInfo:
+      "Can be used to increase rarity or reroll evolution choices.",
+    playerUse:
+      "Use them to fix the run, not just to chase legendary options.",
+  },
+  {
+    thing: "Carcinisation",
+    confirmedInfo:
+      "Each crab point improves food rarity but makes enemies more dangerous. The first crab point shows a tradeoff of +10% enemy damage and +8% food rarity.",
+    playerUse:
+      "Take 0-1 for safer clears, 2-3 only when stable, and 4+ as greed or challenge routing.",
+  },
+  {
+    thing: "Pressure 20",
+    confirmedInfo:
+      "Pressure goes up to 20 in the 1.0 release.",
+    playerUse:
+      "Treat Pressure 20 as a late target. Build stable clears before pushing it.",
+  },
+  {
+    thing: "Pressure 6",
+    confirmedInfo:
+      "Adds random biome starts.",
+    playerUse:
+      "Adapt your first picks to the biome instead of forcing the same opener every run.",
+  },
+  {
+    thing: "Body Slam",
+    confirmedInfo:
+      "Fits best on HP-scaling routes where your build is already investing in size, durability, or max health.",
+    playerUse:
+      "Use it on big HP routes, not fragile speed routes.",
+  },
+];
+
+export const firstClearColumns = [
+  { key: "slot", label: "Slot" },
+  { key: "minimumPick", label: "Minimum First-Clear Pick" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const firstClearRows = [
+  {
+    slot: "Food solution",
+    minimumPick:
+      "Cheek Pouch, Tail / Prehensile Tail, feeding distance, feeding speed, food progress, or Scavenger-style XP value",
+    whyItMatters:
+      "You need a safe way to turn food into levels before bosses arrive.",
+  },
+  {
+    slot: "Main attack",
+    minimumPick:
+      "Trunk, Horns, Jaws, Body Slam, Stinger, or another attack you actually upgrade",
+    whyItMatters:
+      "A run with one supported attack is safer than a run full of unsupported buttons.",
+  },
+  {
+    slot: "Movement",
+    minimumPick:
+      "Legs, speed, dash help, wings, terrain adaptation, or dodge",
+    whyItMatters:
+      "Bosses, water, snow, night pressure, and Cataclysm all punish slow builds.",
+  },
+  {
+    slot: "Sustain",
+    minimumPick:
+      "Shell, Plating, HP, regeneration, damage resistance, Leech-style sustain, or healing food access",
+    whyItMatters:
+      "New players need room to survive chip damage and pattern-learning mistakes.",
+  },
+  {
+    slot: "Fight location",
+    minimumPick:
+      "Open ground, safe biome routing, recovery food nearby, and no boss spawn in water / snow / heat if you can avoid it",
+    whyItMatters:
+      "Many boss deaths are arena deaths. A good build can still lose if the fight starts in bad terrain.",
+  },
+];
+
+export const failureColumns = [
+  { key: "deathPoint", label: "Where You Died" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "nextRunFix", label: "Next Run Fix" },
+];
+
+export const failureRows = [
+  {
+    deathPoint: "Before first boss",
+    likelyCause:
+      "Unsafe eating, no main attack, or chasing elites / starred enemies in bad terrain.",
+    nextRunFix:
+      "Take Cheek Pouch or feeding distance early, then commit to one attack before greed.",
+  },
+  {
+    deathPoint: "While eating",
+    likelyCause:
+      "You are stopping too long near enemies or chasing food through danger.",
+    nextRunFix:
+      "Prioritize Cheek Pouch, feeding speed, feeding distance, movement, or safer routing.",
+  },
+  {
+    deathPoint: "First boss",
+    likelyCause:
+      "Too slow, underleveled, low HP, or fighting in a bad biome.",
+    nextRunFix:
+      "Take movement before the timer ends and move to safer ground if possible.",
+  },
+  {
+    deathPoint: "After taking crab points",
+    likelyCause:
+      "Carcinisation was taken before the build could handle the added danger.",
+    nextRunFix:
+      "Stay at 0-1 crab points until food, damage, movement, and defense are stable.",
+  },
+  {
+    deathPoint: "Poison / chip damage",
+    likelyCause:
+      "No sustain, no regeneration, bad mushroom routing, or standing in poison effects.",
+    nextRunFix:
+      "Add regeneration, Leech-style sustain, Shell, Plating, or safer healing food access.",
+  },
+  {
+    deathPoint: "Final boss / Cataclysm",
+    likelyCause:
+      "Build had damage but lacked movement, defense, or Cataclysm awareness.",
+    nextRunFix:
+      "Arrive with speed, HP, one reliable attack, and fewer greedy late-run choices.",
+  },
+];
+
+export const biomeColumns = [
+  { key: "biome", label: "Biome" },
+  { key: "mainThreat", label: "Main Threat" },
+  { key: "goodPicks", label: "Good Picks" },
+  { key: "playerNote", label: "Player Note" },
+];
+
+export const biomeRows = [
+  {
+    biome: "Plains",
+    mainThreat:
+      "Open waves can surround you if you overstay for food or chase enemies too long.",
+    goodPicks:
+      "Cheek Pouch, feeding speed, movement, one clean attack",
+    playerNote:
+      "Use plains to stabilize, collect food, and build before entering harsher areas.",
+  },
+  {
+    biome: "Desert / heat",
+    mainThreat:
+      "Heat pressure and recovery routing. Oasis-style recovery can matter.",
+    goodPicks:
+      "Heat adaptation, regeneration, Shell, healing food, Oasis routing",
+    playerNote:
+      "Do not greed damage if heat is already forcing your HP low.",
+  },
+  {
+    biome: "Snow / cold",
+    mainThreat:
+      "Cold, blizzard pressure, and slower / less comfortable movement.",
+    goodPicks:
+      "Fur, cold adaptation, Wool-style conversion, movement speed, Shell",
+    playerNote:
+      "A cold start is where defensive adaptation can be better than a greedy attack pick.",
+  },
+  {
+    biome: "Ocean / water",
+    mainThreat:
+      "Water slows movement and can make bosses much harder to dodge.",
+    goodPicks:
+      "Wings, terrain adaptation, movement speed, dash tools, ranged or wide attacks",
+    playerNote:
+      "Avoid starting a boss in water unless your build can move through it safely.",
+  },
+  {
+    biome: "Night cycle",
+    mainThreat:
+      "Low visibility and nocturnal enemy pressure.",
+    goodPicks:
+      "Senses, More Eyes, speed, daytime extension, Stalker if using night damage",
+    playerNote:
+      "Night is not only visual. Some enemies and evolution effects become more important at night.",
+  },
+];
+
+export const geneticColumns = [
+  { key: "genetic", label: "Genetic" },
+  { key: "whatItChanges", label: "What It Changes" },
+  { key: "bestUse", label: "Best Use" },
+];
+
+export const geneticRows = [
+  {
+    genetic: "Standard",
+    whatItChanges:
+      "A baseline run without a major special restriction.",
+    bestUse:
+      "Best for learning food, enemies, evolutions, bosses, and your first clear.",
+  },
+  {
+    genetic: "Pacifist",
+    whatItChanges:
+      "Reduces your damage but also lowers the evolution progress requirement.",
+    bestUse:
+      "Use after normal clears, when you understand food routing, movement, survival, and non-combat scaling.",
+  },
+  {
+    genetic: "Challenger",
+    whatItChanges:
+      "Pushes the run toward a harder or more specialized start.",
+    bestUse:
+      "Use after you already have a stable build. Do not test it at the same time as a new build route.",
+  },
+  {
+    genetic: "Grandiose",
+    whatItChanges:
+      "Supports a larger-body style run.",
+    bestUse:
+      "Best when aiming for Mass, Alpha, Trunk reach, Body Slam, HP scaling, or big physical routes.",
+  },
+  {
+    genetic: "Minimalist",
+    whatItChanges:
+      "Changes how much you can rely on normal build comfort.",
+    bestUse:
+      "Use only after a baseline clear, because it is easier to evaluate when you already know what a normal run should feel like.",
+  },
+  {
+    genetic: "New Codex genetics",
+    whatItChanges:
+      "Unlocked genetics can change your starting risk, build direction, or evolution priorities.",
+    bestUse:
+      "After each clear, read the new Codex entry before starting a run. Test only one new genetic at a time.",
+  },
+];
+
+export const mutagenColumns = [
+  { key: "useCase", label: "Mutagen Use" },
+  { key: "goodTargets", label: "Good Targets" },
+  { key: "badUse", label: "Avoid This" },
+];
+
+export const mutagenRows = [
+  {
+    useCase: "Upgrade your main attack",
+    goodTargets:
+      "Trunk, Body Slam, Horns, Jaws, Stinger, or whatever is actually carrying the run.",
+    badUse:
+      "Upgrading a side attack that you are not supporting with stats.",
+  },
+  {
+    useCase: "Fix food access",
+    goodTargets:
+      "Cheek Pouch, Tail / Prehensile Tail, feeding speed, feeding distance, food progress.",
+    badUse:
+      "Rerolling away from food tools when you are already underleveled.",
+  },
+  {
+    useCase: "Prepare for bosses",
+    goodTargets:
+      "Movement speed, Shell, Plating, HP, regeneration, damage resistance.",
+    badUse:
+      "Chasing rarity while the boss timer is almost finished.",
+  },
+  {
+    useCase: "Complete a build route",
+    goodTargets:
+      "Mass / Alpha for Trunk, HP for Body Slam, Spines / Revenge for reflect, poison tools for Stinger.",
+    badUse:
+      "Taking a legendary pick that sends the build in a new direction.",
+  },
+  {
+    useCase: "Escape bad choices",
+    goodTargets:
+      "Reroll when all three options do nothing for your current run.",
+    badUse:
+      "Rerolling a solid support option just because it is not flashy.",
+  },
+];
+
+export const routeColumns = [
+  { key: "route", label: "Route" },
+  { key: "coreIdea", label: "Core Idea" },
+  { key: "whatMakesItWork", label: "What Makes It Work" },
+  { key: "warning", label: "Warning" },
+];
+
+export const routeRows = [
+  {
+    route: "Scavenger / food thief",
+    coreIdea:
+      "Level through food value, stolen food, XP tools, and safe routing instead of forcing constant fights.",
+    whatMakesItWork:
+      "Cheek Pouch, Scavenger-style XP value, feeding distance, movement speed, and senses help you grab food without committing to bad fights.",
+    warning:
+      "You still need one attack or survival plan for bosses.",
+  },
+  {
+    route: "Herbivore / plant progress",
+    coreIdea:
+      "Use vegetable / plant food progress and safer food priorities instead of relying only on meat or predator scaling.",
+    whatMakesItWork:
+      "Herbivore-style food bonuses, food progress, feeding tools, regeneration, and movement let you scale while avoiding unnecessary fights.",
+    warning:
+      "Do not mix it with predator-heavy picks that fight your food route.",
+  },
+  {
+    route: "Social / charm",
+    coreIdea:
+      "Use charm, allies, and pack damage to turn enemies into distractions or extra damage.",
+    whatMakesItWork:
+      "Social stat, Tail / Tail Wag-style charm tools, Antennae-style support, and pack damage let allies become part of your damage plan.",
+    warning:
+      "Bosses may still require personal damage, so keep one backup attack.",
+  },
+  {
+    route: "Pacifist / low-damage",
+    coreIdea:
+      "Survive through food, mobility, defense, indirect damage, and careful boss routing.",
+    whatMakesItWork:
+      "Pacifist, Cheek Pouch, movement, Shell, Plating, regeneration, social tools, poison, or reflect can replace part of your normal damage plan.",
+    warning:
+      "Not recommended for your first clear. Learn normal clears first.",
+  },
+  {
+    route: "Poison / mushroom",
+    coreIdea:
+      "Let poison damage stack while you survive and keep enemies under control.",
+    whatMakesItWork:
+      "Stinger, poisonous saliva, toxic mushroom effects, Spines, HP, movement, and regeneration help poison damage matter before you die.",
+    warning:
+      "Poison needs time, so fragile poison builds die before the damage pays off.",
+  },
+];
+
+export const poisonColumns = [
+  { key: "piece", label: "Poison Piece" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "howToUse", label: "How To Use It" },
+];
+
+export const poisonRows = [
+  {
+    piece: "Stinger",
+    whatItDoes:
+      "Poison-focused tool tied to dealing over 200 poison damage in one run.",
+    howToUse:
+      "Start the poison route early and build enough survival for poison to tick.",
+  },
+  {
+    piece: "Poisonous saliva",
+    whatItDoes:
+      "Adds a poison direction to mouth / saliva-style routes.",
+    howToUse:
+      "Use when your build can apply poison repeatedly instead of relying on one hit.",
+  },
+  {
+    piece: "Toxic mushrooms",
+    whatItDoes:
+      "Mushroom effects can support poison routes, but they can also create dangerous side effects.",
+    howToUse:
+      "Use carefully. Mushrooms can help a poison route, but do not take them blindly.",
+  },
+  {
+    piece: "Spines",
+    whatItDoes:
+      "Can support contact punishment and poison / reflect-style goals depending on path.",
+    howToUse:
+      "Pair with HP, Shell, Plating, Revenge, or regeneration so contact does not kill you first.",
+  },
+  {
+    piece: "Movement",
+    whatItDoes:
+      "Keeps you alive while poison damage works.",
+    howToUse:
+      "Poison is not burst. Kite, survive, and avoid trapping yourself.",
+  },
+];
+
+export const healingColumns = [
+  { key: "healSource", label: "Healing Source" },
+  { key: "howItHelps", label: "How It Helps" },
+  { key: "whenToUse", label: "When To Prioritize It" },
+];
+
+export const healingRows = [
+  {
+    healSource: "Glowing / healing food",
+    howItHelps:
+      "Restores HP during a run and can save you after boss hits, poison, heat, or risky elite fights.",
+    whenToUse:
+      "Use it when you can reach it safely. Do not chase healing food through enemies if you are already cornered.",
+  },
+  {
+    healSource: "Regeneration",
+    howItHelps:
+      "Restores health over time and makes chip damage less punishing.",
+    whenToUse:
+      "Prioritize it when poison, heat, night pressure, or repeated small hits are ending your runs.",
+  },
+  {
+    healSource: "Leech-style sustain",
+    howItHelps:
+      "Turns repeated attacks into recovery if your build can keep hitting safely.",
+    whenToUse:
+      "Best on builds with frequent hits, safe contact, or enough defense to stay close.",
+  },
+  {
+    healSource: "Oasis / biome recovery",
+    howItHelps:
+      "Desert recovery points can offset heat pressure and stabilize a damaged run.",
+    whenToUse:
+      "Use Oasis routing when the desert biome is forcing HP loss before the boss.",
+  },
+  {
+    healSource: "Hump / max-HP food value",
+    howItHelps:
+      "Can reward health food consumption when you are already near or at full HP.",
+    whenToUse:
+      "Best on high-HP routes that can safely collect health food without wasting it.",
+  },
+];
+
+export const trunkColumns = [
+  { key: "piece", label: "Trunk Piece" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "playerUse", label: "Player Use" },
+];
+
+export const trunkRows = [
+  {
+    piece: "Physical damage",
+    whyItMatters:
+      "Trunk uses Physical as one side of its hybrid scaling.",
+    playerUse:
+      "Take it if Physical is your lower stat or if your other attacks also use Physical.",
+  },
+  {
+    piece: "Ability damage",
+    whyItMatters:
+      "Trunk also checks Ability, and the lower stat can hold back the attack.",
+    playerUse:
+      "Take it if Ability is behind. Do not ignore it because Trunk looks like a physical swing.",
+  },
+  {
+    piece: "Mass / Alpha / size",
+    whyItMatters:
+      "Size improves reach and makes the slow sweep easier to use.",
+    playerUse:
+      "Take when you already have enough speed or when Trunk is becoming your wave clear.",
+  },
+  {
+    piece: "Dextrous / cooldown",
+    whyItMatters:
+      "Trunk is slow, so cooldown help makes it smoother.",
+    playerUse:
+      "Take when Trunk damage is good but the attack window feels too slow.",
+  },
+  {
+    piece: "Tail / Prehensile Tail",
+    whyItMatters:
+      "More feeding distance stacks with Trunk's food utility.",
+    playerUse:
+      "Take when you win fights but are still underleveled.",
+  },
+];
+
+export const carcinisationColumns = [
+  { key: "level", label: "Crab Points" },
+  { key: "risk", label: "Risk" },
+  { key: "useCase", label: "Use Case" },
+];
+
+export const carcinisationRows = [
+  {
+    level: "0",
+    risk:
+      "Safest, but lower food rarity.",
+    useCase:
+      "Learning runs, weak builds, or bosses you do not understand yet.",
+  },
+  {
+    level: "1",
+    risk:
+      "Usually manageable if the run already has food and a main attack.",
+    useCase:
+      "First greed point when stable.",
+  },
+  {
+    level: "2-3",
+    risk:
+      "Noticeably riskier if movement or defense is weak.",
+    useCase:
+      "Use when ahead on damage, speed, and survival.",
+  },
+  {
+    level: "4+",
+    risk:
+      "Late-run greed that can stack with final boss pressure.",
+    useCase:
+      "Use for strong runs or specific challenge goals.",
+  },
+  {
+    level: "7",
+    risk:
+      "Dedicated challenge / unlock-style target.",
+    useCase:
+      "Plan the whole run around HP, defense, food, damage, and final boss readiness.",
+  },
+];
+
+export const afterClearColumns = [
+  { key: "step", label: "After First Clear" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "nextAction", label: "Next Action" },
+];
+
+export const afterClearRows = [
+  {
+    step: "Check the Codex",
+    whyItMatters:
+      "New genetics, evolutions, enemies, cosmetics, and discoveries can change your next run.",
+    nextAction:
+      "Read any new genetic or evolution before starting another run.",
+  },
+  {
+    step: "Push one Pressure level",
+    whyItMatters:
+      "Pressure is the main difficulty ladder and unlock path.",
+    nextAction:
+      "Use your most stable build first instead of testing multiple new routes.",
+  },
+  {
+    step: "Test one new genetic",
+    whyItMatters:
+      "Genetics can change your opener, risk level, and build direction.",
+    nextAction:
+      "Run one new genetic at a time so you know what changed.",
+  },
+  {
+    step: "Choose one unlock goal",
+    whyItMatters:
+      "Poison, reflect, social, size, boss, and Carcinisation goals need different builds.",
+    nextAction:
+      "Pick one goal such as Stinger poison damage, Spines reflect, or a Pressure clear.",
+  },
+  {
+    step: "Practice the final boss",
+    whyItMatters:
+      "The final boss tests movement, damage, defense, Cataclysm awareness, and Carcinisation choices.",
+    nextAction:
+      "Arrive with a complete build instead of only bigger damage numbers.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**For your first Everything Is Crab clear, use a build that has five parts: safe food, one main attack, movement, sustain, and a safe fight location.**
+
+A minimum first-clear setup looks like this:
+
+**Cheek Pouch or feeding distance → Trunk / Horns / Jaws / Body Slam as your main attack → Legs or speed → Shell / Plating / regeneration → safe boss terrain and low Carcinisation.**
+
+Do not force every shiny mutation. If you die before the first boss, fix food and movement. If Trunk feels weak, balance Physical and Ability. If you die after taking crab points, you took Carcinisation too early. If you die after your first clear, check the Codex and push one goal at a time.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-guide-1-0-run-start.webp"
+    alt="Player starting Everything Is Crab 1.0 and checking Pressure levels, genetics, final boss, challenges, and evolutions."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Everything Is Crab 1.0 gives you more than one clear to chase: Pressure, genetics, evolutions, challenges, cosmetics, and the final boss all change what your next run should do.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="known-numbers">
+  Important numbers: Cheek Pouch, Trunk, Stinger, Pressure and Carcinisation
+</h2>
+
+These are the early mechanics and numbers most likely to affect your first clears. Use this section to understand what each upgrade actually does before you commit a run around it.
+
+<GuideTable
+  caption="Key mechanics, numbers, and how to use them."
+  columns={knownColumns}
+  rows={knownRows}
+/>
+
+<GuideCallout title="Tooltip rule">
+If an upgrade affects damage, cooldown, capacity, feeding distance, or food progress, read the tooltip before choosing. Small numbers can decide whether an evolution fits your current build.
+</GuideCallout>
+
+<AdUnit placement="article_after_first_h2" />
+
+---
+
+<h2 id="minimum-first-clear-build">
+  Minimum first-clear build
+</h2>
+
+The easiest first clear does not need a perfect build. It needs a complete build.
+
+Use this as your minimum checklist:
+
+<GuideTable
+  caption="Minimum viable first-clear build in Everything Is Crab."
+  columns={firstClearColumns}
+  rows={firstClearRows}
+/>
+
+If your run is missing one of these slots, fix that slot before taking greed. A run with safe food, one attack, speed, and defense is usually better than a run with five cool evolutions that do not work together.
+
+Use <Link href="/everything-is-crab/best-builds">Best Builds</Link> when you want full build routes.
+
+---
+
+<h2 id="first-death-checklist">
+  First failure self-check
+</h2>
+
+Use this table after a failed run. Do not just restart with the same plan.
+
+<GuideTable
+  caption="Death reason checklist for Everything Is Crab."
+  columns={failureColumns}
+  rows={failureRows}
+/>
+
+<GuideCallout title="Self-check rule">
+The best next run starts with one correction. Fix food, speed, boss prep, sustain, or Carcinisation timing before adding a new experiment.
+</GuideCallout>
+
+---
+
+<h2 id="cheek-pouch">
+  Cheek Pouch: capacity, trigger, and why it is strong
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-cheek-pouch-capacity-tooltip.webp"
+    alt="Player checking the Cheek Pouch tooltip showing food storage and capacity 2 in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cheek Pouch has a capacity of 2 and lets stored food keep being consumed while you move.
+  </figcaption>
+</figure>
+
+**Cheek Pouch stores nearby food inside your cheeks. Stored food is consumed at the same rate, and the tooltip shows a capacity of 2.**
+
+That means Cheek Pouch is not just a convenience upgrade. It changes how safely you can level. Instead of stopping for every food pickup, you can store food, keep moving, and let the food convert into progress while avoiding enemies.
+
+The reason it is so strong is simple:
+
+**food becomes less dangerous.**
+
+Cheek Pouch is especially valuable when your run is underleveled, when enemies are forcing you away from food piles, or when you are using a slower attack like Trunk and need more time to reposition.
+
+---
+
+<h2 id="trunk">
+  Trunk: damage, cooldown, scaling, and build logic
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-best-builds-trunk-choice.webp"
+    alt="Player checking the Trunk tooltip showing 1 to 1.4x damage, 1.5 second cooldown, and +0.66 feeding distance in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Trunk is both a damage tool and a food-routing tool because it adds reach and feeding distance.
+  </figcaption>
+</figure>
+
+**Trunk is a swiping, slow hybrid attack. Its tooltip shows 1-1.4x damage based on Physical or Ability, using the lowest value. It has a 1.5s cooldown and gives +0.66 Feeding Distance.**
+
+This makes Trunk very different from a pure physical attack. If your Physical damage is high but Ability is low, Trunk is held back by Ability. If your Ability is high but Physical is low, Trunk is held back by Physical.
+
+The basic Trunk build logic is:
+
+**balance Physical and Ability → add size / attack area → reduce cooldown or improve tempo → add movement → use the +0.66 feeding distance to level more safely.**
+
+<GuideTable
+  caption="How to make Trunk stronger."
+  columns={trunkColumns}
+  rows={trunkRows}
+/>
+
+Trunk works best when it is both your damage tool and your food-routing tool. The +0.66 feeding distance matters because it lets you collect food from safer positions, which pairs well with Cheek Pouch, Tail / Prehensile Tail, and movement speed.
+
+---
+
+<h2 id="biomes">
+  Biomes and how they change builds
+</h2>
+
+Pressure 6 can start you in random biomes, so biome knowledge is part of progression, not a side detail.
+
+<GuideTable
+  caption="Biome effects and build adjustments in Everything Is Crab."
+  columns={biomeColumns}
+  rows={biomeRows}
+/>
+
+For normal clears, the safest habit is to leave bad terrain before the boss timer finishes. For Pressure runs, your first few picks should answer the biome you actually spawned in.
+
+Use <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link> for the full high-difficulty route.
+
+---
+
+<h2 id="genetics">
+  Genetics: what to pick first
+</h2>
+
+Genetics change your starting conditions or build direction. Do not equip a new genetic just because it unlocked.
+
+<GuideTable
+  caption="Early genetics and how to choose them."
+  columns={geneticColumns}
+  rows={geneticRows}
+/>
+
+For new players, the safest progression is:
+
+1. clear with Standard or a simple setup,
+2. unlock early Pressure,
+3. check the Codex,
+4. test one new genetic,
+5. compare it against your stable build.
+
+Use <Link href="/everything-is-crab/progression-guide">Progression Guide</Link> for the full unlock and Codex plan.
+
+---
+
+<h2 id="non-combat-routes">
+  Non-combat and low-combat routes
+</h2>
+
+Everything Is Crab is not only about becoming a huge predator. Food, social, herbivore, scavenger, and Pacifist-style routes can all work if you build around the right problem.
+
+<GuideTable
+  caption="Non-combat and low-combat routes in Everything Is Crab."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The important rule is that non-combat does not mean no plan. Scavenger still needs food routing. Herbivore still needs progress. Social still needs boss damage. Pacifist still needs survival.
+
+Use <Link href="/everything-is-crab/achievements-challenges-guide">Achievements and Challenges Guide</Link> if you are trying Pacifist, poison, reflect, or social goals.
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="poison-and-stinger">
+  Poison and Stinger
+</h2>
+
+Stinger is one of the clearest early unlock goals because it has a specific poison target: **deal over 200 poison damage in a single run**.
+
+<GuideTable
+  caption="Poison route pieces and how to use them."
+  columns={poisonColumns}
+  rows={poisonRows}
+/>
+
+Poison is not the same as burst damage. A poison run needs time, which means it also needs movement, food, HP, and defense.
+
+<GuideCallout title="Poison rule">
+If your poison build dies before poison damage stacks, the problem is not poison. The problem is survival.
+</GuideCallout>
+
+---
+
+<h2 id="how-to-heal">
+  How to heal
+</h2>
+
+Healing matters because many failed runs die to chip damage before the boss.
+
+Use these recovery sources when they appear:
+
+<GuideTable
+  caption="Healing and recovery options in Everything Is Crab."
+  columns={healingColumns}
+  rows={healingRows}
+/>
+
+Healing is strongest when paired with movement. If you are already trapped, healing food or Oasis recovery may be too dangerous to reach.
+
+---
+
+<h2 id="mutagen-rarity-and-rerolls">
+  Mutagen points, rarity, and rerolls
+</h2>
+
+Starred enemies can give mutagen points, and mutagen can improve rarity or reroll choices.
+
+The best use of mutagen is not making anything legendary. The best use is improving the piece that solves your current run.
+
+<GuideTable
+  caption="Best and worst ways to spend mutagen points."
+  columns={mutagenColumns}
+  rows={mutagenRows}
+/>
+
+Do not chase starred enemies into bad terrain. Mutagen is valuable, but dying for it is not.
+
+---
+
+<h2 id="carcinisation">
+  Carcinisation: safe levels
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-carcinisation-food-rarity.webp"
+    alt="Player checking Carcinisation, which improves food rarity but increases enemy damage and final boss danger in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Carcinisation is a greed system. Better food is useful, but the extra danger can ruin unstable runs.
+  </figcaption>
+</figure>
+
+Use crab points as a risk meter.
+
+<GuideTable
+  caption="Practical Carcinisation risk guide."
+  columns={carcinisationColumns}
+  rows={carcinisationRows}
+/>
+
+For a normal beginner clear, 0-1 crab points is the safest range. Push 2-3 when stable. Treat 4+ as a strong-run choice or a challenge route.
+
+---
+
+<h2 id="bosses-and-final-boss">
+  Bosses and the final boss
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-final-boss-run-structure.webp"
+    alt="Player learning that Everything Is Crab 1.0 runs are longer and end with a final boss."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In 1.0, your build needs to survive beyond early bosses and reach a real final boss.
+  </figcaption>
+</figure>
+
+Before every boss, check four things:
+
+1. Can my main attack hit the boss?
+2. Am I fast enough to dodge?
+3. Do I have enough HP, defense, or healing?
+4. Am I fighting in bad terrain?
+
+If the answer is bad, fix it before taking greed.
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-final-boss-cataclysm.webp"
+    alt="Player fighting the Crab Kin final boss during Cataclysm with meteorites falling in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The final boss tests your whole run: damage, movement, defense, Cataclysm awareness, and earlier Carcinisation choices.
+  </figcaption>
+</figure>
+
+Use <Link href="/everything-is-crab/boss-guide">Boss Guide</Link> for boss-specific help.
+
+---
+
+<h2 id="after-first-clear">
+  What to do after your first clear
+</h2>
+
+After your first clear, do not turn on every new option at once. Pick one target and learn what changed.
+
+<GuideTable
+  caption="After first clear checklist in Everything Is Crab."
+  columns={afterClearColumns}
+  rows={afterClearRows}
+/>
+
+A good post-clear route is:
+
+1. check the Codex,
+2. read new genetics,
+3. push one Pressure level with a stable build,
+4. farm one unlock goal,
+5. practice the final boss with less greed.
+
+---
+
+<h2 id="recommended-reading-order">
+  Recommended reading order
+</h2>
+
+If you are new, read the guides in this order:
+
+1. <Link href="/everything-is-crab">Everything Is Crab Guide</Link>
+2. <Link href="/everything-is-crab/best-builds">Best Builds</Link>
+3. <Link href="/everything-is-crab/progression-guide">Progression Guide</Link>
+4. <Link href="/everything-is-crab/boss-guide">Boss Guide</Link>
+5. <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link>
+6. <Link href="/everything-is-crab/achievements-challenges-guide">Achievements and Challenges Guide</Link>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many food slots does Cheek Pouch have?
+
+Cheek Pouch has a capacity of 2. It stores nearby food inside your cheeks, and stored food is consumed at the same rate while you keep moving.
+
+### What is Trunk's exact damage multiplier?
+
+Trunk deals 1-1.4x damage based on Physical or Ability, using whichever value is lower. It also has a 1.5s cooldown and gives +0.66 Feeding Distance.
+
+### What is the easiest first-clear build?
+
+Use Cheek Pouch or feeding distance, one main attack, movement speed, Shell / Plating / HP, and low Carcinisation. Trunk hybrid and big physical builds are the easiest early routes to understand.
+
+### What should I do if I die before the first boss?
+
+Fix food and movement first. Take Cheek Pouch, feeding distance, speed, or a simple main attack before chasing rare evolutions.
+
+### What should I do if I die to bosses?
+
+Enter the fight with one attack that hits reliably, movement speed, HP or defense, and safer terrain. Do not fight bosses in water, snow, heat, or cramped areas if you can move away first.
+
+### What should I do if I die after taking crab points?
+
+Take fewer Carcinisation points. Stay at 0-1 while learning, push 2-3 only when stable, and save 4+ for strong runs or challenge goals.
+
+### Is Pacifist good for beginners?
+
+Pacifist is not a good first-clear route. It becomes useful after you understand food routing, movement, boss patterns, and non-combat scaling.
+
+### Is Scavenger good?
+
+Yes, Scavenger-style XP value becomes stronger when runs are longer, but you still need one attack or survival plan for bosses.
+
+### How do I unlock Stinger?
+
+Stinger is tied to dealing over 200 poison damage in a single run. Build poison early and add enough survival for poison damage to stack.
+
+### What should I do after my first clear?
+
+Check the Codex, read new genetics, push one Pressure level with a stable build, and pick one unlock target instead of testing everything at once.
+
+### What should I read next?
+
+Read <Link href="/everything-is-crab/best-builds">Best Builds</Link> if you want stronger build routes. Read <Link href="/everything-is-crab/progression-guide">Progression Guide</Link> if you want genetics, Codex, unlocks, and Endless Mode.

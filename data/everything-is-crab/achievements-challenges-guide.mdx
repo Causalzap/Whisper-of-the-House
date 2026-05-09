@@ -1,0 +1,730 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const goalColumns = [
+  { key: "goal", label: "Goal Type" },
+  { key: "whenToDoIt", label: "When To Do It" },
+  { key: "coreAnswer", label: "Core Answer" },
+];
+
+export const goalRows = [
+  {
+    goal: "Early unlocks",
+    whenToDoIt: "Your first few clears and early Pressure attempts.",
+    coreAnswer:
+      "Play for stable clears, check the Codex after runs, and test new genetics one at a time.",
+  },
+  {
+    goal: "Poison / Stinger goals",
+    whenToDoIt: "After you can survive long enough for damage-over-time routes.",
+    coreAnswer:
+      "Stinger is the key known poison target: deal over 200 poison damage in one run, excluding Detachable Tail damage.",
+  },
+  {
+    goal: "Reflect goals",
+    whenToDoIt: "After you understand contact damage and recovery.",
+    coreAnswer:
+      "Build around Spines and contact punishment, but make the run durable before inviting hits.",
+  },
+  {
+    goal: "Pacifist goals",
+    whenToDoIt: "After you know food routes, boss patterns, and safe scaling.",
+    coreAnswer:
+      "Outlasting bosses can be a valid Pacifist route, but skipping kills costs meat and DNA / mutagen-style reroll resources.",
+  },
+  {
+    goal: "Social / charm goals",
+    whenToDoIt: "After you can keep allies alive and survive bosses yourself.",
+    coreAnswer:
+      "The major charm target is 12 charmed allies at the same time. Stack Social with Tail, Tail Wag, Alpha, and Antennae support.",
+  },
+  {
+    goal: "Pressure goals",
+    whenToDoIt: "After your normal clears are consistent.",
+    coreAnswer:
+      "Use safe scaling and one focused build. Pressure is not the best place to chase five side goals at once.",
+  },
+  {
+    goal: "Final boss / Cataclysm goals",
+    whenToDoIt: "After you can reach the end without arriving broken or underbuilt.",
+    coreAnswer:
+      "Treat the final boss as a full-run goal: movement, defense, recovery, and reliable damage all matter.",
+  },
+  {
+    goal: "Cosmetics and collection",
+    whenToDoIt: "After stable clears, or when a cosmetic has a clear unlock route.",
+    coreAnswer:
+      "Separate free gameplay unlocks from paid Supporter Pack cosmetics so you do not farm for something that is DLC-only.",
+  },
+];
+
+export const knownUnlockColumns = [
+  { key: "unlock", label: "Unlock / Target" },
+  { key: "trigger", label: "Trigger" },
+  { key: "route", label: "Best Route" },
+];
+
+export const knownUnlockRows = [
+  {
+    unlock: "Stinger",
+    trigger:
+      "Known: deal over 200 poison damage in a single run. Detachable Tail damage does not count toward this unlock.",
+    route:
+      "Start poison early, then add enough movement and defense to keep enemies alive long enough for poison to tick.",
+  },
+  {
+    unlock: "Frens / charm target",
+    trigger:
+      "Known: have 12 charmed allies at the same time.",
+    route:
+      "Stack Social through Tail, Tail Wag, Alpha, Antennae, and other Social support, then avoid losing allies to bad fights.",
+  },
+  {
+    unlock: "Pacifist boss route",
+    trigger:
+      "Known route: you can outlast a boss instead of killing it, but you trade away meat and DNA / reroll resources.",
+    route:
+      "Build food access, movement, defense, regeneration, and indirect value. Do not route Pacifist like a normal DPS run.",
+  },
+  {
+    unlock: "Supporter Pack cosmetics",
+    trigger:
+      "Paid DLC: Ghost Crab cosmetics for Exoskeleton, Pincer, Pistol Pincer, and More Eyes. Cosmetic only, no gameplay power.",
+    route:
+      "Buy only if you want the paid look or want to support the developer. Do not farm these as achievement unlocks.",
+  },
+  {
+    unlock: "Free cosmetics",
+    trigger:
+      "Known status: there are free cosmetics unlockable through normal gameplay, separate from the Supporter Pack.",
+    route:
+      "Check locked visuals and the Codex after runs, then farm one cosmetic target at a time.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "priority", label: "Unlock Priority" },
+  { key: "why", label: "Why This Comes Here" },
+  { key: "nextStep", label: "Next Step" },
+];
+
+export const priorityRows = [
+  {
+    priority: "1. Stable clear",
+    why: "You need a baseline before you know whether a challenge failed because of the goal or because the run was unstable.",
+    nextStep:
+      "Use safe food access, one real attack, movement, and defense until you can finish normal runs.",
+  },
+  {
+    priority: "2. Early Pressure",
+    why: "Pressure progression unlocks more long-term options and teaches harder rule sets.",
+    nextStep:
+      "Push one Pressure level at a time instead of combining it with Pacifist, poison, and cosmetic farming.",
+  },
+  {
+    priority: "3. Known numeric targets",
+    why: "Targets like Stinger and 12 charmed allies give you a clear success condition.",
+    nextStep:
+      "Run poison or Social routes when you can build toward the exact number instead of guessing.",
+  },
+  {
+    priority: "4. Pacifist and low-damage routes",
+    why: "These change boss rewards, reroll resources, and scaling tempo.",
+    nextStep:
+      "Attempt them after you understand what you lose by not killing bosses or enemies normally.",
+  },
+  {
+    priority: "5. Cosmetics and collection",
+    why: "Collection is easier once you can clear without ruining the current run objective.",
+    nextStep:
+      "Separate free cosmetic unlocks from paid Supporter Pack items before farming.",
+  },
+];
+
+export const buildColumns = [
+  { key: "build", label: "Challenge Build" },
+  { key: "bestFor", label: "Best For" },
+  { key: "uniqueJob", label: "Unique Job In The Run" },
+];
+
+export const buildRows = [
+  {
+    build: "Cheek Pouch Safe Scaling",
+    bestFor: "First clear, unlock farming, Pressure attempts",
+    uniqueJob:
+      "Turns food into safer levels while moving, which gives you more chances to find the goal-specific piece.",
+  },
+  {
+    build: "Poison / Stinger",
+    bestFor: "Stinger and poison damage goals",
+    uniqueJob:
+      "Reaches the poison damage threshold. The build problem is not finding poison once; it is keeping the run alive while poison accumulates.",
+  },
+  {
+    build: "Spines / Reflect",
+    bestFor: "Returned damage and contact-punishment goals",
+    uniqueJob:
+      "Converts enemy contact into progress, but only after HP, resistance, and recovery make contact survivable.",
+  },
+  {
+    build: "Social / Charm Pack",
+    bestFor: "12 ally charm target, pack damage, Social goals",
+    uniqueJob:
+      "Uses Tail, Tail Wag, Alpha, Antennae, and Social stacking to reach more allies while you avoid losing them to bad fights.",
+  },
+  {
+    build: "Pacifist Survival",
+    bestFor: "Pacifist and low-kill routes",
+    uniqueJob:
+      "Wins by routing food, movement, defense, and boss outlasting instead of assuming every boss must die.",
+  },
+  {
+    build: "Final Boss Complete Build",
+    bestFor: "Cataclysm and endgame goals",
+    uniqueJob:
+      "Combines damage, movement, defense, recovery, and safe attack timing instead of overinvesting in one stat.",
+  },
+];
+
+export const socialColumns = [
+  { key: "piece", label: "Social Piece" },
+  { key: "job", label: "Job" },
+  { key: "note", label: "Note" },
+];
+
+export const socialRows = [
+  {
+    piece: "Tail",
+    job: "Starts the Social route and can lead into Tail Wag.",
+    note: "Take it when you are committing to charm goals, not as a random side stat.",
+  },
+  {
+    piece: "Tail Wag",
+    job: "Periodically charms nearby enemies.",
+    note: "This is one of the most important tools for building toward a large ally group.",
+  },
+  {
+    piece: "Alpha",
+    job: "Supports the larger pack / ally plan.",
+    note: "Works best when your run already has the movement and food safety to keep the group together.",
+  },
+  {
+    piece: "Antennae",
+    job: "Adds Social support and helps push the ally count higher.",
+    note: "Useful when the goal is the 12-charmer threshold rather than generic boss DPS.",
+  },
+  {
+    piece: "Personal attack",
+    job: "Keeps bosses and dangerous enemies from stalling the run.",
+    note: "Allies are support. You still need a way to finish fights yourself.",
+  },
+];
+
+export const cosmeticColumns = [
+  { key: "cosmeticType", label: "Cosmetic Type" },
+  { key: "howItUnlocks", label: "How It Unlocks" },
+  { key: "whatToKnow", label: "What To Know" },
+];
+
+export const cosmeticRows = [
+  {
+    cosmeticType: "Supporter Pack cosmetics",
+    howItUnlocks:
+      "Paid DLC. The Ghost Crab theme applies to Exoskeleton, Pincer, Pistol Pincer, and More Eyes.",
+    whatToKnow:
+      "These are visual only and do not affect survival, progression, or build strength.",
+  },
+  {
+    cosmeticType: "Free gameplay cosmetics",
+    howItUnlocks:
+      "Unlocked through normal gameplay and collection progress.",
+    whatToKnow:
+      "Check locked visuals and the Codex after runs to see what to farm next.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Chasing five goals in one run",
+    whyItHurts:
+      "The run loses direction, and you cannot tell which decision caused the failure.",
+    betterPlay:
+      "Pick one target before the run starts: poison, reflect, Pacifist, Social, Pressure, final boss, or cosmetics.",
+  },
+  {
+    mistake: "Ignoring exact triggers",
+    whyItHurts:
+      "Some goals have real thresholds, like Stinger's poison damage or the 12-charmer ally target.",
+    betterPlay:
+      "Use known thresholds when available. If the exact trigger is unclear, build toward the goal type without sacrificing the run’s core survival and boss plan.",
+  },
+  {
+    mistake: "Playing Pacifist like weak DPS",
+    whyItHurts:
+      "Pacifist changes reward flow. Outlasting a boss is not the same as killing it slowly.",
+    betterPlay:
+      "Route around survival, special fruit, and fewer meat / DNA drops.",
+  },
+  {
+    mistake: "Treating Supporter Pack cosmetics as farmable unlocks",
+    whyItHurts:
+      "You may waste runs chasing visuals that are paid DLC only.",
+    betterPlay:
+      "Separate paid cosmetics from free gameplay cosmetics before planning collection runs.",
+  },
+  {
+    mistake: "Using allies as the whole boss plan",
+    whyItHurts:
+      "A large Social pack can still collapse if the boss or terrain removes your safety.",
+    betterPlay:
+      "Use allies for pressure and distraction, but keep movement, defense, and one personal attack.",
+  },
+  {
+    mistake: "Taking Carcinisation while behind",
+    whyItHurts:
+      "The extra danger can hit before the better food pays off.",
+    betterPlay:
+      "Take it when your current goal route is already stable, not when the run needs rescue.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Everything Is Crab achievements and challenges are easiest when you pick one goal per run and build around the exact trigger when that trigger is known.**
+
+Known high-value targets include **Stinger** for poison routing, **12 charmed allies** for Social / charm routing, and Pacifist-style boss survival where you can **outlast a boss instead of killing it**. Pacifist routing has a real cost: you can lose meat and DNA / mutagen-style reroll resources, so later build control becomes harder.
+
+Use this as a route-planning guide for the most useful early achievement and challenge targets. The table below focuses on triggers and routes that are useful to players right now, instead of trying to list every achievement before all thresholds are fully documented.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-achievements-challenges-overview.webp"
+    alt="Player seeing that Everything Is Crab 1.0 adds more unlocks, Pressure 20, challenges, new evolutions, and a final boss."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Everything Is Crab 1.0 adds more long-term goals, so the best approach is to separate normal clears, unlock farming, Pressure clears, and challenge runs.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-achievements-and-challenges-work">
+  How achievements and challenges work
+</h2>
+
+Achievements and challenges in **Everything Is Crab** are not all the same type of goal. Some are natural progression goals, some are build-routing goals, some are numeric thresholds, and some are collection goals.
+
+The most important rule is:
+
+**one run should have one main goal.**
+
+If you try to farm poison, push Pressure, collect cosmetics, force Pacifist, stack Carcinisation, and beat the final boss all in the same run, you will usually build something unfocused.
+
+<GuideTable
+  caption="Main achievement and challenge goal types in Everything Is Crab."
+  columns={goalColumns}
+  rows={goalRows}
+/>
+
+<GuideCallout title="Challenge rule">
+Do not start a run with “maybe I can unlock everything.” Start with one target: poison, reflect, Pacifist, Social, Pressure, final boss, or collection.
+</GuideCallout>
+
+Use <Link href="/everything-is-crab">Everything Is Crab Guide</Link> if you need the full overview before planning challenge runs.
+
+<AdUnit placement="article_after_first_h2" />
+
+---
+
+<h2 id="known-unlock-triggers">
+  Known unlock routes
+</h2>
+
+Start with the targets that have clear routes and useful rewards. These are the unlocks and challenge paths most likely to change how you plan a run.
+
+<GuideTable
+  caption="Known achievement and challenge routes."
+  columns={knownUnlockColumns}
+  rows={knownUnlockRows}
+/>
+
+<GuideCallout title="Unlock route rule">
+If a goal has a clear trigger, build directly toward that trigger. If you only know the goal type, do not overfit the run; use the closest route here and keep the build stable enough to finish.
+</GuideCallout>
+
+---
+
+<h2 id="what-to-unlock-first">
+  What to unlock first
+</h2>
+
+The best first unlock is not always the flashiest one. It is the one that makes future runs more consistent.
+
+<GuideTable
+  caption="Recommended unlock priorities for Everything Is Crab."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+Use <Link href="/everything-is-crab/progression-guide">Progression Guide</Link> if you want the full genetics, Codex, unlock, and Endless Mode breakdown.
+
+---
+
+<h2 id="best-builds-for-challenges">
+  Best builds for achievements and challenges
+</h2>
+
+The right build depends on the goal. This table replaces repeated advice across the page: use it to choose the build core, then use the specific sections below for the exact trigger or route.
+
+<GuideTable
+  caption="Best build cores for Everything Is Crab achievements and challenges."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+Use <Link href="/everything-is-crab/best-builds">Best Builds</Link> for the full build breakdown.
+
+---
+
+<h2 id="poison-goals-and-stinger">
+  Poison goals and Stinger unlocks
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-achievements-stinger-poison-unlock.webp"
+    alt="Player checking Stinger, which unlocks after dealing over 200 poison damage in a single Everything Is Crab run."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Stinger is one of the clearest early poison unlocks because it gives poison routing a specific target.
+  </figcaption>
+</figure>
+
+**Stinger** is the cleanest poison route because it gives poison builds a specific target instead of a vague “use poison” objective. The exact trigger is listed in the known unlock table above, so this section focuses on how to route the run.
+
+The mistake is treating poison like instant burst. Poison needs time and enemy uptime. Your job is to apply poison early, keep the run stable, and avoid dying before the damage total matters.
+
+For this route, the unique priorities are:
+
+- get a poison source early,
+- keep enemies alive long enough for poison damage to tick,
+- avoid overbuilding fragile damage,
+- use mutagen and rerolls on poison pieces only when they move the target forward,
+- keep enough personal boss damage so the run does not stall.
+
+<GuideCallout title="Stinger route">
+For Stinger-style goals, the known threshold matters more than generic poison advice. Build toward the target, then stabilize the run so you can finish instead of dying after the unlock attempt.
+</GuideCallout>
+
+---
+
+<h2 id="mutagen-and-rerolls">
+  Mutagen, rarity, and rerolls for unlock farming
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-achievements-mutagen-reroll.webp"
+    alt="Player learning that starred enemies give mutagen points for rarity upgrades and rerolls in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mutagen points are especially useful during unlock runs because they let you chase the pieces your goal actually needs.
+  </figcaption>
+</figure>
+
+When you are farming an unlock, mutagen is more important than usual because it controls how often you can fix the route.
+
+Use mutagen when it does one of three things:
+
+1. finds the required goal piece,
+2. upgrades the required goal piece,
+3. fixes the weakness that would make the goal fail.
+
+Do not reroll only because an option is not legendary. A normal poison, reflect, Social, food, or survival upgrade that supports the goal can be better than a rare option that sends the run in a new direction.
+
+<GuideCallout title="Reroll rule">
+In an achievement run, the best reroll is the one that moves you closer to the target. Rarity is secondary.
+</GuideCallout>
+
+---
+
+<h2 id="reflect-goals-and-spines">
+  Reflect goals and Spines
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-achievements-spines-reflect-goal.webp"
+    alt="Player choosing Spines while aiming for reflected damage goals in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Spines can support reflected damage goals, but the build still needs HP and defense before inviting enemy contact.
+  </figcaption>
+</figure>
+
+Reflect goals are tempting because they sound passive: let enemies hit you and return damage. The real route is more controlled than that.
+
+Use **Spines** as the identity piece, then build the run around surviving the contact that triggers the value. That means Plating, Revenge, Shell, HP, regeneration, and movement all matter because they keep the reflect route from becoming a suicide route.
+
+<GuideCallout title="Reflect rule">
+Reflect is not an excuse to stop dodging. It is bonus damage for a build that is already durable enough to survive contact.
+</GuideCallout>
+
+---
+
+<h2 id="pacifist-runs">
+  Pacifist runs and low-damage goals
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-achievements-pacifist-genetic.webp"
+    alt="Player hovering the Pacifist genetic before starting an Everything Is Crab run."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pacifist-style runs are much easier after you already understand food, movement, enemy patterns, and boss survival.
+  </figcaption>
+</figure>
+
+Pacifist is not just “normal mode with worse damage.” The important mechanic is that you can route around **outlasting** a boss instead of killing it. If the boss gives up, it can drop special fruit that supports a different evolution path.
+
+That route has a cost: by not killing normally, you can lose meat and DNA / mutagen-style resources, which means fewer rerolls and less upgrade control later. Build around food access, feeding speed, feeding distance, movement, HP, defense, regeneration, Social tools, and indirect value from the start.
+
+<GuideCallout title="Pacifist rule">
+Outlasting the boss is a real strategy, not a failure to kill fast enough. The tradeoff is resource control: fewer meat and DNA / reroll drops can make the next stage harder if the build is unfocused.
+</GuideCallout>
+
+---
+
+<h2 id="social-and-pack-challenges">
+  Social, charm, and pack challenges
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-achievements-social-pack-damage.webp"
+    alt="Player checking pack damage and charmed animal scaling for social challenge goals in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Social builds can help with challenge goals when charm, allies, and pack damage all support the same plan.
+  </figcaption>
+</figure>
+
+The clearest Social target is having **12 charmed allies at the same time**. That number matters because it turns Social from a vague “ally build” into a measurable route.
+
+A strong charm route usually stacks several pieces instead of relying on one lucky ally. Tail helps start the route, Tail Wag can charm nearby enemies, Alpha supports the larger pack plan, and Antennae can help push the Social total higher.
+
+<GuideTable
+  caption="Social and charm route pieces."
+  columns={socialColumns}
+  rows={socialRows}
+/>
+
+<GuideCallout title="Social challenge rule">
+The 12-ally target is a Social stat and survival problem. You need enough charm to reach the count, enough routing to keep allies alive, and enough personal strength to survive when allies are not solving the boss.
+</GuideCallout>
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="pressure-achievements">
+  Pressure achievements and harder clears
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-progression-pressure-seven-unlock.webp"
+    alt="Player unlocking Pressure 7 after clearing Pressure 6 in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pressure unlocks are achievement-style goals because each clear proves your build can handle a harder rule set.
+  </figcaption>
+</figure>
+
+Pressure goals are the long-term challenge path.
+
+**Pressure 7 and above is the point where boss difficulty, environmental pressure, and build gaps start stacking more noticeably.** Before that, weak routes may still survive through food luck or safe bosses; after that, missing movement, damage, or defense becomes much harder to hide.
+
+The safest way to approach Pressure is to stop treating it as a place for random experiments. Use stable builds first. Once you can clear consistently, then start adding more specific achievement goals.
+
+For Pressure clears, the unique question is not “what is the strongest evolution?” It is “what removes the most failure points?” Usually that means food safety, one reliable attack, movement, defense, boss preparation, and cautious Carcinisation.
+
+Use <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link> for the dedicated high-difficulty plan.
+
+---
+
+<h2 id="final-boss-and-cataclysm-goals">
+  Final boss and Cataclysm goals
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-achievements-final-boss-cataclysm.webp"
+    alt="Player reaching the Crab Kin final boss while Cataclysm meteorites and poison effects appear in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Final boss goals are not just boss goals. They test your earlier build, Carcinisation, movement, defense, and Cataclysm awareness.
+  </figcaption>
+</figure>
+
+Final boss and Cataclysm goals should be treated as full-run goals because you cannot fix a bad endgame build at the final boss.
+
+A good final boss route answers four questions:
+
+1. Can I damage the boss reliably?
+2. Can I move when Cataclysm starts?
+3. Can I survive one or two mistakes?
+4. Did Carcinisation add more danger than my build can handle?
+
+During Cataclysm, do not chase unsafe damage just because the boss is low. The achievement route is to finish the fight, not to prove the last hit was greedy.
+
+Use <Link href="/everything-is-crab/boss-guide">Boss Guide</Link> if the final boss is your main wall.
+
+---
+
+<h2 id="cosmetics-and-collection-goals">
+  Cosmetics and collection goals
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-achievements-cosmetics-collection.webp"
+    alt="Player checking locked cosmetics and evolution visuals as long-term collection goals in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cosmetics and visual unlocks are great long-term goals, but they should not distract from the power plan of the current run.
+  </figcaption>
+</figure>
+
+Cosmetics and collection goals need one important distinction: **not every cosmetic is a gameplay unlock**.
+
+The Supporter Pack is paid DLC and gives Ghost Crab-themed cosmetics for **Exoskeleton**, **Pincer**, **Pistol Pincer**, and **More Eyes**. These are visual only and do not change survival, progression, stats, or build strength. The game also has free cosmetics that can be unlocked through normal play.
+
+<GuideTable
+  caption="Cosmetic unlock types in Everything Is Crab."
+  columns={cosmeticColumns}
+  rows={cosmeticRows}
+/>
+
+<GuideCallout title="Collection rule">
+Before farming a cosmetic, check whether it is a free gameplay unlock or a Supporter Pack cosmetic. Paid visuals should not be treated like achievement targets, and cosmetic farming should not be confused with making the current run stronger.
+</GuideCallout>
+
+---
+
+<h2 id="common-mistakes">
+  Common achievement and challenge mistakes
+</h2>
+
+<GuideTable
+  caption="Common achievement and challenge mistakes in Everything Is Crab."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is mixing too many goals. You can still get bonus unlocks along the way, but do not let side goals ruin the main route.
+
+---
+
+<h2 id="next-steps">
+  What to read next
+</h2>
+
+If your challenge build keeps falling apart, read <Link href="/everything-is-crab/best-builds">Best Builds</Link>.
+
+If you are stuck on final boss or Cataclysm goals, read <Link href="/everything-is-crab/boss-guide">Boss Guide</Link>.
+
+If you do not understand genetics, Codex, Pressure unlocks, or Endless Mode, read <Link href="/everything-is-crab/progression-guide">Progression Guide</Link>.
+
+If Pressure goals are your main target, read <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link>.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is this a complete all achievements guide?
+
+No. This is an early achievements and challenges guide. It focuses on practical routes, known triggers, and high-value challenge paths rather than pretending every achievement threshold is already documented.
+
+### What should I unlock first in Everything Is Crab?
+
+Get a stable clear first. After that, push early Pressure, check the Codex, test new genetics, then start farming specific poison, reflect, Social, boss, or challenge goals.
+
+### How do I unlock Stinger?
+
+Deal over 200 poison damage in a single run. Detachable Tail damage does not count, so use a real poison route and keep the run alive long enough for poison damage to stack.
+
+### Can you skip killing bosses in a Pacifist run?
+
+Yes. Pacifist-style routing can focus on outlasting a boss until it gives up, but the tradeoff is losing normal meat and DNA / reroll resources.
+
+### What is the best Social achievement target?
+
+The clearest Social target is having 12 charmed allies at the same time. Tail, Tail Wag, Alpha, Antennae, and Social stacking are the main route pieces.
+
+### Are social builds good for bosses?
+
+Yes, but they still need a backup plan. Allies can split pressure and add value, but bosses may still require personal damage, movement, and survival.
+
+### Are Pacifist runs good for beginners?
+
+No. Pacifist-style runs are better after you understand food, movement, boss patterns, and safe scaling.
+
+### Should I take Carcinisation during challenge runs?
+
+Only if the run is already stable. Do not take Carcinisation while behind, low on HP, slow, underleveled, or about to fight a boss unprepared.
+
+### Do Supporter Pack cosmetics affect gameplay?
+
+No. The Supporter Pack cosmetics are visual only. They do not improve survival, progression, stats, or achievement routing.
+
+### Are all cosmetics paid DLC?
+
+No. The Supporter Pack contains paid Ghost Crab cosmetics, but the game also has free cosmetics unlockable through normal gameplay.
+
+### What guide should I read next?
+
+Read <Link href="/everything-is-crab/best-builds">Best Builds</Link> if you need a stronger route. Read <Link href="/everything-is-crab/boss-guide">Boss Guide</Link> if final boss or Cataclysm goals are your main problem.

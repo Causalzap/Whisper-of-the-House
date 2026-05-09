@@ -1,0 +1,1464 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const pressureColumns = [
+  { key: "stage", label: "Pressure Stage" },
+  { key: "whatChanges", label: "What Changes" },
+  { key: "bestGenetic", label: "Recommended Genetic" },
+  { key: "playerPlan", label: "Player Plan" },
+];
+
+export const pressureRows = [
+  {
+    stage: "First clears / Pressure 1",
+    whatChanges:
+      "You are learning the base run: food, evolutions, bosses, final boss, and unlock flow.",
+    bestGenetic: "Standard / baseline start",
+    playerPlan:
+      "Use the safest build that can clear. Do not test challenge genetics yet.",
+  },
+  {
+    stage: "Pressure 2",
+    whatChanges: "Basic enemies deal increased damage.",
+    bestGenetic: "The same genetic that got your first clear",
+    playerPlan:
+      "Add defense, HP, movement, or sustain earlier. Do not trade hits with basic enemies just because the build worked on normal.",
+  },
+  {
+    stage: "Pressure 3",
+    whatChanges:
+      "Boss damage is increased. Enemies behave more aggressively and advance faster.",
+    bestGenetic: "Stable clear genetic",
+    playerPlan:
+      "Prepare boss movement earlier and avoid slow openers that cannot create space from faster enemies.",
+  },
+  {
+    stage: "Pressure 4",
+    whatChanges:
+      "Basic enemies deal increased damage. Environmental effects accumulate faster.",
+    bestGenetic: "Stable clear genetic or a defensive route",
+    playerPlan:
+      "Treat biome and environment damage as a real threat. Pick adaptation, sustain, or safer routing before greed.",
+  },
+  {
+    stage: "Pressure 5",
+    whatChanges:
+      "Movement speed bonuses have diminishing returns. Enemies have increased health.",
+    bestGenetic:
+      "Stable damage route, Trunk Hybrid, Big Physical, or Body Slam Tank",
+    playerPlan:
+      "Do not rely only on speed stacking. Add real damage, attack area, HP, and defense.",
+  },
+  {
+    stage: "Pressure 6",
+    whatChanges:
+      "Boss damage is increased. Starting biome is randomized.",
+    bestGenetic:
+      "Baseline / stable genetic, or Grandiose only if you already know your big-body route",
+    playerPlan:
+      "Read the biome first. Solve cold, heat, water, night, or bad terrain before greed.",
+  },
+  {
+    stage: "Pressure 7",
+    whatChanges:
+      "Bosses gain protection at the start of fights and after each enrage phase. Environmental damage is increased.",
+    bestGenetic:
+      "Stable clear genetic, Body Slam / tank-friendly route, or tested Trunk route",
+    playerPlan:
+      "Bring sustained damage, movement, HP, and defense. Do not rely only on burst.",
+  },
+  {
+    stage: "Pressure 8",
+    whatChanges:
+      "Healing from health food is reduced. The final boss begins with an extra attack modifier.",
+    bestGenetic: "Sustain-heavy route or your safest Pressure 7 clear genetic",
+    playerPlan:
+      "Do not count on health food to save bad trades. Bring regeneration, defense, movement, and final boss-safe damage.",
+  },
+  {
+    stage: "Pressure 9",
+    whatChanges:
+      "Environmental events happen more frequently. Enemies advance faster.",
+    bestGenetic: "Stable biome-aware route",
+    playerPlan:
+      "Prioritize positioning, movement, terrain adaptation, and fast wave control. Avoid builds that need too long to set up.",
+  },
+  {
+    stage: "Pressure 10",
+    whatChanges:
+      "Overall progression is slower. Enemies have increased health. Clearing Pressure 10 unlocks Endless Mode access.",
+    bestGenetic: "Your safest clear genetic",
+    playerPlan:
+      "Build for a normal clear first, then prepare for post-final-boss scaling. You need better damage and stronger food tempo.",
+  },
+  {
+    stage: "Pressure 11",
+    whatChanges:
+      "Monsters scale faster, and you have less time to slowly assemble your build.",
+    bestGenetic:
+      "Tested Body Slam / HP route, Trunk route, or another build you already know",
+    playerPlan:
+      "Pick flexible early value first, then commit only when the run offers a real build-defining piece.",
+  },
+  {
+    stage: "Pressure 12",
+    whatChanges:
+      "Animals deal less damage to bosses, and food bonus is decreased.",
+    bestGenetic:
+      "Avoid social-only or animal-reliant boss plans unless you have backup damage",
+    playerPlan:
+      "Bring personal boss damage and stronger food tempo because ally / animal boss value and food bonuses are worse.",
+  },
+  {
+    stage: "Pressure 13-19",
+    whatChanges:
+      "These tiers should be treated as late Pressure consistency tests. Small weaknesses in food tempo, movement, sustain, boss damage, or Cataclysm survival become much harder to ignore.",
+    bestGenetic:
+      "Only tested genetics. Do not combine a new genetic, new build, and new challenge goal.",
+    playerPlan:
+      "Use your most repeatable build, read the tier modifier before the run, and adjust one failure point at a time.",
+  },
+  {
+    stage: "Pressure 20",
+    whatChanges:
+      "Pressure 20 is a late progression target, not an early clear target.",
+    bestGenetic:
+      "Use the genetic and build core that already cleared your highest Pressure tier",
+    playerPlan:
+      "Attempt with a proven scaling core: Trunk Hybrid with defense, Body Slam Tank, or Spines / Reflect with sustain.",
+  },
+];
+
+export const pressureTrackerColumns = [
+  { key: "pressureRange", label: "Pressure Range" },
+  { key: "mainRisk", label: "Main Risk" },
+  { key: "safePlan", label: "Safe Plan" },
+  { key: "whatToWatchFor", label: "What To Watch For" },
+];
+
+export const pressureTrackerRows = [
+  {
+    pressureRange: "Pressure 8",
+    mainRisk:
+      "Healing from health food is reduced, and the final boss starts with an extra attack modifier.",
+    safePlan:
+      "Bring recovery that does not depend only on health food, plus movement and final boss-safe damage.",
+    whatToWatchFor:
+      "Watch whether you are dying because you expected food healing to cover mistakes.",
+  },
+  {
+    pressureRange: "Pressure 9",
+    mainRisk:
+      "Environmental events happen more often, and enemies advance faster.",
+    safePlan:
+      "Use stronger positioning, terrain adaptation, movement, and wave control.",
+    whatToWatchFor:
+      "Watch whether your deaths come from being forced into bad terrain or getting surrounded faster than before.",
+  },
+  {
+    pressureRange: "Pressure 10",
+    mainRisk:
+      "Overall progression is slower, enemies have more health, and Endless access unlocks after clearing it.",
+    safePlan:
+      "Use better damage scaling and stronger food tempo. Do not enter the final boss barely online.",
+    whatToWatchFor:
+      "Watch whether you are underleveled, lacking damage, or clearing with no resources left for Endless.",
+  },
+  {
+    pressureRange: "Pressure 11",
+    mainRisk:
+      "Monsters scale faster, so slow build assembly is punished.",
+    safePlan:
+      "Use known build patterns. Take flexible early value, then commit around a strong specialization or core evolution.",
+    whatToWatchFor:
+      "Watch whether you are dying because the build takes too long to come online.",
+  },
+  {
+    pressureRange: "Pressure 12",
+    mainRisk:
+      "Animals deal less damage to bosses and food bonus is decreased.",
+    safePlan:
+      "Do not rely on social / animal boss damage. Bring personal boss damage and stronger food planning.",
+    whatToWatchFor:
+      "Watch for underleveling and weak boss damage if your route depends on allies or animals.",
+  },
+  {
+    pressureRange: "Pressure 13-14",
+    mainRisk:
+      "Mid-late Pressure starts punishing whichever part of your route is least stable.",
+    safePlan:
+      "Keep your genetic stable and use the build that cleared Pressure 12.",
+    whatToWatchFor:
+      "Watch which failure point becomes dominant: food, boss protection, terrain, chip damage, or final boss chaos.",
+  },
+  {
+    pressureRange: "Pressure 15-19",
+    mainRisk:
+      "Late Pressure exposes weak scaling, weak sustain, bad boss uptime, and poor Carcinisation timing.",
+    safePlan:
+      "Use only your most tested build. Avoid Pacifist, social-only, or poison-only attempts unless they are already proven.",
+    whatToWatchFor:
+      "Watch whether late Pressure mainly punishes scaling, sustain, Cataclysm survival, or greed.",
+  },
+  {
+    pressureRange: "Pressure 20",
+    mainRisk:
+      "Pressure 20 is the late consistency target where your build must survive the clear and still be Endless-ready.",
+    safePlan:
+      "Use a proven high-sustain scaling build instead of a novelty route.",
+    whatToWatchFor:
+      "Watch whether your build can survive Cataclysm, enter Endless with resources left, and keep scaling after the clear.",
+  },
+];
+
+export const geneticColumns = [
+  { key: "pressureStage", label: "Pressure Stage" },
+  { key: "recommendedGenetic", label: "Recommended Genetic" },
+  { key: "whyItFits", label: "Why It Fits" },
+  { key: "avoid", label: "Avoid" },
+];
+
+export const geneticRows = [
+  {
+    pressureStage: "Normal clear",
+    recommendedGenetic: "Standard / baseline start",
+    whyItFits:
+      "You need to learn the normal run before adding special rules.",
+    avoid:
+      "Pacifist, Challenger, or Minimalist if you have not cleared yet.",
+  },
+  {
+    pressureStage: "Pressure 1-5",
+    recommendedGenetic: "Your first-clear genetic",
+    whyItFits:
+      "Keeping the same genetic makes it easier to see what Pressure changed.",
+    avoid:
+      "Testing a new genetic and a new build at the same time.",
+  },
+  {
+    pressureStage: "Pressure 6",
+    recommendedGenetic:
+      "Stable baseline or Grandiose if you already understand big-body routing",
+    whyItFits:
+      "Random biome starts punish slow adaptation. You want a genetic that does not make the opening confusing.",
+    avoid:
+      "Slow or fragile setups that cannot handle cold, heat, water, or bad terrain.",
+  },
+  {
+    pressureStage: "Pressure 7",
+    recommendedGenetic: "Stable Trunk, Body Slam, or tank-friendly route",
+    whyItFits:
+      "Boss protection and environmental damage reward sustain and repeated safe damage.",
+    avoid:
+      "Pure burst plans and social routes with no backup boss attack.",
+  },
+  {
+    pressureStage: "Pressure 8-14",
+    recommendedGenetic:
+      "Tested baseline, Grandiose for size builds, or another Codex genetic only after one controlled run",
+    whyItFits:
+      "Mid Pressure is where you need consistency more than novelty.",
+    avoid:
+      "Pacifist or Minimalist unless you are specifically testing that route.",
+  },
+  {
+    pressureStage: "Pressure 15-20",
+    recommendedGenetic:
+      "Only the genetic that already works for your highest stable clear",
+    whyItFits:
+      "Late Pressure punishes untested openings.",
+    avoid:
+      "New genetic + new build + new challenge goal in the same attempt.",
+  },
+];
+
+export const buildColumns = [
+  { key: "build", label: "Pressure Build" },
+  { key: "whyPressureMakesItGood", label: "Why It Works Under Pressure" },
+  { key: "pressureFailurePoint", label: "Pressure Failure Point" },
+];
+
+export const buildRows = [
+  {
+    build: "Trunk Hybrid",
+    whyPressureMakesItGood:
+      "Trunk combines damage with feeding distance, which matters more when Pressure makes safe leveling harder.",
+    pressureFailurePoint:
+      "Falls apart if Physical and Ability are unbalanced or if the slow swing has no movement support.",
+  },
+  {
+    build: "Body Slam Tank",
+    whyPressureMakesItGood:
+      "Pressure bosses and environmental damage reward HP, defense, and damage that scales from Max HP.",
+    pressureFailurePoint:
+      "Dies if it becomes a slow tank with no movement before biome or final boss chaos.",
+  },
+  {
+    build: "Big Physical",
+    whyPressureMakesItGood:
+      "Simple scaling helps when Pressure leaves less room for complicated synergy setup.",
+    pressureFailurePoint:
+      "Can be punished by water, snow, boss protection, and final boss movement checks.",
+  },
+  {
+    build: "Spines / Reflect",
+    whyPressureMakesItGood:
+      "Contact punishment can turn dangerous enemy pressure into damage if the build has HP and sustain.",
+    pressureFailurePoint:
+      "Reflect does nothing if the contact kills you first.",
+  },
+  {
+    build: "Cheek Pouch Safe Scaling",
+    whyPressureMakesItGood:
+      "Food tempo matters more when bad starts and harsher modifiers make underleveling more common.",
+    pressureFailurePoint:
+      "Food safety alone does not kill bosses; it must pivot into Trunk, tank, physical, poison, or social.",
+  },
+  {
+    build: "Social Pack",
+    whyPressureMakesItGood:
+      "Allies and charm can reduce wave pressure when the route is fully online.",
+    pressureFailurePoint:
+      "Pressure bosses may still require personal damage, and Pressure 12 makes animal boss damage worse.",
+  },
+];
+
+export const failureFixColumns = [
+  { key: "deathScenario", label: "Pressure Death Scenario" },
+  { key: "likelyProblem", label: "Likely Problem" },
+  { key: "nextRunFix", label: "Next Run / Prep Fix" },
+  { key: "doNotDo", label: "Do Not Do" },
+];
+
+export const failureFixRows = [
+  {
+    deathScenario: "Died on Pressure 6 cold start before first boss",
+    likelyProblem:
+      "You forced a normal opener instead of adapting to cold / movement pressure.",
+    nextRunFix:
+      "Next run: prioritize cold adaptation or defense first, then movement, then one reliable attack or food tool.",
+    doNotDo:
+      "Do not chase a greedy damage route before the biome is solved.",
+  },
+  {
+    deathScenario: "Died on Pressure 6 water start or water boss arena",
+    likelyProblem:
+      "Movement collapsed in water and the build could not reposition.",
+    nextRunFix:
+      "Next run: take movement, wings, or terrain adaptation early, then add a wide / ranged attack and HP or Shell / Plating.",
+    doNotDo:
+      "Do not start a boss in water if you can move to safer ground.",
+  },
+  {
+    deathScenario: "Died on Pressure 7 boss protection",
+    likelyProblem:
+      "The build relied on burst and could not survive protected windows.",
+    nextRunFix:
+      "Next run: build sustained damage, HP or defense, and movement before the boss timer.",
+    doNotDo:
+      "Do not spend all early picks on burst damage.",
+  },
+  {
+    deathScenario: "Died on Pressure 11 before build came together",
+    likelyProblem:
+      "Pressure 11 scaling gave you less time to slowly assemble a perfect route.",
+    nextRunFix:
+      "Next run: take flexible early value, commit to one known build pattern sooner, and add defense or movement before specialization greed.",
+    doNotDo:
+      "Do not hold picks forever waiting for the ideal evolution package.",
+  },
+  {
+    deathScenario: "Died on Pressure 12 with social / animal damage",
+    likelyProblem:
+      "Animals deal less damage to bosses, so ally or animal boss pressure was not enough.",
+    nextRunFix:
+      "Next run: bring a personal boss attack, add food tempo support, then take movement or HP for longer boss windows.",
+    doNotDo:
+      "Do not rely on animals or charmed enemies as your only boss plan.",
+  },
+  {
+    deathScenario: "Died to environmental damage",
+    likelyProblem:
+      "Pressure made chip damage more expensive, and the run had no sustain.",
+    nextRunFix:
+      "Next run: take regeneration or sustain earlier, then biome adaptation, then food safety or HP.",
+    doNotDo:
+      "Do not take Carcinisation while the environment is already draining you.",
+  },
+  {
+    deathScenario: "Died after taking Carcinisation",
+    likelyProblem:
+      "The run took extra danger before it could convert better food into power.",
+    nextRunFix:
+      "Next run: build your main attack, movement, and defense first. Delay crab points until the run is already ahead.",
+    doNotDo:
+      "Do not treat Carcinisation as a default pick in Pressure.",
+  },
+  {
+    deathScenario: "Died during Cataclysm",
+    likelyProblem:
+      "The build had enough damage to reach the final boss but not enough movement or awareness to survive meteorites.",
+    nextRunFix:
+      "Next run: build movement, HP or defense, and reliable damage that does not require standing still.",
+    doNotDo:
+      "Do not chase final boss damage windows through meteorite danger.",
+  },
+  {
+    deathScenario: "Died right after entering Endless",
+    likelyProblem:
+      "The build barely cleared the final boss and had no HP, movement, recovery, or scaling left for Extinction / objective pressure.",
+    nextRunFix:
+      "Before entering Endless next time: finish the final boss with HP left, keep movement online, secure recovery, and have a scaling plan such as Max HP, Physical, Ability, or reflect sustain.",
+    doNotDo:
+      "Do not enter Endless with a build that only wins the final boss by damage racing.",
+  },
+];
+
+export const biomeColumns = [
+  { key: "biomeProblem", label: "Biome Problem" },
+  { key: "whyPressureMakesItWorse", label: "Why Pressure Makes It Worse" },
+  { key: "answer", label: "Player Answer" },
+];
+
+export const biomeRows = [
+  {
+    biomeProblem: "Cold start",
+    whyPressureMakesItWorse:
+      "Random biome starts can put you into cold before your build has speed or sustain.",
+    answer:
+      "Take cold adaptation, fur-style defense, movement, or a simple attack before greed.",
+  },
+  {
+    biomeProblem: "Heat start",
+    whyPressureMakesItWorse:
+      "Chip damage becomes harder to ignore when Pressure already punishes mistakes.",
+    answer:
+      "Prioritize heat adaptation, regeneration, HP, defense, and safer routing.",
+  },
+  {
+    biomeProblem: "Water zones",
+    whyPressureMakesItWorse:
+      "Slow movement makes protected bosses, enemy waves, and recovery routing more dangerous.",
+    answer:
+      "Take wings, terrain adaptation, speed, dash tools, or avoid water boss arenas.",
+  },
+  {
+    biomeProblem: "Night or low vision",
+    whyPressureMakesItWorse:
+      "Low visibility makes food routes and enemy approach angles harder to read.",
+    answer:
+      "Use senses, vision, speed, or safer food tools. Do not chase food you cannot safely path to.",
+  },
+  {
+    biomeProblem: "Bad boss arena",
+    whyPressureMakesItWorse:
+      "Boss modifiers plus bad terrain can kill runs that were otherwise stable.",
+    answer:
+      "Move to open ground before the boss timer finishes whenever possible.",
+  },
+];
+
+export const cataclysmColumns = [
+  { key: "mechanic", label: "Cataclysm Mechanic" },
+  { key: "pressureProblem", label: "Why It Matters In Pressure" },
+  { key: "playerAnswer", label: "Player Answer" },
+];
+
+export const cataclysmRows = [
+  {
+    mechanic: "Meteorites",
+    pressureProblem:
+      "Meteorites force you to watch the arena, not only the boss. Slow or stationary builds lose safe damage windows.",
+    playerAnswer:
+      "Keep moving, avoid tunnel vision, and attack only when your escape path is clear.",
+  },
+  {
+    mechanic: "Final boss overlap",
+    pressureProblem:
+      "Boss attacks, meteorites, enemies, and terrain pressure can overlap during the final stretch.",
+    playerAnswer:
+      "Arrive with movement, HP, defense, and damage that does not require standing still too long.",
+  },
+  {
+    mechanic: "Carcinisation interaction",
+    pressureProblem:
+      "Carcinisation can add final boss danger while Pressure already increases punishment.",
+    playerAnswer:
+      "Use fewer crab points than you would in a normal run unless the build is far ahead.",
+  },
+  {
+    mechanic: "Low-HP panic",
+    pressureProblem:
+      "Chasing food or damage during Cataclysm often creates a worse path through meteorites.",
+    playerAnswer:
+      "Recover only when the route is safe. Do not cross meteorite danger for one food pickup.",
+  },
+  {
+    mechanic: "Burst greed",
+    pressureProblem:
+      "The boss being low HP tempts players into unsafe final hits.",
+    playerAnswer:
+      "Treat the last 10% like the most dangerous part of the fight, not a victory lap.",
+  },
+];
+
+export const endlessPressureColumns = [
+  { key: "endlessPart", label: "Endless Part" },
+  { key: "whatHappens", label: "What Happens" },
+  { key: "whatItChanges", label: "What It Changes" },
+];
+
+export const endlessPressureRows = [
+  {
+    endlessPart: "Unlock access",
+    whatHappens:
+      "Defeating Pressure 10 unlocks Endless access, but you still need to defeat the current run to enter Endless.",
+    whatItChanges:
+      "Pressure 10 is not just another clear. It opens the path to post-clear scaling.",
+  },
+  {
+    endlessPart: "Endless start",
+    whatHappens:
+      "After the Pressure 11 clear, Endless begins through a point-of-interest style entry and shows Extinction 1.",
+    whatItChanges:
+      "The run shifts from final boss completion into continued survival.",
+  },
+  {
+    endlessPart: "Branching / POI choices",
+    whatHappens:
+      "Endless introduces branching choices and point-of-interest value after the clear.",
+    whatItChanges:
+      "Route choice and long-term map value matter more after the normal clear.",
+  },
+  {
+    endlessPart: "Defend objective",
+    whatHappens:
+      "One Endless objective asks you to defend for one minute and can spawn a charmed small version of the land boss.",
+    whatItChanges:
+      "Endless can force you to hold ground instead of only kiting away from danger.",
+  },
+  {
+    endlessPart: "Boss continuation",
+    whatHappens:
+      "Endless still includes bosses; after a boss cycle, the run can move into Extinction 2.",
+    whatItChanges:
+      "A final-boss clear build still needs boss damage after the clear.",
+  },
+  {
+    endlessPart: "Infinite scaling",
+    whatHappens:
+      "Endless allows continued scaling, including Max HP, Ability, and Physical.",
+    whatItChanges:
+      "Long-term stat scaling becomes more valuable than short burst damage.",
+  },
+];
+
+export const endlessBuildColumns = [
+  { key: "build", label: "Endless Candidate" },
+  { key: "whyItWorks", label: "Why It Works" },
+  { key: "mustHave", label: "Must Have Before Endless" },
+];
+
+export const endlessBuildRows = [
+  {
+    build: "Body Slam Tank",
+    whyItWorks:
+      "Max HP can keep scaling in Endless, and Body Slam benefits from Max HP scaling.",
+    mustHave:
+      "Max HP, Shell / Plating, movement, recovery, and ideally Hemp-style Max HP synergy.",
+  },
+  {
+    build: "Trunk Hybrid",
+    whyItWorks:
+      "Can scale both Physical and Ability while keeping food reach useful after the clear.",
+    mustHave:
+      "Balanced Physical and Ability, size, cooldown help, movement, and defense.",
+  },
+  {
+    build: "Spines / Reflect with sustain",
+    whyItWorks:
+      "Longer enemy pressure makes contact punishment stronger if you can survive it.",
+    mustHave:
+      "HP, Plating, regeneration, Poisonous / Detachable, movement, and a way to avoid being trapped.",
+  },
+  {
+    build: "Big Physical with defense",
+    whyItWorks:
+      "Simple damage and size scaling are reliable when Endless chaos makes complicated setups harder.",
+    mustHave:
+      "Physical damage, size, HP, movement, and enough defense for boss continuation.",
+  },
+  {
+    build: "Social Pack with backup attack",
+    whyItWorks:
+      "Allies can help with wave pressure, but Pressure 12 makes animal boss damage less reliable.",
+    mustHave:
+      "Charm tools, pack damage, backup personal attack, and enough movement to survive without allies.",
+  },
+];
+
+export const hempColumns = [
+  { key: "piece", label: "Piece" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "pressureUse", label: "Pressure / Endless Use" },
+];
+
+export const hempRows = [
+  {
+    piece: "Hemp",
+    whyItMatters:
+      "Hemp gives Max HP when health food is eaten at maximum health.",
+    pressureUse:
+      "Strong with Body Slam because Body Slam scales from Max HP.",
+  },
+  {
+    piece: "Body Slam",
+    whyItMatters:
+      "Body Slam converts Physical damage and Max HP into close-range damage.",
+    pressureUse:
+      "Becomes a stronger Pressure / Endless candidate when Max HP keeps scaling.",
+  },
+  {
+    piece: "Regeneration",
+    whyItMatters:
+      "Regeneration helps you return to full HP so health food can become Max HP value instead of only recovery.",
+    pressureUse:
+      "Useful when environmental damage and poison chip would otherwise keep you below full HP.",
+  },
+  {
+    piece: "Senses / POI routing",
+    whyItMatters:
+      "Senses help locate points of interest and high-value routes.",
+    pressureUse:
+      "More valuable in Pressure and Endless where POI choices can affect long-term scaling.",
+  },
+  {
+    piece: "Movement",
+    whyItMatters:
+      "HP scaling does not help if you cannot escape objectives, meteorites, water, or boss pressure.",
+    pressureUse:
+      "Required before turning a Body Slam route into an Endless route.",
+  },
+];
+
+export const modifierColumns = [
+  { key: "modifier", label: "Pressure Modifier" },
+  { key: "problem", label: "Problem It Creates" },
+  { key: "howToPlayAroundIt", label: "How To Play Around It" },
+];
+
+export const modifierRows = [
+  {
+    modifier: "Basic enemy damage up",
+    problem:
+      "Pressure 2 and Pressure 4 make normal enemies more punishing.",
+    howToPlayAroundIt:
+      "Stop trading hits early. Add HP, defense, movement, or safer attack range before greed.",
+  },
+  {
+    modifier: "Boss damage up",
+    problem:
+      "Pressure 3 and Pressure 6 make boss mistakes more expensive.",
+    howToPlayAroundIt:
+      "Enter bosses with movement, HP, defense, and a reliable attack instead of pure greed.",
+  },
+  {
+    modifier: "Enemies advance faster",
+    problem:
+      "Pressure 3 and Pressure 9 make slow builds easier to collapse.",
+    howToPlayAroundIt:
+      "Use earlier wave control, movement, and attacks that do not require long setup.",
+  },
+  {
+    modifier: "Environmental effects accumulate faster",
+    problem:
+      "Pressure 4 makes biome hazards harder to ignore.",
+    howToPlayAroundIt:
+      "Take adaptation, regeneration, HP, or safer routing before the environment drains the run.",
+  },
+  {
+    modifier: "Movement bonuses have diminishing returns",
+    problem:
+      "Pressure 5 makes pure speed stacking less reliable.",
+    howToPlayAroundIt:
+      "Balance movement with defense, attack area, terrain answers, and boss-safe damage.",
+  },
+  {
+    modifier: "Enemies have increased health",
+    problem:
+      "Pressure 5 and Pressure 10 make weak damage routes fall behind.",
+    howToPlayAroundIt:
+      "Commit to a real damage route earlier: Trunk Hybrid, Big Physical, Body Slam Tank, or another supported core.",
+  },
+  {
+    modifier: "Random biome starts",
+    problem:
+      "Pressure 6 makes the opening less predictable, and a normal first-pick plan may not fit the biome.",
+    howToPlayAroundIt:
+      "Read the biome first and pick adaptation, movement, sustain, or a simple attack before greed.",
+  },
+  {
+    modifier: "Boss protection",
+    problem:
+      "Pressure 7 stops you from always bursting a boss immediately at the start or after enrage.",
+    howToPlayAroundIt:
+      "Bring sustained damage, movement, and enough defense to survive protected windows.",
+  },
+  {
+    modifier: "Healing from health food reduced",
+    problem:
+      "Pressure 8 makes food healing less reliable as a bailout.",
+    howToPlayAroundIt:
+      "Add regeneration, Leech-style sustain, defense, HP, or avoid taking bad trades in the first place.",
+  },
+  {
+    modifier: "Final boss extra attack modifier",
+    problem:
+      "Pressure 8 makes the final boss more dangerous before Endless even starts.",
+    howToPlayAroundIt:
+      "Arrive with movement, defense, and damage that does not require standing still too long.",
+  },
+  {
+    modifier: "Environmental events happen more frequently",
+    problem:
+      "Pressure 9 makes arena and biome pressure harder to ignore.",
+    howToPlayAroundIt:
+      "Keep moving, avoid bad terrain, and do not start bosses in dangerous areas if you can reposition first.",
+  },
+  {
+    modifier: "Overall progression is slower",
+    problem:
+      "Pressure 10 makes it easier to reach bosses underleveled.",
+    howToPlayAroundIt:
+      "Use stronger food tempo and commit to a real build earlier instead of taking scattered support pieces.",
+  },
+  {
+    modifier: "Animals deal less damage to bosses",
+    problem:
+      "Pressure 12 weakens animal / ally boss contribution.",
+    howToPlayAroundIt:
+      "Bring personal boss damage and do not rely on social-only boss plans.",
+  },
+  {
+    modifier: "Food bonus decreased",
+    problem:
+      "Pressure 12 makes food tempo worse, so underleveling becomes easier.",
+    howToPlayAroundIt:
+      "Improve food routing, use safe food tools, and convert food tempo into real damage earlier.",
+  },
+  {
+    modifier: "Final boss / Endless scaling",
+    problem:
+      "A build that clears the final boss can still fail immediately after entering Endless.",
+    howToPlayAroundIt:
+      "Enter with movement, sustain, recovery, personal boss damage, and a long-term stat plan.",
+  },
+];
+
+export const checklistColumns = [
+  { key: "check", label: "Pressure Check" },
+  { key: "goodSign", label: "Good Sign" },
+  { key: "badSign", label: "Bad Sign" },
+];
+
+export const checklistRows = [
+  {
+    check: "Pressure modifier",
+    goodSign:
+      "You know what the current Pressure level changed.",
+    badSign:
+      "You are pushing the next level without reading or recording the modifier.",
+  },
+  {
+    check: "Genetic choice",
+    goodSign:
+      "You are using a genetic that already fits your build and Pressure stage.",
+    badSign:
+      "You changed genetic, build, and Pressure level at the same time.",
+  },
+  {
+    check: "Biome answer",
+    goodSign:
+      "Your first picks answer cold, heat, water, night, or bad terrain if they appear.",
+    badSign:
+      "You force the same opener regardless of biome.",
+  },
+  {
+    check: "Boss readiness",
+    goodSign:
+      "You have movement, sustained damage, and enough HP or defense.",
+    badSign:
+      "You rely on burst while the boss has protection or enragement windows.",
+  },
+  {
+    check: "Cataclysm plan",
+    goodSign:
+      "Your build can move, recover, and attack without standing still too long.",
+    badSign:
+      "Your final boss plan is only to damage race.",
+  },
+  {
+    check: "Endless readiness",
+    goodSign:
+      "You can finish the final boss with HP, movement, recovery, and scaling left.",
+    badSign:
+      "You barely kill the final boss and enter Endless with no plan.",
+  },
+  {
+    check: "Carcinisation limit",
+    goodSign:
+      "You decide your crab-point limit before the run starts.",
+    badSign:
+      "You take crab points automatically and die before the better food pays off.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Pressure Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Treating Pressure 8-19 as one vague difficulty band",
+    whyItHurts:
+      "You cannot fix your route if you do not know which part of the run actually failed.",
+    betterPlay:
+      "Treat each tier as a separate consistency test and adjust one failure point at a time.",
+  },
+  {
+    mistake: "Testing a new genetic on the same run as a new Pressure tier",
+    whyItHurts:
+      "If you die, you will not know what caused the failure.",
+    betterPlay:
+      "Keep either the genetic or the build stable whenever you push a new tier.",
+  },
+  {
+    mistake: "Repeating a normal-clear food plan in Pressure",
+    whyItHurts:
+      "Pressure makes food timing more punishing through bad starts, environmental damage, and boss tempo.",
+    betterPlay:
+      "Use food tools only as tempo support, then quickly convert them into a real build.",
+  },
+  {
+    mistake: "Taking Carcinisation by habit",
+    whyItHurts:
+      "Pressure already increases punishment, so extra danger stacks faster than it does in normal runs.",
+    betterPlay:
+      "Set a crab-point limit before the run and break it only if the build is far ahead.",
+  },
+  {
+    mistake: "Ignoring Cataclysm until the final boss",
+    whyItHurts:
+      "A build can reach the final boss and still fail because it cannot move during meteorites.",
+    betterPlay:
+      "Build movement and sustain before the final boss, not after Cataclysm starts.",
+  },
+  {
+    mistake: "Entering Endless with a final-boss-only build",
+    whyItHurts:
+      "Endless adds Extinction scaling, objectives, more bosses, and infinite stat pressure.",
+    betterPlay:
+      "Prepare a build that still has recovery, movement, and scaling after the clear.",
+  },
+  {
+    mistake: "Relying on animals for Pressure 12 boss damage",
+    whyItHurts:
+      "Pressure 12 reduces animal damage to bosses.",
+    betterPlay:
+      "Use allies for wave control, but bring personal boss damage.",
+  },
+  {
+    mistake: "Forcing Pressure 20 with an unproven core",
+    whyItHurts:
+      "Pressure 20 punishes routing mistakes that lower tiers already revealed.",
+    betterPlay:
+      "Use the build and genetic that already cleared your highest stable Pressure tier.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Selective Pressure is the long-term difficulty ladder in Everything Is Crab. Each tier should change how you build, not just make you repeat the same run.**
+
+The safest route is:
+
+**first clear → Pressure 1-5 with a stable build → Pressure 6 biome adaptation → Pressure 7 sustained boss damage → Pressure 10 Endless unlock → Pressure 11 faster scaling → Pressure 12 personal boss damage → Pressure 13-20 modifier tracking.**
+
+For Endless-ready attempts, use a build that keeps scaling after the final boss: **Body Slam Tank, Trunk Hybrid, Spines / Reflect with sustain, or Big Physical with movement.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-selective-pressure-20-overview.webp"
+    alt="Player seeing that Everything Is Crab 1.0 expands Pressure levels to 20 with new unlocks, challenges, evolutions, and a final boss."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pressure is not only more difficulty. It is a progression ladder that forces you to track modifiers, genetics, biome starts, boss rules, Endless access, and final boss consistency.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-is-selective-pressure">
+  What is Selective Pressure?
+</h2>
+
+**Selective Pressure** is the scaling difficulty system in **Everything Is Crab**.
+
+After you clear runs, you unlock harder Pressure levels. Each level changes what your build must prove. Early Pressure tests basic consistency. Pressure 6 tests biome adaptation. Pressure 7 tests boss survival. Pressure 10 opens the path to Endless. Pressure 11 makes monster scaling feel much faster. Pressure 12 changes animal boss damage and food bonus.
+
+<GuideTable
+  caption="Selective Pressure stages, changes, and recommended genetics."
+  columns={pressureColumns}
+  rows={pressureRows}
+/>
+
+<GuideCallout title="Pressure rule">
+Do not push Pressure blindly. Each new tier should answer one question: what changed, what killed me, and what should the next run fix?
+</GuideCallout>
+
+Use <Link href="/everything-is-crab">Everything Is Crab Guide</Link> if you need the full beginner overview first.
+
+<AdUnit placement="article_after_first_h2" />
+
+---
+
+<h2 id="pressure-8-19-tracker">
+  Pressure 8-19 tracker
+</h2>
+
+Pressure 8-19 should be treated as a consistency ladder. Pressure 8 starts testing reduced healing and final boss pressure. Pressure 9 pushes environmental events and faster enemy advance. Pressure 10 slows progression and increases enemy health before opening the path to Endless.
+
+After that, the main job is to keep your build stable enough that each failed run tells you what broke.
+
+<GuideTable
+  caption="Pressure 8-19 planning table."
+  columns={pressureTrackerColumns}
+  rows={pressureTrackerRows}
+/>
+
+<GuideCallout title="Pressure 8-19 rule">
+Do not change everything at once. Keep either your build or your genetic stable so each failed run tells you what actually broke.
+</GuideCallout>
+
+---
+
+<h2 id="pressure-genetics">
+  Pressure and genetics matching
+</h2>
+
+Genetics matter more as Pressure rises because every modifier makes the opening less forgiving.
+
+<GuideTable
+  caption="Recommended genetics by Pressure stage."
+  columns={geneticColumns}
+  rows={geneticRows}
+/>
+
+Use <Link href="/everything-is-crab/progression-guide">Progression Guide</Link> if you need the full genetics, Codex, and unlock route.
+
+---
+
+<h2 id="pressure-six">
+  Pressure 6: random biome starts
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-selective-pressure-six-random-biome-starts.webp"
+    alt="Player starting Pressure 6 and learning that this difficulty adds random biome starts in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pressure 6 is the first major warning that you cannot autopilot the same opening every run.
+  </figcaption>
+</figure>
+
+Pressure 6 matters because it can start you in a random biome.
+
+That changes the first minute of the run. A safe opener in plains may be bad in cold, heat, water, or night. Your first three evolution priorities should answer the biome before chasing a dream build.
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-selective-pressure-cold-biome-start.webp"
+    alt="Player starting in the cold biome on Pressure 6 and choosing early fur for adaptation in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A random cold start can make adaptation, movement, and defense more important than a greedy damage pick.
+  </figcaption>
+</figure>
+
+The Pressure 6 opener is simple:
+
+**read biome → solve biome danger → take one attack → add movement → prepare boss terrain.**
+
+---
+
+<h2 id="pressure-seven">
+  Pressure 7: boss protection and environmental damage
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-selective-pressure-seven-boss-protection.webp"
+    alt="Player unlocking Pressure 7 where bosses are protected at the start of the fight and after each enragement in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pressure 7 makes boss fights less burst-friendly, so your build needs to survive longer windows of danger.
+  </figcaption>
+</figure>
+
+Pressure 7 changes boss fights because bosses can be protected at the start of the fight and after each enragement. That means the old plan of bursting immediately becomes less reliable.
+
+Pressure 7 wants:
+
+- sustained damage,
+- movement,
+- HP or defense,
+- safer boss terrain,
+- enough recovery for environmental damage,
+- less automatic Carcinisation.
+
+Use <Link href="/everything-is-crab/boss-guide">Boss Guide</Link> if Pressure bosses are your main wall.
+
+---
+
+<h2 id="pressure-ten-eleven-twelve">
+  Pressure 10, 11, and 12: Endless, faster scaling, and weaker animal boss damage
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-pressure-10-unlocks-endless.webp"
+    alt="Player explaining that defeating Pressure 10 unlocks Endless Mode in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pressure 10 is important because it unlocks Endless access, but you still need to win the current run to enter Endless.
+  </figcaption>
+</figure>
+
+Pressure 10, 11, and 12 are the first progression band where the route changes more clearly.
+
+**Pressure 10** unlocks Endless access, but the run still has to be completed before you actually enter Endless.
+
+**Pressure 11** feels much faster because monsters scale quicker and give you less time to slowly assemble a perfect build. This makes flexible early value stronger. Pick useful tools first, then commit once the run gives you a build-defining piece.
+
+**Pressure 12** reduces animal damage to bosses and decreases food bonus. That makes social-only or animal-reliant boss plans less reliable. Allies can still help with wave pressure, but you need personal boss damage.
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-pressure-12-animal-boss-food-modifier.webp"
+    alt="Player unlocking Pressure 12 where animals deal less damage to bosses and food bonus is decreased in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pressure 12 weakens animal boss damage and reduces food bonus, so social and food-tempo routes need backup planning.
+  </figcaption>
+</figure>
+
+The practical rule for this band is:
+
+**Pressure 10 prepares Endless. Pressure 11 punishes slow build assembly. Pressure 12 punishes animal-only boss damage and weak food tempo.**
+
+---
+
+<h2 id="best-builds-for-pressure">
+  Best builds for Selective Pressure
+</h2>
+
+The best Pressure build is not just the strongest normal-run build. It is the build that loses the fewest pieces when Pressure adds bad starts, boss protection, environmental damage, faster monster scaling, food penalties, and Cataclysm pressure.
+
+<GuideTable
+  caption="Best build cores for Selective Pressure."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+Use <Link href="/everything-is-crab/best-builds">Best Builds</Link> for evolution timelines and pivot rules.
+
+---
+
+<h2 id="pressure-failure-fixes">
+  Pressure failure fixes
+</h2>
+
+If you die in Pressure, do not only ask “what build is best?” Ask where the run failed.
+
+<GuideTable
+  caption="Pressure death scenarios and next-run fixes."
+  columns={failureFixColumns}
+  rows={failureFixRows}
+/>
+
+This is the fastest way to improve. Pressure runs become easier when every death creates one specific change for the next attempt.
+
+---
+
+<h2 id="movement-and-biomes">
+  Movement, terrain, and biome adaptation
+</h2>
+
+<GuideTable
+  caption="How biome problems change Pressure runs."
+  columns={biomeColumns}
+  rows={biomeRows}
+/>
+
+Pressure makes biome mistakes more expensive. Random starts can force cold, heat, water, or night before your build is online, and boss timers can trap you in bad terrain if you do not move early.
+
+The rule is:
+
+**solve the biome before solving the dream build.**
+
+---
+
+<h2 id="food-tempo">
+  Food tempo under Pressure
+</h2>
+
+Food advice appears in the main guide, so this section is not another list of food tools.
+
+In Pressure, food matters because it controls tempo. If bad starts or environmental damage delay your eating, you reach bosses with fewer evolutions. If boss protection extends fights, underleveling becomes even more punishing. If Pressure 12 lowers food bonus, weak food routing gets exposed faster.
+
+The Pressure-specific rule is:
+
+**food tools are not the build; they are the time you buy to finish the build.**
+
+Use <Link href="/everything-is-crab#cheek-pouch">Everything Is Crab Guide</Link> for Cheek Pouch and basic food mechanics.
+
+---
+
+<h2 id="carcinisation-at-pressure">
+  Carcinisation at higher Pressure
+</h2>
+
+In Pressure, Carcinisation is riskier than it is in a normal run because extra danger stacks with existing Pressure modifiers.
+
+That does not mean you never take it. It means you set a crab-point limit before the run starts.
+
+For most Pressure attempts:
+
+**0-1 crab points = safest learning range.**  
+**2-3 crab points = only when the build is already ahead.**  
+**4+ crab points = strong-run greed or a dedicated challenge route.**
+
+Use <Link href="/everything-is-crab#carcinisation">Everything Is Crab Guide</Link> for the general Carcinisation explanation.
+
+---
+
+<h2 id="cataclysm-mechanics">
+  Cataclysm mechanics at Pressure
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-pressure-11-cataclysm-dodge-survival.webp"
+    alt="Player surviving Cataclysm on Pressure 11 with dodge and low HP in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cataclysm turns the final boss into an arena-awareness check, not only a damage check.
+  </figcaption>
+</figure>
+
+Cataclysm is dangerous because it adds arena pressure on top of the final boss. Meteorites force you to keep moving, and Carcinisation can make the final boss more punishing if you stacked too much greed earlier.
+
+<GuideTable
+  caption="How to survive Cataclysm under Pressure."
+  columns={cataclysmColumns}
+  rows={cataclysmRows}
+/>
+
+The safest Cataclysm build has movement, HP or defense, recovery, and damage that does not require standing still too long.
+
+---
+
+<h2 id="endless-mode-at-pressure">
+  Endless Mode at Pressure
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-endless-mode-extinction-one.webp"
+    alt="Player entering Endless Mode and seeing Extinction 1 after clearing Pressure 11 in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Endless Mode begins after the clear route and immediately changes the goal from finishing the run to surviving continued scaling.
+  </figcaption>
+</figure>
+
+Endless Mode is not just “one more wave.” It changes the run into a post-clear survival and scaling test.
+
+<GuideTable
+  caption="Endless Mode mechanics after a Pressure clear."
+  columns={endlessPressureColumns}
+  rows={endlessPressureRows}
+/>
+
+The important takeaway is that Endless changes the objective structure.
+
+A normal Pressure run asks whether you can reach and kill the final boss. Endless asks whether the same run can continue through Extinction scaling, new objectives, more bosses, and long-term stat growth.
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-endless-mode-defend-one-minute.webp"
+    alt="Player getting an Endless Mode objective to defend for one minute and spawn a charmed small land boss in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Endless objectives can force you to hold space, which is much harder than simply running away from danger.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-endless-mode-infinite-scaling.webp"
+    alt="Player learning that Endless Mode continues with bosses, Extinction 2, and infinite scaling for Max HP, Ability, and Physical in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Endless scaling makes long-term stats such as Max HP, Ability, and Physical much more important.
+  </figcaption>
+</figure>
+
+Build advice belongs in the next table: choose a route that still has resources after the final boss, not one that only wins the clear by damage racing.
+
+<GuideTable
+  caption="Best early Endless build candidates."
+  columns={endlessBuildColumns}
+  rows={endlessBuildRows}
+/>
+
+Avoid entering Endless with a build that only has burst damage, no sustain, no movement, or no personal boss damage.
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="hemp-body-slam-synergy">
+  Hemp, Body Slam, and Max HP scaling
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-hemp-body-slam-max-hp-synergy.webp"
+    alt="Player explaining Hemp gives Max HP when health food is eaten at maximum health, which can scale Body Slam in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Hemp is especially valuable for Body Slam routes because it can turn health food at full HP into more Max HP.
+  </figcaption>
+</figure>
+
+A useful late-game Body Slam note is simple: **Hemp gives Max HP when health food is eaten while you are already at maximum health.**
+
+That matters because Body Slam scales with Max HP. In normal runs, this is a strong synergy. In Pressure and Endless, it becomes even more important because Endless can continue scaling Max HP after the clear.
+
+<GuideTable
+  caption="Hemp and Body Slam scaling pieces."
+  columns={hempColumns}
+  rows={hempRows}
+/>
+
+A strong Endless-ready Body Slam route is:
+
+**Max HP → Body Slam → Shell / Plating → regeneration → Hemp → movement → boss-safe damage → Endless scaling.**
+
+The trap is taking Hemp when you cannot stay near full HP. If poison, environmental damage, or boss hits constantly keep you low, Hemp becomes harder to convert into Max HP value.
+
+---
+
+<h2 id="pressure-modifiers">
+  How to play around Pressure modifiers
+</h2>
+
+<GuideTable
+  caption="Common Pressure modifiers and how to play around them."
+  columns={modifierColumns}
+  rows={modifierRows}
+/>
+
+Pressure modifiers should change your first few decisions. If the modifier affects bosses, prepare sustained damage. If it affects biome or environment, prepare adaptation. If it affects final boss or Endless pressure, reduce greed earlier.
+
+---
+
+<h2 id="pressure-run-checklist">
+  Pressure run checklist
+</h2>
+
+<GuideTable
+  caption="Use this checklist before pushing a new Pressure level."
+  columns={checklistColumns}
+  rows={checklistRows}
+/>
+
+Before starting a new Pressure attempt, decide:
+
+1. Which Pressure modifier am I testing?
+2. Which genetic am I keeping stable?
+3. Which build core am I using?
+4. What killed the last run?
+5. What is my crab-point limit?
+6. What is my boss terrain plan?
+7. How will this build survive Cataclysm?
+8. Can this build enter Endless with resources left?
+
+---
+
+<h2 id="common-mistakes">
+  Common Selective Pressure mistakes
+</h2>
+
+<GuideTable
+  caption="Common Selective Pressure mistakes in Everything Is Crab."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The most common mistake is pushing the next Pressure level without recording what changed. If you do not know the modifier, you cannot build against it.
+
+---
+
+<h2 id="pressure-20-core-build">
+  Pressure 20 and Endless-ready core build
+</h2>
+
+Pressure 20 is a late progression target. You are not only building to clear the final boss. You are building to survive what happens after the clear: Extinction scaling, more bosses, point-of-interest choices, defend objectives, and infinite stat scaling.
+
+A practical Pressure 20 / Endless-ready core is:
+
+**tested genetic → food tempo tool → sustained main attack → movement → HP / defense → final boss-safe damage → Endless scaling plan → limited Carcinisation.**
+
+Best candidates:
+
+- **Body Slam Tank** if you have Max HP, Shell, Plating, Revenge, movement, and ideally Hemp-style Max HP synergy.
+- **Trunk Hybrid** if you can balance Physical and Ability while adding size, cooldown, and defense.
+- **Spines / Reflect with sustain** if you have HP, Plating, regeneration, Poisonous / Detachable, and enough movement.
+- **Big Physical with defense** if you need a simple route and can avoid becoming too slow.
+- **Social Pack with backup attack** only if you have personal boss damage, because Pressure 12 weakens animal boss damage.
+
+Avoid Pressure 20 / Endless attempts with:
+
+- untested genetics,
+- social-only boss plans,
+- poison without sustain,
+- high Carcinisation before the run is ahead,
+- slow body plans with no terrain answer,
+- builds that barely survive the final boss with no recovery left.
+
+<GuideCallout title="Pressure 20 rule">
+Use the build that cleared your highest stable Pressure tier, then improve it for Endless. A clear build is not automatically an Endless build.
+</GuideCallout>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is Selective Pressure in Everything Is Crab?
+
+Selective Pressure is the long-term difficulty ladder in Everything Is Crab. After clears, you unlock harder Pressure levels that add new modifiers, harsher conditions, and stricter build checks.
+
+### How high does Pressure go?
+
+Everything Is Crab 1.0 goes up to Pressure 20.
+
+### What changes from Pressure 2 to Pressure 5?
+
+Pressure 2 increases basic enemy damage. Pressure 3 increases boss damage and makes enemies more aggressive. Pressure 4 increases basic enemy damage again and makes environmental effects build up faster. Pressure 5 gives movement speed bonuses diminishing returns and increases enemy health.
+
+### What changes at Pressure 6?
+
+Pressure 6 increases boss damage and randomizes your starting biome. This means your opener needs to answer the biome first instead of forcing the same build every run.
+
+### What changes at Pressure 7?
+
+Pressure 7 gives bosses protection at the start of fights and after each enrage phase. Environmental damage also increases, so burst damage alone becomes less reliable.
+
+### What changes at Pressure 8?
+
+Pressure 8 reduces healing from health food and gives the final boss an extra attack modifier. You should not rely only on food healing to cover mistakes.
+
+### What changes at Pressure 9?
+
+Pressure 9 makes environmental events happen more frequently and makes enemies advance faster. Positioning, movement, terrain control, and wave clear become more important.
+
+### What changes at Pressure 10?
+
+Pressure 10 slows overall progression and increases enemy health. Clearing Pressure 10 also unlocks Endless Mode access, so your build should be able to scale beyond a normal clear.
+
+### When does Endless Mode unlock?
+
+Endless Mode access unlocks after defeating Pressure 10, but you still need to defeat the game in the run before entering Endless.
+
+### What changes at Pressure 11?
+
+Pressure 11 punishes slow build assembly because monsters scale faster. Use known build patterns, take flexible early value, and commit once a real build-defining piece appears.
+
+### What changes at Pressure 12?
+
+Pressure 12 makes animals deal less damage to bosses and decreases food bonus. Social and animal-based routes need backup personal boss damage, and food tempo becomes more important.
+
+### What happens at Pressure 13-19?
+
+Pressure 13-19 should be treated as late Pressure consistency tests. Keep your build or genetic stable, read the modifier before each run, watch what actually kills you, and adjust one failure point at a time.
+
+### How do I prepare for Pressure 20?
+
+Use your highest proven build and genetic. The safest Pressure 20 candidates are Body Slam Tank, Trunk Hybrid with defense, Spines / Reflect with sustain, or Big Physical with movement.
+
+### What happens in Endless Mode?
+
+Endless Mode continues after the clear with Extinction scaling, more bosses, point-of-interest choices, defend objectives, and infinite scaling for stats such as Max HP, Ability, and Physical.
+
+### What build is best for Endless Mode?
+
+Body Slam Tank, Trunk Hybrid, Spines / Reflect with sustain, and Big Physical with movement are the safest early Endless candidates. Endless wants long-term scaling, not just final boss burst.
+
+### Is Social Pack good for Pressure?
+
+Social Pack can help with wave pressure, but it needs backup personal boss damage. Pressure 12 reduces animal damage to bosses, so social-only boss plans are risky.
+
+### Should I take Carcinisation in Pressure runs?
+
+Take fewer crab points than you would in normal runs. Pressure already adds danger, so Carcinisation should be limited unless your build is clearly ahead.
+
+### How do I survive Cataclysm under Pressure?
+
+Bring movement, HP or defense, recovery, and damage that does not require standing still. During meteorites, do not chase unsafe damage windows just because the boss is low.

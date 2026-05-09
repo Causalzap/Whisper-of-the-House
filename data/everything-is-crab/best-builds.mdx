@@ -1,0 +1,1026 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildColumns = [
+  { key: "build", label: "Build" },
+  { key: "bestFor", label: "Best For" },
+  { key: "corePlan", label: "Core Plan" },
+  { key: "readThisIf", label: "Read This If..." },
+];
+
+export const buildRows = [
+  {
+    build: "Cheek Pouch Safe Scaling",
+    bestFor: "First clears, beginners, early Pressure",
+    corePlan:
+      "Solve food first, then turn the extra levels into one supported attack, movement, and defense.",
+    readThisIf:
+      "You die while eating, fall behind on levels, or reach bosses underbuilt.",
+  },
+  {
+    build: "Trunk Hybrid",
+    bestFor: "Hybrid damage, wide swings, safer food routing",
+    corePlan:
+      "Take Trunk early, balance Physical and Ability, then add size, cooldown help, movement, and feeding distance.",
+    readThisIf:
+      "You want a build with both AoE damage and food utility.",
+  },
+  {
+    build: "Big Physical",
+    bestFor: "Simple damage, large body, easy first-clear scaling",
+    corePlan:
+      "Use Mass, Alpha, size, Physical damage, HP, Arms / Horns / Jaws, and enough speed to avoid being trapped.",
+    readThisIf:
+      "You want the simplest damage route without managing hybrid stats.",
+  },
+  {
+    build: "Body Slam Tank",
+    bestFor: "HP scaling, safer boss mistakes, bruiser routes",
+    corePlan:
+      "Stack HP, Mass, Plating, Shell, Revenge, and cooldown support so Body Slam converts bulk into damage.",
+    readThisIf:
+      "You keep getting HP and defense pieces and want to turn them into a win condition.",
+  },
+  {
+    build: "Spines / Reflect Poison",
+    bestFor: "Contact punishment, poison goals, reflect goals",
+    corePlan:
+      "Use Spines, Poisonous, Detachable, HP, Plating, Revenge, and movement so contact hurts enemies more than you.",
+    readThisIf:
+      "You want enemies to punish themselves or you are farming poison / reflect unlocks.",
+  },
+  {
+    build: "Social Pack",
+    bestFor: "Charm, allies, pack damage, low-combat routes",
+    corePlan:
+      "Use Tail / Tail Wag-style charm, Social scaling, pack damage, and a backup boss attack.",
+    readThisIf:
+      "You want a charm / ally build but need to know when it is safe to commit.",
+  },
+];
+
+export const numberColumns = [
+  { key: "evolution", label: "Evolution / Tool" },
+  { key: "keyValue", label: "Key Value / Requirement" },
+  { key: "buildUse", label: "Build Use" },
+];
+
+export const numberRows = [
+  {
+    evolution: "Cheek Pouch",
+    keyValue:
+      "Capacity: 2. Stores nearby food inside your cheeks, and stored food is consumed at the same rate.",
+    buildUse:
+      "Best early food-safety core. Use it to level while moving instead of stopping in danger.",
+  },
+  {
+    evolution: "Trunk",
+    keyValue:
+      "Damage: 1-1.4x Physical or Ability, using the lower value. Cooldown: 1.5s. Feeding Distance: +0.66.",
+    buildUse:
+      "Hybrid build core. Balance Physical and Ability before stacking size or cooldown.",
+  },
+  {
+    evolution: "Body Slam",
+    keyValue:
+      "Close-range Physical attack. Damage: 1.2-1.4x Physical + 17% of Max HP. Cooldown: 1.25s.",
+    buildUse:
+      "HP-scaling tank core. Becomes much better when you already have Max HP, Mass, Shell, Plating, or Revenge.",
+  },
+  {
+    evolution: "Spines Lv. 4",
+    keyValue:
+      "Returns a percentage of damage taken on contact impacts. Damage Returned: +180%.",
+    buildUse:
+      "Reflect / contact build core. Needs HP and defense so contact does not kill you first.",
+  },
+  {
+    evolution: "Poisonous",
+    keyValue:
+      "Applies a Poison stack on contact impacts taken. Damage: 0.3x Ability Damage.",
+    buildUse:
+      "Poison contact route. Works best when you can survive repeated contact and scale Ability.",
+  },
+  {
+    evolution: "Detachable",
+    keyValue:
+      "Your Spines are also triggered on Dodge.",
+    buildUse:
+      "Turns dodge into a damage trigger. Stronger when paired with Spines, Poisonous, movement, and dodge uptime.",
+  },
+  {
+    evolution: "Stinger",
+    keyValue:
+      "Unlock route is tied to dealing over 200 poison damage in a single run.",
+    buildUse:
+      "Poison unlock target. Build survival first so poison has time to stack.",
+  },
+];
+
+export const timelineColumns = [
+  { key: "build", label: "Build" },
+  { key: "evo1to3", label: "Evolutions 1-3" },
+  { key: "evo4to6", label: "Evolutions 4-6" },
+  { key: "beforeFirstBoss", label: "Before First Boss" },
+  { key: "afterFirstBoss", label: "After First Boss" },
+];
+
+export const timelineRows = [
+  {
+    build: "Cheek Pouch Safe Scaling",
+    evo1to3:
+      "Take Cheek Pouch if offered. If not, take Tail / feeding distance, feeding speed, or one simple attack.",
+    evo4to6:
+      "Add one main attack, movement speed, and basic defense. Do not spend every pick on food.",
+    beforeFirstBoss:
+      "You need one attack that can hit, one movement tool, and a way to recover or avoid chip damage.",
+    afterFirstBoss:
+      "Convert the food advantage into a real build: Trunk, physical, Body Slam, poison, or Social.",
+  },
+  {
+    build: "Trunk Hybrid",
+    evo1to3:
+      "Take Trunk early if it appears. If Trunk does not appear, take feeding distance, Physical, Ability, or size as flexible prep.",
+    evo4to6:
+      "Balance Physical and Ability. Add Mass / Alpha / size only after both stats are not badly lopsided.",
+    beforeFirstBoss:
+      "Have Trunk online, at least one movement option, and either size or cooldown help if possible.",
+    afterFirstBoss:
+      "Add cooldown, more size, Tail / Prehensile Tail, Cheek Pouch, and defense for longer fights.",
+  },
+  {
+    build: "Big Physical",
+    evo1to3:
+      "Take a simple physical attack or size piece first: Horns, Jaws, Arms, Mass, or Alpha.",
+    evo4to6:
+      "Stack Physical, size, HP, and attack area. Add Legs if the body is getting slow.",
+    beforeFirstBoss:
+      "Have one upgraded physical attack and enough speed to avoid boss contact.",
+    afterFirstBoss:
+      "Choose between pure physical scaling, Body Slam tank, or Trunk hybrid if Ability support appears.",
+  },
+  {
+    build: "Body Slam Tank",
+    evo1to3:
+      "Do not force Body Slam before HP support. Start with HP, Mass, Shell, Plating, or a safe attack.",
+    evo4to6:
+      "Take Body Slam once Max HP scaling is online. Add Plating, Revenge, Shell, and movement.",
+    beforeFirstBoss:
+      "You need HP and at least one defensive layer. Body Slam without bulk is not the build yet.",
+    afterFirstBoss:
+      "Scale Max HP, cooldown, Revenge, and survivability. Add enough speed for final boss chaos.",
+  },
+  {
+    build: "Spines / Reflect Poison",
+    evo1to3:
+      "Start with Spines only if you also see HP, Plating, Shell, movement, or another survival piece.",
+    evo4to6:
+      "Look for Poisonous, Detachable, Revenge, damage resistance, regeneration, and Ability support.",
+    beforeFirstBoss:
+      "Do not rely on contact damage alone. Have a safe way to survive the first boss.",
+    afterFirstBoss:
+      "Stack reflect, poison contact, dodge triggers, and sustain. Avoid facetanking without recovery.",
+  },
+  {
+    build: "Social Pack",
+    evo1to3:
+      "Start only if you see Tail / charm tools, Social stat, or early ally support. Otherwise keep a normal attack route open.",
+    evo4to6:
+      "Add Tail Wag-style charm, Antennae-style support, pack damage, and survivability.",
+    beforeFirstBoss:
+      "Have a backup attack. Social value can be weaker during boss moments if allies are not contributing.",
+    afterFirstBoss:
+      "Scale ally count, pack damage, and charm support while keeping personal damage for bosses.",
+  },
+];
+
+export const trunkColumns = [
+  { key: "piece", label: "Trunk Piece" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "timing", label: "When To Take It" },
+];
+
+export const trunkRows = [
+  {
+    piece: "Trunk",
+    whyItMatters:
+      "Main attack and food-routing tool. It gives hybrid damage and extra Feeding Distance.",
+    timing:
+      "Take early if offered. If it does not appear by your first few evolution choices, prepare with flexible Physical, Ability, size, or food tools.",
+  },
+  {
+    piece: "Physical damage",
+    whyItMatters:
+      "Trunk uses Physical as one side of its hybrid scaling.",
+    timing:
+      "Take when Physical is the lower stat or when your backup attacks also use Physical.",
+  },
+  {
+    piece: "Ability damage",
+    whyItMatters:
+      "Trunk also checks Ability, and the lower stat limits the attack.",
+    timing:
+      "Take when Ability is behind. Do not ignore it just because Trunk looks like a physical swing.",
+  },
+  {
+    piece: "Mass / Alpha / size",
+    whyItMatters:
+      "Size makes the slow sweep easier to land and improves area coverage.",
+    timing:
+      "Take after Trunk is online or when your physical route can still use size if Trunk never appears.",
+  },
+  {
+    piece: "Cooldown / Dextrous",
+    whyItMatters:
+      "Trunk is slow, so tempo upgrades make it feel much safer.",
+    timing:
+      "Take when Trunk damage is good but enemies are reaching you between swings.",
+  },
+  {
+    piece: "Cheek Pouch / Tail",
+    whyItMatters:
+      "Stacks with Trunk's feeding-distance value and keeps the build from falling behind.",
+    timing:
+      "Take when you are winning fights but underleveled or when food routes are unsafe.",
+  },
+];
+
+export const bigPhysicalColumns = [
+  { key: "piece", label: "Big Physical Piece" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "timing", label: "When To Take It" },
+];
+
+export const bigPhysicalRows = [
+  {
+    piece: "Horns / Jaws / Arms",
+    whyItMatters:
+      "These give the build a simple Physical attack plan before you know whether Trunk or Body Slam will appear.",
+    timing:
+      "Take one early if you need a clear damage button before the first boss.",
+  },
+  {
+    piece: "Mass / Alpha",
+    whyItMatters:
+      "Size improves reach, attack coverage, and the big-body route that can later pivot into Body Slam or Trunk.",
+    timing:
+      "Take early when your build already has a usable attack or when you are clearly moving toward size scaling.",
+  },
+  {
+    piece: "Physical damage",
+    whyItMatters:
+      "This is the simplest way to make your main physical attack scale without needing hybrid stat balance.",
+    timing:
+      "Take after you have chosen the attack that will carry the run.",
+  },
+  {
+    piece: "HP",
+    whyItMatters:
+      "HP gives safer boss mistakes and opens the door to Body Slam if the run starts offering tank pieces.",
+    timing:
+      "Take when you are getting hit often, preparing for bosses, or seeing Body Slam / Plating / Shell support.",
+  },
+  {
+    piece: "Attack area / Reach",
+    whyItMatters:
+      "A larger hit area helps big physical builds clear waves before enemies surround you.",
+    timing:
+      "Take when your damage is good but enemies are slipping around your attack range.",
+  },
+  {
+    piece: "Movement",
+    whyItMatters:
+      "Big bodies can become slow, and slow builds lose to water, snow, bosses, and final boss chaos.",
+    timing:
+      "Take before your size becomes a liability or before entering higher Pressure.",
+  },
+];
+
+export const bodySlamColumns = [
+  { key: "piece", label: "Body Slam Piece" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "timing", label: "When To Take It" },
+];
+
+export const bodySlamRows = [
+  {
+    piece: "Body Slam",
+    whyItMatters:
+      "Turns Physical damage and Max HP into close-range damage.",
+    timing:
+      "Take after you already have HP, Mass, Shell, Plating, or another reason to scale bulk.",
+  },
+  {
+    piece: "Max HP",
+    whyItMatters:
+      "Directly increases Body Slam value because the attack scales with Max HP.",
+    timing:
+      "Take before or immediately after Body Slam. HP is damage in this build.",
+  },
+  {
+    piece: "Mass / Alpha",
+    whyItMatters:
+      "Supports big-body routing and makes close-range play more threatening.",
+    timing:
+      "Take when your movement is not already falling behind.",
+  },
+  {
+    piece: "Plating / Shell",
+    whyItMatters:
+      "Lets you survive the contact-heavy playstyle.",
+    timing:
+      "Take before bosses or when normal enemies are forcing bad trades.",
+  },
+  {
+    piece: "Revenge",
+    whyItMatters:
+      "Adds value when you take hits, which fits tank routing.",
+    timing:
+      "Take once your HP and defense are high enough that taking a hit does not end the run.",
+  },
+  {
+    piece: "Movement",
+    whyItMatters:
+      "Body Slam is close range. A tank that cannot reposition still dies.",
+    timing:
+      "Take before water, snow, high Pressure, or final boss attempts.",
+  },
+];
+
+export const spinesColumns = [
+  { key: "piece", label: "Spines Piece" },
+  { key: "value", label: "Value / Effect" },
+  { key: "howToUse", label: "How To Use It" },
+];
+
+export const spinesRows = [
+  {
+    piece: "Spines Lv. 4",
+    value:
+      "Damage Returned: +180% on contact impacts.",
+    howToUse:
+      "Use as the reflect core, but only when you have HP, defense, or recovery.",
+  },
+  {
+    piece: "Poisonous",
+    value:
+      "Applies a Poison stack on contact impacts taken. Damage: 0.3x Ability Damage.",
+    howToUse:
+      "Use when you can survive contact and have enough Ability scaling for poison to matter.",
+  },
+  {
+    piece: "Detachable",
+    value:
+      "Spines are also triggered on Dodge.",
+    howToUse:
+      "Use with dodge, movement, and poison / reflect pieces so defensive movement becomes damage.",
+  },
+  {
+    piece: "Plating / Shell",
+    value:
+      "Defensive layer.",
+    howToUse:
+      "Take before committing to contact damage. Reflect without defense is a trap.",
+  },
+  {
+    piece: "Revenge",
+    value:
+      "Hit-taking synergy.",
+    howToUse:
+      "Use after you can survive hits consistently.",
+  },
+];
+
+export const socialColumns = [
+  { key: "piece", label: "Social Piece" },
+  { key: "role", label: "Role In The Build" },
+  { key: "timing", label: "When To Commit" },
+];
+
+export const socialRows = [
+  {
+    piece: "Tail / Tail Wag-style charm",
+    role:
+      "Turns the route from generic support into an actual ally / charm build.",
+    timing:
+      "Commit when charm tools appear early enough to affect normal waves before the first or second boss.",
+  },
+  {
+    piece: "Antennae-style support",
+    role:
+      "Supports social routing and ally control depending on the evolution path.",
+    timing:
+      "Take after you already have a social direction, not as a random standalone pick.",
+  },
+  {
+    piece: "Pack damage",
+    role:
+      "Converts allies or group size into real damage instead of only distractions.",
+    timing:
+      "Take when you already have charm or ally generation. Pack damage without allies is weak.",
+  },
+  {
+    piece: "Ally cap / ally count scaling",
+    role:
+      "Lets the build move toward high-ally setups, including 12-ally style social routes if your evolutions support it.",
+    timing:
+      "Take after the build proves it can actually charm and keep allies useful.",
+  },
+  {
+    piece: "Backup attack",
+    role:
+      "Solves boss phases where allies do not carry enough damage.",
+    timing:
+      "Take before the first boss. Do not wait until the social route fails.",
+  },
+  {
+    piece: "Defense / movement",
+    role:
+      "Keeps you alive while allies create value.",
+    timing:
+      "Take whenever charm is working but you personally keep getting hit.",
+  },
+];
+
+export const pressureColumns = [
+  { key: "pressureRange", label: "Pressure Range" },
+  { key: "bestBuilds", label: "Best Builds" },
+  { key: "why", label: "Why They Work" },
+  { key: "avoid", label: "Avoid" },
+];
+
+export const pressureRows = [
+  {
+    pressureRange: "Normal / first clear",
+    bestBuilds:
+      "Cheek Pouch Safe Scaling, Trunk Hybrid, Big Physical",
+    why:
+      "These builds are easy to stabilize and teach food, damage, movement, and boss basics.",
+    avoid:
+      "Pacifist, hard social routes, high Carcinisation, or poison-only routes before you know boss patterns.",
+  },
+  {
+    pressureRange: "Pressure 1-5",
+    bestBuilds:
+      "Trunk Hybrid, Big Physical, Body Slam Tank",
+    why:
+      "They have clear scaling and can handle early difficulty increases without needing perfect RNG.",
+    avoid:
+      "Social routes without backup attack and reflect builds without HP.",
+  },
+  {
+    pressureRange: "Pressure 6",
+    bestBuilds:
+      "Cheek Pouch Safe Scaling, Trunk Hybrid, Body Slam Tank",
+    why:
+      "Random biome starts make food safety, movement, and sustain more valuable.",
+    avoid:
+      "Slow big-body builds with no movement or terrain adaptation.",
+  },
+  {
+    pressureRange: "Pressure 7-10",
+    bestBuilds:
+      "Body Slam Tank, Trunk Hybrid with defense, Spines / Reflect with sustain",
+    why:
+      "Boss protection and environmental damage reward sustained survival, not only burst damage.",
+    avoid:
+      "Glass-cannon builds and social builds that cannot personally damage bosses.",
+  },
+  {
+    pressureRange: "Pressure 10+",
+    bestBuilds:
+      "Stable hybrid, tank, or reflect routes with tested genetics",
+    why:
+      "High Pressure punishes untested pivots, weak sustain, and bad Carcinisation timing.",
+    avoid:
+      "Testing a new genetic, new build, and new challenge goal in the same run.",
+  },
+];
+
+export const pivotColumns = [
+  { key: "originalPlan", label: "Original Plan" },
+  { key: "pivotSignal", label: "Pivot Signal" },
+  { key: "firstPivotPick", label: "First Pivot Pick" },
+  { key: "newPlan", label: "New Plan" },
+];
+
+export const pivotRows = [
+  {
+    originalPlan: "Trunk Hybrid",
+    pivotSignal:
+      "Trunk does not appear early, but you get Mass, Alpha, Physical damage, or HP.",
+    firstPivotPick:
+      "Take Mass / Alpha or your best Physical attack instead of waiting forever.",
+    newPlan:
+      "Pivot to Big Physical or Body Slam Tank. Keep Ability only if Trunk appears later.",
+  },
+  {
+    originalPlan: "Big Physical",
+    pivotSignal:
+      "You keep getting HP, Plating, Shell, Revenge, and Body Slam instead of clean damage.",
+    firstPivotPick:
+      "Take Body Slam once HP support is already present.",
+    newPlan:
+      "Pivot to Body Slam Tank and treat HP as damage scaling.",
+  },
+  {
+    originalPlan: "Body Slam Tank",
+    pivotSignal:
+      "You do not see HP or defense, but you do see Trunk, Ability, and feeding distance.",
+    firstPivotPick:
+      "Take Trunk or Ability support before forcing more tank pieces.",
+    newPlan:
+      "Pivot to Trunk Hybrid with enough movement to offset the slow swing.",
+  },
+  {
+    originalPlan: "Poison / Spines",
+    pivotSignal:
+      "You see Spines but no HP, no Plating, no regeneration, and no poison support.",
+    firstPivotPick:
+      "Use Spines as a defensive side pick, not the whole build.",
+    newPlan:
+      "Pivot to tank, physical, or Trunk depending on the next main attack offered.",
+  },
+  {
+    originalPlan: "Social Pack",
+    pivotSignal:
+      "You see Social stat but no charm tool, no pack damage, and no ally support.",
+    firstPivotPick:
+      "Take a backup attack first.",
+    newPlan:
+      "Stay flexible. Commit to Social only when charm and pack tools actually appear.",
+  },
+  {
+    originalPlan: "Any build",
+    pivotSignal:
+      "Boss timer is close and your build has no movement or sustain.",
+    firstPivotPick:
+      "Take movement, HP, Shell, Plating, or regeneration over greed.",
+    newPlan:
+      "Stabilize first, then resume the intended build after the boss.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Build Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Waiting too long for one perfect build piece",
+    whyItHurts:
+      "You lose tempo and reach bosses with half a build.",
+    betterPlay:
+      "Use the pivot table. If your opener gives HP, size, or poison support, move into the build the game is offering.",
+  },
+  {
+    mistake: "Building Trunk with one weak stat",
+    whyItHurts:
+      "Trunk uses the lower value between Physical and Ability.",
+    betterPlay:
+      "Balance both stats before stacking only size or cooldown.",
+  },
+  {
+    mistake: "Taking Body Slam before HP support",
+    whyItHurts:
+      "Body Slam scales with Max HP, so it is weaker before the tank core exists.",
+    betterPlay:
+      "Take HP, Mass, Shell, or Plating first, then Body Slam.",
+  },
+  {
+    mistake: "Building Spines without survivability",
+    whyItHurts:
+      "Reflect and poison contact damage require you to survive contact.",
+    betterPlay:
+      "Pair Spines with HP, Plating, Shell, Revenge, regeneration, or movement.",
+  },
+  {
+    mistake: "Committing to Social without a backup boss plan",
+    whyItHurts:
+      "Charm and allies can be inconsistent during boss moments.",
+    betterPlay:
+      "Take one personal attack before going deep into social scaling.",
+  },
+  {
+    mistake: "Using a normal clear build unchanged for higher Pressure",
+    whyItHurts:
+      "Pressure adds biome starts, boss modifiers, and environmental danger.",
+    betterPlay:
+      "Use the Pressure build table and add sustain, movement, or defense earlier.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best builds in Everything Is Crab are not just lists of good evolutions. They are routes with timing.**
+
+For a first clear, the safest route is **Cheek Pouch Safe Scaling** or **Trunk Hybrid**. For simple damage, use **Big Physical**. If the game gives you HP, Shell, Plating, Revenge, and Body Slam, pivot into **Body Slam Tank**. If you see Spines, Poisonous, Detachable, HP, and defense, go **Spines / Reflect Poison**. Social Pack is strong only when charm tools, pack damage, ally scaling, and a backup boss attack appear together.
+
+Use this rule:
+
+**Evolutions 1-3 decide your direction. Evolutions 4-6 confirm the build. Before the first boss, you need one attack, movement, and survival.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-best-builds-cheek-pouch-priority.webp"
+    alt="Player choosing Cheek Pouch because safe food scaling makes an Everything Is Crab build more consistent."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The strongest builds have a route: early direction, mid-run confirmation, and a boss-ready checkpoint.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="best-builds-ranked">
+  Best builds in Everything Is Crab
+</h2>
+
+The best build is the one your run can actually complete. Do not judge a build only by its final form. Judge it by how early it becomes usable, how easily it pivots, and whether it can beat bosses before it becomes perfect.
+
+<GuideTable
+  caption="Best Everything Is Crab builds and when to read each route."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+<GuideCallout title="Build route rule">
+A build is not online when you find one flashy evolution. A build is online when your early picks, damage stats, movement, and boss plan all support the same route.
+</GuideCallout>
+
+Use <Link href="/everything-is-crab">Everything Is Crab Guide</Link> if you need the general beginner hub first.
+
+<AdUnit placement="article_after_first_h2" />
+
+---
+
+<h2 id="confirmed-build-numbers">
+  Key build numbers
+</h2>
+
+Use these numbers when deciding whether an evolution is worth building around. The table is the quick reference; the build sections below explain when those numbers should change your route.
+
+<GuideTable
+  caption="Key tooltip values and unlock requirements for Everything Is Crab builds."
+  columns={numberColumns}
+  rows={numberRows}
+/>
+
+<GuideCallout title="Number rule">
+The more a build depends on a number, the earlier you should check whether your current stats actually support that number. Trunk wants balanced stats. Body Slam wants Max HP. Spines wants survivability.
+</GuideCallout>
+
+---
+
+<h2 id="evolution-timelines">
+  Evolution timelines: what to pick first
+</h2>
+
+This is the most important part of the build page. The goal is not to memorize a perfect list. The goal is to know what your first six evolution choices are trying to prove.
+
+<GuideTable
+  caption="Evolution timing for each major build."
+  columns={timelineColumns}
+  rows={timelineRows}
+/>
+
+If your first three evolution choices do not point toward a build, stay flexible. If choices four to six still do not confirm the build, pivot before the first boss forces the issue.
+
+---
+
+<h2 id="trunk-hybrid-build">
+  Trunk Hybrid build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-best-builds-trunk-choice.webp"
+    alt="Player checking the Trunk tooltip showing hybrid damage, cooldown, and feeding distance in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Trunk is a hybrid attack with real food utility, so it rewards both damage planning and safer food routing.
+  </figcaption>
+</figure>
+
+**Trunk Hybrid** is one of the best builds because Trunk solves two problems at once: it gives you a wide swiping attack and improves feeding distance.
+
+The mistake is building it like a pure physical weapon. Trunk uses the lower value between Physical and Ability, so the weaker stat limits the attack. Check the key numbers table above if you need the exact multiplier, cooldown, and feeding-distance value.
+
+<GuideTable
+  caption="Trunk Hybrid pieces and timing."
+  columns={trunkColumns}
+  rows={trunkRows}
+/>
+
+A strong Trunk route is:
+
+**Trunk → balance Physical and Ability → add Mass / Alpha / size → add cooldown help → add movement → add Cheek Pouch or Tail for safer food.**
+
+If Trunk does not appear early, do not wait forever. If the game gives you Mass, Alpha, HP, or Physical damage, pivot to Big Physical or Body Slam Tank and keep Trunk as a possible later bonus.
+
+---
+
+<h2 id="body-slam-tank-build">
+  Body Slam Tank build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-best-builds-body-slam-revenge.webp"
+    alt="Player checking Body Slam and Revenge while building a tank route in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Body Slam is strongest when your run already wants HP, defense, and close-range pressure.
+  </figcaption>
+</figure>
+
+**Body Slam Tank** becomes strong when your run already wants HP.
+
+Do not force Body Slam on a fragile build. Its damage scales with **Max HP**, so the build needs bulk before the attack becomes a real win condition. Use the key numbers table above when you need the exact damage and cooldown.
+
+<GuideTable
+  caption="Body Slam Tank pieces and timing."
+  columns={bodySlamColumns}
+  rows={bodySlamRows}
+/>
+
+The ideal Body Slam route is:
+
+**HP / Mass / Shell / Plating → Body Slam → Revenge → cooldown support → movement → final boss defense.**
+
+This build is best when the game keeps giving you tank pieces. If you are not seeing HP or defense, Body Slam is probably a trap pick.
+
+---
+
+<h2 id="spines-reflect-poison-build">
+  Spines, reflect, and poison build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-best-builds-spines-poisonous-detachable-specialisations.webp"
+    alt="Player checking Spines, Poisonous, and Detachable specialisations for a reflect and poison build in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Spines can branch into reflect, poison, and dodge-triggered damage, but only if the build can survive contact.
+  </figcaption>
+</figure>
+
+The **Spines / Reflect Poison** build is strongest when contact becomes a weapon instead of a death sentence.
+
+Spines, Poisonous, and Detachable each turn enemy pressure into value in a different way. The key numbers table gives the exact values; this section is about the route: survive contact first, then turn contact, poison, or dodge into damage.
+
+<GuideTable
+  caption="Spines, reflect, and poison pieces."
+  columns={spinesColumns}
+  rows={spinesRows}
+/>
+
+The route is:
+
+**Spines → HP / Plating / Shell → Poisonous or Detachable → Revenge / regeneration → movement → Ability support if poison is carrying.**
+
+This build fails when players take Spines early but do not build survival. The enemy taking damage does not matter if you die from the same contact.
+
+---
+
+<h2 id="big-physical-build">
+  Big Physical build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-best-builds-alpha-size-200.webp"
+    alt="Player reaching huge size with Alpha, Spines, and Trunk during a big physical build in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Big Physical is the simplest route: get larger, hit harder, and keep enough movement to avoid bad terrain.
+  </figcaption>
+</figure>
+
+**Big Physical** is the easiest damage route to understand because it does not need hybrid stat balancing, poison timing, or charm setup.
+
+Start with one physical attack or size piece. Then add Physical, Mass, Alpha, HP, attack area, and enough movement to keep your body from becoming a liability.
+
+<GuideTable
+  caption="Big Physical pieces and timing."
+  columns={bigPhysicalColumns}
+  rows={bigPhysicalRows}
+/>
+
+The clean route is:
+
+**physical attack → Mass / Alpha → Physical damage → HP → attack area / reach → movement → Shell / Plating → Body Slam if HP is high.**
+
+Big Physical is also one of the best pivot routes. If you wanted Trunk but the game keeps giving you Mass, Alpha, HP, and Physical damage, stop waiting and become a big physical build. If Body Slam appears after HP support, pivot into Body Slam Tank.
+
+---
+
+<h2 id="social-pack-build">
+  Social Pack build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-best-builds-social-pack-damage.webp"
+    alt="Player building social and pack damage while checking how many enemies can be charmed in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Social builds need more than Social stat. They need charm tools, pack damage, ally scaling, and a backup boss plan.
+  </figcaption>
+</figure>
+
+**Social Pack** is the easiest build to overcommit to too early.
+
+A Social stat by itself is not a build. The build starts when you have a charm trigger, ally support, or pack damage that converts allies into real value.
+
+<GuideTable
+  caption="Social Pack pieces and when to commit."
+  columns={socialColumns}
+  rows={socialRows}
+/>
+
+A good Social route is:
+
+**Tail / charm tool → Social support → pack damage → ally count scaling → backup attack → defense / movement.**
+
+The main weakness is bosses. Allies and charm can be excellent in normal waves, but boss fights may still require personal damage. If you do not have a backup attack before the first boss, do not go all-in on Social yet.
+
+---
+
+<h2 id="cheek-pouch-safe-scaling">
+  Cheek Pouch Safe Scaling
+</h2>
+
+Cheek Pouch is covered in detail in the main <Link href="/everything-is-crab#cheek-pouch">Everything Is Crab guide</Link>, so this section focuses only on build timing.
+
+Cheek Pouch Safe Scaling is not a damage build. It is a **tempo build**. It gives you safer food, which gives you more evolution choices, which lets you choose the real damage route later.
+
+The correct route is:
+
+**Cheek Pouch → simple attack → movement → defense → choose Trunk, physical, Body Slam, poison, or Social based on what appears.**
+
+Do not stay in “food build” mode forever. By the first boss, Cheek Pouch should already be helping you reach a real combat route.
+
+---
+
+<h2 id="pressure-builds">
+  Best builds for Pressure levels
+</h2>
+
+Pressure builds should be chosen by the problems each Pressure range creates, not by what looks funniest in a normal run.
+
+<GuideTable
+  caption="Best builds by Pressure range."
+  columns={pressureColumns}
+  rows={pressureRows}
+/>
+
+Use <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link> for the full high-difficulty breakdown.
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="how-to-pivot">
+  How to pivot when the build does not appear
+</h2>
+
+The most common build mistake is waiting too long for the perfect route.
+
+A pivot should happen when the game gives you enough support pieces for a different build before your original build appears.
+
+<GuideTable
+  caption="Specific pivot decisions in Everything Is Crab."
+  columns={pivotColumns}
+  rows={pivotRows}
+/>
+
+<GuideCallout title="Pivot rule">
+Evolutions 1-3 suggest a route. Evolutions 4-6 confirm it. If the route is not confirmed before the first boss, pivot to the strongest supported build on screen.
+</GuideCallout>
+
+---
+
+<h2 id="common-mistakes">
+  Common build mistakes
+</h2>
+
+<GuideTable
+  caption="Common Everything Is Crab build mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+---
+
+<h2 id="recommended-build-order">
+  Recommended build order for new players
+</h2>
+
+If you are not sure what to play, use this order:
+
+1. **Cheek Pouch Safe Scaling**  
+   Learn food tempo and how to reach more evolution choices.
+
+2. **Trunk Hybrid**  
+   Learn hybrid scaling, feeding distance, cooldown timing, and size.
+
+3. **Big Physical**  
+   Learn simple damage, body size, attack area, and boss positioning.
+
+4. **Body Slam Tank**  
+   Learn HP scaling, defense, contact range, and tank mistakes.
+
+5. **Spines / Reflect Poison**  
+   Learn contact punishment, poison contact, dodge triggers, and sustain.
+
+6. **Social Pack**  
+   Learn charm, allies, pack damage, and backup boss planning.
+
+This order works because each build teaches a different part of the game without requiring perfect RNG.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best build in Everything Is Crab?
+
+For first clears, the best build is usually Cheek Pouch Safe Scaling into Trunk Hybrid or Big Physical. For safer boss fights, Body Slam Tank is strong if you already have HP and defense.
+
+### What is the easiest beginner build?
+
+Cheek Pouch Safe Scaling is the easiest opener because it fixes food tempo. You still need to turn that extra progress into a real attack before bosses.
+
+### What is the best damage build?
+
+Trunk Hybrid and Big Physical are the easiest damage builds to recommend. Trunk gives hybrid damage and feeding distance, while Big Physical gives simple scaling through size and Physical damage.
+
+### What are Trunk's important numbers?
+
+Trunk deals 1-1.4x damage using Physical or Ability, whichever is lower. It has a 1.5s cooldown and gives +0.66 Feeding Distance.
+
+### Where should I check Body Slam's numbers?
+
+Check the <Link href="#confirmed-build-numbers">Key build numbers</Link> section for Body Slam's damage, HP scaling, and cooldown. Then use the Body Slam Tank section to decide whether your current run has enough HP, Mass, Shell, or Plating to support it.
+
+### Is Body Slam good?
+
+Body Slam is good when you already have HP, Mass, Shell, Plating, or other tank pieces. Do not force it on a fragile build.
+
+### Is Spines good?
+
+Spines is good when you have survivability. Spines Lv. 4 can return +180% damage on contact impacts, but the build still needs HP, Plating, Shell, Revenge, regeneration, or movement.
+
+### How does Poisonous work with Spines?
+
+Poisonous applies a poison stack on contact impacts taken and deals 0.3x Ability Damage. It works best when you can survive contact and have enough Ability scaling.
+
+### What does Detachable do?
+
+Detachable makes your Spines trigger on Dodge. This is strong when you are already using Spines, movement, dodge, poison, or reflect support.
+
+### Is Social Pack good?
+
+Social Pack can be good, but only when charm tools, ally support, pack damage, and a backup attack appear together. Do not go all-in on Social if you have no boss plan.
+
+### When should I pivot builds?
+
+If your first three evolutions suggest one route but choices four to six support a different route, pivot before the first boss. For example, if Trunk never appears but HP and Body Slam support do, move into Body Slam Tank.
+
+### What should I build for Pressure levels?
+
+For early Pressure, use Trunk Hybrid, Big Physical, or Body Slam Tank. For Pressure 6 and higher, value movement, sustain, and boss consistency more than normal-run greed.
+
+### What guide should I read next?
+
+Read the <Link href="/everything-is-crab/boss-guide">Boss Guide</Link> if your build dies at bosses. Read the <Link href="/everything-is-crab/progression-guide">Progression Guide</Link> if you want genetics, Codex, unlocks, and Endless Mode.
