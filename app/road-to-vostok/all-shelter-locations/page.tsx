@@ -55,7 +55,7 @@ const jsonLd = {
       description:
         "A practical guide to every current shelter in Road to Vostok, including where each one is, how to unlock it, the best shelter order, and which shelters are actually worth rushing.",
       image: [
-        `${siteUrl}/images/road-to-vostok/all-shelters-network-map.webp`,
+        `${siteUrl}/images/road-to-vostok/all-shelters-network-map-new.webp`,
         `${siteUrl}/images/road-to-vostok/village-map-with-attic-shelter.webp`,
         `${siteUrl}/images/road-to-vostok/outpost-bunker-cave-entrance.webp`,
       ],
