@@ -1,0 +1,843 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const tierColumns = [
+  { key: "tier", label: "Tier" },
+  { key: "wizard", label: "Wizard" },
+  { key: "bestFor", label: "Best For" },
+  { key: "why", label: "Why This Tier" },
+];
+
+export const tierRows = [
+  {
+    tier: "S",
+    wizard: "Reginald",
+    bestFor: "Beginner consistency, Luck, Acid multi-hit routes",
+    why:
+      "Reginald is the safest baseline wizard because increased Luck improves upgrade quality, while Astral Orbs works well with repeated-hit elemental routes.",
+  },
+  {
+    tier: "S / Co-op S",
+    wizard: "Campanelli",
+    bestFor: "Co-op revive value, movement, projectile builds",
+    why:
+      "Campanelli improves Resurrection Beam power and movement speed, making him especially useful in co-op and revive-heavy runs.",
+  },
+  {
+    tier: "A",
+    wizard: "Sun Mage",
+    bestFor: "Solo, farming, Solar Pulse Aura",
+    why:
+      "Solar Pulse is one of the easiest strong routes to reproduce, and Sun Mage's dodge, road speed, and smaller hitbox make close-range aura play safer.",
+  },
+  {
+    tier: "A",
+    wizard: "Star Mage",
+    bestFor: "High-ceiling Falling Stars builds",
+    why:
+      "Falling Stars scales well with cast speed, cooldown, Lightning, Luck, and critical damage, while stronger elemental effects raise the ceiling.",
+  },
+  {
+    tier: "A-",
+    wizard: "Aldric / Maggie",
+    bestFor: "Co-op support, healing, objectives, team utility",
+    why:
+      "Aldric supports revive and healing efficiency, while Maggie helps locate objectives, potions, magnets, and scrolls.",
+  },
+  {
+    tier: "B+",
+    wizard: "Pipwick",
+    bestFor: "Summoner playstyle, random-element chaos",
+    why:
+      "Impish Havoc gives the clearest minion-focused route, while Pipwick's passive adds random elemental infusion and a crit-damage / crit-chance tradeoff.",
+  },
+  {
+    tier: "B+",
+    wizard: "Knelly",
+    bestFor: "Bell March, zone utility, 1.0 content",
+    why:
+      "Bell March is unique and useful, but it is more positioning-heavy than normal projectile builds.",
+  },
+  {
+    tier: "Specialist",
+    wizard: "Wizard King",
+    bestFor: "Magic Missile, crit scaling, late-game projectile routing",
+    why:
+      "Wizard King's card shows Increased Critical Chance and Magic Missile, making him a crit-focused projectile wizard rather than a beginner-safe pick.",
+  },
+];
+
+export const wizardColumns = [
+  { key: "wizard", label: "Wizard" },
+  { key: "signatureSpell", label: "Signature Spell" },
+  { key: "passiveTrait", label: "Passive / Trait" },
+  { key: "bestFor", label: "Best For" },
+];
+
+export const wizardRows = [
+  {
+    wizard: "Reginald",
+    signatureSpell: "Astral Orbs",
+    passiveTrait:
+      "Increased Luck; increased chance of finding Health Potions and Mana Magnets",
+    bestFor: "Beginner damage, safer upgrades, Acid multi-hit, boss shred",
+  },
+  {
+    wizard: "Sun Mage",
+    signatureSpell: "Solar Pulse",
+    passiveTrait:
+      "Increased Dodge; moves faster on environmental hazards and even faster on roads; smaller hitbox",
+    bestFor: "Solo, farming, aura builds, safe close-range AoE",
+  },
+  {
+    wizard: "Moon Mage",
+    signatureSpell: "Moonerang",
+    passiveTrait:
+      "Gets new Spells and Infusions faster; increased Mana Gain",
+    bestFor: "Multi-hit routes, Acid builds, return-hit damage, faster spell progression",
+  },
+  {
+    wizard: "Ludwig",
+    signatureSpell: "Arcane Broadsword",
+    passiveTrait:
+      "Unaffected by elemental effects; bigger hitbox; increased Armor; decreased Move Speed",
+    bestFor: "Risky melee, armor-heavy routes, close-range play",
+  },
+  {
+    wizard: "Aldric",
+    signatureSpell: "Aether Beam",
+    passiveTrait:
+      "Revives teammates more efficiently; increased Health Regeneration; heals teammates more efficiently",
+    bestFor: "Healing, support, beam damage, co-op utility",
+  },
+  {
+    wizard: "Maggie",
+    signatureSpell: "Aurora Wings",
+    passiveTrait:
+      "Knows the location of Objectives faster; can spot Health Potions, Mana Magnets, and Scrolls with ease",
+    bestFor: "Co-op support, objective routing, bouncing projectiles, pickup awareness",
+  },
+  {
+    wizard: "Kavin",
+    signatureSpell: "Rocky Road",
+    passiveTrait: "Gains Mana when taking Damage",
+    bestFor: "Terrain control, defensive routing, mana recovery under pressure",
+  },
+  {
+    wizard: "Star Mage",
+    signatureSpell: "Falling Stars",
+    passiveTrait: "Elemental effects are more effective",
+    bestFor: "Falling Stars Lightning, high-ceiling damage, elemental builds",
+  },
+  {
+    wizard: "Hatti",
+    signatureSpell: "Cardinal Runes",
+    passiveTrait:
+      "Increased Damage; decreased Max HP; more vulnerable to elemental effects",
+    bestFor: "Fragile high-damage rune builds, spell size, cast speed, challenge routes",
+  },
+  {
+    wizard: "Balthazar",
+    signatureSpell: "Talon Slash",
+    passiveTrait:
+      "Signature Spell is imbued with Lifesteal; can revive teammates while being down himself",
+    bestFor: "Lifesteal, short-range burst, risky sustain, co-op clutch revives",
+  },
+  {
+    wizard: "Bryony",
+    signatureSpell: "Vengeful Sprout",
+    passiveTrait:
+      "Mana Magnets are more effective; Health Potions are more effective; increased Mana Pull",
+    bestFor: "Passive pressure, pickup-heavy runs, safer sustain routes",
+  },
+  {
+    wizard: "Campanelli",
+    signatureSpell: "Phantom Blades",
+    passiveTrait:
+      "Increased Size, Damage, and Lifetime for the Resurrection Beam; increased Move Speed",
+    bestFor: "Projectile builds, revive value, co-op challenges",
+  },
+  {
+    wizard: "Wizard King",
+    signatureSpell: "Magic Missile",
+    passiveTrait: "Increased Critical Chance",
+    bestFor: "Crit scaling, projectile damage, late-game Magic Missile routing",
+  },
+  {
+    wizard: "Pipwick",
+    signatureSpell: "Impish Havoc",
+    passiveTrait:
+      "Spells cast have a slight chance of being infused with a random element; increased Critical Damage; decreased Critical Chance",
+    bestFor: "Summoner builds, minions, random-element routes, crit-damage scaling",
+  },
+  {
+    wizard: "Knelly",
+    signatureSpell: "Bell March",
+    passiveTrait:
+      "When hit, deals damage back to the source; explodes on death",
+    bestFor: "Bell zones, damage reflection, risky utility, co-op chaos",
+  },
+];
+
+export const unlockTypeColumns = [
+  { key: "unlockType", label: "Unlock Type" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "playerTip", label: "Player Tip" },
+];
+
+export const unlockTypeRows = [
+  {
+    unlockType: "Survival milestones",
+    whatItMeans:
+      "Some wizard progression goals are tied to total survival time across runs.",
+    playerTip:
+      "Use stable builds first. Solar Pulse, Astral Orbs, Moonerang, and Scepter Mesh-style routes make survival goals easier.",
+  },
+  {
+    unlockType: "New spell goals",
+    whatItMeans:
+      "Some unlock paths care about discovering, equipping, or trying new spells.",
+    playerTip:
+      "Use safer runs to broaden your spell pool instead of forcing new spells during hard attempts.",
+  },
+  {
+    unlockType: "Level-up milestones",
+    whatItMeans:
+      "Some progression checks care about how many times you level up across runs.",
+    playerTip:
+      "Pickup range, Mana Gain, XP flow, and long stable runs help more than pure burst damage.",
+  },
+  {
+    unlockType: "Quest completions",
+    whatItMeans:
+      "Some outfits, spell unlocks, or wizard-specific rewards are tied to quest objectives.",
+    playerTip:
+      "Check the quest screen before starting a run so you know which wizard or spell to use.",
+  },
+  {
+    unlockType: "Roster requirements",
+    whatItMeans:
+      "Some roster entries may show a specific unlock requirement, milestone, or purchase prompt depending on progression state.",
+    playerTip:
+      "Use the in-game wizard screen as the final source for the exact requirement instead of assuming every wizard uses the same unlock method.",
+  },
+  {
+    unlockType: "Wizard Rank / Ascension",
+    whatItMeans:
+      "Playing a wizard increases that wizard's long-term progression.",
+    playerTip:
+      "Rank progression matters because Ascension and outfits can change future build routes.",
+  },
+];
+
+export const unlockOrderColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "recommended", label: "Recommended Wizards" },
+  { key: "why", label: "Why" },
+];
+
+export const unlockOrderRows = [
+  {
+    stage: "First stable route",
+    recommended: "Sun Mage",
+    why:
+      "Solar Pulse gives the cleanest early path into solo, farming, and basic aura scaling.",
+  },
+  {
+    stage: "Boss damage",
+    recommended: "Reginald, Moon Mage, Star Mage",
+    why:
+      "Astral Orbs and Moonerang support multi-hit routes, while Falling Stars has a higher ceiling.",
+  },
+  {
+    stage: "Co-op support",
+    recommended: "Maggie, Aldric, Campanelli, Knelly",
+    why:
+      "Support, revive value, healing, pickup awareness, and bell utility become stronger when teammates can benefit from them.",
+  },
+  {
+    stage: "Achievement hunting",
+    recommended: "Star Mage, Hatti, Bryony, Campanelli, Knelly",
+    why:
+      "These wizards have distinct challenge routes that are easier to plan once you know their spell behavior.",
+  },
+  {
+    stage: "Specialist playstyles",
+    recommended: "Pipwick, Balthazar, Ludwig, Kavin, Wizard King",
+    why:
+      "Summons, lifesteal, melee routes, terrain control, mana recovery, and crit-focused projectile play are better after you understand the basics.",
+  },
+];
+
+export const roleColumns = [
+  { key: "goal", label: "Your Goal" },
+  { key: "bestWizard", label: "Best Wizard" },
+  { key: "backup", label: "Backup Pick" },
+  { key: "reason", label: "Reason" },
+];
+
+export const roleRows = [
+  {
+    goal: "Best beginner wizard",
+    bestWizard: "Sun Mage",
+    backup: "Reginald",
+    reason:
+      "Solar Pulse is easy to build around; Reginald is safer if you prefer orbiting projectiles and better upgrade quality.",
+  },
+  {
+    goal: "Best solo wizard",
+    bestWizard: "Sun Mage",
+    backup: "Moon Mage",
+    reason:
+      "Solo wants uptime, AoE, and safety. Solar Pulse is easiest, while Moonerang gives a strong multi-hit route.",
+  },
+  {
+    goal: "Best farming wizard",
+    bestWizard: "Sun Mage",
+    backup: "Star Mage",
+    reason:
+      "Solar Pulse is the easiest repeatable farm route, while Falling Stars has a higher ceiling if the build comes together.",
+  },
+  {
+    goal: "Best boss wizard",
+    bestWizard: "Star Mage",
+    backup: "Reginald / Moon Mage",
+    reason:
+      "Falling Stars Lightning has high ceiling, while multi-hit spells can use Acid shred.",
+  },
+  {
+    goal: "Best co-op support",
+    bestWizard: "Maggie",
+    backup: "Aldric / Campanelli / Knelly",
+    reason:
+      "Objective awareness, healing, revive value, and bell-zone utility become stronger when teammates can benefit.",
+  },
+  {
+    goal: "Best summoner",
+    bestWizard: "Pipwick",
+    backup: "None",
+    reason:
+      "Impish Havoc gives the clearest minion-focused route in 1.0.",
+  },
+  {
+    goal: "Most complex late-game wizard",
+    bestWizard: "Wizard King",
+    backup: "Star Mage",
+    reason:
+      "Wizard King has crit-focused Magic Missile routing, while Star Mage gives a cleaner high-ceiling elemental route.",
+  },
+];
+
+export const goldColumns = [
+  { key: "system", label: "System" },
+  { key: "whatItUses", label: "What It Uses" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const goldRows = [
+  {
+    system: "Wizard unlocks",
+    whatItUses:
+      "Quests, milestones, spell goals, survival goals, roster requirements, and wizard-specific progression",
+    whatToDo:
+      "Track character progress through the wizard and quest screens. Some roster entries may have specific requirements, so do not assume every wizard uses the same unlock method.",
+  },
+  {
+    system: "Enchantments",
+    whatItUses: "Gold",
+    whatToDo:
+      "Spend gold on permanent upgrades that make future runs safer and faster.",
+  },
+  {
+    system: "Bounty and farming upgrades",
+    whatItUses: "Gold / meta-progression points",
+    whatToDo:
+      "Use the Gold Farm Guide if your goal is faster progression income.",
+  },
+  {
+    system: "Wizard Rank",
+    whatItUses: "Playing that wizard",
+    whatToDo:
+      "Keep using a wizard if you want rank, outfits, ascension, or wizard-specific rewards.",
+  },
+  {
+    system: "Outfits / Ascension",
+    whatItUses: "Wizard quests and rank progression",
+    whatToDo:
+      "Treat outfit and ascension progress as part of long-term build planning.",
+  },
+];
+
+export const ascensionColumns = [
+  { key: "wizard", label: "Wizard" },
+  { key: "ascensionStart", label: "Ascension Skin Starting Spell" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const ascensionRows = [
+  {
+    wizard: "Reginald",
+    ascensionStart: "Bell March",
+    whyItMatters:
+      "Turns a beginner-friendly Astral Orbs wizard into a bell-zone route.",
+  },
+  {
+    wizard: "Sun Mage",
+    ascensionStart: "Chthonic Charge",
+    whyItMatters:
+      "Changes Sun Mage away from the normal Solar Pulse aura start.",
+  },
+  {
+    wizard: "Moon Mage",
+    ascensionStart: "Scepter Mesh",
+    whyItMatters:
+      "Moves the wizard toward control and damage-zone routing.",
+  },
+  {
+    wizard: "Aldric",
+    ascensionStart: "Solar Pulse",
+    whyItMatters:
+      "Gives a support-oriented wizard access to one of the strongest aura starts.",
+  },
+];
+
+export const spellUnlockColumns = [
+  { key: "concept", label: "Unlock Concept" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const spellUnlockRows = [
+  {
+    concept: "Wizard unlock",
+    whatItMeans:
+      "You gain access to that wizard as a playable character.",
+    whyItMatters:
+      "Each wizard changes your starting spell, passive trait, and early upgrade direction.",
+  },
+  {
+    concept: "Signature spell",
+    whatItMeans:
+      "The spell tied to that wizard, such as Falling Stars for Star Mage or Bell March for Knelly.",
+    whyItMatters:
+      "Your starting spell strongly shapes the run's early upgrades and infusion route.",
+  },
+  {
+    concept: "Spell unlock for future runs",
+    whatItMeans:
+      "Some wizard feats can make that wizard's starting spell appear for other wizards later.",
+    whyItMatters:
+      "This gives you a reason to play different wizards even if you already have a favorite.",
+  },
+  {
+    concept: "Ascension Skin",
+    whatItMeans:
+      "A higher-progression outfit route that can change the wizard's starting spell.",
+    whyItMatters:
+      "Ascension can turn a familiar wizard into a different build route.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Unlock Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Chasing a wizard plan before stabilizing your runs",
+    whyItHurts:
+      "Unlocking or chasing a new wizard does not help if your account cannot survive objectives or bosses yet.",
+    betterPlay:
+      "Stabilize with permanent upgrades, safe builds, and basic progression before chasing specialists.",
+  },
+  {
+    mistake: "Confusing wizard unlocks with gold progression",
+    whyItHurts:
+      "Gold mainly supports Enchantments and meta-progression, while wizard unlocks can involve quests, milestones, roster requirements, and wizard systems.",
+    betterPlay:
+      "Use gold for upgrades, and use the quest / wizard screen to track character unlocks.",
+  },
+  {
+    mistake: "Ignoring passive traits",
+    whyItHurts:
+      "A wizard's passive can change how safe, lucky, fast-scaling, or risky the run feels before the first upgrade appears.",
+    betterPlay:
+      "Judge a wizard by passive trait plus signature spell, not by spell alone.",
+  },
+  {
+    mistake: "Unlocking specialist wizards too early",
+    whyItHurts:
+      "Pipwick, Ludwig, Balthazar, Kavin, and Wizard King are more interesting once you understand infusions and objectives.",
+    betterPlay:
+      "Get one reliable solo or farming route first, then branch into specialist playstyles.",
+  },
+  {
+    mistake: "Treating Ascension Skins as cosmetic only",
+    whyItHurts:
+      "Ascension Skin routes can change a wizard's starting spell, which changes the whole build plan.",
+    betterPlay:
+      "Check ascension rewards before grinding a wizard only for appearance.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best wizard to unlock early in The Spell Brigade 1.0 is usually Sun Mage, but the best wizard depends on your goal.**
+
+Use **Sun Mage** if you want the safest solo and farming route. Use **Reginald** if you want a beginner-friendly wizard with better upgrade quality. Use **Star Mage** if you want the highest Falling Stars ceiling. Use **Campanelli**, **Maggie**, **Aldric**, or **Knelly** if you mostly play co-op. Use **Pipwick** if you want summons.
+
+Wizard unlocks can involve quests, milestones, roster requirements, wizard rank, and ascension systems. Gold is mainly used for Enchantments and meta-progression, so always use the in-game wizard screen for the exact unlock requirement.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-15-wizards-overview.webp"
+    alt="The Spell Brigade wizard selection screen showing the full roster of 15 wizards."
+    width={600}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The 1.0 roster has 15 wizards. Each one changes your starting spell, passive trait, and long-term progression route.
+  </figcaption>
+</figure>
+
+<h2 id="wizard-tier-list">
+  Wizard tier list
+</h2>
+
+This tier list is for practical player value, not lore. It combines early usefulness, solo safety, co-op value, scaling ceiling, and how easily the wizard opens a strong build route.
+
+<GuideTable
+  caption="The Spell Brigade wizard tier list for 1.0."
+  columns={tierColumns}
+  rows={tierRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-wizard-unlocks-work">
+  How wizard unlocks work in The Spell Brigade 1.0
+</h2>
+
+Wizard unlocks and gold progression are easy to confuse because both affect long-term progression.
+
+For player planning, use this rule:
+
+**Use the wizard and quest screens to track character unlocks. Use gold for Enchantments, Bounty, and meta-progression upgrades.**
+
+The major unlock paths include survival time, trying new spells, leveling up, roster requirements, quest completions, wizard rank, outfits, and ascension progress.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-quests-unlocks.webp"
+    alt="The Spell Brigade quest completed pop-up showing a Reginald outfit unlock."
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wizard progression often happens through quests, milestones, outfits, and character-specific goals.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Common wizard unlock and progression types in The Spell Brigade."
+  columns={unlockTypeColumns}
+  rows={unlockTypeRows}
+/>
+
+<GuideCallout title="Unlock rule">
+Do not assume every wizard uses the same unlock method. Track the exact requirement from the wizard screen, then use gold to strengthen the account through Enchantments and meta-progression.
+</GuideCallout>
+
+<h2 id="all-wizards">
+  All wizards, traits, and signature spells
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-star-mage-falling-stars.webp"
+    alt="The Spell Brigade Star Mage wizard card showing traits and the Falling Stars signature spell."
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A wizard card shows the two things that matter most before a run starts: the passive trait and the signature spell.
+  </figcaption>
+</figure>
+
+The game has 15 wizards in 1.0. The table below focuses on what matters most for build planning: signature spell, passive trait, and role.
+
+<GuideTable
+  caption="All The Spell Brigade wizards, passive traits, and signature spells."
+  columns={wizardColumns}
+  rows={wizardRows}
+/>
+
+<h2 id="best-unlock-order">
+  Best wizard unlock order
+</h2>
+
+Use this order by goal, not as a fixed shopping list.
+
+<GuideTable
+  caption="Best wizard unlock order by progression goal."
+  columns={unlockOrderColumns}
+  rows={unlockOrderRows}
+/>
+
+<h2 id="best-wizard-by-goal">
+  Best wizard by goal
+</h2>
+
+This is the quick lookup table for searches like “best wizard for solo,” “best wizard for gold farming,” or “best wizard for bosses.”
+
+<GuideTable
+  caption="Best wizard by goal in The Spell Brigade."
+  columns={roleColumns}
+  rows={roleRows}
+/>
+
+<h2 id="gold-and-enchantments">
+  Gold, Enchantments, and unlock planning
+</h2>
+
+Gold is mainly your meta-progression currency. Spend it on Enchantments, Bounty, permanent upgrades, and other account-wide power systems.
+
+Wizard unlocks are better treated as quest, milestone, roster, outfit, rank, and wizard-progression goals.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-enchantments-gold.webp"
+    alt="The Spell Brigade enchantments and upgrades screen showing gold costs."
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gold is used for Enchantments and meta-progression upgrades, while wizard unlocks are tracked through wizard and quest systems.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Wizard unlocks vs gold progression."
+  columns={goldColumns}
+  rows={goldRows}
+/>
+
+Read the <Link href="/the-spell-brigade/gold-farm">Gold Farm Guide</Link> if you need the full Bounty and Enchantment spending plan.
+
+<h2 id="ascension-system">
+  Ascension Skin starting spell examples
+</h2>
+
+Ascension is not only about cosmetics. Some Ascension Skin routes can change the wizard's starting spell, which means the same wizard can open a different build path after enough progression.
+
+<GuideTable
+  caption="Known Ascension Skin starting spell examples in The Spell Brigade."
+  columns={ascensionColumns}
+  rows={ascensionRows}
+/>
+
+<GuideCallout title="Ascension rule">
+If an Ascension Skin changes the starting spell, treat it as a new build route, not just a visual reward.
+</GuideCallout>
+
+<h2 id="signature-spell-unlocks">
+  Signature spells and future runs
+</h2>
+
+Unlocking a wizard is not only about playing that wizard. It can also matter because that wizard's starting spell can become part of the wider spell pool after specific feats.
+
+<GuideTable
+  caption="How wizard and signature spell unlocks affect future runs."
+  columns={spellUnlockColumns}
+  rows={spellUnlockRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-bell-march-unlocked.webp"
+    alt="The Spell Brigade Bell March unlocked for every wizard after a Knelly challenge."
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wizard-specific feats can unlock that wizard's spell for wider use, which gives you a reason to play beyond your favorite wizard.
+  </figcaption>
+</figure>
+
+<h2 id="specialist-examples">
+  Specialist wizard examples
+</h2>
+
+The roster includes several specialist wizards that are worth learning once you understand basic infusions and objectives.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-pipwick-impish-havoc.webp"
+    alt="The Spell Brigade Pipwick wizard card showing Impish Havoc and summoner traits."
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pipwick is the clearest summoner wizard because Impish Havoc spawns minions that attack enemies for you.
+  </figcaption>
+</figure>
+
+Pipwick, Bryony, Campanelli, Wizard King, Balthazar, and Knelly are good examples of why wizard choice is more than a damage number. Each one changes how you move, scale, survive, or support the team.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-knelly-bell-march.webp"
+    alt="The Spell Brigade Knelly wizard card showing Bell March and damage reflection traits."
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Knelly's Bell March is a zone-based spell, and her traits reward dangerous, reactive play.
+  </figcaption>
+</figure>
+
+<h2 id="quests-and-unlocks">
+  Quests, feats, skins, and unlock grinding
+</h2>
+
+Wizard progression is not just getting characters onto the roster. Quests, feats, skins, signature spell unlocks, and ascension systems all feed into the long-term grind.
+
+Before starting a run with a specific wizard, check whether that wizard has:
+
+- a spell unlock feat,
+- a skin or outfit challenge,
+- an achievement route,
+- a rank or ascension goal,
+- a contract or bonus gold route,
+- an objective-related quest.
+
+<h2 id="contracts">
+  Contracts and wizard choice
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-contracts-wizard.webp"
+    alt="The Spell Brigade wizard contract system showing a specific wizard can provide bonus gold."
+    width={600}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Contracts can make a specific wizard more valuable for a run, especially when you are farming gold.
+  </figcaption>
+</figure>
+
+Sometimes the best wizard choice is not your planned unlock order. It is the wizard with a useful contract.
+
+Use this rule:
+
+**Take the contract when the wizard can still finish the run. Skip it when the bonus would make you play a weak route.**
+
+<h2 id="common-mistakes">
+  Common wizard unlock mistakes
+</h2>
+
+<GuideTable
+  caption="Common The Spell Brigade wizard unlock mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="recommended-unlock-path">
+  Recommended unlock path for new players
+</h2>
+
+If you are still learning, use this path:
+
+1. **Stabilize your runs first.**  
+   Learn movement, objectives, infusions, and basic survival before chasing specialist routes.
+
+2. **Unlock one safe all-purpose route.**  
+   Sun Mage is the easiest choice here because Solar Pulse covers solo and farming well.
+
+3. **Unlock one boss or ceiling route.**  
+   Pick Star Mage for Falling Stars ceiling, or Reginald / Moon Mage for multi-hit routes.
+
+4. **Unlock one co-op support route.**  
+   Maggie, Aldric, Campanelli, or Knelly gives your account better team options.
+
+5. **Unlock one specialist route.**  
+   Pipwick, Ludwig, Balthazar, Kavin, or Wizard King is better once you understand the basics.
+
+6. **Start planning wizard-specific progression.**  
+   Once rank, outfits, and quests matter, check whether the wizard opens future spell or build routes.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best wizard to unlock first?
+
+Sun Mage is the safest early unlock for most players because Solar Pulse works well for solo, farming, and beginner-friendly AoE scaling.
+
+### How do you unlock wizards in The Spell Brigade 1.0?
+
+Wizard unlocks can involve quests, milestones, survival goals, trying new spells, level-up goals, roster requirements, map progression, wizard rank, outfits, and ascension systems. Use the in-game wizard screen for the exact requirement.
+
+### Is gold used to unlock wizards?
+
+Gold is mainly used for Enchantments, Bounty, permanent upgrades, and meta-progression. If a specific roster entry shows a gold or purchase prompt, follow that in-game requirement; otherwise, track wizard unlocks through the quest and progression systems.
+
+### How many wizards are in The Spell Brigade?
+
+There are 15 wizards in 1.0.
+
+### Which wizard is best for solo or farming?
+
+Sun Mage is the easiest recommendation for both solo and farming because Solar Pulse gives safe AoE, strong scaling, and a simple build route. Star Mage can have a higher damage ceiling, but Sun Mage is easier to reproduce.
+
+### What is the best wizard for bosses?
+
+Star Mage is best for high-ceiling Falling Stars damage. Reginald and Moon Mage are strong alternatives if their multi-hit spells can use Acid, Flux, or Corrosion.
+
+### What is the best co-op wizard?
+
+Maggie, Aldric, Campanelli, and Knelly are strong co-op or utility picks because they bring healing, support, revive value, objective awareness, or zone utility.
+
+### What does Ascension do?
+
+Ascension Skin routes can change a wizard's starting spell, so Ascension can affect gameplay and not just appearance.
+
+### What is Reginald's Ascension Skin starting spell?
+
+Reginald's known Ascension Skin example starts with Bell March.
+
+### What is Sun Mage's Ascension Skin starting spell?
+
+Sun Mage's known Ascension Skin example starts with Chthonic Charge.
+
+### Is Wizard King just a Magic Missile wizard?
+
+Wizard King's visible card shows Increased Critical Chance and Magic Missile, making him a crit-focused projectile wizard. Treat any extra mechanics as advanced only if confirmed by your current game UI.
+
+### Is Knelly the bell wizard?
+
+Yes. Your in-game screenshot shows **Knelly** as the bell wizard, and her signature spell is **Bell March**.
+
+### Is Pipwick worth unlocking?
+
+Yes, if you want a summoner build. Pipwick's Impish Havoc gives the clearest minion route, while his passive adds random elemental infusion and a critical damage tradeoff.
+
+### What should I read next?
+
+Read the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> for build routes, the <Link href="/the-spell-brigade/best-spells-elements">Best Spells and Elements Guide</Link> for infusions, or the <Link href="/the-spell-brigade/gold-farm">Gold Farm Guide</Link> if you need faster meta-progression.

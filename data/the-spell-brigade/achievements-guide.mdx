@@ -1,0 +1,1084 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const roadmapColumns = [
+  { key: "stage", label: "Roadmap Stage" },
+  { key: "focus", label: "Focus" },
+  { key: "why", label: "Why This Order Works" },
+];
+
+export const roadmapRows = [
+  {
+    stage: "1. Normal clears",
+    focus: "Survive, learn objectives, unlock basic progression",
+    why:
+      "Early achievements usually come from finishing runs, trying spells, and learning how objectives work.",
+  },
+  {
+    stage: "2. Wizard unlocks",
+    focus: "Unlock more wizards and signature spells",
+    why:
+      "Many harder achievements are easier once the correct wizard and starting spell are available.",
+  },
+  {
+    stage: "3. Spell and element achievements",
+    focus: "Infusions, advanced infusions, repeated casts, special spell behavior",
+    why:
+      "These achievements need a focused build instead of random spell choices.",
+  },
+  {
+    stage: "4. Objective achievements",
+    focus: "Team objectives, braziers, augments, map-specific tasks",
+    why:
+      "Objective achievements are easiest when your build is already stable and the team knows the plan.",
+  },
+  {
+    stage: "5. Wizard-specific achievements",
+    focus:
+      "Star Mage, Hatti, Knelly, Bryony, Campanelli, Aldric, Ludwig, Maggie, Pipwick, and other wizard tasks",
+    why:
+      "These often need a specific wizard, spell, upgrade route, map condition, or co-op setup.",
+  },
+  {
+    stage: "6. Hardcore and restriction routes",
+    focus: "Hardcore, no-potion, boss precision, dodge, sustain, portal decisions",
+    why:
+      "Restriction achievements are easier after you understand when to abandon risky objectives.",
+  },
+  {
+    stage: "7. Cleanup",
+    focus: "Long grinds, cumulative casts, scrolls, sacrifices, bell detonations, awkward co-op achievements",
+    why:
+      "Save repetitive or highly specific tasks for the end when your account is stronger.",
+  },
+];
+
+export const achievementTypeColumns = [
+  { key: "type", label: "Achievement Type" },
+  { key: "examples", label: "Examples" },
+  { key: "bestApproach", label: "Best Approach" },
+];
+
+export const achievementTypeRows = [
+  {
+    type: "Progression",
+    examples: "Unlock wizards, unlock spells, complete runs, level up",
+    bestApproach:
+      "Play normally at first. Do not optimize too early before your account has basic upgrades.",
+  },
+  {
+    type: "Objective",
+    examples: "Brazier order, map tasks, team objective completions, augment routes",
+    bestApproach:
+      "Run with a stable build and treat objectives as planned checkpoints, not panic decisions.",
+  },
+  {
+    type: "Spell-specific",
+    examples:
+      "Falling Stars casts, Phantom Blades count, Bell detonations, Magic Missile precision",
+    bestApproach:
+      "Use the correct wizard and funnel upgrades into the target spell.",
+  },
+  {
+    type: "Wizard-specific",
+    examples:
+      "Star Mage, Hatti, Knelly, Bryony, Campanelli, Maggie, Pipwick, Ludwig achievements",
+    bestApproach:
+      "Build around that wizard's signature spell, passive trait, and exact achievement trigger.",
+  },
+  {
+    type: "Co-op",
+    examples:
+      "Revives, Hatti hitting Ludwig, Balthazar ghost revive, team objectives",
+    bestApproach:
+      "Communicate the goal before the run. Do not rely on random teammates for precise tasks.",
+  },
+  {
+    type: "Restriction",
+    examples: "No potion, Hardcore, Pyrestorm Pit survival, no-greed routes",
+    bestApproach:
+      "Prioritize movement, dodge, sustain, safe objectives, and portal decisions over raw damage greed.",
+  },
+  {
+    type: "Grind",
+    examples:
+      "9,001 Falling Stars, 2,080 Bells, 1,066 sacrifices, 432 fungi, 33 scrolls",
+    bestApproach:
+      "Use one-spell, high-frequency, or co-op-assisted routes to make the grind automatic.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "goal", label: "Achievement Goal" },
+  { key: "bestWizard", label: "Best Wizard / Build" },
+  { key: "keyStats", label: "Key Stats" },
+  { key: "warning", label: "Warning" },
+];
+
+export const priorityRows = [
+  {
+    goal: "Falling Stars / Starry Rain",
+    bestWizard: "Star Mage",
+    keyStats:
+      "Cast speed, cooldown reduction, Falling Stars levels, projectile augments, long-run safety",
+    warning:
+      "Do not dilute the run with too many side spells before Falling Stars is online.",
+  },
+  {
+    goal: "Hatti π Plasma Damage",
+    bestWizard: "Hatti",
+    keyStats:
+      "Fire + Lightning infusion, cast speed, spell size, cooldown reduction, survivability",
+    warning:
+      "Plasma is the target. If the run misses Plasma too late, reset instead of forcing dead damage.",
+  },
+  {
+    goal: "Knelly Bell achievements",
+    bestWizard: "Knelly",
+    keyStats:
+      "Bell March levels, cast speed, bell size, explosion uptime, boss control",
+    warning:
+      "Hells Bells is a volume grind; Out with a Bang needs controlled boss damage.",
+  },
+  {
+    goal: "No-potion / survival achievements",
+    bestWizard: "Bryony, Sun Mage, Dodge Crit Heal shell",
+    keyStats:
+      "Dodge, movement, healing alternatives, pickup control, safe objectives",
+    warning:
+      "Avoid accidentally pathing through potions if the achievement forbids healing items.",
+  },
+  {
+    goal: "Co-op revive and teammate achievements",
+    bestWizard: "Campanelli, Balthazar, Hatti + Ludwig setup",
+    keyStats:
+      "Move speed, revive positioning, teammate coordination, defensive tools",
+    warning:
+      "These are much faster with friends than random matchmaking.",
+  },
+  {
+    goal: "Projectile / multi-hit achievements",
+    bestWizard: "Campanelli, Maggie, Star Mage, Wizard King",
+    keyStats:
+      "+1 projectile, split effects, cast speed, spell level, objective augments",
+    warning:
+      "Many of these need augments, not just normal level-up choices.",
+  },
+  {
+    goal: "Hardcore / Pyrestorm Pit",
+    bestWizard: "Sun Mage, safe AoE build, dodge sustain shell",
+    keyStats:
+      "Movement, dodge, sustain, spell size, AoE uptime, portal discipline",
+    warning:
+      "A greedy objective can kill the entire run. Survival is the route.",
+  },
+];
+
+export const wizardChecklistColumns = [
+  { key: "wizard", label: "Wizard" },
+  { key: "importantAchievements", label: "Important Achievements" },
+  { key: "quickRoute", label: "Quick Route" },
+];
+
+export const wizardChecklistRows = [
+  {
+    wizard: "Sun Mage",
+    importantAchievements:
+      "Solar Pulse, Eclipse, Hot as the Sun, On Thin Ice",
+    quickRoute:
+      "Use Solar Pulse for safe AoE. Route Eclipse as a boss-dodge task, Hot as the Sun in Pyrestorm Pit, and On Thin Ice on Frozen Ancients ice patches.",
+  },
+  {
+    wizard: "Moon Mage",
+    importantAchievements:
+      "Moonerang, The Moon and Stars, Moon Sage",
+    quickRoute:
+      "Use Moonerang for multi-hit routing, complete a Mission in the Astral Riftlands, then plan one clean run where all 4 spells can be infused.",
+  },
+  {
+    wizard: "Reginald",
+    importantAchievements:
+      "The Wizard That Could, Simply Lucky, Embrace the Dark Side",
+    quickRoute:
+      "Augment Astral Orbs 4 times in one Mission, collect a Legendary Improvement, and make a Void Spell. Luck helps, but do not dilute the Astral Orbs route too early.",
+  },
+  {
+    wizard: "Aldric",
+    importantAchievements:
+      "Aether Beam, Gentle Giant, A Burning Love, The Fungi Amongi",
+    quickRoute:
+      "Use Aether Beam for healing routes, heal a teammate with Fire, and do the 432 Bewitched Fungi route in co-op so teammates can leave fungi for Aldric.",
+  },
+  {
+    wizard: "Ludwig",
+    importantAchievements:
+      "Arcane Broadsword, Corrosive Swordplay, A Worthy Sacrifice",
+    quickRoute:
+      "Use Arcane Broadsword for multi-kill routing, infuse it with Corrosion, then save the 1,066 sacrifice grind for a dedicated route.",
+  },
+  {
+    wizard: "Kavin",
+    importantAchievements:
+      "Rocky Road, Blocky Rocky Road, For Those About to Rock",
+    quickRoute:
+      "Create Crit Rocks, double Rocky Road size, and corrupt yourself with Rocky Road. Add sustain before stepping through your own trail too often.",
+  },
+  {
+    wizard: "Maggie",
+    importantAchievements:
+      "Aurora Wings, 2 Stones with 1 Bird, Avian Archeologist",
+    quickRoute:
+      "Use bird pathing for multi-target and statue tasks, then treat 33 Scrolls as multi-run cleanup.",
+  },
+  {
+    wizard: "Star Mage",
+    importantAchievements:
+      "Falling Stars, Starry Rain, Surf's Up, Chill Out",
+    quickRoute:
+      "Keep Falling Stars central. Farm 9,001 casts separately from self-freeze and Sol'phish river positioning.",
+  },
+  {
+    wizard: "Hatti",
+    importantAchievements:
+      "Cardinal Runes, π, Frost Branch Reaper, No Honor Among Knights",
+    quickRoute:
+      "Use Rune Burst for sequential-hit routing, force Plasma for π, use bush positioning for Frost Branch, and do the Ludwig interaction in co-op.",
+  },
+  {
+    wizard: "Bryony",
+    importantAchievements:
+      "Vengeful Sprout, Unholy Attraction, Finders Keepers, All Natural",
+    quickRoute:
+      "Control pickups carefully: delay Mana Orbs for Magnet, path around potions, and separate no-potion runs.",
+  },
+  {
+    wizard: "Pipwick",
+    importantAchievements:
+      "Impish Havoc, Imphony of Destruction, Stayin' Alive",
+    quickRoute:
+      "Use Imp uptime, lifetime, and infusion variety until you can hold 8 active Imps or minions of 3 different Infusions.",
+  },
+  {
+    wizard: "Balthazar",
+    importantAchievements:
+      "Talon Slash, It's Morbing Time, Mutually Beneficial Transaction, Postmortem Assistance",
+    quickRoute:
+      "Use Talon Slash for health-steal routing, then use co-op for teammate-health interactions and ghost revive tasks.",
+  },
+  {
+    wizard: "Campanelli",
+    importantAchievements:
+      "Phantom Blades, Watch the Knives, Lucky Thirteen",
+    quickRoute:
+      "Hit a Golden Crab with Phantom Blades, scale Phantom Blades to 10 casts at once, and use friends for revive farming.",
+  },
+  {
+    wizard: "Wizard King",
+    importantAchievements:
+      "Magic Missile, Kingly Precision, Sulfur Supremacy, Enemies Not Found",
+    quickRoute:
+      "Separate Magic Missile crit / precision tasks from Geyser damage and Resurrection Beam kill farming.",
+  },
+  {
+    wizard: "Knelly",
+    importantAchievements:
+      "Bell March, Hells Bells, Out with a Bang",
+    quickRoute:
+      "Use Bell March for single-explosion hit routing, stack bell frequency for 2,080 detonations, then control boss HP for Death Explosion kills.",
+  },
+];
+
+export const hardestAchievementColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "whyHard", label: "Why It Is Hard" },
+  { key: "bestRoute", label: "Best Route" },
+];
+
+export const hardestAchievementRows = [
+  {
+    achievement: "Heckin' Hardcore",
+    whyHard:
+      "Requires Hardcore clears across Realms, so one bad objective or portal decision can erase the attempt.",
+    bestRoute:
+      "Save for late cleanup. Prioritize movement, dodge, sustain, AoE uptime, and portal discipline.",
+  },
+  {
+    achievement: "π",
+    whyHard:
+      "Requires Hatti to deal 314,159 Plasma Damage, so the run needs both damage volume and the correct infusion.",
+    bestRoute:
+      "Force Fire + Lightning for Plasma. Reset if the Plasma route fails too late.",
+  },
+  {
+    achievement: "Starry Rain",
+    whyHard:
+      "Requires 9,001 Falling Stars casts, making it one of the longest single-wizard grinds.",
+    bestRoute:
+      "Use Star Mage with cast speed, cooldown reduction, Falling Stars levels, and long-run safety.",
+  },
+  {
+    achievement: "Hells Bells",
+    whyHard:
+      "Requires Knelly to detonate 2,080 Bells, so it is a pure volume grind.",
+    bestRoute:
+      "Use Bell March as the core spell and stack cast speed, bell size, and long-run safety.",
+  },
+  {
+    achievement: "Out with a Bang",
+    whyHard:
+      "Requires killing a Boss with Knelly's Death Explosion, so the final hit must be controlled.",
+    bestRoute:
+      "Lower boss HP carefully, stop over-damaging, then die close enough for the explosion to finish it.",
+  },
+  {
+    achievement: "A Worthy Sacrifice",
+    whyHard:
+      "Requires Ludwig to sacrifice 1,066 enemies, which depends on routing and objective availability.",
+    bestRoute:
+      "Run Ludwig specifically for sacrifice cleanup instead of treating it as a normal clear.",
+  },
+  {
+    achievement: "The Fungi Amongi",
+    whyHard:
+      "Requires Aldric to retrieve 432 Bewitched Fungi, which is much slower solo.",
+    bestRoute:
+      "Run co-op and have teammates leave fungi for Aldric. A full squad makes this much smoother.",
+  },
+];
+
+export const starMageColumns = [
+  { key: "achievement", label: "Star Mage Achievement" },
+  { key: "requirement", label: "Requirement" },
+  { key: "route", label: "Route" },
+];
+
+export const starMageRows = [
+  {
+    achievement: "Starry Rain",
+    requirement: "As Star Mage, cast 9,001 Falling Stars",
+    route:
+      "Use long Star Mage runs with Falling Stars as the main spell. Stack cast speed, cooldown reduction, spell levels, and survival.",
+  },
+  {
+    achievement: "Surf's Up",
+    requirement: "As Star Mage, fight Sol'phish in a river",
+    route:
+      "Treat this as a map and boss-positioning condition, not a damage check. Keep enough movement to reposition safely.",
+  },
+  {
+    achievement: "Chill Out",
+    requirement: "As Star Mage, freeze yourself",
+    route:
+      "Use an Ice / freeze setup that can affect yourself. Avoid defensive setups that block self-affecting spell interactions.",
+  },
+];
+
+export const hattiColumns = [
+  { key: "achievement", label: "Hatti Achievement" },
+  { key: "requirement", label: "Requirement" },
+  { key: "route", label: "Route" },
+  { key: "warning", label: "Warning" },
+];
+
+export const hattiRows = [
+  {
+    achievement: "π",
+    requirement: "Deal 314,159 Plasma Damage as Hatti",
+    route:
+      "Force Fire + Lightning on the main damage spell, then stack cast speed, spell size, cooldown reduction, and survival.",
+    warning:
+      "Plasma is the target. If the run misses Plasma too late, reset instead of forcing dead damage.",
+  },
+  {
+    achievement: "Frost Branch Reaper",
+    requirement: "Kill 300 enemies in Bushes as Hatti",
+    route:
+      "Route bush-heavy areas and use controlled positioning so enemies die inside the required zone.",
+    warning:
+      "Do not over-kite enemies away from bushes just to stay comfortable.",
+  },
+  {
+    achievement: "No Honor Among Knights",
+    requirement: "Hit Ludwig as Hatti",
+    route:
+      "Do this in co-op with a Ludwig teammate standing close enough for a controlled hit.",
+    warning:
+      "Do not rely on random matchmaking for this interaction achievement.",
+  },
+];
+
+export const knellyColumns = [
+  { key: "achievement", label: "Knelly Achievement" },
+  { key: "requirement", label: "Requirement" },
+  { key: "route", label: "Route" },
+  { key: "warning", label: "Warning" },
+];
+
+export const knellyRows = [
+  {
+    achievement: "Hells Bells",
+    requirement: "Detonate 2,080 Bells as Knelly",
+    route:
+      "Use Bell March as the core spell and take cast speed, bell size, spell uptime, and safe long-run tools.",
+    warning:
+      "This is a volume grind. Do not overcomplicate it with risky side objectives.",
+  },
+  {
+    achievement: "Out with a Bang",
+    requirement: "Kill a Boss with Knelly's Death Explosion",
+    route:
+      "Lower the boss carefully, stop uncontrolled damage, then die close enough for the Death Explosion to finish it.",
+    warning:
+      "Too much passive damage can kill the boss before the setup is ready.",
+  },
+];
+
+export const bryonyColumns = [
+  { key: "achievement", label: "Bryony Achievement" },
+  { key: "requirement", label: "Requirement" },
+  { key: "route", label: "Route" },
+];
+
+export const bryonyRows = [
+  {
+    achievement: "Unholy Attraction",
+    requirement: "Collect more than 666 Mana Orbs with a single Mana Magnet",
+    route:
+      "Let Mana Orbs pile up during dense waves, avoid collecting too early, then use a Mana Magnet once enough orbs are waiting.",
+  },
+  {
+    achievement: "Finders Keepers",
+    requirement: "Grab a Health Potion when already at full Health",
+    route:
+      "Keep track of potion spawns and take one only after topping off. This is a pickup-control task, not a survival task.",
+  },
+  {
+    achievement: "All Natural",
+    requirement: "Complete a mission without using any Health Potions",
+    route:
+      "Use dodge, movement, and non-potion sustain. Path around potions instead of automatically collecting every pickup.",
+  },
+];
+
+export const campanelliColumns = [
+  { key: "achievement", label: "Campanelli Achievement" },
+  { key: "requirement", label: "Requirement" },
+  { key: "route", label: "Route" },
+];
+
+export const campanelliRows = [
+  {
+    achievement: "Lucky Thirteen",
+    requirement: "Revive 13 teammates",
+    route:
+      "Do this in co-op. Let teammates coordinate safe deaths and revives, then use Campanelli's movement and Resurrection Beam value to repeat.",
+  },
+  {
+    achievement: "Watch the Knives",
+    requirement: "Cast 10 Phantom Blades at the same time",
+    route:
+      "Push Phantom Blades levels, take +1 projectile upgrades, and look for augments that add extra directions or additional blades.",
+  },
+];
+
+export const objectiveDecisionColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "decision", label: "Achievement Decision" },
+  { key: "reason", label: "Reason" },
+];
+
+export const objectiveDecisionRows = [
+  {
+    situation: "Build is stable and the objective is nearby",
+    decision: "Do it",
+    reason:
+      "Objectives can unlock augments and may be required for specific achievements.",
+  },
+  {
+    situation: "Team objective requires order or coordination",
+    decision: "Call the plan first",
+    reason:
+      "Brazier-style achievements are easy to ruin when players act out of order.",
+  },
+  {
+    situation: "You are low HP and the build is not online",
+    decision: "Skip or reset",
+    reason:
+      "Dying loses the run and usually wastes more time than restarting the attempt.",
+  },
+  {
+    situation: "Hardcore portal appears during a bad objective",
+    decision: "Use the portal if needed",
+    reason:
+      "Hardcore achievements reward smart exits more than unnecessary heroism.",
+  },
+  {
+    situation: "You need a specific augment",
+    decision: "Take calculated risks",
+    reason:
+      "Some achievements need +1 projectile, split, or special spell behavior that comes from augments.",
+  },
+];
+
+export const routeColumns = [
+  { key: "phase", label: "Phase" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const routeRows = [
+  {
+    phase: "Before the run",
+    goal: "Pick one achievement",
+    whatToDo:
+      "Do not chase five achievements at once. Choose the wizard, spell, map, difficulty, and team setup for one target.",
+  },
+  {
+    phase: "Early run",
+    goal: "Get the core spell online",
+    whatToDo:
+      "Push the achievement spell first. Take survival only when the run starts becoming unstable.",
+  },
+  {
+    phase: "Mid run",
+    goal: "Secure key augments",
+    whatToDo:
+      "Do safe objectives, look for projectile / split / cooldown / spell behavior augments, and avoid diluting the build.",
+  },
+  {
+    phase: "Late run",
+    goal: "Farm the condition",
+    whatToDo:
+      "Once the build works, focus on the actual trigger: casts, revives, magnets, no-potion completion, boss kill, or map condition.",
+  },
+  {
+    phase: "Cleanup",
+    goal: "Stop when the attempt is dead",
+    whatToDo:
+      "If the wrong augment path appears or a restriction is broken, reset instead of wasting another 20 minutes.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Achievement Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Trying to complete too many achievements in one run",
+    whyItHurts:
+      "Different achievements often need different builds, pacing, maps, and objectives.",
+    betterPlay:
+      "Route one main achievement and one compatible side achievement at most.",
+  },
+  {
+    mistake: "Ignoring objectives until it is too late",
+    whyItHurts:
+      "Many spell achievements need augments, and augments come from objectives.",
+    betterPlay:
+      "Do safe objectives early and mid-run while the map is still manageable.",
+  },
+  {
+    mistake: "Leveling blindly during a targeted farm",
+    whyItHurts:
+      "After certain points, the upgrade pool can dilute and make it harder to find the specific options you need.",
+    betterPlay:
+      "For targeted farms, keep the build compact and avoid unnecessary side choices.",
+  },
+  {
+    mistake: "Forcing Hardcore objectives at low health",
+    whyItHurts:
+      "One greedy objective can erase the entire attempt.",
+    betterPlay:
+      "Use portals and resets strategically. Surviving the route matters more than proving bravery.",
+  },
+  {
+    mistake: "Doing co-op achievements with no communication",
+    whyItHurts:
+      "Revive counts, teammate interactions, brazier order, and team tasks are easy to ruin accidentally.",
+    betterPlay:
+      "Tell the team the exact achievement before the run starts.",
+  },
+  {
+    mistake: "Building single-target for boss achievements",
+    whyItHurts:
+      "Boss fights often include adds, movement, and awkward damage windows.",
+    betterPlay:
+      "Use AoE uptime, spell size, cooldown reduction, movement, and sustain.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The fastest way to complete achievements in The Spell Brigade is to route one achievement at a time instead of trying to do everything in one run.**
+
+The game currently has **114 Steam achievements**, and a realistic 100% cleanup can easily take **35+ hours** if you are starting from normal progression. If you are serious about full completion, join the Discord or bring three friends and run a full 4-player squad. Revive setups, objective farms, scroll routes, and wizard-specific grinds become dramatically faster when everyone is helping the same route.
+
+Start with normal clears, then unlock the right wizard, then build around the exact trigger. Star Mage needs **Falling Stars** volume. Hatti needs **Plasma routing**. Knelly needs **Bell detonation control**. Bryony needs **pickup and potion discipline**. Hardcore achievements need movement and survival decisions more than raw damage.
+
+The rule is simple:
+
+**Pick the target, pick the wizard, build around the trigger, and reset when the run breaks the condition.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-objectives-augments.webp"
+    alt="The Spell Brigade objective and augmentation reward screen showing why objectives matter for achievement runs."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Many achievement routes depend on objectives because objectives unlock the augments that change how your spell behaves.
+  </figcaption>
+</figure>
+
+<h2 id="achievement-roadmap">
+  Achievement roadmap
+</h2>
+
+Do not start with the most awkward wizard-specific tasks. Build your account first, unlock the main wizards, then route the achievements that need specific spells, teammates, maps, or augments.
+
+<GuideTable
+  caption="The Spell Brigade achievement roadmap."
+  columns={roadmapColumns}
+  rows={roadmapRows}
+/>
+
+<GuideCallout title="Roadmap rule">
+A clean 100% route is not about doing every achievement immediately. It is about grouping achievements that use the same wizard, build, map, and run condition.
+</GuideCallout>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="achievement-types">
+  Achievement types and how to route them
+</h2>
+
+Most achievements fall into a few practical categories. Once you know the category, you know how to build the run.
+
+<GuideTable
+  caption="Achievement types and routing strategy."
+  columns={achievementTypeColumns}
+  rows={achievementTypeRows}
+/>
+
+<h2 id="best-builds-for-achievements">
+  Best builds for achievements
+</h2>
+
+This table is for deciding which wizard or build shell to use before you start the attempt.
+
+<GuideTable
+  caption="Best builds and stats for achievement hunting."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+Read the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> if you need the full build routes first.
+
+<h2 id="wizard-achievement-checklist">
+  Wizard achievement checklist
+</h2>
+
+This is the section that keeps the guide useful without turning it into a 10,000-word achievement encyclopedia. You do not need a full paragraph for every wizard achievement, but you do need to know which wizard has which cleanup route.
+
+<GuideTable
+  caption="Key wizard achievement routes."
+  columns={wizardChecklistColumns}
+  rows={wizardChecklistRows}
+/>
+
+<GuideCallout title="100% tip">
+Do not rotate wizards randomly during cleanup. Group achievements by wizard. If you are already running Knelly, finish Bell routes. If you are already running Star Mage, farm Falling Stars. If you are already running Hatti, force Plasma.
+</GuideCallout>
+
+<h2 id="objectives-and-augments">
+  Objectives, augments, and achievement routing
+</h2>
+
+Many achievements are not solved by raw damage. They are solved by getting the right augment at the right time.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-team-objective-braziers.webp"
+    alt="The Spell Brigade team objective achievement route involving coordinated objective order."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Team objective achievements need communication before anyone touches the objective.
+  </figcaption>
+</figure>
+
+Use this rule:
+
+**If the achievement needs spell behavior, projectiles, split effects, team objective order, or a specific spell interaction, build your run around objectives early.**
+
+<h2 id="objective-decisions">
+  When to do or skip objectives
+</h2>
+
+Objectives are powerful, but they are not always worth the risk. In achievement runs, a failed objective is not the problem. A dead run is the problem.
+
+<GuideTable
+  caption="Achievement objective decision table."
+  columns={objectiveDecisionColumns}
+  rows={objectiveDecisionRows}
+/>
+
+<h2 id="level-pacing">
+  Level pacing and RNG pool dilution
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-level-15-rng-pool.webp"
+    alt="The Spell Brigade upgrade screen used to explain level pacing and RNG pool dilution during achievement farming."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Targeted achievement runs can fail when the upgrade pool becomes too diluted before the key spell or augment appears.
+  </figcaption>
+</figure>
+
+For normal progression, leveling fast is good. For specific achievements, it can be smarter to keep the build compact.
+
+This matters when you need:
+
+- one specific spell,
+- one specific infusion,
+- +1 Projectile,
+- split effects,
+- a self-freeze setup,
+- a no-potion route,
+- a long cast-count farm.
+
+Do not take side spells just because they look fun. Every side option can make the next targeted offer harder to find. This is especially important for **Starry Rain**, **π**, **Hells Bells**, **Watch the Knives**, and other achievements that depend on one spell doing one job repeatedly.
+
+<h2 id="hardest-achievements">
+  Hardest achievements to plan first
+</h2>
+
+These achievements waste the most time if you treat them like normal progression. Route them intentionally instead of hoping they happen during a random clear.
+
+<GuideTable
+  caption="Hardest The Spell Brigade achievements and the best route for each."
+  columns={hardestAchievementColumns}
+  rows={hardestAchievementRows}
+/>
+
+<h2 id="star-mage-achievements">
+  Star Mage achievements: Starry Rain, Surf's Up, Chill Out
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-star-mage-falling-stars.webp"
+    alt="The Spell Brigade Star Mage card showing Falling Stars as the signature spell for Star Mage achievement routes."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Star Mage achievements are easiest when Falling Stars stays the center of the run.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Star Mage achievement routes."
+  columns={starMageColumns}
+  rows={starMageRows}
+/>
+
+For Star Mage, route **Starry Rain** with any Falling Stars scaling you still need. The requirement is not mechanically complex, but it is time-consuming: you want more casts, more uptime, and fewer wasted levels.
+
+Best route:
+
+**Falling Stars → cast speed → cooldown reduction → spell levels → objectives → projectile / uptime augments → long-run safety**
+
+Do not combine **Chill Out** with your best Starry Rain attempt unless the freeze setup naturally appears. Self-freeze is a specific interaction achievement; Starry Rain is a volume grind.
+
+<h2 id="hatti-achievements">
+  Hatti achievements: π, Frost Branch Reaper, No Honor Among Knights
+</h2>
+
+Hatti's achievement routes are all about control: **π** needs the correct Plasma damage route, **Frost Branch Reaper** needs enemy positioning, and **No Honor Among Knights** is best handled with a co-op Ludwig setup.
+
+<GuideTable
+  caption="Hatti achievement routes."
+  columns={hattiColumns}
+  rows={hattiRows}
+/>
+
+<h2 id="knelly-achievements">
+  Knelly achievements: Hells Bells and Out with a Bang
+</h2>
+
+Knelly has two achievements that should not be treated the same way. **Hells Bells** is a long volume grind. **Out with a Bang** is a precision boss setup.
+
+<GuideTable
+  caption="Knelly achievement routes."
+  columns={knellyColumns}
+  rows={knellyRows}
+/>
+
+For **Hells Bells**, your goal is simple: create as many bell detonations as possible without dying. For **Out with a Bang**, the hard part is not reaching the boss. The hard part is making sure Knelly's Death Explosion gets the final hit.
+
+<h2 id="bryony-achievements">
+  Bryony achievements: Unholy Attraction, Finders Keepers, All Natural
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-bryony-vengeful-sprout.webp"
+    alt="The Spell Brigade Bryony card showing Vengeful Sprout and pickup-focused traits."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bryony's achievements are mostly about pickup discipline: when to collect, when to avoid, and when to delay.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Bryony achievement routes."
+  columns={bryonyColumns}
+  rows={bryonyRows}
+/>
+
+For **Unholy Attraction**, do not grab every Mana Orb immediately. Let the screen build up orbs, then use the Mana Magnet when enough are waiting.
+
+For **All Natural**, treat Health Potions as hazards. Your pathing matters as much as your build.
+
+<h2 id="campanelli-achievements">
+  Campanelli achievements: Lucky Thirteen and Watch the Knives
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-wizard-unlocks-campanelli-phantom-blades.webp"
+    alt="The Spell Brigade Campanelli card showing Phantom Blades and Resurrection Beam traits."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Campanelli is one of the best co-op achievement wizards because revive value and Phantom Blades both matter.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Campanelli achievement routes."
+  columns={campanelliColumns}
+  rows={campanelliRows}
+/>
+
+**Lucky Thirteen** is not a random matchmaking achievement. It is much easier when teammates agree to help.  
+**Watch the Knives** needs projectile scaling, so objectives and augments are part of the plan.
+
+<h2 id="pyrestorm-pit-hardcore">
+  Pyrestorm Pit Hardcore route
+</h2>
+
+Pyrestorm Pit Hardcore deserves its own section because it is not just “Hardcore but harder.” The map itself attacks your route. Lava, tight movement lanes, enemy density, and late-wave pressure make greedy objectives much more dangerous.
+
+For Pyrestorm Pit Hardcore, use this rule:
+
+**Never stop moving unless your build is already deleting the screen.**
+
+Best priorities:
+
+- **Sun Mage** is one of the safest picks because Solar Pulse gives constant AoE while you focus on pathing.
+- **Movement speed** matters more than one more damage roll if you are getting boxed in.
+- **Dodge + sustain** keeps the run alive when lava, enemies, and projectiles overlap.
+- **Armor helps**, but do not rely on Armor alone unless your damage is already stable.
+- **Thunder or Plasma** are strong late-game damage routes because they help clear dense waves.
+- **Crit-heal / Vital Strike-style sustain** can save runs where unavoidable chip damage piles up.
+- After the first key augments, skip objectives that would force you through bad terrain.
+
+The biggest mistake is trying to full-clear every objective like this is Verdant Meadows. In Pyrestorm Pit Hardcore, survival is the achievement route.
+
+<h2 id="boss-achievements">
+  Boss achievements and final boss routing
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-final-boss-aoe.webp"
+    alt="The Spell Brigade boss achievement route showing why AoE, spell size, and cooldown matter in boss fights."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Boss achievements are often easier with AoE uptime than with narrow single-target damage.
+  </figcaption>
+</figure>
+
+For boss achievements, do not build like the boss is standing still forever.
+
+Better boss achievement stats:
+
+- spell size,
+- cooldown reduction,
+- cast speed,
+- AoE uptime,
+- Acid shred,
+- movement,
+- sustain.
+
+Solar Pulse, Falling Stars, Aether Beam, Phantom Blades, Bell March, and Acid multi-hit routes are safer than narrow damage when the boss moves, summons adds, or creates bad angles.
+
+<h2 id="long-run-grind-achievements">
+  Long-run and cast-count achievements
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-long-run-stats.webp"
+    alt="The Spell Brigade long run final stats showing objectives completed, gold, and massive Solar Pulse damage."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Long-run achievements become easier when one spell scales hard enough to carry the entire screen.
+  </figcaption>
+</figure>
+
+Long-run achievements are usually about automation. Once the build is safe, your goal is to keep the condition happening.
+
+Good long-run tools:
+
+- one-spell builds,
+- Solar Pulse Aura,
+- Falling Stars cooldown stacking,
+- Bell March spam,
+- high cast speed,
+- pickup range,
+- sustain,
+- movement,
+- safe objectives.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-one-spell-ascension.webp"
+    alt="The Spell Brigade one-spell route used for ascension and long achievement grinding."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    One-spell routes are useful when an achievement needs thousands of casts or long-term wizard progression.
+  </figcaption>
+</figure>
+
+Read the <Link href="/the-spell-brigade/best-builds#solitary-focus-covenant-build">Solitary Focus section</Link> if you want the one-spell route.
+
+<h2 id="achievement-run-plan">
+  Achievement run plan
+</h2>
+
+Use this structure when routing any difficult achievement.
+
+<GuideTable
+  caption="The Spell Brigade achievement run plan."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+<h2 id="common-mistakes">
+  Common achievement mistakes
+</h2>
+
+<GuideTable
+  caption="Common The Spell Brigade achievement mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="recommended-cleanup-order">
+  Recommended cleanup order
+</h2>
+
+If you want a clean 100% route, use this order:
+
+1. **Finish normal progression achievements.**  
+   Learn the game before optimizing.
+
+2. **Unlock the key wizards.**  
+   Star Mage, Bryony, Campanelli, Hatti, Knelly, Aldric, Ludwig, Maggie, and Pipwick open many targeted routes.
+
+3. **Complete spell and infusion achievements.**  
+   These teach you how to force builds and understand element routing.
+
+4. **Complete objective achievements.**  
+   Do these once you understand when objectives are safe.
+
+5. **Complete wizard-specific achievements.**  
+   Group them by wizard so you do not keep switching routes.
+
+6. **Complete co-op achievements.**  
+   Revives, teammate interactions, and coordinated objectives are much easier with planned teammates.
+
+7. **Finish Hardcore and restriction achievements.**  
+   Save these until your account and decision-making are stronger.
+
+8. **Clean up long grinds.**  
+   Use one-spell and high-frequency builds for cast counts, bell detonations, scrolls, sacrifices, and long-run requirements.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many achievements are in The Spell Brigade?
+
+The current Steam achievement route should be planned around **114 achievements**. Some older or fan-made resources may use smaller milestone counts, but 114 is the safer number for Steam achievement hunting.
+
+### How long does 100% completion take?
+
+A realistic 100% completion push can easily take **35+ hours**, especially if you are doing wizard-specific cleanup solo. A coordinated 4-player squad can reduce revive, objective, scroll, and farming time dramatically.
+
+### Do I need co-op for 100% achievements?
+
+Most achievements can be attempted solo, but co-op makes several routes much faster: Campanelli revives, Aldric fungi routing, Balthazar ghost revive setups, Hatti hitting Ludwig, and team objective cleanup.
+
+### What achievements should I do first?
+
+Start with normal clears, wizard unlocks, spell discovery, and basic objective achievements. Save Hardcore, co-op interactions, boss precision, and long grinds for later.
+
+### What are the hardest achievements?
+
+The main time sinks are **Heckin' Hardcore**, **π**, **Starry Rain**, **Hells Bells**, **Out with a Bang**, **A Worthy Sacrifice**, and **The Fungi Amongi**. See the <a href="#hardest-achievements">Hardest achievements</a> section above.
+
+### Should I chase multiple achievements in one run?
+
+Only if they naturally share the same route. Star Mage cast farming can pair with Falling Stars scaling, but a no-potion Bryony route should not be mixed with risky objective or Hardcore attempts.
+
+### Why do objectives matter for achievements?
+
+Objectives unlock augments, and many achievements need specific spell behavior: projectiles, split effects, extra directions, special interactions, or spell uptime. See the <a href="#objectives-and-augments">Objectives and augments</a> section.
+
+### Why does RNG pool dilution matter?
+
+Targeted runs fail when you add too many side spells and make the upgrade pool harder to control. Keep the build compact when farming Starry Rain, π, Hells Bells, Watch the Knives, or other one-condition achievements.
+
+### How do I handle Pyrestorm Pit Hardcore?
+
+Use a mobile AoE build, keep moving, prioritize dodge / sustain / movement, and skip unsafe objectives. See the <a href="#pyrestorm-pit-hardcore">Pyrestorm Pit Hardcore</a> section above.
+
+### What should I read next?
+
+Read the <Link href="/the-spell-brigade/wizard-unlocks">Wizard Unlocks Guide</Link> for character routes, the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> for build planning, or the <Link href="/the-spell-brigade/best-spells-elements">Best Spells and Elements Guide</Link> for infusion choices.

@@ -1,0 +1,1038 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildColumns = [
+  { key: "build", label: "Build" },
+  { key: "bestFor", label: "Best For" },
+  { key: "corePlan", label: "Core Plan" },
+  { key: "readThisIf", label: "Read This If..." },
+];
+
+export const buildRows = [
+  {
+    build: "Falling Stars Lightning",
+    bestFor: "Highest ceiling, community meta, Star Mage damage",
+    corePlan:
+      "Use Star Mage, stack Luck, cooldown reduction, Falling Stars levels, Lightning, and critical damage.",
+    readThisIf:
+      "You want the community GOAT-style build and are comfortable forcing one spell to scale hard.",
+  },
+  {
+    build: "Solar Pulse Aura",
+    bestFor: "Solo, farming, long loops, safe scaling",
+    corePlan:
+      "Use Sun Mage, one-spell routing, spell size, cast speed, Lightning / Plasma / Wildfire, crit sustain, and movement.",
+    readThisIf:
+      "You want the easiest strong build to reproduce across solo, farming, and long runs.",
+  },
+  {
+    build: "Solitary Focus Covenant",
+    bestFor: "Mono-spell builds, farming, achievement routing",
+    corePlan:
+      "Use a one-spell covenant to funnel upgrades into one starting spell, then stack cast speed, size, damage, and the best second infusion.",
+    readThisIf:
+      "You want a mono-spell route or want to test which signature spell has the highest ceiling.",
+  },
+  {
+    build: "Acid Multi-Hit Shred",
+    bestFor: "Bosses, elites, tanky waves",
+    corePlan:
+      "Use Astral Orbs, Moonerang, or repeat-hit spells with Acid, Flux, or Corrosion to reduce resistance quickly.",
+    readThisIf:
+      "Enemies live too long and pure burst is not fixing the run.",
+  },
+  {
+    build: "Scepter Mesh Plasma",
+    bestFor: "Co-op, area control, boss chaos, wave control",
+    corePlan:
+      "Turn Scepter Mesh from a wall into a damage zone with Lightning or Plasma, then add spell size, cast speed, and augments.",
+    readThisIf:
+      "You keep underrating Scepter Mesh or want a build that controls space while dealing damage.",
+  },
+  {
+    build: "Dodge Crit Heal",
+    bestFor: "Late-game survival, solo mistakes, high-pressure runs",
+    corePlan:
+      "Stack dodge, crit chance, crit damage, healing-on-crit or dodge-heal relics, then pair the loop with a reliable main spell.",
+    readThisIf:
+      "You die in late-game swarms even when your damage looks good.",
+  },
+  {
+    build: "Veil of Haste Burst",
+    bestFor: "Rune Burst, Aether Beam, high-frequency spells",
+    corePlan:
+      "Prioritize Veil of Haste at rare or higher, then stack cooldown reduction, spell damage, crit, and one focused spell route.",
+    readThisIf:
+      "You want a build that suddenly turns a normal run into a damage avalanche.",
+  },
+  {
+    build: "Pipwick Summoner",
+    bestFor: "Minion playstyle, Dark / Acid pressure, safer positioning",
+    corePlan:
+      "Scale Impish Havoc with spell time, spell damage, cast speed, Dark / Acid / Fire, and summon-focused augments.",
+    readThisIf:
+      "You want the minions to do the work while you focus on movement and objectives.",
+  },
+  {
+    build: "Nelly / Knelly Bell March",
+    bestFor: "Bell zones, armor / healing utility, co-op chaos",
+    corePlan:
+      "Use Bell March zones, bell size, cast speed, armor or healing augments, and careful positioning around friendly fire.",
+    readThisIf:
+      "You want a weird positioning build instead of a normal projectile build.",
+  },
+  {
+    build: "Full Dark Corruption Team",
+    bestFor: "4-player co-op, corruption chains, coordinated teams",
+    corePlan:
+      "Have multiple players commit to Dark routes, then build toward Void, Blight, Wither, or Hellfire-style spread.",
+    readThisIf:
+      "You play with a coordinated group and want a true co-op build instead of four solo builds next to each other.",
+  },
+];
+
+export const routeColumns = [
+  { key: "build", label: "Build" },
+  { key: "early", label: "Early Run" },
+  { key: "mid", label: "Mid Run" },
+  { key: "late", label: "Late Run" },
+];
+
+export const routeRows = [
+  {
+    build: "Falling Stars Lightning",
+    early:
+      "Start on Star Mage and push Falling Stars as the main spell. Take Luck and cooldown / cast speed when they appear.",
+    mid:
+      "Take Lightning and keep pushing Falling Stars levels. Add crit damage once the spell is firing often enough.",
+    late:
+      "Keep cooldown, spell levels, Lightning scaling, and crit damage moving together. Do not let the build split into too many side spells.",
+  },
+  {
+    build: "Solar Pulse Aura",
+    early:
+      "Push Solar Pulse toward infusion. Take spell size, cast speed, Lightning, Luck, and enough regen or movement to stay alive.",
+    mid:
+      "Choose Plasma, Wildfire, or Flux depending on offers. Add crit chance, spell damage, and objective augments.",
+    late:
+      "Stack cast speed and size until the aura covers most threats. Add sustain and movement before long loops.",
+  },
+  {
+    build: "Solitary Focus Covenant",
+    early:
+      "Commit to one starting spell. Avoid taking side spells that dilute the upgrade pool before the main spell is online.",
+    mid:
+      "Push the spell into its second infusion. Stack cast speed, size, damage, or crit depending on the spell.",
+    late:
+      "Use the focused upgrade pool to push extreme scaling. Add sustain because the build has fewer backup tools.",
+  },
+  {
+    build: "Acid Multi-Hit Shred",
+    early:
+      "Start with Astral Orbs, Moonerang, or another repeat-hit spell. Take Acid as soon as the spell can apply it often.",
+    mid:
+      "Build toward Flux or Corrosion. Add cast speed, spell damage, and augments that increase hit count or uptime.",
+    late:
+      "Use resistance reduction to melt bosses and elites. Add survival so you can keep applying hits.",
+  },
+  {
+    build: "Scepter Mesh Plasma",
+    early:
+      "Take Scepter Mesh only if you are willing to support it. Start with Lightning or a Fire / Lightning setup.",
+    mid:
+      "Add spell size, cast speed, Plasma, and augments that make the walls more active.",
+    late:
+      "Use walls as damage zones and reposition around them instead of treating them like passive defense.",
+  },
+  {
+    build: "Dodge Crit Heal",
+    early:
+      "Do not force it too early. Take dodge, crit chance, or healing relics when they appear naturally.",
+    mid:
+      "Once dodge or crit sustain appears, stack crit damage, crit chance, and a spell that hits often.",
+    late:
+      "Let dodge cover bad hits while crit or dodge healing keeps your health stable during swarms.",
+  },
+  {
+    build: "Pipwick Summoner",
+    early:
+      "Increase Impish Havoc uptime. Prioritize spell time, summon count, spell damage, and early safety.",
+    mid:
+      "Add Dark, Acid, or Fire. Use augments that improve minion attacks, crits, or spread pressure.",
+    late:
+      "Keep moving while minions apply pressure. Avoid underbuilding your own survival.",
+  },
+  {
+    build: "Nelly / Knelly Bell March",
+    early:
+      "Increase bell uptime, bell size, and cast speed. Learn how the bells trigger before committing too hard.",
+    mid:
+      "Choose armor, healing, or damage augments depending on whether you are solo or co-op.",
+    late:
+      "Use bell zones as controlled danger zones. Avoid freezing or damaging teammates by accident.",
+  },
+  {
+    build: "Full Dark Corruption Team",
+    early:
+      "Only commit if multiple players are taking Dark. One random Dark player is not a team build.",
+    mid:
+      "Split into Void, Blight, Wither, or Hellfire roles so corruption spreads different effects.",
+    late:
+      "Keep team coverage balanced. A corruption team still needs damage, control, and survival.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "build", label: "Build" },
+  { key: "statPriority", label: "Stat Priority" },
+  { key: "pros", label: "Pros" },
+  { key: "cons", label: "Cons" },
+];
+
+export const priorityRows = [
+  {
+    build: "Falling Stars Lightning",
+    statPriority:
+      "Luck → Cooldown Reduction / Cast Speed → Falling Stars Level → Lightning → Crit Damage",
+    pros:
+      "Very high ceiling, strong community meta, excellent scaling when Falling Stars gets enough levels.",
+    cons:
+      "Needs setup, relies on offers, and can feel weak before cooldown and spell levels come online.",
+  },
+  {
+    build: "Solar Pulse Aura",
+    statPriority:
+      "Spell Size → Cast Speed → Lightning / Plasma / Wildfire → Luck → Crit / Sustain → Move Speed",
+    pros:
+      "Easy to reproduce, strong for solo, farming, and long loops.",
+    cons:
+      "Can become greedy if you skip movement or sustain.",
+  },
+  {
+    build: "Solitary Focus Covenant",
+    statPriority:
+      "One Starting Spell → Cast Speed → Spell Size / Damage → Second Infusion → Sustain",
+    pros:
+      "Funnels all power into one spell and can reach extreme scaling.",
+    cons:
+      "Bad spell choice or bad infusion offers can make the whole run narrow.",
+  },
+  {
+    build: "Acid Multi-Hit Shred",
+    statPriority:
+      "Multi-Hit Spell → Acid → Cast Speed → Flux / Corrosion → Spell Damage → Survival",
+    pros:
+      "Excellent against bosses and elites; resistance reduction helps the whole team.",
+    cons:
+      "Less impressive on slow single-hit spells and weaker when you need instant wave clear.",
+  },
+  {
+    build: "Scepter Mesh Plasma",
+    statPriority:
+      "Scepter Mesh → Lightning / Fire → Spell Size → Cast Speed → Plasma → Augments",
+    pros:
+      "Strong area control and damage zones; very useful in co-op.",
+    cons:
+      "Feels passive if you do not invest in size, cast speed, or elemental damage.",
+  },
+  {
+    build: "Dodge Crit Heal",
+    statPriority:
+      "Dodge → Crit Chance → Crit Damage → Healing on Crit / Dodge Heal → Fast-Hit Spell",
+    pros:
+      "Turns survival into a scaling loop and makes late-game mistakes more forgiving.",
+    cons:
+      "Needs the right relics or stat offers; not ideal as a forced opener.",
+  },
+  {
+    build: "Veil of Haste Burst",
+    statPriority:
+      "Main Spell → Strong Infusion → Veil of Haste → Cooldown / Cast Speed → Crit / Damage",
+    pros:
+      "Can make normal spells suddenly scale extremely fast.",
+    cons:
+      "Depends on seeing the right upgrade at a good rarity.",
+  },
+  {
+    build: "Pipwick Summoner",
+    statPriority:
+      "Spell Time → Summon Count / Cast Speed → Spell Damage → Dark / Acid / Fire → Movement",
+    pros:
+      "Minions apply pressure while you focus on movement and objectives.",
+    cons:
+      "Can feel underpowered if minion uptime or scaling does not appear.",
+  },
+  {
+    build: "Nelly / Knelly Bell March",
+    statPriority:
+      "Bell Size → Cast Speed → Armor / Healing / Damage Augments → Fire / Lightning → Movement",
+    pros:
+      "Unique positioning playstyle with strong utility options.",
+    cons:
+      "Can create co-op chaos if bell zones, Ice, or friendly fire are handled poorly.",
+  },
+  {
+    build: "Full Dark Corruption Team",
+    statPriority:
+      "Dark → Cast Speed → Void / Blight / Wither / Hellfire → Team Coverage → Survival",
+    pros:
+      "Strong co-op identity and high chain-reaction potential.",
+    cons:
+      "Needs coordination; weaker if only one player randomly picks Dark.",
+  },
+];
+
+export const statColumns = [
+  { key: "stat", label: "Stat / Upgrade" },
+  { key: "bestBuilds", label: "Best Builds" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const statRows = [
+  {
+    stat: "Cast Speed / Cooldown Reduction",
+    bestBuilds:
+      "Falling Stars, Solar Pulse, Scepter Mesh, Rune Burst, Pipwick, Bell March",
+    whyItMatters:
+      "More casts means more hits, more elemental applications, and faster build payoff.",
+  },
+  {
+    stat: "Spell Size",
+    bestBuilds:
+      "Solar Pulse, Scepter Mesh, Aether Beam, AoE boss builds",
+    whyItMatters:
+      "A larger spell covers more enemies, protects more space, and makes boss movement less punishing.",
+  },
+  {
+    stat: "Luck",
+    bestBuilds:
+      "Falling Stars, Solar Pulse, long runs, aura farming, high-rarity upgrade hunting",
+    whyItMatters:
+      "Better rarity offers can snowball into more legendary cast speed, size, damage, crit, or cooldown options.",
+  },
+  {
+    stat: "Move Speed",
+    bestBuilds:
+      "Every build, especially solo and higher difficulty",
+    whyItMatters:
+      "Movement is active defense. You cannot scale damage if you cannot escape bad positions.",
+  },
+  {
+    stat: "Crit Chance / Crit Damage",
+    bestBuilds:
+      "Falling Stars, Dodge Crit Heal, Aether Beam, Wildfire, Solar Pulse",
+    whyItMatters:
+      "Crit scaling turns strong hits into screen clears and can become sustain when paired with healing effects.",
+  },
+  {
+    stat: "Dodge",
+    bestBuilds:
+      "Dodge Crit Heal, late-game solo, risky objective builds",
+    whyItMatters:
+      "Dodge creates a survival layer that keeps you alive when the screen fills up.",
+  },
+  {
+    stat: "Objectives / Augments",
+    bestBuilds:
+      "All serious builds",
+    whyItMatters:
+      "Augments change how spells behave. They are often more important than a small stat increase.",
+  },
+];
+
+export const pivotColumns = [
+  { key: "start", label: "You Started With..." },
+  { key: "signal", label: "Pivot Signal" },
+  { key: "newPlan", label: "Pivot Into..." },
+];
+
+export const pivotRows = [
+  {
+    start: "Falling Stars",
+    signal:
+      "You get Luck, cooldown reduction, Lightning, and Falling Stars level offers.",
+    newPlan:
+      "Commit to Falling Stars Lightning. Keep the build focused instead of adding too many side spells.",
+  },
+  {
+    start: "Falling Stars",
+    signal:
+      "You do not get cooldown or spell levels, but Solar Pulse or Acid multi-hit pieces appear.",
+    newPlan:
+      "Pivot into Solar Pulse Aura or Acid Multi-Hit instead of forcing the meta build.",
+  },
+  {
+    start: "Solar Pulse",
+    signal:
+      "You get Lightning, cast speed, spell size, and crit / sustain.",
+    newPlan:
+      "Stay on Solar Pulse Aura. Add Plasma, Wildfire, or Flux depending on offers.",
+  },
+  {
+    start: "Solar Pulse",
+    signal:
+      "You do not get size or cast speed, but get Acid and repeat-hit spell offers.",
+    newPlan:
+      "Pivot into Acid Multi-Hit or Flux instead of forcing aura scaling.",
+  },
+  {
+    start: "Scepter Mesh",
+    signal:
+      "You get Lightning / Fire and spell size.",
+    newPlan:
+      "Commit to Scepter Mesh Plasma.",
+  },
+  {
+    start: "Scepter Mesh",
+    signal:
+      "You get Acid but no burst tools.",
+    newPlan:
+      "Use Scepter Mesh as an Acid / Flux zone instead of forcing Plasma.",
+  },
+  {
+    start: "Any spell",
+    signal:
+      "You find dodge healing, healing on crit, or strong crit relics.",
+    newPlan:
+      "Add Dodge Crit Heal as your survival layer.",
+  },
+  {
+    start: "Pipwick",
+    signal:
+      "You get spell time, summon count, Dark, Acid, or Fire support.",
+    newPlan:
+      "Commit to Summoner. Let minions pressure while you play objectives.",
+  },
+  {
+    start: "Dark",
+    signal:
+      "Multiple teammates also commit to Dark routes.",
+    newPlan:
+      "Move into Full Dark Corruption Team instead of playing four unrelated builds.",
+  },
+  {
+    start: "Any build",
+    signal:
+      "You reach boss phases with no AoE, no movement, and no sustain.",
+    newPlan:
+      "Stop greed. Take spell size, move speed, defense, or sustain immediately.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Build Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Trying to build every spell at once",
+    whyItHurts:
+      "You delay infusions, miss advanced routes, and reach bosses with several weak spells instead of one real build.",
+    betterPlay:
+      "Pick one main spell, push it to infusion, then add support spells after the build has a direction.",
+  },
+  {
+    mistake: "Calling a run finished after one good infusion",
+    whyItHurts:
+      "A first infusion is only the start. The build still needs stats, augments, movement, and sustain.",
+    betterPlay:
+      "After the first infusion, ask what the build is missing: damage, size, cast speed, control, or survival.",
+  },
+  {
+    mistake: "Ignoring movement because damage looks high",
+    whyItHurts:
+      "Late-game enemies get faster and denser. A slow high-damage build still dies when trapped.",
+    betterPlay:
+      "Take movement before the screen gets impossible, especially on solo and long loops.",
+  },
+  {
+  mistake: "Only thinking about objectives after the build falls behind",
+  whyItHurts:
+    "By then, you may already be missing the augments that would have made the spell scale.",
+  betterPlay:
+    "Use early and mid-run objectives as build checkpoints, not as last-minute cleanup before the boss.",
+},
+  {
+    mistake: "Forcing Plasma on every build",
+    whyItHurts:
+      "Plasma is strong, but Acid, Flux, Corrosion, Wildfire, Ice, or Thunder may solve the actual problem better.",
+    betterPlay:
+      "Use the element guide: Acid for resistance reduction, Lightning for consistency, Ice for control, Plasma for burst.",
+  },
+  {
+    mistake: "Building crit without enough hit frequency",
+    whyItHurts:
+      "Crit needs enough hits to matter. A slow spell with low uptime may not trigger the loop often enough.",
+    betterPlay:
+      "Pair crit with fast spells, high base damage, cast speed, or sustain relics.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The strongest community meta build in The Spell Brigade 1.0 is Falling Stars Lightning on Star Mage, but the easiest build to reproduce is Solar Pulse Aura.**
+
+Use **Falling Stars Lightning** if you want the highest ceiling and can commit to Luck, cooldown reduction, spell levels, Lightning, and critical damage. Use **Solar Pulse Aura** if you want the safest all-purpose solo, farming, and long-loop route.
+
+For boss shred, use **Acid Multi-Hit**. For co-op control, use **Scepter Mesh Plasma**. For survivability, add **Dodge Crit Heal**. For covenant play, use **Solitary Focus**. For coordinated 4-player runs, use **Full Dark Corruption**.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-solar-pulse-aura-setup.webp"
+    alt="The Spell Brigade Sun Mage Solar Pulse aura build setup with spell size mastery and one-spell covenant."
+    width={800}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar Pulse Aura is the easiest strong build to reproduce, especially for solo, farming, and long-loop runs.
+  </figcaption>
+</figure>
+
+<h2 id="best-builds-ranked">
+  Best builds in The Spell Brigade 1.0
+</h2>
+
+The best build depends on what you mean by “best.”
+
+If you mean the highest ceiling, start with **Falling Stars Lightning**. If you mean the easiest build to reproduce, start with **Solar Pulse Aura**. If you mean boss killing, look at **Acid Multi-Hit Shred**. If you mean co-op identity, look at **Full Dark Corruption Team**.
+
+<GuideTable
+  caption="Best The Spell Brigade builds and when to use each one."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+<GuideCallout title="Build rule">
+A build is online when the spell, element, stats, augments, and survival plan all support the same route. One strong infusion by itself is not a complete build.
+</GuideCallout>
+
+Read the <Link href="/the-spell-brigade/best-spells-elements">Best Spells and Elements Guide</Link> if you need the full element and infusion breakdown first.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="build-timelines">
+  Build timelines: early, mid, and late run
+</h2>
+
+Use this table when you are inside a run and need to know whether to commit or pivot.
+
+<GuideTable
+  caption="Build timelines for The Spell Brigade 1.0."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+If the early and mid-run pieces do not appear, do not force the build. Pivot before the boss makes the decision for you.
+
+<h2 id="stat-priority">
+  Stat priority, pros, and cons by build
+</h2>
+
+Most build guides tell you what the final build looks like. This table is for the choices you actually make during a run.
+
+<GuideTable
+  caption="Stat priority, pros, and cons for The Spell Brigade builds."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+<h2 id="core-stats">
+  Core stats for each build
+</h2>
+
+
+Strong builds in The Spell Brigade usually come from the same stat families: cast speed, cooldown reduction, spell size, movement, crit, Luck, and augments.
+
+The table above tells you what to prioritize for each build. This table works the other way around: it starts from a stat and shows which builds actually want it.
+
+<GuideTable
+  caption="Core stats and upgrades for The Spell Brigade builds."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+<h2 id="falling-stars-lightning-build">
+  Falling Stars Lightning build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-falling-stars-lightning.webp"
+    alt="The Spell Brigade Star Mage Falling Stars Lightning build showing Falling Stars as the main damage spell."
+    width={300}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Falling Stars Lightning is the highest-ceiling community meta route, but it needs enough spell levels, cooldown support, and Luck to feel dominant.
+  </figcaption>
+</figure>
+
+**Falling Stars Lightning is the build to mention when players ask for the community meta ceiling.**
+
+The idea is simple: take Star Mage, push Falling Stars as high as possible, then use Lightning, cooldown reduction, Luck, and critical damage to turn delayed AoE into constant pressure.
+
+**Stat Priority:**  
+**Luck → Cooldown Reduction / Cast Speed → Falling Stars Level → Lightning → Critical Damage**
+
+**Pros:**  
+Huge scaling ceiling, strong AoE pressure, excellent when Falling Stars gets enough levels and cooldown support.
+
+**Cons:**  
+Needs setup, depends on offers, and can feel worse than Solar Pulse if the run never gives you enough cooldown or spell levels.
+
+Use this build if you want the highest ceiling. Use Solar Pulse Aura if you want the most reproducible route.
+
+<h2 id="solar-pulse-aura-build">
+  Solar Pulse Aura build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-solar-pulse-luck-cast-speed.webp"
+    alt="The Spell Brigade Solar Pulse aura build stacking luck, cast speed, spell size, and crit."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar Pulse becomes scary when cast speed, spell size, Luck, crit, and sustain all point in the same direction.
+  </figcaption>
+</figure>
+
+Solar Pulse Aura is the build I would recommend first to most players because it teaches the game cleanly. You pick one main spell, push it hard, then make the entire run support that spell.
+
+The build works because Solar Pulse solves several problems at once:
+
+- it damages enemies near you,
+- it scales well with spell size,
+- it gets better with cast speed,
+- it can use Lightning, Plasma, Wildfire, or Flux,
+- it pairs well with dodge, crit, and healing layers,
+- it can become a strong farming route in long runs.
+
+Do not skip movement. Solar Pulse wants enemies close, but that does not mean you should stand still forever. You still need to escape boss pulls, bad objective spawns, and late-loop swarms.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-solar-pulse-final-stats.webp"
+    alt="The Spell Brigade Solar Pulse aura build final stats after a long farming run."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A finished Solar Pulse route should feel like the map is walking into you: wide aura, fast casts, enough sustain, and enough movement to reposition.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Solar Pulse rule">
+Build the aura first. Add greed after the aura is already safe. If you take only damage and no movement or sustain, the build will eventually punish you.
+</GuideCallout>
+
+<h2 id="solitary-focus-covenant-build">
+  Solitary Focus Covenant build
+</h2>
+
+Solitary Focus-style one-spell builds are simple: remove the noise and push one spell as hard as possible.
+
+This works especially well when the starting spell already has strong coverage, scaling, or repeated hits. Solar Pulse is the cleanest example because it scales with spell size, cast speed, crit, movement, and elemental infusions.
+
+**Stat Priority:**  
+**One Main Spell → Cast Speed → Spell Size / Spell Damage → Second Infusion → Sustain**
+
+Best candidates:
+
+- **Solar Pulse**, for aura farming and long loops.
+- **Falling Stars**, for high-ceiling Star Mage scaling.
+- **Aether Beam**, if you get beam-supporting augments.
+- **Rune Burst**, if you get cooldown and crit support.
+- **Bell March**, if you want a weird zone-based mono-spell route.
+
+**Pros:**  
+Very focused upgrade pool, easier build identity, strong for farming and achievement routing.
+
+**Cons:**  
+Bad offers hurt more because the build has fewer backup options. You also need to pick a starting spell that can actually carry the run.
+
+<h2 id="acid-multi-hit-build">
+  Acid Multi-Hit Shred build
+</h2>
+
+Acid Multi-Hit is the build for players who keep asking:
+
+**Why are bosses and elites still alive?**
+
+If your spell hits repeatedly, Acid becomes much stronger because resistance reduction gets more chances to matter. That makes this route especially good on:
+
+- **Astral Orbs**
+- **Moonerang**
+- fast projectiles
+- repeated-hit zones
+- co-op teams with multiple damage sources
+
+The core route is:
+
+**multi-hit spell → Acid → Flux or Corrosion → cast speed → spell damage → survival**
+
+**Pros:**  
+Excellent boss and elite shred, very strong in co-op, and makes the whole team deal more damage to affected enemies.
+
+**Cons:**  
+Less exciting on slow single-hit spells and weaker when the main problem is instant crowd clearing.
+
+Use **Flux** when you want Lightning pressure plus Acid utility. Use **Corrosion** when you want to fully commit to Acid and make bosses safer.
+
+<h2 id="scepter-mesh-plasma-build">
+  Scepter Mesh Plasma build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-spells-elements-scepter-mesh-plasma.webp"
+    alt="The Spell Brigade Scepter Mesh and Solar Pulse Plasma infusion cards."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scepter Mesh is not just a wall. With Lightning or Plasma, it becomes a damage zone.
+  </figcaption>
+</figure>
+
+Scepter Mesh is easy to underestimate because it looks defensive. The mistake is treating it like a panic wall instead of a build core.
+
+The walls create space, but with the right infusion they also punish enemies walking through that space.
+
+The route is:
+
+**Scepter Mesh → Lightning → Plasma if offered → spell size → cast speed → objective augments**
+
+**Pros:**  
+Strong area control, great co-op value, and safer boss positioning.
+
+**Cons:**  
+Feels passive if you do not invest in size, cast speed, and elemental damage.
+
+Scepter Mesh also works as an Acid / Flux zone if enemies are too tanky. Plasma is the flashy route, but not the only route.
+
+<h2 id="dodge-crit-heal-build">
+  Dodge Crit Heal build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-crit-dodge-final-stats.webp"
+    alt="The Spell Brigade final stats showing dodge, movement speed, crit chance, crit damage, and cast speed for a crit dodge build."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dodge Crit Heal is a strategy shell, so a final stat screen is more useful than trying to screenshot a single card.
+  </figcaption>
+</figure>
+
+Dodge Crit Heal is not usually the first build you force. It is the survival shell you add when the game offers the pieces.
+
+Look for:
+
+- dodge chance,
+- healing on dodge,
+- healing on crit,
+- crit chance,
+- crit damage,
+- high-frequency spells,
+- reliable AoE or beam damage.
+
+The loop is simple:
+
+**Dodge prevents bad hits → crit damage clears enemies → healing stabilizes your health → movement keeps you from getting trapped**
+
+**Pros:**  
+Excellent late-game survival layer and very forgiving when the screen gets messy.
+
+**Cons:**  
+Needs the right relics or stat offers. It is better as a pivot shell than a forced opener.
+
+<h2 id="veil-of-haste-build">
+  Veil of Haste Burst build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-veil-of-haste.webp"
+    alt="The Spell Brigade Veil of Haste upgrade supporting cooldown reduction and spell damage builds."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some of the strongest build pieces do not look flashy. Veil of Haste is valuable because it improves tempo and damage at the same time.
+  </figcaption>
+</figure>
+
+Veil of Haste is the kind of upgrade that makes a build suddenly feel finished.
+
+It is strongest on:
+
+- **Rune Burst**
+- **Aether Beam**
+- **Falling Stars**
+- high-frequency spells
+- crit builds
+- builds that already have a strong infusion
+
+The route is:
+
+**main spell → strong infusion → Veil of Haste → cast speed / cooldown → crit or damage → sustain**
+
+**Pros:**  
+Huge tempo spike, excellent on high-frequency spells, and strong when your build already has a good infusion.
+
+**Cons:**  
+Depends on seeing the upgrade at a good rarity. It is not a full build by itself if your main spell is weak.
+
+If Veil of Haste appears at a good rarity and your build depends on casting often, it should be one of your highest-priority picks.
+
+<h2 id="pipwick-summoner-build">
+  Pipwick Summoner build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-pipwick-summoner.webp"
+    alt="The Spell Brigade Pipwick summoner build using Impish Havoc minions."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pipwick is the build for players who want minions applying pressure while they focus on movement.
+  </figcaption>
+</figure>
+
+Pipwick's Impish Havoc is the clearest summoner route in 1.0.
+
+The goal is not only to make more minions. The goal is to make the minions stay useful long enough to matter.
+
+The route is:
+
+**Impish Havoc → spell time → spell damage → cast speed → Dark / Acid / Fire → summon augments → movement**
+
+**Pros:**  
+Great for players who like indirect pressure and objective movement.
+
+**Cons:**  
+Can feel weak if minion uptime, summon augments, or scaling never appear.
+
+Do not forget your own survival. Summons help, but they do not replace movement, positioning, or emergency defense.
+
+<h2 id="nelly-bell-march-build">
+  Nelly / Knelly Bell March build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-bell-march-nelly.webp"
+    alt="The Spell Brigade Nelly Bell March build introduction showing bells and cast speed utility."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bell March is a positioning build: the spell is strongest when you control where and when the bells matter.
+  </figcaption>
+</figure>
+
+Nelly / Knelly Bell March is not a normal projectile build. It asks you to think about zones, timing, and whether standing near your own setup is safe.
+
+The route is:
+
+**Bell March → bell size → cast speed → armor or healing augments → Fire / Lightning / Acid → movement**
+
+The build can lean in three directions:
+
+- **damage bells**, if you want each trigger to clear packs,
+- **armor bells**, if you want to stand inside zones more safely,
+- **healing bells**, if you are playing co-op or risky close-range objectives.
+
+**Pros:**  
+Unique zone-based playstyle with strong utility options.
+
+**Cons:**  
+Can create friendly-fire chaos if the team is not paying attention.
+
+<h2 id="full-dark-corruption-team-build">
+  Full Dark Corruption team build
+</h2>
+
+Full Dark Corruption is not a normal solo build. It is a coordinated co-op build.
+
+The goal is to have multiple players commit to Dark routes so corruption effects can spread through the map instead of staying as one player's side element.
+
+**Stat Priority:**  
+**Dark → Cast Speed → Void / Blight / Wither / Hellfire → Team Coverage → Survival**
+
+A simple 4-player template:
+
+- **Player 1:** Dark + Dark for Void-style corruption spread.
+- **Player 2:** Dark + Acid for Blight pressure.
+- **Player 3:** Dark + Fire for Hellfire pressure.
+- **Player 4:** Dark + Ice or Lightning, depending on whether the team needs control or damage.
+
+**Pros:**  
+High co-op identity, strong chain-reaction potential, and better than four players building unrelated solo routes.
+
+**Cons:**  
+Requires coordination. If only one player takes Dark while the rest of the team ignores corruption, the build usually feels weaker than Lightning, Acid, or Plasma routes.
+
+<h2 id="objectives-and-augments">
+  Why objectives decide build quality
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-spells-elements-objectives-augments.webp"
+    alt="The Spell Brigade objective completed screen leading into augmentation choices."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Augments are often what turn a decent spell into a real build.
+  </figcaption>
+</figure>
+
+Most weak builds are not weak because the spell is bad. They are weak because the spell never gets the augments that change how it behaves.
+
+Objectives can give you:
+
+- extra projectiles,
+- split effects,
+- healing effects,
+- spell behavior changes,
+- stronger targeting,
+- better area control.
+
+Use objectives as build checkpoints. If your build feels good but you skipped every objective, it may fall behind later.
+
+<h2 id="pivot-rules">
+  How to pivot builds
+</h2>
+
+Do not wait forever for the perfect build. The game gives you offers, and your job is to read them.
+
+<GuideTable
+  caption="The Spell Brigade build pivot rules."
+  columns={pivotColumns}
+  rows={pivotRows}
+/>
+
+<GuideCallout title="Pivot rule">
+If the run gives you two or three pieces for a different strong build, pivot before you lose tempo. The best players are not forcing perfect plans; they are reading the offers.
+</GuideCallout>
+
+<h2 id="common-mistakes">
+  Common build mistakes
+</h2>
+
+<GuideTable
+  caption="Common The Spell Brigade build mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="recommended-build-order">
+  Recommended build order for new players
+</h2>
+
+If you are still learning The Spell Brigade, try the builds in this order:
+
+1. **Solar Pulse Aura**  
+   Learn how one focused spell becomes a full build.
+
+2. **Acid Multi-Hit Shred**  
+   Learn why resistance reduction and repeat hits are so strong.
+
+3. **Scepter Mesh Plasma**  
+   Learn area control and damage zones.
+
+4. **Dodge Crit Heal**  
+   Learn how survival layers keep damage builds alive.
+
+5. **Veil of Haste Burst**  
+   Learn how cooldown and spell damage create tempo.
+
+6. **Falling Stars Lightning**  
+   Learn what a high-ceiling community meta build looks like once you understand build pacing.
+
+7. **Solitary Focus Covenant**  
+   Learn mono-spell routing and how to build around a single starting spell.
+
+8. **Pipwick Summoner**  
+   Learn summon uptime and indirect pressure.
+
+9. **Nelly / Knelly Bell March**  
+   Learn positioning, zones, and co-op chaos.
+
+10. **Full Dark Corruption Team**  
+   Learn coordinated co-op build planning.
+
+This order works because each build teaches a different part of the game.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best build in The Spell Brigade?
+
+Falling Stars Lightning has the highest community meta ceiling, while Solar Pulse Aura is the easiest strong build to reproduce for most players.
+
+### What is the best solo build?
+
+Solar Pulse Aura is the easiest solo build to recommend. Dodge Crit Heal is the best survival shell to add when the run offers dodge, crit, or healing relics.
+
+### What is the best boss build?
+
+Acid Multi-Hit Shred is excellent when bosses and elites live too long. Use Astral Orbs, Moonerang, Flux, or Corrosion when you want resistance reduction instead of pure burst.
+
+### What is the best covenant build?
+
+Solitary Focus-style one-spell builds are the best covenant route to start with because they funnel upgrades into one main spell and make the build easier to read.
+
+### Is Scepter Mesh good?
+
+Yes. Scepter Mesh is strong when you build around it. With Lightning or Plasma, the walls become damage zones instead of only defensive barriers.
+
+### What is the best farming build?
+
+Solar Pulse Aura is the easiest farming build to recommend because it scales well with cast speed, spell size, crit, and long-loop aura coverage.
+
+### Is Pipwick good?
+
+Pipwick is good if you want a summon build. Scale Impish Havoc with spell time, spell damage, cast speed, and Dark / Acid / Fire routes.
+
+### Is Nelly / Knelly Bell March good?
+
+Bell March can be good, but it is more positioning-heavy than normal projectile builds. It works best when you build bell size, cast speed, armor, healing, or trigger damage on purpose.
+
+### Is Full Dark Corruption good?
+
+Full Dark Corruption is good in coordinated co-op. It is not a good random solo route unless the build is intentionally supporting Dark, Void, Blight, Wither, or Hellfire.
+
+### Should I always build Plasma?
+
+No. Plasma is strong, but Acid, Flux, Corrosion, Wildfire, Ice, or Thunder may solve the run better depending on whether you need shred, control, crit ticks, or impact damage.
+
+### What should I read next?
+
+Read the <Link href="/the-spell-brigade/best-spells-elements">Best Spells and Elements Guide</Link> if you want to understand infusions. Read the <Link href="/the-spell-brigade/solo-guide">Solo Guide</Link> if you mostly play alone, or the <Link href="/the-spell-brigade/gold-farm">Gold Farm Guide</Link> if you want faster progression.

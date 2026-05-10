@@ -1,0 +1,837 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const difficultyColumns = [
+  { key: "difficulty", label: "Difficulty" },
+  { key: "soloUse", label: "Solo Use" },
+  { key: "why", label: "Why" },
+];
+
+export const difficultyRows = [
+  {
+    difficulty: "Moderate Threat",
+    soloUse: "Best starting point",
+    why:
+      "Use this to learn enemy patterns, objective timing, boss movement, and spell scaling without being punished too hard.",
+  },
+  {
+    difficulty: "Higher Threat",
+    soloUse: "After your build is consistent",
+    why:
+      "Move up once you can finish runs, complete safe objectives, and survive bosses without relying on lucky upgrade offers.",
+  },
+  {
+    difficulty: "Hardcore",
+    soloUse: "Challenge / mastery runs",
+    why:
+      "Only attempt this when your route has movement, dodge or sustain, AoE uptime, and a clear exit plan.",
+  },
+  {
+    difficulty: "Endless / Long Loop",
+    soloUse: "Farm or stress-test builds",
+    why:
+      "Loop only while your damage, pickup flow, and survival are still scaling efficiently.",
+  },
+];
+
+export const bossColumns = [
+  { key: "boss", label: "Boss" },
+  { key: "soloProblem", label: "Solo Problem" },
+  { key: "soloAnswer", label: "Solo Answer" },
+];
+
+export const bossRows = [
+  {
+    boss: "Krog'wa",
+    soloProblem:
+      "Punishes standing still, greedy close-range positioning, and slow reactions to danger zones.",
+    soloAnswer:
+      "Keep moving, take movement earlier than usual, and use wide AoE or damage zones so you can keep hitting while repositioning.",
+  },
+  {
+  boss: "Mul'gath the Twisted One",
+  soloProblem:
+    "A 1.0 boss that punishes narrow damage and poor repositioning because the fight can become chaotic quickly.",
+  soloAnswer:
+    "Use wide uptime damage such as Solar Pulse, Scepter Mesh, Falling Stars, or Acid Multi-Hit. Keep moving, avoid greedy casts, and prioritize spell size, cooldown, and sustain over pure damage greed.",
+},
+  {
+    boss: "Sol'phish",
+    soloProblem:
+      "Can overwhelm you if you tunnel the boss and ignore add pressure or conversion opportunities.",
+    soloAnswer:
+      "Use Dark or conversion-style tools if your build supports them, then let converted enemies help pressure the boss.",
+  },
+  {
+    boss: "Mobile bosses",
+    soloProblem:
+      "Moving bosses make narrow single-target damage unreliable.",
+    soloAnswer:
+      "Use AoE, spell size, cooldown reduction, Solar Pulse, Scepter Mesh, or other uptime-heavy damage.",
+  },
+  {
+    boss: "First-time boss",
+    soloProblem:
+      "You do not know the pattern yet, so greed kills the run.",
+    soloAnswer:
+      "Play wider, safer builds first. Learn the pattern before chasing maximum damage.",
+  },
+];
+
+export const buildColumns = [
+  { key: "build", label: "Solo Build" },
+  { key: "bestFor", label: "Best For" },
+  { key: "corePlan", label: "Core Plan" },
+  { key: "mainRisk", label: "Main Risk" },
+];
+
+export const buildRows = [
+  {
+    build: "Solar Pulse Aura",
+    bestFor: "Best all-purpose solo build",
+    corePlan:
+      "Use Sun Mage, Solar Pulse, spell size, cast speed, Lightning / Plasma / Wildfire / Flux, movement, and sustain.",
+    mainRisk:
+      "Getting greedy with damage before the build has enough safety.",
+  },
+  {
+    build: "Dodge Crit Heal",
+    bestFor: "Late-game solo survival",
+    corePlan:
+      "Combine dodge chance, Evasion Mend-style healing, Vital Strike-style crit healing, and a high-hit spell.",
+    mainRisk:
+      "Forcing it before the right relics or stats appear.",
+  },
+  {
+    build: "Acid Multi-Hit",
+    bestFor: "Solo boss and elite killing",
+    corePlan:
+      "Use Astral Orbs, Moonerang, or repeat-hit spells with Acid, Flux, or Corrosion to reduce resistance.",
+    mainRisk:
+      "Weak wave clear if your spell is too narrow or slow.",
+  },
+  {
+    build: "Scepter Mesh Control",
+    bestFor: "Solo space control and safer objectives",
+    corePlan:
+      "Turn Scepter Mesh into a damage zone with Lightning or Plasma, then add size, cast speed, and augments.",
+    mainRisk:
+      "Treating it like a passive wall instead of a supported build.",
+  },
+  {
+    build: "Falling Stars Lightning",
+    bestFor: "High-ceiling solo damage",
+    corePlan:
+      "Use Star Mage, Luck, cooldown reduction, Falling Stars levels, Lightning, and critical damage.",
+    mainRisk:
+      "Needs setup and can feel weaker if the right offers do not appear.",
+  },
+  {
+    build: "Solitary Focus",
+    bestFor: "Mono-spell solo routing",
+    corePlan:
+      "Use a one-spell covenant or one-spell plan to funnel upgrades into a strong starting spell.",
+    mainRisk:
+      "Bad infusion offers hurt more because you have fewer backup tools.",
+  },
+];
+
+export const statColumns = [
+  { key: "stat", label: "Solo Stat" },
+  { key: "priority", label: "Priority" },
+  { key: "why", label: "Why It Matters Solo" },
+];
+
+export const statRows = [
+  {
+  stat: "Movement Speed",
+  priority: "S-tier",
+  why:
+    "In solo, nobody can revive you or peel enemies away, so leaving bad positions matters more than trying to tank them.",
+},
+  {
+    stat: "Cast Speed / Cooldown",
+    priority: "S-tier",
+    why:
+      "More casts means more damage, more elemental applications, more healing triggers, and safer boss uptime.",
+  },
+  {
+    stat: "Spell Size",
+    priority: "S-tier for AoE builds",
+    why:
+      "Larger spells let you hit while dodging, cover boss movement, and control objectives more safely.",
+  },
+  {
+    stat: "Dodge",
+    priority: "A-tier",
+    why:
+      "Dodge becomes a solo safety layer, especially when paired with Evasion Mend-style healing.",
+  },
+  {
+    stat: "Crit Chance / Crit Damage",
+    priority: "A-tier",
+    why:
+      "Crit improves clear speed and can become sustain when paired with Vital Strike-style healing.",
+  },
+  {
+    stat: "Pickup Range / Mana Flow",
+    priority: "A-tier for long runs",
+    why:
+      "Solo builds still need XP flow. If XP stays outside your pickup range, your scaling slows down.",
+  },
+  {
+    stat: "Armor / HP",
+    priority: "B-tier",
+    why:
+      "Useful, but not a replacement for positioning, dodge, movement, or sustain.",
+  },
+  {
+    stat: "Objectives / Augments",
+    priority: "Run-defining",
+    why:
+      "Augments can change how your spell works. Solo players need to choose safe objectives, not every objective.",
+  },
+];
+
+export const objectiveColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "soloDecision", label: "Solo Decision" },
+  { key: "why", label: "Why" },
+];
+
+export const objectiveRows = [
+  {
+    situation: "Objective is close and your build is stable",
+    soloDecision: "Do it",
+    why:
+      "Augments can turn a normal spell into the build that carries the rest of the run.",
+  },
+  {
+    situation: "Objective is far away but the map is clear",
+    soloDecision: "Usually do it",
+    why:
+      "The travel cost is acceptable if you are not under pressure.",
+  },
+  {
+    situation: "Objective spawns inside a dangerous horde",
+    soloDecision: "Skip or wait",
+    why:
+      "Solo players cannot rely on a teammate to revive or clear space.",
+  },
+  {
+    situation: "Boss is close and your build is weak",
+    soloDecision: "Stabilize first",
+    why:
+      "A dead run gets no value from a greedy objective.",
+  },
+  {
+    situation: "You need a specific augment",
+    soloDecision: "Take calculated risks",
+    why:
+      "Some builds need augments, but the risk still has to be survivable.",
+  },
+];
+
+export const phaseColumns = [
+  { key: "phase", label: "Solo Phase" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const phaseRows = [
+  {
+    phase: "Opening",
+    goal: "Choose one carry spell",
+    whatToDo:
+      "Pick a reliable main spell, usually Solar Pulse, Astral Orbs, Scepter Mesh, Falling Stars, or another spell that can scale alone.",
+  },
+  {
+    phase: "First infusion",
+    goal: "Get the build direction",
+    whatToDo:
+      "Rush the main spell toward the first infusion. Lightning is safest, Acid is best for tanky enemies, and Fire sets up Plasma or Wildfire.",
+  },
+  {
+    phase: "Mid-run",
+    goal: "Add safety before the screen collapses",
+    whatToDo:
+      "Take movement, dodge, spell size, sustain, or control before enemies become too fast.",
+  },
+  {
+    phase: "Objectives",
+    goal: "Get augments without throwing the run",
+    whatToDo:
+      "Do objectives while safe. Skip them when your health, movement, or build state is too unstable.",
+  },
+  {
+    phase: "Boss phase",
+    goal: "Keep damage landing while dodging",
+    whatToDo:
+      "Favor AoE, spell size, cast speed, and cooldown so you do not need perfect aim or perfect positioning.",
+  },
+  {
+    phase: "Loop / long run",
+    goal: "Scale without losing control",
+    whatToDo:
+      "Add pickup support, movement, sustain, and enough damage to keep enemy density from trapping you.",
+  },
+];
+
+export const soloVsCoopColumns = [
+  { key: "topic", label: "Topic" },
+  { key: "solo", label: "Solo" },
+  { key: "coop", label: "Co-op" },
+];
+
+export const soloVsCoopRows = [
+  {
+    topic: "Damage",
+    solo:
+      "You need one build that handles waves, elites, bosses, and objectives.",
+    coop:
+      "Players can split roles: damage, shred, control, healing, objective runner.",
+  },
+  {
+    topic: "Survival",
+    solo:
+      "Movement, dodge, and sustain matter more because nobody can cover your mistakes.",
+    coop:
+      "Revives and healing help, but friendly fire and chaos can create new problems.",
+  },
+  {
+    topic: "Objectives",
+    solo:
+      "You must decide whether the reward is worth the risk.",
+    coop:
+      "Teams can split up, but over-splitting can create deaths and revive problems.",
+  },
+  {
+    topic: "Build choice",
+    solo:
+      "Safe AoE and consistent uptime are better than narrow greedy builds.",
+    coop:
+      "Specialized builds become better because teammates can cover weaknesses.",
+  },
+  {
+    topic: "Friendly fire",
+    solo:
+      "No teammate friendly-fire problem, but you can still create bad zones or self-chaos depending on effects.",
+    coop:
+      "Ice, bells, chains, explosions, and healing effects can help or ruin positioning.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Solo Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Building like you still have teammates",
+    whyItHurts:
+      "Solo gives you no backup revive, no role coverage, and no one to clear space when you panic.",
+    betterPlay:
+      "Build one route that covers damage, movement, sustain, and objectives.",
+  },
+  {
+    mistake: "Taking damage when your escape plan is already failing",
+    whyItHurts:
+      "More damage does not help if you cannot leave boss AoE, stampedes, or crowded objective zones.",
+    betterPlay:
+      "When positioning feels bad, take movement, dodge, sustain, or control before another damage upgrade.",
+  },
+  {
+  mistake: "Overvaluing HP and armor in Hardcore",
+  whyItHurts:
+    "HP and armor help, but they do not solve the real late-game problem: getting trapped, surrounded, or forced into bad boss zones.",
+  betterPlay:
+    "Use HP and armor as backup layers, not your main plan. Prioritize movement, dodge, sustain, AoE uptime, and clean positioning.",
+},
+  {
+    mistake: "Using narrow single-target damage for boss chaos",
+    whyItHurts:
+      "Boss fights include adds, movement, and bad angles. Narrow damage often misses value.",
+    betterPlay:
+      "Use AoE, spell size, cooldown reduction, and damage uptime.",
+  },
+  {
+    mistake: "Forcing Dodge Crit Heal before the pieces appear",
+    whyItHurts:
+      "Dodge, crit, and healing need each other. One piece alone is not a full survival loop.",
+    betterPlay:
+      "Treat it as a pivot shell when Evasion Mend, Vital Strike, dodge chance, crit, or a high-hit spell appears.",
+  },
+  {
+    mistake: "Trying to AFK before the build is ready",
+    whyItHurts:
+      "Even strong aura builds need pickup support, movement, sustain, and objective decisions.",
+    betterPlay:
+      "Treat semi-AFK as a result of a finished build, not the plan from minute one.",
+  },
+];
+
+export const settingColumns = [
+  { key: "question", label: "Question" },
+  { key: "answer", label: "Solo Answer" },
+];
+
+export const settingRows = [
+  {
+    question: "How do you start solo?",
+    answer:
+      "From the main menu, choose Play, then use Private Match or start without waiting for squad fill. If the UI shows Fill Squad or matchmaking, turn it off before launching.",
+  },
+  {
+    question: "Can you play The Spell Brigade solo?",
+    answer:
+      "Yes. Solo works, but you need a build that covers damage, objectives, bosses, and survival by itself.",
+  },
+  {
+    question: "What difficulty should solo players start on?",
+    answer:
+      "Start on Moderate Threat if you are still learning enemy patterns and objective timing.",
+  },
+  {
+    question: "Is solo easier than co-op?",
+    answer:
+      "Solo removes teammate chaos and friendly fire, but it also removes revives and role coverage.",
+  },
+  {
+    question: "What is the safest solo build?",
+    answer:
+      "Solar Pulse Aura is the easiest solo route to recommend because it gives AoE, scaling, and room for sustain.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Yes, you can play The Spell Brigade solo. Start on Moderate Threat if you are still learning enemy patterns, then move up once your build can clear objectives safely.**
+
+The easiest solo route is **Solar Pulse Aura** because it gives safe AoE, strong scaling, and enough room to add sustain. If bosses or elites live too long, use **Acid Multi-Hit**. If you need space control, use **Scepter Mesh**. If you are pushing Hardcore or long loops, add dodge, sustain, and a clear exit plan before chasing more damage.
+
+The solo rule is simple:
+
+**Pick the difficulty you can finish, build one spell properly, and skip objectives that would probably end the run.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-solar-pulse-aura-setup.webp"
+    alt="The Spell Brigade solo Solar Pulse Aura build setup with Sun Mage, spell size, and one-spell routing."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar Pulse Aura is the safest solo starting point because one spell can become wave clear, boss damage, and farming utility.
+  </figcaption>
+</figure>
+
+<h2 id="can-you-play-solo">
+  Can you play The Spell Brigade solo?
+</h2>
+
+Yes. You can play The Spell Brigade solo.
+
+From the main menu, choose **Play**, then use **Private Match** or start without waiting for squad fill. If the UI shows **Fill Squad** or matchmaking, turn it off before launching.
+
+<GuideTable
+  caption="The Spell Brigade solo setup quick answers."
+  columns={settingColumns}
+  rows={settingRows}
+/>
+
+<GuideCallout title="Solo mindset">
+Solo is cleaner than co-op because you do not have teammate chaos, but it is also less forgiving because nobody can revive you or cover a weak part of your build.
+</GuideCallout>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="best-solo-difficulty">
+  Best difficulty for solo players
+</h2>
+
+Do not start solo by proving you can survive the hardest option. Start by learning the game cleanly.
+
+<GuideTable
+  caption="Best difficulty choices for solo players in The Spell Brigade."
+  columns={difficultyColumns}
+  rows={difficultyRows}
+/>
+
+<GuideCallout title="Solo difficulty rule">
+Start on Moderate Threat if you are learning. Raise the difficulty only when your build can handle objectives, bosses, and bad enemy patterns without needing perfect luck.
+</GuideCallout>
+
+<h2 id="best-solo-builds">
+  Best solo builds in The Spell Brigade
+</h2>
+
+The best solo builds are not always the highest-damage builds. They are the builds that keep working while you dodge, complete objectives, and survive boss chaos.
+
+<GuideTable
+  caption="Best solo builds in The Spell Brigade 1.0."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+Read the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> if you want the full build list.
+
+<h2 id="solo-stat-priority">
+  Solo stat priority
+</h2>
+
+Solo makes some stats more important than they look in co-op.
+
+<GuideTable
+  caption="Best solo stats in The Spell Brigade."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+<h2 id="hardcore-solo">
+  Hardcore solo priorities
+</h2>
+
+Hardcore solo is not just normal solo with bigger numbers. It changes what you should value.
+
+In normal solo, you can sometimes fix mistakes with more damage, a potion, or a lucky upgrade. In Hardcore, bad positioning and greedy objectives punish you much harder.
+
+Use this priority order:
+
+1. **Movement and positioning**
+2. **Dodge or sustain**
+3. **AoE uptime**
+4. **Spell size and cooldown**
+5. **Boss safety**
+6. **Damage greed**
+
+Armor and HP still help, but they do not replace movement, dodge, or a safe route through the arena.
+
+<GuideCallout title="Hardcore solo rule">
+In Hardcore, do not ask “what gives me the most damage?” Ask “what keeps this run from ending when the screen gets crowded?”
+</GuideCallout>
+
+<h2 id="solar-pulse-solo-build">
+  Solar Pulse Aura solo build
+</h2>
+
+Solar Pulse Aura is the best solo build to start with because it keeps dealing damage while you move. That is the whole point of the build: you are not stopping to aim, and you are not depending on a teammate to clear space for you.
+
+Use the build table above for the full route. In practice, the build becomes strong once Solar Pulse has enough size, cast speed, a useful infusion route, and at least one layer of sustain or movement.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-solar-pulse-final-stats.webp"
+    alt="The Spell Brigade Solar Pulse Aura solo long-loop final stats showing huge Solar Pulse damage and gold."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A finished Solar Pulse solo route should feel like enemies are walking into your damage, not like you are chasing them.
+  </figcaption>
+</figure>
+
+Do not turn Solar Pulse into a stationary build too early. You still need movement and sustain before the build becomes safe.
+
+<h2 id="dodge-crit-heal">
+  Dodge Crit Heal for solo survival
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-solo-guide-dodge-heal-upgrade.webp"
+    alt="The Spell Brigade Evasion Mend dodge healing upgrade that restores health when a dodge prevents damage."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Evasion Mend is the concrete card that turns dodge from chance-based defense into recovery.
+  </figcaption>
+</figure>
+
+Dodge Crit Heal is not one card. It is a survival shell.
+
+You are looking for this combination:
+
+1. **Dodge chance**
+2. **Dodge healing**, such as Evasion Mend
+3. **A high-hit spell**, such as Solar Pulse, Aether Beam, Rune Burst, or another spell that keeps triggering value
+4. **Crit chance / crit damage**
+5. **Healing on crit**, such as Vital Strike, if the run offers it
+
+The loop is:
+
+**Dodge avoids the hit → Evasion Mend restores health → crit clears enemies → Vital Strike turns critical damage into more healing**
+
+That is why this shell is strongest on high-hit spells. Solar Pulse, Aether Beam, Rune Burst, and other frequent-hit spells create more chances for dodge, crit, and healing value to matter.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-solo-guide-crit-heal-upgrade.webp"
+    alt="The Spell Brigade Vital Strike critical damage healing upgrade for solo sustain builds."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vital Strike is not the opener. It becomes powerful once your build already has crit and enough hit frequency.
+  </figcaption>
+</figure>
+
+Use this when the screen is starting to overwhelm you and raw damage is no longer enough. Do not force it from minute one; recognize it when the pieces appear.
+
+<h2 id="acid-solo-boss-build">
+  Acid Multi-Hit for solo bosses
+</h2>
+
+Solo boss fights can feel bad when your build has damage but no shred.
+
+That is where Acid Multi-Hit helps. Acid reduces resistance, and repeated-hit spells apply that value more often. This is especially useful when bosses and elites are the reason your run slows down.
+
+Good solo Acid carriers include:
+
+- Astral Orbs,
+- Moonerang,
+- Scepter Mesh zones,
+- fast projectiles,
+- any spell that keeps hitting while you dodge.
+
+Use **Flux** if you want Lightning pressure plus Acid utility. Use **Corrosion** if you want to commit harder to Acid.
+
+Read the <Link href="/the-spell-brigade/best-spells-elements#acid">Acid section</Link> if you need the full infusion explanation.
+
+<h2 id="scepter-mesh-solo">
+  Scepter Mesh for solo space control
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-spells-elements-scepter-mesh-plasma.webp"
+    alt="The Spell Brigade Scepter Mesh solo build using Lightning or Plasma to turn walls into damage zones."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scepter Mesh is a solo control tool first, then a damage zone once you add the right element.
+  </figcaption>
+</figure>
+
+Scepter Mesh is good solo when you treat it like arena control.
+
+With Lightning or Plasma, its walls become damage zones. With Acid or Flux, it can help soften tanky enemies. With enough size and cast speed, it gives you something solo players desperately need: space.
+
+Use Scepter Mesh when:
+
+- enemies are collapsing on you,
+- you need safer objective zones,
+- bosses move too much for narrow damage,
+- you want to fight around a controlled area.
+
+The mistake is taking Scepter Mesh and leaving it unsupported. Small, slow, under-infused walls will feel passive.
+
+<h2 id="solo-objectives">
+  Solo objectives: when to do them and when to skip
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-solo-guide-sacrifice-objective-risk.webp"
+    alt="The Spell Brigade solo augmentation reward after completing a risky objective."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Objectives are strongest when they give augments without forcing you into a death trap.
+  </figcaption>
+</figure>
+
+Objectives are not side chores, but they are also not mandatory deaths.
+
+Use this table when you are deciding whether to chase one.
+
+<GuideTable
+  caption="Solo objective decisions in The Spell Brigade."
+  columns={objectiveColumns}
+  rows={objectiveRows}
+/>
+
+In solo, the best objective decision is usually the one that keeps the run alive. A missed augment is bad. A dead run is worse.
+
+<h2 id="solo-bosses">
+  Solo boss quick guide
+</h2>
+
+A common solo mistake is building like every boss is a stationary target. Boss fights still ask for movement, add control, AoE uptime, and safe damage windows.
+
+<GuideTable
+  caption="Solo boss quick guide for The Spell Brigade."
+  columns={bossColumns}
+  rows={bossRows}
+/>
+
+For general boss fights, prioritize:
+
+- spell size,
+- cast speed,
+- cooldown reduction,
+- AoE uptime,
+- Acid shred,
+- movement,
+- sustain.
+
+<h2 id="solo-looping">
+  Solo long loops and when to stop
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-solo-guide-loop-boss-kill.webp"
+    alt="The Spell Brigade solo boss fight showing a large boss attack zone during a long-loop run."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Long loops are possible solo, but they only stay efficient while your damage, XP pickup, and positioning keep up.
+  </figcaption>
+</figure>
+
+Solo long loops are fun, but they are not automatically efficient.
+
+Keep looping if:
+
+- enemies are still dying quickly,
+- XP pickup is keeping up,
+- your positioning is safe,
+- boss fights are controlled,
+- your build is still scaling.
+
+Stop or cash out if:
+
+- enemies become damage sponges,
+- XP is sitting outside pickup range,
+- objectives become unsafe,
+- your escape route is gone,
+- the next boss will probably end the run.
+
+A strong solo player is not the one who always loops forever. It is the one who knows when the run has already paid out.
+
+<h2 id="solo-vs-coop">
+  Solo vs co-op
+</h2>
+
+Solo and co-op are not better or worse. They punish different mistakes.
+
+<GuideTable
+  caption="Solo vs co-op differences in The Spell Brigade."
+  columns={soloVsCoopColumns}
+  rows={soloVsCoopRows}
+/>
+
+Solo is cleaner. Co-op is more flexible. Pick the one that matches how you want to solve problems.
+
+<h2 id="solo-run-plan">
+  Solo run plan: opening, mid-run, boss, and loop
+</h2>
+
+<GuideTable
+  caption="The Spell Brigade solo run plan by phase."
+  columns={phaseColumns}
+  rows={phaseRows}
+/>
+
+<h2 id="common-mistakes">
+  Common solo mistakes
+</h2>
+
+<GuideTable
+  caption="Common The Spell Brigade solo mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="recommended-solo-order">
+  Recommended solo learning order
+</h2>
+
+If you are learning solo, use this order:
+
+1. **Start with Solar Pulse Aura.**  
+   It teaches focused spell scaling, AoE, movement, and safe objectives.
+
+2. **Learn when to take safety upgrades.**  
+   Solo runs fail when you keep taking damage after your positioning is already falling apart.
+
+3. **Learn Dodge Crit Heal as a survival shell.**  
+   Do not force it every run, but recognize Evasion Mend, Vital Strike, dodge, crit, and high-hit spells when they appear together.
+
+4. **Try Acid Multi-Hit for boss problems.**  
+   Use it when bosses and elites live too long.
+
+5. **Try Scepter Mesh for space control.**  
+   It teaches you to fight around zones instead of only chasing damage.
+
+6. **Practice objective judgment.**  
+   Do safe objectives. Skip the ones that would probably kill the run.
+
+7. **Only then chase high-ceiling routes.**  
+   Falling Stars Lightning, Solitary Focus, and long loops are easier once you understand the basics.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Can you play The Spell Brigade solo?
+
+Yes. From the main menu, choose Play, then use Private Match or start without waiting for squad fill. If the UI shows Fill Squad or matchmaking, turn it off before launching.
+
+### What difficulty should I start on solo?
+
+Start on Moderate Threat if you are still learning enemy patterns, objective timing, and boss movement.
+
+### What is the best solo build?
+
+Solar Pulse Aura is the easiest solo build to recommend because it gives AoE damage, strong scaling, and room for sustain.
+
+### Is solo easier than co-op?
+
+Solo is cleaner but less forgiving. You avoid teammate chaos, but you also lose revives, role coverage, and co-op support.
+
+### What is the best solo stat?
+
+Movement speed is one of the best solo stats, but in Hardcore you should think in terms of a full safety plan: movement, positioning, dodge, sustain, and AoE uptime.
+
+### Is Dodge Crit Heal good solo?
+
+Yes. Dodge Crit Heal is excellent when Evasion Mend, Vital Strike, dodge chance, crit, healing, and a high-hit spell start coming together. It is usually a survival shell, not a forced opener.
+
+### Should I do every objective solo?
+
+No. Do objectives when they are safe and useful. Skip objectives that would probably kill the run.
+
+### What is the best solo boss build?
+
+Solar Pulse Aura and Acid Multi-Hit are both strong. Solar Pulse keeps damage active while you dodge, while Acid Multi-Hit helps shred bosses and elites.
+
+### Is Scepter Mesh good solo?
+
+Yes. Scepter Mesh is good when supported with Lightning, Plasma, Acid, Flux, spell size, and cast speed. It gives space control and damage.
+
+### Can you farm gold solo?
+
+Yes. Solar Pulse Aura is one of the easiest solo farming routes. Read the <Link href="/the-spell-brigade/gold-farm">Gold Farm Guide</Link> for Bounty, objectives, and farm timing.
+
+### What should I read next?
+
+Read the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> for full build routes, the <Link href="/the-spell-brigade/best-spells-elements">Best Spells and Elements Guide</Link> for infusions, or the <Link href="/the-spell-brigade/gold-farm">Gold Farm Guide</Link> if you want faster progression.

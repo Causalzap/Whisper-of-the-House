@@ -1,0 +1,932 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const tierColumns = [
+  { key: "tier", label: "Tier" },
+  { key: "element", label: "Element / Infusion" },
+  { key: "bestFor", label: "Best For" },
+  { key: "why", label: "Why It Ranks Here" },
+];
+
+export const tierRows = [
+  {
+    tier: "S",
+    element: "Lightning",
+    bestFor: "Safe first infusion, general damage, reliable clears",
+    why:
+      "Lightning works on almost any spell and does not need a perfect build to feel useful.",
+  },
+  {
+    tier: "S",
+    element: "Acid",
+    bestFor: "Bosses, elites, resistance reduction, multi-hit spells",
+    why:
+      "Acid reduces resistance, so enemies take more damage from all sources. It gets much better on repeated-hit spells.",
+  },
+  {
+    tier: "A",
+    element: "Plasma",
+    bestFor: "Burst damage, Solar Pulse, high-frequency spells",
+    why:
+      "Fire + Lightning is excellent when your spell hits often enough, but it is not always better than Acid or Lightning.",
+  },
+  {
+    tier: "A",
+    element: "Wildfire",
+    bestFor: "Fire scaling, crit damage ticks, dense packs",
+    why:
+      "Fire + Fire is an advanced Fire route that raises the damage ceiling when you can scale crit or repeated damage.",
+  },
+  {
+    tier: "A-",
+    element: "Brimstone",
+    bestFor: "Splash damage, clustered enemies, wave clear",
+    why:
+      "Acid + Fire turns resistance reduction into area clear, especially when enemies are grouped.",
+  },
+  {
+    tier: "B+",
+    element: "Flux",
+    bestFor: "Lightning pressure plus Acid utility",
+    why:
+      "Lightning + Acid is a strong hybrid route when you want consistency and resistance reduction together.",
+  },
+  {
+    tier: "B+",
+    element: "Ice",
+    bestFor: "Slow, freeze, control, safer objectives",
+    why:
+      "Ice buys space and time, but it should not be treated like Acid-style damage amplification.",
+  },
+  {
+    tier: "B",
+    element: "Fire",
+    bestFor: "DoT, combo setup, early AoE",
+    why:
+      "Useful by itself, but often best as the first step toward Plasma, Brimstone, Hellfire, or Wildfire.",
+  },
+  {
+    tier: "Situational",
+    element: "Dark",
+    bestFor: "Corruption routes, Hellfire, Void, Blight, Wither",
+    why:
+      "Dark is strong only when the run or team is intentionally building around corruption.",
+  },
+];
+
+export const baseElementColumns = [
+  { key: "element", label: "Base Element" },
+  { key: "bestFor", label: "Best For" },
+  { key: "playerRule", label: "Player Rule" },
+];
+
+export const baseElementRows = [
+  {
+    element: "Lightning",
+    bestFor: "Reliable damage and safe first infusions",
+    playerRule:
+      "Pick Lightning when you want the safest general option.",
+  },
+  {
+    element: "Acid",
+    bestFor: "Resistance reduction, bosses, elites, multi-hit spells",
+    playerRule:
+      "Pick Acid when enemies live too long or your spell hits repeatedly.",
+  },
+  {
+    element: "Fire",
+    bestFor: "Damage over time and advanced Fire routes",
+    playerRule:
+      "Pick Fire when you want Plasma, Brimstone, Hellfire, or Wildfire later.",
+  },
+  {
+    element: "Ice",
+    bestFor: "Control, slow, freeze, objective safety",
+    playerRule:
+      "Pick Ice when you need space more than raw damage.",
+  },
+  {
+    element: "Dark",
+    bestFor: "Corruption and spread effects",
+    playerRule:
+      "Pick Dark only when you are building around corruption on purpose.",
+  },
+];
+
+export const advancedColumns = [
+  { key: "advanced", label: "Advanced Infusion" },
+  { key: "formula", label: "Formula" },
+  { key: "role", label: "Role" },
+  { key: "takeItWhen", label: "Take It When..." },
+  { key: "dontTakeItWhen", label: "Don't Take It When..." },
+];
+
+export const advancedRows = [
+  {
+    advanced: "Plasma",
+    formula: "Fire + Lightning",
+    role: "Burst damage",
+    takeItWhen:
+      "Your spell hits often, covers a large area, or needs boss burst.",
+    dontTakeItWhen:
+      "Your real problem is resistance reduction, control, or enemies being too spread out.",
+  },
+  {
+    advanced: "Flux",
+    formula: "Lightning + Acid",
+    role: "Consistent damage plus resistance reduction",
+    takeItWhen:
+      "You want Lightning pressure but still need enemies to take more damage over time.",
+    dontTakeItWhen:
+      "You need pure burst right now, or you already have another Acid player covering shred.",
+  },
+  {
+    advanced: "Corrosion",
+    formula: "Acid + Acid",
+    role: "Heavy resistance reduction and weakness route",
+    takeItWhen:
+      "Your spell hits many times and you want boss / elite fights to become safer.",
+    dontTakeItWhen:
+      "You need immediate splash clear or your spell does not hit often.",
+  },
+  {
+    advanced: "Brimstone",
+    formula: "Acid + Fire",
+    role: "Splash damage",
+    takeItWhen:
+      "Enemies are clustered and you want Acid to help with wave clear.",
+    dontTakeItWhen:
+      "You are fighting isolated bosses or enemies are too spread out.",
+  },
+  {
+    advanced: "Wildfire",
+    formula: "Fire + Fire",
+    role: "Critical Fire ticks and dense-pack damage",
+    takeItWhen:
+      "You can scale crit, cast speed, AoE, or repeated Fire damage.",
+    dontTakeItWhen:
+      "You need Acid shred, Ice control, or direct burst more urgently.",
+  },
+  {
+    advanced: "Thunder",
+    formula: "Lightning + Lightning",
+    role: "Front-loaded lightning strike",
+    takeItWhen:
+      "You are already committed to Lightning and want bigger impact damage.",
+    dontTakeItWhen:
+      "Your run needs Acid utility, Fire combos, or Ice control instead.",
+  },
+  {
+    advanced: "Hellfire",
+    formula: "Dark + Fire",
+    role: "Burning corruption",
+    takeItWhen:
+      "You already have Dark and want corrupted enemies to spread Fire pressure.",
+    dontTakeItWhen:
+      "You are not committed to corruption or need reliable solo damage immediately.",
+  },
+  {
+    advanced: "Void",
+    formula: "Dark + Dark",
+    role: "Dark corruption spread",
+    takeItWhen:
+      "You are playing a full Dark route or a coordinated corruption team.",
+    dontTakeItWhen:
+      "Dark is only a random side element in your build.",
+  },
+  {
+    advanced: "Frostbite",
+    formula: "Ice + Fire",
+    role: "Control and spacing",
+    takeItWhen:
+      "You need to push enemies away or create space around objectives.",
+    dontTakeItWhen:
+      "You want enemies grouped inside Solar Pulse, Scepter Mesh, or Brimstone zones.",
+  },
+  {
+    advanced: "Miasma",
+    formula: "Ice + Acid",
+    role: "Control plus Acid utility",
+    takeItWhen:
+      "You want crowd disruption while still keeping Acid value.",
+    dontTakeItWhen:
+      "Your team is trying to keep enemies tightly stacked.",
+  },
+  {
+    advanced: "Blight",
+    formula: "Dark + Acid",
+    role: "Corruption plus Acid spread",
+    takeItWhen:
+      "You want corruption to help spread Acid pressure.",
+    dontTakeItWhen:
+      "Nobody else is supporting Dark or Acid.",
+  },
+  {
+    advanced: "Wither",
+    formula: "Dark + Ice",
+    role: "Corruption plus Ice control",
+    takeItWhen:
+      "Your team wants a control-heavy corruption setup.",
+    dontTakeItWhen:
+      "Your team already lacks damage.",
+  },
+];
+
+export const fluxCompareColumns = [
+  { key: "route", label: "Route" },
+  { key: "formula", label: "Formula" },
+  { key: "bestFor", label: "Best For" },
+  { key: "pickThisIf", label: "Pick This If..." },
+];
+
+export const fluxCompareRows = [
+  {
+    route: "Flux",
+    formula: "Lightning + Acid",
+    bestFor: "Hybrid consistency",
+    pickThisIf:
+      "You want Lightning's reliable pressure while also reducing enemy resistance.",
+  },
+  {
+    route: "Corrosion",
+    formula: "Acid + Acid",
+    bestFor: "Maximum Acid value",
+    pickThisIf:
+      "Your spell hits many times and you want to fully commit to boss / elite shredding.",
+  },
+  {
+    route: "Plasma",
+    formula: "Fire + Lightning",
+    bestFor: "Burst damage",
+    pickThisIf:
+      "Your spell already has high uptime and you need immediate damage instead of Acid utility.",
+  },
+];
+
+export const wizardColumns = [
+  { key: "wizard", label: "Wizard / Spell" },
+  { key: "bestElement", label: "Best Element" },
+  { key: "why", label: "Why It Fits" },
+];
+
+export const wizardRows = [
+  {
+    wizard: "Reginald / Astral Orbs",
+    bestElement: "Acid, Flux, Corrosion",
+    why:
+      "Astral Orbs can hit repeatedly, making Acid resistance reduction much stronger.",
+  },
+  {
+    wizard: "Moon Mage / Moonerang",
+    bestElement: "Acid, Corrosion, Lightning",
+    why:
+      "Moonerang-style return hits are excellent Acid carriers.",
+  },
+  {
+    wizard: "Sun Mage / Solar Pulse",
+    bestElement: "Lightning, Plasma, Wildfire",
+    why:
+      "Solar Pulse wants cast speed, spell size, and effects that reward enemies staying near you.",
+  },
+  {
+    wizard: "Hatti / Rune Burst",
+    bestElement: "Plasma, Lightning, Ice",
+    why:
+      "Rune Burst can lean into burst, high-frequency damage, or control depending on the run goal.",
+  },
+  {
+    wizard: "Star Mage / Falling Stars",
+    bestElement: "Lightning, Thunder, Plasma",
+    why:
+      "Falling Stars wants reliable impact damage and enough spell speed to keep pressure up.",
+  },
+  {
+    wizard: "Maggie / Aurora Wings",
+    bestElement: "Fire, Acid, support augments",
+    why:
+      "Aurora Wings can bounce and support teammates, so spread and utility routes work well.",
+  },
+  {
+    wizard: "Pipwick / Impish Havoc",
+    bestElement: "Dark, Acid, Fire",
+    why:
+      "Summons want uptime and spread pressure. Dark and Acid can turn minions into pressure tools.",
+  },
+  {
+    wizard: "Knelly / Bell March",
+    bestElement: "Fire, Lightning, defensive augments",
+    why:
+      "Bell March depends on triggered zones, so each bell needs either damage or team utility.",
+  },
+];
+
+export const spellColumns = [
+  { key: "spell", label: "Spell" },
+  { key: "bestInfusion", label: "Best Infusion" },
+  { key: "whyItWorks", label: "Why It Works" },
+];
+
+export const spellRows = [
+  {
+    spell: "Astral Orbs",
+    bestInfusion: "Acid / Flux / Corrosion",
+    whyItWorks:
+      "Repeated hits make resistance reduction scale very well.",
+  },
+  {
+    spell: "Moonerang",
+    bestInfusion: "Acid / Corrosion / Lightning",
+    whyItWorks:
+      "Multi-hit paths make it a strong Acid carrier.",
+  },
+  {
+    spell: "Solar Pulse",
+    bestInfusion: "Lightning / Plasma / Wildfire",
+    whyItWorks:
+      "It hits everything near you, so cast speed, size, and high-uptime infusions matter.",
+  },
+  {
+    spell: "Scepter Mesh",
+    bestInfusion: "Lightning / Plasma",
+    whyItWorks:
+      "Elemental damage turns its walls into damage zones.",
+  },
+  {
+    spell: "Rune Burst",
+    bestInfusion: "Lightning / Plasma",
+    whyItWorks:
+      "High-frequency damage scales well with cast speed, burst, and crit support.",
+  },
+  {
+    spell: "Falling Stars",
+    bestInfusion: "Lightning / Thunder / Plasma",
+    whyItWorks:
+      "Delayed AoE benefits from strong impact damage and reliable burst windows.",
+  },
+  {
+    spell: "Impish Havoc",
+    bestInfusion: "Dark / Acid / Fire",
+    whyItWorks:
+      "Summons want uptime and spread pressure rather than one-time burst.",
+  },
+  {
+    spell: "Bell March",
+    bestInfusion: "Fire / Lightning / defensive augments",
+    whyItWorks:
+      "Bells reward positioning, triggered damage, and utility.",
+  },
+];
+
+export const coopColumns = [
+  { key: "teamPlan", label: "Team Plan" },
+  { key: "player1", label: "Player 1" },
+  { key: "player2", label: "Player 2" },
+  { key: "player3", label: "Player 3" },
+  { key: "player4", label: "Player 4" },
+  { key: "why", label: "Why It Works" },
+];
+
+export const coopRows = [
+  {
+    teamPlan: "Safe general team",
+    player1: "Lightning DPS",
+    player2: "Acid shred",
+    player3: "Fire / Wildfire clear",
+    player4: "Ice or support",
+    why:
+      "Covers consistent damage, resistance reduction, wave clear, and control.",
+  },
+  {
+    teamPlan: "Boss-focused team",
+    player1: "Acid",
+    player2: "Acid / Corrosion",
+    player3: "Lightning",
+    player4: "Plasma",
+    why:
+      "Double Acid makes bosses easier to shred while Lightning and Plasma handle burst windows.",
+  },
+  {
+    teamPlan: "Horde clear team",
+    player1: "Wildfire",
+    player2: "Brimstone",
+    player3: "Lightning",
+    player4: "Ice",
+    why:
+      "Fire-style spread and splash clear packs while Ice prevents the team from being overrun.",
+  },
+  {
+    teamPlan: "Corruption team",
+    player1: "Dark",
+    player2: "Dark",
+    player3: "Acid or Fire",
+    player4: "Ice or Lightning",
+    why:
+      "Dark only shines when the team commits to Blight, Hellfire, Void, or Wither-style spread.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Splitting upgrades across too many spells early",
+    whyItHurts:
+      "You delay the first and second infusion breakpoints, so none of your spells becomes a real build.",
+    betterPlay:
+      "Choose one main spell early and push it toward its infusion route before spreading upgrades.",
+  },
+  {
+    mistake: "Forcing the perfect second infusion",
+    whyItHurts:
+      "Advanced infusions depend on offers and rerolls. Waiting forever for one exact combo can kill your tempo.",
+    betterPlay:
+      "Use the best route offered: Acid if enemies live too long, Lightning if you need consistency, Fire if you can reach a strong combo.",
+  },
+  {
+    mistake: "Picking burst when the run needs shred",
+    whyItHurts:
+      "Plasma can look tempting, but if bosses and elites are too tanky, Acid or Flux may solve more problems.",
+    betterPlay:
+      "Choose Acid, Flux, or Corrosion when resistance reduction matters more than burst.",
+  },
+  {
+    mistake: "Building only single-target damage into boss chaos",
+    whyItHurts:
+      "Boss fights still include movement, adds, bad angles, and objective pressure.",
+    betterPlay:
+      "Add spell size, cast speed, AoE, or control so your damage keeps working while you dodge.",
+  },
+  {
+  mistake: "Waiting until the boss phase to care about objectives",
+  whyItHurts:
+    "By the time the boss arrives, your spell may still be missing the augments that make the build actually scale.",
+  betterPlay:
+    "Treat early and mid-run objectives as build checkpoints. If an objective is safe, finish it before the run becomes too chaotic.",
+},
+  {
+    mistake: "Taking Dark as a random filler element",
+    whyItHurts:
+      "Dark is best when it connects to corruption routes. Alone, it can feel weaker than Lightning, Acid, or Fire setup.",
+    betterPlay:
+      "Take Dark when you are aiming for Hellfire, Void, Blight, Wither, or a team corruption plan.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best element in The Spell Brigade 1.0 is usually either Lightning or Acid, depending on what your run needs.**
+
+Pick **Lightning** when you want the safest first infusion. Pick **Acid** when bosses, elites, or tanky waves live too long, because Acid reduces enemy resistance and makes them take more damage from all sources.
+
+After that, choose your advanced infusion by problem: **Plasma** for burst, **Flux** for Lightning plus Acid utility, **Corrosion** for full Acid commitment, **Wildfire** for Fire crit ticks, **Thunder** for double-Lightning impact, and **Ice** when you need control instead of more damage.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-spells-elements-brimstone-choice.webp"
+    alt="The Spell Brigade Acid and Fire infusion card showing Acid reducing resistance and Brimstone causing splash damage."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Acid is one of the most important 1.0 elements because it reduces resistance instead of only adding damage.
+  </figcaption>
+</figure>
+
+<h2 id="element-tier-list">
+  The Spell Brigade element tier list
+</h2>
+
+This is a player-focused tier list. It ranks elements by how often they solve real run problems: clearing packs, killing bosses, surviving objectives, and turning one spell into a real build.
+
+<GuideTable
+  caption="The Spell Brigade 1.0 element and advanced infusion tier list."
+  columns={tierColumns}
+  rows={tierRows}
+/>
+
+<GuideCallout title="Tier list rule">
+Lightning is the safest default. Acid is the best answer when enemies live too long. Plasma is strong, but it is not automatically better than Acid, Flux, or Corrosion.
+</GuideCallout>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="base-elements">
+  Base elements: Lightning, Acid, Fire, Ice, and Dark
+</h2>
+
+The normal first-layer elements are **Lightning, Acid, Fire, Ice, and Dark**. Wildfire is not a base element; it is an advanced Fire route created by stacking Fire twice.
+
+<GuideTable
+  caption="Base elements in The Spell Brigade and when to pick each one."
+  columns={baseElementColumns}
+  rows={baseElementRows}
+/>
+
+A simple way to decide:
+
+<pre className="my-4 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100">
+  <code>{`Need reliable damage?             Pick Lightning.
+Need enemies to take more damage? Pick Acid.
+Need combo setup?                 Pick Fire.
+Need control?                     Pick Ice.
+Need corruption?                  Pick Dark.`}</code>
+</pre>
+
+<h2 id="infusion-timing">
+  When do you get spell infusions?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-spells-elements-infusion-level-7.webp"
+    alt="The Spell Brigade upgrade screen showing spell level progress toward an infusion."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Infusion timing matters because a focused spell reaches its real build much faster.
+  </figcaption>
+</figure>
+
+Your build usually comes online in this order:
+
+**Main spell → first infusion → support stats → second infusion → advanced infusion.**
+
+The first infusion usually appears around **spell level 7**. The second infusion usually appears around **spell level 14**. That second infusion is where advanced routes like **Plasma**, **Flux**, **Corrosion**, **Wildfire**, **Thunder**, **Brimstone**, **Hellfire**, or **Void** become possible.
+
+<h2 id="element-decision-tree">
+  Which element should you pick?
+</h2>
+
+Use this during a run:
+
+<pre className="my-4 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100">
+  <code>{`Are bosses or elites taking too long to die?
+├─ Yes → Does your spell hit many times?
+│  ├─ Yes → Pick Acid, Flux, or Corrosion.
+│  └─ No  → Pick Lightning or Plasma.
+└─ No → Are you getting surrounded?
+   ├─ Yes → Need control?
+   │  ├─ Yes → Pick Ice.
+   │  └─ No  → Pick Fire, Wildfire, or Brimstone.
+   └─ No → Are you building corruption?
+      ├─ Yes → Pick Dark and build toward Hellfire / Void / Blight / Wither.
+      └─ No  → Pick Lightning.`}</code>
+</pre>
+
+The best element is the one that fixes the run you are actually playing.
+
+<h2 id="advanced-infusions">
+  Advanced infusions and when not to pick them
+</h2>
+
+Advanced infusions are not guaranteed every run. You need to level the spell high enough, see the right element offers, and sometimes spend rerolls to force the route.
+
+<GuideTable
+  caption="The Spell Brigade advanced infusions, formulas, and when not to take them."
+  columns={advancedColumns}
+  rows={advancedRows}
+/>
+
+<GuideCallout title="Advanced infusion rule">
+Do not plan as if the exact second element is guaranteed. If you run out of rerolls, take the strongest route offered and keep the build moving.
+</GuideCallout>
+
+<h2 id="acid">
+  Acid: the S-tier resistance-reduction element
+</h2>
+
+Acid is the element that makes enemies take more damage.
+
+The tooltip says:
+
+**Afflicted target's resistance is reduced, meaning they receive more damage from all sources.**
+
+That is why Acid deserves S-tier placement. It is not just another DoT. It changes how fast everything dies, especially when your spell can apply hits repeatedly.
+
+Best Acid carriers include:
+
+- **Astral Orbs**, because they can keep hitting enemies.
+- **Moonerang**, because return paths can create repeated contact.
+- **Fast projectiles**, because more hits mean more chances to apply Acid value.
+- **Zone spells**, if enemies stay inside the damage area.
+- **Co-op teams**, because every teammate benefits when enemies take more damage.
+
+If your spell hits slowly and only once, Acid is less exciting. If your spell hits many times, Acid can become one of the best boss and elite tools in the game.
+
+<h2 id="flux-vs-corrosion">
+  Flux vs Corrosion: which Acid route should you take?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-spells-elements-solar-pulse-plasma.webp"
+    alt="The Spell Brigade Solar Pulse infusion choice showing Plasma and Flux options."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Plasma and Flux are different answers: Plasma is burst, while Flux keeps Lightning pressure and adds Acid utility.
+  </figcaption>
+</figure>
+
+Flux is not just “the other option next to Plasma.” It is the hybrid route for players who want Lightning's consistency and Acid's resistance reduction at the same time.
+
+<GuideTable
+  caption="Flux, Corrosion, and Plasma compared."
+  columns={fluxCompareColumns}
+  rows={fluxCompareRows}
+/>
+
+Use **Flux** when you want a balanced route. Use **Corrosion** when you want to fully commit to Acid. Use **Plasma** when the run needs burst damage more than resistance reduction.
+
+<h2 id="brimstone">
+  Brimstone: Acid + Fire splash damage
+</h2>
+
+Brimstone is the advanced infusion shown when Acid meets Fire:
+
+**Acid + Fire = Brimstone**
+
+It is one of the best wave-clear routes because the initial hit inflicts splash damage on nearby enemies. This makes it much better when enemies are packed together.
+
+Take Brimstone when:
+
+- enemies are grouped,
+- your spell already hits packs,
+- your team needs wave clear,
+- you want Acid utility to turn into AoE pressure.
+
+Do not take Brimstone as your main answer to isolated boss phases unless your spell already has strong boss uptime.
+
+<h2 id="plasma">
+  Plasma: Fire + Lightning burst damage
+</h2>
+
+Plasma is the classic burst combo:
+
+**Fire + Lightning = Plasma**
+
+It is strongest when the spell already has good uptime. Solar Pulse, Rune Burst, Scepter Mesh, Aether Beam, and other frequent-hit spells can turn Plasma into a strong boss and elite damage route.
+
+Take Plasma when:
+
+- your spell hits often,
+- you already have cast speed,
+- you need burst damage,
+- bosses are not dying fast enough,
+- your build does not need Acid shred or Ice control more.
+
+Plasma is excellent. It is just not the only best answer.
+
+<h2 id="thunder">
+  Thunder: Lightning + Lightning impact damage
+</h2>
+
+Thunder is the double-Lightning route:
+
+**Lightning + Lightning = Thunder**
+
+If Lightning is the safest first infusion, Thunder is what happens when you double down on that plan. It is best when you want bigger impact damage without changing into Fire, Acid, Ice, or Dark utility.
+
+Take Thunder when:
+
+- your first Lightning infusion already feels good,
+- you want stronger front-loaded hits,
+- your spell lands reliably,
+- you do not need Acid resistance reduction,
+- your team already has Fire, Acid, or Ice covered.
+
+Do not force Thunder just because Lightning is S-tier. If elites are too tanky, Acid or Flux may solve more. If the horde is collapsing on you, Ice or Brimstone may be better.
+
+<h2 id="wildfire">
+  Wildfire: Fire + Fire, not a base element
+</h2>
+
+Wildfire is an advanced Fire route:
+
+**Fire + Fire = Wildfire**
+
+It should not be treated like a sixth base element. The base element is Fire. Wildfire is what Fire becomes when you double down on it.
+
+Take Wildfire when:
+
+- you already have Fire,
+- you can scale critical damage,
+- enemies are dense,
+- your spell hits many targets,
+- you are playing Solar Pulse or another AoE-heavy build.
+
+Do not take Wildfire when the run urgently needs Acid resistance reduction, Ice control, or Plasma burst.
+
+<h2 id="ice">
+  Ice: control, not vulnerability
+</h2>
+
+Ice is for control.
+
+It can slow and freeze enemies, which gives you time to reposition, revive teammates, finish objectives, or keep enemies away from a fragile damage build. The important correction is this: **Acid is the element that reduces resistance. Ice is the element that buys time.**
+
+Use Ice when:
+
+- the horde is closing too fast,
+- you need space,
+- your team needs safer revives,
+- objectives are getting messy,
+- your build already has enough damage.
+
+Avoid overusing Ice if your team wants enemies to stay inside Solar Pulse, Scepter Mesh, Brimstone, or other damage zones.
+
+<h2 id="dark">
+  Dark, Hellfire, Void, Blight, and Wither
+</h2>
+
+Dark is the most plan-dependent base element.
+
+It becomes strong when your build is intentionally about corruption. It feels weak when you take it randomly without supporting the route.
+
+Dark routes include:
+
+- **Hellfire**: Dark + Fire.
+- **Void**: Dark + Dark.
+- **Blight**: Dark + Acid.
+- **Wither**: Dark + Ice.
+
+Use Dark when your build or team is coordinating corruption. If you are solo and underbuilt, Lightning or Acid is usually safer.
+
+<h2 id="best-elements-by-wizard">
+  Best element by wizard
+</h2>
+
+This is the quick answer for player searches like “best element for Reginald” or “best element for Sun Mage.”
+
+<GuideTable
+  caption="Best elements by wizard and signature spell."
+  columns={wizardColumns}
+  rows={wizardRows}
+/>
+
+<GuideCallout title="Wizard rule">
+Look at the spell's hit pattern first. Multi-hit spells love Acid. Large AoE spells love Fire, Wildfire, Lightning, or Plasma. Control builds use Ice. Corruption builds need Dark on purpose.
+</GuideCallout>
+
+<h2 id="best-spells">
+  Best spells to infuse first
+</h2>
+
+The best spell to infuse first is the spell that benefits most from reaching its first and second infusion quickly.
+
+<GuideTable
+  caption="Best spells to infuse first in The Spell Brigade."
+  columns={spellColumns}
+  rows={spellRows}
+/>
+
+<h2 id="scepter-mesh">
+  Scepter Mesh: why players underrate it
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-spells-elements-scepter-mesh-plasma.webp"
+    alt="The Spell Brigade Scepter Mesh new spell card next to Solar Pulse Plasma infusion."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scepter Mesh looks defensive at first, but the right infusion turns its walls into a damage zone.
+  </figcaption>
+</figure>
+
+Scepter Mesh is easy to underrate because it does not look like a normal damage spell. It creates walls, so new players often treat it like a panic button instead of a build core.
+
+The trick is that enemies walk through the walls. That means any element with repeated contact value becomes much stronger.
+
+Use these routes:
+
+- **Lightning / Plasma** if you want the walls to become a damage grinder.
+- **Acid / Flux** if enemies are tanky and you want the walls to help reduce resistance.
+- **Ice** if your team needs space and safer repositioning.
+- **Fire / Brimstone** if enemies are grouped and you want more splash pressure.
+
+A simple Scepter Mesh route is:
+
+**Scepter Mesh → Lightning or Acid → spell size → cast speed → second infusion → objective augments**
+
+The biggest mistake is taking Scepter Mesh and then not building around it. If the walls are small, slow, and under-infused, the spell feels passive. If the walls are large, fast, and infused correctly, they become arena control plus damage.
+
+<h2 id="coop-templates">
+  Best co-op element templates
+</h2>
+
+In co-op, the best element is not always the best solo element. A good team wants coverage.
+
+<GuideTable
+  caption="4-player element templates for The Spell Brigade co-op."
+  columns={coopColumns}
+  rows={coopRows}
+/>
+
+The safest 4-player setup is:
+
+**Lightning DPS + Acid shred + Fire / Wildfire clear + Ice or support**
+
+That gives the team consistent damage, resistance reduction, wave clear, and emergency control.
+
+<h2 id="common-mistakes">
+  Common spell and element mistakes
+</h2>
+
+<GuideTable
+  caption="Common The Spell Brigade spell and element mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="recommended-learning-order">
+  Recommended learning order for new players
+</h2>
+
+If you are new to The Spell Brigade, do not try to learn every element route at once. Learn them in the order that teaches the most useful habits first.
+
+1. **Start with Lightning.**  
+   Lightning is the safest first infusion because it works on almost any spell and does not require a perfect build.
+
+2. **Try Acid on Astral Orbs or Moonerang.**  
+   Acid teaches you how resistance reduction works. Multi-hit spells make the lesson obvious because enemies start dying faster after repeated hits.
+
+3. **Build Fire into Plasma.**  
+   Fire + Lightning teaches you why the second infusion matters. Plasma is a great way to understand burst damage and high-uptime spells.
+
+4. **Try Acid + Fire for Brimstone.**  
+   Brimstone teaches you how Acid can become wave clear instead of only boss shred.
+
+5. **Try Fire + Fire for Wildfire.**  
+   Wildfire teaches you how advanced Fire routes scale with crit ticks, dense packs, and repeated damage.
+
+6. **Use Ice when damage is not the problem.**  
+   Ice teaches control. Pick it when you need space, safer revives, or objective control.
+
+7. **Try Dark last.**  
+   Dark is powerful only when you understand corruption routes. Do not use it as a random filler element.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best element in The Spell Brigade?
+
+Lightning is the safest general element. Acid is usually the best answer when bosses or elites live too long. Plasma is strong for burst, but it is not always better than Acid, Flux, or Corrosion.
+
+### Is Acid good with Astral Orbs and Moonerang?
+
+Yes. Acid is excellent on multi-hit spells such as Astral Orbs and Moonerang because repeated hits can apply resistance-reduction value much more often.
+
+### What is the difference between Flux and Corrosion?
+
+Flux is Lightning + Acid, so it keeps Lightning pressure while adding Acid utility. Corrosion is Acid + Acid, so it is the full Acid route for resistance reduction and safer elite / boss fights.
+
+### Is Wildfire a base element?
+
+No. Wildfire is Fire + Fire. It is an advanced Fire infusion, not a base element.
+
+### Does Ice make enemies take more damage?
+
+Ice is mainly control: slow, freeze, and space. Acid is the element that reduces resistance and makes enemies take more damage from all sources.
+
+### What is Thunder?
+
+Thunder is Lightning + Lightning. It is the double-Lightning route for stronger impact damage.
+
+### What is Plasma?
+
+Plasma is Fire + Lightning. It is a strong burst route for spells with good uptime, such as Solar Pulse or Scepter Mesh.
+
+### What is Brimstone?
+
+Brimstone is Acid + Fire. Its initial hit inflicts splash damage on nearby enemies, making it strong against clustered packs.
+
+### Are advanced infusions guaranteed?
+
+No. You need the spell to reach the right level and you need the correct element options to appear. Rerolls help, but you should not assume every run will offer the exact route you want.
+
+### What element should beginners learn first?
+
+Start with Lightning, then learn Acid, Plasma, Brimstone, Wildfire, Ice, and Dark in that order. See the <Link href="#recommended-learning-order">recommended learning order</Link>.
+
+### What should I read next?
+
+Read the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> if you want full build routes. Read the <Link href="/the-spell-brigade/solo-guide">Solo Guide</Link> if you mostly play alone, or the <Link href="/the-spell-brigade/gold-farm">Gold Farm Guide</Link> if you want faster progression.

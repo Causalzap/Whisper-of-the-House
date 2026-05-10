@@ -1,0 +1,915 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const systemColumns = [
+  { key: "system", label: "System" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "playerUse", label: "Player Use" },
+];
+
+export const systemRows = [
+  {
+    system: "Covenants",
+    whatItDoes:
+      "Add run-shaping restrictions or modifiers before the mission starts.",
+    playerUse:
+      "Use them when the restriction supports your goal, such as one-spell scaling, Devotion farming, or controlled challenge routing.",
+  },
+  {
+    system: "Trial Covenants",
+    whatItDoes:
+      "Harder Covenant modifiers that add Devotion and change how the run must be built.",
+    playerUse:
+      "Use them when the route can survive the modifier long enough for Devotion progress to matter.",
+  },
+  {
+    system: "Devotion",
+    whatItDoes:
+      "A value tied to Trial Covenant difficulty and ascension-style progression.",
+    playerUse:
+      "Increase Devotion gradually. Do not stack high Devotion if the run cannot consistently reach its goal.",
+  },
+  {
+    system: "Masteries",
+    whatItDoes:
+      "Advanced build-defining passive bonuses that push a specific stat, spell behavior, or route direction.",
+    playerUse:
+      "Pick Masteries that match the spell identity: spell size for aura, cast speed for high-frequency spells, pickup support for long farms.",
+  },
+  {
+    system: "Enchantments",
+    whatItDoes:
+      "General lobby progression upgrades that improve baseline account power.",
+    playerUse:
+      "Treat Enchantments as broad account strength, while Masteries should be chosen around the exact build plan.",
+  },
+  {
+    system: "Banish",
+    whatItDoes:
+      "Removes unwanted upgrade options from future choices once unlocked.",
+    playerUse:
+      "Use it to protect focused builds from weak, irrelevant, or repeated dead offers.",
+  },
+  {
+    system: "Rerolls",
+    whatItDoes:
+      "Let you reroll bad offers, but may have a cost depending on your setup.",
+    playerUse:
+      "Spend rerolls when the next offer can change the run; conserve them when the current option is already good enough.",
+  },
+  {
+    system: "Ascension",
+    whatItDoes:
+      "Long-term wizard progression gained by playing that wizard and pushing deeper routes.",
+    playerUse:
+      "Farm ascension with stable long-run builds, especially one-spell routes that level quickly.",
+  },
+];
+
+export const masteryVsEnchantColumns = [
+  { key: "system", label: "System" },
+  { key: "scope", label: "Scope" },
+  { key: "howToThinkAboutIt", label: "How To Think About It" },
+];
+
+export const masteryVsEnchantRows = [
+  {
+    system: "Enchantments",
+    scope: "General account power",
+    howToThinkAboutIt:
+      "These are broad upgrades that make your roster stronger before the run starts.",
+  },
+  {
+    system: "Masteries",
+    scope: "Build-defining focus",
+    howToThinkAboutIt:
+      "These should match the spell plan. Spell Size Mastery belongs with Solar Pulse or Scepter Mesh, while Cast Speed belongs with high-frequency routes.",
+  },
+  {
+    system: "Covenants",
+    scope: "Run restriction and reward structure",
+    howToThinkAboutIt:
+      "These decide what the run is sacrificing in exchange for Devotion, challenge, or a more focused progression route.",
+  },
+  {
+    system: "Banish / Reroll",
+    scope: "Offer control inside the run",
+    howToThinkAboutIt:
+      "These do not make the account stronger by themselves. They help you force the build you already planned.",
+  },
+];
+
+export const covenantColumns = [
+  { key: "covenant", label: "Trial Covenant" },
+  { key: "effect", label: "Effect" },
+  { key: "stacking", label: "Stacking" },
+  { key: "counterplay", label: "Counterplay / Element Synergy" },
+];
+
+export const covenantRows = [
+  {
+    covenant: "Mana Drought",
+    effect: "Enemies drop less Mana when killed.",
+    stacking: "Scaling penalty",
+    counterplay:
+      "Use a compact build with strong early damage and pickup support. Because leveling is slower, avoid side spells that dilute the pool. Luck helps only after the run is already safe.",
+  },
+  {
+    covenant: "Purity",
+    effect: "Activated Enchantments are disabled.",
+    stacking: "Fixed restriction",
+    counterplay:
+      "Treat this as a raw-skill and base-spell check. Use wizards with strong starter spells, movement, and objective augments. Do not rely on lobby power to carry the opener.",
+  },
+  {
+    covenant: "Mortality",
+    effect: "Monsters can kill you in one hit. Environmental damage is handled separately.",
+    stacking: "Fixed restriction",
+    counterplay:
+      "Build like a no-hit run: movement, dodge, Ice control, long-range AoE, and safe pathing. Do not force objectives through dense lanes.",
+  },
+  {
+    covenant: "Abstinence",
+    effect: "You can equip fewer spells.",
+    stacking: "Can become stricter with stacks",
+    counterplay:
+      "Use true carry-spell routes and protect them with Banish / rerolls. Spell Size, cast speed, and pickup support matter more because one spell must solve damage, coverage, and safety.",
+  },
+  {
+    covenant: "Denial",
+    effect: "You get fewer upgrade choices on level up.",
+    stacking: "Can become stricter with stacks",
+    counterplay:
+      "Use Luck, Banish, rerolls, and low-dilution builds. Fewer choices make every bad side pick more punishing.",
+  },
+  {
+    covenant: "Torment",
+    effect: "Healing from sources is reduced.",
+    stacking: "Can become stricter with stacks",
+    counterplay:
+      "Shift from healing to prevention. Use dodge, Armor, movement, Ice control, ranged damage, and safer objectives instead of relying on recovery.",
+  },
+  {
+    covenant: "Onslaught",
+    effect: "Extra waves of enemies spawn during encounters.",
+    stacking: "Can become stricter with stacks",
+    counterplay:
+      "Solve screen density with AoE uptime, spell size, Plasma, Thunder, Acid, Ice, and movement. Plasma / Thunder help clear dense waves; Acid helps if enemies live too long.",
+  },
+  {
+    covenant: "Discipline",
+    effect: "You take damage when you level up.",
+    stacking: "Fixed damage pressure",
+    counterplay:
+      "Control pickup timing and avoid leveling during unsafe fights when possible. Add sustain, Armor, HP buffer, and movement before long loops.",
+  },
+];
+
+export const devotionColumns = [
+  { key: "concept", label: "Concept" },
+  { key: "meaning", label: "Meaning" },
+  { key: "routingRule", label: "Routing Rule" },
+];
+
+export const devotionRows = [
+  {
+    concept: "Stacks",
+    meaning:
+      "Some Trial Covenants increase in severity with each stack, such as Abstinence, Denial, Torment, and Onslaught.",
+    routingRule:
+      "Do not add another stack until you know exactly what the previous stack changed in your run.",
+  },
+  {
+    concept: "Devotion",
+    meaning:
+      "Higher Trial Covenant difficulty contributes to Devotion and long-term progression goals.",
+    routingRule:
+      "Devotion is only valuable if the run survives long enough to cash out progress.",
+  },
+  {
+    concept: "Unlock gates",
+    meaning:
+      "Some Trial Covenants require specific ascensions, maps, Hardcore clears, or minimum Devotion values.",
+    routingRule:
+      "Route unlocks separately from farming. Do not combine your first unlock attempt with a fragile achievement route.",
+  },
+  {
+    concept: "Stack planning",
+    meaning:
+      "A stacked Covenant can change the value of stats, spells, elements, and objectives.",
+    routingRule:
+      "Add one difficulty layer at a time, then adjust Mastery, spell, and element priorities around the new problem.",
+  },
+];
+
+export const masteryColumns = [
+  { key: "mastery", label: "Mastery Focus" },
+  { key: "bestWith", label: "Best With" },
+  { key: "why", label: "Why It Works" },
+];
+
+export const masteryRows = [
+  {
+    mastery: "Spell Size",
+    bestWith: "Solar Pulse, Scepter Mesh, AoE builds, aura farming",
+    why:
+      "Bigger spells hit while you move, cover objectives, and make one-spell routes more stable.",
+  },
+  {
+    mastery: "Cast Speed / Cooldown",
+    bestWith: "Aether Beam, Falling Stars, Cardinal Runes, Solar Pulse",
+    why:
+      "More casts means more hits, faster elemental application, more healing triggers, and better long-run scaling.",
+  },
+  {
+    mastery: "Luck",
+    bestWith: "Long runs, Star Mage, one-spell builds, achievement routing",
+    why:
+      "Higher rarity choices make it easier to see build-defining upgrades, legendary cast speed, and rare stat spikes.",
+  },
+  {
+    mastery: "Pickup Range / Mana Pull",
+    bestWith: "Long loops, farming, ascension grind, aura routes",
+    why:
+      "Mana left on the ground slows level flow. Pickup support keeps the build scaling.",
+  },
+  {
+    mastery: "Movement",
+    bestWith: "Hardcore, Mortality, solo, boss routes, objective routing",
+    why:
+      "Movement turns bad positions into survivable ones and helps you keep objectives safe.",
+  },
+  {
+    mastery: "Banish / Offer Control",
+    bestWith: "One-spell builds, achievement farms, specific infusion routes",
+    why:
+      "Removing dead options keeps the upgrade pool cleaner and helps you find the route you actually need.",
+  },
+];
+
+export const rerollColumns = [
+  { key: "tool", label: "Tool" },
+  { key: "useWhen", label: "Use It When" },
+  { key: "avoidWhen", label: "Avoid It When" },
+];
+
+export const rerollRows = [
+  {
+    tool: "Reroll",
+    useWhen:
+      "The current choices do nothing for the build, or you need a specific infusion / spell-defining upgrade.",
+    avoidWhen:
+      "One option is already good enough and the reroll cost could hurt your run.",
+  },
+  {
+    tool: "Banish",
+    useWhen:
+      "A stat or offer keeps appearing but does not help your route, such as irrelevant side-spell scaling in a one-spell farm.",
+    avoidWhen:
+      "You are not sure whether the option will matter later.",
+  },
+  {
+    tool: "Pin / Lock-style planning",
+    useWhen:
+      "You see a key offer that you cannot take yet, but the run needs it later.",
+    avoidWhen:
+      "The pinned option is only nice-to-have and blocks more important decisions.",
+  },
+  {
+    tool: "Luck stacking",
+    useWhen:
+      "The run has enough safety and wants higher rarity offers over time.",
+    avoidWhen:
+      "The build is dying right now and needs immediate damage, movement, or sustain.",
+  },
+];
+
+export const buildColumns = [
+  { key: "route", label: "Progression Route" },
+  { key: "bestSetup", label: "Best Setup" },
+  { key: "priority", label: "Priority" },
+  { key: "warning", label: "Warning" },
+];
+
+export const buildRows = [
+  {
+    route: "Abstinence / one-spell ascension",
+    bestSetup:
+      "Solar Pulse, Falling Stars, Aether Beam, Scepter Mesh, or another spell that can clear and protect objectives by itself",
+    priority:
+      "Spell size, cast speed, Luck, pickup range, crit healing, movement",
+    warning:
+      "Do not go one-spell with a weak spell that cannot cover enemies or objectives.",
+  },
+  {
+    route: "Falling Stars ascension / cast farm",
+    bestSetup:
+      "Star Mage, Falling Stars focus, Luck, cooldown, projectile augments",
+    priority:
+      "Cooldown, cast speed, spell levels, projectile upgrades, survival",
+    warning:
+      "Splitting upgrades too early delays the spell that is supposed to carry.",
+  },
+  {
+    route: "Aether Beam high-frequency route",
+    bestSetup:
+      "Aldric or ascended route with Aether Beam, cast speed, extra beam augments",
+    priority:
+      "Cast speed, cooldown, Lightning, beam augments, crit damage",
+    warning:
+      "Needs the right augments before it feels broken.",
+  },
+  {
+    route: "Scepter Mesh control route",
+    bestSetup:
+      "Scepter Mesh, Lightning or Plasma, spell size, cast speed",
+    priority:
+      "Spell size, cast speed, infusion, objective augments",
+    warning:
+      "Unsupported walls feel passive; build it as a damage zone.",
+  },
+  {
+    route: "High-Devotion Hardcore route",
+    bestSetup:
+      "Safe AoE build, movement, dodge, sustain, careful objective decisions",
+    priority:
+      "Movement, dodge, sustain, AoE uptime, portal discipline",
+    warning:
+      "Devotion does not matter if the run dies before it pays out.",
+  },
+];
+
+export const phaseColumns = [
+  { key: "phase", label: "Phase" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const phaseRows = [
+  {
+    phase: "Before run",
+    goal: "Choose the system goal",
+    whatToDo:
+      "Decide whether the run is for ascension, mastery testing, covenant progress, gold, achievements, or build discovery.",
+  },
+  {
+    phase: "Opening",
+    goal: "Get the core spell online",
+    whatToDo:
+      "Push the spell that matches your covenant or mastery. Do not dilute the route with random side spells.",
+  },
+  {
+    phase: "First infusion",
+    goal: "Lock the build direction",
+    whatToDo:
+      "Use rerolls only if the current infusion choices fail the route.",
+  },
+  {
+    phase: "Mid run",
+    goal: "Control the upgrade pool",
+    whatToDo:
+      "Use objectives for augments, take Luck when safe, and use Banish on options that do not fit the route.",
+  },
+  {
+    phase: "Loop / ascension farm",
+    goal: "Maintain Mana flow",
+    whatToDo:
+      "Add pickup range, movement, sustain, and enough cast speed so the build keeps leveling.",
+  },
+  {
+    phase: "Cash out",
+    goal: "Preserve progress",
+    whatToDo:
+      "End or portal out when the build stops scaling, objectives become unsafe, or the run already achieved its goal.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Progression Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Stacking Trial Covenants during a fragile achievement attempt",
+    whyItHurts:
+      "A Hardcore, no-potion, boss precision, or specific objective route can fail before Devotion ever matters.",
+    betterPlay:
+      "Separate first-time Covenant unlocks from fragile achievement routes.",
+  },
+  {
+    mistake: "Using Abstinence with the wrong spell",
+    whyItHurts:
+      "If the spell cannot clear, scale, or protect objectives, the restriction becomes a trap.",
+    betterPlay:
+      "Start with Solar Pulse, Falling Stars, Aether Beam, Scepter Mesh, or another spell with real screen coverage.",
+  },
+  {
+    mistake: "Treating Mastery as a generic stat boost",
+    whyItHurts:
+      "The wrong Mastery can make a strong build feel unfocused.",
+    betterPlay:
+      "Match Mastery to spell identity: size for aura, cooldown for high-frequency spells, pickup for long loops.",
+  },
+  {
+    mistake: "Spending rerolls just because an option is imperfect",
+    whyItHurts:
+      "Rerolls are most valuable when they protect a specific route.",
+    betterPlay:
+      "Reroll dead choices; accept good-enough choices that keep the build alive.",
+  },
+  {
+    mistake: "Ignoring Banish after unlocking it",
+    whyItHurts:
+      "Bad offers keep polluting the pool and delay key upgrades.",
+    betterPlay:
+      "Banish options that repeatedly hurt your route, especially in one-spell or achievement farms.",
+  },
+  {
+    mistake: "Looping forever after the goal is already done",
+    whyItHurts:
+      "Longer does not always mean more efficient, especially if pickup flow, kill speed, or safety drops.",
+    betterPlay:
+      "Cash out when the run already delivered ascension, gold, objective, or build-testing value.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Trial Covenants, Masteries, Enchantments, Banish, rerolls, and Ascension are the systems that turn The Spell Brigade from “good run” into “planned run.”**
+
+Use **Enchantments** for broad account power. Use **Masteries** to support a specific build identity, such as spell size for Solar Pulse or cast speed for high-frequency spells. Use **Trial Covenants** when the Devotion reward is worth the restriction. Use **Banish** and rerolls to protect focused builds from bad offers.
+
+The simple rule:
+
+**Pick the progression goal before the run starts. Then choose the covenant, mastery, spell, and offer-control tools that serve that goal.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-progression-trial-covenants-devotion.webp"
+    alt="The Spell Brigade Trial Covenant screen showing Devotion and covenant choices."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Trial Covenants are not just difficulty toggles. They shape Devotion, ascension pacing, and how risky the run becomes.
+  </figcaption>
+</figure>
+
+<h2 id="systems-overview">
+  Covenants, Masteries, Banish, and Ascension explained
+</h2>
+
+These systems solve different problems. Do not treat them as one generic progression menu.
+
+<GuideTable
+  caption="The Spell Brigade progression systems explained."
+  columns={systemColumns}
+  rows={systemRows}
+/>
+
+<GuideCallout title="Progression rule">
+Do not pick a Covenant or Mastery because it sounds strong in isolation. Pick it because it supports the run you are actually trying to build.
+</GuideCallout>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="masteries-vs-enchantments">
+  Masteries vs Enchantments
+</h2>
+
+Masteries and Enchantments are related, but they should not be planned the same way.
+
+<GuideTable
+  caption="Masteries, Enchantments, Covenants, and offer-control tools compared."
+  columns={masteryVsEnchantColumns}
+  rows={masteryVsEnchantRows}
+/>
+
+Use **Enchantments** to raise baseline power. Use **Masteries** to decide what kind of run this is going to be. A Solar Pulse run wants different Mastery support from a Falling Stars run, and both want different offer control from a high-Devotion Trial Covenant route.
+
+<h2 id="trial-covenants">
+  Trial Covenants and Devotion
+</h2>
+
+Trial Covenants increase difficulty and push Devotion-related progression, but every Covenant changes the run in a different way. Some slow your leveling, some reduce choices, some punish healing, and some turn the game into a near no-hit challenge.
+
+Because unlock conditions can change with patches and should be checked in-game, this table focuses on the part that matters during the run: **what the Covenant does and how to build around it.**
+
+<GuideTable
+  caption="Trial Covenants, effects, stacking pressure, and counterplay."
+  columns={covenantColumns}
+  rows={covenantRows}
+/>
+
+<GuideCallout title="Trial Covenant rule">
+A Trial Covenant is only good if the run survives long enough for the Devotion value to matter.
+</GuideCallout>
+
+<h2 id="devotion-and-stacks">
+  Devotion, stacks, and unlock planning
+</h2>
+
+The important detail is that some Covenants are not just on/off modifiers. Several of them scale with stacks, which means the same Covenant can move from manageable to run-breaking once you add another layer.
+
+<GuideTable
+  caption="How Devotion and Covenant stacking affect routing."
+  columns={devotionColumns}
+  rows={devotionRows}
+/>
+
+Do not unlock, stack, and farm with the same mindset. Unlocking a Covenant is a goal. Stacking it is a challenge. Farming with it is a route. Treat those as separate phases.
+
+<h2 id="one-spell-covenant">
+  Abstinence and one-spell covenant routes
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-solar-pulse-aura-setup.webp"
+    alt="The Spell Brigade Solar Pulse one-spell covenant setup with spell size mastery."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Abstinence-style routes work best when the chosen spell can clear, scale, and protect the player by itself.
+  </figcaption>
+</figure>
+
+Abstinence is the cleanest example of how Covenants and Masteries work together.
+
+The setup is simple:
+
+**Pick one carry spell → use a Mastery that strengthens that spell → funnel upgrades into it → use rerolls / Banish to protect the route.**
+
+The key question is not “is one-spell strong?” The key question is whether the chosen spell can handle three jobs by itself:
+
+- clear enemies,
+- protect your movement path,
+- complete objectives safely.
+
+If it cannot do all three, the Covenant turns from a focused route into a trap.
+
+<h2 id="masteries">
+  Best Masteries by build type
+</h2>
+
+Masteries are strongest when they match the way your spell actually wins.
+
+<GuideTable
+  caption="Best Mastery focus by build type."
+  columns={masteryColumns}
+  rows={masteryRows}
+/>
+
+<h2 id="mastery-spell-size">
+  Spell Size Mastery and aura scaling
+</h2>
+
+Spell Size Mastery is one of the easiest masteries to understand because you can see the payoff immediately.
+
+It is best with:
+
+- Solar Pulse,
+- Scepter Mesh,
+- AoE-heavy builds,
+- objective control,
+- one-spell aura routes,
+- long-run farming.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-progression-loop-scaling.webp"
+    alt="The Spell Brigade long-loop Solar Pulse build showing huge aura coverage from mastery and scaling."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Spell Size Mastery turns coverage into safety. Once the spell covers enough space, enemies walk into your damage before they can touch you.
+  </figcaption>
+</figure>
+
+This is why spell size is not just a damage stat. It is also safety, objective control, boss uptime, pickup routing, and co-op space control.
+
+<h2 id="reroll-banish">
+  Rerolls, Banish, and offer control
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-progression-rerolls-cost-hp.webp"
+    alt="The Spell Brigade reroll choice showing how rerolls can carry a cost depending on the run setup."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Rerolls are not free value. Use them when they protect the route, not just because the current offer is imperfect.
+  </figcaption>
+</figure>
+
+Rerolls and Banish are not the same tool.
+
+Reroll is for finding a better offer right now.  
+Banish is for making future offers cleaner.
+
+<GuideTable
+  caption="When to use rerolls, Banish, and offer control."
+  columns={rerollColumns}
+  rows={rerollRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-progression-banish-unlocked.webp"
+    alt="The Spell Brigade Banish tool unlocked and used to remove an unwanted upgrade option."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Banish is strongest in focused builds because one bad repeated option can waste multiple level-up screens.
+  </figcaption>
+</figure>
+
+In one-spell builds, Banish is especially strong because you already know what the run does not want.
+
+<h2 id="luck-and-rarity">
+  Luck, rarity, and scroll choices
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-progression-luck-reroll-scroll.webp"
+    alt="The Spell Brigade scroll and reroll choice showing Luck and offer quality planning."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Luck is not a flashy stat, but long runs can turn better offer quality into better scaling.
+  </figcaption>
+</figure>
+
+Luck matters most when the run will last long enough for offer quality to compound.
+
+Take Luck when:
+
+- the build is already safe,
+- you are farming a long loop,
+- you need legendary or rare upgrades,
+- you are trying to hit a specific augment or spell route,
+- your wizard or mastery already supports scaling.
+
+Skip Luck when:
+
+- you are dying now,
+- the boss is coming and your damage is too low,
+- your movement is failing,
+- your main spell is not online yet.
+
+<h2 id="objectives-and-augments">
+  Objectives and augments are part of progression
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-objectives-augments.webp"
+    alt="The Spell Brigade objective and augmentation screen showing how objectives unlock build-changing augments."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Objectives are not only for achievements. They unlock augments that can turn a normal spell into the core of a progression route.
+  </figcaption>
+</figure>
+
+Covenants and Masteries give you the plan before the run. Objectives and augments give you the power inside the run.
+
+Do objectives when:
+
+- your build is stable,
+- the objective is nearby,
+- the reward can unlock the next augment,
+- you need +1 Projectile, extra beams, split, healing, or spell behavior changes.
+
+Skip objectives when:
+
+- the run is already unstable,
+- the Covenant restriction makes the area too dangerous,
+- a Hardcore portal is the safer decision,
+- the objective would break the run goal.
+
+<h2 id="level-pacing">
+  Level pacing and upgrade pool dilution
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-level-15-rng-pool.webp"
+    alt="The Spell Brigade upgrade screen used to explain upgrade pool dilution after level 15."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Focused Covenant and Mastery routes can fail when the upgrade pool becomes too diluted before the key offer appears.
+  </figcaption>
+</figure>
+
+For normal clears, leveling quickly is usually good. For Covenant and Mastery routes, the goal is more specific: reach the right offers before the pool becomes too noisy.
+
+This matters most when you are:
+
+- playing **Abstinence** and need one spell to carry the run,
+- playing **Denial** and every upgrade choice matters more,
+- playing **Mana Drought** and slower leveling makes bad choices more expensive,
+- forcing one specific infusion,
+- building around one Mastery instead of collecting random side power.
+
+Do not slow down leveling on purpose unless the route needs precision. The real rule is:
+
+**Level fast for power. Keep the pool compact for precision.**
+
+<h2 id="ascension-farming">
+  Ascension farming and pickup flow
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-progression-ascension-points.webp"
+    alt="The Spell Brigade long run where the player expects gold and ascension points from a stable Sun Mage route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ascension farming rewards stable long runs more than greedy unstable routes.
+  </figcaption>
+</figure>
+
+Ascension farming is different from normal clearing. You are not only trying to win the run. You are trying to get consistent wizard progress without wasting time.
+
+The best ascension routes usually have:
+
+- one strong carry spell,
+- a Mastery that supports that spell,
+- a Covenant that increases progress without killing the run,
+- enough pickup range to keep leveling,
+- enough movement to survive loops,
+- enough sustain to avoid random deaths.
+
+A build can kill the whole screen and still scale badly if it cannot collect Mana. Pickup range is not a comfort stat. In long progression runs, it is part of the engine.
+
+<h2 id="progression-builds">
+  Best builds for Masteries, Covenants, and Ascension
+</h2>
+
+<GuideTable
+  caption="Best progression routes for Masteries, Covenants, and Ascension."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+<h2 id="run-plan">
+  Progression run plan
+</h2>
+
+Use this structure for any Covenant, Mastery, or ascension-focused run.
+
+<GuideTable
+  caption="The Spell Brigade progression run plan."
+  columns={phaseColumns}
+  rows={phaseRows}
+/>
+
+<h2 id="final-stats">
+  What a successful progression run looks like
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-achievements-long-run-stats.webp"
+    alt="The Spell Brigade long run final stats showing objectives completed, gold earned, wizard rank, and massive Solar Pulse damage."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A strong progression run converts time into multiple rewards: rank, gold, objectives, spell scaling, and long-term account progress.
+  </figcaption>
+</figure>
+
+A good progression run usually has more than one payoff:
+
+- wizard rank,
+- ascension progress,
+- gold,
+- objectives,
+- spell unlock progress,
+- Mastery testing,
+- Covenant testing,
+- build knowledge.
+
+That is why long-run screenshots matter. They show whether the system choices actually converted into progress.
+
+<h2 id="common-mistakes">
+  Common progression mistakes
+</h2>
+
+<GuideTable
+  caption="Common The Spell Brigade progression mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="recommended-progression-order">
+  Recommended progression order
+</h2>
+
+Use this order if you are still building your account:
+
+1. **Stabilize normal clears.**  
+   Do not stack hard Covenants before you can finish normal runs.
+
+2. **Separate Enchantments from Mastery planning.**  
+   Enchantments raise your floor. Masteries decide the build identity.
+
+3. **Pick one reliable Mastery route.**  
+   Spell Size with Solar Pulse is the easiest example.
+
+4. **Learn Abstinence / one-spell routing.**  
+   Use a spell that can actually carry the screen.
+
+5. **Unlock and use offer control.**  
+   Rerolls and Banish make focused builds much easier to force.
+
+6. **Unlock Trial Covenants one at a time.**  
+   Learn what each restriction changes before stacking it.
+
+7. **Use objectives for augments.**  
+   Build-changing augments are part of progression, not optional fluff.
+
+8. **Farm ascension with long stable loops.**  
+   Use pickup range, movement, sustain, and one-spell scaling.
+
+9. **Cash out when the run has done its job.**  
+   A clean completed progression run is better than a greedy dead one.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What do Trial Covenants do?
+
+Trial Covenants add difficult run modifiers in exchange for Devotion and progression value. Each one changes the run differently, such as reducing Mana drops, disabling Enchantments, reducing upgrade choices, reducing healing, or adding extra enemy waves.
+
+### What is Devotion?
+
+Devotion is tied to Trial Covenant difficulty and long-term progression. Higher Devotion is useful when you are intentionally farming ascension-style progress, but it is not worth dying early for.
+
+### Do Trial Covenants stack?
+
+Some do. Abstinence, Denial, Torment, and Onslaught explicitly become more severe with stacks. Add stacks slowly and adjust your build around the new pressure.
+
+### What is the difference between Masteries and Enchantments?
+
+Enchantments are broad account upgrades. Masteries are build-defining passive focuses. Treat Enchantments as baseline power and Masteries as the thing that tells your run what it wants to become.
+
+### What is the best Covenant for ascension farming?
+
+Abstinence / one-spell routing is the easiest route to recommend when the chosen spell has strong AoE coverage. Solar Pulse is the safest starting example.
+
+### Should I use rerolls aggressively?
+
+Use rerolls when the current choices do nothing for the build or when you need a specific infusion. Do not reroll every imperfect offer.
+
+### When should I use Banish?
+
+Use Banish when an offer repeatedly appears but does not help your route. It is especially strong in one-spell, Denial, and achievement-focused builds.
+
+### Does Luck help progression?
+
+Yes, especially in long runs. Luck helps you see better rarity offers, but it should not replace immediate survival, damage, or movement when the run is unstable.
+
+### Why does pickup range matter for ascension farming?
+
+Long runs create more Mana than you can collect automatically. If Mana stays outside pickup range, your level flow slows down and the build stops scaling efficiently.
+
+### Is Prestige the same as Ascension?
+
+Players may use “prestige” loosely, but the current in-game progression language is better described through wizard rank, Devotion, Covenants, Masteries, outfits, and Ascension. Use the in-game term when naming the system.
+
+### What should I read next?
+
+Read the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> for build routes, the <Link href="/the-spell-brigade/gold-farm">Gold Farm Guide</Link> for Bounty and gold progression, or the <Link href="/the-spell-brigade/achievements-guide">Achievements Guide</Link> if you are using Covenants for specific unlocks.

@@ -1,0 +1,941 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const sourceColumns = [
+  { key: "source", label: "Gold Source" },
+  { key: "howItWorks", label: "How It Works" },
+  { key: "farmImpact", label: "Farm Impact" },
+];
+
+export const sourceRows = [
+  {
+    source: "Objectives",
+    howItWorks:
+      "Gold is awarded after the run based partly on completed objectives. With Bounty, objective rewards become much stronger.",
+    farmImpact:
+      "This is the most important source to optimize. Fast objective clears usually beat long unfocused runs.",
+  },
+  {
+    source: "Enemy kills",
+    howItWorks:
+      "Kills contribute to the final post-run payout. They do not drop gold on the ground in real time.",
+    farmImpact:
+      "Clear speed matters, but only if you can keep killing efficiently.",
+  },
+  {
+    source: "Run completion",
+    howItWorks:
+      "Finishing the run improves the final reward compared with dying early.",
+    farmImpact:
+      "A safe completed run often beats a greedy failed loop.",
+  },
+  {
+    source: "Bounty",
+    howItWorks:
+      "Bounty gives extra gold income and greatly improves objective rewards once unlocked.",
+    farmImpact:
+      "This is the key gold-farming upgrade to build around.",
+  },
+  {
+    source: "Greed and breakables",
+    howItWorks:
+      "Greed improves gold from crates, boxes, and other destructible objects.",
+    farmImpact:
+      "Not the whole farm by itself, but small map pickups add up over repeated runs.",
+  },
+  {
+    source: "Contracts",
+    howItWorks:
+      "A random wizard can receive a contract bonus. Running that wizard can give extra gold.",
+    farmImpact:
+      "Free value if the contracted wizard can clear efficiently.",
+  },
+];
+
+export const benchmarkColumns = [
+  { key: "setup", label: "Setup" },
+  { key: "expectedGold", label: "Expected Gold" },
+  { key: "notes", label: "Notes" },
+];
+
+export const benchmarkRows = [
+  {
+    setup: "Normal clear without focused gold setup",
+    expectedGold: "About 500-550 gold",
+    notes:
+      "A reasonable baseline if you finish the run and complete some objectives.",
+  },
+  {
+    setup: "Optimized Bounty objective run",
+    expectedGold: "About 800-850 gold",
+    notes:
+      "A realistic target when Bounty is active and objectives are cleared efficiently.",
+  },
+  {
+    setup: "Long loop / aura farm",
+    expectedGold: "Varies heavily",
+    notes:
+      "Can produce large totals, but gold per minute can drop if enemies become damage sponges.",
+  },
+  {
+    setup: "Contract run",
+    expectedGold: "Varies by contract and wizard",
+    notes:
+      "Worth checking before each run because it can be free extra gold.",
+  },
+];
+
+export const methodColumns = [
+  { key: "method", label: "Farm Method" },
+  { key: "bestFor", label: "Best For" },
+  { key: "corePlan", label: "Core Plan" },
+  { key: "risk", label: "Main Risk" },
+];
+
+export const methodRows = [
+  {
+    method: "Bounty Objective Runs",
+    bestFor: "Best general gold farming",
+    corePlan:
+      "Unlock Bounty, refund early rows if needed, invest into Bounty, then run fast objective-focused clears.",
+    risk:
+      "Forgetting to respec into Bounty before farming.",
+  },
+  {
+    method: "25-30 Minute Fast Runs",
+    bestFor: "Gold per minute",
+    corePlan:
+      "Clear objectives, maintain kill speed, finish the run, and reset before enemies become too tanky.",
+    risk:
+      "Overstaying into inefficient late loops.",
+  },
+  {
+    method: "Solar Pulse Aura Farm",
+    bestFor: "Solo farming, long loops, safe scaling",
+    corePlan:
+      "Use Sun Mage, Solar Pulse, spell size, cast speed, Luck, sustain, and a one-spell route if available.",
+    risk:
+      "Greeding too hard without movement, sustain, or pickup range.",
+  },
+  {
+    method: "Greed + Breakables",
+    bestFor: "Extra gold during normal routes",
+    corePlan:
+      "Take Greed when it fits the run and break crates, boxes, and dense destructible clusters along your route.",
+    risk:
+      "Wasting too much time chasing small objects away from objectives.",
+  },
+  {
+    method: "Contract Bonus Runs",
+    bestFor: "Free bonus gold",
+    corePlan:
+      "Check the wizard tab before starting. If a contracted wizard can clear safely, use that wizard for the next run.",
+    risk:
+      "Forcing a weak wizard just for a bonus and lowering your clear speed.",
+  },
+  {
+    method: "One-Spell Ascension Farm",
+    bestFor: "Wizard rank, ascension, focused upgrade pools",
+    corePlan:
+      "Use a Solitary Focus-style setup to funnel upgrades into one strong starting spell and level faster.",
+    risk:
+      "Choosing a weak spell or running out of good infusion options.",
+  },
+  {
+    method: "Co-op Objective Farm",
+    bestFor: "Teams that can split tasks",
+    corePlan:
+      "Assign roles: one player clears, one handles objectives, one controls space, one supports or shreds bosses.",
+    risk:
+      "Friendly fire, over-splitting, or everyone chasing different goals.",
+  },
+];
+
+export const bountyColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const bountyRows = [
+  {
+    step: "1",
+    whatToDo:
+      "Unlock the first two rows of upgrades so the third row becomes available.",
+    why:
+      "Bounty sits in the third row, so you cannot build around it immediately.",
+  },
+  {
+    step: "2",
+    whatToDo:
+      "Unlock Bounty once it becomes available.",
+    why:
+      "Bounty is the dedicated gold-income upgrade and should become your farming priority.",
+  },
+  {
+    step: "3",
+    whatToDo:
+      "If your only goal is gold farming, refund earlier non-essential upgrades.",
+    why:
+      "You can move points into Bounty instead of spreading them across less relevant upgrades.",
+  },
+  {
+    step: "4",
+    whatToDo:
+      "Put your farming points into Bounty before starting gold runs.",
+    why:
+      "Bounty provides 25% extra gold and doubles objective reward gold.",
+  },
+  {
+    step: "5",
+    whatToDo:
+      "Run fast objective-focused clears instead of pure kill loops.",
+    why:
+      "Bounty makes completed objectives much more valuable.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "goldPriority", label: "Gold Priority" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const priorityRows = [
+  {
+    stage: "Before Bounty",
+    goldPriority: "Basic damage, survivability, and unlock path",
+    why:
+      "Your first goal is to reach the upgrade rows that unlock Bounty while still clearing runs.",
+  },
+  {
+    stage: "After Bounty unlock",
+    goldPriority: "Respec into Bounty for dedicated farming",
+    why:
+      "Bounty is the most direct gold-income upgrade and improves objective payout.",
+  },
+  {
+    stage: "Early progression",
+    goldPriority: "Useful enchantments and core upgrades",
+    why:
+      "Permanent upgrades make every later farm run safer and faster.",
+  },
+  {
+    stage: "Wizard unlocks",
+    goldPriority: "Buy wizards that unlock better farming or achievement routes",
+    why:
+      "New wizards give access to better starting spells and future build routes.",
+  },
+  {
+    stage: "Ascension / prestige",
+    goldPriority: "Save for expensive ascension costs",
+    why:
+      "Late-game progression can cost a lot of gold, so do not spend randomly.",
+  },
+];
+
+export const statColumns = [
+  { key: "stat", label: "Farm Stat" },
+  { key: "whyItHelps", label: "Why It Helps" },
+  { key: "bestWith", label: "Best With" },
+];
+
+export const statRows = [
+  {
+    stat: "Bounty",
+    whyItHelps:
+      "Directly increases gold income and doubles objective reward gold.",
+    bestWith:
+      "Fast objective runs, 25-30 minute clears, repeat farming",
+  },
+  {
+    stat: "Cast Speed",
+    whyItHelps:
+      "More hits means faster killing, more elemental applications, and better scaling.",
+    bestWith:
+      "Solar Pulse, Scepter Mesh, Falling Stars, Aether Beam, Rune Burst",
+  },
+  {
+    stat: "Spell Size",
+    whyItHelps:
+      "Bigger spells cover more enemies and make objectives safer.",
+    bestWith:
+      "Solar Pulse, Scepter Mesh, AoE builds, long loops",
+  },
+  {
+    stat: "Luck",
+    whyItHelps:
+      "Luck helps you see better rarity offers, which can snowball into stronger upgrades.",
+    bestWith:
+      "Long farms, Solar Pulse, Falling Stars, one-spell routes",
+  },
+  {
+    stat: "Move Speed",
+    whyItHelps:
+      "Movement keeps you alive while chasing objectives, avoiding bosses, and collecting XP.",
+    bestWith:
+      "Every farm route",
+  },
+  {
+    stat: "Pickup Range / Mana Pool",
+    whyItHelps:
+      "Pickup support keeps XP flow steady so your build continues leveling during long farms.",
+    bestWith:
+      "Aura farms, long loops, semi-AFK routes",
+  },
+  {
+    stat: "Greed",
+    whyItHelps:
+      "Improves gold gained from destructible objects such as crates and boxes.",
+    bestWith:
+      "Routes that naturally pass through breakable clusters",
+  },
+];
+
+export const routeColumns = [
+  { key: "phase", label: "Farm Phase" },
+  { key: "goal", label: "Goal" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const routeRows = [
+  {
+    phase: "0-10 minutes",
+    goal: "Get the build online",
+    whatToDo:
+      "Focus one main spell, reach the first infusion, take farming stats if offered, and start clearing safe objectives.",
+  },
+  {
+    phase: "10-25 minutes",
+    goal: "Cash in objectives while kill speed is high",
+    whatToDo:
+      "Reach the second infusion, keep objective tempo high, and avoid wandering into inefficient side paths.",
+  },
+  {
+    phase: "25-30 minutes",
+    goal: "Decide whether to finish or loop",
+    whatToDo:
+      "If enemies are starting to become damage sponges, finish the run instead of forcing a long loop.",
+  },
+  {
+    phase: "After 30 minutes",
+    goal: "Loop only if your build is still efficient",
+    whatToDo:
+      "Continue only if your clear speed, pickup flow, and objective safety are still good.",
+  },
+  {
+    phase: "End run / cash out",
+    goal: "Convert time into progression",
+    whatToDo:
+      "Reset when gold per minute drops, objectives become too risky, or you already have enough gold for the next goal.",
+  },
+];
+
+export const farmBuildColumns = [
+  { key: "build", label: "Build" },
+  { key: "goldFarmRole", label: "Gold Farm Role" },
+  { key: "bestUpgrades", label: "Best Upgrades" },
+  { key: "whenToUse", label: "When To Use" },
+];
+
+export const farmBuildRows = [
+  {
+  build: "Solar Pulse Aura",
+  goldFarmRole: "Best all-purpose farming route",
+  bestUpgrades:
+    "Use this when you want the safest repeatable route. See the Solar Pulse section for the full upgrade path.",
+  whenToUse:
+    "When you want a repeatable solo farming route with strong long-loop potential.",
+},
+  {
+    build: "Solitary Focus",
+    goldFarmRole: "Mono-spell scaling route",
+    bestUpgrades:
+      "One main spell, cast speed, spell size, second infusion, sustain",
+    whenToUse:
+      "When your starting spell can carry the whole run and you want faster spell scaling.",
+  },
+  {
+    build: "Acid Multi-Hit",
+    goldFarmRole: "Boss / elite shred route",
+    bestUpgrades:
+      "Acid, Flux, Corrosion, cast speed, multi-hit augments, survival",
+    whenToUse:
+      "When elites and bosses slow your runs down.",
+  },
+  {
+    build: "Scepter Mesh",
+    goldFarmRole: "Objective and area-control route",
+    bestUpgrades:
+      "Lightning, Plasma, spell size, cast speed, augments",
+    whenToUse:
+      "When you want safer objective zones and strong co-op control.",
+  },
+  {
+    build: "Falling Stars Lightning",
+    goldFarmRole: "High-ceiling damage route",
+    bestUpgrades:
+      "Luck, cooldown / cast speed, Falling Stars levels, Lightning, crit damage",
+    whenToUse:
+      "When you want a stronger meta damage route and can force enough spell levels.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Gold Farm Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Farming without Bounty after unlocking it",
+    whyItHurts:
+      "You are leaving the most direct gold-income upgrade unused.",
+    betterPlay:
+      "Respec into Bounty before dedicated gold farming runs.",
+  },
+  {
+  mistake: "Looking for gold drops during the run",
+  whyItHurts:
+    "Gold is mainly settled after the run, so chasing imaginary drops wastes attention.",
+  betterPlay:
+    "Think in post-run payout sources: Bounty, completion, kills, contracts, Greed, and objective rewards.",
+},
+  {
+    mistake: "Turning every farm into a long loop",
+    whyItHurts:
+      "After about 25-30 minutes, kill speed can drop as enemies become tankier.",
+    betterPlay:
+      "Prefer repeated fast clears unless your build is still scaling efficiently.",
+  },
+  {
+    mistake: "Ignoring contracts before starting",
+    whyItHurts:
+      "A contracted wizard can give free extra gold if they can clear safely.",
+    betterPlay:
+      "Check the wizard tab before launching a farm run.",
+  },
+  {
+    mistake: "Turning the run into a box hunt",
+    whyItHurts:
+      "Greed and breakables are bonus gold, not the main farm. Long detours can lower your objective tempo and gold per minute.",
+    betterPlay:
+      "Treat crates and boxes as route bonuses, not the reason you ignore objectives, contracts, or Bounty value.",
+  },
+  {
+    mistake: "Building only damage and no movement",
+    whyItHurts:
+      "A high-damage farm build still dies if it cannot escape bombs, bosses, or bad objective spawns.",
+    betterPlay:
+      "Take movement before the screen becomes impossible.",
+  },
+  {
+    mistake: "Letting XP pile up outside pickup range",
+    whyItHurts:
+      "Your leveling flow slows down and the build stops scaling efficiently.",
+    betterPlay:
+      "Take pickup support, move through XP regularly, and avoid becoming too stationary too early.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The fastest way to farm gold in The Spell Brigade 1.0 is to unlock Bounty, respec into it for farming, then run fast objective-focused clears instead of forcing endless loops.**
+
+Gold is not something you pick up constantly during the run. Most of it is calculated after the run from things like **completed objectives**, **enemy kills**, **run completion**, **Bounty**, **contracts**, and small extra sources such as **Greed** and breakables.
+
+A normal clear often lands around **500-550 gold**. A better Bounty-focused objective run can reach around **800-850 gold**. Long Solar Pulse aura loops can produce big totals, but repeated 25-30 minute runs are often better for gold per minute once enemies start becoming damage sponges.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-solar-pulse-final-stats.webp"
+    alt="The Spell Brigade Solar Pulse aura farming final stats showing long run time, completed objectives, gold earned, and huge Solar Pulse damage."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Long aura runs can create huge totals, but the best gold farm is still the one with the best gold per minute.
+  </figcaption>
+</figure>
+
+<h2 id="how-gold-is-calculated">
+  How gold is calculated in The Spell Brigade
+</h2>
+
+The first thing to understand is that gold farming is mostly a **post-run reward system**.
+
+You are not running around collecting constant gold drops like coins. Your payout comes from what the run accomplished.
+
+<GuideTable
+  caption="Where gold comes from in The Spell Brigade."
+  columns={sourceColumns}
+  rows={sourceRows}
+/>
+
+<GuideTable
+  caption="Gold benchmarks for judging your farm efficiency."
+  columns={benchmarkColumns}
+  rows={benchmarkRows}
+/>
+
+<GuideCallout title="Gold calculation rule">
+If your run is not completing objectives, killing efficiently, or finishing safely, it is probably not a good gold farm even if the build looks powerful.
+</GuideCallout>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="bounty">
+  Bounty: the most important gold farming upgrade
+</h2>
+
+Bounty is the key gold-farming upgrade to understand.
+
+It appears in the **third row** of the upgrade system, which means you need to unlock the first two rows before you can access it. Once Bounty is unlocked, it becomes permanently available.
+
+For dedicated farming, the common strategy is:
+
+<GuideTable
+  caption="How to use Bounty for gold farming."
+  columns={bountyColumns}
+  rows={bountyRows}
+/>
+
+Bounty matters because it gives **25% extra gold** and doubles gold from objective rewards. That completely changes how you should farm.
+
+Before Bounty, you are mostly trying to stabilize clears and unlock the system. After Bounty, your gold farm should become an objective-focused route.
+
+<GuideCallout title="Bounty rule">
+If you are farming gold and Bounty is unlocked, build around Bounty first. It is more important than squeezing a little more damage out of a random upgrade.
+</GuideCallout>
+
+<h2 id="best-gold-farm-methods">
+  Best gold farm methods
+</h2>
+
+The best farming method is not always the hardest map or the longest loop. It is the route that gives you the most reliable gold for the time and risk you put in.
+
+<GuideTable
+  caption="Best The Spell Brigade gold farm methods."
+  columns={methodColumns}
+  rows={methodRows}
+/>
+
+Read the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> if you need the full build breakdown first.
+
+<h2 id="short-runs-vs-long-runs">
+  Short runs vs long loops
+</h2>
+
+The biggest farming trap is thinking longer always means better.
+
+Long loops can work if your build is still deleting enemies, collecting XP efficiently, and completing objectives. But after about **25-30 minutes**, many runs start slowing down because enemies become tankier and your kill speed drops.
+
+That is the point where repeated fast clears can beat one long run.
+
+Use this rule:
+
+**If the run is still clearing fast, keep going. If enemies are becoming damage sponges, cash out and start another run.**
+
+This is why Bounty objective runs are so strong. You are not trying to prove your build can last forever. You are trying to finish profitable runs quickly.
+
+<h2 id="greed-breakables">
+  Greed, crates, boxes, and breakables
+</h2>
+
+Greed is not the main gold farm by itself, but it is worth understanding.
+
+When you have Greed, destructible objects such as crates, boxes, and breakable clusters become more valuable. These small sources are not worth ruining your route for, but they are worth collecting when they are already on your path.
+
+Use Greed well by:
+
+- breaking clustered objects near objectives,
+- avoiding long detours for one small crate,
+- pairing it with fast movement,
+- treating it as bonus gold, not the whole farm.
+
+The rule is simple:
+
+**Break what is on your route. Do not turn the entire run into a box hunt.**
+
+<h2 id="contracts">
+  Contracts and bonus gold
+</h2>
+
+Contracts are easy to forget because they are checked before the run, not during it.
+
+Sometimes the game gives a random wizard a contract bonus. If you run that wizard next, you can gain extra gold.
+
+Before starting a dedicated farm run, check the wizard tab and ask:
+
+- Which wizard has the contract?
+- Can I clear safely with that wizard?
+- Does that wizard have a strong farming build?
+- Is the bonus worth changing my plan?
+
+Do not force a weak run just because a contract exists. A safe Solar Pulse or objective run can still beat a bad contract run. But when the contracted wizard is already strong, the contract is free value.
+
+<h2 id="why-gold-matters">
+  What is gold used for?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-gold-farm-enchantments-cost-gold.webp"
+    alt="The Spell Brigade enchantments and permanent upgrades screen showing gold costs."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gold controls permanent upgrades, unlock pacing, and late-game progression.
+  </figcaption>
+</figure>
+
+Gold matters because 1.0 progression asks you to spend it in several places:
+
+- Bounty and other upgrade investments,
+- permanent upgrades and enchantments,
+- wizard unlocks,
+- build setup,
+- later ascension / prestige-style progression.
+
+Before you spend gold, decide what your next goal is:
+
+**Do I need stronger farm income, a new wizard, or a specific ascension / progression goal?**
+
+<h2 id="gold-buys-wizards">
+  Gold and wizard unlocks
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-gold-farm-gold-buys-wizards.webp"
+    alt="The Spell Brigade 1.0 explanation that gold currency from runs can be used to buy wizards."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In 1.0, gold is part of the wizard unlock loop, so farming also controls how quickly you access new build routes.
+  </figcaption>
+</figure>
+
+Gold farming gets more important once you stop thinking of it as “buying upgrades” and start thinking of it as **unlocking build options**.
+
+A new wizard can mean:
+
+- a better farming spell,
+- a stronger achievement route,
+- a better solo build,
+- a new co-op role,
+- a signature spell you can later build around.
+
+If you are early in progression, do not spend everything on tiny upgrades if a new wizard would open a much better route.
+
+<h2 id="solar-pulse-farm">
+  Solar Pulse Aura gold farm
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-best-builds-solar-pulse-aura-setup.webp"
+    alt="The Spell Brigade Solar Pulse aura farming setup with Sun Mage, spell size mastery, and a one-spell covenant."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar Pulse Aura is a strong farming route because one spell can become damage, safety, and long-loop scaling.
+  </figcaption>
+</figure>
+
+Solar Pulse Aura is the cleanest farming build in the current footage because it solves several farming problems at once:
+
+- it clears enemies around you,
+- it scales with spell size,
+- it scales with cast speed,
+- it can use Lightning, Plasma, Wildfire, or Flux,
+- it can pair with crit healing,
+- it can become semi-AFK only after the build is already strong.
+
+The basic route is:
+
+**Sun Mage → Solar Pulse → spell size → cast speed → Lightning → second infusion → Luck → crit / sustain → movement → pickup support**
+
+This route is especially good after you understand Bounty, because the build gives you enough safety to keep completing objectives efficiently.
+
+<h2 id="one-spell-farming">
+  One-spell farming and Solitary Focus
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-gold-farm-one-spell-ascension.webp"
+    alt="The Spell Brigade one-spell farming route showing why focusing one spell can turbocharge leveling and ascension farming."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    One-spell farming works because the upgrade pool becomes focused, letting one spell scale much faster.
+  </figcaption>
+</figure>
+
+One-spell farming works when your starting spell is strong enough to carry the run by itself.
+
+The benefit is focus. Instead of splitting upgrades across several spells, the run keeps feeding one spell more levels, more cast speed, more size, and better infusion choices.
+
+The risk is narrowness. If the one spell cannot clear, cannot scale, or gets bad infusion offers, the whole run has fewer backup options.
+
+<h2 id="objectives-give-gold">
+  Why objectives matter for gold farming
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-gold-farm-objectives-give-gold.webp"
+    alt="The Spell Brigade farming run where objectives give gold and legendary cast speed appears during the route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    With Bounty, objectives become even more important because objective reward gold is doubled.
+  </figcaption>
+</figure>
+
+Objectives matter because they connect the two most important parts of farming:
+
+1. **Gold payout**
+2. **Build scaling through augments**
+
+The practical rule is not “do every objective.” The practical rule is:
+
+**Do objectives while they are still safe and fast.**
+
+If an objective takes too long or risks killing the run, skip it. Bounty makes objectives better, but it does not make bad decisions free.
+
+<h2 id="xp-cap-pickup-range">
+  XP cap, pickup range, and semi-AFK farming
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-gold-farm-xp-cap-pickup-range.webp"
+    alt="The Spell Brigade aura farming run explaining XP on the ground, pickup range, and why pickup support matters."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Long farms need pickup support so XP flow does not fall behind your kill speed.
+  </figcaption>
+</figure>
+
+Killing enemies is not enough. You also need to collect XP efficiently.
+
+If too much XP stays on the ground, your level flow gets worse. That matters because level flow feeds spell upgrades, cast speed, size, crit, sustain, and better scaling.
+
+This is why pickup range, mana pool, and movement matter more in farming than they look on paper.
+
+<h2 id="farm-route">
+  Gold farm route: early, mid, cash out, or loop
+</h2>
+
+Use this as the basic route for most farming runs.
+
+<GuideTable
+  caption="The Spell Brigade gold farm route by phase."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+<h2 id="best-farm-builds">
+  Best builds for gold farming
+</h2>
+
+<GuideTable
+  caption="Best builds for farming gold in The Spell Brigade."
+  columns={farmBuildColumns}
+  rows={farmBuildRows}
+/>
+
+Solar Pulse is the easiest route to recommend, but it is not the only route. If your goal is boss speed, Acid Multi-Hit may be better. If your goal is team safety, Scepter Mesh may be better. If your goal is a high ceiling, Falling Stars Lightning can become stronger once you know how to force it.
+
+<h2 id="farm-stats">
+  Best stats for gold farming
+</h2>
+
+<GuideTable
+  caption="Best farming stats in The Spell Brigade."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+<GuideCallout title="Farm stat rule">
+Bounty improves the payout. Damage gets the run moving. Cast speed, spell size, pickup support, movement, Luck, and objectives keep the farm efficient.
+</GuideCallout>
+
+<h2 id="upgrade-priority">
+  What should you spend gold on first?
+</h2>
+
+<GuideTable
+  caption="Gold spending priority in The Spell Brigade."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+If Bounty is unlocked and your current goal is farming, prioritize Bounty first. If you are still unlocking the system, spend gold on upgrades that make future clears safer and faster.
+
+<h2 id="ascension-cost">
+  Gold, ascension, and late-game progression
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-spell-brigade/the-spell-brigade-gold-farm-ascension-cost.webp"
+    alt="The Spell Brigade ascension screen showing a high gold cost for wizard ascension."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Late-game progression can ask for large gold payments, so farm planning matters more after your first clears.
+  </figcaption>
+</figure>
+
+Ascension and prestige-style systems are why gold farming becomes more important later.
+
+Early on, you farm because you want upgrades. Later, you farm because you need to pay for expensive progression gates. That changes the way you should think about runs.
+
+A late-game farm run should ask:
+
+- Am I farming for Bounty value?
+- Am I farming for a wizard unlock?
+- Am I farming for enchantments or masteries?
+- Am I farming for ascension?
+- Am I farming for an achievement route?
+
+<h2 id="map-choice">
+  Best map for gold farming
+</h2>
+
+The best farming map is not always the hardest map.
+
+Because gold and progression depend on survival, objectives, and clear speed, the best map is usually the one where your build can:
+
+- move easily,
+- finish objectives quickly,
+- avoid too many terrain blockers,
+- break useful object clusters without detours,
+- keep enemies inside damage zones,
+- survive boss phases consistently.
+
+Open maps are usually better for farming than cramped maps with lots of obstacles. Terrain that blocks your route can lower your real gold per minute even if the map looks harder or more advanced.
+
+<h2 id="solo-vs-coop">
+  Solo vs co-op gold farming
+</h2>
+
+Solo farming is easier to control. Co-op farming can be faster if the team is organized.
+
+A simple co-op farming template:
+
+- **Player 1:** Main damage, such as Solar Pulse, Falling Stars, or Plasma.
+- **Player 2:** Acid shred for bosses and elites.
+- **Player 3:** Control or Scepter Mesh for safe objectives.
+- **Player 4:** Support, healing, or objective runner.
+
+The mistake is having four players all chase their own solo build. A co-op farm works best when the team covers different jobs.
+
+<h2 id="common-mistakes">
+  Common gold farming mistakes
+</h2>
+
+<GuideTable
+  caption="Common The Spell Brigade gold farming mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="recommended-farm-order">
+  Recommended farming order for new players
+</h2>
+
+If you are still early in progression, use this order:
+
+1. **Stabilize normal runs.**  
+   Do not worry about perfect gold per minute until you can finish runs consistently.
+
+2. **Unlock the path to Bounty.**  
+   Bounty is the upgrade that turns normal clears into real gold farming.
+
+3. **Respec into Bounty for dedicated farming.**  
+   If your goal is gold, put points where the gold is.
+
+4. **Run 25-30 minute objective clears.**  
+   Fast clears are usually better than forcing every run into a long loop.
+
+5. **Add Greed and breakables when convenient.**  
+   Take free extra gold, but do not ruin the route for it.
+
+6. **Check contracts before starting.**  
+   A strong contracted wizard can be free value.
+
+7. **Use Solar Pulse or another safe AoE route.**  
+   Safe AoE makes objectives and boss phases easier.
+
+8. **Save for late-game goals.**  
+   Do not spend every bit of gold randomly once ascension or mastery costs start appearing.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best gold farm in The Spell Brigade?
+
+Unlock Bounty, respec into it for farming, and run fast objective-focused clears. Solar Pulse Aura is the easiest build route to pair with this strategy.
+
+### What does Bounty do?
+
+Bounty gives 25% extra gold and doubles objective reward gold. It appears in the third row of upgrades and becomes the main gold-farming upgrade once unlocked.
+
+### How much gold should a good run make?
+
+A normal clear often lands around 500-550 gold. An optimized Bounty objective run can reach around 800-850 gold.
+
+### Does gold drop during the run?
+
+Gold is mostly calculated after the run. The important factors are objectives, kills, run completion, Bounty, contracts, Greed, and breakables.
+
+### Are short runs better than long runs?
+
+Often, yes. After about 25-30 minutes, enemies can become tanky enough that gold per minute drops. Keep looping only if your build is still clearing efficiently.
+
+### What is Greed good for?
+
+Greed improves gold from destructible objects such as crates and boxes. It is a bonus source, not the whole farming plan.
+
+### What are contracts?
+
+Contracts are random wizard bonuses that can give extra gold. Check the wizard tab before starting a farm run.
+
+### Should I farm the hardest map?
+
+Not always. The best farming map is the one your build can clear quickly and safely. If terrain slows objectives or you die early, your gold per minute drops.
+
+### Why does pickup range matter?
+
+If XP stays on the ground outside your pickup range, your leveling flow slows down. Long farms need pickup support or regular movement through XP.
+
+### What should I read next?
+
+Read the <Link href="/the-spell-brigade/best-builds">Best Builds Guide</Link> for build routes, the <Link href="/the-spell-brigade/best-spells-elements">Best Spells and Elements Guide</Link> for infusion choices, or the <Link href="/the-spell-brigade/solo-guide">Solo Guide</Link> if you mostly farm alone.

@@ -115,6 +115,9 @@ const allGameGuides = [
   { title: 'Farever', href: '/farever' },
 
   { title: 'Everything is Crab: The Animal Evolution Roguelite', href: '/everything-is-crab' },
+
+  { title: 'The Spell Brigade', href: '/the-spell-brigade' },
+
 ];
 
 const exploreCards = [

@@ -13,6 +13,47 @@ export type LatestUpdateItem = {
   
   export const latestUpdates: LatestUpdateItem[] = [
 
+    {
+      href: "/the-spell-brigade",
+      game: "The Spell Brigade",
+      title: "Complete Guide Hub",
+      description:
+        "Start here for builds, spells, elements, gold farming, solo play, wizard unlocks, achievements, Trial Covenants, Masteries, and Ascension.",
+      tagClass: "text-violet-500",
+      hoverBorderClass: "hover:border-violet-300",
+      hoverTitleClass: "group-hover:text-violet-700",
+    },
+    {
+      href: "/the-spell-brigade/best-builds",
+      game: "The Spell Brigade",
+      title: "Best Builds Guide",
+      description:
+        "Best builds for 1.0, including Falling Stars Lightning, Solar Pulse Aura, Acid Multi-Hit, Scepter Mesh, Dodge Crit Heal, and co-op routes.",
+      tagClass: "text-violet-500",
+      hoverBorderClass: "hover:border-violet-300",
+      hoverTitleClass: "group-hover:text-violet-700",
+    },
+    {
+      href: "/the-spell-brigade/best-spells-elements",
+      game: "The Spell Brigade",
+      title: "Best Spells & Elements Guide",
+      description:
+        "Spell rankings, base elements, advanced infusions, Plasma, Acid, Wildfire, Flux, Corrosion, Thunder, and wizard-specific element choices.",
+      tagClass: "text-violet-500",
+      hoverBorderClass: "hover:border-violet-300",
+      hoverTitleClass: "group-hover:text-violet-700",
+    },
+    {
+      href: "/the-spell-brigade/wizard-unlocks",
+      game: "The Spell Brigade",
+      title: "Wizard Unlocks Guide",
+      description:
+        "All 15 wizards, signature spells, passive traits, unlock planning, best wizard by role, Knelly, Pipwick, Wizard King, ranks, and ascension context.",
+      tagClass: "text-violet-500",
+      hoverBorderClass: "hover:border-violet-300",
+      hoverTitleClass: "group-hover:text-violet-700",
+    },
+
     // ===== Everything Is Crab =====
 {
   href: "/everything-is-crab",
