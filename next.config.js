@@ -7,6 +7,8 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 
   experimental: {
@@ -14,28 +16,10 @@ const nextConfig = {
   },
 
   images: {
+    unoptimized: true,
     remotePatterns: [
       { protocol: 'https', hostname: '**' },
     ],
-  },
-
-  async rewrites() {
-    return [];
-  },
-
-  async redirects() {
-    return [
-      {
-        source: '/play-online/:slug',
-        destination: '/:slug',
-        permanent: false,
-      },
-      {
-        source: '/home-design',
-        destination: '/play-online',
-        permanent: true,
-      },
-    ];
   },
 
   webpack(config) {
