@@ -1,0 +1,901 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const resourceColumns = [
+  { key: "resource", label: "Resource" },
+  { key: "whereToFind", label: "Where To Find It" },
+  { key: "priority", label: "Priority" },
+];
+
+export const resourceRows = [
+  {
+    resource: "Scrap Metal",
+    whereToFind:
+      "Around Signal Towers, roadside junk, supply boxes, abandoned stops, and mining areas.",
+    priority: "Very high",
+  },
+  {
+    resource: "Everwood",
+    whereToFind:
+      "Loose logs near campsites, roads, wooded paths, and early map stops. Larger wood sources need an Axe.",
+    priority: "Very high",
+  },
+  {
+    resource: "Fiber",
+    whereToFind:
+      "Small bushes in the first map. Larger fiber bushes require a Sickle.",
+    priority: "High",
+  },
+  {
+    resource: "Litter",
+    whereToFind:
+      "Campsites, towers, abandoned stops, buildings, and roadside points of interest.",
+    priority: "Very high",
+  },
+  {
+    resource: "Roadberries",
+    whereToFind:
+      "Red berry bushes in the first map and near early campsites.",
+    priority: "Medium",
+  },
+  {
+    resource: "Ginger",
+    whereToFind:
+      "Supply spots, towers, and early landmarks.",
+    priority: "Medium",
+  },
+  {
+    resource: "Water",
+    whereToFind:
+      "Wells, buckets, and some points of interest.",
+    priority: "Medium early, higher later",
+  },
+  {
+    resource: "Everwood Planks",
+    whereToFind:
+      "Craft them from Everwood at the Sawmill.",
+    priority: "High once bridges appear",
+  },
+  {
+    resource: "Bolts",
+    whereToFind:
+      "Craft them from Scrap Metal after unlocking and building the Bolt Press.",
+    priority: "High once Vehicle Research starts",
+  },
+  {
+    resource: "Coarse Ore",
+    whereToFind:
+      "A small mining pocket / ore area rather than random roadside rocks. Check mining-style landmarks and metal-heavy POIs.",
+    priority: "High when smelting starts",
+  },
+  {
+    resource: "Silverbark",
+    whereToFind:
+      "Silver-colored tree areas in a later biome of the first map.",
+    priority: "High after you reach the biome",
+  },
+  {
+    resource: "Redwood",
+    whereToFind:
+      "The coast / second map area after leaving the first map.",
+    priority: "Very high after the tunnel",
+  },
+  {
+    resource: "Clay",
+    whereToFind:
+      "Canyon biome later in progression.",
+    priority: "High later",
+  },
+];
+
+export const numberColumns = [
+  { key: "item", label: "Item / Recipe" },
+  { key: "number", label: "Useful Number" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const numberRows = [
+  {
+    item: "Metal Scrap pickup",
+    number: "1 pickup gives 3 Scrap Metal",
+    whyItMatters:
+      "Scrap Metal is more efficient to grab than it looks, especially near Signal Towers.",
+  },
+  {
+    item: "Loose Everwood",
+    number: "Usually 1 pickup gives 1 Everwood",
+    whyItMatters:
+      "Wood piles fill your backpack faster because they do not multiply like Scrap Metal pickups.",
+  },
+  {
+    item: "Sawmill recipe",
+    number: "10 Everwood + 2 Scrap Metal",
+    whyItMatters:
+      "This is the key workstation for turning raw wood into bridge materials.",
+  },
+  {
+    item: "Everwood Plank",
+    number: "2 Everwood → 1 Everwood Plank",
+    whyItMatters:
+      "Bridge repair costs are easier to plan when you convert wood into planks before leaving the van.",
+  },
+  {
+    item: "Early bridge chain",
+    number: "12 Everwood → 6 Everwood Planks → 3 Reinforced Planks",
+    whyItMatters:
+      "This helps you prepare before walking back to a bridge repair point.",
+  },
+  {
+    item: "Motor I upgrade",
+    number: "Often asks for 10 Bolts",
+    whyItMatters:
+      "You need the Bolt Press and enough Scrap Metal before the first motor upgrade feels smooth.",
+  },
+  {
+    item: "Later bridge repair",
+    number: "One later bridge can ask for 30 Everwood Planks",
+    whyItMatters:
+      "Do not spend all your wood on decoration before bridge progression is handled.",
+  },
+];
+
+export const routeColumns = [
+  { key: "phase", label: "Route Phase" },
+  { key: "whatToCollect", label: "What To Collect" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const routeRows = [
+  {
+    phase: "Tutorial area",
+    whatToCollect:
+      "Everwood from the supply box, Scrap Metal near the first tower, and anything close to the road.",
+    why:
+      "This gives you the Wrench, the first gate repair, and the first taste of the gather-deposit-craft loop.",
+  },
+  {
+    phase: "First campsites",
+    whatToCollect:
+      "Everwood, Litter, Roadberries, Ginger, Water, and loose Scrap Metal.",
+    why:
+      "These keep you fed, supplied, and ready to unlock blueprints.",
+  },
+  {
+    phase: "Signal Tower loop",
+    whatToCollect:
+      "Scrap Metal around towers, Download Vouchers from the Recycler, and any nearby food or Fiber.",
+    why:
+      "Towers drive progression, and Scrap Metal near towers can respawn after resting or time passing.",
+  },
+  {
+    phase: "Bridge repair stage",
+    whatToCollect:
+      "Everwood, then process it into Everwood Planks at the Sawmill.",
+    why:
+      "Broken bridges require planks or reinforced plank chains, not just loose wood.",
+  },
+  {
+    phase: "Vehicle upgrade stage",
+    whatToCollect:
+      "Scrap Metal, Bolts, metal materials, and anything needed for Vehicle Research.",
+    why:
+      "Motor and slope upgrades can block road progression if ignored.",
+  },
+  {
+    phase: "Mining area",
+    whatToCollect:
+      "Scrap Metal, Coarse Ore, and ore-like materials.",
+    why:
+      "This is where metal shortages become easier to solve, especially once Smelter recipes appear.",
+  },
+  {
+    phase: "New biome / coast",
+    whatToCollect:
+      "Silverbark, Redwood, Coast Berries, Sturdy Fiber, and new local materials.",
+    why:
+      "New biomes introduce new resource tiers that unlock the next tool, building, and vehicle chains.",
+  },
+];
+
+export const biomeColumns = [
+  { key: "area", label: "Area / Biome" },
+  { key: "resources", label: "Resources To Watch For" },
+  { key: "notes", label: "Player Notes" },
+];
+
+export const biomeRows = [
+  {
+    area: "Starting area",
+    resources:
+      "Everwood, Scrap Metal, Roadberries, Ginger, Fiber, Litter, Water",
+    notes:
+      "Collect more than you think you need. The first map sends you back and forth often.",
+  },
+  {
+    area: "Signal Tower areas",
+    resources:
+      "Scrap Metal, Litter, supply box materials, blueprint unlocks",
+    notes:
+      "Scrap Metal commonly appears near towers and can return after time passes, so revisit towers when you are short.",
+  },
+  {
+    area: "Wooded first-map paths",
+    resources:
+      "Everwood, Fiber, Roadberries, Ginger",
+    notes:
+      "Loose logs are easy to miss in grass. Driving gives you a slightly better view of some pickups.",
+  },
+  {
+    area: "Mining area",
+    resources:
+      "Scrap Metal, Coarse Ore, coarse metal / ore-like materials",
+    notes:
+      "This is the area to check when bolts, smelting, or metal upgrades start blocking you.",
+  },
+  {
+    area: "Silverbark biome",
+    resources:
+      "Silverbark Wood and biome-specific pickups",
+    notes:
+      "Once a new wood type appears, store some before burning or spending it.",
+  },
+  {
+    area: "Coast / second map",
+    resources:
+      "Redwood, Coast Berries, Sturdy Fiber, bananas, new local materials",
+    notes:
+      "Redwood becomes important quickly after the first tunnel, especially for later tool chains.",
+  },
+  {
+    area: "Canyon biome",
+    resources:
+      "Clay and later-game materials",
+    notes:
+      "Clay can become a bottleneck later. When you find it, collect extra.",
+  },
+];
+
+export const shortageColumns = [
+  { key: "missing", label: "If You Are Missing..." },
+  { key: "check", label: "Check This First" },
+  { key: "priority", label: "Priority" },
+  { key: "tip", label: "Tip" },
+];
+
+export const shortageRows = [
+  {
+    missing: "Scrap Metal",
+    check:
+      "Signal Towers, roadside junk, metal-heavy landmarks, and mining areas.",
+    priority: "Very high",
+    tip:
+      "Each Metal Scrap pickup gives 3 Scrap Metal. Sleep or explore elsewhere, then revisit Signal Towers because tower Scrap Metal can respawn.",
+  },
+  {
+    missing: "Everwood",
+    check:
+      "Campsites, loose roadside logs, wooded paths, and larger logs after unlocking the Axe.",
+    priority: "Very high",
+    tip:
+      "Plan around conversion: 2 Everwood makes 1 Everwood Plank at the Sawmill.",
+  },
+  {
+    missing: "Fiber",
+    check:
+      "Small bushes early on. Return to larger bushes after unlocking the Sickle.",
+    priority: "High",
+    tip:
+      "Fiber supports Sewing Table and gear upgrades, so avoid burning all of it for power.",
+  },
+  {
+    missing: "Download Vouchers",
+    check:
+      "Recycler output. Pick up Litter and let the Recycler run overnight.",
+    priority: "Very high",
+    tip:
+      "Lock vouchers in your backpack before depositing materials.",
+  },
+  {
+    missing: "Everwood Planks",
+    check:
+      "Sawmill. You need to craft planks from Everwood.",
+    priority: "High",
+    tip:
+      "If a bridge asks for 30 Planks, that means 60 Everwood before other processing costs.",
+  },
+  {
+    missing: "Bolts",
+    check:
+      "Bolt Press. Bolts usually come from processed Scrap Metal.",
+    priority: "High",
+    tip:
+      "Motor I can ask for 10 Bolts, so build the Bolt Press before pushing steep slope routes.",
+  },
+  {
+    missing: "Coarse Ore",
+    check:
+      "Mining pocket / ore area rather than random roadside rocks.",
+    priority: "High when smelting starts",
+    tip:
+      "Coarse Ore is easy to miss because it is not spread evenly across the map. Check metal-heavy POIs and mining landmarks carefully.",
+  },
+  {
+    missing: "Redwood",
+    check:
+      "Coast / second map after the Mossrock tunnel.",
+    priority: "Very high after tunnel",
+    tip:
+      "If a tool upgrade asks for Redwood, you may need to progress out of the first map first.",
+  },
+  {
+    missing: "Clay",
+    check:
+      "Canyon biome later in progression.",
+    priority: "High later",
+    tip:
+      "When you finally find clay, gather extra because later recipes can ask for a lot.",
+  },
+];
+
+export const fuelColumns = [
+  { key: "fuel", label: "Fuel Material" },
+  { key: "useItForPower", label: "Use For Power?" },
+  { key: "rule", label: "Rule" },
+];
+
+export const fuelRows = [
+  {
+    fuel: "Everwood",
+    useItForPower: "Yes, but carefully",
+    rule:
+      "Good emergency fuel early, but keep enough for Planks, bridges, workstations, and building.",
+  },
+  {
+    fuel: "Fiber",
+    useItForPower: "Emergency only",
+    rule:
+      "Use it if you are stranded, but save most Fiber for Sewing Table, gear, and upgrade chains.",
+  },
+  {
+    fuel: "Silverbark",
+    useItForPower: "Only if you have extra",
+    rule:
+      "Stronger later wood, but it may be needed for biome recipes. Store a stack before burning any.",
+  },
+  {
+    fuel: "Redwood",
+    useItForPower: "Avoid early",
+    rule:
+      "Redwood becomes important after the first map. Do not burn it until you know your next tool and building costs.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Resource Mistake" },
+  { key: "fix", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Ignoring Scrap Metal after the first few tools",
+    fix:
+      "Keep collecting it. You need Scrap Metal for tools, Bolts, workstations, vehicle upgrades, and research.",
+  },
+  {
+    mistake: "Thinking Litter is useless",
+    fix:
+      "Recycle Litter into Download Vouchers for more blueprint unlocks.",
+  },
+  {
+    mistake: "Looking for Planks on the ground",
+    fix:
+      "Build the Sawmill and craft Everwood Planks yourself.",
+  },
+  {
+    mistake: "Trying to harvest every large bush or log with starter tools",
+    fix:
+      "Return after Axe, Sickle, or Pickaxe upgrades.",
+  },
+  {
+    mistake: "Driving into a new biome without storage space",
+    fix:
+      "Deposit first, carry food and vouchers, then collect new materials aggressively.",
+  },
+  {
+    mistake: "Spending new biome resources immediately",
+    fix:
+      "Store Silverbark, Redwood, Clay, and other new materials before burning or crafting with them.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best early resource route in Outbound is to loop between campsites, Signal Towers, bridges, and mining-style POIs while constantly depositing materials into your van.**
+
+Prioritize **Scrap Metal**, **Everwood**, **Litter**, **Fiber**, **Roadberries**, **Ginger**, and **Water** in the first map. Scrap Metal is especially important because one Metal Scrap pickup gives **3 Scrap Metal**, and tower-side Scrap Metal can respawn after time passes or after sleeping. For bridge progression, remember that the **Sawmill costs 10 Everwood + 2 Scrap Metal**, and **2 Everwood makes 1 Everwood Plank**.
+
+Once you reach later areas, protect new biome materials such as **Silverbark**, **Redwood**, and **Clay** before burning or crafting with them.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-early-resources-scrap-metal-signal-tower.webp"
+    alt="Outbound Scrap Metal location near a Signal Tower where Metal Scrap pickups give 3 Scrap Metal and can respawn."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Signal Towers are not only for blueprints. They are also one of the best early places to check for Scrap Metal.
+  </figcaption>
+</figure>
+
+<h2 id="best-early-resource-route">
+  Best early resource route in Outbound
+</h2>
+
+Outbound does not ask you to memorize a perfect farming map in the first hour. It asks you to build a habit:
+
+**Stop often, grab everything near the route, deposit it into the van, then keep moving.**
+
+The best early loop is:
+
+1. Drive toward a campsite, tower, landmark, bridge, or question-mark POI.
+2. Stop the van close enough that you can return quickly.
+3. Collect Scrap Metal, Everwood, Fiber, Litter, food, and water.
+4. Deposit materials into van storage.
+5. Recycle Litter into Download Vouchers.
+6. Use vouchers at Signal Towers.
+7. Come back with the right tool or workstation when a resource is gated.
+
+Use this table as the basic route:
+
+<GuideTable
+  caption="Outbound early resource route by progression phase."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<GuideCallout title="Resource conservation rules">
+Do not burn or spend every material just because you can. Keep a reserve of common wood for Planks, save Fiber for Sewing and gear upgrades, store new biome materials before using them, and only burn rare wood when you already know your next recipe costs.
+</GuideCallout>
+
+<h2 id="storage-panel-build-mode">
+  Storage panel and Build Mode basics
+</h2>
+
+New players often lose time because the storage and build controls are easy to miss.
+
+On keyboard, press **B** to enter Build Mode. On controller, use the right D-pad input. This is how you place counters, workstations, and van-building parts.
+
+The storage / deposit panel is near the van, around the driver-side rear wheel area. It can blend into the vehicle because it uses similar colors, so if you cannot find it, walk near the rear wheel and look down / scan the side of the van.
+
+Use this habit:
+
+- enter Build Mode to place counters and workstations,
+- use the storage panel whenever you return,
+- lock Download Vouchers before depositing,
+- start resource runs with an empty backpack.
+
+Read the <Link href="/outbound/storage-backpack-guide">Storage and Backpack Guide</Link> if inventory is slowing you down.
+
+
+<h2 id="key-resource-numbers">
+  Key resource numbers new players should know
+</h2>
+
+These numbers make resource planning much easier, especially when you are preparing for bridges, vehicle upgrades, and workstation chains.
+
+<GuideTable
+  caption="Important Outbound resource numbers and conversion rules."
+  columns={numberColumns}
+  rows={numberRows}
+/>
+
+<h2 id="resource-overview">
+  Early resource locations
+</h2>
+
+This is not an all-locations map. It is a practical early resource guide for the materials that most often block new players.
+
+<GuideTable
+  caption="Important Outbound resources and where to find them."
+  columns={resourceColumns}
+  rows={resourceRows}
+/>
+
+<h2 id="scrap-metal">
+  Where to find Scrap Metal
+</h2>
+
+Scrap Metal is the resource you will underestimate first.
+
+You need it for tools, workstations, Bolts, Vehicle Research, motor upgrades, and repair-style progression. The important detail is that one Metal Scrap pickup gives **3 Scrap Metal**, so dense metal spots are worth stopping for even when your backpack is getting close to full.
+
+The best early places to check are:
+
+- around Signal Towers,
+- supply boxes,
+- roadside junk,
+- abandoned points of interest,
+- mining areas once you reach them.
+
+Scrap Metal around Signal Towers can return after time passes or after you sleep. If you are short, do not drive randomly forever. Revisit tower routes, check the ground around them, and use the trip to collect Litter and food at the same time.
+
+<h2 id="fiber">
+  Where to find Fiber
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-early-resources-fiber-bushes.webp"
+    alt="Outbound Fiber location showing small Fiber bushes and larger bushes that require the Sickle."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Small bushes can be gathered early, but larger Fiber bushes may require the Sickle.
+  </figcaption>
+</figure>
+
+Fiber comes from bushes.
+
+Small bushes can be harvested early. Larger bushes may require the **Sickle**, so if the game blocks you, do not keep clicking the bush. You need the right tool.
+
+Fiber matters because it connects to:
+
+- Homing Boots,
+- early crafting,
+- Sewing Table upgrades,
+- backpack and clothing paths,
+- emergency battery charging.
+
+Fiber can be burned in the Power Unit, but it is usually better as an emergency fuel than a main fuel. Once Sewing Table or gear upgrades appear, Fiber becomes too useful to waste casually.
+
+<h2 id="everwood">
+  Where to find Everwood
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-early-resources-everwood-campsite.webp"
+    alt="Outbound Everwood location near an early campsite supply box used for Sawmill and bridge repair."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Everwood appears early from supply boxes and loose logs, but you will need a lot more than the tutorial gives you.
+  </figcaption>
+</figure>
+
+Everwood is one of the most important first-map materials.
+
+You can find it from:
+
+- supply boxes,
+- loose logs near roads,
+- campsites,
+- wooded paths,
+- larger wood sources after you unlock the Axe.
+
+Everwood is used for basic crafting, campfires, Sawmill processing, planks, building, and early energy emergencies.
+
+The key conversion is:
+
+**2 Everwood → 1 Everwood Plank**
+
+That means a bridge asking for 30 Everwood Planks is really asking for 60 Everwood before any other processing costs. Do not spend all your early wood on decoration before bridge progression is handled.
+
+Read the <Link href="/outbound/leave-first-biome">First Biome Progression Guide</Link> if a broken bridge is blocking your route.
+
+<h2 id="litter-download-vouchers">
+  Litter and Download Vouchers
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-recycler-download-vouchers.webp"
+    alt="Outbound Litter location and Recycler guide showing how to make Download Vouchers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Litter is blueprint currency in disguise. Recycle it into Download Vouchers whenever you can.
+  </figcaption>
+</figure>
+
+Litter looks like trash because it is trash, but mechanically it is one of the most valuable early resources.
+
+The chain is:
+
+**Litter → Recycler → Download Vouchers → Signal Tower blueprints**
+
+That means every piece of Litter helps unlock more workstations, tools, decorations, building pieces, and upgrades.
+
+Your early habit should be:
+
+1. Pick up Litter at every stop.
+2. Deposit normal materials into the van.
+3. Put Litter into the Recycler.
+4. Take the Download Vouchers after processing.
+5. Lock vouchers in your backpack before visiting towers.
+
+For the full unlock route, read the <Link href="/outbound/blueprints-workstations-upgrades">Blueprints and Workstations Guide</Link>.
+
+
+<h2 id="power-unit-fuel">
+  What should you burn for power?
+</h2>
+
+The Power Unit can use Fiber and different woods, including early Everwood and later woods such as Silverbark. This is useful when your van battery is low, but these same materials are also recipe ingredients.
+
+Use this table as a fuel priority guide:
+
+<GuideTable
+  caption="Outbound Power Unit fuel priority for early resource management."
+  columns={fuelColumns}
+  rows={fuelRows}
+/>
+
+The simple rule is:
+
+**Burn common materials when you are stranded. Store rare biome materials until you know what they craft.**
+
+For a deeper power setup, read the <Link href="/outbound/energy-guide">Outbound Energy Guide</Link>.
+
+<h2 id="water-food-ginger">
+  Water, Roadberries, and Ginger
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-early-resources-water-well.webp"
+    alt="Outbound Water location at a well used for farming food production and later crafting."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Water is easy to ignore early, but it becomes more important once farming and food production open up.
+  </figcaption>
+</figure>
+
+The first map gives you simple food and recovery items:
+
+- **Roadberries** for hunger,
+- **Ginger** for health,
+- **Water** for farming and food systems later.
+
+You do not need to overfill your backpack with food if your van is nearby. But you should keep a few items on you before long walks, steep climbs, or night trips.
+
+Early food rule:
+
+**Carry enough to avoid hunger problems, but deposit the rest so you have room for resources.**
+
+<h2 id="mining-coarse-ore">
+  Mining areas and Coarse Ore
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-first-biome-mining-area-scrap-metal.webp"
+    alt="Outbound Coarse Ore location in a small mining area with Scrap Metal and ore resources."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Coarse Ore is tied to mining-style areas, not every random rock on the roadside.
+  </figcaption>
+</figure>
+
+Coarse Ore is one of the easiest early materials to miss because it is not spread evenly across the first map.
+
+If a recipe asks for Coarse Ore, do not waste time checking every normal rock. Look for a **mining-style pocket**, **ore area**, or **metal-heavy landmark**. These spots are also useful when you need Scrap Metal, smelting materials, Bolts, Vehicle Research parts, or heavier workstation chains.
+
+Check mining areas when you start seeing:
+
+- Metal Smelter recipes,
+- Coarse Ore requirements,
+- ore processing,
+- heavier workstation chains,
+- vehicle or tool upgrade materials,
+- mid-progression crafting blockers.
+
+If you have not found the mining area yet, keep exploring question-mark POIs and metal-heavy routes instead of assuming Coarse Ore should spawn beside every stone.
+
+<h2 id="silverbark">
+  Where to find Silverbark
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-early-resources-silverbark-biome.webp"
+    alt="Outbound Silverbark location in a later biome with silver-colored trees."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Silverbark appears once the first map starts introducing new biome materials.
+  </figcaption>
+</figure>
+
+Silverbark appears in a later biome where the tree type changes to silver-colored wood.
+
+Treat it as a new material tier, not just another Everwood stack. It can matter for biome-specific crafting, upgrades, building, and fuel decisions. The general rule is already simple: store a stack first, check your next recipe costs, then spend or burn extra only when you know it is safe.
+
+<h2 id="redwood">
+  Where to find Redwood
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-early-resources-redwood-coast.webp"
+    alt="Outbound Redwood location after reaching the coast and second map."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Redwood starts appearing after the first tunnel, and it quickly becomes important for later tool and biome progression.
+  </figcaption>
+</figure>
+
+Redwood appears after you leave the first map and reach the coast / second map area.
+
+You may need Redwood for later tools and upgrades, so collect it aggressively once you reach that area. Campfires in the second location may also ask for Redwood instead of first-map wood.
+
+If you see a recipe asking for Redwood while you are still in the first map, that usually means you need to progress farther first.
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-early-resources-redwood-search.webp"
+    alt="Outbound Redwood search for later Axe upgrade and biome progression."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Redwood can become a tool-upgrade bottleneck, so pick it up when you see it instead of waiting until the recipe blocks you.
+  </figcaption>
+</figure>
+
+<h2 id="clay">
+  Where to find Clay
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-early-resources-clay-canyon.webp"
+    alt="Outbound Clay location in the canyon biome for later crafting chains."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Clay is a later resource tied to the canyon biome. When you find it, collect extra.
+  </figcaption>
+</figure>
+
+Clay is not a first-hour resource. It becomes relevant later, around the canyon biome.
+
+The important thing is not to look for it too early. If a recipe asks for Clay and you have not reached the canyon-style area yet, keep progressing.
+
+Once you do find Clay, collect more than the exact amount you need. Later crafting chains can ask for a lot of it, and backtracking for one missing material is one of the slowest parts of Outbound.
+
+<h2 id="resources-by-area">
+  Resources by area and biome
+</h2>
+
+Use this as a practical area checklist.
+
+<GuideTable
+  caption="Outbound resources by early area and biome."
+  columns={biomeColumns}
+  rows={biomeRows}
+/>
+
+<h2 id="what-to-do-when-missing-resource">
+  What to do when you are missing a resource
+</h2>
+
+If a recipe is blocking you, do not drive randomly. First identify the type of resource you are missing.
+
+<GuideTable
+  caption="Where to check when you are missing a resource in Outbound."
+  columns={shortageColumns}
+  rows={shortageRows}
+/>
+
+<GuideCallout title="Backtracking rule">
+If you need one specific material, return with an empty backpack, locked vouchers if you are visiting towers, and enough battery to get back. Do not start a resource run already overloaded.
+</GuideCallout>
+
+<h2 id="best-storage-habits">
+  Best storage habits for resource farming
+</h2>
+
+Resource farming gets annoying when your backpack is full, your stamina is low, and your van is far away.
+
+Use these habits:
+
+1. **Park close to the resource area.**
+2. **Deposit before leaving the van.**
+3. **Lock Download Vouchers.**
+4. **Keep one or two food items on you.**
+5. **Gather in short loops.**
+6. **Return before the backpack is full if the van is close.**
+7. **Use the dog pouch later when available.**
+8. **Do not carry heavy stacks of food, water, or decorations during resource runs.**
+
+The van is your real storage. Your backpack is just the bag you use between the van and the resource node.
+
+Read the <Link href="/outbound/storage-backpack-guide">Storage and Backpack Guide</Link> if inventory is slowing you down.
+
+<h2 id="common-mistakes">
+  Common resource mistakes
+</h2>
+
+<GuideTable
+  caption="Common Outbound resource mistakes and better habits."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<GuideCallout title="Best resource mindset">
+Outbound is not about finding one magic farm spot. It is about making every stop useful: gather, deposit, recycle, unlock, craft, and move to the next blocker.
+</GuideCallout>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Where do I find Scrap Metal in Outbound?
+
+Check around Signal Towers, roadside junk, supply boxes, abandoned stops, and mining areas. One Metal Scrap pickup gives 3 Scrap Metal, and tower-side Scrap Metal can respawn after time passes or after sleeping.
+
+### Where do I find Fiber?
+
+Fiber comes from bushes. Small bushes can be gathered early, while larger bushes may require the Sickle.
+
+### Where do I find Everwood?
+
+Everwood comes from loose logs, supply boxes, campsites, wooded paths, and larger wood sources once you unlock the Axe.
+
+### How do I get Everwood Planks?
+
+Build the Sawmill and process Everwood into Everwood Planks. The Sawmill costs 10 Everwood and 2 Scrap Metal, and 2 Everwood makes 1 Everwood Plank.
+
+### Where do I find Coarse Ore?
+
+Check the mining-style ore pocket or metal-heavy landmarks. Coarse Ore is not spread evenly across normal roadside rocks, so explore mining POIs if smelting recipes are blocking you.
+
+### Where do I find Redwood?
+
+Redwood appears after you leave the first map and reach the coast / second map area. It becomes important for later tools, campfires, and biome progression.
+
+### Where do I find Clay?
+
+Clay appears later, around the canyon biome. It is not something you should expect to farm in the first map.
+
+### What is Litter used for?
+
+Litter becomes Download Vouchers through the Recycler. See <Link href="#litter-download-vouchers">Litter and Download Vouchers</Link>.
+
+### Do resources respawn?
+
+Some resources around towers and common pickup areas can return over time. Scrap Metal around Signal Towers is especially worth rechecking when you are short.
+
+### What should I burn for power?
+
+Use common Everwood if you need emergency charge, use Fiber only as a backup, and avoid burning Silverbark or Redwood until you know your next recipe costs.

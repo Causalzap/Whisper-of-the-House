@@ -64,7 +64,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/farever`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/everything-is-crab`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/the-spell-brigade`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-               
+    { url: `${base}/outbound`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/outbound/leave-first-biome`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/outbound/energy-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/outbound/early-resources`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/outbound/blueprints-workstations-upgrades`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/outbound/storage-backpack-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/the-spell-brigade/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/the-spell-brigade/best-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

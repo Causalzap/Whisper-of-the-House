@@ -96,7 +96,46 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-orange-700",
 },
 
-
+{
+  href: "/outbound",
+  game: "Outbound",
+  title: "Complete Beginner Guide Hub",
+  description:
+    "Start here for the best starting van, first steps, Signal Towers, blueprints, storage, energy, resources, Mossrocks, dogs, co-op, and early progression.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/outbound/leave-first-biome",
+  game: "Outbound",
+  title: "First Biome Progression Guide",
+  description:
+    "How to leave the first biome, including broken bridges, Everwood Planks, the drawbridge switch, Motor I, Pickaxe II, Mossrocks, and Paws & Whiskers Lodge.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/outbound/energy-guide",
+  game: "Outbound",
+  title: "Energy & Battery Guide",
+  description:
+    "Fix battery drain with Power Unit fuel, charging stations, solar, wind, rainwater, van weight, vehicle upgrades, co-op power tips, and out-of-power recovery.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+{
+  href: "/outbound/early-resources",
+  game: "Outbound",
+  title: "Early Resource Guide",
+  description:
+    "Find Scrap Metal, Everwood, Fiber, Litter, Coarse Ore, Silverbark, Redwood, Clay, Sawmill numbers, bridge materials, respawns, and farming routes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
       // ===== Road to Vostok =====
   {
     href: "/road-to-vostok/area-05-guide",

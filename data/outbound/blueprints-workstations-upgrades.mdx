@@ -1,0 +1,787 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const priorityColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "unlock", label: "Blueprint / System" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const priorityRows = [
+  {
+    priority: "1",
+    unlock: "Basic Tools",
+    why:
+      "The first Signal Tower gives you the Wrench, Build Hammer, and Homing Boots. This starts the whole progression loop.",
+  },
+  {
+    priority: "2",
+    unlock: "Recycler",
+    why:
+      "Turns Litter into Download Vouchers. Build it early with 2 Everwood and 1 Scrap Metal on a counter inside your van.",
+  },
+  {
+    priority: "3",
+    unlock: "Axe / Pickaxe / Sickle",
+    why:
+      "Tools unlock larger logs, rock blockers, bigger bushes, Mossrocks, and better resource routes.",
+  },
+  {
+    priority: "4",
+    unlock: "Sawmill",
+    why:
+      "Turns Everwood into Planks, which are needed for bridge repairs, building pieces, and early progression.",
+  },
+  {
+    priority: "5",
+    unlock: "Sewing Table",
+    why:
+      "Starts the backpack and clothing upgrade path. Sickle and Fiber matter more once this line opens.",
+  },
+  {
+    priority: "6",
+    unlock: "Base Building Deck",
+    why:
+      "Lets you build upward on top of your van, turning the camper into a real mobile base instead of a cramped workshop.",
+  },
+  {
+    priority: "7",
+    unlock: "Bolt Press",
+    why:
+      "Turns Scrap Metal into Bolts, which are needed for motor upgrades and several building / research chains.",
+  },
+  {
+    priority: "8",
+    unlock: "Vehicle Research Station",
+    why:
+      "Unlocks motor, slope, battery, weight, building space, and outdoor building upgrades for your van.",
+  },
+  {
+    priority: "9",
+    unlock: "Gear Research Station",
+    why:
+      "Unlocks backpack, stamina, and health upgrades, making longer resource trips much easier.",
+  },
+  {
+    priority: "10",
+    unlock: "Power blueprints",
+    why:
+      "Solar, wind, rainwater, and better power systems reduce battery stress once your basic progression chain is stable.",
+  },
+];
+
+export const workstationColumns = [
+  { key: "workstation", label: "Workstation" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "whenToPrioritize", label: "When To Prioritize It" },
+];
+
+export const workstationRows = [
+  {
+    workstation: "Recycler",
+    whatItDoes:
+      "Processes Litter into Download Vouchers. Early recipe: 2 Everwood + 1 Scrap Metal, placed on a counter.",
+    whenToPrioritize:
+      "When you need more Signal Tower unlocks or you keep finding Litter at campsites and POIs.",
+  },
+  {
+    workstation: "Sawmill",
+    whatItDoes:
+      "Processes wood into planks.",
+    whenToPrioritize:
+      "When a bridge asks for Everwood Planks, or when building pieces start asking for processed wood.",
+  },
+  {
+    workstation: "Sewing Table",
+    whatItDoes:
+      "Supports backpack and clothing upgrades such as carry capacity, stamina, and health-related gear paths.",
+    whenToPrioritize:
+      "When Backpack Upgrade, clothing upgrades, or Fiber-based gear recipes start appearing.",
+  },
+  {
+    workstation: "Bolt Press",
+    whatItDoes:
+      "Turns Scrap Metal into Bolts.",
+    whenToPrioritize:
+      "When a motor upgrade, vehicle upgrade, or building piece asks for Bolts.",
+  },
+  {
+    workstation: "Metal Smelter",
+    whatItDoes:
+      "Processes ore and metal materials for heavier crafting chains.",
+    whenToPrioritize:
+      "When recipes start asking for Coarse Ore, metal bars, or smelted parts instead of raw Scrap Metal.",
+  },
+  {
+    workstation: "Nailing Station",
+    whatItDoes:
+      "Supports building and construction-style chains.",
+    whenToPrioritize:
+      "When roof, wall, deck, or furniture recipes start asking for construction parts.",
+  },
+  {
+    workstation: "Vehicle Research Station",
+    whatItDoes:
+      "Researches vehicle upgrades such as motor, battery, slope, weight, and building space.",
+    whenToPrioritize:
+      "When a steep slope blocks your route, your battery feels too small, or your van build hits weight / space limits.",
+  },
+  {
+    workstation: "Gear Research Station",
+    whatItDoes:
+      "Researches backpack, stamina, and health upgrades.",
+    whenToPrioritize:
+      "When you are constantly overencumbered, running out of stamina, or taking avoidable exploration damage.",
+  },
+];
+
+export const toolColumns = [
+  { key: "tool", label: "Tool" },
+  { key: "unlocks", label: "What It Unlocks" },
+  { key: "priority", label: "Priority" },
+];
+
+export const toolRows = [
+  {
+    tool: "Wrench",
+    unlocks:
+      "Repairs the first gate and teaches basic repair interactions.",
+    priority:
+      "Required first. Craft it as soon as Basic Tools unlocks.",
+  },
+  {
+    tool: "Build Hammer",
+    unlocks:
+      "Lets you place counters, workstations, furniture, and van-building pieces.",
+    priority:
+      "Very high. You need it for the Recycler and most mobile-base systems.",
+  },
+  {
+    tool: "Homing Boots",
+    unlocks:
+      "Helps you return toward your vehicle at night when movement becomes worse.",
+    priority:
+      "Useful, but not more important than core progression tools.",
+  },
+  {
+    tool: "Axe",
+    unlocks:
+      "Larger wood sources and better wood gathering.",
+    priority:
+      "High if you are short on Everwood or building materials.",
+  },
+  {
+    tool: "Pickaxe",
+    unlocks:
+      "Rock blockers, mining resources, and eventually Mossrock progression.",
+    priority:
+      "High. Do not delay Pickaxe upgrades if you want to leave the first map.",
+  },
+  {
+    tool: "Sickle",
+    unlocks:
+      "Larger Fiber bushes and plant-style gathering.",
+    priority:
+      "Medium early, higher once Sewing Table, Fiber, or farming chains start blocking you.",
+  },
+];
+
+export const decisionColumns = [
+  { key: "stuckOn", label: "If You Are Stuck On..." },
+  { key: "unlockThis", label: "Unlock / Build This" },
+  { key: "why", label: "Why" },
+];
+
+export const decisionRows = [
+  {
+    stuckOn: "No more blueprints",
+    unlockThis: "Recycler + Download Vouchers",
+    why:
+      "Most towers after the first one need vouchers, and the Recycler turns Litter into vouchers.",
+  },
+  {
+    stuckOn: "Bridge repairs",
+    unlockThis: "Sawmill",
+    why:
+      "Bridges usually need Planks, and Planks come from processed wood.",
+  },
+  {
+    stuckOn: "Backpack too small",
+    unlockThis: "Sewing Table / Gear Research",
+    why:
+      "These lead into backpack, stamina, and clothing upgrade paths.",
+  },
+  {
+    stuckOn: "Cannot harvest large Fiber bushes",
+    unlockThis: "Sickle",
+    why:
+      "The Sickle lets you gather bigger plant and Fiber nodes.",
+  },
+  {
+    stuckOn: "Cannot build on top of the van",
+    unlockThis: "Base Building Deck",
+    why:
+      "This unlocks roof / upper-deck building and makes your van expansion much less cramped.",
+  },
+  {
+    stuckOn: "Steep slope",
+    unlockThis: "Vehicle Research + Bolt Press",
+    why:
+      "You need vehicle upgrades, and motor upgrades often need Bolts.",
+  },
+  {
+    stuckOn: "Battery problems",
+    unlockThis: "Battery capacity + power blueprints",
+    why:
+      "Manual fuel helps early, but upgrades and passive power make travel smoother.",
+  },
+  {
+    stuckOn: "Mossrocks",
+    unlockThis: "Pickaxe upgrade",
+    why:
+      "Mossrocks are a tool-gated exit path, not a puzzle button.",
+  },
+];
+
+export const coopColumns = [
+  { key: "topic", label: "Co-op Topic" },
+  { key: "whatToKnow", label: "What To Know" },
+];
+
+export const coopRows = [
+  {
+    topic: "Blueprint ownership",
+    whatToKnow:
+      "Blueprints, recipes, bridge repairs, van upgrades, and world unlocks are tied to the host save, not permanently to every player.",
+  },
+  {
+    topic: "Joining a friend's world",
+    whatToKnow:
+      "When you join someone else's world, treat that session as progress inside their save. The group's van and unlocked recipes help everyone while playing there.",
+  },
+  {
+    topic: "Returning to your own save",
+    whatToKnow:
+      "Do not expect the host's blueprint progress, repaired bridges, or upgraded van to appear in your own solo world afterward.",
+  },
+  {
+    topic: "Best co-op habit",
+    whatToKnow:
+      "Choose one main host for a shared run. Have one player drive, one gather, one handle towers / vouchers, and one build or process materials.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "fix", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Panicking over the first tool choice",
+    fix:
+      "Do not worry too much. Signal Towers can reactivate and cycle new blueprint options later.",
+  },
+  {
+    mistake: "Ignoring Litter",
+    fix:
+      "Pick up Litter and keep the Recycler running for Download Vouchers.",
+  },
+  {
+    mistake: "Depositing vouchers by accident",
+    fix:
+      "Lock Download Vouchers in your backpack before using the van deposit panel.",
+  },
+  {
+    mistake: "Choosing decoration before progression",
+    fix:
+      "Prioritize tools, Sawmill, Sewing Table, Base Building Deck, Bolt Press, Vehicle Research, and Gear Research first.",
+  },
+  {
+    mistake: "Forgetting processed materials",
+    fix:
+      "Check whether you need Planks, Bolts, or smelted materials instead of raw resources.",
+  },
+  {
+    mistake: "Trying to finish all van upgrades in the first biome",
+    fix:
+      "The first map mainly supports early vehicle upgrades. Higher-tier materials and recipes come from later maps and biomes.",
+  },
+  {
+    mistake: "Assuming co-op unlocks transfer everywhere",
+    fix:
+      "Treat blueprint and vehicle progress as host-save progress unless your group has tested otherwise.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best blueprints to unlock first in Outbound are Basic Tools, Recycler, Axe / Pickaxe / Sickle, Sawmill, Sewing Table, Base Building Deck, Bolt Press, Vehicle Research Station, and Gear Research Station.**
+
+Do not panic over one blueprint choice. **Signal Towers can reactivate and cycle new options later**, so you usually are not permanently locked out. Your real job is to keep the unlock chain moving:
+
+**Litter → Recycler → Download Vouchers → Signal Towers → Blueprints → Workstations → Tools / upgrades / van expansion**
+
+If you are stuck, look for the missing link: a voucher, a blueprint, a workstation, a processed material, a tool upgrade, or a vehicle upgrade.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-first-signal-tower-blueprints.webp"
+    alt="Outbound blueprint guide showing how to download Basic Tools at the first Signal Tower."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Signal Towers are your main blueprint gates. The first one teaches the system with Basic Tools, then later towers ask for vouchers.
+  </figcaption>
+</figure>
+
+<h2 id="best-blueprints-first">
+  Best blueprints to unlock first in Outbound
+</h2>
+
+Outbound looks like a cozy van-building game, but progression is controlled by blueprints.
+
+A blueprint is not just a recipe. It is usually the key to a new system: tools, workstations, vehicle upgrades, gear upgrades, power, farming, building, or decoration.
+
+For a smooth early game, prioritize blueprints that unlock more progression before spending too much on cosmetic or comfort items.
+
+<GuideTable
+  caption="Best Outbound blueprints to unlock first."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<GuideCallout title="Blueprint rule">
+If a blueprint helps you gather, process, store, move, repair, upgrade, or expand your van, it is usually more important than a blueprint that only decorates the interior.
+</GuideCallout>
+
+<h2 id="signal-towers-reactivate">
+  Signal Towers reactivate, so do not panic over blueprint choices
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-signal-tower-reactivates.webp"
+    alt="Outbound Signal Towers reactivate and cycle blueprint options so players do not permanently miss key unlocks."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A tower that goes dark is not necessarily useless forever. Towers can reactivate later with more blueprint options.
+  </figcaption>
+</figure>
+
+One of the most important things the game does not explain clearly enough is that Signal Towers can reactivate and cycle new blueprint options.
+
+That means your first blueprint choice is not always a permanent disaster. If you pick Axe before Pickaxe, or food processing before sewing, you may have to route differently for a while, but you are usually not locked out forever.
+
+There is also some randomness in how blueprint options appear. You may not see the exact same tower choices in the exact same order as another player. If your friend found Vehicle Research Station, Sewing Table, or Base Building Deck at a different tower, do not assume your save is broken.
+
+Use this habit instead:
+
+- revisit towers after exploring elsewhere,
+- watch for new radio signals,
+- keep Download Vouchers ready,
+- check question-mark points of interest on the map,
+- explore towers fully if they ask for local keys or items,
+- do not build your whole plan around one fixed tower route.
+
+<GuideCallout title="Signal Tower rule">
+If the blueprint you want is not available yet, keep exploring towers and unknown POIs. Outbound often wants you to widen your route, not restart your save.
+</GuideCallout>
+
+<h2 id="download-vouchers">
+  Download Vouchers and the Recycler recipe
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-recycler-download-vouchers.webp"
+    alt="Outbound recycler recipe and how to make download vouchers from litter."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Recycler turns Litter into Download Vouchers, which makes trash one of the most important early resources.
+  </figcaption>
+</figure>
+
+Download Vouchers are the currency you use at many Signal Towers.
+
+The early loop is:
+
+**Pick up Litter → Build Recycler → Process Litter → Take Download Vouchers → Unlock blueprints at Signal Towers**
+
+To build the Recycler early, place a counter inside your van and craft the Recycler on top of it. The early recipe is:
+
+**Recycler = 2 Everwood + 1 Scrap Metal**
+
+That is why your first resource stops should not ignore loose wood, Scrap Metal, or Litter.
+
+<h2 id="lock-vouchers">
+  Lock your Download Vouchers before depositing
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-lock-download-vouchers.webp"
+    alt="Outbound how to lock Download Vouchers before depositing materials at the van storage panel."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lock vouchers before using the deposit panel, or you may leave your blueprint currency behind in van storage.
+  </figcaption>
+</figure>
+
+This is one of the easiest mistakes to make.
+
+The van deposit panel is useful because it dumps materials into storage fast. But if you deposit everything without thinking, you can accidentally store your vouchers too.
+
+Before a tower run:
+
+1. Open your backpack.
+2. Select your Download Vouchers.
+3. Lock them.
+4. Deposit everything else.
+5. Walk to the tower with vouchers still on you.
+
+This small habit saves a lot of backtracking.
+
+<h2 id="tools-choice">
+  Axe, Pickaxe, or Sickle: which tool should you choose first?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-tool-choice-axe-pickaxe-sickle.webp"
+    alt="Outbound best tool blueprint choice between Axe Pickaxe and Sickle for early progression."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Tool choices matter because each one unlocks a different kind of resource or blocker.
+  </figcaption>
+</figure>
+
+The early tool choice depends on what is blocking you.
+
+<GuideTable
+  caption="Outbound early tool priority."
+  columns={toolColumns}
+  rows={toolRows}
+/>
+
+In general:
+
+- choose **Axe** if you are short on wood or need bigger wood sources,
+- choose **Pickaxe** if rocks, mining, or Mossrocks are becoming the issue,
+- choose **Sickle** if Fiber, larger bushes, Sewing Table upgrades, or plant resources are blocking crafting.
+
+For leaving the first map, do not delay Pickaxe upgrades too long. Mossrocks are one of the key exit gates.
+
+Read the <Link href="/outbound/leave-first-biome">First Biome Progression Guide</Link> if you are stuck on Mossrocks, bridges, slopes, or the first map exit.
+
+<h2 id="sawmill">
+  Sawmill: the bridge repair blueprint
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-first-biome-sawmill-planks.webp"
+    alt="Outbound how to make Everwood Planks with the Sawmill for bridge repair."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Sawmill is the missing step when a bridge asks for planks and you only have loose wood.
+  </figcaption>
+</figure>
+
+The Sawmill should be one of your first major workstation goals.
+
+It turns wood into planks, and planks are needed for:
+
+- bridge repairs,
+- building pieces,
+- workstation chains,
+- van expansion,
+- early progression routes.
+
+If you find a broken bridge asking for Everwood Planks, gathering more loose Everwood is only half the solution. You need the Sawmill to process it.
+
+<h2 id="player-upgrades">
+  Sewing Table and Gear Research: backpack, stamina, and clothing upgrades
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-sewing-table-backpack-upgrades.webp"
+    alt="Outbound Sewing Table and Gear Research guide for backpack upgrade stamina upgrade and clothing upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Player upgrades matter because backpack space, stamina, and clothing upgrades make every resource route smoother.
+  </figcaption>
+</figure>
+
+Do not treat Sewing as a cosmetic blueprint.
+
+The **Sewing Table** and **Gear Research Station** both help solve the same player-side problem: exploration friction. If you are constantly overencumbered, low on stamina, or walking back to the van too often, this upgrade path matters as much as a new vehicle part.
+
+Think of them like this:
+
+- **Sewing Table:** the crafting side of backpack and clothing upgrades.
+- **Gear Research Station:** the research side of backpack, stamina, and health improvements.
+- **Sickle:** the tool that makes Fiber gathering easier once larger Fiber bushes start blocking you.
+- **Fiber:** the material that connects plant gathering to backpack and clothing progression.
+
+This is why the Sickle is more important than it first appears. A player who skips Sickle and Sewing may still progress, but every resource run will feel slower for longer.
+
+Prioritize this path when:
+
+- your backpack fills before every useful trip ends,
+- you cannot sprint often enough,
+- larger Fiber bushes are blocking material collection,
+- clothing or backpack recipes start asking for Fiber,
+- you are spending more time walking back to the van than exploring.
+
+If your main frustration is inventory, do not only look for van upgrades. Look for Sewing, Gear Research, Fiber, and backpack upgrades too.
+
+Read the <Link href="/outbound/storage-backpack-guide">Storage and Backpack Guide</Link> if backpack space is your main blocker.
+
+<h2 id="base-building-deck">
+  Base Building Deck: how to build upward on your van
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-base-building-deck-treehut.webp"
+    alt="Outbound Base Building Deck blueprint location near the Treehut and Fire Lookout route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Base Building Deck is the blueprint that turns van building from cramped interior placement into real vertical expansion.
+  </figcaption>
+</figure>
+
+The Base Building Deck is one of the most important building blueprints because it lets you build upward on top of your van.
+
+Without it, your van can feel cramped quickly. You are trying to fit the Recycler, Sawmill, Sewing Table, Bolt Press, power production, food tools, storage-friendly layouts, and decoration into a small space. The deck gives you a second layer to work with.
+
+A common early route is to repair the bridge near the Fire Lookout path, reach the Treehut / upper building area, and look for the blueprint there. Because blueprint availability can vary, treat this as a high-priority POI route rather than a guaranteed fixed unlock.
+
+Once you have the Base Building Deck, think of your van in zones:
+
+- **Interior:** core workbench access, quick deposit, storage habits, essential machines.
+- **Roof deck:** Sawmill, Bolt Press, Sewing Table, power tools, and bulky workstations.
+- **Outdoor / upper area:** farming, turbines, water systems, decorative space, and future expansion.
+- **Weight-limited sections:** anything heavy should wait until you research more vehicle weight or building capacity.
+
+The deck is not just for making the van look cooler. It reduces workstation clutter and makes the whole mobile-base loop smoother.
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-van-roof-expansion.webp"
+    alt="Outbound van roof expansion guide showing how to build upward after Base Building Deck."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vertical building lets you fit workstations, power, farming, and living space into the same mobile base.
+  </figcaption>
+</figure>
+
+<h2 id="metal-workstations">
+  Metal Smelter, Bolt Press, or Nailing Station?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-metal-smelter-bolt-press-nailing-station.webp"
+    alt="Outbound workstation blueprint choice between Metal Smelter Bolt Press and Nailing Station."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When metal workstations appear, pick based on the upgrade chain currently blocking you.
+  </figcaption>
+</figure>
+
+This is where Outbound starts to feel less like “collect everything” and more like “process the right material.”
+
+The best choice depends on your blocker:
+
+- **Bolt Press** if motor upgrades, vehicle upgrades, or bolt recipes are blocking you.
+- **Metal Smelter** if recipes start asking for Coarse Ore or smelted metal parts.
+- **Nailing Station** if building and construction chains are your focus.
+
+If you are trying to climb a steep slope, the Bolt Press usually becomes more important because motor upgrades often need Bolts.
+
+<h2 id="vehicle-research">
+  Vehicle Research Station: motor, battery, weight, and building space
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-vehicle-research-station.webp"
+    alt="Outbound Vehicle Research Station guide for motor upgrade battery capacity weight and building space."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Vehicle Research turns the van from a starter camper into a real progression machine.
+  </figcaption>
+</figure>
+
+The Vehicle Research Station is one of the most important mid-early unlocks.
+
+It opens upgrades for:
+
+- motor,
+- slope handling,
+- battery capacity,
+- vehicle weight,
+- building space,
+- outdoor building,
+- base expansion.
+
+This matters because some routes are not blocked by your character. They are blocked by your van.
+
+If a steep slope stops you, you do not need to drive better. You need vehicle research, processed parts, and a motor upgrade.
+
+Do not expect the first biome to support every van upgrade. The early map mainly gives enough materials for the first stage of vehicle progression. Faster travel, larger builds, better power systems, and more furniture / workstation routes often depend on materials and blueprints from later maps and biomes.
+
+<h2 id="bolt-press-motor-upgrade">
+  Bolt Press and Motor Upgrade chain
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-bolt-press-making-bolts.webp"
+    alt="Outbound Bolt Press guide showing how to make Bolts from Scrap Metal for motor upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Bolt Press turns Scrap Metal into Bolts, which makes Scrap Metal even more important than it looks early on.
+  </figcaption>
+</figure>
+
+Motor upgrades usually require processed parts, not just raw Scrap Metal.
+
+The short version is:
+
+**Scrap Metal → Bolt Press → Bolts → Vehicle Research → Motor Upgrade**
+
+Once you understand this chain, a lot of Outbound becomes easier. When the game blocks you, it is usually not hiding one missing item. It is asking whether you built the whole chain.
+
+<h2 id="what-to-unlock-next">
+  What should you unlock next?
+</h2>
+
+Use this as a quick troubleshooting table.
+
+<GuideTable
+  caption="What to unlock next when you are stuck in Outbound."
+  columns={decisionColumns}
+  rows={decisionRows}
+/>
+
+<GuideCallout title="Missing-link rule">
+When you are stuck, ask which part of the chain is missing: raw resource, processed material, workstation, research station, blueprint, voucher, tool upgrade, or vehicle upgrade.
+</GuideCallout>
+
+<h2 id="co-op-blueprints">
+  Co-op blueprint and save progress notes
+</h2>
+
+Co-op makes blueprint choices feel more important because one player's unlocks can help the whole group inside the host world.
+
+The important warning is that co-op progression is tied to the save you are playing in. If you join someone else's game, you are helping progress that host world. Do not expect the host's repaired bridges, van upgrades, workstation layout, or blueprint progress to appear in your own solo save afterward.
+
+<GuideTable
+  caption="Outbound co-op blueprint and progression notes."
+  columns={coopColumns}
+  rows={coopRows}
+/>
+
+<GuideCallout title="Co-op rule">
+Before a long co-op session, decide whose world is the main save. Blueprint and van progress is most useful when the same host keeps running the shared world.
+</GuideCallout>
+
+<h2 id="common-mistakes">
+  Common blueprint mistakes
+</h2>
+
+<GuideTable
+  caption="Common Outbound blueprint and workstation mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<GuideCallout title="Best early blueprint mindset">
+Build a functional van before a beautiful one. Tools, vouchers, workstations, research, storage, power, and vertical expansion make every later decoration easier.
+</GuideCallout>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What are the best blueprints to unlock first in Outbound?
+
+Prioritize Basic Tools, Recycler, Axe / Pickaxe / Sickle, Sawmill, Sewing Table, Base Building Deck, Bolt Press, Vehicle Research Station, and Gear Research Station.
+
+### Can I permanently miss a blueprint?
+
+Usually, no. Signal Towers can reactivate and cycle new blueprint options later. You may need to revisit towers, follow new radio signals, or explore question-mark POIs.
+
+### Are blueprints random in Outbound?
+
+Blueprint availability can vary by save and route. If another player found a blueprint at a different tower, keep checking Signal Towers and question-mark POIs instead of assuming your game is broken.
+
+### How do I build the Recycler?
+
+Build a counter inside your van, then place the Recycler on it. The early Recycler recipe is 2 Everwood and 1 Scrap Metal. Use it to turn Litter into Download Vouchers.
+
+### What does the Sewing Table do?
+
+The Sewing Table supports backpack and clothing upgrade paths. It connects Fiber gathering to better carry capacity, stamina, and health-style gear progression.
+
+### How do I build on top of the van?
+
+Look for the Base Building Deck blueprint. After crafting it, you can start placing roof floors and expanding upward, though weight and building-space upgrades still matter.
+
+### Where is the Base Building Deck?
+
+A common early route is around the Treehut / Fire Lookout side of the first map after repairing bridge access. Because blueprint availability can vary, check nearby POIs and towers if it is not exactly where another player found it.
+
+### Why am I missing materials even after building Vehicle Research?
+
+Some vehicle upgrades are designed for later progression. The first biome mainly supports early van upgrades; higher-tier materials and more advanced recipes often require later maps and biomes.
+
+### How do blueprints work in co-op?
+
+Blueprints, recipes, bridges, van upgrades, and workstation progress are tied to the host save. They help the group while playing in that world, but they should not be expected to transfer back to each guest's own solo save.

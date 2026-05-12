@@ -1,0 +1,761 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const storageColumns = [
+  { key: "system", label: "Storage System" },
+  { key: "howItWorks", label: "How It Works" },
+  { key: "bestUse", label: "Best Use" },
+];
+
+export const storageRows = [
+  {
+    system: "Backpack",
+    howItWorks:
+      "Your personal inventory starts with a small slot limit. Early on, this is only for short trips away from the van.",
+    bestUse:
+      "Carry locked Download Vouchers, a little food, current repair materials, and whatever you are gathering right now.",
+  },
+  {
+    system: "Van storage",
+    howItWorks:
+      "The van is your main inventory. It holds far more than your backpack and can expand as you add storage modules later.",
+    bestUse:
+      "Store common resources, rare biome materials, spare fuel, processed parts, food, decorations, and anything not needed for the current trip.",
+  },
+  {
+    system: "Deposit panel",
+    howItWorks:
+      "The deposit panel near the driver-side rear wheel sends backpack materials into van storage.",
+    bestUse:
+      "Use it every time you return to the van, especially after resource runs.",
+  },
+  {
+    system: "Storage info screen",
+    howItWorks:
+      "The small screen above the storage panel opens the storage list so you can take items back out.",
+    bestUse:
+      "Use it when you need vouchers, repair materials, food, or items for world interactions.",
+  },
+  {
+    system: "Workbench auto-pull",
+    howItWorks:
+      "Workstations on the van can pull materials directly from van storage.",
+    bestUse:
+      "Keep crafting materials stored in the van instead of carrying everything in your backpack.",
+  },
+  {
+    system: "Locked items",
+    howItWorks:
+      "Locked backpack items stay with you when you deposit other materials.",
+    bestUse:
+      "Lock Download Vouchers, bridge materials, vending-machine items, or anything needed away from the van.",
+  },
+  {
+    system: "Dog pouch",
+    howItWorks:
+      "After you unlock a dog companion, the pouch can hold extra items and help reduce return trips.",
+    bestUse:
+      "Use it as emergency overflow or to send items back toward the van when you are far from storage.",
+  },
+];
+
+export const carryColumns = [
+  { key: "item", label: "Item Type" },
+  { key: "carryOrStore", label: "Carry or Store?" },
+  { key: "why", label: "Why" },
+];
+
+export const carryRows = [
+  {
+    item: "Download Vouchers",
+    carryOrStore: "Carry and lock",
+    why:
+      "Signal Towers need vouchers in your backpack. Lock them before using the deposit panel.",
+  },
+  {
+    item: "Food",
+    carryOrStore: "Carry a small amount",
+    why:
+      "A few Roadberries, bananas, or cooked foods are useful, but too much food clogs your backpack.",
+  },
+  {
+    item: "Ginger / healing items",
+    carryOrStore: "Carry one or two",
+    why:
+      "Good for fall damage, hunger mistakes, or long trips away from the van.",
+  },
+  {
+    item: "Scrap Metal",
+    carryOrStore: "Store often",
+    why:
+      "You need a lot of it, but it fills slots quickly. Deposit it whenever you return to the van.",
+  },
+  {
+    item: "Wood / Fiber",
+    carryOrStore: "Store most, carry only as needed",
+    why:
+      "Both can be fuel or crafting materials. Keep a reserve in van storage instead of carrying all of it.",
+  },
+  {
+    item: "Bridge or repair materials",
+    carryOrStore: "Carry only for the current job",
+    why:
+      "Bring Planks, Bolts, or special materials only when you are heading to that repair point.",
+  },
+  {
+    item: "Cap-N-Snap / vending items",
+    carryOrStore: "Carry when using",
+    why:
+      "World interactions usually need the item in your backpack, not only in van storage.",
+  },
+  {
+    item: "Rare biome materials",
+    carryOrStore: "Store immediately",
+    why:
+      "Silverbark, Redwood, Clay, and new materials may be needed later. Do not waste backpack space carrying them around.",
+  },
+  {
+    item: "Decorations",
+    carryOrStore: "Store",
+    why:
+      "Decorations are fun, but they should not take space during tower, bridge, mining, or resource runs.",
+  },
+];
+
+export const routeColumns = [
+  { key: "route", label: "Trip Type" },
+  { key: "bring", label: "Bring" },
+  { key: "storeBeforeLeaving", label: "Store Before Leaving" },
+];
+
+export const routeRows = [
+  {
+    route: "Signal Tower run",
+    bring:
+      "Locked Download Vouchers, small food stack, maybe Ginger.",
+    storeBeforeLeaving:
+      "Scrap Metal, extra wood, Fiber, decorations, bottle caps you are not using.",
+  },
+  {
+    route: "Bridge repair",
+    bring:
+      "Required Planks or repair materials, food if the bridge is far.",
+    storeBeforeLeaving:
+      "Anything not used for that bridge.",
+  },
+  {
+    route: "Resource farming",
+    bring:
+      "Food, maybe one emergency healing item, empty backpack space.",
+    storeBeforeLeaving:
+      "Vouchers if not visiting towers, decorations, processed parts, extra food.",
+  },
+  {
+    route: "Mining trip",
+    bring:
+      "Pickaxe, food, empty space, and dog pouch later.",
+    storeBeforeLeaving:
+      "Wood, Fiber, caps, decorations, and materials unrelated to mining.",
+  },
+  {
+    route: "New biome scouting",
+    bring:
+      "Food, locked vouchers, fuel plan, and as much empty space as possible.",
+    storeBeforeLeaving:
+      "Old common materials unless you need them for a known repair or tower.",
+  },
+  {
+    route: "Cap-N-Snap / vending stop",
+    bring:
+      "The exact currency or item the machine needs.",
+    storeBeforeLeaving:
+      "Unrelated resources, crafting materials, and decorations.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "upgrade", label: "Upgrade / Habit" },
+  { key: "priority", label: "Priority" },
+  { key: "whyItHelps", label: "Why It Helps" },
+];
+
+export const upgradeRows = [
+  {
+    upgrade: "Find the deposit panel",
+    priority: "Essential",
+    whyItHelps:
+      "Most early storage problems come from not knowing where to deposit materials.",
+  },
+  {
+    upgrade: "Use Storage info to retrieve items",
+    priority: "Essential",
+    whyItHelps:
+      "The deposit panel sends items in; the screen above it is how you browse storage and take items back out.",
+  },
+  {
+    upgrade: "Lock Download Vouchers",
+    priority: "Essential",
+    whyItHelps:
+      "Prevents backtracking when you reach a Signal Tower without your blueprint currency.",
+  },
+  {
+    upgrade: "Build the Recycler",
+    priority: "Very high",
+    whyItHelps:
+      "Turns Litter into vouchers, making every resource stop more useful.",
+  },
+  {
+    upgrade: "Sewing Table",
+    priority: "High",
+    whyItHelps:
+      "This is the practical crafting station for backpack and clothing upgrade paths.",
+  },
+  {
+    upgrade: "Backpack upgrade",
+    priority: "High",
+    whyItHelps:
+      "More slots means longer trips, fewer slow walks, and less constant dumping.",
+  },
+  {
+    upgrade: "Gear Research Station",
+    priority: "High",
+    whyItHelps:
+      "Supports backpack, stamina, and health improvements alongside Sewing Table progression.",
+  },
+  {
+    upgrade: "Extra van storage modules",
+    priority: "Medium to high",
+    whyItHelps:
+      "More storage containers and external racks make the van better as a long-term mobile base.",
+  },
+  {
+    upgrade: "Dog pouch",
+    priority: "Medium once unlocked",
+    whyItHelps:
+      "Gives overflow space and can reduce how often you personally walk back to the van.",
+  },
+];
+
+export const problemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "cause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const problemRows = [
+  {
+    problem: "I cannot find the storage panel",
+    cause:
+      "The panel blends into the van body and is easy to miss.",
+    fix:
+      "Go to the driver-side rear wheel area, look down / scan the side of the van, and move until the Deposit materials prompt appears.",
+  },
+  {
+    problem: "I deposited items but cannot get them back",
+    cause:
+      "The deposit panel only sends items into storage.",
+    fix:
+      "Look at the small screen above the panel until Storage info appears, then open the storage menu and take items from the list.",
+  },
+  {
+    problem: "I cannot find an old item in storage",
+    cause:
+      "The quick screen may show recent materials first.",
+    fix:
+      "Scroll through the full storage list instead of only checking the first visible items.",
+  },
+  {
+    problem: "I cannot use a Signal Tower item",
+    cause:
+      "The item may be in van storage instead of your backpack.",
+    fix:
+      "Take it out through Storage info and lock it in your backpack before walking to the tower.",
+  },
+  {
+    problem: "I cannot sprint anymore",
+    cause:
+      "Your backpack is over the slot limit.",
+    fix:
+      "Return to the van, deposit materials, eat or store extra food, and use the dog pouch later if available.",
+  },
+  {
+    problem: "My Download Vouchers disappeared",
+    cause:
+      "You probably deposited them into van storage by accident.",
+    fix:
+      "Open Storage info, take them back out, then lock them in your backpack before using the deposit panel again.",
+  },
+  {
+    problem: "Crafting feels like it needs too much backpack space",
+    cause:
+      "You may be carrying materials manually even though van workstations can pull from storage.",
+    fix:
+      "Keep crafting materials in van storage and craft at van workstations without filling your backpack first.",
+  },
+  {
+    problem: "Backpack upgrades are confusing",
+    cause:
+      "Sewing Table and Gear Research are related but not the same system.",
+    fix:
+      "Use Sewing Table for the practical backpack / clothing crafting path, and Gear Research for broader backpack, stamina, and health upgrades.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To manage storage in Outbound, use your van as the main inventory and your backpack as a short-trip bag.**
+
+The deposit panel is near the **driver-side rear wheel** of the van and can be hard to see because it blends into the vehicle. Walk close to the rear wheel area, look down, and scan until the **Deposit materials** prompt appears.
+
+To take items back out, look at the small screen above the panel until **Storage info** appears, then open the storage list. For world interactions like **Signal Towers**, bridge repairs, or **Cap-N-Snap machines**, the item usually needs to be in your backpack.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-storage-backpack-20-slots.webp"
+    alt="Outbound backpack upgrade guide showing the early 20 slot backpack limit."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The early backpack limit is one of the first real friction points in Outbound.
+  </figcaption>
+</figure>
+
+<h2 id="how-storage-works">
+  How storage works in Outbound
+</h2>
+
+Outbound storage is simple once you stop treating the backpack as your main inventory.
+
+Use this mental model:
+
+**Backpack = what I need for this trip.**  
+**Van storage = everything I own.**
+
+Your backpack is for short trips away from the van. Your van storage is where almost everything should live.
+
+<GuideTable
+  caption="Outbound storage systems and when to use them."
+  columns={storageColumns}
+  rows={storageRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<GuideCallout title="Storage rule">
+Deposit first, then decide what to take back out. The van is your inventory; the backpack is only the trip.
+</GuideCallout>
+
+<h2 id="storage-panel-location">
+  Where to find the storage panel
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-van-storage-power-unit.webp"
+    alt="Outbound storage panel location near the driver side rear wheel and deposit materials prompt."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The storage panel blends into the van, so walk near the driver-side rear wheel and look for the Deposit materials prompt.
+  </figcaption>
+</figure>
+
+The storage panel is one of the easiest things to miss in the early game.
+
+It is near the **driver-side rear wheel** of the van. The problem is that it uses colors close to the van body, so it does not always look like a big obvious container.
+
+To find it:
+
+1. Walk to the driver-side rear wheel area.
+2. Move close to the side of the van.
+3. Look slightly down and scan the panel area.
+4. Wait for the **Deposit materials** prompt.
+5. Interact to send carried materials into van storage.
+
+This panel is for depositing. It does not explain the whole storage system by itself, which is why many players think their items disappeared.
+
+<h2 id="retrieve-items">
+  How to take items back out of van storage
+</h2>
+
+Depositing and retrieving are two different interactions.
+
+The deposit panel sends items into van storage. To take items back out, look at the small screen above the panel until the **Storage info** prompt appears. Interact with that screen to open the storage list.
+
+From there, you can choose items and move them back into your backpack.
+
+Important details:
+
+- The first visible list may show recent materials.
+- Older items may require scrolling through the full storage list.
+- If you deposited Download Vouchers by accident, this is how you get them back.
+- If a tower, bridge, or vending machine needs an item, take it out before leaving the van.
+
+Do not assume an item is gone just because it is not visible immediately. Scroll the storage list first.
+
+<h2 id="crafting-from-storage">
+  Workstations can use materials from van storage
+</h2>
+
+This is the storage mechanic that saves the most backpack space.
+
+When you are using workstations on your van, the game can pull required materials directly from van storage. That means you do **not** need to fill your backpack with Scrap Metal, wood, Fiber, Planks, Bolts, and food just to craft at the van.
+
+Use this rule:
+
+**Crafting at the van = storage can help.**  
+**Using something out in the world = put it in your backpack.**
+
+Examples:
+
+- Sawmill, Recycler, Sewing Table, Bolt Press, and other van workstations can use stored materials.
+- Signal Towers need Download Vouchers in your backpack.
+- Cap-N-Snap machines and similar world interactions usually need the item carried with you.
+- Bridge repairs require you to bring the repair materials to the bridge.
+
+This one rule prevents most unnecessary backpack clutter.
+
+<h2 id="lock-items">
+  Lock important items before depositing
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-lock-download-vouchers.webp"
+    alt="Outbound how to lock Download Vouchers before depositing items into van storage."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lock vouchers before using the deposit panel so your blueprint currency stays with you.
+  </figcaption>
+</figure>
+
+The deposit panel is useful because it dumps materials into storage fast. But if you deposit everything without thinking, you can also store something you meant to carry.
+
+Before using the panel, ask:
+
+- Am I visiting a **Signal Tower**?
+- Do I need **Planks**, **Bolts**, or another item for a repair?
+- Am I going to a **Cap-N-Snap** machine or vending stop?
+- Do I need food or healing for a long walk?
+
+If yes, lock those items first.
+
+**Download Vouchers** are the item you should lock most often. If you deposit them by accident, you may walk all the way to a Signal Tower and realize your blueprint currency is still in van storage.
+
+Before any tower run:
+
+1. Open your backpack.
+2. Select your Download Vouchers.
+3. Lock them.
+4. Deposit everything else.
+5. Walk to the tower with vouchers still on you.
+
+This also applies to any item you need for a specific job. If you are repairing a bridge, keep the repair materials on you. If you are using a Cap-N-Snap machine, carry the required item.
+
+<h2 id="overencumbered">
+  How overencumbered works
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-storage-overencumbered-too-heavy.webp"
+    alt="Outbound overencumbered guide showing backpack too heavy and cannot sprint."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once your backpack is over the limit, movement gets worse and every trip back to the van feels longer.
+  </figcaption>
+</figure>
+
+When your backpack goes over its slot limit, you become overencumbered. The most important effect is that you lose mobility, especially sprinting.
+
+Being overloaded is not dangerous in a combat sense. It is annoying because Outbound is a game about moving between the van, towers, campsites, bridges, resources, and landmarks.
+
+If you are overencumbered:
+
+1. Stop picking up low-priority items.
+2. Eat or use small items if that frees space.
+3. Return to the van instead of exploring deeper.
+4. Deposit materials through the storage panel.
+5. Retrieve only what you need for the next objective.
+
+<GuideCallout title="Overencumbered rule">
+If you are far from the van and already overloaded, do not keep exploring. Go back, unload, and restart the route with empty space.
+</GuideCallout>
+
+<h2 id="what-to-carry">
+  What should you carry vs store?
+</h2>
+
+The easiest way to manage inventory is to decide before leaving the van what kind of trip you are taking.
+
+Are you going to a Signal Tower? A bridge? A mining area? A new biome? A campsite? A vending machine?
+
+Use this table:
+
+<GuideTable
+  caption="What to carry and what to store in Outbound."
+  columns={carryColumns}
+  rows={carryRows}
+/>
+
+<h2 id="player-upgrades">
+  Sewing Table, Gear Research, and backpack upgrades
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-storage-backpack-upgrade-40.webp"
+    alt="Outbound backpack upgrade guide showing how to increase inventory space with Sewing Table and gear upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Backpack upgrades are one of the biggest quality-of-life improvements in Outbound.
+  </figcaption>
+</figure>
+
+Backpack upgrades are not just a vague “gear upgrade.” The practical crafting path runs through the **Sewing Table**, while the **Gear Research Station** supports broader player upgrades.
+
+Think of it this way:
+
+- **Sewing Table:** where backpack and clothing upgrade crafting happens.
+- **Gear Research Station:** where backpack, stamina, and health improvements are researched or unlocked.
+- **Fiber:** important for the sewing path.
+- **Thread and Rough Stuffing:** important clothing / gear materials to watch for.
+- **Sickle:** helps gather larger Fiber bushes, which supports the whole upgrade path.
+
+Once Sewing Table and Gear Research become available, backpack upgrades are worth prioritizing. Increasing your carry capacity changes the whole game:
+
+- fewer forced returns,
+- longer mining trips,
+- more room for vouchers and food,
+- easier new biome scouting,
+- less overencumbered movement.
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-blueprints-gear-research-station.webp"
+    alt="Outbound Gear Research Station guide for backpack stamina and health upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gear Research supports the same player-side problems as Sewing: backpack space, stamina, and health.
+  </figcaption>
+</figure>
+
+For most players, the priority is:
+
+**Backpack capacity first, stamina second, health when you need more safety.**
+
+Read the <Link href="/outbound/blueprints-workstations-upgrades">Blueprints and Workstations Guide</Link> if you are missing Sewing Table or Gear Research.
+
+<h2 id="expand-van-storage">
+  How to expand van storage later
+</h2>
+
+Van storage is not only one fixed panel forever. As your mobile base grows, you can add more storage and build more space around the van.
+
+Later storage improvements can include:
+
+- larger storage containers inside the van,
+- more organized storage layouts,
+- external storage racks,
+- roof or upper-deck storage once van building expands,
+- more room after camp mode / upper structure expansion,
+- better separation between crafting materials, food, fuel, and rare biome resources.
+
+The important part is not to build every storage module immediately. Extra storage has a cost in space, materials, and sometimes vehicle weight. Expand storage when your current van layout is actually slowing you down.
+
+If you are also building upward, read the <Link href="/outbound/blueprints-workstations-upgrades">Blueprints and Workstations Guide</Link> for the Base Building Deck path.
+
+<h2 id="dog-pouch">
+  Use the dog pouch and dog commands to reduce return trips
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-storage-dog-pouch-items.webp"
+    alt="Outbound dog pouch guide showing dog companion carrying extra items and helping return items to the van."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The dog pouch is not your main storage, but it can save a bad resource run when you are far from the van.
+  </figcaption>
+</figure>
+
+After you unlock a dog companion, the dog pouch becomes a useful storage backup.
+
+The pouch can hold extra items, but the dog can also help reduce return trips by carrying items back toward the van when commanded. That makes the dog especially useful when you are:
+
+- slightly over your backpack limit,
+- far from the van,
+- returning from a mining route,
+- carrying rare materials,
+- trying to avoid a long slow walk back.
+
+Do not treat the dog like infinite storage. Treat it as emergency overflow and route support.
+
+Good uses for the dog pouch:
+
+- a few extra resources from a long walk,
+- overflow from a mining trip,
+- rare materials you do not want to drop,
+- items found right before hitting the limit,
+- enough space to get back to the van without crawling.
+
+<h2 id="best-storage-routes">
+  Best storage habits by trip type
+</h2>
+
+Before leaving the van, decide what the trip is for.
+
+<GuideTable
+  caption="Outbound storage planning by trip type."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+This one habit prevents most storage frustration.
+
+A Signal Tower trip and a mining trip should not use the same backpack setup. A bridge repair trip should not be full of food, decorations, and spare caps. A new biome scouting trip should start with as much empty space as possible.
+
+<h2 id="upgrade-priority">
+  Storage habits and upgrades by priority
+</h2>
+
+Use this priority list if storage is slowing you down. The first fixes are not blueprints; they are habits and controls you need to learn before upgrades matter.
+
+<GuideTable
+  caption="Outbound storage habits and inventory upgrades by priority."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+Once you can deposit, retrieve, lock items, and craft from storage correctly, then Sewing Table, Gear Research, backpack upgrades, extra van storage, and the dog pouch become much more valuable.
+
+<h2 id="resource-farming-routine">
+  Best storage routine for resource farming
+</h2>
+
+When farming resources, your goal is not to carry everything forever. Your goal is to shorten the loop between resource nodes and van storage.
+
+Use this farming routine:
+
+1. Park close to the resource area.
+2. Deposit everything first.
+3. Lock anything you must keep.
+4. Carry only food and essential tools.
+5. Gather until almost full, not fully overloaded.
+6. Return to the van.
+7. Deposit through the panel.
+8. Retrieve only what the next objective needs.
+
+This is especially useful for:
+
+- Scrap Metal around towers,
+- wood-heavy areas,
+- mining areas,
+- new biome materials,
+- bridge repair material runs.
+
+Read the <Link href="/outbound/early-resources">Early Resource Guide</Link> if you are missing Scrap Metal, Fiber, Everwood, Silverbark, Redwood, Clay, or other upgrade materials.
+
+<h2 id="storage-and-progression">
+  Storage tips for progression blockers
+</h2>
+
+Storage problems often hide inside progression problems.
+
+For example:
+
+- a bridge needs Planks, but the Planks are still in storage;
+- a tower needs vouchers, but you deposited them;
+- a vending machine needs caps, but they are in the van;
+- a slope needs a motor upgrade, but your Bolts are still unprocessed;
+- a mining trip fails because your backpack was already full;
+- a new biome gives new resources, but you have no space to carry them.
+
+Before any progression push, ask:
+
+**What must be in my backpack, and what can stay in storage?**
+
+For bridges, slopes, and Mossrocks, read the <Link href="/outbound/leave-first-biome">First Biome Progression Guide</Link>.  
+For workstations and unlock chains, read the <Link href="/outbound/blueprints-workstations-upgrades">Blueprints and Workstations Guide</Link>.
+
+<h2 id="common-problems">
+  Common storage problems and fixes
+</h2>
+
+<GuideTable
+  caption="Common Outbound storage problems and how to fix them."
+  columns={problemColumns}
+  rows={problemRows}
+/>
+
+<GuideCallout title="Best storage mindset">
+Do not try to make the backpack solve everything. The van is the inventory. The backpack is only the trip.
+</GuideCallout>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Where is the storage panel in Outbound?
+
+The storage panel is near the driver-side rear wheel of the van. It blends into the vehicle, so walk close to the rear wheel area, look down, and scan until the Deposit materials prompt appears.
+
+### How do I deposit materials?
+
+Interact with the deposit panel near the van’s driver-side rear wheel. This sends carried materials from your backpack into van storage.
+
+### How do I take items back out of van storage?
+
+Look at the small screen above the storage panel until the Storage info prompt appears. Open it, scroll the storage list if needed, and move items back into your backpack.
+
+### Can workstations use materials from van storage?
+
+Yes. Van workstations can pull materials directly from storage, so you do not need to carry every crafting material in your backpack while crafting at the van.
+
+### Why can’t I use a Signal Tower item from storage?
+
+World interactions usually need the item in your backpack. Take the item out through Storage info, then lock it before leaving the van.
+
+### Why can’t I sprint?
+
+You are probably over your backpack slot limit. Return to the van, deposit materials, and leave again with fewer items.
+
+### How do I increase backpack space?
+
+Use the Sewing Table and gear-related upgrades. The Sewing Table supports backpack and clothing crafting, while Gear Research helps unlock backpack, stamina, and health upgrades.
+
+### What materials should I watch for backpack and clothing upgrades?
+
+Watch for Fiber, Thread, Rough Stuffing, and other sewing / clothing materials. Larger Fiber bushes may require the Sickle.
+
+### Can I expand van storage?
+
+Yes. As the van build grows, you can add more storage modules, larger containers, external racks, and upper-deck storage layouts.
+
+### Can the dog carry items?
+
+Yes. After you unlock a dog companion, the pouch can carry extra items, and dog commands can help reduce return trips to the van.

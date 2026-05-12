@@ -1,0 +1,835 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const energySourceColumns = [
+  { key: "source", label: "Energy Source" },
+  { key: "bestUse", label: "Best Use" },
+  { key: "strengths", label: "Strengths" },
+  { key: "limits", label: "Limits" },
+];
+
+export const energySourceRows = [
+  {
+    source: "Wood / Everwood",
+    bestUse: "Best early manual fuel",
+    strengths:
+      "Reliable, easy to find, and works through the Power Unit when you need emergency charge.",
+    limits:
+      "Also needed for Planks, bridges, workstations, and building. Do not burn your whole stock.",
+  },
+  {
+    source: "Fiber",
+    bestUse: "Emergency backup fuel",
+    strengths:
+      "Easy to gather from bushes and useful when you only need enough charge to keep moving.",
+    limits:
+      "Also used for Sewing Table, gear, backpack, and clothing upgrade paths. Poor choice as main fuel.",
+  },
+  {
+    source: "Charging stations",
+    bestUse: "Route reset and free top-off",
+    strengths:
+      "Very useful when you pass one during long trips between landmarks and biomes.",
+    limits:
+      "They have a cooldown, so you cannot spam the same station endlessly. Do not wait until zero battery to start looking.",
+  },
+  {
+    source: "Solar",
+    bestUse: "Passive daytime support while parked",
+    strengths:
+      "Good low-maintenance support once unlocked and placed.",
+    limits:
+      "Only useful while parked and dependent on daylight / weather. It does not save you while driving.",
+  },
+  {
+    source: "Wind",
+    bestUse: "Best long-term passive power layer",
+    strengths:
+      "Becomes one of the most stable passive power options later, especially once you unlock better turbines.",
+    limits:
+      "Still works as parked passive support, not a replacement for battery upgrades and route planning.",
+  },
+  {
+    source: "Rainwater / Hydro",
+    bestUse: "Strong parked power near water or in the right weather",
+    strengths:
+      "Useful when your route and parking spot support it.",
+    limits:
+      "Needs the right setup and usually a valid water / rain condition. If parked badly, it may feel like it is doing nothing.",
+  },
+  {
+    source: "Silverbark / later woods",
+    bestUse: "Mid-game emergency fuel or crafting stock",
+    strengths:
+      "More valuable than basic wood once later biomes introduce stronger materials.",
+    limits:
+      "Often needed for later recipes. Store a stack before burning any.",
+  },
+];
+
+export const batteryProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const batteryProblemRows = [
+  {
+    problem: "The battery keeps draining while I drive",
+    likelyCause:
+      "You are traveling farther than your current battery capacity, vehicle weight, and fuel habits can support.",
+    fix:
+      "Use wood in the Power Unit, top off at chargers, reduce unnecessary build weight, and upgrade battery / motor systems.",
+  },
+  {
+    problem: "I used a charging station, but I cannot use it again",
+    likelyCause:
+      "Charging stations have a cooldown. Treat them as route checkpoints, not infinite refill machines.",
+    fix:
+      "Move on, gather fuel, or use another route instead of waiting until the van is empty again.",
+  },
+  {
+    problem: "Solar or wind is not charging while I drive",
+    likelyCause:
+      "Passive generators are mainly useful while the van is parked, and their output depends on conditions.",
+    fix:
+      "Park before expecting passive charge. Use manual fuel and charging stations for travel recovery.",
+  },
+  {
+    problem: "Solar feels too slow",
+    likelyCause:
+      "Early solar is support power and depends on daylight and weather.",
+    fix:
+      "Use solar as background generation while still carrying wood, fiber, and a route plan.",
+  },
+  {
+    problem: "Rainwater / hydro power does not seem to work",
+    likelyCause:
+      "The van may not be parked near a valid water source, or the weather / setup may not support generation.",
+    fix:
+      "Move the van to a better water-side parking spot and treat rainwater / hydro as situational passive power.",
+  },
+  {
+    problem: "The van cannot climb a steep slope",
+    likelyCause:
+      "Your motor, slope level, or build weight is holding the vehicle back.",
+    fix:
+      "Unlock Vehicle Research, make the required parts, upgrade the motor / slope level, and avoid overbuilding before weight upgrades.",
+  },
+  {
+    problem: "Power drains faster in co-op",
+    likelyCause:
+      "Multiple players may be crafting, processing, building, and traveling off the same shared van battery.",
+    fix:
+      "Assign one player to monitor charge, keep fuel stocked, and call charger stops before the battery gets low.",
+  },
+];
+
+export const earlySetupColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "powerPlan", label: "Power Plan" },
+  { key: "why", label: "Why It Works" },
+];
+
+export const earlySetupRows = [
+  {
+    stage: "Tutorial / first tower",
+    powerPlan:
+      "Learn where the Power Unit, battery info, motor info, and deposit panel are at the back of the van.",
+    why:
+      "You need to understand the battery before long trips start punishing you.",
+  },
+  {
+    stage: "First map exploration",
+    powerPlan:
+      "Use wood as your main manual fuel and fiber only as emergency backup.",
+    why:
+      "Both are easy to find early, but wood is usually the safer fuel choice if you keep enough for Planks.",
+  },
+  {
+    stage: "Before long detours",
+    powerPlan:
+      "Deposit materials, reduce unnecessary carried weight, lock vouchers, eat food, and add fuel before driving away.",
+    why:
+      "Low battery, full backpack, and heavy build weight together create the worst early-game travel loops.",
+  },
+  {
+    stage: "When you find a charger",
+    powerPlan:
+      "Top off the battery even if you are not empty, then continue the route.",
+    why:
+      "Chargers are limited by cooldown and are not common enough to rely on only when you are desperate.",
+  },
+  {
+    stage: "After Vehicle Research",
+    powerPlan:
+      "Prioritize battery capacity, motor, slope level, and weight capacity when roads or builds start gating progress.",
+    why:
+      "Energy is not just charge. A heavier van and steeper terrain both make upgrades more important.",
+  },
+  {
+    stage: "After passive power unlocks",
+    powerPlan:
+      "Layer wind, solar, and rainwater / hydro with manual fuel and battery upgrades.",
+    why:
+      "Passive power is strongest when parked and stacked, not when treated as an infinite driving battery.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "upgrade", label: "Upgrade / System" },
+  { key: "priority", label: "Priority" },
+  { key: "reason", label: "Reason" },
+];
+
+export const upgradeRows = [
+  {
+    upgrade: "Power Unit fuel habits",
+    priority: "Very high",
+    reason:
+      "This is your first practical fix for battery problems. Learn to feed wood before you get stranded.",
+  },
+  {
+    upgrade: "Battery capacity",
+    priority: "High",
+    reason:
+      "A larger battery gives you more room to explore before every stop becomes urgent.",
+  },
+  {
+    upgrade: "Motor upgrade",
+    priority: "High",
+    reason:
+      "Motor upgrades help with steep slopes and progression gates, not just speed.",
+  },
+  {
+    upgrade: "Slope level",
+    priority: "High when blocked",
+    reason:
+      "If a road warns you about a steep slope, this becomes a progression requirement.",
+  },
+  {
+    upgrade: "Weight capacity",
+    priority: "High once building expands",
+    reason:
+      "More workstations, furniture, storage, and roof pieces make the van heavier, which hurts handling, climbing, and battery efficiency.",
+  },
+  {
+    upgrade: "Wind turbines",
+    priority: "Medium to high",
+    reason:
+      "Wind becomes the best long-term passive layer once you unlock better turbine options.",
+  },
+  {
+    upgrade: "Solar power",
+    priority: "Medium",
+    reason:
+      "Useful parked daytime support, but early solar should not be your only power source.",
+  },
+  {
+    upgrade: "Rainwater / Hydro",
+    priority: "Medium later",
+    reason:
+      "Strong when parked near valid water or in the right conditions, but more position-dependent than wind.",
+  },
+];
+
+export const fuelColumns = [
+  { key: "fuel", label: "Fuel" },
+  { key: "useForPower", label: "Use For Power?" },
+  { key: "rule", label: "Rule" },
+];
+
+export const fuelRows = [
+  {
+    fuel: "Everwood / common wood",
+    useForPower: "Yes, early",
+    rule:
+      "Best early emergency fuel, but keep enough for Planks, bridges, workstations, and building.",
+  },
+  {
+    fuel: "Fiber",
+    useForPower: "Emergency only",
+    rule:
+      "Use it if you are stranded, but save most Fiber for Sewing Table, gear, backpack, and clothing upgrades.",
+  },
+  {
+    fuel: "Silverbark",
+    useForPower: "Only if you have extra",
+    rule:
+      "Later wood can be valuable for recipes. Store a stack before burning any.",
+  },
+  {
+    fuel: "Redwood",
+    useForPower: "Avoid early",
+    rule:
+      "Redwood becomes important after the first map. Do not burn it until you know your next tool and building costs.",
+  },
+];
+
+export const coopColumns = [
+  { key: "issue", label: "Co-op Issue" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const coopRows = [
+  {
+    issue: "Shared van battery",
+    whatToDo:
+      "Treat the battery as a team resource. If everyone crafts, processes, builds, and drives without checking charge, it drains faster than expected.",
+  },
+  {
+    issue: "Multiple workstation users",
+    whatToDo:
+      "Have one player watch battery and fuel while others gather, build, or unlock towers.",
+  },
+  {
+    issue: "Long split routes",
+    whatToDo:
+      "Do not send everyone far from the van with low charge. Regroup, deposit, recharge, and then split again.",
+  },
+  {
+    issue: "Route planning",
+    whatToDo:
+      "Assign roles: driver / power monitor, gatherer, tower runner, and builder or processor.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Energy Mistake" },
+  { key: "fix", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Waiting until the battery is almost empty",
+    fix:
+      "Recharge when you pass a station, add fuel before long drives, and avoid starting routes already low.",
+  },
+  {
+    mistake: "Trying to spam the same charging station",
+    fix:
+      "Remember the cooldown. Use stations as route checkpoints, not infinite energy loops.",
+  },
+  {
+    mistake: "Expecting passive power while driving",
+    fix:
+      "Solar, wind, and water systems are mainly parked support. Drive with battery capacity, fuel, and route planning.",
+  },
+  {
+    mistake: "Ignoring van weight",
+    fix:
+      "More furniture, workstations, storage, and roof pieces can make travel less efficient. Upgrade weight capacity before overbuilding.",
+  },
+  {
+    mistake: "Ignoring motor and slope upgrades",
+    fix:
+      "When a steep road blocks you, treat it as a vehicle upgrade gate, not a driving problem.",
+  },
+  {
+    mistake: "Driving long loops with a full backpack",
+    fix:
+      "Deposit materials before long drives so low battery and overencumbered movement do not stack together.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best early energy setup in Outbound is to use wood as your main manual fuel, keep fiber only as an emergency backup, recharge at stations before you are desperate, and upgrade battery capacity, motor, slope level, and weight capacity as soon as vehicle progression starts blocking roads.**
+
+Charging stations are useful, but they have a **15-minute cooldown**, so you cannot rely on one station as an infinite refill. Solar, wind, and rainwater / hydro power are useful passive systems, but they mainly help while the van is **parked** and depend on weather, location, or setup. As your van gets heavier from workstations, storage, furniture, and roof building, energy management becomes a build-planning problem too.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-energy-battery-running-low.webp"
+    alt="Outbound battery running low guide showing van battery drain while driving."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Battery drain is one of the first real friction points in Outbound because long drives can leave you low on power before you have a strong passive setup.
+  </figcaption>
+</figure>
+
+<h2 id="why-battery-drains">
+  Why your van battery keeps draining in Outbound
+</h2>
+
+Your van is electric, and it uses battery power as you drive. Early on, that feels manageable because the first routes are short. The problem starts when you drive farther, add more workstations, build upward, or try to force hills before your vehicle upgrades are ready.
+
+Most early battery problems come from one of these causes:
+
+- you drove too far without stopping,
+- you ignored wood and fiber as emergency fuel,
+- you passed a charging station without topping off,
+- you expected passive power to work while driving,
+- your battery capacity is still low,
+- your motor / slope upgrade is not ready,
+- your van build is getting too heavy.
+
+The fix is not one single item. It is a habit:
+
+**Charge before you are empty, keep common fuel, avoid overbuilding before weight upgrades, and upgrade the van before forcing longer routes.**
+
+<GuideTable
+  caption="Common battery problems in Outbound and how to fix them."
+  columns={batteryProblemColumns}
+  rows={batteryProblemRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<GuideCallout title="Energy rule">
+In Outbound, energy management is route planning plus build planning. A heavy van, low battery, full backpack, and bad parking spot can turn a cozy trip into a long crawl.
+</GuideCallout>
+
+<h2 id="power-unit">
+  Use the Power Unit first: wood and fiber charging
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-van-storage-power-unit.webp"
+    alt="Outbound Power Unit guide showing where to charge the van battery with wood and fiber."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Power Unit is your first reliable battery tool. Wood and fiber can keep the van moving before passive power is strong.
+  </figcaption>
+</figure>
+
+The Power Unit is at the back of your van, near the battery and motor information.
+
+Early on, this is the system you should understand before anything else. You can put **wood** or **fiber** into the Power Unit to charge the battery.
+
+For new players, the best rule is:
+
+**Wood is your main early emergency fuel. Fiber is your backup.**
+
+Wood is usually easier to justify as fuel because you find loose logs often, and once you have the Axe, bigger wood sources become better. But wood is also used for Planks, bridges, workstations, and building pieces, so do not burn your entire supply.
+
+Fiber works when you are stuck, but it becomes important for Sewing Table, gear, backpack, and clothing upgrades. Use it when you need enough charge to recover the route, not as your permanent main fuel.
+
+<h2 id="charging-stations">
+  Charging stations: useful, but limited by cooldown
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-energy-charging-station-full.webp"
+    alt="Outbound charging station guide showing how to recharge the van battery with cooldown limits."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Charging stations are worth using before you are empty, because they are not common enough to be your only plan.
+  </figcaption>
+</figure>
+
+Charging stations are useful, but they are not infinite.
+
+A charging station can only be used again after a cooldown, so do not build your route around repeatedly draining and refilling at the same station. Treat chargers like **checkpoints**.
+
+Use a station when:
+
+- you pass one during a long drive,
+- you are about to enter a new biome,
+- you are heading toward a far landmark,
+- you are trying a steep route,
+- you are low on fuel materials,
+- you are in co-op and multiple players are using the same van battery.
+
+A charging station is also a good moment to reset the whole trip: deposit resources, eat food, check your vouchers, and decide if the next detour is still worth pushing.
+
+<h2 id="best-early-energy-setup">
+  Best early energy setup
+</h2>
+
+The best early setup is not fancy. It is reliable.
+
+Use this order:
+
+<GuideTable
+  caption="Best early energy setup by stage."
+  columns={earlySetupColumns}
+  rows={earlySetupRows}
+/>
+
+In the first map, you do not need a perfect renewable grid. You need a van that does not die halfway between two objectives.
+
+Your early setup should be:
+
+**wood fuel + backup fiber + charger stops + battery upgrades + motor / slope upgrades + controlled build weight**
+
+<h2 id="passive-power-parked">
+  Passive power only helps when your van is parked
+</h2>
+
+This is the biggest passive-power mistake.
+
+Solar, wind, and rainwater / hydro systems are not a magic battery that refills while you freely drive across the map. They are best treated as parked support.
+
+That means passive power works best when you:
+
+- stop to build,
+- stop to process materials,
+- stop to organize storage,
+- park near a useful resource area,
+- wait out a route reset,
+- place the van correctly for water or weather systems,
+- stack multiple passive generators over time.
+
+Do not expect passive systems to replace manual fuel and battery upgrades. They reduce pressure when parked, but your driving route still depends on stored charge.
+
+<h2 id="solar-power">
+  Solar power: useful daytime support
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-energy-solar-charging-slow.webp"
+    alt="Outbound solar power guide showing slow daytime battery charging while parked."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early solar can feel slow, so treat it as parked background support instead of your only battery plan.
+  </figcaption>
+</figure>
+
+Solar sounds like the obvious cozy off-grid solution, but early solar can feel slow and situational.
+
+Use solar as:
+
+- daytime parked support,
+- a way to reduce fuel pressure,
+- part of a larger energy setup,
+- a reason to stop and reorganize while charge comes in.
+
+Do not use solar as an excuse to ignore wood, charging stations, battery capacity, or weight upgrades.
+
+If it is nighttime, raining, or you are far from a good parking plan, manual fuel is usually more reliable.
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-energy-solar-station-night.webp"
+    alt="Outbound solar charging at night showing why solar power cannot solve every battery problem."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar is a support system, not a rescue plan for every situation. Keep fuel ready when traveling at night or in bad weather.
+  </figcaption>
+</figure>
+
+<h2 id="wind-power">
+  Wind power: the best long-term passive layer
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-energy-wind-turbines-roof.webp"
+    alt="Outbound wind turbine guide showing roof turbines as stable passive power for the van."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wind turbines become useful once your van roof turns into a real mobile base, not just a place for decoration.
+  </figcaption>
+</figure>
+
+Wind power is the passive source I would prioritize once your basic energy loop is stable.
+
+Solar is useful, and water systems have strong moments, but wind becomes the most reliable long-term passive layer because it is easier to build into your van layout and does not depend as heavily on one perfect parking spot.
+
+The mistake is expecting one early turbine to replace all other energy management.
+
+Think of wind as one layer:
+
+**manual fuel + charging stations + battery upgrades + wind turbines = safer travel**
+
+Once you unlock stronger wind options, upgrade them when the materials make sense. Passive energy gets better the more sources you stack.
+
+<h2 id="rainwater-hydro">
+  Rainwater and hydro power: park near the right water source
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-energy-rainwater-efficient-wind-blueprints.webp"
+    alt="Outbound Rainwater Energy and Efficient Wind Turbine blueprints for passive power setup."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Later blueprint choices add stronger passive systems such as Rainwater Energy and Efficient Wind Turbines.
+  </figcaption>
+</figure>
+
+Rainwater and hydro-style power can be strong, but placement matters.
+
+If your water power setup does not seem to work, the problem may not be the blueprint. Your van may simply be parked in the wrong place or the weather / water condition may not support it.
+
+Use rainwater / hydro when:
+
+- you are parked near a valid water source,
+- your route naturally passes rivers, lakes, or water-side areas,
+- you plan to stay parked long enough for passive generation to matter,
+- you are already building a larger parked-base setup.
+
+If you want the most general passive power first, wind is usually easier to recommend. If you are planning a water-side base stop, rainwater / hydro becomes much more attractive.
+
+<h2 id="vehicle-upgrades">
+  Battery, motor, slope, and weight upgrades
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-energy-vehicle-upgrades-battery-motor.webp"
+    alt="Outbound vehicle upgrade guide showing battery capacity motor level slope level and van weight upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Energy is not only battery charge. Motor level, slope level, battery capacity, and vehicle weight all affect where the van can go.
+  </figcaption>
+</figure>
+
+Energy problems are not always about “how do I get more charge?”
+
+Sometimes the real answer is:
+
+**Your van needs an upgrade.**
+
+The main vehicle progression stats to watch are:
+
+- **Battery capacity**
+- **Motor level**
+- **Slope level**
+- **Weight capacity**
+- **Building space**
+
+Battery capacity lets you travel longer before every drive becomes stressful. Motor and slope upgrades matter because certain roads are vehicle-gated. Weight capacity matters because your van becomes heavier as you add workstations, storage, furniture, building pieces, roof floors, and decorations.
+
+A heavier van can feel slower, climb worse, and burn through energy faster on rough routes. That does not mean you should avoid building. It means you should upgrade weight capacity and vehicle systems alongside your mobile base.
+
+<figure className="my-8">
+  <Image
+    src="/images/outbound/outbound-first-biome-steep-slope-motor-upgrade.webp"
+    alt="Outbound steep slope motor upgrade guide showing when the van needs more power to climb."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Steep slopes are one of the clearest signs that energy progression and vehicle upgrades are tied together.
+  </figcaption>
+</figure>
+
+<h2 id="upgrade-priority">
+  Energy upgrade priority
+</h2>
+
+Use this priority list if you do not know what to unlock or build next.
+
+<GuideTable
+  caption="Outbound energy and vehicle upgrade priority."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+The important point is that passive power should not come before basic reliability.
+
+If you are still getting stranded, improve the basics first:
+
+**fuel habits → charging station habits → battery capacity → motor / slope upgrade → weight capacity → passive power layers**
+
+<h2 id="energy-sources">
+  Energy sources compared
+</h2>
+
+This table is written from a player route-planning perspective, not exact lab numbers. Use it to decide what to rely on at each stage.
+
+<GuideTable
+  caption="Outbound energy sources and when to use them."
+  columns={energySourceColumns}
+  rows={energySourceRows}
+/>
+
+<h2 id="co-op-energy">
+  Co-op energy management
+</h2>
+
+Co-op makes battery management easier to forget because everyone is busy doing different jobs.
+
+The van battery is still a shared resource. If one player is driving, another is processing materials, another is building, and another is using workstations, the group can run through energy faster than a solo player expects.
+
+<GuideTable
+  caption="Outbound co-op energy management tips."
+  columns={coopColumns}
+  rows={coopRows}
+/>
+
+<GuideCallout title="Co-op power rule">
+In co-op, assign one player to watch the battery and fuel supply. A good power monitor prevents the whole group from getting stranded.
+</GuideCallout>
+
+<h2 id="pre-trip-checklist">
+  Pre-trip power checklist
+</h2>
+
+Before a long drive, check only the things that change the next route:
+
+1. **Battery:** Is there enough charge to reach the next stop?
+2. **Fuel:** Do you have spare wood or emergency Fiber?
+3. **Weight:** Did you add heavy workstations or roof pieces before upgrading capacity?
+4. **Route:** Is there a charger, water stop, or safe parking point nearby?
+5. **Backpack:** Are you leaving with enough empty space to make the trip useful?
+
+If two or more of those answers look bad, fix the van before you leave.
+
+<h2 id="fuel-vs-crafting">
+  Should you burn wood, fiber, or rare materials?
+</h2>
+
+This is the main energy tradeoff.
+
+Wood, Fiber, and later biome materials can help power the van, but they are also recipe ingredients. Use this table before feeding everything into the Power Unit.
+
+<GuideTable
+  caption="Outbound fuel vs crafting priority."
+  columns={fuelColumns}
+  rows={fuelRows}
+/>
+
+The simple rule is:
+
+**Burn common materials when you are stranded. Save rare materials until you know your next upgrade cost.**
+
+For example:
+
+- burn some common Everwood if the van is low and you are still early,
+- avoid burning all your wood if you need Planks for a bridge,
+- avoid burning new biome wood before checking tool and workstation recipes,
+- use Fiber as backup instead of your main plan,
+- keep rare resources in van storage until you understand their upgrade chain.
+
+If you are missing materials, use the <Link href="/outbound/early-resources">Outbound Early Resource Guide</Link>.
+
+<h2 id="what-to-do-if-out-of-power">
+  What to do if your van runs out of power
+</h2>
+
+If your van runs out of power, do not panic. Fix the situation in order:
+
+1. **Check nearby resources.**  
+   Look for loose logs, Fiber bushes, supply boxes, or roadside junk.
+
+2. **Deposit heavy items if possible.**  
+   If your backpack is full, every trip feels worse.
+
+3. **Feed the Power Unit.**  
+   Use wood first if you have it. Use Fiber if you need emergency charge.
+
+4. **Wait for enough battery to move.**  
+   You do not need a perfect charge. You need enough to reach a safer stop.
+
+5. **Drive toward a charger, camp, or better parking spot.**  
+   Do not immediately start another long detour.
+
+6. **Change the route.**  
+   If the trip drained you once, it may drain you again unless you upgrade, restock, reduce weight, or choose a better stop.
+
+If this happens often, your problem is not bad luck. Your route is too long, your van is too heavy, or your upgrade path is behind your exploration route.
+
+<h2 id="energy-and-first-biome">
+  Energy and first biome progression
+</h2>
+
+Energy becomes a progression issue in the first map because several blockers ask more from your van than basic driving.
+
+The clearest example is the steep slope.
+
+If you are still trying to leave the first map, energy connects to:
+
+- getting enough battery to explore,
+- bringing materials back to the van,
+- making Bolts,
+- unlocking Vehicle Research,
+- upgrading the motor,
+- upgrading slope handling,
+- managing weight as the van build grows,
+- reaching the Mossrock exit chain.
+
+Read <Link href="/outbound/leave-first-biome">How to Leave the First Biome in Outbound</Link> if your battery problem is tied to bridges, slopes, Mossrocks, or the first map exit.
+
+<h2 id="common-mistakes">
+  Common energy mistakes
+</h2>
+
+<GuideTable
+  caption="Common Outbound energy mistakes and better habits."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<GuideCallout title="Best early setup">
+For the first few hours, the best energy build is not a perfect renewable network. It is a stocked van, spare wood, backup Fiber, smart charger stops, controlled build weight, and the vehicle upgrades needed to reach the next road.
+</GuideCallout>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Why does my battery keep running out in Outbound?
+
+Your van battery drains as you drive, and early battery capacity is limited. Long routes, heavy van builds, steep terrain, and poor fuel habits make this worse. Use the Power Unit, charging stations, and vehicle upgrades.
+
+### How often can I use a charging station?
+
+Charging stations have a cooldown, so you cannot spam the same station endlessly. Treat them as route checkpoints and top off before you are desperate.
+
+### Does solar or wind charge while driving?
+
+Passive power is mainly useful while the van is parked. Solar, wind, and rainwater / hydro systems reduce pressure during stops, but they do not replace battery capacity and fuel planning while traveling.
+
+### What is the best early fuel?
+
+Common wood is the best early manual fuel. Fiber works as an emergency backup, but you should save most Fiber for Sewing Table, gear, backpack, and clothing upgrades.
+
+### Is solar power good in Outbound?
+
+Solar is useful as passive daytime support, but early solar can feel slow and depends on daylight and weather. Do not rely on solar alone in the first map.
+
+### Is wind power better than solar?
+
+Wind becomes the strongest long-term passive layer once you unlock better turbines. Solar is still useful, but wind is easier to recommend as your later passive backbone.
+
+### How does rainwater or hydro power work?
+
+Rainwater / hydro power is position and condition dependent. Park near a valid water source or in the right weather setup, then treat it as parked passive generation rather than driving power.
+
+### Why can’t my van climb a steep slope?
+
+You need a motor or slope upgrade, and a heavy van can make the problem worse. Unlock Vehicle Research, craft the required parts, and upgrade the vehicle before trying again.
+
+### Does van weight affect energy?
+
+Yes. More workstations, storage, furniture, roof pieces, and decorations make the van heavier. A heavier van can slow down, climb worse, and consume power less efficiently, so weight capacity upgrades matter.
+
+### How does energy work in co-op?
+
+The van battery is shared. Multiple players crafting, building, processing, and driving can drain power faster, so assign one player to monitor battery and fuel.
