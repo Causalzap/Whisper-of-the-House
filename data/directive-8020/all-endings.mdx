@@ -1,0 +1,860 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const endingsColumns = [
+  { key: "ending", label: "Ending" },
+  { key: "howToReach", label: "How to Reach It" },
+  { key: "avoidItBy", label: "How to Avoid It" },
+];
+
+export const endingsRows = [
+  {
+    ending: "Everyone Lives",
+    howToReach:
+      "Keep the active crew alive, complete the key Destinies, avoid unresolved intruder conditions, and survive the final boss / reactor escape.",
+    avoidItBy:
+      "Fail major survival checks, lose key crew members, or carry an unsafe intruder / duplicate condition into the finale.",
+  },
+  {
+    ending: "Forever and Ever",
+    howToReach:
+      "Reach a loop-style outcome tied to the wider cycle / clone structure after the ending sequence.",
+    avoidItBy:
+      "Use cleanup routes to push toward cleaner survival, warning, Beacon, or darker fail-state variants instead.",
+  },
+  {
+    ending: "Docked",
+    howToReach:
+      "Reach the docked outcome without carrying the worst unresolved intruder condition into the final state.",
+    avoidItBy:
+      "Let an intruder / duplicate condition remain active to push toward Docked / Not Alone.",
+  },
+  {
+    ending: "Beacon",
+    howToReach:
+      "Choose the distress / Save Our Souls-style final message route near the end of the game.",
+    avoidItBy:
+      "Choose the warning-style final message instead and compare the post-credit result.",
+  },
+  {
+    ending: "Docked / Not Alone",
+    howToReach:
+      "Reach the docked-style outcome while an intruder / duplicate threat is still unresolved.",
+    avoidItBy:
+      "Clean up scanner, duplicate, and intruder conditions before the ending locks in.",
+  },
+  {
+    ending: "Homeward Bound / Massacre",
+    howToReach:
+      "Carry a dangerous route into the homeward escape where the threat turns the return into a massacre outcome.",
+    avoidItBy:
+      "Do not let the alien threat travel forward in a way that can attack or overrun the survivors.",
+  },
+  {
+    ending: "Homeward Bound / Masks Off",
+    howToReach:
+      "Push the Homeward Bound route into a duplicate / identity reveal variant.",
+    avoidItBy:
+      "Resolve mimic and identity checks cleanly before the final route.",
+  },
+  {
+    ending: "Hitchhiker",
+    howToReach:
+      "Escape with the implication that something dangerous is still along for the ride.",
+    avoidItBy:
+      "Remove or avoid unresolved intruder conditions before launch / escape.",
+  },
+  {
+    ending: "Game Over",
+    howToReach:
+      "Let the route collapse until no playable characters are left.",
+    avoidItBy:
+      "Keep at least one playable character alive through the final route.",
+  },
+  {
+    ending: "Bad Ending / Everyone Dies",
+    howToReach:
+      "Fail the survival route badly enough that the crew is wiped out and the horror wins.",
+    avoidItBy:
+      "Keep characters alive, verify duplicates, and survive the final escape cleanly.",
+  },
+];
+
+export const destiniesColumns = [
+  { key: "character", label: "Character" },
+  { key: "destiny", label: "Destiny" },
+  { key: "howToUnlock", label: "How to Push Toward It" },
+  { key: "endingImpact", label: "Ending Impact" },
+];
+
+export const destiniesRows = [
+  {
+    character: "Stafford",
+    destiny: "The Father",
+    howToUnlock:
+      "Make protective, crew-first choices with Young and the rest of the crew. When Stafford can act like a mentor or commander who puts people before mission pride, choose that route.",
+    endingImpact:
+      "This is one of the most important Destinies to track for Everyone Lives. If Stafford does not land on The Father route, your clean-ending setup may fail even if the final escape looks good.",
+  },
+  {
+    character: "Eisele",
+    destiny: "Humanist",
+    howToUnlock:
+      "Choose the compassionate / humanity-first path over pure research, control, or project-continuation logic. Treat the crew as people, not data for the cycle.",
+    endingImpact:
+      "This is the key Eisele state for the Humanitarian-style interpretation. If you push her away from Humanist, expect the Scientist / continuation reading instead.",
+  },
+  {
+    character: "Cooper",
+    destiny: "Rogue",
+    howToUnlock:
+      "Favor independent, decisive action when Cooper has to move without waiting for perfect orders. This route is about acting when the chain of command is too slow.",
+    endingImpact:
+      "This appears more important for character-state and cleanup tracking than for the core Everyone Lives gate. Do not treat it as the main best-ending blocker unless your route data proves it.",
+  },
+  {
+    character: "Young",
+    destiny: "Hero",
+    howToUnlock:
+      "Choose brave rescue actions, take responsibility under pressure, and do not back away from high-risk crew-saving decisions.",
+    endingImpact:
+      "This supports a clean survival route because Young is often tied to high-pressure rescue and escape scenes.",
+  },
+  {
+    character: "Cernan",
+    destiny: "Philosopher",
+    howToUnlock:
+      "Choose calm, reflective, empathetic responses. When Cernan can de-escalate, reason through fear, or keep the crew grounded, lean into that path.",
+    endingImpact:
+      "This mainly helps define Cernan’s route state and completion cleanup. It is useful to track, but do not present it as a confirmed hard gate for the best ending without more route verification.",
+  },
+];
+
+export const postCreditColumns = [
+  { key: "postCredit", label: "Post-Credit Scene" },
+  { key: "likelyRoute", label: "Likely Route Link" },
+  { key: "meaning", label: "What It Means" },
+];
+
+export const postCreditRows = [
+  {
+    postCredit: "Eisele the Humanitarian",
+    likelyRoute:
+      "Humanist / distress-signal style route.",
+    meaning:
+      "Frames the ending around the human cost of the project and whether survival is worth losing humanity.",
+  },
+  {
+    postCredit: "Eisele the Scientist",
+    likelyRoute:
+      "Scientist / warning-style route.",
+    meaning:
+      "Frames the ending around research, the clone project, and the belief that another cycle may eventually succeed.",
+  },
+];
+
+export const turningPointColumns = [
+  { key: "ending", label: "Ending Target" },
+  { key: "branchFrom", label: "Closest Practical Turning Point" },
+  { key: "whatToChange", label: "What to Change" },
+];
+
+export const turningPointRows = [
+  {
+    ending: "Everyone Lives",
+    branchFrom:
+      "Episode 8 - The Way Back / final boss and reactor escape setup.",
+    whatToChange:
+      "Make sure all active crew members are alive before the finale, Stafford and Eisele are on the right Destiny tracks, and no unresolved intruder condition is carried into the escape.",
+  },
+  {
+    ending: "Beacon",
+    branchFrom:
+      "Episode 8 - final Andromeda message / Save Our Souls choice.",
+    whatToChange:
+      "Choose the distress / Save Our Souls-style message route instead of the warning-style message.",
+  },
+  {
+    ending: "Eisele the Humanitarian",
+    branchFrom:
+      "Episode 8 - final message split plus Eisele’s final Destiny state.",
+    whatToChange:
+      "Push Eisele toward Humanist choices, then compare the final-message branch that leads to the Humanitarian post-credit scene.",
+  },
+  {
+    ending: "Eisele the Scientist",
+    branchFrom:
+      "Episode 8 - final message split plus Eisele’s final Destiny state.",
+    whatToChange:
+      "Push Eisele toward the research / continuation interpretation instead of the Humanist route.",
+  },
+  {
+    ending: "Docked",
+    branchFrom:
+      "Episode 8 - final escape / docked outcome branch.",
+    whatToChange:
+      "Reach the docked state without leaving the intruder / duplicate condition unresolved.",
+  },
+  {
+    ending: "Docked / Not Alone",
+    branchFrom:
+      "Episode 8 - final escape / docked outcome branch.",
+    whatToChange:
+      "Let the docked route resolve while the alien or duplicate threat is still unresolved.",
+  },
+  {
+    ending: "Homeward Bound / Massacre",
+    branchFrom:
+      "Episode 8 - late launch / homeward escape branch.",
+    whatToChange:
+      "Carry the alien threat forward in a way that turns the return route into a violent outcome.",
+  },
+  {
+    ending: "Homeward Bound / Masks Off",
+    branchFrom:
+      "Episode 8 - late launch / duplicate reveal branch.",
+    whatToChange:
+      "Leave a duplicate / identity condition unresolved so the homeward route becomes a reveal-focused variant.",
+  },
+  {
+    ending: "Hitchhiker",
+    branchFrom:
+      "Episode 8 - final launch / escape aftermath branch.",
+    whatToChange:
+      "Escape with the implication that something dangerous is still traveling with the survivors.",
+  },
+  {
+    ending: "Game Over / Everyone Dies",
+    branchFrom:
+      "The last major survival check before your final playable character dies.",
+    whatToChange:
+      "Fail the remaining survival chain until no playable characters are left or the full crew is wiped out.",
+  },
+];
+
+export const finalChoiceColumns = [
+  { key: "condition", label: "Final Condition" },
+  { key: "whatToWatch", label: "What to Watch" },
+  { key: "endingImpact", label: "Ending Impact" },
+];
+
+export const finalChoiceRows = [
+  {
+    condition: "Who is still alive",
+    whatToWatch:
+      "The number of active crew members alive before the final boss and escape.",
+    endingImpact:
+      "Determines whether you can reach Everyone Lives or fall into darker survival / fail-state routes.",
+  },
+  {
+    condition: "Destinies",
+    whatToWatch:
+      "Stafford’s The Father, Eisele’s Humanist, and the other character Destiny outcomes.",
+    endingImpact:
+      "Destinies can influence whether your route qualifies for the cleanest ending and which interpretation plays afterward.",
+  },
+  {
+    condition: "Intruder status",
+    whatToWatch:
+      "Whether the alien life form or a duplicate is still involved in the final escape state.",
+    endingImpact:
+      "Pushes safe-looking endings toward Not Alone, Hitchhiker, or other horror-leaning variants.",
+  },
+  {
+    condition: "Final message",
+    whatToWatch:
+      "The Save Our Souls / distress-style choice versus the warning-style route.",
+    endingImpact:
+      "Changes Beacon-style outcomes and the Eisele post-credit interpretation.",
+  },
+  {
+    condition: "Final escape performance",
+    whatToWatch:
+      "Reactor escape, door timing, launch pressure, and last-minute survival checks.",
+    endingImpact:
+      "A good route can still collapse if you fail the final stretch.",
+  },
+];
+
+export const cleanupColumns = [
+  { key: "goal", label: "Your Goal" },
+  { key: "route", label: "Route to Try" },
+  { key: "why", label: "Why" },
+];
+
+export const cleanupRows = [
+  {
+    goal: "Best first ending",
+    route:
+      "Go for Everyone Lives.",
+    why:
+      "It gives you the cleanest survival baseline before you start deliberately breaking branches.",
+  },
+  {
+    goal: "Understand the story",
+    route:
+      "Compare Everyone Lives, Beacon, Cycle 13, and both Eisele post-credit scenes.",
+    why:
+      "These routes explain the clone project, the life form, the final-message split, and why the cycle matters.",
+  },
+  {
+    goal: "See intruder consequences",
+    route:
+      "Compare Docked, Docked / Not Alone, and Hitchhiker.",
+    why:
+      "These endings show how escaping is not the same as being safe.",
+  },
+  {
+    goal: "Bad ending cleanup",
+    route:
+      "Go after Homeward Bound variants, Game Over, and Everyone Dies later.",
+    why:
+      "These are best handled after your main survival route because they require dangerous or failed branches.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Directive 8020 has 10 main ending variants: Everyone Lives, Forever and Ever, Docked, Beacon, Docked / Not Alone, Homeward Bound / Massacre, Homeward Bound / Masks Off, Hitchhiker, Game Over, and Bad Ending / Everyone Dies.**
+
+For your first playthrough, go for **Everyone Lives**. After that, use Turning Points to change the final message, Destinies, intruder status, and late escape conditions to unlock the other endings.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-everyone-lives-ending.webp"
+    alt="Directive 8020 Everyone Lives ending showing the best survival outcome."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Everyone Lives is the clean route to lock in first. Use the darker endings for cleanup after that.
+  </figcaption>
+</figure>
+
+<h2 id="how-many-endings">
+  How many endings does Directive 8020 have?
+</h2>
+
+Directive 8020 has **10 main ending variants** in the ending cleanup route:
+
+- Everyone Lives,
+- Forever and Ever,
+- Docked,
+- Beacon,
+- Docked / Not Alone,
+- Homeward Bound / Massacre,
+- Homeward Bound / Masks Off,
+- Hitchhiker,
+- Game Over,
+- Bad Ending / Everyone Dies.
+
+The ending you get depends on more than one final choice. Your route can change based on who is alive, whether the correct Destinies are unlocked, whether the alien / intruder status is clean, which final message you send, and how the final escape plays out.
+
+<GuideCallout title="Major spoiler warning">
+This page discusses final scenes, post-credit variants, Destinies, duplicate outcomes, bad endings, and everyone-dies routes. If you are still on your first run, use the main <Link href="/directive-8020">Directive 8020 guide</Link> first.
+</GuideCallout>
+
+<h2 id="all-endings-overview">
+  All Directive 8020 endings overview
+</h2>
+
+Use this table if you want the direct answer first: what each ending is, how to reach it, and how to avoid it.
+
+<GuideTable
+  caption="Directive 8020 endings, trigger summaries, and avoidance notes."
+  columns={endingsColumns}
+  rows={endingsRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="best-ending">
+  What is the best ending in Directive 8020?
+</h2>
+
+The best ending for most players is **Everyone Lives**.
+
+The reason is simple: it gives you the cleanest survival result before you start deliberately breaking branches for Beacon, Docked / Not Alone, Homeward Bound, Hitchhiker, Game Over, or Everyone Dies.
+
+To work toward the best ending, focus on these conditions:
+
+- keep every active crew member alive,
+- complete the important Destinies,
+- verify duplicates instead of guessing,
+- resolve intruder status cleanly,
+- survive the final boss and reactor escape,
+- avoid carrying the alien threat forward into the ending.
+
+The two most important things many players miss are **Destinies** and the **final message split**. If you only focus on QTEs and who is alive, you may still miss the ending or post-credit variant you wanted.
+
+<h2 id="destinies-system">
+  Do Destinies affect the ending?
+</h2>
+
+Yes. Destinies are not just labels at the end of a route. They are character-state outcomes, and they can change whether your ending setup is clean enough for Everyone Lives or which post-credit interpretation you receive.
+
+For players, the useful question is not only “which Destiny did I get?” It is:
+
+**What behavior pushed the character there, and what ending does that state support?**
+
+Use this table while checking your route.
+
+<GuideTable
+  caption="Directive 8020 Destinies, unlock direction, and ending impact."
+  columns={destiniesColumns}
+  rows={destiniesRows}
+/>
+
+The two Destinies you should track first are:
+
+**Stafford → The Father**  
+Push Stafford toward protective, mentor-style, crew-first decisions. This is one of the most important best-ending route checks.
+
+**Eisele → Humanist**  
+Push Eisele toward humanity-first choices rather than project-continuation or pure research logic. This is the important split behind the Humanitarian / Scientist reading.
+
+For Cooper, Young, and Cernan, track their Destinies for completion and route-state cleanup, but do not treat every one of them as a confirmed hard gate for the best ending unless your route test proves it.
+
+<h2 id="everyone-lives-ending">
+  Everyone Lives ending
+</h2>
+
+The Everyone Lives ending is the clean survival outcome.
+
+It requires more than simply reaching the finale. You need to bring a healthy route into the final stretch: active crew alive, duplicate mistakes avoided, key Destinies handled, and the final escape completed cleanly.
+
+**How to reach this ending:** keep the active crew alive, complete the important Destiny outcomes, clear or avoid dangerous intruder conditions, and survive the final boss / reactor escape.
+
+**How to avoid losing this ending:** do not guess during duplicate checks, do not let unresolved intruder status carry forward, and do not treat the final escape as a cutscene.
+
+**Closest Turning Point to branch from:** start from the final boss / reactor escape or the late intruder-status checkpoint if your only issue is the ending route. If someone died earlier, you need to rewind to that character’s danger scene instead.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-final-boss-reactor.webp"
+    alt="Directive 8020 final boss and reactor escape before the Everyone Lives ending."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The final boss and reactor escape are still part of the survival route. Do not relax too early.
+  </figcaption>
+</figure>
+
+For the full survival route, read the <Link href="/directive-8020">main Directive 8020 guide</Link> and the <Link href="/directive-8020/character-survival-guide">Character Survival Guide</Link>.
+
+<h2 id="forever-and-ever-ending">
+  Forever and Ever ending
+</h2>
+
+The **Forever and Ever** scene is one of the most important endings for understanding Directive 8020’s structure.
+
+Instead of feeling like a normal escape result, it leans into the game’s loop, clone, and cycle themes. The scene returns to a familiar wake-up setup and makes the player question how much of the mission is repeating.
+
+**How to reach this ending:** follow a route that exposes the cycle / clone structure and pushes the story into its repeating wake-up interpretation.
+
+**How to avoid it:** use Turning Points to move toward a cleaner survival route, a final-message variant, or a more direct fail-state ending.
+
+**Closest Turning Point to branch from:** rewind to the late ending-state branch before the final interpretation locks in.
+
+<h2 id="cycle-13-explained">
+  What does Cycle 13 mean?
+</h2>
+
+Cycle 13 is the key to understanding why Directive 8020’s endings feel stranger than a normal survival-horror finale.
+
+The game is not only asking whether this crew survives. It is asking what kind of experiment, clone route, or repeated mission state has been created around the Cassiopeia and the life form.
+
+That is why endings like Forever and Ever and the two Eisele post-credit scenes matter. They show that survival is not only physical. The project is also trying to turn repeated failure into usable knowledge.
+
+In simple terms:
+
+**Cycle 13 means the ending is part of a larger repeated experiment, not just one isolated mission.**
+
+That is why Eisele’s final interpretation matters so much. She can frame the project as a moral failure, a scientific necessity, or a cycle that still needs another attempt.
+
+<h2 id="docked-ending">
+  Docked ending
+</h2>
+
+The **Docked** ending is a ship-state ending.
+
+Its main value is as a comparison point for **Docked / Not Alone**. Docked is the cleaner version. Docked / Not Alone is the version where the escape state is contaminated by unresolved alien / intruder danger.
+
+**How to reach this ending:** reach the docked outcome without letting the final route carry an active intruder condition into the result.
+
+**How to avoid it:** push the route toward Beacon, Homeward Bound, Hitchhiker, or a bad ending through final-message and intruder-state changes.
+
+**Closest Turning Point to branch from:** rewind to the final escape / docked outcome branch and change intruder status.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-docked-ending.webp"
+    alt="Directive 8020 Docked ending scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Docked is most useful when compared directly with Docked / Not Alone.
+  </figcaption>
+</figure>
+
+<h2 id="beacon-ending">
+  Beacon ending
+</h2>
+
+The **Beacon** ending is tied to the final-message split near the end of the game.
+
+The important choice is the distress / **Save Our Souls**-style message route. This is the branch to test if you are searching for how to get the Beacon ending or how final communication changes the post-credit result.
+
+**How to reach this ending:** choose the distress / Save Our Souls-style final message instead of the warning-style route.
+
+**How to avoid it:** choose the warning-style final message route instead.
+
+**Closest Turning Point to branch from:** rewind to the final Andromeda / message choice before the ending sequence locks in.
+
+If you only want to compare Beacon against the warning route, do not replay the whole game. Branch from the final-message Turning Point and change that one decision first.
+
+<h2 id="eisele-final-choice">
+  Eisele final choice and post-credit split
+</h2>
+
+Eisele’s ending is mainly about whether she lands on a **Humanist / Humanitarian** reading or a **Scientist / continuation** reading.
+
+Do not treat this as a separate third ending path. Use this section as the bridge between Destinies and the two post-credit variants below: if Eisele’s choices lean toward humanity, compassion, and ending the moral compromise of the project, expect the Humanitarian interpretation. If her route leans toward research, control, and continuing the cycle, expect the Scientist interpretation.
+
+<h2 id="eisele-humanitarian">
+  Eisele the Humanitarian post-credit scene
+</h2>
+
+**Eisele the Humanitarian** is the post-credit variant tied to Eisele’s Humanist direction.
+
+This route frames the ending around moral cost, compassion, and whether humanity can survive without sacrificing the part of itself that makes it human.
+
+**How to reach this scene:** push Eisele toward Humanist choices, then use the final-message route that supports the Humanitarian interpretation.
+
+**How to avoid it:** push Eisele toward the Scientist / continuation interpretation or change the final-message branch.
+
+**Closest Turning Point to branch from:** Episode 8 - final message split plus Eisele’s final Destiny state.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-eisele-humanitarian-post-credits.webp"
+    alt="Directive 8020 Eisele the Humanitarian post-credit ending scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Eisele the Humanitarian is the post-credit scene that leans hardest into the moral cost of the project.
+  </figcaption>
+</figure>
+
+<h2 id="eisele-scientist">
+  Eisele the Scientist post-credit scene
+</h2>
+
+**Eisele the Scientist** is the post-credit variant tied to Eisele’s research / continuation direction.
+
+This route frames the project as something that may still be necessary, even after everything the crew has suffered. It is colder than the Humanitarian route because it treats the cycle as a tool that might eventually save humanity.
+
+**How to reach this scene:** push Eisele away from the Humanist interpretation and toward research, control, and continuing the project.
+
+**How to avoid it:** push Eisele toward Humanist choices and test the alternate final-message branch.
+
+**Closest Turning Point to branch from:** Episode 8 - final message split plus Eisele’s final Destiny state.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-eisele-scientist-post-credits.webp"
+    alt="Directive 8020 Eisele the Scientist post-credit ending scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Eisele the Scientist focuses on research, cycles, and the belief that the project can still succeed.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Directive 8020 post-credit scene differences."
+  columns={postCreditColumns}
+  rows={postCreditRows}
+/>
+
+<h2 id="docked-not-alone-ending">
+  Docked / Not Alone ending
+</h2>
+
+**Docked / Not Alone** is the horror version of the Docked outcome.
+
+The crew may have reached a destination, but the route is still contaminated by the alien threat.
+
+**How to reach this ending:** carry an unresolved intruder / duplicate condition into the docked-style ending.
+
+**How to avoid it:** clean up scanner, duplicate, and intruder conditions before the final escape state locks in.
+
+**Closest Turning Point to branch from:** rewind to the final escape / intruder-status branch.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-docked-not-alone-ending.webp"
+    alt="Directive 8020 Docked Not Alone ending showing the intruder threat after escape."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Docked / Not Alone is the ending that proves “escaped” does not always mean “safe.”
+  </figcaption>
+</figure>
+
+For more on duplicate scenes, read the <Link href="/directive-8020/all-monster-scenes-alien-duplicates">Monster Scenes and Alien Duplicates Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="homeward-bound-massacre">
+  Homeward Bound / Massacre ending
+</h2>
+
+**Homeward Bound / Massacre** is the violent version of the Homeward Bound route.
+
+This version is about the threat reaching the wrong place and turning the return route into a bloodbath.
+
+**How to reach this ending:** push the homeward escape route while the alien threat is still positioned to attack or overrun the survivors.
+
+**How to avoid it:** do not let the alien threat travel forward in a state where it can massacre the crew or destination.
+
+**Closest Turning Point to branch from:** rewind to the late homeward escape / intruder-state branch.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-homeward-bound-massacre.webp"
+    alt="Directive 8020 Homeward Bound Massacre ending scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Homeward Bound / Massacre is the route where going home becomes the next disaster.
+  </figcaption>
+</figure>
+
+<h2 id="homeward-bound-masks-off">
+  Homeward Bound / Masks Off ending
+</h2>
+
+**Homeward Bound / Masks Off** is the identity-horror version of Homeward Bound.
+
+Where Massacre focuses on the bloody consequence, Masks Off focuses on the duplicate / reveal side of the threat.
+
+**How to reach this ending:** push the Homeward Bound route with a duplicate / identity condition unresolved.
+
+**How to avoid it:** resolve mimic and identity checks before the homeward route locks in.
+
+**Closest Turning Point to branch from:** rewind to the late duplicate / homeward branch before launch or final escape.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-homeward-bound-masks-off.webp"
+    alt="Directive 8020 Homeward Bound Masks Off ending scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Masks Off is the Homeward Bound variant that makes the duplicate theme impossible to ignore.
+  </figcaption>
+</figure>
+
+<h2 id="hitchhiker-ending">
+  Hitchhiker ending
+</h2>
+
+The **Hitchhiker** ending is another “escape was not clean” variant.
+
+It suggests that something dangerous may still be traveling with the survivors.
+
+**How to reach this ending:** escape while carrying an unresolved alien / intruder implication into the aftermath.
+
+**How to avoid it:** clean up intruder status before the final escape.
+
+**Closest Turning Point to branch from:** rewind to the final escape / launch-state branch.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-hitchhiker-ending.webp"
+    alt="Directive 8020 Hitchhiker ending scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Hitchhiker belongs to the same cleanup family as the other “not truly safe” endings.
+  </figcaption>
+</figure>
+
+<h2 id="game-over-ending">
+  Game Over ending: no playable characters left
+</h2>
+
+The **Game Over** ending is the fail-state route where no playable characters are left.
+
+**How to reach this ending:** let the playable cast collapse through failed survival checks.
+
+**How to avoid it:** keep at least one playable character alive through the final route.
+
+**Closest Turning Point to branch from:** rewind to the last major survival check before your final playable character dies.
+
+This ending is useful for completion and death-route testing, especially if you are also tracking all death scenes.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-game-over-ending.webp"
+    alt="Directive 8020 Game Over ending when no playable characters are left."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Game Over is the route to chase when you are deliberately testing fail states.
+  </figcaption>
+</figure>
+
+<h2 id="bad-ending-everyone-dies">
+  Bad Ending / Everyone Dies
+</h2>
+
+The **Bad Ending / Everyone Dies** route is the darkest ending.
+
+This is the opposite of Everyone Lives: the crew fails, the horror wins, and the route collapses into the worst outcome.
+
+**How to reach this ending:** fail enough survival, duplicate, and final escape checks that the crew is wiped out.
+
+**How to avoid it:** protect characters, verify duplicates, and survive the final escape cleanly.
+
+**Closest Turning Point to branch from:** rewind to the death chain that starts removing your final survivors.
+
+This ending also connects naturally to death-scene cleanup. If you are tracking the wider “44 death scenes” completion route, handle that separately from your clean Everyone Lives run.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-bad-ending-everyone-dies.webp"
+    alt="Directive 8020 Bad Ending where everyone dies."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Everyone Dies is the cleanup route for players who want to see the worst possible outcome.
+  </figcaption>
+</figure>
+
+<h2 id="turning-point-branches">
+  Best Turning Points to branch from for each ending
+</h2>
+
+You do not need to replay the full game for every ending. Use the nearest practical Turning Point and change the condition that actually controls the result.
+
+The most useful branches are the late **Episode 8** route splits: the final message, final escape, intruder status, launch outcome, and Eisele’s final route state.
+
+<GuideTable
+  caption="Directive 8020 ending cleanup Turning Points."
+  columns={turningPointColumns}
+  rows={turningPointRows}
+/>
+
+If someone died much earlier, do not start from Episode 8. Rewind to that character’s death-risk scene first. The late Turning Points only help if your survivor state is already correct.
+
+<h2 id="final-choice-conditions">
+  Final choices and conditions that change endings
+</h2>
+
+Directive 8020 endings are shaped by the route you bring into the finale.
+
+<GuideTable
+  caption="Final conditions that affect Directive 8020 endings."
+  columns={finalChoiceColumns}
+  rows={finalChoiceRows}
+/>
+
+The simple rule is:
+
+**Survivors decide whether the ending can be good. Destinies decide whether the route qualifies cleanly. Intruder status decides whether escape is safe. The final message decides how the ending is interpreted.**
+
+<h2 id="best-ending-cleanup-order">
+  Best ending cleanup order
+</h2>
+
+If you want every ending without making the process messy, use this order.
+
+<GuideTable
+  caption="Best order to clean up Directive 8020 endings."
+  columns={cleanupColumns}
+  rows={cleanupRows}
+/>
+
+<GuideCallout title="Ending cleanup rule">
+Do not chase every ending on your first run. Get a clean survival route first, then use Turning Points to change final-message, Destiny, intruder, and fail-state conditions.
+</GuideCallout>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many endings are in Directive 8020?
+
+Directive 8020 has 10 main ending variants: Everyone Lives, Forever and Ever, Docked, Beacon, Docked / Not Alone, Homeward Bound / Massacre, Homeward Bound / Masks Off, Hitchhiker, Game Over, and Bad Ending / Everyone Dies.
+
+### What is the best ending in Directive 8020?
+
+The best ending for most players is Everyone Lives, where the active crew survives the final boss, reactor escape, and ending sequence with the cleanest route state.
+
+### How do I get the Beacon ending?
+
+To get the Beacon ending, branch from the final-message choice near the end and choose the distress / Save Our Souls-style message route. If you choose the warning-style route instead, you should compare the alternate post-credit result.
+
+### Does the Destinies system affect the ending?
+
+Yes. Stafford’s The Father and Eisele’s Humanist are the two Destinies you should check first for best-ending and post-credit cleanup. The Father comes from protective, mentor-style Stafford choices, while Humanist comes from Eisele choices that prioritize humanity over research or project continuation.
+
+### Do Cooper, Young, and Cernan Destinies affect the ending?
+
+They are useful for route-state and completion tracking, but Stafford’s The Father and Eisele’s Humanist are the first Destinies to check if your best ending or post-credit result is wrong. Track Cooper, Young, and Cernan after those two.
+
+### What is Cycle 13?
+
+Cycle 13 refers to the wider repeated experiment / clone route structure behind the mission. It helps explain why Forever and Ever and the Eisele post-credit scenes feel like more than normal escape endings.
+
+### What is the difference between Eisele the Humanitarian and Eisele the Scientist?
+
+Eisele the Humanitarian focuses on the moral cost of survival and the meaning of humanity. Eisele the Scientist focuses more on research, cycles, the clone project, and the belief that another attempt may eventually succeed.
+
+### What is the difference between Homeward Bound / Massacre and Homeward Bound / Masks Off?
+
+Massacre focuses on the bloody consequence of the alien threat carrying forward. Masks Off focuses more on duplicate identity and reveal conditions within the Homeward Bound route.
+
+### What is Docked / Not Alone?
+
+Docked / Not Alone is a darker docked variant where the crew may have escaped one danger but has not truly escaped the alien threat.
+
+### How do I get the Game Over ending?
+
+Game Over is a fail-state ending tied to having no playable characters left. Chase it only after your survival route.
+
+### Should I chase Everyone Dies first?
+
+No. Save Everyone Lives for your first route, then chase Everyone Dies after you understand the death checks, duplicate scenes, and ending structure.
+
+### Are endings different on PS5, Xbox, and PC?
+
+The ending structure should be the same across platforms. Platform differences usually affect performance, controls, or patches, not which story endings exist.

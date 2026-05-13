@@ -136,6 +136,49 @@ export type LatestUpdateItem = {
   hoverBorderClass: "hover:border-emerald-300",
   hoverTitleClass: "group-hover:text-emerald-700",
 },
+
+
+// ===== Directive 8020 =====
+{
+  href: "/directive-8020",
+  game: "Directive 8020",
+  title: "Save Everyone Guide",
+  description:
+    "Best first-run route, key choices, Ep2 power routing, Ice and Fire, Two Eisele, Explorer vs Survivor, and what to clean up after Everyone Lives.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/directive-8020/choices-consequences",
+  game: "Directive 8020",
+  title: "Choices and Consequences Guide",
+  description:
+    "Major choices, delayed consequences, Ep2 Fire Control vs Landing Computer, Ice and Fire, Destinies, Survivor Mode, and final message branches.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/directive-8020/all-monster-scenes-alien-duplicates",
+  game: "Directive 8020",
+  title: "Mimic and Alien Duplicates Guide",
+  description:
+    "Which Eisele is fake, when to Test instead of Shoot, scanner verification, Eisele Double, Save Your Souls, intruder states, and contaminated endings.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+{
+  href: "/directive-8020/all-endings",
+  game: "Directive 8020",
+  title: "All Endings Guide",
+  description:
+    "Every ending variant, Everyone Lives, Beacon, Docked, Not Alone, Hitchhiker, Homeward Bound, Game Over, Everyone Dies, Destinies, and Cycle 13.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
       // ===== Road to Vostok =====
   {
     href: "/road-to-vostok/area-05-guide",

@@ -1,0 +1,464 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const keyChoiceColumns = [
+  { key: "moment", label: "Key Moment" },
+  { key: "safeRoute", label: "Safe Route / What to Remember" },
+];
+
+export const keyChoiceRows = [
+  {
+    moment: "Early ship damage",
+    safeRoute:
+      "Use the Oracle / diagnostics to understand the ship state before escalating or panicking.",
+  },
+  {
+    moment: "Ep2 power routing",
+    safeRoute:
+      "Track whether you cut Fire Control System or Landing Computer. This can affect the Episode 5 Ice and Fire Anders / Mitchell rescue route.",
+  },
+  {
+    moment: "Crash / landing computer",
+    safeRoute:
+      "Bring the landing computer online. Treat the crash as a survival check, not background action.",
+  },
+  {
+    moment: "Wake Williams",
+    safeRoute:
+      "Wake and stabilize Williams, but do not let his research-first logic override crew safety later.",
+  },
+  {
+    moment: "Weapon authorization",
+    safeRoute:
+      "For the safer first route, refuse weapon panic. Test weapon branches later during cleanup.",
+  },
+  {
+    moment: "Episode 3 sample route",
+    safeRoute:
+      "Push for containment and caution. Williams still drives the crew toward taking the sample, but the safer logic is containment.",
+  },
+  {
+    moment: "Scanner / Test scenes",
+    safeRoute:
+      "Use scanner verification or Test whenever available. Do not trust voice, face, or urgency alone.",
+  },
+  {
+    moment: "Two Eisele scene",
+    safeRoute:
+      "The left Eisele is fake. The newcomer is real. Choose Test instead of Shoot.",
+  },
+  {
+    moment: "Episode 5 Ice and Fire",
+    safeRoute:
+      "If Anders or Mitchell dies, check the Ep2 power-routing branch first before replaying only Episode 5.",
+  },
+  {
+    moment: "Final escape and message",
+    safeRoute:
+      "Keep intruder status clean before escape. Distress / Save Our Souls points toward Beacon-style cleanup; warning-style routes affect alternate ending interpretation.",
+  },
+];
+
+export const survivorColumns = [
+  { key: "group", label: "Character / Group" },
+  { key: "survivalStatus", label: "Can They Be Saved?" },
+];
+
+export const survivorRows = [
+  {
+    group: "Active crew",
+    survivalStatus:
+      "Yes. The main survival route can keep the active crew alive through the final escape.",
+  },
+  {
+    group: "Eisele and Cernan",
+    survivalStatus:
+      "Yes, but they are among the easiest to lose because late survival pressure can depend on earlier route states.",
+  },
+  {
+    group: "Stafford, Mitchell, Williams, Anders, Cooper",
+    survivalStatus:
+      "Yes. Their survival depends on ship systems, containment choices, rescue logic, and route-state cleanup.",
+  },
+  {
+    group: "Carter",
+    survivalStatus:
+      "No, not as a normal active-crew target. Carter is part of the opening mystery and cannot be saved like the main crew.",
+  },
+  {
+    group: "Sims",
+    survivalStatus:
+      "No, not like a normal crew member. Sims is tied to the sleep crew mystery, recordings, and mimic setup.",
+  },
+];
+
+export const clusterColumns = [
+  { key: "step", label: "Step" },
+  { key: "useThis", label: "Use This Guide" },
+];
+
+export const clusterRows = [
+  {
+    step: "1. First survival route",
+    useThis:
+      "Start here on the hub. Use the key choice checklist, then open the Character Survival Guide if someone dies.",
+  },
+  {
+    step: "2. Major choices",
+    useThis:
+      "Use the Choices and Consequences Guide for Ep2 power routing, Ice and Fire, final message, weapon branches, and Destiny cleanup.",
+  },
+  {
+    step: "3. Duplicate / mimic scenes",
+    useThis:
+      "Use the Monster Scenes and Alien Duplicates Guide for scanner scenes, Two Eisele, mimic mistakes, intruder status, and contaminated endings.",
+  },
+  {
+    step: "4. Ending cleanup",
+    useThis:
+      "Use the All Endings Guide after your first clear to compare Everyone Lives, Beacon, Docked / Not Alone, Hitchhiker, Homeward Bound, and bad endings.",
+  },
+  {
+    step: "5. Collectibles",
+    useThis:
+      "Use the Secrets, Simms Recordings, and O Death guide after survival is stable. Do not risk a first survival route for collectibles.",
+  },
+];
+
+export const modeColumns = [
+  { key: "mode", label: "Mode" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const modeRows = [
+  {
+    mode: "Explorer",
+    whatItMeans:
+      "Better for cleanup. You can use Turning Points more freely to test choices, endings, and bad branches.",
+  },
+  {
+    mode: "Survivor",
+    whatItMeans:
+      "Treat choices as permanent during the run. Do not plan around immediate Turning Point fixes.",
+  },
+];
+
+export const episodeColumns = [
+  { key: "episode", label: "Episode" },
+  { key: "watchFor", label: "What Matters Most" },
+];
+
+export const episodeRows = [
+  {
+    episode: "Episode 1",
+    watchFor:
+      "Opening mystery, Carter / Sims setup, early traits, scanner tutorial, and ship-state logic.",
+  },
+  {
+    episode: "Episode 2",
+    watchFor:
+      "Power routing. Track Fire Control System vs Landing Computer because it can affect Episode 5 Ice and Fire.",
+  },
+  {
+    episode: "Episode 3",
+    watchFor:
+      "Search-party split, power-cell route, Williams sample pressure, and early route states that can matter later.",
+  },
+  {
+    episode: "Episode 4",
+    watchFor:
+      "Carry your clean route forward. Do not treat middle chapters as harmless downtime.",
+  },
+  {
+    episode: "Episode 5",
+    watchFor:
+      "Ice and Fire, Anders / Mitchell rescue logic, alien growth, and containment pressure.",
+  },
+  {
+    episode: "Episode 6",
+    watchFor:
+      "High-risk Eisele / Cernan survival pressure, identity checks, and late-route consequences.",
+  },
+  {
+    episode: "Episode 7",
+    watchFor:
+      "Duplication evidence, late conspiracy reveals, and setup for final intruder-state cleanup.",
+  },
+  {
+    episode: "Episode 8",
+    watchFor:
+      "Final message, intruder status, final escape, post-credit direction, and ending variants.",
+  },
+];
+
+export const intentColumns = [
+  { key: "problem", label: "If You Are Stuck On..." },
+  { key: "goTo", label: "Go To" },
+];
+
+export const intentRows = [
+  {
+    problem: "Which Eisele is fake?",
+    goTo:
+      "Monster Scenes and Alien Duplicates Guide.",
+  },
+  {
+    problem: "Anders or Mitchell in Ice and Fire",
+    goTo:
+      "Choices and Consequences Guide.",
+  },
+  {
+    problem: "Eisele or Cernan dies later",
+    goTo:
+      "Character Survival Guide.",
+  },
+  {
+    problem: "Beacon, Docked / Not Alone, Hitchhiker, or Everyone Dies",
+    goTo:
+      "All Endings Guide.",
+  },
+  {
+    problem: "Secrets, Simms Recordings, O Death, Duplication Analysis",
+    goTo:
+      "Collectibles Guide.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Yes, you can save the active crew in Directive 8020, but Carter and Sims are not normal save targets.**
+
+For a first survival route, focus on the major delayed-consequence choices: Ep2 power routing, landing computer, Williams wake-up, weapon authorization, Episode 3 sample pressure, scanner / Test scenes, Two Eisele, Episode 5 Ice and Fire, final escape, and final message.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-everyone-lives-ending.webp"
+    alt="Directive 8020 Everyone Lives ending and clean survival route."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+</figure>
+
+<h2 id="can-you-save-everyone">
+  Can you save everyone in Directive 8020?
+</h2>
+
+You can save the active crew and reach a clean survival route, but not every named character is a normal save target.
+
+Carter and Sims are part of the opening mystery. They are not handled like crew members you can simply keep alive with the right dialogue choice.
+
+<GuideTable
+  caption="Directive 8020 survival targets."
+  columns={survivorColumns}
+  rows={survivorRows}
+/>
+
+<GuideCallout title="Important">
+If you are searching for how to save Carter or Sims, the answer is that they are not normal active-crew survival targets. Focus your save-everyone route on the active crew.
+</GuideCallout>
+
+<h2 id="key-choices">
+  10 key choices you should know before going for Everyone Lives
+</h2>
+
+Use this as your first-route checklist. These are the choices and route states most likely to affect survival, endings, or cleanup.
+
+<GuideTable
+  caption="Directive 8020 key choices for a safe first route."
+  columns={keyChoiceColumns}
+  rows={keyChoiceRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-biometric-scanner-mimic.webp"
+    alt="Directive 8020 scanner verification scene used to identify mimics."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+For the full scanner, Test, and Two Eisele breakdown, use the{" "}
+<Link href="/directive-8020/all-monster-scenes-alien-duplicates">
+  Monster Scenes and Alien Duplicates Guide
+</Link>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-to-use-this-hub">
+  How to use this Directive 8020 guide hub
+</h2>
+
+This hub is for players who want the right guide at the right time, without turning the game into a wiki crawl.
+
+Use this order.
+
+<GuideTable
+  caption="Directive 8020 guide cluster and play order."
+  columns={clusterColumns}
+  rows={clusterRows}
+/>
+
+The simple rule is:
+
+**Save everyone first. Break branches later.**
+
+Do not try to save the crew, collect everything, see every bad ending, and test every monster scene in one run.
+
+<h2 id="explorer-vs-survivor">
+  Explorer vs Survivor mode: which should you choose?
+</h2>
+
+The mode you choose changes how forgiving your route feels.
+
+<GuideTable
+  caption="Directive 8020 Explorer vs Survivor mode."
+  columns={modeColumns}
+  rows={modeRows}
+/>
+
+If this is your first Dark Pictures-style run and you mainly care about seeing the best outcome, use Explorer. If you want a stricter run where consequences feel heavier, use Survivor.
+
+<GuideCallout title="Survivor Mode warning">
+In Survivor Mode, treat every major decision as permanent for the run. Do not rely on immediate Turning Point cleanup.
+</GuideCallout>
+
+<h2 id="episode-priorities">
+  Episode-by-episode route priorities
+</h2>
+
+Use this table to understand where the big risks are before you start cleanup.
+
+<GuideTable
+  caption="Directive 8020 episode priorities for survival and cleanup."
+  columns={episodeColumns}
+  rows={episodeRows}
+/>
+
+
+
+<h2 id="ice-and-fire">
+  Ice and Fire: why Anders or Mitchell can die
+</h2>
+
+Episode 5’s **Ice and Fire** scene is one of the most important delayed-consequence moments in Directive 8020.
+
+Young appears to face an immediate rescue problem between Anders and Mitchell, but the result can depend on the earlier Episode 2 power-routing branch.
+
+If Anders or Mitchell dies here, do not only replay Episode 5. Check whether you cut Fire Control System or Landing Computer in Episode 2.
+
+For the full choice chain, use the{" "}
+<Link href="/directive-8020/choices-consequences#ice-and-fire-choice">
+  Ice and Fire section of the Choices Guide
+</Link>
+.
+
+<h2 id="collectibles">
+  When should you collect Secrets, Simms Recordings, and O Death?
+</h2>
+
+Collectibles are useful, but do not let them ruin your first survival route.
+
+If a collectible makes you slow down during a chase, scanner scene, final escape, or high-pressure choice, leave it for cleanup.
+
+The most important collectibles for story understanding are:
+
+- **Secret #45 — Duplication Analysis**, for mimic / duplicate lore;
+- **Secret #50 — Williams 2.0**, for replacement and conspiracy themes;
+- **Simms Recordings**, for the sleep crew and Simms storyline;
+- **O Death items**, for Dark Pictures anthology cleanup.
+
+For locations, use the{" "}
+<Link href="/directive-8020/all-secrets-simms-recordings-o-death">
+  All Secrets, Simms Recordings, and O Death Guide
+</Link>
+.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="what-guide-should-i-open">
+  What guide should I open next?
+</h2>
+
+Use this table if you already know what problem you have.
+
+<GuideTable
+  caption="Directive 8020 guide picker."
+  columns={intentColumns}
+  rows={intentRows}
+/>
+
+<h2 id="main-guides">
+  Main Directive 8020 guides
+</h2>
+
+### <Link href="/directive-8020/choices-consequences">Choices and Consequences Guide</Link>
+
+Use this for Ep2 power routing, Ice and Fire, weapon authorization, final message, Destiny / trait routes, Survivor Mode, and bad-choice cleanup.
+
+### <Link href="/directive-8020/character-survival-guide">Character Survival Guide</Link>
+
+Use this if Eisele, Cernan, Stafford, Mitchell, Williams, Anders, or Cooper dies and you need to know where to rewind.
+
+### <Link href="/directive-8020/all-monster-scenes-alien-duplicates">Monster Scenes and Alien Duplicates Guide</Link>
+
+Use this for scanner verification, Two Eisele, mimic mistakes, Eisele Double, Save Your Souls, intruder status, and contaminated endings.
+
+### <Link href="/directive-8020/all-endings">All Endings Guide</Link>
+
+Use this after your first clear to compare Everyone Lives, Beacon, Docked, Docked / Not Alone, Homeward Bound, Hitchhiker, Game Over, Everyone Dies, and post-credit variants.
+
+### <Link href="/directive-8020/all-secrets-simms-recordings-o-death">All Secrets, Simms Recordings, and O Death Guide</Link>
+
+Use this for all 50 Secrets, 10 Simms Recordings, 5 O Death collectibles, missable rules, and story links.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Can you save everyone in Directive 8020?
+
+You can save the active crew and reach a clean survival route.
+
+### Can you save Carter?
+
+No. Carter is part of the opening mystery and is not a normal active-crew survival target.
+
+### Can you save Sims?
+
+No, not like a normal crew member. Sims is tied to the sleep crew mystery, recordings, and mimic setup.
+
+### Which Eisele is fake?
+
+The left Eisele is fake. The newcomer is real. Choose Test instead of Shoot.
+
+### Should I play Explorer or Survivor?
+
+Explorer is better for first-route cleanup. Survivor is stricter and should be treated as a consequence-heavy run.
+
+### Why does Episode 2 power routing matter?
+
+It can affect the Episode 5 Ice and Fire route, where Anders and Mitchell are at risk.
+
+### Can I stop Williams from taking the sample?
+
+Not cleanly. Cooper can push back, but Williams still drives the group toward taking the sample.
+
+### What should I read first?
+
+Start with this hub and the key choice checklist. If someone dies, open the Character Survival Guide. If a duplicate scene goes wrong, open the Monster Scenes and Alien Duplicates Guide.
+
+### Should I collect everything on my first run?
+
+Not if it risks survival. Save the crew first, then use the collectibles guide for cleanup.
+
+### What should I do after Everyone Lives?
+
+Use the All Endings Guide for final-message, intruder, Beacon, Docked / Not Alone, Hitchhiker, Homeward Bound, Game Over, and Everyone Dies cleanup.

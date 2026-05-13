@@ -1,0 +1,597 @@
+import Link from "next/link";
+import Image from "next/image";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const directAnswerColumns = [
+  { key: "question", label: "Player Question" },
+  { key: "answer", label: "Direct Answer" },
+];
+
+export const directAnswerRows = [
+  {
+    question: "Which Eisele is fake?",
+    answer:
+      "The left Eisele is fake. The newcomer is real. Choose Test instead of Shoot.",
+  },
+  {
+    question: "Should I shoot or test in the two Eisele scene?",
+    answer:
+      "Choose Test. Shooting immediately is the panic route and can punish the wrong target.",
+  },
+  {
+    question: "How do I identify a mimic?",
+    answer:
+      "Use scanner / Test verification whenever the game offers it. Do not rely on voice, face, or panic dialogue.",
+  },
+  {
+    question: "Should I authorize the weapon?",
+    answer:
+      "For the safer survival route, refuse the weapon. Use weapon branches later for cleanup.",
+  },
+  {
+    question: "Why does Episode 3 matter?",
+    answer:
+      "Episode 3 creates the split routes, power-cell isolation, sample pressure, and earlier route states that can affect later survival.",
+  },
+  {
+    question: "What does Save Your Souls mean?",
+    answer:
+      "It is a major outcome / rewind prompt. Use it to go back before a bad consequence fully locks in.",
+  },
+];
+
+export const episode3Columns = [
+  { key: "scene", label: "Episode 3 Scene" },
+  { key: "whatToDo", label: "What to Do" },
+];
+
+export const episode3Rows = [
+  {
+  scene: "Opening trust check",
+  whatToDo:
+    "Treat the opening confrontation as a verification scene, not a trust scene. Question the person in front of you and keep distance instead of blindly letting them in.",
+},
+  {
+    scene: "Search-party split",
+    whatToDo:
+      "Cernan goes with Williams, while Anders and Eisele move onto another search path. Remember this split if later route states become confusing.",
+  },
+  {
+    scene: "Power the door",
+    whatToDo:
+      "Use the power cell to progress. This route separates characters and increases later mimic pressure.",
+  },
+  {
+    scene: "Sample argument",
+    whatToDo:
+      "Cooper can push back, but Williams still drives the group toward taking the sample. Treat this as contamination setup, not a clean preventable branch.",
+  },
+  {
+    scene: "Later injury / survival pressure",
+    whatToDo:
+      "If Eisele or Cernan later dies in Episode 6, check their earlier Stafford / Williams pressure routes before replaying only Episode 6.",
+  },
+];
+
+export const scannerColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "safePlay", label: "Safe Play" },
+];
+
+export const scannerRows = [
+  {
+    situation: "A crew member appears after being separated",
+    safePlay:
+      "Do not trust them on appearance alone. Look for scanner, Test, or route evidence.",
+  },
+  {
+    situation: "The game offers Test or Shoot",
+    safePlay:
+      "Choose Test first unless you are deliberately chasing a bad branch.",
+  },
+  {
+    situation: "Someone sounds familiar but the scene feels wrong",
+    safePlay:
+      "Assume the game is testing identity. Verify before letting them through or aiming at them.",
+  },
+  {
+    situation: "A weapon is available",
+    safePlay:
+      "Do not treat the gun as a solution. A weapon makes wrong identification worse.",
+  },
+  {
+    situation: "The crew reaches a safe-looking ending",
+    safePlay:
+          "Check whether an intruder or duplicate condition is still unresolved. Use the ending matrix below to diagnose the route.",
+  },
+];
+
+export const injuryColumns = [
+  { key: "routeState", label: "Route State" },
+  { key: "fix", label: "Fix" },
+];
+
+export const injuryRows = [
+  {
+    routeState: "Eisele dies or becomes very hard to save in Episode 6",
+    fix:
+      "Check her earlier Stafford pressure route. Prevent earlier injury or failed survival state before replaying Episode 6.",
+  },
+  {
+    routeState: "Cernan dies or cannot be saved later",
+    fix:
+      "Check his earlier Williams route. If the later branch feels impossible, the mistake may be earlier.",
+  },
+  {
+    routeState: "A character dies without a normal rescue window",
+    fix:
+      "They may be carrying a bad earlier route state. Rewind to the first pressure scene, not only the death scene.",
+  },
+  {
+    routeState: "The same Episode 6 scene keeps failing",
+    fix:
+      "Work backward: Episode 6 choice, then earlier identity state, then Episode 3 split / injury route.",
+  },
+];
+
+export const turningPointColumns = [
+  { key: "badResult", label: "Bad Result" },
+  { key: "whereToRewind", label: "Where to Rewind" },
+];
+
+export const turningPointRows = [
+  {
+    badResult: "You shot the wrong Eisele",
+    whereToRewind:
+      "Return to the two Eisele scene and choose Test instead of Shoot.",
+  },
+  {
+    badResult: "Eisele dies in Episode 6",
+    whereToRewind:
+      "Check her earlier Stafford route before replaying the Episode 6 sequence again.",
+  },
+  {
+    badResult: "Cernan dies later",
+    whereToRewind:
+      "Check the Cernan / Williams route before assuming the late scene is the only problem.",
+  },
+  {
+    badResult: "You get Docked / Not Alone",
+    whereToRewind:
+      "Start with Episode 8 intruder status. If that does not fix it, work backward through earlier duplicate branches.",
+  },
+  {
+    badResult: "You get Hitchhiker",
+    whereToRewind:
+      "Check final launch / escape state first, then earlier mimic or intruder conditions.",
+  },
+  {
+    badResult: "A clean route suddenly becomes a bad ending",
+    whereToRewind:
+      "Check final escape, then Episode 6 survival state, then Episode 3 route setup.",
+  },
+];
+
+export const endingColumns = [
+  { key: "routeState", label: "Route State" },
+  { key: "likelyEnding", label: "Likely Ending" },
+];
+
+export const endingRows = [
+  {
+    routeState:
+      "Crew survives, final escape is clean, no unresolved intruder state",
+    likelyEnding:
+      "Everyone Lives / clean survival route",
+  },
+  {
+    routeState:
+      "Docked outcome, but alien or intruder condition remains active",
+    likelyEnding:
+      "Docked / Not Alone",
+  },
+  {
+    routeState:
+      "Escape succeeds, but the threat travels forward",
+    likelyEnding:
+      "Hitchhiker",
+  },
+  {
+    routeState:
+      "Homeward route carries the alien threat into a violent outcome",
+    likelyEnding:
+      "Homeward Bound / Massacre",
+  },
+  {
+    routeState:
+      "Homeward route keeps duplicate identity unresolved",
+    likelyEnding:
+      "Homeward Bound / Masks Off",
+  },
+  {
+    routeState:
+      "No playable characters remain",
+    likelyEnding:
+      "Game Over",
+  },
+  {
+    routeState:
+      "Crew death chain reaches the worst outcome",
+    likelyEnding:
+      "Bad Ending / Everyone Dies",
+  },
+];
+
+export const episodeColumns = [
+  { key: "episode", label: "Episode" },
+  { key: "whatToWatch", label: "What to Watch" },
+];
+
+export const episodeRows = [
+  {
+    episode: "Episode 1",
+    whatToWatch:
+      "Scanner tutorial, ship damage, Carter / Sims recordings, and early signs that the problem is not just technical.",
+  },
+  {
+    episode: "Episode 2",
+    whatToWatch:
+      "Sleep crew mystery, missing tools, broken explanations, and early identity paranoia.",
+  },
+  {
+    episode: "Episode 3",
+    whatToWatch:
+      "Opening trust check, search-party split, power-cell route, and the sample argument.",
+  },
+  {
+    episode: "Episode 4",
+    whatToWatch:
+      "Carry your clean route state forward. Do not treat the middle chapters as harmless downtime.",
+  },
+  {
+    episode: "Episode 5",
+    whatToWatch:
+      "Alien growth, containment pressure, and Williams pushing investigation over safety.",
+  },
+  {
+    episode: "Episode 6",
+    whatToWatch:
+      "High-pressure survival checks where earlier injury, identity, or route mistakes can pay off badly.",
+  },
+  {
+    episode: "Episode 7",
+    whatToWatch:
+      "Duplication evidence becomes clearer. Secret #45: Duplication Analysis is especially important.",
+  },
+  {
+    episode: "Episode 8",
+    whatToWatch:
+      "Final escape, intruder status, Docked / Not Alone, Hitchhiker, and contaminated ending routes.",
+  },
+];
+
+export const collectibleColumns = [
+  { key: "collectible", label: "Collectible" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const collectibleRows = [
+  {
+    collectible: "Secret #45 — Duplication Analysis",
+    whyItMatters:
+      "The strongest collectible link to the mimic / duplicate storyline.",
+  },
+  {
+    collectible: "Secret #50 — Williams 2.0",
+    whyItMatters:
+      "Connects late-game conspiracy material with replacement and identity horror.",
+  },
+  {
+    collectible: "O Death #1 — This Doesn’t Belong Here",
+    whyItMatters:
+      "Useful for late-game intrusion and contamination cleanup.",
+  },
+  {
+    collectible: "O Death #5 — Bloodlines",
+    whyItMatters:
+      "Supports the late-game duplicate and survivor-paranoia themes.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**In the two Eisele scene, the left Eisele is fake, the newcomer is real, and you should choose Test instead of Shoot.**
+
+For the safest survival route, use scanner verification whenever possible, refuse weapon panic, and treat Episode 3 as a long-term route setup chapter. If a later route collapses, use Turning Points to rewind to the first split, scanner, sample, injury, or intruder-state mistake.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-two-eiseles-choice.webp"
+    alt="Directive 8020 two Eisele duplicate scene showing the Eisele Double consequence."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+</figure>
+
+<h2 id="direct-answers">
+  Direct answers for mimic and duplicate scenes
+</h2>
+
+Use this table if you are stuck in a scene and need the answer quickly.
+
+<GuideTable
+  caption="Directive 8020 mimic and duplicate scene answers."
+  columns={directAnswerColumns}
+  rows={directAnswerRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="two-eiseles">
+  Which Eisele is fake?
+</h2>
+
+In the two Eisele scene:
+
+**The left Eisele is fake.**  
+**The newcomer is real.**  
+**Choose Test instead of Shoot.**
+
+This is the most important duplicate choice in the game. The scene is designed to make you panic, but the safe route is to verify identity instead of reacting emotionally.
+
+The game also tracks this as a real consequence state, not just a throwaway cutscene. That matters because duplicate mistakes can affect later route cleanup.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-biometric-scanner-mimic.webp"
+    alt="Directive 8020 biometric scanner verification scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+For broader choice routing, use the{" "}
+<Link href="/directive-8020/choices-consequences">
+  Choices and Consequences Guide
+</Link>
+.
+
+<h2 id="scanner-verification">
+  How to identify a mimic
+</h2>
+
+The scanner is the safest way to identify a mimic.
+
+Once the crew realizes the alien can copy voices, appearance, and behavior, emotional recognition stops being reliable. A familiar face can be wrong. A familiar voice can be bait.
+
+Use this rule:
+
+**If the game gives you Test, choose Test. If the game gives you scanner verification, use it.**
+
+<GuideTable
+  caption="Directive 8020 scanner and mimic decision rules."
+  columns={scannerColumns}
+  rows={scannerRows}
+/>
+
+<h2 id="episode-3-choices">
+  Episode 3 choices that matter later
+</h2>
+
+Episode 3 looks like a search chapter, but it sets up several later problems.
+
+The important parts are the opening trust check, the search-party split, the power-cell route, and the sample argument.
+
+<GuideTable
+  caption="Directive 8020 Episode 3 choices and route-state checks."
+  columns={episode3Columns}
+  rows={episode3Rows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-episode-3-search-party-split.webp"
+    alt="Directive 8020 Episode 3 search-party split with Cernan, Williams, Anders, and Eisele."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+The most important route split is simple:
+
+- Cernan and Williams move onto one route.
+- Anders and Eisele move onto another.
+- Cooper coordinates the broader search.
+
+If Cernan or Eisele becomes hard to save later, do not only replay the late scene. Check whether the earlier route already put them in a bad state.
+
+<h3 id="power-cell-route">
+  Power the door and power-cell route
+</h3>
+
+The power-cell route matters because it slows the group down and separates people inside damaged ship areas.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-episode-3-power-cell-route.webp"
+    alt="Directive 8020 Episode 3 Power the Door objective with power cell tutorial."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+This is not only a utility puzzle. It creates isolation, and isolation is where mimic pressure becomes dangerous.
+
+<h3 id="sample-argument">
+  Can you stop Williams from taking the sample?
+</h3>
+
+The sample scene looks like a containment choice, but Williams still pushes the group toward taking the sample.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-episode-3-sample-argument.webp"
+    alt="Directive 8020 Episode 3 Williams sample argument."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+Cooper can push back, but this is not a clean “stop the sample” branch. Treat it as contamination setup and a warning about Williams’ priorities.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="episode-6-deaths">
+  Why Eisele or Cernan can die later
+</h2>
+
+If Eisele or Cernan dies later even though your immediate choice looks correct, the mistake may be earlier.
+
+Directive 8020 can punish earlier route states during later pressure sequences. That means a late Episode 6 failure is not always fixed by replaying only Episode 6.
+
+<GuideTable
+  caption="Directive 8020 Eisele and Cernan late-route diagnosis."
+  columns={injuryColumns}
+  rows={injuryRows}
+/>
+
+<GuideCallout title="Route diagnosis">
+If Episode 6 feels impossible to fix, work backward. Check the immediate choice first, then the earlier identity route, then the Episode 3 split or pressure route.
+</GuideCallout>
+
+<h2 id="turning-points">
+  How Turning Points help fix bad routes
+</h2>
+
+Turning Points are useful because mimic mistakes are not always obvious immediately.
+
+You may trust the wrong person, miss a scanner clue, or carry an intruder state forward, then only realize the damage much later.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-save-your-souls-rewind.webp"
+    alt="Directive 8020 Save Your Souls rewind prompt."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+When a major outcome prompt appears, use it as a clue: the game is telling you that something important just locked in, or is about to lock in.
+
+<GuideTable
+  caption="Directive 8020 Turning Point fixes for mimic and duplicate mistakes."
+  columns={turningPointColumns}
+  rows={turningPointRows}
+/>
+
+<h2 id="contaminated-endings">
+  How mimic states affect endings
+</h2>
+
+The duplicate threat does not disappear just because the crew reaches an ending.
+
+A route can look like an escape route and still be contaminated if an intruder or duplicate condition remains unresolved.
+
+<GuideTable
+  caption="Directive 8020 mimic and intruder route states."
+  columns={endingColumns}
+  rows={endingRows}
+/>
+
+For the full ending breakdown, use the{" "}
+<Link href="/directive-8020/all-endings">
+  All Endings Guide
+</Link>
+.
+
+<h2 id="episode-breakdown">
+  Episode-by-episode mimic and monster checklist
+</h2>
+
+Use this checklist if you want to know which chapters matter for mimic, duplicate, and intruder cleanup.
+
+<GuideTable
+  caption="Directive 8020 mimic and duplicate checklist by episode."
+  columns={episodeColumns}
+  rows={episodeRows}
+/>
+
+<h2 id="collectibles">
+  Collectibles that explain the duplicate system
+</h2>
+
+Some collectibles explain the mimic route better than the main story alone.
+
+<GuideTable
+  caption="Directive 8020 collectibles tied to mimic and duplicate lore."
+  columns={collectibleColumns}
+  rows={collectibleRows}
+/>
+
+For every collectible location, use the{" "}
+<Link href="/directive-8020/all-secrets-simms-recordings-o-death">
+  All Secrets, Simms Recordings, and O Death Locations Guide
+</Link>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Which Eisele is fake in Directive 8020?
+
+The left Eisele is fake. The newcomer is real.
+
+### Should I shoot or test in the two Eisele scene?
+
+Choose Test. Shooting immediately is the panic route.
+
+### How do I identify a mimic?
+
+Use scanner verification or Test whenever the game gives you that option. Do not rely only on voice, appearance, or urgency.
+
+### Should I authorize the weapon?
+
+For the safer survival route, refuse the weapon. Weapon branches are better for cleanup routes.
+
+### What does Eisele Double mean?
+
+Eisele Double is a consequence state tied to the duplicate encounter. If you see this state, check the two Eisele scene and make sure you used Test / scanner logic instead of reacting with Shoot.
+
+### Why does Episode 3 matter?
+
+Episode 3 creates the search-party split, power-cell route, sample pressure, and isolation setup that later mimic and survival scenes build on.
+
+### Can you stop Williams from taking the sample?
+
+Not cleanly. Cooper can push back, but Williams still drives the group toward taking the sample.
+
+### Why does Eisele die later?
+
+Check the immediate scene first, then work backward to earlier Stafford / identity pressure and Episode 3 route state.
+
+### Why does Cernan die later?
+
+Check the Cernan / Williams route and earlier pressure states before replaying only the late death scene.
+
+### What does Save Your Souls mean?
+
+It is an outcome / rewind prompt. Use it to go back before a major consequence becomes locked into your route.
+
+### What does Docked / Not Alone mean?
+
+It means the route reaches a docked-style outcome, but an alien, intruder, or duplicate condition is still unresolved.
+
+### What collectible explains the mimic system best?
+
+Secret #45 — Duplication Analysis is the strongest collectible connection to the duplicate storyline.

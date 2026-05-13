@@ -1,0 +1,573 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const survivalOverviewColumns = [
+  { key: "character", label: "Character" },
+  { key: "highestRisk", label: "Highest-Risk Moment" },
+  { key: "mustCheck", label: "Must Check First" },
+];
+
+export const survivalOverviewRows = [
+  {
+    character: "Eisele",
+    highestRisk:
+      "Episode 6 survival pressure and late duplicate / identity scenes.",
+    mustCheck:
+      "Scanner / Test choices, earlier Stafford pressure, and whether she enters the late route in a bad state.",
+  },
+  {
+    character: "Cernan",
+    highestRisk:
+      "Episode 6 Detour and the Cernan / Williams pressure route.",
+    mustCheck:
+      "Earlier Williams route state before replaying only the late death scene.",
+  },
+  {
+    character: "Stafford",
+    highestRisk:
+      "Episode 3 crash / landing route and later command-pressure decisions.",
+    mustCheck:
+      "Landing computer, crew-first command choices, and whether pride overrides safety.",
+  },
+  {
+    character: "Mitchell",
+    highestRisk:
+      "Landing, fire, oxygen, and system-failure scenes where rescue and engineering overlap.",
+    mustCheck:
+      "Do not solve only the system or only the rescue. You usually need both.",
+  },
+  {
+    character: "Williams",
+    highestRisk:
+      "Episode 3 wake-up, sample argument, and later routes where his ambition pushes the crew into risk.",
+    mustCheck:
+      "Keep him alive, but do not let him turn research or control into the main priority.",
+  },
+  {
+    character: "Anders",
+    highestRisk:
+      "Alien sample, science routes, and containment-risk scenes.",
+    mustCheck:
+      "Containment before curiosity, especially around samples and organic growth.",
+  },
+  {
+    character: "Cooper",
+    highestRisk:
+      "Medical wake-up, search support, and rescue decisions where the group needs a stabilizing character.",
+    mustCheck:
+      "Keep the crew coordinated and do not let medical / search scenes become panic branches.",
+  },
+];
+
+export const scriptedColumns = [
+  { key: "character", label: "Character" },
+  { key: "canYouSaveThem", label: "Can You Save Them?" },
+];
+
+export const scriptedRows = [
+  {
+    character: "Carter",
+    canYouSaveThem:
+      "No, not as a normal survival-route target. Carter’s death is part of the opening mystery and the proof that the crew is already being deceived.",
+  },
+  {
+    character: "Sims",
+    canYouSaveThem:
+      "No, not like an active crew member. Sims is tied to the sleep crew mystery, recordings, airlock pressure, and mimic setup.",
+  },
+];
+
+export const dangerColumns = [
+  { key: "scene", label: "Danger Scene" },
+  { key: "survivalCheck", label: "What to Check" },
+];
+
+export const dangerRows = [
+  {
+    scene: "Episode 3 landing computer / crash",
+    survivalCheck:
+      "Treat this as a ship-survival scene, not background action. A bad route here can damage the whole run.",
+  },
+  {
+    scene: "Episode 3 search-party split",
+    survivalCheck:
+      "Cernan and Williams separate from Anders and Eisele. If later routes feel strange, work backward to this split.",
+  },
+  {
+    scene: "Episode 3 sample argument",
+    survivalCheck:
+      "Williams pushes the crew toward investigation. Choose containment logic whenever the game gives you control.",
+  },
+  {
+    scene: "Episode 6 Detour",
+    survivalCheck:
+      "One of the biggest character-survival checks. If Eisele or Cernan dies here, the setup may be earlier.",
+  },
+  {
+    scene: "Two Eisele / duplicate scene",
+    survivalCheck:
+      "Use Test / scanner logic. Do not shoot or trust based only on emotion.",
+  },
+  {
+    scene: "Final boss / reactor escape",
+    survivalCheck:
+      "Do not relax after reaching the finale. Doors, timing, intruder status, and escape choices still matter.",
+  },
+];
+
+export const dependencyColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "whatItUsuallyMeans", label: "What It Usually Means" },
+];
+
+export const dependencyRows = [
+  {
+    problem: "Eisele dies even when the late choice looks correct",
+    whatItUsuallyMeans:
+      "Check earlier Stafford / identity pressure and Episode 3 route state before replaying only Episode 6.",
+  },
+  {
+    problem: "Cernan dies or cannot be saved later",
+    whatItUsuallyMeans:
+      "Check the Cernan / Williams route first. The late failure may be a payoff from earlier pressure.",
+  },
+  {
+    problem: "Mitchell dies during a system scene",
+    whatItUsuallyMeans:
+      "You may have solved the ship problem but not the rescue problem, or the reverse.",
+  },
+  {
+    problem: "Williams survives but the route gets worse",
+    whatItUsuallyMeans:
+      "That can happen if his survival lets ambition, sample-taking, or project logic override containment.",
+  },
+  {
+    problem: "Everyone reaches the finale but the ending is contaminated",
+    whatItUsuallyMeans:
+      "Someone may have survived physically while an intruder / duplicate condition remained unresolved.",
+  },
+];
+
+export const characterDiagnosisColumns = [
+  { key: "character", label: "Character" },
+  { key: "ifTheyDie", label: "If They Die, Check This First" },
+];
+
+export const characterDiagnosisRows = [
+  {
+    character: "Eisele",
+    ifTheyDie:
+      "Two Eisele / scanner logic, earlier Stafford pressure, and Episode 6 route state.",
+  },
+  {
+    character: "Cernan",
+    ifTheyDie:
+      "Cernan / Williams route and Episode 6 Detour pressure.",
+  },
+  {
+    character: "Stafford",
+    ifTheyDie:
+      "Crash / landing route, command decisions, and late duplicate pressure.",
+  },
+  {
+    character: "Mitchell",
+    ifTheyDie:
+      "Landing, fire, oxygen, and rescue-system overlap scenes.",
+  },
+  {
+    character: "Williams",
+    ifTheyDie:
+      "Wake-up stabilization, medical pressure, and later sample / research branches.",
+  },
+  {
+    character: "Anders",
+    ifTheyDie:
+      "Sample route, alien growth, contamination, and science-team branches.",
+  },
+  {
+    character: "Cooper",
+    ifTheyDie:
+      "Medical wake-up, search support, and group coordination scenes.",
+  },
+];
+
+export const routeOrderColumns = [
+  { key: "goal", label: "Goal" },
+  { key: "route", label: "Route" },
+];
+
+export const routeOrderRows = [
+  {
+    goal: "First survival route",
+    route:
+      "Keep the active crew alive, verify identities, choose containment, and survive the final escape.",
+  },
+  {
+    goal: "Fix one character death",
+    route:
+      "Replay the character’s highest-risk scene first, then work backward if the death still happens.",
+  },
+  {
+    goal: "Fix Eisele / Cernan deaths",
+    route:
+      "Check Episode 6, then earlier Stafford / Williams pressure routes and Episode 3 setup.",
+  },
+  {
+    goal: "Ending cleanup",
+    route:
+      "After Everyone Lives, test final message, intruder state, and bad-ending branches.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To keep everyone alive in Directive 8020, focus on each character’s highest-risk scene instead of replaying the finale over and over.**
+
+Eisele and Cernan are most likely to fail around Episode 6 route pressure. Stafford and Mitchell are most vulnerable when ship systems and rescue choices overlap. Williams must be kept alive, but his ambition can make the route more dangerous. Carter and Sims cannot be saved as normal active-crew targets.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-carter-sims-dead-pod.webp"
+    alt="Directive 8020 Carter and Sims pod discovery showing the opening mystery."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+</figure>
+
+<h2 id="can-everyone-survive">
+  Can everyone survive in Directive 8020?
+</h2>
+
+Yes, the active crew can survive and reach the clean survival route.
+
+But “everyone lives” does not mean every named person in the story can be rescued like a normal playable character. Carter and Sims are part of the opening mystery, not standard survival-route targets.
+
+<GuideTable
+  caption="Directive 8020 scripted / non-standard survival targets."
+  columns={scriptedColumns}
+  rows={scriptedRows}
+/>
+
+<GuideCallout title="Important">
+If you are trying to save Carter or Sims like normal crew members, you are chasing the wrong route. Their role is to establish the sleep crew mystery and the mimic threat.
+</GuideCallout>
+
+<h2 id="highest-risk-scenes">
+  Highest-risk scene for each character
+</h2>
+
+Use this table first. Most character deaths are easier to fix when you know which episode or route state is actually putting that character at risk.
+
+<GuideTable
+  caption="Directive 8020 character survival overview."
+  columns={survivalOverviewColumns}
+  rows={survivalOverviewRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="major-death-risk-scenes">
+  Major death-risk scenes
+</h2>
+
+These are the scenes most likely to ruin a save-everyone route.
+
+<GuideTable
+  caption="Directive 8020 major death-risk scenes."
+  columns={dangerColumns}
+  rows={dangerRows}
+/>
+
+<h2 id="eisele-survival">
+  How to keep Eisele alive
+</h2>
+
+**Eisele’s survival depends on verification and route state. Do not treat her danger scenes as simple chase scenes.**
+
+Her biggest risks come from identity pressure, scanner logic, Stafford-related pressure, and Episode 6 survival routing.
+
+If Eisele dies later, check these in order:
+
+1. Did you use Test / scanner logic in duplicate scenes?
+2. Did an earlier Stafford-related route put her in a bad state?
+3. Did Episode 6 become harder because of an earlier route mistake?
+4. Did the final escape carry an intruder condition forward?
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-two-eiseles-choice.webp"
+    alt="Directive 8020 two Eisele duplicate choice."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+The two Eisele scene is the clearest example. Use verification. Do not shoot or trust based only on emotion.
+
+For duplicate-specific routing, use the{" "}
+<Link href="/directive-8020/all-monster-scenes-alien-duplicates">
+  Monster Scenes and Alien Duplicates Guide
+</Link>
+.
+
+<h2 id="cernan-survival">
+  How to keep Cernan alive
+</h2>
+
+**Cernan’s survival is tied to the Williams route and Episode 6 pressure.**
+
+If Cernan dies late, do not assume the final scene is the only problem. His route can be shaped earlier when he is paired with Williams and pushed through pressure scenes.
+
+Check these first:
+
+1. The Episode 3 search-party split.
+2. The Cernan / Williams route state.
+3. Episode 6 Detour.
+4. Any identity or mimic pressure before the death.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-cernan-williams-duplicate-route.webp"
+    alt="Directive 8020 Cernan and Williams duplicate pressure route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+Cernan’s route is a good example of why you should not replay only the death scene. If the setup is already bad, the later scene may feel impossible.
+
+<h2 id="stafford-survival">
+  How to keep Stafford alive
+</h2>
+
+**Stafford is safest when command stays practical instead of prideful.**
+
+His highest-risk moments are not always monster attacks. They often happen when ship-system pressure, mission pride, and crew safety collide.
+
+Check these first:
+
+1. Episode 3 landing / crash route.
+2. Landing computer and ship stabilization choices.
+3. Command decisions where Stafford can prioritize the mission over people.
+4. Late duplicate or intruder pressure.
+
+Stafford’s survival is important for more than one route. He is tied to command stability, character survival, and some ending-state cleanup.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-landing-computer-crash.webp"
+    alt="Directive 8020 landing computer crash sequence."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+If Stafford dies or the route becomes unstable around him, replay the practical command choice first, not only the final danger scene.
+
+<h2 id="mitchell-survival">
+  How to keep Mitchell alive
+</h2>
+
+**Mitchell’s danger scenes usually combine a system problem with a rescue problem.**
+
+This is why players lose him: they solve only one side.
+
+If Mitchell is in danger, ask two questions:
+
+1. What ship system is failing?
+2. Who is physically at risk while that system is failing?
+
+Mitchell is most vulnerable around landing, fire, oxygen, and other system-pressure scenes.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-mitchell-fire-choice.webp"
+    alt="Directive 8020 Mitchell fire and oxygen survival choice."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+To keep him alive, do not tunnel-vision on either the engineering task or the rescue. You need both.
+
+<h2 id="williams-survival">
+  How to keep Williams alive
+</h2>
+
+**Williams is the unusual case: you need him alive, but his priorities can make the route more dangerous.**
+
+He is not just another person to rescue. Williams pushes the crew toward control, samples, research, and project logic. That means saving him does not mean obeying him.
+
+His most important danger and influence points are:
+
+1. Episode 3 wake-up and stabilization.
+2. The sample argument.
+3. Cernan / Williams route pressure.
+4. Late conspiracy and Williams 2.0 material.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-episode-3-sample-argument.webp"
+    alt="Directive 8020 Williams sample argument."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+The best Williams route keeps him alive while resisting the choices that turn science, ambition, or control into a survival risk.
+
+<h2 id="anders-survival">
+  How to keep Anders alive
+</h2>
+
+**Anders is safest when science stays behind containment.**
+
+Her danger scenes are tied to alien biology, sample collection, contamination risk, and science-team pressure.
+
+Check these first:
+
+1. Episode 3 sample route.
+2. Alien growth scenes.
+3. Episode 5 science / Drugs routes.
+4. Any scene where research is prioritized over crew safety.
+
+Anders is not usually saved by rushing toward more information. She is saved by limiting exposure and keeping the crew from treating the alien life form like a harmless discovery.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-alien-growth-science.webp"
+    alt="Directive 8020 alien growth science scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+For choices around samples and containment, use the{" "}
+<Link href="/directive-8020/choices-consequences">
+  Choices and Consequences Guide
+</Link>
+.
+
+<h2 id="cooper-survival">
+  How to keep Cooper alive
+</h2>
+
+**Cooper is the stabilizer. If Cooper’s route goes wrong, medical, rescue, and search scenes become harder to control.**
+
+Cooper’s highest-risk value is not only her own life. It is what she helps prevent: panic, bad medical handling, and poor group coordination.
+
+Check these first:
+
+1. Williams wake-up and stabilization.
+2. Medical pressure after the crash.
+3. Search support during Episode 3.
+4. Scenes where the group wants to split or rush.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-williams-wakeup.webp"
+    alt="Directive 8020 Williams wake-up and Cooper medical stabilization scene."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+If Cooper dies or disappears from a route, think about the support role she was filling. Some later scenes may become more dangerous because the crew loses that stabilizing force.
+
+<h2 id="route-dependencies">
+  Character route dependencies
+</h2>
+
+Some deaths are not caused by the scene where they happen. They are payoffs from earlier route states.
+
+<GuideTable
+  caption="Directive 8020 character route dependencies."
+  columns={dependencyColumns}
+  rows={dependencyRows}
+/>
+
+<h2 id="if-someone-dies">
+  What to check if someone dies
+</h2>
+
+Use this table when you do not know where the mistake happened.
+
+<GuideTable
+  caption="Directive 8020 character death diagnosis."
+  columns={characterDiagnosisColumns}
+  rows={characterDiagnosisRows}
+/>
+
+<h2 id="best-order">
+  Best order for saving everyone
+</h2>
+
+Use this order to keep the route clean.
+
+<GuideTable
+  caption="Directive 8020 survival and cleanup order."
+  columns={routeOrderColumns}
+  rows={routeOrderRows}
+/>
+
+<GuideCallout title="Route rule">
+Save everyone first. Then use Turning Points to break the route on purpose for endings, deaths, and monster-scene cleanup.
+</GuideCallout>
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Can everyone survive in Directive 8020?
+
+Yes. The active crew can survive through the finale and reach the clean survival route.
+
+### Can you save Carter?
+
+No. Carter is part of the opening mystery and is not a normal active-crew survival target.
+
+### Can you save Sims?
+
+No, not like a normal crew member. Sims is tied to the sleep crew mystery, recordings, and mimic setup.
+
+### Who is hardest to keep alive?
+
+Eisele and Cernan are among the easiest to lose because later survival scenes can depend on earlier route states.
+
+### How do I keep Eisele alive?
+
+Use Test / scanner logic in duplicate scenes, avoid bad Stafford-related route states, and check Episode 6 pressure if she dies later.
+
+### How do I keep Cernan alive?
+
+Check the Cernan / Williams route and Episode 6 Detour before replaying only the final death scene.
+
+### How do I keep Mitchell alive?
+
+Treat his danger scenes as both system problems and rescue problems. Solving only one side can get him killed.
+
+### Should I keep Williams alive?
+
+Yes, but do not let Williams’ ambition override containment or crew safety.
+
+### Why did I get a bad ending even though some characters survived?
+
+A character can survive physically while the route still carries an intruder, duplicate, or contaminated escape condition.
+
+### What should I do after saving everyone?
+
+Use Turning Points for endings, monster scenes, and death-route cleanup.

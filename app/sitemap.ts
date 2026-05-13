@@ -67,7 +67,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/everything-is-crab`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/the-spell-brigade`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/outbound`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/directive-8020`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+    // ⬇️ 把 4 篇文章补上
+    { url: `${base}/directive-8020/all-endings`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/directive-8020/all-monster-scenes-alien-duplicates`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/directive-8020/all-secrets-simms-recordings-o-death`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/directive-8020/character-survival-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/directive-8020/choices-consequences`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+ 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/outbound/leave-first-biome`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/outbound/energy-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

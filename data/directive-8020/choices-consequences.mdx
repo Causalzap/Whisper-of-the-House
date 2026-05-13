@@ -1,0 +1,645 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const majorChoiceColumns = [
+  { key: "choice", label: "Choice / Scene" },
+  { key: "bestRoute", label: "Best Route" },
+  { key: "badResult", label: "If You Pick Wrong" },
+];
+
+export const majorChoiceRows = [
+  {
+    choice: "Early Carter / Simms dialogue",
+    bestRoute:
+      "Choose the response that builds trust or useful information instead of treating the scene as throwaway flavor.",
+    badResult:
+      "Small dialogue choices can feed traits. Traits can later affect Destiny routes, so do not ignore early character-state choices.",
+  },
+  {
+    choice: "Consult the Oracle / first ship damage report",
+    bestRoute:
+      "Gather information before acting. Use the Oracle and diagnostics to understand the ship state.",
+    badResult:
+      "You lose context and may misread later system choices. This is usually an information loss, not an instant death.",
+  },
+  {
+    choice: "Tell Earth immediately or run diagnostics first",
+    bestRoute:
+      "Run diagnostics first and stabilize the ship before escalating.",
+    badResult:
+      "The route leans into panic before evidence. This usually affects tone and procedure more than immediate survival.",
+  },
+  {
+    choice: "Ep2 power routing: Fire Control System vs Landing Computer",
+    bestRoute:
+      "Track exactly which system you cut. This branch can matter later in Episode 5’s Ice and Fire rescue logic.",
+    badResult:
+      "Cutting Fire Control can put Mitchell at higher risk in Episode 5. Cutting Landing Computer can shift the danger toward Anders. If one of them dies in Ice and Fire, check this branch first.",
+  },
+  {
+    choice: "Landing computer during the crash",
+    bestRoute:
+      "Bring the landing computer online when the crash route starts.",
+    badResult:
+      "The landing route becomes more dangerous and can destabilize Stafford, Mitchell, and the wider crew state.",
+  },
+  {
+    choice: "Wake Williams after the crash",
+    bestRoute:
+      "Wake and stabilize Williams.",
+    badResult:
+      "Leaving him under is not the safer survival route. Williams can make later choices harder, but abandoning him early creates a worse emergency state.",
+  },
+  {
+    choice: "Weapon authorization",
+    bestRoute:
+      "For the safer first survival route, refuse weapon panic. Test weapon branches later during cleanup.",
+    badResult:
+      "A weapon can make mimic scenes worse if you act before verifying identity.",
+  },
+  {
+    choice: "Episode 3 sample argument",
+    bestRoute:
+      "Push for caution and containment when the game lets you respond.",
+    badResult:
+      "Williams still drives the crew toward taking the sample, but agreeing with investigation-first logic reinforces the contamination route.",
+  },
+  {
+    choice: "Scanner / Test choices",
+    bestRoute:
+      "Use scanner verification or Test whenever the game offers it.",
+    badResult:
+      "You can trust the wrong person, shoot the wrong target, or carry a duplicate-state mistake into later scenes.",
+  },
+  {
+    choice: "Two Eisele scene",
+    bestRoute:
+      "The left Eisele is fake. The newcomer is real. Choose Test instead of Shoot.",
+    badResult:
+      "Shooting immediately is the panic branch and can punish the wrong target.",
+  },
+  {
+    choice: "Episode 8 Explanations scene",
+    bestRoute:
+      "Choose based on the Destiny you are chasing. Cernan’s route can lean toward Philosopher or Focused depending on how you answer.",
+    badResult:
+      "If Cernan’s Destiny is wrong, late-route cleanup and ending interpretation can shift.",
+  },
+  {
+    choice: "Final door / escape pressure",
+    bestRoute:
+      "Do not open or trust blindly unless the person or route is verified.",
+    badResult:
+      "A clean-looking escape can become contaminated, leading toward Docked / Not Alone, Hitchhiker, or another intruder-state ending.",
+  },
+  {
+    choice: "Final message: Warning or Distress / Save Our Souls",
+    bestRoute:
+      "Choose based on the ending you want. Distress / Save Our Souls points toward Beacon-style cleanup. Warning-style routes connect more strongly to alternate Eisele post-credit interpretation.",
+    badResult:
+      "You may still survive, but the ending interpretation and post-credit scene can change.",
+  },
+];
+
+export const chainColumns = [
+  { key: "earlyChoice", label: "Early Choice" },
+  { key: "laterImpact", label: "Later Impact" },
+];
+
+export const chainRows = [
+  {
+    earlyChoice: "Ep2: cut Fire Control System",
+    laterImpact:
+      "In Episode 5’s Ice and Fire route, Mitchell becomes the high-risk side. Young may be pushed toward saving Anders instead.",
+  },
+  {
+    earlyChoice: "Ep2: cut Landing Computer",
+    laterImpact:
+      "The Episode 5 rescue pressure can shift the other way, making Anders the higher-risk side.",
+  },
+  {
+    earlyChoice: "Ep1: Carter / Simms dialogue traits",
+    laterImpact:
+      "Early trait gains can feed later Destiny checks. If a Destiny route feels wrong, check early trait-shaping dialogue.",
+  },
+  {
+    earlyChoice: "Stafford supportive / protective choices",
+    laterImpact:
+      "Pushes Stafford toward The Father path. This is important for clean-route and ending-state cleanup.",
+  },
+  {
+    earlyChoice: "Cernan philosophical responses across the game",
+    laterImpact:
+      "Pushes Cernan toward Philosopher. Episode 8’s Explanations scene is especially important for the final Cernan state.",
+  },
+  {
+    earlyChoice: "Episode 3 split routes and pressure scenes",
+    laterImpact:
+      "Eisele / Cernan later survival can become harder if earlier pressure routes leave them in a bad state.",
+  },
+  {
+    earlyChoice: "Scanner / Test decisions",
+    laterImpact:
+      "Correct verification keeps duplicate mistakes from poisoning survival and ending states.",
+  },
+  {
+    earlyChoice: "Final message choice",
+    laterImpact:
+      "Changes Beacon-style cleanup, warning-style interpretation, and Eisele post-credit direction.",
+  },
+];
+
+export const destinyColumns = [
+  { key: "destinyTarget", label: "Destiny / Trait Target" },
+  { key: "howToPushIt", label: "How to Push It" },
+];
+
+export const destinyRows = [
+  {
+    destinyTarget: "Stafford — The Father",
+    howToPushIt:
+      "Choose supportive, protective, mentor-style Stafford responses. Avoid prideful command choices when crew safety is on the line.",
+  },
+  {
+    destinyTarget: "Cernan — Philosopher",
+    howToPushIt:
+      "Choose reflective, philosophical, meaning-focused responses across the route, especially around Episode 8’s Explanations scene.",
+  },
+  {
+    destinyTarget: "Cernan — Focused",
+    howToPushIt:
+      "Choose practical, task-focused, survival-first answers instead of reflective ones.",
+  },
+  {
+    destinyTarget: "Young — Hero / final route influence",
+    howToPushIt:
+      "Choose rescue-oriented and brave responses when Young is under pressure. Young’s state can influence how the late route plays out.",
+  },
+  {
+    destinyTarget: "Eisele — Humanist direction",
+    howToPushIt:
+      "Choose humanity-first responses instead of pure project-continuation or research logic.",
+  },
+];
+
+export const timingColumns = [
+  { key: "choiceType", label: "Choice Type" },
+  { key: "howToHandle", label: "How to Handle It" },
+];
+
+export const timingRows = [
+  {
+    choiceType: "Timed / pressure sequences",
+    howToHandle:
+      "Landing computer, crash, fire, oxygen, reactor, and final escape scenes are survival checks.",
+  },
+  {
+    choiceType: "Identity choices",
+    howToHandle:
+      "Scanner, Test, Shoot, door, and duplicate scenes are verification checks. If Test is available, use it.",
+  },
+  {
+    choiceType: "System choices",
+    howToHandle:
+      "Power routing, fire control, oxygen, landing systems, and reactor choices can create later route-state changes.",
+  },
+  {
+    choiceType: "Containment choices",
+    howToHandle:
+      "Sample, alien growth, science, and Williams-driven investigation scenes should be played cautiously on a first survival route.",
+  },
+  {
+    choiceType: "Ending choices",
+    howToHandle:
+      "Final message, intruder status, launch, and escape choices decide which ending family you see.",
+  },
+];
+
+export const modeColumns = [
+  { key: "mode", label: "Mode" },
+  { key: "whatItMeans", label: "What It Means for Choices" },
+];
+
+export const modeRows = [
+  {
+    mode: "Explorer",
+    whatItMeans:
+      "Use Turning Points during cleanup to replay bad branches, final-message splits, mimic mistakes, and ending variants.",
+  },
+  {
+    mode: "Survivor",
+    whatItMeans:
+      "Do not rely on mid-run Turning Point cleanup. You need to live with consequences until the mode allows replay access.",
+  },
+];
+
+export const cleanupColumns = [
+  { key: "goal", label: "Cleanup Goal" },
+  { key: "changeThis", label: "Change This First" },
+];
+
+export const cleanupRows = [
+  {
+  goal: "Fix Anders / Mitchell in Ice and Fire",
+  changeThis:
+    "Check the Ep2 power-routing branch first, then replay the Ice and Fire choice with the correct risk state in mind.",
+},
+  {
+    goal: "Fix a character death",
+    changeThis:
+      "Replay that character’s highest-risk scene, then work backward if the death still happens.",
+  },
+  {
+    goal: "Fix a mimic mistake",
+    changeThis:
+      "Replay scanner / Test / Shoot / door scenes before replaying the finale.",
+  },
+  {
+    goal: "Fix Docked / Not Alone",
+    changeThis:
+      "Check final escape and intruder status first, then earlier duplicate branches.",
+  },
+  {
+    goal: "Fix Destiny / post-credit results",
+    changeThis:
+      "Check trait direction, key Destiny scenes, and the final message branch.",
+  },
+  {
+    goal: "Bad ending cleanup",
+    changeThis:
+      "Only after a clean survival route, test weapon, failed scanner, intruder, and death-chain branches.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The most important Directive 8020 choices are not always the dramatic ones. Ep2 power routing can affect Episode 5’s Anders / Mitchell rescue logic, early traits can feed Destiny outcomes, scanner / Test choices can prevent mimic mistakes, and the final message changes ending interpretation.**
+
+For a first survival route, prioritize crew safety, scanner verification, containment, and clean escape conditions. In Survivor Mode, do not depend on Turning Points to fix mistakes mid-run.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-oracle-first-report.webp"
+    alt="Directive 8020 Oracle report choice during the early ship damage sequence."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+</figure>
+
+<h2 id="how-choices-work">
+  How choices work in Directive 8020
+</h2>
+
+Directive 8020 choices are dangerous because many consequences are delayed.
+
+The game may ask you to route power, use the scanner, open a door, handle a sample, shape a trait, or send a final message. The real consequence may not appear until several episodes later.
+
+This guide focuses on:
+
+- what to choose,
+- what happens if you choose wrong,
+- and which earlier branch to check when a later route collapses.
+
+<GuideCallout title="Spoiler warning">
+This guide discusses major choices, Episode 5 rescue logic, Destiny routes, duplicate checks, Episode 8 branches, and ending consequences. If you want a blind first run, use the main <Link href="/directive-8020">Directive 8020 guide</Link> first.
+</GuideCallout>
+
+<h2 id="major-choices-table">
+  Major choices and consequences
+</h2>
+
+Use this table if you want the direct route answer first.
+
+<GuideTable
+  caption="Directive 8020 major choices, best route, and bad-branch results."
+  columns={majorChoiceColumns}
+  rows={majorChoiceRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="choice-chains">
+  Important choice chains that affect later episodes
+</h2>
+
+This is the section to check when a later death or ending feels unfair. The mistake may not be in the scene where the character dies.
+
+<GuideTable
+  caption="Directive 8020 early choices and later consequences."
+  columns={chainColumns}
+  rows={chainRows}
+/>
+
+<h2 id="ep2-power-routing">
+  Ep2 power routing: Fire Control System or Landing Computer?
+</h2>
+
+The Ep2 power-routing choice is one of the most important delayed-consequence branches.
+
+If you cut the **Fire Control System**, the later Episode 5 **Ice and Fire** rescue route can put Mitchell in serious danger. Young may be pushed toward saving Anders instead.
+
+If you cut the **Landing Computer**, the later pressure can shift the other way, making Anders the higher-risk side.
+
+That means this is not just a technical choice. It is an early setup for a later character rescue problem.
+
+If Anders or Mitchell dies in Episode 5, check this branch before replaying the same scene repeatedly.
+
+<h2 id="ice-and-fire-choice">
+  Ice and Fire choice: save Anders or Mitchell?
+</h2>
+
+Episode 5’s **Ice and Fire** scene is one of the clearest delayed-consequence choices in Directive 8020.
+
+At the moment, it looks like Young has to choose between two immediate emergencies: Anders is dealing with the freezing / sample-side danger, while Mitchell is tied to the fuel pump / fire-side danger. The trap is that the result is not only decided by the choice you make in Episode 5.
+
+Your earlier Episode 2 power-routing branch can change who is actually in more danger:
+
+- If you cut the **Fire Control System** in Episode 2, Mitchell can become the higher-risk side in Ice and Fire.
+- If you cut the **Landing Computer** in Episode 2, the danger can shift toward Anders.
+- If Anders or Mitchell dies here, do not only replay Ice and Fire. Rewind to the Episode 2 power-routing branch first.
+
+The simple cleanup rule is:
+
+**Ice and Fire is not a standalone choice. It is the payoff for your earlier system-routing decision.**
+
+If you are trying to save both characters, treat Episode 2 and Episode 5 as one connected route chain.
+
+<h2 id="destiny-traits">
+  Traits and Destinies: why small choices matter
+</h2>
+
+Directive 8020 uses traits and Destinies to store character direction across the route.
+
+Small choices can matter if they push a character toward or away from a key Destiny path.
+
+<GuideTable
+  caption="Directive 8020 Destiny and trait choice guide."
+  columns={destinyColumns}
+  rows={destinyRows}
+/>
+
+The most important rule is simple:
+
+**If your ending or post-credit result feels wrong, do not only replay the final message. Check the trait and Destiny path that led into it.**
+
+For full ending details, use the{" "}
+<Link href="/directive-8020/all-endings">
+  All Endings Guide
+</Link>
+.
+
+<h2 id="choice-timing">
+  Which choices are timed or high pressure?
+</h2>
+
+Not every choice has the same danger level.
+
+Some are slow route-state decisions. Others are pressure checks where hesitation, panic, or a failed prompt can kill a character.
+
+<GuideTable
+  caption="Directive 8020 choice timing and pressure types."
+  columns={timingColumns}
+  rows={timingRows}
+/>
+
+<h2 id="survivor-mode">
+  Survivor Mode warning
+</h2>
+
+If you are playing in **Survivor Mode**, do not plan your route around immediate Turning Point fixes.
+
+In Explorer-style cleanup, you can use Turning Points to test bad branches, final-message splits, and mimic mistakes. In Survivor Mode, you should assume you must live with consequences until replay access becomes available.
+
+<GuideTable
+  caption="Directive 8020 mode differences for choice cleanup."
+  columns={modeColumns}
+  rows={modeRows}
+/>
+
+<GuideCallout title="Survivor Mode rule">
+In Survivor Mode, treat every major choice as permanent for the run. Do not rely on cleanup logic until you have replay access.
+</GuideCallout>
+
+<h2 id="landing-computer-choice">
+  Landing computer choice
+</h2>
+
+When the crash route begins, the landing computer becomes a direct survival check.
+
+**Best route:** bring the landing computer online.
+
+If you ignore or fail this route, the crash becomes more dangerous and can destabilize Stafford, Mitchell, and the wider crew state.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-landing-computer-crash.webp"
+    alt="Directive 8020 landing computer crash sequence choice."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+<h2 id="wake-williams-choice">
+  Should you wake Williams?
+</h2>
+
+Yes. Wake and stabilize Williams.
+
+Williams can make the route more dangerous later because he pushes research, control, and project logic. But leaving him under during an emergency is not the safer survival choice.
+
+The right play is:
+
+**save Williams, but do not obey every Williams-driven priority.**
+
+That distinction matters in the sample argument and later research / contamination scenes.
+
+<h2 id="episode-3-choices">
+  Episode 3 choices: split routes, power cell, and sample pressure
+</h2>
+
+Episode 3 matters because it turns isolated ship problems into long-term route pressure.
+
+The important Episode 3 moments are:
+
+- the search-party split, because Cernan / Williams and Anders / Eisele move onto different pressure routes;
+- the power-cell route, because damaged ship traversal separates the crew and slows regrouping;
+- the sample argument, because Williams pushes the group toward contamination risk;
+- and Williams pushing investigation over containment, because that pressure carries into later science and mimic routes.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-episode-3-search-party-split.webp"
+    alt="Directive 8020 Episode 3 search-party split."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+<h3 id="sample-choice">
+  Can you stop Williams from taking the sample?
+</h3>
+
+Not cleanly.
+
+Cooper can push back, and other characters can argue for caution, but Williams still drives the group toward taking the sample.
+
+That means the sample scene is less about stopping the event completely and more about understanding the route pressure:
+
+**Williams wants proof and control. The safer survival logic is containment.**
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-episode-3-sample-argument.webp"
+    alt="Directive 8020 Episode 3 sample argument with Williams."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="scanner-and-two-eiseles">
+  Scanner choices and the two Eisele scene
+</h2>
+
+Use scanner verification or Test whenever the game gives you that option.
+
+In the two Eisele scene:
+
+**The left Eisele is fake.**  
+**The newcomer is real.**  
+**Choose Test instead of Shoot.**
+
+This page only gives the short answer. For the full mimic route, use the{" "}
+<Link href="/directive-8020/all-monster-scenes-alien-duplicates">
+  Monster Scenes and Alien Duplicates Guide
+</Link>
+.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-two-eiseles-choice.webp"
+    alt="Directive 8020 two Eisele duplicate choice."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+<h2 id="weapon-authorization-note">
+  Weapon authorization note
+</h2>
+
+For the safer first survival route, refuse weapon panic.
+
+Do not use the weapon as a shortcut for identity checks. If you want to see weapon outcomes, test those branches after a clean survival route.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-authorize-weapon.webp"
+    alt="Directive 8020 weapon authorization choice."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+<h2 id="final-message-choice">
+  Final message: warning or distress?
+</h2>
+
+The final message is one of the biggest ending-related choices.
+
+The short version:
+
+- **Distress / Save Our Souls-style route** points toward Beacon-style cleanup.
+- **Warning-style route** connects more strongly to the alternate Eisele post-credit interpretation.
+- Survivor state, Destinies, and intruder status still matter.
+
+<figure className="my-8">
+  <Image
+    src="/images/directive-8020/directive-8020-andromeda-message-choice.webp"
+    alt="Directive 8020 final message choice."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+</figure>
+
+For exact ending variants, use the{" "}
+<Link href="/directive-8020/all-endings">
+  All Endings Guide
+</Link>
+.
+
+<h2 id="cleanup-plan">
+  How to fix bad choices
+</h2>
+
+If you are trying to save Anders or Mitchell, start with the <Link href="#ice-and-fire-choice">Ice and Fire choice</Link> section before replaying Episode 5.
+
+Use this table when you are replaying with Turning Points.
+
+<GuideTable
+  caption="Directive 8020 bad-choice cleanup plan."
+  columns={cleanupColumns}
+  rows={cleanupRows}
+/>
+
+<GuideCallout title="Cleanup rule">
+Get a clean survival route first. Then use Turning Points for controlled cleanup of weapon branches, mimic mistakes, final-message variants, and bad endings.
+</GuideCallout>
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Do choices matter in Directive 8020?
+
+Yes. Choices can affect survival, route state, traits, Destinies, duplicate outcomes, final messages, post-credit scenes, and endings.
+
+### Should I cut Fire Control System or Landing Computer?
+
+Track this choice carefully. Cutting Fire Control System can put Mitchell at higher risk in Episode 5’s Ice and Fire route, while cutting Landing Computer can shift risk toward Anders.
+
+### Should I authorize the weapon?
+
+For the safer survival route, refuse the weapon. Test weapon branches later during cleanup.
+
+### Should I shoot or test in the two Eisele scene?
+
+Choose Test. The left Eisele is fake, and the newcomer is real.
+
+### Is the scanner important?
+
+Yes. Scanner / Test logic is the safest way to avoid mimic mistakes.
+
+### Can you stop Williams from taking the sample?
+
+Not cleanly. Cooper can push back, but Williams still drives the group toward taking the sample.
+
+### Do traits affect Destinies?
+
+Yes. Supportive, philosophical, heroic, and humanist-style responses can push characters toward different Destiny outcomes.
+
+### Does Survivor Mode allow Turning Point cleanup?
+
+Do not rely on it during the run. Treat major choices as permanent until replay access is available.
+
+### Does the final message change the ending?
+
+Yes. Distress / Save Our Souls-style and warning-style routes can change ending interpretation and post-credit direction.
+
+### Can Turning Points fix a bad choice?
+
+Yes, but only if you rewind to the earlier mistake, not just the scene where someone dies.
