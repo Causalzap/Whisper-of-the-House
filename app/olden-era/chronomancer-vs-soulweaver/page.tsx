@@ -316,10 +316,7 @@ export default function Page() {
               href: "/olden-era/necropolis-skeletal-archers",
               label: "Necropolis Skeleton Archers Guide",
             },
-            {
-              href: "/olden-era/beginner-economy-guide",
-              label: "Beginner Economy Guide",
-            },
+            
           ]}
         >
           <ChronomancerVsSoulweaverContent />

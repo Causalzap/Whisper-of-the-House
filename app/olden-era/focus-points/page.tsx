@@ -312,10 +312,7 @@ export default function Page() {
             },
           ]}
           relatedLinks={[
-            {
-              href: "/olden-era/beginner-economy-guide",
-              label: "Beginner Economy Guide",
-            },
+            
             {
               href: "/olden-era/best-buildings-first",
               label: "Best Buildings to Build First",
@@ -340,18 +337,9 @@ export default function Page() {
               href: "/olden-era/necropolis-week-1-build-order",
               label: "Necropolis Week 1 Build Order",
             },
-            {
-              href: "/olden-era/schism-guide",
-              label: "Schism Guide",
-            },
-            {
-              href: "/olden-era/abyssal-communion",
-              label: "Abyssal Communion Explained",
-            },
-            {
-              href: "/olden-era/temple-guide",
-              label: "Temple Guide",
-            },
+            
+            
+            
           ]}
         >
           <FocusPointsContent />

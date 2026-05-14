@@ -324,10 +324,7 @@ export default function Page() {
               href: "/olden-era/law-points-astrology-points",
               label: "Law Points and Astrology Points Explained",
             },
-            {
-              href: "/olden-era/beginner-economy-guide",
-              label: "Beginner Economy Guide",
-            },
+            
           ]}
         >
           <NecropolisWeek1BuildOrderContent />

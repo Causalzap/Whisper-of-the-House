@@ -324,10 +324,7 @@ export default function Page() {
               href: "/olden-era/necropolis-common-mistakes",
               label: "Necropolis Common Mistakes",
             },
-            {
-              href: "/olden-era/beginner-economy-guide",
-              label: "Beginner Economy Guide",
-            },
+            
             {
               href: "/olden-era/alchemical-dust",
               label: "How to Get Alchemical Dust",

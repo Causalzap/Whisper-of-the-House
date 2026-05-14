@@ -308,10 +308,7 @@ export default function Page() {
               href: "/olden-era/necropolis-guide",
               label: "Necropolis Guide",
             },
-            {
-              href: "/olden-era/beginner-economy-guide",
-              label: "Beginner Economy Guide",
-            },
+            
             {
               href: "/olden-era/focus-points",
               label: "Focus Points Explained",
@@ -320,14 +317,8 @@ export default function Page() {
               href: "/olden-era/law-points-astrology-points",
               label: "Law Points and Astrology Points Explained",
             },
-            {
-              href: "/olden-era/schism-guide",
-              label: "Schism Guide",
-            },
-            {
-              href: "/olden-era/temple-guide",
-              label: "Temple Guide",
-            },
+            
+            
           ]}
         >
           <ForceSubclassContent />

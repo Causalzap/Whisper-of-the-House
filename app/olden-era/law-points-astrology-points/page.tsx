@@ -275,10 +275,7 @@ export default function Page() {
             },
           ]}
           relatedLinks={[
-            {
-              href: "/olden-era/beginner-economy-guide",
-              label: "Beginner Economy Guide",
-            },
+            
             {
               href: "/olden-era/best-buildings-first",
               label: "Best Buildings to Build First",
@@ -303,14 +300,8 @@ export default function Page() {
               href: "/olden-era/necropolis-common-mistakes",
               label: "Necropolis Common Mistakes",
             },
-            {
-              href: "/olden-era/schism-guide",
-              label: "Schism Guide",
-            },
-            {
-              href: "/olden-era/temple-guide",
-              label: "Temple Guide",
-            },
+           
+            
             {
               href: "/olden-era/subclass-guide",
               label: "Subclass and Advanced Class Guide",
