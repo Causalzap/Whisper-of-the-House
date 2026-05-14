@@ -21,16 +21,6 @@ export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
   keywords: [
-    "Soulmask Tribesmen guide",
-    "Soulmask Shifting Sands Tribesmen",
-    "Soulmask recruitment",
-    "Soulmask Deter",
-    "Soulmask Training Ground",
-    "Soulmask direct control Tribesman",
-    "Soulmask 120 proficiency",
-    "Soulmask worker not working",
-    "Soulmask farming automation",
-    "Soulmask combat followers",
   ],
   alternates: {
     canonical: pageUrl,
