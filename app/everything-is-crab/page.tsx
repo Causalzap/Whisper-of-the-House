@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/everything-is-crab`;
 
 export const metadata: Metadata = {
-  title: "Everything Is Crab Guide: Best Builds, Genetics & Tips",
+  title: "Everything Is Crab Guide: Evolutions, Builds & Genetics",
   description:
-    "Your complete Everything Is Crab guide! Learn the best early builds, essential genetics, and strategies to survive bosses, Carcinisation & max Pressure.",
+    "Complete Everything Is Crab guide and walkthrough covering evolutions, best builds, Genetics, bosses, progression, achievements, Pressure, and beginner tips.",
   alternates: {
     canonical: pageUrl,
   },
@@ -241,6 +241,10 @@ export default function Page() {
               label: "Known numbers",
             },
             {
+              id: "core-systems-guides",
+              label: "Core systems",
+            },
+            {
               id: "minimum-first-clear-build",
               label: "First-clear build",
             },
@@ -302,6 +306,14 @@ export default function Page() {
             },
           ]}
           relatedLinks={[
+            {
+              href: "/everything-is-crab/evolutions-list",
+              label: "Everything Is Crab Evolution Picker",
+            },
+            {
+              href: "/everything-is-crab/genetics-guide",
+              label: "Everything Is Crab Genetics Guide",
+            },  
             {
               href: "/everything-is-crab/best-builds",
               label: "Everything Is Crab Best Builds",

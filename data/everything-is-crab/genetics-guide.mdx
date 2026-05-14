@@ -1,0 +1,1200 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const tierColumns = [
+  { key: "tier", label: "Tier" },
+  { key: "genetic", label: "Genetic" },
+  { key: "effect", label: "Core Effect / Value" },
+  { key: "bestFor", label: "Best For" },
+  { key: "avoid", label: "Avoid When..." },
+];
+
+export const tierRows = [
+  {
+    tier: "S",
+    genetic: "Chosen",
+    effect:
+      "Your third level-up offers three Legendary Evolutions, which gives the run an early direction spike.",
+    bestFor: "Beginners, first clears, flexible builds, early build routing",
+    avoid:
+      "You are chasing a very specific challenge condition that needs a different opener.",
+  },
+  {
+    tier: "S",
+    genetic: "Pioneer",
+    effect:
+      "Increases Points of Interest by 50%, giving more chances for progress, mutagen, stat boosts, events, and route recovery.",
+    bestFor: "POI farming, beginners, exploration, flexible builds, long runs",
+    avoid:
+      "You ignore question marks or your build has no movement to reach them safely.",
+  },
+  {
+    tier: "S-",
+    genetic: "Grandiose",
+    effect:
+      "Damage scales with Size, making large-body routes stronger as your crab grows.",
+    bestFor: "Chonky, Body Slam, Imposing, big Physical, size-scaling damage",
+    avoid:
+      "Your build is already too slow or starts in terrain that punishes size before movement appears.",
+  },
+  {
+    tier: "A+",
+    genetic: "Independent",
+    effect:
+      "Every 12th level-up becomes a Branching Evolution, but bosses no longer drop Boss Fruits.",
+    bestFor: "POI level farming, long runs, Branching planning, hybrid routes",
+    avoid:
+      "You rely on boss fruit rewards to stabilize or cannot gain levels quickly.",
+  },
+  {
+    tier: "A+",
+    genetic: "Precocious",
+    effect:
+      "Turns the first level-up into a Branching Evolution, giving early route access before a normal build would branch.",
+    bestFor: "Experienced players, fast route setup, build experiments",
+    avoid:
+      "You do not know which Branching options your route actually wants.",
+  },
+  {
+    tier: "A",
+    genetic: "Challenger",
+    effect:
+      "Alpha-related bonuses that reward fighting and defeating Alphas across the run.",
+    bestFor: "Alpha hunting, mutagen scaling, aggressive players",
+    avoid:
+      "You still die to early Alphas or lack a safe attack before the first boss.",
+  },
+  {
+    tier: "A",
+    genetic: "Expert",
+    effect:
+      "Unlocks or improves access to advanced options after selecting different Specializations.",
+    bestFor: "Players building around Arms, Legs, Wings, Spines, Jaws, or other specialization routes",
+    avoid:
+      "Your run is too unfocused to know which specialization you want.",
+  },
+  {
+    tier: "A-",
+    genetic: "Minimalist",
+    effect:
+      "+15% all damage but removes Dash, turning mobility into the main weakness.",
+    bestFor: "High-damage players who can rebuild mobility quickly",
+    avoid:
+      "You are new, slow, stuck in bad terrain, or not comfortable without Dash.",
+  },
+  {
+    tier: "A-",
+    genetic: "Spawn of Chaos",
+    effect:
+      "Randomizes starting stats, which can create a strong opener or a dangerous first biome.",
+    bestFor: "Experienced players who can pivot from the first stat screen",
+    avoid:
+      "You need consistency for first clears, unlocks, or serious Pressure pushes.",
+  },
+  {
+    tier: "B+",
+    genetic: "Pacifist",
+    effect:
+      "Deals less damage but needs less progress to evolve, making leveling easier while combat is weaker.",
+    bestFor: "Non-combat learning, food routing, challenge prep, unusual builds",
+    avoid:
+      "You need reliable boss damage or are still learning how to survive without killing quickly.",
+  },
+  {
+    tier: "B+",
+    genetic: "Simple",
+    effect:
+      "Simplifies certain mechanics, making it more useful after you already understand normal routing.",
+    bestFor: "Players who already understand high-Pressure routing",
+    avoid:
+      "You have not stabilized a normal Pressure 10 build yet.",
+  },
+  {
+    tier: "B",
+    genetic: "Patient",
+    effect:
+      "Skipping a level-up improves the rarity of the next evolution offered, and this bonus stacks.",
+    bestFor: "Big Physical, Body Slam, burst goals, damage-threshold practice",
+    avoid:
+      "Your build deals damage through many small hits, poison ticks, allies, or reflect instead of one large hit.",
+  },
+  {
+    tier: "B",
+    genetic: "Picky",
+    effect:
+      "Reroll-related bonus that rewards targeted evolution hunting and controlled reroll use.",
+    bestFor: "Targeted build hunting, specific unlock attempts",
+    avoid:
+      "You reroll without a clear target or spend mutagen that should upgrade your carry evolution.",
+  },
+  {
+    tier: "B",
+    genetic: "Highborn",
+    effect:
+      "Running effect still needs in-game tooltip confirmation; use Highborn after unlocking it for high-damage route testing.",
+    bestFor: "Players pushing damage thresholds or boss burst routes",
+    avoid:
+      "Your build lacks survivability or cannot consistently reach late-run damage scaling.",
+  },
+  {
+    tier: "Situational",
+    genetic: "Vegan",
+    effect:
+      "Strengthens plant-progress or non-damage routing after a no-damage clear.",
+    bestFor: "Challenge clears, Codex completion, non-combat experiments",
+    avoid:
+      "You want a normal clear, Predator route, or reliable boss damage.",
+  },
+  {
+    tier: "Situational",
+    genetic: "Bullseye",
+    effect:
+      "Running effect still needs in-game tooltip confirmation; use Bullseye after unlocking it for Stoner-related route testing.",
+    bestFor: "Achievement routing, stone kill goals, completion runs",
+    avoid:
+      "You are not actively building around Stoner or boss setup.",
+  },
+  {
+    tier: "Situational",
+    genetic: "Opportunistic",
+    effect:
+      "POI / timing-related bonus unlocked by making Crabtaur crash into an obstacle.",
+    bestFor: "Completion players and boss-mechanics routing",
+    avoid:
+      "You want a straightforward clear instead of a setup-heavy boss goal.",
+  },
+  {
+    tier: "Situational",
+    genetic: "Underdog",
+    effect:
+      "Weak-route support unlocked by winning at Pressure 10+ while staying level 30 or below.",
+    bestFor: "Advanced challenge routing",
+    avoid:
+      "You rely on POI farming, extra levels, or slow scaling to survive.",
+  },
+  {
+    tier: "Situational",
+    genetic: "Stubborn",
+    effect:
+      "High-Pressure adaptation bonus unlocked by clearing Pressure 15.",
+    bestFor: "Late-game Pressure progression",
+    avoid:
+      "You are still learning normal or mid-Pressure routes.",
+  },
+  {
+    tier: "Situational",
+    genetic: "Envoy of Chaos",
+    effect:
+      "Chaos-route upgrade unlocked by winning Pressure 10 with Spawn of Chaos.",
+    bestFor: "Expert players who already route around Chaos starts",
+    avoid:
+      "You have not learned Spawn of Chaos or Pressure 10 consistency yet.",
+  },
+  {
+    tier: "Progression",
+    genetic: "Standard",
+    effect:
+      "Default start with no special routing pressure.",
+    bestFor: "Learning, baseline runs, testing new evolution routes",
+    avoid:
+      "You have unlocked a genetic that clearly supports your current goal.",
+  },
+];
+
+export const unlockColumns = [
+  { key: "genetic", label: "Genetic" },
+  { key: "unlock", label: "How To Unlock" },
+  { key: "unlockType", label: "Unlock Type" },
+  { key: "bestUse", label: "Best Use After Unlock" },
+];
+
+export const unlockRows = [
+  {
+    genetic: "Standard",
+    unlock: "Unlocked by default.",
+    unlockType: "Default",
+    bestUse: "Baseline learning runs and testing new evolution routes.",
+  },
+  {
+    genetic: "Pacifist",
+    unlock: "Complete a run at any Pressure.",
+    unlockType: "First clear / low-combat",
+    bestUse: "Non-combat and low-combat route support after a normal clear.",
+  },
+  {
+    genetic: "Chosen",
+    unlock: "Win a run at any Pressure.",
+    unlockType: "Clear",
+    bestUse: "Early Legendary choice and flexible first-clear follow-up runs.",
+  },
+  {
+    genetic: "Pioneer",
+    unlock: "Discover any 7 Points of Interest. Discoveries can count across multiple runs.",
+    unlockType: "Exploration",
+    bestUse: "POI farming, flexible progression, beginner-friendly routing, and Nomad-style POI routes.",
+  },
+  {
+    genetic: "Expert",
+    unlock: "Select 5 different Specializations.",
+    unlockType: "Specialization",
+    bestUse: "Advanced option routing after you understand Specialization paths.",
+  },
+  {
+    genetic: "Patient",
+    unlock: "Deal 100 or more damage with a single hit.",
+    unlockType: "Damage threshold",
+    bestUse: "Skip-evolution rarity stacking, burst setup practice, and single-hit damage routing.",
+  },
+  {
+    genetic: "Highborn",
+    unlock: "Deal 2000 or more damage in a single run.",
+    unlockType: "Damage threshold",
+    bestUse: "Burst, Body Slam, big Physical, and high-damage routes.",
+  },
+  {
+    genetic: "Challenger",
+    unlock: "Defeat 50 Alphas. Progress can count across multiple runs.",
+    unlockType: "Alpha hunting",
+    bestUse: "Alpha pressure, mutagen, and aggressive early scaling.",
+  },
+  {
+    genetic: "Grandiose",
+    unlock: "Reach 160% size or higher.",
+    unlockType: "Size challenge",
+    bestUse: "Chonky, Body Slam, Imposing, big Physical, and size-scaling damage routes.",
+  },
+  {
+    genetic: "Minimalist",
+    unlock: "Reach 50% size or smaller.",
+    unlockType: "Size challenge",
+    bestUse: "Damage-focused runs where you can rebuild mobility after losing Dash.",
+  },
+  {
+    genetic: "Picky",
+    unlock: "Reroll 100 times. This can be done across one or multiple runs.",
+    unlockType: "Reroll",
+    bestUse: "Targeted build hunting and specific unlock attempts.",
+  },
+  {
+    genetic: "Independent",
+    unlock: "Unlock any 7 Branching Evolutions.",
+    unlockType: "Branching",
+    bestUse: "Every-12-level Branching routes and POI level farming.",
+  },
+  {
+    genetic: "Bullseye",
+    unlock: "Use a stone to kill any regular boss.",
+    unlockType: "Boss / stone kill",
+    bestUse: "Stoner-related routing, boss setup, and completion routes.",
+  },
+  {
+    genetic: "Opportunistic",
+    unlock: "Kill Crabtaur by making it crash into an obstacle.",
+    unlockType: "Boss mechanic",
+    bestUse: "Completion and boss-mechanics routing.",
+  },
+  {
+    genetic: "Vegan",
+    unlock: "Complete a run without doing any damage.",
+    unlockType: "Challenge",
+    bestUse: "Plant-progress routing, nonviolent routing, Codex completion, and challenge attempts.",
+  },
+  {
+    genetic: "Spawn of Chaos",
+    unlock: "Beat the game on Pressure 5.",
+    unlockType: "Pressure",
+    bestUse: "Randomized stat starts and expert pivot practice.",
+  },
+  {
+    genetic: "Precocious",
+    unlock: "Defeat the game on the highest Pressure available to you.",
+    unlockType: "Pressure",
+    bestUse: "Early Branching routes and expert starts.",
+  },
+  {
+    genetic: "Simple",
+    unlock: "Beat the game on Pressure 10.",
+    unlockType: "Pressure",
+    bestUse: "Simplified-mechanic routing after you understand normal Pressure progression.",
+  },
+  {
+    genetic: "Underdog",
+    unlock: "Win Pressure 10 or higher with level 30 or less.",
+    unlockType: "Low-level Pressure challenge",
+    bestUse: "Weak-route support and efficient low-level challenge clears.",
+  },
+  {
+    genetic: "Envoy of Chaos",
+    unlock: "Pick Spawn of Chaos and win at Pressure 10.",
+    unlockType: "Pressure + Chaos",
+    bestUse: "Enhanced Chaos routing and late-game completion.",
+  },
+  {
+    genetic: "Stubborn",
+    unlock: "Beat the game at Pressure 15.",
+    unlockType: "Pressure",
+    bestUse: "Late-game Pressure progression.",
+  },
+];
+
+export const numberColumns = [
+  { key: "genetic", label: "Genetic" },
+  { key: "knownValue", label: "Effect / Trigger" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const numberRows = [
+  {
+    genetic: "Chosen",
+    knownValue: "Third level-up offers three Legendary Evolutions.",
+    whyItMatters:
+      "This is the clearest early power spike because it happens before the first boss plan is fully locked.",
+  },
+  {
+    genetic: "Pioneer",
+    knownValue: "+50% Points of Interest.",
+    whyItMatters:
+      "More POIs mean more chances for progress, mutagen, stat boosts, defensive events, and recovery routes.",
+  },
+  {
+    genetic: "Independent",
+    knownValue: "Every 12th level-up becomes a Branching Evolution: level 12, 24, 36, and so on. Bosses do not drop Boss Fruits.",
+    whyItMatters:
+      "It is strongest when your build gains levels quickly enough to trigger multiple branch moments.",
+  },
+  {
+    genetic: "Precocious",
+    knownValue: "First level-up becomes a Branching Evolution.",
+    whyItMatters:
+      "You get route access immediately, but only if you know which branch your build wants.",
+  },
+  {
+    genetic: "Grandiose",
+    knownValue: "Damage scales with Size. Unlock requires reaching 160% size or higher.",
+    whyItMatters:
+      "The value is highest on Chonky, Body Slam, Imposing, and big Physical routes that naturally grow large.",
+  },
+  {
+    genetic: "Minimalist",
+    knownValue: "+15% all damage, but Dash is removed. Unlock requires reaching 50% size or smaller.",
+    whyItMatters:
+      "The damage is real, but losing Dash makes movement replacements much more important.",
+  },
+  {
+    genetic: "Spawn of Chaos",
+    knownValue: "Randomizes starting stats. Unlock requires beating Pressure 5.",
+    whyItMatters:
+      "It can create a free route or a terrible opener, so the first stat screen decides the run.",
+  },
+  {
+    genetic: "Patient",
+    knownValue:
+      "Skipping an evolution improves the next evolution's rarity, and this stacks. Unlock: deal 100+ damage in a single hit.",
+    whyItMatters:
+      "It rewards players who can skip weak offers on purpose and cash in later for higher-rarity choices.",
+  },
+  {
+    genetic: "Highborn",
+    knownValue: "Unlock requires 2000 or more damage in a single run.",
+    whyItMatters:
+      "This is a total-output goal, so stable damage over the full run matters more than one lucky hit.",
+  },
+  {
+    genetic: "Bullseye",
+    knownValue: "Unlock requires killing a regular boss with a thrown stone.",
+    whyItMatters:
+      "The thrown stone should be the final hit, so you need to lower the boss safely before setting up the kill.",
+  },
+  {
+    genetic: "Underdog",
+    knownValue: "Unlock requires winning Pressure 10 or higher at level 30 or less.",
+    whyItMatters:
+      "This is a low-level efficiency challenge, not a normal scaling run.",
+  },
+];
+
+export const unlockTipColumns = [
+  { key: "genetic", label: "Unlock" },
+  { key: "commonFail", label: "Common Failure" },
+  { key: "fix", label: "How To Fix It" },
+];
+
+export const unlockTipRows = [
+  {
+    genetic: "Bullseye",
+    commonFail:
+      "The boss dies to poison, contact damage, a normal attack, or reflect before the stone lands.",
+    fix:
+      "Lower the boss safely, stop using passive damage sources if possible, then make the thrown stone the final hit.",
+  },
+  {
+    genetic: "Vegan",
+    commonFail:
+      "Accidental damage from contact, allies, poison, reflect, or a panic attack ruins the run.",
+    fix:
+      "Plan a true non-damage route before starting. Avoid damage-triggering evolutions and read each tooltip before taking it.",
+  },
+  {
+    genetic: "Pacifist",
+    commonFail:
+      "Players treat it like a beginner build even though lower damage makes bosses harder.",
+    fix:
+      "Use it after you understand food routing, movement, sustain, and low-combat progression.",
+  },
+  {
+    genetic: "Patient",
+    commonFail:
+      "The run deals good total damage but never lands one hit above the threshold.",
+    fix:
+      "Use single-hit burst routes such as big Physical, Body Slam, high-size attacks, or damage-window setups.",
+  },
+  {
+    genetic: "Minimalist",
+    commonFail:
+      "The build gets the damage bonus but dies because Dash is gone.",
+    fix:
+      "Take Legs, Wings, Slithery, Leap, speed, or terrain adaptation early. Treat movement as mandatory.",
+  },
+  {
+    genetic: "Underdog",
+    commonFail:
+      "POI farming and extra levels accidentally push the run above level 30.",
+    fix:
+      "Route efficiently, avoid unnecessary progress, and focus on a compact boss-ready build.",
+  },
+  {
+    genetic: "Opportunistic",
+    commonFail:
+      "Crabtaur dies normally before it crashes into an obstacle.",
+    fix:
+      "Fight near obstacles, manage boss health carefully, and let the crash finish the kill condition.",
+  },
+];
+
+export const splicePathColumns = [
+  { key: "combo", label: "Splice Combo" },
+  { key: "timing", label: "Timing" },
+  { key: "plan", label: "What To Pick / Do" },
+  { key: "why", label: "Why" },
+];
+
+export const splicePathRows = [
+  {
+    combo: "Chosen + Pioneer",
+    timing: "Before level 3",
+    plan:
+      "Prioritize safe food, movement, or one simple attack while watching nearby POIs.",
+    why:
+      "Pioneer gives more question marks, but you still need to survive long enough for Chosen to spike.",
+  },
+  {
+    combo: "Chosen + Pioneer",
+    timing: "Level 3 Chosen spike",
+    plan:
+      "Pick the Legendary that solves the run's missing slot: attack, movement, sustain, or food tempo.",
+    why:
+      "The best Legendary is the one that stabilizes the first boss plan, not always the highest damage option.",
+  },
+  {
+    combo: "Chosen + Pioneer",
+    timing: "Levels 4-6",
+    plan:
+      "Use POIs for progress or mutagen, then upgrade the Legendary route instead of spreading picks randomly.",
+    why:
+      "Chosen gives direction; Pioneer gives resources. The combo works when both feed the same route.",
+  },
+  {
+    combo: "Grandiose + Chosen",
+    timing: "Before level 3",
+    plan:
+      "Take More Mass, Chunky, HP, Shell, Plating, or a simple Physical attack if they appear.",
+    why:
+      "Grandiose wants Size to matter, but Chonky routes still need one usable attack and one survival layer.",
+  },
+  {
+    combo: "Grandiose + Chosen",
+    timing: "Level 3 Chosen spike",
+    plan:
+      "Prefer a Legendary that supports big-body scaling: Body Slam, strong Physical damage, defense, movement, or attack area.",
+    why:
+      "Grandiose makes size valuable, but the Chosen pick should turn that size into a real first-boss plan.",
+  },
+  {
+    combo: "Grandiose + Chosen",
+    timing: "Before first boss",
+    plan:
+      "Take Legs, Wings, Slithery, Leap, or terrain adaptation if your size is already slowing the run down.",
+    why:
+      "The most common Chonky failure is not damage. It is becoming too slow for terrain and boss positioning.",
+  },
+  {
+    combo: "Independent + Pioneer",
+    timing: "Levels 1-11",
+    plan:
+      "Use Pioneer POIs to gain progress quickly while locking one safe attack and one movement tool.",
+    why:
+      "Independent pays off at level 12, so the first job is reaching that milestone without dying.",
+  },
+  {
+    combo: "Independent + Pioneer",
+    timing: "Level 12 branch",
+    plan:
+      "Pick the Branching Evolution that matches your current route: movement for bad terrain, Body Slam for HP, Arms or attack tools for damage.",
+    why:
+      "Independent is strongest when the branch fixes the problem your build already has.",
+  },
+  {
+    combo: "Independent + Pioneer",
+    timing: "After level 12",
+    plan:
+      "Keep using POIs for level 24 and 36 branch goals, but stop chasing far question marks before bosses.",
+    why:
+      "The combo can snowball, but boss fruit is gone, so bad detours are more punishing.",
+  },
+];
+
+export const chaosColumns = [
+  { key: "startSignal", label: "Spawn of Chaos Start" },
+  { key: "goodRoute", label: "Good Route" },
+  { key: "badSign", label: "Bad Sign" },
+  { key: "firstFix", label: "First Fix" },
+];
+
+export const chaosRows = [
+  {
+    startSignal: "High Size",
+    goodRoute: "Grandiose-style Chonky, More Mass, Body Slam, Imposing, big Physical.",
+    badSign:
+      "Low speed and bad terrain. Fix movement before stacking more size.",
+    firstFix:
+      "Take Legs, Wings, Slithery, Leap, Shell, or Plating before another greedy size pick.",
+  },
+  {
+    startSignal: "High Ability / cooldown help",
+    goodRoute: "Poison, Leech, Cortex, Dextrous, Stinger, skill tempo.",
+    badSign:
+      "No sustain or range. Ability damage still needs a safe way to apply it.",
+    firstFix:
+      "Prioritize Leech, Immune System, movement, Reach, Shell, or another safety layer before pure damage.",
+  },
+  {
+    startSignal: "High Speed / Senses",
+    goodRoute: "Pioneer-style POI routing, More Eyes, fast map control, safer detours.",
+    badSign:
+      "No attack. Fast POI routing does not kill bosses by itself.",
+    firstFix:
+      "Use the speed to find food and POIs, then lock one attack before the first boss.",
+  },
+  {
+    startSignal: "Low HP",
+    goodRoute: "Shell, Plating, Regeneration, Cheek Pouch, safe boss positioning.",
+    badSign:
+      "Taking greedy damage or Alpha fights before fixing survivability.",
+    firstFix:
+      "Avoid Challenger-style fights early; take Shell, Plating, Regeneration, Cheek Pouch, or safer food tempo.",
+  },
+  {
+    startSignal: "Bad starting biome",
+    goodRoute: "Wings, Legs, Slithery, Leap, terrain adaptation, safer food routing.",
+    badSign:
+      "Forcing your planned build instead of answering the biome first.",
+    firstFix:
+      "Answer the biome first: movement for water or snow, sustain for heat, senses for night, then resume your build.",
+  },
+];
+
+export const spliceColumns = [
+  { key: "combo", label: "Splice Combo" },
+  { key: "bestFor", label: "Best For" },
+  { key: "corePlan", label: "Core Plan" },
+  { key: "risk", label: "Main Risk" },
+];
+
+export const spliceRows = [
+  {
+    combo: "Chosen + Pioneer",
+    bestFor: "Best general first-clear follow-up and flexible routing",
+    corePlan:
+      "Use Chosen for the early Legendary spike, then use Pioneer to find more POIs, progress, mutagen, and recovery options.",
+    risk:
+      "You still need one real attack before the first boss; POIs and Legendary choices do not replace boss damage.",
+  },
+  {
+    combo: "Chosen + Challenger",
+    bestFor: "Aggressive starts with a safety valve",
+    corePlan:
+      "Chosen gives early direction while Challenger adds alpha pressure and mutagen opportunities. Spend mutagen on one carry evolution.",
+    risk:
+      "Extra Alphas punish weak openings if the Legendary choice does not give damage, movement, or sustain.",
+  },
+  {
+    combo: "Grandiose + Chosen",
+    bestFor: "Chonky, Body Slam, big Physical",
+    corePlan:
+      "Use Chosen to find a strong early piece, then let Grandiose reward More Mass, Chunky, HP, and size-based routing.",
+    risk:
+      "Large bodies still need Legs, Wings, Slithery, Leap, or terrain adaptation.",
+  },
+  {
+    combo: "Grandiose + Expert",
+    bestFor: "Specialization-heavy Chonky or Imposing routes",
+    corePlan:
+      "Grandiose rewards size while Expert helps reach specializations sooner. Look for Body Slam, Arms, Legs, Shell, Plating, and movement.",
+    risk:
+      "If your early evolutions do not support size or specialization, pivot instead of forcing it.",
+  },
+  {
+    combo: "Independent + Pioneer",
+    bestFor: "POI level farming and repeated Branching moments",
+    corePlan:
+      "Pioneer creates more POIs, which can fuel faster leveling. Independent converts every 12th level into a Branching Evolution.",
+    risk:
+      "Independent removes boss fruit drops, so the build must survive without relying on those rewards.",
+  },
+  {
+    combo: "Independent + Precocious",
+    bestFor: "Advanced Branching routes",
+    corePlan:
+      "Precocious gives an early Branching moment, while Independent adds more branch points if you level quickly.",
+    risk:
+      "This is strong only if you understand which Branching options your route wants.",
+  },
+  {
+    combo: "Spawn of Chaos + Chosen",
+    bestFor: "Randomized starts with a recovery tool",
+    corePlan:
+      "Spawn of Chaos gives a random stat profile. Chosen helps stabilize the first few levels with a powerful early choice.",
+    risk:
+      "Bad HP or terrain starts can still kill the run before the combo pays off.",
+  },
+  {
+    combo: "Minimalist + Chosen",
+    bestFor: "High-damage players who need an early replacement plan",
+    corePlan:
+      "Minimalist gives damage but removes Dash. Chosen can help find an early movement, sustain, or damage piece to offset the downside.",
+    risk:
+      "No Dash is brutal if you enter water, snow, desert, or boss pressure without a movement replacement.",
+  },
+  {
+    combo: "Challenger + Highborn",
+    bestFor: "Damage farming and alpha-heavy combat routes",
+    corePlan:
+      "Use extra alpha pressure to find mutagen and fights, then push one damage route hard enough to reach big damage totals.",
+    risk:
+      "Do not take this combo if your early build cannot kill safely.",
+  },
+  {
+    combo: "Vegan / Pacifist + Pioneer",
+    bestFor: "Non-combat, challenge, and exploration-heavy attempts",
+    corePlan:
+      "Use Pioneer to find more noncombat rewards and progress while Vegan or Pacifist changes how you approach damage.",
+    risk:
+      "Bosses and accidental damage can ruin the goal; use this only when you are intentionally routing a challenge.",
+  },
+];
+
+export const buildColumns = [
+  { key: "build", label: "Build Goal" },
+  { key: "bestGenetics", label: "Best Genetics" },
+  { key: "why", label: "Why" },
+  { key: "readNext", label: "Read Next" },
+];
+
+export const buildRows = [
+  {
+    build: "First clear / safe follow-up",
+    bestGenetics: "Chosen, Pioneer, Standard, Pacifist",
+    why:
+      "Chosen gives early direction, Pioneer creates more recovery options, and Standard keeps the run simple while learning.",
+    readNext: "Evolution Picker for Cheek Pouch, Saliva, Legs, Shell, and first-boss choices.",
+  },
+  {
+    build: "Poison / Ability",
+    bestGenetics: "Chosen, Spawn of Chaos, Expert, Pioneer",
+    why:
+      "Poison wants Ability, cooldown, sustain, and movement. Chosen and Spawn of Chaos can reveal those routes early.",
+    readNext: "Evolution Picker for Stinger, Leech, Cortex, Dextrous, Immune System, and Reach.",
+  },
+  {
+    build: "Chonky / Body Slam",
+    bestGenetics: "Grandiose, Chosen, Expert, Spawn of Chaos",
+    why:
+      "Grandiose turns Size into damage value, while Chosen and Expert help find or reach key build pieces earlier.",
+    readNext: "Best Builds for Body Slam Tank and Big Physical routing.",
+  },
+  {
+    build: "Predator / Jaws",
+    bestGenetics: "Challenger, Chosen, Highborn, Patient",
+    why:
+      "Predator wants fights, meat progress, and damage scaling. Challenger and Chosen create early combat momentum.",
+    readNext: "Evolution Picker for Jaws, Carnivore, Muscular Tissue, Sharpen, and movement.",
+  },
+  {
+    build: "POI level farming",
+    bestGenetics: "Pioneer, Independent, Precocious, Spawn of Chaos",
+    why:
+      "Pioneer increases POIs, Independent rewards level milestones, and Precocious gives early branch access.",
+    readNext: "Points of Interest Guide for POI routing and level-farming mistakes.",
+  },
+  {
+    build: "Challenge / unlock hunting",
+    bestGenetics: "Vegan, Bullseye, Opportunistic, Underdog, Picky",
+    why:
+      "These are not always best for normal clears, but they are useful when the run has a specific unlock goal.",
+    readNext: "Achievements and Challenges Guide for route-specific conditions.",
+  },
+  {
+    build: "High Pressure",
+    bestGenetics: "Chosen, Pioneer, Grandiose, Expert, Simple, Stubborn",
+    why:
+      "High Pressure rewards starts that make the first biome and first boss more consistent.",
+    readNext: "Selective Pressure Guide for full difficulty routing.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Choosing a Genetic by description instead of name",
+    whyItHurts:
+      "You cannot use a guide at the Splice screen if you cannot map the advice to Chosen, Pioneer, Grandiose, or another real Genetic.",
+    betterPlay:
+      "Pick the actual Genetic name that matches your run goal, then use Splice only when both names support the same plan.",
+  },
+  {
+    mistake: "Using two risky Splice effects together",
+    whyItHurts:
+      "Splice can stack power, but it can also stack volatility and make the first boss harder than expected.",
+    betterPlay:
+      "Pair one risky modifier with one stabilizer until you know the route.",
+  },
+  {
+    mistake: "Ignoring Spawn of Chaos stats",
+    whyItHurts:
+      "Randomized starting stats can point you toward size, Ability, speed, or survival immediately, but only if you check them.",
+    betterPlay:
+      "Open the stat screen early and pivot based on size, HP, Ability, Physical, speed, and senses.",
+  },
+  {
+    mistake: "Forcing a build after the Genetic disagrees",
+    whyItHurts:
+      "If Grandiose points toward size but you force poison, or Spawn of Chaos gives Ability but you force big Physical, the run loses tempo.",
+    betterPlay:
+      "Let the first few evolutions confirm the Genetic. If they do not, pivot before the first boss.",
+  },
+  {
+    mistake: "Testing a brand-new Splice at high Pressure",
+    whyItHurts:
+      "High Pressure already changes terrain, boss danger, and survival requirements.",
+    betterPlay:
+      "Test new Splice combinations at safer Pressure first, then bring proven combinations into Pressure pushes.",
+  },
+  {
+    mistake: "Treating Genetics as the whole build",
+    whyItHurts:
+      "A Genetic only shapes the start. You still need food, movement, damage, survival, and boss planning.",
+    betterPlay:
+      "Use Genetics Guide for the opener, Evolution Picker for level-up choices, and Best Builds for full routes.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best Genetics in Everything Is Crab are Chosen, Pioneer, Grandiose, Independent, Precocious, Challenger, and Expert, depending on your run goal.**
+
+Use **Chosen** for a strong early Legendary choice, **Pioneer** for more Points of Interest, **Grandiose** for Chonky / Body Slam routes, **Independent** for level-based Branching, **Precocious** for an early Branching start, **Challenger** for Alpha and mutagen pressure, and **Expert** when your build depends on specializations.
+
+Use this rule:
+
+**Pick the real Genetic name that matches your first-boss plan. Then Splice only if the second Genetic supports the same route.**
+</GuideQuickAnswer>
+
+<GuideCallout title="Version note">
+This guide is written for the 1.0 launch version of Everything Is Crab. Genetics names and unlock routes are stable enough to plan around, but exact numbers can change with patches, so check the in-game Codex when a tooltip value matters.
+</GuideCallout>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-genetics-splice-screen-challenger.webp"
+    alt="Everything Is Crab splice screen showing Chosen and Challenger Genetics before starting a run."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Genetics advice has to map to real names on the Splice screen: Chosen, Challenger, Pioneer, Grandiose, Spawn of Chaos, and the rest.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-are-genetics">
+  What are Genetics?
+</h2>
+
+Genetics are starting modifiers that change how a run begins. Some give early power, some change enemy pressure, some alter branch timing, and some push you toward unusual challenge routes.
+
+The important part is that Genetics are **not** the whole build. A Genetic shapes the opener. Your level-up evolutions still decide whether the run becomes poison, Chonky, Predator, POI farming, Social, or something else.
+
+<GuideCallout title="Genetics rule">
+Pick Genetics for the first six evolutions, not for the fantasy final build. If the Genetic does not help you reach a stable attack, food plan, movement tool, or survival layer before the first boss, it is probably too greedy.
+</GuideCallout>
+
+Use the <Link href="/everything-is-crab/evolutions-list">Evolution Picker</Link> once the run starts. Use <Link href="/everything-is-crab/best-builds">Best Builds</Link> when you need full route plans.
+
+<AdUnit placement="article_after_first_h2" />
+
+---
+
+<h2 id="best-genetics-tier-list">
+  Best Genetics tier list
+</h2>
+
+This tier list uses the real Genetic names you see in-game. The rating is based on three things: how clearly the Genetic shapes the first six evolutions, how well it works in Splice, and how much risk it adds before the first boss.
+
+<GuideTable
+  caption="Best Everything Is Crab Genetics tier list by practical run value."
+  columns={tierColumns}
+  rows={tierRows}
+/>
+
+<GuideCallout title="Value rule">
+Chosen, Pioneer, and Grandiose are easy to recommend because their value is immediate and easy to build around. Independent, Precocious, Spawn of Chaos, Minimalist, and Patient can be stronger in expert hands, but they punish players who do not pivot quickly.
+</GuideCallout>
+
+---
+
+<h2 id="key-genetic-numbers">
+  Key Genetic numbers and trigger conditions
+</h2>
+
+Use this table when you need the practical reason behind a tier ranking. These are the numbers and trigger points that most often change how you play the opening.
+
+<GuideTable
+  caption="Important Everything Is Crab Genetic numbers and triggers."
+  columns={numberColumns}
+  rows={numberRows}
+/>
+
+---
+
+<h2 id="all-genetics-unlock-table">
+  All Genetics unlock table
+</h2>
+
+Players search Genetics because they usually want two answers: **what does this name mean, and how do I unlock it?** Use this table for the unlock route, then use the tier and Splice sections to decide whether the Genetic is worth using immediately.
+
+<GuideTable
+  caption="All Everything Is Crab Genetics and how to unlock them."
+  columns={unlockColumns}
+  rows={unlockRows}
+/>
+
+<GuideCallout title="Unlock note">
+For exact in-game values that may change with updates, check the Codex tooltip. Use this table for the unlock route and the rest of this guide for practical build decisions.
+</GuideCallout>
+
+---
+
+<h2 id="unlock-mistakes">
+  Unlock mistakes that waste runs
+</h2>
+
+Some Genetics are easy to understand but easy to fail in practice. These are the unlocks where one small mistake can invalidate the run.
+
+<GuideTable
+  caption="Common Genetics unlock mistakes and how to avoid them."
+  columns={unlockTipColumns}
+  rows={unlockTipRows}
+/>
+
+---
+
+<h2 id="how-splice-works">
+  How Splice works
+</h2>
+
+Splice lets you start with two Genetics instead of one, but only if your previous run reached the first boss. If the previous run ended before the first boss, you only choose one Genetic. Challenge Mode does not provide Splice opportunities.
+
+When Splice is available, the selection happens in two rounds: you see three Genetic options, choose one, then see another three options and choose a second. Both Genetics are active, so the run becomes stronger but also more complex.
+
+A good Splice pair has one of these patterns:
+
+- **One power Genetic + one stabilizer.**
+- **Two Genetics that support the same build route.**
+- **One unlock / challenge Genetic + one consistency Genetic.**
+
+A bad Splice pair gives you two unrelated problems. For example, Spawn of Chaos asks you to pivot from random stats, while Minimalist removes Dash. That can work, but it is dangerous if you start in bad terrain with low HP.
+
+<GuideCallout title="Splice rule">
+Do not Splice two Genetics just because both are strong. Splice them because they make the same first-boss plan easier. If you died before the first boss last run, treat the next run as a single-Genetic recovery run.
+</GuideCallout>
+
+---
+
+<h2 id="best-splice-combinations">
+  Best Splice combinations
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-genetics-branching-every-12-levels.webp"
+    alt="Everything Is Crab Independent Genetic showing every twelfth level as a Branching Evolution."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Independent is strongest when your run can gain levels quickly enough to trigger multiple Branching moments.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Best Everything Is Crab Splice combinations by run goal."
+  columns={spliceColumns}
+  rows={spliceRows}
+/>
+
+The safest Splice pattern is **Chosen + route Genetic**. Chosen gives early direction, while the second Genetic tells you what kind of direction you want.
+
+<h3 id="splice-example-paths">
+  Splice example paths
+</h3>
+
+These examples show how the strongest Splice combinations should play out during the first few level-ups. The goal is not to force a perfect script; it is to know what each combo is trying to prove before the first boss.
+
+<GuideTable
+  caption="Example early routes for Chosen + Pioneer, Grandiose + Chosen, and Independent + Pioneer."
+  columns={splicePathColumns}
+  rows={splicePathRows}
+/>
+
+---
+
+<h2 id="spawn-of-chaos-random-stats">
+  Spawn of Chaos and randomized starting stats
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-genetics-randomized-starting-stats.webp"
+    alt="Everything Is Crab Spawn of Chaos randomized starting stats showing unusual size, senses, and HP before the run stabilizes."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Spawn of Chaos can be powerful, but the first stat screen should decide your route.
+  </figcaption>
+</figure>
+
+**Spawn of Chaos** is the Genetic for randomized starting stats. It can hand you a strong route immediately, but it can also make the first biome much harder.
+
+Read the first stat screen like this:
+
+- **High size** means Grandiose-style Chonky, Body Slam, More Mass, or Imposing may be open.
+- **High Ability or cooldown help** means poison, Leech, Cortex, or Dextrous may be open.
+- **High speed or senses** means Pioneer / POI routing may be open.
+- **Low HP** means you should stabilize before greed.
+- **Bad terrain start** means Wings, Legs, Slithery, Leap, or adaptation rises in value.
+
+If you do not like pivoting, Spawn of Chaos is not the safest first-clear Genetic.
+
+<GuideTable
+  caption="How to read a Spawn of Chaos start."
+  columns={chaosColumns}
+  rows={chaosRows}
+/>
+
+---
+
+<h2 id="grandiose-size-scaling">
+  Grandiose, Size, and Chonky Genetics
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-genetics-size-rarity-splice.webp"
+    alt="Everything Is Crab Grandiose Genetic showing Size-based damage scaling for Chonky builds."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Grandiose is easy to build around because Chonky routes already want Size, HP, and big Physical scaling.
+  </figcaption>
+</figure>
+
+**Grandiose** is the cleanest Genetic for Chonky, Body Slam, Imposing, and big Physical routes. It rewards what those builds already want: becoming larger and converting Size into damage value.
+
+The clean plan is:
+
+**Grandiose → More Mass / Chunky → one Physical attack → HP / Shell / Plating → Body Slam if offered → movement before terrain punishes you.**
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-genetics-splice-combo-big-size-start.webp"
+    alt="Early Everything Is Crab run committing to a big size and Imposing route after Grandiose."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Grandiose gets better when the first few evolutions confirm the same Chonky direction.
+  </figcaption>
+</figure>
+
+The danger is speed. If you grow before you can move, bad terrain and fast enemies can waste the whole advantage.
+
+---
+
+<h2 id="best-genetics-by-build">
+  Best Genetics by build
+</h2>
+
+Choose Genetics based on the build you want to make easier, not based on the most exciting tooltip.
+
+<GuideTable
+  caption="Best Genetics by Everything Is Crab build goal."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+This table intentionally points you to the next guide instead of repeating every evolution pick. Genetics decide the opener; the <Link href="/everything-is-crab/evolutions-list">Evolution Picker</Link> decides the level-up choices.
+
+---
+
+<h2 id="pressure-genetics-note">
+  Genetics at higher Pressure
+</h2>
+
+At higher Pressure, do not treat Genetics as free power. Pressure 6+ makes random biome starts and terrain more dangerous, while Pressure 10+ punishes weak sustain, bad movement, and untested Splice combinations.
+
+<GuideCallout title="Pressure rule">
+For Pressure pushes, use proven Splice combinations. Chosen, Pioneer, Grandiose, and Expert are easier to stabilize than high-volatility starts. Spawn of Chaos, Minimalist, Independent, and Precocious can be strong, but test them at safer Pressure before using them in serious pushes.
+</GuideCallout>
+
+Use <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link> for the full high-difficulty plan.
+
+---
+
+<h2 id="unlock-priority">
+  Which Genetics should you unlock first?
+</h2>
+
+Do not chase the hardest Genetics first. Unlock the ones that make future runs easier, then use those to chase the weird challenge names.
+
+Recommended order:
+
+1. **Chosen** — win any run, then use the early Legendary spike.
+2. **Pioneer** — discover 7 POIs, then use extra POIs for safer routing.
+3. **Expert** — select 5 Specializations, then reach build payoffs sooner.
+4. **Grandiose / Minimalist** — learn size manipulation from both directions.
+5. **Challenger** — defeat Alphas across runs, then use alpha pressure for mutagen.
+6. **Independent / Precocious** — use Branching routes once you understand branch planning.
+7. **Pressure Genetics** — Simple, Stubborn, Spawn of Chaos, Envoy of Chaos, and Precocious belong later.
+8. **Challenge Genetics** — Vegan, Bullseye, Opportunistic, Underdog, and similar goals are best after you can route intentionally.
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-genetics-pressure-five-unlock-screen.webp"
+    alt="Everything Is Crab post-run screen showing Pressure progression and unlock checking after a run."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pressure and Codex progression unlock more Genetics, but stable clears come before weird challenge routing.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="common-genetics-mistakes">
+  Common Genetics mistakes
+</h2>
+
+<GuideTable
+  caption="Common Everything Is Crab Genetics and Splice mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What are the best Genetics in Everything Is Crab?
+
+The best general Genetics are Chosen, Pioneer, Grandiose, Independent, Precocious, Challenger, and Expert. Chosen is best for early flexibility, Pioneer for POIs, Grandiose for Chonky builds, Independent and Precocious for Branching, Challenger for Alphas, and Expert for specializations.
+
+### What does Chosen do?
+
+Chosen makes your third level-up offer three Legendary Evolutions. It is one of the best general-purpose Genetics because it gives the run an early direction spike.
+
+### What does Pioneer do?
+
+Pioneer increases the number of Points of Interest by 50%. It is excellent for exploration, POI level farming, mutagen, recovery, and flexible build routing.
+
+### What does Grandiose do?
+
+Grandiose makes damage scale with Size, so it rewards builds that are already becoming large. It is best with Chonky, Body Slam, Imposing, big Physical, More Mass, HP, and defensive layers. The common mistake is stacking size without movement; if terrain or bosses are already punishing you, take Legs, Wings, Slithery, Leap, or adaptation before more greed.
+
+### What does Independent do?
+
+Independent makes every 12th level-up a Branching Evolution, but bosses no longer drop Boss Fruits. It is best for POI level farming and long-run branch planning.
+
+### What does Spawn of Chaos do?
+
+Spawn of Chaos randomizes starting stats. Check your stat screen immediately and pivot based on size, HP, Ability, Physical, speed, senses, and terrain. New players often fail this Genetic because they force their planned build instead of reading the opener they actually received.
+
+### What is the best Splice combination?
+
+The safest general Splice is Chosen + Pioneer because Chosen gives early direction while Pioneer gives more POIs and recovery options. For Chonky builds, use Grandiose + Chosen. For POI Branching routes, use Independent + Pioneer. If your previous run did not reach the first boss, you will not get a Splice choice and should plan around one Genetic instead.
+
+### Should beginners use Splice?
+
+Yes, but keep it simple. Beginners should avoid combining two risky modifiers. Use Chosen, Pioneer, Standard, or another stable Genetic before testing volatile Splice combinations.
+
+### What Genetics are best for Chonky or Body Slam?
+
+Grandiose, Chosen, Expert, and Spawn of Chaos with high starting size are the best Chonky / Body Slam Genetics. Look for More Mass, Chunky, Body Slam, Shell, Plating, and movement.
+
+### What Genetics are best for poison builds?
+
+Poison builds usually prefer Chosen, Spawn of Chaos if Ability starts high, Expert, or Pioneer. After the run begins, look for Stinger, Leech, Cortex, Dextrous, Immune System, and movement.
+
+### What Genetics are best for POI level farming?
+
+Pioneer, Independent, Precocious, and Spawn of Chaos are the main POI farming Genetics. Pair them with More Eyes, Legs, Wings, Slithery, Leap, and terrain adaptation.
+
+### How do I unlock Minimalist?
+
+Reach 50% size or smaller. Minimalist gives strong damage value but removes Dash, so you need a movement plan before using it seriously.
+
+### How do I unlock Bullseye?
+
+Kill any regular boss with a thrown stone. The usual mistake is letting poison, contact damage, reflect, or a normal attack take the final hit first. Lower the boss safely, then make the thrown stone the finishing hit.
+
+### How do I unlock Patient?
+
+Deal 100 or more damage with a single hit. Use routes that create one large hit, such as big Physical, Body Slam, size scaling, or a damage-window setup. Poison, allies, and many small attacks are usually worse for this goal.
+
+### What Genetics should I use for high Pressure?
+
+Use tested Genetics that support movement, sustain, defensive consistency, or a proven damage route. Chosen, Pioneer, Grandiose, and Expert are easier to stabilize than risky combinations like Spawn of Chaos + Minimalist.

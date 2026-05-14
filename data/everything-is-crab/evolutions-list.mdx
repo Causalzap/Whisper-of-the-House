@@ -1,0 +1,988 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const goalColumns = [
+  { key: "goal", label: "If Your Run Needs..." },
+  { key: "prioritize", label: "Prioritize These Evolutions" },
+  { key: "why", label: "Why They Matter" },
+  { key: "avoid", label: "Be Careful With..." },
+];
+
+export const goalRows = [
+  {
+    goal: "A safe first clear",
+    prioritize: "Cheek Pouch, Saliva, Shell, Legs, Scavenger, More Eyes",
+    why:
+      "These fix the problems that kill new runs: stopping too long to eat, missing POIs, entering bad terrain, or reaching bosses underleveled.",
+    avoid:
+      "Greedy damage picks when you have no movement, no food plan, or no way to survive chip damage.",
+  },
+  {
+    goal: "Poison / Ability scaling",
+    prioritize: "Stinger, Leech, Cortex, Dextrous, Poison Spores, Saliva, Immune System, Reach",
+    why:
+      "Poison builds need Ability, repeat application, cooldown help, and enough range or healing to stay alive while damage ticks.",
+    avoid:
+      "Taking poison pieces with no Ability support, no sustain, and no way to safely apply poison.",
+  },
+  {
+    goal: "Big Physical / Chonky scaling",
+    prioritize: "Body Slam, Chunky, More Mass, Muscular Tissue, Horns, Jaws, Arms, Plating, Shell",
+    why:
+      "Big-body routes turn size, Physical damage, Max HP, and attack area into a simple boss-ready plan.",
+    avoid:
+      "Stacking size without speed. A huge crab that cannot catch food or leave bad terrain is still a dead crab.",
+  },
+  {
+    goal: "Predator food engine",
+    prioritize: "Jaws, Carnivore, Muscular Tissue, Sharpen, Legs, Wings, Body Slam",
+    why:
+      "Predator routes want reliable kills and meat progress. Jaws is especially useful when you can finish enemies for extra food value.",
+    avoid:
+      "Using Jaws as your only plan when your damage is low or when enemies are too fast to finish cleanly.",
+  },
+  {
+    goal: "POI / level farming",
+    prioritize: "More Eyes, Senses tools, Legs, Wings, Leap, Slithery, terrain adaptation, POI rewards",
+    why:
+      "Points of Interest can snowball levels. The faster you can find and reach them, the more your run can outscale normal food routes.",
+    avoid:
+      "POI hunting with no movement or survival. A full level is not worth dying in snow, water, desert, or a boss timer.",
+  },
+  {
+    goal: "Reflect / contact punishment",
+    prioritize: "Spines, Poisonous, Detachable, Plating, Shell, Revenge, Regeneration, Dodge",
+    why:
+      "Reflect and contact poison are strong only after you can survive contact long enough for the punishment to matter.",
+    avoid:
+      "Building Spines as your whole plan before you have HP, defense, recovery, or movement.",
+  },
+];
+
+export const pickerColumns = [
+  { key: "evolution", label: "Evolution" },
+  { key: "role", label: "Best Role" },
+  { key: "priority", label: "Picker Priority" },
+  { key: "takeWhen", label: "Take It When..." },
+  { key: "skipWhen", label: "Skip / Delay When..." },
+];
+
+export const pickerRows = [
+  {
+    evolution: "Cheek Pouch",
+    role: "Food economy / beginner safety",
+    priority: "S early",
+    takeWhen:
+      "You are dying while eating, entering unsafe terrain, or need more levels before the first boss.",
+    skipWhen:
+      "You already have safe food tempo and urgently need damage before the boss timer fills.",
+  },
+  {
+    evolution: "Saliva",
+    role: "Feeding speed / tempo / poison support",
+    priority: "A",
+    takeWhen:
+      "Your build wins fights but loses time eating, or your poison / mouth route needs better application support.",
+    skipWhen:
+      "You have no damage button and the next boss is close.",
+  },
+  {
+    evolution: "Scavenger",
+    role: "Extra progress from leftover meat",
+    priority: "A early, B late",
+    takeWhen:
+      "The map has constant fights and you can safely steal meat from enemies or boss chaos.",
+    skipWhen:
+      "You are not seeing enough leftover food or cannot safely reach corpses.",
+  },
+  {
+    evolution: "More Eyes",
+    role: "Senses / dodge / POI hunting",
+    priority: "A",
+    takeWhen:
+      "You want to find alphas, POIs, mushrooms, or safer routes while adding dodge value.",
+    skipWhen:
+      "You already see enough map value and need a real attack upgrade instead.",
+  },
+  {
+    evolution: "Leech",
+    role: "Ability sustain attack",
+    priority: "A in Ability, B elsewhere",
+    takeWhen:
+      "You are stacking Ability, poison, Cortex, cooldown, or need healing attached to your damage button.",
+    skipWhen:
+      "You are a pure Physical build and taking Leech would split your scaling too early.",
+  },
+  {
+    evolution: "Stinger",
+    role: "Poison attack core",
+    priority: "S in poison, B elsewhere",
+    takeWhen:
+      "You have Ability, poison support, cooldown help, or sustain that lets poison ticks do real work.",
+    skipWhen:
+      "You cannot safely land short-range attacks or your build is already committed to pure Physical.",
+  },
+  {
+    evolution: "Cortex",
+    role: "Ability damage scaling",
+    priority: "S if Ability carries",
+    takeWhen:
+      "Your main damage is Leech, Stinger, Spit, poison, or another Ability-scaling attack.",
+    skipWhen:
+      "Your main attack is Physical and you need HP, movement, or defense more urgently.",
+  },
+  {
+    evolution: "Dextrous",
+    role: "Cooldown / Ability tempo",
+    priority: "A in skill builds",
+    takeWhen:
+      "Your damage is good but your attacks come out too slowly, especially on poison or Ability routes.",
+    skipWhen:
+      "You do not yet have a good skill worth reducing cooldown for.",
+  },
+  {
+    evolution: "Body Slam",
+    role: "HP-scaling Physical tank core",
+    priority: "S with HP, B before HP",
+    takeWhen:
+      "You already have Max HP, Chunky, More Mass, Shell, Plating, or a big-body route.",
+    skipWhen:
+      "You are fragile, small, low-HP, or trying to play at range. At Pressure 6+, also check whether the starting biome punishes close-range play.",
+  },
+  {
+    evolution: "Chunky",
+    role: "Size / Max HP / Physical setup",
+    priority: "A",
+    takeWhen:
+      "Your run is moving toward big-body, Body Slam, Imposing, or Physical scaling.",
+    skipWhen:
+      "Your speed is already too low and you have no movement correction.",
+  },
+  {
+    evolution: "More Mass",
+    role: "Size route / Physical setup",
+    priority: "A",
+    takeWhen:
+      "You need size, attack area, HP support, or a foundation for Body Slam and big Physical.",
+    skipWhen:
+      "You are relying on dodge, mobility, or small-body safety and cannot afford to become slower.",
+  },
+  {
+    evolution: "Muscular Tissue",
+    role: "Physical damage scaling",
+    priority: "A in Physical",
+    takeWhen:
+      "Your main attack is Jaws, Horns, Arms, Body Slam, Leap impact, or another Physical tool.",
+    skipWhen:
+      "Your main damage is poison / Ability and Physical is not solving the current fight.",
+  },
+  {
+    evolution: "Jaws",
+    role: "Predator attack / food engine",
+    priority: "A in Predator",
+    takeWhen:
+      "You can finish enemies with Jaws, want meat progress, and are building Predator / Carnivore / Physical.",
+    skipWhen:
+      "You cannot reliably secure kills or need safer range, movement, or defense first.",
+  },
+  {
+    evolution: "Carnivore",
+    role: "Meat progress / Predator route",
+    priority: "A",
+    takeWhen:
+      "Your run gets most food from kills, boss drops, alphas, or Jaws finishing routes.",
+    skipWhen:
+      "You are deliberately building Vegan / Prey-style food plans or cannot kill reliably.",
+  },
+  {
+    evolution: "Horns",
+    role: "Physical dash / boss contact damage",
+    priority: "A",
+    takeWhen:
+      "You need a simple Physical attack that also helps you engage enemies.",
+    skipWhen:
+      "You are already too contact-heavy and lack HP or defensive layers.",
+  },
+  {
+    evolution: "Arms",
+    role: "Physical / Ability flexibility and reach routes",
+    priority: "A flexible",
+    takeWhen:
+      "You want a route that can support Pinchers, physical tools, feeding distance, or hybrid pivots.",
+    skipWhen:
+      "The speed loss or branch direction would hurt your current plan.",
+  },
+  {
+    evolution: "Legs",
+    role: "Speed / movement branch",
+    priority: "S if slow",
+    takeWhen:
+      "You cannot catch enemies, escape bosses, cross terrain, or reach POIs in time.",
+    skipWhen:
+      "You already have enough movement and urgently need damage or sustain.",
+  },
+  {
+    evolution: "Wings",
+    role: "Terrain adaptation / speed",
+    priority: "A, S at Pressure 6+ starts",
+    takeWhen:
+      "Bad terrain is costing you fights or you need safer movement through desert, water, snow, or boss zones.",
+    skipWhen:
+      "You are already mobile and need a real combat upgrade.",
+  },
+  {
+    evolution: "Leap",
+    role: "Mobility / size-physical impact",
+    priority: "A in size routes",
+    takeWhen:
+      "You have size and Physical scaling or need to jump over enemies and obstacles.",
+    skipWhen:
+      "Replacing your current movement tool would make the build less controllable.",
+  },
+  {
+    evolution: "Slithery",
+    role: "Speed / terrain adaptation",
+    priority: "A",
+    takeWhen:
+      "Your build needs smoother terrain movement without committing to a big-body branch.",
+    skipWhen:
+      "You are already solving terrain and need boss damage.",
+  },
+  {
+    evolution: "Plating",
+    role: "Damage mitigation",
+    priority: "B early, A if tanking",
+    takeWhen:
+      "You are taking contact damage, building Body Slam, or preparing for boss mistakes.",
+    skipWhen:
+      "Your problem is low damage, low food tempo, or inability to catch enemies.",
+  },
+  {
+    evolution: "Shell",
+    role: "Defensive safety",
+    priority: "A before danger",
+    takeWhen:
+      "You need a simple defensive layer before a boss or while learning a new build.",
+    skipWhen:
+      "You are safe but underbuilt offensively.",
+  },
+  {
+    evolution: "Regeneration / Regenerative Tissue",
+    role: "Sustain",
+    priority: "A, often S at Pressure 10+",
+    takeWhen:
+      "Your build survives long fights but loses to chip damage, poison, or repeated small hits.",
+    skipWhen:
+      "You are getting one-shot or cannot deal enough damage to end fights.",
+  },
+  {
+    evolution: "Immune System",
+    role: "Poison resistance / poison route safety",
+    priority: "A, often S at Pressure 10+",
+    takeWhen:
+      "You are eating mushrooms, using poison routes, or taking poison chip too often.",
+    skipWhen:
+      "Poison is not currently a threat and you need direct scaling.",
+  },
+  {
+    evolution: "Spines",
+    role: "Reflect / contact punishment",
+    priority: "A with survival, C alone",
+    takeWhen:
+      "You already have HP, Shell, Plating, Revenge, dodge, or poison contact support.",
+    skipWhen:
+      "You would die from the same contact you are trying to punish.",
+  },
+  {
+    evolution: "Poisonous",
+    role: "Contact poison",
+    priority: "A in reflect poison",
+    takeWhen:
+      "Your build can survive contact and has Ability scaling or poison synergies.",
+    skipWhen:
+      "You have no defensive layer and no way to keep poison ticking safely.",
+  },
+  {
+    evolution: "Detachable",
+    role: "Dodge-triggered Spines",
+    priority: "A in dodge reflect",
+    takeWhen:
+      "You already have Spines, dodge, movement, or Poisonous and want defense to become offense.",
+    skipWhen:
+      "You have no reflect core or rarely dodge successfully.",
+  },
+  {
+    evolution: "Revenge",
+    role: "Hit-taking damage buff",
+    priority: "A in tank, C in fragile",
+    takeWhen:
+      "You can survive hits and want them to fuel Physical or Ability damage.",
+    skipWhen:
+      "Getting hit is currently lethal or your build should avoid contact entirely.",
+  },
+  {
+    evolution: "Tail / Tail Wag",
+    role: "Charm / social setup",
+    priority: "B flexible, A in Social",
+    takeWhen:
+      "You see early charm, ally, Social, or pack-damage support.",
+    skipWhen:
+      "You have no backup boss attack and the social route is not yet online.",
+  },
+  {
+    evolution: "Antennae",
+    role: "Senses / social support",
+    priority: "B to A",
+    takeWhen:
+      "You need senses, POI value, or are already leaning into Gregarious / Social support.",
+    skipWhen:
+      "It would be a random support pick with no route behind it.",
+  },
+  {
+    evolution: "Beak",
+    role: "Feeding speed / mouth route / poison setup",
+    priority: "B to A",
+    takeWhen:
+      "You need feeding speed or are preparing for spit / poison / mouth-based routing.",
+    skipWhen:
+      "You already have a better main attack and do not need more food tempo.",
+  },
+  {
+    evolution: "Fungoid",
+    role: "Mushroom / poison economy",
+    priority: "Situational",
+    takeWhen:
+      "You are intentionally building mushroom, poison resistance, Forager, or poison-food synergies.",
+    skipWhen:
+      "You cannot identify or survive mushroom outcomes consistently.",
+  },
+  {
+    evolution: "Sharpen",
+    role: "Predator burst window",
+    priority: "A in Predator",
+    takeWhen:
+      "You have enough Predator affinity and contact attacks to convert the buff into real burst.",
+    skipWhen:
+      "Your Predator affinity is low or you forget to use Q-style active tools.",
+  },
+];
+
+export const routeColumns = [
+  { key: "route", label: "Route" },
+  { key: "commitSignal", label: "Commit Signal" },
+  { key: "pivotSignal", label: "Pivot Signal" },
+];
+
+export const routeRows = [
+  {
+    route: "Beginner Safe Scaling",
+    commitSignal:
+      "Cheek Pouch, Saliva, Shell, Legs, More Eyes, or Scavenger appear early and your food tempo improves.",
+    pivotSignal:
+      "You keep taking food tools but still do not have a boss-ready attack.",
+  },
+  {
+    route: "Poison / Ability",
+    commitSignal:
+      "Stinger, Leech, Cortex, Dextrous, poison support, or sustain appear together.",
+    pivotSignal:
+      "You cannot land poison safely or your Ability scaling never appears.",
+  },
+  {
+    route: "Chonky / Body Slam",
+    commitSignal:
+      "HP, size, Plating, Shell, Chunky, More Mass, and Body Slam start lining up.",
+    pivotSignal:
+      "You are getting bigger but not tankier, or terrain is killing your movement.",
+  },
+  {
+    route: "Predator / Jaws",
+    commitSignal:
+      "Jaws, Carnivore, Muscular Tissue, Sharpen, and movement let you secure kills.",
+    pivotSignal:
+      "Enemies escape before you can finish them or you lack defenses for boss contact.",
+  },
+  {
+    route: "POI Level Farming",
+    commitSignal:
+      "More Eyes, movement, terrain adaptation, and POI rewards start giving repeated level spikes.",
+    pivotSignal:
+      "You are chasing question marks through lethal terrain without a combat plan.",
+  },
+  {
+    route: "Reflect / Spines Poison",
+    commitSignal:
+      "Spines, Poisonous, Detachable, HP, Plating, Shell, Revenge, or Regeneration appear together.",
+    pivotSignal:
+      "Your reflect pieces appear before HP, defense, or recovery.",
+  },
+];
+
+export const pressureColumns = [
+  { key: "pressure", label: "Pressure Range" },
+  { key: "whatChanges", label: "What Changes" },
+  { key: "evolutionImpact", label: "Evolution Impact" },
+];
+
+export const pressureRows = [
+  {
+    pressure: "Pressure 1-5",
+    whatChanges:
+      "Most runs still reward early food tempo and simple scaling.",
+    evolutionImpact:
+      "Cheek Pouch, Saliva, Scavenger, one reliable attack, and basic movement are usually enough to snowball.",
+  },
+  {
+    pressure: "Pressure 6+",
+    whatChanges:
+      "Random biome starts and harsher terrain make movement and adaptation much more important.",
+    evolutionImpact:
+      "Wings, Legs, Slithery, Leap, terrain adaptation, and safer food routing rise in value. Recheck any slow big-body pick.",
+  },
+  {
+    pressure: "Pressure 10+",
+    whatChanges:
+      "Chip damage, poison, boss mistakes, and bad pivots become much more punishing.",
+    evolutionImpact:
+      "Immune System, Regenerative Tissue, Shell, Plating, sustain, and tested build routes become more valuable than greedy damage.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterPick", label: "Better Picker Rule" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Picking the rarest card every time",
+    whyItHurts:
+      "Rarity does not matter if the evolution scales the wrong stat or solves the wrong problem.",
+    betterPick:
+      "Choose the evolution that supports your current damage stat, food plan, survival need, or next boss checkpoint.",
+  },
+  {
+    mistake: "Splitting Physical and Ability too early",
+    whyItHurts:
+      "A Physical build with random Ability attacks often reaches bosses with no clear damage plan.",
+    betterPick:
+      "Only split stats when the attack or route rewards it. Otherwise, support one main damage type first.",
+  },
+  {
+    mistake: "Forcing Body Slam before HP",
+    whyItHurts:
+      "Body Slam wants Max HP. Without bulk, it is just another risky close-range attack.",
+    betterPick:
+      "Take HP, Mass, Shell, Plating, or Chunky first, then make Body Slam the payoff.",
+  },
+  {
+    mistake: "Building poison without application safety",
+    whyItHurts:
+      "Poison needs time. If you cannot survive or reach enemies, the ticks do not matter.",
+    betterPick:
+      "Pair Stinger / Poison Spores with Ability, healing, cooldown, range, movement, or poison resistance.",
+  },
+  {
+    mistake: "Ignoring movement on big builds",
+    whyItHurts:
+      "Big bodies can hit hard but still lose to terrain, fast enemies, and boss positioning.",
+    betterPick:
+      "Take Legs, Wings, Leap, Slithery, or terrain adaptation before size becomes a liability.",
+  },
+  {
+    mistake: "Treating support stats as a build",
+    whyItHurts:
+      "Senses, Social, feeding distance, and food tools are strong only when they lead to damage, levels, or survival.",
+    betterPick:
+      "Use support picks to unlock or stabilize a route, not as a substitute for one.",
+  },
+];
+
+export const imagePlan = [
+  {
+    fileName: "everything-is-crab-evolution-picker-cheek-pouch-choice.webp",
+    sourceFile: "I Became An IMMORTAL Poison Crab That MELTS Bosses! - Everything is Crab .txt",
+    timestamp: "09:18-09:35",
+    use: "Opening image / food economy and safe scaling",
+  },
+  {
+    fileName: "everything-is-crab-evolution-picker-poison-stinger-cortex.webp",
+    sourceFile: "I evolved this crazy crustacean .txt",
+    timestamp: "04:51-05:25",
+    use: "Poison / Ability route section",
+  },
+  {
+    fileName: "everything-is-crab-evolution-picker-poison-boss-sustain.webp",
+    sourceFile: "I evolved this crazy crustacean .txt",
+    timestamp: "06:21-07:02",
+    use: "Poison boss sustain example",
+  },
+  {
+    fileName: "everything-is-crab-evolution-picker-body-slam-jaws.webp",
+    sourceFile: "I think we found a cheat code to getting a LOT of levels. | Everything is Crab .txt",
+    timestamp: "05:12-06:00",
+    use: "Body Slam / Predator decision section",
+  },
+  {
+    fileName: "everything-is-crab-evolution-picker-poi-level-farming.webp",
+    sourceFile: "I think we found a cheat code to getting a LOT of levels. | Everything is Crab .txt",
+    timestamp: "22:04-22:12",
+    use: "POI level farming section",
+  },
+  {
+    fileName: "everything-is-crab-evolution-picker-late-game-level-133.webp",
+    sourceFile: "I think we found a cheat code to getting a LOT of levels. | Everything is Crab .txt",
+    timestamp: "38:54-39:16",
+    use: "Late-game POI scaling / FAQ image",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**This Everything Is Crab Evolution Picker covers the major evolution decisions across all 5 affinities: Predator, Prey, Gregarious, Imposing, and Trickster.**
+
+Use it when the game offers three evolutions and you are not sure which one actually helps your run. For a first clear, prioritize **Cheek Pouch, Saliva, Shell, Legs, More Eyes, and one simple attack**. For poison, build around **Stinger, Leech, Cortex, Dextrous, Poison Spores, and Immune System**. For big Physical routes, look for **Body Slam, Chunky, More Mass, Muscular Tissue, Jaws, Horns, Plating, and Shell**. For level farming, value **More Eyes, movement, terrain adaptation, and Points of Interest rewards**.
+
+Use this rule:
+
+**Do not pick the rarest evolution. Pick the evolution that solves your current run problem: damage, food, movement, survival, scaling, or boss readiness.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-evolution-picker-cheek-pouch-choice.webp"
+    alt="Player choosing Cheek Pouch as an early food economy evolution in Everything Is Crab."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Good evolution choices are not just about power. They are about what your current run is missing.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="how-to-use-this-picker">
+  How to use this Evolution Picker
+</h2>
+
+Most bad evolution choices happen because the player asks the wrong question.
+
+Do not ask, **"Which evolution is strongest?"** Ask:
+
+1. **What is killing this run right now?**
+2. **Which stat does my main attack scale with?**
+3. **Do I have enough food tempo to reach the next boss?**
+4. **Can I move through the next biome safely?**
+5. **Am I building toward a real route, or just taking good-looking pieces?**
+
+This guide is built around that player decision. A raw data table can tell you what an evolution does. This picker tells you when to take it, when to skip it, and which build actually wants it.
+
+<GuideCallout title="Picker rule">
+If two evolutions look good, pick the one that fixes your weakest checkpoint before the next boss. Damage, movement, food, and defense all matter, but not at the same time.
+</GuideCallout>
+
+Use the <Link href="/everything-is-crab/best-builds">Best Builds guide</Link> if you already know your route and want a full build plan. Use the <Link href="/everything-is-crab">Everything Is Crab guide</Link> if you need the main beginner hub first.
+
+<AdUnit placement="article_after_first_h2" />
+
+---
+
+
+<h2 id="affinity-drift">
+  Why you keep getting the same type of evolutions
+</h2>
+
+If you keep seeing the same family of evolutions, it is usually not a bug. It is **affinity drift**.
+
+Every time you pick an evolution tied to an affinity, your build is pushed further toward that affinity. After two or three picks in the same direction, that affinity starts showing up more often in your evolution pool. For example, if you keep taking Gregarious tools like Tail Wag, Social, Antennae, or charm support, you should expect more social-style evolutions to appear.
+
+<GuideCallout title="Affinity drift rule">
+Affinity is not just flavor text. It nudges the future evolution pool. Consecutive Predator picks make Predator-style options more common; consecutive Gregarious picks make social options more common; consecutive Imposing picks make size and tank options more common.
+</GuideCallout>
+
+This is why the first few picks matter so much. Your early choices do not only help the current level-up; they influence what the game is likely to offer next.
+
+---
+
+<h2 id="branching-evolutions">
+  Branching Evolutions vs normal evolutions
+</h2>
+
+Branching Evolutions are not the same as normal level-up evolutions.
+
+Normal evolutions appear from the regular level-up pool. Branching Evolutions are route-shaping choices that appear from boss reward moments and major branch points. That means you cannot always force them by rerolling normal level-ups. You prepare for them by pushing your build toward the route that wants that branch.
+
+<GuideCallout title="Branching rule">
+Plan your build before the Branching Evolution appears. If your route wants Body Slam, big-body tools, Arms, Legs, Wings, or other branch payoffs, your earlier picks should already support that direction.
+</GuideCallout>
+
+This matters because some evolutions are build-around pieces only when the rest of the route is ready. Body Slam is much better after HP and size support. Wings are much better when terrain is costing you the run. Arms are stronger when your build can use the physical, ability, or reach tools that follow.
+
+---
+
+<h2 id="best-evolutions-by-goal">
+  Best evolutions by goal
+</h2>
+
+Start here if you are in the middle of a run. Find the problem your crab has, then choose the evolution that solves it.
+
+<GuideTable
+  caption="Best Everything Is Crab evolutions by run goal."
+  columns={goalColumns}
+  rows={goalRows}
+/>
+
+
+---
+
+<h2 id="pressure-adaptation">
+  How Pressure changes evolution priority
+</h2>
+
+The same evolution can be correct at Pressure 2 and greedy at Pressure 10. Use this table before treating any tier list as universal.
+
+<GuideTable
+  caption="How Pressure changes evolution value in Everything Is Crab."
+  columns={pressureColumns}
+  rows={pressureRows}
+/>
+
+<GuideCallout title="Pressure rule">
+At low Pressure, food tempo can snowball. At Pressure 6+, terrain and random starts make movement more valuable. At Pressure 10+, sustain, poison resistance, and tested build routes matter more than greedy scaling.
+</GuideCallout>
+
+Use <Link href="/everything-is-crab/selective-pressure-guide">Selective Pressure Guide</Link> for the full high-difficulty breakdown.
+
+---
+
+<h2 id="full-evolution-picker-table">
+  Evolution Picker table
+</h2>
+
+This table is the decision layer. It should not try to reproduce every raw data row from another guide. Keep raw names, affinities, and tooltip values in your own verified database or internal notes, then show the evolutions that actually change player decisions.
+
+<GuideCallout title="Data note">
+This picker focuses on decisions, not raw tooltips. For exact values like cooldowns, capacity, damage multipliers, affinity points, or max levels, check the in-game Codex because numbers can change with updates.
+</GuideCallout>
+
+<GuideTable
+  caption="Everything Is Crab evolution picker notes for decision-making evolutions."
+  columns={pickerColumns}
+  rows={pickerRows}
+/>
+
+---
+
+<h2 id="best-poison-evolutions">
+  Best poison and Ability evolutions
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-evolution-picker-poison-stinger-cortex.webp"
+    alt="Player choosing Stinger and Cortex while building a poison Ability route in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Poison builds need more than poison. They need Ability scaling, cooldown help, application safety, and sustain.
+  </figcaption>
+</figure>
+
+Poison builds become strong when several small pieces point in the same direction.
+
+The core pieces are:
+
+**Stinger → Leech → Cortex → Dextrous → Poison Spores → Immune System → movement or Reach.**
+
+Stinger gives the route its poison identity. Leech gives close-range sustain. Cortex makes Ability-scaling attacks hit harder. Dextrous helps the build apply damage more often. Immune System and poison resistance keep mushroom and poison-heavy routes from turning against you.
+
+The biggest poison mistake is taking poison without a way to safely apply it. If your Stinger is short range and your build has no HP, no mobility, no cooldown, and no healing, the poison plan is not online yet.
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-evolution-picker-poison-boss-sustain.webp"
+    alt="Poison and healing carrying a boss fight in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Poison is best when you can keep moving, keep applying ticks, and survive long enough for the boss to melt.
+  </figcaption>
+</figure>
+
+Pick poison when your run already has at least two of these signals:
+
+- Ability scaling is showing up.
+- You have Leech or another sustain tool.
+- You have cooldown reduction.
+- You can apply poison without taking lethal contact damage.
+- You have movement, Reach, or terrain adaptation.
+- You are seeing mushroom / poison support.
+
+If only one poison piece appears, treat it as a side pick until the route proves itself.
+
+---
+
+<h2 id="best-chonky-physical-evolutions">
+  Best Chonky, Body Slam, and Physical evolutions
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-evolution-picker-body-slam-jaws.webp"
+    alt="Player choosing Body Slam and Jaws while building a big Physical route in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Body Slam, Jaws, More Mass, and Chunky are strongest when your run already wants size, HP, and Physical damage.
+  </figcaption>
+</figure>
+
+Big Physical is the easiest route to understand: get larger, hit harder, and add enough movement that your size does not trap you.
+
+The core pieces are:
+
+**More Mass / Chunky → one Physical attack → Muscular Tissue → HP → Plating / Shell → movement → Body Slam if HP is high.**
+
+Body Slam is the clearest payoff. It is not just a random close-range attack; it becomes a route when Max HP, size, defense, and Physical damage are already appearing. If you take Body Slam before HP support, it can feel underwhelming. If you take it after HP and size are online, it can become your main damage plan.
+
+Jaws is different. Jaws can be used as a Predator food engine, especially when you can finish enemies and convert kills into meat progress. The best Predator runs combine kill power with movement so enemies do not simply run away from your giant body.
+
+<GuideCallout title="Big body rule">
+Size is not enough. The bigger you become, the earlier you should ask whether you still have speed, terrain adaptation, or a way to reach food safely.
+</GuideCallout>
+
+<AdUnit placement="article_middle" />
+---
+
+<h2 id="best-predator-evolutions">
+  Best Predator evolutions
+</h2>
+
+Predator evolutions reward aggression, Physical damage, meat progress, and contact attacks. They are best when your run can actually secure kills.
+
+Prioritize:
+
+- **Jaws** when you can finish enemies and use meat drops.
+- **Carnivore** when meat is your main food source.
+- **Muscular Tissue** when your main attacks are Physical.
+- **Sharpen** when you have enough Predator affinity and contact attacks to make the active buff matter.
+- **Legs / Wings** when your prey keeps escaping.
+
+Predator routes fail when they are too slow. If you cannot catch enemies, Jaws and Carnivore lose value. Take movement before greed if the map is outrunning you.
+
+---
+
+<h2 id="best-mobility-poi-evolutions">
+  Best food, movement, and POI evolutions
+</h2>
+
+This is where the old beginner and food economy sections merge. Food tools and movement tools are not separate early-game ideas; together, they decide how fast you reach the next build checkpoint.
+
+Prioritize:
+
+- **Cheek Pouch** for moving while food continues to convert.
+- **Saliva** when feeding speed is the bottleneck.
+- **Scavenger** when enemies or bosses leave meat you can safely steal.
+- **Legs / Wings / Slithery / Leap** when terrain or enemy speed is the bottleneck.
+- **More Eyes** when POIs, alphas, and map awareness are the bottleneck.
+- **Jaws / Carnivore** when kills are your food engine.
+
+Do not stay in food economy forever. Food tools create more evolution choices; they do not replace damage. Once your food loop is stable, convert that advantage into a real attack route.
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-evolution-picker-poi-level-farming.webp"
+    alt="Player gaining a large amount of progress from a Point of Interest in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Points of Interest can become a level engine when your build has enough movement and senses to reach them safely.
+  </figcaption>
+</figure>
+
+POI farming wants:
+
+**More Eyes / senses → movement → terrain adaptation → POI progress rewards → enough defense to survive detours.**
+
+<figure className="my-8">
+  <Image
+    src="/images/everything-is-crab/everything-is-crab-evolution-picker-late-game-level-133.webp"
+    alt="Late-game run reaching very high levels after heavy Point of Interest farming in Everything Is Crab."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    POI farming is strongest when it feeds an actual build, not when it replaces combat planning.
+  </figcaption>
+</figure>
+
+Use <Link href="/everything-is-crab/points-of-interest">Points of Interest Guide</Link> once that spoke is live.
+
+---
+
+<h2 id="best-reflect-spines-evolutions">
+  Best Spines, reflect, and contact poison evolutions
+</h2>
+
+Spines-style builds are powerful only when they reverse enemy pressure. The route is not "let enemies hit you." The route is "survive contact, then make contact expensive."
+
+The core pieces are:
+
+**Spines → HP / Plating / Shell → Poisonous or Detachable → Revenge → Regeneration → movement or dodge.**
+
+Use Spines when your build already has a survival plan. Add Poisonous when Ability and poison contact matter. Add Detachable when dodge is frequent enough to become a damage trigger.
+
+Skip Spines as a main plan if you have no HP, no defense, and no recovery. Reflect damage does not help if the contact kills you first.
+
+---
+
+<h2 id="build-routes-from-evolutions">
+  Build routes from evolution choices
+</h2>
+
+A good run usually does not begin with a perfect build. It begins with two or three evolution choices that suggest a direction.
+
+<GuideTable
+  caption="When to commit to or pivot away from an evolution route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+<GuideCallout title="Commit rule">
+Evolutions 1-3 suggest a route. Evolutions 4-6 confirm it. If the route is not confirmed before the first boss, stop forcing it and pivot to what the game is offering.
+</GuideCallout>
+
+For full route plans, use <Link href="/everything-is-crab/best-builds">Best Builds</Link>. This page only keeps the commit and pivot signals so the picker does not duplicate the build guide.
+
+---
+
+<h2 id="affinity-picker-notes">
+  Affinity picker notes
+</h2>
+
+Use affinity as a direction signal, not as a prison. A build can take off-route evolutions when they solve an immediate problem, but your main scaling should still make sense.
+
+### Predator
+
+Predator is best for Physical damage, aggression, meat progress, Jaws, Carnivore, and contact attacks. Each Predator pick makes future Predator-style options more likely, so do not chain Predator picks unless you are ready to commit to kills and meat progress.
+
+### Prey
+
+Prey is usually safer, more defensive, or more food-oriented. Consecutive Prey picks push the pool toward survival, food, and lower-risk routes. That is useful if you are under pressure, but it can leave you short on boss damage if you never pivot.
+
+### Imposing
+
+Imposing supports size, HP, mitigation, Body Slam, Plating, Shell, and big-body routes. Each Imposing pick makes the run more likely to keep offering tank and size tools. Take movement early so the route does not become too slow.
+
+### Trickster
+
+Trickster is best when your run wants dodge, cooldown, Ability tools, evasive play, or unusual routes like poison / leech / dexterity setups. Multiple Trickster picks can pull the pool toward skill tempo, but the build still needs a safe way to apply damage.
+
+### Gregarious
+
+Gregarious supports senses, social effects, charm, allies, and map awareness. Consecutive Gregarious picks can explain why you keep seeing social and charm options. It can be strong, but it needs a backup boss plan.
+
+---
+
+<h2 id="common-picker-mistakes">
+  Common evolution picker mistakes
+</h2>
+
+<GuideTable
+  caption="Common Everything Is Crab evolution picker mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What are the best evolutions in Everything Is Crab?
+
+The best general evolutions are usually Cheek Pouch, Saliva, Legs, Shell, More Eyes, and one reliable attack for beginners. For specific routes, Stinger and Leech are better for poison / Ability, while Body Slam, Chunky, More Mass, Jaws, and Muscular Tissue are better for big Physical builds.
+
+### Does this cover all evolutions?
+
+This picker covers the major evolution decisions across the game's 5 affinities and the evolutions most likely to change your build. It is not trying to clone a raw 125+ row data table. Instead, it organizes the important picks by route, priority, take condition, and skip condition.
+
+### Why do I keep getting the same evolutions?
+
+You are probably seeing affinity drift. When you keep choosing evolutions from the same affinity, that affinity becomes more likely to appear in future evolution choices. If you keep taking Gregarious or Social tools, expect more charm, ally, and senses options.
+
+### What is affinity drift?
+
+Affinity drift is the way your early picks push the future evolution pool. Predator picks pull you toward aggression and meat routes. Imposing picks pull you toward size and tank routes. Gregarious picks pull you toward social and senses routes.
+
+### What are Branching Evolutions?
+
+Branching Evolutions are route-shaping choices that appear from boss reward moments and major branch points, not just from normal level-up rolls. Plan for them by building the stats and route that make the branch useful.
+
+### How many attacks can you have at once?
+
+Plan your loadout around limited slots: usually two normal attacks, one Ultimate-style ability, and one Movement tool. If a new evolution replaces a slot, make sure it improves your actual build instead of breaking your current damage or movement plan.
+
+### What is the max evolution level?
+
+Not every evolution scales the same way. Some evolutions have multiple levels and become build-defining only after upgrades, while others are one-time tools or branch choices. Check the tooltip before spending mutagen or reroll value on an upgrade.
+
+### Should I always pick the highest rarity evolution?
+
+No. Rarity helps, but the best pick is the one that solves your current problem. A rare off-route evolution can be worse than a common evolution that gives your build food, movement, defense, or the correct damage stat.
+
+### Is Cheek Pouch good?
+
+Yes. Cheek Pouch is one of the safest early picks because it improves food tempo. It helps you keep moving while food continues to convert into progress.
+
+### Is Stinger good?
+
+Stinger is excellent when you are building poison, Ability damage, cooldown, or sustain. It is weaker when your build cannot safely land short-range attacks or when you are already committed to pure Physical.
+
+### Is Leech good?
+
+Leech is good in Ability and sustain routes because it deals Ability damage and helps you heal through fights. It is less valuable in pure Physical builds unless you have enough Ability support.
+
+### Is Body Slam good?
+
+Body Slam is good when you already have Max HP, size, Shell, Plating, Chunky, or More Mass. Do not force it before your build has enough bulk.
+
+### Is Jaws good?
+
+Jaws is good in Predator routes because it supports Physical damage and meat-based progress. It is best when you can use it to finish enemies reliably.
+
+### Are Points of Interest worth chasing?
+
+Yes, if your build has movement, senses, and enough safety to reach them. POIs can give huge progress, but chasing them through lethal terrain can still lose the run.
+
+### When should I pivot evolutions?
+
+Pivot when your first plan does not appear by the first boss checkpoint. If you wanted poison but the game gives HP, Mass, and Body Slam, pivot to Body Slam. If you wanted big Physical but the game gives Leech, Cortex, and Dextrous, consider Ability instead.
+
+### What changes at higher Pressure?
+
+At Pressure 1-5, food tempo and simple scaling are usually enough. At Pressure 6+, random biome starts make movement and terrain adaptation more valuable. At Pressure 10+, sustain, poison resistance, and defensive consistency become much more important.
+
+### Should this be one page or many pages?
+
+Start with this one Evolution Picker page. Split into separate pages later only if Search Console shows meaningful impressions for specific routes like poison evolutions, Body Slam, Predator / Jaws, Branching Evolutions, or POI level farming.
+

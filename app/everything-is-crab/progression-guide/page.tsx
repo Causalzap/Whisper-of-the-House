@@ -277,6 +277,14 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
+              href: "/everything-is-crab/evolutions-list",
+              label: "Everything Is Crab Evolution Picker",
+            },
+            {
+              href: "/everything-is-crab/genetics-guide",
+              label: "Everything Is Crab Genetics Guide",
+            },  
+            {
               href: "/everything-is-crab",
               label: "Everything Is Crab Guide",
             },
