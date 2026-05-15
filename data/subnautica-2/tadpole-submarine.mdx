@@ -1,0 +1,538 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const fragmentColumns = [
+  { key: "fragment", label: "Fragment" },
+  { key: "location", label: "Location" },
+  { key: "route", label: "Route Clue" },
+  { key: "whatToWatch", label: "What To Watch For" },
+];
+
+export const fragmentRows = [
+  {
+    fragment: "Fragment #1",
+    location: "Blackbox Ruby route",
+    route:
+      "Follow the Ruby / black box progression route and scan near wreck debris around the Ruby section.",
+    whatToWatch:
+      "Bring extra oxygen and do not keep pushing deeper after the scan. This is a progression route, not a farming trip.",
+  },
+  {
+    fragment: "Fragment #2",
+    location: "Cicada wreck / colonist outpost route",
+    route:
+      "Move through the large arch route, then check the right-side colonist structure / outpost area.",
+    whatToWatch:
+      "This one is easy to miss because damaged structure pieces and scannables can blend together.",
+  },
+  {
+    fragment: "Fragment #3",
+    location: "Colonist Bunker route",
+    route:
+      "Head roughly 280m southwest from the Lifepod toward the Colonist Bunker entrance area.",
+    whatToWatch:
+      "Mark the route before entering. The bunker route can also reward extra progression, so do not rush in with bad oxygen.",
+  },
+];
+
+export const materialColumns = [
+  { key: "material", label: "Material" },
+  { key: "amount", label: "Amount" },
+  { key: "where", label: "Where To Get It" },
+  { key: "why", label: "Why You Need It" },
+];
+
+export const materialRows = [
+  {
+    material: "Titanium Ingot",
+    amount: "2",
+    where:
+      "Farm Titanium, then use the Processor / advanced material chain to turn it into Ingots.",
+    why:
+      "Main vehicle hull material.",
+  },
+  {
+    material: "Glass",
+    amount: "1",
+    where:
+      "Use Quartz from coral domes and shallow resource routes.",
+    why:
+      "Vehicle canopy / structural component.",
+  },
+  {
+    material: "System Chip",
+    amount: "1",
+    where:
+      "Use the Processor and electronics chain after your base crafting setup is working.",
+    why:
+      "Vehicle electronics.",
+  },
+  {
+    material: "Power Cell",
+    amount: "1",
+    where:
+      "Craft through the battery / silicone material route.",
+    why:
+      "The Tadpole's power source.",
+  },
+];
+
+export const constructionColumns = [
+  { key: "build", label: "Build" },
+  { key: "materials", label: "Materials" },
+  { key: "note", label: "Note" },
+];
+
+export const constructionRows = [
+  {
+    build: "Moonpool",
+    materials: "5x Titanium",
+    note:
+      "Needed for the vehicle construction path. Build it over deep enough water so the Tadpole Deck is not blocked.",
+  },
+  {
+    build: "Vehicle Fabricator",
+    materials: "Confirm in your current Early Access build",
+    note:
+      "Recipes can shift during Early Access. Check the build menu after Moonpool progress unlocks.",
+  },
+  {
+    build: "Tadpole",
+    materials: "2x Titanium Ingot, 1x Glass, 1x System Chip, 1x Power Cell",
+    note:
+      "This is the final vehicle craft after the fragment and Moonpool chain.",
+  },
+];
+
+export const buildChainColumns = [
+  { key: "step", label: "Step" },
+  { key: "unlock", label: "Unlock / Build" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const buildChainRows = [
+  {
+    step: "1",
+    unlock: "Scan 3 Tadpole Fragments",
+    why:
+      "The blueprint does not unlock from one scan. You need multiple fragment scans before building.",
+  },
+  {
+    step: "2",
+    unlock: "Build a powered base",
+    why:
+      "The Tadpole route depends on real base crafting, not just the Lifepod Fabricator.",
+  },
+  {
+    step: "3",
+    unlock: "Use the Processor chain",
+    why:
+      "Advanced materials such as Ingots and electronics become part of the vehicle path.",
+  },
+  {
+    step: "4",
+    unlock: "Build Moonpool / vehicle construction setup",
+    why:
+      "The Tadpole is not crafted directly from the basic Fabricator.",
+  },
+  {
+    step: "5",
+    unlock: "Craft Tadpole",
+    why:
+      "Once materials and vehicle construction are ready, the Tadpole becomes your first true submarine route tool.",
+  },
+];
+
+export const utilityColumns = [
+  { key: "feature", label: "Tadpole Feature" },
+  { key: "How To Use It", label: "How To Use It" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const utilityRows = [
+  {
+    feature: "Portable Locker mounts",
+    "How To Use It":
+      "Attach Portable Lockers to the rear hardpoint / attachment spots when available.",
+    "Why It Matters":
+      "Extra storage turns the Tadpole into a resource-run vehicle instead of only an oxygen shelter.",
+  },
+  {
+    feature: "Power Cell management",
+    "How To Use It":
+      "Carry or prepare spare power and recharge old cells at a Power Cell Terminal when your base setup supports it.",
+    "Why It Matters":
+      "A powerless vehicle deep in a route becomes a liability.",
+  },
+  {
+    feature: "Oxygen relay",
+    "How To Use It":
+      "Park the Tadpole between a base, outpost, or deep entry point so you can reset oxygen during long dives.",
+    "Why It Matters":
+      "The Tadpole makes dangerous routes repeatable, but only if parked where it helps your return path.",
+  },
+  {
+    feature: "Repair Tool support",
+    "How To Use It":
+      "Unlock and bring the Repair Tool before serious predator or deep routes.",
+    "Why It Matters":
+      "The Tadpole can take damage, and repairs matter more once you depend on it for oxygen and transport.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "upgrade", label: "Upgrade / System" },
+  { key: "Use", label: "Use" },
+  { key: "Priority", label: "Priority" },
+];
+
+export const upgradeRows = [
+  {
+    upgrade: "Scout Ray Chassis",
+    Use:
+      "Improves movement / handling path for faster or safer vehicle travel depending on build.",
+    Priority:
+      "Good once basic Tadpole use is stable.",
+  },
+  {
+    upgrade: "Cavitation Muffler",
+    Use:
+      "Helps reduce noise and makes cautious routes safer around threats.",
+    Priority:
+      "High if you are entering predator-heavy or Leviathan-adjacent routes.",
+  },
+  {
+    upgrade: "Crush depth upgrades",
+    Use:
+      "Increase how deep the Tadpole can safely go before pressure damage becomes a problem.",
+    Priority:
+      "High when progression pushes beyond your current safe depth.",
+  },
+  {
+    upgrade: "Storage / utility attachments",
+    Use:
+      "Turn the Tadpole into a better resource and logistics platform.",
+    Priority:
+      "High for long material routes and co-op runs.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To unlock the Tadpole in Subnautica 2, scan 3 Tadpole Fragments, then build it through the Moonpool / vehicle construction chain using 2x Titanium Ingot, 1x Glass, 1x System Chip, and 1x Power Cell.**
+
+The Tadpole is your first true submarine-style vehicle. It gives you safer oxygen routing, longer material runs, portable storage options, upgrade paths, and a better way to push toward deep routes. The big mistake is treating it as invincible: you still need power, repairs, safe parking, and depth awareness.
+</GuideQuickAnswer>
+
+<h2 id="tadpole-route-loop">
+  The Tadpole route loop you are building toward
+</h2>
+
+This guide is not only about unlocking the blueprint. The real value of the Tadpole is that it turns dangerous routes into repeatable routes.
+
+```text
+Base
+→ Tadpole parked near deep entry
+→ scan / gather route
+→ return to Tadpole for oxygen
+→ unload at base
+→ recharge / repair
+→ repeat with better upgrades
+```
+
+That loop is why Fragment locations, Moonpool placement, Portable Lockers, Power Cells, repairs, and crush depth all matter. If the Tadpole is parked badly, unpowered, or overloaded with rare materials, it stops being a safety tool and becomes another recovery problem.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-tadpole-fragment-ruby-wreck.webp"
+    alt="Subnautica 2 Tadpole Fragment near the Ruby black box wreck route."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Tadpole route starts with fragment scanning. Do not leave the wreck route after only one scan if your blueprint progress still needs more fragments.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="fragment-locations">
+  Tadpole Fragment locations
+</h2>
+
+You need **3 Tadpole Fragment scans** to unlock the Tadpole blueprint. Do not plan your route around finding only one piece.
+
+<GuideTable
+  caption="Subnautica 2 Tadpole Fragment locations and route clues."
+  columns={fragmentColumns}
+  rows={fragmentRows}
+/>
+
+<GuideCallout title="Fragment route rule">
+When you find one Tadpole Fragment, slow down and scan the surrounding structure. Vehicle fragments are usually placed as part of a route, not as isolated loot.
+</GuideCallout>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="fragment-1-ruby">
+  Fragment #1: Blackbox Ruby route
+</h2>
+
+The first useful Tadpole route is near the Ruby / black box progression area. Look around the wreck debris and nearby structure pieces instead of only following the objective marker.
+
+This is a good first fragment because it naturally connects to the midgame material path. The risk is that players push too deep after the scan and lose the route back.
+
+Take this approach:
+
+1. follow the Ruby / black box route,
+2. scan the Tadpole Fragment,
+3. check only the nearby debris,
+4. leave before oxygen becomes uncomfortable.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-tadpole-fragment-ruby-wreck.webp"
+    alt="Subnautica 2 first Tadpole Fragment near the Ruby black box route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fragment #1 is tied to the Ruby / black box route. Scan it, then leave cleanly unless your oxygen route is safe.
+  </figcaption>
+</figure>
+
+<h2 id="fragment-2-cicada">
+  Fragment #2: Cicada wreck / colonist outpost route
+</h2>
+
+The second route is the one many players miss. After moving through the large arch / wreck path, check the right-side colonist structure or outpost area. Damaged rooms, scannables, and wreck pieces can make the fragment easy to overlook.
+
+If you are making screenshots for this section, show the arch or entry approach first, then the fragment inside the colonist structure. A close-up scan prompt alone is less useful than a route screenshot.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-tadpole-fragment-cicada-outpost.webp"
+    alt="Subnautica 2 Tadpole Fragment inside the Cicada wreck colonist outpost route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fragment #2 is easy to miss because the colonist structure contains several damaged pieces and route distractions.
+  </figcaption>
+</figure>
+
+<h2 id="fragment-3-bunker">
+  Fragment #3: Colonist Bunker route
+</h2>
+
+The third route points toward the colonist bunker direction, roughly southwest from the Lifepod and far enough away that you should not treat it like a casual shallow swim.
+
+Before going:
+
+- bring a clear oxygen plan,
+- keep inventory space open,
+- mark the route if Beacons are unlocked,
+- avoid carrying rare materials you do not need for the scan.
+
+<GuideCallout title="Do not miss the bunker reward">
+The Colonist Bunker route can also include a Biobed unlock tied to inventory expansion progress. If you came all the way for Fragment #3, scan the room carefully before leaving.
+</GuideCallout>
+
+This is where your <Link href="/subnautica-2/navigation-guide">navigation habits</Link> matter. A fragment is not useful if you die trying to leave with it.
+
+<h2 id="materials">
+  Tadpole materials
+</h2>
+
+After the blueprint unlocks, your next blocker is usually materials. The Tadpole is not a random Fabricator recipe; it sits inside the base and vehicle construction chain.
+
+<GuideTable
+  caption="Subnautica 2 Tadpole crafting materials."
+  columns={materialColumns}
+  rows={materialRows}
+/>
+
+If one of these materials is not obvious yet, do not brute-force the Tadpole route. Go back through the <Link href="/subnautica-2/fully-functional-fabricator">Fully Functional Fabricator guide</Link> and make sure your Processor and powered-base chain are working.
+
+<GuideTable
+  caption="Moonpool and Tadpole construction checklist."
+  columns={constructionColumns}
+  rows={constructionRows}
+/>
+
+<h2 id="moonpool">
+  You need the Moonpool / vehicle construction chain
+</h2>
+
+You cannot craft the Tadpole directly from the Lifepod Fabricator or a basic starter setup. The vehicle route depends on a Moonpool-style construction chain and enough water space to place the vehicle systems.
+
+Use this progression chain:
+
+<GuideTable
+  caption="Tadpole build chain from fragments to vehicle construction."
+  columns={buildChainColumns}
+  rows={buildChainRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-tadpole-deck-blocked-depth.webp"
+    alt="Subnautica 2 Tadpole Deck blocked because the water below the Moonpool is too shallow."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the Tadpole Deck or Moonpool placement is blocked, move to deeper water and leave more space below the base.
+  </figcaption>
+</figure>
+
+The placement rule is simple: do not build the vehicle area too close to the seafloor. If the placement preview shows blocked, move the Moonpool / deck farther from terrain or build over deeper water.
+
+<h2 id="portable-lockers">
+  How to attach Portable Lockers to the Tadpole
+</h2>
+
+This is one of the best Tadpole tricks and many players miss it. The Tadpole has rear attachment points that can support Portable Lockers or other utility attachments depending on your current build and unlocks.
+
+Use Portable Lockers for planned material runs, not for permanent storage. They are strongest when the run has one clear purpose: Titanium, Quartz, Silver, Salt, base materials, or co-op drop-off.
+
+Label your route mentally:
+
+```text
+Tadpole storage = current run only
+Base storage = long-term materials
+Rare materials = return immediately
+```
+
+If you overload the vehicle with important materials, then park it badly or lose power, you turn your best tool into your biggest problem.
+
+<h2 id="power-cell">
+  Power Cell management
+</h2>
+
+The Tadpole runs on power. When the Power Cell drains, you need to swap or recharge instead of assuming the vehicle will always be ready.
+
+Good habits:
+
+- check power before leaving base,
+- keep a spare Power Cell when routes get longer,
+- recharge old cells at a Power Cell Terminal when your base supports it,
+- do not park your only vehicle deep with an almost-empty cell.
+
+For co-op, assign one player as the vehicle lead. That person checks power, storage, parking, and upgrades before the group leaves.
+
+<h2 id="repair-tool">
+  Bring the Repair Tool before dangerous routes
+</h2>
+
+The Repair Tool matters because the Tadpole can take damage. If you are pushing into predator routes, tight wreck routes, or deeper water, do not treat repairs as optional.
+
+Bring the Repair Tool when:
+
+- predators are nearby,
+- the route is deep enough that losing the Tadpole would strand you,
+- you are carrying important materials,
+- you are testing a new biome.
+
+If you do not have the Repair Tool yet, play the Tadpole conservatively. Use it as oxygen support and transport, not as armor.
+
+<h2 id="crush-depth">
+  Crush depth and deep route limits
+</h2>
+
+The Tadpole has a safe depth limit. If you push beyond its current crush depth, the vehicle can take pressure damage. Depth upgrades make the Tadpole more useful later, but the first version should be treated as an early-to-mid route vehicle, not a free pass to every biome.
+
+Before descending:
+
+- check the vehicle depth warning,
+- mark the entry route,
+- keep enough power to return,
+- leave before damage becomes a recovery problem.
+
+<h2 id="upgrades">
+  Tadpole upgrades to look for
+</h2>
+
+Once the Tadpole is built, upgrades become the next progression layer.
+
+<GuideTable
+  caption="Useful Tadpole upgrades and systems to watch for."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+You do not need every upgrade immediately. Prioritize based on the problem you actually have: depth, noise, storage, movement, or repair risk.
+
+<h2 id="how-to-use">
+  How to actually use the Tadpole well
+</h2>
+
+The Tadpole makes you safer, but only if you use it as a route tool.
+
+Use it for:
+
+- oxygen relay between base and deep entry,
+- material transport with Portable Lockers,
+- safe return point near wrecks,
+- co-op meeting point,
+- scouting before building a forward base.
+
+Avoid using it as armor, a junk drawer, or a reason to ignore crush depth. Keep the vehicle powered, repaired, and parked where it helps the return route.
+
+<h2 id="tadpole-pens">
+  What to do after building the Tadpole
+</h2>
+
+After building the Tadpole, your next goals are not just “go deeper.” Use the vehicle to open safer progression routes:
+
+- revisit fragment and wreck routes you skipped,
+- move materials for better base setup,
+- work toward Tadpole Pens / later route objectives,
+- build a forward outpost near a repeated deep entry,
+- start collecting upgrade materials.
+
+If you are still missing the base chain, go back to the <Link href="/subnautica-2/first-base-setup">First Base Setup guide</Link>. If you keep getting lost, use the <Link href="/subnautica-2/navigation-guide">Navigation Guide</Link> before pushing farther.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many Tadpole Fragments do I need?
+
+You need 3 Tadpole Fragment scans to unlock the Tadpole blueprint.
+
+### Can I build the Tadpole without a Moonpool?
+
+No. The Tadpole belongs to the vehicle construction chain, so you need the Moonpool / vehicle setup rather than only the Lifepod Fabricator.
+
+### What materials do I need for the Tadpole?
+
+The current recipe is 2x Titanium Ingot, 1x Glass, 1x System Chip, and 1x Power Cell.
+
+### Can teammates use my Tadpole in co-op?
+
+Yes. Treat the Tadpole as a shared vehicle in co-op. Agree on where it is parked and what materials are inside.
+
+### Can I attach storage to the Tadpole?
+
+Yes, the Tadpole can support utility attachments such as Portable Lockers through rear attachment points when available.
+
+### What happens if the Tadpole exceeds crush depth?
+
+The vehicle can take pressure damage if it goes beyond its safe depth. Upgrade depth before treating the Tadpole as a deep-biome vehicle.
+
+### How do I recharge the Tadpole Power Cell?
+
+Swap in a charged Power Cell or recharge drained cells through your base power / Power Cell Terminal setup when available.
+
+### Do I need the Repair Tool?
+
+Yes, if you plan to use the Tadpole in predator routes or deeper areas. It is your main way to recover from vehicle damage.

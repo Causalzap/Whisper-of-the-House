@@ -12,6 +12,46 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+    {
+      href: "/subnautica-2",
+      game: "Subnautica 2",
+      title: "Complete Guide Hub",
+      description:
+        "Start here for the first route, tools, Welcome Center, Digestion, resources, base setup, Tadpole, co-op, navigation, and Leviathan survival.",
+      tagClass: "text-cyan-500",
+      hoverBorderClass: "hover:border-cyan-300",
+      hoverTitleClass: "group-hover:text-cyan-700",
+    },
+    {
+      href: "/subnautica-2/what-to-do-first",
+      game: "Subnautica 2",
+      title: "What to Do First Guide",
+      description:
+        "A safe first two-hour route: craft core tools, reach the Welcome Center, unlock Digestion, find Silver, and prepare your first base.",
+      tagClass: "text-cyan-500",
+      hoverBorderClass: "hover:border-cyan-300",
+      hoverTitleClass: "group-hover:text-cyan-700",
+    },
+    {
+      href: "/subnautica-2/early-resources",
+      game: "Subnautica 2",
+      title: "Early Resources Guide",
+      description:
+        "Find early Titanium, Copper, Quartz, Silver, Salt, Rubber, Fibrous Pulp, Acidic Raion Pouches, Strong Acid, and key crafting materials.",
+      tagClass: "text-cyan-500",
+      hoverBorderClass: "hover:border-cyan-300",
+      hoverTitleClass: "group-hover:text-cyan-700",
+    },
+    {
+      href: "/subnautica-2/first-base-setup",
+      game: "Subnautica 2",
+      title: "First Base Setup Guide",
+      description:
+        "Learn when to leave the Lifepod, where to build your first base, how to set up storage, power, Habitat Beacon, and Moonpool space.",
+      tagClass: "text-cyan-500",
+      hoverBorderClass: "hover:border-cyan-300",
+      hoverTitleClass: "group-hover:text-cyan-700",
+    },
 
     {
       href: "/the-spell-brigade",

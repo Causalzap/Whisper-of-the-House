@@ -1,0 +1,574 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const roleColumns = [
+  { key: "Group Size", label: "Group Size" },
+  { key: "Best Role Split", label: "Best Role Split" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const roleRows = [
+  {
+    "Group Size": "2 players",
+    "Best Role Split": "Scanner / route lead + resource runner",
+    "Why It Works":
+      "One player keeps progression moving while the other brings back Titanium, Copper, Quartz, Silver, Rubber, and food support.",
+  },
+  {
+    "Group Size": "3 players",
+    "Best Role Split": "Scanner lead + builder + resource runner",
+    "Why It Works":
+      "This prevents everyone from chasing the same scan while the base has no storage, power, or crafting chain.",
+  },
+  {
+    "Group Size": "4 players",
+    "Best Role Split": "Scanner lead + builder + resource runner + scout / safety",
+    "Why It Works":
+      "A fourth player should mark routes, watch oxygen / threats, and prepare vehicle or outpost paths instead of duplicating basic farming.",
+  },
+];
+
+export const phaseColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "Team Priority", label: "Team Priority" },
+  { key: "Avoid This", label: "Avoid This" },
+];
+
+export const phaseRows = [
+  {
+    Phase: "Opening hour",
+    "Team Priority":
+      "Split tool materials, water, Rubber / Fiber, and Scanner progress.",
+    "Avoid This":
+      "Four players crowding the same small cave.",
+  },
+  {
+    Phase: "Welcome Center",
+    "Team Priority":
+      "Scanner lead handles fragments, one player brings a battery, others manage oxygen and storage.",
+    "Avoid This":
+      "Leaving after only one Habitat Builder scan.",
+  },
+  {
+    Phase: "First base",
+    "Team Priority":
+      "Builder places room, hatch, power, storage, and Fabricator while runners bring materials.",
+    "Avoid This":
+      "Everyone crafting from shared storage with no project target.",
+  },
+  {
+    Phase: "Tadpole path",
+    "Team Priority":
+      "Pool rare materials, choose one vehicle lead, and keep vehicle access organized.",
+    "Avoid This":
+      "One player taking the only vehicle away without telling the team.",
+  },
+  {
+    Phase: "Deep routes",
+    "Team Priority":
+      "Use named routes, Scanner Station support, and Dive Elevator logistics where available.",
+    "Avoid This":
+      "Entering deep routes without a return anchor.",
+  },
+];
+
+export const newGuestColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why", label: "Why" },
+];
+
+export const newGuestRows = [
+  {
+    Step: "1. Spawn and check inventory",
+    "What To Do":
+      "Assume the guest starts with an empty or basic personal inventory unless the session proves otherwise.",
+    Why:
+      "The host's tools and materials do not automatically become the guest's personal loadout.",
+  },
+  {
+    Step: "2. Get personal survival setup",
+    "What To Do":
+      "Make basic tools, confirm oxygen upgrades, and get Digestion / Angel Comb-related survival progress if missing.",
+    Why:
+      "A fresh guest should not be dragged into deep routes without their own body progression.",
+  },
+  {
+    Step: "3. Sync route knowledge",
+    "What To Do":
+      "Show the guest base names, storage labels, vehicle parking rules, and the next objective.",
+    Why:
+      "Shared blueprints do not mean shared understanding.",
+  },
+  {
+    Step: "4. Assign a role",
+    "What To Do":
+      "Give the guest a simple job: gather Quartz, bring Copper, scan a safe area, or organize storage.",
+    Why:
+      "New guests help faster when they have one clear task instead of following silently.",
+  },
+];
+
+export const sharedColumns = [
+  { key: "System", label: "System" },
+  { key: "Shared?", label: "Shared?" },
+  { key: "What It Means", label: "What It Means" },
+];
+
+export const sharedRows = [
+  {
+    System: "World save",
+    "Shared?": "Host-owned",
+    "What It Means":
+      "The active world is tied to the host during normal co-op play.",
+  },
+  {
+    System: "Blueprints / scans",
+    "Shared?": "Yes",
+    "What It Means":
+      "One player's scans can unlock progress for the session.",
+  },
+  {
+    System: "Databank entries",
+    "Shared?": "Yes",
+    "What It Means":
+      "Discovery information is team-friendly.",
+  },
+  {
+    System: "DNA Adaptations",
+    "Shared?": "Personal",
+    "What It Means":
+      "Guests need their own body progression and survival upgrades.",
+  },
+  {
+    System: "Personal inventory",
+    "Shared?": "No",
+    "What It Means":
+      "Each player carries their own tools and materials.",
+  },
+  {
+    System: "Base storage",
+    "Shared?": "Yes at launch",
+    "What It Means":
+      "Treat lockers as team-access storage until personal storage is added.",
+  },
+  {
+    System: "Vehicles",
+    "Shared?": "Yes",
+    "What It Means":
+      "Vehicles such as the Tadpole are team assets.",
+  },
+];
+
+export const soloVsCoopColumns = [
+  { key: "Mode", label: "Mode" },
+  { key: "Best For", label: "Best For" },
+  { key: "Tradeoff", label: "Tradeoff" },
+];
+
+export const soloVsCoopRows = [
+  {
+    Mode: "Solo",
+    "Best For":
+      "Atmosphere, fear, pacing control, and clean base ownership.",
+    Tradeoff:
+      "You handle every scan, resource run, build, and recovery yourself.",
+  },
+  {
+    Mode: "2-player co-op",
+    "Best For":
+      "Clean teamwork with one route lead and one resource runner.",
+    Tradeoff:
+      "Both players must avoid duplicating the same task.",
+  },
+  {
+    Mode: "3-player co-op",
+    "Best For":
+      "Balanced scanner, builder, and resource roles.",
+    Tradeoff:
+      "Storage rules become important.",
+  },
+  {
+    Mode: "4-player co-op",
+    "Best For":
+      "Fast resource loops, big bases, and logistics.",
+    Tradeoff:
+      "More chaos without roles and vehicle rules.",
+  },
+];
+
+export const knownIssueColumns = [
+  { key: "Issue", label: "Known EA Co-op Issue / Limit" },
+  { key: "What To Try", label: "What To Try" },
+];
+
+export const knownIssueRows = [
+  {
+    Issue: "Friend invite or code does not work",
+    "What To Try":
+      "Confirm both players are on the same version, restart the host session, and try platform friends instead of Friend Code.",
+  },
+  {
+    Issue: "Version mismatch after an update",
+    "What To Try":
+      "Update every client, restart the launcher, and on Steam verify integrity of game files.",
+  },
+  {
+    Issue: "Strict NAT or network problems",
+    "What To Try":
+      "Try a different host, restart router / platform services, and avoid VPNs that may block connection flow.",
+  },
+  {
+    Issue: "Guest progress seems missing",
+    "What To Try":
+      "Recheck inventory, adaptations, recipes, and Signals at base before leaving on a route.",
+  },
+  {
+    Issue: "Storage confusion",
+    "What To Try":
+      "Use labeled lockers and one project target at a time: TADPOLE, BASE, TOOLS, or RARE.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Subnautica 2 co-op works natively without mods. You can play solo, host friends, convert a solo save into multiplayer, convert it back to single player, share scans and blueprints, and build together — but the host controls the active world while inventory, body upgrades, and DNA Adaptations remain personal.**
+
+The best co-op setup is not “everyone explore.” Use roles: scanner, builder, resource runner, and scout / safety. Fresh guests joining an old world should first check inventory, get personal adaptations such as Digestion / Angel Comb progress if missing, learn base rules, then join the main route.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-coop-crossplay-invite.webp"
+    alt="Subnautica 2 co-op invite flow showing host world, platform friends, in-game friends, Friend Code, Steam, Epic, Windows Store and Xbox."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Co-op is native in Subnautica 2, so you do not need a multiplayer mod like many players used for the first game.
+  </figcaption>
+</figure>
+
+<h2 id="last-updated">
+  Early Access update note
+</h2>
+
+Last updated for the May 2026 Early Access launch window. Co-op menus, session settings, storage permissions, and guest progress behavior can change during Early Access updates.
+
+<h2 id="coop-roles">
+  Best co-op roles by group size
+</h2>
+
+The biggest advantage of co-op is role division. If everyone scans the same room or mines the same cave, co-op becomes crowded solo. Use this instead:
+
+<GuideTable
+  caption="Best Subnautica 2 co-op role splits by group size."
+  columns={roleColumns}
+  rows={roleRows}
+/>
+
+<h2 id="phase-plan">
+  Co-op progression plan by phase
+</h2>
+
+Your team roles should change as the save progresses. The opening hour is about tools and oxygen. The base phase is about storage and power. The deep phase is about logistics and recovery.
+
+<GuideTable
+  caption="Subnautica 2 co-op progression plan by phase."
+  columns={phaseColumns}
+  rows={phaseRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="new-guest-quick-start">
+  New Guest Quick-Start: joining an old world
+</h2>
+
+A guest joining an older save should not assume they are ready for the host's route. Treat them as a fresh character entering a progressed world.
+
+<GuideTable
+  caption="What a new guest should do after joining an existing Subnautica 2 world."
+  columns={newGuestColumns}
+  rows={newGuestRows}
+/>
+
+The key rule is simple: **shared world progress does not replace personal survival setup.** A guest can benefit from team blueprints, but they still need their own tools, oxygen plan, inventory, and DNA Adaptations before deep exploration.
+
+<h2 id="platforms-crossplay">
+  Platforms, crossplay, and joining friends
+</h2>
+
+Subnautica 2 co-op supports up to four players across PC and Xbox platforms, including Steam, Epic Games Store, Windows Store / Microsoft Store, and Xbox Series X|S.
+
+You can join through platform friends, an in-game friends list, or a Friend Code flow depending on platform and build.
+
+```text
+Host opens the world
+→ enables multiplayer
+→ chooses privacy
+→ invites by platform friends, in-game friends, or Friend Code
+```
+
+Cross-progression is separate from guest access. Cross-progression helps your account across platforms; it does not automatically let a guest continue the host's world while the host is offline.
+
+<h2 id="playable-characters">
+  Playable characters in co-op
+</h2>
+
+At Early Access launch, Subnautica 2 uses four preset playable characters. More customization is expected during Early Access. For co-op, the practical value is readability: distinct characters make it easier to recognize teammates underwater.
+
+<h2 id="session-settings">
+  Session privacy, difficulty, and PvP settings
+</h2>
+
+Before inviting friends, check the session settings screen.
+
+Look for:
+
+- **Session Privacy:** public, friends-only, invite-only, or code-based joining depending on build.
+- **Game Mode / Difficulty:** choose Survival or Creative before the group commits to the save.
+- **Friend Code / Invite Flow:** useful when platform friends do not appear correctly.
+- **PvP:** Subnautica 2 is built around survival and co-op exploration, not PvP.
+
+Use friends-only or invite-only for a serious progression save. Public access is risky because storage and base systems are shared.
+
+<h2 id="convert-solo-save">
+  Convert solo save to multiplayer
+</h2>
+
+You do not need a separate world just to play with friends.
+
+```text
+Main Menu
+→ Load / select your solo world
+→ Convert to Multiplayer or Host Multiplayer
+→ set session privacy
+→ invite friends
+```
+
+Menu wording may shift during Early Access, but the concept is stable: the world owner becomes the host and the solo save becomes the shared session world.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-coop-save-convert-menu.webp"
+    alt="Subnautica 2 menu showing Convert to Multiplayer or Host Multiplayer option for a solo save."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If possible, use a real menu screenshot here. This is one of the highest-intent co-op search questions.
+  </figcaption>
+</figure>
+
+<h2 id="convert-back-single-player">
+  Convert multiplayer back to single player
+</h2>
+
+If your friends leave and you want to continue alone, convert the session back to single player.
+
+```text
+Load the multiplayer world
+→ open world / session options
+→ Convert to Single Player
+→ confirm and continue alone
+```
+
+This answers the common worry: converting to co-op should not trap you into always playing multiplayer.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="share-save-host">
+  Share a save copy so another friend can host
+</h2>
+
+If your connection is unstable or you are rarely online, you can share a copy of the save with a trusted teammate and let them host that copy.
+
+Use the safe process:
+
+```text
+Host makes a backup
+→ host sends the save copy to trusted friend
+→ friend imports / places it in the correct save location
+→ group agrees which copy is now the main world
+```
+
+Exact file paths can vary by platform and storefront, so confirm the save location before moving files. On Windows / Steam, check this path first:
+
+```
+%USERPROFILE%\Saved Games\Subnautica2
+If your Steam build does not use that folder, right-click the game in Steam, open **Manage → Browse local files**, then search the game folder and Saved Games for the newest save directory. Epic, Windows Store, and Xbox builds may use different account-linked folders, so do not overwrite anything until you have made a backup.
+```
+
+Do not keep two “main” copies active, or the group will split progress.
+
+<h2 id="host-save">
+  Host responsibilities: who should host?
+</h2>
+
+The best host is not always the best player. Pick the person with the most stable connection, most consistent schedule, and best chance of keeping the save organized.
+
+A bad host choice can stall the group even if everyone helped build the world.
+
+<h2 id="shared-vs-personal">
+  What is shared in co-op?
+</h2>
+
+<GuideTable
+  caption="Subnautica 2 co-op shared vs personal systems."
+  columns={sharedColumns}
+  rows={sharedRows}
+/>
+
+<h2 id="dynamic-scaling">
+  Does co-op change difficulty or resource pressure?
+</h2>
+
+Co-op changes practical difficulty even when the base mechanics are familiar. More players consume materials faster, crowd routes, use shared storage, and create more vehicle demand. Some Early Access reports also describe dynamic pressure around resource depletion and predator behavior as lobby size changes, so bigger groups should play with more structure.
+
+<h2 id="storage-base-risk">
+  Shared storage and base safety risks
+</h2>
+
+Shared storage is convenient, but invited players can use team materials and change the base.
+
+Use project lockers:
+
+```text
+TADPOLE
+BASE
+TOOLS
+RARE
+FOOD
+```
+
+Assign one builder to approve major layout changes and one vehicle lead to decide when rare materials leave storage.
+
+<h2 id="death-items">
+  Death, dropped items, Biobeds, and revive limits
+</h2>
+
+There is no teammate revive loop to rely on. If a player dies, they respawn instead of waiting for a revive.
+
+In co-op, dropped items can remain where the player died, and a teammate may be able to pick them up. This can save the dead player from making a second risky trip. Depending on progression and location, the dead player respawns at the nearest Biobed rather than exactly where the team is.
+
+Use this recovery plan:
+
+1. Call out the last known location.
+2. Decide whether a teammate can safely pick up the dropped items.
+3. Do not send rare materials into the same danger route twice.
+4. Regroup at the nearest Biobed, base, vehicle, or named marker before continuing.
+
+<h2 id="known-issues">
+  Known Early Access co-op issues and quick fixes
+</h2>
+
+<GuideTable
+  caption="Subnautica 2 co-op known issues and quick fixes."
+  columns={knownIssueColumns}
+  rows={knownIssueRows}
+/>
+
+If the same issue repeats, let the host save, restart the world, and avoid rare-material runs until the session is stable.
+
+<h2 id="coop-vs-solo">
+  Is co-op worth it compared with solo?
+</h2>
+
+<GuideTable
+  caption="Subnautica 2 solo vs co-op comparison."
+  columns={soloVsCoopColumns}
+  rows={soloVsCoopRows}
+/>
+
+Play solo for atmosphere and pacing. Play co-op for faster resource loops, shared scanning, bigger bases, and team logistics.
+
+<h2 id="no-tether">
+  Can players split up, or is there a tether?
+</h2>
+
+Players can split jobs instead of staying glued together. In practical Early Access play, players can separate by hundreds of meters without a strict short tether forcing everyone back together.
+
+The farther players split, the more important the role system above becomes.
+
+<h2 id="vehicles">
+  Vehicles are team assets
+</h2>
+
+Vehicles such as the Tadpole should be treated like shared infrastructure, not personal toys.
+
+Use vehicle rules:
+
+- say where you are taking it,
+- keep it near agreed routes or bases,
+- do not leave rare materials inside without telling the team,
+- build more than one vehicle if your group splits often.
+
+If your team is working toward the first vehicle, use the <Link href="/subnautica-2/tadpole-submarine">Tadpole Submarine guide</Link>.
+
+<h2 id="dive-elevator">
+  Dive Elevator logistics: the biggest co-op advantage
+</h2>
+
+The Dive Elevator is where co-op becomes more than “solo, but with friends.” It lets one part of the team gather deep resources while another part keeps building or processing materials above.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-dive-elevator-resource-transport.webp"
+    alt="Subnautica 2 Dive Elevator showing co-op resource transport between deep routes and base building."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Dive Elevator turns co-op into a logistics chain instead of four players looting the same cave.
+  </figcaption>
+</figure>
+
+<h2 id="creative-mode">
+  Creative Mode in co-op
+</h2>
+
+Creative Mode is useful in multiplayer if your group wants to test base layouts, teach new players, or experiment with Dive Elevator logistics without normal survival pressure.
+
+Do not confuse Creative routing with Survival routing. A base design that looks good in Creative may still be too expensive or unsafe in a normal survival save.
+
+<h2 id="related-guides">
+  Related co-op routes
+</h2>
+
+- <Link href="/subnautica-2/what-to-do-first">What to Do First</Link> for fresh guests joining an older world.
+- <Link href="/subnautica-2/early-resources">Early Resources</Link> for splitting material roles.
+- <Link href="/subnautica-2/navigation-guide">Navigation Guide</Link> for Beacons, Signals, and route names.
+- <Link href="/subnautica-2/fully-functional-fabricator">Fully Functional Fabricator</Link> for base crafting blockers.
+- <Link href="/subnautica-2/tadpole-submarine">Tadpole Submarine</Link> for shared vehicle progression.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Do I need mods for Subnautica 2 co-op?
+
+No. Subnautica 2 has native co-op support, so you do not need a multiplayer mod.
+
+### Can I switch a multiplayer save back to solo?
+
+Yes. Use world or session options to convert the multiplayer world back to single player, then continue alone.
+
+### Can a friend host my save instead?
+
+Yes, if you deliberately share a copy of the save with a trusted teammate. Confirm the correct save location for your platform or storefront first.
+
+### Can a teammate recover my dropped items?
+
+Yes, if they can safely reach the death location. A teammate may be able to pick up dropped items, but the team should still regroup after recovery.
+
+### Does a new guest get my adaptations?
+
+No. Treat DNA Adaptations and personal body upgrades as personal progression. A new guest should check their own survival setup first.

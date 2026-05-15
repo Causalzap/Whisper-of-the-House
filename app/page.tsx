@@ -118,7 +118,8 @@ const allGameGuides = [
 
   { title: 'The Spell Brigade', href: '/the-spell-brigade' },
   { title: 'Outbound', href: '/outbound' },
-  { title: 'directive-8020', href: '/directive-8020' },
+  { title: 'Directive 8020', href: '/directive-8020' },
+  { title: 'Subnautica 2', href: '/subnautica-2' },
   
 ];
 

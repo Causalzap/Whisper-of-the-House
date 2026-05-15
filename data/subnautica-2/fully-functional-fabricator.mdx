@@ -1,0 +1,357 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const triggerColumns = [
+  { key: "trigger", label: "When You See It" },
+  { key: "whatItMeans", label: "What It Usually Means" },
+  { key: "nextStep", label: "Do This Next" },
+];
+
+export const triggerRows = [
+  {
+    trigger: "Fiber Mesh or other processed resources stay unavailable",
+    whatItMeans:
+      "You are still using the damaged Lifepod Fabricator or missing the next crafting station.",
+    nextStep:
+      "Scan both Habitat Builder fragments, build a powered base, then place a real Fabricator.",
+  },
+  {
+    trigger: "Wiring Kit, First Aid Kit, or an early gear chain feels blocked",
+    whatItMeans:
+      "The recipe may need a proper base Fabricator, a new material scan, or the next station in the chain.",
+    nextStep:
+      "Move crafting into a powered base, keep scanning fragments, and craft newly unlocked material parts there.",
+  },
+  {
+    trigger: "Ingots, Strong Acid chains, or vehicle materials are missing",
+    whatItMeans: "You are past the basic Fabricator step and probably need the Processor.",
+    nextStep:
+      "Follow the later habitat route, scan the Processor, then use it for advanced materials.",
+  },
+  {
+    trigger: "Moonpool, Tadpole Deck, or Vehicle Fabricator path is blocked",
+    whatItMeans:
+      "Your base progression is not far enough, or your Moonpool placement is too shallow.",
+    nextStep:
+      "Unlock Processor materials, expand toward deeper water, then place the Moonpool chain on an outer edge.",
+  },
+];
+
+export const materialColumns = [
+  { key: "order", label: "Order" },
+  { key: "part", label: "Build" },
+  { key: "materials", label: "Materials" },
+  { key: "action", label: "Do This" },
+];
+
+export const materialRows = [
+  {
+    order: "1",
+    part: "Corridor",
+    materials: "2 Titanium",
+    action: "Place the smallest starter structure in shallow, safe water.",
+  },
+  {
+    order: "2",
+    part: "Hatch",
+    materials: "1 Titanium + 1 Quartz",
+    action: "Attach it so the base becomes an oxygen reset point.",
+  },
+  {
+    order: "3",
+    part: "Solar Panel",
+    materials: "1 Titanium + 2 Quartz",
+    action: "Place it outside on top of the base with open access to sunlight.",
+  },
+  {
+    order: "4",
+    part: "Fabricator",
+    materials: "1 Titanium + 1 Copper + 1 Quartz",
+    action: "Mount it inside the powered base and craft blocked recipes there.",
+  },
+  {
+    order: "5",
+    part: "Storage locker / floor locker",
+    materials: "Varies by locker",
+    action: "Store Titanium, Quartz, Copper, Silver, Salt, and vehicle prep materials near crafting.",
+  },
+  {
+    order: "6",
+    part: "Habitat Beacon / base marker",
+    materials: "After unlock",
+    action: "Mark the base so you can return after resource runs and Tadpole fragment routes.",
+  },
+  {
+    order: "7",
+    part: "Second Solar Panel",
+    materials: "1 Titanium + 2 Quartz",
+    action: "Bring the extra 1 Titanium + 2 Quartz now if you want to avoid a second resource trip later.",
+  },
+];
+
+export const fixColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const fixRows = [
+  {
+    problem: "Recipe says it requires a fully functional Fabricator",
+    likelyCause: "You are trying to craft from the damaged Lifepod Fabricator.",
+    fix: "Build a powered base → place a real Fabricator → craft the recipe there.",
+  },
+  {
+    problem: "Habitat Builder is still locked",
+    likelyCause: "You scanned only one of the two Habitat Builder fragments.",
+    fix: "Go to the Welcome Center → scan the entrance fragment → scan the lower fragment before leaving.",
+  },
+  {
+    problem: "Base has no power",
+    likelyCause: "No Solar Panel, blocked placement, or not enough stored power for repeated crafting.",
+    fix: "Place 1 Solar Panel on top → confirm power/oxygen → add a second panel if crafting drains it.",
+  },
+  {
+    problem: "Advanced materials are missing",
+    likelyCause: "The Processor is not unlocked yet.",
+    fix: "Enter the later habitat route → find the locker/black-box interior → turn right and scan the Processor.",
+  },
+  {
+    problem: "Tadpole Deck placement says blocked",
+    likelyCause: "The Moonpool edge is too close to the seafloor or another obstruction.",
+    fix: "Extend toward deeper water → place Moonpool on the outer edge → place Tadpole Deck where the preview clears.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**If Subnautica 2 says a recipe requires a fully functional Fabricator, stop using the damaged Lifepod Fabricator. Scan both Habitat Builder fragments at the Welcome Center, build a tiny powered base, place a real Fabricator inside, then continue toward Processor → Moonpool → Tadpole progression.**
+
+For the smallest reliable setup, build a **Corridor, Hatch, Solar Panel, and Fabricator** first. Bring **5 Titanium, 1 Copper, and 4 Quartz** for the minimum workshop. If you want a safer power setup in one trip, add another **1 Titanium + 2 Quartz** for a second Solar Panel.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-habitat-builder-scan.webp"
+    alt="Subnautica 2 Habitat Builder fragment scan at the Welcome Center."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The fix starts at the Welcome Center. Do not leave until the Habitat Builder shows 2/2 scans.
+  </figcaption>
+</figure>
+
+<h2 id="what-the-message-means">What “requires a fully functional Fabricator” means</h2>
+
+That message means the **Lifepod Fabricator is no longer enough** for the recipe or material chain you are trying to use. The game is pushing you out of the temporary Lifepod workshop and into a powered base with real crafting stations.
+
+You may see the blocker after finding new resources, scanning new fragments, or unlocking recipes that need a proper Fabricator, Processor, or vehicle station.
+
+<GuideTable
+  caption="Common fully functional Fabricator triggers and what to do next."
+  columns={triggerColumns}
+  rows={triggerRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="quick-route">Quick route: Lifepod to working Fabricator</h2>
+
+Use this route if you just want the blocker gone.
+
+1. **Craft the Scanner.** You need it before the Welcome Center route matters.
+2. **Swim southeast from the Lifepod toward the Welcome Center.** Use the visible structure, signal, and bright open-water direction as your guide instead of relying only on a fixed bearing.
+3. **Scan the first Habitat Builder fragment** near the Welcome Center entrance / front-right exterior area.
+4. **Go inside, insert a Battery to power the Welcome Center, and scan useful rooms / stations.**
+5. **Check below and around the Welcome Center route for the second Habitat Builder scan.**
+6. **Return with Titanium, Quartz, and Copper.**
+7. **Build the starter setup in the table below, then craft blocked recipes from the real Fabricator.**
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-welcome-center-exterior.webp"
+    alt="Subnautica 2 Welcome Center exterior route from the Lifepod."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the Welcome Center itself as the landmark. Directions can drift between saves and builds, but the southeast route from the Lifepod is the practical early path.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Do not leave early">
+If the Habitat Builder is only 1/2, you are not done. The first scan is near the Welcome Center entrance area, and the second is below / around the same unlock route. Leaving with one scan is the easiest way to create this crafting blocker later.
+</GuideCallout>
+
+<h2 id="materials">Starter Fabricator base materials and build order</h2>
+
+You do not need a beautiful base to fix the Fabricator problem. You need a tiny powered workshop that works.
+
+<GuideTable
+  caption="Minimum starter base build order for a working Fabricator setup."
+  columns={materialColumns}
+  rows={materialRows}
+/>
+
+The first four rows are the actual fix. Storage, a marker, and a second Solar Panel are upgrades you should add as soon as the base works.If you hate making two material trips, bring **6 Titanium, 1 Copper, and 6 Quartz** from the start. That covers the minimum Fabricator base plus a second Solar Panel.
+
+Do not overbuild yet. Your first base is a workshop, oxygen stop, and route anchor. You can make it pretty after the crafting chain is stable.
+
+<h2 id="power">How much power does the Fabricator need?</h2>
+
+The Fabricator uses base energy while it is actively crafting. A safe working rule is to treat it as about **2 power per second while in use**.
+
+For a tiny shallow base, **one Solar Panel** can get you started. Add a second Solar Panel if you craft repeatedly, attach a Scanner Station, build more rooms, or notice power dips at night.
+
+Use this rule:
+
+- **1 Solar Panel:** enough for a tiny starter base and short crafting bursts,
+- **2 Solar Panels:** safer for repeated crafting, storage-heavy bases, and Scanner Station setup,
+- **Hydroelectric / power transmitters later:** better once you start building a serious base or pushing deeper.
+
+Place Solar Panels **outside, on top of the base, in open water with clear access toward the surface**. Do not hide them under terrain, tuck them into cramped cave geometry, or place them where expansion pieces will block your layout.
+
+<GuideCallout title="Power check">
+After placing the Solar Panel, enter the base and confirm it is powered and oxygenated before moving your main crafting loop there. If the base does not feel stable, fix power before adding more stations.
+</GuideCallout>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="common-fixes">Common setup problems and direct fixes</h2>
+
+If the base exists but the progression still feels wrong, use the table below as a quick troubleshooting checklist.
+
+<GuideTable
+  caption="Common Fabricator setup problems and direct fixes."
+  columns={fixColumns}
+  rows={fixRows}
+/>
+
+<h2 id="beacon-tip">Put a Beacon on your first base</h2>
+
+Subnautica 2 is easy to get lost in because you are often navigating by signals, landmarks, air pockets, caves, and memory. Once you unlock Beacons or base markers, put one on your first base immediately.
+
+Name it something boring and useful, such as:
+
+- **Starter Base**
+- **Fabricator Base**
+- **Moonpool Prep**
+
+This is not just quality-of-life. If you swim out for Silver, Salt, Strong Acid, or Tadpole fragments, a visible base marker saves time and stops you from turning the Lifepod into your only mental anchor.
+
+<h2 id="processor">Unlock the Processor next</h2>
+
+The Fabricator fix is only the first half of the chain. The next important station is the **Processor**, because it opens advanced material crafting such as ingots and vehicle prep materials.
+
+Look for it during the later habitat route with black boxes, wall lockers, orange ladders, oxygen pockets, and multiple scannable stations. After entering the main interior room, check the **right-hand side from the entry path** and scan the Processor before leaving.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-processor-scan-location.webp"
+    alt="Subnautica 2 Processor scan location inside the later habitat route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+  After entering the habitat room, look to the right-hand side of the entry path. Add an arrow to the Processor console in this screenshot so players can match the scan point to the room layout.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Why the Processor matters">
+The Processor is the bridge from basic base crafting to advanced materials. If ingots, Strong Acid chains, or Tadpole-related materials are missing, your problem is probably no longer the Fabricator.
+</GuideCallout>
+
+<h2 id="moonpool">Prepare the Moonpool and Tadpole Deck</h2>
+
+Once the Processor and advanced materials are moving, your base starts connecting to the **Moonpool → Tadpole Deck → Vehicle Fabricator** path.
+
+The most common placement mistake is building the starter base too close to the seafloor. The Moonpool and Tadpole Deck need enough open vertical space below them.
+
+A safe placement rule is:
+
+**Put the Moonpool on the outer edge of your base, over visibly deeper water, with open vertical clearance below.**
+
+If the placement preview says **blocked**, do not fight it. Extend the base one or two pieces toward deeper water and try again from the edge.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-tadpole-deck-blocked-depth.webp"
+    alt="Subnautica 2 Tadpole Deck blocked placement because the water below is too shallow."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the Tadpole Deck says blocked, the problem is usually vertical clearance. Move the Moonpool toward deeper water before rebuilding the whole base.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Depth note">
+Do not rely on a fixed meter number until you measure it in your current build. The reliable player-facing rule is: if the Tadpole Deck is blocked, the Moonpool is too close to the seafloor or another obstruction.
+</GuideCallout>
+
+<h2 id="progression-chain">Fabricator to Tadpole flow</h2>
+
+Most quick fixes stop when the Fabricator works. The stronger route is to show the whole chain players are actually trying to reach.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-fabricator-progression-flow.webp"
+    alt="Subnautica 2 Fabricator progression flow from Habitat Builder to Processor Moonpool and Tadpole."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Suggested original diagram: Habitat Builder → powered base → Fabricator → Processor → Moonpool → Tadpole Deck → Vehicle Fabricator.
+  </figcaption>
+</figure>
+
+<h2 id="next">What to do after fixing the Fabricator</h2>
+
+Once your real Fabricator setup works, do not stay in starter-base mode forever.
+
+Your next best step depends on what is blocking you:
+
+- If you need vehicle progression, open the <Link href="/subnautica-2/tadpole-submarine">Tadpole Submarine Guide</Link>.
+- If your base has power, storage, or layout problems, use the <Link href="/subnautica-2/first-base-setup">First Base Setup Guide</Link>.
+- If you keep running out of materials, use the <Link href="/subnautica-2/early-resources">Early Resource Route</Link>.
+- If you keep losing your way back, use the <Link href="/subnautica-2/navigation-guide">Navigation Guide</Link> and mark your base.
+
+<h2 id="faq">FAQ</h2>
+
+### What does “fully functional Fabricator” mean in Subnautica 2?
+
+It means the damaged Lifepod Fabricator is not enough for the recipe or progression chain. Build a powered base and place a proper Fabricator there.
+
+### How many Solar Panels do I need for a Fabricator base?
+
+Use one Solar Panel for a tiny shallow starter base. Add a second Solar Panel if repeated crafting, Scanner Station use, nighttime dips, or a larger base makes power unstable.
+
+### Where should I place Solar Panels for the best early power?
+
+Place Solar Panels outside on the top or upper exterior of a shallow base, with clear open water above and as little terrain obstruction as possible. Avoid cramped caves, shaded overhangs, and spots you plan to cover with future rooms.
+
+### Is the Fabricator shared in co-op?
+
+A Fabricator placed inside a shared base should be treated as a team crafting station. In co-op, coordinate shared storage, scanning, and material use so one player does not spend the Copper, Quartz, or advanced materials another player needs for the next unlock.
+
+### Why are advanced materials still missing after I build a Fabricator?
+
+You probably need the Processor. Scan it in the later habitat route, then use it for advanced material chains such as ingots, Strong Acid chains, and vehicle prep.
+
+### Why can’t I place the Tadpole Deck?
+
+The Moonpool area is probably too shallow or blocked. Extend the base over deeper water and place the Moonpool on an outer edge with clear space below.
+
+### Should I put a Beacon on my first base?
+
+Yes. Once Beacons or base markers are available, mark your first base immediately. It makes resource runs and Tadpole preparation much easier in a game where navigation depends heavily on landmarks and signals.

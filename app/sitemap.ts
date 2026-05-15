@@ -68,6 +68,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/the-spell-brigade`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/outbound`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/directive-8020`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/subnautica-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+     // ⬇️ 把 4 篇文章补上
+     { url: `${base}/directive-8020/co-op-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/directive-8020/collector-leviathan`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/directive-8020/digestion-adaptation`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/directive-8020/early-resources`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/directive-8020/first-base-setup`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/directive-8020/fully-functional-fabricator`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/directive-8020/navigation-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/directive-8020/tadpole-submarine`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+     { url: `${base}/directive-8020/what-to-do-first`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     // ⬇️ 把 4 篇文章补上
     { url: `${base}/directive-8020/all-endings`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

@@ -1,0 +1,478 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const decisionColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "decision", label: "What I Would Do" },
+  { key: "why", label: "Why" },
+];
+
+export const decisionRows = [
+  {
+    situation: "You only need to cross the edge of its biome",
+    decision: "Skirt the edge, keep an exit route, and do not stop for extra resources.",
+    why: "Most deaths happen because you turn a quick crossing into a greedy farming trip.",
+  },
+  {
+    situation: "You are carrying rare materials",
+    decision: "Leave first, unload, then come back with a clean inventory.",
+    why: "Collector territory is not where you should gamble a full backpack.",
+  },
+  {
+    situation: "You want the scan entry",
+    decision: "Bring Scanner, Distraction Flares, healing, and a vehicle or base escape plan.",
+    why: "The scan is possible, but the attempt should be planned like a short dive, not a casual swim.",
+  },
+  {
+    situation: "It has turned toward you or closed distance fast",
+    decision: "Stop scouting and escape immediately.",
+    why: "Once it is locked in, distance, flare timing, and a clear route out matter more than sneaking.",
+  },
+  {
+    situation: "Your Tadpole is near it",
+    decision: "Do not park or idle. Point the vehicle toward your escape route.",
+    why: "The Tadpole helps you travel, but it is not a safe room.",
+  },
+];
+
+export const loadoutColumns = [
+  { key: "item", label: "Bring This" },
+  { key: "priority", label: "Priority" },
+  { key: "use", label: "How It Helps" },
+];
+
+export const loadoutRows = [
+  {
+    item: "Distraction Flare",
+    priority: "Required",
+    use: "Throw it away from your escape path to pull attention off you long enough to leave or reset the attempt.",
+  },
+  {
+    item: "Scanner",
+    priority: "Required if scanning",
+    use: "Only bring it if you are actually going for the Collector scan; otherwise keep the hotbar clean.",
+  },
+  {
+    item: "Fast movement option",
+    priority: "Very high",
+    use: "Use your best fins or mobility setup so you are not trying to outrun a Leviathan with early-game movement.",
+  },
+  {
+    item: "Air Bladder or oxygen backup",
+    priority: "Very high",
+    use: "Gives you a recovery option if the route out takes longer than planned.",
+  },
+  {
+    item: "First Aid Kits",
+    priority: "High",
+    use: "Lets you survive a bad hit long enough to reach a hatch, vehicle, or open water.",
+  },
+  {
+    item: "Beacon or route marker",
+    priority: "High",
+    use: "Marks your exit, panic base, or safe return line so you are not navigating by memory while stressed.",
+  },
+  {
+    item: "Tadpole",
+    priority: "Useful, not invincible",
+    use: "Good for entry and retreat, but do not treat it as protection once the Collector is close.",
+  },
+];
+
+export const encounterColumns = [
+  { key: "phase", label: "Encounter Phase" },
+  { key: "action", label: "Your Action" },
+  { key: "doNot", label: "Do Not" },
+];
+
+export const encounterRows = [
+  {
+    phase: "Before entering",
+    action: "Unload rare items, equip flare, check oxygen, and point your route back toward safety.",
+    doNot: "Enter with a full inventory just because the biome looks open.",
+  },
+  {
+    phase: "First sighting",
+    action: "Stop, mark the direction, and decide whether you are scouting, scanning, or leaving.",
+    doNot: "Swim closer just to get a better look unless that is the whole plan.",
+  },
+  {
+    phase: "It notices you",
+    action: "Commit to the exit. Throw a Distraction Flare away from your escape lane, then move out.",
+    doNot: "Let the flare pull danger into the same path you need to use.",
+  },
+  {
+    phase: "Tadpole gets threatened",
+    action: "Break line, use the flare window, and leave the area instead of trying to save the route.",
+    doNot: "Idle, turn slowly, or assume the vehicle can tank the encounter.",
+  },
+  {
+    phase: "You reach a sealed base",
+    action: "Get inside the hatch and reset. Heal, breathe, and wait before going back out.",
+    doNot: "Step back outside immediately just because the screen feels calm.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "betterPlay", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Entering Collector territory with no purpose.",
+    betterPlay: "Decide first: crossing, scanning, scouting, or retreating. If you cannot name the goal, do not go in.",
+  },
+  {
+    mistake: "Thinking low lights alone make you safe.",
+    betterPlay: "Use low light to reduce early attention, but once it locks on, switch to flare plus escape.",
+  },
+  {
+    mistake: "Throwing a Distraction Flare down your own exit path.",
+    betterPlay: "Throw the flare sideways or behind the threat so your escape lane stays clean.",
+  },
+  {
+    mistake: "Staying because the scan, screenshot, or pickup feels almost done.",
+    betterPlay: "Reset the attempt. A failed dive is cheaper than a death marker.",
+  },
+  {
+    mistake: "Parking the Tadpole inside the danger zone.",
+    betterPlay: "Keep the vehicle pointed out and use it as a retreat tool, not a campsite.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Only enter Collector territory with a reason, an exit, and a Distraction Flare on your hotbar. It is reported in Sparse Plains and Outer Bounds, can be scanned, uses sonar-style detection rather than pure visual stealth, and can threaten both you and the Tadpole.**
+
+If you see it at distance, decide immediately: leave, cross the edge, or attempt a planned scan. If it turns toward you or closes fast, stop playing stealthy. Throw a **Distraction Flare away from your escape route**, move out, and do not try to finish “one more thing.”
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-distraction-flare-pickup.webp"
+    alt="Subnautica 2 Distraction Flare picked up before entering dangerous territory."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The best Collector plan starts before the encounter: bring the flare, know the exit, and do not enter with a full inventory.
+  </figcaption>
+</figure>
+
+<h2 id="should-you-enter-collector-territory">Should you enter Collector territory right now?</h2>
+
+Most players should **not** enter Collector territory just because they found it. Treat the area like a planned dive.
+
+I would only go in if one of these is true:
+
+- you need to cross the edge of the biome,
+- you are specifically hunting for the scan entry,
+- you are mapping the boundary from a safe distance,
+- you have a vehicle, base, or oxygen route already planned,
+- you have Distraction Flares ready on your hotbar.
+
+If you are carrying rare resources, low on oxygen, missing healing, or just “checking it out,” leave first. The Collector is exactly the kind of threat that turns curiosity into a lost inventory.
+
+<GuideTable
+  caption="Collector Leviathan decision table."
+  columns={decisionColumns}
+  rows={decisionRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="collector-location">Where to find the Collector Leviathan</h2>
+
+The Collector Leviathan is associated with **Sparse Plains** and **Outer Bounds** in current Early Access reporting. That matters because a lot of players only prepare for Sparse Plains, then relax too much near the outer edge of the map.
+
+Ocean currents can pull you into **Sparse Plains** without warning. Check your position on the HUD before any deep dive near the biome edge.
+
+My rule is simple:
+
+- **Sparse Plains:** expect possible Collector activity.
+- **Outer Bounds:** do not assume safety just because you left Sparse Plains.
+- **Biome edge plus deep open water plus no clear exit:** leave or mark the route first.
+
+Do not build a main base, park the Tadpole, or start a long resource run just because the area looks empty for the first minute. Scout from the edge, watch for movement, and keep enough distance that you can still turn around without panic.
+
+<GuideCallout title="Location rule">
+If you are going into Sparse Plains or Outer Bounds, pretend the Collector is already nearby until you prove otherwise.
+</GuideCallout>
+
+<h2 id="what-to-bring">What to bring before going in</h2>
+
+Do not treat the Collector like a normal fish encounter. Set your hotbar before you cross into its territory.
+
+The minimum kit I would bring is:
+
+- **Distraction Flare** on an easy hotkey,
+- **Scanner** only if I am actually going for the scan,
+- the best movement setup I currently have,
+- oxygen backup,
+- First Aid Kits,
+- a route marker or beacon,
+- Tadpole nearby but not parked right beside the threat.
+
+<GuideTable
+  caption="Collector Leviathan survival loadout."
+  columns={loadoutColumns}
+  rows={loadoutRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-scanner-essential-tool.webp"
+    alt="Subnautica 2 Scanner prepared before a dangerous scan attempt."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bring the Scanner only when scanning is the mission. Otherwise, keep the hotbar focused on escape tools.
+  </figcaption>
+</figure>
+
+<h2 id="first-sighting-decision">What to do when you first see it</h2>
+
+The first sighting is the safest moment because you still have distance. Do not waste that advantage.
+
+Do this instead:
+
+- stop moving forward,
+- check oxygen,
+- check inventory value,
+- turn your camera toward the exit,
+- decide whether you are leaving, crossing, scanning, or observing.
+
+If you only came for navigation, leave wide space around it. If you came for a scan, wait for a better angle instead of swimming straight at its face. If you came for resources, ask yourself whether the item is worth a death run. Usually, it is not.
+
+Low light and quieter movement can help before you are noticed, but do not overrate them. The Collector is not just a visual stealth puzzle. Once it starts reacting hard, you need to switch from “sneak” to “escape.”
+
+<h2 id="lock-on-escape-plan">What to do if the Collector locks on</h2>
+
+The Collector’s detection should be treated as **sonar-style lock-on**, not “I turned my lights off so I am safe.”
+
+That changes the decision:
+
+- before it notices you, reduce obvious attention and stay outside the route,
+- once it turns, closes distance, or commits to you, stop hiding,
+- throw a Distraction Flare away from your escape path,
+- move toward open water, your Tadpole, or a sealed base,
+- ignore dropped items and reset the dive after you are safe.
+
+Once the encounter has flipped from scouting to chase, greed is the real danger. You are no longer optimizing the route. You are saving the run.
+
+<GuideTable
+  caption="Collector encounter flow."
+  columns={encounterColumns}
+  rows={encounterRows}
+/>
+
+<h2 id="common-mistakes">Common Collector mistakes</h2>
+
+This is the section I would check before going in. Most Collector deaths come from small decisions that looked harmless five seconds earlier.
+
+<GuideTable
+  caption="Common Collector Leviathan mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+
+<h2 id="distraction-flare-strategy">How to use Distraction Flare against the Collector</h2>
+
+**Distraction Flare is the specific tool you should name and use here.** Do not write this off as a vague “decoy.”
+
+Use it like this:
+
+1. Equip the flare before entering the biome.
+2. When the Collector notices you, aim away from your escape route.
+3. Throw the flare to the side or behind the threat.
+4. Leave while the flare creates a distraction window.
+5. Do not wait to confirm every animation.
+
+The direction matters. If you throw the flare along your exit path, you may pull the danger toward the same route you need to use. If you throw it at your own feet, you have not created separation. The best flare is one that buys distance, not one that makes a cool light show.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-distraction-flare-throw.webp"
+    alt="Subnautica 2 Distraction Flare thrown away from the player to draw danger off the escape route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Throw the flare where you want the threat to look, not where you want to swim.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Flare rule">
+Throw the Distraction Flare where you want the Collector to look — not where you want to swim.
+</GuideCallout>
+
+<h2 id="scan-collector-safely">How to scan the Collector Leviathan safely</h2>
+
+Yes, the Collector can be scanned, but I would not make your first sighting a scan attempt.
+
+A safer scan plan looks like this:
+
+1. **Scout first.** Find the edge of the area and identify a route out.
+2. **Unload valuables.** Do not bring rare materials into the scan attempt.
+3. **Bring at least one Distraction Flare.** Two is better if you are learning the timing.
+4. **Approach from a side angle.** Do not swim straight at the head.
+5. **Start scanning only when you have room to abort.**
+6. **Abort the second it turns hard or closes distance.**
+7. **Do not chase the scan.** If the window is bad, leave and reset.
+
+The scan is not worth forcing. A clean failed attempt is better than dying with the Scanner in your hand and no route back.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-air-bladder-escape-tool.webp"
+    alt="Subnautica 2 Air Bladder used as an emergency oxygen and escape tool before dangerous exploration."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scan attempts need an exit tool. If the angle is bad, leave and reset instead of chasing the scan.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="tadpole-safety">Is the Tadpole safe near the Collector?</h2>
+
+The Tadpole is useful near Collector territory, but it is not a panic room.
+
+Use it for:
+
+- getting to the edge of the biome,
+- keeping oxygen and storage nearby,
+- turning a failed scout into a faster retreat,
+- carrying enough supplies for a second attempt.
+
+Do not use it for:
+
+- idling inside Collector patrol space,
+- parking next to a scan attempt,
+- assuming the vehicle can absorb every mistake,
+- slowly turning around after the Collector reacts.
+
+If you bring the Tadpole, park it facing the way out. That sounds small, but it matters. A vehicle pointed into danger is not an escape plan.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-tadpole-repair-tool.webp"
+    alt="Subnautica 2 Tadpole repaired after taking damage during dangerous exploration."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Tadpole is a retreat tool, not a guaranteed safe room. Keep it pointed out before things go wrong.
+  </figcaption>
+</figure>
+
+<h2 id="base-safety">Are bases safe from the Collector?</h2>
+
+A **sealed base compartment** is the one place I would treat as a real reset point. If you make it through the hatch into a sealed base, use that moment to breathe, heal, and wait.
+
+But that does **not** mean you should build your main base on the Collector’s route.
+
+The smart use is a small emergency setup near the edge:
+
+- small room,
+- hatch,
+- power,
+- beacon,
+- maybe one locker.
+
+Use it as a panic room or oxygen stop, not as your beautiful permanent base. The danger is not usually “will the Collector break the base?” The danger is “can I reach the hatch before it catches me?”
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-powered-base-safe-oxygen.webp"
+    alt="Subnautica 2 powered base interior used as a safe oxygen reset point."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A powered sealed base gives you a reset point after you reach it. Do not confuse that with permission to build on the patrol route.
+  </figcaption>
+</figure>
+
+<div>
+  For full base placement logic, use the{" "}
+  <Link href="/subnautica-2/first-base-setup">first base setup guide</Link>.
+</div>
+
+<h2 id="pearl-warning-signs">Pearls as a Collector territory warning sign</h2>
+
+Pearls are worth treating as a warning sign around Collector territory. Current creature data links the Collector with **Pearl Stash** interactions, so if you notice pearl-related objects in a suspicious deep zone, do not assume you found a peaceful loot pocket.
+
+My rule:
+
+- if you find a pearl stash, slow down,
+- check your exit,
+- do not farm with a full inventory,
+- expect Collector attention until proven safe.
+
+This does not mean every pearl guarantees an immediate attack. It means pearls should change your behavior from “loot mode” to “territory check.”
+
+<h2 id="can-you-kill-collector">Can you kill the Collector Leviathan?</h2>
+
+Do not plan around killing the Collector Leviathan.
+
+For a practical player guide, the answer is:
+
+- do not fight it,
+- do not test damage with rare items on you,
+- do not stay to see if it works,
+- scan, distract, escape, and come back later if needed.
+
+If a future Early Access update adds a reliable neutralization method, this section should be updated with the patch version, tool, and exact steps. Until then, the winning strategy is not bravery. It is leaving early enough that you do not need to recover a corpse marker.
+
+<h2 id="faq">FAQ</h2>
+
+### Where does the Collector Leviathan spawn?
+
+Current reporting places the Collector Leviathan in **Sparse Plains** and **Outer Bounds**. Treat both areas as dangerous until you have confirmed the route yourself.
+
+### Can ocean currents drag me into Collector territory?
+
+Yes. Ocean currents can pull you into Sparse Plains faster than you expect, so check your HUD position before deep dives near the biome edge.
+
+### Should I go into Collector territory early?
+
+Only if you have a clear reason and a way out. Do not enter with rare materials, low oxygen, no flare, or no exit marker.
+
+### Does turning off lights make me safe?
+
+No. Low light may help before the Collector notices you, but the important point is that its detection should be treated as sonar-style tracking. Once it locks on, escape and flare timing matter more than staying dark.
+
+### Does Distraction Flare work?
+
+Yes, Distraction Flare is the tool I would bring. Throw it away from your escape route so the attention moves off your path instead of following you.
+
+### Can you scan the Collector Leviathan?
+
+Yes, but do it as a planned scan attempt. Bring flares, keep an exit route, approach from an angle, and abort if it turns toward you.
+
+### Is the Tadpole safe from the Collector?
+
+No. The Tadpole is useful for travel and retreat, but it is not a guaranteed safe room. Keep it pointed toward the exit and do not idle near the Collector.
+
+### Are bases safe from the Collector?
+
+A sealed base compartment is a safe reset point once you are inside. The risky part is reaching the hatch, so do not build your main base directly in its route.
+
+### Can you kill the Collector Leviathan?
+
+Do not plan around killing it. Treat the Collector as an avoid, distract, scan, and escape threat unless a future patch adds a verified method.

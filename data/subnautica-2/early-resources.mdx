@@ -1,0 +1,359 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const routeColumns = [
+  { key: "order", label: "Order" },
+  { key: "stop", label: "Stop" },
+  { key: "grab", label: "Grab" },
+  { key: "goal", label: "Leave When" },
+  { key: "risk", label: "Risk Tip" },
+];
+
+export const routeRows = [
+  {
+    order: "1",
+    stop: "Lifepod surface area",
+    grab: "3 Titanium, Water Slugs, loose ore",
+    goal: "You can craft the Survival Multitool and make basic water.",
+    risk: "Very safe. Return to the Lifepod before oxygen becomes a problem.",
+  },
+  {
+    order: "2",
+    stop: "Cave below the Lifepod",
+    grab: "Copper, Acidic Raion Pouches, Portable Locker, oxygen bubbles",
+    goal: "You have enough Copper + pouches for two Batteries.",
+    risk: "Use bubbles as checkpoints. Leave if you drop under 20 seconds and do not know the exit.",
+  },
+  {
+    order: "3",
+    stop: "Nearby coral domes",
+    grab: "2-4 Quartz",
+    goal: "You can craft the Scanner and keep a small Quartz spare.",
+    risk: "Low. Learn the coral dome shape so you can re-farm Quartz later.",
+  },
+  {
+    order: "4",
+    stop: "Huge coral route",
+    grab: "4 Lucifer Rotsack and 4 Fibrous Pulp minimum",
+    goal: "You can make Rubber / Fiber for Fins and Air Bladder progression.",
+    risk: "Keep the huge coral as your return landmark instead of chasing every plant.",
+  },
+  {
+    order: "5",
+    stop: "Green-flora Silver cave north of the Lifepod route",
+    grab: "2-4 Silver, plus safe extra ore",
+    goal: "You can craft the Standard Air Tank or your pinned Silver-gated recipe.",
+    risk: "Medium. Bring Fins or Air Bladder, and identify the air pocket before going deeper.",
+  },
+  {
+    order: "6",
+    stop: "Early habitat / seafloor POIs",
+    grab: "Salt, scannables, storage, free loot",
+    goal: "You have food support, storage upgrades, or base pieces worth bringing home.",
+    risk: "Use red hatches and interior air as reset points. Do not leave full pockets in a deeper room.",
+  },
+  {
+    order: "7",
+    stop: "Warmer / hot-region edge later",
+    grab: "Sulfur, Gold, later crafting materials",
+    goal: "You need Strong Acid, Power Cell, or Tadpole materials for a pinned recipe.",
+    risk: "Do not force this before Digestion, more oxygen, and a known return route.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "resource", label: "Resource" },
+  { key: "firstAmount", label: "First Amount" },
+  { key: "stopWhen", label: "Stop Farming When" },
+  { key: "nextUnlock", label: "Next Unlock" },
+];
+
+export const priorityRows = [
+  {
+    resource: "Titanium",
+    firstAmount: "3 immediately, then 8-12 more later",
+    stopWhen: "The Survival Multitool is crafted and you still have inventory space.",
+    nextUnlock: "Multitool, lockers, rooms, hatches",
+  },
+  {
+    resource: "Copper",
+    firstAmount: "2-4 pieces",
+    stopWhen: "You can craft two Batteries.",
+    nextUnlock: "Scanner path and Welcome Center power",
+  },
+  {
+    resource: "Acidic Raion Pouch",
+    firstAmount: "2 pouches",
+    stopWhen: "You have enough pouches to match your Copper for Batteries.",
+    nextUnlock: "Battery crafting",
+  },
+  {
+    resource: "Quartz",
+    firstAmount: "2-4 Quartz",
+    stopWhen: "The Scanner is ready and you have a small spare stack.",
+    nextUnlock: "Scanner, base / power parts",
+  },
+  {
+    resource: "Lucifer Rotsack",
+    firstAmount: "4 minimum",
+    stopWhen: "You can craft early Rubber needs.",
+    nextUnlock: "Fins and Air Bladder path",
+  },
+  {
+    resource: "Fibrous Pulp",
+    firstAmount: "4 minimum",
+    stopWhen: "You have Fiber for early tools and a small backup stack.",
+    nextUnlock: "Fiber, mesh-style crafting, food after Digestion",
+  },
+  {
+    resource: "Silver",
+    firstAmount: "2-4 Silver",
+    stopWhen: "The Standard Air Tank or next pinned Silver recipe is ready.",
+    nextUnlock: "Standard Air Tank",
+  },
+  {
+    resource: "Salt",
+    firstAmount: "2-4 when already nearby",
+    stopWhen: "You have enough for food support and can return safely.",
+    nextUnlock: "Food / preservation support",
+  },
+  {
+    resource: "Sulfur / Gold",
+    firstAmount: "Only when the route is safe",
+    stopWhen: "You have the Strong Acid / Power Cell materials your Tadpole path needs.",
+    nextUnlock: "Strong Acid, Power Cells, later vehicle progression",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best early resource route in Subnautica 2 is a 15-20 minute Lifepod loop: collect 3 Titanium near the Lifepod, dive into the cave below for Copper and Acidic Raion Pouches, check coral domes for Quartz, harvest Lucifer Rotsack and Fibrous Pulp near the huge coral route, then push the green-flora Silver cave once you have Fins or an Air Bladder.**
+
+Do not farm forever. Your first stopping points are **two Batteries**, **Scanner**, **Fins**, **Air Bladder**, and **Standard Air Tank**. Once one of those unlocks is ready, return and craft it before extending the route.
+</GuideQuickAnswer>
+
+<GuideCallout title="Early Access note">
+This guide is written for the current Subnautica 2 Early Access build. Resource patterns, POI layouts, and danger levels may change, so use the landmarks and route logic more than one exact coordinate.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-early-resource-route-map.webp"
+    alt="Subnautica 2 early resource route map from Lifepod to cave, coral dome, huge coral, Silver cave, and early habitat route."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A not-to-scale route diagram for the first resource loop: start at the Lifepod, clear the cave below, learn the coral dome Quartz pattern, collect Lucifer Rotsack and Fibrous Pulp near the huge coral route, then push Silver once your oxygen plan is safer.
+  </figcaption>
+</figure>
+
+<h2 id="pre-dive-checklist">Pre-dive checklist</h2>
+
+Before you leave the Lifepod, check three things:
+
+1. **Pin your recipes.** Pin Survival Multitool, Scanner, Fins, Air Bladder, and Standard Air Tank so every pickup has a purpose.
+2. **Empty your inventory.** Store extra food, first aid, and spare ore before entering caves.
+3. **Know your oxygen reset.** Your resets are the Lifepod, oxygen bubbles, air pockets, and interior rooms.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="route-overview">Early resource route overview</h2>
+
+Use the Lifepod as your zero point until you unlock stronger navigation tools. This route is not about emptying every cave. It is about getting enough material to unlock the next tool, returning safely, then extending your range.
+
+<GuideTable
+  caption="Subnautica 2 early resource route, targets, and risk tips."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-lifepod-cave-copper-acidic-raion.webp"
+    alt="Subnautica 2 cave below the Lifepod with Copper, Acidic Raion Pouch, oxygen bubbles, and Portable Locker."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The cave below the Lifepod is your first serious resource stop because it can give you Copper, Acidic Raion Pouches, oxygen bubbles, and early portable storage in one short loop.
+  </figcaption>
+</figure>
+
+<h2 id="how-much-to-grab">How much of each resource to grab first</h2>
+
+New players usually lose time by over-farming the safest ore. Use this table as a stopping rule: once the next unlock is ready, return and craft instead of filling your inventory with more of the same material.
+
+<GuideTable
+  caption="Early Subnautica 2 resources, first amounts, stopping points, and unlocks."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+<h2 id="titanium-copper-battery">Titanium, Copper, and Battery materials</h2>
+
+Start with **3 Titanium** for the Survival Multitool. After that, your first Copper goal is usually **two Batteries**: one for the Scanner path and one for early powered interactions such as the **Welcome Center**, the first major early POI where you scan important fragments and use powered systems.
+
+The cave below the Lifepod is the best first stop because it bundles Copper, Acidic Raion Pouches, bubbles, and often a Portable Locker into one route. Cut the Acidic Raion Pouches with the Survival Multitool before you commit to deeper exploration.
+
+<GuideCallout title="Decision point">
+Once you can craft two Batteries, stop treating Copper as the main objective. Move to Quartz for Scanner progression, then Lucifer Rotsack / Fibrous Pulp for movement and oxygen safety.
+</GuideCallout>
+
+<h2 id="quartz-coral-domes">Quartz: learn the coral dome pattern</h2>
+
+Quartz becomes easier once you stop hunting random rocks and start reading the terrain. Look for **coral dome** structures and check underneath or inside them. That visual pattern repeats, so learning the shape matters more than memorizing one exact spot.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-quartz-coral-dome.webp"
+    alt="Subnautica 2 Quartz deposits under a coral dome near the Lifepod route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Coral domes are a reliable early visual pattern for Quartz. Check below and inside them before swimming farther from the Lifepod.
+  </figcaption>
+</figure>
+
+Grab **2-4 Quartz** early. That is enough to craft the Scanner and keep a small spare stack for early base or power parts.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="fibrous-pulp-lucifer-rotsack">Fibrous Pulp, Lucifer Rotsack, Rubber, and Fins</h2>
+
+Near the huge coral route, collect **at least 4 Lucifer Rotsack and 4 Fibrous Pulp**. That minimum gives you the Rubber and Fiber branch needed for Fins and Air Bladder progression.
+
+Lucifer Rotsack is easy to spot because of the bright yellow-orange growths. Fibrous Pulp is easier to overlook because it looks like background plant life, but it matters for Fiber, mesh-style crafting, and food routes after Digestion.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-huge-coral-lucifer-rotsack.webp"
+    alt="Subnautica 2 huge coral route with Lucifer Rotsack and Fibrous Pulp for Rubber and Fiber crafting."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The huge coral route is where the movement branch starts: Lucifer Rotsack pushes Rubber, while Fibrous Pulp feeds Fiber and later food-related crafting.
+  </figcaption>
+</figure>
+
+<h2 id="silver-standard-air-tank">Silver and the Standard Air Tank breakpoint</h2>
+
+Silver is the first resource that noticeably changes your oxygen economy. Once you have Fins or an Air Bladder, push toward the green-flora Silver cave north of the Lifepod route.
+
+A good first target is **2-4 Silver**. Get enough for the Standard Air Tank or your next pinned Silver-gated recipe, then leave. Do not turn your first Silver trip into a full cave-clear unless you already know the air pocket and return path.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-silver-cave-green-flowers.webp"
+    alt="Subnautica 2 green-flora Silver cave with early Silver deposits and an oxygen reset route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The green-flora cave is your first serious Silver push. Enter with a clear oxygen plan, then leave as soon as the Standard Air Tank requirement is covered.
+  </figcaption>
+</figure>
+
+<h2 id="digestion-salt-food">Digestion, Salt, and why food changes after Anita</h2>
+
+If local food feels punishing early, you are missing **Digestion**. Digestion is an early adaptation near Anita's signal that lets you safely rely on local cooked food and plant-based food routes. Until then, use Lifepod food, crafted water, and short trips instead of assuming every edible-looking item is safe.
+
+After Digestion, Salt and food crafting become more valuable because longer routes are less about sprinting home and more about sustaining a trip. Salt appears around early caves and seafloor routes near habitat POIs, so pick it up when you are already nearby instead of making it your first dangerous detour.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-digestion-adaptation-plant.webp"
+    alt="Subnautica 2 Digestion Adaptation plant near Anita signal for eating local food safely."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Digestion turns local food from an early confusion point into a reliable support system for longer resource routes.
+  </figcaption>
+</figure>
+
+<h2 id="salt-sulfur-gold">Salt, Sulfur, Gold, and when to stop pushing</h2>
+
+Salt is reasonable to grab during early habitat routes. Sulfur and Gold are different: they matter for later chains such as Strong Acid, Power Cells, and Tadpole progression, but the hotter route is not worth forcing while you are still oxygen-starved.
+
+When this guide says to wait for the right adaptation and oxygen plan, it means: unlock Digestion for food reliability, craft the Standard Air Tank, know your return route, and bring a mobility option such as Fins or Air Bladder. If the route feels like gambling on oxygen, leave and come back.
+
+<h2 id="if-you-get-lost">If you get lost or run out of oxygen</h2>
+
+Use these quick fixes instead of forcing a bad route:
+
+- **Cannot find Silver:** return to the Lifepod, reset your direction, then look for the huge coral route and green-flora cave features rather than chasing random ore.
+- **Running out of oxygen:** craft Fins first, carry Air Bladder before deeper dives, and treat bubbles or air pockets as checkpoints.
+- **Copper but no Scanner:** you still need an Acidic Raion Pouch for the Battery and Quartz for the Scanner recipe.
+- **Fins crafted but still stuck:** push Silver next. The Standard Air Tank is the bigger oxygen breakpoint.
+- **Sulfur or Gold route feels dangerous:** back out and return later with Digestion, more oxygen, and a pinned recipe.
+
+<h2 id="co-op-resources">Co-op resource split</h2>
+
+In co-op, do not send the whole team into the same cave chasing the same Copper. Subnautica 2 supports up to four players, but the resource loop works better when each player has a different job:
+
+- one player gathers Titanium and Water Slugs near the Lifepod,
+- one player handles Copper and Acidic Raion Pouches below the Lifepod,
+- one player checks coral domes for Quartz,
+- one player scouts the huge coral / Silver route and returns with directions.
+
+Because blueprints and progression are shared in co-op, the team gets more value from dividing routes than from duplicating the same scan or resource run. Store shared materials at the base or Lifepod so the group can craft the next unlock without asking who has the one missing item.
+
+<h2 id="what-to-craft-next">What to craft next and why</h2>
+
+Use this chain to decide why you are collecting each resource:
+
+```text
+Survival Multitool
+  → lets you harvest Fiber and Acidic Raion Pouches
+Battery
+  → turns Copper + Acidic Raion Pouch into tool progress
+Scanner
+  → unlocks blueprints and fragments
+Fins
+  → reduces travel time on every route
+Air Bladder
+  → gives emergency oxygen and faster surfacing
+Standard Air Tank
+  → doubles your dive time and unlocks deeper biome access
+Habitat Builder
+  → turns resource runs into base progression
+Tadpole path
+  → makes Sulfur / Gold / Strong Acid more relevant later
+```
+
+If you are following the broader progression route, go back to the <Link href="/subnautica-2/what-to-do-first">Subnautica 2 What to Do First guide</Link>. If your next blocker says you need a better crafting station, use the <Link href="/subnautica-2/fully-functional-fabricator">Fully Functional Fabricator fix</Link>.
+
+<h2 id="faq">FAQ</h2>
+
+### Can I skip Fins and rush the Air Bladder?
+
+You can, but most players should craft Fins early because they improve every resource trip. Air Bladder is the better emergency oxygen tool; Fins are the better route-speed upgrade.
+
+### When should I stop farming Copper?
+
+Stop focusing on Copper once you can craft two Batteries. After that, Quartz for Scanner progression and Silver for Standard Air Tank usually matter more.
+
+### Should I farm Silver before making Fins?
+
+Only if you already know the cave and oxygen reset. For a first playthrough, Fins or Air Bladder make the Silver trip safer and less stressful.
+
+### Should a co-op group split resources or stay together?
+
+Split by route once everyone knows the Lifepod return path. One player can do Copper, one Quartz, one Lifepod basics, and one Silver scouting. Pool everything in shared storage.
+
+### Do I need Salt before Digestion?
+
+Not urgently. Salt becomes more useful after your food loop opens up. Before that, prioritize tools, oxygen, and the resources tied to pinned recipes.

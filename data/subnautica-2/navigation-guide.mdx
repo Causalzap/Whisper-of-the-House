@@ -1,0 +1,511 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const navigationStageColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "Main Navigation Tool", label: "Main Navigation Tool" },
+  { key: "What To Do", label: "What To Do" },
+];
+
+export const navigationStageRows = [
+  {
+    stage: "First hour",
+    "Main Navigation Tool": "Lifepod + visible landmarks",
+    "What To Do":
+      "Use the Lifepod as your zero point. Memorize one route at a time instead of trying to explore in every direction.",
+  },
+  {
+    stage: "After Scanner",
+    "Main Navigation Tool": "Signals + environment reading",
+    "What To Do":
+      "Follow objective signals, then learn the surrounding shapes, lights, bubbles, and cave exits before leaving.",
+  },
+  {
+    stage: "After Beacon unlock",
+    "Main Navigation Tool": "Named Beacons",
+    "What To Do":
+    "Craft Beacons with 1x Titanium + 1x Copper, place them with the Habitat Builder, and mark your base, resource caves, danger zones, and deep entrances with short functional names.",
+  },
+  {
+    stage: "After base building",
+    "Main Navigation Tool": "Outposts + storage points",
+    "What To Do":
+      "Build small powered rooms or safe oxygen stops near routes you repeat often.",
+  },
+  {
+    stage: "Deep exploration",
+    "Main Navigation Tool": "Beacon network + return rules",
+    "What To Do":
+      "Never enter a deep biome without a marked entry point, an oxygen reset plan, and enough inventory space for the return trip.",
+  },
+];
+
+export const beaconNameColumns = [
+  { key: "Beacon Name", label: "Beacon Name" },
+  { key: "Use It For", label: "Use It For" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const beaconNameRows = [
+  {
+    "Beacon Name": "BASE-01",
+    "Use It For": "Your first main base",
+    "Why It Works":
+      "Numbered base names stay useful if you later build forward bases or deep bases.",
+  },
+  {
+    "Beacon Name": "LIFE-POD",
+    "Use It For": "Backup zero point",
+    "Why It Works":
+      "Useful if you disable default signals or build far from the starting area.",
+  },
+  {
+    "Beacon Name": "SILVER-CAVE",
+    "Use It For": "Early Silver route",
+    "Why It Works":
+      "Names the reason to return, not just the location.",
+  },
+  {
+    "Beacon Name": "QUARTZ-DOME",
+    "Use It For": "Reliable Quartz coral dome",
+    "Why It Works":
+      "Works better than vague names like “cave” or “resource spot.”",
+  },
+  {
+    "Beacon Name": "DEEP-ENTRY",
+    "Use It For": "Entrance to deeper biome route",
+    "Why It Works":
+      "Tells you this is a doorway into risk, not a casual farming stop.",
+  },
+  {
+    "Beacon Name": "DANGER-PREDATOR",
+    "Use It For": "Aggressive creature zone",
+    "Why It Works":
+      "Warns future you and co-op teammates before they repeat the mistake.",
+  },
+  {
+    "Beacon Name": "O2-STOP",
+    "Use It For": "Air pocket, safe room, or mini outpost",
+    "Why It Works":
+      "Marks survival infrastructure instead of loot.",
+  },
+];
+
+export const environmentColumns = [
+  { key: "Clue", label: "Environmental Clue" },
+  { key: "What It Usually Means", label: "What It Usually Means" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const environmentRows = [
+  {
+    clue: "Oxygen bubbles rising",
+    "What It Usually Means": "A temporary oxygen reset is nearby.",
+    "How To Use It":
+      "Use bubbles as breadcrumbs when entering caves. If you cannot see the next air source, turn back earlier.",
+  },
+  {
+    clue: "Air pockets on cave ceilings",
+    "What It Usually Means": "A safe pause point inside a cave route.",
+    "How To Use It":
+      "Look upward before leaving a cave chamber. Ceiling air pockets can turn a risky route into a repeatable route.",
+  },
+  {
+    clue: "Coral dome shapes",
+    "What It Usually Means": "Often a useful landmark and early resource pattern.",
+    "How To Use It":
+      "Use coral domes to remember Quartz routes and to orient yourself near the Lifepod.",
+  },
+  {
+    clue: "Green flora / glowing cave features",
+    "What It Usually Means": "A distinct cave route or resource area.",
+    "How To Use It":
+      "Use color and plant shape as the route name in your head, such as “green Silver cave.”",
+  },
+  {
+    clue: "Red hatches / habitat rooms",
+    "What It Usually Means": "A breathable interior or progression POI.",
+    "How To Use It":
+      "Treat these as reset points. Enter, refill oxygen, scan, then decide whether to push deeper.",
+  },
+  {
+    clue: "Open water with no landmark",
+    "What It Usually Means": "High risk of losing direction.",
+    "How To Use It":
+      "Do not cross long empty water without a signal, beacon, surface check, or visible return landmark.",
+  },
+];
+
+export const lostDecisionColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "First Move", label: "First Move" },
+  { key: "Do Not", label: "Do Not" },
+];
+
+export const lostDecisionRows = [
+  {
+    Situation: "You are low on oxygen in a cave",
+    "First Move": "Look up for air pockets or bubbles, then leave by the last known opening.",
+    "Do Not": "Continue scanning just because one more fragment is nearby.",
+  },
+  {
+    Situation: "You cannot see the Lifepod",
+    "First Move": "Surface if safe, open Signals, and re-enable Lifepod or objective markers.",
+    "Do Not": "Keep swimming in a random direction underwater.",
+  },
+  {
+    Situation: "You found a resource cave but cannot find it again",
+    "First Move": "Return to the closest landmark and place a Beacon once unlocked.",
+    "Do Not": "Name it from memory later with vague labels like “good cave.”",
+  },
+  {
+    Situation: "You died and lost items",
+    "First Move": "Use the death marker, bring oxygen backup, recover the container, and leave.",
+    "Do Not": "Turn the recovery run into another deep exploration trip.",
+  },
+  {
+    Situation: "Your co-op teammate is lost",
+    "First Move": "Have them surface or return to a shared signal, then guide by named Beacon.",
+    "Do Not": "Send everyone away from base looking for them without marking your own route.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To stop getting lost in Subnautica 2, use the Lifepod as your first zero point, keep Signals enabled, learn environmental landmarks, place Beacons as soon as you unlock them, and build a small network of named routes instead of swimming randomly.**
+
+The safest navigation pattern is: **landmark first, signal second, beacon third, outpost later**. In shallow water, use the Lifepod, coral domes, oxygen bubbles, and visible structures. In caves, memorize the exit before scanning. In deeper routes, mark the entry point before you descend.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-navigation-lifepod-zero-point.webp"
+    alt="Subnautica 2 navigation guide showing the Lifepod as the first zero point for early routes."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Treat the Lifepod as your first zero point. Every early route should be something you can describe from here.
+  </figcaption>
+</figure>
+
+<h2 id="navigation-progression">
+  Navigation progression: landmarks first, Beacons later
+</h2>
+
+Navigation in Subnautica 2 should evolve as your save progresses. Early on, you are not trying to create a full map. You are trying to build a small set of routes you can repeat safely.
+
+<GuideTable
+  caption="How navigation changes as your Subnautica 2 save progresses."
+  columns={navigationStageColumns}
+  rows={navigationStageRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="use-lifepod-zero-point">
+  Use the Lifepod as your zero point
+</h2>
+
+In the opening hours, the Lifepod is your best anchor because it is safe, familiar, and tied to the first resource loops.
+
+Do not describe routes as “some cave I found.” Describe them from the Lifepod:
+
+- “below the Lifepod” for Copper and Acidic Raion Pouches,
+- “toward the coral dome” for Quartz,
+- “toward the large Welcome Center structure” for the first unlock hub,
+- “toward the green-flora cave” for early Silver.
+
+This is why early routes in the <Link href="/subnautica-2/early-resources">Early Resources guide</Link> are written from the Lifepod. Once you unlock Beacons, you can replace memory with markers.
+
+<h2 id="signals-tab">
+  Use the Signals tab before you assume you are lost
+</h2>
+
+If an objective marker disappears, open your Signals tab before panicking. Subnautica 2 lets you toggle signals on and off, which means a marker may be hidden rather than gone.
+
+Use Signals for:
+
+- Lifepod and objective recovery,
+- Anita and early black box routes,
+- returning to important quest locations,
+- turning off clutter once you have your own Beacons.
+
+Signals are not a full map. They are route anchors. The mistake is following a signal all the way in, collecting resources, then leaving without learning what the surrounding area looks like.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-signals-tab-marker-toggle.webp"
+    alt="Subnautica 2 Signals tab showing objective markers that can be toggled on and off for navigation."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check the Signals tab when a marker seems missing. Many early navigation problems are hidden markers, not lost objectives.
+  </figcaption>
+</figure>
+
+<h2 id="read-environment">
+  Read the environment like a route
+</h2>
+
+The strongest navigation habit is learning what the world is already telling you. You do not need a perfect map if you can read the route.
+
+<GuideTable
+  caption="Environmental clues that help you navigate without a map."
+  columns={environmentColumns}
+  rows={environmentRows}
+/>
+
+<GuideCallout title="Navigation rule">
+Before entering a cave, name your exit in your head. If you cannot describe how to get back out, you are not ready to keep going deeper.
+</GuideCallout>
+
+<h2 id="beacon-unlock">
+  How Beacons fit into your route
+</h2>
+
+Beacons are the point where Subnautica 2 navigation starts to feel controlled instead of improvised. Once you unlock and craft Beacons, stop trusting memory for places you plan to revisit.
+
+Use a Beacon for any spot that matches one of these:
+
+- you died there once,
+- it has a resource you need more than once,
+- it is an entrance to a deep or confusing route,
+- it is your first base or forward outpost,
+- it is a danger zone you want to avoid.
+
+In the current Early Access route, Beacons are unlocked through early blueprint progression by scanning Beacon fragments and useful route objects as you explore. If Beacon crafting has not appeared yet, keep scanning early wreck pieces, habitat objects, and progression fragments while using Signals, Lifepod-based directions, and obvious landmarks.
+
+Once the blueprint is unlocked, a Beacon costs **1x Titanium + 1x Copper**, and you place it with the **Habitat Builder**. After placing it, use **Set Label** to rename it with a functional route name like `BASE-01`, `SILVER-CAVE`, or `DEEP-ENTRY`. If you placed it badly, dismantle it with the Habitat Builder to recover the materials, then move it somewhere cleaner.
+
+<h2 id="beacon-names">
+  Beacon naming system you can copy
+</h2>
+
+Do not name Beacons emotionally. Name them by function. A good Beacon tells tired future-you what the place is for.
+
+<GuideTable
+  caption="Subnautica 2 Beacon naming examples."
+  columns={beaconNameColumns}
+  rows={beaconNameRows}
+/>
+
+A simple naming pattern is:
+
+```text
+TYPE-NUMBER or TYPE-LOCATION
+
+BASE-01
+SILVER-CAVE
+O2-STOP
+DEEP-ENTRY
+DANGER-PREDATOR
+```
+
+In co-op, this matters even more. “My cave” means nothing to your teammate. “SILVER-CAVE” is immediately useful.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="shallow-water">
+  Shallow water navigation
+</h2>
+
+In shallow water, keep your routes short and visual. The surface is close enough that you can reset often, so your main risk is not death; it is losing track of which coral dome, cave, or structure mattered.
+
+Use shallow routes for:
+
+- Titanium,
+- Copper,
+- Quartz,
+- Water Slugs,
+- Lucifer Rotsack,
+- Fibrous Pulp,
+- early scans.
+
+Your shallow-water habit should be:
+
+1. leave the Lifepod with one target,
+2. grab only what supports that target,
+3. look back at the Lifepod or landmark before entering a cave,
+4. return before your inventory is full of random items.
+
+<h2 id="cave-navigation">
+  Cave navigation
+</h2>
+
+Caves are where most early players get lost because the exit stops looking obvious once you turn twice.
+
+Before entering a cave, check three things:
+
+- **Exit:** What does the entrance look like from the inside?
+- **Air:** Do you see bubbles, a ceiling pocket, or a nearby surface route?
+- **Reason:** What are you here for: Copper, Acidic Raion Pouch, Quartz, Silver, or a scan?
+
+If the answer is “I am just checking,” stay near the entrance. If the answer is “I need one more deposit,” leave earlier than your panic brain wants to.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-cave-oxygen-bubbles-route.webp"
+    alt="Subnautica 2 cave navigation showing oxygen bubbles as route markers and emergency air."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Oxygen bubbles are not just survival help. They are also route markers inside early caves.
+  </figcaption>
+</figure>
+
+<h2 id="deep-water">
+  Deep water navigation
+</h2>
+
+Deep routes need a different mindset. In shallow water, you can make small mistakes and surface. In deeper routes, a wrong turn can turn into a death loop.
+
+Before entering deep water, set a rule:
+
+**Mark the entry before you descend.**
+
+That marker can be a Signal, a Beacon, a base, a mini outpost, or a very obvious structure. What matters is that you have a return anchor before the environment stops looking familiar.
+
+For deep routes, bring:
+
+- enough oxygen capacity for the route,
+- Air Bladder or another emergency return tool,
+- a clear exit marker,
+- inventory space,
+- a reason to be there.
+
+Do not explore deep water because it looks interesting. Explore it because you know what you are trying to unlock.
+
+<h2 id="mini-outpost">
+  How mini outposts help navigation
+</h2>
+
+A mini outpost is a tiny functional base used as a route anchor. It does not need to be pretty.
+
+A useful early outpost can be as simple as:
+
+```text
+Small room or basic base piece
++ hatch
++ power source
++ storage
++ Beacon
+```
+
+Use one near routes you repeat often: a deep entry, a resource cave, or a forward exploration point. The goal is not decoration. The goal is to create a safe oxygen, storage, and orientation reset.
+
+If you are still working through the base chain, read the <Link href="/subnautica-2/fully-functional-fabricator">Fully Functional Fabricator guide</Link> first, then use the <Link href="/subnautica-2/first-base-setup">First Base Setup guide</Link> once that page is live before overbuilding outposts.
+
+<h2 id="pathfinder">
+  What Pathfinder is and when to use it
+</h2>
+
+Pathfinder is an early active Biomod option from the Welcome Center Biolab. When used, it leaves a temporary visible trail behind you, which can help you escape confusing caves.
+
+You do not need Pathfinder for every route. Dash, another early active Biomod option from the same Welcome Center Biolab, is often better for speed and predator escape. But Pathfinder is valuable if you are the type of player who gets turned around inside caves.
+
+Use Pathfinder when:
+
+- you are entering a winding cave,
+- you are scanning inside a structure,
+- you are teaching a co-op teammate a route,
+- you know the exit will not be obvious on the way back.
+
+The tradeoff is simple: Pathfinder helps you remember the route; Dash helps you move faster. Choose based on the problem you actually have.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-pathfinder-biomod-trail.webp"
+    alt="Subnautica 2 Pathfinder Biomod leaving a visible trail for cave navigation."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pathfinder is a Biolab active Biomod that can leave a visible return trail through confusing routes.
+  </figcaption>
+</figure>
+
+<h2 id="lost-decision-tree">
+  If you are completely lost, do this
+</h2>
+
+When you are lost, stop making new decisions. Recover the route first.
+
+<GuideTable
+  caption="What to do when you are lost in Subnautica 2."
+  columns={lostDecisionColumns}
+  rows={lostDecisionRows}
+/>
+
+The general recovery rule is:
+
+```text
+Stop
+→ find oxygen
+→ surface or open Signals
+→ return to a known marker
+→ place a Beacon when safe
+→ only then continue exploring
+```
+
+<h2 id="coop-navigation">
+  Co-op navigation rules
+</h2>
+
+Co-op makes navigation easier if the team uses shared names. It becomes worse if everyone describes places differently.
+
+Use these rules:
+
+- pick one person to name Beacons,
+- agree on short names before placing them,
+- mark danger zones for the whole team,
+- do not split four ways before the base and resource network is stable,
+- call out routes by function: “Silver cave,” “O2 stop,” “deep entry,” not “over here.”
+
+When a teammate gets lost, do not send everyone searching. Have the lost player surface if safe, re-enable Signals, or return to the nearest named Beacon. One player can guide them while the rest keep the base or resource loop stable.
+
+<h2 id="death-recovery">
+  Death recovery without repeating the same mistake
+</h2>
+
+If you died while lost, treat the recovery run as a navigation problem, not a revenge trip.
+
+Use the death marker, bring oxygen backup, recover the container, and leave. The full death recovery steps are covered in <Link href="/subnautica-2/what-to-do-first">What to Do First</Link>, but the navigation lesson is simple:
+
+**Do not return to the same route with the same plan.**
+
+Add one improvement before trying again: Fins, Air Bladder, Standard Air Tank, a Beacon, a co-op guide, or a clearer exit rule.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Does Subnautica 2 have a map?
+
+Do not rely on a traditional map in the opening route. The practical navigation system is made from Signals, landmarks, Beacons, bases, outposts, and your own route memory.
+
+### How do I unlock Beacons in Subnautica 2?
+
+Scan Beacon fragments and early route objects until the Beacon blueprint appears. Once unlocked, a Beacon costs **1x Titanium + 1x Copper**, must be placed with the **Habitat Builder**, can be renamed with **Set Label**, and can be dismantled with the Habitat Builder to recover materials.
+
+### What should I name my first Beacon?
+
+Name your first base Beacon `BASE-01`. After that, use functional names like `SILVER-CAVE`, `O2-STOP`, `DEEP-ENTRY`, or `DANGER-PREDATOR`.
+
+### Is Pathfinder better than Dash?
+
+Pathfinder is better when you get lost in caves because it can leave a visible return trail. Dash is better for speed and escaping danger. Use Pathfinder for confusing routes and Dash for general exploration.
+
+### How do I stop getting lost in co-op?
+
+Use shared Beacon names, call out routes by function, and avoid everyone using different names for the same place. If someone gets lost, guide them back to a named marker instead of sending the whole team searching.
