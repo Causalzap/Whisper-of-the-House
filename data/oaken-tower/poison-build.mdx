@@ -1,0 +1,545 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const coreItemColumns = [
+  { key: "Item", label: "Item" },
+  { key: "Role", label: "Role" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const coreItemRows = [
+  {
+    Item: "Poison Dagger",
+    Role: "Early Poison starter",
+    "How To Use It":
+      "Take it when you need a cheap Poison direction early. It gives the run a real Poison base, but it is not always your final carry.",
+  },
+  {
+    Item: "Petal Staff",
+    Role: "Early scaling piece",
+    "How To Use It":
+      "Good when you can trigger it early and keep the fight alive. The earlier it starts gaining Poison, the more useful it becomes later.",
+  },
+  {
+    Item: "Venomstrike",
+    Role: "Bow-based Poison pressure",
+    "How To Use It":
+      "Best when you already have bow support, extra projectiles, or repeated triggers. Do not force it into a board that has no bow plan.",
+  },
+  {
+    Item: "Toxins",
+    Role: "Poison trigger amplifier",
+    "How To Use It":
+      "Use it when your board already applies Poison and you need that Poison damage to trigger harder or more often.",
+  },
+  {
+    Item: "Venom Ring",
+    Role: "Poison scaling payoff",
+    "How To Use It":
+      "This is one of the clearest reasons to commit. If you find it with enough Poison items already in play, start feeding the Poison engine.",
+  },
+  {
+    Item: "Harbinger",
+    Role: "Hybrid debuff option",
+    "How To Use It":
+      "Useful when your run is not pure Poison and you are mixing Poison with Burn, Bleed, or other debuffs.",
+  },
+];
+
+export const perkColumns = [
+  { key: "Perk", label: "Perk" },
+  { key: "Poison Value", label: "Poison Value" },
+  { key: "How To Play It", label: "How To Play It" },
+];
+
+export const perkRows = [
+  {
+    Perk: "Toxic",
+    "Poison Value":
+      "The cleanest Poison opener because it gives you a Poison Slot after starting with a Refined Spear.",
+    "How To Play It":
+      "Prioritize fast trigger items and early Poison pieces. If the first shops also show Poison Dagger or Petal Staff, this is your best reason to commit.",
+  },
+  {
+    Perk: "Strike",
+    "Poison Value":
+      "The Day 8 Multicast Slot can help a Poison item trigger more value if your board already has a good Poison holder.",
+    "How To Play It":
+      "Do not take it just because you want Poison. Take it when your build can use the Silver Lance start or when extra casts will matter later.",
+  },
+  {
+    Perk: "Gathering",
+    "Poison Value":
+      "Extra free rerolls help you search for a specific Poison piece without burning as much gold.",
+    "How To Play It":
+      "Use the rerolls with a target: Venom Ring, Toxins, Venomstrike, a duplicate, or a support item. Do not roll randomly.",
+  },
+  {
+    Perk: "Flash Sale",
+    "Poison Value":
+      "Discounted shops can help you buy expensive support or scaling pieces at the right timing.",
+    "How To Play It":
+      "Plan around sale shops. Buy what actually improves your board and avoid rerolling away value with no target.",
+  },
+  {
+    Perk: "Gambit",
+    "Poison Value":
+      "A high-risk option that can give an early Epic item and sometimes push you into a Poison or debuff route.",
+    "How To Play It":
+      "Only treat it as a Poison route if the Epic item or follow-up shop supports Poison. The HP penalty means you cannot be greedy forever.",
+  },
+  {
+    Perk: "Essential Oils",
+    "Poison Value":
+      "Flexible if the Essence choices support your item plan, but not a direct Poison opener by itself.",
+    "How To Play It":
+      "Use it as support, not as proof that you must force Poison. Your early shops still decide whether the run is real.",
+  },
+];
+
+export const dayColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "Your Goal", label: "Your Goal" },
+  { key: "Good Signs", label: "Good Signs" },
+  { key: "Danger Signs", label: "Danger Signs" },
+];
+
+export const dayRows = [
+  {
+    Timing: "D1-D3",
+    "Your Goal":
+      "Buy enough tempo to survive and check whether Poison is actually being offered.",
+    "Good Signs":
+      "Toxic, Poison Dagger, Petal Staff, a fast trigger item, or cheap support.",
+    "Danger Signs":
+      "You buy slow Poison pieces while your tower has no real damage yet.",
+  },
+  {
+    Timing: "D4-D6",
+    "Your Goal":
+      "Commit only if you have a real Poison engine or a clear scaling path.",
+    "Good Signs":
+      "You have Poison on a fast item, potion support, duplicates, or enough health to level.",
+    "Danger Signs":
+      "You keep rolling because you want Poison, not because you know what item you need.",
+  },
+  {
+    Timing: "D7-D8",
+    "Your Goal":
+      "Level for better shop quality or upgrade your real carry.",
+    "Good Signs":
+      "You are winning or barely losing while searching for Venom Ring, Toxins, Venomstrike, or support pieces.",
+    "Danger Signs":
+      "Your Poison is too slow and defensive builds are out-healing or out-shielding you.",
+  },
+  {
+    Timing: "D9+",
+    "Your Goal":
+      "Stop building theory and solve the next matchup.",
+    "Good Signs":
+      "Your main Poison item triggers often, your defense buys time, and you have backup damage.",
+    "Danger Signs":
+      "You add more Poison but still die before it matters.",
+  },
+];
+
+export const encounterColumns = [
+  { key: "Encounter", label: "Encounter" },
+  { key: "Pick It When", label: "Pick It When" },
+  { key: "Why Poison Likes It", label: "Why Poison Likes It" },
+];
+
+export const encounterRows = [
+  {
+    Encounter: "Traveler",
+    "Pick It When":
+      "You need free rerolls or a safer way to search for a missing Poison piece.",
+    "Why Poison Likes It":
+      "Free rerolls are good when you already know the target: Venom Ring, Toxins, a duplicate, or a support item.",
+  },
+  {
+    Encounter: "Carmen",
+    "Pick It When":
+      "You want shop value, lucky rolls, or a better chance to find a key scaling piece.",
+    "Why Poison Likes It":
+      "Poison often needs one specific payoff. Carmen-style shop value is strong when you roll with a target.",
+  },
+    {
+    Encounter: "Lyra",
+    "Pick It When":
+      "You are afraid of the enemy's opening burst and need a few seconds for Poison to start working.",
+    "Why Poison Likes It":
+      "Lyra freezes all enemy items at the start of combat for 2 seconds, which gives slower Poison boards time to apply their first stacks.",
+  },
+  {
+    Encounter: "Celestia",
+    "Pick It When":
+      "Her offered reward directly improves your Poison carry, key support item, or upgrade path.",
+    "Why Poison Likes It":
+      "Poison does not need random value late. Take Celestia when the reward makes your main Poison engine stronger, not just because it looks rare.",
+  },
+  {
+    Encounter: "Potion Seller",
+    "Pick It When":
+      "Your build already benefits from potions or needs a quick stat / Poison boost.",
+    "Why Poison Likes It":
+      "Potions can add Poison, crit, rerolls, cooldown help, or temporary power depending on what you hit.",
+  },
+  {
+    Encounter: "Cleric",
+    "Pick It When":
+      "You are low on lives or need enough health to survive into your scaling turns.",
+    "Why Poison Likes It":
+      "A slower Poison board sometimes needs one more fight before it becomes lethal.",
+  },
+];
+
+export const matchupColumns = [
+  { key: "Enemy Build", label: "Enemy Build" },
+  { key: "What They Threaten", label: "What They Threaten" },
+  { key: "How Poison Should Respond", label: "How Poison Should Respond" },
+];
+
+export const matchupRows = [
+  {
+    "Enemy Build": "Shield / Heal",
+    "What They Threaten":
+      "They survive at low health, cleanse debuffs, or outlast weak Poison stacks.",
+    "How Poison Should Respond":
+      "Increase Poison application speed, add Toxins, or use backup damage. One slow Poison source is usually not enough.",
+  },
+  {
+    "Enemy Build": "Burn",
+    "What They Threaten":
+      "They race you before your Poison engine fully scales.",
+    "How Poison Should Respond":
+      "Buy more tempo or defense early. Do not greed for perfect scaling while Burn is already killing you.",
+  },
+  {
+    "Enemy Build": "Frosty / Freeze",
+    "What They Threaten":
+      "They delay your key item or burst after setup.",
+    "How Poison Should Respond":
+      "Spread value across more than one item if possible, and make sure your Poison starts before the freeze swing matters.",
+  },
+  {
+    "Enemy Build": "Dark burst",
+    "What They Threaten":
+      "They can kill before long Poison fights develop.",
+    "How Poison Should Respond":
+      "Prioritize early health, shield, and faster Poison triggers. Slow Poison scaling is not enough here.",
+  },
+  {
+    "Enemy Build": "Bow / projectile carry",
+    "What They Threaten":
+      "They rely on one carry window to burst you down before your damage-over-time engine finishes the fight.",
+    "How Poison Should Respond":
+      "Build enough HP, shield, or delay to live through the first bow burst. Once you survive that window, Poison can win through repeated stacks.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Loses Runs", label: "Why It Loses Runs" },
+  { key: "Better Play", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Forcing Poison with no Poison pieces",
+    "Why It Loses Runs":
+      "You skip stronger early boards and lose health before the build exists.",
+    "Better Play":
+      "Play tempo first, then commit when you see Toxic, Poison Dagger, Petal Staff, Venom Ring, Toxins, or Venomstrike.",
+  },
+  {
+    Mistake: "Treating every Poison item as a carry",
+    "Why It Loses Runs":
+      "Some pieces are starters or support, not win conditions.",
+    "Better Play":
+      "Decide whether the item is a starter, engine, payoff, or support before buying around it.",
+  },
+  {
+    Mistake: "Rolling before you know the target",
+    "Why It Loses Runs":
+      "You spend the gold that should become levels, upgrades, or survival.",
+    "Better Play":
+      "Name the item before you reroll: Venom Ring, Toxins, duplicate, potion piece, or cooldown support.",
+  },
+  {
+    Mistake: "Ignoring enemy speed",
+    "Why It Loses Runs":
+      "Poison needs time, and some boards kill before your stacks matter.",
+    "Better Play":
+      "Buy tempo or defense when the next fight is the real problem.",
+  },
+  {
+    Mistake: "Overbuilding Poison against the wrong problem",
+    "Why It Loses Runs":
+      "More Poison does not fix a slow trigger, low health, or missing backup damage.",
+    "Better Play":
+      "Ask why the next fight is lost, then buy the piece that solves that exact reason.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Play Poison when Oaken Tower gives you an actual Poison opener: Toxic, Poison Dagger, Petal Staff, Venomstrike, or an early shop that already points toward repeated Poison triggers.**
+
+Your best Poison boards usually have one clear engine, one scaling payoff such as Venom Ring or Toxins, and enough tempo to survive until the stacks matter. Do not reroll unless you can name the item you are looking for.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-poison-start.webp"
+    alt="Oaken Tower early Poison start with a Poison slot and Poison items in the shop."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A Poison run starts best when the game gives you a Poison direction early, not when you force the idea from an empty shop.
+  </figcaption>
+</figure>
+
+<h2 id="when-to-play-poison">
+  When should you play Poison?
+</h2>
+
+Play Poison when at least one of these is true:
+
+- you rolled **Toxic** and can use the Poison Slot,
+- your opening shop shows **Poison Dagger** or **Petal Staff**,
+- you see early bow support for **Venomstrike**,
+- you find **Toxins** or **Venom Ring** as a scaling payoff,
+- you already have fast triggers, multicast, or cooldown support,
+- an encounter gives you enough rerolls, upgrades, or shop value to search for a real Poison piece.
+
+The important word is **real**. One random Poison item is not a build. A Poison item plus repeated triggers, scaling, or a strong support path is a build.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="core-items">
+  Core Poison items to look for
+</h2>
+
+This is the part that matters most in real runs. You do not want “Poison items” in general. You want to know what job each item does.
+
+<GuideTable
+  caption="Core Oaken Tower Poison items and what each one does."
+  columns={coreItemColumns}
+  rows={coreItemRows}
+/>
+
+A simple way to read the table:
+
+- **Poison Dagger** is a starter.
+- **Petal Staff** is early scaling.
+- **Venomstrike** is a bow Poison route.
+- **Toxins** makes existing Poison matter more.
+- **Venom Ring** is a scaling payoff.
+- **Harbinger** is for hybrid debuff boards.
+
+If you do not have at least one starter and one payoff, keep your board flexible.
+
+<h2 id="perk-setup">
+  Best perks for Poison builds
+</h2>
+
+Poison starts before the shop. Your selected perks decide what kind of run you are allowed to play.
+
+You do not need every Poison-friendly perk at once. You need one perk that gives a direction and enough backup value to survive if the first shops do not support Poison.
+
+<GuideTable
+  caption="Best Oaken Tower perks for Poison builds."
+  columns={perkColumns}
+  rows={perkRows}
+/>
+
+One important note: **Dream Catcher is not a perk.** It is cooldown support. If you find it during a Poison run, it can still be excellent, but it belongs in your item plan, not your perk selection.
+
+<h2 id="day-by-day">
+  Day-by-day Poison plan
+</h2>
+
+The biggest improvement you can make is to stop thinking “early / mid / late” and start thinking by run timing.
+
+<GuideTable
+  caption="Oaken Tower Poison plan by run timing."
+  columns={dayColumns}
+  rows={dayRows}
+/>
+
+The short version:
+
+- **D1-D3:** do not be weak on purpose unless the reward is huge.
+- **D4-D6:** commit only if your Poison actually has a carry path.
+- **D7-D8:** level, upgrade, or search for a specific payoff.
+- **D9+:** solve the next opponent, not your dream final board.
+
+<h2 id="mid-game-scaling">
+  Mid game: what you are actually searching for
+</h2>
+
+In the mid game, your shop decisions should be boring and specific.
+
+You are usually searching for one of these:
+
+- **Venom Ring** if you already have several Poison items.
+- **Toxins** if your Poison exists but needs to trigger harder.
+- **Venomstrike** if your board has bow or projectile support.
+- **Petal Staff duplicates** if it is already carrying your scaling.
+- **Potion support** if your run has potion synergy.
+- **Cooldown or multicast support** if your Poison engine is too slow.
+- **Shield or healing** if you are dying before the stacks matter.
+
+Do not reroll because you are bored. Reroll because one of those targets changes the next two fights.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-poison-reroll-ring.webp"
+    alt="Oaken Tower Poison build using potion rewards, free rerolls and leveling to look for a Poison scaling ring."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Free rerolls are strongest when you already know the target. In a Poison run, that target is usually Venom Ring, Toxins, a duplicate, or trigger support.
+  </figcaption>
+</figure>
+
+<h2 id="encounters">
+  Best encounters for Poison builds
+</h2>
+
+Encounters are not just bonuses. In Poison runs, they often decide whether you can afford to search, survive, upgrade, or pivot.
+
+<GuideTable
+  caption="Best Oaken Tower encounters for Poison builds."
+  columns={encounterColumns}
+  rows={encounterRows}
+/>
+
+The best encounter choice depends on what your board is missing:
+
+- missing a key item: take rerolls or shop value,
+- missing time: take health, shield, or healing,
+- missing scaling: take upgrades or cooldown,
+- missing a build direction: take the option that gives you a real carry path.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="placement-and-support">
+  Placement and support rules
+</h2>
+
+Poison gets much better when the right item is doing the poisoning.
+
+Good Poison holders usually have:
+
+- fast cooldown,
+- repeated triggers,
+- multicast,
+- projectile support,
+- item-triggering effects,
+- a Poison slot,
+- enough protection to survive long fights.
+
+Bad Poison holders are slow items that trigger once, apply a little Poison, and then watch the enemy kill you.
+
+If you have to choose between “more Poison” and “faster Poison,” faster Poison is often the better first fix.
+
+<h2 id="matchups">
+  Poison matchups: what to do against common builds
+</h2>
+
+Poison is not played the same way into every opponent. The next fight should change what you buy.
+
+<GuideTable
+  caption="How to play Poison against common Oaken Tower builds."
+  columns={matchupColumns}
+  rows={matchupRows}
+/>
+
+Against shield and heal, Poison needs enough application speed to finish the enemy. Against Burn or Dark burst, you need enough early tempo to avoid dying first. Against bow carries, the key is surviving their burst window so your damage-over-time can actually finish the fight.
+
+<h2 id="final-board">
+  What a strong Poison board looks like
+</h2>
+
+A good final Poison board should be easy to explain:
+
+- this item applies most of my Poison,
+- this item makes it trigger faster,
+- this item helps me survive,
+- this item is my scaling payoff,
+- this item finishes fights if Poison is too slow.
+
+If you cannot point to those jobs, the board is probably too scattered.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-poison-final-damage.webp"
+    alt="Oaken Tower Poison build showing huge Poison stacks and final damage near the end of the run."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Strong Poison boards are not just piles of Poison items. They have a main engine, a payoff, and enough support to keep triggering.
+  </figcaption>
+</figure>
+
+<h2 id="common-mistakes">
+  Common Poison build mistakes
+</h2>
+
+<GuideTable
+  caption="Common Oaken Tower Poison build mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="quick-checklist">
+  Quick Poison checklist
+</h2>
+
+Before you fully commit, check this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>I have a real Poison signal, not just one random item.</li>
+  <li>I can name my Poison engine.</li>
+  <li>I know whether my payoff is Venom Ring, Toxins, Venomstrike, Petal Staff scaling, or a hybrid debuff plan.</li>
+  <li>My board can survive the next fight.</li>
+  <li>I know what item I am rerolling for.</li>
+  <li>I have a plan for shield, heal, Burn, Frosty, Dark burst, or bow carry opponents.</li>
+</ul>
+
+If you fail most of this checklist, do not hard-force Poison. Play the strongest board first and pivot later.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What are the best Poison items in Oaken Tower?
+
+Start with Poison Dagger or Petal Staff if the shop offers them early. Look for Venomstrike if you have bow support, Toxins if you already apply Poison, and Venom Ring when you have enough Poison items to scale around it.
+
+### Is Toxic the best perk for Poison?
+
+Toxic is the cleanest Poison opener because it gives a Poison Slot, but it is only strong when your shop gives you fast triggers or Poison items to use with it.
+
+### Is Venom Ring worth building around?
+
+Yes, when you already have enough Poison items or can quickly add them. Venom Ring is much weaker if it appears in a board with no Poison base.
+
+### Is Poison good against shield builds?
+
+Poison can be good into shield and heal builds, but only if you apply enough of it. A tiny Poison source may not beat heavy shielding, healing, or debuff cleanse.
+
+### What should I reroll for in a Poison build?
+
+Reroll for a named target: Venom Ring, Toxins, Venomstrike, Petal Staff duplicates, potion support, cooldown support, multicast, or defense. If you cannot name the target, you probably should not roll yet.

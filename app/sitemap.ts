@@ -69,6 +69,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/outbound`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/directive-8020`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/subnautica-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/oaken-tower`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+    { url: `${base}/oaken-tower/poison-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/oaken-tower/10-wins-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/oaken-tower/level-vs-reroll`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/oaken-tower/3-star-items`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/oaken-tower/perk-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
      // ⬇️ 把 4 篇文章补上
      { url: `${base}/directive-8020/co-op-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

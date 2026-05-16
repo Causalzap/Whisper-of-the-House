@@ -1,0 +1,585 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const unlockConditionColumns = [
+  { key: "Perk", label: "Perk" },
+  { key: "Known Unlock Condition", label: "Known Unlock Condition" },
+  { key: "Safe Unlock Advice", label: "Safe Unlock Advice" },
+];
+
+export const unlockConditionRows = [
+  {
+    Perk: "Gambit",
+    "Known Unlock Condition":
+      "Earn 10 trophies while only ever buying Epic items.",
+    "Safe Unlock Advice":
+      "Keep the attempt extremely clean. Avoid buying lower-rarity items, and be careful with potions or encounter rewards that might count against the condition.",
+  },
+  {
+    Perk: "Essential Oils",
+    "Known Unlock Condition":
+      "Use an Essence to give an item a new tag 3 times.",
+    "Safe Unlock Advice":
+      "Take Essence choices only when you can clearly apply them to items during the run. Do not turn the whole board into a weak Essence experiment.",
+  },
+  {
+    Perk: "Merge Perk",
+    "Known Unlock Condition":
+      "Earn the 10th Trophy with a 3-star item 3 times.",
+    "Safe Unlock Advice":
+      "Do this in runs where a 3-star carry is already realistic. Forcing two-star setups from nothing usually costs too much tempo.",
+  },
+  {
+    Perk: "Random Perks",
+    "Known Unlock Condition":
+      "Unlock all other perks.",
+    "Safe Unlock Advice":
+      "Treat this as a collection reward, not an early target.",
+  },
+];
+
+export const unconfirmedUnlockColumns = [
+  { key: "Perk", label: "Perk" },
+  { key: "Status", label: "Status" },
+  { key: "What To Do For Now", label: "What To Do For Now" },
+];
+
+export const unconfirmedUnlockRows = [
+  {
+    Perk: "Toxic",
+    Status:
+      "The exact unlock condition still needs in-game confirmation.",
+    "What To Do For Now":
+      "Use Toxic if it is already unlocked and your packs support Poison. Do not plan a dedicated unlock run until the condition is verified.",
+  },
+  {
+    Perk: "Flash Sale",
+    Status:
+      "The exact unlock condition still needs in-game confirmation.",
+    "What To Do For Now":
+      "Treat it as a strong economy perk once unlocked, but avoid claiming a specific unlock route without checking the in-game text.",
+  },
+  {
+    Perk: "Strike",
+    Status:
+      "The exact unlock condition still needs in-game confirmation.",
+    "What To Do For Now":
+      "Use it as a multicast perk once unlocked. If chasing the unlock, confirm the tooltip before starting the run.",
+  },
+  {
+    Perk: "Healing Touch",
+    Status:
+      "The exact unlock condition still needs in-game confirmation.",
+    "What To Do For Now":
+      "Use it as a survival perk once unlocked. Do not follow any unverified community condition blindly.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "Perk", label: "Perk" },
+  { key: "Unlock Priority", label: "Unlock Priority" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const priorityRows = [
+  {
+    Perk: "Toxic",
+    "Unlock Priority": "High",
+    "Why It Matters":
+      "It gives a clear Poison direction, which is one of the easiest build paths for players to understand.",
+  },
+  {
+    Perk: "Flash Sale",
+    "Unlock Priority": "High",
+    "Why It Matters":
+      "Discount shops can turn good gold decisions into stronger boards, faster levels, and safer carry upgrades.",
+  },
+  {
+    Perk: "Healing Touch",
+    "Unlock Priority": "Medium-high",
+    "Why It Matters":
+      "A healing slot can help slower builds survive long enough for their carry to work.",
+  },
+  {
+    Perk: "Strike",
+    "Unlock Priority": "Medium",
+    "Why It Matters":
+      "A multicast slot can make one strong item much better, but it needs a real carry to multiply.",
+  },
+  {
+    Perk: "Essential Oils",
+    "Unlock Priority": "Medium",
+    "Why It Matters":
+      "It gives Essence flexibility, but it is support value rather than a full build direction.",
+  },
+  {
+    Perk: "Gambit",
+    "Unlock Priority": "Advanced",
+    "Why It Matters":
+      "An early Epic item can be powerful, but the unlock and play pattern are easy to mess up.",
+  },
+  {
+    Perk: "Merge Perk",
+    "Unlock Priority": "Low for beginners",
+    "Why It Matters":
+      "It sounds strong, but forcing 3-star setup conditions can make early boards too weak.",
+  },
+];
+
+export const useCaseColumns = [
+  { key: "Perk", label: "Perk" },
+  { key: "Good Use", label: "Good Use" },
+  { key: "Trap", label: "Trap" },
+];
+
+export const useCaseRows = [
+  {
+    Perk: "Toxic",
+    "Good Use":
+      "Pick it when your packs can show Poison items and your first shops offer Poison Dagger, Petal Staff, fast triggers, or Poison support.",
+    Trap:
+      "Forcing Poison when the shop gives you a stronger Burn, Bow, Shield, or weapon carry.",
+  },
+  {
+    Perk: "Flash Sale",
+    "Good Use":
+      "Use discounted shops to buy a carry, complete a duplicate, level while buying power, or pick up expensive support.",
+    Trap:
+      "Buying every discounted item just because it is cheap.",
+  },
+  {
+    Perk: "Healing Touch",
+    "Good Use":
+      "Use it when your build needs time: Poison, scaling weapons, shield / heal plans, or slow setup boards.",
+    Trap:
+      "Building only survival and never adding a way to kill the enemy tower.",
+  },
+  {
+    Perk: "Strike",
+    "Good Use":
+      "Use multicast on one item that already matters, such as a Poison holder, bow carry, or fast weapon.",
+    Trap:
+      "Taking it when your board has no item worth multiplying.",
+  },
+  {
+    Perk: "Essential Oils",
+    "Good Use":
+      "Use Essence and extra value to support your current item plan.",
+    Trap:
+      "Treating Essence value as the whole build and ignoring stronger shop items.",
+  },
+  {
+    Perk: "Gambit",
+    "Good Use":
+      "Turn the early Epic item into a real build direction, then protect the run from the HP penalty.",
+    Trap:
+      "Assuming the Epic item wins by itself or breaking the unlock condition with unclear purchases.",
+  },
+  {
+    Perk: "Merge Perk",
+    "Good Use":
+      "Use it when you already have natural 2-star progress and a real 3-star carry path.",
+    Trap:
+      "Starting a run by forcing two 2-star items before your board can survive.",
+  },
+];
+
+export const notUnlockColumns = [
+  { key: "Problem", label: "Why It Did Not Unlock" },
+  { key: "What To Check", label: "What To Check" },
+];
+
+export const notUnlockRows = [
+  {
+    Problem: "The condition was stricter than it looked",
+    "What To Check":
+      "Read the in-game perk tooltip word by word. Some conditions care about buying, item rarity, trophies, tags, wins, or the final board state.",
+  },
+  {
+    Problem: "A potion may have counted against the attempt",
+    "What To Check":
+      "For strict unlocks like Gambit, avoid potions if you are not sure whether they count as item-related purchases or lower-rarity pickups.",
+  },
+  {
+    Problem: "An encounter reward changed the run",
+    "What To Check":
+      "If the unlock asks for a clean condition, NPC rewards may still matter. Avoid unclear rewards during unlock attempts.",
+  },
+  {
+    Problem: "You completed the run but not the trophy condition",
+    "What To Check":
+      "Some perk unlocks care about trophies, not just winning fights. Confirm whether the condition says win, trophy, 10th trophy, or completed run.",
+  },
+  {
+    Problem: "You unlocked it but did not select it",
+    "What To Check":
+      "Unlocked perks still need to be added to your selected perk pool before they can appear in a run.",
+  },
+  {
+    Problem: "The game delayed or bugged the unlock",
+    "What To Check":
+      "Restart the game, check the perk screen again, and search Steam discussions before repeating a long unlock attempt.",
+  },
+];
+
+export const poolColumns = [
+  { key: "Slot", label: "Selected Perk Slot" },
+  { key: "What To Put There", label: "What To Put There" },
+  { key: "Why", label: "Why" },
+];
+
+export const poolRows = [
+  {
+    Slot: "One direction perk",
+    "What To Put There":
+      "Toxic, Strike, or another perk that can become a real build direction.",
+    Why:
+      "You need at least one perk that gives the run a plan if the shop supports it.",
+  },
+  {
+    Slot: "One economy perk",
+    "What To Put There":
+      "Flash Sale, Lucky / reroll value, or another shop-value perk.",
+    Why:
+      "Economy perks help you recover from awkward shops or find payoff items.",
+  },
+  {
+    Slot: "One survival perk",
+    "What To Put There":
+      "Healing Touch, shield support, extra HP, or another defensive perk.",
+    Why:
+      "Some runs need time before the carry starts winning fights.",
+  },
+  {
+    Slot: "One flexible perk",
+    "What To Put There":
+      "Essential Oils, general scaling, or a perk that works with multiple packs.",
+    Why:
+      "The chosen perk is random, so your fourth option should not create a dead start.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Play", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Chasing unlocks during serious win runs",
+    "Why It Hurts":
+      "Unlock conditions can force awkward buying, strange rewards, or weaker boards.",
+    "Better Play":
+      "Separate unlock attempts from 10-win or ranked attempts.",
+  },
+  {
+    Mistake: "Ignoring the exact unlock text",
+    "Why It Hurts":
+      "Many failed unlocks happen because one purchase, potion, or reward broke the condition.",
+    "Better Play":
+      "Follow the in-game tooltip literally and keep the attempt clean.",
+  },
+  {
+    Mistake: "Picking four greedy perks",
+    "Why It Hurts":
+      "If the selected perk is slow, your opening can become too weak.",
+    "Better Play":
+      "Use a balanced pool: direction, economy, survival, flexible.",
+  },
+  {
+    Mistake: "Forcing the selected perk",
+    "Why It Hurts":
+      "A perk suggests a route, but the shop decides whether that route is real.",
+    "Better Play":
+      "Use the perk as a signal, then follow the strongest actual items.",
+  },
+  {
+    Mistake: "Leaving old perks selected",
+    "Why It Hurts":
+      "After unlocking a better perk, old filler can still be randomly selected.",
+    "Better Play":
+      "Update your selected perk pool after every important unlock.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**If you are trying to unlock perks in Oaken Tower, check the exact in-game condition first, then run a clean attempt around that condition. Do not mix serious 10-win runs with awkward unlock attempts unless the unlock already fits your board.**
+
+The known unlock routes worth planning around first are Gambit, Essential Oils, and Merge-style 3-star goals. For perks like Toxic, Flash Sale, Strike, and Healing Touch, use them if already unlocked, but verify the in-game condition before building a dedicated unlock run.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-pack-perk-selection.webp"
+    alt="Oaken Tower pack and perk selection screen before starting a run."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Perk unlocks matter because your selected perk pool shapes every run before the first shop appears.
+  </figcaption>
+</figure>
+
+<h2 id="known-unlocks">
+  Known perk unlock conditions
+</h2>
+
+Start here if you only want the unlock condition.
+
+Some perk conditions are strict, and some public sources are still incomplete. If a condition below says **check the in-game perk tooltip**, do that before spending a whole run on the attempt.
+
+<GuideTable
+  caption="Known Oaken Tower perk unlock conditions and safe unlock advice."
+  columns={unlockConditionColumns}
+  rows={unlockConditionRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="unconfirmed-unlocks">
+  Unlocks that still need confirmation
+</h2>
+
+Some perk unlocks are useful enough to discuss, but their exact public unlock conditions are not reliable enough to print as facts yet.
+
+Instead of guessing, keep them out of the known-condition table until you confirm the in-game tooltip.
+
+<GuideTable
+  caption="Oaken Tower perk unlocks that still need in-game confirmation."
+  columns={unconfirmedUnlockColumns}
+  rows={unconfirmedUnlockRows}
+/>
+
+This does not mean these perks are bad. It only means the unlock condition should be verified before writing a dedicated route.
+
+<h2 id="best-unlocks">
+  Best perks to unlock first
+</h2>
+
+After you know the condition, decide whether the perk is actually worth chasing now. Not every unlock makes your next run easier.
+
+<GuideTable
+  caption="Best Oaken Tower perks to unlock first."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+The best early unlock is not always the flashiest one. It is the perk that helps you build stable boards without forcing bad shops.
+
+<h2 id="perk-use-cases">
+  How each perk helps — and how it baits you
+</h2>
+
+Most perk mistakes happen because the player sees the upside but ignores the trap.
+
+<GuideTable
+  caption="Oaken Tower perk use cases and common traps."
+  columns={useCaseColumns}
+  rows={useCaseRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-poison-start.webp"
+    alt="Oaken Tower Toxic perk start showing a Poison direction."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Toxic is strongest when the first shops also support Poison. The perk gives a direction, but the shop still decides whether the run is real.
+  </figcaption>
+</figure>
+
+For the full route, use the <Link href="/oaken-tower/poison-build">Best Poison Build in Oaken Tower</Link> guide.
+
+<h2 id="gambit">
+  Gambit unlock: why it fails so often
+</h2>
+
+Gambit is the perk most likely to confuse players because the wording around buying Epic items can be strict.
+
+If you are trying to unlock Gambit, keep the attempt clean:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Only buy items that clearly satisfy the condition.</li>
+  <li>Avoid lower-rarity items even if they look harmless.</li>
+  <li>Be careful with potions if you do not know whether they count.</li>
+  <li>Be careful with encounter rewards if they add items to your board.</li>
+  <li>Do not mix the attempt with a normal “win however possible” run.</li>
+</ul>
+
+If Gambit fails, the most likely issue is not your final board. It is something you clicked earlier in the run.
+
+<h2 id="essential-oils">
+  Essential Oils unlock: keep the Essence goal simple
+</h2>
+
+Essential Oils is easier to understand if you focus on the unlock condition: use Essence to give items new tags.
+
+Do not overcomplicate the run. You do not need to build the perfect Essence board. You need clean chances to use Essence on items and complete the condition.
+
+Use Essence when:
+
+- the item will stay on your board,
+- the new tag helps your current plan,
+- the run is stable enough to spend time on the unlock,
+- the action clearly counts toward the condition.
+
+Avoid Essence detours when:
+
+- your board is already dying,
+- the item is temporary,
+- you are using Essence only because you want the unlock,
+- the tag does not help the next fight.
+
+<h2 id="merge-perk">
+  Merge-style perk unlocks: do not force 3-star from nothing
+</h2>
+
+Merge-style 3-star goals sound simple until you try to force them. The hard part is not understanding the condition. The hard part is staying alive while building toward it.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-merge-perk-warning.webp"
+    alt="Oaken Tower perk or reward asking for two 2-star items to combine into a 3-star item."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A 3-star unlock is easiest when the run already has natural duplicate progress. Forcing it from zero usually costs too much tempo.
+  </figcaption>
+</figure>
+
+Good signs:
+
+- your carry already has duplicates,
+- the 2-star items are useful by themselves,
+- your board is winning or stable,
+- the 3-star item will actually carry the run.
+
+Bad signs:
+
+- you are buying weak copies just for the condition,
+- you have no real carry,
+- you are losing hearts every fight,
+- the upgrade target is only a support item.
+
+For deeper upgrade timing, read <Link href="/oaken-tower/3-star-items">How to Get 3-Star Items in Oaken Tower</Link>.
+
+<h2 id="not-unlocking">
+  Why your perk did not unlock
+</h2>
+
+If a perk did not unlock, do not immediately repeat the same attempt. Diagnose the failure first.
+
+<GuideTable
+  caption="Common reasons an Oaken Tower perk does not unlock."
+  columns={notUnlockColumns}
+  rows={notUnlockRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-perk-bug-candy.webp"
+    alt="Oaken Tower perk screen showing perk text and a recently fixed perk-related issue."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If a perk seems bugged, check the perk screen again after restarting and look for recent community reports before repeating a long attempt.
+  </figcaption>
+</figure>
+
+<h2 id="perk-pool">
+  How to build your selected perk pool
+</h2>
+
+This is secondary to unlocking, but it still matters. Once a perk is unlocked, it does not help unless you select it into your pool.
+
+Since one selected perk is chosen for the run, your pool should be balanced.
+
+<GuideTable
+  caption="Best way to build your selected perk pool."
+  columns={poolColumns}
+  rows={poolRows}
+/>
+
+A balanced pool keeps you from bricking the opener. If every perk needs a perfect shop, one bad roll can ruin the run before Day 4.
+
+<h2 id="common-mistakes">
+  Common perk unlock mistakes
+</h2>
+
+<GuideTable
+  caption="Common Oaken Tower perk unlock mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="quick-checklist">
+  Perk unlock checklist
+</h2>
+
+Before starting an unlock attempt, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Did I read the exact in-game unlock condition?</li>
+  <li>Am I doing an unlock run or a serious 10-win run?</li>
+  <li>Could a potion break the condition?</li>
+  <li>Could an encounter reward break the condition?</li>
+  <li>Do I need a trophy, a win, a 10th trophy, or a final board state?</li>
+  <li>If the perk unlocks, did I add it to my selected perk pool?</li>
+</ul>
+
+If the condition is strict, play boring. Clean unlock attempts are better than clever failed attempts.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do perks work in Oaken Tower?
+
+You select a pool of perks before the run, and one of those selected perks is chosen when the run starts. That means you should build a balanced perk pool, not just pick four greedy options.
+
+### How do I unlock Gambit?
+
+The known condition is to earn 10 trophies while only ever buying Epic items. Keep the run clean and be careful with potions or encounter rewards that might count against the condition.
+
+### Why did Gambit not unlock?
+
+Usually because the condition was stricter than expected. Check whether you bought a lower-rarity item, took a potion, accepted an encounter reward, or otherwise broke the requirement.
+
+### How do I unlock Essential Oils?
+
+Use an Essence to give an item a new tag 3 times. Keep the run stable and use Essence on items that actually stay on your board.
+
+### How do I unlock Merge Perk?
+
+The known condition is to earn the 10th Trophy with a 3-star item 3 times. Do this when a 3-star carry path appears naturally instead of forcing it from nothing.
+
+### What perks should I unlock first?
+
+Prioritize perks that help real runs: Toxic for Poison direction, Flash Sale or shop-value perks for economy, Healing Touch for survival, and Strike for multicast carry setups.
+
+### Is Toxic worth unlocking?
+
+Yes, Toxic is worth unlocking if you like Poison builds or want a clear beginner-friendly direction. It is strongest when your packs and shop can support Poison items.
+
+### Is Essential Oils good?
+
+Essential Oils is flexible support. It is good when the extra gold and Essence choices help your current board, but it should not replace a real carry item.
+
+### Should I chase perk unlocks while trying to climb?
+
+Usually no. Unlock runs and serious win runs have different goals. If the unlock condition forces awkward choices, do it separately from serious 10-win or ranked attempts.

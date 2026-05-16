@@ -1,0 +1,742 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const quickDecisionColumns = [
+  { key: "Choice", label: "Choice" },
+  { key: "Do It When", label: "Do It When" },
+  { key: "Do Not Do It When", label: "Do Not Do It When" },
+];
+
+export const quickDecisionRows = [
+  {
+    Choice: "Level",
+    "Do It When":
+      "Your board can survive the next fight and better shop rarity, more health, or level scaling matters.",
+    "Do Not Do It When":
+      "You have no damage, no defense, and are only leveling because the shop looks bad.",
+  },
+  {
+    Choice: "Reroll",
+    "Do It When":
+      "You can name the item, duplicate, support piece, or upgrade path you are searching for.",
+    "Do Not Do It When":
+      "You are hoping to see something good but cannot say what good means.",
+  },
+  {
+    Choice: "Freeze",
+    "Do It When":
+      "The shop has a key item you cannot buy yet, or you want to level first and buy it next day.",
+    "Do Not Do It When":
+      "The frozen item is just random value and does not change your next fight.",
+  },
+  {
+    Choice: "Buy power",
+    "Do It When":
+      "The item helps you win or barely survive the next fight.",
+    "Do Not Do It When":
+      "It is a shiny item that does not fit your current board.",
+  },
+  {
+    Choice: "Save",
+    "Do It When":
+      "Your board already wins and the shop does not improve your carry or next matchup.",
+    "Do Not Do It When":
+      "You are losing fights and need tempo right now.",
+  },
+];
+
+export const levelNumberColumns = [
+  { key: "Upgrade", label: "Upgrade" },
+  { key: "XP Cost", label: "XP Cost" },
+  { key: "Income After Level", label: "Income After Level" },
+  { key: "What It Means", label: "What It Means" },
+];
+
+export const levelNumberRows = [
+  {
+    Upgrade: "Level 1 → 2",
+    "XP Cost": "52 XP",
+    "Income After Level": "50 gold",
+    "What It Means":
+      "The first level is affordable, but it can still lose the next fight if your tower has no tempo.",
+  },
+  {
+    Upgrade: "Level 2 → 3",
+    "XP Cost": "56 XP",
+    "Income After Level": "55 gold",
+    "What It Means":
+      "A strong early board can use this to reach better shops without rolling too much.",
+  },
+  {
+    Upgrade: "Level 3 → 4",
+    "XP Cost": "60 XP",
+    "Income After Level": "60 gold",
+    "What It Means":
+      "This is where your build direction should start becoming clear.",
+  },
+  {
+    Upgrade: "Level 4 → 5",
+    "XP Cost": "64 XP",
+    "Income After Level": "65 gold",
+    "What It Means":
+      "Leveling here is strong if your carry already wins fights or you need higher-rarity payoffs.",
+  },
+  {
+    Upgrade: "Level 5 → 6",
+    "XP Cost": "68 XP",
+    "Income After Level": "70 gold",
+    "What It Means":
+      "Do this when you are stable. Do not buy XP while your board is dying to the next opponent.",
+  },
+  {
+    Upgrade: "Level 6 → 7",
+    "XP Cost": "72 XP",
+    "Income After Level": "75 gold",
+    "What It Means":
+      "This is usually a payoff level, not a panic level. Make sure the board can use the better shops.",
+  },
+];
+
+export const levelColumns = [
+  { key: "Level Signal", label: "Level Signal" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Player Read", label: "Player Read" },
+];
+
+export const levelRows = [
+  {
+    "Level Signal": "You are already winning fights",
+    "Why It Matters":
+      "A stable board can afford to invest in better future shops.",
+    "Player Read":
+      "Leveling is a reward for being strong, not a way to escape being weak.",
+  },
+  {
+    "Level Signal": "You need higher-rarity pieces",
+    "Why It Matters":
+      "Some builds only come together when stronger items enter the shop pool.",
+    "Player Read":
+      "Level when your current board can survive long enough to use those pieces.",
+  },
+  {
+    "Level Signal": "The level gives useful health",
+    "Why It Matters":
+      "Extra health can make the next fight safer, especially later in the run.",
+    "Player Read":
+      "This is good when you are close to stabilizing, not when your board has no damage.",
+  },
+  {
+    "Level Signal": "Your build scales with level or shop quality",
+    "Why It Matters":
+      "Some runs want to rush better shops instead of chasing weak early duplicates.",
+    "Player Read":
+      "Do this only when your early tempo is already handled.",
+  },
+  {
+    "Level Signal": "The current shop is weak but you are not weak",
+    "Why It Matters":
+      "If nothing improves your board, XP can be better than random purchases.",
+    "Player Read":
+      "Bad shop plus strong board is a level spot. Bad shop plus weak board is danger.",
+  },
+];
+
+export const rerollColumns = [
+  { key: "Reroll Target", label: "Reroll Target" },
+  { key: "Good Example", label: "Good Example" },
+  { key: "Bad Example", label: "Bad Example" },
+];
+
+export const rerollRows = [
+  {
+    "Reroll Target": "Duplicate",
+    "Good Example":
+      "You are one copy away from upgrading your carry or an important support item.",
+    "Bad Example":
+      "You roll for random pairs while your main board still has no damage.",
+  },
+  {
+    "Reroll Target": "Carry item",
+    "Good Example":
+      "Your build already wants Venom Ring, Toxins, Molten Bow, Mythic Rod, or another named payoff.",
+    "Bad Example":
+      "You roll because you want to see any legendary.",
+  },
+  {
+    "Reroll Target": "Support piece",
+    "Good Example":
+      "You need cooldown, multicast, shield, healing, or an adjacency support for your carry.",
+    "Bad Example":
+      "You buy support before you know what it is supporting.",
+  },
+  {
+    "Reroll Target": "Defensive fix",
+    "Good Example":
+      "You are dying before your Poison, Burn, bow, or scaling item can finish the fight.",
+    "Bad Example":
+      "You keep rolling for more damage when the real problem is survival.",
+  },
+  {
+    "Reroll Target": "Pivot item",
+    "Good Example":
+      "Your current build has no payoff and a new item clearly gives you a better direction.",
+    "Bad Example":
+      "You pivot away from a board that is already winning.",
+  },
+];
+
+export const freezeColumns = [
+  { key: "Freeze Use", label: "Freeze Use" },
+  { key: "How It Works", label: "How It Works" },
+  { key: "Why It Wins Games", label: "Why It Wins Games" },
+];
+
+export const freezeRows = [
+  {
+    "Freeze Use": "Freeze then level",
+    "How It Works":
+      "Keep a key item in the shop, level now, then buy the item next day.",
+    "Why It Wins Games":
+      "You get the long-term level without losing the item that completes your board.",
+  },
+  {
+    "Freeze Use": "Freeze a duplicate",
+    "How It Works":
+      "Save the extra copy when it upgrades your carry or pushes a real 3-star path.",
+    "Why It Wins Games":
+      "It prevents you from rolling away the most important upgrade in the shop.",
+  },
+  {
+    "Freeze Use": "Freeze a carry + support pair",
+    "How It Works":
+      "Keep two pieces together when they only work as a package.",
+    "Why It Wins Games":
+      "Some builds need both the carry and the item that triggers, buffs, or protects it.",
+  },
+  {
+    "Freeze Use": "Freeze before pivoting",
+    "How It Works":
+      "Hold a possible new direction for one day while you see whether your old board still works.",
+    "Why It Wins Games":
+      "It gives you the option to pivot without immediately destroying your current plan.",
+  },
+  {
+    "Freeze Use": "Freeze expensive value",
+    "How It Works":
+      "Keep an expensive item you want to buy after income, sales, or a level decision.",
+    "Why It Wins Games":
+      "It lets you use the next day’s economy instead of selling useful pieces too early.",
+  },
+];
+
+export const buySaveColumns = [
+  { key: "Question", label: "Question" },
+  { key: "Buy Power", label: "Buy Power" },
+  { key: "Save Gold", label: "Save Gold" },
+];
+
+export const buySaveRows = [
+  {
+    Question: "Does the next fight look dangerous?",
+    "Buy Power":
+      "Yes. Buy damage, shield, healing, debuff pressure, or support that makes the next fight safer.",
+    "Save Gold":
+      "Only if your current board already survives without the purchase.",
+  },
+  {
+    Question: "Does the shop improve your carry?",
+    "Buy Power":
+      "Buy if it buffs, triggers, protects, or upgrades your main item.",
+    "Save Gold":
+      "Save if the item is just a second idea that does not help the carry.",
+  },
+  {
+    Question: "Are you close to 10 wins?",
+    "Buy Power":
+      "Buy the safest immediate improvement, even if it is boring.",
+    "Save Gold":
+      "Save only if the board is already favored and the shop adds nothing.",
+  },
+  {
+    Question: "Are you behind?",
+    "Buy Power":
+      "Usually yes. Behind boards need tempo before greed.",
+    "Save Gold":
+      "Saving while behind is usually just delaying the loss.",
+  },
+];
+
+export const badHabitColumns = [
+  { key: "Bad Habit", label: "Bad Habit" },
+  { key: "Why It Feels Right", label: "Why It Feels Right" },
+  { key: "Why It Loses", label: "Why It Loses" },
+];
+
+export const badHabitRows = [
+  {
+    "Bad Habit": "Leveling because the shop is bad",
+    "Why It Feels Right":
+      "You avoid buying weak items and move toward better shops.",
+    "Why It Loses":
+      "Bad shop plus weak board is danger. Leveling does not fix a tower that cannot fight.",
+  },
+  {
+    "Bad Habit": "Rolling until you see something exciting",
+    "Why It Feels Right":
+      "Every new shop feels like another chance to high-roll.",
+    "Why It Loses":
+      "You spend gold without adding power, health, or a real upgrade.",
+  },
+  {
+    "Bad Habit": "Freezing rare-looking items",
+    "Why It Feels Right":
+      "Rare items look important, especially when you are new.",
+    "Why It Loses":
+      "A rare item that does not fit your board is still not your next-fight solution.",
+  },
+  {
+    "Bad Habit": "Saving while behind",
+    "Why It Feels Right":
+      "You want a bigger next shop.",
+    "Why It Loses":
+      "You may not survive long enough to use the money.",
+  },
+  {
+    "Bad Habit": "Chasing every pair",
+    "Why It Feels Right":
+      "Upgrades feel like progress.",
+    "Why It Loses":
+      "A pair that is not your carry can drain the gold your real board needed.",
+  },
+];
+
+export const scenarioColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "Best Choice", label: "Best Choice" },
+  { key: "Why", label: "Why" },
+];
+
+export const scenarioRows = [
+  {
+    Situation: "You are winning fights and the shop has no useful item.",
+    "Best Choice": "Level or save",
+    Why:
+      "Do not buy random pieces when your current board is already doing its job.",
+  },
+  {
+    Situation: "You are one copy away from upgrading your carry.",
+    "Best Choice": "Reroll or freeze",
+    Why:
+      "A carry upgrade can change multiple future fights.",
+  },
+  {
+    Situation: "You see a key item but cannot afford it.",
+    "Best Choice": "Freeze",
+    Why:
+      "The item is already here. Do not roll it away.",
+  },
+  {
+    Situation: "You keep losing before your build starts.",
+    "Best Choice": "Buy tempo or defense",
+    Why:
+      "The problem is not shop quality. The problem is surviving long enough.",
+  },
+  {
+    Situation: "You have a strong carry but no support.",
+    "Best Choice": "Reroll for support",
+    Why:
+      "Cooldown, multicast, shield, healing, or trigger support can be stronger than a second carry.",
+  },
+  {
+    Situation: "A new build looks cool but your current board is winning.",
+    "Best Choice": "Do not pivot yet",
+    Why:
+      "A 10-win push rewards stability more than style.",
+  },
+];
+
+export const timingColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "Level Bias", label: "Level Bias" },
+  { key: "Reroll Bias", label: "Reroll Bias" },
+];
+
+export const timingRows = [
+  {
+    Timing: "D1-D3",
+    "Level Bias":
+      "Level only if you can accept the early loss or already have enough tempo.",
+    "Reroll Bias":
+      "Reroll lightly if one item creates a real opener. Do not roll down for a dream.",
+  },
+  {
+    Timing: "D4-D6",
+    "Level Bias":
+      "Level when the board has an identity and can survive the next fight.",
+    "Reroll Bias":
+      "Reroll for the item that completes your direction.",
+  },
+  {
+    Timing: "D7-D8",
+    "Level Bias":
+      "Level if you need higher-rarity payoff pieces and your carry is stable.",
+    "Reroll Bias":
+      "Reroll for duplicates, payoff items, or matchup fixes. Avoid random value.",
+  },
+  {
+    Timing: "D9+",
+    "Level Bias":
+      "Level only if it directly improves your chance to win the next fight.",
+    "Reroll Bias":
+      "Reroll for immediate power. Late shops are not for theory crafting.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Level when your board is already strong enough to survive. Reroll when you can name the exact item, duplicate, support piece, or matchup fix you are looking for. Freeze when the shop has a key item but the timing is wrong.**
+
+A level is not just “better shops.” It also costs real gold now. The useful shortcut is: each next level costs 4 more XP than the last, and each level adds 5 income. Level when that future value is worth more than buying power for the next fight.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-shop-level-reroll.webp"
+    alt="Oaken Tower shop showing level, income, reroll, freeze and buy XP decisions."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The shop is the real fight. Your gold can become power, XP, a targeted reroll, a freeze, or saved value — but it should never disappear without a plan.
+  </figcaption>
+</figure>
+
+<h2 id="quick-rule">
+  The rule in one sentence
+</h2>
+
+If your board is strong, **level**.  
+If your board has a target, **reroll**.  
+If the shop has a key item at the wrong time, **freeze**.  
+If the next fight kills you, **buy power**.  
+If nothing helps and you are already winning, **save**.
+
+That sounds simple, but most players lose because they break this rule emotionally. They level because the shop is boring. They reroll because they are tilted. They freeze because an item looks rare. They buy because they have gold.
+
+Do not spend gold because you can. Spend it because it changes the run.
+
+<h2 id="decision-table">
+  Level, reroll, freeze, buy, or save
+</h2>
+
+Use this table before every shop ends.
+
+<GuideTable
+  caption="Oaken Tower level vs reroll decision table."
+  columns={quickDecisionColumns}
+  rows={quickDecisionRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="level-numbers">
+  Level numbers: what leveling actually gives you
+</h2>
+
+Leveling is an economy decision, not just a power decision. The basic pattern is simple:
+
+- The next level cost increases by **4 XP** each level.
+- Your income increases by **5 gold** each level.
+- Higher levels also improve the kind of items you can realistically shop for.
+
+The income shown in the table is the income after you reach that new level. For example, Level 1 shows 45 income in-game, so leveling from 1 to 2 puts the next income point at 50.
+
+Use this table as a quick reference when deciding whether XP is better than buying power.
+
+<GuideTable
+  caption="Oaken Tower level cost and income reference."
+  columns={levelNumberColumns}
+  rows={levelNumberRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-level-tooltip.webp"
+    alt="Oaken Tower level tooltip showing Level 1 shop rarity, income, max HP and XP needed to level up."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The level tooltip is the safest way to check what leveling gives you: better drop chances, more max HP, and +5 income per level.
+  </figcaption>
+</figure>
+
+The important takeaway is not the exact number by itself. It is the tradeoff: **you are paying current gold for future shops and future income.** That is great when your board is stable. It is dangerous when the next fight is already killing you.
+
+<h2 id="when-to-level">
+  When should you level?
+</h2>
+
+Leveling gives you access to better shops, more income, and more health, but it does not automatically make your current board stronger.
+
+That means leveling is best when you are already stable.
+
+<GuideTable
+  caption="Good reasons to level in Oaken Tower."
+  columns={levelColumns}
+  rows={levelRows}
+/>
+
+The biggest trap is treating level as a panic button. If the enemy is already killing you, spending gold on XP may leave you with the same weak board and fewer chances to fix it.
+
+<h2 id="risky-level">
+  Example: risky early leveling
+</h2>
+
+Sometimes you can level early and accept that the first fights might be ugly. This is not always wrong. It is a gamble.
+
+The key question is whether the loss is affordable and whether the level gives you enough future value.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-greedy-leveling.webp"
+    alt="Oaken Tower early shop where the player chooses to level instead of buying immediate board power."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early leveling can work when the risk is controlled. It fails when you skip power, lose too many hearts, and still do not know what your build is.
+  </figcaption>
+</figure>
+
+Use risky leveling only when at least one of these is true:
+
+- early losses are still affordable,
+- your perk or economy makes the level valuable,
+- you have enough health to take the hit,
+- the current shop is truly bad,
+- you have a plan for the next shop.
+
+Do not copy greedy leveling blindly. The same play that wins one run can throw another.
+
+<h2 id="when-to-reroll">
+  When should you reroll?
+</h2>
+
+Rerolling is good when you have a target. It is terrible when you are just asking the shop to save you.
+
+Before you reroll, say the target out loud:
+
+- I need one more copy of my carry.
+- I need cooldown support.
+- I need multicast.
+- I need shield or healing.
+- I need a specific payoff item.
+- I need a pivot because my current build has no future.
+
+If your target is “something good,” do not roll yet.
+
+<GuideTable
+  caption="Good and bad reroll targets in Oaken Tower."
+  columns={rerollColumns}
+  rows={rerollRows}
+/>
+
+<h2 id="when-to-freeze">
+  When should you freeze?
+</h2>
+
+Freeze is one of the strongest tools in Oaken Tower because it lets you separate timing from value.
+
+Sometimes the item is correct, but buying it right now is wrong. Maybe you need to level first. Maybe you need income. Maybe the item is a duplicate you cannot use yet. Maybe the support piece only matters if you also buy the carry next day.
+
+That is when freeze wins games.
+
+<GuideTable
+  caption="Best ways to use freeze in Oaken Tower."
+  columns={freezeColumns}
+  rows={freezeRows}
+/>
+
+<h2 id="freeze-then-level">
+  Example: freeze then level
+</h2>
+
+One of the cleanest plays is to roll first, find a useful shop, then freeze and level because buying immediately does not improve the board.
+
+This works when the item is good, but not useful this second.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-freeze-then-level.webp"
+    alt="Oaken Tower shop decision where the player freezes a useful item and levels instead of buying it immediately."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Freeze is not only for items you cannot afford. Sometimes you freeze because leveling first is better and the item will matter next day.
+  </figcaption>
+</figure>
+
+Freeze then level is good when:
+
+- the item completes your next shop, not your current fight,
+- leveling gives health or shop access now,
+- buying the item immediately would leave it unused,
+- you want to preserve a duplicate or carry option,
+- you are strong enough to survive without buying it now.
+
+Freeze then level is bad when:
+
+- you need immediate power,
+- the frozen item is not important,
+- you are too weak to invest,
+- the next fight can end the run.
+
+<h2 id="buy-vs-save">
+  Buy power vs save gold
+</h2>
+
+Buying and saving are both correct in different spots.
+
+Buying power is correct when the next fight is the problem. Saving is correct when your board already wins and the shop does not improve it.
+
+<GuideTable
+  caption="When to buy power and when to save gold."
+  columns={buySaveColumns}
+  rows={buySaveRows}
+/>
+
+The simple version: **buy when you are behind, save when you are already stable.** The mistake is doing the opposite.
+
+<h2 id="timing">
+  Level vs reroll by run timing
+</h2>
+
+Your decision changes as the run gets later. Early, you can take more risk. Late, you need the safest fight-winning play.
+
+<GuideTable
+  caption="Level vs reroll timing by day range."
+  columns={timingColumns}
+  rows={timingRows}
+/>
+
+The later the run goes, the less you should shop for dreams. By the final stretch, every gold spend should answer the next opponent.
+
+<h2 id="common-scenarios">
+  Common shop scenarios
+</h2>
+
+These are the situations that come up constantly.
+
+<GuideTable
+  caption="Common Oaken Tower shop scenarios and the best choice."
+  columns={scenarioColumns}
+  rows={scenarioRows}
+/>
+
+If you are unsure, default to the choice that makes the next fight safer. You can build the dream board only if you live long enough to use it.
+
+<h2 id="three-star-chasing">
+  Level vs reroll when chasing 3-star items
+</h2>
+
+Chasing 3-star items is where reroll discipline matters most.
+
+Rerolling for a 3-star is good when:
+
+- the item is your actual carry,
+- you already have duplicates,
+- one upgrade changes your damage, defense, or trigger speed,
+- your board can survive while rolling,
+- you are not sacrificing a better level timing.
+
+Rerolling for a 3-star is bad when:
+
+- the item is only support,
+- you are already losing,
+- the rest of your board is weak,
+- you are rolling because upgrades feel good,
+- leveling would give you better shops and more health.
+
+For the full upgrade plan, read <Link href="/oaken-tower/3-star-items">How to Get 3-Star Items in Oaken Tower</Link>.
+
+<h2 id="bad-habits">
+  Bad shop habits that lose runs
+</h2>
+
+<GuideTable
+  caption="Bad Oaken Tower shop habits."
+  columns={badHabitColumns}
+  rows={badHabitRows}
+/>
+
+The fix is always the same: give every gold spend a job.
+
+<h2 id="quick-checklist">
+  Shop checklist
+</h2>
+
+Before you leave the shop, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Am I strong enough for the next fight?</li>
+  <li>Do I know what my carry is?</li>
+  <li>Am I leveling because I am stable?</li>
+  <li>Am I rerolling for a named target?</li>
+  <li>Should I freeze this item instead of buying it now?</li>
+  <li>Does this purchase actually improve my board?</li>
+  <li>Am I saving because I am strong, or because I am avoiding a hard decision?</li>
+  <li>If I am close to 10 wins, is this the safest play?</li>
+</ul>
+
+If you cannot answer these, slow down. Most bad Oaken Tower shops happen because the player clicks before deciding.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Should I level or reroll in Oaken Tower?
+
+Level when your board is already strong enough to survive and better shops, more income, or more health matter. Reroll when you can name the exact item, duplicate, or support piece you need.
+
+### What does leveling give you?
+
+Leveling costs XP, increases your income by 5 gold per level, improves your future shop quality, and gives more health. The next level cost also rises by 4 XP each level, so leveling is best when your board can survive the investment.
+
+### Is early leveling good?
+
+Early leveling can be good if you can afford the loss or already have enough tempo. It is bad when you skip power and leave your tower too weak to survive.
+
+### When should I stop rerolling?
+
+Stop rerolling when you no longer have a target, when your board needs immediate power, or when leveling gives better value. If you are rolling just to see something exciting, stop.
+
+### Should I freeze before leveling?
+
+Yes, when the shop has a key item you want later but leveling first is better right now. Freeze then level is one of the strongest shop patterns when your current board can survive.
+
+### Should I buy weak items or save?
+
+Buy weak items only if they help the next fight or support your carry. Save if your board already wins and the shop does not improve it.
+
+### Should I reroll for 3-star items?
+
+Only when the item is your actual carry or the upgrade creates a major breakpoint. Do not roll for 3-star support items while your board is falling behind.
+
+### Why do I lose after leveling?
+
+Usually because you leveled while too weak. Leveling improves future shops, but it does not fix a board that cannot survive the next fight.
+
+### Why do I lose after rerolling?
+
+Usually because the rerolls had no target. You spent gold without gaining power, upgrades, health, or a clear pivot.

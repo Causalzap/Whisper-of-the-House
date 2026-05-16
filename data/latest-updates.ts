@@ -13,6 +13,47 @@ export type LatestUpdateItem = {
   
   export const latestUpdates: LatestUpdateItem[] = [
     {
+      href: "/oaken-tower",
+      game: "Oaken Tower",
+      title: "Complete Guide Hub",
+      description:
+        "Start here for builds, Poison scaling, 10-win strategy, level vs reroll decisions, 3-star items, perk unlocks, and common run mistakes.",
+      tagClass: "text-emerald-500",
+      hoverBorderClass: "hover:border-emerald-300",
+      hoverTitleClass: "group-hover:text-emerald-700",
+    },
+    {
+      href: "/oaken-tower/poison-build",
+      game: "Oaken Tower",
+      title: "Best Poison Build Guide",
+      description:
+        "Learn when to commit to Poison, which items and perks matter, how to use Venom Ring, Toxins, Poison Dagger, and how to handle matchups.",
+      tagClass: "text-emerald-500",
+      hoverBorderClass: "hover:border-emerald-300",
+      hoverTitleClass: "group-hover:text-emerald-700",
+    },
+    {
+      href: "/oaken-tower/10-wins-guide",
+      game: "Oaken Tower",
+      title: "How to Get 10 Wins",
+      description:
+        "Fix 6-7 win stalls, protect your hearts, choose one real carry, stop over-rolling, and make safer final-fight decisions for 10 wins.",
+      tagClass: "text-emerald-500",
+      hoverBorderClass: "hover:border-emerald-300",
+      hoverTitleClass: "group-hover:text-emerald-700",
+    },
+    {
+      href: "/oaken-tower/level-vs-reroll",
+      game: "Oaken Tower",
+      title: "Level vs Reroll Guide",
+      description:
+        "Know when to level, reroll, freeze, buy power, or save gold with XP cost, income, shop timing, freeze tricks, and 3-star chase decisions.",
+      tagClass: "text-emerald-500",
+      hoverBorderClass: "hover:border-emerald-300",
+      hoverTitleClass: "group-hover:text-emerald-700",
+    },
+
+    {
       href: "/subnautica-2",
       game: "Subnautica 2",
       title: "Complete Guide Hub",
@@ -806,47 +847,6 @@ export type LatestUpdateItem = {
   hoverBorderClass: "hover:border-violet-300",
   hoverTitleClass: "group-hover:text-violet-700",
 },
-    // ===== Pokemon Champions =====
-    {
-      href: "/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles",
-      game: "Pokemon Champions",
-      title: "Incineroar Counter Guide",
-      description:
-        "How to beat Incineroar in Doubles: Fake Out cycles, Parting Shot loops, and best counter picks.",
-      tagClass: "text-amber-500",
-      hoverBorderClass: "hover:border-amber-300",
-      hoverTitleClass: "group-hover:text-amber-700",
-    },
-    {
-      href: "/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles",
-      game: "Pokemon Champions",
-      title: "Sneasler Counter Guide",
-      description:
-        "Best counters for Sneasler: Ghost-types, Psychic pressure, and stopping Unburden sweeps.",
-      tagClass: "text-amber-500",
-      hoverBorderClass: "hover:border-amber-300",
-      hoverTitleClass: "group-hover:text-amber-700",
-    },
-    {
-      href: "/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles",
-      game: "Pokemon Champions",
-      title: "Tailwind Counter Guide",
-      description:
-        "How to beat Tailwind teams: Taunt, Fake Out pressure, Trick Room reversal, and positioning tips.",
-      tagClass: "text-amber-500",
-      hoverBorderClass: "hover:border-amber-300",
-      hoverTitleClass: "group-hover:text-amber-700",
-    },
-    {
-      href: "/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles",
-      game: "Pokemon Champions",
-      title: "Trick Room Counter Guide",
-      description:
-        "How to stop Trick Room: Taunt leads, double targeting setters, and reversing speed control.",
-      tagClass: "text-amber-500",
-      hoverBorderClass: "hover:border-amber-300",
-      hoverTitleClass: "group-hover:text-amber-700",
-    },
   
     // ===== I Am Jesus Christ =====
     {

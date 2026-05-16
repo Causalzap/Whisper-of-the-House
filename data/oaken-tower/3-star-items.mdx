@@ -1,0 +1,623 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const pathColumns = [
+  { key: "3-Star Path", label: "3-Star Path" },
+  { key: "How It Works", label: "How It Works" },
+  { key: "Best Use", label: "Best Use" },
+];
+
+export const pathRows = [
+  {
+    "3-Star Path": "Natural merges",
+    "How It Works":
+      "Buy matching copies and merge them upward over the run.",
+    "Best Use":
+      "Best when the item is already your carry and duplicates appear naturally.",
+  },
+  {
+    "3-Star Path": "Upgrade-to-3-star reward",
+    "How It Works":
+      "Some encounter or reward choices can upgrade an eligible item to 3-star.",
+    "Best Use":
+      "Best when you already have a strong 2-star carry. Do not waste it on random support.",
+  },
+  {
+    "3-Star Path": "Crown Forge potion",
+    "How It Works":
+      "Use the potion on a 2-star item to push it to 3-star.",
+    "Best Use":
+      "Best for your main carry or a support item that creates a major breakpoint.",
+  },
+  {
+    "3-Star Path": "Mirror Elixir / copy effects",
+    "How It Works":
+      "Copy-style rewards can help you duplicate an important item line instead of rolling from nothing.",
+    "Best Use":
+      "Best when the copied item is already part of your main carry path.",
+  },
+  {
+    "3-Star Path": "Two 2-star merge perk / reward",
+    "How It Works":
+      "Some perk or reward lines ask you to obtain two 2-star items and combine them into a 3-star item.",
+    "Best Use":
+      "Only worth chasing if the setup is already happening. It is usually too slow if you force it from nothing.",
+  },
+];
+
+export const chaseColumns = [
+  { key: "Question", label: "Question" },
+  { key: "Chase 3-Star", label: "Chase 3-Star" },
+  { key: "Stop Chasing", label: "Stop Chasing" },
+];
+
+export const chaseRows = [
+  {
+    Question: "Is this item your carry?",
+    "Chase 3-Star":
+      "Yes, if it is doing most of your damage, shielding, scaling, or fight-winning work.",
+    "Stop Chasing":
+      "No, if it is only a small support piece or a temporary early item.",
+  },
+  {
+    Question: "Do you already have duplicates?",
+    "Chase 3-Star":
+      "Yes, if the shop naturally gave you copies and you are close to the upgrade.",
+    "Stop Chasing":
+      "No, if you need to spend multiple shops rolling from zero.",
+  },
+  {
+    Question: "Can your board survive while rolling?",
+    "Chase 3-Star":
+      "Yes, if your current board is winning or barely losing safely.",
+    "Stop Chasing":
+      "No, if you are already bleeding hearts and need power now.",
+  },
+  {
+    Question: "Does the upgrade create a breakpoint?",
+    "Chase 3-Star":
+      "Yes, if the new star level adds enough damage, triggers, cooldown value, shield, or scaling to change fights.",
+    "Stop Chasing":
+      "No, if the upgrade is just a small number increase on the wrong item.",
+  },
+  {
+    Question: "Are you close to 10 wins?",
+    "Chase 3-Star":
+      "Only if the upgrade makes the next fight safer.",
+    "Stop Chasing":
+      "Stop if your current board already wins and the chase risks throwing the run.",
+  },
+];
+
+export const itemTypeColumns = [
+  { key: "Item Type", label: "Item Type" },
+  { key: "Usually Worth 3-Star?", label: "Usually Worth 3-Star?" },
+  { key: "Why", label: "Why" },
+];
+
+export const itemTypeRows = [
+  {
+    "Item Type": "Main damage carry, such as Doom Guide, Molten Bow, Mythic Rod",
+    "Usually Worth 3-Star?": "Yes",
+    Why:
+      "If one item is killing the enemy tower or scaling hard enough to decide fights, upgrading it can carry several future rounds.",
+  },
+  {
+    "Item Type": "Poison / Burn / Bleed engine, such as Petal Staff, Venom Bow, Poison Dagger",
+    "Usually Worth 3-Star?": "Often",
+    Why:
+      "Debuff engines are worth upgrading when the star level improves application, trigger value, scaling, or fight pressure.",
+  },
+  {
+    "Item Type": "Cooldown / trigger support, such as Dream Catcher-style cooldown support or trigger-enabling items",
+    "Usually Worth 3-Star?": "Sometimes",
+    Why:
+      "Worth it only if the support directly improves your carry. Do not upgrade support just because it is available.",
+  },
+  {
+    "Item Type": "Shield or heal core, such as Runic Shield or a main defensive engine",
+    "Usually Worth 3-Star?": "Sometimes",
+    Why:
+      "Good when defense is what lets your damage plan survive. Bad if you still cannot kill anything.",
+  },
+  {
+    "Item Type": "Copy / potion / upgrade enabler, such as Mirror Elixir or Crown Forge setup pieces",
+    "Usually Worth 3-Star?": "Only if it serves the carry",
+    Why:
+      "These are strongest when they help your real carry reach 3-star. They are not automatically worth building around by themselves.",
+  },
+  {
+    "Item Type": "Temporary early item",
+    "Usually Worth 3-Star?": "Usually no",
+    Why:
+      "Early tempo items often did their job already. Do not over-invest if they are not your final plan.",
+  },
+  {
+    "Item Type": "Random expensive item",
+    "Usually Worth 3-Star?": "No",
+    Why:
+      "Rarity does not matter if the item is not solving your current build problem.",
+  },
+];
+
+export const timingColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "3-Star Rule", label: "3-Star Rule" },
+];
+
+export const timingRows = [
+  {
+    Timing: "D1-D3",
+    "What To Do":
+      "Buy tempo and watch for natural pairs.",
+    "3-Star Rule":
+      "Do not roll hard for 3-star yet unless the item is already clearly your carry.",
+  },
+  {
+    Timing: "D4-D6",
+    "What To Do":
+      "Decide which item is worth feeding.",
+    "3-Star Rule":
+      "Start holding duplicates only if they support your real direction.",
+  },
+  {
+    Timing: "D7-D8",
+    "What To Do":
+      "Use rerolls, freezes, copy effects, or upgrade rewards to push a real carry.",
+    "3-Star Rule":
+      "This is the best timing to finish an upgrade if your board is stable.",
+  },
+  {
+    Timing: "D9+",
+    "What To Do":
+      "Win the next fight.",
+    "3-Star Rule":
+      "Only chase 3-star if it immediately improves survival or damage. Late theory crafting loses runs.",
+  },
+];
+
+export const freezeColumns = [
+  { key: "Freeze Situation", label: "Freeze Situation" },
+  { key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const freezeRows = [
+  {
+    "Freeze Situation": "You see a duplicate but cannot afford it.",
+    "Why It Helps":
+      "The copy may be your cheapest path toward 2-star or 3-star. Do not roll it away.",
+  },
+  {
+    "Freeze Situation": "You want to level before buying.",
+    "Why It Helps":
+      "Freeze lets you keep the upgrade piece while spending this turn on XP.",
+  },
+  {
+    "Freeze Situation": "The shop has carry + support together.",
+    "Why It Helps":
+      "Some upgrades only matter if the item also has the correct support around it.",
+  },
+  {
+    "Freeze Situation": "You are deciding whether to pivot.",
+    "Why It Helps":
+      "Freezing keeps the new option alive without destroying your current board immediately.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Loses Runs", label: "Why It Loses Runs" },
+  { key: "Better Play", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Chasing 3-star on a support item",
+    "Why It Loses Runs":
+      "You spend gold upgrading something that does not actually win fights.",
+    "Better Play":
+      "Upgrade the carry first. Upgrade support only when it directly improves the carry.",
+  },
+  {
+    Mistake: "Rolling from zero copies",
+    "Why It Loses Runs":
+      "You burn too much gold before the upgrade path is real.",
+    "Better Play":
+      "Start chasing when duplicates already appeared or a reward gives you a shortcut.",
+  },
+  {
+    Mistake: "Using Crown Forge on the wrong item",
+    "Why It Loses Runs":
+      "A 3-star support item can still lose if your main damage is weak.",
+    "Better Play":
+      "Use Crown Forge on a 2-star carry or a support piece that creates a major breakpoint.",
+  },
+  {
+    Mistake: "Copying the wrong item",
+    "Why It Loses Runs":
+      "Copy effects feel powerful, but copying a random item does not create a win condition.",
+    "Better Play":
+      "Use Mirror Elixir-style value on the item you already plan to carry or upgrade.",
+  },
+  {
+    Mistake: "Ignoring level timing",
+    "Why It Loses Runs":
+      "You reroll for copies in low-quality shops when leveling would unlock better options.",
+    "Better Play":
+      "Level first if your board can survive and better shop quality matters more.",
+  },
+  {
+    Mistake: "Throwing the final fight for a prettier board",
+    "Why It Loses Runs":
+      "You chase an upgrade when your current board already reaches 10 wins.",
+    "Better Play":
+      "When close to 10 wins, buy the safest next-fight improvement.",
+  },
+];
+
+export const scenarioColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "Best Move", label: "Best Move" },
+  { key: "Why", label: "Why" },
+];
+
+export const scenarioRows = [
+  {
+    Situation: "You have a 2-star carry and find Crown Forge.",
+    "Best Move": "Use it if the 3-star upgrade changes fights.",
+    Why:
+      "This is the cleanest high-value 3-star path.",
+  },
+  {
+    Situation: "You find Mirror Elixir and have one clear carry.",
+    "Best Move": "Copy the carry line or the piece that pushes it toward 3-star.",
+    Why:
+      "Copy effects are strongest when they reduce the number of shops needed to finish your real upgrade.",
+  },
+  {
+    Situation: "You have two copies of a support item.",
+    "Best Move": "Hold only if it directly helps your carry.",
+    Why:
+      "Support upgrades are good only when the supported item is already worth feeding.",
+  },
+  {
+    Situation: "You are losing fights but see a duplicate.",
+    "Best Move": "Buy power first or freeze the duplicate.",
+    Why:
+      "The upgrade does not matter if you die before using it.",
+  },
+  {
+    Situation: "The shop shows a 3-star shortcut but your best item is 1-star.",
+    "Best Move": "Do not force it yet.",
+    Why:
+      "Most direct 3-star shortcuts are best when the item is already 2-star or close.",
+  },
+  {
+    Situation: "Your carry is already winning fights.",
+    "Best Move": "Freeze or reroll for the final copy only if safe.",
+    Why:
+      "Do not weaken a winning board just to make the screenshot better.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To get 3-star items in Oaken Tower, do not roll randomly for every duplicate. Pick one item that actually wins fights, merge natural copies when they appear, freeze important duplicates, and use 3-star shortcuts like Crown Forge or copy effects only on items that matter.**
+
+The safest rule is simple: chase 3-star on your carry, not on every item. If the upgrade does not improve your damage, defense, trigger speed, or scaling enough to change the next fight, spend the gold somewhere else.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-three-star-preview.webp"
+    alt="Oaken Tower item upgrade preview showing 1-star, 2-star and 3-star item values."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Always preview the upgraded item before committing. A 3-star item is only worth chasing if the upgraded effect actually changes your fights.
+  </figcaption>
+</figure>
+
+<h2 id="how-stars-work">
+  How item stars work
+</h2>
+
+Item stars are Oaken Tower's upgrade system. When you get matching copies of an item, you can merge them upward and improve the item.
+
+The important part is not just “higher star is better.” The important part is **which item gets the upgrade**.
+
+A 3-star item is strongest when it is:
+
+- your main damage source,
+- your main Poison, Burn, Bleed, Shock, or scaling engine,
+- the support item that makes your carry trigger,
+- the defensive core that lets your carry survive,
+- the exact item your build is already built around.
+
+A 3-star item is weak when it is just an expensive trophy sitting next to the real carry.
+
+<h2 id="three-star-paths">
+  How to get 3-star items
+</h2>
+
+There are several ways to reach 3-star, but they do not all fit the same run.
+
+<GuideTable
+  caption="Main ways to get 3-star items in Oaken Tower."
+  columns={pathColumns}
+  rows={pathRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="natural-merges">
+  Natural merges: the safest 3-star path
+</h2>
+
+The safest 3-star upgrades usually start naturally.
+
+If the shop keeps offering the same carry item, that is a signal. You can buy duplicates, freeze the important copy, and build around the item without destroying your economy.
+
+Natural merging is good when:
+
+- the item is already winning fights,
+- you already have duplicates,
+- the next upgrade is close,
+- your board survives while you chase it,
+- you are not ignoring a better level timing.
+
+Natural merging is bad when:
+
+- you have only one copy,
+- the item is not your carry,
+- you are rolling from nothing,
+- the rest of your board is falling behind,
+- the upgrade does not solve your next matchup.
+
+<h2 id="upgrade-rewards">
+  Upgrade-to-3-star rewards
+</h2>
+
+Some reward choices can push an item straight toward 3-star or offer a direct upgrade path.
+
+These rewards are powerful, but they are not always correct. In one run, the player saw an **upgrade item to 3-star** choice but passed because the board did not have a good 2-star target for it yet.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-upgrade-to-three-star-choice.webp"
+    alt="Oaken Tower reward choice showing upgrade item to three star, copy item and freeze enemy options."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A direct 3-star upgrade is only strong when you already have the right item to receive it. If the target is weak, the reward can be low value.
+  </figcaption>
+</figure>
+
+Before taking an upgrade reward, ask:
+
+- Do I already have a 2-star item worth upgrading?
+- Is that item my carry?
+- Does the 3-star version solve my next fights?
+- Would another reward keep me alive more safely?
+- Am I upgrading because it wins, or because 3-star looks exciting?
+
+<h2 id="crown-forge">
+  Crown Forge potion: use it on the right 2-star item
+</h2>
+
+Crown Forge is one of the cleanest ways to reach 3-star, but it has a key rule: **you need a 2-star item first.**
+
+That means Crown Forge is not a magic fix for a weak board. It is a payoff for a board that already built the correct 2-star item.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-crown-forge-brew.webp"
+    alt="Oaken Tower Crown Forge potion used as a shortcut for upgrading a 2-star item to 3-star."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Crown Forge-style upgrades are strongest when the target is already 2-star and already important to your build.
+  </figcaption>
+</figure>
+
+Use Crown Forge on:
+
+- your main damage carry,
+- a Poison / Burn / Bleed engine,
+- a shield or heal core that keeps your carry alive,
+- a trigger item that makes the whole board work,
+- a support piece only if it creates a major breakpoint.
+
+Do not use Crown Forge on:
+
+- random temporary items,
+- support that barely matters,
+- a piece you are about to sell,
+- an item that is not part of your current build,
+- a 2-star item that exists only because you happened to find copies.
+
+<h2 id="what-to-upgrade">
+  Which items are worth 3-star?
+</h2>
+
+Think in jobs, not rarity. If you are staring at a specific item like Doom Guide, Petal Staff, Venom Bow, Molten Bow, Mythic Rod, Runic Shield, or Mirror Elixir, the real question is not “is this rare?” The real question is: **does this item decide fights for my current board?**
+
+<GuideTable
+  caption="Which item types and examples are worth chasing to 3-star."
+  columns={itemTypeColumns}
+  rows={itemTypeRows}
+/>
+
+The best 3-star target is usually the item you can already point to and say: **this is why I am winning fights.**
+
+<h2 id="when-to-chase">
+  When should you chase 3-star items?
+</h2>
+
+Use this table before you start rolling for copies.
+
+<GuideTable
+  caption="When to chase 3-star items in Oaken Tower."
+  columns={chaseColumns}
+  rows={chaseRows}
+/>
+
+A 3-star chase is not a default plan. It is a commitment. Once you start spending gold on duplicates and rerolls, you are not spending that gold on levels, defense, or new build directions.
+
+
+<AdUnit placement="article_middle" />
+
+<h2 id="timing">
+  3-star timing by day range
+</h2>
+
+Your upgrade plan changes as the run goes on.
+
+<GuideTable
+  caption="Oaken Tower 3-star item timing by run phase."
+  columns={timingColumns}
+  rows={timingRows}
+/>
+
+Early copies are nice, but early tunnel vision is dangerous. The longer the run goes, the more your upgrades need to solve the next opponent instead of just making the board look better.
+
+<h2 id="freeze-duplicates">
+  Freeze duplicates instead of panic-rolling
+</h2>
+
+Freeze is one of the best tools for building toward 3-star items.
+
+<GuideTable
+  caption="How to use freeze while chasing 3-star items."
+  columns={freezeColumns}
+  rows={freezeRows}
+/>
+
+The important idea: freeze lets you keep an upgrade path without spending all your gold right now.
+
+That matters when you need to level first, buy tempo, or wait for income before committing to the copy.
+
+<h2 id="level-vs-reroll">
+  Level vs reroll when chasing upgrades
+</h2>
+
+If you want 3-star items, your instinct may be to reroll. That is not always right.
+
+Reroll when:
+
+- you are one copy away,
+- the item is your carry,
+- the shop tier can actually show what you need,
+- your board survives while rolling,
+- one upgrade changes future fights.
+
+Level when:
+
+- your current shop quality is too low,
+- you need higher-rarity items,
+- your board is already stable,
+- rerolling now would only find weak copies,
+- better future shops matter more than this shop.
+
+For the full decision tree, read the <Link href="/oaken-tower/level-vs-reroll">Oaken Tower Level vs Reroll Guide</Link>.
+
+<h2 id="common-scenarios">
+  Common 3-star scenarios
+</h2>
+
+<GuideTable
+  caption="Common Oaken Tower 3-star item scenarios."
+  columns={scenarioColumns}
+  rows={scenarioRows}
+/>
+
+<h2 id="common-mistakes">
+  Common 3-star mistakes
+</h2>
+
+<GuideTable
+  caption="Common mistakes when chasing 3-star items."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="quick-checklist">
+  3-star checklist
+</h2>
+
+Before you chase a 3-star item, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Is this item my carry?</li>
+  <li>Do I already have duplicates?</li>
+  <li>Can my board survive while I roll?</li>
+  <li>Does the upgrade change the next fight?</li>
+  <li>Would leveling be better than rolling?</li>
+  <li>Should I freeze the copy instead of buying or rolling now?</li>
+  <li>Am I close to 10 wins and risking the run for a prettier board?</li>
+</ul>
+
+If the answer is mostly no, stop chasing. Buy power, level, or save instead.
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do you get 3-star items in Oaken Tower?
+
+You get 3-star items by merging matching item copies, using upgrade rewards, copying important item lines, or using shortcut effects such as Crown Forge on an eligible 2-star item.
+
+### Does Crown Forge work on any item?
+
+No. Crown Forge-style upgrades are best used on a 2-star item. Do not treat it as a fix for a weak 1-star board.
+
+### Is Mirror Elixir good for getting 3-star items?
+
+It can be, but only when it copies an item that matters. Use copy effects on your carry path, not on random support pieces.
+
+### Should I always chase 3-star items?
+
+No. Chase 3-star only when the item is your carry or the upgrade creates a major breakpoint. Many 10-win runs do not need a 3-star item.
+
+### Is Doom Guide worth 3-star?
+
+Only if Doom Guide is your real carry or scaling engine. If another item is doing the work, do not spend the run chasing Doom Guide just because it looks powerful.
+
+### Is Petal Staff worth 3-star?
+
+Petal Staff can be worth 3-star if it is already your Poison or scaling engine. It is not worth forcing if the rest of your board cannot survive while you roll.
+
+### Is Venom Bow worth 3-star?
+
+Yes, if your board is built around Poison or bow pressure and Venom Bow is carrying fights. If you have no bow support or Poison payoff, do not chase it blindly.
+
+### What item should I upgrade to 3-star?
+
+Upgrade the item that is actually winning fights: your damage carry, debuff engine, trigger engine, or defensive core that keeps your carry alive.
+
+### Is a 3-star support item worth it?
+
+Sometimes, but only if that support directly improves your carry. A 3-star support item is bad if your main damage is still weak.
+
+### Should I reroll for 3-star copies?
+
+Reroll when you are close to the upgrade and your board can survive. Do not roll from zero copies just because you want a 3-star item.
+
+### Should I freeze duplicates?
+
+Yes, if the duplicate is part of a real carry upgrade. Freezing is often safer than panic-rolling or spending all your gold immediately.
+
+### Can I win without 3-star items?
+
+Yes. Many runs reach 10 wins with strong 1-star or 2-star items plus good support. A 3-star item is a tool, not a requirement.

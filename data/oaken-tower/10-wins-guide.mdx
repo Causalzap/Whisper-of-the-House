@@ -1,0 +1,876 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const winPlanColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "Your Goal", label: "Your Goal" },
+  { key: "What Usually Loses", label: "What Usually Loses" },
+];
+
+export const winPlanRows = [
+  {
+    Phase: "Opening shops",
+    "Your Goal":
+      "Buy enough real power to survive the first fights while watching for a build direction.",
+    "What Usually Loses":
+      "Skipping tempo because you are dreaming about a late-game combo.",
+  },
+  {
+    Phase: "First direction",
+    "Your Goal":
+      "Let the shop choose your build: Poison, Burn, Bleed, bow carry, weapon carry, shield / heal, or a clear combo.",
+    "What Usually Loses":
+      "Forcing the build you wanted before the run started.",
+  },
+  {
+    Phase: "Mid run",
+    "Your Goal":
+      "Feed the item that is already winning fights instead of rebuilding the whole tower.",
+    "What Usually Loses":
+      "Pivoting away from a board that is already strong enough.",
+  },
+  {
+    Phase: "Final push",
+    "Your Goal":
+      "Solve the next fight and reach 10 wins. You do not need a perfect final board.",
+    "What Usually Loses":
+      "Getting greedy for one more upgrade when you only needed to survive one more fight.",
+  },
+];
+
+export const dayColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "Main Job", label: "Main Job" },
+  { key: "What To Watch", label: "What To Watch" },
+];
+
+export const dayRows = [
+  {
+    Timing: "D1-D3",
+    "Main Job":
+      "Get tempo. Your tower needs damage, shield, healing, or a scaling item that starts working now.",
+    "What To Watch":
+      "Early losses are cheaper, but a completely empty or slow board still ruins the run.",
+  },
+  {
+    Timing: "D4",
+    "Main Job":
+      "Use the encounter to fix what your board is missing: damage, defense, rerolls, or economy.",
+    "What To Watch":
+      "This is often where a vague build becomes a real direction.",
+  },
+  {
+    Timing: "D5-D6",
+    "Main Job":
+      "Commit to the strongest line the shop has actually offered.",
+    "What To Watch":
+      "If you still cannot name your carry, stop rolling randomly and buy next-fight power.",
+  },
+  {
+    Timing: "D7-D8",
+    "Main Job":
+      "Level, upgrade, or search for a named item that changes the next fights.",
+    "What To Watch":
+      "This is the danger zone for greedy rerolls and fake 3-star chases.",
+  },
+  {
+    Timing: "D9+",
+    "Main Job":
+      "Make the safest play that gets you to 10 wins.",
+    "What To Watch":
+      "Do not chase a prettier final board if your current board already wins.",
+  },
+];
+
+export const stuckColumns = [
+  { key: "Problem", label: "Why You Get Stuck" },
+  { key: "What It Looks Like", label: "What It Looks Like" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const stuckRows = [
+  {
+    Problem: "You win early but stop scaling",
+    "What It Looks Like":
+      "You reach 5-7 wins, then enemy boards suddenly out-damage you.",
+    Fix:
+      "Find a real scaling item or upgrade path before the final stretch. Tempo alone is not enough.",
+  },
+  {
+    Problem: "You over-roll after a good start",
+    "What It Looks Like":
+      "You were winning, then spent three shops looking for a perfect item and got weaker.",
+    Fix:
+      "If the board is already winning, level, upgrade the carry, or save. Do not rebuild.",
+  },
+  {
+    Problem: "Your build has no finisher",
+    "What It Looks Like":
+      "You survive for a long time but cannot kill shield, heal, or scaling boards.",
+    Fix:
+      "Add a real damage engine: Poison payoff, Burn pressure, bow carry, Mythic Rod-style scaling, or another item that actually ends fights.",
+  },
+  {
+    Problem: "You chase 3-star too early",
+    "What It Looks Like":
+      "You spend all your gold on duplicates while the rest of your tower falls behind.",
+    Fix:
+      "Only chase 3-star when the item is your carry or the upgrade creates a major breakpoint.",
+  },
+  {
+    Problem: "You ignore hearts",
+    "What It Looks Like":
+      "You keep greeding even though one late loss can end the run.",
+    Fix:
+      "When late losses cost more hearts, stop farming value and buy the safest next-fight power.",
+  },
+];
+
+export const heartColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "Heart Pressure", label: "Heart Pressure" },
+  { key: "How To Play Around It", label: "How To Play Around It" },
+];
+
+export const heartRows = [
+  {
+    Timing: "D1-D3",
+    "Heart Pressure": "Losses are less punishing.",
+    "How To Play Around It":
+      "You can take a small risk for income, XP, or a strong setup, but do not leave the tower useless.",
+  },
+  {
+    Timing: "D4-D6",
+    "Heart Pressure": "Losses start hurting more.",
+    "How To Play Around It":
+      "Your board needs an identity now. Use encounters and shops to fix the weakest part of the tower.",
+  },
+  {
+    Timing: "D7+",
+    "Heart Pressure": "Late losses are dangerous.",
+    "How To Play Around It":
+      "If you are low on hearts, stop greed. Buy immediate power, defense, or the upgrade that wins the next fight.",
+  },
+];
+
+export const encounterColumns = [
+  { key: "Encounter", label: "Encounter" },
+  { key: "Take It When", label: "Take It When" },
+  { key: "Why It Helps 10 Wins", label: "Why It Helps 10 Wins" },
+];
+
+export const encounterRows = [
+  {
+    Encounter: "Pirate",
+    "Take It When":
+      "You need gold, economy, or a way to recover from an awkward shop.",
+    "Why It Helps 10 Wins":
+      "More gold gives you room to level, buy tempo, or chase one specific item without destroying the run.",
+  },
+  {
+    Encounter: "Shieldbearer",
+    "Take It When":
+      "You are losing fights before your carry has time to work.",
+    "Why It Helps 10 Wins":
+      "Shield buys time for Poison, Burn, scaling weapons, or bow carries to finish the enemy tower.",
+  },
+  {
+    Encounter: "Traveler",
+    "Take It When":
+      "You know exactly what item, duplicate, or support piece you are looking for.",
+    "Why It Helps 10 Wins":
+      "Free rerolls are strongest when they search for a named target, not random value.",
+  },
+  {
+    Encounter: "Potion Seller",
+    "Take It When":
+      "Your board needs a quick stat boost, Poison / Burn support, cooldown help, or a temporary fight swing.",
+    "Why It Helps 10 Wins":
+      "Potions can turn a close fight into a safe win, especially when you only need to stabilize.",
+  },
+  {
+    Encounter: "Celestia",
+    "Take It When":
+      "You already have a strong 2-star carry or a clear upgrade path.",
+    "Why It Helps 10 Wins":
+      "A late upgrade can turn one real carry into a 10-win board. Do not use it on a random support item.",
+  },
+];
+
+export const itemColumns = [
+  { key: "Item Type", label: "Item Type" },
+  { key: "Why It Can Carry", label: "Why It Can Carry" },
+  { key: "How To Use It For 10 Wins", label: "How To Use It For 10 Wins" },
+];
+
+export const itemRows = [
+  {
+    "Item Type": "Venom Bow / Poison carry",
+    "Why It Can Carry":
+      "Poison pressure keeps working while the fight continues.",
+    "How To Use It For 10 Wins":
+      "Add faster triggers, Poison support, and enough defense to survive until stacks matter.",
+  },
+  {
+    "Item Type": "Molten Bow / Burn carry",
+    "Why It Can Carry":
+      "Burn can race slower boards before they finish scaling.",
+    "How To Use It For 10 Wins":
+      "Feed the bow with damage, cooldown, or trigger support instead of pivoting away from it.",
+  },
+  {
+    "Item Type": "Mythic Rod / scaling carry",
+    "Why It Can Carry":
+      "A scaling item can become the whole run if you start feeding it early enough.",
+    "How To Use It For 10 Wins":
+      "Protect it, speed it up, and stop buying unrelated items once it is doing the work.",
+  },
+  {
+    "Item Type": "Runic Shield / defensive core",
+    "Why It Can Carry":
+      "It can buy time for a slower damage engine to win.",
+    "How To Use It For 10 Wins":
+      "Pair defense with real damage. Shield alone does not finish the enemy tower.",
+  },
+    {
+    "Item Type": "Fast weapon carry",
+    "Why It Can Carry":
+      "A quick item can abuse buffs, multicast, debuffs, and cooldown support.",
+    "How To Use It For 10 Wins":
+      "Put your best buffs on the item that triggers often enough to matter.",
+  },
+];
+
+export const goldColumns = [
+  { key: "Choice", label: "Choice" },
+  { key: "Use It When", label: "Use It When" },
+  { key: "Avoid It When", label: "Avoid It When" },
+];
+
+export const goldRows = [
+  {
+    Choice: "Buy power",
+    "Use It When":
+      "The item helps you win or barely lose the next fight.",
+    "Avoid It When":
+      "It is just a random piece that does not fit your board.",
+  },
+  {
+    Choice: "Level",
+    "Use It When":
+      "Your current board is stable and better shop rarity or more health matters.",
+    "Avoid It When":
+      "You are too weak right now and leveling leaves your tower empty.",
+  },
+  {
+    Choice: "Reroll",
+    "Use It When":
+      "You can name the target before rolling.",
+    "Avoid It When":
+      "You are rolling because the shop is boring.",
+  },
+  {
+    Choice: "Freeze",
+    "Use It When":
+      "A key item is in the shop but you need to buy it next day or after leveling.",
+    "Avoid It When":
+      "You are freezing random value that does not change your next fight.",
+  },
+  {
+    Choice: "Save",
+    "Use It When":
+      "Your board already wins and the current shop does not improve it.",
+    "Avoid It When":
+      "You are losing fights and refusing to buy tempo.",
+  },
+];
+
+export const hiddenColumns = [
+  { key: "Mechanic", label: "Mechanic" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Player Takeaway", label: "Player Takeaway" },
+];
+
+export const hiddenRows = [
+  {
+    Mechanic: "Trigger cap",
+    "Why It Matters":
+      "Effects can only trigger so many times per second, so stacking infinite speed is not always useful.",
+    "Player Takeaway":
+      "After a point, add damage, scaling, defense, or another support line instead of only chasing more triggers.",
+  },
+  {
+    Mechanic: "Cooldown floor",
+    "Why It Matters":
+      "Cooldown reduction has a lower limit, so the same item cannot always become faster forever.",
+    "Player Takeaway":
+      "Once the main item is fast enough, improve what each trigger does.",
+  },
+  {
+    Mechanic: "Item bias",
+    "Why It Matters":
+      "The shop often rewards following a real direction more than forcing a missing one.",
+    "Player Takeaway":
+      "If the run keeps offering one family of items, use that signal instead of fighting it for six shops.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "3-Star Path", label: "3-Star Path" },
+  { key: "How It Works", label: "How It Works" },
+  { key: "When It Is Worth It", label: "When It Is Worth It" },
+];
+
+export const upgradeRows = [
+  {
+    "3-Star Path": "Natural merges",
+    "How It Works":
+      "Buy duplicates and combine them over time.",
+    "When It Is Worth It":
+      "Good when the item is already your carry and duplicates appear naturally.",
+  },
+  {
+    "3-Star Path": "Celestia",
+    "How It Works":
+      "Use the encounter when it can upgrade or improve your key carry path.",
+    "When It Is Worth It":
+      "Good when you already have a strong 2-star item that can win the run if pushed further.",
+  },
+  {
+    "3-Star Path": "Crownforge",
+    "How It Works":
+      "Use Crownforge-style upgrade value to push a key item toward its next star.",
+    "When It Is Worth It":
+      "Good for your main carry, not for random support pieces.",
+  },
+  {
+    "3-Star Path": "Merge Perk",
+    "How It Works":
+      "Use perk-based merging or upgrade support when your setup already points at one carry.",
+    "When It Is Worth It":
+      "Good when you know the exact item you are building around.",
+  },
+];
+
+export const positioningColumns = [
+  { key: "Tip", label: "Tip" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const positioningRows = [
+  {
+    Tip: "Put ranged or projectile-focused items where they can safely do their job.",
+    "Why It Matters":
+      "Some ranged setups benefit from right-side placement or support positioning depending on the item text.",
+  },
+  {
+    Tip: "Keep your main carry near the support that buffs, triggers, or protects it.",
+    "Why It Matters":
+      "A strong item in the wrong place can miss the support that makes it strong.",
+  },
+  {
+    Tip: "Do not spread buffs randomly.",
+    "Why It Matters":
+      "Most 10-win boards are built around one or two important items, not five equal carries.",
+  },
+  {
+    Tip: "Read adjacent-item text carefully.",
+    "Why It Matters":
+      "Many Oaken Tower items care about what is above, below, left, or right of them.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Stops 10 Wins", label: "Why It Stops 10 Wins" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Forcing a dream build",
+    "Why It Stops 10 Wins":
+      "You ignore the strong items the game is actually offering.",
+    Fix:
+      "Let the shop decide your direction. Build from what appears, not from what you wanted before the run.",
+  },
+  {
+    Mistake: "Over-rolling",
+    "Why It Stops 10 Wins":
+      "You spend gold without gaining power, levels, or upgrades.",
+    Fix:
+      "Only reroll when you know the item, duplicate, or support piece you are looking for.",
+  },
+  {
+    Mistake: "Leveling while weak",
+    "Why It Stops 10 Wins":
+      "Better shops do not matter if your next fight kills you.",
+    Fix:
+      "Buy enough tempo first, then level when your board can survive.",
+  },
+  {
+    Mistake: "Chasing 3-star too early",
+    "Why It Stops 10 Wins":
+      "You roll for a pretty upgrade while the rest of your board falls behind.",
+    Fix:
+      "Only chase 3-star items that are your real carry or a major breakpoint.",
+  },
+  {
+    Mistake: "Ignoring positioning",
+    "Why It Stops 10 Wins":
+      "Your strongest item may miss the support, slot, or adjacency effect that makes it work.",
+    Fix:
+      "Place the carry first, then arrange support items around what the text actually says.",
+  },
+  {
+    Mistake: "Refusing to stop",
+    "Why It Stops 10 Wins":
+      "You keep chasing upgrades after the board is already strong enough.",
+    Fix:
+      "When 10 wins is close, make the safest next-fight play.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To get 10 wins in Oaken Tower, stop playing for the perfect screenshot. Buy early tempo, follow the strongest build direction the shop gives you, protect your hearts, and feed one real carry instead of rebuilding every shop.**
+
+Most failed 10-win runs do not fail because the player lacks a broken combo. They fail because the player over-rolls at 6-7 wins, levels while weak, chases a 3-star too early, or ignores the item that is already carrying.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-shop-level-reroll.webp"
+    alt="Oaken Tower shop showing level, income, reroll, freeze and buy XP decisions."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your 10-win run is usually decided in the shop. Every gold spend should become power, XP, a targeted reroll, a freeze, or saved value.
+  </figcaption>
+</figure>
+
+<h2 id="ten-win-mindset">
+  The 10-win mindset
+</h2>
+
+A 10-win run is not the same thing as a perfect run.
+
+Perfect run thinking sounds like this:
+
+- I need the exact build I saw in a video.
+- I need a 3-star carry.
+- I need the funniest combo.
+- I need to farm more value.
+- I should pivot because this other build looks stronger.
+
+10-win thinking sounds like this:
+
+- Can I win the next fight?
+- What is my real carry?
+- What item actually improves my board?
+- Can I level without dying?
+- Am I rolling with a target?
+- Do I already have enough to finish the run?
+
+That second mindset wins more often.
+
+<h2 id="simple-plan">
+  Simple 10-win plan
+</h2>
+
+The cleanest path is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <strong>Buy early tempo.</strong> Your first board needs damage, shield, healing, or a scaling item that starts working immediately.
+  </li>
+  <li>
+    <strong>Follow the shop's direction.</strong> Poison, Burn, Bleed, bow carry, weapon carry, shield / heal plus damage, or a real combo line can all win.
+  </li>
+  <li>
+    <strong>Feed the carry.</strong> Once one item is winning fights, support it instead of spreading gold everywhere.
+  </li>
+  <li>
+    <strong>Protect your hearts.</strong> Late losses are expensive, so stop greeding when one bad fight can end the run.
+  </li>
+  <li>
+    <strong>Stop when you are strong enough.</strong> If the next fight is already winning, do not ruin the run chasing style.
+  </li>
+</ol>
+
+<GuideTable
+  caption="Oaken Tower 10-win plan by phase."
+  columns={winPlanColumns}
+  rows={winPlanRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="why-stuck">
+  Why you get stuck at 6-7 wins
+</h2>
+
+If you can already reach 5, 6, or 7 wins, you do not need a basic tutorial. You need to fix the transition from “my board works” to “my board can finish the run.”
+
+Most players get stuck there because the enemies start showing real scaling while their own board is still half tempo, half dream build.
+
+<GuideTable
+  caption="Why Oaken Tower runs stall around 6-7 wins."
+  columns={stuckColumns}
+  rows={stuckRows}
+/>
+
+The key difference is this: early wins prove your board has tempo. They do not prove your board has a final carry.
+
+<h2 id="heart-checkpoints">
+  Heart checkpoints: stop greeding when losses get expensive
+</h2>
+
+Oaken Tower punishes late losses harder than early losses. That means your risk tolerance should change as the run goes on.
+
+<GuideTable
+  caption="Oaken Tower heart pressure by timing."
+  columns={heartColumns}
+  rows={heartRows}
+/>
+
+Use this rule: **the fewer hearts you have, the less you are allowed to shop for dreams.** If one bad fight can end the run, your next purchase should make the next fight safer.
+
+<h2 id="day-plan">
+  Day-by-day plan for 10 wins
+</h2>
+
+Use the day count as a pressure timer. The goal is not to memorize a fixed script. The goal is to know what kind of decision each stage asks from you.
+
+<GuideTable
+  caption="Oaken Tower 10-win timing plan."
+  columns={dayColumns}
+  rows={dayRows}
+/>
+
+<h2 id="day-four-encounter">
+  Day 4 encounter: use it to fix the run
+</h2>
+
+The Day 4 encounter is often the first big correction point. Do not choose the funniest option. Choose the option that solves your board's current weakness.
+
+<GuideTable
+  caption="Best Day 4-style encounter choices for a 10-win run."
+  columns={encounterColumns}
+  rows={encounterRows}
+/>
+
+A simple rule:
+
+- If you are poor, take gold or economy.
+- If you are dying too fast, take defense.
+- If you know the exact item you need, take rerolls.
+- If you already have a 2-star carry, consider upgrade value.
+- If your board has no direction, take the option that gives one.
+
+<h2 id="early-game">
+  Early game: buy tempo before dreams
+</h2>
+
+In the first shops, your job is to avoid building a tower that does nothing.
+
+Good early purchases usually do one of these:
+
+- deal immediate damage,
+- apply Poison, Burn, Bleed, Shock, or another useful pressure,
+- shield or heal enough to buy time,
+- start permanent scaling early,
+- fit the perk or slot you already rolled,
+- give you a clear direction for future shops.
+
+Bad early purchases are items that only become good after four other things happen.
+
+If you have to choose between a boring item that wins the next fight and a fancy item that might become good later, take the boring power unless the scaling payoff is obvious.
+
+<h2 id="pick-carry">
+  Pick one carry and stop spreading gold
+</h2>
+
+Most 10-win boards are carried by one main engine. That engine might be Poison, Burn, a bow, a shield-supported damage plan, or a scaling item.
+
+Once you find it, stop treating every item as equally important.
+
+<GuideTable
+  caption="Specific item directions that can carry 10-win runs."
+  columns={itemColumns}
+  rows={itemRows}
+/>
+
+The item names matter less than the job. A carry must either kill the enemy tower, scale into the final fights, or buy enough time for another item to kill.
+
+<h2 id="molten-bow-example">
+  Example: when one carry is enough
+</h2>
+
+This is the kind of decision that separates a 10-win run from a thrown run.
+
+In the Molten Bow run, the player started looking at other options. There was a possible sword / Katana direction, and later even the thought of pivoting into another carry. But the important thing was already obvious: **the bow was winning fights.**
+
+The correct lesson is not “force Molten Bow every run.” It is this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>If one item is already carrying, do not rebuild the tower just because a new shiny item appears.</strong>
+  </li>
+  <li>
+    <strong>If a pivot makes the board weaker right now, it is probably wrong for a 10-win push.</strong>
+  </li>
+  <li>
+    <strong>If your carry only needs support, buy support instead of starting a second build.</strong>
+  </li>
+  <li>
+    <strong>If you are close to 10 wins, the safest improvement is better than the coolest pivot.</strong>
+  </li>
+</ul>
+
+That is why the Molten Bow example matters. The bow had already been farmed and was doing the real work. Swapping into a new sword plan looked tempting, but it risked weakening a board that was already close to finishing the run.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-molten-bow-carry.webp"
+    alt="Oaken Tower Molten Bow carrying a run without needing a perfect final build."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The lesson is not to force Molten Bow. The lesson is to recognize when one item is already carrying and stop pivoting away from it.
+  </figcaption>
+</figure>
+
+<h2 id="gold-decisions">
+  Gold decisions: buy, level, reroll, freeze, or save
+</h2>
+
+The fastest way to lose a promising run is to spend gold without a reason.
+
+Before spending, name the job:
+
+- this item wins the next fight,
+- this level gives me better shops and more health,
+- this reroll is looking for one specific item,
+- this freeze keeps a key item for next turn,
+- this save gives me a better next shop.
+
+If you cannot name the job, do not spend yet.
+
+<GuideTable
+  caption="How to spend gold when pushing for 10 wins."
+  columns={goldColumns}
+  rows={goldRows}
+/>
+
+For a deeper decision tree, read the <Link href="/oaken-tower/level-vs-reroll">Oaken Tower Level vs Reroll Guide</Link>.
+
+<h2 id="freeze">
+  Freeze is stronger than beginners think
+</h2>
+
+Freeze is not just for saving an item you cannot afford. It is a timing tool.
+
+Good freeze examples:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Freeze then level:</strong> if the shop has a key item but leveling first gives better health or shop odds, freeze the item, level, then buy it next day.
+  </li>
+  <li>
+    <strong>Freeze a duplicate:</strong> if a duplicate creates a 2-star or pushes your carry toward 3-star, keep it instead of rolling it away.
+  </li>
+  <li>
+    <strong>Freeze a support pair:</strong> if the shop has both a carry and the support that makes it work, freeze when you cannot afford both now.
+  </li>
+  <li>
+    <strong>Freeze before a pivot:</strong> if a new build direction appears but you need one more shop to decide, freezing buys time without losing the option.
+  </li>
+</ul>
+
+Bad freeze examples:
+
+- freezing random value,
+- freezing an item that does not improve the next fight,
+- freezing because the shop looks rare,
+- freezing a pivot piece when your current board is already winning.
+
+A frozen shop should answer a question. If it does not, let it go.
+
+<h2 id="level-reroll">
+  When to level or reroll
+</h2>
+
+Leveling and rerolling are not opposites. They answer different questions.
+
+**Level** when the board is stable and you need better shop quality, more health, or access to higher-rarity pieces.
+
+**Reroll** when the board has a target and one specific item changes the run.
+
+The mistake is using either button emotionally. Do not level because you are bored with the shop. Do not reroll because you are tilted from a close loss.
+
+For the full breakdown, use the <Link href="/oaken-tower/level-vs-reroll">Level vs Reroll Guide</Link>.
+
+<h2 id="three-star">
+  How to get 3-star items without throwing the run
+</h2>
+
+You do not need a 3-star item for every 10-win run, but you do need to know when a 3-star path is real.
+
+<GuideTable
+  caption="How to get 3-star items in Oaken Tower."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+The rule is simple: push 3-star when the item is the carry. Do not push 3-star on a support item while your tower has no damage.
+
+For a deeper upgrade guide, read <Link href="/oaken-tower/3-star-items">How to Get 3-Star Items in Oaken Tower</Link>.
+
+<h2 id="positioning">
+  Positioning tips that win close fights
+</h2>
+
+Positioning is easy to ignore because the shop decisions feel louder. But many Oaken Tower items care about adjacency, slots, ranged behavior, or item triggers.
+
+<GuideTable
+  caption="Oaken Tower positioning tips for 10-win runs."
+  columns={positioningColumns}
+  rows={positioningRows}
+/>
+
+Do not drag items randomly. Place the carry first, then make the rest of the board serve that carry.
+
+<h2 id="hidden-mechanics">
+  Hidden mechanics that matter for 10 wins
+</h2>
+
+You do not need to memorize every hidden rule, but a few mechanics explain why some greedy builds stop working.
+
+<GuideTable
+  caption="Hidden Oaken Tower mechanics that affect 10-win runs."
+  columns={hiddenColumns}
+  rows={hiddenRows}
+/>
+
+The practical lesson is simple: once your main item is fast enough, make each trigger better instead of only chasing more speed.
+
+<h2 id="final-fights">
+  Final fights: stop getting greedy
+</h2>
+
+The last stretch is where players throw.
+
+When you are close to 10 wins, ask one question:
+
+**What wins the next fight?**
+
+Not:
+
+- What makes the build cooler?
+- What gives the biggest screenshot?
+- What lets me farm more?
+- What would be perfect if I had three more days?
+
+If your current board already wins, improve it slightly and go. If you are weak, buy the most immediate power. If one fight decides the run, do not spend gold like you still have five lives.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-10-wins-result.webp"
+    alt="Oaken Tower run reaching 10 wins after surviving the key fight."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When one fight gets you to 10 wins, the correct play is whatever makes that fight safest — not whatever makes the final board prettier.
+  </figcaption>
+</figure>
+
+<h2 id="common-mistakes">
+  Common mistakes that stop 10-win runs
+</h2>
+
+<GuideTable
+  caption="Common Oaken Tower mistakes that stop 10-win runs."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="quick-checklist">
+  10-win checklist
+</h2>
+
+Before each shop ends, check this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Do I have enough power for the next fight?</li>
+  <li>Can I name my main carry?</li>
+  <li>Am I protecting my hearts, or still shopping like early losses are cheap?</li>
+  <li>Am I leveling because the board is stable?</li>
+  <li>Am I rerolling for a specific item?</li>
+  <li>Does this 3-star chase actually win fights?</li>
+  <li>Is my carry placed where its support actually works?</li>
+  <li>If I am close to 10 wins, am I making the safest play?</li>
+</ul>
+
+If you answer those honestly, you will win more runs even without knowing every item in the game.
+
+<h2 id="related-guides">
+  Related Oaken Tower guides
+</h2>
+
+- <Link href="/oaken-tower">Oaken Tower Guide</Link> for the full guide hub.
+- <Link href="/oaken-tower/poison-build">Best Poison Build in Oaken Tower</Link> if you want a simple damage-over-time direction.
+- <Link href="/oaken-tower/level-vs-reroll">Oaken Tower Level vs Reroll Guide</Link> if you waste gold in shops.
+- <Link href="/oaken-tower/3-star-items">How to Get 3-Star Items in Oaken Tower</Link> if you are chasing upgrades.
+- <Link href="/oaken-tower/perk-unlock-guide">Oaken Tower Perk Unlock Guide</Link> if your opening perk choices feel confusing.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How many wins do I need in Oaken Tower?
+
+You need 10 wins to complete a normal run. After that, you can think about extra scaling, big damage, or fighting the Oak, but the clean target is 10 wins first.
+
+### Why do I keep getting stuck at 6 or 7 wins?
+
+Because early tempo is no longer enough. By that point, you need a real carry, a scaling path, enough hearts, and disciplined gold spending. Many players throw this stage by over-rolling or chasing a weak 3-star.
+
+### What is the easiest way to get 10 wins?
+
+Build early tempo, choose one carry direction, and stop wasting gold. Poison, Burn, bow carry, shield plus damage, and strong weapon carry boards are all fine if the shop supports them.
+
+### Should I force the same build every run?
+
+No. Let the shop and perk decide. Forcing a build with no support is one of the easiest ways to lose before 10 wins.
+
+### Is leveling early good?
+
+Leveling early is good when your board is already stable. It is bad when you skip power and die because the tower has no damage.
+
+### Should I reroll early?
+
+Only if you have a target. Rerolling for a duplicate, carry, or support item is fine. Rerolling because the shop is boring usually loses gold.
+
+### Do I need 3-star items to get 10 wins?
+
+No. A 3-star carry can help, but many 10-win runs are carried by a strong 1-star or 2-star item with good support. Chase 3-star only when it is actually your win condition.
+
+### Does positioning matter in Oaken Tower?
+
+Yes. Some items care about adjacency, slots, ranged behavior, or what item they trigger. Put the carry first, then place support around it.
+
+### Why do I lose with a strong build idea?
+
+Because a strong idea is not the same as a strong board. You still need early tempo, enough hearts, correct leveling, useful positioning, and a carry that actually triggers before the enemy kills you.

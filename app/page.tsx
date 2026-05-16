@@ -120,6 +120,8 @@ const allGameGuides = [
   { title: 'Outbound', href: '/outbound' },
   { title: 'Directive 8020', href: '/directive-8020' },
   { title: 'Subnautica 2', href: '/subnautica-2' },
+  { title: 'Oaken Tower', href: '/oaken-tower' },
+
   
 ];
 
