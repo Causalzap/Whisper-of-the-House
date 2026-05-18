@@ -1,0 +1,559 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const oxygenNumberColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "oxygen", label: "Oxygen / Effect" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const oxygenNumberRows = [
+  {
+    stage: "No tank upgrade",
+    oxygen: "45 oxygen",
+    whatItMeans: "Enough for shallow scans, not enough for relaxed wreck clearing.",
+  },
+  {
+    stage: "Standard Air Tank",
+    oxygen: "75 oxygen",
+    whatItMeans: "Your first real breakpoint. This is the tank to craft before 80-100m routes.",
+  },
+  {
+    stage: "High Capacity Air Tank",
+    oxygen: "120 oxygen",
+    whatItMeans: "The big early-to-mid game upgrade for long wrecks, colony ruins, and safer material runs.",
+  },
+  {
+    stage: "Air Bladder",
+    oxygen: "Emergency oxygen refill and fast ascent",
+    whatItMeans: "Use it to recover a bad dive or launch upward. Treat it as a panic button, not a replacement for tanks.",
+  },
+  {
+    stage: "Rebreather",
+    oxygen: "No capacity increase",
+    whatItMeans: "It cancels the depth-drain penalty, so your tank lasts normally below 100m instead of melting in deep water.",
+  },
+  {
+    stage: "Below 100m without Rebreather",
+    oxygen: "About 3 oxygen per second",
+    whatItMeans: "A 75-oxygen tank can feel like only 25 seconds if you stay deep too long.",
+  },
+  {
+    stage: "Below 200m without Rebreather",
+    oxygen: "About 5 oxygen per second",
+    whatItMeans: "This is why deep wrecks feel impossible without Rebreather support.",
+  },
+];
+
+export const progressionColumns = [
+  { key: "step", label: "Step" },
+  { key: "upgrade", label: "Upgrade" },
+  { key: "goal", label: "What It Solves" },
+  { key: "moveOnWhen", label: "Move On When" },
+];
+
+export const progressionRows = [
+  {
+    step: "1",
+    upgrade: "Air Bladder + natural oxygen resets",
+    goal: "Lets you survive messy early caves before your tank upgrades are online.",
+    moveOnWhen: "You can reliably return from short caves using surface air, Oxygen Tunics, bubbles, or an Air Bladder.",
+  },
+  {
+    step: "2",
+    upgrade: "Standard Air Tank",
+    goal: "Raises your oxygen from the starting 45 range to the 75 range.",
+    moveOnWhen: "You have 2 Titanium, 2 Silver, and 1 Rubber, then can push 80-100m routes safely.",
+  },
+  {
+    step: "3",
+    upgrade: "High Capacity Air Tank",
+    goal: "Raises your oxygen to the 120 range for longer wreck and colony-ruin routes.",
+    moveOnWhen: "You unlock the data card, gather Lithium for Plasteel Ingot, then combine the ingot with your Standard Air Tank at a full Fabricator.",
+  },
+  {
+    step: "4",
+    upgrade: "Rebreather",
+    goal: "Fixes deep-water oxygen drain instead of increasing the oxygen number.",
+    moveOnWhen: "You scan one Rebreather fragment and craft it from 2 Fiber Mesh and 1 System Chip.",
+  },
+  {
+    step: "5",
+    upgrade: "Portable Oxygen Generator / Tadpole",
+    goal: "Adds route-based oxygen support once you are leaving the Lifepod area for longer trips.",
+    moveOnWhen: "You can place or bring a reliable oxygen reset near the route you are pushing.",
+  },
+];
+
+export const craftColumns = [
+  { key: "item", label: "Item" },
+  { key: "unlock", label: "Unlock" },
+  { key: "recipe", label: "Recipe" },
+  { key: "playerNote", label: "Player Note" },
+];
+
+export const craftRows = [
+  {
+    item: "Air Bladder",
+    unlock: "Early Fabricator recipe",
+    recipe: "2 Titanium, 1 Rubber",
+    playerNote: "Has two jobs: emergency oxygen and fast surfacing. Carry one or two before deep detours.",
+  },
+  {
+    item: "Standard Air Tank",
+    unlock: "Available early",
+    recipe: "2 Titanium, 2 Silver, 1 Rubber",
+    playerNote: "The first permanent oxygen upgrade. If you are still oxygen-starved, solve this before chasing deeper scans.",
+  },
+  {
+    item: "High Capacity Air Tank",
+    unlock: "High Capacity Air Tank recipe data card",
+    recipe: "Standard Air Tank + Plasteel Ingot",
+    playerNote: "Plasteel Ingot is made from 2 Titanium and 1 Lithium through the Processor. You need a full base production chain, not just the Lifepod Fabricator.",
+  },
+  {
+    item: "Rebreather",
+    unlock: "Scan one Rebreather fragment",
+    recipe: "2 Fiber Mesh, 1 System Chip",
+    playerNote: "Fiber Mesh needs Fiber and Strong Acid. System Chip needs a Wiring Kit and Quartz. This is deep-dive efficiency, not more capacity.",
+  },
+  {
+    item: "Portable Oxygen Generator",
+    unlock: "Scan broken generator pieces, commonly near the Great Jaw route",
+    recipe: "3 Titanium, 2 Lithium; requires a Basic Battery to run",
+    playerNote: "Use it as a deployable route support item once you are pushing longer trips away from bases and vehicles.",
+  },
+];
+
+export const highCapacityColumns = [
+  { key: "step", label: "Step" },
+  { key: "landmark", label: "Landmark" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "riskTip", label: "Risk Tip" },
+];
+
+export const highCapacityRows = [
+  {
+    step: "1",
+    landmark: "Lifepod",
+    whatToDo: "Leave with a Standard Air Tank, at least one Air Bladder, and preferably a Wakemaker or another speed tool.",
+    riskTip: "Do this during the day if possible. The route can drop to around 90m and gets visually confusing.",
+  },
+  {
+    step: "2",
+    landmark: "Early southwest / south-southwest shelf, about 250-290m from the Lifepod",
+    whatToDo: "Follow the seafloor along the drop-off until the ground comes back and you see the ruin / wreck structure on the shelf.",
+    riskTip: "Do not dive blindly into the abyss. Reset oxygen before the final entry.",
+  },
+  {
+    step: "3",
+    landmark: "Colony ruin / data-card room",
+    whatToDo: "Enter, grab the High Capacity Air Tank data card, then leave unless you have plenty of oxygen for side loot.",
+    riskTip: "This is an unlock run first, not a full-clear run. Batteries and scannables are nice only if the exit is safe.",
+  },
+  {
+    step: "4",
+    landmark: "Base Processor and full Fabricator",
+    whatToDo: "Make Plasteel Ingot from 2 Titanium and 1 Lithium, then craft the tank from your Standard Air Tank plus the ingot.",
+    riskTip: "If the recipe is unlocked but missing from crafting, finish your base Fabricator / Processor setup.",
+  },
+  {
+    step: "5",
+    landmark: "Later Research Center / Alien Ruins route",
+    whatToDo: "Treat this as an alternate / later data-card source if you missed the early southwest copy or are already following the Tadpole Pens story path.",
+    riskTip: "This is not the route I would use for a first oxygen upgrade. It is much farther and belongs to later progression.",
+  },
+];
+
+export const rebreatherColumns = [
+  { key: "option", label: "Option" },
+  { key: "route", label: "Route From Lifepod" },
+  { key: "requirement", label: "Requirement" },
+  { key: "useItWhen", label: "Use This Route When" },
+];
+
+export const rebreatherRows = [
+  {
+    option: "Cleanest first route",
+    route: "South / southeast, roughly 320-330m; head between south and southeast, pass the rock columns, then check the ground-level scrap box",
+    requirement: "Standard Air Tank and Air Bladder recommended",
+    useItWhen: "You want the most competitor-consistent early route and do not want to rely on a Repair Tool or Heat Tolerance.",
+  },
+  {
+    option: "Southwest bunker route",
+    route: "Southwest / south-southwest, about 300-400m; look below cliffside scrap and lights for a hidden colony room",
+    requirement: "Standard Air Tank recommended; no later tool required",
+    useItWhen: "You are already following the southwest colony-ruin / High Capacity route and want another one-scan Rebreather option.",
+  },
+  {
+    option: "Repair Tool wreck",
+    route: "Northeast, roughly 430m; enter a large wreck from below, then repair the door near the window",
+    requirement: "Repair Tool",
+    useItWhen: "You already made the Repair Tool and want a backup scan in a larger wreck.",
+  },
+  {
+    option: "Late east structure",
+    route: "Directly east around 500m to a superstructure",
+    requirement: "Heat Tolerance",
+    useItWhen: "You already have Heat Tolerance. Do not use this as your first Rebreather route.",
+  },
+];
+
+export const supportColumns = [
+  { key: "source", label: "Oxygen Source" },
+  { key: "use", label: "Best Use" },
+  { key: "warning", label: "Warning" },
+];
+
+export const supportRows = [
+  {
+    source: "Oxygen Tunics",
+    use: "Mid-dive bubbles and Air Bladder refill points.",
+    warning: "Mark them mentally before entering a cave or wreck.",
+  },
+  {
+    source: "Air pockets / interior rooms",
+    use: "Free oxygen resets inside caves, bunkers, and ruins.",
+    warning: "Do not assume every room is safe; confirm the exit before looting.",
+  },
+  {
+    source: "Tadpole / vehicle",
+    use: "Mobile oxygen reset for longer route pushes.",
+    warning: "Keep it powered and parked close enough to the entrance.",
+  },
+  {
+    source: "Portable Oxygen Generator",
+    use: "Deployable oxygen support for remote routes.",
+    warning: "It needs a battery and lithium-heavy crafting, so it is not your first upgrade.",
+  },
+  {
+    source: "Oxygen Control Biomod",
+    use: "Slows oxygen use while stationary, useful for scanning.",
+    warning: "It does not help much while you are swimming hard between POIs.",
+  },
+];
+
+export const diveColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "fix", label: "Fix" },
+];
+
+export const diveRows = [
+  {
+    problem: "I keep dying before reaching the data card.",
+    fix: "Craft the Standard Air Tank first, carry an Air Bladder, and reset oxygen before entering the ruin or wreck.",
+  },
+  {
+    problem: "I unlocked the High Capacity Air Tank but cannot craft it.",
+    fix: "You need a full base production chain: Processor for Plasteel Ingot and a full Fabricator for the tank upgrade.",
+  },
+  {
+    problem: "I cannot find Lithium for Plasteel Ingot.",
+    fix: "Check the southwest Great Jaw / colony-ruin route for early lithium, then later return to the Tadpole Pens / hot-cave side once progression is safer.",
+  },
+  {
+    problem: "The Rebreather did not increase my oxygen number.",
+    fix: "That is normal. It reduces depth penalties; it does not raise your oxygen capacity.",
+  },
+  {
+    problem: "The Repair Tool door will not repair.",
+    fix: "Move your aim around the panel edge until the repair percentage starts filling. Some doors have picky hitboxes.",
+  },
+  {
+    problem: "Different guides point to different tank or Rebreather locations.",
+    fix: "There are multiple data cards and Rebreather fragments. Use the closest route you can safely reach, then stop chasing duplicates once the blueprint unlocks.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The safest oxygen progression in Subnautica 2 is Air Bladder → Standard Air Tank → High Capacity Air Tank → Rebreather → Portable Oxygen Generator / vehicle support.** You start around **45 oxygen**, the **Standard Air Tank** pushes you to about **75**, and the **High Capacity Air Tank** pushes you to about **120**. The **Rebreather** does not raise the number; it makes deep dives cost less oxygen.
+
+For the **High Capacity Air Tank**, this guide uses the early southwest / south-southwest colony-ruin data card route, about **250-290m from the Lifepod** and roughly **90m deep**. Some guides point to a farther **Research Center / Alien Ruins** data card after Tadpole Pens progression, so treat the southwest route as the closer early source and the Alien Ruins route as a later alternate. For the **Rebreather**, the cleanest early route is the **south / southeast scrap route around 320-330m**, with the southwest hidden bunker as a strong backup.
+</GuideQuickAnswer>
+
+<GuideCallout title="Early Access note">
+Subnautica 2 is in Early Access, and several oxygen upgrades have multiple scan or data-card locations. This guide prioritizes the routes that are closest, safest, and easiest to explain from the Lifepod, then notes later alternatives when they matter.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-high-capacity-air-tank-databox.webp"
+    alt="Subnautica 2 High Capacity Air Tank data card unlock inside a colony ruin."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The High Capacity Air Tank is a data-card unlock, not a fragment scan. Grab the recipe, leave safely, then craft the tank after your base production chain is ready.
+  </figcaption>
+</figure>
+
+<h2 id="oxygen-numbers">Oxygen numbers that matter</h2>
+
+Before you chase another blueprint, know what each upgrade actually changes. The tanks increase your oxygen pool. The Rebreather changes how fast oxygen drains at depth. Oxygen support tools give you mid-route resets.
+
+<GuideTable
+  caption="Subnautica 2 oxygen values and what each breakpoint means."
+  columns={oxygenNumberColumns}
+  rows={oxygenNumberRows}
+/>
+
+Depth is the hidden killer. In shallow water, oxygen is roughly a one-second-per-point timer. Below **100m**, the drain jumps to roughly **3 oxygen per second**; below **200m**, it can jump to roughly **5 oxygen per second**. The Rebreather cancels that depth penalty, which is why a 120-oxygen tank can still feel bad in deep wrecks if you ignore the Rebreather.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="oxygen-upgrade-order">Best oxygen upgrade order</h2>
+
+The best order is not “get the fanciest item first.” It is “make the next route safe enough to complete.” Follow this order and you avoid most early oxygen deaths.
+
+<GuideTable
+  caption="Subnautica 2 oxygen upgrade order and when to move on."
+  columns={progressionColumns}
+  rows={progressionRows}
+/>
+
+<h2 id="what-each-upgrade-does">What each oxygen upgrade actually does</h2>
+
+The short version is: **Air Bladder saves bad dives, tanks extend good dives, the Rebreather fixes deep dives, and generators or vehicles turn long trips into planned routes.**
+
+<GuideTable
+  caption="Oxygen-related equipment, recipes, unlocks, and player notes."
+  columns={craftColumns}
+  rows={craftRows}
+/>
+
+If you are still missing Silver, Rubber, or early Titanium, use the <Link href="/subnautica-2/early-resources">early resources route</Link> before forcing deeper wrecks. If your full Fabricator / Processor path is missing, finish the <Link href="/subnautica-2/welcome-center-habitat-builder">Welcome Center and Habitat Builder route</Link> first.
+
+<h2 id="high-capacity-air-tank">How to get the High Capacity Air Tank</h2>
+
+The High Capacity Air Tank has more than one reported data-card source. This guide keeps the **early southwest / south-southwest colony-ruin route** as the practical first target because it is close, early, and only about **250-290m from the Lifepod** at roughly **90m deep**. Several written guides point players to a farther **Research Center / Alien Ruins** data card after Tadpole Pens progression, so I would present the southwest route as a closer early source rather than the only source.
+
+<GuideCallout title="Why some guides disagree">
+Some guides point to a later Research Center / Alien Ruins data card after Tadpole Pens progression. This guide prioritizes the closer southwest / south-southwest data card route, so the safest wording is: use the southwest source if you find it early, and use the Alien Ruins source as the later, story-aligned backup.
+</GuideCallout>
+
+<GuideTable
+  caption="High Capacity Air Tank route and crafting path."
+  columns={highCapacityColumns}
+  rows={highCapacityRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-high-capacity-air-tank-southwest-wreck.webp"
+    alt="Subnautica 2 southwest shelf route toward the High Capacity Air Tank data card ruin."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Follow the shelf instead of dropping straight into the pit. This route is close enough to do early, but deep enough that Standard Air Tank plus Air Bladder is the safer baseline.
+  </figcaption>
+</figure>
+
+<h2 id="high-capacity-crafting">High Capacity Air Tank crafting checklist</h2>
+
+Once the data card unlocks the recipe, the practical crafting chain is:
+
+```text
+High Capacity Air Tank
+  → Standard Air Tank
+  → Plasteel Ingot
+
+Plasteel Ingot
+  → 2 Titanium
+  → 1 Lithium
+```
+
+The main blocker is **Lithium**. Early on, look around the southwest Great Jaw / colony-ruin route. Later, after more progression, lithium becomes easier around the Tadpole Pens / hot-cave side. Do not swim into a lithium route with a tiny tank and no escape plan; you only need enough for the ingot, not a full inventory.
+
+<h2 id="rebreather">How to get the Rebreather</h2>
+
+The Rebreather is currently a **one-scan blueprint**. There are multiple fragments, so you should choose the easiest one for your current route and stop once the blueprint unlocks.
+
+<GuideTable
+  caption="Rebreather fragment routes and when to use each one."
+  columns={rebreatherColumns}
+  rows={rebreatherRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-rebreather-sse-scrap-box.webp"
+    alt="Subnautica 2 south-southeast scrap box with a Rebreather fragment."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The south / southeast scrap route is the cleanest first Rebreather route to try: pass the rock columns, find the ground-level scrap, and scan the fragment in the box.
+  </figcaption>
+</figure>
+
+<h3 id="south-southeast-scrap">South / southeast scrap route</h3>
+
+From the Lifepod, head between south and southeast. In compass terms, aim roughly between **150 and 165**. Pass the rock columns, then look for ground-level scrap rather than a big interior structure. The fragment sits in a box on the left side of the scrap area.
+
+This is the route I would point most players to first because it lines up with the common 320-330m southeast descriptions and does not require Repair Tool or Heat Tolerance.
+
+<h3 id="southwest-hidden-room">Southwest hidden colony room</h3>
+
+The southwest hidden-room route is still useful. Head southwest / south-southwest until you see scrap hanging near a cliff and lights below. Drop toward the lights, enter the hidden colony room, and scan the Rebreather on the right.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-rebreather-hidden-room-southwest.webp"
+    alt="Subnautica 2 southwest hidden colony room with a Rebreather fragment on the right."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The southwest bunker is a strong backup route, especially if you are already working the High Capacity Air Tank / Great Jaw side of the map.
+  </figcaption>
+</figure>
+
+<h3 id="northeast-repair-tool-wreck">Northeast Repair Tool wreck</h3>
+
+The northeast wreck is a later backup. Swim northeast to the large structure, enter from below, move up into the interior, then repair the door near the window. The Rebreather is inside the room, near the window.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-rebreather-repair-door-window.webp"
+    alt="Subnautica 2 Repair Tool door near a window leading to a Rebreather fragment."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the repair bar does not move, shift your aim around the panel edge. Some wreck doors only start repairing from a narrow angle.
+  </figcaption>
+</figure>
+
+<h2 id="rebreather-crafting">Rebreather crafting checklist</h2>
+
+Once you scan a fragment, craft the Rebreather from:
+
+```text
+Rebreather
+  → 2 Fiber Mesh
+  → 1 System Chip
+
+Fiber Mesh
+  → Fiber
+  → Strong Acid
+
+System Chip
+  → Wiring Kit
+  → 2 Quartz
+```
+
+Do not expect your oxygen number to go up after crafting it. The Rebreather is valuable because it makes deeper routes drain less oxygen than they would without it.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="portable-oxygen-generator">Where the Portable Oxygen Generator fits</h2>
+
+The Portable Oxygen Generator is not the first thing I would chase, but it belongs in this oxygen spoke because it fills the gap between “I have a tank” and “I can safely operate far away from base.” You can scan broken generator pieces near the **Great Jaw** route, then build it later with the Habitat Builder once you have enough Lithium.
+
+Use it for remote route support, not as a replacement for tanks. It needs a **Basic Battery** to function and refills oxygen over time through electrolysis, so it is best when you are staging a longer resource run or repeated wreck entry.
+
+<h2 id="oxygen-sources">Natural oxygen sources you should use</h2>
+
+Gear is only half of the oxygen plan. Learn the oxygen resets and you will survive routes that look too deep on paper.
+
+<GuideTable
+  caption="Oxygen support sources and how to use them."
+  columns={supportColumns}
+  rows={supportRows}
+/>
+
+The mistake is entering a wreck as if your tank is the only oxygen source. Before you go inside, know where your last reset was and where the next one should be.
+
+<h2 id="when-to-use-rebreather">Which setup should I use for each dive?</h2>
+
+Use this decision rule:
+
+```text
+Short shallow dive
+  → Air Bladder + Standard Air Tank
+
+Long wreck or colony ruin
+  → High Capacity Air Tank
+
+Deep wreck, lower cave, or fast-drain route
+  → High Capacity Air Tank + Rebreather
+
+Remote repeated route
+  → High Capacity Air Tank + Rebreather + vehicle or Portable Oxygen Generator
+```
+
+If you are still in the first hour and mostly scanning shallow fragments, the Rebreather can wait. If you are pushing 90m routes, southwest ruins, Repair Tool wrecks, or deeper story routes, it becomes much more valuable.
+
+<h2 id="troubleshooting">Troubleshooting oxygen problems</h2>
+
+<GuideTable
+  caption="Common oxygen upgrade problems and fixes."
+  columns={diveColumns}
+  rows={diveRows}
+/>
+
+<h2 id="route-order">Recommended route order</h2>
+
+For a clean first playthrough, use this order:
+
+```text
+1. Craft Survival Multitool and Scanner.
+2. Make an Air Bladder.
+3. Farm Silver and craft the Standard Air Tank.
+4. Power the Welcome Center and slot Oxygen Control if you want safer scanning.
+5. Build your first base so the full Fabricator / Processor path is available.
+6. Grab the High Capacity Air Tank data card from the early southwest / south-southwest colony ruin.
+7. Use the Processor to make Plasteel Ingot from Titanium + Lithium.
+8. Craft the High Capacity Air Tank.
+9. Scan the easiest Rebreather fragment.
+10. Add Portable Oxygen Generator or Tadpole support for longer routes.
+```
+
+This order avoids the common trap: swimming to a deep upgrade before you have enough oxygen to leave with it.
+
+For the base step, use the <Link href="/subnautica-2/welcome-center-habitat-builder">Welcome Center and Habitat Builder guide</Link>. For the resource step, use the <Link href="/subnautica-2/early-resources">early resources route</Link>. If your next blocker is lithium, cankers, or blocked mineral deposits, the <Link href="/subnautica-2/sonic-resonator-guide">Sonic Resonator guide</Link> helps open the routes that feed the oxygen upgrade chain.
+
+<h2 id="faq">FAQ</h2>
+
+### What is the best first oxygen upgrade in Subnautica 2?
+
+Craft the **Standard Air Tank** first. Air Bladder is useful before that, but the Standard Air Tank is the first permanent oxygen breakpoint.
+
+### How much oxygen do the tanks give?
+
+You start around **45 oxygen**. The **Standard Air Tank** raises that to about **75**, and the **High Capacity Air Tank** raises it to about **120**.
+
+### Where is the High Capacity Air Tank blueprint?
+
+There are multiple reported data-card sources. This guide uses the southwest / south-southwest colony ruin route, around **250-290m from the Lifepod** and roughly **90m deep**. Some written guides point to the Research Center / Alien Ruins route after Tadpole Pens progression; treat that as a later alternate source if you do not use the early southwest route.
+
+### What do I need for Plasteel Ingot?
+
+Use the Processor to make Plasteel Ingot from **2 Titanium and 1 Lithium**. Early lithium can be found around the southwest Great Jaw / colony-ruin route; later lithium becomes easier around the Tadpole Pens / hot-cave side.
+
+### Does the Rebreather increase oxygen capacity?
+
+No. The Rebreather reduces deep-water oxygen drain. It is best paired with a larger tank.
+
+### Where should I get the Rebreather first?
+
+Try the **south / southeast scrap route around 320-330m** first. If you are already working the southwest colony-ruin route, the hidden southwest bunker is also a good one-scan option.
+
+### Do I need multiple Rebreather fragments?
+
+In the current Early Access build, one Rebreather scan is enough to unlock the blueprint. Extra fragments are backups.
+
+### Should I get the High Capacity Air Tank or Rebreather first?
+
+Get the **High Capacity Air Tank** first if your problem is total oxygen. Get the **Rebreather** when your problem is deep-water drain. The strongest setup is both together.

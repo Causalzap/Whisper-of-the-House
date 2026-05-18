@@ -71,6 +71,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/subnautica-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/oaken-tower`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+
+    { url: `${base}/subnautica-2/biomods-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/co-op-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/collector-leviathan`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/digestion-adaptation`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/early-resources`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/first-base-setup`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/fully-functional-fabricator`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/navigation-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/oxygen-air-tank-rebreather`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/sonic-resonator-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/tadpole-submarine`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/welcome-center-habitat-builder`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/subnautica-2/what-to-do-first`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+
+
     { url: `${base}/oaken-tower/poison-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/oaken-tower/10-wins-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/oaken-tower/level-vs-reroll`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

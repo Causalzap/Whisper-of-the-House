@@ -1,0 +1,427 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "objective", label: "Objective" },
+  { key: "where", label: "Where to Go" },
+  { key: "leaveWhen", label: "Move On When" },
+  { key: "tip", label: "Player Tip" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    objective: "Craft a Scanner",
+    where: "Lifepod resource loop: Copper, Acidic Raion Pouch, Quartz, and Titanium.",
+    leaveWhen: "You have the Scanner and one spare Basic Battery if possible.",
+    tip: "Do not over-farm. The Scanner is only the key that opens the Habitat Builder route.",
+  },
+  {
+    step: "2",
+    objective: "Swim to the Welcome Center",
+    where: "Southeast / south-southeast of the Lifepod, roughly 80-90m away.",
+    leaveWhen: "You can see the Welcome Center entrance and sign.",
+    tip: "Use the Lifepod as your zero point. This is a short trip, not a deep expedition.",
+  },
+  {
+    step: "3",
+    objective: "Scan Habitat Builder fragment 1",
+    where: "Open crate just to the right of the Welcome Center entrance, near the sign.",
+    leaveWhen: "The blueprint progress shows 1/2 Habitat Builder scans.",
+    tip: "This should be the first fragment you scan because it is almost in plain sight.",
+  },
+  {
+    step: "4",
+    objective: "Scan Habitat Builder fragment 2",
+    where: "Inside the Welcome Center, clear the metal blocking the floor hole, swim down, and check the crate at the bottom.",
+    leaveWhen: "The Habitat Builder blueprint unlocks at 2/2 scans.",
+    tip: "Top off oxygen before dropping through the floor. Do not stay inside if you lose the exit.",
+  },
+  {
+    step: "5",
+    objective: "Craft the Habitat Builder",
+    where: "Return to the Lifepod Fabricator.",
+    leaveWhen: "You craft 2 Titanium, 1 Glass, 1 Basic Battery, and 1 Copper Wire into the tool.",
+    tip: "The Lifepod Fabricator is enough for the tool itself. A base Fabricator comes later.",
+  },
+  {
+    step: "6",
+    objective: "Power the Welcome Center",
+    where: "Return with a spare Basic Battery and insert it into the Welcome Center power outlet.",
+    leaveWhen: "NOA basic building information and the Bio Lab / Biomods become available.",
+    tip: "This is why I like crafting two Batteries before leaving: one for the Scanner path, one for the Welcome Center.",
+  },
+  {
+    step: "7",
+    objective: "Unlock a real Room blueprint",
+    where: "Old Habitat route north / north-northwest of the Lifepod, around 350-420m depending on your marker and approach.",
+    leaveWhen: "You scan the Processor inside Old Habitat and the Room blueprint unlocks.",
+    tip: "If your builder menu only has corridors, you are not stuck. The Habitat Builder is the tool; the Room is a separate blueprint.",
+  },
+  {
+    step: "8",
+    objective: "Build the first usable base",
+    where: "Near the Lifepod, Welcome Center, or your early resource route with enough flat space around it.",
+    leaveWhen: "You have a Room or corridor, Hatch, power, oxygen, and storage / Fabricator space.",
+    tip: "Build for function first: oxygen, power, storage, and room to expand toward a Tadpole dock later.",
+  },
+];
+
+export const craftColumns = [
+  { key: "item", label: "Item" },
+  { key: "recipe", label: "Recipe" },
+  { key: "where", label: "Where to Make / Find It" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const craftRows = [
+  {
+    item: "Scanner",
+    recipe: "2 Titanium, 2 Quartz, 1 Basic Battery",
+    where: "Craft at the Lifepod Fabricator.",
+    why: "Required to scan both Habitat Builder fragments.",
+  },
+  {
+    item: "Basic Battery",
+    recipe: "2 Copper, 1 Acidic Raion Pouch",
+    where: "Craft in the Fabricator resources tab.",
+    why: "Needed for the Scanner, the Habitat Builder recipe, and the Welcome Center power outlet.",
+  },
+  {
+    item: "Glass",
+    recipe: "Quartz processed into Glass",
+    where: "Quartz is common around coral domes and early caves.",
+    why: "One Glass is part of the Habitat Builder recipe.",
+  },
+  {
+    item: "Copper Wire",
+    recipe: "2 Copper",
+    where: "Craft in the Fabricator resources tab.",
+    why: "Required for the Habitat Builder itself.",
+  },
+  {
+    item: "Habitat Builder",
+    recipe: "2 Titanium, 1 Glass, 1 Basic Battery, 1 Copper Wire",
+    where: "Craft at the Lifepod Fabricator after scanning 2 Habitat Builder fragments.",
+    why: "This is the tool that lets you place base pieces, hatches, power pieces, and later full rooms.",
+  },
+];
+
+export const welcomeColumns = [
+  { key: "stop", label: "Welcome Center Stop" },
+  { key: "whatToDo", label: "What to Do" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const welcomeRows = [
+  {
+    stop: "Entrance crate",
+    whatToDo: "Scan the first Habitat Builder fragment beside the entrance sign.",
+    why: "Fastest visible scan and your first 1/2 blueprint progress.",
+  },
+  {
+    stop: "Floor hole / lower cave",
+    whatToDo: "Clear the metal obstruction, swim down, and scan the second Habitat Builder in the lower crate.",
+    why: "Completes the Habitat Builder blueprint in one Welcome Center trip.",
+  },
+  {
+    stop: "Battery outlet",
+    whatToDo: "Insert a spare Basic Battery to boot the Welcome Center systems.",
+    why: "Opens early base-building guidance and the next Welcome Center interactions.",
+  },
+  {
+    stop: "Bio Lab",
+    whatToDo: "Use the Bio Lab after powering the site.",
+    why: "Unlocks your first Biomod choices, usually Dash / Pathfinder and an early passive.",
+  },
+  {
+    stop: "Scannables and containers",
+    whatToDo: "Scan everything useful and check crates before leaving.",
+    why: "Early POIs often hide free blueprints, storage, food, or materials that shorten your first base setup.",
+  },
+];
+
+export const roomColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "fix", label: "Fix" },
+  { key: "note", label: "Note" },
+];
+
+export const roomRows = [
+  {
+    problem: "I crafted the Habitat Builder but only see corridors.",
+    fix: "Scan the Processor at the Old Habitat north / north-northwest of the Lifepod.",
+    note: "The Room recipe data card can also unlock the basic Room elsewhere, but the Old Habitat Processor is the route this guide uses.",
+  },
+  {
+    problem: "I cannot fit storage, Fabricator, or larger systems comfortably.",
+    fix: "Prioritize the Room blueprint before decorating or expanding corridors.",
+    note: "Corridors work as a starter air pocket, but a Room is the real base breakpoint.",
+  },
+  {
+    problem: "I built a base but it has no oxygen.",
+    fix: "Add power first, usually Solar Panels early.",
+    note: "No power means no oxygen. Power is not optional.",
+  },
+  {
+    problem: "I placed my base too close to the seabed or terrain.",
+    fix: "Build slightly above the bottom and leave space below and around the structure.",
+    note: "You will want clearance for hatches, expansion, and eventually vehicle / dock planning.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To get the Habitat Builder in Subnautica 2, craft a Scanner, swim southeast / south-southeast from the Lifepod to the Welcome Center about 80-90m away, scan one Habitat Builder in the open crate by the entrance sign, then clear the floor hole inside the Welcome Center and scan the second Habitat Builder in the lower crate.**
+
+After that, return to the **Lifepod Fabricator** and craft the Habitat Builder with **2 Titanium, 1 Glass, 1 Basic Battery, and 1 Copper Wire**. Bring another Battery back to the Welcome Center to power the site, unlock the early Bio Lab / Biomod step, then unlock the **Room blueprint** separately so your first base is more than a hallway.
+</GuideQuickAnswer>
+
+<GuideCallout title="Early Access note">
+This route is written for the current Subnautica 2 Early Access build. There are multiple Habitat Builder fragment locations on the map; this route uses the Welcome Center pair because they are the closest and easiest to confirm in one trip from the Lifepod.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-welcome-center-exterior.webp"
+    alt="Subnautica 2 Welcome Center exterior southeast of the Lifepod."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Welcome Center is the route anchor for this guide: get here with a Scanner, scan both Habitat Builder fragments, then come back with a spare Battery to power the site.
+  </figcaption>
+</figure>
+
+<h2 id="route-overview">Route overview</h2>
+
+The fastest way to stop living out of the Lifepod is not to chase every early wreck. Follow one clean chain: **Scanner → Welcome Center fragments → Habitat Builder → Welcome Center power → Room blueprint → first functional base**.
+
+<GuideTable
+  caption="Subnautica 2 Habitat Builder and Welcome Center route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="before-you-leave">Before you leave the Lifepod</h2>
+
+Before swimming to the Welcome Center, make sure you have a working **Scanner** and enough oxygen confidence to make one short POI trip. The Welcome Center is close, but the second fragment asks you to drop below the floor, so do not enter with an almost-empty tank.
+
+For a smooth run, bring:
+
+1. **Scanner** for both Habitat Builder fragments.
+2. **One spare Basic Battery** for the Welcome Center power outlet.
+3. **Food and water** if you are also detouring for Digestion, Quartz, or Copper.
+4. **Air Bladder or Fins** if this is your first time leaving the Lifepod area.
+
+<h2 id="habitat-builder-fragment-locations">Habitat Builder fragment locations</h2>
+
+The current best route is the **Welcome Center**, about **80-90m southeast / south-southeast of the Lifepod**. You need two scans.
+
+The first Habitat Builder fragment is outside the Welcome Center, in an **open crate to the right of the entrance near the Welcome Center sign**. Scan it before going inside so you immediately know whether your Scanner has enough battery.
+
+The second fragment is inside the Welcome Center. Look for the **metal blocking the hole in the floor**, clear it with your Survival Multitool, then swim down through the opening and check the crate at the bottom. Scan the second Habitat Builder there to unlock the tool blueprint.
+
+<GuideCallout title="If your route looks different">
+There are several broken Habitat Builders in the early map. A scan near the Digestion / Gene Donor route can still count toward the same 2/2 progress, but the Welcome Center pair is the simplest route because both scans are tied to one landmark.
+</GuideCallout>
+
+<h2 id="crafting-recipe">Habitat Builder crafting recipe</h2>
+
+Once the blueprint is unlocked, go back to the **Lifepod Fabricator**. You do **not** need a base Fabricator to craft the Habitat Builder itself.
+
+<GuideTable
+  caption="Subnautica 2 Habitat Builder recipe and early crafting chain."
+  columns={craftColumns}
+  rows={craftRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-habitat-builder-crafting-recipe.webp"
+    alt="Subnautica 2 Habitat Builder crafting recipe at the Lifepod Fabricator."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Craft the Habitat Builder at the Lifepod Fabricator. The tool itself is an early item; the more advanced base systems come after you place a habitat and power it.
+  </figcaption>
+</figure>
+
+<h2 id="welcome-center-power">What to do at the Welcome Center</h2>
+
+The Welcome Center is not just a fragment stop. It is also your early base-building and Biomod checkpoint. Bring a spare Basic Battery and use the power outlet inside.
+
+<GuideTable
+  caption="What to scan, power, and use at the Welcome Center."
+  columns={welcomeColumns}
+  rows={welcomeRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-welcome-center-battery-outlet.webp"
+    alt="Subnautica 2 Welcome Center battery power outlet used to boot NOA basic building."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A spare Basic Battery turns the Welcome Center from a scan stop into an actual progression checkpoint.
+  </figcaption>
+</figure>
+
+After the site powers up, use the **Bio Lab** opposite the NOA terminal. I usually take **Dash** first because movement fixes more early mistakes than most players expect, but Pathfinder is useful if you keep getting turned around in caves.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-welcome-center-biolab-biomods.webp"
+    alt="Subnautica 2 Welcome Center Bio Lab used to unlock early Biomods."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Bio Lab is the reason I do not treat the Welcome Center as optional. Power it, choose your first Biomods, and scan anything useful before leaving.
+  </figcaption>
+</figure>
+
+For the full ability breakdown, use the <Link href="/subnautica-2/biomods-guide">Subnautica 2 Biomods guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="room-blueprint">Why the Room blueprint still matters</h2>
+
+Crafting the Habitat Builder does not always mean you can build the base you actually want. In the current Early Access route, many players unlock the tool first and then wonder why their build menu still feels limited.
+
+If you only see corridors, get the **Room blueprint** next. The reliable route for this guide is the **Old Habitat** north / north-northwest of the Lifepod, around **350-420m** depending on your marker and approach. Inside the ruin, scan the **Processor**. That Processor scan is the practical unlock target for this route.
+
+There is also a **Room recipe data card** in a deeper colony ruin route, and it can unlock the same basic Room blueprint, but do not treat that as the required step here. For a first base route, go to Old Habitat, scan the Processor, then come back and build.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-room-blueprint-station.webp"
+    alt="Subnautica 2 room blueprint station inside an early habitat route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Room blueprint is the real base breakpoint. Corridors are enough for a tiny air pocket; rooms are where the base becomes useful.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Common base-building blockers after crafting the Habitat Builder."
+  columns={roomColumns}
+  rows={roomRows}
+/>
+
+<h2 id="build-first-base">Build your first functional base</h2>
+
+Do not make the first base pretty. Make it useful.
+
+A good first base has:
+
+- a **Room or starter corridor** you can safely enter,
+- a **Hatch**,
+- enough **power** for oxygen,
+- a **Fabricator** or storage plan,
+- clear space around it for expansion.
+
+A good rule of thumb is to build near an early resource / storage route because it shortens your next three chores. Place your first base where it helps you craft, store, breathe, and return safely, not where it looks cinematic.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-first-base-room-hatch.webp"
+    alt="Subnautica 2 first base with a Room and Hatch placed near an early resource route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start with function: a powered structure, an entrance, oxygen, and enough interior space to add storage and crafting.
+  </figcaption>
+</figure>
+
+If you are still short on materials, use the <Link href="/subnautica-2/early-resources">early resources route</Link>. If your Fabricator says it is not fully functional after you start building, use the <Link href="/subnautica-2/fully-functional-fabricator">Fully Functional Fabricator fix</Link>.
+
+<h2 id="where-to-build">Where should your first base go?</h2>
+
+The safest first base is close enough to the Lifepod that you can retreat, but far enough from the Lifepod that it actually improves your route.
+
+Use these rules:
+
+- **Near resources:** Titanium, Quartz, Copper, Water Slugs, and Fibrous Pulp should be a short swim away.
+- **Near progression:** Welcome Center, Old Habitat, or the early black box route are better anchors than random pretty terrain.
+- **Flat but not buried:** leave room for hatches, solar panels, and later expansion.
+- **Think ahead to power:** natural currents matter later once Hydroelectric Turbines unlock.
+
+<h2 id="common-mistakes">Common mistakes</h2>
+
+### Scanning only one Habitat Builder fragment
+
+The tool needs **two** fragment scans. If you only have 1/2, return to the Welcome Center and check both the entrance crate and the lower crate below the floor hole.
+
+### Forgetting the spare Battery
+
+A Scanner battery is not the same thing as a spare Battery for the Welcome Center. If you want the Welcome Center power step and Biomod access in the same loop, craft an extra Basic Battery before going back.
+
+### Expecting the Habitat Builder to unlock every room
+
+The Habitat Builder is the tool. Some base pieces, especially the **Room**, are separate blueprints. If the menu only gives you corridors, scan the Processor at Old Habitat instead of assuming the base system is broken.
+
+### Building without power
+
+A base with no power is not a base; it is a wet box. Build power first so the structure supplies oxygen.
+
+<h2 id="what-to-do-next">What to do next</h2>
+
+After the first functional base, your next goals are:
+
+```text
+Habitat Builder
+  → Welcome Center power
+  → Bio Lab / early Biomods
+  → Room blueprint
+  → powered base with oxygen
+  → Fabricator / Processor / storage
+  → Tadpole and mid-game resource routes
+```
+
+From here, use the <Link href="/subnautica-2/first-base-setup">First Base Setup guide</Link> for layout and power planning, or move into the <Link href="/subnautica-2/tadpole-submarine">Tadpole Submarine guide</Link> once your base can support vehicle progression.
+
+<h2 id="faq">FAQ</h2>
+
+### Where is the Welcome Center in Subnautica 2?
+
+The Welcome Center is roughly **80-90m southeast / south-southeast of the Lifepod**. It is close enough to reach early, but bring a Scanner and enough oxygen to check the lower floor section safely.
+
+### Where are the two Habitat Builder fragments?
+
+The fastest pair is at the Welcome Center. One is in an open crate near the entrance sign, and the other is in a lower crate reached through the floor hole inside the building.
+
+### What is the Habitat Builder recipe?
+
+The Habitat Builder recipe is **2 Titanium, 1 Glass, 1 Basic Battery, and 1 Copper Wire**. Craft it at the **Lifepod Fabricator** after scanning two fragments.
+
+### Do I need a base Fabricator to craft the Habitat Builder?
+
+No. The Habitat Builder itself is crafted at the Lifepod Fabricator. You build a base Fabricator later after you have a habitat.
+
+### Why can I only build corridors?
+
+You probably have the Habitat Builder but not the Room blueprint yet. For this route, unlock it by scanning the Processor at the Old Habitat north / north-northwest of the Lifepod. A Room recipe data card is another valid unlock source elsewhere, but the Old Habitat Processor is the cleaner first-base route.
+
+### Should I build my first base at the Welcome Center?
+
+You can, but I usually treat the Welcome Center as a progression checkpoint rather than the only base location. Build nearby if the terrain has space, resources, and safe power options; otherwise build closer to your main early resource route.

@@ -1,0 +1,481 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const fragmentColumns = [
+  { key: "route", label: "Route" },
+  { key: "where", label: "Where" },
+  { key: "fragments", label: "Fragments" },
+  { key: "why", label: "Why Use This Route" },
+];
+
+export const fragmentRows = [
+  {
+    route: "Best route",
+    where: "Old Habitat / Quaker blackbox area, about 370-420m north or north-northwest of the Lifepod",
+    fragments: "Two fragments inside the habitat",
+    why: "This is the cleanest route because one POI can unlock the full blueprint. Use this first if you have the Old Habitat marker or can find the north route safely.",
+  },
+  {
+    route: "Alternate 1",
+    where: "Small cave north-northwest of the Lifepod, around the 330-345 direction depending on your starting angle",
+    fragments: "One fragment on a box inside the cave",
+    why: "Good backup if you are still near the Lifepod and want one quick scan before pushing to Old Habitat.",
+  },
+  {
+    route: "Alternate 2",
+    where: "Spider Dome / shell-like landmark southwest of the Lifepod, roughly 240-250 direction and about 240m out",
+    fragments: "One fragment near the lower area / overturned crate route",
+    why: "Useful if you are already following Wander's blackbox or exploring the southwest shell landmark.",
+  },
+];
+
+export const oldHabitatColumns = [
+  { key: "step", label: "Step" },
+  { key: "landmark", label: "Landmark" },
+  { key: "action", label: "What to Do" },
+  { key: "tip", label: "Player Tip" },
+];
+
+export const oldHabitatRows = [
+  {
+    step: "1",
+    landmark: "Lifepod",
+    action: "Swim north / north-northwest toward the Old Habitat, roughly 370-420m from the Lifepod.",
+    tip: "A Wakemaker or better fins make the trip much calmer, but this is still an early-game route compared with the far-east areas.",
+  },
+  {
+    step: "2",
+    landmark: "Old Habitat lower building",
+    action: "Find the entrance on the lower structure, then go inside.",
+    tip: "This is also tied to early blackbox / habitat exploration, so you may arrive here naturally while following story signals.",
+  },
+  {
+    step: "3",
+    landmark: "First room",
+    action: "Turn right after entering and scan the first Sonic Resonator fragment.",
+    tip: "Do the scan first before looting the room. The fragment is the reason you are here.",
+  },
+  {
+    step: "4",
+    landmark: "Next room / hallway",
+    action: "Move into the next room and scan the second fragment near the floor / toppled table area.",
+    tip: "Once the blueprint unlocks, leave and craft. Do not turn the scan trip into a full inventory spiral.",
+  },
+];
+
+export const sonicCraftColumns = [
+  { key: "material", label: "Material" },
+  { key: "amount", label: "Amount" },
+  { key: "howToGet", label: "How to Get It" },
+  { key: "note", label: "Player Note" },
+];
+
+export const sonicCraftRows = [
+  {
+    material: "Basic Battery",
+    amount: "1",
+    howToGet: "Craft from Copper and Acidic Raion Pouch materials.",
+    note: "Make one spare if your Scanner, flashlight, or Wakemaker is already draining your batteries.",
+  },
+  {
+    material: "Titanium Ingot",
+    amount: "2",
+    howToGet: "Make Titanium Ingots with a Processor, or use any ingots you found in caches.",
+    note: "The Processor is the real early blocker for many players, not the fragment scans.",
+  },
+  {
+    material: "Lead",
+    amount: "2",
+    howToGet: "Pick up small loose Lead chunks before the Resonator is built, then mine larger Lead deposits later.",
+    note: "Do not rely on large deposits yet; the Sonic Resonator is what lets you break those.",
+  },
+  {
+    material: "Wiring Kit",
+    amount: "1",
+    howToGet: "Craft from Copper Wire and Silver.",
+    note: "If Silver is your blocker, run the Silver cave route instead of roaming deeper with a full inventory.",
+  },
+];
+
+export const mineColumns = [
+  { key: "target", label: "Target" },
+  { key: "why", label: "Why Mine It" },
+  { key: "when", label: "When to Prioritize" },
+];
+
+export const mineRows = [
+  {
+    target: "Titanium",
+    why: "Base rooms, hatches, lockers, vehicle support, and general crafting eat huge amounts of it.",
+    when: "Mine it first if your base expansion has stalled.",
+  },
+  {
+    target: "Lead",
+    why: "The Resonator recipe itself uses Lead, and later tools can drain your supply quickly.",
+    when: "Mine it after crafting the tool if you barely had enough Lead to make it.",
+  },
+  {
+    target: "Copper / Silver / Quartz",
+    why: "These keep electronics, Wiring Kits, glass, and early utility crafting moving.",
+    when: "Mine them when Scanner, wiring, and base glass recipes are your bottleneck.",
+  },
+  {
+    target: "Creature Enamel",
+    why: "Needed for Enameled Glass, which feeds the Feedback Resonator upgrade path.",
+    when: "Save this for the Alien Ruins / late-zone material phase.",
+  },
+  {
+    target: "Celestine",
+    why: "Processed into Strontium, a key Feedback Resonator and late-upgrade material.",
+    when: "Farm it once you are already operating near the Alien Ruins biome.",
+  },
+];
+
+export const feedbackPrepColumns = [
+  { key: "need", label: "Bring / Unlock" },
+  { key: "priority", label: "Priority" },
+  { key: "why", label: "Why" },
+];
+
+export const feedbackPrepRows = [
+  {
+    need: "Tadpole with a safe depth plan",
+    priority: "Strongly recommended",
+    why: "Both Feedback Resonator fragments are tied to far-east progression areas, not the starter fragment loop.",
+  },
+  {
+    need: "Scanner, Repair Tool, first aid, and spare power",
+    priority: "Recommended",
+    why: "Late wrecks and ruins often combine scan targets, repair doors, predators, and long oxygen resets.",
+  },
+  {
+    need: "Heat / pressure readiness",
+    priority: "Recommended before lingering",
+    why: "The route passes dangerous late-zone terrain. If the environment is already warning you off, treat that as a stop sign.",
+  },
+  {
+    need: "Empty inventory space",
+    priority: "Recommended",
+    why: "You will pass Celestine, Conduit Crystal, Creature Enamel, and other materials you may want for the upgrade.",
+  },
+];
+
+export const feedbackRouteColumns = [
+  { key: "step", label: "Step" },
+  { key: "location", label: "Location" },
+  { key: "whatToDo", label: "What to Do" },
+  { key: "warning", label: "Warning" },
+];
+
+export const feedbackRouteRows = [
+  {
+    step: "1",
+    location: "Cicada Wreck / Therapy Room, roughly 770m east-southeast of the Alien Ruins marker",
+    whatToDo: "Follow the Alien Ruins-side story route toward the Cicada Wreck, enter the Therapy Room area, and scan the first Feedback Resonator fragment.",
+    warning: "Do the Bioscanner / Iso blackbox side of progression first if this wreck route has not opened cleanly for you.",
+  },
+  {
+    step: "2",
+    location: "Metal Farms / bright green pools, northeast of the corrupted Angel Comb near the massive alien turbine",
+    whatToDo: "Move to the green-pool area and scan the second Feedback Resonator fragment on the ground near the pools.",
+    warning: "This area has dangerous creatures and a leviathan nearby. Scan quickly and leave if your Tadpole or oxygen plan is weak.",
+  },
+];
+
+export const feedbackCraftColumns = [
+  { key: "material", label: "Material" },
+  { key: "amount", label: "Amount" },
+  { key: "source", label: "Source / Note" },
+];
+
+export const feedbackCraftRows = [
+  {
+    material: "Sonic Resonator",
+    amount: "1",
+    source: "The base tool becomes the upgrade ingredient. Do not lose track of it after your first mining run.",
+  },
+  {
+    material: "Enameled Glass",
+    amount: "2",
+    source: "Craft from Glass plus Creature Enamel. Creature Enamel appears as protruding Alien Ruins / late-zone deposits and must be broken with the Sonic Resonator.",
+  },
+  {
+    material: "Conduit Crystal",
+    amount: "2",
+    source: "Look around the far-east conduit / corrupted Angel Comb route, especially near green-energy and tendril landmarks.",
+  },
+  {
+    material: "Strontium",
+    amount: "2",
+    source: "Process Celestine with your Processor. Celestine is a light blue / grey crystal resource around the Alien Ruins biome.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The fastest Sonic Resonator route is to scan two fragments in the Old Habitat, about 370-420m north / north-northwest of the Lifepod. Enter the lower habitat, scan one fragment immediately to your right, then scan the second in the next room near the floor / toppled table area. After the blueprint unlocks, craft the Sonic Resonator at a Fabricator in your own base, not the basic Lifepod Fabricator.**
+
+The recipe is **1 Basic Battery, 2 Titanium Ingots, 2 Lead, and 1 Wiring Kit**. Build it before you keep pushing blocked wrecks, Bloom Biofilm, large mineral deposits, or the Feedback Resonator upgrade path.
+</GuideQuickAnswer>
+
+<GuideCallout title="Early Access note">
+This guide is written for the current Subnautica 2 Early Access build. Fragment placements, recipes, and blocked-route behavior may change, so use the POI names and landmarks first, then confirm with your in-game blueprint.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-sonic-resonator-crafting-recipe.webp"
+    alt="Subnautica 2 Sonic Resonator crafting recipe showing Basic Battery, Titanium Ingots, Lead, and Wiring Kit."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Sonic Resonator is the first tool that turns large deposits, Bloom Biofilm, and several mid-game blockers into solvable problems.
+  </figcaption>
+</figure>
+
+<h2 id="why-sonic-resonator-matters">Why the Sonic Resonator matters</h2>
+
+The Sonic Resonator is not just a mining tool. It is the point where Subnautica 2 starts letting you break the things the Survival Multitool cannot: large ore deposits, Bloom Biofilm, and several growths tied to adaptation routes.
+
+Once you have the blueprint, your goal should be simple: craft it, test it on a useful deposit, then bring it on routes where the game keeps showing you blocked holes, infected growths, or big mineral nodes.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="best-fragment-route">Best Sonic Resonator fragment route</h2>
+
+Use **Old Habitat** as the primary route. There are other Sonic Resonator fragments in the world, but Old Habitat is the cleanest unlock because it can give you both scans in one POI.
+
+<GuideTable
+  caption="Subnautica 2 Sonic Resonator fragment routes and when to use them."
+  columns={fragmentColumns}
+  rows={fragmentRows}
+/>
+
+<h2 id="old-habitat-fragments">Old Habitat: two fragments in one trip</h2>
+
+From the Lifepod, swim roughly **370-420m north / north-northwest** to the Old Habitat. If you are following early blackbox signals, this is the same general area tied to Quaker / Old Habitat progression.
+
+<GuideTable
+  caption="Fast route for scanning both Sonic Resonator fragments at Old Habitat."
+  columns={oldHabitatColumns}
+  rows={oldHabitatRows}
+/>
+
+<GuideCallout title="Best route recommendation">
+If you only want the blueprint, use Old Habitat first. The north-northwest cave and Spider Dome fragments are still useful backups, but they make more sense when you are already near those landmarks.
+</GuideCallout>
+
+<h2 id="alternate-fragment-locations">Alternate fragment locations</h2>
+
+If you miss the Old Habitat fragments, or you are already exploring other early story routes, use either of these alternate scans.
+
+The **north-northwest cave fragment** sits on a box inside a short cave route from the Lifepod. Swim toward the 330-345 direction, use the small rock / glimmer landmark, and scan the fragment before turning the cave into a full loot run.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-sonic-resonator-fragment-nnw-cave.webp"
+    alt="Subnautica 2 Sonic Resonator fragment on a box inside the north-northwest cave route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The north-northwest cave fragment is a good backup scan if you are still using the Lifepod as your main reference point.
+  </figcaption>
+</figure>
+
+The **Spider Dome / shell-like landmark fragment** is southwest of the Lifepod, around the 240-250 direction. Look for the large shell / spider-dome shape and scan the fragment near the lower route or overturned crate area.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-sonic-resonator-fragment-spider-dome.webp"
+    alt="Subnautica 2 Sonic Resonator fragment near the Spider Dome shell-like landmark southwest of the Lifepod."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Spider Dome route is useful when you are already following Wander's blackbox or exploring the southwest shell landmark.
+  </figcaption>
+</figure>
+
+<h2 id="crafting-recipe">Sonic Resonator crafting recipe</h2>
+
+After scanning two fragments, return to a **Fabricator in a player-built base**. The Lifepod Fabricator is too basic for this craft, so if the recipe is unlocked but you cannot make it, build or fix your base crafting setup first.
+
+<GuideTable
+  caption="Subnautica 2 Sonic Resonator crafting materials."
+  columns={sonicCraftColumns}
+  rows={sonicCraftRows}
+/>
+
+If you are stuck on Titanium Ingots or the correct crafting station, use the <Link href="/subnautica-2/fully-functional-fabricator">Fully Functional Fabricator guide</Link>. If you are stuck on Silver for the Wiring Kit, use the <Link href="/subnautica-2/early-resources">early resources route</Link> and do one focused Silver run.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="how-to-use-sonic-resonator">How to use the Sonic Resonator</h2>
+
+Equip the Sonic Resonator, aim at a valid target, charge it, then release. On a large mineral deposit, the node breaks into collectible chunks. On Bloom Biofilm or certain infected growths, it clears the blockage or lets the objective continue.
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-sonic-resonator-large-deposit.webp"
+    alt="Subnautica 2 Sonic Resonator breaking a large ore deposit into collectible resources."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Empty your inventory before mining. A single large deposit can create more chunks than you expect.
+  </figcaption>
+</figure>
+
+<h2 id="what-can-sonic-resonator-mine">What can the Sonic Resonator mine?</h2>
+
+The useful answer is: anything the game labels like a large mineral deposit or Resonator-only breakable target. In practice, that means you should start thinking of the Sonic Resonator as your bulk resource tool for materials such as Titanium, Lead, Copper, Silver, Quartz, Creature Enamel, and Celestine.
+
+<GuideTable
+  caption="Best Sonic Resonator mining targets and when to prioritize them."
+  columns={mineColumns}
+  rows={mineRows}
+/>
+
+This is where the tool pays for itself. Mine the material that removes your current blocker instead of cracking every deposit you see.
+
+<h2 id="bloom-biofilm-and-adaptations">Bloom Biofilm, cankers, and adaptation routes</h2>
+
+The Sonic Resonator also matters because it clears growths tied to wrecks, caves, and adaptation objectives. If you hit a Bloom Biofilm wall or an infected Angel Comb route that keeps pointing you toward breakable growths, bring the Resonator with first aid, oxygen, and a clean exit path.
+
+The tool opens the route, but it does not make the route safe. Bloom parasites, predators, and oxygen pressure are still the real danger.
+
+<h2 id="feedback-resonator">Feedback Resonator upgrade</h2>
+
+The **Feedback Resonator** is the later upgrade path from the Sonic Resonator. Keep it in the same mental chain: first you build the base Resonator to mine and clear blockers, then you upgrade it once the far-east route and late-zone materials are realistic.
+
+<GuideTable
+  caption="What to bring before chasing the Feedback Resonator."
+  columns={feedbackPrepColumns}
+  rows={feedbackPrepRows}
+/>
+
+<h2 id="feedback-fragment-locations">Feedback Resonator fragment locations</h2>
+
+The Feedback Resonator requires two fragments. Unlike the basic Sonic Resonator, these are not beginner Lifepod scans. Treat them as far-east progression scans around the Alien Ruins, Cicada Wreck, and Metal Farms route.
+
+<GuideTable
+  caption="Subnautica 2 Feedback Resonator fragment route overview."
+  columns={feedbackRouteColumns}
+  rows={feedbackRouteRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-feedback-resonator-green-pool-fragment.webp"
+    alt="Subnautica 2 Feedback Resonator fragment near the green pool in the Metal Farms late-game area."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Metal Farms fragment uses the green pool as the clearest visual cue. Scan fast; this is not a safe sightseeing spot.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/subnautica-2/subnautica-2-feedback-resonator-crystal-cave-fragment.webp"
+    alt="Subnautica 2 Feedback Resonator fragment near the crystal cave and late-zone alien symbol route."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The second late-zone scan is easier to trust when you use the crystal cave / alien symbol landmarks from the route.
+  </figcaption>
+</figure>
+
+<h2 id="feedback-resonator-recipe">Feedback Resonator recipe and material blockers</h2>
+
+After scanning both Feedback Resonator fragments, upgrade the Sonic Resonator at the **Modification Station**.
+
+<GuideTable
+  caption="Subnautica 2 Feedback Resonator upgrade materials."
+  columns={feedbackCraftColumns}
+  rows={feedbackCraftRows}
+/>
+
+The material most players underestimate is **Strontium**. You do not pick up Strontium directly from a random early cave. Farm **Celestine** around the Alien Ruins biome, then process it into Strontium at your Processor. Creature Enamel works the same way as a late-zone commitment: you need the Sonic Resonator to break the deposits before you can make Enameled Glass.
+
+<h2 id="recommended-progression-order">Recommended progression order</h2>
+
+Use this order if you are trying to avoid wasted trips:
+
+```text
+Scanner and basic oxygen setup
+  → Old Habitat Sonic Resonator fragments
+  → base Fabricator + Processor setup
+  → Basic Battery, Titanium Ingots, Lead, and Wiring Kit
+  → craft Sonic Resonator at your base Fabricator
+  → mine your current blocker: Lead, Titanium, Quartz, Copper, or Silver
+  → clear Bloom Biofilm / blocked objective routes
+  → progress far-east exploration and Alien Ruins-side objectives
+  → scan Feedback Resonator fragments at Cicada Wreck and Metal Farms
+  → gather Creature Enamel, Conduit Crystal, and Celestine / Strontium
+  → upgrade at the Modification Station
+```
+
+If your current blocker is oxygen or navigation rather than mining, use the <Link href="/subnautica-2/navigation-guide">Navigation Guide</Link> and <Link href="/subnautica-2/tadpole-submarine">Tadpole Submarine guide</Link> before forcing the far-east route.
+
+<h2 id="common-mistakes">Common mistakes</h2>
+
+### Using the Lifepod Fabricator
+
+The Sonic Resonator is crafted at a Fabricator in your own base. If you only check the Lifepod Fabricator, it can look like the recipe is missing even after you scanned the fragments.
+
+### Ignoring Old Habitat and chasing scattered fragments
+
+The scattered cave and Spider Dome fragments work, but Old Habitat is the cleaner route because it has two scans in one location.
+
+### Forgetting the Wiring Kit
+
+A Wiring Kit needs Copper Wire and Silver. If this is your missing piece, do a short Silver run instead of drifting deeper into unrelated objectives.
+
+### Mining with a full inventory
+
+Large deposits can drop enough resources to fill you quickly. Bring storage, clear your pockets, or mine only the resource you actually need.
+
+<h2 id="faq">FAQ</h2>
+
+### How many Sonic Resonator fragments do I need?
+
+You need **two Sonic Resonator fragments**. The fastest route is Old Habitat, where you can scan both fragments in one trip.
+
+### Where is the best Sonic Resonator fragment location?
+
+Old Habitat is the best location because it has two fragments inside and sits roughly 370-420m north / north-northwest of the Lifepod. The north-northwest cave and southwest Spider Dome fragments are good backups.
+
+### What is the Sonic Resonator recipe?
+
+In the current Early Access build, the Sonic Resonator recipe is **1 Basic Battery, 2 Titanium Ingots, 2 Lead, and 1 Wiring Kit**.
+
+### Why can I not craft the Sonic Resonator after scanning it?
+
+Check two things: you need the required materials, and you need to craft it at a **base Fabricator**, not the basic Lifepod Fabricator. You may also need your Processor chain online for Titanium Ingots.
+
+### What does the Sonic Resonator actually do?
+
+It breaks large ore deposits, clears Bloom Biofilm / certain infected blockers, and becomes the base item for the Feedback Resonator upgrade.
+
+### Where do I get Strontium for the Feedback Resonator?
+
+Farm Celestine in the Alien Ruins biome, then process Celestine into Strontium with your Processor.
+
+### Is the Sonic Resonator a weapon?
+
+Not really. It can sometimes disrupt smaller threats, but its real job is mining and clearing breakable progression blockers. Use movement, flares, and your vehicle as your main survival tools.
