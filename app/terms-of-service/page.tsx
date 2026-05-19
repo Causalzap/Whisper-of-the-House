@@ -1,116 +1,255 @@
 'use client';
 
 import React from 'react';
-import Layout from '../../components/Layout'; // 导入 Layout 组件
+import Link from 'next/link';
+import Layout from '../../components/Layout';
 
 const TermsOfService = () => {
   return (
     <Layout>
-      <div className="terms-of-service">
-        <h1>Terms of Service</h1>
-        <p>
-          Welcome to Whisper of the House! By accessing or using our service, you agree to comply with the following Terms of Service and our Privacy Policy. Please read these terms carefully.
-        </p>
+      <main className="terms-page">
+        <section className="terms-card">
+          <h1>Terms of Service</h1>
+          <p className="last-updated">Last updated: May 19, 2026</p>
 
-        <h2>1. Acceptance of Terms</h2>
-        <p>
-          By accessing and using the Whisper of the House website or any associated services (the “Service”), you agree to be bound by these Terms of Service. If you do not agree with these terms, you may not access or use the Service.
-        </p>
+          <p>
+            Welcome to Whisper of the House. By accessing or using this website, you agree to
+            these Terms of Service. If you do not agree with these terms, please do not use
+            this website.
+          </p>
 
-        <h2>2. Changes to Terms</h2>
-        <p>
-          We reserve the right to update, change, or modify these Terms of Service at any time. Any changes will be effective immediately upon posting the revised Terms of Service on this page. We encourage you to check this page periodically for any updates.
-        </p>
+          <p>
+            Whisper of the House is an independent PC and Steam game guide website. We publish
+            walkthroughs, beginner guides, puzzle solutions, troubleshooting articles, and
+            gaming-related recommendations.
+          </p>
 
-        <h2>3. User Responsibilities</h2>
-        <p>
-          You agree to use the Service only for lawful purposes. You are prohibited from using the Service to:
-        </p>
-        <ul>
-          <li>Violate any local, state, or international laws or regulations.</li>
-          <li>Engage in any activity that disrupts or interferes with the functionality of the Service.</li>
-          <li>Upload or distribute harmful or malicious software or data.</li>
-          <li>Harass, abuse, or harm others through the Service.</li>
-        </ul>
+          <h2>1. Acceptance of Terms</h2>
+          <p>
+            By accessing or using Whisper of the House, you agree to be bound by these Terms of
+            Service and our Privacy Policy. These terms apply to all visitors and users of the
+            website.
+          </p>
 
-        <h2>4. Privacy Policy</h2>
-        <p>
-          Your use of the Service is also governed by our <a href="/privacy-policy" className="footer-link">Privacy Policy</a>. Please review it to understand how we collect, use, and protect your information.
-        </p>
+          <h2>2. Independent Website Disclaimer</h2>
+          <p>
+            Whisper of the House is an independent website. Unless specifically stated, we are not
+            affiliated with Steam, Valve, any game publisher, developer, or official game brand
+            mentioned on this website.
+          </p>
 
-        <h2>5. Account Security</h2>
-        <p>
-          If you create an account with Whisper of the House, you are responsible for maintaining the confidentiality of your account and password. You agree to notify us immediately of any unauthorized use or breach of security related to your account.
-        </p>
+          <p>
+            All game titles, logos, images, trademarks, and related materials belong to their
+            respective owners. Any references to games, platforms, or third-party brands are used
+            for identification, commentary, guide, review, or informational purposes.
+          </p>
 
-        <h2>6. Intellectual Property</h2>
-        <p>
-          All content, graphics, logos, designs, and trademarks on the Service are the property of Whisper of the House or its licensors. You may not use any content from the Service without our prior written consent, except as permitted by these Terms of Service.
-        </p>
+          <h2>3. Website Content</h2>
+          <p>
+            We aim to provide helpful and accurate game guides, walkthroughs, tips, and related
+            information. However, games may be updated, patched, changed, removed, or modified by
+            their developers or publishers at any time.
+          </p>
 
-        <h2>7. Limitation of Liability</h2>
-        <p>
-          In no event will Whisper of the House be liable for any indirect, special, incidental, or consequential damages arising out of or in connection with your use or inability to use the Service, even if we have been advised of the possibility of such damages.
-        </p>
+          <p>
+            We do not guarantee that all information on the website will always be complete,
+            accurate, current, or suitable for every user. You use the information on this website
+            at your own discretion.
+          </p>
 
-        <h2>8. Termination</h2>
-        <p>
-          We reserve the right to suspend or terminate your access to the Service at our sole discretion, without notice, if you violate these Terms of Service or engage in any activity that could harm the Service or other users.
-        </p>
+          <h2>4. No Unauthorized Downloads</h2>
+          <p>
+            We do not host, distribute, or promote pirated files, cracks, cheats, malware,
+            unauthorized downloads, or illegal copies of games or software.
+          </p>
 
-        <h2>9. Governing Law</h2>
-        <p>
-          These Terms of Service will be governed by and construed in accordance with the laws of the jurisdiction in which Whisper of the House operates, without regard to its conflict of law principles.
-        </p>
+          <p>
+            When we link to games, software, or related products, we aim to link to official stores,
+            official publisher pages, Steam pages, or other legitimate sources.
+          </p>
 
-        <h2>10. Contact Information</h2>
-        <p>
-          If you have any questions about these Terms of Service, please contact us at:
-        </p>
-        <p>
-          Email: <a href="mailto:support@causalzap.com" className="footer-link">support@causalzap.com</a>
-        </p>
+          <h2>5. Affiliate Links and Advertising</h2>
+          <p>
+            Some pages on this website may contain affiliate links. If you click an affiliate link
+            and make a purchase or complete another qualifying action, we may earn a commission at
+            no additional cost to you.
+          </p>
 
-        <style jsx>{`
-          .terms-of-service {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-            color: black;
+          <p>
+            Affiliate commissions help support the website, but they do not control our editorial
+            content, opinions, rankings, or guide information. For more details, please review our{' '}
+            <Link href="/affiliate-disclosure" className="terms-link">
+              Affiliate Disclosure
+            </Link>
+            .
+          </p>
+
+          <h2>6. Third-Party Links</h2>
+          <p>
+            This website may contain links to third-party websites, including Steam pages, official
+            game stores, publisher websites, advertisers, affiliate partners, and other external
+            resources.
+          </p>
+
+          <p>
+            We are not responsible for the content, policies, privacy practices, availability,
+            pricing, products, services, or actions of any third-party websites. Visiting third-party
+            websites is at your own risk.
+          </p>
+
+          <h2>7. Intellectual Property</h2>
+          <p>
+            The original text, layout, design, structure, and website content created by Whisper of
+            the House are owned by us or used with permission, unless otherwise stated.
+          </p>
+
+          <p>
+            You may not copy, reproduce, republish, scrape, sell, or redistribute our original
+            content without our prior written permission, except where permitted by applicable law.
+          </p>
+
+          <h2>8. User Responsibilities</h2>
+          <p>You agree to use this website only for lawful purposes. You agree not to:</p>
+
+          <ul>
+            <li>Use the website for unlawful, harmful, abusive, or fraudulent purposes.</li>
+            <li>Attempt to disrupt, hack, overload, or interfere with the website.</li>
+            <li>Upload, distribute, or link to malware, viruses, cracks, cheats, or illegal files.</li>
+            <li>Copy, scrape, or republish our content at scale without permission.</li>
+            <li>Misrepresent your relationship with Whisper of the House or any third-party brand.</li>
+            <li>Use the website in a way that violates applicable laws or regulations.</li>
+          </ul>
+
+          <h2>9. Privacy Policy</h2>
+          <p>
+            Your use of this website is also governed by our{' '}
+            <Link href="/privacy-policy" className="terms-link">
+              Privacy Policy
+            </Link>
+            , which explains how we collect, use, and protect information.
+          </p>
+
+          <h2>10. Limitation of Liability</h2>
+          <p>
+            To the fullest extent permitted by law, Whisper of the House will not be liable for any
+            direct, indirect, incidental, consequential, special, or punitive damages arising from
+            your use of, or inability to use, this website.
+          </p>
+
+          <p>
+            This includes, but is not limited to, errors in content, outdated information, website
+            interruptions, third-party links, product availability, pricing changes, or any actions
+            you take based on information found on this website.
+          </p>
+
+          <h2>11. Changes to These Terms</h2>
+          <p>
+            We may update these Terms of Service from time to time. Any changes will be posted on
+            this page with an updated &quot;Last updated&quot; date. Your continued use of the
+            website after changes are posted means you accept the updated terms.
+          </p>
+
+          <h2>12. Governing Law</h2>
+          <p>
+            These Terms of Service will be governed by the laws applicable in the jurisdiction where
+            Whisper of the House operates, without regard to conflict of law principles.
+          </p>
+
+          <h2>13. Contact Us</h2>
+          <p>
+            If you have any questions about these Terms of Service, please contact us at{' '}
+            <a href="mailto:support@whisperofthehouse.com" className="terms-link">
+              support@whisperofthehouse.com
+            </a>
+            .
+          </p>
+        </section>
+      </main>
+
+      <style jsx>{`
+        .terms-page {
+          width: 100%;
+          padding: 3rem 1rem;
+        }
+
+        .terms-card {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 2rem;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.96);
+          color: #111827;
+          line-height: 1.7;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+          margin-bottom: 0.5rem;
+          color: #6d28d9;
+          font-size: 2.25rem;
+          font-weight: 800;
+          line-height: 1.2;
+        }
+
+        .last-updated {
+          margin-bottom: 1.5rem;
+          color: #6b7280;
+          font-size: 0.95rem;
+        }
+
+        h2 {
+          margin-top: 1.8rem;
+          margin-bottom: 0.75rem;
+          color: #1f2937;
+          font-size: 1.35rem;
+          font-weight: 700;
+        }
+
+        p {
+          margin-bottom: 1rem;
+          color: #374151;
+        }
+
+        ul {
+          margin: 0 0 1rem 1.5rem;
+          padding-left: 1rem;
+          color: #374151;
+          list-style-type: disc;
+        }
+
+        li {
+          margin-bottom: 0.5rem;
+        }
+
+        .terms-link {
+          color: #6d28d9;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+
+        .terms-link:hover {
+          color: #4c1d95;
+        }
+
+        @media (max-width: 640px) {
+          .terms-page {
+            padding: 2rem 1rem;
+          }
+
+          .terms-card {
+            padding: 1.5rem;
+            border-radius: 12px;
           }
 
           h1 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: black;
+            font-size: 1.9rem;
           }
 
           h2 {
-            font-size: 1.5rem;
-            margin-top: 1.5rem;
-            color: black;
+            font-size: 1.2rem;
           }
-
-          p {
-            color: black;
-          }
-
-          ul {
-            color: black;
-          }
-
-          .footer-link {
-            color: #a78bfa;
-            text-decoration: none;
-          }
-
-          .footer-link:hover {
-            text-decoration: underline;
-          }
-        `}</style>
-      </div>
+        }
+      `}</style>
     </Layout>
   );
 };

@@ -142,28 +142,12 @@ const exploreCards = [
     buttonClass: 'bg-green-500 hover:bg-green-600',
   },
   {
-    title: 'Play Online',
-    href: '/play-online',
-    description:
-      'Discover browser-friendly games and enjoy cozy, casual, and quick-play experiences directly online.',
-    cta: 'Play Now',
-    buttonClass: 'bg-orange-500 hover:bg-orange-600',
-  },
-  {
     title: 'Hidden Secrets',
     href: '/abnormal-points-collection',
     description:
       'Find unusual discoveries, secret rooms, abnormal points, and mysterious details worth collecting.',
     cta: 'Discover Secrets',
     buttonClass: 'bg-purple-500 hover:bg-purple-600',
-  },
-  {
-    title: 'News & Updates',
-    href: '/news',
-    description:
-      'Stay updated with the latest guide additions, game news, content updates, and notable discoveries.',
-    cta: 'Read News',
-    buttonClass: 'bg-red-500 hover:bg-red-600',
   },
   {
     title: 'Retro Rewind',

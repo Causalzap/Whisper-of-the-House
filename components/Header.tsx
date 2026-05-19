@@ -17,8 +17,6 @@ const featuredGuides = [
 const mainNav = [
   { label: 'Home', href: '/' },
   { label: 'Collection', href: '/collection' },
-  { label: 'Play Online', href: '/play-online' },
-  { label: 'News', href: '/download-and-news' },
 ];
 
 const Header = () => {
