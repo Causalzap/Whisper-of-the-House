@@ -70,7 +70,8 @@ const TermsOfService = () => {
 
           <h2>5. Affiliate Links and Advertising</h2>
           <p>
-            Some pages on this website may contain affiliate links. If you click an affiliate link
+            Some pages on this website may contain affiliate links provided through affiliate
+            networks, which may include Awin and similar programs. If you click an affiliate link
             and make a purchase or complete another qualifying action, we may earn a commission at
             no additional cost to you.
           </p>
@@ -151,8 +152,8 @@ const TermsOfService = () => {
 
           <h2>12. Governing Law</h2>
           <p>
-            These Terms of Service will be governed by the laws applicable in the jurisdiction where
-            Whisper of the House operates, without regard to conflict of law principles.
+            These Terms of Service are governed by applicable laws, without regard to conflict of
+            law principles.
           </p>
 
           <h2>13. Contact Us</h2>
