@@ -23,6 +23,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <meta
+          name="impact-site-verification"
+          content="5b77d168-34a3-4c38-b27b-6db13d6bd8ba"
+          {...({ value: "5b77d168-34a3-4c38-b27b-6db13d6bd8ba" } as any)}
+        />
+
         <Script
           async
           strategy="afterInteractive"
