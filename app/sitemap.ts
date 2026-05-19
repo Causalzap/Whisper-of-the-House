@@ -70,7 +70,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/directive-8020`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/subnautica-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/oaken-tower`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/dwarf-eats-mountain`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+    { url: `${base}/dwarf-eats-mountain/build-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/dwarf-eats-mountain/prestige-ascension-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/dwarf-eats-mountain/runners-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/dwarf-eats-mountain/artifacts-mithril-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/dwarf-eats-mountain/best-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/dwarf-eats-mountain/endgame-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     { url: `${base}/subnautica-2/biomods-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/subnautica-2/co-op-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
@@ -85,7 +92,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/subnautica-2/tadpole-submarine`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/subnautica-2/welcome-center-habitat-builder`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/subnautica-2/what-to-do-first`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
 
     { url: `${base}/oaken-tower/poison-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/oaken-tower/10-wins-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

@@ -12,6 +12,49 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+
+    // ===== Dwarf Eats Mountain =====
+{
+  href: "/dwarf-eats-mountain",
+  game: "Dwarf Eats Mountain",
+  title: "Complete Guide Hub",
+  description:
+    "Find the right guide for build order, runners, Prestige, artifacts, Mithril, best builds, Goblin King, World Spire, and True Ending.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+{
+  href: "/dwarf-eats-mountain/build-order",
+  game: "Dwarf Eats Mountain",
+  title: "Beginner Build Order",
+  description:
+    "What to build first, Great Maw setup, Runners, N/A upgrades, building unlocks, first Mithril, Flameworks, Demo Shack, and first Prestige.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+{
+  href: "/dwarf-eats-mountain/runners-guide",
+  game: "Dwarf Eats Mountain",
+  title: "Runners Guide",
+  description:
+    "Fix gold not being collected, runner speed, carrying capacity, stunned runners, ore reclaim, Looming Motivation, and Mithril runner upgrades.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+{
+  href: "/dwarf-eats-mountain/prestige-ascension-guide",
+  game: "Dwarf Eats Mountain",
+  title: "Prestige & Ascension Guide",
+  description:
+    "When to Prestige, how to spend PP, best early upgrades, Swift Start, T6 stacking, Ascension Rank, and what resets or stays.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
     {
       href: "/oaken-tower",
       game: "Oaken Tower",

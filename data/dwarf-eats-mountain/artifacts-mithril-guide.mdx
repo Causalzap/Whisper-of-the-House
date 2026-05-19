@@ -1,0 +1,670 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const artifactPriorityColumns = [
+  { key: "bottleneck", label: "Your Bottleneck" },
+  { key: "artifactType", label: "Pick This Type" },
+  { key: "why", label: "Why It Helps" },
+];
+
+export const artifactPriorityRows = [
+  {
+    bottleneck: "Gold is piling up",
+    artifactType: "Runner speed, carrying, gathering, dodge, or ore movement",
+    why: "More damage will not help if the loot never reaches the Great Maw.",
+  },
+  {
+    bottleneck: "Runners keep getting stunned",
+    artifactType: "Runner safety, stun recovery, dodge, or protection",
+    why: "A stunned runner is lost income, especially during rockfalls and dense loot piles.",
+  },
+  {
+    bottleneck: "Mountain HP is too high",
+    artifactType: "Miner, Flamer, Demo, Ballista, Laser, or general damage",
+    why: "Damage artifacts are best when the field is already being collected cleanly.",
+  },
+  {
+    bottleneck: "Dens or veins take too long",
+    artifactType: "Targeting, burst, Ballista, Demo, or den-related effects",
+    why: "Dens and veins often hide the resources that push your run forward.",
+  },
+  {
+    bottleneck: "Mithril blocks upgrades",
+    artifactType: "Mithril, Mountain Soul, Forge, ritual, or rare-resource effects",
+    why: "These help you reach stronger systems earlier than gold alone can.",
+  },
+  {
+    bottleneck: "Later mountains give poor value",
+    artifactType: "Luck, Jackpot, gem, artifact, or drop-scaling effects",
+    why: "Later progress depends on making each hit and each drop more valuable.",
+  },
+  {
+    bottleneck: "You are close to Prestige",
+    artifactType: "PP, dwarf, Mithril, or run-start value",
+    why: "These can make the next reset stronger instead of only improving the current run.",
+  },
+];
+
+export const artifactExamplesColumns = [
+  { key: "artifact", label: "Artifact / Effect Type" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "pickWhen", label: "Pick When" },
+];
+
+export const artifactExamplesRows = [
+  {
+    artifact: "Bottled Dwarf",
+    whatItDoes: "Gives +1 dwarf, +1 Mithril, and +1 PP.",
+    pickWhen:
+      "You want a clean all-purpose reward that helps the current run and the next reset.",
+  },
+  {
+    artifact: "Quickbeer Dispenser",
+    whatItDoes:
+      "When a runner delivers a payload, it can gain a temporary boost to speed, gathering speed, and dodge. The chance scales with Luck and is guaranteed if the runner delivered an artifact.",
+    pickWhen:
+      "Your runner economy is the main thing slowing down gold, Mithril, artifact, or rare-drop collection.",
+  },
+  {
+    artifact: "Tremor Lord's Idol",
+    whatItDoes: "Gives Demodwarves extra damage.",
+    pickWhen:
+      "You are already using Demo Dwarves for burst, den pressure, or explosive damage.",
+  },
+  {
+    artifact: "Crystal Skull-style Luck picks",
+    whatItDoes: "Adds Luck or gem-related value.",
+    pickWhen:
+      "You are scaling gems, rare drops, dodge interactions, or later drop quality.",
+  },
+  {
+    artifact: "Ballista / cannon picks",
+    whatItDoes: "Improves targeted or weapon-specific damage.",
+    pickWhen:
+      "Dens, veins, bosses, or high targets are slowing the run.",
+  },
+  {
+    artifact: "Runner luck / speed picks",
+    whatItDoes: "Improves runner value, delivery speed, or gem generation.",
+    pickWhen:
+      "You are producing enough loot but need runners to convert it better.",
+  },
+];
+
+export const damageArtifactColumns = [
+  { key: "build", label: "Build" },
+  { key: "artifactType", label: "Damage Artifact To Prefer" },
+  { key: "chooseWhen", label: "Choose It When" },
+];
+
+export const damageArtifactRows = [
+  {
+    build: "Miner build",
+    artifactType: "Miner damage, throwing, cooldown, crit, or pickaxe effects",
+    chooseWhen:
+      "The mountain itself is slow and your runners are already keeping the field clean.",
+  },
+  {
+    build: "Flamer build",
+    artifactType: "Fire duration, burn damage, cooldown, or fire-field effects",
+    chooseWhen:
+      "You want steady damage that does not add as much chaos as explosives.",
+  },
+  {
+    build: "Demo build",
+    artifactType: "Explosion damage, force, Wind Bomb, den damage, or burst effects",
+    chooseWhen:
+      "Dens, veins, or tough targets need burst and your runners can survive the chaos.",
+  },
+  {
+    build: "Ballista build",
+    artifactType: "Harpoon, turret, targeting, den, vein, or anti-monster effects",
+    chooseWhen:
+      "Special targets matter more than raw mountain HP.",
+  },
+  {
+    build: "Laser / Laboratory build",
+    artifactType: "Laser, machine, charge, beam, scientist, or unlock-scaling effects",
+    chooseWhen:
+      "You have enough economy to support a slower science setup.",
+  },
+  {
+    build: "General damage route",
+    artifactType: "Global damage, attack speed, crit, or all-unit scaling",
+    chooseWhen:
+      "Your build is still mixed and you have not committed to one unit line yet.",
+  },
+];
+
+export const mithrilSourceColumns = [
+  { key: "source", label: "Mithril Source" },
+  { key: "how", label: "How It Works" },
+  { key: "priority", label: "Player Tip" },
+];
+
+export const mithrilSourceRows = [
+  {
+    source: "Dens and special targets",
+    how: "Monster dens, veins, and special structures can drop rare resources.",
+    priority:
+      "Break them before the mountain collapses if you can collect the drops safely.",
+  },
+  {
+    source: "Random damage drops",
+    how: "Damage can have a small chance to produce Mithril, helped by Luck and related scaling.",
+    priority:
+      "Do not rely only on random drops early. Treat them as a bonus unless your build supports them.",
+  },
+  {
+    source: "Artifacts",
+    how: "Some artifact choices can give Mithril directly or improve rare-resource routes.",
+    priority:
+      "Pick these when Mithril is your next upgrade wall, not when basic runners are failing.",
+  },
+  {
+    source: "Ancient Cache",
+    how: "Prestige upgrade that starts the game with Mithril.",
+    priority:
+      "Strong when your early route wants Mithril upgrades before the run naturally finds enough.",
+  },
+  {
+    source: "Mountain's Hidden Veins",
+    how: "Prestige upgrade that gives a chance to gain Mithril when consuming mountains.",
+    priority:
+      "Better for longer runs where repeated mountain clears feed your Forge path.",
+  },
+];
+
+export const mithrilSpendingColumns = [
+  { key: "upgrade", label: "Mithril Upgrade" },
+  { key: "helps", label: "Helps With" },
+  { key: "useWhen", label: "Use When" },
+];
+
+export const mithrilSpendingRows = [
+  {
+    upgrade: "Mithril Forging",
+    helps: "Unlocking the Mithril upgrade tree",
+    useWhen:
+      "You are ready to turn Mithril from a rare drop into a real progression system.",
+  },
+  {
+    upgrade: "Mithril Pickaxes",
+    helps: "Miner damage and crit damage",
+    useWhen:
+      "Mountain HP is the blocker and your runner economy is already stable.",
+  },
+  {
+    upgrade: "Pickarang",
+    helps: "Extra miner hits through bounce effects",
+    useWhen:
+      "You have scientists, Luck, or enough resources to support a miner-scaling route.",
+  },
+  {
+    upgrade: "Mithril Chainmail",
+    helps: "Runner stun protection",
+    useWhen:
+      "Falling rocks, monsters, friendly explosives, or calamities keep stopping deliveries.",
+  },
+  {
+    upgrade: "Magnetic Gloves",
+    helps: "Ore gathering speed",
+    useWhen:
+      "Runners reach piles but pickup speed is slowing deliveries.",
+  },
+  {
+    upgrade: "Serrated Mithril Spikes / Harpoon Ballista upgrades",
+    helps: "Ballista and targeting routes",
+    useWhen:
+      "Dens, veins, or higher targets matter more than basic miner damage.",
+  },
+  {
+    upgrade: "Forge Artifact Ritual",
+    helps: "Artifact and ritual scaling",
+    useWhen:
+      "You are building around artifacts instead of simple early damage.",
+  },
+  {
+    upgrade: "Monster Bane Ballista upgrade",
+    helps: "Dens, monsters, and dangerous targets",
+    useWhen:
+      "Enemy structures are interrupting progress or protecting valuable drops.",
+  },
+];
+
+export const soulColumns = [
+  { key: "resource", label: "Resource" },
+  { key: "use", label: "Use" },
+  { key: "doNotWasteOn", label: "Do Not Waste It On" },
+];
+
+export const soulRows = [
+  {
+    resource: "Mithril",
+    use: "Mithril upgrades, runner protection, miner tools, Ballista upgrades, Forge routes",
+    doNotWasteOn:
+      "Random upgrades that do not fix your current bottleneck.",
+  },
+  {
+    resource: "Mountain Soul",
+    use: "Powerful upgrades, rituals, advanced unlocks, and certain special effects",
+    doNotWasteOn:
+      "A side path you are not ready to support with your build.",
+  },
+  {
+    resource: "PP",
+    use: "Prestige upgrades that make future runs faster",
+    doNotWasteOn:
+      "Comfort upgrades that do not help your next few runs.",
+  },
+  {
+    resource: "Artifacts",
+    use: "Run-shaping effects that solve collection, damage, Luck, Mithril, or boss problems",
+    doNotWasteOn:
+      "A flashy effect that does not match the run you are actually playing.",
+  },
+];
+
+export const executionColumns = [
+  { key: "step", label: "Step" },
+  { key: "decision", label: "Decision" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const executionRows = [
+  {
+    step: "1",
+    decision: "Collect Mithril safely before planning around it.",
+    why: "A Mithril drop does nothing if runners leave it on the ground or the mountain reclaims it.",
+  },
+  {
+    step: "2",
+    decision: "Unlock Mithril Forging only when you can support a real route.",
+    why: "Forge systems are strongest when you know whether you need damage, runners, Ballistas, or rituals.",
+  },
+  {
+    step: "3",
+    decision: "Spend Mithril on the current blocker first.",
+    why: "Mithril Pickaxes, Chainmail, Magnetic Gloves, and Ballista upgrades solve different problems.",
+  },
+  {
+    step: "4",
+    decision: "Save Mountain Souls for route-defining upgrades.",
+    why: "Souls should support the build you are actually playing, not a side path you might abandon.",
+  },
+  {
+    step: "5",
+    decision: "Move into Artifact Ritual only after the base loop is stable.",
+    why: "Rituals are better when damage, collection, Mithril income, and artifact direction already work.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyBad", label: "Why It Hurts" },
+  { key: "betterMove", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Always picking damage artifacts",
+    whyBad:
+      "Damage creates more drops, but it does not collect them.",
+    betterMove:
+      "Pick runner or collection artifacts when the ground is already crowded.",
+  },
+  {
+    mistake: "Ignoring Mithril drops",
+    whyBad:
+      "Mithril unlocks routes that gold cannot replace.",
+    betterMove:
+      "Push Mithril toward the Great Maw manually if runners are slow.",
+  },
+  {
+    mistake: "Spending Mountain Souls without a plan",
+    whyBad:
+      "Souls are tied to powerful upgrades and rituals.",
+    betterMove:
+      "Spend them on the system that fixes your current wall.",
+  },
+  {
+    mistake: "Taking Luck too early with no base economy",
+    whyBad:
+      "Extra value does not help if runners cannot collect normal loot.",
+    betterMove:
+      "Fix delivery first, then use Luck / Jackpot to improve drop quality.",
+  },
+  {
+    mistake: "Treating artifacts like a tier list only",
+    whyBad:
+      "The best pick changes based on damage, runners, Mithril, and Prestige timing.",
+    betterMove:
+      "Choose artifacts by bottleneck, not by rarity alone.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**In Dwarf Eats Mountain, the best artifact is the one that fixes your current bottleneck. Pick runner artifacts when gold is piling up, damage artifacts when the field is clean but the mountain is slow, Mithril or Mountain Soul effects when rare resources block upgrades, and Luck / Jackpot effects once later mountains start making drop value more important.**
+
+For Mithril, unlock **Mithril Forging** once your run can support it. Early Mithril is usually best spent on upgrades that solve a real wall: **Mithril Pickaxes** for miner damage, **Mithril Chainmail** or **Magnetic Gloves** for runners, and Ballista / Forge / ritual upgrades when your build is ready for them.
+</GuideQuickAnswer>
+
+<GuideCallout title="No fixed tier list yet">
+Do not treat this as a complete artifact tier list. The game has a large artifact pool, and the best pick depends on your run. This guide focuses on how to choose correctly as a player: collection, damage, Mithril, Luck, Prestige, or boss prep.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-artifact-choice-bottled-dwarf.webp"
+    alt="Dwarf Eats Mountain Bottled Dwarf artifact choice giving one dwarf, one Mithril, and one PP."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some artifacts are strong because they give several kinds of progress at once. Bottled Dwarf helps the current run and the next reset.
+  </figcaption>
+</figure>
+
+<h2 id="how-artifacts-work">How artifacts work</h2>
+
+Artifacts are run-shaping rewards. They are not just passive bonuses you collect because they look rare.
+
+Every few mountains, the game gives you artifact choices. These choices can change how your run plays: faster runners, stronger miners, better Luck, more Mithril, more PP, stronger Demo Dwarves, better Ballistas, safer collection, or more value from rare drops.
+
+The most important rule is simple:
+
+**Pick the artifact that fixes the thing slowing you down right now.**
+
+If the ground is full of gold, do not blindly pick more damage.  
+If runners are idle and the mountain is slow, damage is fine.  
+If Mithril blocks your next unlock, pick rare-resource support.  
+If you are near Prestige, PP or run-start value can be stronger than a temporary damage bump.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="artifact-priority">Best artifact priority by bottleneck</h2>
+
+Use this table when you are staring at three artifact choices and do not know which one to take.
+
+<GuideTable
+  caption="How to choose Dwarf Eats Mountain artifacts by bottleneck."
+  columns={artifactPriorityColumns}
+  rows={artifactPriorityRows}
+/>
+
+This is why a simple artifact tier list can mislead new players. A damage artifact can be excellent in one run and wrong in another. A runner artifact can look boring but save a run that would otherwise lose value to uncollected ore.
+
+<h2 id="artifact-examples">Artifact examples and when to pick them</h2>
+
+These examples show how to think about artifact choices. The exact best pick changes with your build, but the decision logic stays the same.
+
+<GuideTable
+  caption="Dwarf Eats Mountain artifact examples and when they are useful."
+  columns={artifactExamplesColumns}
+  rows={artifactExamplesRows}
+/>
+
+<h2 id="runner-artifacts">Runner artifacts: pick these when loot is the wall</h2>
+
+Runner artifacts are stronger than they look because collection is the hidden gate behind every damage upgrade.
+
+Pick runner-focused artifacts when:
+
+- gold is piling up,
+- runners are crossing the field too slowly,
+- rare drops sit on the ground,
+- the mountain starts reclaiming ores,
+- falling rocks keep stunning runners,
+- or Demo / Flamer damage creates more loot than your economy can collect.
+
+A good runner artifact can be better than a damage artifact if your current damage is already producing more value than you can bank.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-artifact-quickbeer-dispenser.webp"
+    alt="Dwarf Eats Mountain Quickbeer Dispenser artifact that buffs runner speed, gathering speed, and dodge after deliveries."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Quickbeer Dispenser is a strong runner artifact because it rewards successful deliveries with temporary speed, gathering, and dodge bonuses.
+  </figcaption>
+</figure>
+
+Quickbeer Dispenser is especially useful when runners are already making deliveries but need better tempo. It does not replace basic speed or carry upgrades, but it can make each successful delivery snowball into faster cleanup.
+
+For deeper collection fixes, use the <Link href="/dwarf-eats-mountain/runners-guide">Runners Guide</Link>.
+
+<h2 id="damage-artifacts">Damage artifacts: choose by build, not just by number</h2>
+
+Damage artifacts are best when your runners are already keeping up.
+
+The mistake is treating all damage artifacts as the same. Miner damage, Demo burst, Flamer burn, Ballista targeting, and Laser scaling solve different problems. Before picking a damage artifact, check which unit line is actually carrying your run.
+
+<GuideTable
+  caption="How to choose Dwarf Eats Mountain damage artifacts by build."
+  columns={damageArtifactColumns}
+  rows={damageArtifactRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-artifact-tremor-lords-idol.webp"
+    alt="Dwarf Eats Mountain Tremor Lord's Idol artifact giving Demodwarves extra damage."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Tremor Lord's Idol is a clean example of why damage artifacts should match your build: it is valuable for Demo routes, but much weaker if you are not using Demodwarves.
+  </figcaption>
+</figure>
+
+If the field is clean and the mountain is slow, damage is a good pick. If the field is messy, even the best damage artifact can make the run worse by creating more uncollected loot.
+
+<h2 id="luck-jackpot-artifacts">Luck, Jackpot, and gem artifacts</h2>
+
+Luck and gem-related artifacts become more important once your run is stable enough to care about drop quality.
+
+Early on, Luck is nice but not always urgent. If your runners cannot collect normal gold, extra rare drops will only make the field messier.
+
+Later, Luck and Jackpot-style scaling become much more valuable because they can improve what your damage produces. This matters especially when later mountains start feeling less generous and you need each hit, each gem, and each rare drop to carry more value. A run can still stall even with enough damage if hit quality and drop value do not scale with it.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-runner-prospectors-nose.webp"
+    alt="Dwarf Eats Mountain Prospector's Massive Nose upgrade for gem chance when runners pick up non-gem ore."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Luck and gem systems are better once collection is stable. Extra value only helps if your runners can actually bring it home.
+  </figcaption>
+</figure>
+
+Pick Luck or gem artifacts when:
+
+- runner collection is stable,
+- you are scaling gem value,
+- you have upgrades that benefit from Luck,
+- you are pushing later mountains,
+- or your build needs better drops instead of only more hits.
+
+<h2 id="how-to-get-mithril">How to get Mithril</h2>
+
+Mithril is one of the first resources that changes your route. Gold buys many early upgrades, but Mithril unlocks stronger systems.
+
+<GuideTable
+  caption="How to get Mithril in Dwarf Eats Mountain."
+  columns={mithrilSourceColumns}
+  rows={mithrilSourceRows}
+/>
+
+The important player habit is this:
+
+**If Mithril drops, help it get home.**
+
+Do not let a rare drop sit under the mountain while runners are stunned or overloaded. Push it manually if needed, then upgrade runners so the next rare drop is easier to collect.
+
+<h2 id="prestige-mithril">Prestige upgrades that help Mithril</h2>
+
+Two early Prestige upgrades matter for Mithril planning: **Ancient Cache** and **Mountain's Hidden Veins**. Ancient Cache is better when your route needs Mithril immediately at the start of a run. Mountain's Hidden Veins is better when you are clearing enough mountains for repeated chances to add up.
+
+Both are useful, but neither fixes a broken collection economy. If Mithril or rare drops are sitting on the ground, improve runners before chasing more Mithril sources.
+
+For exact PP timing and Prestige priorities, use the <Link href="/dwarf-eats-mountain/prestige-ascension-guide">Prestige and Ascension Guide</Link>.
+
+<h2 id="mithril-forging">Mithril Forging: what to unlock first</h2>
+
+Once you unlock the Great Forge and Mithril Forging, Mithril becomes a build direction instead of a random rare drop.
+
+<GuideTable
+  caption="Dwarf Eats Mountain Mithril spending priorities."
+  columns={mithrilSpendingColumns}
+  rows={mithrilSpendingRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-mithril-upgrades-chain-mail.webp"
+    alt="Dwarf Eats Mountain Mithril Forging upgrades including Mithril Pickaxes, Mithril Chainmail, Magnetic Gloves, Ballista upgrades, and rituals."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mithril Forging branches into miner damage, runner protection, ore gathering, Ballista upgrades, artifact rituals, and later Forge systems.
+  </figcaption>
+</figure>
+
+<h3 id="mithril-pickaxes">Mithril Pickaxes</h3>
+
+Choose **Mithril Pickaxes** when mountain HP is the wall and your runners can keep up.
+
+This is a damage route. It is best when the field is clean and you need stronger miner output, not when gold is already sitting uncollected.
+
+<h3 id="pickarang">Pickarang</h3>
+
+**Pickarang** is a miner-scaling upgrade that can create extra hits. It becomes more interesting when you have scientists, Luck, or enough resources to support the route.
+
+Pick it when you are intentionally building around miner scaling.
+
+<h3 id="mithril-chainmail">Mithril Chainmail</h3>
+
+**Mithril Chainmail** is a runner safety upgrade.
+
+Choose it when falling rocks, monsters, friendly explosives, or calamities keep stunning runners before they can deliver loot.
+
+This is especially useful if your build uses Demo Dwarves or other chaotic damage.
+
+<h3 id="magnetic-gloves">Magnetic Gloves</h3>
+
+**Magnetic Gloves** improve ore gathering speed.
+
+Choose them when runners reach the pile but pickup speed is slowing them down. This is different from movement speed. It helps at the loot pile itself.
+
+<h2 id="mountain-soul">Mountain Soul: what it is used for</h2>
+
+Mountain Soul is a rare resource tied to powerful upgrades, rituals, and later systems.
+
+You should not spend Mountain Souls casually. Treat them like build-defining resources.
+
+<GuideTable
+  caption="How to think about rare resources in Dwarf Eats Mountain."
+  columns={soulColumns}
+  rows={soulRows}
+/>
+
+Use Mountain Souls when the upgrade does one of these:
+
+- unlocks a system your build needs,
+- fixes your current wall,
+- improves a route you are already committed to,
+- or enables a ritual / Forge path that changes future runs.
+
+Do not spend a soul only because an upgrade is available. If the upgrade supports a build you are not playing, it can wait.
+
+<h2 id="artifact-ritual">Artifact Ritual and Forge routes</h2>
+
+Artifact Ritual appears later in the Mithril / Forge path. It is not an early-game priority.
+
+Think of it as part of the transition from “I am buying simple upgrades” to “I am building around artifacts and rituals.”
+
+Move toward Artifact Ritual when:
+
+- artifacts are becoming your main scaling system,
+- you have enough Mithril and Mountain Souls to support the route,
+- your basic runner economy works,
+- and your build benefits from stronger artifact interactions.
+
+If your opening still collapses because gold is not being collected, do not rush rituals. Fix runners first.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="mithril-execution">Mithril, Souls, and Ritual execution order</h2>
+
+Artifact choices are handled by bottleneck above. This section is about the execution layer: when to turn rare resources into a real route.
+
+<GuideTable
+  caption="Dwarf Eats Mountain Mithril, Mountain Soul, and Ritual execution order."
+  columns={executionColumns}
+  rows={executionRows}
+/>
+
+<h2 id="common-mistakes">Common artifact and Mithril mistakes</h2>
+
+<GuideTable
+  caption="Common Dwarf Eats Mountain artifact and Mithril mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">FAQ</h2>
+
+### What are the best artifacts in Dwarf Eats Mountain?
+
+The best artifact depends on your bottleneck. Pick runner artifacts if gold is piling up, damage artifacts if the field is clean but the mountain is slow, Mithril artifacts if rare resources block upgrades, and Luck / Jackpot artifacts when drop quality matters.
+
+### Should I always pick the highest-tier artifact?
+
+Not always. A lower-tier artifact that fixes your current problem can be better than a rare artifact that supports a build you are not using.
+
+### Is Bottled Dwarf good?
+
+Yes, Bottled Dwarf is a strong early value pick because it gives a dwarf, Mithril, and PP. That helps the current run and the next Prestige cycle.
+
+### When should I pick runner artifacts?
+
+Pick runner artifacts when gold, gems, Mithril, or rare drops sit on the ground. If loot is not reaching the Great Maw, runner help is usually better than more damage.
+
+### When should I pick damage artifacts?
+
+Pick damage artifacts when the field is clean and mountain HP, dens, veins, or bosses are the main wall. Match the artifact to your build: miner, Flamer, Demo, Ballista, Laser, or global damage.
+
+### How do I get Mithril?
+
+Mithril can come from dens, special targets, random damage drops, artifact rewards, and Prestige support such as Ancient Cache or Mountain's Hidden Veins.
+
+### What should I spend Mithril on first?
+
+Spend Mithril on the upgrade that fixes your blocker. Use Mithril Pickaxes for miner damage, Mithril Chainmail for runner safety, Magnetic Gloves for gathering speed, and Ballista / Forge upgrades when your build supports them.
+
+### What does Mountain Soul do?
+
+Mountain Soul is used for powerful upgrades, rituals, and advanced unlocks. Save it for upgrades that support your current build instead of spending it randomly.
+
+### Is Luck worth it early?
+
+Luck is better once your basic economy works. If runners cannot collect normal drops, extra rare drops can make the field messier instead of helping.
+
+### When should I use Artifact Ritual?
+
+Use Artifact Ritual when your run is already stable and artifacts are becoming a main scaling system. Do not rush it before fixing damage, runners, and Mithril access.

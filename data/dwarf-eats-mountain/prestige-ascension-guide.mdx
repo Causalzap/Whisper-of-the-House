@@ -1,0 +1,710 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const ppColumns = [
+  { key: "source", label: "PP Source" },
+  { key: "howItWorks", label: "How It Works" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const ppRows = [
+  {
+    source: "Eating mountains",
+    howItWorks: "Every 1-3 mountains can randomly yield 1 PP.",
+    whatToDo:
+      "Keep pushing mountains while progress is still fast. Do not reset only because one PP appears.",
+  },
+  {
+    source: "Artifacts",
+    howItWorks:
+      "Some artifacts can directly give PP or help you reach more mountain clears faster.",
+    whatToDo:
+      "Pick PP artifacts when they also help your current run or speed up the next reset.",
+  },
+  {
+    source: "Bosses",
+    howItWorks:
+      "Bosses can become another PP source once you are deep enough into progression.",
+    whatToDo:
+      "Treat boss PP as a later goal. Build stable damage and collection first.",
+  },
+  {
+    source: "Prestige upgrades",
+    howItWorks:
+      "Some later upgrades can improve how often you gain PP or how quickly you reach PP sources.",
+    whatToDo:
+      "Prioritize them when your basic opening is already smooth.",
+  },
+];
+
+export const timingColumns = [
+  { key: "signal", label: "Signal" },
+  { key: "meaning", label: "What It Means" },
+  { key: "action", label: "Action" },
+];
+
+export const timingRows = [
+  {
+    signal: "The next mountain takes much longer than the last few",
+    meaning: "Your current scaling is falling behind.",
+    action: "Check whether a Prestige upgrade would make the next run faster.",
+  },
+  {
+    signal: "You are waiting with no useful purchase",
+    meaning: "The run has lost momentum.",
+    action: "Prestige if you can buy a meaningful permanent upgrade.",
+  },
+  {
+    signal: "Gold piles up and the mountain starts reclaiming ores",
+    meaning: "Your collection economy is behind your damage.",
+    action:
+      "Consider runner-focused Prestige upgrades or reset into a better economy route.",
+  },
+  {
+    signal: "You unlock a strong start bonus",
+    meaning: "The next run can skip early friction.",
+    action:
+      "Prestige if that bonus solves your worst early bottleneck.",
+  },
+  {
+    signal: "You are near a major artifact, boss, or unlock",
+    meaning: "A little more pushing may be worth it.",
+    action:
+      "Delay Prestige briefly if the reward is close and likely to improve the next run.",
+  },
+  {
+    signal: "You are past Mountain 50 and progress slows sharply",
+    meaning:
+      "The game is starting to demand stronger scaling, Luck, artifacts, T6, or Ascension planning.",
+    action:
+      "Prestige more deliberately instead of brute-forcing every mountain.",
+  },
+];
+
+export const earlyPrestigeColumns = [
+  { key: "upgrade", label: "Upgrade" },
+  { key: "effect", label: "Effect" },
+  { key: "bestFor", label: "Best For" },
+];
+
+export const earlyPrestigeRows = [
+  {
+    upgrade: "Swift Start",
+    effect: "Start the game with 1/2/3 runners.",
+    bestFor: "Almost every early route, especially if gold piles up.",
+  },
+  {
+    upgrade: "Guild Apprentices",
+    effect: "The first 1/2/3 additional miners cost 0 gold.",
+    bestFor: "Faster early damage without starving your runner economy.",
+  },
+  {
+    upgrade: "Housing Batches",
+    effect: "Every 4 Underground Housings built gives +2 dwarves.",
+    bestFor: "Runs where dwarf capacity blocks your next unit line.",
+  },
+  {
+    upgrade: "Veteran Settlers",
+    effect: "Start the game with extra dwarves.",
+    bestFor: "Smoother first minutes and less early capacity pressure.",
+  },
+  {
+    upgrade: "Wakeful Slap Mastery",
+    effect: "Slapping stunned runners is much more effective.",
+    bestFor: "Active players whose runners get knocked down often.",
+  },
+  {
+    upgrade: "Orequake Finger",
+    effect: "Adds force when clicking ores.",
+    bestFor: "Players who manually push loot into the Great Maw.",
+  },
+  {
+    upgrade: "Mountain's Hidden Veins",
+    effect:
+      "Every mountain consumed has a chance to give Mithril, scaling with miners, runesmiths, and scientists.",
+    bestFor: "Mithril routes, Forge routes, and upgrades that need rare resources.",
+  },
+  {
+    upgrade: "Looming Motivation",
+    effect:
+      "When there are over 350 uncollected ores and the mountain starts reclaiming them, runners gain temporary carrying capacity when returning to stash.",
+    bestFor: "Runs that collapse into ore overflow and reclaim.",
+  },
+  {
+    upgrade: "Ancient Cache",
+    effect: "Start the game with 2/3/4 Mithril.",
+    bestFor: "Early Mithril upgrades, Forge planning, and faster advanced unlocks.",
+  },
+  {
+    upgrade: "Heirloom Inheritance",
+    effect: "Start the game with 1 random Tier 1 artifact spawned.",
+    bestFor: "Artifact-heavy routes and runs that benefit from early randomness.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "bottleneck", label: "Your Bottleneck" },
+  { key: "prestigePriority", label: "Prestige Priority" },
+  { key: "why", label: "Why" },
+];
+
+export const priorityRows = [
+  {
+    bottleneck: "Slow opening",
+    prestigePriority: "Swift Start, Guild Apprentices, Veteran Settlers",
+    why: "These upgrades make the first minute faster and less cramped.",
+  },
+  {
+    bottleneck: "Gold not being collected",
+    prestigePriority: "Swift Start, Looming Motivation, Wakeful Slap Mastery",
+    why: "They help runners start earlier, recover faster, or carry more during overflow.",
+  },
+  {
+    bottleneck: "Dwarf capacity",
+    prestigePriority: "Housing Batches, Veteran Settlers, Mountain Recruits",
+    why: "They give you more bodies to support mixed builds.",
+  },
+  {
+    bottleneck: "Need more Mithril",
+    prestigePriority: "Ancient Cache, Mountain's Hidden Veins",
+    why: "They make Mithril less random and speed up Forge or Mithril upgrade routes.",
+  },
+  {
+    bottleneck: "Manual ore pushing matters",
+    prestigePriority: "Orequake Finger",
+    why: "It makes active ore control stronger when you are helping runners yourself.",
+  },
+  {
+    bottleneck: "Artifacts carry your run",
+    prestigePriority: "Heirloom Inheritance and artifact-related upgrades",
+    why: "Early artifacts can change your route before the run has fully developed.",
+  },
+];
+
+export const ascensionColumns = [
+  { key: "part", label: "Ascension Rule" },
+  { key: "whatHappens", label: "What Happens" },
+  { key: "playerMeaning", label: "What It Means For You" },
+];
+
+export const ascensionRows = [
+  {
+    part: "Unlock condition",
+    whatHappens: "Ascension becomes relevant after reaching the T6 Prestige layer.",
+    playerMeaning:
+      "Do not plan around Ascension in your first few runs. Get your Prestige engine working first.",
+  },
+  {
+    part: "Wiped",
+    whatHappens: "Earlier Prestige upgrades and unspent PP are reset.",
+    playerMeaning:
+      "Spend and plan before ascending. Do not sit on PP you are about to lose.",
+  },
+  {
+    part: "Kept",
+    whatHappens: "T6 upgrades are kept.",
+    playerMeaning:
+      "T6 is your long-term base. These upgrades matter more than short-term comfort.",
+  },
+  {
+    part: "Ascension Rank",
+    whatHappens: "Ascension Rank directly buffs the power of your T6 upgrades.",
+    playerMeaning:
+      "The higher your Ascension Rank, the stronger each T6 upgrade becomes in future cycles.",
+  },
+  {
+    part: "Main risk",
+    whatHappens: "Ascending too early can make the next cycle feel weak.",
+    playerMeaning:
+      "Ascend when your T6 setup is worth keeping and your current layer has slowed down.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyBad", label: "Why It Hurts" },
+  { key: "betterMove", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Trying to spend PP during an active run",
+    whyBad:
+      "PP is not spent by clicking upgrades mid-run. You spend it on the Prestige setup screen.",
+    betterMove:
+      "Hold the Prestige button, spend PP before the next run starts, then press Begin Game.",
+  },
+  {
+    mistake: "Pressing Begin Game too fast after Prestige",
+    whyBad:
+      "You can skip the screen where you should buy permanent upgrades.",
+    betterMove:
+      "Check your PP and buy upgrades before starting the next run.",
+  },
+  {
+    mistake: "Prestiging only because the button appears",
+    whyBad: "You may reset before your current run has earned enough value.",
+    betterMove:
+      "Prestige when the next permanent upgrade clearly speeds up future runs.",
+  },
+  {
+    mistake: "Ignoring runners in Prestige choices",
+    whyBad: "More damage creates more loot, but runners still have to collect it.",
+    betterMove:
+      "Take runner or overflow upgrades if gold is piling up between runs.",
+  },
+  {
+    mistake: "Spreading T6 upgrades too evenly",
+    whyBad:
+      "T6 purchases do not become more expensive per stack, so splitting points can leave every bonus weak.",
+    betterMove:
+      "Stack the T6 type that matches your main bottleneck or build plan.",
+  },
+  {
+    mistake: "Saving too much PP before Ascension",
+    whyBad: "Unspent PP can be wiped when you ascend.",
+    betterMove:
+      "Spend deliberately before ascending and know what will be kept.",
+  },
+  {
+    mistake: "Rushing Ascension before T6 matters",
+    whyBad: "The next cycle can feel slower if your kept upgrades are weak.",
+    betterMove:
+      "Build a strong T6 base before treating Ascension as the next major reset.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Prestige in Dwarf Eats Mountain when your current run slows down and your next permanent upgrade will make the next run faster. PP comes mainly from eating mountains, with extra sources from artifacts and bosses. You cannot spend PP during an active run; hold the Prestige button, spend PP on the Prestige setup screen, then start the next run.**
+
+Ascension is the later reset layer. It becomes important once you reach T6 Prestige upgrades. Ascension resets earlier Prestige progress and unspent PP, keeps T6 upgrades, and gives Ascension Rank that directly buffs your T6 upgrades.
+</GuideQuickAnswer>
+
+<GuideCallout title="Player-first rule">
+Prestige is not a panic button. It is a speed decision. Reset when the next run will reach the same point faster, not simply because the Prestige button is available.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-upgrades-screen.webp"
+    alt="Dwarf Eats Mountain Prestige upgrade screen explaining PP from eating mountains, artifacts, and bosses."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Prestige points turn slow mountain progress into permanent upgrades that make future runs faster.
+  </figcaption>
+</figure>
+
+<h2 id="how-prestige-works">How Prestige works</h2>
+
+Prestige is the first major reset layer in Dwarf Eats Mountain.
+
+When you Prestige, you reset the current run in exchange for permanent upgrades. These upgrades make future runs faster, smoother, or easier to scale. Some help the opening. Some help runners. Some help Mithril. Some help artifacts, bosses, or later systems.
+
+The part that confuses many new players is **how spending works**：**PP is spent between runs, not during the active run.** You do not click Prestige upgrades on the normal gameplay screen.
+
+To spend PP correctly:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ol className="list-decimal space-y-2 pl-5 text-sm leading-7 text-slate-200">
+    <li>Wait until the current run has slowed down enough to justify a reset.</li>
+    <li>Press and hold the top <strong>Hold to Prestige</strong> button.</li>
+    <li>Use the Prestige setup screen to spend your PP on permanent upgrades.</li>
+    <li>Do not instantly press <strong>Begin Game</strong> before checking your PP choices.</li>
+    <li>Start the next run only after your upgrades are selected.</li>
+  </ol>
+</div>
+
+The most important thing to understand is this:
+
+**A good Prestige upgrade should solve the reason your current run slowed down.**
+
+If your first minutes are slow, pick a start bonus.  
+If your gold keeps piling up, pick runner support.  
+If Mithril blocks your next route, pick Mithril help.  
+If you are pushing later mountains, start planning around T6 and Ascension.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-to-get-pp">How to get PP</h2>
+
+PP is short for Prestige Points. You spend PP on Prestige upgrades, but only during the Prestige setup flow.
+
+<GuideTable
+  caption="How to get PP in Dwarf Eats Mountain."
+  columns={ppColumns}
+  rows={ppRows}
+/>
+
+The normal source is eating mountains. Some artifacts can also give PP directly, and bosses can become another source later.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-artifact-choice-bottled-dwarf.webp"
+    alt="Dwarf Eats Mountain Bottled Dwarf artifact choice giving one dwarf, one Mithril, and one PP."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some artifact picks can push your reset forward by adding PP, Mithril, or extra dwarves in the same choice.
+  </figcaption>
+</figure>
+
+<h2 id="when-to-prestige">When should you Prestige?</h2>
+
+<GuideTable
+  caption="When to Prestige in Dwarf Eats Mountain."
+  columns={timingColumns}
+  rows={timingRows}
+/>
+
+Do not reset only because the button appears. If the current run is still clearing mountains quickly, pushing a little farther can earn more PP, artifacts, Mithril, or unlocks.
+
+Also do not grind forever. If the mountain takes much longer, your next purchase is far away, and a permanent upgrade would speed up the next cycle, Prestige is usually correct.
+
+<h2 id="first-prestige-priorities">Best early Prestige upgrades</h2>
+
+Your first Prestige choices should make the next opening smoother.
+
+For most players, the safest early categories are:
+
+- starting runners,
+- free early miners,
+- extra dwarves,
+- housing support,
+- runner recovery,
+- Mithril access,
+- ore overflow protection.
+
+<GuideTable
+  caption="Useful early Prestige upgrades and what they are best for."
+  columns={earlyPrestigeColumns}
+  rows={earlyPrestigeRows}
+/>
+
+<h2 id="swift-start">Swift Start: why starting runners are so strong</h2>
+
+**Swift Start** is one of the safest early Prestige picks because runners solve the first economy problem before it starts.
+
+Starting miners are useful, but miners only create value. They do not bank it. If the Great Maw has no delivery support, early damage can still leave gold sitting on the ground. Starting runners help the next run feel smoother because collection begins earlier, manual pushing matters less, and your first damage upgrades turn into spendable gold faster.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-swift-start.webp"
+    alt="Dwarf Eats Mountain Swift Start Prestige upgrade that starts the game with extra runners."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Swift Start is strong because every new run needs collection before damage can turn into real progress.
+  </figcaption>
+</figure>
+
+Choose Swift Start when:
+
+- gold piles up in the first few mountains,
+- the Great Maw setup feels slow every reset,
+- you are manually pushing too much ore early,
+- or your first damage upgrades create drops faster than you can collect them.
+
+Choose a miner or damage start instead when the field is already clean and mountain HP is the only thing slowing your opening.
+
+For more collection fixes, use the <Link href="/dwarf-eats-mountain/runners-guide">Runners Guide</Link>.
+
+<h2 id="mithril-prestige">Mithril Prestige upgrades: Ancient Cache and Hidden Veins</h2>
+
+Mithril can unlock important upgrade routes, so Prestige upgrades that improve Mithril access can be very strong.
+
+**Ancient Cache** starts you with Mithril.  
+**Mountain's Hidden Veins** gives you a chance to gain Mithril when consuming mountains.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-ancient-cache.webp"
+    alt="Dwarf Eats Mountain Ancient Cache Prestige upgrade that starts the game with Mithril."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ancient Cache is useful when your route wants Mithril upgrades earlier than the run normally provides them.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-mountains-hidden-veins.webp"
+    alt="Dwarf Eats Mountain Mountain's Hidden Veins Prestige upgrade for gaining Mithril when consuming mountains."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mountain's Hidden Veins is better for longer runs where repeated mountain clears can feed your Mithril path.
+  </figcaption>
+</figure>
+
+Pick Mithril upgrades when:
+
+- Forge upgrades are your next goal,
+- Ballista upgrades need rare resources,
+- or your build keeps waiting on Mithril instead of gold.
+
+For the full resource system, use the <Link href="/dwarf-eats-mountain/artifacts-mithril-guide">Artifacts and Mithril Guide</Link>.
+
+<h2 id="artifact-prestige">Heirloom Inheritance and artifact starts</h2>
+
+**Heirloom Inheritance** starts the game with a random Tier 1 artifact spawned.
+
+This is not as predictable as Swift Start or Ancient Cache, but it can be powerful if your route benefits from early artifact effects.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-heirloom-inheritance.webp"
+    alt="Dwarf Eats Mountain Heirloom Inheritance Prestige upgrade that starts the game with a random Tier 1 artifact."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Heirloom Inheritance is a stronger pick when you are comfortable adapting your route around early artifact randomness.
+  </figcaption>
+</figure>
+
+Pick it when:
+
+- you understand most early artifact effects,
+- you are pushing artifact-based routes,
+- you want more early run variance,
+- or you already have basic runner and start upgrades covered.
+
+Skip it early if your main issue is predictable: slow runners, not enough miners, dwarf cap, or Mithril access.
+
+<h2 id="overflow-prestige">Looming Motivation and ore overflow</h2>
+
+Some runs fail because you create too much loot and cannot collect it.
+
+When there are over **350 uncollected ores**, the mountain can start reclaiming them. **Looming Motivation** helps in that exact situation by giving runners temporary carrying capacity when they return to stash.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-looming-motivation.webp"
+    alt="Dwarf Eats Mountain Looming Motivation Prestige upgrade for over 350 uncollected ores and mountain reclaim."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Looming Motivation is a recovery upgrade for runs where damage creates more loot than your runners can handle.
+  </figcaption>
+</figure>
+
+Pick Looming Motivation when:
+
+- you often see reclaim pressure,
+- gold piles up after calamities,
+- Demo or Flamer builds overwhelm collection,
+- or your runners are active but cannot clear the field fast enough.
+
+Do not use it as an excuse to ignore collection. It is a safety net, not a replacement for good runner upgrades.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="choose-by-bottleneck">Choose Prestige upgrades by bottleneck</h2>
+
+The best Prestige choice depends on what slowed your previous run.
+
+<GuideTable
+  caption="How to choose Prestige upgrades by bottleneck."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+This is the core decision:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ul className="space-y-2 text-sm leading-7 text-slate-200">
+    <li><strong>Slow opening?</strong> Take starting bonuses.</li>
+    <li><strong>Gold piles up?</strong> Take runner and overflow support.</li>
+    <li><strong>No dwarf capacity?</strong> Take housing or starting dwarf bonuses.</li>
+    <li><strong>Mithril blocks upgrades?</strong> Take Mithril start or Mithril chance.</li>
+    <li><strong>Artifacts shape your route?</strong> Take artifact-start bonuses.</li>
+    <li><strong>Late game slows down?</strong> Start planning around T6 and Ascension.</li>
+  </ul>
+</div>
+
+<h2 id="t2-and-beyond">T2 and beyond: when Prestige starts shaping builds</h2>
+
+Early Prestige upgrades mostly make the opening smoother. Later Prestige upgrades start pushing you into build paths.
+
+You may see upgrades that support:
+
+- artifact gold,
+- extra PP chance,
+- Cyber Dwarf upgrades,
+- runners with mechanical upgrades,
+- den artifact drops,
+- free Flamers,
+- Forge starts,
+- free Ballistas,
+- Laboratory starts,
+- stronger miners,
+- better falling rock value,
+- ritual power.
+
+At this stage, stop thinking in isolated upgrades. Think in routes.
+
+A runner route wants collection, safety, speed, carry, and ore control.  
+A Flamer route wants fire uptime and cooldown support.  
+A Ballista route wants targeting and den pressure.  
+A Mithril route wants Forge access and rare-resource support.  
+An artifact route wants more artifact access and better artifact value.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-ballista-laser-flamer-chaos.webp"
+    alt="Dwarf Eats Mountain mid-game build with ballistas, lasers, flamers, runners, and large ore piles."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once builds get this busy, Prestige should support the route you are actually playing instead of scattering points randomly.
+  </figcaption>
+</figure>
+
+<h2 id="t6-prestige">T6 Prestige: why focus starts to matter</h2>
+
+T6 upgrades are the bridge between Prestige and Ascension.
+
+By the time you reach T6, the game is no longer asking, "Can you start faster?" It is asking, "Which long-term scaling path are you building around?"
+
+The key mechanism is that **T6 upgrades do not increase in cost with each purchase**. If each purchase still costs the same amount of PP, stacking one T6 type often gives more useful power than spreading points across every option equally.
+
+That does not mean one T6 upgrade is always best. It means your T6 spending should match your build.
+
+If your build fails because loot is not collected, focus collection-related scaling.  
+If your build fails because mountain HP is too high, focus damage scaling.  
+If your build fails because drops lose value, focus Luck, Jackpot, artifacts, or resource scaling.  
+If your build fails at bosses, focus the route that helps you pass the boss check.
+
+<h2 id="ascension">How Ascension works</h2>
+
+Ascension is the later reset layer after T6 Prestige becomes relevant.
+
+Use this table as the practical version:
+
+<GuideTable
+  caption="Dwarf Eats Mountain Ascension rules and what they mean."
+  columns={ascensionColumns}
+  rows={ascensionRows}
+/>
+
+The important idea is simple:
+
+**Ascension is a long-term reset, not an early Prestige.**
+
+You should not rush it in the early game. Build a strong Prestige route first, reach T6, then think about what you are keeping into the next cycle.
+
+<h2 id="when-to-ascend">When should you Ascend?</h2>
+
+Ascend when all three are true:
+
+1. You have reached T6 Prestige upgrades.
+2. Your current layer is slowing down hard.
+3. Your kept T6 upgrades are strong enough to make the next cycle better.
+
+Do not Ascend just because it unlocks. If your T6 base is weak, the next cycle can feel worse than expected.
+
+Good Ascension timing usually looks like this:
+
+- your normal Prestige upgrades no longer feel like enough,
+- you have invested in T6 upgrades that match your build,
+- you understand what will be wiped,
+- you are not sitting on unspent PP you are about to lose,
+- and the Ascension Rank will make your T6 upgrades stronger in future cycles.
+
+<h2 id="prestige-route">Recommended Prestige route for most players</h2>
+
+Use this as a simple route, then adjust based on your bottleneck:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ol className="list-decimal space-y-2 pl-5 text-sm leading-7 text-slate-200">
+    <li>First, make your opening smoother with <strong>Swift Start</strong> or another start bonus.</li>
+    <li>Fix your worst early bottleneck: runners, miners, housing, or Mithril.</li>
+    <li>When you hold <strong>Prestige</strong>, spend PP before pressing <strong>Begin Game</strong>.</li>
+    <li>Add runner support if gold piles up or reclaim starts.</li>
+    <li>Add Mithril support when Forge or Mithril upgrades become important.</li>
+    <li>Use artifact-related upgrades once you understand which artifacts help your route.</li>
+    <li>Move into build-specific Prestige upgrades after your early route is stable.</li>
+    <li>Reach T6 and stack upgrades around one main long-term plan.</li>
+    <li>Ascend only when your T6 base is worth keeping and the current layer has slowed down.</li>
+  </ol>
+</div>
+
+<h2 id="mistakes">Common Prestige mistakes</h2>
+
+<GuideTable
+  caption="Common Dwarf Eats Mountain Prestige and Ascension mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">FAQ</h2>
+
+### When should I Prestige in Dwarf Eats Mountain?
+
+Prestige when your run clearly slows down and your next permanent upgrade will make the next run faster.
+
+### How do I spend PP?
+
+Hold the top **Hold to Prestige** button, spend PP on the Prestige setup screen, then press **Begin Game**. You cannot spend PP during an active run.
+
+### Why can't I buy Prestige upgrades during a run?
+
+Prestige upgrades are bought between runs. If you are still in active gameplay, you need to hold the Prestige button first and use the setup screen before starting the next run.
+
+### How do you get PP?
+
+You mainly get PP by eating mountains. Some artifacts and bosses can also give PP or help you reach more PP sources.
+
+### What are the best first Prestige upgrades?
+
+For most players, Swift Start is one of the safest early picks because every run needs runners. Guild Apprentices, Housing Batches, Veteran Settlers, Ancient Cache, and Looming Motivation are also strong depending on your bottleneck.
+
+### Should I choose damage or runner Prestige upgrades first?
+
+Choose based on your problem. If gold piles up, choose runner support. If the field is clean but mountains take too long, choose damage or starting miner support.
+
+### Is Ancient Cache worth it?
+
+Ancient Cache is worth it if Mithril is blocking your route. It is less urgent if your main problem is basic gold collection or dwarf capacity.
+
+### Is Heirloom Inheritance good early?
+
+It can be good, but it is less predictable than Swift Start or Ancient Cache. Pick it once you are comfortable adapting around random Tier 1 artifacts.
+
+### What does Looming Motivation do?
+
+Looming Motivation helps when there are over 350 uncollected ores and the mountain starts reclaiming them. It gives runners temporary carrying capacity when they return to stash.
+
+### What does Ascension reset?
+
+Ascension resets earlier Prestige progress and unspent PP, while keeping T6 upgrades. It also gives Ascension Rank, which directly buffs T6 upgrades.
+
+### When should I Ascend?
+
+Ascend after T6 upgrades matter, your current layer has slowed down, and your kept T6 upgrades are strong enough to make the next cycle better.
+
+### Should I spread T6 upgrades evenly?
+
+Usually no. T6 upgrades do not increase in cost with each purchase, so stacking the T6 type that matches your build often performs better than spreading points randomly.

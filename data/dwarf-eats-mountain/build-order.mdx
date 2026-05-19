@@ -1,0 +1,687 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildOrderColumns = [
+  { key: "step", label: "Step" },
+  { key: "what", label: "Build / Upgrade" },
+  { key: "why", label: "Why It Matters" },
+  { key: "moveOn", label: "Move On When" },
+];
+
+export const buildOrderRows = [
+  {
+    step: "1",
+    what: "Miner's Guild",
+    why: "Starts your basic mountain damage and unlocks miners.",
+    moveOn: "The guild is placed and you can hire your first miners.",
+  },
+  {
+    step: "2",
+    what: "5 Underground Housing",
+    why: "Gives enough dwarf capacity to complete the opening setup.",
+    moveOn: "You can hire 6 miners.",
+  },
+  {
+    step: "3",
+    what: "6 Miners",
+    why: "Creates steady early damage so you are not relying only on manual clicking.",
+    moveOn: "The mountain is taking passive damage.",
+  },
+  {
+    step: "4",
+    what: "The Great Maw",
+    why: "Creates the stash where runners deliver gold, gems, Mithril, and ore.",
+    moveOn: "The runner option is available.",
+  },
+  {
+    step: "5",
+    what: "3 Runners",
+    why: "Turns drops on the ground into usable gold.",
+    moveOn: "Gold is being collected instead of sitting under the mountain.",
+  },
+  {
+    step: "6",
+    what: "Stoutly March + Carrying Capacity",
+    why: "Runner speed and carry decide whether your early damage actually becomes income.",
+    moveOn: "Most drops are collected before the field gets crowded.",
+  },
+  {
+    step: "7",
+    what: "Rock and Protein Diet + Raised by Pickaxes",
+    why: "Adds miner damage and throwing velocity once collection is stable.",
+    moveOn: "Runners still keep up after the extra drops.",
+  },
+  {
+    step: "8",
+    what: "More Underground Housing",
+    why: "You need dwarf capacity before adding runners, demos, flamers, scientists, or support units.",
+    moveOn: "You can hire the next unit type without hitting capacity.",
+  },
+  {
+    step: "9",
+    what: "Flameworks or Demolition Shack",
+    why: "Adds your first real damage branch: steady fire or explosive burst.",
+    moveOn: "Your collection economy can handle the extra loot and chaos.",
+  },
+  {
+    step: "10",
+    what: "Ballistics Workshop, Grand Laboratory, Spelunker's Guild, or Great Forge",
+    why: "These unlock targeting, science, artifacts, spelunking, Mithril, and mid-game scaling.",
+    moveOn: "Pick the building that solves your current blocker instead of buying everything.",
+  },
+  {
+    step: "11",
+    what: "First Prestige",
+    why: "Turns a slow run into permanent progress.",
+    moveOn: "The next permanent upgrade would make a fresh run faster.",
+  },
+];
+
+export const unlockColumns = [
+  { key: "building", label: "Building / System" },
+  { key: "observedRoute", label: "Observed Unlock Route" },
+  { key: "ifNA", label: "If It Still Says N/A" },
+];
+
+export const unlockRows = [
+  {
+    building: "Miner's Guild",
+    observedRoute: "Available at the start.",
+    ifNA: "This should not be locked in a normal new run.",
+  },
+  {
+    building: "Underground Housing",
+    observedRoute: "Available during the opening setup from the Great Hold.",
+    ifNA: "Continue the tutorial prompts around Miner's Guild and early housing.",
+  },
+  {
+    building: "The Great Maw",
+    observedRoute: "Appears after the first miner / housing setup, usually after building housing and hiring the opening miners.",
+    ifNA: "Build the Miner's Guild, add 5 Underground Housing, and hire the first 6 Miners.",
+  },
+  {
+    building: "Runners",
+    observedRoute: "Unlocked through the Great Maw.",
+    ifNA: "Build the Great Maw first. Runners are tied to delivery, not the Miner's Guild.",
+  },
+  {
+    building: "Flameworks",
+    observedRoute: "Observed after the basic Great Maw + runner economy starts progressing.",
+    ifNA: "Clear more early mountains and keep upgrading the basic miner / runner loop.",
+  },
+  {
+    building: "Demolition Shack",
+    observedRoute: "Observed after the basic Great Maw + runner economy starts progressing.",
+    ifNA: "Clear more early mountains, destroy early dens when possible, and stabilize collection.",
+  },
+  {
+    building: "Ballistics Workshop",
+    observedRoute: "Observed after early damage branches and special targets such as dens / veins begin to matter.",
+    ifNA: "Keep pushing mountains and dens. Ballistics is a targeting route, not an opening building.",
+  },
+  {
+    building: "Grand Laboratory",
+    observedRoute: "Observed after the run reaches advanced building choices and science / laser systems start appearing.",
+    ifNA: "Keep progressing mountains and buildings; do not force Laboratory before your miner / runner economy is stable.",
+  },
+  {
+    building: "Spelunker's Guild",
+    observedRoute: "Exact trigger is still being confirmed. It appears tied to artifact, den, Luck, Mithril-luck, and spelunking progression.",
+    ifNA: "Keep clearing mountains, interacting with dens, collecting artifacts, and opening rare-resource systems. Do not treat N/A as a bug.",
+  },
+  {
+    building: "Great Forge",
+    observedRoute: "Observed once Mithril / Mountain Soul / Forge systems become available.",
+    ifNA: "Collect Mithril, push more mountains, and open the rare-resource route before expecting Forge upgrades.",
+  },
+];
+
+export const minerUpgradeColumns = [
+  { key: "upgrade", label: "Miner Upgrade" },
+  { key: "effect", label: "Effect" },
+  { key: "bestWhen", label: "Best When" },
+];
+
+export const minerUpgradeRows = [
+  {
+    upgrade: "Rock and Protein Diet",
+    effect: "Adds miner damage and throwing velocity.",
+    bestWhen: "You want more early damage and better throws toward higher veins or dens.",
+  },
+  {
+    upgrade: "Raised by Pickaxes",
+    effect: "Adds miner damage and can help yield higher-value loot through stronger hits.",
+    bestWhen: "The field is clear and mountain HP is the main thing slowing you down.",
+  },
+  {
+    upgrade: "The Art of Faster Chucking",
+    effect: "Reduces miner cooldown.",
+    bestWhen: "You already have enough collection and want miners attacking more often.",
+  },
+];
+
+export const runnerUpgradeColumns = [
+  { key: "upgrade", label: "Runner Upgrade" },
+  { key: "effect", label: "Effect" },
+  { key: "bestWhen", label: "Best When" },
+];
+
+export const runnerUpgradeRows = [
+  {
+    upgrade: "Stoutly March",
+    effect: "Adds runner speed.",
+    bestWhen: "Runners spend too long crossing the field.",
+  },
+  {
+    upgrade: "Carrying Capacity",
+    effect: "Lets each runner carry more ore at once.",
+    bestWhen: "Runners reach loot but cannot clear piles quickly.",
+  },
+  {
+    upgrade: "Dodgy Profession",
+    effect: "Adds dodge chance against falling rocks and monsters.",
+    bestWhen: "Runners keep getting stunned before they can deliver.",
+  },
+  {
+    upgrade: "Prospector's Massive Nose",
+    effect: "Adds a chance to find random gems when picking up non-gem ore.",
+    bestWhen: "Collection is stable and you want more value from each runner trip.",
+  },
+];
+
+export const mithrilColumns = [
+  { key: "situation", label: "Your First Mithril Situation" },
+  { key: "spend", label: "Best Early Spend" },
+  { key: "why", label: "Why" },
+];
+
+export const mithrilRows = [
+  {
+    situation: "Runners get stunned often",
+    spend: "Save for Mithril Chainmail",
+    why: "Runner protection is better than extra damage when deliveries keep getting interrupted.",
+  },
+  {
+    situation: "Runners reach piles but pick up too slowly",
+    spend: "Save for Magnetic Gloves",
+    why: "Gathering speed helps when pickup time, not travel time, is the bottleneck.",
+  },
+  {
+    situation: "The field is clean but the mountain is slow",
+    spend: "Mithril Pickaxes",
+    why: "Miner damage is good when collection already works.",
+  },
+  {
+    situation: "Dens or veins are the real wall",
+    spend: "Save for Ballista / Monster Bane-style upgrades",
+    why: "Targeting upgrades are better than generic damage when special structures block progress.",
+  },
+  {
+    situation: "You are not sure yet",
+    spend: "Hold the Mithril",
+    why: "Early Mithril is rare. It is better to wait than spend it on a side path you do not need.",
+  },
+];
+
+export const firstPrestigeColumns = [
+  { key: "upgrade", label: "Prestige Upgrade" },
+  { key: "effect", label: "Effect" },
+  { key: "why", label: "Why It Helps Early" },
+];
+
+export const firstPrestigeRows = [
+  {
+    upgrade: "Swift Start",
+    effect: "Start the game with 1/2/3 runners.",
+    why: "Every run needs collection immediately, so this removes early friction.",
+  },
+  {
+    upgrade: "Guild Apprentices",
+    effect: "The first 1/2/3 additional miners cost 0 gold.",
+    why: "Lets you add early damage without delaying runners.",
+  },
+  {
+    upgrade: "Housing Batches",
+    effect: "Every 4 Underground Housings built gives +2 dwarves.",
+    why: "Solves early capacity pressure as you add more unit types.",
+  },
+  {
+    upgrade: "Veteran Settlers",
+    effect: "Start the game with 2/4 dwarves.",
+    why: "Makes the first minute less cramped.",
+  },
+  {
+    upgrade: "Wakeful Slap Mastery",
+    effect: "Slapping stunned runners is much more effective.",
+    why: "Strong if rockfalls, goblins, or explosions keep knocking runners down.",
+  },
+  {
+    upgrade: "Looming Motivation",
+    effect:
+      "When there are over 350 uncollected ores and the mountain starts reclaiming them, runners gain temporary carrying capacity when they return to stash.",
+    why: "Helps recover when your collection economy falls behind.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best beginner build order in Dwarf Eats Mountain is: Miner's Guild, 5 Underground Housing, 6 Miners, the Great Maw, 3 Runners, runner speed and carrying capacity, then miner damage and throwing velocity.**
+
+After that, add **Flameworks** or **Demolition Shack** only when your runners can handle the extra loot. If an upgrade or building says **N/A**, it usually means its prerequisite building, unit, resource, or system is not unlocked yet. Keep progressing the related route instead of treating it as a bug.
+</GuideQuickAnswer>
+
+<GuideCallout title="Beginner rule">
+Your first goal is not maximum damage. Your first goal is a stable loop: break the mountain, collect the loot, spend it, then repeat faster.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-great-m-runners.webp"
+    alt="Dwarf Eats Mountain Great Maw and runners during the opening setup."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Great Maw turns your run into an economy loop: miners create drops, runners bring them home, and upgrades turn that income into faster mountains.
+  </figcaption>
+</figure>
+
+<h2 id="best-build-order">Best beginner build order</h2>
+
+Follow this order for your first serious run:
+
+<GuideTable
+  caption="Dwarf Eats Mountain beginner build order from first building to first Prestige."
+  columns={buildOrderColumns}
+  rows={buildOrderRows}
+/>
+
+This order works because the game tests you in layers. First, you need damage. Then you need collection. Then you need stronger systems such as artifacts, Mithril, Prestige, specialized buildings, and eventually Spelunker's Guild or Forge routes.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="opening-setup">Opening setup: Miner's Guild, housing, miners, Great Maw</h2>
+
+Start with **Miner's Guild**, then build **5 Underground Housing** and hire **6 Miners**. This gives you enough early damage to start breaking the mountain without depending only on your cursor.
+
+After that, build **the Great Maw** and hire your first **3 Runners**. This is the real start of the game. Before runners, drops are just objects on the ground. After runners, drops become gold you can spend.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-miners-housing-start.webp"
+    alt="Dwarf Eats Mountain early start with underground housing, miners, and the Great Maw."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The safest opening is simple: housing, miners, Great Maw, then runners. Do not overthink builds before this loop is working.
+  </figcaption>
+</figure>
+
+<h2 id="manual-help">Manual help and slap timing</h2>
+
+In the opening minutes, manual control is worth using. You can:
+
+- hold on the mountain to add damage,
+- hold on loose gold or ore to push it toward the Great Maw,
+- slap stunned runners so they stand up faster.
+
+The best time to slap is when a runner is stunned **near a valuable pile** or when the field is starting to back up. A runner lying next to Mithril, diamonds, large gold chunks, or a crowded pile is costing you more than a runner knocked out on an empty field.
+
+Slap timing matters most after:
+
+- rockfalls,
+- goblin hits,
+- Demo explosions,
+- Wind Bomb chaos,
+- calamity events,
+- or any moment where several runners are down at once.
+
+If you often lose runs because runners stay stunned while ore piles up, **Wakeful Slap Mastery** is a strong early Prestige option. If you mostly idle and do not watch the field, it is less valuable than passive runner speed, carry, or starting-runner upgrades.
+
+<h2 id="building-unlocks">Building unlock requirements and N/A upgrades</h2>
+
+One of the most confusing early-game moments is seeing a building or upgrade marked **N/A**. In most cases, that does not mean the game is broken. It means you have not unlocked the prerequisite building, unit, resource, or system yet.
+
+Use this table as a practical unlock map. It is written from a player's route perspective, not as a datamined requirement list.
+
+<GuideCallout title="Unlock note">
+Exact building unlock conditions are still being confirmed by players. This table uses observed player routes, not datamined requirements. If something still says N/A, use the last column to decide what system to push next.
+</GuideCallout>
+
+<GuideTable
+  caption="Dwarf Eats Mountain building unlock requirements and when to use each building."
+  columns={unlockColumns}
+  rows={unlockRows}
+/>
+
+<h2 id="runner-upgrades">Early runner upgrades</h2>
+
+Your first runner upgrades are usually **Stoutly March** and **Carrying Capacity**.
+
+**Stoutly March** helps runners cross the field faster. **Carrying Capacity** lets each runner bring back more loot per trip. If runners are constantly knocked out before delivery, add **Dodgy Profession** or prioritize slap-related support later.
+
+<GuideTable
+  caption="Early runner upgrades and when to buy them."
+  columns={runnerUpgradeColumns}
+  rows={runnerUpgradeRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-runner-stoutly-march.webp"
+    alt="Dwarf Eats Mountain Stoutly March runner speed upgrade."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Stoutly March is usually one of the first runner upgrades worth buying because slow runners make every other system feel worse.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-runner-carrying-capacity.webp"
+    alt="Dwarf Eats Mountain Carrying Capacity runner upgrade."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Carrying Capacity matters once runners are reaching loot but cannot clear piles fast enough.
+  </figcaption>
+</figure>
+
+For deeper collection problems, use the <Link href="/dwarf-eats-mountain/runners-guide">Dwarf Eats Mountain Runners Guide</Link>.
+
+<h2 id="miner-upgrades">Then upgrade miner damage and throwing velocity</h2>
+
+Once the field is under control, improve miners.
+
+The first miner upgrades are useful for different reasons:
+
+<GuideTable
+  caption="Early miner upgrades and when they matter."
+  columns={minerUpgradeColumns}
+  rows={minerUpgradeRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-miner-rock-protein-diet.webp"
+    alt="Dwarf Eats Mountain Rock and Protein Diet miner upgrade with damage and throwing velocity."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Rock and Protein Diet is a strong early miner upgrade because it improves both damage and throwing velocity.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-miner-raised-by-pickaxes.webp"
+    alt="Dwarf Eats Mountain Raised by Pickaxes miner damage upgrade."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Raised by Pickaxes is better once collection is stable and you need the mountain to break faster.
+  </figcaption>
+</figure>
+
+<h2 id="housing-and-dwarf-cap">Add more housing when dwarf capacity blocks you</h2>
+
+If you cannot hire the units you want, build more **Underground Housing**. This becomes more important once you add runners, Demo Dwarves, Flamers, Scientists, Spelunkers, Runesmiths, or later support units.
+
+Do not wait until you are completely stuck. If your next building is about to unlock a useful unit line, make sure your dwarf capacity can support it.
+
+This is also why early Prestige upgrades that add dwarves or improve housing feel so strong. They make the opening less cramped and let your next run reach the real decisions faster.
+
+<h2 id="damage-branch">When to build Flameworks or Demolition Shack</h2>
+
+After your basic miner and runner loop works, choose your first stronger damage branch.
+
+**Flameworks** produces Flamers. They are the steadier damage option and are easier for most new players to control.
+
+**Demolition Shack** produces Demo Dwarves. They bring explosive damage, Wind Bomb utility, and den pressure, but they can also scatter loot, raise danger, and make runners' jobs harder.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-demolition-shack-first-demo.webp"
+    alt="Dwarf Eats Mountain Demolition Shack and first Demo Dwarf unlock."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Demo Dwarves are powerful, but explosive damage is safest after your runner economy is already stable.
+  </figcaption>
+</figure>
+
+Pick **Flameworks** if you want steadier damage. Pick **Demolition Shack** if you need burst or den pressure and can handle the extra chaos. Delay both if rare drops are already sitting on the ground.
+
+<h2 id="mid-game-buildings">Ballistics Workshop, Grand Laboratory, Spelunker's Guild, and Great Forge</h2>
+
+Once the early loop is stable, your next building should solve a specific blocker.
+
+**Ballistics Workshop** is for targeting. Build it when dens, veins, or higher targets are slowing the run.
+
+**Grand Laboratory** is for Scientists, Laser Cannons, and unlock-based scaling. Build it once your economy can support a more expensive advanced route.
+
+**Spelunker's Guild** is for artifact, den, Luck, Mithril-luck, and spelunking progression. Build it when rare-resource systems become more important than simple gold.
+
+**Great Forge** is for Mithril, Runesmiths, Forge upgrades, and rituals. Build toward it after you can actually collect Mithril reliably.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-demo-flamer-lab-buildings.webp"
+    alt="Dwarf Eats Mountain building menu with Flameworks, Demolition Shack, Ballistics Workshop, and Grand Laboratory."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first real build branch starts here: steady fire, explosive burst, targeting, science, spelunking, Mithril, or Forge systems.
+  </figcaption>
+</figure>
+
+Do not build everything just because it appears. Pick the building that answers your current blocker.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="first-mithril-spend">What should you spend your first Mithril on?</h2>
+
+Early Mithril is rare, so do not spend it just because an upgrade appears. First, make sure the Mithril gets into the Great Maw. If runners are slow or stunned, manually push it home.
+
+Then decide based on your problem:
+
+<GuideTable
+  caption="What to spend your first Mithril on in Dwarf Eats Mountain."
+  columns={mithrilColumns}
+  rows={mithrilRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-mithril-upgrades-chain-mail.webp"
+    alt="Dwarf Eats Mountain Mithril Forging upgrade tiers at the Great Forge."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mithril is strongest when it fixes a real wall: runner safety, miner damage, gathering speed, Ballista support, or Forge progression.
+  </figcaption>
+</figure>
+
+For the full resource route, use the <Link href="/dwarf-eats-mountain/artifacts-mithril-guide">Artifacts and Mithril Guide</Link>.
+
+<h2 id="first-prestige">When to take your first Prestige</h2>
+
+Prestige when your current run feels slower than a fresh run with permanent upgrades.
+
+Good signs that your first Prestige is close:
+
+- the next mountain takes much longer than the last few,
+- you have enough PP for a useful permanent upgrade,
+- the first minutes feel slow every run,
+- runners keep falling behind,
+- or you can buy an upgrade that fixes your worst early bottleneck.
+
+Do not Prestige only because the button exists. Also do not grind a clearly stalled run forever.
+
+For the full reset layer, use the <Link href="/dwarf-eats-mountain/prestige-ascension-guide">Prestige and Ascension Guide</Link>.
+
+<h2 id="best-first-prestige-upgrades">Best first Prestige upgrades for build order</h2>
+
+The best first Prestige upgrades are the ones that make the next opening smoother.
+
+<GuideTable
+  caption="Useful early Prestige upgrades for Dwarf Eats Mountain build order."
+  columns={firstPrestigeColumns}
+  rows={firstPrestigeRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-swift-start.webp"
+    alt="Dwarf Eats Mountain Swift Start Prestige upgrade that starts the game with extra runners."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Swift Start is one of the cleanest early Prestige picks because every new run needs runners immediately.
+  </figcaption>
+</figure>
+
+<h3 id="how-prestige-changes-openings">How Prestige changes your opening</h3>
+
+Prestige upgrades change the build order by removing early friction.
+
+For example:
+
+- **Swift Start** makes collection start sooner.
+- **Guild Apprentices** adds free early miners.
+- **Housing Batches** makes housing scale better.
+- **Veteran Settlers** gives you more starting dwarf capacity.
+- **Wakeful Slap Mastery** helps active players recover stunned runners.
+- **Looming Motivation** helps when uncollected ore gets out of control.
+
+That is why Prestige is not only a late-game system. It rewrites the first few minutes of every run.
+
+<h2 id="recommended-route">Recommended first-run route</h2>
+
+Use this as your simple checklist:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ol className="list-decimal space-y-2 pl-5 text-sm leading-7 text-slate-200">
+    <li>Build <strong>Miner's Guild</strong>.</li>
+    <li>Build <strong>5 Underground Housing</strong>.</li>
+    <li>Hire <strong>6 Miners</strong>.</li>
+    <li>Build <strong>the Great Maw</strong>.</li>
+    <li>Hire <strong>3 Runners</strong>.</li>
+    <li>Buy <strong>runner speed</strong> and <strong>carrying capacity</strong>.</li>
+    <li>Buy <strong>miner damage</strong> and <strong>throwing velocity</strong>.</li>
+    <li>Add more housing if dwarf capacity blocks you.</li>
+    <li>Build <strong>Flameworks</strong> or <strong>Demolition Shack</strong>.</li>
+    <li>Check what is still <strong>N/A</strong>, then progress its prerequisite system.</li>
+    <li>Add <strong>Ballistics Workshop</strong>, <strong>Grand Laboratory</strong>, <strong>Spelunker's Guild</strong>, or <strong>Great Forge</strong> based on your blocker.</li>
+    <li>Take your first <strong>Prestige</strong> when progress clearly slows.</li>
+  </ol>
+</div>
+
+If your run goes off-plan, use the bottleneck rule:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ul className="space-y-2 text-sm leading-7 text-slate-200">
+    <li><strong>Loot on the ground?</strong> Upgrade runners.</li>
+    <li><strong>Clean field but slow mountain?</strong> Upgrade damage.</li>
+    <li><strong>Dens causing trouble?</strong> Add targeting or burst damage.</li>
+    <li><strong>Runners keep getting stunned?</strong> Add dodge, slap efficiency, or protection.</li>
+    <li><strong>Building or upgrade says N/A?</strong> Progress its prerequisite building, unit, resource, or system.</li>
+    <li><strong>Run feels slow with no good next buy?</strong> Prestige.</li>
+  </ul>
+</div>
+
+<h2 id="common-mistakes">Common beginner mistakes</h2>
+
+### Buying damage while loot is already piling up
+
+If gold is not reaching the Great Maw, more damage usually makes the problem worse. Fix runners first.
+
+### Ignoring N/A upgrade requirements
+
+N/A usually means you are missing a prerequisite. Check whether the upgrade belongs to a building, unit line, Mithril route, spelunking system, artifact system, or Prestige layer you have not opened yet.
+
+### Spending your first Mithril randomly
+
+Early Mithril should fix a real wall. Save it for runner protection, miner damage, gathering speed, Ballista support, or Forge progression.
+
+### Adding Demo Dwarves too early
+
+Demo Dwarves are strong, but explosions can create more chaos than your early economy can handle.
+
+### Waiting too long to Prestige
+
+If a run is clearly crawling and you can buy a permanent upgrade, resetting can be faster than forcing one more slow mountain.
+
+<h2 id="what-to-read-next">What to read next</h2>
+
+If your gold is not being collected, go to the <Link href="/dwarf-eats-mountain/runners-guide">Runners Guide</Link>.
+
+If your run is slowing down and you are thinking about resetting, go to the <Link href="/dwarf-eats-mountain/prestige-ascension-guide">Prestige and Ascension Guide</Link>.
+
+If you are choosing between artifacts, Mithril spending, Mountain Souls, or rituals, go to the <Link href="/dwarf-eats-mountain/artifacts-mithril-guide">Artifacts and Mithril Guide</Link>.
+
+If you are choosing between Flamers, Demo Dwarves, Ballistas, Scientists, and late-game scaling, go to the <Link href="/dwarf-eats-mountain/best-builds">Best Builds Guide</Link>.
+
+For the full route, return to the <Link href="/dwarf-eats-mountain">Dwarf Eats Mountain Guide Hub</Link>.
+
+<h2 id="faq">FAQ</h2>
+
+### What should I build first in Dwarf Eats Mountain?
+
+Build Miner's Guild first, then 5 Underground Housing, 6 Miners, the Great Maw, and 3 Runners.
+
+### Why are some upgrades marked N/A?
+
+N/A usually means you have not unlocked the prerequisite building, unit, resource, or system. Progress the related route first, such as Ballistics, Laboratory, Spelunker's Guild, Mithril, Forge, artifacts, or Prestige.
+
+### How do I unlock Spelunker's Guild?
+
+Spelunker's Guild belongs to the artifact, den, Luck, Mithril-luck, and spelunking side of progression. If it is not available yet, keep progressing mountains, dens, artifacts, and rare-resource systems while keeping your runner economy stable.
+
+### Is Stoutly March or Carrying Capacity better first?
+
+Stoutly March is better when runners take too long to reach loot. Carrying Capacity is better when they reach loot but cannot clear piles fast enough. Most early runs want both.
+
+### When should I buy miner damage?
+
+Buy miner damage when the field is clean and mountain HP is the main slowdown.
+
+### Should I build Flameworks or Demolition Shack first?
+
+Flameworks is steadier and easier for beginners. Demolition Shack is stronger but more chaotic. If your runners are already behind, delay both.
+
+### What should I spend my first Mithril on?
+
+If runners keep getting stunned, save for Mithril Chainmail. If mountain HP is the wall, consider Mithril Pickaxes. If pickup speed is the problem, look for Magnetic Gloves. If you are unsure, hold the Mithril until the blocker is clear.
+
+### When should I Prestige for the first time?
+
+Prestige when your current run slows down and a permanent upgrade will make the next run faster.
+
+### Is Wakeful Slap Mastery worth it?
+
+Yes, if you actively watch the field and runner stuns often cause loot piles or ore reclaim. If you mostly idle, starting runners, speed, carry, or Mithril support may be better.

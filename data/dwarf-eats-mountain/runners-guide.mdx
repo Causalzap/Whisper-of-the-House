@@ -1,0 +1,597 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const problemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "meaning", label: "What It Means" },
+  { key: "fix", label: "Fix First" },
+];
+
+export const problemRows = [
+  {
+    problem: "Gold sits on the ground",
+    meaning: "Your damage is creating drops faster than runners can collect them.",
+    fix: "Buy Stoutly March, Carrying Capacity, or more runners before adding damage.",
+  },
+  {
+    problem: "Runners reach loot but piles do not shrink",
+    meaning: "They are moving, but each trip carries too little.",
+    fix: "Upgrade Carrying Capacity and later Mithril runner upgrades.",
+  },
+  {
+    problem: "Runners are always crossing the field",
+    meaning: "Travel time is the bottleneck.",
+    fix: "Upgrade Stoutly March and use manual ore pushing when needed.",
+  },
+  {
+    problem: "Runners keep getting knocked out",
+    meaning: "Rocks, monsters, calamities, or explosions are interrupting delivery.",
+    fix: "Buy Dodgy Profession, Wakeful Slap Mastery, Mithril Chainmail, or safer builds.",
+  },
+  {
+    problem: "The mountain starts reclaiming ores",
+    meaning: "Too many unclaimed drops are sitting on the field.",
+    fix: "Stop adding damage, clear the field, improve runner capacity, and use Looming Motivation later.",
+  },
+  {
+    problem: "Rare drops are left behind",
+    meaning: "Heavy or distant loot is not being prioritized well.",
+    fix: "Push valuable drops manually and improve carry / gathering speed.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "upgrade", label: "Upgrade" },
+  { key: "Effect", label: "Effect" },
+  { key: "buyWhen", label: "Buy When" },
+  { key: "waitIf", label: "Wait If" },
+];
+
+export const upgradeRows = [
+  {
+    upgrade: "Stoutly March",
+    Effect: "Increases runner speed.",
+    buyWhen: "Runners spend too long crossing the field.",
+    waitIf: "Runners are already waiting around with no loot to collect.",
+  },
+  {
+    upgrade: "Carrying Capacity",
+    Effect: "Lets each runner carry more ore per trip.",
+    buyWhen: "Runners touch loot but cannot clear piles quickly.",
+    waitIf: "Runners rarely reach their carry limit.",
+  },
+  {
+    upgrade: "Dodgy Profession",
+    Effect: "Adds dodge chance against falling rocks and monsters.",
+    buyWhen: "Runners keep getting stunned before delivering.",
+    waitIf: "The field is safe and your real bottleneck is speed or capacity.",
+  },
+  {
+    upgrade: "Prospector's Massive Nose",
+    Effect: "Adds a chance to find random gems when picking up non-gem ore.",
+    buyWhen: "Collection is stable and you want more value from runner trips.",
+    waitIf: "Gold is already piling up and basic collection is behind.",
+  },
+  {
+    upgrade: "Wakeful Slap Mastery",
+    Effect: "Makes slapping stunned runners much more effective.",
+    buyWhen: "You actively watch the field and runners are often knocked out.",
+    waitIf: "You mostly idle or runners are not getting stunned often.",
+  },
+  {
+    upgrade: "Looming Motivation",
+    Effect:
+      "Gives temporary runner carry when there are over 350 uncollected ores and the mountain starts reclaiming them.",
+    buyWhen: "Ore overflow and reclaim are common problems in your runs.",
+    waitIf: "You rarely let the field get that crowded.",
+  },
+];
+
+export const stageColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "runnerGoal", label: "Runner Goal" },
+  { key: "priority", label: "Priority" },
+];
+
+export const stageRows = [
+  {
+    stage: "First mountain",
+    runnerGoal: "Get 3 runners working as soon as the Great Maw is built.",
+    priority: "Basic delivery, manual pushing, and waking stunned runners.",
+  },
+  {
+    stage: "Early game",
+    runnerGoal: "Keep the field mostly clear while miner damage grows.",
+    priority: "Stoutly March, Carrying Capacity, and enough runners to prevent piles.",
+  },
+  {
+    stage: "First damage branch",
+    runnerGoal: "Survive the extra drops and chaos from Flamers or Demo Dwarves.",
+    priority: "Dodge, slap efficiency, and not overbuying damage.",
+  },
+  {
+    stage: "Mid game",
+    runnerGoal: "Handle rare drops, dens, heavier ore, and bigger loot bursts.",
+    priority: "Mithril Chainmail, Magnetic Gloves, and Prestige upgrades.",
+  },
+  {
+    stage: "Overflow stage",
+    runnerGoal: "Prevent the mountain from reclaiming too much value.",
+    priority: "Looming Motivation, better carry, manual cleanup, and later collection systems.",
+  },
+  {
+    stage: "Late game",
+    runnerGoal: "Use runners only where they still matter, while other systems help move loot.",
+    priority: "Guzzler-style tools, physics movement, Luck, artifacts, and build-specific scaling.",
+  },
+];
+
+export const mithrilColumns = [
+  { key: "upgrade", label: "Mithril Upgrade" },
+  { key: "helpsWith", label: "Helps With" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const mithrilRows = [
+  {
+    upgrade: "Mithril Chainmail",
+    helpsWith: "Stuns, falling rocks, monsters, friendly explosions",
+    why: "Runners lose less time when the field becomes dangerous.",
+  },
+  {
+    upgrade: "Magnetic Gloves",
+    helpsWith: "Ore gathering speed",
+    why: "Runners pick up loot faster, which matters when piles get dense.",
+  },
+  {
+    upgrade: "Runner speed bonuses",
+    helpsWith: "Travel time",
+    why: "More speed reduces the dead time between pickup and stash delivery.",
+  },
+  {
+    upgrade: "Runner carry bonuses",
+    helpsWith: "Large piles and heavy drops",
+    why: "More carry means fewer trips for the same field of loot.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**If gold is not being collected in Dwarf Eats Mountain, your runners are behind your damage. First upgrade Stoutly March for speed and Carrying Capacity for bigger deliveries. If runners keep getting stunned, add Dodgy Profession, Wakeful Slap Mastery, or Mithril Chainmail.**
+
+Do not keep buying damage while the ground is already full of loot. A clean field means you can scale damage. A messy field means your next upgrade should help runners, ore movement, or collection.
+</GuideQuickAnswer>
+
+<GuideCallout title="Runner rule">
+Look at the ground, not just your damage number. If gold, gems, or Mithril are sitting under the mountain, your next upgrade is probably collection.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-great-m-runners.webp"
+    alt="Dwarf Eats Mountain Great Maw and runners collecting ore in the opening tutorial."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Great Maw is where your economy becomes real. Runners turn loose drops into gold you can actually spend.
+  </figcaption>
+</figure>
+
+<h2 id="why-gold-is-not-collected">Why gold is not being collected</h2>
+
+When gold is not being collected, it usually means your **damage is ahead of your delivery system**.
+
+Miners, Flamers, Demo Dwarves, Ballistas, Lasers, and clicks all create more drops. Runners are the part of the colony that converts those drops into usable gold. If damage grows faster than runner speed, carry, safety, and gathering, the ground starts filling up.
+
+That is why a run can feel slower after buying a big damage upgrade. You are breaking more rock, but the value is not reaching the Great Maw.
+
+Use this table to diagnose the problem quickly:
+
+<GuideTable
+  caption="Dwarf Eats Mountain runner problems and the first fix to try."
+  columns={problemColumns}
+  rows={problemRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="runner-upgrade-priority">Best runner upgrade priority</h2>
+
+For most early runs, the runner upgrade order is:
+
+1. **Stoutly March**
+2. **Carrying Capacity**
+3. **Dodgy Profession**
+4. **Prospector's Massive Nose**
+5. **Wakeful Slap Mastery**
+6. **Looming Motivation**
+7. **Mithril Chainmail / Magnetic Gloves later**
+
+This is not a fixed rule. It depends on what is actually slowing the run.
+
+<GuideTable
+  caption="Dwarf Eats Mountain runner upgrades, effects, and when to buy them."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+<h2 id="stoutly-march">Stoutly March: when speed is the problem</h2>
+
+Buy **Stoutly March** when runners are spending too much time walking between the loot pile and the Great Maw.
+
+This is usually the safest first runner upgrade because every delivery route gets better with speed. Faster runners also recover from bad field layouts more easily because they spend less time exposed to falling rocks and monsters.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-runner-stoutly-march.webp"
+    alt="Dwarf Eats Mountain Stoutly March runner speed upgrade."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Stoutly March is the cleanest early runner upgrade when the field is not too crowded yet, but every trip takes too long.
+  </figcaption>
+</figure>
+
+Buy speed first when:
+
+- runners are crossing long distances,
+- loot is spread across the field,
+- you are manually pushing ore because runners are too slow,
+- or runners are not overloaded but still take too long to deliver.
+
+<h2 id="carrying-capacity">Carrying Capacity: when piles are too big</h2>
+
+Buy **Carrying Capacity** when runners reach loot but do not clear it fast enough.
+
+This is different from speed. Speed fixes travel time. Carry fixes trip value.
+
+If runners keep walking back and forth while the pile barely shrinks, speed alone will not solve it. They need to carry more per delivery.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-runner-carrying-capacity.webp"
+    alt="Dwarf Eats Mountain Carrying Capacity runner upgrade."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Carrying Capacity becomes better as loot piles get denser and individual trips stop clearing enough value.
+  </figcaption>
+</figure>
+
+Buy carrying capacity when:
+
+- the field is crowded,
+- runners are making trips but piles stay large,
+- rare drops are heavy,
+- or ore reclaim is starting to threaten your income.
+
+<h2 id="dodge-and-stuns">Dodgy Profession: when runners keep getting stunned</h2>
+
+Runners do not only lose time by walking slowly. They also lose time by getting knocked out.
+
+Falling rocks, monsters, goblins, boulders, calamities, Demo explosions, and general field chaos can all interrupt collection. When runners are stunned often, speed and carry stop mattering because the runner is not moving at all.
+
+That is when **Dodgy Profession** becomes valuable.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-runner-dodgy-profession.webp"
+    alt="Dwarf Eats Mountain Dodgy Profession runner dodge upgrade."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dodgy Profession is a safety upgrade. Buy it when rocks and monsters are stopping deliveries, not just because it is available.
+  </figcaption>
+</figure>
+
+Buy dodge when:
+
+- runners fall down before reaching the stash,
+- rockfalls are common,
+- dens or monsters are active,
+- Demo Dwarves are creating friendly-fire chaos,
+- or your build relies on runners staying alive through dangerous fields.
+
+<h2 id="prospectors-nose">Prospector's Massive Nose: when collection is stable</h2>
+
+**Prospector's Massive Nose** gives runners a chance to find random gems when they pick up non-gem ore. It is a value upgrade, not a basic delivery fix.
+
+That means it is good after the core runner economy already works.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-runner-prospectors-nose.webp"
+    alt="Dwarf Eats Mountain Prospector's Massive Nose runner gem chance upgrade."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Prospector's Massive Nose is best after your runners can already keep up, because it increases value rather than fixing basic delivery.
+  </figcaption>
+</figure>
+
+Buy it when:
+
+- gold is being collected cleanly,
+- runners are active but not overwhelmed,
+- you want more gem value,
+- or your build has Luck support.
+
+Wait on it when:
+
+- gold is piling up,
+- rare drops are being left behind,
+- runners are constantly stunned,
+- or the mountain is already reclaiming ores.
+
+<h2 id="manual-pushing">Manual pushing: when to help runners yourself</h2>
+
+Manual pushing is strongest in the opening and during rare-drop emergencies.
+
+Use your cursor to push loot when:
+
+- a diamond, Mithril, artifact, or large gold chunk lands far away,
+- runners are stunned,
+- a pile is close to the Great Maw but not quite moving,
+- or you need a quick purchase and the value is already on the ground.
+
+Do not let manual pushing hide a bad build. If you have to push every pile yourself, your runner economy is behind.
+
+<h2 id="ore-reclaim">Ore reclaim: what it means when the mountain takes loot back</h2>
+
+Ore reclaim is the game telling you that the field has become too crowded. When too many unclaimed ores sit on the ground, the mountain can start reclaiming them.
+
+That is a serious warning. Reclaimed ore is value you created but failed to convert.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-calamity-ore-reclaim.webp"
+    alt="Dwarf Eats Mountain calamity and ore reclaim warning with unclaimed ores on the field."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ore reclaim usually means your build has too much production and not enough collection.
+  </figcaption>
+</figure>
+
+When reclaim starts:
+
+1. Stop buying damage for a moment.
+2. Buy runner speed or carry.
+3. Wake stunned runners.
+4. Push high-value drops manually.
+5. Consider Prestige upgrades that help when the field overflows.
+6. Delay chaotic damage like Demo Dwarves if they make the pile worse.
+
+A crowded field can also cause frame drops. If the game slows down, disable heavy visual options such as shaders or particles, clear the field, then wait before adding more damage.
+
+<h2 id="looming-motivation">Looming Motivation: the anti-overflow Prestige upgrade</h2>
+
+**Looming Motivation** is a strong Prestige upgrade for players whose runs often collapse into ore overflow.
+
+It activates when there are over **350 uncollected ores** and the mountain starts reclaiming them. When that happens, runners gain temporary carrying capacity when they return to stash.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-looming-motivation.webp"
+    alt="Dwarf Eats Mountain Looming Motivation Prestige upgrade for over 350 uncollected ores."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Looming Motivation does not replace good runner upgrades, but it helps rescue runs that overflow into mountain reclaim.
+  </figcaption>
+</figure>
+
+This upgrade is best if:
+
+- your damage spikes create huge loot piles,
+- you often see reclaim warnings,
+- your runners recover too slowly after a bad calamity,
+- or you want a safety net while learning stronger builds.
+
+It is less important if your field usually stays clean.
+
+<h2 id="how-many-runners">How many runners do you need?</h2>
+
+There is no perfect fixed number. Use the field as your answer.
+
+You need more runners or better runner upgrades when:
+
+- gold stays on the ground after a few deliveries,
+- runners are all busy and the pile keeps growing,
+- rare drops sit far from the Great Maw,
+- ore reclaim starts,
+- or new damage buildings immediately create a backlog.
+
+You probably do not need more runners yet when:
+
+- the field is mostly clear,
+- runners are idle,
+- runners are not reaching their carry limit,
+- or mountain HP is the actual wall.
+
+Use this stage table as a practical guide:
+
+<GuideTable
+  caption="How runner needs change through a Dwarf Eats Mountain run."
+  columns={stageColumns}
+  rows={stageRows}
+/>
+
+<h2 id="damage-vs-runners">Should you buy damage or runners next?</h2>
+
+Use this rule:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ul className="space-y-2 text-sm leading-7 text-slate-200">
+    <li><strong>Clean field, slow mountain?</strong> Buy damage.</li>
+    <li><strong>Messy field, slow delivery?</strong> Buy runners.</li>
+    <li><strong>Runners reaching loot but not clearing it?</strong> Buy carrying capacity.</li>
+    <li><strong>Runners walking too long?</strong> Buy speed.</li>
+    <li><strong>Runners getting knocked out?</strong> Buy dodge, slap efficiency, or stun protection.</li>
+    <li><strong>Reclaim warning appears?</strong> Stop adding damage and fix collection.</li>
+  </ul>
+</div>
+
+This is the simplest way to avoid the biggest beginner trap: buying damage because the run feels slow, when the real problem is that your existing damage is not being collected.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="mithril-runner-upgrades">Mithril upgrades for runners</h2>
+
+Once you reach Mithril systems, runners get better tools than basic speed and carry.
+
+The two important runner upgrades to watch for are **Mithril Chainmail** and **Magnetic Gloves**.
+
+<GuideTable
+  caption="Mithril runner upgrades and why they matter."
+  columns={mithrilColumns}
+  rows={mithrilRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-mithril-upgrades-chain-mail.webp"
+    alt="Dwarf Eats Mountain Mithril Forging upgrades including Mithril Chainmail and Magnetic Gloves for runners."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mithril upgrades are the point where runner fixes become more specialized: shorter stuns, better gathering, extra speed, and more carrying strength.
+  </figcaption>
+</figure>
+
+<h3 id="mithril-chainmail">Mithril Chainmail</h3>
+
+Mithril Chainmail helps when runners are losing too much time to danger. It reduces stun problems and adds protection against threats like monsters, falling rocks, friendly dynamite, and Wind Bomb chaos.
+
+Prioritize it when your build uses explosive damage or when calamities keep interrupting deliveries.
+
+<h3 id="magnetic-gloves">Magnetic Gloves</h3>
+
+Magnetic Gloves help with ore gathering speed. They are better when runners are alive and moving, but dense piles take too long to pick up.
+
+Prioritize them when the runners reach the pile but the pickup step itself feels slow.
+
+<h2 id="commit-to-runner-build">When to hard-commit to a runner build</h2>
+
+Do not turn every run into a pure runner build. Most early runs should stay balanced: enough runners to collect, then enough damage to keep clearing mountains.
+
+Hard-commit to runner economy when collection is the thing that keeps ending your runs.
+
+Good signs are:
+
+- every damage upgrade immediately creates a loot backlog,
+- the mountain starts reclaiming ores often,
+- rare drops sit on the ground long enough to feel risky,
+- runners are always busy and never idle,
+- Demo or Flamer damage makes the field worse instead of faster,
+- or your next Prestige choice is clearly runner-related.
+
+Stay balanced when:
+
+- the field is mostly clean,
+- runners have idle time,
+- mountain HP is the main wall,
+- or dens and veins need more targeting instead of more carry.
+
+The goal is not “buy every runner upgrade.” The goal is to stop losing value before it reaches the Great Maw.
+
+<h2 id="demo-flamer-warning">Why Demo and Flamer builds can break your runner economy</h2>
+
+Flamers and Demo Dwarves are strong, but they increase pressure on collection.
+
+Flamers create steady extra damage, which means more drops. Demo Dwarves add burst and physics chaos, which can throw loot around, wake up danger, or stun runners if your safety is weak.
+
+Before adding a new damage branch, ask:
+
+- Are runners already busy?
+- Is the field already messy?
+- Do rare drops get left behind?
+- Are stunned runners common?
+- Is ore reclaim already starting?
+
+If the answer is yes, improve collection before adding more damage.
+
+For damage paths, use the <Link href="/dwarf-eats-mountain/best-builds">Best Builds Guide</Link>.
+
+
+<h2 id="recommended-fix-order">Recommended fix order when gold piles up</h2>
+
+Once you have decided that collection is the problem, use this as the execution order:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ol className="list-decimal space-y-2 pl-5 text-sm leading-7 text-slate-200">
+    <li>Stop buying damage for a moment.</li>
+    <li>Push nearby rare drops toward the Great Maw manually.</li>
+    <li>Buy <strong>Stoutly March</strong> if runners are too slow.</li>
+    <li>Buy <strong>Carrying Capacity</strong> if piles are too large.</li>
+    <li>Buy <strong>Dodgy Profession</strong> if runners are getting stunned.</li>
+    <li>Slap stunned runners when you see them down.</li>
+    <li>Use <strong>Looming Motivation</strong> later if reclaim keeps happening.</li>
+    <li>Unlock Mithril runner upgrades when basic upgrades stop being enough.</li>
+    <li>Add more damage only after the field is mostly clean again.</li>
+  </ol>
+</div>
+
+<h2 id="what-to-read-next">What to read next</h2>
+
+If you are still setting up your first run, use the <Link href="/dwarf-eats-mountain/build-order">Beginner Build Order</Link>.
+
+If your run is slowing down and you are thinking about resetting, use the <Link href="/dwarf-eats-mountain/prestige-ascension-guide">Prestige and Ascension Guide</Link>.
+
+If you want to understand Mithril, Mountain Souls, and artifacts, use the <Link href="/dwarf-eats-mountain/artifacts-mithril-guide">Artifacts and Mithril Guide</Link>.
+
+For the full route, return to the <Link href="/dwarf-eats-mountain">Dwarf Eats Mountain Guide Hub</Link>.
+
+<h2 id="faq">FAQ</h2>
+
+### Why is my gold not being collected in Dwarf Eats Mountain?
+
+Your runners are usually too slow, overloaded, stunned, or outpaced by your damage. Buy Stoutly March, Carrying Capacity, Dodgy Profession, or more runners before adding more damage.
+
+### How many runners do I need?
+
+There is no fixed number. If gold and rare drops sit on the ground, you need more collection. If runners are idle and the field is clean, you can usually buy damage instead.
+
+### Is Stoutly March or Carrying Capacity better?
+
+Speed fixes travel time. Carry fixes pile size. Most early runs need both.
+
+### When should I buy Dodgy Profession?
+
+Buy Dodgy Profession when falling rocks, monsters, goblins, calamities, or explosions keep stunning runners before they can deliver.
+
+### Is Prospector's Massive Nose worth it early?
+
+It is good after basic collection is stable. Do not buy it before speed and carry if gold is already piling up.
+
+### What does Looming Motivation do?
+
+Looming Motivation helps when there are over 350 uncollected ores and the mountain starts reclaiming them. It gives runners temporary carrying capacity when they return to stash.
+
+### How do I stop the mountain from reclaiming ore?
+
+Reduce the pile. Stop buying damage, push valuable drops manually, upgrade runner speed and carry, wake stunned runners, and use Prestige or Mithril upgrades that improve collection.
+
+### Are Mithril runner upgrades worth it?
+
+Yes, once you unlock them. Mithril Chainmail helps with stun and danger. Magnetic Gloves help runners gather ore faster. Both are strong when basic runner upgrades are no longer enough.

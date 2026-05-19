@@ -1,0 +1,727 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const endgameStageColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "whatChanges", label: "What Changes" },
+  { key: "mainGoal", label: "Main Goal" },
+];
+
+export const endgameStageRows = [
+  {
+    stage: "Early mountains",
+    whatChanges: "You learn damage, runners, artifacts, calamities, and your first Prestige.",
+    mainGoal: "Build a stable loop that breaks mountains and collects loot cleanly.",
+  },
+  {
+    stage: "Mid-game",
+    whatChanges:
+      "Flamers, Demo Dwarves, Ballistas, Scientists, Lasers, Mithril, Forge, and Spelunker's Guild routes start to matter.",
+    mainGoal: "Choose a build direction instead of buying every upgrade randomly.",
+  },
+  {
+    stage: "Mountain 50+",
+    whatChanges:
+      "Drop quality and collection pressure change. Multi-ore hits become less reliable and single-ore outcomes become more common.",
+    mainGoal: "Improve Luck, artifacts, Mithril, runners, and collection systems before forcing more damage.",
+  },
+  {
+    stage: "Goblin King",
+    whatChanges:
+      "The first boss acts as an early endgame damage check with a time limit.",
+    mainGoal: "Kill it within the limit for treasure and the artifact needed for later boss progression.",
+  },
+  {
+    stage: "T6 Prestige",
+    whatChanges:
+      "Prestige becomes a long-term scaling layer with upgrades such as Speleological Domination, Buried Heirlooms, Greyglitter Leylines, Orequake Finger, Hand of God, and Yeeti Arms.",
+    mainGoal: "Focus T6 upgrades around the wall your build actually hits.",
+  },
+  {
+    stage: "Ascension",
+    whatChanges:
+      "Earlier Prestige progress resets, but T6 upgrades stay and Ascension Rank buffs T6 upgrade power.",
+    mainGoal: "Ascend only when your T6 base is strong enough to make the next cycle better.",
+  },
+  {
+    stage: "Mountain 100 / True Ending",
+    whatChanges:
+      "The run becomes about final checks, World Spire progress, True Ending, and Endless Mode.",
+    mainGoal: "Bring a complete scaling route, not a scattered collection of upgrades.",
+  },
+];
+
+export const mountain50Columns = [
+  { key: "problem", label: "What Changes After Mountain 50" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "response", label: "How To Respond" },
+];
+
+export const mountain50Rows = [
+  {
+    problem: "Multi-ore drops become less reliable",
+    whyItMatters:
+      "The game interpolates drop outcomes as you move toward Mountain 100, reducing the value of simple hit spam.",
+    response:
+      "Add Luck, Jackpot-style scaling, artifact support, and rare-resource routes instead of only more attacks.",
+  },
+  {
+    problem: "Single-ore outcomes become more common",
+    whyItMatters:
+      "By Mountain 100, single-ore outcomes can represent a much larger share of hits, so each hit needs better value.",
+    response:
+      "Scale hit quality through artifacts, Luck, Mithril routes, and T6 upgrades.",
+  },
+  {
+    problem: "Collection pressure rises",
+    whyItMatters:
+      "Even if each hit produces less burst value, long fights still create fields that runners must clear.",
+    response:
+      "Use runner upgrades, Gorilla Arms, Guzzler-style collection, Magnetic Gloves, and overflow support.",
+  },
+  {
+    problem: "Random damage upgrades feel weaker",
+    whyItMatters:
+      "Late mountains punish builds that do not have a focused route.",
+    response:
+      "Commit to one main damage or value engine and support it with Prestige, Mithril, and artifacts.",
+  },
+];
+
+export const endgameCheckColumns = [
+  { key: "check", label: "Endgame Check" },
+  { key: "youNeed", label: "You Need" },
+  { key: "fixIfFailing", label: "If You Are Failing" },
+];
+
+export const endgameCheckRows = [
+  {
+    check: "Mountain HP",
+    youNeed: "A focused damage route such as Flamers, Demo burst, Ballistas, Lasers, Runes, or T6 damage scaling.",
+    fixIfFailing:
+      "Stop spreading upgrades. Pick the route that is already carrying your run and stack support around it.",
+  },
+  {
+    check: "Gold and ore collection",
+    youNeed:
+      "Runners, carrying capacity, dodge, Magnetic Gloves, Gorilla Arms, Guzzler-style pickup, and overflow support.",
+    fixIfFailing:
+      "Stabilize collection before adding another damage branch.",
+  },
+  {
+    check: "Rare-resource flow",
+    youNeed:
+      "Mithril, Mountain Souls, artifacts, Luck, Spelunker's Guild, and den / spelunking reward support.",
+    fixIfFailing:
+      "Move toward Mithril-luck, artifact-den-luck, or Spelunker's Guild systems instead of treating gold as the only economy.",
+  },
+  {
+    check: "Dens and boss access",
+    youNeed:
+      "Targeted pressure from Ballistas, Demo burst, Lasers, Monster Bane-style support, or boss-focused artifacts.",
+    fixIfFailing:
+      "Add targeting instead of only scaling basic miner damage.",
+  },
+  {
+    check: "Reset scaling",
+    youNeed:
+      "Prestige upgrades that support your build, then T6 upgrades that keep scaling into Ascension.",
+    fixIfFailing:
+      "Use PP around the build you are actually playing, then ascend only after T6 value is worth keeping.",
+  },
+];
+
+export const bossPrepColumns = [
+  { key: "bossProblem", label: "Goblin King Problem" },
+  { key: "likelyCause", label: "Likely Cause" },
+  { key: "prepareWith", label: "Prepare With" },
+];
+
+export const bossPrepRows = [
+  {
+    bossProblem: "You cannot kill it within the time limit",
+    likelyCause: "Your build does not have enough focused damage yet.",
+    prepareWith:
+      "Flamer scaling, Demo burst, Ballistas, Lasers, Rune of Might, boss damage artifacts, or T6 damage focus.",
+  },
+  {
+    bossProblem: "You reach the fight but the run economy is weak",
+    likelyCause: "You pushed to the boss without enough income or rare-resource support.",
+    prepareWith:
+      "Better runners, Mithril upgrades, artifacts that match your build, and a cleaner Prestige route.",
+  },
+  {
+    bossProblem: "Dens or enemies disrupt the setup",
+    likelyCause: "You lack targeting or monster control.",
+    prepareWith:
+      "Ballistas, Monster Bane-style support, Demo burst, runner safety, and den-control upgrades.",
+  },
+];
+
+export const unitColumns = [
+  { key: "unit", label: "Endgame Unit / System" },
+  { key: "Role", label: "Role" },
+  { key: "whenItMatters", label: "When It Matters" },
+];
+
+export const unitRows = [
+  {
+    unit: "Gorilla Arms",
+    Role: "Late collection and physical pickup support",
+    whenItMatters:
+      "When ordinary runners struggle to keep up with large fields or heavy drops.",
+  },
+  {
+    unit: "Guzzler",
+    Role: "High-value collection / suction-style economy support",
+    whenItMatters:
+      "When the field is too crowded and you need stronger collection than normal runners provide.",
+  },
+  {
+    unit: "Spelunker's Guild",
+    Role: "Artifact, den, Mithril-luck, artifact-den-luck, and spelunking support",
+    whenItMatters:
+      "When rare-resource quality matters more than simple gold income.",
+  },
+];
+
+export const t6Columns = [
+  { key: "upgrade", label: "T6 Upgrade / Route" },
+  { key: "likelyRole", label: "Likely Role" },
+  { key: "useWhen", label: "Use When" },
+];
+
+export const t6Rows = [
+  {
+    upgrade: "Speleological Domination",
+    likelyRole: "Spelunking / den / resource-route scaling",
+    useWhen:
+      "Spelunker's Guild, den rewards, artifacts, or rare-resource routing are central to your build.",
+  },
+  {
+    upgrade: "Buried Heirlooms",
+    likelyRole: "Artifact or inherited value scaling",
+    useWhen:
+      "Artifact starts, artifact value, or long-cycle rewards are carrying your progression.",
+  },
+  {
+    upgrade: "Greyglitter Leylines",
+    likelyRole: "Mithril / rare-resource scaling",
+    useWhen:
+      "Mithril, Forge upgrades, Mountain Souls, or resource quality are blocking progress.",
+  },
+  {
+    upgrade: "Orequake Finger",
+    likelyRole: "Manual ore force / active ore control",
+    useWhen:
+      "You actively push ore and rare drops into the Great Maw and want that control to scale.",
+  },
+  {
+    upgrade: "Hand of God",
+    likelyRole: "High-impact active or global scaling",
+    useWhen:
+      "Your build benefits from stronger active control or broad late-game power.",
+  },
+  {
+    upgrade: "Yeeti Arms",
+    likelyRole: "Physical force / collection / heavy interaction scaling",
+    useWhen:
+      "Your endgame wall is tied to moving, collecting, or controlling large amounts of loot.",
+  },
+];
+
+export const thresholdColumns = [
+  { key: "milestone", label: "Milestone" },
+  { key: "roughBenchmark", label: "Rough Benchmark" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const thresholdRows = [
+  {
+    milestone: "First useful Prestige",
+    roughBenchmark:
+      "A good observed first-reset target is around 6-8 PP, or enough PP to buy several T1 upgrades that fix your opening.",
+    whatItMeans:
+      "Resetting at 1-2 PP is usually too early unless the run is completely stuck. Around 6-8 PP lets you buy meaningful start, runner, housing, or Mithril support.",
+  },
+  {
+    milestone: "Tier 2 Prestige checkpoint",
+    roughBenchmark:
+      "Tier 2 appears around the 12 PP spent / required point shown on the Prestige screen.",
+    whatItMeans:
+      "Before this point, focus on the T1 upgrades that make every new run faster. After this point, start thinking about build-specific Prestige routes.",
+  },
+  {
+    milestone: "Ore overflow danger",
+    roughBenchmark:
+      "350+ uncollected ores is the key visible threshold for Looming Motivation and mountain reclaim pressure.",
+    whatItMeans:
+      "If you regularly reach this threshold, your endgame issue is collection, not damage. Add runner carry, late collection tools, or overflow support.",
+  },
+  {
+    milestone: "Artifact and Mountain Soul cycle",
+    roughBenchmark:
+      "Every 3rd mountain grants an artifact choice; every 4th mountain grants a Mountain Soul.",
+    whatItMeans:
+      "Short pushes can be worth delaying Prestige if the next artifact or soul is close and will improve the next cycle.",
+  },
+  {
+    milestone: "Mountain 50+ planning",
+    roughBenchmark:
+      "Use Mountain 50 as the point where drop quality, Luck, Mithril, Spelunker's Guild, and collection start matter more.",
+    whatItMeans:
+      "The exact 50-100 drop curve should be sourced from patch notes, not video timestamps. Treat this as a system shift, not a video-derived threshold.",
+  },
+  {
+    milestone: "First Ascension",
+    roughBenchmark:
+      "Do not quantify this from the current videos. Use the safer rule: Ascend only after T6 upgrades are carrying your build.",
+    whatItMeans:
+      "The current transcripts do not provide enough evidence for 'N Prestiges before Ascension.' Avoid inventing a number until there is stronger data.",
+  },
+];
+
+export const ascensionColumns = [
+  { key: "rule", label: "Ascension Rule" },
+  { key: "meaning", label: "Meaning" },
+];
+
+export const ascensionRows = [
+  {
+    rule: "Reach T6 first",
+    meaning: "Ascension belongs to the late Prestige layer, not the early reset loop.",
+  },
+  {
+    rule: "Earlier Prestige progress is wiped",
+    meaning: "Do not ascend while relying only on T1-T5 comfort upgrades.",
+  },
+  {
+    rule: "T6 upgrades are kept",
+    meaning: "Your T6 choices become the foundation of the next cycle.",
+  },
+  {
+    rule: "Ascension Rank buffs T6 upgrades",
+    meaning: "Higher Ascension Rank makes each T6 upgrade stronger in later cycles.",
+  },
+  {
+    rule: "Unspent PP can be lost",
+    meaning: "Spend deliberately before ascending instead of hoarding points.",
+  },
+];
+
+export const endingColumns = [
+  { key: "question", label: "Question" },
+  { key: "answer", label: "Answer" },
+];
+
+export const endingRows = [
+  {
+    question: "Does Dwarf Eats Mountain have an ending?",
+    answer:
+      "Yes. The game points toward World Spire, Mountain 100, True Ending, and then Endless-style progression.",
+  },
+  {
+    question: "Is World Spire just another mountain?",
+    answer:
+      "No. It is the long-term target the tutorial points you toward after repeated progression layers.",
+  },
+  {
+    question: "Is Goblin King required?",
+    answer:
+      "The fight is the first boss damage check. Failing it does not stop normal progress, but killing it gives treasure and an artifact needed for later boss progression.",
+  },
+  {
+    question: "What changes after True Ending?",
+    answer:
+      "True Ending is a major milestone. Endless Mode shifts the goal toward deeper optimization and scaling.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyBad", label: "Why It Hurts" },
+  { key: "betterMove", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Treating Goblin King like a normal mountain",
+    whyBad:
+      "The fight has a time limit, so weak focused damage can fail even if your normal run still progresses.",
+    betterMove:
+      "Prepare a real damage route, then return when the timer is realistic.",
+  },
+  {
+    mistake: "Ignoring Mountain 50-100 drop changes",
+    whyBad:
+      "Later mountains can feel worse even with more damage because hit value and drop outcomes change.",
+    betterMove:
+      "Scale Luck, artifacts, Mithril, and drop quality instead of only adding attacks.",
+  },
+  {
+    mistake: "Skipping Spelunker's Guild routes",
+    whyBad:
+      "Artifact-den-luck, Mithril-luck, and spelunking rewards can become major endgame value sources.",
+    betterMove:
+      "Add Spelunker's Guild support when rare-resource quality matters.",
+  },
+  {
+    mistake: "Using only basic runners forever",
+    whyBad:
+      "Late fields can outgrow normal delivery tools.",
+    betterMove:
+      "Use Gorilla Arms, Guzzler-style collection, Magnetic Gloves, and overflow support when collection becomes the wall.",
+  },
+  {
+    mistake: "Ascending with a weak T6 base",
+    whyBad:
+      "Ascension keeps T6 upgrades, so weak T6 choices make the next cycle feel worse.",
+    betterMove:
+      "Focus T6 first, then Ascend when the kept upgrades are worth amplifying.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Dwarf Eats Mountain endgame starts when basic damage and runners stop being enough. From Mountain 50 onward, drop outcomes become less generous, collection pressure rises, and your build needs focused scaling through artifacts, Mithril, Spelunker's Guild, Luck, T6 Prestige, and eventually Ascension.**
+
+Goblin King is the first boss damage check: kill it within the time limit for treasure and the artifact needed for later boss progression. If you fail, you can keep progressing and come back stronger. For Mountain 100, World Spire, True Ending, and Endless Mode, build around a focused route instead of spreading upgrades everywhere.
+</GuideQuickAnswer>
+
+<GuideCallout title="Endgame note">
+Late-game routes are still being refined by players. This guide focuses on known mechanics and practical preparation: Mountain 50-100 drop pressure, Goblin King, Spelunker's Guild, T6 upgrades, Ascension, and True Ending.
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-world-spire-tutorial-goal.webp"
+    alt="Dwarf Eats Mountain tutorial goal pointing players toward the World Spire Mountain."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The game tells you the long-term goal early: eat mountains, collect artifacts, Prestige when needed, and keep pushing toward the World Spire.
+  </figcaption>
+</figure>
+
+<h2 id="does-it-have-an-ending">Does Dwarf Eats Mountain have an ending?</h2>
+
+Yes. Dwarf Eats Mountain points toward World Spire, Mountain 100, True Ending, and Endless Mode.
+
+The ending is not only a bigger health bar. By the time you push that far, the game is testing whether your whole route still scales: damage, collection, rare resources, artifacts, T6 upgrades, and Ascension Rank.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="endgame-progression">Endgame progression overview</h2>
+
+Use this table to see where each endgame layer starts.
+
+<GuideTable
+  caption="Dwarf Eats Mountain endgame progression from early mountains to True Ending."
+  columns={endgameStageColumns}
+  rows={endgameStageRows}
+/>
+
+For most players, endgame starts when basic upgrades stop solving the problem. Once a random damage purchase no longer fixes the run, you need a route.
+
+<h2 id="mountain-50-100">Mountain 50-100: why late mountains feel different</h2>
+
+Mountain 50 is where the game starts changing how valuable your hits feel.
+
+After Mountain 50, the chance for a single hit to drop multiple ores is interpolated downward as you move toward Mountain 100. By Mountain 100, single-ore outcomes become much more common, which means simple hit spam can feel weaker even if your damage number keeps rising.
+
+<GuideTable
+  caption="Why Mountain 50-100 changes endgame planning."
+  columns={mountain50Columns}
+  rows={mountain50Rows}
+/>
+
+This is why late-game progress often needs Luck, Jackpot-style value, artifact scaling, Mithril routes, and Spelunker's Guild support. You are not only trying to hit more. You are trying to make each hit and each reward matter more.
+
+<h2 id="world-spire">What is the World Spire?</h2>
+
+World Spire is the long-term mountain goal the tutorial points you toward.
+
+Treat it as the reason your reset and build systems exist. The first few runs teach you how to break mountains. The later game asks whether your build can keep scaling through lower drop quality, stronger targets, boss checks, rare resources, and Ascension cycles.
+
+Before pushing World Spire seriously, you should have:
+
+- one focused damage route,
+- a collection plan that survives large loot fields,
+- a Mithril and Mountain Soul plan,
+- artifacts that support the build instead of random bonuses,
+- and a T6 route worth carrying into Ascension.
+
+<h2 id="endgame-checklist">Endgame readiness checklist</h2>
+
+Use this table before pushing deep endgame.
+
+<GuideTable
+  caption="Dwarf Eats Mountain endgame readiness checks."
+  columns={endgameCheckColumns}
+  rows={endgameCheckRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-ballista-laser-flamer-chaos.webp"
+    alt="Dwarf Eats Mountain endgame-style build with ballistas, lasers, flamers, runners, and large loot piles."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Deep runs become a full-system test: weapons, runners, rare resources, artifacts, and scaling all have to agree with each other.
+  </figcaption>
+</figure>
+
+<h2 id="goblin-king">Goblin King: first boss damage check</h2>
+
+Goblin King is the first real boss check in Dwarf Eats Mountain.
+
+Think of it as a time-limited damage test, not a normal mountain. You need to kill it within the time limit to earn treasure and the specific artifact that opens the path toward later boss progression.
+
+Failing Goblin King does not end your run. You can keep progressing, strengthen your build, and return later. Treat a failed attempt as feedback: your route is not ready to beat the timer yet, but your run is not bricked.
+
+<GuideTable
+  caption="Goblin King preparation and failure points."
+  columns={bossPrepColumns}
+  rows={bossPrepRows}
+/>
+
+<h2 id="endgame-units">Endgame units and systems to watch</h2>
+
+Formal-release endgame is not only Miners, Runners, Demo Dwarves, and Flamers. Several later systems change how you handle resources, collection, and scaling.
+
+
+<GuideTable
+  caption="Dwarf Eats Mountain endgame units and systems."
+  columns={unitColumns}
+  rows={unitRows}
+/>
+
+<GuideCallout title="Formal-release unit note">
+Gyrocopter, Bulldozer, and Brewmaster are part of the formal-release unit pool, but their exact endgame roles are still being tested by players. They are worth tracking, but this guide only gives full route advice for systems with clearer current use: Gorilla Arms, Guzzler, Spelunker's Guild, Mithril, artifacts, T6, and Ascension.
+</GuideCallout>
+
+This is where the game becomes less like a basic idle build and more like a route planner. If your endgame issue is rare-resource quality, Spelunker's Guild may matter more than another damage unit. If your issue is collection, Gorilla Arms or Guzzler-style tools may matter more than another weapon.
+
+<h2 id="spelunkers-guild">Spelunker's Guild and rare-resource endgame</h2>
+
+Spelunker's Guild is one of the most important formal-release systems to watch in endgame.
+
+It connects to artifact-den-luck, Mithril-luck, spelunking rewards, and rare-resource flow. That means it belongs in routes where the problem is no longer basic gold, but the quality and consistency of the rewards your run produces.
+
+Use Spelunker's Guild when:
+
+- dens and artifacts are becoming central,
+- Mithril-luck starts affecting your route,
+- rare-resource flow is limiting Forge or T6 progress,
+- artifact-den rewards matter more than another generic damage upgrade,
+- or your build needs better long-term resource quality instead of only more raw damage.
+
+<h2 id="collection-endgame">Gorilla Arms, Guzzler, and late collection</h2>
+
+Normal runners can carry the early game, but late fields can outgrow them.
+
+That is where **Gorilla Arms** and **Guzzler-style** collection become important. They help when the issue is no longer “do I have enough runners?” but “can my build move huge amounts of loot quickly enough before reclaim, lag, or missed rare drops cost me value?”
+
+Use late collection tools when:
+
+- Mithril or artifacts sit on the field too long,
+- normal runner trips cannot keep up,
+- large loot piles build up after damage spikes,
+- or Mountain 50+ fights create long collection pressure.
+
+For detailed runner fixes, use the <Link href="/dwarf-eats-mountain/runners-guide">Runners Guide</Link>.
+
+<GuideCallout title="Collection note">
+Spelunker's Guild can be part of a rare-resource route while you improve collection, but rare drops still need to reach the Great Maw. If Mithril, artifacts, or high-value ores sit on the field too long, add late collection support before scaling reward quality further.
+</GuideCallout>
+
+<h2 id="mithril-and-forge">Mithril, Forge, and Mountain Souls in endgame</h2>
+
+Mithril becomes a route decision in endgame.
+
+Use Mithril and Mountain Souls for the system that moves your build forward: miner scaling, runner safety, Ballistas, Forge Artifact Ritual, runes, or rare-resource routes. If Spelunker's Guild is part of your plan, Mithril-luck and artifact-den-luck can also become part of the same long-term economy.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-mithril-upgrades-chain-mail.webp"
+    alt="Dwarf Eats Mountain Great Forge with Mithril Forging, runner upgrades, Ballista upgrades, and rune paths."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Endgame Mithril spending should support a direction: damage, runners, Ballistas, runes, rituals, or rare-resource flow.
+  </figcaption>
+</figure>
+
+For full resource planning, use the <Link href="/dwarf-eats-mountain/artifacts-mithril-guide">Artifacts and Mithril Guide</Link>.
+
+<h2 id="artifacts-for-endgame">Artifacts for endgame</h2>
+
+Endgame artifact choices should support your route, not just look rare.
+
+Pick artifacts based on the wall:
+
+- damage artifacts for timed checks like Goblin King,
+- runner artifacts when loot is not reaching the Great Maw,
+- Mithril or Mountain Soul artifacts when rare resources block the route,
+- Luck and Jackpot-style artifacts when hit quality matters,
+- den or artifact support when Spelunker's Guild routes are active,
+- PP or T6 support when the next reset matters more than the current push.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-artifact-choice-bottled-dwarf.webp"
+    alt="Dwarf Eats Mountain Bottled Dwarf artifact choice giving dwarf, Mithril, and PP."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Endgame artifact picks are strongest when they help both the current push and the next reset cycle.
+  </figcaption>
+</figure>
+
+<h2 id="t6-prestige">T6 Prestige upgrades</h2>
+
+T6 Prestige is where reset planning turns into long-term build identity.
+
+These are examples of T6 routes and how to think about them:
+
+<GuideTable
+  caption="Dwarf Eats Mountain T6 upgrade examples and when to use them."
+  columns={t6Columns}
+  rows={t6Rows}
+/>
+
+T6 upgrades do not need to be spread evenly. If one route is carrying your build, stack around that route instead of buying one of everything.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-prestige-upgrades-screen.webp"
+    alt="Dwarf Eats Mountain Prestige upgrade screen with PP and persistent upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    T6 is the layer where your build direction starts mattering more than broad comfort upgrades.
+  </figcaption>
+</figure>
+
+For PP spending and T6 reset planning, use the <Link href="/dwarf-eats-mountain/prestige-ascension-guide">Prestige and Ascension Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="rough-thresholds">Rough thresholds for Prestige, T6, and Ascension</h2>
+
+These are not hard rules or datamined requirements. Use them as planning checkpoints.
+
+<GuideTable
+  caption="Rough endgame thresholds for Dwarf Eats Mountain progression."
+  columns={thresholdColumns}
+  rows={thresholdRows}
+/>
+
+If a benchmark does not match your run, trust your bottleneck. A clean, focused build can push earlier. A scattered build can need many more resets.
+
+<h2 id="ascension">Ascension and Ascension Rank</h2>
+
+Ascension is the reset layer after T6 starts mattering.
+
+<GuideTable
+  caption="Dwarf Eats Mountain Ascension rules for endgame planning."
+  columns={ascensionColumns}
+  rows={ascensionRows}
+/>
+
+The key reason to care about Ascension Rank is simple: it directly buffs your T6 upgrades. More Rank makes the T6 upgrades you keep stronger in later cycles.
+
+<h2 id="true-ending-endless">True Ending and Endless Mode</h2>
+
+Mountain 100 is the major True Ending target. After that, the game can continue into Endless-style progression.
+
+<GuideTable
+  caption="Dwarf Eats Mountain ending and post-ending questions."
+  columns={endingColumns}
+  rows={endingRows}
+/>
+
+Treat True Ending as a milestone, not the end of optimization. Endless Mode is where route focus, T6 stacking, Ascension Rank, and resource quality become the real game.
+
+<h2 id="recommended-endgame-route">Recommended endgame route</h2>
+
+Use this route as a checklist:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ol className="list-decimal space-y-2 pl-5 text-sm leading-7 text-slate-200">
+    <li>Stabilize the early damage and runner loop.</li>
+    <li>Choose one main build route instead of buying every system.</li>
+    <li>At Mountain 50+, add Luck, artifact, Mithril, or Spelunker's Guild support for drop quality.</li>
+    <li>Use Gorilla Arms, Guzzler-style tools, or stronger runner upgrades when collection becomes the wall.</li>
+    <li>Prepare Goblin King as a timed damage check, not a normal mountain.</li>
+    <li>Use Mithril and Mountain Souls on route-defining upgrades.</li>
+    <li>Focus T6 upgrades around your actual endgame wall.</li>
+    <li>Ascend only when your T6 base is worth amplifying with Ascension Rank.</li>
+    <li>Push Mountain 100, True Ending, and then Endless Mode with a focused route.</li>
+  </ol>
+</div>
+
+<h2 id="common-mistakes">Common endgame mistakes</h2>
+
+<GuideTable
+  caption="Common Dwarf Eats Mountain endgame mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">FAQ</h2>
+
+### What happens if I fail Goblin King?
+
+You can keep progressing. Goblin King is a timed damage check, but failing it does not end your run. Come back when your damage route is stronger.
+
+### What does Goblin King drop?
+
+Killing Goblin King within the time limit gives treasure and a specific artifact needed for later boss progression.
+
+### Why does progress feel worse after Mountain 50?
+
+After Mountain 50, multi-ore outcomes become less reliable as the game moves toward Mountain 100. You need better hit quality, Luck, artifacts, Mithril, and collection instead of only more attacks.
+
+### What does Spelunker's Guild do in endgame?
+
+Spelunker's Guild supports artifact-den-luck, Mithril-luck, spelunking rewards, and rare-resource quality. It matters when rare resources and artifacts become more important than simple gold.
+
+### Are Gorilla Arms and Guzzler important?
+
+Yes, when normal runners cannot handle late loot fields. They help with heavy collection pressure, rare drops, and crowded endgame fields.
+
+### What are the new formal-release units to watch?
+
+Gyrocopter, Bulldozer, and Brewmaster are formal-release units / systems to watch as runs move beyond the older Demo-era unit setup.
+
+### When should I start caring about T6 upgrades?
+
+Start caring about T6 when ordinary Prestige upgrades no longer feel like enough and one long-term route is clearly carrying your run.
+
+### What does Ascension Rank do?
+
+Ascension Rank directly buffs the power of your T6 upgrades, making future cycles stronger.
+
+### Should I Ascend as soon as it unlocks?
+
+No. Ascend when your T6 upgrades are worth keeping, the current layer has slowed down, and the next cycle will be stronger because Ascension Rank amplifies your T6 base.
+
+### Is True Ending the end of the game?
+
+No. True Ending is a major milestone. After that, Endless Mode shifts the focus toward deeper scaling and optimization.

@@ -1,0 +1,733 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildColumns = [
+  { key: "build", label: "Build" },
+  { key: "bestFor", label: "Best For" },
+  { key: "coreTools", label: "Core Tools" },
+  { key: "watchOut", label: "Watch Out For" },
+];
+
+export const buildRows = [
+  {
+    build: "Runner Economy",
+    bestFor: "Gold piles, ore overflow, slow collection, mountain reclaim",
+    coreTools:
+      "Runners, Stoutly March, Carrying Capacity, Dodgy Profession, Looming Motivation, Mithril Chainmail, Magnetic Gloves",
+    watchOut:
+      "Too many runners without enough damage can slow mountain clears.",
+  },
+  {
+    build: "Miner Damage",
+    bestFor: "Simple early damage and clean first Prestige routes",
+    coreTools:
+      "Miner's Guild, Rock and Protein Diet, Raised by Pickaxes, Faster Chucking, Mithril Pickaxes",
+    watchOut:
+      "Stable early, but can feel flat if you ignore artifacts, Mithril, or stronger unit lines.",
+  },
+  {
+    build: "Flamer",
+    bestFor: "Steady damage, fire fields, safer scaling than explosives",
+    coreTools:
+      "Flameworks, Flamers, fire duration, cooldown support, Rune of Flame, fire artifacts",
+    watchOut:
+      "Still creates more drops, so it can expose weak runners.",
+  },
+  {
+    build: "Demo",
+    bestFor: "Burst damage, dens, explosive ore movement, Wind Bomb utility",
+    coreTools:
+      "Demolition Shack, Demo Dwarves, Wind Bomb, Explosive Interns, explosive force, den damage",
+    watchOut:
+      "Explosions can scatter loot, raise calamity pressure, and get runners stunned.",
+  },
+  {
+    build: "Ballista / Turret",
+    bestFor: "Dens, veins, high targets, focused damage, anti-rock support",
+    coreTools:
+      "Ballistics Workshop, Ballistas, Harpoon upgrades, Anti-Rock Turret, Monster Bane, Serrated Mithril Spikes",
+    watchOut:
+      "Needs setup and economy support before it feels like a main route.",
+  },
+  {
+    build: "Scientist / Laser",
+    bestFor: "Unlock-based scaling, laser damage, upgrade support",
+    coreTools:
+      "Grand Laboratory, Scientists, Laser Cannons, Energy Sustainer, Cookie Cutter, science unlocks",
+    watchOut:
+      "Scientists do not solve collection by themselves.",
+  },
+  {
+    build: "Mithril / Rune",
+    bestFor: "Mid-game scaling, Forge routes, rituals, specialized bonuses",
+    coreTools:
+      "Great Forge, Mithril Forging, Runesmiths, Rune of Might, Rune of Flame, Rune of Speed, Rune of Power",
+    watchOut:
+      "Do not rush Forge if you cannot collect Mithril reliably.",
+  },
+  {
+    build: "Luck / Artifact / Spelunking",
+    bestFor: "Rare drops, gem value, artifact-den rewards, Mithril-luck, later scaling",
+    coreTools:
+      "Artifacts, Prospector's Massive Nose, Luck, Spelunker's Guild, artifact-den-luck, Mithril-luck, PP artifacts",
+    watchOut:
+      "Better drops do not help if the loot stays on the ground.",
+  },
+];
+
+export const bottleneckColumns = [
+  { key: "bottleneck", label: "Your Problem" },
+  { key: "bestBuild", label: "Best Build Direction" },
+  { key: "why", label: "Why" },
+];
+
+export const bottleneckRows = [
+  {
+    bottleneck: "Gold is not being collected",
+    bestBuild: "Runner Economy",
+    why: "Your damage is already creating value, but runners are not converting it into gold.",
+  },
+  {
+    bottleneck: "Mountain HP is too high",
+    bestBuild: "Miner, Flamer, Demo, Laser, or Rune damage",
+    why: "The field is clean, so the next wall is raw or scaling damage.",
+  },
+  {
+    bottleneck: "Dens or veins survive too long",
+    bestBuild: "Ballista, Demo burst, or Laser",
+    why: "You need targeted pressure instead of only basic mountain damage.",
+  },
+  {
+    bottleneck: "Runners get stunned constantly",
+    bestBuild: "Runner Economy with safety upgrades",
+    why: "A stunned runner is zero income, even if your damage is strong.",
+  },
+  {
+    bottleneck: "Mithril blocks your next upgrade",
+    bestBuild: "Mithril / Forge route",
+    why: "Gold cannot replace Mithril when the upgrade tree asks for rare resources.",
+  },
+  {
+    bottleneck: "Artifacts, dens, or rare drops are your main progress",
+    bestBuild: "Luck / Artifact / Spelunking route",
+    why: "Spelunker's Guild and Luck-style systems help when resource quality matters more than raw hits.",
+  },
+  {
+    bottleneck: "Your run is slow from the first minute",
+    bestBuild: "Prestige-supported start build",
+    why: "Swift Start, Guild Apprentices, Ancient Cache, or similar upgrades can rewrite the opening.",
+  },
+];
+
+export const playbookColumns = [
+  { key: "build", label: "Build" },
+  { key: "firstMove", label: "First Move" },
+  { key: "powerSpike", label: "Power Spike" },
+  { key: "commonDeath", label: "Common Death" },
+];
+
+export const playbookRows = [
+  {
+    build: "Runner Economy",
+    firstMove:
+      "Buy speed and carry before adding a new damage branch.",
+    powerSpike:
+      "The run speeds up when the field stays mostly clear even during larger drop bursts.",
+    commonDeath:
+      "You over-invest in runners while mountain HP becomes the real wall.",
+  },
+  {
+    build: "Miner Damage",
+    firstMove:
+      "Upgrade miner damage only after the Great Maw and runners are working.",
+    powerSpike:
+      "Mithril Pickaxes or stronger miner scaling turns basic hits into real progress.",
+    commonDeath:
+      "You keep scaling miners even after dens, veins, or bosses need targeted tools.",
+  },
+  {
+    build: "Flamer",
+    firstMove:
+      "Add Flameworks after collection is stable, then watch whether burn damage creates a backlog.",
+    powerSpike:
+      "Fire becomes strong when it keeps damaging the mountain without creating uncontrollable chaos.",
+    commonDeath:
+      "You treat steady fire as free damage and forget runners still have to collect the drops.",
+  },
+  {
+    build: "Demo",
+    firstMove:
+      "Add Demolition Shack when you need burst or den pressure, not just because it unlocks.",
+    powerSpike:
+      "Demo feels best when explosions help targets and your runners survive the chaos.",
+    commonDeath:
+      "Explosions scatter loot, stun runners, and turn a damage build into a collection failure.",
+  },
+  {
+    build: "Ballista / Turret",
+    firstMove:
+      "Add Ballistics when dens, veins, or high targets become the wall.",
+    powerSpike:
+      "The route takes off when targeting removes structures that basic units were wasting time around.",
+    commonDeath:
+      "You buy Ballistas too early and delay the basic economy that should support them.",
+  },
+  {
+    build: "Scientist / Laser",
+    firstMove:
+      "Add Grand Laboratory only after your miner / runner loop can pay for a slower setup.",
+    powerSpike:
+      "Scientists become valuable once their unlocks and Laser Cannons start supporting the whole build.",
+    commonDeath:
+      "You rush science before having enough damage, collection, or resources to benefit from it.",
+  },
+  {
+    build: "Mithril / Rune",
+    firstMove:
+      "Collect Mithril reliably before committing to Forge upgrades.",
+    powerSpike:
+      "The build improves when Mithril spending supports one clear route: damage, runners, Ballistas, runes, or rituals.",
+    commonDeath:
+      "You spend rare resources on scattered upgrades instead of fixing the current bottleneck.",
+  },
+  {
+    build: "Luck / Artifact / Spelunking",
+    firstMove:
+      "Stabilize collection first, then invest in Luck, artifact-den rewards, Mithril-luck, and Spelunker's Guild systems.",
+    powerSpike:
+      "The route works when better drops, artifacts, PP, and rare resources start improving every cycle.",
+    commonDeath:
+      "You generate better drops than your runners can collect.",
+  },
+];
+
+export const unitColumns = [
+  { key: "unit", label: "Unit / System" },
+  { key: "role", label: "Role" },
+  { key: "pairsWith", label: "Pairs Well With" },
+  { key: "risk", label: "Risk" },
+];
+
+export const unitRows = [
+  {
+    unit: "Miners",
+    role: "Stable baseline damage",
+    pairsWith: "Mithril Pickaxes, Pickarang, Rune of Might, miner Prestige upgrades",
+    risk: "Can feel too slow without stronger scaling later.",
+  },
+  {
+    unit: "Runners",
+    role: "Gold and ore conversion",
+    pairsWith: "Carry, speed, dodge, Mithril Chainmail, Magnetic Gloves, Looming Motivation",
+    risk: "Too many runners without damage can slow mountain clears.",
+  },
+  {
+    unit: "Flamers",
+    role: "Steady fire damage and field pressure",
+    pairsWith: "Rune of Flame, cooldown reduction, fire field duration, flamer artifacts",
+    risk: "Creates more drops that still need collection.",
+  },
+  {
+    unit: "Demo Dwarves",
+    role: "Burst, explosions, Wind Bomb, den damage",
+    pairsWith: "Explosive Interns, force upgrades, den loot effects, runner safety",
+    risk: "Can scatter loot and create runner chaos.",
+  },
+  {
+    unit: "Ballistas",
+    role: "Targeting, dens, veins, high targets",
+    pairsWith: "Serrated Mithril Spikes, Monster Bane, free Ballista Prestige upgrades",
+    risk: "Needs investment before it becomes a main route.",
+  },
+  {
+    unit: "Scientists",
+    role: "Unlocks and upgrade support",
+    pairsWith: "Grand Laboratory, Laser Cannon, science-gated upgrades, Mithril routes",
+    risk: "Does not directly collect loot or act like a normal attacker.",
+  },
+  {
+    unit: "Laser Cannons",
+    role: "Charged beam damage",
+    pairsWith: "Energy Sustainer, Cookie Cutter, machine or laser support effects",
+    risk: "Can add pressure without solving collection.",
+  },
+  {
+    unit: "Runesmiths",
+    role: "Rune and Forge scaling",
+    pairsWith: "Great Forge, Mithril Forging, Rune of Might, Rune of Flame, Rune of Speed",
+    risk: "Needs Mithril and setup before paying off.",
+  },
+  {
+    unit: "Spelunker's Guild",
+    role: "Artifact, den, Luck, Mithril-luck, and spelunking support",
+    pairsWith: "Luck builds, artifact routes, Mithril routes, den reward routes",
+    risk: "Does not replace basic damage or runner collection.",
+  },
+];
+
+export const routeColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "buildFocus", label: "Build Focus" },
+  { key: "goal", label: "Goal" },
+];
+
+export const routeRows = [
+  {
+    stage: "First run",
+    buildFocus: "Miner + Runner balance",
+    goal: "Learn the loop: break mountain, collect loot, avoid overflow.",
+  },
+  {
+    stage: "Early Prestige",
+    buildFocus: "Runner economy or smoother start",
+    goal: "Use Swift Start, Guild Apprentices, or capacity upgrades to remove early friction.",
+  },
+  {
+    stage: "Early-mid",
+    buildFocus: "Flamer or Demo branch",
+    goal: "Add stronger damage only after runners can keep up.",
+  },
+  {
+    stage: "Mid-game",
+    buildFocus: "Ballista, Laboratory, Spelunker's Guild, or Forge",
+    goal: "Pick a route based on dens, artifacts, Mithril, science, or targeting needs.",
+  },
+  {
+    stage: "Late-mid",
+    buildFocus: "Rune, Luck, Artifact, or T2+ Prestige support",
+    goal: "Stop buying random upgrades and support one main scaling direction.",
+  },
+  {
+    stage: "Endgame prep",
+    buildFocus: "T6, Ascension, boss checks, drop quality",
+    goal: "Focus long-term upgrades around the wall your build actually hits.",
+  },
+];
+
+export const switchColumns = [
+  { key: "signal", label: "Signal" },
+  { key: "meaning", label: "What It Means" },
+  { key: "move", label: "Move" },
+];
+
+export const switchRows = [
+  {
+    signal: "Your next upgrade is expensive and does not fix the current wall",
+    meaning: "You are probably forcing the old route.",
+    move: "Pause that build and buy the system that solves the blocker.",
+  },
+  {
+    signal: "A new building unlocks but your field is already messy",
+    meaning: "The new route may create more problems before it helps.",
+    move: "Stabilize runners before investing in the new branch.",
+  },
+  {
+    signal: "Dens or veins are the only reason progress slows",
+    meaning: "Generic damage is no longer enough.",
+    move: "Add Ballista, Demo burst, Laser, or targeted support.",
+  },
+  {
+    signal: "You keep waiting on Mithril or artifacts",
+    meaning: "Gold is no longer the only resource that matters.",
+    move: "Move toward Forge, Spelunker's Guild, Luck, or artifact support.",
+  },
+  {
+  signal: "Your build works until a Prestige reset, then starts slowly again",
+  meaning: "The build needs reset support, not another random active-run upgrade.",
+  move:
+    "Pick Prestige upgrades that match the build: runner support, Mithril access, start bonuses, artifact starts, or free unit support.",
+},
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyBad", label: "Why It Hurts" },
+  { key: "betterMove", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Calling one build the best forever",
+    whyBad: "The best build changes when your bottleneck changes.",
+    betterMove: "Choose by field state: collection, damage, targeting, Mithril, or drops.",
+  },
+  {
+    mistake: "Adding Demo Dwarves while runners are already behind",
+    whyBad: "Explosions can create more loot and more chaos than your economy can handle.",
+    betterMove: "Fix runners first, then add explosive damage.",
+  },
+  {
+    mistake: "Ignoring Ballistas until dens become a wall",
+    whyBad: "Dens and veins can hide the resources you need to scale.",
+    betterMove: "Add targeting when special structures slow the run.",
+  },
+  {
+    mistake: "Rushing Laboratory with no economy",
+    whyBad: "Scientists and lasers need a working base to support them.",
+    betterMove: "Build Laboratory after your miner / runner loop is stable.",
+  },
+  {
+    mistake: "Treating Mithril as only a Forge resource",
+    whyBad: "Mithril routes can also involve runner safety, Ballistas, artifacts, and Spelunker's Guild support.",
+    betterMove: "Spend Mithril around the build you are actually playing.",
+  },
+  {
+    mistake: "Taking Luck before collection works",
+    whyBad: "Better drops do not help if they stay on the ground.",
+    betterMove: "Fix runners, then scale Luck and rare-resource value.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best build in Dwarf Eats Mountain is the one that fixes your current bottleneck. Use Runner Economy when loot is not being collected, Flamer or Demo when mountain HP needs more pressure, Ballistas when dens and veins are the wall, Laboratory / Lasers for unlock scaling, Mithril / Runes for mid-game systems, and Luck / Artifact / Spelunking when rare drops and artifact rewards matter.**
+
+Do not buy every route at once. A strong build has one main job, one supporting system, and enough runners to turn the results into progress.
+</GuideQuickAnswer>
+
+<GuideCallout title="Build rule">
+Do not ask “What is the best build forever?” Ask “What is my build failing to do right now?”
+</GuideCallout>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-ballista-laser-flamer-chaos.webp"
+    alt="Dwarf Eats Mountain late-game build with ballistas, lasers, flamers, runners, and large piles of loot."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Builds become messy fast. The goal is not to buy everything, but to know which system is actually moving the run forward.
+  </figcaption>
+</figure>
+
+<h2 id="best-builds-overview">Best builds overview</h2>
+
+Dwarf Eats Mountain does not have one build that is always best. The right build changes as your run changes.
+
+Use this table as the build map:
+
+<GuideTable
+  caption="Dwarf Eats Mountain best build types and when to use them."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="choose-by-bottleneck">Choose your build by bottleneck</h2>
+
+The easiest way to pick a build is to look at what is actually failing.
+
+<GuideTable
+  caption="Pick a Dwarf Eats Mountain build based on your current bottleneck."
+  columns={bottleneckColumns}
+  rows={bottleneckRows}
+/>
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ul className="space-y-2 text-sm leading-7 text-slate-200">
+    <li><strong>Loot on the ground?</strong> Build around runners and collection.</li>
+    <li><strong>Clean field, slow mountain?</strong> Build around damage.</li>
+    <li><strong>Dens blocking progress?</strong> Build around Ballistas, Demo burst, or lasers.</li>
+    <li><strong>Mithril blocking upgrades?</strong> Build around Forge and rare-resource routes.</li>
+    <li><strong>Artifacts or rare drops matter?</strong> Build around Luck, Spelunker's Guild, and artifact support.</li>
+  </ul>
+</div>
+
+<h2 id="build-playbooks">Build playbooks: first move, power spike, and common failure</h2>
+
+The overview table tells you which build fits your problem. This table tells you how each build usually starts, when it starts working, and how it usually dies.
+
+<GuideTable
+  caption="Dwarf Eats Mountain build playbooks with first moves, power spikes, and common failures."
+  columns={playbookColumns}
+  rows={playbookRows}
+/>
+
+<h2 id="runner-economy-build">Runner Economy build</h2>
+
+The Runner Economy build is not a permanent identity. It is a response to a field that is producing more loot than it can bank.
+
+The first move is usually to stop adding damage for a moment and check which part of collection is failing. If runners are walking too long, speed matters. If piles are too dense, carry matters. If runners are getting knocked down, safety matters.
+
+The power spike is easy to see: the field clears between bursts, rare drops reach the Great Maw, and new damage upgrades no longer create a backlog.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-runner-carrying-capacity.webp"
+    alt="Dwarf Eats Mountain Carrying Capacity runner upgrade for collection builds."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Runner Economy builds become strong when your field starts clearing itself instead of needing constant manual cleanup.
+  </figcaption>
+</figure>
+
+Switch out of a runner-heavy route when runners are idle and mountain HP is clearly the wall.
+
+For the full collection route, use the <Link href="/dwarf-eats-mountain/runners-guide">Runners Guide</Link>.
+
+<h2 id="miner-build">Miner damage build</h2>
+
+Miner damage is the cleanest early damage route. It is best before the run needs special targeting or complex systems.
+
+Start with miner damage only after the Great Maw and runners are working. If you rush miner upgrades before delivery exists, you create value that sits on the ground.
+
+Miner builds start to fall off when special structures matter more than the main mountain. If dens, veins, or high targets are slowing the run, do not keep forcing miners as the only answer. Add Ballistas, Demo burst, or science support.
+
+<h2 id="flamer-build">Flamer build</h2>
+
+Flamers are the steadier damage branch. They are useful when you want more pressure without the full chaos of explosives.
+
+The best first move is to add Flameworks only after your runner economy can handle normal miner drops. A good Flamer route feels smooth when burn damage keeps working while runners still clear the field.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-flameworks-building.webp"
+    alt="Dwarf Eats Mountain Flameworks building that produces Flamers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Flameworks is the cleaner damage branch: steady fire instead of explosive chaos.
+  </figcaption>
+</figure>
+
+The common failure is assuming steady damage is free. It is not. More fire still creates more drops, and weak runners will expose the problem quickly.
+
+Use Flamers when the field is clean but mountain HP is slow. Delay Flamers when loot is already piling up.
+
+<h2 id="demo-build">Demo build</h2>
+
+Demo builds are the burst route. They are best when a run needs explosive pressure, den damage, or Wind Bomb utility.
+
+The first move is not “buy Demo as soon as possible.” The first move is to check whether your runners can survive and collect through extra chaos. If not, Demo turns a slow run into a messy one.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-demolition-shack-first-demo.webp"
+    alt="Dwarf Eats Mountain Demolition Shack and first Demo Dwarf unlock."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Demo Dwarves are powerful, but explosive power is safest after your runner economy is already stable.
+  </figcaption>
+</figure>
+
+Demo starts to feel good when explosions help clear targets without leaving the field unmanageable. It fails when it scatters loot, stuns runners, or triggers chaos faster than your economy can recover.
+
+Use Demo when you need burst. Avoid it when the problem is already collection.
+
+<h2 id="ballista-laser-build">Ballista, Scientist, and Laser builds</h2>
+
+Ballistas and Lasers solve a different problem from basic damage: they help when the run needs targeting, unlocks, or special structure pressure.
+
+Ballistas are usually the earlier targeting answer. They become valuable when dens, veins, high targets, or enemy structures are wasting too much time.
+
+Grand Laboratory and Laser Cannons are slower to set up. They are better when the run can afford a science route and wants unlock-based scaling instead of only more miners.
+
+The failure cases are different. Ballistas usually fail when you buy them too early and delay the economy that should support them. Laboratory and Laser routes fail when you rush science before your miner / runner loop can afford the slower setup.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-ballistics-workshop-ballistas.webp"
+    alt="Dwarf Eats Mountain Ballistics Workshop and Ballistas for dens and veins."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ballistas are best when the problem is not just mountain HP, but targets like dens and veins.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-grand-laboratory-laser-cannon.webp"
+    alt="Dwarf Eats Mountain Grand Laboratory with Scientists and Laser Cannon unlocks."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Grand Laboratory is not just another damage building. It opens scientists, unlocks, cost support, and laser scaling.
+  </figcaption>
+</figure>
+
+The common failure is rushing advanced tools before the base economy can support them. If your runners are failing, Laboratory will not magically fix that.
+
+<h2 id="mithril-rune-build">Mithril, Rune, and Spelunker's Guild build</h2>
+
+Mithril and Forge systems become important once gold alone no longer solves your upgrades.
+
+A good Mithril route starts by collecting Mithril reliably. That means your runners must be able to deliver rare drops before you build around spending them.
+
+<figure className="my-8">
+  <Image
+    src="/images/dwarf-eats-mountain/dwarf-eats-mountain-mithril-upgrades-chain-mail.webp"
+    alt="Dwarf Eats Mountain Mithril Forging, Rune, runner, miner, and Ballista upgrades at the Great Forge."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mithril routes turn your build into a real direction: miner damage, runner safety, Ballista targeting, runes, rituals, or Forge scaling.
+  </figcaption>
+</figure>
+
+Do not treat this route as “build Great Forge and win.” Mithril routes can also care about **Spelunker's Guild**, especially when your progress depends on artifact-den-luck, Mithril-luck, spelunking rewards, or better rare-resource flow.
+
+The common failure is spending Mithril in five directions at once. Pick the system that fixes your wall:
+
+- runner safety if deliveries fail,
+- miner damage if mountain HP is the wall,
+- Ballista support if dens and veins are the wall,
+- runes if one unit line is clearly carrying,
+- Spelunker's Guild support if artifacts, dens, Luck, or Mithril-luck are your next route.
+
+For deeper resource planning, use the <Link href="/dwarf-eats-mountain/artifacts-mithril-guide">Artifacts and Mithril Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="luck-artifact-build">Luck, Artifact, and Spelunking build</h2>
+
+Luck and artifact builds are not first-run builds. They work best after your basic damage and collection loop is stable.
+
+This route becomes attractive when the problem is no longer “can I hit the mountain?” but “are my hits producing enough value?”
+
+Spelunker's Guild belongs here because it supports the artifact, den, Luck, Mithril-luck, and spelunking side of progression. If your route depends on better den rewards, rare-resource flow, or artifact value, Spelunker's Guild can matter as much as Forge.
+
+Use this build when:
+
+- normal gold is not the only bottleneck,
+- artifacts are shaping your run,
+- dens and rare drops matter,
+- Mithril-luck or artifact-den-luck starts appearing,
+- or your next Prestige cycle depends on better resource quality.
+
+Do not use Luck as a bandage for weak runners. Better drops only help if you can collect them.
+
+<h2 id="unit-synergies">Unit and system synergies</h2>
+
+Use this table to avoid mixing upgrades randomly.
+
+<GuideTable
+  caption="Dwarf Eats Mountain build synergies by unit and system."
+  columns={unitColumns}
+  rows={unitRows}
+/>
+
+The strongest builds usually come from stacking systems that agree with each other. The table is the synergy reference; the build sections above explain when those synergies are actually worth committing to.
+
+<h2 id="recommended-build-route">Recommended build route for most players</h2>
+
+Use this route if you are not sure what to do next:
+
+<GuideTable
+  caption="Recommended Dwarf Eats Mountain build route by stage."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+As a checklist:
+
+<div className="not-prose my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <ol className="list-decimal space-y-2 pl-5 text-sm leading-7 text-slate-200">
+    <li>Start with a balanced <strong>Miner + Runner</strong> setup.</li>
+    <li>Fix collection before adding a major damage branch.</li>
+    <li>Add <strong>Flamers</strong> if you want steady damage.</li>
+    <li>Add <strong>Demo Dwarves</strong> if you want burst and can handle chaos.</li>
+    <li>Add <strong>Ballistas</strong> when dens, veins, or targeting matter.</li>
+    <li>Add <strong>Grand Laboratory</strong> when unlocks, Scientists, or Laser Cannons become worth the cost.</li>
+    <li>Use <strong>Spelunker's Guild</strong> when artifacts, dens, Luck, Mithril-luck, or spelunking become central.</li>
+    <li>Move into <strong>Mithril / Rune</strong> upgrades when rare resources become available.</li>
+    <li>Use <strong>Prestige</strong> to support the build that is already working.</li>
+    <li>Use <strong>T6 and Ascension</strong> later to focus your long-term route.</li>
+  </ol>
+</div>
+
+<h2 id="stop-investing">When to stop investing in your current build</h2>
+
+This is different from choosing a build. Choosing is about the current bottleneck. Stopping is about recognizing that your current route is no longer fixing it.
+
+<GuideTable
+  caption="When to stop investing in your current Dwarf Eats Mountain build."
+  columns={switchColumns}
+  rows={switchRows}
+/>
+If the problem is reset support rather than active-run upgrades, use the <Link href="/dwarf-eats-mountain/prestige-ascension-guide">Prestige and Ascension Guide</Link> to match PP spending with your build.
+
+Do not abandon a route just because a new building appears. Switch when the current build no longer solves the wall you are actually hitting.
+
+<h2 id="common-mistakes">Common build mistakes</h2>
+
+<GuideTable
+  caption="Common Dwarf Eats Mountain build mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="what-to-read-next">What to read next</h2>
+
+If you are still setting up your first route, use the <Link href="/dwarf-eats-mountain/build-order">Beginner Build Order</Link>.
+
+If your gold is not being collected, use the <Link href="/dwarf-eats-mountain/runners-guide">Runners Guide</Link>.
+
+If your build needs Mithril, rituals, Mountain Souls, Spelunker's Guild, or artifact direction, use the <Link href="/dwarf-eats-mountain/artifacts-mithril-guide">Artifacts and Mithril Guide</Link>.
+
+If you are deciding when to reset or how to support your build with PP, use the <Link href="/dwarf-eats-mountain/prestige-ascension-guide">Prestige and Ascension Guide</Link>.
+
+For the full route, return to the <Link href="/dwarf-eats-mountain">Dwarf Eats Mountain Guide Hub</Link>.
+
+<h2 id="faq">FAQ</h2>
+
+### What is the best build in Dwarf Eats Mountain?
+
+There is no single best build for every stage. The best build is the one that fixes your current bottleneck: runners for loot piles, damage for slow mountains, Ballistas or Demo for dens, Mithril for rare-resource walls, and Luck / artifacts / Spelunker's Guild for later scaling.
+
+### Is Flamer build better than Demo build?
+
+Flamer builds are steadier and easier to control. Demo builds have stronger burst and explosive utility, but they create more chaos. Use Flamers if you want reliable damage, and Demo Dwarves if your runners can handle the mess.
+
+### Are Demo Dwarves worth it?
+
+Yes, but not when your collection economy is already failing. Demo Dwarves are best when you need burst damage, den pressure, or Wind Bomb utility and have enough runner support.
+
+### When should I use Ballistas?
+
+Use Ballistas when dens, veins, high targets, or special structures are slowing you down. They are better as a targeting solution than as your first basic damage upgrade.
+
+### When should I build Grand Laboratory?
+
+Build Grand Laboratory once your basic miner and runner economy is stable and you are ready for Scientists, Laser Cannons, and unlock-based scaling.
+
+### Where does Spelunker's Guild fit?
+
+Spelunker's Guild fits artifact, den, Luck, Mithril-luck, and spelunking routes. Use it when rare-resource quality and artifact-den rewards matter more than simple gold or raw damage.
+
+### What build should I use if gold is piling up?
+
+Use a Runner Economy build. Prioritize speed, carrying capacity, dodge, slap efficiency, Mithril Chainmail, Magnetic Gloves, and overflow support before buying more damage.
+
+### What build should I use if mountain HP is too high?
+
+Use Miner, Flamer, Demo, Laser, or Rune-based damage. Only do this if the field is mostly clean and runners are keeping up.
+
+### Should I focus one build or buy everything?
+
+Focus first. Buying everything spreads your resources too thin. Once one route is working, add support systems that solve the next wall.
+
+### What is the best late-game build?
+
+Late-game builds depend on T6, Ascension, artifacts, Luck, Mithril, Spelunker's Guild, and boss requirements. Focus long-term upgrades around the wall your build actually hits: damage, collection, drops, targeting, or boss checks.
