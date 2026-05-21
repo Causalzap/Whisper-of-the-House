@@ -1,0 +1,903 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const soloMechanicColumns = [
+  { key: "mechanic", label: "Solo Mechanic" },
+  { key: "whatChanges", label: "What Changes" },
+  { key: "soloRule", label: "Solo Rule" },
+];
+
+export const soloMechanicRows = [
+  {
+    mechanic: "Enemy scaling",
+    whatChanges:
+      "Enemy health and base spawn pressure are reduced for solo, but the run still expects you to keep moving.",
+    soloRule:
+      "Do not confuse lower scaling with unlimited time. You still need tempo.",
+  },
+  {
+    mechanic: "Timer pressure",
+    whatChanges:
+      "The mission timer and aggression pressure keep moving while you mine, deposit, fight, and pick up items.",
+    soloRule:
+      "If you spend too long interacting with objects, the floor can still overwhelm you.",
+  },
+  {
+    mechanic: "Interaction bottleneck",
+    whatChanges:
+      "In co-op, one player can mine while others defend. In solo, every job competes for your attention.",
+    soloRule:
+      "Mine, fight, command Cooper, and deposit in short loops instead of trying to do one task forever.",
+  },
+  {
+    mechanic: "Armor pressure",
+    whatChanges:
+      "Armor is a second health bar, but you should not assume it will recover automatically or that every supply source will fix it.",
+    soloRule:
+      "Value armor recovery, damage reduction, and defensive upgrades much higher in solo.",
+  },
+  {
+    mechanic: "Cooper support",
+    whatChanges:
+      "Cooper helps with mining, focus fire, and pressure, and can receive upgrades during solo runs.",
+    soloRule:
+      "Use the laser pointer to give Cooper specific jobs instead of letting it stay generic.",
+  },
+];
+
+export const soloPlanColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "soloRule", label: "Solo Rule" },
+];
+
+export const soloPlanRows = [
+  {
+    step: "1. Pick a short, readable mission",
+    whatToDo:
+      "Start with lower Depth, lower Complexity, and shorter Facility Length while learning solo.",
+    soloRule:
+      "Long, messy facilities make every solo mistake more expensive.",
+  },
+  {
+    step: "2. Choose a Reclaimer with a solo plan",
+    whatToDo:
+      "Guardian is safest, Slicer has the highest aggressive ceiling, Retcon is high-skill, and Falconer needs a caveat.",
+    soloRule:
+      "Do not pick a class only because it is strong in co-op.",
+  },
+  {
+    step: "3. Use Cooper actively",
+    whatToDo:
+      "Use the laser pointer to send Cooper at Expenite, awkward minerals, or high-threat enemies.",
+    soloRule:
+      "Cooper is strongest when directed at the task that matters now.",
+  },
+  {
+    step: "4. Follow the power cable first",
+    whatToDo:
+      "Use the cable as your route anchor, then leave it only for useful rewards.",
+    soloRule:
+      "A side room is good only when it gives power, safety, or progression.",
+  },
+  {
+    step: "5. Turn resources into power early",
+    whatToDo:
+      "Use Expenite, crates, Workbenches, and Bio Boosters to solve your current weakness.",
+    soloRule:
+      "Solo runs get harder when you collect resources but delay the payoff.",
+  },
+  {
+    step: "6. Protect your armor",
+    whatToDo:
+      "Take defensive upgrades, armor recovery, or damage reduction when chip damage keeps ending runs.",
+    soloRule:
+      "In solo, armor loss snowballs because no teammate can cover your recovery window.",
+  },
+  {
+    step: "7. Leave with resources for the next floor",
+    whatToDo:
+      "Start the elevator when the run is stronger and you still have enough ammo, armor, and space to defend.",
+    soloRule:
+      "A clean exit matters more than squeezing one more minor reward.",
+  },
+];
+
+export const classColumns = [
+  { key: "className", label: "Reclaimer" },
+  { key: "soloUse", label: "Solo Use" },
+  { key: "howToPlayIt", label: "How to Play It Solo" },
+  { key: "watchOut", label: "Watch Out" },
+];
+
+export const classRows = [
+  {
+    className: "Guardian",
+    soloUse: "Safest first solo pick",
+    howToPlayIt:
+      "Use stun, pushback, and armor tools before rooms collapse.",
+    watchOut:
+      "Guardian can feel slow if your weapon upgrades do not solve damage.",
+  },
+  {
+    className: "Slicer",
+    soloUse: "Highest aggressive ceiling",
+    howToPlayIt:
+      "Use dense waves to start kill chains, then leave before the chain turns into overextension.",
+    watchOut:
+      "Sparse rooms and bad dashes can make Slicer feel worse than its damage numbers suggest.",
+  },
+  {
+    className: "Retcon",
+    soloUse: "High-skill survival and burst pick",
+    howToPlayIt:
+      "Use Time Rewind before risky pushes so you can roll back health, ammo, or position.",
+    watchOut:
+      "Retcon is weak if you only press tools after the mistake has already happened.",
+  },
+  {
+    className: "Falconer",
+    soloUse: "Playable, but loses key co-op value",
+    howToPlayIt:
+      "Use drone pressure and electric damage, but remember remote revive does not help true solo.",
+    watchOut:
+      "Falconer can feel like a trap if you picked it for revive utility and are playing alone.",
+  },
+  {
+    className: "Spotter",
+    soloUse: "Utility-heavy solo pick",
+    howToPlayIt:
+      "Use marks, weakpoint windows, and Cooper focus fire to delete priority targets.",
+    watchOut:
+      "Spotter's best value is easier to feel when teammates also shoot marked targets.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "soloProblem", label: "Solo Problem" },
+  { key: "upgradeExamples", label: "Upgrade Examples" },
+  { key: "whyItWorks", label: "Why It Works" },
+];
+
+export const upgradeRows = [
+  {
+    soloProblem: "You take lethal health damage",
+    upgradeExamples:
+      "Damage Dam or similar damage-reduction upgrades after health damage.",
+    whyItWorks:
+      "A short damage-reduction window can stop one mistake from becoming a full wipe.",
+  },
+  {
+    soloProblem: "Armor keeps disappearing",
+    upgradeExamples:
+      "Suit ability immunity, armor-on-hit effects, armor recovery, or defensive suit upgrades.",
+    whyItWorks:
+      "Armor is your buffer in solo. If it breaks often, survival upgrades beat greedier damage picks.",
+  },
+  {
+    soloProblem: "You get surrounded",
+    upgradeExamples:
+      "Movement, stun, pushback, area damage, explosion radius, or Defensive Fighting-style melee safety.",
+    whyItWorks:
+      "Solo deaths often come from being trapped while trying to mine, deposit, or reload.",
+  },
+  {
+    soloProblem: "You run out of ammo",
+    upgradeExamples:
+      "Max ammo, ammo recovery, magazine size, reload speed, or a second reliable weapon.",
+    whyItWorks:
+      "In solo, an empty weapon means no one else is covering the wave for you.",
+  },
+  {
+    soloProblem: "You are playing Slicer",
+    upgradeExamples:
+      "Slice damage, kill-chain duration, chain trigger cooldown, Defensive Fighting, or melee damage from missing max ammo.",
+    whyItWorks:
+      "Slicer scales hard when upgrades help start chains faster and survive the close-range window.",
+  },
+  {
+    soloProblem: "You are playing Retcon",
+    upgradeExamples:
+      "Time Rewind cooldown, extra rewind safety, Rage duration, or safer Rage payoff.",
+    whyItWorks:
+      "Retcon solo strength comes from planning risky windows, not panic-button use.",
+  },
+  {
+    soloProblem: "You find an Expenite Gem",
+    upgradeExamples:
+      "Deposit the Gem immediately.",
+    whyItWorks:
+      "An Expenite Gem can trigger a major Epic-tier power spike for both you and Cooper.",
+  },
+];
+
+export const tempoColumns = [
+  { key: "floorState", label: "Floor State" },
+  { key: "whatYouShouldDo", label: "What You Should Do" },
+  { key: "leaveWhen", label: "Leave When..." },
+];
+
+export const tempoRows = [
+  {
+    floorState: "Fresh floor",
+    whatYouShouldDo:
+      "Follow the power cable, identify the main route, and grab nearby safe Expenite.",
+    leaveWhen:
+      "The route is clear and nearby safe value has been collected.",
+  },
+  {
+    floorState: "Safe side reward nearby",
+    whatYouShouldDo:
+      "Step off route for a close Workbench, Bio Booster, crate, Expenite Gem, or useful Expenite deposit.",
+    leaveWhen:
+      "The reward is claimed, the room starts costing too much armor or ammo, or the route back becomes unsafe.",
+  },
+  {
+    floorState: "Upgrade threshold is close",
+    whatYouShouldDo:
+      "Mine and deposit enough Expenite to trigger the next upgrade.",
+    leaveWhen:
+      "The upgrade is active, or the remaining Expenite would pull you too far from the route.",
+  },
+  {
+    floorState: "Aggression is climbing",
+    whatYouShouldDo:
+      "Stop opening new optional tasks unless the reward is major.",
+    leaveWhen:
+      "The elevator route is available, ammo is dropping, or the next reward would not change the run.",
+  },
+  {
+    floorState: "Elevator is available",
+    whatYouShouldDo:
+      "Reload, clear space, command Cooper onto threats, then start the defense.",
+    leaveWhen:
+      "The elevator arrives. Get in instead of spending the next floor's ammo outside.",
+  },
+];
+
+export const workbenchDecisionColumns = [
+  { key: "situation", label: "Workbench Situation" },
+  { key: "decision", label: "Decision" },
+  { key: "why", label: "Why" },
+];
+
+export const workbenchDecisionRows = [
+  {
+    situation: "Workbench is close and your build has a clear weakness",
+    decision: "Use it",
+    why:
+      "A weapon upgrade, ability upgrade, or new weapon can fix the run before the next floor.",
+  },
+  {
+    situation: "Workbench is close but your build already works",
+    decision: "Use it only if the room is safe",
+    why:
+      "A small improvement is good, but not worth spending armor and ammo during rising pressure.",
+  },
+  {
+    situation: "Toolbox is far and aggression is climbing",
+    decision: "Skip it",
+    why:
+      "The time cost can be worse than the upgrade, especially when you are alone.",
+  },
+  {
+    situation: "Workbench offers a new weapon that fixes your biggest gap",
+    decision: "Consider it",
+    why:
+      "A new weapon is worth taking when your current setup cannot handle armor, range, crowds, or ammo pressure.",
+  },
+  {
+    situation: "Workbench only offers upgrades that do not fit your build",
+    decision: "Leave",
+    why:
+      "Forcing a bad upgrade is worse than keeping a stable route and saving resources.",
+  },
+];
+
+export const coopVsSoloColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "coOpHabit", label: "Co-op Habit" },
+  { key: "soloHabit", label: "Solo Habit" },
+];
+
+export const coopVsSoloRows = [
+  {
+    Situation: "Mining Expenite",
+    coOpHabit:
+      "One player mines while others defend.",
+    soloHabit:
+      "Mine in short bursts, kite around the deposit, and use Cooper for awkward veins.",
+  },
+  {
+    Situation: "Picking up objects",
+    coOpHabit:
+      "A teammate can cover you while you carry or interact.",
+    soloHabit:
+      "Clear nearby threats first, then interact quickly before pressure rebuilds.",
+  },
+  {
+    Situation: "Upgrade choices",
+    coOpHabit:
+      "The team can cover your weakness.",
+    soloHabit:
+      "Prioritize self-sustain, armor, mobility, ammo, and simple triggers.",
+  },
+  {
+    Situation: "Bad positioning",
+    coOpHabit:
+      "A teammate may revive or peel enemies away.",
+    soloHabit:
+      "Fight near exits and keep a route back to the power cable.",
+  },
+  {
+    Situation: "Elevator defense",
+    coOpHabit:
+      "Players can split angles and repair under cover.",
+    soloHabit:
+      "Hold a repairable position, use Cooper on priority threats, and avoid leaving the generator alone.",
+  },
+];
+
+export const cooperColumns = [
+  { key: "cooperAction", label: "Cooper Action" },
+  { key: "howToUseIt", label: "How to Use It" },
+  { key: "soloValue", label: "Solo Value" },
+];
+
+export const cooperRows = [
+  {
+    cooperAction: "Mine Expenite or minerals",
+    howToUseIt:
+      "Use the laser pointer on a specific deposit, especially one that is awkward or unsafe to mine yourself.",
+    soloValue:
+      "Reduces the interaction bottleneck while you watch enemies and route pressure.",
+  },
+  {
+    cooperAction: "Focus high-threat enemies",
+    howToUseIt:
+      "Point Cooper at a dangerous enemy, especially one blocking a deposit, route, or elevator setup.",
+    soloValue:
+      "Lets you control the real threat instead of wasting shots on harmless stragglers.",
+  },
+  {
+    cooperAction: "Scale through upgrades",
+    howToUseIt:
+      "Look for Cooper options during R.E.P.D. / processor drone and Bio Booster interactions.",
+    soloValue:
+      "Cooper gets stronger with the run instead of staying as background pressure.",
+  },
+  {
+    cooperAction: "Support Expenite Gems",
+    howToUseIt:
+      "Deposit an Expenite Gem immediately when found.",
+    soloValue:
+      "Can trigger a strong upgrade moment for both you and Cooper.",
+  },
+];
+
+export const elevatorColumns = [
+  { key: "step", label: "Elevator Step" },
+  { key: "soloAction", label: "Solo Action" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const elevatorRows = [
+  {
+    step: "Before starting",
+    soloAction:
+      "Reload, check armor, clear nearby enemies, and command Cooper onto the biggest threat.",
+    whyItMatters:
+      "The elevator event punishes starting while already behind.",
+  },
+  {
+    step: "During defense",
+    soloAction:
+      "Stay near a repairable position and avoid chasing enemies away from the generator.",
+    whyItMatters:
+      "If you get pulled off the objective, one bad wave can snowball.",
+  },
+  {
+    step: "If the generator is damaged",
+    soloAction:
+      "Use stun, movement, Cooper focus fire, or defensive tools before repairing.",
+    whyItMatters:
+      "Repairing while surrounded burns armor and health quickly.",
+  },
+  {
+    step: "When elevator arrives",
+    soloAction:
+      "Enter instead of farming outside.",
+    whyItMatters:
+      "The next floor is easier if you do not waste ammo after the exit is ready.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Solo Mistake" },
+  { key: "whyItKillsRuns", label: "Why It Kills Runs" },
+  { key: "betterHabit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Playing solo like scaled-down co-op",
+    whyItKillsRuns:
+      "Enemy scaling may be lower, but interaction time is not shared with teammates.",
+    betterHabit:
+      "Plan around the interaction bottleneck: mine, command Cooper, deposit, and move in short loops.",
+  },
+  {
+    mistake: "Treating armor as automatic recovery",
+    whyItKillsRuns:
+      "If you assume armor will come back on its own, chip damage turns into health damage fast.",
+    betterHabit:
+      "Take armor, damage reduction, or defensive upgrade options when the run is unstable.",
+  },
+  {
+    mistake: "Leaving Cooper generic",
+    whyItKillsRuns:
+      "Cooper may shoot or mine the wrong thing while the real threat controls the room.",
+    betterHabit:
+      "Use the laser pointer on Expenite, high-threat enemies, and route-critical tasks.",
+  },
+  {
+    mistake: "Fighting too far from an exit",
+    whyItKillsRuns:
+      "When the room turns bad, you have no safe retreat path and no teammate to peel enemies away.",
+    betterHabit:
+      "Fight near the power cable, cover, or a route back to the elevator path.",
+  },
+  {
+    mistake: "Repairing the elevator generator while surrounded",
+    whyItKillsRuns:
+      "The repair animation can burn armor and health if enemies are already on top of you.",
+    betterHabit:
+      "Use stun, movement, Cooper focus fire, or defensive tools before repairing.",
+  },
+  {
+    mistake: "Chasing a far toolbox late",
+    whyItKillsRuns:
+      "A Workbench upgrade can cost more armor, ammo, and time than it gives back.",
+    betterHabit:
+      "Use close Workbenches early and skip far toolboxes when the floor is already unstable.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Yes, you can play Rogue Core solo, but solo is harder because every interaction competes for your time. Enemy scaling is reduced, but the timer and aggression pressure keep moving while you mine, deposit, fight, and pick upgrades. Start with Guardian for safety, Slicer for high aggressive ceiling, or Retcon if you understand timing. Be careful with Falconer: its remote revive is powerful in co-op but loses value in true solo.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-cooper-solo.webp"
+    alt="Cooper supporting a solo run in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solo gives you Cooper, but the real difficulty is doing every job yourself while the floor keeps moving.
+  </figcaption>
+</figure>
+
+<h2 id="solo-guide-overview">
+  Rogue Core Solo Guide Overview
+</h2>
+
+Deep Rock Galactic: Rogue Core works solo, but solo is not just an easier version of co-op.
+
+The game reduces enemy health and baseline spawn pressure for one player, but it does not remove the real solo problem: **the timer keeps moving while every job is yours**. You mine alone, deposit alone, pick up objects alone, choose upgrades alone, command Cooper alone, and defend the elevator alone.
+
+That is why solo often feels harder than the numbers suggest. In a squad, one player can mine while the others defend. In solo, even a simple Expenite deposit can become dangerous if the aggression meter is already climbing.
+
+This guide focuses on solo-specific decisions:
+
+- why solo pressure feels different,
+- which Reclaimers work best alone,
+- why Falconer needs a warning,
+- how Retcon can work for experienced players,
+- which upgrades matter most,
+- how to use Cooper commands,
+- how to pace each floor,
+- and how to survive elevator defenses.
+
+If you are still learning the basic game loop, read the <Link href="/deep-rock-galactic/beginner-guide">Rogue Core beginner guide</Link> first. If your main question is Cooper, use the <Link href="/deep-rock-galactic/cooper-guide">Cooper guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="why-solo-feels-hard">
+  Why Solo Feels Hard
+</h2>
+
+Solo is hard because every interaction costs your time.
+
+The enemies may scale down, but the run still pressures you forward. That creates a bottleneck that does not exist in the same way in a full squad.
+
+<GuideTable
+  caption="Why Rogue Core solo pressure feels different from co-op."
+  columns={soloMechanicColumns}
+  rows={soloMechanicRows}
+/>
+
+Once you understand this, solo starts making more sense. You are not trying to clear everything. You are trying to convert time into power before the floor converts time into danger.
+
+<h2 id="solo-run-plan">
+  Solo Run Plan
+</h2>
+
+<GuideTable
+  caption="Simple Rogue Core solo plan for early runs."
+  columns={soloPlanColumns}
+  rows={soloPlanRows}
+/>
+
+<h2 id="best-solo-class">
+  Best Solo Class in Rogue Core
+</h2>
+
+The best solo class depends on how comfortable you are with pressure.
+
+<GuideTable
+  caption="Best Rogue Core solo classes by playstyle and risk level."
+  columns={classColumns}
+  rows={classRows}
+/>
+
+<h2 id="guardian-solo">
+  Guardian Solo: Safest First Pick
+</h2>
+
+Guardian is the safest starting point because it gives you time before a mistake becomes fatal.
+
+Use **Concussive Barrage** before enemies reach you, not after you are already surrounded. A good stun window lets you reload, mine the last bit of Expenite, repair the elevator generator, or create space for a clean retreat.
+
+Use **Repulsion Field** when enemies are already too close and you need immediate breathing room. In solo, this is often stronger than it looks because there is no teammate peeling enemies away from you.
+
+Use **Armor Beacon** before chip damage becomes health damage. If you keep waiting until your armor is already gone and the room is collapsing, Guardian starts feeling weaker than it should.
+
+For upgrades, prioritize:
+
+- longer stun duration,
+- more Concussive Barrage value,
+- Repulsion Field uptime,
+- Armor Beacon cooldown, duration, or radius,
+- and damage against stunned enemies only when your weapon can use the control window.
+
+Guardian does not need to clear the fastest. It needs to keep your run stable enough to finish.
+
+<h2 id="slicer-solo">
+  Slicer Solo: Highest Aggressive Ceiling
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-slicer-melee.webp"
+    alt="Slicer using close-range melee pressure in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Slicer is strongest when dense waves let you start and extend kill chains.
+  </figcaption>
+</figure>
+
+Slicer is strong solo because it can turn enemy density into momentum.
+
+Slice deals heavy melee damage, and Slicer gets much better when kills chain together. Each confirmed kill inside an active chain increases the payoff of later hits, which is why Slicer can feel awkward in sparse rooms but overwhelming in dense waves.
+
+Upgrade around that identity. Slice damage helps start chains faster. Kill-chain duration and shorter chain trigger windows make the class more forgiving. Defensive Fighting-style upgrades and melee safety windows matter because you are choosing to fight close.
+
+The rule is simple:
+
+**Enter with a chain plan, leave with an exit plan.**
+
+<h2 id="retcon-solo">
+  Retcon Solo: High-Ceiling Timing Pick
+</h2>
+
+Retcon is not the easiest solo class, but it has real solo potential.
+
+Time Rewind can act like a planned escape, a pseudo-revive, or a way to undo a risky push if you set it up before the danger. That makes Retcon valuable for experienced players who can predict when a room is about to turn bad.
+
+Use Retcon well by setting your rewind state while you still have armor, ammo, and a safe position. Then take the risk. If the push fails, roll back before it becomes a wipe.
+
+Retcon is weak when played as a late panic button. It is strong when played as a planned reset.
+
+<h2 id="falconer-solo">
+  Falconer Solo: Playable, But Do Not Pick It for Revive Value
+</h2>
+
+Falconer is where solo advice needs a caveat.
+
+In co-op, Falconer's remote revive is a major strength because it can save a downed teammate without forcing you to cross the room. In true solo, that signature value disappears. You can still use Falconer for drone pressure and electric damage, but you are not getting the class's biggest team tool.
+
+That does not make Falconer unplayable. It means Falconer is not the safest solo recommendation if your goal is survival.
+
+Pick Falconer solo if you like:
+
+- drone pressure,
+- electric damage,
+- active ability management,
+- and flexible ranged fights.
+
+Avoid Falconer solo if you wanted a safety net. For that, Guardian is easier and Retcon has more planned recovery potential.
+
+<h2 id="solo-upgrade-priority">
+  Solo Upgrade Priority
+</h2>
+
+Solo upgrades should usually favor consistency over perfect damage.
+
+<GuideTable
+  caption="Upgrade priorities that matter most in Rogue Core solo runs."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+A damage upgrade is great when you can use it. But if the run keeps ending because your armor breaks, you get trapped, or you run out of ammo, survival and consistency are the better picks.
+
+For more upgrade examples, read <Link href="/deep-rock-galactic/upgrades-explained">Rogue Core upgrades explained</Link>.
+
+<h2 id="armor-mechanics">
+  Armor Matters More in Solo
+</h2>
+
+Armor is your warning layer.
+
+When armor is gone, every mistake becomes more dangerous. Do not assume armor will simply fix itself over time, and do not assume every supply source will cover the problem. In solo, losing armor often means losing your chance to interact safely with Expenite, Workbenches, Bio Boosters, or the elevator generator.
+
+That is why defensive upgrades are not boring in solo.
+
+Take armor recovery, damage reduction, suit ability immunity, or health-protection effects when the run is unstable. If you keep taking health damage, a Damage Dam-style effect can be stronger than another damage roll because it stops one bad hit from becoming the end of the run.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="use-cooper">
+  Use Cooper With Specific Commands
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-cooper-upgrade.webp"
+    alt="Choosing a Cooper upgrade during a solo run in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cooper gets more useful when you command it and upgrade it around your solo bottleneck.
+  </figcaption>
+</figure>
+
+Cooper is not just background help.
+
+Use the laser pointer to command Cooper onto specific jobs: mine awkward Expenite, focus a high-threat enemy, help during deposits, or reduce pressure while you reposition.
+
+<GuideTable
+  caption="How to use Cooper during solo Rogue Core runs."
+  columns={cooperColumns}
+  rows={cooperRows}
+/>
+
+For the full breakdown, read the <Link href="/deep-rock-galactic/cooper-guide">Rogue Core Cooper guide</Link>.
+
+<h2 id="follow-the-power-cable">
+  Follow the Power Cable, Then Leave the Path on Purpose
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-power-cable-route.webp"
+    alt="Power cable route in Deep Rock Galactic Rogue Core leading players between elevators."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The power cable is your route anchor. Leave it only when the reward is worth the time.
+  </figcaption>
+</figure>
+
+In solo, getting lost costs more because no teammate can keep the route moving while you explore.
+
+Use the cable as your anchor. Leave it for clear value: Expenite, an Expenite Gem, a Workbench, a Bio Booster, a crate, or a progression objective. Then return to the cable before the floor becomes a time sink.
+
+<h2 id="solo-floor-tempo">
+  Solo Floor Tempo
+</h2>
+
+There is no exact timer that fits every cave, but you can use a simple tempo check.
+
+<GuideTable
+  caption="How to pace a Rogue Core solo floor."
+  columns={tempoColumns}
+  rows={tempoRows}
+/>
+
+The important question is not “did I see everything?”
+
+The important question is:
+
+**Did I convert enough time into power to survive the next floor?**
+
+<h2 id="solo-vs-coop-habits">
+  Solo vs Co-op Habits
+</h2>
+
+Solo asks you to change normal co-op behavior.
+
+<GuideTable
+  caption="How to change co-op habits for solo Rogue Core runs."
+  columns={coopVsSoloColumns}
+  rows={coopVsSoloRows}
+/>
+
+<h2 id="expenite-solo">
+  Expenite and Expenite Gems
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-expenite-deposit.webp"
+    alt="Depositing Expenite during a Rogue Core run to trigger upgrades."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In solo, Expenite is a power spike race against time.
+  </figcaption>
+</figure>
+
+Deposit Expenite when it will trigger a power spike before danger starts.
+
+The solo-specific rule is not “mine every green rock.” It is **mine enough to matter, then bank it before the next risky event**.
+
+If you find an **Expenite Gem**, treat it as a top priority. Deposit it immediately because it can create a major upgrade moment for both you and Cooper. Do not carry it while full-clearing small rewards.
+
+<h2 id="aggression-meter-solo">
+  Respect the Aggression Meter
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-aggression-meter.webp"
+    alt="Aggression meter in Deep Rock Galactic Rogue Core during a run."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The aggression meter turns slow solo play into a survival problem.
+  </figcaption>
+</figure>
+
+The aggression meter is the easiest way to tell when a floor is becoming too expensive.
+
+Use it as a decision tool:
+
+- if the reward is major, finish it fast;
+- if the reward is minor, skip it;
+- if an upgrade is close, deposit first;
+- if the elevator is ready, start preparing to leave;
+- if armor and ammo are already low, stop opening new problems.
+
+This is where most solo runs fail: not because the first mistake was huge, but because the floor kept adding pressure while you tried to do one more thing.
+
+<h2 id="workbenches-solo">
+  Workbenches Are Good, But Not Always Worth the Risk
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-workbench.webp"
+    alt="Workbench upgrade choice during a Rogue Core run."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In solo, a Workbench is worth it when it fixes a real build problem before the floor gets too dangerous.
+  </figcaption>
+</figure>
+
+Workbenches can upgrade your ability, improve your weapon, or offer a new weapon.
+
+In solo, the Workbench question is not just “is this upgrade good?” It is:
+
+**Can I reach the toolbox, return safely, and get enough value before the floor punishes the time spent?**
+
+<GuideTable
+  caption="How to decide whether a Workbench is worth it in solo."
+  columns={workbenchDecisionColumns}
+  rows={workbenchDecisionRows}
+/>
+
+Use Workbenches early, when the route is stable, or when the offered choice fixes a real build gap. Skip them when the toolbox is far, the aggression meter is already high, or your current build is good enough to leave.
+
+<h2 id="solo-elevator-rules">
+  Solo Elevator Rules
+</h2>
+
+The elevator is one of the most common solo death points.
+
+<GuideTable
+  caption="How to handle elevator defense in Rogue Core solo runs."
+  columns={elevatorColumns}
+  rows={elevatorRows}
+/>
+
+
+
+<h2 id="common-solo-mistakes">
+  Common Solo Mistakes
+</h2>
+
+<GuideTable
+  caption="Common Rogue Core solo mistakes and how to avoid them."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="can-you-play-rogue-core-solo">
+  Can you play Rogue Core solo?
+</h3>
+
+Yes. Rogue Core supports solo play, and solo runs give you Cooper as a helper. Solo still has real pressure because the timer keeps moving while you handle mining, deposits, fights, upgrades, and routing alone.
+
+<h3 id="is-rogue-core-solo-harder-than-coop">
+  Is Rogue Core solo harder than co-op?
+</h3>
+
+Solo can feel harder because every interaction falls on you. Enemy scaling is reduced, but co-op players can split jobs while solo players must mine, fight, deposit, and move by themselves.
+
+<h3 id="what-is-the-best-solo-class-in-rogue-core">
+  What is the best solo class in Rogue Core?
+</h3>
+
+Guardian is the safest solo class for new players. Slicer has the highest aggressive ceiling if you can manage kill chains and close-range pressure. Retcon is strong for experienced players who can use Time Rewind before risky pushes.
+
+<h3 id="is-falconer-good-solo">
+  Is Falconer good solo?
+</h3>
+
+Falconer is playable solo, but you should not pick it for remote revive value. That tool is much stronger in co-op. In solo, Falconer depends more on drone pressure and electric damage.
+
+<h3 id="is-retcon-good-solo">
+  Is Retcon good solo?
+</h3>
+
+Retcon can be very good solo for experienced players. Time Rewind works best when you set it up before a dangerous push, then use it as a planned reset if the room turns bad.
+
+<h3 id="what-upgrades-are-best-for-solo">
+  What upgrades are best for solo?
+</h3>
+
+Solo players should prioritize self-sustain, armor recovery, damage reduction, movement, ammo help, and simple damage triggers. Damage Dam-style effects and defensive suit upgrades are valuable when health or armor keeps collapsing.
+
+<h3 id="how-should-i-use-cooper-solo">
+  How should I use Cooper solo?
+</h3>
+
+Use the laser pointer to command Cooper onto specific jobs: mine awkward Expenite, focus high-threat enemies, help during deposits, or support route-critical tasks. Cooper upgrades can appear through R.E.P.D. or Bio Booster interactions.
+
+<h3 id="what-should-i-do-with-an-expenite-gem">
+  What should I do with an Expenite Gem?
+</h3>
+
+Deposit it immediately. An Expenite Gem can create a major upgrade moment for both you and Cooper, so carrying it through more danger is usually not worth it.
+
+<h3 id="should-i-full-clear-solo">
+  Should I full clear floors in solo?
+</h3>
+
+Usually no. Take the rewards that change the run, such as Expenite thresholds, Expenite Gems, Workbenches, Bio Boosters, and needed crates, then return to the route before the floor becomes too expensive.

@@ -1,0 +1,700 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const recommendationColumns = [
+  { key: "playerType", label: "If You Want..." },
+  { key: "bestPick", label: "Best Pick" },
+  { key: "why", label: "Why" },
+];
+
+export const recommendationRows = [
+  {
+    playerType: "The safest first Reclaimer",
+    bestPick: "Guardian",
+    why:
+      "Pick Guardian if you want crowd control, armor recovery, and space to recover from beginner mistakes.",
+  },
+  {
+    playerType: "A flexible beginner class",
+    bestPick: "Falconer",
+    why:
+      "Pick Falconer if you want drone damage, electric pressure, and co-op revive utility without committing to melee.",
+  },
+  {
+    playerType: "The best team support",
+    bestPick: "Spotter",
+    why:
+      "Pick Spotter if your team can focus marked targets and turn crit windows into real damage.",
+  },
+  {
+    playerType: "Aggressive solo damage",
+    bestPick: "Slicer",
+    why:
+      "Pick Slicer if you can manage close-range pressure, movement, and kill-chain momentum.",
+  },
+  {
+    playerType: "A high-skill timing class",
+    bestPick: "Retcon",
+    why:
+      "Pick Retcon if you enjoy planning burst windows, rewinding mistakes, and playing around risk.",
+  },
+  {
+    playerType: "The easiest co-op value",
+    bestPick: "Spotter, Guardian, or Falconer",
+    why:
+      "These classes bring useful team tools even when the squad is not perfectly coordinated.",
+  },
+];
+
+export const soloColumns = [
+  { key: "rank", label: "Solo Pick" },
+  { key: "className", label: "Class" },
+  { key: "soloReason", label: "Why It Works Solo" },
+];
+
+export const soloRows = [
+  {
+    rank: "Safest",
+    className: "Guardian",
+    soloReason:
+      "Protection, stun, pushback, and armor recovery make mistakes easier to recover from.",
+  },
+  {
+    rank: "Highest aggressive ceiling",
+    className: "Slicer",
+    soloReason:
+      "Big melee damage and kill-chain potential can clear rooms fast if you control risk.",
+  },
+  {
+    rank: "Most flexible",
+    className: "Falconer",
+    soloReason:
+      "Drone pressure and electric damage help mixed fights, but remote revive loses value solo.",
+  },
+  {
+    rank: "Team-leaning but usable",
+    className: "Spotter",
+    soloReason:
+      "Marks and crit windows still help, but Spotter scales harder when teammates can use them.",
+  },
+  {
+    rank: "Hardest to recommend first",
+    className: "Retcon",
+    soloReason:
+      "Rewind and Rage are strong, but bad timing wastes the class's biggest tools.",
+  },
+];
+
+export const statColumns = [
+  { key: "className", label: "Class" },
+  { key: "example", label: "Useful Number to Notice" },
+  { key: "howToUseIt", label: "How Players Should Read It" },
+];
+
+export const statRows = [
+  {
+    className: "Guardian",
+    example:
+      "Concussive Barrage fires 12 bombs that can stun enemies for 6s; Repulsion Field creates 4s of space; Armor Beacon can restore armor up to 50% max armor in a 6m radius.",
+    howToUseIt:
+      "Guardian is strongest when you use control before the room collapses, not after everyone is already down.",
+  },
+  {
+    className: "Falconer",
+    example:
+      "Lightning Drone has 5 charges with 10s replenishment. Each charge fires 3 bursts for roughly 25-35 damage and applies electrocution. Thunder Rod creates an 8m zone for 15s with +100% electric damage.",
+    howToUseIt:
+      "Falconer is about pressure, electric setup, and remote revive value. In co-op, the revive utility is a major part of the class.",
+  },
+  {
+    className: "Spotter",
+    example:
+      "Scanner detects enemies in a 35m radius every 4s. Crit Darts can mark targets for +100% crit chance from incoming damage.",
+    howToUseIt:
+      "Spotter is not passive support. Mark the enemy or choke point your team should delete first.",
+  },
+  {
+    className: "Slicer",
+    example:
+      "Slice deals 560 damage and turns nearby terrain to glass within 3m.",
+    howToUseIt:
+      "Slicer wants kill-chain momentum and clean exits. The damage is high, but bad positioning gets punished quickly.",
+  },
+  {
+    className: "Retcon",
+    example:
+      "Rage can create a short high-damage window, while Time Rewind can restore an earlier state of health, ammo, and position.",
+    howToUseIt:
+      "Retcon rewards planned windows. If you use the tools only after the mistake, the class loses a lot of value.",
+  },
+];
+
+export const coopComboColumns = [
+  { key: "combo", label: "Co-op Pairing" },
+  { key: "whyItWorks", label: "Why It Works" },
+  { key: "simpleRule", label: "Simple Rule" },
+];
+
+export const coopComboRows = [
+  {
+    combo: "Guardian + Slicer",
+    whyItWorks:
+      "Guardian creates stun and space; Slicer can use that controlled room to chain kills without needing perfect coordination.",
+    simpleRule:
+      "Guardian holds the room, Slicer cleans the room.",
+  },
+  {
+    combo: "Spotter + any high-DPS class",
+    whyItWorks:
+      "Spotter marks a priority target or choke point, then Slicer, Retcon, Falconer, or a strong weapon build turns the crit window into burst damage.",
+    simpleRule:
+      "Mark first, burst second.",
+  },
+  {
+    combo: "Falconer + Guardian",
+    whyItWorks:
+      "Falconer can revive at range while Guardian protects space and keeps enemies away from the team.",
+    simpleRule:
+      "Falconer saves the downed player, Guardian saves the room.",
+  },
+  {
+  combo: "Falconer + Spotter",
+  whyItWorks:
+    "Falconer spreads electric pressure while Spotter creates focused crit windows for dangerous targets, but this pair works best when a third player handles space control.",
+  simpleRule:
+    "Use electric pressure for the pack, marks for priority targets, and bring Guardian-style control if the team feels fragile.",
+},
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterHabit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Picking the highest damage class first",
+    whyItHurts:
+      "Damage does not matter if you cannot stay alive, manage ammo, or control the room.",
+    betterHabit:
+      "Start with a Reclaimer that fixes your biggest beginner problem.",
+  },
+  {
+    mistake: "Treating Spotter like weak DPS",
+    whyItHurts:
+      "Spotter's value comes from marks, crit windows, enemy awareness, and team focus.",
+    betterHabit:
+      "Mark priority targets and help the team shoot the same thing.",
+  },
+  {
+    mistake: "Playing Guardian too passively",
+    whyItHurts:
+      "Guardian tools are meant to create space before the fight collapses.",
+    betterHabit:
+      "Use stun, pushback, and armor tools early enough to change the fight.",
+  },
+  {
+    mistake: "Dashing into every fight as Slicer",
+    whyItHurts:
+      "Slicer is strong up close, but overextending isolates you from ammo, revives, and team support.",
+    betterHabit:
+      "Use Dash to enter only when you already know how you will leave.",
+  },
+  {
+    mistake: "Using Retcon tools after the mistake",
+    whyItHurts:
+      "Retcon rewards planning. Late panic buttons are much weaker than prepared windows.",
+    betterHabit:
+      "Set up Rewind and Rage before committing to risky fights.",
+  },
+  {
+    mistake: "Ignoring upgrade paths",
+    whyItHurts:
+      "Each Reclaimer gets much stronger when upgrades support its signature ability.",
+    betterHabit:
+      "Pick upgrades that improve the class tool you are actually using.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best first class in Rogue Core is Guardian if you want safety, Falconer if you want flexible damage and co-op revive utility, and Spotter if you play team support. Slicer has the highest aggressive solo ceiling but punishes bad positioning, while Retcon is the highest-skill pick because its strongest tools depend on timing.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-five-reclaimers.webp"
+    alt="The five Reclaimers in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Rogue Core starts with five Reclaimers. The best one depends on whether you need safety, support, damage, flexibility, or timing tools.
+  </figcaption>
+</figure>
+
+<h2 id="best-class-overview">
+  Rogue Core Best Class Overview
+</h2>
+
+The best class in Deep Rock Galactic: Rogue Core is not just the one with the biggest damage number.
+
+Rogue Core is a run-based game. Your Reclaimer matters because it changes how you survive bad rooms, recover from mistakes, help teammates, and turn upgrades into a real build.
+
+For most players:
+
+- **Guardian** is the safest first pick.
+- **Falconer** is the best flexible co-op pick.
+- **Spotter** is the best pure team support.
+- **Slicer** is the best aggressive solo pick.
+- **Retcon** is the hardest class to recommend first, but one of the most rewarding once you know the game.
+
+Ask one question before choosing:
+
+**What problem keeps killing me?**
+
+If you die while the room collapses, play Guardian. If your team lacks focused damage, play Spotter. If you want flexible offense with revive utility, play Falconer. If you want to push fights and chain kills, play Slicer. If you like timing-based risk, learn Retcon.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="quick-recommendations">
+  Quick Class Recommendations
+</h2>
+
+<GuideTable
+  caption="Best Rogue Core Reclaimer picks by player type."
+  columns={recommendationColumns}
+  rows={recommendationRows}
+/>
+
+<h2 id="important-class-numbers">
+  Important Class Numbers to Actually Care About
+</h2>
+
+Rogue Core gives you real numbers, but you should read them as playstyle signals.
+
+These are current Early Access numbers and may change with patches.
+
+<GuideTable
+  caption="Useful current Early Access class numbers and how to read them as a player."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+<h2 id="guardian">
+  Guardian: Safest First Pick for New Players
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-guardian-armor-beacon.webp"
+    alt="Guardian using defensive tools in Deep Rock Galactic Rogue Core."
+    width={300}
+    height={200}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Guardian gives new players the most room to recover when a fight turns messy.
+  </figcaption>
+</figure>
+
+Guardian is the Reclaimer you pick when you want the run to feel steadier.
+
+The kit is easy to understand: stun enemies, push enemies back, restore armor, and buy time for revives or repositioning. That makes Guardian especially good while you are still learning enemy pressure, elevator fights, Workbench timing, and when to leave a floor.
+
+<h3 id="guardian-best-for">
+  Guardian Is Best For
+</h3>
+
+- New players who want a safer first class
+- Co-op teams that need protection
+- Players who often revive teammates
+- Teams pushing harder rooms
+- Anyone who wants simple, reliable space control
+
+<h3 id="guardian-best-upgrades">
+  Best Upgrades for Guardian
+</h3>
+
+Pick upgrades that make Guardian's control last longer or happen more often: **stun duration**, **extra Concussive Barrage ammo**, **Repulsion Field uptime**, and **Armor Beacon cooldown or duration**.
+
+Pick damage against stunned enemies when your team can actually shoot the stunned targets.
+
+Skip generic weapon damage unless your current weapon is already carrying the run and Guardian's tools are not the bottleneck.
+
+<h3 id="guardian-watch-out">
+  Guardian Watch Out
+</h3>
+
+Do not play Guardian like a spectator.
+
+Your tools are strongest before the team collapses. If you wait until everyone is down, even the best defensive kit can feel too late. Use stun, pushback, and armor support early enough to change the fight.
+
+<h2 id="falconer">
+  Falconer: Best Flexible Co-op Pick
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-falconer-drone.webp"
+    alt="Falconer drone ability in Deep Rock Galactic Rogue Core."
+    width={300}
+    height={200}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Falconer brings drone pressure, electric damage, and one of the most valuable co-op recovery tools.
+  </figcaption>
+</figure>
+
+Falconer is a strong class if you want damage without giving up team value.
+
+The Lightning Drone gives you active pressure. Thunder Rod creates an electric damage window. Remote Drone Revive is the class's biggest co-op identity: you can bring a downed teammate back at range without crossing the room yourself, which means you do not have to stop playing the fight just to reach the revive.
+
+That makes Falconer much stronger in squads than in pure solo. Solo Falconer is playable, but remote revive has less value when there is no teammate to revive.
+
+<h3 id="falconer-best-for">
+  Falconer Is Best For
+</h3>
+
+- Co-op teams that need revive utility
+- Players who want offense and support together
+- Electric damage setups
+- Players who like drone-based pressure
+- Squads that need a flexible fourth pick
+
+<h3 id="falconer-best-upgrades">
+  Best Upgrades for Falconer
+</h3>
+
+Pick upgrades that improve **charge replenishment**, **burst count per charge**, **electric damage**, and **electrocution chain effects**.
+
+In co-op, remote revive reliability is worth more than it looks because it can stop a wipe without forcing Falconer to cross a dangerous room.
+
+Skip revive-focused upgrades in solo unless the upgrade also improves drone pressure or general utility.
+
+<h3 id="falconer-watch-out">
+  Falconer Watch Out
+</h3>
+
+Do not assume the drone solves positioning.
+
+You still need to move well, deposit Expenite, watch the aggression meter, and choose upgrades that fit the run. Falconer is flexible, not automatic.
+
+<h2 id="spotter">
+  Spotter: Best Team Support and Crit Setup
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-spotter-crit-darts.webp"
+    alt="Spotter using Crit Darts to mark enemies in Deep Rock Galactic Rogue Core."
+    width={300}
+    height={200}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Spotter gets much stronger when the whole team shoots the marked target or fights through the marked zone.
+  </figcaption>
+</figure>
+
+Spotter is the Reclaimer for players who like making the whole squad better.
+
+The scanner helps reveal enemies. Crit Darts create focused damage windows. Ammo support helps extended fights. In co-op, that is huge because Rogue Core fights can fall apart when everyone shoots different targets and burns ammo without killing the real threat.
+
+The important part is target discipline. Spotter is not just support. Spotter tells the team what to kill.
+
+<h3 id="spotter-best-for">
+  Spotter Is Best For
+</h3>
+
+- Co-op players
+- Teams that focus targets
+- Weakpoint and crit builds
+- Players who like active support
+- Harder runs where target control matters
+
+<h3 id="spotter-best-upgrades">
+  Best Upgrades for Spotter
+</h3>
+
+Pick upgrades that improve **Crit Dart duration**, **charge count**, **mark area radius**, and **ammo support uptime**.
+
+Pick weakpoint and crit upgrades when your team is actually focusing marked targets.
+
+Skip solo-leaning damage greed if the team needs longer mark windows or more reliable ammo support.
+
+<h3 id="spotter-watch-out">
+  Spotter Watch Out
+</h3>
+
+Spotter feels weaker if your team ignores your marks.
+
+If everyone shoots random enemies, your crit setup loses value. Use Spotter when you are ready to guide fights, mark priority targets, and help the team stay organized.
+
+<h2 id="slicer">
+  Slicer: Best Aggressive Solo Pick
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-slicer-melee.webp"
+    alt="Slicer melee ability in Deep Rock Galactic Rogue Core."
+    width={300}
+    height={200}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Slicer can delete enemies fast, but every close-range push needs an exit plan.
+  </figcaption>
+</figure>
+
+Slicer is the class for players who want to fight close and keep momentum.
+
+Slice is not just a big melee hit. It deals **560 damage**, converts nearby terrain to glass within **3m**, and becomes much stronger when you keep a kill chain active. Each confirmed kill inside an active chain raises the damage multiplier on later hits, which is why Slicer can feel weak in sparse rooms but overwhelming in dense waves.
+
+Dash helps you start or escape a chain. Shield Belt protects you and allies behind it from ranged attacks, which gives Slicer a way to survive long enough to keep pressure going.
+
+The risk is simple: Slicer rewards planned aggression, but it punishes ego.
+
+<h3 id="slicer-best-for">
+  Slicer Is Best For
+</h3>
+
+- Aggressive players
+- Solo or duo players
+- Close-range burst damage
+- Players who like mobility
+- Builds that support melee or kill-chain pressure
+
+<h3 id="slicer-best-upgrades">
+  Best Upgrades for Slicer
+</h3>
+
+Pick upgrades that improve **kill-chain duration**, **chain trigger windows**, **Slice damage**, and **Dash or Shield Belt reliability**.
+
+Early blade damage upgrades are strong because they help the chain start faster and make each push safer.
+
+Skip upgrades that only help slow, passive play unless you are dying before you can start a chain.
+
+<h3 id="slicer-watch-out">
+  Slicer Watch Out
+</h3>
+
+Do not turn every fight into a melee fight.
+
+Slicer has strong tools, but you still need to respect enemy pressure, ammo, health, and escape paths. A good Slicer enters fights on purpose. A bad Slicer dashes in because the button is ready.
+
+<h2 id="retcon">
+  Retcon: Best High-Skill Pick
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-retcon-rewind.webp"
+    alt="Retcon using rewind and timing tools in Deep Rock Galactic Rogue Core."
+    width={300}
+    height={200}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Retcon is powerful when you plan your timing, but it is not the easiest first Reclaimer.
+  </figcaption>
+</figure>
+
+Retcon is the class for players who enjoy risk, planning, and timing.
+
+Rewind Time gives you a way to return to a previous state. Rage gives you a dangerous burst window. Contingency-style recovery tools can create clutch moments when the run is about to fail.
+
+That sounds amazing, but it also asks a lot from you. You need to know when a fight is about to get dangerous, set up before the mistake happens, and commit only when your window is actually safe.
+
+<h3 id="retcon-best-for">
+  Retcon Is Best For
+</h3>
+
+- Experienced players
+- Risky damage windows
+- Players who like timing tools
+- Clutch recovery moments
+- Runs where you can plan before committing
+
+<h3 id="retcon-best-upgrades">
+  Best Upgrades for Retcon
+</h3>
+
+Pick upgrades that improve **Time Rewind cooldown**, **extra rewind safety**, **Rage duration**, and **Rage damage payoff**.
+
+Pick Rage upgrades when you can create safe burst windows. Pick Time Rewind upgrades when you are using Retcon as a survival and recovery class.
+
+Skip greedy Rage damage if you keep getting hit during the window.
+
+<h3 id="retcon-watch-out">
+  Retcon Watch Out
+</h3>
+
+Retcon is not a simple panic button class.
+
+If you wait until everything has already gone wrong, the kit gets harder to use well. Think ahead. Set up your window. Then commit.
+
+<h2 id="best-solo-class">
+  Best Solo Class in Rogue Core
+</h2>
+
+For solo, the best class depends on how comfortable you are with pressure.
+
+<GuideTable
+  caption="Best Rogue Core solo classes by comfort level and playstyle."
+  columns={soloColumns}
+  rows={soloRows}
+/>
+
+For a full solo route plan, read the <Link href="/deep-rock-galactic/solo-guide">Rogue Core solo guide</Link>.
+
+<h2 id="best-coop-class">
+  Best Co-op Class in Rogue Core
+</h2>
+
+In co-op, the best classes are usually the ones that make the whole team safer, stronger, or easier to recover.
+
+That is why **Spotter**, **Guardian**, and **Falconer** are so easy to recommend. Spotter creates crit windows, Guardian controls space, and Falconer brings drone pressure plus remote revive value.
+
+<h3 id="coop-class-combos">
+  Easy Co-op Class Combos
+</h3>
+
+<GuideTable
+  caption="Simple Rogue Core class pairings that work without heavy coordination."
+  columns={coopComboColumns}
+  rows={coopComboRows}
+/>
+
+Slicer and Retcon can still be excellent in co-op, but they ask more from the player. If the squad already has support and safety covered, a strong Slicer or Retcon can turn controlled rooms into fast clears.
+
+<h2 id="common-class-mistakes">
+  Common Class Mistakes
+</h2>
+
+<GuideTable
+  caption="Common Rogue Core class mistakes and better habits."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="which-class-should-you-main">
+  Which Class Should You Main?
+</h2>
+
+<h3 id="main-guardian">
+  Main Guardian If...
+</h3>
+
+You like being the player who keeps the run from collapsing. Guardian is for players who enjoy protecting teammates, controlling space, and making dangerous rooms manageable.
+
+<h3 id="main-falconer">
+  Main Falconer If...
+</h3>
+
+You like doing damage while still having team utility. Falconer is a good fit if you want a class that always has something useful to do, especially in co-op.
+
+<h3 id="main-spotter">
+  Main Spotter If...
+</h3>
+
+You like calling targets, setting up crit damage, and helping the squad play smarter. Spotter is strongest when you enjoy paying attention to the whole fight.
+
+<h3 id="main-slicer">
+  Main Slicer If...
+</h3>
+
+You like speed, melee pressure, and high-risk damage. Slicer is for players who want to take the fight to the enemies instead of waiting for them.
+
+<h3 id="main-retcon">
+  Main Retcon If...
+</h3>
+
+You like planning, clutch moments, and tools that reward timing. Retcon is not the smoothest first class, but it can become one of the most satisfying once you understand the run.
+
+<h2 id="recommended-class-order">
+  Recommended Class Order for New Players
+</h2>
+
+If you want a simple learning path, try this order:
+
+1. **Guardian** — learn safety, revives, armor, and pressure.
+2. **Falconer** — learn flexible offense, drone pressure, and co-op utility.
+3. **Spotter** — learn marks, crit windows, ammo support, and team focus.
+4. **Slicer** — learn aggression, movement, melee risk, and kill chains.
+5. **Retcon** — learn timing, rewind tools, Rage windows, and clutch recovery.
+
+You do not have to follow this exactly, but it gives you a smoother path than starting with the hardest timing class and wondering why the run feels chaotic.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="what-is-the-best-class-in-rogue-core">
+  What is the best class in Rogue Core?
+</h3>
+
+There is no single best class for every run. In Early Access, balance may still change, but the role split is clear: Guardian is the safest starter, Falconer is flexible co-op utility, Spotter is team support, Slicer is aggressive solo pressure, and Retcon is the timing-based high-skill pick.
+
+<h3 id="what-is-the-best-solo-class-in-rogue-core">
+  What is the best solo class in Rogue Core?
+</h3>
+
+Guardian is the safest solo class for new players. Slicer has the higher aggressive solo ceiling if you can manage movement, kill chains, and close-range pressure.
+
+<h3 id="what-is-the-best-coop-class-in-rogue-core">
+  What is the best co-op class in Rogue Core?
+</h3>
+
+Falconer, Spotter, and Guardian are the easiest co-op recommendations because they bring remote revive utility, crit windows, armor support, and space control.
+
+<h3 id="is-slicer-good-for-beginners">
+  Is Slicer good for beginners?
+</h3>
+
+Slicer is good if you like aggressive play, but it is less forgiving than Guardian or Falconer. If you dash into bad fights without an exit plan, Slicer can feel much harder than it looks.
+
+<h3 id="is-retcon-good-for-new-players">
+  Is Retcon good for new players?
+</h3>
+
+Retcon is not the best first class for most players. It has strong tools, but they work best when you already understand timing, positioning, damage windows, and enemy pressure.
+
+<h3 id="is-spotter-only-a-support-class">
+  Is Spotter only a support class?
+</h3>
+
+No. Spotter is support-focused, but Crit Darts, enemy detection, and ammo tools can strongly improve team damage and run control. Spotter feels best when the team actually focuses marked targets.
+
+<h3 id="what-upgrades-should-guardian-pick">
+  What upgrades should Guardian pick?
+</h3>
+
+Guardian should prioritize stun duration, extra Concussive Barrage value, Repulsion Field uptime, and Armor Beacon cooldown or duration. Damage against stunned enemies is strong when the team can use the control window.
+
+<h3 id="what-upgrades-should-slicer-pick">
+  What upgrades should Slicer pick?
+</h3>
+
+Slicer should prioritize kill-chain duration, chain trigger windows, Slice damage, and mobility or shield reliability. Blade damage is especially useful early because it helps start chains faster.
+
+<h3 id="what-upgrades-should-falconer-pick">
+  What upgrades should Falconer pick?
+</h3>
+
+Falconer should prioritize charge replenishment, burst count, electric damage, electrocution chain effects, and remote revive reliability in co-op. Revive-only upgrades lose value in solo.
+
+<h3 id="what-order-should-i-learn-classes">
+  What order should I learn Rogue Core classes?
+</h3>
+
+A smooth learning order is Guardian, Falconer, Spotter, Slicer, then Retcon. This teaches safety first, then flexible offense, team support, aggression, and finally timing-based tools.

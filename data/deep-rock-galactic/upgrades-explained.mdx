@@ -1,0 +1,1166 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const upgradeLoopColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatHappens", label: "What Happens" },
+  { key: "playerRule", label: "Player Rule" },
+];
+
+export const upgradeLoopRows = [
+  {
+    step: "1. Mine Expenite",
+    whatHappens:
+      "Find green Expenite during a floor and mine it while moving through the facility.",
+    playerRule:
+      "Expenite is upgrade fuel, not background loot.",
+  },
+  {
+    step: "2. Deposit into the R.E.P.D.",
+    whatHappens:
+      "Call the processor drone and deposit your Expenite into it.",
+    playerRule:
+      "Deposit before risky fights when the team is close to a threshold.",
+  },
+  {
+    step: "3. Hit the upgrade threshold",
+    whatHappens:
+      "The first standard upgrade costs 120 Expenite. Later early triggers rise by +10 until 230.",
+    playerRule:
+      "The first few upgrades are the cheapest power spikes of the run.",
+  },
+  {
+    step: "4. Move into the R.E.P.D. radius",
+    whatHappens:
+      "When the threshold is met, players need to gather near the R.E.P.D. to trigger the choice.",
+    playerRule:
+      "Do not wander away when the upgrade is ready.",
+  },
+  {
+    step: "5. Choose during the paused event",
+    whatHappens:
+      "The upgrade choice pauses the action, giving you time to read the options.",
+    playerRule:
+      "Use the pause to check your build, not just the rarity color.",
+  },
+  {
+    step: "6. Stack toward one direction",
+    whatHappens:
+      "Your choices build toward weapon damage, ammo, crits, armor, movement, ability uptime, or class identity.",
+    playerRule:
+      "A focused build usually beats scattered upgrades.",
+  },
+];
+
+export const expeniteCostColumns = [
+  { key: "trigger", label: "Upgrade Trigger" },
+  { key: "cost", label: "Expenite Cost" },
+  { key: "whatItMeans", label: "What It Means" },
+];
+
+export const expeniteCostRows = [
+  {
+    trigger: "1st standard upgrade",
+    cost: "120",
+    whatItMeans:
+      "Cheapest power spike. Try to trigger it early instead of waiting for perfect choices.",
+  },
+  {
+    trigger: "2nd upgrade",
+    cost: "130",
+    whatItMeans:
+      "Still cheap enough that nearby Expenite is usually worth banking.",
+  },
+  {
+    trigger: "3rd upgrade",
+    cost: "140",
+    whatItMeans:
+      "Your build direction should start becoming clear.",
+  },
+  {
+    trigger: "4th upgrade",
+    cost: "150",
+    whatItMeans:
+      "Start doubling down on the weapon, ability, or survival plan that is working.",
+  },
+  {
+    trigger: "5th upgrade",
+    cost: "160",
+    whatItMeans:
+      "Bad early choices start becoming noticeable here.",
+  },
+  {
+    trigger: "6th upgrade",
+    cost: "170",
+    whatItMeans:
+      "Ammo, armor, and trigger reliability matter more.",
+  },
+  {
+    trigger: "Later standard upgrades",
+    cost: "180 → 230",
+    whatItMeans:
+      "Costs keep rising by 10 until the 230 cap.",
+  },
+  {
+    trigger: "After 230",
+    cost: "Higher scaling",
+    whatItMeans:
+      "Do not assume you can fix a scattered build forever. Make early choices count.",
+  },
+];
+
+export const statColumns = [
+  { key: "stat", label: "Stat You See" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "pickItWhen", label: "Pick It When..." },
+];
+
+export const statRows = [
+  {
+    stat: "+40% Recoil Control",
+    whatItMeans:
+      "The weapon becomes easier to keep on target during sustained fire.",
+    pickItWhen:
+      "You are still learning a weapon, missing follow-up shots, or fighting at medium range.",
+  },
+  {
+    stat: "+30% Rate of Fire",
+    whatItMeans:
+      "You shoot faster and can push damage out more quickly.",
+    pickItWhen:
+      "You already control the weapon well and have enough ammo to support faster shooting.",
+  },
+  {
+    stat: "+20% Damage",
+    whatItMeans:
+      "Simple raw damage with no special trigger.",
+    pickItWhen:
+      "You can land shots reliably and just need enemies to die faster.",
+  },
+  {
+    stat: "+40% Weakpoint Damage",
+    whatItMeans:
+      "You get more value from accurate shots or marked targets.",
+    pickItWhen:
+      "You can hit weak points, your team has Spotter marks, or your weapon rewards precision.",
+  },
+  {
+    stat: "+1 Penetration",
+    whatItMeans:
+      "Shots can pass through more enemies or targets.",
+    pickItWhen:
+      "Enemies are lining up, crowds are slowing you down, or your weapon benefits from shooting through packs.",
+  },
+  {
+    stat: "+200% Armor Breaking",
+    whatItMeans:
+      "The weapon handles armored enemies much better.",
+    pickItWhen:
+      "Armor is wasting your ammo, slowing your kills, or blocking your team's damage.",
+  },
+  {
+    stat: "x2 Magazine Size",
+    whatItMeans:
+      "You reload less often and can keep pressure up longer.",
+    pickItWhen:
+      "Reloads keep getting you hit, interrupted, or trapped during waves.",
+  },
+  {
+    stat: "+35% Reload Speed",
+    whatItMeans:
+      "Your downtime between bursts gets shorter.",
+    pickItWhen:
+      "The weapon already feels strong, but reloads are the moment enemies catch you.",
+  },
+  {
+    stat: "+35% Explosion Radius",
+    whatItMeans:
+      "Your area damage reaches more enemies.",
+    pickItWhen:
+      "You need crowd control, swarm clear, or better damage against grouped enemies.",
+  },
+  {
+    stat: "-35% Spread",
+    whatItMeans:
+      "The weapon becomes tighter and more accurate.",
+    pickItWhen:
+      "The weapon hits hard but feels too loose or unreliable at the range you want to fight.",
+  },
+  {
+    stat: "+40% Damage as Acid",
+    whatItMeans:
+      "Part of your damage gains an acid effect.",
+    pickItWhen:
+      "You want damage over time, armor pressure, or better value against enemies that survive the first hit.",
+  },
+  {
+    stat: "100% Ammo Resupplied",
+    whatItMeans:
+      "A resupply gives back a full amount instead of only helping a little.",
+    pickItWhen:
+      "Your run is losing because you run dry before elevator fights, events, or bosses.",
+  },
+];
+
+export const focusColumns = [
+  { key: "choice", label: "Upgrade Focus" },
+  { key: "goodWhen", label: "Good When" },
+  { key: "risk", label: "Risk" },
+];
+
+export const focusRows = [
+  {
+    choice: "Focus one strong weapon",
+    goodWhen:
+      "The weapon already feels reliable and solves your main combat problem.",
+    risk:
+      "You may still need a backup answer for armor, range, or crowds.",
+  },
+  {
+    choice: "Split upgrades across two weapons",
+    goodWhen:
+      "Each weapon clearly solves a different problem, such as one for crowds and one for armor.",
+    risk:
+      "Two half-upgraded weapons often feel worse than one upgraded weapon.",
+  },
+  {
+    choice: "Upgrade class ability first",
+    goodWhen:
+      "Your Reclaimer ability is already carrying fights, revives, movement, or control.",
+    risk:
+      "If you rarely use the ability, the upgrade may not pay off.",
+  },
+  {
+    choice: "Take a new weapon",
+    goodWhen:
+      "Your current setup has a clear missing answer.",
+    risk:
+      "Replacing a working gun for novelty can break a good build.",
+  },
+];
+
+export const problemColumns = [
+  { key: "problem", label: "Your Run Problem" },
+  { key: "lookFor", label: "Look For" },
+  { key: "why", label: "Why It Helps" },
+];
+
+export const problemRows = [
+  {
+    problem: "Enemies live too long",
+    lookFor:
+      "Raw damage, weakpoint damage, crit bonuses, ability damage",
+    why:
+      "You need priority enemies to die before they force you to retreat or burn too much ammo.",
+  },
+  {
+    problem: "You run out of ammo",
+    lookFor:
+      "Max ammo, ammo recovery, magazine size, new weapon",
+    why:
+      "More damage does not help if your gun is empty when the next wave arrives.",
+  },
+  {
+    problem: "Armor slows every fight down",
+    lookFor:
+      "Armor breaking, armor piercing, acid damage, penetration",
+    why:
+      "Better armor handling turns annoying enemies into normal enemies.",
+  },
+  {
+    problem: "Crowds surround you",
+    lookFor:
+      "Explosion radius, penetration, stun, movement, pushback",
+    why:
+      "You need space and area pressure, not only single-target damage.",
+  },
+  {
+    problem: "Reloads get you hit",
+    lookFor:
+      "Magazine size, reload speed, second weapon",
+    why:
+      "A longer or smoother firing window gives you more time before enemies punish you.",
+  },
+  {
+    problem: "Your class ability carries fights",
+    lookFor:
+      "Ability damage, ability cooldown, extra ability charge, range",
+    why:
+      "If the ability is already saving the run, making it better is usually worth it.",
+  },
+  {
+    problem: "You are dying while repositioning",
+    lookFor:
+      "Movement speed, dodge, stun, defensive tools",
+    why:
+      "Survival upgrades are stronger than damage upgrades when the real issue is getting trapped.",
+  },
+];
+
+export const timingColumns = [
+  { key: "stage", label: "Run Stage" },
+  { key: "upgradeGoal", label: "Upgrade Goal" },
+  { key: "goodPicks", label: "Good Picks" },
+];
+
+export const timingRows = [
+  {
+    stage: "Early upgrades",
+    upgradeGoal:
+      "Make your weapon and class feel stable.",
+    goodPicks:
+      "Reliable damage, recoil control, ammo comfort, armor handling, simple ability upgrades.",
+  },
+  {
+    stage: "Mid-run upgrades",
+    upgradeGoal:
+      "Double down on the build direction that is already working.",
+    goodPicks:
+      "Weakpoint chains, electric setups, melee chains, stun payoff, ammo recovery, class-specific scaling.",
+  },
+  {
+    stage: "Late upgrades",
+    upgradeGoal:
+      "Fix the problem that would end the run.",
+    goodPicks:
+      "Survival, damage reduction, ammo sustain, boss damage, crowd control, panic recovery.",
+  },
+];
+
+export const rollColumns = [
+  { key: "example", label: "Example Roll" },
+  { key: "whatItSolves", label: "What It Solves" },
+  { key: "playerRead", label: "How to Read It" },
+];
+
+export const rollRows = [
+  {
+    example:
+      'Epic "Thunderhead" Heavy Autocannon: +1 Penetration, +35% Explosion Radius, -35% Spread, +40% Damage as Acid',
+    whatItSolves:
+      "Crowd pressure, armor pressure, accuracy, and damage over time.",
+    playerRead:
+      "This is a strong crowd-control style pick if your run needs area pressure and better enemy handling.",
+  },
+  {
+    example:
+      "Rare Breach Cutter: x2 Magazine Size, +100% Projectile Velocity, Return to Sender",
+    whatItSolves:
+      "Beam uptime, shot control, and sustained use.",
+    playerRead:
+      "This is good when you want a weapon that can handle groups without constantly reloading or wasting shots.",
+  },
+  {
+    example:
+      "Rare Deepcore 40MM PGL: +35% Explosion Radius, x2 Magazine Size, +35% Reload Speed",
+    whatItSolves:
+      "Area damage, reload comfort, and more shots before downtime.",
+    playerRead:
+      "This is a clean pick when your team needs reliable explosive pressure.",
+  },
+  {
+    example:
+      'Rare "Lead Storm" Powered Minigun: +50% Ricochet Chance, +200% Armor Breaking',
+    whatItSolves:
+      "Armor handling and extra hit value in crowded fights.",
+    playerRead:
+      "This is better when enemies are armored or packed together, not when your main problem is mobility.",
+  },
+  {
+    example:
+      'Epic "Hurricane" Guided Rocket System: +20% Damage, +200% Armor Breaking, x2 Magazine Size, +35% Explosion Radius',
+    whatItSolves:
+      "Damage, armor, magazine comfort, and area pressure at the same time.",
+    playerRead:
+      "This is close to an all-rounder roll. It is hard to ignore if your current weapon feels weak.",
+  },
+  {
+    example:
+      "Common Ammo Boost: +25% Max Ammo, 100% Ammo Resupplied",
+    whatItSolves:
+      "Long-floor ammo pressure and bad resupply timing.",
+    playerRead:
+      "This can beat a flashier weapon if the reason you keep losing is running dry.",
+  },
+];
+
+export const synergyColumns = [
+  { key: "firstPick", label: "If You Already Picked..." },
+  { key: "nextPick", label: "Then This Gets Better" },
+  { key: "why", label: "Why" },
+];
+
+export const synergyRows = [
+  {
+    firstPick: "+40% Weakpoint Damage",
+    nextPick: "Vital Impact or crit-based effects",
+    why:
+      "If you are already aiming for weakpoints, crit effects become much easier to justify.",
+  },
+  {
+    firstPick: "Armor Breaking or Acid damage",
+    nextPick: "Penetration or explosion radius",
+    why:
+      "Armor handling plus crowd reach makes dense rooms much easier to clear.",
+  },
+  {
+    firstPick: "Magazine Size",
+    nextPick: "Rate of Fire or reload speed",
+    why:
+      "More magazine comfort lets faster shooting or shorter downtime pay off.",
+  },
+  {
+    firstPick: "Slice damage",
+    nextPick: "Kill-chain duration or melee safety",
+    why:
+      "Slicer wants the first kill quickly, then needs enough time and safety to keep the chain going.",
+  },
+  {
+    firstPick: "Electric damage",
+    nextPick: "Electrocution chain or Falconer ability upgrades",
+    why:
+      "Electric setups get stronger when the status spreads or the ability comes online more often.",
+  },
+];
+
+export const workbenchColumns = [
+  { key: "option", label: "Workbench Option" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "takeItWhen", label: "Take It When..." },
+];
+
+export const workbenchRows = [
+  {
+    option: "Ability upgrade",
+    whatItDoes:
+      "Improves one of your Reclaimer tools, such as ability damage, range, effect strength, cooldown, or charges.",
+    takeItWhen:
+      "Your ability is already solving fights, revives, movement, crowd control, or damage windows.",
+  },
+  {
+    option: "Weapon upgrade",
+    whatItDoes:
+      "Improves a weapon you already have with stats such as weakpoint damage, armor breaking, penetration, magazine size, reload speed, or elemental effects.",
+    takeItWhen:
+      "You like your current weapon and want to make it more reliable instead of replacing it.",
+  },
+  {
+    option: "New weapon",
+    whatItDoes:
+      "Gives you another weapon option instead of upgrading your current weapon or ability.",
+    takeItWhen:
+      "Your current setup has a clear weakness, such as bad range, poor crowd control, weak armor handling, or bad ammo economy.",
+  },
+];
+
+export const bioBoosterColumns = [
+  { key: "bioBoosterType", label: "Bio Booster Type" },
+  { key: "whatItHelps", label: "What It Helps" },
+  { key: "goodFor", label: "Good For" },
+];
+
+export const bioBoosterRows = [
+  {
+    bioBoosterType: "Crit control",
+    whatItHelps:
+      "Turns critical hits into crowd control or extra value.",
+    goodFor:
+      "Spotter teams, weakpoint builds, accurate weapons, and players who already land crits often.",
+  },
+  {
+    bioBoosterType: "Movement speed",
+    whatItHelps:
+      "Makes repositioning safer and helps you escape bad rooms.",
+    goodFor:
+      "Solo players, Slicer players, and anyone who gets trapped while backing out.",
+  },
+  {
+    bioBoosterType: "Ability cooldown",
+    whatItHelps:
+      "Lets you use your Reclaimer tools more often.",
+    goodFor:
+      "Guardian safety tools, Falconer drone pressure, Slicer aggression, Retcon timing, and Spotter support.",
+  },
+  {
+    bioBoosterType: "Damage-based recovery",
+    whatItHelps:
+      "Rewards you for staying active in fights.",
+    goodFor:
+      "Players with reliable damage output who can keep fighting without overextending.",
+  },
+];
+
+export const hazardColumns = [
+  { key: "environment", label: "Environmental Tool" },
+  { key: "useItFor", label: "Use It For" },
+  { key: "upgradeConnection", label: "Upgrade Connection" },
+];
+
+export const hazardRows = [
+  {
+    environment: "Fire canisters",
+    useItFor:
+      "Burning groups or softening enemies before a wave reaches you.",
+    upgradeConnection:
+      "More valuable when your build already rewards area pressure or damage-over-time effects.",
+  },
+  {
+    environment: "Electric canisters",
+    useItFor:
+      "Status pressure, crowd disruption, or helping electric setups.",
+    upgradeConnection:
+      "Pairs naturally with Falconer-style electric upgrades and status-based picks.",
+  },
+  {
+    environment: "Cryo / freezing tools",
+    useItFor:
+      "Stopping enemies long enough to reposition or focus fire.",
+    upgradeConnection:
+      "Makes precision, weakpoint, and burst windows easier to use.",
+  },
+  {
+    environment: "Sludge / hazard zones",
+    useItFor:
+      "Slowing or damaging packs that are chasing you.",
+    upgradeConnection:
+      "Works best when your build needs time, spacing, or crowd control.",
+  },
+];
+
+export const coopDraftColumns = [
+  { key: "rule", label: "Co-op Upgrade Rule" },
+  { key: "whatHappens", label: "What Happens" },
+  { key: "playerAdvice", label: "Player Advice" },
+];
+
+export const coopDraftRows = [
+  {
+    rule: "Each player sees options",
+    whatHappens:
+      "In a 4-player squad, each player can receive 6 upgrade choices during the event.",
+    playerAdvice:
+      "Read quickly, but do not panic. The action is paused during the selection.",
+  },
+  {
+    rule: "Players choose in random order",
+    whatHappens:
+      "The selection order is random, so one player may remove an option before another player picks.",
+    playerAdvice:
+      "If an option is build-defining for you, take it instead of assuming it will stay available.",
+  },
+  {
+    rule: "Most picks are exclusive",
+    whatHappens:
+      "Most upgrade choices are taken off the table once selected.",
+    playerAdvice:
+      "In voice or premade groups, call out build-critical upgrades before picking.",
+  },
+  {
+    rule: "Health Reward is special",
+    whatHappens:
+      "Health Reward appears as a special final-slot option and can be available to every player.",
+    playerAdvice:
+      "Use it when the team is unstable instead of forcing greedy damage choices.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterHabit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Picking the rarest upgrade every time",
+    whyItHurts:
+      "A rare or epic upgrade can still be wrong if it does not match your weapon, Reclaimer, or current problem.",
+    betterHabit:
+      "Pick the upgrade that helps this run, not the one with the prettiest border.",
+  },
+  {
+    mistake: "Holding Expenite too long",
+    whyItHurts:
+      "You delay the next team upgrade while enemies and the aggression meter keep pressuring you.",
+    betterHabit:
+      "Deposit often, especially when the team is close to filling the upgrade bar.",
+  },
+  {
+    mistake: "Taking weakpoint bonuses without weakpoint access",
+    whyItHurts:
+      "The bonus does little if you cannot hit weak points or mark targets consistently.",
+    betterHabit:
+      "Take weakpoint and crit bonuses when your aim, weapon, Spotter marks, or build can trigger them.",
+  },
+  {
+    mistake: "Replacing a working weapon for novelty",
+    whyItHurts:
+      "A new weapon can break a build that was already solving the run.",
+    betterHabit:
+      "Take a new weapon only when it fixes a real weakness.",
+  },
+  {
+    mistake: "Spreading upgrades too thin",
+    whyItHurts:
+      "Two weak weapons often feel worse than one reliable weapon pushed hard.",
+    betterHabit:
+      "Focus one weapon or class tool until it clearly carries a part of the run.",
+  },
+  {
+    mistake: "Forcing a risky Workbench",
+    whyItHurts:
+      "The upgrade may not be worth the time, damage, ammo, or aggression pressure.",
+    betterHabit:
+      "Use Workbenches when the toolbox is close and the floor is still stable.",
+  },
+  {
+    mistake: "Ignoring team pick order in co-op",
+    whyItHurts:
+      "A build-defining upgrade can disappear if another player picks before you.",
+    betterHabit:
+      "Call out key upgrades when playing with a coordinated squad.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Rogue Core upgrades are powered by Expenite. The first standard upgrade costs 120 Expenite, then each early trigger rises by +10 until 230 before scaling harder. When the threshold is met, move into the R.E.P.D. radius to start a paused upgrade choice. Early on, focus one reliable weapon or class tool instead of spreading upgrades across everything.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-expenite-deposit.webp"
+    alt="Depositing Expenite into the processor drone in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Expenite is the main fuel for run upgrades. Mine it, deposit it, and turn it into power before the floor gets out of control.
+  </figcaption>
+</figure>
+
+
+
+<h2 id="upgrades-overview">
+  Rogue Core Upgrades Explained
+</h2>
+
+Rogue Core upgrades are not just bigger numbers.
+
+They are how your run becomes a build.
+
+A good upgrade can make your weapon easier to control, give your Reclaimer ability a real role, fix ammo problems, help against armor, turn crits into crowd control, or make a risky floor safer. A bad upgrade can look powerful and still do almost nothing for the way you are actually playing.
+
+This guide explains how to read upgrades like a player:
+
+- how Expenite costs scale,
+- when the upgrade event pauses the action,
+- how 4-player upgrade choices work,
+- how to read weapon stats,
+- when to focus one weapon,
+- when a new weapon is worth it,
+- how Workbenches differ from Expenite upgrades,
+- how Bio Boosters fit into your build,
+- and how upgrade synergy changes the value of later picks.
+
+If you are still learning the full run loop, start with the <Link href="/deep-rock-galactic/beginner-guide">Rogue Core beginner guide</Link>. If you are choosing upgrades around a specific Reclaimer, use the <Link href="/deep-rock-galactic/best-class">Rogue Core best class guide</Link> too.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-expenite-upgrades-work">
+  How Expenite Upgrades Work
+</h2>
+
+<GuideTable
+  caption="How the Expenite upgrade loop works in Rogue Core."
+  columns={upgradeLoopColumns}
+  rows={upgradeLoopRows}
+/>
+
+The most important habit is simple:
+
+**Deposit before the run gets messy.**
+
+If you are carrying Expenite and the team is close to an upgrade, stop delaying it. Call the drone, deposit, gather, and take the upgrade. An upgrade waiting in your pocket does nothing when the next wave hits.
+
+<GuideTable
+  caption="Current Early Access Expenite cost curve for standard upgrades."
+  columns={expeniteCostColumns}
+  rows={expeniteCostRows}
+/>
+
+In a steady run, you can expect roughly a dozen standard upgrade events per player, but that depends on how cleanly your team mines, deposits, and keeps the run moving. The exact number is less important than the pattern: early upgrades are cheap, later upgrades punish scattered choices.
+
+<h2 id="upgrade-choice-screen">
+  How to Read an Upgrade Choice
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-bio-booster-choice.webp"
+    alt="Upgrade choices showing Vital Impact and Lucky Shot in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Choices like Vital Impact and Lucky Shot are only great if your build can trigger crits often enough.
+  </figcaption>
+</figure>
+
+When an upgrade choice appears, slow down for a second.
+
+Ask these questions:
+
+1. **Does this help my current weapon?**
+2. **Does this help my Reclaimer ability?**
+3. **Does this fix my biggest problem right now?**
+4. **Can I actually trigger this bonus?**
+5. **Will this still matter on the next floor?**
+
+For example, **Vital Impact** says critical hits stun enemies for **+2s**. That is not just a damage upgrade. It turns crits into crowd control.
+
+That makes it much better when you already have:
+
+- weakpoint damage,
+- crit chance,
+- Spotter support,
+- accurate weapons,
+- or a build that keeps landing critical hits.
+
+If you are missing weak points and panic-firing into armor, the same upgrade becomes much weaker.
+
+<h2 id="weapon-stats">
+  Weapon Stats: What the Numbers Actually Mean
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-weapon-selection.webp"
+    alt="Weapon selection cards showing different stat bonuses in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Weapon cards tell you how the weapon wants to be used. The biggest number is not always the best pick.
+  </figcaption>
+</figure>
+
+Rogue Core gives you real numbers, but you should read them as playstyle clues.
+
+A **BRT7 Burst Fire Gun** roll with **+40% Recoil Control** and **+30% Rate of Fire** is not telling you the same thing as a **"Hammer Caster" 58MM** with **+20% Damage**. One is leaning toward smoother handling and faster output. The other is more about raw hit value.
+
+A **Zhukov NUK17** with **+1 Penetration** and **+200% Armor Breaking** is a different kind of answer. That roll is attractive when armored or dense enemies are slowing you down.
+
+Use this table when you are deciding what the numbers actually mean.
+
+<GuideTable
+  caption="How to read common Rogue Core upgrade stats."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+<h2 id="focus-one-weapon">
+  Focus One Weapon Before Spreading Upgrades
+</h2>
+
+One common mistake is upgrading everything a little.
+
+In Rogue Core, one reliable upgraded weapon is usually better than two weak weapons that both feel unfinished. If your current gun already handles the run well, push it toward Epic or Legendary-level value before splitting upgrades across another weapon.
+
+<GuideTable
+  caption="When to focus one weapon, split upgrades, or take a new weapon."
+  columns={focusColumns}
+  rows={focusRows}
+/>
+
+The exception is when your current weapon has a clear blind spot. If it cannot handle armor, range, crowds, or ammo pressure, a second weapon can be worth taking because it solves a problem your main weapon cannot.
+
+<h2 id="choose-upgrades-by-problem">
+  Choose Upgrades by the Problem You Are Solving
+</h2>
+
+The best upgrade is not always the highest damage upgrade.
+
+It is the upgrade that solves the thing currently hurting your run.
+
+<GuideTable
+  caption="Which upgrade type to pick based on your current run problem."
+  columns={problemColumns}
+  rows={problemRows}
+/>
+
+A simple example:
+
+If you are dying because enemies surround you, **movement, stun, pushback, penetration, or area damage** may be better than more single-target damage.
+
+If you are losing long fights because your gun is empty, **ammo recovery, magazine size, reload speed, or a second weapon** may be better than a damage roll.
+
+If you are already landing weakpoint shots, **+40% Weakpoint Damage** can be huge. If you are not hitting weak points at all, that upgrade is mostly wishful thinking.
+
+<h2 id="upgrade-timing">
+  Upgrade Timing: Early, Mid, and Late Run
+</h2>
+
+A good upgrade can be wrong if you take it at the wrong time.
+
+<GuideTable
+  caption="How upgrade priorities change during a Rogue Core run."
+  columns={timingColumns}
+  rows={timingRows}
+/>
+
+Early upgrades should make your run stable. Mid-run upgrades should strengthen the direction you already started. Late upgrades should solve the thing most likely to kill the run.
+
+<h2 id="specific-upgrade-rolls">
+  Specific Upgrade Rolls: How to Make the Call
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-weapon-upgrade-rolls.webp"
+    alt="Weapon upgrade rolls showing Thunderhead, Breach Cutter, Deepcore PGL, Lead Storm, Hurricane, and Ammo Boost in Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Big upgrade rolls are not automatically better. Read whether the option solves damage, armor, ammo, crowd, or control problems.
+  </figcaption>
+</figure>
+
+These are examples, not a complete upgrade database. Rogue Core already has over 100 upgrades, and the full pool can change during Early Access. Use these rolls to learn the decision logic, not to memorize a fixed list.
+
+Some options have several strong-looking bonuses. Some are simple. Some are common but solve the exact problem that would have ended your run.
+
+<GuideTable
+  caption="How to read specific Rogue Core upgrade roll examples."
+  columns={rollColumns}
+  rows={rollRows}
+/>
+
+An Epic weapon can be amazing, but a Common **Ammo Boost** can still be the correct pick if your whole run is being lost to ammo pressure. Likewise, a big damage roll is less useful if your real problem is missing shots, reloading at bad times, or getting trapped.
+
+<h2 id="upgrade-synergy">
+  Upgrade Synergy: Do Not Pick in Isolation
+</h2>
+
+The best upgrade choice often depends on what you already picked.
+
+<GuideTable
+  caption="Simple Rogue Core upgrade synergy examples."
+  columns={synergyColumns}
+  rows={synergyRows}
+/>
+
+This is why a mediocre-looking upgrade can suddenly become excellent. Once your build has a trigger, the next upgrade that rewards that trigger becomes much more valuable.
+
+<h2 id="workbenches">
+  Workbenches: Ability, Weapon Upgrade, or New Weapon?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-workbench.webp"
+    alt="Workbench upgrade choice with ability, weapon upgrade, and new weapon options in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Workbenches are major build decisions. You usually choose between an ability upgrade, a weapon upgrade, or a new weapon.
+  </figcaption>
+</figure>
+
+A Workbench often asks you to choose between three different build directions:
+
+<GuideTable
+  caption="How to choose between Workbench options in Rogue Core."
+  columns={workbenchColumns}
+  rows={workbenchRows}
+/>
+
+A Workbench is not free value. It often asks you to find a toolbox first, bring it back, and then choose the upgrade.
+
+That means the real question is not only:
+
+**Which option is strongest?**
+
+It is also:
+
+**Is the toolbox close enough, and is the floor stable enough, for this upgrade to pay back the time?**
+
+Use a Workbench when:
+
+- the toolbox is close,
+- the room is safe enough,
+- your build has a clear weakness,
+- and the offered choice fixes that weakness.
+
+Skip or delay it when:
+
+- the toolbox is far,
+- the aggression meter is already high,
+- ammo or armor is low,
+- or your current build is strong enough to leave.
+
+<h2 id="workbench-stat-examples">
+  Workbench Stat Examples
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-workbench-stats-example.webp"
+    alt="Workbench choices showing Crit Darts, P-96 Mag Blaster, and Zhukov NUK17 upgrades in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Workbench choices usually answer different problems: ability value, weapon reliability, or a new weapon direction.
+  </figcaption>
+</figure>
+
+A **Crit Darts** ability upgrade like **+1.25m Crit Dart Area Radius** makes sense when you are playing around Spotter marks and team focus.
+
+A **P-96 Mag Blaster** weapon upgrade with **-35% Spread**, **+200% Armor Breaking**, and **+40% Damage as Acid** pushes the weapon toward accuracy, armor handling, and damage-over-time value.
+
+A **Zhukov NUK17** with **+40% Weakpoint Damage** and **+50% Chain Hit Chance** gives you a different weapon direction entirely.
+
+Use the same upgrade-choice checklist from earlier, then add one Workbench-only question:
+
+**Did the toolbox trip cost less than the upgrade gives back?**
+
+That is the part normal Expenite upgrades do not ask. A Workbench can be excellent, but only if the toolbox route, room safety, and current floor pressure make sense.
+
+If the ability upgrade improves a tool you are already using, take it. If your current weapon is already carrying fights, upgrade it. If the new weapon fixes a missing answer like armor, range, crowds, or ammo pressure, consider switching.
+
+If none of the three options changes the next floor, leave with your current build.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="bio-boosters">
+  Bio Boosters: Personal Upgrades Worth Checking
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-biobooster.webp"
+    alt="Bio Booster container in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bio Boosters are personal upgrades. They are usually worth checking when the team has time to hack safely.
+  </figcaption>
+</figure>
+
+Bio Boosters are different from Expenite upgrades.
+
+They require a hack, then give you a personal upgrade choice. Because the choices are tied to your character, you do not need to worry about stealing the option from someone else.
+
+That makes Bio Boosters very valuable, especially when the upgrade lines up with your Reclaimer and weapon.
+
+<GuideTable
+  caption="How to think about Bio Booster upgrade choices."
+  columns={bioBoosterColumns}
+  rows={bioBoosterRows}
+/>
+
+A Bio Booster can look tempting because both options are usually useful. Still, use the same build-fit logic:
+
+- **Vital Impact** is better when critical hits are already happening often.
+- **Lucky Shot** style ammo recovery is better when you land crits and your weapon runs dry.
+- **Movement speed** is better when survival and repositioning are the real problem.
+- **Ability cooldown** is better when your Reclaimer ability is already saving fights.
+
+Take the Bio Booster that solves the next floor, not the one that only looks exciting.
+
+<h2 id="environmental-hazards">
+  Use Environmental Hazards as Part of Your Build
+</h2>
+
+Not every power spike comes from an upgrade card.
+
+Some rooms have elemental canisters or environmental tools that can burn, shock, freeze, slow, or weaken enemies. Use them when they support what your build is already trying to do.
+
+<GuideTable
+  caption="How environmental tools connect to upgrade choices."
+  columns={hazardColumns}
+  rows={hazardRows}
+/>
+
+If your build already rewards electric damage, crit windows, area control, or damage over time, the environment can make that build feel stronger without spending another upgrade pick.
+
+<h2 id="solo-upgrade-priority">
+  Solo Upgrade Priority
+</h2>
+
+Solo uses the same upgrade framework as the rest of this guide, but the punishment for a bad choice is higher because no teammate can cover your missing piece.
+
+That makes **upgrade synergy** more important in solo. If you already picked weakpoint damage, the next crit-based upgrade becomes more valuable. If you already picked magazine size, rate of fire or reload speed may become safer. If you are building Slicer around Slice damage, kill-chain duration or melee safety can matter more than a random weapon roll.
+
+The solo rule is:
+
+**Do not leave a major weakness uncovered.**
+
+A co-op team can sometimes cover your bad armor handling, weak crowd clear, or low ammo. Solo cannot. Prioritize upgrades with simple, reliable value: armor, damage reduction, movement, ammo help, and damage triggers you can actually activate.
+
+For the full solo decision framework, read the <Link href="/deep-rock-galactic/solo-guide">Rogue Core solo guide</Link>.
+
+<h2 id="coop-upgrade-priority">
+  Co-op Upgrade Priority
+</h2>
+
+Co-op upgrade choices are not only about your own build. They also involve pick order and team value.
+
+<GuideTable
+  caption="How upgrade choices work in a 4-player Rogue Core squad."
+  columns={coopDraftColumns}
+  rows={coopDraftRows}
+/>
+
+In co-op, lean into role value:
+
+- Spotter gets more from crit and weakpoint triggers when teammates focus marked targets.
+- Guardian turns stun, armor, and space-control upgrades into safer team fights.
+- Falconer gets more from electric and revive reliability when teammates can play around those windows.
+- Slicer can go harder into melee if the team creates space.
+- Retcon gets more from planned burst windows when teammates understand the timing.
+
+The main co-op mistake is not “picking selfish upgrades.” It is picking upgrades that neither help your own build nor solve a team problem.
+
+<h2 id="when-to-skip-upgrades">
+  When to Skip a Reward or Leave It Behind
+</h2>
+
+Not every reward is worth the time.
+
+A Workbench is great when it is close and the team is stable. It is much worse when the toolbox is far away, ammo is low, and the aggression meter is already ugly.
+
+A Bio Booster is great when the room is safe enough to hack. It is a bad idea when enemies are already breaking the team apart.
+
+An Expenite event can be worth a lot, but it can also stack more enemies on top of pressure that is already building.
+
+Use this rule:
+
+**If the reward costs more health, ammo, and time than it gives back, leave.**
+
+Rogue Core is not about collecting every possible upgrade. It is about getting enough power to survive the next floor.
+
+<h2 id="common-upgrade-mistakes">
+  Common Upgrade Mistakes
+</h2>
+
+<GuideTable
+  caption="Common Rogue Core upgrade mistakes and better habits."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+
+
+<h2 id="simple-upgrade-rules">
+  Simple Upgrade Rules
+</h2>
+
+Use these rules when you do not have time to think:
+
+1. **If you are dying, take survival or movement.**
+2. **If enemies live too long, take damage you can actually trigger.**
+3. **If you are always empty, take ammo or magazine help.**
+4. **If your weapon is working, upgrade it instead of replacing it.**
+5. **If your ability is carrying fights, upgrade the ability.**
+6. **If a stat depends on crits or weak points, only take it when you can trigger it.**
+7. **If armor is slowing the run down, take armor breaking or acid-style pressure.**
+8. **If reloads get you hit, take magazine size or reload speed.**
+9. **If the Workbench toolbox is far and pressure is high, skip it.**
+10. **If an upgrade works with what you already picked, its value goes up.**
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="how-do-upgrades-work-in-rogue-core">
+  How do upgrades work in Rogue Core?
+</h3>
+
+Mine Expenite, call the R.E.P.D. / processor drone, deposit the Expenite, fill the upgrade bar, gather near the drone, and choose a permanent upgrade for the current run.
+
+<h3 id="how-much-expenite-do-upgrades-cost">
+  How much Expenite do upgrades cost?
+</h3>
+
+The first standard upgrade costs 120 Expenite. Early upgrade thresholds then increase by 10 each time until 230, after which costs scale harder.
+
+<h3 id="does-the-game-pause-during-upgrade-selection">
+  Does the game pause during upgrade selection?
+</h3>
+
+Yes. When the upgrade threshold is reached and players gather near the R.E.P.D., the upgrade choice pauses the action so you can read the options.
+
+<h3 id="should-i-always-pick-the-rarest-upgrade">
+  Should I always pick the rarest upgrade?
+</h3>
+
+No. Rarity matters, but build fit matters more. A lower-rarity upgrade that supports your weapon, class ability, or survival problem can be better than a rare upgrade that does not fit.
+
+<h3 id="should-i-upgrade-one-weapon-or-spread-upgrades">
+  Should I upgrade one weapon or spread upgrades?
+</h3>
+
+Usually focus one reliable weapon first. A strong upgraded weapon is often better than two weak weapons, unless your second weapon clearly solves a missing problem like armor, range, crowds, or ammo pressure.
+
+<h3 id="when-should-i-deposit-expenite">
+  When should I deposit Expenite?
+</h3>
+
+Deposit often, especially when the team is close to filling the upgrade bar. Holding Expenite too long delays power and can make the next wave harder than it needs to be.
+
+<h3 id="are-workbenches-worth-it">
+  Are Workbenches worth it?
+</h3>
+
+Usually, yes, but only when the team has time and space. A Workbench can give ability upgrades, weapon upgrades, or a new weapon, but chasing the toolbox during heavy pressure can cost the run.
+
+<h3 id="should-i-take-a-new-weapon-or-upgrade-my-current-one">
+  Should I take a new weapon or upgrade my current one?
+</h3>
+
+Upgrade your current weapon if it is already working. Take a new weapon if your current setup has a clear weakness, such as poor range, bad crowd control, weak armor handling, or ammo problems.
+
+<h3 id="are-bio-boosters-better-than-normal-upgrades">
+  Are Bio Boosters better than normal upgrades?
+</h3>
+
+Bio Boosters can be stronger and more personal than normal Expenite upgrades, but they require a hack and time. They are usually worth checking when the room is safe.
+
+<h3 id="one-upgrade-rule">
+  If I only remember one upgrade rule, what is it?
+</h3>
+
+Pick the upgrade that makes your next floor safer or faster. That usually means fixing your current bottleneck: damage, ammo, armor, movement, crowd control, weakpoint triggers, or ability uptime.
+
+<h3 id="how-do-coop-upgrade-choices-work">
+  How do co-op upgrade choices work?
+</h3>
+
+In a 4-player squad, players can see multiple upgrade options and choose in a random order. Most picks are exclusive, so a build-defining option may disappear if another player takes it first. Health Reward is a special shared-style option that can be available to everyone.
+
+<h3 id="is-ammo-boost-worth-taking">
+  Is Ammo Boost worth taking?
+</h3>
+
+Yes, if your run keeps running out of ammo. A simple ammo upgrade can be better than a flashy weapon when ammo pressure is the real reason the run is falling apart.
+
+<h3 id="is-weakpoint-damage-good">
+  Is weakpoint damage good?
+</h3>
+
+Weakpoint damage is good when you can actually hit weak points or your team can mark targets. If you are panic-firing into armor or crowds, take a more reliable upgrade first.

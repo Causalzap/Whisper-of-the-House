@@ -122,8 +122,8 @@ const allGameGuides = [
   { title: 'Subnautica 2', href: '/subnautica-2' },
   { title: 'Oaken Tower', href: '/oaken-tower' },
   { title: 'Dwarf Eats Mountain', href: '/dwarf-eats-mountain' },
-
   { title: 'LEGO® Batman™: Legacy of the Dark Knight', href: '/lego-batman'},
+  { title: 'Deep Rock Galactic: Rogue Core', href: '/deep-rock-galactic'},
 
 ];
 

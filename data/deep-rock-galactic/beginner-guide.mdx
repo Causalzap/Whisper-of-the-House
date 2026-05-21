@@ -1,0 +1,861 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const firstRunColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "beginnerRule", label: "Beginner Rule" },
+];
+
+export const firstRunRows = [
+  {
+    step: "1. Pick an easy-to-read mission",
+    whatToDo:
+      "Start with low Depth, shorter Facility Length, lower Complexity, and no scary Risk Vector combination.",
+    beginnerRule:
+      "Your first goal is to understand the run, not prove you can clear the hardest route.",
+  },
+  {
+    step: "2. Choose a Reclaimer with a clear job",
+    whatToDo:
+      "Guardian is safest, Falconer is flexible, Spotter supports crits, Slicer is aggressive, and Retcon is harder to learn.",
+    beginnerRule:
+      "Pick the class that fixes your biggest mistake: dying, missing damage, losing ammo, or getting trapped.",
+  },
+  {
+    step: "3. Take a weapon you can control",
+    whatToDo:
+      "Read the weapon stats before picking. Handling, ammo, armor breaking, and range matter more than rarity early.",
+    beginnerRule:
+      "For a first run, a stable gun you can aim is better than a flashy weapon you cannot manage.",
+  },
+  {
+    step: "4. Mine and deposit Expenite",
+    whatToDo:
+      "Mine green Expenite, call the processor drone, deposit it, and trigger upgrades before the floor gets dangerous.",
+    beginnerRule:
+      "Your first upgrade costs 120 Expenite. If you delay deposits, you delay your power spike.",
+  },
+  {
+    step: "5. Choose upgrades for the current problem",
+    whatToDo:
+      "Pick damage, ammo, armor breaking, movement, or ability upgrades based on what is actually hurting the run.",
+    beginnerRule:
+      "Do not draft a build idea you cannot trigger. Pick the upgrade that helps the next fight.",
+  },
+  {
+    step: "6. Watch the aggression meter",
+    whatToDo:
+      "Keep an eye on rising pressure while farming, hacking, repairing, or chasing side rewards.",
+    beginnerRule:
+      "If the meter is climbing and you already have the important reward, move to the elevator.",
+  },
+  {
+    step: "7. Use crates cleanly",
+    whatToDo:
+      "Take ammo or armor when you need it, then leave the rest for the team.",
+    beginnerRule:
+      "Crates keep the run alive. Do not turn them into a first-come-first-served race.",
+  },
+  {
+    step: "8. Use Workbenches only when the route is safe",
+    whatToDo:
+      "Find the toolbox, bring it back, and choose between an ability upgrade, weapon upgrade, or new weapon.",
+    beginnerRule:
+      "A Workbench is worth it when the upgrade solves a real build problem and the floor gives you time.",
+  },
+  {
+    step: "9. Take Bio Boosters when you can hack safely",
+    whatToDo:
+      "Hack the Bio Booster container and choose the personal upgrade that fits your Reclaimer.",
+    beginnerRule:
+      "Bio Boosters are strong, but do not start the hack in the middle of a collapsing room.",
+  },
+  {
+    step: "10. Call the elevator and commit",
+    whatToDo:
+      "When the team has the main rewards, start the elevator event, defend the generator, and leave.",
+    beginnerRule:
+      "Once the elevator arrives, get in instead of burning ammo outside.",
+  },
+];
+
+export const terminalColumns = [
+  { key: "system", label: "Mission Terminal Term" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "newPlayerAdvice", label: "New Player Advice" },
+];
+
+export const terminalRows = [
+  {
+    system: "Depth",
+    whatItMeans:
+      "The mission difficulty level.",
+    newPlayerAdvice:
+      "Stay low while learning. Rogue Core already starts harder and faster than classic DRG for many players.",
+  },
+  {
+    system: "Facility Length",
+    whatItMeans:
+      "How many floors or stages you need to push through before the end.",
+    newPlayerAdvice:
+      "Shorter facilities are easier for learning upgrade timing, ammo use, and elevator pacing.",
+  },
+  {
+    system: "Complexity",
+    whatItMeans:
+      "How difficult the cave layout is to read and move through.",
+    newPlayerAdvice:
+      "Lower complexity is better while learning traversal tools and route discipline.",
+  },
+  {
+    system: "Risk Vectors",
+    whatItMeans:
+      "Between-floor modifiers that add a downside and a reward direction for the next part of the run.",
+    newPlayerAdvice:
+      "Read these before committing. A bad modifier can make the rest of the run much harder than the reward is worth.",
+  },
+  {
+    system: "Intel Tasks",
+    whatItMeans:
+      "Mission goals that help unlock more clearance and access.",
+    newPlayerAdvice:
+      "Pick missions that line up with your current tasks when possible.",
+  },
+  {
+    system: "Directives",
+    whatItMeans:
+      "Broader progression goals you claim between runs.",
+    newPlayerAdvice:
+      "Check them after a run so you do not leave currency or progress unclaimed.",
+  },
+  {
+    system: "Enhancements",
+    whatItMeans:
+      "Long-term Reclaimer upgrades and slots that shape your class outside a single run.",
+    newPlayerAdvice:
+      "Spend early currency on simple, reliable power before chasing niche setups.",
+  },
+];
+
+export const expeniteColumns = [
+  { key: "upgradeNumber", label: "Upgrade Trigger" },
+  { key: "expeniteCost", label: "Expenite Cost" },
+  { key: "beginnerMeaning", label: "What It Means For You" },
+];
+
+export const expeniteRows = [
+  {
+    upgradeNumber: "1st upgrade",
+    expeniteCost: "120",
+    beginnerMeaning:
+      "This is your first real power spike. Try to trigger it before the floor gets messy.",
+  },
+  {
+    upgradeNumber: "2nd upgrade",
+    expeniteCost: "130",
+    beginnerMeaning:
+      "Still cheap enough that skipping nearby Expenite is usually a mistake.",
+  },
+  {
+    upgradeNumber: "3rd upgrade",
+    expeniteCost: "140",
+    beginnerMeaning:
+      "By now, your build direction should start forming.",
+  },
+  {
+    upgradeNumber: "4th upgrade",
+    expeniteCost: "150",
+    beginnerMeaning:
+      "Start choosing upgrades that solve a specific problem, not random bonuses.",
+  },
+  {
+    upgradeNumber: "5th upgrade",
+    expeniteCost: "160",
+    beginnerMeaning:
+      "If your run reaches this point, weak choices start showing.",
+  },
+  {
+    upgradeNumber: "6th upgrade",
+    expeniteCost: "170",
+    beginnerMeaning:
+      "Ammo, armor, and route discipline matter more as costs rise.",
+  },
+  {
+    upgradeNumber: "7th-12th upgrades",
+    expeniteCost: "180 → 230",
+    beginnerMeaning:
+      "Later upgrades cost more, so side rewards and Expenite events become more important.",
+  },
+  {
+    upgradeNumber: "After 230",
+    expeniteCost: "Scales higher",
+    beginnerMeaning:
+      "Do not expect every run to draft endlessly. Make early upgrades count.",
+  },
+];
+
+export const classNumberColumns = [
+  { key: "reclaimer", label: "Reclaimer" },
+  { key: "beginnerUse", label: "Beginner Use" },
+  { key: "Mechanic Reason", label: "Mechanic Reason" },
+];
+
+export const classNumberRows = [
+  {
+    reclaimer: "Guardian",
+    beginnerUse:
+      "Safest first pick.",
+    "Mechanic Reason":
+      "2 ability charges, 20s cooldown, 12 Concussive Barrage bombs, 6s stun, 4s Repulsion Field, and Armor Beacon restores up to 50% armor in a 6m radius.",
+  },
+  {
+    reclaimer: "Falconer",
+    beginnerUse:
+      "Best flexible pick.",
+    "Mechanic Reason":
+      "Shock Drone gives extra pressure, Remote Drone Revive helps co-op recovery, and Thunder Rod creates an 8m zone for 15s with +100% electric damage.",
+  },
+  {
+    reclaimer: "Spotter",
+    beginnerUse:
+      "Best team support.",
+    "Mechanic Reason":
+      "Scanner checks a 35m radius every 4s, and Crit Darts can make marked enemies take +100% crit chance from incoming damage.",
+  },
+  {
+    reclaimer: "Slicer",
+    beginnerUse:
+      "Best aggressive pick.",
+    "Mechanic Reason":
+      "Slice deals 560 damage and turns nearby terrain to glass within 3m, but close-range pressure punishes bad positioning.",
+  },
+  {
+    reclaimer: "Retcon",
+    beginnerUse:
+      "Hardest first pick.",
+    "Mechanic Reason":
+      "Rewind can restore your earlier state, while Rage can give +100% damage and +30% pickaxe speed for 12s, but both need good timing.",
+  },
+];
+
+export const weaponColumns = [
+  { key: "weaponExample", label: "Weapon Example" },
+  { key: "whatTheStatsSay", label: "What the Stats Say" },
+  { key: "beginnerPick", label: "Beginner Read" },
+];
+
+export const weaponRows = [
+  {
+    weaponExample: "BRT7 Burst Fire Gun",
+    whatTheStatsSay:
+      "+40% Recoil Control and +30% Rate of Fire.",
+    beginnerPick:
+      "Best beginner-style pick from this set if you want a stable, easy-to-control gun.",
+  },
+  {
+    weaponExample: '"Bulldog" Heavy Revolver',
+    whatTheStatsSay:
+      "+50% Chain Hit Chance.",
+    beginnerPick:
+      "Good if you can land deliberate shots, but less forgiving if you panic-fire.",
+  },
+  {
+    weaponExample: "Zhukov NUK17",
+    whatTheStatsSay:
+      "+1 Penetration and +200% Armor Breaking.",
+    beginnerPick:
+      "Pick this when armor or dense groups are slowing your run down.",
+  },
+  {
+    weaponExample: '"Hammer Caster" 58MM',
+    whatTheStatsSay:
+      "+20% Damage.",
+    beginnerPick:
+      "Simple raw damage, but only good if you can land shots consistently.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "lookFor", label: "Look For" },
+  { key: "why", label: "Why" },
+];
+
+export const upgradeRows = [
+  {
+    problem: "You run out of ammo",
+    lookFor:
+      "Max ammo, ammo recovery, magazine size, or a second weapon.",
+    why:
+      "Damage upgrades do not matter if you are empty before the elevator fight.",
+  },
+  {
+    problem: "Armored enemies slow everything down",
+    lookFor:
+      "Armor Breaking, Armor Piercing, Acid damage, or Penetration.",
+    why:
+      "Armor handling turns long, wasteful fights into normal fights.",
+  },
+  {
+    problem: "You get surrounded",
+    lookFor:
+      "Area damage, stun, movement, pushback, or explosion radius.",
+    why:
+      "Crowd pressure kills beginners faster than low single-target damage.",
+  },
+  {
+    problem: "You miss too many shots",
+    lookFor:
+      "Recoil Control, reduced Spread, simpler weapons, or safer range.",
+    why:
+      "A controlled weapon is better than a stronger weapon you cannot use.",
+  },
+  {
+    problem: "Your class ability carries fights",
+    lookFor:
+      "Ability damage, cooldown, extra charge, radius, or duration.",
+    why:
+      "If your ability is already saving the run, improving it is usually worth it.",
+  },
+];
+
+export const crateColumns = [
+  { key: "crate", label: "Crate / Resource" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "beginnerRule", label: "Beginner Rule" },
+];
+
+export const crateRows = [
+  {
+    crate: "Munitions crate",
+    whatItDoes:
+      "Restores ammo and helps you keep fighting through longer floors.",
+    beginnerRule:
+      "Take a charge when you need it. Leave the rest if teammates are also low.",
+  },
+  {
+    crate: "Armor crate",
+    whatItDoes:
+      "Restores armor and helps stabilize before the next fight.",
+    beginnerRule:
+      "Use it before a hard push, elevator, event, or boss route.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterHabit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Trying to full clear every floor",
+    whyItHurts:
+      "The aggression meter keeps rising while you chase small rewards.",
+    betterHabit:
+      "Take rewards that improve the run, then move to the elevator.",
+  },
+  {
+    mistake: "Holding Expenite instead of depositing",
+    whyItHurts:
+      "You delay team upgrades while enemies keep getting harder to manage.",
+    betterHabit:
+      "Deposit when the team is close to a threshold or before starting a risky event.",
+  },
+  {
+  mistake: "Starting risky events before depositing Expenite",
+  whyItHurts:
+    "You can enter the event with an upgrade already waiting, then lose health and ammo before taking the power spike.",
+  betterHabit:
+    "Deposit first when the team is close to a threshold, then start the event with the upgrade active.",
+},
+  {
+    mistake: "Taking every crate charge first",
+    whyItHurts:
+      "A teammate may enter the next fight without ammo or armor.",
+    betterHabit:
+      "Use one charge, check the team, then take more only if no one else needs it.",
+  },
+  {
+    mistake: "Starting events on top of incoming pressure",
+    whyItHurts:
+      "Event enemies can stack with normal waves and turn a safe room into a wipe.",
+    betterHabit:
+      "Check ammo, armor, team position, and aggression before starting events.",
+  },
+  {
+    mistake: "Ignoring Risk Vectors",
+    whyItHurts:
+      "A bad modifier can affect the rest of the run and make later floors harder.",
+    betterHabit:
+      "Read both the downside and reward before choosing the next route.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Rogue Core is harder for beginners than classic Deep Rock Galactic because it is faster, more build-driven, and less forgiving when you waste time. Start with a low-depth mission, pick a simple Reclaimer like Guardian or Falconer, take a controllable weapon, mine and deposit Expenite early, and leave floors once the main rewards are done. Your first Expenite upgrade costs 120, then later thresholds rise by 10 until 230.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-mission-terminal.webp"
+    alt="Mission terminal in Deep Rock Galactic Rogue Core showing mission depth, facility length, and complexity."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start every run by reading the mission terminal. Depth, Facility Length, Complexity, and Risk Vectors all change how beginner-friendly the run feels.
+  </figcaption>
+</figure>
+
+<h2 id="beginner-guide-overview">
+  Rogue Core Beginner Guide Overview
+</h2>
+
+Deep Rock Galactic: Rogue Core is not impossible for beginners, but it is easy to play it the wrong way if you come straight from classic Deep Rock Galactic.
+
+The biggest difference is that Rogue Core is a run-based roguelite. You do not enter with a complete fixed build and slowly clear a normal mission. You pick weapons during the run, mine Expenite for upgrades, choose temporary power spikes, and keep moving before the floor pressure gets out of control.
+
+If you already play DRG, your movement, aiming, revive sense, and cave awareness help. The habit you need to change is pace: Rogue Core rewards useful progress, not full-clearing every corner.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="is-rogue-core-hard-for-beginners">
+  Is Rogue Core Hard for Beginners?
+</h2>
+
+Yes, Rogue Core can feel hard for beginners because the game pushes you faster than regular DRG.
+
+The difficulty is not only enemy damage. It comes from several things stacking together:
+
+- you start with basic gear,
+- weapons and upgrades are drafted during the run,
+- Expenite upgrades need to be triggered on time,
+- the aggression meter punishes slow play,
+- events can stack extra enemies onto existing pressure,
+- and Risk Vectors can make later floors harder.
+
+The good news is that early runs get much easier once you stop trying to do everything. Your job is to get enough power to survive the next floor, not collect every reward on the map.
+
+<h2 id="first-run-plan">
+  First Run Plan
+</h2>
+
+<GuideTable
+  caption="Simple first-run plan for new Rogue Core players."
+  columns={firstRunColumns}
+  rows={firstRunRows}
+/>
+
+<h2 id="read-the-mission-terminal">
+  Read the Mission Terminal Before Launching
+</h2>
+
+The mission terminal decides how painful your next run may be.
+
+Do not just click the nearest mission and launch. Read the run first.
+
+<GuideTable
+  caption="Mission terminal terms new players should understand."
+  columns={terminalColumns}
+  rows={terminalRows}
+/>
+
+For your first few runs, choose the mission that lets you learn cleanly:
+
+**low Depth, short Facility Length, low Complexity, and manageable Risk Vectors.**
+
+That gives you more room to understand Expenite, upgrades, Workbenches, Bio Boosters, crates, and elevator defense without the run collapsing before you learn anything.
+
+<h2 id="choose-a-beginner-class">
+  Choose a Reclaimer With a Reason
+</h2>
+
+Do not choose your first Reclaimer only because the role sounds cool.
+
+Choose based on the mistake you want help with.
+
+<GuideTable
+  caption="Beginner Reclaimer picks with the actual mechanic reason behind each recommendation."
+  columns={classNumberColumns}
+  rows={classNumberRows}
+/>
+
+For most beginners, start with **Guardian** or **Falconer**. Slicer has the higher solo ceiling, but it punishes bad positioning harder. For the full class breakdown, read the <Link href="/deep-rock-galactic/best-class">Rogue Core best class guide</Link>.
+
+<h2 id="choose-starter-gear">
+  Choose Starter Gear You Can Actually Use
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-weapon-selection.webp"
+    alt="Starting weapon and traversal tool selection in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first weapon pick should solve the run in front of you, not just look rare or flashy.
+  </figcaption>
+</figure>
+
+Early weapon cards already tell you how the weapon wants to be used.
+
+Look at the stats, then ask what problem the weapon solves.
+
+<GuideTable
+  caption="How to read early weapon choices as a beginner."
+  columns={weaponColumns}
+  rows={weaponRows}
+/>
+
+The beginner pick from this example set is usually the **BRT7 Burst Fire Gun** because recoil control and rate of fire make it easier to use while learning enemy pressure.
+
+Pick **Zhukov NUK17** if armor or grouped enemies are the issue. Pick **Hammer Caster** if you already land shots and want simple damage. Pick **Bulldog** if you prefer slower, deliberate shots and can make the chain-hit value matter.
+
+The rule is simple:
+
+**Choose the weapon that solves your current weakness, not the one with the biggest-looking number.**
+
+<h2 id="mine-and-deposit-expenite">
+  Mine and Deposit Expenite Early
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-expenite-deposit.webp"
+    alt="Depositing Expenite into the drone to fill the upgrade bar in Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Expenite is not side loot. It is the upgrade fuel that keeps your run from falling behind.
+  </figcaption>
+</figure>
+
+Expenite is the green mineral you should care about immediately.
+
+The basic loop is:
+
+1. Mine Expenite.
+2. Call the processor drone.
+3. Deposit Expenite.
+4. Fill the upgrade bar.
+5. Gather near the drone.
+6. Pick a permanent upgrade for the run.
+
+The first upgrade costs **120 Expenite**. After that, the early thresholds increase by **10 Expenite** each time until they reach **230**.
+
+<GuideTable
+  caption="Early Expenite upgrade cost curve for Rogue Core beginners."
+  columns={expeniteColumns}
+  rows={expeniteRows}
+/>
+
+This is why early Expenite matters so much. The first few upgrades are cheap enough that ignoring nearby Expenite usually makes the run harder than it needs to be.
+
+Do not carry Expenite forever. If your team is near a threshold, call the drone and deposit before starting a risky event or pushing into the next major fight.
+
+Some floors may also give you Expenite-focused events or side opportunities. Treat those as upgrade accelerators, not mandatory objectives. They are worth doing when the team has ammo, armor, space, and a clear route back. They are not worth starting while the aggression meter is already high or while the team is sitting on enough Expenite to trigger an upgrade.
+
+<h2 id="choose-upgrades-by-problem">
+  Choose Upgrades by the Problem You Are Solving
+</h2>
+
+Do not think of upgrades as “best” or “bad” in isolation.
+
+Think of them as answers.
+
+<GuideTable
+  caption="How beginners should choose upgrades based on the current run problem."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+A weakpoint upgrade is strong if you can hit weak points. Ammo recovery is strong if you are running dry. Armor Breaking is strong if armored enemies are wasting your shots. Ability upgrades are strong if your Reclaimer tool is already carrying fights.
+
+For deeper examples, read <Link href="/deep-rock-galactic/upgrades-explained">Rogue Core upgrades explained</Link>.
+
+<h2 id="watch-the-aggression-meter">
+  Watch the Aggression Meter
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-aggression-meter.webp"
+    alt="Aggression meter in Deep Rock Galactic Rogue Core showing rising mission pressure."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The aggression meter tells you when the floor is becoming more dangerous than the reward is worth.
+  </figcaption>
+</figure>
+
+The aggression meter is Rogue Core’s pressure system.
+
+When you mine, explore, hack, repair, or fight on a floor, pressure keeps rising. The meter does not mean you must sprint past everything. It means every side objective needs a reason.
+
+Use this check before staying longer:
+
+- Are you close to an Expenite upgrade?
+- Is a Workbench or Bio Booster nearby?
+- Does the team have enough ammo and armor?
+- Is an event about to stack enemies on top of an incoming wave?
+- Can you still reach the elevator cleanly?
+
+If the answer is mostly no, stop adding risk.
+
+<h2 id="use-crates-without-being-greedy">
+  Use Ammo and Armor Crates Cleanly
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-munitions-crate.webp"
+    alt="Munitions crate in Deep Rock Galactic Rogue Core for restoring ammo and armor."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ammo and armor crates can save a floor, but only if the team uses them based on need.
+  </figcaption>
+</figure>
+
+Crates are simple, but bad crate habits lose runs.
+
+<GuideTable
+  caption="How beginners should use crates and side resources."
+  columns={crateColumns}
+  rows={crateRows}
+/>
+
+In co-op, check the team before taking multiple charges. In solo, use crates before a difficult push instead of saving them so long that they never help.
+
+<h2 id="use-workbenches">
+  Use Workbenches When the Route Is Safe
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-workbench.webp"
+    alt="Workbench upgrade choice in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Workbenches are one of the best places to fix a weak build or double down on a strong one.
+  </figcaption>
+</figure>
+
+Workbenches are one of your biggest beginner advantages because they are easy to understand once you know the flow.
+
+The process is:
+
+1. Find the Workbench.
+2. Locate the toolbox.
+3. Bring the toolbox back.
+4. Choose between an ability upgrade, weapon upgrade, or new weapon.
+
+This is one of the clearest decisions in Rogue Core.
+
+Take an **ability upgrade** if your Reclaimer tool is already important. Take a **weapon upgrade** if your current weapon feels good and needs more power. Take a **new weapon** if your current setup has a real gap, such as bad armor handling, weak crowd control, poor range, or ammo problems.
+
+Do not drag the toolbox across a collapsing floor just because the Workbench exists. Use it when the route is safe enough for the upgrade to pay back the time.
+
+<h2 id="use-bio-boosters">
+  Bio Boosters Are Strong Personal Upgrades
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-biobooster.webp"
+    alt="Bio Booster upgrade choice in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bio Boosters usually give stronger personal choices than normal Expenite upgrades, but you need room to hack safely.
+  </figcaption>
+</figure>
+
+Bio Boosters require a short hack, then give you a personal upgrade choice.
+
+Because the upgrade is personal, you do not need to worry about taking someone else’s option. The main question is whether the room is safe enough to hack.
+
+Good Bio Booster choices usually match your current problem:
+
+- crit effects if you can trigger crits,
+- movement if you keep getting trapped,
+- ability cooldown if your class tool is carrying fights,
+- ammo or recovery if long floors are draining you.
+
+Do not start the hack just as a wave is about to hit unless the team is ready to defend the room.
+
+<AdUnit placement="article_middle" />
+
+
+
+<h2 id="risk-vectors">
+  Risk Vectors: Read the Downside Before the Reward
+</h2>
+
+Risk Vectors appear between stages and change the direction of the run.
+
+They usually give you a downside and a reward. The important part is that the downside can persist and stack through the rest of the mission, while the reward may only help the next stage or a specific part of the run.
+
+That means Risk Vectors are not just flavor text.
+
+Beginner rule:
+
+**Do not pick the reward until you understand the downside.**
+
+A heavy weapon crate sounds great, but if the attached downside makes the rest of the run much harder, it may not be worth it. Early on, choose Risk Vectors that make the next floor easier to understand, not ones that create complicated pressure you are not ready to handle.
+
+<h2 id="know-when-to-start-the-elevator">
+  Know When to Start the Elevator
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/deep-rock-galactic/rogue-core-elevator-defense.webp"
+    alt="Elevator defense event in Deep Rock Galactic Rogue Core."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The elevator is a defense event, not a free exit. Start it when you are ready to commit.
+  </figcaption>
+</figure>
+
+The elevator starts a timer and triggers a Core Spawn attack.
+
+You need to defend the generator until the elevator arrives. If enemies damage it too much, someone has to repair it, which gets stressful when ammo and armor are already low.
+
+Before starting the elevator, make sure:
+
+- everyone is close enough,
+- weapons are reloaded,
+- armor is not empty,
+- the important reward is already taken,
+- and the route back to the elevator is clear.
+
+Once the elevator arrives, leave. The goal is to reach the next floor with enough ammo and armor to keep playing.
+
+<h2 id="what-to-do-after-a-run">
+  What to Do After a Run
+</h2>
+
+A failed run is not wasted.
+
+After each run, return to the ship and check:
+
+- completed directives,
+- intel task progress,
+- clearance unlocks,
+- enhancement slots,
+- Reclaimer upgrades,
+- cosmetics,
+- and loadout changes.
+
+New players often lose progress speed by skipping terminals after a run. If the game is telling you to claim something, spend something, or unlock a new option, do it before launching again.
+
+<h2 id="common-beginner-mistakes">
+  Common Beginner Mistakes
+</h2>
+
+<GuideTable
+  caption="Common Rogue Core beginner mistakes and better habits."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="rogue-core-vs-drg-for-beginners">
+  Rogue Core vs Deep Rock Galactic for Beginners
+</h2>
+
+If you are coming from Deep Rock Galactic, the biggest adjustment is not aiming or mining. It is tempo.
+
+In DRG, you can often stabilize a messy mission by gathering Nitra, kiting, mining carefully, and recovering. In Rogue Core, the run keeps asking you to make decisions faster:
+
+- which weapon solves the next floor,
+- whether to deposit Expenite now,
+- whether the Workbench is worth the time,
+- whether the Risk Vector downside is acceptable,
+- and when to leave instead of full clearing.
+
+DRG experience helps, but Rogue Core needs different habits.
+
+For the full comparison, read <Link href="/deep-rock-galactic/rogue-core-vs-drg">Rogue Core vs Deep Rock Galactic</Link>.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="is-rogue-core-hard-for-beginners">
+  Is Rogue Core hard for beginners?
+</h3>
+
+Yes, it can feel hard at first because Rogue Core is faster, more pressure-based, and more dependent on upgrade decisions than classic Deep Rock Galactic. It gets easier once you learn when to mine, deposit, upgrade, and leave.
+
+<h3 id="what-should-i-do-first-in-rogue-core">
+  What should I do first in Rogue Core?
+</h3>
+
+Pick a low-depth mission, choose a simple Reclaimer, take a controllable weapon, mine and deposit Expenite early, and leave the floor before the aggression meter turns the run against you.
+
+<h3 id="how-much-expenite-does-the-first-upgrade-cost">
+  How much Expenite does the first upgrade cost?
+</h3>
+
+The first Expenite upgrade costs 120. Early upgrade thresholds then increase by 10 Expenite until they reach 230.
+
+<h3 id="what-is-the-best-beginner-class">
+  What is the best beginner class in Rogue Core?
+</h3>
+
+Guardian is the safest beginner class because it has crowd control, protection, armor support, and space-making tools. Falconer is a strong flexible option if you want damage and team utility.
+
+<h3 id="what-weapon-should-beginners-pick">
+  What weapon should beginners pick?
+</h3>
+
+Pick the weapon that solves your current problem. Recoil control and simple damage are good while learning. Armor breaking is better when armored enemies slow the run down. Ammo or magazine bonuses are better when you keep running dry.
+
+<h3 id="what-are-risk-vectors">
+  What are Risk Vectors in Rogue Core?
+</h3>
+
+Risk Vectors are between-stage choices that add a downside and a reward direction to the run. Read the downside before picking the reward because bad modifiers can make later floors harder.
+
+<h3 id="are-rare-upgrades-always-better">
+  Are rare upgrades always better?
+</h3>
+
+No. A rare upgrade can be worse than a common upgrade if it does not fit your weapon, Reclaimer, or current problem.
+
+<h3 id="should-i-full-clear-every-floor">
+  Should I full clear every floor?
+</h3>
+
+Usually no. Take useful rewards, mine nearby Expenite, and use important side systems, but leave before the aggression meter makes the floor too dangerous.
+
+<h3 id="should-drg-players-play-rogue-core-differently">
+  Should DRG players play Rogue Core differently?
+</h3>
+
+Yes. DRG habits help with movement, mining, and teamwork, but Rogue Core is more about run tempo, upgrade drafting, Expenite timing, and knowing when to leave.
