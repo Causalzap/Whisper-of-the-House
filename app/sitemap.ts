@@ -71,7 +71,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/subnautica-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/oaken-tower`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/dwarf-eats-mountain`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/lego-batman`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+    { url: `${base}/lego-batman/carmine-falcone`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/lego-batman/red-bricks`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/lego-batman/batgirl-unlock`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/lego-batman/firefly-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/lego-batman/poison-ivy-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/lego-batman/bane-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+   
     { url: `${base}/dwarf-eats-mountain/build-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/dwarf-eats-mountain/prestige-ascension-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/dwarf-eats-mountain/runners-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

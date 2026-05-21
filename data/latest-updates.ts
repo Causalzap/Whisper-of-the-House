@@ -12,6 +12,47 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== LEGO Batman: Legacy of the Dark Knight =====
+{
+  href: "/lego-batman",
+  game: "LEGO Batman: Legacy of the Dark Knight",
+  title: "Complete Guide & First Route",
+  description:
+    "Start here for the best first-playthrough route, Batcave systems, Red Bricks, Batgirl, Firefly, Poison Ivy, Bane, and cleanup planning.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
+{
+  href: "/lego-batman/red-bricks",
+  game: "LEGO Batman: Legacy of the Dark Knight",
+  title: "All 23 Red Brick Locations",
+  description:
+    "Find every Red Brick, including all 14 mission puzzles, 9 Bat-Mite’s Shop bricks, modifier effects, shop refresh tips, and safe code 596.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
+{
+  href: "/lego-batman/carmine-falcone",
+  game: "LEGO Batman: Legacy of the Dark Knight",
+  title: "Carmine Falcone Walkthrough",
+  description:
+    "Clear the Iceberg Lounge route, find Falcone’s office, solve the food order, reach House of Fun, and open the Filthy Rich Red Brick safe.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
+{
+  href: "/lego-batman/batgirl-unlock",
+  game: "LEGO Batman: Legacy of the Dark Knight",
+  title: "Batgirl Unlock Guide",
+  description:
+    "Find when Barbara becomes Batgirl, how the Chapter 4 Firefly sequence unlocks her, what her tech does, and why Radio Towers matter.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
 
     // ===== Dwarf Eats Mountain =====
 {
@@ -765,47 +806,7 @@ export type LatestUpdateItem = {
   hoverBorderClass: "hover:border-sky-300",
   hoverTitleClass: "group-hover:text-sky-700",
 },
-  // ===== Lucky Tower Ultimate =====
-{
-  href: "/lucky-tower-ultimate/potion-recipes-and-permanent-buffs-guide/",
-  game: "Lucky Tower Ultimate",
-  title: "Potion Recipes and Permanent Buffs Guide",
-  description:
-    "Learn fixed potion colors, the most important recipes, how permanent buffs really work, and when Antidote, Monster, Speed, and Strength matter most.",
-  tagClass: "text-emerald-500",
-  hoverBorderClass: "hover:border-emerald-300",
-  hoverTitleClass: "group-hover:text-emerald-700",
-},
-{
-  href: "/lucky-tower-ultimate/companions-guide/",
-  game: "Lucky Tower Ultimate",
-  title: "Companions Guide",
-  description:
-    "How Sobu, Princess, Alva, Hubert, Marisha and Louise, and the Bard work, plus loyalty rules, rescue value, and the best companion routes.",
-  tagClass: "text-emerald-500",
-  hoverBorderClass: "hover:border-emerald-300",
-  hoverTitleClass: "group-hover:text-emerald-700",
-},
-{
-  href: "/lucky-tower-ultimate/pipeline-guide/",
-  game: "Lucky Tower Ultimate",
-  title: "Pipeline Guide",
-  description:
-    "Where to find the Pipefitters, how the four broken pipes work, what the 100 gold activation and 8 gold reclaim costs mean, and when piping an item is worth it.",
-  tagClass: "text-emerald-500",
-  hoverBorderClass: "hover:border-emerald-300",
-  hoverTitleClass: "group-hover:text-emerald-700",
-},
-{
-  href: "/lucky-tower-ultimate/100-achievement-guide/",
-  game: "Lucky Tower Ultimate",
-  title: "100% Achievement Guide",
-  description:
-    "A practical roadmap for escape, village, companion, potion, pipeline, and endgame achievements, including No touching!, Speedrunner-er, and The chosen one.",
-  tagClass: "text-emerald-500",
-  hoverBorderClass: "hover:border-emerald-300",
-  hoverTitleClass: "group-hover:text-emerald-700",
-},
+
 
 // ===== holoVillage: Our Cozy Days =====
 {
@@ -890,49 +891,7 @@ export type LatestUpdateItem = {
   hoverBorderClass: "hover:border-violet-300",
   hoverTitleClass: "group-hover:text-violet-700",
 },
-  
-    // ===== I Am Jesus Christ =====
-    {
-      href: "/i-am-jesus-christ/walkthrough",
-      game: "I Am Jesus Christ",
-      title: "Full Walkthrough",
-      description:
-        "Full story route from John the Baptist to the ending.",
-      tagClass: "text-amber-500",
-      hoverBorderClass: "hover:border-amber-300",
-      hoverTitleClass: "group-hover:text-amber-700",
-    },
-    {
-      href: "/i-am-jesus-christ/miracles-list",
-      game: "I Am Jesus Christ",
-      title: "Miracles List",
-      description:
-        "Holy Spirit, Divine Vision, miracle categories, and key story scenes.",
-      tagClass: "text-amber-500",
-      hoverBorderClass: "hover:border-amber-300",
-      hoverTitleClass: "group-hover:text-amber-700",
-    },
-    {
-      href: "/i-am-jesus-christ/apostles-locations",
-      game: "I Am Jesus Christ",
-      title: "12 Apostles Locations",
-      description:
-        "Recruitment order, trigger chains, missables, and follower route help.",
-      tagClass: "text-amber-500",
-      hoverBorderClass: "hover:border-amber-300",
-      hoverTitleClass: "group-hover:text-amber-700",
-    },
-    {
-      href: "/i-am-jesus-christ/who-should-play",
-      game: "I Am Jesus Christ",
-      title: "Who Should Play?",
-      description:
-        "Buying advice for Christians, non-Christians, and story-first players.",
-      tagClass: "text-amber-500",
-      hoverBorderClass: "hover:border-amber-300",
-      hoverTitleClass: "group-hover:text-amber-700",
-    },
-  
+
     // ===== Sol Cesto =====
     {
       href: "/sol-cesto/all-characters-unlock-guide",
