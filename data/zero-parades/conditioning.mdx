@@ -1,0 +1,517 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const confirmedThoughtColumns = [
+  { key: "thought", label: "Thought" },
+  { key: "confirmedEffect", label: "Confirmed Effect" },
+  { key: "drawbackOrRule", label: "Violation / Drawback" },
+  { key: "bestFor", label: "Best Fit" },
+];
+
+export const confirmedThoughtRows = [
+  {
+    thought: "Primitive Accumulation",
+    confirmedEffect:
+      "Blueprints skill potential +1; Personalism skill potential +1; adds 'Steal from vending machines, raid more trash.'",
+    drawbackOrRule:
+      "Temporarily lose reinforced effects; gain Relation disadvantage when working any side-jobs.",
+    bestFor:
+      "Best practical first-run pick so far. Good for Blueprints, Personalism, route reading, scavenger play, and social-investigation builds.",
+  },
+  {
+    thought: "Latest Synthetic Desires",
+    confirmedEffect:
+      "Instincts skill potential +2; 1.33x bonus to reducing Fatigue when consuming Rumba Canned Coffee, Jefa Red & Black Blend, or Camisado Ultra Sweet.",
+    drawbackOrRule:
+      "Temporarily lose reinforced effects; gain Action disadvantage when purchasing bootlegged goods.",
+    bestFor:
+      "Instincts builds, Fatigue management, consumable-heavy play, and players who can avoid buying bootlegged goods.",
+  },
+  {
+    thought: "The Umbral Host",
+    confirmedEffect:
+      "Shadowplay skill potential +2; +1 bonus to all active unlocked checks at night; adds 'Embrace the Shadow Realm.'",
+    drawbackOrRule:
+      "Temporarily lose reinforced effects; gain Action disadvantage when sleeping at night between 9 PM and 4 AM.",
+    bestFor:
+      "Shadowplay-heavy builds, night checks, covert spy roleplay, and players willing to route around normal night sleep.",
+  },
+  {
+    thought: "Apology World Tour 96",
+    confirmedEffect:
+      "Personalism skill potential +1; Records skill potential +1; choosing repentful options gives Anxiety +1 and +5 XP.",
+    drawbackOrRule:
+      "Temporarily lose reinforced effects; a Relation disadvantage is shown, but the exact trigger is not fully visible in the current screenshot.",
+    bestFor:
+      "Personalism and Records builds, apology-heavy roleplay, and players who want XP from repentful dialogue.",
+  },
+  {
+    thought: "People's Republic of La-La-La-Land",
+    confirmedEffect:
+      "Doppelgäng skill potential +1; Statehood skill potential +1; aligns your inventory with the Party's values.",
+    drawbackOrRule:
+      "No full violation line is visible in the current screenshot. Treat inventory alignment as a meaningful roleplay and item-management restriction until confirmed.",
+    bestFor:
+      "Statehood, Doppelgäng, ideological roleplay, and players who want a sharper political identity.",
+  },
+  {
+    thought: "Eternal Victim",
+    confirmedEffect:
+      "Nerve skill potential +1; Entanglement skill potential +1; unlocks the 'Too Young to Spy' option in gameplay settings.",
+    drawbackOrRule:
+      "Temporarily lose reinforced effects; gain Relation disadvantage when choosing Hardcore options.",
+    bestFor:
+      "Nerve and Entanglement builds, softer roleplay, and players who avoid aggressive or hard-edged choices.",
+  },
+  {
+    thought: "The Wang Way",
+    confirmedEffect:
+      "Coordination skill potential +1; Technoflex skill potential +1; makes the word 'wang' part of your vocabulary.",
+    drawbackOrRule:
+      "Temporarily lose reinforced effects; gain Action disadvantage when showing any kind of regret.",
+    bestFor:
+      "Coordination or Technoflex builds, absurdist roleplay, and players willing to fully commit to the bit.",
+  },
+];
+
+export const buildFitColumns = [
+  { key: "build", label: "Build / Goal" },
+  { key: "bestThoughts", label: "Best Confirmed Fits" },
+  { key: "whyItWorks", label: "Why It Works" },
+];
+
+export const buildFitRows = [
+  {
+    build: "Safe first-run social + clue build",
+    bestThoughts: "Primitive Accumulation; Apology World Tour 96",
+    whyItWorks:
+      "Primitive Accumulation is the cleaner practical pick because it helps Blueprints and Personalism. Apology World Tour 96 is better if you want Personalism, Records, and repentful dialogue rewards.",
+  },
+  {
+    build: "Statehood / ideological build",
+    bestThoughts: "People's Republic of La-La-La-Land",
+    whyItWorks:
+      "It directly supports Statehood and Doppelgäng while pushing a more committed political identity.",
+  },
+  {
+    build: "Night spy / covert build",
+    bestThoughts: "The Umbral Host",
+    whyItWorks:
+      "Shadowplay +2 is a major boost, and the night-check bonus is powerful if you can avoid triggering its sleep violation.",
+  },
+  {
+    build: "Entanglement / vulnerability build",
+    bestThoughts: "Eternal Victim",
+    whyItWorks:
+      "It reinforces Nerve and Entanglement while fitting a softer, less Hardcore route.",
+  },
+  {
+    build: "Action + technical hybrid",
+    bestThoughts: "The Wang Way",
+    whyItWorks:
+      "Coordination and Technoflex together are a rare pairing for players who want physical and technical options in the same build.",
+  },
+  {
+    build: "Fatigue management / stimulant route",
+    bestThoughts: "Latest Synthetic Desires",
+    whyItWorks:
+      "Instincts +2 is strong by itself, and the Fatigue-reduction bonus makes it one of the most practical Thoughts shown so far.",
+  },
+];
+
+export const violationColumns = [
+  { key: "pattern", label: "Pattern" },
+  { key: "whatItLooksLike", label: "What We See So Far" },
+  { key: "whatItMeans", label: "What It Means for Players" },
+];
+
+export const violationRows = [
+  {
+    pattern: "Temporary loss of reinforced effects",
+    whatItLooksLike:
+      "Every confirmed Thought shown so far includes 'Temporarily lose reinforced effects.'",
+    whatItMeans:
+      "A Thought is not a permanent free bonus. If you break its rule, you can lose the part you took it for.",
+  },
+  {
+    pattern: "Category disadvantage",
+    whatItLooksLike:
+      "Several Thoughts add Action or Relation disadvantage when you violate their condition.",
+    whatItMeans:
+      "The penalty can make future checks worse in the same style of play you were trying to improve.",
+  },
+  {
+    pattern: "Behavior-based trigger",
+    whatItLooksLike:
+      "Triggers include sleeping at night, choosing Hardcore options, showing regret, purchasing bootlegged goods, or working side-jobs.",
+    whatItMeans:
+      "Pick Thoughts that fit your habits. Do not take a Thought whose rule you will constantly forget.",
+  },
+];
+
+export const commitColumns = [
+  { key: "question", label: "Question to Ask" },
+  { key: "whyItMatters", label: "Why It Matters" },
+  { key: "greenLight", label: "Take It If..." },
+];
+
+export const commitRows = [
+  {
+    question: "Does it raise a skill I actually use?",
+    whyItMatters:
+      "A Thought with the wrong skill pair can look cool but do almost nothing for your run.",
+    greenLight:
+      "It directly helps your main build, your weak spot, or a route you already know you want.",
+  },
+  {
+    question: "Can I realistically avoid the violation?",
+    whyItMatters:
+      "A strong Thought becomes much weaker if you constantly break its rule and lose the benefit.",
+    greenLight:
+      "The trigger is easy to remember and does not fight the way you naturally play.",
+  },
+  {
+    question: "Does the reward solve a real current problem?",
+    whyItMatters:
+      "Some Thoughts are practical now; others are more for identity, challenge, or second-run experimentation.",
+    greenLight:
+      "You need the skill potential or side bonus in the next stretch of the game.",
+  },
+  {
+    question: "Could gear solve this instead?",
+    whyItMatters:
+      "A temporary check problem is often better solved with clothing or a held item than a long-term Thought commitment.",
+    greenLight:
+      "The Thought gives a bigger long-term payoff than a simple gear swap.",
+  },
+  {
+    question: "Is the drawback still acceptable if I forget once?",
+    whyItMatters:
+      "If one mistake makes the Thought miserable, it is not a great first-run pick.",
+    greenLight:
+      "Even if you slip once, the Thought is still worth keeping.",
+  },
+];
+
+export const differenceColumns = [
+  { key: "topic", label: "Topic" },
+  { key: "thoughtCabinet", label: "Disco Elysium Thought Cabinet" },
+  { key: "conditioning", label: "ZERO PARADES Conditioning" },
+];
+
+export const differenceRows = [
+  {
+    topic: "Main role",
+    thoughtCabinet:
+      "Identity, stat nudges, jokes, worldview, and weird long-form character shaping.",
+    conditioning:
+      "Identity plus build commitment. It is more tied to skill potential, checks, and play rules.",
+  },
+  {
+    topic: "Practical value",
+    thoughtCabinet:
+      "Often passive, flavorful, and indirect unless you already knew what a Thought did.",
+    conditioning:
+      "More explicit. The reinforced effects usually tell you exactly which skill or behavior changes.",
+  },
+  {
+    topic: "Drawbacks",
+    thoughtCabinet:
+      "Could include opportunity cost or side effects, but often felt softer or slower.",
+    conditioning:
+      "Violations are clear and immediate. Break the rule and you can lose reinforced effects or take a disadvantage.",
+  },
+  {
+    topic: "How to judge it",
+    thoughtCabinet:
+      "Often judged by roleplay identity and long-term curiosity.",
+    conditioning:
+      "Judge it like a build choice: what skill does it raise, what rule does it impose, and can you live with that rule?",
+  },
+  {
+    topic: "Gear and checks",
+    thoughtCabinet:
+      "Less directly compared against clothing or temporary check fixes.",
+    conditioning:
+      "Competes directly with gear and Exertion. You do not need a Thought for every short-term problem.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best confirmed first-run Conditioning pick is Primitive Accumulation if you want practical Blueprints + Personalism support. Latest Synthetic Desires is strong for Fatigue management, while The Umbral Host is powerful but risky because its night-sleep violation can give Action disadvantage. Check the table below before committing to any Thought.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-thought-primitive-accumulation.webp"
+    alt="Primitive Accumulation thought in ZERO PARADES showing Blueprints +1, Personalism +1, and its violation condition."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Primitive Accumulation is the cleanest practical first-run Thought shown so far because it supports both Blueprints and Personalism.
+  </figcaption>
+</figure>
+
+<h2 id="confirmed-thoughts-and-effects">
+  Confirmed Thoughts and Effects
+</h2>
+
+If you are here for the best Conditioning choices, start with this table.
+
+This is not a full Thought list yet. It only includes Thoughts whose names, reinforced effects, and at least part of their violation text are visible in the current material.
+
+<GuideTable
+  caption="Confirmed ZERO PARADES Thoughts and their visible effects."
+  columns={confirmedThoughtColumns}
+  rows={confirmedThoughtRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+The quick read:
+
+- **Primitive Accumulation** is the best general first-run pick shown so far.
+- **Latest Synthetic Desires** is the best practical Fatigue-support Thought shown so far.
+- **The Umbral Host** has the strongest Shadowplay identity, but its sleep rule is easy to break.
+- **People's Republic of La-La-La-Land** is more of an ideological build pick than a generic beginner pick.
+- **The Wang Way** and **Eternal Victim** are more specialized and should fit your roleplay before you commit.
+
+<h2 id="best-conditioning-by-build">
+  Best Conditioning by Build
+</h2>
+
+There is no single best Conditioning for every Cascade.
+
+The best Thought depends on your build, your habits, and whether its violation rule fits the way you already play.
+
+<GuideTable
+  caption="Best currently confirmed Thought fits by build type."
+  columns={buildFitColumns}
+  rows={buildFitRows}
+/>
+
+For a normal first run, I would not start with the weirdest Thought. I would start with the Thought that makes the next few hours smoother.
+
+That is why **Primitive Accumulation** stands out. Blueprints helps with city logic, routes, objects, and practical leads. Personalism helps with people. Those are both valuable early.
+
+<h2 id="umbral-host-violation-example">
+  Why The Umbral Host Shows Violations Are Serious
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-thought-umbral-host.webp"
+    alt="The Umbral Host thought in ZERO PARADES showing Shadowplay +2, night check bonus, and sleep violation."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Umbral Host looks extremely strong, but the violation rule makes it a real commitment instead of a free Shadowplay buff.
+  </figcaption>
+</figure>
+
+The Umbral Host is the best example of why you need to read the violation text before conditioning a Thought.
+
+On paper, it is excellent:
+
+- **Shadowplay skill potential +2**
+- **+1 bonus to all active unlocked checks at night**
+- **Embrace the Shadow Realm**
+
+That sounds like an obvious pick for a covert spy build. But the violation says you gain **Action disadvantage when sleeping at night between 9 PM and 4 AM**, and you can temporarily lose reinforced effects.
+
+That is not decorative flavor text.
+
+It changes how you route your day. If you naturally sleep at night to stabilize your run, The Umbral Host fights your habits. If you are willing to avoid normal night sleep and lean into night activity, it becomes much stronger.
+
+That is the whole Conditioning system in one example:
+
+**the best Thought is not the one with the biggest upside. It is the one whose rule you can actually obey.**
+
+<h2 id="what-conditioning-does">
+  What Conditioning Does in ZERO PARADES
+</h2>
+
+Conditioning is the system that turns a Thought into a real part of your build.
+
+In practice, that usually means three things:
+
+- it raises the **skill potential** of one or more skills,
+- it adds a **gameplay bonus, option, or behavior rule**,
+- and it gives you a **violation condition** that can temporarily strip the reinforced effects or apply a disadvantage.
+
+A clothing item helps with one moment.  
+A Thought can reshape how Cascade plays for hours.
+
+That is why Conditioning is more dangerous than gear. If you pick a bad jacket, you can swap it. If you pick a Thought that fights your habits, you may have to play around that rule for a long time.
+
+<h2 id="how-violations-work">
+  How Violations Change the Choice
+</h2>
+
+Violations are the most important part of a Thought after the skill bonuses.
+
+<GuideTable
+  caption="What current ZERO PARADES Thought violations tell us."
+  columns={violationColumns}
+  rows={violationRows}
+/>
+
+A few confirmed examples make the pattern clear:
+
+- **The Umbral Host** punishes normal night sleep with Action disadvantage.
+- **Latest Synthetic Desires** punishes purchasing bootlegged goods with Action disadvantage.
+- **Primitive Accumulation** punishes working side-jobs with Relation disadvantage.
+- **Eternal Victim** punishes Hardcore options with Relation disadvantage.
+- **The Wang Way** punishes showing regret with Action disadvantage.
+
+So before you commit, ask:
+
+**Will this Thought make me play better, or just make me babysit a rule I hate?**
+
+<h2 id="when-to-commit">
+  When Should You Commit to a Thought?
+</h2>
+
+Do not commit just because a Thought sounds cool.
+
+Commit when it solves a real build problem, strengthens a skill pair you already use, or opens a route you know you want.
+
+<GuideTable
+  caption="How to decide whether a ZERO PARADES Thought is worth conditioning."
+  columns={commitColumns}
+  rows={commitRows}
+/>
+
+The safest first-run rule is:
+
+**Commit late enough to understand the downside, but early enough to enjoy the bonus.**
+
+If you are still unsure how you want to play Cascade, wait.  
+If you already know the Thought fits your build, take it.
+
+<h2 id="conditioning-vs-gear">
+  Conditioning vs Gear
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-gear-skill-bonus.webp"
+    alt="Inventory screen in ZERO PARADES showing gear and skill modifiers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gear fixes a check. Conditioning shapes a build. Do not use a Thought when a simple gear swap would solve the problem.
+  </figcaption>
+</figure>
+
+Do not take a Thought just to pass one check.
+
+If you only need a temporary skill boost, check your clothing and held items first. Gear is reversible. Conditioning is a bigger commitment.
+
+Use this rule:
+
+**Gear for one check. Conditioning for a build. Exertion for a moment.**
+
+That keeps you from turning every small problem into a long-term drawback.
+
+<h2 id="conditioning-vs-thought-cabinet">
+  Conditioning vs Disco Elysium Thought Cabinet
+</h2>
+
+Conditioning is the system Disco Elysium players will compare to the Thought Cabinet first, but the comparison is only partly useful.
+
+The Thought Cabinet usually felt like a mix of roleplay identity, passive modifier, joke, and long-form worldview. Conditioning is closer to a **build rule**. It still shapes who Cascade is, but it is much more directly tied to skill potential, practical bonuses, and behavior-driven drawbacks.
+
+<GuideTable
+  caption="How ZERO PARADES Conditioning differs from the Disco Elysium Thought Cabinet."
+  columns={differenceColumns}
+  rows={differenceRows}
+/>
+
+If you came from Disco Elysium, the best mindset shift is this:
+
+**Do not ask only whether a Thought is interesting. Ask whether it makes your build better without making your habits worse.**
+
+For more general onboarding, read the <Link href="/zero-parades/disco-elysium-guide">ZERO PARADES guide for Disco Elysium players</Link>.
+
+<h2 id="can-you-undo-conditioning">
+  Can You Undo or Remove Conditioning?
+</h2>
+
+I have not confirmed a full remove or respec option for Conditioning yet.
+
+Right now, the safest advice is:
+
+- treat every Thought as a real commitment,
+- save before conditioning anything with a serious downside,
+- and do not assume you can freely undo a Thought later.
+
+The current screenshots show a **Hold to Condition** prompt, but no obvious general remove or undo button. Until you confirm one in your own run, play as if the choice matters.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="what-is-the-best-conditioning-in-zero-parades">
+  What is the best Conditioning in ZERO PARADES?
+</h3>
+
+Based on the currently confirmed Thoughts, **Primitive Accumulation** looks like the best general first-run Conditioning choice because it supports Blueprints and Personalism. **Latest Synthetic Desires** is better if you want Instincts and Fatigue management.
+
+<h3 id="which-thought-is-best-for-a-first-run">
+  Which Thought is best for a first run?
+</h3>
+
+Primitive Accumulation is the safest confirmed first-run pick so far. It reinforces two broadly useful skills and has a clear drawback you can plan around.
+
+<h3 id="can-you-undo-or-remove-a-thought">
+  Can you undo or remove a Thought in ZERO PARADES?
+</h3>
+
+I have not confirmed a general undo or respec option yet. Until that changes, assume a Thought is a meaningful commitment and save before taking one with a harsh drawback.
+
+<h3 id="can-a-bad-thought-ruin-your-run">
+  Can a bad Thought ruin your run?
+</h3>
+
+Usually not, but it can make your run messier. A bad Thought can push you toward a style you do not enjoy, or keep applying violations you regularly trigger.
+
+<h3 id="what-happens-if-you-violate-a-thought">
+  What happens if you violate a Thought?
+</h3>
+
+Confirmed Thoughts show a common pattern: you temporarily lose reinforced effects, and some Thoughts also apply a category disadvantage such as Action disadvantage or Relation disadvantage.
+
+<h3 id="which-thought-is-best-for-a-relation-build">
+  Which Thought is best for a Relation build?
+</h3>
+
+Primitive Accumulation and Apology World Tour 96 are the best confirmed Relation-adjacent options so far. Primitive Accumulation gives Personalism and Blueprints, while Apology World Tour 96 gives Personalism and Records.
+
+<h3 id="which-thought-is-best-for-an-action-build">
+  Which Thought is best for an Action build?
+</h3>
+
+The Wang Way fits Coordination and Technoflex, while The Umbral Host is better for Shadowplay-heavy or night-focused covert play. Latest Synthetic Desires also helps if your Action build needs Fatigue support.
+
+<h3 id="is-conditioning-the-same-as-thought-cabinet">
+  Is Conditioning the same as the Thought Cabinet in Disco Elysium?
+</h3>
+
+No. They are similar in spirit, but Conditioning is more explicit about skill potential, visible bonuses, and violation rules. You should judge a Thought as a gameplay commitment, not just a roleplay idea.
+
+<h3 id="should-i-take-thoughts-early-or-wait">
+  Should I take Thoughts early or wait?
+</h3>
+
+Wait if you do not understand your build or the drawback yet. Commit early only when the Thought clearly supports your route and you know the violation rule will not fight your normal habits.

@@ -12,6 +12,53 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== ZERO PARADES: For Dead Spies =====
+{
+  href: "/zero-parades",
+  game: "ZERO PARADES: For Dead Spies",
+  title: "Beginner Guide & First Route",
+  description:
+    "Start here for first-run tips, safe build direction, stress and Exertion basics, Conditioning, early clues, and Bootleg Bazaar routing.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+
+// ===== ZERO PARADES: For Dead Spies =====
+{
+  href: "/zero-parades/early-game",
+  game: "ZERO PARADES: For Dead Spies",
+  title: "Early Game Walkthrough",
+  description:
+    "Find Pseudopod clues, the purchase order, red disc, half cipher, Rosetta cipher, Constance, Carmuna, and what to do first in Bootleg Bazaar.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+
+// ===== ZERO PARADES: For Dead Spies =====
+{
+  href: "/zero-parades/best-build",
+  game: "ZERO PARADES: For Dead Spies",
+  title: "Best Build for First Playthrough",
+  description:
+    "Use a safe 45-point starting build, compare Relation, Intellect, and Action choices, patch weak checks with gear, and avoid bad early skill traps.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+
+// ===== ZERO PARADES: For Dead Spies =====
+{
+  href: "/zero-parades/stress-exertion",
+  game: "ZERO PARADES: For Dead Spies",
+  title: "Stress & Exertion Guide",
+  description:
+    "Learn Fatigue, Anxiety, Delirium, Exertion, Pressured limits, skill loss, recovery consumables, and when a check is worth pushing.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
 // ===== LEGO Batman: Legacy of the Dark Knight =====
 {
   href: "/lego-batman",

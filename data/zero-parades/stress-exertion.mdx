@@ -1,0 +1,697 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const stressMeterColumns = [
+  { key: "meter", label: "Meter" },
+  { key: "whatItTracks", label: "What It Tracks" },
+  { key: "beginnerRule", label: "Beginner Rule" },
+];
+
+export const stressMeterRows = [
+  {
+    meter: "Fatigue",
+    whatItTracks:
+      "Physical strain and pressure tied to Action-style checks, movement, danger, and physical pushing.",
+    beginnerRule:
+      "Do not spend it freely if you expect movement, danger, or Dramatic Encounters soon.",
+  },
+  {
+    meter: "Anxiety",
+    whatItTracks:
+      "Social and emotional pressure from tense conversations, memories, guilt, authority, and Relation-style checks.",
+    beginnerRule:
+      "Watch it when you keep pushing dialogue, personal reads, authority, guilt, or emotionally loaded options.",
+  },
+  {
+    meter: "Delirium",
+    whatItTracks:
+      "Mental overload from strange information, unstable perception, abstract clues, and Intellect-style pressure.",
+    beginnerRule:
+      "Be careful when chasing weird clues, reality-bending reads, or risky mental checks.",
+  },
+];
+
+export const limitColumns = [
+  { key: "evidence", label: "Visible Example" },
+  { key: "whatItShows", label: "What It Shows" },
+  { key: "playerMeaning", label: "What It Means" },
+];
+
+export const limitRows = [
+  {
+    evidence: "Anxiety Raised +5 → Anxiety Limit Reached",
+    whatItShows:
+      "A single pressure event can raise Anxiety by +5 and push the meter into its limit state.",
+    playerMeaning:
+      "Large stress gains can immediately force consequences if the meter is already high.",
+  },
+  {
+    evidence: "Lower a skill to mitigate the damage",
+    whatItShows:
+      "When Anxiety limit is reached, the game offers Relation-side skills such as Statehood, Cold Read, and Nerve to lower.",
+    playerMeaning:
+      "Stress limit can directly damage the part of your build tied to that pressure type.",
+  },
+  {
+    evidence: "Cold Read Lowered → Anxiety Reset",
+    whatItShows:
+      "After the skill penalty is applied, the meter can reset.",
+    playerMeaning:
+      "The punishment is not just temporary pressure. You may lose skill value, then continue with the meter reset.",
+  },
+  {
+    evidence: "Delirium at 15 → Limit Reached → Cannot exert",
+    whatItShows:
+      "A Delirium example shows the meter at 15 with Exertion blocked by elevated Delirium.",
+    playerMeaning:
+      "At high stress, you can lose access to Exertion exactly when you may want it most.",
+  },
+];
+
+export const exertionColumns = [
+  { key: "situation", label: "Situation" },
+  { key: "shouldYouExert", label: "Should You Exert?" },
+  { key: "why", label: "Why" },
+];
+
+export const exertionRows = [
+  {
+    situation: "Main objective check",
+    shouldYouExert: "Usually yes",
+    why:
+      "If the roll blocks the route you are trying to follow, the stress cost can be worth it.",
+  },
+  {
+    situation: "Important clue check",
+    shouldYouExert: "Maybe",
+    why:
+      "Use Exertion if the clue seems tied to your current goal and you cannot improve the roll another way.",
+  },
+  {
+    situation: "Flavor dialogue",
+    shouldYouExert: "Usually no",
+    why:
+      "Extra text is nice, but it is rarely worth raising a stress meter.",
+  },
+  {
+    situation: "Dramatic Encounter",
+    shouldYouExert: "Often yes",
+    why:
+      "These scenes can change quickly, and a failed action may cost more than normal dialogue.",
+  },
+  {
+    situation: "A check you can fix with gear",
+    shouldYouExert: "No",
+    why:
+      "Change gear first. A small skill bonus is safer than raising stress.",
+  },
+  {
+    situation: "A meter is near its limit",
+    shouldYouExert: "No",
+    why:
+      "High stress can block Exertion or force skill loss. Do not push casually near the danger zone.",
+  },
+];
+
+export const pressureColumns = [
+  { key: "state", label: "State" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const pressureRows = [
+  {
+    state: "Low stress",
+    whatItMeans:
+      "Your meters are still safe enough that you can take normal checks without panic.",
+    whatToDo:
+      "Play normally. Save Exertion for rolls that matter.",
+  },
+  {
+    state: "Rising stress",
+    whatItMeans:
+      "One meter is climbing and may start limiting how aggressively you can play.",
+    whatToDo:
+      "Stop using Exertion on optional checks and look for safer ways to progress.",
+  },
+  {
+    state: "Near limit",
+    whatItMeans:
+      "A meter is close to a point where Exertion may become unavailable or a penalty may trigger.",
+    whatToDo:
+      "Back off, recover if possible, or accept lower-value failures instead of forcing them.",
+  },
+  {
+    state: "Limit reached",
+    whatItMeans:
+      "The game can force a penalty, such as lowering a related skill, to mitigate the damage.",
+    whatToDo:
+      "Pick the least harmful skill loss, then adjust your route before stacking the same pressure again.",
+  },
+  {
+    state: "Reset after penalty",
+    whatItMeans:
+      "Screenshots show Anxiety resetting after Cold Read is lowered.",
+    whatToDo:
+      "Do not treat the reset as free. You paid for it with skill damage.",
+  },
+];
+
+export const saferCheckColumns = [
+  { key: "method", label: "Method" },
+  { key: "howItHelps", label: "How It Helps" },
+  { key: "whenToUseIt", label: "When To Use It" },
+];
+
+export const saferCheckRows = [
+  {
+    method: "Change gear",
+    howItHelps:
+      "Clothing and held items can raise or lower skills.",
+    whenToUseIt:
+      "Use this before Exertion if the check is important but not urgent.",
+  },
+  {
+    method: "Find more context",
+    howItHelps:
+      "Some checks get better modifiers after you learn more or talk to the right person.",
+    whenToUseIt:
+      "Use this when a check looks too hard and the game still gives you other leads.",
+  },
+  {
+    method: "Use consumables",
+    howItHelps:
+      "Some drinks or substances can reduce stress meters, especially Fatigue-related recovery.",
+    whenToUseIt:
+      "Use them when a meter is becoming a bigger threat than the check itself.",
+  },
+  {
+    method: "Accept the failed check",
+    howItHelps:
+      "Not every failed roll ruins the route.",
+    whenToUseIt:
+      "Use this for flavor, curiosity, or low-value checks.",
+  },
+  {
+    method: "Save before a major commitment",
+    howItHelps:
+      "Protects you before big route decisions or chained encounters.",
+    whenToUseIt:
+      "Use this before Dramatic Encounters, major leads, or anything that feels like a lock-in.",
+  },
+];
+
+export const recoveryColumns = [
+  { key: "recoveryTool", label: "Consumable" },
+  { key: "confirmedUse", label: "Confirmed / Visible Use" },
+  { key: "bestUse", label: "Best Use" },
+];
+
+export const recoveryRows = [
+  {
+    recoveryTool: "Rumba Canned Coffee",
+    confirmedUse:
+      "Listed as a drink that can reduce Fatigue; Latest Synthetic Desires boosts this Fatigue reduction by 1.33x.",
+    bestUse:
+      "Use when Fatigue is threatening your Action checks or physical route.",
+  },
+  {
+    recoveryTool: "Jefa Red & Black Blend",
+    confirmedUse:
+      "Listed with Rumba Canned Coffee and Camisado Ultra Sweet for Fatigue reduction synergy under Latest Synthetic Desires.",
+    bestUse:
+      "Use as part of a stimulant or consumable-heavy Fatigue management plan.",
+  },
+  {
+    recoveryTool: "Camisado Ultra Sweet",
+    confirmedUse:
+      "Listed as another drink affected by Latest Synthetic Desires' 1.33x Fatigue reduction bonus.",
+    bestUse:
+      "Use when you need to bring Fatigue down and are building around Instincts or consumables.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterHabit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Using Exertion just because the button is there",
+    whyItHurts:
+      "Every push raises the related stress meter and can make later checks harder to manage.",
+    betterHabit:
+      "Ask whether the roll affects a goal you actually care about.",
+  },
+  {
+    mistake: "Ignoring which meter is rising",
+    whyItHurts:
+      "Fatigue, Anxiety, and Delirium pressure different parts of your build.",
+    betterHabit:
+      "Track the meter that matches the kind of check you keep forcing.",
+  },
+  {
+    mistake: "Trying to pass every white check immediately",
+    whyItHurts:
+      "Some checks are easier after gear changes, new information, or a better route.",
+    betterHabit:
+      "Come back later instead of spending stress on everything right now.",
+  },
+  {
+    mistake: "Pushing rolls near a stress limit",
+    whyItHurts:
+      "You can lose access to Exertion or trigger skill loss exactly when you need stability.",
+    betterHabit:
+      "Stabilize before major checks if a meter is already high.",
+  },
+  {
+    mistake: "Treating skill loss like a failed run",
+    whyItHurts:
+      "Skill loss is bad, but it is not the same as losing the game.",
+    betterHabit:
+      "Recover, use gear, and adjust your route instead of instantly restarting.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Fatigue, Anxiety, and Delirium are the three stress meters in ZERO PARADES. Exertion improves an important check by pushing the roll harder, but it raises the related stress meter; current examples show increases around +4 to +5. If a meter reaches its limit, the game can block Exertion, force skill loss, and then reset the meter after the penalty.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-stress-meters-hud.webp"
+    alt="Fatigue Anxiety and Delirium meters in ZERO PARADES For Dead Spies."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The three meters on the HUD are not just flavor. Fatigue, Anxiety, and Delirium decide how safely you can keep pushing checks.
+  </figcaption>
+</figure>
+
+<h2 id="stress-guide-overview">
+  ZERO PARADES Stress Guide Overview
+</h2>
+
+ZERO PARADES does not punish pressure the same way a normal RPG does.
+
+You are not only watching health. You are watching **Fatigue**, **Anxiety**, and **Delirium**. These meters rise when Cascade pushes too hard, makes mistakes, goes too deep into certain dialogue paths, or uses Exertion to force a better chance on a check.
+
+The important thing to understand early is this:
+
+**Stress is a resource, not just a warning light.**
+
+You can spend it when a roll matters. You can also waste it on a check that only gives a little extra text. The difference between those two habits is what makes the opening feel controlled or chaotic.
+
+For the full starter hub, read the <Link href="/zero-parades">ZERO PARADES beginner guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="fatigue-anxiety-delirium-explained">
+  Fatigue, Anxiety, and Delirium Explained
+</h2>
+
+Each stress meter tracks a different kind of pressure.
+
+<GuideTable
+  caption="ZERO PARADES stress meters and how beginners should read them."
+  columns={stressMeterColumns}
+  rows={stressMeterRows}
+/>
+
+You do not need to memorize every exact trigger in your first hour. Just watch the pattern:
+
+- physical strain tends to push **Fatigue**,
+- tense social or emotional pressure tends to push **Anxiety**,
+- strange mental overload tends to push **Delirium**.
+
+If one meter keeps rising, that is the game telling you what kind of pressure your current route is creating.
+
+<h2 id="how-stress-rises">
+  How Stress Rises
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-anxiety-limit-reached.webp"
+    alt="Anxiety Raised plus five and Anxiety Limit Reached in ZERO PARADES."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Stress can rise in large chunks. This example shows Anxiety Raised +5 immediately followed by Anxiety Limit Reached.
+  </figcaption>
+</figure>
+
+Stress can rise in several ways:
+
+- going too far down a tense dialogue path,
+- failing or forcing certain skill checks,
+- using Exertion,
+- interacting with strange objects or information,
+- or choosing options that strain Cascade physically, socially, or mentally.
+
+The early safe house already teaches this. You can gain pressure from memories, the red disc, and risky reads before you even understand the bigger mission.
+
+That means you should not think of stress as something that only matters in action scenes. ZERO PARADES can pressure you through conversation, investigation, and memory.
+
+<h2 id="what-happens-when-stress-gets-too-high">
+  What Happens When Stress Gets Too High?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-anxiety-lower-skill.webp"
+    alt="ZERO PARADES showing Anxiety limit reached and asking the player to lower a skill."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When a stress meter reaches its limit, the punishment can be a forced skill reduction instead of a normal death screen.
+  </figcaption>
+</figure>
+
+Stress does not work like a simple health bar.
+
+When a stress meter reaches its limit, ZERO PARADES can force you to lower a related skill to mitigate the damage. In the Anxiety example, the game offers Relation-side skills such as **Statehood**, **Cold Read**, and **Nerve**.
+
+That is the important part: the penalty attacks the kind of ability tied to the pressure.
+
+If Anxiety boils over, it can damage social or Relation-side tools. If Delirium gets too high, it threatens your ability to keep pushing strange mental checks. Fatigue should be treated the same way for physical pressure until you have confirmed the exact category behavior in your own run.
+
+<GuideTable
+  caption="Visible stress-limit examples and what they mean."
+  columns={limitColumns}
+  rows={limitRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-anxiety-reset-after-skill-loss.webp"
+    alt="Cold Read Lowered and Anxiety Reset after Anxiety limit in ZERO PARADES."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After Cold Read is lowered, the Anxiety meter resets. The reset is real, but it is not free.
+  </figcaption>
+</figure>
+
+So stress limit is not just a warning. It can directly damage your skill sheet, then reset the meter after the penalty is applied.
+
+The beginner lesson:
+
+**Do not play to the edge of a stress meter unless the result is worth losing a skill point.**
+
+<h2 id="pressured-explained">
+  What Does Pressured Mean?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-delirium-limit-cannot-exert.webp"
+    alt="Delirium at 15 with Limit Reached and Cannot exert Delirium elevated in ZERO PARADES."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This example shows Delirium at 15 with Limit Reached and Cannot exert. High stress can remove your emergency push.
+  </figcaption>
+</figure>
+
+**Pressured** is the warning state you need to respect.
+
+Once a stress meter is high enough, ZERO PARADES can stop you from using Exertion for that category. A Delirium example shows the meter at **15** with **Limit Reached** and **Cannot exert. Delirium elevated.**
+
+That means high stress can remove your ability to Exert in the category where you most need help.
+
+Other meters should be tested separately before assuming every category uses the exact same visible threshold, but the practical rule is already clear:
+
+**Do not wait until Pressured to start caring about stress.**
+
+Use this table as a simple read:
+
+<GuideTable
+  caption="How to read stress states in ZERO PARADES."
+  columns={pressureColumns}
+  rows={pressureRows}
+/>
+
+If you are close to the limit, stop spending that meter unless the check is truly important.
+
+<h2 id="how-exertion-works">
+  How Exertion Works
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-delirium-exertion-plus-four.webp"
+    alt="Exertion check in ZERO PARADES showing Delirium Raised plus four after pushing a check."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Exertion improves your chance, but it raises the related stress meter. This example shows Delirium Raised +4 after pushing the check.
+  </figcaption>
+</figure>
+
+Most checks are built around dice and your relevant skill.
+
+Exertion lets Cascade push harder. In practical terms, it gives you a better chance on the roll, but it raises the related stress meter. Current examples show stress increases around **+4 to +5**, depending on the check or scene.
+
+That makes Exertion a trade:
+
+**better chance now, more pressure later.**
+
+This is why Exertion feels tempting. It can turn a borderline check into a real chance. But if you use it on everything, your meters climb quickly and the game starts taking options away from you.
+
+<h2 id="when-to-use-exertion">
+  When Should You Use Exertion?
+</h2>
+
+Use Exertion when the result matters more than the stress.
+
+<GuideTable
+  caption="When to use Exertion in ZERO PARADES."
+  columns={exertionColumns}
+  rows={exertionRows}
+/>
+
+A good mental shortcut is:
+
+**Would I reload if this failed?**
+
+If the answer is yes, Exertion may be worth it. If the answer is no, save the stress.
+
+<h2 id="dramatic-encounters">
+  Exertion During Dramatic Encounters
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-dramatic-encounter-bazaar.webp"
+    alt="A dramatic encounter in ZERO PARADES For Dead Spies during a tense bazaar escape."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dramatic Encounters are where Exertion can be worth the cost, because one failed action can change the whole scene.
+  </figcaption>
+</figure>
+
+Dramatic Encounters are one of the best places to consider Exertion.
+
+These scenes play out one action at a time. You may be trying to flee, blend in, improvise, or take control before the situation collapses. Because the outcome of one action can shape the next step, an important roll can be worth spending stress on.
+
+That does not mean you should Exert every option.
+
+Read the scene first. If the check lines up with your build and the result gives you a real route forward, push it. If the roll is a desperate action using one of your weak skills, look for another option before spending stress.
+
+<h2 id="how-to-pass-checks-without-exertion">
+  How to Pass Checks Without Exertion
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-technoflex-exert-options.webp"
+    alt="ZERO PARADES showing multiple check options, including Exert choices for Shadowplay and Technoflex."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Exertion is tied to specific check options. If one path is risky, look for gear, context, or another skill route before pushing.
+  </figcaption>
+</figure>
+
+Exertion is not the only answer.
+
+If a check is important but not urgent, try to improve the situation first.
+
+<GuideTable
+  caption="Safer ways to handle checks before spending stress."
+  columns={saferCheckColumns}
+  rows={saferCheckRows}
+/>
+
+This is especially important for white checks or checks you can return to later. If the game is not forcing you to decide right now, do not burn stress like it is a timed event.
+
+<h2 id="how-to-recover-stress">
+  How to Recover Stress
+</h2>
+
+Stress recovery is where consumables start to matter.
+
+The clearest confirmed pattern so far is tied to **Fatigue**. The Thought **Latest Synthetic Desires** gives a **1.33x bonus** to reducing Fatigue when consuming specific drinks, which confirms that consumables are not just flavor items.
+
+<GuideTable
+  caption="Confirmed Fatigue-related consumables and recovery synergy."
+  columns={recoveryColumns}
+  rows={recoveryRows}
+/>
+
+The practical rule is:
+
+**Use consumables for recovery, and use gear or route changes to avoid creating more stress in the first place.**
+
+If Fatigue is threatening Action checks, drinks that reduce Fatigue matter more than a generic skill bonus. If Anxiety or Delirium is climbing, stop forcing the same kind of dialogue or mental reads until you have a safer path or a confirmed recovery option.
+
+For confirmed Thought synergy, read the <Link href="/zero-parades/conditioning">ZERO PARADES Conditioning guide</Link>.
+
+<h2 id="should-you-reload-stress-mistakes">
+  Should You Reload After Stress Mistakes?
+</h2>
+
+Usually, no.
+
+If you used Exertion on a bad check and raised a meter, that is annoying, but it is not always worth reloading. ZERO PARADES is built around pressure and consequences. A messy path is not automatically a failed path.
+
+Reload only if:
+
+- you lost access to a route you specifically wanted,
+- you triggered skill loss right before a major check,
+- you wasted stress because you misunderstood a key system,
+- or you are testing a specific outcome.
+
+Otherwise, keep going. Learn what kind of pressure your choices create, then play cleaner from there.
+
+<h2 id="common-stress-mistakes">
+  Common Stress and Exertion Mistakes
+</h2>
+
+<GuideTable
+  caption="Common ZERO PARADES stress mistakes and better habits."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is treating every roll like it deserves maximum effort.
+
+It does not.
+
+ZERO PARADES gives you many checks because it wants you to make choices under pressure. The best first-run habit is not passing everything. It is learning which rolls are worth paying for.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="best-beginner-rules">
+  Three Rules for Stress Management
+</h2>
+
+Use these three rules if you are still learning:
+
+1. **Spend stress only for route-changing checks.** If a roll does not change your goal, do not pay pressure for it.
+2. **Fix checks before forcing checks.** Try gear, context, another route, or recovery before Exertion.
+3. **Recover the meter you keep abusing.** If the same meter keeps rising, change your approach instead of pushing harder.
+
+That last rule is the real difference between a messy run and a controlled one.
+
+A clean ZERO PARADES run is not a run where every roll succeeds. It is a run where you spend pressure only when the result is worth the cost.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="what-are-fatigue-anxiety-and-delirium">
+  What are Fatigue, Anxiety, and Delirium in ZERO PARADES?
+</h3>
+
+Fatigue, Anxiety, and Delirium are the three main stress meters. They track different kinds of pressure and can make your run harder if you let them climb too high.
+
+<h3 id="how-much-stress-does-exertion-add">
+  How much stress does Exertion add?
+</h3>
+
+Exertion raises the related stress meter. Current examples show increases around **+4 to +5**, depending on the check or scene, so do not treat Exertion as a free retry.
+
+<h3 id="what-does-exertion-do">
+  What does Exertion do?
+</h3>
+
+Exertion lets you push a skill check for a better chance, but it raises the related stress meter. It is useful for important rolls, but dangerous if you use it casually.
+
+<h3 id="should-i-use-exertion-on-every-check">
+  Should I use Exertion on every check?
+</h3>
+
+No. Use Exertion only when the check matters. If a roll is optional, low-value, or fixable with gear, save your stress.
+
+<h3 id="what-does-pressured-mean">
+  What does Pressured mean in ZERO PARADES?
+</h3>
+
+Pressured means one of your stress meters is high enough that Exertion becomes restricted. A Delirium example shows the meter at 15 with Limit Reached and Cannot exert, but other meters should be tested separately before assuming every category uses the exact same visible threshold.
+
+<h3 id="what-number-triggers-pressured">
+  What number triggers Pressured or skill loss?
+</h3>
+
+A Delirium example shows Limit Reached and Cannot exert at 15. An Anxiety example shows Anxiety Limit Reached, a forced skill reduction, and Anxiety reset afterward. More testing is still useful before treating every meter and every difficulty setting as identical.
+
+<h3 id="can-stress-kill-you">
+  Can stress kill you in ZERO PARADES?
+</h3>
+
+Stress itself is more about skill loss than a normal death. Some specific choices or checks can still lead to death scenes, but maxing a stress meter is mainly dangerous because it can damage your skills.
+
+<h3 id="what-happens-when-anxiety-limit-is-reached">
+  What happens when Anxiety limit is reached?
+</h3>
+
+A visible Anxiety example shows Anxiety Raised +5, Anxiety Limit Reached, then a prompt to lower a Relation-side skill such as Statehood, Cold Read, or Nerve. After Cold Read is lowered, Anxiety resets.
+
+<h3 id="how-do-i-lower-stress">
+  How do I lower stress?
+</h3>
+
+Use recovery options, consumables, safer routing, and fewer unnecessary Exertions. Fatigue recovery has confirmed consumable synergy through Latest Synthetic Desires, which boosts Fatigue reduction from specific drinks.
+
+<h3 id="which-consumables-reduce-fatigue">
+  Which consumables reduce Fatigue?
+</h3>
+
+Rumba Canned Coffee, Jefa Red & Black Blend, and Camisado Ultra Sweet are shown as drinks affected by Latest Synthetic Desires, which gives a 1.33x bonus to reducing Fatigue when consuming them.
+
+<h3 id="is-skill-loss-a-run-ender">
+  Is skill loss a run ender?
+</h3>
+
+Usually no. Skill loss hurts, but you can keep playing, use gear, adjust your route, and rebuild. Reload only if the loss ruins a specific outcome you care about.
+
+<h3 id="what-is-the-best-stress-tip-for-beginners">
+  What is the best stress tip for beginners?
+</h3>
+
+Save Exertion for checks that change your route or protect a goal. Do not raise stress just to win every small roll.

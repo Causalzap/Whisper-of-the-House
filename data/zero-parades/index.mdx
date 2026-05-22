@@ -1,0 +1,592 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const quickStartColumns = [
+  { key: "step", label: "Step" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "why", label: "Why It Matters" },
+];
+
+export const quickStartRows = [
+  {
+    step: "1. Do not min-max too hard",
+    whatToDo:
+      "Start with a build that gives you useful options in dialogue, clue reading, and tense encounters.",
+    why:
+      "A narrow build can make the opening feel harsher than it needs to be.",
+  },
+  {
+    step: "2. Treat stress as a real resource",
+    whatToDo:
+      "Watch Fatigue, Anxiety, and Delirium before using Exertion on every check.",
+    why:
+      "Exertion can help you pass important rolls, but it pushes your meters higher.",
+  },
+  {
+    step: "3. Use gear to patch weak checks",
+    whatToDo:
+      "Change clothing or tools when a check matters and your current skill is too low.",
+    why:
+      "A small gear bonus can be safer than forcing stress through Exertion.",
+  },
+  {
+    step: "4. Do the safe house carefully",
+    whatToDo:
+      "Inspect Pseudopod, the jacket, the red disc, the trousers, and the desk before rushing out.",
+    why:
+      "The opening gives you multiple leads: the purchase order, red disc, half cipher, and Rosetta cipher.",
+  },
+  {
+    step: "5. Follow the Bootleg Bazaar lead",
+    whatToDo:
+      "Use the purchase order and Constance's directions to push toward the bazaar.",
+    why:
+      "This is the cleanest early route for turning scattered clues into your next objective.",
+  },
+  {
+    step: "6. Do not reload every failed check",
+    whatToDo:
+      "Keep going unless the failure blocks a goal you actually care about.",
+    why:
+      "ZERO PARADES is built around mistakes, pressure, and branching outcomes.",
+  },
+];
+
+export const guideColumns = [
+  { key: "guide", label: "Guide" },
+  { key: "covers", label: "Covers" },
+  { key: "useItWhen", label: "If You Are Stuck With..." },
+  { key: "url", label: "URL" },
+];
+
+export const guideRows = [
+  {
+    guide: "Early Game Walkthrough",
+    covers:
+      "Pseudopod, red disc, purchase order, half cipher, Rosetta cipher, Constance, Carmuna, and Bootleg Bazaar.",
+    useItWhen:
+      "You do not know what to do in the safe house, where the Rosetta cipher is, or who to talk to after reaching Bootleg Bazaar.",
+    url: "/zero-parades/early-game",
+  },
+  {
+    guide: "Best Build",
+    covers:
+      "45-point first-run builds, presets, key skills, gear fixes, Exertion, and Conditioning direction.",
+    useItWhen:
+      "You are stuck on the starting skill screen or want a safe build before committing points.",
+    url: "/zero-parades/best-build",
+  },
+  {
+    guide: "Stress and Exertion",
+    covers:
+      "Fatigue, Anxiety, Delirium, Exertion, Pressured, skill loss, and recovery.",
+    useItWhen:
+      "You do not understand why stress is rising, what Pressured means, or when Exertion is worth the cost.",
+    url: "/zero-parades/stress-exertion",
+  },
+  {
+    guide: "Conditioning",
+    covers:
+      "Confirmed Thoughts, effects, violations, drawbacks, and best build fits.",
+    useItWhen:
+      "You are deciding whether to commit to a Thought or want to know which Conditioning choice fits your build.",
+    url: "/zero-parades/conditioning",
+  },
+  {
+    guide: "Disco Elysium Player Guide",
+    covers:
+      "Story connection, skills, stress, Exertion, Conditioning, gear, exploration, and failure differences.",
+    useItWhen:
+      "You came from Disco Elysium and want to know what habits still work, what changed, and whether you need to play Disco first.",
+    url: "/zero-parades/disco-elysium-guide",
+  },
+];
+
+export const buildColumns = [
+  { key: "playerGoal", label: "If You Want..." },
+  { key: "buildDirection", label: "Lean Toward" },
+  { key: "beginnerRead", label: "Beginner Read" },
+];
+
+export const buildRows = [
+  {
+    playerGoal: "More dialogue options",
+    buildDirection: "Social / psychological skills",
+    beginnerRead:
+      "Good for players who want more character reads, persuasion, and conversational routes.",
+  },
+  {
+    playerGoal: "Better clue reading",
+    buildDirection: "Mental / intellectual skills",
+    beginnerRead:
+      "Good if you want to understand leads, objects, and strange information earlier.",
+  },
+  {
+    playerGoal: "Safer tense encounters",
+    buildDirection: "Physical / athletic skills",
+    beginnerRead:
+      "Useful when the game pushes you into high-pressure movement or action sequences.",
+  },
+  {
+    playerGoal: "A safer first run",
+    buildDirection: "Balanced social + mental with physical backup",
+    beginnerRead:
+      "Best for most first playthroughs because it avoids locking your run into one narrow style.",
+  },
+];
+
+export const stressColumns = [
+  { key: "system", label: "System" },
+  { key: "whatItDoes", label: "What It Does" },
+  { key: "beginnerRule", label: "Beginner Rule" },
+];
+
+export const stressRows = [
+  {
+    system: "Fatigue",
+    whatItDoes:
+      "A pressure meter tied to physical strain and related checks.",
+    beginnerRule:
+      "Do not spend it casually on low-value checks if you expect more action soon.",
+  },
+  {
+    system: "Anxiety",
+    whatItDoes:
+      "A pressure meter tied to social pressure and related checks.",
+    beginnerRule:
+      "Watch it when you are pushing tense dialogue or emotional reads.",
+  },
+  {
+    system: "Delirium",
+    whatItDoes:
+      "A pressure meter tied to mental overload and related checks.",
+    beginnerRule:
+      "Be careful when chasing strange clues, analysis, or reality-bending options.",
+  },
+  {
+    system: "Exertion",
+    whatItDoes:
+      "Lets you push a check harder for a better chance, at the cost of raising a stress meter.",
+    beginnerRule:
+      "Use it for important goals, not every tempting roll.",
+  },
+  {
+    system: "Pressured",
+    whatItDoes:
+      "A dangerous state where your stress is high enough that Exertion becomes restricted.",
+    beginnerRule:
+      "Back off and stabilize before forcing more major checks.",
+  },
+];
+
+export const earlyClueColumns = [
+  { key: "clue", label: "Opening Clue" },
+  { key: "whereToFindIt", label: "Where To Find It" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const earlyClueRows = [
+  {
+    clue: "Pseudopod's condition",
+    whereToFindIt:
+      "Inspect the man in the safe house before leaving.",
+    whyItMatters:
+      "This sets up the central opening problem: your partner is present, but not operational.",
+  },
+  {
+    clue: "Purchase order",
+    whereToFindIt:
+      "Check inside Pseudopod's jacket.",
+    whyItMatters:
+      "It points you toward Carmuna and the Bootleg Bazaar.",
+  },
+  {
+    clue: "Red disc",
+    whereToFindIt:
+      "Inspect the stereo system and take the disc.",
+    whyItMatters:
+      "It is one of the strangest early objects and clearly connects to the opening mystery.",
+  },
+  {
+    clue: "Half cipher",
+    whereToFindIt:
+      "Check the trousers in the bathroom.",
+    whyItMatters:
+      "It gives you part of a spy cipher, but not the full answer by itself.",
+  },
+  {
+    clue: "Rosetta cipher",
+    whereToFindIt:
+      "Inspect the desk area and cigarette pack.",
+    whyItMatters:
+      "It gives you another piece of the opening code puzzle.",
+  },
+  {
+    clue: "Bootleg Bazaar lead",
+    whereToFindIt:
+      "Talk to Constance after checking the safe house clues.",
+    whyItMatters:
+      "It gives you a clear next destination instead of wandering randomly.",
+  },
+];
+
+export const discoColumns = [
+  { key: "discoHabit", label: "Disco Elysium Habit" },
+  { key: "zeroParadesChange", label: "ZERO PARADES Change" },
+  { key: "playerAdvice", label: "What To Do Instead" },
+];
+
+export const discoRows = [
+  {
+    discoHabit: "Expecting a Kim-style partner early",
+    zeroParadesChange:
+      "Cascade starts the opening more alone because Pseudopod is incapacitated.",
+    playerAdvice:
+      "Read objects carefully and do not rely on a companion to frame every situation for you.",
+  },
+  {
+    discoHabit: "Building around 24 separate skills",
+    zeroParadesChange:
+      "ZERO PARADES uses fewer, more concentrated skills.",
+    playerAdvice:
+      "Choose a build direction, but leave yourself enough flexibility for unknown checks.",
+  },
+  {
+    discoHabit: "Thinking in Health and Morale",
+    zeroParadesChange:
+      "You manage Fatigue, Anxiety, and Delirium instead.",
+    playerAdvice:
+      "Watch what kind of pressure each situation is creating before you push harder.",
+  },
+  {
+    discoHabit: "Reloading every bad roll",
+    zeroParadesChange:
+      "Some failures simply change the route or cost pressure instead of ending the run.",
+    playerAdvice:
+      "Keep moving unless the failed check blocks a specific result you care about.",
+  },
+  {
+    discoHabit: "Expecting no action structure",
+    zeroParadesChange:
+      "Dramatic Encounters play out as step-by-step high-pressure scenes.",
+    playerAdvice:
+      "Slow down, read the situation, and choose based on your build's strengths.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterHabit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Trying to build the perfect character immediately",
+    whyItHurts:
+      "The game gives you gear, Thoughts, and later skill choices to patch weaknesses.",
+    betterHabit:
+      "Pick a flexible first-run build and adapt as you learn what checks matter.",
+  },
+  {
+    mistake: "Using Exertion on every interesting roll",
+    whyItHurts:
+      "You can push Fatigue, Anxiety, or Delirium into dangerous territory too early.",
+    betterHabit:
+      "Save Exertion for checks tied to a goal you actually care about.",
+  },
+  {
+    mistake: "Leaving the safe house too quickly",
+    whyItHurts:
+      "You can miss useful early context and make the opening feel more confusing.",
+    betterHabit:
+      "Inspect Pseudopod, the stereo, the jacket, the trousers, and the desk before moving on.",
+  },
+  {
+    mistake: "Treating Conditioning as a free bonus",
+    whyItHurts:
+      "Thoughts can raise your potential, but many come with drawbacks or rule changes.",
+    betterHabit:
+      "Take a Thought when the bonus fits your build and the drawback does not fight your playstyle.",
+  },
+  {
+    mistake: "Playing exactly like Disco Elysium",
+    whyItHurts:
+      "ZERO PARADES uses different pressure rules, fewer skills, and more structured tense encounters.",
+    betterHabit:
+      "Bring your reading habits from Disco Elysium, but rethink stress, skills, and failure.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**ZERO PARADES is easiest to start if you treat the opening like a spy investigation: search the safe house carefully, build around people-reading and clue-reading, use gear before Exertion, and follow the purchase order toward Bootleg Bazaar. You do not need to play Disco Elysium first.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-dramatic-encounter-bazaar.webp"
+    alt="A dramatic encounter in ZERO PARADES For Dead Spies during a tense bazaar escape."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    ZERO PARADES is not only about picking dialogue. Some scenes become tense step-by-step encounters where your build and stress management both matter.
+  </figcaption>
+</figure>
+
+<h2 id="zero-parades-guide-overview">
+  ZERO PARADES Guide Overview
+</h2>
+
+ZERO PARADES: For Dead Spies is easiest to understand if you stop treating it like a normal checklist RPG.
+
+Your first goal is not to pass every check, see every line, or build the perfect version of Cascade. Your first goal is to stay flexible enough to follow the mystery, survive pressure, and understand which failures are worth living with.
+
+The game gives you several ways to solve problems: starting skills, gear, stress management, Exertion, Conditioning, and route choices during tense scenes. A bad roll is not always a disaster. Sometimes it is just the game pushing you into a different route.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="which-guide-should-you-read-next">
+  Which ZERO PARADES Guide Should You Read Next?
+</h2>
+
+Use this hub as a routing page. Pick the guide that matches the thing currently blocking your run.
+
+<GuideTable
+  caption="ZERO PARADES guide hub links by player problem."
+  columns={guideColumns}
+  rows={guideRows}
+/>
+
+<h2 id="what-to-do-first">
+  What to Do First in ZERO PARADES
+</h2>
+
+Use this simple plan if you are starting your first run.
+
+<GuideTable
+  caption="Simple first-run plan for ZERO PARADES players."
+  columns={quickStartColumns}
+  rows={quickStartRows}
+/>
+
+The most important habit is patience. Read the room, check objects, and do not burn stress just because a roll is available.
+
+ZERO PARADES often gives you more than one way to reach a result. If one approach fails, your next move is not always reload. Sometimes your next move is to look for a different object, person, clue, piece of gear, or route.
+
+<h2 id="best-first-playthrough-build">
+  Best First Playthrough Build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-skill-setup-screen.webp"
+    alt="Skill setup screen in ZERO PARADES For Dead Spies showing early build choices."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first build should give you enough options to read people, understand clues, and survive tense scenes.
+  </figcaption>
+</figure>
+
+For a first playthrough, the safest build is not an extreme one.
+
+A very narrow build can be fun later, but it makes the opening harder to read. A balanced setup with useful social and mental options, plus enough physical backup for tense scenes, gives you the best chance to understand what the game is asking from you.
+
+<GuideTable
+  caption="Beginner build directions for your first ZERO PARADES run."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+The beginner rule is simple:
+
+**Do not build Cascade like you already know every check.**
+
+You do not. Pick a direction, but leave room to adjust. Later, gear and Conditioning can help you push specific skills higher or patch a weak area.
+
+For a deeper build breakdown, read the <Link href="/zero-parades/best-build">ZERO PARADES best build guide</Link>.
+
+<h2 id="fatigue-anxiety-delirium">
+  How Fatigue, Anxiety, and Delirium Work
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-stress-meters-hud.webp"
+    alt="Fatigue Anxiety and Delirium meters in ZERO PARADES For Dead Spies."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fatigue, Anxiety, and Delirium are not background flavor. They shape how safely you can keep pushing checks.
+  </figcaption>
+</figure>
+
+ZERO PARADES does not use the same pressure rhythm as Disco Elysium.
+
+Instead of thinking only about health or morale, you are managing three different stress meters: **Fatigue**, **Anxiety**, and **Delirium**. These meters matter because pushing too far can make later checks harder and restrict your ability to Exert yourself.
+
+<GuideTable
+  caption="Stress systems new ZERO PARADES players should understand."
+  columns={stressColumns}
+  rows={stressRows}
+/>
+
+For a full explanation of stress limits, skill loss, recovery, and when Exertion is worth it, read the <Link href="/zero-parades/stress-exertion">ZERO PARADES stress and Exertion guide</Link>.
+
+<h2 id="when-to-use-exertion">
+  When Should You Use Exertion?
+</h2>
+
+Exertion lets you push an important check for a better chance, but it raises the related stress meter. Do not use it just because the button is available.
+
+Save Exertion for route-changing checks, major clue checks, or Dramatic Encounter moments where failure would actually change what you care about.
+
+For the full breakdown, read the <Link href="/zero-parades/stress-exertion">ZERO PARADES Stress and Exertion Guide</Link>.
+
+<h2 id="conditioning-and-thoughts">
+  Conditioning and Thoughts
+</h2>
+
+Conditioning turns Thoughts into build commitments. A Thought can raise skill potential, add a gameplay effect, or change how Cascade plays, but many Thoughts also have violation rules or drawbacks.
+
+On a first run, do not take a Thought just because it sounds strange. Take it only when it supports skills you already use and the drawback fits the way you actually play.
+
+For confirmed Thoughts, effects, drawbacks, and build pairings, read the <Link href="/zero-parades/conditioning">ZERO PARADES Conditioning Guide</Link>.
+
+<h2 id="early-game-pseudopod-red-disc-cipher">
+  Early Game: Pseudopod, Red Disc, Cipher, and Bootleg Bazaar
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-red-disc-stereo.webp"
+    alt="The red disc in the stereo during the opening safe house investigation in ZERO PARADES."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The red disc is one of the first strange objects you should not ignore in the safe house.
+  </figcaption>
+</figure>
+
+The opening can feel confusing because it gives you several clues before it gives you a clean answer.
+
+Your partner Pseudopod is incapacitated. The safe house contains a strange red disc, a purchase order, and cipher clues. Your controller wants you to leave, but the room itself is telling you there is more to investigate.
+
+<GuideTable
+  caption="Opening clues to find before leaving the safe house."
+  columns={earlyClueColumns}
+  rows={earlyClueRows}
+/>
+
+The safe beginner route is:
+
+1. Inspect Pseudopod.
+2. Check his jacket.
+3. Take the purchase order.
+4. Inspect the stereo and take the red disc.
+5. Check the trousers for the half cipher.
+6. Check the desk and cigarette pack for the Rosetta cipher.
+7. Talk to Constance.
+8. Follow the Bootleg Bazaar lead.
+
+If you are stuck in the first hour, read the <Link href="/zero-parades/early-game">ZERO PARADES early game walkthrough</Link>.
+
+<h2 id="for-disco-elysium-players">
+  If You Are Coming From Disco Elysium
+</h2>
+
+ZERO PARADES will feel familiar in some ways, but you should not play it like a Disco Elysium reskin.
+
+The biggest adjustment is that Cascade has different pressures, fewer skills, less early support from a partner, and more structured high-tension scenes.
+
+<GuideTable
+  caption="What Disco Elysium players should adjust before starting ZERO PARADES."
+  columns={discoColumns}
+  rows={discoRows}
+/>
+
+The best Disco Elysium habit to keep is careful reading.
+
+The worst habit to bring over is trying to recreate Harry exactly. Cascade has a different job, a different pressure system, and a different way of failing forward.
+
+For a full comparison, read the <Link href="/zero-parades/disco-elysium-guide">ZERO PARADES guide for Disco Elysium players</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="common-beginner-mistakes">
+  Common Beginner Mistakes
+</h2>
+
+<GuideTable
+  caption="Common ZERO PARADES beginner mistakes and better habits."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is trying to control everything too early.
+
+ZERO PARADES is more manageable when you accept that your first run is partly about learning what kind of spy Cascade can become. Build carefully, but do not freeze every time the game gives you uncertainty.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="what-should-i-do-first-in-zero-parades">
+  What should I do first in ZERO PARADES?
+</h3>
+
+Inspect the safe house carefully. Check Pseudopod, his jacket, the stereo, the trousers, and the desk before leaving. You want the purchase order, red disc, half cipher, Rosetta cipher, and Bootleg Bazaar lead.
+
+<h3 id="what-is-the-best-build-for-beginners">
+  What is the best build for beginners?
+</h3>
+
+The best beginner build is flexible rather than extreme. Lean toward social and mental options for dialogue and clue reading, but keep enough physical ability to survive tense encounters.
+
+<h3 id="should-i-use-exertion-on-every-check">
+  Should I use Exertion on every check?
+</h3>
+
+No. Use Exertion when the check matters. If the roll is optional, low-value, or easy to improve with gear, save your stress.
+
+<h3 id="what-do-fatigue-anxiety-and-delirium-do">
+  What do Fatigue, Anxiety, and Delirium do?
+</h3>
+
+They are your main stress meters. They rise through pressure, mistakes, and Exertion, and they can make your run more difficult if you let them get too high.
+
+<h3 id="is-conditioning-like-the-thought-cabinet">
+  Is Conditioning like the Thought Cabinet?
+</h3>
+
+It has a similar role, but you should not treat it as a simple copy. Conditioning and Thoughts can improve your build, but many also come with drawbacks or rules that change how you play.
+
+<h3 id="do-i-need-to-play-disco-elysium-first">
+  Do I need to play Disco Elysium first?
+</h3>
+
+No. ZERO PARADES is its own game. Disco Elysium experience helps you understand the style of reading and roleplaying, but the systems are different enough that new players can start here.
+
+<h3 id="should-i-reload-failed-checks">
+  Should I reload failed checks?
+</h3>
+
+Not always. Reload if the failed check blocks a route or result you really care about. Otherwise, keep going and see how the game handles the failure.
+
+<h3 id="where-do-i-go-after-the-safe-house">
+  Where do I go after the safe house?
+</h3>
+
+Follow the Bootleg Bazaar lead. The purchase order and Constance's directions point you toward the next useful place to investigate.

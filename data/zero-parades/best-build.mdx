@@ -1,0 +1,916 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const presetColumns = [
+  { key: "choice", label: "Starting Choice" },
+  { key: "recommendation", label: "Recommendation" },
+  { key: "why", label: "Why" },
+];
+
+export const presetRows = [
+  {
+    choice: "Custom build",
+    recommendation: "Best first-run choice if you are willing to spend two minutes reading skills.",
+    why:
+      "You can copy a safer 45-point spread instead of trusting a preset that may overcommit to one playstyle.",
+  },
+  {
+    choice: "Relation / social-style preset",
+    recommendation: "Safest preset-style pick for most beginners.",
+    why:
+      "ZERO PARADES opens with people, pressure, lies, memories, and social reads. Dialogue confidence matters early.",
+  },
+  {
+    choice: "Intellect / mental-style preset",
+    recommendation: "Good if you want clues, objects, and strange information to make more sense.",
+    why:
+      "The opening has the red disc, cipher clues, worldbuilding, and several objects that reward careful interpretation.",
+  },
+  {
+    choice: "Action / physical-style preset",
+    recommendation: "Pick this if you hate failing physical checks or want safer Dramatic Encounters.",
+    why:
+      "It is useful, but pure Action is less beginner-friendly if you still need help reading people and leads.",
+  },
+];
+
+export const pointTemplateColumns = [
+  { key: "skill", label: "Skill" },
+  { key: "safe", label: "Safe First Run" },
+  { key: "dialogue", label: "Dialogue Build" },
+  { key: "clue", label: "Clue Build" },
+  { key: "action", label: "Action Build" },
+];
+
+export const pointTemplateRows = [
+  {
+    skill: "Coordination",
+    safe: "3",
+    dialogue: "2",
+    clue: "2",
+    action: "5",
+  },
+  {
+    skill: "Doppelgäng",
+    safe: "2",
+    dialogue: "2",
+    clue: "2",
+    action: "4",
+  },
+  {
+    skill: "Instincts",
+    safe: "3",
+    dialogue: "2",
+    clue: "2",
+    action: "4",
+  },
+  {
+    skill: "Sensors",
+    safe: "2",
+    dialogue: "2",
+    clue: "2",
+    action: "4",
+  },
+  {
+    skill: "Shadowplay",
+    safe: "2",
+    dialogue: "2",
+    clue: "2",
+    action: "2",
+  },
+  {
+    skill: "Blueprints",
+    safe: "4",
+    dialogue: "4",
+    clue: "5",
+    action: "3",
+  },
+  {
+    skill: "Cold Read",
+    safe: "4",
+    dialogue: "5",
+    clue: "3",
+    action: "3",
+  },
+  {
+    skill: "Nerve",
+    safe: "3",
+    dialogue: "4",
+    clue: "2",
+    action: "3",
+  },
+  {
+    skill: "Personalism",
+    safe: "5",
+    dialogue: "6",
+    clue: "3",
+    action: "3",
+  },
+  {
+    skill: "Statehood",
+    safe: "3",
+    dialogue: "3",
+    clue: "3",
+    action: "3",
+  },
+  {
+    skill: "Entanglement",
+    safe: "3",
+    dialogue: "2",
+    clue: "4",
+    action: "2",
+  },
+  {
+    skill: "Grey Matter",
+    safe: "3",
+    dialogue: "3",
+    clue: "4",
+    action: "2",
+  },
+  {
+    skill: "Poetics",
+    safe: "4",
+    dialogue: "4",
+    clue: "4",
+    action: "3",
+  },
+  {
+    skill: "Records",
+    safe: "3",
+    dialogue: "3",
+    clue: "4",
+    action: "3",
+  },
+  {
+    skill: "Technoflex",
+    safe: "1",
+    dialogue: "1",
+    clue: "3",
+    action: "1",
+  },
+];
+
+export const templateSummaryColumns = [
+  { key: "template", label: "Template" },
+  { key: "total", label: "Total" },
+  { key: "bestFor", label: "Best For" },
+];
+
+export const templateSummaryRows = [
+  {
+    template: "Safe First Run",
+    total: "45",
+    bestFor:
+      "Most players. Strong Personalism, Cold Read, Blueprints, and Poetics, with enough Action to avoid feeling helpless.",
+  },
+  {
+    template: "Dialogue Build",
+    total: "45",
+    bestFor:
+      "Players who want to talk, read people, and handle social pressure. Strongest early pick if you hate missing conversation reads.",
+  },
+  {
+    template: "Clue Build",
+    total: "45",
+    bestFor:
+      "Players who want to understand objects, ciphers, strange media, and worldbuilding faster.",
+  },
+  {
+    template: "Action Build",
+    total: "45",
+    bestFor:
+      "Players who want more safety in physical checks and Dramatic Encounters, but still need enough Relation to talk.",
+  },
+];
+
+export const skillUseColumns = [
+  { key: "skill", label: "Skill" },
+  { key: "earlyUse", label: "Where It Helps Early" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const skillUseRows = [
+  {
+    skill: "Personalism",
+    earlyUse:
+      "Talking to people who are guarded, emotional, manipulative, or hiding something.",
+    whyItMatters:
+      "This is the cleanest beginner social anchor because so much early progress comes through people.",
+  },
+  {
+    skill: "Cold Read",
+    earlyUse:
+      "Reading expressions, intent, body language, and social pressure before choosing a line.",
+    whyItMatters:
+      "It helps you avoid walking blind into conversations where the other person knows more than you do.",
+  },
+  {
+    skill: "Blueprints",
+    earlyUse:
+      "Understanding places, routes, vendors, the Bootleg Bazaar lead, and practical city logic.",
+    whyItMatters:
+      "It makes the early investigation feel less like random object clicking and more like fieldwork.",
+  },
+  {
+    skill: "Poetics",
+    earlyUse:
+      "Cultural interpretation, lateral thinking, strange phrasing, and alternative quest routes.",
+    whyItMatters:
+      "It gives you a way to understand scenes that are not purely logical or social.",
+  },
+  {
+    skill: "Records",
+    earlyUse:
+      "Past information, files, memory, service history, names, and world context.",
+    whyItMatters:
+      "ZERO PARADES throws names and institutions at you quickly. Records helps keep the story readable.",
+  },
+  {
+    skill: "Technoflex",
+    earlyUse:
+      "Machines, devices, consumer products, tools, and technical objects.",
+    whyItMatters:
+      "Not always urgent, but it becomes more useful when gear, devices, or tool checks enter the route.",
+  },
+  {
+    skill: "Coordination",
+    earlyUse:
+      "Physical actions, movement, balance, and some tense encounter options.",
+    whyItMatters:
+      "You do not need to be an Action specialist, but one usable physical skill keeps you safer.",
+  },
+  {
+    skill: "Sensors",
+    earlyUse:
+      "Noticing small sensory details in rooms, bodies, and objects.",
+    whyItMatters:
+      "Good if you want to catch details before the game turns them into explicit leads.",
+  },
+  {
+    skill: "Shadowplay",
+    earlyUse:
+      "Spy logic, secrecy, ciphers, hidden information, and covert readings.",
+    whyItMatters:
+      "Useful for the opening cipher trail, but the safe first-run build should not depend only on it.",
+  },
+];
+
+export const facultyScenarioColumns = [
+  { key: "faculty", label: "Faculty" },
+  { key: "bestEarlyUse", label: "Best Early Use" },
+  { key: "specificExample", label: "Concrete Example" },
+];
+
+export const facultyScenarioRows = [
+  {
+    faculty: "Relation",
+    bestEarlyUse:
+      "Talking to locals, reading social pressure, and deciding who to trust.",
+    specificExample:
+      "When Constance links Pseudopod's purchase order to Bootleg Bazaar, a social-readable Cascade gets more out of the conversation instead of treating it as a simple marker.",
+  },
+  {
+    faculty: "Intellect",
+    bestEarlyUse:
+      "Understanding strange objects, ciphers, files, and the worldbuilding pile-up.",
+    specificExample:
+      "The red disc, half cipher, Rosetta cipher, and service-history material all reward a build that can connect clues instead of only brute-forcing dialogue.",
+  },
+  {
+    faculty: "Action",
+    bestEarlyUse:
+      "Physical pressure, fast decisions, and Dramatic Encounters.",
+    specificExample:
+      "In bazaar-style high-pressure scenes, Action skills make it less painful when the game asks Cascade to move, dodge, blend in, or improvise physically.",
+  },
+];
+
+export const exertionColumns = [
+  { key: "mechanic", label: "Mechanic" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Build Advice", label: "Build Advice" },
+];
+
+export const exertionRows = [
+  {
+    mechanic: "Normal roll",
+    "What It Means":
+      "A check uses two d6 plus the relevant skill and modifiers.",
+    "Build Advice":
+      "Higher skill still matters. Do not rely on luck alone.",
+  },
+  {
+    mechanic: "Exertion",
+    "What It Means":
+      "Exertion adds a third die and keeps the better two dice, improving your chance on that check.",
+    "Build Advice":
+      "Use it when the check changes your route or protects a result you care about.",
+  },
+  {
+    mechanic: "Stress cost",
+    "What It Means":
+      "Exertion adds stress to the related meter, commonly +5 in the checked category.",
+    "Build Advice":
+      "Do not spend +5 stress on flavor checks or checks you can improve with gear.",
+  },
+  {
+    mechanic: "Pressured",
+    "What It Means":
+      "When a meter gets high enough, Exertion can become unavailable for that category.",
+    "Build Advice":
+      "A build that Exerts constantly can lose its emergency button at the worst time.",
+  },
+  {
+    mechanic: "Double 1 / double 6",
+    "What It Means":
+      "Very low or very high dice can still matter even with good skill.",
+    "Build Advice":
+      "Build and gear improve odds, but they do not delete risk.",
+  },
+];
+
+export const gearColumns = [
+  { key: "item", label: "Item" },
+  { key: "type", label: "Type" },
+  { key: "confirmedUse", label: "Confirmed Use / Bonus" },
+  { key: "howToUseIt", label: "How To Use It" },
+];
+
+export const gearRows = [
+  {
+    item: "Operant Toolkit",
+    type: "Held",
+    confirmedUse:
+      "Contains a screwdriver and can give Blueprints +1 with the Keys to the City modifier.",
+    howToUseIt:
+      "Equip it when a route, object, machine, or city-logic check needs a small Blueprints push.",
+  },
+  {
+    item: "Vostatok Blendcoat",
+    type: "Body",
+    confirmedUse:
+      "Can give Technoflex +1 with the Shimmering Gossamer modifier.",
+    howToUseIt:
+      "Use it when you need a small technical/device boost and can accept the outfit slot.",
+  },
+];
+
+export const conditioningColumns = [
+  { key: "build", label: "Build" },
+  { key: "Conditioning To Favor", label: "Conditioning To Favor" },
+  { key: "Conditioning To Avoid Early", label: "Conditioning To Avoid Early" },
+];
+
+export const conditioningRows = [
+  {
+    build: "Safe Relation + Intellect",
+    "Conditioning To Favor":
+      "Thoughts that raise Personalism, Cold Read, Blueprints, Poetics, or Records potential without adding a rule you will forget.",
+    "Conditioning To Avoid Early":
+      "Restriction-heavy Thoughts that punish shopping, item use, or normal exploration before you know your route.",
+  },
+  {
+    build: "Dialogue Build",
+    "Conditioning To Favor":
+      "Thoughts that support Relation checks, social pressure, people-reading, or Statehood-style authority routes.",
+    "Conditioning To Avoid Early":
+      "Thoughts that make social routes harder or push you into constant Anxiety with no payoff.",
+  },
+  {
+    build: "Clue Build",
+    "Conditioning To Favor":
+      "Thoughts that raise Intellect potential or help with Records, Poetics, Grey Matter, Entanglement, or Technoflex reads.",
+    "Conditioning To Avoid Early":
+      "Thoughts that tempt you into every weird check if Delirium is already climbing.",
+  },
+  {
+    build: "Action Build",
+    "Conditioning To Favor":
+      "Thoughts that raise Coordination, Instincts, Sensors, Doppelgäng, or Shadowplay potential.",
+    "Conditioning To Avoid Early":
+      "Thoughts that leave you unable to handle basic dialogue or clue checks.",
+  },
+  {
+    build: "Disco Elysium-style roleplay run",
+    "Conditioning To Favor":
+      "Thoughts that make Cascade more specific and expressive while still supporting your actual checks.",
+    "Conditioning To Avoid Early":
+      "Taking every weird Thought just because it sounds like a Thought Cabinet moment.",
+  },
+];
+
+export const specificThoughtColumns = [
+  { key: "thought", label: "Thought / Thought Type" },
+  { key: "knownEffect", label: "Known Effect" },
+  { key: "bestUse", label: "Best Use" },
+];
+
+export const specificThoughtRows = [
+  {
+    thought: "People's Republic of La-La-Land",
+    knownEffect:
+      "Shown with reinforced effects for Doppelgäng skill potential +1, Statehood skill potential +1, and an inventory-alignment rule.",
+    bestUse:
+      "Better for players leaning into identity, authority, Statehood, or roleplay. Be careful if the inventory rule fights how you play.",
+  },
+  {
+    thought: "Save-limiting Thought",
+    knownEffect:
+      "A review build example mentions a Thought that limits how often you can save.",
+    bestUse:
+      "Avoid on a first run unless you deliberately want friction. Completionists should be careful.",
+  },
+  {
+    thought: "Check-bonus Thought",
+    knownEffect:
+      "Some Thoughts can add a menu option or bonus that makes checks easier.",
+    bestUse:
+      "Good when the bonus supports checks you already use often.",
+  },
+  {
+    thought: "Narrative / scam Thought",
+    knownEffect:
+      "Some Thoughts can create extra narrative complications, such as getting pulled into a telemarketing-style event.",
+    bestUse:
+      "Fun for roleplay, but not your first choice if you are trying to stabilize a build.",
+  },
+];
+
+export const secondRunColumns = [
+  { key: "secondRunGoal", label: "Second-Run Goal" },
+  { key: "Build Direction", label: "Build Direction" },
+  { key: "Why Try It", label: "Why Try It" },
+];
+
+export const secondRunRows = [
+  {
+    secondRunGoal: "See more weird internal reads",
+    "Build Direction":
+      "Higher Entanglement, Poetics, Grey Matter, and Records.",
+    "Why Try It":
+      "You already know the route, so you can afford a stranger, more interpretive Cascade.",
+  },
+  {
+    secondRunGoal: "Play a harder social operator",
+    "Build Direction":
+      "Personalism, Cold Read, Nerve, and Statehood-heavy.",
+    "Why Try It":
+      "Good for seeing how far you can push people when you understand the consequences better.",
+  },
+  {
+    secondRunGoal: "Lean into spy craft",
+    "Build Direction":
+      "Shadowplay, Sensors, Coordination, and Blueprints.",
+    "Why Try It":
+      "Better if you want a more covert, operational, route-focused second run.",
+  },
+  {
+    secondRunGoal: "Stop playing safely",
+    "Build Direction":
+      "Pick a weird Conditioning plan and commit to it.",
+    "Why Try It":
+      "Second runs are where drawback-heavy Thoughts become more interesting instead of just risky.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterHabit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Searching for a perfect universal build",
+    whyItHurts:
+      "ZERO PARADES is built around routes, pressure, gear, and consequences. One build will not own every scene.",
+    betterHabit:
+      "Copy a safe starting spread, then patch with gear and Conditioning.",
+  },
+  {
+    mistake: "Dumping Action completely",
+    whyItHurts:
+      "Dramatic Encounters and physical checks can still appear even on a dialogue-heavy run.",
+    betterHabit:
+      "Keep at least Coordination, Instincts, or Sensors usable.",
+  },
+  {
+    mistake: "Ignoring gear before Exertion",
+    whyItHurts:
+      "You may spend stress on a roll that a +1 gear swap could have fixed.",
+    betterHabit:
+      "Check clothing and held items before pushing important checks.",
+  },
+  {
+    mistake: "Taking every Thought immediately",
+    whyItHurts:
+      "Conditioning can include drawbacks, violation rules, or playstyle restrictions.",
+    betterHabit:
+      "Condition only when the Thought supports your build.",
+  },
+  {
+    mistake: "Playing it exactly like Disco Elysium",
+    whyItHurts:
+      "The skill sheet is smaller, pressure is different, and Exertion adds a new risk layer.",
+    betterHabit:
+      "Keep the careful reading habit, but rebuild your approach around stress and gear.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**For a first run, the best ZERO PARADES build is a custom 45-point setup that leans Relation + Intellect while keeping enough Action backup for tense scenes. Start with the Safe First Run table below if you want a copyable build, then use gear, Conditioning, and selective Exertion to patch weak checks.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-skill-setup-screen.webp"
+    alt="Starting skill setup screen in ZERO PARADES For Dead Spies showing Faculty of Action, Faculty of Relation, and Faculty of Intellect."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The safest first build is not the most extreme one. Give Cascade a strong social core, enough clue-reading, and at least one usable physical lane.
+  </figcaption>
+</figure>
+
+<h2 id="best-build-short-answer">
+  ZERO PARADES Best Build Short Answer
+</h2>
+
+For most first playthroughs, use the **Safe First Run** spread below.
+
+It gives you:
+
+- strong dialogue through **Personalism** and **Cold Read**,
+- practical investigation through **Blueprints**,
+- clue interpretation through **Poetics**, **Records**, and **Grey Matter**,
+- and enough Action backup through **Coordination** and **Instincts**.
+
+This is not a mathematically perfect build. It is a safe opening anchor you can copy instead of staring at the skill screen forever.
+
+For the full starter hub, read the <Link href="/zero-parades">ZERO PARADES guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="best-starting-preset">
+  Best Starting Preset or Custom Choice
+</h2>
+
+If you are choosing between preset and custom, pick **custom** if you want the safest first run.
+
+If you do not want to think about numbers, pick the preset that leans most toward **Relation / social reads**. ZERO PARADES starts with people, pressure, memory, lies, and strange social context. A pure Action start can work, but it does not explain the opening as well.
+
+<GuideTable
+  caption="Best starting choice for new ZERO PARADES players."
+  columns={presetColumns}
+  rows={presetRows}
+/>
+
+The beginner rule is simple:
+
+**Pick Relation if you want the opening to talk back. Pick Intellect if you want clues to make sense. Pick Action if you want to survive tense scenes.**
+
+The best first run mixes all three, but Relation should usually be your anchor.
+
+<h2 id="best-45-point-builds">
+  Best 45-Point Build Templates
+</h2>
+
+These templates assume a **45-point opening budget across the 15 skills**.
+
+Copy the **Safe First Run** column if you want the recommended build. Use the other columns if you already know what kind of Cascade you want.
+
+<GuideTable
+  caption="Copyable 45-point starting builds for ZERO PARADES."
+  columns={pointTemplateColumns}
+  rows={pointTemplateRows}
+/>
+
+<GuideTable
+  caption="Which 45-point ZERO PARADES build should you pick?"
+  columns={templateSummaryColumns}
+  rows={templateSummaryRows}
+/>
+
+For a first run, I would use:
+
+**Personalism 5 / Cold Read 4 / Blueprints 4 / Poetics 4 / Coordination 3 / Instincts 3 / Grey Matter 3 / Records 3 / Entanglement 3**, with the remaining points spread so no category is completely dead.
+
+That build gives you a readable opening without making Cascade useless when the game asks for physical or strange checks.
+
+<h2 id="why-this-build-works">
+  Why Relation + Intellect Is the Safest First Build
+</h2>
+
+ZERO PARADES opens with people, strange objects, hidden motives, ciphers, and unclear leads. That is why a first-run build should not be pure Action or pure roleplay weirdness.
+
+The safest build gives you one social anchor, one clue-reading anchor, one weird-information skill, and one physical backup skill.
+
+<GuideTable
+  caption="Concrete early uses for the best first-run skills."
+  columns={skillUseColumns}
+  rows={skillUseRows}
+/>
+
+You do not need every skill high. You need enough high-value skills that the opening gives you information instead of fog.
+
+<h2 id="faculty-examples">
+  Faculty Examples: What Each Build Actually Does
+</h2>
+
+Do not think of Action, Relation, and Intellect as abstract categories.
+
+Think of them as the kind of solution Cascade reaches for first.
+
+<GuideTable
+  caption="How each Faculty helps in actual early play."
+  columns={facultyScenarioColumns}
+  rows={facultyScenarioRows}
+/>
+
+This is why the safe build does not dump Action. Relation and Intellect help you understand the game, but Action keeps you from folding when the game leaves normal conversation.
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-dramatic-encounter-bazaar.webp"
+    alt="A dramatic encounter in ZERO PARADES where Cascade must handle a tense bazaar escape."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dramatic Encounters are the reason a dialogue build still wants some Action backup.
+  </figcaption>
+</figure>
+
+<h2 id="best-skills-to-prioritize">
+  Best Skills to Prioritize First
+</h2>
+
+For a safe first run, prioritize these skills first:
+
+1. **Personalism** — your main people skill.
+2. **Cold Read** — helps you read behavior before committing.
+3. **Blueprints** — helps with routes, city logic, and practical leads.
+4. **Poetics** — helps with lateral interpretation and cultural weirdness.
+5. **Records** or **Grey Matter** — keeps the worldbuilding and clues more readable.
+6. **Coordination** or **Instincts** — gives you Action backup.
+
+Do not overinvest in only one of them before you understand the route. A 6 in Personalism is useful, but a 6 in Personalism with terrible clue reading can still leave you lost.
+
+The best opening shape is:
+
+**one social anchor, one clue anchor, one weird-reading skill, and one physical backup skill.**
+
+<h2 id="how-exertion-changes-builds">
+  How Exertion Changes Build Choices
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-exertion-third-die.webp"
+    alt="Exertion check in ZERO PARADES showing an extra die and a higher chance to pass."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Exertion can rescue an important check, but it adds pressure. A good build reduces how often you need it.
+  </figcaption>
+</figure>
+
+A build is not only about passing checks. It is also about how often you need to **Exert**.
+
+By default, checks use two dice plus your relevant skill and modifiers. Exertion improves your odds by adding a third die and keeping the better two dice, but it raises the related stress meter. In many checks, that cost is effectively **+5 stress** in the relevant category.
+
+<GuideTable
+  caption="How Exertion changes build decisions in ZERO PARADES."
+  columns={exertionColumns}
+  rows={exertionRows}
+/>
+
+This is why the safe build spreads points across common early checks.
+
+If your build is too narrow, you will be tempted to Exert constantly. If you Exert constantly, you raise Fatigue, Anxiety, or Delirium. If a meter gets too high, you can become Pressured and lose access to Exertion when you need it most.
+
+For the full mechanics page, read the <Link href="/zero-parades/stress-exertion">ZERO PARADES stress and Exertion guide</Link>.
+
+<h2 id="gear-matters">
+  Gear Matters: Use Items to Patch Weak Checks
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-gear-skill-bonus.webp"
+    alt="Inventory screen in ZERO PARADES showing gear and skill modifiers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gear is not just cosmetic. A single item can be the difference between forcing Exertion and passing cleanly.
+  </figcaption>
+</figure>
+
+This is the most important build habit most players miss:
+
+**Check gear before spending stress.**
+
+ZERO PARADES lets clothing and held items affect skills. That means your starting build does not need to solve every check by itself. If a roll matters and you have time, use your inventory first.
+
+<GuideTable
+  caption="Early items and gear that matter for ZERO PARADES builds."
+  columns={gearColumns}
+  rows={gearRows}
+/>
+
+Not every inventory item is a gear piece.
+
+The **Sock Purchase Order** and **Mysterious Red Disc** matter because they move routes forward, not because they fix your skill sheet. Treat them as lead items: the purchase order points toward Carmuna and Bootleg Bazaar, while the red disc is an unresolved media clue you carry into later investigation.
+
+The practical order is:
+
+1. Read the check.
+2. Check the skill it uses.
+3. Open inventory.
+4. Equip anything that improves that skill.
+5. Look for more context or modifiers.
+6. Exert only if the result still matters.
+
+The **Operant Toolkit** is a good early example because it can give a Blueprints bump while also acting as a practical tool. The **Vostatok Blendcoat** is another useful example because it shows how clothing can carry a skill modifier.
+
+Do not confuse clue items with gear, though. The **Sock Purchase Order** and **Mysterious Red Disc** matter, but they matter because they open leads, not because they fix your skill sheet.
+
+<h2 id="conditioning-for-builds">
+  Conditioning for Each Build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-conditioning-thoughts-menu.webp"
+    alt="Conditioning menu in ZERO PARADES showing a Thought and reinforced effects."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Conditioning should reinforce your build, not fight it. Read the drawback before you commit.
+  </figcaption>
+</figure>
+
+Conditioning is where this build guide needs to become specific.
+
+Do not just ask, “Is this Thought good?” Ask, “Is this Thought good for the build I am actually playing?”
+
+<GuideTable
+  caption="Which Conditioning direction fits each ZERO PARADES build?"
+  columns={conditioningColumns}
+  rows={conditioningRows}
+/>
+
+The safe first-run Conditioning plan is:
+
+**raise the ceiling of skills you already use, avoid restriction-heavy Thoughts early, and do not take a drawback that fights your route.**
+
+If you are using the Safe First Run build, look for Thoughts that support **Personalism, Cold Read, Blueprints, Poetics, Records, or Grey Matter**. Those are the skills carrying your early understanding of people and clues.
+
+<h2 id="specific-conditioning-examples">
+  Specific Conditioning Examples
+</h2>
+
+The game has many Thoughts, and a full Thought list belongs in a dedicated Conditioning guide. For this build page, focus on what these examples teach you.
+
+<GuideTable
+  caption="Specific Conditioning examples and how to read them for builds."
+  columns={specificThoughtColumns}
+  rows={specificThoughtRows}
+/>
+
+The key example is **People's Republic of La-La-Land**.
+
+It can support **Doppelgäng** and **Statehood** potential, which makes it more interesting for identity, authority, and political-roleplay builds than for a simple clue-reading build. But it also has an inventory-alignment rule, which means it is not just a free +1.
+
+That is the pattern you should use for every Thought:
+
+**bonus first, drawback second, build fit third.**
+
+If the drawback changes how you play in a way you dislike, skip it for now.
+
+For more detail, read the <Link href="/zero-parades/conditioning">ZERO PARADES Conditioning guide</Link>.
+
+<h2 id="disco-elysium-players">
+  Build Advice for Disco Elysium Players
+</h2>
+
+If you are coming from Disco Elysium, do not try to rebuild Harry.
+
+ZERO PARADES has fewer skills, different pressure rules, and Exertion adds a new risk layer. You can still bring over the good habits: read carefully, check clothes, accept some failed checks, and let the character become strange.
+
+But the build logic changes.
+
+In Disco Elysium, a weird internal voice could carry a whole roleplay identity. In ZERO PARADES, you also need to ask what kind of **stress** that identity keeps creating. A social Cascade can raise Anxiety. A mental Cascade can raise Delirium. A physical Cascade can raise Fatigue.
+
+The best Disco-friendly first build is:
+
+**Personalism 5, Cold Read 4, Blueprints 4, Poetics 4, Records 3, Grey Matter 3, Coordination 3, Instincts 3.**
+
+That gives you the reading-heavy feel you probably want without making the opening too fragile.
+
+For the full comparison, read the <Link href="/zero-parades/disco-elysium-guide">ZERO PARADES guide for Disco Elysium players</Link>.
+
+<h2 id="second-playthrough-builds">
+  Second Playthrough Build Ideas
+</h2>
+
+After your first run, you can build more aggressively.
+
+A second playthrough is where min-maxing and strange Conditioning become more fun because you already understand what the game is asking from you.
+
+<GuideTable
+  caption="Second-playthrough build ideas for ZERO PARADES."
+  columns={secondRunColumns}
+  rows={secondRunRows}
+/>
+
+For your first run, build safely. For your second run, build deliberately weird.
+
+That is where ZERO PARADES starts rewarding more extreme Cascade concepts.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="common-build-mistakes">
+  Common Build Mistakes
+</h2>
+
+<GuideTable
+  caption="Common ZERO PARADES build mistakes and better habits."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is treating “best build” like a single permanent answer.
+
+The real best build is a strong opening shape plus smart adjustments: gear for specific checks, Conditioning for long-term direction, and Exertion only when the result matters.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="what-is-the-best-45-point-build">
+  What is the best 45-point build in ZERO PARADES?
+</h3>
+
+Use the Safe First Run spread: Personalism 5, Cold Read 4, Blueprints 4, Poetics 4, Coordination 3, Instincts 3, Entanglement 3, Grey Matter 3, Records 3, Statehood 3, Nerve 3, with lower backup values in the remaining skills.
+
+<h3 id="which-preset-is-best-for-beginners">
+  Which preset is best for beginners?
+</h3>
+
+Pick the preset that leans closest to Relation or social reading. If you prefer clues and strange objects, pick the Intellect-style preset. Use Action only if you want a more physical first run.
+
+<h3 id="can-a-bad-build-ruin-my-run">
+  Can a bad build ruin my run?
+</h3>
+
+Usually no. Gear, Exertion, Conditioning, extra context, and alternate routes can all help you recover from weak checks. A bad build may make the opening rougher, but it does not automatically ruin the run.
+
+<h3 id="should-i-use-exertion-to-fix-my-build">
+  Should I use Exertion to fix my build?
+</h3>
+
+Use Exertion for important checks, not as your default build fix. If gear can raise the skill, try gear first. Exertion improves the roll but adds stress.
+
+<h3 id="what-skills-should-disco-elysium-players-pick">
+  What skills should Disco Elysium players pick first?
+</h3>
+
+Start with Personalism, Cold Read, Blueprints, Poetics, Records, and Grey Matter. That keeps the reading-heavy Disco Elysium feel while adapting to ZERO PARADES' spy-focused systems.
+
+<h3 id="does-starting-build-lock-content">
+  Does my starting build lock me out of content?
+</h3>
+
+Not in a simple all-or-nothing way. A low skill can close or weaken some options, but ZERO PARADES often gives other routes, gear fixes, or ways to accept the consequence and keep moving.
+
+<h3 id="is-gear-important-for-builds">
+  Is gear important for builds?
+</h3>
+
+Yes. Gear can change skill values and help you pass checks without spending stress. Always check clothing and held items before using Exertion on a major roll.
+
+<h3 id="which-conditioning-is-best-for-relation-build">
+  Which Conditioning is best for a Relation build?
+</h3>
+
+Favor Thoughts that raise Personalism, Cold Read, Nerve, Statehood, or other social-route potential without adding a drawback that punishes your normal dialogue or item habits.
+
+<h3 id="should-i-min-max-second-playthrough">
+  Should I min-max on a second playthrough?
+</h3>
+
+Yes, if you already understand the game. First runs are better with flexible builds. Second runs are where extreme Action, strange Intellect, heavy Relation, or drawback-heavy Conditioning becomes more interesting.

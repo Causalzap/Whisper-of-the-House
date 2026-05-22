@@ -1,0 +1,866 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const bigDifferenceColumns = [
+  { key: "system", label: "System" },
+  { key: "disco", label: "Disco Elysium" },
+  { key: "zeroParades", label: "ZERO PARADES" },
+];
+
+export const bigDifferenceRows = [
+  {
+    system: "Story connection",
+    disco:
+      "A self-contained detective RPG set in Revachol, centered on Harry and Kim.",
+    zeroParades:
+      "A separate spy RPG with its own protagonist, city, factions, plot, and mission structure.",
+  },
+  {
+    system: "Opening partner",
+    disco:
+      "Harry quickly has Kim as a steady partner and counterweight.",
+    zeroParades:
+      "Cascade starts with Pseudopod incapacitated, so the opening feels lonelier and more self-directed.",
+  },
+  {
+    system: "Skills",
+    disco:
+      "24 skills across four categories.",
+    zeroParades:
+      "15 skills across three Faculties, making each skill direction feel more concentrated.",
+  },
+  {
+    system: "Pressure system",
+    disco:
+      "Health and Morale are the main visible pressure bars.",
+    zeroParades:
+      "Fatigue, Anxiety, and Delirium track different kinds of strain and can lead to skill loss.",
+  },
+  {
+    system: "Pushing checks",
+    disco:
+      "You mostly decide whether to roll now, improve the odds, or return later.",
+    zeroParades:
+      "Exertion lets you push a check harder, but it raises stress.",
+  },
+  {
+    system: "Progression",
+    disco:
+      "Skills, clothes, and the Thought Cabinet shape Harry.",
+    zeroParades:
+      "Skills, gear, and Conditioning shape Cascade, with Thoughts often tied to explicit drawbacks.",
+  },
+  {
+    system: "Exploration",
+    disco:
+      "A dense, focused district structure.",
+    zeroParades:
+      "Portiro is broader, with more districts, route movement, and time-sensitive access.",
+  },
+  {
+    system: "Tense scenes",
+    disco:
+      "Most tension plays through dialogue, checks, and scripted consequences.",
+    zeroParades:
+      "Dramatic Encounters play out as step-by-step high-pressure sequences with multiple skill paths.",
+  },
+];
+
+export const habitColumns = [
+  { key: "oldHabit", label: "Old Disco Habit" },
+  { key: "whyItCanHurt", label: "Why It Can Hurt Here" },
+  { key: "newHabit", label: "New Habit for ZERO PARADES" },
+];
+
+export const habitRows = [
+  {
+    oldHabit: "Trying to recreate Harry",
+    whyItCanHurt:
+      "Cascade has a different job, different pressures, and a different skill structure.",
+    newHabit:
+      "Build around spy work: reading people, following leads, using gear, and surviving pressure.",
+  },
+  {
+    oldHabit: "Expecting Kim to frame the scene",
+    whyItCanHurt:
+      "The opening gives you less companion support because Pseudopod is out of action.",
+    newHabit:
+      "Use object inspection, journal tasks, and room details as your early substitute for Kim-style guidance.",
+  },
+  {
+    oldHabit: "Reloading every failed check",
+    whyItCanHurt:
+      "ZERO PARADES often treats failure as pressure, skill loss, or route change rather than instant disaster.",
+    newHabit:
+      "Reload only when a failure blocks a result you truly care about.",
+  },
+  {
+    oldHabit: "Checking clothes before a roll",
+    whyItCanHurt:
+      "This habit is still good, but it matters more because Exertion has a stress cost.",
+    newHabit:
+      "Keep the habit. Check gear before using Exertion on an important roll.",
+  },
+  {
+    oldHabit: "Treating Thoughts as roleplay flavor",
+    whyItCanHurt:
+      "Conditioning can affect skill potential and may include violation rules or drawbacks.",
+    newHabit:
+      "Read every Thought as a build rule, not just a roleplay prompt.",
+  },
+];
+
+export const skillColumns = [
+  { key: "point", label: "Point" },
+  { key: "whatChanged", label: "What Changed" },
+  { key: "playerAdvice", label: "Player Advice" },
+];
+
+export const skillRows = [
+  {
+    point: "Fewer skills",
+    whatChanged:
+      "ZERO PARADES uses 15 skills instead of Disco Elysium's 24.",
+    playerAdvice:
+      "Expect less choice paralysis, but more weight on each skill direction.",
+  },
+  {
+    point: "Three Faculties",
+    whatChanged:
+      "Skills are grouped into Action, Relation, and Intellect-style categories.",
+    playerAdvice:
+      "Pick a main direction, but keep one backup Faculty usable.",
+  },
+  {
+    point: "More concentrated investment",
+    whatChanged:
+      "With fewer skills, your points can define Cascade more sharply.",
+    playerAdvice:
+      "Do not over-specialize on your first run unless you want a rougher opening.",
+  },
+  {
+    point: "Gear matters",
+    whatChanged:
+      "Clothes and equipment can adjust skill values.",
+    playerAdvice:
+      "Use gear to patch weak checks before spending stress.",
+  },
+  {
+    point: "Conditioning changes potential",
+    whatChanged:
+      "Thoughts can affect skill potential and playstyle rules.",
+    playerAdvice:
+      "Condition toward skills you actually use, not just the weirdest idea available.",
+  },
+];
+
+export const meterColumns = [
+  { key: "meter", label: "ZERO PARADES Meter" },
+  { key: "roughMeaning", label: "Rough Meaning" },
+  { key: "discoPlayerRule", label: "Rule for Disco Players" },
+];
+
+export const meterRows = [
+  {
+    meter: "Fatigue",
+    roughMeaning:
+      "Physical pressure and strain.",
+    discoPlayerRule:
+      "Do not solve every physical situation by brute-forcing it.",
+  },
+  {
+    meter: "Anxiety",
+    roughMeaning:
+      "Social, emotional, and personal pressure.",
+    discoPlayerRule:
+      "Dialogue pressure is not free. Watch it when pushing people, guilt, authority, or memory.",
+  },
+  {
+    meter: "Delirium",
+    roughMeaning:
+      "Mental overload, strange reads, and unstable perception.",
+    discoPlayerRule:
+      "The weird option can be tempting, but do not chase every strange check blindly.",
+  },
+];
+
+export const explorationColumns = [
+  { key: "thing", label: "What Changes" },
+  { key: "howItFeels", label: "How It Feels" },
+  { key: "whatToDo", label: "What To Do" },
+];
+
+export const explorationRows = [
+  {
+    thing: "More districts",
+    howItFeels:
+      "Portiro can feel wider and more scattered than the early Disco Elysium loop.",
+    whatToDo:
+      "Use the journal and map instead of relying only on memory.",
+  },
+  {
+    thing: "More route movement",
+    howItFeels:
+      "You may bounce between leads, objects, citizens, and locations more often.",
+    whatToDo:
+      "Follow the strongest current lead instead of trying to solve everything in one room.",
+  },
+  {
+    thing: "Time and access matter",
+    howItFeels:
+      "Some areas and opportunities can depend on where you are and when you go.",
+    whatToDo:
+      "Check tasks before wandering too far from your current goal.",
+  },
+  {
+    thing: "Quest paths can feel more traditional RPG",
+    howItFeels:
+      "Some objectives have multiple solution paths that feel more route-based.",
+    whatToDo:
+      "If one check fails, look for another approach before reloading.",
+  },
+];
+
+export const failureColumns = [
+  { key: "failureType", label: "Failure Type" },
+  { key: "meaning", label: "What It Usually Means" },
+  { key: "reload", label: "Should You Reload?" },
+];
+
+export const failureRows = [
+  {
+    failureType: "Minor failed check",
+    meaning:
+      "You missed a line, read, or small opportunity.",
+    reload:
+      "Usually no.",
+  },
+  {
+    failureType: "Stress increase",
+    meaning:
+      "Cascade took pressure from the attempt or situation.",
+    reload:
+      "Usually no, unless it pushes you into a bad state right before something major.",
+  },
+  {
+    failureType: "Skill loss",
+    meaning:
+      "A meter got too high and punished the related category.",
+    reload:
+      "Maybe, if it hits a build-defining skill before a key objective.",
+  },
+  {
+    failureType: "Dramatic Encounter failure",
+    meaning:
+      "The scene may shift, close a path, or make the next step harder.",
+    reload:
+      "Maybe, if you were chasing a specific outcome.",
+  },
+  {
+    failureType: "Major route lockout",
+    meaning:
+      "A result you wanted may no longer be available.",
+    reload:
+      "Yes, if that route was your goal.",
+  },
+];
+
+export const recommendationColumns = [
+  { key: "playerType", label: "If You Are..." },
+  { key: "startWith", label: "Start With" },
+  { key: "why", label: "Why" },
+];
+
+export const recommendationRows = [
+  {
+    playerType: "A dialogue-first Disco player",
+    startWith:
+      "Relation plus some Intellect",
+    why:
+      "You still get strong conversations, but you can read clues and systems better.",
+  },
+  {
+    playerType: "A Thought Cabinet fan",
+    startWith:
+      "Conditioning carefully, not immediately",
+    why:
+      "Thoughts can be powerful, but drawbacks and violation rules matter more than they first appear.",
+  },
+  {
+    playerType: "A failed-check enjoyer",
+    startWith:
+      "Flexible build, selective reloads",
+    why:
+      "ZERO PARADES can punish failure differently, so you need to know which failures are worth keeping.",
+  },
+  {
+    playerType: "A completionist",
+    startWith:
+      "Manual saves before major commitments",
+    why:
+      "You will want rollback points before big route choices and dramatic scenes.",
+  },
+  {
+    playerType: "A new player who only knows the comparison",
+    startWith:
+      "Beginner guide and early game walkthrough",
+    why:
+      "ZERO PARADES is readable without Disco Elysium, but the opening has a lot of strange objects and names.",
+  },
+];
+
+export const betterColumns = [
+  { key: "ifYouPrefer", label: "If You Prefer..." },
+  { key: "probablyBetterFit", label: "Probably Better Fit" },
+  { key: "why", label: "Why" },
+];
+
+export const betterRows = [
+  {
+    ifYouPrefer: "A tighter companion dynamic and sharper detective buddy rhythm",
+    probablyBetterFit: "Disco Elysium",
+    why:
+      "Kim gives Disco a steady emotional and investigative counterweight that ZERO PARADES does not copy in the opening.",
+  },
+  {
+    ifYouPrefer: "A spy RPG with more route movement, gear checks, stress management, and operational pressure",
+    probablyBetterFit: "ZERO PARADES",
+    why:
+      "Cascade's systems are more about pressure, route-solving, gear, and Conditioning than recreating Harry's internal collapse.",
+  },
+  {
+    ifYouPrefer: "Stranger skill voices and a denser internal chorus",
+    probablyBetterFit: "Disco Elysium",
+    why:
+      "Disco's 24-skill structure gives it a broader internal personality spread.",
+  },
+  {
+    ifYouPrefer: "Fewer skills with more concentrated build decisions",
+    probablyBetterFit: "ZERO PARADES",
+    why:
+      "ZERO PARADES compresses the skill sheet into 15 skills and asks you to manage stress and Exertion around them.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "mistake", label: "Mistake" },
+  { key: "whyItHurts", label: "Why It Hurts" },
+  { key: "betterHabit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    mistake: "Calling it Disco Elysium 2 in your head",
+    whyItHurts:
+      "You start expecting the same companion rhythm, failure style, and build logic.",
+    betterHabit:
+      "Treat it as a related-feeling but separate spy RPG.",
+  },
+  {
+    mistake: "Building Cascade exactly like Harry",
+    whyItHurts:
+      "The skill categories and stress system are different.",
+    betterHabit:
+      "Build for spy work: people, clues, pressure, and flexible routes.",
+  },
+  {
+    mistake: "Ignoring Fatigue, Anxiety, and Delirium",
+    whyItHurts:
+      "These meters can lead to skill loss and restrict how safely you can push checks.",
+    betterHabit:
+      "Track which meter your choices keep raising.",
+  },
+  {
+    mistake: "Using Exertion like a free retry",
+    whyItHurts:
+      "Exertion improves odds but adds stress.",
+    betterHabit:
+      "Use it only when the roll matters.",
+  },
+  {
+    mistake: "Taking every Thought immediately",
+    whyItHurts:
+      "Conditioning can include drawbacks or rules that fight your playstyle.",
+    betterHabit:
+      "Read the drawback first, then decide.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**You do not need to play Disco Elysium before ZERO PARADES, and ZERO PARADES is not a direct story sequel. Disco players should expect familiar narrative RPG habits, but different systems: fewer skills, Fatigue/Anxiety/Delirium instead of Health/Morale, Exertion for pushing rolls, Conditioning instead of a simple Thought Cabinet copy, a lonelier opening, and Dramatic Encounters that play out as step-by-step pressure scenes.**
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-disco-skill-comparison.webp"
+    alt="ZERO PARADES skill comparison showing fewer concentrated skills than Disco Elysium."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first big adjustment is the skill sheet. ZERO PARADES uses fewer, more concentrated skills than Disco Elysium.
+  </figcaption>
+</figure>
+
+<h2 id="zero-parades-vs-disco-elysium-overview">
+  ZERO PARADES vs Disco Elysium Overview
+</h2>
+
+ZERO PARADES feels familiar if you loved Disco Elysium, but it is not a game you should play on autopilot.
+
+You still spend a lot of time reading, choosing dialogue, following strange leads, and letting your character's inner systems comment on the world. The difference is that Cascade is not Harry, Portiro is not Martinaise, and ZERO PARADES is built around spy pressure instead of detective collapse.
+
+The safest way to start is:
+
+**bring your Disco Elysium reading habits, but leave your exact Disco Elysium build habits behind.**
+
+If you want the general starter guide, read the <Link href="/zero-parades">ZERO PARADES guide hub</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="do-you-need-to-play-disco-elysium-first">
+  Do You Need to Play Disco Elysium First?
+</h2>
+
+No, you do not need to play Disco Elysium first.
+
+ZERO PARADES is its own game with its own protagonist, setting, factions, systems, and opening mystery. Disco Elysium experience helps because you already understand this style of RPG: lots of reading, internal commentary, skill checks, strange political humor, and failure that does not always mean “game over.”
+
+But you can start here.
+
+<h2 id="is-zero-parades-connected-to-disco-elysium-story">
+  Is ZERO PARADES Connected to Disco Elysium's Story?
+</h2>
+
+No. Treat ZERO PARADES as a separate story.
+
+It does not ask you to remember Revachol, Harry, Kim, the murder case, the Pale, or Disco Elysium's ending. The useful connection is not plot continuity. It is **design language**: dialogue-heavy RPG structure, skill checks, internal systems, political worldbuilding, failure, clothing modifiers, and strange character-shaping choices.
+
+That means the right buying question is not “Will I understand the story without Disco Elysium?”
+
+You will.
+
+The better question is:
+
+**Do I want another dense narrative RPG that uses some familiar design instincts in a different spy-fiction structure?**
+
+<h2 id="biggest-differences">
+  Biggest Differences at a Glance
+</h2>
+
+<GuideTable
+  caption="Biggest gameplay differences between ZERO PARADES and Disco Elysium."
+  columns={bigDifferenceColumns}
+  rows={bigDifferenceRows}
+/>
+
+The big picture is simple: ZERO PARADES is more concentrated, more pressure-meter driven, and more structured around spy work.
+
+That does not make it better or worse. It makes it easier to misunderstand if you expect Disco Elysium with a new coat of paint.
+
+<h2 id="you-start-more-alone">
+  You Start More Alone Than Harry
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-journal-whats-wrong-pseudopod.webp"
+    alt="Journal entry in ZERO PARADES showing the early question of what happened to Pseudopod."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pseudopod is central to the opening, but he is not a Kim-style partner guiding every scene.
+  </figcaption>
+</figure>
+
+The opening feels lonelier than Disco Elysium.
+
+Harry has Kim as a stabilizing presence early. Kim gives pushback, context, and a second mind in the room. Cascade begins in a different position. Pseudopod is there, but he is incapacitated, and that changes the rhythm immediately.
+
+That means you need to do more of the early framing yourself.
+
+For the first 30 minutes, treat **object inspection and journal reading as your Kim substitute**. The safe house, the red disc, the purchase order, and the journal tasks are doing part of the work Kim used to do: they give you context, pressure, next steps, and reality checks when the scene feels too strange.
+
+So when the opening feels like it is not explaining enough, do not rush out. Read the room, inspect the weird object, then check the journal entry that updates afterward.
+
+If you are stuck in the opening, read the <Link href="/zero-parades/early-game">ZERO PARADES early game walkthrough</Link>.
+
+<h2 id="fewer-skills">
+  Skills Are Fewer but More Concentrated
+</h2>
+
+ZERO PARADES has fewer skills than Disco Elysium.
+
+That matters because each investment feels more concentrated. Instead of spreading your identity across a larger skill sheet, you are choosing a sharper direction for Cascade.
+
+<GuideTable
+  caption="How Disco Elysium players should read ZERO PARADES skills."
+  columns={skillColumns}
+  rows={skillRows}
+/>
+
+This is good for players who felt overwhelmed by Disco Elysium's skill list. It is less good if you expect the same number of internal voices chiming in constantly.
+
+The beginner advice is:
+
+**do not over-specialize on your first run.**
+
+Build toward a playstyle, but keep one backup area strong enough that you do not feel helpless when the game changes check type.
+
+For a full build breakdown, read the <Link href="/zero-parades/best-build">ZERO PARADES best build guide</Link>.
+
+<h2 id="stress-replaces-health-and-morale">
+  Stress Replaces Health and Morale
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-stress-meters-hud.webp"
+    alt="Fatigue Anxiety and Delirium meters in ZERO PARADES For Dead Spies."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Do not read these like Disco Elysium's Health and Morale. Fatigue, Anxiety, and Delirium shape how safely you can keep pushing.
+  </figcaption>
+</figure>
+
+Disco Elysium players need to unlearn one thing quickly:
+
+**Fatigue, Anxiety, and Delirium are not just Health and Morale with different names.**
+
+They represent different kinds of pressure. They also connect to the way Cascade pushes checks, fails checks, and risks skill loss.
+
+<GuideTable
+  caption="How Disco Elysium players should read ZERO PARADES stress meters."
+  columns={meterColumns}
+  rows={meterRows}
+/>
+
+If one meter keeps rising, pay attention to what kind of behavior is causing it.
+
+A social route may build Anxiety. A strange mental route may build Delirium. A physical route may build Fatigue. That feedback should shape how aggressively you keep forcing the same kind of check.
+
+For the full mechanics page, read the <Link href="/zero-parades/stress-exertion">ZERO PARADES stress and Exertion guide</Link>.
+
+<h2 id="exertion-changes-rolls">
+  Exertion Changes How You Think About Rolls
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-exertion-third-die.webp"
+    alt="Exertion check in ZERO PARADES showing an extra die and a higher chance to pass."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Exertion lets you push a check harder, but it also adds pressure. Do not use it like a free retry.
+  </figcaption>
+</figure>
+
+In Disco Elysium, you usually look at a check and decide whether to roll now, improve the odds, or come back later.
+
+ZERO PARADES adds another temptation: **Exertion**.
+
+Exertion can make a check more favorable, but it raises stress. That makes every important roll a small resource question:
+
+- Is this check important?
+- Is the reward worth the pressure?
+- Can I improve it with gear first?
+- Is the related meter already dangerous?
+- Would I reload if this failed?
+
+If the answer is no, save the stress.
+
+<h2 id="conditioning-vs-thought-cabinet">
+  Conditioning Is Not Just Thought Cabinet Again
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-conditioning-thoughts-menu.webp"
+    alt="Conditioning menu in ZERO PARADES showing a Thought and reinforced effects."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Conditioning scratches a similar itch to the Thought Cabinet, but you should read Thoughts as build rules with possible drawbacks.
+  </figcaption>
+</figure>
+
+Disco Elysium players will naturally compare Conditioning to the Thought Cabinet.
+
+That comparison is useful, but incomplete.
+
+Conditioning is about internalizing Thoughts, raising potential, and changing how Cascade plays. Some Thoughts give strong benefits. Some come with drawbacks or violation rules. That makes them feel less like collectibles and more like commitments.
+
+The first-run rule is:
+
+**do not condition a Thought until you understand the drawback.**
+
+For the full page, read the <Link href="/zero-parades/conditioning">ZERO PARADES Conditioning guide</Link>.
+
+<h2 id="gear-matters-more-than-you-might-expect">
+  Gear Matters More Than You Might Expect
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-gear-skill-bonus.webp"
+    alt="Inventory screen in ZERO PARADES showing gear and skill modifiers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Before spending stress on Exertion, check whether gear can fix the skill problem.
+  </figcaption>
+</figure>
+
+If you already checked clothes before important rolls in Disco Elysium, keep that habit.
+
+ZERO PARADES rewards the same instinct, but the stakes are different because Exertion has a stress cost. A gear swap is safer than pushing a roll when your Fatigue, Anxiety, or Delirium is already high.
+
+Before using Exertion:
+
+1. Check the skill.
+2. Open your inventory.
+3. See whether gear changes that skill.
+4. Look for better context or modifiers.
+5. Exert only if the result is worth the pressure.
+
+This is one of the best habits to bring over from Disco Elysium.
+
+<h2 id="exploration-is-broader">
+  Exploration Is Broader and More Route-Based
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-six-districts-map.webp"
+    alt="Portiro map in ZERO PARADES showing a broader city structure than Disco Elysium."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Portiro is broader than the early Disco Elysium loop, so the journal and map matter more.
+  </figcaption>
+</figure>
+
+Portiro feels less like one tight detective neighborhood and more like a city of leads.
+
+That means your route discipline matters. If you try to solve every clue the moment it appears, you can feel scattered. Use the journal, check your current objective, and follow the strongest lead.
+
+<GuideTable
+  caption="How exploration changes for Disco Elysium players."
+  columns={explorationColumns}
+  rows={explorationRows}
+/>
+
+A useful habit:
+
+**when the game gives you an object, ask which person or place can interpret it.**
+
+That is especially true early, when the purchase order and red disc push you toward Bootleg Bazaar.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="journal-and-objectives">
+  Use the Journal More Actively
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-journal-unassigned-assignment.webp"
+    alt="Journal entry for The Unassigned Assignment in ZERO PARADES showing subtasks and leads."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The journal is not just housekeeping. It helps turn strange objects into usable leads.
+  </figcaption>
+</figure>
+
+Disco Elysium players are used to reading the world closely.
+
+Keep that habit, but add one more: check the journal when the game starts throwing names, objects, and subtasks at you.
+
+ZERO PARADES can give you a strange object before you understand it. The journal helps you remember why it matters and where the lead is pointing.
+
+This is especially important early with:
+
+- Pseudopod,
+- the red disc,
+- the purchase order,
+- Bootleg Bazaar,
+- and your unfinished assignment.
+
+<h2 id="dramatic-encounters">
+  Dramatic Encounters Are Not Normal Combat
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/zero-parades/zero-parades-dramatic-encounter-bazaar.webp"
+    alt="A dramatic encounter in ZERO PARADES during a tense bazaar escape."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dramatic Encounters are tense step-by-step scenes, not a traditional combat system.
+  </figcaption>
+</figure>
+
+ZERO PARADES has scenes that look more structured than most Disco Elysium confrontations.
+
+Do not read them as normal battles.
+
+Dramatic Encounters are high-pressure sequences where you choose actions step by step. You may flee, blend in, push forward, read the situation, or improvise. Your build matters because different options may lean on different skills.
+
+For example, a bazaar escape-style scene is not just “pass one roll and win.” You may need to read the crowd, choose a path, decide whether to move physically or socially, and then live with how that route changes the next step. That is why a Disco-style pure dialogue build can still feel exposed if it has no Action backup.
+
+The best way to handle Dramatic Encounters is:
+
+1. Read the scene before choosing.
+2. Look for options that match your build.
+3. Use Exertion only when the result matters.
+4. Accept that one failure may create a new route rather than a full stop.
+
+<h2 id="failure-works-differently">
+  Failure Works Differently
+</h2>
+
+Disco Elysium is famous for making failure interesting.
+
+ZERO PARADES still has failure, but the rhythm is different. Stress, skill loss, and route pressure can matter more than a funny immediate disaster.
+
+<GuideTable
+  caption="How to think about failure in ZERO PARADES after Disco Elysium."
+  columns={failureColumns}
+  rows={failureRows}
+/>
+
+The beginner rule is:
+
+**do not reload every failed check, but do save before major commitments.**
+
+That gives you room to experience consequences without losing control of a route you actually care about.
+
+<h2 id="which-is-better">
+  ZERO PARADES vs Disco Elysium: Which Is Better?
+</h2>
+
+There is no useful universal answer, because the two games are trying to create different kinds of pressure.
+
+<GuideTable
+  caption="Which game may fit you better?"
+  columns={betterColumns}
+  rows={betterRows}
+/>
+
+If what you loved most about Disco Elysium was Kim, Revachol, Harry's internal chaos, and the sharpness of the detective structure, ZERO PARADES may feel drier and lonelier.
+
+If what you want is another dense narrative RPG with spy systems, gear checks, stress management, Conditioning, broader route movement, and high-pressure sequences, ZERO PARADES is much easier to appreciate on its own terms.
+
+<h2 id="best-starting-advice">
+  Best Starting Advice for Disco Elysium Players
+</h2>
+
+<GuideTable
+  caption="Best starting advice for different types of Disco Elysium players."
+  columns={recommendationColumns}
+  rows={recommendationRows}
+/>
+
+If you only remember one thing, remember this:
+
+**ZERO PARADES rewards careful reading, but it punishes careless pushing.**
+
+Read like Disco Elysium. Build more flexibly. Spend stress more carefully.
+
+
+<h2 id="common-mistakes">
+  Common Mistakes Disco Elysium Players Make
+</h2>
+
+<GuideTable
+  caption="Common mistakes Disco Elysium players make in ZERO PARADES."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is expecting the same emotional safety net.
+
+ZERO PARADES is colder in the opening. It asks you to be more self-directed, more suspicious of objects, and more deliberate about pressure.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="is-zero-parades-connected-to-disco-elysium">
+  Is ZERO PARADES connected to Disco Elysium?
+</h3>
+
+No. ZERO PARADES is not a direct sequel and does not continue Disco Elysium's story. It has its own protagonist, world, factions, and systems, even though Disco Elysium players will notice familiar design DNA.
+
+<h3 id="do-i-need-to-play-disco-elysium-first">
+  Do I need to play Disco Elysium first?
+</h3>
+
+No. You can start with ZERO PARADES. Disco Elysium helps you understand the style, but the story and systems are separate.
+
+<h3 id="is-zero-parades-like-disco-elysium">
+  Is ZERO PARADES like Disco Elysium?
+</h3>
+
+Yes, in broad RPG structure: lots of reading, dialogue, skill checks, internal commentary, politics, and strange humor. But it plays differently because of stress meters, Exertion, Conditioning, broader exploration, and Dramatic Encounters.
+
+<h3 id="zero-parades-vs-disco-elysium-which-is-better">
+  ZERO PARADES vs Disco Elysium: which is better?
+</h3>
+
+Disco Elysium is probably the better fit if you want a tighter detective story, Kim-style companion structure, and a stronger internal skill chorus. ZERO PARADES is better if you want a separate spy RPG with pressure meters, route movement, gear checks, Conditioning, and more structured high-tension sequences.
+
+<h3 id="how-many-skills-does-zero-parades-have">
+  How many skills does ZERO PARADES have?
+</h3>
+
+ZERO PARADES has 15 skills grouped into three broad Faculties. Disco Elysium had 24 skills across four categories.
+
+<h3 id="what-replaces-health-and-morale">
+  What replaces Health and Morale in ZERO PARADES?
+</h3>
+
+ZERO PARADES uses Fatigue, Anxiety, and Delirium. These meters track different kinds of pressure and can punish your skills if they get too high.
+
+<h3 id="is-conditioning-the-same-as-thought-cabinet">
+  Is Conditioning the same as the Thought Cabinet?
+</h3>
+
+No. Conditioning feels related, but it works inside ZERO PARADES' own build and stress systems. Thoughts can raise skill potential, add effects, and include drawbacks or violation rules.
+
+<h3 id="should-i-build-cascade-like-harry">
+  Should I build Cascade like Harry?
+</h3>
+
+No. Build Cascade for spy work: reading people, understanding clues, managing pressure, and staying flexible during route changes.
+
+<h3 id="should-disco-elysium-fans-play-zero-parades">
+  Should Disco Elysium fans play ZERO PARADES?
+</h3>
+
+Yes, if you want another dense narrative RPG and are open to a different rhythm. Do not expect the exact same companion dynamic, writing feel, or failure system.

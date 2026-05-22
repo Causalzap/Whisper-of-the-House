@@ -73,6 +73,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/dwarf-eats-mountain`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/lego-batman`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/deep-rock-galactic`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/zero-parades`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+    { url: `${base}/zero-parades/best-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/zero-parades/conditioning`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/zero-parades/disco-elysium-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/zero-parades/stress-exertion`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/zero-parades/early-game`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     { url: `${base}/deep-rock-galactic/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/deep-rock-galactic/best-class`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
