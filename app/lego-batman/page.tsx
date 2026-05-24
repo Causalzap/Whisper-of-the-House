@@ -35,25 +35,28 @@ const toc = [
 
 const relatedLinks = [
   { href: "/lego-batman/red-bricks", label: "Red Bricks Guide" },
+  { href: "/lego-batman/new-beginnings-docks-collectibles", label: "New Beginnings Docks Collectibles" },
   { href: "/lego-batman/carmine-falcone", label: "Carmine Falcone Walkthrough" },
   { href: "/lego-batman/batgirl-unlock", label: "Batgirl Unlock Guide" },
+  { href: "/lego-batman/radio-towers", label: "Radio Towers Guide" },
   { href: "/lego-batman/escaped-zoo-animals", label: "Escaped Zoo Animals Guide" },
   { href: "/lego-batman/firefly-boss", label: "Firefly Boss Guide" },
+  { href: "/lego-batman/mr-freeze-boss", label: "Mr. Freeze Boss Guide" },
   { href: "/lego-batman/poison-ivy-boss", label: "Poison Ivy Boss Guide" },
   { href: "/lego-batman/bane-boss", label: "Bane Boss Guide" },
 ];
 
 export const metadata: Metadata = {
-  title: "LEGO Batman Legacy Guide: Red Bricks, Bosses & Batcave",
+  title: "LEGO Batman Legacy Guide: Collectibles, Towers, Bosses & Red Bricks",
   description:
-    "Start LEGO Batman Legacy with the right route: Batcave systems, Carmine Falcone, Red Bricks, Batgirl, Firefly, Poison Ivy, and Bane guides.",
+    "Start LEGO Batman Legacy with the right route: New Beginnings collectibles, Batcave systems, Red Bricks, Batgirl, Radio Towers, Mr. Freeze, Firefly, Poison Ivy, and Bane guides.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "LEGO Batman Legacy Guide Hub: Red Bricks, Bosses, Batcave",
+    title: "LEGO Batman Legacy Guide Hub: Collectibles, Towers, Bosses",
     description:
-      "Use this guide hub to route your first playthrough, understand Batcave systems, collect Red Bricks, unlock Batgirl, and beat key bosses.",
+      "Use this guide hub to route your first playthrough, clear New Beginnings collectibles, reveal Radio Towers, collect Red Bricks, unlock Batgirl, and beat key bosses.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -68,9 +71,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "LEGO Batman Legacy Guide: Red Bricks, Bosses & Batcave",
+    title: "LEGO Batman Legacy Guide: Collectibles, Towers, Bosses",
     description:
-      "Follow the best early route, use the Batcave, collect Red Bricks, unlock Batgirl, and beat major bosses.",
+      "Follow the best early route, clear New Beginnings collectibles, reveal Radio Towers, collect Red Bricks, unlock Batgirl, and beat major bosses.",
     images: [imageUrls[0]],
   },
 };
@@ -104,9 +107,10 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "LEGO Batman Legacy Guide Hub: First Playthrough Route, Batcave Systems, Red Bricks, Batgirl Unlock, Firefly, Poison Ivy and Bane Boss Guides",
+      "LEGO Batman Legacy Guide Hub: First Playthrough Route, New Beginnings Collectibles, Radio Towers, Red Bricks, Batgirl Unlock and Boss Guides",
       description:
-        "A player-focused LEGO Batman Legacy guide hub for routing the first playthrough and choosing the right detailed guide. Covers what to do first, when the Batcave starts to matter, how Bat-Mite’s Shop fits into cleanup, why Carmine Falcone and the Iceberg Lounge are an early navigation check, when to start Red Brick cleanup, how Batgirl changes later routes, why Firefly is a Batgirl tech check, and how to approach Poison Ivy and Bane as mechanic-based boss fights.",
+      "A player-focused LEGO Batman Legacy guide hub for routing the first playthrough and choosing the right detailed guide. Covers what to do first, New Beginnings Docks collectibles, Batcave systems, Bat-Mite’s Shop, Carmine Falcone, Red Brick cleanup, Batgirl unlocks, Radio Towers, Escaped Zoo Animals, Firefly, Mr. Freeze, Poison Ivy, and Bane boss guides.",
+
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-05-20",
@@ -125,6 +129,12 @@ const jsonLd = {
         { "@type": "Thing", name: "Iceberg Lounge" },
         { "@type": "Thing", name: "Batgirl" },
         { "@type": "Thing", name: "Firefly" },
+        { "@type": "Thing", name: "New Beginnings" },
+        { "@type": "Thing", name: "Docks Collectibles" },
+        { "@type": "Thing", name: "Radio Towers" },
+        { "@type": "Thing", name: "Mr. Freeze" },
+        { "@type": "Thing", name: "Snow Globes" },
+        { "@type": "Thing", name: "Escaped Zoo Animals" },
         { "@type": "Thing", name: "Poison Ivy" },
         { "@type": "Thing", name: "Bane" },
       ],
@@ -235,7 +245,7 @@ const jsonLd = {
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "No. Use this page as a route hub. For exact sections, open the Red Bricks, Carmine Falcone, Batcave, Batgirl, Firefly, Poison Ivy, or Bane guides.",
+  "No. Use this page as a route hub. For exact sections, open the Red Bricks, New Beginnings Docks, Carmine Falcone, Batgirl, Radio Towers, Firefly, Mr. Freeze, Poison Ivy, Bane, or Escaped Zoo Animals guides.",
           },
         },
       ],
@@ -254,12 +264,11 @@ export default function Page() {
         />
         <GuideArticlePage
           title="LEGO Batman Legacy Guide Hub: What To Do First and Where To Go Next"
-          description="Follow the best early route, understand the Batcave, collect Red Bricks at the right time, unlock Batgirl, and jump to the boss or mission guide you need."
-          gameTitle="LEGO Batman: Legacy of the Dark Knight"
+          description="Follow the best early route, clear New Beginnings collectibles, reveal Radio Towers, collect Red Bricks at the right time, unlock Batgirl, and jump to the boss or mission guide you need."          gameTitle="LEGO Batman: Legacy of the Dark Knight"
           gameHref="/lego-batman"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 20, 2026"
+          updatedAt="May 24, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

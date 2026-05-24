@@ -35,6 +35,9 @@ const relatedLinks = [
   { href: "/lego-batman/batgirl-unlock", label: "Batgirl Unlock Guide" },
   { href: "/lego-batman/batcave-guide", label: "Batcave Guide" },
   { href: "/lego-batman/red-bricks", label: "Red Bricks Guide" },
+  { href: "/lego-batman/new-beginnings-docks-collectibles", label: "New Beginnings Docks Collectibles" },
+{ href: "/lego-batman/radio-towers", label: "Radio Towers Guide" },
+{ href: "/lego-batman/mr-freeze-boss", label: "Mr. Freeze Boss Guide" },
   { href: "/lego-batman/collectibles", label: "Collectibles Guide" },
   { href: "/lego-batman/firefly-boss", label: "Firefly Boss Guide" },
 ];
