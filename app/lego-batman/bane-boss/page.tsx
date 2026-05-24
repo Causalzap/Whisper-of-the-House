@@ -42,6 +42,8 @@ const relatedLinks = [
   { href: "/lego-batman/poison-ivy-boss", label: "Poison Ivy Boss Guide" },
   { href: "/lego-batman/firefly-boss", label: "Firefly Boss Guide" },
   { href: "/lego-batman/batgirl-unlock", label: "Batgirl Unlock Guide" },
+  { href: "/lego-batman/escaped-zoo-animals", label: "Escaped Zoo Animals Guide" },
+
   { href: "/lego-batman/carmine-falcone", label: "Carmine Falcone Walkthrough" },
 ];
 

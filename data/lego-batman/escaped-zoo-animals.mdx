@@ -1,0 +1,667 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const escapedAnimalColumns = [
+  { key: "number", label: "#" },
+  { key: "area", label: "Area" },
+  { key: "animal", label: "Animal" },
+  { key: "mission", label: "Mission / Marker" },
+  { key: "coords", label: "Coordinates" },
+];
+
+export const escapedAnimalRows = [
+  {
+    number: "1",
+    area: "Tricorner Island",
+    animal: "Snake / American Python marker",
+    mission: "Bye-Bye, Hiss American Python",
+    coords: "235, 155",
+  },
+  {
+    number: "2",
+    area: "Tricorner Island",
+    animal: "Brown Bear",
+    mission: "Bear With Me",
+    coords: "130, 127",
+  },
+  {
+    number: "3",
+    area: "Old Gotham South",
+    animal: "Polar Bear",
+    mission: "During a story quest",
+    coords: "385, 226",
+  },
+  {
+    number: "4",
+    area: "Old Gotham South",
+    animal: "Penguins",
+    mission: "Find Cobblenot",
+    coords: "262, 342",
+  },
+  {
+    number: "5",
+    area: "Old Gotham South",
+    animal: "Zebra",
+    mission: "Zebra Crossing",
+    coords: "329, 284",
+  },
+  {
+    number: "6",
+    area: "Old Gotham South",
+    animal: "Meerkats",
+    mission: "C’Meerkat",
+    coords: "259, 279",
+  },
+  {
+    number: "7",
+    area: "Old Gotham North",
+    animal: "Coyotes",
+    mission: "Not So Wily",
+    coords: "365, 366",
+  },
+  {
+    number: "8",
+    area: "Old Gotham North",
+    animal: "Koalas",
+    mission: "Under Koalafied",
+    coords: "419, 443",
+  },
+  {
+    number: "9",
+    area: "Old Gotham West",
+    animal: "Toucan",
+    mission: "Toucan Play At That Game",
+    coords: "291, 502",
+  },
+  {
+    number: "10",
+    area: "Old Gotham West",
+    animal: "Tiger",
+    mission: "Yes. Yes. The Tiger Is Out.",
+    coords: "274, 438",
+  },
+  {
+    number: "11",
+    area: "The Cauldron North",
+    animal: "Macaws",
+    mission: "Making A Macawry",
+    coords: "232, 551",
+  },
+  {
+    number: "12",
+    area: "Newtown",
+    animal: "Panther",
+    mission: "Cat-ch Up",
+    coords: "399, 641",
+  },
+  {
+    number: "13",
+    area: "Newtown",
+    animal: "Frogs",
+    mission: "Hip Hoppers",
+    coords: "314, 610",
+  },
+  {
+    number: "14",
+    area: "Newtown",
+    animal: "Parrots",
+    mission: "Polly Want a Tracker?",
+    coords: "294, 657",
+  },
+  {
+    number: "15",
+    area: "Gotham Village / Robinson Park",
+    animal: "Elephants",
+    mission: "Tree Trunks",
+    coords: "261, 701",
+  },
+  {
+    number: "16",
+    area: "Gotham Village / Robinson Park",
+    animal: "Leopards",
+    mission: "Spotty Reception",
+    coords: "314, 683",
+  },
+  {
+    number: "17",
+    area: "Gotham Village / Robinson Park",
+    animal: "Polar Bear",
+    mission: "Fur-ious",
+    coords: "348, 717",
+  },
+  {
+    number: "18",
+    area: "Gotham Village / Robinson Park",
+    animal: "Lion",
+    mission: "I Ain’t Lion!",
+    coords: "245, 771",
+  },
+  {
+    number: "19",
+    area: "Gotham Village / Robinson Park",
+    animal: "Wolves",
+    mission: "Pack It Up",
+    coords: "191, 679",
+  },
+  {
+    number: "20",
+    area: "East End / Amusement Mile",
+    animal: "Black Bear",
+    mission: "Un-Bear-able",
+    coords: "415, 825",
+  },
+  {
+    number: "21",
+    area: "East End / Amusement Mile",
+    animal: "Sloths",
+    mission: "Some Slow Bros",
+    coords: "470, 829",
+  },
+];
+
+export const prepColumns = [
+  { key: "thing", label: "Before You Start" },
+  { key: "why", label: "Why It Matters" },
+  { key: "tip", label: "What To Do" },
+];
+
+export const prepRows = [
+  {
+    thing: "Story progress",
+    why:
+      "Escaped Zoo Animal cleanup is tied to early tracker-related story progression. Some animals may not appear if you are too early.",
+    tip:
+      "Progress the main story until the tracker mechanic has been introduced, then return to Gotham cleanup.",
+  },
+  {
+    thing: "District access",
+    why:
+      "Some animals sit in later districts or areas that are easier to route after more of Gotham is available.",
+    tip:
+      "If a marker is missing, keep opening districts and come back later instead of assuming the animal is bugged.",
+  },
+  {
+    thing: "Detective Mode",
+    why:
+      "Small animals, high animals, and animals behind clutter are much easier to identify when highlighted.",
+    tip:
+      "Use Detective Mode around rooftops, poles, scaffolding, plazas, and industrial structures.",
+  },
+  {
+    thing: "Tracker placement",
+    why:
+      "Most tasks are not about defeating animals. You need to get close enough to attach the tracker.",
+    tip:
+      "Approach carefully, wait for movement patterns, and use stealth or vertical movement when an animal reacts to you.",
+  },
+];
+
+export const behaviorColumns = [
+  { key: "animalType", label: "Animal Type" },
+  { key: "behavior", label: "Behavior / Problem" },
+  { key: "howToHandle", label: "How To Handle It" },
+];
+
+export const behaviorRows = [
+  {
+    animalType: "Bears",
+    behavior:
+      "Bears can be aggressive and may interrupt you if you rush directly at them.",
+    howToHandle:
+      "Wait for a safe opening, avoid charging straight into them, then attach the tracker when they stop or turn.",
+  },
+  {
+  animalType: "Tiger / Lion / Panther",
+  behavior:
+    "Large cats punish a direct approach. The tiger-style tasks can force a chase or flee response if the animal spots you before the tracker is placed.",
+  howToHandle:
+    "Use rooftops, ledges, gliding, or a side angle to approach from behind. Do not sprint directly into the animal’s line of sight.",
+},
+  {
+    animalType: "Birds",
+    behavior:
+      "Toucan, macaws, and parrots may sit above ground level or move between raised spots.",
+    howToHandle:
+      "Search rooftops, ledges, signs, pipes, statues, and industrial structures instead of only checking the street.",
+  },
+  {
+    animalType: "Small animals",
+    behavior:
+      "Frogs, meerkats, and penguins are easy to lose in dark streets, plazas, or busy map clutter.",
+    howToHandle:
+      "Sweep the entire marker area with Detective Mode and do not stand only on the map icon.",
+  },
+  {
+    animalType: "Koalas and sloths",
+    behavior:
+      "These are vertical-search tasks. The animal may be above eye level, attached to buildings, poles, or high structures.",
+    howToHandle:
+      "Look upward, use Detective Mode, and check rooftops, ladders, rails, scaffolding, and building sides.",
+  },
+  {
+    animalType: "Wolves / coyotes / leopards",
+    behavior:
+      "These tasks can involve multiple animals spread around the marked zone.",
+    howToHandle:
+      "Circle the marker area and keep scanning until every animal in the group has been tracked.",
+  },
+];
+
+export const areaColumns = [
+  { key: "area", label: "Area" },
+  { key: "animals", label: "Animals" },
+  { key: "completionTip", label: "Completion Tip" },
+];
+
+export const areaRows = [
+  {
+    area: "Tricorner Island",
+    animals: "Snake / American Python marker, Brown Bear",
+    completionTip:
+      "Check raised dock platforms for the snake task. Do not search only at road level.",
+  },
+  {
+    area: "Old Gotham South",
+    animals: "Polar Bear, Penguins, Zebra, Meerkats",
+    completionTip:
+      "Small animals are the main issue here. Use Detective Mode and sweep plazas, streets, and lower paths.",
+  },
+  {
+    area: "Old Gotham North",
+    animals: "Coyotes, Koalas",
+    completionTip:
+      "Koalas are a vertical search. Look above the street and check high building edges.",
+  },
+  {
+    area: "Old Gotham West",
+    animals: "Toucan, Tiger",
+    completionTip:
+      "The tiger is easier to spot, but the toucan may require checking raised plaza structures.",
+  },
+  {
+    area: "The Cauldron North",
+    animals: "Macaws",
+    completionTip:
+      "Search industrial rooftops, pipes, platforms, and ledges around the marker.",
+  },
+  {
+    area: "Newtown",
+    animals: "Panther, Frogs, Parrots",
+    completionTip:
+      "The panther is straightforward; frogs and parrots require more careful scanning.",
+  },
+  {
+    area: "Gotham Village / Robinson Park",
+    animals: "Elephants, Leopards, Polar Bear, Lion, Wolves",
+    completionTip:
+      "This is the densest animal area. Use coordinates carefully because several icons sit close together.",
+  },
+  {
+    area: "East End / Amusement Mile",
+    animals: "Black Bear, Sloths",
+    completionTip:
+      "The black bear can be aggressive, while sloths are easy to miss on vertical structures.",
+  },
+];
+
+export const hardAnimalColumns = [
+  { key: "task", label: "Task" },
+  { key: "whyHard", label: "Why Players Miss It" },
+  { key: "solution", label: "Best Fix" },
+];
+
+export const hardAnimalRows = [
+  {
+    task: "Bye-Bye, Hiss American Python",
+    whyHard:
+      "The marker points to an industrial dock area, but the target is easy to miss if you only search the ground.",
+    solution:
+      "Check the raised dock platforms, cargo walkways, and numbered industrial structures.",
+  },
+  {
+    task: "Under Koalafied",
+    whyHard:
+      "Koalas can be above normal camera height and blend into building edges.",
+    solution:
+      "Use Detective Mode and scan high ledges, walkways, and building-side structures.",
+  },
+  {
+    task: "Making A Macawry",
+    whyHard:
+      "Macaws may sit on rooftop or industrial details instead of open ground.",
+    solution:
+      "Search rooftops, pipes, smokestacks, vents, and ledges around the marker.",
+  },
+  {
+    task: "Polly Want a Tracker?",
+    whyHard:
+      "Parrots are spread around Newtown and may require checking multiple height levels.",
+    solution:
+      "Start at the marker, then scan nearby rooftops, signs, ledges, and building sides.",
+  },
+  {
+    task: "Some Slow Bros",
+    whyHard:
+      "Sloths can blend into poles, scaffolding, ladders, and high building rails.",
+    solution:
+      "Look above eye level and use Detective Mode on every vertical structure near the marker.",
+  },
+  {
+    task: "Un-Bear-able",
+    whyHard:
+      "The black bear can interrupt you if you rush the tracker placement.",
+    solution:
+      "Avoid charging straight in. Wait for a safe moment, then close the gap and attach the tracker.",
+  },
+];
+
+export const stuckColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "fix", label: "Fix" },
+];
+
+export const stuckRows = [
+  {
+    problem: "The animal marker is not appearing",
+    fix:
+      "Progress the story further and return after the tracker mechanic and more districts have opened.",
+  },
+  {
+    problem: "You reached the coordinate but cannot see the animal",
+    fix:
+      "Use Detective Mode, then check above and below the marker instead of standing directly on it.",
+  },
+  {
+    problem: "You cannot place the tracker",
+    fix:
+      "Get closer, wait for the animal to stop or turn, and approach from a safer angle.",
+  },
+  {
+    problem: "The final small animal is missing",
+    fix:
+      "Circle the whole marked area slowly. Frogs, meerkats, penguins, and sloths are easy to overlook.",
+  },
+  {
+    problem: "The animal keeps reacting to you",
+    fix:
+      "Use stealth, height, or gliding to approach from behind or from the side.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+There are **21 Escaped Zoo Animal** locations in **LEGO Batman: Legacy of the Dark Knight**.
+
+Use the checklist below for every marker, but do not treat these as simple map pickups. Some animals are on rooftops, high platforms, scaffolding, industrial ledges, or vertical structures, and several can move or react when you get close.
+
+For the smoothest route, progress far enough to unlock tracker-related cleanup, use **Detective Mode** around each marker, and complete the animal tasks as part of your 100% Gotham cleanup. Track **9 Escaped Zoo Animals** to unlock the **Absolute Batman** costume, then finish all **21 Escaped Zoo Animals** if you are aiming for 100% Gotham cleanup.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/lego-batman/lego-batman-all-21-escaped-zoo-animal-locations-collage.webp"
+    alt="Map overview of all 21 Escaped Zoo Animal markers in LEGO Batman Legacy of the Dark Knight."
+    width={2056}
+    height={3606}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Map overview for all 21 Escaped Zoo Animal markers. Use the checklist below for exact areas, mission names, coordinates, and completion tips.
+  </figcaption>
+</figure>
+
+<h2 id="before-you-start">
+  Before You Start Escaped Zoo Animals
+</h2>
+
+Escaped Zoo Animals are not just normal map icons. The activity depends on tracker-style cleanup, district access, and your ability to spot animals through Gotham’s dark streets, rooftops, docks, and cluttered industrial areas.
+
+If an animal does not appear, do not immediately assume the marker is wrong. Continue the story, return after more of Gotham is open, and use Detective Mode around the marked area.
+
+<GuideTable
+  caption="What to know before starting Escaped Zoo Animals."
+  columns={prepColumns}
+  rows={prepRows}
+/>
+
+The most important tool is **Detective Mode**. It helps highlight animals through visual clutter, which is especially useful for koalas, sloths, parrots, macaws, frogs, and meerkats.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="all-escaped-zoo-animal-locations">
+  All Escaped Zoo Animal Locations
+</h2>
+
+Use this table as your main checklist. Match the mission name and coordinates on your map, travel to the marker, then search the whole nearby area. Many animals are not standing exactly on top of the map icon.
+
+<GuideTable
+  caption="All 21 Escaped Zoo Animal locations in LEGO Batman Legacy."
+  columns={escapedAnimalColumns}
+  rows={escapedAnimalRows}
+/>
+
+<h2 id="how-escaped-zoo-animal-tracking-works">
+  How To Tag Escaped Zoo Animals
+</h2>
+
+Most Escaped Zoo Animal objectives follow the same basic loop: reach the marker, find the animal, get close, and place the tracker. The hard part is not always the location. It is often the animal behavior.
+
+Some animals are passive and let you walk up to them. Others may move, hide above you, run around the marker area, or interrupt you if you approach directly.
+
+<GuideTable
+  caption="Escaped Zoo Animal behavior and tracker tips."
+  columns={behaviorColumns}
+  rows={behaviorRows}
+/>
+
+Use this rule while clearing them:
+
+**Map marker first → Detective Mode second → check height levels third → attach tracker only when the approach is safe.**
+
+<h2 id="best-route-for-all-escaped-zoo-animals">
+  Best Route For All Escaped Zoo Animals
+</h2>
+
+The cleanest route is to work from the upper and western parts of Gotham down toward Amusement Mile:
+
+1. **Tricorner Island**
+2. **Old Gotham South**
+3. **Old Gotham North**
+4. **Old Gotham West**
+5. **The Cauldron North**
+6. **Newtown**
+7. **Gotham Village / Robinson Park**
+8. **East End / Amusement Mile**
+
+This keeps the map sweep organized and prevents you from jumping between distant districts. Robinson Park has the densest cluster, so leave extra time for that section.
+
+<h2 id="escaped-zoo-animals-by-area">
+  Escaped Zoo Animals By Area
+</h2>
+
+The table below gives the fast version of what each area expects from you. Use it before reading the district notes if you only need a quick route check.
+
+<GuideTable
+  caption="Escaped Zoo Animal areas and completion tips."
+  columns={areaColumns}
+  rows={areaRows}
+/>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="tricorner-island">
+  Tricorner Island
+</h2>
+
+Tricorner Island has two Escaped Zoo Animal tasks: **Bye-Bye, Hiss American Python** and **Bear With Me**.
+
+The snake marker is the main one to watch. The mission name says **American Python**, but some players may describe the animal model as a cobra-style snake. Either way, treat this as the Tricorner Island snake task.
+
+Do not stay only on the road. The marker sits around the industrial dock side of the island, and the animal can be easy to miss if you never check the raised cargo platforms, numbered dock structures, or open walkways.
+
+**Bear With Me** is more straightforward. The brown bear is around the western cargo route, but approach carefully because bear tasks can interrupt you if you rush straight in.
+
+<h2 id="old-gotham-south">
+  Old Gotham South
+</h2>
+
+Old Gotham South has four entries: the story-related **Polar Bear**, **Find Cobblenot**, **Zebra Crossing**, and **C’Meerkat**.
+
+The story Polar Bear is different from the normal free-roam animals because it appears during a story route. If you are only doing open-world cleanup, do not confuse it with **Fur-ious**, which is the separate Polar Bear task near Robinson Park.
+
+For **Find Cobblenot** and **C’Meerkat**, the main issue is size. Penguins and meerkats are easy to miss in dark streets, plazas, or busy environmental clutter. Use Detective Mode and sweep the full marker area instead of walking to the coordinate and stopping.
+
+**Zebra Crossing** is simpler. Stay near the street-level crossing area around the marker and look for the zebra on the road route.
+
+<h2 id="old-gotham-north">
+  Old Gotham North
+</h2>
+
+Old Gotham North contains **Not So Wily** and **Under Koalafied**.
+
+**Not So Wily** is mostly a street and nearby-building search. If the coyotes are not visible immediately, circle the marker and check nearby sidewalks, raised access points, and alleys.
+
+**Under Koalafied** is the important task here. Koalas are easy to miss because they are often tied to elevated structures rather than the main road. Use Detective Mode, look upward, and check high walkways, building edges, ledges, and vertical surfaces around the coordinate.
+
+<h2 id="old-gotham-west">
+  Old Gotham West
+</h2>
+
+Old Gotham West has **Toucan Play At That Game** and **Yes. Yes. The Tiger Is Out.**
+
+The tiger is the easier animal to identify because it is large and usually handled around ground-level plaza space. The challenge is the approach: if it reacts to you, use height, gliding, or a side angle to close the distance safely.
+
+The toucan is easier to miss visually. Do not only search the street. Check raised plaza objects, statues, ledges, signs, and nearby structures around the marker.
+
+<h2 id="the-cauldron-north">
+  The Cauldron North
+</h2>
+
+The Cauldron North has one Escaped Zoo Animal task: **Making A Macawry**.
+
+This is a bird task, so treat the marker as a vertical search area. Macaws may sit around rooftops, pipes, industrial platforms, vents, smokestacks, or ledges instead of obvious ground positions.
+
+Use Detective Mode while looking upward. If you are at the coordinate and cannot see the final macaw, rotate the camera around nearby rooftop and factory structures before leaving the area.
+
+<h2 id="newtown">
+  Newtown
+</h2>
+
+Newtown has three animal tasks: **Cat-ch Up**, **Hip Hoppers**, and **Polly Want a Tracker?**
+
+**Cat-ch Up** is usually the simplest of the three because the panther is large and easier to identify around the ground-level marker. Approach from a controlled angle if it reacts.
+
+**Hip Hoppers** is more annoying because frogs are small. Use Detective Mode and scan low ground, edges, trackside details, and nearby structures around the marker.
+
+**Polly Want a Tracker?** is the Newtown task most likely to waste time. Parrots may not all sit at the same height. Search the marker, then check nearby rooftops, building sides, signs, ledges, and elevated routes for the remaining birds.
+
+<h2 id="gotham-village-robinson-park">
+  Gotham Village / Robinson Park
+</h2>
+
+Gotham Village and Robinson Park have the largest Escaped Zoo Animal cluster: **Tree Trunks**, **Spotty Reception**, **Fur-ious**, **I Ain’t Lion!**, and **Pack It Up**.
+
+Use the coordinates carefully here because the map can become crowded with nearby icons. This is the section where a table and coordinate check are most useful.
+
+**Tree Trunks** is easier to identify once you reach the right park area because the elephants are large. **I Ain’t Lion!** is similar: the lion is visible, but approach with care if it reacts.
+
+**Spotty Reception** and **Pack It Up** require a wider sweep. Leopards and wolves can be spread around paths, grass, stone edges, and open park sections. Keep Detective Mode active and circle the marker until every animal is tracked.
+
+**Fur-ious** is the free-roam Polar Bear task. Do not confuse it with the earlier story-related Polar Bear in Old Gotham South.
+
+<h2 id="east-end-amusement-mile">
+  East End / Amusement Mile
+</h2>
+
+East End / Amusement Mile has the final two tasks: **Un-Bear-able** and **Some Slow Bros**.
+
+**Un-Bear-able** is the black bear task. The bear can be aggressive, so avoid rushing straight into it. Wait for a safe angle, approach when it is not charging, and place the tracker quickly.
+
+**Some Slow Bros** is one of the easiest tasks to miss even though sloths are passive. The problem is vertical placement. Sloths can blend into poles, scaffolding, ladders, rails, rooftops, and building-side structures. If you cannot find the last one, stop looking at the road and start scanning upward with Detective Mode.
+
+<h2 id="hardest-escaped-zoo-animals-to-find">
+  Hardest Escaped Zoo Animals To Find
+</h2>
+
+The hardest Escaped Zoo Animals are not always the most dangerous. Most are hard because they are small, elevated, spread out, or visually hidden by Gotham’s environment.
+
+<GuideTable
+  caption="Hardest Escaped Zoo Animal tasks and how to solve them."
+  columns={hardAnimalColumns}
+  rows={hardAnimalRows}
+/>
+
+<h2 id="if-you-are-stuck">
+  If You Are Stuck
+</h2>
+
+Most problems come from one of three things: the activity is not unlocked yet, the animal is above or below the marker, or the tracker approach is unsafe.
+
+<GuideTable
+  caption="Common Escaped Zoo Animal problems and fixes."
+  columns={stuckColumns}
+  rows={stuckRows}
+/>
+
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="why-are-escaped-zoo-animals-not-spawning">
+  Why are my Escaped Zoo Animals not spawning?
+</h3>
+
+You may be too early in the story or missing the tracker-related cleanup unlock. Continue the main story, open more districts, then return to the marker later.
+
+<h3 id="do-you-need-detective-mode-for-escaped-zoo-animals">
+  Do you need Detective Mode for Escaped Zoo Animals?
+</h3>
+
+You do not need it for every animal, but Detective Mode is the best tool for the harder ones. Use it for koalas, sloths, macaws, parrots, frogs, meerkats, and any marker where the animal is not visible immediately.
+
+<h3 id="which-escaped-zoo-animals-can-attack-you">
+  Which Escaped Zoo Animals can attack you?
+</h3>
+
+Large animals such as bears and big cats are the ones to treat carefully. If the animal reacts, avoid a direct approach and wait for a safer moment to attach the tracker.
+
+<h3 id="why-cant-i-place-the-tracker">
+  Why can’t I place the tracker?
+</h3>
+
+You are usually not close enough, approaching from a bad angle, or trying while the animal is moving or reacting. Get closer, use stealth or height if needed, and attach the tracker when the animal gives you a safe opening.
+
+<h3 id="which-escaped-zoo-animal-is-easiest-to-miss">
+  Which Escaped Zoo Animal is easiest to miss?
+</h3>
+
+The easiest ones to miss are **Bye-Bye, Hiss American Python**, **Under Koalafied**, **Making A Macawry**, **Polly Want a Tracker?**, and **Some Slow Bros** because they involve high platforms, rooftops, ledges, birds, or vertical structures.
+
+<h3 id="is-the-story-polar-bear-the-same-as-fur-ious">
+  Is the story Polar Bear the same as Fur-ious?
+</h3>
+
+No. The Old Gotham South Polar Bear is tied to a story route, while **Fur-ious** is the separate free-roam Polar Bear task near Robinson Park.
+
+<h3 id="are-escaped-zoo-animals-missable">
+  Are Escaped Zoo Animals missable?
+</h3>
+
+No. You can return to Gotham cleanup later and finish the Escaped Zoo Animal tasks after more story progress.
+
+<h3 id="what-reward-do-you-get-for-escaped-zoo-animals">
+  What reward do you get for Escaped Zoo Animals?
+</h3>
+
+Escaped Zoo Animals contribute to Gotham cleanup and the animal objective reward path, including the **Absolute Batman** costume reward.
+
+<h3 id="do-coordinates-matter">
+  Do coordinates matter for Escaped Zoo Animals?
+</h3>
+
+Yes. Coordinates help confirm the correct marker, especially around Robinson Park where several activity icons can sit close together. Use the coordinate first, then search the full area around it.

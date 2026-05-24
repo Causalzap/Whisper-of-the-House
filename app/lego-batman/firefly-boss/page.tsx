@@ -40,7 +40,10 @@ const toc = [
 const relatedLinks = [
   { href: "/lego-batman", label: "LEGO Batman Guide" },
   { href: "/lego-batman/batgirl-unlock", label: "Batgirl Unlock Guide" },
+  { href: "/lego-batman/escaped-zoo-animals", label: "Escaped Zoo Animals Guide" },
+
   { href: "/lego-batman/poison-ivy-boss", label: "Poison Ivy Boss Guide" },
+  
   { href: "/lego-batman/bane-boss", label: "Bane Boss Guide" },
   { href: "/lego-batman/red-bricks", label: "Red Bricks Guide" },
   { href: "/lego-batman/carmine-falcone", label: "Carmine Falcone Walkthrough" },
