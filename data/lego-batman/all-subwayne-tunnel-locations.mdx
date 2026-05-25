@@ -1,0 +1,887 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const subwayneColumns = [
+  { key: "number", label: "#" },
+  { key: "station", label: "SubWayne Station" },
+  { key: "type", label: "Type" },
+  { key: "requirement", label: "Requirement" },
+  { key: "solution", label: "Solution Summary" },
+];
+
+export const subwayneRows = [
+  {
+    number: "1",
+    station: "Tricorner",
+    type: "Story / tutorial station",
+    requirement: "Batman and Jim Gordon",
+    solution:
+      "Hit the Batarang targets, use Gordon on the wall machine, then return to the entrance for the final target.",
+  },
+  {
+    number: "2",
+    station: "Old Gotham South",
+    type: "Open-world puzzle",
+    requirement: "Catwoman",
+    solution:
+      "Follow the red wire, use Catwoman on the yellow panel, then place the two batteries into the power machines.",
+  },
+  {
+    number: "3",
+    station: "Old Gotham North",
+    type: "Open-world puzzle",
+    requirement: "Batman / Jim Gordon route",
+    solution:
+      "Clear the crowd by pulling the yellow plug and turning the roof valve so water hits the boombox area.",
+  },
+  {
+    number: "4",
+    station: "Old Gotham West",
+    type: "Open-world puzzle",
+    requirement: "Catwoman and Batman",
+    solution:
+      "Use Catwoman’s whip on the yellow trigger, then hit the two revealed Batarang targets above the crowd.",
+  },
+  {
+    number: "5",
+    station: "The Cauldron South",
+    type: "Open-world puzzle",
+    requirement: "Vehicle Grapple / Batmobile winch",
+    solution:
+      "Pull the container with a vehicle, use the revealed lever, then park on the pressure plate.",
+  },
+  {
+    number: "6",
+    station: "The Cauldron North / ACE Chemical",
+    type: "Open-world puzzle",
+    requirement: "Jim Gordon",
+    solution:
+      "Use Gordon’s Foam Sprayer on the fire pipe, press the connected buttons, and power the billboard to move the van.",
+  },
+  {
+    number: "7",
+    station: "Newtown",
+    type: "Open-world puzzle",
+    requirement: "Robin and Batman X-Ray Vision",
+    solution:
+      "Use Robin’s staff on the roof, then place the two batteries into the 3rd and 4th power slots.",
+  },
+  {
+  number: "8",
+  station: "Gotham Village / Robinson Park",
+  type: "Open-world puzzle",
+  requirement: "Batmobile winch, Jim Gordon, and Batman",
+  solution:
+    "Build and pull the winch object, put out fires with Gordon, hit the roof target, then talk to the worker.",
+},
+  {
+    number: "9",
+    station: "East End / Amusement Mile",
+    type: "Open-world puzzle",
+    requirement: "Vent access and Batman traversal",
+    solution:
+      "Break the dumpster, crawl through the vent, carry the battery to the roof, then install and pull the lever.",
+  },
+];
+
+export const countColumns = [
+  { key: "count", label: "Count" },
+  { key: "means", label: "What It Means" },
+  { key: "whyItMatters", label: "Why Players Get Confused" },
+];
+
+export const countRows = [
+  {
+    count: "9 SubWayne stations",
+    means:
+      "The full fast-travel network has 9 stations, including the Tricorner story/tutorial station.",
+    whyItMatters:
+      "If you are checking your map or completion route, count all 9 stations.",
+  },
+  {
+    count: "8 open-world SubWayne puzzles",
+    means:
+      "Most location guides count only the 8 free-roam puzzle stations after the story introduction.",
+    whyItMatters:
+      "Tricorner can be counted as a station but excluded from the open-world puzzle total.",
+  },
+];
+
+export const detectColumns = [
+  { key: "tool", label: "Tool" },
+  { key: "useFor", label: "Use It For" },
+  { key: "tip", label: "Tip" },
+];
+
+export const detectRows = [
+  {
+    tool: "Batman Detect / X-Ray Vision",
+    useFor: "Finding wires, battery machines, hidden links, and puzzle paths",
+    tip:
+      "Use it when a station marker is visible but you cannot tell what object the puzzle wants you to interact with.",
+  },
+  {
+    tool: "Yellow highlights",
+    useFor: "Identifying interactable objects",
+    tip:
+      "If a plug, panel, battery slot, target, or machine glows yellow, it is probably part of the SubWayne puzzle.",
+  },
+  {
+    tool: "Wire tracing",
+    useFor: "Following power routes",
+    tip:
+      "Many stations use cables or wires leading from the shutter to the actual puzzle object.",
+  },
+  {
+    tool: "Traversal scan",
+    useFor: "Checking rooftops and side alleys",
+    tip:
+      "If the puzzle looks empty at street level, look up. Several SubWayne steps are on roofs or behind nearby objects.",
+  },
+];
+
+export const routeColumns = [
+  { key: "step", label: "Route Step" },
+  { key: "station", label: "Station" },
+  { key: "whyHere", label: "Why Do It Here" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    station: "Tricorner",
+    whyHere:
+      "This is the story/tutorial station, so unlock it naturally when the game introduces the SubWayne network.",
+  },
+  {
+    step: "2",
+    station: "East End / Amusement Mile",
+    whyHere:
+      "It gives you a useful northern/eastern travel point and is one of the cleaner battery-and-lever puzzles.",
+  },
+  {
+    step: "3",
+    station: "Newtown",
+    whyHere:
+      "Bring Robin and clear it early so Newtown cleanup becomes easier later.",
+  },
+  {
+  step: "4",
+  station: "Gotham Village / Robinson Park",
+  whyHere:
+    "Bring the Batmobile, Jim Gordon, and Batman here. This station uses a winch pull, fire-clearing steps, a roof target, and a worker interaction.",
+},
+  {
+    step: "5",
+    station: "Old Gotham North",
+    whyHere:
+      "Open the northern Old Gotham node before you start bouncing across the district.",
+  },
+  {
+    step: "6",
+    station: "Old Gotham South",
+    whyHere:
+      "Bring Catwoman and complete the battery/panel setup while routing Old Gotham.",
+  },
+  {
+    step: "7",
+    station: "Old Gotham West",
+    whyHere:
+      "This also needs Catwoman, so it pairs well with Old Gotham South.",
+  },
+  {
+    step: "8",
+    station: "The Cauldron South",
+    whyHere:
+      "Use Vehicle Grapple here before moving toward the ACE Chemical side of The Cauldron.",
+  },
+  {
+    step: "9",
+    station: "The Cauldron North / ACE Chemical",
+    whyHere:
+      "Finish with Gordon’s fire-and-billboard puzzle to complete the network.",
+  },
+];
+
+export const stationStepColumns = [
+  { key: "step", label: "Step" },
+  { key: "action", label: "What To Do" },
+  { key: "character", label: "Character / Tool" },
+];
+
+export const tricornerStepRows = [
+  {
+    step: "1",
+    action: "At the shuttered SubWayne entrance, hit the target above the door.",
+    character: "Batman / Batarang",
+  },
+  {
+    step: "2",
+    action: "Grapple up to the roof and hit the second target.",
+    character: "Batman / Grapple + Batarang",
+  },
+  {
+    step: "3",
+    action:
+      "Move to the right side of the station and stand on the platforms above the water.",
+    character: "Jim Gordon route",
+  },
+  {
+    step: "4",
+    action:
+      "Spray the moving wall machine or gears, then hit the nearby target after it becomes usable.",
+    character: "Jim Gordon / Foam Sprayer, then Batman",
+  },
+  {
+    step: "5",
+    action: "Return to the SubWayne entrance and hit the final target.",
+    character: "Batman / Batarang",
+  },
+];
+
+export const oldGothamSouthStepRows = [
+  {
+    step: "1",
+    action:
+      "Stand at the shutter and follow the red wire on the left down the stairs.",
+    character: "Batman / Detect if needed",
+  },
+  {
+    step: "2",
+    action:
+      "Use Catwoman’s whip on the yellow panel in the work area to open the black shutters.",
+    character: "Catwoman / Whip",
+  },
+  {
+    step: "3",
+    action:
+      "Collect the two battery packs around the station area.",
+    character: "Any character",
+  },
+  {
+    step: "4",
+    action:
+      "Insert the batteries into the nearby battery machines to power the lock.",
+    character: "Any character",
+  },
+  {
+    step: "5",
+    action:
+      "Return to the entrance and use the station button once the shutter is powered.",
+    character: "Any character",
+  },
+];
+
+export const oldGothamNorthStepRows = [
+  {
+    step: "1",
+    action:
+      "Go to the station entrance and look for the crowd and boombox blocking the door.",
+    character: "Batman",
+  },
+  {
+    step: "2",
+    action:
+      "Use the Batclaw on the yellow plug above the shutters and pull it out.",
+    character: "Batman / Batclaw",
+  },
+  {
+    step: "3",
+    action:
+      "Grapple onto the roof above the door and find the water valve.",
+    character: "Batman / Grapple",
+  },
+  {
+    step: "4",
+    action:
+      "Turn the valve so the water pours down and clears the people from the entrance.",
+    character: "Batman",
+  },
+  {
+    step: "5",
+    action:
+      "Go back to the door and activate the station.",
+    character: "Any character",
+  },
+];
+
+export const oldGothamWestStepRows = [
+  {
+    step: "1",
+    action:
+      "At the station entrance, find the yellow trigger on the wall to the left of the shutters.",
+    character: "Catwoman",
+  },
+  {
+    step: "2",
+    action:
+      "Use Catwoman’s whip on the yellow trigger to reveal two targets above the crowd.",
+    character: "Catwoman / Whip",
+  },
+  {
+    step: "3",
+    action:
+      "Quickly switch to Batman and hit both targets with Batarangs.",
+    character: "Batman / Batarang",
+  },
+  {
+    step: "4",
+    action:
+      "Wait for the water to drop and scare off the people blocking the entrance.",
+    character: "Batman",
+  },
+  {
+    step: "5",
+    action:
+      "Press the station button after the crowd leaves.",
+    character: "Any character",
+  },
+];
+
+export const cauldronSouthStepRows = [
+  {
+    step: "1",
+    action:
+      "Bring the Batmobile or another vehicle with grapple/winch access to the blocked station.",
+    character: "Vehicle Grapple",
+  },
+  {
+    step: "2",
+    action:
+      "Drive to the right side of the blocked door and attach the winch to the blue container or plug object.",
+    character: "Batmobile / Winch",
+  },
+  {
+    step: "3",
+    action:
+      "Pull the container away or topple it to reveal the next interaction.",
+    character: "Vehicle Grapple",
+  },
+  {
+    step: "4",
+    action:
+      "Use the revealed lever to expose or activate the pressure plate.",
+    character: "Any character",
+  },
+  {
+    step: "5",
+    action:
+      "Park the vehicle on the pressure plate until the station unlocks.",
+    character: "Any vehicle",
+  },
+];
+
+export const cauldronNorthStepRows = [
+  {
+    step: "1",
+    action:
+      "Go behind the building near the blocked ACE Chemical SubWayne station.",
+    character: "Jim Gordon",
+  },
+  {
+    step: "2",
+    action:
+      "Use Gordon’s Foam Sprayer on the fire pipe so you can safely reach the button.",
+    character: "Jim Gordon / Foam Sprayer",
+  },
+  {
+    step: "3",
+    action:
+      "Press the button near the pipe to send power through the wires.",
+    character: "Any character",
+  },
+  {
+    step: "4",
+    action:
+      "Follow the wires up the building, open the locked case, and press the button inside.",
+    character: "Batman / melee or basic attack",
+  },
+  {
+    step: "5",
+    action:
+      "Keep following the power route until the billboard lights up and the van moves away.",
+    character: "Batman / Detect if needed",
+  },
+  {
+    step: "6",
+    action:
+      "Return to the station entrance and activate the SubWayne.",
+    character: "Any character",
+  },
+];
+
+export const newtownStepRows = [
+  {
+    step: "1",
+    action:
+      "From the SubWayne doors, look up and grapple to the roof.",
+    character: "Batman / Grapple",
+  },
+  {
+    step: "2",
+    action:
+      "Switch to Robin and use his staff on the yellow circle, pulling it left to open the shutters.",
+    character: "Robin / Staff",
+  },
+  {
+    step: "3",
+    action:
+      "Switch back to Batman and go behind the building to grab the first battery.",
+    character: "Batman",
+  },
+  {
+    step: "4",
+    action:
+      "Place the first battery into the 3rd power station.",
+    character: "Batman",
+  },
+  {
+    step: "5",
+    action:
+      "Find the second battery to the right of the station and place it into the 4th empty slot.",
+    character: "Batman",
+  },
+  {
+    step: "6",
+    action:
+      "Use X-Ray Vision near the red toolbox if you need to trace the green wires and confirm the connection.",
+    character: "Batman / X-Ray Vision",
+  },
+  {
+    step: "7",
+    action:
+      "Return to the SubWayne door and press the button.",
+    character: "Any character",
+  },
+];
+
+export const gothamVillageStepRows = [
+  {
+    step: "1",
+    action:
+      "Go to the right side of the truck blocking the station and smash the red and white boxes.",
+    character: "Any character",
+  },
+  {
+    step: "2",
+    action:
+      "Build the pieces into a winch object, then use the Batmobile to pull it.",
+    character: "Batmobile / Winch",
+  },
+  {
+    step: "3",
+    action:
+      "Press the hidden button that becomes reachable after the winch pull.",
+    character: "Any character",
+  },
+  {
+    step: "4",
+    action:
+      "Find the button covered in flames on the right side of the building and put out the fire.",
+    character: "Jim Gordon / Foam Sprayer",
+  },
+  {
+    step: "5",
+    action:
+      "Grapple to the roof, put out the second fire, then hit the target on the wall.",
+    character: "Jim Gordon, then Batman / Batarang",
+  },
+  {
+    step: "6",
+    action:
+      "Go left behind the billboard and press the final button.",
+    character: "Any character",
+  },
+  {
+    step: "7",
+    action:
+      "Talk to the construction worker so the truck moves, then press the station button.",
+    character: "Any character",
+  },
+];
+
+export const eastEndStepRows = [
+  {
+    step: "1",
+    action:
+      "Start at the front of the SubWayne station and walk left until you find the dumpster.",
+    character: "Any character",
+  },
+  {
+    step: "2",
+    action:
+      "Smash the dumpster to reveal a vent, then crawl through to the other side.",
+    character: "Vent access",
+  },
+  {
+    step: "3",
+    action:
+      "Pick up the battery. This opens the shutters nearby.",
+    character: "Any character",
+  },
+  {
+    step: "4",
+    action:
+      "Carry the battery to the roof on the left side of the station and insert it into the power machine.",
+    character: "Batman / Grapple",
+  },
+  {
+    step: "5",
+    action:
+      "Return to the battery area, break the box, and pick up the lever.",
+    character: "Any character",
+  },
+  {
+    step: "6",
+    action:
+      "Take the lever to the front of the SubWayne station, place it in the slot, and pull it.",
+    character: "Any character",
+  },
+];
+
+export const problemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "fix", label: "Fix" },
+];
+
+export const problemRows = [
+  {
+    problem: "A guide says 8 SubWayne puzzles, but my route has 9 locations",
+    fix:
+      "Count 9 total stations. Count 8 open-world puzzles if you exclude the Tricorner story/tutorial station.",
+  },
+  {
+    problem: "I am at the station but cannot tell what to interact with",
+    fix:
+      "Use Batman’s Detect / X-Ray Vision and follow wires from the shutter. The real puzzle object is often on a roof, behind a nearby box, or down a side path.",
+  },
+  {
+    problem: "The station marker is visible, but the puzzle will not progress",
+    fix:
+      "Check the required character or tool. Some stations need Catwoman, Jim Gordon, Robin, a vehicle winch, or X-Ray Vision.",
+  },
+  {
+    problem: "Old Gotham South is not opening",
+    fix:
+      "Follow the red wire, use Catwoman on the yellow panel, then power the machines with both batteries.",
+  },
+  {
+    problem: "Newtown batteries are not working",
+    fix:
+      "Use the 3rd and 4th power slots. X-Ray Vision near the red toolbox helps trace the correct connection.",
+  },
+  {
+    problem: "The Cauldron South station is still blocked",
+    fix:
+      "Use Vehicle Grapple on the container, pull the revealed lever, then park the vehicle on the pressure plate.",
+  },
+  {
+    problem: "Gotham Village still has a truck in front of the door",
+    fix:
+      "You probably missed one of the buttons. Clear the winch button, the fire button, the roof target, and the billboard-side button, then speak to the worker.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+There are **9 SubWayne stations** in **LEGO Batman: Legacy of the Dark Knight**, but only **8 open-world SubWayne puzzles** if you exclude the Tricorner story/tutorial station.
+
+The full station list is **Tricorner**, **Old Gotham South**, **Old Gotham North**, **Old Gotham West**, **The Cauldron South**, **The Cauldron North / ACE Chemical**, **Newtown**, **Gotham Village / Robinson Park**, and **East End / Amusement Mile**.
+
+The easiest way to solve them is to use **Batman’s Detect / X-Ray Vision** near each shutter, follow the wires, and bring the right character: **Catwoman** for Old Gotham South and West, **Jim Gordon** for Cauldron North and fire/foam steps, **Robin** for Newtown, and **Vehicle Grapple** for The Cauldron South.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/lego-batman/lego-batman-all-subwayne-tunnel-locations.webp"
+    alt="All 9 SubWayne tunnel map locations in LEGO Batman Legacy of the Dark Knight."
+    width={1024}
+    height={1536}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    All 9 SubWayne station locations. Use the collage for map position, then use the station sections below for the actual puzzle solution.
+  </figcaption>
+</figure>
+
+<h2 id="all-subwayne-tunnel-locations">
+  All SubWayne Tunnel Locations And Solutions
+</h2>
+
+The **SubWayne tunnels** are Gotham’s underground fast-travel network. Opening each station gives you another shortcut across the city, which makes collectible cleanup, crime alerts, district objectives, and suit hunting much faster.
+
+Use the table below as the quick checklist. The detailed sections after it explain what to do once you actually reach each station.
+
+<GuideTable
+  caption="All SubWayne tunnel locations and puzzle requirements."
+  columns={subwayneColumns}
+  rows={subwayneRows}
+/>
+
+If you are clearing Gotham district by district, keep the <Link href="/lego-batman">LEGO Batman Legacy guide hub</Link> open so you can jump from SubWayne tunnels into Red Bricks, collectibles, character unlocks, and district cleanup without losing your route.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="nine-stations-vs-eight-puzzles">
+  9 SubWayne Stations vs 8 SubWayne Puzzles
+</h2>
+
+This is the part that causes most of the confusion.
+
+Some guides say there are **8 SubWayne puzzles**. That is not wrong if they are only counting the open-world puzzle stations. But the full fast-travel network has **9 SubWayne stations** because **Tricorner** is introduced as a story/tutorial station.
+
+<GuideTable
+  caption="Why SubWayne counts can appear as 8 or 9."
+  columns={countColumns}
+  rows={countRows}
+/>
+
+For a full completion route, track all **9 stations**. For open-world puzzle solving, expect **8 non-story puzzle stations** after Tricorner.
+
+<h2 id="use-detect-xray-vision">
+  Use Detect / X-Ray Vision Before You Solve Each Station
+</h2>
+
+If you arrive at a SubWayne marker and the solution is not obvious, do not start randomly breaking everything. Use **Batman’s Detect / X-Ray Vision** first.
+
+Most SubWayne puzzles are built around wires, hidden battery slots, yellow interactables, rooftop objects, or small side paths. Detecting the area usually tells you which object the shutter is connected to.
+
+<GuideTable
+  caption="How Detect and X-Ray Vision help with SubWayne puzzles."
+  columns={detectColumns}
+  rows={detectRows}
+/>
+
+This is especially important for **Newtown**, where the battery machines are easier to confirm with X-Ray Vision, and for any station where a wire leads away from the entrance.
+
+<h2 id="best-subwayne-unlock-route">
+  Best Route To Unlock All SubWayne Tunnels
+</h2>
+
+You can unlock the SubWayne tunnels in any order once the relevant areas, characters, and tools are available. The route below follows a clean progression from the story station into the free-roam stations.
+
+<GuideTable
+  caption="Recommended SubWayne unlock route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+
+<h2 id="tricorner-subwayne">
+  1. Tricorner SubWayne Solution
+</h2>
+
+The **Tricorner SubWayne** is the story/tutorial station. It teaches the basic logic used by several later stations: follow wires, hit targets, use a character tool, then return to the shutter.
+
+<GuideTable
+  caption="Tricorner SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={tricornerStepRows}
+/>
+
+Once the final target is hit, the station is added to the SubWayne network.
+
+<h2 id="old-gotham-south-subwayne">
+  2. Old Gotham South SubWayne Solution
+</h2>
+
+The **Old Gotham South SubWayne** requires **Catwoman**. The key clue is the **red wire** leading away from the shutter.
+
+<GuideTable
+  caption="Old Gotham South SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={oldGothamSouthStepRows}
+/>
+
+If the station still does not open, check whether you inserted both batteries. This is the easiest part of the puzzle to half-finish without realizing it.
+
+<h2 id="old-gotham-north-subwayne">
+  3. Old Gotham North SubWayne Solution
+</h2>
+
+The **Old Gotham North SubWayne** is blocked by a crowd near a boombox. Your goal is not to fight them. You need to scare them away by using the plug and water valve setup.
+
+<GuideTable
+  caption="Old Gotham North SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={oldGothamNorthStepRows}
+/>
+
+If you only look at street level, the puzzle feels like it has no solution. Grapple up and check the roof above the entrance.
+
+<h2 id="old-gotham-west-subwayne">
+  4. Old Gotham West SubWayne Solution
+</h2>
+
+The **Old Gotham West SubWayne** requires both **Catwoman** and **Batman**. Catwoman starts the puzzle, but Batman finishes it with Batarangs.
+
+<GuideTable
+  caption="Old Gotham West SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={oldGothamWestStepRows}
+/>
+
+Do not come here with Batman alone. You need Catwoman’s whip to reveal the targets above the crowd.
+
+<h2 id="the-cauldron-south-subwayne">
+  5. The Cauldron South SubWayne Solution
+</h2>
+
+The **Cauldron South SubWayne** is the vehicle puzzle. Bring the **Batmobile** or another vehicle that can use the grapple / winch interaction.
+
+<GuideTable
+  caption="The Cauldron South SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={cauldronSouthStepRows}
+/>
+
+If the container is not moving, line up the vehicle and look for the grapple prompt instead of trying to push it by hand.
+
+<h2 id="the-cauldron-north-subwayne">
+  6. The Cauldron North / ACE Chemical SubWayne Solution
+</h2>
+
+The **Cauldron North / ACE Chemical SubWayne** is blocked by a van. To move it, you need to restore power to the nearby billboard.
+
+<GuideTable
+  caption="The Cauldron North / ACE Chemical SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={cauldronNorthStepRows}
+/>
+
+The important tool here is **Jim Gordon’s Foam Sprayer**. If the fire pipe is still active, you have not started the real power route yet.
+
+<h2 id="newtown-subwayne">
+  7. Newtown SubWayne Solution
+</h2>
+
+The **Newtown SubWayne** requires **Robin** and benefits heavily from **Batman’s X-Ray Vision**.
+
+The confusing part is the battery placement. The batteries need to go into the correct power stations, not just any empty machine.
+
+<GuideTable
+  caption="Newtown SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={newtownStepRows}
+/>
+
+Use the **3rd** and **4th** power slots. If you are unsure, scan near the red toolbox and follow the green wires.
+
+<h2 id="gotham-village-robinson-park-subwayne">
+  8. Gotham Village / Robinson Park SubWayne Solution
+</h2>
+
+The **Gotham Village / Robinson Park SubWayne** is one of the longer station puzzles. A truck blocks the entrance, and you need to clear several buttons before the worker moves it.
+
+<GuideTable
+  caption="Gotham Village / Robinson Park SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={gothamVillageStepRows}
+/>
+
+If the worker does not move the truck, you missed one of the buttons or the roof target.
+
+<h2 id="east-end-amusement-mile-subwayne">
+  9. East End / Amusement Mile SubWayne Solution
+</h2>
+
+The **East End / Amusement Mile SubWayne** is a battery-and-lever puzzle. The part players usually miss is the vent hidden behind the dumpster.
+
+<GuideTable
+  caption="East End / Amusement Mile SubWayne puzzle solution."
+  columns={stationStepColumns}
+  rows={eastEndStepRows}
+/>
+
+Once this station is open, you have a useful fast-travel anchor near Amusement Mile. If you are also farming money in this part of the map, use the <Link href="/lego-batman/how-to-farm-studs-fast">how to farm studs fast guide</Link> after your SubWayne network is active.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="common-subwayne-problems">
+  Common SubWayne Problems
+</h2>
+
+Most SubWayne issues come from one of four things: counting 8 puzzles vs 9 stations, missing the required character, ignoring Detect / X-Ray Vision, or leaving before the final station button is pressed.
+
+<GuideTable
+  caption="Common SubWayne tunnel problems and fixes."
+  columns={problemColumns}
+  rows={problemRows}
+/>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="how-many-subwayne-tunnels-are-there">
+  How many SubWayne tunnels are there in LEGO Batman: Legacy of the Dark Knight?
+</h3>
+
+There are **9 SubWayne stations** in total, including the **Tricorner** story/tutorial station.
+
+Some guides count **8 SubWayne puzzles** because they exclude Tricorner and only count the free-roam puzzle stations.
+
+<h3 id="what-do-subwayne-tunnels-do">
+  What do SubWayne tunnels do?
+</h3>
+
+SubWayne tunnels expand Gotham’s fast-travel network. Every station you unlock gives you another travel point, which makes district cleanup much faster.
+
+<h3 id="why-do-some-guides-say-there-are-only-8-subwayne-puzzles">
+  Why do some guides say there are only 8 SubWayne puzzles?
+</h3>
+
+They are usually counting only the open-world puzzle stations. The full network has 9 stations, but Tricorner is introduced through the story, so some puzzle guides leave it out of the count.
+
+<h3 id="which-subwayne-tunnel-is-story-related">
+  Which SubWayne tunnel is story-related?
+</h3>
+
+The **Tricorner SubWayne** is the story-related station. It introduces the SubWayne system and uses a tutorial-style shutter puzzle.
+
+<h3 id="which-subwayne-tunnels-require-catwoman">
+  Which SubWayne tunnels require Catwoman?
+</h3>
+
+**Old Gotham South** and **Old Gotham West** require Catwoman.
+
+Old Gotham South uses Catwoman’s whip on a yellow panel, while Old Gotham West uses her whip to reveal Batarang targets above the crowd.
+
+<h3 id="which-subwayne-tunnels-require-jim-gordon">
+  Which SubWayne tunnels require Jim Gordon?
+</h3>
+
+**The Cauldron North / ACE Chemical** requires Jim Gordon’s Foam Sprayer. Gotham Village also uses Gordon for fire-covered buttons and roof fire.
+
+<h3 id="which-subwayne-tunnel-requires-robin">
+  Which SubWayne tunnel requires Robin?
+</h3>
+
+The **Newtown SubWayne** requires Robin. Use Robin’s staff on the yellow circle on the roof to open the shutters before solving the battery puzzle.
+
+<h3 id="which-subwayne-tunnel-requires-vehicle-grapple">
+  Which SubWayne tunnel requires Vehicle Grapple?
+</h3>
+
+The **Cauldron South SubWayne** requires Vehicle Grapple or Batmobile winch access.
+
+<h3 id="should-i-use-detect-vision-for-subwayne-puzzles">
+  Should I use Detect / X-Ray Vision for SubWayne puzzles?
+</h3>
+
+Yes. Detect / X-Ray Vision is one of the best tools for SubWayne puzzles because it helps you spot wires, battery machines, hidden power routes, and interactable objects.
+
+<h3 id="can-you-unlock-subwayne-tunnels-before-finishing-the-story">
+  Can you unlock SubWayne tunnels before finishing the story?
+</h3>
+
+You can unlock some SubWayne stations as soon as the area and required character are available, but others should be saved until you have Catwoman, Robin, Jim Gordon, and a vehicle with grapple access.
+
+<h3 id="are-subwayne-tunnels-missable">
+  Are SubWayne tunnels missable?
+</h3>
+
+No. If you cannot unlock one yet, come back later with the required character, tool, or vehicle.

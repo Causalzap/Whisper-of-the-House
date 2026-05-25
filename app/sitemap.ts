@@ -98,6 +98,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/lego-batman/mr-freeze-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/lego-batman/new-beginnings-docks-collectibles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/lego-batman/radio-towers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/lego-batman/absolute-batman-suit`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/lego-batman/all-subwayne-tunnel-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/lego-batman/how-to-farm-studs-fast`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
     { url: `${base}/dwarf-eats-mountain/build-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/dwarf-eats-mountain/prestige-ascension-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

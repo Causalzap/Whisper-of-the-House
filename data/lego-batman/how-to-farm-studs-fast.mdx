@@ -1,0 +1,576 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const farmMethodColumns = [
+  { key: "method", label: "Method" },
+  { key: "bestFor", label: "Best For" },
+  { key: "requirement", label: "Requirement" },
+  { key: "expectedReturn", label: "Expected Return" },
+  { key: "useWhen", label: "Use It When" },
+];
+
+export const farmMethodRows = [
+  {
+    method: "Stud Cache loop",
+    bestFor: "Fast repeatable studs",
+    requirement: "Survey reward code and Batcave access",
+    expectedReturn:
+      "Around 30,000 studs per open with full stud upgrades / x4 setup. Lower before upgrades.",
+    useWhen:
+      "You want the fastest simple loop and do not mind leaving and returning to the Batcave.",
+  },
+  {
+    method: "Jim Gordon Rebound Launcher",
+    bestFor: "Active farming",
+    requirement: "Gordon, Rebound Launcher, and the split-bolt upgrade",
+    expectedReturn:
+      "Variable, but excellent in rooms packed with breakable LEGO objects.",
+    useWhen:
+      "You are already exploring Gotham or replaying areas and want to clear rooms quickly.",
+  },
+  {
+    method: "Police Radio crime events",
+    bestFor: "Open-world farming",
+    requirement: "Gotham free roam and police radio crime alerts",
+    expectedReturn:
+      "Strong burst rewards from crime events, especially while doing normal cleanup.",
+    useWhen:
+      "You see or hear a red police alert while moving through Gotham.",
+  },
+  {
+    method: "Party Man replay",
+    bestFor: "Post-story manual farming",
+    requirement: "Story completion, mission replay, and Catwoman interactions",
+    expectedReturn:
+      "High but route-dependent. Purple studs and keeping the x4 combo matter most.",
+    useWhen:
+      "You have replay unlocked and want a dense mission route with lots of valuable pickups.",
+  },
+  {
+    method: "Amusement park roller coaster",
+    bestFor: "Late-game / semi-AFK farming",
+    requirement: "Story completion and access to the amusement park area",
+    expectedReturn:
+      "Can climb all the way to the 9,999,999 stud cap. One loop is roughly 25 seconds.",
+    useWhen:
+      "You want to build toward the stud cap without constantly fighting or clearing rooms.",
+  },
+];
+
+export const studValueColumns = [
+  { key: "color", label: "Stud Color" },
+  { key: "baseValue", label: "Base Value" },
+  { key: "whatToKnow", label: "What To Know" },
+];
+
+export const studValueRows = [
+  {
+    color: "Bronze",
+    baseValue: "1",
+    whatToKnow:
+      "The lowest-value stud. These are common from basic breakable objects.",
+  },
+  {
+    color: "Silver",
+    baseValue: "10",
+    whatToKnow:
+      "Still low value, but worth picking up when your stud magnet is upgraded.",
+  },
+  {
+    color: "Gold",
+    baseValue: "100",
+    whatToKnow:
+      "Common in breakable-object routes and good for building your combo.",
+  },
+  {
+    color: "Blue",
+    baseValue: "1,000",
+    whatToKnow:
+      "A high-value pickup. Do not run past blue studs while your combo is active.",
+  },
+  {
+    color: "Purple",
+    baseValue: "10,000",
+    whatToKnow:
+      "The most important pickup. At x4, one purple stud is worth 40,000 studs.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "upgradeType", label: "Upgrade Type" },
+  { key: "WhyItMatters", label: "Why It Matters" },
+];
+
+export const upgradeRows = [
+  {
+    priority: "1",
+    upgradeType: "Stud Magnet / collect studs from farther away",
+    WhyItMatters:
+      "This prevents you from missing blue and purple studs while moving quickly through rooms.",
+  },
+  {
+    priority: "2",
+    upgradeType: "Increase maximum stud combo multiplier",
+    WhyItMatters:
+      "This is what lets your farming route scale toward the x4 payout.",
+  },
+  {
+    priority: "3",
+    upgradeType: "Stud combo meter depletes slower",
+    WhyItMatters:
+      "This gives you more time to move between objects, crates, rooms, and high-value pickups.",
+  },
+  {
+    priority: "4",
+    upgradeType: "Stud combo meter fills faster",
+    WhyItMatters:
+      "This helps active routes reach x4 sooner, especially Gordon room-clearing routes.",
+  },
+  {
+    priority: "5",
+    upgradeType: "Jim Gordon Rebound Launcher split-bolt upgrade",
+    WhyItMatters:
+      "This turns Gordon from a normal character into one of the best active stud farmers.",
+  },
+];
+
+export const gordonLocationColumns = [
+  { key: "location", label: "Location" },
+  { key: "whyItWorks", label: "Why It Works" },
+  { key: "howToFarm", label: "How To Farm It" },
+];
+
+export const gordonLocationRows = [
+  {
+    location: "Gotham Bank",
+    whyItWorks:
+      "It has dense clusters of breakable objects, so Gordon's rebound shots can bounce through the room quickly.",
+    howToFarm:
+      "Enter, switch to Gordon, fire the Rebound Launcher into object clusters, collect the studs, then reset or move to the next dense room.",
+  },
+  {
+    location: "Batcave Trophy Room",
+    whyItWorks:
+      "The trophy room has many props and displays packed close together, which makes it a strong Rebound Launcher test room.",
+    howToFarm:
+      "Use Gordon near the trophy displays, fire into the densest section, then sweep the room with Stud Magnet upgraded.",
+  },
+  {
+    location: "Mission rooms with many props",
+    whyItWorks:
+      "Any room with tight groups of breakable LEGO objects can work, even if it is not the absolute best location.",
+    howToFarm:
+      "Before solving the room, clear the props with Gordon first so the studs feed your combo instead of being wasted.",
+  },
+];
+
+export const switchPlanColumns = [
+  { key: "trigger", label: "Switch Trigger" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "whyNow", label: "Why This Is The Right Time" },
+];
+
+export const switchPlanRows = [
+  {
+    trigger: "You redeem the survey reward",
+    whatToDo:
+      "Stop smashing random props for money and start using the Batcave Stud Cache loop.",
+    whyNow:
+      "The cache is repeatable after leaving and returning to the Batcave, so it beats normal early-game object farming.",
+  },
+  {
+    trigger: "You have enough Skill Bricks for stud upgrades",
+    whatToDo:
+      "Buy stud magnet and combo upgrades before spending Skill Bricks on comfort upgrades.",
+    whyNow:
+      "WayneTech upgrades use Skill Bricks, not studs. More studs will not directly buy these upgrades later.",
+  },
+  {
+    trigger: "Gordon has the split Rebound Launcher upgrade",
+    whatToDo:
+      "Start clearing Gotham Bank, the Batcave Trophy Room, and other dense prop rooms with Gordon.",
+    whyNow:
+      "The split bolts let one shot hit multiple targets, which makes active farming much faster.",
+  },
+  {
+    trigger: "A red police radio alert appears",
+    whatToDo:
+      "Interrupt your route and handle the crime event before returning to cleanup.",
+    whyNow:
+      "Crime events give a better burst of studs than wandering around breaking random objects.",
+  },
+  {
+    trigger: "Mission replay and post-story areas are unlocked",
+    whatToDo:
+      "Use Party Man replay for manual farming or the amusement park roller coaster for a more passive cap push.",
+    whyNow:
+      "At this stage, you are usually buying expensive suits, vehicles, and Batcave items, so high-volume routes matter more.",
+  },
+  {
+    trigger: "You hit 9,999,999 studs",
+    whatToDo:
+      "Stop farming and go spend. You are at the visible stud cap.",
+    whyNow:
+      "More farming does not help if the counter is no longer increasing.",
+  },
+];
+
+export const problemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "fix", label: "Fix" },
+];
+
+export const problemRows = [
+  {
+    problem: "I redeemed the survey reward but cannot find the Stud Cache",
+    fix:
+      "Go to the Batcave vehicle garage / vehicle bay. The cache is the red-and-yellow crate near the vehicles, not a random chest in the main cave.",
+  },
+  {
+    problem: "The Stud Cache only gives a small amount",
+    fix:
+      "You probably do not have enough stud upgrades yet. The 30,000-per-open number assumes a strong stud upgrade setup and x4 combo scaling.",
+  },
+  {
+    problem: "The Stud Cache does not refill immediately",
+    fix:
+      "Fast travel out of the Batcave, then use Return to Batcave. The crate should be full again when you come back.",
+  },
+  {
+    problem: "Gordon farming feels slow",
+    fix:
+      "Buy the Rebound Launcher split-bolt upgrade first. Without it, Gordon is much worse at clearing dense prop rooms.",
+  },
+  {
+    problem: "I keep losing the x4 combo",
+    fix:
+      "Prioritize the combo meter upgrades and do not leave blue or purple studs behind. Stud Magnet also helps keep the route smooth.",
+  },
+  {
+    problem: "The roller coaster stopped increasing my studs",
+    fix:
+      "Check your counter. If it shows 9,999,999, you have hit the visible stud cap.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The fastest way to farm studs early in **LEGO Batman: Legacy of the Dark Knight** is the **Stud Cache loop** in the **Batcave vehicle garage**. After you redeem the LEGO Group Online Survey reward, open the red-and-yellow cache near the Batcave vehicles, fast travel away, return to the Batcave, and open it again.
+
+With the right stud upgrades and x4 combo setup, the Stud Cache is worth around **30,000 studs per open**. Before those upgrades, it still works, but the payout will be lower.
+
+The best active farming method is **Jim Gordon’s Rebound Launcher** in dense rooms like **Gotham Bank** or the **Batcave Trophy Room**. For open-world farming, follow **police radio crime events** whenever the red alert icon appears. After the story, **Party Man replay** and the **amusement park roller coaster** become strong late-game options.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/lego-batman/lego-batman-stud-cache-batcave-crate.webp"
+    alt="Stud Cache crate near the Batcave vehicle garage in LEGO Batman Legacy of the Dark Knight."
+    width={1192}
+    height={673}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Stud Cache is the red-and-yellow crate near the Batcave vehicle garage. This is the fastest simple stud loop once you redeem the survey reward.
+  </figcaption>
+</figure>
+
+<h2 id="best-stud-farming-methods">
+  Best Stud Farming Methods Ranked
+</h2>
+
+There are several ways to earn studs quickly, but they are not equal. The best method depends on where you are in the game.
+
+If you are early, use the **Stud Cache loop**. If you are actively exploring, use **Jim Gordon** and police radio events. If you are post-story and want to push toward the cap, use **Party Man replay** or the **amusement park roller coaster**.
+
+<GuideTable
+  caption="Best ways to farm studs fast in LEGO Batman: Legacy of the Dark Knight."
+  columns={farmMethodColumns}
+  rows={farmMethodRows}
+/>
+
+If you are following a full progression route, keep the <Link href="/lego-batman">LEGO Batman Legacy guide hub</Link> open so you can jump between story missions, unlocks, Red Bricks, suits, vehicles, and Gotham cleanup without losing your place.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="stud-colors-and-values">
+  Stud Colors And Values
+</h2>
+
+Before you farm, it helps to know which studs actually matter.
+
+Most breakable objects drop **bronze**, **silver**, or **gold** studs. Those are useful for keeping your combo alive, but the big payouts come from **blue** and especially **purple** studs.
+
+<GuideTable
+  caption="LEGO Batman Legacy stud colors and base values."
+  columns={studValueColumns}
+  rows={studValueRows}
+/>
+
+This is why stud farming is not just about breaking everything. It is about keeping your combo alive long enough to pick up the high-value drops.
+
+A single **purple stud** is worth **10,000** by default. At **x4**, that becomes **40,000**. That is more than many small rooms are worth by themselves.
+
+<h2 id="best-upgrades-for-farming-studs">
+  Best Upgrades For Farming Studs
+</h2>
+
+The most important farming upgrades are not bought with studs. They use **Skill Bricks**.
+
+That detail matters because farming more studs will not directly buy the upgrades that make farming better. Spend your early Skill Bricks on stud collection and combo upgrades before comfort upgrades.
+
+<GuideTable
+  caption="Upgrade priority for faster stud farming."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+The basic priority is simple: first make studs easier to collect, then make the combo last longer, then improve Gordon’s room-clearing power.
+
+<h2 id="stud-cache-loop">
+  Stud Cache Loop: Fastest Early Stud Farm
+</h2>
+
+The **Stud Cache loop** is the best place to start because it is simple, repeatable, and does not require you to search for a perfect farming room.
+
+To unlock it, pause the game, go to the **Extras** tab, and open **The LEGO Group Online Survey**. After completing the survey, redeem the code from the main menu. This adds a Stud Cache crate to the Batcave.
+
+<figure className="my-8">
+  <Image
+    src="/images/lego-batman/lego-batman-stud-cache-survey-menu.webp"
+    alt="The LEGO Group Online Survey option in the Extras menu in LEGO Batman Legacy of the Dark Knight."
+    width={1562}
+    height={692}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Open the LEGO Group Online Survey from the Extras menu, then redeem the reward code from the main menu.
+  </figcaption>
+</figure>
+
+Once the reward is active, go to the **Batcave vehicle garage**. Look for the red-and-yellow crate near the vehicles. This is the Stud Cache.
+
+Open the crate, collect the studs, then use the map to fast travel to another location. After that, use **Return to Batcave**. When you come back, the cache should be full again.
+
+<figure className="my-8">
+  <Image
+    src="/images/lego-batman/lego-batman-stud-cache-return-loop.webp"
+    alt="Returning to the Batcave to reset the Stud Cache crate in LEGO Batman Legacy of the Dark Knight."
+    width={938}
+    height={697}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Leave the Batcave, return, and the Stud Cache can be opened again.
+  </figcaption>
+</figure>
+
+With full stud upgrades and x4 scaling, expect roughly **30,000 studs per open**. If your payout is much lower, you are probably missing combo or stud collection upgrades.
+
+This method is strongest when you need money immediately for suits, vehicles, Batcave props, or early purchases.
+
+<h2 id="jim-gordon-rebound-launcher-farm">
+  Jim Gordon Rebound Launcher Farm
+</h2>
+
+Jim Gordon becomes one of the best active stud farmers once you upgrade the **Rebound Launcher**.
+
+The key upgrade is the one that makes rebound bolts split after bouncing. Without that, Gordon is useful but not special. With it, one shot can bounce through clustered objects and clear a room far faster than normal melee attacks.
+
+<figure className="my-8">
+  <Image
+    src="/images/lego-batman/lego-batman-jim-gordon-rebound-launcher-upgrade.webp"
+    alt="Jim Gordon Rebound Launcher upgrade menu in LEGO Batman Legacy of the Dark Knight."
+    width={1016}
+    height={792}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Buy the split-bolt Rebound Launcher upgrade before relying on Gordon for serious stud farming.
+  </figcaption>
+</figure>
+
+The best Gordon farming rooms are not just “anywhere with props.” You want places with lots of breakable objects packed close together.
+
+<GuideTable
+  caption="Best Gordon Rebound Launcher farming locations."
+  columns={gordonLocationColumns}
+  rows={gordonLocationRows}
+/>
+
+The route is simple: enter a dense room, switch to Gordon, fire into the largest object cluster, then collect everything before your combo drops. Stud Magnet makes this much smoother because you do not have to manually sweep every corner.
+
+Gordon farming is not as passive as the Stud Cache loop, but it is better while you are already playing. Use it whenever you are moving through Gotham, replaying missions, or entering rooms full of props.
+
+<h2 id="police-radio-crime-events">
+  Police Radio Crime Events
+</h2>
+
+Do not ignore police radio crime events while exploring Gotham.
+
+When a red police alert appears, follow it and stop the crime. These events can drop a large burst of studs, and they fit naturally into normal free-roam cleanup. You do not have to stop your entire plan to farm a single room.
+
+The best way to treat these events is as a route interruption:
+
+1. Travel toward your collectible, suit, or mission objective.
+2. If a red crime alert appears nearby, follow it.
+3. Clear the criminals quickly.
+4. Grab the stud burst.
+5. Return to your original route.
+
+If you are using stealth-heavy characters or stealth takedowns, these events can become even more rewarding because special stud drops are more likely to matter when your combo is active.
+
+Police radio events are not the best way to hard farm from zero to the cap, but they are one of the best ways to earn extra money while you are already clearing Gotham.
+
+<h2 id="party-man-replay-catwoman-farm">
+  Party Man Replay Catwoman Farm
+</h2>
+
+After you finish enough story content to use mission replay, **Party Man** becomes a strong manual farming route.
+
+Open the Bat Computer, replay the **Flugelheim / Party Man** mission, and switch to **Catwoman** when you reach the display and glass-case sections. Catwoman can open or cut through several high-value areas that are easy to rush past during a normal story run.
+
+<figure className="my-8">
+  <Image
+    src="/images/lego-batman/lego-batman-party-man-catwoman-stud-farm.webp"
+    alt="Catwoman opening glass display cases in the Party Man mission in LEGO Batman Legacy of the Dark Knight."
+    width={1016}
+    height={724}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Party Man has several Catwoman-friendly display and safe sections with valuable stud drops.
+  </figcaption>
+</figure>
+
+The goal is not to slowly full-clear every corner. The goal is to hit the valuable Catwoman interactions while keeping your combo active.
+
+A clean Party Man route looks like this:
+
+1. Enter the mission through replay.
+2. Switch to Catwoman as soon as the display-case route opens.
+3. Break or cut the glass displays, then prioritize blue and purple studs before the combo drops.
+4. Continue toward the safe and statue-head sections.
+5. Skip low-value loose studs if they would make you lose the route rhythm.
+6. Restart or replay once the valuable rooms are cleared.
+
+This route is especially good if your stud combo can reach x4. A fixed “per run” number is hard to promise because it depends on your upgrades and how cleanly you keep the combo alive, but the route is valuable because the mission has concentrated high-value pickups instead of scattered outdoor props.
+
+<h2 id="amusement-park-roller-coaster-farm">
+  Amusement Park Roller Coaster Farm
+</h2>
+
+The amusement park roller coaster is a late-game option for players who want a more relaxed way to build toward the cap.
+
+Once you can access the amusement park area, get on the roller coaster and let the loop run. Each loop continues adding studs until the counter stops increasing.
+
+<figure className="my-8">
+  <Image
+    src="/images/lego-batman/lego-batman-amusement-park-roller-coaster-stud-cap.webp"
+    alt="Stud counter at 9,999,999 with x4 multiplier in LEGO Batman Legacy of the Dark Knight."
+    width={660}
+    height={400}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The visible stud counter caps at 9,999,999. If the number stops moving, you are done farming.
+  </figcaption>
+</figure>
+
+This method is not the best choice when you only need a small amount of money. It shines when you want to push toward the **9,999,999** cap while doing less active room clearing.
+
+Each loop is short and easy to repeat, so this method works better as a relaxed cap-push than a strict per-minute farm.
+
+<h2 id="when-to-switch-farming-methods">
+  When To Switch Farming Methods
+</h2>
+
+The mistake most players make is sticking with one farming method for the entire game.
+
+The better approach is to switch methods when your unlocks change. The Stud Cache is best as soon as it is available. Gordon becomes better once his Rebound Launcher is upgraded. Police events are best when you are already moving through Gotham. Party Man and the roller coaster are best after replay and late-game access open up.
+
+<GuideTable
+  caption="When to switch stud farming methods."
+  columns={switchPlanColumns}
+  rows={switchPlanRows}
+/>
+
+If you only remember one thing, remember this: **do not farm low-value objects before buying stud upgrades**. The same route becomes much better once Stud Magnet, combo upgrades, and x4 scaling are active.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="common-problems">
+  Common Stud Farming Problems
+</h2>
+
+Most stud farming problems come from unclear locations, missing upgrades, or losing the combo before collecting the valuable drops.
+
+<GuideTable
+  caption="Common stud farming problems and fixes."
+  columns={problemColumns}
+  rows={problemRows}
+/>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+<h3 id="what-is-the-fastest-way-to-farm-studs">
+  What is the fastest way to farm studs in LEGO Batman: Legacy of the Dark Knight?
+</h3>
+
+The fastest simple method is the **Stud Cache loop** in the Batcave vehicle garage. Open the cache, fast travel away, return to the Batcave, and open it again.
+
+With full stud upgrades and x4 scaling, it can pay around **30,000 studs per open**.
+
+<h3 id="where-is-the-stud-cache">
+  Where is the Stud Cache in the Batcave?
+</h3>
+
+The Stud Cache is near the **Batcave vehicle garage / vehicle bay**. Look for the red-and-yellow crate near the vehicles after redeeming the LEGO Group Online Survey reward code.
+
+<h3 id="is-the-stud-cache-one-time-use">
+  Is the Stud Cache one-time use?
+</h3>
+
+No. The survey reward unlocks the Stud Cache, and the crate can be reopened after you leave the Batcave and return. The reward code is redeemed once, but the crate itself can be looped.
+
+<h3 id="how-much-is-a-purple-stud-worth">
+  How much is a purple stud worth?
+</h3>
+
+A purple stud is worth **10,000 studs** before multipliers. At **x4**, it is worth **40,000 studs**, which is why you should always prioritize purple studs during farming routes.
+
+<h3 id="what-are-the-best-gordon-farming-locations">
+  What are the best Gordon farming locations?
+</h3>
+
+The best Gordon farming locations are dense rooms such as **Gotham Bank** and the **Batcave Trophy Room**. Both have enough breakable objects for the upgraded Rebound Launcher to bounce through multiple targets quickly.
+
+<h3 id="are-police-radio-events-worth-doing">
+  Are police radio crime events worth doing?
+</h3>
+
+Yes. They are worth doing whenever they appear near your route. They give a strong burst of studs and fit naturally into Gotham cleanup, especially if your combo and stud magnet upgrades are already active.
+
+<h3 id="what-is-the-stud-cap">
+  What is the stud cap?
+</h3>
+
+The visible stud counter caps at **9,999,999**. If your counter stops increasing at that number, stop farming and spend your studs.
+
+<h3 id="should-i-farm-studs-before-buying-upgrades">
+  Should I farm studs before buying upgrades?
+</h3>
+
+Do not delay the key farming upgrades just to build a bigger stud pile. If you already have Skill Bricks, buy Stud Magnet and combo upgrades first, then farm. Your later Stud Cache loops, Gordon routes, and replay farms will pay more.
+
+<h3 id="do-stud-farming-upgrades-cost-studs-or-skill-bricks">
+  Do stud farming upgrades cost studs or Skill Bricks?
+</h3>
+
+The key stud-farming upgrades — **Stud Magnet**, combo multiplier, combo drain, and combo fill upgrades — use **Skill Bricks**, not studs.

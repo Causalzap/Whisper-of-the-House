@@ -35,6 +35,9 @@ const toc = [
 
 const relatedLinks = [
   { href: "/lego-batman/red-bricks", label: "Red Bricks Guide" },
+  { href: "/lego-batman/how-to-farm-studs-fast", label: "How to Farm Studs Fast" },
+  { href: "/lego-batman/all-subwayne-tunnel-locations", label: "SubWayne Tunnel Locations Guide" },
+  { href: "/lego-batman/absolute-batman-suit", label: "Absolute Batman Suit Guide" },
   { href: "/lego-batman/new-beginnings-docks-collectibles", label: "New Beginnings Docks Collectibles" },
   { href: "/lego-batman/carmine-falcone", label: "Carmine Falcone Walkthrough" },
   { href: "/lego-batman/batgirl-unlock", label: "Batgirl Unlock Guide" },
@@ -47,16 +50,16 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-  title: "LEGO Batman Legacy Guide: Collectibles, Towers, Bosses & Red Bricks",
+  title: "LEGO Batman Legacy Guide: Studs, SubWayne, Bosses & Bricks",
   description:
-    "Start LEGO Batman Legacy with the right route: New Beginnings collectibles, Batcave systems, Red Bricks, Batgirl, Radio Towers, Mr. Freeze, Firefly, Poison Ivy, and Bane guides.",
+    "Follow LEGO Batman Legacy with stud farming, SubWayne tunnels, Absolute Batman, Radio Towers, Red Bricks, collectibles, Batgirl and boss guides.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "LEGO Batman Legacy Guide Hub: Collectibles, Towers, Bosses",
+    title: "LEGO Batman Legacy Guide Hub: Studs, SubWayne, Bosses",
     description:
-      "Use this guide hub to route your first playthrough, clear New Beginnings collectibles, reveal Radio Towers, collect Red Bricks, unlock Batgirl, and beat key bosses.",
+      "Use this guide hub to route your playthrough, farm studs, open SubWayne tunnels, unlock Absolute Batman, reveal Radio Towers, collect Red Bricks, and beat key bosses.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -71,9 +74,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "LEGO Batman Legacy Guide: Collectibles, Towers, Bosses",
+    title: "LEGO Batman Legacy Guide: Studs, SubWayne, Bosses",
     description:
-      "Follow the best early route, clear New Beginnings collectibles, reveal Radio Towers, collect Red Bricks, unlock Batgirl, and beat major bosses.",
+      "Route your playthrough with guides for studs, SubWayne tunnels, Absolute Batman, Radio Towers, Red Bricks, Batgirl, and bosses.",
     images: [imageUrls[0]],
   },
 };
@@ -107,14 +110,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-      "LEGO Batman Legacy Guide Hub: First Playthrough Route, New Beginnings Collectibles, Radio Towers, Red Bricks, Batgirl Unlock and Boss Guides",
+        "LEGO Batman Legacy Guide Hub: First Playthrough Route, Stud Farming, SubWayne Tunnels, Absolute Batman, Red Bricks and Boss Guides",
       description:
-      "A player-focused LEGO Batman Legacy guide hub for routing the first playthrough and choosing the right detailed guide. Covers what to do first, New Beginnings Docks collectibles, Batcave systems, Bat-Mite’s Shop, Carmine Falcone, Red Brick cleanup, Batgirl unlocks, Radio Towers, Escaped Zoo Animals, Firefly, Mr. Freeze, Poison Ivy, and Bane boss guides.",
-
+        "A player-focused LEGO Batman: Legacy of the Dark Knight guide hub for routing the first playthrough and choosing the right detailed guide. Covers what to do first, Batcave systems, Bat-Mite’s Shop, stud farming routes, Carmine Falcone, Red Brick cleanup, Batgirl unlocks, Radio Towers, SubWayne tunnel locations and puzzle solutions, Escaped Zoo Animals, the Absolute Batman suit reward, New Beginnings Docks collectibles, Firefly, Mr. Freeze, Poison Ivy, and Bane boss guides.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-05-20",
-      dateModified: "2026-05-20",
+      dateModified: "2026-05-25",
       about: [
         {
           "@type": "VideoGame",
@@ -124,17 +126,22 @@ const jsonLd = {
         { "@type": "Thing", name: "Batcave" },
         { "@type": "Thing", name: "Challenge Board" },
         { "@type": "Thing", name: "Bat-Mite’s Shop" },
+        { "@type": "Thing", name: "Stud farming" },
+        { "@type": "Thing", name: "Stud Cache" },
+        { "@type": "Thing", name: "SubWayne tunnels" },
+        { "@type": "Thing", name: "Gotham fast travel" },
+        { "@type": "Thing", name: "Absolute Batman" },
+        { "@type": "Thing", name: "Escaped Zoo Animals" },
         { "@type": "Thing", name: "Red Bricks" },
         { "@type": "Thing", name: "Carmine Falcone" },
         { "@type": "Thing", name: "Iceberg Lounge" },
         { "@type": "Thing", name: "Batgirl" },
+        { "@type": "Thing", name: "Radio Towers" },
         { "@type": "Thing", name: "Firefly" },
         { "@type": "Thing", name: "New Beginnings" },
         { "@type": "Thing", name: "Docks Collectibles" },
-        { "@type": "Thing", name: "Radio Towers" },
         { "@type": "Thing", name: "Mr. Freeze" },
         { "@type": "Thing", name: "Snow Globes" },
-        { "@type": "Thing", name: "Escaped Zoo Animals" },
         { "@type": "Thing", name: "Poison Ivy" },
         { "@type": "Thing", name: "Bane" },
       ],
@@ -232,6 +239,15 @@ const jsonLd = {
         },
         {
           "@type": "Question",
+          name: "When should I do Escaped Zoo Animals?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Do Escaped Zoo Animals after the tracker mechanic is available and more of Gotham has opened up. Track 9 animals to unlock the Absolute Batman costume, then finish all 21 if you are aiming for 100% cleanup.",
+          },
+        },
+        {
+          "@type": "Question",
           name: "Are boss fights hard?",
           acceptedAnswer: {
             "@type": "Answer",
@@ -245,7 +261,7 @@ const jsonLd = {
           acceptedAnswer: {
             "@type": "Answer",
             text:
-  "No. Use this page as a route hub. For exact sections, open the Red Bricks, New Beginnings Docks, Carmine Falcone, Batgirl, Radio Towers, Firefly, Mr. Freeze, Poison Ivy, Bane, or Escaped Zoo Animals guides.",
+              "No. Use this page as a route hub. For exact sections, open the Red Bricks, Stud Farming, SubWayne Tunnels, Absolute Batman, Escaped Zoo Animals, New Beginnings Docks, Carmine Falcone, Batgirl, Radio Towers, Firefly, Mr. Freeze, Poison Ivy, or Bane guides.",
           },
         },
       ],
@@ -264,11 +280,12 @@ export default function Page() {
         />
         <GuideArticlePage
           title="LEGO Batman Legacy Guide Hub: What To Do First and Where To Go Next"
-          description="Follow the best early route, clear New Beginnings collectibles, reveal Radio Towers, collect Red Bricks at the right time, unlock Batgirl, and jump to the boss or mission guide you need."          gameTitle="LEGO Batman: Legacy of the Dark Knight"
+          description="Follow the best route, farm studs when purchases get expensive, open SubWayne tunnels for fast travel, unlock Absolute Batman, reveal Radio Towers, collect Red Bricks, and jump to the boss or mission guide you need."
+          gameTitle="LEGO Batman: Legacy of the Dark Knight"
           gameHref="/lego-batman"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 24, 2026"
+          updatedAt="May 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

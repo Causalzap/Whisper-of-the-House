@@ -36,7 +36,11 @@ const toc = [
 ];
 
 const relatedLinks = [
+  { href: "/lego-batman", label: "LEGO Batman Guide" },
   { href: "/lego-batman/red-bricks", label: "Red Bricks Guide" },
+  { href: "/lego-batman/how-to-farm-studs-fast", label: "How to Farm Studs Fast" },
+  { href: "/lego-batman/all-subwayne-tunnel-locations", label: "SubWayne Tunnel Locations Guide" },
+  { href: "/lego-batman/absolute-batman-suit", label: "Absolute Batman Suit Guide" },
   { href: "/lego-batman/new-beginnings-docks-collectibles", label: "New Beginnings Docks Collectibles" },
   { href: "/lego-batman/carmine-falcone", label: "Carmine Falcone Walkthrough" },
   { href: "/lego-batman/batgirl-unlock", label: "Batgirl Unlock Guide" },
