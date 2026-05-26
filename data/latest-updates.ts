@@ -12,6 +12,55 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+
+// ===== Paralives =====
+{
+  href: "/paralives",
+  game: "Paralives",
+  title: "Beginner Guide, Skills & Careers",
+  description:
+    "Start here for Paralives beginner tips, early builds, skills, careers, job performance, upgrade points, and progression routes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Paralives =====
+{
+  href: "/paralives/best-early-game-skills-talents-careers",
+  game: "Paralives",
+  title: "Best Early Game Skills & Careers",
+  description:
+    "Pick stronger early skills, talents, vibes, careers, stats, Application Points routes, and first-save builds for smoother progression.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Paralives =====
+{
+  href: "/paralives/level-skills-faster",
+  game: "Paralives",
+  title: "How to Level Skills Faster",
+  description:
+    "Level skills faster with the right stats, Knowledge Skills, direct practice, Town Events, Together Cards, talents, and daily routines.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Paralives =====
+{
+  href: "/paralives/job-performance-not-improving",
+  game: "Paralives",
+  title: "Job Performance Not Improving Fix",
+  description:
+    "Fix stuck job performance with skills, needs, career rank, perks, Story Cards, strikes, Moon Book, vacation days, and work checks.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
 // ===== ZERO PARADES: For Dead Spies =====
 {
   href: "/zero-parades",

@@ -1,0 +1,703 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const itemColumns = [
+  { key: "Item", label: "Item" },
+  { key: "Key Data", label: "Key Data" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const itemRows = [
+  {
+    Item: "Frozen Orb",
+    "Key Data":
+      "Epic, 50g, Orb / Frosty, 5.2s cooldown. At lower stars, it triggers other Frosty items 1 / 2 / 3 times. At the key upgraded breakpoint, its on-trigger effect can trigger Frosty items 4 times and give them +50% bonus crit.",
+    "Why It Matters":
+      "This is the engine. The 5.2s cooldown explains why Time Pendant and cooldown reduction matter; the multi-trigger +50% crit breakpoint explains why 3-star Frozen Orb is worth chasing.",
+  },
+  {
+    Item: "Glacier",
+    "Key Data":
+      "Epic, 45g, Sword / Frosty, 2.5s cooldown, 35 damage. When a Frosty item triggers, Glacier permanently gains crit chance: +2% at 1-star, +4% at 2-star, +8% plus damage at the next upgrade, and up to +16% crit plus +10 damage at the strongest breakpoint.",
+    "Why It Matters":
+      "This is the scaling carry. Frozen Orb gives you repeated Frosty triggers; Glacier turns those triggers into permanent crit and damage.",
+  },
+  {
+    Item: "Frost Essence",
+    "Key Data":
+      "Gives an item the Frosty tag.",
+    "Why It Matters":
+      "This is the connector. Use Frost Essence on the support item that should be pulled into the Frozen Orb engine: Lost Fragment, Time Pendant, or Warhorn.",
+  },
+  {
+    Item: "Lost Fragment",
+    "Key Data":
+      "Multicast support for the item above.",
+    "Why It Matters":
+      "Lost Fragment makes each Frozen Orb cycle more valuable. If it becomes Frosty, Frozen Orb can trigger it as part of the same engine.",
+  },
+  {
+    Item: "Time Pendant",
+    "Key Data":
+      "Cooldown support that removes cooldown from the item below.",
+    "Why It Matters":
+      "Frozen Orb starts at 5.2s, which is slow. Time Pendant is one of the cleanest ways to make the engine start before Burn, Poison, or Dark burst kills you.",
+  },
+  {
+    Item: "Warhorn",
+    "Key Data":
+      "Late-game damage payoff. At 3-star, it converts crit chance into bonus damage for your items.",
+    "Why It Matters":
+      "Glacier creates huge crit numbers. Warhorn turns those crit numbers into board-wide damage, especially when Warhorn is made Frosty.",
+  },
+  {
+    Item: "Sapphire Amulet",
+    "Key Data":
+      "Crit damage amplifier.",
+    "Why It Matters":
+      "Once Glacier has stacked crit chance, Sapphire Amulet helps turn that crit chance into real damage instead of just a high stat line.",
+  },
+];
+
+export const perkColumns = [
+  { key: "Perk / Encounter", label: "Perk / Encounter" },
+  { key: "Priority", label: "Priority" },
+  { key: "Why It Helps Frosty", label: "Why It Helps Frosty" },
+];
+
+export const perkRows = [
+  {
+    "Perk / Encounter": "Lyra / Northern Offering",
+    Priority: "High when offered",
+    "Why It Helps Frosty":
+      "Lyra is one of the cleanest Frosty signals when the route offers Frozen Orb access or Frosty support. Take it when your board can survive the pivot and you are ready to build around Frozen Orb.",
+  },
+  {
+    "Perk / Encounter": "Merge",
+    Priority: "High",
+    "Why It Helps Frosty":
+      "Frozen Orb and Glacier both care about star breakpoints. Merge helps you reach the upgrades that turn the build from a slow control board into a scaling engine.",
+  },
+  {
+    "Perk / Encounter": "Flash Sale",
+    Priority: "High",
+    "Why It Helps Frosty":
+      "Frosty is expensive. Discount windows help you buy Frozen Orb, Glacier, Frost Essence, Warhorn, Time Pendant, and duplicates without emptying the run.",
+  },
+  {
+    "Perk / Encounter": "Tempo / Income",
+    Priority: "Medium-High",
+    "Why It Helps Frosty":
+      "Frosty often starts as a pivot. Extra income or tempo helps you survive until the D7-D8 window where the real engine pieces appear.",
+  },
+  {
+    "Perk / Encounter": "Sword support",
+    Priority: "Medium",
+    "Why It Helps Frosty":
+      "Useful when Glacier becomes the main carry. Take it when the shop already points toward Glacier or sword scaling.",
+  },
+  {
+    "Perk / Encounter": "Generic Frosty support",
+    Priority: "Medium",
+    "Why It Helps Frosty":
+      "Good only when you already have a real Frosty engine. Do not take generic Frosty value if the board still lacks Frozen Orb, Glacier, or a payoff.",
+  },
+];
+
+export const dayColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "Main Goal", label: "Main Goal" },
+  { key: "Decision Rule", label: "Decision Rule" },
+];
+
+export const dayRows = [
+  {
+    Timing: "D1-D3",
+    "Main Goal":
+      "Play tempo and keep the run alive. Moon, Burn, Poison, weapons, bows, shield, healing, or economy are all fine if they win or barely lose early fights.",
+    "Decision Rule":
+      "Do not force Frosty before you see Frozen Orb, Glacier, Lyra support, or a clear Frost Essence target.",
+  },
+  {
+    Timing: "D4-D6",
+    "Main Goal":
+      "Look for the first real Frosty signal. Frozen Orb, Glacier, Frostbound, Lost Fragment, or an economy line can justify preparing the pivot.",
+    "Decision Rule":
+      "A single Frosty tag is not enough. You need an engine piece and a payoff.",
+  },
+  {
+    Timing: "D7-D8",
+    "Main Goal":
+      "Commit if the shop offers the engine. Frozen Orb plus Glacier, Time Pendant, Lost Fragment, or Frost Essence is the ideal pivot window.",
+    "Decision Rule":
+      "Roll with a named target. If you cannot name the missing piece, keep the current board and buy next-fight power.",
+  },
+  {
+    Timing: "D9-D10",
+    "Main Goal":
+      "Stabilize the engine. Reduce Frozen Orb's 5.2s cooldown, add Multicast, and start stacking Glacier.",
+    "Decision Rule":
+      "If you die before Frozen Orb starts, the build is too slow. Buy cooldown, health, shield, or earlier activation.",
+  },
+  {
+    Timing: "D11+",
+    "Main Goal":
+      "Convert scaling into damage with Warhorn, Sapphire Amulet, stronger Glacier upgrades, and final positioning.",
+    "Decision Rule":
+      "Stop adding random Frosty items. Buy the upgrade that either starts the chain sooner or makes each cycle hit harder.",
+  },
+];
+
+export const breakpointColumns = [
+  { key: "Breakpoint", label: "Breakpoint" },
+  { key: "What Changes", label: "What Changes" },
+  { key: "Why You Care", label: "Why You Care" },
+];
+
+export const breakpointRows = [
+  {
+    Breakpoint: "Frozen Orb 5.2s base cooldown",
+    "What Changes":
+      "Before cooldown support, the engine starts late.",
+    "Why You Care":
+      "This is why Time Pendant, cooldown potions, and earlier activation are not optional luxuries. Without them, fast Burn, Poison, or Dark boards can kill first.",
+  },
+  {
+    Breakpoint: "Frozen Orb multi-trigger upgrade",
+    "What Changes":
+      "Frozen Orb goes from triggering Frosty items a few times to becoming the engine that fires the whole board repeatedly.",
+    "Why You Care":
+      "This is the difference between owning Frosty items and actually having a Frosty build.",
+  },
+  {
+    Breakpoint: "Frozen Orb +50% bonus crit line",
+    "What Changes":
+      "Triggered Frosty items receive a major crit boost.",
+    "Why You Care":
+      "This is the mathematical foundation for Glacier and Warhorn scaling. It makes crit chance matter across the whole engine.",
+  },
+  {
+    Breakpoint: "Glacier crit scaling",
+    "What Changes":
+      "Glacier gains permanent crit chance whenever Frosty items trigger, scaling from +2% to much larger upgraded values.",
+    "Why You Care":
+      "Every Frozen Orb cycle makes Glacier stronger. At high upgrades, that crit scaling becomes the main damage plan.",
+  },
+  {
+    Breakpoint: "3-star Frosty Warhorn",
+    "What Changes":
+      "Warhorn converts crit chance into bonus damage for the board.",
+    "Why You Care":
+      "This is the high-roll payoff. Glacier creates crit; Warhorn turns it into damage.",
+  },
+];
+
+export const essenceColumns = [
+  { key: "Target", label: "Frost Essence Target" },
+  { key: "Use It When", label: "Use It When" },
+  { key: "Why", label: "Why" },
+];
+
+export const essenceRows = [
+  {
+    Target: "Lost Fragment",
+    "Use It When":
+      "Frozen Orb is firing, but each cycle does not create enough value.",
+    Why:
+      "Frosty Lost Fragment can join the trigger chain and add Multicast to the item above.",
+  },
+  {
+    Target: "Time Pendant",
+    "Use It When":
+      "Frozen Orb or the main payoff is too slow.",
+    Why:
+      "A Frosty Time Pendant can help the engine start sooner while still being part of the Frozen Orb trigger plan.",
+  },
+  {
+    Target: "Warhorn",
+    "Use It When":
+      "Glacier has stacked crit and you need a real damage payoff.",
+    Why:
+      "Frosty Warhorn is the late-game bridge from crit scaling to board-wide damage.",
+  },
+  {
+    Target: "A temporary support",
+    "Use It When":
+      "You are one fight from dying and need the board to work now.",
+    Why:
+      "Sometimes the correct Frost Essence target is the item that wins the next fight, not the item that makes the prettiest final board.",
+  },
+];
+
+export const matchupColumns = [
+  { key: "Matchup", label: "Matchup" },
+  { key: "Problem", label: "Problem" },
+  { key: "Answer", label: "Answer" },
+];
+
+export const matchupRows = [
+  {
+    Matchup: "Burn / Poison tempo",
+    Problem:
+      "They can kill before a 5.2s Frozen Orb engine starts.",
+    Answer:
+      "Do not pivot too early. Buy health, shield, cooldown, or a temporary carry until Frozen Orb can actually fire in time.",
+  },
+  {
+    Matchup: "Dark burst",
+    Problem:
+      "Start-of-combat burst can delete you before Frosty scaling matters.",
+    Answer:
+      "Prioritize earlier activation and survival. If you are close to 10 wins, buy the safest next-fight upgrade instead of more scaling.",
+  },
+  {
+    Matchup: "Shield / healing boards",
+    Problem:
+      "They can survive early Frosty control if you have no damage conversion.",
+    Answer:
+      "Scale Glacier, add Warhorn, and use Sapphire Amulet or damage support so crit becomes lethal.",
+  },
+  {
+    Matchup: "Other late scaling builds",
+    Problem:
+      "If both boards scale, the one that starts first or converts faster usually wins.",
+    Answer:
+      "Get Frozen Orb online quickly, then convert with Glacier and Warhorn rather than adding random Frosty tags.",
+  },
+  {
+    Matchup: "Bad pivot timing",
+    Problem:
+      "The most common Frosty loss is selling a working board before the engine is ready.",
+    Answer:
+      "Only pivot when you can name the engine: Frozen Orb, the triggered Frosty item, and the damage payoff.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Loses", label: "Why It Loses" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Forcing Frosty before Frozen Orb",
+    "Why It Loses":
+      "Frosty pieces without a trigger engine are slow and easy to punish.",
+    Fix:
+      "Play early tempo first. Commit when Frozen Orb, Glacier, Lyra support, or Frost Essence gives you a real route.",
+  },
+  {
+    Mistake: "Ignoring Frozen Orb's 5.2s cooldown",
+    "Why It Loses":
+      "A powerful engine still loses if it starts after the opponent kills you.",
+    Fix:
+      "Use Time Pendant, cooldown support, health, or shield before chasing more scaling.",
+  },
+  {
+    Mistake: "Using Frost Essence randomly",
+    "Why It Loses":
+      "The Frosty tag is only valuable when it connects an important support item to Frozen Orb.",
+    Fix:
+      "Use Frost Essence on Lost Fragment, Time Pendant, Warhorn, or the item that makes the next fight safe.",
+  },
+  {
+    Mistake: "Stopping at 2-star Frozen Orb when the run needs the ceiling",
+    "Why It Loses":
+      "The huge value comes from the multi-trigger and +50% bonus crit breakpoint.",
+    Fix:
+      "If Frozen Orb is already the engine and you can afford the chase, prioritize the upgrade before adding random support.",
+  },
+  {
+    Mistake: "No damage conversion",
+    "Why It Loses":
+      "Freezing or triggering forever does not matter if the enemy survives.",
+    Fix:
+      "Add Glacier scaling, Warhorn, Sapphire Amulet, Frostbound, or another damage payoff.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best Frosty build in Oaken Tower is a Frozen Orb engine built around Glacier, Frost Essence, Time Pendant, Lost Fragment, and a late Frosty Warhorn payoff. Frozen Orb starts at 5.2s cooldown, so the build needs cooldown support before it can beat fast Burn, Poison, or Dark boards.**
+
+The key breakpoint is upgraded Frozen Orb: it can trigger Frosty items multiple times and give +50% bonus crit, which is why Glacier and Warhorn scale so hard. Use the official name **Frost Essence**, not “Frosty Essence.”
+
+<em>Version note: this guide is written for the current Early Access item pool as of May 25, 2026. Re-check Frozen Orb, Glacier, Frost Essence, and Warhorn text after major patches.</em>
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-frosty-build-core-board.webp"
+    alt="Oaken Tower Frosty build core board with Frozen Orb, Glacier, Frost Essence support and Warhorn scaling."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This Frosty route is not just freeze control. Frozen Orb triggers Frosty items, Glacier stacks crit, and Warhorn turns that crit into damage.
+  </figcaption>
+</figure>
+
+<h2 id="build-plan">
+  The Frosty build plan
+</h2>
+
+Frosty is a pivot build. The strongest version is not “buy every Frosty tag.” It is a trigger engine with a crit-scaling payoff.
+
+The plan is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <strong>Survive the opening.</strong> Use any shop-driven tempo that keeps hearts safe.
+  </li>
+  <li>
+    <strong>Find the engine.</strong> Frozen Orb or Glacier gives you the first real reason to move into Frosty.
+  </li>
+  <li>
+    <strong>Fix the 5.2s cooldown problem.</strong> Time Pendant and cooldown support help Frozen Orb start before fast boards kill you.
+  </li>
+  <li>
+    <strong>Use Frost Essence carefully.</strong> Put it on the item that should join the Frozen Orb chain.
+  </li>
+  <li>
+    <strong>Add the payoff.</strong> Glacier, Warhorn, Sapphire Amulet, and Frostbound turn repeated triggers into damage.
+  </li>
+</ol>
+
+<GuideTable
+  caption="Core pieces for the Oaken Tower Frosty build."
+  columns={itemColumns}
+  rows={itemRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="item-data">
+  Key item data: Frozen Orb and Glacier
+</h2>
+
+The numbers explain why this build works.
+
+<GuideTable
+  caption="Important Frozen Orb and Glacier breakpoints."
+  columns={breakpointColumns}
+  rows={breakpointRows}
+/>
+
+Frozen Orb's 5.2s base cooldown is the whole reason this build needs support. If it fires late, you die. If it fires early and repeatedly, Glacier and Warhorn can take over the fight.
+
+<h2 id="perks">
+  Best perks and encounters for Frosty
+</h2>
+
+Frosty is more dependent on pivot tools than Burn or Poison because its engine pieces are expensive and timing-sensitive.
+
+<GuideTable
+  caption="Best perks and encounter choices for Oaken Tower Frosty builds."
+  columns={perkColumns}
+  rows={perkRows}
+/>
+
+The simple rule:
+
+**Take Lyra or Frozen Orb access when you can survive the pivot. Take Merge or Flash Sale when they help you reach star breakpoints. Take tempo when the run is too weak to pivot safely.**
+
+<h2 id="day-plan">
+  Day-by-day Frosty route
+</h2>
+
+Use the day count as a pivot timer. You do not need to hard-force Frosty from the first shop.
+
+<GuideTable
+  caption="Oaken Tower Frosty build timing plan."
+  columns={dayColumns}
+  rows={dayRows}
+/>
+
+A Frosty pivot is good when you can name three things:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>What starts the chain?</li>
+  <li>What does Frozen Orb trigger?</li>
+  <li>What turns the triggers into damage?</li>
+</ul>
+
+If you cannot answer those, keep your current board alive and wait.
+
+<h2 id="pivot-window">
+  Pivot window: when Frosty becomes real
+</h2>
+
+The best Frosty pivots usually happen when the shop gives you Frozen Orb, Glacier, Lost Fragment, Frostbound, or a way to use Frost Essence on an important support item.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-frosty-pivot-window.webp"
+    alt="Oaken Tower shop and board state where the player pivots from Moon into a Frosty build."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The pivot starts when the run has a real Frosty direction, not when one random Frosty item appears.
+  </figcaption>
+</figure>
+
+This is why Frosty is usually a D7-D8 decision. You need enough shop quality and gold to find the engine, but enough health to survive the transition.
+
+<h2 id="frozen-orb">
+  Frozen Orb: the 5.2s engine
+</h2>
+
+Frozen Orb is the main trigger engine.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-frozen-orb-core.webp"
+    alt="Oaken Tower Frozen Orb tooltip showing Frosty item triggers and bonus crit scaling."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Frozen Orb is powerful because it triggers your Frosty items, but its 5.2s base cooldown means it needs Time Pendant or cooldown support.
+  </figcaption>
+</figure>
+
+The upgraded Frozen Orb breakpoint is the reason this route has such a high ceiling. Triggering Frosty items multiple times and giving +50% bonus crit creates the base for Glacier and Warhorn scaling.
+
+Your Frozen Orb support should answer:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>How do I make the first trigger happen sooner?</li>
+  <li>Which Frosty item gets triggered?</li>
+  <li>What item converts the crit into damage?</li>
+</ul>
+
+<h2 id="glacier">
+  Glacier: the crit-scaling carry
+</h2>
+
+Glacier is the item that turns Frozen Orb triggers into permanent scaling.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-glacier-scaling.webp"
+    alt="Oaken Tower Glacier tooltip showing Frosty trigger crit chance scaling."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Glacier gains crit when Frosty items trigger. Higher-star Glacier turns repeated Frozen Orb cycles into much faster damage scaling.
+  </figcaption>
+</figure>
+
+At 1-star, Glacier's +2% crit per Frosty trigger is already useful. At higher stars, the crit gain and damage gain become the reason to keep investing. That is why the build cares so much about Frozen Orb's multi-trigger upgrade.
+
+<h2 id="frost-essence">
+  Frost Essence: choose the right target
+</h2>
+
+Frost Essence is the tag converter. It decides what can join the Frozen Orb engine.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-frost-essence.webp"
+    alt="Oaken Tower Frost Essence tooltip showing it gives an item the Frosty tag."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the official name Frost Essence. The best target is the item that should be triggered by Frozen Orb.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Best Frost Essence targets."
+  columns={essenceColumns}
+  rows={essenceRows}
+/>
+
+Do not use Frost Essence randomly. The tag only matters if it connects an important support item to Frozen Orb.
+
+<h2 id="lost-fragment-time-pendant">
+  Lost Fragment and Time Pendant
+</h2>
+
+Lost Fragment and Time Pendant solve different problems.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-frosty-cdr-lost-fragment.webp"
+    alt="Oaken Tower Frosty Lost Fragment setup giving Multicast inside a Frozen Orb build."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lost Fragment gives Multicast value. Time Pendant solves the 5.2s Frozen Orb cooldown problem.
+  </figcaption>
+</figure>
+
+Use Time Pendant when the engine starts too late. Use Lost Fragment when the engine starts but each cycle needs more value. If both are available, the best Frost Essence target depends on which problem is killing the next fight.
+
+<h2 id="warhorn">
+  Frosty Warhorn is the late-game payoff
+</h2>
+
+Warhorn is not the first reason to go Frosty. It is the payoff when the crit engine is already working.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-frosty-warhorn-target.webp"
+    alt="Oaken Tower Warhorn being targeted as a Frosty build payoff."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once Glacier is stacking crit, Frosty Warhorn becomes one of the best payoff targets.
+  </figcaption>
+</figure>
+
+At 3-star, Warhorn converts crit chance into bonus damage. That is why the build can explode once Frozen Orb, Glacier, and Warhorn are all connected.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-frosty-warhorn-three-star.webp"
+    alt="Oaken Tower 3-star Frosty Warhorn tooltip showing bonus damage based on crit chance."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    3-star Frosty Warhorn is the damage conversion point: Glacier stacks crit, then Warhorn turns that crit into damage.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="sapphire-frostbound">
+  Sapphire Amulet and Frostbound
+</h2>
+
+Sapphire Amulet and Frostbound are payoff pieces, not the engine.
+
+Sapphire Amulet makes crits matter more. Frostbound can add permanent damage while the build is scaling. Both are much stronger after Frozen Orb and Glacier are already doing their jobs.
+
+Do not overbuy payoff before the engine works. First make Frozen Orb fire. Then make Glacier scale. Then make the crit damage lethal.
+
+<h2 id="matchups">
+  Matchups and counters
+</h2>
+
+Frosty is strongest when it gets time to start. It is weakest when the opponent kills before Frozen Orb fires.
+
+<GuideTable
+  caption="How to play the Oaken Tower Frosty build into common matchups."
+  columns={matchupColumns}
+  rows={matchupRows}
+/>
+
+The matchup rule is simple:
+
+**Against fast boards, make Frozen Orb start sooner or buy survival. Against slow boards, push Glacier and Warhorn.**
+
+<h2 id="oak-test">
+  Oak damage test
+</h2>
+
+The Oak test shows the ceiling of the build.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-frosty-oak-test.webp"
+    alt="Oaken Tower Frosty build Oak test showing huge damage from Time Pendant, Warhorn and Glacier."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In the Oak test, the Frosty engine reached 304 billion total damage, with Warhorn, Glacier, and Time Pendant all showing huge payoff numbers.
+  </figcaption>
+</figure>
+
+That does not mean every 10-win run needs 304 billion damage. Ranked Frosty needs the engine to start in time, survive the first burst, and deal enough damage before faster boards run you over.
+
+<h2 id="common-mistakes">
+  Common Frosty build mistakes
+</h2>
+
+<GuideTable
+  caption="Common Oaken Tower Frosty build mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="checklist">
+  Frosty build checklist
+</h2>
+
+Before ending each shop, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Do I have Frozen Orb, Glacier, Lyra support, or another real reason to pivot?</li>
+  <li>Is Frozen Orb's 5.2s cooldown solved?</li>
+  <li>What Frosty item does Frozen Orb trigger?</li>
+  <li>Should Frost Essence go on Lost Fragment, Time Pendant, or Warhorn?</li>
+  <li>Is Glacier stacking crit fast enough?</li>
+  <li>Do I need Warhorn, Sapphire Amulet, Frostbound, or survival?</li>
+  <li>Am I building for 10 wins, or only for an Oak screenshot?</li>
+</ul>
+
+If you cannot name the trigger engine and the damage payoff, keep the current board alive and wait for a better Frosty signal.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best Frosty build in Oaken Tower?
+
+The best Frosty build is usually a Frozen Orb engine with Glacier crit scaling, Frost Essence support, Time Pendant or cooldown help, Lost Fragment Multicast, and a late Warhorn or Sapphire Amulet payoff.
+
+### Why is Frozen Orb important?
+
+Frozen Orb is the trigger engine. It can trigger your other Frosty items multiple times, and the upgraded breakpoint can give +50% bonus crit. That is what makes Glacier and Warhorn scale so hard.
+
+### Why does Frozen Orb's 5.2s cooldown matter?
+
+Because 5.2s is slow in ranked fights. If Frozen Orb starts too late, Burn, Poison, or Dark burst can kill before your engine works. Time Pendant and cooldown support solve this problem.
+
+### Why is Glacier good?
+
+Glacier permanently gains crit chance whenever Frosty items trigger. Since Frozen Orb can trigger Frosty items repeatedly, Glacier can scale from a normal sword into the main damage carry.
+
+### What should I use Frost Essence on?
+
+Use Frost Essence on the support item that should join the Frozen Orb chain. The best targets are usually Lost Fragment for Multicast, Time Pendant for cooldown, or Warhorn for late damage.
+
+### Is it Frost Essence or Frosty Essence?
+
+Use the official item name Frost Essence. The effect matters because it gives an item the Frosty tag, allowing Frozen Orb to trigger it.
+
+### Is Lyra good for Frosty?
+
+Yes, Lyra is a strong Frosty signal when the route gives Frozen Orb access or Frosty support and your current board can survive the pivot. Do not take it blindly if you are already too weak.
+
+### Do I need 3-star Frozen Orb?
+
+Not every 10-win run needs it, but the 3-star / upgraded Frozen Orb breakpoint is the ceiling. Triggering Frosty items multiple times and giving +50% bonus crit is the reason the Glacier + Warhorn version scales so hard.
+
+### What beats Frosty?
+
+Fast Burn, Poison, Dark burst, and bad pivot timing can all beat Frosty. If Frozen Orb starts too late, buy cooldown, Time Pendant, health, shield, or temporary damage before chasing more scaling.
+
+### Is Frosty good for The Oak?
+
+Yes. A finished Frosty engine can produce huge Oak numbers. In the recorded Oak test, the build reached 304 billion total damage, with Glacier, Warhorn, and Time Pendant doing massive payoff damage.

@@ -11,23 +11,34 @@ const imageUrls = [
   `${siteUrl}/images/oaken-tower/oaken-tower-shop-level-reroll.webp`,
   `${siteUrl}/images/oaken-tower/oaken-tower-poison-start.webp`,
   `${siteUrl}/images/oaken-tower/oaken-tower-10-wins-result.webp`,
+  `${siteUrl}/images/oaken-tower/oaken-tower-burn-build-core-board.webp`,
+  `${siteUrl}/images/oaken-tower/oaken-tower-bleed-build-core-items.webp`,
+  `${siteUrl}/images/oaken-tower/oaken-tower-frosty-build-core-board.webp`,
 ];
 
 const toc = [
   { id: "start-here", label: "Start here" },
   { id: "simple-game-plan", label: "Game plan" },
   { id: "best-builds", label: "Builds" },
-  { id: "poison-first", label: "Poison" },
+  { id: "build-picker", label: "Build picker" },
+  { id: "poison-build", label: "Poison" },
+  { id: "burn-build", label: "Burn" },
+  { id: "bleed-build", label: "Bleed" },
+  { id: "frosty-build", label: "Frosty" },
   { id: "ten-wins", label: "10 wins" },
   { id: "level-vs-reroll", label: "Level vs reroll" },
   { id: "three-star-items", label: "3-star items" },
   { id: "perks", label: "Perks" },
+  { id: "common-mistakes", label: "Mistakes" },
   { id: "guide-index", label: "Guide index" },
   { id: "faq", label: "FAQ" },
 ];
 
 const relatedLinks = [
   { href: "/oaken-tower/poison-build", label: "Best Poison Build" },
+  { href: "/oaken-tower/burn-build", label: "Best Burn Build" },
+  { href: "/oaken-tower/bleed-build", label: "Best Bleed Build" },
+  { href: "/oaken-tower/frosty-build", label: "Best Frosty Build" },
   { href: "/oaken-tower/10-wins-guide", label: "10-Win Guide" },
   { href: "/oaken-tower/level-vs-reroll", label: "Level vs Reroll" },
   { href: "/oaken-tower/3-star-items", label: "3-Star Items" },
@@ -35,17 +46,17 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-    title: "Oaken Tower Guide: Best Builds, 10-Win Strategy & Meta",
-    description: "Stop throwing your runs. Discover the ultimate Oaken Tower strategy hub: best beginner builds, exact level vs reroll timing, and how to secure 10 wins.",
-    alternates: {
+  title: "Oaken Tower Guide: Best Builds, 10 Wins & Meta Tips",
+  description:
+    "Win more Oaken Tower runs with Poison, Burn, Bleed and Frosty builds, plus 10-win strategy, level vs reroll timing, 3-star items and perks.",
+  alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "Oaken Tower Guide: Builds, 10 Wins, Perks & Tips",
+    title: "Oaken Tower Guide: Best Builds, 10 Wins, Perks & Tips",
     description:
-  "A player-first Oaken Tower guide covering beginner builds, Poison scaling, 10-win strategy, level vs reroll decisions, 3-star items and perk unlocks.",
-
-      url: pageUrl,
+      "A player-first Oaken Tower guide hub covering Poison, Burn, Bleed and Frosty builds, 10-win strategy, level vs reroll decisions, 3-star items and perk unlocks.",
+    url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
     images: [
@@ -59,9 +70,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Oaken Tower Guide: Builds, 10 Wins, Perks & Tips",
+    title: "Oaken Tower Guide: Best Builds, 10 Wins & Tips",
     description:
-  "Win more Oaken Tower runs with clear build choices, shop decisions, 10-win strategy, 3-star upgrades and perk unlock tips.",
+      "Choose the right Oaken Tower build route, stop wasting gold, and learn when to level, reroll, chase 3-star items or push for 10 wins.",
     images: [imageUrls[0]],
   },
 };
@@ -95,18 +106,21 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-  "Oaken Tower Guide: Builds, 10-Win Strategy, Level vs Reroll Decisions, 3-Star Items and Perk Unlocks",
-  description:
-  "A practical Oaken Tower guide for players who want to win more runs without reading a full wiki. It explains what to do first, which beginner-friendly build directions to learn, why Poison is a good first build, how to think about 10 wins, when to level or reroll, when to chase 3-star items, how perk unlocks work, and how to stop losing winnable runs.",
-
-        image: imageUrls,
+        "Oaken Tower Guide: Best Builds, 10-Win Strategy, Level vs Reroll Decisions, 3-Star Items, Perks and Build Routes",
+      description:
+        "A practical Oaken Tower guide hub for players who want to win more runs without reading a full wiki. It explains what to do first, how to read the shop, how to choose between Poison, Burn, Bleed, Frosty, weapon carry and shield routes, when to level or reroll, when to freeze or save gold, how to think about 10 wins, when to chase 3-star items, how perk unlocks affect real runs, and how to stop losing winnable boards by forcing unsupported builds.",
+      image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-05-16",
-      dateModified: "2026-05-16",
+      dateModified: "2026-05-25",
       about: [
         { "@type": "VideoGame", name: "Oaken Tower" },
         { "@type": "Thing", name: "Beginner Guide" },
+        { "@type": "Thing", name: "Best Builds" },
         { "@type": "Thing", name: "Poison Build" },
+        { "@type": "Thing", name: "Burn Build" },
+        { "@type": "Thing", name: "Bleed Build" },
+        { "@type": "Thing", name: "Frosty Build" },
         { "@type": "Thing", name: "10 Wins" },
         { "@type": "Thing", name: "Level vs Reroll" },
         { "@type": "Thing", name: "3-Star Items" },
@@ -138,7 +152,7 @@ const jsonLd = {
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "Build a board that can win early fights instead of forcing a perfect late-game idea. Buy strong tempo, pick one scaling direction, and only level when your board can survive.",
+              "Build a board that can win or safely survive early fights. Do not force a perfect late-game idea. Buy tempo, pick one real direction, and only level when your board can survive.",
           },
         },
         {
@@ -147,34 +161,79 @@ const jsonLd = {
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "Poison is a good first build to learn because it gives steady pressure and teaches repeated triggers, cooldown, and scaling. Take it when the shop offers a clear Poison start, but do not force it from nothing.",
+              "Poison is still one of the easiest directions to learn because it teaches repeated triggers, scaling pressure, and damage-over-time decisions. Burn is faster, Bleed has a higher scaling ceiling, and Frosty is stronger when you understand pivot timing.",
           },
         },
         {
           "@type": "Question",
-          name: "Should I level early in Oaken Tower?",
+          name: "Is Burn still good after the Flare nerf?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "Level early when your board is already strong or your build gains value from leveling. Do not level just because the shop is bad if your tower has no real damage yet.",
+              "Yes. Burn still works as a fast tempo route, but you need to respect the new timing. Molten Bow is the main carry, while Flare now works best as a follow-up scaler after the cooldown change.",
           },
         },
         {
           "@type": "Question",
-          name: "When should I reroll in Oaken Tower?",
+          name: "When should I play Bleed instead of Poison?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "Reroll when you have a target, such as a duplicate, key carry, support item, or build-completing piece. Rolling with no target is one of the easiest ways to waste a strong start.",
+              "Play Bleed when the shop gives you Shardfang, Emerald Sword, Crystal support, or Crown Forge value. Play Poison when the shop gives you earlier pressure and you need a simpler board that stabilizes sooner.",
           },
         },
         {
           "@type": "Question",
-          name: "Should I always chase 3-star items in Oaken Tower?",
+          name: "When should I play Frosty?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "No. Chase 3-star items only when the item is central to your build or unlocks an important breakpoint. Otherwise, the gold may be better spent leveling, buying tempo, or saving.",
+              "Play Frosty when you find Frozen Orb, Glacier, Frost Essence, Lyra support, or enough cooldown support to survive the pivot. If Frozen Orb starts too late, fast boards can kill you before the engine works.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Why do I get stuck around 6 or 7 wins?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Because early tempo stops being enough. You need a real carry, a scaling path, enough hearts, and better gold discipline. Many players throw this stage by over-rolling or chasing weak 3-star upgrades.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Should I level or reroll in Oaken Tower?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Level when your board is stable and future shops are worth the XP. Reroll when you can name the exact item, duplicate, support piece, or matchup fix you need.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Should I always chase 3-star items?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "No. Chase 3-star only when the item is your carry or creates a major breakpoint. If the item is not central to your build, the gold may be better spent leveling, buying power, freezing, or saving.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Why did my perk not unlock?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Usually because the condition was stricter than expected, a potion or encounter reward may have interfered, or the perk was unlocked but not added to your selected pool. Check the exact in-game condition before repeating the attempt.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is Oaken Tower more like a wiki game or a decision game?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "The wiki is useful for checking raw item and perk data. This guide hub is for decisions: what to build, when to level, when to reroll, when to chase upgrades, and how to stop losing winnable runs.",
           },
         },
       ],
@@ -192,13 +251,13 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Oaken Tower Guide: What to Do First, What to Build, and How to Win"
-          description="Start here if you keep losing, do not know what to buy, or just want a simple path toward your first clean 10-win run."
+          title="Oaken Tower Guide: What to Build, What to Buy, and How to Win"
+          description="Start here if you keep losing, do not know which build the shop is offering, or want a clean path through Poison, Burn, Bleed, Frosty, 10-win strategy, leveling and rerolls."
           gameTitle="Oaken Tower"
           gameHref="/oaken-tower"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 16, 2026"
+          updatedAt="May 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -1,0 +1,775 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const itemColumns = [
+  { key: "Item", label: "Item" },
+  { key: "Key Data", label: "Key Data" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const itemRows = [
+  {
+    Item: "Molten Bow",
+    "Key Data":
+      "Rare, 35g, 4.0s cooldown, 1 Multicast, applies 3 Burn. At 2-star, it gains a Start of Combat permanent +2 Burn breakpoint. Check the current tooltip after patches for the 3-star on-trigger text.",
+    "Why It Matters":
+      "This is the main Burn bow carry. The 4.0s cooldown matters because post-nerf Flare now fires at 4.1s, letting Molten Bow start the Burn stack first.",
+  },
+  {
+    Item: "Flare",
+    "Key Data":
+      "Common, 30g, 4.1s cooldown after the nerf, applies 1 Burn. On trigger, it gives Burn items +1 / +2 / +4 bonus Burn by star level, and the 3-star version also gives permanent +2 Burn.",
+    "Why It Matters":
+      "Flare is still one of the best Burn scaling supports. The nerf from 3.9s to 4.1s is small on paper, but it changes the trigger order against 4.0s Molten Bow.",
+  },
+  {
+    Item: "Wildfire",
+    "Key Data":
+      "Common, 20g, 3.7s cooldown, applies 4 Burn. The recent nerf lowered its Burn from 5 to 4, but the price also dropped from 25g to 20g. At 2-star / 3-star, its on-trigger line gives permanent +1 / +2 Burn.",
+    "Why It Matters":
+      "Wildfire is faster than Molten Bow and Flare. It can start early pressure, but you still need a carry and scaling support so it does not become flat Burn.",
+  },
+  {
+    Item: "Fire Orb",
+    "Key Data":
+      "A Flame / Burn support piece that can trigger the Flame item to the right. Higher-star versions can become a major scaling point when placed correctly.",
+    "Why It Matters":
+      "Fire Orb is strongest when its right-side target is the item you actually want to scale. Treat it as a positioning puzzle, not a random damage item.",
+  },
+  {
+    Item: "Cooldown / Time Pendant support",
+    "Key Data":
+      "Cooldown support changes when the first Burn stack happens and whether your carry can fire before faster boards kill you.",
+    "Why It Matters":
+      "Burn wins by starting first. Once Molten Bow or your main trigger is fast enough, stop buying only speed and add damage, Burn scaling, or survival.",
+  },
+  {
+    Item: "Lifebinder Shield / defensive slot",
+    "Key Data":
+      "A defensive flex slot for mirrors, burst, Poison, or fights where the enemy survives the first Burn wave.",
+    "Why It Matters":
+      "Burn is a tempo build, but it still needs a small survival buffer in close ranked fights.",
+  },
+];
+
+export const patchColumns = [
+  { key: "Change", label: "Patch Change" },
+  { key: "Old", label: "Before" },
+  { key: "Now", label: "Now" },
+  { key: "What It Means", label: "What It Means" },
+];
+
+export const patchRows = [
+  {
+    Change: "Flare cooldown",
+    Old: "3.9s",
+    Now: "4.1s",
+    "What It Means":
+      "Flare no longer naturally beats 4.0s Molten Bow to the first trigger. Build around Molten Bow applying Burn first, then Flare scaling the chain after.",
+  },
+  {
+    Change: "Flare price",
+    Old: "25g",
+    Now: "30g",
+    "What It Means":
+      "You can still buy it, but early Flare is no longer a free autopick if it delays your carry, level, or survival.",
+  },
+  {
+    Change: "Wildfire Burn",
+    Old: "5 Burn",
+    Now: "4 Burn",
+    "What It Means":
+      "Wildfire lost some raw pressure, but it is still useful because 3.7s cooldown lets it fire before Molten Bow and Flare.",
+  },
+  {
+    Change: "Wildfire price",
+    Old: "25g",
+    Now: "20g",
+    "What It Means":
+      "The lower price makes it easier to use as early pressure or a support piece without destroying your D7-D8 economy.",
+  },
+];
+
+export const perkColumns = [
+  { key: "Perk", label: "Perk" },
+  { key: "Priority", label: "Priority" },
+  { key: "Why It Helps Burn", label: "Why It Helps Burn" },
+];
+
+export const perkRows = [
+  {
+    Perk: "Merge",
+    Priority: "High",
+    "Why It Helps Burn":
+      "Burn has valuable star breakpoints. Flare's +1 / +2 / +4 bonus Burn scaling and 3-star permanent Burn line make upgrades matter a lot.",
+  },
+  {
+    Perk: "Flash Sale",
+    Priority: "High",
+    "Why It Helps Burn":
+      "Burn wants a funded D7-D8 shop. Discounts help you buy Molten Bow, Flare, Wildfire, Fire Orb, and cooldown support without rolling yourself broke.",
+  },
+  {
+    Perk: "Artillery",
+    Priority: "Medium-High",
+    "Why It Helps Burn":
+      "Useful when Molten Bow or another ranged Burn carry is your main damage source. Take it when your opening already points toward bows.",
+  },
+  {
+    Perk: "Flame / Burn support",
+    Priority: "Medium-High",
+    "Why It Helps Burn":
+      "Still strong when the shop gives you real Fire pieces, but do not force it blindly after the Flare and Wildfire nerfs. The items still need to line up.",
+  },
+  {
+    Perk: "Tempo / Income",
+    Priority: "Medium",
+    "Why It Helps Burn":
+      "Good when you need to survive the early shops or fund a later roll-down. Burn falls apart if you spend gold without finding the carry.",
+  },
+  {
+    Perk: "Generic weapon / bow support",
+    Priority: "Medium",
+    "Why It Helps Burn":
+      "Good only when it buffs the item actually carrying the run. Do not take generic damage if your Burn chain still has no Molten Bow or scaling support.",
+  },
+];
+
+export const dayColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "Main Goal", label: "Main Goal" },
+  { key: "Decision Rule", label: "Decision Rule" },
+];
+
+export const dayRows = [
+  {
+    Timing: "D1-D2",
+    "Main Goal":
+      "Stay flexible. Buy real tempo if the shop gives a strong bow, Flame item, or scaling piece; otherwise level, save, or freeze.",
+    "Decision Rule":
+      "Do not buy clutter. A cheap item is only good if it wins the next fight or points toward Molten Bow, Flare, Wildfire, or Fire Orb.",
+  },
+  {
+    Timing: "D3-D4",
+    "Main Goal":
+      "Look for the first real Burn signal. Molten Bow, Flare, Wildfire, Fire Orb, or a useful Fire slot can justify the pivot.",
+    "Decision Rule":
+      "If you cannot name the carry yet, keep playing the strongest temporary board instead of rolling randomly.",
+  },
+  {
+    Timing: "D5-D7",
+    "Main Goal":
+      "Build around the item already winning fights. Upgrade the carry, add Flare or Wildfire, and preserve enough gold for the roll-down.",
+    "Decision Rule":
+      "If the Burn board is working, support it. If it is not working, do not keep buying every Fire tag you see.",
+  },
+  {
+    Timing: "D8",
+    "Main Goal":
+      "Spend with a target. Use saved gold, discounts, or free rerolls to find Molten Bow, Flare, Fire Orb, Wildfire, cooldown, or a key duplicate.",
+    "Decision Rule":
+      "Before rolling, say the exact missing piece. If you cannot name it, you are probably wasting gold.",
+  },
+  {
+    Timing: "D9+",
+    "Main Goal":
+      "Close the run. Improve first trigger timing, add final Burn scaling, or buy survival if mirrors, Poison, or burst can kill you first.",
+    "Decision Rule":
+      "For 10 wins, buy the next-fight upgrade. Do not greed for an Endless screenshot if the ranked run is already close.",
+  },
+];
+
+export const positionColumns = [
+  { key: "Timing Detail", label: "Timing Detail" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Player Takeaway", label: "Player Takeaway" },
+];
+
+export const positionRows = [
+  {
+    "Timing Detail": "Wildfire: 3.7s",
+    "Why It Matters":
+      "Wildfire fires before Molten Bow and Flare, so it can start early Burn pressure.",
+    "Player Takeaway":
+      "Use Wildfire as early pressure or a scaling support, but do not let it replace your actual carry.",
+  },
+  {
+    "Timing Detail": "Molten Bow: 4.0s",
+    "Why It Matters":
+      "Molten Bow now naturally triggers just before Flare.",
+    "Player Takeaway":
+      "Let Molten Bow be the main Burn source when it is your carry. Put the best slot and support around it.",
+  },
+  {
+    "Timing Detail": "Flare: 4.1s",
+    "Why It Matters":
+      "The 0.1s delay after the nerf means Flare follows Molten Bow instead of beating it.",
+    "Player Takeaway":
+      "Treat Flare as the follow-up scaler. Its timing is part of the build, not just a stat line.",
+  },
+  {
+    "Timing Detail": "Ranged projectile travel",
+    "Why It Matters":
+      "Ranged items can care about where the projectile starts and how quickly it connects.",
+    "Player Takeaway":
+      "In close mirrors, small placement details can decide who starts the damage race first.",
+  },
+];
+
+export const starColumns = [
+  { key: "Target", label: "Upgrade Target" },
+  { key: "Why You Upgrade It", label: "Why You Upgrade It" },
+  { key: "When To Stop", label: "When To Stop" },
+];
+
+export const starRows = [
+  {
+    Target: "Flare",
+    "Why You Upgrade It":
+      "Flare's on-trigger Burn bonus scales by star level: +1 / +2 / +4 bonus Burn to Burn items, with a 3-star permanent +2 Burn line.",
+    "When To Stop":
+      "Push it when Flare is actually supporting your main Burn chain. Do not chase 3-star Flare if the board still lacks a carry.",
+  },
+  {
+    Target: "Molten Bow",
+    "Why You Upgrade It":
+      "Molten Bow is your main carry. The 2-star Start of Combat permanent +2 Burn breakpoint makes it scale better across fights.",
+    "When To Stop":
+      "Upgrade it when it is already carrying. If another item is doing the work, do not force Molten Bow just because it is rare.",
+  },
+  {
+    Target: "Wildfire",
+    "Why You Upgrade It":
+      "Wildfire's 2-star / 3-star on-trigger permanent +1 / +2 Burn lines help it stay relevant after the base Burn nerf.",
+    "When To Stop":
+      "Upgrade it if it is firing often and supporting the chain. Skip if it is just a cheap filler piece.",
+  },
+  {
+    Target: "Fire Orb",
+    "Why You Upgrade It":
+      "Fire Orb becomes valuable when it triggers the correct Flame item to the right or turns a support slot into real scaling.",
+    "When To Stop":
+      "Only upgrade when the positioning is solved. A strong Fire Orb in the wrong place is wasted value.",
+  },
+];
+
+export const matchupColumns = [
+  { key: "Matchup", label: "Matchup" },
+  { key: "Problem", label: "Problem" },
+  { key: "Answer", label: "Answer" },
+];
+
+export const matchupRows = [
+  {
+    Matchup: "Shield / healing",
+    Problem:
+      "They can survive weak Burn pressure and outscale if your first wave is not lethal.",
+    Answer:
+      "Upgrade the carry, add Flare or Wildfire scaling, and keep direct bow damage or a flex damage slot. If the fight lasts longer, your Burn must keep growing.",
+  },
+  {
+    Matchup: "Poison tempo",
+    Problem:
+      "Poison can stabilize earlier and punish greedy Burn setups that spend too long shopping.",
+    Answer:
+      "Buy earlier activation, health, shield, or a stronger immediate board. Do not sell a winning tempo board for unfinished Burn pieces.",
+  },
+  {
+    Matchup: "Burn mirror",
+    Problem:
+      "The mirror is often decided by who starts Burn first and who survives the first wave.",
+    Answer:
+      "Respect the 3.7s / 4.0s / 4.1s timings, improve ranged placement, and add a small defensive buffer when the lobby has many Burn boards.",
+  },
+  {
+    Matchup: "Dark burst",
+    Problem:
+      "Start-of-combat burst can kill before your Burn chain matters.",
+    Answer:
+      "Stop greeding. Buy health, shield, earlier activation, or the safest next-fight upgrade. Burn should usually finish 10 wins before Endless burst engines take over.",
+  },
+  {
+    Matchup: "Late scaling engines",
+    Problem:
+      "Frosty, Bleed, shield scaling, or Dark variants can pass your ceiling if the fight goes too long.",
+    Answer:
+      "Play Burn as a tempo route. The goal is to end the game before slower engines reach their ceiling, not to beat every infinite board.",
+  },
+];
+
+export const finalColumns = [
+  { key: "Slot", label: "Slot" },
+  { key: "Target Piece", label: "Target Piece" },
+  { key: "Purpose", label: "Purpose" },
+];
+
+export const finalRows = [
+  {
+    Slot: "Main carry",
+    "Target Piece": "2-star or 3-star Molten Bow",
+    Purpose:
+      "Starts the main Burn pressure and should receive your best slot, cooldown, or damage support.",
+  },
+  {
+    Slot: "Follow-up scaler",
+    "Target Piece": "Flare",
+    Purpose:
+      "Follows Molten Bow after the 4.1s nerf timing and gives Burn items +1 / +2 / +4 bonus Burn by star level.",
+  },
+  {
+    Slot: "Early pressure / support",
+    "Target Piece": "Wildfire",
+    Purpose:
+      "Fires at 3.7s, adds early Burn, and can gain permanent Burn at higher stars.",
+  },
+  {
+    Slot: "Positioning support",
+    "Target Piece": "Fire Orb",
+    Purpose:
+      "Triggers the Flame item to the right and can multiply the correct carry when positioned well.",
+  },
+  {
+    Slot: "Defense",
+    "Target Piece": "Lifebinder Shield, health, or shield flex",
+    Purpose:
+      "Stops mirrors, Poison, and burst from ending the run before Burn finishes the opponent.",
+  },
+  {
+    Slot: "Flex",
+    "Target Piece": "Cooldown, Multicast, direct damage, or backup bow",
+    Purpose:
+      "Solves the next fight. Use this slot for whatever your current matchup demands.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Loses", label: "Why It Loses" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Ignoring the 4.0s vs 4.1s timing",
+    "Why It Loses":
+      "The Flare nerf is only 0.2s from old value and 0.1s behind Molten Bow, but that small gap changes the opening order.",
+    Fix:
+      "Let Molten Bow apply Burn first, then use Flare as the follow-up scaler.",
+  },
+  {
+    Mistake: "Over-buying Fire tags",
+    "Why It Loses":
+      "A board full of Fire items can still lack a carry, speed, or survival.",
+    Fix:
+      "Name the carry, the follow-up scaler, and the item that wins the next fight.",
+  },
+  {
+    Mistake: "Skipping upgrades that matter",
+    "Why It Loses":
+      "Flare, Wildfire, and Molten Bow all have important star breakpoints.",
+    Fix:
+      "Use Merge, discounts, or targeted rerolls when the upgrade improves the active Burn chain.",
+  },
+  {
+    Mistake: "Playing Burn like an Endless build",
+    "Why It Loses":
+      "Burn is strongest when it wins before slower engines take over.",
+    Fix:
+      "When 10 wins is close, buy immediate power or survival instead of chasing a perfect late-game board.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Burn is still good after the Flare and Wildfire nerfs, but you need to build around the new timing. Molten Bow has a 4.0s cooldown, while Flare now has a 4.1s cooldown, so Molten Bow should usually apply Burn first and Flare should scale the chain after.**
+
+Use the official item name **Molten Bow**, not “Firebow.” Build around Molten Bow, Flare, Wildfire, Fire Orb, cooldown support, and one defensive flex slot. Burn wins by ending fights before slower Frosty, Bleed, shield, or Dark engines come online.
+
+<em>Version note: this guide is written for the current Early Access item pool as of May 25, 2026, after the recent Flare and Wildfire changes. Re-check item text after major patches.</em>
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-burn-build-core-board.webp"
+    alt="Oaken Tower Burn build board with Molten Bow, Fire Orb and Burn support pieces."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Burn is still a strong tempo route after the nerf. The difference is that timing, star breakpoints, and support placement now matter more.
+  </figcaption>
+</figure>
+
+<h2 id="burn-after-nerf">
+  Burn after the Flare and Wildfire nerfs
+</h2>
+
+The biggest reason to play Burn right now is still the same: it kills slow boards before they finish scaling.
+
+The difference after the nerf is that Burn is less autopilot. Flare is slower and more expensive, and Wildfire applies less base Burn. That does not kill the build, but it changes the way you read the first few triggers.
+
+<GuideTable
+  caption="Recent Burn changes that affect the build."
+  columns={patchColumns}
+  rows={patchRows}
+/>
+
+The most important number is **4.0s vs 4.1s**.
+
+Molten Bow triggers at 4.0s. Flare now triggers at 4.1s. That 0.1s gap is small, but it is enough to make Molten Bow the first Burn source and Flare the follow-up scaler.
+
+<h2 id="build-plan">
+  The Burn build plan
+</h2>
+
+Burn is a tempo build. Your job is to start the damage race early and force the opponent to die before their engine stabilizes.
+
+A clean Burn run has five jobs:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <strong>Find a real carry.</strong> In this guide, that means Molten Bow, not a vague “Firebow.”
+  </li>
+  <li>
+    <strong>Use Flare as the follow-up scaler.</strong> After the 4.1s nerf, it should usually fire after Molten Bow.
+  </li>
+  <li>
+    <strong>Add Wildfire or Fire Orb when they connect the chain.</strong> Do not buy them as random Fire tags.
+  </li>
+  <li>
+    <strong>Hit the right star breakpoints.</strong> Flare and Wildfire upgrades are much more valuable than generic filler.
+  </li>
+  <li>
+    <strong>Buy just enough survival.</strong> One defensive slot can beat mirrors, Poison, and burst without turning the build into a tank board.
+  </li>
+</ol>
+
+<GuideTable
+  caption="Core pieces for the Oaken Tower Burn build."
+  columns={itemColumns}
+  rows={itemRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="perks">
+  Best perks for Burn
+</h2>
+
+Burn perks and Fire support were much easier to trust before the nerf. They are still good, but now you should ask whether the perk helps your actual board, not your dream board.
+
+<GuideTable
+  caption="Best perks for Oaken Tower Burn builds."
+  columns={perkColumns}
+  rows={perkRows}
+/>
+
+The safest rule:
+
+**Take Merge or Flash Sale when they help you hit Burn breakpoints. Take Artillery or Flame support when your opening already has Molten Bow or a real Fire package.**
+
+<h2 id="day-plan">
+  Day-by-day Burn route
+</h2>
+
+Burn is fast, but that does not mean every early shop should become a Fire shop.
+
+<GuideTable
+  caption="Oaken Tower Burn build timing plan."
+  columns={dayColumns}
+  rows={dayRows}
+/>
+
+If the shop gives you a real Burn direction, buy it. If it gives you random filler, do not force. Level, freeze, save, or play the strongest temporary board until the carry appears.
+
+<h2 id="molten-bow">
+  Use Molten Bow as the official carry name
+</h2>
+
+This guide uses the official item name **Molten Bow**.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-molten-bow-burn-only.webp"
+    alt="Oaken Tower Molten Bow appearing in shop as a Burn-specific bow carry."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Molten Bow is the Burn bow carry. Do not treat it as a generic bow item unless the rest of the board supports Burn.
+  </figcaption>
+</figure>
+
+If you have been calling it “Firebow,” clean that up in your own notes. Players search for item names, and the item this route is built around is Molten Bow.
+
+Buy Molten Bow when at least one of these is true:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>You already have Flare, Wildfire, Fire Orb, or Fire slot support.</li>
+  <li>You can place it where it starts the Burn chain.</li>
+  <li>You have gold to support it instead of leaving it alone.</li>
+  <li>Your current board needs a damage-over-time carry.</li>
+  <li>You are close enough to the D7-D8 roll-down to find missing pieces soon.</li>
+</ul>
+
+<h2 id="trigger-order">
+  Trigger order: Wildfire, Molten Bow, then Flare
+</h2>
+
+Burn positioning is mostly a timing problem.
+
+<GuideTable
+  caption="Important Burn trigger timings."
+  columns={positionColumns}
+  rows={positionRows}
+/>
+
+The default order to think about is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <strong>Wildfire at 3.7s</strong> can start early Burn pressure.
+  </li>
+  <li>
+    <strong>Molten Bow at 4.0s</strong> applies the main carry Burn.
+  </li>
+  <li>
+    <strong>Flare at 4.1s</strong> follows up and scales Burn items.
+  </li>
+</ol>
+
+This is why the Flare nerf matters. Before, Flare could naturally fire earlier. Now it usually acts as the follow-up, not the first trigger.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-burn-fire-orb-timing.webp"
+    alt="Oaken Tower Burn build showing Fire Orb and Flame item positioning."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fire Orb and other support pieces are strongest when the item they trigger is the item you actually want to scale.
+  </figcaption>
+</figure>
+
+<h2 id="positioning">
+  Positioning and ranged timing
+</h2>
+
+Once the trigger order is clear, place the board around the item doing the work.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-burn-ranged-placement.webp"
+    alt="Oaken Tower ranged weapon placement showing why projectile timing can matter."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ranged placement can matter in close fights because projectile travel affects when damage actually connects.
+  </figcaption>
+</figure>
+
+Use these rules:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Put Molten Bow where it gets your best carry slot or bow support.</li>
+  <li>Place Flare so it supports the Burn chain after the first stack exists.</li>
+  <li>Place Fire Orb so the Flame item to the right is the item you want to trigger.</li>
+  <li>Use ranged placement carefully in mirrors where first contact matters.</li>
+  <li>Do not spread cooldown and Multicast across random pieces.</li>
+</ul>
+
+<h2 id="day-eight">
+  D7-D8 roll-down: spend with a target
+</h2>
+
+The D7-D8 timing is where many Burn runs become real.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-burn-day-eight-reroll.webp"
+    alt="Oaken Tower Burn build using a targeted D8 reroll to find Burn and bow support pieces."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    D8 rerolls should search for named pieces: Molten Bow, Flare, Wildfire, Fire Orb, cooldown, or a star breakpoint.
+  </figcaption>
+</figure>
+
+Before rolling, name the missing piece:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Do I need Molten Bow?</li>
+  <li>Do I need Flare or a Flare duplicate?</li>
+  <li>Do I need Wildfire for earlier pressure?</li>
+  <li>Do I need Fire Orb positioning support?</li>
+  <li>Do I need cooldown to make the first trigger faster?</li>
+  <li>Do I need defense because Burn mirrors or Poison are killing me?</li>
+</ul>
+
+If you cannot name the target, do not roll until broke.
+
+<h2 id="star-breakpoints">
+  Star breakpoints: what is worth upgrading?
+</h2>
+
+Burn has real star breakpoints. That is why Merge, Flash Sale, and targeted rerolls can be so strong.
+
+<GuideTable
+  caption="Important Burn upgrade targets."
+  columns={starColumns}
+  rows={starRows}
+/>
+
+Do not chase every 3-star. Chase the upgrade that improves the active Burn chain.
+
+<h2 id="final-board">
+  Target final board
+</h2>
+
+A clean 10-win Burn board does not need every Fire item. It needs a fast carry, a follow-up scaler, and enough survival to reach the finish line.
+
+<GuideTable
+  caption="Example Oaken Tower Burn build final board targets."
+  columns={finalColumns}
+  rows={finalRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-burn-final-board.webp"
+    alt="Oaken Tower Burn build final board and ranked result."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A good Burn final board is not about using every Fire item. It is about making the first Burn chain lethal before slower builds stabilize.
+  </figcaption>
+</figure>
+
+<h2 id="matchups">
+  Matchups and counters
+</h2>
+
+Burn is strongest against slow boards. It struggles when the enemy either kills first or survives the first wave.
+
+<GuideTable
+  caption="How to play the Oaken Tower Burn build into common matchups."
+  columns={matchupColumns}
+  rows={matchupRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-burn-vs-fast-burst.webp"
+    alt="Oaken Tower Burn or Doom Guide burst variant showing how fast Burn pressure can delete opponents."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Burn variants can hit extremely fast, but ranked consistency still comes from timing, star breakpoints, and enough survival to avoid getting deleted first.
+  </figcaption>
+</figure>
+
+The matchup rule is simple:
+
+**Against slow boards, make Burn faster. Against fast boards, buy survival or earlier activation.**
+
+<h2 id="common-mistakes">
+  Common Burn build mistakes
+</h2>
+
+<GuideTable
+  caption="Common Oaken Tower Burn build mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="checklist">
+  Burn build checklist
+</h2>
+
+Before ending each shop, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Am I building around Molten Bow, or am I using vague Fire item names?</li>
+  <li>Do I understand the 3.7s / 4.0s / 4.1s trigger order?</li>
+  <li>Is Flare supporting a real Burn chain?</li>
+  <li>Is Wildfire early pressure, scaling support, or just filler?</li>
+  <li>Do I need a Flare, Wildfire, or Molten Bow star breakpoint?</li>
+  <li>Am I rolling for a named target?</li>
+  <li>Do I need survival for Poison, mirrors, or Dark burst?</li>
+  <li>Am I playing for 10 wins, or greeding for a late-game screenshot?</li>
+</ul>
+
+If those answers are clear, the Burn build is probably real.
+
+<h2 id="related-guides">
+  Related Oaken Tower guides
+</h2>
+
+- <Link href="/oaken-tower">Oaken Tower Guide</Link> for the full guide hub.
+- <Link href="/oaken-tower/10-wins-guide">How to Get 10 Wins in Oaken Tower</Link> if you keep throwing strong starts.
+- <Link href="/oaken-tower/level-vs-reroll">Oaken Tower Level vs Reroll Guide</Link> if you over-roll before the build is ready.
+- <Link href="/oaken-tower/bleed-build">Best Bleed Build in Oaken Tower</Link> if you want a scaling damage-over-time route.
+- <Link href="/oaken-tower/poison-build">Best Poison Build in Oaken Tower</Link> if you want another early pressure build.
+- <Link href="/oaken-tower/frosty-build">Best Frosty Build in Oaken Tower</Link> if you want a late-game scaling route.
+- <Link href="/oaken-tower/3-star-items">How to Get 3-Star Items in Oaken Tower</Link> if you are pushing a carry toward a major breakpoint.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is Burn still good after the Flare nerf?
+
+Yes. Burn is still good, but the timing changed. Flare moved from 3.9s to 4.1s, while Molten Bow is 4.0s, so Molten Bow usually applies Burn first and Flare follows as the scaler.
+
+### What is the best Burn build in Oaken Tower?
+
+The best Burn build is usually a Molten Bow carry supported by Flare, Wildfire, Fire Orb, cooldown, star upgrades, and one defensive flex slot. The exact board changes by shop, but the trigger order matters.
+
+### Is Firebow a real item?
+
+Use the official item name Molten Bow. “Firebow” can be used casually to mean a Burn bow, but the item this route is built around is Molten Bow.
+
+### Why does Flare's 4.1s cooldown matter?
+
+Because Molten Bow has a 4.0s cooldown. That 0.1s gap means Molten Bow can apply the first Burn stack before Flare triggers, so Flare should usually be treated as a follow-up scaler.
+
+### Is Wildfire still worth buying?
+
+Yes, but it is not an autopick. Wildfire now applies 4 Burn instead of 5, but it costs 20g and has a 3.7s cooldown, so it can still provide early Burn pressure and useful scaling at higher stars.
+
+### What are the best perks for Burn?
+
+Merge and Flash Sale are the safest general Burn perks because they help with star breakpoints and expensive roll-downs. Artillery, Flame/Burn support, and economy perks are good when the opening shop supports them.
+
+### Should I force Burn from Day 1?
+
+No. Buy early Burn only when the shop gives you real tempo or a clear Fire package. If the shop gives random filler, level, freeze, save, or play the strongest temporary board.
+
+### What beats Burn?
+
+Poison tempo, Burn mirrors, Dark burst, shield / healing boards, and late scaling engines can all beat Burn if your first wave is too slow or too weak. The answer is usually earlier activation, a stronger carry, or a small defensive buffer.
+
+### Do I need a 3-star Molten Bow?
+
+No, but Molten Bow upgrades are valuable when it is already your carry. Do not chase 3-star unless the upgrade actually helps the active Burn chain.
+
+### Why does my Burn build fall off late?
+
+Burn falls off when it is only fast, not scalable or safe. Add Flare upgrades, Wildfire scaling, Fire Orb positioning, cooldown, direct damage, or a defensive flex slot before enemies survive your first wave.

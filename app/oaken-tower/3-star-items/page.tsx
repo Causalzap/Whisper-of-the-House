@@ -32,10 +32,13 @@ const toc = [
 
 const relatedLinks = [
   { href: "/oaken-tower", label: "Oaken Tower Guide" },
-  { href: "/oaken-tower/10-wins-guide", label: "10-Win Guide" },
-  { href: "/oaken-tower/level-vs-reroll", label: "Level vs Reroll" },
-  { href: "/oaken-tower/poison-build", label: "Best Poison Build" },
-  { href: "/oaken-tower/perk-unlock-guide", label: "Perk Unlock Guide" },
+    { href: "/oaken-tower/10-wins-guide", label: "10-Win Guide" },
+    { href: "/oaken-tower/level-vs-reroll", label: "Level vs Reroll" },
+    { href: "/oaken-tower/perk-unlock-guide", label: "Perk Unlock Guide" },
+    { href: "/oaken-tower/poison-build", label: "Best Poison Build" },
+    { href: "/oaken-tower/burn-build", label: "Best Burn Build" },
+    { href: "/oaken-tower/frosty-build", label: "Best Frosty Build" },
+    { href: "/oaken-tower/bleed-build", label: "Best Bleed Build" },
   
 ];
 

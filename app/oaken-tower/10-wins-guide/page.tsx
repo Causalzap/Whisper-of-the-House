@@ -37,11 +37,13 @@ const toc = [
 
 const relatedLinks = [
   { href: "/oaken-tower", label: "Oaken Tower Guide" },
-  { href: "/oaken-tower/poison-build", label: "Best Poison Build" },
-  { href: "/oaken-tower/level-vs-reroll", label: "Level vs Reroll" },
-  { href: "/oaken-tower/3-star-items", label: "3-Star Items" },
-  { href: "/oaken-tower/perk-unlock-guide", label: "Perk Unlock Guide" },
-  
+    { href: "/oaken-tower/level-vs-reroll", label: "Level vs Reroll" },
+    { href: "/oaken-tower/3-star-items", label: "3-Star Items" },
+    { href: "/oaken-tower/perk-unlock-guide", label: "Perk Unlock Guide" },
+    { href: "/oaken-tower/poison-build", label: "Best Poison Build" },
+    { href: "/oaken-tower/burn-build", label: "Best Burn Build" },
+    { href: "/oaken-tower/frosty-build", label: "Best Frosty Build" },
+    { href: "/oaken-tower/bleed-build", label: "Best Bleed Build" },
 ];
 
 export const metadata: Metadata = {

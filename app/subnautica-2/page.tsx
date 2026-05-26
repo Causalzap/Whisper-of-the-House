@@ -25,7 +25,7 @@ const guideUrls = [
   `${siteUrl}/subnautica-2/digestion-adaptation`,
   `${siteUrl}/subnautica-2/first-base-setup`,
   `${siteUrl}/subnautica-2/tadpole-submarine`,
-  `${siteUrl}/subnautica-2/coop-guide`,
+  `${siteUrl}/subnautica-2/co-op-guide`,
   `${siteUrl}/subnautica-2/collector-leviathan`,
 ];
 
@@ -63,7 +63,7 @@ const relatedLinks = [
   { href: "/subnautica-2/digestion-adaptation", label: "Digestion Adaptation" },
   { href: "/subnautica-2/first-base-setup", label: "First Base Setup" },
   { href: "/subnautica-2/tadpole-submarine", label: "Tadpole Submarine" },
-  { href: "/subnautica-2/coop-guide", label: "Co-op Guide" },
+  { href: "/subnautica-2/co-op-guide", label: "Co-op Guide" },
   { href: "/subnautica-2/collector-leviathan", label: "Collector Leviathan" },
 ];
 

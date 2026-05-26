@@ -125,6 +125,7 @@ const allGameGuides = [
   { title: 'LEGO® Batman™: Legacy of the Dark Knight', href: '/lego-batman'},
   { title: 'Deep Rock Galactic: Rogue Core', href: '/deep-rock-galactic'},
   { title: 'ZERO PARADES: For Dead Spies', href: '/zero-parades'},
+  { title: 'Paralives', href: '/paralives'},
 
 ];
 

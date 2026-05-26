@@ -1,0 +1,797 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const itemColumns = [
+  { key: "Item", label: "Item" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "Why It Matters For Bleed", label: "Why It Matters For Bleed" },
+];
+
+export const itemRows = [
+  {
+    Item: "Shardfang",
+    "What It Does":
+      "2.0s cooldown. When another item applies Bleed, Shardfang triggers. Higher-star versions trigger more times, and the 3-star version adds extra Bleed before triggering multiple times.",
+    "Why It Matters For Bleed":
+      "This is the payoff. Shardfang does not start the Bleed chain by itself; it rewards you for having another item apply Bleed first.",
+  },
+  {
+    Item: "Emerald Sword",
+    "What It Does":
+      "2.3s cooldown. At 1-star, it gives your Crystal items +1 bonus Bleed at the start of combat. At 2-star, this becomes +2. At 3-star, it becomes +4 and turns into the build's key permanent Crystal Bleed scaling point.",
+    "Why It Matters For Bleed":
+      "It is the cleanest Shardfang enabler because it turns Crystal items into Bleed appliers. The +1 → +2 → +4 jump also explains why upgrading Emerald Sword matters so much.",
+  },
+  {
+    Item: "Midas Diary",
+    "What It Does":
+      "Economy item that helps fund expensive shops, rerolls, upgrades, and Crownforge-style scaling.",
+    "Why It Matters For Bleed":
+      "Bleed is expensive when played correctly. You need gold to find Shardfang, upgrade Emerald Sword, buy cooldown, and avoid dead rerolls.",
+  },
+  {
+    Item: "Crown Forge / Crown Forge Brew",
+    "What It Does":
+      "Upgrade or scaling value that can push a key item toward a major breakpoint.",
+    "Why It Matters For Bleed":
+      "Use it on the engine, not on random support. Emerald Sword is often the correct target because each star directly improves how much Bleed your Crystal package applies.",
+  },
+  {
+    Item: "Lost Fragment / Time Pendant / cooldown support",
+    "What It Does":
+      "Adds Multicast, reduces cooldown, or increases how often the chain fires.",
+    "Why It Matters For Bleed":
+      "Shardfang has a short 2.0s base cooldown, but the whole board still needs early activation. Cooldown gets the engine online; Multicast makes each cycle stronger.",
+  },
+  {
+    Item: "Night Quill / other backup trigger",
+    "What It Does":
+      "Can help bridge the build when you have Bleed direction but not the perfect Shardfang + Emerald Sword package yet.",
+    "Why It Matters For Bleed":
+      "It gives you a fallback trigger or damage line so you are not stuck holding weak Bleed tags while waiting for the perfect shop.",
+  },
+];
+
+export const starColumns = [
+  { key: "Item", label: "Item" },
+  { key: "1-Star / 2-Star Role", label: "1-Star / 2-Star Role" },
+  { key: "3-Star Breakpoint", label: "3-Star Breakpoint" },
+];
+
+export const starRows = [
+  {
+    Item: "Shardfang",
+    "1-Star / 2-Star Role":
+      "Shardfang has a 2.0s base cooldown and triggers when another item applies Bleed. The lower-star versions are already useful if you have a reliable Bleed applier.",
+    "3-Star Breakpoint":
+      "The 3-star version is the big ceiling jump because it adds extra Bleed and triggers multiple times. This is where Shardfang changes from a payoff into a real late-game engine.",
+  },
+  {
+    Item: "Emerald Sword",
+    "1-Star / 2-Star Role":
+      "Emerald Sword has a 2.3s base cooldown. At 1-star, it gives Crystal items +1 bonus Bleed at the start of combat; at 2-star, it gives +2.",
+    "3-Star Breakpoint":
+      "At 3-star, Emerald Sword gives Crystal items +4 bonus Bleed and becomes the build's key permanent Crystal Bleed scaling point. This +1 → +2 → +4 jump is why Emerald Sword is worth upgrading.",
+  },
+  {
+    Item: "Midas Diary",
+    "1-Star / 2-Star Role":
+      "Funds rerolls and lets you search without destroying the run.",
+    "3-Star Breakpoint":
+      "Only chase upgrades if the economy directly helps you finish the Shardfang / Emerald Sword / Crown Forge plan.",
+  },
+];
+
+export const perkColumns = [
+  { key: "Perk", label: "Perk" },
+  { key: "Priority", label: "Priority" },
+  { key: "Why It Helps Bleed", label: "Why It Helps Bleed" },
+];
+
+export const perkRows = [
+  {
+    Perk: "Merge",
+    Priority: "High",
+    "Why It Helps Bleed":
+      "Bleed cares about star breakpoints. Merge helps you reach important Shardfang or Emerald Sword upgrades without spending the whole run chasing duplicates.",
+  },
+  {
+    Perk: "Flash Sale",
+    Priority: "High",
+    "Why It Helps Bleed":
+      "Bleed wants expensive items and targeted roll-downs. Discount windows can turn D7-D8 into a real engine-building shop.",
+  },
+  {
+    Perk: "Artillery",
+    Priority: "Medium",
+    "Why It Helps Bleed":
+      "Useful when your Bleed route uses bow or ranged support, but it is not required for the Shardfang / Emerald Sword core.",
+  },
+  {
+    Perk: "Melee / Sword support",
+    Priority: "Medium",
+    "Why It Helps Bleed":
+      "Good if Emerald Sword or another sword becomes your main trigger. Take it when the opening shop already points toward weapons.",
+  },
+  {
+    Perk: "Generic economy / income",
+    Priority: "Medium",
+    "Why It Helps Bleed":
+      "Good when the run needs gold more than immediate damage. Bleed often needs a funded pivot more than another random tag.",
+  },
+];
+
+export const packColumns = [
+  { key: "Pack / Tag", label: "Pack / Tag" },
+  { key: "What To Know", label: "What To Know" },
+  { key: "Practical Decision", label: "Practical Decision" },
+];
+
+export const packRows = [
+  {
+    "Pack / Tag": "Crystal",
+    "What To Know":
+      "Emerald Sword and Shardfang both care about the Crystal package. Emerald Sword gives Crystal items bonus Bleed, and Shardfang can punish the Bleed application.",
+    "Practical Decision":
+      "If you already have Emerald Sword, Crystal shops and Crystal-tagged items become more attractive because they can join the same engine.",
+  },
+  {
+    "Pack / Tag": "Dagger",
+    "What To Know":
+      "Shardfang is a Dagger / Crystal-style payoff. It needs another item to apply Bleed first.",
+    "Practical Decision":
+      "Do not buy Shardfang and assume the build is done. Ask what item applies Bleed before Shardfang triggers.",
+  },
+  {
+    "Pack / Tag": "Sword",
+    "What To Know":
+      "Emerald Sword being a Sword matters for perk and support decisions.",
+    "Practical Decision":
+      "If the run offers sword support, Emerald Sword can become both the trigger and the scaling target.",
+  },
+  {
+    "Pack / Tag": "Bleed",
+    "What To Know":
+      "Bleed is not just a tag count. The build needs application, a payoff, and enough speed.",
+    "Practical Decision":
+      "Skip random Bleed pieces if they do not apply Bleed, trigger from Bleed, or improve the engine.",
+  },
+];
+
+export const dayColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "Main Goal", label: "Main Goal" },
+  { key: "Decision Rule", label: "Decision Rule" },
+];
+
+export const dayRows = [
+  {
+    Timing: "D1-D3",
+    "Main Goal":
+      "Survive with tempo. Use Poison, Burn, bow pressure, a fast weapon, shield, healing, or economy if it keeps the run alive.",
+    "Decision Rule":
+      "Do not force Bleed before you see Shardfang, Emerald Sword, or a clear Crystal / Bleed package.",
+  },
+  {
+    Timing: "D4-D6",
+    "Main Goal":
+      "Start naming targets. Shardfang, Emerald Sword, Midas Diary, and Crownforge-style value are real reasons to lean Bleed.",
+    "Decision Rule":
+      "If you still cannot name the trigger chain by D6, keep your current board and avoid blind rerolls.",
+  },
+  {
+    Timing: "D7-D8",
+    "Main Goal":
+      "Commit or pivot. This is the best window to spend saved gold on named Bleed pieces, duplicates, cooldown, or Crown Forge value.",
+    "Decision Rule":
+      "Roll only when you know whether you need Shardfang, Emerald Sword, a duplicate, cooldown, or a fallback carry.",
+  },
+  {
+    Timing: "D9+",
+    "Main Goal":
+      "Finish the engine. Make the main trigger fast enough, then add Multicast, Bleed scaling, crit, health, or shield.",
+    "Decision Rule":
+      "When you are close to 10 wins, buy what wins the next fight, not what creates the prettiest Oak screenshot.",
+  },
+];
+
+export const fallbackColumns = [
+  { key: "If This Happens", label: "If This Happens" },
+  { key: "Best Response", label: "Best Response" },
+  { key: "Why", label: "Why" },
+];
+
+export const fallbackRows = [
+  {
+    "If This Happens": "No Shardfang by D5-D6",
+    "Best Response":
+      "Do not keep forcing pure Bleed. Play the strongest tempo board and keep Emerald Sword / Crystal pieces only if they are already helping.",
+    Why:
+      "Bleed without a payoff becomes slow damage. You need to reach the next shops with hearts and gold.",
+  },
+  {
+    "If This Happens": "Emerald Sword appears first",
+    "Best Response":
+      "Use it as a Crystal scaling signal. Look for Shardfang, Crystal support, sword support, and Crown Forge value.",
+    Why:
+      "Emerald Sword can become the external trigger and scaling piece that makes Shardfang worth building around.",
+  },
+  {
+    "If This Happens": "Shardfang appears with no Bleed applier",
+    "Best Response":
+      "Freeze or buy only if you can soon add Emerald Sword, Night Quill, Amethyst-style Bleed support, or another reliable applier.",
+    Why:
+      "Shardfang is a payoff. It does not solve application by itself.",
+  },
+  {
+    "If This Happens": "You find Poison tempo instead",
+    "Best Response":
+      "Stay Poison or hybrid until Bleed has a real payoff. Do not sell a winning Poison board for weak Bleed tags.",
+    Why:
+      "Poison and Bleed both use damage-over-time pressure, but Poison is often easier to stabilize early.",
+  },
+  {
+    "If This Happens": "You have the engine but lose to burst",
+    "Best Response":
+      "Buy health, shield, earlier activation, or a safer next-fight upgrade before adding more greed.",
+    Why:
+      "Bleed scaling is useless if the chain starts after you are dead.",
+  },
+];
+
+export const poisonColumns = [
+  { key: "Question", label: "Question" },
+  { key: "Choose Bleed When", label: "Choose Bleed When" },
+  { key: "Choose Poison When", label: "Choose Poison When" },
+];
+
+export const poisonRows = [
+  {
+    Question: "What did the shop give first?",
+    "Choose Bleed When":
+      "You see Shardfang, Emerald Sword, Crystal support, or a Crown Forge path.",
+    "Choose Poison When":
+      "You see early Poison application, fast Poison triggers, or a board that already wins fights.",
+  },
+  {
+    Question: "How much gold do you have?",
+    "Choose Bleed When":
+      "You can afford targeted rerolls and upgrades for the engine.",
+    "Choose Poison When":
+      "You are low on gold and need a simpler damage-over-time plan now.",
+  },
+  {
+    Question: "What is your damage ceiling?",
+    "Choose Bleed When":
+      "You can scale Emerald Sword / Shardfang into a late engine or Oak-style damage test.",
+    "Choose Poison When":
+      "You need consistent pressure without waiting for a specific Legendary payoff.",
+  },
+  {
+    Question: "What is killing you?",
+    "Choose Bleed When":
+      "Slow shields or healing boards are giving you time to scale.",
+    "Choose Poison When":
+      "Fast lobbies punish slow setup and you need earlier pressure.",
+  },
+];
+
+export const speedColumns = [
+  { key: "Breakpoint", label: "Breakpoint" },
+  { key: "What To Buy", label: "What To Buy" },
+  { key: "Stop When", label: "Stop When" },
+];
+
+export const speedRows = [
+  {
+    Breakpoint: "Engine is too slow",
+    "What To Buy":
+      "Cooldown reduction, Time Pendant, faster trigger items, or positioning that starts the chain sooner.",
+    "Stop When":
+      "Shardfang / Emerald Sword are firing early enough that enemies cannot freely scale first.",
+  },
+  {
+    Breakpoint: "Engine fires but lacks output",
+    "What To Buy":
+      "Multicast, extra Bleed per trigger, Crown Forge value, crit, or a stronger Emerald Sword.",
+    "Stop When":
+      "Each activation meaningfully increases Bleed pressure instead of just making numbers flash faster.",
+  },
+  {
+    Breakpoint: "Engine wins but you die first",
+    "What To Buy":
+      "Health, shield, defensive slot, or direct next-fight power.",
+    "Stop When":
+      "The board survives long enough for the first chain to complete.",
+  },
+];
+
+export const matchupColumns = [
+  { key: "Matchup", label: "Matchup" },
+  { key: "Problem", label: "Problem" },
+  { key: "Answer", label: "Answer" },
+];
+
+export const matchupRows = [
+  {
+    Matchup: "Shield / heal",
+    Problem:
+      "They can survive weak early Bleed and outscale if your engine is not real.",
+    Answer:
+      "Use Emerald Sword + Shardfang scaling, then add Multicast or Crown Forge value so Bleed keeps climbing instead of staying as flat pressure.",
+  },
+  {
+    Matchup: "Burn",
+    Problem:
+      "Burn can kill before your slower Bleed chain ramps.",
+    Answer:
+      "Buy earlier activation, health, shield, or stay on a stronger tempo board until Bleed has its core. Do not sell a winning board for an unfinished Shardfang setup.",
+  },
+  {
+    Matchup: "Poison",
+    Problem:
+      "Poison may stabilize earlier and punish greedy rerolls.",
+    Answer:
+      "Only stay Bleed if you have the payoff. Otherwise use Poison as the bridge or pivot, especially when you have early Poison application but no Shardfang.",
+  },
+  {
+    Matchup: "Dark burst",
+    Problem:
+      "Start-of-combat triggers can kill before Bleed gets to scale.",
+    Answer:
+      "Do not build for a perfect Oak test. Buy immediate survival, earlier activation, or the safest next-fight upgrade.",
+  },
+  {
+    Matchup: "Faster Bleed / Crystal mirror",
+    Problem:
+      "The mirror is usually decided by who gets Emerald Sword scaling and Shardfang triggers online first.",
+    Answer:
+      "Prioritize Emerald Sword upgrades, Shardfang trigger reliability, and cooldown before greedy extra scaling. A working 2-star engine can beat a prettier board that starts too late.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Loses", label: "Why It Loses" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Counting Bleed tags instead of building a chain",
+    "Why It Loses":
+      "Random Bleed items do not automatically trigger Shardfang or scale Emerald Sword.",
+    Fix:
+      "Name the applier, the payoff, and the speed support before committing hard.",
+  },
+  {
+    Mistake: "Using Crown Forge on a support item",
+    "Why It Loses":
+      "A random upgrade may not make the engine fire faster or apply more Bleed.",
+    Fix:
+      "Use Crown Forge on Emerald Sword, Shardfang, or the item that directly improves the chain.",
+  },
+  {
+    Mistake: "Over-rolling before the pivot window",
+    "Why It Loses":
+      "You spend gold before you have the shop odds, targets, or health to support the search.",
+    Fix:
+      "Use tempo early. Spend hard around D7-D8 only when you can name the missing piece.",
+  },
+  {
+    Mistake: "Selling backup damage too early",
+    "Why It Loses":
+      "If the Shardfang chain is not proven, one bad fight can end the run.",
+    Fix:
+      "Test the chain first. Keep temporary damage until Emerald Sword / Shardfang are actually firing.",
+  },
+  {
+    Mistake: "Building only for The Oak",
+    "Why It Loses":
+      "Oak damage boards can be greedier than ranked 10-win boards.",
+    Fix:
+      "For ranked, prioritize the next fight. Use Oak testing to show ceiling, not to decide every shop.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**The best Bleed build in Oaken Tower is a Crystal Bleed engine built around Shardfang and Emerald Sword. Shardfang is the payoff: it triggers when another item applies Bleed. Emerald Sword is the cleanest enabler because it gives Crystal items +1 / +2 / +4 bonus Bleed as it upgrades, turning the Crystal package into a reliable Shardfang trigger source.**
+
+Do not force Bleed from Day 1. Play tempo first, pivot when you find Shardfang, Emerald Sword, Midas Diary, or a Crown Forge path, then add cooldown until the chain starts quickly enough. After that, buy Multicast, extra Bleed, crit, or defense based on the matchup.
+
+<em>Version note: this guide is written for the current Early Access item pool as of May 25, 2026. Oaken Tower balance changes often, so re-check Shardfang and Emerald Sword text after major patches.</em>
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-bleed-build-core-items.webp"
+    alt="Oaken Tower Bleed build showing Emerald Sword, Shardfang, Midas Diary and Crystal support pieces."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A real Bleed build needs three things: a Bleed applier, a payoff that triggers from Bleed, and enough speed to make the chain start before the enemy wins.
+  </figcaption>
+</figure>
+
+<h2 id="build-plan">
+  The Bleed build plan
+</h2>
+
+Bleed is not a “buy every red drop icon” build. It is a trigger chain.
+
+Your goal is to make this happen:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <strong>Emerald Sword or another item applies Bleed.</strong>
+  </li>
+  <li>
+    <strong>Shardfang sees another item apply Bleed and triggers.</strong>
+  </li>
+  <li>
+    <strong>Cooldown and Multicast make that interaction happen faster and more often.</strong>
+  </li>
+  <li>
+    <strong>Crown Forge-style scaling improves the item that feeds the engine.</strong>
+  </li>
+  <li>
+    <strong>The board finishes fights before faster Burn, Poison, or Dark boards kill you.</strong>
+  </li>
+</ol>
+
+That is the whole build. The rest of the guide is about when to pivot, what to buy, and what to do when the perfect pieces do not appear.
+
+<GuideTable
+  caption="Core pieces for the Oaken Tower Bleed build."
+  columns={itemColumns}
+  rows={itemRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="item-data">
+  Key item data: Shardfang and Emerald Sword
+</h2>
+
+Wiki-style data tells you what the items do, but it does not tell you how to build around them. The important part is how the text creates a chain.
+
+<GuideTable
+  caption="Important Bleed item breakpoints."
+  columns={starColumns}
+  rows={starRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-shard-fang-target.webp"
+    alt="Oaken Tower Shardfang tooltip showing its Bleed trigger effect."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shardfang is the payoff. It wants another item to apply Bleed first, then it converts that application into extra triggers.
+  </figcaption>
+</figure>
+
+The key line is “when another item applies Bleed.” That means Shardfang is not the first step. It is the punishment that happens after the first step.
+
+Emerald Sword is the cleanest first step because it can give your Crystal items bonus Bleed at the start of combat.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-crown-forge-emerald-sword.webp"
+    alt="Oaken Tower Emerald Sword tooltip showing Crystal item Bleed scaling."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Emerald Sword is valuable because it turns Crystal items into Bleed appliers, which gives Shardfang something reliable to react to.
+  </figcaption>
+</figure>
+
+<h2 id="perks">
+  Best perks for Bleed
+</h2>
+
+Perks matter because Bleed needs specific breakpoints. You are not just looking for more damage; you are looking for the tools that make the engine easier to assemble.
+
+<GuideTable
+  caption="Best perks for Oaken Tower Bleed builds."
+  columns={perkColumns}
+  rows={perkRows}
+/>
+
+The safest rule is:
+
+**Take the perk that helps your actual opening, not the perk that only helps a perfect Bleed fantasy.**
+
+If you already have Emerald Sword or a sword-heavy opening, weapon support is better. If you need to reach star breakpoints, Merge is better. If your plan depends on a big D7-D8 shop, Flash Sale or economy becomes much stronger.
+
+<h2 id="pack-mechanics">
+  Crystal pack and tag strategy
+</h2>
+
+The reason this route works is not only “Bleed.” It is **Crystal Bleed**.
+
+<GuideTable
+  caption="Pack and tag decisions for the Bleed build."
+  columns={packColumns}
+  rows={packRows}
+/>
+
+When Emerald Sword is online, Crystal items become more than generic items. They become part of the Bleed application package. That is why the build can scale harder than a random Bleed board: the tag package and the trigger payoff point in the same direction.
+
+This also changes how you read shops:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Shardfang without an applier</strong> is incomplete.
+  </li>
+  <li>
+    <strong>Emerald Sword without a payoff</strong> is a scaling signal, not a finished build.
+  </li>
+  <li>
+    <strong>Crystal support after Emerald Sword</strong> is more valuable than it looks.
+  </li>
+  <li>
+    <strong>Random Bleed tags</strong> are still skippable if they do not connect the chain.
+  </li>
+</ul>
+
+<h2 id="day-plan">
+  Day-by-day Bleed route
+</h2>
+
+Use the day count as a pressure timer. You are not following a fixed script; you are deciding when the shop has given you enough evidence to commit.
+
+<GuideTable
+  caption="Oaken Tower Bleed build timing plan."
+  columns={dayColumns}
+  rows={dayRows}
+/>
+
+This section replaces the usual “never force Bleed early” advice with a more useful rule:
+
+**Force nothing until you can name the trigger chain.**
+
+<h2 id="fallbacks">
+  What if you do not find Shardfang?
+</h2>
+
+This is the decision that saves the most failed Bleed runs.
+
+<GuideTable
+  caption="What to do when the perfect Bleed pieces do not appear."
+  columns={fallbackColumns}
+  rows={fallbackRows}
+/>
+
+If D5-D6 arrives and you still do not have Shardfang or Emerald Sword, stop spending like you are already Bleed. You can still keep a good Bleed piece frozen, but your active board should be the thing that wins the next fight.
+
+<h2 id="bleed-vs-poison">
+  Bleed vs Poison: which route should you take?
+</h2>
+
+Bleed and Poison look similar because both are damage-over-time routes, but they solve different problems.
+
+<GuideTable
+  caption="How to choose between Bleed and Poison in Oaken Tower."
+  columns={poisonColumns}
+  rows={poisonRows}
+/>
+
+Use Poison when the shop gives you early pressure and you need stability. Use Bleed when the shop gives you a real engine and enough gold to build around it.
+
+A good run can also bridge from Poison into Bleed. The mistake is selling a working Poison board for a weak Bleed idea before Shardfang or Emerald Sword is ready.
+
+<h2 id="crown-forge">
+  Where to use Crown Forge
+</h2>
+
+Crown Forge value should go where it changes the engine.
+
+In this build, the best targets are usually:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <strong>Emerald Sword</strong> when it is feeding your Crystal Bleed package.
+  </li>
+  <li>
+    <strong>Shardfang</strong> when the trigger payoff itself needs a star breakpoint.
+  </li>
+  <li>
+    <strong>The item that applies Bleed first</strong> if that item is what makes Shardfang fire.
+  </li>
+</ol>
+
+Do not spend a rare upgrade on a support piece just because it looks expensive. Ask whether the upgrade makes the chain faster, stronger, or safer.
+
+<h2 id="speed-multicast">
+  Cooldown, Multicast, and when to stop buying speed
+</h2>
+
+Bleed needs speed, but only until the engine is active.
+
+<GuideTable
+  caption="Cooldown and Multicast breakpoints for Bleed builds."
+  columns={speedColumns}
+  rows={speedRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-bleed-build-one-second-cooldown.webp"
+    alt="Oaken Tower Bleed build reaching a fast cooldown and Multicast breakpoint."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A fast trigger chain is the point where Bleed becomes dangerous. After that, make each trigger stronger instead of only buying more speed.
+  </figcaption>
+</figure>
+
+The simple rule is:
+
+**Before the breakpoint, buy speed. After the breakpoint, buy output or survival.**
+
+<h2 id="trigger-test">
+  Test the trigger chain before selling backup damage
+</h2>
+
+The most expensive mistake is assuming the loop works because the item names look correct.
+
+<figure className="my-8">
+  <Image
+    src="/images/oaken-tower/oaken-tower-shard-fang-trigger-rule.webp"
+    alt="Oaken Tower Bleed build testing Shardfang trigger rules with external Bleed application."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shardfang needs another item to apply Bleed. Multiple payoff items are not the same thing as a proven trigger chain.
+  </figcaption>
+</figure>
+
+Before you sell temporary damage, answer these five questions:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>What item applies Bleed first?</li>
+  <li>What item triggers from that Bleed?</li>
+  <li>Does the trigger happen early enough?</li>
+  <li>Does the chain still work when the fight is short?</li>
+  <li>What happens if the enemy survives the first wave?</li>
+</ul>
+
+If you cannot answer those, keep your backup carry for one more fight.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="matchups">
+  Matchups and counters
+</h2>
+
+Bleed is strong when it has time to build a chain. It is weak when the enemy wins before the first real cycle.
+
+<GuideTable
+  caption="How to play the Oaken Tower Bleed build into common matchups."
+  columns={matchupColumns}
+  rows={matchupRows}
+/>
+
+The practical rule is:
+
+**Against slow boards, scale the engine. Against fast boards, survive the first hit. Against cleanse, keep backup damage.**
+
+<h2 id="oak-test">
+  Oak test: ceiling proof, not the ranked requirement
+</h2>
+
+A finished Bleed engine can reach ridiculous numbers against The Oak because the fight gives your chain time to run.
+
+That matters, but it can also be misleading.
+
+The Oak test is a ceiling test. The Oak does not pressure your setup the same way a ranked opponent does, so you can let the engine stack far longer than you usually can in a 10-win run. That is why a Shardfang / Emerald Sword engine can climb into 100,000+ Bleed and break into 1 billion+ total damage when the fight lasts long enough.
+
+For a normal 10-win ranked run, the requirement is much lower and much stricter:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Start the chain early.</strong> Your main trigger should usually be around 1.0-1.5s once the build is online.
+  </li>
+  <li>
+    <strong>Stack Bleed in the first few seconds.</strong> You do not need 100,000 Bleed. You need enough early Bleed to kill before Poison, Burn, Dark, or shield boards stabilize.
+  </li>
+  <li>
+    <strong>Hit the real damage check.</strong> A strong ranked Bleed board should be able to deal roughly 30,000-60,000 effective damage in the opening window when the engine is working.
+  </li>
+  <li>
+    <strong>Do not skip survival.</strong> Health, shield, or earlier activation matters more than a prettier Oak screenshot if the next opponent can burst you down.
+  </li>
+</ul>
+
+Use this rule:
+
+<strong>The Oak test proves the ceiling. The ranked test is whether your Bleed engine can start within 3-5 seconds and delete a real opponent before their build fully comes online.</strong>
+
+<h2 id="common-mistakes">
+  Common Bleed build mistakes
+</h2>
+
+<GuideTable
+  caption="Common Oaken Tower Bleed build mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="checklist">
+  Bleed build checklist
+</h2>
+
+Before ending each shop, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Can I name the item that applies Bleed first?</li>
+  <li>Can I name the payoff that triggers from that Bleed?</li>
+  <li>Do I have Shardfang, Emerald Sword, or a real reason to pivot?</li>
+  <li>Is Crown Forge improving the engine, not a random support item?</li>
+  <li>Is my chain too slow, or does it need more output?</li>
+  <li>If Shardfang is missing, am I playing the strongest fallback board?</li>
+  <li>Should this run be Bleed, Poison, or a temporary hybrid?</li>
+  <li>Am I building for 10 wins, or only for an Oak screenshot?</li>
+</ul>
+
+If those answers are clear, your Bleed build is real. If they are not, keep the current board alive and wait for a better signal.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best Bleed build in Oaken Tower?
+
+The best Bleed build is usually a Crystal Bleed engine built around Shardfang and Emerald Sword. Emerald Sword gives Crystal items bonus Bleed, and Shardfang triggers when another item applies Bleed.
+
+### Should I force Bleed from Day 1?
+
+No. Play early tempo first. Move into Bleed when the shop gives you Shardfang, Emerald Sword, Midas Diary, Crown Forge value, or a strong Crystal package.
+
+### What does Shardfang need to work?
+
+Shardfang needs another item to apply Bleed first. It is the payoff, not the opener. Emerald Sword is one of the best enablers because it gives Crystal items bonus Bleed.
+
+### Why is Emerald Sword important?
+
+Emerald Sword turns Crystal items into stronger Bleed appliers at the start of combat. That gives Shardfang a reliable trigger source and makes the Crystal package scale.
+
+### What are the best perks for Bleed?
+
+Merge and Flash Sale are usually the best general options because they help you hit upgrades and afford targeted shops. Sword, melee, or economy perks can also be good if your opening supports Emerald Sword or a funded pivot.
+
+### Should I use Crown Forge on Shardfang or Emerald Sword?
+
+Use it on whichever item improves the engine most. In many runs, Emerald Sword is the better target because it feeds the Crystal Bleed package that makes Shardfang trigger.
+
+### What if I never find Shardfang?
+
+Do not keep forcing Bleed. Use Poison, Burn, bow tempo, weapon carry, or the strongest shop direction while keeping useful Emerald Sword / Crystal pieces only if they are already helping.
+
+### Is Bleed better than Poison?
+
+Bleed has a higher engine ceiling when you find Shardfang and Emerald Sword. Poison is usually easier to stabilize early. Choose based on the shop, not on the build you wanted before the run.
+
+### Is Bleed good for The Oak?
+
+Yes. A finished Bleed engine can reach huge Oak damage because long fights let the chain keep scaling. But ranked 10-win boards still need speed and survival first.
+
+### What is the biggest Bleed mistake?
+
+The biggest mistake is owning Bleed items without a working chain. A real Bleed build needs an applier, a payoff, speed, and a way to convert scaling into wins.

@@ -1,0 +1,783 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const fastestMethodColumns = [
+  { key: "Method", label: "Method" },
+  { key: "Priority", label: "Priority" },
+  { key: "Best Use", label: "Best Use" },
+];
+
+export const fastestMethodRows = [
+  {
+    Method: "Practice the actual skill",
+    Priority: "Best base method",
+    "Best Use":
+      "Use when your Para has the object, time, and needs to train the real skill directly.",
+  },
+  {
+    Method: "Research on a computer",
+    Priority: "Best setup method",
+    "Best Use":
+      "Good for building a Knowledge Skill before serious direct practice.",
+  },
+  {
+    Method: "Read books",
+    Priority: "Safe but slower",
+    "Best Use":
+      "Good when you want low-risk learning at home or do not have the right object yet.",
+  },
+  {
+    Method: "Dark Blue Together Cards",
+    Priority: "Bonus XP during social play",
+    "Best Use":
+      "Use when the card matches a skill you already care about.",
+  },
+  {
+    Method: "Town Events",
+    Priority: "Best bonus window when matched",
+    "Best Use":
+      "Prioritize if the event gives a multiplier for a skill on your route.",
+  },
+];
+
+export const routePlanColumns = [
+  { key: "Goal", label: "Goal" },
+  { key: "Best Stat", label: "Best Stat" },
+  { key: "Train First", label: "Train First" },
+  { key: "Then Practice", label: "Then Practice" },
+  { key: "Payoff", label: "Payoff" },
+];
+
+export const routePlanRows = [
+  {
+    Goal: "Painting money",
+    "Best Stat": "Creativity",
+    "Train First": "Art",
+    "Then Practice": "Painting",
+    Payoff: "Better paintings, stronger creative income route, Character Artist fit",
+  },
+  {
+    Goal: "Tech career",
+    "Best Stat": "Mind",
+    "Train First": "Technology",
+    "Then Practice": "Programming, Graphic Design",
+    Payoff: "Gameplay Programmer and higher software job routes",
+  },
+  {
+    Goal: "Daily life stability",
+    "Best Stat": "Physique or balanced stats",
+    "Train First": "Food, Fitness",
+    "Then Practice": "Cooking, Exercise, Repair",
+    Payoff: "Easier meals, fewer routine problems, safer workdays",
+  },
+  {
+    Goal: "Social career",
+    "Best Stat": "Charisma",
+    "Train First": "Route skill plus social play",
+    "Then Practice": "Dark Blue Together Cards and job-related skills",
+    Payoff: "Better service, culture, and relationship-heavy play",
+  },
+  {
+    Goal: "Music route",
+    "Best Stat": "Creativity",
+    "Train First": "Music",
+    "Then Practice": "Guitar, Piano, Triangle",
+    Payoff: "Better instrument progress and creative roleplay",
+  },
+  {
+    Goal: "Science route",
+    "Best Stat": "Mind",
+    "Train First": "Science",
+    "Then Practice": "Biology, Astronomy, Surgery",
+    Payoff: "Science and healthcare-style progression",
+  },
+];
+
+export const skillColumns = [
+  { key: "Knowledge Skill", label: "Knowledge Skill" },
+  { key: "Related Skills", label: "Related Skills" },
+];
+
+export const skillRows = [
+  {
+    "Knowledge Skill": "Music",
+    "Related Skills": "Guitar, Piano, Triangle",
+  },
+  {
+    "Knowledge Skill": "Food",
+    "Related Skills": "Cooking",
+  },
+  {
+    "Knowledge Skill": "Fitness",
+    "Related Skills": "Exercise, Dance",
+  },
+  {
+    "Knowledge Skill": "Technology",
+    "Related Skills": "Programming, Graphic Design",
+  },
+  {
+    "Knowledge Skill": "Art",
+    "Related Skills": "Painting",
+  },
+  {
+    "Knowledge Skill": "Science",
+    "Related Skills": "Surgery, Biology, Astronomy",
+  },
+  {
+    "Knowledge Skill": "Outdoorsiness",
+    "Related Skills": "Fishing",
+  },
+  {
+    "Knowledge Skill": "Kids",
+    "Related Skills": "Language, Potty",
+  },
+  {
+    "Knowledge Skill": "Repair",
+    "Related Skills": "Standalone skill",
+  },
+];
+
+export const statColumns = [
+  { key: "Stat", label: "Stat" },
+  { key: "Skill Routes It Supports", label: "Skill Routes It Supports" },
+  { key: "Pick It If", label: "Pick It If" },
+];
+
+export const statRows = [
+  {
+    Stat: "Creativity",
+    "Skill Routes It Supports": "Art, Painting, Music-style creative routes",
+    "Pick It If": "You want painting money, creative jobs, or music gameplay.",
+  },
+  {
+    Stat: "Mind",
+    "Skill Routes It Supports": "Technology, Programming, Science-style routes",
+    "Pick It If": "You want tech jobs, science jobs, or research-heavy play.",
+  },
+  {
+    Stat: "Physique",
+    "Skill Routes It Supports": "Fitness, Exercise, Dance, active routines",
+    "Pick It If": "You want easier active play or a low-maintenance household.",
+  },
+  {
+    Stat: "Charisma",
+    "Skill Routes It Supports": "Social progress, job applications, service-style routes",
+    "Pick It If": "You want social jobs, relationships, or Application Point help.",
+  },
+];
+
+export const minimumColumns = [
+  { key: "Route", label: "Route" },
+  { key: "Minimum Viable Setup", label: "Minimum Viable Setup" },
+  { key: "When To Switch To Practice", label: "When To Switch To Practice" },
+];
+
+export const minimumRows = [
+  {
+    Route: "Painting money",
+    "Minimum Viable Setup": "Creativity + Art Talent + Art around Level 2-3",
+    "When To Switch To Practice":
+      "Start painting once Art has a small foundation. Level 2-3 is a practical early target, not a hard rule.",
+  },
+  {
+    Route: "Tech career",
+    "Minimum Viable Setup": "Mind + Technology Talent + Technology around Level 2-3",
+    "When To Switch To Practice":
+      "Start Programming once Technology is moving and the job route is clear.",
+  },
+  {
+    Route: "Cooking stability",
+    "Minimum Viable Setup": "Food around Level 2-3 plus enough Cooking to stop failing basic meals",
+    "When To Switch To Practice":
+      "Cook directly once the household needs regular meals anyway.",
+  },
+  {
+    Route: "Music",
+    "Minimum Viable Setup": "Creativity + Music Talent + Music around Level 2-3",
+    "When To Switch To Practice":
+      "Practice Guitar, Piano, or Triangle once Music has a small foundation.",
+  },
+];
+
+export const multiplierColumns = [
+  { key: "Boost Source", label: "Boost Source" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const multiplierRows = [
+  {
+    "Boost Source": "Matching stat",
+    "How To Use It":
+      "Build the stat that matches your route, such as Creativity for Art or Mind for Technology.",
+  },
+  {
+    "Boost Source": "Knowledge Skill",
+    "How To Use It":
+      "Raise the parent skill first so related skills feel better to train.",
+  },
+  {
+    "Boost Source": "Talent",
+    "How To Use It":
+      "Pick a talent that matches your route, such as Art, Technology, Food, Fitness, or Music.",
+  },
+  {
+    "Boost Source": "Serious Vibe",
+    "How To Use It":
+      "Treat it as a small productivity and learning support for focused Paras.",
+  },
+  {
+    "Boost Source": "Inspired mood",
+    "How To Use It":
+      "Use it as a small bonus window when it appears, not as your whole plan.",
+  },
+  {
+    "Boost Source": "Story Cards",
+    "How To Use It":
+      "Use temporary learning cards on the skill blocking your current route.",
+  },
+  {
+    "Boost Source": "Town Events",
+    "How To Use It":
+      "Prioritize events that multiply a skill you already plan to train.",
+  },
+];
+
+export const togetherCardColumns = [
+  { key: "Card / Situation", label: "Card / Situation" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Best Use", label: "Best Use" },
+];
+
+export const togetherCardRows = [
+  {
+    "Card / Situation": "Dark Blue Together Card",
+    "What It Means": "A social card that can give XP for the skill being discussed.",
+    "Best Use": "Pick it when that skill supports your route.",
+  },
+  {
+    "Card / Situation": "Other social cards",
+    "What It Means": "Usually more focused on relationship, mood, or social outcome.",
+    "Best Use": "Use them for relationship goals, not skill routing.",
+  },
+  {
+    "Card / Situation": "Skill card appears during social play",
+    "What It Means": "Your conversation can also become a small training moment.",
+    "Best Use": "Good for social Paras who do not want social time to be dead time.",
+  },
+  {
+    "Card / Situation": "Skill does not match your plan",
+    "What It Means": "The XP may be real, but not always useful.",
+    "Best Use": "Skip it unless the relationship or mood outcome is also valuable.",
+  },
+];
+
+export const townEventColumns = [
+  { key: "Event Type", label: "Event Type" },
+  { key: "Best Skill Use", label: "Best Skill Use" },
+  { key: "Rule", label: "Rule" },
+];
+
+export const townEventRows = [
+  {
+    "Event Type": "Fitness or activity event",
+    "Best Skill Use": "Fitness, Exercise, Dance",
+    Rule: "Go if active skills are part of your route.",
+  },
+  {
+    "Event Type": "Creative event",
+    "Best Skill Use": "Art, Painting, Music, instruments",
+    Rule: "Use it for creative income or creative careers.",
+  },
+  {
+    "Event Type": "Science or tech event",
+    "Best Skill Use": "Science, Technology, Programming",
+    Rule: "High priority for career-focused Paras.",
+  },
+  {
+    "Event Type": "Event that does not match your route",
+    "Best Skill Use": "Usually skip",
+    Rule: "Do not lose a full day chasing a bonus you do not need.",
+  },
+];
+
+export const scheduleColumns = [
+  { key: "Route", label: "Route" },
+  { key: "Morning", label: "Morning" },
+  { key: "Afternoon", label: "Afternoon" },
+  { key: "Evening", label: "Evening" },
+];
+
+export const scheduleRows = [
+  {
+    Route: "Painting money",
+    Morning: "Read or research Art if needed.",
+    Afternoon: "Paint directly while needs are stable.",
+    Evening: "Sell, recover needs, check Story Cards.",
+  },
+  {
+    Route: "Tech career",
+    Morning: "Research Technology or train the weak job skill.",
+    Afternoon: "Practice Programming or work if scheduled.",
+    Evening: "Review career panel and plan the next training day.",
+  },
+  {
+    Route: "Cooking stability",
+    Morning: "Cook a real meal and treat it as Cooking practice.",
+    Afternoon: "Use Food or Cooking training when the household needs another meal.",
+    Evening: "Repair, prep food, or recover needs before the next workday.",
+  },
+  {
+    Route: "Social skill route",
+    Morning: "Handle needs and job prep.",
+    Afternoon: "Socialize and watch for Dark Blue Together Cards.",
+    Evening: "Use wants, relationship goals, or Story Cards.",
+  },
+];
+
+export const householdColumns = [
+  { key: "Para Role", label: "Para Role" },
+  { key: "Best Skills", label: "Best Skills" },
+  { key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const householdRows = [
+  {
+    "Para Role": "Money maker",
+    "Best Skills": "Art, Painting, Technology, Programming",
+    "Why It Helps": "Turns training into income or career progress.",
+  },
+  {
+    "Para Role": "Household stabilizer",
+    "Best Skills": "Food, Cooking, Repair",
+    "Why It Helps": "Keeps meals, broken objects, and daily problems under control.",
+  },
+  {
+    "Para Role": "Social connector",
+    "Best Skills": "Charisma route, social cards, service-style skills",
+    "Why It Helps": "Builds relationships and can support social careers.",
+  },
+  {
+    "Para Role": "Active / errands Para",
+    "Best Skills": "Fitness, Exercise, Outdoorsiness, Fishing",
+    "Why It Helps": "Good for active routines, outdoor play, and extra household tasks.",
+  },
+];
+
+export const lifeStageColumns = [
+  { key: "Life Stage", label: "Life Stage" },
+  { key: "Best Focus", label: "Best Focus" },
+  { key: "Why", label: "Why" },
+];
+
+export const lifeStageRows = [
+  {
+    "Life Stage": "Toddler / Child",
+    "Best Focus": "Age-appropriate basics and household routine skills",
+    Why: "Do not plan them like adult workers. Use this stage to build useful foundations.",
+  },
+  {
+    "Life Stage": "Teen",
+    "Best Focus": "Career setup skills, creative skills, social direction",
+    Why: "A good time to prepare for adult jobs before job performance becomes the main pressure.",
+  },
+  {
+    "Life Stage": "Young Adult / Adult",
+    "Best Focus": "Job-related Knowledge Skills and income skills",
+    Why: "This is where skills, Application Points, work performance, and money start connecting directly.",
+  },
+  {
+    "Life Stage": "Elder",
+    "Best Focus": "Support skills, household roles, focused goals",
+    Why: "Still useful for skill growth, but plan around the needs and rhythm of the household.",
+  },
+];
+
+export const talentColumns = [
+  { key: "Choice", label: "Choice" },
+  { key: "Best For", label: "Best For" },
+  { key: "Tradeoff", label: "Tradeoff" },
+];
+
+export const talentRows = [
+  {
+    Choice: "Route-specific Talent",
+    "Best For": "Fast progress in one clear route, such as Art or Technology",
+    Tradeoff: "Less flexible if you change plans later.",
+  },
+  {
+    Choice: "Jack-of-All-Trades",
+    "Best For": "Flexible first saves or players who want to sample many skills",
+    Tradeoff: "Usually less focused than a dedicated Talent for one route.",
+  },
+  {
+    Choice: "Good at Nothing",
+    "Best For": "Challenge runs",
+    Tradeoff: "Bad for efficient leveling.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Play", label: "Better Play" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Treating Inspired as the main plan",
+    "Why It Hurts":
+      "Inspired is useful, but the bigger gains come from route, stat, Knowledge Skill, Talent, and good timing.",
+    "Better Play":
+      "Use Inspired when it appears, but build around your actual skill route.",
+  },
+  {
+    Mistake: "Reading forever instead of practicing",
+    "Why It Hurts":
+      "Books are convenient, but direct skill use is usually the better base method once available.",
+    "Better Play":
+      "Use books or computer research to set up, then switch to the real activity.",
+  },
+  {
+    Mistake: "Ignoring Town Events",
+    "Why It Hurts":
+      "A matching event can be a much better training window than an ordinary day.",
+    "Better Play":
+      "Check events and prioritize the ones that match your route.",
+  },
+  {
+    Mistake: "Letting every Para train the same thing",
+    "Why It Hurts":
+      "Multi-Para households become inefficient if everyone overlaps roles.",
+    "Better Play":
+      "Split skills across household roles like money, cooking, repair, and social play.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The fastest way to level skills in **Paralives** is to match your **stat**, **Knowledge Skill**, **Talent**, and training method to the route you are playing. Direct practice is usually the best base method once you can do it. Computer research and books are better as setup tools, not the whole plan.
+
+For example, a Painting route should build **Creativity → Art → Painting**. A tech route should build **Mind → Technology → Programming**. Use Town Events, Story Cards, Inspired mood, and Dark Blue Together Cards as bonus windows when they match the skill you already want to train.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/paralives/paralives-skills-panel-knowledge-skills.webp"
+    alt="Paralives skills panel showing Music, Guitar, Piano and Triangle skills."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Skills are easier to plan when you think in routes: matching stat, parent Knowledge Skill, then direct practice.
+  </figcaption>
+</figure>
+
+<h2 id="version-note">
+  Early Access note
+</h2>
+
+Paralives is still in Early Access, so skill caps, learning bonuses, and balance values may change between updates.
+
+Use the numbers and tips in this guide as early-game direction, not permanent rules. The safest approach is to build around your route first: choose the right stat, train the matching Knowledge Skill, then practice the skill your Para actually needs.
+
+If a patch changes a multiplier or cap later, the practical plan stays the same: do not train randomly. Build the foundation, then use the best training windows you have.
+
+<h2 id="fastest-methods">
+  Practice first, research second, read books third
+</h2>
+
+The most important leveling rule is simple: **direct practice is usually the best base method**.
+
+Books and computer research are still useful, but they should not replace the actual skill activity forever. They are best when you are preparing the parent **Knowledge Skill**, missing the right object, or trying to learn safely at home.
+
+<GuideTable
+  caption="Skill training methods ranked by practical use."
+  columns={fastestMethodColumns}
+  rows={fastestMethodRows}
+/>
+
+A good early pattern is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Use books or a computer to build the Knowledge Skill if needed.</li>
+  <li>Switch to direct practice once you can train the real skill.</li>
+  <li>Time your practice around Story Cards, Town Events, Inspired mood, or other bonuses.</li>
+</ol>
+
+For example, if you want **Painting**, do not only read about Art forever. Build enough **Art** to support the route, then actually paint.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="route-table">
+  Match your stat, Knowledge Skill, and practice skill
+</h2>
+
+The best skill route starts before you touch an object. Your **stat** should match the kind of skill you plan to train.
+
+<GuideTable
+  caption="Best Paralives skill routes by goal, stat, parent skill, and payoff."
+  columns={routePlanColumns}
+  rows={routePlanRows}
+/>
+
+This is the biggest difference between a focused Para and a messy one. A Creativity Para naturally fits Art and Painting. A Mind Para naturally fits Technology and Programming. A Charisma Para has better reason to lean into social routes and job applications.
+
+<h2 id="stats-affect-skill-speed">
+  Stats affect how fast skills grow
+</h2>
+
+Stats are not just roleplay flavor. They can affect how smoothly your Para learns skills connected to that stat.
+
+<GuideTable
+  caption="Stats and the skill routes they support in Paralives."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+If you ask, “Will higher Creativity help my Painting route?” the practical answer is yes: it supports the creative skill path. The same idea applies to **Mind** for tech, **Physique** for active skills, and **Charisma** for social or application-heavy routes.
+
+This is why your starting build matters. If your first goal is Painting money, do not treat Creativity as optional. If your first goal is Programming, do not ignore Mind and Technology.
+
+<h2 id="knowledge-skills">
+  How Knowledge Skills and parent skills work
+</h2>
+
+Paralives uses **Knowledge Skills** as parent skills. These parent skills support related practical skills.
+
+For example, **Food** supports **Cooking**, **Technology** supports **Programming** and **Graphic Design**, and **Music** supports instruments.
+
+<figure className="my-8">
+  <Image
+    src="/images/paralives/paralives-knowledge-skill-food-cooking.webp"
+    alt="Paralives Food Knowledge Skill explaining faster Cooking skill learning."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Food is the parent Knowledge Skill for Cooking. Raising the parent skill makes the related route feel smoother.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Paralives Knowledge Skills and related skills."
+  columns={skillColumns}
+  rows={skillRows}
+/>
+
+The rule is simple:
+
+> Train the parent Knowledge Skill first, then practice the related skill.
+
+If you want to become a programmer, do not only grind Programming. Build **Technology** too. If you want to make money with Painting, do not only paint. Build **Art** first.
+
+<h2 id="minimum-viable-routes">
+  Minimum viable skill routes
+</h2>
+
+You do not need to max a Knowledge Skill before doing the real activity. That is too slow. The practical goal is to build just enough foundation that direct practice starts to feel worthwhile.
+
+<GuideTable
+  caption="Minimum viable skill routes before switching into direct practice."
+  columns={minimumColumns}
+  rows={minimumRows}
+/>
+
+Think of this as the early threshold: study enough to avoid the painful beginner stage, then practice the real skill. If you stay in books forever, you are probably over-preparing.
+
+<h2 id="town-events">
+  Use Town Events for skill windows
+</h2>
+
+Town Events can be strong leveling windows when the event matches a skill you already care about. Some events can provide temporary skill bonuses or event multipliers, so check the town and newspaper instead of staying home every day.
+
+<GuideTable
+  caption="How to use Town Events for faster skill leveling."
+  columns={townEventColumns}
+  rows={townEventRows}
+/>
+
+The rule is:
+
+> If a Town Event boosts a skill you need, plan the day around it.
+
+Do not attend every event just because it exists. Use events as targeted training windows. If the event does not support your route, it is fine to skip it and keep practicing your main skill.
+
+<h2 id="story-cards-and-buffs">
+  Stack Story Cards, mood, and talent bonuses
+</h2>
+
+The best skill days happen when several bonuses line up at once.
+
+That can include your stat, Knowledge Skill, Talent, Vibe, mood, Story Card, or Town Event. You do not need all of them every time, but the more pieces match your route, the better that training window becomes.
+
+<GuideTable
+  caption="Useful skill learning boosts and when to use them."
+  columns={multiplierColumns}
+  rows={multiplierRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/paralives/paralives-storyteller-skill-buff.webp"
+    alt="Paralives Storyteller card showing a temporary skill learning speed bonus."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Temporary learning cards are best used on the skill that is blocking your route right now.
+  </figcaption>
+</figure>
+
+The counterintuitive part: **Inspired is useful, but it is not the whole strategy.** A matching stat, Knowledge Skill, and Talent usually matter more than waiting around for the perfect mood. Use Inspired when it appears, but do not let it stop your normal plan.
+
+<h2 id="together-cards">
+  Use Dark Blue Together Cards for extra skill XP
+</h2>
+
+Dark Blue **Together Cards** can give skill XP through social interactions. This is easy to miss because it feels like conversation, not training.
+
+<GuideTable
+  caption="How to use Dark Blue Together Cards for skill progress."
+  columns={togetherCardColumns}
+  rows={togetherCardRows}
+/>
+
+This is especially useful for social Paras. A social route does not have to pause progression while talking to people. If the right Dark Blue card appears, your conversation can also support a skill.
+
+Together Cards are not a replacement for practice, but they are free value when they appear during a conversation you already wanted to have.
+
+<h2 id="daily-schedule">
+  One-day skill training templates
+</h2>
+
+The easiest way to level faster is to stop treating every day as random. Give the day a job.
+
+<GuideTable
+  caption="Simple daily skill training templates by route."
+  columns={scheduleColumns}
+  rows={scheduleRows}
+/>
+
+These are not strict schedules. They are templates. The idea is to put setup work, direct practice, and bonus windows into the same day instead of spreading them randomly across the week.
+
+For example, a Painting day should not be: wake up, wander, chat, cook, read for 10 minutes, then paint while exhausted. A better Painting day is: stabilize needs, build or refresh Art, paint during your best energy window, then use the evening for recovery and Story Cards.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="multi-para-households">
+  Split skills in multi-Para households
+</h2>
+
+If you play a household with more than one Para, do not make everyone train the same skill. You can level faster as a household by giving each Para a job.
+
+<GuideTable
+  caption="Efficient skill roles for multi-Para households."
+  columns={householdColumns}
+  rows={householdRows}
+/>
+
+This is one of the easiest ways to make a save feel smoother. One Para can handle money, another can handle food and repairs, and another can focus on social progress. You do not need every Para to become a perfect all-rounder.
+
+<h2 id="life-stages">
+  Skill training by life stage
+</h2>
+
+Skill training is not identical at every age. Life stage can affect what is practical, what is available, and what your Para should focus on.
+
+<GuideTable
+  caption="How to think about skill training by life stage."
+  columns={lifeStageColumns}
+  rows={lifeStageRows}
+/>
+
+For career optimization, the important stage is usually Teen into Young Adult. A Teen who starts building the right foundation can enter adulthood with a clearer route instead of scrambling for skills after getting a job.
+
+For family gameplay, do not treat children as wasted time. Use younger stages to build useful foundations and household rhythm, then specialize later.
+
+<h2 id="talents">
+  Talent choice: focus beats flexibility unless you are unsure
+</h2>
+
+Talents are one of the biggest early choices because they decide which route your Para naturally supports.
+
+<figure className="my-8">
+  <Image
+    src="/images/paralives/paralives-talent-upgrade-screen.webp"
+    alt="Paralives talent upgrade screen with Jack-of-All-Trades Music Food Technology Art and Good at Nothing."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pick talents around your route. Art supports painting, Technology supports programming, and Jack-of-All-Trades is the flexible option.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Route-specific Talents vs flexible Talents."
+  columns={talentColumns}
+  rows={talentRows}
+/>
+
+A route-specific Talent is usually better if you already know your plan. **Art** is stronger for a Painting route. **Technology** is stronger for Programming. **Food** is stronger for a cooking household.
+
+**Jack-of-All-Trades** is better when you are still exploring. It is a safer first-save option, but it may not beat a dedicated Talent for one focused route.
+
+<h2 id="mistakes">
+  Mistakes that actually slow leveling
+</h2>
+
+Most slow leveling comes from wasting good training windows or building against your route.
+
+<GuideTable
+  caption="Common mistakes that slow down skill leveling in Paralives."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is treating every day the same. Some days are normal. Some days have Story Cards, Town Events, Inspired mood, or social cards that give you a better window. Use those windows when they appear.
+
+<h2 id="simple-routine">
+  Simple early-game leveling routine
+</h2>
+
+Use this if you do not want to overthink your first save.
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Pick one goal: money, tech, daily life, social, or creative.</li>
+  <li>Build the stat that matches that goal.</li>
+  <li>Train the matching Knowledge Skill until the route has a foundation.</li>
+  <li>Switch into direct practice as soon as it makes sense.</li>
+  <li>Use Town Events and Story Cards when they match the route.</li>
+  <li>Use Dark Blue Together Cards if they support a skill you care about.</li>
+  <li>Split roles if you have multiple Paras in the household.</li>
+</ol>
+
+This keeps your Para focused instead of becoming average at everything.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Should I max a Knowledge Skill before practicing the real skill?
+
+No. Build enough foundation to make the route feel better, then switch into direct practice. Sitting in books forever is usually over-preparation.
+
+### What should a multi-Para household do first?
+
+Split roles. Give one Para the money route, one Para household support like Cooking or Repair, and one Para social or career support. This is usually better than making everyone train the same skill.
+
+### Are Town Events worth interrupting my routine for?
+
+Yes, if the event boosts a skill you already need. No, if it pulls you away from your actual route.
+
+### Should I train Repair early?
+
+Yes, but usually not as your main route. Repair is a good support skill because broken appliances can waste time, hurt routines, and make workdays worse. In a multi-Para household, it is often worth giving one Para Repair as a support role.
+
