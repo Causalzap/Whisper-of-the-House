@@ -1,0 +1,540 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const dungeonTypeColumns = [
+  { key: "Dungeon Type", label: "Dungeon Type" },
+  { key: "What It Tests", label: "What It Tests" },
+  { key: "How To Play It", label: "How To Play It" },
+];
+
+export const dungeonTypeRows = [
+  {
+    "Dungeon Type": "Crypt / Twin Crypt",
+    "What It Tests": "Short combat pressure, spawners, loot discipline, and safe exits.",
+    "How To Play It": "Enter light, identify the spawner early, clear the room, loot, then leave before the run gets messy.",
+  },
+  {
+    "Dungeon Type": "Trap or puzzle room",
+    "What It Tests": "Patience, floor reading, lever timing, ranged hazards, and recovery planning.",
+    "How To Play It": "Slow down before the center of the room. Look for pressure plates, arrows, fire, or path clues before rushing loot.",
+  },
+  {
+    "Dungeon Type": "Artifact objective dungeon",
+    "What It Tests": "Progression routing, not just combat.",
+    "How To Play It": "Go in for the specific artifact, bring it back to the altar, and check what building or god unlock it enables.",
+  },
+  {
+    "Dungeon Type": "Large combat gauntlet",
+    "What It Tests": "Sustained food, healing, weapon control, and enemy management.",
+    "How To Play It": "Do not fight in the middle. Pull enemies outward, reset when needed, and leave once your supplies are low.",
+  },
+];
+
+export const trapColumns = [
+  { key: "Trap Or Room Type", label: "Trap Or Room Type" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "How To Handle It", label: "How To Handle It" },
+];
+
+export const trapRows = [
+  {
+    "Trap Or Room Type": "Pressure plates",
+    "What It Does": "Punishes players who walk straight into the room without reading the floor.",
+    "How To Handle It": "Pause at the edge, watch the tile pattern, and test movement carefully before chasing loot.",
+  },
+  {
+    "Trap Or Room Type": "Arrow or ranged hazards",
+    "What It Does": "Forces you to move with timing instead of standing still or looting slowly.",
+    "How To Handle It": "Move between safe gaps, heal before crossing, and do not recover dropped items while panicking.",
+  },
+  {
+    "Trap Or Room Type": "Fire or damage zones",
+    "What It Does": "Turns a small mistake into repeated damage if you keep forcing the same route.",
+    "How To Handle It": "Back out, reset your position, then cross only when you have enough health to survive a mistake.",
+  },
+  {
+    "Trap Or Room Type": "Levers and locked paths",
+    "What It Does": "Can open routes, change hazards, or bait you into moving before you understand the room.",
+    "How To Handle It": "Pull the lever, watch what changed, then move. Do not sprint forward just because a door opened.",
+  },
+  {
+    "Trap Or Room Type": "Loot bait",
+    "What It Does": "Places a chest or reward where rushing creates a bad fight or trap death.",
+    "How To Handle It": "Clear the room first. Loot after you understand the hazard, not before.",
+  },
+];
+
+export const readyColumns = [
+  { key: "Ready Check", label: "Ready Check" },
+  { key: "Minimum Standard", label: "Minimum Standard" },
+];
+
+export const readyRows = [
+  {
+    "Ready Check": "Town stability",
+    "Minimum Standard": "Town Core placed, Food Storage stocked, and at least one worker assigned.",
+  },
+  {
+    "Ready Check": "Inventory risk",
+    "Minimum Standard": "Rare offerings, boss items, and extra materials are stored at home.",
+  },
+  {
+    "Ready Check": "Food and healing",
+    "Minimum Standard": "Bring enough food to recover between fights, not just one emergency bite.",
+  },
+  {
+    "Ready Check": "Gear",
+    "Minimum Standard": "Use a weapon you already understand and basic armor if the area has spawners or ranged threats.",
+  },
+  {
+    "Ready Check": "Death setting",
+    "Minimum Standard": "Know whether carried inventory drops on death, or use Softcore while learning.",
+  },
+  {
+    "Ready Check": "Exit plan",
+    "Minimum Standard": "You know how to leave quickly after a good reward, quest item, or dangerous trigger.",
+  },
+];
+
+export const spawnerColumns = [
+  { key: "Spawner Situation", label: "Spawner Situation" },
+  { key: "Best Response", label: "Best Response" },
+];
+
+export const spawnerRows = [
+  {
+    "Spawner Situation": "You see or trigger the spawner early",
+    "Best Response": "Stop looting. Back up, control the first wave, then focus the spawner before clearing normal enemies.",
+  },
+  {
+    "Spawner Situation": "Enemies keep appearing",
+    "Best Response": "Assume the spawner is still active. Do not waste time farming enemies unless you came prepared for it.",
+  },
+  {
+    "Spawner Situation": "The room becomes a gauntlet",
+    "Best Response": "Move toward the edge of the room or entrance. Fighting in the center gives enemies too many angles.",
+  },
+  {
+    "Spawner Situation": "You are under-geared",
+    "Best Response": "Leave, upgrade armor or food, then return. A crypt does not need to be cleared on the first visit.",
+  },
+  {
+    "Spawner Situation": "You die near the spawner",
+    "Best Response": "Do a recovery run only. Grab your items, leave, and come back later with better gear.",
+  },
+];
+
+export const lootColumns = [
+  { key: "Reward Type", label: "Reward Type" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "What To Do With It", label: "What To Do With It" },
+];
+
+export const lootRows = [
+  {
+    "Reward Type": "Weapons",
+    "Why It Matters": "A new weapon can change how safe your next dungeon run feels.",
+    "What To Do With It": "Test it near town before relying on it deep inside a dungeon.",
+  },
+  {
+    "Reward Type": "Armor or rings",
+    "Why It Matters": "Stat gear can make boss fights and spawner rooms safer.",
+    "What To Do With It": "Equip it if it clearly helps your build, otherwise store it before another risky run.",
+  },
+  {
+    "Reward Type": "Bones and monster loot",
+    "Why It Matters": "These can matter for altar offerings and god progression.",
+    "What To Do With It": "Check altar value before dumping or ignoring large stacks.",
+  },
+  {
+    "Reward Type": "Artifacts",
+    "Why It Matters": "Some objectives ask for dungeon artifacts that unlock buildings or new progression.",
+    "What To Do With It": "Return to the altar and check the related god objective.",
+  },
+  {
+    "Reward Type": "Survivors or special encounters",
+    "Why It Matters": "Some dangerous areas can connect to town growth or new routing.",
+    "What To Do With It": "Stabilize the town before sending everyone into more danger.",
+  },
+  {
+    "Reward Type": "Cleared location marker",
+    "Why It Matters": "A cleared crypt tells you that area is done and safe to deprioritize.",
+    "What To Do With It": "Store rewards, then move to the next god, boss, building, or town objective.",
+  },
+];
+
+export const recoveryColumns = [
+  { key: "If You Died Because", label: "If You Died Because" },
+  { key: "Recovery Plan", label: "Recovery Plan" },
+];
+
+export const recoveryRows = [
+  {
+    "If You Died Because": "You got swarmed by a spawner",
+    "Recovery Plan": "Return only to retrieve items, then leave. Do not restart the same fight immediately.",
+  },
+  {
+    "If You Died Because": "You triggered a trap",
+    "Recovery Plan": "Re-enter with full health and only recovery gear. Study the room before crossing the same path.",
+  },
+  {
+    "If You Died Because": "You stayed after finding good loot",
+    "Recovery Plan": "Recover the loot, store it at home, and treat the dungeon as a second trip later.",
+  },
+  {
+    "If You Died Because": "You had no food",
+    "Recovery Plan": "Restock Food Storage and bring recovery food before returning.",
+  },
+  {
+    "If You Died Because": "You were under-geared",
+    "Recovery Plan": "Craft armor, improve weapon choice, or use a safer route before trying again.",
+  },
+];
+
+export const coopColumns = [
+  { key: "Co-op Role", label: "Co-op Role" },
+  { key: "Job In Dungeons", label: "Job In Dungeons" },
+];
+
+export const coopRows = [
+  {
+    "Co-op Role": "Frontliner",
+    "Job In Dungeons": "Pull enemies, hold space, and stop spawner waves from reaching weaker players.",
+  },
+  {
+    "Co-op Role": "Ranged or caster",
+    "Job In Dungeons": "Focus spawners, ranged threats, and dangerous enemies from safer positions.",
+  },
+  {
+    "Co-op Role": "Loot runner",
+    "Job In Dungeons": "Pick up key rewards and leave early if the group finds an artifact or rare item.",
+  },
+  {
+    "Co-op Role": "Town keeper",
+    "Job In Dungeons": "Stay near town if the settlement still needs food, defense, or worker management.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Entering a crypt before your town can feed itself",
+    "Better Choice": "Stabilize Food Storage and workers before risking a long trip.",
+  },
+  {
+    Mistake: "Ignoring the crypt spawner",
+    "Better Choice": "Treat the spawner as the room's main threat, not as background decoration.",
+  },
+  {
+    Mistake: "Opening another room while low",
+    "Better Choice": "Heal, leave, or reset before turning one bad fight into a death spiral.",
+  },
+  {
+    Mistake: "Carrying altar items into a random dungeon",
+    "Better Choice": "Store offerings, boss drops, and artifacts before exploring unless they are needed.",
+  },
+  {
+    Mistake: "Thinking all dungeons are the same",
+    "Better Choice": "Play crypts, trap rooms, artifact objectives, and gauntlets differently.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Romestead dungeons and crypts**, do not treat every run as a generic loot trip. A **Twin Crypt** is usually a short combat check with spawner pressure. A trap or puzzle room tests patience and recovery planning. An artifact dungeon may be tied directly to a god objective or building unlock.
+
+Before entering, make sure your town can survive without you, your backpack is not full of rare items, and you understand your current death setting. If a crypt spawner wakes up, stop looting and deal with the source of the pressure first.
+</GuideQuickAnswer>
+
+<h2 id="dungeon-types">
+  Romestead dungeon types are not all the same
+</h2>
+
+The old mistake is writing one generic rule for every dungeon. Romestead has different kinds of dangerous spaces, and they should not be played the same way.
+
+<GuideTable
+  caption="Romestead dungeon types and how to approach them."
+  columns={dungeonTypeColumns}
+  rows={dungeonTypeRows}
+/>
+
+
+<h2 id="when-to-enter">
+  When are you ready to enter a dungeon?
+</h2>
+
+Your first dungeon check is not the entrance. It is your setup.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-death-drops-setting.webp"
+    alt="Romestead character creation screen showing Softcore and inventory drop rules."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your death setting changes how risky dungeons feel. If carried inventory drops, enter crypts with a lighter backpack.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Ready check before entering a crypt or dungeon in Romestead."
+  columns={readyColumns}
+  rows={readyRows}
+/>
+
+The practical standard is simple: if your town still has no stable food, no assigned worker, and no storage discipline, the dungeon can wait. A crypt run should be a planned trip, not a panic escape from a half-built settlement.
+
+For the first-town setup, use <Link href="/romestead/first-day-base-building/">Romestead First Day Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="twin-crypt">
+  Twin Crypt: how to approach the first crypt-style challenge
+</h2>
+
+Twin Crypt is a good example of why dungeons need their own strategy. The entrance looks manageable, but the danger ramps quickly once the spawner starts turning the room into a gauntlet.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-twin-crypt-entry.webp"
+    alt="Romestead player approaching the Twin Crypt entrance before a crypt run."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Treat Twin Crypt like a short combat challenge. Check your food, inventory, and exit route before committing.
+  </figcaption>
+</figure>
+
+Before stepping in, ask four questions: can your town handle you being gone, are you carrying anything too valuable, do you have enough food to recover between fights, and can you retreat if the room turns into a gauntlet?
+
+If the answer is no, leave and return later. Crypts do not disappear because you waited.
+
+<h2 id="crypt-spawner">
+  Crypt Spawner: the real threat in gauntlet rooms
+</h2>
+
+The spawner is the part that turns a normal room into a problem. If you only fight the enemies and ignore the source, the room keeps draining your food, health, and patience.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-crypt-spawner-gauntlet.webp"
+    alt="Romestead Twin Crypt spawner turning the room into a gauntlet fight."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the spawner wakes up, treat it as the main objective. Clear the pressure source before you start looting.
+  </figcaption>
+</figure>
+
+Spawner behavior can change during Early Access, so do not memorize an exact trigger distance. Play around the safer rule: **assume the spawner can activate before you stand directly on top of it**.
+
+<GuideTable
+  caption="How to handle crypt spawners in Romestead."
+  columns={spawnerColumns}
+  rows={spawnerRows}
+/>
+
+Do not use a spawner room as a place to test new weapons, sort inventory, or read menus. Clear the threat first, then loot.
+
+<h2 id="trap-rooms">
+  Trap rooms and puzzle rooms: slow down before the center
+</h2>
+
+Crypt spawners are not the only danger. Some rooms are dangerous because of layout: pressure plates, arrows, fire, levers, locked doors, or suspicious floor patterns.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-dungeon-pressure-plate-puzzle.webp"
+    alt="Romestead dungeon pressure plate puzzle room with traps and loot risk."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Trap rooms are visual puzzles first and combat rooms second. Read the floor before you chase the chest.
+  </figcaption>
+</figure>
+
+A trap room should change your rhythm. Do not enter the center first. Stop near the edge, look for the hazard, then decide whether the room is safe enough to cross.
+
+<GuideTable
+  caption="Common trap and puzzle-room problems in Romestead."
+  columns={trapColumns}
+  rows={trapRows}
+/>
+
+If your dropped items land inside a trap, treat the next trip as a recovery run, not as another full clear attempt. Go in healthy, bring only recovery gear, grab the items, and leave.
+
+<h2 id="loot-table">
+  What do you actually get from dungeons?
+</h2>
+
+The reason to enter dungeons is not just “good loot.” You are looking for specific categories of rewards that help your town, character, or god progression.
+
+<GuideTable
+  caption="Dungeon rewards and what to do with them."
+  columns={lootColumns}
+  rows={lootRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-crypt-loot-reward.webp"
+    alt="Romestead crypt loot after clearing enemies and collecting rewards."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dungeon rewards matter because they can become gear upgrades, altar offerings, or progression items.
+  </figcaption>
+</figure>
+
+A weapon drop is not the same as an artifact. A stack of bones is not the same as a random material. Before selling, dumping, or offering everything, check whether the item connects to the altar, a god objective, a building unlock, or your next boss route.
+
+<h2 id="god-progression">
+  How dungeons connect to gods and offerings
+</h2>
+
+Dungeons are not separate from the god system. Some god objectives send you into dangerous places because the reward is a progression key, not just loot.
+
+A good example is **The Moonstring**. It points you toward a hidden dungeon artifact and unlocks **Well** when completed.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-gods-moonstring-well-unlock.webp"
+    alt="Romestead The Moonstring quest showing a dungeon artifact objective that unlocks Well."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some dungeon objectives are progression routes. The Moonstring points to a dungeon artifact and unlocks Well.
+  </figcaption>
+</figure>
+
+That matters because Well also connects back into farming and Farmstead automation. In other words, a dungeon trip can unlock a building that fixes a town problem.
+
+For the full altar route, read <Link href="/romestead/gods-offerings-boss-progression/">Romestead Gods and Offerings Guide</Link>. For Well and Farmstead setup, read <Link href="/romestead/farmstead-workers-food-logistics/">Romestead Farmstead Guide</Link>.
+
+<h2 id="death-recovery">
+  Death recovery: fix the cause, not only the corpse run
+</h2>
+
+Death recovery is not just “run back and grab your stuff.” If you died because the room was still active, the same room can kill you again.
+
+<GuideTable
+  caption="Death recovery plans by cause of death."
+  columns={recoveryColumns}
+  rows={recoveryRows}
+/>
+
+The important idea is to identify why you died. A spawner death, a trap death, a no-food death, and an under-geared death are different problems. Recover your items first, then decide whether the dungeon deserves a second attempt.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="coop">
+  Co-op dungeon roles
+</h2>
+
+Romestead supports co-op, and dungeons become cleaner when players stop doing the same job.
+
+<GuideTable
+  caption="Simple co-op roles for Romestead dungeons."
+  columns={coopColumns}
+  rows={coopRows}
+/>
+
+In co-op, the biggest upgrade is discipline. Do not have every player loot at the same time while a spawner is active. One player should control the fight, one should focus the spawner, and one should secure important loot or retreat if the run turns bad.
+
+If your town is still weak, leaving one player near town can be stronger than sending everyone into a dungeon.
+
+<h2 id="cleared-crypt">
+  What to do after clearing a crypt
+</h2>
+
+A cleared crypt is not only a combat result. It is a routing signal.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-dungeon-crypt-clear.webp"
+    alt="Romestead crypt shown as cleared after a successful dungeon run."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once a crypt is marked clear, move the rewards into your town plan instead of standing around the same location.
+  </figcaption>
+</figure>
+
+After the clear, do three things: store the rewards, check altar value for unusual items, and choose the next route from your current god, boss, building, or town objective. Use the <Link href="#loot-table">dungeon rewards table</Link> above if you are not sure whether an item should be equipped, stored, offered, or saved for progression.
+
+<h2 id="common-mistakes">
+  Common dungeon mistakes
+</h2>
+
+<GuideTable
+  caption="Common Romestead dungeon mistakes and better choices."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+Most dungeon deaths are not caused by one unlucky hit. They come from entering too early, ignoring the room's main mechanic, or carrying too much value into a place you do not understand yet.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the safest first dungeon type in Romestead?
+
+A short crypt-style location like Twin Crypt is a reasonable early target, but only after your town has Food Storage, a worker, food, and a clear recovery plan.
+
+### How do I deal with Crypt Spawners?
+
+Treat the spawner as the main objective. Back up, control the first wave, then destroy or disable the pressure source before looting. Do not stand in the center while enemies keep appearing.
+
+### Why did the Crypt Spawner trigger so early?
+
+Spawner trigger distance can change during Early Access. Play safely by assuming the spawner may activate before you are directly beside it.
+
+### What loot should I expect from dungeons?
+
+Useful dungeon rewards can include weapons, armor, rings, bones, monster loot, artifacts, quest items, and cleared location progress. Always check whether unusual items connect to the altar.
+
+### Are dungeons required for god progression?
+
+Some god objectives can point you toward dungeon artifacts. The Moonstring is one example because it asks for a dungeon artifact and unlocks Well.
+
+### What happens when I die in a dungeon?
+
+It depends on your death setting. Normal death can drop carried inventory while keeping equipped items. Softcore is safer because it only drops money.
+
+### Should I use Softcore?
+
+Use Softcore if you want to learn dungeon layouts without painful recovery runs. Use normal death drops if you want more survival pressure.
+
+### How do I recover dropped items from a trap room?
+
+Return with full health, only the gear needed for recovery, and a plan for the exact hazard that killed you. Grab the items and leave instead of continuing the dungeon.
+
+### Should I keep exploring after finding a good reward?
+
+Only if your food, health, and inventory risk are still under control. If the reward is rare, an artifact, or a major gear upgrade, bank it first.
+
+### How should co-op groups handle dungeons?
+
+Split roles. One player controls enemies, one focuses spawners or ranged threats, one secures loot, and one may stay near town if the settlement is still unstable.

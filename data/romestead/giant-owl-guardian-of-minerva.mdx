@@ -1,0 +1,561 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const bossRouteColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Do This", label: "Do This" },
+];
+
+export const bossRouteRows = [
+  {
+    Step: "1",
+    "Do This": "Build a stable first town with Food Storage, Leatherworker, sleep setup, and stored rare loot.",
+  },
+  {
+    Step: "2",
+    "Do This": "Prepare a Flint Gladius or Flint Hasta, full Leather armor, and food or healing.",
+  },
+  {
+    Step: "3",
+    "Do This": "Follow the sky-presence clue, bird shadow, or statue/campfire direction to find the nest.",
+  },
+  {
+    Step: "4",
+    "Do This": "Break the egg in the nest only when you are ready to start the fight.",
+  },
+  {
+    Step: "5",
+    "Do This": "Play Phase 1 patiently and save recovery for the low-HP lightning phase.",
+  },
+  {
+    Step: "6",
+    "Do This": "Take the Guardian's Eye to the altar, offer it, claim the reward, then check your Workbench.",
+  },
+];
+
+export const gearColumns = [
+  { key: "Slot Or Prep", label: "Slot Or Prep" },
+  { key: "Recommended Minimum", label: "Recommended Minimum" },
+  { key: "Why", label: "Why" },
+];
+
+export const gearRows = [
+  {
+    "Slot Or Prep": "Weapon",
+    "Recommended Minimum": "Flint Gladius or Flint Hasta",
+    Why: "Both are early enough to prepare before the first boss. Hasta gives safer reach; Gladius is a simple melee choice.",
+  },
+  {
+    "Slot Or Prep": "Armor",
+    "Recommended Minimum": "Full Leather set",
+    Why: "The quest warns you to prepare armor against the owl's beak and claws.",
+  },
+  {
+    "Slot Or Prep": "Food",
+    "Recommended Minimum": "Buff food or reliable healing food",
+    Why: "Save some recovery for Phase 2 instead of eating everything early.",
+  },
+  {
+    "Slot Or Prep": "Town setup",
+    "Recommended Minimum": "Food Storage, Leatherworker, sleep/Bedroll, and stored rare loot",
+    Why: "A failed boss attempt is much less painful when your base and respawn setup are stable.",
+  },
+  {
+    "Slot Or Prep": "Inventory",
+    "Recommended Minimum": "Only carry fight items",
+    Why: "If your death setting drops inventory, do not bring rare offerings or building materials into the boss area.",
+  },
+];
+
+export const findColumns = [
+  { key: "Clue", label: "Clue" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "What To Do", label: "What To Do" },
+];
+
+export const findRows = [
+  {
+    Clue: "The Giant Owl quest",
+    "What It Means": "The owl's home is nearby, and the Guardian's Eye must be offered at the altar after the kill.",
+    "What To Do": "Use the quest as your main objective, but prepare before leaving town.",
+  },
+  {
+    Clue: "\"You feel a presence in the skies above\"",
+    "What It Means": "You are close enough to start tracking the owl.",
+    "What To Do": "Stop sprinting randomly and look for a large moving bird shadow on the ground.",
+  },
+  {
+    Clue: "Bird shadow on the ground",
+    "What It Means": "The owl is circling overhead and pointing you toward the nest route.",
+    "What To Do": "Follow the shadow. If you lose it, continue in the last direction it was moving.",
+  },
+  {
+    Clue: "Owl statue / campfire clue",
+    "What It Means": "Some routes can point you toward the boss location through a statue and campfire interaction.",
+    "What To Do": "Use the direction marker or map clue instead of wandering the whole Plains.",
+  },
+  {
+    Clue: "Nest with egg",
+    "What It Means": "You found the fight trigger.",
+    "What To Do": "Break the egg only when you are ready to start the boss fight.",
+  },
+];
+
+export const phaseOneColumns = [
+  { key: "Phase 1 Attack", label: "Phase 1 Attack" },
+  { key: "Tell", label: "Tell" },
+  { key: "How To Dodge", label: "How To Dodge" },
+];
+
+export const phaseOneRows = [
+  {
+    "Phase 1 Attack": "Jump / Lunge",
+    Tell: "The owl starts a committed movement toward you, often after wing movement.",
+    "How To Dodge": "Dash or step sideways instead of running straight away. Punish only after the movement ends.",
+  },
+  {
+    "Phase 1 Attack": "Close explosion",
+    Tell: "The owl pauses and charges near its body or legs.",
+    "How To Dodge": "Get a few safe hits if you are close, then back out before the burst lands.",
+  },
+];
+
+export const phaseTwoColumns = [
+  { key: "Phase 2 Attack", label: "Phase 2 Attack" },
+  { key: "Tell", label: "Tell" },
+  { key: "How To Handle It", label: "How To Handle It" },
+];
+
+export const phaseTwoRows = [
+  {
+    "Phase 2 Attack": "Lightning Jump",
+    Tell: "The owl jumps or lunges with lightning pressure along the path.",
+    "How To Handle It": "Dodge the movement first, then reposition before trying to attack.",
+  },
+  {
+    "Phase 2 Attack": "Lightning Bolts",
+    Tell: "The owl's eyes glow and lightning strikes around the area.",
+    "How To Handle It": "Keep moving and do not heal while standing still in the danger zone.",
+  },
+  {
+    "Phase 2 Attack": "Trail Explosion",
+    Tell: "An explosion trail begins from the owl's foot/path.",
+    "How To Handle It": "Dash away from the trail instead of backing along the same line.",
+  },
+  {
+    "Phase 2 Attack": "Wind Attack",
+    Tell: "Triggered when you stay behind or near the wrong side of the owl's head.",
+    "How To Handle It": "Do not camp behind the head. Dash sideways and reset your angle.",
+  },
+];
+
+export const lootColumns = [
+  { key: "Drop", label: "Drop" },
+  { key: "Use", label: "Use" },
+  { key: "Note", label: "Note" },
+];
+
+export const lootRows = [
+  {
+    Drop: "Guardian's Eye",
+    Use: "Offer it at the altar to push Minerva progression.",
+    Note: "This is the key progression drop. Do not treat it like normal loot.",
+  },
+  {
+    Drop: "Guardian's Feather ×3",
+    Use: "Guardian / Feathered crafting path.",
+    Note: "Useful if you plan to farm owl materials later.",
+  },
+  {
+    Drop: "Guardian's Talon ×2",
+    Use: "Guardian / Feathered crafting path.",
+    Note: "Keep it until you know which boss gear you want.",
+  },
+  {
+    Drop: "Random Feathered armor piece",
+    Use: "Early boss-tier armor upgrade.",
+    Note: "Can include pieces such as hood, armor, or boots depending on the roll.",
+  },
+  {
+    Drop: "Coal and Copper Bars",
+    Use: "Early crafting and blacksmith progression.",
+    Note: "Public data commonly reports around 18 Coal and 5 Copper Bars, but exact rewards can vary.",
+  },
+  {
+    Drop: "Poisoned Arrows and coins",
+    Use: "Combat supplies and economy.",
+    Note: "Useful bonus loot, but not the main reason to kill the boss.",
+  },
+];
+
+export const unlockColumns = [
+  { key: "Unlock Or Change", label: "Unlock Or Change" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const unlockRows = [
+  {
+    "Unlock Or Change": "Level 2 Altar",
+    "Why It Matters": "Opens the next layer of god progression after the Guardian's Eye offering.",
+  },
+  {
+    "Unlock Or Change": "Material Storage",
+    "Why It Matters": "Helps organize heavier resources and crafting materials after your first major boss.",
+  },
+  {
+    "Unlock Or Change": "Blacksmith",
+    "Why It Matters": "Starts the next gear and metal crafting route.",
+  },
+  {
+    "Unlock Or Change": "Carpenter's Workshop",
+    "Why It Matters": "Supports stronger settlement construction and later town upgrades.",
+  },
+  {
+    "Unlock Or Change": "World Tier 1",
+    "Why It Matters": "God quests, stronger buffs, new buildings, and more town threats begin opening up.",
+  },
+];
+
+export const farmColumns = [
+  { key: "Question", label: "Question" },
+  { key: "Answer", label: "Answer" },
+];
+
+export const farmRows = [
+  {
+    Question: "Can you fight the Guardian of Minerva again?",
+    Answer: "Yes, public data and older patch notes indicate the owl/egg can respawn, so the boss is intended to be farmable.",
+  },
+  {
+    Question: "Why farm it?",
+    Answer: "Guardian's Feather, Guardian's Talon, Feathered armor rolls, Coal, Copper Bars, and other rewards can support later crafting.",
+  },
+  {
+    Question: "When should you farm it?",
+    Answer: "After your first kill, altar reward, and town upgrades. Do not farm it before your food, armor, and respawn setup are stable.",
+  },
+  {
+    Question: "What if the egg is not back?",
+    Answer: "Wait, check the nest again later, and remember that respawn behavior can change during Early Access patches.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Breaking the egg before checking gear",
+    "Better Choice": "Treat the egg as the boss-start button. Check armor, food, weapon, inventory, and death setting first.",
+  },
+  {
+    Mistake: "Using Phase 1 habits in Phase 2",
+    "Better Choice": "When lightning starts, slow down. Dodge first, then attack after the danger window ends.",
+  },
+  {
+    Mistake: "Using all food in Phase 1",
+    "Better Choice": "Save recovery for Phase 2, when lightning attacks make the fight more dangerous.",
+  },
+  {
+    Mistake: "Ignoring the Guardian's Eye after the kill",
+    "Better Choice": "Return to the altar, offer the eye, claim the reward, then check the Workbench.",
+  },
+  {
+    Mistake: "Not checking new buildings after the reward",
+    "Better Choice": "Look for Material Storage, Blacksmith, Carpenter's Workshop, Level 2 Altar, and other new options.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To beat the **Giant Owl / Guardian of Minerva** in Romestead, prepare before you touch the nest. Bring at least a **Flint Gladius or Flint Hasta**, a **full Leather armor set**, and food or healing. Look for the sky-presence clue, follow the bird shadow to the nest, then **break the egg** to start the fight.
+
+The boss enters Phase 2 at low HP, around the final 50 HP in current public data. Save healing for that phase because lightning attacks start appearing. After the kill, take the **Guardian's Eye** to the altar, claim the reward, and then check your Workbench for new buildings.
+</GuideQuickAnswer>
+
+<GuideTable
+  caption="Giant Owl boss route in Romestead."
+  columns={bossRouteColumns}
+  rows={bossRouteRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-giant-owl-quest-prep.webp"
+    alt="Romestead The Giant Owl quest explaining the Guardian's Eye objective, nearby nest, armor and food preparation."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The quest gives the first warning: the owl has a nest nearby, and fighting without armor and food is a bad idea.
+  </figcaption>
+</figure>
+
+<h2 id="recommended-gear">
+  Recommended gear before the Giant Owl
+</h2>
+
+The Giant Owl is the first real boss check. Do not treat it like a normal animal or random enemy. If your town is still missing Food Storage, Leatherworker, sleep setup, or a safe inventory, fix that first.
+
+<GuideTable
+  caption="Recommended minimum setup before fighting the Giant Owl."
+  columns={gearColumns}
+  rows={gearRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-leatherworker-armor-prep.webp"
+    alt="Romestead Leatherworker menu showing early leather armor and gear options before the Giant Owl fight."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Leather armor is the cleanest early defense route before the owl. If you keep dying fast, gear is probably the problem.
+  </figcaption>
+</figure>
+
+For the first town setup before this fight, read <Link href="/romestead/first-day-base-building/">Romestead First Day Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="find-the-nest">
+  How to find the Giant Owl nest
+</h2>
+
+The Giant Owl is not found by walking into the boss and pressing interact. You are looking for the nest.
+
+<GuideTable
+  caption="How to find the Giant Owl nest in Romestead."
+  columns={findColumns}
+  rows={findRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-giant-owl-shadow-nest.webp"
+    alt="Romestead Giant Owl shadow clue leading toward the nest location."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When you see the bird shadow, follow it instead of searching randomly. The shadow is the practical route to the nest.
+  </figcaption>
+</figure>
+
+If you see a statue or campfire clue that points toward the boss location, use it. The goal is to narrow the search until you find the nest and egg.
+
+<h2 id="start-fight">
+  How to start the Giant Owl fight
+</h2>
+
+Once you find the nest, do not rush the trigger. The fight starts when you **break the egg** in the nest.
+
+That matters because you can stand near the nest and still have time to prepare. Before breaking the egg:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>eat or top off health,</li>
+  <li>confirm your weapon and armor,</li>
+  <li>clear small enemies nearby,</li>
+  <li>drop off unnecessary loot if possible,</li>
+  <li>and make sure you are ready for a two-phase fight.</li>
+</ul>
+
+Breaking the egg is the point of no return. Treat it like pressing the boss-start button.
+
+<h2 id="phase-one">
+  Phase 1 attacks
+</h2>
+
+Current public data puts the Guardian of Minerva around the low-200 HP range, with Phase 2 beginning near the final 50 HP. Use those numbers as Early Access guidance, not permanent tuning.
+
+Phase 1 is simpler than Phase 2, but it still punishes greedy melee.
+
+<GuideTable
+  caption="Guardian of Minerva Phase 1 attacks."
+  columns={phaseOneColumns}
+  rows={phaseOneRows}
+/>
+
+<h2 id="phase-two">
+  Phase 2 attacks
+</h2>
+
+Phase 2 begins when the owl is low, around **below 50 HP** in current public data. Rain and thunder start, and the fight becomes much less forgiving.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-giant-owl-fight-phase-two.webp"
+    alt="Romestead Giant Owl boss fight entering phase two with lightning pressure."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Phase 2 is where most bad attempts fall apart. Save healing and stop attacking during unsafe windows.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Guardian of Minerva Phase 2 attacks and dodges."
+  columns={phaseTwoColumns}
+  rows={phaseTwoRows}
+/>
+
+The safest Phase 2 rule is simple: dodge first, attack second. If you are unsure what the owl is doing, move instead of committing to another hit.
+
+<h2 id="after-kill">
+  What to do after killing the Giant Owl
+</h2>
+
+The boss kill is not the end of the objective. You need the **Guardian's Eye**.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-giant-owl-guardian-eye-drop.webp"
+    alt="Romestead after the Giant Owl fight showing the Guardian's Eye objective before returning to the altar."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Do not leave the boss route unfinished. Bring the Guardian's Eye back to the altar.
+  </figcaption>
+</figure>
+
+Take the eye to the altar, offer it, and claim the reward. If you skip the claim step, you may think nothing unlocked.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="drops">
+  Giant Owl drops and rewards
+</h2>
+
+The Guardian of Minerva can drop both progression loot and farmable materials. Exact reward rolls can change during Early Access, but current public data commonly lists these categories.
+
+<GuideTable
+  caption="Guardian of Minerva drops and what they are for."
+  columns={lootColumns}
+  rows={lootRows}
+/>
+
+The most important item is still **Guardian's Eye**. Use it for altar progression before worrying about farming extra materials.
+
+<h2 id="guardian-eye-reward">
+  Guardian's Eye reward, buildings and World Tier 1
+</h2>
+
+Offering the Guardian's Eye unlocks the real reason this boss matters: new town and crafting progression.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-gods-offerings-guardian-eye.webp"
+    alt="Romestead Guardian's Eye altar reward showing Level 2 Altar, Material Storage, Blacksmith and Carpenter's Workshop unlocks."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Guardian's Eye reward can unlock major building routes like Material Storage, Blacksmith, and Carpenter's Workshop.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Important unlocks after offering the Guardian's Eye."
+  columns={unlockColumns}
+  rows={unlockRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-gods-world-tier-one.webp"
+    alt="Romestead World Tier Progression tutorial after offering the Owl's Eye."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    World Tier 1 means the tutorial-style opening is over. New god quests, buildings, buffs, and town threats begin opening up.
+  </figcaption>
+</figure>
+
+After this, return to the Workbench and check new construction options. For the full altar route, read <Link href="/romestead/gods-offerings-boss-progression/">Romestead Gods and Offerings Guide</Link>.
+
+
+<h2 id="farm-guardian">
+  Can you farm the Guardian of Minerva?
+</h2>
+
+Yes, the Guardian of Minerva appears to be intended as a repeatable material source. Older patch notes even mention fixing an issue where Minerva's Owl Egg did not respawn, which supports the idea that repeat kills are part of the loop.
+
+<GuideTable
+  caption="Farming the Guardian of Minerva."
+  columns={farmColumns}
+  rows={farmRows}
+/>
+
+Do not turn it into a farm route too early. Your first kill should be about the Guardian's Eye and unlocks. Later kills are for materials, armor rolls, and crafting routes.
+
+<h2 id="common-mistakes">
+  Common Giant Owl mistakes
+</h2>
+
+<GuideTable
+  caption="Common Giant Owl mistakes and better choices."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is treating the owl like a normal enemy. The fight is really three checks in a row: finding the nest, surviving the two-phase boss, and completing the altar reward.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Where is the Giant Owl in Romestead?
+
+Watch for the sky-presence message, then look for the large bird shadow moving across the ground. Follow the shadow toward the nest. Some routes can also use a statue and campfire clue to point toward the boss location.
+
+### How do I start the Giant Owl fight?
+
+Find the nest and break the egg. Breaking the egg starts the Guardian of Minerva fight, so prepare before doing it.
+
+### What gear should I bring to the Giant Owl?
+
+Bring at least a Flint Gladius or Flint Hasta, full Leather armor, and food or healing. Buff food helps if you have it.
+
+### How much HP does the Guardian of Minerva have?
+
+Current public data puts the boss around the low-200 HP range, with Phase 2 starting around the final 50 HP. Treat exact HP as Early Access tuning that may change.
+
+### What happens in Phase 2?
+
+Phase 2 adds lightning pressure. Watch for Lightning Jump, Lightning Bolts, Trail Explosion, and Wind Attack. Move first, then attack after the danger window ends.
+
+### What does the Guardian's Eye do?
+
+Take the Guardian's Eye to the altar, offer it, and claim the reward. It pushes Minerva progression and unlocks major early buildings.
+
+### What does the Giant Owl drop?
+
+Important drops include Guardian's Eye, Guardian's Feather, Guardian's Talon, possible Feathered armor, Coal, Copper Bars, arrows, and coins. Exact quantities can vary with Early Access tuning and reward rolls.
+
+### Can you farm the Giant Owl?
+
+Yes. The Guardian of Minerva can be repeated for materials and armor rewards, but it is better to finish the first altar reward before farming it.
+
+### Why did I beat the owl but nothing unlocked?
+
+You may not have offered the Guardian's Eye, or you may not have claimed the altar reward. After claiming it, return to the Workbench and check Construction Mode.
+
+### What should I do after the Giant Owl?
+
+Build the new upgrades, especially Material Storage, Blacksmith, Carpenter's Workshop, and Level 2 Altar options. Then follow the next god objectives instead of wandering randomly.

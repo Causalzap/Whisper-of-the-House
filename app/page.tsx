@@ -126,7 +126,8 @@ const allGameGuides = [
   { title: 'Deep Rock Galactic: Rogue Core', href: '/deep-rock-galactic'},
   { title: 'ZERO PARADES: For Dead Spies', href: '/zero-parades'},
   { title: 'Paralives', href: '/paralives'},
-
+  { title: 'Romestead', href: '/romestead'},
+  
 ];
 
 const exploreCards = [

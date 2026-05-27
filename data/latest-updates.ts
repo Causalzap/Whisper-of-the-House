@@ -12,6 +12,53 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Romestead =====
+{
+  href: "/romestead",
+  game: "Romestead",
+  title: "Beginner Guide, Bosses & Progression",
+  description:
+    "Start here for Romestead first town setup, Farmstead, gods, Giant Owl, dungeons, workers, food, offerings, and death recovery.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== Romestead =====
+{
+  href: "/romestead/first-day-base-building",
+  game: "Romestead",
+  title: "First Day & Base Building Guide",
+  description:
+    "Build a safer first town with Workbench, Town Core, Altar, Food Storage, Leather Bedroll, workers, raids, and Defense Value.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== Romestead =====
+{
+  href: "/romestead/farmstead-workers-food-logistics",
+  game: "Romestead",
+  title: "Farmstead, Workers & Food Guide",
+  description:
+    "Fix Farmstead, worker, food, and logistics problems with 40 wheat, crop range, Well unlock, farmer levels, storage, and Warehouse checks.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== Romestead =====
+{
+  href: "/romestead/giant-owl-guardian-of-minerva",
+  game: "Romestead",
+  title: "Giant Owl Boss Guide",
+  description:
+    "Find the Giant Owl nest, break the egg, prepare gear, survive Phase 2, claim Guardian’s Eye rewards, and unlock the next progression tier.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
 
 // ===== Paralives =====
 {

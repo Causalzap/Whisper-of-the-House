@@ -1,0 +1,548 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const firstDayColumns = [
+  { key: "Order", label: "Order" },
+  { key: "Do This", label: "Do This" },
+  { key: "Why", label: "Why" },
+];
+
+export const firstDayRows = [
+  {
+    Order: "1",
+    "Do This": "Choose a death setting you can live with.",
+    Why: "Normal item drops make early mistakes more punishing; Softcore is safer while learning.",
+  },
+  {
+    Order: "2",
+    "Do This": "Collect sticks and make flint shards.",
+    Why: "You need early tools before mining, chopping, building, or crafting reliably.",
+  },
+  {
+    Order: "3",
+    "Do This": "Craft your first tools and start processing wood.",
+    Why: "Wood planks and basic materials feed your first building chain.",
+  },
+  {
+    Order: "4",
+    "Do This": "Place a Workbench and build a Town Core.",
+    Why: "The Workbench opens Construction Mode, and the Town Core starts the settlement system.",
+  },
+  {
+    Order: "5",
+    "Do This": "Build an Altar after the Town Core.",
+    Why: "The Altar points you toward god objectives, offerings, and early progression.",
+  },
+  {
+    Order: "6",
+    "Do This": "Build housing, Food Storage, and a first workplace.",
+    Why: "Citizens need a place to live, food they can access, and a job before they become useful.",
+  },
+  {
+    Order: "7",
+    "Do This": "Use the Leatherworker for early gear and a Bedroll route.",
+    Why: "Armor helps survival, and a Bedroll lets you turn your house into a safer night setup.",
+  },
+  {
+    Order: "8",
+    "Do This": "Assign your first worker at the Town Core.",
+    Why: "A finished workplace does not help unless a citizen is assigned to it.",
+  },
+  {
+    Order: "9",
+    "Do This": "Raise your town defense before wandering too far.",
+    Why: "Raids can pressure your town while citizens are still weak.",
+  },
+  {
+    Order: "10",
+    "Do This": "Only then push toward the Giant Owl, dungeons, or longer exploration.",
+    Why: "Your town should be stable before you start chasing boss and dungeon progression.",
+  },
+];
+
+export const buildingColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Build", label: "Build" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const buildingRows = [
+  {
+    Priority: "Required",
+    Build: "Workbench",
+    "Why It Matters": "Opens Construction Mode and lets you start real settlement building.",
+  },
+  {
+    Priority: "Required",
+    Build: "Town Core",
+    "Why It Matters": "Creates the settlement and unlocks town management.",
+  },
+  {
+    Priority: "Required",
+    Build: "Altar",
+    "Why It Matters": "Starts god objectives, offerings, and early progression routing.",
+  },
+  {
+    Priority: "High",
+    Build: "Housing / Insula",
+    "Why It Matters": "Citizens need a place to live before your town can grow safely.",
+  },
+  {
+    Priority: "High",
+    Build: "Food Storage",
+    "Why It Matters": "Citizens need accessible food, not just food in your backpack.",
+  },
+  {
+    Priority: "High",
+    Build: "Leatherworker",
+    "Why It Matters": "Gives your town early armor, Bedroll access, and a useful first job route.",
+  },
+  {
+    Priority: "Medium",
+    Build: "Lumberyard / hauling tools",
+    "Why It Matters": "Helps with wood pressure and moving bulky resources around your first settlement.",
+  },
+  {
+    Priority: "Medium",
+    Build: "Walls, battlements, traps, or catapult-style defense",
+    "Why It Matters": "Raises town defense and gives citizens a better chance during raids.",
+  },
+];
+
+export const constructionColumns = [
+  { key: "Building Step", label: "Building Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Common Mistake", label: "Common Mistake" },
+];
+
+export const constructionRows = [
+  {
+    "Building Step": "Place blueprint",
+    "What To Do": "Use Construction Mode from the Workbench and place the building site.",
+    "Common Mistake": "Putting the Town Core or first houses in a cramped spot with no room to expand.",
+  },
+  {
+    "Building Step": "Bring materials",
+    "What To Do": "Move wood, stone, and required items into the construction site.",
+    "Common Mistake": "Standing near the blueprint with materials but not actually feeding the site.",
+  },
+  {
+    "Building Step": "Build the structure",
+    "What To Do": "Interact with the construction site and complete the building action.",
+    "Common Mistake": "Ignoring the construction timing/minigame and wasting build progress.",
+  },
+  {
+    "Building Step": "Check the finished building",
+    "What To Do": "Open the building panel and see whether it needs a worker, order, storage, or upgrade.",
+    "Common Mistake": "Assuming a building works automatically just because the model appeared.",
+  },
+];
+
+export const bedrollColumns = [
+  { key: "Sleep System Step", label: "Sleep System Step" },
+  { key: "What To Check", label: "What To Check" },
+];
+
+export const bedrollRows = [
+  {
+    "Sleep System Step": "Leatherworker access",
+  "What To Check": "Craft it at the Leatherworker with 2 Leather, 2 Wool, and 1 Wheat.",
+  },
+  {
+  "Sleep System Step": "Bedroll recipe",
+  "What To Check": "Craft a Leather Bedroll at the Leatherworker with 2 Leather, 2 Wool, and 1 Wheat. Check the panel after patches in case the recipe changes.",
+},
+  {
+    "Sleep System Step": "House placement",
+    "What To Check": "Place the Bedroll inside a usable house or sleeping space, not randomly outside.",
+  },
+  {
+    "Sleep System Step": "Sleep / skip night",
+  "What To Check": "Place the Leather Bedroll inside a house, then interact with it to sleep through the night.",
+  },
+  {
+    "Sleep System Step": "Respawn point",
+  "What To Check": "Sleeping with the Bedroll also sets your respawn point, which makes raids, bosses, and dungeon mistakes less punishing.",
+  },
+];
+
+export const defenseColumns = [
+  { key: "Defense Problem", label: "Defense Problem" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "First Fix", label: "First Fix" },
+];
+
+export const defenseRows = [
+  {
+    "Defense Problem": "Town is vulnerable",
+    "What It Means": "Your settlement may not be ready for raids or threats while you are away.",
+    "First Fix": "Add basic walls, battlements, traps, or early defensive buildings before long trips.",
+  },
+  {
+    "Defense Problem": "Defense Value is low",
+    "What It Means": "The town may not have enough defensive structure to protect citizens on its own.",
+    "First Fix": "Check the town/building UI after placing defense pieces and watch whether the value improves.",
+  },
+  {
+    "Defense Problem": "Raid is approaching",
+    "What It Means": "You are about to be tested on layout, defense, and whether citizens are exposed.",
+    "First Fix": "Return home, heal, prepare food, and fight near your town instead of chasing enemies into the dark.",
+  },
+  {
+    "Defense Problem": "Citizens are at risk",
+    "What It Means": "A weak town can cost you more than materials; worker progress and survival matter.",
+    "First Fix": "Do not over-recruit before housing, food, and defense can support the population.",
+  },
+  {
+    "Defense Problem": "Base is too spread out",
+    "What It Means": "Enemies, raids, and manual defense become harder when buildings are scattered.",
+    "First Fix": "Keep first housing, Food Storage, workplace, Altar, and defense close enough to protect.",
+  },
+];
+
+export const exploreColumns = [
+  { key: "You Are Ready If", label: "You Are Ready If" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const exploreRows = [
+  {
+    "You Are Ready If": "Your town has housing, Food Storage, and at least one assigned worker.",
+    "Why It Matters": "The town can keep functioning while you are away.",
+  },
+  {
+    "You Are Ready If": "You have a Bedroll or safe respawn/sleep setup.",
+    "Why It Matters": "Bad nights, deaths, and boss attempts become less punishing.",
+  },
+  {
+    "You Are Ready If": "Your defense value is not obviously neglected.",
+    "Why It Matters": "Raids and threats can punish a town that has no walls, traps, or defensive pieces.",
+  },
+  {
+    "You Are Ready If": "You have stored rare items and unnecessary materials.",
+    "Why It Matters": "Exploration is less painful if death or a mistake does not cost your whole inventory.",
+  },
+  {
+    "You Are Ready If": "You know your next objective.",
+    "Why It Matters": "The Giant Owl, gods, dungeons, and Farmstead route should be chosen deliberately, not randomly.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For your **first day in Romestead**, rush a working settlement, not a giant base. Get sticks and flint shards, craft tools, place a **Workbench**, build a **Town Core**, then add an **Altar**, housing, **Food Storage**, a **Leatherworker**, and one assigned worker.
+
+Do not recruit aggressively or rush the Giant Owl until your town can feed, house, employ, and defend people. The detailed readiness check is in the exploration section below.
+
+</GuideQuickAnswer>
+
+<GuideTable
+  caption="Romestead first-day route at a glance."
+  columns={firstDayColumns}
+  rows={firstDayRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-death-drops-setting.webp"
+    alt="Romestead character creation screen showing the Softcore death setting."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pick a death setting before the first run gets serious. If you hate corpse runs while learning, Softcore is the safer start.
+  </figcaption>
+</figure>
+
+<h2 id="death-setting">
+  Choose the death setting before you build
+</h2>
+
+Romestead can punish early wandering if you die while carrying too much. Before you start treating every ruin and cave as free loot, check whether your current death setting drops carried inventory.
+
+If you are still learning the map, Softcore is easier. If you want full survival pressure, keep the normal setting, but play around it: store rare items, return home before night spirals out of control, and do not carry boss or altar items into random danger.
+
+For dungeon-specific recovery, use <Link href="/romestead/dungeon-traps-death-recovery/">Romestead Dungeon Traps and Death Recovery</Link>.
+
+<h2 id="flint-tools">
+  Get flint shards, sticks and your first tools
+</h2>
+
+Your first resource goal is simple: collect sticks and make **flint shards**. If you pick up a full Flint piece, throw the Flint onto a Rock to break it into shards. That gives you the early material you need for your first tools.
+
+If a later Early Access patch changes the exact interaction, follow the current tutorial prompt, but the lesson stays the same: do not wander around waiting for perfect shard pickups when the game is teaching you how to break raw flint into usable pieces.
+
+Once you have enough early materials, craft your first tools and start processing wood. Logs are not just inventory icons. You may need to chop, move, and process them into usable building materials before the first town comes together.
+
+<h2 id="physical-building">
+  Learn the physical building loop early
+</h2>
+
+A lot of new players lose time here because Romestead building is more physical than a normal menu-based builder.
+
+<GuideTable
+  caption="How construction works in Romestead."
+  columns={constructionColumns}
+  rows={constructionRows}
+/>
+
+The important lesson is that placing a blueprint is only the beginning. You still need to bring materials, complete the building action, and then check whether the finished building needs a worker, storage, order, or upgrade.
+
+<h2 id="workbench-town-core-altar">
+  Build Workbench, Town Core and Altar first
+</h2>
+
+The **Workbench** opens Construction Mode. The **Town Core** creates the settlement. The **Altar** gives you the first real progression direction through gods and offerings.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-town-core-construction-mode.webp"
+    alt="Romestead Construction Mode tutorial explaining the Workbench, Town Core and trade routes."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Workbench and Town Core are the start of the real settlement loop. Do not place them somewhere you already know you will hate.
+  </figcaption>
+</figure>
+
+After the Town Core, build the Altar before you get lost in random chores. The Altar connects your first town to the Giant Owl, Guardian's Eye, gods, offerings, and later building unlocks.
+
+For the god route, read <Link href="/romestead/gods-offerings-boss-progression/">Romestead Gods and Offerings Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="first-buildings">
+  Best first buildings to build
+</h2>
+
+Your first settlement should solve support before expansion. That means housing, food, work, progression, and defense come before pretty roads or giant walls.
+
+<GuideTable
+  caption="Best first buildings in Romestead."
+  columns={buildingColumns}
+  rows={buildingRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-first-settlement-requirements.webp"
+    alt="Romestead Citizens tutorial explaining housing, Food Storage, Leatherworker, Insula, defenses and citizen jobs."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Before recruiting survivors, make sure the town can house, feed, employ, and defend them.
+  </figcaption>
+</figure>
+
+Do not try to build every possible structure on day one. A compact town with the right buildings is stronger than a huge blueprint field with no food, workers, or defense value.
+
+<h2 id="food-storage">
+  Food Storage is not optional
+</h2>
+
+Food in your backpack helps you. Food in **Food Storage** helps the town.
+
+That distinction matters because citizens need accessible food, not just the fact that you personally own some olives, meat, or crops. If your first citizen arrives and the food system is not ready, your town can become unstable before the rest of your base is even finished.
+
+For food and Farmstead routing after the first day, use <Link href="/romestead/farmstead-workers-food-logistics/">Romestead Farmstead, Workers, Food and Logistics Guide</Link>.
+
+<h2 id="leatherworker-bedroll">
+  Leather Bedroll, sleep and respawn point
+</h2>
+
+The **Leatherworker** is not just for early armor. It also gives you access to the **Leather Bedroll**, one of the most important first-day safety tools.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-leatherworker-bedroll.webp"
+    alt="Romestead Leatherworker menu showing Bedroll and early leather gear options."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Leather Bedroll is worth planning for early because it lets you sleep through the night and set a safer respawn point.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How sleep and Bedroll fit into your first day."
+  columns={bedrollColumns}
+  rows={bedrollRows}
+/>
+
+Night is when the dangerous enemies start becoming a bigger problem. To skip the night safely, craft a **Leather Bedroll** at the Leatherworker with **2 Leather, 2 Wool, and 1 Wheat**, place it inside a house, then interact with it to sleep.
+
+The Bedroll also sets your respawn point, so it is not just a comfort item. It is part of your safety setup before raids, boss attempts, and dungeon runs.
+
+<h2 id="worker-assignment">
+  Assign your first worker
+</h2>
+
+A finished workplace does not automatically solve production. If no citizen is assigned, the building is mostly just a building.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-citizen-assignment-town-core.webp"
+    alt="Romestead Town Core worker assignment screen showing a citizen being assigned to a workplace."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If a workplace is idle, check assignment at the Town Core before blaming the building.
+  </figcaption>
+</figure>
+
+Start with one useful worker and one useful job. Do not recruit a crowd before your housing, food, work, and defense systems can support them.
+
+<h2 id="town-raids-defense">
+  Town Raids and Defense Value
+</h2>
+
+Romestead does not let your settlement stay safe just because you walked away. Raids can approach, and your town defense matters.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-town-defense-value.webp"
+    alt="Romestead town defense rising after building defensive structures."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Defensive pieces can raise town defense. Check the value instead of assuming one wall is enough.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How to think about first-day defense and raids."
+  columns={defenseColumns}
+  rows={defenseRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-town-raid-approaching.webp"
+    alt="Romestead warning that a raid is approaching the town."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A raid warning is not the time to be deep in a dungeon with your best loot. Return home and fight near your defenses.
+  </figcaption>
+</figure>
+
+This is why early defense is not cosmetic. Walls, battlements, traps, and defensive buildings are not just for looks; they help decide whether your town survives while citizens are still fragile.
+
+If you lose citizens or worker levels because the town was not ready, the cost is bigger than the materials you saved by skipping defense.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="material-storage-note">
+  Do not plan around Material Storage on day one
+</h2>
+
+Early storage is awkward, but do not assume **Material Storage** is a first-minute fix. It comes later through boss and god progression. That means your first-day plan should use simple storage discipline instead of waiting for the perfect storage building.
+
+Use chests, Food Storage, and careful backpack habits until the first major unlocks start opening better options.
+
+For the first boss route that leads into stronger building unlocks, read <Link href="/romestead/giant-owl-guardian-of-minerva/">Romestead Giant Owl Guide</Link>.
+
+<h2 id="when-to-explore">
+  When should you leave town?
+</h2>
+
+Leave town when the base can survive your absence, not when the tutorial text simply moves forward.
+
+<GuideTable
+  caption="When you are ready to explore farther in Romestead."
+  columns={exploreColumns}
+  rows={exploreRows}
+/>
+
+If one of those checks fails, fix it before you chase the Giant Owl or a dungeon. Exploration is much easier when the town behind you is not starving, undefended, or full of idle citizens.
+
+
+<h2 id="first-day-summary">
+  First-day summary
+</h2>
+
+A strong first day should end with a small working town:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Workbench and Town Core placed.</li>
+  <li>Altar built and checked.</li>
+  <li>Housing and Food Storage ready.</li>
+  <li>Leatherworker built for armor and Bedroll route.</li>
+  <li>At least one citizen assigned to a real job.</li>
+  <li>Basic defense value improved before raid pressure arrives.</li>
+  <li>Rare items stored before longer exploration.</li>
+</ul>
+
+That is enough. You do not need a perfect Roman city on day one. You need a town that can feed people, survive pressure, and give you a safe base for the next objective.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do first in Romestead?
+
+Collect sticks and flint shards, craft tools, place a Workbench, build a Town Core, then add an Altar, housing, Food Storage, a Leatherworker, and one assigned worker.
+
+### How do I get flint shards?
+
+Look for flint and interact with the environment. Earlier builds show flint being broken into shards by throwing or striking it against rock. Follow your current tutorial prompt if the exact interaction changes.
+
+### Is Altar required on the first day?
+
+Yes, you should build it early. The Altar connects your first town to god objectives, offerings, the Guardian's Eye route, and later unlocks.
+
+### What are the best first buildings?
+
+Workbench, Town Core, Altar, housing, Food Storage, and Leatherworker are the most important early buildings. After that, add worker support, hauling, roads, and basic defense.
+
+### How do I sleep in Romestead?
+
+Craft a Leather Bedroll at the Leatherworker with 2 Leather, 2 Wool, and 1 Wheat, place it inside a house, then interact with it to sleep through the night. This also sets your respawn point.
+
+### Does Bedroll set a respawn point?
+
+Treat Bedroll as part of your sleep and safety setup. It is especially useful before night, raids, boss attempts, and risky dungeon trips.
+
+### Why are my citizens not working?
+
+Most work buildings need a citizen assigned. Open the Town Core and assign the citizen to the correct workplace.
+
+### Why do I need Food Storage?
+
+Citizens need accessible food. Food in your personal inventory does not solve the town's food problem.
+
+### What is Defense Value?
+
+Defense Value reflects how prepared your town is to handle threats. If you build walls, battlements, traps, or defensive structures, check whether the town defense value improves.
+
+### What are Town Raids?
+
+Town Raids are attacks on your settlement. If a raid is approaching, return home, prepare food and healing, and fight near your defenses instead of staying far away.
+
+### Can citizens die during raids?
+
+Your citizens can be put at risk if the town is under-defended. Avoid over-recruiting before you have housing, food, jobs, and defense.
+
+### Should I fight the Giant Owl on the first day?
+
+Usually no. Build a stable town, craft armor or better gear, prepare food, understand sleep/death recovery, and then fight the Giant Owl when you can safely claim the Guardian's Eye reward.
+
+### When do I unlock Material Storage?
+
+Material Storage is tied to early boss and god progression rather than your first few minutes. Do not rely on it to solve day-one storage.

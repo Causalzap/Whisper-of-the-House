@@ -75,7 +75,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/deep-rock-galactic`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/zero-parades`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/paralives`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/romestead`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
 
+    { url: `${base}/romestead/dungeon-traps-death-recovery`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/romestead/farmstead-workers-food-logistics`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/romestead/first-day-base-building`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/romestead/giant-owl-guardian-of-minerva`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/romestead/gods-offerings-boss-progression`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    
     { url: `${base}/paralives/paramaker-stats-vibes-personality`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/paralives/best-early-game-skills-talents-careers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/paralives/job-performance-not-improving`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

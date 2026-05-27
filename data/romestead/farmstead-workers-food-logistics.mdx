@@ -1,0 +1,547 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const setupColumns = [
+  { key: "Farmstead Piece", label: "Farmstead Piece" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "Player Check", label: "Player Check" },
+];
+
+export const setupRows = [
+  {
+    "Farmstead Piece": "40 wheat offering",
+    "What It Does": "Unlocks Farmstead through the Honoring the Soil objective.",
+    "Player Check": "Do not spend all wheat before you finish this unlock.",
+  },
+  {
+    "Farmstead Piece": "Farmstead building",
+    "What It Does": "Handles nearby farming work once it is built and assigned correctly.",
+    "Player Check": "Place it with open space around it, not in a cramped corner.",
+  },
+  {
+    "Farmstead Piece": "Nearby farmland",
+    "What It Does": "Gives the Farmstead crops to work on.",
+    "Player Check": "Use the placement/highlight area as your real range guide.",
+  },
+  {
+    "Farmstead Piece": "Seeds or crops",
+    "What It Does": "Provide the input the Farmstead needs to start working.",
+    "Player Check": "Plant crops nearby or keep seeds/crops where the building can use them.",
+  },
+  {
+    "Farmstead Piece": "Water setup",
+    "What It Does": "Controls whether crop watering becomes automated.",
+    "Player Check": "If watering is stuck, go to the Farmstead not watering section.",
+  },
+  {
+    "Farmstead Piece": "Worker and job level",
+    "What It Does": "Affects whether work happens and how efficient it becomes.",
+    "Player Check": "Assign a citizen and upgrade the building when the job level cap becomes the bottleneck.",
+  },
+];
+
+export const storageCheckColumns = [
+  { key: "Found Here", label: "Found Here" },
+  { key: "What It Usually Means", label: "What It Usually Means" },
+  { key: "Do This", label: "Do This" },
+];
+
+export const storageCheckRows = [
+  {
+    "Found Here": "In the field",
+    "What It Usually Means": "The crop exists, but the next building has not handled it yet.",
+    "Do This": "Check Farmstead range, worker assignment, and whether the crop is ready to harvest.",
+  },
+  {
+    "Found Here": "Inside the Farmstead",
+    "What It Usually Means": "Farming is working, but the output may not be moving into the next step.",
+    "Do This": "Move the item manually if needed, then check whether storage or processing is close enough.",
+  },
+  {
+    "Found Here": "Inside a finished order",
+    "What It Usually Means": "The order completed, but the item is still sitting in the producing building.",
+    "Do This": "Collect it or move it into the storage/processing building that needs it next.",
+  },
+  {
+    "Found Here": "In Food Storage",
+    "What It Usually Means": "The town can access it as food, but it may not be available for crafting or processing.",
+    "Do This": "Leave citizen food there, but move crafting ingredients elsewhere if the next recipe cannot see them.",
+  },
+  {
+    "Found Here": "In Warehouse",
+    "What It Usually Means": "The item is stored, but the next building may not automatically pull it.",
+    "Do This": "Check whether the recipe counts Warehouse items. If not, move the item closer or into the required building.",
+  },
+  {
+    "Found Here": "In your backpack",
+    "What It Usually Means": "The town does not really have that item yet.",
+    "Do This": "Put food into Food Storage, materials into the right storage, or inputs into the building that needs them.",
+  },
+];
+
+export const cropColumns = [
+  { key: "Crop Or Food", label: "Crop Or Food" },
+  { key: "Early Use", label: "Early Use" },
+  { key: "What To Watch", label: "What To Watch" },
+];
+
+export const cropRows = [
+  {
+    "Crop Or Food": "Wheat",
+    "Early Use": "The key crop for the Farmstead unlock and later food-chain routing.",
+    "What To Watch": "Save 40 wheat for Honoring the Soil before spending it casually.",
+  },
+  {
+    "Crop Or Food": "Cabbage",
+    "Early Use": "A simple early crop/food source when you have seeds.",
+    "What To Watch": "Useful for stabilizing food, but it does not replace wheat progression.",
+  },
+  {
+    "Crop Or Food": "Olives",
+    "Early Use": "Early food and a reminder that not every edible item is equally useful for citizens.",
+    "What To Watch": "Check food value before assuming a crop or fruit solves citizen hunger.",
+  },
+  {
+    "Crop Or Food": "Apples / tree food",
+    "Early Use": "Good for emergency food while your farms are still coming online.",
+    "What To Watch": "Do not cut down useful food trees without thinking about your food route.",
+  },
+  {
+    "Crop Or Food": "Meat and cooked food",
+    "Early Use": "Useful for feeding yourself and stocking Food Storage early.",
+    "What To Watch": "Put town food into Food Storage, not only in your backpack.",
+  },
+  {
+    "Crop Or Food": "Buff food",
+    "Early Use": "Some food can help your character more than basic town feeding.",
+    "What To Watch": "Save stronger food for boss fights, dungeon runs, or recovery instead of dumping everything into storage.",
+  },
+];
+
+export const wateringColumns = [
+  { key: "If This Is Happening", label: "If This Is Happening" },
+  { key: "Likely Cause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const wateringRows = [
+  {
+    "If This Is Happening": "Farmstead plants crops but does not water them",
+    "Likely Cause": "The watering support step is not finished.",
+    Fix: "Complete the Well route and place the Well close enough for the Farmstead to use.",
+  },
+  {
+    "If This Is Happening": "Farmstead does nothing at all",
+    "Likely Cause": "The building has no usable input, no nearby farmland, or no valid worker setup.",
+    Fix: "Check nearby crops, seeds/crops in the expected place, and worker assignment.",
+  },
+  {
+    "If This Is Happening": "Only some plots are handled",
+    "Likely Cause": "Some farmland may be outside the working area.",
+    Fix: "Move fields inside the highlighted range instead of spreading crops across the whole base.",
+  },
+  {
+    "If This Is Happening": "You unlocked Farmstead but still hand-water everything",
+    "Likely Cause": "Farmstead and watering are separate parts of the chain.",
+    Fix: "Treat Farmstead as the farming building, then finish the water unlock before expecting full automation.",
+  },
+];
+
+export const workerColumns = [
+  { key: "Worker System", label: "Worker System" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Why It Matters For Farmstead", label: "Why It Matters For Farmstead" },
+];
+
+export const workerRows = [
+  {
+    "Worker System": "Citizen assignment",
+    "What It Means": "Most work buildings need a citizen assigned before they perform orders.",
+    "Why It Matters For Farmstead": "A built Farmstead is not useful if nobody is assigned to do the work.",
+  },
+  {
+    "Worker System": "Job XP",
+    "What It Means": "Citizens gain experience by completing work orders.",
+    "Why It Matters For Farmstead": "A farmer becomes more valuable over time if you keep the farm loop running.",
+  },
+  {
+    "Worker System": "Building tier cap",
+    "What It Means": "A building can cap how far a citizen's job level can go.",
+    "Why It Matters For Farmstead": "If the worker is capped, upgrading the building matters more than adding more fields.",
+  },
+  {
+    "Worker System": "Higher job levels",
+    "What It Means": "Higher-level citizens can work faster and may unlock new recipes.",
+    "Why It Matters For Farmstead": "This is the long-term reason to care about farmer level, not just crop placement.",
+  },
+  {
+    "Worker System": "Loyalty and bonuses",
+    "What It Means": "Worker details can affect bonus chances when orders finish.",
+    "Why It Matters For Farmstead": "A better worker setup can make the same building more productive.",
+  },
+];
+
+export const foodChainColumns = [
+  { key: "Food Chain Step", label: "Food Chain Step" },
+  { key: "What It Handles", label: "What It Handles" },
+  { key: "Do Not Confuse It With", label: "Do Not Confuse It With" },
+];
+
+export const foodChainRows = [
+  {
+    "Food Chain Step": "Farmstead",
+    "What It Handles": "Nearby crop work such as farming around the building.",
+    "Do Not Confuse It With": "Milling grain, baking bread, or magically moving every item into storage.",
+  },
+  {
+    "Food Chain Step": "Manual Mill",
+    "What It Handles": "Early processing such as turning wheat into flour.",
+    "Do Not Confuse It With": "Farmstead automation. A crop can be harvested and still need processing.",
+  },
+  {
+    "Food Chain Step": "Watermill",
+    "What It Handles": "A later processing route tied to milling in older/current progression examples.",
+    "Do Not Confuse It With": "Farmstead watering. Watermill is about processing, not fixing every farm plot.",
+  },
+  {
+    "Food Chain Step": "Bakery / bread step",
+    "What It Handles": "Turns processed ingredients into better food when available.",
+    "Do Not Confuse It With": "The farming step. Bread problems usually start earlier in the chain.",
+  },
+  {
+    "Food Chain Step": "Food Storage",
+    "What It Handles": "Feeds the town by holding food citizens can access.",
+    "Do Not Confuse It With": "Your personal inventory. Food in your backpack does not stabilize the town.",
+  },
+  {
+    "Food Chain Step": "Warehouse",
+    "What It Handles": "Helps store materials, but does not automatically solve every logistics gap.",
+    "Do Not Confuse It With": "A perfect global hauling network.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "Upgrade Signal", label: "Upgrade Signal" },
+  { key: "What It Means", label: "What It Means" },
+];
+
+export const upgradeRows = [
+  {
+    "Upgrade Signal": "Your farmer hits the building's job level cap",
+    "What It Means": "Upgrade the Farmstead before expecting more job-level growth from that worker.",
+  },
+  {
+    "Upgrade Signal": "New recipes or orders are locked behind higher levels",
+    "What It Means": "The next building tier may matter more than adding more crop plots.",
+  },
+  {
+    "Upgrade Signal": "The farm loop works but feels slow",
+    "What It Means": "Check worker level, building tier, and logistics before expanding the field size.",
+  },
+  {
+    "Upgrade Signal": "You are still missing water or processing",
+    "What It Means": "Do not upgrade blindly. Fix missing Well, mill, or storage steps first.",
+  },
+  {
+    "Upgrade Signal": "Exact material cost changed after a patch",
+    "What It Means": "Use the current building panel for costs instead of relying on old build numbers.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Romestead**, the Farmstead is the start of farming automation, not the whole food chain. Unlock it through the **40 wheat** offering, place it with farmland inside its working area, give it seeds or crops to work with, assign a citizen, and then fix the water, processing, and storage pieces around it.
+
+If your Farmstead is not watering crops, do not rebuild the whole base first. Check the Farmstead order text, the nearby farmland, the input storage, and the **Well** route.
+</GuideQuickAnswer>
+
+<GuideTable
+  caption="How the Farmstead setup actually fits together in Romestead."
+  columns={setupColumns}
+  rows={setupRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-farmstead-offer-40-wheat.webp"
+    alt="Romestead Honoring the Soil quest showing a 40 wheat offering that unlocks Farmstead."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wheat is progression, not just food. Save 40 wheat for Honoring the Soil if you want Farmstead online.
+  </figcaption>
+</figure>
+
+<h2 id="unlock-farmstead">
+  How to unlock the Farmstead
+</h2>
+
+Farmstead is not a starter building you should expect on minute one. It comes through altar progression, and the key early requirement is **40 wheat**.
+
+That changes how you should treat wheat. Do not spend all of it just because your town needs food right now. If you are close to Honoring the Soil, keep a dedicated wheat stack for the offering.
+
+Once you finish the objective, return to your building options and confirm that Farmstead is available before redesigning your farming area.
+
+<h2 id="farmstead-range">
+  Farmstead range: how close does farmland need to be?
+</h2>
+
+The Farmstead works with nearby farmland, so placement matters. In the current build shown here, the placement/working indicator appears to use a **3-tile range** around the Farmstead, and the order panel refers to handling **10 crops**. Treat the game's highlight and order text as the source of truth, because exact range and crop counts can change during Early Access.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-farmstead-building-placement.webp"
+    alt="Romestead Farmstead being placed with space for surrounding farmland."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Place the Farmstead before filling the area with random roads or fields. The working range is easier to plan when the space is still open.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-farmstead-nearby-crops.webp"
+    alt="Romestead Farmstead with farmland arranged around the working area."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Keep crop plots inside the Farmstead's nearby area instead of spreading food production across the whole settlement.
+  </figcaption>
+</figure>
+
+Good placement means:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>the Farmstead has enough open space around it,</li>
+  <li>farmland fits inside the highlighted range,</li>
+  <li>roads do not cut through your crop layout awkwardly,</li>
+  <li>storage and processing buildings are close enough to manage without constant running.</li>
+</ul>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="farmstead-not-watering">
+  Why is my Farmstead not watering crops?
+</h2>
+
+This is the most common Farmstead confusion: the Farmstead can be unlocked and placed correctly, but watering may still need a separate support step.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-farmstead-seeds-well-requirement.webp"
+    alt="Romestead Farmstead order showing nearby farmland, seeds or crops, and Well requirement."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Read the order text carefully. The Farmstead can work nearby farmland, but watering depends on the water support step.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Why Farmstead watering is not working."
+  columns={wateringColumns}
+  rows={wateringRows}
+/>
+
+If you have Farmstead but not the water unlock yet, your next goal may be **The Moonstring** rather than more fields.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-gods-moonstring-well-unlock.webp"
+    alt="Romestead The Moonstring quest showing that it unlocks Well."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Moonstring is important for farming because it unlocks Well, which completes the watering side of the Farmstead setup.
+  </figcaption>
+</figure>
+
+For the altar route behind this unlock, read <Link href="/romestead/gods-offerings-boss-progression/">Romestead Gods and Offerings Guide</Link>.
+
+<h2 id="crops">
+  What should you plant first?
+</h2>
+
+Do not think of every crop as equal. Early farming has two jobs: keep people fed and unlock the systems that make food easier later.
+
+<GuideTable
+  caption="Early crops and food sources to track in Romestead."
+  columns={cropColumns}
+  rows={cropRows}
+/>
+
+The safe early answer is: **protect wheat progression first**, then use other food sources to stabilize the town. Wheat leads into Farmstead. Other food keeps citizens and your character from falling behind while the farm loop is still rough.
+
+If you are preparing for a boss or dungeon, do not put every strong food item into town storage. Some food is more useful in your inventory when you need healing, buffs, or recovery during a risky trip.
+
+<h2 id="worker-assignment-job-level">
+  Worker assignment, farmer level and building upgrades
+</h2>
+
+A Farmstead is still a workplace. That means the worker system matters.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-citizen-assignment-town-core.webp"
+    alt="Romestead Town Core worker assignment screen showing a citizen being assigned to a workplace."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If a work building is idle, check assignment first. A finished building is not the same as an assigned worker.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-worker-job-level-upgrade.webp"
+    alt="Romestead workplace panel showing job level, building upgrade and higher-level worker benefits."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Job level is a real progression system. Higher-level citizens work faster, and building upgrades can raise the max job level.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How workers and job levels affect Farmstead."
+  columns={workerColumns}
+  rows={workerRows}
+/>
+
+If your farmer is capped, adding more crops may not fix the bottleneck. Check the building tier and upgrade option. If the building can no longer support higher job levels, the next step is upgrading the workplace, not expanding the field.
+
+<h2 id="food-chain-after-farmstead">
+  How the food chain works after Farmstead
+</h2>
+
+Farmstead does not mean “food is solved forever.” It mainly handles the farming side. Food still has to move through processing, storage, and sometimes cooking.
+
+<GuideTable
+  caption="Farmstead, mills, storage and food processing are separate steps."
+  columns={foodChainColumns}
+  rows={foodChainRows}
+/>
+
+Use this table as a boundary check. If crops exist but flour, bread, or citizen food is missing, the problem may already have moved past the Farmstead.
+
+That is why a “Farmstead problem” is often really a processing, storage, or hauling problem.
+
+This separation matters because a “Farmstead problem” is often a mill, storage, or hauling problem.
+
+<h2 id="warehouse-logistics">
+  Why Warehouse and storage do not solve everything
+</h2>
+
+Storage helps, but it is not a perfect global logistics system. In current play, finished orders and nearby storage may not always connect the way you expect.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-warehouse-automation-limits.webp"
+    alt="Romestead Warehouse and Farmstead setup showing early automation limits with storage and manual movement."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If items sit in the wrong place, treat it as a logistics problem. Warehouse helps, but it does not automatically fix every output.
+  </figcaption>
+</figure>
+
+When the food chain feels stuck, do not only ask whether the item exists. Ask where it is.
+
+<GuideTable
+  caption="Where stuck food-chain items usually are and what to do next."
+  columns={storageCheckColumns}
+  rows={storageCheckRows}
+/>
+
+The item being “somewhere in town” is not always enough. It needs to be where the next system can actually use it.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="farmstead-upgrades">
+  When should you upgrade the Farmstead?
+</h2>
+
+Do not upgrade the Farmstead just because the button exists. Upgrade when the building tier is the thing holding the farm back.
+
+<GuideTable
+  caption="When Farmstead upgrades actually matter."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+A good upgrade order is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Unlock Farmstead.</li>
+  <li>Place it with usable farmland inside range.</li>
+  <li>Assign a citizen.</li>
+  <li>Fix water support.</li>
+  <li>Make sure food processing and storage work.</li>
+  <li>Then upgrade when job level, recipes, or production speed become the bottleneck.</li>
+</ol>
+
+If the building is idle, missing water, missing seeds, or starved by logistics, an upgrade will not solve the real problem.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I unlock Farmstead in Romestead?
+
+In the current route, Farmstead comes from the Honoring the Soil objective and requires 40 wheat. Save wheat once you know you are approaching this unlock.
+
+### How close does farmland need to be to the Farmstead?
+
+Use the in-game highlighted area as the final answer. In the current build shown here, the Farmstead working area appears to be around 3 tiles, but Early Access tuning can change exact range.
+
+### Why is my Farmstead not watering crops?
+
+Farmstead and watering are separate steps. If crops are not being watered, check the water support requirement and follow The Moonstring route if you still need Well.
+
+### Does Farmstead need a worker?
+
+Yes. Farmstead is a workplace, so check worker assignment at the Town Core if nothing is happening.
+
+### How do I level up a farmer?
+
+Keep the Farmstead working. Citizens gain job XP from completing work orders, and higher-level citizens can work faster. If the worker hits the building’s level cap, upgrade the building.
+
+### When should I upgrade the Farmstead?
+
+Upgrade when the farmer is capped, new recipes or orders require a higher level, or the farm loop already works but production speed is now the bottleneck. Do not upgrade before fixing water, storage, and inputs.
+
+### What should I plant first?
+
+Wheat is the safest priority because 40 wheat unlocks Farmstead. Use other food sources to keep the town stable while saving enough wheat for progression.
+
+### Does Warehouse automate all food movement?
+
+No. Warehouse helps with storage, but it does not automatically solve every finished order, Farmstead output, or processing step. Check where the item actually is.
+
+### How does the mill fit into Farmstead?
+
+Farmstead handles farming. The mill handles processing, such as turning wheat into flour. If crops exist but bread or processed food is missing, the problem may be the processing chain, not the Farmstead itself.
+
+### Are food buffs important?
+
+Yes, but do not overbuild the page around unstable numbers yet. Save stronger food for boss fights, dungeon runs, and recovery once you know which meals give the best current-version bonuses.

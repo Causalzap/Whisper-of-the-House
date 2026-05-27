@@ -1,0 +1,468 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const godColumns = [
+  { key: "God Or Clue", label: "God Or Clue" },
+  { key: "Seen Role", label: "Seen Role" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const godRows = [
+  {
+    "God Or Clue": "Minerva",
+    "Seen Role": "Guardian's Eye, wisdom, first major altar restoration.",
+    "Why It Matters": "Your first boss reward pushes Minerva progression and opens major construction progress.",
+  },
+  {
+    "God Or Clue": "Mars",
+    "Seen Role": "War, town defense, combat pressure, and siege-related bonuses.",
+    "Why It Matters": "Useful when raids, town defense, and direct combat start becoming your main problem.",
+  },
+  {
+    "God Or Clue": "Mercury",
+    "Seen Role": "Trade, speed, roads, markets, work speed, and efficiency.",
+    "Why It Matters": "Useful when travel, economy, resource flow, or worker efficiency becomes the bottleneck.",
+  },
+  {
+    "God Or Clue": "Vulcan",
+    "Seen Role": "Referenced through crafted artifacts such as The Moonstring.",
+    "Why It Matters": "Watch for crafting, artifact, dungeon, and technology-style objectives tied to unlocks.",
+  },
+];
+
+export const termColumns = [
+  { key: "Term", label: "Term" },
+  { key: "What It Means In Practice", label: "What It Means In Practice" },
+  { key: "Player Rule", label: "Player Rule" },
+];
+
+export const termRows = [
+  {
+    Term: "Offering",
+    "What It Means In Practice": "Giving a specific item, crop, boss drop, or artifact to a god objective at the altar.",
+    "Player Rule": "Read the objective text first. Some offerings unlock buildings, quests, or world progression.",
+  },
+  {
+    Term: "Sacrifice",
+    "What It Means In Practice": "A broader commitment of valuable items or devotion through the altar system.",
+    "Player Rule": "Do not sacrifice rare items blindly. Treat it as a higher-risk version of spending resources.",
+  },
+  {
+    Term: "Favor",
+    "What It Means In Practice": "Points or unlock currency used on god-related buffs and practical bonuses.",
+    "Player Rule": "Spend favor on the bottleneck you actually have: gathering, building, healing, movement, defense, or production.",
+  },
+  {
+    Term: "Quest item",
+    "What It Means In Practice": "A required item such as Guardian's Eye or The Moonstring that points to a specific god route.",
+    "Player Rule": "Store it safely and bring it to the correct altar objective instead of treating it like normal loot.",
+  },
+  {
+    Term: "Claim reward",
+    "What It Means In Practice": "The final UI step after completing an altar objective.",
+    "Player Rule": "Do not leave the altar until the reward is claimed, then check the Workbench for new construction options.",
+  },
+];
+
+export const altarColumns = [
+  { key: "Altar Step", label: "Altar Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Common Miss", label: "Common Miss" },
+];
+
+export const altarRows = [
+  {
+    "Altar Step": "Open the Altar",
+    "What To Do": "Select the god or objective from the altar list.",
+    "Common Miss": "Checking the Workbench first and not realizing the next route is on the altar.",
+  },
+  {
+    "Altar Step": "Read the objective text",
+    "What To Do": "Look for the required item, crop, boss drop, or dungeon artifact.",
+    "Common Miss": "Offering random loot instead of following the active objective.",
+  },
+  {
+    "Altar Step": "Insert the required item",
+    "What To Do": "Offer the item or resource shown by the objective.",
+    "Common Miss": "Spending crops or rare loot elsewhere before finishing the altar step.",
+  },
+  {
+    "Altar Step": "Claim the reward",
+    "What To Do": "Press the reward/claim action after the objective completes.",
+    "Common Miss": "Walking away after the offering and thinking nothing unlocked.",
+  },
+  {
+    "Altar Step": "Return to the Workbench",
+    "What To Do": "Open Construction Mode and check for new buildings or upgrades.",
+    "Common Miss": "Missing new construction options because you never checked the Workbench.",
+  },
+];
+
+export const objectiveColumns = [
+  { key: "Objective", label: "Objective" },
+  { key: "Requires", label: "Requires" },
+  { key: "Unlock Or Purpose", label: "Unlock Or Purpose" },
+];
+
+export const objectiveRows = [
+  {
+    Objective: "The Giant Owl / Guardian's Eye",
+    Requires: "Defeat the Guardian of Minerva and offer the Guardian's Eye.",
+    "Unlock Or Purpose": "Restores Minerva progression and opens major early construction routes.",
+  },
+  {
+    Objective: "Honoring the Soil",
+    Requires: "Offer 40 wheat.",
+    "Unlock Or Purpose": "Unlocks Farmstead and starts the farming automation route.",
+  },
+  {
+    Objective: "The Moonstring",
+    Requires: "Find and offer the dungeon artifact.",
+    "Unlock Or Purpose": "Unlocks Well, which matters for Farmstead watering.",
+  },
+  {
+    Objective: "Mars discovery / war offerings",
+    Requires: "War-themed offerings such as bones, monster loot, or related items.",
+    "Unlock Or Purpose": "Pushes defense and combat-related god progression.",
+  },
+  {
+    Objective: "Mercury discovery / trade route",
+    Requires: "Trade, travel, coin, market, or speed-themed offerings.",
+    "Unlock Or Purpose": "Can lead toward movement, road, market, work speed, and economy-related bonuses.",
+  },
+];
+
+export const favorColumns = [
+  { key: "Favor Example", label: "Favor Example" },
+  { key: "Shown Effect", label: "Shown Effect" },
+  { key: "Pick It When", label: "Pick It When" },
+];
+
+export const favorRows = [
+  {
+    "Favor Example": "Lignator",
+    "Shown Effect": "+30% overall Axe Power",
+    "Pick It When": "Wood gathering is slowing down base expansion.",
+  },
+  {
+    "Favor Example": "Cuniculator",
+    "Shown Effect": "+30% overall Pickaxe Power",
+    "Pick It When": "Mining, stone, ore, or early resource gathering is the bottleneck.",
+  },
+  {
+    "Favor Example": "Construction Plan",
+    "Shown Effect": "+25% construction hit area and +25% more progress",
+    "Pick It When": "You are building constantly and construction speed feels slow.",
+  },
+  {
+    "Favor Example": "Power Napper",
+    "Shown Effect": "Laying in a bed regenerates HP",
+    "Pick It When": "You keep returning from fights hurt and want safer recovery.",
+  },
+  {
+    "Favor Example": "Far Reach",
+    "Shown Effect": "Hooks have 20% speed and range",
+    "Pick It When": "Mobility, exploration, or hook movement starts mattering more.",
+  },
+];
+
+
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Treating the altar like a trash can",
+    "Better Choice": "Only offer or sacrifice valuable items after reading the active god objective.",
+  },
+  {
+    Mistake: "Leaving before claiming the reward",
+    "Better Choice": "After the altar accepts an item, claim the reward before closing the UI.",
+  },
+  {
+    Mistake: "Mixing up offerings and sacrifices",
+    "Better Choice": "Treat offerings as objective-driven item turn-ins, and treat sacrifices as a more serious resource commitment.",
+  },
+  {
+    Mistake: "Spending all wheat before Honoring the Soil",
+    "Better Choice": "Save 40 wheat when Farmstead is your next farming goal.",
+  },
+  {
+    Mistake: "Ignoring dungeon artifact objectives",
+    "Better Choice": "If a god asks for an artifact, treat that dungeon route as progression, not optional loot.",
+  },
+  {
+    Mistake: "Picking favor only for combat",
+    "Better Choice": "Choose the buff that fixes the current bottleneck: wood, mining, building, healing, defense, speed, or food.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Romestead**, gods are your progression map. Use the **Altar** to read god objectives, offer the required item, claim the reward, then return to the **Workbench** to check new buildings.
+
+Do not dump rare loot into the altar blindly. **Guardian's Eye**, **40 wheat**, and **The Moonstring** are all examples of items that unlock real systems: Minerva progression, Farmstead, and Well. Favor is different again: spend it on practical buffs that solve your current bottleneck.
+</GuideQuickAnswer>
+
+<h2 id="gods-list">
+  Romestead gods list: who appears early?
+</h2>
+
+Romestead has multiple gods, and each one points your settlement in a different direction. You do not need to memorize every god on day one, but you should know which names are already showing up in early progression.
+
+<GuideTable
+  caption="Early gods and god clues in Romestead."
+  columns={godColumns}
+  rows={godRows}
+/>
+
+This table is not meant to replace the altar. Use it as a quick orientation guide, then follow the objective text in your current save.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-gods-world-tier-one.webp"
+    alt="Romestead World Tier Progression tutorial after offering the Owl's Eye."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    World Tier progression explains the core loop: god quests unlock buildings, powerful buffs, and more threats.
+  </figcaption>
+</figure>
+
+<h2 id="offerings-sacrifices-favor">
+  Offerings, sacrifices and favor are not the same thing
+</h2>
+
+It is easy to blur altar terms together, but they do different jobs in your run.
+
+<GuideTable
+  caption="Offerings, sacrifices, favor and quest items explained."
+  columns={termColumns}
+  rows={termRows}
+/>
+
+The safest rule is simple: if the item looks rare, boss-related, artifact-related, or tied to a god name, pause before spending it. The altar often uses specific items as progression keys.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="altar-ui">
+  How to use the Altar without missing rewards
+</h2>
+
+The Altar is where many new players lose progress without realizing it. Offering the item is not always the final step; you may still need to **claim the reward** and then check the Workbench.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-gods-offerings-guardian-eye.webp"
+    alt="Romestead altar screen showing the Guardian's Eye offering and new construction unlocks."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After a major offering, check the reward text and claim it. Then return to the Workbench for new construction options.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Altar UI steps players often miss."
+  columns={altarColumns}
+  rows={altarRows}
+/>
+
+If you beat a boss or finish an objective and nothing seems to change, the problem is usually one of two things: you did not claim the reward, or you did not return to the Workbench to check the new construction menu.
+
+<h2 id="early-objectives">
+  Early god objectives that unlock real systems
+</h2>
+
+God objectives are not side flavor. They unlock buildings, technology paths, and progression routes.
+
+<GuideTable
+  caption="Important early altar objectives in Romestead."
+  columns={objectiveColumns}
+  rows={objectiveRows}
+/>
+
+The most important lesson is that different objectives solve different problems. Guardian's Eye pushes the first boss route forward. Wheat unlocks Farmstead. The Moonstring unlocks Well. Mars and Mercury point toward very different town priorities.
+
+<h2 id="guardian-eye">
+  Guardian's Eye and Minerva progression
+</h2>
+
+The Guardian's Eye is your first major proof that boss drops are progression keys. After defeating the Giant Owl, offer the Guardian's Eye at the altar, claim the reward, and check the Workbench for new construction options.
+
+Do not use this page as the full Giant Owl walkthrough. Use the dedicated boss guide if you need nest tracking, egg trigger, Phase 2 attacks, drops, or farming:
+
+<p className="my-6">
+  <Link href="/romestead/giant-owl-guardian-of-minerva/">
+    Romestead Giant Owl Guide: Find the Nest, Break the Egg, Beat Phase 2
+  </Link>
+</p>
+
+<h2 id="farmstead-wheat">
+  Honoring the Soil: why 40 wheat matters
+</h2>
+
+One of the clearest early examples is **Honoring the Soil**. It asks you to offer **40 wheat** and unlocks **Farmstead**.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-farmstead-offer-40-wheat.webp"
+    alt="Romestead Honoring the Soil quest showing a 40 wheat offering that unlocks Farmstead."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wheat is not just food. In this route, 40 wheat turns into Farmstead progression.
+  </figcaption>
+</figure>
+
+This is why you should not spend every crop the moment you harvest it. If Farmstead is close, save the wheat and complete the altar objective.
+
+For the farming setup after this unlock, read:
+
+<p className="my-6">
+  <Link href="/romestead/farmstead-workers-food-logistics/">
+    Romestead Farmstead Guide: Fix Food, Workers and Watering
+  </Link>
+</p>
+
+<h2 id="moonstring-well">
+  The Moonstring unlocks Well
+</h2>
+
+The Moonstring is another important example because it sends you toward a dungeon artifact and unlocks **Well**.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-gods-moonstring-well-unlock.webp"
+    alt="Romestead The Moonstring quest showing a dungeon artifact objective that unlocks Well."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some god objectives are dungeon routes. The Moonstring points to an artifact and unlocks Well.
+  </figcaption>
+</figure>
+
+That matters because Well connects back into Farmstead watering. A dungeon artifact can become the missing piece in your food automation chain.
+
+For dungeon preparation and recovery, use:
+
+<p className="my-6">
+  <Link href="/romestead/dungeon-traps-death-recovery/">
+    Romestead Dungeon Guide: Traps, Death and Loot Recovery
+  </Link>
+</p>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="favor">
+  How favor buffs fit into progression
+</h2>
+
+Favor is where god progression starts affecting daily play. Do not choose buffs only because they sound strong. Choose the one that fixes your current problem.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-favor-lignator-axe-power.webp"
+    alt="Romestead favor tree showing Lignator with +30% overall Axe Power."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lignator shows how favor can solve a practical bottleneck: +30% overall Axe Power means faster wood pressure relief.
+  </figcaption>
+</figure>
+
+Use the table below as a decision guide. The exact numbers may change during Early Access, but the choice logic stays the same: pick the favor that fixes your current bottleneck.
+
+<GuideTable
+  caption="Useful early favor examples in Romestead."
+  columns={favorColumns}
+  rows={favorRows}
+/>
+
+If you are constantly building, Construction Plan may help more than a damage node. If wood is the bottleneck, Lignator is easy value. If mining is the wall, Cuniculator may be better. The best favor is the one that removes the next slowdown.
+
+<h2 id="bosses-and-gods">
+  How bosses connect to gods
+</h2>
+
+Bosses are not just combat checks. They are usually part of the god and altar route. The Giant Owl is the first clear example: the fight gives you the Guardian's Eye, but the real progression happens only after you offer it at the altar and claim the reward.
+
+Later bosses should be treated the same way: check whether their drops connect to a god objective, altar reward, world tier step, or new construction unlock.
+
+<div className="my-6">
+  <Link href="/romestead/giant-owl-guardian-of-minerva/">
+    Romestead Giant Owl Guide: Find the Nest, Break the Egg, Beat Phase 2
+  </Link>
+</div>
+
+<h2 id="common-mistakes">
+  Common god and altar mistakes
+</h2>
+
+<GuideTable
+  caption="Common mistakes with gods, offerings and favor."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The altar is not just a donation box. It is the system that turns boss drops, crops, artifacts, and devotion into buildings, buffs, and the next progression route.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I restore gods in Romestead?
+
+Use the Altar. Read the god objective, offer the required item or resource, claim the reward, then check the Workbench for new construction options.
+
+### Which gods appear early in Romestead?
+
+Early routes show or reference gods and god clues such as Minerva, Mars, Mercury, Diana, Venus and Vulcan. Minerva is tied to the first major Guardian's Eye route.
+
+### What is the difference between offerings and sacrifices?
+
+Offerings are usually specific items or resources given to a god objective. Sacrifices are broader or more costly altar commitments. In both cases, read the altar text before spending rare items.
+
+### What does favor do?
+
+Favor unlocks god-related buffs or bonuses. Pick favor based on your current bottleneck: wood, mining, building, healing, movement, defense, trade, food, or production.
+
+### What does the Guardian's Eye do?
+
+Offer the Guardian's Eye at the altar after beating the Giant Owl. It pushes Minerva progression and unlocks major early construction progress after you claim the reward.
+
+### How do I unlock Farmstead?
+
+Complete Honoring the Soil by offering 40 wheat. This unlocks Farmstead and starts the farming automation route.
+
+### How do I unlock Well?
+
+Follow The Moonstring objective. It points you toward a dungeon artifact and unlocks Well, which matters for Farmstead watering.
+
+### Why did I complete an offering but nothing changed?
+
+You may not have claimed the reward, or you may not have checked the Workbench afterward. Some altar rewards show up as new construction options.
+
+### Should I offer bones and monster loot?
+
+Check the altar first. Bones and monster loot can matter for gods like Mars or other objectives, but you should not dump valuable stacks blindly.
+
+### Is there a best god to focus first?
+
+Early on, focus on the god route that solves your current bottleneck. Minerva pushes the first boss unlock route, Farmstead needs wheat, Moonstring unlocks Well, Mars helps defense/combat pressure, and Mercury points toward speed, trade, and economy-style bonuses.
