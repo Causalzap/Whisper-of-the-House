@@ -1,0 +1,585 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const controlColumns = [
+{ key: "Control", label: "Control" },
+{ key: "What It Does", label: "What It Does" },
+{ key: "Use It For", label: "Use It For" },
+];
+
+export const controlRows = [
+{
+Control: "W / A / S / D",
+"What It Does": "Moves your ship on the main horizontal axes.",
+"Use It For": "Basic forward, backward and side movement.",
+},
+{
+Control: "Q / E",
+"What It Does": "Moves your ship up and down in 3D space.",
+"Use It For": "Vertical alignment, docking angles and avoiding objects above or below you.",
+},
+{
+Control: "Shift + movement keys",
+"What It Does": "Rotates your ship instead of translating it.",
+"Use It For": "Turning your nose, lining up scanners, weapons and mining lasers.",
+},
+{
+Control: "Orientation Tool",
+"What It Does": "Shows which way the ship is pointing.",
+"Use It For": "Checking forward direction before thrusting, aiming or docking.",
+},
+{
+Control: "Linear Dampeners",
+"What It Does": "Counter straight-line drift.",
+"Use It For": "Stopping forward, backward, sideways, upward or downward movement after you release thrust.",
+},
+{
+Control: "Rotational Dampeners",
+"What It Does": "Counter spin and angular movement.",
+"Use It For": "Stopping unwanted rotation after you turn.",
+},
+{
+Control: "Space",
+"What It Does": "Helps brake the ship by using dampening systems together.",
+"Use It For": "Emergency stopping, docking approach and preventing collisions.",
+},
+];
+
+export const physicsColumns = [
+{ key: "What You Feel", label: "What You Feel" },
+{ key: "Why It Happens", label: "Why It Happens" },
+{ key: "What To Do", label: "What To Do" },
+];
+
+export const physicsRows = [
+{
+"What You Feel": "The ship keeps moving after you release the keys",
+"Why It Happens": "There is no air resistance in space to slow you down automatically.",
+"What To Do": "Use dampeners, brake earlier and hold Space when you need a clean stop.",
+},
+{
+"What You Feel": "The ship overshoots stations or asteroids",
+"Why It Happens": "Velocity does not disappear instantly, especially when your ship is heavy.",
+"What To Do": "Start braking before you reach the danger zone instead of waiting until the last second.",
+},
+{
+"What You Feel": "The ship starts spinning after expansion",
+"Why It Happens": "A heavy module on one side can shift center of mass, so thrust can create torque instead of clean movement.",
+"What To Do": "Expand in smaller steps, test movement in open space and avoid lopsided layouts early.",
+},
+{
+"What You Feel": "Tools face the wrong way",
+"Why It Happens": "Scanners, weapons and mining lasers are mounted on the ship, not fired from the camera.",
+"What To Do": "Use the orientation tool and rotate the ship until the right module faces the target.",
+},
+];
+
+export const problemColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const problemRows = [
+{
+Problem: "Ship keeps drifting forward",
+"Likely Cause": "Linear dampeners are off, weak, or your ship is too heavy.",
+Fix: "Turn linear dampeners on, stop thrusting, hold Space if needed, and give the ship time to slow down.",
+},
+{
+Problem: "Ship keeps spinning",
+"Likely Cause": "Rotational dampeners are off, low energy is hurting control, or the ship has an unbalanced layout.",
+Fix: "Turn rotational dampeners on, stop input, recover power, then make smaller rotation taps.",
+},
+{
+Problem: "Ship starts a death spin after adding modules",
+"Likely Cause": "Mass may be uneven, so thrust is creating rotation instead of clean acceleration.",
+Fix: "Remove or rebalance the heavy module, add control support, and test the layout in open space.",
+},
+{
+Problem: "WASD feels reversed or confusing",
+"Likely Cause": "Your ship orientation changed and forward is no longer where you think it is.",
+Fix: "Use the orientation tool and check the forward arrow before thrusting.",
+},
+{
+Problem: "The ship will not slow down",
+"Likely Cause": "Dampeners are off, thrusters cannot counter the current velocity, or energy is low.",
+Fix: "Turn dampeners on, rotate to use better thrust, hold Space, and avoid panic thrusting.",
+},
+{
+Problem: "Controls feel worse after mining",
+"Likely Cause": "Cargo mass made the rig heavier.",
+Fix: "Return slowly, keep dampeners on, sell or unload cargo, then move again.",
+},
+{
+Problem: "Ship bumps into stations or asteroids",
+"Likely Cause": "Approach speed is too high, or you trusted navigation too close to a large object.",
+Fix: "Cancel navigation near the target and fly the final approach manually at low speed.",
+},
+{
+Problem: "Tools are facing the wrong way",
+"Likely Cause": "Modules are directional and mounted on a specific side of the ship.",
+Fix: "Rotate the ship until the scanner, weapon or mining laser has a clean line toward the target.",
+},
+];
+
+export const massColumns = [
+{ key: "What Changes", label: "What Changes" },
+{ key: "Why You Feel It", label: "Why You Feel It" },
+{ key: "How To Play Around It", label: "How To Play Around It" },
+];
+
+export const massRows = [
+{
+"What Changes": "More cargo",
+"Why You Feel It": "A full cargo load makes the rig heavier after mining or salvage.",
+"How To Play Around It": "Return slowly, brake earlier, and sell or unload before another risky trip.",
+},
+{
+"What Changes": "More modules",
+"Why You Feel It": "Every attached module adds physical mass and can change how thrusters respond.",
+"How To Play Around It": "Expand in small steps and test movement after each major addition.",
+},
+{
+"What Changes": "Uneven layout",
+"Why You Feel It": "If mass shifts to one side, thrust can create torque and unwanted spin.",
+"How To Play Around It": "Avoid lopsided early builds and test the ship in open space after attaching large modules.",
+},
+{
+"What Changes": "Low energy",
+"Why You Feel It": "Dampeners and active systems may not work as expected if the grid is strained.",
+"How To Play Around It": "Turn off unused systems, let batteries recover, then move again.",
+},
+];
+
+export const dockingColumns = [
+{ key: "Approach Step", label: "Approach Step" },
+{ key: "What To Do", label: "What To Do" },
+];
+
+export const dockingRows = [
+{
+"Approach Step": "Long travel",
+"What To Do": "Use navigation or manual thrust while you still have plenty of open space.",
+},
+{
+"Approach Step": "Mid approach",
+"What To Do": "Turn linear dampeners on and reduce speed before the target fills the screen.",
+},
+{
+"Approach Step": "Final approach",
+"What To Do": "Cancel risky navigation and fly manually if the waypoint aims you too close to a station or asteroid.",
+},
+{
+"Approach Step": "Alignment",
+"What To Do": "Use the orientation tool and small Shift inputs to line up the correct side of the ship.",
+},
+{
+"Approach Step": "Stop",
+"What To Do": "Hold Space or use dampeners until velocity drops safely. Do not keep tapping forward into the object.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+If your ship keeps drifting or spinning in **Starminer**, stop thrusting, check your orientation, turn on **linear dampeners** for straight-line drift, turn on **rotational dampeners** for spin, and hold **Space** when you need a hard stop.
+
+Starminer uses Newtonian-style movement, so releasing the keys does not automatically stop the ship. Your first control loop is:
+
+**read orientation → brake early → use dampeners → manage mass → keep enough energy**. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: May 2026 Early Access build. Starminer movement, thruster balance, dampeners and module physics may change during Early Access, so check your current build if a control behaves differently.
+</div>
+
+<GuideTable
+caption="Starminer controls and 6DOF movement basics."
+columns={controlColumns}
+rows={controlRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-linear-rotational-dampeners.webp"
+    alt="Starminer tutorial explaining linear dampeners and ship orientation."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Learn dampeners early. They decide whether the ship slows down cleanly or keeps drifting through space.
+  </figcaption>
+</figure>
+
+<h2 id="why-controls-feel-hard">
+  Why Starminer controls feel hard at first
+</h2>
+
+Starminer movement feels strange because your ship behaves like a heavy machine in space, not like a flat arcade cursor. You are flying with six-direction, **6DOF-style movement**: forward/back, left/right, up/down, plus rotation for aiming tools and lining up modules.
+
+That is why new players often think the controls are broken when the real problem is usually one of these:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Your ship is facing a different direction than you think.</li>
+  <li>Your ship still has velocity after you release movement keys.</li>
+  <li>Linear dampeners are not stopping straight-line drift.</li>
+  <li>Rotational dampeners are not stopping spin.</li>
+  <li>Your power grid is too weak for the current maneuver.</li>
+  <li>Your ship is heavier after mining, salvage or expansion.</li>
+</ul>
+
+The fix is not to spam more thrust. Slow down, read the orientation, stabilize the ship, and move with smaller inputs.
+
+<Link href="/starminer/beginner-first-hour/">
+  If you are still in the first run, start with the Beginner First Hour Guide
+</Link>
+
+<h2 id="newtonian-movement">
+  Why doesn't my ship stop when I release the keys?
+</h2>
+
+In Starminer, your ship keeps moving because space has no air resistance to slow it down. Releasing the keys only stops adding new thrust. It does not erase the velocity you already built up.
+
+Dampeners are the tools that fight that velocity for you. Linear dampeners counter straight-line drift, while rotational dampeners counter spin. If they are off, underpowered, or fighting a heavy ship, your rig will keep moving longer than you expect.
+
+<GuideTable
+caption="How Starminer physics turns into common control problems."
+columns={physicsColumns}
+rows={physicsRows}
+/>
+
+<h2 id="center-of-mass">
+  Why does my ship spin after I add modules?
+</h2>
+
+A sudden spin is often a layout problem, not just a control problem. When you attach a heavy module on one side of the ship, the center of mass can shift. If your thrusters no longer push cleanly through that center of mass, the ship can start rotating instead of moving straight.
+
+That is the simple version of the “death spin” problem: uneven mass plus off-center thrust creates torque.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-module-grid-blueprints.webp"
+    alt="Starminer build mode showing module options and hull nodes."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Build mode is not only about fitting parts. Large or uneven modules can change mass balance, control and future handling.
+  </figcaption>
+</figure>
+
+Early on, avoid attaching every useful module to one side just because it fits. Expand in smaller steps, test movement in open space, and fix bad handling before you fly near stations or asteroids.
+
+<h2 id="orientation-tool">
+  Use the orientation tool before you thrust
+</h2>
+
+The orientation tool tells you where your ship is pointing. That matters because “forward” is not always where your camera makes it feel.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-energy-grid-orientation-tool.webp"
+    alt="Starminer early systems check showing the energy grid and orientation tool."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bring the grid online first, then use orientation tools so you know which way your rig is actually pointing.
+  </figcaption>
+</figure>
+
+If WASD feels backwards or sideways, stop moving for a second and check the forward direction. This also matters for scanners, weapons and mining lasers because those modules need the correct side of the ship facing the target.
+
+<h2 id="linear-dampeners">
+  Linear dampeners stop drift
+</h2>
+
+Linear dampeners counter straight-line movement: forward, backward, sideways, up or down. Leave them on while learning, especially near stations, asteroids, debris fields, unmanned vessels and docking targets.
+
+Once you understand the controls, you can turn them off to coast across open space. Early on, turning them off near obstacles is one of the fastest ways to ram something.
+
+<h2 id="rotational-dampeners">
+  Rotational dampeners stop spinning
+</h2>
+
+Rotational dampeners counter angular movement. If your ship keeps rolling, pitching or yawing after you rotate, this is the system that helps calm it down.
+
+Use them whenever you need stable tool alignment, especially when lining up scanners, weapons, mining lasers, docking angles or merge targets.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="space-brake">
+  Hold Space when you need to stop
+</h2>
+
+If the ship is moving too fast or drifting toward danger, use Space as your emergency braking habit. Do not just tap it once and assume the rig is safe. Hold it until velocity actually drops.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-space-brake-low-energy.webp"
+    alt="Starminer ship trying to brake near debris while low energy warnings appear."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Braking only works well if your ship has power and the right thrusters can respond. Slow down before you are already inside the danger zone.
+  </figcaption>
+</figure>
+
+A good approach rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Start slowing down earlier than you think.</li>
+  <li>Use small taps near objects.</li>
+  <li>Keep dampeners on while learning.</li>
+  <li>Do not point full thrust at the station and hope the ship stops in time.</li>
+</ul>
+
+Starminer punishes panic movement. If you are unsure, stop first, rotate second, then move.
+
+<h2 id="shift-rotation">
+  Shift controls rotate the ship
+</h2>
+
+WASD and Q/E move your ship. Holding Shift changes those inputs into rotation. This is powerful, but it is also how many new players accidentally spin too far.
+
+Use Shift inputs in short taps. Long presses can rotate you past the angle you need, especially if rotational dampeners are off, low energy is active, or your ship has an uneven mass layout.
+
+A clean aiming habit looks like this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Stop or slow the ship.</li>
+  <li>Turn on rotational dampeners.</li>
+  <li>Use small Shift inputs.</li>
+  <li>Wait for the rotation to settle.</li>
+  <li>Only then move or activate the tool.</li>
+</ul>
+
+<h2 id="tools-directional">
+  Tools and weapons are directional
+</h2>
+
+Your ship modules are not just UI buttons. They exist on the ship. If a laser, scanner, weapon or construction tool is mounted on one side, that side needs a clean angle toward the target.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-directional-module-line-of-sight.webp"
+    alt="Starminer ship lining up directional modules toward a target in space."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If a tool is on the wrong side of the ship, rotate the rig instead of assuming the module is broken.
+  </figcaption>
+</figure>
+
+This is why controls, mining and combat are linked. A ship that cannot rotate cleanly also cannot aim cleanly.
+
+<Link href="/starminer/how-to-mine-scanner-laser/">
+  Read the Mining, Scanner and Laser Guide
+</Link>
+
+<h2 id="mass">
+  Mass changes everything
+</h2>
+
+Every module you add makes the ship heavier. Cargo also makes the ship feel worse after a mining trip. A rig that felt responsive when empty can become sluggish after it is full of iron, silicates or salvaged parts.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-ship-vitals-ui.webp"
+    alt="Starminer ship vitals showing mass-related resources, energy, storage and heat."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Watch storage, energy and heat together. A heavier ship with weak power is much harder to control safely.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="How mass, layout and power change ship control."
+columns={massColumns}
+rows={massRows}
+/>
+
+Do not judge a new build only by whether the module fits. After attaching a big part, test movement in open space before flying near a station or asteroid field.
+
+<h2 id="low-energy">
+  Low energy can make controls feel broken
+</h2>
+
+Low energy is one of the easiest control problems to misread. If the grid is strained, dampeners and other active systems may not behave the way you expect.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-low-energy-warning.webp"
+    alt="Starminer low energy warning while a ship maneuvers near asteroids."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Low energy can turn a small movement mistake into a serious drift problem. Recover power before forcing more maneuvers.
+  </figcaption>
+</figure>
+
+If Low Energy appears while you are trying to control the ship, turn off unused scanners, mining or weapons, let batteries recover, and avoid adding more modules until the grid is stable.
+
+<Link href="/starminer/power-heat-low-energy/">
+  Read the Power, Heat and Low Energy Guide
+</Link>
+
+<h2 id="manual-approach">
+  Fly the final approach manually
+</h2>
+
+Navigation is useful for covering distance, but the final approach near large objects should be careful. If the waypoint or travel line brings you toward the center of a big station, ship or debris field, cancel it and finish manually.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-manual-approach-near-station.webp"
+    alt="Starminer ship approaching a large station manually to avoid collision."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use navigation for travel, but take over manually when you get close to large structures.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Safe docking and approach habits."
+columns={dockingColumns}
+rows={dockingRows}
+/>
+
+This habit saves ships. Most early crashes come from arriving too fast, rotating too late, or trusting the approach path when your rig is too heavy to stop quickly.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="free-modules">
+  Be careful when merging free modules
+</h2>
+
+Unmanned vessels and free modules can be a huge early boost, but they also make control harder. You may gain extra power, storage or stronger parts, but you also gain more mass and a more awkward layout.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-free-t2-ship-salvage.webp"
+    alt="Starminer unmanned vessel prompt explaining that the player can add the ship into their fleet."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Free vessels are worth checking, but do not ram them. Stabilize first, then merge or salvage carefully.
+  </figcaption>
+</figure>
+
+Before merging, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Can I stop safely?</li>
+  <li>Is my grid stable enough?</li>
+  <li>Will this add too much mass?</li>
+  <li>Will the new layout block tools or thrusters?</li>
+  <li>Can I still turn and brake after attaching it?</li>
+</ul>
+
+If the answer is unclear, save first or practice in open space.
+
+<h2 id="common-problems">
+  Common control problems
+</h2>
+
+<GuideTable
+caption="Starminer control problems and quick fixes."
+columns={problemColumns}
+rows={problemRows}
+/>
+
+If you are stuck, run this checklist:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Check orientation.</li>
+  <li>Turn on linear dampeners.</li>
+  <li>Turn on rotational dampeners.</li>
+  <li>Hold Space until velocity drops.</li>
+  <li>Stop using long Shift inputs.</li>
+  <li>Recover power if Low Energy is showing.</li>
+  <li>Unload cargo or slow down if the ship is heavy.</li>
+  <li>Recheck layout if the ship started spinning after expansion.</li>
+</ul>
+
+Once you understand orientation, velocity, center of mass, dampeners and power, Starminer controls stop feeling random. They start feeling like a system you can diagnose.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I stop my ship from drifting in Starminer?
+
+Turn on linear dampeners, stop thrusting, and hold Space if you need stronger braking. If Low Energy is showing, let the grid recover before trying more maneuvers.
+
+### How do I stop my ship from spinning?
+
+Turn on rotational dampeners, stop giving rotation input, and use smaller Shift taps. If the spin started after adding modules, check whether the new layout shifted your center of mass.
+
+### Why doesn't my ship stop when I release the keys?
+
+Starminer uses Newtonian-style movement. Releasing the keys stops adding thrust, but your ship keeps its existing velocity until dampeners, braking or opposite thrust slow it down.
+
+### What does 6DOF movement mean in Starminer?
+
+6DOF means six degrees of freedom. In Starminer, you can move forward/back, left/right, up/down, and rotate the ship to aim tools, weapons and docking angles.
+
+### What do linear dampeners do?
+
+Linear dampeners counter straight-line movement. They help stop forward, backward, sideways, upward and downward drift after you release thrust.
+
+### What do rotational dampeners do?
+
+Rotational dampeners counter spin and angular movement. They help the ship stop rotating after you turn.
+
+### What does Space do?
+
+Space helps brake the ship by using dampening systems together. Hold it until your velocity drops instead of tapping it once.
+
+### Why do WASD controls feel reversed?
+
+Your ship may be facing a different direction than you think. Use the orientation tool to check forward direction before thrusting.
+
+### How do I rotate the ship?
+
+Use Shift with the movement keys to rotate instead of only moving in a straight line. Use short taps so you do not over-rotate.
+
+### Why does my ship handle worse after mining?
+
+Cargo adds mass. A heavier ship takes longer to slow down and can strain power while maneuvering.
+
+### Why does low energy affect movement?
+
+Dampeners and other active systems need power. If your grid is strained, the ship may not stop, rotate or respond as cleanly.
+
+### Should I turn off dampeners to travel faster?
+
+Only when you understand how to brake safely. While learning, keep dampeners on near stations, asteroids, debris and docking targets.
+
+### Why do my weapons or mining lasers not point at the target?
+
+Many modules are directional. Rotate the ship until the correct side has line of sight.
+
+### How do I avoid crashing into stations?
+
+Slow down early, keep linear dampeners on, cancel risky navigation near the target, and finish the final approach manually with small inputs.

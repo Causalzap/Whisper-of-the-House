@@ -1,0 +1,758 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const firstHourColumns = [
+{ key: "Order", label: "Order" },
+{ key: "Do This", label: "Do This" },
+{ key: "Why", label: "Why" },
+];
+
+export const firstHourRows = [
+    {
+      Order: "1",
+      "Do This": "Start in Campaign if you want guided objectives. In Sandbox, begin by checking vitals, scanning a nearby target and building the same survival loop yourself.",
+      Why: "Campaign teaches energy, scanning, mining, trade and module control in order. Sandbox gives you freedom, but less direction.",
+    },
+    {
+    Order: "2",
+    "Do This": "Pick a preset, then choose 3 modifiers from that preset's perk pool.",
+    Why: "The preset screen shows Selected Modifiers 0/3, so the modifiers you choose matter more than the preset name alone.",
+    },
+    {
+    Order: "3",
+    "Do This": "Activate the energy grid and read the left-side ship vitals.",
+    Why: "Energy, battery, storage, water and heat decide whether the ship can keep working.",
+    },
+    {
+    Order: "4",
+    "Do This": "Learn orientation, dampeners and Space braking before hauling heavy cargo.",
+    Why: "Most early movement problems come from wrong orientation, drift, spin, low energy or cargo mass.",
+    },
+    {
+    Order: "5",
+    "Do This": "Scan before mining.",
+    Why: "Targets can show Composition Unknown until scanned, so mining blindly can waste time and storage.",
+    },
+    {
+    Order: "6",
+    "Do This": "Mine a small load and wait for haulers.",
+    Why: "The laser breaks the target down, but haulers move resources into your rig.",
+    },
+    {
+    Order: "7",
+    "Do This": "Sell a controlled amount at Reclamation 9.",
+    Why: "Credits matter, but you still need iron, silicates, cobalt and other materials for repairs and modules.",
+    },
+    {
+    Order: "8",
+    "Do This": "Use early credits on power, storage or the next bottleneck.",
+    Why: "A stable grid and cargo loop help more than random module spam.",
+    },
+    {
+    Order: "9",
+    "Do This": "Check module costs before building.",
+    Why: "A Research Lab example in this run costs 71 Iron, 36 Silicates, 8 Cobalt, 10 Colonists and 500 Energy.",
+    },
+    {
+    Order: "10",
+    "Do This": "Expand slowly and test the ship after each major change.",
+    Why: "Every added module affects mass, power draw, heat and handling.",
+    },
+];
+
+export const presetColumns = [
+    { key: "Preset", label: "Preset" },
+    { key: "What To Check", label: "What To Check" },
+    { key: "First-Run Advice", label: "First-Run Advice" },
+];
+
+export const presetRows = [
+  {
+    Preset: "Warmonger",
+    "What To Check":
+      "Warmonger opens a weapon-heavy modifier pool. Visible Offensive perks include Advanced Kinetic Weapons Training, Tactical Energy Weapon Training, Advanced Weapons Systems Training, Ballistic Warfare Expertise, Advanced Ballistic Targeting Expert, Rapid Fire Deployment Training, Energy Weapons Research, Gauss Targeting System Tuning, Plasma Cannon System Tuning and Flak Cannon System Tuning. It also shows Streamlined Construction Techniques under Industry Perks.",
+    "First-Run Advice":
+      "Pick Warmonger only if you want to lean into combat early. It is harder for a first run because weapons add power and heat pressure before your mining loop is stable.",
+  },
+  {
+    Preset: "Miner",
+    "What To Check":
+      "Open Miner and look for modifiers that improve mining speed, hauling, storage, scanner use or resource handling.",
+    "First-Run Advice":
+      "Usually the safest first-run direction if you want to learn the scan → mine → haul → sell loop before dealing with combat or long-distance travel.",
+  },
+  {
+    Preset: "Builder",
+    "What To Check":
+      "Open Builder and look for modifiers that reduce building friction, improve construction speed or make early station growth easier.",
+    "First-Run Advice":
+      "A strong first-run direction if you want to expand carefully and make fewer painful mistakes with modules, costs and layout.",
+  },
+  {
+    Preset: "Trader",
+    "What To Check":
+      "Open Trader and look for modifiers tied to selling, buying, trade value or route efficiency.",
+    "First-Run Advice":
+      "Better once you understand which materials are safe to sell. On a first run, bad selling decisions can block repairs or Research Lab preparation.",
+  },
+  {
+    Preset: "Navigator",
+    "What To Check":
+      "Open Navigator and look for modifiers tied to movement, range, docking, route planning or ship handling.",
+    "First-Run Advice":
+      "Useful if movement is your main pain point, but it pays off more after you understand dampeners, ship mass and manual approaches.",
+  },
+  {
+    Preset: "Custom",
+    "What To Check":
+      "Use Custom when you already know which modifiers solve your usual bottleneck.",
+    "First-Run Advice":
+      "Best for second runs, once you know whether your usual bottleneck is mining, power, trade, travel or combat.",
+  },
+];
+
+export const sandboxColumns = [
+{ key: "Sandbox Problem", label: "Sandbox Problem" },
+{ key: "What To Do First", label: "What To Do First" },
+];
+
+export const sandboxRows = [
+{
+"Sandbox Problem": "No guided objective tells you what matters first.",
+"What To Do First": "Open the ship UI, check energy, battery, storage, water and heat before moving far.",
+},
+{
+"Sandbox Problem": "You do not know what to mine.",
+"What To Do First": "Scan nearby asteroids or debris first. Do not fill storage with random material.",
+},
+{
+"Sandbox Problem": "Your mining laser is not working.",
+"What To Do First": "Check mining is online, face the laser toward the target, move into range and watch power.",
+},
+{
+"Sandbox Problem": "Haulers are not collecting.",
+"What To Do First": "Stay near the target, wait for cargo transfer and check whether storage is full.",
+},
+{
+"Sandbox Problem": "The ship keeps drifting.",
+"What To Do First": "Turn on dampeners, stop thrusting, hold Space if needed and recover energy.",
+},
+{
+"Sandbox Problem": "You need credits.",
+"What To Do First": "Mine a small useful load, return to a trade target and sell only what you can spare.",
+},
+{
+"Sandbox Problem": "You want to build the Research Lab immediately.",
+"What To Do First": "Wait until mining, selling, power, battery and heat are stable. The lab can drain a weak grid.",
+},
+];
+
+export const controlColumns = [
+{ key: "Control", label: "Control" },
+{ key: "What It Does", label: "What It Does" },
+];
+
+export const controlRows = [
+{
+Control: "W / A / S / D",
+"What It Does": "Moves the ship on the main horizontal axes.",
+},
+{
+Control: "Q / E",
+"What It Does": "Moves the ship up and down in 3D space.",
+},
+{
+Control: "Shift + movement keys",
+"What It Does": "Rotates the ship instead of only moving it.",
+},
+{
+Control: "Linear Dampeners",
+"What It Does": "Help stop straight-line drift.",
+},
+{
+Control: "Rotational Dampeners",
+"What It Does": "Help stop unwanted spin.",
+},
+{
+Control: "Space",
+"What It Does": "Helps brake when you need the ship to stop.",
+},
+];
+
+export const problemColumns = [
+{ key: "If This Happens", label: "If This Happens" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "First Fix", label: "First Fix" },
+];
+
+export const problemRows = [
+{
+"If This Happens": "Mining laser not working",
+"Likely Cause": "Mining is offline, the laser is facing the wrong way, target is out of range, or power is low.",
+"First Fix": "Enable mining, rotate the ship, move closer and check the grid.",
+},
+{
+"If This Happens": "Scanner still says Composition Unknown",
+"Likely Cause": "The target has not been scanned properly.",
+"First Fix": "Turn scanners on, face the target and move closer.",
+},
+{
+"If This Happens": "Haulers not collecting",
+"Likely Cause": "You moved away too early, storage is full, or the target is awkwardly positioned.",
+"First Fix": "Stay near the target, wait for haulers and check storage.",
+},
+{
+"If This Happens": "Ship keeps drifting or spinning",
+"Likely Cause": "Dampeners are off, low energy is active, or the ship is heavier than before.",
+"First Fix": "Turn on dampeners, hold Space, stop thrusting and recover power.",
+},
+{
+"If This Happens": "Low Energy appears",
+"Likely Cause": "Too many systems are running for your current solar and battery setup.",
+"First Fix": "Turn off unused scanners, mining or weapons, then add power and battery capacity.",
+},
+{
+"If This Happens": "You need credits fast",
+"Likely Cause": "You have not turned mining into a stable sell loop yet.",
+"First Fix": "Mine a small load and sell surplus at Reclamation 9.",
+},
+];
+
+export const resourceColumns = [
+{ key: "Example", label: "Example" },
+{ key: "Value / Cost Shown", label: "Value / Cost Shown" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const resourceRows = [
+{
+Example: "20 Eonite sale",
+"Value / Cost Shown": "2,400 credits",
+"Why It Matters": "High-value resources can fund early licenses and power upgrades quickly.",
+},
+{
+Example: "Iron sell price",
+"Value / Cost Shown": "12 credits in one shown trade screen",
+"Why It Matters": "Cheap common materials may be better kept for repairs and modules.",
+},
+{
+Example: "G2 Solar / Energy Solar license",
+"Value / Cost Shown": "5,000 credits, 0 RP",
+"Why It Matters": "A strong early power target if Low Energy keeps blocking progress.",
+},
+{
+Example: "Research Lab example cost",
+"Value / Cost Shown": "71 Iron, 36 Silicates, 8 Cobalt, 10 Colonists, 500 Energy",
+"Why It Matters": "Do not sell cobalt or spend all credits before checking lab and module costs.",
+},
+{
+Example: "Advanced Trade Negotiation",
+"Value / Cost Shown": "+12% sell price",
+"Why It Matters": "Useful when credits are your main bottleneck.",
+},
+];
+
+export const buildColumns = [
+{ key: "Before Building", label: "Before Building" },
+{ key: "Check This", label: "Check This" },
+];
+
+export const buildRows = [
+{
+"Before Building": "New module",
+"Check This": "Can your ship power it, cool it and handle the extra mass?",
+},
+{
+"Before Building": "Research Lab",
+"Check This": "Do you have the materials, colonists, 500 Energy and enough power stability to run it?",
+},
+{
+"Before Building": "More mining lasers",
+"Check This": "Is mining actually slow, or is the real problem power, storage or hauler delay?",
+},
+{
+"Before Building": "More storage",
+"Check This": "Will the extra capacity make return trips safer, or will the added mass make the ship harder to stop?",
+},
+{
+"Before Building": "Fleet or hangar upgrades",
+"Check This": "Can your economy and grid support the cost, heat and logistics?",
+},
+];
+
+export const nextStepColumns = [
+{ key: "If You Are Stuck On", label: "If You Are Stuck On" },
+{ key: "Go Next", label: "Go Next" },
+];
+
+export const nextStepRows = [
+{
+"If You Are Stuck On": "Scanner, laser angle, haulers or asteroid resources",
+"Go Next": "Mining, Scanner and Laser Guide",
+},
+{
+"If You Are Stuck On": "Drifting, spinning, dampeners or heavy ship movement",
+"Go Next": "Controls and Dampeners Guide",
+},
+{
+"If You Are Stuck On": "Selling, credits, trade screen or early resource choices",
+"Go Next": "Money and Selling Resources Guide",
+},
+{
+"If You Are Stuck On": "Low energy, batteries, heat or systems shutting down",
+"Go Next": "Power and Heat Guide",
+},
+{
+"If You Are Stuck On": "Research Lab, first unlocks or tech priority",
+"Go Next": "Early Research Progression Guide",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For your first hour in **Starminer**, pick a preset and choose **3 modifiers** before starting. Miner or Builder-style pools are easier than Warmonger for a first run, because Warmonger is more weapon-heavy.
+
+Then get the beginner survival loop working:
+
+**scan → mine → wait for haulers → sell surplus → fix power → expand slowly**.
+
+Campaign teaches these steps in order. Sandbox skips the guidance, so check your ship vitals first. 
+
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: May 2026 Early Access build. Costs, labels, perk pools and balance values can change during Early Access, so check your current build menu before spending rare materials.
+</div>
+
+<GuideTable
+caption="Starminer first-hour route at a glance."
+columns={firstHourColumns}
+rows={firstHourRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-ship-vitals-ui.webp"
+    alt="Starminer ship UI showing credits, XP, energy, battery, storage, water and heat."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The left-side vitals are your real first-hour checklist. Energy, battery, storage, water and heat tell you whether the rig is ready for more work.
+  </figcaption>
+</figure>
+
+<h2 id="start-mode">
+  Start with Campaign, or use the Sandbox checklist
+</h2>
+
+If this is your first run, Campaign is the safest start because it teaches the systems in order: energy grid, orientation, dampeners, scanners, weapons, mining, hauling and selling.
+
+If you jumped straight into **Sandbox**, do not treat it like a normal free-build mode. You still need the same survival loop, but the game gives you less guidance. Start by checking your ship vitals, scanning a nearby target, mining a small load, then finding where you can trade or unload.
+
+<GuideTable
+caption="If you started in Sandbox instead."
+columns={sandboxColumns}
+rows={sandboxRows}
+/>
+
+The important difference is that Campaign tells you the next step. Sandbox makes you diagnose the next step yourself. If something does not work, treat it as a power, range, angle, storage or transfer problem before assuming it is a bug.
+
+<Link href="/starminer/">
+  Back to the full Starminer Guide Hub
+</Link>
+
+<h2 id="presets-modifiers">
+  Pick a preset, then choose 3 modifiers
+</h2>
+
+Starminer does have preset-style starts in this Early Access build. The preset list shows **Warmonger, Miner, Builder, Trader, Navigator and Custom**.
+
+The important part is that a preset is not just a label. It changes the perk pool you see before starting, and the screen shows **Selected Modifiers 0/3**. That means you should read the available modifiers before confirming instead of assuming the preset automatically gives every listed perk.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-presets-modifiers-warmonger.webp"
+    alt="Starminer preset screen showing Warmonger, Miner, Builder, Trader, Navigator and Custom with Warmonger perk options and Selected Modifiers 0/3."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Each preset shows a different modifier pool. Warmonger displays weapon-heavy Offensive perks plus Streamlined Construction Techniques, and you select 3 modifiers before confirming.
+  </figcaption>
+</figure>
+
+<div className="my-4 text-sm text-slate-400">
+  Do not confirm a preset by name alone. Open the preset, read the modifier pool, then choose 3 modifiers that solve your first-hour problem.
+</div>
+
+<GuideTable
+caption="How to choose a Starminer preset for your first run."
+columns={presetColumns}
+rows={presetRows}
+/>
+
+For a first run, avoid choosing purely around late-game fantasy. If you are still learning mining, power, hauling and selling, a practical Miner or Builder direction is usually easier than a weapon-heavy Warmonger route. If you pick Warmonger anyway, choose modifiers that solve your first-hour problem instead of stacking combat perks you cannot power yet.
+
+<h2 id="ship-vitals">
+  Read ship vitals before building anything big
+</h2>
+
+If your first question is “why is nothing working?”, start with the vitals. A weak grid, full storage, low water or rising heat can break the whole plan.
+
+The main early vitals are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Credits</strong> — used for purchases, licenses and recovery supplies.</li>
+  <li><strong>XP / Rank</strong> — unlocks perks and progression options.</li>
+  <li><strong>Energy generation</strong> — tells you whether the grid is gaining or losing power.</li>
+  <li><strong>Battery</strong> — protects you from short spikes.</li>
+  <li><strong>Storage</strong> — limits how much you can mine or haul.</li>
+  <li><strong>Water</strong> — matters for travel and ship operation.</li>
+  <li><strong>Heat</strong> — tells you whether your systems are pushing too hard.</li>
+</ul>
+
+If two or more vitals are strained, stop expanding. Fix the bottleneck first.
+
+<h2 id="controls">
+  Ship drifting or spinning? Learn the movement basics
+</h2>
+
+If your ship keeps drifting, spinning or overshooting targets, the problem is usually orientation, dampeners, low energy or mass.
+
+<GuideTable
+caption="Starminer beginner movement controls."
+columns={controlColumns}
+rows={controlRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-linear-rotational-dampeners.webp"
+    alt="Starminer UI showing linear and rotational dampener controls during the tutorial."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use dampeners while learning. They are the difference between a controlled approach and drifting into a station or asteroid.
+  </figcaption>
+</figure>
+
+Keep the detailed movement troubleshooting in the dedicated guide:
+
+<Link href="/starminer/controls-dampeners-ship-spinning/">
+  Read the Starminer Controls, Dampeners and Ship Spinning Guide
+</Link>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="rank-xp">
+  Rank up before planning a serious expansion
+</h2>
+
+Early Starminer progression is tied to more than resources. You also need XP, rank and unlocked module options. One early rank screen shows **Ensign → Lieutenant Junior** with XP moving from **750 → 1,500**, plus an increase in max available officers from **3 → 4**.
+
+That means you should not plan a huge station before the early systems are online. First, complete the basic objectives that teach:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Energy grid control.</li>
+  <li>Orientation and dampeners.</li>
+  <li>Scanner use.</li>
+  <li>Mining laser alignment.</li>
+  <li>Hauler collection.</li>
+  <li>Trade and selling.</li>
+</ul>
+
+Once you have a rank-up and a working economy loop, expansion decisions become safer.
+
+<h2 id="scan-mine">
+  Mining laser not working? Scan, align, then mine
+</h2>
+
+If the mining laser will not fire, do not start by adding more modules. Check scanner status, angle, range and power first.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-scanner-composition-unknown.webp"
+    alt="Starminer asteroid target showing Composition Unknown before scanning."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Composition Unknown means you still need scanner information. Scan before committing cargo space and energy.
+  </figcaption>
+</figure>
+
+A clean first mining trip looks like this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Turn scanners on.</li>
+  <li>Face the target.</li>
+  <li>Move close enough for the scan.</li>
+  <li>Turn mining on.</li>
+  <li>Rotate until the laser has a clear angle.</li>
+  <li>Wait for haulers to collect resources.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-mining-laser-haulers.webp"
+    alt="Starminer T1 Mining Laser panel showing energy consumption, range and mass while aimed at a target."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mining has real numbers. This T1 Mining Laser example shows 20 MW energy consumption, 10t mass and 182.5m range with bonuses active.
+  </figcaption>
+</figure>
+
+For the full mining troubleshooting route:
+
+<Link href="/starminer/how-to-mine-scanner-laser/">
+  Read the Starminer Mining, Scanner and Laser Guide
+</Link>
+
+<h2 id="haulers">
+  Haulers not collecting? Wait before flying away
+</h2>
+
+If resources are not entering storage, the mining laser may not be the problem. The laser breaks down the target, but haulers do the collection.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-haulers-collecting-resources.webp"
+    alt="Starminer haulers leaving the rig to collect resources from a mined target."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Do not fly away as soon as the laser finishes. Stay close enough for haulers to bring resources back.
+  </figcaption>
+</figure>
+
+If haulers seem stuck, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Are you still close enough?</li>
+  <li>Is storage full?</li>
+  <li>Did you move or rotate too far away?</li>
+  <li>Is power low?</li>
+  <li>Is the target awkwardly positioned?</li>
+</ul>
+
+<h2 id="sell-first-load">
+  Sell your first load, but keep repair materials
+</h2>
+
+Once you have a useful load, return to Reclamation 9 and sell only what you can spare.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-eonite-sale-2400-credits.webp"
+    alt="Starminer trade screen showing 20 Eonite being sold for 2,400 credits."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    High-value resources can fund early upgrades. This example sells 20 Eonite for 2,400 credits.
+  </figcaption>
+</figure>
+
+Do not sell every common material just because the trade screen allows it. Iron and silicates can be needed for repairs and modules. Cobalt can matter for more advanced build costs. Sell deliberately, then keep moving.
+
+<Link href="/starminer/money-selling-resources/">
+  Read the Starminer Money and Selling Resources Guide
+</Link>
+
+<h2 id="real-values">
+  Early numbers worth knowing
+</h2>
+
+Starminer becomes easier when you stop treating every resource as abstract. These are useful values from one Early Access run.
+
+<GuideTable
+caption="Useful early Starminer values to keep in mind."
+columns={resourceColumns}
+rows={resourceRows}
+/>
+
+Use these as planning examples, not permanent guarantees. Early Access balance can change, and costs may vary by perks, build, version or difficulty.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="build-carefully">
+  Check costs before building or overbuilding
+</h2>
+
+Blueprint costs and power limits matter more than whether a module looks useful. A new part can add mass, power draw, heat pressure and material cost.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-module-grid-blueprints.webp"
+    alt="Starminer module grid editor showing build menu, module options and blueprint requirements."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Build mode is not just a placement screen. Check cost, power, mass and future layout before attaching more parts.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="What to check before building in Starminer."
+columns={buildColumns}
+rows={buildRows}
+/>
+
+This is also why you should not rush the Research Lab just because it becomes available. It can be powerful, but it has real material, crew, energy, power and heat requirements.
+
+<h2 id="free-modules">
+  Free modules are useful, but they still add mass
+</h2>
+
+Unmanned vessels and free modules can be a big early boost. They can give you parts that would be expensive to build yourself, but they also change handling, mass and layout.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-free-t2-ship-salvage.webp"
+    alt="Starminer unmanned vessel prompt explaining that the player can assume temporary command and add it to the fleet."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Free modules are worth checking, but approach slowly. More mass can make the rig harder to stop.
+  </figcaption>
+</figure>
+
+Before merging or attaching something large, stabilize the ship, check power and make sure you can still control the rig afterward.
+
+<h2 id="common-problems">
+  Common first-hour problems
+</h2>
+
+<GuideTable
+caption="Starminer first-hour problems and quick fixes."
+columns={problemColumns}
+rows={problemRows}
+/>
+
+Run through these before assuming the run is broken. Most first-hour problems are caused by range, angle, power, storage or moving away too early.
+
+
+<h2 id="next-step">
+  Where to go after your first hour
+</h2>
+
+<GuideTable
+caption="Where to go after your first hour in Starminer."
+columns={nextStepColumns}
+rows={nextStepRows}
+/>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <Link href="/starminer/how-to-mine-scanner-laser/">
+      Mining, Scanner and Laser Guide
+    </Link>
+  </li>
+  <li>
+    <Link href="/starminer/controls-dampeners-ship-spinning/">
+      Controls, Dampeners and Ship Spinning Guide
+    </Link>
+  </li>
+  <li>
+    <Link href="/starminer/money-selling-resources/">
+      Money and Selling Resources Guide
+    </Link>
+  </li>
+  <li>
+    <Link href="/starminer/power-heat-low-energy/">
+      Power, Heat and Low Energy Guide
+    </Link>
+  </li>
+  <li>
+    <Link href="/starminer/early-research-progression/">
+      Early Research and Progression Guide
+    </Link>
+  </li>
+</ul>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do first in Starminer?
+
+Start by checking energy, battery, storage, water and heat. Then scan a nearby target, mine a small load, wait for haulers, sell surplus and add power before building big modules.
+
+### Should I start in Campaign or Sandbox?
+
+Campaign is safer for a first run because it teaches systems in order. Sandbox is fine, but you need to self-direct: check vitals, scan, mine, sell and stabilize power before expanding.
+
+### How do Starminer presets work?
+
+In this Early Access build, the preset screen shows Warmonger, Miner, Builder, Trader, Navigator and Custom.Each preset changes the modifier pool you choose from. The screen shows Selected Modifiers 0/3, so choose 3 modifiers that help your first-hour plan instead of confirming by preset name alone.
+
+### What is the best beginner preset in Starminer?
+
+For a first run, choose a preset based on the modifier pool, not just the name. Miner or Builder-style starts are usually safer if you are learning mining, power, hauling and selling. Warmonger is more weapon-heavy and is better once you understand combat and power draw.
+
+### What does Warmonger do in Starminer?
+
+Warmonger shows a weapon-heavy perk pool. In the shown build, it includes Offensive perks such as Advanced Kinetic Weapons Training, Tactical Energy Weapon Training, Advanced Weapons Systems Training, Rapid Fire Deployment Training and Energy Weapons Research, plus Streamlined Construction Techniques as an Industry option.
+
+### How many modifiers do I choose?
+
+The preset screen shows Selected Modifiers 0/3, so you choose 3 modifiers before confirming your start.
+
+### How much XP do I need to rank up?
+
+One early rank screen shows Ensign moving toward Lieutenant Junior with XP increasing from 750 to 1,500. Treat rank and XP as part of progression, but check your current build because Early Access values may change.
+
+### Why is my mining laser not working?
+
+Mining may be offline, the laser may face the wrong direction, the target may be out of range, or your power may be low. Rotate the ship, move closer and check the grid.
+
+### Why are my haulers not collecting?
+
+You may have moved away too early, storage may be full, or the target may be awkwardly positioned. Stay near the target and wait for collection to finish.
+
+### How do I sell resources early?
+
+Return to Reclamation 9 or another valid trade target, open the trade screen, choose Sell, select the amount and confirm the trade. Wait for the transfer to finish.
+
+### Should I sell all my early resources?
+
+No. Keep materials needed for repairs, blueprints and Research Lab preparation. Sell surplus or high-value resources when you need credits.
+
+### Why does my ship keep drifting?
+
+Your ship may have dampeners off, low energy, too much cargo mass or the wrong orientation. Turn on dampeners, stop thrusting, hold Space and let power recover.
+
+### What should I build first?
+
+Build what fixes the current bottleneck. If low energy appears, add solar and battery. If storage fills too fast, add storage. If research is your goal, prepare power, heat, colonists and materials first.
+
+### Should I build the Research Lab in the first hour?
+
+Usually no. Build it after mining, selling, power, battery and heat are stable. In one run, the Research Lab cost shows 71 Iron, 36 Silicates, 8 Cobalt, 10 Colonists and 500 Energy.
+
+### What should I spend early credits on?
+
+Spend credits on the bottleneck: power, battery, storage, emergency water, useful licenses or materials. Do not spend credits on flashy upgrades while the grid is unstable.
+
+### What is the biggest beginner mistake?
+
+Overbuilding too early. Extra modules add mass, power draw, heat and material costs. Build a stable loop first, then expand.

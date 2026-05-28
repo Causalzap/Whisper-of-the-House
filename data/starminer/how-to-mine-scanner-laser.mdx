@@ -1,0 +1,525 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const miningStepsColumns = [
+{ key: "Order", label: "Order" },
+{ key: "Do This", label: "Do This" },
+{ key: "Why", label: "Why" },
+];
+
+export const miningStepsRows = [
+{
+Order: "1",
+"Do This": "Point your ship toward the asteroid, debris, or module you want to check.",
+Why: "Scanners and mining lasers both care about angle and range.",
+},
+{
+Order: "2",
+"Do This": "Turn on scanners and scan the target first.",
+Why: "Composition Unknown means you have not confirmed what the target contains yet.",
+},
+{
+Order: "3",
+"Do This": "Move closer if the scan does not start.",
+Why: "If the target is too far away or outside scanner angle, nothing useful happens.",
+},
+{
+Order: "4",
+"Do This": "Turn scanners off after the scan if power is tight.",
+Why: "Early power is limited, and leaving extra systems on can push you toward Low Energy.",
+},
+{
+Order: "5",
+"Do This": "Enable mining and line up the mining laser.",
+Why: "The laser must face the target and stay within its working range.",
+},
+{
+Order: "6",
+"Do This": "Let haulers collect the mined resources.",
+Why: "The laser breaks the target down, but haulers move the resources back to your rig.",
+},
+{
+Order: "7",
+"Do This": "Watch cargo, mass, energy and heat while mining.",
+Why: "A full or heavy ship is harder to fly, and mining equipment can strain the grid.",
+},
+{
+Order: "8",
+"Do This": "Return to Reclamation 9 and sell only what you can spare.",
+Why: "Credits matter, but some resources are needed for repairs, modules and early progression.",
+},
+];
+
+export const laserColumns = [
+{ key: "Mining Detail", label: "Mining Detail" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const laserRows = [
+{
+"Mining Detail": "Angle",
+"Why It Matters": "The mining laser is mounted on your ship. If the wrong side is facing the target, it will not work cleanly.",
+},
+{
+"Mining Detail": "Range",
+"Why It Matters": "A T1 Mining Laser can have limited working range. In the example shown, the range is 182.5m with bonuses active.",
+},
+{
+"Mining Detail": "Energy consumption",
+"Why It Matters": "The T1 Mining Laser shown uses 20 MW, so mining can pressure a weak early grid.",
+},
+{
+"Mining Detail": "Mass",
+"Why It Matters": "The T1 Mining Laser shown has 10t mass. Every module adds weight and changes handling.",
+},
+{
+"Mining Detail": "Haulers",
+"Why It Matters": "Haulers turn broken-down resources into actual cargo inside your rig.",
+},
+];
+
+export const targetColumns = [
+{ key: "Target", label: "Target" },
+{ key: "What To Expect", label: "What To Expect" },
+{ key: "Early Advice", label: "Early Advice" },
+];
+
+export const targetRows = [
+{
+Target: "Debris / junk parts",
+"What To Expect": "Often useful for early objectives, scrap, repaired station tasks, and quick resource pickup.",
+"Early Advice": "Great first mining target because Campaign points you toward it early.",
+},
+{
+Target: "Asteroids",
+"What To Expect": "Can contain raw materials, but you should scan before committing.",
+"Early Advice": "Do not mine random asteroids blindly. Check composition and current needs first.",
+},
+{
+Target: "Loose modules or vessels",
+"What To Expect": "May become salvage, repair targets, or merge opportunities.",
+"Early Advice": "Approach slowly. Free parts are valuable, but collisions and bad angles are expensive.",
+},
+{
+Target: "Station-related objectives",
+"What To Expect": "Often tied to repairs, trade, transfer or tutorial progression.",
+"Early Advice": "Read the current objective before selling or scrapping everything.",
+},
+];
+
+export const resourceColumns = [
+{ key: "Resource", label: "Resource" },
+{ key: "Early Use", label: "Early Use" },
+{ key: "Sell or Keep?", label: "Sell or Keep?" },
+];
+
+export const resourceRows = [
+{
+Resource: "Iron",
+"Early Use": "Repairs, modules, construction and early objectives.",
+"Sell or Keep?": "Keep enough for repairs and building before selling extra.",
+},
+{
+Resource: "Silicates",
+"Early Use": "Repairs and basic infrastructure needs.",
+"Sell or Keep?": "Do not dump all of it early if station repairs still need materials.",
+},
+{
+Resource: "Cobalt",
+"Early Use": "More advanced module costs and early progression gates.",
+"Sell or Keep?": "Usually worth keeping until you know your next blueprint costs.",
+},
+{
+Resource: "Thorium",
+"Early Use": "Valuable resource and later power-related route potential.",
+"Sell or Keep?": "Good sale candidate only if you do not need it soon.",
+},
+{
+Resource: "Eonite",
+"Early Use": "High-value resource used in early money routes.",
+"Sell or Keep?": "Strong for credits, but sell deliberately.",
+},
+{
+Resource: "Nuclear Fuel Cell",
+"Early Use": "Power route relevance later.",
+"Sell or Keep?": "Do not treat it like random junk if you plan to explore nuclear tech later.",
+},
+];
+
+export const problemColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "First Fix", label: "First Fix" },
+];
+
+export const problemRows = [
+{
+Problem: "Composition still says Unknown",
+"Likely Cause": "The target has not been scanned properly.",
+"First Fix": "Face the target, move closer, turn scanners on, and wait for the scan to finish.",
+},
+{
+Problem: "Scanner does nothing",
+"Likely Cause": "Bad angle, too much distance, scanner is off, or power is low.",
+"First Fix": "Turn the ship, close distance, and make sure scanners are online.",
+},
+{
+Problem: "Mining laser will not start",
+"Likely Cause": "Mining is offline, the laser is not facing the target, or the object is out of range.",
+"First Fix": "Enable mining, rotate the ship, and move the laser into range.",
+},
+{
+Problem: "Laser stops during mining",
+"Likely Cause": "Low energy, bad angle, or target moved out of range.",
+"First Fix": "Stop moving, recover battery, turn off unused systems, then realign.",
+},
+{
+Problem: "Resources are not entering storage",
+"Likely Cause": "Haulers are still working, storage is full, or distance/pathing is awkward.",
+"First Fix": "Wait near the target, check storage capacity, and avoid moving away too early.",
+},
+{
+Problem: "Ship becomes hard to fly after mining",
+"Likely Cause": "Cargo mass is making the rig heavier.",
+"First Fix": "Return slowly, keep dampeners on, and sell or unload before the next trip.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To mine in **Starminer**, turn on scanners, face the target, move close enough, wait until the target is scanned, then enable mining and line up your mining laser. The laser breaks down the object, while haulers carry resources back into your rig.
+
+If mining does not work, check these first:
+
+**scanner angle → scan range → laser range → power level → hauler collection**. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: May 2026 Early Access build. Scanner range, mining laser range, power costs, resource values and asteroid composition can change during Early Access, so check your current module panels before planning around exact numbers.
+</div>
+
+<GuideTable
+caption="Starminer mining route at a glance."
+columns={miningStepsColumns}
+rows={miningStepsRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-scanner-target-range.webp"
+    alt="Starminer scanner aimed at an asteroid with distance and Composition Unknown shown."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Composition Unknown means you still need scanner information. Face the target, move closer, and scan before committing to a mining trip.
+  </figcaption>
+</figure>
+
+<h2 id="basic-loop">
+  The basic mining loop
+</h2>
+
+Mining in Starminer is not just clicking an asteroid. Your ship position matters, your scanner angle matters, your mining laser range matters, and your haulers need time to bring the resources home.
+
+If you try to skip the scan and just mine everything nearby, you can easily fill storage with the wrong material, overload your ship, or waste energy while chasing a resource you did not need.
+
+<div className="my-4">
+  <Link href="/starminer/beginner-first-hour/">
+    New to the game? Start with the Beginner First Hour Guide
+  </Link>
+</div>
+
+<h2 id="scanner">
+  Scanner not working? Check angle, distance and power
+</h2>
+
+Turn on your scanner when you need information, then point your ship toward the target. In the early game, you will often see targets marked with distance and unknown composition. That is your cue to scan first.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-scanner-composition-unknown.webp"
+    alt="Starminer asteroid target showing Composition Unknown before scanning."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the target still says Composition Unknown, treat it as unconfirmed. Do not waste a long mining trip until you know what you are looking at.
+  </figcaption>
+</figure>
+
+If the scanner does not start, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Is the scanner turned on?</li>
+  <li>Is your ship facing the target?</li>
+  <li>Are you close enough?</li>
+  <li>Is the target inside the scanner angle?</li>
+  <li>Is your power already too low?</li>
+</ul>
+
+The exact scanner range was not shown clearly enough in the captured panel, so do not guess a fixed number yet. For now, play it by the target distance and scanner behavior. If Composition Unknown does not resolve, move closer, slow down, and point the scanner more directly at the target.
+
+When the scan is done, turn scanners off if your power grid is weak. Early Starminer rewards players who toggle systems deliberately instead of leaving every tool online.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="mining-online">
+  Turn on mining only when you are ready
+</h2>
+
+After scanning, enable mining and line up the ship so the mining laser has a clean path to the target.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-mining-online-system-toggle.webp"
+    alt="Starminer mining systems online with haulers ready to collect resources."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Enable mining when the target is close and lined up. Leaving extra systems online while drifting around only makes early power problems worse.
+  </figcaption>
+</figure>
+
+Do not panic if the laser does not fire instantly. Starminer is physical. You may need to rotate, move closer, stop the ship, or recover power so the tool can stay in range.
+
+<h2 id="laser-range">
+  Mining laser not firing? Check angle, range and power cost
+</h2>
+
+The mining laser is an actual module on your ship, not a magic beam from the camera. If the module is on the wrong side of the rig, rotate the ship until the laser has line of sight.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-mining-laser-haulers.webp"
+    alt="Starminer T1 Mining Laser panel showing energy consumption, range and mass while aimed at a target."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check the mining laser stats. In this setup, the T1 Mining Laser uses 20 MW, has 10t mass, and shows 182.5m range with bonuses active.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Why mining laser details matter."
+columns={laserColumns}
+rows={laserRows}
+/>
+
+That energy cost is important. If your ship is already low on battery, the laser may become unreliable, dampeners may feel worse, and mining can turn into a slow power spiral.
+
+<div className="my-4">
+  <Link href="/starminer/power-heat-low-energy/">
+    If your systems keep shutting down, read the Power and Heat Guide
+  </Link>
+</div>
+
+<h2 id="haulers">
+  Haulers not collecting? Stay close and wait
+</h2>
+
+The mining laser breaks down the target, but the resources are not safely yours until haulers bring them back into your storage.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-haulers-collecting-resources.webp"
+    alt="Starminer haulers leaving the rig to collect resources from a mined target."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Do not fly away the moment the laser finishes. Give haulers time to collect the mined resources and return them to storage.
+  </figcaption>
+</figure>
+
+If you move too early, drift too far, or keep rotating while haulers are working, the collection step can feel confusing. Stay close, let the transfer finish, then move on.
+
+<h2 id="target-choice">
+  What should you mine first?
+</h2>
+
+Your first targets should be close, useful, and connected to your current objective. Debris and junk parts are usually safer early targets because they often feed repairs, selling or basic progression.
+
+<GuideTable
+caption="Best early mining targets in Starminer."
+columns={targetColumns}
+rows={targetRows}
+/>
+
+<h2 id="asteroid-resources">
+  What resources come from different asteroid types?
+</h2>
+
+Do not assume every asteroid is worth the same trip. Some resources are common building materials, while others are more valuable or tied to later systems.
+
+In early runs, treat the scanner as your source of truth. Debris and wreckage can often be useful for repair or build materials, while asteroid classes may point toward different raw resources. Competitor and player notes have mentioned cobalt from debris-style targets and thorium from C-class asteroid routes, but you should still confirm composition in your own build before committing cargo space.
+
+The practical rule is simple: scan first, mine what solves the next bottleneck, and do not fill storage with random raw material just because the asteroid was close.
+
+<h2 id="raw-vs-processed">
+  Raw resources are not always ready to use
+</h2>
+
+Early on, pay attention to the difference between scrap-style targets and asteroids. Debris can give processed or immediately useful materials tied to objectives, while asteroids may provide raw resources that need a larger production loop later.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-raw-asteroid-resources.webp"
+    alt="Starminer asteroid mining area showing raw resource collection from an asteroid."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Asteroids are not just generic rocks. Scan them, check what you need, then mine the resource that actually fits your next step.
+  </figcaption>
+</figure>
+
+A simple first-hour rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Mine debris when the objective points you there.</li>
+  <li>Mine asteroids when you know which material you need.</li>
+  <li>Do not fill storage with random material before checking repairs or blueprint costs.</li>
+</ul>
+
+<h2 id="resources">
+  Early resources: sell or keep?
+</h2>
+
+Resources are not all equal in the first hours. Some are tempting to sell, but you may need them for repairs, modules or research preparation.
+
+<GuideTable
+caption="Early Starminer resources and how to treat them."
+columns={resourceColumns}
+rows={resourceRows}
+/>
+
+The safest habit is to sell deliberately. If a material appears in your current objective, repair cost or module blueprint, keep a reserve before turning the rest into credits.
+
+<h2 id="power">
+  Low energy while mining? Stop stacking systems
+</h2>
+
+Mining is one of the first places where weak power shows up. You may be moving, running dampeners, keeping scanners online, powering haulers, and firing mining lasers at the same time.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-low-energy-warning.webp"
+    alt="Starminer low energy warning while the ship is operating systems near asteroids."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Low energy during mining is a warning to slow down. Turn off unused systems and let the grid recover before adding more load.
+  </figcaption>
+</figure>
+
+If Low Energy appears:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Stop unnecessary movement.</li>
+  <li>Turn off scanners if the scan is done.</li>
+  <li>Turn off weapons if no threat is nearby.</li>
+  <li>Wait for battery recovery.</li>
+  <li>Return to sell or unload if cargo is making the ship too heavy.</li>
+</ul>
+
+Do not fix low energy by adding more mining lasers. Fix the grid first.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="after-mining">
+  What to do after mining
+</h2>
+
+After your first useful load, return to Reclamation 9 and sell only what you can spare. Do not dump materials that appear in your repair tasks, module blueprints, or Research Lab preparation.
+
+<div className="my-4">
+  <Link href="/starminer/money-selling-resources/">
+    Read the Money and Selling Resources Guide
+  </Link>
+</div>
+
+<h2 id="common-problems">
+  Common mining problems
+</h2>
+
+<GuideTable
+caption="Starminer mining problems and quick fixes."
+columns={problemColumns}
+rows={problemRows}
+/>
+
+Most mining problems come from one of five checks: wrong angle, too far away, system not turned on, low power, or storage and hauler issues. Run through those before assuming the game is bugged.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I mine in Starminer?
+
+Turn on scanners, face the target, move close enough, scan it, enable mining, line up your mining laser, then wait for haulers to collect the resources.
+
+### Why does the asteroid say Composition Unknown?
+
+It has not been scanned properly yet. Turn on scanners, point your ship toward the asteroid, move closer if needed, and wait for the scan to complete.
+
+### What is the scanner range in Starminer?
+
+A fixed scanner range value was not clearly captured in this build. If the target remains Composition Unknown, move closer, face the scanner toward the target, and check whether your current scanner panel shows a range value.
+
+### Why is my scanner not working?
+
+The scanner may be off, pointed the wrong way, too far from the target, or your ship may be low on power. Check angle and distance first.
+
+### Why is my mining laser not firing?
+
+Mining may be offline, the laser may not face the target, the target may be out of range, or your grid may not have enough energy.
+
+### Does the mining laser need line of sight?
+
+Treat it that way. The mining laser is mounted on your ship, so angle and module position matter. Rotate the ship until the laser has a clean path.
+
+### What does the T1 Mining Laser cost to run?
+
+In the example shown here, the T1 Mining Laser uses 20 MW, has 10t mass, and shows 182.5m range with bonuses active. Your exact numbers may change with perks or updates.
+
+### Why are my haulers not collecting resources?
+
+They may still be traveling, storage may be full, the target may be awkwardly positioned, or you may have moved away too quickly. Stay close until the transfer finishes.
+
+### Should I mine debris or asteroids first?
+
+Mine the debris or target the Campaign points you toward first. Use asteroids when you know which resource you need and have scanned the composition.
+
+### Where do I find cobalt, thorium or Eonite?
+
+Use the scanner before committing to a trip. Debris-style targets can be useful for rarer build materials, while some asteroid classes may point toward resources like thorium. Confirm composition in your own build before filling cargo.
+
+### Should I sell everything I mine?
+
+No. Sell what you can spare, but keep materials needed for repairs, construction, blueprints and early progression.
+
+### Why does my ship handle worse after mining?
+
+Cargo adds mass. A heavier rig drifts more, slows down worse, and can strain power while maneuvering. Sell or unload before making risky moves.
+
+### Why do I get Low Energy while mining?
+
+You may be moving, scanning, running dampeners, powering haulers and firing lasers at the same time. Turn off unused systems and let the battery recover.
+
+### What should I do after my first mining trip?
+
+Return to Reclamation 9, sell only spare resources, check your next objective, then decide whether you need power, storage, repairs, research preparation or more mining.

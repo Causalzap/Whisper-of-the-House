@@ -1,0 +1,664 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const quickFixColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Do This First", label: "Do This First" },
+{ key: "Why", label: "Why" },
+];
+
+export const quickFixRows = [
+{
+Problem: "Low Energy warning keeps appearing",
+"Do This First": "Stop moving, turn off unused systems, and wait for the battery to recover.",
+Why: "Movement, scanners, mining, weapons and construction can all strain the same early grid.",
+},
+{
+Problem: "Dampeners feel weak",
+"Do This First": "Check energy before blaming controls.",
+Why: "A weak grid can make movement and braking feel worse than usual.",
+},
+{
+Problem: "Mining drains power",
+"Do This First": "Turn off scanners after scanning and do not mine while constantly maneuvering.",
+Why: "Mining lasers, haulers, dampeners and movement can stack power demand.",
+},
+{
+Problem: "Research Lab crashes the grid",
+"Do This First": "Pause expansion, add solar and battery capacity, then run the lab only after the grid is stable.",
+Why: "The Research Lab can drain power and add heat pressure early.",
+},
+{
+Problem: "Heat keeps rising",
+"Do This First": "Check Thermal Dumpers, Radiators and high-heat modules before adding more industry or research.",
+Why: "Heat capacity and heat dissipation are different problems.",
+},
+{
+Problem: "Aliens keep noticing you",
+"Do This First": "Reduce high-heat activity, avoid long high-load sessions, and improve heat control.",
+Why: "High heat signature can attract alien attention, so heat is also a threat-management problem.",
+},
+{
+Problem: "The ship is overloaded",
+"Do This First": "Sell, unload or stop adding modules before trying to solve everything with more systems.",
+Why: "More mass and more active modules can make energy and control problems worse.",
+},
+];
+
+export const systemColumns = [
+{ key: "System", label: "System" },
+{ key: "What It Does", label: "What It Does" },
+{ key: "Early Advice", label: "Early Advice" },
+];
+
+export const systemRows = [
+{
+System: "Solar Panels",
+"What It Does": "Generate steady power for the grid.",
+"Early Advice": "Add more solar before scaling mining, weapons or research.",
+},
+{
+System: "Energy Batteries",
+"What It Does": "Store power so short spikes do not collapse the grid.",
+"Early Advice": "Build battery capacity before running high-drain modules for long periods.",
+},
+{
+System: "Thermal Dumper",
+"What It Does": "Stores excess heat and vents it when filled.",
+"Early Advice": "Useful as a heat buffer, but it does not replace stable heat dissipation.",
+},
+{
+System: "Thermal Radiator",
+"What It Does": "Passively dumps heat over time.",
+"Early Advice": "Use when heat keeps building during long mining, combat or research sessions.",
+},
+{
+System: "Scanners",
+"What It Does": "Identify targets and compositions.",
+"Early Advice": "Turn off after scanning if power is tight.",
+},
+{
+System: "Mining Lasers",
+"What It Does": "Break down asteroids, debris and salvage targets.",
+"Early Advice": "Do not add more lasers until power and battery are stable.",
+},
+{
+System: "Research Lab",
+"What It Does": "Generates Research Points when staffed and running.",
+"Early Advice": "Do not rush it before your power and heat setup can support it.",
+},
+];
+
+export const drainColumns = [
+{ key: "Power Drain Source", label: "Power Drain Source" },
+{ key: "Why It Hurts Early", label: "Why It Hurts Early" },
+{ key: "How To Reduce It", label: "How To Reduce It" },
+];
+
+export const drainRows = [
+{
+"Power Drain Source": "Movement and dampeners",
+"Why It Hurts Early": "Heavy cargo and repeated braking can pull on a weak grid.",
+"How To Reduce It": "Fly slower, use shorter trips, sell cargo sooner, and avoid panic thrusting.",
+},
+{
+"Power Drain Source": "Scanners left online",
+"Why It Hurts Early": "Scanning is useful, but leaving it on after the scan adds unnecessary load.",
+"How To Reduce It": "Scan, confirm the target, then turn scanners off.",
+},
+{
+"Power Drain Source": "Mining lasers",
+"Why It Hurts Early": "Lasers consume power while you may also be moving and running haulers.",
+"How To Reduce It": "Mine while stable, stop unnecessary movement, and avoid overbuilding lasers.",
+},
+{
+"Power Drain Source": "Weapons",
+"Why It Hurts Early": "Combat can stack weapon draw on top of movement, targeting and repairs.",
+"How To Reduce It": "Keep weapons offline when no threat is nearby.",
+},
+{
+"Power Drain Source": "Construction and repairs",
+"Why It Hurts Early": "Building modules can compete with movement, mining and battery recovery.",
+"How To Reduce It": "Build in safe windows instead of while fighting the ship.",
+},
+{
+"Power Drain Source": "Research Lab",
+"Why It Hurts Early": "It can drain power continuously and produce heat pressure.",
+"How To Reduce It": "Delay the lab until solar, battery and heat capacity are ready.",
+},
+];
+
+export const buildOrderColumns = [
+{ key: "Priority", label: "Priority" },
+{ key: "Build or Unlock", label: "Build or Unlock" },
+{ key: "Why It Comes Here", label: "Why It Comes Here" },
+];
+
+export const buildOrderRows = [
+{
+Priority: "1",
+"Build or Unlock": "More T1 Solar Panels",
+"Why It Comes Here": "Cheap, simple, and immediately helps the basic grid.",
+},
+{
+Priority: "2",
+"Build or Unlock": "Energy Battery capacity",
+"Why It Comes Here": "Lets the ship survive short spikes from movement, mining and construction.",
+},
+{
+Priority: "3",
+"Build or Unlock": "Thermal Dumper / Thermal Radiator",
+"Why It Comes Here": "Prevents heat from becoming the next limit after power is stable.",
+},
+{
+Priority: "4",
+"Build or Unlock": "Storage / Cargo support",
+"Why It Comes Here": "Reduces overloaded mining trips and keeps the economy loop smoother.",
+},
+{
+Priority: "5",
+"Build or Unlock": "G2 Solar / Energy Solar license",
+"Why It Comes Here": "A strong early power upgrade. In this build, Energy Solar shows a 5,000-credit license cost and 0 required RP.",
+},
+{
+Priority: "6",
+"Build or Unlock": "Research Lab",
+"Why It Comes Here": "Important, but only safe after the grid can handle the drain and heat.",
+},
+];
+
+export const heatColumns = [
+{ key: "Heat Problem", label: "Heat Problem" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const heatRows = [
+{
+"Heat Problem": "Heat capacity fills quickly",
+"What It Means": "Your ship is producing heat faster than your current buffer can comfortably handle.",
+Fix: "Add or reposition Thermal Dumpers and stop adding high-heat systems.",
+},
+{
+"Heat Problem": "Heat never comes down",
+"What It Means": "You may have heat storage, but not enough passive dissipation.",
+Fix: "Add Radiators and reduce continuous module load.",
+},
+{
+"Heat Problem": "Research Lab heats the station",
+"What It Means": "The lab is not just a tech module; it is a power and heat load.",
+Fix: "Run it after solar, battery and thermal systems are ready.",
+},
+{
+"Heat Problem": "Combat pushes heat up",
+"What It Means": "Weapons and active systems can stack heat during long fights.",
+Fix: "Do not leave weapons online unless you need them.",
+},
+{
+"Heat Problem": "Heat signature attracts attention",
+"What It Means": "High heat can make your station more noticeable to hostile forces.",
+Fix: "Avoid long high-heat sessions, add thermal support, and do not stack research, mining and combat at the same time.",
+},
+{
+"Heat Problem": "Expansion makes heat worse",
+"What It Means": "More modules create more power demand and more heat to manage.",
+Fix: "Expand in stages and test heat after each major addition.",
+},
+];
+
+export const trapColumns = [
+{ key: "Trap", label: "Trap" },
+{ key: "Why It Fails", label: "Why It Fails" },
+{ key: "Safer Play", label: "Safer Play" },
+];
+
+export const trapRows = [
+{
+Trap: "Adding more mining lasers to fix slow progress",
+"Why It Fails": "More lasers add power draw and mass. If the grid is weak, mining gets less reliable, not faster.",
+"Safer Play": "Add solar and battery first, then add mining capacity.",
+},
+{
+Trap: "Building the Research Lab too early",
+"Why It Fails": "The lab can drain the grid and add heat before your station is ready.",
+"Safer Play": "Stabilize power, add battery and thermal support, then build the lab.",
+},
+{
+Trap: "Treating Thermal Dumpers as the whole heat solution",
+"Why It Fails": "A dumper stores and vents heat, but long sessions may still need passive dissipation.",
+"Safer Play": "Use dumpers as buffer and radiators for ongoing heat control.",
+},
+{
+Trap: "Ignoring heat signature",
+"Why It Fails": "Heat is not only a stability problem. High heat signature can attract alien attention.",
+"Safer Play": "Keep high-heat activity short and improve cooling before long research, mining or combat sessions.",
+},
+{
+Trap: "Flying heavy cargo while low on energy",
+"Why It Fails": "A heavy ship needs more control margin, while low energy makes braking and recovery worse.",
+"Safer Play": "Sell or unload, then move. Do not keep mining while the ship is already struggling.",
+},
+{
+Trap: "Rushing nuclear power",
+"Why It Fails": "Nuclear paths can involve fuel and heat support, which is too much for many early setups.",
+"Safer Play": "Use solar and batteries first, then explore nuclear when your logistics and heat systems are ready.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+If you keep seeing **Low Energy** in **Starminer**, stop expanding and fix the grid first. Turn off unused scanners, mining lasers and weapons, stop unnecessary movement, let batteries recover, then add more **Solar Panels** and **Energy Battery** capacity before adding high-drain modules.
+
+For heat, use **Thermal Dumpers** as a buffer and **Thermal Radiators** for passive heat control. High heat signature can also attract alien attention, so do not treat heat as only a comfort problem. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: May 2026 Early Access build. Solar prices, battery values, heat behavior, Research Lab drain, thermal modules and heat signature effects can change during Early Access, so check your current build menu before planning around exact numbers.
+</div>
+
+<GuideTable
+caption="Starminer low energy and heat quick fixes."
+columns={quickFixColumns}
+rows={quickFixRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-low-energy-warning.webp"
+    alt="Starminer low energy warning while a ship operates near asteroids."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Low Energy is not background noise. It means your current grid cannot comfortably support what the ship is trying to do.
+  </figcaption>
+</figure>
+
+<h2 id="why-low-energy-happens">
+  Why low energy happens
+</h2>
+
+Low energy usually means you are asking the ship to do too much at once. In the first hours, your grid is small, your batteries are limited, and every active system competes for power.
+
+The usual causes are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Moving a heavy ship while dampeners are working.</li>
+  <li>Leaving scanners online after the scan is done.</li>
+  <li>Mining while constantly adjusting position.</li>
+  <li>Running weapons during or after combat.</li>
+  <li>Building modules while the battery is already low.</li>
+  <li>Adding the Research Lab before your power grid is ready.</li>
+</ul>
+
+When Low Energy appears, do not add more tools immediately. Stabilize first, then expand.
+
+<div className="my-4">
+  <Link href="/starminer/controls-dampeners-ship-spinning/">
+    If low energy is making the ship hard to control, read the Controls and Dampeners Guide
+  </Link>
+</div>
+
+<h2 id="read-vitals">
+  Read energy, battery, water and heat together
+</h2>
+
+The left-side vitals are your early warning panel. Do not look at energy alone. Energy, battery, water, storage and heat all affect whether the ship can keep working.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-ship-vitals-ui.webp"
+    alt="Starminer ship vitals showing energy, battery, storage, water and heat."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Energy and heat are tied to almost everything you do. Check the vitals before adding modules or starting another mining trip.
+  </figcaption>
+</figure>
+
+A simple reading pattern:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Energy generation</strong> tells you whether the grid is positive or negative.</li>
+  <li><strong>Battery</strong> tells you how long you can survive short spikes.</li>
+  <li><strong>Water</strong> matters for movement and ship operation.</li>
+  <li><strong>Storage</strong> tells you whether cargo mass is becoming a problem.</li>
+  <li><strong>Heat</strong> tells you whether your systems are pushing too hard.</li>
+</ul>
+
+If two or more of these are strained, stop expanding.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="turn-off-systems">
+  Turn off systems you are not using
+</h2>
+
+Starminer rewards deliberate system control. If you are not scanning, turn scanners off. If there is no target, turn weapons off. If you are done mining, stop mining before flying home.
+
+<GuideTable
+caption="Common power drains and how to reduce them."
+columns={drainColumns}
+rows={drainRows}
+/>
+
+<h2 id="solar-battery">
+  Build solar and batteries before more load
+</h2>
+
+The safest early fix is usually more solar and more battery capacity.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-build-menu-solar-battery.webp"
+    alt="Starminer build menu showing T1 Solar Panel and T1 Energy Battery options."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar panels and energy batteries are boring upgrades, but they are what let the rest of your station run safely.
+  </figcaption>
+</figure>
+
+Solar helps the grid recover. Batteries help you survive short bursts of demand. You want both before you start stacking more mining lasers, weapons, research or heavy industry.
+
+<GuideTable
+caption="Recommended early power and heat build order."
+columns={buildOrderColumns}
+rows={buildOrderRows}
+/>
+
+<h2 id="mining-power">
+  Mining can drain your grid faster than you expect
+</h2>
+
+Mining is not just the laser. During a mining trip, you may be running:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Movement thrusters.</li>
+  <li>Linear and rotational dampeners.</li>
+  <li>Scanners.</li>
+  <li>Mining lasers.</li>
+  <li>Haulers.</li>
+  <li>Cargo transfer systems.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-mining-laser-haulers.webp"
+    alt="Starminer T1 Mining Laser panel showing power use, mass and range while mining."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mining tools have real power and mass costs. Add power support before adding more lasers.
+  </figcaption>
+</figure>
+
+If Low Energy appears during mining, do this:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Stop moving if you are not avoiding a collision.</li>
+  <li>Turn off scanners if the scan is already complete.</li>
+  <li>Turn off weapons if there is no active threat.</li>
+  <li>Let the battery recover.</li>
+  <li>Finish the current load instead of starting a new target.</li>
+  <li>Return and sell or unload before continuing.</li>
+</ol>
+
+<div className="my-4">
+  <Link href="/starminer/how-to-mine-scanner-laser/">
+    For scanner and mining alignment, use the Mining Guide
+  </Link>
+</div>
+
+<h2 id="heat-basics">
+  Heat is the second bottleneck
+</h2>
+
+Once your power is stable, heat becomes the next limit. You can have enough energy and still run into heat problems if too many systems are active for too long.
+
+Heat also matters because high heat signature can attract alien attention. That means heat management is not only about keeping modules online. It can also affect how much danger your station invites while mining, researching, fighting or running heavy industry.
+
+<GuideTable
+caption="Starminer heat problems and fixes."
+columns={heatColumns}
+rows={heatRows}
+/>
+
+Heat usually rises when you scale:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>More mining.</li>
+  <li>More weapons.</li>
+  <li>More industry.</li>
+  <li>More research.</li>
+  <li>More continuous operation without downtime.</li>
+</ul>
+
+Do not solve heat by pretending it is not there. Add the right thermal modules before you push the station harder.
+
+<h2 id="thermal-dumper-radiator">
+  Thermal Dumper vs Thermal Radiator
+</h2>
+
+Thermal Dumpers and Thermal Radiators do different jobs.
+
+A **Thermal Dumper** acts like a heat buffer. It absorbs excess heat, stores it, then vents when filled.
+
+A **Thermal Radiator** is for passive heat dumping over time.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-thermal-dumper-radiator.webp"
+    alt="Starminer build menu showing Thermal Dumper and Thermal Radiator options."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dumpers help absorb heat spikes. Radiators help with ongoing passive heat control.
+  </figcaption>
+</figure>
+
+The simple rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use dumpers if heat spikes during short bursts.</li>
+  <li>Use radiators if heat stays high over time.</li>
+  <li>Use both if research, industry or combat runs for long periods.</li>
+</ul>
+
+Do not add only one dumper and assume the heat problem is solved forever.
+
+<h2 id="research-lab">
+  The Research Lab is a power and heat test
+</h2>
+
+The Research Lab is important, but it is one of the first modules that can expose a weak station. If you build it before the grid is ready, the lab can drain energy and push heat up.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-research-lab-power-drain.webp"
+    alt="Starminer Research Lab causing low energy and heat pressure during early progression."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Treat the Research Lab as a stress test. Build it after solar, batteries and thermal support are ready.
+  </figcaption>
+</figure>
+
+Before building the Research Lab, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Do I have positive power generation?</li>
+  <li>Do I have enough battery capacity?</li>
+  <li>Can I handle heat spikes?</li>
+  <li>Can I keep mining and selling while the lab is running?</li>
+  <li>Do I actually have the materials, colonists and credits to follow up on research?</li>
+</ul>
+
+If not, wait. A delayed Research Lab is better than a lab that crashes the whole station.
+
+<div className="my-4">
+  <Link href="/starminer/early-research-progression/">
+    For unlock order, read the Early Research Progression Guide
+  </Link>
+</div>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="g2-solar">
+  G2 Solar is a strong early credit goal
+</h2>
+
+Some power progression is tied to credits and licenses, not only Research Points. In this build, **G2 Solar / Energy Solar** is especially useful because the shown Energy Solar unlock costs **5,000 credits** and requires **0 RP**.
+
+That makes it a clean early power target if your mining and selling loop is already working. Credits can solve this upgrade before the Research Lab is stable, which is why G2 Solar often fits before heavy research.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-g2-solar-license-cost.webp"
+    alt="Starminer research screen showing Energy Solar with 5,000 credit license cost and 0 required RP."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In this build, Energy Solar shows a 5,000-credit license cost and 0 required RP, making it a strong early power target.
+  </figcaption>
+</figure>
+
+Do not treat this as permission to skip batteries. Solar generation and battery storage solve different parts of the same problem:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Solar improves recovery and generation.</li>
+  <li>Batteries keep systems alive during spikes.</li>
+  <li>Thermal modules keep the station from overheating while working.</li>
+</ul>
+
+Use the safer order: stabilize T1 solar and batteries, improve cargo and selling, buy stronger solar when credits allow, add thermal support, then build the Research Lab safely. Nuclear power can wait until logistics, fuel and heat are under control.
+
+<h2 id="water">
+  Water can look separate, but it affects your run
+</h2>
+
+Power is not the only resource that can make the ship feel broken. Water matters for movement and station operation, and running low can make a good plan fall apart.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-merchant-buy-water.webp"
+    alt="Starminer trade screen showing water available to buy from Reclamation 9."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Keep credits for emergency supplies. Buying water can be better than losing control of a run.
+  </figcaption>
+</figure>
+
+If you are low on water and energy at the same time, stop expanding. Fix the support loop first: sell cargo, buy what you need, then return to mining or building once the ship is stable.
+
+<div className="my-4">
+  <Link href="/starminer/money-selling-resources/">
+    For buying and selling basics, use the Money Guide
+  </Link>
+</div>
+
+<h2 id="common-traps">
+  Common power and heat traps
+</h2>
+
+<GuideTable
+caption="Power and heat mistakes to avoid in Starminer."
+columns={trapColumns}
+rows={trapRows}
+/>
+
+The biggest trap is trying to solve every slow system by adding another module. If mining is slow, you add lasers. If haulers are slow, you add hangars. If research is slow, you run the lab harder. That only works if the grid, batteries and heat systems can support the extra load.
+
+<h2 id="recovery-route">
+  Recovery route when the grid is already collapsing
+</h2>
+
+If you are already stuck in Low Energy, use this recovery route:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Stop moving unless you are about to hit something.</li>
+  <li>Turn off scanners, mining and weapons if they are not needed.</li>
+  <li>Wait for the battery to recover.</li>
+  <li>Sell or unload heavy cargo if the ship is hard to control.</li>
+  <li>Add cheap solar panels if you can.</li>
+  <li>Add energy battery capacity if spikes keep draining the grid.</li>
+  <li>Add thermal support if heat is climbing.</li>
+  <li>Delay Research Lab, extra lasers, nuclear power and combat expansion until stable.</li>
+</ol>
+
+Do not keep forcing the same failing action. If the ship says Low Energy five times in a row, the current plan is too heavy for the grid.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I fix Low Energy in Starminer?
+
+Stop moving, turn off unused scanners, mining lasers and weapons, wait for battery recovery, then add more solar and battery capacity before expanding again.
+
+### Why does Low Energy keep happening?
+
+You are probably running too many active systems at once. Movement, dampeners, scanners, mining, weapons, construction and research can all pull from the same weak early grid.
+
+### Should I turn off scanners after scanning?
+
+Yes, if power is tight. Scan the target, confirm what you need, then turn scanners off until you need them again.
+
+### Do mining lasers use power?
+
+Yes. Mining lasers add power demand, and mining often happens while you are also moving, using dampeners and running haulers.
+
+### Why does my ship control worse during Low Energy?
+
+Dampeners and other active systems need power. If the grid is strained, stopping, rotating and recovering from bad movement can feel worse.
+
+### What should I build first for power?
+
+Start with more solar panels and energy battery capacity. They are the safest early way to stabilize the grid before bigger modules.
+
+### Is G2 Solar worth it early?
+
+Yes, if power is your bottleneck and you can afford the license. In this build, the shown Energy Solar unlock costs 5,000 credits and requires 0 RP.
+
+### What does a Thermal Dumper do?
+
+A Thermal Dumper absorbs excess heat, stores it, and vents it when filled. Treat it as a heat buffer.
+
+### What does a Thermal Radiator do?
+
+A Thermal Radiator passively dumps heat over time. It is better for ongoing heat control than a one-time buffer.
+
+### Does heat signature attract aliens in Starminer?
+
+Yes, high heat signature can attract alien attention. Keep long high-heat activities under control, especially when running research, weapons, mining or heavy industry.
+
+### Should I build the Research Lab early?
+
+Usually no. Build the Research Lab after your solar, battery and thermal support are stable, because the lab can drain power and produce heat.
+
+### Should I rush nuclear power?
+
+Usually no. Nuclear power can require fuel and heat support, so it is safer after your early solar, battery, economy and thermal systems are already stable.
+
+### Why does my station overheat?
+
+Too many active modules may be producing more heat than your dumpers and radiators can handle. Reduce load and add thermal support before expanding again.

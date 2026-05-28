@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Starminer =====
+{
+  href: "/starminer",
+  game: "Starminer",
+  title: "Beginner Guide, Mining, Power & Research",
+  description:
+    "Start here for Starminer first hour, Campaign vs Sandbox, controls, mining, credits, Low Energy, heat signature, G2 Solar, and research.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
+// ===== Starminer =====
+{
+  href: "/starminer/beginner-first-hour",
+  game: "Starminer",
+  title: "Beginner First Hour Guide",
+  description:
+    "Pick a preset, choose 3 modifiers, survive Campaign or Sandbox, scan, mine, sell, fix power, and avoid early overbuilding mistakes.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
+// ===== Starminer =====
+{
+  href: "/starminer/how-to-mine-scanner-laser",
+  game: "Starminer",
+  title: "Mining, Scanner & Laser Guide",
+  description:
+    "Fix Composition Unknown, scanner angle, mining laser range, haulers not collecting, Low Energy while mining, and early resource choices.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
+// ===== Starminer =====
+{
+  href: "/starminer/power-heat-low-energy",
+  game: "Starminer",
+  title: "Power, Heat & Low Energy Guide",
+  description:
+    "Fix Low Energy with solar, batteries, G2 Solar, Thermal Dumpers, Radiators, heat signature control, and safer Research Lab timing.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
 // ===== Romestead =====
 {
   href: "/romestead",

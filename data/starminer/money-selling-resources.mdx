@@ -1,0 +1,534 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const creditLoopColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Do This", label: "Do This" },
+{ key: "Why", label: "Why" },
+];
+
+export const creditLoopRows = [
+{
+Step: "1",
+"Do This": "Mine a small, useful load instead of stripping everything nearby.",
+Why: "Early cargo mass makes the ship harder to fly, and random materials may not solve your next objective.",
+},
+{
+Step: "2",
+"Do This": "Return to Reclamation 9 or a valid trade target.",
+Why: "Credits come from turning spare resources into money, not from hoarding every chunk forever.",
+},
+{
+Step: "3",
+"Do This": "Get close enough for cargo transfer.",
+Why: "If the trade looks right but nothing moves, distance and cargo access are the first things to check.",
+},
+{
+Step: "4",
+"Do This": "Open Trade, choose Sell, select the resource and amount, then confirm.",
+Why: "Selling, depositing and withdrawing can feel similar, so confirm the correct tab and amount before waiting.",
+},
+{
+Step: "5",
+"Do This": "Wait for cargo pods or haulers to finish the transfer.",
+Why: "The money loop is not done until the resource actually leaves your rig.",
+},
+{
+Step: "6",
+"Do This": "Keep repair and blueprint materials before selling extras.",
+Why: "Iron, silicates and cobalt can be more valuable as progression materials than quick cash.",
+},
+{
+Step: "7",
+"Do This": "Use credits on power, storage and unlocks that fix your current bottleneck.",
+Why: "Credits are strongest when they keep the next mining and research loop stable.",
+},
+];
+
+export const resourceColumns = [
+{ key: "Resource", label: "Resource" },
+{ key: "Shown Trade Value", label: "Shown Trade Value" },
+{ key: "Early Rule", label: "Early Rule" },
+];
+
+export const resourceRows = [
+{
+Resource: "Iron",
+"Shown Trade Value": "20 in one trade screen, 12 in another shown sale context",
+"Early Rule": "Keep enough for modules, repairs and construction before selling extra.",
+},
+{
+Resource: "Silicates",
+"Shown Trade Value": "20",
+"Early Rule": "Do not sell blindly. Early repair and construction tasks can need silicates.",
+},
+{
+Resource: "Cobalt",
+"Shown Trade Value": "120",
+"Early Rule": "Treat as a progression material first. Check blueprint and Research Lab costs before selling.",
+},
+{
+Resource: "Thorium",
+"Shown Trade Value": "300",
+"Early Rule": "High-value sale candidate if you do not need it for your next build or route.",
+},
+{
+Resource: "Eonite",
+"Shown Trade Value": "20 Eonite sold for 2,400 credits in one shown trade",
+"Early Rule": "Strong credit resource. Sell deliberately when you need money for licenses or power upgrades.",
+},
+{
+Resource: "Nuclear Fuel Cell",
+"Shown Trade Value": "1200",
+"Early Rule": "Very valuable, but do not treat power-route items as junk if you plan to explore nuclear tech later.",
+},
+];
+
+export const keepSellColumns = [
+{ key: "Situation", label: "Situation" },
+{ key: "Better Choice", label: "Better Choice" },
+{ key: "Reason", label: "Reason" },
+];
+
+export const keepSellRows = [
+{
+Situation: "You need to repair station modules.",
+"Better Choice": "Keep silicates and common building materials.",
+Reason: "A small sale can delay the next repair objective if you dump every repair material.",
+},
+{
+Situation: "You want to add hull, storage or basic modules.",
+"Better Choice": "Keep iron and silicates first.",
+Reason: "Basic expansion often uses common materials, and buying them back wastes credits.",
+},
+{
+Situation: "Your ship is overloaded and hard to control.",
+"Better Choice": "Sell or unload low-priority cargo.",
+Reason: "Cargo mass makes docking, mining and return trips more dangerous.",
+},
+{
+Situation: "You are saving for a license or power upgrade.",
+"Better Choice": "Sell higher-value extras such as thorium or eonite if not needed soon.",
+Reason: "Credits can unlock upgrades that make every future trip safer.",
+},
+{
+Situation: "You are preparing for research.",
+"Better Choice": "Keep cobalt and key materials until you check costs.",
+Reason: "Selling rare materials too early can stall Research Lab or module progression.",
+},
+];
+
+export const missionColumns = [
+{ key: "Money Route", label: "Money Route" },
+{ key: "Use It When", label: "Use It When" },
+{ key: "Watch Out For", label: "Watch Out For" },
+];
+
+export const missionRows = [
+{
+"Money Route": "Mining and selling",
+"Use It When": "You need predictable materials, credits and control over what enters your cargo.",
+"Watch Out For": "Cargo mass, Low Energy, hauler delays and selling materials needed for repairs.",
+},
+{
+"Money Route": "Missions / side quests",
+"Use It When": "You want credits and XP without repeating the same mining route.",
+"Watch Out For": "Travel distance, combat risk, power drain and whether your ship can safely complete the objective.",
+},
+{
+"Money Route": "High-value resource sales",
+"Use It When": "You need a fast license purchase or power upgrade.",
+"Watch Out For": "Selling rare resources before checking blueprint, research or power-route needs.",
+},
+];
+
+export const tradeProblemColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "First Fix", label: "First Fix" },
+];
+
+export const tradeProblemRows = [
+{
+Problem: "Trade screen opens but nothing transfers",
+"Likely Cause": "You may be too far away or cargo access is awkward.",
+"First Fix": "Move closer to the station, cargo bay or trade area, then try again.",
+},
+{
+Problem: "You sold the wrong thing",
+"Likely Cause": "You did not check repair, objective or blueprint needs first.",
+"First Fix": "Check current objectives and module costs before confirming future trades.",
+},
+{
+Problem: "Ship is too heavy after mining",
+"Likely Cause": "Cargo mass is making the rig sluggish.",
+"First Fix": "Return slowly, sell or unload cargo, then continue mining.",
+},
+{
+Problem: "You need credits but also need materials",
+"Likely Cause": "You are treating every resource as either full sell or full keep.",
+"First Fix": "Sell only the surplus amount and keep a reserve for the next build.",
+},
+{
+Problem: "You cannot buy emergency supplies",
+"Likely Cause": "Not enough credits or you are not close enough to the merchant or trade target.",
+"First Fix": "Sell spare cargo first, then move closer and buy only what you need.",
+},
+];
+
+export const spendColumns = [
+{ key: "Credit Goal", label: "Credit Goal" },
+{ key: "Good Early Use", label: "Good Early Use" },
+{ key: "Avoid", label: "Avoid" },
+];
+
+export const spendRows = [
+{
+"Credit Goal": "Power stability",
+"Good Early Use": "Solar licenses, power modules and battery capacity.",
+Avoid: "Adding more mining lasers while the grid is already weak.",
+},
+{
+"Credit Goal": "Mining loop",
+"Good Early Use": "Storage, haulers and upgrades that reduce downtime.",
+Avoid: "Flying back and forth with full storage because you delayed cargo upgrades.",
+},
+{
+"Credit Goal": "Research preparation",
+"Good Early Use": "Materials, power and stability before building the Research Lab.",
+Avoid: "Rushing research while the station cannot support the energy, heat and colonist load.",
+},
+{
+"Credit Goal": "Mobility",
+"Good Early Use": "Thrusters or layout changes when travel and docking are becoming painful.",
+Avoid: "Expanding mass without improving your ability to move and stop.",
+},
+{
+"Credit Goal": "Combat safety",
+"Good Early Use": "Defensive upgrades only when threats are actually blocking progress.",
+Avoid: "Buying combat toys before mining, power and credits are stable.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To make money early in **Starminer**, mine a useful load, return to **Reclamation 9**, open **Trade**, choose **Sell**, select the resource amount, confirm the trade, and wait for cargo transfer to finish.
+
+Do not sell everything. Keep enough **iron**, **silicates**, **cobalt** and research materials for repairs, blueprints and Research Lab preparation. Sell surplus or high-value resources when you need credits for power, storage, licenses or safer expansion. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: May 2026 Early Access build. Resource prices, mission rewards, trade values, perk bonuses and license costs can change during Early Access, so check your current trade screen before planning around exact numbers.
+</div>
+
+<GuideTable
+caption="Starminer early credit loop at a glance."
+columns={creditLoopColumns}
+rows={creditLoopRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-trade-sell-resources.webp"
+    alt="Starminer trade screen at Reclamation 9 showing Iron, Silicates, Cobalt, Thorium, Eonite and Nuclear Fuel Cell prices."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The trade screen is your first real credit loop. Use it deliberately instead of dumping every material you own.
+  </figcaption>
+</figure>
+
+<h2 id="money-loop">
+  The early money loop
+</h2>
+
+The safest early money loop in Starminer is not complicated. Mine a useful load, return safely, sell only the surplus, and spend credits on the bottleneck that makes the next trip safer.
+
+The mistake is trying to mine everything. Your ship has mass, storage limits, power limits and travel time. A clean short trip is better than a huge overloaded trip that leaves you drifting, low on power or unable to stop near the station.
+
+<div className="my-4">
+  <Link href="/starminer/how-to-mine-scanner-laser/">
+    Still learning the resource loop? Read the Mining, Scanner and Laser Guide
+  </Link>
+</div>
+
+<h2 id="how-to-sell">
+  How to sell resources at Reclamation 9
+</h2>
+
+Return to Reclamation 9 with a useful load, get close enough for cargo transfer, then open the trade screen. Use the **Sell** tab, choose the resource, set the amount and confirm the trade.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-reclamation-9-close-trade-range.webp"
+    alt="Starminer ship positioned close to Reclamation 9 before selling resources."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Get close before selling. Shorter cargo movement makes the early trade loop more reliable and less confusing.
+  </figcaption>
+</figure>
+
+If the trade does not seem to move anything, check the simple things first:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Are you close enough?</li>
+  <li>Are you trading with the right station or merchant?</li>
+  <li>Are you on the Sell tab, not Buy?</li>
+  <li>Did you choose the correct resource and amount?</li>
+  <li>Did you wait for the cargo transfer to finish?</li>
+</ul>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="wait-for-transfer">
+  Wait for the cargo transfer
+</h2>
+
+After you confirm a trade, give the game time to move the cargo. Starminer is physical: resources do not always feel like instant menu numbers. Cargo pods and haulers are part of the loop.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-cargo-pods-transfer-short-trip.webp"
+    alt="Starminer cargo pods transferring resources during a short trade trip."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Do not fly away the moment you hit Confirm Trade. Wait until the cargo movement finishes.
+  </figcaption>
+</figure>
+
+A good habit is to stay near the trade target until the transfer is visibly complete. If you leave too early, you may think the sale failed when the transfer simply had not finished.
+
+<h2 id="trade-values">
+  Early resource values
+</h2>
+
+The trade screen can help you compare resource value, but do not treat the numbers as the only thing that matters. A cheap material can be more important than a valuable one if it is needed for repairs or your next module.
+
+<GuideTable
+caption="Example Starminer trade values shown at Reclamation 9."
+columns={resourceColumns}
+rows={resourceRows}
+/>
+
+Use these as planning examples, not permanent values. During Early Access, prices and balance can change, and your current run may also differ by mode, perks or version.
+
+<h2 id="what-to-sell">
+  What should you sell first?
+</h2>
+
+In the first hours, sell what you can spare, not what looks valuable in isolation.
+
+<GuideTable
+caption="When to sell and when to keep early resources."
+columns={keepSellColumns}
+rows={keepSellRows}
+/>
+
+A simple early rule is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Keep a reserve of iron and silicates.</li>
+  <li>Keep cobalt until you know your next module or Research Lab costs.</li>
+  <li>Sell high-value extras when you are saving for a specific upgrade.</li>
+  <li>Do not sell materials that appear in your current objective.</li>
+  <li>Do not fly around overloaded just because you cannot decide what to sell.</li>
+</ul>
+
+<h2 id="do-not-sell-silicates">
+  Do not dump all your silicates
+</h2>
+
+Silicates look easy to sell because they are common, but early repair and construction objectives can need them. If you sell all of them, you may immediately have to mine the same material again.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-silicates-repair-objective.webp"
+    alt="Starminer objective asking the player to repair a damaged module using silicates."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the current objective needs silicates, keep a reserve before turning the rest into credits.
+  </figcaption>
+</figure>
+
+This is the difference between a money guide and a trap. Credits are useful, but buying back materials you just sold is a bad early economy loop.
+
+<h2 id="storage-and-mass">
+  Watch storage and mass
+</h2>
+
+Mining makes money, but it also makes your ship heavier. A full storage bar is not just an inventory problem. It changes how safe the return trip feels.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-build-menu-solar-battery.webp"
+    alt="Starminer build menu showing T1 Solar Panel and T1 Energy Battery options."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Credits are strongest when they fix the next bottleneck. Early power and battery support often matter more than hoarding cargo.
+  </figcaption>
+</figure>
+
+If the ship starts feeling sluggish after a mining trip, return slowly. Keep dampeners on, brake early and avoid tight spaces until you sell or unload.
+
+<div className="my-4">
+  <Link href="/starminer/controls-dampeners-ship-spinning/">
+    If the ship feels impossible to stop, use the Controls and Dampeners Guide
+  </Link>
+</div>
+
+<h2 id="spend-credits">
+  What should you spend early credits on?
+</h2>
+
+Do not spend credits just because the number went up. Spend them on whatever makes the next loop safer or faster.
+
+<GuideTable
+caption="Good ways to spend early Starminer credits."
+columns={spendColumns}
+rows={spendRows}
+/>
+
+In most early runs, your best credit targets are power stability, battery capacity, storage, hauler support, useful licenses and missing materials. Avoid spending everything on combat, fleet or flashy late-game systems before your mining and power loops are stable.
+
+<h2 id="missions">
+  Can missions make money too?
+</h2>
+
+Yes. Mining and selling is the most direct early credit loop, but missions and side quests can also provide credits and XP. They are useful when you are tired of repeating mining trips or when your next bottleneck is rank, not just cash.
+
+<GuideTable
+caption="Starminer early money routes: mining, missions and high-value sales."
+columns={missionColumns}
+rows={missionRows}
+/>
+
+Before taking a mission, check travel distance, power, cargo space and whether combat might be involved. A mission that pays credits is not worth it if your ship cannot safely reach the target, stop, fight or return.
+
+<h2 id="sell-price-perk">
+  Sell Price Perk is a strong early economy pick
+</h2>
+
+When you level up, watch for perks that improve your credit loop. A sell price bonus can be powerful because it improves every future sale instead of only helping one trip.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-sell-price-perk-advanced-trade.webp"
+    alt="Starminer perk screen showing Advanced Trade Negotiation increasing sell prices by 12%."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Advanced Trade Negotiation is strong when credits are your bottleneck because it increases sell prices by 12%.
+  </figcaption>
+</figure>
+
+This does not mean you should always pick trade perks over everything else. If your ship cannot stay powered, power is more important. If your ship cannot move safely, control and layout matter more. But if credits are the current wall, a sell price perk is one of the cleanest ways to snowball.
+
+<h2 id="buying-supplies">
+  Buying supplies is part of the money loop
+</h2>
+
+Selling is only half the economy. Sometimes the correct use of money is buying the thing that prevents a run from collapsing: water, materials, power-related parts or missing construction resources.
+
+<figure className="my-8">
+  <Image
+    src="/images/starminer/starminer-merchant-buy-water.webp"
+    alt="Starminer trade screen near a merchant while buying water as an emergency supply."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Keep enough credits for emergency buys. Running out of water or key materials can be worse than delaying an upgrade.
+  </figcaption>
+</figure>
+
+Do not spend your last credits unless the purchase solves an immediate problem. A small credit reserve can save you when you need emergency supplies or one missing material.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="trade-problems">
+  Common selling problems
+</h2>
+
+<GuideTable
+caption="Common Starminer selling and trade problems."
+columns={tradeProblemColumns}
+rows={tradeProblemRows}
+/>
+
+Most trade problems are not worth turning into a separate bug-fix page. For a normal economy guide, the important checks are distance, cargo access, the right tab, the right resource and whether the transfer finished.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I sell resources in Starminer?
+
+Return to Reclamation 9 or a valid trade target, get close enough, open Trade, choose Sell, select the resource and amount, confirm the trade, then wait for the transfer to finish.
+
+### Why is nothing transferring after I sell?
+
+You may be too far away, using the wrong trade target, on the wrong tab, or not waiting long enough for cargo movement. Move closer and confirm the correct Sell order.
+
+### What should I sell first?
+
+Sell surplus or high-value resources you do not need soon. Keep enough iron, silicates and rare materials for repairs, blueprints and Research Lab preparation.
+
+### Should I sell silicates?
+
+Not all of them. Silicates can be needed for repairs and construction, so keep a reserve before selling extras.
+
+### Is Eonite good to sell?
+
+Yes, Eonite is a strong credit resource when you need money. In one shown trade, 20 Eonite sells for 2,400 credits. Make sure it is not needed for your current objective or next build before selling.
+
+### Should I sell Cobalt?
+
+Be careful. Cobalt can be tied to more advanced module costs and Research Lab preparation, so check your next blueprint or research plan before selling it.
+
+### Why does my ship handle worse after mining?
+
+Cargo adds mass. A heavier ship takes longer to move and stop, so return slowly and unload or sell before taking risky maneuvers.
+
+### How do I make credits faster?
+
+Mine deliberately, sell surplus high-value resources, avoid wasting materials you need later, take suitable missions for credits and XP, and consider sell price perks if credits are your current bottleneck.
+
+### Do missions give credits in Starminer?
+
+Yes, missions and side quests can be another credit and XP route. Use them when you need variety or rank progress, but check travel distance, combat risk, power and cargo space before accepting.
+
+### Is the sell price perk worth it?
+
+Yes, if you are credit-blocked. A sell price perk improves future sales, but it should not come before power or survival if your ship is already unstable.
+
+### What should I buy first with credits?
+
+Spend early credits on the bottleneck that blocks your next loop: power, battery capacity, storage, licenses, hauler support, emergency water or missing materials.
+
+### Should I buy water?
+
+Buy water if your crew or ship operation needs it and you cannot safely solve the problem by mining or hauling. Keep enough credits for emergency supplies.
+
+### Should I hoard every resource?
+
+No. Hoarding makes your ship heavy and slows progression. Keep useful reserves, then sell surplus to fund upgrades.

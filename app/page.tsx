@@ -127,6 +127,7 @@ const allGameGuides = [
   { title: 'ZERO PARADES: For Dead Spies', href: '/zero-parades'},
   { title: 'Paralives', href: '/paralives'},
   { title: 'Romestead', href: '/romestead'},
+  { title: 'Starminer', href: '/starminer'},
   
 ];
 
