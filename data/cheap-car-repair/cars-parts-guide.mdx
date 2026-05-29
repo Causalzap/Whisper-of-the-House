@@ -1,0 +1,798 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const partsColumns = [
+{ key: "Part", label: "Part" },
+{ key: "Where It Shows Up", label: "Where It Shows Up" },
+{ key: "What To Remember", label: "What To Remember" },
+];
+
+export const partsRows = [
+{
+Part: "Battery",
+"Where It Shows Up": "Daddy's Little Girl, your own car and later customer jobs.",
+"What To Remember": "A replacement battery does not need to look perfect if the job accepts it, but it still needs to be installed and tightened.",
+},
+{
+Part: "Tire",
+"Where It Shows Up": "Daddy's Little Girl, optional wheel jobs and larger repair jobs.",
+"What To Remember": "The tire is not the rim. Keep the rim unless the job specifically replaces it.",
+},
+{
+Part: "Rim",
+"Where It Shows Up": "Wheel jobs, bike storage and larger parts lists.",
+"What To Remember": "A tire objective may still fail if the wheel is missing the correct rim.",
+},
+{
+Part: "Air intake pipe",
+"Where It Shows Up": "Daddy's Little Girl.",
+"What To Remember": "It can be removed, but the car still needs it reinstalled and clipped before the job can finish.",
+},
+{
+Part: "Air filter",
+"Where It Shows Up": "Daddy's Little Girl and later filter jobs.",
+"What To Remember": "Do not confuse the air filter with the air intake pipe. The filter can be a profit opportunity; the pipe is required.",
+},
+{
+Part: "Fuel filter",
+"Where It Shows Up": "Christopher Kingman and later engine jobs.",
+"What To Remember": "Some fuel filter jobs give a location hint, so check the house or cabinet hint before searching the whole map.",
+},
+{
+Part: "Alternator",
+"Where It Shows Up": "Christopher Kingman and later engine repairs.",
+"What To Remember": "If the game points you to the neighbor's yard, search there before buying.",
+},
+{
+Part: "Timing belt",
+"Where It Shows Up": "Engine With a Whim and later engine jobs.",
+"What To Remember": "The belt may be blocked by nearby parts. Remove the blocker first instead of pulling random pieces.",
+},
+{
+Part: "Spark plugs",
+"Where It Shows Up": "Engine With a Whim and later ignition jobs.",
+"What To Remember": "The job can ask for all four plugs, so count them before assuming the step is done.",
+},
+{
+Part: "Oil filter",
+"Where It Shows Up": "Larger engine jobs.",
+"What To Remember": "Oil filter, air filter and fuel filter are separate objectives. Read the exact quest line.",
+},
+{
+Part: "Pulley parts",
+"Where It Shows Up": "Shocked Driver and bigger repair jobs.",
+"What To Remember": "Big pulley, small pulley and alternator pulley can be separate parts with different compatibility.",
+},
+];
+
+export const sourceColumns = [
+{ key: "Source", label: "Source" },
+{ key: "Best For", label: "Best For" },
+{ key: "Player Note", label: "Player Note" },
+];
+
+export const sourceRows = [
+{
+Source: "Garage floor and shelves",
+"Best For": "Loose batteries, filters, sprays, cans, rims and early spare parts.",
+"Player Note": "Check here first when a job says something is lying around.",
+},
+{
+Source: "House and cabinets",
+"Best For": "Fuel filters, sponge substitutes and small parts.",
+"Player Note": "Some hints point directly to the living room or cabinet, so do not ignore the house.",
+},
+{
+Source: "Yard and shed",
+"Best For": "Alternators, tires, rims and random reusable parts.",
+"Player Note": "Useful when the game tells you a replacement is somewhere nearby.",
+},
+{
+Source: "Neighbor area",
+"Best For": "Alternator and other outside replacements.",
+"Player Note": "If a line mentions the neighbor, leave the garage and search the marked outdoor area.",
+},
+{
+Source: "Customer cars",
+"Best For": "Risky swaps such as battery, belt, filter or tire quality.",
+"Player Note": "Only profitable if the customer does not catch the sloppiness and the job still completes.",
+},
+{
+Source: "Scrapyard",
+"Best For": "Cheap used parts and common replacements.",
+"Player Note": "Use it once the route is available, especially before paying full price.",
+},
+{
+Source: "Part store",
+"Best For": "Specific parts such as pulleys when you cannot find a free one.",
+"Player Note": "Buy only when the payout or time saved makes the purchase worth it.",
+},
+];
+
+export const carColumns = [
+{ key: "Vehicle / Job", label: "Vehicle / Job" },
+{ key: "Parts You Handle", label: "Parts You Handle" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const carRows = [
+{
+"Vehicle / Job": "Sebastian's Solonez",
+"Parts You Handle": "Body panels, rust, green paint and polish.",
+"Why It Matters": "This teaches the basic repair loop before the game starts asking for real parts.",
+},
+{
+"Vehicle / Job": "Your own car",
+"Parts You Handle": "Rust, paint, tires, battery and parts you save for yourself.",
+"Why It Matters": "Your own car is where saved parts start feeling valuable.",
+},
+{
+"Vehicle / Job": "Daddy's Little Girl / Mini Fiax",
+"Parts You Handle": "Rear-left tire, rim, battery, brake fluid, petrol, air intake pipe and air filter.",
+"Why It Matters": "This is the first major parts job, and the rear engine layout catches many players.",
+},
+{
+"Vehicle / Job": "Christopher Kingman",
+"Parts You Handle": "Fuel filter, alternator, engine oil, putty and bodywork.",
+"Why It Matters": "Kingman is a risky customer, so sloppy work is more dangerous here.",
+},
+{
+"Vehicle / Job": "Engine With a Whim",
+"Parts You Handle": "Timing belt and spark plugs.",
+"Why It Matters": "This job teaches stacked engine parts and blocked access.",
+},
+{
+"Vehicle / Job": "Shocked Driver",
+"Parts You Handle": "Big pulley, front tires, rims, alternator pulley, paint, putty and missing parts.",
+"Why It Matters": "This job is large enough to deserve its own walkthrough instead of being buried in a parts list.",
+},
+];
+
+export const substituteColumns = [
+{ key: "Shortcut", label: "Shortcut" },
+{ key: "What It Does", label: "What It Does" },
+{ key: "Risk", label: "Risk" },
+];
+
+export const substituteRows = [
+{
+Shortcut: "Kitchen sponge as air filter",
+"What It Does": "Replaces a proper air filter when the game allows the cheap substitute.",
+Risk: "Useful for profit, but it can raise sloppiness if the customer notices.",
+},
+{
+Shortcut: "Old tire",
+"What It Does": "Lets you keep a better tire for yourself or another job.",
+Risk: "May fail if the tire condition is too poor or the objective rejects it.",
+},
+{
+Shortcut: "Worse battery",
+"What It Does": "Lets you save a better battery while still finishing a job.",
+Risk: "Can turn into a penalty if the job or customer detects the bad swap.",
+},
+{
+Shortcut: "Used timing belt",
+"What It Does": "Replaces a better belt you would rather keep.",
+Risk: "Higher-risk shortcut because the belt is important and easy to notice if the car fails.",
+},
+{
+Shortcut: "Watered-down petrol",
+"What It Does": "Completes a cheap fuel objective when the mission asks for that mixture.",
+Risk: "Follow the job text. Guessing with fluids outside the objective can waste time or create sloppiness.",
+},
+{
+Shortcut: "Putty over dents",
+"What It Does": "Handles cheap bodywork without replacing panels.",
+Risk: "Fresh filler needs to be smoothed before paint, or sloppiness rises quickly.",
+},
+];
+
+export const sloppinessColumns = [
+{ key: "Action", label: "Action" },
+{ key: "Sloppiness Risk", label: "Sloppiness Risk" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const sloppinessRows = [
+{
+Action: "Leaving a required part removed",
+"Sloppiness Risk": "Very high",
+"Why It Matters": "Some jobs will not complete at all, and others can trigger customer complaints.",
+},
+{
+Action: "Using a bad substitute",
+"Sloppiness Risk": "Medium to high",
+"Why It Matters": "A sponge, weak battery or worn belt can save money only if the job accepts it and the customer does not notice.",
+},
+{
+Action: "Wrong tire side or missing rim",
+"Sloppiness Risk": "High",
+"Why It Matters": "The objective may stay incomplete, so you lose time instead of making profit.",
+},
+{
+Action: "Loose bolts or unsecured clips",
+"Sloppiness Risk": "High",
+"Why It Matters": "Bolts and clips are small, but they are exactly the kind of mistake that can make a repair fail.",
+},
+{
+Action: "Painting over unfinished filler",
+"Sloppiness Risk": "Medium",
+"Why It Matters": "The game warns that fresh filler needs smoothing before paint.",
+},
+{
+Action: "Using found parts that match the job",
+"Sloppiness Risk": "Low",
+"Why It Matters": "A found part is not automatically bad. If it matches and the job accepts it, it can be clean profit.",
+},
+];
+
+export const issueColumns = [
+{ key: "Issue", label: "Issue" },
+{ key: "Where It Happens", label: "Where It Happens" },
+{ key: "What To Try", label: "What To Try" },
+];
+
+export const issueRows = [
+{
+Issue: "Air intake pipe will not install",
+"Where It Happens": "Daddy's Little Girl.",
+"What To Try": "Place the pipe in the rear engine bay first, then use pliers to secure the clips. Do not use pliers before the pipe is seated.",
+},
+{
+Issue: "Green spray runs out or paint objective feels stuck",
+"Where It Happens": "Early bodywork and paint jobs.",
+"What To Try": "Check whether the job needs a specific color, whether rust or filler is still unfinished, and whether you are wasting spray on areas that do not matter.",
+},
+{
+Issue: "Key remapping does not behave correctly",
+"Where It Happens": "Controls menu / launch build reports.",
+"What To Try": "Use default controls for the affected action if possible, especially G for dropping items and E for interaction.",
+},
+{
+Issue: "Part does not snap into place",
+"Where It Happens": "Filters, intake, pulleys, wheels and engine parts.",
+"What To Try": "Drop the wrong item with G, move closer, check whether another part blocks it, then aim at the ghosted install point.",
+},
+{
+Issue: "Parts respawn or storage confusion",
+"Where It Happens": "Garage, yard, scrapyard and found parts.",
+"What To Try": "Do not rely on random piles as permanent storage. Keep important parts in a place you can find again.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Throwing away the rim",
+"Why It Hurts": "A tire replacement can still need the old rim.",
+"Better Move": "Remove the tire, keep the rim, mount the replacement, then tighten the bolts.",
+},
+{
+Mistake: "Keeping an essential part",
+"Why It Hurts": "The car may not run or the job may not complete.",
+"Better Move": "Reinstall required parts first, then see what the job lets you keep.",
+},
+{
+Mistake: "Mixing up filters",
+"Why It Hurts": "Air filter, fuel filter and oil filter solve different objectives.",
+"Better Move": "Read the exact quest line before installing anything.",
+},
+{
+Mistake: "Using pliers too early",
+"Why It Hurts": "Clips cannot secure a part that is not seated.",
+"Better Move": "Place the part first, then use pliers.",
+},
+{
+Mistake: "Buying too quickly",
+"Why It Hurts": "The part may already be nearby for free or cheap.",
+"Better Move": "Check the hinted location first, then buy only if the time saved is worth it.",
+},
+{
+Mistake: "Ignoring sloppiness",
+"Why It Hurts": "A profitable shortcut can become a penalty when it is detected.",
+"Better Move": "Use risky swaps only when the job accepts them and the customer is not dangerous.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Cheap Car Repair**, parts are not just a checklist. A part can be required, reusable, good enough, worth keeping, or risky enough to get you in trouble.
+
+Start with the early essentials:
+
+**battery, tire, rim, brake fluid, petrol, air intake pipe, air filter, fuel filter, alternator, timing belt, spark plugs, oil filter and pulleys**.
+
+The safest rule is simple: **finish the job first, then think about profit**. If a part is required, reinstall it. If a cheap substitute works and the customer does not notice, that is where the money is. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: May 2026 launch build. This is a confirmed-so-far parts guide, not a full wiki. More vehicles, parts and substitutes will be added as they are verified.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-shocked-driver-objectives.webp"
+    alt="Cheap Car Repair Shocked Driver job objective list showing tires, rims, pulleys, dents and paint."
+    width={300}
+    height={400}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bigger jobs quickly become parts-management problems. For Shocked Driver, use the dedicated walkthrough instead of treating it like a normal parts swap.
+  </figcaption>
+</figure>
+
+<h2 id="confirmed-parts-list">
+  Confirmed early parts list
+</h2>
+
+This guide focuses on parts that matter in the opening and mid-early jobs. It is built for players who are trying to finish jobs, find missing parts, avoid sloppiness penalties and decide when a cheap substitute is worth using.
+
+<GuideTable
+caption="Cheap Car Repair confirmed early parts."
+columns={partsColumns}
+rows={partsRows}
+/>
+
+The big rule is: **a part only becomes profit if the job still completes**. If a removed part blocks the customer handoff, it is not a clever shortcut yet.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/">
+    Back to the full Cheap Car Repair Guide
+  </Link>
+</div>
+
+<h2 id="where-to-find-parts">
+  Where to find parts before buying
+</h2>
+
+Cheap Car Repair often hides usable parts close to the job. When the game gives a hint, follow the hint before spending money.
+
+<GuideTable
+caption="Where to look for parts in Cheap Car Repair."
+columns={sourceColumns}
+rows={sourceRows}
+/>
+
+Do not treat the part store as your first stop. Early jobs often use nearby junk, garage leftovers, house items, neighbor-yard finds or scrapyard parts. The part store is still useful, but it should solve a specific missing part, not replace basic searching.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="vehicles-and-jobs">
+  Vehicles and jobs that teach parts
+</h2>
+
+Most early vehicles matter because they introduce a new type of repair. You do not need a complete car encyclopedia to progress; you need to know which part is blocking the current job.
+
+<GuideTable
+caption="Early vehicles, jobs and the parts they teach."
+columns={carColumns}
+rows={carRows}
+/>
+
+Shocked Driver is the first job here that should be split out. It has enough missing parts, tire/rim work, bodywork and pulley objectives to deserve its own page.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/shocked-driver-mission/">
+    Read the Shocked Driver Mission Walkthrough
+  </Link>
+</div>
+
+<h2 id="tires-and-rims">
+  Tires and rims are not the same part
+</h2>
+
+Wheel jobs become much easier once you separate tire, rim and bolts in your head.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-daddys-little-girl-rear-left-tire.webp"
+    alt="Cheap Car Repair rear-left tire replacement showing the jack, wheel bolts, tire and rim."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Replace the tire, keep the rim if the job still needs it, then tighten every bolt before calling the customer.
+  </figcaption>
+</figure>
+
+In Daddy's Little Girl, **RL means rear left**. In later jobs, read the side carefully because front-left, front-right and rear-left are different objectives.
+
+If the wheel objective will not finish, check the side, rim and bolts before looking for another tire.
+
+<h2 id="battery">
+  Battery
+</h2>
+
+Battery swaps show up early. The replacement battery may be ugly, but the job only cares whether it works well enough and is installed correctly.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-daddys-little-girl-battery.webp"
+    alt="Cheap Car Repair spare battery on the garage floor during Daddy's Little Girl."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early replacement batteries can be lying around the garage. Install it, tighten it and check whether the objective accepts it.
+  </figcaption>
+</figure>
+
+Battery swaps are one of the first places where profit and sloppiness meet. A worse battery can save value, but only if the customer does not notice and the job still passes.
+
+<h2 id="air-filter-and-intake">
+  Air filter and air intake pipe
+</h2>
+
+The air filter and air intake pipe are related, but they are not the same thing. Daddy's Little Girl teaches this clearly.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-air-intake-pipe.webp"
+    alt="Cheap Car Repair rear engine air intake pipe and air filter housing."
+    width={1200}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The air filter can be a profit opportunity, but the air intake pipe must be reinstalled and clipped before the job can finish.
+  </figcaption>
+</figure>
+
+If the air intake pipe is removed, put it back into the rear engine bay first. After it is seated, use pliers to secure the clips. Using pliers before the pipe is placed is one of the easiest ways to get stuck.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/daddys-little-girl-mission/">
+    Read the Daddy's Little Girl Mission Walkthrough
+  </Link>
+</div>
+
+<h2 id="can-you-use-a-sponge-as-an-air-filter">
+  Can you use a sponge as an air filter?
+</h2>
+
+Yes. In Cheap Car Repair, a sponge can replace an air filter when the job allows that cheap substitute. It is one of the clearest examples of the game's repair logic: the fix is terrible, but it can still work if the objective accepts it and the customer does not notice.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-air-filter-sponge-substitute.webp"
+    alt="Cheap Car Repair air filter cover during an air filter substitute job."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A sponge can replace an air filter when the job allows it, but this is exactly the kind of shortcut that can raise sloppiness.
+  </figcaption>
+</figure>
+
+Use the sponge only when the game points you toward it or the job accepts it. If the customer is risky, the repair already has high sloppiness, or the objective still expects a proper air filter, use a safer part instead.
+
+<h2 id="fuel-filter">
+  Fuel filter
+</h2>
+
+Fuel filter jobs are easy to overcomplicate because the part may not be in the garage. If the game gives you a location hint, follow it literally.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-fuel-filter-location.webp"
+    alt="Cheap Car Repair fuel filter location hint near the house."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the hint says the fuel filter was in the living room, go check the house before checking the scrapyard or store.
+  </figcaption>
+</figure>
+
+Fuel filter, air filter and oil filter are separate. When a job says fuel filter, do not install the first filter-looking part you find.
+
+<h2 id="alternator">
+  Alternator and alternator pulley
+</h2>
+
+Alternator work starts appearing once jobs move past simple bodywork. Kingman introduces alternator replacement, while larger jobs can ask for an alternator pulley instead.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-alternator-neighbor-yard.webp"
+    alt="Cheap Car Repair hint saying the old alternator is removed and the neighbor may have a new one."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When the game points you to the neighbor's yard, search there before buying an alternator.
+  </figcaption>
+</figure>
+
+Do not confuse the alternator with the alternator pulley. The pulley is a smaller part and can appear as a separate store item.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-part-store-alternator-pulley.webp"
+    alt="Cheap Car Repair part store showing alternator pulley options and price."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The part store can solve specific missing parts, but check compatibility before buying.
+  </figcaption>
+</figure>
+
+<h2 id="timing-belt-and-spark-plugs">
+  Timing belt and spark plugs
+</h2>
+
+Engine With a Whim is the cleanest early example of a stacked engine job. The objective asks for spark plugs and a timing belt, but the belt is not always free to grab immediately.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-timing-belt-spark-plugs.webp"
+    alt="Cheap Car Repair Engine With a Whim job showing timing belt and spark plug replacement steps."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When an engine part is blocked, follow the highlighted part chain instead of guessing.
+  </figcaption>
+</figure>
+
+If the timing belt will not come out, look for the part that is physically blocking it. Remove that first, then return to the belt. For spark plugs, count the objective: if it says 0/4, one plug is not enough.
+
+<h2 id="fluids-and-drain-plugs">
+  Fluids and drain plugs
+</h2>
+
+Fluids have three different patterns: refill, mix, and drain-then-refill.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-daddys-little-girl-brake-fluid.webp"
+    alt="Cheap Car Repair brake fluid reservoir showing the cap and fill amount."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    For simple refill tasks, open the cap, add the fluid and close the cap again.
+  </figcaption>
+</figure>
+
+For a full fluid change, empty the tank first.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-oil-drain-service-pit.webp"
+    alt="Cheap Car Repair service pit prompt explaining that the tank must be completely emptied first."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some fluids need to be drained first, and the drain plug is easier to reach from the service pit.
+  </figcaption>
+</figure>
+
+For mixed fluids, use the mixing table instead of guessing with containers.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-daddys-little-girl-fluid-mixing-table.webp"
+    alt="Cheap Car Repair fluid mixing table prompt for preparing a petrol mixture."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the job asks for a mixture, place the canister on the mixing table and follow the required amount.
+  </figcaption>
+</figure>
+
+<h2 id="shocked-driver">
+  Before starting Shocked Driver
+</h2>
+
+Shocked Driver is not just a parts example. It is a full multi-step mission with bodywork, paint, missing parts, tires, rims and pulleys. Before you open the dedicated walkthrough, this parts guide should help you understand what the job is asking for.
+
+Before you start Shocked Driver, make sure you understand these parts from this guide:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Tires vs rims:</strong> replacing a tire is not the same as replacing the rim.</li>
+  <li><strong>Pulleys:</strong> big pulley, small pulley and alternator pulley are separate parts.</li>
+  <li><strong>Putty and paint:</strong> repair dents with putty, smooth the filler, then paint.</li>
+  <li><strong>Sloppiness risk:</strong> a big job gives you more chances to leave bolts, clips, rims or bodywork unfinished.</li>
+</ul>
+
+Use this page to understand the parts. Use the dedicated mission page when you need the full step-by-step order.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/shocked-driver-mission/">
+    Read the Shocked Driver Mission Walkthrough
+  </Link>
+</div>
+
+<h2 id="scrapyard-part-store-and-scrap">
+  Scrapyard, part store and scrap value
+</h2>
+
+The scrapyard is for saving money. The part store is for solving a specific missing part quickly. Selling old junk can help, but old parts may not be worth much.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-scrapyard-parts.webp"
+    alt="Cheap Car Repair map showing the scrapyard and nearby locations."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The scrapyard is one of the best places to check once jobs start asking for more replacement parts.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-used-parts-sell-scrap.webp"
+    alt="Cheap Car Repair bike storage or scrap interface showing a used rim part."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Old parts can have value, but do not sell something your own car or an active job still needs.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="how-sloppiness-works-with-parts">
+  How sloppiness works with parts
+</h2>
+
+Sloppiness is the risk created by bad work. With parts, it usually comes from one of four things: using a worse part, leaving something loose, skipping a required step, or making a repair look finished before it actually is.
+
+<GuideTable
+caption="Common part actions and sloppiness risk."
+columns={sloppinessColumns}
+rows={sloppinessRows}
+/>
+
+A high sloppiness bar does not always mean instant failure, but it means the job is more likely to become expensive if the customer notices. This is why a sloppy repair can show a bonus on one job and a detected penalty on another.
+
+Use this player rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>If the job is low-risk, cheap parts can be worth it.</li>
+  <li>If the customer is dangerous, use safer parts.</li>
+  <li>If the part is required for the car to run, reinstall it.</li>
+  <li>If the job already has many sloppy steps, do not stack more obvious mistakes on top.</li>
+</ul>
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/how-to-make-money/">
+    Read the Money and Sloppiness Guide
+  </Link>
+</div>
+
+<h2 id="substitute-parts">
+  Substitute parts and risky swaps
+</h2>
+
+Substitute parts are part of the game's economy. They help you keep better parts, save cash or finish a job cheaply. They also create the clearest sloppiness risk.
+
+<GuideTable
+caption="Cheap Car Repair substitute parts and shortcut risks."
+columns={substituteColumns}
+rows={substituteRows}
+/>
+
+The best substitute is not the funniest one. It is the one the job accepts without starting a customer problem.
+
+<h2 id="known-issues">
+  Known Issues in the launch build
+</h2>
+
+These issues are worth checking before you assume you missed a normal part step.
+
+<GuideTable
+caption="Cheap Car Repair known issues and stuck points in the launch build."
+columns={issueColumns}
+rows={issueRows}
+/>
+
+If one of these problems happens, use the quest log first. Then empty your hands with **G**, step back from the car, and retry the exact part interaction from the correct angle.
+
+<h2 id="common-parts-mistakes">
+  Common parts mistakes
+</h2>
+
+<GuideTable
+caption="Parts mistakes to avoid in Cheap Car Repair."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+When a parts job will not finish, check the exact blocker instead of replacing random parts. The most common blockers are wrong side, missing rim, loose bolt, unsecured clip, open cap or a required part left on the floor.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is this a full Cheap Car Repair parts list?
+
+Not yet. This is a confirmed early parts guide for the opening and mid-early jobs. It focuses on parts that actually block players: tires, rims, filters, battery, alternator, timing belt, spark plugs, pulleys and fluids.
+
+### Where is the fuel filter?
+
+For one early fuel filter job, the hint says a fuel filter was lying on the cabinet in the living room. Check the house before searching outside.
+
+### What is the difference between a tire and a rim?
+
+The tire is the rubber part. The rim is the metal wheel part. Some jobs need both, and replacing a tire may still require the original rim.
+
+### What does RL mean?
+
+RL means rear left. In Daddy's Little Girl, the tire objective is the rear-left tire.
+
+### Why will the air intake pipe not install?
+
+The pipe needs to be placed first, then secured with pliers. If it will not install, drop the wrong item with G, aim at the rear engine install point, place the pipe, then clip it.
+
+### Where is the alternator?
+
+One early alternator objective points you toward the neighbor's yard. If the game gives that hint, search outside before buying.
+
+### What are pulleys used for?
+
+Pulleys appear in bigger jobs such as Shocked Driver. Big pulley, small pulley and alternator pulley can be separate objectives, so check the exact part name.
+
+### How do I remove the timing belt?
+
+Click the timing belt and look for the blocking part. Remove the part that physically blocks access, then return to the belt.
+
+### What is the fluid mixing table?
+
+The fluid mixing table is used when a job asks for a prepared mixture instead of a normal refill. Place the canister on the table with E, add the required fluids in the requested amounts, then pour the finished mixture into the correct tank.
+
+### How do I use the service pit to drain oil?
+
+For drain-and-refill jobs, move under the car through the service pit and find the drain plug. Empty the old fluid first, then return to the reservoir or fill point and add the new fluid. If the job still does not update, check whether the cap or drain plug step is unfinished.
+
+### Why do I need to drain fluid first?
+
+Some jobs are full fluid changes, not simple refills. 
+
+### What happens when sloppiness is detected?
+
+When sloppiness is detected, the shortcut can stop being profitable. You may lose part of the payout, miss the sloppiness bonus, trigger a customer complaint or create a follow-up problem. That is why risky swaps are better on low-risk jobs than on story customers.
+
+### Is there a sloppiness meter I can see?
+
+Yes. Job screens can show a sloppiness bar, and completion screens can tell you whether the customer noticed the sloppy work. Use that feedback to learn which shortcuts are safe and which ones are too obvious.
+
+### Should I buy parts or search first?
+
+Search when the game gives a clear hint or the part is likely nearby. Buy when the missing part is specific, cheap enough, and the job payout justifies saving time.
+
+### Can parts despawn?
+
+Loose parts can remain around for a while, but do not treat random piles as permanent storage. Keep important parts where you can find them again.
+
+### Why can't I finish a parts job?
+
+The usual cause is a wrong part, wrong side, missing rim, loose bolt, unsecured clip, open cap, unfinished fluid amount or required part left on the floor.

@@ -1,0 +1,702 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const payoutColumns = [
+{ key: "Money Signal", label: "Money Signal" },
+{ key: "What It Tells You", label: "What It Tells You" },
+{ key: "How To Use It", label: "How To Use It" },
+];
+
+export const payoutRows = [
+{
+"Money Signal": "Base salary",
+"What It Tells You": "The guaranteed payout for finishing the job.",
+"How To Use It": "Use this to decide whether a job is worth spending good parts on.",
+},
+{
+"Money Signal": "Sloppiness bonus",
+"What It Tells You": "You saved value through cheap work and the customer did not catch it.",
+"How To Use It": "A good sign that the shortcut was worth it on that job type.",
+},
+{
+"Money Signal": "Sloppiness detected",
+"What It Tells You": "The customer noticed the bad repair.",
+"How To Use It": "Avoid repeating that shortcut on similar or riskier customers.",
+},
+{
+"Money Signal": "Parts cost",
+"What It Tells You": "How much of the payout you lose by buying or sacrificing a better part.",
+"How To Use It": "Search for found parts before buying when the job gives a hint.",
+},
+{
+"Money Signal": "Time cost",
+"What It Tells You": "How long the job blocks you from easier cash jobs.",
+"How To Use It": "A higher salary is not always better if the job takes too long or needs too many parts.",
+},
+];
+
+export const jobValueColumns = [
+{ key: "Job Type", label: "Job Type" },
+{ key: "Money Potential", label: "Money Potential" },
+{ key: "Best Strategy", label: "Best Strategy" },
+];
+
+export const jobValueRows = [
+{
+"Job Type": "Simple bodywork",
+"Money Potential": "Low to steady",
+"Best Strategy": "Do only the requested rust, paint and polish work. Do not waste spray chasing perfect cosmetics.",
+},
+{
+"Job Type": "Fluid jobs",
+"Money Potential": "Good when quick",
+"Best Strategy": "Open the right cap, use the correct container or mixing table, finish the exact amount and move on.",
+},
+{
+"Job Type": "Battery or tire jobs",
+"Money Potential": "Good if you have spare parts",
+"Best Strategy": "Use found or good-enough replacements. Keep rims, tighten bolts and avoid buying before searching.",
+},
+{
+"Job Type": "Filter or small engine jobs",
+"Money Potential": "High if the part is nearby",
+"Best Strategy": "Follow hints for fuel filters, air filters and small parts. A cheap substitute can help if the job accepts it.",
+},
+{
+"Job Type": "Large multi-part jobs",
+"Money Potential": "High but risky",
+"Best Strategy": "Do these when you have parts ready. They pay better only if the missing parts do not eat the whole payout.",
+},
+{
+"Job Type": "Dangerous story customers",
+"Money Potential": "High risk",
+"Best Strategy": "Do not test every scam here. A penalty or story consequence can wipe out the value of the shortcut.",
+},
+];
+
+export const fastMoneyColumns = [
+{ key: "Priority", label: "Priority" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Why It Works", label: "Why It Works" },
+];
+
+export const fastMoneyRows = [
+{
+Priority: "1",
+"What To Do": "Finish small driveway jobs quickly.",
+"Why It Works": "Regular clients become your repeat cash source once the garage loop opens.",
+},
+{
+Priority: "2",
+"What To Do": "Take jobs that use parts you already have.",
+"Why It Works": "A job with no purchase cost keeps more of its payout.",
+},
+{
+Priority: "3",
+"What To Do": "Use good-enough parts on low-risk customers.",
+"Why It Works": "You save better parts without risking a major story consequence.",
+},
+{
+Priority: "4",
+"What To Do": "Check hinted locations before buying.",
+"Why It Works": "Fuel filters, alternators, batteries and other parts can be nearby.",
+},
+{
+Priority: "5",
+"What To Do": "Avoid long jobs until you know the missing parts.",
+"Why It Works": "A big payout is not good profit if you spend half of it buying parts.",
+},
+];
+
+export const sloppinessMoneyColumns = [
+{ key: "Outcome", label: "Outcome" },
+{ key: "Money Result", label: "Money Result" },
+{ key: "What To Learn", label: "What To Learn" },
+];
+
+export const sloppinessMoneyRows = [
+{
+Outcome: "Sloppiness bonus",
+"Money Result": "Extra value or a better final total.",
+"What To Learn": "That shortcut worked on this job and customer type.",
+},
+{
+Outcome: "Customer does not notice",
+"Money Result": "You keep the salary and the saved part or material value.",
+"What To Learn": "This is the ideal cheap repair outcome.",
+},
+{
+Outcome: "Sloppiness detected",
+"Money Result": "Penalty, lost bonus or a worse final payout.",
+"What To Learn": "The shortcut was too obvious or used on the wrong job.",
+},
+{
+Outcome: "Job blocked by missing part",
+"Money Result": "No payout until the required part is reinstalled.",
+"What To Learn": "A removed required part is not profit yet.",
+},
+{
+Outcome: "Story customer gets angry",
+"Money Result": "The repair can create a larger consequence than a normal penalty.",
+"What To Learn": "Save the worst shortcuts for safer customers.",
+},
+];
+
+export const shortcutColumns = [
+{ key: "Shortcut", label: "Shortcut" },
+{ key: "Money Use", label: "Money Use" },
+{ key: "Do Not Use When", label: "Do Not Use When" },
+];
+
+export const shortcutRows = [
+{
+Shortcut: "Paint only what the job needs",
+"Money Use": "Saves spray and time on simple bodywork.",
+"Do Not Use When": "Rust, filler or polish objectives are still unfinished.",
+},
+{
+Shortcut: "Use an old tire",
+"Money Use": "Lets you keep a better tire for your own car or a better-paying job.",
+"Do Not Use When": "The tire condition is too poor or the job refuses it.",
+},
+{
+Shortcut: "Use a weaker battery",
+"Money Use": "Saves a good battery for your own car or later repairs.",
+"Do Not Use When": "The job fails, the battery remains loose or the customer is risky.",
+},
+{
+Shortcut: "Use a cheap filter substitute",
+"Money Use": "Can turn a small parts job into quick profit.",
+"Do Not Use When": "The job requires a proper part or sloppiness is already high.",
+},
+{
+Shortcut: "Use the required cheap fluid mix",
+"Money Use": "Completes the objective without wasting proper fluid.",
+"Do Not Use When": "You are guessing outside the objective text.",
+},
+{
+Shortcut: "Keep useful leftovers",
+"Money Use": "Reduces future part costs.",
+"Do Not Use When": "The current customer car still needs that part installed.",
+},
+];
+
+export const ownCarColumns = [
+{ key: "Situation", label: "Situation" },
+{ key: "Spend On Your Car?", label: "Spend On Your Car?" },
+{ key: "Reason", label: "Reason" },
+];
+
+export const ownCarRows = [
+{
+Situation: "Story requires your car to progress",
+"Spend On Your Car?": "Yes",
+Reason: "Progression matters more than saving a small part.",
+},
+{
+Situation: "Your car only needs to be usable",
+"Spend On Your Car?": "Only enough",
+Reason: "Do not over-invest before you know what later jobs need.",
+},
+{
+Situation: "You have one good battery or tire",
+"Spend On Your Car?": "Usually yes",
+Reason: "Your car benefits you long-term, while a cheap customer may not deserve your best part.",
+},
+{
+Situation: "A customer job pays well and needs that part",
+"Spend On Your Car?": "Maybe wait",
+Reason: "A high-paying job can fund more upgrades if the part cost is worth it.",
+},
+{
+Situation: "You found several spare parts",
+"Spend On Your Car?": "Yes, after active jobs",
+Reason: "Use extras after you finish jobs that are already blocking payout.",
+},
+];
+
+export const regularClientColumns = [
+{ key: "Regular Client Feature", label: "Regular Client Feature" },
+{ key: "Money Tip", label: "Money Tip" },
+];
+
+export const regularClientRows = [
+{
+"Regular Client Feature": "They appear at your driveway after the garage loop opens.",
+"Money Tip": "Treat them as your repeat cash source between story jobs.",
+},
+{
+"Regular Client Feature": "They can wait while you handle other tasks.",
+"Money Tip": "Do not abandon a nearly finished story objective just because a client arrived.",
+},
+{
+"Regular Client Feature": "They often teach one small repair system.",
+"Money Tip": "Use them to practice tires, filters, fluids and bodywork without wasting premium parts.",
+},
+{
+"Regular Client Feature": "Their value depends on part cost.",
+"Money Tip": "A small job is good money if it uses parts you already have.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Costs Money", label: "Why It Costs Money" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Buying before checking hints",
+"Why It Costs Money": "The part may be in the house, yard, garage or scrapyard.",
+"Better Move": "Search hinted locations first, then buy only if needed.",
+},
+{
+Mistake: "Using good parts on bad jobs",
+"Why It Costs Money": "The part value can be higher than the extra safety you gain.",
+"Better Move": "Save good parts for your car, risky jobs or better-paying work.",
+},
+{
+Mistake: "Taking large jobs without checking missing parts",
+"Why It Costs Money": "A high salary can disappear into part purchases.",
+"Better Move": "Read the full objective list before accepting the repair as easy money.",
+},
+{
+Mistake: "Stacking too many shortcuts",
+"Why It Costs Money": "One cheap trick can pass; five obvious mistakes can trigger detection.",
+"Better Move": "Use one or two low-risk shortcuts instead of making the whole car suspicious.",
+},
+{
+Mistake: "Leaving required parts removed",
+"Why It Costs Money": "The job may not complete, so you get no payout.",
+"Better Move": "Reinstall required parts first, then keep only what the game lets you get away with.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The fastest way to make money in **Cheap Car Repair** is to take jobs where the **payout is higher than your part cost, supply cost and time cost**.
+
+Use this rule:
+
+**finish the checklist → avoid buying parts unless needed → use found or good-enough parts on safe customers → save your best parts for your own car or higher-paying jobs**.
+
+Early examples show why this matters: the first bodywork job is a small **$30** job, while later good-enough repairs can pay much more if you keep costs low. Sloppiness is profitable only when the customer does not notice it. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: May 2026 launch build. Payouts, sloppiness checks, part values and customer reactions may change with patches, so use this as an early-game profit framework rather than a final min-max route.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-good-enough-payout.webp"
+    alt="Cheap Car Repair payout screen showing a good-enough repair with salary and final money total."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A job becomes profitable when the payout beats the cost of parts, supplies and time.
+  </figcaption>
+</figure>
+
+<h2 id="how-money-works">
+  How money works in Cheap Car Repair
+</h2>
+
+Money comes from customer jobs, but the salary is only one part of profit. A job is worth doing when the final payout is higher than what you spent or sacrificed to finish it.
+
+<GuideTable
+caption="How to read money signals in Cheap Car Repair."
+columns={payoutColumns}
+rows={payoutRows}
+/>
+
+The main rule applies to every money decision in this guide:
+
+<strong>Use cheap work on safe jobs. Use safer work on risky jobs. Save good parts when the current customer does not deserve them.</strong>
+
+That rule is the reason you can paint only what matters on one car, keep a better battery for your own car on another, and still avoid the worst shortcuts on dangerous story customers.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/">
+    Back to the full Cheap Car Repair Guide
+  </Link>
+</div>
+
+<h2 id="best-jobs-for-money">
+  Best jobs for making money fast
+</h2>
+
+The best-paying job is not always the job with the biggest salary. A big job that forces you to buy expensive parts can be worse than a smaller job you finish with supplies you already own.
+
+<GuideTable
+caption="Which Cheap Car Repair jobs are best for money?"
+columns={jobValueColumns}
+rows={jobValueRows}
+/>
+
+For early money, look for jobs with one or more of these traits:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>You already have the required part.</li>
+  <li>The replacement can be found nearby.</li>
+  <li>The job has only one or two repair systems.</li>
+  <li>The customer is not a dangerous story character.</li>
+  <li>The job allows a cheap substitute without blocking completion.</li>
+</ul>
+
+Avoid calling a job "high value" just because the number looks bigger. First check whether you need to buy tires, rims, filters, pulleys, belts or fluids.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="early-fast-money-route">
+  Early fast money route
+</h2>
+
+If you want a simple early route, focus on quick jobs and low purchase cost.
+
+<GuideTable
+caption="Early money priorities in Cheap Car Repair."
+columns={fastMoneyColumns}
+rows={fastMoneyRows}
+/>
+
+This is the safest early pattern:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Finish Sebastian's first job without wasting spray.</li>
+  <li>Repair your own car only as much as progression requires.</li>
+  <li>Use Daddy's Little Girl to learn tires, battery, fluids and rear engine parts.</li>
+  <li>Keep good parts only when the active customer job still completes.</li>
+  <li>Use driveway clients for repeat cash once they start arriving.</li>
+  <li>Search hinted locations before spending money at the part store.</li>
+</ol>
+
+<h2 id="first-job-money">
+  Your first job teaches low-margin work
+</h2>
+
+Sebastian's first job is simple: remove rust, paint the vehicle green, polish the fresh paint and collect the salary.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-first-job-objectives.webp"
+    alt="Cheap Car Repair first job objectives showing rust removal, green paint, polishing and salary."
+    width={300}
+    height={400}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first job is a small payout. It teaches you not to waste supplies on work the customer did not ask for.
+  </figcaption>
+</figure>
+
+The lesson is not that bodywork is bad. The lesson is that low-paying jobs should be finished efficiently. Remove enough rust, use the requested paint, polish when required and call the customer when the checklist accepts the job.
+
+<h2 id="sloppiness-and-profit">
+  How sloppiness affects profit
+</h2>
+
+Sloppiness is not just a risk system. It is part of the money system. Cheap work can increase profit when the customer misses it, but the same cheap work can reduce the payout when it gets detected.
+
+<GuideTable
+caption="How sloppiness changes your money."
+columns={sloppinessMoneyColumns}
+rows={sloppinessMoneyRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-sloppiness-bonus.webp"
+    alt="Cheap Car Repair job complete screen showing salary, sloppiness bonus and total payout."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A sloppiness bonus means the cheap repair worked in your favor this time.
+  </figcaption>
+</figure>
+
+The difference between these two outcomes is usually the job type, the customer risk and how obvious the shortcut was.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-sloppiness-detected-penalty.webp"
+    alt="Cheap Car Repair job result showing sloppiness detected and a money penalty."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When sloppiness is detected, the same shortcut can become a penalty instead of profit.
+  </figcaption>
+</figure>
+
+For a parts-focused view of which actions create sloppiness, use the parts guide.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/cars-parts-guide/">
+    Read the Cars and Parts Guide
+  </Link>
+</div>
+
+<h2 id="cheap-shortcuts-that-save-money">
+  Cheap shortcuts that actually save money
+</h2>
+
+A shortcut is only good if it saves more than it risks. The goal is not to ruin every car. The goal is to use the cheapest repair that the job accepts.
+
+<GuideTable
+caption="Cheap shortcuts and when they help profit."
+columns={shortcutColumns}
+rows={shortcutRows}
+/>
+
+Do not stack every shortcut on the same car. One bad part or cheap fluid mix may pass. A bad tire, missing cap, loose bolt, weak battery and wrong filter on the same job is how a profitable repair becomes an obvious scam.
+
+<h2 id="bodywork-profit">
+  Bodywork profit: rust, paint and polish
+</h2>
+
+Bodywork jobs are usually good when they are quick and cheap. They become bad money when you waste spray, polish or time fixing things the objective does not care about.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-rust-grinder.webp"
+    alt="Cheap Car Repair rusty car body being repaired with a grinder before painting."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Remove enough rust for the job to accept the repair, then paint and polish only what the objective requires.
+  </figcaption>
+</figure>
+
+Use this bodywork rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>If the job wants rust removal, grind the required area first.</li>
+  <li>If the job wants paint, use the requested color and avoid wasting spray.</li>
+  <li>If the job wants polish, finish the fresh paint before calling the customer.</li>
+  <li>If the job pays badly, do not turn it into a full restoration.</li>
+</ul>
+
+<h2 id="fluid-jobs-profit">
+  Fluid jobs can be fast money
+</h2>
+
+Fluid jobs are profitable when you know the exact interaction. The mistake that kills profit is wasting time with the wrong container, wrong cap or wrong fill amount.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-daddys-little-girl-fluid-mixing-table.webp"
+    alt="Cheap Car Repair fluid mixing table used to prepare a cheap petrol mixture."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the job asks for a mixture, use the fluid mixing table and follow the required amount.
+  </figcaption>
+</figure>
+
+Fluid jobs are worth doing when the task is clear: open cap, drain or fill, close cap, check objective. They become annoying when you try to guess instead of reading the job text.
+
+<h2 id="found-parts-profit">
+  Found parts beat bought parts
+</h2>
+
+A job that needs a part is profitable if the part is free, cheap or already in your garage. It is much less profitable if you buy the first replacement you see.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-fuel-filter-location.webp"
+    alt="Cheap Car Repair hint saying a fuel filter was lying on the cabinet in the living room."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some parts are nearby if you follow the hint. A found part keeps more of the job payout in your pocket.
+  </figcaption>
+</figure>
+
+Good sources include the garage, house, yard, neighbor area, scrapyard and part store. The part store is useful, but it should be the answer when searching would take too long or the job payout justifies the purchase.
+
+<h2 id="your-own-car-investment">
+  Should you repair your own car?
+</h2>
+
+Yes, but only with a plan. Your own car matters because it helps progression and gives long-term value, but over-investing too early can drain parts that might earn money on customer jobs.
+
+<GuideTable
+caption="When to spend parts on your own car."
+columns={ownCarColumns}
+rows={ownCarRows}
+/>
+
+Use this priority:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Fix your car when the story requires it.</li>
+  <li>Use good parts on your car when they create long-term value.</li>
+  <li>Do not waste rare parts on cosmetic perfection too early.</li>
+  <li>Finish active customer jobs before moving spare parts around.</li>
+  <li>Keep a small reserve of tires, batteries and filters if you can.</li>
+</ol>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="dangerous-customers">
+  Dangerous customers are not always worth scamming
+</h2>
+
+Some customers are bad targets for your worst shortcuts. Christopher Kingman is the early warning: a risky customer can turn one bad repair into a bigger problem.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-christopher-kingman-job-list.webp"
+    alt="Cheap Car Repair Christopher Kingman job list with bodywork, fluids and parts objectives."
+    width={300}
+    height={400}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Kingman jobs can pay, but they are not the best place to test every risky shortcut.
+  </figcaption>
+</figure>
+
+On story customers, protect the payout first. Use safer parts, tighten everything, close caps and avoid leaving obvious failures. Save the nastier shortcuts for repeat clients where the consequence is smaller.
+
+<h2 id="regular-clients">
+  Regular clients and repeat cash
+</h2>
+
+After the early story opens the garage loop, clients begin coming to your driveway. They are important because they turn the garage into a repeat money source instead of only a story mission chain.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-serve-clients-earn-cash.webp"
+    alt="Cheap Car Repair message saying clients will regularly come to the driveway and can be served to earn cash."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Regular driveway clients become your steady cash source once the garage loop opens up.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="How regular clients help you make money."
+columns={regularClientColumns}
+rows={regularClientRows}
+/>
+
+Regular clients are best for building cash, practicing small systems and using spare parts without stopping the main story for too long.
+
+<h2 id="scrapyard-and-store">
+  Scrapyard, part store and selling junk
+</h2>
+
+The scrapyard matters because it gives you a way to reduce part cost. The part store matters because it can solve a specific missing part quickly. Selling junk can help, but used parts may not be worth much.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-scrapyard-parts.webp"
+    alt="Cheap Car Repair scrapyard map location where cheap parts can be found."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The scrapyard is a money saver once you can use it, especially for jobs that need common parts.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-used-parts-sell-scrap.webp"
+    alt="Cheap Car Repair used parts interface showing an old rim with low scrap value."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Old parts can have value, but do not sell something your own car or an active job still needs.
+  </figcaption>
+</figure>
+
+If a bought part costs too much compared with the job payout, the job may not be worth rushing. Search first, buy second, sell only when you are sure the part is not needed.
+
+<h2 id="money-mistakes">
+  Money mistakes to avoid
+</h2>
+
+<GuideTable
+caption="Common money mistakes in Cheap Car Repair."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+The biggest beginner mistake is thinking only about salary. Profit is salary minus parts, supplies, time and penalties.
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best way to make money in Cheap Car Repair?
+
+Take jobs where the payout is higher than your part cost, supply cost and time cost. Use found parts, finish only the required objectives and save good parts for your own car or higher-paying jobs.
+
+### What jobs pay the most in Cheap Car Repair?
+
+Large multi-part jobs can pay more, but they are only good profit if you already have the parts or can find them cheaply. Early on, quick fluid, tire, battery and filter jobs can be better money than a big job that forces you to buy expensive parts.
+
+### What is the fastest early money route?
+
+Finish small jobs quickly, use driveway clients for repeat cash, search hinted locations before buying parts and avoid long repairs until you know the missing parts.
+
+### Should I repair my own car?
+
+Yes, when the story requires it or when the part gives long-term value. Do not over-invest in cosmetic repairs too early if those parts could finish a paying customer job.
+
+### What does sloppiness bonus mean?
+
+A sloppiness bonus means your cheap repair worked in your favor. You saved value through bad or cheap work, and the customer did not notice enough to punish you.
+
+### What does sloppiness detected mean?
+
+Sloppiness detected means the customer noticed the bad work. The shortcut can reduce your payout, remove the bonus or create a follow-up problem.
+
+### Should I use proper parts or cheap parts? 
+
+Use cheap parts only when the job accepts them and the saved value is worth the risk. For the full decision framework, use the cheap shortcuts section above.
+
+### Is painting over rust good for profit?
+
+Only when the job accepts it. Painting too early can save time, but if the objective still wants rust removal or filler work, it can create sloppiness instead of profit.
+
+### Are regular clients worth doing?
+
+Yes. Regular driveway clients are your repeat cash source once they start appearing. They are useful between story jobs, especially when their repair uses parts you already have.
+
+### Is the scrapyard worth using?
+
+Yes. The scrapyard can save money on common replacement parts. It is most useful when a job needs a part that would cost too much at the store.
+
+### Should I buy parts or search first?
+
+Search first when the game gives a hint or the part is likely nearby. Buy only when the missing part is specific, cheap enough or the job payout justifies saving time.
+
+### Why am I losing money?
+
+You may be buying too many parts, wasting supplies, getting sloppiness detected, using good parts on low-value jobs or starting big repairs without checking the missing parts first.

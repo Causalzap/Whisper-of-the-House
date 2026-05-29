@@ -128,7 +128,8 @@ const allGameGuides = [
   { title: 'Paralives', href: '/paralives'},
   { title: 'Romestead', href: '/romestead'},
   { title: 'Starminer', href: '/starminer'},
-  
+  { title: 'Cheap Car Repair', href: '/cheap-car-repair'},
+
 ];
 
 const exploreCards = [

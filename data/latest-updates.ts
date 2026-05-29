@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Cheap Car Repair =====
+{
+  href: "/cheap-car-repair",
+  game: "Cheap Car Repair",
+  title: "Beginner Guide, Tips, Missions & How to Play",
+  description:
+  "Start here for Cheap Car Repair basics, controls, sloppiness, early missions, money, parts, Daddy's Little Girl, Kingman, and Shocked Driver.",
+  tagClass: "text-orange-500",
+  hoverBorderClass: "hover:border-orange-300",
+  hoverTitleClass: "group-hover:text-orange-700",
+  },
+  
+  // ===== Cheap Car Repair =====
+  {
+  href: "/cheap-car-repair/daddys-little-girl-mission",
+  game: "Cheap Car Repair",
+  title: "Daddy's Little Girl Mission Walkthrough",
+  description:
+  "Complete Angelica's job: rear-left tire, battery, brake fluid, petrol mix, rear engine access, air intake pipe, air filter choice, and Angelica turn-in.",
+  tagClass: "text-orange-500",
+  hoverBorderClass: "hover:border-orange-300",
+  hoverTitleClass: "group-hover:text-orange-700",
+  },
+  
+  // ===== Cheap Car Repair =====
+  {
+  href: "/cheap-car-repair/controls-drop-items-save-tools",
+  game: "Cheap Car Repair",
+  title: "Controls, Drop Items & Save Guide",
+  description:
+  "Learn Cheap Car Repair controls, how to drop items with G, save your game, remap keys, run faster, use tools, fluids, pliers, and the service pit.",
+  tagClass: "text-orange-500",
+  hoverBorderClass: "hover:border-orange-300",
+  hoverTitleClass: "group-hover:text-orange-700",
+  },
+  
+  // ===== Cheap Car Repair =====
+  {
+  href: "/cheap-car-repair/how-to-make-money",
+  game: "Cheap Car Repair",
+  title: "How to Make Money Fast",
+  description:
+  "Make money fast with better job choices, cheap parts, found parts, sloppiness bonuses, regular clients, scrapyard savings, and early profit routes.",
+  tagClass: "text-orange-500",
+  hoverBorderClass: "hover:border-orange-300",
+  hoverTitleClass: "group-hover:text-orange-700",
+  },  
+
 // ===== Starminer =====
 {
   href: "/starminer",

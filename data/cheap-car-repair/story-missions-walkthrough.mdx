@@ -1,0 +1,761 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const missionColumns = [
+{ key: "Mission / Job", label: "Mission / Job" },
+{ key: "What Happens", label: "What Happens" },
+{ key: "Main Stuck Point", label: "Main Stuck Point" },
+];
+
+export const missionRows = [
+{
+"Mission / Job": "Beginnings Are Always Hard",
+"What Happens": "Take Sebastian's first job, remove rust, paint the car green, polish it and call him back.",
+"Main Stuck Point": "Players often over-repair the car instead of just finishing the checklist.",
+},
+{
+"Mission / Job": "High Voltage Electrician",
+"What Happens": "Restore power by using the neighbor's electrical box and following the four-wire diagram.",
+"Main Stuck Point": "Reading the wire order wrong or clicking wires before checking the diagram.",
+},
+{
+"Mission / Job": "Apple of My Eye",
+"What Happens": "Fix your own car more carefully than a customer car.",
+"Main Stuck Point": "Running out of spray or missing small rust spots while trying to make it look perfect.",
+},
+{
+"Mission / Job": "Applied Signology",
+"What Happens": "Build and paint your shop sign so more customers can find the garage.",
+"Main Stuck Point": "Missing one sign part, forgetting the naming step or trying to treat it like a normal car repair.",
+},
+{
+"Mission / Job": "Daddy's Little Girl",
+"What Happens": "Fix Angelica's car with petrol, brake fluid, battery, rear-left tire and air intake work.",
+"Main Stuck Point": "The air intake pipe must be reinstalled and secured with pliers.",
+},
+{
+"Mission / Job": "Boss of All Bosses / Christopher Kingman",
+"What Happens": "Handle Kingman's car with washing, putty, oil, fuel filter and alternator objectives.",
+"Main Stuck Point": "This is a risky customer, so obvious sloppy work can lead to consequences.",
+},
+{
+"Mission / Job": "Kingman Aftermath",
+"What Happens": "If Kingman is unhappy, the story pulls you into a forced consequence and another repair objective.",
+"Main Stuck Point": "Players may think they failed permanently, but it is a story sequence. Follow the new objective list.",
+},
+{
+"Mission / Job": "Regular Driveway Clients",
+"What Happens": "After the story opens up, customers regularly come to your driveway for cash jobs.",
+"Main Stuck Point": "Players may not realize clients can wait while they handle other tasks.",
+},
+{
+"Mission / Job": "Shocked Driver",
+"What Happens": "A larger repair job with cleaning, dents, paint, missing parts, pulleys, tires and rims.",
+"Main Stuck Point": "This job has enough parts to deserve a dedicated walkthrough.",
+},
+];
+
+export const routeColumns = [
+{ key: "Order", label: "Order" },
+{ key: "Mission", label: "Mission" },
+{ key: "Do This First", label: "Do This First" },
+];
+
+export const routeRows = [
+{
+Order: "1",
+Mission: "Beginnings Are Always Hard",
+"Do This First": "Accept Sebastian's job and complete the rust, green paint and polish objectives.",
+},
+{
+Order: "2",
+Mission: "High Voltage Electrician",
+"Do This First": "Go to the neighbor's electrical box, open it and follow the four-wire order shown on the diagram.",
+},
+{
+Order: "3",
+Mission: "Apple of My Eye",
+"Do This First": "Repair your own car, but do not waste every supply chasing tiny cosmetic details.",
+},
+{
+Order: "4",
+Mission: "Applied Signology",
+"Do This First": "Find the sign pieces near the gate, place them in the marked spots, name the shop and paint the sign.",
+},
+{
+Order: "5",
+Mission: "Daddy's Little Girl",
+"Do This First": "Replace the rear-left tire and battery, then handle fluids and the rear air intake.",
+},
+{
+Order: "6",
+Mission: "Christopher Kingman",
+"Do This First": "Wash the vehicle, repair dents with putty, smooth the filler, then handle oil and parts.",
+},
+{
+Order: "7",
+Mission: "Kingman Aftermath",
+"Do This First": "Follow the forced objective after Kingman reacts badly, then return to the garage when the story lets you.",
+},
+{
+Order: "8",
+Mission: "Regular Clients",
+"Do This First": "Use driveway clients for repeat cash while continuing story objectives.",
+},
+{
+Order: "9",
+Mission: "Shocked Driver",
+"Do This First": "Open the job list and identify every missing part before starting the large repair list.",
+},
+];
+
+export const electricalColumns = [
+{ key: "Step", label: "Step" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Tip", label: "Tip" },
+];
+
+export const electricalRows = [
+{
+Step: "1",
+"What To Do": "Go to the neighbor's electrical box after the power objective starts.",
+Tip: "This is a story objective outside the garage, not a car repair step.",
+},
+{
+Step: "2",
+"What To Do": "Open the box and look at the wiring diagram on the panel.",
+Tip: "The early puzzle uses four colored wires. Do not start clicking before reading the order.",
+},
+{
+Step: "3",
+"What To Do": "Click the wires in the order shown by your diagram.",
+Tip: "Use the diagram in your current run as the source of truth if the order looks different after a patch.",
+},
+{
+Step: "4",
+"What To Do": "If nothing happens, step back, re-check the diagram and try the wire sequence again.",
+Tip: "This is a retryable interaction; a wrong click is not a permanent fail state.",
+},
+];
+
+export const signColumns = [
+{ key: "Step", label: "Step" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Common Miss", label: "Common Miss" },
+];
+
+export const signRows = [
+{
+Step: "1",
+"What To Do": "Look near the gate and shop entrance for the broken sign pieces.",
+"Common Miss": "Players often search inside the garage even though the sign is an outside progression step.",
+},
+{
+Step: "2",
+"What To Do": "Carry each sign part to the marked position and place it.",
+"Common Miss": "If a part will not place, drop the wrong item with G and aim at the marked spot again.",
+},
+{
+Step: "3",
+"What To Do": "Use the naming prompt when the game asks for your shop name.",
+"Common Miss": "The sign is not finished just because the pieces are placed.",
+},
+{
+Step: "4",
+"What To Do": "Spray-paint the sign when the objective changes to painting.",
+"Common Miss": "This is not precision bodywork; follow the sign objective instead of treating it like a customer car.",
+},
+];
+
+export const stuckColumns = [
+{ key: "If You Are Stuck On", label: "If You Are Stuck On" },
+{ key: "Check This", label: "Check This" },
+];
+
+export const stuckRows = [
+{
+"If You Are Stuck On": "First job",
+"Check This": "Make sure the rust, green paint and polish objectives are all accepted before calling Sebastian.",
+},
+{
+"If You Are Stuck On": "Electrical box",
+"Check This": "Open the box, read the four-wire diagram and click the wires in the shown order. If it fails, step back and retry the sequence.",
+},
+{
+"If You Are Stuck On": "Your own car",
+"Check This": "Change the grinder disc if it wears out, and check small rust spots before painting.",
+},
+{
+"If You Are Stuck On": "Shop sign",
+"Check This": "Find all sign parts near the gate, place them in the marked spots, use the naming prompt and paint the sign.",
+},
+{
+"If You Are Stuck On": "Daddy's Little Girl",
+"Check This": "RL means rear left. Also make sure the rear engine is open and the air intake pipe is reinstalled and clipped with pliers.",
+},
+{
+"If You Are Stuck On": "Kingman",
+"Check This": "Smooth putty before painting, drain and refill oil correctly, and install the required fuel filter and alternator.",
+},
+{
+"If You Are Stuck On": "Kingman aftermath",
+"Check This": "Follow the new forced objective. It is a story consequence, not a permanent softlock.",
+},
+{
+"If You Are Stuck On": "Regular clients",
+"Check This": "The customer can wait. You can serve them for cash or continue other story tasks first.",
+},
+{
+"If You Are Stuck On": "Shocked Driver",
+"Check This": "Track the job and gather missing parts before starting the large repair list.",
+},
+];
+
+export const missionLinkColumns = [
+{ key: "Need Help With", label: "Need Help With" },
+{ key: "Use This Guide", label: "Use This Guide" },
+];
+
+export const missionLinkRows = [
+{
+"Need Help With": "Daddy's Little Girl air intake, battery, tire and brake fluid",
+"Use This Guide": "Daddy's Little Girl Mission Walkthrough",
+},
+{
+"Need Help With": "Shocked Driver tires, rims, pulleys, paint and missing parts",
+"Use This Guide": "Shocked Driver Mission Walkthrough",
+},
+{
+"Need Help With": "Dropping tools, using pliers, fluids, bolts or saving",
+"Use This Guide": "Controls, Drop Items, Save and Tools Guide",
+},
+{
+"Need Help With": "Sloppiness, profit, cheap parts and customer risk",
+"Use This Guide": "How to Make Money in Cheap Car Repair",
+},
+{
+"Need Help With": "Parts, filters, tires, fluids, alternator and substitutes",
+"Use This Guide": "Cars and Parts Guide",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+This **Cheap Car Repair story missions walkthrough** is a work-in-progress route for the early game.
+
+The confirmed early order is:
+
+**Sebastian first job → High Voltage Electrician → Apple of My Eye → Applied Signology → Daddy's Little Girl → Christopher Kingman → Kingman aftermath → regular driveway clients → Shocked Driver**.
+
+If a mission will not progress, open the quest log first. Most blockers come from one missed step: a customer not called, a quest not tracked, a sign part not placed, the electrical box order not followed, the wrong tire side, or a required part left off the car. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: May 2026 launch build. This page tracks confirmed story missions and early jobs so far. More jobs will be added as the route is verified.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-daddys-little-girl-job-complete.webp"
+    alt="Cheap Car Repair quest log showing completed early missions and the Daddy's Little Girl quest steps."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the quest log whenever a story job feels stuck. It usually shows the exact unfinished step.
+  </figcaption>
+</figure>
+
+<h2 id="work-in-progress">
+  Story missions walkthrough status
+</h2>
+
+This is not a full 100-job list yet. It is a player route for the confirmed early story missions and the first major jobs that are likely to block new players.
+
+<GuideTable
+caption="Cheap Car Repair story missions confirmed so far."
+columns={missionColumns}
+rows={missionRows}
+/>
+
+The goal is to help you keep moving through the early story without turning this into a full wiki. Named missions, story blockers and high-friction jobs get detailed notes. Simple repeat jobs stay in the mission table unless they create a real stuck point.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/">
+    Back to the full Cheap Car Repair Guide
+  </Link>
+</div>
+
+<h2 id="recommended-order">
+  Recommended early mission order
+</h2>
+
+Follow this order if you want a clean route through the opening hours.
+
+<GuideTable
+caption="Recommended Cheap Car Repair early story route."
+columns={routeColumns}
+rows={routeRows}
+/>
+
+You can sometimes do small tasks in a different order, but the early story is easier if you treat each mission as a lesson: first bodywork, then power, then your own car, then advertising, then multi-system repair jobs.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="beginnings-are-always-hard">
+  Beginnings Are Always Hard: Sebastian's first job
+</h2>
+
+Sebastian is the first customer. His Solonez needs simple bodywork: remove rust, paint the vehicle green and polish the fresh paint.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-first-job-objectives.webp"
+    alt="Cheap Car Repair Sebastian's Solonez first job objectives showing rust removal, green paint and polishing."
+    width={300}
+    height={400}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Sebastian's job teaches the basic loop: remove rust, paint, polish and call the customer.
+  </figcaption>
+</figure>
+
+Do not overthink this job. It teaches you that the checklist matters more than perfection.
+
+Use this order:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Take the job from Sebastian.</li>
+  <li>Enter the garage and turn on the light.</li>
+  <li>Pick up the grinder.</li>
+  <li>Remove enough rust for the objective.</li>
+  <li>Paint the car green.</li>
+  <li>Switch to polishing and polish the fresh paint.</li>
+  <li>Call Sebastian when the job accepts the work.</li>
+</ol>
+
+If the job will not complete, check whether you missed a rust patch, forgot to polish or did not call the customer.
+
+<h2 id="high-voltage-electrician">
+  High Voltage Electrician: electrical box order
+</h2>
+
+After the first job, the power goes out. The game sends you to the neighbor's electrical box. This is one of the first non-car story tasks, and it can feel confusing because you are suddenly solving a wire puzzle instead of repairing a vehicle.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-electrical-box-wire-order.webp"
+    alt="Cheap Car Repair electrical box wiring diagram sequence during the High Voltage Electrician mission."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Open the electrical box and use the diagram on the panel before clicking the wires.
+  </figcaption>
+</figure>
+
+The early electrical box puzzle uses **four colored wires**. Your job is to read the diagram on the box and click the wires in that shown order. Do not guess from memory if your current build shows a different layout after a patch.
+
+<GuideTable
+caption="High Voltage Electrician electrical box steps."
+columns={electricalColumns}
+rows={electricalRows}
+/>
+
+If you click the wrong wire, do not treat it as a permanent failure. Step back, look at the diagram again and retry the sequence. The important part is the order, not your exact standing position.
+
+<h2 id="apple-of-my-eye">
+  Apple of My Eye: fix your own car
+</h2>
+
+After power is restored, you work on your own car. This is where the game teaches the opposite of cheap customer work: do not cut corners on your own stuff unless the story only needs the car to be usable.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-own-car-rust-repair-annotated.webp"
+    alt="Cheap Car Repair own car rust repair process showing rust, grinding, repainting and a finished hood."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your own car teaches the full bodywork flow: remove rust, grind it down, repaint the panel and finish the surface.
+  </figcaption>
+</figure>
+
+Remove rust, paint the car and polish it. You do not need to turn it into a perfect restoration, but this is a good time to learn how spray, polishing and grinder disc wear behave before harder jobs start.
+
+Beginner tips:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Check small rust spots before painting.</li>
+  <li>Change the grinder disc when it wears out.</li>
+  <li>Do not waste every spray can on tiny cosmetic differences.</li>
+  <li>Use this mission to practice before real customers become more demanding.</li>
+</ul>
+
+<h2 id="applied-signology">
+  Applied Signology: build the shop sign
+</h2>
+
+Applied Signology opens the garage up as a real business. You need to find the broken sign parts, place them outside the shop, name the garage and paint the sign.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-applied-signology-shop-sign.webp"
+    alt="Cheap Car Repair Applied Signology mission showing the shop sign being assembled and painted."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Applied Signology is not just decoration. The sign pushes the garage into regular customer work.
+  </figcaption>
+</figure>
+
+The sign pieces are outside near the gate and shop entrance area. Pick them up, carry them to the marked positions and place them when the prompt appears. If a part will not place, you are probably holding the wrong object or aiming at the wrong marker.
+
+<GuideTable
+caption="Applied Signology shop sign steps."
+columns={signColumns}
+rows={signRows}
+/>
+
+After the pieces are placed, the game asks you to name the shop. Use the naming prompt, then paint the sign when the objective changes. This step does not require the same precision as a customer car; follow the objective rather than trying to make the sign perfect.
+
+<h2 id="daddys-little-girl">
+  Daddy's Little Girl
+</h2>
+
+Daddy's Little Girl is the first job where many players get stuck. Angelica's car needs petrol, brake fluid, a battery, the rear-left tire and rear engine work.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-daddys-little-girl-objectives.webp"
+    alt="Cheap Car Repair Daddy's Little Girl objective list showing petrol, brake fluid, battery and rear-left tire."
+    width={300}
+    height={400}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Daddy's Little Girl is the first big multi-system job: fluids, battery, tire and rear engine parts.
+  </figcaption>
+</figure>
+
+Key points:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>RL means rear left.</strong> Replace the rear-left tire.</li>
+  <li>Use the jack before wheel work.</li>
+  <li>Open and close the brake fluid cap.</li>
+  <li>Use the fluid mixing table for the petrol objective.</li>
+  <li>The engine is in the rear.</li>
+  <li>The air intake pipe must be reinstalled before the job can finish.</li>
+  <li>Use pliers to secure the clips after the pipe is placed.</li>
+</ul>
+
+For the full route, use the dedicated mission guide.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/daddys-little-girl-mission/">
+    Read the Daddy's Little Girl Mission Walkthrough
+  </Link>
+</div>
+
+<h2 id="christopher-kingman">
+  Boss of All Bosses: Christopher Kingman
+</h2>
+
+Christopher Kingman is the early story warning that some customers are not safe to scam carelessly.
+
+His job asks for bodywork, fluids and parts: wash the vehicle, repair dents using putty, smooth the applied putty, drain and refill engine oil, replace the fuel filter and replace the alternator.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-christopher-kingman-job-list.webp"
+    alt="Cheap Car Repair Christopher Kingman job list showing washing, putty, oil, fuel filter and alternator objectives."
+    width={300}
+    height={400}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Kingman's job is where cheap work becomes risky. Follow the checklist carefully.
+  </figcaption>
+</figure>
+
+Use this order:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Wash the vehicle with the hose.</li>
+  <li>Find the dents.</li>
+  <li>Apply putty with the spatula.</li>
+  <li>Smooth the fresh filler.</li>
+  <li>Drain and refill engine oil.</li>
+  <li>Find or install the fuel filter.</li>
+  <li>Install the alternator.</li>
+  <li>Check the job list before turning it in.</li>
+</ol>
+
+The biggest bodywork mistake is painting over fresh filler before smoothing it.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-putty-dent-repair.webp"
+    alt="Cheap Car Repair fresh body filler warning during Christopher Kingman dent repair."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Smooth the filler before painting. Rushing this step raises sloppiness.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="kingman-aftermath">
+  What happens after Kingman gets angry?
+</h2>
+
+If Kingman is unhappy, the story can pull you out of the normal garage loop. This is not just a normal bad review. It becomes a scripted consequence: Kingman reacts, you are forced into a new situation and the game gives you another objective to follow.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-kingman-consequence-trunk.webp"
+    alt="Cheap Car Repair Christopher Kingman consequence scene after an unhappy repair."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Kingman is the reminder that not every customer is worth scamming.
+  </figcaption>
+</figure>
+
+Do not treat this as a permanent softlock. Follow the new objective list and complete the forced repair the story gives you. If you want to avoid this kind of consequence later, use safer repairs on dangerous story customers and save the worst shortcuts for lower-risk clients.
+
+The follow-up repair can ask you to handle petrol again. Stick to the current objective, finish the forced step and return to the garage when the story lets you.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-kingman-forced-petrol-job.webp"
+    alt="Cheap Car Repair forced petrol repair objective after the Christopher Kingman story event."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When the story forces a repair, focus on the current objective instead of cleaning up the garage first.
+  </figcaption>
+</figure>
+
+<h2 id="regular-clients">
+  Regular driveway clients
+</h2>
+
+Once the early story opens up, clients begin coming to your driveway regularly. You can serve them to earn cash, or let them wait while you handle other tasks.
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-serve-clients-earn-cash.webp"
+    alt="Cheap Car Repair message saying clients will regularly come to the driveway and can be served to earn cash."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Regular driveway clients become the repeat cash loop after the early story opens up.
+  </figcaption>
+</figure>
+
+Use these jobs for money, parts practice and sloppiness testing. Just do not forget that story objectives can still be waiting in the quest log.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/how-to-make-money/">
+    Read the Money and Profit Guide
+  </Link>
+</div>
+
+<h2 id="shocked-driver">
+  Shocked Driver
+</h2>
+
+Shocked Driver is a larger early job and should be treated as a mission-level repair, not a quick parts swap. It asks for cleaning, dents, paint, missing parts, tires, rims and pulley work.
+
+Before you start Shocked Driver, make sure you understand where to find parts. At this point in the story, missing parts may come from your garage, yard, stored junk, the scrapyard or the part store, so do not assume every missing pulley, rim or tire has to be bought immediately.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/cars-parts-guide/">
+    Read the Cars and Parts Guide
+  </Link>
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/cheap-car-repair/cheap-car-repair-shocked-driver-objectives.webp"
+    alt="Cheap Car Repair Shocked Driver objective list showing cleaning, dents, paint and missing parts."
+    width={300}
+    height={400}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shocked Driver is a bigger job. Track the missing parts before you start taking the car apart.
+  </figcaption>
+</figure>
+
+Before you start, check the objective list for:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Wash the vehicle.</li>
+  <li>Repair dents with putty.</li>
+  <li>Paint the vehicle in the requested color.</li>
+  <li>Replace missing tires and rims.</li>
+  <li>Handle pulley-related parts.</li>
+  <li>Find or use stored filters, belts and batteries.</li>
+</ul>
+
+Because this job has several separate systems, use the dedicated walkthrough instead of trying to solve it from the mission list alone.
+
+<div className="my-4">
+  <Link href="/cheap-car-repair/shocked-driver-mission/">
+    Read the Shocked Driver Mission Walkthrough
+  </Link>
+</div>
+
+<h2 id="what-to-check-when-stuck">
+  What to check when a mission is stuck
+</h2>
+
+<GuideTable
+caption="Cheap Car Repair mission stuck checklist."
+columns={stuckColumns}
+rows={stuckRows}
+/>
+
+If the table does not solve it, check these general blockers:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>The quest may not be tracked.</li>
+  <li>The customer may not have been called yet.</li>
+  <li>A naming prompt, travel prompt or story interaction may still be waiting.</li>
+  <li>You may be holding the wrong item; press <strong>G</strong> to empty your hands.</li>
+</ul>
+
+If you cannot progress, stop working from memory and read the quest log.
+
+<h2 id="which-guide-next">
+  Which guide should you open next?
+</h2>
+
+<GuideTable
+caption="Where to go next if a mission blocks you."
+columns={missionLinkColumns}
+rows={missionLinkRows}
+/>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <Link href="/cheap-car-repair/daddys-little-girl-mission/">
+      Daddy's Little Girl Mission Walkthrough
+    </Link>
+  </li>
+  <li>
+    <Link href="/cheap-car-repair/shocked-driver-mission/">
+      Shocked Driver Mission Walkthrough
+    </Link>
+  </li>
+  <li>
+    <Link href="/cheap-car-repair/controls-drop-items-save-tools/">
+      Controls, Drop Items, Save and Tools Guide
+    </Link>
+  </li>
+  <li>
+    <Link href="/cheap-car-repair/how-to-make-money/">
+      How to Make Money in Cheap Car Repair
+    </Link>
+  </li>
+  <li>
+    <Link href="/cheap-car-repair/cars-parts-guide/">
+      Cars and Parts Guide
+    </Link>
+  </li>
+</ul>
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is this a complete Cheap Car Repair missions list?
+
+Not yet. This is a work-in-progress walkthrough for confirmed early story missions and major early jobs. More missions should be added as they are verified.
+
+### What is the first mission in Cheap Car Repair?
+
+The first major job is Sebastian's Solonez. You remove rust, paint the vehicle green, polish the fresh paint and call the customer.
+
+### How do I restore power?
+
+Go to the neighbor's electrical box, open it, read the four-wire diagram and click the wires in the shown order. If it does not work, step back and retry the sequence.
+
+### What do I do if the electrical box wire sequence does not work? 
+
+Step back from the box, open the panel again and read the four-wire diagram before clicking anything. Click the wires in the exact order shown by the diagram in your current build. If you clicked too early or missed a wire, reset your position and retry the sequence.
+
+### What is Apple of My Eye?
+
+Apple of My Eye is the early mission where you fix your own car. It teaches you to care more about your own car than cheap customer cars.
+
+### What is Applied Signology?
+
+Applied Signology is the shop sign mission. Find the sign parts near the gate, place them in the marked spots, name your shop and paint the sign.
+
+### How do I build the shop sign?
+
+Pick up the broken sign pieces near the shop entrance or gate, place them in the marked positions, use the shop name prompt and spray-paint the sign when the objective changes.
+
+### How do I unlock more customers?
+
+Build and paint the shop sign during Applied Signology, then continue the early story until regular driveway clients start appearing. Once the garage loop opens, clients can come to your driveway for repeat cash jobs.
+
+### What is the first hard mission?
+
+Daddy's Little Girl is the first big stuck point because it combines fluids, battery work, rear-left tire replacement and rear engine air intake work.
+
+### Why is Daddy's Little Girl stuck?
+
+The usual problem is the air intake pipe. Reinstall the pipe first, then use pliers to secure the clips before calling Angelica.
+
+### What does RL mean?
+
+RL means rear left. For Daddy's Little Girl, replace the rear-left tire.
+
+### Who is Christopher Kingman?
+
+Christopher Kingman is a dangerous early story customer. His job introduces washing, putty, oil, fuel filter and alternator work, and sloppy work can cause trouble.
+
+### What happens after Kingman gets angry?
+
+Kingman can trigger a story consequence if his car fails after leaving your garage. Follow the new objective list; it is a forced story sequence, not a permanent softlock.
+
+### When do regular clients start coming?
+
+After the early story opens the garage loop, clients begin coming to your driveway. You can serve them for cash or let them wait while you do other tasks.
+
+### Is the scrapyard important?
+
+Yes. The scrapyard and nearby part sources become important once jobs ask for more replacement parts.
+
+### What is Shocked Driver?
+
+Shocked Driver is a larger early repair job with cleaning, dents, paint, tires, rims, pulleys and missing parts. Use the dedicated walkthrough if you need the full step order.
+
+### What should I do if a mission will not finish?
+
+Open the quest log and look for unchecked lines. If that does not solve it, make sure the quest is tracked, the customer has been called and no story prompt is still waiting.
