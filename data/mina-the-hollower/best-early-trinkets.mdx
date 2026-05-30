@@ -1,0 +1,779 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const priorityColumns = [
+{ key: "Your Problem", label: "Your Problem" },
+{ key: "Best Trinket", label: "Best Trinket" },
+{ key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const priorityRows = [
+{
+"Your Problem": "You keep dying in bosses or long rooms",
+"Best Trinket": "Proto Spark",
+"Why It Helps": "It saves Mina from death once, which is the strongest early safety effect after Queensbury Crypt.",
+},
+{
+"Your Problem": "You run out of healing too quickly",
+"Best Trinket": "Primed Vial Pouch",
+"Why It Helps": "It lets Mina carry 2 extra Plasma Vials and makes vial use restore some health.",
+},
+{
+"Your Problem": "Terrain keeps slowing you down",
+"Best Trinket": "Steady Soles",
+"Why It Helps": "It helps with water, grass, stairs, ice and knockback-heavy routes.",
+},
+{
+"Your Problem": "Deaths are costing too many Bones",
+"Best Trinket": "Bell of Grace",
+"Why It Helps": "It can protect Spark or reduce Bone loss, which matters if you keep dying with loose Bones.",
+},
+{
+"Your Problem": "You want more damage and rarely miss",
+"Best Trinket": "Chain Capacitor",
+"Why It Helps": "It rewards clean consecutive hits, but loses value if you whiff often.",
+},
+{
+"Your Problem": "Healing keeps getting interrupted",
+"Best Trinket": "Plasma Funnel",
+"Why It Helps": "It lets Mina drink Plasma Vials faster and prevents losing vials when hit.",
+},
+];
+
+export const slotColumns = [
+{ key: "Question", label: "Question" },
+{ key: "Answer", label: "Answer" },
+];
+
+export const slotRows = [
+{
+Question: "How many trinkets can you equip early?",
+Answer: "You start limited, so treat your first slot as a survival slot instead of a damage slot.",
+},
+{
+Question: "How do you equip more trinkets?",
+Answer: "Look for Trinket Bags. These increase how many trinkets Mina can equip at the same time.",
+},
+{
+Question: "What is an early Trinket Bag source?",
+Answer: "After Queensbury Crypt, watch for Maxi when entering Ossex from the right side. Beating that fight rewards a Trinket Bag.",
+},
+{
+Question: "What should your first slot usually hold?",
+Answer: "Before Proto Spark, use Primed Vial Pouch or Steady Soles depending on the route. After Proto Spark, it becomes your safest default.",
+},
+];
+
+export const protoSparkColumns = [
+{ key: "Step", label: "Step" },
+{ key: "What To Do", label: "What To Do" },
+];
+
+export const protoSparkRows = [
+{
+Step: "1",
+"What To Do": "Go to Queensbury Crypt, the northeast generator route after Ossex.",
+},
+{
+Step: "2",
+"What To Do": "Progress until you reach the red-carpet room before the Ancestral Chamber.",
+},
+{
+Step: "3",
+"What To Do": "Take the left path instead of rushing north.",
+},
+{
+Step: "4",
+"What To Do": "Spend two vials on the barrier to open the side route.",
+},
+{
+Step: "5",
+"What To Do": "Find the Duke, then escort him to the room after the boss to receive Proto Spark.",
+},
+];
+
+export const freyColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Bell of Grace Route", label: "Bell of Grace Route" },
+];
+
+export const freyRows = [
+{
+Step: "1",
+"Bell of Grace Route": "Enter the station underside on the west side of Ossex and meet Frey.",
+},
+{
+Step: "2",
+"Bell of Grace Route": "After leaving, watch for Frey around the west-side streets of Ossex when he tries to steal your Bones.",
+},
+{
+Step: "3",
+"Bell of Grace Route": "Hit him before he reaches you. Repeat the encounter until he retreats back under the station.",
+},
+{
+Step: "4",
+"Bell of Grace Route": "Return to the station underside and pay 1,000 Bones.",
+},
+{
+Step: "5",
+"Bell of Grace Route": "Claim Bell of Grace and equip it if Bone loss is your biggest early problem.",
+},
+];
+
+export const loadoutColumns = [
+{ key: "Situation", label: "Situation" },
+{ key: "Recommended Trinket", label: "Recommended Trinket" },
+{ key: "Why", label: "Why" },
+];
+
+export const loadoutRows = [
+{
+Situation: "Before your first Queensbury Crypt boss",
+"Recommended Trinket": "Primed Vial Pouch",
+Why: "Proto Spark is tied to the Duke route after the boss, so extra vials are the safer pre-boss choice.",
+},
+{
+Situation: "Queensbury Crypt with annoying terrain or knockback",
+"Recommended Trinket": "Steady Soles",
+Why: "Cleaner movement prevents damage before you even need to heal.",
+},
+{
+Situation: "After getting Proto Spark",
+"Recommended Trinket": "Proto Spark",
+Why: "One saved death is usually better than a small damage bonus.",
+},
+{
+Situation: "If you have a second trinket slot",
+"Recommended Trinket": "Proto Spark + Primed Vial Pouch",
+Why: "This gives you both a death save and more healing room.",
+},
+{
+Situation: "If deaths are costing too many Bones",
+"Recommended Trinket": "Bell of Grace",
+Why: "Use it when resource loss is slowing your upgrades more than enemy damage is.",
+},
+];
+
+export const referenceColumns = [
+{ key: "Trinket", label: "Trinket" },
+{ key: "Key Requirement", label: "Key Requirement" },
+{ key: "Delay It If...", label: "Delay It If..." },
+];
+
+export const referenceRows = [
+{
+Trinket: "Proto Spark",
+"Key Requirement": "Queensbury Crypt, two vials for the side barrier, Duke escort.",
+"Delay It If...": "You cannot survive the crypt route yet. Upgrade Attack, Defense or healing first.",
+},
+{
+Trinket: "Primed Vial Pouch",
+"Key Requirement": "Ossex main gate route, beam guards, roof burrow entry, bottom-left stairs inside.",
+"Delay It If...": "The guards are killing you before you reach the roof entry.",
+},
+{
+Trinket: "Steady Soles",
+"Key Requirement": "Eastern Ossex route, stairs, balcony, attic burrow path.",
+"Delay It If...": "You are not entering terrain-heavy routes yet.",
+},
+{
+Trinket: "Bell of Grace",
+"Key Requirement": "Frey route on the west side of Ossex and 1,000 Bones.",
+"Delay It If...": "You still need the Isle Map or basic Attack / Defense upgrades.",
+},
+{
+Trinket: "Chain Capacitor",
+"Key Requirement": "Key for the grass-surrounded building and a 30-second car-smashing challenge.",
+"Delay It If...": "You keep missing attacks or cannot clear the timer.",
+},
+{
+Trinket: "Plasma Funnel",
+"Key Requirement": "Reach the trinket shop and afford the purchase.",
+"Delay It If...": "Healing interruption is not your main problem yet.",
+},
+];
+
+export const shopColumns = [
+{ key: "Shop Trinket", label: "Shop Trinket" },
+{ key: "Effect", label: "Effect" },
+{ key: "Should You Buy It Early?", label: "Should You Buy It Early?" },
+];
+
+export const shopRows = [
+{
+"Shop Trinket": "Plasma Funnel",
+Effect: "Drink Plasma Vials twice as fast and do not lose Plasma Vials when hit.",
+"Should You Buy It Early?": "Yes, if interrupted healing is getting you killed.",
+},
+{
+"Shop Trinket": "Seismic Belt",
+Effect: "Press the attack button while burrowing to emit a damaging pulse.",
+"Should You Buy It Early?": "Optional. Buy it if you like burrow-based combat, but survival trinkets usually matter more first.",
+},
+];
+
+export const nextColumns = [
+{ key: "Next Trinket Type", label: "Next Trinket Type" },
+{ key: "Why To Watch For It", label: "Why To Watch For It" },
+];
+
+export const nextRows = [
+{
+"Next Trinket Type": "Pit Preserver",
+"Why To Watch For It": "Look for pit-protection utility once holes and falling hazards become more common.",
+},
+{
+"Next Trinket Type": "Spike Spurs",
+"Why To Watch For It": "A good mid-game target when spike damage or spike knockback starts blocking exploration.",
+},
+{
+"Next Trinket Type": "Uranium Bracelet",
+"Why To Watch For It": "A high-risk damage option for players who want to hit harder and can survive the drawback.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Trying to collect every trinket before the first dungeon.",
+"Better Choice": "Grab the trinket that solves your current problem, then keep progressing.",
+},
+{
+Mistake: "Missing Proto Spark because the Queensbury Crypt side path looks optional.",
+"Better Choice": "In the red-carpet room before the Ancestral Chamber, take the left path and finish the Duke route.",
+},
+{
+Mistake: "Using Chain Capacitor when you keep missing.",
+"Better Choice": "Use a survival or movement trinket until your combat rhythm improves.",
+},
+{
+Mistake: "Ignoring Trinket Bags.",
+"Better Choice": "More slots change your build completely. Once you can equip two trinkets, survival combinations become much stronger.",
+},
+{
+Mistake: "Spending 1,000 Bones on Bell of Grace before buying the Isle Map.",
+"Better Choice": "Buy the Isle Map and core upgrades first unless repeated deaths are already costing more than the Bell.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The best early trinket in **Mina the Hollower** is **Proto Spark**, found through the Duke route in **Queensbury Crypt**. It saves Mina from death once, which makes it the strongest early safety pick after you clear that route.
+
+Before you get Proto Spark, use **Primed Vial Pouch** if you need more healing or **Steady Soles** if terrain and knockback are causing problems.
+
+You start with limited trinket slots, so your early choice matters. Look for **Trinket Bags** to equip more than one trinket, then use the boss loadout section below to decide your safest setup.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: May 2026 launch build. This guide focuses on early trinkets that help during the first major routes after Ossex and Queensbury Crypt.
+</div>
+
+<h2 id="best-early-trinkets">
+  Best early trinkets by problem
+</h2>
+
+Do not pick early trinkets by raw power alone. Pick the trinket that fixes what is currently making your run worse: dying, running out of heals, losing Bones, moving badly through terrain or missing damage windows.
+
+<GuideTable
+caption="Best early Mina the Hollower trinkets by player problem."
+columns={priorityColumns}
+rows={priorityRows}
+/>
+
+For most players, the early priority is simple: get through **Queensbury Crypt**, secure **Proto Spark**, then build around survival until you have more trinket slots.
+
+<div className="my-4">
+  <Link href="/mina-the-hollower">
+    New to Mina the Hollower? Start with the Beginner Guide first
+  </Link>
+</div>
+
+<h2 id="trinket-slots">
+  How trinket slots work early
+</h2>
+
+Before chasing every trinket, remember one important thing: you cannot equip everything at once. Early on, your trinket choice matters because your available slots are limited.
+
+<GuideTable
+caption="Trinket slots and Trinket Bags."
+columns={slotColumns}
+rows={slotRows}
+/>
+
+If you only have one slot, use it for the problem you are facing right now. If you are going into a dangerous route, use survival. If terrain is the problem, use movement. If you already have a second slot, start combining safety effects instead of swapping constantly.
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-underlab-rest-point.webp"
+    alt="Mina the Hollower Underlab rest point where Mina can change equipment and plan routes."
+    width={610}
+    height={436}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Change trinkets before the route, not after you are already dying in it. The Underlab is your planning stop.
+  </figcaption>
+</figure>
+
+<h2 id="proto-spark">
+  Proto Spark — found in Queensbury Crypt
+</h2>
+
+**Proto Spark** is the best early trinket because it saves Mina from death once. You get it through the Duke route in **Queensbury Crypt**, the northeast generator route that is worth doing early.
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-proto-spark-duke.webp"
+    alt="Mina the Hollower Proto Spark trinket reward from the Duke in Queensbury Crypt."
+    width={456}
+    height={342}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Proto Spark is not just a comfort pick. It turns one fatal mistake into a second chance.
+  </figcaption>
+</figure>
+
+The route branches near the end of Queensbury Crypt, so it is easy to miss if you rush toward the boss.
+
+<GuideTable
+caption="How to get Proto Spark in Queensbury Crypt."
+columns={protoSparkColumns}
+rows={protoSparkRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-crypt-red-carpet-room-marked.webp"
+    alt="Mina the Hollower Queensbury Crypt red-carpet room marked with the left path toward the Duke and Proto Spark."
+    width={651}
+    height={384}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The red carpet pulls your eye north. The reward route is left.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-proto-spark-vial-barrier.webp"
+    alt="Mina the Hollower two-vial barrier on the Queensbury Crypt side path toward Proto Spark."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Keep two vials available for this barrier. If you spent them all healing, refill before committing to the side route.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-duke-escort-route.webp"
+    alt="Mina the Hollower Duke escort route inside Queensbury Crypt."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Duke route pays off after the boss. Do not leave Queensbury Crypt before finishing the escort.
+  </figcaption>
+</figure>
+
+<div className="my-4">
+  <Link href="/mina-the-hollower/where-to-go-first">
+    Read the Where to Go First guide
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="boss-loadouts">
+  Early boss and route loadouts
+</h2>
+
+Proto Spark is the best early safety trinket, but you may not have it before your first Queensbury Crypt boss attempt. Use your available slot based on the fight in front of you.
+
+<GuideTable
+caption="Early trinket loadouts by situation."
+columns={loadoutColumns}
+rows={loadoutRows}
+/>
+
+The safest general rule is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Before Proto Spark:</strong> use Primed Vial Pouch if healing is tight.</li>
+  <li><strong>After Proto Spark:</strong> make it your default danger-route trinket.</li>
+  <li><strong>With two slots:</strong> pair Proto Spark with Primed Vial Pouch for a very safe early setup.</li>
+  <li><strong>If terrain is killing you:</strong> swap in Steady Soles instead of forcing a damage trinket.</li>
+</ul>
+
+<h2 id="primed-vial-pouch">
+  Primed Vial Pouch gives you more healing room
+</h2>
+
+Use **Primed Vial Pouch** when your biggest problem is running out of healing before the route is done. It lets Mina carry **2 extra Plasma Vials**, and using vials always restores some health.
+
+To get it, head left outside the main gate of **Ossex**. Get past the two guards shooting beams, then go down and to the right. Burrow into the marked roof spot to enter the building below. From there, take the bottom-left stairs inside and claim the reward.
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-primed-vial-pouch-route-marked.webp"
+    alt="Mina the Hollower marked route to the Primed Vial Pouch from the Ossex gate through the beam guards and roof burrow entry."
+    width={1204}
+    height={270}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The route is short, but the beam guards can punish sloppy movement. If you arrive low on health, back out and refill before going inside.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-primed-vial-pouch-reward.webp"
+    alt="Mina the Hollower Primed Vial Pouch trinket reward."
+    width={907}
+    height={600}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+  The reward confirms the two key effects: 2 extra Plasma Vials and a small heal whenever Mina uses a vial.
+  </figcaption>
+</figure>
+
+The extra vials also help with vial barriers, so Primed Vial Pouch is useful outside combat too. You can replace it later when your vial count improves, but early on it is one of the most reliable comfort picks.
+
+<h2 id="steady-soles">
+  Steady Soles makes bad terrain easier
+</h2>
+
+Use **Steady Soles** when the environment is causing more damage than the enemies. It helps with movement penalties on rough terrain and helps resist knockback.
+
+To get Steady Soles, start from the checkpoint near the eastern side of **Ossex**. Go up the stairs, head left onto the balcony route, then burrow through the rightmost attic opening. Work across the attic, check the Bone Stone chest while you are inside, then exit through the top-left stairs to reach the reward.
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Start from the checkpoint near the eastern exit of Ossex.</li>
+  <li>Take the stairs up, then head left toward the balcony.</li>
+  <li>Burrow through the rightmost opening to enter the attic.</li>
+  <li>Cross the attic route and grab the Bone Stone chest if you want the extra value.</li>
+  <li>Exit through the top-left stairs and collect Steady Soles.</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-steady-soles-stairs-route.webp"
+    alt="Mina the Hollower route toward Steady Soles from the stairs near the eastern exit of Ossex."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start from the eastern side of Ossex. This is a quick detour before you commit to rougher routes.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-steady-soles-attic-entry.webp"
+    alt="Mina the Hollower attic entry route toward Steady Soles."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Burrow through the attic opening instead of leaving the balcony route too early. There is also a Bone Stone chest inside.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-steady-soles-reward.webp"
+    alt="Mina the Hollower Steady Soles trinket reward."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Equip Steady Soles before terrain-heavy routes, not after you are already frustrated by them.
+  </figcaption>
+</figure>
+
+Do not judge this trinket by damage. Cleaner movement often prevents more damage than a small attack boost would add.
+
+<h2 id="bell-of-grace">
+  Bell of Grace helps if deaths are draining your Bones
+</h2>
+
+Use **Bell of Grace** if repeated deaths are costing you too many Bones. It is a resource-protection trinket, not a first-choice damage or boss trinket.
+
+The important question is whether you should spend **1,000 Bones** on it now. If you still need the Isle Map or basic upgrades, buy those first. If Bone loss is already slowing your progress, Bell of Grace becomes much more attractive.
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-frey-bell-of-grace.webp"
+    alt="Mina the Hollower Frey side route connected to the Bell of Grace trinket."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Frey is tied to the station underside west of Ossex. This is a Bone-protection route, not a pure combat upgrade.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="How to get Bell of Grace."
+columns={freyColumns}
+rows={freyRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-bell-of-grace-reward.webp"
+    alt="Mina the Hollower Bell of Grace trinket reward from Frey."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If you are debating this purchase, check how often deaths are actually costing you Bones. If the answer is “constantly,” Bell of Grace is worth considering.
+  </figcaption>
+</figure>
+
+<div className="my-4">
+  <Link href="/mina-the-hollower/bones-farming">
+    If Bone loss is your problem, read the Bones Farming guide before spending 1,000 Bones
+  </Link>
+</div>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="chain-capacitor">
+  Chain Capacitor is for confident attackers
+</h2>
+
+Use **Chain Capacitor** when you can land hits consistently. It boosts damage for consecutive hits, but if you keep missing, you lose the value that makes it good.
+
+To get it, leave Ossex from the east, go one screen north, then use a key on the building surrounded by grass.
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-chain-capacitor-building.webp"
+    alt="Mina the Hollower building route toward Chain Capacitor."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bring a key before walking here. Without one, this detour wastes time.
+  </figcaption>
+</figure>
+
+Inside, you need to finish a **30-second car-smashing challenge**.
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-chain-capacitor-car-minigame.webp"
+    alt="Mina the Hollower car-smashing challenge for Chain Capacitor."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The challenge is a timer check. If you keep barely missing it, get an Attack upgrade and come back.
+  </figcaption>
+</figure>
+
+Use these tips:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use the weapon you control best, not the one that looks strongest on paper.</li>
+  <li>Stay close to the target so you are not wasting seconds walking back into range.</li>
+  <li>If the timer feels too strict, leave and return after an Attack upgrade.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-chain-capacitor-reward.webp"
+    alt="Mina the Hollower Chain Capacitor trinket reward."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Chain Capacitor is a win-more trinket early. Use it when you are already landing clean hits.
+  </figcaption>
+</figure>
+
+<h2 id="plasma-funnel-and-shop-trinkets">
+  Plasma Funnel and other early shop trinkets
+</h2>
+
+Some trinkets come from side routes, while others come from shops. Do not buy shop trinkets just because they are available. Buy them when their effect solves a real problem.
+
+<GuideTable
+caption="Early shop trinkets to consider."
+columns={shopColumns}
+rows={shopRows}
+/>
+
+**Plasma Funnel** is the better early shop buy for most players because it directly helps with healing.
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-plasma-funnel-shop.webp"
+    alt="Mina the Hollower Plasma Funnel trinket in the trinket shop."
+    width={1140}
+    height={417}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Buy this when healing gets interrupted often. If healing is fine, save the Bones.
+  </figcaption>
+</figure>
+
+**Seismic Belt** is more of a playstyle pick. It lets Mina emit a damaging pulse while burrowing, which can be useful if you already like using burrow aggressively.
+
+<figure className="my-8">
+  <Image
+    src="/images/mina-the-hollower/mina-the-hollower-seismic-belt-shop.webp"
+    alt="Mina the Hollower Seismic Belt trinket in the trinket shop."
+    width={1140}
+    height={417}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Seismic Belt is fun for burrow pressure, but it is not more urgent than staying alive.
+  </figcaption>
+</figure>
+
+<h2 id="quick-reference">
+  Early trinket requirements quick reference
+</h2>
+
+Use this table as a quick check before you chase a trinket. It focuses on requirements, not another repeat of the route.
+
+<GuideTable
+caption="Early trinket requirements and when to delay them."
+columns={referenceColumns}
+rows={referenceRows}
+/>
+
+This is the practical route order for most players:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Buy the Isle Map.</li>
+  <li>Head toward Queensbury Crypt.</li>
+  <li>Use Primed Vial Pouch or Steady Soles before Proto Spark if needed.</li>
+  <li>Get Proto Spark from the Duke route in Queensbury Crypt.</li>
+  <li>Look for a Trinket Bag so you can run stronger combinations.</li>
+  <li>Use Bell of Grace only if Bone loss is slowing your progress.</li>
+  <li>Pick up Chain Capacitor or Plasma Funnel when your build needs damage or safer healing.</li>
+</ol>
+
+<h2 id="what-next">
+  When you are done with early trinkets
+</h2>
+
+After Proto Spark, Primed Vial Pouch and Steady Soles stop solving your immediate problems, start watching for trinkets that handle hazards or stronger build tradeoffs.
+
+<GuideTable
+caption="Early-to-mid trinkets to watch for next."
+columns={nextColumns}
+rows={nextRows}
+/>
+
+Do not turn this page into an all-trinkets checklist. Once you are actively hunting every trinket, use a full trinket locations guide instead.
+
+<div className="my-4">
+  <Link href="/mina-the-hollower/all-trinkets">
+    Coming next: All Trinket Locations in Mina the Hollower
+  </Link>
+</div>
+
+<h2 id="common-mistakes">
+  Common early trinket mistakes
+</h2>
+
+<GuideTable
+caption="Early trinket mistakes to avoid."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+The right trinket is not always the highest-damage trinket. Early in Mina the Hollower, survival and route comfort usually matter more than perfect damage.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best early trinket in Mina the Hollower?
+
+The best early trinket is Proto Spark because it saves Mina from death once. You get it through the Duke route in Queensbury Crypt.
+
+### Where is Proto Spark?
+
+Proto Spark is in Queensbury Crypt. Take the left path in the red-carpet room before the Ancestral Chamber, spend two vials on the barrier, find the Duke and finish his escort route.
+
+### Can I use Proto Spark before the first Queensbury Crypt boss?
+
+No, unless you fully explore the crypt side route before triggering the boss. The Duke escort pays off after the boss room, so for most players Proto Spark becomes available on the way out of Queensbury Crypt, not before the first boss attempt.
+
+### How do I equip more than one trinket?
+
+You need Trinket Bags to increase how many trinkets Mina can equip. One early Trinket Bag comes from beating Maxi after Queensbury Crypt.
+
+### What should I equip if I only have one trinket slot?
+
+Before Proto Spark, use Primed Vial Pouch if healing is your problem or Steady Soles if terrain is the problem. After Proto Spark, use Proto Spark for dangerous routes.
+
+### Is Primed Vial Pouch worth it?
+
+Yes. Primed Vial Pouch is one of the best early survival trinkets because it gives Mina 2 extra Plasma Vials and makes vial use restore some health.
+
+### How do I get Primed Vial Pouch?
+
+From the main gate of Ossex, head left, get past the two beam guards, then go down and right. Burrow into the marked roof spot, enter the building below and take the bottom-left stairs to the reward.
+
+### What does Steady Soles do?
+
+Steady Soles helps with movement on difficult terrain like water, grass, stairs and ice, while also helping resist knockback.
+
+### Is Bell of Grace worth 1,000 Bones?
+
+Bell of Grace is worth it if deaths are costing you too many Bones. If you still need the Isle Map or core upgrades, buy those first.
+
+### How do I get Bell of Grace?
+
+Start at the station underside west of Ossex, meet Frey, stop him when he later tries to steal your Bones, then return and pay 1,000 Bones to receive Bell of Grace.
+
+### Is Chain Capacitor good?
+
+Chain Capacitor is good if you can land consecutive hits without missing. It is weaker if you are still learning enemy movement and whiff often.
+
+### How do I beat the Chain Capacitor car challenge?
+
+Use the weapon you control best, stay close to the target and come back after an Attack upgrade if the timer feels too strict.
+
+### Should I buy Plasma Funnel early?
+
+Buy Plasma Funnel early if healing keeps getting interrupted. It lets Mina drink Plasma Vials faster and prevents losing vials when hit.
+
+### Is Seismic Belt worth buying early?
+
+Seismic Belt is optional. It is useful if you like burrow attacks, but most beginners should prioritize Proto Spark, Primed Vial Pouch or Plasma Funnel first.
+
+### What trinkets should I look for after the early game?
+
+After the early survival picks, watch for hazard and build trinkets such as Pit Preserver, Spike Spurs and Uranium Bracelet, then move into a full trinket locations guide.

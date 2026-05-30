@@ -12,6 +12,55 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+
+// ===== Mina the Hollower =====
+{
+  href: "/mina-the-hollower",
+  game: "Mina the Hollower",
+  title: "Beginner Guide & Walkthrough",
+  description:
+    "Start after Ossex with the Isle Map, route order, Bones, upgrades, weapons, trinkets, fast travel, and early beginner tips.",
+  tagClass: "text-purple-500",
+  hoverBorderClass: "hover:border-purple-300",
+  hoverTitleClass: "group-hover:text-purple-700",
+},
+
+// ===== Mina the Hollower =====
+{
+  href: "/mina-the-hollower/where-to-go-first",
+  game: "Mina the Hollower",
+  title: "Where to Go First & Dungeon Order",
+  description:
+    "Follow the best route after Ossex: Isle Map first, then Queensbury Crypt, Nox's Bayou, Septemburg, Sandfalls, Bone Beach, and Astral Orrery.",
+  tagClass: "text-purple-500",
+  hoverBorderClass: "hover:border-purple-300",
+  hoverTitleClass: "group-hover:text-purple-700",
+},
+
+// ===== Mina the Hollower =====
+{
+  href: "/mina-the-hollower/how-to-get-map",
+  game: "Mina the Hollower",
+  title: "Isle Map, Rhene & Drillhardt Guide",
+  description:
+    "Enter the Hollower's Guild, rescue Rhene from the Rebel Barracks, dig out Drillhardt, buy the Isle Map, and learn what the Enhanced Map does.",
+  tagClass: "text-purple-500",
+  hoverBorderClass: "hover:border-purple-300",
+  hoverTitleClass: "group-hover:text-purple-700",
+},
+
+// ===== Mina the Hollower =====
+{
+  href: "/mina-the-hollower/bones-farming",
+  game: "Mina the Hollower",
+  title: "Bones Farming & Bone Stones Guide",
+  description:
+    "Get safe Bone Stones, farm early Bones, unlock Elizabeth's Deboning Wand, pair it with Stolenoid, and use Mourner's Mile for bigger gains.",
+  tagClass: "text-purple-500",
+  hoverBorderClass: "hover:border-purple-300",
+  hoverTitleClass: "group-hover:text-purple-700",
+},
+
 // ===== Cheap Car Repair =====
 {
   href: "/cheap-car-repair",
@@ -47,6 +96,7 @@ export type LatestUpdateItem = {
   hoverBorderClass: "hover:border-orange-300",
   hoverTitleClass: "group-hover:text-orange-700",
   },
+  
   
   // ===== Cheap Car Repair =====
   {
