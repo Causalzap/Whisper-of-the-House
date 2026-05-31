@@ -43,6 +43,10 @@ const toc = [
 ];
 
 const relatedLinks = [
+    {
+        href: "/mina-the-hollower/all-trinkets-guide",
+        label: "All Trinkets Guide",
+      },
 { href: "/mina-the-hollower", label: "Mina the Hollower Beginner Guide" },
 {
 href: "/mina-the-hollower/where-to-go-first",
