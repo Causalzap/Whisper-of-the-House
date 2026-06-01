@@ -1,0 +1,484 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const upgradeColumns = [
+  { key: "Upgrade", label: "Upgrade" },
+  { key: "Why It Matters", label: "Why It Matters In Loch Ness" },
+  { key: "Priority", label: "Priority" },
+];
+
+export const upgradeRows = [
+  {
+    Upgrade: "Rod / line distance",
+    "Why It Matters": "Gates every hidden route, switch, artifact and the Beithir spawn depth. Nothing else matters until you can reach deeper water.",
+    Priority: "First",
+  },
+  {
+    Upgrade: "Bucket",
+    "Why It Matters": "More fish per trip means fewer returns and faster customer progress.",
+    Priority: "Second",
+  },
+  {
+    Upgrade: "Hook damage",
+    "Why It Matters": "Needed for larger fish and for the Beithir legendary fish attempt.",
+    Priority: "Third",
+  },
+  {
+    Upgrade: "Knife",
+    "Why It Matters": "Makes large fish and long prep phases significantly faster and cleaner.",
+    Priority: "High for cleanup",
+  },
+  {
+    Upgrade: "Repellent",
+    "Why It Matters": "Stops small fish from filling your bag on secret-hunting or Beithir runs.",
+    Priority: "Situational",
+  },
+];
+
+export const customerColumns = [
+  { key: "Customer", label: "Customer" },
+  { key: "Hint", label: "Their Hint" },
+  { key: "Favourite", label: "Favourite Fish" },
+  { key: "Notes", label: "Notes" },
+];
+
+export const customerRows = [
+  {
+    Customer: "Otter",
+    Hint: "Anything goes.",
+    Favourite: "Any fish",
+    Notes: "The easiest customer in Loch Ness. Use Otter to clear leftover small fish without wasting valuable catches.",
+  },
+  {
+    Customer: "Heron",
+    Hint: "Prefers larger fish.",
+    Favourite: "Big fish — avoid small fry",
+    Notes: "Heron will visibly react negatively to small fish. Save medium-to-large catches for this customer.",
+  },
+  {
+    Customer: "Kelpie",
+    Hint: "\"The color of hearts are desire\"",
+    Favourite: "Red fish",
+    Notes: "Kelpie has a strong personality and low tolerance for wrong fish. Check the CARP Manual after your first feed.",
+  },
+  {
+    Customer: "Selkie",
+    Hint: "Specific local favorite.",
+    Favourite: "Brown Trout",
+    Notes: "Appears later in the Loch Ness customer rotation.",
+  },
+  {
+    Customer: "Nessie",
+    Hint: "Only the best will do.",
+    Favourite: "Beithir (legendary fish)",
+    Notes: "Nessie is the hardest customer to satisfy. She appears after significant Loch Ness progress and only fully fills on legendary-tier catches. The Beithir is the intended target.",
+  },
+  {
+    Customer: "Other customers",
+    Hint: "Check the CARP Manual.",
+    Favourite: "Varies (e.g., \"funny stripes\", \"plain and simple\", or avoids \"spiny fish\")",
+    Notes: "Loch Ness has 23 total customers. Use the CARP Manual to track each one's liked and disliked fish after your first feed.",
+  },
+];
+
+export const missableColumns = [
+  { key: "You Are Stuck At", label: "You Are Stuck At" },
+  { key: "Most Likely Cause", label: "Most Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const missableRows = [
+  {
+    "You Are Stuck At": "22/23 customers",
+    "Most Likely Cause": "You left Loch Ness after unlocking the next location without finishing every customer.",
+    Fix: "Return and keep cycling customers. Some customers appear only after others are fed, so keep fishing and serving until 23/23 shows.",
+  },
+  {
+    "You Are Stuck At": "6/7 treasures",
+    "Most Likely Cause": "The last treasure is behind a switch route, hidden grass or a deep-access path you have not reached yet.",
+    Fix: "Stop money fishing. Make exploration-only runs: clear every bush, check every switch branch and use line reels to reach any pockets you skipped.",
+  },
+  {
+    "You Are Stuck At": "Missing a fish in CARP Manual",
+    "Most Likely Cause": "The fish is depth-gated. Your line does not reach its spawn layer yet.",
+    Fix: "Upgrade rod distance, then make a clean exploration run to the layer you have not fully covered.",
+  },
+  {
+    "You Are Stuck At": "Missing an artifact",
+    "Most Likely Cause": "Artifacts are not always on the main fishing path — some are behind grass, in corners or off switch-opened side routes.",
+    Fix: "Clear every suspicious bush and corner. After hitting any switch, sweep the newly opened branches before moving on.",
+  },
+  {
+    "You Are Stuck At": "Missing a message",
+    "Most Likely Cause": "Messages in bottles are easy to ignore when you are focused on fish or customers.",
+    Fix: "Make a dedicated bottle run with repellent equipped so small fish do not interrupt the route.",
+  },
+  {
+    "You Are Stuck At": "Cannot find Beithir",
+    "Most Likely Cause": "Beithir requires deep line access and is rare. Weak hook damage makes the fight too slow to finish.",
+    Fix: "Upgrade rod to reach deep water, upgrade hook damage, then make a dedicated run without filling your bag first.",
+  },
+];
+
+export const beithirColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "What Beithir Does", label: "What Beithir Does" },
+  { key: "How To Handle It", label: "How To Handle It" },
+];
+
+export const beithirRows = [
+  {
+    Phase: "Finding Beithir",
+    "What Beithir Does": "Beithir is a rare deep-water serpent. It does not spawn on shallow routes.",
+    "How To Handle It": "You need maximum rod distance to reach the depth layer where Beithir spawns. If you have not seen it yet, upgrade line first.",
+  },
+  {
+    Phase: "Movement",
+    "What Beithir Does": "Beithir is large and moves in wide arcs. It is significantly harder to keep pressure on than normal fish.",
+    "How To Handle It": "Position your hook ahead of its movement path instead of chasing every turn after it changes direction.",
+  },
+  {
+    Phase: "Damage",
+    "What Beithir Does": "Beithir has high HP compared to every other Loch Ness fish. Weak hook damage makes the fight take too long.",
+    "How To Handle It": "Upgrade hook damage before the attempt. If the fight drags on and you run low on line, stop and upgrade before trying again.",
+  },
+  {
+    Phase: "Bag space",
+    "What Beithir Does": "The route to Beithir's depth passes normal fish that can fill your bag before you reach it.",
+    "How To Handle It": "Equip repellent or make a clean Beithir-only run without grabbing random fish on the way down.",
+  },
+  {
+    Phase: "After the catch",
+    "What Beithir Does": "Beithir is large and its prep has a long body to work across.",
+    "How To Handle It": "Pan the camera, work section by section and slow down near fins and head edges. Do not rush — this is the fish Nessie wants.",
+  },
+  {
+    Phase: "Who to feed it to",
+    "What Beithir Does": "Beithir is the highest-value fish in Loch Ness.",
+    "How To Handle It": "Do not waste Beithir on Otter or other low-tier customers. Save it for Nessie — her tip is the largest single payout in the area.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To get **100% in Loch Ness**, reach **23/23 customers** and **7/7 treasures** on the GPS, then fill every entry in the CARP Manual for fish, messages and artifacts.
+
+The safest route is:
+
+**upgrade rod first → upgrade bucket and hook → feed early customers → clear messages, artifacts and chests → hit every switch → catch Beithir → feed Nessie → check GPS before leaving**.
+
+Do not leave when the next location unlocks. That only means you can move on — it does not mean Loch Ness is complete. The most common misses are **the last customer**, **the 7th treasure**, **Beithir**, and **artifacts hidden behind grass or switch routes**.
+
+**Before you leave:** upgrades reset between locations. Spend remaining money on rod, hook and knife before moving to Outer Banks.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: May 2026 full release. This guide covers Loch Ness 100% completion, all customers including Nessie, the Beithir legendary fish, treasures, messages, artifacts, switches, upgrades and what resets when you leave.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-loch-ness-100-complete.webp"
+    alt="Scale the Depths Loch Ness GPS screen showing 23 out of 23 customers and 7 out of 7 treasures."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The GPS screen is your completion check. Loch Ness is not done until both customers and treasures show their full count.
+  </figcaption>
+</figure>
+
+<h2 id="upgrades-first">
+  Upgrade order: what to buy and why
+</h2>
+
+The first thing to get right in Loch Ness is upgrade priority. The wrong order slows everything else down.
+
+<GuideTable
+  caption="Loch Ness upgrade priority order."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+Rod distance comes first because it gates everything else. Hidden routes, artifact pockets, switch branches and the Beithir's spawn depth are all locked behind line reach. Upgrading the knife before the rod leaves you farming shallow cheap fish longer than you need to.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-equipment-shop.webp"
+    alt="Scale the Depths Loch Ness equipment shop with rod, hook, knife, bucket and repellent upgrades."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Buy rod distance first. Every other upgrade compounds on top of the range you unlock.
+  </figcaption>
+</figure>
+
+**Important before you leave Loch Ness:** most upgrades reset when you move to the next location. The game frames this as different waters needing different tools. Spend any remaining money on rod, hook and knife before leaving — you cannot carry currency between areas either.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="customers">
+  All Loch Ness customers and what they want
+</h2>
+
+Loch Ness is complete when the GPS shows **23/23 customers**. The most important thing to know is that different customers want different fish — feeding the wrong catch to the wrong customer wastes your best catches and slows progress.
+
+<GuideTable
+  caption="Loch Ness customers and their fish preferences."
+  columns={customerColumns}
+  rows={customerRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-customer-preferences.webp"
+    alt="Scale the Depths customer preference screen showing liked and disliked fish for a Loch Ness customer."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Liked fish fill the bar faster and earn bigger tips. Check each customer's CARP Manual entry after the first feed so you know what to bring next time.
+  </figcaption>
+</figure>
+
+Three rules that save valuable fish:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use <strong>Otter</strong> to clear any leftover small fish. Otter accepts everything and wastes nothing.</li>
+  <li>Never feed <strong>Beithir</strong> to a low-tier customer. Save it for Nessie — her tip is the largest single payout in Loch Ness.</li>
+  <li>Check the CARP Manual after the first feed with any customer. Their liked and disliked fish are recorded there permanently.</li>
+</ul>
+
+Some customers appear only after others have been fed. If you are stuck at 22/23, keep fishing and cycling the customer queue instead of looking for a hidden trigger.
+
+<h2 id="treasures-secrets">
+  Treasures, messages and artifacts
+</h2>
+
+Loch Ness tracks two types of secrets on the GPS: **treasures** (7/7) and **customers** (23/23). Messages and artifacts are tracked separately in the CARP Manual data list.
+
+If your GPS shows 7/7 treasures but the CARP Manual still has missing entries, you are not done.
+
+Things to look for on exploration runs:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>messages in bottles — often in deep side pockets or off switch-opened branches,</li>
+  <li>research artifacts — can sit behind grass, in corners, or off routes that look unimportant,</li>
+  <li>money chests,</li>
+  <li>boat cosmetics and decoration pickups,</li>
+  <li>line reels that extend your reach to deeper pockets.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-loch-ness-artifact-sputnik.webp"
+    alt="Scale the Depths Loch Ness Sputnik artifact entry in the CARP Manual data list."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Sputnik is one of the Loch Ness artifacts. Artifacts are not always on the main fishing path — clear grass and check corners before assuming you have covered an area.
+  </figcaption>
+</figure>
+
+The key rule for artifact and message cleanup: **stop money fishing and make exploration-only runs**. If you are still catching fish on every trip, you are optimising the wrong thing for 100%.
+
+<h2 id="switches">
+  Switch routes and the golden switch
+</h2>
+
+Switches in Loch Ness are not just shortcut tools. Some open hidden paths that are the only way to reach a specific treasure, artifact or message.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-loch-ness-golden-switch.webp"
+    alt="Scale the Depths Loch Ness hidden golden switch location."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The golden switch is one of the main reasons players finish Loch Ness's story route but still miss 100%. Hit it and sweep the newly opened area before continuing.
+  </figcaption>
+</figure>
+
+After every switch, do not immediately move on. Sweep the newly opened branches first. If the area feels easier to navigate after a switch, you probably unlocked a shortcut that matters for a hidden pickup.
+
+<h2 id="beithir">
+  Where to find Beithir and how to catch it
+</h2>
+
+**Beithir** is the Loch Ness legendary fish. It is a large serpent from Scottish folklore and the highest-value catch in the area. Nessie will not fully fill on anything else.
+
+Beithir spawns only in deep water. You will not see it until your rod has enough distance to reach the lower depth layers. If you have been fishing Loch Ness for a while and have never encountered it, upgrade your rod and go deeper.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-legendary-fish-warning.webp"
+    alt="Scale the Depths legendary fish warning message before the Beithir catch attempt."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Treat the Beithir attempt as a focused run. Go in with strong hook damage, an empty bag and enough line to stay on it.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How Beithir moves and how to catch it."
+  columns={beithirColumns}
+  rows={beithirRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-loch-ness-legendary-fish-caught.webp"
+    alt="Scale the Depths Loch Ness Beithir legendary fish caught and ready for prep."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After catching Beithir, prep it carefully. The fish is long, so pan the camera and work section by section. Do not rush after landing it.
+  </figcaption>
+</figure>
+
+The safest Beithir attempt:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Upgrade rod to maximum distance and hook to a level where you can keep consistent pressure.</li>
+  <li>Equip repellent so shallow fish do not fill your bag on the way down.</li>
+  <li>Reach the deep layer and wait for Beithir — do not grab random fish.</li>
+  <li>Stay ahead of Beithir's arc. Position your hook where it is moving, not where it just was.</li>
+  <li>After the catch, prep slowly. Pan the camera before you start and finish each section before moving to the next.</li>
+  <li>Save the prepped Beithir for Nessie.</li>
+</ol>
+
+<h2 id="nessie">
+  How to feed Nessie
+</h2>
+
+Nessie is the most demanding customer in Loch Ness and appears only after significant area progress. She requires legendary-tier fish to fill her bar meaningfully.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-loch-ness-start.webp"
+    alt="Scale the Depths Loch Ness starting area where Nessie eventually appears as a customer."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Nessie appears after you have built up enough Loch Ness progress. When she shows up, make sure you have a prepped Beithir ready.
+  </figcaption>
+</figure>
+
+What to know about Nessie:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>She does not appear early. Keep feeding other customers and upgrading until she shows up.</li>
+  <li>Normal fish will barely move her bar. Beithir is the intended feed.</li>
+  <li>Her tip when properly fed is the largest single payout in Loch Ness.</li>
+  <li>If you caught Beithir but fed it to another customer by accident, you need another Beithir run.</li>
+</ul>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="troubleshooting">
+  Troubleshooting: what to do when progress is stuck
+</h2>
+
+<GuideTable
+  caption="Loch Ness 100% troubleshooting guide."
+  columns={missableColumns}
+  rows={missableRows}
+/>
+
+The pattern behind most stuck progress is the same: you switched from money fishing to cleanup too late, or you left for the next area before Loch Ness was actually finished.
+
+<h2 id="before-you-leave">
+  Before you leave Loch Ness
+</h2>
+
+Open the GPS and the CARP Manual and confirm:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Customers:</strong> 23/23</li>
+  <li><strong>Treasures:</strong> 7/7</li>
+  <li><strong>Fish:</strong> every Loch Ness fish entry filled in the CARP Manual</li>
+  <li><strong>Messages:</strong> every bottle found</li>
+  <li><strong>Artifacts:</strong> every artifact found, including Sputnik and any others off switch routes</li>
+  <li><strong>Beithir:</strong> caught, prepped and fed to Nessie</li>
+  <li><strong>Upgrades:</strong> rod, hook and knife bought — they reset when you enter Outer Banks</li>
+</ul>
+
+If something is still missing, do not start a money run. Switch to a cleanup run: equip repellent, ignore fish, hit every switch, clear every bush, use line reels, then recheck the GPS count.
+
+<div className="my-4">
+  <Link href="/scale-the-depths/outer-banks-100-percent-guide">
+    Moving on? Read the Outer Banks 100% Guide — upgrades reset when you arrive, so expect a slower start.
+  </Link>
+</div>
+
+<div className="my-4">
+  <Link href="/scale-the-depths/achievement-guide">
+    Finishing the whole game? The Scale the Depths Achievement Guide tracks which items count toward each achievement across all locations.
+  </Link>
+</div>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do if the Loch Ness door or switch does not work?
+
+Hit the switch and then sweep the nearby branches before assuming nothing happened. Some switches open shortcuts or side paths in a different part of the area rather than immediately nearby.
+
+### Where is the Beithir in Loch Ness?
+
+Beithir spawns in deep water. You need maximum rod distance to reach its depth layer. If you have never seen it, upgrade your rod first — the fish is not accessible at shallow depths.
+
+### How do I catch Beithir?
+
+Upgrade hook damage before the attempt, equip repellent to keep your bag clear, reach the deep layer and stay ahead of Beithir's movement arc instead of chasing every turn. The fight takes longer than any normal fish, so do not force it with weak gear.
+
+### How do I feed Nessie?
+
+Nessie appears after enough Loch Ness progress. She needs legendary-tier fish — specifically Beithir — to fill meaningfully. Do not waste Beithir on other customers.
+
+### Why does the next location unlock before Loch Ness is complete?
+
+The next location unlocks after enough main progress, not after 100% cleanup. You can still be missing customers, treasures, fish, messages or artifacts. Return and finish before moving on if you want clean completionist progress.
+
+### How many customers are in Loch Ness?
+
+The GPS shows 23/23 when the customer cleanup is complete.
+
+### How many treasures are in Loch Ness?
+
+The GPS shows 7/7 when the treasure cleanup is complete.
+
+### What upgrades carry over to the next location?
+
+Most upgrades reset when you move to Outer Banks. The game frames this as different waters needing different tools. Spend any remaining Loch Ness money before leaving — you cannot take currency with you either.
+
+### What is the best upgrade to buy first in Loch Ness?
+
+Rod distance. It gates hidden routes, deeper fish, the Beithir spawn layer and most of the secret content. Every other upgrade compounds on top of the reach you unlock.
+
+### Why can I not find the last treasure?
+
+Stop money fishing and make exploration-only runs. Clear every bush, check every switch branch and use line reels to reach any depth pockets you have not fully swept. The last treasure is almost always behind a switch route or hidden grass.
+
+### Should I 100% Loch Ness before going to Outer Banks?
+
+Yes, especially if you want clean achievement progress. Returning later is possible but awkward — and upgrades reset, so you will need to rebuild gear from scratch when you do.

@@ -130,7 +130,8 @@ const allGameGuides = [
   { title: 'Starminer', href: '/starminer'},
   { title: 'Cheap Car Repair', href: '/cheap-car-repair'},
   { title: 'Mina the Hollower', href: '/mina-the-hollower'},
-  
+  { title: 'Scale the Depths', href: '/scale-the-depths'},
+
 ];
 
 const exploreCards = [

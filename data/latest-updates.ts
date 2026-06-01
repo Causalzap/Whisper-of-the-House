@@ -13,6 +13,55 @@ export type LatestUpdateItem = {
   
   export const latestUpdates: LatestUpdateItem[] = [
 
+// ===== Scale the Depths =====
+{
+  href: "/scale-the-depths/loch-ness-100-percent-guide",
+  game: "Scale the Depths",
+  title: "Loch Ness 100% Guide",
+  description:
+  "Finish Loch Ness with 23/23 customers, 7/7 treasures, Beithir, Nessie, Sputnik artifact, golden switch route, upgrades and cleanup checks.",
+  tagClass: "text-cyan-500",
+  hoverBorderClass: "hover:border-cyan-300",
+  hoverTitleClass: "group-hover:text-cyan-700",
+  },
+  
+  // ===== Scale the Depths =====
+  {
+  href: "/scale-the-depths/outer-banks-100-percent-guide",
+  game: "Scale the Depths",
+  title: "Outer Banks 100% Guide",
+  description:
+  "Find 5 messages, 6 artifacts, Compass, Spring, Sonar Receiver, Spanish Doubloon, boat blueprint, blue switches and Lost Dimetrodon.",
+  tagClass: "text-cyan-500",
+  hoverBorderClass: "hover:border-cyan-300",
+  hoverTitleClass: "group-hover:text-cyan-700",
+  },
+  
+  // ===== Scale the Depths =====
+  {
+  href: "/scale-the-depths/huatulco-100-percent-guide",
+  game: "Scale the Depths",
+  title: "Huatulco 100% Guide",
+  description:
+  "Clear Huatulco pressure plate doors, Quetzalcoatl Statue, Shark Tooth, Pouch, boat decal, cosmetics, switches and Hoga.",
+  tagClass: "text-cyan-500",
+  hoverBorderClass: "hover:border-cyan-300",
+  hoverTitleClass: "group-hover:text-cyan-700",
+  },
+  
+  // ===== Scale the Depths =====
+  {
+  href: "/scale-the-depths/point-nemo-100-percent-guide",
+  game: "Scale the Depths",
+  title: "Point Nemo 100% Guide",
+  description:
+  "Solve the three-hint door puzzle, find 5 messages, Sextant, Toy Submarine, Magnet, Sewing Needle, switches and Apophis 99942.",
+  tagClass: "text-cyan-500",
+  hoverBorderClass: "hover:border-cyan-300",
+  hoverTitleClass: "group-hover:text-cyan-700",
+  },
+  
+
 // ===== Mina the Hollower =====
 {
   href: "/mina-the-hollower",

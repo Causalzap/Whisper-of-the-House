@@ -1,0 +1,729 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const routeColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Route Section", label: "Route Section" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Where It Is", label: "Where It Is" },
+{ key: "Tip", label: "Tip" },
+];
+
+export const routeRows = [
+{
+Step: "1",
+"Route Section": "Opening route",
+"What To Do": "Pick up the first messages, the boat blueprint and the first money chest.",
+"Where It Is": "At the start of Huatulco, before the pressure plate doors become the main route.",
+Tip: "Clear the opening items first so you do not need to backtrack through the puzzle section later.",
+},
+{
+Step: "2",
+"Route Section": "First pressure plate room",
+"What To Do": "Push the block onto the southwest pressure plate.",
+"Where It Is": "Use the lower-left plate in the first door puzzle room.",
+Tip: "Push the block fully onto the plate. If it sits on the edge, the door may not trigger.",
+},
+{
+Step: "3",
+"Route Section": "Second pressure plate room",
+"What To Do": "Move the block onto the southeast pressure plate.",
+"Where It Is": "Use the lower-right plate in the next door puzzle step.",
+Tip: "Stand behind the block, push it toward the lower-right corner and stop only when it is centered.",
+},
+{
+Step: "4",
+"Route Section": "Early side pocket",
+"What To Do": "Grab the first cosmetic before going deeper.",
+"Where It Is": "In the small side pocket after the first door puzzle sequence.",
+Tip: "Cosmetics look optional, but they matter for full completion.",
+},
+{
+Step: "5",
+"Route Section": "Straight south door",
+"What To Do": "Push the block straight down onto the south pressure plate.",
+"Where It Is": "In the next pressure plate room after the early cosmetic route.",
+Tip: "The straight-south plate pattern appears more than once in Huatulco, so check which door opens each time.",
+},
+{
+Step: "6",
+"Route Section": "First artifact pocket",
+"What To Do": "Collect the Quetzalcoatl Statue.",
+"Where It Is": "After the straight-south pressure plate route, inside the first major artifact pocket.",
+Tip: "This is your first major Huatulco artifact. Start tracking artifacts from here.",
+},
+{
+Step: "7",
+"Route Section": "Middle door route",
+"What To Do": "Open the money chest, solve another south plate step, hit the Red Switch and use the west pressure plate.",
+"Where It Is": "In the middle route after the Quetzalcoatl Statue area.",
+Tip: "This opens the path toward the dense artifact and bait chain.",
+},
+{
+Step: "8",
+"Route Section": "Dense artifact chain",
+"What To Do": "Collect the message, Rubber Ball, Aztec Sun Stone and Shark Tooth bait.",
+"Where It Is": "After the west pressure plate door, along the same middle cleanup branch.",
+Tip: "These items are close together. If you find one, slow down and sweep the nearby path before moving on.",
+},
+{
+Step: "9",
+"Route Section": "Shortcut and cosmetic route",
+"What To Do": "Hit the Yellow Switch, then grab the second cosmetic before Blue Switch 1/2.",
+"Where It Is": "After the Aztec Sun Stone and Shark Tooth route. The cosmetic sits in a side pocket before the blue switch chain.",
+Tip: "This is the cosmetic players are most likely to skip because the route is pulling you toward switches.",
+},
+{
+Step: "10",
+"Route Section": "Blue switch route",
+"What To Do": "Activate Blue Switch 1/2, then Blue Switch 2/2, collect the nearby message and pick up the Coffee Cup artifact.",
+"Where It Is": "In the late switch route after the second cosmetic.",
+Tip: "When you hit Blue Switch 2/2, do not leave immediately. Check the nearby bottle and continue to Coffee Cup.",
+},
+{
+Step: "11",
+"Route Section": "Late collection route",
+"What To Do": "Pick up Pouch bait, the boat decal and the cloth chest.",
+"Where It Is": "After Coffee Cup, before the final Hoga route.",
+Tip: "Pouch and the boat decal are two of the most likely Huatulco cleanup misses.",
+},
+{
+Step: "12",
+"Route Section": "Legendary fish route",
+"What To Do": "Go to the final deep route, catch Hoga and prep it carefully.",
+"Where It Is": "At the end of the Huatulco cleanup path, after the late collection route.",
+Tip: "Hoga should be the final major task, not something you chase before collectibles are done.",
+},
+];
+
+export const doorColumns = [
+{ key: "Door Step", label: "Door Step" },
+{ key: "Pressure Plate", label: "Pressure Plate" },
+{ key: "How To Move The Block", label: "How To Move The Block" },
+{ key: "If The Door Does Not Open", label: "If The Door Does Not Open" },
+];
+
+export const doorRows = [
+{
+"Door Step": "First door",
+"Pressure Plate": "Southwest / lower-left plate",
+"How To Move The Block": "Stand on the opposite side of the block and push it diagonally toward the lower-left plate. The block should cover the plate, not just touch its edge.",
+"If The Door Does Not Open": "Nudge the block farther onto the plate, then pause for a moment and check the door route.",
+},
+{
+"Door Step": "Second door",
+"Pressure Plate": "Southeast / lower-right plate",
+"How To Move The Block": "Push the block toward the lower-right plate from the center of the room. Keep the block aligned with the plate instead of pushing from an angle too early.",
+"If The Door Does Not Open": "Recenter the block. The most common mistake is leaving it half on and half off the plate.",
+},
+{
+"Door Step": "Straight south door",
+"Pressure Plate": "Straight south / bottom plate",
+"How To Move The Block": "Push the block directly downward until it sits on the bottom plate. Do not push it sideways unless the room asks for the west plate later.",
+"If The Door Does Not Open": "Check whether you are on the correct south plate. Huatulco reuses similar-looking pressure plate rooms.",
+},
+{
+  "Door Step": "Later west door",
+  "Pressure Plate": "West / left plate",
+  "How To Move The Block": "After you pass the Red Switch area and reach the next block room, push the block left until it sits fully on the west plate.",
+  "If The Door Does Not Open": "Do not assume the Red Switch is the problem. First check that the block is centered on the west plate. If it is only touching the edge, the door may stay closed.",
+},
+];
+
+export const collectibleColumns = [
+{ key: "Item", label: "Item" },
+{ key: "Type", label: "Type" },
+{ key: "Where It Is", label: "Where It Is" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const collectibleRows = [
+{
+Item: "Boat Blueprint",
+Type: "Boat",
+"Where It Is": "In the opening route before the pressure plate doors become the main focus.",
+"Why It Matters": "Counts toward boat collection progress and is annoying to return for later.",
+},
+{
+Item: "Cosmetic 1",
+Type: "Cosmetic",
+"Where It Is": "In the early side pocket after the first door puzzle sequence.",
+"Why It Matters": "Cosmetics look optional, but they matter for character cosmetic completion.",
+},
+{
+Item: "Quetzalcoatl Statue",
+Type: "Artifact",
+"Where It Is": "After the straight-south pressure plate route, inside the first major artifact pocket.",
+"Why It Matters": "This is one of the main Huatulco artifact entries.",
+},
+{
+Item: "Rubber Ball",
+Type: "Artifact",
+"Where It Is": "After the later door puzzle section, shortly after another message in a bottle.",
+"Why It Matters": "Part of the dense middle artifact route.",
+},
+{
+Item: "Aztec Sun Stone",
+Type: "Artifact",
+"Where It Is": "Near the Rubber Ball route and just before the Shark Tooth pickup.",
+"Why It Matters": "Often missed if you grab one middle-route item and rush to the shortcut.",
+},
+{
+Item: "Shark Tooth",
+Type: "Bait",
+"Where It Is": "Immediately after the Aztec Sun Stone section.",
+"Why It Matters": "One of the key Huatulco baits for Master of Bait cleanup.",
+},
+{
+Item: "Cosmetic 2",
+Type: "Cosmetic",
+"Where It Is": "After the Yellow Switch, before Blue Switch 1/2. Check the side pocket off the shortcut route before following the path toward the blue switch chain.",
+"Why It Matters": "This is easy to miss because the switch route pulls your attention forward.",
+},
+{
+Item: "Coffee Cup",
+Type: "Artifact",
+"Where It Is": "After Blue Switch 2/2 and the nearby message, in the late artifact pocket.",
+"Why It Matters": "Final Huatulco artifact-style pickup before the late bait and boat route.",
+},
+{
+Item: "Pouch",
+Type: "Bait",
+"Where It Is": "In the late route after Coffee Cup.",
+"Why It Matters": "A common missing bait if you go straight toward Hoga.",
+},
+{
+Item: "Boat Decal",
+Type: "Decal",
+"Where It Is": "After Pouch and before the cloth chest.",
+"Why It Matters": "Counts toward decal completion and should not be treated as optional style content.",
+},
+{
+Item: "Cloth Chest",
+Type: "Chest",
+"Where It Is": "After the boat decal on the late cleanup route.",
+"Why It Matters": "A final route pickup before the legendary fish cleanup.",
+},
+{
+Item: "Hoga",
+Type: "Legendary fish",
+"Where It Is": "In the final deep route after the late collection path. Reach it after Pouch, boat decal and the cloth chest are handled.",
+"Why It Matters": "Required for the Huatulco legendary fish cleanup.",
+},
+];
+
+export const switchColumns = [
+{ key: "Switch", label: "Switch" },
+{ key: "Where It Is", label: "Where It Is" },
+{ key: "What It Opens", label: "What It Opens" },
+];
+
+export const switchRows = [
+{
+Switch: "Red Switch",
+"Where It Is": "In the middle route after another door puzzle step.",
+"What It Opens": "A shortcut that makes the middle route easier to revisit.",
+},
+{
+Switch: "Yellow Switch",
+"Where It Is": "After the Aztec Sun Stone and Shark Tooth section.",
+"What It Opens": "A shortcut before the late collection route.",
+},
+{
+Switch: "Blue Switch 1/2",
+"Where It Is": "After the second cosmetic route.",
+"What It Opens": "Starts the blue switch chain.",
+},
+{
+Switch: "Blue Switch 2/2",
+"Where It Is": "Near a message in a bottle in the late route.",
+"What It Opens": "Completes the blue switch chain.",
+},
+];
+
+export const hogaColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "What Hoga Does", label: "What Hoga Does" },
+  { key: "How To Handle It", label: "How To Handle It" },
+];
+
+export const hogaRows = [
+  {
+    Phase: "Approach",
+    "What Hoga Does": "Hoga sits at the end of Huatulco's final deep route, after the late collection path.",
+    "How To Handle It": "Clear Pouch, the boat decal, the cloth chest and nearby route items first so this can be a dedicated legendary fish run.",
+  },
+  {
+    Phase: "Movement",
+    "What Hoga Does": "Hoga moves like a large legendary fish: wider arcs, more commitment to its path and less forgiving turns than normal fish.",
+    "How To Handle It": "Stay ahead of its path instead of chasing every small turn. Keep your hook positioned where Hoga is moving, not where it just was.",
+  },
+  {
+    Phase: "Pressure",
+    "What Hoga Does": "The fight punishes weak hook damage or a messy route because you need enough time and line to keep pressure.",
+    "How To Handle It": "If the catch takes too long, upgrade hook or line before trying again. Do not fill your bag with random fish on the way in.",
+  },
+  {
+    Phase: "Final catch",
+    "What Hoga Does": "Hoga is harder than a normal high-value fish because the route and catch both need to be clean.",
+    "How To Handle It": "Make the trip only about Hoga: reach the area cleanly, watch the arc, commit to the line and avoid over-correcting every turn.",
+  },
+  {
+    Phase: "Prep",
+    "What Hoga Does": "After the catch, Hoga follows the same broad prep flow as other large fish, but its size makes sloppy knife movement more costly.",
+    "How To Handle It": "Pan the camera, work across the body in sections and slow down around fins, head edges and tight highlighted areas.",
+  },
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Pushing the block without checking plate position",
+"Why It Hurts": "The block can look close enough but still fail to trigger the door.",
+Fix: "Center the block on the exact pressure plate and wait for the route to open.",
+},
+{
+Mistake: "Leaving after the first artifact",
+"Why It Hurts": "Huatulco has artifacts in several different route sections.",
+Fix: "Track Quetzalcoatl Statue, Rubber Ball, Aztec Sun Stone and Coffee Cup separately.",
+},
+{
+Mistake: "Skipping baits",
+"Why It Hurts": "Shark Tooth and Pouch both matter for bait completion.",
+Fix: "Grab Shark Tooth in the middle route and Pouch in the late route.",
+},
+{
+Mistake: "Ignoring the boat decal",
+"Why It Hurts": "Boat decal progress can block broader completion even if artifacts are done.",
+Fix: "Pick up the decal after Pouch and before the cloth chest.",
+},
+{
+Mistake: "Going for Hoga too early",
+"Why It Hurts": "You may still need to repeat the route for missing collectibles.",
+Fix: "Catch Hoga after puzzles, switches and late items are done.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To get **100% in Huatulco**, solve the pressure plate door puzzles, collect every **message, artifact, bait, cosmetic, boat item, switch and chest**, then catch and prep **Hoga**.
+
+The safest route is:
+
+**opening messages → boat blueprint → southwest plate → southeast plate → first cosmetic → south plate → Quetzalcoatl Statue → Red Switch → west plate → Rubber Ball → Aztec Sun Stone → Shark Tooth → Yellow Switch → second cosmetic → Blue Switches → Coffee Cup → Pouch → boat decal → cloth chest → Hoga**.
+
+Do not rush straight to Hoga. The easiest Huatulco misses are **Shark Tooth**, **Pouch**, **boat decal**, **Blue Switch 2/2's nearby message**, and the pressure plate route around **Quetzalcoatl Statue / Rubber Ball / Aztec Sun Stone**. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: May 2026 full release. This guide covers Huatulco 100% completion, pressure plate door puzzles, messages, artifacts, Shark Tooth, Pouch, switches, boat blueprint, boat decal, cosmetics, Hoga and legendary fish prep.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-door-puzzle-sw-annotated.webp"
+    alt="Scale the Depths Huatulco door puzzle showing the block pushed to the southwest pressure plate."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start with the southwest pressure plate. The block needs to sit fully on the plate before the route opens.
+  </figcaption>
+</figure>
+
+<h2 id="huatulco-100-route">
+  Huatulco 100% route
+</h2>
+
+Huatulco is a route-based area. If you search randomly, you can easily miss one artifact, bait, switch or boat item. Follow the route below from the opening items through the pressure plate doors, then finish with Hoga.
+
+<GuideTable
+caption="Huatulco 100% route."
+columns={routeColumns}
+rows={routeRows}
+/>
+
+The key idea is to finish each route layer before moving on: opening pickups, pressure plates, middle artifacts, shortcuts, late baits, boat items and finally Hoga.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="door-puzzle">
+  Huatulco door puzzle solution
+</h2>
+
+Huatulco's doors use blocks and pressure plates. The route becomes much clearer once you separate the plates by direction: southwest, southeast, straight south and west.
+
+<GuideTable
+caption="Huatulco pressure plate door puzzle steps."
+columns={doorColumns}
+rows={doorRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-door-puzzle-se-annotated.webp"
+    alt="Scale the Depths Huatulco door puzzle showing the block pushed to the southeast pressure plate."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    For the southeast plate, push the block toward the lower-right side and make sure it is centered before leaving.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-door-puzzle-south-annotated.webp"
+    alt="Scale the Depths Huatulco door puzzle showing the block pushed straight south."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The straight-south plate appears in more than one part of the route. Check which door opens before moving on.
+  </figcaption>
+</figure>
+
+If a door does not open, do not immediately assume you chose the wrong plate. First check whether the block is actually centered on the pressure plate. Slightly off-center blocks can make the puzzle feel bugged.
+
+<h2 id="opening-pickups">
+  Opening pickups: messages, boat blueprint and first chest
+</h2>
+
+Before spending too much time on the puzzle doors, clear the opening items. You should pick up the first messages, the boat blueprint and the early money chest.
+
+The boat blueprint appears very early, before the route becomes crowded with pressure plates and artifacts. Grab it now so you do not return later for one missed boat item.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-boat-blueprint.webp"
+    alt="Scale the Depths Huatulco boat blueprint pickup near the opening route."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The boat blueprint is an opening-route pickup. Get it before the puzzle route starts pulling you deeper.
+  </figcaption>
+</figure>
+
+<h2 id="artifacts-baits">
+  Artifacts and baits: exact cleanup order
+</h2>
+
+Huatulco's artifacts are not in one neat cluster. They are split between the early puzzle path, the middle artifact route and the late blue switch route.
+
+<GuideTable
+caption="Huatulco artifacts, baits and collection items."
+columns={collectibleColumns}
+rows={collectibleRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-quetzalcoatl-statue.webp"
+    alt="Scale the Depths Huatulco Quetzalcoatl Statue artifact pickup after the early pressure plate route."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Quetzalcoatl Statue is the first major artifact after the early pressure plate route.
+  </figcaption>
+</figure>
+
+The densest section is the route around **Rubber Ball**, **Aztec Sun Stone** and **Shark Tooth**. Treat these as one cleanup chain. If you find one of them, slow down and check the nearby route before moving to the Yellow Switch.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-aztec-sun-stone.webp"
+    alt="Scale the Depths Huatulco Aztec Sun Stone artifact pickup near the Shark Tooth bait route."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Aztec Sun Stone sits in the same dense middle route as Rubber Ball and Shark Tooth.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-shark-tooth-bait.webp"
+    alt="Scale the Depths Huatulco Shark Tooth bait pickup after the Aztec Sun Stone route."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shark Tooth is one of the easiest Huatulco baits to miss if you rush from the artifact route to the shortcut.
+  </figcaption>
+</figure>
+
+<h2 id="switches-shortcuts">
+  Red, Yellow and Blue Switches
+</h2>
+
+Switches are not optional in a 100% route. They open shortcuts and keep the route from becoming painful when you need to backtrack.
+
+<GuideTable
+caption="Huatulco switches and shortcuts."
+columns={switchColumns}
+rows={switchRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-red-switch.webp"
+    alt="Scale the Depths Huatulco red switch used to unlock a shortcut."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Hit the red switch before you continue into the artifact chain. It makes the middle route easier to revisit.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-yellow-switch.webp"
+    alt="Scale the Depths Huatulco yellow switch shortcut after the Shark Tooth route."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the yellow switch after the Aztec Sun Stone and Shark Tooth route, then continue toward the late pickups.
+  </figcaption>
+</figure>
+
+When you reach **Blue Switch 2/2**, check the nearby message before leaving the section. This is exactly the kind of small miss that can make the area feel complete when it is not.
+
+<h2 id="cosmetic-2">
+  Where to find Cosmetic 2
+</h2>
+
+The second Huatulco cosmetic is easy to miss because it sits between two more obvious route goals: the **Yellow Switch** and **Blue Switch 1/2**.
+
+After you hit the Yellow Switch, do not follow the main route straight toward the blue switch chain. First, check the nearby side pocket off the shortcut route. The cosmetic is in that small detour before Blue Switch 1/2.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-cosmetic-2-annotated.webp"
+    alt="Scale the Depths Huatulco second cosmetic location after the Yellow Switch and before Blue Switch 1 out of 2."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After the Yellow Switch, check the side pocket before Blue Switch 1/2. This is the easiest Huatulco cosmetic to overlook.
+  </figcaption>
+</figure>
+
+<h2 id="late-pickups">
+  Pouch, boat decal and cloth chest
+</h2>
+
+The late route has three important pickups: **Pouch**, the **boat decal**, and the **cloth chest**. These do not look as dramatic as Hoga, but they matter for completion.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-pouch-bait.webp"
+    alt="Scale the Depths Huatulco Pouch bait pickup in the late route."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pouch is the late Huatulco bait. If Master of Bait is missing later, this is one of the first Huatulco items to recheck.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-boat-decal.webp"
+    alt="Scale the Depths Huatulco boat decal pickup after the Pouch bait route."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The boat decal is a late collection item. Do not skip it just because Hoga is nearby.
+  </figcaption>
+</figure>
+
+After the boat decal, open the cloth chest before treating the route as finished.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="hoga-location">
+  Where to find Hoga
+</h2>
+
+**Hoga** is in Huatulco's final deep route, after the main puzzle chain and late collection path. The practical way to think about the route is:
+
+**pressure plate doors → middle artifacts → Yellow Switch → blue switches → Coffee Cup → Pouch → boat decal → cloth chest → Hoga**.
+
+Do not try to use Hoga as an early landmark. If you reach the legendary fish before collecting **Pouch**, the **boat decal** and the **cloth chest**, you are probably going to repeat the route later.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-hoga-location-annotated.webp"
+    alt="Scale the Depths Huatulco Hoga location in the final deep route after the late collection path."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Hoga is at the end of the late Huatulco route. Clear Pouch, the boat decal and the cloth chest before making this your final target.
+  </figcaption>
+</figure>
+
+<h2 id="hoga">
+  How to catch Hoga
+</h2>
+
+Hoga is the Huatulco legendary fish, so treat it differently from a normal money fish. It sits at the end of the final deep route and moves in wider arcs than standard fish. The key is to stay on Hoga's path instead of chasing every small turn after it already changes direction.
+
+Do not start the attempt with a nearly full bag. Hoga works best as a clean, dedicated run after the puzzle route, switches, Pouch, boat decal and cloth chest are done.
+
+<GuideTable
+  caption="How Hoga moves and how to catch it."
+  columns={hogaColumns}
+  rows={hogaRows}
+/>
+
+Hoga should be a dedicated legendary fish run. Do not reach it with a nearly full bag, and do not chase it while you are still missing late collectibles.
+
+The safest Hoga attempt looks like this:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Finish the pressure plate doors and switch routes first.</li>
+  <li>Collect Shark Tooth, Pouch, the boat decal, cosmetics and the cloth chest.</li>
+  <li>Start a clean run toward the final deep route.</li>
+  <li>Avoid filling your bag with random fish before Hoga.</li>
+  <li>Keep your hook ahead of Hoga's movement path instead of over-correcting every turn.</li>
+  <li>If the catch takes too long, upgrade hook or line before trying again.</li>
+</ol>
+
+<h2 id="hoga-prep">
+  How to prep Hoga
+</h2>
+
+Hoga follows the same broad prep flow as other large fish, but its long body makes careless movement more punishing. The challenge is not a special gimmick; it is keeping the knife controlled across a larger target without rushing the final sections.
+
+<figure className="my-8">
+  <Image
+    src="/images/scale-the-depths/scale-the-depths-huatulco-hoga-prep.webp"
+    alt="Scale the Depths Huatulco Hoga legendary fish prep showing the large fish on the prep station."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Hoga's long body gives you room to work, but the size also makes careless prep easier. Pan the camera and work section by section.
+  </figcaption>
+</figure>
+
+Use this prep approach:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Pan the camera so you can see the full body before you start.</li>
+  <li>Work across the long body in controlled passes instead of fast swipes.</li>
+  <li>Slow down around fins, head edges and tight highlighted sections.</li>
+  <li>Finish one prep section before moving to the next.</li>
+  <li>Do not rush the final cuts just because most of the bar is already done.</li>
+</ol>
+
+
+<h2 id="common-mistakes">
+  Common Huatulco mistakes
+</h2>
+
+<GuideTable
+caption="Common Huatulco 100% mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+The biggest mistake is treating Huatulco like a normal fishing route. It is really a puzzle-and-cleanup route with a legendary fish at the end.
+
+<h2 id="final-check">
+  Final check before leaving Huatulco
+</h2>
+
+Before leaving, make sure you have:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>all messages in bottles,</li>
+  <li>boat blueprint,</li>
+  <li>both cosmetics,</li>
+  <li>Quetzalcoatl Statue,</li>
+  <li>Rubber Ball,</li>
+  <li>Aztec Sun Stone,</li>
+  <li>Coffee Cup,</li>
+  <li>Shark Tooth bait,</li>
+  <li>Pouch bait,</li>
+  <li>Red Switch shortcut,</li>
+  <li>Yellow Switch shortcut,</li>
+  <li>Blue Switch 1/2 and Blue Switch 2/2,</li>
+  <li>boat decal,</li>
+  <li>cloth chest,</li>
+  <li>Hoga caught and prepped.</li>
+</ul>
+
+If completion is still missing, recheck **Shark Tooth**, **Pouch**, **boat decal**, **Cosmetic 2**, **Blue Switch 2/2's nearby message**, and the pressure plate route around **Quetzalcoatl Statue / Rubber Ball / Aztec Sun Stone**.
+
+<div className="my-4">
+  <Link href="/scale-the-depths/achievement-guide">
+    If Master of Bait or Elite Explorer is still locked, check the [Scale the Depths Achievement Guide] for which items count toward each achievement.
+  </Link>
+</div>
+
+<div className="my-4">
+  <Link href="/scale-the-depths/all-collectibles-secrets">
+    Use the All Collectibles and Secrets Guide
+  </Link>
+</div>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What should I do if the Huatulco door does not open?
+
+First check whether the block is fully centered on the pressure plate. If it is only touching the edge, the door may not trigger. If it still does not open, check whether the room wants a different plate direction: southwest, southeast, straight south or west.
+
+### Where is the Quetzalcoatl Statue?
+
+Quetzalcoatl Statue is after the early pressure plate route, in the first major artifact pocket after the straight-south door step.
+
+### Where is Shark Tooth bait?
+
+Shark Tooth is in the dense middle route near the Aztec Sun Stone. If you find the Aztec Sun Stone, slow down and check the nearby path before moving to the Yellow Switch.
+
+### Where is Pouch bait?
+Pouch is in the late route after the Coffee Cup artifact, before the boat decal and cloth chest. If you went straight to Hoga without collecting it, retrace the late collection route.
+
+### Where is Cosmetic 2 in Huatulco?
+
+Cosmetic 2 is after the Yellow Switch and before Blue Switch 1/2. Check the side pocket off the shortcut route before following the main path toward the blue switch chain.
+
+### Where is Hoga?
+
+Hoga is in the final deep Huatulco route after the pressure plate puzzle chain and late collection path. Clear Pouch, the boat decal and the cloth chest before treating Hoga as your final target.
+
+### How do I catch Hoga?
+
+Hoga moves in wider arcs than normal fish and is less forgiving if your hook or line is weak. Stay ahead of its movement path instead of chasing every turn, and upgrade hook or line if the fight takes too long.
