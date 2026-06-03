@@ -13,6 +13,54 @@ export type LatestUpdateItem = {
   
   export const latestUpdates: LatestUpdateItem[] = [
 
+// ===== Fatekeeper =====
+{
+  href: "/fatekeeper",
+  game: "Fatekeeper",
+  title: "Beginner Guide, Builds, Weapons & Boss",
+  description:
+    "Start here for Fatekeeper first hour, Haven, portal training, Ancient Hallways, safe builds, Blade vs Axe, fire spells, alchemy, and final EA boss help.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+},
+
+// ===== Fatekeeper =====
+{
+  href: "/fatekeeper/beginner-guide",
+  game: "Fatekeeper",
+  title: "Beginner Guide & First Hour Route",
+  description:
+    "Explore Haven, finish portal training, craft at the alchemy table, enter Ancient Hallways, compare Blade vs Axe, find Ring of Life, and avoid early mistakes.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+},
+
+// ===== Fatekeeper =====
+{
+  href: "/fatekeeper/best-build",
+  game: "Fatekeeper",
+  title: "Best Builds & Upgrade Priority",
+  description:
+    "Choose safe melee, fire, alchemy, shatter, telekinesis, wind, or dagger builds with difficulty, core stats, Burning Axe, respec tips, and boss-ready routes.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+},
+
+// ===== Fatekeeper =====
+{
+  href: "/fatekeeper/boss-guide",
+  game: "Fatekeeper",
+  title: "Final EA Boss Guide",
+  description:
+    "Beat Fatekeeper's final Early Access fight with prep, adds control, block timing, fire damage, stomp dodges, phase two resets, and safe punish windows.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+},
+
 // ===== Scale the Depths =====
 {
   href: "/scale-the-depths/loch-ness-100-percent-guide",

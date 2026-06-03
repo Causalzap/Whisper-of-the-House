@@ -1,0 +1,554 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const startingWeaponColumns = [
+  { key: "Weapon", label: "Weapon" },
+  { key: "Rarity / Type", label: "Rarity / Type" },
+  { key: "Costs", label: "Costs" },
+  { key: "Damage", label: "Damage" },
+  { key: "Best Use", label: "Best Use" },
+];
+
+export const startingWeaponRows = [
+  {
+    Weapon: "Blade of the Sentinel",
+    "Rarity / Type": "Uncommon sword, two-handed",
+    Costs: "5 attack costs, 5 dash costs",
+    Damage: "30 slash damage",
+    "Best Use":
+      "Better if you want stronger listed starting damage and are comfortable with a two-handed rhythm.",
+  },
+  {
+    Weapon: "Axe of the Sentinel",
+    "Rarity / Type": "Common axe, one-handed",
+    Costs: "5 attack costs, 5 dash costs",
+    Damage: "20 slash damage",
+    "Best Use":
+      "Better if you want a simpler one-handed baseline while learning stamina, spacing, block, and kick.",
+  },
+];
+
+export const earlyWeaponColumns = [
+  { key: "Weapon / Item", label: "Weapon / Item" },
+  { key: "Known Details", label: "Known Details" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const earlyWeaponRows = [
+  {
+    "Weapon / Item": "Blade of the Sentinel",
+    "Known Details":
+      "Uncommon sword, two-handed. 5 attack costs, 5 dash costs, 30 slash damage.",
+    "How To Use It":
+      "Use it if you want the stronger opening weapon and can handle a slightly more committed two-handed feel.",
+  },
+  {
+    "Weapon / Item": "Axe of the Sentinel",
+    "Known Details":
+      "Common axe, one-handed. 5 attack costs, 5 dash costs, 20 slash damage.",
+    "How To Use It":
+      "Use it if you want a simpler one-handed weapon while learning block, kick, stamina, and spacing.",
+  },
+  {
+    "Weapon / Item": "Skull Club",
+    "Known Details": "An early blunt weapon pickup found in Haven.",
+    "How To Use It":
+      "Use it to test heavier melee timing or prepare for blunt / shatter-style routes later.",
+  },
+  {
+    "Weapon / Item": "Ornate Dagger",
+    "Known Details": "3 attack costs, 3 dash costs, +15% crit chance, +15 pierce damage.",
+    "How To Use It":
+      "Use it if you want a faster crit-focused route and can avoid taking constant return hits.",
+  },
+  {
+  "Weapon / Item": "Burning Axe",
+  "Known Details":
+    "Rare axe, one-handed. 5 attack costs, 5 dash costs, 10 slash damage, 15 fire damage.",
+  "How To Use It":
+    "Use it if you want a fire / melee hybrid route. It has lower slash damage than the starting Blade, but the 15 fire damage makes it valuable for fire-supported builds.",
+},
+];
+
+export const statColumns = [
+  { key: "Stat", label: "Stat" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const statRows = [
+  {
+    Stat: "Attack cost",
+    "What It Means": "How much stamina or attack resource the weapon spends when you swing.",
+    "Why It Matters":
+      "A weapon with higher commitment can feel worse if you keep running out of stamina before you can dodge.",
+  },
+  {
+    Stat: "Dash cost",
+    "What It Means": "How much movement cost is tied to the weapon's dash or mobility behavior.",
+    "Why It Matters":
+      "Low dash cost helps aggressive weapons feel safer, especially when you need to reposition after attacking.",
+  },
+  {
+    Stat: "Slash damage",
+    "What It Means": "Cutting damage used by weapons such as swords and axes.",
+    "Why It Matters":
+      "Blade of the Sentinel starts with higher listed slash damage than Axe of the Sentinel, even though both show the same attack and dash costs.",
+  },
+  {
+    Stat: "Crit chance",
+    "What It Means": "Chance to land a critical hit.",
+    "Why It Matters":
+      "Crit chance is better on fast weapons or builds that can land frequent safe hits.",
+  },
+  {
+    Stat: "Pierce damage",
+    "What It Means": "A damage type tied to stabbing or thrusting weapons.",
+    "Why It Matters":
+      "Pierce damage makes dagger routes feel more specialized than normal balanced melee.",
+  },
+  {
+    Stat: "Fire damage",
+    "What It Means": "Elemental damage added to the weapon.",
+    "Why It Matters":
+      "Fire damage is useful for hybrid builds and hard fights where pure melee feels risky.",
+  },
+  {
+    Stat: "Weapon coating",
+    "What It Means": "Alchemy-based effects applied to your weapon through poison, vials, or other crafted bonuses.",
+    "Why It Matters":
+      "Coatings let melee builds gain extra value before longer fights or tougher enemies.",
+  },
+];
+
+export const choiceColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Best Weapon Choice", label: "Best Weapon Choice" },
+  { key: "Reason", label: "Reason" },
+];
+
+export const choiceRows = [
+  {
+    Problem: "You want the strongest listed starting damage",
+    "Best Weapon Choice": "Blade of the Sentinel",
+    Reason:
+      "It has the same listed 5 attack costs and 5 dash costs as Axe of the Sentinel, but higher slash damage.",
+  },
+  {
+    Problem: "You want a simpler one-handed baseline",
+    "Best Weapon Choice": "Axe of the Sentinel",
+    Reason:
+      "It has lower listed slash damage than Blade of the Sentinel, but it is easy to treat as a straightforward learning weapon.",
+  },
+  {
+    Problem: "You are still learning combat timing",
+    "Best Weapon Choice": "Blade or axe",
+    Reason:
+      "Both teach normal reach, stamina, block, kick, and recovery before you commit to a specialized route.",
+  },
+  {
+    Problem: "You keep getting punished after slow swings",
+    "Best Weapon Choice": "Dagger or faster weapon",
+    Reason:
+      "Faster recovery gives you more chances to dodge, but only if your positioning is already decent.",
+  },
+  {
+    Problem: "You want crit pressure",
+    "Best Weapon Choice": "Ornate Dagger",
+    Reason:
+      "+15% crit chance and +15 pierce damage make it the clearest early dagger choice.",
+  },
+  {
+  Problem: "You want fire or hybrid damage",
+  "Best Weapon Choice": "Burning Axe",
+  Reason:
+    "It has 10 slash damage and 15 fire damage, so it works best when your build supports fire or elemental pressure.",
+},
+  {
+    Problem: "You want shatter or blunt setup",
+    "Best Weapon Choice": "Club, mace, or hammer",
+    Reason:
+      "Blunt weapons fit heavier control and shatter-style build ideas better than dagger or sword routes.",
+  },
+  {
+    Problem: "You prepare with alchemy",
+    "Best Weapon Choice": "Any comfortable weapon with coating support",
+    Reason:
+      "Poison, vials, and coatings can make your chosen weapon stronger without changing your whole build.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Picking only by damage number",
+    "Why It Hurts":
+      "Blade of the Sentinel has higher listed slash damage than Axe of the Sentinel, but weapon rhythm and recovery still decide whether it feels safe.",
+    "Better Choice":
+      "Use damage numbers as a starting point, then test whether the weapon fits your timing.",
+  },
+  {
+    Mistake: "Picking the biggest hit without checking recovery",
+    "Why It Hurts":
+      "Fatekeeper punishes slow, greedy attacks. A bigger hit is not better if you get punished every time you miss.",
+    "Better Choice":
+      "Use the weapon that lets you attack, recover, and still dodge or block safely.",
+  },
+  {
+    Mistake: "Forcing dagger too early",
+    "Why It Hurts":
+      "Dagger needs close-range confidence. Speed does not help if you are standing in every enemy swing.",
+    "Better Choice":
+      "Start with safer melee, then switch to dagger once you can dodge cleanly.",
+  },
+  {
+    Mistake: "Ignoring weapon costs",
+    "Why It Hurts":
+      "Attack cost and dash cost affect how safe the weapon feels in real fights.",
+    "Better Choice":
+      "Compare costs before deciding a weapon is stronger just because its damage looks good.",
+  },
+  {
+    Mistake: "Forgetting weapon coatings",
+    "Why It Hurts":
+      "Alchemy can add poison or other useful effects, especially before longer fights.",
+    "Better Choice":
+      "Craft before hard rooms and apply coatings when your build supports it.",
+  },
+  {
+    Mistake: "Swapping weapons without changing your build",
+    "Why It Hurts":
+      "A dagger build, axe build, fire weapon build, and blunt build do not want the same stats.",
+    "Better Choice":
+      "Match the weapon to your current build route: Wrath, Power, Insight, dagger, fire, or blunt support.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The best early weapon in **Fatekeeper** is usually **Blade of the Sentinel** if you want stronger listed starting damage: it has **5 attack costs, 5 dash costs, and 30 slash damage**.
+
+**Axe of the Sentinel** has the same **5 attack costs and 5 dash costs**, but lower listed damage at **20 slash damage**, making it a simpler one-handed baseline while you learn combat.
+
+After that, use **Ornate Dagger** for crit and pierce damage, **Burning Axe** for fire / hybrid damage, and **clubs, maces, or hammers** for blunt or shatter-style builds.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 Early Access. This guide covers Fatekeeper early weapons, Blade of the Sentinel vs Axe of the Sentinel, dagger stats, blunt weapon routes, fire weapons, weapon coatings, and which weapon to use for different builds.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-blade-vs-axe-stats.webp"
+    alt="Fatekeeper Blade of the Sentinel and Axe of the Sentinel starting weapon stat comparison."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Both starting weapons show 5 attack costs and 5 dash costs, but Blade of the Sentinel has 30 slash damage while Axe of the Sentinel has 20 slash damage.
+  </figcaption>
+</figure>
+
+<h2 id="best-early-weapon">
+  Best early weapon in Fatekeeper
+</h2>
+
+The best early weapon in Fatekeeper is not automatically the rarest weapon you find. It is the weapon that lets you attack, recover, and still avoid the next hit.
+
+For most players, start by comparing **Blade of the Sentinel** and **Axe of the Sentinel**, then use the early weapon table below to decide when to test Skull Club, Ornate Dagger, Burning Axe, or weapon coatings.
+
+<div className="my-4">
+  <Link href="/fatekeeper/beginner-guide">
+    Still learning the first hour? Read the Fatekeeper Beginner Guide
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="blade-vs-axe">
+  Blade of the Sentinel vs Axe of the Sentinel
+</h2>
+
+Your first real weapon choice is between **Blade of the Sentinel** and **Axe of the Sentinel**. Both use the same listed attack and dash cost, so the decision is about damage, weapon type, rhythm, and comfort.
+
+<GuideTable
+  caption="Blade of the Sentinel vs Axe of the Sentinel."
+  columns={startingWeaponColumns}
+  rows={startingWeaponRows}
+/>
+
+Use **Blade of the Sentinel** if you want the stronger opening hit and can handle the two-handed rhythm. Use **Axe of the Sentinel** if you prefer a simpler one-handed weapon while learning spacing, kick, block, and stamina management.
+
+Do not overcommit points before testing both. Fatekeeper punishes bad timing, so if one weapon feels safer in your hands, use that while you learn.
+
+<h2 id="early-weapons-list">
+  Early weapons worth knowing
+</h2>
+
+Your first weapon decisions are less about final damage and more about comfort. You need to learn how far your weapon reaches, how much recovery it has, and how much stamina you have left after attacking.
+
+<GuideTable
+  caption="Fatekeeper early weapons and how to use them."
+  columns={earlyWeaponColumns}
+  rows={earlyWeaponRows}
+/>
+
+<h2 id="weapon-stats">
+  Weapon stats that actually matter
+</h2>
+
+Do not judge weapons only by damage. In Fatekeeper, a weapon can look stronger on paper but feel worse if the cost or recovery gets you hit.
+
+<GuideTable
+  caption="Fatekeeper weapon stats explained."
+  columns={statColumns}
+  rows={statRows}
+/>
+
+The most important beginner stat is not crit chance or fire damage. It is whether you can swing, recover, and still react.
+
+If a weapon makes you spend all your stamina and then stand still, it is probably not your best beginner weapon yet.
+
+<h2 id="weapon-switching">
+  Test weapons before committing points
+</h2>
+
+Do not spend several build points before you know which weapon you actually like.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-switch-weapon.webp"
+    alt="Fatekeeper player switching between early weapons."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Test weapons before committing your build. A weapon that feels safe is often better than one that only looks stronger.
+  </figcaption>
+</figure>
+
+If you are using a sword or axe, Wrath and melee damage are easy to understand. If you switch to dagger, crit chance and speed matter more. If you move into blunt weapons, shatter-style ideas become more interesting. If you use Burning Axe, fire and elemental support matter more.
+
+<div className="my-4">
+  <Link href="/fatekeeper/best-build">
+    Need the build route? Read the Fatekeeper Best Builds Guide
+  </Link>
+</div>
+
+<h2 id="dagger">
+  Ornate Dagger: best early crit weapon
+</h2>
+
+The **Ornate Dagger** is the clearest early weapon for a dagger / crit route. Use it when you want faster hits, crit pressure, and pierce damage, but only if your dodging and spacing are already clean.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-ornate-dagger-stats.webp"
+    alt="Fatekeeper Ornate Dagger showing attack cost, dash cost, crit chance, and pierce damage."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ornate Dagger is the best early reason to test a dagger build, but dagger builds are less forgiving if you still take every enemy swing to the face.
+  </figcaption>
+</figure>
+
+Do not use Ornate Dagger just because it looks exciting. If you keep dying while testing dagger, go back to a safer weapon and return once your timing improves.
+
+<h2 id="blunt-weapons">
+  Club, mace, and hammer: blunt weapon routes
+</h2>
+
+Blunt weapons are slower and more deliberate, but they matter if you want a heavier build or a shatter-style route.
+
+The early **Skull Club** is your first reason to test this style.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-skull-club-pickup.webp"
+    alt="Fatekeeper Skull Club pickup in Haven."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Skull Club lets you test blunt timing early. Use it if you want heavier hits or plan to explore shatter-style builds later.
+  </figcaption>
+</figure>
+
+Use blunt weapons if you like slower, heavier timing, you are comfortable waiting for punish windows, and you want a build that may connect with shatter or frost ideas.
+
+Avoid blunt weapons if you are still panic-dodging or missing every timing window. Heavy weapons feel much better once your spacing improves.
+
+<h2 id="burning-axe">
+  Burning Axe: best early fire weapon
+</h2>
+
+The **Burning Axe** is one of the most interesting early weapon pickups because it combines axe pressure with fire damage. Its known stats are **5 attack costs**, **5 dash costs**, **10 slash damage**, and **15 fire damage**.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-burning-axe-pickup.webp"
+    alt="Fatekeeper Burning Axe rare axe pickup with fire damage."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+  Burning Axe is a rare one-handed axe with 5 attack costs, 5 dash costs, 10 slash damage, and 15 fire damage. Use it for fire / melee hybrid builds, not as a pure slash weapon.
+  </figcaption>
+</figure>
+
+Use Burning Axe if you already like axe timing, you are investing in Power or elemental damage, or you want a hybrid melee / fire route. It is not a pure slash upgrade over Blade of the Sentinel; its value comes from the added fire damage.
+
+Do not switch to Burning Axe blindly if you depend on attack speed. If the weapon makes you feel too slow, keep it for a fire route later instead of forcing it immediately.
+
+<h2 id="weapon-coating">
+  Weapon coatings, poison, and alchemy support
+</h2>
+
+Weapon coatings are easy to overlook, but they are one of the best ways to make your current weapon stronger without changing your whole build.
+
+If you craft before fights, alchemy can add poison effects, vial-based bonuses, mana or healing support, and extra weapon pressure before longer fights.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-weapon-coating.webp"
+    alt="Fatekeeper weapon coating menu with poison and vial options."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Weapon coatings turn alchemy into a weapon system. Use them before harder fights instead of treating crafting as optional clutter.
+  </figcaption>
+</figure>
+
+Weapon coating is best if you are using Insight or alchemy support, have spare ingredients, are preparing for a boss or horde room, or your weapon feels good but needs more damage over time.
+
+<h2 id="which-weapon-to-choose">
+  Which weapon should you choose?
+</h2>
+
+Use this table if you are stuck between weapons:
+
+<GuideTable
+  caption="Which Fatekeeper weapon should you use?"
+  columns={choiceColumns}
+  rows={choiceRows}
+/>
+
+The short version:
+
+```txt
+First listed damage: Blade of the Sentinel
+Simpler one-handed start: Axe of the Sentinel
+Crit route: Ornate Dagger
+Fire route: Burning Axe
+Shatter route: club, mace, or hammer
+Alchemy route: any safe weapon with coating support
+Hard fights: reliable weapon + fire or coating backup
+````
+<AdUnit placement="article_middle" />
+
+<h2 id="weapons-for-bosses">
+  Best weapons for bosses and hard fights
+</h2>
+
+For bosses, your weapon needs to be safe more than flashy.
+
+A boss weapon should let you attack once or twice, recover before the next hit, keep enough stamina to dodge or block, and back away before phase pressure starts.
+
+Do not use a weapon that only works when the boss stands still. Hard fights punish long strings and panic healing.
+
+If your weapon damage feels low, add support instead of forcing greed. For the full weapon choice breakdown, use the table above.
+
+<div className="my-4">
+  <Link href="/fatekeeper/boss-guide">
+    Stuck on a hard fight? Read the Fatekeeper Boss Guide
+  </Link>
+</div>
+
+<h2 id="common-mistakes">
+  Common weapon mistakes
+</h2>
+
+Most weapon mistakes come from chasing damage before understanding the weapon's cost, rhythm, and build fit.
+
+<GuideTable
+caption="Common Fatekeeper weapon mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+The best weapon is the one that fits your build and your hands. If a weapon looks strong but makes you die after every swing, put it away until your stamina, timing, or build can support it.
+
+
+<h2 id="recommended-progression">
+  Recommended weapon progression
+</h2>
+
+For a normal Early Access run, use this progression:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Start with Blade of the Sentinel if you want stronger listed slash damage.</li>
+  <li>Use Axe of the Sentinel if the one-handed rhythm feels more comfortable.</li>
+  <li>Pick up Skull Club to test blunt weapon timing.</li>
+  <li>Use blade or axe until you understand enemy reach and stamina cost.</li>
+  <li>Switch to Ornate Dagger if you want crit and can dodge cleanly.</li>
+  <li>Switch to Burning Axe if you want a fire / melee hybrid route.</li>
+  <li>Use weapon coating before hard fights.</li>
+  <li>Match your weapon to your build instead of swapping randomly.</li>
+</ol>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best early weapon in Fatekeeper?
+
+Blade of the Sentinel is the stronger listed starting weapon with 30 slash damage. Use Axe of the Sentinel if the one-handed feel is easier while learning.
+
+### Is Ornate Dagger good?
+
+Yes, if you want a dagger / crit route and can dodge cleanly. Its crit chance and pierce damage make it the clearest early dagger option, but it is not the safest weapon if you are still trading hits.
+
+### Is Burning Axe good?
+
+Yes, if you want a fire or hybrid melee route. Burning Axe is a rare axe with fire damage, making it useful for players who already like axe timing or elemental pressure.
+
+### Are clubs good in Fatekeeper?
+
+Clubs are useful if you like blunt weapon timing or want to test shatter-style routes. They are less beginner-friendly if you are still struggling with slow attacks.
+
+### Do maces and hammers matter?
+
+Yes. Maces and hammers belong with blunt weapon routes and are worth watching for shatter or heavy melee builds, even if your first tested blunt weapon is a club.
+
+### Do weapon coatings matter?
+
+Yes. Weapon coatings let alchemy support melee builds through poison, vials, or other effects. They are especially useful before bosses or longer fights.
+
+### What weapon should I use for bosses?
+
+Use a weapon that lets you attack once or twice and still recover safely. Pair it with fire, poison, weapon coating, healing, or mana support instead of trying to win with greedy melee strings.
+
+### Should I always use rare weapons?
+
+No. A rare weapon is not automatically better if it does not fit your build or timing. Use rare weapons when their damage type, speed, or effect supports your route.
+
+### What weapon should I pair with a fire build?
+
+Burning Axe is the clearest early fire weapon option. You can also pair fire spells with a safe melee weapon if the axe timing does not feel comfortable.
+

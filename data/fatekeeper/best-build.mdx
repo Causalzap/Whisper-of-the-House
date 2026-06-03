@@ -1,0 +1,855 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildColumns = [
+  { key: "Build Route", label: "Build Route" },
+  { key: "Difficulty", label: "Difficulty" },
+  { key: "Best For", label: "Best For" },
+  { key: "Main Idea", label: "Main Idea" },
+];
+
+export const buildRows = [
+  {
+    "Build Route": "Beginner-safe melee",
+    Difficulty: "Easy",
+    "Best For": "Your first run, Ancient Hallways, horde fights, and learning enemy timing.",
+    "Main Idea":
+      "Use Fortitude, stamina, Wrath, attack speed, and a weapon you can recover from safely.",
+  },
+  {
+    "Build Route": "Fire / pyromancy",
+    Difficulty: "Easy",
+    "Best For": "Reliable damage, hard fights, fire projectile upgrades, and hybrid melee support.",
+    "Main Idea":
+      "Use fire upgrades like Excessive Flames, Ricochet, MORE!, fire spell power, and Burning Axe if your weapon route supports fire.",
+  },
+  {
+    "Build Route": "Alchemy / consumables",
+    Difficulty: "Medium",
+    "Best For": "Players who prepare before fights with potions, poison, vials, weapon coatings, and mana tools.",
+    "Main Idea":
+      "Use Insight, Horder, Azuremash, healing, mana support, poison, and weapon coatings to strengthen your main route.",
+  },
+  {
+    "Build Route": "Shatter / frost",
+    Difficulty: "Medium",
+    "Best For": "Players who like setup damage, control, and heavier blunt weapon routes.",
+    "Main Idea":
+      "Use frost-facing nodes such as Herald of Winter once supported, then pair control with clubs, maces, hammers, or other blunt weapons.",
+  },
+  {
+    "Build Route": "Telekinesis utility",
+    Difficulty: "Medium",
+    "Best For": "Players who want control, safer pulls, object interaction, and lower spell costs.",
+    "Main Idea":
+      "Use telekinesis for control first, then add Savant or Dark Arts if it becomes part of your normal combat loop.",
+  },
+  {
+    "Build Route": "Wind",
+    Difficulty: "Hard",
+    "Best For": "Players who want spell coverage and can handle higher spell costs.",
+    "Main Idea":
+      "Use Lord of the Skies and Storm Surge only when your mana support is strong enough to pay for the route.",
+  },
+  {
+    "Build Route": "Dagger / crit",
+    Difficulty: "Hard",
+    "Best For": "Players who dodge cleanly, stay close, and want faster pressure.",
+    "Main Idea":
+      "Use Ornate Dagger, crit chance, pierce damage, attack speed, and bleed-style support after your movement is consistent.",
+  },
+];
+
+export const coreStatColumns = [
+  { key: "Core Node", label: "Core Node" },
+  { key: "Effect", label: "Effect" },
+  { key: "Best Use", label: "Best Use" },
+];
+
+export const coreStatRows = [
+  {
+    "Core Node": "Power",
+    Effect: "+3% Efficiency of Max Mana Nodes, +5 Mana, +3% Elemental Damage",
+    "Best Use":
+      "Good for magic routes that need more mana and elemental scaling, especially fire, wind, or mixed spell builds.",
+  },
+  {
+    "Core Node": "Wrath",
+    Effect: "+10% Melee Weapon Damage",
+    "Best Use":
+      "Best early melee damage node if you are using sword, axe, dagger, club, mace, or hammer as your main damage.",
+  },
+  {
+    "Core Node": "Fortitude",
+    Effect: "+10% Health",
+    "Best Use":
+      "The safest beginner pick when you are dying too quickly or still learning enemy attack timing.",
+  },
+  {
+    "Core Node": "Insight",
+    Effect: "+10% Alchemy Skill",
+    "Best Use":
+      "Useful if you craft often and want potions, vials, poison, Azuremash, or weapon coatings to matter more.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Take It When", label: "Take It When" },
+  { key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const priorityRows = [
+  {
+    Priority: "Fortitude / health",
+    "Take It When": "You are dying in two or three bad hits.",
+    "Why It Helps":
+      "Extra health gives you time to learn enemy attacks instead of restarting after every mistake.",
+  },
+  {
+    Priority: "Stamina",
+    "Take It When": "You attack, then have nothing left for dodge or block.",
+    "Why It Helps":
+      "Stamina keeps every build playable. Damage does not matter if you cannot escape after swinging.",
+  },
+  {
+    Priority: "Wrath / melee damage",
+    "Take It When": "Your main damage comes from weapons.",
+    "Why It Helps":
+      "+10% melee weapon damage is simple, direct, and useful for most first-run melee setups.",
+  },
+  {
+    Priority: "Attack speed",
+    "Take It When": "Your weapon feels too slow or you get punished after every miss.",
+    "Why It Helps":
+      "Faster recovery makes melee safer, especially while you are still learning enemy patterns.",
+  },
+  {
+    Priority: "Power / mana / elemental damage",
+    "Take It When": "You are leaning into fire, wind, frost, or mixed spell damage.",
+    "Why It Helps":
+      "Mana and elemental damage help spell routes stay active longer and hit harder.",
+  },
+  {
+    Priority: "Spell power",
+    "Take It When": "Fire, wind, telekinesis, or another spell is part of your normal combat plan.",
+    "Why It Helps":
+      "Spell power is good only if you are actually casting often enough to benefit from it.",
+  },
+  {
+    Priority: "Insight / alchemy",
+    "Take It When": "You regularly craft potions, poison, vials, Azuremash, or weapon coatings.",
+    "Why It Helps":
+      "Alchemy gets stronger when you prepare. It is weaker if you never craft before hard fights.",
+  },
+];
+
+export const spellNodeColumns = [
+  { key: "Node", label: "Node" },
+  { key: "Original Effect", label: "Original Effect" },
+  { key: "Build Use", label: "Build Use" },
+];
+
+export const spellNodeRows = [
+  {
+    Node: "Greater Mana",
+    "Original Effect": "+15 Mana",
+    "Build Use":
+      "Simple and useful for any spell-heavy route. Take it when you run out of mana before the fight is under control.",
+  },
+  {
+    Node: "Elemental Fortress",
+    "Original Effect": "Disables parry, creates powerful elemental shield on block",
+    "Build Use":
+      "A defensive elemental option for players who block often and do not rely on parry timing.",
+  },
+  {
+    Node: "Excessive Flames",
+    "Original Effect": "Burning enemies continuously lose poise",
+    "Build Use":
+      "Strong fire route support because it helps burning damage become control, not just damage over time.",
+  },
+  {
+    Node: "Flame Spout",
+    "Original Effect": "Turns your fire spell into a ray of fire",
+    "Build Use":
+      "Good if you want fire to become a more focused damage tool instead of only projectile pressure.",
+  },
+  {
+    Node: "Ricochet",
+    "Original Effect": "Fire projectiles now ricochet",
+    "Build Use":
+      "Great for rooms and awkward angles. This makes fire more useful when enemies are not lined up cleanly.",
+  },
+  {
+    Node: "MORE!",
+    "Original Effect": "+2 Projectiles",
+    "Build Use":
+      "Very strong for fire projectile builds if your mana economy can support the extra casting pressure.",
+  },
+  {
+    Node: "Lord of the Skies",
+    "Original Effect": "+30% Windblast Arc",
+    "Build Use":
+      "Useful for wind builds that want better coverage, but less direct than fire for most beginners.",
+  },
+  {
+    Node: "Storm Surge",
+    "Original Effect": "+50% Spell Power with Wind Spells, +25% Spell Costs with Wind Spells",
+    "Build Use":
+      "High upside, but expensive. Take it only if wind spells are your real damage plan and your mana can handle the cost.",
+  },
+  {
+    Node: "Herald of Winter (WIP)",
+    "Original Effect": "Windblast is infused with ice",
+    "Build Use":
+      "Current frost-facing node to watch for a future wind / frost bridge. Marked WIP, so treat it as an Early Access route signal.",
+  },
+  {
+    Node: "Savant",
+    "Original Effect": "-50% Spell Costs with Telekinesis Spells",
+    "Build Use":
+      "Excellent if telekinesis is part of your regular combat loop instead of a once-in-a-while utility button.",
+  },
+  {
+    Node: "Dark Arts",
+    "Original Effect": "Telekinesis also deals arcane damage to lifted enemies",
+    "Build Use":
+      "Turns telekinesis from control into damage support. Better for players who already use telekinesis often.",
+  },
+];
+
+export const meleeNodeColumns = [
+  { key: "Node / Item", label: "Node / Item" },
+  { key: "Effect", label: "Effect" },
+  { key: "Build Use", label: "Build Use" },
+];
+
+export const meleeNodeRows = [
+  {
+    "Node / Item": "Axe Damage",
+    Effect: "+7% Axe Damage",
+    "Build Use":
+      "A direct upgrade if axe is your main weapon. It becomes more interesting if you are using Burning Axe or another axe route.",
+  },
+  {
+    "Node / Item": "Anatomical Knowledge",
+    Effect: "Regular attacks have a 15% chance to inflict bleeding",
+    "Build Use":
+      "Good for melee builds that land frequent regular attacks, especially faster weapons.",
+  },
+  {
+    "Node / Item": "Ornate Dagger",
+    Effect: "3 attack costs, 3 dash costs, +15% crit chance, +15 pierce damage",
+    "Build Use":
+      "A strong reason to test dagger / crit, but it rewards clean movement more than brute-force trading.",
+  },
+  {
+    "Node / Item": "Burning Axe",
+    Effect: "Rare axe with fire damage",
+    "Build Use":
+      "Best for fire / melee hybrid players who want axe pressure plus elemental damage.",
+  },
+  {
+    "Node / Item": "Flying Dagger (WIP)",
+    Effect:
+      "Planned: hybrid attack to throw and recall dagger via telekinesis. Current placeholder: +25% damage with daggers, node inactive",
+    "Build Use":
+      "A dagger / telekinesis route signal for later updates. Do not treat it as a finished active node yet.",
+  },
+];
+
+export const alchemyNodeColumns = [
+  { key: "Node / Item", label: "Node / Item" },
+  { key: "Effect", label: "Effect" },
+  { key: "Build Use", label: "Build Use" },
+];
+
+export const alchemyNodeRows = [
+  {
+    "Node / Item": "Horder",
+    Effect: "+1% Effect for consumables and potions per consumable in inventory",
+    "Build Use":
+      "Good for players who carry and use many consumables. Weak if you forget to craft or keep your inventory empty.",
+  },
+  {
+    "Node / Item": "Azuremash",
+    Effect: "Heal 12 Mana, deal 15% Health damage as extra Mana damage",
+    "Build Use":
+      "Useful for magic or hybrid builds that want mana recovery while turning health cost into extra mana-based damage.",
+  },
+  {
+    "Node / Item": "Weapon coating",
+    Effect: "Applies effects like poison or other vial-based bonuses to your weapon",
+    "Build Use":
+      "Best as support for melee builds, especially before longer fights or tougher enemies.",
+  },
+];
+
+export const routeColumns = [
+  { key: "Route", label: "Route" },
+  { key: "Difficulty", label: "Difficulty" },
+  { key: "Early Focus", label: "Early Focus" },
+  { key: "Use This If", label: "Use This If" },
+];
+
+export const routeRows = [
+  {
+    Route: "Safe melee",
+    Difficulty: "Easy",
+    "Early Focus": "Fortitude, stamina, Wrath, attack speed, block timing, kick, and a comfortable weapon.",
+    "Use This If":
+      "You are still learning Fatekeeper and want the least frustrating first run.",
+  },
+  {
+    Route: "Fire",
+    Difficulty: "Easy",
+    "Early Focus": "Power, Greater Mana, spell power, Excessive Flames, Ricochet, MORE!, and Burning Axe if you find it.",
+    "Use This If":
+      "You want reliable damage when melee trades feel too risky.",
+  },
+  {
+    Route: "Alchemy",
+    Difficulty: "Medium",
+    "Early Focus": "Insight, Horder, Azuremash, potions, poison, vials, and weapon coating.",
+    "Use This If":
+      "You like preparing for fights and turning items into extra safety or damage.",
+  },
+  {
+    Route: "Shatter / frost",
+    Difficulty: "Medium",
+    "Early Focus": "Herald of Winter (WIP), frost / ice support, blunt weapons, stamina, and safe punish windows.",
+    "Use This If":
+      "You like setup-based damage and heavier weapon routes.",
+  },
+  {
+    Route: "Telekinesis",
+    Difficulty: "Medium",
+    "Early Focus": "Savant, Dark Arts, mana support, and control-focused play.",
+    "Use This If":
+      "You already use telekinesis constantly to pull enemies or control space.",
+  },
+  {
+    Route: "Wind",
+    Difficulty: "Hard",
+    "Early Focus": "Lord of the Skies, Storm Surge, mana support, and careful spell cost management.",
+    "Use This If":
+      "You like wide-area spell coverage and can handle higher spell costs.",
+  },
+  {
+    Route: "Dagger / crit",
+    Difficulty: "Hard",
+    "Early Focus": "Attack speed, crit chance, Anatomical Knowledge, dagger damage, stamina, and clean dodging.",
+    "Use This If":
+      "You are comfortable staying close without eating every swing.",
+  },
+];
+
+export const buildMistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Feels Bad", label: "Why It Feels Bad" },
+  { key: "Better Choice", label: "Better Choice" },
+];
+
+export const buildMistakeRows = [
+  {
+    Mistake: "Going pure damage immediately",
+    "Why It Feels Bad":
+      "Fatekeeper punishes greedy swings, late dodges, and bad healing windows.",
+    "Better Choice":
+      "Add enough Fortitude, stamina, or attack speed before chasing a glass-cannon route.",
+  },
+  {
+    Mistake: "Spreading points everywhere",
+    "Why It Feels Bad":
+      "The tree is large, and a little bit of everything can leave you with no clear strength.",
+    "Better Choice":
+      "Pick one main route first: safe melee, fire, alchemy, shatter, telekinesis, wind, or dagger.",
+  },
+  {
+    Mistake: "Taking spell power without casting",
+    "Why It Feels Bad":
+      "Spell power does nothing if you still solve every fight with melee.",
+    "Better Choice":
+      "Only invest in spell power when fire, wind, telekinesis, or another spell is part of your normal rotation.",
+  },
+  {
+    Mistake: "Taking Storm Surge without mana support",
+    "Why It Feels Bad":
+      "+50% wind spell power is strong, but +25% spell cost can make the route feel expensive.",
+    "Better Choice":
+      "Get mana support first, then use Storm Surge when wind spells are your real plan.",
+  },
+  {
+    Mistake: "Building around WIP or inactive nodes",
+    "Why It Feels Bad":
+      "Nodes like Herald of Winter or Flying Dagger may not behave like finished routes yet.",
+    "Better Choice":
+      "Treat WIP nodes as route signals for future updates, then spend around working effects in the current version.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The easiest Fatekeeper build for a first Early Access run is **safe melee**: take **Fortitude / health**, keep enough **stamina** to dodge after attacking, use **Wrath** if your damage comes from weapons, then add **fire** or **alchemy** once your basics feel stable.
+
+Best route by difficulty:
+
+**Easy:** safe melee, fire  
+**Medium:** alchemy, shatter / frost, telekinesis  
+**Hard:** wind, dagger / crit
+
+For most players, start with **safe melee → add fire if melee feels risky → add alchemy if you craft often → test shatter, telekinesis, wind, or dagger later**.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 Early Access. This guide focuses on practical Fatekeeper build routes using current Early Access nodes, item effects, difficulty, and player-facing skill tree values.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-skill-tree-core-stats.webp"
+    alt="Fatekeeper skill tree showing Power, Wrath, Fortitude, and Insight core stat nodes."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Power, Wrath, Fortitude, and Insight are useful early anchors. Use them to solve your current problem before branching into a full route.
+  </figcaption>
+</figure>
+
+<h2 id="best-build">
+  Best build for your first run
+</h2>
+
+The best Fatekeeper build for your first run is not the highest damage setup. It is the build that keeps you alive while you learn enemy timing.
+
+For most players, start with **safe melee**. It is the easiest route because it works before you understand every spell node, weapon route, or boss pattern.
+
+<GuideTable
+  caption="Fatekeeper build routes by difficulty."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+<div className="my-4">
+  <Link href="/fatekeeper/beginner-guide">
+    Still learning the basics? Read the Fatekeeper Beginner Guide first
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="core-stats">
+  Core stat nodes: Power, Wrath, Fortitude, and Insight
+</h2>
+
+Before you think about advanced routes, understand the early core nodes. These are not locked classes. They are simple stat anchors that help you decide which direction your build should go.
+
+<GuideTable
+  caption="Fatekeeper core stat nodes and best uses."
+  columns={coreStatColumns}
+  rows={coreStatRows}
+/>
+
+For a first run, **Fortitude** is the easiest safety pick, **Wrath** is the cleanest melee damage pick, **Power** helps spell and elemental routes, and **Insight** only becomes valuable if alchemy is part of your real playstyle.
+
+<h2 id="upgrade-priority">
+  Best early upgrade priority
+</h2>
+
+Use this table to choose your first upgrades based on what is actually going wrong in your run.
+
+<GuideTable
+  caption="Fatekeeper early upgrade priority."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-greater-mana-node.webp"
+    alt="Fatekeeper Greater Mana skill node showing plus 15 mana."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Greater Mana is simple but useful. Take mana when spell cost is the thing stopping your build from working.
+  </figcaption>
+</figure>
+
+<h2 id="safe-melee-build">
+  Safe melee build
+</h2>
+
+The safest beginner build is a melee-first setup with enough defense and stamina to survive mistakes.
+
+Start with this plan:
+
+```txt
+Fortitude / health
+→ stamina
+→ Wrath / melee damage
+→ attack speed
+→ comfortable weapon
+→ fire, telekinesis, or alchemy as backup
+````
+
+This route is best if you are still learning:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>enemy windups,</li>
+  <li>how much stamina your attacks cost,</li>
+  <li>when to block,</li>
+  <li>when to kick,</li>
+  <li>and when it is safe to heal.</li>
+</ul>
+
+The safe melee route does not mean ignoring magic. It means your build does not collapse if you run out of mana or miss a spell. You can still use telekinesis for control, fire for safer damage, and alchemy for backup.
+
+<h2 id="fire-build">
+  Fire / pyromancy build
+</h2>
+
+Fire is the easiest magic route to recommend early because it gives you damage without forcing you to stand inside every enemy swing.
+
+Fire also has a clear weapon bridge: **Burning Axe**. If you find it, it fits best as a fire / melee hybrid option instead of a random axe swap.
+
+<GuideTable
+caption="Fatekeeper fire, wind, frost, and telekinesis nodes."
+columns={spellNodeColumns}
+rows={spellNodeRows}
+/>
+
+A practical fire build looks like this:
+
+```txt
+Basic survivability
+→ Power or spell power
+→ Greater Mana
+→ Excessive Flames
+→ Ricochet
+→ MORE!
+→ Burning Axe or alchemy backup
+```
+
+The key fire nodes are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Excessive Flames:</strong> burning enemies continuously lose poise.</li>
+  <li><strong>Flame Spout:</strong> turns your fire spell into a ray of fire.</li>
+  <li><strong>Ricochet:</strong> fire projectiles now ricochet.</li>
+  <li><strong>MORE!:</strong> adds +2 projectiles.</li>
+</ul>
+
+These effects make fire more than raw damage. Fire can pressure enemies, punish groups, and help when melee windows are too dangerous.
+
+<h2 id="alchemy-build">
+  Alchemy / consumables build
+</h2>
+
+Alchemy is stronger than it looks because it supports every other route. A melee build can use weapon coating. A spell build can use mana tools. A hard-fight setup can use healing, poison, or other consumable effects.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-azuremash-effect.webp"
+    alt="Fatekeeper Azuremash consumable showing mana healing and extra mana damage effect."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Azuremash shows why alchemy can matter for hybrid builds: it can restore mana and turn health cost into extra mana-based damage.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Fatekeeper alchemy and consumable route options."
+columns={alchemyNodeColumns}
+rows={alchemyNodeRows}
+/>
+
+The alchemy route looks like this:
+
+```txt
+Insight
+→ Horder
+→ healing and mana prep
+→ Azuremash or poison
+→ weapon coating
+→ main damage route
+```
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-weapon-coating.webp"
+    alt="Fatekeeper weapon coating menu with poison and vial options."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Weapon coatings let alchemy support melee builds instead of sitting in a separate crafting corner.
+  </figcaption>
+</figure>
+
+Alchemy is only worth investing in if you actually use it. If you never craft before fights, take health, stamina, Wrath, or spell nodes first.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="shatter-build">
+  Shatter / frost build
+</h2>
+
+Shatter / frost is a setup route, not the easiest first build. Use it when you want control before damage and you are willing to pair magic with the right weapon type.
+
+Right now, the clearest frost-facing node in the current notes is **Herald of Winter (WIP)**, which says **Windblast is infused with ice**. That makes it an important route signal, but not something you should treat like a finished full build by itself.
+
+A practical shatter / frost plan looks like this:
+
+```txt
+Fortitude
+→ stamina
+→ blunt weapon comfort
+→ frost / ice support
+→ Herald of Winter when supported
+→ shatter payoff
+→ alchemy backup
+```
+
+Use this route if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you like clubs, maces, hammers, or other blunt weapons,</li>
+  <li>you want control before damage,</li>
+  <li>you are comfortable setting up punish windows,</li>
+  <li>and you do not mind a slower, more deliberate build.</li>
+</ul>
+
+If you want the easiest route, use safe melee or fire first. If you want a more technical route with room to grow across updates, shatter / frost is worth watching.
+
+<h2 id="telekinesis-build">
+  Telekinesis utility build
+</h2>
+
+Telekinesis is useful even without a full build. You can pull enemies, control space, and interact with certain objects. But if you want to turn it into a real route, look for nodes that reduce cost or add damage.
+
+The two important nodes are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Savant:</strong> -50% spell costs with telekinesis spells.</li>
+  <li><strong>Dark Arts:</strong> telekinesis also deals arcane damage to lifted enemies.</li>
+</ul>
+
+A telekinesis route looks like this:
+
+```txt
+Mana support
+→ Savant
+→ Dark Arts
+→ survivability
+→ melee or fire backup
+```
+
+Do not build around telekinesis damage unless you are already using it often. If you only cast it once in a while, keep it as utility and spend your main points elsewhere.
+
+<h2 id="wind-build">
+  Wind build
+</h2>
+
+Wind can scale hard, but it is less beginner-safe than fire because some of its stronger effects come with cost pressure.
+
+The important wind nodes are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Lord of the Skies:</strong> +30% Windblast Arc.</li>
+  <li><strong>Storm Surge:</strong> +50% Spell Power with Wind Spells, but +25% Spell Costs with Wind Spells.</li>
+  <li><strong>Herald of Winter (WIP):</strong> Windblast is infused with ice.</li>
+</ul>
+
+Storm Surge is the big warning point. +50% spell power sounds great, but +25% spell cost can make the route feel bad if you did not invest in mana first.
+
+Use wind if you enjoy spell coverage and can support the cost. If you just want safer damage right now, fire is easier to recommend than wind.
+
+<h2 id="dagger-build">
+  Dagger / crit build
+</h2>
+
+Dagger is one of the most tempting routes because it looks fast and aggressive. It can work, but it asks more from the player than a safe melee route.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-ornate-dagger-stats.webp"
+    alt="Fatekeeper Ornate Dagger showing attack cost, dash cost, crit chance, and pierce damage."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ornate Dagger gives +15% crit chance and +15 pierce damage, but dagger builds still need clean dodging and close-range confidence.
+  </figcaption>
+</figure>
+
+The dagger route cares about:
+
+<GuideTable
+caption="Fatekeeper dagger and melee route nodes."
+columns={meleeNodeColumns}
+rows={meleeNodeRows}
+/>
+
+A practical dagger build looks like this:
+
+```txt
+Attack speed
+→ stamina
+→ dagger damage
+→ crit chance
+→ Anatomical Knowledge
+→ enough Fortitude to survive one mistake
+```
+
+If you keep dying while testing dagger, do not force it. Go back to a safer weapon, learn the enemy patterns, then return to dagger once your timing improves.
+
+<h2 id="which-route-to-pick">
+  Which build route should you pick?
+</h2>
+
+Use this table if you are still unsure:
+
+<GuideTable
+caption="Which Fatekeeper build route should you choose?"
+columns={routeColumns}
+rows={routeRows}
+/>
+
+My recommended first route is:
+
+```txt
+Safe melee
+→ add fire if melee feels risky
+→ add alchemy if you craft often
+→ test shatter, telekinesis, wind, or dagger later
+```
+
+That order gives you a strong foundation without locking you into a fragile route before you understand the combat.
+
+
+<h2 id="build-mistakes">
+  Build mistakes to avoid
+</h2>
+
+A bad build in Fatekeeper is not always about picking a bad node. Sometimes it is about picking a good node before your build can use it.
+
+<GuideTable
+caption="Common Fatekeeper build mistakes."
+columns={buildMistakeColumns}
+rows={buildMistakeRows}
+/>
+
+If you spread points incorrectly, early respecs are free at the **Sanctuary of First Flame**. Later respecs cost a rare resource found through exploration, so you should still treat early points carefully.
+
+<h2 id="boss-build">
+  Best build for hard fights
+</h2>
+
+For hard fights, use a build that gives you three things:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li><strong>Survival</strong> so one mistake does not end the attempt.</li>
+  <li><strong>Safe damage</strong> so you do not need to stand inside every attack.</li>
+  <li><strong>Prepared consumables</strong> so you are not relying on perfect play.</li>
+</ol>
+
+The safest hard-fight setup is usually:
+
+```txt
+Fortitude or health
++ stamina
++ Wrath or fire damage
++ healing
++ mana support if casting
++ poison or weapon coating if available
+```
+
+If you keep dying while dealing almost enough damage, do not add more damage first. Add the survival or stamina that lets you reach the end of the fight.
+
+<div className="my-4">
+  <Link href="/fatekeeper/boss-guide">
+    Stuck on a hard fight? Read the Fatekeeper Boss Guide
+  </Link>
+</div>
+
+<h2 id="recommended-progression">
+  Recommended early progression
+</h2>
+
+For your first six upgrades, use the priority table above. Fix the problem that is actually killing your run first: health, stamina, melee damage, attack speed, mana, spell power, or alchemy.
+
+Once those basics feel stable, continue with:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Add fire nodes like Excessive Flames, Ricochet, or MORE! if fire is your main spell route.</li>
+  <li>Add Insight, Horder, Azuremash, or weapon coating support if you craft regularly.</li>
+  <li>Test shatter, telekinesis, wind, or dagger once your survival, stamina, and main damage route are stable.</li>
+</ol>
+
+This keeps the build flexible without repeating the same early upgrade logic. The table solves your first problem; this progression tells you where to branch after that.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best beginner build in Fatekeeper?
+
+For your first Early Access run, the best beginner build is a safe melee hybrid with Fortitude or health, stamina, Wrath or melee damage, and enough attack speed to avoid getting punished after every swing. Add fire or alchemy support once your basics feel stable. For most players, this is also the easiest route.
+
+
+### Should I take Fortitude, Wrath, Power, or Insight first?
+
+Take Fortitude if you are dying too fast, Wrath if your main damage is melee, Power if you are building around spells or elemental damage, and Insight if you use alchemy often.
+
+### Is fire good in Fatekeeper?
+
+Yes. Fire is one of the safest early magic routes. Ricochet, MORE!, Excessive Flames, and Flame Spout all give fire a clear damage identity. Burning Axe also fits fire / melee hybrid builds.
+
+### What build is Burning Axe best for?
+
+Burning Axe is best for a fire / melee hybrid build. Use it if you already like axe timing and want fire damage to support your melee route.
+
+### Is wind good?
+
+Wind can be strong, especially with Storm Surge, but it needs mana support because Storm Surge increases wind spell costs. Fire is easier for most beginners.
+
+### Is dagger a good beginner build?
+
+Dagger can be strong, especially with crit chance and pierce damage, but it is not the safest beginner route. Use dagger if you can dodge cleanly and stay close without taking constant hits.
+
+### Is shatter or frost good?
+
+Shatter / frost is worth watching if you like setup damage and blunt weapons. Herald of Winter is the clearest current frost-facing node in these notes, but because it is marked WIP, safe melee or fire is easier for a first run.
+
+### Is telekinesis worth building around?
+
+Telekinesis is always useful as utility. Build around it only if you take nodes like Savant or Dark Arts and use it often in combat.
+
+### Is alchemy worth investing in?
+
+Yes, if you craft and use consumables. Insight, Horder, Azuremash, poison, vials, and weapon coatings can all support real builds. If you never craft, spend points elsewhere first.
+
+### Can I respec in Fatekeeper?
+
+Early respecs are free at the Sanctuary of First Flame. Later respecs cost a rare resource found through exploration. Spend carefully until you know where the sanctuary is in your current build.
+
+### Should I use WIP nodes?
+
+Do not make WIP or inactive nodes the center of your current build. Treat nodes like Herald of Winter or Flying Dagger as route signals for future updates, then build around working effects right now.
+
+### What build should I use for bosses?
+
+Use enough Fortitude or health to survive mistakes, enough stamina to dodge after attacking, a reliable damage plan like Wrath melee or fire, and prepared consumables such as healing, mana support, poison, or weapon coating.

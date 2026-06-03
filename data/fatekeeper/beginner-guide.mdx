@@ -1,0 +1,664 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const weaponColumns = [
+  { key: "Weapon", label: "Weapon" },
+  { key: "Known Stats", label: "Known Stats" },
+  { key: "Best Use", label: "Best Use" },
+];
+
+export const weaponRows = [
+  {
+    Weapon: "Blade of the Sentinel",
+    "Known Stats":
+      "Uncommon sword, two-handed. 5 attack costs, 5 dash costs, 30 slash damage.",
+    "Best Use":
+      "Use it if you want the stronger listed starting damage. Based on early testing, it feels better when you can handle the two-handed rhythm and recovery.",
+  },
+  {
+    Weapon: "Axe of the Sentinel",
+    "Known Stats":
+      "Common axe, one-handed. 5 attack costs, 5 dash costs, 20 slash damage.",
+    "Best Use":
+      "Use it if you prefer a simpler one-handed rhythm while learning spacing, block, kick, and stamina.",
+  },
+  {
+    Weapon: "Skull Club",
+    "Known Stats": "Early blunt weapon pickup.",
+    "Best Use":
+      "Use it to test heavier blunt timing or prepare for shatter-style routes later.",
+  },
+  {
+    Weapon: "Ornate Dagger",
+    "Known Stats":
+      "3 attack costs, 3 dash costs, +15% crit chance, +15 pierce damage.",
+    "Best Use":
+      "Use it only after you can dodge cleanly. It rewards speed and crit pressure but is less forgiving if you trade hits.",
+  },
+];
+
+export const combatColumns = [
+  { key: "Tool", label: "Tool" },
+  { key: "Use It Like This", label: "Use It Like This" },
+  { key: "Rule Of Thumb", label: "Rule Of Thumb" },
+];
+
+export const combatRows = [
+  {
+    Tool: "Stamina",
+    "Use It Like This":
+      "Attack in short bursts, then stop before the bar is empty.",
+    "Rule Of Thumb":
+      "Keep at least 1/3 of your stamina bar before an enemy swing connects, so you can block, dodge, or back away.",
+  },
+  {
+    Tool: "Block",
+    "Use It Like This":
+      "Use block when you already see the enemy's committed swing coming.",
+    "Rule Of Thumb":
+      "Block is safer than late dodging when your timing is still inconsistent.",
+  },
+  {
+    Tool: "Kick",
+    "Use It Like This":
+      "Kick guarded enemies, enemies near ledges, or enemies that are standing too close.",
+    "Rule Of Thumb":
+      "If normal attacks keep hitting a guard, kick first. If kick does nothing, stop forcing it and reposition.",
+  },
+  {
+    Tool: "Dodge",
+    "Use It Like This":
+      "Dodge before the hit is already on you, not after your attack has trapped you.",
+    "Rule Of Thumb":
+      "If you cannot dodge after swinging, your attack string was too long.",
+  },
+  {
+    Tool: "Healing",
+    "Use It Like This":
+      "Back away, clear space, then drink.",
+    "Rule Of Thumb":
+      "Never heal inside melee range unless the enemy is already controlled or dead.",
+  },
+];
+
+export const telekinesisColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "Telekinesis Play", label: "Telekinesis Play" },
+  { key: "Why It Is Better Than Swinging", label: "Why It Is Better Than Swinging" },
+];
+
+export const telekinesisRows = [
+  {
+    Situation: "One enemy is leading a group in a corridor",
+    "Telekinesis Play":
+      "Pull the lead enemy back into the group, then use fire, a spike, a kick, or a short melee punish.",
+    "Why It Is Better Than Swinging":
+      "You control the opening instead of walking into three enemies at once.",
+  },
+  {
+    Situation: "A shield or object is highlighted",
+    "Telekinesis Play":
+      "Hold search mode, hover over the object, then release to interact.",
+    "Why It Is Better Than Swinging":
+      "Some objects are meant to be moved or activated from range, not hit with your weapon.",
+  },
+  {
+    Situation: "An enemy is close but not attacking yet",
+    "Telekinesis Play":
+      "Pull first, then step in for one safe hit instead of starting with a raw swing.",
+    "Why It Is Better Than Swinging":
+      "It gives you a safer first turn and can interrupt the enemy's spacing.",
+  },
+  {
+    Situation: "You need to heal",
+    "Telekinesis Play":
+      "Pull or disrupt the enemy, then back away before drinking.",
+    "Why It Is Better Than Swinging":
+      "Healing takes commitment. Control buys the time your potion animation needs.",
+  },
+];
+
+export const buildColumns = [
+  { key: "If This Is Happening", label: "If This Is Happening" },
+  { key: "Spend Toward", label: "Spend Toward" },
+  { key: "Why", label: "Why" },
+];
+
+export const buildRows = [
+  {
+    "If This Is Happening": "You die in two or three mistakes",
+    "Spend Toward": "Health / Fortitude",
+    Why:
+      "Extra health gives you room to learn enemy timing without restarting after every bad exchange.",
+  },
+  {
+    "If This Is Happening": "You attack and cannot dodge after",
+    "Spend Toward": "Stamina",
+    Why:
+      "Stamina is the difference between one safe hit and one greedy death.",
+  },
+  {
+    "If This Is Happening": "Your melee feels too slow",
+    "Spend Toward": "Attack speed or your weapon type",
+    Why:
+      "Faster recovery makes early melee much more forgiving.",
+  },
+  {
+    "If This Is Happening": "You use fire or telekinesis often",
+    "Spend Toward": "Power, spell power, mana, or Greater Mana",
+    Why:
+      "Spell routes need both damage and enough mana to keep casting.",
+  },
+  {
+    "If This Is Happening": "You craft before fights",
+    "Spend Toward": "Insight / alchemy",
+    Why:
+      "Alchemy only pays off if you actually use potions, poison, vials, or weapon coatings.",
+  },
+];
+
+export const earlyItemColumns = [
+  { key: "Item / Mechanic", label: "Item / Mechanic" },
+  { key: "Where To Check", label: "Where To Check" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const earlyItemRows = [
+  {
+    "Item / Mechanic": "Ornate Copper Key",
+    "Where To Check":
+      "Ancient Hallways, in the early lower route after the first locked copper-key door. Push through the nearby side path / ledge route, pick up the key, then backtrack to the locked door.",
+    "Why It Matters":
+      "It opens the early locked door and teaches you to remember key-gated routes instead of treating every locked door as optional.",
+  },
+  {
+    "Item / Mechanic": "Ring of Life",
+    "Where To Check":
+      "Early Ancient Hallways side route, around the first left-side corridor / ledge section after entering the area.",
+    "Why It Matters":
+      "It gives +5 health. That is not a huge number, but it is valuable while you are still learning enemy timing.",
+  },
+  {
+    "Item / Mechanic": "Materials and plants",
+    "Where To Check":
+      "Opening path, Haven, and Ancient Hallways side routes.",
+    "Why It Matters":
+      "They feed into alchemy, healing, mana, poison, and weapon effects.",
+  },
+  {
+    "Item / Mechanic": "NPC rescue",
+    "Where To Check":
+      "Side rooms and optional paths in the wild.",
+    "Why It Matters":
+      "Rescued NPCs can return to Haven and unlock useful services, including gear shop options and skill point refund support.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Spending points without a first build plan",
+    "Why It Hurts":
+      "The skill tree is large, and early points feel weak if they are spread across unrelated routes.",
+    Fix:
+      "For most first-time players, start with 2 health/survival nodes, 1 stamina node, then put the next 3 points into your main weapon or spell route if those nodes are available.",
+  },
+  {
+    Mistake: "Emptying your stamina bar",
+    "Why It Hurts":
+      "You cannot dodge, block, or escape after your last swing.",
+    Fix:
+      "Keep at least 1/3 stamina before an enemy attack connects.",
+  },
+  {
+    Mistake: "Using telekinesis only when the tutorial forces it",
+    "Why It Hurts":
+      "You miss one of the safest ways to start fights, pull enemies, and interact with objects.",
+    Fix:
+      "Use it before crowded fights, near interactable objects, and when you need space to heal.",
+  },
+  {
+    Mistake: "Leaving Haven without crafting",
+    "Why It Hurts":
+      "Ancient Hallways can punish you before you understand enemy groups.",
+    Fix:
+      "Craft healing or mana support before the route, then restock when you return.",
+  },
+  {
+    Mistake: "Ignoring side paths",
+    "Why It Hurts":
+      "You can miss keys, rings, materials, NPCs, and routes that later unlock Haven options.",
+    Fix:
+      "Check optional rooms before leaving a section, especially when a path loops or says it opens from elsewhere.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+Your first hour in **Fatekeeper** should be:
+
+**explore Haven → portal training → craft at the alchemy table → enter Ancient Hallways**.
+
+In Haven, compare **Blade of the Sentinel** and **Axe of the Sentinel** before spending points. In portal training, practice block, kick, stamina control, and telekinesis. Before Ancient Hallways, craft healing or mana support. Once inside, look for the **Ornate Copper Key**, **Ring of Life**, side paths, and NPC rescue opportunities.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 Early Access. This beginner guide covers Fatekeeper's first hour, Haven, portal training, combat basics, Blade vs Axe, telekinesis, alchemy, Ancient Hallways, Ring of Life, NPC rescue, respec notes, and common beginner mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-haven-start.webp"
+    alt="Fatekeeper opening path toward Haven with the player HUD visible."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first goal is simple: reach Haven, learn the safe area, then prepare before the first real route.
+  </figcaption>
+</figure>
+
+<h2 id="first-hour-roadmap">
+  First hour roadmap
+</h2>
+
+Your first hour in Fatekeeper has a clean route:
+
+```txt
+Explore Haven
+→ finish portal training
+→ craft at the alchemy table
+→ enter Ancient Hallways
+````
+
+That order matters because each step gives you something practical. Haven lets you check your weapons and skill tree. Portal training teaches block, kick, stamina, and telekinesis. The alchemy table gives you healing or mana support. Ancient Hallways is the first route where keys, side paths, enemies, and early pickups start to matter.
+
+<div className="my-4">
+  <Link href="/fatekeeper">
+    Need the full guide hub? Start with the main Fatekeeper guide
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="explore-haven">
+  Explore Haven before the portal
+</h2>
+
+Haven is your first safe hub. Use it to understand three things:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>where the portal and map table are,</li>
+  <li>where the alchemy table is,</li>
+  <li>and what your starting weapons and first skill options look like.</li>
+</ul>
+
+Do not spend several skill points before you know which weapon feels good. Open the tree, look at the routes, then make your first choices after the training room teaches you how combat actually feels.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-skill-tree-overview.webp"
+    alt="Fatekeeper large skill tree overview with early upgrade paths."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The skill tree is large. Your first goal is not to solve the whole tree; it is to pick a safe direction.
+  </figcaption>
+</figure>
+
+<h2 id="starting-weapons">
+  Blade of the Sentinel vs Axe of the Sentinel
+</h2>
+
+Your first important gear choice is **Blade of the Sentinel vs Axe of the Sentinel**.
+
+<GuideTable
+caption="Blade of the Sentinel vs Axe of the Sentinel."
+columns={weaponColumns}
+rows={weaponRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-blade-vs-axe-stats.webp"
+    alt="Fatekeeper Blade of the Sentinel and Axe of the Sentinel starting weapon stat comparison."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Both starting weapons show 5 attack costs and 5 dash costs. Blade of the Sentinel has 30 slash damage, while Axe of the Sentinel has 20 slash damage.
+  </figcaption>
+</figure>
+
+For most players, start with **Blade of the Sentinel** if you want the stronger listed damage. Switch to **Axe of the Sentinel** if the one-handed rhythm feels easier while learning spacing, block, kick, and stamina.
+
+Do not overthink this choice. Test both before committing your first real weapon upgrades.
+
+<div className="my-4">
+  <Link href="/fatekeeper/best-weapons">
+    Need the full weapon breakdown? Read the Fatekeeper Best Weapons Guide
+  </Link>
+</div>
+
+<h2 id="portal-training">
+  Portal training: what to actually practice
+</h2>
+
+The portal training is not just a tutorial checklist. It teaches the first-hour combat loop.
+
+You should leave portal training knowing:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>how early you need to block,</li>
+  <li>when kick breaks guard,</li>
+  <li>how quickly stamina disappears,</li>
+  <li>how telekinesis pulls enemies,</li>
+  <li>and how search mode interacts with marked objects.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-portal-training.webp"
+    alt="Fatekeeper portal training area where the player learns combat basics."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the training room to test timing. The point is not speed; it is learning how much each action commits you.
+  </figcaption>
+</figure>
+
+<h2 id="combat-basics">
+  Combat basics: stamina, block, kick, and healing
+</h2>
+
+Start with these rules instead of trying to memorize every enemy:
+
+<GuideTable
+caption="Fatekeeper beginner combat rules."
+columns={combatColumns}
+rows={combatRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-combat-block-tutorial.webp"
+    alt="Fatekeeper tutorial prompt showing block used against incoming attacks."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Block is useful when you read the attack early. If you are always blocking late, step back and slow down.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-combat-kick-guard-break.webp"
+    alt="Fatekeeper tutorial prompt showing kick used to break an enemy guard."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Kick is your first answer to guard. If kick does not create an opening, reposition instead of forcing more swings.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="telekinesis">
+  Telekinesis: when it is better than attacking
+</h2>
+
+Telekinesis is not just a tutorial spell. It is your safest way to start certain fights.
+
+<GuideTable
+caption="Practical telekinesis uses in Fatekeeper."
+columns={telekinesisColumns}
+rows={telekinesisRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-telekinesis-pull.webp"
+    alt="Fatekeeper telekinesis spell pulling an enemy during early combat training."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pulling first is often safer than walking into range. Use telekinesis to decide how the fight starts.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-telekinesis-search-mode.webp"
+    alt="Fatekeeper telekinesis search mode used to interact with a marked object."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Search mode is for marked objects and interactions. If something highlights, try telekinesis before wasting time attacking it.
+  </figcaption>
+</figure>
+
+<h2 id="alchemy">
+  Craft at the alchemy table before Ancient Hallways
+</h2>
+
+Before leaving Haven, craft at least basic recovery if your ingredients allow it.
+
+You are looking for:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>healing,</li>
+  <li>mana support,</li>
+  <li>poison or damage effects,</li>
+  <li>and weapon coating options.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-alchemy-table.webp"
+    alt="Fatekeeper alchemy table showing potions, vials, ingredients, and effects."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Craft before the route, not after you are already out of healing. Alchemy is part of your first-hour survival plan.
+  </figcaption>
+</figure>
+
+If you are not sure what to make, start with healing. Add mana support only if you are casting often.
+
+
+<h2 id="ancient-hallways">
+  Ancient Hallways: your first real route
+</h2>
+
+Ancient Hallways is where Fatekeeper starts mixing combat with route memory. Instead of rushing forward, use this section like a checklist: locked doors, side paths, early rings, materials, and NPC rescue opportunities all matter here.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-ancient-hallways.webp"
+    alt="Fatekeeper Ancient Hallways area with the player entering the first major route."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ancient Hallways is the first route where you should slow down and track side paths, keys, and pickups.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Early Ancient Hallways pickups and mechanics."
+  columns={earlyItemColumns}
+  rows={earlyItemRows}
+/>
+
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-ornate-copper-key-door.webp"
+    alt="Fatekeeper locked door that requires an ornate copper key."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When you see the Ornate Copper Key requirement, remember the door and come back once the route gives you the key.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-ring-of-life-pickup.webp"
+    alt="Fatekeeper Ring of Life common ring showing plus five health."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ring of Life gives +5 health. Pick it up early in Ancient Hallways if you are still getting punished by basic enemies.
+  </figcaption>
+</figure>
+
+<h2 id="npc-rescue">
+  Rescue NPCs and send them back to Haven
+</h2>
+
+Do not skip side rooms just because they are not on the main path. Fatekeeper uses Haven as a hub, and rescued NPCs can return there to unlock useful services.
+
+The important beginner loop is:
+
+```txt
+check side rooms and optional routes
+→ rescue NPCs
+→ send them back to Haven
+→ unlock new gear shop options or skill point refund support
+```
+
+This matters because exploration is not only about loot. A side path can lead to materials, rings, keys, rescued NPCs, new Haven services, or better shop options.
+
+If you are wondering how to unlock more gear choices or how skill refunds work, do not only push the main route. Recheck optional rooms and rescue NPCs when the game gives you the chance.
+
+<h2 id="first-build">
+  First build recommendation
+</h2>
+
+For most first-time players, use this simple build rule:
+
+```txt
+2 health / survival nodes
+→ 1 stamina node
+→ 3 points into your main weapon or spell route
+```
+
+This is not a permanent meta build. It is a safe first-hour structure.
+
+<GuideTable
+caption="How to spend early Fatekeeper points."
+columns={buildColumns}
+rows={buildRows}
+/>
+
+If you are using **Blade of the Sentinel** or **Axe of the Sentinel**, lean toward melee damage, stamina, and attack speed. If fire or telekinesis is doing most of the work, add spell power or mana. If you are crafting every route, alchemy becomes more valuable.
+
+<div className="my-4">
+  <Link href="/fatekeeper/best-build">
+    Need the full build route? Read the Fatekeeper Best Builds Guide
+  </Link>
+</div>
+
+<h2 id="common-mistakes">
+  Common beginner mistakes
+</h2>
+
+These are the mistakes that make the first hour feel harder than it needs to be.
+
+<GuideTable
+caption="Common Fatekeeper beginner mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best first-hour route?
+
+Use this route: Haven, portal training, alchemy table, Ancient Hallways. In Ancient Hallways, look for the Ornate Copper Key, Ring of Life, side paths, and NPC rescue opportunities.
+
+### Should I use Blade of the Sentinel or Axe of the Sentinel?
+
+Use Blade of the Sentinel if you want higher listed starting damage. It has 5 attack costs, 5 dash costs, and 30 slash damage. Axe of the Sentinel has the same listed costs but 20 slash damage, making it a simpler one-handed option if that rhythm feels better.
+
+### How much stamina should I keep?
+
+Keep at least 1/3 of your stamina bar before an enemy swing connects. If you cannot dodge or block after attacking, your string was too long.
+
+### When is telekinesis better than attacking?
+
+Use telekinesis when a group is in a corridor, when a dangerous enemy is just outside melee range, when you need time to heal, or when an object is highlighted for search mode.
+
+### How does telekinesis search mode work?
+
+Switch to telekinesis, hold search mode, hover over a valid target, then release to interact. Use it on highlighted objects instead of trying to hit everything with your weapon.
+
+### How do I break enemy guard?
+
+Use kick when an enemy guards. If kick does not create an opening on a specific enemy, stop forcing it and reposition.
+
+### Is there an FOV setting?
+
+If you cannot find an FOV option in your current build, check the display and graphics menus first, then use lower motion settings or more comfortable display settings where available. If you are sensitive to first-person camera movement, take breaks and watch for Early Access updates.
+
+### Should I craft before Ancient Hallways?
+
+Yes. Craft healing first, then mana support if you cast often. Poison, vials, and weapon coatings become more useful once you understand the route.
+
+### Where is the Ornate Copper Key?
+
+The Ornate Copper Key is in the early Ancient Hallways route after you first see the locked copper-key door. Push through the nearby lower / side route, pick up the key, then return to open the locked door.
+
+### Where is Ring of Life?
+
+Ring of Life appears early in Ancient Hallways around the first left-side corridor / ledge section after entering the area. It gives +5 health.
+
+### How do I unlock more gear shop options?
+
+Explore side rooms and rescue NPCs when the game gives you the chance. Rescued NPCs can return to Haven and unlock useful services, including gear shop options or skill point refund support.
+
+### Can I respec or refund skill points?
+
+Early respecs are free at the Sanctuary of First Flame. Later respecs cost a rare resource found through exploration. Treat early points carefully until you know where the sanctuary is in your current build.
+
+### What should I spend my first skill points on?
+
+For most first-time players, use 2 health or survival nodes, 1 stamina node, then 3 points into your main weapon or spell route if those nodes are available.
+
+### What is the biggest beginner mistake?
+
+The biggest mistake is entering Ancient Hallways without preparation. Check weapons, learn portal training tools, craft before leaving Haven, and keep enough stamina to escape after attacking.
+

@@ -1,0 +1,694 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const spellRouteColumns = [
+  { key: "Spell Route", label: "Spell Route" },
+  { key: "Best For", label: "Best For" },
+  { key: "Beginner Advice", label: "Beginner Advice" },
+];
+
+export const spellRouteRows = [
+  {
+    "Spell Route": "Fire / Pyromancy",
+    "Best For": "Reliable damage, hard fights, burning pressure, projectile upgrades, and fire alchemy support.",
+    "Beginner Advice":
+      "Fire is the safest magic route to recommend first because it has clear damage scaling, projectile upgrades, and alchemy support from ingredients like Kutracite.",
+  },
+  {
+    "Spell Route": "Telekinesis",
+    "Best For": "Pulling enemies, controlling space, interacting with objects, and utility play.",
+    "Beginner Advice":
+      "Use telekinesis even if you are not a full mage. It changes positioning and gives you safer openings before melee or fire damage.",
+  },
+  {
+    "Spell Route": "Wind",
+    "Best For": "Arc coverage, spell pressure, and players who can handle higher spell costs.",
+    "Beginner Advice":
+      "Wind can scale, but it needs mana support. Do not take expensive wind nodes before you can pay for them.",
+  },
+  {
+    "Spell Route": "Shatter / Frost",
+    "Best For": "Control, ice setup, and builds that want to pair magic with blunt weapon payoff.",
+    "Beginner Advice":
+      "Treat shatter as a planned route, not a random side spell. It works better when your weapon and build support it.",
+  },
+  {
+    "Spell Route": "Life Leech / Alchemy sustain",
+    "Best For": "Players who want sustain through consumables, body effects, or weapon-applied vial effects.",
+    "Beginner Advice":
+      "Life Leech is confirmed through alchemy data such as Guards Vermillion, but a full Life Leech spell-tree route is not confirmed yet. Treat it as alchemy sustain for now.",
+  },
+];
+
+export const fireColumns = [
+  { key: "Fire Upgrade / Item", label: "Fire Upgrade / Item" },
+  { key: "Effect", label: "Effect" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const fireRows = [
+  {
+    "Fire Upgrade / Item": "Fire spell power",
+    Effect: "+20% Spell Power with Fire Spells",
+    "Why It Matters":
+      "Simple damage scaling for the safest early magic damage route.",
+  },
+  {
+    "Fire Upgrade / Item": "Excessive Flames",
+    Effect: "Burning enemies continuously lose poise",
+    "Why It Matters":
+      "Makes fire safer because burning pressure can interrupt or weaken enemy momentum.",
+  },
+  {
+    "Fire Upgrade / Item": "Flame Spout",
+    Effect: "Turns your fire spell into a ray of fire",
+    "Why It Matters":
+      "Changes fire into a more focused damage tool when you want controlled pressure.",
+  },
+  {
+    "Fire Upgrade / Item": "Ricochet",
+    Effect: "Fire projectiles now ricochet",
+    "Why It Matters":
+      "Lets fire work around corners, bad angles, and messy enemy positions.",
+  },
+  {
+    "Fire Upgrade / Item": "MORE!",
+    Effect: "+2 Projectiles",
+    "Why It Matters":
+      "Adds more projectile pressure, but becomes better when your mana pool can support frequent casting.",
+  },
+  {
+    "Fire Upgrade / Item": "Kutracite",
+    Effect: "+6% Fire Damage for 15s, +5 Fire damage",
+    "Why It Matters":
+      "Useful alchemy support for fire builds, especially if you want your magic route to gain extra short-window damage.",
+  },
+];
+
+export const telekinesisColumns = [
+  { key: "Telekinesis Use / Node", label: "Telekinesis Use / Node" },
+  { key: "Effect", label: "Effect" },
+  { key: "When To Use It", label: "When To Use It" },
+];
+
+export const telekinesisRows = [
+  {
+    "Telekinesis Use / Node": "Pull enemies",
+    Effect:
+      "Pulls or disrupts enemies so you can control the opening of a fight.",
+    "When To Use It":
+      "Use it when an enemy is dangerous up close or you want to separate one target from a group.",
+  },
+  {
+    "Telekinesis Use / Node": "Search mode",
+    Effect:
+      "Lets you interact with marked objects from range.",
+    "When To Use It":
+      "Use it when the game highlights a shield, object, sigil, or interactable target.",
+  },
+  {
+    "Telekinesis Use / Node": "Savant",
+    Effect: "-50% Spell Costs with Telekinesis Spells",
+    "When To Use It":
+      "Take it only when telekinesis is part of your regular combat loop.",
+  },
+  {
+    "Telekinesis Use / Node": "Dark Arts",
+    Effect: "Telekinesis also deals arcane damage to lifted enemies",
+    "When To Use It":
+      "Use it when you want telekinesis to become a real combat route, not just utility.",
+  },
+];
+
+export const windColumns = [
+  { key: "Wind / Frost Node", label: "Wind / Frost Node" },
+  { key: "Effect", label: "Effect" },
+  { key: "Advice", label: "Advice" },
+];
+
+export const windRows = [
+  {
+    "Wind / Frost Node": "Lord of the Skies",
+    Effect: "+30% Windblast Arc",
+    Advice:
+      "Good if you want wider wind coverage. This is more about area and angle than simple damage.",
+  },
+  {
+    "Wind / Frost Node": "Storm Surge",
+    Effect: "+50% Spell Power with Wind Spells, +25% Spell Costs with Wind Spells",
+    Advice:
+      "Strong but expensive. Do not take it before you have mana support.",
+  },
+  {
+    "Wind / Frost Node": "Herald of Winter (WIP)",
+    Effect: "Windblast is infused with ice",
+    Advice:
+      "Interesting for a wind / frost route, but avoid building around it as your only plan while it is marked WIP.",
+  },
+];
+
+export const lifeLeechColumns = [
+  { key: "Alchemy Item / System", label: "Alchemy Item / System" },
+  { key: "Confirmed Effect", label: "Confirmed Effect" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const lifeLeechRows = [
+  {
+    "Alchemy Item / System": "Guards Vermillion",
+    "Confirmed Effect": "+10% increased Stance for 15s, +5% Life Leech",
+    "How To Use It":
+      "Use it when you want sustain from an alchemy setup. The Life Leech value is confirmed, but it should be treated as consumable support rather than a full spell route by itself.",
+  },
+  {
+    "Alchemy Item / System": "Potion container",
+    "Confirmed Effect": "Ingredients mixed in this container create a potion that affects your body.",
+    "How To Use It":
+      "Use potion-style results when you want body buffs such as stance, sustain, or other self-focused effects.",
+  },
+  {
+    "Alchemy Item / System": "Vial container",
+    "Confirmed Effect": "Ingredients mixed in this container create a vial that can be applied to your weapon.",
+    "How To Use It":
+      "Use vial results when you want your weapon route to gain extra effects from alchemy.",
+  },
+  {
+    "Alchemy Item / System": "Hand Bomb container",
+    "Confirmed Effect": "Ingredients mixed in this container create throwable hand bombs.",
+    "How To Use It":
+      "Use hand bombs when you want alchemy to become a ranged or throwable tool instead of a body or weapon effect.",
+  },
+];
+
+export const bossSpellColumns = [
+  { key: "Spell Route", label: "Spell Route" },
+  { key: "Boss Usefulness", label: "Boss Usefulness" },
+  { key: "Recommendation", label: "Recommendation" },
+];
+
+export const bossSpellRows = [
+  {
+    "Spell Route": "Fire",
+    "Boss Usefulness": "Most reliable damage route for the current hard fight.",
+    Recommendation:
+      "Use fire if your build has spell power, mana, fire upgrades, or fire alchemy support. It is the safest magic damage plan.",
+  },
+  {
+    "Spell Route": "Telekinesis",
+    "Boss Usefulness": "Useful as utility, but weak as the main boss damage plan unless built for it.",
+    Recommendation:
+      "Use it for control and positioning, not as your only way to kill the boss.",
+  },
+  {
+    "Spell Route": "Wind",
+    "Boss Usefulness": "Can struggle if you do not have the mana and node support.",
+    Recommendation:
+      "Use wind only if you already committed to the route.",
+  },
+  {
+    "Spell Route": "Ice / shatter",
+    "Boss Usefulness": "Less reliable as a quick answer unless your whole build supports it.",
+    Recommendation:
+      "Do not force it during a boss wall. Use it when your weapon and setup match the route.",
+  },
+  {
+    "Spell Route": "Life leech",
+    "Boss Usefulness": "Useful as alchemy sustain, but not confirmed as a full boss-killing spell route.",
+    Recommendation:
+      "Use Guards Vermillion or other confirmed Life Leech alchemy effects as support. Do not make it your only boss plan.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Feels Bad", label: "Why It Feels Bad" },
+  { key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Taking spell nodes without enough mana",
+    "Why It Feels Bad":
+      "Strong spell nodes do not matter if you run out of mana before the fight is under control.",
+    "Better Choice":
+      "Use Power for early mana and elemental scaling, then take Greater Mana when you need a bigger pool.",
+  },
+  {
+    Mistake: "Forcing wind too early",
+    "Why It Feels Bad":
+      "Storm Surge gives big power but also increases wind spell costs.",
+    "Better Choice":
+      "Use wind after you have mana support. Use fire first if you want a simpler damage route.",
+  },
+  {
+    Mistake: "Treating telekinesis as only a damage spell",
+    "Why It Feels Bad":
+      "Telekinesis shines because it controls enemies and interacts with objects.",
+    "Better Choice":
+      "Use pull and search mode first, then add Savant or Dark Arts if you want to build around it.",
+  },
+  {
+    Mistake: "Treating Life Leech like a full spell route",
+    "Why It Feels Bad":
+      "The confirmed data shows Life Leech through alchemy effects like Guards Vermillion, not a complete standalone spell-tree route yet.",
+    "Better Choice":
+      "Use Life Leech as sustain support for melee, fire, or alchemy builds, then update the route if dedicated nodes are confirmed later.",
+  },
+  {
+    Mistake: "Using magic while standing too close",
+    "Why It Feels Bad":
+      "Casting still needs space. If you cast inside enemy range, you can get punished like a bad melee swing.",
+    "Better Choice":
+      "Create distance with movement, block, kick, or telekinesis before casting.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The best spell route in **Fatekeeper** is **fire / pyromancy** if you want reliable damage. Fire has useful upgrades like **+20% fire spell power**, **Excessive Flames**, **Ricochet**, and **MORE! +2 Projectiles**. It can also get alchemy support from **Kutracite**, which gives **+6% Fire Damage for 15s** and **+5 Fire damage**.
+
+Use **telekinesis** even if you are not a full mage, because it can pull enemies, control space, and interact with objects. Use **wind** only when you have enough mana support, because **Storm Surge** gives +50% wind spell power but also increases wind spell costs by 25%.
+
+**Life Leech is confirmed through alchemy**, especially **Guards Vermillion** with **+5% Life Leech**, but a full Life Leech spell-tree route is not confirmed yet. Treat it as sustain support, not your first main spell build.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 Early Access. This guide covers Fatekeeper fire spells, telekinesis, wind, shatter, life leech, mana nodes, alchemy containers, spell costs, and the best magic routes for hard fights.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-telekinesis-pull.webp"
+    alt="Fatekeeper telekinesis spell pulling an enemy during early combat training."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Telekinesis is the first spell tool you should respect. It controls fights before your damage build comes online.
+  </figcaption>
+</figure>
+
+<h2 id="best-spells">
+  Best spells in Fatekeeper
+</h2>
+
+The best spell route in Fatekeeper depends on your problem: use **fire** for reliable damage, **telekinesis** for control, **wind** only after you have mana support, and **Life Leech** as alchemy-based sustain for now.
+
+For the full node-by-node order, see the recommended spell progression section below.
+
+<GuideTable
+  caption="Fatekeeper spell routes and best uses."
+  columns={spellRouteColumns}
+  rows={spellRouteRows}
+/>
+
+<div className="my-4">
+  <Link href="/fatekeeper/beginner-guide">
+    Still learning the first hour? Read the Fatekeeper Beginner Guide
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="fire-spells">
+  Fire / pyromancy: best damage route
+</h2>
+
+Fire is the best spell route for most players right now because it has clear damage scaling, useful projectile upgrades, and alchemy support.
+
+<GuideTable
+  caption="Fatekeeper fire spell upgrades and fire alchemy support."
+  columns={fireColumns}
+  rows={fireRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-spell-tree-fire-ricochet.webp"
+    alt="Fatekeeper spell tree with Greater Mana, fire, wind, ricochet, and winter spell nodes."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fire has the clearest early damage route because its nodes improve damage, poise pressure, and projectile behavior.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-kutracite-fire-damage.webp"
+    alt="Fatekeeper Kutracite ingredient showing fire damage bonuses in the alchemy container menu."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Kutracite supports fire builds through alchemy, giving +6% Fire Damage for 15 seconds and +5 Fire damage while showing how the same ingredient can be used through Potion, Vial, or Hand Bomb containers.
+  </figcaption>
+</figure>
+
+A practical fire route looks like this:
+
+```txt
+basic survivability
+→ Power or spell power
+→ Greater Mana
+→ Excessive Flames
+→ Ricochet
+→ MORE!
+→ Kutracite or alchemy backup
+````
+
+Use fire if melee feels too risky, hard fights need safer damage, or your build already has Power, spell power, and enough mana to keep casting.
+
+If you find the **Burning Axe**, it works well as a fire / melee hybrid option. See the <Link href="/fatekeeper/best-weapons">Best Weapons Guide</Link> for the weapon details.
+
+<h2 id="telekinesis">
+  Telekinesis: best utility spell
+</h2>
+
+Telekinesis is useful even before you build around it. It can pull enemies, create space, and interact with specific objects.
+
+<GuideTable
+caption="Fatekeeper telekinesis uses and nodes."
+columns={telekinesisColumns}
+rows={telekinesisRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-telekinesis-search-mode.webp"
+    alt="Fatekeeper telekinesis search mode used to interact with a marked object."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Search mode is why telekinesis matters outside combat too. Some interactions are meant to be handled from range.
+  </figcaption>
+</figure>
+
+A telekinesis route looks like this:
+
+```txt
+mana support
+→ Savant
+→ Dark Arts
+→ survivability
+→ fire or melee backup
+```
+
+Do not judge telekinesis only by damage. Its best value is often that it lets you control when and where the fight starts.
+
+<h2 id="mana">
+  Power, Greater Mana and spell costs
+</h2>
+
+Mana decides whether a spell route feels good or frustrating. A strong spell route with no mana support can still collapse halfway through a room.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-greater-mana-node.webp"
+    alt="Fatekeeper Greater Mana skill node showing plus 15 mana."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Greater Mana gives +15 Mana. It is not flashy, but it can make a spell route feel much smoother.
+  </figcaption>
+</figure>
+
+**Power** is the broader early magic node: it gives **+5 Mana** and **+3% Elemental Damage**, so it helps both your resource pool and spell scaling. **Greater Mana** is the cleaner mana expansion node: it gives **+15 Mana** without also acting as an elemental damage pick.
+
+Use the two differently:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Take <strong>Power</strong> when you want mana plus elemental damage.</li>
+  <li>Take <strong>Greater Mana</strong> when spell cost is the main thing stopping your build from working.</li>
+  <li>Do not stack mana nodes blindly if your real problem is damage, stamina, or survivability.</li>
+</ul>
+
+<h2 id="wind">
+  Wind spells: strong but expensive
+</h2>
+
+Wind can be good, but it is not the easiest route for beginners. The main issue is cost management.
+
+<GuideTable
+caption="Fatekeeper wind and frost-related spell nodes."
+columns={windColumns}
+rows={windRows}
+/>
+
+Use wind if you like wider arc coverage, already have mana support, and are willing to manage higher costs. If you are stuck in a hard fight and just need a reliable answer, fire is easier to recommend than wind.
+
+<h2 id="shatter-frost">
+  Shatter / frost: use it as a planned route
+</h2>
+
+Shatter and frost are interesting because they can connect magic with weapon choice. This route makes the most sense when you are also thinking about blunt weapons, setup windows, and control.
+
+Use shatter / frost if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you like freezing or controlling enemies before punishing,</li>
+  <li>you want to use clubs, maces, hammers, or other blunt weapons,</li>
+  <li>you are comfortable waiting for setup windows,</li>
+  <li>and you do not need the fastest beginner damage route.</li>
+</ul>
+
+A shatter-style route looks like this:
+
+```txt
+survivability
+→ stamina
+→ frost / ice support
+→ blunt weapon comfort
+→ shatter payoff
+```
+
+Do not force shatter if your weapon and build do not support it. Fire and telekinesis are easier to use early because they solve more immediate problems.
+
+<div className="my-4">
+  <Link href="/fatekeeper/best-weapons">
+    Need blunt weapon options? Read the Fatekeeper Best Weapons Guide
+  </Link>
+</div>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="life-leech">
+  Life Leech: confirmed as alchemy sustain
+</h2>
+
+Life Leech is no longer just a route to watch. It is confirmed as an **alchemy effect** through **Guards Vermillion**, which gives:
+
+```txt
++10% increased Stance for 15s
++5% Life Leech
+```
+
+That makes Life Leech useful, but the important detail is this: right now, the confirmed data supports **Life Leech as alchemy sustain**, not a complete standalone spell-tree route.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-guards-vermillion-life-leech.webp"
+    alt="Fatekeeper Guards Vermillion ingredient showing increased stance and life leech effects."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Guards Vermillion confirms +5% Life Leech as an alchemy effect, along with +10% increased Stance for 15 seconds.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Fatekeeper Life Leech and alchemy sustain options."
+columns={lifeLeechColumns}
+rows={lifeLeechRows}
+/>
+
+Use Life Leech if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you want sustain during longer fights,</li>
+  <li>you already use alchemy before hard rooms,</li>
+  <li>you can apply the effect through a potion or vial setup,</li>
+  <li>and your build has enough survivability to stay alive while sustain pays off.</li>
+</ul>
+
+Do not treat Life Leech as immortality. A small sustain effect helps you recover during a fight, but it will not fix bad stamina management, panic healing, or standing inside enemy attacks.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-alchemy-container-types.webp"
+    alt="Fatekeeper alchemy containers showing potion, vial, and hand bomb options."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Alchemy results depend on the container: potions affect your body, vials can be applied to weapons, and hand bombs become throwable tools.
+  </figcaption>
+</figure>
+
+For now, the safest way to think about Life Leech is:
+
+```txt
+Guards Vermillion
+→ potion or vial setup
+→ sustain support
+→ melee, fire, or alchemy hybrid build
+```
+
+This section should still be updated after more testing confirms whether Life Leech has dedicated skill-tree nodes, scaling bonuses, or route-specific upgrades.
+
+<h2 id="best-spells-for-bosses">
+  Best spells for bosses and hard fights
+</h2>
+
+For hard fights, fire is the safest spell route to recommend. It gives clear damage and works better as a main answer than trying to force ice, wind, or telekinesis without enough support.
+
+<GuideTable
+caption="Best Fatekeeper spells for hard fights."
+columns={bossSpellColumns}
+rows={bossSpellRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-fire-best.webp"
+    alt="Fatekeeper hard fight using fire as the safest damage option."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fire is the safest hard-fight spell route when you need reliable damage and do not want to stand inside every melee window.
+  </figcaption>
+</figure>
+
+The safest boss spell setup is:
+
+```txt
+fire as main damage
++ Greater Mana if costs hurt
++ telekinesis for control
++ healing or alchemy backup
++ melee punish windows when safe
+```
+
+If your spell route fails during a boss, do not immediately blame the spell. Check whether you have enough mana, enough survivability, and enough space to cast safely.
+
+<div className="my-4">
+  <Link href="/fatekeeper/boss-guide">
+    Stuck on a hard fight? Read the Fatekeeper Boss Guide
+  </Link>
+</div>
+
+<h2 id="common-mistakes">
+  Common spell mistakes
+</h2>
+
+Most spell mistakes come from taking exciting nodes before your build can support them.
+
+<GuideTable
+caption="Common Fatekeeper spell mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+A simple rule works well:
+
+```txt
+Control first
+→ mana second
+→ damage third
+→ expensive route nodes last
+```
+
+That order keeps magic useful without turning every fight into a resource problem.
+
+
+<h2 id="recommended-spell-progression">
+  Recommended spell progression
+</h2>
+
+For a normal first run, use this progression:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Use telekinesis for pull, control, and object interaction.</li>
+  <li>Use fire as your first real damage spell route.</li>
+  <li>Take Power when you want mana plus elemental damage.</li>
+  <li>Take Greater Mana if you run out of mana too quickly.</li>
+  <li>Add fire nodes like Excessive Flames, Ricochet, Flame Spout, or MORE! if fire is carrying fights.</li>
+  <li>Use Kutracite if you want short-window fire damage support from alchemy.</li>
+  <li>Use Savant or Dark Arts only if telekinesis is part of your normal loop.</li>
+  <li>Use wind nodes after you can handle the spell costs.</li>
+  <li>Use shatter / frost when your weapon and build support the setup.</li>
+  <li>Use Guards Vermillion when you want Life Leech sustain through alchemy.</li>
+</ol>
+
+### What is the best spell in Fatekeeper?
+
+Fire is the safest damage spell route for most players. It has clear upgrades like +20% fire spell power, Excessive Flames, Ricochet, Flame Spout, and MORE! +2 Projectiles. Kutracite can also support fire through alchemy.
+
+### Is telekinesis good?
+
+Yes. Telekinesis is one of the best early tools because it can pull enemies, control space, and interact with objects. It is useful even if you are not a full magic build.
+
+### Should I build around telekinesis?
+
+Build around telekinesis only if you use it often. Savant reduces telekinesis spell costs by 50%, and Dark Arts adds arcane damage to lifted enemies, but those nodes are best when telekinesis is part of your normal loop.
+
+### Is Greater Mana worth it?
+
+Yes, if spell costs are stopping your build from working. Greater Mana gives +15 Mana and helps fire, wind, telekinesis, and other spell-heavy routes feel smoother.
+
+### Should I take Power or Greater Mana first?
+
+Take Power if you want both +5 Mana and +3% elemental damage. Take Greater Mana if your main problem is simply running out of mana, because Greater Mana gives +15 Mana.
+
+### Is wind good in Fatekeeper?
+
+Wind can be good, but it is more expensive to support. Storm Surge gives +50% spell power with wind spells but also adds +25% wind spell costs, so you need mana support first.
+
+### Is fire better than wind?
+
+For most beginners and hard fights, fire is easier to recommend because its damage plan is clearer. Wind can work, but it needs more support.
+
+### Does Kutracite help fire builds?
+
+Yes. Kutracite gives +6% Fire Damage for 15 seconds and +5 Fire damage, making it useful alchemy support for fire builds.
+
+### Does Burning Axe work with a fire build?
+
+Yes. Burning Axe is a strong fire / melee hybrid option if you like axe timing and want fire damage to support your weapon route. See the Best Weapons Guide for details.
+
+### Is shatter or frost good?
+
+Shatter and frost are good when you build around them. They make more sense with control, setup windows, and blunt weapon routes than as random side investments.
+
+### Is Life Leech worth using?
+
+Yes, as alchemy sustain. Guards Vermillion gives +5% Life Leech and +10% increased Stance for 15 seconds, so Life Leech can support longer fights. It is not confirmed as a full standalone spell-tree route yet, so use it as support for melee, fire, or alchemy builds.
+
+### What is the difference between Potion, Vial, and Hand Bomb?
+
+Potion results affect your body, Vial results can be applied to your weapon, and Hand Bomb results become throwable bombs. Choose the container based on whether you want a self-buff, a weapon effect, or a thrown alchemy tool.
+
+### What spell should I use for bosses?
+
+Use fire as your main spell damage route if your build supports it. Keep telekinesis for control, bring mana support if casting often, and use alchemy support such as Kutracite or Guards Vermillion when it fits your setup.
+
+### Should I use WIP spell nodes?
+
+Do not build your whole setup around WIP nodes. Treat them as future route hints, and rely on working effects like fire upgrades, Greater Mana, Savant, Dark Arts, Kutracite, and Guards Vermillion for the current version.
+

@@ -1,0 +1,605 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const bossPrepColumns = [
+  { key: "Before The Fight", label: "Before The Fight" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const bossPrepRows = [
+  {
+    "Before The Fight": "Save first",
+    "What To Do":
+      "Use the save point before the final fight route if you see one nearby.",
+    "Why It Matters":
+      "The runback can become frustrating if you die several times while learning the boss.",
+  },
+  {
+    "Before The Fight": "Craft consumables",
+    "What To Do":
+      "Use the alchemy pot before entering the arena. Bring healing, mana support, poison, or useful weapon effects.",
+    "Why It Matters":
+      "This fight is much easier when you enter prepared instead of trying to recover with no supplies.",
+  },
+  {
+    "Before The Fight": "Bring fire if you use magic",
+    "What To Do":
+      "Use fire as your safest damage spell if your build supports it.",
+    "Why It Matters":
+      "Fire is more reliable here than trying to force ice, wind, or telekinesis as your main damage plan.",
+  },
+  {
+    "Before The Fight": "Keep stamina available",
+    "What To Do":
+      "Do not empty your stamina bar on long attack strings.",
+    "Why It Matters":
+      "You need stamina to block, dodge, jump away, or back off after a punish window.",
+  },
+  {
+    "Before The Fight": "Expect adds",
+    "What To Do":
+      "Be ready to clear smaller enemies instead of tunnel-visioning the main target.",
+    "Why It Matters":
+      "Adds can interrupt your healing, block your movement, and turn a safe boss window into a death.",
+  },
+];
+
+export const attackColumns = [
+  { key: "Observed Attack", label: "Observed Attack" },
+  { key: "How To Answer It", label: "How To Answer It" },
+  { key: "Common Mistake", label: "Common Mistake" },
+];
+
+export const attackRows = [
+  {
+    "Observed Attack": "Long-range punch / lunge",
+    "How To Answer It":
+      "Respect the range and do not assume you are safe just because you backed up once.",
+    "Common Mistake":
+      "Healing or casting too close after one dodge, then getting clipped by the next reach attack.",
+  },
+  {
+    "Observed Attack": "Opening hit",
+    "How To Answer It":
+      "Block the first committed hit if you cannot reliably dodge it.",
+    "Common Mistake":
+      "Trying to last-second dodge every opener even when the timing keeps failing.",
+  },
+  {
+    "Observed Attack": "Stomp",
+    "How To Answer It":
+      "Jump or move early when the stomp is coming, then reset your spacing.",
+    "Common Mistake":
+      "Standing beside or behind the boss and assuming the stomp will miss.",
+  },
+  {
+    "Observed Attack": "Adds",
+    "How To Answer It":
+      "Clear them when they crowd you, especially before healing or committing to fire casts.",
+    "Common Mistake":
+      "Ignoring adds until they body-block you or interrupt your recovery.",
+  },
+  {
+    "Observed Attack": "Phase two pressure",
+    "How To Answer It":
+      "Slow down, block or dodge the first hit, punish briefly, then back away.",
+    "Common Mistake":
+      "Getting excited after reaching phase two and spending all stamina on greedy damage.",
+  },
+];
+
+export const spellColumns = [
+  { key: "Tool", label: "Tool" },
+  { key: "Usefulness In This Fight", label: "Usefulness In This Fight" },
+  { key: "Recommendation", label: "Recommendation" },
+];
+
+export const spellRows = [
+  {
+    Tool: "Fire",
+    "Usefulness In This Fight":
+      "The most reliable damage option if your build has spell power, mana, or fire upgrades.",
+    Recommendation:
+      "Use fire when melee windows feel too risky. It is the best magic fallback for this fight.",
+  },
+  {
+    Tool: "Ice / frost",
+    "Usefulness In This Fight":
+      "Can be tested, but it does not feel as reliable as fire for the current fight.",
+    Recommendation:
+      "Do not force ice as your main damage plan unless your whole build supports it.",
+  },
+  {
+    Tool: "Telekinesis",
+    "Usefulness In This Fight":
+      "Still useful as a control habit, but not enough as the main damage answer here.",
+    Recommendation:
+      "Use it for utility, not as your primary boss-killing plan.",
+  },
+  {
+    Tool: "Wind",
+    "Usefulness In This Fight":
+      "Can struggle if you do not have enough spell power and mana support.",
+    Recommendation:
+      "Use wind only if your build is already invested in it.",
+  },
+  {
+    Tool: "Melee",
+    "Usefulness In This Fight":
+      "Works when you punish short windows, especially after block, dodge, or kick.",
+    Recommendation:
+      "Attack once or twice, then back away. Do not greed.",
+  },
+];
+
+export const phaseColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "Goal", label: "Goal" },
+  { key: "Safe Plan", label: "Safe Plan" },
+];
+
+export const phaseRows = [
+  {
+    Phase: "Before entering",
+    Goal: "Prepare your setup.",
+    "Safe Plan":
+      "Save, craft, equip healing, organize quick slots, and make sure fire or your main damage tool is ready.",
+  },
+  {
+    Phase: "Opening",
+    Goal: "Survive the first read.",
+    "Safe Plan":
+      "Do not rush in. Watch the first attack, block if the dodge timing feels inconsistent, then punish lightly.",
+  },
+  {
+    Phase: "Adds pressure",
+    Goal: "Keep the arena manageable.",
+    "Safe Plan":
+      "Clear adds when they crowd you. Do not let them interrupt healing or push you into the boss.",
+  },
+  {
+    Phase: "Phase two",
+    Goal: "Avoid stomp deaths and greedy trades.",
+    "Safe Plan":
+      "Block or dodge the first hit, jump or move early for stomp, use fire or short melee punishes, then back away.",
+  },
+  {
+    Phase: "Final stretch",
+    Goal: "Finish without panic.",
+    "Safe Plan":
+      "Use the same loop: block, dodge, kick when safe, one punish, back away, heal only after creating space.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Kills You", label: "Why It Kills You" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Calling the boss Sacred Roots",
+    "Why It Kills You":
+      "It does not affect the fight, but it can confuse the route because the phrase appears in dialogue, not as a confirmed boss name.",
+    Fix:
+      "Treat it as the corrupted roots / final Early Access fight until the official boss name is clearly shown.",
+  },
+  {
+    Mistake: "Trying to dodge every hit late",
+    "Why It Kills You":
+      "The boss has long reach and awkward timing, so late dodges can still get clipped.",
+    Fix:
+      "Block the opener if your dodge timing is failing, then dodge or jump earlier for follow-up attacks.",
+  },
+  {
+    Mistake: "Ignoring adds",
+    "Why It Kills You":
+      "Adds can interrupt healing, trap you, and make the boss feel unfair.",
+    Fix:
+      "Clear adds before you fully commit to the boss.",
+  },
+  {
+    Mistake: "Healing in melee range",
+    "Why It Kills You":
+      "The boss can reach farther than expected, and healing takes commitment.",
+    Fix:
+      "Back away first, clear space, then heal.",
+  },
+  {
+    Mistake: "Forcing ice, wind, or telekinesis as main damage",
+    "Why It Kills You":
+      "Those tools may not carry the fight if your build is not fully invested in them.",
+    Fix:
+      "Use fire or safe melee as your reliable damage plan unless your build clearly supports another route.",
+  },
+  {
+    Mistake: "Getting greedy in phase two",
+    "Why It Kills You":
+      "The stomp and follow-up pressure punish long attack strings.",
+    Fix:
+      "One or two hits, then reset. Winning slowly is safer than dying with the boss almost dead.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The safest way to beat Fatekeeper's final Early Access fight is to **prepare before the arena, clear adds, use fire if your build supports it, block the first hit when dodge timing feels unreliable, jump or move early for the stomp, and never greed in phase two**.
+
+Do not treat “Sacred Roots” as the confirmed boss name. It appears as a line in the scene, so this guide calls it the **corrupted roots fight** or **final Early Access fight**.
+
+Your basic loop should be:
+
+**block or dodge → clear adds → fire or short melee punish → kick when safe → back away → heal only after creating space**.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 Early Access. This guide covers Fatekeeper boss preparation, the corrupted roots fight, adds, phase two, stomp timing, fire damage, safe melee windows, and common mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-entrance.webp"
+    alt="Fatekeeper final Early Access fight arena with corrupted roots in the center."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is the hard fight most players will remember from the current Early Access route. Treat it as a survival check, not only a damage check.
+  </figcaption>
+</figure>
+
+<h2 id="prepare-before-fight">
+  Prepare before the fight
+</h2>
+
+Do not walk into this fight with messy quick slots. The arena is small, the boss has long reach, and the adds can turn a good attempt into a bad one quickly.
+
+The phrase **“By the sacred roots...”** appears in the scene, but no confirmed boss name is clearly shown here. Until the official name is clear, this guide uses **corrupted roots fight** or **final Early Access fight**.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-save-before-boss.webp"
+    alt="Fatekeeper save and alchemy spot before the final Early Access fight."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Save and craft before the fight. If you die while learning the boss, you do not want to repeat setup mistakes every run.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Fatekeeper boss preparation checklist."
+  columns={bossPrepColumns}
+  rows={bossPrepRows}
+/>
+
+For most players, the safest prep is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Save before pushing into the fight.</li>
+  <li>Craft healing and mana support if you have ingredients.</li>
+  <li>Bring fire if your build uses spells.</li>
+  <li>Use a weapon you can recover from safely.</li>
+  <li>Keep enough stamina for block, dodge, and jump.</li>
+</ol>
+
+<div className="my-4">
+  <Link href="/fatekeeper/best-build">
+    Need a safer setup? Read the Fatekeeper Best Builds Guide
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="opening-phase">
+  Opening phase: do not rush the first read
+</h2>
+
+The opening mistake is running in like this is a normal enemy. It is not. The boss can cover more space than you expect, and your first bad dodge can put you behind the fight immediately.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-opening.webp"
+    alt="Fatekeeper boss fight opening as the corrupted roots enemy begins attacking."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start the fight slowly. Watch the first attack before you commit to long melee strings.
+  </figcaption>
+</figure>
+
+Use the first few seconds to learn:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>how far the boss can reach,</li>
+  <li>which attack you can block,</li>
+  <li>when the adds begin to matter,</li>
+  <li>and whether your current damage plan is actually working.</li>
+</ul>
+
+If you keep getting clipped by the opener, stop relying on last-second dodges. Block the first committed hit, then punish lightly.
+
+<h2 id="boss-attacks">
+  Boss attacks and how to answer them
+</h2>
+
+This fight gets easier once you stop reacting late. The boss's range is awkward, and the stomp can punish you even when you think you are beside it.
+
+These names describe the observed attacks from the fight, not confirmed official skill names.
+
+<GuideTable
+  caption="Fatekeeper final fight attacks and counters."
+  columns={attackColumns}
+  rows={attackRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-range.webp"
+    alt="Fatekeeper final fight showing the boss's long attack range."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Respect the boss's reach. If you heal or cast too close, the next lunge can still catch you.
+  </figcaption>
+</figure>
+
+<h2 id="adds">
+  Clear adds before they ruin the attempt
+</h2>
+
+The adds are not just background pressure. They make the arena harder to read, interrupt your recovery, and force bad movement.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-adds.webp"
+    alt="Fatekeeper final fight with smaller enemies pressuring the player."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Adds are one of the biggest reasons the fight feels messy. Clear them before committing to long boss damage windows.
+  </figcaption>
+</figure>
+
+Use this priority:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>If adds are far away, keep boss spacing and prepare your next window.</li>
+  <li>If adds are near you, clear or reposition first.</li>
+  <li>If you need to heal, create distance from both the boss and the adds.</li>
+  <li>If the boss is open but adds are blocking your escape path, do not greed.</li>
+</ol>
+
+The fight becomes much more manageable when the arena is clean.
+
+<h2 id="block-timing">
+  Block the opener if dodge timing feels bad
+</h2>
+
+If your late dodges keep failing, use block more. The first hit can be easier to handle with block than with a panic dodge.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-block-timing.webp"
+    alt="Fatekeeper player preparing to block during the final Early Access fight."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Blocking is a real answer here. If last-second dodges keep failing, block first and punish after the committed swing.
+  </figcaption>
+</figure>
+
+Use this rhythm:
+
+```txt
+block the committed hit
+→ wait for recovery
+→ one or two attacks
+→ back away
+````
+
+Do not hold block forever. You still need stamina to move, dodge, jump, or heal.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="phase-two">
+  Phase two: slow down
+</h2>
+
+Phase two is where many good attempts die. The fight starts to feel winnable, then the stomp or follow-up pressure punishes greed.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-phase-two.webp"
+    alt="Fatekeeper final fight entering phase two."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Phase two is not the time to speed up. Keep the same safe loop and let the boss give you punish windows.
+  </figcaption>
+</figure>
+
+Your phase two rhythm is the same core loop: **block or dodge, punish briefly, jump or move early for stomp, then reset**.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-stomp.webp"
+    alt="Fatekeeper final fight stomp attack during phase two."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The stomp is the move that punishes greedy phase two play. Move or jump early, then reset instead of forcing damage.
+  </figcaption>
+</figure>
+
+<h2 id="best-damage">
+  Best damage option: fire or short melee windows
+</h2>
+
+For the current fight, fire is the safest spell damage plan if your build supports it. Ice, wind, and telekinesis can still have uses, but they do not feel as reliable as fire for actually ending the fight.
+
+<GuideTable
+caption="Best tools for the final Early Access fight."
+columns={spellColumns}
+rows={spellRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-fire-best.webp"
+    alt="Fatekeeper final fight using fire as the most reliable damage option."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fire is the most reliable magic option here if your build has the mana and spell power to support it.
+  </figcaption>
+</figure>
+
+If you are mostly melee, do not force long combos. The safer melee loop is:
+
+```txt
+wait
+→ block or dodge
+→ punish once or twice
+→ kick if it creates space
+→ back away
+```
+
+<h2 id="clean-kill-loop">
+  Clean kill loop
+</h2>
+
+The successful rhythm is simple but strict:
+
+<GuideTable
+caption="Fatekeeper final fight phase plan."
+columns={phaseColumns}
+rows={phaseRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-clean-sequence.webp"
+    alt="Fatekeeper final fight clean sequence with dodge, kick, and backing away."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The clean rhythm is dodge, kick when safe, punish briefly, then back away. Do not turn one good window into a greedy death.
+  </figcaption>
+</figure>
+
+Use this full loop:
+
+```txt
+clear adds
+→ watch the boss
+→ block or dodge the opener
+→ fire or short melee punish
+→ jump or move early for stomp
+→ back away
+→ heal only when space is clear
+→ repeat
+```
+
+<h2 id="common-mistakes">
+  Common boss mistakes
+</h2>
+
+Most deaths in this fight come from the same few mistakes. Fixing one mistake at a time is better than trying to completely change your build after every death.
+
+<GuideTable
+caption="Common Fatekeeper boss fight mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+If you keep dying in phase two, the problem is usually not damage. It is stamina, greed, healing timing, or stomp awareness.
+
+<h2 id="recommended-build">
+  Recommended build for this fight
+</h2>
+
+For this fight, use **health, stamina, and fire or reliable melee**. If your setup feels too fragile, see the <Link href="/fatekeeper/best-build">Best Builds Guide</Link>.
+
+<h2 id="victory">
+  After you beat the fight
+</h2>
+
+Once the boss dies, do not immediately rush away. Check the room, recover, and look for any post-fight route, dialogue, or reward prompt.
+
+<figure className="my-8">
+  <Image
+    src="/images/fatekeeper/fatekeeper-final-fight-victory.webp"
+    alt="Fatekeeper final Early Access fight victory moment after the boss dies."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After the fight ends, take a second to check the arena before moving on. Hard fights can hide route changes or follow-up prompts.
+  </figcaption>
+</figure>
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What is the best way to beat the final Early Access fight?
+
+Prepare before entering, clear adds, use fire if your build supports it, block the opener if dodging feels unreliable, jump or move early for stomp, and punish only in short windows.
+
+### Should I use fire, ice, wind, or telekinesis?
+
+Fire is the safest damage option for most players. Ice, wind, and telekinesis can help if your build supports them, but they are less reliable as the main answer here.
+
+### Can I block the boss?
+
+Yes. Blocking can be better than trying to last-second dodge every opening hit. Just do not drain all your stamina by holding block forever.
+
+### How do I avoid the stomp?
+
+Move or jump early when the stomp starts. Do not stand close and assume it will miss because you are beside the boss.
+
+### Should I kill the adds?
+
+Yes. Clear adds when they crowd you or interrupt your healing. Ignoring them makes the boss feel much harder.
+
+### Why do I keep dying in phase two?
+
+Usually because of greed, low stamina, bad healing timing, or stomp damage. Slow down, punish briefly, then reset.
+
+### What build should I use for the fight?
+
+Use health, stamina, and fire or reliable melee. If your setup feels too fragile, use a safer build route before trying to brute-force the fight.
+
+### Is this fight too hard for a first run?
+
+It can feel rough if you enter underprepared or try to force greedy melee. The fight becomes much more manageable once you save, craft, manage adds, and stop overcommitting in phase two.
+
+### What should I do after beating the fight?
+
+Check the arena before leaving. Look for route changes, rewards, dialogue, or any new path that opens after the boss dies.
