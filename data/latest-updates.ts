@@ -13,6 +13,54 @@ export type LatestUpdateItem = {
   
   export const latestUpdates: LatestUpdateItem[] = [
 
+// ===== Realm of Ink =====
+{
+  href: "/realm-of-ink",
+  game: "Realm of Ink",
+  title: "Guide Hub, Builds, Oread & Endgame",
+  description:
+    "Start here for Realm of Ink beginner tips, Ink Gems, Momo, Curios, Oread, best builds, final boss, true ending, Endless, and Rupture.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+
+// ===== Realm of Ink =====
+{
+  href: "/realm-of-ink/beginner-guide",
+  game: "Realm of Ink",
+  title: "Beginner Guide, Ink Gems, Momo & Curios",
+  description:
+    "Learn Ink Gems, Momo, Curios, dash heavy attacks, Way Stations, challenge rooms, Fox Blood, Primordial Ink, Rupture, and early mistakes.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+
+// ===== Realm of Ink =====
+{
+  href: "/realm-of-ink/best-builds",
+  game: "Realm of Ink",
+  title: "Best Builds, Violeta, Oread & Red Crit",
+  description:
+    "Use Violeta status, Oread lasers, Red Crit, Venom + Ivy DOT, Momo pets, boss setups, Dragon Hair Brush, and Rupture build tips.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+
+// ===== Realm of Ink =====
+{
+  href: "/realm-of-ink/endless-rupture-guide",
+  game: "Realm of Ink",
+  title: "Endless, Rupture & High Difficulty Guide",
+  description:
+    "Unlock Endless mode, learn Rupture rewards, Dragon Hair Brush, Rupture 50, Archive builds, boss checks, and high difficulty build prep.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+},
+
 // ===== Fatekeeper =====
 {
   href: "/fatekeeper",

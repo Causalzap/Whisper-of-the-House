@@ -1,0 +1,692 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const difficultyColumns = [
+  { key: "System", label: "System" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const difficultyRows = [
+  {
+    System: "Difficulty 7 / Dragon Hair Brush",
+    "What It Means":
+      "The highest normal difficulty tier, with stronger monsters, better rewards, enhanced boss moves, and increased Fox Blood drops.",
+    "Player Advice":
+      "Do not rush it just because rewards are better. Weak builds get exposed quickly here.",
+  },
+  {
+    System: "Rupture",
+    "What It Means":
+      "An extra modifier system that adds more challenge for achievements, unlocks, rewards, and character rank progression.",
+    "Player Advice":
+      "Start low. Rupture makes existing build problems louder, especially weak boss damage and no defense.",
+  },
+  {
+    System: "Rupture 50",
+    "What It Means":
+      "A high-pressure endgame setting where enemies are much less forgiving and boss damage checks matter more.",
+    "Player Advice":
+      "Bring a finished build, not a build that still needs one lucky Curio.",
+  },
+  {
+    System: "Endless Mode",
+    "What It Means":
+      "A post-true-ending mode entered through Archive / Sanctum using a completed run's final build.",
+    "Player Advice":
+      "Enter with a build that ended strong. A build that barely cleared usually collapses quickly.",
+  },
+];
+
+export const unlockColumns = [
+  { key: "Mode", label: "Mode" },
+  { key: "How It Unlocks", label: "How It Unlocks" },
+  { key: "What To Do First", label: "What To Do First" },
+];
+
+export const unlockRows = [
+  {
+    Mode: "Endless Mode",
+    "How It Unlocks":
+      "Unlocks after you reach the true ending, then becomes available through the Archive / Sanctum system.",
+    "What To Do First":
+      "Finish the ending route first. If Endless is missing, keep progressing endings instead of searching the hub randomly.",
+  },
+  {
+    Mode: "Rupture",
+    "How It Unlocks":
+      "Appears through the doctor / old man near the run entrance after you have enough run progression to start adding modifiers.",
+    "What To Do First":
+      "Use low Rupture first. Early Rupture is limited, and higher levels open as you clear more.",
+  },
+  {
+    Mode: "Higher Rupture levels",
+    "How It Unlocks":
+      "At first, Rupture only lets you push a limited number of levels, such as Lv.5. After clears, more levels become available.",
+    "What To Do First":
+      "Clear the current cap, then return to raise Rupture further.",
+  },
+];
+
+export const rewardColumns = [
+  { key: "Rupture Milestone", label: "Rupture Milestone" },
+  { key: "Reward Meaning", label: "Reward Meaning" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const rewardRows = [
+  {
+    "Rupture Milestone": "Rupture 12",
+    "Reward Meaning":
+      "A first major climb checkpoint where new Rupture reward progression starts to matter more than simple challenge pushing.",
+    "Player Advice":
+      "Aim for this after Dragon Hair Brush clears feel stable. Treat it as your first real reward target, not just a difficulty flex.",
+  },
+  {
+    "Rupture Milestone": "Rupture 21",
+    "Reward Meaning":
+      "A deeper reward checkpoint that asks for stronger boss damage and better defensive planning.",
+    "Player Advice":
+      "Push here when your build can beat bosses without relying on perfect luck. If bosses take too long, farm lower Rupture first.",
+  },
+  {
+    "Rupture Milestone": "Rupture 30",
+    "Reward Meaning":
+      "A major high-Rupture checkpoint before the long-term rarity climb becomes the main reason to keep pushing.",
+    "Player Advice":
+      "Bring a finished build with scaling, defense, and boss payoff. Do not push this with a route that barely cleared Rupture 21.",
+  },
+  {
+    "Rupture Milestone": "Every 5 levels after that",
+    "Reward Meaning":
+      "Improves the appearance chance of Epic-or-higher Curios / perks and Elixirs.",
+    "Player Advice":
+      "This is the long-term farming reason to keep climbing: better high-rarity build pieces for future runs.",
+  },
+];
+
+
+export const buildColumns = [
+  { key: "Build Type", label: "Build Type" },
+  { key: "Why It Works", label: "Why It Works" },
+  { key: "Risk", label: "Risk" },
+];
+
+export const buildRows = [
+  {
+    "Build Type": "Violeta Primordial Status / Curse",
+    "Why It Works":
+      "Several damage layers stack together: Primordial Ink, status damage, curse effect, heavy attacks, Ink Relic skill damage, crit, and all damage bonus.",
+    Risk:
+      "High damage still needs clean movement. Late boss patterns can kill you if you skip defense.",
+  },
+  {
+    "Build Type": "Oread Curse Butterfly / Laser",
+    "Why It Works":
+      "Curses, butterflies, lasers, arrays, Power of Prayer, and Primordial upgrades can scale into long fights.",
+    Risk:
+      "Damage can feel low before curse payoff, laser upgrades, and defensive layers come online.",
+  },
+  {
+    "Build Type": "Status / DOT",
+    "Why It Works":
+      "Burning, bleeding, poison, stack limit, and status effect damage keep pressure active while you dodge.",
+    Risk:
+      "Status application without status scaling is not enough for high-Rupture bosses.",
+  },
+  {
+    "Build Type": "Momo / Ink Pet",
+    "Why It Works":
+      "Pets keep dealing damage while you focus on movement and pattern reading.",
+    Risk:
+      "One pet bonus is not a pet build. You need real pet scaling or it falls off.",
+  },
+];
+
+export const failureColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Why It Happens", label: "Why It Happens" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const failureRows = [
+  {
+    Problem: "Damage falls off",
+    "Why It Happens":
+      "Your rewards do not multiply one clear damage engine.",
+    Fix:
+      "Pick one route: status, curse, pets, heavy attack, crit, Ink Relic skill, or Primordial Ink.",
+  },
+  {
+    Problem: "Boss fights take too long",
+    "Why It Happens":
+      "Your build clears rooms but lacks boss pressure.",
+    Fix:
+      "Add single-target scaling, burst windows, status damage, curse payoff, or heavy attack / laser damage.",
+  },
+  {
+    Problem: "You die before the build works",
+    "Why It Happens":
+      "You spent everything on offense and skipped HP, shield, food, or damage reduction.",
+    Fix:
+      "Take defensive layers once your damage engine is online.",
+  },
+  {
+    Problem: "Endless feels much harder than expected",
+    "Why It Happens":
+      "You entered with a build that barely cleared instead of a build that could keep scaling.",
+    Fix:
+      "Use Archive / Sanctum with runs that ended strong, not runs that survived by luck.",
+  },
+  {
+    Problem: "Rupture feels unfair",
+    "Why It Happens":
+      "Rupture makes existing mistakes louder: weak scaling, poor economy, bad dodging, or no defense.",
+    Fix:
+      "Lower modifiers, fix the build, then climb again.",
+  },
+];
+
+export const checklistColumns = [
+  { key: "Before You Push", label: "Before You Push" },
+  { key: "Good Sign", label: "Good Sign" },
+  { key: "Bad Sign", label: "Bad Sign" },
+];
+
+export const checklistRows = [
+  {
+    "Before You Push": "Damage engine",
+    "Good Sign": "Your Ink Gems, Curios, Elixirs, and attacks all support one plan.",
+    "Bad Sign": "Your build is a mix of unrelated bonuses.",
+  },
+  {
+    "Before You Push": "Boss damage",
+    "Good Sign": "Late bosses lose HP quickly during your real damage windows.",
+    "Bad Sign": "Every boss becomes a long dodge test.",
+  },
+  {
+    "Before You Push": "Defense",
+    "Good Sign": "You have HP, shield, food, damage reduction, or safe mobility.",
+    "Bad Sign": "One bad pattern almost kills you.",
+  },
+  {
+    "Before You Push": "Economy",
+    "Good Sign": "You can buy healing, Elixirs, or key Curios at Way Stations.",
+    "Bad Sign": "You reach shops broke and injured.",
+  },
+  {
+    "Before You Push": "Attack loop",
+    "Good Sign": "You know whether to use light attacks, heavy attacks, Ink skills, pets, or lasers.",
+    "Bad Sign": "You keep fighting the same way even after your upgrades change.",
+  },
+];
+
+export const bossPatternColumns = [
+  { key: "Boss / Fight Type", label: "Boss / Fight Type" },
+  { key: "High Difficulty Problem", label: "High Difficulty Problem" },
+  { key: "Build Answer", label: "Build Answer" },
+];
+
+export const bossPatternRows = [
+  {
+    "Boss / Fight Type": "Book Spirit",
+    "High Difficulty Problem":
+      "Longer phases punish weak boss damage and make visual clutter harder to manage.",
+    "Build Answer":
+      "Use sustained pressure such as Violeta status / curse or Oread curse laser, plus enough defense to survive mistakes.",
+  },
+  {
+    "Boss / Fight Type": "Ink God",
+    "High Difficulty Problem":
+      "Burst windows matter more because the fight can punish builds that only clear rooms well.",
+    "Build Answer":
+      "Bring a finished build with single-target damage and at least one defensive layer.",
+  },
+  {
+    "Boss / Fight Type": "Whale / large bosses",
+    "High Difficulty Problem":
+      "Large HP pools expose Oread or DOT builds that have setup but no payoff.",
+    "Build Answer":
+      "Add ability damage, Ink Relic skill damage, heavy attack lasers, status scaling, or crit before the fight.",
+  },
+  {
+    "Boss / Fight Type": "Enhanced normal enemies",
+    "High Difficulty Problem":
+      "More dangerous patterns and higher HP make greed attacks riskier.",
+    "Build Answer":
+      "Keep ranged enemies visible, dodge first, and use pets / skills during safe openings.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Endless Mode** unlocks after you reach the **true ending**, then opens through the **Archive / Sanctum** system using a completed run's final build. If Endless is not available yet, keep progressing endings first.
+
+**Rupture** is the extra modifier system near the run entrance. Early Rupture starts with a limited cap, then higher levels open after clears. Push it for challenge, achievements, character progression, and reward milestones such as **Rupture 12, 21, and 30**. After that, every 5 Rupture levels improves the chance of Epic-or-higher Curios / perks and Elixirs.
+
+Do not push Endless, Dragon Hair Brush, or Rupture with a build that barely cleared. Bring a finished route like **Violeta Primordial Status / Curse** or a complete **Oread Curse Butterfly / Laser** setup.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Realm of Ink 1.0. This guide covers how to unlock Endless mode, how Rupture unlocks and scales, Rupture 12 / 21 / 30 rewards, Dragon Hair Brush, Rupture 50, Violeta high difficulty builds, Oread high difficulty builds, boss pattern changes, and endgame build mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-difficulty-rupture-doctor.webp"
+    alt="Realm of Ink difficulty 7 Dragon Hair Brush screen showing stronger monsters, enhanced boss moves, and better rewards."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dragon Hair Brush gives better rewards, but it also makes weak builds and bad habits much harder to hide.
+  </figcaption>
+</figure>
+
+<h2 id="endless-rupture-overview">
+  Endless, Dragon Hair Brush, and Rupture explained
+</h2>
+
+Realm of Ink's endgame is not just about clearing one more run. Once you start pushing higher difficulty, Rupture modifiers, and Endless, the game tests whether your build actually scales.
+
+A normal run can be cleared with a messy setup if you dodge well and get decent rewards. High difficulty is less forgiving. Rupture makes your weak points louder. Endless asks whether your final build can keep going after the normal route is already finished.
+
+<GuideTable
+  caption="Realm of Ink high difficulty systems."
+  columns={difficultyColumns}
+  rows={difficultyRows}
+/>
+
+<div className="my-4">
+  <Link href="/realm-of-ink">
+    Back to the Realm of Ink Guide Hub
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-to-unlock-endless-rupture">
+  How to unlock Endless mode and Rupture
+</h2>
+
+The two most common endgame questions are simple: **why is Endless missing, and how do I start Rupture?**
+
+<GuideTable
+  caption="How to unlock Endless mode and Rupture in Realm of Ink."
+  columns={unlockColumns}
+  rows={unlockRows}
+/>
+
+For Endless, the key requirement is the true ending. If you have not reached the true ending yet, do not waste time looking for the Sanctum option. Keep progressing the ending route first.
+
+For Rupture, look for the doctor / old man near the run entrance once the system is available. Early Rupture does not immediately let you push every level. You start with a smaller cap, then unlock higher Rupture levels through clears.
+
+If you are still working on endings, read the <Link href="/realm-of-ink/final-boss-true-ending">Final Boss and True Ending Guide</Link> first.
+
+<h2 id="difficulty-7">
+  Difficulty 7: Dragon Hair Brush
+</h2>
+
+Dragon Hair Brush is difficulty 7, the highest normal difficulty tier. The reward is better, but the game also becomes much more demanding.
+
+The important changes are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>monster attack and HP are increased,</li>
+  <li>some levels can feature empowered enemies,</li>
+  <li>mid-chapter bosses and end-chapter bosses can gain enhanced moves,</li>
+  <li>Fox Blood drop increases,</li>
+  <li>and high-rarity rewards and legendary Elixirs become more common.</li>
+</ul>
+
+That sounds like a good deal, but the catch is simple: if your build is weak, the better rewards may not save you.
+
+A build that clears lower difficulty by surviving messy fights can feel awful on Dragon Hair Brush. Bosses live longer. Bad dodges hurt more. Low damage becomes more obvious.
+
+Use Dragon Hair Brush when you already understand your build, can clear normal runs consistently, and have stable boss damage. Do not use it just because you want better drops.
+
+<h2 id="rupture">
+  What is Rupture?
+</h2>
+
+Rupture is an extra challenge layer. You can add modifiers through the doctor / old man near the run entrance, then push harder versions of a run for more challenge, achievements, unlocks, and character rank progress.
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-rupture-modifier-doctor.webp"
+    alt="Realm of Ink doctor near the run entrance used to increase Rupture modifiers."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Rupture is where you add extra pressure. Start low, clear the current cap, then climb higher.
+  </figcaption>
+</figure>
+
+Rupture does not magically create a new game. It takes the problems you already have and makes them harder to ignore.
+
+If your build lacks boss damage, Rupture makes bosses feel worse.  
+If your defense is thin, Rupture punishes mistakes harder.  
+If your economy is weak, Rupture makes bad shops more painful.  
+If you do not understand your attack loop, Rupture turns every room into noise.
+
+Before adding Rupture, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Can I clear without needing perfect reward luck?</li>
+  <li>Can I beat bosses without every fight becoming a panic dodge marathon?</li>
+  <li>Do I know which stats my build actually wants?</li>
+  <li>Can I recover if I enter a Way Station hurt?</li>
+</ul>
+
+If not, fix the normal build first.
+
+<h2 id="rupture-rewards">
+  Rupture rewards and why you should climb
+</h2>
+
+Rupture is not only for bragging rights. It also has reward checkpoints and better high-rarity reward odds as you push deeper.
+
+<GuideTable
+  caption="Realm of Ink Rupture reward milestones."
+  columns={rewardColumns}
+  rows={rewardRows}
+/>
+
+This reward structure matters because it gives you a real reason to climb beyond low Rupture. You are not only making the game harder. You are also increasing the chance that future runs see stronger Curios / perks and Elixirs.
+
+The important 1.0 terminology note: older update notes or discussions may say **perks**, while current in-game language uses **Curios**. When players talk about Epic-or-higher perks, they usually mean Epic-or-higher Curios.
+
+<h2 id="rupture-50">
+  Rupture 50 build logic
+</h2>
+
+Rupture 50 is where you should stop bringing half-builds.
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-rupture-50-violeta-stats.webp"
+    alt="Realm of Ink Rupture 50 Violeta build showing late-run stats and scaling."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Rupture 50 needs real scaling. A good high-difficulty build stacks several damage layers into one engine.
+  </figcaption>
+</figure>
+
+A Rupture 50 build needs more than one strong reward. It needs a complete engine: main damage, scaling multipliers, boss payoff, defense, and enough economy to fix bad luck.
+
+The Violeta Primordial Status / Curse route is a good example because it stacks several connected systems: Primordial Ink, status effect damage, curse effect, burning, bleeding, poison, heavy attack damage, Ink Relic skill damage, crit, and all damage bonus.
+
+That is why the build can work in Rupture 50. It is not one lucky item. It is a chain.
+
+<div className="my-4">
+  <Link href="/realm-of-ink/best-builds">
+    Need a tested high-difficulty setup? Read the Realm of Ink Best Builds Guide
+  </Link>
+</div>
+
+<h2 id="endless-mode">
+  How Endless mode works
+</h2>
+
+Endless mode unlocks after the true ending and is accessed through the Archive and Sanctum system. The key detail is that you enter using a completed run's build.
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-endless-archive-sanctum.webp"
+    alt="Realm of Ink Archive screen with Enter Sanctum option for Endless mode."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Endless uses a finished run's build. Do not enter with a setup that only barely cleared the normal route.
+  </figcaption>
+</figure>
+
+That changes how you should think about your normal clears. A normal clear is not always an Endless-ready clear.
+
+A build is good for Endless when it ended with:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>strong damage scaling,</li>
+  <li>good boss damage,</li>
+  <li>multiple defensive layers,</li>
+  <li>a clear attack loop,</li>
+  <li>and enough synergy to keep going without needing one more lucky pickup.</li>
+</ul>
+
+A build is bad for Endless when it only survived because:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you got lucky with healing,</li>
+  <li>bosses barely died,</li>
+  <li>your damage fell off late,</li>
+  <li>or your upgrades did not multiply each other.</li>
+</ul>
+
+If Endless is still locked, keep working through endings instead of trying to force the Archive / Sanctum option early.
+
+<h2 id="best-builds">
+  Best builds for Endless and Rupture
+</h2>
+
+For Endless and Rupture, the best build is not always the flashiest one. It is the build that keeps scaling when enemies get tankier and boss windows get more dangerous.
+
+<GuideTable
+  caption="Best Realm of Ink build types for Endless and Rupture."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+The safest tested route is **Violeta Primordial Status / Curse** because it has multiple connected damage layers. Oread can also work, but her run needs the right curse, butterfly, laser, array, and defensive pieces before late bosses.
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-violeta-rupture-50-build.webp"
+    alt="Realm of Ink Violeta Primordial Ink build with status effect damage and curse effect."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Violeta's high-difficulty strength comes from stacking status, curse, heavy attack, Ink Relic skill, crit, and all damage scaling together.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="oread-high-difficulty">
+  Oread in high difficulty
+</h2>
+
+Oread can clear high difficulty, but she needs patience. Her build can feel underpowered before the right curse and laser pieces appear.
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-oread-high-difficulty-whale.webp"
+    alt="Realm of Ink Oread fighting the whale boss on high difficulty with curse and butterfly effects."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    High difficulty bosses punish Oread if her curse setup has no real damage payoff yet.
+  </figcaption>
+</figure>
+
+For Oread, prioritize curse application, Butterfly Roosting Call or another clear ability route, Six-Line Secret Art or curse effect scaling, Power of Prayer and heavy attack laser payoff, cooldown or interval support, and at least one defensive layer.
+
+Do not judge Oread only by the first half of the run. She can become very strong, but high difficulty bosses will expose her if she has setup without payoff.
+
+For the full character route, use the <Link href="/realm-of-ink/oread-guide">Oread Guide</Link>.
+
+<h2 id="enemy-patterns">
+  Enemy patterns get more dangerous
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-oread-high-difficulty-patterns.webp"
+    alt="Realm of Ink high difficulty note about enemies gaining new attack patterns."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Higher difficulty is not just bigger numbers. Some enemies and bosses become harder to read and punish.
+  </figcaption>
+</figure>
+
+On higher difficulty, fights become harder because enemies live longer, hit harder, and can gain more dangerous patterns. That changes how you should evaluate builds.
+
+<GuideTable
+  caption="High difficulty boss and enemy pattern checks."
+  columns={bossPatternColumns}
+  rows={bossPatternRows}
+/>
+
+For **Book Spirit**, sustained pressure matters because the fight can become messy if your damage is low. Violeta status / curse and Oread curse laser both work because they keep pressure active through longer phases.
+
+For **Ink God**, do not bring a build that only looks good in normal rooms. You need a finished route with boss damage and enough defense to survive your own mistakes.
+
+If a boss feels impossible on high difficulty, use the failure table below before blaming the fight itself. Most failed runs come from the same few problems: weak boss payoff, thin defense, poor economy, or an attack loop that no longer matches your upgrades.
+
+For deeper endgame boss help, read the <Link href="/realm-of-ink/final-boss-true-ending">Final Boss and True Ending Guide</Link>.
+
+<h2 id="why-builds-fail">
+  Why high difficulty builds fail
+</h2>
+
+Most Endless and Rupture failures are predictable. The game is usually telling you what went wrong before the run ends.
+
+<GuideTable
+  caption="Why Realm of Ink high difficulty builds fail."
+  columns={failureColumns}
+  rows={failureRows}
+/>
+
+If the same thing keeps happening, fix the root problem:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Low damage</strong> usually means a build identity problem.</li>
+  <li><strong>Slow bosses</strong> usually means a boss payoff problem.</li>
+  <li><strong>Random deaths</strong> usually means a defense or visibility problem.</li>
+  <li><strong>Bad shops</strong> usually means an economy or routing problem.</li>
+  <li><strong>Endless collapse</strong> usually means the final build was not strong enough to continue.</li>
+</ul>
+
+Do not keep pushing harder modifiers with the same broken build logic.
+
+
+<h2 id="prep-checklist">
+  Endless and Rupture prep checklist
+</h2>
+
+Use this before entering Endless, Dragon Hair Brush, or higher Rupture:
+
+<GuideTable
+  caption="Realm of Ink Endless and Rupture prep checklist."
+  columns={checklistColumns}
+  rows={checklistRows}
+/>
+
+
+<h2 id="recommended-route">
+  Recommended progression route
+</h2>
+
+For most players, the right progression is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Clear normal runs.</li>
+  <li>Stabilize boss damage.</li>
+  <li>Learn which builds keep scaling.</li>
+  <li>Reach the true ending.</li>
+  <li>Unlock Endless through Archive / Sanctum.</li>
+  <li>Push Dragon Hair Brush.</li>
+  <li>Add low Rupture.</li>
+  <li>Climb toward Rupture reward checkpoints.</li>
+  <li>Use your strongest completed builds for Endless.</li>
+</ol>
+
+Do not rush the last steps. Realm of Ink has enough build depth that you will improve faster by understanding your failed runs than by forcing modifiers too early.
+
+If your build knowledge still feels shaky, read the <Link href="/realm-of-ink/ink-gems-curios-guide">Ink Gems and Curios Guide</Link>. If your damage is the problem, read the <Link href="/realm-of-ink/best-builds">Best Builds Guide</Link>.
+
+<h2 id="faq">
+  Realm of Ink Endless and Rupture FAQ
+</h2>
+
+### How do you unlock Endless mode in Realm of Ink?
+
+Endless mode unlocks after you reach the true ending. After that, you can access it through the Archive / Sanctum system using a completed run's final build.
+
+### Why is Endless mode missing?
+
+If Endless is missing, you probably have not finished the true ending route yet. Keep progressing endings before looking for the Sanctum option.
+
+### Can I re-enter Endless with the same build?
+
+Yes, if that completed run is saved in the Archive / Sanctum system. Endless uses completed-run builds, so the important part is finishing a run with a build worth bringing back.
+
+### Does Endless use my last run or can I pick a build?
+
+Endless uses completed builds through the Archive / Sanctum system, so you are not only thinking about your most recent room clear. Pick a finished run that ended with strong damage, defense, and scaling instead of a run that barely survived.
+
+### What is Dragon Hair Brush in Realm of Ink?
+
+Dragon Hair Brush is difficulty 7. It increases challenge, improves rewards, increases Fox Blood drops, and can give bosses enhanced moves.
+
+### What is Rupture?
+
+Rupture is an extra modifier system that adds more challenge for achievements, unlocks, rewards, and character rank progression.
+
+### How do you unlock higher Rupture levels?
+
+Rupture starts with a limited early cap, such as Lv.5. Clear the available levels, then return to push higher caps as more Rupture levels unlock.
+
+### What are the Rupture reward milestones?
+
+Rupture 12, 21, and 30 are important reward checkpoints. After that, every 5 Rupture levels improves the appearance chance of Epic-or-higher Curios / perks and Elixirs.
+
+### Should I push Rupture early?
+
+No. Push Rupture after your normal clears are stable. If you add Rupture before you understand your build, it will mostly make your mistakes more punishing.
+
+### What is Rupture 50?
+
+Rupture 50 is a high-pressure endgame setting where you need a finished build with real scaling, boss damage, and defensive support.
+
+### What build should I use for Endless?
+
+Use a completed run that ended strong. Violeta Primordial Status / Curse is a strong tested direction. Oread Curse Butterfly / Laser can also work if the right pieces are online.
+
+### What is the best build for Rupture?
+
+The safest tested route here is Violeta Primordial Status / Curse because it stacks multiple damage layers into one engine.
+
+### Is Oread good for high difficulty?
+
+Yes, but Oread needs the correct curse, butterfly, laser, array, ability damage, and defensive pieces. She can feel weak if the setup has no payoff.
+
+### Why does my damage fall off in high difficulty?
+
+Your build probably has too many unrelated rewards. Pick one damage engine and stack Ink Gems, Curios, Elixirs, and abilities that multiply it.
+
+### Why do bosses take so long?
+
+Your build may have good room clear but weak boss damage. Add single-target scaling, burst, status damage, curse payoff, heavy attack lasers, or Ink Relic skill damage.
+
+### Should I take more damage or defense?
+
+If bosses are not dying, take damage. If you already have damage but keep losing runs to mistakes, take HP, shield, food, or damage reduction.
+

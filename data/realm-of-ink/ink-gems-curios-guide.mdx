@@ -1,0 +1,754 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const inkGemColumns = [
+  { key: "Ink Gem Part", label: "Ink Gem Part" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const inkGemRows = [
+  {
+    "Ink Gem Part": "Element",
+    "What It Does":
+      "The element helps decide Momo's form when paired with your other Ink Gem.",
+    "Player Advice":
+      "Do not swap elements blindly if your current Momo form is carrying damage or utility.",
+  },
+  {
+    "Ink Gem Part": "Rarity",
+    "What It Does":
+      "Ink Gems can be common, rare, epic, or legendary. Rarity improves values and can add new utility.",
+    "Player Advice":
+      "Upgrade the gem that supports your build first. Do not spread upgrades across random gems.",
+  },
+  {
+    "Ink Gem Part": "Passive bonus",
+    "What It Does":
+      "Passive bonuses can improve pet damage, crit, status effects, bonus damage, or other build stats.",
+    "Player Advice":
+      "The passive is often more important than the active skill. Read both before replacing a gem.",
+  },
+  {
+    "Ink Gem Part": "Active skill",
+    "What It Does":
+      "Active skills can summon allies, apply poison, trigger burning, create arrays, apply curses, or add burst damage.",
+    "Player Advice":
+      "Some active skills should be used often, but others are better saved or avoided in long fights. Read the gem's logic.",
+  },
+  {
+    "Ink Gem Part": "Momo interaction",
+    "What It Does":
+      "Your two Ink Gem elements and rarities affect Momo's form and progression.",
+    "Player Advice":
+      "If you want a pet build, your gem choices are part of the pet build, not separate from it.",
+  },
+];
+
+export const specificGemColumns = [
+  { key: "Ink Gem", label: "Ink Gem" },
+  { key: "Best Use", label: "Best Use" },
+  { key: "Common Mistake", label: "Common Mistake" },
+];
+
+export const specificGemRows = [
+  {
+    "Ink Gem": "Burning Ink",
+    "Best Use":
+      "In short fights, use the active skill often to convert Burning stacks into burst damage.",
+    "Common Mistake":
+      "In long fights, spamming the active can reset or consume the value you wanted from passive Burning buildup.",
+  },
+  {
+    "Ink Gem": "Venom Ink",
+    "Best Use":
+      "Use it when your run has poison application, status effect damage, stack limit, or another status partner like Ivy Ink.",
+    "Common Mistake":
+      "Taking Venom Ink as a standalone damage source with no status scaling behind it.",
+  },
+  {
+    "Ink Gem": "Ivy Ink",
+    "Best Use":
+      "Pair it with Venom Ink or other status effects when you want a DOT route with poison, bleeding, burning, or curse support.",
+    "Common Mistake":
+      "Treating Ivy Ink as a full build by itself instead of one status layer.",
+  },
+  {
+    "Ink Gem": "Tiger Ink",
+    "Best Use":
+      "Use it for fast-hit crit routes, especially when your Curios or Talents support crit rate and crit damage.",
+    "Common Mistake":
+      "Picking Tiger Ink without enough crit chance, attack frequency, or crit payoff.",
+  },
+  {
+    "Ink Gem": "Momo Ink",
+    "Best Use":
+      "Use it when your run already has pet damage, extra pets, pet attack speed, pet cooldown, or pet inheritance support.",
+    "Common Mistake":
+      "Taking one Momo Ink and calling the whole run a pet build.",
+  },
+  {
+    "Ink Gem": "Grace Ink",
+    "Best Use":
+      "Use it for cooldown / skill-value routes, especially when your run can pair it with Flash Ink, Psychic Pendant, Quickening Charm, or other cooldown support.",
+    "Common Mistake":
+      "Taking it as a generic safe pickup without enough cooldown, skill trigger, or Ink Relic support to make the route matter.",
+  },
+];
+
+export const momoInkColumns = [
+  { key: "Momo Ink Type", label: "Momo Ink Type" },
+  { key: "Element", label: "Element" },
+  { key: "How To Think About It", label: "How To Think About It" },
+];
+
+export const momoInkRows = [
+  {
+    "Momo Ink Type": "Wood Momo Ink",
+    Element: "Wood",
+    "How To Think About It":
+      "Use when the run wants sustained pet value, growth, or steady support from Momo rather than one burst window.",
+  },
+  {
+    "Momo Ink Type": "Metal Momo Ink",
+    Element: "Metal",
+    "How To Think About It":
+      "Use when your pet route wants sharper damage, direct pressure, or a more aggressive Momo setup.",
+  },
+  {
+    "Momo Ink Type": "Water Momo Ink",
+    Element: "Water",
+    "How To Think About It":
+      "Use when you want safer pet support, control, or smoother fights while you dodge.",
+  },
+  {
+    "Momo Ink Type": "Fire Momo Ink",
+    Element: "Fire",
+    "How To Think About It":
+      "Use when you want more aggressive pet damage and are ready to support it with pet Curios or Elixirs.",
+  },
+  {
+    "Momo Ink Type": "Earth Momo Ink",
+    Element: "Earth",
+    "How To Think About It":
+      "Use when you want sturdier pet value or a more stable support route instead of pure burst.",
+  },
+];
+
+export const curioColumns = [
+  { key: "Curio Type", label: "Curio Type" },
+  { key: "What It Usually Gives", label: "What It Usually Gives" },
+  { key: "How To Judge It", label: "How To Judge It" },
+];
+
+export const curioRows = [
+  {
+    "Curio Type": "Simple stat Curios",
+    "What It Usually Gives":
+      "Damage, HP, crit, cooldown, shield, drop rate, or other direct stat value.",
+    "How To Judge It":
+      "Take it when the stat solves your current problem.",
+  },
+  {
+    "Curio Type": "Build-defining Curios",
+    "What It Usually Gives":
+      "Extra triggers, pets, arrays, clones, status effects, curse effects, or damage conversion.",
+    "How To Judge It":
+      "These can decide your run. Take them when they match your engine.",
+  },
+  {
+    "Curio Type": "Named build Curios",
+    "What It Usually Gives":
+      "Specific routes around items like Pellet Drum, Nexus Collar, Tri-Curse, Glacier Claw, Croc Drum, or Tempest Ring.",
+    "How To Judge It":
+      "Read the name and effect together. These are often what turn a broad idea like crit, DOT, or pet into a real build.",
+  },
+  {
+    "Curio Type": "Cursed Curios",
+    "What It Usually Gives":
+      "Large upside with a dangerous downside.",
+    "How To Judge It":
+      "Only take them when the upside fits your build and the downside will not kill the run.",
+  },
+  {
+    "Curio Type": "Economy / drop Curios",
+    "What It Usually Gives":
+      "More coins, higher drop rates, better shops, or extra rewards.",
+    "How To Judge It":
+      "Great early. Less useful if you already need immediate boss damage or healing.",
+  },
+];
+
+export const namedCurioColumns = [
+  { key: "Curio", label: "Curio" },
+  { key: "Build Fit", label: "Build Fit" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const namedCurioRows = [
+  {
+    Curio: "Croc Drum",
+    "Build Fit": "Crit / fast-hit routes",
+    "How To Use It":
+      "Pair with Tiger Ink, crit rate, crit damage, and fast attacks so the crit payoff appears often.",
+  },
+  {
+    Curio: "Tempest Ring",
+    "Build Fit": "Crit / attack-frequency routes",
+    "How To Use It":
+      "Use when your build attacks often enough to make repeated triggers matter.",
+  },
+  {
+    Curio: "Tri-Curse",
+    "Build Fit": "DOT / curse / multi-status routes",
+    "How To Use It":
+      "Use when your build can keep several debuffs active instead of relying on one poison or burn effect.",
+  },
+  {
+    Curio: "Glacier Claw",
+    "Build Fit": "Status / control / DOT support",
+    "How To Use It":
+      "Use with Venom Ink, Ivy Ink, burning, bleeding, poison, or other status layers when you need more control and scaling.",
+  },
+  {
+    Curio: "Pellet Drum",
+    "Build Fit": "Projectile or repeated-hit routes",
+    "How To Use It":
+      "Use when your build creates enough hits for repeated triggers to matter.",
+  },
+  {
+    Curio: "Nexus Collar",
+    "Build Fit": "Pet / Momo / Ink Pet routes",
+    "How To Use It":
+      "Use when Momo or extra Ink Pets are part of your actual damage plan, not just a side bonus.",
+  },
+];
+
+export const buildChoiceColumns = [
+  { key: "Build Goal", label: "Build Goal" },
+  { key: "Ink Gem Priority", label: "Ink Gem Priority" },
+  { key: "Curio Priority", label: "Curio Priority" },
+];
+
+export const buildChoiceRows = [
+  {
+    "Build Goal": "Status / DOT",
+    "Ink Gem Priority":
+      "Venom Ink, Ivy Ink, Burning Ink, status damage, stack limit, repeated hits.",
+    "Curio Priority":
+      "Tri-Curse, Glacier Claw, status effect damage, status duration, status triggers, multi-hit effects.",
+  },
+  {
+    "Build Goal": "Crit",
+    "Ink Gem Priority":
+      "Tiger Ink, fast hit rate, crit rate, crit damage, light or heavy attack support.",
+    "Curio Priority":
+      "Croc Drum, Tempest Ring, crit chance, crit damage, effects triggered by crits.",
+  },
+  {
+    "Build Goal": "Momo / Ink Pet",
+    "Ink Gem Priority":
+      "Momo Ink, pet-specialized Ink, useful Momo element pairing, higher gem rarity.",
+    "Curio Priority":
+      "Nexus Collar, Ink Pet damage, extra pets, pet attack speed, pet ultimate cooldown, pet inheritance.",
+  },
+  {
+    "Build Goal": "Curse / Oread-style",
+    "Ink Gem Priority":
+      "Curse application, curse duration, curse effect, Power of Prayer or similar debuffs.",
+    "Curio Priority":
+      "Random curse application, curse effect, ability damage, Ink Relic skill damage, laser or butterfly triggers.",
+  },
+  {
+    "Build Goal": "Cooldown / skill route",
+    "Ink Gem Priority":
+      "Grace Ink, Flash Ink, Ink Relic skill uptime, cooldown support, repeated skill triggers.",
+    "Curio Priority":
+      "Psychic Pendant, Quickening Charm, cooldown reduction, skill triggers, Ink Relic skill damage.",
+  },
+  {
+    "Build Goal": "Primordial Ink",
+    "Ink Gem Priority":
+      "Two rare-or-better Ink Gems plus a plan that matches your character's Primordial Ink.",
+    "Curio Priority":
+      "Effects that support the Primordial's main damage type after the exchange.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Replacing a good Ink Gem because the new one is rarer",
+    "Why It Hurts":
+      "A higher-rarity gem can still break your Momo form, damage plan, or Primordial path.",
+    "Better Choice":
+      "Compare the element, passive, active skill, and build fit before replacing it.",
+  },
+  {
+    Mistake: "Spamming Burning Ink active in long fights",
+    "Why It Hurts":
+      "In longer fights, you may lose the passive buildup value you wanted from Burning stacks.",
+    "Better Choice":
+      "Use the active often in short fights, but let passive burning stack in longer boss fights when that gives better damage.",
+  },
+  {
+    Mistake: "Taking Curios that do not match your build",
+    "Why It Hurts":
+      "Curios are powerful because they multiply a plan. Random Curios create random damage.",
+    "Better Choice":
+      "Pick Curios that support your main damage engine.",
+  },
+  {
+    Mistake: "Upgrading too many Ink Gems",
+    "Why It Hurts":
+      "Spreading shards across weak or temporary gems delays the upgrade that actually matters.",
+    "Better Choice":
+      "Upgrade the gem that your build will keep using.",
+  },
+  {
+    Mistake: "Forcing Primordial Ink",
+    "Why It Hurts":
+      "Primordial Ink dismantles your current two-gem setup and can reset your Momo plan.",
+    "Better Choice":
+      "Take Primordial Ink only when it improves your current build direction.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In Realm of Ink, **Ink Gems** decide your active skills, passive bonuses, elements, and Momo's form. **Curios** are the 1.0 name for perks, and named Curios like **Croc Drum**, **Tempest Ring**, **Tri-Curse**, **Glacier Claw**, **Pellet Drum**, and **Nexus Collar** are often what turn a broad build idea into a real route.
+
+For specific gems: use **Burning Ink** active often in short fights, but avoid consuming its passive buildup too quickly in long fights. Use **Venom Ink + Ivy Ink** only when you can scale status damage. Use **Tiger Ink** when you can actually support crit. Use **Momo Ink** only when pet bonuses are stacking. Use **Grace Ink** when your run has cooldown, skill trigger, or Ink Relic support.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Realm of Ink 1.0. This guide covers Ink Gems, Momo Ink elements, Burning Ink active vs passive logic, Venom Ink, Ivy Ink, Tiger Ink, Grace Ink, Flash Ink, Curios, cursed Curios, named Curios, Primordial Ink, Elixirs, pet builds, crit builds, DOT builds, cooldown builds, and reward choices.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-ink-gems-momo-guide.webp"
+    alt="Realm of Ink Ink Gem menu showing Momo Ink and Ink Relic effects."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ink Gems shape more than your active skills. They affect passives, Momo, build direction, and whether your Curios can actually scale.
+  </figcaption>
+</figure>
+
+<h2 id="ink-gems-curios">
+  Ink Gems and Curios explained
+</h2>
+
+Ink Gems and Curios are the two systems that decide whether your Realm of Ink run becomes a real build or a pile of unrelated upgrades.
+
+Ink Gems give you passive bonuses and active skills. They also affect Momo's form through their element and rarity. Curios are the 1.0 name for perks, and they provide the effects that make your build scale.
+
+The important 1.0 terminology note is simple: if older guides, Steam posts, or comments say **perks**, they usually mean **Curios**.
+
+<div className="my-4">
+  <Link href="/realm-of-ink">
+    Back to the Realm of Ink Guide Hub
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-ink-gems-work">
+  How Ink Gems work
+</h2>
+
+Ink Gems have four things you should check before replacing one:
+
+<GuideTable
+  caption="Realm of Ink Ink Gem parts and how to judge them."
+  columns={inkGemColumns}
+  rows={inkGemRows}
+/>
+
+The beginner mistake is looking only at rarity. Rarity matters, but it is not the whole decision. A lower-rarity gem that supports your build can be better than a higher-rarity gem that pulls the run in a different direction.
+
+The easiest way to evaluate an Ink Gem is to ask whether its **element**, **passive**, **active skill**, and **Momo interaction** all help the route your Curios are already pushing.
+
+<h2 id="specific-ink-gems">
+  Specific Ink Gems and how to use them
+</h2>
+
+This is where many players make mistakes. Some Ink Gems are not just “good” or “bad.” They change depending on fight length, build support, and whether your Curios multiply them.
+
+<GuideTable
+  caption="Specific Realm of Ink Ink Gems and common mistakes."
+  columns={specificGemColumns}
+  rows={specificGemRows}
+/>
+
+<h3 id="burning-ink">
+  Burning Ink: short fights and long fights play differently
+</h3>
+
+**Burning Ink** is one of the best examples of a non-obvious Ink Gem. In short fights, you usually want to use the active skill often because converting Burning stacks into burst damage can kill enemies before they become a problem.
+
+In longer fights, especially bosses, the logic can flip. If the passive is building Burning value over time, using the active too often can consume or reset the value you wanted to stack. In that case, it can be better to let the passive keep working and use the active more carefully.
+
+Use this rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Short room fights:</strong> use the active more often for burst.</li>
+  <li><strong>Long boss fights:</strong> avoid wasting the active if the passive buildup is doing more work.</li>
+  <li><strong>Status builds:</strong> check whether your Curios reward Burning stacks, status duration, or active-skill bursts before deciding.</li>
+</ul>
+
+That one rule prevents the most common Burning Ink mistake: playing the same way in every fight.
+
+<h3 id="venom-ivy-ink">
+  Venom Ink and Ivy Ink need status scaling
+</h3>
+
+**Venom Ink** and **Ivy Ink** are useful because they can help create a real DOT route, but neither one should be treated as a complete build by itself.
+
+Take Venom / Ivy routes when you have at least some of these:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>status effect damage,</li>
+  <li>status duration,</li>
+  <li>status stack limit,</li>
+  <li>multi-hit attacks,</li>
+  <li>Tri-Curse,</li>
+  <li>Glacier Claw,</li>
+  <li>or another way to keep poison, bleeding, burning, or curse effects active.</li>
+</ul>
+
+Skip or replace them if the run is clearly moving toward crit, pets, heavy attacks, or Primordial Ink instead.
+
+<h3 id="tiger-ink">
+  Tiger Ink wants real crit support
+</h3>
+
+**Tiger Ink** is a strong signal for a crit route, but it still needs support. If your crit rate is too low, crit damage does not matter. If your attack frequency is too slow, the build can feel inconsistent.
+
+Tiger Ink is best when you have:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>fast light attacks or repeated hits,</li>
+  <li>crit rate,</li>
+  <li>crit damage,</li>
+  <li>Croc Drum,</li>
+  <li>Tempest Ring,</li>
+  <li>or On Target-style support from your broader progression.</li>
+</ul>
+
+This is why Tiger Ink is often easier to understand on Red than a complicated DOT or Primordial route.
+
+<h3 id="grace-ink">
+  Grace Ink wants cooldown and skill support
+</h3>
+
+**Grace Ink** is not a generic “safe” Ink Gem. It becomes much better when your run is already moving toward cooldown, skill uptime, or repeated Ink Relic triggers.
+
+Use Grace Ink when you can pair it with:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Flash Ink,</li>
+  <li>Psychic Pendant,</li>
+  <li>Quickening Charm,</li>
+  <li>cooldown reduction,</li>
+  <li>Ink Relic skill damage,</li>
+  <li>or Curios that reward repeated skill use.</li>
+</ul>
+
+If your build is pure crit, pure pet, or pure DOT, Grace Ink may be less useful unless your Curios are also giving skill triggers or cooldown value.
+
+<h2 id="momo-ink">
+  Momo Ink and the five elements
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-momo-ink-fire-pet-build.webp"
+    alt="Realm of Ink Momo Ink Fire showing Ink Pet damage bonus and Summon Allies skill."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Momo Ink is a clear signal that the run can move toward pet value, but the element still matters.
+  </figcaption>
+</figure>
+
+There are five Momo Ink element types: **Wood, Metal, Water, Fire, and Earth**. The exact form you get depends on your Ink Gem elements and setup, but the key player lesson is that Momo Ink is not one generic pet button.
+
+<GuideTable
+  caption="Realm of Ink Momo Ink element types."
+  columns={momoInkColumns}
+  rows={momoInkRows}
+/>
+
+A pet build usually starts when your Ink Gems or Curios give you one of these:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Ink Pet damage bonus,</li>
+  <li>extra Ink Pets,</li>
+  <li>pet attack speed,</li>
+  <li>pet ultimate cooldown reduction,</li>
+  <li>pet crit effects,</li>
+  <li>pet inheritance from your stats,</li>
+  <li>or a named pet Curio like Nexus Collar.</li>
+</ul>
+
+The important part is commitment. One pet bonus is not a pet build. If Momo is going to carry damage, support him with Ink Gems, Curios, Elixirs, and upgrades that all point toward pet value.
+
+If you are still learning Momo basics, start with the <Link href="/realm-of-ink/beginner-guide">Beginner Guide</Link>.
+
+<h2 id="curios">
+  What are Curios?
+</h2>
+
+Curios are the 1.0 name for perks. Older discussions may still call them perks, but in current Realm of Ink, Curios are the build-defining items you collect during runs.
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-curios-archive-list.webp"
+    alt="Realm of Ink Curios archive showing multiple Curios such as Celestial Hook, Nether Pennant, Twin Blades, and Elixir Gourd."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Curios are where many builds become real. The name matters because players may still search for perks, but the 1.0 term is Curios.
+  </figcaption>
+</figure>
+
+Curios can be simple stat boosts, but the best ones often change how your build works. They can create arrays, summon pets, apply curses, trigger status effects, increase drop rates, add clones, improve cooldowns, or multiply damage when certain conditions are met.
+
+<GuideTable
+  caption="Realm of Ink Curio types and how to judge them."
+  columns={curioColumns}
+  rows={curioRows}
+/>
+
+When judging a Curio, do not only ask whether it is rare. Ask whether it improves the build you are already making.
+
+<h2 id="named-curios">
+  Named Curios to recognize
+</h2>
+
+Specific Curio names matter because players do not search for “generic crit Curio.” They search for the item they saw in the run.
+
+<GuideTable
+  caption="Named Realm of Ink Curios and build fit."
+  columns={namedCurioColumns}
+  rows={namedCurioRows}
+/>
+
+If you find one of these named Curios early, let it influence your next Ink Gem choice. Curios are usually harder to undo than Ink Gems, so a strong named Curio can become the reason you switch into crit, DOT, pet, projectile, or cooldown scaling.
+
+<h2 id="cursed-curios">
+  Cursed Curios: when to take the risk
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-curios-cursed-variants.webp"
+    alt="Realm of Ink cursed Curios showing powerful upside and dangerous downside."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cursed Curios can carry a run, but the downside is real. Take them only when your build can survive the tradeoff.
+  </figcaption>
+</figure>
+
+Cursed Curios are tempting because their upside can be huge. Some can multiply your damage, change your economy, or add powerful effects that make the run snowball.
+
+The problem is the downside. A Curio that makes you deal more damage but also take more damage is great if you are dodging well and already have defensive support. It is terrible if you are entering every boss at low HP.
+
+Use a simple rule: take cursed Curios when the upside directly supports your build and the downside is manageable. Skip them when you are already struggling to survive or when the upside does not match your route.
+
+<h2 id="primordial-ink">
+  Primordial Ink explained
+</h2>
+
+Primordial Ink is one of the strongest systems in Realm of Ink, but it is also one of the easiest to misuse.
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-primordial-ink-archive-entry.webp"
+    alt="Realm of Ink Primordial Ink archive entry explaining the exchange for a form-exclusive Primordial Ink Relic."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Primordial Ink is powerful because it gives a form-exclusive route, but it also replaces your normal two-Ink-Gem setup.
+  </figcaption>
+</figure>
+
+To get Primordial Ink, you need a Primordial Ink Curio and two rare-or-better Ink Gems. After the exchange, those two Ink Gems are dismantled, and you receive a form-exclusive Primordial Ink.
+
+That trade matters because your normal two-gem setup affects your active skills and Momo. If your current gems are already carrying the run, Primordial Ink can be a downgrade unless your new route has support.
+
+For practical examples of Primordial builds, read the <Link href="/realm-of-ink/best-builds">Best Builds Guide</Link>.
+
+<h2 id="elixirs">
+  Elixirs and stat scaling
+</h2>
+
+Elixirs are the quiet part of a strong build. They often look less exciting than Curios, but they can decide whether your damage keeps up.
+
+Elixirs can improve stats like:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>all damage bonus,</li>
+  <li>light attack damage,</li>
+  <li>heavy attack damage,</li>
+  <li>Ink Relic skill damage,</li>
+  <li>status effect damage,</li>
+  <li>curse duration or effect support,</li>
+  <li>crit rate and crit damage,</li>
+  <li>HP, shield, and damage reduction,</li>
+  <li>drop rate and economy.</li>
+</ul>
+
+The best Elixir is not always the rarest one. The best Elixir is the one that improves the stat your build actually uses.
+
+Break objects when it is safe, because objects can drop healing, coins, and Elixirs. Free scaling matters.
+
+<h2 id="build-matching">
+  How to match Ink Gems and Curios to your build
+</h2>
+
+The easiest way to choose rewards is to name your build first.
+
+<GuideTable
+  caption="How to match Realm of Ink Ink Gems and Curios to your build goal."
+  columns={buildChoiceColumns}
+  rows={buildChoiceRows}
+/>
+
+Once you know your build goal, your choices become much easier.
+
+If your build is status, you should not take every random crit or pet reward.  
+If your build is Oread curse laser, you should not ignore Power of Prayer, ability damage, cooldown, and laser triggers.  
+If your build is Momo, you should not replace a pet-specialized Ink without thinking about what happens to your pet route.
+
+Build identity comes first. Rarity comes second.
+
+For full route examples, use the <Link href="/realm-of-ink/best-builds">Best Builds Guide</Link> for Violeta, Red, Venom + Ivy DOT, Tiger Ink crit, and Momo pet routes. If you are building around Oread specifically, use the <Link href="/realm-of-ink/oread-guide">Oread Guide</Link> for the full curse, butterfly, laser, and Power of Prayer setup.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="common-mistakes">
+  Common Ink Gem and Curio mistakes
+</h2>
+
+Most bad runs fail because the rewards do not agree with each other.
+
+<GuideTable
+  caption="Common Realm of Ink Ink Gem and Curio mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The most important habit is to read the actual names on your rewards. **Burning Ink**, **Venom Ink**, **Tiger Ink**, **Momo Ink**, **Tri-Curse**, and **Nexus Collar** all point toward different decisions.
+
+<h2 id="recommended-reward-checklist">
+  Recommended reward checklist
+</h2>
+
+Use this checklist before picking a reward:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>What is my current main damage source?</li>
+  <li>Does this reward improve that damage source?</li>
+  <li>Does it change Momo's form?</li>
+  <li>Does it help or hurt my Primordial Ink plan?</li>
+  <li>Does it solve my current problem: damage, survival, cooldown, economy, or boss pressure?</li>
+  <li>Is the downside manageable?</li>
+  <li>Will I still want this reward three chapters from now?</li>
+</ol>
+
+If you cannot answer those questions, take the safer reward or save resources for the next Way Station.
+
+<h2 id="faq">
+  Realm of Ink Ink Gems and Curios FAQ
+</h2>
+
+### What are Ink Gems in Realm of Ink?
+
+Ink Gems are run upgrades that give passive bonuses and active skills. Their element and rarity also affect Momo's form and progression.
+
+### What are Curios?
+
+Curios are the 1.0 name for perks. They add stats, effects, build triggers, boss drops, and sometimes cursed tradeoffs.
+
+### Are Curios the same as perks?
+
+Yes. Older discussions may call them perks, but in Realm of Ink 1.0 they are called Curios.
+
+### How should I use Burning Ink?
+
+Use Burning Ink's active skill often in short fights to convert Burning stacks into burst damage. In long fights, be more careful, because overusing the active can waste passive Burning buildup that would have kept scaling.
+
+### Is Venom Ink good?
+
+Yes, but Venom Ink needs status support. Pair it with Ivy Ink, status effect damage, status duration, status stack limit, Tri-Curse, Glacier Claw, or repeated hits.
+
+### Is Tiger Ink good?
+
+Tiger Ink is good for crit builds when you have crit rate, crit damage, fast attacks, Croc Drum, Tempest Ring, or other crit support. Do not take it without a crit plan.
+
+### How should I use Grace Ink?
+
+Use Grace Ink when your run has cooldown, skill trigger, or Ink Relic support. It works better with Flash Ink, Psychic Pendant, Quickening Charm, cooldown reduction, or repeated skill-use effects.
+
+### How many Momo Ink types are there?
+
+There are five Momo Ink element types: Wood, Metal, Water, Fire, and Earth. Each points toward a different pet-style route, so do not treat all Momo Ink as the same pickup.
+
+### Is Momo Ink good?
+
+Momo Ink is good if you want a pet route. It gives Ink Pet support, but you should pair it with Curios and Elixirs that also improve pet damage, extra pets, pet attack speed, or pet inheritance.
+
+### What Curios should I look for?
+
+Look for Curios that match your route. Croc Drum and Tempest Ring fit crit builds, Tri-Curse and Glacier Claw fit DOT / curse routes, Nexus Collar fits pet builds, and Psychic Pendant or Quickening Charm can support cooldown / skill routes.
+
+### Should I pick the highest-rarity Ink Gem?
+
+Not always. Pick the Ink Gem that supports your build. A lower-rarity gem that fits your plan can be better than a higher-rarity gem that breaks your setup.
+
+### How do Ink Gems affect Momo?
+
+Your equipped Ink Gem elements affect Momo's form, and Ink Gem rarity affects Momo's progression and strength.
+
+### What is Primordial Ink?
+
+Primordial Ink is a form-exclusive Ink route that requires a Primordial Ink Curio and two rare-or-better Ink Gems. It replaces your normal two-gem setup.
+
+### Should I always take Primordial Ink?
+
+No. Take Primordial Ink only when it supports your current character and build. It can be wrong if your two Ink Gems and Momo form are already carrying the run.
+
+### Are cursed Curios worth it?
+
+Cursed Curios are worth it when the upside fits your build and the downside is manageable. Do not take them if you are already struggling to survive.
+
+### What should I upgrade first?
+
+Upgrade the Ink Gem that your build will keep using. Do not spend shards on a temporary gem unless it solves an immediate problem.
+
+### Why does my build feel weak?
+
+Your Ink Gems, Curios, and Elixirs probably do not support the same route. Start with the named pieces you already have, then choose rewards that multiply them instead of pulling the run in a different direction.
+

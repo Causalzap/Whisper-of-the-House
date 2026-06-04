@@ -132,6 +132,7 @@ const allGameGuides = [
   { title: 'Mina the Hollower', href: '/mina-the-hollower'},
   { title: 'Scale the Depths', href: '/scale-the-depths'},
   { title: 'Fatekeeper', href: '/fatekeeper'},
+  { title: 'Realm of Ink', href: '/realm-of-ink'},
 
 ];
 

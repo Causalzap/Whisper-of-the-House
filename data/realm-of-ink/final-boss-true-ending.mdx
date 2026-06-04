@@ -1,0 +1,612 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const endingRouteColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What Happens", label: "What Happens" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const endingRouteRows = [
+  {
+    Step: "Enter the Story Relics route",
+    "What Happens":
+      "The late story path starts pushing you toward the Book Spirit instead of a normal run clear.",
+    "Player Advice":
+      "Do not enter with a half-build. Start thinking about boss damage before the final room.",
+  },
+  {
+    Step: "Reach the Book Spirit rift",
+    "What Happens":
+      "The rift marks the point where the Book Spirit route is about to begin.",
+    "Player Advice":
+      "Check your HP, food, defense, and damage before committing.",
+  },
+  {
+    Step: "Defeat Book Spirit",
+    "What Happens":
+      "Book Spirit becomes the major final story boss and unlocks the true ending route after the first clear.",
+    "Player Advice":
+      "Treat the fight as a mechanics check, not just a damage race.",
+  },
+  {
+    Step: "Return for ending progress",
+    "What Happens":
+      "After the first Book Spirit clear, later ending choices and talisman-related options can become relevant.",
+    "Player Advice":
+      "If the talisman option is missing, check the talisman section below instead of assuming a bug.",
+  },
+];
+
+export const bookSpiritColumns = [
+  { key: "Mechanic", label: "Mechanic" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "How To Handle It", label: "How To Handle It" },
+];
+
+export const bookSpiritRows = [
+  {
+    Mechanic: "Falling pages",
+    "What It Does":
+      "Pages can drop from above and turn parts of the arena into danger zones.",
+    "How To Handle It":
+      "Keep moving after attacks, do not tunnel on damage numbers, and avoid standing still during long animations.",
+  },
+  {
+    Mechanic: "Ink anchors",
+    "What It Does":
+      "Ink anchors can make the arena shrink if ignored.",
+    "How To Handle It":
+      "Destroy anchors quickly when they appear, especially if your build needs space to dodge.",
+  },
+  {
+    Mechanic: "Arena pressure",
+    "What It Does":
+      "The fight becomes harder when falling hazards, shrinking space, and boss attacks overlap.",
+    "How To Handle It":
+      "Use builds with sustained pressure so you can hit the boss while repositioning.",
+  },
+  {
+    Mechanic: "Long phase punish",
+    "What It Does":
+      "Low-damage builds drag the fight out and give the arena more time to become unsafe.",
+    "How To Handle It":
+      "Bring real boss damage: Violeta status / curse, Oread lasers, Red Crit, or a finished DOT route.",
+  },
+];
+
+export const inkGodColumns = [
+  { key: "Mechanic", label: "Mechanic" },
+  { key: "What To Watch", label: "What To Watch" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const inkGodRows = [
+  {
+    Mechanic: "Sun / moon punishment",
+    "What To Watch":
+      "The fight can punish poor positioning with large divine-style attacks tied to the sun and moon phase.",
+    "Player Advice":
+      "Do not spend your dash greedily. Save movement for the punishment tell instead of using every dash for damage.",
+  },
+  {
+    Mechanic: "Full-screen bullet pressure",
+    "What To Watch":
+      "Ink God can cover large parts of the screen with wide bullet patterns.",
+    "Player Advice":
+      "Look for the safe lane first, then attack. High damage is useless if you dash into the next wave.",
+  },
+  {
+    Mechanic: "Multi-phase damage check",
+    "What To Watch":
+      "The fight rewards builds that stay strong after the first burst window.",
+    "Player Advice":
+      "Bring sustained scaling, not only one short burst. Status, curse, lasers, crit, or pets need enough support to keep working.",
+  },
+  {
+    Mechanic: "Visual overload",
+    "What To Watch":
+      "Your own build effects can hide boss tells if the screen is already busy.",
+    "Player Advice":
+      "Prioritize readability. Use clear movement and do not stand inside your own effects if they block the next attack tell.",
+  },
+];
+
+export const bossBuildColumns = [
+  { key: "Boss / Goal", label: "Boss / Goal" },
+  { key: "Best Build Direction", label: "Best Build Direction" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const bossBuildRows = [
+  {
+    "Boss / Goal": "Book Spirit first clear",
+    "Best Build Direction": "Red Crit, Violeta status / curse, or Oread curse laser",
+    "Why It Works":
+      "You need reliable pressure while moving around falling pages and ink anchors.",
+  },
+  {
+    "Boss / Goal": "Book Spirit on Dragon Hair Brush",
+    "Best Build Direction": "Violeta Primordial Status / Curse",
+    "Why It Works":
+      "High difficulty makes the fight longer and less forgiving, so layered status, curse, and heavy attack scaling are valuable.",
+  },
+  {
+    "Boss / Goal": "Ink God",
+    "Best Build Direction": "Finished Violeta or Oread build with defense",
+    "Why It Works":
+      "Ink God needs boss damage and enough defensive support to survive wide punishment windows.",
+  },
+  {
+    "Boss / Goal": "Achievement runs",
+    "Best Build Direction": "The safest build for the required form or difficulty",
+    "Why It Works":
+      "When chasing form or difficulty achievements, consistency matters more than flashy room clear.",
+  },
+];
+
+export const endingLogicColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "What To Do", label: "What To Do" },
+];
+
+export const endingLogicRows = [
+  {
+    Situation: "You have not beaten Book Spirit yet",
+    "What It Means":
+      "You are not ready for the true ending route.",
+    "What To Do":
+      "Clear the Story Relics route and defeat Book Spirit first.",
+  },
+  {
+    Situation: "You beat Book Spirit once",
+    "What It Means":
+      "The true ending route starts opening after the first Book Spirit clear.",
+    "What To Do":
+      "Return to the ending route and watch for new story or talisman-related choices.",
+  },
+  {
+    Situation: "The talisman option is missing",
+    "What It Means":
+      "You may not have finished the required earlier ending progress yet.",
+    "What To Do":
+      "Complete available endings first, then return to check the talisman option again.",
+  },
+  {
+    Situation: "The talisman option appears",
+    "What It Means":
+      "You have reached the point where the different ending route can be tested.",
+    "What To Do":
+      "Choose it only when you are ready to see the alternate ending path.",
+  },
+];
+
+export const achievementColumns = [
+  { key: "Achievement Type", label: "Achievement Type" },
+  { key: "What It Usually Asks", label: "What It Usually Asks" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const achievementRows = [
+  {
+    "Achievement Type": "Book Spirit by form",
+    "What It Usually Asks":
+      "Defeat Book Spirit with a specific character form, such as Red or other unlocked forms.",
+    "Player Advice":
+      "Use the safest build that fits that form. Do not force a route that only works on another character.",
+  },
+  {
+    "Achievement Type": "Book Spirit by difficulty",
+    "What It Usually Asks":
+      "Defeat Book Spirit on higher brush difficulties, including Dragon Hair Brush.",
+    "Player Advice":
+      "Bring boss damage and defense. Dragon Hair Brush Book Spirit is not the place for a half-built route.",
+  },
+  {
+    "Achievement Type": "Dissolution / Rupture milestones",
+    "What It Usually Asks":
+      "Clear milestone levels such as 12, 21, or 30 depending on the wording used by your version or platform.",
+    "Player Advice":
+      "Treat these as endgame build checks. Use the Endless and Rupture guide for climb planning.",
+  },
+  {
+    "Achievement Type": "Status / build achievements",
+    "What It Usually Asks":
+      "Trigger specific build conditions, such as applying several status effects at once or using pet ultimates.",
+    "Player Advice":
+      "Plan these around Ink Gems and Curios before the boss, not during the final fight.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Fails", label: "Why It Fails" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Ignoring Book Spirit anchors",
+    "Why It Fails":
+      "The arena can become smaller and harder to survive if anchors stay alive too long.",
+    Fix:
+      "Destroy ink anchors quickly, then return to boss damage.",
+  },
+  {
+    Mistake: "Greeding damage during falling pages",
+    "Why It Fails":
+      "Falling hazards punish players who stand still during long attacks.",
+    Fix:
+      "Move first, then attack after the danger zone is clear.",
+  },
+  {
+    Mistake: "Using dash too early against Ink God",
+    "Why It Fails":
+      "Sun / moon punishment and wide bullet patterns can catch you if your dash is already spent.",
+    Fix:
+      "Save dash for the real punishment tell instead of using it only to chase damage.",
+  },
+  {
+    Mistake: "Bringing room-clear damage to a boss check",
+    "Why It Fails":
+      "Some builds erase normal rooms but lack single-target pressure.",
+    Fix:
+      "Add boss payoff: crit consistency, status scaling, curse payoff, heavy attack lasers, or Ink Relic skill damage.",
+  },
+  {
+    Mistake: "Chasing achievement runs too early",
+    "Why It Fails":
+      "Difficulty and form achievements are much harder if you are still learning the fight.",
+    Fix:
+      "Get a normal Book Spirit clear first, then chase difficulty or form-specific achievements.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To unlock Realm of Ink's true ending route, **defeat Book Spirit once** through the Story Relics path. Book Spirit is not just a damage check: watch for **falling pages**, destroy **ink anchors** before the arena shrinks, and keep enough room to dodge.
+
+For **Ink God**, save your dash for sun / moon punishment tells and wide bullet patterns instead of spending every dash for damage. If the talisman or different ending option is missing, finish available endings first, then return after your ending progress has advanced.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Realm of Ink 1.0. This guide covers Book Spirit, falling pages, ink anchors, Ink God, sun / moon punishment, talisman ending logic, true ending unlocks, Book Spirit achievements, Dragon Hair Brush, Dissolution / Rupture milestones, and boss-ready builds.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-book-spirit-final-boss.webp"
+    alt="Realm of Ink Book Spirit final boss encounter with dialogue calling out the Book Spirit."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Book Spirit is the fight where mechanics, arena control, and boss damage all matter at the same time.
+  </figcaption>
+</figure>
+
+<h2 id="spoiler-warning">
+  Spoiler warning
+</h2>
+
+This guide discusses Realm of Ink's late-game route, Book Spirit, Ink God, true ending progress, and talisman choices. If you still want to discover the endgame on your own, stop here and use the <Link href="/realm-of-ink/beginner-guide">Beginner Guide</Link> or <Link href="/realm-of-ink/best-builds">Best Builds Guide</Link> instead.
+
+If you are trying to beat Book Spirit, unlock the true ending, understand the talisman route, or chase Book Spirit achievements, keep reading.
+
+<div className="my-4">
+  <Link href="/realm-of-ink">
+    Back to the Realm of Ink Guide Hub
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="route-overview">
+  Final boss and true ending route overview
+</h2>
+
+Realm of Ink's endgame starts moving once you enter the Story Relics route and reach Book Spirit. The first important unlock is simple: **defeat Book Spirit once to start opening the true ending route**.
+
+<GuideTable
+  caption="Realm of Ink final boss and ending route overview."
+  columns={endingRouteColumns}
+  rows={endingRouteRows}
+/>
+
+The part that confuses players is the talisman route. The talisman option is not just a random prompt. It is tied to ending progress, so if it is missing, the answer is usually to finish available endings first and return later.
+
+<h2 id="story-relics">
+  Story Relics and why they matter
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-story-relics-scroll.webp"
+    alt="Realm of Ink Story Relics explanation near the Spirit Fox Inn."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Story Relics push you toward the Book Spirit route, so start preparing for a real boss check before the final room.
+  </figcaption>
+</figure>
+
+The Story Relics route is where the run stops feeling like a normal clear and starts becoming an ending route. This is the moment to start thinking about the final fight earlier.
+
+Save the full build check for the final prep checklist near the end of this guide. At this point, the main thing is to understand that Story Relics lead into a real boss route, not just another normal room clear.
+
+<h2 id="book-spirit-rift">
+  How to reach Book Spirit
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-book-spirit-rift.webp"
+    alt="Realm of Ink rift before the Book Spirit lair near the end of the story."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The rift is your final warning. If your build is weak here, Book Spirit will make that weakness obvious.
+  </figcaption>
+</figure>
+
+Late in the route, you reach the rift that points toward the Book Spirit's lair. Treat this as your final build check.
+
+
+<h2 id="book-spirit-guide">
+  Book Spirit boss guide
+</h2>
+
+Book Spirit has specific mechanics that you need to respect. This is not only a normal dodge-and-hit fight.
+
+<GuideTable
+  caption="Realm of Ink Book Spirit mechanics."
+  columns={bookSpiritColumns}
+  rows={bookSpiritRows}
+/>
+
+The two biggest mechanics are **falling pages** and **ink anchors**.
+
+Falling pages create arena danger. When the fight starts filling the floor with hazards, stop greeding damage and move. If you keep attacking through every page drop, you will take avoidable hits before the boss even needs to pressure you directly.
+
+Ink anchors are even more important. When anchors appear, destroy them quickly. If you ignore them, the arena can shrink and the fight becomes much harder to control. This is especially bad for builds that need space, such as Oread laser routes, DOT builds that rely on kiting, or pet builds that take longer to kill.
+
+A clean Book Spirit attempt looks like this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Enter with enough boss damage, not only room clear.</li>
+  <li>Watch the floor for falling pages.</li>
+  <li>Destroy ink anchors as soon as they become a problem.</li>
+  <li>Keep moving while your status, curse, pet, or laser damage continues working.</li>
+  <li>Do not burn every dash chasing damage if the arena is about to become unsafe.</li>
+</ul>
+
+If the fight takes too long, your build probably lacks boss payoff. Go back to the <Link href="/realm-of-ink/best-builds">Best Builds Guide</Link> and check whether your route actually has single-target pressure.
+
+<h2 id="after-book-spirit">
+  What happens after beating Book Spirit?
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-book-spirit-after-clear.webp"
+    alt="Realm of Ink dialogue after defeating Book Spirit and returning from the free world."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After the first Book Spirit clear, the true ending route starts opening instead of ending everything immediately.
+  </figcaption>
+</figure>
+
+After defeating Book Spirit once, Realm of Ink starts opening the true ending route. That does not mean every ending choice appears instantly in every situation, but it does mean your first Book Spirit clear is the major gateway.
+
+If you have beaten Book Spirit and still do not see a talisman or different ending option, continue the ending route and finish available endings first. 
+
+<AdUnit placement="article_middle" />
+
+<h2 id="ink-god">
+  Ink God fight tips
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-ink-god-fight.webp"
+    alt="Realm of Ink Ink God fight during a high damage endgame build."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ink God is a finished-build check. You need damage, defense, and disciplined dash timing.
+  </figcaption>
+</figure>
+
+Ink God is much more dangerous if you spend movement carelessly. The fight can punish you with sun / moon style attacks, wide bullet pressure, and large screen control. Your dash should be saved for danger, not spent every time you want one more hit.
+
+<GuideTable
+  caption="Realm of Ink Ink God mechanics."
+  columns={inkGodColumns}
+  rows={inkGodRows}
+/>
+
+The safest Ink God approach is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Keep a dash ready when a punishment tell starts.</li>
+  <li>Look for the safe lane during full-screen bullet pressure before attacking.</li>
+  <li>Use burst windows after the attack pattern, not during the most crowded moment.</li>
+  <li>Bring at least one defensive layer: HP, shield, damage reduction, or reliable food support.</li>
+  <li>Do not rely on one short burst. The fight rewards sustained boss damage.</li>
+</ul>
+
+Violeta Primordial Status / Curse is one of the safest tested answers because it can keep status, curse, heavy attack, Ink Relic skill, crit, and all damage scaling active. Oread can also work if her curse, butterfly, laser, and Power of Prayer route is online.
+
+<div className="my-4">
+  <Link href="/realm-of-ink/best-builds">
+    Need a boss-ready setup? Read the Realm of Ink Best Builds Guide
+  </Link>
+</div>
+
+<h2 id="best-builds-for-final-boss">
+  Best builds for Book Spirit and Ink God
+</h2>
+
+This page is not trying to repeat the full Best Builds Guide. For final bosses, the short version is this: bring a build that can hit one target hard while you keep moving.
+
+<GuideTable
+  caption="Best Realm of Ink builds for final boss runs."
+  columns={bossBuildColumns}
+  rows={bossBuildRows}
+/>
+
+If you are chasing a first clear, Red Crit or a stable DOT route can be enough if your rewards line up. If you are pushing Book Spirit on high difficulty, Violeta and Oread are safer because they can maintain damage during longer phases.
+
+<h2 id="talisman-ending">
+  Talisman and true ending logic
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-oread-talisman-ending.webp"
+    alt="Realm of Ink talisman ending choice after a successful Oread clear."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The talisman route is tied to ending progress. If the option is missing, keep clearing available endings first.
+  </figcaption>
+</figure>
+
+Use this table instead of guessing whether your save is bugged.
+
+<GuideTable
+  caption="Realm of Ink talisman and true ending logic."
+  columns={endingLogicColumns}
+  rows={endingLogicRows}
+/>
+
+The key point is simple: **Book Spirit first, then true ending progress, then talisman-related choices.** If you have not beaten Book Spirit yet, focus on the boss route. If you have beaten Book Spirit but the talisman option is not there, complete available endings and check again later.
+
+<h2 id="achievement-checklist">
+  Book Spirit achievement checklist
+</h2>
+
+Book Spirit is also tied to several long-tail achievement goals. These are worth planning because they change how you should build the run.
+
+<GuideTable
+  caption="Realm of Ink Book Spirit and endgame achievement checklist."
+  columns={achievementColumns}
+  rows={achievementRows}
+/>
+
+For difficulty achievements, do not start at the hardest version. Get a clean normal Book Spirit clear first, then climb toward higher brush difficulties such as Dragon Hair Brush.
+
+For form achievements, the safest approach is to use the strongest route that fits the required form. Do not copy an Oread laser build onto Red, and do not force a Violeta Primordial route onto a character that does not support it.
+
+For Dissolution / Rupture milestone achievements, build planning matters more than one lucky run. Use the <Link href="/realm-of-ink/endless-rupture-guide">Endless and Rupture Guide</Link> if you are aiming for 12, 21, 30, or higher milestone clears.
+
+
+<h2 id="common-mistakes">
+  Common final boss and ending mistakes
+</h2>
+
+Most endgame problems come from treating Book Spirit and Ink God like normal room-clear checks.
+
+<GuideTable
+  caption="Common Realm of Ink final boss and ending mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest improvement is to respect boss mechanics. Destroy anchors. Move away from falling pages. Save dash for Ink God punishment windows. Bring boss damage instead of only room clear.
+
+<h2 id="recommended-prep">
+  Recommended final boss prep checklist
+</h2>
+
+Before pushing Book Spirit, Ink God, or ending routes, use this checklist:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Choose one main boss damage source.</li>
+  <li>Make sure your Ink Gems support that damage source.</li>
+  <li>Use Curios that multiply the same plan.</li>
+  <li>Bring Elixirs that strengthen the stats your build actually uses.</li>
+  <li>Buy food if your HP is low.</li>
+  <li>Add shield, HP, damage reduction, or defensive tools if your damage is already good.</li>
+  <li>Check whether your attack loop changed after upgrades.</li>
+  <li>Destroy Book Spirit ink anchors quickly.</li>
+  <li>Move away from falling pages before greeding damage.</li>
+  <li>Save dash for Ink God punishment tells and wide bullet patterns.</li>
+</ol>
+
+<h2 id="faq">
+  Realm of Ink final boss and true ending FAQ
+</h2>
+
+### Who is the final boss in Realm of Ink?
+
+Book Spirit is the major final story boss route, while Ink God is also part of the late endgame boss structure depending on your route and progression.
+
+### How do I unlock the true ending?
+
+Defeat Book Spirit once through the Story Relics route. After the first Book Spirit clear, the true ending route starts opening.
+
+### How do I beat Book Spirit?
+
+Watch for falling pages, destroy ink anchors before the arena shrinks too much, and bring a build with real boss damage. Do not treat the fight like a normal room-clear check.
+
+### What are ink anchors in the Book Spirit fight?
+
+Ink anchors are side objectives that can make the arena shrink if ignored. Destroy them quickly so you keep enough space to dodge.
+
+### Why are pages falling during Book Spirit?
+
+Falling pages are arena hazards. Move first when they appear, then return to damage after the danger zone is clear.
+
+### How do I beat Ink God?
+
+Save dash for sun / moon punishment tells and wide bullet patterns. Bring sustained boss damage, one defensive layer, and a build that still works after the first burst window.
+
+### Why is Ink God so hard?
+
+Ink God punishes builds that only clear rooms well. You need boss damage, movement discipline, and enough defense to survive large punishment patterns.
+
+### What build should I use for Book Spirit?
+
+Violeta Primordial Status / Curse and Oread Curse Butterfly / Laser are strong options because they keep pressure active during longer phases. Red Crit can work for earlier clears if your crit route is strong.
+
+### What build should I use for Ink God?
+
+Use a finished build with boss damage and defense. Violeta status / curse is the safest tested route here, while Oread curse laser can work if Power of Prayer and laser scaling are online.
+
+### Why is the talisman option missing?
+
+The talisman option can be tied to ending progress. If it is missing, finish available endings first, then return to check again.
+
+### Should I choose the talisman?
+
+Choose it when you are ready to see a different ending path. If you are still avoiding spoilers, wait until you are done with your current ending route.
+
+### Can I fight Book Spirit again after the first clear?
+
+Yes. Book Spirit can be challenged again after your first clear, which matters for form-specific clears, difficulty achievements, Dragon Hair Brush attempts, and later endgame goals. If you are chasing achievements, treat your first clear as the unlock point, then return with the required form, difficulty, or build.
+
+### Are there Book Spirit achievements?
+
+Yes. Book Spirit is tied to form-specific clears, difficulty clears, and high-end milestone goals depending on platform and version wording.
+
+### How do I beat Book Spirit on Dragon Hair Brush?
+
+Bring stronger boss damage and at least one defensive layer. Dragon Hair Brush makes the fight less forgiving, so destroy anchors quickly and avoid falling pages before chasing damage.
+

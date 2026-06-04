@@ -1,0 +1,694 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildColumns = [
+  { key: "Build", label: "Build" },
+  { key: "Core Pieces", label: "Core Pieces" },
+  { key: "Best For", label: "Best For" },
+];
+
+export const buildRows = [
+  {
+    Build: "Violeta Primordial Status / Curse",
+    "Core Pieces":
+      "Viperous Beauty, status effect damage, curse effect.",
+    "Best For":
+      "High damage boss clears, Dragon Hair Brush, Rupture 50, and players who want the strongest tested route here.",
+  },
+  {
+    Build: "Oread Curse Butterfly / Laser",
+    "Core Pieces":
+      "Butterfly Roosting Call, Power of Prayer, lasers.",
+    "Best For":
+      "Oread players, 1.0 crossover runs, curse scaling, butterfly builds, and flashy late-game clears.",
+  },
+  {
+    Build: "Red Crit Build",
+    "Core Pieces":
+      "Tiger Ink, crit rate, Croc Drum.",
+    "Best For":
+      "Default-character players who want a simple damage plan before learning advanced Primordial or Oread routes.",
+  },
+  {
+    Build: "Venom + Ivy DOT Build",
+    "Core Pieces":
+      "Venom Ink, Ivy Ink, status stack limit.",
+    "Best For":
+      "Players who want a non-Violeta status route that keeps damage ticking while they dodge.",
+  },
+  {
+    Build: "Momo / Ink Pet Build",
+    "Core Pieces":
+      "Momo Ink, Ink Pet damage, extra pets.",
+    "Best For":
+      "Safer runs where pets keep dealing damage while you focus on movement.",
+  },
+];
+
+export const violetaColumns = [
+  { key: "Piece", label: "Piece" },
+  { key: "Priority", label: "Priority" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const violetaRows = [
+  {
+    Piece: "Viperous Beauty / Primordial Ink",
+    Priority: "Core",
+    "Why It Matters":
+      "This is the center of the route. It turns Violeta into a status / curse engine instead of a normal attack build.",
+  },
+  {
+    Piece: "Status effects",
+    Priority: "Core",
+    "Why It Matters":
+      "Burning, bleeding, and poison become real boss damage when you also have status effect damage and stack support.",
+  },
+  {
+    Piece: "Curse effect",
+    Priority: "Core",
+    "Why It Matters":
+      "Curse effect improves the payoff from curse-based triggers and makes the build scale harder in long fights.",
+  },
+  {
+    Piece: "Heavy attack support",
+    Priority: "High",
+    "Why It Matters":
+      "The build can shift from light attack pressure into heavy attacks, clones, shockwaves, and Ink Relic skill damage.",
+  },
+  {
+    Piece: "Crit and all damage bonus",
+    Priority: "High",
+    "Why It Matters":
+      "Once the build hits often, crit and all damage scaling multiply everything that is already working.",
+  },
+  {
+    Piece: "HP, shield, or damage reduction",
+    Priority: "Medium",
+    "Why It Matters":
+      "Rupture and late bosses can still kill a strong build if you skip every defensive layer.",
+  },
+];
+
+export const oreadColumns = [
+  { key: "Piece", label: "Piece" },
+  { key: "Priority", label: "Priority" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const oreadRows = [
+  {
+    Piece: "Butterfly Roosting Call",
+    Priority: "Core",
+    "Why It Matters":
+      "Large butterflies create smaller butterflies, and small butterfly damage improves when curses are stacked.",
+  },
+  {
+    Piece: "Six-Line Secret Art",
+    Priority: "Core",
+    "Why It Matters":
+      "Curse Effects increase, and ability damage improves when more targets are cursed.",
+  },
+  {
+    Piece: "Power of Prayer",
+    Priority: "High",
+    "Why It Matters":
+      "This is the bridge into heavy attack laser damage after Oread's Primordial upgrades come online.",
+  },
+  {
+    Piece: "Spiraling Light Dance",
+    Priority: "High",
+    "Why It Matters":
+      "Choose the Speed route for faster light attacks, or the Sigil route when your Curios reward arrays.",
+  },
+  {
+    Piece: "Butterfly Manipulation Art",
+    Priority: "High",
+    "Why It Matters":
+      "Cooldown and interval support help Oread trigger butterflies, lasers, and ability effects more often.",
+  },
+  {
+    Piece: "Shield / damage reduction",
+    Priority: "Medium",
+    "Why It Matters":
+      "Oread creates a busy screen, so defensive support helps you survive while the build ramps.",
+  },
+];
+
+export const redColumns = [
+  { key: "Red Build", label: "Red Build" },
+  { key: "Core Setup", label: "Core Setup" },
+  { key: "When To Use It", label: "When To Use It" },
+];
+
+export const redRows = [
+  {
+    "Red Build": "Red Crit Build",
+    "Core Setup":
+      "Tiger Ink, crit rate, crit damage, On Target-style support, Croc Drum, Tempest Ring, fast light attacks.",
+    "When To Use It":
+      "Use this if you want the cleanest default-character damage route and do not want to rely on complex DOT timing.",
+  },
+  {
+    "Red Build": "Red DOT Build",
+    "Core Setup":
+      "Venom Ink, Ivy Ink, poison, bleeding, burning, Tri-Curse, Glacier Claw, status effect damage.",
+    "When To Use It":
+      "Use this if your run gives you multiple status pieces early and you want damage to keep ticking during dodges.",
+  },
+  {
+    "Red Build": "Red Pet Support",
+    "Core Setup":
+      "Momo Ink, pet-specialized Ink, Ink Pet damage, pet attack speed, extra pets, pet inheritance.",
+    "When To Use It":
+      "Use this if your early rewards push Momo hard and you are still learning boss movement.",
+  },
+];
+
+export const dotColumns = [
+  { key: "DOT Piece", label: "DOT Piece" },
+  { key: "Role", label: "Role" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const dotRows = [
+  {
+    "DOT Piece": "Venom Ink",
+    Role: "Poison route starter",
+    "Player Advice":
+      "Use it when your run can apply poison often or when you already have status effect damage.",
+  },
+  {
+    "DOT Piece": "Ivy Ink",
+    Role: "Status pairing piece",
+    "Player Advice":
+      "Pair it with Venom-style routes when you want more status coverage instead of one isolated poison effect.",
+  },
+  {
+    "DOT Piece": "Tri-Curse",
+    Role: "Curse / status payoff",
+    "Player Advice":
+      "Use it when your build can keep several debuffs active at the same time.",
+  },
+  {
+    "DOT Piece": "Glacier Claw",
+    Role: "Extra status / control support",
+    "Player Advice":
+      "Use it when you want more status layering and safer pressure during long fights.",
+  },
+  {
+    "DOT Piece": "Status stack limit",
+    Role: "Scaling multiplier",
+    "Player Advice":
+      "More stacks only matter if you can apply the status often enough.",
+  },
+];
+
+export const petColumns = [
+  { key: "Pet Build Piece", label: "Pet Build Piece" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Warning", label: "Warning" },
+];
+
+export const petRows = [
+  {
+    "Pet Build Piece": "Momo Ink",
+    "Why It Matters":
+      "This is the clearest signal that the run can move toward pet damage.",
+    Warning:
+      "Do not take it as a random side piece if your Curios already push crit, DOT, or heavy attacks.",
+  },
+  {
+    "Pet Build Piece": "Ink Pet damage",
+    "Why It Matters":
+      "Directly improves the damage pets contribute while you dodge.",
+    Warning:
+      "One pet damage bonus is not enough to make the whole run a pet build.",
+  },
+  {
+    "Pet Build Piece": "Extra Ink Pets",
+    "Why It Matters":
+      "More pets can add consistent pressure and more triggers.",
+    Warning:
+      "Extra pets still need scaling. Otherwise they can fall off in late bosses.",
+  },
+  {
+    "Pet Build Piece": "Pet attack speed / cooldown",
+    "Why It Matters":
+      "More pet actions mean more damage and more chances to trigger pet-related effects.",
+    Warning:
+      "This is better after you already know pets are part of your real damage plan.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Fails", label: "Why It Fails" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Using only damage-type labels",
+    "Why It Fails":
+      "Players search and choose rewards by real names like Tiger Ink, Venom Ink, Ivy Ink, Momo Ink, Viperous Beauty, Croc Drum, and Tempest Ring.",
+    Fix:
+      "Match the named Ink Gem or Curio to the actual build route instead of only thinking in broad categories.",
+  },
+  {
+    Mistake: "Forcing Violeta logic onto every character",
+    "Why It Fails":
+      "Violeta Primordial status / curse is strong, but Red, Oread, Wang Ding, and Ning Ye do not all want the same route.",
+    Fix:
+      "Start from the character's attack pattern and strongest early rewards, then choose the build path.",
+  },
+  {
+    Mistake: "Taking DOT pieces without enough application",
+    "Why It Fails":
+      "Venom Ink or Ivy Ink alone does not make a full DOT build if you cannot apply and scale status effects often.",
+    Fix:
+      "Pair DOT Ink with status effect damage, stack limit, duration, and multi-hit triggers.",
+  },
+  {
+    Mistake: "Calling one pet reward a pet build",
+    "Why It Fails":
+      "Pet builds need repeated pet support, not one Momo-related pickup.",
+    Fix:
+      "Commit only when Momo Ink, pet damage, extra pets, pet attack speed, or pet inheritance start stacking together.",
+  },
+  {
+    Mistake: "Ignoring defense on high difficulty",
+    "Why It Fails":
+      "Dragon Hair Brush and Rupture punish builds that deal damage but cannot survive boss patterns.",
+    Fix:
+      "Add HP, shield, food, damage reduction, or safer mobility once your damage engine is online.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The strongest tested Realm of Ink build here is **Violeta Primordial Status / Curse**, built around **Viperous Beauty**, status effect damage, curse effect, burning, bleeding, poison, heavy attacks, and Ink Relic skill damage.
+
+For the default character, start with **Red Crit Build** if you want the easiest route: look for **Tiger Ink**, crit rate, crit damage, **On Target** style support, **Croc Drum**, and **Tempest Ring**. If your run gives you status pieces instead, use **Venom Ink + Ivy Ink** for a DOT build with poison, bleeding, burning, **Tri-Curse**, and **Glacier Claw**.
+
+For Oread, use **Curse Butterfly / Laser** with **Butterfly Roosting Call**, **Six-Line Secret Art**, **Power of Prayer**, and Primordial upgrades.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Realm of Ink 1.0. This guide covers Violeta Primordial status / curse builds, Oread butterfly laser builds, Red crit builds, Venom Ink and Ivy Ink DOT builds, Tiger Ink crit scaling, Momo Ink pet builds, Dragon Hair Brush, Rupture, and boss-ready build advice.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-violeta-rupture-50-build.webp"
+    alt="Realm of Ink Violeta Primordial Ink build with Viperous Beauty status and curse scaling."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Violeta's Primordial status / curse route is the strongest tested build here, but it is not the only build worth using.
+  </figcaption>
+</figure>
+
+<h2 id="best-builds">
+  Best builds in Realm of Ink
+</h2>
+
+The best Realm of Ink build depends on your character and the named Ink Gems / Curios you actually find. A build guide that only says “use status damage” or “use crit” is not enough, because players make decisions from names they see in the run: **Tiger Ink**, **Venom Ink**, **Ivy Ink**, **Momo Ink**, **Viperous Beauty**, **Croc Drum**, **Tempest Ring**, **Tri-Curse**, and **Glacier Claw**.
+
+<GuideTable
+  caption="Realm of Ink best build directions."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+<div className="my-4">
+  <Link href="/realm-of-ink">
+    Back to the Realm of Ink Guide Hub
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="violeta-status-curse">
+  Violeta Primordial Status / Curse build
+</h2>
+
+Violeta's strongest tested setup is a **Primordial Status / Curse build** centered on **Viperous Beauty**. This route works because it turns Violeta into a multi-layer damage engine: status effects, curse effects, heavy attacks, Ink Relic skill damage, crit, and all damage bonus all start pushing the same direction.
+
+<GuideTable
+  caption="Violeta Primordial Status / Curse build priorities."
+  columns={violetaColumns}
+  rows={violetaRows}
+/>
+
+The practical playstyle is simple: get the Primordial route online, keep status and curse effects active, then shift your attack loop when your upgrades start rewarding heavy attacks, clones, shockwaves, or Ink Relic skill triggers.
+
+Do not stay locked into light attack spam if your build has clearly moved into heavy attack or Ink Relic scaling. This is one of the biggest reasons a strong-looking Violeta run can feel weaker than it should.
+
+Use this build if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you have access to Viperous Beauty / Primordial Ink,</li>
+  <li>you can stack burning, bleeding, poison, or other status effects,</li>
+  <li>you have curse effect or curse-related Curios,</li>
+  <li>your run is giving you heavy attack, Ink Relic skill, crit, or all damage scaling,</li>
+  <li>and you want a build that can handle Dragon Hair Brush or Rupture-style pressure.</li>
+</ul>
+
+<h2 id="red-build">
+  Red build: easiest default-character route
+</h2>
+
+Red matters because she is the first character most players use. If someone searches for a Realm of Ink build after the first few runs, they are often really asking: “What should I build on Red?”
+
+The easiest answer is **Red Crit Build**.
+
+<GuideTable
+  caption="Realm of Ink Red build routes."
+  columns={redColumns}
+  rows={redRows}
+/>
+
+<h3 id="red-crit-build">
+  Red Crit Build with Tiger Ink
+</h3>
+
+Start with Red Crit if you want the most straightforward default-character route. Look for **Tiger Ink**, crit rate, crit damage, **On Target** style talent support, **Croc Drum**, and **Tempest Ring**.
+
+This route works because crit builds are easier to understand than many DOT or Primordial routes. You want frequent hits, enough crit chance to make the build consistent, and crit damage that makes those hits matter.
+
+Use Red Crit if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you are still learning the game,</li>
+  <li>you want a direct damage plan,</li>
+  <li>you find Tiger Ink or crit support early,</li>
+  <li>you already have Curios that reward light attacks, fast hits, or crits,</li>
+  <li>and you do not want to rely on poison / bleed / burn stacking yet.</li>
+</ul>
+
+<h3 id="red-dot-build">
+  When Red should switch to a DOT build
+</h3>
+
+Red does not have to stay on crit every run. If your early rewards give you **Venom Ink**, **Ivy Ink**, poison, bleeding, burning, or status effect damage before your crit route is ready, it can be better to move into DOT instead.
+
+Use Red DOT instead of Red Crit when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you find Venom Ink or Ivy Ink early,</li>
+  <li>your Curios already improve status effect damage, status duration, or stack limits,</li>
+  <li>you do not have enough crit rate to make Tiger Ink feel consistent,</li>
+  <li>and you are comfortable letting poison, bleed, or burn keep ticking while you dodge.</li>
+</ul>
+
+Do not force DOT just because you found one poison source. Red DOT needs several pieces before it feels better than a straightforward crit route.
+
+For the full setup, use the <Link href="#dot-build">Venom Ink + Ivy Ink DOT build</Link> section below.
+
+<h2 id="dot-build">
+  Venom Ink + Ivy Ink DOT build
+</h2>
+
+The strongest non-Violeta status route to watch for is **Venom Ink + Ivy Ink**. This build is easier to search, easier to recognize in-game, and more useful than a generic “status scaling” label.
+
+<GuideTable
+  caption="Realm of Ink DOT build pieces."
+  columns={dotColumns}
+  rows={dotRows}
+/>
+
+The DOT route wants layered effects. Poison alone can feel slow. Bleeding alone can feel incomplete. Burning alone can be fine, but it becomes better when it is one part of a larger status engine.
+
+A stronger DOT route stacks:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Venom Ink</strong> for poison pressure,</li>
+  <li><strong>Ivy Ink</strong> for status pairing,</li>
+  <li><strong>Tri-Curse</strong> when your run can keep multiple debuffs active,</li>
+  <li><strong>Glacier Claw</strong> for extra status / control value,</li>
+  <li>status effect damage,</li>
+  <li>status duration,</li>
+  <li>status stack limit,</li>
+  <li>and multi-hit attacks that keep effects applied.</li>
+</ul>
+
+This is the route to use when your run gives you status pieces early but not enough Primordial support for a Violeta-style build.
+
+<h2 id="oread-build">
+  Oread Curse Butterfly / Laser build
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-oread-butterfly-lasers.webp"
+    alt="Realm of Ink Oread curse butterfly laser build in combat."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Oread's best route starts with curses, then turns butterflies, lasers, arrays, and Primordial upgrades into real damage.
+  </figcaption>
+</figure>
+
+Oread's best build is **Curse Butterfly / Laser**. She wants enemies cursed, then she wants butterflies, lasers, arrays, heavy attacks, and ability effects to keep triggering value from those curses.
+
+<GuideTable
+  caption="Oread Curse Butterfly / Laser build priorities."
+  columns={oreadColumns}
+  rows={oreadRows}
+/>
+
+<h3 id="oread-power-of-prayer">
+  Power of Prayer and heavy attack lasers
+</h3>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-oread-power-of-prayer.webp"
+    alt="Realm of Ink Oread Power of Prayer upgrade adding heavy attack damage and laser prayer effects."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Power of Prayer is the point where Oread's build starts moving from curse setup into heavy attack and laser payoff.
+  </figcaption>
+</figure>
+
+Power of Prayer matters because it changes how Oread deals boss damage. Early Oread often feels like a light attack and butterfly character. After the right upgrades, she becomes a heavy attack laser character.
+
+If you take Power of Prayer upgrades but keep playing like nothing changed, you lose damage. Once heavy attack lasers come online, weave heavy attacks into your normal loop and let the lasers carry more of the fight.
+
+<h3 id="oread-butterfly-array-choice">
+  Spiraling Light Dance: Speed or Sigil?
+</h3>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-oread-spiraling-light-dance-speed.webp"
+    alt="Realm of Ink Oread Spiraling Light Dance Speed upgrade increasing light attack speed and butterfly rotation speed."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Choose Speed when your Oread build wants faster light attack pressure.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-oread-spiraling-light-dance-sigil.webp"
+    alt="Realm of Ink Oread Spiraling Light Dance Sigil upgrade creating an array while butterflies spiral."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Choose Sigil when your Curios reward arrays or when your build needs more zone-based triggers.
+  </figcaption>
+</figure>
+
+The Speed vs Sigil choice is one of Oread's most important build decisions. Take **Speed** when light attack frequency and butterfly rotation are your real damage source. Take **Sigil** when your Curios reward arrays, standing in arrays, or triggering effects from zones.
+
+For the full character route, read the <Link href="/realm-of-ink/oread-guide">Oread Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="momo-pet-build">
+  Momo Ink and pet builds
+</h2>
+
+Pet builds can work, but they need more commitment than one pet reward.
+
+<GuideTable
+  caption="Realm of Ink Momo and Ink Pet build pieces."
+  columns={petColumns}
+  rows={petRows}
+/>
+
+Look for **Momo Ink** or pet-specialized Ink when your run is already giving you pet value. A real pet build wants several pieces working together: Ink Pet damage, extra pets, pet attack speed, pet ultimate cooldown, pet crit, or pet inheritance.
+
+Pet builds are useful because they keep dealing damage while you dodge. That makes them comfortable for players still learning boss movement. The downside is that pet builds can fall off in high difficulty if you do not keep scaling them.
+
+Use pet builds if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you find Momo Ink early,</li>
+  <li>you have multiple pet Curios,</li>
+  <li>you want safer damage while learning bosses,</li>
+  <li>or your run gives you extra Ink Pets and pet scaling together.</li>
+</ul>
+
+Do not force pet builds if your best Curios are clearly pushing crit, DOT, Oread lasers, or Violeta Primordial damage.
+
+<h2 id="wang-ding-ning-ye">
+  What about Wang Ding and Ning Ye builds?
+</h2>
+
+Wang Ding and Ning Ye are not covered as full tested routes here yet, but they should not be treated like weaker copies of Red, Violeta, or Oread. Their best builds depend on how their base kit wants to deal damage and what the run gives you early.
+
+For **Wang Ding**, think of him as a more weapon-forward character. If your run starts giving you heavy attack damage, burst windows, clones, shockwaves, single-hit payoff, or strong melee Curios, lean into that direction instead of forcing Venom + Ivy DOT just because status builds are strong elsewhere.
+
+For **Ning Ye**, look for speed, skill use, multi-hit pressure, or safer hit-and-run damage. If the run gives you crit support, she can move toward a fast-hit crit route. If it gives you status application and enough scaling, she can move into DOT. The key is to read the first strong route the run gives you instead of copying Oread's curse laser plan or Violeta's Primordial status route.
+
+A simple rule works:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Wang Ding</strong> — start by checking heavy attack, burst, clone, shockwave, or melee payoff.</li>
+  <li><strong>Ning Ye</strong> — start by checking speed, crit, skill use, multi-hit, or status application.</li>
+  <li><strong>Do not force another character's build</strong> unless the rewards clearly support it.</li>
+</ul>
+
+These two characters deserve dedicated build testing later, but this should keep you from making the biggest mistake: forcing them into a route that only works because another character's kit supports it.
+
+<h2 id="boss-builds">
+  Best builds for bosses
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-oread-book-spirit-clear.webp"
+    alt="Realm of Ink Oread fighting Book Spirit with curse, butterfly, and laser build pressure."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Book Spirit is a good test for whether your build has real boss damage or only strong room clear.
+  </figcaption>
+</figure>
+
+Boss builds need more than room clear. Normal rooms reward wide damage, pets, and screen coverage. Bosses reward pressure on one target, safe burst windows, and enough defense to survive bad patterns.
+
+Use this quick matchup logic:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Early bosses:</strong> Red Crit is usually enough if Tiger Ink, crit rate, or fast attack support appears early. You do not need a perfect Primordial route for the first real boss checks.
+  </li>
+  <li>
+    <strong>Tanky mid-run bosses:</strong> Venom + Ivy DOT becomes better if you already have status effect damage, stack limit, or several ways to apply poison, bleeding, or burning.
+  </li>
+  <li>
+    <strong>Book Spirit:</strong> Violeta Primordial Status / Curse and Oread Curse Butterfly / Laser are the strongest directions here because both can keep pressure active through longer phases.
+  </li>
+  <li>
+    <strong>Ink God:</strong> bring a finished build with a defensive layer. Raw damage is not enough if you cannot survive long enough to use your burst windows.
+  </li>
+  <li>
+    <strong>Dragon Hair Brush bosses:</strong> use builds with real scaling, not only early room clear. Violeta is the safest tested route here, while Oread needs her curse, laser, and defense pieces online.
+  </li>
+</ul>
+
+If your boss damage feels low, check whether your build has single-target payoff. A pet build with no pet scaling, a DOT build with no status damage, or a crit build with low crit rate will all feel fine in rooms and weak against bosses.
+
+If you are stuck near the end, read the <Link href="/realm-of-ink/final-boss-true-ending">Final Boss and True Ending Guide</Link>.
+<h2 id="high-difficulty-builds">
+  Best build logic for Dragon Hair Brush and Rupture
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/realm-of-ink/realm-of-ink-difficulty-rupture-doctor.webp"
+    alt="Realm of Ink Dragon Hair Brush difficulty 7 screen showing higher challenge and better rewards."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dragon Hair Brush and Rupture expose weak builds. Bring a route with real scaling and at least one defensive layer.
+  </figcaption>
+</figure>
+
+For Dragon Hair Brush and Rupture, the safest route here is still **Violeta Primordial Status / Curse** because it has multiple connected damage layers. Oread can also work if her curse, butterfly, laser, and defensive pieces are ready. Red Crit can work for earlier high-difficulty pushes, but it needs enough crit consistency and boss damage before the final route.
+
+For more endgame-specific advice, use the <Link href="/realm-of-ink/endless-rupture-guide">Endless and Rupture Guide</Link>.
+
+
+<h2 id="common-mistakes">
+  Build mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common Realm of Ink build mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The most important habit is to read named rewards as part of a route. **Tiger Ink** suggests a different run than **Venom Ink**. **Momo Ink** suggests a different run than **Viperous Beauty**. **Power of Prayer** changes Oread differently than a basic curse pickup.
+
+<h2 id="faq">
+  Realm of Ink Best Builds FAQ
+</h2>
+
+### What is the best build in Realm of Ink?
+
+The strongest tested build here is Violeta Primordial Status / Curse with Viperous Beauty, status effect damage, curse effect, heavy attacks, Ink Relic skill damage, crit, and all damage bonus.
+
+### Which Red build is easiest to start with?
+
+Red Crit Build is the easiest starting route. Look for Tiger Ink, crit rate, crit damage, On Target-style support, Croc Drum, Tempest Ring, and fast light attack pressure.
+
+### Is Red Crit better than Red DOT?
+
+Red Crit is easier to start with because the goal is direct: crit more often and make crits hit harder. Red DOT can scale well with Venom Ink + Ivy Ink, but it needs enough status application and status effect damage to feel good.
+
+### What is the best Oread build?
+
+Oread's best route is Curse Butterfly / Laser. Use Butterfly Roosting Call, Six-Line Secret Art, Power of Prayer, Spiraling Light Dance, Butterfly Manipulation Art, curse effect, ability damage, and laser payoff.
+
+### Is Venom Ink good?
+
+Yes, Venom Ink is good when your run can apply poison often and support it with status effect damage, status duration, stack limit, or other status pieces like Ivy Ink.
+
+### Is Tiger Ink good?
+
+Tiger Ink is good for crit-focused builds, especially on Red or other fast-hit routes that can use crit rate and crit damage consistently.
+
+### Can pet builds work at Dragon Hair Brush?
+
+Yes, but only with real pet support. Momo Ink, pet damage, extra pets, pet attack speed, and pet inheritance need to stack together. A single pet bonus usually falls off in high difficulty.
+
+### Does Wang Ding have a recommended build?
+
+For Wang Ding, look for heavy attack, burst, clone, shockwave, or single-hit payoff support. Do not force him into a Violeta-style status build unless the run clearly gives you those pieces.
+
+### Does Ning Ye have a recommended build?
+
+For Ning Ye, start from the first strong route your run gives you: crit, status, skill use, or safer multi-hit pressure. Build around the rewards that appear instead of copying Oread or Violeta directly.
+
+### Should I always take Primordial Ink?
+
+No. Primordial Ink is strongest when it becomes the center of your route. Do not take it if your current two-Ink-Gem setup and Momo form are already carrying the run.
+
+### Why does my build lose damage late?
+
+First check your named pieces. If your Curios reward heavy attacks but your Ink Gems are pushing pets, your build is split. If you have Venom Ink but no status damage, your DOT route is unfinished. If you have Tiger Ink but no crit scaling, the crit route is incomplete.
