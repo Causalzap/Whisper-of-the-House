@@ -13,6 +13,78 @@ export type LatestUpdateItem = {
   
   export const latestUpdates: LatestUpdateItem[] = [
 
+// ===== House Flipper Remastered Collection =====
+{
+  href: "/house-flipper-remastered-collection",
+  game: "House Flipper Remastered Collection",
+  title: "Beginner Guide, Jobs, Money, DLC & Achievements",
+  description:
+    "Start here for House Flipper Remastered Classic Mode, Free Play, first jobs, money, buyers, DLC regions, Heart Valley, and all 56 achievements.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== House Flipper Remastered Collection =====
+{
+  href: "/house-flipper-remastered-collection/beginner-guide",
+  game: "House Flipper Remastered Collection",
+  title: "Beginner Guide",
+  description:
+    "Pick Classic Mode or Free Play, clean the office, use the laptop, follow first jobs, choose early perks, use UV light, and avoid bad starts.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== House Flipper Remastered Collection =====
+{
+  href: "/house-flipper-remastered-collection/first-jobs-walkthrough",
+  game: "House Flipper Remastered Collection",
+  title: "First Jobs Walkthrough",
+  description:
+    "Finish Ex-Boyfriend Stole the Radiator, Cleaning the Garage, A Heated Argument, Art in Every Corner, tool unlocks, UV light, and 100% fixes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== House Flipper Remastered Collection =====
+{
+  href: "/house-flipper-remastered-collection/money-guide",
+  game: "House Flipper Remastered Collection",
+  title: "Money Guide",
+  description:
+    "Make more money with jobs, room labels, buyer feedback, Dolan Trusk, Oceanside Villa profit, negotiation timing, and renovation cost control.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== House Flipper Remastered Collection =====
+{
+  href: "/house-flipper-remastered-collection/dlc-content-guide",
+  game: "House Flipper Remastered Collection",
+  title: "DLC Content Guide",
+  description:
+    "Plan DLC regions from North Levyville to Heart Valley, with Cozy Village, Maple Bloom Village, Flipperberg, Sunset Bay, Moonrise Bay, and Winter Hills.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== House Flipper Remastered Collection =====
+{
+  href: "/house-flipper-remastered-collection/achievements-guide",
+  game: "House Flipper Remastered Collection",
+  title: "Achievements Guide",
+  description:
+    "Unlock all 56 House Flipper Remastered achievements with job, buyer, DLC, Negotiator, Millionaire, secret action, and not-unlocking fixes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
 // ===== Realm of Ink =====
 {
   href: "/realm-of-ink",

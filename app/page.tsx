@@ -133,7 +133,8 @@ const allGameGuides = [
   { title: 'Scale the Depths', href: '/scale-the-depths'},
   { title: 'Fatekeeper', href: '/fatekeeper'},
   { title: 'Realm of Ink', href: '/realm-of-ink'},
-
+  { title: 'House Flipper Remastered Collection', href: '/house-flipper-remastered-collection'},
+  
 ];
 
 const exploreCards = [

@@ -1,0 +1,648 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const moneyRouteColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Makes Money", label: "Why It Makes Money" },
+];
+
+export const moneyRouteRows = [
+  {
+    Stage: "Early game",
+    "What To Do":
+      "Finish jobs first, unlock tools, and avoid buying a serious house before cleaning, mounting, painting, and furniture control feel comfortable.",
+    "Why It Makes Money":
+      "Jobs pay less than house sales, but they unlock the tools that make flips faster and less risky.",
+  },
+  {
+    Stage: "First flips",
+    "What To Do":
+      "Buy cheaper houses, clean everything, sell useless old furniture, fix obvious problems, and avoid luxury spending.",
+    "Why It Makes Money":
+      "Low renovation cost protects profit while you learn buyer feedback.",
+  },
+  {
+    Stage: "Buyer targeting",
+    "What To Do":
+      "Choose one buyer profile before decorating, then make rooms match that buyer instead of trying to please everyone.",
+    "Why It Makes Money":
+      "A focused house usually gets a stronger top offer than a random mix of rooms.",
+  },
+  {
+    Stage: "High-value flips",
+    "What To Do":
+      "Use larger or better-located houses once you understand room labels, buyer feedback, and cost control.",
+    "Why It Makes Money":
+      "Bigger houses give more room for profit and negotiation, but also make overspending easier.",
+  },
+  {
+    Stage: "Negotiation",
+    "What To Do":
+      "Negotiate only after the top buyer already likes the house and the highest offer is clearly ahead of the others.",
+    "Why It Makes Money":
+      "Negotiation works best from strength. It should increase a good sale, not rescue a bad one.",
+  },
+];
+
+export const saleColumns = [
+  { key: "Line Item", label: "Line Item" },
+  { key: "Amount", label: "Amount" },
+  { key: "What It Means", label: "What It Means" },
+];
+
+export const saleRows = [
+  {
+    "Line Item": "House price",
+    Amount: "$339,247.09",
+    "What It Means":
+      "The original purchase price of the Oceanside Villa example.",
+  },
+  {
+    "Line Item": "Renovation cost",
+    Amount: "$0.00",
+    "What It Means":
+      "No separate renovation-cost line was counted in this sale screen.",
+  },
+  {
+    "Line Item": "Furniture bought",
+    Amount: "$3,170.47",
+    "What It Means":
+      "New furniture added for the buyer-targeted setup.",
+  },
+  {
+    "Line Item": "Furniture sold",
+    Amount: "$1,281.59",
+    "What It Means":
+      "Old furniture sold back to recover some money.",
+  },
+  {
+    "Line Item": "House sale",
+    Amount: "$433,290.37",
+    "What It Means":
+      "Final winning sale price from Dolan Trusk.",
+  },
+  {
+    "Line Item": "Negotiation",
+    Amount: "$0.00",
+    "What It Means":
+      "This example did not rely on negotiation profit.",
+  },
+  {
+    "Line Item": "Profit",
+    Amount: "$92,154.41",
+    "What It Means":
+      "Final profit after purchase price and furniture changes.",
+  },
+];
+
+export const roomLabelColumns = [
+  { key: "Room Type", label: "Room Type" },
+  { key: "Basic Requirement", label: "Basic Requirement" },
+  { key: "Money Tip", label: "Money Tip" },
+];
+
+export const roomLabelRows = [
+  {
+    "Room Type": "Bedroom",
+    "Basic Requirement":
+      "Usually needs a real bed or sleeping setup that the game recognizes as a bedroom item.",
+    "Money Tip":
+      "Do not call a room a bedroom unless it has a bed. Empty decorated rooms may not help the buyer you want.",
+  },
+  {
+    "Room Type": "Bathroom",
+    "Basic Requirement":
+      "Use the core bathroom set: toilet, sink, and bath or shower-style washing fixture.",
+    "Money Tip":
+      "A real bathroom is more valuable than a room with only a sink or random tiles.",
+  },
+  {
+    "Room Type": "Office",
+    "Basic Requirement":
+      "Use office-style furniture such as a desk, chair, and storage / bookcase support.",
+    "Money Tip":
+      "Office rooms help buyers who care about work, value, or practical layouts.",
+  },
+  {
+    "Room Type": "Kitchen",
+    "Basic Requirement":
+      "Use kitchen counters, sink, fridge, stove / cooktop, and enough functional kitchen pieces.",
+    "Money Tip":
+      "A small functional kitchen is usually better than expensive decorations with missing basics.",
+  },
+  {
+    "Room Type": "Living room",
+    "Basic Requirement":
+      "Use seating, table / TV-style comfort items, and a clear shared-space layout.",
+    "Money Tip":
+      "Family buyers often respond better to usable shared rooms than random décor.",
+  },
+  {
+    "Room Type": "Sauna",
+    "Basic Requirement":
+      "If sauna items are available in your Remastered build, create a room that clearly uses sauna benches / heater-style sauna pieces.",
+    "Money Tip":
+      "Sauna rooms were a known high-value room type in the original House Flipper. In Remastered, test the room recognition and buyer feedback before relying on it.",
+  },
+];
+
+export const priceDriverColumns = [
+  { key: "Price Driver", label: "Price Driver" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const priceDriverRows = [
+  {
+    "Price Driver": "Cleanliness",
+    "What To Do":
+      "Remove trash, clean dirt, clean windows, and fix obvious mess before decorating.",
+    "Why It Helps":
+      "A dirty house can drag down buyer interest even if the furniture looks expensive.",
+  },
+  {
+    "Price Driver": "Functional room labels",
+    "What To Do":
+      "Make rooms read as real bedrooms, bathrooms, offices, kitchens, and living spaces.",
+    "Why It Helps":
+      "Buyers respond to usable rooms, not just empty rooms with nice walls.",
+  },
+  {
+    "Price Driver": "Buyer-specific layout",
+    "What To Do":
+      "Pick a target buyer before spending money, then build toward that buyer's preferences.",
+    "Why It Helps":
+      "Focused houses usually create a stronger top offer.",
+  },
+  {
+    "Price Driver": "Controlled furniture spending",
+    "What To Do":
+      "Buy what the room needs, not every expensive object that looks good.",
+    "Why It Helps":
+      "Profit depends on sale price minus what you spent to get there.",
+  },
+  {
+    "Price Driver": "Special rooms",
+    "What To Do":
+      "Use high-value special rooms only when they fit the house and are recognized by your current build.",
+    "Why It Helps":
+      "Special rooms such as sauna-style rooms can be powerful, but should be tested in Remastered before you build a full strategy around them.",
+  },
+  {
+    "Price Driver": "High-value properties",
+    "What To Do":
+      "Move into larger or better houses once you understand buyer feedback and cost control.",
+    "Why It Helps":
+      "A bigger base price gives more room for meaningful profit and negotiation.",
+  },
+];
+
+export const confirmedBuyerColumns = [
+  { key: "Buyer", label: "Buyer" },
+  { key: "Offer", label: "Offer" },
+  { key: "Observed Feedback", label: "Observed Feedback" },
+  { key: "Money Lesson", label: "Money Lesson" },
+];
+
+export const confirmedBuyerRows = [
+  {
+    Buyer: "Dolan Trusk",
+    Offer: "$433,290.37",
+    "Observed Feedback":
+      "Wanted more armchairs, but still gave the winning offer.",
+    "Money Lesson":
+      "A practical, value-focused setup can still win even if one small preference is not perfect.",
+  },
+  {
+    Buyer: "Jack Tarinton",
+    Offer: "$421,954.78",
+    "Observed Feedback":
+      "Liked essentials, but objected to trash and weak tenant-friendly presentation.",
+    "Money Lesson":
+      "Cleanliness and essentials matter, but the final buyer target still needs focus.",
+  },
+  {
+    Buyer: "Smoth Family",
+    Offer: "$385,145.01",
+    "Observed Feedback":
+      "Cared about hygiene and disliked the walls.",
+    "Money Lesson":
+      "Family buyers punish dirt, hygiene problems, and poor wall condition quickly.",
+  },
+  {
+    Buyer: "Jantart Family",
+    Offer: "$363,846.40",
+    "Observed Feedback":
+      "Liked carpet warmth, but the house still felt too barn-like and not clean enough.",
+    "Money Lesson":
+      "Warmth helps, but cleaning and room identity still decide whether the buyer becomes competitive.",
+  },
+];
+
+export const legacyBuyerColumns = [
+  { key: "Buyer", label: "Buyer" },
+  { key: "Legacy Buyer Logic", label: "Legacy Buyer Logic" },
+  { key: "Use Carefully In Remastered", label: "Use Carefully In Remastered" },
+];
+
+export const legacyBuyerRows = [
+  {
+    Buyer: "Chang Choi",
+    "Legacy Buyer Logic":
+      "Minimal student-style setup: bed, desk, bookcases, simple bathroom, and low-cost furniture. Avoid excess family or luxury decoration.",
+    "Use Carefully In Remastered":
+      "Use this as a starting direction only. Do not treat 'no kitchen' as a confirmed Remastered hard rule unless the live buyer panel confirms it.",
+  },
+  {
+    Buyer: "Veronica Liptson",
+    "Legacy Buyer Logic":
+      "Creative and art-focused direction: pastel colors, pictures, plants, bookcases, and visible decoration personality.",
+    "Use Carefully In Remastered":
+      "Art and plants are a good test direction, but do not claim an exact picture or plant count unless you verify it in the Remastered buyer panel.",
+  },
+  {
+    Buyer: "Rafael Erko",
+    "Legacy Buyer Logic":
+      "Modern, clean, adult-focused layout with office or entertainment direction. Original buyer logic often points toward Man Cave-style rooms and no children items.",
+    "Use Carefully In Remastered":
+      "Build toward modern entertainment if his feedback rises, but do not hard-code a fixed Man Cave recipe without testing.",
+  },
+  {
+    Buyer: "Jonson Family",
+    "Legacy Buyer Logic":
+      "Large family layout: multiple bedrooms, enough bathrooms, child-friendly rooms, toys, and practical family spaces.",
+    "Use Carefully In Remastered":
+      "Use this as a family-house starting point. Confirm bed count, toy placement, and bathroom needs with live feedback before spending heavily.",
+  },
+];
+
+export const negotiatorColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What To Check", label: "What To Check" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const negotiatorRows = [
+  {
+    Step: "1",
+    "What To Check":
+      "The top buyer's offer is clearly ahead of the next buyer.",
+    "Why It Matters":
+      "If the buyer barely leads, negotiation is riskier and the house may still be poorly targeted.",
+  },
+  {
+    Step: "2",
+    "What To Check":
+      "The target buyer's complaints are minor, not core problems.",
+    "Why It Matters":
+      "Negotiation works best when the buyer already likes the house. It should not be used to fix a bad build.",
+  },
+  {
+    Step: "3",
+    "What To Check":
+      "The house is valuable enough for the extra money to matter.",
+    "Why It Matters":
+      "A tiny starter house gives little room for a meaningful negotiation gain.",
+  },
+  {
+    Step: "4",
+    "What To Check":
+      "You have removed obvious trash, fixed ugly walls, and made rooms functional.",
+    "Why It Matters":
+      "Basic problems can hurt buyer confidence before negotiation even starts.",
+  },
+  {
+    Step: "5",
+    "What To Check":
+      "You are negotiating from a strong sale, not trying to rescue a weak one.",
+    "Why It Matters":
+      "For the Negotiator achievement, aim for a high-value sale where a large gain is realistic.",
+  },
+];
+
+export const profitMistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts Profit", label: "Why It Hurts Profit" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const profitMistakeRows = [
+  {
+    Mistake: "Buying houses before your tools are ready",
+    "Why It Hurts Profit":
+      "You spend money before you can clean, paint, mount, and replace items efficiently.",
+    "Better Move":
+      "Finish early jobs first. Start flipping after the basic toolkit feels comfortable.",
+  },
+  {
+    Mistake: "Decorating without a buyer target",
+    "Why It Hurts Profit":
+      "Random furniture can attract the wrong buyer or raise costs without improving the final offer.",
+    "Better Move":
+      "Pick one target buyer, then buy furniture that supports that buyer's room logic.",
+  },
+  {
+    Mistake: "Overspending on furniture",
+    "Why It Hurts Profit":
+      "Expensive furniture does not automatically create enough sale-price increase to cover its cost.",
+    "Better Move":
+      "Clean everything first, sell unwanted old furniture, fix ugly walls, add only needed room pieces, then stop spending when buyer feedback improves.",
+  },
+  {
+    Mistake: "Ignoring room labels",
+    "Why It Hurts Profit":
+      "A decorated room may not count as a bedroom, bathroom, office, or kitchen if it lacks the required objects.",
+    "Better Move":
+      "Build rooms around core requirements: bed for bedroom, toilet + sink + bath/shower for bathroom, desk setup for office.",
+  },
+  {
+    Mistake: "Negotiating too early",
+    "Why It Hurts Profit":
+      "A weak buyer offer gives you less leverage and may fail to support a large negotiation increase.",
+    "Better Move":
+      "Negotiate only when the highest offer is clearly strong and the buyer's feedback is mostly satisfied.",
+  },
+  {
+    Mistake: "Leaving trash or dirt",
+    "Why It Hurts Profit":
+      "Even expensive houses can lose buyer appeal when basic cleaning is incomplete.",
+    "Better Move":
+      "Use cleaning, UV light, and room task checks before judging the house ready to sell.",
+  },
+  {
+    Mistake: "Building special rooms blindly",
+    "Why It Hurts Profit":
+      "A sauna or other special room can cost money if the game does not recognize it or the buyer does not value it.",
+    "Better Move":
+      "If you use a sauna-style room, confirm the room is recognized and test it on a house where the cost makes sense.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The safest way to make money in **House Flipper Remastered Collection** is to finish early jobs first, unlock the basic tools, then buy houses only when you can clean, repair, paint, and furnish quickly.
+
+For profit, focus on three things: **functional room labels**, **buyer-targeted renovation**, and **controlled spending**. For **Negotiator**, do not negotiate a weak sale. Negotiate only when the top buyer already likes the house and the highest offer is clearly strong.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for House Flipper Remastered Collection. This money guide covers early job income, buyer-targeted flips, room requirements, sale price drivers, Dolan Trusk, Oceanside Villa, Negotiator, renovation cost control, sauna-room notes, and common profit mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/house-flipper-remastered-collection/house-flipper-remastered-collection-oceanside-villa-dolan-trusk-sale.webp"
+    alt="House Flipper Remastered Collection Oceanside Villa sale result with Dolan Trusk winning and 92154.41 profit."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This Oceanside Villa example sold to Dolan Trusk for $433,290.37 and ended with $92,154.41 profit.
+  </figcaption>
+</figure>
+
+<h2 id="money-guide">
+  House Flipper Remastered Collection money guide
+</h2>
+
+Money in House Flipper Remastered Collection is not only about buying cheap and selling high. You make more when the game understands what each room is, when the right buyer wants the house, and when your renovation cost stays under control.
+
+Use this route first:
+
+<GuideTable
+  caption="Best money route for House Flipper Remastered Collection."
+  columns={moneyRouteColumns}
+  rows={moneyRouteRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="what-raises-sale-price">
+  What raises a house sale price?
+</h2>
+
+A high sale price usually comes from a combination of clean condition, functional rooms, buyer fit, and controlled spending. Do not assume that expensive furniture always creates profit.
+
+<GuideTable
+  caption="Main price drivers in House Flipper Remastered Collection."
+  columns={priceDriverColumns}
+  rows={priceDriverRows}
+/>
+
+The most important early lesson is this: **a useful room is stronger than an expensive room**. A cheap bedroom with a real bed helps more than a beautiful empty room that the game does not understand.
+
+<h2 id="room-requirements">
+  Room labels and basic room requirements
+</h2>
+
+House Flipper uses room logic. That means a room needs the right objects before the game and buyers treat it as a bedroom, bathroom, office, kitchen, or other useful space.
+
+<GuideTable
+  caption="Basic room requirements and money value."
+  columns={roomLabelColumns}
+  rows={roomLabelRows}
+/>
+
+These requirements are why “make rooms functional” is not just generic advice. If a buyer wants a family house, they need real bedrooms. If a buyer values practical essentials, they need rooms that clearly serve a purpose.
+
+<h2 id="sauna-rooms">
+  Are sauna rooms good for profit?
+</h2>
+
+Sauna rooms were a known high-value idea in the original House Flipper, but in Remastered Collection you should treat sauna as a test route, not a guaranteed money trick.
+
+If sauna items are available in your build, use them only on a house where the extra cost makes sense, then confirm the room recognition and buyer feedback before relying on it for profit.
+
+<h2 id="confirmed-buyer-feedback">
+  Confirmed buyer feedback from the Oceanside Villa sale
+</h2>
+
+Use confirmed Remastered sale feedback first. This is safer than copying old buyer guides word-for-word.
+
+<GuideTable
+  caption="Confirmed buyer feedback from the Oceanside Villa sale example."
+  columns={confirmedBuyerColumns}
+  rows={confirmedBuyerRows}
+/>
+
+Dolan Trusk won at **$433,290.37** even though he still wanted more armchairs. That is important: you do not need to satisfy every small comment. You need the target buyer to like the overall house more than everyone else.
+
+In this example, Jack Tarinton was close at **$421,954.78**, while Smoth Family and Jantart Family were much lower. That spread tells you the house was aimed more toward practical value than family comfort.
+
+<h2 id="legacy-buyer-logic">
+  Legacy buyer logic to verify in Remastered
+</h2>
+
+Older House Flipper buyer guides are still useful as a starting point, but do not treat every old rule as a confirmed Remastered rule. The safest method is to use legacy buyer logic to plan the house, then confirm the result with the live buyer feedback panel before selling.
+
+<GuideTable
+  caption="Legacy buyer logic to test in Remastered."
+  columns={legacyBuyerColumns}
+  rows={legacyBuyerRows}
+/>
+
+If the live buyer panel disagrees with the old rule, trust the live panel. Remastered can keep the same buyer names while still changing item names, UI wording, room recognition, or weighting.
+
+<h2 id="oceanside-villa-sale-example">
+  Oceanside Villa sale example
+</h2>
+
+This Oceanside Villa example is useful because it shows a real sale where the winning buyer was not perfect, but still strong enough to win.
+
+<GuideTable
+  caption="Oceanside Villa sale result."
+  columns={saleColumns}
+  rows={saleRows}
+/>
+
+The key lesson is that profit came from a controlled setup, not from filling the house with expensive items. Furniture bought was only **$3,170.47**, while the final sale reached **$433,290.37**.
+
+<h2 id="how-to-use-negotiation">
+  How to use negotiation
+</h2>
+
+Negotiation is most valuable when the base offer is already strong. Do not use it as a bandage for a badly targeted house.
+
+Use this checklist before negotiating:
+
+<GuideTable
+  caption="When negotiation is worth using."
+  columns={negotiatorColumns}
+  rows={negotiatorRows}
+/>
+
+A practical rule: negotiate when the top buyer is clearly ahead, the feedback is mostly positive, and the house value is high enough that a bigger increase matters. If the top buyer only barely leads or still complains about core problems, fix the house first.
+
+For the **Negotiator** achievement, use a valuable house and push the buyer offer as high as you can before negotiating. A cheap starter house is usually the wrong place to chase a large negotiation gain.
+
+<h2 id="how-to-control-renovation-cost">
+  How to control renovation cost
+</h2>
+
+Profit is not the same as sale price. You can sell a house for a lot and still waste money if you overspend on furniture or rebuild rooms without a buyer target.
+
+Use the mistakes table below as your cost-control checklist. The main idea is simple: clean first, sell what you do not need, fix obvious problems, make rooms functional, then stop spending once the buyer signal improves.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="common-profit-mistakes">
+  Common profit mistakes
+</h2>
+
+<GuideTable
+  caption="Common money mistakes and better moves."
+  columns={profitMistakeColumns}
+  rows={profitMistakeRows}
+/>
+
+<h2 id="which-house-should-you-flip-first">
+  Which house should you flip first?
+</h2>
+
+Your first flip should not be your dream renovation. It should be a learning property.
+
+If you are not sure which house to buy first, sort the property list by price and start with one of the cheapest small houses. Your goal is to practice cleaning, selling old furniture, fixing obvious problems, reading room labels, and checking buyer feedback without risking too much money.
+
+Pick a first house that is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>cheap enough that mistakes do not ruin your save,</li>
+  <li>small enough to clean quickly,</li>
+  <li>simple enough to understand room labels,</li>
+  <li>big enough to test one buyer direction,</li>
+  <li>and not so large that furniture costs spiral out of control.</li>
+</ul>
+
+Do not start with a high-value house like Oceanside Villa unless you already understand buyer feedback and renovation cost control. Big properties can make more money later, but they also make bad spending decisions more expensive.
+
+<h2 id="early-money-vs-late-money">
+  Early money vs late money
+</h2>
+
+Early money comes from jobs. Late money comes from house sales.
+
+In the first hour, jobs are better because they unlock tools and teach you the systems. Later, house sales become stronger because one good flip can beat many small jobs.
+
+Use this split:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Early:</strong> take jobs, unlock tools, learn task lists.</li>
+  <li><strong>Middle:</strong> buy cheap houses, clean heavily, control furniture cost.</li>
+  <li><strong>Late:</strong> use buyer targeting, high-value homes, special rooms, and negotiation.</li>
+</ul>
+
+For the first job route, read the <Link href="/house-flipper-remastered-collection/first-jobs-walkthrough">First Jobs Walkthrough</Link>.
+
+<h2 id="best-money-route-summary">
+  Best money route summary
+</h2>
+
+Early: do jobs first so your toolkit and task-reading habits are ready.
+
+Mid game: flip with a buyer target, not random decoration.
+
+Late game: negotiate from strength on higher-value houses, then use special rooms and buyer feedback only when they clearly improve profit.
+
+<div className="my-6 rounded-xl border border-slate-700 p-4">
+  <div className="mb-2 font-semibold">Planning achievements too?</div>
+  <div className="text-sm text-slate-300">
+    Use the <Link href="/house-flipper-remastered-collection/achievements-guide">Achievements Guide</Link> for Negotiator, Millionaire, buyer achievements, and all 56 Remastered achievements.
+  </div>
+</div>
+
+<h2 id="faq">
+  House Flipper Remastered Collection Money FAQ
+</h2>
+
+### What is the best way to make money early?
+
+Do jobs first. Early jobs pay you while unlocking cleaning, mounting, painting, and task-list skills that make house sales easier later.
+
+### Should I buy a house right away?
+
+No. Buy a house after the basic toolkit feels comfortable. If cleaning, mounting, painting, and item placement still feel slow, keep doing jobs first.
+
+### What raises house sale price the most?
+
+Clean condition, functional room labels, buyer-targeted renovation, and controlled furniture spending matter more than random expensive decoration.
+
+### What are room labels?
+
+Room labels are the game logic that makes a room count as a bedroom, bathroom, office, kitchen, or another useful room. A bedroom usually needs a bed. A bathroom needs core bathroom fixtures. An office needs office-style furniture.
+
+### Are sauna rooms good for money?
+
+Sauna rooms were a strong profit tactic in the original House Flipper. In Remastered, test sauna items, room recognition, and buyer feedback in your build before relying on it as a guaranteed money method.
+
+### Which buyer preferences are confirmed in this guide?
+
+The confirmed feedback in this guide comes from the Oceanside Villa sale example: Dolan Trusk, Jack Tarinton, Smoth Family, and Jantart Family. Other buyer rules are treated as legacy House Flipper logic that should be verified in Remastered.
+
+### Can I use old House Flipper buyer guides?
+
+Yes, but use them as starting points, not guaranteed Remastered rules. Confirm buyer reactions with the live buyer feedback panel before spending heavily.
+
+### Who is a good buyer for practical profit?
+
+Dolan Trusk and Jack Tarinton are good examples of practical-value buyers in the Oceanside Villa example. They respond better to useful layouts than emotional family comfort.
+
+### How do I unlock the Negotiator achievement?
+
+Use a valuable property, make the top buyer clearly like the house, then negotiate from a strong offer. Do not chase Negotiator on a tiny starter house.
+
+### When should I negotiate?
+
+Negotiate when the highest offer is clearly ahead, the buyer feedback is mostly satisfied, and the house value is high enough for a large gain to matter.
+
+### Why did my profit stay low?
+
+You probably overspent on furniture, decorated without a buyer target, ignored room labels, or sold before cleaning and fixing obvious problems.
+
+### Is Free Play good for money testing?
+
+Yes. Free Play is useful for testing room layouts, buyer reactions, and sale setups without committing your normal progression save.
