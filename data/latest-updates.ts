@@ -61,30 +61,6 @@ export type LatestUpdateItem = {
   hoverTitleClass: "group-hover:text-emerald-700",
 },
 
-// ===== House Flipper Remastered Collection =====
-{
-  href: "/house-flipper-remastered-collection/dlc-content-guide",
-  game: "House Flipper Remastered Collection",
-  title: "DLC Content Guide",
-  description:
-    "Plan DLC regions from North Levyville to Heart Valley, with Cozy Village, Maple Bloom Village, Flipperberg, Sunset Bay, Moonrise Bay, and Winter Hills.",
-  tagClass: "text-emerald-500",
-  hoverBorderClass: "hover:border-emerald-300",
-  hoverTitleClass: "group-hover:text-emerald-700",
-},
-
-// ===== House Flipper Remastered Collection =====
-{
-  href: "/house-flipper-remastered-collection/achievements-guide",
-  game: "House Flipper Remastered Collection",
-  title: "Achievements Guide",
-  description:
-    "Unlock all 56 House Flipper Remastered achievements with job, buyer, DLC, Negotiator, Millionaire, secret action, and not-unlocking fixes.",
-  tagClass: "text-emerald-500",
-  hoverBorderClass: "hover:border-emerald-300",
-  hoverTitleClass: "group-hover:text-emerald-700",
-},
-
 // ===== Realm of Ink =====
 {
   href: "/realm-of-ink",
