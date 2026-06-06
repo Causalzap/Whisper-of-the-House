@@ -136,7 +136,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/romestead/first-day-base-building`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/romestead/giant-owl-guardian-of-minerva`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/romestead/gods-offerings-boss-progression`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    
+    { url: `${base}/romestead/base-layout-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/romestead/raid-defense-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+
     { url: `${base}/paralives/paramaker-stats-vibes-personality`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/paralives/best-early-game-skills-talents-careers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/paralives/job-performance-not-improving`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

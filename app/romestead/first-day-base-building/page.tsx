@@ -41,6 +41,14 @@ const relatedLinks = [
     label: "Farmstead, Workers, Food and Logistics Guide",
   },
   {
+    href: "/romestead/base-layout-guide",
+    label: "Town Layout and Base Setup Guide",
+  },
+  {
+    href: "/romestead/raid-defense-guide",
+    label: "Night Raid Defense, Torches and Defense Value Guide",
+  },
+  {
     href: "/romestead/gods-offerings-boss-progression",
     label: "Gods, Offerings and Boss Progression Guide",
   },

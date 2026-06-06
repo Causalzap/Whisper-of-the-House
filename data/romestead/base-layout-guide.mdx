@@ -1,0 +1,621 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const locationColumns = [
+{ key: "Location Factor", label: "Location Factor" },
+{ key: "Best Choice", label: "Best Choice" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const locationRows = [
+{
+"Location Factor": "Map position",
+"Best Choice": "Choose a spot near the center of your early travel routes, not only the spawn point.",
+"Why It Matters":
+"A central town reduces long hauling trips and makes it easier to reach later biomes, dungeons, and resource routes.",
+},
+{
+"Location Factor": "Water",
+"Best Choice": "Build close to water if possible.",
+"Why It Matters":
+"Early crops need manual watering, and Watermill placement depends on water access later.",
+},
+{
+"Location Factor": "Clay",
+"Best Choice": "Keep clay close to the first town.",
+"Why It Matters":
+"Clay is used in many early and mid-game buildings, so a distant clay route slows every expansion.",
+},
+{
+"Location Factor": "Stone and wood",
+"Best Choice": "Stay near reliable stone and wood routes.",
+"Why It Matters":
+"Roads, buildings, walls, gates, carts, and upgrades all consume basic materials quickly.",
+},
+{
+"Location Factor": "Coal / harder resources",
+"Best Choice": "Do not ignore nearby coal or routes toward harder biomes.",
+"Why It Matters":
+"Your layout should support mid-game crafting, not only the first campfire and Workbench.",
+},
+{
+"Location Factor": "Open fertile space",
+"Best Choice": "Leave room for Farmstead, farmland, Well, roads, and food processing.",
+"Why It Matters":
+"Farmstead and farming systems punish towns that fill every open tile with houses and roads too early.",
+},
+];
+
+export const buildOrderColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Priority", label: "Priority" },
+{ key: "Layout Rule", label: "Layout Rule" },
+];
+
+export const buildOrderRows = [
+{
+Step: "1",
+Priority: "Feed citizens",
+"Layout Rule":
+"Place Food Storage near housing and the Farmstead route before expanding the town.",
+},
+{
+Step: "2",
+Priority: "Assign workers",
+"Layout Rule":
+"Keep early workplaces close enough that you can check them quickly when output stops.",
+},
+{
+Step: "3",
+Priority: "Stabilize production",
+"Layout Rule":
+"Connect Workbench, Food Storage, Farmstead, Blacksmith, Material Storage, and roads into one short loop.",
+},
+{
+Step: "4",
+Priority: "Expand carefully",
+"Layout Rule":
+"Add new buildings beside the core only when food, storage, and worker routes still make sense.",
+},
+{
+Step: "5",
+Priority: "Defend the core",
+"Layout Rule":
+"Wall and light the Blacksmith, Farmstead, Food Storage, housing, and main entrances before decorating the outer edge.",
+},
+];
+
+export const coreColumns = [
+{ key: "Building", label: "Building" },
+{ key: "Place It Near", label: "Place It Near" },
+{ key: "Avoid", label: "Avoid" },
+];
+
+export const coreRows = [
+{
+Building: "Town Core",
+"Place It Near": "Housing, Food Storage, Workbench, and early roads.",
+Avoid: "Placing it at spawn before scouting water, clay, stone, and open space.",
+},
+{
+Building: "Food Storage",
+"Place It Near": "Housing, Farmstead route, Bakery / food processing, and citizen paths.",
+Avoid: "Leaving food isolated from the people and workplaces that need it.",
+},
+{
+Building: "Blacksmith",
+"Place It Near": "The protected production core with torches and short wall routes.",
+Avoid: "Placing it in a dark outer corner once raids start to matter.",
+},
+{
+Building: "Farmstead",
+"Place It Near": "Farmland, Well route, Food Storage, Watermill / processing, and roads.",
+Avoid: "Placing it before checking fertile land, open space, water, and future processing.",
+},
+{
+Building: "Material Storage",
+"Place It Near": "Lumberyard, Quarry, Clay Pit, production routes, and later Logistics Tent routes.",
+Avoid: "Putting it so far away that every resource trip becomes manual hauling.",
+},
+];
+
+export const farmsteadColumns = [
+{ key: "Farm Piece", label: "Farm Piece" },
+{ key: "Hard Rule", label: "Hard Rule" },
+{ key: "Layout Advice", label: "Layout Advice" },
+];
+
+export const farmsteadRows = [
+{
+"Farm Piece": "Farmland",
+"Hard Rule": "Crops need usable farmland / fertile space.",
+"Layout Advice":
+"Do not block the Farmstead area with houses, roads, or decorative buildings too early.",
+},
+{
+"Farm Piece": "Water",
+"Hard Rule": "Manual watering is painful if the water source is far away.",
+"Layout Advice":
+"Start near water or expect long bucket trips until Well support comes online.",
+},
+{
+"Farm Piece": "Well",
+"Hard Rule": "Well support matters for Farmstead watering automation.",
+"Layout Advice":
+"Leave enough room near the Farmstead for Well-related support instead of boxing the farm in.",
+},
+{
+"Farm Piece": "Watermill",
+"Hard Rule": "Watermill placement depends on water access.",
+"Layout Advice":
+"Plan your food-processing cluster near the water route instead of treating Watermill like any normal building.",
+},
+{
+"Farm Piece": "Food Storage",
+"Hard Rule": "Food in the wrong place does not solve citizen hunger.",
+"Layout Advice":
+"Keep Food Storage close to housing, Farmstead, and processing so crops do not become a hauling problem.",
+},
+];
+
+export const logisticsColumns = [
+{ key: "Phase", label: "Phase" },
+{ key: "Layout Problem", label: "Layout Problem" },
+{ key: "Best Response", label: "Best Response" },
+];
+
+export const logisticsRows = [
+{
+Phase: "Before Logistics Tent",
+"Layout Problem":
+"Resources pile up near their own buildings and you move too much by hand.",
+"Best Response":
+"Keep Material Storage near Lumberyard, Quarry, Clay Pit, Carpenter, and Blacksmith routes.",
+},
+{
+Phase: "After Logistics Tent",
+"Layout Problem":
+"Buildings can connect better, but bad spacing still makes the town harder to read and defend.",
+"Best Response":
+"Use logistics to connect production, not to excuse a chaotic layout.",
+},
+{
+Phase: "After Cyclops / Desert progression",
+"Layout Problem":
+"New unlocks can change where resources need to move.",
+"Best Response":
+"Leave expansion lanes near storage and production instead of sealing every gap with roads and houses.",
+},
+];
+
+export const defenseColumns = [
+{ key: "Defense Pattern", label: "Defense Pattern" },
+{ key: "How It Works", label: "How It Works" },
+{ key: "Use It When", label: "Use It When" },
+];
+
+export const defenseRows = [
+{
+"Defense Pattern": "Compact protected core",
+"How It Works":
+"Blacksmith, Farmstead, Food Storage, housing, and Town Core stay close enough to light and wall.",
+"Use It When":
+"You are still in the early game and cannot afford a huge perimeter.",
+},
+{
+"Defense Pattern": "Natural choke point",
+"How It Works":
+"Water, cliffs, quarry edges, or terrain reduce the number of paths enemies can use.",
+"Use It When":
+"The map gives you a narrow entrance or a short wall line.",
+},
+{
+"Defense Pattern": "Kill-box courtyard",
+"How It Works":
+"A small entrance funnels enemies into a lit, trapped, or weapon-covered space before they reach buildings.",
+"Use It When":
+"You know where raids approach and can control the path without exposing citizens.",
+},
+{
+"Defense Pattern": "Double-layer wall",
+"How It Works":
+"An outer delay line slows enemies while the inner core protects important buildings.",
+"Use It When":
+"Raids are stronger and you have enough wood, stone, and repair capacity.",
+},
+{
+"Defense Pattern": "Road-lit response path",
+"How It Works":
+"Roads and torches create a fast route from your house / Workbench to the raid breach.",
+"Use It When":
+"You still need to fight manually and cannot rely on automated defense.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Placing Town Core at spawn without scouting",
+"Better Choice":
+"Scout for water, clay, stone, wood, coal, open space, and travel routes first.",
+},
+{
+Mistake: "Spreading every building far apart",
+"Better Choice":
+"Keep the first production core compact enough to light, wall, repair, and manage.",
+},
+{
+Mistake: "Ignoring Watermill placement",
+"Better Choice":
+"Plan food processing around water access instead of placing farms randomly.",
+},
+{
+Mistake: "Putting Material Storage far from production",
+"Better Choice":
+"Keep it near resource and crafting routes until Logistics Tent changes the town flow.",
+},
+{
+Mistake: "Walling the whole town too early",
+"Better Choice":
+"Protect Blacksmith, Farmstead, Food Storage, housing, and Town Core first.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The best **Romestead base layout** is a compact town near water, clay, stone, wood, coal, and open space, preferably close to the center of your early travel routes. Do not place Town Core at spawn without scouting.
+
+Your build priority is simple: **feed citizens first, assign workers, stabilize production, expand carefully, then defend the core**. Keep Blacksmith, Farmstead, Food Storage, housing, Workbench, Material Storage, and roads close enough that workers can function and raids cannot punish a huge scattered town. 
+</GuideQuickAnswer>
+
+<GuideTable
+caption="Romestead town layout priorities."ƒ
+columns={locationColumns}
+rows={locationRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-base-location-stone-clay-water.webp"
+    alt="Romestead base location near water, clay, stone and early resources."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scout before placing Town Core. A central route with water, clay, stone, wood and room to expand is worth more than a random spawn location.
+  </figcaption>
+</figure>
+
+<h2 id="base-location">
+  Best base location: central, resource-rich and expandable
+</h2>
+
+A good Romestead base location is not just “near some trees.” It should shorten your early travel loop and still make sense after new buildings unlock.
+
+Look for a spot that is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>near the center of your early map routes</strong>, so travel to resources, dungeons, and later biome paths is not painful,</li>
+  <li><strong>close to water</strong>, because manual watering and Watermill placement both depend on it,</li>
+  <li><strong>close to clay</strong>, because clay-heavy construction becomes a real bottleneck,</li>
+  <li><strong>close to stone and wood</strong>, because early buildings, roads, walls, and gates consume them quickly,</li>
+  <li><strong>not too far from coal or stronger resource routes</strong>, because mid-game crafting eventually matters,</li>
+  <li><strong>open enough for Farmstead, Well, Watermill, Material Storage, roads, housing, and defenses</strong>.</li>
+</ul>
+
+If you already placed the Town Core badly, do not panic. Use roads, carts, storage, and a compact expansion plan to reduce the damage. But if you have not committed yet, spend a few minutes scouting first.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="build-order">
+  Build order: food, workers, production, expansion, defense
+</h2>
+
+The easiest way to ruin a layout is expanding before the town can support itself. A beautiful city does not matter if citizens are hungry, workers are idle, and the raid path goes straight through your production buildings.
+
+Use this order:
+
+<GuideTable
+caption="A practical Romestead town setup order."
+columns={buildOrderColumns}
+rows={buildOrderRows}
+/>
+
+This order also keeps the page from becoming a pure decoration guide. Layout in Romestead is a survival system: it controls food, workers, production, logistics, and raid defense.
+
+For the first-day version of this route, use <Link href="/romestead/first-day-base-building/">Romestead First Day Build Order</Link>.
+
+<h2 id="town-core-placement">
+  Place Workbench and Town Core deliberately
+</h2>
+
+The **Workbench** opens Construction Mode, and the **Town Core** defines your settlement loop. Treat both as long-term anchors, not temporary tutorial objects.
+
+A good first Town Core position should be:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>close enough to Food Storage and housing,</li>
+  <li>not blocking the space you want for roads or Farmstead later,</li>
+  <li>near the daily path between Workbench, storage, and workplaces,</li>
+  <li>inside the area you can defend with torches and short walls,</li>
+  <li>close enough to resources that the first construction push is not painful.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-town-core-layout-placement.webp"
+    alt="Romestead Town Core and Workbench placed deliberately for a compact early layout."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Town Core is the center of your early layout. Place it where support buildings can stay close without blocking future expansion.
+  </figcaption>
+</figure>
+
+<h2 id="compact-core">
+  Build a compact production core
+</h2>
+
+Your first town should be a working support cluster, not a huge city. Keep the buildings you check every day close enough that you can feed citizens, assign workers, move materials, and respond to raids without running across the map.
+
+<GuideTable
+caption="Where important Romestead buildings belong in your first layout."
+columns={coreColumns}
+rows={coreRows}
+/>
+
+This is also why layout and raid defense are connected. A compact core is cheaper to light, cheaper to wall, easier to repair, and easier to diagnose after a bad night.
+
+<h2 id="roads">
+  Roads should connect your daily loop
+</h2>
+
+Roads matter because you walk constantly in Romestead. Use them to connect the places you visit every day:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Workbench and Town Core,</li>
+  <li>Food Storage and housing,</li>
+  <li>Farmstead and processing,</li>
+  <li>Material Storage and production buildings,</li>
+  <li>main entrances and raid defense routes,</li>
+  <li>resource paths you repeat often.</li>
+</ul>
+
+Do not cover the map with roads before you know your building plan. Roads are strongest when they support a route you actually use.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-roads-movement-layout.webp"
+    alt="Romestead roads connecting workbench, storage, farms and town routes."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Roads are not just decoration. Use them to connect your real daily route through town.
+  </figcaption>
+</figure>
+
+<h2 id="farmstead-watermill-layout">
+  Farmstead, fertile land, Well and Watermill layout
+</h2>
+
+Farmstead is where many early layouts start to fail. It is not enough to place the building wherever you see empty land. Farming depends on space, water, food storage, and processing.
+
+<GuideTable
+caption="How to place Farmstead, Well and Watermill in your town layout."
+columns={farmsteadColumns}
+rows={farmsteadRows}
+/>
+
+The important rule is that **Watermill is not a normal free-placement production building**. Plan it around water access, then connect it back to Farmstead, Food Storage, and the road loop. If you place farms far from water and later realize the Watermill route does not fit, your food chain becomes harder than it needs to be.
+
+For the full farming setup, read <Link href="/romestead/farmstead-workers-food-logistics/">Romestead Farmstead Guide: Fix Workers, Watering and Food Logistics</Link>.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-farmstead-layout-near-water.webp"
+    alt="Romestead Farmstead and farmland planned near water with room for Well and food processing."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Leave room around the Farmstead before the town grows around it. Water, Well, storage and processing all matter later.
+  </figcaption>
+</figure>
+
+<h2 id="material-storage-logistics">
+  Material Storage and Logistics Tent change the layout
+</h2>
+
+Material Storage is powerful, but placement still matters. Before your logistics systems improve, every distant building becomes a manual hauling route.
+
+Place Material Storage where it shortens the path between:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Lumberyard and wood-heavy construction,</li>
+  <li>Quarry / stone output and building projects,</li>
+  <li>Clay Pit or clay gathering routes,</li>
+  <li>Blacksmith and crafting needs,</li>
+  <li>Carpenter and building upgrades,</li>
+  <li>the roads you actually use while expanding.</li>
+</ul>
+
+The **Logistics Tent** changes the town later because it lets buildings pass resources through a more automated route. Once that unlock is available, your layout can spread slightly more, but it should still be readable: production buildings should connect to storage and crafting instead of becoming isolated islands.
+
+<GuideTable
+caption="How logistics changes Romestead town layout."
+columns={logisticsColumns}
+rows={logisticsRows}
+/>
+
+If you are still before the Logistics Tent unlock, design as if you are the logistics system. Keep the buildings that exchange resources close enough that you do not spend the whole day carrying items.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-material-storage-near-production.webp"
+    alt="Romestead Material Storage placed near production buildings and resource routes."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Material Storage should shorten your production loop, not become a faraway dumping ground.
+  </figcaption>
+</figure>
+
+<h2 id="raid-defense-layout">
+  Layout for raids: compact core, choke points and kill boxes
+</h2>
+
+Raid defense starts with layout. If your important buildings are scattered, every night raid costs more wood, more torches, more repair time, and more attention.
+
+The basic pattern is:
+
+<GuideTable
+caption="Practical defensive layout patterns in Romestead."
+columns={defenseColumns}
+rows={defenseRows}
+/>
+
+A simple early **kill-box courtyard** is not complicated. Leave one obvious approach into the protected core, light it with torches, place walls or natural terrain on the sides, and keep yourself positioned where you can fight enemies before they reach Blacksmith, Farmstead, Food Storage, or housing.
+
+Do not overbuild the kill box before your food and workers are stable. A small controlled entrance is enough early. Later, you can add a second wall layer, traps, better weapons, or automated defense.
+
+For night raid details, use <Link href="/romestead/raid-defense-guide/">Romestead Night Raids: Blacksmith Defense, Torches and Defense Value</Link>.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-spread-out-town-defense-risk.webp"
+    alt="Romestead town layout showing buildings spread too far apart for efficient raid defense."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A spread-out town looks nice until you realize how much wall and torch coverage it needs.
+  </figcaption>
+</figure>
+
+<h2 id="natural-barriers">
+  Use natural barriers and choke points
+</h2>
+
+Natural terrain can reduce your wall cost. If cliffs, water, quarry edges, land bridges, or dense terrain already create a narrow approach, use that shape instead of drawing a huge square around the town.
+
+Good choke points are useful because they:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>reduce how many wall pieces you need,</li>
+  <li>make torch placement more efficient,</li>
+  <li>give enemies fewer paths into town,</li>
+  <li>make traps and ranged attacks easier to use,</li>
+  <li>turn a messy raid into a predictable fight.</li>
+</ul>
+
+Do not pick a bad base location only because it has one narrow entrance. The best layout combines resources, open building space, and defensible routes.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-natural-barrier-chokepoint.webp"
+    alt="Romestead natural terrain used as a defensive choke point near the town."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Natural terrain can replace a lot of early wall cost if you build around it deliberately.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="move-remove-buildings">
+  Can you move or remove buildings?
+</h2>
+
+During Early Access, always check the current building UI before assuming a structure can be moved cleanly. Some objects may have remove, dismantle, cancel, or rebuild options, while other placement mistakes may be easier to work around.
+
+The best fix is prevention: scout first, leave space around Farmstead, and avoid trapping Town Core, Food Storage, or Material Storage behind roads and buildings you may regret.
+
+If you already placed something badly, decide whether rebuilding is worth the material cost. Moving a whole settlement can waste time, especially if clay-heavy structures are involved.
+
+<h2 id="construction-tools">
+  Use construction tools to plan faster
+</h2>
+
+Construction Mode is easier when you use the tools the game gives you. If you are placing roads, walls, or repeated structures one tile at a time, you may be making layout work harder than it needs to be.
+
+Use line and rectangle placement for roads and walls when possible. Rotate buildings before final placement, and cancel bad construction sites before you spend materials.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-construction-drag-walls-roads.webp"
+    alt="Romestead Construction Mode placing wooden walls for town defense layout."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+Use Construction Mode to plan walls before spending resources. A short defensive line is easier to finish than a huge perimeter.
+  </figcaption>
+</figure>
+
+<h2 id="common-mistakes">
+  Common town layout mistakes
+</h2>
+
+<GuideTable
+caption="Common Romestead base layout mistakes and better choices."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+The best layout is not the prettiest one. It is the one that lets citizens eat, workers work, farms function, materials move, and raids fail before they damage your whole town.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Where should I build my first base in Romestead?
+
+Build near the center of your early travel routes, with water, clay, stone, wood, coal access, and enough open space for Farmstead, Well, Watermill, Material Storage, roads and defenses.
+
+### What is the best town layout in Romestead?
+
+The best early layout is a compact protected core with Town Core, housing, Food Storage, Workbench, Blacksmith, Farmstead route, Material Storage, and roads close enough to defend and manage.
+
+### Should I make a compact base or a large city?
+
+Start compact. A large city is harder to light, wall, repair, and defend during raids. Expand once food, workers, storage, logistics and defense are stable.
+
+### Where should I place Farmstead?
+
+Place Farmstead where it has fertile space, access to water or future Well support, nearby Food Storage, and a clean route to processing buildings such as Mill or Watermill.
+
+### Where should I put the Watermill?
+
+Plan Watermill around water access. Do not treat it like a normal building that can go anywhere in your production core.
+
+### How does Logistics Tent change base layout?
+
+Before Logistics Tent, keep production and storage close because you move many items by hand. After Logistics Tent unlocks, you can connect buildings more efficiently, but you still need a layout that is easy to defend and understand.
+
+### Should I wall the entire town?
+
+Not at first. Protect the important core first: Blacksmith, Farmstead, Food Storage, housing, Town Core, and main roads. A huge wall around a scattered town is expensive and slow to repair.
+
+### Can I move buildings in Romestead?
+
+Check the current building UI for remove, dismantle, cancel, or rebuild options. If moving is expensive or awkward, work around the mistake and plan the next expansion more carefully.

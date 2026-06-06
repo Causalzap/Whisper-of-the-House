@@ -1,0 +1,664 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const targetColumns = [
+{ key: "Raid Target", label: "Raid Target" },
+{ key: "Why It Matters", label: "Why It Matters" },
+{ key: "Defense Priority", label: "Defense Priority" },
+];
+
+export const targetRows = [
+{
+"Raid Target": "Blacksmith",
+"Why It Matters":
+"The Fallen pressure production buildings, and the Blacksmith is the first building you should plan around.",
+"Defense Priority":
+"Put torches around it first, then add walls, fences, or barriers on the direct approach routes.",
+},
+{
+"Raid Target": "Farmstead",
+"Why It Matters":
+"Farmstead supports food automation, and a bad raid can turn into a food problem the next morning.",
+"Defense Priority":
+"Protect it after Blacksmith, especially once your food chain depends on Farmstead output.",
+},
+{
+"Raid Target": "Housing and citizens",
+"Why It Matters":
+"Citizens can be injured, lose loyalty, or die if they are exposed during attacks.",
+"Defense Priority":
+"Keep housing inside the defended area and make sure citizens have enough beds.",
+},
+{
+"Raid Target": "Food Storage",
+"Why It Matters":
+"Food instability makes raid recovery worse because hungry citizens are already a town problem.",
+"Defense Priority":
+"Keep Food Storage near the protected core instead of isolated on the edge of town.",
+},
+{
+"Raid Target": "Perimeter walls",
+"Why It Matters":
+"Walls slow and redirect enemies, but they are not the real thing you are protecting.",
+"Defense Priority":
+"Use walls to fill approach gaps around key buildings, not as the first and only defense layer.",
+},
+];
+
+export const torchPriorityColumns = [
+{ key: "Priority", label: "Priority" },
+{ key: "Place Torches Here", label: "Place Torches Here" },
+{ key: "Why", label: "Why" },
+];
+
+export const torchPriorityRows = [
+{
+Priority: "1",
+"Place Torches Here": "Around the Blacksmith",
+Why: "This is the first production building to protect when the Fallen pressure your settlement.",
+},
+{
+Priority: "2",
+"Place Torches Here": "Around the Farmstead",
+Why: "Food production matters after the raid, especially once Farmstead becomes part of your town loop.",
+},
+{
+Priority: "3",
+"Place Torches Here": "Roads between core buildings",
+Why: "You move faster and fight cleaner when your main paths are lit.",
+},
+{
+Priority: "4",
+"Place Torches Here": "Choke points and entrances",
+Why: "Light works best when enemies are forced through predictable paths.",
+},
+{
+Priority: "5",
+"Place Torches Here": "Outer perimeter gaps",
+Why: "Fill the remaining weak routes after the key buildings are protected.",
+},
+];
+
+export const layoutColumns = [
+{ key: "Layout Choice", label: "Layout Choice" },
+{ key: "Good For Defense", label: "Good For Defense" },
+{ key: "Risk", label: "Risk" },
+];
+
+export const layoutRows = [
+{
+"Layout Choice": "Compact production core",
+"Good For Defense":
+"Keeps Blacksmith, Farmstead, housing, Food Storage, and Town Core close enough to protect.",
+Risk: "Can feel cramped if you do not leave room for later upgrades.",
+},
+{
+"Layout Choice": "Wide spread-out town",
+"Good For Defense":
+"Looks clean and gives each building plenty of space.",
+Risk: "Costs much more to light, wall, patrol, and repair during raids.",
+},
+{
+"Layout Choice": "Natural choke point",
+"Good For Defense":
+"Lets terrain reduce wall cost and force enemies through fewer paths.",
+Risk: "Bad if the choke point is too far from your daily work route.",
+},
+{
+"Layout Choice": "Road-lit settlement",
+"Good For Defense":
+"Makes movement, torch placement, and raid response work together.",
+Risk: "Roads without light, walls, or fallback routes do not protect the town by themselves.",
+},
+{
+"Layout Choice": "Separate production outposts",
+"Good For Defense":
+"Can work later when logistics, walls, and automated defenses are stronger.",
+Risk: "Early on, isolated workplaces are harder to defend and easier to forget.",
+},
+];
+
+export const prepColumns = [
+{ key: "Before A Raid", label: "Before A Raid" },
+{ key: "Do This", label: "Do This" },
+];
+
+export const prepRows = [
+{
+"Before A Raid": "Blacksmith",
+"Do This":
+"Put torches around it and close the most direct enemy paths with walls or barriers.",
+},
+{
+"Before A Raid": "Farmstead",
+"Do This":
+"Keep it inside the protected core once your food chain depends on Farmstead output.",
+},
+{
+"Before A Raid": "Town layout",
+"Do This":
+"Keep early housing, Food Storage, Town Core, and workplaces compact enough to defend.",
+},
+{
+"Before A Raid": "Torches",
+"Do This":
+"Light roads, entrances, choke points, Blacksmith, and Farmstead before decorating the outer edge.",
+},
+{
+"Before A Raid": "Walls and traps",
+"Do This":
+"Use them to close real approach gaps, not to draw a huge unfinished perimeter.",
+},
+{
+"Before A Raid": "Citizens",
+"Do This":
+"Make sure housing and Food Storage are inside the defended area before recruiting too aggressively.",
+},
+{
+"Before A Raid": "Defense Value",
+"Do This":
+"Check it at the Workbench after building or upgrading defenses.",
+},
+];
+
+export const raidResponseColumns = [
+{ key: "Raid Situation", label: "Raid Situation" },
+{ key: "What To Do", label: "What To Do" },
+];
+
+export const raidResponseRows = [
+{
+"Raid Situation": "A raid warning appears",
+"What To Do":
+"Return home, eat or heal, stop long exploration, and fight near your prepared defenses.",
+},
+{
+"Raid Situation": "Enemies are pushing toward the Blacksmith",
+"What To Do":
+"Defend that route first. Do not chase random enemies while the key production building is exposed.",
+},
+{
+"Raid Situation": "Enemies are hitting walls",
+"What To Do":
+"Use the wall as time, not as a full solution. Attack from safe angles and repair later.",
+},
+{
+"Raid Situation": "Enemies are inside the settlement",
+"What To Do":
+"Pull them away from citizens, Food Storage, and key workplaces instead of chasing scattered targets blindly.",
+},
+{
+"Raid Situation": "Citizens are exposed",
+"What To Do":
+"Check whether housing is enough and whether important work areas are inside your defended zone.",
+},
+{
+"Raid Situation": "The raid bar ends but enemies remain",
+"What To Do":
+"Clear the remaining enemies before assuming the town is safe again.",
+},
+];
+
+export const scalingColumns = [
+{ key: "Raid Stage", label: "Raid Stage" },
+{ key: "What Changes", label: "What Changes" },
+{ key: "Defense Upgrade", label: "Defense Upgrade" },
+];
+
+export const scalingRows = [
+{
+"Raid Stage": "First raids",
+"What Changes":
+"The main danger is not understanding what the Fallen are trying to reach.",
+"Defense Upgrade":
+"Torch the Blacksmith and Farmstead, then add short wall sections on direct paths.",
+},
+{
+"Raid Stage": "Expanding town",
+"What Changes":
+"More buildings create more paths, more dark gaps, and a larger repair burden.",
+"Defense Upgrade":
+"Extend torch lines with your production cluster instead of only adding a bigger outer wall.",
+},
+{
+"Raid Stage": "Mid-game production",
+"What Changes":
+"Farmstead, Blacksmith, storage, and processing become more important to daily town function.",
+"Defense Upgrade":
+"Create a protected production core and upgrade walls on the routes enemies actually use.",
+},
+{
+"Raid Stage": "Mars / automated defense",
+"What Changes":
+"God progression can add automated defensive tools such as Scorpios.",
+"Defense Upgrade":
+"Use Mars-style automated weapons to cover approach routes, but keep torches and walls maintained.",
+},
+];
+
+export const coopDefenseColumns = [
+{ key: "Role", label: "Role" },
+{ key: "Raid Job", label: "Raid Job" },
+];
+
+export const coopDefenseRows = [
+{
+Role: "Fighter",
+"Raid Job":
+"Stay near the Blacksmith or the main breach route and pull Fallen away from citizens.",
+},
+{
+Role: "Builder / repair player",
+"Raid Job":
+"Maintain torches, repair damaged walls, and close obvious gaps after the fight.",
+},
+{
+Role: "Production defender",
+"Raid Job":
+"Watch Farmstead, Food Storage, and key workplaces instead of chasing every enemy.",
+},
+{
+Role: "Scorpio / automated defense manager",
+"Raid Job":
+"If your Mars route unlocks automated defense, keep those weapons covering the approach routes.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Treating torches as decoration",
+"Better Choice":
+"Use light around Blacksmith, Farmstead, roads, entrances, and choke points.",
+},
+{
+Mistake: "Building a huge town before defending it",
+"Better Choice":
+"Keep the first settlement compact until food, housing, workers, and defenses are stable.",
+},
+{
+Mistake: "Only protecting your own house",
+"Better Choice":
+"Protect citizens, Food Storage, Blacksmith, Farmstead, and Town Core too.",
+},
+{
+Mistake: "Depending on walls alone",
+"Better Choice":
+"Use torches first, then walls, traps, terrain, food, gear, and player response together.",
+},
+{
+Mistake: "Ignoring the Town Report",
+"Better Choice":
+"Read the report after raids to see injuries, loyalty changes, and what went wrong overnight.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Romestead night raids**, defend the buildings the Fallen actually care about. Protect the **Blacksmith** first, then the **Farmstead** and the food/worker core around it.
+
+Place **torches before full walls**. Light helps deter the Fallen, while walls mainly buy time and fill approach gaps. After each raid, check **Defense Value** at the Workbench and read the **Town Report** so you know whether citizens were injured, loyalty changed, or your defense line failed. 
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-blacksmith-torch-defense.webp"
+    alt="Romestead Blacksmith protected with torches and early raid defenses."
+    width={400}
+    height={300}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start defense around the buildings raids actually threaten. A lit Blacksmith is more important than a decorative outer wall.
+  </figcaption>
+</figure>
+
+<h2 id="when-raids-start">
+  When should you prepare for raids?
+</h2>
+
+Start preparing before your town feels “big.” The mistake is waiting until the first serious raid warning, then realizing your buildings are too spread out, your citizens are exposed, and your defense line is too expensive to finish.
+
+Your first goal is not a perfect fortress. It is a settlement that can survive pressure:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Blacksmith and Farmstead are close enough to protect.</li>
+  <li>Town Core, housing, Food Storage, and early workplaces are not scattered across the map.</li>
+  <li>Citizens have places to sleep and food they can actually access.</li>
+  <li>Roads and entrances are lit.</li>
+  <li>Walls or fences cover the most important approach paths first.</li>
+  <li>You know where to fight when enemies arrive.</li>
+</ul>
+
+If you are still working on the opening setup, start with <Link href="/romestead/first-day-base-building/">Romestead First Day Build Order</Link> before turning the town into a large defended city.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="fallen-targets">
+  What do the Fallen actually target?
+</h2>
+
+The priority order is what makes night raid defense different from normal base building:
+
+<GuideTable
+caption="What to protect first during Romestead night raids."
+columns={targetColumns}
+rows={targetRows}
+/>
+
+The practical rule is simple: map the Blacksmith and Farmstead first, then build your defense around them. A short, lit route around the buildings the Fallen want is stronger than an unfinished wall around a scattered town.
+
+<h2 id="light-torches">
+  Torches before walls: where to place light first
+</h2>
+
+Do not treat torches as cosmetic decoration. In Romestead, light helps deter the Fallen, which makes torches one of your cheapest early defense tools.
+
+The order matters. Do not start by lighting random roads or decorating your whole town. Light the production buildings that raids threaten first.
+
+<GuideTable
+caption="Torch placement priority for early night raids."
+columns={torchPriorityColumns}
+rows={torchPriorityRows}
+/>
+
+After that, use walls to close the dark approach gaps between lit zones. This is cheaper and safer than trying to build a full four-sided perimeter before your town can afford it.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-night-raid-torches-roads.webp"
+    alt="Romestead settlement with torches placed along roads and important paths for raid defense."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Torches are not just decoration. Use them on the routes that connect your production core, entrances, and fight paths.
+  </figcaption>
+</figure>
+
+<h2 id="compact-layout">
+  Keep the first town compact enough to defend
+</h2>
+
+A spread-out town makes every raid more expensive. You need more torches, more walls, more repair time, and more running between targets.
+
+Your first protected core should keep these close together:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Blacksmith</strong>, because it is the key production target to defend.</li>
+  <li><strong>Farmstead</strong>, because food automation becomes a raid recovery issue.</li>
+  <li><strong>Town Core</strong>, housing, and Food Storage.</li>
+  <li><strong>Workbench</strong> and early production buildings you use after attacks.</li>
+</ul>
+
+You do not need a perfect square city. You need a short defense line around the buildings that matter.
+
+For a deeper building plan, use <Link href="/romestead/base-layout-guide/">Romestead Town Layout Guide</Link> once that guide is available.
+
+<h2 id="natural-barriers">
+  Use terrain and natural barriers
+</h2>
+
+Natural barriers can reduce the amount of wall you need. If the land already creates a narrow path, a quarry gap, a water edge, a cliff edge, or a small entrance between obstacles, use that shape instead of forcing a giant square wall.
+
+This matters most early, when wood, stone, and worker time are still limited. A shorter wall line is easier to finish before raids become a bigger problem.
+
+<GuideTable
+caption="Base layout choices that affect raid defense."
+columns={layoutColumns}
+rows={layoutRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-natural-barrier-chokepoint.webp"
+    alt="Romestead town using natural terrain as a defensive choke point."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Natural terrain can shorten your defensive line. A small controlled gap is easier to protect than a huge perimeter.
+  </figcaption>
+</figure>
+
+<h2 id="walls-traps">
+  Walls fill gaps; they do not replace light
+</h2>
+
+Walls are useful, but they are not the first layer of defense. Use them to slow enemies on the direct paths toward your Blacksmith, Farmstead, and citizen core.
+
+Build first wall sections where they change enemy movement:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>between dark approach routes and the Blacksmith,</li>
+  <li>beside the Farmstead if it sits near the edge of town,</li>
+  <li>at natural choke points where a short wall closes a long path,</li>
+  <li>around housing and Food Storage if citizens are exposed.</li>
+</ul>
+
+Traps are strongest when the route is predictable. Do not scatter them randomly. Put them where enemies are already being funneled by walls, terrain, and torch placement.
+
+<h2 id="raid-prep-checklist">
+  Raid preparation checklist
+</h2>
+
+Use this checklist before you wander too far from town, chase a boss, or enter a dungeon.
+
+<GuideTable
+caption="What to prepare before night raids become a problem."
+columns={prepColumns}
+rows={prepRows}
+/>
+
+If several rows fail, do not solve raids by adding more citizens. Solve the support problem first: food, housing, light, walls, and a compact production core.
+
+<h2 id="during-raid">
+  What to do when a raid starts
+</h2>
+
+When a raid warning appears, stop treating it like background noise. Return to town, eat, heal, and fight near the area you prepared.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-town-raid-warning.webp"
+    alt="Romestead raid warning showing that a raid is approaching the town."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A raid warning is your signal to return home and fight near your defenses, not deep in a dungeon or far from storage.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="How to respond during a Romestead raid."
+columns={raidResponseColumns}
+rows={raidResponseRows}
+/>
+
+The raid is not always fully over just because the pressure bar changes. If enemies are still inside or around the town, clear them before you repair, loot, or leave again.
+
+<h2 id="citizens-loyalty">
+  Protect citizens, loyalty and worker progress
+</h2>
+
+Walls are repairable. Citizen damage can cost you more.
+
+If citizens are injured, killed, or lose loyalty because the raid went badly, the town can be set back even if the buildings still stand. This is why your defense plan should protect people, not only your personal house.
+
+After each raid, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>whether any citizens were hurt,</li>
+  <li>whether loyalty changed,</li>
+  <li>whether anyone lost progress,</li>
+  <li>whether housing is enough for the current population,</li>
+  <li>whether important workers were caught outside the defended area.</li>
+</ul>
+
+Use the Town Report and the town management screen as your post-raid diagnosis tools.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-town-report-after-raid.webp"
+    alt="Romestead town report after a raid showing citizen status, raid results, or loyalty changes."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Town Report tells you whether your defense actually worked or only looked good from the outside.
+  </figcaption>
+</figure>
+
+<h2 id="defense-value">
+  Check Defense Value at the Workbench
+</h2>
+
+Do not guess whether the town is defended. Check **Defense Value** at the Workbench and use it as your warning signal before the next raid.
+
+If Defense Value is low, diagnose the town in this order:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Key buildings:</strong> Are Blacksmith, Farmstead, Food Storage, and housing actually protected?</li>
+  <li><strong>Light coverage:</strong> Are torches covering the buildings the Fallen target, or only random roads?</li>
+  <li><strong>Approach gaps:</strong> Are there dark paths that lead straight to production buildings?</li>
+  <li><strong>Wall placement:</strong> Are walls blocking real enemy routes, or just decorating the outside edge?</li>
+  <li><strong>Town spread:</strong> Is your settlement too wide for the amount of defense you can maintain?</li>
+  <li><strong>Population risk:</strong> Do citizens have housing and food inside the defended area?</li>
+</ul>
+
+Defense Value is not a full strategy by itself, but it is the best quick check for whether your defense upgrades are actually being recognized.
+
+<figure className="my-8">
+  <Image
+    src="/images/romestead/romestead-town-defense-value.webp"
+    alt="Romestead Workbench or town UI showing Defense Value for raid preparation."
+    width={400}
+    height={300}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check Defense Value after adding torches, walls, traps, or stronger defensive structures. Do not assume the number changed.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="raid-scaling">
+  How raids scale as your town grows
+</h2>
+
+The defense that works for your first small settlement will not hold forever. As your town expands, raids become harder because there are more buildings to protect, more dark approach gaps, and more citizens who can be affected by a bad night.
+
+<GuideTable
+caption="How to scale raid defense as Romestead progression opens up."
+columns={scalingColumns}
+rows={scalingRows}
+/>
+
+The key is to expand defense with your production core, not only with your outer border. When you add a new important building, ask whether it needs light, a wall gap closed, a safer road, or a better fallback path.
+
+If raids are your main bottleneck, check the Mars route in the god system. Scorpios and other automated defense tools can reduce how much of the fight you need to handle manually.
+
+<div className="my-6">
+  <Link href="/romestead/gods-offerings-boss-progression/">
+    Romestead Gods Guide: Offerings, Sacrifice and Altar Rewards
+  </Link>
+</div>
+
+<h2 id="after-raid">
+  What to do after a raid
+</h2>
+
+A good raid defense plan includes the morning after. Do not immediately run into the wilderness with damaged walls, injured citizens, and empty food stores.
+
+After a raid:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Clear any remaining enemies.</li>
+  <li>Read the Town Report.</li>
+  <li>Check citizen injuries, loyalty, and worker progress.</li>
+  <li>Repair walls, traps, and broken defensive paths.</li>
+  <li>Restock Food Storage.</li>
+  <li>Add torches or walls where enemies reached the town too easily.</li>
+  <li>Shorten your defensive line if the town is too spread out.</li>
+</ol>
+
+If the same weak point fails twice, do not just repair it. Redesign that entrance, light it better, or turn it into a controlled choke point.
+
+<h2 id="coop-defense">
+  Co-op raid defense roles
+</h2>
+
+In co-op, raids become much easier when players stop doing the same job. Do not have everyone chase the same Fallen while torches go out, walls break, or citizens are exposed.
+
+<GuideTable
+caption="Simple co-op roles for Romestead raid defense."
+columns={coopDefenseColumns}
+rows={coopDefenseRows}
+/>
+
+For two players, the cleanest split is one fighter and one builder/repair player. For larger groups, assign someone to watch production buildings specifically, especially the Blacksmith and Farmstead.
+
+<h2 id="common-mistakes">
+  Common raid defense mistakes
+</h2>
+
+<GuideTable
+caption="Common Romestead raid defense mistakes and better choices."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+The biggest mistake is thinking raid defense starts when enemies arrive. It starts when you place the Town Core, choose where housing goes, decide how wide your roads are, and whether your first settlement is compact enough to protect.
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### What do the Fallen target in Romestead raids?
+
+The Fallen pressure production buildings. Protect the Blacksmith first, then Farmstead, Food Storage, housing, and the citizen core around them.
+
+### Do torches help against the Fallen?
+
+Yes. Light helps deter the Fallen, so torches should go around Blacksmith, Farmstead, entrances, roads, and choke points before you spend everything on a full wall.
+
+### Should I build torches or walls first?
+
+Build torches first around key buildings, then use walls to fill the dark approach gaps. Walls are still useful, but they work best after you know what you are protecting.
+
+### How do I defend against raids in Romestead?
+
+Protect Blacksmith and Farmstead, keep your town compact, light the main routes, build walls on direct approach paths, check Defense Value, and fight near your prepared defenses.
+
+### What is Defense Value?
+
+Defense Value is a town defense signal you can check at the Workbench. Use it to confirm whether your torches, walls, traps, and defensive structures are actually improving the settlement.
+
+### Why did my citizens lose loyalty after a raid?
+
+A bad raid can affect citizen status, injuries, or loyalty. Read the Town Report after the attack and fix the weak point before the next night.
+
+### Do raids get harder later?
+
+Yes. As your town grows, you need wider torch coverage, stronger walls on real approach routes, and eventually better defensive tools or god progression support.
+
+### What does Mars do for raid defense?
+
+Mars progression can lead toward automated defense tools such as Scorpios. If raids are your main bottleneck, check the Mars route instead of only adding more manual walls.
+
+### What should I check after a raid?
+
+Clear remaining enemies, read the Town Report, check citizen injuries and loyalty, repair broken defenses, restock Food Storage, and improve the route where enemies reached your town.

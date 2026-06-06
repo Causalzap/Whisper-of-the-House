@@ -20,6 +20,8 @@ const toc = [
   { id: "where-to-start", label: "Where to start" },
   { id: "early-route", label: "Early route" },
   { id: "first-town-priorities", label: "Town priorities" },
+  { id: "town-layout-base-setup", label: "Town layout" },
+{ id: "night-raid-defense", label: "Night raids" },
   { id: "systems-connect", label: "Systems connect" },
   { id: "farmstead-workers-food", label: "Farmstead" },
   { id: "gods-offerings-altar", label: "Gods and altar" },
@@ -32,6 +34,14 @@ const relatedLinks = [
   {
     href: "/romestead/first-day-base-building",
     label: "First Day and Base Building Guide",
+  },
+  {
+    href: "/romestead/base-layout-guide",
+    label: "Town Layout and Base Setup Guide",
+  },
+  {
+    href: "/romestead/raid-defense-guide",
+    label: "Night Raid Defense, Torches and Defense Value Guide",
   },
   {
     href: "/romestead/farmstead-workers-food-logistics",

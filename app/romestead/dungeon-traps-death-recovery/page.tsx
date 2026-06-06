@@ -41,6 +41,14 @@ const relatedLinks = [
     label: "First Day and Base Building Guide",
   },
   {
+    href: "/romestead/base-layout-guide",
+    label: "Town Layout and Base Setup Guide",
+  },
+  {
+    href: "/romestead/raid-defense-guide",
+    label: "Night Raid Defense, Torches and Defense Value Guide",
+  },
+  {
     href: "/romestead/farmstead-workers-food-logistics",
     label: "Farmstead, Workers, Food and Logistics Guide",
   },
