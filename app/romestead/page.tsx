@@ -16,6 +16,7 @@ const imageUrls = [
 ];
 
 const toc = [
+  { id: "quick-reference", label: "Quick reference" },
   { id: "where-to-start", label: "Where to start" },
   { id: "early-route", label: "Early route" },
   { id: "first-town-priorities", label: "Town priorities" },
@@ -51,16 +52,16 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-  title: "Romestead Guide: Beginner Route, Bosses, Gods & Tips",
+  title: "Romestead Guide Hub: Farmstead, Gods, Bosses & Dungeons",
   description:
-    "Find the right Romestead guide for your problem: first day, Farmstead, gods, Giant Owl, dungeons, death recovery, workers and food.",
+  "Use this Romestead guide hub to find help with your first town, Farmstead, workers, food, gods, offerings, Giant Owl, Core Vessel, dungeons and death recovery.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "Romestead Guide: Beginner Route, Bosses, Gods and Tips",
+    title: "Romestead Guide Hub: Farmstead, Gods, Bosses and Dungeons",
     description:
-      "A practical Romestead guide hub for first-day setup, Farmstead, workers, food, gods, offerings, Giant Owl, dungeons and death recovery.",
+      "A practical Romestead guide hub for first town setup, Farmstead, workers, food, gods, offerings, Giant Owl, Core Vessel, dungeons and death recovery.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -75,9 +76,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Romestead Guide: Beginner Route, Bosses, Gods and Tips",
+    title: "Romestead Guide Hub: Farmstead, Gods, Bosses and Dungeons",
     description:
-      "Start here if you are stuck in Romestead: find the right guide for your town, Farmstead, altar, Giant Owl or dungeon problem.",
+      "Start here if you are stuck in Romestead: find the right guide for your town, Farmstead, altar, Giant Owl, Core Vessel or dungeon problem.",
     images: [imageUrls[0]],
   },
 };
@@ -111,13 +112,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Romestead Guide: Beginner Route, First Town, Farmstead, Gods, Giant Owl and Dungeons",
+        "Romestead Guide Hub: First Town, Farmstead, Gods, Giant Owl, Core Vessel and Dungeons",
       description:
-        "A player-focused Romestead guide hub that helps new players choose the right next guide based on their current problem. It covers the early progression route, first town priorities, how town building connects to workers, Food Storage, Farmstead, Altar objectives, offerings, favor, Giant Owl, Guardian's Eye, dungeon artifacts, crypts, spawners, death recovery and key links to focused Romestead guides.",
+        "A player-focused Romestead guide hub that helps new players choose the right next guide based on their current problem. It covers the early progression route, first town priorities, how town building connects to workers, Food Storage, Farmstead, Well, Watermill, Altar objectives, offerings, sacrifice, favor, Giant Owl, Guardian's Eye, Core Vessel, dungeon artifacts, crypts, spawners, death recovery and key links to focused Romestead guides.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-05-27",
-      dateModified: "2026-05-27",
+      dateModified: "2026-06-06",
       about: [
         { "@type": "VideoGame", name: "Romestead" },
         { "@type": "Thing", name: "Romestead Guide" },
@@ -132,6 +133,12 @@ const jsonLd = {
         { "@type": "Thing", name: "Guardian of Minerva" },
         { "@type": "Thing", name: "Dungeons" },
         { "@type": "Thing", name: "Death Recovery" },
+        { "@type": "Thing", name: "Core Vessel" },
+        { "@type": "Thing", name: "The Moonstring" },
+        { "@type": "Thing", name: "Well" },
+        { "@type": "Thing", name: "Watermill" },
+        { "@type": "Thing", name: "Sacrifice" },
+        { "@type": "Thing", name: "Dungeon Artifacts" },
       ],
       isPartOf: {
         "@type": "WebSite",
@@ -243,6 +250,33 @@ const jsonLd = {
               "It depends on your death setting. Normal death can drop carried inventory, while Softcore is safer for learning because it only drops money.",
           },
         },
+        {
+          "@type": "Question",
+          name: "Is this a Romestead wiki?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "No. This is a guide hub for solving common Romestead problems. Use it like a quick index, then open the focused guide for the system that is blocking you.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is Core Vessel in Romestead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Treat Core Vessel as a dungeon or progression clue rather than random loot. Check your active god objectives, Altar and Workbench before selling, sacrificing or carrying unusual dungeon items into another risky room.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Where should I go after the first town is stable?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "After your first town can feed, house, employ and defend citizens, choose the next bottleneck: Farmstead and food, gods and offerings, Giant Owl progression, or dungeon artifacts.",
+          },
+        },
       ],
     },
   ],
@@ -258,13 +292,12 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Romestead Guide: Start Here If You Are Stuck"
-          description="Pick the right guide for your current problem: first town, Farmstead, gods, Giant Owl, dungeons, workers, food or death recovery."
-          gameTitle="Romestead"
+          title="Romestead Guide Hub: Start Here If You Are Stuck"
+          description="Pick the right guide for your current problem: first town, Farmstead, workers, food, gods, Giant Owl, Core Vessel, dungeons or death recovery."          gameTitle="Romestead"
           gameHref="/romestead"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 27, 2026"
+          updatedAt="June 6, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

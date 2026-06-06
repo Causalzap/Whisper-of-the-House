@@ -26,6 +26,7 @@ const toc = [
   { id: "worker-assignment-job-level", label: "Workers and levels" },
   { id: "food-chain-after-farmstead", label: "Food chain" },
   { id: "warehouse-logistics", label: "Warehouse limits" },
+  { id: "watermill-trade-routes", label: "Watermill & Trade Routes" }, // 新增
   { id: "farmstead-upgrades", label: "Upgrades" },
   { id: "faq", label: "FAQ" },
 ];
@@ -51,16 +52,14 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-  title: "Romestead Farmstead Guide: Workers, Food & Logistics",
+  title: "Romestead Farmstead Guide: Workers, Water, Food & Logistics",
   description:
-    "Fix Romestead Farmstead problems: unlock it with 40 wheat, place farmland, solve watering, level farmers, manage food storage and logistics.",
-  alternates: {
-    canonical: pageUrl,
-  },
+    "Unlock Farmstead with 40 wheat, set up farmland and water, assign workers, manage Food Storage, Watermill, trade routes and logistics effectively.",
+  alternates: { canonical: pageUrl },
   openGraph: {
-    title: "Romestead Farmstead Guide: Workers, Food and Logistics",
+    title: "Romestead Farmstead Guide: Workers, Water, Food & Logistics",
     description:
-      "A practical Romestead Farmstead guide covering 40 wheat, Farmstead range, watering, Well unlock, farmer job levels, food processing and Warehouse limits.",
+      "Practical guide covering Farmstead unlock, range, watering, Well, Moonstring, worker levels, Food Storage, Watermill and trade logistics.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -69,15 +68,15 @@ export const metadata: Metadata = {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "Romestead Honoring the Soil quest showing a 40 wheat offering that unlocks Farmstead.",
+        alt: "Romestead Farmstead unlocked with 40 wheat offering.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Romestead Farmstead Guide: Workers, Food and Logistics",
+    title: "Romestead Farmstead Guide: Workers, Water, Food & Logistics",
     description:
-      "Unlock Farmstead, fix watering, place crops correctly, level farmers, and stop food-chain items from getting stuck.",
+      "Unlock Farmstead, place crops correctly, assign workers, manage Watermill, trade routes, and logistics for smooth food-chain flow.",
     images: [imageUrls[0]],
   },
 };
@@ -176,6 +175,24 @@ const jsonLd = {
         },
         {
           "@type": "Question",
+          name: "How do I set up trade routes for Farmstead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Ensure your warehouses and Food Storage are linked. Check that Farmstead output reaches processing buildings, and that all transport chains are connected.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How does Watermill interact with Farmstead output?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Watermill handles processing crops like wheat into flour. If crops are harvested but not processed, check Watermill placement, worker assignment, and connection to storage.",
+          },
+        },
+        {
+          "@type": "Question",
           name: "Why is my Farmstead not watering crops?",
           acceptedAnswer: {
             "@type": "Answer",
@@ -261,13 +278,13 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Romestead Farmstead Guide: Fix Food, Workers and Watering"
-          description="Unlock Farmstead, place crops inside range, solve watering, level your farmer, and stop food-chain items from getting stuck."
+          title="Romestead Farmstead Guide: Workers, Water, Food & Logistics"
+          description="Unlock Farmstead, place crops inside range, solve watering, level your farmers, manage Food Storage, Watermill, and trade routes efficiently."
           gameTitle="Romestead"
           gameHref="/romestead"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 27, 2026"
+          updatedAt="June 6, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

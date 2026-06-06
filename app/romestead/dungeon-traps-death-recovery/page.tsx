@@ -20,6 +20,8 @@ const imageUrls = [
 const toc = [
   { id: "dungeon-types", label: "Dungeon types" },
   { id: "when-to-enter", label: "When to enter" },
+  { id: "core-vessel", label: "Core Vessel" }, 
+  { id: "trapped-cellar", label: "Trapped Cellar" },
   { id: "twin-crypt", label: "Twin Crypt" },
   { id: "crypt-spawner", label: "Crypt Spawner" },
   { id: "trap-rooms", label: "Trap rooms" },
@@ -53,16 +55,16 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-  title: "Romestead Dungeon Guide: Traps, Death & Loot Recovery",
+  title: "Romestead Dungeon Guide: Core Vessel, Traps & Death Recovery",
   description:
-    "Survive Romestead dungeons and crypts. Learn when to enter, how to handle Twin Crypt spawners, traps, loot, death drops and recovery runs.",
+  "Survive Romestead dungeons and crypts, find Core Vessel clues, handle Twin Crypt spawners, trapped cellar rooms, traps, loot, death drops and recovery runs.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "Romestead Dungeon Guide: Traps, Death and Loot Recovery",
+    title: "Romestead Dungeon Guide: Core Vessel, Traps and Death Recovery",
     description:
-      "A practical Romestead dungeon guide covering Twin Crypt, crypt spawners, trap rooms, dungeon loot, death settings, recovery runs and god progression links.",
+    "A practical Romestead dungeon guide covering Core Vessel clues, Twin Crypt, crypt spawners, trapped cellar rooms, trap puzzles, dungeon loot, death settings and recovery runs.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -77,9 +79,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Romestead Dungeon Guide: Traps, Death and Loot Recovery",
+    title: "Romestead Dungeon Guide: Core Vessel, Traps and Death Recovery",
     description:
-      "Enter Romestead crypts safely, handle spawners and traps, protect your loot, and recover dropped items without repeating the same mistake.",
+      "Find Core Vessel clues, enter Romestead crypts safely, handle spawners and traps, protect your loot, and recover dropped items.",
     images: [imageUrls[1]],
   },
 };
@@ -119,13 +121,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Romestead Dungeon Traps and Death Recovery Guide: Twin Crypt, Spawners, Loot, Traps and Recovery Runs",
+        "Romestead Dungeon Guide: Core Vessel, Twin Crypt, Spawners, Traps, Loot and Death Recovery",
       description:
-        "A player-focused Romestead dungeon guide explaining how to approach different dungeon types, when a town is ready for crypt runs, how to handle Twin Crypt and crypt spawners, how trap and puzzle rooms work, what dungeon reward types matter, how dungeons connect to god objectives such as The Moonstring and Well unlock, how death settings affect item risk, and how to recover dropped items without repeating the same mistake.",
+        "A player-focused Romestead dungeon guide explaining how to approach different dungeon types, when a town is ready for crypt runs, how Core Vessel clues fit into dungeon progression, how to handle Twin Crypt and crypt spawners, how trap and puzzle rooms work, what dungeon reward types matter, how dungeons connect to god objectives such as The Moonstring and Well unlock, how death settings affect item risk, and how to recover dropped items without repeating the same mistake.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-05-27",
-      dateModified: "2026-05-27",
+      dateModified: "2026-06-06",
       about: [
         { "@type": "VideoGame", name: "Romestead" },
         { "@type": "Thing", name: "Romestead Dungeons" },
@@ -135,6 +137,11 @@ const jsonLd = {
         { "@type": "Thing", name: "Death Recovery" },
         { "@type": "Thing", name: "Softcore" },
         { "@type": "Thing", name: "Dungeon Loot" },
+        { "@type": "Thing", name: "Core Vessel" },
+        { "@type": "Thing", name: "Trapped Cellar" },
+        { "@type": "Thing", name: "Eye Dungeon" },
+        { "@type": "Thing", name: "Sand Cave" },
+        { "@type": "Thing", name: "Buried Fort" },
         { "@type": "Thing", name: "The Moonstring" },
         { "@type": "Thing", name: "Well Unlock" },
       ],
@@ -174,6 +181,42 @@ const jsonLd = {
             "@type": "Answer",
             text:
               "Treat the spawner as the main objective. Back up, control the first wave, then destroy or disable the pressure source before looting. Do not stand in the center while enemies keep appearing.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is the Core Vessel in Romestead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Treat the Core Vessel as a progression clue or dungeon-related item, not random loot. Check your active god objectives, Altar and Workbench before selling, sacrificing or carrying it into another dangerous room.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Where should I go after finding a Core Vessel clue?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Return to town first. Store risky loot, check the Altar for related god objectives, claim any available reward, then check the Workbench for new construction or progression options.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is a Trapped Cellar in Romestead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "A Trapped Cellar is a dangerous small-room challenge that should be treated like a trap room. Slow down, read the floor and hazards, and do not rush the loot before you understand the room.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Are Eye Dungeon, Sand Cave and Buried Fort important in Romestead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "If a dungeon name or location appears in an objective, treat it as progression until proven otherwise. Check whether the location connects to an artifact, god objective, altar reward or building unlock.",
           },
         },
         {
@@ -263,13 +306,12 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Romestead Dungeon Guide: Survive Crypts, Traps and Death Runs"
-          description="Know when to enter crypts, how to handle spawners and trap rooms, what loot matters, and how to recover dropped items safely."
-          gameTitle="Romestead"
+          title="Romestead Dungeon Guide: Core Vessel, Crypts and Death Recovery"
+          description="Know when to enter crypts, how to handle Core Vessel clues, spawners and trap rooms, what loot matters, and how to recover dropped items safely."          gameTitle="Romestead"
           gameHref="/romestead"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 27, 2026"
+          updatedAt="June 6, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

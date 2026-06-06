@@ -22,6 +22,7 @@ const toc = [
   { id: "flint-tools", label: "Flint and tools" },
   { id: "physical-building", label: "Building loop" },
   { id: "workbench-town-core-altar", label: "Core buildings" },
+  { id: "base-layout", label: "Base layout" },
   { id: "first-buildings", label: "First buildings" },
   { id: "food-storage", label: "Food Storage" },
   { id: "leatherworker-bedroll", label: "Bedroll and sleep" },
@@ -54,16 +55,16 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-  title: "Romestead First Day Guide: Best Start & First Buildings",
+  title: "Romestead First Day Build Order: Best Base Layout & Buildings",
   description:
-    "Start Romestead with the right first-day route: Town Core, Altar, Food Storage, Leather Bedroll, workers, Defense Value and raid prep.",
+    "Follow the best Romestead first-day build order with a compact base layout, early buildings, Town Core, Altar, Food Storage, Bedroll, workers and raid defense.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "Romestead First Day Guide: Best Start and First Buildings",
+    title: "Romestead First Day Build Order: Best Base Layout and Buildings",
     description:
-      "A practical Romestead first-day guide covering tools, Workbench, Town Core, Altar, Food Storage, Leather Bedroll, workers, raids and Defense Value.",
+            "A practical Romestead first-day build order covering base layout, tools, Workbench, Town Core, Altar, Food Storage, Leather Bedroll, workers, raids and Defense Value.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -120,13 +121,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Romestead First Day Guide: Best Start, First Buildings, Leather Bedroll, Sleep, Workers and Town Defense",
+        "Romestead First Day Build Order: Best Base Layout, First Buildings, Bedroll, Workers and Defense",
       description:
         "A player-focused Romestead first-day guide explaining how to choose a death setting, get flint shards and sticks, craft first tools, use the Workbench and Town Core, build an Altar, set up housing and Food Storage, use the Leatherworker to craft a Leather Bedroll for sleep and respawn, assign the first worker, prepare for Town Raids, understand Defense Value, avoid relying on Material Storage too early, and decide when the town is ready for the Giant Owl, dungeons or longer exploration.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-05-27",
-      dateModified: "2026-05-27",
+      dateModified: "2026-06-06",
       about: [
         { "@type": "VideoGame", name: "Romestead" },
         { "@type": "Thing", name: "Romestead First Day" },
@@ -203,6 +204,24 @@ const jsonLd = {
             "@type": "Answer",
             text:
               "Craft a Leather Bedroll at the Leatherworker with 2 Leather, 2 Wool and 1 Wheat, place it inside a house, then interact with it to sleep through the night. This also sets your respawn point.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can you move buildings in Romestead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Check the building or construction UI for move, cancel, dismantle or rebuild options. During the first day, it is safer to place the Town Core, housing, Food Storage and workplaces with extra room around them so you do not have to rebuild your whole town later.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can you remove a Workbench, chest or farmland in Romestead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Check the object or building interaction menu for remove, dismantle, cancel or destroy options. If the current build does not offer a clean removal option, expand around the mistake instead of trapping important buildings in a cramped starter area.",
           },
         },
         {
@@ -292,13 +311,12 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Romestead First Day Guide: What to Build First"
-          description="Build a safer first town with Town Core, Altar, Food Storage, Leather Bedroll, workers, sleep, raids and Defense Value."
-          gameTitle="Romestead"
+          title="Romestead First Day Build Order: What to Build First"
+          description="Build a safer first town with a compact base layout, Town Core, Altar, Food Storage, Leather Bedroll, workers, sleep, raids and Defense Value."          gameTitle="Romestead"
           gameHref="/romestead"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 27, 2026"
+          updatedAt="June 6, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

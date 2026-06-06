@@ -23,6 +23,8 @@ const toc = [
   { id: "guardian-eye", label: "Guardian's Eye" },
   { id: "farmstead-wheat", label: "40 wheat" },
   { id: "moonstring-well", label: "Moonstring" },
+  { id: "profane-artifice", label: "Profane Artifice" },
+  { id: "temple-of-vulcan", label: "Temple of Vulcan" },
   { id: "favor", label: "Favor" },
   { id: "bosses-and-gods", label: "Bosses and gods" },
   { id: "common-mistakes", label: "Mistakes" },
@@ -50,9 +52,9 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-  title: "Romestead Gods Guide: Offerings, Favor & Altar Progression",
+  title: "Romestead Gods Guide: Offerings, Sacrifice & Altar Rewards",
   description:
-    "Learn Romestead gods, offerings, sacrifices, favor, altar rewards, Guardian’s Eye, 40 wheat Farmstead unlock and Moonstring Well route.",
+  "Use the Romestead Altar correctly: learn offerings, sacrifice, favor, altar rewards, Guardian’s Eye, 40 wheat, Moonstring, Well and early god progression.",
   alternates: {
     canonical: pageUrl,
   },
@@ -74,9 +76,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Romestead Gods Guide: Offerings, Favor and Altar Progression",
+    title: "Romestead Gods Guide: Offerings, Sacrifice and Altar Rewards",
     description:
-      "Use the Altar correctly, claim god rewards, save key offerings, spend favor wisely, and unlock Farmstead and Well.",
+      "Learn what to offer, when to sacrifice, how to claim altar rewards, how favor works, and why Guardian’s Eye, 40 wheat and Moonstring matter.",
     images: [imageUrls[0]],
   },
 };
@@ -122,7 +124,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-05-27",
-      dateModified: "2026-05-27",
+      dateModified: "2026-06-06",
       about: [
         { "@type": "VideoGame", name: "Romestead" },
         { "@type": "Thing", name: "Romestead Gods" },
@@ -136,6 +138,8 @@ const jsonLd = {
         { "@type": "Thing", name: "Vulcan" },
         { "@type": "Thing", name: "Guardian's Eye" },
         { "@type": "Thing", name: "Honoring the Soil" },
+        { "@type": "Thing", name: "Profane Artifice" },
+        { "@type": "Thing", name: "Temple of Vulcan" },
         { "@type": "Thing", name: "The Moonstring" },
         { "@type": "Thing", name: "Farmstead" },
         { "@type": "Thing", name: "Well Unlock" },
@@ -194,6 +198,33 @@ const jsonLd = {
             "@type": "Answer",
             text:
               "Favor unlocks god-related buffs or bonuses. Pick favor based on your current bottleneck, such as wood, mining, building, healing, movement, defense, trade, food or production.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is Profane Artifice in Romestead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "Treat Profane Artifice as an altar or progression clue, not random flavor text. Check which god objective mentions it, what item or artifact it requires, and whether the reward needs to be claimed before new Workbench options appear.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is the Temple of Vulcan in Romestead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "The Temple of Vulcan is connected to Vulcan-style crafting, artifact or progression checks. If your altar route points there, read the objective text carefully before sacrificing rare items or assuming the unlock appears automatically.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Why is Moonstring important for Farmstead?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text:
+              "The Moonstring route unlocks Well. Well supports Farmstead watering, so a farming problem can actually be a god or dungeon artifact progression problem.",
           },
         },
         {
@@ -266,12 +297,12 @@ export default function Page() {
         />
         <GuideArticlePage
           title="Romestead Gods Guide: Use the Altar Without Wasting Rare Items"
-          description="Learn what to offer, when to claim rewards, how favor works, and why Guardian’s Eye, 40 wheat and Moonstring matter."
+          description="A player-focused Romestead gods guide explaining how early gods and god clues such as Minerva, Mars, Mercury and Vulcan fit into progression; how offerings, sacrifices, favor and quest items differ; how to use the Altar UI without missing claim rewards; how Guardian's Eye, Honoring the Soil, 40 wheat, Farmstead, The Moonstring, Well, Profane Artifice and Temple of Vulcan connect to early progression; how favor choices such as Lignator, Cuniculator, Construction Plan, Power Napper and Far Reach solve practical bottlenecks; and how bosses, dungeon artifacts and altar objectives connect to new buildings, world tier changes and Workbench unlocks."
           gameTitle="Romestead"
           gameHref="/romestead"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 27, 2026"
+          updatedAt="June 6, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
