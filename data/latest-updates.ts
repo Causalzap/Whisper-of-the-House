@@ -13,6 +13,54 @@ export type LatestUpdateItem = {
   
   export const latestUpdates: LatestUpdateItem[] = [
 
+// ===== Gothic 1 Remake =====
+{
+  href: "/gothic-1-remake",
+  game: "Gothic 1 Remake",
+  title: "Beginner Route, Gear, Factions & Diego’s List",
+  description:
+  "Start here for Gothic 1 Remake guides: first route, Old Sword, Drax’s bow, Digger’s Dress, best faction, Old Camp, and Diego’s List.",
+  tagClass: "text-stone-500",
+  hoverBorderClass: "hover:border-stone-300",
+  hoverTitleClass: "group-hover:text-stone-700",
+  },
+  
+  // ===== Gothic 1 Remake =====
+  {
+  href: "/gothic-1-remake/beginner-guide",
+  game: "Gothic 1 Remake",
+  title: "Beginner Guide: What to Do First",
+  description:
+  "Learn what to do first, where to find the Old Sword, how escort XP works, when to spend LP, what enemies to avoid, and when to choose a camp.",
+  tagClass: "text-stone-500",
+  hoverBorderClass: "hover:border-stone-300",
+  hoverTitleClass: "group-hover:text-stone-700",
+  },
+  
+  // ===== Gothic 1 Remake =====
+  {
+  href: "/gothic-1-remake/perfect-start",
+  game: "Gothic 1 Remake",
+  title: "Perfect Start Route",
+  description:
+  "Follow the best first route with Diego, Old Sword, Drax’s free bow, Old Camp safe bed, Mordrag escort, Rider’s Bow, and Lares access.",
+  tagClass: "text-stone-500",
+  hoverBorderClass: "hover:border-stone-300",
+  hoverTitleClass: "group-hover:text-stone-700",
+  },
+  
+  // ===== Gothic 1 Remake =====
+  {
+  href: "/gothic-1-remake/best-faction",
+  game: "Gothic 1 Remake",
+  title: "Best Faction Guide",
+  description:
+  "Compare Old Camp, New Camp, and Swamp Camp by armor, magic route, economy, trainers, Chapter 4 exile, and faction lock-in timing.",
+  tagClass: "text-stone-500",
+  hoverBorderClass: "hover:border-stone-300",
+  hoverTitleClass: "group-hover:text-stone-700",
+  },
+  
 // ===== House Flipper Remastered Collection =====
 {
   href: "/house-flipper-remastered-collection",

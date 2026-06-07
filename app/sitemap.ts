@@ -83,6 +83,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/fatekeeper`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/realm-of-ink`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/house-flipper-remastered-collection`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/gothic-1-remake`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+    { url: `${base}/gothic-1-remake/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/gothic-1-remake/perfect-start`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/gothic-1-remake/early-ore-weapons-armor`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/gothic-1-remake/best-faction`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/gothic-1-remake/old-camp-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/gothic-1-remake/old-mine-diegos-list`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    
 
     { url: `${base}/house-flipper-remastered-collection/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/house-flipper-remastered-collection/first-jobs-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered first jobs walkthrough
@@ -139,6 +148,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/romestead/base-layout-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/romestead/raid-defense-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
 
+    
     { url: `${base}/paralives/paramaker-stats-vibes-personality`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/paralives/best-early-game-skills-talents-careers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/paralives/job-performance-not-improving`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },

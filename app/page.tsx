@@ -134,7 +134,8 @@ const allGameGuides = [
   { title: 'Fatekeeper', href: '/fatekeeper'},
   { title: 'Realm of Ink', href: '/realm-of-ink'},
   { title: 'House Flipper Remastered Collection', href: '/house-flipper-remastered-collection'},
-  
+  { title: 'Gothic 1 Remake', href: '/gothic-1-remake'},
+
 ];
 
 const exploreCards = [
