@@ -1,0 +1,826 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildPlanColumns = [
+{ key: "Build Direction", label: "Build Direction" },
+{ key: "First Trainer Priority", label: "First Trainer Priority" },
+{ key: "Cost / Gate To Expect", label: "Cost / Gate To Expect" },
+{ key: "Why This Works", label: "Why This Works" },
+];
+
+export const buildPlanRows = [
+{
+"Build Direction": "Melee first playthrough",
+"First Trainer Priority":
+"Old Camp arena weapon trainer for one-handed, then Diego for Strength when a weapon needs it.",
+"Cost / Gate To Expect":
+"Expect LP plus an ore fee for real training. Save before spending because there is no respec.",
+"Why This Works":
+"One-handed training fixes combat control; Strength fixes weapon requirements and damage.",
+},
+{
+"Build Direction": "Simple Strength route",
+"First Trainer Priority":
+"Diego for Strength.",
+"Cost / Gate To Expect":
+"Usually bought in LP blocks; ore cost can vary by trainer dialogue and route state.",
+"Why This Works":
+"Good if your next melee weapon is locked behind a Strength requirement.",
+},
+{
+"Build Direction": "Bow / Dexterity route",
+"First Trainer Priority":
+"Cavalorn early if you are near Old Camp, then Diego for Dexterity, then Wolf after reaching New Camp.",
+"Cost / Gate To Expect":
+"Cavalorn-style early bow training can cost around 10 LP + 50 ore; later archery costs vary.",
+"Why This Works":
+"Dexterity only matters if it helps you equip or improve a bow you actually use.",
+},
+{
+"Build Direction": "Thief / chest route",
+"First Trainer Priority":
+"Fingers for lockpicking first, pickpocketing later.",
+"Cost / Gate To Expect":
+"Trained lockpicking costs 10 LP + 100 ore; Master costs 20 LP + 200 ore.",
+"Why This Works":
+"Lockpicking supports chest value and Fingers' Old Camp support route.",
+},
+{
+"Build Direction": "Hunting income",
+"First Trainer Priority":
+"Drax for hunting skills only after you can kill the right animals safely.",
+"Cost / Gate To Expect":
+"Costs vary by material skill; do not buy skills for animals you cannot kill yet.",
+"Why This Works":
+"Hunting pays off only when your kills turn into sellable teeth, claws, fur, or skins.",
+},
+{
+"Build Direction": "Crafting / ore economy",
+"First Trainer Priority":
+"Huno for blacksmithing.",
+"Cost / Gate To Expect":
+"Smithing can cost around 10 LP + 50 ore to unlock the route.",
+"Why This Works":
+"Crafting gives a steadier ore route than fighting enemies you are not ready for.",
+},
+{
+"Build Direction": "Exploration / movement",
+"First Trainer Priority":
+"Theron for climbing if you are using the Swamp Camp route.",
+"Cost / Gate To Expect":
+"Climbing can require 5 LP, but you may need to give Fortuno 6 Northern Dark herbs first.",
+"Why This Works":
+"Climbing is not damage, but it opens movement and exploration options.",
+},
+{
+"Build Direction": "Magic route",
+"First Trainer Priority":
+"Torrez for early magic logic, Cronos for mana direction, Baal Cadar for Brotherhood magic.",
+"Cost / Gate To Expect":
+"Magic costs and access depend heavily on faction progress, mana, scrolls, and circles.",
+"Why This Works":
+"Magic is route-sensitive. Do not spend random LP before choosing Fire, Water, or Brotherhood direction.",
+},
+];
+
+export const trainerColumns = [
+{ key: "Trainer", label: "Trainer" },
+{ key: "Where / Route", label: "Where / Route" },
+{ key: "Teaches", label: "Teaches" },
+{ key: "Cost / Unlock", label: "Cost / Unlock" },
+{ key: "Best Use", label: "Best Use" },
+];
+
+export const trainerRows = [
+{
+Trainer: "Diego",
+"Where / Route": "Old Camp outer ring / early Old Camp route.",
+Teaches: "Strength and Dexterity.",
+"Cost / Unlock":
+"LP-based stat training; ore cost can vary by route state. Check dialogue before confirming.",
+"Best Use":
+"Use him when a weapon requirement is blocking your build.",
+},
+{
+Trainer: "Old Camp arena weapon trainer",
+"Where / Route":
+"Old Camp arena area. Speak with Scatty for arena access, but check the arena-side hut / nearby trainer if Scatty only manages fights.",
+Teaches: "One-handed weapon training.",
+"Cost / Unlock":
+"Expect LP plus an ore fee. Save first and confirm the one-handed option before spending.",
+"Best Use":
+"Best early melee investment if your problem is clumsy attack timing, not raw damage.",
+},
+{
+Trainer: "Fingers",
+"Where / Route": "Old Camp, near the castle wall / arena side.",
+Teaches: "Lockpicking and pickpocketing.",
+"Cost / Unlock":
+"Lockpicking Trained: 10 LP + 100 ore. Master: 20 LP + 200 ore.",
+"Best Use":
+"Worth it for chest routes, thief play, and Old Camp support.",
+},
+{
+Trainer: "Huno",
+"Where / Route": "Old Camp smith / forge area.",
+Teaches: "Blacksmithing and weapon crafting route.",
+"Cost / Unlock":
+"Blacksmithing can cost around 10 LP + 50 ore.",
+"Best Use":
+"Good if you want repeatable ore through crafting instead of risky fights.",
+},
+{
+Trainer: "Drax",
+"Where / Route": "Hunter camp before Old Camp / early hunting route.",
+Teaches: "Hunting skills such as teeth, claws, fur, and reptile skin.",
+"Cost / Unlock":
+"Costs vary by material skill. Buy only for animals you can already kill.",
+"Best Use":
+"Great once your kills can reliably become sellable materials.",
+},
+{
+Trainer: "Cavalorn",
+"Where / Route": "Outside / west of Old Camp, near the river-side hut route.",
+Teaches: "Bow / archery training and sneak-related utility depending on route.",
+"Cost / Unlock":
+"Early bow training can cost around 10 LP + 50 ore.",
+"Best Use":
+"Useful before New Camp if you want an early bow route without waiting for Wolf.",
+},
+{
+Trainer: "Wolf",
+"Where / Route": "New Camp area.",
+Teaches: "Archery / bow handling.",
+"Cost / Unlock":
+"Costs vary by training stage and route progress.",
+"Best Use":
+"Best after you already have a Dexterity / bow plan.",
+},
+{
+Trainer: "Theron",
+"Where / Route": "Swamp Camp.",
+Teaches: "Climbing.",
+"Cost / Unlock":
+"Climbing can require 5 LP, but you may need to give Fortuno 6 Northern Dark herbs first.",
+"Best Use":
+"Good exploration utility even if you do not fully commit to Swamp Camp.",
+},
+{
+Trainer: "Torrez",
+"Where / Route": "Old Camp Fire Mage / magic access route.",
+Teaches: "Scroll, rune, and early magic logic.",
+"Cost / Unlock":
+"Depends on magic access and route state.",
+"Best Use":
+"Use him to understand magic before committing all LP to a mage plan.",
+},
+{
+Trainer: "Cronos",
+"Where / Route": "New Camp / Water Mage direction.",
+Teaches: "Mana and later Water Mage-oriented magic support.",
+"Cost / Unlock":
+"Depends on New Camp and mage progression.",
+"Best Use":
+"Important if you are moving toward Water Mage instead of Old Camp Fire Mage.",
+},
+{
+Trainer: "Baal Cadar",
+"Where / Route": "Swamp Camp Brotherhood route.",
+Teaches: "Mana and Brotherhood magic direction.",
+"Cost / Unlock":
+"Requires Swamp Camp / Novice progress.",
+"Best Use":
+"Best for Brotherhood flavor and Templar-style magic support.",
+},
+];
+
+export const skillEffectColumns = [
+{ key: "Stat / Skill", label: "Stat / Skill" },
+{ key: "What It Changes", label: "What It Changes" },
+{ key: "Early Decision", label: "Early Decision" },
+];
+
+export const skillEffectRows = [
+{
+"Stat / Skill": "Strength",
+"What It Changes":
+"Melee damage direction and access to weapons with Strength requirements.",
+"Early Decision":
+"Buy it when your current melee weapon plan needs a specific Strength threshold.",
+},
+{
+"Stat / Skill": "Dexterity",
+"What It Changes":
+"Ranged weapon direction and access to bows with Dexterity requirements.",
+"Early Decision":
+"Buy it when it unlocks or improves a bow route you are actually using.",
+},
+{
+"Stat / Skill": "One-handed training",
+"What It Changes":
+"Combat flow, combos, parry options, critical chance, recovery control, and active melee feel.",
+"Early Decision":
+"Often better than raw Strength if you are dying because attacks feel slow or clumsy.",
+},
+{
+"Stat / Skill": "Lockpicking",
+"What It Changes":
+"Makes locks more forgiving and turns chest routes into a real resource path.",
+"Early Decision":
+"Good after you have lockpicks, chest targets, and a reason to work with Fingers.",
+},
+{
+"Stat / Skill": "Hunting",
+"What It Changes":
+"Turns animal kills into teeth, claws, fur, skins, and other sellable materials.",
+"Early Decision":
+"Buy only after you can reliably kill the animals that drop those materials.",
+},
+{
+"Stat / Skill": "Blacksmithing",
+"What It Changes":
+"Opens crafting and weapon production for a steadier ore route.",
+"Early Decision":
+"Good when you want income without fighting harder enemies.",
+},
+{
+"Stat / Skill": "Climbing",
+"What It Changes":
+"Improves movement and exploration access.",
+"Early Decision":
+"Worth considering if you are already visiting Swamp Camp and can meet Theron's herb gate.",
+},
+{
+"Stat / Skill": "Magic / mana",
+"What It Changes":
+"Access to spellcasting through scrolls, runes, mana, circles, and faction teachers.",
+"Early Decision":
+"Delay heavy LP spending until you know your Fire, Water, or Brotherhood route.",
+},
+];
+
+export const meleeColumns = [
+{ key: "Training Stage", label: "Training Stage" },
+{ key: "What It Adds", label: "What It Adds" },
+{ key: "Should You Take It Early?", label: "Should You Take It Early?" },
+];
+
+export const meleeRows = [
+{
+"Training Stage": "Untrained",
+"What It Adds":
+"Nothing. Your swings feel slower, clumsier, and less controlled.",
+"Should You Take It Early?":
+"This is why many players feel weak even after finding a weapon.",
+},
+{
+"Training Stage": "One-handed trained",
+"What It Adds":
+"Better one-handed control, attack combos, critical potential, parry options, and smoother recovery.",
+"Should You Take It Early?":
+"Yes for melee players. This is one of the best early LP investments.",
+},
+{
+"Training Stage": "One-handed master",
+"What It Adds":
+"Higher-level melee upgrades such as stronger combo finishers, riposte-style follow-ups, and knockback tools.",
+"Should You Take It Early?":
+"Not first. Strong later, but wait until your build and ore route are stable.",
+},
+];
+
+export const lockpickColumns = [
+{ key: "Question", label: "Question" },
+{ key: "Answer", label: "Answer" },
+{ key: "Beginner Rule", label: "Beginner Rule" },
+];
+
+export const lockpickRows = [
+{
+Question: "Do I need lockpicking for every early chest?",
+Answer: "No. Some early chests can be opened without heavy investment if you save first and have picks.",
+"Beginner Rule":
+"Use manual saves and do not spend all LP on thief skills before you can survive fights.",
+},
+{
+Question: "What does Trained lockpicking cost?",
+Answer: "10 LP + 100 ore.",
+"Beginner Rule":
+"This is the first serious lockpicking upgrade if you plan to open many chests.",
+},
+{
+Question: "What does Master lockpicking cost?",
+Answer: "20 LP + 200 ore.",
+"Beginner Rule":
+"Strong later, but usually too expensive for your first build decision.",
+},
+{
+Question: "Can lockpicking support Old Camp admission?",
+Answer:
+"Yes. Fingers values proof that you can handle locked chests and thief-style work.",
+"Beginner Rule":
+"If you want Old Camp support, Fingers is worth learning about early.",
+},
+{
+Question: "Should I learn pickpocketing early?",
+Answer:
+"Only if you are deliberately playing a thief route and accept the risk.",
+"Beginner Rule":
+"Pickpocketing around important NPCs can create problems bigger than the stolen value.",
+},
+];
+
+export const huntingColumns = [
+{ key: "Hunting Skill", label: "Hunting Skill" },
+{ key: "What It Lets You Take", label: "What It Lets You Take" },
+{ key: "When To Learn It", label: "When To Learn It" },
+];
+
+export const huntingRows = [
+{
+"Hunting Skill": "Teeth",
+"What It Lets You Take": "Teeth from creatures that have useful teeth drops.",
+"When To Learn It":
+"Very early if you are killing the right creatures safely.",
+},
+{
+"Hunting Skill": "Claws",
+"What It Lets You Take": "Claws from clawed beasts.",
+"When To Learn It":
+"After you can survive the animals that drop them or use escorts / ranged attacks to kill them.",
+},
+{
+"Hunting Skill": "Fur",
+"What It Lets You Take": "Fur from relevant animals.",
+"When To Learn It":
+"Good once you have a repeatable hunting loop instead of random one-off kills.",
+},
+{
+"Hunting Skill": "Reptile skin",
+"What It Lets You Take": "Skins from reptile-type enemies.",
+"When To Learn It":
+"Usually later than teeth, because the enemies are not your safest first targets.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Spending LP before understanding there is no respec",
+"Why It Hurts":
+"Every LP choice is permanent for that run, so scattered spending can weaken your build.",
+"Better Move":
+"Pick a direction first: melee, bow, thief, crafting, climbing, hunting, or magic.",
+},
+{
+Mistake: "Only buying Strength because melee is hard",
+"Why It Hurts":
+"Raw Strength does not fix clumsy attack timing, combo access, or combat control.",
+"Better Move":
+"Consider one-handed training if you are actually fighting in melee.",
+},
+{
+Mistake: "Looking only for Scatty and missing the actual weapon trainer",
+"Why It Hurts":
+"Scatty may manage the arena while the one-handed training option can be tied to the arena-side trainer / hut.",
+"Better Move":
+"Talk around the arena and check the east-side hut if Scatty does not offer the training option.",
+},
+{
+Mistake: "Learning lockpicking before you have a chest plan",
+"Why It Hurts":
+"It competes with survival skills and still requires lockpicks / good targets.",
+"Better Move":
+"Save first, open valuable chests, and invest when you know you will use it often.",
+},
+{
+Mistake: "Learning hunting skills before you can hunt",
+"Why It Hurts":
+"Animal loot skills do nothing if you are avoiding or dying to the animals.",
+"Better Move":
+"Buy hunting skills only for animals you can already kill safely.",
+},
+{
+Mistake: "Ignoring Huno when planning ore income",
+"Why It Hurts":
+"Blacksmithing can be a safer income route than risky animal fights.",
+"Better Move":
+"Use Huno if you want crafting and a repeatable ore path.",
+},
+{
+Mistake: "Going magic without a faction plan",
+"Why It Hurts":
+"Magic access depends heavily on teachers, runes, scrolls, mana, and faction direction.",
+"Better Move":
+"Compare Old Camp, New Camp, and Swamp Camp magic routes before committing.",
+},
+{
+Mistake: "Ignoring ore cost",
+"Why It Hurts":
+"Many trainers need both Learning Points and ore.",
+"Better Move":
+"Plan LP and ore together. A skill you cannot afford is not an immediate upgrade.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Gothic 1 Remake**, each level gives **10 Learning Points**, and there is **no respec**. Every LP you spend is permanent for that run, so do not spread points across too many systems early.
+
+For a safe first run, use the trainer that solves your current problem: **one-handed training** if melee feels clumsy, **Diego** if you need Strength or Dexterity for a weapon, **Fingers** if you are opening chests, **Huno** if you want blacksmithing income, **Drax** if you can already hunt animals, and **Cavalorn / Wolf** if you are building around bows. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Gothic 1 Remake. This skills and trainers guide covers Learning Points, no respec, first LP spending, trainer costs, Diego, Old Camp arena weapon training, Scatty and Dog confusion, Fingers, Huno, Drax, Cavalorn, Wolf, Theron, Torrez, Cronos, Baal Cadar, Strength, Dexterity, one-handed, lockpicking, hunting, blacksmithing, climbing, archery, mana, and common LP mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-learning-points-level-up.webp"
+    alt="Gothic 1 Remake Learning Points after leveling up"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Every level gives Learning Points, but there is no respec. Save your LP until you know which trainer solves your current problem.
+  </figcaption>
+</figure>
+
+<h2 id="skills-trainers-guide">
+  Gothic 1 Remake skills and trainers guide
+</h2>
+
+Gothic 1 Remake does not let you become stronger from a simple menu. You gain **Learning Points** by leveling up, but you spend them through trainers. Many trainers also require ore, reputation, quest progress, or faction access.
+
+The most important beginner rule is simple:
+
+<strong>There is no way to respec in Gothic 1 Remake. Every LP you spend is permanent for that run.</strong>
+
+That means your first question should not be “what stat is best?” It should be:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Which trainer have I reached?</li>
+  <li>How much LP and ore does this training cost?</li>
+  <li>Which weapon, chest route, income route, or faction path does it support?</li>
+  <li>Am I fixing a real problem, or just spending because I leveled up?</li>
+</ul>
+
+If you are still in the first hour, read the <Link href="/gothic-1-remake/beginner-guide">Beginner Guide</Link> first. If you need specific weapons and armor before spending LP, use the <Link href="/gothic-1-remake/early-ore-weapons-armor">Early Gear Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="best-first-lp-by-build">
+  Best first LP plan by build
+</h2>
+
+Do not spend your first 10 LP in a vacuum. Spend it to support a build direction.
+
+<GuideTable
+caption="Best early trainer plan by build direction."
+columns={buildPlanColumns}
+rows={buildPlanRows}
+/>
+
+The safest first-playthrough rule is:
+
+<strong>Meet the early trainers first, then spend.</strong>
+
+A melee player should compare one-handed training against raw Strength. A bow player should check Dexterity and bow access. A thief player should understand Fingers and lockpicking costs. A crafting player should find Huno before assuming hunting is the only ore route.
+
+<h2 id="trainer-overview">
+  Trainer overview with costs
+</h2>
+
+This is not a wiki list of every teacher in the Colony. This table focuses on trainers that matter during your first route and early faction decision.
+
+Costs can vary by version, route state, faction access, and dialogue, so always confirm the trainer prompt before spending. Use the numbers below as planning anchors, not as a reason to skip saving.
+
+<GuideTable
+caption="Important early trainers in Gothic 1 Remake."
+columns={trainerColumns}
+rows={trainerRows}
+/>
+
+<h2 id="diego-strength-dexterity">
+  Diego: Strength and Dexterity
+</h2>
+
+Diego is the cleanest early stat trainer. He can help you raise Strength or Dexterity, which matters for weapon requirements and build direction.
+
+Use Diego when you have a specific goal:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Need a melee weapon requirement? Train Strength.</li>
+  <li>Need a bow requirement? Train Dexterity.</li>
+  <li>Not sure what you are building? Save your LP.</li>
+</ul>
+
+Do not buy Strength only because melee feels bad. If your issue is slow attacks, bad recovery, or awkward timing, the better answer may be one-handed training.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-diego-strength-dexterity-trainer.webp"
+    alt="Gothic 1 Remake Diego trainer for Strength and Dexterity"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use Diego for stat requirements. Strength and Dexterity are strongest when they unlock a weapon you actually plan to use.
+  </figcaption>
+</figure>
+
+<h2 id="one-handed-arena-trainer">
+  One-handed training: Scatty, Dog, and the Old Camp arena
+</h2>
+
+The Old Camp arena area is where melee players should look for early one-handed training. Be careful with names here: **Scatty is the arena figure**, but depending on route state and NPC layout, the actual one-handed training option may be tied to an arena-side trainer, often found around the hut east of the arena.
+
+If Scatty does not offer the training you expect, do not assume the guide is wrong or the route is broken. Check the nearby arena-side hut and talk to the weapon trainer there.
+
+One-handed training matters because it changes combat directly.
+
+<GuideTable
+caption="One-handed training value."
+columns={meleeColumns}
+rows={meleeRows}
+/>
+
+If you want a melee build, one-handed training should be one of the first serious LP decisions you consider.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-scatty-one-handed-training.webp"
+    alt="Gothic 1 Remake Old Camp arena one-handed weapon training"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If Scatty only manages arena fights, check the arena-side trainer / hut for the actual one-handed training option.
+  </figcaption>
+</figure>
+
+<h2 id="fingers-lockpicking">
+  Fingers: lockpicking and pickpocketing
+</h2>
+
+Fingers is the early thief trainer. He matters for both Old Camp admission and chest value.
+
+Lockpicking is not only about passing a check. Training can make the system less punishing and turn chests into a real resource route. But it still competes with combat survival, ore, and your first stat choices.
+
+<GuideTable
+caption="When to learn lockpicking."
+columns={lockpickColumns}
+rows={lockpickRows}
+/>
+
+If you are going Old Camp, Fingers is especially useful because his support route already asks you to prove you can handle a locked chest. If you are not opening many chests yet, delay the full investment.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-fingers-lockpicking-trainer.webp"
+    alt="Gothic 1 Remake Fingers lockpicking trainer in the Old Camp"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Learn lockpicking when you have chests worth opening, not just because Fingers is nearby.
+  </figcaption>
+</figure>
+
+<h2 id="huno-blacksmithing">
+  Huno: blacksmithing and safer ore income
+</h2>
+
+Huno is the Old Camp smith and the trainer to remember if you want crafting income instead of relying only on hunting or risky fights.
+
+Blacksmithing can cost around **10 LP + 50 ore**, but it opens a repeatable economy route. That matters because early ore is always under pressure: maps, lockpicks, arrows, training, armor, and quest costs all compete for the same wallet.
+
+Blacksmithing is best when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you have a stable Old Camp route,</li>
+  <li>you can reach the forge safely,</li>
+  <li>you want income without fighting stronger enemies,</li>
+  <li>and you are willing to spend LP on economy instead of immediate combat.</li>
+</ul>
+
+Do not take blacksmithing if you still cannot survive basic travel. Take it when your route is stable enough to turn crafting into real ore.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-huno-blacksmithing-trainer.webp"
+    alt="Gothic 1 Remake Huno blacksmithing trainer in the Old Camp forge"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Huno is the trainer to check if you want blacksmithing as a safer early ore route.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="drax-hunting-skills">
+  Drax: hunting skills and when they pay off
+</h2>
+
+Drax is your early hunting trainer. He can teach you how to take useful materials from animals, such as teeth, claws, fur, and reptile skins.
+
+The key is timing. Hunting skills are excellent once you can kill animals safely. They are weak if you are still avoiding every real fight.
+
+<GuideTable
+caption="Drax hunting skills and when to learn them."
+columns={huntingColumns}
+rows={huntingRows}
+/>
+
+The right question is not “is hunting good?” It is “which animals can I already kill?” Buy the material skill that matches your current hunting loop.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-drax-hunting-skills.webp"
+    alt="Gothic 1 Remake Drax hunting skills for teeth claws fur and skins"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Drax turns animal kills into income, but only after you can reliably kill the animals that drop the materials.
+  </figcaption>
+</figure>
+
+<h2 id="bow-trainers-cavalorn-wolf">
+  Bow trainers: Cavalorn early, Wolf later
+</h2>
+
+If you want a bow route, do not wait until New Camp to think about archery.
+
+**Cavalorn** is the important early name near the Old Camp side of the world. He can support early bow training before you fully commit to New Camp. This matters if your route uses Dexterity, arrows, and ranged safety from the beginning.
+
+**Wolf** becomes more important once you reach New Camp. He is useful if you already have a bow plan and want to improve it rather than simply carrying a bow as a backup.
+
+Before buying bow training, check four things:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Do you have a bow worth using?</li>
+  <li>Do you meet its Dexterity requirement?</li>
+  <li>Do you have enough arrows?</li>
+  <li>Can you create space before enemies reach you?</li>
+</ul>
+
+Cavalorn-style early bow training can cost around **10 LP + 50 ore**, so do not buy it unless ranged combat is actually part of your plan.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-wolf-archery-training.webp"
+    alt="Gothic 1 Remake Wolf archery trainer in New Camp"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wolf is the trainer to look for when your route moves from carrying a bow into a real archery plan.
+  </figcaption>
+</figure>
+
+<h2 id="theron-climbing">
+  Theron: climbing and Swamp Camp utility
+</h2>
+
+Theron is easy to miss because climbing does not look like a damage upgrade. But movement skills can matter a lot in Gothic 1 Remake, especially if you are exploring, searching for routes, or trying to avoid bad fights.
+
+Theron's climbing training can require **5 LP**, but the route may also require you to give **6 Northern Dark herbs** to Fortuno first.
+
+This makes climbing a planned utility investment:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Worth it if you are already visiting Swamp Camp.</li>
+  <li>Worth it if exploration and route access matter to you.</li>
+  <li>Not worth it if you need immediate combat survival more.</li>
+</ul>
+
+If you are choosing between camps, read the <Link href="/gothic-1-remake/best-faction">Best Faction Guide</Link> before treating Swamp Camp utility as your main reason to join.
+
+<h2 id="magic-trainers">
+  Magic trainers: Torrez, Cronos, and Baal Cadar
+</h2>
+
+Magic is powerful, but it is route-sensitive. The game separates scrolls, runes, mana, circles, and faction access.
+
+The three names to keep straight are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Torrez:</strong> Old Camp / Fire Mage direction and early scroll or rune logic.</li>
+  <li><strong>Cronos:</strong> New Camp / Water Mage direction and mana support later.</li>
+  <li><strong>Baal Cadar:</strong> Swamp Camp / Brotherhood magic direction after Novice progress.</li>
+</ul>
+
+Use this rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use scrolls as flexible tools early.</li>
+  <li>Do not spend all LP before you know your magic route.</li>
+  <li>Compare Fire Mage, Water Mage, and Brotherhood flavor before committing.</li>
+</ul>
+
+For faction-specific magic direction, read the <Link href="/gothic-1-remake/best-faction">Best Faction Guide</Link>.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-torrez-rune-magic.webp"
+    alt="Gothic 1 Remake Torrez rune magic and scroll training"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Torrez is your early reminder that magic is not just damage. Scrolls, runes, mana, and faction access all matter.
+  </figcaption>
+</figure>
+
+<h2 id="skill-effects-table">
+  Strength, Dexterity, one-handed, lockpicking, hunting, crafting, climbing, or magic?
+</h2>
+
+Use this table when you are deciding what a skill actually solves.
+
+<GuideTable
+caption="Early skill and stat decisions."
+columns={skillEffectColumns}
+rows={skillEffectRows}
+/>
+
+The key is to buy solutions, not numbers. If your problem is weapon access, buy stats. If your problem is melee control, buy weapon training. If your problem is ore income, buy hunting or crafting only when you can use it.
+
+
+<h2 id="common-mistakes">
+  Common LP and trainer mistakes
+</h2>
+
+<GuideTable
+caption="Common skills and trainers mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+
+<h2 id="faq">
+  Gothic 1 Remake skills and trainers FAQ
+</h2>
+
+### Is there respec in Gothic 1 Remake?
+
+No. There is no respec, so every LP you spend is permanent for that run. Save before major training choices and avoid spreading LP across too many systems.
+
+### How many Learning Points do I get per level?
+
+Each level gives 10 Learning Points. You spend them through trainers, often with an additional ore cost or route requirement.
+
+### What should I spend my first 10 LP on?
+
+Spend your first 10 LP on the trainer that solves your current problem. For melee, consider one-handed training. For weapon requirements, use Diego. For chests, use Fingers. For crafting income, use Huno.
+
+### Who teaches one-handed weapons?
+
+Check the Old Camp arena area. Scatty is the arena figure, but if he does not offer one-handed training, check the nearby arena-side trainer or east-side hut.
+
+### Is Strength or one-handed training better first?
+
+Strength is better if you need a weapon requirement. One-handed training is better if your problem is clumsy melee control.
+
+### Who teaches blacksmithing?
+
+Huno in the Old Camp smith area is the key early blacksmithing trainer. Blacksmithing can cost around 10 LP + 50 ore.
+
+### Who teaches bow skills early?
+
+Cavalorn is the early bow trainer near the Old Camp side of the world. Wolf becomes important later in New Camp.
+
+### Is lockpicking worth learning early?
+
+Yes if you have a chest route or want Fingers' Old Camp support. Trained lockpicking costs 10 LP + 100 ore, while Master costs 20 LP + 200 ore.
+
+### When should I learn hunting skills?
+
+Learn hunting only after you can kill the animals that drop the materials. Buying teeth, claws, fur, or skin skills too early wastes LP.
+
+### Who teaches climbing?
+
+Theron in Swamp Camp can teach climbing. Expect a 5 LP cost and a possible requirement involving 6 Northern Dark herbs for Fortuno.
+
+### Who teaches mana or magic?
+
+Torrez helps with Old Camp / Fire Mage direction, Cronos supports New Camp / Water Mage direction, and Baal Cadar supports Swamp Camp / Brotherhood magic.

@@ -91,7 +91,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/gothic-1-remake/best-faction`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/gothic-1-remake/old-camp-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/gothic-1-remake/old-mine-diegos-list`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    
+    { url: `${base}/gothic-1-remake/new-camp-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/gothic-1-remake/swamp-camp-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/gothic-1-remake/skills-trainers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/gothic-1-remake/lockpicking-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
 
     { url: `${base}/house-flipper-remastered-collection/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/house-flipper-remastered-collection/first-jobs-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered first jobs walkthrough

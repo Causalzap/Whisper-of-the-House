@@ -13,6 +13,7 @@ const imageUrls = [
 `${siteUrl}/images/gothic-1-remake/gothic-1-remake-drax-free-short-bow.webp`,
 `${siteUrl}/images/gothic-1-remake/gothic-1-remake-three-camps-diego-dialogue.webp`,
 `${siteUrl}/images/gothic-1-remake/gothic-1-remake-ian-old-mine-list.webp`,
+`${siteUrl}/images/gothic-1-remake/gothic-1-remake-learning-points-level-up.webp`,
 ];
 
 const toc = [
@@ -21,9 +22,11 @@ const toc = [
 { id: "best-first-route", label: "Best first route" },
 { id: "early-gear", label: "Early gear" },
 { id: "best-faction", label: "Best faction" },
+{ id: "camp-walkthroughs", label: "Camp walkthroughs" },
 { id: "old-camp-route", label: "Old Camp route" },
+{ id: "skills-lockpicking", label: "Skills & lockpicking" },
 { id: "common-mistakes", label: "Common mistakes" },
-{ id: "next-guides", label: "Next guides" },
+{ id: "complete-guide-cluster", label: "Complete cluster" },
 { id: "faq", label: "FAQ" },
 ];
 
@@ -49,23 +52,39 @@ href: "/gothic-1-remake/old-camp-walkthrough",
 label: "Gothic 1 Remake Old Camp Walkthrough",
 },
 {
+href: "/gothic-1-remake/new-camp-walkthrough",
+label: "Gothic 1 Remake New Camp Walkthrough",
+},
+{
+href: "/gothic-1-remake/swamp-camp-walkthrough",
+label: "Gothic 1 Remake Swamp Camp Walkthrough",
+},
+{
 href: "/gothic-1-remake/old-mine-diegos-list",
 label: "Gothic 1 Remake Diego's List Guide",
+},
+{
+href: "/gothic-1-remake/skills-trainers",
+label: "Gothic 1 Remake Skills and Trainers Guide",
+},
+{
+href: "/gothic-1-remake/lockpicking-guide",
+label: "Gothic 1 Remake Lockpicking Guide",
 },
 ];
 
 export const metadata: Metadata = {
-title: "Gothic 1 Remake Guide: Beginner Tips, Gear & Factions",
+title: "Gothic 1 Remake Guide: Walkthrough, Factions & Gear",
 description:
-"Follow Gothic 1 Remake guides for the first route, Old Sword, Drax’s bow, Digger’s Dress, best faction, Old Camp, and Diego’s List choices.",
+"Start Gothic 1 Remake with Old Sword, Drax’s bow, Digger’s Dress, best faction, camp walkthroughs, Diego’s List, skills, trainers, and lockpicking.",
 alternates: {
 canonical: pageUrl,
 },
 openGraph: {
 title:
-"Gothic 1 Remake Guide Hub: Beginner Route, Early Gear, Factions and Diego’s List",
+"Gothic 1 Remake Guide Hub: Beginner Route, Gear, Factions, Camps, Skills and Lockpicking",
 description:
-"Use this Gothic 1 Remake guide hub to find the best first route, early weapons and armor, Old Camp, New Camp, Swamp Camp, Diego’s List, Gomez dialogue, and faction decisions.",
+"Use this complete Gothic 1 Remake guide hub to find the best first route, early gear, Old Camp, New Camp, Swamp Camp, Diego’s List, skills, trainers, lockpicking, and faction decisions.",
 url: pageUrl,
 siteName: "Whisper of the House",
 type: "article",
@@ -82,7 +101,7 @@ twitter: {
 card: "summary_large_image",
 title: "Gothic 1 Remake Guide Hub",
 description:
-"Beginner route, Old Sword, Drax’s bow, early gear, factions, Old Camp, and Diego’s List explained.",
+"Best first route, Old Sword, Drax’s bow, early gear, factions, camp walkthroughs, Diego’s List, skills, and lockpicking.",
 images: [imageUrls[0]],
 },
 };
@@ -116,31 +135,41 @@ mainEntityOfPage: {
 "@id": pageUrl,
 },
 headline:
-"Gothic 1 Remake Guide Hub: Beginner Route, Perfect Start, Early Gear, Best Faction, Old Camp and Diego's List",
+"Gothic 1 Remake Guide Hub: Beginner Route, Perfect Start, Early Gear, Factions, Camp Walkthroughs, Diego's List, Skills, Trainers and Lockpicking",
 description:
-"A player-focused Gothic 1 Remake guide hub that helps new players choose the right next guide and avoid early mistakes. It explains the best first route from Diego, where to find the Old Sword before the Old Camp, how Drax's hunting knife leads to a free short bow, why Digger's Dress is a key early armor decision, how to compare Old Camp, New Camp and Swamp Camp by armor, magic, economy, trainers and story consequences, how Old Camp admission works with Shadow support, Diego's Test of Faith, Raven and Gomez, and why Diego's List should often be shown to Lares first for the 1,750 XP route instead of giving it straight to Diego for 750 XP.",
+"A complete player-focused Gothic 1 Remake guide hub that helps new players choose the right next guide and avoid early mistakes. It explains the best first route from Diego, where to find the Old Sword before the Old Camp, how Drax's hunting knife leads to a free short bow, why Digger's Dress is a key early armor decision, how to compare Old Camp, New Camp and Swamp Camp by armor, magic, economy, trainers and story consequences, how to join Old Camp with Shadow support, Raven and Gomez, how to join New Camp with Mordrag's Ring, Diego's List, Herb Merchant, The Raid and Lares's task pool, how to join Swamp Camp with Joru, four Guru approvals, Dusty, Swampweed Harvest, Sleep scroll and Cor Kalom, why Diego's List should often be shown to Lares first for the 1,750 XP route, how Learning Points and trainers work with no respec, and how lockpicking works through the slider puzzle, Fingers and Trained / Master costs.",
 image: imageUrls,
 inLanguage: "en",
 datePublished: "2026-06-07",
-dateModified: "2026-06-07",
+dateModified: "2026-06-08",
 articleSection: "Guides",
 about: [
 { "@type": "VideoGame", name: "Gothic 1 Remake" },
 { "@type": "Thing", name: "Gothic 1 Remake guide" },
 { "@type": "Thing", name: "Gothic 1 Remake beginner guide" },
 { "@type": "Thing", name: "Gothic 1 Remake perfect start" },
+{ "@type": "Thing", name: "Gothic 1 Remake walkthrough" },
 { "@type": "Thing", name: "Gothic 1 Remake Old Sword" },
 { "@type": "Thing", name: "Gothic 1 Remake Drax hunting knife" },
 { "@type": "Thing", name: "Gothic 1 Remake free bow" },
 { "@type": "Thing", name: "Gothic 1 Remake Digger's Dress" },
 { "@type": "Thing", name: "Gothic 1 Remake Rider's Bow" },
+{ "@type": "Thing", name: "Gothic 1 Remake early gear" },
 { "@type": "Thing", name: "Gothic 1 Remake best faction" },
 { "@type": "Thing", name: "Gothic 1 Remake Old Camp" },
 { "@type": "Thing", name: "Gothic 1 Remake New Camp" },
 { "@type": "Thing", name: "Gothic 1 Remake Swamp Camp" },
+{ "@type": "Thing", name: "Gothic 1 Remake how to join Old Camp" },
+{ "@type": "Thing", name: "Gothic 1 Remake how to join New Camp" },
+{ "@type": "Thing", name: "Gothic 1 Remake how to join Swamp Camp" },
 { "@type": "Thing", name: "Gothic 1 Remake Diego's List" },
 { "@type": "Thing", name: "Gothic 1 Remake Lares" },
 { "@type": "Thing", name: "Gothic 1 Remake Gomez" },
+{ "@type": "Thing", name: "Gothic 1 Remake Cor Kalom" },
+{ "@type": "Thing", name: "Gothic 1 Remake Learning Points" },
+{ "@type": "Thing", name: "Gothic 1 Remake skills" },
+{ "@type": "Thing", name: "Gothic 1 Remake trainers" },
+{ "@type": "Thing", name: "Gothic 1 Remake lockpicking" },
 ],
 isPartOf: {
 "@type": "WebSite",
@@ -200,6 +229,33 @@ text:
 },
 {
 "@type": "Question",
+name: "How do I join the Old Camp?",
+acceptedAnswer: {
+"@type": "Answer",
+text:
+"Complete Diego's Test of Faith, gather enough Shadow support, enter the castle through Thorus and Raven, then avoid Gomez's fatal dialogue answers.",
+},
+},
+{
+"@type": "Question",
+name: "How do I join the New Camp?",
+acceptedAnswer: {
+"@type": "Answer",
+text:
+"Reach Level 5 and complete at least three major Lares tasks. Mordrag's Ring, Diego's List, and Herb Merchant are usually the cleanest core route.",
+},
+},
+{
+"@type": "Question",
+name: "How do I join the Swamp Camp?",
+acceptedAnswer: {
+"@type": "Answer",
+text:
+"Reach Level 5, earn four Guru approvals, then pass Cor Kalom's final faith check. Talk to Joru early so you understand how the Guru system works.",
+},
+},
+{
+"@type": "Question",
 name: "Should I kill Mordrag?",
 acceptedAnswer: {
 "@type": "Answer",
@@ -227,6 +283,24 @@ text:
 },
 {
 "@type": "Question",
+name: "Is there respec in Gothic 1 Remake?",
+acceptedAnswer: {
+"@type": "Answer",
+text:
+"No. There is no respec, so every LP choice is permanent for that run. Save before major trainer decisions.",
+},
+},
+{
+"@type": "Question",
+name: "How does lockpicking work?",
+acceptedAnswer: {
+"@type": "Answer",
+text:
+"Lockpicking uses a slider puzzle. Move the bronze pins into the fourth hole, watch how plates move together, and save before important chests until you understand the system.",
+},
+},
+{
+"@type": "Question",
 name: "What Gomez answers should I avoid?",
 acceptedAnswer: {
 "@type": "Answer",
@@ -236,20 +310,20 @@ text:
 },
 {
 "@type": "Question",
+name: "What Cor Kalom answer should I choose?",
+acceptedAnswer: {
+"@type": "Answer",
+text:
+"Choose the answer that supports faith in the Sleeper. Questioning or insulting the belief can turn Cor Kalom hostile and block the Swamp Camp route.",
+},
+},
+{
+"@type": "Question",
 name: "Is Rider's Bow worth getting early?",
 acceptedAnswer: {
 "@type": "Answer",
 text:
 "Yes, if you plan to use Dexterity. Rider's Bow is hidden in an underwater cave near the New Camp route and requires 14 Dexterity.",
-},
-},
-{
-"@type": "Question",
-name: "What guide should I read next?",
-acceptedAnswer: {
-"@type": "Answer",
-text:
-"Read Perfect Start for the exact opening route, Early Gear Guide for items and ore, or Best Faction Guide before joining a camp.",
 },
 },
 ],
@@ -265,12 +339,12 @@ type="application/ld+json"
 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 /> <GuideArticlePage
        title="Gothic 1 Remake Guide Hub"
-       description="Start with Diego, grab the Old Sword, get Drax’s free bow, compare early gear and factions, then decide what to do with Diego’s List."
+       description="Start with Diego, grab the Old Sword, get Drax’s bow, compare gear and factions, then use the right camp, skills, and lockpicking guide."
        gameTitle="Gothic 1 Remake"
        gameHref="/gothic-1-remake"
        breadcrumbBaseHref="/"
        breadcrumbBaseLabel="Home"
-       updatedAt="June 7, 2026"
+       updatedAt="June 8, 2026"
        toc={toc}
        relatedLinks={relatedLinks}
      > <GothicOneRemakeHubContent /> </GuideArticlePage> </main> <Footer />

@@ -1,0 +1,836 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const quickColumns = [
+{ key: "Question", label: "Question" },
+{ key: "Short Answer", label: "Short Answer" },
+{ key: "Beginner Tip", label: "Beginner Tip" },
+];
+
+export const quickRows = [
+{
+Question: "How does the lockpicking puzzle work?",
+"Short Answer":
+"Move the sliders until every bronze pin lines up with the fourth hole in the center.",
+"Beginner Tip":
+"A correct pin rises instead of dropping. The hard part is that one slider can move other sliders too.",
+},
+{
+Question: "Why do my lockpicks keep breaking?",
+"Short Answer":
+"By default, a lockpick breaks after 2 failed slider moves and the lock resets.",
+"Beginner Tip":
+"Save before important chests until you have lockpicking training.",
+},
+{
+Question: "Who teaches lockpicking?",
+"Short Answer": "Fingers in the Old Camp.",
+"Beginner Tip":
+"Diego points you toward Fingers early. He is near the castle wall, left from the gate toward the arena side.",
+},
+{
+Question: "Where should I buy lockpicks first?",
+"Short Answer": "Mordrag first if he is still in Old Camp.",
+"Beginner Tip":
+"Mordrag sells lockpicks for 13 ore each, cheaper than Fisk or Dexter at about 15 ore.",
+},
+{
+Question: "Is lockpicking worth learning early?",
+"Short Answer": "Yes, but not always as your first 10 LP.",
+"Beginner Tip":
+"Learn it when you are opening many chests or using Fingers for Old Camp support.",
+},
+];
+
+export const mechanicColumns = [
+{ key: "Mechanic", label: "Mechanic" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "What To Watch For", label: "What To Watch For" },
+];
+
+export const mechanicRows = [
+{
+Mechanic: "Sliding plates",
+"What It Means":
+"Each lock is made of several sliding plates, and each plate has 7 holes.",
+"What To Watch For":
+"You are not just guessing left and right. You are aligning a visible mechanism.",
+},
+{
+Mechanic: "Fourth hole target",
+"What It Means":
+"The goal is to move each bronze pin into the fourth hole, the middle position.",
+"What To Watch For":
+"The center hole is the target for every pin.",
+},
+{
+Mechanic: "Correct pin behavior",
+"What It Means":
+"When a pin is aligned correctly, it rises / pops up instead of dropping.",
+"What To Watch For":
+"Use the pin movement as feedback, not only the slider position.",
+},
+{
+Mechanic: "Linked sliders",
+"What It Means":
+"Moving one plate can move another plate, sometimes in the same direction and sometimes in the opposite direction.",
+"What To Watch For":
+"This is why a lock can feel solved for one second and broken again after the next move.",
+},
+{
+Mechanic: "Default break rule",
+"What It Means":
+"Without training, a lockpick breaks after 2 failed slider moves and the lock fully resets.",
+"What To Watch For":
+"Manual saves matter most before you have Trained lockpicking.",
+},
+{
+Mechanic: "Real-time interface",
+"What It Means":
+"The world does not fully pause while you are lockpicking.",
+"What To Watch For":
+"NPCs and guards can interrupt or attack you during the puzzle if you are seen.",
+},
+];
+
+export const trainingColumns = [
+{ key: "Training Level", label: "Training Level" },
+{ key: "Cost", label: "Cost" },
+{ key: "Effect", label: "Effect" },
+{ key: "Worth It?", label: "Worth It?" },
+];
+
+export const trainingRows = [
+{
+"Training Level": "Untrained",
+Cost: "No LP / no ore",
+Effect:
+"A lockpick breaks after 2 failed slider moves, and the whole lock resets.",
+"Worth It?":
+"Fine for a few early chests if you save first, but frustrating for serious chest routes.",
+},
+{
+"Training Level": "Trained",
+Cost: "10 LP + 100 ore",
+Effect:
+"You can make up to 4 failed slider moves before the lockpick breaks, and a broken pick does not reset lock progress.",
+"Worth It?":
+"Best first lockpicking investment if you plan to open many chests or use Fingers seriously.",
+},
+{
+"Training Level": "Master",
+Cost: "20 LP + 200 ore",
+Effect:
+"When a lockpick breaks, one slider connection is removed, making the remaining puzzle simpler.",
+"Worth It?":
+"Strong later, but too expensive for most first-hour builds.",
+},
+];
+
+export const sourceColumns = [
+{ key: "Source", label: "Source" },
+{ key: "Where", label: "Where" },
+{ key: "Price / Value", label: "Price / Value" },
+{ key: "Best Use", label: "Best Use" },
+];
+
+export const sourceRows = [
+{
+Source: "Mordrag",
+Where: "Old Camp before you send him away for Thorus.",
+"Price / Value": "13 ore each.",
+"Best Use":
+"Buy from him first if he is still available because he is the cheapest early source.",
+},
+{
+Source: "Fisk",
+Where: "Old Camp market / trader area.",
+"Price / Value": "About 15 ore each.",
+"Best Use":
+"Reliable Old Camp backup source after Mordrag or when you are already shopping for arrows and gear.",
+},
+{
+Source: "Dexter",
+Where: "Old Camp / Shadow route.",
+"Price / Value": "About 15 ore each.",
+"Best Use":
+"Useful backup if you are working Dexter's Old Camp support route.",
+},
+{
+Source: "New Camp traders",
+Where: "New Camp tavern / merchant routes.",
+"Price / Value": "Varies by trader.",
+"Best Use":
+"Restock if you are already on Mordrag / Lares routes.",
+},
+{
+Source: "Loot",
+Where: "Road supplies, abandoned areas, mine supplies, and safe containers.",
+"Price / Value": "Free if safe.",
+"Best Use":
+"Always check safe loot before buying a large stack.",
+},
+];
+
+export const trainerColumns = [
+{ key: "Trainer / Trader", label: "Trainer / Trader" },
+{ key: "Where To Find Them", label: "Where To Find Them" },
+{ key: "What They Help With", label: "What They Help With" },
+];
+
+export const trainerRows = [
+{
+"Trainer / Trader": "Fingers",
+"Where To Find Them":
+"Old Camp outer ring, a few shacks from the castle gate, left toward the arena side and castle wall.",
+"What They Help With":
+"Lockpicking, pickpocketing, and an Old Camp support task tied to a nearby locked chest.",
+},
+{
+"Trainer / Trader": "Mordrag",
+"Where To Find Them":
+"Old Camp before you resolve Thorus's Mordrag problem.",
+"What They Help With":
+"Cheapest early lockpick source at 13 ore each, plus New Camp escort if you keep him alive.",
+},
+{
+"Trainer / Trader": "Fisk",
+"Where To Find Them":
+"Old Camp market / trader area.",
+"What They Help With":
+"Backup lockpicks, arrows, gear, and Whistler's Sword route.",
+},
+{
+"Trainer / Trader": "Cavalorn",
+"Where To Find Them":
+"West of the Old Camp area.",
+"What They Help With":
+"Sneak training, useful for approaching owned chests without being noticed.",
+},
+{
+"Trainer / Trader": "Fingers' nearby chest",
+"Where To Find Them":
+"House next to / near Fingers in the Old Camp.",
+"What They Help With":
+"A safe early practical lockpicking test and a route toward Fingers' support.",
+},
+];
+
+export const saveColumns = [
+{ key: "Rule", label: "Rule" },
+{ key: "How To Use It", label: "How To Use It" },
+{ key: "Why It Saves Lockpicks", label: "Why It Saves Lockpicks" },
+];
+
+export const saveRows = [
+{
+Rule: "Save before the chest",
+"How To Use It":
+"Make a manual save before trying any locked chest that might matter.",
+"Why It Saves Lockpicks":
+"Before training, 2 failed slider moves can break the pick and reset the lock.",
+},
+{
+Rule: "Study slider links",
+"How To Use It":
+"Move one plate and watch whether another plate moves with it, against it, or not at all.",
+"Why It Saves Lockpicks":
+"Most mistakes come from fighting the linked sliders instead of learning their pattern.",
+},
+{
+Rule: "Do not spam inputs",
+"How To Use It":
+"Move carefully through the lock sequence instead of guessing fast.",
+"Why It Saves Lockpicks":
+"Fast guessing turns a cheap chest into a lockpick sink.",
+},
+{
+Rule: "Open valuable chests first",
+"How To Use It":
+"Prioritize quest chests, trainer-related chests, and storage rooms with visible value.",
+"Why It Saves Lockpicks":
+"Low-value chests can wait until you have more picks and ore.",
+},
+{
+Rule: "Train before long chest routes",
+"How To Use It":
+"Learn Trained lockpicking when you plan to open houses, caves, mines, and camp storage.",
+"Why It Saves Lockpicks":
+"Trained lockpicking gives more mistake room and keeps progress after a broken pick.",
+},
+];
+
+export const chestColumns = [
+{ key: "Chest Type", label: "Chest Type" },
+{ key: "Open Early?", label: "Open Early?" },
+{ key: "Why", label: "Why" },
+];
+
+export const chestRows = [
+{
+"Chest Type": "Fingers' nearby chest",
+"Open Early?": "Yes.",
+Why: "It directly supports Fingers' Old Camp approval and teaches the basic system.",
+},
+{
+"Chest Type": "Abandoned mine / road chests",
+"Open Early?": "Yes, if safe.",
+Why: "These can contain torches, lockpicks, food, rings, and useful early supplies.",
+},
+{
+"Chest Type": "Old Camp personal chests",
+"Open Early?": "Only with caution.",
+Why: "Being seen can cause warnings, fights, or reputation trouble.",
+},
+{
+"Chest Type": "Mine storage chests",
+"Open Early?": "Sometimes.",
+Why: "The rewards can be good, but mine routes can become dangerous or involve NPC ownership.",
+},
+{
+"Chest Type": "Inner castle / restricted chests",
+"Open Early?": "No.",
+Why: "The risk is too high before you understand access rules and guard behavior.",
+},
+];
+
+export const fingersColumns = [
+{ key: "Fingers Route Step", label: "Fingers Route Step" },
+{ key: "Action", label: "Action" },
+{ key: "Important Detail", label: "Important Detail" },
+];
+
+export const fingersRows = [
+{
+"Fingers Route Step": "Find Fingers",
+Action: "From the castle gate, head left toward the arena side and castle wall.",
+"Important Detail":
+"Diego tells you Fingers is only a few shacks away from the gate area.",
+},
+{
+"Fingers Route Step": "Ask about useful skills",
+Action: "Talk to Fingers about lockpicking and thief work.",
+"Important Detail":
+"You do not need to become a full thief build to use him for Old Camp support.",
+},
+{
+"Fingers Route Step": "Save before the chest",
+Action: "Make a manual save before trying the nearby locked chest.",
+"Important Detail":
+"Before training, a broken pick resets the lock, so a save protects your ore.",
+},
+{
+"Fingers Route Step": "Open the chest",
+Action: "Lockpick the nearby chest and take the valuables tied to the task.",
+"Important Detail":
+"The chest is useful because it supports Fingers' approval, not because every chest should be opened immediately.",
+},
+{
+"Fingers Route Step": "Return to Fingers",
+Action: "Bring the proof back to Fingers.",
+"Important Detail":
+"This can get him on your side for Old Camp admission.",
+},
+];
+
+export const worthColumns = [
+{ key: "Situation", label: "Situation" },
+{ key: "Learn Lockpicking?", label: "Learn Lockpicking?" },
+{ key: "Reason", label: "Reason" },
+];
+
+export const worthRows = [
+{
+Situation: "You are trying to join Old Camp",
+"Learn Lockpicking?": "Often yes.",
+Reason:
+"Fingers is one of the easiest support sources, and the skill helps with his route.",
+},
+{
+Situation: "You are still dying to scavengers",
+"Learn Lockpicking?": "Not first.",
+Reason:
+"Combat survival matters more than chest value if every trip outside camp becomes a reload.",
+},
+{
+Situation: "You want to open several early chests",
+"Learn Lockpicking?": "Yes, Trained is the best first target.",
+Reason:
+"Trained costs 10 LP and 100 ore, gives more failure room, and prevents reset after a broken pick.",
+},
+{
+Situation: "You are low on ore",
+"Learn Lockpicking?": "Maybe, but buy picks carefully.",
+Reason:
+"Lockpicking can pay off, but broken picks and poor chest choices can make you poorer first.",
+},
+{
+Situation: "You want a thief roleplay route",
+"Learn Lockpicking?": "Yes.",
+Reason:
+"Lockpicking and pickpocketing fit that route, but save often and avoid key NPC trouble.",
+},
+{
+Situation: "You are considering Master early",
+"Learn Lockpicking?": "Usually wait.",
+Reason:
+"Master is powerful, but 20 LP and 200 ore is a heavy early cost before your build is stable.",
+},
+];
+
+export const stealthColumns = [
+{ key: "Risk", label: "Risk" },
+{ key: "What Happens", label: "What Happens" },
+{ key: "How To Reduce It", label: "How To Reduce It" },
+];
+
+export const stealthRows = [
+{
+Risk: "Real-time interruption",
+"What Happens":
+"The lockpicking interface runs while the world continues, so guards or NPCs can catch you mid-puzzle.",
+"How To Reduce It":
+"Check sightlines before starting and do not pick locks in front of people.",
+},
+{
+Risk: "Owned chests",
+"What Happens":
+"NPCs may warn you, attack, knock you down, or cause route trouble if they see you stealing.",
+"How To Reduce It":
+"Wait until the owner leaves, sleeps, or turns away.",
+},
+{
+Risk: "Noisy approach",
+"What Happens":
+"You may be seen before you even start the lock.",
+"How To Reduce It":
+"Consider Sneak training from Cavalorn west of Old Camp if you want a safer theft route.",
+},
+{
+Risk: "Key NPC trouble",
+"What Happens":
+"Stealing from important NPCs can create more damage than the chest reward is worth.",
+"How To Reduce It":
+"Avoid important trainers, quest NPCs, and guarded areas until you know the consequences.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Not understanding the slider puzzle",
+"Why It Hurts":
+"You waste lockpicks guessing instead of aligning pins with the middle hole.",
+"Better Move":
+"Watch how each plate affects the others, and aim every pin at the fourth hole.",
+},
+{
+Mistake: "Spending your first 10 LP on lockpicking without a plan",
+"Why It Hurts":
+"You may still lack combat survival, a real weapon, or the ore to buy enough lockpicks.",
+"Better Move":
+"Meet Fingers first, open his task chest, then decide whether you will open many chests.",
+},
+{
+Mistake: "Buying from Fisk before Mordrag",
+"Why It Hurts":
+"Mordrag can sell lockpicks before you resolve Thorus’s Mordrag problem, so check him first before buying from Fisk or Dexter.",
+"Better Move":
+"Buy from Mordrag first if he is still in Old Camp.",
+},
+{
+Mistake: "Opening every chest you see",
+"Why It Hurts":
+"Some chests are low-value, owned, watched, or risky.",
+"Better Move":
+"Open route chests first: Fingers, abandoned mine supplies, and clearly safe storage.",
+},
+{
+Mistake: "Not saving before a lock",
+"Why It Hurts":
+"Before training, 2 failed moves can break the pick and reset the whole lock.",
+"Better Move":
+"Manual save before every chest you care about.",
+},
+{
+Mistake: "Ignoring NPCs during the puzzle",
+"Why It Hurts":
+"Lockpicking happens in real time, so someone can interrupt and attack you mid-puzzle.",
+"Better Move":
+"Check sightlines, time of day, and NPC routines before opening owned containers.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To lockpick in **Gothic 1 Remake**, move the sliding plates until every bronze pin lines up with the **fourth hole**, the middle slot. A correct pin rises instead of dropping. The hard part is that moving one plate can also move other plates.
+
+Before training, a lockpick breaks after **2 failed slider moves** and the whole lock resets. Buy lockpicks from **Mordrag** first if he is still in Old Camp because he sells them for **13 ore each**, cheaper than Fisk or Dexter. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Gothic 1 Remake. This lockpicking guide covers the slider puzzle, bronze pins, fourth-hole alignment, broken lockpick rules, Trained and Master lockpicking costs, Mordrag, Fisk, Dexter, Fingers, Cavalorn's Sneak training, owned chest risks, and whether lockpicking is worth your first Learning Points.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-lockpicking-slider-puzzle.webp"
+    alt="Gothic 1 Remake lockpicking slider puzzle with bronze pins and plates"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The lockpicking puzzle is about aligning bronze pins with the fourth hole, not guessing random left-right inputs.
+  </figcaption>
+</figure>
+
+<h2 id="lockpicking-guide">
+  Gothic 1 Remake lockpicking guide
+</h2>
+
+Lockpicking in Gothic 1 Remake is valuable, but it is easy to misunderstand because the game uses a visible slider puzzle.
+
+The first thing to learn is the mechanism, not the trainer list.
+
+<GuideTable
+caption="Gothic 1 Remake lockpicking quick answers."
+columns={quickColumns}
+rows={quickRows}
+/>
+
+If you are still deciding how to spend your first Learning Points, read the <Link href="/gothic-1-remake/skills-trainers">Skills and Trainers Guide</Link>. If you need ore for lockpicks, use the <Link href="/gothic-1-remake/early-ore-weapons-armor">Early Gear Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+
+<h2 id="how-lockpicking-works">
+  How lockpicking works
+</h2>
+
+Each lock is made of several sliding plates. Each plate has **7 holes**. Your goal is to move every bronze pin into the **fourth hole**, which is the center position.
+
+When a pin is correct, it rises / pops up instead of dropping. That is your feedback.
+
+The puzzle becomes tricky because plates can be linked. Moving one plate may also move another plate, and the second plate may move in the same direction or the opposite direction.
+
+<GuideTable
+caption="How the Gothic 1 Remake lockpicking puzzle works."
+columns={mechanicColumns}
+rows={mechanicRows}
+/>
+
+Before you are trained, a lockpick breaks after **2 failed slider moves**, and the lock fully resets. That is why lockpicking feels brutal if you spam guesses.
+
+<h2 id="how-to-lockpick">
+  How to lockpick without wasting picks
+</h2>
+
+Use this method:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Stand at the chest and make a manual save.</li>
+  <li>Look at the pins and sliders before moving anything.</li>
+  <li>Move one plate and watch which other plate moves with it.</li>
+  <li>Aim each pin for the fourth hole in the center.</li>
+  <li>Use the rising pin as confirmation that a position is correct.</li>
+  <li>If you break too many lockpicks, reload instead of burning your ore budget.</li>
+</ol>
+
+The goal is not to brute-force every lock. The goal is to understand how the sliders are connected, then move them in an order that leaves the pins centered.
+
+<GuideTable
+caption="How to save lockpicks."
+columns={saveColumns}
+rows={saveRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-lockpicking-chest-save.webp"
+    alt="Gothic 1 Remake saving before lockpicking a chest"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Save before important chests. Before training, two failed slider moves can break the pick and reset the lock.
+  </figcaption>
+</figure>
+
+<h2 id="lockpicking-training-levels">
+  Lockpicking training levels and costs
+</h2>
+
+Fingers can train lockpicking, but the key question is whether the upgrade solves your current problem.
+
+<GuideTable
+caption="Gothic 1 Remake lockpicking training levels."
+columns={trainingColumns}
+rows={trainingRows}
+/>
+
+The best early upgrade is usually **Trained**, not Master. Trained is where lockpicking becomes much less punishing because you get more mistake room and a broken lockpick no longer resets the whole lock.
+
+Master is strong, but **20 LP and 200 ore** is a major early investment. Wait until you know you are playing a serious thief / chest route.
+
+<h2 id="where-to-buy-lockpicks">
+  Where to buy lockpicks
+</h2>
+
+Buy from **Mordrag** first if he is still in Old Camp. He sells lockpicks for **13 ore each**, making him the cheapest early source.
+
+After Mordrag, use Fisk or Dexter as backup sources. They sell lockpicks for about **15 ore each**.
+
+<GuideTable
+caption="Where to buy or find lockpicks."
+columns={sourceColumns}
+rows={sourceRows}
+/>
+
+Do not buy a giant stack immediately. Early ore also needs to cover maps, training, arrows, quest costs, and gear.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-mordrag-lockpicks-trader.webp"
+    alt="Gothic 1 Remake Mordrag trader stock with lockpicks"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check Mordrag’s trader stock before sending him away for Thorus. He can be an early lockpick source before you rely on Fisk or Dexter.
+  </figcaption>
+</figure>
+
+<h2 id="fingers-location">
+  Where to find Fingers
+</h2>
+
+Fingers is in the Old Camp outer ring. From the castle gate, head left toward the arena side and the castle wall. Diego can point you in this direction when you ask who teaches useful skills.
+
+Fingers matters because he is both:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a lockpicking / pickpocketing trainer,</li>
+  <li>and one of the easiest Old Camp supporters.</li>
+</ul>
+
+If you are joining Old Camp, do not ignore him.
+
+<GuideTable
+caption="Important lockpicking people and services."
+columns={trainerColumns}
+rows={trainerRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-fingers-location-old-camp.webp"
+    alt="Gothic 1 Remake Fingers location near the Old Camp castle wall and arena side"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    From the castle gate, head left toward the arena side. Fingers is only a few shacks away near the wall.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="fingers-chest">
+  Fingers' chest task
+</h2>
+
+Fingers' early support task is one of the best reasons to learn the lockpicking system quickly.
+
+The chest is in the house next to / near him. You can save before opening it, pick the lock, retrieve the valuables, and bring the result back to Fingers.
+
+This is a good early chest because it has a clear purpose: it supports your Old Camp admission route. It is not just random looting.
+
+<GuideTable
+caption="Fingers route for lockpicking and Old Camp support."
+columns={fingersColumns}
+rows={fingersRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-fingers-chest-task.webp"
+    alt="Gothic 1 Remake Fingers chest task for Old Camp support"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fingers' nearby chest is the best first lockpicking target because it teaches the system and helps Old Camp admission.
+  </figcaption>
+</figure>
+
+<h2 id="chests-worth-opening">
+  Which early chests are worth opening?
+</h2>
+
+Not every chest deserves your lockpicks. Prioritize chests that help your route, solve survival problems, or obviously sit in low-risk areas.
+
+<GuideTable
+caption="Early chests worth opening."
+columns={chestColumns}
+rows={chestRows}
+/>
+
+The best early chest logic is: open safe supply chests first, then trainer-related chests, then higher-risk owned chests only when you understand NPC routines.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-abandoned-mine-lockpicks-chest.webp"
+    alt="Gothic 1 Remake abandoned mine chest with lockpicks torches and early supplies"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Safe road and mine chests can give supplies like torches, lockpicks, food, rings, and early route items.
+  </figcaption>
+</figure>
+
+<h2 id="is-lockpicking-worth-it">
+  Is lockpicking worth learning early?
+</h2>
+
+Yes, but not automatically as your first LP purchase.
+
+<GuideTable
+caption="When lockpicking is worth learning."
+columns={worthColumns}
+rows={worthRows}
+/>
+
+The best timing is after you have a basic weapon, a stable route, a few lockpicks, and a reason to open several chests. If you are still dying to early animals, spend your first LP on survival or combat instead.
+
+<h2 id="lockpicking-vs-pickpocketing">
+  Lockpicking vs pickpocketing
+</h2>
+
+Lockpicking and pickpocketing are not the same decision.
+
+**Lockpicking** is safer to start with because it targets chests. You still need to watch ownership and NPC sightlines, but the risk is more controllable.
+
+**Pickpocketing** targets people. That means failure can create more serious consequences, especially around important NPCs, trainers, guards, and faction figures.
+
+For a first run:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>learn lockpicking before pickpocketing,</li>
+  <li>practice on safe chests first,</li>
+  <li>save before theft,</li>
+  <li>do not pickpocket key NPCs unless you accept the risk.</li>
+</ul>
+
+<h2 id="stealing-owned-chests">
+  Owned chests, real-time risk, and Sneak
+</h2>
+
+The lockpicking interface runs in real time. If a guard or NPC sees you while you are solving the puzzle, they can interrupt and attack you before you finish.
+
+Owned chests are more dangerous than abandoned supply chests. If someone sees you open a chest that is not yours, they may warn you, attack, knock you down, or create trouble with that area.
+
+<GuideTable
+caption="Owned chest and real-time lockpicking risks."
+columns={stealthColumns}
+rows={stealthRows}
+/>
+
+If you want to steal more safely, look into **Sneak** training from **Cavalorn** west of Old Camp. Sneak does not make theft consequence-free, but it can help you approach chests without immediately alerting people.
+
+<h2 id="lockpicking-and-old-camp">
+  Lockpicking and Old Camp admission
+</h2>
+
+Lockpicking matters more if you plan to join the Old Camp.
+
+Fingers is one of the easier Shadow supporters, and his task is close by. You do not need to travel across the map, fight a boss, or commit to a faction route. You just need to prove you can handle the chest.
+
+If your Old Camp route needs four supporters, Fingers is a good target alongside Whistler, Sly, and Scatty.
+
+For the full route, read the <Link href="/gothic-1-remake/old-camp-walkthrough">Old Camp Walkthrough</Link>.
+
+
+<h2 id="early-lockpicking-checklist">
+  Early lockpicking checklist
+</h2>
+
+Use this short route:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Buy a few lockpicks from Mordrag if he is still in Old Camp.</li>
+  <li>Find Fingers near the castle wall / arena side.</li>
+  <li>Save before Fingers' nearby chest.</li>
+  <li>Open that chest for Old Camp support value.</li>
+  <li>Learn Trained lockpicking only if you plan to open many more chests.</li>
+</ol>
+
+This keeps lockpicking useful without letting it consume your whole early build.
+
+<h2 id="mistakes">
+  Lockpicking mistakes to avoid
+</h2>
+
+<GuideTable
+caption="Common Gothic 1 Remake lockpicking mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  Gothic 1 Remake lockpicking FAQ
+</h2>
+
+### How does lockpicking work in Gothic 1 Remake?
+
+Each lock uses sliding plates with 7 holes. Move the bronze pins into the fourth hole, the center position. A correct pin rises instead of dropping. The challenge is that moving one plate can move other plates too.
+
+### Why do my lockpicks break so fast?
+
+Before training, a lockpick breaks after 2 failed slider moves and the lock fully resets. This is why manual saving before chests is so important early.
+
+### What does Trained lockpicking do?
+
+Trained lockpicking costs 10 LP and 100 ore. It lets you make up to 4 failed slider moves before the lockpick breaks, and a broken pick does not reset your lock progress.
+
+### What does Master lockpicking do?
+
+Master lockpicking costs 20 LP and 200 ore. When a lockpick breaks, one slider connection is removed, making the remaining puzzle simpler.
+
+### Who sells the cheapest lockpicks?
+
+"Mordrag can sell lockpicks while he is still in the Old Camp, before you send him away for Thorus. Check his stock first, then use Fisk or Dexter as backup sources."
+
+### Where is Fingers?
+
+Fingers is in the Old Camp outer ring. From the castle gate, head left toward the arena side and castle wall.
+
+### Is lockpicking worth my first 10 LP?
+
+Only if you have a chest route or are using Fingers for Old Camp support. If you are still struggling in combat, one-handed training, Strength, or Dexterity may matter more.
+
+### Can guards interrupt lockpicking?
+
+Yes. Lockpicking happens in real time, so guards and NPCs can catch you during the puzzle and attack or interrupt you.
+
+### What is Cavalorn's Sneak training for?
+
+Sneak can help you approach owned chests without being noticed as easily. It does not remove theft consequences, but it supports a safer thief route.
+
+### Should I learn pickpocketing with lockpicking?
+
+Not automatically. Lockpicking is usually the safer first thief skill because it targets chests. Pickpocketing targets people and carries higher risk around important NPCs.

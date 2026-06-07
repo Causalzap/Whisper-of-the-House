@@ -1,0 +1,911 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const requirementColumns = [
+{ key: "Requirement", label: "Requirement" },
+{ key: "How To Handle It", label: "How To Handle It" },
+{ key: "Beginner Warning", label: "Beginner Warning" },
+];
+
+export const requirementRows = [
+{
+Requirement: "Level 5",
+"How To Handle It":
+"Reach Level 5 before asking Cor Kalom to accept you.",
+"Beginner Warning":
+"If Cor Kalom says you are not experienced enough, it usually means your level is too low.",
+},
+{
+Requirement: "Four Guru approvals",
+"How To Handle It":
+"Earn approval from four of the five important Gurus: Baal Namib, Baal Tyon, Baal Orun, Baal Tondral, and Baal Cadar.",
+"Beginner Warning":
+"Do not treat Gurus like normal quest NPCs. Most approvals require indirect proof, staged actions, or the right item.",
+},
+{
+Requirement: "Cor Kalom final check",
+"How To Handle It":
+"After enough approvals and Level 5, go to Cor Kalom's laboratory and answer his final faith question correctly.",
+"Beginner Warning":
+"One Cor Kalom answer can turn him hostile and block the route, so save before the final conversation.",
+},
+{
+Requirement: "Safe camp access",
+"How To Handle It":
+"Use Baal Parvez from the Old Camp area to reach the Swamp Camp safely.",
+"Beginner Warning":
+"Walking there blind is much riskier than using an escort.",
+},
+{
+Requirement: "Faction commitment",
+"How To Handle It":
+"Make a manual save before becoming a Novice.",
+"Beginner Warning":
+"Joining Swamp Camp locks you out of formally joining Old Camp or New Camp.",
+},
+];
+
+export const routeColumns = [
+{ key: "Phase", label: "Phase" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const routeRows = [
+{
+Phase: "1. Reach the camp",
+"What To Do": "Use Baal Parvez to travel safely from the Old Camp area to Swamp Camp.",
+"Why It Matters":
+"This avoids dangerous solo travel and introduces you to the Brotherhood as a visitor.",
+},
+{
+Phase: "2. Learn the system",
+"What To Do": "Get Fortuno's daily swampweed ration, then speak with Joru for Guru advice.",
+"Why It Matters":
+"Joru helps explain how to impress the Gurus instead of wandering blindly.",
+},
+{
+Phase: "3. Get early approvals",
+"What To Do": "Use Lester for Baal Namib and Baal Kagan / Dreamcaller for Baal Tyon.",
+"Why It Matters":
+"These are fast approvals if you already know the correct setup.",
+},
+{
+Phase: "4. Build work-chain approvals",
+"What To Do": "Help Ghorim, force Harl back to work, collect the harvest from Balor and Viran, deliver it to Cor Kalom, then report to Baal Orun.",
+"Why It Matters":
+"This earns Baal Orun's approval and gives the Sleep scroll needed for Baal Cadar.",
+},
+{
+Phase: "5. Add a fourth approval",
+"What To Do": "Use Sleep for Baal Cadar or complete Baal Tondral's Dusty / Melvin route.",
+"Why It Matters":
+"You need four Guru approvals before Cor Kalom can accept you.",
+},
+{
+Phase: "6. Final check",
+"What To Do": "Return to Cor Kalom at Level 5 and choose the answer that supports faith in the Sleeper.",
+"Why It Matters":
+"The final dialogue can accept you, warn you, or turn Cor Kalom hostile depending on your answer.",
+},
+];
+
+export const guruColumns = [
+{ key: "Guru", label: "Guru" },
+{ key: "Approval Route", label: "Approval Route" },
+{ key: "Fast Advice", label: "Fast Advice" },
+];
+
+export const guruRows = [
+{
+Guru: "Baal Namib",
+"Approval Route":
+"Use Lester. Ask Lester to show you around, move him away from Namib, ask how to join his master, then return and play along with the conversion scene.",
+"Fast Advice":
+"Do not walk up and talk to Namib like a normal quest giver. Let Lester set up the scene.",
+},
+{
+Guru: "Baal Tyon",
+"Approval Route":
+"Use the Dreamcaller / special Brotherhood-help reward from Baal Kagan's earlier route, then bring it to Tyon in the temple area.",
+"Fast Advice":
+"Save before choosing Baal Kagan's reward. If you choose a different reward, this route may not be available cleanly.",
+},
+{
+Guru: "Baal Orun",
+"Approval Route":
+"Help Ghorim by forcing Harl back to work, then complete Swampweed Harvest by collecting from Balor and Viran, delivering to Cor Kalom, and reporting back to Orun.",
+"Fast Advice":
+"This is one of the most important chains because it also gives the Sleep scroll for Baal Cadar.",
+},
+{
+Guru: "Baal Tondral",
+"Approval Route":
+"Complete New Souls for the Brotherhood by connecting Melvin in Swamp Camp with Dusty in Old Camp, helping Dusty leave, and bringing him to the Brotherhood.",
+"Fast Advice":
+"Do not treat Dusty / Melvin as only optional flavor. This is a real Guru approval route.",
+},
+{
+Guru: "Baal Cadar",
+"Approval Route":
+"Use the Sleep scroll from Baal Orun's reward on a student during Cadar's lesson.",
+"Fast Advice":
+"Do not waste the Sleep scroll before using it for Cadar's approval.",
+},
+];
+
+export const visitorColumns = [
+{ key: "Visitor Benefit", label: "Visitor Benefit" },
+{ key: "Where / Who", label: "Where / Who" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const visitorRows = [
+{
+"Visitor Benefit": "Safe escort",
+"Where / Who": "Baal Parvez near the Old Camp southern exit / Fisk area.",
+"Why It Matters":
+"He can guide you to Swamp Camp safely and help with route XP.",
+},
+{
+"Visitor Benefit": "Daily swampweed ration",
+"Where / Who": "Fortuno, the quartermaster.",
+"Why It Matters":
+"Visitors can get a free daily ration, which also sets up Joru's advice route.",
+},
+{
+"Visitor Benefit": "Guru advice",
+"Where / Who": "Joru in the Swamp Camp.",
+"Why It Matters":
+"Give him Fortuno's swampweed ration and he explains how to approach the Gurus.",
+},
+{
+"Visitor Benefit": "Camp tour",
+"Where / Who": "Lester near the entrance / Baal Namib area.",
+"Why It Matters":
+"Lester helps you understand the camp layout and sets up Namib's approval route.",
+},
+{
+"Visitor Benefit": "Trading and supplies",
+"Where / Who": "Fortuno and other camp traders.",
+"Why It Matters":
+"Swamp Camp can be useful for supplies even if you eventually join another faction.",
+},
+{
+"Visitor Benefit": "Brotherhood preview",
+"Where / Who": "Templars, Novices, Gurus, and Cor Kalom's lab route.",
+"Why It Matters":
+"You can learn the faction style before locking into Novice / Templar identity.",
+},
+];
+
+export const joruColumns = [
+{ key: "Joru Step", label: "Joru Step" },
+{ key: "Action", label: "Action" },
+{ key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const joruRows = [
+{
+"Joru Step": "Get your ration",
+Action: "Talk to Fortuno and take the daily swampweed ration.",
+"Why It Helps":
+"This gives you the item Joru wants and teaches you that visitor benefits matter.",
+},
+{
+"Joru Step": "Find Joru",
+Action: "Look for Joru in the Swamp Camp's northwest / work area.",
+"Why It Helps":
+"He is one of the best early information NPCs for the Guru approval system.",
+},
+{
+"Joru Step": "Give him swampweed",
+Action: "Hand over the ration from Fortuno.",
+"Why It Helps":
+"Joru opens up advice about how to impress specific Gurus.",
+},
+{
+"Joru Step": "Ask everything",
+Action: "Fully exhaust his dialogue about Gurus and joining.",
+"Why It Helps":
+"This prevents you from treating Guru approvals like normal quest markers.",
+},
+];
+
+export const harvestColumns = [
+{ key: "Swampweed Harvest Step", label: "Swampweed Harvest Step" },
+{ key: "Action", label: "Action" },
+{ key: "Important Detail", label: "Important Detail" },
+];
+
+export const harvestRows = [
+{
+"Swampweed Harvest Step": "Start with Baal Orun",
+Action: "After helping Ghorim and Harl, speak with Baal Orun.",
+"Important Detail":
+"This unlocks the harvest delivery chain and eventually the Sleep scroll reward.",
+},
+{
+"Swampweed Harvest Step": "Collect from Balor",
+Action: "Go to the swamp work area and collect the harvest from Balor.",
+"Important Detail":
+"Do not return early after only one worker if the quest expects the full day's harvest.",
+},
+{
+"Swampweed Harvest Step": "Collect from Viran",
+Action: "Find Viran and collect the remaining harvest.",
+"Important Detail":
+"Balor and Viran together complete the collection side.",
+},
+{
+"Swampweed Harvest Step": "Deliver to Cor Kalom",
+Action: "Bring the collected harvest to Cor Kalom.",
+"Important Detail":
+"The delivery goes through Cor Kalom before Baal Orun's final report.",
+},
+{
+"Swampweed Harvest Step": "Report to Baal Orun",
+Action: "Return to Baal Orun after Cor Kalom receives the harvest.",
+"Important Detail":
+"This completes the chain, gives strong XP value, and rewards the Sleep scroll for Baal Cadar.",
+},
+];
+
+export const dustyColumns = [
+{ key: "New Souls Step", label: "New Souls Step" },
+{ key: "Action", label: "Action" },
+{ key: "Important Detail", label: "Important Detail" },
+];
+
+export const dustyRows = [
+{
+"New Souls Step": "Find Melvin",
+Action: "Speak with Melvin in Swamp Camp.",
+"Important Detail":
+"Melvin explains why someone from Old Camp might want Brotherhood life instead.",
+},
+{
+"New Souls Step": "Find Dusty",
+Action: "Return to Old Camp and talk to Dusty.",
+"Important Detail":
+"Dusty is the recruit Baal Tondral's route cares about.",
+},
+{
+"New Souls Step": "Handle the gate",
+Action: "Help Dusty leave Old Camp safely.",
+"Important Detail":
+"You may need to deal with or bribe the gate situation so he can leave.",
+},
+{
+"New Souls Step": "Escort Dusty",
+Action: "Bring Dusty safely to Swamp Camp.",
+"Important Detail":
+"Do not make him travel alone through dangerous roads.",
+},
+{
+"New Souls Step": "Report the conversion",
+Action: "Use Dusty's arrival to satisfy Baal Tondral's New Souls route.",
+"Important Detail":
+"This can count as one of your Guru approvals.",
+},
+];
+
+export const corKalomColumns = [
+{ key: "Final Answer", label: "Final Answer" },
+{ key: "Result", label: "Result" },
+{ key: "What To Do", label: "What To Do" },
+];
+
+export const corKalomRows = [
+{
+"Final Answer": "Option 1: Support faith in the Sleeper",
+Result: "Correct answer. Cor Kalom continues the joining process.",
+"What To Do":
+"Choose this if you want to become a Novice.",
+},
+{
+"Final Answer": "Option 2: Question / insult the belief",
+Result: "Bad answer. Cor Kalom can become hostile and block your joining route.",
+"What To Do":
+"Avoid this unless you intentionally want to break the route.",
+},
+{
+"Final Answer": "Option 3: Vague or uncertain answer",
+Result: "Cor Kalom gets annoyed but may give you one chance to answer again.",
+"What To Do":
+"Use the second chance to choose the Sleeper-supporting answer.",
+},
+];
+
+export const rewardColumns = [
+{ key: "Reward / Result", label: "Reward / Result" },
+{ key: "What You Get", label: "What You Get" },
+{ key: "Route Meaning", label: "Route Meaning" },
+];
+
+export const rewardRows = [
+{
+"Reward / Result": "Full joining route XP",
+"What You Get": "The full Swamp Camp admission route can total around 3850 XP.",
+"Route Meaning":
+"This makes the route competitive with other camp admission routes when you complete the major approval chains.",
+},
+{
+"Reward / Result": "Final acceptance",
+"What You Get": "Becoming a Novice can award 750 XP.",
+"Route Meaning":
+"This is the formal payoff after approvals, Level 5, and Cor Kalom's final check.",
+},
+{
+"Reward / Result": "Rank",
+"What You Get": "Novice status in the Brotherhood of the Sleeper.",
+"Route Meaning":
+"You formally join Swamp Camp and move out of outsider status.",
+},
+{
+"Reward / Result": "Armor",
+"What You Get": "Novice Armor / Novice robe-style faction gear.",
+"Route Meaning":
+"You start the Brotherhood gear route instead of Old Camp or New Camp armor progression.",
+},
+{
+"Reward / Result": "Magic",
+"What You Get": "Access to Brotherhood magic training routes through Baal Cadar and related teachers.",
+"Route Meaning":
+"You get strong faction flavor, but this is not the strongest pure mage route compared with Fire / Water Mage paths.",
+},
+{
+"Reward / Result": "Future identity",
+"What You Get": "Templar direction later.",
+"Route Meaning":
+"Swamp Camp is best if you want Brotherhood / Templar flavor more than the easiest first playthrough.",
+},
+{
+"Reward / Result": "Restrictions",
+"What You Get": "You cannot formally join Old Camp or New Camp afterward.",
+"Route Meaning":
+"Save before joining if you want to compare routes.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Talking directly to Gurus as if they are normal quest givers",
+"Why It Hurts":
+"Swamp Camp approval often works through indirect proof, staged scenes, or the right item.",
+"Better Move":
+"Use Joru, Lester, camp tasks, and staged actions to understand each Guru route.",
+},
+{
+Mistake: "Ignoring Joru",
+"Why It Hurts":
+"You miss one of the clearest in-game explanations of how to impress the Gurus.",
+"Better Move":
+"Get Fortuno's ration, give it to Joru, and exhaust his Guru advice.",
+},
+{
+Mistake: "Treating Dusty / Melvin as optional flavor only",
+"Why It Hurts":
+"Dusty's recruitment is tied to Baal Tondral's New Souls approval route.",
+"Better Move":
+"Use Melvin to understand Dusty's motivation, then bring Dusty to Swamp Camp if you need that approval.",
+},
+{
+Mistake: "Choosing the wrong Baal Kagan reward",
+"Why It Hurts":
+"If you need Baal Tyon's fast approval route, the Dreamcaller / Brotherhood-help reward matters.",
+"Better Move":
+"Save before picking Kagan's reward and choose the option that supports your Swamp Camp plan.",
+},
+{
+Mistake: "Returning to Orun before finishing the full harvest chain",
+"Why It Hurts":
+"Swampweed Harvest requires collecting from Balor and Viran, delivering to Cor Kalom, then reporting to Orun.",
+"Better Move":
+"Follow the full Balor / Viran → Cor Kalom → Baal Orun sequence.",
+},
+{
+Mistake: "Wasting the Sleep scroll",
+"Why It Hurts":
+"Baal Cadar's approval depends on using Sleep in the right lesson context.",
+"Better Move":
+"Save the Sleep scroll from Baal Orun and use it in front of Cadar.",
+},
+{
+Mistake: "Answering Cor Kalom carelessly",
+"Why It Hurts":
+"One final answer can offend him, turn him hostile, and block the join route.",
+"Better Move":
+"Save before the final conversation and choose the answer that supports faith in the Sleeper.",
+},
+{
+Mistake: "Thinking approvals are enough without Level 5",
+"Why It Hurts":
+"Cor Kalom can still reject you as not experienced enough.",
+"Better Move":
+"Reach Level 5 before the final joining conversation.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To join the **Swamp Camp** in **Gothic 1 Remake**, reach **Level 5**, earn **four Guru approvals**, then pass **Cor Kalom's** final check. The five key Guru routes are **Baal Namib**, **Baal Tyon**, **Baal Orun**, **Baal Tondral**, and **Baal Cadar**.
+
+Before the final Cor Kalom conversation, make a manual save. Choose the answer that supports faith in the **Sleeper**. Questioning or insulting the belief can turn Cor Kalom hostile and block the route. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Gothic 1 Remake. This Swamp Camp walkthrough covers Baal Parvez, Fortuno, Joru, Lester, Baal Namib, Baal Tyon, Baal Orun, Baal Tondral, Baal Cadar, Ghorim, Harl, Balor, Viran, Swampweed Harvest, Dusty and Melvin, New Souls for the Brotherhood, Cor Kalom's final dialogue, Level 5, Novice Armor, 3850 XP route value, and common Brotherhood mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-baal-parvez-swamp-escort.webp"
+    alt="Gothic 1 Remake Swamp Camp walkthrough using Baal Parvez escort"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use Baal Parvez for your first Swamp Camp trip. He makes the route safer and introduces the Brotherhood properly.
+  </figcaption>
+</figure>
+
+<h2 id="swamp-camp-walkthrough">
+  Gothic 1 Remake Swamp Camp walkthrough
+</h2>
+
+The Swamp Camp route is different from Old Camp and New Camp. You are not building Shadow support or proving yourself to Lares. You are trying to impress the Gurus of the Brotherhood without acting like a normal outsider.
+
+To join Swamp Camp, you need:
+
+<GuideTable
+caption="Swamp Camp joining requirements."
+columns={requirementColumns}
+rows={requirementRows}
+/>
+
+If you are still comparing camps, read the <Link href="/gothic-1-remake/best-faction">Best Faction Guide</Link> first. If you need a safe early route before choosing, use the <Link href="/gothic-1-remake/perfect-start">Perfect Start Route</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="route-overview">
+  Swamp Camp joining route overview
+</h2>
+
+Use this route as the main structure:
+
+<GuideTable
+caption="How to join the Swamp Camp."
+columns={routeColumns}
+rows={routeRows}
+/>
+
+The most important rule is this: **do not treat Gurus like normal quest NPCs**. Swamp Camp approval usually comes from showing faith, usefulness, or magic potential in front of the right people.
+
+<h2 id="baal-parvez-escort">
+  Step 1: Reach Swamp Camp with Baal Parvez
+</h2>
+
+Baal Parvez is near the southern exit of the Old Camp, close to the Fisk area. Ask him to guide you to Swamp Camp.
+
+This is the safest first route because he knows the road and can help you survive enemies along the way. You also get a better introduction to the Brotherhood than if you wander there alone.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-swamp-camp-entrance.webp"
+    alt="Gothic 1 Remake Swamp Camp entrance after Baal Parvez escort"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Templars let you enter as a visitor, but some areas and Gurus are still not open to outsiders.
+  </figcaption>
+</figure>
+
+<h2 id="visitor-benefits">
+  Visitor benefits before joining
+</h2>
+
+Swamp Camp is useful even before you become a Novice.
+
+<GuideTable
+caption="Useful Swamp Camp visitor benefits."
+columns={visitorColumns}
+rows={visitorRows}
+/>
+
+The biggest quick benefit is Fortuno's daily swampweed ration. It is also worth using Lester to learn the layout before trying to impress the Gurus.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-fortuno-daily-swampweed.webp"
+    alt="Gothic 1 Remake Fortuno daily swampweed ration in Swamp Camp"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fortuno gives visitors a daily swampweed ration. Pick it up before speaking with Joru.
+  </figcaption>
+</figure>
+
+<h2 id="joru-guru-advice">
+  Step 2: Talk to Joru for Guru advice
+</h2>
+
+Joru is one of the easiest NPCs to miss, but he is important because he explains how the Guru approval system works.
+
+After you get Fortuno's daily swampweed ration, find **Joru** in the Swamp Camp's northwest / work area. Give him the swampweed and talk through his advice.
+
+<GuideTable
+caption="How to use Joru before chasing Guru approvals."
+columns={joruColumns}
+rows={joruRows}
+/>
+
+Joru is not just flavor. He helps new players understand that the Gurus do not respond like normal quest givers. If you are lost after reaching Swamp Camp, talk to Joru before running around the temple.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-joru-guru-advice.webp"
+    alt="Gothic 1 Remake Joru giving Guru approval advice after Fortuno swampweed"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Give Joru Fortuno's swampweed ration and ask about the Gurus before chasing approvals blind.
+  </figcaption>
+</figure>
+
+<h2 id="guru-approvals">
+  Guru approvals: the five routes
+</h2>
+
+You need four Guru approvals before Cor Kalom accepts you. The five main approval routes are Namib, Tyon, Orun, Tondral, and Cadar.
+
+<GuideTable
+caption="Guru approval routes for joining Swamp Camp."
+columns={guruColumns}
+rows={guruRows}
+/>
+
+The clean route is usually to secure Namib, Tyon, Orun, and Cadar. If one route is inconvenient, Baal Tondral's Dusty / Melvin route gives another real approval path.
+
+<h2 id="baal-namib-lester">
+  Step 3: Get Baal Namib's approval with Lester
+</h2>
+
+When you first enter, you will meet Lester near Baal Namib. Do not walk up to Namib and start talking like a normal outsider.
+
+Instead:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Talk to Lester near the entrance / Namib area.</li>
+  <li>Ask him to show you around.</li>
+  <li>Move him away from Namib.</li>
+  <li>Ask how to join his master.</li>
+  <li>Play along with the conversion story.</li>
+  <li>Return with Lester and let the scene impress Baal Namib.</li>
+</ol>
+
+This is one of the fastest approvals if you handle it correctly.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-lester-baal-namib-approval.webp"
+    alt="Gothic 1 Remake Lester and Baal Namib approval route in Swamp Camp"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use Lester to stage the right moment for Baal Namib instead of speaking to the Guru directly.
+  </figcaption>
+</figure>
+
+<h2 id="baal-tyon-dreamcaller">
+  Step 4: Get Baal Tyon's approval
+</h2>
+
+Baal Tyon's fast route depends on the reward you chose from Baal Kagan's cigarette task near New Camp.
+
+If you picked the option that helps you join the Brotherhood, you receive the item needed for Tyon's approval. Bring it to Baal Tyon in the temple area and hand it over.
+
+This is why you should save before choosing Kagan's reward. If you were using Kagan for New Camp, you may have taken scrolls for Roscoe instead. If you are aiming for Swamp Camp, choose the Brotherhood-help reward.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-baal-tyon-dreamcaller.webp"
+    alt="Gothic 1 Remake Baal Tyon Dreamcaller approval route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Baal Tyon's fast approval depends on the Brotherhood-help reward from the Baal Kagan route.
+  </figcaption>
+</figure>
+
+<h2 id="cor-kalom-first-check">
+  Step 5: Talk to Cor Kalom early
+</h2>
+
+Before finishing the Orun / Cadar chain, go to Cor Kalom's laboratory and ask about joining.
+
+Lester can guide you to the lab if you ask him to take you there. Cor Kalom is up near the circular stair / laboratory area.
+
+He explains what kind of proof the Brotherhood expects. This also points you toward the work chain with Ghorim, Harl, and Baal Orun.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-cor-kalom-laboratory.webp"
+    alt="Gothic 1 Remake Cor Kalom laboratory in Swamp Camp"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cor Kalom is the final admission check, so learn his expectations before finishing the approval route.
+  </figcaption>
+</figure>
+
+<h2 id="ghorim-harl">
+  Step 6: Help Ghorim by forcing Harl back to work
+</h2>
+
+Go to the swampweed pressers and speak with **Ghorim**. He explains that **Harl** is slacking instead of taking his shift.
+
+Find Harl near the camp vendor / tree area and force him back to work. This may require fighting him.
+
+After Harl returns, go back to Ghorim and complete the step. This draws Baal Orun's attention and leads into Swampweed Harvest.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-ghorim-harl-swampweed-pressers.webp"
+    alt="Gothic 1 Remake Ghorim and Harl swampweed pressers quest"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ghorim's problem with Harl is the work chain that leads into Baal Orun's approval.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="swampweed-harvest">
+  Step 7: Complete Swampweed Harvest for Baal Orun
+</h2>
+
+After helping Ghorim, Baal Orun sends you into the swamp to collect the day's harvest.
+
+This is more specific than “go deeper into the swamp.” You need to collect from **Balor** and **Viran**, deliver the harvest to **Cor Kalom**, then return to **Baal Orun**.
+
+<GuideTable
+caption="How to complete Swampweed Harvest."
+columns={harvestColumns}
+rows={harvestRows}
+/>
+
+This chain can give strong XP value, around **1100 XP** across the harvest route, and it rewards the **Sleep** scroll you need for Baal Cadar.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-swampweed-harvest-balor.webp"
+    alt="Gothic 1 Remake collecting Swampweed Harvest from Balor and Viran"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Collect the day's harvest from Balor and Viran before delivering it through Cor Kalom and reporting to Baal Orun.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-baal-orun-harvest.webp"
+    alt="Gothic 1 Remake Baal Orun harvest task for Swamp Camp approval"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Baal Orun's route is valuable because it also gives the Sleep scroll needed for Baal Cadar.
+  </figcaption>
+</figure>
+
+<h2 id="baal-cadar-sleep">
+  Step 8: Use Sleep for Baal Cadar
+</h2>
+
+Take the Sleep scroll from Baal Orun's reward and go to Baal Cadar's lesson area.
+
+Do not waste the scroll elsewhere. Cast Sleep on one of the students during Cadar's teaching scene. This impresses him and earns his approval.
+
+Save before using the scroll if you are not sure you are in the right place.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-baal-cadar-sleep-scroll.webp"
+    alt="Gothic 1 Remake using Sleep scroll for Baal Cadar approval"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Save the Sleep scroll for Baal Cadar. Using it in the lesson area proves your magic potential.
+  </figcaption>
+</figure>
+
+<h2 id="baal-tondral-dusty-melvin">
+  Step 9: Baal Tondral, Dusty, and Melvin
+</h2>
+
+Dusty and Melvin are not just side flavor. They connect to **Baal Tondral's** approval route, often described as bringing new souls into the Brotherhood.
+
+<GuideTable
+caption="Baal Tondral and New Souls for the Brotherhood."
+columns={dustyColumns}
+rows={dustyRows}
+/>
+
+If you already met Melvin in Swamp Camp, return to Old Camp and talk to Dusty. Helping him escape and bringing him to the Brotherhood fits the faction's recruitment theme and gives you another approval path if you need it.
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-melvin-swamp-camp.webp"
+    alt="Gothic 1 Remake Melvin in Swamp Camp leading to Dusty recruitment"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Melvin explains why Dusty may be ready to leave Old Camp and join the Brotherhood.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/gothic-1-remake/gothic-1-remake-dusty-old-camp-recruitment.webp"
+    alt="Gothic 1 Remake Dusty recruitment from Old Camp to Swamp Camp"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dusty is the Old Camp recruit who can satisfy Baal Tondral's New Souls route.
+  </figcaption>
+</figure>
+
+
+<h2 id="cor-kalom-final">
+  Final step: Cor Kalom dialogue and joining
+</h2>
+
+Once you have four Guru approvals, return to Cor Kalom at **Level 5**.
+
+If he says you are not experienced enough, do not assume the approvals failed. Most of the time, you need more level progress. Reach Level 5, then return.
+
+Before the final conversation, save manually. Cor Kalom can ask a final faith question before accepting you.
+
+<GuideTable
+caption="Cor Kalom final dialogue choices."
+columns={corKalomColumns}
+rows={corKalomRows}
+/>
+
+The safe answer is the one that supports your faith in the Sleeper. Do not question or insult the belief system unless you intentionally want to break the route.
+
+<h2 id="rewards">
+  What do you get for joining Swamp Camp?
+</h2>
+
+Swamp Camp is strongest for players who want Brotherhood identity, Novice status, and Templar direction later.
+
+<GuideTable
+caption="Swamp Camp joining rewards and route meaning."
+columns={rewardColumns}
+rows={rewardRows}
+/>
+
+This is not the simplest first-playthrough faction. Old Camp is easier to understand, and New Camp gives a freer anti-Old-Camp route. Swamp Camp is for players who want the Brotherhood fantasy and do not mind a more unusual approval structure.
+
+<h2 id="mistakes">
+  Swamp Camp mistakes to avoid
+</h2>
+
+<GuideTable
+caption="Common Swamp Camp route mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+<h2 id="anti-mistake-checklist">
+  Swamp Camp anti-mistake checklist
+</h2>
+
+Before you ask Cor Kalom to accept you, check the things players most often miss:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Do not walk to Swamp Camp alone if Baal Parvez can escort you.</li>
+  <li>Take Fortuno's daily swampweed ration before looking for Joru.</li>
+  <li>Give Joru the ration and ask about the Gurus.</li>
+  <li>Do not speak to Gurus like normal quest NPCs; use the correct setup for each one.</li>
+  <li>Save before choosing Baal Kagan's reward if you need Baal Tyon approval.</li>
+  <li>For Orun, collect from Balor and Viran, deliver to Cor Kalom, then report back to Baal Orun.</li>
+  <li>Do not waste the Sleep scroll before using it for Baal Cadar.</li>
+  <li>Remember that Dusty / Melvin belongs to Baal Tondral's approval route.</li>
+  <li>Reach Level 5 before the final Cor Kalom check.</li>
+  <li>Save before Cor Kalom's final dialogue and choose the Sleeper-supporting answer.</li>
+</ol>
+
+<h2 id="faq">
+  Gothic 1 Remake Swamp Camp FAQ
+</h2>
+
+### How do I join Swamp Camp in Gothic 1 Remake?
+
+Reach Swamp Camp safely, earn four Guru approvals, reach Level 5, then pass Cor Kalom's final joining check and become a Novice.
+
+### How many Guru approvals do I need?
+
+You need four Guru approvals. The main Guru routes are Baal Namib, Baal Tyon, Baal Orun, Baal Tondral, and Baal Cadar.
+
+### What level do I need to join Swamp Camp?
+
+You need Level 5 before the final Cor Kalom joining step.
+
+### Why does Cor Kalom say I am not experienced enough?
+
+Usually because you are not Level 5 yet. If you already have the approvals, gain more XP and return.
+
+### What Cor Kalom answer should I choose?
+
+Choose the answer that supports faith in the Sleeper. Questioning or insulting the belief can turn Cor Kalom hostile and block the route. A vague answer may give you one more chance.
+
+### Who is Joru and why should I talk to him?
+
+Joru is an important advice NPC in Swamp Camp. Give him Fortuno's daily swampweed ration and he explains how to impress the Gurus.
+
+### How do I get Baal Namib's approval?
+
+Use Lester. Move him away from Namib, ask how to join his master, then return and play along with the conversion scene.
+
+### How do I get Baal Tyon's approval?
+
+Use the Dreamcaller / Brotherhood-help reward from Baal Kagan's route, then bring it to Baal Tyon.
+
+### How do I complete Swampweed Harvest?
+
+After helping Ghorim and Harl, collect the harvest from Balor and Viran, deliver it to Cor Kalom, then report back to Baal Orun.
+
+### How do I get Baal Cadar's approval?
+
+Complete Baal Orun's route first, keep the Sleep scroll reward, then use Sleep on a student during Cadar's lesson.
+
+### Is Dusty required for Swamp Camp?
+
+Dusty is not the only possible approval path, but he is part of Baal Tondral's New Souls for the Brotherhood route and can count as a real Guru approval.
+
+### What rewards do I get for joining Swamp Camp?
+
+The full admission route can total around 3850 XP. Final acceptance as a Novice can give 750 XP and Novice Armor, along with Brotherhood faction access.
+
+### Is Swamp Camp good for magic?
+
+Swamp Camp has strong Brotherhood magic flavor and Novice / Templar identity, but it is not the strongest pure mage route compared with Fire Mage or Water Mage direction.
+

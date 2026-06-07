@@ -12,7 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
-
+// ===== Gothic 1 Remake =====
+{
+  href: "/gothic-1-remake/new-camp-walkthrough",
+  game: "Gothic 1 Remake",
+  title: "New Camp Walkthrough",
+  description:
+  "Join Lares with Mordrag’s Ring, Diego’s List, Herb Merchant, The Raid, Rice Lord, bridge toll, Level 5, and 3 major Lares tasks.",
+  tagClass: "text-stone-500",
+  hoverBorderClass: "hover:border-stone-300",
+  hoverTitleClass: "group-hover:text-stone-700",
+  },
+  
+  // ===== Gothic 1 Remake =====
+  {
+  href: "/gothic-1-remake/swamp-camp-walkthrough",
+  game: "Gothic 1 Remake",
+  title: "Swamp Camp Walkthrough",
+  description:
+  "Join the Brotherhood with Baal Parvez, Joru, four Guru approvals, Dusty, Swampweed Harvest, Sleep scroll, Cor Kalom, and Novice rewards.",
+  tagClass: "text-stone-500",
+  hoverBorderClass: "hover:border-stone-300",
+  hoverTitleClass: "group-hover:text-stone-700",
+  },
+  
+  // ===== Gothic 1 Remake =====
+  {
+  href: "/gothic-1-remake/skills-trainers",
+  game: "Gothic 1 Remake",
+  title: "Skills & Trainers Guide",
+  description:
+  "Plan first LP with no respec, trainer costs, Diego, one-handed training, Fingers, Huno, Drax, Cavalorn, Theron, and magic routes.",
+  tagClass: "text-stone-500",
+  hoverBorderClass: "hover:border-stone-300",
+  hoverTitleClass: "group-hover:text-stone-700",
+  },
+  
+  // ===== Gothic 1 Remake =====
+  {
+  href: "/gothic-1-remake/lockpicking-guide",
+  game: "Gothic 1 Remake",
+  title: "Lockpicking Guide",
+  description:
+  "Solve the lockpicking slider puzzle, avoid broken picks, find Fingers, learn Trained and Master costs, buy lockpicks, and handle owned chests.",
+  tagClass: "text-stone-500",
+  hoverBorderClass: "hover:border-stone-300",
+  hoverTitleClass: "group-hover:text-stone-700",
+  },
+  
 // ===== Gothic 1 Remake =====
 {
   href: "/gothic-1-remake",
