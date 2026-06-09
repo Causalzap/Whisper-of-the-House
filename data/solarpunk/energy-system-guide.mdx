@@ -1,0 +1,838 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const problemColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const problemRows = [
+{
+Problem: "Solar panels stop at night",
+"Likely Cause": "Solar power only works when there is enough sunlight.",
+Fix: "Sleep through the night early on. Later, add batteries so stored power can cover nighttime demand.",
+},
+{
+Problem: "Power drops during rain or cloudy weather",
+"Likely Cause": "Solar generation becomes unreliable when the weather is bad.",
+Fix: "Use batteries, switches, and later windmills so your base is not fully dependent on solar.",
+},
+{
+Problem: "Drill will not run",
+"Likely Cause": "A drill is a heavy load. In the current build covered here, it uses 120 power.",
+Fix: "Check the Network Display, reduce other loads, and build enough generation before relying on the drill.",
+},
+{
+Problem: "Sprinklers drain your batteries",
+"Likely Cause": "Each sprinkler uses power, and multiple sprinklers can keep running even when rain already waters crops.",
+Fix: "Use compact layouts and put sprinklers on a switch once your farm grows.",
+},
+{
+Problem: "Your grid looks fine but one machine still shuts off",
+"Likely Cause": "Your power network may be split into separate cable groups.",
+Fix: "Keep one main grid early. Split remote outposts only after you understand each network's generation and load.",
+},
+];
+
+export const unlockColumns = [
+{ key: "Unlock", label: "Unlock" },
+{ key: "Why It Matters", label: "Why It Matters" },
+{ key: "Priority", label: "Priority" },
+];
+
+export const unlockRows = [
+{
+Unlock: "Energy Workbench",
+"Why It Matters":
+"Opens the real power system: solar panels, cables, network display, drill, weather station, and switches.",
+Priority: "Mandatory",
+},
+{
+Unlock: "Solar Panels",
+"Why It Matters":
+"Let you stop feeding wood into early generators during the day.",
+Priority: "Very high",
+},
+{
+Unlock: "Network Display",
+"Why It Matters":
+"Shows how much energy your grid produces, consumes, and stores.",
+Priority: "Very high",
+},
+{
+Unlock: "Drill",
+"Why It Matters":
+"Starts automated ore production, but it has a heavy power cost.",
+Priority: "High",
+},
+{
+Unlock: "Battery",
+"Why It Matters":
+"Stores extra power and releases it when solar generation drops.",
+Priority: "High after Tier 2",
+},
+{
+Unlock: "Windmill",
+"Why It Matters":
+"Adds a non-solar energy source for a more stable mid-to-late-game grid.",
+Priority: "High after Tier 3",
+},
+];
+
+export const powerNumberColumns = [
+{ key: "Device", label: "Device" },
+{ key: "Power Value", label: "Power Value" },
+{ key: "What It Means", label: "What It Means" },
+];
+
+export const powerNumberRows = [
+{
+Device: "Solar Panel",
+"Power Value": "+10 power each",
+"What It Means":
+"A small solar field is fine for light loads, but heavy machines need many panels or stored power.",
+},
+{
+Device: "Battery",
+"Power Value": "95 storage each",
+"What It Means":
+"Two batteries give 190 storage, which helps cover night, rain, and short production dips.",
+},
+{
+Device: "Drill",
+"Power Value": "-120 power",
+"What It Means":
+"A drill is one of your first heavy power checks. Do not add it to a weak grid casually.",
+},
+{
+Device: "Sprinkler",
+"Power Value": "-40 power each",
+"What It Means":
+"Three sprinklers cost 120 power, the same load as one drill.",
+},
+{
+Device: "Advanced Dock",
+"Power Value": "-100 power",
+"What It Means":
+"Useful for flying, but it can overload a base that is already powering drills and sprinklers.",
+},
+];
+
+export const setupColumns = [
+{ key: "Stage", label: "Stage" },
+{ key: "Recommended Setup", label: "Recommended Setup" },
+{ key: "What To Avoid", label: "What To Avoid" },
+];
+
+export const setupRows = [
+{
+Stage: "First power setup",
+"Recommended Setup":
+"Use the generator only as a temporary bridge while you unlock the Energy Workbench and solar panels.",
+"What To Avoid":
+"Do not burn all your wood forever. Wood is needed for building, crafting, fuel, and repairs.",
+},
+{
+Stage: "Early solar setup",
+"Recommended Setup":
+"Build solar panels, cables, and a Network Display before adding heavy machines.",
+"What To Avoid":
+"Do not assume one panel can run everything. Check your actual generation and load.",
+},
+{
+Stage: "First drill setup",
+"Recommended Setup":
+"Treat the drill as a 120-power machine. Build enough solar, reduce other loads, or wait for batteries.",
+"What To Avoid":
+"Do not connect a drill to the same weak grid as multiple sprinklers and the Advanced Dock.",
+},
+{
+Stage: "First farm automation",
+"Recommended Setup":
+"Use one compact sprinkler block first, then add switches before expanding to multiple sprinklers.",
+"What To Avoid":
+"Do not let sprinklers drain batteries during rain if your crops are already watered.",
+},
+{
+Stage: "Mid-game battery setup",
+"Recommended Setup":
+"Add batteries after Tier 2 so your grid can survive night, rain, and short production dips.",
+"What To Avoid":
+"Do not keep adding machines before you have storage for weak solar periods.",
+},
+{
+Stage: "Remote mining outpost",
+"Recommended Setup":
+"Place a drill, local generation, and a battery on an ore island, then visit to collect ore until drones are ready.",
+"What To Avoid":
+"Do not keep flying out manually for every ore run once drills become available.",
+},
+];
+
+export const placementColumns = [
+{ key: "Power Source", label: "Power Source" },
+{ key: "Placement Rule", label: "Placement Rule" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const placementRows = [
+{
+"Power Source": "Solar Panels",
+"Placement Rule":
+"Place them in an open area with clear sky. Avoid roofs, tall walls, and tight shadowed corners.",
+"Why It Matters":
+"Blocked or poorly placed panels can make your solar setup feel weaker than expected.",
+},
+{
+"Power Source": "Solar Panel Rows",
+"Placement Rule":
+"Stagger panels instead of packing them into one dense block.",
+"Why It Matters":
+"A staggered layout reduces awkward spacing and helps keep panels exposed.",
+},
+{
+"Power Source": "Windmills",
+"Placement Rule":
+"Leave open space around each windmill. A rough 5-10 meter gap is a safer planning rule.",
+"Why It Matters":
+"Wind power works best when turbines are not crowded into blocked base corners.",
+},
+{
+"Power Source": "Energy Area",
+"Placement Rule":
+"Keep your main energy zone open and easy to expand.",
+"Why It Matters":
+"You will likely add more solar panels, batteries, windmills, and switches later.",
+},
+];
+
+export const drillColumns = [
+{ key: "Drill Setup", label: "Drill Setup" },
+{ key: "Power Math", label: "Power Math" },
+{ key: "Advice", label: "Advice" },
+];
+
+export const drillRows = [
+{
+"Drill Setup": "Drill only",
+"Power Math": "Drill = 120 power",
+Advice:
+"If one solar panel gives 10 power in your build, a drill alone equals 12 solar panels before weather and time-of-day losses.",
+},
+{
+"Drill Setup": "Drill + 1 sprinkler",
+"Power Math": "120 + 40 = 160 power",
+Advice:
+"Do not put early mining and farming automation on the same weak grid unless you have enough generation.",
+},
+{
+"Drill Setup": "Drill + 3 sprinklers",
+"Power Math": "120 + 120 = 240 power",
+Advice:
+"This is already a serious base load. Add batteries and switches before expanding further.",
+},
+{
+"Drill Setup": "Drill + Advanced Dock",
+"Power Math": "120 + 100 = 220 power",
+Advice:
+"The Advanced Dock is convenient, but it can compete directly with mining power.",
+},
+];
+
+export const batteryColumns = [
+{ key: "Battery Count", label: "Battery Count" },
+{ key: "Storage", label: "Storage" },
+{ key: "Best Use", label: "Best Use" },
+];
+
+export const batteryRows = [
+{
+"Battery Count": "1 Battery",
+Storage: "95",
+"Best Use":
+"A first buffer for one small solar grid, light automation, or short nighttime dips.",
+},
+{
+"Battery Count": "2 Batteries",
+Storage: "190",
+"Best Use":
+"A practical early Tier 2 target once you run drills, sprinklers, or an Advanced Dock.",
+},
+{
+"Battery Count": "4 Batteries",
+Storage: "380",
+"Best Use":
+"A stronger mid-game buffer for mixed loads and bad weather.",
+},
+];
+
+export const priorityColumns = [
+{ key: "Choice", label: "Choice" },
+{ key: "Better Early Pick", label: "Better Early Pick" },
+{ key: "Why", label: "Why" },
+];
+
+export const priorityRows = [
+{
+Choice: "Solar Panel vs Weather Station",
+"Better Early Pick": "Solar Panel",
+Why: "Power progression helps everything. Weather information is useful, but solar solves the immediate fuel problem.",
+},
+{
+Choice: "Battery vs Animal Transport",
+"Better Early Pick": "Battery",
+Why: "Animal Transport is useful later, but Battery fixes night, rain, and overloaded solar setups.",
+},
+{
+Choice: "More Sprinklers vs Drill",
+"Better Early Pick": "Drill if copper is slowing you down",
+Why: "Automated ore income unlocks more panels, cables, batteries, and upgrades faster.",
+},
+{
+Choice: "Windmill vs Lights Pack",
+"Better Early Pick": "Windmill",
+Why: "Lights are nice, but wind power directly helps a strained base.",
+},
+];
+
+export const switchColumns = [
+{ key: "Power Problem", label: "Power Problem" },
+{ key: "Switch Fix", label: "Switch Fix" },
+{ key: "Why It Works", label: "Why It Works" },
+];
+
+export const switchRows = [
+{
+"Power Problem": "Sprinklers keep draining batteries",
+"Switch Fix": "Put sprinklers on a switch-controlled line.",
+"Why It Works":
+"You can turn them off during rain or when you need stored power for other machines.",
+},
+{
+"Power Problem": "Drill competes with base machines",
+"Switch Fix": "Give the drill its own controllable branch.",
+"Why It Works":
+"You can pause mining when the base needs power for other tasks.",
+},
+{
+"Power Problem": "Advanced Dock overloads the grid",
+"Switch Fix": "Keep optional travel devices separate from essential farm / mining loads.",
+"Why It Works":
+"The dock is useful, but it does not need to starve your farm or drill.",
+},
+{
+"Power Problem": "Remote outpost behaves unpredictably",
+"Switch Fix": "Keep the outpost on its own local grid.",
+"Why It Works":
+"A separate drill outpost is easier to diagnose than one giant cable mess.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+If your **Solarpunk** energy system is not working, check your **Network Display** first. In the current build covered here, a **Solar Panel gives 10 power**, a **Battery stores 95**, a **Drill uses 120**, a **Sprinkler uses 40**, and the **Advanced Dock uses 100**. That means one drill is a heavy early load, and three sprinklers can drain as much power as a drill.
+
+Your first stable route should be: **Energy Workbench → Solar Panels → Cables → Network Display → Drill → Battery**. Keep solar panels in open sky, use batteries for night and rain, put sprinklers on a switch, and prioritize Windmill after Tier 3 if your base still loses power. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Solarpunk. This guide covers solar panels, generators, batteries, cables, network display, drill power, sprinkler power, Advanced Dock load, solar placement, windmill spacing, switches, remote mining outposts, water power, and common power mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-energy-workbench-unlocks.webp"
+    alt="Solarpunk Energy Workbench showing solar panels cables network display and drill unlocks"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Energy Workbench is where Solarpunk turns from manual survival into real power management.
+  </figcaption>
+</figure>
+
+<h2 id="solarpunk-energy-system-guide">
+  Solarpunk energy system guide
+</h2>
+
+The energy system in **Solarpunk** is easy to underestimate. At first, power looks simple: build a generator, add fuel, connect a machine, and move on. Then you unlock solar panels, drills, sprinklers, batteries, switches, windmills, and powered docks, and your base starts shutting things off for reasons that are not obvious.
+
+The most common mistake is treating power as a yes-or-no system. It is not. Your grid has four separate questions:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>How much power are you generating?</li>
+  <li>How much power are your machines consuming?</li>
+  <li>How much energy can your batteries store?</li>
+  <li>Are all powered devices connected to the right network?</li>
+</ol>
+
+That is why the **Network Display** matters so much. Without it, you are guessing. With it, you can see whether the problem is low generation, too much consumption, no stored power, or a machine sitting on the wrong cable network.
+
+If you are still in the first hour and have not unlocked the Energy Workbench yet, read the <Link href="/solarpunk/beginners-guide">Solarpunk Beginner Guide</Link> first. If you are still trying to reach wheat, quartz, or cobalt, use the <Link href="/solarpunk/airship-guide">Airship Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="power-values">
+  Solarpunk power values you should know
+</h2>
+
+Use these numbers when planning your first real grid.
+
+<GuideTable
+caption="Solarpunk power values for common early and mid-game devices."
+columns={powerNumberColumns}
+rows={powerNumberRows}
+/>
+
+The important takeaway is simple: **a drill is not a small device**. If your solar panel gives 10 power, a 120-power drill needs the same output as 12 panels before you even count weather, night, sprinklers, or the Advanced Dock.
+
+That does not mean you must build 12 panels immediately. It means you should not connect a drill to a tiny starter grid and expect it to run all day.
+
+<h2 id="what-to-build-first">
+  What to build first for power
+</h2>
+
+Your early energy route should not start with a huge solar field. It should start with the unlocks that let you understand the grid.
+
+<GuideTable
+caption="Best early Solarpunk energy unlock order."
+columns={unlockColumns}
+rows={unlockRows}
+/>
+
+The important part is this: **do not skip the Network Display**. It is tempting to build another solar panel or another drill first, but the display is what tells you what your setup is actually doing.
+
+A clean early route looks like this:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Trade for the Energy Workbench blueprint.</li>
+  <li>Build the Energy Workbench at your base.</li>
+  <li>Research or craft solar panels.</li>
+  <li>Make enough cables to connect your first powered area.</li>
+  <li>Add a Network Display before expanding the grid.</li>
+  <li>Only then add heavier machines like drills and sprinklers.</li>
+</ol>
+
+<h2 id="why-power-stops">
+  Why your power stops working
+</h2>
+
+Most power problems in Solarpunk are not bugs. They usually come from night, rain, overloaded machines, bad placement, or messy cable routing.
+
+<GuideTable
+caption="Common Solarpunk power problems and fixes."
+columns={problemColumns}
+rows={problemRows}
+/>
+
+If your setup works during the day and fails at night, your solar panels are doing exactly what solar panels do. Early on, sleeping is the easiest fix because it skips you back to daytime. Later, that is what batteries are for.
+
+If your setup works in clear weather but drops during rain, do not only add more solar panels. You need storage, switches, and later another generation type such as wind power.
+
+<h2 id="use-network-display">
+  Build the Network Display early
+</h2>
+
+The **Network Display** is the difference between guessing and fixing the real issue.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-network-display-power-balance.webp"
+    alt="Solarpunk Network Display showing energy generation storage and power consumption"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the Network Display before expanding. If you do not know your generation, storage, and load, every power fix is guesswork.
+  </figcaption>
+</figure>
+
+Use it whenever you add:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a new drill,</li>
+  <li>a new sprinkler group,</li>
+  <li>a powered dock,</li>
+  <li>a battery bank,</li>
+  <li>a second solar field,</li>
+  <li>or a remote mining outpost.</li>
+</ul>
+
+One good habit is to keep your main base on **one cable network** at first. Separate networks sound organized, but they make troubleshooting harder. Split networks later when you know exactly what each branch needs.
+
+<h2 id="early-best-energy-setup">
+  Best early energy setup
+</h2>
+
+Your first serious setup should be small and readable. Do not try to power every machine at once.
+
+<GuideTable
+caption="Recommended Solarpunk energy setups by progression stage."
+columns={setupColumns}
+rows={setupRows}
+/>
+
+For the first real base grid, aim for:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>one central cable line,</li>
+  <li>solar panels in an open area,</li>
+  <li>a Network Display near your crafting area,</li>
+  <li>only one or two important powered machines,</li>
+  <li>and enough room to add batteries later.</li>
+</ul>
+
+Do not put your first solar setup in a cramped corner. You will expand this grid later, so leave space for more panels, batteries, windmills, and switches.
+
+<h2 id="solar-panel-placement">
+  Solar panel and windmill placement rules
+</h2>
+
+Bad placement can make a power setup feel weaker than it should.
+
+<GuideTable
+caption="Solarpunk solar panel and windmill placement rules."
+columns={placementColumns}
+rows={placementRows}
+/>
+
+For solar panels, the safe rule is **open sky first**. Do not build them under roofs, behind tall walls, or in tight corners where your base structures can block them. Staggering panels also makes future expansion cleaner.
+
+For windmills, plan a separate open area instead of jamming turbines directly into your crowded crafting zone. A rough 5-10 meter spacing rule gives you room to expand and keeps the energy area readable.
+
+<h2 id="solar-panel-vs-generator">
+  Solar panel vs generator
+</h2>
+
+Generators are useful early, but they are not where you want to stay. They need fuel, and fuel costs resources you could use elsewhere.
+
+Solar panels are cleaner and easier during the day, but they have two big weaknesses:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>They stop at night.</li>
+  <li>They become unreliable during poor weather.</li>
+</ol>
+
+So the real answer is not “generator or solar forever.” The answer is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use generators as a temporary bridge.</li>
+  <li>Move to solar panels as soon as the Energy Workbench allows it.</li>
+  <li>Add batteries once your base depends on powered machines.</li>
+  <li>Add windmills later so bad solar conditions do not cripple the whole base.</li>
+</ul>
+
+If you still need fuel, wax briquettes are much better than dumping wood into everything. Wood disappears fast once you are building, crafting, expanding, and running furnaces.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="drill-power">
+  How many solar panels do you need for a drill?
+</h2>
+
+The **Drill** is one of the first machines that makes players realize Solarpunk power has real load management.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-drill-120-power-warning.webp"
+    alt="Solarpunk drill setup showing a 120 power requirement"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The drill uses 120 power, so it can overwhelm a small starter solar grid.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Solarpunk drill power math."
+columns={drillColumns}
+rows={drillRows}
+/>
+
+If your current build shows **10 power per solar panel**, then a drill by itself equals **12 solar panels** at full output. That is the clean math. In real play, you should also account for weather, night, batteries, and other devices on the same grid.
+
+For your first drill:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Build the Network Display first.</li>
+  <li>Check your actual generation and load.</li>
+  <li>Turn off sprinklers or optional machines if the drill is your priority.</li>
+  <li>Add a battery once Tier 2 is available.</li>
+  <li>Move to a remote mining outpost once manual ore trips become annoying.</li>
+</ol>
+
+If copper is your bottleneck, automating a copper island is usually more valuable than making your home farm prettier.
+
+<h2 id="battery-setup">
+  When to build batteries
+</h2>
+
+Build batteries as soon as your base has enough powered devices that night or rain can interrupt real progress.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-battery-tier-2-unlock.webp"
+    alt="Solarpunk Tier 2 research showing Battery Energy Furnace Advanced Dock and logic unlocks"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Battery is one of the most important Tier 2 choices because it turns extra daytime power into backup power.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Solarpunk battery storage values."
+columns={batteryColumns}
+rows={batteryRows}
+/>
+
+The best moment to build your first battery is when you already have at least one of these:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a drill you want to keep running,</li>
+  <li>multiple sprinklers,</li>
+  <li>an Advanced Dock,</li>
+  <li>a growing solar field,</li>
+  <li>or a farm that depends on automation instead of manual watering.</li>
+</ul>
+
+Do not wait until your base is huge. If you wait too long, you end up chasing every outage with another solar panel instead of solving the storage problem.
+
+<h2 id="battery-priority">
+  Battery vs Animal Transport vs Advanced Dock
+</h2>
+
+Once Tier 2 opens, the game gives you several exciting choices. This is where it is easy to make the wrong call.
+
+<GuideTable
+caption="Solarpunk energy unlock priorities."
+columns={priorityColumns}
+rows={priorityRows}
+/>
+
+Animal Transport is useful. Advanced Dock is useful. Energy Furnace is convenient. But if your base already has solar panels, drills, and sprinklers, **Battery** should usually come first.
+
+<h2 id="sprinklers-power">
+  Sprinklers and farm power
+</h2>
+
+Sprinklers are great because they remove a boring daily job. They are also dangerous because they make your farm part of your power grid.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-sprinkler-eight-plots.webp"
+    alt="Solarpunk sprinkler layout watering eight nearby farm plots"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A compact sprinkler layout saves time, but every sprinkler adds another 40 power load.
+  </figcaption>
+</figure>
+
+A safe farming setup is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>keep farm plots close to the sprinkler,</li>
+  <li>avoid spreading sprinklers across a huge messy field,</li>
+  <li>check the Network Display after each new sprinkler,</li>
+  <li>use switches when sprinklers are not needed,</li>
+  <li>and add batteries before the farm depends on automation full time.</li>
+</ul>
+
+If it rains, turn sprinklers off when your grid is busy. Rain helps with watering, but weak solar and active sprinklers can drain your stored power at the same time.
+
+<h2 id="switches-logic">
+  How to stop sprinklers from wasting power
+</h2>
+
+Switches are one of the easiest ways to make a weak grid feel smarter. A switch lets you shut off one branch of your grid instead of letting every machine fight for the same power.
+
+<GuideTable
+caption="How to control power with switches in Solarpunk."
+columns={switchColumns}
+rows={switchRows}
+/>
+
+Start simple:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Put sprinklers on their own cable branch.</li>
+  <li>Add a switch before that branch.</li>
+  <li>Turn the sprinkler line off during rain or low-power periods.</li>
+  <li>Keep your drill on a separate controllable line if it competes with the farm.</li>
+  <li>Use sensors and logic later when you want automation instead of manual switching.</li>
+</ol>
+
+This is the part many players miss. More power is good, but **controlling demand** is just as important.
+
+<h2 id="remote-mining-outpost">
+  How to set up a remote mining outpost
+</h2>
+
+Once you find a good ore island, do not keep flying back just to hand-mine the same resource. That is exactly what drills are for.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-copper-island-drill-outpost.webp"
+    alt="Solarpunk copper island mining outpost with solar panels and a drill"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A simple outpost with a drill and local power turns copper runs into quick pickup trips.
+  </figcaption>
+</figure>
+
+For a basic remote mining outpost, bring:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>a drill,</li>
+  <li>enough local power generation for the drill,</li>
+  <li>cables,</li>
+  <li>a battery if you have unlocked it,</li>
+  <li>repair supplies for your airship,</li>
+  <li>food and water for the trip.</li>
+</ol>
+
+Keep the outpost on its own local network. It is easier to diagnose one drill, one battery bank, and one small power setup than a giant cable chain running back to your main base.
+
+At first, you can visit the island and collect ore manually from the drill. Later, transport drones can turn this into a real automated supply chain.
+
+<h2 id="windmill-priority">
+  When to build windmills
+</h2>
+
+Windmills are not your first energy fix. They are your answer when your base has grown past simple solar.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-windmill-tier-3-unlock.webp"
+    alt="Solarpunk Tier 3 research showing Windmill drones and post box unlocks"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once Tier 3 opens, Windmill is one of the strongest unlocks if your base keeps losing power.
+  </figcaption>
+</figure>
+
+Prioritize Windmill when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>your farm uses multiple sprinklers,</li>
+  <li>you have batteries but they keep draining,</li>
+  <li>your drills compete with base machines,</li>
+  <li>your Advanced Dock is part of the grid,</li>
+  <li>and rain or night still interrupts your routine.</li>
+</ul>
+
+Lights, decorations, and comfort unlocks are nice, but power stability affects everything. If your base is still unstable, Windmill comes before cosmetic upgrades.
+
+<h2 id="recommended-power-route">
+  Recommended power route
+</h2>
+
+If you want a clean route without overthinking it, follow this:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Use a generator only long enough to reach Energy Workbench progression.</li>
+  <li>Unlock Energy Workbench through the Traderbot route.</li>
+  <li>Build solar panels, cables, and a Network Display.</li>
+  <li>Place solar panels in an open area with clear sky.</li>
+  <li>Keep one main cable network at your base early.</li>
+  <li>Add one drill only after you understand its 120-power load.</li>
+  <li>Use solar to replace wood fuel during the day.</li>
+  <li>Unlock Tier 2 and build Battery early.</li>
+  <li>Put sprinklers on a controlled line once your farm expands.</li>
+  <li>Set up a mining outpost with a drill, local power, and a battery.</li>
+  <li>After Tier 3, prioritize Windmill if your grid still feels strained.</li>
+</ol>
+
+If you follow that order, Solarpunk's energy system becomes much less frustrating. You will still need to expand, but you will know why each machine stops and what to build next.
+
+
+<h2 id="faq">
+  Solarpunk energy system FAQ
+</h2>
+
+### Why is my Solarpunk power not working?
+
+Most of the time, your grid is either out of sunlight, overloaded, missing stored power, or split into separate cable networks. Build a Network Display, check generation and consumption, then turn off non-essential machines.
+
+### Why do solar panels stop at night?
+
+Solar panels need sunlight. At night, they stop producing energy. Sleep through the night early on, then build batteries later so your machines can keep running after sunset.
+
+### Why are my solar panels not producing enough?
+
+Check placement first. Solar panels should be in open sky, away from roofs, tall walls, and cramped blocked corners. Staggering panels also makes expansion cleaner.
+
+### How much power does a solar panel make?
+
+In the current build covered here, one solar panel gives 10 power. Check your Network Display after placing panels because weather and time of day still matter.
+
+### How much power does a drill need?
+
+A drill uses 120 power. If one solar panel gives 10 power, a drill equals 12 panels before you count weather, night, batteries, or other machines.
+
+### How many solar panels do I need for a drill?
+
+For clean math, a 120-power drill needs the same output as 12 solar panels if each panel gives 10 power. In practice, use the Network Display, add batteries, and avoid running sprinklers on the same weak grid.
+
+### How much power does a sprinkler use?
+
+A sprinkler uses 40 power. Three sprinklers use 120 power, the same load as one drill.
+
+### How much storage does a battery have?
+
+One battery stores 95 energy. Two batteries store 190, and four batteries store 380.
+
+### Should I build Battery or Animal Transport first?
+
+If your machines already shut off, build Battery first. Animal Transport is useful, but Battery solves the power instability that affects drills, sprinklers, docks, and other powered systems.
+
+### What does the Network Display do?
+
+The Network Display helps you see how much power your grid is generating, consuming, and storing. Build it early so you stop guessing why machines turn off.
+
+### How do I stop sprinklers from wasting power?
+
+Put sprinklers on their own cable branch with a switch. Turn them off during rain or when your battery storage is low.
+
+### How do I control which machines get power?
+
+Use switches to separate branches of your grid. Put sprinklers, drills, or optional devices like the Advanced Dock on controllable lines so they do not all compete for power at once.
+
+### Is there water power in Solarpunk?
+
+Yes, Solarpunk supports water power as part of its renewable energy systems. Do not delay your early base waiting for it, though. Solar panels, batteries, switches, and later windmills are the practical route for most early and mid-game power problems.
+
+### How do I set up a mining outpost in Solarpunk?
+
+Bring a drill, local generation, cables, a battery if unlocked, food, water, and repair supplies. Keep the outpost on its own local grid so the drill is easier to power and troubleshoot.
+
+### Is the Advanced Dock worth it?
+
+Yes, but not before your base has stable power. The Advanced Dock uses 100 power, so adding it too early can make an already strained grid worse.
+
+### When should I build windmills?
+
+Build windmills after Tier 3 when your base is too large for simple solar and batteries. Windmills help diversify your energy sources and reduce bad-weather problems.
+
+### Should I use one big power grid or separate networks?
+
+Use one main grid early because it is easier to read and troubleshoot. Split into separate networks later when you know exactly what each area needs.

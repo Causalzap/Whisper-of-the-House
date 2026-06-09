@@ -12,6 +12,55 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Solarpunk =====
+{
+  href: "/solarpunk",
+  game: "Solarpunk",
+  title: "Beginner Guide, Airship, Energy, Farming & Research",
+  description:
+  "Start here for Solarpunk first island, Standard vs Soft, Research Table, Map, Airship Dock, power, Wheat, chickens, eggs, and progression gates.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+  // ===== Solarpunk =====
+  {
+  href: "/solarpunk/beginners-guide",
+  game: "Solarpunk",
+  title: "Beginner Guide & First Island Route",
+  description:
+  "Choose Standard or Soft, collect berries and cotton, craft the Survival Guide, build water, storage, bed, beehives, and prepare for the first airship.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+  // ===== Solarpunk =====
+  {
+  href: "/solarpunk/airship-guide",
+  game: "Solarpunk",
+  title: "Airship Guide: Parts, Dock & Range Upgrade",
+  description:
+  "Find the Crashed Airship Component, build the Airship Dock, craft your first airship, upgrade range with 32 Copper, and reach Wheat and Quartz.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+  // ===== Solarpunk =====
+  {
+  href: "/solarpunk/energy-system-guide",
+  game: "Solarpunk",
+  title: "Energy Guide: Power, Drill, Battery & Windmill",
+  description:
+  "Fix power problems with Network Display, solar panels, drill load, batteries, sprinklers, switches, mining outposts, Advanced Dock, and Windmill.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+
 // ===== Gothic 1 Remake =====
 {
   href: "/gothic-1-remake/new-camp-walkthrough",

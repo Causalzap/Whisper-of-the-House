@@ -1,0 +1,894 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const modeColumns = [
+  { key: "Mode", label: "Mode" },
+  { key: "What Changes", label: "What Changes" },
+  { key: "Who Should Pick It", label: "Who Should Pick It" },
+];
+
+export const modeRows = [
+  {
+    Mode: "Standard",
+    "What Changes":
+      "Default hunger and thirst drain, inventory drops on death, and lightning can hurt you.",
+    "Who Should Pick It":
+      "Pick Standard if you want the intended survival pace and do not mind recovering from mistakes.",
+  },
+  {
+    Mode: "Soft",
+    "What Changes":
+      "-50% hunger and thirst drain, inventory is not dropped on death, and lightning cannot hit or hurt you.",
+    "Who Should Pick It":
+      "Pick Soft if you mainly want relaxed building, farming, decorating, and exploration.",
+  },
+];
+
+export const phaseColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "Goal", label: "Goal" },
+  { key: "You Are Ready When", label: "You Are Ready When" },
+];
+
+export const phaseRows = [
+  {
+    Phase: "First session goal",
+    Goal: "Make the starter island safe enough that hunger, thirst, and night are not stopping you.",
+    "You Are Ready When":
+      "You have a Research Table, Rain Collector, Bed, basic storage, and cotton growing.",
+  },
+  {
+    Phase: "Before first flight",
+    Goal: "Prepare the systems that feed airship progression.",
+    "You Are Ready When":
+      "You have storage, beehives, cloth production, saved iron, and the Crashed Airship Component collected.",
+  },
+  {
+    Phase: "First flight ready",
+    Goal: "Leave the island with a purpose instead of flying around unprepared.",
+    "You Are Ready When":
+      "Your Airship Dock is built, your first airship is ready, and you have food, water, tools, and inventory space.",
+  },
+];
+
+export const overviewColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "Core Goal", label: "Core Goal" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const overviewRows = [
+  {
+    Stage: "Mode choice",
+    "Core Goal": "Choose Standard or Soft before the world starts.",
+    "Why It Matters":
+      "This decides how punishing hunger, thirst, death, and lightning feel.",
+  },
+  {
+    Stage: "Resource sweep",
+    "Core Goal": "Collect berries, wood, sticks, stone, cotton, and early ore.",
+    "Why It Matters":
+      "These feed your first tools, crops, research, water, storage, and bed.",
+  },
+  {
+    Stage: "First tools",
+    "Core Goal": "Make the axe, pickaxe, hoe, crafting table, watering can, and Build Hammer.",
+    "Why It Matters":
+      "This opens the gather, craft, farm, water, and building loop.",
+  },
+  {
+    Stage: "First crops",
+    "Core Goal": "Plant berries and cotton immediately.",
+    "Why It Matters":
+      "Berries solve early food, while cotton becomes cloth for progression.",
+  },
+  {
+    Stage: "First utilities",
+    "Core Goal": "Craft the Survival Guide, Research Table, Rain Collector, Chest, and Bed.",
+    "Why It Matters":
+      "These stabilize the first island and stop early resource panic.",
+  },
+  {
+    Stage: "Progression setup",
+    "Core Goal": "Build beehives, save iron, gather cloth, and move toward the Airship Dock.",
+    "Why It Matters":
+      "This prepares you for Traderbot, copper, wheat, quartz, and silicon.",
+  },
+  {
+    Stage: "Flight preparation",
+    "Core Goal": "Collect the Crashed Airship Component and prepare for the first flight.",
+    "Why It Matters":
+      "The airship is the first major gate out of the starter island loop.",
+  },
+];
+
+export const firstIslandColumns = [
+  { key: "Item / System", label: "Item / System" },
+  { key: "Priority", label: "Priority" },
+  { key: "Beginner Advice", label: "Beginner Advice" },
+];
+
+export const firstIslandRows = [
+  {
+    "Item / System": "Berries",
+    Priority: "Very high",
+    "Beginner Advice":
+      "Eat them early for food and a little thirst support, but keep planting berry bushes for a steady supply.",
+  },
+  {
+    "Item / System": "Cotton",
+    Priority: "Very high",
+    "Beginner Advice":
+      "Do not ignore cotton. It becomes cloth, and cloth is needed for early crafting, research, and bed progress.",
+  },
+  {
+    "Item / System": "Survival Guide",
+    Priority: "Very high",
+    "Beginner Advice":
+      "Craft it from Quick Crafting and read it early. It explains clean rainwater, thunderstorms, stairs, crops, and airship basics.",
+  },
+  {
+    "Item / System": "Rain Collector",
+    Priority: "Very high",
+    "Beginner Advice":
+      "Build it early so you can drink clean rainwater and refill water tools more safely.",
+  },
+  {
+    "Item / System": "Research Table",
+    Priority: "Mandatory",
+    "Beginner Advice":
+      "This is your first major unlock station. Build it before spending resources on optional extras.",
+  },
+  {
+    "Item / System": "Bed",
+    Priority: "High",
+    "Beginner Advice":
+      "Sleeping helps you skip dangerous or unproductive nights and stabilizes your routine.",
+  },
+  {
+    "Item / System": "Chest",
+    Priority: "High",
+    "Beginner Advice":
+      "Storage becomes important quickly because early resources pile up and inventory space is limited.",
+  },
+  {
+    "Item / System": "Beehive",
+    Priority: "High",
+    "Beginner Advice":
+      "Beehives lead to beeswax, early Traderbot progress, and wax briquettes later.",
+  },
+  {
+    "Item / System": "Airship Dock",
+    Priority: "Progression gate",
+    "Beginner Advice":
+      "Build it when your first island is stable enough for longer trips.",
+  },
+];
+
+export const resourceColumns = [
+  { key: "Resource", label: "Resource" },
+  { key: "Best Early Use", label: "Best Early Use" },
+  { key: "Mistake To Avoid", label: "Mistake To Avoid" },
+];
+
+export const resourceRows = [
+  {
+    Resource: "Wood",
+    "Best Early Use": "Crafting table, building, fuel, tools, beehives, and dock progress.",
+    "Mistake To Avoid":
+      "Do not burn all of it as long-term fuel. You need wood constantly.",
+  },
+  {
+    Resource: "Sticks",
+    "Best Early Use": "Basic tools, early crafting, and replacement pickaxes.",
+    "Mistake To Avoid":
+      "Do not forget you can craft sticks from wood when you are short.",
+  },
+  {
+    Resource: "Stone",
+    "Best Early Use": "Basic pickaxes and early crafting.",
+    "Mistake To Avoid":
+      "Do not panic when basic tools break. Stone and sticks are renewable enough for cheap tools.",
+  },
+  {
+    Resource: "Iron",
+    "Best Early Use": "Research, first airship, repairs, dock progress, and early machines.",
+    "Mistake To Avoid":
+      "Do not spend your iron down to zero before the airship and energy systems start asking for it.",
+  },
+  {
+    Resource: "Cotton",
+    "Best Early Use": "Cloth, bed, research table, early trades, and later cloth requirements.",
+    "Mistake To Avoid":
+      "Do not stop growing cotton after one early craft.",
+  },
+  {
+    Resource: "Beeswax",
+    "Best Early Use": "Traderbot trades and wax briquettes.",
+    "Mistake To Avoid":
+      "Do not wait too long to build beehives if you want smoother progression.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Ignoring food and water while building",
+    "Why It Hurts":
+      "You can get too hungry or thirsty to work efficiently, especially on Standard.",
+    "Better Move":
+      "Plant berries early, build a Rain Collector, and keep food / water on your hotbar.",
+  },
+  {
+    Mistake: "Not planting seeds immediately",
+    "Why It Hurts":
+      "Progression can slow down when you need more crops for trades, cloth, feed, or recipes.",
+    "Better Move":
+      "Replant every crop seed until you have a real surplus.",
+  },
+  {
+    Mistake: "Using iron tools too early",
+    "Why It Hurts":
+      "Iron is needed for the first airship, repairs, dock progress, machines, and energy systems.",
+    "Better Move":
+      "Use cheap stone tools early unless you truly need the durability.",
+  },
+  {
+    Mistake: "Missing infinite ore patches",
+    "Why It Hurts":
+      "You may think you need to fly farther for ore when the island has mineable ground patches.",
+    "Better Move":
+      "Look for large ore textures embedded in the ground, not only loose rocks.",
+  },
+  {
+    Mistake: "Overfilling furnaces or generators with fuel",
+    "Why It Hurts":
+      "Extra fuel can be accepted but not always give extra useful runtime.",
+    "Better Move":
+      "Add only the amount of fuel you actually need, especially once wax briquettes are available.",
+  },
+  {
+    Mistake: "Waiting too long to build storage",
+    "Why It Hurts":
+      "You start dropping, mixing, or losing track of resources.",
+    "Better Move":
+      "Research and build chests early, then organize raw materials, food, seeds, and processed items.",
+  },
+  {
+    Mistake: "Flying before your base is ready",
+    "Why It Hurts":
+      "You may leave without food, water, tools, or inventory space.",
+    "Better Move":
+      "Stabilize the first island before your first real airship trip.",
+  },
+];
+
+export const nextColumns = [
+  { key: "If You Are Stuck On", label: "If You Are Stuck On" },
+  { key: "Read This Next", label: "Read This Next" },
+  { key: "Why", label: "Why" },
+];
+
+export const nextRows = [
+  {
+    "If You Are Stuck On": "Airship, crashed component, copper, wheat, quartz, or silicon",
+    "Read This Next": "Airship Guide",
+    Why: "It explains the crashed component, dock, first airship materials, 32 copper upgrade, map range, and second-ring resources.",
+  },
+  {
+    "If You Are Stuck On": "Power, drills, batteries, or sprinklers",
+    "Read This Next": "Energy System Guide",
+    Why: "It explains solar panels, batteries, network display, windmills, and power load.",
+  },
+  {
+    "If You Are Stuck On": "Traderbot, tiers, blueprints, or unlock order",
+    "Read This Next": "Research Progression Guide",
+    Why: "It explains what to unlock first and what each trade gate is blocking.",
+  },
+  {
+    "If You Are Stuck On": "Wheat, animals, eggs, greenhouse, or sprinklers",
+    "Read This Next": "Farming Guide",
+    Why: "It explains crop priorities, animal feed, eggs, and farm automation.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Solarpunk**, your first island goal is to secure **food**, **clean water**, **cloth**, **storage**, **sleep**, and **research** before chasing the airship. Start with berries and cotton, craft basic tools, plant your first crops, craft the **Survival Guide** from **Quick Crafting**, build a **Research Table**, make a **Rain Collector**, place a **Bed**, then work toward **Beehives** and the **Airship Dock**.
+
+A good first-session target is: **Research Table + Rain Collector + Bed + cotton growing**. Before your first flight, add storage, beehives, saved iron, cloth, and the **Crashed Airship Component**. Do not rush iron tools or huge buildings before the first island is stable.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Solarpunk. This beginner guide covers Standard vs Soft mode, first-session goals, first island priorities, berries, cotton, Quick Crafting, Survival Guide, Rain Collector, Research Table, bed, storage, beehives, thunderstorm safety, infinite ore patches, first airship preparation, and beginner mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-standard-soft-mode-choice.webp"
+    alt="Solarpunk new world screen showing Standard and Soft mode choice"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pick Standard if you want the intended survival rules. Pick Soft if you mainly want a calmer building and farming run.
+  </figcaption>
+</figure>
+
+<h2 id="solarpunk-beginner-guide">
+  Solarpunk beginner guide
+</h2>
+
+**Solarpunk** looks relaxed, but your first island still has a clear order of operations. If you build randomly, you can end up short on water, cloth, storage, iron, or food right when the game asks you to push toward the airship.
+
+The safest beginner route is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Choose Standard or Soft.</li>
+  <li>Collect berries, sticks, stones, wood, and cotton.</li>
+  <li>Craft your first tools.</li>
+  <li>Plant berries and cotton.</li>
+  <li>Craft and read the Survival Guide.</li>
+  <li>Build the Research Table.</li>
+  <li>Make clean water, storage, and a bed.</li>
+  <li>Add beehives and save iron for the airship route.</li>
+</ol>
+
+That route gives you a stable base before the game starts asking for Traderbot trades, copper, wheat, silicon, eggs, and energy management.
+
+If you already built your airship, read the <Link href="/solarpunk/airship-guide">Airship Guide</Link>. If your machines keep turning off, read the <Link href="/solarpunk/energy-system-guide">Energy System Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="standard-vs-soft-mode">
+  Standard vs Soft mode
+</h2>
+
+Before you land on your island, choose the mode that matches how you want to play.
+
+<GuideTable
+  caption="Solarpunk Standard vs Soft mode."
+  columns={modeColumns}
+  rows={modeRows}
+/>
+
+Standard is the better pick if you want the full survival loop. Soft is better if your main goal is to build, decorate, farm, and explore without being punished as much for early mistakes.
+
+If you are playing mainly for cozy building, there is no shame in Soft. If you want your choices to matter more, pick Standard.
+
+<h2 id="first-session-goals">
+  First-session goals
+</h2>
+
+Instead of trying to finish everything at once, use three simple checkpoints.
+
+<GuideTable
+  caption="Solarpunk beginner checkpoints for your first few hours."
+  columns={phaseColumns}
+  rows={phaseRows}
+/>
+
+This gives you a realistic pace. Your first session does not need to end with a fully upgraded airship. It should end with a starter island that can support the next step.
+
+<h2 id="first-island-overview">
+  First island overview
+</h2>
+
+Use this overview to understand the early flow before the detailed sections.
+
+<GuideTable
+  caption="Solarpunk first island overview."
+  columns={overviewColumns}
+  rows={overviewRows}
+/>
+
+The detailed route below expands each stage. The final checklist near the end gives you the clean order to follow in-game.
+
+<h2 id="basic-resources">
+  Step 1: Collect basic resources
+</h2>
+
+When you first start, do not run straight into building a big house. Walk the island and collect the basics:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>berries,</li>
+  <li>sticks,</li>
+  <li>stones,</li>
+  <li>wood,</li>
+  <li>cotton,</li>
+  <li>loose seeds,</li>
+  <li>and early ore or sand if you pass it.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-island-basic-resources.webp"
+    alt="Solarpunk first island with berries sticks stones cotton and early resources"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first island has enough to start. Do a resource sweep before committing to a permanent base spot.
+  </figcaption>
+</figure>
+
+You do not need to clear everything immediately, but you should not ignore cotton. Cotton becomes cloth, and cloth appears in more early steps than you might expect.
+
+<h2 id="first-tools">
+  Step 2: Craft your first tools
+</h2>
+
+Your first tools should be cheap and practical:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>axe,</li>
+  <li>pickaxe,</li>
+  <li>hoe,</li>
+  <li>crafting table,</li>
+  <li>watering can,</li>
+  <li>and later the Build Hammer.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-tools-pickaxe-hoe-crafting-table.webp"
+    alt="Solarpunk early crafting with pickaxe hoe crafting table and basic tools"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cheap tools are enough early. Save iron for the first airship, repairs, machines, and energy unlocks.
+  </figcaption>
+</figure>
+
+Do not rush iron tools just because they look better. Basic tools break faster, but they are cheap. Early iron is more valuable for progression.
+
+<h2 id="plant-berries-cotton">
+  Step 3: Plant berries and cotton
+</h2>
+
+Start farming before you feel desperate for food. Your first useful crops are berries and cotton.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-berry-cotton-farm.webp"
+    alt="Solarpunk first berry and cotton farm plots on the starter island"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Plant berries for early food and cotton for cloth. These two crops keep your first island moving.
+  </figcaption>
+</figure>
+
+Berries are your early safety net. Cotton is your progression crop. Replant every seed until you have a surplus.
+
+A good early habit:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Make a hoe.</li>
+  <li>Create a few farm plots near your base.</li>
+  <li>Plant berry seeds and cotton seeds.</li>
+  <li>Craft a watering can.</li>
+  <li>Fill it from water.</li>
+  <li>Water the crops immediately.</li>
+</ol>
+
+If farming starts feeling too manual later, that is when sprinklers matter. For that route, use the <Link href="/solarpunk/farming-guide">Farming Guide</Link>.
+
+<h2 id="survival-guide">
+  Step 4: Craft and read the Survival Guide
+</h2>
+
+The **Survival Guide** is a craftable early item in the **Quick Crafting** menu. After gathering basic starter materials, open Quick Crafting, craft the Survival Guide, then read it before you rush into bigger builds.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-survival-guide-early-tips.webp"
+    alt="Solarpunk Survival Guide explaining raspberries, clean rainwater, thunderstorms and stairs"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Survival Guide explains berries, clean rainwater, thunderstorms, crop safety, stairs, and early airship basics.
+  </figcaption>
+</figure>
+
+Pay attention to these points:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>clean rainwater is safe to drink,</li>
+  <li>some foods help with thirst,</li>
+  <li>fully grown plants can be damaged by thunderstorms,</li>
+  <li>your house protects you from storms,</li>
+  <li>stairs and bridges help reach high areas,</li>
+  <li>and airship components can come from crashed airship parts.</li>
+</ul>
+
+This guide is not just flavor. It tells you how to avoid several beginner mistakes.
+
+<h2 id="research-table">
+  Step 5: Build the Research Table
+</h2>
+
+The **Research Table** is your first real progression station.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-research-table.webp"
+    alt="Solarpunk first Research Table placed on the starter island"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Research Table turns your first island from basic survival into an unlock route.
+  </figcaption>
+</figure>
+
+Your early research goals should be practical:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Rain Collector,</li>
+  <li>Chest,</li>
+  <li>Bed,</li>
+  <li>Beehive,</li>
+  <li>Well if you need it,</li>
+  <li>and the Airship Dock path when you are ready to leave the starter loop.</li>
+</ul>
+
+Do not spend too long unlocking decorative items before your food, water, storage, sleep, and airship path are stable.
+
+<h2 id="clean-water">
+  Step 6: Build the Rain Collector
+</h2>
+
+Water is one of the first things that can slow you down.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-rain-collector-clean-water.webp"
+    alt="Solarpunk first Rain Collector used for clean water and watering can refills"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Build a Rain Collector early. It gives you a cleaner water routine before your base has better systems.
+  </figcaption>
+</figure>
+
+A Rain Collector helps with:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>clean drinking water,</li>
+  <li>watering can refills,</li>
+  <li>early thirst safety,</li>
+  <li>and reducing panic when you are far from a water source.</li>
+</ul>
+
+Do not rely only on food for thirst. Berries and watermelon can help, but water infrastructure is safer.
+
+<h2 id="bed-and-shelter">
+  Step 7: Build a bed and small shelter
+</h2>
+
+A bed is not just comfort. It helps you control your day cycle and recover from rough timing.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-bed-small-shelter.webp"
+    alt="Solarpunk first bed inside a small starter shelter"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A small shelter and bed are enough early. You can build a prettier base after your progression systems are stable.
+  </figcaption>
+</figure>
+
+Your first house does not need to be huge. Build enough to:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>place a bed,</li>
+  <li>protect yourself from storms,</li>
+  <li>keep workstations close,</li>
+  <li>and leave room for chests.</li>
+</ul>
+
+<h3 id="thunderstorm-safety">
+  Thunderstorm safety
+</h3>
+
+Thunderstorms matter more than normal rain. On Standard mode, lightning can hurt you. Fully grown plants can also be damaged if they are exposed when a storm hits.
+
+Early on, the simple answer is to harvest mature crops before bad weather and take shelter when lightning starts. Later, use greenhouse-style protection for crops that matter to progression, especially wheat, carrots, and sunflowers.
+
+For the full crop protection route, read the <Link href="/solarpunk/farming-guide">Farming Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="storage">
+  Step 8: Build storage early
+</h2>
+
+Inventory space gets tight fast. Chests prevent your base from becoming a messy pile of mixed resources.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-storage-chest.webp"
+    alt="Solarpunk early chest storage for food seeds raw materials and processed items"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Build storage before your inventory is full. Separate food, seeds, raw materials, and processed items as soon as you can.
+  </figcaption>
+</figure>
+
+A simple early storage setup:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>one chest for food and seeds,</li>
+  <li>one chest for raw materials,</li>
+  <li>one chest for processed items,</li>
+  <li>and one chest for tools or travel supplies.</li>
+</ul>
+
+You do not need perfect organization on day one, but you do need enough space to stop losing track of cotton, cloth, iron, beeswax, seeds, and ore.
+
+<h2 id="beehives">
+  Step 9: Build beehives for beeswax
+</h2>
+
+Beehives are easy to delay, but they matter more than they look.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-beehive-beeswax.webp"
+    alt="Solarpunk first beehive producing beeswax near the starter base"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Beehives give beeswax for early trades and later wax briquettes, so build them before you urgently need beeswax.
+  </figcaption>
+</figure>
+
+Beeswax is useful for:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Traderbot progression,</li>
+  <li>wax briquettes,</li>
+  <li>better furnace fuel,</li>
+  <li>and reducing wood pressure later.</li>
+</ul>
+
+If placement turns invalid near another hive, move the new hive farther away until the build preview becomes valid. You do not need to measure an exact distance; just avoid trying to pack all hives into one tiny corner.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-wax-briquette-fuel.webp"
+    alt="Solarpunk wax briquette recipe using beeswax and cloth for furnace fuel"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Wax briquettes are a better furnace fuel route than burning through all your wood.
+  </figcaption>
+</figure>
+
+<h2 id="airship-dock">
+  Step 10: Work toward the Airship Dock
+</h2>
+
+The **Airship Dock** is your first major progression gate, but you should not rush it before your island is stable.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-airship-dock-build.webp"
+    alt="Solarpunk Airship Dock research and build requirement with wood iron and cloth"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Airship Dock moves you from first-island survival into real exploration.
+  </figcaption>
+</figure>
+
+Before building it, make sure you have:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>steady food,</li>
+  <li>clean water,</li>
+  <li>storage,</li>
+  <li>basic tools,</li>
+  <li>cloth production,</li>
+  <li>saved iron,</li>
+  <li>and the Crashed Airship Component.</li>
+</ul>
+
+Once the airship is ready, your next targets are Traderbot, copper, watermelons, the 32 copper airship upgrade, wheat, quartz, and silicon. Read the <Link href="/solarpunk/airship-guide">Airship Guide</Link> before your first serious flight.
+
+<h2 id="first-island-priorities">
+  First island priorities
+</h2>
+
+Use this table to decide what matters and what can wait:
+
+<GuideTable
+  caption="Solarpunk first island priorities."
+  columns={firstIslandColumns}
+  rows={firstIslandRows}
+/>
+
+The common pattern is simple: anything that supports food, water, cloth, storage, research, beeswax, or airship progress is worth doing early. Anything purely decorative can wait.
+
+<h2 id="early-resource-advice">
+  Early resource advice
+</h2>
+
+Use your early resources carefully:
+
+<GuideTable
+  caption="Solarpunk early resource advice."
+  columns={resourceColumns}
+  rows={resourceRows}
+/>
+
+The most important resource lesson is this: **do not spend rare early materials before you know the next gate**. Iron, cloth, cotton, and beeswax all become more important once the airship and Traderbot route starts.
+
+<h2 id="infinite-ore-patches">
+  Why you might not need to leave the island for ore
+</h2>
+
+If you cannot find enough iron, do not assume you need to fly away immediately. Not every useful ore source is a loose rock. Look for larger ore patches embedded in the ground.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-infinite-ore-patch.webp"
+    alt="Solarpunk infinite ore patch embedded in the ground for repeated mining"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Large ore patches are more important than loose rocks. Later, these are also good places for drills.
+  </figcaption>
+</figure>
+
+These patches can be mined repeatedly, and later they become strong places to set up drills. If you are short on iron before your first airship, check the ground texture carefully before assuming the island is empty.
+
+For powered mining later, use the <Link href="/solarpunk/energy-system-guide">Energy System Guide</Link>.
+
+<h2 id="recommended-first-hour-route">
+  Recommended first-hour route
+</h2>
+
+Follow this route if you want a clean start:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Choose Standard or Soft.</li>
+  <li>Collect berries, sticks, stones, wood, cotton, and loose seeds.</li>
+  <li>Craft a pickaxe, axe, hoe, crafting table, and watering can.</li>
+  <li>Plant berries and cotton.</li>
+  <li>Water your first crops.</li>
+  <li>Craft and read the Survival Guide from Quick Crafting.</li>
+  <li>Build the Research Table.</li>
+  <li>Research Rain Collector, Chest, Bed, Beehive, and the Airship Dock path.</li>
+  <li>Build the Rain Collector.</li>
+  <li>Build a bed and small shelter.</li>
+  <li>Add storage before your inventory gets messy.</li>
+  <li>Build beehives for beeswax.</li>
+  <li>Check ore patches and save iron.</li>
+  <li>Collect the Crashed Airship Component when the wreck becomes reachable.</li>
+  <li>Build the Airship Dock when your base is stable.</li>
+</ol>
+
+This route prevents the common problem of having an airship goal but no food, no water, no cloth, no storage, and no research direction.
+
+
+<h2 id="mistakes">
+  Beginner mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common Solarpunk beginner mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The best mindset is to avoid spending rare early materials on short-term convenience. If something helps you reach airship, energy, farming, or research progression, it is worth doing. If it only makes your base prettier, save it for later.
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+<GuideTable
+  caption="Best Solarpunk guide to read next."
+  columns={nextColumns}
+  rows={nextRows}
+/>
+
+A good order is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li><Link href="/solarpunk/airship-guide">Airship Guide</Link> after your first dock.</li>
+  <li><Link href="/solarpunk/energy-system-guide">Energy System Guide</Link> after Energy Workbench.</li>
+  <li><Link href="/solarpunk/research-progression-guide">Research Progression Guide</Link> when Traderbot trades start stacking up.</li>
+  <li><Link href="/solarpunk/farming-guide">Farming Guide</Link> once wheat, sprinklers, and animals enter the loop.</li>
+</ol>
+
+<h2 id="faq">
+  Solarpunk beginner FAQ
+</h2>
+
+### What should I do first in Solarpunk?
+
+Collect berries, sticks, stones, wood, and cotton. Then craft basic tools, plant berries and cotton, craft the Survival Guide from Quick Crafting, build a Research Table, make a Rain Collector, and set up a bed.
+
+### Should I pick Standard or Soft mode?
+
+Pick Standard if you want the intended survival rules. Pick Soft if you want a more relaxed building and farming experience with lower hunger / thirst pressure, no inventory drop on death, and no lightning damage.
+
+### What should I finish in my first session?
+
+A good first-session goal is Research Table, Rain Collector, Bed, basic storage, and cotton growing. That is enough to make the starter island feel stable.
+
+### Where do I get the Survival Guide?
+
+Craft the Survival Guide from the Quick Crafting menu after collecting basic starter materials. Read it early because it explains clean water, thunderstorms, crop safety, stairs, and airship basics.
+
+### What is the best first crop?
+
+Berries are the safest first food crop, but cotton is the most important early progression crop because it becomes cloth.
+
+### Why is cotton important?
+
+Cotton becomes cloth. Cloth is needed for early research, crafting, bed progress, trades, and later progression steps.
+
+### How do I get clean water early?
+
+Build a Rain Collector. Rainwater is the safest early clean water source, and it also helps with refilling water tools.
+
+### Should I make iron tools early?
+
+Usually no. Basic stone tools are cheaper, and early iron is better saved for the first airship, repairs, dock progress, machines, and energy systems.
+
+### I can't find enough iron. Do I need to explore?
+
+Not always. Look for large ore patches embedded in the ground. These patches are more important than loose rocks and can help before your first airship.
+
+### What should I research first?
+
+Prioritize practical unlocks: Rain Collector, Chest, Bed, Beehive, and the Airship Dock path. Delay decorative unlocks until your base is stable.
+
+### Do thunderstorms damage crops?
+
+Fully grown plants can be damaged by thunderstorms if they are exposed. Harvest mature crops before storms when possible, and use greenhouse protection later for important crops.
+
+### When should I build the Airship Dock?
+
+Build the Airship Dock after your first island has food, water, storage, cloth production, saved iron, and the Crashed Airship Component. Do not fly out underprepared.
+
+### Are beehives worth building early?
+
+Yes. Beehives produce beeswax, which supports Traderbot progression and wax briquettes later.

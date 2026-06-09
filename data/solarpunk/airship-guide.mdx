@@ -1,0 +1,881 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const milestoneColumns = [
+{ key: "Milestone", label: "Milestone" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const milestoneRows = [
+{
+Milestone: "Crashed Airship Component",
+"What To Do":
+"Progress on the starter island until the crashed airship becomes reachable, then collect the component from the wreck.",
+"Why It Matters":
+"You need this component before you can build your first airship.",
+},
+{
+Milestone: "Airship Dock",
+"What To Do":
+"Unlock the Airship Dock at the Research Table with 5 Wood, 5 Iron, and 5 Cloth.",
+"Why It Matters":
+"The dock is used to build, upgrade, retrieve, and manage your airship.",
+},
+{
+Milestone: "First airship",
+"What To Do":
+"Build the first airship from the dock panel with 10 Iron, 3 Cloth, and 1 Crashed Airship Component.",
+"Why It Matters":
+"Your first airship lets you reach Traderbot, copper islands, and the first blueprint loop.",
+},
+{
+Milestone: "32 copper upgrade",
+"What To Do":
+"Bring 32 Copper to Traderbot, complete the airship upgrade trade, then return home.",
+"Why It Matters":
+"This gives you the upgrade item, but your range expands only after you apply it at your dock.",
+},
+{
+Milestone: "Second ring",
+"What To Do":
+"After applying the upgrade, search the next ring for wheat and quartz.",
+"Why It Matters":
+"Wheat feeds the farming / animal loop, while quartz smelts into silicon for Tier 2.",
+},
+{
+Milestone: "Egg upgrade",
+"What To Do":
+"Build your wheat and chicken setup until you can save 6 eggs for the next airship upgrade.",
+"Why It Matters":
+"This opens the route toward carrots, sunflowers, cobalt, pigs, and Tier 3.",
+},
+];
+
+export const materialColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Materials", label: "Materials" },
+{ key: "Important Note", label: "Important Note" },
+];
+
+export const materialRows = [
+{
+Step: "Unlock Airship Dock",
+Materials: "5 Wood, 5 Iron, 5 Cloth",
+"Important Note":
+"This is the Research Table unlock. It opens the dock route but does not build the airship yet.",
+},
+{
+Step: "Build first airship",
+Materials: "10 Iron, 3 Cloth, 1 Crashed Airship Component",
+"Important Note":
+"Build it from the Airship Dock panel after collecting the crashed component.",
+},
+{
+Step: "First range upgrade",
+Materials: "32 Copper",
+"Important Note":
+"Trade with Traderbot, then return to your dock and click Upgrade.",
+},
+{
+Step: "Later range upgrade",
+Materials: "6 Eggs",
+"Important Note":
+"This pushes you into wheat, animal feed, chickens, and egg production.",
+},
+];
+
+export const prepColumns = [
+{ key: "Bring This", label: "Bring This" },
+{ key: "Why", label: "Why" },
+{ key: "Mistake To Avoid", label: "Mistake To Avoid" },
+];
+
+export const prepRows = [
+{
+"Bring This": "Food and clean water",
+Why: "New island trips take longer once your range expands.",
+"Mistake To Avoid":
+"Do not leave base with low thirst and assume the next island will solve it.",
+},
+{
+"Bring This": "Cheap pickaxes",
+Why: "Basic pickaxes can mine important ores and are cheaper than wasting early iron.",
+"Mistake To Avoid":
+"Do not spend early iron on tool durability when you need iron for machines, repairs, and dock progress.",
+},
+{
+"Bring This": "Empty inventory space",
+Why: "New islands often have crops, chests, ore, seeds, and loose materials.",
+"Mistake To Avoid":
+"Do not arrive full and start dropping useful items on the ground.",
+},
+{
+"Bring This": "Build Hammer and wood",
+Why: "Stairs and bridges help reach high ledges, hidden chests, and resources.",
+"Mistake To Avoid":
+"Do not ignore upper paths. Important items can be above the obvious walking route.",
+},
+{
+"Bring This": "Repair kit or repair materials",
+Why: "Bad landings and boost mistakes can damage the airship.",
+"Mistake To Avoid":
+"Do not assume a damaged airship is harmless just because it still flies.",
+},
+];
+
+export const controlColumns = [
+{ key: "Action", label: "Action" },
+{ key: "How To Handle It", label: "How To Handle It" },
+{ key: "Beginner Warning", label: "Beginner Warning" },
+];
+
+export const controlRows = [
+{
+Action: "Forward / Brake",
+"How To Handle It":
+"Use forward to build speed, then brake before you reach the island or dock.",
+"Beginner Warning":
+"The airship keeps momentum. Brake earlier than you think.",
+},
+{
+Action: "Reverse",
+"How To Handle It":
+"Use reverse when you overshoot a dock or need a small correction.",
+"Beginner Warning":
+"Do not mash every movement input at once. Small corrections are safer.",
+},
+{
+Action: "Rise / Descend",
+"How To Handle It":
+"Adjust height before your final approach.",
+"Beginner Warning":
+"Trying to fix height at the last second makes docking much harder.",
+},
+{
+Action: "Dock",
+"How To Handle It":
+"Hover near a valid dock or landing area and dock when the prompt appears.",
+"Beginner Warning":
+"A slow approach is better than a fast crash.",
+},
+{
+Action: "Retrieve Airship",
+"How To Handle It":
+"Use your dock if the airship is lost, crashed, or left somewhere awkward.",
+"Beginner Warning":
+"Retrieving the ship does not always remove the need to recover dropped loot.",
+},
+{
+Action: "Boost",
+"How To Handle It":
+"Use short taps after you unlock the Advanced Dock and can power it.",
+"Beginner Warning":
+"Long boosts near a dock can make you crash before you can slow down.",
+},
+];
+
+export const rangeProblemColumns = [
+{ key: "Symptom", label: "Symptom" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const rangeProblemRows = [
+{
+Symptom: "The island is visible but outside the white circle",
+"Likely Cause": "Your current airship level cannot reach that island yet.",
+Fix: "Finish the next Traderbot upgrade milestone and apply the upgrade at your dock.",
+},
+{
+Symptom: "You traded for an upgrade but the map circle did not move",
+"Likely Cause": "You received the upgrade item but did not apply it at your dock.",
+Fix: "Fly home, dock the airship, open the dock panel, and click Upgrade.",
+},
+{
+Symptom: "Traderbot shows more trades but no new range",
+"Likely Cause": "You are still in the delivery chain before the next upgrade reward.",
+Fix: "Complete the required Traderbot deliveries until the airship upgrade appears as the reward.",
+},
+{
+Symptom: "Your co-op partner cannot use your ship",
+"Likely Cause": "Only the player who built an airship can use that airship.",
+Fix: "Have each player who wants independent travel build their own Airship Dock and airship.",
+},
+];
+
+export const islandColumns = [
+{ key: "Stage", label: "Stage" },
+{ key: "Look For", label: "Look For" },
+{ key: "Why", label: "Why" },
+];
+
+export const islandRows = [
+{
+Stage: "First ring",
+"Look For": "Traderbot, copper island, watermelon, early chests, and loose resources.",
+Why: "Copper leads to the first airship upgrade, and watermelon feeds the early trade loop.",
+},
+{
+Stage: "After first upgrade",
+"Look For": "Wheat and quartz, especially in the next ring's island groups.",
+Why: "Wheat supports animals and bread. Quartz smelts into silicon for Tier 2.",
+},
+{
+Stage: "After egg upgrade",
+"Look For": "Carrots, sunflowers, cobalt, pigs, chests, and higher paths.",
+Why: "Cobalt gates Tier 3, while carrots and sunflowers feed later trades and animals.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Waiting for the Airship Dock without checking the crashed wreck",
+"Why It Hurts":
+"You may have the research path open but still be missing the crashed component needed for the first airship.",
+"Better Move":
+"When the wreck is reachable, collect the Crashed Airship Component before trying to finish the first airship.",
+},
+{
+Mistake: "Trading for an upgrade and forgetting the dock step",
+"Why It Hurts":
+"Your map range stays the same even though you completed the trade.",
+"Better Move":
+"After every airship upgrade trade, return home and apply the upgrade at the dock.",
+},
+{
+Mistake: "Approaching docks too fast",
+"Why It Hurts":
+"The airship carries momentum and can take heavy damage from bad approaches.",
+"Better Move":
+"Brake early, line up slowly, and use boost only in short bursts.",
+},
+{
+Mistake: "Skipping quartz after the first upgrade",
+"Why It Hurts":
+"Quartz is your silicon route, and silicon opens Tier 2.",
+"Better Move":
+"Search the second ring carefully, bring quartz home, and smelt it.",
+},
+{
+Mistake: "Cooking the first eggs too early",
+"Why It Hurts":
+"Eggs are needed for a later airship upgrade.",
+"Better Move":
+"Save the first six eggs before treating eggs as normal food.",
+},
+{
+Mistake: "Building Advanced Dock before your grid is stable",
+"Why It Hurts":
+"Advanced Dock uses power and can stress a weak solar setup.",
+"Better Move":
+"Stabilize batteries and read your Network Display before adding it.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To build your first **airship in Solarpunk**, progress through the starter island until you can collect the **Crashed Airship Component** from the wreck. Then unlock the **Airship Dock** at the Research Table with **5 Wood, 5 Iron, and 5 Cloth**.
+
+After placing the dock, build the first airship from the dock panel with **10 Iron, 3 Cloth, and 1 Crashed Airship Component**. The first major range upgrade comes from Traderbot and needs **32 Copper**. If your map range did not expand after trading, return to your dock and click **Upgrade** — the trade gives you the item, but the dock applies it. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Solarpunk. This guide covers the crashed airship component, Airship Dock materials, first airship materials, first flight controls, Traderbot upgrades, 32 copper, map range circle, dock upgrade button, wheat, quartz, silicon, egg upgrade, cobalt islands, co-op airship rules, Advanced Dock, boost, repair kits, and common airship mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-crashed-airship-component-wreck.webp"
+    alt="Solarpunk crashed airship wreck where the player obtains the Crashed Airship Component"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first airship route depends on this wreck. Collect the Crashed Airship Component before trying to finish the first airship.
+  </figcaption>
+</figure>
+
+<h2 id="solarpunk-airship-guide">
+  Solarpunk airship guide
+</h2>
+
+The airship is the main progression gate in **Solarpunk**. It is not just a vehicle. It decides when you can reach Traderbot, copper, wheat, quartz, silicon, eggs, cobalt, pigs, and later Tier 3 unlocks.
+
+The part that trips up many players is that the airship route does not start with copper or Traderbot. It starts with the **Crashed Airship Component** from the wreck. If you skip that component, the dock panel can look confusing even when you have enough iron and cloth.
+
+Use this guide when you are stuck on any of these:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>where to get the Crashed Airship Component,</li>
+  <li>how to unlock the Airship Dock,</li>
+  <li>what the Airship Dock materials are,</li>
+  <li>what the first airship materials are,</li>
+  <li>why the airship range did not expand,</li>
+  <li>where to go after the 32 copper upgrade,</li>
+  <li>how to get wheat, quartz, silicon, and cobalt,</li>
+  <li>or how co-op airships work.</li>
+</ul>
+
+If you are still setting up food, water, cotton, and the Research Table, read the <Link href="/solarpunk/beginners-guide">Solarpunk Beginner Guide</Link> first. If your Advanced Dock or powered machines keep shutting down, read the <Link href="/solarpunk/energy-system-guide">Energy System Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="airship-milestones">
+  Airship progression milestones
+</h2>
+
+Here is the short version of the whole route:
+
+<GuideTable
+caption="Solarpunk airship progression milestones."
+columns={milestoneColumns}
+rows={milestoneRows}
+/>
+
+The rest of this guide explains the important steps without repeating the same route three different times.
+
+<h2 id="find-crashed-airship-component">
+  Find the Crashed Airship Component first
+</h2>
+
+Before worrying about Traderbot or copper, make sure you have the **Crashed Airship Component**. The game points you toward crashed airship parts during early progression, and the component is what lets the dock panel move from “almost ready” to actually building the first airship.
+
+When you reach the wreck, interact with the airship part and collect the component.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-crashed-airship-component-wreck.webp"
+    alt="Solarpunk player collecting a Crashed Airship Component from the airship wreck"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When the wreck is reachable, collect the component before spending time farming more airship materials.
+  </figcaption>
+</figure>
+
+If the wreck sits above you or behind a height gap, use stairs. The Survival Guide confirms that stairs can be built with the Build Hammer and stacked, which is why they matter for high ledges and wreck routes.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-survival-guide-stairs-tip.webp"
+    alt="Solarpunk Survival Guide explaining that stairs can be built with the Build Hammer and stacked"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Stairs are not just for base building. Use them to reach high ledges, upper paths, and important wreck routes.
+  </figcaption>
+</figure>
+
+Do this before your first airship build:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Progress through the first island until the wreck route becomes relevant.</li>
+  <li>Bring the Build Hammer and wood if you need stairs.</li>
+  <li>Reach the crashed airship wreck.</li>
+  <li>Collect the Crashed Airship Component.</li>
+  <li>Return to the Airship Dock and finish the first airship build.</li>
+</ol>
+
+<h2 id="airship-dock-materials">
+  Airship Dock and first airship materials
+</h2>
+
+After you have the crashed component, your next goal is the **Airship Dock**.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-airship-dock-build.webp"
+    alt="Solarpunk Airship Dock research showing wood iron and cloth requirements"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Airship Dock is used to build, upgrade, and retrieve your airship. Unlock it before planning long exploration trips.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Solarpunk Airship Dock and airship material checklist."
+columns={materialColumns}
+rows={materialRows}
+/>
+
+Place the dock near a clear edge of your base island. You want enough space for takeoff, docking, and later upgrades. If you place it in a cramped spot, every future landing becomes more annoying.
+
+<h2 id="first-airship-build-materials">
+  Build your first airship
+</h2>
+
+After the dock is placed, open the dock panel and build the first airship from there.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-first-airship-build-materials.webp"
+    alt="Solarpunk first airship build materials showing 10 iron 3 cloth and 1 crashed airship component"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first airship needs 10 Iron, 3 Cloth, and 1 Crashed Airship Component.
+  </figcaption>
+</figure>
+
+The first airship materials are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>10 Iron</strong></li>
+  <li><strong>3 Cloth</strong></li>
+  <li><strong>1 Crashed Airship Component</strong></li>
+</ul>
+
+The safe preparation rule is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>save iron instead of wasting it on early iron tools,</li>
+  <li>keep growing cotton for cloth,</li>
+  <li>do not burn all your wood as fuel,</li>
+  <li>build beehives so wax briquettes can reduce wood fuel pressure,</li>
+  <li>and collect the crashed component before trying to finish the build.</li>
+</ul>
+
+If you are missing iron, check for large ore patches embedded in the ground before assuming you must leave the island.
+
+<h2 id="before-first-flight">
+  Before your first flight
+</h2>
+
+Do not fly away with a full inventory and no tools. Your first airship trip should solve progression, not create more problems.
+
+<GuideTable
+caption="What to bring before your first real airship trip."
+columns={prepColumns}
+rows={prepRows}
+/>
+
+For the first serious flight, I would leave base with:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>food,</li>
+  <li>clean water,</li>
+  <li>two or more cheap pickaxes,</li>
+  <li>mostly empty inventory,</li>
+  <li>Build Hammer and wood,</li>
+  <li>and repair materials if you have already unlocked repair kits.</li>
+</ul>
+
+You do not need airship fuel, but you do need inventory space. New islands often have crops, chests, ore, and loose materials that matter later.
+
+<h2 id="airship-controls">
+  Airship controls and docking
+</h2>
+
+Your first airship flight is mostly about learning momentum. The airship keeps moving after you let go, so you need to slow down early.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-airship-controls-first-flight.webp"
+    alt="Solarpunk airship manual showing forward brake reverse rise descend dock retrieve repair and camera controls"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Read the airship manual before your first trip. Brake, dock, retrieve, and repair matter more than speed.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Solarpunk airship controls and beginner warnings."
+columns={controlColumns}
+rows={controlRows}
+/>
+
+A safe docking pattern is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Aim at the island or dock from a distance.</li>
+  <li>Brake before you reach it.</li>
+  <li>Adjust height early.</li>
+  <li>Hover near the valid docking point.</li>
+  <li>Dock only when the prompt appears.</li>
+</ol>
+
+Do not treat the airship like a car. It floats, drifts, and keeps momentum.
+
+<h2 id="traderbot-first-upgrade">
+  Traderbot and the 32 copper airship upgrade
+</h2>
+
+Your first major airship target is Traderbot. Traderbot trades turn materials into blueprints, research progress, and airship upgrades.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-traderbot-first-blueprints.webp"
+    alt="Solarpunk Traderbot early blueprint trades with cotton beeswax watermelon copper silicon and wheat"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Traderbot trades are the route forward. The early chain moves from basic island resources into copper, silicon, wheat, bread, eggs, and cobalt.
+  </figcaption>
+</figure>
+
+The first major range upgrade needs **32 Copper**.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-airship-upgrade-32-copper.webp"
+    alt="Solarpunk Traderbot airship upgrade trade requiring 32 copper"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bring 32 copper for the first major airship upgrade trade. Carry extra copper if you have room because cables and machines also need it.
+  </figcaption>
+</figure>
+
+A clean copper trip looks like this:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Fly to a copper island inside the first exploration ring.</li>
+  <li>Bring cheap pickaxes.</li>
+  <li>Mine at least 32 copper.</li>
+  <li>Collect extra copper if your inventory can handle it.</li>
+  <li>Return to Traderbot and complete the upgrade trade.</li>
+  <li>Fly home and apply the upgrade at your dock.</li>
+</ol>
+
+Copper is not only for the upgrade. It also matters for cables, solar panels, powered devices, and energy progression.
+
+<h2 id="why-airship-range-not-expanding">
+  Why your airship range is not expanding
+</h2>
+
+If you already traded for an airship upgrade but the map circle did not move, the problem is usually the dock step.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-dock-airship-upgrade-button.webp"
+    alt="Solarpunk dock upgrade button used to apply an airship upgrade and expand the range circle"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After every airship upgrade trade, return to your dock and click Upgrade. Your range will not expand until this step is done.
+  </figcaption>
+</figure>
+
+Use this checklist:
+
+<GuideTable
+caption="Why your Solarpunk airship range is not expanding."
+columns={rangeProblemColumns}
+rows={rangeProblemRows}
+/>
+
+Your map shows a white range circle around your airship. If an island is outside that circle, you cannot reach it yet. Finish the next Traderbot upgrade milestone, return to your dock, and apply the upgrade.
+
+The upgrade trade gives you the item. The dock applies it.
+
+<h2 id="after-first-upgrade">
+  After the first upgrade: wheat and quartz
+</h2>
+
+After applying the 32 copper upgrade, search the next ring for **wheat** and **quartz**.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-wheat-quartz-islands-after-upgrade.webp"
+    alt="Solarpunk second ring island with wheat cotton and quartz after the first airship upgrade"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After the first range upgrade, do not fly home too quickly. Check upper paths, lower paths, crops, chests, and ore nodes.
+  </figcaption>
+</figure>
+
+A good first target is the **northwest island group in the second ring** if it appears in your map layout. Look for pale quartz ore and wheat plants. Island layout can vary, so use the map ring and visible islands as your guide, not a fixed coordinate.
+
+Wheat feeds the animal and bread loop. Quartz smelts into **silicon**.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-quartz-smelted-into-silicon.webp"
+    alt="Solarpunk quartz smelted into silicon in the furnace"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Quartz is the silicon route. Bring quartz home and smelt it before checking Tier 2 again.
+  </figcaption>
+</figure>
+
+If Tier 2 is stuck, make sure you actually smelted quartz into silicon. Simply finding quartz is not enough.
+
+<h2 id="best-islands-to-explore">
+  Best islands to explore first
+</h2>
+
+Use this short version for exploration order:
+
+<GuideTable
+caption="Solarpunk island exploration order."
+columns={islandColumns}
+rows={islandRows}
+/>
+
+The rule is simple: fly for the resource gate you need next. First copper, then wheat and quartz, then eggs and cobalt.
+
+<h2 id="egg-upgrade-cobalt">
+  Egg upgrade, cobalt, and outer islands
+</h2>
+
+After you start animal progression, eggs become another airship upgrade gate.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-airship-egg-upgrade.webp"
+    alt="Solarpunk Traderbot airship upgrade trade requiring six eggs"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Save your first six eggs for the airship upgrade. Do not cook them before this gate is done.
+  </figcaption>
+</figure>
+
+To prepare for this upgrade:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Collect wheat after the first range upgrade.</li>
+  <li>Grow enough wheat for animal feed.</li>
+  <li>Unlock Animal Basics.</li>
+  <li>Build water troughs, feeding troughs, and chicken coops.</li>
+  <li>Keep chickens fed, watered, and sheltered.</li>
+  <li>Save the first six eggs for Traderbot.</li>
+</ol>
+
+After the egg upgrade, you can push toward outer islands with carrots, sunflowers, pigs, and cobalt.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-cobalt-island-after-upgrade.webp"
+    alt="Solarpunk cobalt ore on an outer island after a later airship upgrade"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cobalt is a major Tier 3 gate. When you find it, bring home more than one small stack if your inventory allows it.
+  </figcaption>
+</figure>
+
+Cobalt pushes you into Tier 3, where Windmill, drones, and stronger automation become available.
+
+<h2 id="advanced-dock-boost">
+  Advanced Dock and boost
+</h2>
+
+The **Advanced Dock** is useful, but it is not a beginner priority. It needs power, so a weak base can become worse after you add it.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-advanced-dock-boost.webp"
+    alt="Solarpunk Advanced Dock boost prompt while flying an airship"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Boost is useful for long return trips, but it is dangerous near your dock because the airship keeps momentum.
+  </figcaption>
+</figure>
+
+Build Advanced Dock when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>your solar and battery setup is stable,</li>
+  <li>you understand your Network Display,</li>
+  <li>you are flying between islands often,</li>
+  <li>and your base can afford another powered device.</li>
+</ul>
+
+Use boost in short bursts. Do not boost hard while already close to an island, dock, or cliff.
+
+<h2 id="repair-and-retrieve">
+  Repair and retrieve your airship
+</h2>
+
+Crashes happen, especially when you are learning docking or using boost.
+
+<figure className="my-8">
+  <Image
+    src="/images/solarpunk/solarpunk-airship-repair-kit.webp"
+    alt="Solarpunk repairing a damaged airship with a repair kit"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check damage after a bad landing. Repair kits are worth keeping at base once you start longer flights.
+  </figcaption>
+</figure>
+
+Know both recovery tools:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Repair Kit:</strong> use it when the airship is damaged.</li>
+  <li><strong>Retrieve at Dock:</strong> use your dock if the airship is lost, crashed, or left in an awkward place.</li>
+</ul>
+
+If you crash while carrying rare materials, you may still need to recover your dropped crate. Retrieval helps the ship, not every mistake.
+
+<h2 id="co-op-airship">
+  Co-op airship behavior
+</h2>
+
+In co-op, only the player who built an airship can use it. Your partner needs their own.
+
+The safest co-op rule is simple: **each player who wants independent airship travel should build their own Airship Dock and airship.**
+
+Good co-op setup:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>One player rushes food, water, and cotton.</li>
+  <li>One player gathers wood, iron, and cloth for dock progress.</li>
+  <li>Each explorer builds their own airship when possible.</li>
+  <li>Share crop and resource discoveries at the base.</li>
+  <li>Do not send every player in a different direction until everyone understands range limits.</li>
+</ol>
+
+If you only have enough materials for one airship, let that player handle Traderbot and resource scouting first, then build the second airship as soon as possible.
+
+<h2 id="airship-mistakes">
+  Airship mistakes to avoid
+</h2>
+
+<GuideTable
+caption="Common Solarpunk airship mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+Most airship mistakes come from skipping a progression step. Check the crashed component, check the dock upgrade button, check the map circle, and check whether your next gate is copper, wheat, quartz, eggs, or cobalt.
+
+<h2 id="recommended-airship-route">
+  Recommended airship route
+</h2>
+
+After collecting the Crashed Airship Component and unlocking the dock route, follow this clean progression path:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Build and place the Airship Dock.</li>
+  <li>Build your first airship with 10 Iron, 3 Cloth, and 1 Crashed Airship Component.</li>
+  <li>Practice docking before carrying important resources.</li>
+  <li>Fly to Traderbot and start the trade chain.</li>
+  <li>Mine copper inside the first exploration ring.</li>
+  <li>Trade 32 copper for the first airship upgrade.</li>
+  <li>Return home and apply the upgrade at your dock.</li>
+  <li>Search the next ring for wheat and quartz.</li>
+  <li>Smelt quartz into silicon for Tier 2.</li>
+  <li>Grow wheat, support chickens, and save six eggs.</li>
+  <li>Trade eggs for the next airship upgrade.</li>
+  <li>Push outward for carrots, sunflowers, pigs, and cobalt.</li>
+  <li>Use cobalt to unlock Tier 3 and move toward Windmill / drones.</li>
+</ol>
+
+This route keeps every flight tied to a specific unlock instead of random island hopping.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="faq">
+  Solarpunk airship FAQ
+</h2>
+
+### How do I start the airship route in Solarpunk?
+
+Collect the Crashed Airship Component from the airship wreck, then continue toward the Airship Dock at the Research Table.
+
+### Where do I get the Crashed Airship Component?
+
+You get the Crashed Airship Component from the crashed airship wreck during early progression. Interact with the wreck part, collect the component, then return to your dock route.
+
+### How do I get Airship Parts in Solarpunk?
+
+For the first airship, you need the Crashed Airship Component from the wreck. Collect it from the crashed airship, then build the first airship from the Airship Dock panel.
+
+### What are the Airship Dock materials?
+
+The Airship Dock research step uses 5 Wood, 5 Iron, and 5 Cloth. After researching it, build and place the dock near a clear edge.
+
+### What are the first airship materials?
+
+The first airship needs 10 Iron, 3 Cloth, and 1 Crashed Airship Component. Build it from the Airship Dock panel.
+
+### How do I upgrade the airship?
+
+Complete the required Traderbot trade, return home, dock the airship, open the dock panel, and click Upgrade.
+
+### Why did my airship range not expand?
+
+You probably completed the trade but did not apply the upgrade at your dock. The map circle expands only after the dock upgrade step.
+
+### How do I know if an island is out of range?
+
+Open the map and check the white range circle. If the island is outside the circle, your current airship level cannot reach it yet.
+
+### What does the first airship upgrade need?
+
+The first major range upgrade needs 32 copper through Traderbot. Bring extra copper if possible because energy systems also need it.
+
+### Where should I go after the first airship upgrade?
+
+Search the next ring for wheat and quartz. A northwest island group can be a good target if it appears in your map layout, but use the range circle and visible islands as your guide.
+
+### How do I get silicon?
+
+Mine quartz on second-ring islands, bring it home, and smelt it into silicon.
+
+### How do I get the egg airship upgrade?
+
+Grow wheat, make animal feed, support chickens with food, water, and shelter, then save six eggs for Traderbot.
+
+### Can co-op players use the same airship?
+
+No. In co-op, only the player who built an airship can use it. Your partner needs their own Airship Dock and airship for independent travel.
+
+### Should I fly during thunderstorms?
+
+Avoid it when carrying rare materials. Bad weather makes flying, docking, and recovery riskier. Wait, sleep, or dock safely if possible.
+
+### Is the Advanced Dock worth it?
+
+Yes, but only after your power grid is stable. Advanced Dock uses power, and boost can make you crash if you use it too close to your dock.
+
+### How do I repair the airship?
+
+Craft or carry a repair kit, then use it on the damaged airship. Also remember that the dock can retrieve a lost or crashed airship.
