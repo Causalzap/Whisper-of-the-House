@@ -1,0 +1,842 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const systemColumns = [
+{ key: "System", label: "System" },
+{ key: "What It Changes", label: "What It Changes" },
+{ key: "When It Matters", label: "When It Matters" },
+];
+
+export const systemRows = [
+{
+System: "Attributes",
+"What It Changes":
+"Base combat feel: damage, Essence scaling, health, armor, stamina, cooldowns, fire rate, movement, and critical stats.",
+"When It Matters":
+"Every run. Your first stat choices decide whether a Voidling feels safe, fast, durable, or ability-heavy.",
+},
+{
+System: "Evolution Chamber",
+"What It Changes":
+"Individual evolution nodes, element routes, abilities, movement tools, status effects, and perks.",
+"When It Matters":
+"Early and mid game. This is the first major way to change how a specific Voidling plays.",
+},
+{
+System: "Cerebrum Enhancer",
+"What It Changes":
+"Species-wide upgrades that apply to that creature type, including future Voidlings of the same species.",
+"When It Matters":
+"As soon as you know which species you actually use often.",
+},
+{
+System: "Training Room",
+"What It Changes":
+"Lets backup Voidlings gain experience while you complete missions with another creature.",
+"When It Matters":
+"Mid game. Use it to keep backups from falling behind without forcing them into every mission.",
+},
+{
+System: "Breeding",
+"What It Changes":
+"Same-species offspring, inherited traits, stronger base stats, and Dual Natures.",
+"When It Matters":
+"Mid to late game, once you start saving high-stat parents and useful Natures.",
+},
+{
+System: "Splicing Station",
+"What It Changes":
+"Genes, abilities, elemental affinity, looks, modules, and mutated perks from discovered evolution data.",
+"When It Matters":
+"Late game. Use it after you have the parents, traits, and genes you want.",
+},
+{
+System: "Catalyzers",
+"What It Changes":
+"Endgame power modifiers equipped through the Catalyzer Injector.",
+"When It Matters":
+"After Void Strikes and Abyss progression open. This is not a first-hour system.",
+},
+];
+
+export const buildOrderColumns = [
+{ key: "Stage", label: "Stage" },
+{ key: "Main Goal", label: "Main Goal" },
+{ key: "Best Move", label: "Best Move" },
+{ key: "Avoid This", label: "Avoid This" },
+];
+
+export const buildOrderRows = [
+{
+Stage: "Early game",
+"Main Goal": "Make one Voidling reliable.",
+"Best Move":
+"Use Attributes, Evolution Chamber, and Cerebrum Enhancer on the creature you actually play.",
+"Avoid This":
+"Splitting every resource across every species just because a new option appears.",
+},
+{
+Stage: "Early cleanup",
+"Main Goal": "Unlock useful genes and Golden Egg variants.",
+"Best Move":
+"Evolve your main species, collect Golden Eggs, and inspect rare variants before releasing them.",
+"Avoid This":
+"Ignoring Golden Egg Voidlings because they are not on the normal genetic tree.",
+},
+{
+Stage: "Mid game",
+"Main Goal": "Build stronger parent candidates.",
+"Best Move":
+"Use Breeding to improve stat lines and combine useful Natures within the same species.",
+"Avoid This":
+"Releasing high-stat Voidlings or rare Natures before you understand Breeding.",
+},
+{
+Stage: "Before Splicing",
+"Main Goal": "Lock in the parent line you want.",
+"Best Move":
+"Finish Breeding before you Splice the final candidate.",
+"Avoid This":
+"Splicing a parent candidate too early, because spliced Voidlings can no longer breed.",
+},
+{
+Stage: "Late game",
+"Main Goal": "Create a custom endgame build.",
+"Best Move":
+"Use Splicing to combine discovered genes, abilities, elements, and mutated perks.",
+"Avoid This":
+"Spending Polychrome Mutagens on experiments without a plan.",
+},
+{
+Stage: "Endgame",
+"Main Goal": "Push Abyss and Void Strike power.",
+"Best Move":
+"Equip Catalyzers, test their order, and swap them to fine-tune your build.",
+"Avoid This":
+"Treating Catalyzers like early progression. They are a late-game layer.",
+},
+];
+
+export const attributeColumns = [
+{ key: "Attribute", label: "Attribute" },
+{ key: "What It Improves", label: "What It Improves" },
+{ key: "Best Use", label: "Best Use" },
+];
+
+export const attributeRows = [
+{
+Attribute: "Strength",
+"What It Improves": "Attack power and critical damage.",
+"Best Use":
+"Pick this when your Voidling already survives well and you want faster clears.",
+},
+{
+Attribute: "Essence",
+"What It Improves": "Elemental damage bonus and status effect damage multiplier.",
+"Best Use":
+"Pick this for element-heavy builds, status routes, Poison, Burn, Frostbite, Static, or Disintegrate plans.",
+},
+{
+Attribute: "Vitality",
+"What It Improves": "Health, armor, and stamina.",
+"Best Use":
+"Pick this when you are still learning fights or when a build dies before its damage matters.",
+},
+{
+Attribute: "Recuperation",
+"What It Improves":
+"Reload duration, cooldown reduction, ultimate fill rate, and healing multiplier.",
+"Best Use":
+"Pick this for ability-heavy builds or Voidlings that feel too slow between attacks.",
+},
+{
+Attribute: "Agility",
+"What It Improves": "Fire rate multiplier, movement speed, and critical chance.",
+"Best Use":
+"Pick this for fast ranged builds, mobility builds, and crit-friendly playstyles.",
+},
+];
+
+export const evolutionColumns = [
+{ key: "Evolution Choice", label: "Evolution Choice" },
+{ key: "Good When", label: "Good When" },
+{ key: "Beginner Warning", label: "Beginner Warning" },
+];
+
+export const evolutionRows = [
+{
+"Evolution Choice": "Primary attack upgrade",
+"Good When":
+"You use the basic attack constantly and want smoother mission clears.",
+"Beginner Warning":
+"A strong primary attack is usually safer than a flashy ability you rarely land.",
+},
+{
+"Evolution Choice": "Element change",
+"Good When":
+"You need a better matchup for a mission faction or want a specific Mutagen route.",
+"Beginner Warning":
+"Do not change element blindly. Check the Atlas Terminal weakness icons first.",
+},
+{
+"Evolution Choice": "Status effect route",
+"Good When":
+"Your build can apply Poison, Burn, Frostbite, Static, or Disintegrate consistently.",
+"Beginner Warning":
+"Status routes feel weak if you cannot keep stacks active.",
+},
+{
+"Evolution Choice": "Mobility or survival perk",
+"Good When":
+"You are losing runs because you cannot escape, heal, dodge, or reposition.",
+"Beginner Warning":
+"Damage is not always the problem. A safer build can clear more consistently.",
+},
+{
+"Evolution Choice": "Future gene unlock",
+"Good When":
+"You want the gene, ability, or perk available later for Splicing.",
+"Beginner Warning":
+"Only chase future Splicing pieces after your current build can already clear missions.",
+},
+];
+
+export const trainingColumns = [
+{ key: "Training Room Use", label: "Training Room Use" },
+{ key: "Why It Helps", label: "Why It Helps" },
+{ key: "Best Target", label: "Best Target" },
+];
+
+export const trainingRows = [
+{
+"Training Room Use": "Level backup Voidlings",
+"Why It Helps":
+"A backup can gain experience while you complete missions with your main Voidling.",
+"Best Target":
+"A strong alternate element or faction counter you want ready later.",
+},
+{
+"Training Room Use": "Prepare breeding candidates",
+"Why It Helps":
+"A good parent candidate does not have to sit unused forever.",
+"Best Target":
+"High-stat Voidlings, rare Natures, and same-species candidates you may breed.",
+},
+{
+"Training Room Use": "Test new species later",
+"Why It Helps":
+"New species often feel weak if you try them immediately at low level.",
+"Best Target":
+"A newly hatched species you like but cannot safely use in current missions yet.",
+},
+];
+
+export const breedingColumns = [
+{ key: "Breeding Rule", label: "Breeding Rule" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "Player Advice", label: "Player Advice" },
+];
+
+export const breedingRows = [
+{
+"Breeding Rule": "Same species only",
+"What It Means":
+"The Pheromone Nest uses two Voidlings of the same species for selective breeding.",
+"Player Advice":
+"Keep multiple good candidates from a species you like instead of releasing every duplicate.",
+},
+{
+"Breeding Rule": "Parent traits matter",
+"What It Means":
+"Offspring can inherit stat ranges and useful traits from each parent.",
+"Player Advice":
+"Save high-stat rolls, useful Natures, and rare variants before choosing parents.",
+},
+{
+"Breeding Rule": "Dual Natures come from Breeding",
+"What It Means":
+"Breeding is the route for combining Natures into stronger long-term candidates.",
+"Player Advice":
+"Do not judge duplicate Voidlings only by level. A good Nature can make a parent valuable.",
+},
+{
+"Breeding Rule": "Inheritance improves through Hatchery upgrades",
+"What It Means":
+"Early offspring may inherit only part of the parents' potential, but Hatchery upgrades can improve inheritance up to the full parent value.",
+"Player Advice":
+"Upgrade the breeding setup before trying to perfect a final stat line.",
+},
+{
+"Breeding Rule": "Eggs can appear after missions",
+"What It Means":
+"Once the Pheromone Nest is running, breeding results can show up after mission clears.",
+"Player Advice":
+"Run normal missions while breeding is active instead of waiting at the ship.",
+},
+];
+
+export const splicingColumns = [
+{ key: "Splicing Feature", label: "Splicing Feature" },
+{ key: "What It Does", label: "What It Does" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const splicingRows = [
+{
+"Splicing Feature": "Gene editing",
+"What It Does":
+"Uses genes you have already discovered through evolution.",
+"Why It Matters":
+"The more you evolve and collect, the more options your Splicing Station can use.",
+},
+{
+"Splicing Feature": "Ability and element changes",
+"What It Does":
+"Lets you reshape abilities and elemental affinity.",
+"Why It Matters":
+"This is how you start building around multiple faction matchups instead of one fixed route.",
+},
+{
+"Splicing Feature": "Mutated perks",
+"What It Does":
+"A spliced Voidling can carry up to three mutated perks.",
+"Why It Matters":
+"Mutated perks are one of the biggest reasons Golden Egg variants and rare genes matter.",
+},
+{
+"Splicing Feature": "No Breeding after Splicing",
+"What It Does":
+"Once a Voidling is spliced, it can no longer breed.",
+"Why It Matters":
+"This makes Splicing a final-leaning commitment, not a casual test.",
+},
+];
+
+export const catalyzerColumns = [
+{ key: "Catalyzer Rule", label: "Catalyzer Rule" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "Player Advice", label: "Player Advice" },
+];
+
+export const catalyzerRows = [
+{
+"Catalyzer Rule": "Endgame power layer",
+"What It Means":
+"Catalyzers push Voidlings beyond their normal thresholds after the Catalyzer Injector opens.",
+"Player Advice":
+"Do not plan your first build around them. Treat them as an Abyss and Void Strike system.",
+},
+{
+"Catalyzer Rule": "Up to five at a time",
+"What It Means":
+"A Voidling can equip up to five Catalyzers.",
+"Player Advice":
+"Use them to reinforce the build you already made through Evolution, Breeding, and Splicing.",
+},
+{
+"Catalyzer Rule": "Swappable without consequence",
+"What It Means":
+"Catalyzers can be swapped, so you can test different setups.",
+"Player Advice":
+"Experiment with Catalyzers more freely than with Splicing decisions.",
+},
+{
+"Catalyzer Rule": "Order matters",
+"What It Means":
+"Catalyzer effects are applied in equipped order.",
+"Player Advice":
+"If a setup feels wrong, try changing the order before abandoning the build.",
+},
+{
+"Catalyzer Rule": "Found in Void Strikes and Leon's cache",
+"What It Means":
+"Catalyzers are tied to late-game activities and rewards.",
+"Player Advice":
+"Farm them after your main build is already strong enough to survive deeper runs.",
+},
+];
+
+export const problemColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Use This System", label: "Use This System" },
+{ key: "Why", label: "Why" },
+];
+
+export const problemRows = [
+{
+Problem: "My main Voidling dies too fast",
+"Use This System": "Attributes, Evolution Chamber, Cerebrum Enhancer",
+Why: "Vitality, survival perks, and species upgrades usually fix early durability problems faster than chasing rare systems.",
+},
+{
+Problem: "My damage feels too low",
+"Use This System": "Evolution Chamber, Attributes, element matchup",
+Why: "A better attack node, Strength or Essence investment, or correct element can change a weak mission matchup.",
+},
+{
+Problem: "My backup Voidlings are underleveled",
+"Use This System": "Training Room",
+Why: "Training lets backups gain experience while you keep clearing missions with your main Voidling.",
+},
+{
+Problem: "I found good duplicates but do not know what to keep",
+"Use This System": "Breeding",
+Why: "Same-species candidates with good stats, rare Natures, or Golden Egg variants can become better parents later.",
+},
+{
+Problem: "I want stronger Nature combinations",
+"Use This System": "Breeding",
+Why: "Dual Natures come from Breeding, so parent quality matters before late customization.",
+},
+{
+Problem: "I want custom abilities, genes, elements, or mutated perks",
+"Use This System": "Splicing Station",
+Why: "Splicing is the custom-build layer, but its 5 Polychrome Mutagen cost makes planning important.",
+},
+{
+Problem: "Abyss or Void Strikes feel too hard",
+"Use This System": "Catalyzers",
+Why: "Catalyzers tune endgame builds after your core Evolution, Breeding, and Splicing choices already work.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Spending Mutagens without a build goal",
+"Why It Hurts":
+"You can unlock a path that does not match your real playstyle or upcoming mission matchup.",
+"Better Move":
+"Pick evolution nodes that solve a current problem: damage, safety, element, status, or mobility.",
+},
+{
+Mistake: "Ignoring Cerebrum Enhancer upgrades",
+"Why It Hurts":
+"Species-wide upgrades are easy to underrate because individual evolution feels more exciting.",
+"Better Move":
+"Upgrade the species you actually use often.",
+},
+{
+Mistake: "Releasing duplicate Voidlings too early",
+"Why It Hurts":
+"Duplicates can still be valuable if they have better stats, rare Natures, or parent potential.",
+"Better Move":
+"Inspect duplicates before releasing them, especially within your favorite species.",
+},
+{
+Mistake: "Wasting Polychrome Mutagens",
+"Why It Hurts":
+"Splicing costs 5 Polychrome Mutagens, so random experiments are expensive.",
+"Better Move":
+"Plan the genes, abilities, element, and mutated perks before committing.",
+},
+{
+Mistake: "Forgetting the Training Room",
+"Why It Hurts":
+"Useful backup Voidlings can fall behind if you only level your main creature.",
+"Better Move":
+"Assign backups or parent candidates to training while you clear missions.",
+},
+{
+Mistake: "Treating Catalyzers like early progression",
+"Why It Hurts":
+"Catalyzers are an endgame tuning layer, not the first system that fixes a weak build.",
+"Better Move":
+"Build a reliable foundation first, then use Catalyzers for Abyss and Void Strike tuning.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Voidling Bound**, long-term power comes from stacking systems in the right order: make one Voidling reliable, evolve it with Mutagens, upgrade its species at the Cerebrum Enhancer, train backups, breed strong same-species candidates, then use Splicing and Catalyzers for late-game builds.
+
+Splicing is expensive and final-leaning: it costs **5 Polychrome Mutagens**, and spliced Voidlings can no longer breed. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Voidling Bound. This guide covers Attributes, Evolution Chamber, Cerebrum Enhancer, Training Room, Breeding, Splicing Station, Catalyzers, Polychrome Mutagen cost, Dual Natures, and how to choose the system that fixes your current build problem.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-evolution-chamber-mutagen-path.webp"
+    alt="Voidling Bound Evolution Chamber Mutagen path and evolution build planning"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Evolution is your first major build-shaping system, but it is only one part of long-term Voidling progression.
+  </figcaption>
+</figure>
+
+<h2 id="voidling-bound-evolution-breeding-splicing-guide">
+  Voidling Bound evolution, breeding, and splicing guide
+</h2>
+
+**Voidling Bound** has several different power systems, and they do not all solve the same problem.
+
+If you only evolve your favorite creature, you will miss species-wide upgrades. If you only chase new Voidlings, your main build may fall behind. If you Splice without planning, you can waste rare Polychrome Mutagens on a candidate that was not ready.
+
+This guide explains the full progression stack:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Attributes make a Voidling feel better immediately.</li>
+  <li>Evolution Chamber changes an individual Voidling's route.</li>
+  <li>Cerebrum Enhancer improves a species.</li>
+  <li>Training Room keeps backups from falling behind.</li>
+  <li>Breeding creates stronger same-species offspring and Dual Nature candidates.</li>
+  <li>Splicing turns a finished candidate into a custom late-game build.</li>
+  <li>Catalyzers become the endgame tuning layer once Void Strikes open.</li>
+</ul>
+
+For the first-hour basics, start with the <Link href="/voidling-bound/beginner-guide">Voidling Bound Beginner Guide</Link>. For resource cleanup, use the <Link href="/voidling-bound/all-collectibles">All Collectibles Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="system-overview">
+  System overview: what each upgrade system actually does
+</h2>
+
+<GuideTable
+caption="Voidling Bound upgrade systems and when they matter."
+columns={systemColumns}
+rows={systemRows}
+/>
+
+Think of these systems as layers. Evolution changes one Voidling. Cerebrum upgrades help a whole species. Training keeps backups relevant. Breeding improves future candidates. Splicing customizes a planned late-game creature. Catalyzers tune endgame power after that.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="best-build-order">
+  Best build order
+</h2>
+
+Use this table as the practical progression route. It explains what to focus on at each stage and what mistake to avoid.
+
+<GuideTable
+caption="Voidling Bound build order from early game to endgame."
+columns={buildOrderColumns}
+rows={buildOrderRows}
+/>
+
+If you are unsure what to do next, find your current stage and follow the "Best Move" column.
+
+<h2 id="attributes-explained">
+  Attributes explained
+</h2>
+
+Attributes are the foundation of every build. They decide whether a Voidling feels strong, safe, fast, or ability-heavy before you even consider Breeding or Splicing.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-first-voidling-attributes-kwipeck.webp"
+    alt="Voidling Bound attributes Strength Essence Vitality Recuperation Agility"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Before chasing complex systems, make sure your core attributes support the way you actually fight.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Voidling Bound attributes and build uses."
+columns={attributeColumns}
+rows={attributeRows}
+/>
+
+The safest early pattern is **Vitality for survival**, then **Strength or Agility** if your attacks feel slow or weak. Save deeper **Essence** decisions for element and status builds that can actually apply their effects often.
+
+<h2 id="evolution-chamber">
+  Evolution Chamber and Mutagens
+</h2>
+
+The **Evolution Chamber** uses Mutagens to evolve an individual Voidling. Evolution nodes can change damage, movement, ability behavior, elements, status effects, and future Splicing options.
+
+<GuideTable
+caption="How to choose Evolution Chamber nodes."
+columns={evolutionColumns}
+rows={evolutionRows}
+/>
+
+A good evolution choice should answer one question:
+
+<strong>What problem is this node solving for my current build?</strong>
+
+If the node gives safer range, better mission matchups, more reliable status, or a gene you know you want later, it has a clear purpose. If you are picking it only because it is available, wait.
+
+<h2 id="cerebrum-enhancer">
+  Cerebrum Enhancer and species-wide upgrades
+</h2>
+
+The **Cerebrum Enhancer** is separate from individual evolution. Evolution changes one Voidling. Cerebrum upgrades improve a species.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-cerebrum-enhancer-species-upgrades.webp"
+    alt="Voidling Bound Cerebrum Enhancer species upgrades and research samples"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cerebrum Enhancer upgrades are strongest when you focus on the species you actually use.
+  </figcaption>
+</figure>
+
+This matters because future Voidlings of the same species can benefit from that species progress. If you love Kwipeck, Gilick, Kerapin, Gwigoon, or another species, species upgrades make later candidates easier to build.
+
+Use Cerebrum Enhancer upgrades when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you know which species you use most,</li>
+  <li>you keep hatching better candidates from that species,</li>
+  <li>you want future offspring to start from a stronger foundation,</li>
+  <li>or your main creature needs more reliability before harder missions.</li>
+</ul>
+
+Do not spread early research samples too thin. A focused species upgrade plan usually feels better than a shallow upgrade spread across every creature you own.
+
+<h2 id="training-room">
+  Training Room: keep backups from falling behind
+</h2>
+
+The **Training Room** is easy to forget because it is not as flashy as Evolution or Splicing. It still matters because Voidling Bound often asks you to bring the right creature for the right mission.
+
+<GuideTable
+caption="How to use the Training Room in Voidling Bound."
+columns={trainingColumns}
+rows={trainingRows}
+/>
+
+The best use is simple: keep one main Voidling active, then train backup candidates that fill gaps your main build does not cover.
+
+Good Training Room targets include:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a different element for faction matchups,</li>
+  <li>a same-species parent candidate for later Breeding,</li>
+  <li>a Golden Egg variant you want to test later,</li>
+  <li>or a species that feels interesting but is too underleveled for current missions yet.</li>
+</ul>
+
+This lets you experiment without dragging a weak Voidling into missions before it is ready.
+
+<h2 id="breeding-and-pheromone-nest">
+  Breeding and the Pheromone Nest
+</h2>
+
+Breeding opens through the **Pheromone Nest** and works within the same species. It is not just a collection system. It is how you turn good candidates into better next-generation Voidlings.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-pheromone-nest-breeding.webp"
+    alt="Voidling Bound Pheromone Nest breeding same species offspring traits"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Breeding is where duplicate Voidlings start to matter, especially if they have strong stats or useful Natures.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Voidling Bound Breeding rules and player advice."
+columns={breedingColumns}
+rows={breedingRows}
+/>
+
+The big lesson is that duplicate Voidlings are not automatically junk. A lower-level candidate can still be valuable if it has better parent traits, a rare Nature, or a stronger stat profile.
+
+Before releasing a Voidling, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>total stat potential,</li>
+  <li>Nature and Nature rarity,</li>
+  <li>whether it belongs to a species you plan to keep using,</li>
+  <li>whether it came from a Golden Egg,</li>
+  <li>and whether it could become a better parent than your current main.</li>
+</ul>
+
+Breeding is especially important because it is the path toward stronger parent lines and Dual Nature candidates. If you care about long-term min-maxing, save your best parent options before committing to irreversible systems.
+
+<h2 id="golden-egg-variants-and-future-genes">
+  Golden Egg variants and future genes
+</h2>
+
+Golden Egg Voidlings are not only collectibles. They can contain rare variants, unusual Natures, unique looks, and genes outside the normal evolution tree.
+
+That matters because the **Splicing Station** can later use discovered genes, abilities, and perks to create stronger custom Voidlings.
+
+Use this simple rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Hatch Golden Eggs.</li>
+  <li>Inspect the result.</li>
+  <li>Keep rare variants until you know whether their genes or perks matter.</li>
+  <li>Only release them after you are sure they are not useful for Breeding, Splicing, or Voidpedia completion.</li>
+</ul>
+
+For exact locations and hatch results, use the <Link href="/voidling-bound/golden-egg-locations">Golden Egg Locations Guide</Link>.
+
+<h2 id="splicing-station">
+  Splicing Station: final custom build layer
+</h2>
+
+The **Splicing Station** is powerful, but it is not a cheap test button. **Each Splice costs 5 Polychrome Mutagens**, so treat it as a planned late-game commitment.
+
+Use Splicing when you already know the candidate is worth keeping, the parent line is finished, and the genes, abilities, element, or mutated perks are worth the cost.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-splicing-station-mutated-perks.webp"
+    alt="Voidling Bound Splicing Station 5 Polychrome Mutagen cost mutated perks and custom genes"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Splicing lets you reshape a final candidate with discovered genes, abilities, elemental affinity, and mutated perks.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Voidling Bound Splicing Station features and risks."
+columns={splicingColumns}
+rows={splicingRows}
+/>
+
+Splicing is the right move when you have a specific custom build in mind. If you are still experimenting with parents, Natures, or base stat lines, keep working through Breeding and normal upgrades first.
+
+<h2 id="catalyzers">
+  Catalyzers and Catalyzer Injector
+</h2>
+
+**Catalyzers** are the endgame layer of Voidling progression. They are not a replacement for Evolution, Cerebrum Enhancer, Breeding, or Splicing. They sit on top of those systems once you start pushing deeper late-game content.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-catalyzer-injector.webp"
+    alt="Voidling Bound Catalyzer Injector Catalyzers Void Strikes and Abyss endgame build"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Catalyzers are best treated as endgame build tuning for Abyss and Void Strike progression.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Voidling Bound Catalyzer rules and player advice."
+columns={catalyzerColumns}
+rows={catalyzerRows}
+/>
+
+Catalyzers are more flexible than Splicing because you can swap them around. That makes them good for testing endgame setups after your main build already exists.
+
+Use Catalyzers to answer questions like:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Do I need more damage for deeper floors?</li>
+  <li>Do I need more survival for longer runs?</li>
+  <li>Does this build need faster uptime?</li>
+  <li>Does changing the Catalyzer order improve the result?</li>
+  <li>Is this Voidling ready for Void Strikes, or does it need more work first?</li>
+</ul>
+
+If you are still early in the story, do not worry about Catalyzers yet. Build a reliable foundation first.
+
+
+<h2 id="which-system-fixes-your-problem">
+  Which system fixes your current problem?
+</h2>
+
+Do not use every system just because it is unlocked. Start from the problem your build actually has, then choose the system that fixes it.
+
+<GuideTable
+caption="Voidling Bound build problem solver."
+columns={problemColumns}
+rows={problemRows}
+/>
+
+This section is the practical way to avoid wasting resources: use early systems for early problems, save Splicing for planned custom builds, and treat Catalyzers as endgame tuning.
+
+<h2 id="common-mistakes">
+  Common evolution, breeding, and splicing mistakes
+</h2>
+
+<GuideTable
+caption="Common Voidling Bound build progression mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+Most mistakes come from rushing the exciting system before the foundation is ready. Evolution should support your current playstyle. Breeding should prepare better candidates. Splicing should customize a planned build. Catalyzers should tune an already strong endgame build.
+
+<h2 id="faq">
+  Voidling Bound evolution, breeding, and splicing FAQ
+</h2>
+
+### What should I upgrade first?
+
+Upgrade the Voidling and species you actually use. Start with Attributes, Evolution Chamber nodes, and Cerebrum Enhancer upgrades before worrying about late-game systems.
+
+### Is Evolution or Cerebrum Enhancer more important?
+
+They do different jobs. Evolution changes one Voidling. Cerebrum Enhancer upgrades the species, so it becomes stronger for future candidates too.
+
+### What does Breeding do?
+
+Breeding uses same-species parents to create offspring that can inherit useful traits, stronger stat lines, and Nature combinations.
+
+### What are Dual Natures?
+
+Dual Natures are stronger Nature combinations created through Breeding. Keep rare or useful Natures instead of releasing them too quickly.
+
+### Can a spliced Voidling breed?
+
+No. Spliced Voidlings can no longer breed, so parent planning should happen before a final Splicing decision.
+
+### How much does Splicing cost?
+
+Splicing costs **5 Polychrome Mutagens**. Because that resource is rare, plan the genes, abilities, element, and mutated perks before committing.
+
+### What does Splicing change?
+
+Splicing can change genes, looks, abilities, elemental affinity, and mutated perks based on genes you have already discovered.
+
+### Why do Golden Eggs matter for Splicing?
+
+Golden Eggs can hatch secret variants with unique genes, perks, looks, or modules that may become useful for future Splicing plans.
+
+### What is the Training Room for?
+
+The Training Room lets backup Voidlings gain experience while you complete missions. Use it for alternate elements, breeding candidates, and new species you want to test later.
+
+### What are Catalyzers?
+
+Catalyzers are endgame modifiers equipped through the Catalyzer Injector. They are mainly for Void Strikes, Abyss runs, and late build tuning.
+
+### How many Catalyzers can a Voidling equip?
+
+A Voidling can equip up to five Catalyzers at a time, and their order can matter.
+
+### Should beginners worry about Catalyzers?
+
+No. Beginners should focus on a reliable main Voidling, evolution choices, species upgrades, and basic resource management first.
+
+### Which system should I use if my Voidling feels weak?
+
+Use the system that matches the problem. Attributes and Evolution help one Voidling, Cerebrum Enhancer helps a species, Training Room helps backups, Breeding improves parent lines, Splicing customizes final builds, and Catalyzers tune endgame power.

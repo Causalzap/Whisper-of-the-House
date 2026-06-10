@@ -1,0 +1,813 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const collectibleTypeColumns = [
+{ key: "Collectible", label: "Collectible" },
+{ key: "Why You Want It", label: "Why You Want It" },
+{ key: "Best Cleanup Use", label: "Best Cleanup Use" },
+];
+
+export const collectibleTypeRows = [
+{
+Collectible: "Mutagens",
+"Why You Want It":
+"Mutagens unlock elemental evolution paths and new combat options for your Voidlings.",
+"Best Cleanup Use":
+"Farm these first when your next Evolution Chamber node is blocked.",
+},
+{
+Collectible: "Golden Eggs",
+"Why You Want It":
+"Golden Eggs hatch secret Voidlings outside the normal genetic tree.",
+"Best Cleanup Use":
+"Grab them when you want rare variants, future Splicing options, or Voidpedia completion.",
+},
+{
+Collectible: "Quackies",
+"Why You Want It":
+"Quackies are hidden duck collectibles tied to completion and ship-side collection display.",
+"Best Cleanup Use":
+"Save them for dedicated cleanup runs once your build can explore safely.",
+},
+{
+Collectible: "Time Stars",
+"Why You Want It":
+"Time stars reward clean routing and stronger builds.",
+"Best Cleanup Use":
+"Do them separately from hidden collectible runs unless you already know the route.",
+},
+];
+
+export const mutagenTypeColumns = [
+{ key: "I Need", label: "I Need" },
+{ key: "Best Missions To Check", label: "Best Missions To Check" },
+{ key: "Route Cue", label: "Route Cue" },
+];
+
+export const mutagenTypeRows = [
+{
+"I Need": "Organic Mutagen",
+"Best Missions To Check": "Centennial Bloom, Cleaning the Eyrie, Navigate the Maze",
+"Route Cue":
+"Start with plant-heavy routes and upper garden paths. Use Navigate the Maze as your mixed-element fallback if you still need Organic after early cleanup.",
+},
+{
+"I Need": "Pyro Mutagen",
+"Best Missions To Check": "Centennial Bloom, Storm Breaker, Navigate the Maze",
+"Route Cue":
+"Check hot terrain, exposed platforms, fire-crystal routes, and red or orange Elemental Rifts. Navigate the Maze is the best backup if your Pyro gap remains later.",
+},
+{
+"I Need": "Cryo Mutagen",
+"Best Missions To Check": "Secret Stronghold, Subterranean Expedition, Navigate the Maze",
+"Route Cue":
+"Check icy paths, cave routes, frozen blockages, and routes opened by fire crystals. Navigate the Maze is the safest late mixed-element check.",
+},
+{
+"I Need": "Cyber Mutagen",
+"Best Missions To Check": "Secret Stronghold, Pull the Plug, Navigate the Maze",
+"Route Cue":
+"Look around stronghold structures, machinery, antenna areas, platform routes, and yellow or electric-looking Elemental Rifts.",
+},
+{
+"I Need": "Plasma Mutagen",
+"Best Missions To Check": "Pull the Plug, End to the Unknown, Navigate the Maze",
+"Route Cue":
+"Plasma is better checked in later missions. Look for purple Elemental Rifts in maze routes, high platforms, and late-game side paths.",
+},
+];
+
+
+export const gapColumns = [
+{ key: "Step", label: "Step" },
+{ key: "What To Check", label: "What To Check" },
+{ key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const gapRows = [
+{
+Step: "1",
+"What To Check": "Open the Evolution Chamber and choose the Voidling you are actively building.",
+"Why It Helps":
+"Your real Mutagen need depends on the species and evolution path you are using, not on a universal checklist.",
+},
+{
+Step: "2",
+"What To Check": "Look at the next locked evolution node and note the required element.",
+"Why It Helps":
+"This tells you whether you should farm Organic, Pyro, Cryo, Cyber, or Plasma Mutagens.",
+},
+{
+Step: "3",
+"What To Check": "Use the Mutagen type lookup to pick a mission with that element focus.",
+"Why It Helps":
+"You avoid replaying a random mission that does not help your next upgrade.",
+},
+{
+Step: "4",
+"What To Check": "Run the mission as a resource route, not a timer route.",
+"Why It Helps":
+"Elemental Rifts and side-path collectibles are easy to skip when rushing.",
+},
+{
+Step: "5",
+"What To Check": "Return to the Evolution Chamber and check the next node again.",
+"Why It Helps":
+"Your best farm target can change after each evolution unlock.",
+},
+];
+
+export const vireoColumns = [
+{ key: "Mission", label: "Mission" },
+{ key: "Main Collectibles", label: "Main Collectibles" },
+{ key: "Mutagen Type Focus", label: "Mutagen Type Focus" },
+{ key: "Where To Look", label: "Where To Look" },
+];
+
+export const vireoRows = [
+{
+Mission: "Faint Signal",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Use the early route to learn what a Quacky looks like. Sweep the side spaces before leaving the first mission area.",
+},
+{
+Mission: "Save the Cauldron",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Check around the main route instead of moving directly from one objective marker to the next.",
+},
+{
+Mission: "Centennial Bloom",
+"Main Collectibles": "Mutagens, Golden Egg, Quacky",
+"Mutagen Type Focus": "Organic / Pyro / Cryo mix",
+"Where To Look":
+"Search the plant-platform route, upper cliff ledges, garden side paths, and the area around the Golden Egg cliff.",
+},
+{
+Mission: "Stranded Lead",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Replay slowly and check side ledges before finishing the mission route.",
+},
+{
+Mission: "Secret Stronghold",
+"Main Collectibles": "Mutagens, 2 Golden Eggs, Quacky",
+"Mutagen Type Focus": "Cyber / Cryo focus",
+"Where To Look":
+"Drop to the lower area near the start, then check the large antenna building, upper floors, and stronghold side platforms.",
+},
+{
+Mission: "On the Precipice",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Move along the ledges slowly and scan side platforms before committing to the next objective.",
+},
+{
+Mission: "Last Stand",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Do this as a calm cleanup run after the combat route feels comfortable.",
+},
+{
+Mission: "On Night Watch",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Use mission replay to confirm the missing collectible, then sweep the route edges.",
+},
+{
+Mission: "Back to Square One",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Come back later with a stronger Voidling and check the off-route corners.",
+},
+{
+Mission: "Genetic Pursuit",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Treat this as late Vireo cleanup rather than a first-clear objective.",
+},
+];
+
+export const solumColumns = [
+{ key: "Mission", label: "Mission" },
+{ key: "Main Collectibles", label: "Main Collectibles" },
+{ key: "Mutagen Type Focus", label: "Mutagen Type Focus" },
+{ key: "Where To Look", label: "Where To Look" },
+];
+
+export const solumRows = [
+{
+Mission: "Search and Rescue",
+"Main Collectibles": "Mutagens, 2 Golden Eggs, Quacky",
+"Mutagen Type Focus": "Mixed route",
+"Where To Look":
+"Open the early puzzle route, climb to the upper path, hook left for the hidden egg route, then check the building near the last cleansing area.",
+},
+{
+Mission: "Reclaim Sanctuary",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Replay after learning the route and check side structures before finishing.",
+},
+{
+Mission: "Cleaning the Eyrie",
+"Main Collectibles": "Mutagens, 2 Golden Eggs, Quacky",
+"Mutagen Type Focus": "Organic-leaning mixed route",
+"Where To Look":
+"Start with the early building, then hit the nearby fire crystal and inspect the revealed path behind the structure.",
+},
+{
+Mission: "Subterranean Expedition",
+"Main Collectibles": "Mutagens, Golden Egg, Quacky",
+"Mutagen Type Focus": "Cryo route with puzzle interaction",
+"Where To Look":
+"Explore the cave rooms, use fire crystals to melt ice blockages, and check the side route before leaving the chamber.",
+},
+{
+Mission: "Ruin Delver",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Move through the ruin route slowly and check corners before the final push.",
+},
+{
+Mission: "Drawing Fire",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Sweep arena edges instead of focusing only on combat objectives.",
+},
+{
+Mission: "Survive the Storm",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Come back after your build feels safe enough to explore without rushing.",
+},
+{
+Mission: "Safe Passage",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Use a dedicated replay if pressure makes you skip side checks.",
+},
+];
+
+export const aulisColumns = [
+{ key: "Mission", label: "Mission" },
+{ key: "Main Collectibles", label: "Main Collectibles" },
+{ key: "Mutagen Type Focus", label: "Mutagen Type Focus" },
+{ key: "Where To Look", label: "Where To Look" },
+];
+
+export const aulisRows = [
+{
+Mission: "Stay on Track",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Check off-route side objects before finishing the track-style objective.",
+},
+{
+Mission: "Storm Breaker",
+"Main Collectibles": "Mutagens, Golden Egg, Quacky",
+"Mutagen Type Focus": "Pyro-leaning mixed route",
+"Where To Look":
+"Clear the first area, follow the opened upper path, then inspect the red pond side area.",
+},
+{
+Mission: "Machine Non Grata",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Replay after learning the machinery route and check the edges before moving on.",
+},
+{
+Mission: "Navigate the Maze",
+"Main Collectibles": "Mutagens, 2 Golden Eggs, Quacky",
+"Mutagen Type Focus": "All 5 types present — best any-element gap mission",
+"Where To Look":
+"Turn right near the start, climb to the high route, then drop and follow the lower side-wall route. This is the best replay target when you are missing an unknown or mixed Mutagen element.",
+},
+{
+Mission: "On the Brink of Ruin",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Save this for a calmer replay if the first clear is too combat-heavy.",
+},
+{
+Mission: "Pull the Plug",
+"Main Collectibles": "Mutagens, 2 Golden Eggs, Quacky",
+"Mutagen Type Focus": "Cyber / Plasma-leaning mixed route",
+"Where To Look":
+"Use the purple platform route for the high collectible path, then continue through the lower section for the second hidden route.",
+},
+{
+Mission: "Calm Before the Storm",
+"Main Collectibles": "Quacky",
+"Mutagen Type Focus": "—",
+"Where To Look":
+"Bring a comfortable Voidling and sweep side paths during a dedicated cleanup run.",
+},
+];
+
+export const abyssColumns = [
+{ key: "Mission", label: "Mission" },
+{ key: "Main Collectibles", label: "Main Collectibles" },
+{ key: "Mutagen Type Focus", label: "Mutagen Type Focus" },
+{ key: "Where To Look", label: "Where To Look" },
+];
+
+export const abyssRows = [
+{
+Mission: "End to the Unknown",
+"Main Collectibles": "Mutagens, 2 Golden Eggs, Quacky",
+"Mutagen Type Focus": "Late-game mixed route",
+"Where To Look":
+"Climb the hidden mountain route for one Golden Egg, then check the side room after the lift and the final hidden corner before leaving.",
+},
+];
+
+export const goldenEggColumns = [
+{ key: "Mission", label: "Mission" },
+{ key: "Golden Egg Hatch Result", label: "Golden Egg Hatch Result" },
+{ key: "Why It Matters", label: "Why It Matters" },
+{ key: "Location Cue", label: "Location Cue" },
+];
+
+export const goldenEggRows = [
+{
+Mission: "Centennial Bloom",
+"Golden Egg Hatch Result": "Qwebeck Kwipeck",
+"Why It Matters":
+"This is one of the earliest secret Voidlings you can collect, and it gives players a clear reason to replay Centennial Bloom early.",
+"Location Cue":
+"Take the upper cliff route after the plant-platform section.",
+},
+{
+Mission: "Secret Stronghold",
+"Golden Egg Hatch Result": "Experimental Gwigoon / Telluric Gilick",
+"Why It Matters":
+"Two early secret variants in one mission. This makes Secret Stronghold one of the best early Golden Egg cleanup routes.",
+"Location Cue":
+"One egg is near the lower route close to the start. The other is inside the large antenna building upstairs.",
+},
+{
+Mission: "Search and Rescue",
+"Golden Egg Hatch Result": "Andromeda Gilick / Charcoal Kerapin",
+"Why It Matters":
+"These variants give players more reason to explore the large Solum route instead of only following the main rescue objective.",
+"Location Cue":
+"One egg is on the upper left path after the puzzle route. The other is in the building near the last cleansing area.",
+},
+{
+Mission: "Cleaning the Eyrie",
+"Golden Egg Hatch Result": "Arcing Gwigoon / Galvanic Ur-Sek",
+"Why It Matters":
+"Both eggs sit close to early route interactions, so this is a good mission to clean once you understand the building and fire crystal path.",
+"Location Cue":
+"One egg is inside the first building. The other is behind the route opened by the nearby fire crystal.",
+},
+{
+Mission: "Subterranean Expedition",
+"Golden Egg Hatch Result": "Transcendent Anami",
+"Why It Matters":
+"This egg teaches players to look for puzzle-gated paths, not just obvious side ledges.",
+"Location Cue":
+"Use the fire crystal route to melt the larger ice blockage, then check the opened side path.",
+},
+{
+Mission: "Storm Breaker",
+"Golden Egg Hatch Result": "Argon Anami",
+"Why It Matters":
+"A useful Aulis secret variant tied to a clear environmental landmark, making it easier to route once players know where to look.",
+"Location Cue":
+"After the upper route opens, check the red pond side area.",
+},
+{
+Mission: "Navigate the Maze",
+"Golden Egg Hatch Result": "Golden Nugget Kwipeck / Hellfire Packuran",
+"Why It Matters":
+"One of the best Golden Egg missions for secret variants because the eggs sit close to a dense collectible route.",
+"Location Cue":
+"One egg is on the high route near the start. The other is on the lower side-wall route after dropping down.",
+},
+{
+Mission: "Pull the Plug",
+"Golden Egg Hatch Result": "Chthonian Morfang / Heavenly Packuran",
+"Why It Matters":
+"These late Aulis variants are worth keeping for inspection before any serious breeding or Splicing decisions.",
+"Location Cue":
+"One egg is on the high purple-platform route. The other is lower in the later mission route.",
+},
+{
+Mission: "End to the Unknown",
+"Golden Egg Hatch Result": "Locust Packuran / Galvanic Ur-Sek",
+"Why It Matters":
+"This is the final Golden Egg cleanup target and gives players a strong reason to fully sweep the late-game route.",
+"Location Cue":
+"One egg is on the hidden mountain climb. The other is after the lift-side route later in the mission.",
+},
+];
+
+export const quackyColumns = [
+{ key: "Quacky Goal", label: "Quacky Goal" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const quackyRows = [
+{
+"Quacky Goal": "First Quacky",
+"What To Do": "Start with an early mission such as Faint Signal or Centennial Bloom.",
+"Why It Matters":
+"You learn what the collectible looks like before cleaning harder maps.",
+},
+{
+"Quacky Goal": "Ship display / collection",
+"What To Do": "Collect Quackies as visual collectibles rather than power upgrades.",
+"Why It Matters":
+"They are better motivation for completion players than for raw build strength.",
+},
+{
+"Quacky Goal": "Full cleanup",
+"What To Do": "Replay each mission calmly and mark it off after collecting the Quacky.",
+"Why It Matters":
+"Quackies are easy to miss if you combine them with timer runs or first clears.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Farming a mission without checking which Mutagen you need",
+"Why It Hurts":
+"You can spend several runs collecting the wrong element for your next evolution node.",
+"Better Move":
+"Check the Evolution Chamber first, then choose a mission by Mutagen type.",
+},
+{
+Mistake: "Treating Quackies like power upgrades",
+"Why It Hurts":
+"Quackies help completion and display goals, but they do not solve weak combat.",
+"Better Move":
+"Farm Mutagens first if your Voidling feels underpowered.",
+},
+{
+Mistake: "Releasing Golden Egg Voidlings immediately",
+"Why It Hurts":
+"Some secret variants may become useful later for rare perks, traits, or Splicing plans.",
+"Better Move":
+"Hatch them, inspect the result, and keep unusual variants until you know their value.",
+},
+{
+Mistake: "Combining time stars with hidden collectibles",
+"Why It Hurts":
+"Fast routes usually skip the side paths where Golden Eggs, Quackies, and Mutagens are hidden.",
+"Better Move":
+"Do time stars as a separate route after your collection run.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Voidling Bound** collectible cleanup, farm **Mutagens** first if your next evolution node is blocked, then collect **Golden Eggs** for secret Voidlings, and save **Quackies** for completion and ship-display cleanup.
+
+Do not replay missions randomly. Check the **Evolution Chamber** to see which element you need, use the mission tables below to pick a good route, and use the **Atlas Terminal** to return to missed collectibles. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Voidling Bound. This all collectibles guide covers Mutagen type farming, Golden Egg hatch results, Quacky cleanup, Atlas Terminal replay, and mission-by-mission collectible route cues.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-centennial-bloom-mutagen-cleanup.webp"
+    alt="Voidling Bound Centennial Bloom Organic Pyro Cryo Mutagen locations and cleanup route"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Centennial Bloom is a strong early cleanup mission because it teaches you to look for Elemental Rifts, Golden Eggs, and Quackies away from the main route.
+  </figcaption>
+</figure>
+
+<h2 id="voidling-bound-all-collectibles-guide">
+  Voidling Bound all collectibles guide
+</h2>
+
+**Voidling Bound** has three main collectible goals that matter for mission cleanup: **Mutagens**, **Golden Eggs**, and **Quackies**.
+
+They are not equally important at the same point in the game. If your Voidling is weak, Mutagens matter first because they unlock evolution paths. If you want secret Voidlings, Golden Eggs matter. If you are finishing the collection, Quackies become the cleanup target.
+
+The best way to plan a route is:
+
+<strong>Check what upgrade or collection goal you actually need, then replay the mission that solves that problem.</strong>
+
+For focused routes, use the <Link href="/voidling-bound/golden-egg-locations">Golden Egg Locations Guide</Link> and the <Link href="/voidling-bound/quackies-locations">Quacky Locations Guide</Link>. This page is the combined mission checklist and resource planner.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="collectible-types">
+  Collectible types explained
+</h2>
+
+<GuideTable
+caption="Voidling Bound collectible types and when to prioritize them."
+columns={collectibleTypeColumns}
+rows={collectibleTypeRows}
+/>
+
+A resource run should not feel like a blind sweep. If you need power, check your evolution path first. If you need secret variants, target Golden Eggs. If you need completion, clean up Quackies after your build is comfortable.
+
+<h2 id="mutagen-type-lookup">
+  Mutagen type lookup: where to farm each element
+</h2>
+
+This is the most useful way to think about Mutagen farming. Players usually do not ask, “Which mission has any Mutagen?” They ask, “I need Cryo Mutagen, where should I go?”
+
+Use this table as a route selector.
+
+<GuideTable
+caption="Voidling Bound Mutagen type farming lookup."
+columns={mutagenTypeColumns}
+rows={mutagenTypeRows}
+/>
+
+These missions can contain multiple element types, so use the table as a route selector rather than a guarantee that every pickup in the mission is the same element. If you are not sure which element you are missing, **Navigate the Maze** is the best mixed-element cleanup target because it can cover all five Mutagen types in one replay route.
+
+Do not use Navigate the Maze as your first farming mission, though. It is better after your build is stable. For early farming, start with the more specific missions listed first, then use Navigate the Maze when you need a broad catch-up route.
+
+<h2 id="calculate-mutagen-gap">
+  How to calculate your Mutagen gap
+</h2>
+
+Do not farm Mutagens by guessing. The game already tells you what you need if you check the right place.
+
+<GuideTable
+caption="How to decide which Mutagen to farm next."
+columns={gapColumns}
+rows={gapRows}
+/>
+
+This method is better than chasing total completion numbers too early. A full evolution tree can require a lot of Mutagens, but your immediate problem is usually the next locked node, not the entire tree.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="atlas-terminal-cleanup">
+  Use Atlas Terminal for missed collectibles
+</h2>
+
+The **Atlas Terminal** is your cleanup hub. Use it to replay older missions, check mission level, see the faction, and return for missed objectives.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-atlas-terminal-mission-replay.webp"
+    alt="Voidling Bound Atlas Terminal replay for missing Mutagens Golden Eggs and Quackies"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Before replaying a mission, check whether you need Mutagens, Golden Eggs, Quackies, or a cleaner time route.
+  </figcaption>
+</figure>
+
+A good cleanup run has one main goal. If you try to farm Mutagens, find Golden Eggs, collect Quackies, and rush the timer at the same time, you will usually miss something.
+
+<h2 id="vireo-collectibles">
+  Vireo collectibles checklist
+</h2>
+
+Vireo is where you learn the collectible logic. **Centennial Bloom** and **Secret Stronghold** are the key early missions because they combine multiple collectible types in one route.
+
+<GuideTable
+caption="Voidling Bound Vireo collectibles checklist."
+columns={vireoColumns}
+rows={vireoRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-centennial-bloom-golden-egg-cliff.webp"
+    alt="Voidling Bound Centennial Bloom Golden Egg location on Vireo upper cliff route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Centennial Bloom's Golden Egg is on the upper cliff route after the plant-platform section.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-secret-stronghold-mutagen-route.webp"
+    alt="Voidling Bound Secret Stronghold Cyber Cryo Mutagen route and Golden Egg cleanup"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Secret Stronghold is worth replaying once you know the lower drop, antenna building, and upper platform routes.
+  </figcaption>
+</figure>
+
+<h2 id="solum-collectibles">
+  Solum collectibles checklist
+</h2>
+
+Solum missions are larger, so route cues matter more. Look for puzzle doors, buildings near cleansing areas, cave rooms, fire crystals, and side paths that are easy to skip during a first clear.
+
+<GuideTable
+caption="Voidling Bound Solum collectibles checklist."
+columns={solumColumns}
+rows={solumRows}
+/>
+
+<h2 id="aulis-collectibles">
+  Aulis collectibles checklist
+</h2>
+
+Aulis is where route planning becomes more important than simply spotting an item. **Navigate the Maze** is the biggest cleanup target because it combines several Mutagens, two Golden Eggs, and a Quacky in a route that is easy to misread.
+
+<GuideTable
+caption="Voidling Bound Aulis collectibles checklist."
+columns={aulisColumns}
+rows={aulisRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-navigate-the-maze-mutagen-cleanup.webp"
+    alt="Voidling Bound Navigate the Maze mixed Mutagen locations Golden Eggs and Quacky route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Navigate the Maze is the best mission to revisit when you need a dense mixed-Mutagen route and hidden collectible cleanup in one place.
+  </figcaption>
+</figure>
+
+<h2 id="end-to-the-unknown-collectibles">
+  End to the Unknown collectibles checklist
+</h2>
+
+End to the Unknown is the final cleanup target. Bring a strong, comfortable Voidling and treat the mission as a late-game sweep.
+
+<GuideTable
+caption="Voidling Bound End to the Unknown collectibles checklist."
+columns={abyssColumns}
+rows={abyssRows}
+/>
+
+The key route cues are the hidden mountain climb, the side room after the lift, and the last hidden corner before leaving the mission.
+
+
+<h2 id="golden-egg-hatch-results">
+  Golden Egg hatch results
+</h2>
+
+Golden Eggs are worth more than a normal collectible because they hatch into secret Voidlings. Some are useful immediately, while others are better kept for future breeding, Splicing, or Voidpedia completion.
+
+<GuideTable
+caption="Voidling Bound Golden Egg hatch results and location cues."
+columns={goldenEggColumns}
+rows={goldenEggRows}
+/>
+
+Do not release Golden Egg Voidlings immediately. Hatch them, inspect their traits, and keep unusual variants until you know whether they help a later build.
+
+<h2 id="quacky-rewards">
+  Quacky rewards and ship collection
+</h2>
+
+Quackies are not power upgrades like Mutagens, and they do not hatch into secret Voidlings like Golden Eggs. Their value is completion and collection display.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-centennial-bloom-quacky.webp"
+    alt="Voidling Bound Centennial Bloom Quacky location hidden duck collectible"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Quackies are best collected during dedicated cleanup runs, not during your first clear or timer route.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Voidling Bound Quacky collection goals."
+columns={quackyColumns}
+rows={quackyRows}
+/>
+
+Use Quackies as a final pass once your build is strong enough to explore without pressure. If you still need power, farm Mutagens first.
+
+<h2 id="recommended-cleanup-route">
+  Recommended all collectibles cleanup route
+</h2>
+
+Use this order if you want a practical 100% route:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Clear a mission normally first so you understand the layout.</li>
+  <li>Check the Evolution Chamber to see which Mutagen element you need next.</li>
+  <li>Use the Mutagen type lookup to choose a good replay mission.</li>
+  <li>Collect Golden Eggs when the route is nearby or when you want secret Voidlings.</li>
+  <li>Save Quackies for dedicated completion runs once the mission is no longer dangerous.</li>
+  <li>Do time stars separately after you know the fastest route.</li>
+</ol>
+
+This keeps each replay focused and prevents the most common problem: trying to make one run solve every objective.
+
+<h2 id="common-mistakes">
+  Common collectible mistakes
+</h2>
+
+<GuideTable
+caption="Common Voidling Bound collectible cleanup mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+Most collectible mistakes come from rushing or farming without a goal. Before replaying a mission, decide whether you need an element, a secret Voidling, a Quacky, or a clean timer route.
+
+<h2 id="faq">
+  Voidling Bound all collectibles FAQ
+</h2>
+
+### What collectible should I prioritize first?
+
+Prioritize Mutagens first if your next evolution node is blocked. Then collect Golden Eggs for secret Voidlings, and save Quackies for completion cleanup.
+
+### Where should I farm Organic Mutagens?
+
+Start with Centennial Bloom, Cleaning the Eyrie, and Navigate the Maze. For the full route selector, see the <a href="#mutagen-type-lookup">Mutagen type lookup table</a>.
+
+### Where should I farm Pyro Mutagens?
+
+Check Centennial Bloom, Storm Breaker, and Navigate the Maze first. For route cues by element, use the <a href="#mutagen-type-lookup">Mutagen type lookup table</a>.
+
+### Where should I farm Cryo Mutagens?
+
+Secret Stronghold, Subterranean Expedition, and Navigate the Maze are the best missions to check first. See the <a href="#mutagen-type-lookup">Mutagen type lookup table</a> for the full breakdown.
+
+### Where should I farm Cyber Mutagens?
+
+Start with Secret Stronghold, Navigate the Maze, and Pull the Plug. Use the <a href="#mutagen-type-lookup">Mutagen type lookup table</a> if you need the route cues.
+
+### Where should I farm Plasma Mutagens?
+
+Navigate the Maze, Pull the Plug, and End to the Unknown are the best late-game checks. For the full list, jump to the <a href="#mutagen-type-lookup">Mutagen type lookup table</a>.
+
+
+### How do I know which Mutagen I need?
+
+Open the Evolution Chamber, choose the Voidling you are building, and check the next locked evolution node. Farm the element required by that node.
+
+### Are Golden Eggs worth collecting early?
+
+Yes. Golden Eggs hatch secret Voidlings, and some variants may become useful later for traits, perks, or Splicing plans.
+
+### What does the Centennial Bloom Golden Egg hatch?
+
+It hatches **Qwebeck Kwipeck**, one of the earliest secret Voidlings you can collect.
+
+### What does the Secret Stronghold Golden Egg hatch?
+
+Secret Stronghold has two Golden Eggs. They hatch **Experimental Gwigoon** and **Telluric Gilick**.
+
+### What does the Navigate the Maze Golden Egg hatch?
+
+Navigate the Maze has two Golden Eggs. They hatch **Golden Nugget Kwipeck** and **Hellfire Packuran**.
+
+### Are Quackies useful for builds?
+
+No. Quackies are mainly for completion and ship-side collection display. They are worth collecting, but they do not replace Mutagens for power progression.
+
+### Should I collect everything during a time-star run?
+
+Usually no. Hidden collectible routes and timer routes often conflict. Do the time star separately after you know the mission layout.

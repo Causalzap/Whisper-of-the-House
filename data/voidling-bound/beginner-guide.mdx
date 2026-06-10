@@ -1,0 +1,789 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const difficultyColumns = [
+{ key: "Difficulty", label: "Difficulty" },
+{ key: "Best For", label: "Best For" },
+{ key: "Beginner Advice", label: "Beginner Advice" },
+];
+
+export const difficultyRows = [
+{
+Difficulty: "Collector",
+"Best For": "Players who mainly want collecting, exploration, and lower combat pressure.",
+"Beginner Advice":
+"Pick this if you want to learn systems slowly or focus on collectibles first.",
+},
+{
+Difficulty: "Adventurer",
+"Best For": "A normal first playthrough with action pressure but room to learn.",
+"Beginner Advice":
+"This is the safest default if you are not sure which difficulty to choose.",
+},
+{
+Difficulty: "Fighter",
+"Best For": "Players who already feel comfortable with third-person action combat.",
+"Beginner Advice":
+"Pick this if you want enemies to punish mistakes earlier.",
+},
+{
+Difficulty: "Wrangler",
+"Best For": "A tougher first run where build choices and combat mistakes matter more.",
+"Beginner Advice":
+"Avoid this for your first run unless you specifically want a harder start.",
+},
+];
+
+export const firstRouteColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Goal", label: "Goal" },
+{ key: "Do This First", label: "Do This First" },
+];
+
+export const firstRouteRows = [
+{
+Step: "1",
+Goal: "Choose a difficulty",
+"Do This First":
+"Use Adventurer for a normal first run, or Collector if you mainly want collection and exploration.",
+},
+{
+Step: "2",
+Goal: "Bind with Kwipeck",
+"Do This First":
+"Learn ranged attacks, dash timing, stamina recovery, and healing before worrying about advanced builds.",
+},
+{
+Step: "3",
+Goal: "Clear the first mission",
+"Do This First":
+"Stay at range, clear corruption safely, collect nearby resources, and return to the ship after the boss.",
+},
+{
+Step: "4",
+Goal: "Spend your first upgrades",
+"Do This First":
+"Use Mutagens at the Evolution Chamber and research samples at the Cerebrum Enhancer.",
+},
+{
+Step: "5",
+Goal: "Use Atlas Terminal",
+"Do This First":
+"Check mission level, faction, weaknesses, and missing objectives before choosing your next run.",
+},
+];
+
+export const statColumns = [
+{ key: "Stat", label: "Stat" },
+{ key: "What It Helps", label: "What It Helps" },
+{ key: "Beginner Pick?", label: "Beginner Pick?" },
+];
+
+export const statRows = [
+{
+Stat: "Strength",
+"What It Helps": "Attack power and critical damage.",
+"Beginner Pick?":
+"Good if your attacks feel weak and you are already surviving comfortably.",
+},
+{
+Stat: "Essence",
+"What It Helps": "Elemental damage bonus and status effect damage multiplier.",
+"Beginner Pick?":
+"Better after you start building around elements, status effects, or faction matchups.",
+},
+{
+Stat: "Vitality",
+"What It Helps": "Health, armor, and stamina.",
+"Beginner Pick?":
+"The safest first pick if you are still learning enemy attacks and healing timing.",
+},
+{
+Stat: "Recuperation",
+"What It Helps": "Reload duration, cooldown reduction, ultimate fill rate, and healing multiplier.",
+"Beginner Pick?":
+"Good if your Voidling feels slow, cooldown-heavy, or too dependent on recovery windows.",
+},
+{
+Stat: "Agility",
+"What It Helps": "Fire rate multiplier, movement speed, and critical chance.",
+"Beginner Pick?":
+"Strong for fast attackers, but not usually safer than Vitality for a first point.",
+},
+];
+
+export const elementColumns = [
+{ key: "Element", label: "Element" },
+{ key: "Strong Against", label: "Strong Against" },
+{ key: "Weak Against", label: "Weak Against" },
+{ key: "Status Effect", label: "Status Effect" },
+];
+
+export const elementRows = [
+{
+Element: "Neutral",
+"Strong Against": "Same damage against all factions.",
+"Weak Against": "No faction weakness.",
+"Status Effect": "Bleed — Neutral damage over time.",
+},
+{
+Element: "Organic",
+"Strong Against": "Lesion-spawns and Ancients.",
+"Weak Against": "Crystallines and GenBots.",
+"Status Effect": "Poison — Organic damage over time.",
+},
+{
+Element: "Pyro",
+"Strong Against": "Lesion-spawns and Crystallines.",
+"Weak Against": "GenBots and Ancients.",
+"Status Effect": "Burn — Pyro damage over time.",
+},
+{
+Element: "Cryo",
+"Strong Against": "GenBots and Ancients.",
+"Weak Against": "Lesion-spawns and Crystallines.",
+"Status Effect": "Frostbite — Cryo damage over time.",
+},
+{
+Element: "Cyber",
+"Strong Against": "GenBots and Crystallines.",
+"Weak Against": "Lesion-spawns.",
+"Status Effect": "Static — builds stacks, then deals Cyber burst damage.",
+},
+{
+Element: "Plasma",
+"Strong Against": "Effective against all factions.",
+"Weak Against": "No listed faction weakness.",
+"Status Effect": "Disintegrate — builds stacks, then triggers Plasma overflow damage.",
+},
+];
+
+
+export const statusColumns = [
+{ key: "Status Effect", label: "Status Effect" },
+{ key: "Element", label: "Element" },
+{ key: "Beginner Meaning", label: "Beginner Meaning" },
+];
+
+export const statusRows = [
+{
+"Status Effect": "Bleed",
+Element: "Neutral",
+"Beginner Meaning":
+"A simple damage-over-time effect that does not depend on an elemental matchup.",
+},
+{
+"Status Effect": "Poison",
+Element: "Organic",
+"Beginner Meaning":
+"Good when your Organic route can keep stacks on enemies during longer fights.",
+},
+{
+"Status Effect": "Burn",
+Element: "Pyro",
+"Beginner Meaning":
+"A straightforward Pyro damage-over-time effect for aggressive routes.",
+},
+{
+"Status Effect": "Frostbite",
+Element: "Cryo",
+"Beginner Meaning":
+"Useful when your Cryo route wants to slow down fights and add damage over time.",
+},
+{
+"Status Effect": "Static",
+Element: "Cyber",
+"Beginner Meaning":
+"Builds stacks first, then converts them into a Cyber damage burst.",
+},
+{
+"Status Effect": "Disintegrate",
+Element: "Plasma",
+"Beginner Meaning":
+"Builds toward Plasma overflow damage, making it better once you can apply stacks reliably.",
+},
+];
+
+export const buildStyleColumns = [
+{ key: "I Want To Play", label: "I Want To Play" },
+{ key: "Best Early Stats", label: "Best Early Stats" },
+{ key: "Evolution Direction", label: "Evolution Direction" },
+{ key: "Why", label: "Why" },
+];
+
+export const buildStyleRows = [
+{
+"I Want To Play": "Safe first-clear ranged build",
+"Best Early Stats": "Vitality, then Strength",
+"Evolution Direction": "Reliable ranged attack or safer damage route",
+Why: "This gives you room to learn missions without dying for small mistakes.",
+},
+{
+"I Want To Play": "Fast clearer",
+"Best Early Stats": "Strength, then Agility",
+"Evolution Direction": "Primary attack damage, fire rate, or projectile comfort",
+Why: "Better when you already dodge well and want missions to end faster.",
+},
+{
+"I Want To Play": "Status damage build",
+"Best Early Stats": "Essence, then Recuperation",
+"Evolution Direction": "Poison, Burn, Frostbite, Static, or Disintegrate routes",
+Why: "Status routes need elemental scaling and enough ability uptime to feel good.",
+},
+{
+"I Want To Play": "Mobility-focused build",
+"Best Early Stats": "Agility, then Vitality",
+"Evolution Direction": "Movement tools, dash comfort, or repositioning abilities",
+Why: "Good if you like staying active and avoiding damage through movement.",
+},
+{
+"I Want To Play": "Future breeding candidate",
+"Best Early Stats": "Keep high total stats and rare Nature candidates",
+"Evolution Direction": "Do not rush irreversible decisions",
+Why: "Strong parents and rare Natures become more valuable once Breeding opens.",
+},
+];
+
+export const upgradeColumns = [
+{ key: "System", label: "System" },
+{ key: "Resource", label: "Resource" },
+{ key: "Beginner Priority", label: "Beginner Priority" },
+];
+
+export const upgradeRows = [
+{
+System: "Evolution Chamber",
+Resource: "Mutagens",
+"Beginner Priority":
+"Pick an ability route that matches how you fight. Do not spend every Mutagen just because a node is available.",
+},
+{
+System: "Cerebrum Enhancer",
+Resource: "Research samples",
+"Beginner Priority":
+"Upgrade the species you actually use. Species-wide progress is very valuable early.",
+},
+{
+System: "Atlas Terminal",
+Resource: "Mission access",
+"Beginner Priority":
+"Use it to check faction, weaknesses, level, and missing objectives before entering a mission.",
+},
+];
+
+export const replayColumns = [
+{ key: "Mission Screen Check", label: "Mission Screen Check" },
+{ key: "What It Tells You", label: "What It Tells You" },
+{ key: "How To Use It", label: "How To Use It" },
+];
+
+export const replayRows = [
+{
+"Mission Screen Check": "Mission level",
+"What It Tells You": "How hard the mission is likely to feel.",
+"How To Use It":
+"If the level gap feels bad, upgrade your main Voidling before forcing the run.",
+},
+{
+"Mission Screen Check": "Faction",
+"What It Tells You": "Which enemy group you are about to fight.",
+"How To Use It":
+"Pick an element that is strong against that faction instead of bringing a random build.",
+},
+{
+"Mission Screen Check": "Weakness icons",
+"What It Tells You": "Which element has a better matchup.",
+"How To Use It":
+"Use your strongest matching Voidling or evolution route if you have one.",
+},
+{
+"Mission Screen Check": "Missing objectives",
+"What It Tells You": "Whether the mission still has Mutagens, Golden Eggs, Quackies, or stars.",
+"How To Use It":
+"Choose one cleanup goal before entering instead of trying to do every objective at once.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Choosing Wrangler immediately",
+"Why It Hurts":
+"You may spend the first hour fighting pressure instead of learning systems.",
+"Better Move":
+"Start on Adventurer or Collector unless you specifically want a harder first run.",
+},
+{
+Mistake: "Ignoring element matchups",
+"Why It Hurts":
+"A good Voidling can feel weak if you bring the wrong element into the wrong faction.",
+"Better Move":
+"Check the Atlas Terminal before entering and pick a better matchup when possible.",
+},
+{
+Mistake: "Spending Mutagens randomly",
+"Why It Hurts":
+"Evolution choices can change how your Voidling plays, and resources are limited early.",
+"Better Move":
+"Choose paths that support your real playstyle: safer range, damage, status, or mobility.",
+},
+{
+Mistake: "Releasing useful Voidlings too early",
+"Why It Hurts":
+"High stat totals and rare Natures can become valuable once Breeding opens.",
+"Better Move":
+"Keep strong candidates until you understand Breeding and parent inheritance.",
+},
+{
+Mistake: "Trying to 100% every mission on the first clear",
+"Why It Hurts":
+"Timer routes, Mutagens, Golden Eggs, and Quackies can pull you in different directions.",
+"Better Move":
+"Clear first, then come back with one cleanup goal at a time.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For your first **Voidling Bound** run, choose **Adventurer** for the normal experience or **Collector** for a gentler start. Your first Voidling is **Kwipeck**. Put your first point into **Vitality** if you are still learning combat, or **Strength** if you already feel safe.
+
+Before entering a mission, check the **Atlas Terminal** for faction and weakness information. Element matchups matter: Organic, Pyro, Cryo, Cyber, and Plasma all perform differently depending on the enemy faction. Use Mutagens at the **Evolution Chamber**, spend research samples at the **Cerebrum Enhancer**, and keep high-stat or rare-Nature Voidlings for future Breeding. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Voidling Bound. This beginner guide covers difficulty choice, Kwipeck, first stat points, element matchups, status effects, first mission survival, Mutagens, Evolution Chamber, Cerebrum Enhancer, Atlas Terminal, Breeding preparation, and early mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-difficulty-select.webp"
+    alt="Voidling Bound best starting difficulty Collector Adventurer Fighter Wrangler"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Adventurer is the safest default for a first run. Collector is better if you mainly want to learn systems and collect without heavy pressure.
+  </figcaption>
+</figure>
+
+<h2 id="voidling-bound-beginner-guide">
+  Voidling Bound beginner guide
+</h2>
+
+The first hour of **Voidling Bound** is not about finding the perfect endgame build. It is about learning the mission loop, building one reliable Voidling, and understanding how element matchups affect your mission choices.
+
+The game introduces several systems quickly:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>difficulty choice,</li>
+  <li>your first Voidling, Kwipeck,</li>
+  <li>basic attributes,</li>
+  <li>element matchups and status effects,</li>
+  <li>Mutagens and evolution paths,</li>
+  <li>research samples and species upgrades,</li>
+  <li>Atlas Terminal mission replay,</li>
+  <li>and later Breeding and Splicing preparation.</li>
+</ul>
+
+A clean beginner plan is simple:
+
+<strong>Stay alive first, upgrade one main species, check faction weaknesses before missions, and only chase full collectible cleanup once your build is comfortable.</strong>
+
+For the main overview, return to the <Link href="/voidling-bound">Voidling Bound guide hub</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="best-starting-difficulty">
+  Best starting difficulty
+</h2>
+
+Voidling Bound starts with four difficulty options: **Collector**, **Adventurer**, **Fighter**, and **Wrangler**.
+
+<GuideTable
+caption="Voidling Bound starting difficulty advice."
+columns={difficultyColumns}
+rows={difficultyRows}
+/>
+
+For most players, **Adventurer** is the best first choice. It gives you the intended action feel without asking you to optimize every early upgrade immediately.
+
+Pick **Collector** if you want a lighter first run focused on creature collecting, Golden Eggs, Quackies, exploration, and learning systems slowly. Pick the harder options only if you are comfortable being punished for mistakes.
+
+<h2 id="first-route">
+  What to do in your first hour
+</h2>
+
+Use this route if you want a clean start without over-planning.
+
+<GuideTable
+caption="Voidling Bound first-hour route."
+columns={firstRouteColumns}
+rows={firstRouteRows}
+/>
+
+The important point is not to rush every system at once. Learn combat first, then start making upgrade choices once you understand how your main Voidling feels.
+
+<h2 id="first-voidling-and-stats">
+  First Voidling and first stat choice
+</h2>
+
+Your first Voidling is **Kwipeck**. It is a good starter because it gives you safe ranged pressure while you learn movement, stamina, healing, and enemy patterns.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-first-voidling-attributes-kwipeck.webp"
+    alt="Voidling Bound Kwipeck first Voidling attributes Strength Essence Vitality Recuperation Agility"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Kwipeck introduces the five core attributes: Strength, Essence, Vitality, Recuperation, and Agility.
+  </figcaption>
+</figure>
+
+Your first stat choice should solve your current problem, not follow a perfect endgame plan.
+
+<GuideTable
+caption="Voidling Bound first stat choice."
+columns={statColumns}
+rows={statRows}
+/>
+
+The simple choice:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Pick <strong>Vitality</strong> if you are still getting hit or learning dodge timing.</li>
+  <li>Pick <strong>Strength</strong> if you already feel safe and want faster clears.</li>
+  <li>Wait on <strong>Essence</strong> unless you are already building around elements or status effects.</li>
+</ul>
+
+Vitality is the safest beginner pick because it gives you more room to make mistakes while learning combat.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="beginner-build-decision">
+  Beginner build decision table
+</h2>
+
+Most beginner advice stops at listing the five stats. That is not enough. You should choose stats based on how you want to play.
+
+<GuideTable
+caption="Voidling Bound beginner build style and stat priorities."
+columns={buildStyleColumns}
+rows={buildStyleRows}
+/>
+
+If you are unsure, start with the safe first-clear build: **Vitality first, Strength second, and a reliable ranged evolution route**. You can experiment once you understand mission pressure.
+
+<h2 id="first-mission-survival">
+  First mission survival
+</h2>
+
+The first mission teaches the core loop: clear corruption, fight Legion enemies, collect resources, and survive the Malignant Heart area before returning to the ship.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-first-mission-cleansing-heart.webp"
+    alt="Voidling Bound first mission Malignant Heart and corruption clearing tips"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early missions are easier when you keep distance, clear corruption safely, and avoid standing on top of enemies.
+  </figcaption>
+</figure>
+
+Beginner combat rules:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use Kwipeck's range instead of standing inside enemy groups.</li>
+  <li>Dash before you are surrounded, not after your health is already low.</li>
+  <li>Watch stamina so you can still escape when pressure rises.</li>
+  <li>Heal before you are one hit from dying.</li>
+  <li>Do not chase timer pressure on your first clear.</li>
+</ul>
+
+Your first clear matters because it opens the upgrade loop. After that, the game starts asking you to make better choices about elements, evolution, and species upgrades.
+
+<h2 id="element-matchups">
+  Element matchups: check this before entering missions
+</h2>
+
+Voidling Bound has five main elements: **Organic**, **Pyro**, **Cryo**, **Cyber**, and **Plasma**, plus Neutral damage. The element you bring can matter a lot depending on the enemy faction.
+
+Before entering a mission, check the faction and weakness information at the Atlas Terminal. If your current Voidling feels weak, the problem may be the matchup, not only your level.
+
+This table follows the current public element matchup data. If a later patch changes faction weaknesses, use the Atlas Terminal weakness icons first.
+<GuideTable
+caption="Voidling Bound element and faction matchup quick reference."
+columns={elementColumns}
+rows={elementRows}
+/>
+
+For beginners, the takeaway is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Organic</strong> and <strong>Pyro</strong> are strong early offensive options against Lesion-spawns.</li>
+  <li><strong>Cryo</strong> and <strong>Cyber</strong> are better when GenBots become the problem.</li>
+  <li><strong>Plasma</strong> is the safest broad matchup once you have access to a reliable Plasma route.</li>
+</ul>
+
+You do not need to memorize every matchup immediately. Just stop entering harder missions blindly. Check the faction first, then pick the best Voidling or evolution route you currently have.
+
+<h2 id="status-effects">
+  Status effects beginner explanation
+</h2>
+
+Some evolution routes are not only about direct hit damage. They can apply **Status Effects**, which add damage over time, burst damage, or control after you build enough stacks.
+
+<GuideTable
+caption="Voidling Bound status effects for beginners."
+columns={statusColumns}
+rows={statusRows}
+/>
+
+This is why **Essence** becomes more useful after the opening missions. If your build is applying Poison, Burn, Frostbite, Static, or Disintegrate often, elemental scaling and status damage start to matter more.
+
+For your first hour, do not overbuild around a status effect you cannot apply consistently. Pick status routes when the ability text clearly matches how you are fighting.
+
+
+<h2 id="what-to-upgrade-first">
+  What to upgrade first
+</h2>
+
+After the first mission, you will start using Mutagens and research samples. These resources do different jobs.
+
+<GuideTable
+caption="Voidling Bound early upgrade priorities."
+columns={upgradeColumns}
+rows={upgradeRows}
+/>
+
+A good early upgrade rule is:
+
+Early upgrades should support your main species first.
+
+If you like Kwipeck's ranged playstyle, upgrade that species first. If a new species immediately feels better, shift gradually instead of splitting everything evenly.
+
+<h2 id="evolution-chamber-mutagens">
+  Evolution Chamber and Mutagens
+</h2>
+
+The **Evolution Chamber** uses Mutagens to evolve an individual Voidling. Evolution can add abilities, change elements, improve combat routes, and open status-based playstyles.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-evolution-chamber-mutagen-path.webp"
+    alt="Voidling Bound Evolution Chamber Mutagen path and beginner evolution choice"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mutagens are tied to evolution paths. Read the node text before spending, especially if the choice changes your element or status route.
+  </figcaption>
+</figure>
+
+Before choosing an evolution, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Does this help the faction I am about to fight?</li>
+  <li>Does it improve my safe ranged damage?</li>
+  <li>Does it apply a status effect I can keep active?</li>
+  <li>Does it help movement or survival?</li>
+  <li>Will I still have the right Mutagens for the next node?</li>
+</ul>
+
+For a first run, reliable range and survival are usually better than risky burst damage.
+
+<h2 id="cerebrum-enhancer-research-samples">
+  Cerebrum Enhancer and research samples
+</h2>
+
+The **Cerebrum Enhancer** is easy to underrate because Mutagen evolution feels more exciting. Do not ignore it.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-cerebrum-enhancer-species-upgrades.webp"
+    alt="Voidling Bound Cerebrum Enhancer research samples and species upgrades"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cerebrum Enhancer upgrades are species-based, so they are strongest when you focus on the creature type you actually use.
+  </figcaption>
+</figure>
+
+Research samples can improve a species, and future Voidlings of the same type can benefit from that progress. That makes species upgrades very strong if you know which creature you are using most.
+
+Good early spending targets are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>primary attack improvements,</li>
+  <li>damage upgrades for the ability you use most,</li>
+  <li>fire rate or cooldown comfort,</li>
+  <li>mobility upgrades if you keep getting trapped,</li>
+  <li>and healing or gear support if survival is the problem.</li>
+</ul>
+
+Do not spend all your research samples on a species you barely use.
+
+<h2 id="atlas-terminal-replay">
+  Atlas Terminal and mission replay
+</h2>
+
+Once the **Atlas Terminal** opens, stop choosing missions blindly. The mission screen gives you information that directly affects your build choice.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-atlas-terminal-mission-replay.webp"
+    alt="Voidling Bound Atlas Terminal mission level faction weaknesses and replay objectives"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Atlas Terminal helps you choose missions by level, faction, weakness, and missing objectives.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="How to use the Atlas Terminal as a beginner."
+columns={replayColumns}
+rows={replayRows}
+/>
+
+This is where Voidling Bound becomes easier to plan. If you know the faction, you can choose a better element. If you know what objective is missing, you can decide whether the next run is for power, collectibles, or a clean time route.
+
+<h2 id="golden-eggs-quackies-and-collectibles">
+  Golden Eggs, Quackies, and collectibles
+</h2>
+
+Do not try to collect everything during your first clear. Hidden objectives are easier once you know the mission layout.
+
+For now, remember the difference:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Mutagens</strong> help your evolution path and should come first if you need power.</li>
+  <li><strong>Golden Eggs</strong> hatch secret Voidlings and can matter later for build options.</li>
+  <li><strong>Quackies</strong> are better saved for dedicated completion cleanup.</li>
+</ul>
+
+Use the <Link href="/voidling-bound/all-collectibles">All Collectibles Guide</Link> when you are ready to clean mission objectives systematically, or the <Link href="/voidling-bound/golden-egg-locations">Golden Egg Locations Guide</Link> if you only want secret Voidlings.
+
+<h2 id="when-to-try-new-voidlings">
+  When to try new Voidlings
+</h2>
+
+You will hatch new Voidlings as you progress. Try them, but do not abandon your upgraded main creature every time something new appears.
+
+A good early setup is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>one safe main Voidling for reliable clears,</li>
+  <li>one backup Voidling with a different element or faction matchup,</li>
+  <li>and a few saved candidates with strong stats or rare Natures.</li>
+</ul>
+
+New species can feel weak before upgrades. If a Voidling looks interesting but struggles immediately, test it in older missions before committing resources.
+
+<h2 id="breeding-and-splicing-later">
+  Breeding and Splicing come later, but prepare now
+</h2>
+
+Breeding and Splicing are not first-hour priorities, but you can make better choices now by not throwing away useful Voidlings too early.
+
+Keep an eye out for:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>high total stat rolls,</li>
+  <li>rare or useful Natures,</li>
+  <li>strong parents within a species you like,</li>
+  <li>unusual Golden Egg variants,</li>
+  <li>and Voidlings with ability pieces you may want later.</li>
+</ul>
+
+Breeding becomes valuable because offspring can inherit from parents. If you release every strong candidate too early, you may regret it when the Pheromone Nest opens.
+
+For deeper system planning, use the <Link href="/voidling-bound/evolution-breeding-splicing-guide">Evolution, Breeding, and Splicing Guide</Link>.
+
+
+<h2 id="common-beginner-mistakes">
+  Common beginner mistakes
+</h2>
+
+<GuideTable
+caption="Voidling Bound beginner mistakes and better choices."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+The biggest beginner mistake is treating every problem as a level problem. Sometimes you need more health. Sometimes you need a better element. Sometimes you need a different evolution route. Check the mission, then upgrade with a goal.
+
+<h2 id="faq">
+  Voidling Bound beginner FAQ
+</h2>
+
+### What is the best difficulty for beginners?
+
+Adventurer is the safest default for a first run. Pick Collector if you want a lighter start focused on learning, collecting, and exploring.
+
+### What is the first Voidling in Voidling Bound?
+
+Your first Voidling is Kwipeck. It is a good starter because it gives you safe ranged pressure while you learn movement and healing.
+
+### What stat should I pick first?
+
+Vitality is the safest first stat if you are still learning combat. Strength is better if you already feel safe and want faster clears.
+
+### What element should I use first?
+
+Use the element that matches the mission faction. Check the element matchup table before entering a mission.
+
+### Are status effects important for beginners?
+
+Yes, but only when your evolution route can apply them consistently. See the status effects section for the short version.
+
+### Should I evolve Kwipeck right away?
+
+Yes, but read the node first. Pick an evolution route that improves your real playstyle, especially safe range, useful status, or a better faction matchup.
+
+### What are Mutagens for?
+
+Mutagens are used at the Evolution Chamber to unlock elemental evolution paths and new abilities for individual Voidlings.
+
+### What are research samples for?
+
+Research samples are used at the Cerebrum Enhancer and other upgrade systems. Cerebrum upgrades are acquired per species, so they are valuable for the creature type you use most.
+
+### Should I spend research samples on every species?
+
+No. Focus on the species you actually use. Spreading samples across too many species can make all of them feel underpowered.
+
+### When should I replay missions?
+
+Replay when you need a specific missing objective, a safer resource route, or a better cleanup run. Do not combine timer routes with hidden collectible routes unless you already know the mission.
+
+### Should I collect Golden Eggs early?
+
+Yes, if the route is easy. Golden Eggs hatch secret Voidlings and can help later with build options and Splicing.
+
+### Should I worry about Breeding early?
+
+Not as a full system, but keep high-stat Voidlings, rare Natures, and unusual Golden Egg variants for later parent choices. See Breeding and Splicing come later.
+
+### Should I worry about Splicing early?
+
+No. Just keep useful species, abilities, Golden Egg variants, and rare candidates so you have better options when Splicing opens.

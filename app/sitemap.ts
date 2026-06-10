@@ -85,6 +85,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/house-flipper-remastered-collection`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/gothic-1-remake`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/solarpunk`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/voidling-bound`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+    { url: `${base}/voidling-bound/all-collectibles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/voidling-bound/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/voidling-bound/evolution-breeding-splicing-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/voidling-bound/golden-egg-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/voidling-bound/mutagen-research-points-farm`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/voidling-bound/quackies-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
 
     { url: `${base}/solarpunk/beginners-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/solarpunk/energy-system-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide

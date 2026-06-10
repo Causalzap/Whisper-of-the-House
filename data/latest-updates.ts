@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Voidling Bound =====
+{
+  href: "/voidling-bound",
+  game: "Voidling Bound",
+  title: "Guide Hub, Beginner Tips, Mutagens & Eggs",
+  description:
+  "Start here for Voidling Bound beginner tips, Kwipeck, Mutagens, Research Points, Evolution, Golden Eggs, Quackies, Breeding, Splicing, and Abyss prep.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+  },
+  
+  // ===== Voidling Bound =====
+  {
+  href: "/voidling-bound/beginner-guide",
+  game: "Voidling Bound",
+  title: "Beginner Guide, Stats, Elements & First Route",
+  description:
+  "Start Voidling Bound with the best difficulty, Kwipeck stats, element matchups, status effects, early upgrades, Atlas replay tips, and Breeding prep.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+  },
+  
+  // ===== Voidling Bound =====
+  {
+  href: "/voidling-bound/golden-egg-locations",
+  game: "Voidling Bound",
+  title: "Golden Egg Locations & Secret Voidlings",
+  description:
+  "Find every Voidling Bound Golden Egg with route cues, hatch results like Qwebeck Kwipeck and Hellfire Packuran, return-to-ship tips, and cleanup advice.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+  },
+  
+  // ===== Voidling Bound =====
+  {
+  href: "/voidling-bound/quackies-locations",
+  game: "Voidling Bound",
+  title: "Quackies Locations, Names, Colors & Checklist",
+  description:
+  "Find all 26 Voidling Bound Quackies with mission checklist, names, colors, landmarks, high-friction misses, and cleanup route for every system.",
+  tagClass: "text-violet-500",
+  hoverBorderClass: "hover:border-violet-300",
+  hoverTitleClass: "group-hover:text-violet-700",
+  },
+  
 // ===== Solarpunk =====
 {
   href: "/solarpunk",

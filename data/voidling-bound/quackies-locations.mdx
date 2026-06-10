@@ -1,0 +1,992 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const collectibleColumns = [
+{ key: "Collectible", label: "Collectible" },
+{ key: "Main Use", label: "Main Use" },
+{ key: "Best Time to Hunt", label: "Best Time to Hunt" },
+];
+
+export const collectibleRows = [
+{
+Collectible: "Quackies",
+"Main Use":
+"Hidden duck collectibles that appear on your ship after collection.",
+"Best Time to Hunt":
+"After you already know the mission route and can search without rushing.",
+},
+{
+Collectible: "Golden Eggs",
+"Main Use":
+"Hatch secret Voidlings outside the normal genetic tree.",
+"Best Time to Hunt":
+"Before or alongside completion cleanup, especially if you want secret variants.",
+},
+{
+Collectible: "Mutagens",
+"Main Use":
+"Unlock evolution nodes, elements, abilities, and stronger build routes.",
+"Best Time to Hunt":
+"Before Quacky cleanup if your Voidling still needs more power.",
+},
+{
+Collectible: "Research Points",
+"Main Use":
+"Upgrade species-wide progression through systems like the Cerebrum Enhancer.",
+"Best Time to Hunt":
+"Whenever your build feels weak or your main species needs permanent upgrades.",
+},
+];
+
+export const checklistColumns = [
+{ key: "Track", label: "Track" },
+{ key: "System", label: "System" },
+{ key: "Mission", label: "Mission" },
+{ key: "Quacky", label: "Quacky" },
+{ key: "Look", label: "Look / Color Cue" },
+{ key: "Main Landmark", label: "Main Landmark" },
+{ key: "Cleanup Friction", label: "Cleanup Friction" },
+];
+
+export const checklistRows = [
+{
+Track: "☐",
+System: "Vireo",
+Mission: "Faint Signal",
+Quacky: "Canary Quacky",
+Look: "Bright yellow",
+"Main Landmark": "Mission-end platform",
+"Cleanup Friction": "Low",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "Save the Cauldron",
+Quacky: "Violet Quacky",
+Look: "Purple / violet",
+"Main Landmark": "Cauldron-side objects",
+"Cleanup Friction": "Low",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "Stranded Lead",
+Quacky: "Brown Quacky",
+Look: "Brown",
+"Main Landmark": "Tables and crates",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "Centennial Bloom",
+Quacky: "Red Quacky",
+Look: "Red",
+"Main Landmark": "High leaf platform",
+"Cleanup Friction": "Low",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "Secret Stronghold",
+Quacky: "Blue Quacky",
+Look: "Blue",
+"Main Landmark": "Antenna building",
+"Cleanup Friction": "Low",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "On the Precipice",
+Quacky: "Dark Quacky",
+Look: "Dark",
+"Main Landmark": "Cliff ledges",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "Last Stand",
+Quacky: "Cute Quacky",
+Look: "Cute duck variant",
+"Main Landmark": "Arena edge",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "On Night Watch",
+Quacky: "Pyro Quacky",
+Look: "Pyro-themed / dark warm color",
+"Main Landmark": "Console-side objects",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "Genetic Pursuit",
+Quacky: "Amber Quacky",
+Look: "Amber",
+"Main Landmark": "Side structures",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Vireo",
+Mission: "Back to Square One",
+Quacky: "Green Quacky",
+Look: "Green",
+"Main Landmark": "Off-route corners",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Solum",
+Mission: "Search and Rescue",
+Quacky: "Bronze Quacky",
+Look: "Bronze",
+"Main Landmark": "Glowing cave shelf",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Solum",
+Mission: "Reclaim Sanctuary",
+Quacky: "White Quacky",
+Look: "White",
+"Main Landmark": "Sanctuary objects",
+"Cleanup Friction": "Low",
+},
+{
+Track: "☐",
+System: "Solum",
+Mission: "Cleaning the Eyrie",
+Quacky: "Silver Quacky",
+Look: "Silver",
+"Main Landmark": "First building",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Solum",
+Mission: "Subterranean Expedition",
+Quacky: "Beige Quacky",
+Look: "Beige",
+"Main Landmark": "Icy cave wall",
+"Cleanup Friction": "High",
+},
+{
+Track: "☐",
+System: "Solum",
+Mission: "Ruin Delver",
+Quacky: "Aquacky",
+Look: "Aqua-themed",
+"Main Landmark": "Ruin side paths",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Solum",
+Mission: "Drawing Fire",
+Quacky: "Banana Quacky",
+Look: "Yellow / banana-themed",
+"Main Landmark": "Arena cover",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Solum",
+Mission: "Survive the Storm",
+Quacky: "Night Quacky",
+Look: "Dark / night-themed",
+"Main Landmark": "Sheltered ledges",
+"Cleanup Friction": "High",
+},
+{
+Track: "☐",
+System: "Solum",
+Mission: "Safe Passage",
+Quacky: "Cursed Quacky",
+Look: "Cursed-themed",
+"Main Landmark": "Path-edge pockets",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Aulis",
+Mission: "Stay on Track",
+Quacky: "Mirage Quacky",
+Look: "Orange-yellow / mirage-themed",
+"Main Landmark": "Blue-green leaf cluster",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Aulis",
+Mission: "Storm Breaker",
+Quacky: "Toxic Quacky",
+Look: "Toxic green / dark green",
+"Main Landmark": "Red pond ledges",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Aulis",
+Mission: "Navigate the Maze",
+Quacky: "Quicky Quacky",
+Look: "Small orange / red duck",
+"Main Landmark": "Rock-overhang platform",
+"Cleanup Friction": "High",
+},
+{
+Track: "☐",
+System: "Aulis",
+Mission: "Pull the Plug",
+Quacky: "Deepwater Quacky",
+Look: "Deepwater-themed",
+"Main Landmark": "Purple-platform route",
+"Cleanup Friction": "High",
+},
+{
+Track: "☐",
+System: "Aulis",
+Mission: "Machine Non Grata",
+Quacky: "Poltergeist Quacky",
+Look: "Ghost / poltergeist-themed",
+"Main Landmark": "Machinery ledges",
+"Cleanup Friction": "High",
+},
+{
+Track: "☐",
+System: "Aulis",
+Mission: "On the Brink of Ruin",
+Quacky: "Fancy Quacky",
+Look: "Fancy-themed",
+"Main Landmark": "Stone pedestal",
+"Cleanup Friction": "Medium",
+},
+{
+Track: "☐",
+System: "Aulis",
+Mission: "Calm Before the Storm",
+Quacky: "Oxblood Quacky",
+Look: "Deep red / oxblood",
+"Main Landmark": "Late side pockets",
+"Cleanup Friction": "High",
+},
+{
+Track: "☐",
+System: "The Abyss",
+Mission: "End to the Unknown",
+Quacky: "The Dark Entity Quacky",
+Look: "Dark entity-themed",
+"Main Landmark": "Dark cave wall",
+"Cleanup Friction": "High",
+},
+];
+
+export const detailColumns = [
+{ key: "Mission", label: "Mission" },
+{ key: "Quacky", label: "Quacky" },
+{ key: "How to Find It", label: "How to Find It" },
+{ key: "Why Players Miss It", label: "Why Players Miss It" },
+];
+
+export const vireoRows = [
+{
+Mission: "Faint Signal",
+Quacky: "Canary Quacky",
+"How to Find It":
+"After reaching the mission-end platform, check the metal tower / arena-side machinery before leaving.",
+"Why Players Miss It":
+"It appears during the first mission pattern, so many players focus on clearing the fight and exit before checking the platform objects.",
+},
+{
+Mission: "Save the Cauldron",
+Quacky: "Violet Quacky",
+"How to Find It":
+"Search the starting-side route and the cauldron-side object cluster before pushing too far along the main path.",
+"Why Players Miss It":
+"The violet color can blend into darker mission lighting and side objects, especially when you are still learning the mission layout.",
+},
+{
+Mission: "Stranded Lead",
+Quacky: "Brown Quacky",
+"How to Find It":
+"Check around table-like objects, crates, and route-side structures instead of only following the objective lane.",
+"Why Players Miss It":
+"Brown blends into wood, metal, and cluttered structure surfaces, so it is easier to miss than the brighter early Quackies.",
+},
+{
+Mission: "Centennial Bloom",
+Quacky: "Red Quacky",
+"How to Find It":
+"Climb the plant-heavy route and check the high leaf platform instead of staying on the lower garden path.",
+"Why Players Miss It":
+"The lower route feels natural, but the Red Quacky sits on the elevated plant platform above the main garden path.",
+},
+{
+Mission: "Secret Stronghold",
+Quacky: "Blue Quacky",
+"How to Find It":
+"Sweep the stronghold structure route and check the large antenna building before leaving the area.",
+"Why Players Miss It":
+"The antenna building is a clear landmark, but players can still miss it if they only follow the objective and do not inspect the structure edges.",
+},
+{
+Mission: "On the Precipice",
+Quacky: "Dark Quacky",
+"How to Find It":
+"Move along the cliff route slowly and check side ledges before committing to the next objective section.",
+"Why Players Miss It":
+"The dark color is not the main problem by itself; the cliff layout makes players look at jumps and safe footing instead of the ledge sides.",
+},
+{
+Mission: "Last Stand",
+Quacky: "Cute Quacky",
+"How to Find It":
+"After the combat route opens up, sweep the outer arena edge and nearby side spaces.",
+"Why Players Miss It":
+"The arena encourages center positioning during combat, so the outer edge often gets skipped after the fight ends.",
+},
+{
+Mission: "On Night Watch",
+Quacky: "Pyro Quacky",
+"How to Find It":
+"Search console-side spaces, side objects, and NPC-adjacent areas instead of only checking the combat lane.",
+"Why Players Miss It":
+"Its dark warm look can hide in the night-route lighting, and the mission naturally pulls attention toward patrol and combat flow.",
+},
+{
+Mission: "Genetic Pursuit",
+Quacky: "Amber Quacky",
+"How to Find It":
+"Sweep side structures and terrain edges before the final route push.",
+"Why Players Miss It":
+"Amber can blend into warm route lighting, and the mission momentum makes the final side-structure check easy to skip.",
+},
+{
+Mission: "Back to Square One",
+Quacky: "Green Quacky",
+"How to Find It":
+"Replay with a stronger Voidling and check off-route corners, ledges, and small side spaces.",
+"Why Players Miss It":
+"Green can blend into plant or terrain colors, and the mission name makes players treat the route like a simple repeat instead of a cleanup pass.",
+},
+];
+
+export const solumRows = [
+{
+Mission: "Search and Rescue",
+Quacky: "Bronze Quacky",
+"How to Find It":
+"Follow the cave route and search the stone shelf around the glowing pool, crystal area, and large cave plants.",
+"Why Players Miss It":
+"Bronze sits in a blue-green cave environment, so players who only scan the main floor can miss the raised shelf.",
+},
+{
+Mission: "Reclaim Sanctuary",
+Quacky: "White Quacky",
+"How to Find It":
+"Search around sanctuary-side structures and chest-like objects near the route.",
+"Why Players Miss It":
+"White is easy to notice in open space, but enemy waves pull attention away from object clusters and side structures.",
+},
+{
+Mission: "Cleaning the Eyrie",
+Quacky: "Silver Quacky",
+"How to Find It":
+"Check the first building, the nearby fire crystal route, and the opened side space behind the structure.",
+"Why Players Miss It":
+"Silver can blend with pale stone and structure edges, and players often continue the eyrie route without returning to the building-side space.",
+},
+{
+Mission: "Subterranean Expedition",
+Quacky: "Beige Quacky",
+"How to Find It":
+"Use the fire-crystal and ice-blockage route, then search the narrow ledge beside the icy cave wall with lava visible below or behind the route.",
+"Why Players Miss It":
+"Beige is easy to lose against pale rock and icy cave surfaces, and the ledge position makes players look forward instead of down the wall.",
+},
+{
+Mission: "Ruin Delver",
+Quacky: "Aquacky",
+"How to Find It":
+"Search ruin side paths, broken wall corners, and lower pockets before the final push.",
+"Why Players Miss It":
+"Aquacky can visually blend into cool-toned ruin lighting and water-like color palettes, so it needs a deliberate side-path sweep.",
+},
+{
+Mission: "Drawing Fire",
+Quacky: "Banana Quacky",
+"How to Find It":
+"After combat pressure drops, sweep arena edges, cover objects, and side lanes.",
+"Why Players Miss It":
+"Banana Quacky is bright, but the mission's combat pressure makes players focus on threats and cover instead of checking the arena border.",
+},
+{
+Mission: "Survive the Storm",
+Quacky: "Night Quacky",
+"How to Find It":
+"Check sheltered corners, side ledges, and spaces near large environmental objects once the route feels safe.",
+"Why Players Miss It":
+"Night Quacky is a dark collectible in a pressure-heavy mission, so it is easy to miss while prioritizing survival and movement.",
+},
+{
+Mission: "Safe Passage",
+Quacky: "Cursed Quacky",
+"How to Find It":
+"Search path edges, route-side objects, and small pockets before taking the final exit.",
+"Why Players Miss It":
+"The mission encourages safe forward movement, but Cursed Quacky requires a short side-pocket check before you commit to leaving.",
+},
+];
+
+export const aulisRows = [
+{
+Mission: "Stay on Track",
+Quacky: "Mirage Quacky",
+"How to Find It":
+"Follow the cliff-side platform and look toward the right rock wall. Check beside the large blue-green leaf cluster before moving deeper into the route.",
+"Why Players Miss It":
+"The mission title encourages forward movement, while Mirage Quacky sits beside the plant cluster along the cliff edge.",
+},
+{
+Mission: "Storm Breaker",
+Quacky: "Toxic Quacky",
+"How to Find It":
+"After the upper route opens, check the red pond side area and nearby ledges before leaving.",
+"Why Players Miss It":
+"The opened route pulls players forward, so the pond-side ledge is easy to skip even though the red pond is a strong landmark.",
+},
+{
+Mission: "Navigate the Maze",
+Quacky: "Quicky Quacky",
+"How to Find It":
+"After using the high route and dropping lower, follow the side wall and check the small platform tucked under the large rock overhang.",
+"Why Players Miss It":
+"The maze has many competing paths, and Quicky Quacky sits under the overhang rather than on the route players naturally scan.",
+},
+{
+Mission: "Pull the Plug",
+Quacky: "Deepwater Quacky",
+"How to Find It":
+"Use the high purple-platform route, then continue through the later lower section and check side platforms before leaving.",
+"Why Players Miss It":
+"The vertical route makes players focus on platforming and the exit path, while Deepwater Quacky sits closer to the lower-side cleanup route.",
+},
+{
+Mission: "Machine Non Grata",
+Quacky: "Poltergeist Quacky",
+"How to Find It":
+"Search machinery-side ledges, route edges, small ledges, and platform corners after you understand the main path.",
+"Why Players Miss It":
+"Poltergeist Quacky has to compete with machinery shapes, pipes, platforms, and bright environmental details, so the room itself becomes visual noise.",
+},
+{
+Mission: "On the Brink of Ruin",
+Quacky: "Fancy Quacky",
+"How to Find It":
+"Look for the small round stone pedestal near tall pale rock blocks and broken ruin structures.",
+"Why Players Miss It":
+"Fancy Quacky is placed low on a pedestal while the surrounding pale blocks and broken red ruins draw the eye upward and outward.",
+},
+{
+Mission: "Calm Before the Storm",
+Quacky: "Oxblood Quacky",
+"How to Find It":
+"Bring a comfortable Voidling and sweep late-route side pockets before the final section.",
+"Why Players Miss It":
+"Oxblood's deep red tone can sink into darker late-route colors, especially when players are already trying to finish the mission cleanly.",
+},
+];
+
+export const abyssRows = [
+{
+Mission: "End to the Unknown",
+Quacky: "The Dark Entity Quacky",
+"How to Find It":
+"During the final mission sweep, search the dark floor pocket between tall rock walls and pale root-like structures before leaving.",
+"Why Players Miss It":
+"The Dark Entity blends into the final route's dark floor and wall colors, while the pale vertical rocks pull attention away from the collectible.",
+},
+];
+
+export const frictionColumns = [
+{ key: "Quacky", label: "Quacky" },
+{ key: "Mission", label: "Mission" },
+{ key: "Why It Is Easy to Miss", label: "Why It Is Easy to Miss" },
+{ key: "What to Check", label: "What to Check" },
+];
+
+export const frictionRows = [
+{
+Quacky: "Beige Quacky",
+Mission: "Subterranean Expedition",
+"Why It Is Easy to Miss":
+"The pale color blends into icy cave walls and rock ledges.",
+"What to Check":
+"Fire-crystal route, ice-blockage route, narrow cave wall ledge.",
+},
+{
+Quacky: "Mirage Quacky",
+Mission: "Stay on Track",
+"Why It Is Easy to Miss":
+"The mission pushes you forward along the track route.",
+"What to Check":
+"Right rock wall and large blue-green leaf cluster.",
+},
+{
+Quacky: "Toxic Quacky",
+Mission: "Storm Breaker",
+"Why It Is Easy to Miss":
+"The opened upper route pulls players away from the pond-side check.",
+"What to Check":
+"Red pond side area and nearby ledges.",
+},
+{
+Quacky: "Quicky Quacky",
+Mission: "Navigate the Maze",
+"Why It Is Easy to Miss":
+"The maze route is dense, and the Quacky sits under a lower overhang rather than on the obvious path.",
+"What to Check":
+"Lower side platform under the large rock overhang.",
+},
+{
+Quacky: "Deepwater Quacky",
+Mission: "Pull the Plug",
+"Why It Is Easy to Miss":
+"The route has vertical pressure and late lower-side checks.",
+"What to Check":
+"High purple-platform route and later lower section.",
+},
+{
+Quacky: "Poltergeist Quacky",
+Mission: "Machine Non Grata",
+"Why It Is Easy to Miss":
+"Machinery-heavy spaces create visual noise around small collectibles.",
+"What to Check":
+"Machinery-side ledges, route edges, and platform corners.",
+},
+{
+Quacky: "Oxblood Quacky",
+Mission: "Calm Before the Storm",
+"Why It Is Easy to Miss":
+"The deep red color can blend into darker late-route lighting.",
+"What to Check":
+"Late-route side pockets before the final section.",
+},
+{
+Quacky: "The Dark Entity Quacky",
+Mission: "End to the Unknown",
+"Why It Is Easy to Miss":
+"The dark look blends into the final mission floor and cave wall colors.",
+"What to Check":
+"Dark floor pocket between tall rock walls and pale root-like structures.",
+},
+];
+
+export const routeColumns = [
+{ key: "Route Stage", label: "Route Stage" },
+{ key: "Recommended Missions", label: "Recommended Missions" },
+{ key: "Reason", label: "Reason" },
+];
+
+export const routeRows = [
+{
+"Route Stage": "Learn the pattern",
+"Recommended Missions":
+"Faint Signal, Save the Cauldron, Centennial Bloom",
+Reason:
+"These teach the basic Quacky search loop: arena edge, side object, and high platform checks.",
+},
+{
+"Route Stage": "Clean Vireo",
+"Recommended Missions":
+"Secret Stronghold, On the Precipice, On Night Watch, Genetic Pursuit",
+Reason:
+"These introduce darker colors, structure-heavy hiding spots, and cliff-side checks.",
+},
+{
+"Route Stage": "Clean Solum",
+"Recommended Missions":
+"Search and Rescue, Cleaning the Eyrie, Subterranean Expedition",
+Reason:
+"These teach cave landmarks, fire-crystal routes, building checks, and low wall searches.",
+},
+{
+"Route Stage": "Clean Aulis",
+"Recommended Missions":
+"Stay on Track, Storm Breaker, Navigate the Maze, Pull the Plug",
+Reason:
+"These routes are denser and more vertical, so they are better after your build is stable.",
+},
+{
+"Route Stage": "Final sweep",
+"Recommended Missions":
+"Machine Non Grata, On the Brink of Ruin, Calm Before the Storm, End to the Unknown",
+Reason:
+"These are easier when your main Voidling can search safely without combat pressure.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Treating Quackies like normal loot",
+"Why It Hurts":
+"They are usually not placed directly on the objective route.",
+"Better Move":
+"Search side spaces, ledges, objects, and mission-end areas.",
+},
+{
+Mistake: "Ignoring color contrast",
+"Why It Hurts":
+"Brown, dark, beige, bronze, oxblood, and night-themed Quackies can blend into terrain.",
+"Better Move":
+"Use both the Quacky name and the landmark cue.",
+},
+{
+Mistake: "Doing Quacky cleanup during timer attempts",
+"Why It Hurts":
+"Timer routes reward speed, while Quacky routes reward slow side checks.",
+"Better Move":
+"Separate timer attempts from completion cleanup.",
+},
+{
+Mistake: "Leaving after the main fight or final objective",
+"Why It Hurts":
+"Some Quackies sit near arena edges, late-route side spaces, or mission-end landmarks.",
+"Better Move":
+"Before exiting, sweep one more side platform, wall edge, or object cluster.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+There are **26 Quackies** in **Voidling Bound**: 10 in Vireo, 8 in Solum, 7 in Aulis, and 1 in The Abyss. Quackies are hidden duck collectibles that appear on your ship after collection.
+
+Use this page like a mini-wiki checklist: find the mission, match the Quacky name and color, then search the listed landmark. Quackies are completion collectibles, so farm Mutagens, Golden Eggs, and Research Points first if your build still needs power. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Voidling Bound. This guide covers all Quacky names, systems, missions, color cues, location landmarks, cleanup friction ratings, and recommended collection order.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-faint-signal-canary-quacky-location.webp"
+    alt="Voidling Bound Canary Quacky location in Faint Signal near the mission-end arena platform"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Faint Signal is the best place to learn the Quacky pattern: finish the main route, then check the arena-side platform and nearby machinery before leaving.
+  </figcaption>
+</figure>
+
+<h2 id="voidling-bound-quackies-mini-wiki">
+  Voidling Bound Quackies mini-wiki and checklist
+</h2>
+
+**Quackies** are not combat upgrades. They are hidden collectibles spread across Voidling Bound missions, and each one has its own name and visual theme. That makes them better suited to a checklist-style guide than a long route walkthrough.
+
+Instead of trying to memorize every turn, use three clues:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Mission:</strong> the only place that Quacky appears.
+  </li>
+  <li>
+    <strong>Look:</strong> color or theme, such as Canary, Violet, Bronze, Mirage, or Oxblood.
+  </li>
+  <li>
+    <strong>Landmark:</strong> the object, ledge, wall, cave route, arena edge, plant cluster, or machinery area you should check.
+  </li>
+</ul>
+
+For full completion routing, pair this page with the <Link href="/voidling-bound/all-collectibles">All Collectibles Guide</Link>. If you are still building power, use the <Link href="/voidling-bound/mutagen-research-points-farm">Mutagen and Research Points Farm Guide</Link> first.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-quackies-work">
+  How Quackies work
+</h2>
+
+<GuideTable
+caption="Voidling Bound Quackies compared with other collectible types."
+columns={collectibleColumns}
+rows={collectibleRows}
+/>
+
+Quackies are best handled after your first clear of a mission. Once you know the route, enemy pressure, platforming, and exit path, it becomes much easier to slow down and search the small spaces that are easy to skip.
+
+<h2 id="all-quackies-checklist">
+  All Quackies checklist
+</h2>
+
+Use this table to identify which Quacky you are missing. The “Main Landmark” column is intentionally short, so you can scan it quickly. The system sections below provide the fuller “How to Find It” description.
+
+<div className="my-5 rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-sm leading-7 text-slate-300">
+  <strong className="text-slate-100">Cleanup friction note:</strong>{" "}
+  Low, Medium, and High are our own player-facing cleanup ratings, not official in-game mission difficulty labels. They are based on screenshot review, community location notes, and editorial judgment around landmark clarity, color contrast, route pressure, and how easy the Quacky is to overlook.
+</div>
+
+<GuideTable
+caption="All Voidling Bound Quackies by system, mission, name, look, landmark, and cleanup friction."
+columns={checklistColumns}
+rows={checklistRows}
+/>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="vireo-quackies">
+  Vireo Quackies
+</h2>
+
+Vireo Quackies teach the basic search pattern: do not only follow the objective. Check arena edges, plants, tables, cliffs, building sides, and route-side objects.
+
+<GuideTable
+caption="Voidling Bound Vireo Quacky location cues."
+columns={detailColumns}
+rows={vireoRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-centennial-bloom-red-quacky-location.webp"
+    alt="Voidling Bound Red Quacky location in Centennial Bloom on the high plant platform"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Centennial Bloom hides Red Quacky on the elevated plant route, so check the high leaf platform instead of staying only on the lower garden path.
+  </figcaption>
+</figure>
+
+<h2 id="solum-quackies">
+  Solum Quackies
+</h2>
+
+Solum Quackies are more about environmental landmarks. Cave walls, glowing pools, fire crystals, ice blockages, buildings, ruin corners, and sheltered spaces matter more than the straight mission path.
+
+<GuideTable
+caption="Voidling Bound Solum Quacky location cues."
+columns={detailColumns}
+rows={solumRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-search-and-rescue-bronze-quacky-location.webp"
+    alt="Voidling Bound Bronze Quacky location in Search and Rescue near the glowing cave pool"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Search and Rescue places Bronze Quacky on a raised cave shelf near glowing water, crystals, and large cave plants.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-subterranean-expedition-beige-quacky-location.webp"
+    alt="Voidling Bound Beige Quacky location in Subterranean Expedition beside the icy cave wall"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Subterranean Expedition is a high-friction cleanup target because Beige Quacky can blend into the icy cave wall and pale rock ledge.
+  </figcaption>
+</figure>
+
+<h2 id="aulis-quackies">
+  Aulis Quackies
+</h2>
+
+Aulis is where Quacky cleanup becomes more demanding. The routes are denser, more vertical, and more visually busy. Use landmarks first: blue-green leaves, red pond ledges, rock-overhang platforms, purple-platform routes, machinery ledges, stone pedestals, and late-route side pockets.
+
+<GuideTable
+caption="Voidling Bound Aulis Quacky location cues."
+columns={detailColumns}
+rows={aulisRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-stay-on-track-mirage-quacky-location.webp"
+    alt="Voidling Bound Mirage Quacky location in Stay on Track beside the blue green leaf cluster"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Stay on Track hides Mirage Quacky beside the large blue-green leaf cluster along the right rock wall.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-navigate-the-maze-quicky-quacky-location.webp"
+    alt="Voidling Bound Quicky Quacky location in Navigate the Maze under the large rock overhang"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Navigate the Maze is a dedicated cleanup route. Look for Quicky Quacky on the lower side platform under the large rock overhang.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-on-the-brink-of-ruin-fancy-quacky-location.webp"
+    alt="Voidling Bound Fancy Quacky location in On the Brink of Ruin on the stone platform near broken ruins"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    On the Brink of Ruin places Fancy Quacky on a small round stone pedestal near pale rock blocks and broken ruin structures.
+  </figcaption>
+</figure>
+
+<h2 id="the-abyss-quacky">
+  The Abyss Quacky
+</h2>
+
+The Abyss only has one Quacky in this checklist, but it is easy to overlook because the final route is darker and more visually compressed.
+
+<GuideTable
+caption="Voidling Bound The Abyss Quacky location cue."
+columns={detailColumns}
+rows={abyssRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-end-to-the-unknown-the-dark-entity-quacky-location.webp"
+    alt="Voidling Bound The Dark Entity Quacky location in End to the Unknown near the dark cave wall"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Dark Entity Quacky blends into the final mission environment, so search the dark floor pocket between tall rock walls and pale root-like structures.
+  </figcaption>
+</figure>
+
+
+<h2 id="hardest-quackies-to-miss">
+  High-friction Quackies to check first
+</h2>
+
+These are editorial picks based on cleanup friction, not official rankings. They are the Quackies most likely to cause cleanup frustration because their colors blend in, their landmarks are less obvious, or their missions push players forward quickly.
+
+<GuideTable
+caption="High-friction Voidling Bound Quackies to check first."
+columns={frictionColumns}
+rows={frictionRows}
+/>
+
+<h2 id="best-quacky-cleanup-route">
+  Best Quacky cleanup route
+</h2>
+
+The best route is not simply mission order. Start with easy landmark types, then move into harder cave, vertical, machinery, and dark-route Quackies.
+
+<GuideTable
+caption="Recommended Voidling Bound Quacky cleanup route."
+columns={routeColumns}
+rows={routeRows}
+/>
+
+This order keeps the highest-friction searches for later, when your build is strong enough to explore without combat pressure.
+
+<h2 id="common-quacky-mistakes">
+  Common Quacky mistakes
+</h2>
+
+<GuideTable
+caption="Common Voidling Bound Quacky cleanup mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+Most missed Quackies come from rushing the mission exit. Before leaving a mission, check one more ledge, one more object cluster, and one more side wall.
+
+<h2 id="faq">
+  Voidling Bound Quackies FAQ
+</h2>
+
+### How many Quackies are in Voidling Bound?
+
+There are 26 Quackies in this checklist: 10 in Vireo, 8 in Solum, 7 in Aulis, and 1 in The Abyss.
+
+### What do Quackies do in Voidling Bound?
+
+Quackies are hidden duck collectibles. After you collect them, they appear on your ship as part of your collection.
+
+### Are Quackies power upgrades?
+
+No. Quackies are completion collectibles. If your build is still weak, farm Mutagens and Research Points before doing full Quacky cleanup.
+
+### Are Low, Medium, and High official Quacky difficulties?
+
+No. The cleanup friction ratings in this guide are our own player-facing labels, not official in-game difficulty categories. They estimate how easy each Quacky is to miss based on landmark clarity, color contrast, route pressure, screenshot review, community notes, and editorial judgment.
+
+### Does every mission have a Quacky?
+
+Use each mission as if it has one hidden Quacky. The checklist above maps each mission to its Quacky name, look, and main landmark.
+
+### What is the easiest Quacky to find first?
+
+Canary Quacky in Faint Signal is the best first target because the mission-end platform is a clear landmark.
+
+### Which Vireo Quackies are easiest to find?
+
+Canary Quacky in Faint Signal, Violet Quacky in Save the Cauldron, Red Quacky in Centennial Bloom, and Blue Quacky in Secret Stronghold are good early targets because their landmarks are relatively clear.
+
+### What is the easiest Solum Quacky to miss?
+
+Subterranean Expedition's Beige Quacky is easy to miss because it blends into icy cave walls and pale terrain around the fire-crystal and ice-blockage route.
+
+### What is the easiest Aulis Quacky to miss?
+
+Navigate the Maze's Quicky Quacky is one of the easiest Aulis Quackies to miss because it sits away from the obvious path on a lower side platform under a rock overhang.
+
+### Where is Mirage Quacky?
+
+Mirage Quacky is in Stay on Track. Check the cliff-side platform near the right rock wall and the large blue-green leaf cluster.
+
+### Where is Toxic Quacky?
+
+Toxic Quacky is in Storm Breaker. Check the red pond side area and nearby ledges after the upper route opens.
+
+### Where is Poltergeist Quacky?
+
+Poltergeist Quacky is in Machine Non Grata. Search machinery-side ledges, route edges, and platform corners.
+
+### Where is Fancy Quacky?
+
+Fancy Quacky is in On the Brink of Ruin. Look for the small round stone pedestal near tall pale rock blocks and broken ruin structures.
+
+### Where is The Dark Entity Quacky?
+
+The Dark Entity Quacky is in End to the Unknown. Search the dark floor pocket between tall rock walls and pale root-like structures before leaving.
+
+### Should I collect Quackies during timer routes?
+
+Usually no. Timer routes reward speed, while Quacky cleanup requires slow side checks.
