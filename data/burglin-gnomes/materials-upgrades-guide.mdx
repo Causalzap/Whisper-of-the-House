@@ -1,0 +1,873 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const materialColumns = [
+  { key: "Material", label: "Material" },
+  { key: "Best Early Clue", label: "Best Early Clue" },
+  { key: "Where To Start", label: "Where To Start" },
+  { key: "Trust Level", label: "Trust Level" },
+];
+
+export const materialRows = [
+  {
+    Material: "Plasto",
+    "Best Early Clue": "Plastic-looking household items.",
+    "Where To Start":
+      "Bathroom, kids' room, bedroom, under beds, cabinets, tables, sinks, plastic toys, toothpaste, cream tubs, nail polish, DVD covers.",
+    "Trust Level":
+      "Strong early route. Still follow your current task count and checkmark feedback.",
+  },
+  {
+  Material: "Clonk",
+  "Best Early Clue": "Metal items.",
+  "Where To Start":
+    "Kitchen counters, oven route, drawers, cans, toaster, kettle, metal cookware, cat bowl, kitchen tools.",
+  "Trust Level":
+    "Strong early route. The Stockpile menu shows Clonk, not Clunk.",
+},
+
+  {
+    Material: "Fraggles",
+    "Best Early Clue": "Fragment, break, or small debris-style items.",
+    "Where To Start":
+      "Only test likely objects that are already near your route.",
+    "Trust Level":
+      "Name confirmed in Stockpile, but exact object mapping needs clean-run verification.",
+  },
+  {
+    Material: "Grabble",
+    "Best Early Clue": "Objects that look like grabby, mixed, or reusable household parts.",
+    "Where To Start":
+      "Treat it as a test route unless the task overview gives a clearer item image.",
+    "Trust Level":
+      "Name confirmed in Stockpile, but do not overclaim exact sources yet.",
+  },
+  {
+    Material: "Scrapling",
+    "Best Early Clue": "Scrap-like objects or broken household pieces.",
+    "Where To Start":
+      "Check clutter near your route instead of searching the whole house.",
+    "Trust Level":
+      "Name confirmed in Stockpile. Do not call it Scraggle in your notes.",
+  },
+  {
+    Material: "Marble",
+    "Best Early Clue": "Marble objects or slippery small objects.",
+    "Where To Start":
+      "Use only when the route is calm; do not test during final extraction.",
+    "Trust Level":
+      "Name confirmed in Stockpile, but route safely because marble-style objects can create movement problems.",
+  },
+];
+
+export const plastoColumns = [
+  { key: "Plasto Step", label: "Plasto Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const plastoRows = [
+  {
+    "Plasto Step": "1. Check the task count",
+    "What To Do":
+      "Open the task list and confirm how many Plasto pieces your current run asks for.",
+    "Why It Works":
+      "Task counts can vary by run or build. Do not rely on memory if the UI gives a different number.",
+  },
+  {
+    "Plasto Step": "2. Start in plastic-heavy rooms",
+    "What To Do":
+      "Go to the bathroom, kids' room, or bedroom before searching random rooms.",
+    "Why It Works":
+      "These rooms usually contain the most plastic-looking objects close together.",
+  },
+  {
+    "Plasto Step": "3. Check small object spots",
+    "What To Do":
+      "Look under beds, inside cabinets, on tables, on sinks, and around toy or vanity areas.",
+    "Why It Works":
+      "Plasto is often tied to small household objects rather than one giant item.",
+  },
+  {
+    "Plasto Step": "4. Use likely plastic objects",
+    "What To Do":
+      "Try plastic toys, toothpaste, cream tubs, nail polish, DVD covers, and similar items.",
+    "Why It Works":
+      "These match the plastic-object pattern and are easier to move than heavy loot.",
+  },
+  {
+    "Plasto Step": "5. Throw or move them outside",
+    "What To Do":
+      "Carry or toss the Plasto items outside the house until the task updates.",
+    "Why It Works":
+      "Gather tasks usually care about getting the material out, not just touching it indoors.",
+  },
+];
+
+export const clonkColumns = [
+  { key: "Clonk Step", label: "Clonk Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Warning", label: "Warning" },
+];
+
+export const clonkRows = [
+  {
+    "Clonk Step": "1. Start in the kitchen",
+    "What To Do":
+      "Use the kitchen route first because metal objects are commonly clustered there.",
+    Warning:
+      "The kitchen is also a bad room for panic, so do not rush deep before checking the route.",
+  },
+  {
+    "Clonk Step": "2. Secure a kitchen exit",
+    "What To Do":
+      "Open a nearby window, door, drawer route, or low path before climbing to counters.",
+    Warning:
+      "If the old man enters while the exit is closed, a simple Clonk route can become a rescue problem.",
+  },
+  {
+    "Clonk Step": "3. Reach the counter route",
+    "What To Do":
+      "Use the oven, drawers, shelves, or teammate boosts to reach upper kitchen surfaces.",
+    Warning:
+      "Do not jump blindly while carrying sharp tools or heavy items.",
+  },
+  {
+    "Clonk Step": "4. Pick metal items",
+    "What To Do":
+      "Try cans, toaster, kettle, cookware, metal tools, or the cat bowl if it appears in your route.",
+    Warning:
+      "Do not waste time on non-metal objects if the task specifically asks for Clonk.",
+  },
+  {
+    "Clonk Step": "5. Move items outside",
+    "What To Do":
+      "Drop metal items from the counter, then drag or carry them out through the safest route.",
+    Warning:
+      "Dragging metal items during an old man chase is how a clean route becomes a rescue.",
+  },
+  {
+    "Clonk Step": "6. Wait for task feedback",
+    "What To Do":
+      "Confirm the task update before grabbing the next item.",
+    Warning:
+      "If an item does not count, stop forcing it and switch to a clearer metal object.",
+  },
+];
+
+
+export const costColumns = [
+  { key: "Cost Rule", label: "Cost Rule" },
+  { key: "What To Check", label: "What To Check" },
+  { key: "Why", label: "Why" },
+];
+
+export const costRows = [
+  {
+    "Cost Rule": "Use the crafting menu for exact costs",
+    "What To Check":
+      "Open the item or upgrade before farming and write down the exact material requirements.",
+    Why:
+      "Costs can change by build, upgrade level, or item. Do not spend based on memory.",
+  },
+  {
+    "Cost Rule": "Identify the bottleneck material",
+    "What To Check":
+      "Check whether you are missing Plasto, Clonk, Scrapling, Marble, or another material.",
+    Why:
+      "A focused material run is faster than stealing random objects after every failed craft.",
+  },
+  {
+    "Cost Rule": "Do not buy offensive gear too early",
+    "What To Check":
+      "Ask whether the item helps extraction, survival, rescue, or only creates combat.",
+    Why:
+      "Early materials are scarce. Gear that starts fights often gives worse returns than gear that helps you leave alive.",
+  },
+  {
+    "Cost Rule": "Buy for your current failure point",
+    "What To Check":
+      "Review whether you are dying before extraction, leaving loot behind, getting detected, or failing rescues.",
+    Why:
+      "The best upgrade is the one that fixes the reason your last three runs failed.",
+  },
+];
+
+export const upgradePriorityColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Upgrade Type", label: "Upgrade Type" },
+  { key: "Buy When", label: "Buy When" },
+  { key: "Why It Comes Here", label: "Why It Comes Here" },
+];
+
+export const upgradePriorityRows = [
+  {
+    Priority: "1",
+    "Upgrade Type": "Movement and route tools",
+    "Buy When":
+      "You die before extraction, cannot reach routes, miss windows, or lose time crossing the house.",
+    "Why It Comes Here":
+      "Movement problems kill runs before carry problems matter.",
+  },
+  {
+    Priority: "2",
+    "Upgrade Type": "Stealth and noise control",
+    "Buy When":
+      "The old man, pets, or patrol pressure catches you before tasks are finished.",
+    "Why It Comes Here":
+      "Quiet movement keeps the route stable long enough to use your materials.",
+  },
+  {
+    Priority: "3",
+    "Upgrade Type": "Rescue and recovery tools",
+    "Buy When":
+      "Runs fail because teammates get tied, downed, trapped, or left behind.",
+    "Why It Comes Here":
+      "Recovery tools turn one mistake into a reset instead of a full wipe.",
+  },
+  {
+    Priority: "4",
+    "Upgrade Type": "Carry capacity and hauling support",
+    "Buy When":
+      "You already extract often but leave too much loot or material behind.",
+    "Why It Comes Here":
+      "Carry upgrades are strong after your team can survive the trip out.",
+  },
+  {
+    Priority: "5",
+    "Upgrade Type": "Crafting utility and conversion tools",
+    "Buy When":
+      "You need better material routing, potion use, repackaging, or bottleneck control.",
+    "Why It Comes Here":
+      "Utility tools become better once you know what materials you are missing.",
+  },
+  {
+    Priority: "6",
+    "Upgrade Type": "Special combat or chaos gear",
+    "Buy When":
+      "The team already has stable extraction, roles, and rescue discipline.",
+    "Why It Comes Here":
+      "Combat gear is fun, but early materials usually get better returns from movement, stealth, rescue, or economy.",
+  },
+];
+
+export const spendColumns = [
+  { key: "Your Problem", label: "Your Problem" },
+  { key: "Spend On", label: "Spend On" },
+  { key: "Do Not Spend On", label: "Do Not Spend On" },
+];
+
+export const spendRows = [
+  {
+    "Your Problem": "You die before reaching the exit",
+    "Spend On": "Movement, safe routes, escape tools, or stamina-style support.",
+    "Do Not Spend On":
+      "Carry capacity. It does not help if the gnome carrying more loot never leaves.",
+  },
+  {
+    "Your Problem": "You get detected too early",
+    "Spend On": "Stealth, noise control, safer entry options, or warning tools.",
+    "Do Not Spend On":
+      "Loud offensive gear that starts more fights.",
+  },
+  {
+    "Your Problem": "You keep losing teammates",
+    "Spend On": "Rescue support, recovery tools, revive safety, or team utility.",
+    "Do Not Spend On":
+      "Solo greed upgrades that ignore rescue timing.",
+  },
+  {
+    "Your Problem": "You extract but leave materials behind",
+    "Spend On": "Carry capacity, hauling tools, route support, or teammate hauling roles.",
+    "Do Not Spend On":
+      "Extra stealth if the route is already safe and the bottleneck is hauling.",
+  },
+  {
+    "Your Problem": "You cannot craft the next useful item",
+    "Spend On": "Targeted material runs for the exact missing material.",
+    "Do Not Spend On":
+      "Random material testing with no crafting-menu check.",
+  },
+  {
+    "Your Problem": "The team wants fun chaos gear",
+    "Spend On": "Special gear only after core survival and extraction tools are covered.",
+    "Do Not Spend On":
+      "Early combat tools while the team still fails basic routes.",
+  },
+];
+
+export const equipmentColumns = [
+  { key: "Equipment / Upgrade", label: "Equipment / Upgrade" },
+  { key: "Best Use", label: "Best Use" },
+  { key: "Crafting Note", label: "Crafting Note" },
+];
+
+export const equipmentRows = [
+  {
+    "Equipment / Upgrade": "Movement upgrade",
+    "Best Use":
+      "Reaching routes faster, escaping danger, crossing rooms, and saving time before tornado.",
+    "Crafting Note":
+      "Check exact cost first. Prioritize if your runs fail before extraction.",
+  },
+  {
+    "Equipment / Upgrade": "Carry capacity",
+    "Best Use":
+      "Bringing out more loot, materials, and heavy objects once extraction is stable.",
+    "Crafting Note":
+      "Buy earlier only if your team already survives and the bottleneck is hauling.",
+  },
+  {
+    "Equipment / Upgrade": "Stealth / noise utility",
+    "Best Use":
+      "Reducing early detection and keeping old man pressure lower during task routes.",
+    "Crafting Note":
+      "Strong second priority for teams that wake the house too early.",
+  },
+  {
+    "Equipment / Upgrade": "Rescue utility",
+    "Best Use":
+      "Recovering tied, trapped, or downed teammates before the run collapses.",
+    "Crafting Note":
+      "Best when co-op wipes come from bad rescues rather than bad task choice.",
+  },
+  {
+    "Equipment / Upgrade": "Grappling Hook",
+    "Best Use":
+      "Advanced movement, high routes, fast repositioning, and route shortcuts.",
+    "Crafting Note":
+      "Do not craft just because it looks fun. Check cost and make sure your team can use it safely.",
+  },
+  {
+    "Equipment / Upgrade": "Glider",
+    "Best Use":
+      "Safer drops, movement routes, and advanced repositioning after height changes.",
+    "Crafting Note":
+      "Better after the team understands safe landing routes.",
+  },
+  {
+    "Equipment / Upgrade": "Potion Station",
+    "Best Use":
+      "Crafting support items such as blow darts or utility potions for specific routes.",
+    "Crafting Note":
+      "Buy when you know which recipes solve a real problem.",
+  },
+  {
+    "Equipment / Upgrade": "Repackager",
+    "Best Use":
+      "Material handling, conversion, or item preparation when your route has clear bottlenecks.",
+    "Crafting Note":
+      "Useful after basic material collection is stable.",
+  },
+  {
+    "Equipment / Upgrade": "Marble Gun",
+    "Best Use":
+      "Special utility, chaos, or advanced team setups.",
+    "Crafting Note":
+      "Late priority. Do not spend scarce materials on it before core route tools.",
+  },
+  {
+    "Equipment / Upgrade": "World danger meter",
+    "Best Use":
+      "Reading global run pressure before the team starts risky routes.",
+    "Crafting Note":
+      "Good for teams that fail because they do not know when the run is turning unsafe.",
+  },
+  {
+    "Equipment / Upgrade": "House upgrades",
+    "Best Use":
+      "Long-term base progression and better future runs.",
+    "Crafting Note":
+      "Spend only after checking whether a direct tool upgrade would fix your current failure point.",
+  },
+];
+
+export const routeColumns = [
+  { key: "Progress Stage", label: "Progress Stage" },
+  { key: "Material Goal", label: "Material Goal" },
+  { key: "Upgrade Goal", label: "Upgrade Goal" },
+];
+
+export const routeRows = [
+  {
+    "Progress Stage": "First clears",
+    "Material Goal":
+      "Bring out easy Plasto and Clonk only when they are close to your route.",
+    "Upgrade Goal":
+      "Unlock movement or route tools that help you survive extraction.",
+  },
+  {
+    "Progress Stage": "Stable early runs",
+    "Material Goal":
+      "Start focused material runs instead of random grabbing.",
+    "Upgrade Goal":
+      "Add stealth or noise control if the house wakes up too fast.",
+  },
+  {
+    "Progress Stage": "Co-op recovery phase",
+    "Material Goal":
+      "Spend on tools that stop one capture from becoming a team wipe.",
+    "Upgrade Goal":
+      "Add rescue or recovery support.",
+  },
+  {
+    "Progress Stage": "Better extraction phase",
+    "Material Goal":
+      "Farm extra Clonk, Plasto, Scrapling, Marble, and other bottleneck materials.",
+    "Upgrade Goal":
+      "Add carry capacity or hauling support once the team extracts consistently.",
+  },
+  {
+    "Progress Stage": "Advanced runs",
+    "Material Goal":
+      "Use crafting menu costs to target specific missing materials.",
+    "Upgrade Goal":
+      "Craft special gear, Potion Station routes, Repackager setups, or advanced movement tools.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Using old material names",
+    "Why It Hurts":
+      "Wrong notes like Clunk or Scraggle make it harder to match Stockpile materials.",
+    Fix:
+      "Use the confirmed names: Clonk and Scrapling.",
+  },
+  {
+    Mistake: "Searching random rooms for Plasto",
+    "Why It Hurts":
+      "Plasto is much faster when you start in plastic-heavy rooms.",
+    Fix:
+      "Check bathroom, kids' room, bedroom, cabinets, tables, sinks, and toy areas first.",
+  },
+  {
+    Mistake: "Doing Clonk without an exit route",
+    "Why It Hurts":
+      "Metal objects are often on counters or in the kitchen, which becomes dangerous during chases.",
+    Fix:
+      "Open a window or exit route before hauling metal items outside.",
+  },
+  {
+    Mistake: "Buying carry capacity before survival is stable",
+    "Why It Hurts":
+      "More inventory does not help if you keep dying before extraction.",
+    Fix:
+      "Buy carry earlier only if your team already extracts but leaves materials behind.",
+  },
+  {
+    Mistake: "Crafting from memory",
+    "Why It Hurts":
+      "Exact costs may vary by item, level, or update.",
+    Fix:
+      "Open the crafting menu, write down the exact cost, then run for the missing material.",
+  },
+  {
+    Mistake: "Buying combat gear too early",
+    "Why It Hurts":
+      "Early materials usually give better returns through movement, stealth, rescue, or hauling.",
+    Fix:
+      "Craft offensive or chaos gear after the core route is stable.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Burglin' Gnomes**, start materials with the two easiest early routes: **Plasto** and **Clonk**. Plasto comes from plastic-looking objects, with the bathroom, kids' room, and bedroom as the best first rooms to search. Clonk comes from metal items, and the kitchen route is usually the best place to start. For gather tasks, move or throw the items outside until the task updates.
+
+For upgrades, buy based on your failure point. **Movement comes first** if you die before extraction. **Stealth** comes next if the house wakes up too early. **Rescue tools** matter when teammates keep getting tied or downed. **Carry capacity** is strong only after your team already extracts consistently and leaves materials behind.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Burglin' Gnomes. This materials and upgrades guide covers Plasto, Clonk, Fraggles, Grabble, Scrapling, Marble, Stockpile names, material rooms, crafting cost checks, movement upgrades, stealth, rescue tools, carry capacity, Potion Station, Repackager, Grappling Hook, Glider, World danger meter, and upgrade priority.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-stockpile-materials.webp"
+    alt="Burglin' Gnomes Stockpile menu showing Fraggles, Grabble, Clonk, Plasto, Scrapling, and Marble"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start by using the correct Stockpile names. Clonk is not Clunk, and Scrapling is not Scraggle.
+  </figcaption>
+</figure>
+
+<h2 id="burglin-gnomes-materials-upgrades-guide">
+  Burglin' Gnomes materials and upgrades guide
+</h2>
+
+**Burglin' Gnomes** progression is not just about stealing more. It is about stealing the right materials, getting them outside safely, and spending them on upgrades that fix the reason your runs fail.
+
+The safest rule is:
+
+<strong>Farm the material your next useful upgrade actually needs. Do not grab random objects and hope they solve the problem.</strong>
+
+This guide focuses on material routes and upgrade priority. For task routing, read the <Link href="/burglin-gnomes/tasks-guide">Tasks Guide</Link>. For co-op role splitting and hauling, read the <Link href="/burglin-gnomes/co-op-guide">Co-op Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="material-name-reference">
+  Material name reference
+</h2>
+
+Use the Stockpile names exactly. This matters because community posts and quick notes often use wrong spellings.
+
+<GuideTable
+  caption="Burglin' Gnomes material names and early clues."
+  columns={materialColumns}
+  rows={materialRows}
+/>
+
+The safest material route is not always the longest route. It is the route where the item type is obvious, the exit is close, and the task checkmark confirms the result quickly.
+
+<h2 id="copy-paste-material-template">
+  Copy-paste material and upgrade template
+</h2>
+
+Use this in Discord, Steam chat, or your crew notes before starting a material run.
+
+```txt
+BURGLIN' GNOMES MATERIAL RUN CARD
+
+CHECK FIRST:
+- Open crafting menu.
+- Write exact material cost:
+- Missing material:
+- Do not craft from memory.
+
+PLASTO:
+- Start: bathroom / kids' room / bedroom.
+- Check: under bed, cabinets, tables, sinks, toys, toothpaste, cream tubs, nail polish, DVD covers.
+- Rule: plastic-looking items must be moved or thrown outside.
+
+CLONK:
+- Start: kitchen.
+- Check: counters, oven route, drawers, cans, toaster, kettle, cookware, cat bowl, metal tools.
+- Rule: metal items must be moved outside.
+
+UNCERTAIN MATERIALS:
+- Fraggles / Grabble / Scrapling / Marble.
+- Test only likely objects near the route.
+- Stop if the task does not update.
+
+UPGRADE ORDER:
+- Movement if dying before extraction.
+- Stealth if detected too early.
+- Rescue if teammates keep getting tied or downed.
+- Carry capacity if extracting but leaving loot behind.
+- Special gear only after the route is stable.
+````
+
+This template keeps material runs focused. The goal is not to touch every item in the house; the goal is to leave with the material your next upgrade needs.
+
+<h2 id="plasto-route">
+  How to get Plasto
+</h2>
+
+Plasto is the most important material to explain clearly because “plastic-looking object” is too vague during a live run.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-plasto-plastic-item.webp"
+    alt="Burglin' Gnomes plastic-looking item used for a Plasto route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Plasto routes work best when you search plastic-heavy rooms first instead of testing random objects across the whole house.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Burglin' Gnomes Plasto route."
+columns={plastoColumns}
+rows={plastoRows}
+/>
+
+Best early Plasto rooms:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Bathroom:</strong> toothpaste, sink items, cabinet items, bottles, tubs, and plastic containers.</li>
+  <li><strong>Kids' room:</strong> plastic toys and small toy-like objects.</li>
+  <li><strong>Bedroom:</strong> vanity items, cream tubs, nail polish, dresser objects, and items under the bed.</li>
+  <li><strong>Living room:</strong> DVD covers or plastic objects near cabinets and TV areas.</li>
+</ul>
+
+If the task does not update after moving the item outside, stop forcing that object and test a clearer plastic item.
+
+<h2 id="clonk-route">
+  How to gather Clonk
+</h2>
+
+Clonk is tied to metal objects. The kitchen is usually the best first room because metal items are often clustered there and can be moved out through a nearby route.
+
+<GuideTable
+caption="Burglin' Gnomes Clonk route."
+columns={clonkColumns}
+rows={clonkRows}
+/>
+
+Good Clonk candidates include:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>metal cans,</li>
+  <li>toasters,</li>
+  <li>kettles,</li>
+  <li>metal cookware,</li>
+  <li>metal tools,</li>
+  <li>cat bowls,</li>
+  <li>and other clearly metal objects.</li>
+</ul>
+
+The important step is getting the item outside. Picking up a metal object indoors is not enough if the task wants you to gather or remove Clonk.
+
+<h2 id="uncertain-materials">
+  Fraggles, Grabble, Scrapling, Marble: test carefully
+</h2>
+
+Not every material has the same clean early route as Plasto or Clonk. When the exact object mapping is uncertain, treat the material as a test route, not a first objective.
+
+Use this rule:
+
+<strong>Only test uncertain materials when the likely object is already close to your route.</strong>
+
+Do not spend the final minute checking random shelves for Grabble or Scrapling when a confirmed task is still available. If the task list or Stockpile gives item images or wording in your current run, follow that over any generic route.
+
+<h2 id="crafting-costs">
+  Check exact crafting costs before farming
+</h2>
+
+This guide does not fake exact costs for every item because costs can change by build, upgrade level, or crafting station. The reliable method is to check the crafting menu before starting a material run.
+
+<GuideTable
+caption="How to handle crafting costs in Burglin' Gnomes."
+columns={costColumns}
+rows={costRows}
+/>
+
+A good material run begins before you enter the house:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>open the crafting menu,</li>
+  <li>pick the exact item or upgrade,</li>
+  <li>write down the missing material,</li>
+  <li>run the house for that material,</li>
+  <li>and do not spend the material on a worse item when you return.</li>
+</ul>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="upgrade-priority">
+  Best upgrade priority
+</h2>
+
+Some guides recommend **movement and carry weight first**. That advice makes sense for teams that already extract consistently and want better economy. This guide separates the two because new players often die before carry capacity matters.
+
+<strong>Carry capacity feels tempting early, but it only matters after you already extract. Movement problems kill runs before carry problems do.</strong>
+
+<GuideTable
+caption="Burglin' Gnomes upgrade priority."
+columns={upgradePriorityColumns}
+rows={upgradePriorityRows}
+/>
+
+If your team is already surviving but leaving half the room behind, move carry capacity up. If your team keeps dying before the tornado, keep movement, stealth, and rescue above carry.
+
+<h2 id="spend-by-problem">
+  Spend materials based on your failure point
+</h2>
+
+The best upgrade is not universal. It depends on what keeps ruining your runs.
+
+<GuideTable
+caption="What to spend materials on based on your Burglin' Gnomes failure point."
+columns={spendColumns}
+rows={spendRows}
+/>
+
+Use the Gnome Report, your last wipe, and your team complaints as evidence. If everyone says “we had loot but could not leave,” that is a different upgrade problem from “we died before finding the first material.”
+
+<h2 id="equipment-and-upgrades">
+  Equipment and upgrade reference
+</h2>
+
+Use this table as a planning reference before spending scarce materials.
+
+<GuideTable
+caption="Burglin' Gnomes equipment and upgrade planning."
+columns={equipmentColumns}
+rows={equipmentRows}
+/>
+
+Do not craft a cool item just because it is available. Craft it because it solves a route, rescue, material, or extraction problem.
+
+<h2 id="potion-station-repackager">
+  Potion Station and Repackager
+</h2>
+
+Potion Station and Repackager are not first-run upgrades. They become useful when your team already knows which routes need support.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-potion-station.webp"
+    alt="Burglin' Gnomes Potion Station used for crafting support items"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Potion Station is best after your team knows which recipe or support item will actually solve a run problem.
+  </figcaption>
+</figure>
+
+Use Potion Station when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you know the recipe you want,</li>
+  <li>the item supports a real task or rescue route,</li>
+  <li>the team can protect the crafter or carrier,</li>
+  <li>and the cost does not block a more important movement or survival upgrade.</li>
+</ul>
+
+Use Repackager when your material route has a bottleneck and you know what conversion or handling problem it solves. Do not buy it blindly before your team understands basic Plasto and Clonk routes.
+
+<h2 id="world-danger-meter">
+  World danger meter
+</h2>
+
+World danger tools are valuable for teams that fail because they stay too long or do not notice when the run is becoming unstable.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-world-danger-meter.webp"
+    alt="Burglin' Gnomes world danger meter used to read run pressure"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Danger information matters most when the team uses it to leave earlier, not when they ignore it and chase one more task.
+  </figcaption>
+</figure>
+
+Buy this type of utility when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>your team often says “we should have left earlier,”</li>
+  <li>tornado timing keeps catching you mid-task,</li>
+  <li>rescue decisions are too late,</li>
+  <li>or players keep starting risky routes when the house is already unstable.</li>
+</ul>
+
+<h2 id="house-upgrades">
+  House upgrades and long-term progression
+</h2>
+
+House upgrades are long-term progression. They can be powerful, but they compete with tools that immediately improve your next run.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-house-upgrade.webp"
+    alt="Burglin' Gnomes house upgrade menu used for long-term progression"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Spend on house upgrades when the long-term benefit is stronger than fixing your next run's biggest failure point.
+  </figcaption>
+</figure>
+
+Before spending on a house upgrade, ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Does this help the next three runs?</li>
+  <li>Does this fix the reason we keep failing?</li>
+  <li>Are we delaying a movement, stealth, rescue, or carry upgrade?</li>
+  <li>Do we know which material bottleneck comes next?</li>
+</ul>
+
+<h2 id="recommended-upgrade-route">
+  Recommended material and upgrade route
+</h2>
+
+Use this progression route if you are not sure where to spend next.
+
+<GuideTable
+caption="Burglin' Gnomes material and upgrade progression route."
+columns={routeColumns}
+rows={routeRows}
+/>
+
+The main idea is to stop upgrading from wishful thinking. Spend when you know which problem the upgrade solves.
+
+<h2 id="material-upgrade-mistakes">
+  Material and upgrade mistakes to avoid
+</h2>
+
+These mistakes are where most material progress gets wasted.
+
+<GuideTable
+caption="Burglin' Gnomes material and upgrade mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+The biggest mistake is not choosing the wrong upgrade once. It is choosing upgrades without checking what your team actually needs.
+
+<h2 id="faq">
+  Burglin' Gnomes materials and upgrades FAQ
+</h2>
+
+### How do I get Plasto in Burglin' Gnomes?
+
+Start in the bathroom, kids' room, or bedroom. Look for plastic toys, toothpaste, cream tubs, nail polish, DVD covers, sink items, cabinet items, and objects under beds or on tables. Move or throw the items outside until the task updates.
+
+### How do I gather Clonk?
+
+Look for metal items, especially in the kitchen. Cans, toaster, kettle, cookware, tools, and other metal objects are good first tests. Move the metal items outside to count them.
+
+### Is Plasto always in the same room?
+
+No. Bathroom, kids' room, and bedroom are strong first places to search, but follow your current task list and item feedback.
+
+### Is Clonk the same as Clunk?
+
+No. Use **Clonk**. Wrong spellings make material notes harder to match with the Stockpile.
+
+### Is Scrapling the same as Scraggle?
+
+No. Use **Scrapling**. If your notes say Scraggle, update them to avoid confusion.
+
+### Should I buy carry capacity first?
+
+Buy carry capacity early only if you already extract consistently but leave loot or materials behind. If you die before extraction, movement, stealth, or rescue upgrades usually matter more.
+
+### Why do some guides say movement and carry first?
+
+That advice is fine for stable teams. For beginners, follow the upgrade priority section: movement fixes failed extractions first, and carry capacity moves up once you already leave safely.
+
+### How do I know exact crafting costs?
+
+Open the crafting menu and check the item or upgrade directly. Do not rely on memory because costs can vary by item, level, or update.
+
+### Should I craft combat gear early?
+
+Usually no. Early offensive gear often costs materials that could have improved movement, stealth, rescue, or carrying. Craft combat gear after the team can already extract safely.
+
+### What should I read next?
+
+Read the <Link href="/burglin-gnomes/tasks-guide">Tasks Guide</Link> if you need better material task routing, or the <Link href="/burglin-gnomes/co-op-guide">Co-op Guide</Link> if your team needs better hauling and role splitting.

@@ -1,0 +1,770 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const roleColumns = [
+  { key: "Role", label: "Role" },
+  { key: "Main Job", label: "Main Job" },
+  { key: "Say This", label: "Say This" },
+  { key: "Do Not Do This", label: "Do Not Do This" },
+];
+
+export const roleRows = [
+  {
+    Role: "Scout",
+    "Main Job":
+      "Enter first, check room layout, find task items, call out hazards, and mark useful loot.",
+    "Say This": "Route clear to kitchen. Rat near hallway. Hauler wait.",
+    "Do Not Do This":
+      "Do not grab every object you see. Your job is to make the route less blind.",
+  },
+  {
+    Role: "Hauler",
+    "Main Job":
+      "Move pots, frying pans, metal cans, books, plastic, tools, and larger loot toward the exit.",
+    "Say This": "Grabbing the frying pan. Need the window open.",
+    "Do Not Do This":
+      "Do not drag heavy items through the old man's path without someone opening the route.",
+  },
+  {
+    Role: "Distractor",
+    "Main Job":
+      "Pull pressure away from the team when a task, rescue, or carry route needs space.",
+    "Say This": "I have the old man. Finish the task now.",
+    "Do Not Do This":
+      "Do not make noise all run. A distraction is useful only when it creates a clear opening.",
+  },
+  {
+    Role: "Anchor",
+    "Main Job":
+      "Stay closer to the exit, guard staged loot, watch the escape route, and rescue teammates.",
+    "Say This": "Exit is open. Bring staged loot here.",
+    "Do Not Do This":
+      "Do not chase every task. The anchor keeps the run recoverable.",
+  },
+];
+
+export const teamSizeColumns = [
+  { key: "Team Size", label: "Team Size" },
+  { key: "Best Setup", label: "Best Setup" },
+  { key: "How To Play It", label: "How To Play It" },
+];
+
+export const teamSizeRows = [
+  {
+    "Team Size": "Solo",
+    "Best Setup": "Scout + Hauler + Anchor combined",
+    "How To Play It":
+      "Use solo to learn maps, object handling, room names, entry routes, and danger patterns. Do not expect rescue safety.",
+  },
+  {
+    "Team Size": "2 players",
+    "Best Setup": "Scout-Hauler + Anchor-Rescuer",
+    "How To Play It":
+      "One player finds and moves task items. The other stays safer, opens routes, and handles rescue.",
+  },
+  {
+    "Team Size": "3 players",
+    "Best Setup": "Scout + Hauler + Anchor",
+    "How To Play It":
+      "The scout checks rooms, the hauler moves priority items, and the anchor keeps escape and rescue stable.",
+  },
+  {
+    "Team Size": "4 players",
+    "Best Setup": "Scout + Hauler + Distractor + Anchor",
+    "How To Play It":
+      "This is the cleanest setup. Each player has a job, so fewer people panic into the same bad room.",
+  },
+  {
+    "Team Size": "5 players",
+    "Best Setup": "Scout + Hauler + Hauler + Distractor + Anchor",
+    "How To Play It":
+      "Add a second hauler for bulky items or material routes. Do not add a second distractor unless the team already communicates well.",
+  },
+  {
+    "Team Size": "6 players",
+    "Best Setup": "Scout + Scout + Hauler + Hauler + Distractor + Anchor",
+    "How To Play It":
+      "Split into two mini-pairs: one scout-hauler pair for tasks, one scout-hauler pair for loot, plus one distractor and one anchor.",
+  },
+];
+
+export const calloutColumns = [
+  { key: "Callout", label: "Callout" },
+  { key: "Say This", label: "Say This" },
+  { key: "When To Use It", label: "When To Use It" },
+  { key: "What Everyone Should Do", label: "What Everyone Should Do" },
+];
+
+export const calloutRows = [
+  {
+    Callout: "Task first",
+    "Say This": "Read list first. We need three safe checks.",
+    "When To Use It": "At the start of a run, before everyone starts grabbing random objects.",
+    "What Everyone Should Do":
+      "Read the list, pick easy objectives, and avoid chasing shiny loot immediately.",
+  },
+  {
+    Callout: "Route clear",
+    "Say This": "Window route is open. Carry items to porch.",
+    "When To Use It": "The scout or anchor has confirmed a safe entry or exit route.",
+    "What Everyone Should Do":
+      "Use that route for carry items, rescues, and final extraction instead of splitting.",
+  },
+  {
+    Callout: "Old man near me",
+    "Say This": "Old man hallway. Drop heavy items now.",
+    "When To Use It": "The old man enters a room, blocks a route, or starts chasing someone.",
+    "What Everyone Should Do":
+      "Drop heavy items, stop loud actions, and decide whether to hide, distract, or switch tasks.",
+  },
+  {
+    Callout: "I am tied",
+    "Say This": "Tied in fridge. Need one rescuer, one lookout.",
+    "When To Use It": "A teammate gets tied up in a fridge, cabinet, bathroom, kitchen, or outdoor spot.",
+    "What Everyone Should Do":
+      "One player rescues, one watches the route, and everyone else keeps the exit from collapsing.",
+  },
+  {
+    Callout: "Downed",
+    "Say This": "Down in kitchen. Clear room before CPR.",
+    "When To Use It": "A teammate needs CPR or is stuck in a dangerous spot.",
+    "What Everyone Should Do":
+      "Clear immediate danger first, then revive. Do not make three players pile onto one body.",
+  },
+  {
+    Callout: "Stage it here",
+    "Say This": "Drop loot by this window. We extract from here.",
+    "When To Use It": "A carry item is too heavy or awkward to move directly to extraction.",
+    "What Everyone Should Do":
+      "Drop the item near a safe window, porch, table, or route point and come back later.",
+  },
+  {
+    Callout: "Leave now",
+    "Say This": "Tornado. No new tasks. Leave now.",
+    "When To Use It": "The tornado warning appears or the run becomes unrecoverable.",
+    "What Everyone Should Do":
+      "Drop greed, stop new tasks, and move toward extraction.",
+  },
+];
+
+export const rescueColumns = [
+  { key: "Rescue Problem", label: "Rescue Problem" },
+  { key: "Best Co-op Response", label: "Best Co-op Response" },
+  { key: "Common Mistake", label: "Common Mistake" },
+];
+
+export const rescueRows = [
+  {
+    "Rescue Problem": "Teammate tied in fridge",
+    "Best Co-op Response":
+      "Anchor opens the fridge and unties while another player watches the old man's path.",
+    "Common Mistake":
+      "Everyone rushes into the kitchen and gets caught in the same place.",
+  },
+  {
+    "Rescue Problem": "Teammate downed",
+    "Best Co-op Response":
+      "Clear space first, then one player gives CPR while another watches for rats, roaches, or the old man.",
+    "Common Mistake":
+      "Starting CPR while danger is still standing on top of the body.",
+  },
+  {
+    "Rescue Problem": "Teammate trapped in microwave or cabinet",
+    "Best Co-op Response":
+      "Open the object or pull them out first, then revive if needed.",
+    "Common Mistake":
+      "Trying to continue the task while the trapped player slowly dies.",
+  },
+  {
+    "Rescue Problem": "Multiple players down",
+    "Best Co-op Response":
+      "Save the closest recoverable player first, then chain the next rescue.",
+    "Common Mistake":
+      "Splitting into several bad rescues with no lookout.",
+  },
+  {
+    "Rescue Problem": "Tornado active",
+    "Best Co-op Response":
+      "Rescue only if the body is close and the route is safe. Otherwise extract with who can still leave.",
+    "Common Mistake":
+      "Turning one far rescue into a full-team wipe.",
+  },
+];
+
+export const stagingColumns = [
+  { key: "Loot Situation", label: "Loot Situation" },
+  { key: "Better Co-op Plan", label: "Better Co-op Plan" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const stagingRows = [
+  {
+    "Loot Situation": "Heavy pot, frying pan, or metal can",
+    "Better Co-op Plan":
+      "Hauler moves it in short stages while another player opens the next door or window.",
+    "Why It Works":
+      "You avoid dragging one awkward item through the whole house during a chase.",
+  },
+  {
+    "Loot Situation": "Several small items near one room",
+    "Better Co-op Plan":
+      "Scout marks the room, hauler gathers, anchor creates a pile near the exit.",
+    "Why It Works":
+      "The final escape becomes faster because loot is already near the route.",
+  },
+  {
+    "Loot Situation": "Task item far from extraction",
+    "Better Co-op Plan":
+      "Move it to a halfway point first, then finish the carry after the old man leaves.",
+    "Why It Works":
+      "Staging lets you pause without losing the whole route.",
+  },
+  {
+    "Loot Situation": "Tornado warning active",
+    "Better Co-op Plan": "Stop starting new staging routes.",
+    "Why It Works":
+      "Final extraction rules are covered in the tornado section below.",
+  },
+];
+
+export const movementColumns = [
+  { key: "Co-op Movement Trick", label: "Co-op Movement Trick" },
+  { key: "Best Use", label: "Best Use" },
+  { key: "Warning", label: "Warning" },
+];
+
+export const movementRows = [
+  {
+    "Co-op Movement Trick": "Player boost",
+    "Best Use": "Helping a teammate reach a counter, window, shelf, roof, or high route.",
+    Warning:
+      "Do not stack players while enemies are already in the room. Set up the boost before the chase.",
+  },
+  {
+    "Co-op Movement Trick": "Route opening",
+    "Best Use": "One player opens the window, door, drawer, or path while another carries the item.",
+    Warning:
+      "The opener should not run away with the only safe exit still closed.",
+  },
+  {
+    "Co-op Movement Trick": "Pulling heavy objects",
+    "Best Use": "Clearing an obstacle or moving a large task item through a tight gap.",
+    Warning:
+      "Move slowly. Fast dragging can flip the object, trap players, or block the route.",
+  },
+  {
+    "Co-op Movement Trick": "Grapple / glider chain",
+    "Best Use":
+      "Advanced movement routes after upgrades, especially when the team already knows the landing route.",
+    Warning:
+      "Treat this as advanced movement. Do not depend on it for your first clean clears.",
+  },
+];
+
+export const noiseColumns = [
+  { key: "Distraction Type", label: "Distraction Type" },
+  { key: "Good Use", label: "Good Use" },
+  { key: "Bad Use", label: "Bad Use" },
+];
+
+export const noiseRows = [
+  {
+    "Distraction Type": "Old man pull",
+    "Good Use": "Pull him away from a rescue, carry route, or final task.",
+    "Bad Use": "Running him straight into the task room.",
+  },
+  {
+    "Distraction Type": "Breaking noise",
+    "Good Use": "Breaking an item when the task requires it or when the team is ready to move.",
+    "Bad Use": "Breaking random items before the scout finds the first objective.",
+  },
+  {
+    "Distraction Type": "Tool chaos",
+    "Good Use": "Using a tool to open a rescue window or handle a required enemy task.",
+    "Bad Use": "Throwing weapons, traps, or explosives near teammates for no reason.",
+  },
+  {
+    "Distraction Type": "Voice call",
+    "Good Use": "Short calls like 'leave now,' 'old man hallway,' or 'drop loot here.'",
+    "Bad Use": "Everyone talking over the rescue call.",
+  },
+];
+
+export const routeColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "Team Plan", label: "Team Plan" },
+  { key: "Goal", label: "Goal" },
+];
+
+export const routeRows = [
+  {
+    Phase: "Before entering",
+    "Team Plan": "Read the task list and assign loose roles.",
+    Goal: "Stop everyone from grabbing random objects at the same time.",
+  },
+  {
+    Phase: "First room",
+    "Team Plan": "Scout checks the route, anchor watches the exit, hauler waits for the target.",
+    Goal: "Get early progress without waking the whole house.",
+  },
+  {
+    Phase: "Mid-run",
+    "Team Plan": "Stage carry items and complete one risky task at a time.",
+    Goal: "Avoid six players chasing six different distractions.",
+  },
+  {
+    Phase: "Rescue moment",
+    "Team Plan": "One player rescues, one watches, others stop adding noise.",
+    Goal: "Recover the run instead of making the rescue worse.",
+  },
+  {
+    Phase: "Extraction",
+    "Team Plan": "Use a clear leave call and move to the tornado.",
+    Goal: "Cash in tasks and staged loot before the run collapses.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Burglin' Gnomes**, the best co-op setup is not everyone grabbing random loot. Use simple roles: a **scout** to find tasks and safe routes, a **hauler** to move heavy items, a **distractor** to pull pressure when needed, and an **anchor** to guard the exit, stage loot, and rescue teammates.
+
+The game supports solo play and online co-op, with a full group able to include you and up to five friends. Solo is best for learning maps and object handling, while co-op is better for rescue, carrying, lookout duty, and controlled chaos.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Burglin' Gnomes. This co-op guide covers solo practice, 2-player, 3-player, 4-player, 5-player, and 6-player role setups, scout routes, hauler routes, distractor timing, anchor rescue, voice callouts, loot staging, CPR, untie saves, movement boosts, tornado extraction, and a copy-paste team plan.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-first-task-list.webp"
+    alt="Burglin' Gnomes task list used by a co-op team before choosing roles and objectives"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start by reading the task list together. Roles only work when everyone knows which objectives actually matter.
+  </figcaption>
+</figure>
+
+<h2 id="burglin-gnomes-co-op-guide">
+  Burglin' Gnomes co-op guide
+</h2>
+
+**Burglin' Gnomes** is funniest when everyone is panicking, but it is much easier to win when the team has a loose plan. You do not need perfect strategy. You just need fewer players doing the same mistake at the same time.
+
+The best co-op rule is simple:
+
+<strong>One player finds the route, one player moves the loot, one player handles pressure, and one player keeps the run recoverable.</strong>
+
+If your team keeps failing because everyone gets caught in the kitchen, stuck in the fridge, or trapped after the tornado warning, this guide gives you a cleaner way to split jobs.
+
+If you are still learning basic objectives, read the <Link href="/burglin-gnomes/tasks-guide">Burglin' Gnomes Tasks Guide</Link>. If enemies are the main problem, read the <Link href="/burglin-gnomes/survival-enemies-guide">Survival and Enemies Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="solo-vs-coop">
+  Solo vs co-op: what each mode is good for
+</h2>
+
+Solo is useful, but it teaches a different skill set from co-op. Use solo runs to learn the house, object weight, window routes, room names, enemy behavior, and how long tasks take.
+
+Solo is not the best place to learn rescue timing because no teammate can untie, revive, distract, or carry the second half of a route for you.
+
+A simple way to think about it:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Solo:</strong> best for learning maps, movement, task wording, and object handling.</li>
+  <li><strong>2-player:</strong> best for careful runs where one player handles route and the other handles rescue.</li>
+  <li><strong>4-player:</strong> best for the clean scout / hauler / distractor / anchor setup.</li>
+  <li><strong>5–6 players:</strong> best for chaos, split routes, and faster carrying, but only if voice calls stay short.</li>
+</ul>
+
+If you are playing solo, combine scout, hauler, and anchor decisions. That means you should move slower, stage fewer items, and leave earlier.
+
+<h2 id="best-co-op-roles">
+  Best co-op roles and what to say
+</h2>
+
+You do not have to lock roles forever. The point is to stop every player from running into the same room and grabbing the same useless object.
+
+<GuideTable
+  caption="Best Burglin' Gnomes co-op roles and voice lines."
+  columns={roleColumns}
+  rows={roleRows}
+/>
+
+The most overlooked role is the anchor. The anchor does not need to grab the most loot. Their job is to keep the run recoverable by guarding the exit, watching staged items, and saving teammates.
+
+<h2 id="team-size-setups">
+  Best setup for solo, 2, 3, 4, 5, and 6 players
+</h2>
+
+Burglin' Gnomes can scale from solo practice to a full six-player group. More players can help, but only if the team does not turn into six separate panic routes.
+
+<GuideTable
+  caption="Burglin' Gnomes co-op setup by team size."
+  columns={teamSizeColumns}
+  rows={teamSizeRows}
+/>
+
+In larger groups, the danger is not lack of manpower. The danger is noise. If five or six players all talk, break objects, and chase side tasks at once, the run becomes harder than a smaller team.
+
+<h2 id="copy-paste-team-plan">
+  Copy-paste co-op role template
+</h2>
+
+Use this in Discord, Steam chat, or your group before starting a run. Delete any role lines that do not apply to your team size.
+
+```txt
+BURGLIN' GNOMES CO-OP PLAN
+
+TEAM SIZE:
+- Players:
+- Map / difficulty:
+
+TASK TARGET:
+- Read task list before entry.
+- First target:
+- Second target:
+- Third target:
+- Skip if unsafe:
+
+ROLES:
+- Scout:
+- Hauler 1:
+- Hauler 2: (delete if not needed)
+- Distractor:
+- Anchor / Rescue:
+- Backup Rescue: (delete if not needed)
+
+RETREAT SIGNAL:
+- Say: "Tornado. No new tasks. Leave now."
+
+STAGING POINT:
+- Main window / porch / exit:
+- Heavy item drop point:
+- Rescue reset point:
+
+NOISE BUDGET:
+- Quiet start: yes / no
+- Break items only for task: yes / no
+- Distractor waits for call: yes / no
+
+RULES:
+- One rescuer, one lookout.
+- Drop heavy items before rescue.
+- Do not start enemy tasks without the right tool.
+- If the route collapses, stop looting and reset.
+````
+
+This template gives every player a job before the house starts falling apart. It also creates a shared retreat signal, which matters more than most upgrades.
+
+<h2 id="co-op-callouts">
+  Use short callouts players can actually say
+</h2>
+
+A co-op team does not need complicated voice chat. It needs short calls that instantly change what everyone is doing.
+
+<GuideTable
+caption="Useful Burglin' Gnomes co-op callouts."
+columns={calloutColumns}
+rows={calloutRows}
+/>
+
+The strongest call is **Leave now**. When that call happens, do not debate the last object, the last room, or the last funny idea. Move.
+
+<h2 id="hauler-route">
+  Hauler route: move heavy items in stages
+</h2>
+
+Carry objectives are where co-op helps the most. Pots, frying pans, metal cans, glass jars, books, tools, and kitchen items are much safer when one player carries and another player opens the path.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-steal-frying-pan-task.webp"
+    alt="Burglin' Gnomes frying pan carry objective being moved through a route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Heavy items should move in stages. The hauler should not drag a frying pan or pot through the whole house alone.
+  </figcaption>
+</figure>
+
+A good hauler route looks like this:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Scout finds the item and the nearest exit route.</li>
+  <li>Hauler grabs the item.</li>
+  <li>Anchor opens the window, door, or path ahead.</li>
+  <li>Distractor pulls pressure only if the old man enters the route.</li>
+  <li>Hauler drops the item near a safe staging point.</li>
+  <li>The team extracts it later when the route is clear.</li>
+</ol>
+
+Do not carry a heavy item during a rescue. Drop it first.
+
+<h2 id="loot-staging">
+  Loot staging and extraction piles
+</h2>
+
+Loot staging means you do not carry everything directly from the room to the tornado. Instead, you create small piles near safe windows, porches, tables, or exit routes.
+
+<GuideTable
+caption="How to stage loot in Burglin' Gnomes co-op."
+columns={stagingColumns}
+rows={stagingRows}
+/>
+
+The best staging points are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>near an open window,</li>
+  <li>on a porch or outside step,</li>
+  <li>beside a room you already cleared,</li>
+  <li>near the anchor player,</li>
+  <li>or on the route everyone will use when the tornado appears.</li>
+</ul>
+
+If the old man is active, do not keep dragging the item. Drop it, hide, and come back later.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="rescue-system">
+  Rescue is a team job
+</h2>
+
+Rescue works best when the whole team does not crowd the same room. One player saves, one player watches, and everyone else stops making the run worse.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-fridge-rescue.webp"
+    alt="Burglin' Gnomes player using the untie prompt to rescue a teammate from the fridge"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Untie saves are easiest when the rescuer has empty hands and another player watches the old man's route.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Burglin' Gnomes co-op rescue plan."
+columns={rescueColumns}
+rows={rescueRows}
+/>
+
+The anchor should usually be the first rescuer. They are already closer to safety and less likely to be trapped deep inside the house.
+
+<h2 id="cpr-chain-rescue">
+  CPR and chain rescue
+</h2>
+
+A downed gnome can still be brought back if the team reacts fast. This is where co-op becomes more than just grabbing items together.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-cpr-revive.webp"
+    alt="Burglin' Gnomes player giving CPR to revive a teammate during a co-op run"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    CPR should not be a solo panic move. Revive while a teammate watches the room.
+  </figcaption>
+</figure>
+
+A clean chain rescue works like this:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Recover the closest teammate first.</li>
+  <li>The revived player moves away from the danger.</li>
+  <li>That player helps with the next rescue.</li>
+  <li>The anchor keeps the exit route open.</li>
+  <li>The team decides whether to continue or extract.</li>
+</ol>
+
+If two players are down and the tornado warning is active, do not automatically chase both bodies. Save only what is reachable without losing everyone else.
+
+<h2 id="microwave-rescue">
+  Trapped teammate rescue
+</h2>
+
+Sometimes a teammate is not simply downed. They may be trapped in a fridge, microwave, cabinet, or awkward piece of furniture.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-microwave-rescue.webp"
+    alt="Burglin' Gnomes teammate trapped near the microwave while the team tries to rescue them"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If a teammate is trapped, solve the trap first. Continuing tasks while they are stuck usually turns into a death.
+  </figcaption>
+</figure>
+
+For trapped teammates:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>call the room clearly,</li>
+  <li>say whether the old man is still nearby,</li>
+  <li>open the object or pull the player out first,</li>
+  <li>then revive or untie if needed,</li>
+  <li>and leave the room before restarting tasks.</li>
+</ul>
+
+A rescue is not complete until the rescued player is back on a safe route.
+
+<h2 id="movement-boosts">
+  Co-op movement, boosts, and advanced gear routes
+</h2>
+
+Small gnomes can use the house in strange ways. Doors, drawers, ovens, counters, shelves, windows, teammates, and later gear can all become part of a route.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-coop-movement-boost.webp"
+    alt="Burglin' Gnomes co-op movement where players help each other use a route object"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Co-op movement is strongest when it is planned before enemies arrive, not during a panic chase.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Burglin' Gnomes co-op movement tricks."
+columns={movementColumns}
+rows={movementRows}
+/>
+
+Grappling Hook and Glider routes belong here too, but treat them as advanced movement. They are powerful after upgrades, but they should not replace basic route planning, safe staging, or rescue discipline.
+
+Use movement tricks for route solving, not random chaos. If the old man is already in the room, stop building a gnome ladder and escape first.
+
+<h2 id="noise-budget">
+  Good distraction vs bad distraction
+</h2>
+
+A distractor is useful, but constant distraction is not a plan. If one player keeps making noise while everyone else is still setting up the route, the house gets harder before the team has any real progress.
+
+<GuideTable
+caption="Good and bad Burglin' Gnomes distractions."
+columns={noiseColumns}
+rows={noiseRows}
+/>
+
+In co-op, silence is not boring. It gives the team more time before everything becomes a rescue mission.
+
+<h2 id="tornado-extraction">
+  Use a clear tornado extraction call
+</h2>
+
+The tornado warning should trigger one team rule: stop starting new tasks.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-tornado-extraction.webp"
+    alt="Burglin' Gnomes out of time warning telling the team to get to the tornado"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The tornado call is the team's hard stop. Take what is close, leave what is not, and extract.
+  </figcaption>
+</figure>
+
+When the warning appears:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Anchor calls the exit.</li>
+  <li>Hauler grabs only staged or close loot.</li>
+  <li>Scout stops exploring.</li>
+  <li>Distractor only distracts if it protects the exit route.</li>
+  <li>Everyone moves to the tornado.</li>
+</ol>
+
+Do not start a new rat task, TV task, bathroom task, or material test after the warning unless it is directly beside the exit.
+
+<h2 id="full-co-op-route">
+  Full co-op route
+</h2>
+
+Use this table when your team wants a cleaner run from entry to extraction.
+
+<GuideTable
+caption="Recommended Burglin' Gnomes co-op route."
+columns={routeColumns}
+rows={routeRows}
+/>
+
+The key is not to make the run complicated. The key is to make sure every phase has one job: enter safely, get early progress, stage items, rescue cleanly, and extract when the warning appears.
+
+<h2 id="co-op-mistakes">
+  Co-op mistakes to avoid
+</h2>
+
+Avoid these habits if your squad keeps wiping:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Everyone plays hauler.</strong> Six players carrying random objects means nobody is scouting, rescuing, or watching the exit.</li>
+  <li><strong>No one reads the task list.</strong> The team wastes time on items that do not count.</li>
+  <li><strong>Distraction happens too early.</strong> Noise before progress just makes the house harder.</li>
+  <li><strong>Rescue turns into a crowd.</strong> One rescuer and one lookout is better than everyone rushing one fridge room.</li>
+  <li><strong>Loot is never staged.</strong> Dragging every item directly to extraction wastes time and exposes the team.</li>
+  <li><strong>No one calls extraction.</strong> The tornado appears and everyone does something different.</li>
+</ul>
+
+<h2 id="faq">
+  Burglin' Gnomes co-op FAQ
+</h2>
+
+### How many players can play Burglin' Gnomes together?
+
+The Steam page says you can enter houses with up to five friends, so a full online co-op group can have six players total.
+
+### Is Burglin' Gnomes worth playing solo?
+
+Yes. Solo is useful for learning maps, object handling, room names, task wording, and danger patterns. Co-op is better for rescue, carrying, lookout duty, and chaotic task recovery.
+
+### Can we change roles mid-run?
+
+Yes. Roles are jobs, not permanent classes. If the scout gets tied up, the anchor may become the rescuer, and a hauler may need to call the route.
+
+### What should a 5-player or 6-player team do differently?
+
+Add a second hauler first. In a 6-player group, add a second scout only if voice chat stays clear. Do not add more distractors unless the team already has clean callouts.
+
+### What happens if the whole team wipes?
+
+If everyone goes down, the run is usually unrecoverable. That is why the anchor role matters: one safer player can stop a bad capture from becoming a full-team wipe.
+
+### Who should be the anchor?
+
+Give anchor to the most patient player, not the loudest player. The anchor watches the exit, staged loot, and rescue route instead of chasing every funny object.
+
+### Should beginners play distractor?
+
+Only if they can escape after pulling pressure. A bad distractor brings the old man into the task room and makes the run harder.
+
+### How should we handle voice chat with six players?
+
+Use short callouts. Say the room, danger, and action: “Old man kitchen, drop loot,” or “Tornado, no new tasks.” Long explanations during panic make rescue harder.
+
+### What should we do if two people are down at once?
+
+Save the closest recoverable player first, then use that revived player to help chain the next rescue. Do not split into multiple unsafe rescues.
+

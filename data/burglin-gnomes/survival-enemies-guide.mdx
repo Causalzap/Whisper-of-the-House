@@ -1,0 +1,873 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const dangerColumns = [
+  { key: "Danger", label: "Danger" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "Best Response", label: "Best Response" },
+];
+
+export const dangerRows = [
+  {
+    Danger: "Old man",
+    "What It Does":
+      "Grabs, carries, throws, ties up, traps, blocks routes, and can become much worse if he gets a gun.",
+    "Best Response":
+      "Drop heavy items, break line of sight, call your room, and rescue with one player plus one lookout.",
+  },
+  {
+    Danger: "Old man with gun",
+    "What It Does":
+      "Turns a normal chase into a ranged threat. If he reaches the gun first, the whole route becomes unsafe.",
+    "Best Response":
+      "Prioritize stealing the gun before he gets it. If he already has it, stun him first before trying to take it.",
+  },
+  {
+    Danger: "Evil gnome",
+    "What It Does":
+      "Appears as the run becomes more violent or unstable, especially after the old man is killed.",
+    "Best Response":
+      "Avoid killing the old man unless the team is ready. Close doors and windows before triggering that chaos.",
+  },
+  {
+    Danger: "Rats and roaches",
+    "What It Does":
+      "Interrupt carry routes, punish tight spaces, and turn small rooms into panic traps.",
+    "Best Response":
+      "Fight only when the task requires it or the enemy blocks the route.",
+  },
+  {
+    Danger: "Roomba",
+    "What It Does":
+      "Acts like a moving floor hazard that can punish players who are focused only on the old man.",
+    "Best Response":
+      "Treat it like a patrol hazard: watch its path, step away, and do not carry heavy items across it blindly.",
+  },
+  {
+    Danger: "Bees",
+    "What It Does":
+      "Ruin outdoor routes, confuse movement, and punish players who sprint through garden areas.",
+    "Best Response":
+      "Back away, stop running in circles, and let a teammate help if bees attach.",
+  },
+  {
+    Danger: "Dangerous floor objects",
+    "What It Does":
+      "Knives, forks, soap, sharp tools, and messy objects can hurt or dismember you even when you are not using them.",
+    "Best Response":
+      "Look down before sprinting, dragging, or jumping through cluttered rooms.",
+  },
+  {
+    Danger: "Fall damage",
+    "What It Does":
+      "Medium-height drops can break legs or ruin movement, especially during panic routes.",
+    "Best Response":
+      "Use drawers, shelves, teammates, or safer steps instead of jumping blindly.",
+  },
+  {
+    Danger: "Tornado timer",
+    "What It Does":
+      "Turns the run from survival routing into extraction.",
+    "Best Response":
+      "Stop starting new tasks and leave with what is already safe or staged.",
+  },
+];
+
+export const oldManColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "Correct Response", label: "Correct Response" },
+  { key: "Bad Response", label: "Bad Response" },
+];
+
+export const oldManRows = [
+  {
+    Situation: "Old man enters your room",
+    "Correct Response":
+      "Drop heavy items, crouch or move behind furniture, and leave through the route you already opened.",
+    "Bad Response":
+      "Keep dragging a pot, frying pan, or tool while trying to outrun him.",
+  },
+  {
+    Situation: "Old man grabs a teammate",
+    "Correct Response":
+      "Call the room, track where he carries them, and send one rescuer plus one lookout.",
+    "Bad Response":
+      "Everyone chases him into the same kitchen, bathroom, or fridge room.",
+  },
+  {
+    Situation: "Old man ties someone up",
+    "Correct Response":
+      "Wait for a safe opening, untie with empty hands, then leave the room immediately.",
+    "Bad Response":
+      "Start another task while the tied teammate is still trapped.",
+  },
+  {
+    Situation: "Old man blocks a carry route",
+    "Correct Response":
+      "Stage the item, switch tasks, or let the distractor pull him away.",
+    "Bad Response":
+      "Force the item through him and lose both the task and the player.",
+  },
+  {
+    Situation: "Old man reaches the extraction route",
+    "Correct Response":
+      "Use the safest alternate path or leave only with staged items already near the exit.",
+    "Bad Response":
+      "Start a new objective while the exit is already unsafe.",
+  },
+];
+
+export const gunColumns = [
+  { key: "Gun Situation", label: "Gun Situation" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const gunRows = [
+  {
+    "Gun Situation": "You find the gun first",
+    "What To Do":
+      "Take it before the old man reaches it, then keep it away from panic routes and teammates.",
+    "Why It Matters":
+      "The gun is far safer in player hands than in the old man's hands.",
+  },
+  {
+    "Gun Situation": "You are looking for the gun",
+    "What To Do":
+      "Check drawers, bathroom storage, cabinets, weapon tables, and nearby surfaces early, but do not assume the gun always spawns in one fixed spot.",
+    "Why It Matters":
+      "Gun location may vary by run, map, or task roll. A fixed-spawn claim can make players waste time in the wrong room.",
+  },
+  {
+    "Gun Situation": "Old man gets the gun first",
+    "What To Do":
+      "Do not rush him directly. Use a stun option, such as a taser, before trying to steal it back.",
+    "Why It Matters":
+      "Trying to grab a gun from an active old man can turn one mistake into a full-team wipe.",
+  },
+  {
+    "Gun Situation": "The gun drops during chaos",
+    "What To Do":
+      "Call the location, grab it only if the route is safe, and do not fight teammates for it during a rescue.",
+    "Why It Matters":
+      "A dropped gun can save the run, but chasing it at the wrong moment can make the rescue worse.",
+  },
+];
+
+
+export const evilGnomeColumns = [
+  { key: "Risk Factor / Situation", label: "Risk Factor / Situation" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "How To Prepare", label: "How To Prepare" },
+];
+
+export const evilGnomeRows = [
+  {
+    "Risk Factor / Situation": "Old man is killed",
+    "What It Means":
+      "Evil gnome pressure can take over after the old man is no longer controlling the house.",
+    "How To Prepare":
+      "Do not kill him casually. Finish key tasks first, close unused routes, choose a rally point, and prepare to leave.",
+  },
+  {
+    "Risk Factor / Situation": "Open routes + split team",
+    "What It Means":
+      "Open doors, open windows, and players split between inside and outside make new pressure harder to control.",
+    "How To Prepare":
+      "Close unused routes, keep only the extraction path clear, and regroup before the run turns unstable.",
+  },
+  {
+    "Risk Factor / Situation": "Tornado warning is close",
+    "What It Means":
+      "There is no time to solve a new enemy phase and finish extra objectives.",
+    "How To Prepare":
+      "Stop fighting and extract with whoever can reach the route safely.",
+  },
+];
+
+
+export const rescueColumns = [
+  { key: "Rescue Type", label: "Rescue Type" },
+  { key: "Best Response", label: "Best Response" },
+  { key: "When To Give Up", label: "When To Give Up" },
+];
+
+export const rescueRows = [
+  {
+    "Rescue Type": "Tied in fridge",
+    "Best Response":
+      "One player opens and unties while another watches the old man's route.",
+    "When To Give Up":
+      "If the tornado is active and the fridge is far behind the team.",
+  },
+  {
+    "Rescue Type": "Tied in room",
+    "Best Response":
+      "Call the room name, send one rescuer, and leave immediately after the untie.",
+    "When To Give Up":
+      "If rescuing would pull the whole team into a blocked room.",
+  },
+  {
+    "Rescue Type": "Downed teammate",
+    "Best Response":
+      "Clear immediate danger first, then give CPR while someone watches.",
+    "When To Give Up":
+      "If the body is surrounded and extraction is already active.",
+  },
+  {
+    "Rescue Type": "Trapped in furniture or appliance",
+    "Best Response":
+      "Open or move the object first, then revive or untie if needed.",
+    "When To Give Up":
+      "If the trap is inside a room the old man is camping and the team has no second route.",
+  },
+  {
+    "Rescue Type": "Tornado rescue",
+    "Best Response":
+      "Save only the closest recoverable player.",
+    "When To Give Up":
+      "If a rescue would turn one lost player into a full-team wipe.",
+  },
+];
+
+export const toolColumns = [
+  { key: "Tool / Hazard", label: "Tool / Hazard" },
+  { key: "Good Use", label: "Good Use" },
+  { key: "Warning", label: "Warning" },
+];
+
+export const toolRows = [
+  {
+    "Tool / Hazard": "Knife",
+    "Good Use": "Required stabbing tasks, small enemy control, or emergency defense.",
+    Warning:
+      "Do not climb, crawl, or rescue while holding it at a bad angle. You can hurt yourself or teammates.",
+  },
+  {
+    "Tool / Hazard": "Taser",
+    "Good Use": "Rat tasks, roach tasks, and stunning the old man before stealing a gun.",
+    Warning:
+      "Do not waste it randomly. It is most valuable when it creates a safe task or rescue window.",
+  },
+  {
+    "Tool / Hazard": "Gun",
+    "Good Use": "Last-resort pressure control or keeping it away from the old man.",
+    Warning:
+      "If the old man gets it first, do not rush him directly. Stun first, then steal it back.",
+  },
+  {
+    "Tool / Hazard": "Grenade / explosive",
+    "Good Use": "Emergency pressure or specific chaos moments when the route is already clear.",
+    Warning:
+      "Do not carry explosives like normal loot. They are run-ending near teammates or extraction.",
+  },
+  {
+    "Tool / Hazard": "Bear trap / landmine",
+    "Good Use": "Area control only when the team knows exactly where it is.",
+    Warning:
+      "A trap that your team forgets is usually more dangerous than the enemy.",
+  },
+  {
+    "Tool / Hazard": "Chainsaw",
+    "Good Use": "High-risk tool route or destructive utility when the team has space.",
+    Warning:
+      "Do not bring it into crowded rescue rooms or tight carry paths.",
+  },
+  {
+    "Tool / Hazard": "Soap, fork, knife, floor clutter",
+    "Good Use": "Usually not a tool; treat these as passive floor hazards.",
+    Warning:
+      "Sprinting over clutter can cause slips, cuts, dismemberment, or sudden death.",
+  },
+];
+
+export const badRoomColumns = [
+  { key: "Bad Room Type", label: "Bad Room Type" },
+  { key: "Why It Is Dangerous", label: "Why It Is Dangerous" },
+  { key: "Safe Rule", label: "Safe Rule" },
+];
+
+export const badRoomRows = [
+  {
+    "Bad Room Type": "Kitchen",
+    "Why It Is Dangerous":
+      "Heavy items, sharp objects, drawers, old man paths, and enemy tasks can overlap.",
+    "Safe Rule":
+      "Do one job at a time. Do not rescue, fight, and carry cookware all at once.",
+  },
+  {
+    "Bad Room Type": "Bathroom",
+    "Why It Is Dangerous":
+      "Flush tasks, gun routes, drawers, and trap situations can all pull players into a small space.",
+    "Safe Rule":
+      "Enter with a job, finish it fast, and leave before the old man arrives.",
+  },
+  {
+    "Bad Room Type": "Fridge area",
+    "Why It Is Dangerous":
+      "Captured players can be tied inside, and rescuers often crowd the same danger route.",
+    "Safe Rule":
+      "One rescuer, one lookout, empty hands, quick exit.",
+  },
+  {
+    "Bad Room Type": "Outdoor / garden area",
+    "Why It Is Dangerous":
+      "Bees, traps, Jonathan routes, shed key routes, and long travel time can split the team.",
+    "Safe Rule":
+      "Send one scout first. Do not move the whole team outside without a reason.",
+  },
+  {
+    "Bad Room Type": "High shelves / roof routes",
+    "Why It Is Dangerous":
+      "Falls can break legs or slow movement during extraction.",
+    "Safe Rule":
+      "Use safer steps, drawers, teammates, or planned boosts instead of blind jumps.",
+  },
+];
+
+export const survivalRouteColumns = [
+  { key: "Run Phase", label: "Run Phase" },
+  { key: "Survival Priority", label: "Survival Priority" },
+  { key: "Do Not Do This", label: "Do Not Do This" },
+];
+
+export const survivalRouteRows = [
+  {
+    "Run Phase": "Entry",
+    "Survival Priority":
+      "Open a reusable route and avoid making noise before the team knows the task list.",
+    "Do Not Do This":
+      "Sprint through the first room carrying tools or heavy items.",
+  },
+  {
+    "Run Phase": "Early tasks",
+    "Survival Priority":
+      "Complete low-risk objectives before enemies and old man pressure stack up.",
+    "Do Not Do This":
+      "Start with gun fights, rat chases, or locked outdoor routes if easier tasks are available.",
+  },
+  {
+    "Run Phase": "Mid-run",
+    "Survival Priority":
+      "Stage carry items, call danger clearly, and rescue before starting more tasks.",
+    "Do Not Do This":
+      "Let a tied teammate sit in a fridge while everyone keeps looting.",
+  },
+  {
+    "Run Phase": "Chaos phase",
+    "Survival Priority":
+      "Stop adding new problems. Stabilize, rescue if safe, or extract.",
+    "Do Not Do This":
+      "Trigger evil gnome pressure, test materials, or play with traps while the route is already unstable.",
+  },
+  {
+    "Run Phase": "Tornado extraction",
+    "Survival Priority":
+      "Leave with close, staged, or already completed progress.",
+    "Do Not Do This":
+      "Start a new far task or chase a rescue that will wipe everyone.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Kills Runs", label: "Why It Kills Runs" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Treating bees as background noise",
+    "Why It Kills Runs":
+      "Outdoor routes can collapse fast when bees attach, confuse movement, or split the team.",
+    Fix:
+      "Call bees early, slow down near gardens, and do not sprint through hive areas during Jonathan or shed routes.",
+  },
+  {
+    Mistake: "Testing dangerous tools near extraction",
+    "Why It Kills Runs":
+      "A gun, trap, grenade, or chainsaw mistake near the exit can kill teammates after the run is already almost safe.",
+    Fix:
+      "Use tools for a specific job, then drop or stage them away from the extraction path.",
+  },
+  {
+    Mistake: "Climbing while holding a knife or sharp object",
+    "Why It Kills Runs":
+      "Bad angles around furniture, windows, shelves, and teammates can cause self-damage or team damage.",
+    Fix:
+      "Drop sharp tools before climbing, crawling, boosting, or rescuing.",
+  },
+  {
+    Mistake: "Ignoring floor clutter",
+    "Why It Kills Runs":
+      "Soap, forks, knives, loose tools, and messy objects can cause slips, cuts, broken limbs, or sudden death.",
+    Fix:
+      "Look down before sprinting through kitchens, bathrooms, or chaotic carry routes.",
+  },
+  {
+    Mistake: "Killing the old man without a plan",
+    "Why It Kills Runs":
+      "Removing him can trigger worse pressure from evil gnomes while the team is still unprepared.",
+    Fix:
+      "Finish key tasks first, close unused doors and windows, choose a rally point, and prepare to extract.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Burglin' Gnomes**, survival is about stopping panic from spreading. Drop heavy items before rescues, send one rescuer with one lookout, avoid fighting rats or roaches without the right tool, watch for Roomba and floor hazards, and stop starting new tasks when the tornado warning appears.
+
+The old man is the main threat, but he becomes much more dangerous if he gets a gun. Try to take the gun before he does; if he already has it, stun him first before stealing it back. Evil gnomes can take over after the old man is killed, so do not kill him unless your team is ready to close routes, regroup, and extract.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Burglin' Gnomes. This survival guide covers the old man, gun routes, evil gnomes, rats, roaches, Roomba, bees, floor hazards, fall damage, fridge rescue, CPR, dangerous tools, bad rooms, tornado extraction, and survival mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-old-man-grab.webp"
+    alt="Burglin' Gnomes old man grabbing a gnome near a fridge route"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The old man does not just chase you. He can grab, carry, tie, trap, and turn a small mistake into a rescue emergency.
+  </figcaption>
+</figure>
+
+<h2 id="burglin-gnomes-survival-enemies-guide">
+  Burglin' Gnomes survival and enemies guide
+</h2>
+
+**Burglin' Gnomes** is dangerous because most deaths do not happen from one big mistake. They happen when one mistake creates another: a player gets grabbed, two teammates rush the same room, someone keeps carrying a heavy item, then the tornado warning appears.
+
+The survival rule is simple:
+
+<strong>Drop the item, call the danger, rescue only when the route is safe, and stop adding new problems.</strong>
+
+This guide covers the threats that ruin runs: the old man, old man with gun, evil gnomes, rats, roaches, Roomba, bees, sharp floor hazards, fall damage, traps, rescue mistakes, and bad rooms.
+
+For task priority, read the <Link href="/burglin-gnomes/tasks-guide">Tasks Guide</Link>. For role splitting and callouts, read the <Link href="/burglin-gnomes/co-op-guide">Co-op Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="danger-quick-reference">
+  Danger quick reference
+</h2>
+
+Use this table when you need a fast answer during a run.
+
+<GuideTable
+  caption="Burglin' Gnomes danger quick reference."
+  columns={dangerColumns}
+  rows={dangerRows}
+/>
+
+The biggest mistake is treating every danger the same. A rat task, a gun route, a bee swarm, and a tied teammate all need different responses.
+
+<h2 id="copy-paste-survival-card">
+  Copy-paste survival card
+</h2>
+
+Use this in Discord, Steam chat, or your group message before starting a run.
+
+```txt
+BURGLIN' GNOMES SURVIVAL CARD
+
+OLD MAN:
+- Drop heavy items.
+- Call the room.
+- One rescuer, one lookout.
+- Do not crowd the same trap room.
+
+GUN:
+- Take it before the old man gets it.
+- If old man has gun, stun first, then steal.
+- Do not carry gun through crowded rescue routes.
+
+EVIL GNOME:
+- Can take over after old man is killed.
+- Close unused doors/windows before major chaos.
+- Regroup and prepare to extract.
+
+RESCUE:
+- Empty hands before untie or CPR.
+- Clear danger before revive.
+- Skip far rescues during tornado.
+
+FLOOR / FALLS:
+- Watch for knives, forks, soap, traps, and clutter.
+- Do not sprint through messy kitchens or bathrooms.
+- Do not jump from medium heights without a safe landing.
+
+TORNADO:
+- No new tasks.
+- Take only close or staged loot.
+- Leave before one rescue becomes a full-team wipe.
+```
+
+This card is built for quick decisions. If the team can follow this, most wipes become recoverable.
+
+<h2 id="old-man">
+  Old man: the main survival check
+</h2>
+
+The old man is not just a simple enemy. He changes the whole route because he can force rescue situations.
+
+<GuideTable
+  caption="How to respond to the old man in Burglin' Gnomes."
+  columns={oldManColumns}
+  rows={oldManRows}
+/>
+
+Do not turn every old man sighting into a chase. Sometimes the correct play is to drop the item, hide, and resume after he leaves.
+
+<h2 id="old-man-gun">
+  Old man with gun: steal it before he does
+</h2>
+
+The gun route deserves special attention because it changes the old man from a chase threat into a ranged threat. If your team finds the gun first, taking it away from his route can prevent a much worse mid-run situation.
+
+<GuideTable
+  caption="How to handle the gun before or after the old man gets it."
+  columns={gunColumns}
+  rows={gunRows}
+/>
+
+The safest rule is:
+
+<strong>If the old man gets the gun first, do not rush him directly. Stun him first, then steal it back.</strong>
+
+Gun locations should be checked early, but do not build your whole route around one fixed spawn unless your current run confirms it. Drawers, bathroom storage, cabinets, weapon tables, and nearby surfaces are worth checking, but the task route still comes first.
+
+<h2 id="evil-gnomes">
+  Evil gnomes: avoid triggering chaos before you are ready
+</h2>
+
+Evil gnomes are dangerous because they can punish teams that think killing the old man solves the run. Removing the old man can create a worse enemy phase if the team has not prepared the route.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-evil-gnome-danger.webp"
+    alt="Burglin' Gnomes evil gnome danger during an unstable run"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Evil gnome pressure is not something beginners should trigger casually. Finish key tasks and prepare the route first.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How to prepare for evil gnome pressure."
+  columns={evilGnomeColumns}
+  rows={evilGnomeRows}
+/>
+
+Before killing the old man or triggering major chaos:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>finish the safest tasks first,</li>
+  <li>close unused doors and windows,</li>
+  <li>keep one extraction route clear,</li>
+  <li>choose a rally point,</li>
+  <li>and be ready to leave instead of starting a new objective.</li>
+</ul>
+
+<h2 id="fridge-rescue">
+  Fridge rescue and tied teammates
+</h2>
+
+A tied teammate is a rescue problem, not an invitation for the whole team to rush one room.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-fridge-rescue.webp"
+    alt="Burglin' Gnomes tied-up gnome inside a fridge with the untie prompt visible"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fridge saves are safest with empty hands, one rescuer, and one lookout.
+  </figcaption>
+</figure>
+
+Use this rescue rule:
+
+<GuideTable
+  caption="Burglin' Gnomes rescue decisions."
+  columns={rescueColumns}
+  rows={rescueRows}
+/>
+
+The hard truth is that not every rescue is worth it. During tornado extraction, a far rescue can turn one lost player into a full-team wipe.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="cpr-revive">
+  CPR revive: clear danger first
+</h2>
+
+CPR is powerful, but it is not magic. Reviving in the middle of danger often creates a second downed gnome.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-cpr-revive.webp"
+    alt="Burglin' Gnomes player giving CPR to revive a downed teammate"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Give CPR only after the immediate danger is controlled or watched by another player.
+  </figcaption>
+</figure>
+
+A clean CPR save looks like this:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Call the body location.</li>
+  <li>Clear the old man, enemy, trap, or floor hazard first.</li>
+  <li>One player revives.</li>
+  <li>Another player watches the route.</li>
+  <li>The revived player leaves the room before starting another task.</li>
+</ol>
+
+<h2 id="rats-roaches-roomba">
+  Rats, roaches, and Roomba
+</h2>
+
+Small threats are dangerous because players underestimate them. They block carry routes, interrupt tasks, and force bad movement in tight spaces.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-roach-danger.webp"
+    alt="Burglin' Gnomes small enemy danger near a carry route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Small enemies are worst when you are carrying something or trapped in a tight route.
+  </figcaption>
+</figure>
+
+For rats and roaches:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>fight only if the task requires it,</li>
+  <li>find the correct tool before engaging,</li>
+  <li>do not fight while carrying heavy loot,</li>
+  <li>avoid chasing them into worse rooms,</li>
+  <li>and stop if the fight pulls the old man toward the team.</li>
+</ul>
+
+For Roomba:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>watch its path like a moving trap,</li>
+  <li>do not drag heavy items across it blindly,</li>
+  <li>avoid sprinting into it while looking behind you,</li>
+  <li>and treat it as a route hazard, not background decoration.</li>
+</ul>
+
+<h2 id="bees-outdoor-danger">
+  Bees and outdoor danger
+</h2>
+
+Bees are easy to ignore until they ruin Jonathan, shed key, garden, or outdoor material routes. Outdoor danger is especially bad because the team is usually split between inside tasks and outside objectives.
+
+For bees:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>slow down near outdoor routes,</li>
+  <li>do not sprint through hive areas,</li>
+  <li>call bees before the whole team enters the area,</li>
+  <li>let a teammate help if bees attach,</li>
+  <li>and do not combine bees with a far rescue or tornado escape.</li>
+</ul>
+
+If Jonathan or shed key tasks send you outside, send one scout first. The whole team should not move outside until the route is confirmed.
+
+<h2 id="floor-fall-dismemberment">
+  Floor hazards, fall damage, and dismemberment
+</h2>
+
+Not every danger is an enemy. Some of the worst deaths happen because players sprint over clutter, step on sharp objects, slip on soap, jump from unsafe heights, or pull heavy objects in a bad position.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-floor-hazard-knife-fork.webp"
+    alt="Burglin' Gnomes floor hazard with sharp objects near a drawer route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Sharp floor objects are not background clutter. A bad step near knives, forks, or drawer routes can turn into a death or failed rescue.
+  </figcaption>
+</figure>
+
+The risky objects include:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>knives and forks on the floor,</li>
+  <li>soap or slippery objects,</li>
+  <li>sharp tools near kitchen routes,</li>
+  <li>heavy objects that can pull or twist your body,</li>
+  <li>medium-height drops from shelves, counters, roofs, or furniture,</li>
+  <li>and cluttered routes where you cannot see what your feet are touching.</li>
+</ul>
+
+The safe habit is simple:
+
+<strong>Look down before sprinting through kitchens, bathrooms, shelves, or chaotic carry routes.</strong>
+
+This matters even more during extraction. A broken leg or lost limb near the tornado can be worse than missing one task.
+
+<h2 id="dangerous-tools">
+  Dangerous tools and traps
+</h2>
+
+Tools can save a run, but they are also one of the fastest ways to kill yourself or a teammate.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-landmine-danger.webp"
+    alt="Burglin' Gnomes landmine danger on the floor"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Traps and explosive tools are only helpful if the whole team knows where they are.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Burglin' Gnomes tool safety table."
+  columns={toolColumns}
+  rows={toolRows}
+/>
+
+The tool rule is:
+
+<strong>Use the tool for one clear job, then stop carrying it through rescue, climbing, or extraction routes.</strong>
+
+<h2 id="bad-rooms">
+  Bad rooms: places that turn mistakes into wipes
+</h2>
+
+Some rooms are dangerous even before enemies arrive. The layout, objects, and exits make rescue harder.
+
+<GuideTable
+  caption="Burglin' Gnomes bad rooms and safe rules."
+  columns={badRoomColumns}
+  rows={badRoomRows}
+/>
+
+Bad rooms do not mean “never enter.” They mean enter with a job, finish it quickly, and leave before the room becomes a trap.
+
+<h2 id="tornado-extraction">
+  Tornado extraction: stop starting new problems
+</h2>
+
+The tornado warning is the moment survival becomes more important than greed.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-tornado-extraction.webp"
+    alt="Burglin' Gnomes out of time warning telling players to get to the tornado"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When the tornado warning appears, stop starting new tasks, new rescues, and new tool experiments.
+  </figcaption>
+</figure>
+
+During tornado extraction:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>take only close or staged loot,</li>
+  <li>skip far rescues,</li>
+  <li>do not test dangerous tools,</li>
+  <li>avoid high shelves and risky jumps,</li>
+  <li>and leave before one mistake becomes a full-team wipe.</li>
+</ul>
+
+<h2 id="survival-route">
+  Survival route by run phase
+</h2>
+
+Use this route when your team keeps dying even when the task list looks easy.
+
+<GuideTable
+  caption="Burglin' Gnomes survival route by run phase."
+  columns={survivalRouteColumns}
+  rows={survivalRouteRows}
+/>
+
+If a run feels unstable, stop asking “what task can we still do?” and ask “what danger is about to wipe us?”
+
+<h2 id="survival-mistakes">
+  Survival mistakes to avoid
+</h2>
+
+These mistakes are not always covered by a single enemy or rescue section, but they are common reasons clean runs collapse.
+
+<GuideTable
+  caption="Burglin' Gnomes survival mistakes and fixes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The best survival improvement is not bravery. It is knowing when to stop adding new risks.
+
+<h2 id="faq">
+  Burglin' Gnomes survival and enemies FAQ
+</h2>
+
+### What is the most dangerous enemy in Burglin' Gnomes?
+
+The old man is usually the main survival check because he can grab, carry, tie up, trap, and block routes. He becomes even more dangerous if he gets a gun.
+
+### What should I do if the old man gets the gun?
+
+Do not rush him directly. Use a stun option first, such as a taser, then steal the gun back when he is disabled or safely interrupted.
+
+### What triggers evil gnomes?
+
+Evil gnome pressure can begin after the old man is killed. Do not kill him casually; finish key tasks first, close unused routes, and prepare to extract.
+
+### How do I rescue someone from the fridge?
+
+Send one rescuer with empty hands while another player watches the old man's route. Untie the teammate, then leave the room immediately.
+
+### When should I skip a rescue?
+
+Skip a rescue if the tornado is active, the teammate is far away, the route is blocked, or saving them would likely turn one lost player into a full-team wipe.
+
+### Are rats and roaches worth fighting?
+
+Only if the task requires it or they block the route. Do not chase them into worse rooms, and do not fight while carrying heavy loot.
+
+### Is Roomba dangerous?
+
+Yes. Treat Roomba like a moving floor hazard. Watch its path, avoid dragging heavy items across it blindly, and do not sprint into it while looking backward.
+
+### Why did I die without fighting anything?
+
+You may have hit floor clutter, sharp objects, soap, fall damage, traps, or awkward item physics. Look down before sprinting through kitchens, bathrooms, and carry routes.
+
+### Should I use guns, knives, or explosives?
+
+Use them only for a clear job. Dangerous tools become a liability during climbing, rescue, crowded rooms, or tornado extraction.

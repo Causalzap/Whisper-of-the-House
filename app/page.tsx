@@ -137,6 +137,8 @@ const allGameGuides = [
   { title: 'Gothic 1 Remake', href: '/gothic-1-remake'},
   { title: 'Solarpunk™', href: '/solarpunk'},
   { title: 'Voidling Bound', href: '/voidling-bound'},
+  { title: 'Burglin\' Gnomes', href: '/burglin-gnomes'},
+
 ];
 
 const exploreCards = [

@@ -1,0 +1,778 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const controlsColumns = [
+  { key: "Input", label: "Input" },
+  { key: "Action", label: "Action" },
+  { key: "Beginner Note", label: "Beginner Note" },
+];
+
+export const controlsRows = [
+  {
+    Input: "WASD",
+    Action: "Move",
+    "Beginner Note":
+      "Use small movements around furniture, counters, doors, and traps. Tiny gnomes get caught on awkward angles easily.",
+  },
+  {
+    Input: "Shift",
+    Action: "Sprint",
+    "Beginner Note":
+      "Sprint when escaping, not while scouting. Sprinting burns stamina and creates more noise.",
+  },
+  {
+    Input: "Ctrl",
+    Action: "Crouch / move quieter",
+    "Beginner Note":
+      "Use crouch when entering rooms, crossing near the old man, or moving before the team has a route.",
+  },
+  {
+    Input: "E",
+    Action: "Interact, grab, pick up, use, untie",
+    "Beginner Note":
+      "Most rescue and object actions use the interact prompt. Empty hands make many interactions cleaner.",
+  },
+  {
+    Input: "Q",
+    Action: "Drop / throw held item",
+    "Beginner Note":
+      "Drop heavy or dangerous items before rescuing, climbing, or running from the old man.",
+  },
+  {
+    Input: "Tab",
+    Action: "Open task list / journal",
+    "Beginner Note":
+      "Press this before entering deeply. The task list decides what actually matters.",
+  },
+  {
+    Input: "Left mouse / prompt input",
+    Action: "Context actions such as CPR or item use",
+    "Beginner Note":
+      "Follow the on-screen prompt. Some rescue actions appear only when you are close enough.",
+  },
+];
+
+export const passRuleColumns = [
+  { key: "Rule", label: "Rule" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Beginner Decision", label: "Beginner Decision" },
+];
+
+export const passRuleRows = [
+  {
+    Rule: "Steam confirms you need enough tasks",
+    "What It Means":
+      "The official Steam page says the High-Gnome will not carry you around for free, and failing to complete enough tasks can get you fired.",
+    "Beginner Decision":
+      "Do not extract too early with only one or two easy actions unless the run is already lost.",
+  },
+  {
+    Rule: "Use the crown marker as your run target",
+    "What It Means":
+      "In the current Gnome Report example used here, the crown target sits around 3 completed tasks out of 5.",
+    "Beginner Decision":
+      "Plan around 3 completed tasks for this route, then switch from task chasing to extraction.",
+  },
+  {
+    Rule: "Extra tasks are optional risk",
+    "What It Means":
+      "More checkmarks can improve the verdict, but forcing every objective can turn a good run into a wipe.",
+    "Beginner Decision":
+      "After the crown target is reached, finish only close and safe tasks.",
+  },
+  {
+    Rule: "Follow your current UI",
+    "What It Means":
+      "Updates, maps, task rolls, or future balance changes may show a different crown target.",
+    "Beginner Decision":
+      "If your own report shows a different crown position, follow that instead of forcing 3.",
+  },
+];
+
+export const firstRunColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const firstRunRows = [
+  {
+    Step: "1. Pick the safest start",
+    "What To Do":
+      "Choose the smallest / easiest setup available, such as Cottage on Easy if your build offers it.",
+    "Why It Matters":
+      "New players need to learn patrols, room scale, object handling, and extraction before harder maps.",
+  },
+  {
+    Step: "2. Read the task list",
+    "What To Do":
+      "Press Tab before entering deeply and choose the first realistic tasks that can reach the crown target.",
+    "Why It Matters":
+      "Do not waste the opening minute on random loot when the High-Gnome only cares about assigned tasks.",
+  },
+  {
+    Step: "3. Open a reusable entry",
+    "What To Do":
+      "Use a window, low opening, drawer, or furniture route instead of forcing a tall door handle.",
+    "Why It Matters":
+      "A good entry route should also work as your exit route when the run gets loud.",
+  },
+  {
+    Step: "4. Finish low-risk tasks",
+    "What To Do":
+      "Start with windows, break any item, flush item, or a nearby room steal.",
+    "Why It Matters":
+      "Easy checkmarks give you progress before rats, roaches, bees, traps, or the old man interrupt.",
+  },
+  {
+    Step: "5. Stage one carry item",
+    "What To Do":
+      "Move a pot, frying pan, metal can, or other bulky item toward a window or exit in stages.",
+    "Why It Matters":
+      "Dragging one heavy object across the whole house during a chase is how good runs collapse.",
+  },
+  {
+    Step: "6. Extract instead of proving a point",
+    "What To Do": "When the tornado warning appears, stop starting new objectives.",
+    "Why It Matters":
+      "A clean target-clear escape is better than a full wipe caused by one extra checkmark.",
+  },
+];
+
+export const taskPriorityColumns = [
+  { key: "Task Type", label: "Task Type" },
+  { key: "Examples", label: "Examples" },
+  { key: "Beginner Rule", label: "Beginner Rule" },
+];
+
+export const taskPriorityRows = [
+  {
+    "Task Type": "Fast checkmarks",
+    Examples: "Open a window, break any item, flush a small item.",
+    "Beginner Rule":
+      "Do these early. They are usually the safest way to reach the crown target.",
+  },
+  {
+    "Task Type": "Room steals",
+    Examples: "Steal from the kids room, kitchen, dining room, bathroom, or hallway.",
+    "Beginner Rule":
+      "Confirm the room first. Do not carry a random object outside and hope it counts.",
+  },
+  {
+    "Task Type": "Carry objectives",
+    Examples: "Steal a pot, frying pan, metal can, glass jar, toy, or food.",
+    "Beginner Rule":
+      "Move it in stages and drop it during danger. The route matters more than the item.",
+  },
+  {
+    "Task Type": "Enemy tasks",
+    Examples: "Tase a rat, stab a rat, kill a roach, stab a roach.",
+    "Beginner Rule":
+      "Only attempt these after you have the right tool and a safe space to miss.",
+  },
+  {
+    "Task Type": "Outdoor / special tasks",
+    Examples: "Get Jonathan out of his hut, shed key, garden gnomes, material tasks.",
+    "Beginner Rule":
+      "Do these after at least one safe task is done, because outdoor routes can split the team.",
+  },
+];
+
+export const noiseColumns = [
+  { key: "Noise Source", label: "Noise Source" },
+  { key: "Risk Level", label: "Risk Level" },
+  { key: "How To Reduce It", label: "How To Reduce It" },
+];
+
+export const noiseRows = [
+  {
+    "Noise Source": "Sprinting indoors",
+    "Risk Level": "High",
+    "How To Reduce It":
+      "Walk or crouch while scouting. Save sprinting for escape, rescue, or extraction.",
+  },
+  {
+    "Noise Source": "Breaking objects",
+    "Risk Level": "High",
+    "How To Reduce It":
+      "Break items only when the task asks for it or when the team is ready to move.",
+  },
+  {
+    "Noise Source": "Throwing heavy items",
+    "Risk Level": "High",
+    "How To Reduce It":
+      "Set heavy objects down near staging points instead of launching them through rooms.",
+  },
+  {
+    "Noise Source": "Opening doors, cabinets, and drawers",
+    "Risk Level": "Medium",
+    "How To Reduce It":
+      "Have one scout check rooms instead of every player opening every object.",
+  },
+  {
+    "Noise Source": "Dragging pots, cans, and furniture",
+    "Risk Level": "Medium",
+    "How To Reduce It":
+      "Use short carry stages and stop moving when the old man enters the route.",
+  },
+  {
+    "Noise Source": "Weapons, traps, and explosives",
+    "Risk Level": "Very high",
+    "How To Reduce It":
+      "Use them for a clear task or rescue window, not as random chaos.",
+  },
+  {
+    "Noise Source": "Team panic",
+    "Risk Level": "Very high",
+    "How To Reduce It":
+      "Call one simple plan: task, rescue, or leave. Do not let four players do four noisy things.",
+  },
+];
+
+export const dangerColumns = [
+  { key: "Danger", label: "Danger" },
+  { key: "What Goes Wrong", label: "What Goes Wrong" },
+  { key: "Beginner Response", label: "Beginner Response" },
+];
+
+export const dangerRows = [
+  {
+    Danger: "Old man",
+    "What Goes Wrong":
+      "He grabs, carries, throws, ties up, or traps a gnome in a fridge, bathroom, kitchen, or bad room.",
+    "Beginner Response":
+      "Drop heavy loot, break line of sight, call your room, and send one rescuer instead of the whole team.",
+  },
+  {
+    Danger: "Fridge / trap rooms",
+    "What Goes Wrong":
+      "A captured player gets tied up, then two more players rush in and get caught too.",
+    "Beginner Response":
+      "One player unties, one watches the route, and everyone leaves the room immediately after the save.",
+  },
+  {
+    Danger: "Rats and roaches",
+    "What Goes Wrong":
+      "They interrupt carry routes and force bad fights in tight rooms.",
+    "Beginner Response":
+      "Fight only if the task requires it or the enemy blocks the route.",
+  },
+  {
+    Danger: "Bees",
+    "What Goes Wrong":
+      "Outdoor routes turn chaotic when bees attach or confuse the team.",
+    "Beginner Response":
+      "Back away from the hive area, stop sprinting in circles, and let a teammate help if possible.",
+  },
+  {
+    Danger: "Dangerous items",
+    "What Goes Wrong":
+      "Knives, guns, traps, landmines, and explosives hurt your own gnome during panic movement.",
+    "Beginner Response":
+      "Use dangerous tools only for a clear job, then drop them before climbing, rescuing, or carrying.",
+  },
+];
+
+export const roleColumns = [
+  { key: "Role", label: "Role" },
+  { key: "Job", label: "Job" },
+  { key: "Beginner Tip", label: "Beginner Tip" },
+];
+
+export const roleRows = [
+  {
+    Role: "Scout",
+    Job: "Checks rooms, finds task items, watches hazards, and calls the route.",
+    "Beginner Tip": "Do not pick up every object. Your value is information.",
+  },
+  {
+    Role: "Hauler",
+    Job: "Moves pots, frying pans, metal cans, books, plastic, and bulky task items.",
+    "Beginner Tip":
+      "Stage items near windows or exits instead of dragging them across the whole house.",
+  },
+  {
+    Role: "Distractor",
+    Job: "Pulls the old man away only when the team needs space for a task, carry, or rescue.",
+    "Beginner Tip":
+      "Do not make noise all run. Bad distraction is just early detection.",
+  },
+  {
+    Role: "Anchor",
+    Job: "Stays closer to the exit, watches staged loot, and rescues teammates.",
+    "Beginner Tip":
+      "This is the safest beginner co-op role because you keep the run recoverable.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "Upgrade Focus", label: "Upgrade Focus" },
+  { key: "Why It Helps", label: "Why It Helps" },
+  { key: "Buy When", label: "Buy When" },
+];
+
+export const upgradeRows = [
+  {
+    "Upgrade Focus": "Movement",
+    "Why It Helps": "Entry, rescue, climbing, and extraction all become easier.",
+    "Buy When": "First priority for most new teams.",
+  },
+  {
+    "Upgrade Focus": "Carry support",
+    "Why It Helps": "You can bring out more once the route is stable.",
+    "Buy When":
+      "Buy next if your team survives but keeps leaving useful loot behind.",
+  },
+  {
+    "Upgrade Focus": "Stealth / noise control",
+    "Why It Helps": "Quieter runs give you more time to reach the crown target safely.",
+    "Buy When":
+      "Buy next if your team gets detected, grabbed, or trapped too early.",
+  },
+  {
+    "Upgrade Focus": "Rescue support",
+    "Why It Helps": "One good save protects the whole run in co-op.",
+    "Buy When": "Prioritize in teams that get caught often.",
+  },
+  {
+    "Upgrade Focus": "Special gear",
+    "Why It Helps": "Grappling Hook, Glider, Slingshot, and other tools open advanced routes.",
+    "Buy When": "After basic task clears feel reliable.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Burglin' Gnomes**, Steam confirms that you must complete enough High-Gnome tasks to avoid getting fired, but the store page does not list a fixed number. In the current Gnome Report example used here, the crown target sits around **3/5**, so beginners should plan around **3 completed tasks** unless their own run shows a different target.
+
+For your first clears, pick the smallest / easiest setup available, read the task list with **Tab**, enter through a window instead of forcing tall doors, finish fast checkmarks first, and leave when the tornado warning appears. Use **WASD** to move, **Shift** to sprint, **Ctrl** to crouch, **E** to interact / pick up / untie, and **Q** to drop or throw held items.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Burglin' Gnomes. This beginner guide covers the Gnome Report crown target, controls, Cottage / Easy start advice, task priority, noise management, window entry, old man survival, fridge rescue, CPR, co-op roles, upgrade priority, tornado extraction, and a copy-paste pre-run checklist.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-first-task-list.webp"
+    alt="Burglin' Gnomes task list with objectives like stealing from the kids room, flushing an item, breaking items, tasing a rat, and stealing a pot"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first job is not to steal everything. Your first job is to reach the task target without letting the run collapse.
+  </figcaption>
+</figure>
+
+<h2 id="burglin-gnomes-beginner-guide">
+  Burglin' Gnomes beginner guide
+</h2>
+
+**Burglin' Gnomes** looks like a goofy co-op stealing game, but the early runs punish players who ignore the task list. The house is oversized, the old man can trap you, rats and roaches interrupt routes, bees can ruin outdoor tasks, and your own tools can hurt you if you carry them badly.
+
+The beginner rule is simple:
+
+<strong>Reach the crown target, keep the team recoverable, and extract before greed turns into a wipe.</strong>
+
+This guide is for your first clean clears. It focuses on the hard basics: controls, task targets, safe entry, noise, rescue, and when to stop looting.
+
+If you want the full cluster, start from the <Link href="/burglin-gnomes">Burglin' Gnomes Guide Hub</Link>. For objective routes, use the <Link href="/burglin-gnomes/tasks-guide">Tasks Guide</Link> after this page.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="minimum-tasks">
+  High-Gnome tasks: use the crown target
+</h2>
+
+Steam confirms the core rule: the High-Gnome will not carry you around for free, and failing to complete enough tasks can get you fired. The official store page does not list a fixed task number, so do not treat 3 tasks as a universal hardcoded rule.
+
+In the current Gnome Report example used in this guide, the crown target sits around **3/5**. That makes **3 completed tasks** the safest beginner planning target for this version of the run: reach the crown target first, then decide whether extra objectives are worth the risk.
+
+<GuideTable
+  caption="Burglin' Gnomes task completion rules for beginners."
+  columns={passRuleColumns}
+  rows={passRuleRows}
+/>
+
+The clean decision is:
+
+<strong>Before the crown target, play for checkmarks. After the crown target, play for extraction.</strong>
+
+If your own Gnome Report, map, or task list shows a different target, follow the in-game UI.
+
+<h2 id="controls">
+  Basic controls you should know first
+</h2>
+
+Before learning advanced tactics, make sure you know the core controls. Most beginner failures come from not dropping items, not checking tasks, or not using crouch and sprint at the right time.
+
+<GuideTable
+  caption="Burglin' Gnomes basic controls."
+  columns={controlsColumns}
+  rows={controlsRows}
+/>
+
+The two controls new players forget most are **Tab** and **Q**.
+
+Use **Tab** before entering deeply so the team knows the task target. Use **Q** when you need to drop a pot, frying pan, weapon, or risky item before escaping or rescuing.
+
+<h2 id="best-starting-map-difficulty">
+  Start on the easiest map and difficulty
+</h2>
+
+For your first clears, do not start with the largest or most chaotic setup if the game gives you a choice. Pick the smallest / easiest option available, such as **Cottage on Easy**, then learn the route before moving up.
+
+A smaller first setup helps you learn:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>where windows and low entry points usually are,</li>
+  <li>how far you can carry objects before danger builds,</li>
+  <li>how the old man moves through rooms,</li>
+  <li>which objects are easy task targets,</li>
+  <li>and how long it takes your team to reach the crown target.</li>
+</ul>
+
+Harder maps are not just bigger. They create more ways for the team to split, panic, and fail rescues.
+
+<h2 id="first-heist-checklist">
+  First heist checklist
+</h2>
+
+Use this as your first-run plan.
+
+<GuideTable
+  caption="Burglin' Gnomes first heist checklist."
+  columns={firstRunColumns}
+  rows={firstRunRows}
+/>
+
+Do not try to learn every system in one run. A good first clear is boring in the best way: enough tasks for the crown target, one safe entry route, one staged item, no unnecessary fight, and a clean tornado escape.
+
+<h2 id="copy-paste-checklist">
+  Copy-paste checklist for your squad
+</h2>
+
+Use this in Discord, Steam chat, or your group message before starting a run.
+
+```txt
+BURGLIN' GNOMES FIRST CLEAR PLAN
+
+GOAL:
+- Complete enough High-Gnome tasks to avoid getting fired.
+- Use the Gnome Report crown marker as the real target.
+- In this example, plan around 3 completed tasks.
+- After the crown target is reached, stop forcing risky objectives.
+
+CONTROLS:
+- WASD = move
+- Shift = sprint
+- Ctrl = crouch / quieter movement
+- E = interact / pick up / untie
+- Q = drop or throw held item
+- Tab = task list / journal
+
+ROLES:
+- Scout: find rooms, task items, and hazards.
+- Hauler: move heavy task items in stages.
+- Distractor: pull old man pressure only when needed.
+- Anchor: stay near exit, stage loot, rescue teammates.
+
+UPGRADES:
+- Movement first.
+- If we survive but leave loot behind, buy carry support next.
+- If we get caught too early, buy stealth / noise control next.
+
+RULES:
+- Start with easy tasks first.
+- Use windows instead of forcing tall doors.
+- Drop heavy items before rescue.
+- Do not start enemy tasks without the right tool.
+- When tornado appears, leave.
+```
+
+This checklist is intentionally simple. If the team cannot follow this, adding more strategy will not help.
+
+<h2 id="entry-route">
+  Use windows instead of forcing tall doors
+</h2>
+
+You are a tiny gnome in a human-sized house. That means doors, handles, counters, cabinets, and furniture are part of the puzzle.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-window-entry.webp"
+    alt="Burglin' Gnomes front door handle too high for a gnome, making window entry safer"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the handle is too high, stop fighting the door. A window route is usually safer and faster.
+  </figcaption>
+</figure>
+
+A good entry route should also be a good exit route. Before you drag a pot, frying pan, metal can, or other bulky object, ask where it will leave the house.
+
+<h2 id="task-priority">
+  Pick tasks by risk, not by excitement
+</h2>
+
+The task list is not just a checklist. It is a risk map.
+
+<GuideTable
+  caption="Burglin' Gnomes beginner task priority."
+  columns={taskPriorityColumns}
+  rows={taskPriorityRows}
+/>
+
+A strong beginner route usually looks like this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>first checkmark from an easy interaction,</li>
+  <li>second checkmark from a nearby room or break task,</li>
+  <li>third checkmark from a carry task or another safe objective,</li>
+  <li>then extraction unless the next task is close and safe.</li>
+</ul>
+
+This is why enemy tasks should not usually be first. A rat task can be worth doing, but only after you have the right tool and enough room to miss safely.
+
+<h2 id="noise-system">
+  Noise is the hidden timer
+</h2>
+
+Noise is not just flavor. It is one of the reasons easy runs turn dangerous. Sprinting, breaking objects, throwing items, opening objects, dragging heavy loot, fighting enemies, and using weapons can all push the run toward detection and pressure.
+
+<GuideTable
+  caption="Burglin' Gnomes noise sources and beginner fixes."
+  columns={noiseColumns}
+  rows={noiseRows}
+/>
+
+The practical rule is:
+
+<strong>Spend noise only when it buys a task, a rescue, or an escape.</strong>
+
+Breaking an item because the task asks for it is useful. Breaking random objects while the scout is still looking for the first room is just making the house harder.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="old-man-rescue">
+  Old man, fridge rescue, and CPR
+</h2>
+
+The old man is the main reason you need a rescue plan. He can grab a gnome, carry them away, tie them up, or trap them somewhere awkward.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-fridge-rescue.webp"
+    alt="Burglin' Gnomes tied-up gnome inside a fridge with the untie prompt visible"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    One player should rescue while another watches the old man's route. Do not turn one capture into a full-team wipe.
+  </figcaption>
+</figure>
+
+Use this rescue rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Call the room where you were taken.</li>
+  <li>Drop heavy or dangerous items before rescuing.</li>
+  <li>Send one rescuer and one lookout.</li>
+  <li>Untie or revive first.</li>
+  <li>Leave the room immediately after the save.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-cpr-revive.webp"
+    alt="Burglin' Gnomes player giving CPR to revive a downed teammate"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    CPR is strongest when the room is watched. Reviving alone while danger is still nearby can create another downed gnome.
+  </figcaption>
+</figure>
+
+For deeper enemy handling, use the <Link href="/burglin-gnomes/survival-enemies-guide">Survival and Enemies Guide</Link>.
+
+<h2 id="danger-table">
+  Common dangers and what to do
+</h2>
+
+These are the problems that wipe new teams most often.
+
+<GuideTable
+  caption="Burglin' Gnomes beginner danger table."
+  columns={dangerColumns}
+  rows={dangerRows}
+/>
+
+The big lesson is that survival is usually about stopping the snowball. When one thing goes wrong, stop adding new problems.
+
+<h2 id="weapon-safety">
+  Weapon safety: use tools for a job, not for chaos
+</h2>
+
+Weapons and dangerous items can save a run, but they can also ruin it. Knives, guns, grenades, bear traps, landmines, and other tools should solve a specific problem.
+
+<strong>Do not climb, rescue, or squeeze through furniture while carrying a dangerous item at a bad angle.</strong>
+
+A safe weapon rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use a knife or taser when the task or enemy requires it.</li>
+  <li>Do not wave sharp items around teammates.</li>
+  <li>Drop dangerous tools before CPR or untie rescues.</li>
+  <li>Do not carry explosives as normal loot.</li>
+  <li>If the team is panicking, dropping the weapon is usually safer than forcing a fight.</li>
+</ul>
+
+This is one of the fastest ways to improve. Many beginner deaths come from the team hurting itself.
+
+<h2 id="co-op-roles">
+  Use simple co-op roles
+</h2>
+
+Burglin' Gnomes gets easier when each player has a loose job.
+
+<GuideTable
+  caption="Burglin' Gnomes beginner co-op roles."
+  columns={roleColumns}
+  rows={roleRows}
+/>
+
+The most important role is often the **anchor**. The anchor keeps the run recoverable by staying closer to the exit, watching staged loot, and saving teammates.
+
+For full team routing, read the <Link href="/burglin-gnomes/co-op-guide">Burglin' Gnomes Co-op Guide</Link>.
+
+<h2 id="upgrade-priority">
+  What to upgrade first
+</h2>
+
+Do not buy upgrades only because they look funny. Early upgrades should fix the problem that is actually costing your runs.
+
+<GuideTable
+  caption="Burglin' Gnomes beginner upgrade priority."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+The safest default is:
+
+<strong>Movement first, then choose carry or stealth based on what keeps ruining your runs.</strong>
+
+If your team usually survives but leaves too much loot behind, carry support can come before stealth. If your team gets detected, grabbed, or trapped too early, stealth and noise control matter more. Special gear is better after basic task clears feel reliable.
+
+For material names and upgrade planning, use the <Link href="/burglin-gnomes/materials-upgrades-guide">Materials and Upgrades Guide</Link>.
+
+<h2 id="tornado-extraction">
+  Leave when the tornado appears
+</h2>
+
+The tornado warning is your hard stop. Once it appears, the question is no longer “what else can we do?” The question is “what can we safely cash in?”
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-tornado-extraction.webp"
+    alt="Burglin' Gnomes out of time warning telling players to get to the tornado"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When the tornado warning appears, stop starting new tasks and get out with the progress already earned.
+  </figcaption>
+</figure>
+
+Leave immediately if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you already reached the crown target,</li>
+  <li>the next objective is in another room,</li>
+  <li>the old man is between you and the task,</li>
+  <li>a teammate is tied up too far away,</li>
+  <li>or the carry item is not already staged near an exit.</li>
+</ul>
+
+One missed task is easier to accept than losing the whole squad.
+
+<h2 id="gnome-report">
+  After-run review: read the Gnome Report
+</h2>
+
+The Gnome Report is how you turn a failed run into a better next run. Do not only ask whether you won. Check where the run actually broke.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-high-gnome-verdict.webp"
+    alt="Burglin' Gnomes Gnome Report showing completed tasks, missed tasks, and the High-Gnome's Verdict bar"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the Gnome Report to judge route quality. The crown target tells you whether the run had enough task progress.
+  </figcaption>
+</figure>
+
+After each run, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Did we reach the crown target?</li>
+  <li>Which task gave us the easiest checkmark?</li>
+  <li>Which task wasted the most time?</li>
+  <li>Did we leave when the tornado appeared?</li>
+  <li>Did rescue save the run or make the wipe worse?</li>
+  <li>Should the next upgrade fix movement, carry, or detection?</li>
+</ul>
+
+This review loop matters more than one perfect run. If you know why a run failed, the next route becomes cleaner.
+
+<h2 id="faq">
+  Burglin' Gnomes beginner FAQ
+</h2>
+
+### How many tasks do I need to complete?
+
+Steam says you must complete enough High-Gnome tasks, but it does not give a fixed number. Use the Gnome Report crown marker as your real target. In the example used here, that target is around 3 completed tasks.
+
+### Can I extract before reaching the crown target?
+
+You can try to leave, but you should not plan around it. If the Gnome Report target is not met, the run may fail even if you reached extraction.
+
+### Should I keep playing after reaching the crown target?
+
+Only if the next task is close, safe, and does not risk a wipe. After the crown target is reached, extraction becomes more important than greed.
+
+### What if my Gnome Report shows a different target?
+
+Follow your current in-game UI. The beginner route on this page plans around the crown target shown in the example, but updates, maps, or task rolls can change how a run is judged.
+
+### What is the best first map or difficulty?
+
+Start with the smallest / easiest setup available, such as Cottage on Easy if your build offers it. Learn safe routes before moving into larger maps.
+
+### What controls should I remember first?
+
+Remember **Tab** for the task list, **E** for interact / untie, and **Q** to drop held items. These three controls fix many beginner mistakes.
+
+### Is sprinting bad?
+
+Sprinting is useful for escape, but bad for scouting. It burns stamina and creates more noise, so use it when you actually need speed.
+
+### How do I know which room a task item belongs to?
+
+Use the task wording first. If it says kids room, dining room, kitchen, bathroom, or hallway, confirm the room before carrying objects outside. If the task does not update, stop testing random items and finish a safer objective.
+
+### Can I play Burglin' Gnomes solo?
+
+You can attempt runs solo, but the game is much easier with friends because rescue, lookout, carrying, and distraction can be split between players.

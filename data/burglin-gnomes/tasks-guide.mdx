@@ -1,0 +1,930 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const tierColumns = [
+  { key: "Tier", label: "Tier" },
+  { key: "Task Type", label: "Task Type" },
+  { key: "Examples", label: "Examples" },
+  { key: "Rule", label: "Rule" },
+];
+
+export const tierRows = [
+  {
+    Tier: "LOW",
+    "Task Type": "Fast, nearby, low-risk checkmarks",
+    Examples: "Open a window, break a small item, flush a small item, steal from a nearby room.",
+    Rule: "Do these first. They build safe progress before the house gets loud.",
+  },
+{
+  Tier: "MED",
+  "Task Type": "Route-based tasks that depend on distance or room position",
+  Examples:
+    "Room-specific steals, carry objectives, Jonathan routes, confirmed material tasks.",
+  Rule:
+    "Treat these as LOW if the room or item is close and safe; treat them as MED if they require a route, carry plan, or outdoor movement.",
+},
+
+  {
+    Tier: "HIGH",
+    "Task Type": "Enemy, locked-area, tool, trap, or uncertain material tasks",
+    Examples: "Tase a rat, stab a roach, shed key, firework, gather uncertain materials.",
+    Rule: "Do these only when the team has the right tool, enough time, and a safe escape route.",
+  },
+];
+
+export const priorityColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why", label: "Why" },
+];
+
+export const priorityRows = [
+  {
+    Step: "1. Read the task list",
+    "What To Do": "Check all High-Gnome tasks before entering deeply.",
+    Why: "You need to know which objectives are LOW, MED, or HIGH before touching random objects.",
+  },
+  {
+    Step: "2. Secure entry and exit",
+    "What To Do": "Open a window, low route, drawer route, or door path that can be reused.",
+    Why: "Carry tasks and rescue moments both need a route out.",
+  },
+  {
+    Step: "3. Finish LOW tasks first",
+    "What To Do": "Take the fastest checkmarks before the old man, enemies, or traps interrupt.",
+    Why: "Early progress makes the run safer even if later tasks go badly.",
+  },
+  {
+    Step: "4. Combine MED tasks on the same route",
+    "What To Do": "If the kitchen has a frying pan and kitchen steal task, do them together.",
+    Why: "Good task combinations save time and reduce extra room entries.",
+  },
+  {
+    Step: "5. Attempt one HIGH task at a time",
+    "What To Do": "Do not start rat, roach, shed key, firework, and material testing all at once.",
+    Why: "High-risk tasks stack badly and often create full-team wipes.",
+  },
+  {
+    Step: "6. Stop when the tornado warning appears",
+    "What To Do": "Take close or staged items only. Do not start a new far objective.",
+    Why: "A completed route is better than losing everything for one extra checkmark.",
+  },
+];
+
+export const commonTaskColumns = [
+  { key: "Task", label: "Task" },
+  { key: "Tier", label: "Tier" },
+  { key: "How To Approach It", label: "How To Approach It" },
+  { key: "Beginner Risk", label: "Beginner Risk" },
+];
+
+export const commonTaskRows = [
+  {
+    Task: "Open a window",
+    Tier: "LOW",
+    "How To Approach It":
+      "Do this early. It often creates both an entry route and an extraction route.",
+    "Beginner Risk": "Low, unless the window route leads straight into danger.",
+  },
+  {
+    Task: "Break any item",
+    Tier: "LOW",
+    "How To Approach It":
+      "Break a small nearby item when the team is ready to move. Do not make random noise before reading the list.",
+    "Beginner Risk": "Low to medium, depending on noise and old man position.",
+  },
+  {
+    Task: "Flush an item",
+    Tier: "LOW",
+    "How To Approach It":
+      "Carry a small item to a toilet, flush it, then leave the bathroom quickly.",
+    "Beginner Risk": "Low, but bathrooms can become trap rooms if the old man enters.",
+  },
+  {
+    Task: "Steal from a specific room",
+    Tier: "LOW / MED",
+    "How To Approach It":
+      "Confirm the room first, then carry a likely item out. Do not test objects from the wrong room.",
+    "Beginner Risk": "Medium if the room is far or crowded.",
+  },
+  {
+    Task: "Steal a pot",
+    Tier: "MED",
+    "How To Approach It":
+      "Move it in stages. Use a window or nearby exit instead of dragging it through the whole house.",
+    "Beginner Risk": "Medium because heavy carry routes collapse during chases.",
+  },
+  {
+    Task: "Steal a frying pan",
+    Tier: "MED",
+    "How To Approach It":
+      "Treat it like a heavy carry task. Open the route first, then move the pan in short stages.",
+    "Beginner Risk": "Medium because the kitchen is often a bad place to panic.",
+  },
+  {
+    Task: "Steal a metal can",
+    Tier: "MED",
+    "How To Approach It":
+      "Find the can, stage it near a window, and extract it when the path is clear.",
+    "Beginner Risk": "Medium if you keep carrying it during rescue or danger.",
+  },
+  {
+    Task: "Get Jonathan out of his hut",
+    Tier: "MED / HIGH",
+    "How To Approach It":
+      "Find the hut, trigger Jonathan, then guide the route without splitting the whole team.",
+    "Beginner Risk": "High if bees, traps, or outdoor hazards are active.",
+  },
+  {
+    Task: "Tase or stab a rat",
+    Tier: "HIGH",
+    "How To Approach It":
+      "Find the correct tool first, clear space, then attempt the task. Do not improvise with the wrong item.",
+    "Beginner Risk": "High because misses and panic movement create extra danger.",
+  },
+  {
+    Task: "Kill or stab a roach",
+    Tier: "HIGH",
+    "How To Approach It":
+      "Only do it if the roach blocks the route or the task requires it. Use the correct tool and a safe angle.",
+    "Beginner Risk": "High in tight spaces or during carry routes.",
+  },
+  {
+    Task: "Shed key / firework route",
+    Tier: "HIGH",
+    "How To Approach It":
+      "Find the key first, open the locked area, grab the target, and leave before the route becomes noisy.",
+    "Beginner Risk": "High because locked routes often waste time and split the team.",
+  },
+  {
+    Task: "Gather material",
+    Tier: "MED / HIGH",
+    "How To Approach It":
+      "Use confirmed material names, test likely object types, then verify through the task checkmark or Stockpile.",
+    "Beginner Risk": "High when the material source is not fully confirmed.",
+  },
+];
+
+export const comboColumns = [
+  { key: "Task Combination", label: "Task Combination" },
+  { key: "Why It Works", label: "Why It Works" },
+  { key: "Warning", label: "Warning" },
+];
+
+export const comboRows = [
+  {
+    "Task Combination": "Open window + carry objective",
+    "Why It Works":
+      "The window becomes both the entry route and the carry route for pots, frying pans, cans, or room items.",
+    Warning:
+      "Open the route before picking up the heavy item.",
+  },
+  {
+    "Task Combination": "Break item + room steal",
+    "Why It Works":
+      "If the target room has small breakable objects, one player can finish the break task while another identifies the steal target.",
+    Warning:
+      "Do not break objects before the team knows which room matters.",
+  },
+  {
+    "Task Combination": "Kitchen steal + frying pan / pot",
+    "Why It Works":
+      "Kitchen tasks often overlap with cookware carry objectives.",
+    Warning:
+      "The kitchen can become dangerous fast, so stage items near the closest exit.",
+  },
+  {
+    "Task Combination": "Jonathan + outdoor route",
+    "Why It Works":
+      "If the team already has an outdoor path, Jonathan can be handled while another player watches bees or traps.",
+    Warning:
+      "Do not send everyone outside if indoor tasks are still safe and close.",
+  },
+  {
+    "Task Combination": "Material task + nearby small objects",
+    "Why It Works":
+      "If likely material objects are already close to your route, test them while moving toward extraction.",
+    Warning:
+      "Do not turn a clean run into long material testing when the source is uncertain.",
+  },
+  {
+    "Task Combination": "Enemy task + tool already found",
+    "Why It Works":
+      "Rat or roach tasks become more reasonable after the correct tool is already in hand.",
+    Warning:
+      "Do not search the whole house for a weapon while LOW tasks remain unfinished.",
+  },
+];
+
+export const conflictColumns = [
+  { key: "Bad Combination", label: "Bad Combination" },
+  { key: "Why It Fails", label: "Why It Fails" },
+  { key: "Better Choice", label: "Better Choice" },
+];
+
+export const conflictRows = [
+  {
+    "Bad Combination": "Two HIGH tasks at the same time",
+    "Why It Fails":
+      "Rat, roach, locked-area, and uncertain material tasks all need tools, time, and attention.",
+    "Better Choice":
+      "Finish one HIGH task only after LOW tasks are already done.",
+  },
+  {
+    "Bad Combination": "Carry task during rescue",
+    "Why It Fails":
+      "Heavy items slow the rescuer and block clean interaction prompts.",
+    "Better Choice":
+      "Drop the item, rescue first, then return to the staged carry item.",
+  },
+  {
+    "Bad Combination": "Room-specific steal without confirming the room",
+    "Why It Fails":
+      "A similar object from the wrong room may not count.",
+    "Better Choice":
+      "Confirm the room name first, then carry the item out.",
+  },
+  {
+    "Bad Combination": "Outdoor task while tornado is close",
+    "Why It Fails":
+      "Outdoor routes can add bees, traps, and long travel time.",
+    "Better Choice":
+      "Extract with finished tasks unless the outdoor target is already beside the route.",
+  },
+  {
+    "Bad Combination": "Material testing while the old man is active",
+    "Why It Fails":
+      "Unconfirmed material routes cost time and create noise.",
+    "Better Choice":
+      "Finish a confirmed task or leave with staged progress.",
+  },
+];
+
+export const materialColumns = [
+  { key: "Material", label: "Material" },
+  { key: "Confirmed Status", label: "Confirmed Status" },
+  { key: "How To Test Safely", label: "How To Test Safely" },
+];
+
+export const materialRows = [
+  {
+    Material: "Plasto",
+    "Confirmed Status":
+      "Material name is confirmed in the Stockpile. Plastic-looking objects are the first pattern to test.",
+    "How To Test Safely":
+      "Try nearby plastic-looking items first, then verify through the task checkmark or Stockpile change.",
+  },
+  {
+    Material: "Clonk",
+    "Confirmed Status":
+      "Material name is confirmed in the Stockpile. Exact object mapping still needs clean run confirmation.",
+    "How To Test Safely":
+      "Start with metal-looking objects only if they are already close to your route.",
+  },
+  {
+    Material: "Fraggles",
+    "Confirmed Status":
+      "Material name is confirmed in the Stockpile, but source mapping should not be overclaimed yet.",
+    "How To Test Safely":
+      "Test likely fragment or break-related objects only after safer tasks are done.",
+  },
+  {
+    Material: "Grabble",
+    "Confirmed Status":
+      "Material name is confirmed in the Stockpile, but exact item sources need more reliable confirmation.",
+    "How To Test Safely":
+      "Treat it as a material route, not a first objective, unless the target object is obvious and nearby.",
+  },
+  {
+    Material: "Scrapling",
+    "Confirmed Status":
+      "Material name is confirmed in the Stockpile. Do not call it Scraggle in your notes or route plan.",
+    "How To Test Safely":
+      "Test scrap-like objects only when they do not pull the team away from safer tasks.",
+  },
+  {
+    Material: "Marble",
+    "Confirmed Status":
+      "Material name is confirmed in the Stockpile. It can also appear as a physical object type.",
+    "How To Test Safely":
+      "Use it only when the route is calm. Do not spend the final minute experimenting.",
+  },
+];
+
+export const routeColumns = [
+  { key: "Route Type", label: "Route Type" },
+  { key: "Best When", label: "Best When" },
+  { key: "Plan", label: "Plan" },
+];
+
+export const routeRows = [
+  {
+    "Route Type": "Fast clear route",
+    "Best When": "The list has 2–3 LOW tasks.",
+    Plan: "Open window, finish fast checks, stage one nearby item, then prepare to leave.",
+  },
+  {
+    "Route Type": "Carry route",
+    "Best When": "The list has pot, frying pan, metal can, jar, toy, or food tasks.",
+    Plan: "Open the exit first, move the item in stages, and stop carrying during rescue.",
+  },
+  {
+    "Route Type": "Room route",
+    "Best When": "The list names kids room, kitchen, dining room, bathroom, or hallway.",
+    Plan: "Confirm the room, choose one likely item, carry it out, and stop testing if it does not count.",
+  },
+  {
+    "Route Type": "Enemy route",
+    "Best When": "The list requires tasing, stabbing, killing, or fighting.",
+    Plan: "Find the correct tool first, clear space, attempt once, then leave if the fight gets messy.",
+  },
+  {
+    "Route Type": "Locked / outdoor route",
+    "Best When": "The list includes shed key, firework, Jonathan, garden, or outdoor objectives.",
+    Plan: "Send one scout first, keep one player near safety, and do not split the whole team outside.",
+  },
+  {
+    "Route Type": "Material route",
+    "Best When": "The list asks for Plasto, Clonk, Fraggles, Grabble, Scrapling, or Marble.",
+    Plan: "Use likely object types only, verify through task or Stockpile feedback, and avoid long blind testing.",
+  },
+];
+
+export const verdictColumns = [
+  { key: "Gnome Report Result", label: "Gnome Report Result" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Next Run Adjustment", label: "Next Run Adjustment" },
+];
+
+export const verdictRows = [
+  {
+    "Gnome Report Result": "Too few checkmarks",
+    "What It Means":
+      "The team spent too much time on loot, high-risk tasks, or wrong-room items.",
+    "Next Run Adjustment":
+      "Start with LOW tasks and confirm room names before carrying objects out.",
+  },
+  {
+    "Gnome Report Result": "One task wasted most of the run",
+    "What It Means":
+      "A HIGH task was attempted too early or without the right route/tool.",
+    "Next Run Adjustment":
+      "Move that task later, or skip it unless the required tool appears naturally.",
+  },
+  {
+    "Gnome Report Result": "Good tasks, bad extraction",
+    "What It Means":
+      "The team reached enough progress but stayed too long after the tornado warning.",
+    "Next Run Adjustment":
+      "Stage loot earlier and make a clear leave call.",
+  },
+  {
+    "Gnome Report Result": "Many rescues, low progress",
+    "What It Means":
+      "The team kept recovering mistakes instead of completing tasks.",
+    "Next Run Adjustment":
+      "Use quieter entry, fewer high-risk tasks, and one rescuer with one lookout.",
+  },
+  {
+    "Gnome Report Result": "Clean target, extra time left",
+    "What It Means":
+      "The route is stable enough to add one MED task or material test next run.",
+    "Next Run Adjustment":
+      "Add only one new risk at a time.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Doing room-specific steals from the wrong room",
+    "Why It Hurts":
+      "The item may look correct but fail to count because it came from the wrong room.",
+    Fix: "Confirm the room before carrying the object outside.",
+  },
+  {
+    Mistake: "Testing unconfirmed materials for too long",
+    "Why It Hurts":
+      "Material mapping can be unclear, and blind testing burns the run.",
+    Fix: "Test only likely objects near the route, then verify through task or Stockpile feedback.",
+  },
+  {
+    Mistake: "Stacking HIGH tasks",
+    "Why It Hurts":
+      "Enemy, locked-area, tool, and material tasks all create different failure points.",
+    Fix: "Attempt one HIGH task at a time after LOW tasks are done.",
+  },
+  {
+    Mistake: "Ignoring task combinations",
+    "Why It Hurts":
+      "The team repeats the same route instead of combining room steals, carry tasks, and staging.",
+    Fix: "Look for tasks that share the same room, exit, or item route.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Burglin' Gnomes**, sort tasks into three tiers before you move: **LOW** tasks are fast checkmarks like opening windows, breaking small items, or flushing objects; **MED** tasks include room steals, carry objectives, and Jonathan-style routes; **HIGH** tasks include enemies, locked areas, tool routes, and uncertain material tasks.
+
+Do LOW tasks first, combine MED tasks when they share a room or route, and attempt only one HIGH task at a time. If the tornado warning appears, stop starting new objectives and extract with whatever is already finished or staged.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Burglin' Gnomes. This tasks guide covers task tiers, LOW / MED / HIGH priority, Break TV, flush item, frying pan, pot, metal can, Jonathan, rat and roach tasks, material tasks, shed key and firework routes, task combinations, route templates, Gnome Report review, and task mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-first-task-list.webp"
+    alt="Burglin' Gnomes task list with objectives like steal from the kids room, flush an item, tase a rat, break items, and steal a pot"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The task list is not just a checklist. It tells you which objectives are safe, which need routing, and which can wipe the run.
+  </figcaption>
+</figure>
+
+<h2 id="burglin-gnomes-tasks-guide">
+  Burglin' Gnomes tasks guide
+</h2>
+
+**Burglin' Gnomes** tasks are not equal. Some tasks give fast progress with low risk. Some need a room route or carry plan. Some should wait until the team has tools, time, and a safe exit.
+
+The best task strategy is:
+
+<strong>Do LOW tasks first, combine MED tasks when possible, and never stack HIGH tasks before the route is stable.</strong>
+
+This guide focuses on task priority and practical completion routes. For first-run controls and basic survival, read the <Link href="/burglin-gnomes/beginner-guide">Beginner Guide</Link>. For enemy handling and rescue, use the <Link href="/burglin-gnomes/survival-enemies-guide">Survival and Enemies Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="task-tier-framework">
+  Task tier framework: LOW, MED, and HIGH
+</h2>
+
+Use this tier system before the run starts. It gives the team a simple way to decide what to do first.
+
+<GuideTable
+  caption="Burglin' Gnomes task priority tiers."
+  columns={tierColumns}
+  rows={tierRows}
+/>
+
+Do not confuse **task tier** with **execution order**. Tier means risk level. Execution order means what your team does during the run. A room steal can be LOW if it is beside your entry route, but MED if it forces the team across the house.
+
+This table is the task **risk tier**. The execution order below tells you how to move through a run after you know which tasks are LOW, MED, or HIGH.
+
+<h2 id="copy-paste-task-template">
+  Copy-paste task priority template
+</h2>
+
+Use this in Discord, Steam chat, or your group message before the run.
+
+```txt
+BURGLIN' GNOMES TASK PRIORITY
+
+LOW:
+- Open window
+- Break small item
+- Flush small item
+- Nearby room steal
+
+MED:
+- Carry pot / frying pan / metal can
+- Room-specific steal
+- Jonathan / outdoor route
+- Confirmed material task
+
+HIGH:
+- Rat / roach combat
+- Locked area / shed key / firework
+- Tool-required task
+- Unconfirmed material test
+
+RULES:
+- Do 2 LOW tasks before chasing HIGH tasks.
+- Combine MED tasks if they share the same room or exit.
+- Attempt only 1 HIGH task at a time.
+- Drop heavy items before rescue.
+- When tornado appears, no new tasks.
+```
+
+This template is intentionally short. During a run, players need a decision tool, not a lecture.
+
+<h2 id="execution-order">
+  Best task execution order
+</h2>
+
+Once your team has sorted the list into LOW, MED, and HIGH tasks, use this order.
+
+<GuideTable
+  caption="Burglin' Gnomes task execution order."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+The key is not to complete the list from top to bottom. The key is to complete the safest useful tasks before the run becomes noisy.
+
+<h2 id="common-tasks">
+  Common tasks and beginner risk
+</h2>
+
+Use this table when you need a quick read on what a task is asking you to do.
+
+<GuideTable
+  caption="Burglin' Gnomes common task risk table."
+  columns={commonTaskColumns}
+  rows={commonTaskRows}
+/>
+
+If two tasks are both available, take the one that gives progress with less movement, less noise, and fewer tool requirements.
+
+<h2 id="task-combinations">
+  Task combinations that save time
+</h2>
+
+Good Burglin' Gnomes routing is not just about avoiding danger. It is also about noticing when two objectives can share the same room, exit, or item route.
+
+<GuideTable
+  caption="Useful Burglin' Gnomes task combinations."
+  columns={comboColumns}
+  rows={comboRows}
+/>
+
+Combining tasks is strongest when the team has one safe exit route. If the team has no exit route yet, fix that before trying to be efficient.
+
+<h2 id="task-conflicts">
+  Task conflicts that ruin runs
+</h2>
+
+Some tasks look fine alone but become terrible when combined with another risky objective.
+
+<GuideTable
+  caption="Burglin' Gnomes task conflicts to avoid."
+  columns={conflictColumns}
+  rows={conflictRows}
+/>
+
+The main rule is simple: **do not let two HIGH tasks fight for the same minute.**
+
+<AdUnit placement="article_middle" />
+
+<h2 id="safe-entry-for-tasks">
+  Safe entry comes before task chasing
+</h2>
+
+Many tasks become easier once you have a reusable route. A window, drawer, low opening, or furniture path can become the difference between a clean carry task and a panic wipe.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-window-entry.webp"
+    alt="Burglin' Gnomes front door handle too high for a gnome, making a window route safer"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the door handle is too high, stop forcing it. Open a reusable route before you start heavy or risky tasks.
+  </figcaption>
+</figure>
+
+A safe task route should answer three questions:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>How do we enter?</li>
+  <li>Where does the task item leave?</li>
+  <li>Where do we go if the old man enters the room?</li>
+</ul>
+
+<h2 id="break-tv-task">
+  Break TV and break item tasks
+</h2>
+
+Break tasks are usually LOW if the object is close and the team is ready to move. They become risky when players break random objects before the route is known.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-break-tv-task.webp"
+    alt="Burglin' Gnomes task completed after breaking the television"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Break tasks are strong early checkmarks when the target is close and the team already knows where to go next.
+  </figcaption>
+</figure>
+
+For break tasks:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>choose a nearby object,</li>
+  <li>break it once the team is ready to move,</li>
+  <li>watch for old man pressure after the noise,</li>
+  <li>and leave the room instead of breaking extra items for no reason.</li>
+</ul>
+
+<h2 id="flush-item-task">
+  Flush item task
+</h2>
+
+Flush tasks are usually LOW because they can be finished with a small object and a bathroom route.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-flush-item-task.webp"
+    alt="Burglin' Gnomes flush an item down the toilet task completed"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use a small item for flush tasks. Do not drag a heavy object into a bathroom unless the task specifically requires it.
+  </figcaption>
+</figure>
+
+A clean flush route is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Find a small object near the bathroom route.</li>
+  <li>Carry it into the bathroom.</li>
+  <li>Use the toilet interaction.</li>
+  <li>Leave immediately after the checkmark.</li>
+</ol>
+
+Bathrooms can become trap rooms. If the old man enters, drop the item and escape.
+
+<h2 id="carry-objectives">
+  Pot, frying pan, metal can, and heavy carry tasks
+</h2>
+
+Carry tasks are MED because they are not always dangerous, but they become slow if you carry the item through the whole house without staging.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-steal-frying-pan-task.webp"
+    alt="Burglin' Gnomes frying pan task where the item is carried through a route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Move frying pans, pots, metal cans, and other heavy objects in stages instead of dragging them across the entire house.
+  </figcaption>
+</figure>
+
+For carry objectives:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>open the route before grabbing the item,</li>
+  <li>move the item to a halfway point,</li>
+  <li>drop it during rescue or danger,</li>
+  <li>then finish the carry after the route is clear.</li>
+</ul>
+
+If you are playing co-op, one player should carry while another opens windows, doors, or drawers ahead. The <Link href="/burglin-gnomes/co-op-guide">Co-op Guide</Link> covers that setup in more detail.
+
+<h2 id="jonathan-task">
+  Get Jonathan out of his hut
+</h2>
+
+Jonathan-style tasks are MED or HIGH depending on the route. If the hut is close and safe, the task can be simple. If bees, traps, or outdoor hazards are active, it becomes dangerous fast.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-jonathan-hut-task.webp"
+    alt="Burglin' Gnomes Jonathan hut task route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Jonathan tasks need route control. Do not send the whole team outside if indoor tasks are still safer.
+  </figcaption>
+</figure>
+
+For Jonathan:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>send one scout first,</li>
+  <li>confirm the hut route,</li>
+  <li>watch for bees or traps,</li>
+  <li>trigger the task,</li>
+  <li>then regroup instead of splitting the whole squad outside.</li>
+</ul>
+
+<h2 id="enemy-tasks">
+  Rat, roach, and enemy tasks
+</h2>
+
+Enemy tasks are HIGH because they require the correct tool, safe positioning, and calm movement. A rat or roach task is not automatically bad, but it should not be your first objective if easier checkmarks are available.
+
+For enemy tasks:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>find the correct tool first,</li>
+  <li>clear space before swinging, tasing, or stabbing,</li>
+  <li>avoid fighting while carrying heavy loot,</li>
+  <li>do not chase enemies into worse rooms,</li>
+  <li>and stop if the fight pulls the old man into the route.</li>
+</ul>
+
+If the enemy is not blocking the route and the task is not required yet, leave it for later.
+
+<h2 id="material-tasks">
+  Material tasks: confirm the source before trusting the route
+</h2>
+
+Material tasks need extra care. The Stockpile confirms material names such as **Fraggles**, **Grabble**, **Clonk**, **Plasto**, **Scrapling**, and **Marble**, but the exact object-to-material mapping should be verified through clean runs.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-stockpile-materials.webp"
+    alt="Burglin' Gnomes Stockpile menu showing Fraggles, Grabble, Clonk, Plasto, Scrapling, and Marble"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Stockpile confirms the material names, but material source routes still need careful in-run verification.
+  </figcaption>
+</figure>
+
+This section is deliberately conservative. Do not treat every material guess as confirmed until the task checkmark or Stockpile result supports it.
+
+<GuideTable
+  caption="Burglin' Gnomes material task verification."
+  columns={materialColumns}
+  rows={materialRows}
+/>
+
+For material tasks, use this rule:
+
+<strong>Test likely objects only when they are already close to your route.</strong>
+
+If the material is far, unclear, or unsafe, finish a confirmed task first.
+
+<h2 id="locked-area-shed-key-firework">
+  Shed key, firework, and locked-area tasks
+</h2>
+
+Locked-area tasks are HIGH because they add extra steps before the objective can even begin. You may need to find a key, open a shed, grab a target item, and return safely.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-shed-key-firework-task.webp"
+    alt="Burglin' Gnomes shed key and firework task route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Key and firework routes are worth doing only when the team has time, a safe path, and enough completed tasks already.
+  </figcaption>
+</figure>
+
+Use this route:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Confirm that the locked-area task is actually required.</li>
+  <li>Find the key before sending multiple players to the locked area.</li>
+  <li>Open the route.</li>
+  <li>Grab the target item.</li>
+  <li>Leave before outdoor danger or tornado timing ruins the run.</li>
+</ol>
+
+Do not start this route if the team still has easy indoor tasks unfinished.
+
+<h2 id="task-route-templates">
+  Task route templates
+</h2>
+
+Use these route templates when the task list looks messy.
+
+<GuideTable
+  caption="Burglin' Gnomes task route templates."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+Pick one route style at a time. A team trying to run a carry route, enemy route, locked-area route, and material route all at once will usually lose control.
+
+<h2 id="tornado-extraction">
+  Tornado extraction and task cutoff
+</h2>
+
+The tornado warning is the cutoff point for task chasing. After it appears, do not start new tasks unless the final objective is directly beside your extraction route.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-tornado-extraction.webp"
+    alt="Burglin' Gnomes out of time warning telling players to get to the tornado"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The tornado warning is the moment to stop task testing and cash in what is already completed or staged.
+  </figcaption>
+</figure>
+
+Leave immediately if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>the next task is in another room,</li>
+  <li>the required tool has not been found,</li>
+  <li>the old man blocks the route,</li>
+  <li>the item is not staged,</li>
+  <li>or the task requires an outdoor or locked-area detour.</li>
+</ul>
+
+<h2 id="gnome-report">
+  Use the Gnome Report to improve the next task route
+</h2>
+
+The Gnome Report shows which tasks were completed and which objectives cost too much time. Use it to improve your next route instead of guessing.
+
+<figure className="my-8">
+  <Image
+    src="/images/burglin-gnomes/burglin-gnomes-high-gnome-verdict.webp"
+    alt="Burglin' Gnomes Gnome Report showing completed tasks and the High-Gnome's Verdict bar"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use the report to identify whether your team failed because of task choice, routing, rescue, or extraction timing.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How to read the Burglin' Gnomes Gnome Report after a task run."
+  columns={verdictColumns}
+  rows={verdictRows}
+/>
+
+If the same task keeps ruining the run, move it to HIGH and stop starting with it.
+
+<h2 id="task-mistakes">
+  Task mistakes to avoid
+</h2>
+
+These are the task-specific mistakes that are not always obvious from a single objective route.
+
+<GuideTable
+  caption="Burglin' Gnomes task mistakes and fixes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is not failing a task. The biggest mistake is failing the same task the same way on the next run.
+
+<h2 id="faq">
+  Burglin' Gnomes tasks FAQ
+</h2>
+
+### What task should I do first?
+
+Start with a LOW task: open a window, break a small item, flush a small item, or steal from a nearby confirmed room.
+
+### Are all tasks required?
+
+No. The task list can contain more objectives than you safely complete in one run. Prioritize the safest checkmarks first and use the Gnome Report to judge the result.
+
+### What are LOW tasks?
+
+LOW tasks are fast objectives with low movement and low tool requirements, such as opening a window, breaking a small nearby object, flushing a small item, or stealing from a nearby room.
+
+### What are HIGH tasks?
+
+HIGH tasks require tools, combat, locked areas, outdoor routes, or uncertain material testing. Rat, roach, shed key, firework, and unclear material tasks usually belong here.
+
+### Should I do rat or roach tasks early?
+
+Only if you already have the correct tool and safe space. If easier tasks are available, finish those first.
+
+### How do I know if a room-specific steal will count?
+
+Use the task wording. If it says kids room, kitchen, dining room, bathroom, or hallway, confirm the room before carrying the object out.
+
+### How should I handle material tasks?
+
+Use confirmed Stockpile names, test likely object types only when they are near your route, and verify through task or Stockpile feedback. Do not overcommit to unconfirmed material routes.
+
+### When should I skip a task?
+
+Skip or delay a task when it needs a missing tool, a locked route, an unsafe outdoor path, a far carry item, or long material testing while the tornado warning is close.
+
+### What if my task list has no obvious LOW tasks?
+
+Create a LOW route first. Open a window, secure an exit, confirm the closest room, and choose the task with the fewest tool, enemy, or outdoor requirements. If every task looks risky, start with the one that is closest to your entry route.

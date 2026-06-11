@@ -12,6 +12,53 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Burglin' Gnomes =====
+{
+  href: "/burglin-gnomes",
+  game: "Burglin' Gnomes",
+  title: "Guide Hub: Tasks, Co-op, Materials & Tips",
+  description:
+    "Start here for Burglin' Gnomes beginner routes, task tiers, old man survival, co-op roles, Plasto, Clonk, upgrades, and tornado escape.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Burglin' Gnomes =====
+{
+  href: "/burglin-gnomes/beginner-guide",
+  game: "Burglin' Gnomes",
+  title: "Beginner Guide, Controls, Tasks & First Runs",
+  description:
+    "Learn Burglin' Gnomes controls, crown target, safe window entry, noise, fridge rescue, CPR, upgrades, and when to leave before wipes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Burglin' Gnomes =====
+{
+  href: "/burglin-gnomes/tasks-guide",
+  game: "Burglin' Gnomes",
+  title: "Tasks Guide, Priority Tiers & Routes",
+  description:
+    "Plan Burglin' Gnomes tasks by LOW/MED/HIGH tiers, route Break TV, flush, Jonathan, materials, shed key, and avoid bad combos.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Burglin' Gnomes =====
+{
+  href: "/burglin-gnomes/survival-enemies-guide",
+  game: "Burglin' Gnomes",
+  title: "Survival Guide, Enemies, Guns & Rescue",
+  description:
+    "Survive the old man, gun routes, evil gnomes, Roomba, floor hazards, fridge rescue, CPR, tools, traps, and tornado escape.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
 // ===== Voidling Bound =====
 {
   href: "/voidling-bound",
