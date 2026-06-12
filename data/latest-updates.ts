@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Fears to Fathom - Scratch Creek =====
+{
+  href: "/fears-to-fathom-scratch-creek",
+  game: "Fears to Fathom - Scratch Creek",
+  title: "Guide Hub, Walkthrough, Ending & Achievements",
+  description:
+  "Start here for Scratch Creek walkthrough, co-op route, trailer setup, Miss Julia's parsonage, ending escape, Cow Clicker, and all achievements.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+  },
+  
+  // ===== Fears to Fathom - Scratch Creek =====
+  {
+  href: "/fears-to-fathom-scratch-creek/walkthrough",
+  game: "Fears to Fathom - Scratch Creek",
+  title: "Full Walkthrough & Co-op Route Guide",
+  description:
+  "Follow Marcus and Tessa from moving out, trailer setup, GPS driving, fallen-tree stop, gas station, parsonage, Henry, and final escape.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+  },
+  
+  // ===== Fears to Fathom - Scratch Creek =====
+  {
+  href: "/fears-to-fathom-scratch-creek/ending-guide",
+  game: "Fears to Fathom - Scratch Creek",
+  title: "Ending Guide, Trailer Unhook & Final Escape",
+  description:
+  "Fix the Scratch Creek ending, unhook the trailer, solve the hitch prompt, split co-op roles, avoid failed escapes, and understand the ending.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+  },
+  
+  // ===== Fears to Fathom - Scratch Creek =====
+  {
+  href: "/fears-to-fathom-scratch-creek/achievements-guide",
+  game: "Fears to Fathom - Scratch Creek",
+  title: "All Achievements Guide & Hidden Unlocks",
+  description:
+  "Unlock all 10 Scratch Creek achievements, including Holy Cow, Down in the Dark, Eavesdropper, Come In, The Drifter, and Out of Sight.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+  },
+  
 // ===== Burglin' Gnomes =====
 {
   href: "/burglin-gnomes",

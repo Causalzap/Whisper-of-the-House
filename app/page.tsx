@@ -138,7 +138,8 @@ const allGameGuides = [
   { title: 'Solarpunk™', href: '/solarpunk'},
   { title: 'Voidling Bound', href: '/voidling-bound'},
   { title: 'Burglin\' Gnomes', href: '/burglin-gnomes'},
-
+  { title: 'Fears to Fathom - Scratch Creek', href: '/fears-to-fathom-scratch-creek'},
+  
 ];
 
 const exploreCards = [
