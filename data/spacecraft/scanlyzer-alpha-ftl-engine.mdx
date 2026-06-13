@@ -1,0 +1,807 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const unlockRouteColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Goal", label: "Goal" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Common Blocker", label: "Common Blocker" },
+];
+
+export const unlockRouteRows = [
+  {
+    Step: "0",
+    Goal: "Unlock Modular Systems permit",
+    "What To Do":
+      "Open Knowledge when the route offers it and buy Modular Systems as early as possible. It opens the module/Shipyard path and the first ship-blueprint route.",
+    "Common Blocker":
+      "If the permit is not visible yet, follow the current objective until the Knowledge menu offers it, then buy it before chasing more module crafts.",
+  },
+  {
+    Step: "1",
+    Goal: "Craft Scanalyzer Alpha",
+    "What To Do":
+      "Return to Babylon, use the Smelter and Workshop, then craft Scanalyzer Alpha from early Copper/Iron-based parts.",
+    "Common Blocker":
+      "Missing Wire, Nuts and Bolts, Small Module Kit, or enough credits for station machine fees.",
+  },
+  {
+    Step: "2",
+    Goal: "Install Scanalyzer Alpha",
+    "What To Do":
+      "Open the Shipyard, load your ship, place Scanalyzer Alpha on the hull, and confirm the edit.",
+    "Common Blocker":
+      "The module is crafted but still sitting in inventory, so Solar Alpha 2 objectives do not progress correctly.",
+  },
+  {
+    Step: "3",
+    Goal: "Find Gray Quartz",
+    "What To Do":
+      "Fly to Solar Alpha 2, use radar near the High Peak area, scan the dark crystal-like Gray Quartz, then mine it.",
+    "Common Blocker":
+      "Scanalyzer Alpha is not installed, or you try to mine the unknown crystal before scanning it.",
+  },
+  {
+    Step: "4",
+    Goal: "Find Gravite",
+    "What To Do":
+      "Follow the approximate radar direction, slow down, visually locate the Gravite target, then scan it.",
+    "Common Blocker":
+      "Waiting for a perfect radar marker. Gravite only gives a direction and must be found visually.",
+  },
+  {
+    Step: "5",
+    Goal: "Buy Silicon Gel",
+    "What To Do":
+      "Use the Company Exchanger, sell enough value for the objective, then buy 10 Silicon Gel.",
+    "Common Blocker":
+      "Selling Quartz or Copper too aggressively before checking the next recipe.",
+  },
+  {
+    Step: "6",
+    Goal: "Unlock Electromagnetism",
+    "What To Do":
+      "Open Knowledge and buy Electromagnetism when the FTL route asks for it.",
+    "Common Blocker":
+      "Not enough credits after repairs, station fees, or unnecessary purchases.",
+  },
+  {
+    Step: "7",
+    Goal: "Craft FTL Engine - Eco",
+    "What To Do":
+      "Craft the required Small Module Kit, Crystalline Focuser, Wire, and Silicon Gel path in the Workshop.",
+    "Common Blocker":
+      "Missing Wire, Crystalline Focuser, or enough Quartz/Copper to finish the chain.",
+  },
+  {
+    Step: "8",
+    Goal: "Install FTL Engine - Eco",
+    "What To Do":
+      "Use the Shipyard, place FTL Engine - Eco into a valid ship slot, and confirm the edit.",
+    "Common Blocker":
+      "FTL Engine - Eco is crafted but not installed, so the ship still cannot jump.",
+  },
+  {
+    Step: "9",
+    Goal: "Refill Magnetic Plasma",
+    "What To Do":
+      "Board or access your ship at the station/dock prompt and fill Magnetic Plasma before taking off.",
+    "Common Blocker":
+      "The engine is installed, but the ship still has no Magnetic Plasma for the jump.",
+  },
+];
+
+export const materialColumns = [
+  { key: "Item", label: "Item" },
+  { key: "Confirmed Requirement / Role", label: "Confirmed Requirement / Role" },
+  { key: "Where To Get It", label: "Where To Get It" },
+  { key: "Important Note", label: "Important Note" },
+];
+
+export const materialRows = [
+  {
+    Item: "Modular Systems permit",
+    "Confirmed Requirement / Role":
+      "Knowledge unlock tied to the early ship-module path.",
+    "Where To Get It":
+      "Open the Knowledge menu when the route offers it and buy the permit.",
+    "Important Note":
+      "Prioritize it as soon as it is available because it unlocks the real module/Shipyard progression path.",
+  },
+  {
+    Item: "Scanalyzer Alpha",
+    "Confirmed Requirement / Role":
+      "First scanning module for Solar Alpha 2 resource progression.",
+    "Where To Get It":
+      "Craft it in the Workshop at Babylon after processing Copper and Iron into early parts.",
+    "Important Note":
+      "Crafting is not enough. Install it in the Shipyard before leaving for Solar Alpha 2.",
+  },
+  {
+    Item: "Gray Quartz",
+    "Confirmed Requirement / Role":
+      "Needed for Crystalline Focuser and the FTL route.",
+    "Where To Get It":
+      "Solar Alpha 2 after Scanalyzer Alpha is installed.",
+    "Important Note":
+      "Scan the dark crystal-like resource near the High Peak route before mining it.",
+  },
+  {
+    Item: "Crystalline Focuser",
+    "Confirmed Requirement / Role":
+      "Current build examples confirm 1 Gray Quartz plus Wire for each Crystalline Focuser.",
+    "Where To Get It":
+      "Craft it in the Workshop after bringing Gray Quartz back to the station.",
+    "Important Note":
+      "The Quartz blocker is obvious, but Wire is the part players often run out of. Check the Workshop count before leaving Babylon again.",
+  },
+  {
+    Item: "Wire",
+    "Confirmed Requirement / Role":
+      "FTL Engine - Eco recipe shows Wire as a direct ingredient, and Wire also feeds other parts in the chain.",
+    "Where To Get It":
+      "Process Copper into the required crafting chain at the station.",
+    "Important Note":
+      "If the FTL route feels stuck after Quartz, you are probably short on Copper or Wire.",
+  },
+  {
+    Item: "Small Module Kit",
+    "Confirmed Requirement / Role":
+      "Direct ingredient for FTL Engine - Eco and several early modules.",
+    "Where To Get It":
+      "Craft from basic Copper/Iron-derived parts in the Workshop.",
+    "Important Note":
+      "Do not leave the station after making only the Focuser. The engine still needs a module kit.",
+  },
+  {
+    Item: "Silicon Gel",
+    "Confirmed Requirement / Role":
+      "FTL Engine - Eco recipe shows Silicon Gel as a direct ingredient.",
+    "Where To Get It":
+      "Buy 10 Silicon Gel from the Company Exchanger during the trading objective.",
+    "Important Note":
+      "Before selling resources, check the active objective and the FTL recipe so you do not sell the next blocker.",
+  },
+  {
+    Item: "Electromagnetism permit",
+    "Confirmed Requirement / Role":
+      "Knowledge unlock required before FTL Engine - Eco can be crafted.",
+    "Where To Get It":
+      "Open Knowledge after the Silicon Gel step and buy Electromagnetism.",
+    "Important Note":
+      "Save credits for this. Repairs, station fees, and extra purchases can delay the unlock.",
+  },
+  {
+    Item: "FTL Engine - Eco",
+    "Confirmed Requirement / Role":
+      "Current recipe shows 1 Small Module Kit, 1 Crystalline Focuser, Wire, and Silicon Gel.",
+    "Where To Get It":
+      "Craft it in the Workshop after Electromagnetism is unlocked.",
+    "Important Note":
+      "Install it in the Shipyard after crafting. A crafted engine in inventory does not make the ship FTL-ready.",
+  },
+  {
+    Item: "Magnetic Plasma",
+    "Confirmed Requirement / Role":
+      "Fuel gate for the first FTL jump after the engine is installed.",
+    "Where To Get It":
+      "Use the station ship/dock prompt to fill Magnetic Plasma before taking off.",
+    "Important Note":
+      "In the current build example, the fill prompt costs 40 credits. Keep enough money before leaving the station.",
+  },
+];
+
+export const stuckColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Likely Cause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const stuckRows = [
+  {
+    Problem: "I cannot find the Scanalyzer Alpha recipe.",
+    "Likely Cause":
+      "Modular Systems or the current Knowledge objective has not been handled yet.",
+    Fix:
+      "Open Knowledge, check Modular Systems, and follow the active objective until the early module blueprints become available.",
+  },
+  {
+    Problem: "I crafted Scanalyzer Alpha but Gray Quartz still does not work.",
+    "Likely Cause":
+      "Scanalyzer Alpha is still in inventory or the Shipyard edit was not confirmed.",
+    Fix:
+      "Return to the Shipyard, place the module on the ship, and confirm the edit.",
+  },
+  {
+    Problem: "I found the dark crystal but cannot mine it.",
+    "Likely Cause":
+      "The Gray Quartz has not been scanned, or you are not close enough to the valid node.",
+    Fix:
+      "Use Scanalyzer Alpha first, wait for identification, then mine the confirmed Gray Quartz node.",
+  },
+  {
+    Problem: "I cannot find Gravite.",
+    "Likely Cause":
+      "You are treating it like a normal radar marker.",
+    Fix:
+      "Follow the approximate direction, slow down, and search visually. Gravite does not give a perfect pinpoint marker.",
+  },
+  {
+  Problem: "I sold Quartz and now the FTL route is blocked.",
+  "Likely Cause":
+    "Crystalline Focuser needs Gray Quartz, and the same route can still need Wire after Quartz is solved.",
+  Fix:
+    "Return to Solar Alpha 2, scan and mine more Gray Quartz, then also bring enough Copper or Wire before going back to the Workshop. If this is your second Quartz trip, fix the Wire shortage at the same time.",
+},
+  {
+    Problem: "Crystalline Focuser is still blocked after getting Quartz.",
+    "Likely Cause":
+      "The Quartz requirement is solved, but the Wire requirement is still missing.",
+    Fix:
+      "Process more Copper into Wire. In current examples, each Focuser needs 1 Gray Quartz plus Wire.",
+  },
+  {
+    Problem: "FTL Engine - Eco is visible but cannot be crafted.",
+    "Likely Cause":
+      "Electromagnetism is not unlocked, or you are missing Small Module Kit, Crystalline Focuser, Wire, or Silicon Gel.",
+    Fix:
+      "Buy Electromagnetism in Knowledge, then check each direct ingredient in the Workshop.",
+  },
+  {
+    Problem: "I crafted FTL Engine - Eco but still cannot jump.",
+    "Likely Cause":
+      "The engine is not installed, or Magnetic Plasma is empty.",
+    Fix:
+      "Install the engine in the Shipyard, confirm the edit, then fill Magnetic Plasma at the station ship/dock prompt.",
+  },
+  {
+    Problem: "I cannot afford Magnetic Plasma.",
+    "Likely Cause":
+      "Credits were spent on repairs, permits, or extra crafting before the fuel step.",
+    Fix:
+      "Sell a small amount of spare processed material, then return to the dock and fill Magnetic Plasma. Keep this as a fuel cost, not an optional step.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Ignoring Modular Systems",
+    "Why It Hurts":
+      "The early module route depends on the Knowledge and permit path, not just raw materials.",
+    "Better Move":
+      "Check Knowledge as soon as the objective mentions Modular Systems and buy it when available.",
+  },
+  {
+    Mistake: "Leaving Babylon with Scanalyzer Alpha still in inventory",
+    "Why It Hurts":
+      "Solar Alpha 2 resource steps expect the module to be installed on the ship.",
+    "Better Move":
+      "Install Scanalyzer Alpha in the Shipyard and confirm before taking off.",
+  },
+  {
+    Mistake: "Selling too much Gray Quartz",
+    "Why It Hurts":
+      "Crystalline Focuser needs Quartz, and later laser upgrades can pull you back into the same resource.",
+    "Better Move":
+      "Craft the Focuser first, then decide what Quartz is safe to sell.",
+  },
+  {
+    Mistake: "Underestimating Wire",
+    "Why It Hurts":
+      "Wire appears in the Focuser and FTL chain, so Quartz alone does not finish the route.",
+    "Better Move":
+      "Bring extra Copper or make extra Wire before committing to the final craft.",
+  },
+  {
+    Mistake: "Repairing every scratch before paying for FTL progress",
+    "Why It Hurts":
+      "Early credits are also needed for Electromagnetism, Silicon Gel, station fees, and Magnetic Plasma.",
+    "Better Move":
+      "Repair when needed, but keep enough credits for the current FTL step.",
+  },
+  {
+    Mistake: "Trying to mine Gravite like normal ore",
+    "Why It Hurts":
+      "Gravite is a scan/progression target with approximate radar behavior.",
+    "Better Move":
+      "Follow the direction, visually locate it, then scan it instead of waiting for a perfect marker.",
+  },
+  {
+    Mistake: "Taking off after installing FTL without filling plasma",
+    "Why It Hurts":
+      "The engine is installed, but the ship still cannot make the jump if Magnetic Plasma is empty.",
+    "Better Move":
+      "Use the station ship/dock prompt and fill Magnetic Plasma before leaving.",
+  },
+];
+
+export const finalCheckColumns = [
+  { key: "Check", label: "Check" },
+  { key: "Ready State", label: "Ready State" },
+  { key: "If Not Ready", label: "If Not Ready" },
+];
+
+export const finalCheckRows = [
+  {
+    Check: "Modular Systems",
+    "Ready State": "The early module/Shipyard route is unlocked or the active objective has advanced past it.",
+    "If Not Ready":
+      "Open Knowledge and buy Modular Systems when available.",
+  },
+  {
+    Check: "Scanalyzer Alpha",
+    "Ready State": "Crafted, installed on the ship, and confirmed in the Shipyard.",
+    "If Not Ready":
+      "Return to Babylon Shipyard and confirm the module edit.",
+  },
+  {
+    Check: "Gray Quartz",
+    "Ready State": "Scanned and mined from Solar Alpha 2.",
+    "If Not Ready":
+      "Go back to the High Peak route and use Scanalyzer Alpha before mining.",
+  },
+  {
+    Check: "Crystalline Focuser",
+    "Ready State": "Crafted from Gray Quartz plus Wire in the Workshop.",
+    "If Not Ready":
+      "Get more Quartz or process more Copper into Wire.",
+  },
+  {
+    Check: "Electromagnetism",
+    "Ready State": "Unlocked in Knowledge.",
+    "If Not Ready":
+      "Save credits and buy the permit before crafting FTL Engine - Eco.",
+  },
+  {
+    Check: "FTL Engine - Eco",
+    "Ready State": "Crafted, placed on the ship, and confirmed in the Shipyard.",
+    "If Not Ready":
+      "Check Small Module Kit, Crystalline Focuser, Wire, and Silicon Gel.",
+  },
+  {
+    Check: "Magnetic Plasma",
+    "Ready State": "Filled at the station before takeoff.",
+    "If Not Ready":
+      "Return to the ship/dock prompt and fill it. Current build examples show a 40-credit fill prompt.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **SpaceCraft**, the FTL route is: unlock **Modular Systems** when Knowledge offers it, craft and install **Scanalyzer Alpha**, scan **Gray Quartz** on Solar Alpha 2, scan **Gravite**, buy **10 Silicon Gel**, unlock **Electromagnetism**, craft and install **FTL Engine - Eco**, then fill **Magnetic Plasma** at the station before jumping.
+
+Most players get stuck because a module was crafted but not installed, Crystalline Focuser still needs Wire after Quartz, or Magnetic Plasma was never filled.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the SpaceCraft Early Access launch build. Recipe values, permit costs, and Magnetic Plasma prices are current-build examples and may change during Early Access.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-scanlyzer-alpha-recipe.webp"
+    alt="SpaceCraft Scanalyzer Alpha recipe in the Workshop"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scanalyzer Alpha starts the FTL route, but it only works after the module is installed on your ship.
+  </figcaption>
+</figure>
+
+<h2 id="scanlyzer-alpha-ftl-engine-guide">
+  SpaceCraft Scanalyzer Alpha and FTL Engine guide
+</h2>
+
+The first FTL route in SpaceCraft is not one craft. It is a chain of permits, modules, scanning, trading, and ship editing.
+
+The clean route is:
+
+<GuideTable
+  caption="SpaceCraft Scanalyzer Alpha and FTL Engine - Eco unlock route."
+  columns={unlockRouteColumns}
+  rows={unlockRouteRows}
+/>
+
+If you are still learning the opening mining route, read the <Link href="/spacecraft/beginner-guide">SpaceCraft Beginner Guide</Link> first. This page focuses only on the Scanalyzer Alpha, Gray Quartz, Gravite, Electromagnetism, FTL Engine - Eco, and Magnetic Plasma chain.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="modular-systems-permit">
+  Step 0: check Modular Systems permit
+</h2>
+
+Before treating the FTL route as a normal crafting problem, check the **Knowledge** menu.
+
+The early module route points you toward **Modular Systems**. This permit matters because it is tied to the Shipyard and blueprint path that makes early module progression work.
+
+Use this rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>If Knowledge offers **Modular Systems**, buy it as early as you can.</li>
+  <li>If the permit is not available yet, follow the current onboarding objective until it appears.</li>
+  <li>If the Workshop or Shipyard route feels empty, check Knowledge before assuming you are missing ore.</li>
+</ul>
+
+This prevents the most confusing early problem: having materials but not having the correct permit or blueprint path unlocked.
+
+<h2 id="craft-scanalyzer-alpha">
+  Craft Scanalyzer Alpha
+</h2>
+
+After your first Copper and Iron trip, return to Babylon and use the station machines. The chain usually goes through Copper into Wire, Iron into basic parts, and then into the Small Module Kit path.
+
+If Scanalyzer Alpha is not craftable, do not leave the station immediately. Check the subcomponents first:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Do you have enough Copper processed into Wire?</li>
+  <li>Do you have enough Iron processed into Nuts and Bolts or basic parts?</li>
+  <li>Do you have the Small Module Kit ready?</li>
+  <li>Did you unlock the required permit or blueprint path in Knowledge?</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-scanlyzer-alpha-recipe.webp"
+    alt="SpaceCraft Scanalyzer Alpha Workshop recipe"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If Scanalyzer Alpha is blocked, check Wire and basic metal parts before flying away for random resources.
+  </figcaption>
+</figure>
+
+<h2 id="install-scanalyzer-alpha">
+  Install Scanalyzer Alpha in the Shipyard
+</h2>
+
+Crafting Scanalyzer Alpha is only half the step.
+
+Open the Shipyard, load your ship, edit the ship, place Scanalyzer Alpha onto a valid hull slot, and confirm the change. If the module remains in your inventory, Solar Alpha 2 will still feel broken because the ship does not actually have the scanner equipped.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-install-scanlyzer-shipyard.webp"
+    alt="SpaceCraft installing Scanalyzer Alpha on the ship in the Shipyard"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Shipyard confirm step matters. Installed modules count; inventory modules do not.
+  </figcaption>
+</figure>
+
+<h2 id="gray-quartz">
+  Find Gray Quartz on Solar Alpha 2
+</h2>
+
+After Scanalyzer Alpha is installed, fly to **Solar Alpha 2** and look for the **High Peak** route. Gray Quartz appears as a dark, crystal-like resource near the high landmark area.
+
+The sequence is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Use radar near Solar Alpha 2.</li>
+  <li>Approach the High Peak area.</li>
+  <li>Find the dark crystal-like Gray Quartz node.</li>
+  <li>Scan it with Scanalyzer Alpha.</li>
+  <li>Mine enough Gray Quartz for the Crystalline Focuser and FTL route.</li>
+</ol>
+
+Do not sell all of it after the trade step. Quartz can come back again through Crystalline Focuser and mining laser upgrade paths.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-solar-alpha-2-gray-quartz.webp"
+    alt="SpaceCraft Gray Quartz on Solar Alpha 2"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gray Quartz is the resource bridge between Scanalyzer Alpha and FTL Engine - Eco.
+  </figcaption>
+</figure>
+
+<h2 id="crystalline-focuser">
+  Craft Crystalline Focuser
+</h2>
+
+The **Crystalline Focuser** is the most common hidden blocker in the FTL route.
+
+In current build examples, each Crystalline Focuser uses **1 Gray Quartz plus Wire**. The Quartz part is easy to notice because it sends you back to Solar Alpha 2. The Wire part is easier to miss because it sends you back into Copper processing.
+
+Before leaving Babylon again, check the Workshop recipe and make sure you have:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>at least 1 Gray Quartz for the Focuser,</li>
+  <li>enough Copper processed into Wire,</li>
+  <li>and enough spare Wire left for FTL Engine - Eco itself.</li>
+</ul>
+
+If the Focuser is still blocked after you brought Quartz back, the missing part is usually Wire. Mine more Copper, process it, and return to the Workshop.
+
+<h2 id="find-gravite">
+  Find and scan Gravite
+</h2>
+
+Gravite does not behave like Copper, Iron, or Gray Quartz.
+
+Its radio properties interfere with radar, so the ship gives you an approximate direction instead of a perfect marker. That means the correct method is to follow the direction, slow down, and search the terrain visually.
+
+Use this pattern:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Track the Gravite objective.</li>
+  <li>Use radar for the general direction.</li>
+  <li>Slow down once the signal gets stronger.</li>
+  <li>Look for the target visually.</li>
+  <li>Scan it to complete the objective.</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-gravite-radar-search.webp"
+    alt="SpaceCraft Gravite radar direction and visual search"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gravite is not a broken marker. It is a visual-search objective with approximate radar direction.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="buy-silicon-gel">
+  Buy Silicon Gel from the Company Exchanger
+</h2>
+
+After the Solar Alpha 2 objectives, return to Babylon and use the **Company Exchanger**. The early trading step asks you to sell enough value, then buy **10 Silicon Gel**.
+
+Before selling, check the active objective and the next Workshop recipe. You need credits, but you also need enough materials left to finish Crystalline Focuser, Wire, Small Module Kit, and FTL Engine - Eco.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-company-exchanger-silicon-gel.webp"
+    alt="SpaceCraft Company Exchanger buying Silicon Gel for the FTL route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Silicon Gel step is a trade check, not a reason to empty every useful material from your cargo.
+  </figcaption>
+</figure>
+
+<h2 id="unlock-electromagnetism">
+  Unlock Electromagnetism
+</h2>
+
+After buying Silicon Gel, open Knowledge and unlock **Electromagnetism** when the route asks for it. This is the permit gate before **FTL Engine - Eco**.
+
+If Electromagnetism is visible but you cannot buy it, the problem is usually credits. Avoid spending all your money on repairs or optional purchases before the FTL craft is complete.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-electromagnetism-permit.webp"
+    alt="SpaceCraft Electromagnetism permit unlock for FTL Engine Eco"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Electromagnetism is the final Knowledge gate before the FTL Engine - Eco craft.
+  </figcaption>
+</figure>
+
+<h2 id="craft-ftl-engine-eco">
+  Craft FTL Engine - Eco
+</h2>
+
+Once Electromagnetism is unlocked, go back to the Workshop and craft **FTL Engine - Eco**.
+
+In the current build example, the FTL Engine - Eco recipe shows:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>1 Small Module Kit</strong>,</li>
+  <li><strong>1 Crystalline Focuser</strong>,</li>
+  <li><strong>Wire</strong>,</li>
+  <li><strong>Silicon Gel</strong>.</li>
+</ul>
+
+The common trap is thinking Quartz alone solves the recipe. It does not. Quartz becomes the Focuser, but the engine still needs Wire and other module parts.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-ftl-engine-eco-recipe.webp"
+    alt="SpaceCraft FTL Engine Eco recipe with Small Module Kit Crystalline Focuser Wire and Silicon Gel"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    FTL Engine - Eco combines the whole route: module parts, Crystalline Focuser, Wire, and Silicon Gel.
+  </figcaption>
+</figure>
+
+<h2 id="install-ftl-engine">
+  Install FTL Engine - Eco
+</h2>
+
+Crafting the engine does not make the ship jump-ready. Install it through the Shipyard.
+
+The install path is the same logic as Scanalyzer Alpha:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Open the Shipyard.</li>
+  <li>Load your ship.</li>
+  <li>Edit the ship.</li>
+  <li>Place FTL Engine - Eco into a valid slot.</li>
+  <li>Confirm the ship edit.</li>
+</ol>
+
+If you craft the engine and leave it in inventory, the next travel step will still fail.
+
+<h2 id="refill-magnetic-plasma">
+  Refill Magnetic Plasma before jumping
+</h2>
+
+After FTL Engine - Eco is installed, you still need **Magnetic Plasma**.
+
+Use the station ship or dock prompt before taking off. In current build examples, the game asks you to fill Magnetic Plasma before departure, and the fill prompt can cost **40 credits**. If you cannot afford it, sell a small amount of spare processed material, return to the dock, and fill the plasma.
+
+This is the last common FTL blocker:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>FTL Engine - Eco crafted? Good, but not enough.</li>
+  <li>FTL Engine - Eco installed? Good, but still not enough.</li>
+  <li>Magnetic Plasma filled? Now the ship can actually make the jump.</li>
+</ul>
+
+<h2 id="final-ftl-checklist">
+  Final FTL checklist
+</h2>
+
+Before leaving the station, run through this checklist.
+
+<GuideTable
+  caption="Final checklist before the first SpaceCraft FTL jump."
+  columns={finalCheckColumns}
+  rows={finalCheckRows}
+/>
+
+
+<h2 id="what-happens-after-ftl">
+  What happens after the first FTL jump?
+</h2>
+
+After the first successful jump, the game points you toward **RakMu** and the wider route out of the starter system.
+
+The next goals are no longer only about FTL. You will start seeing:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>ship upgrade choices from Bob,</li>
+  <li>Mining Bureau resource tasks,</li>
+  <li>Noviciate and corporation progression,</li>
+  <li>better cargo and detector needs,</li>
+  <li>and eventually base-building automation.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-rakmu-orientation-clerk.webp"
+    alt="SpaceCraft RakMu station orientation clerk after FTL travel"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After the FTL route, RakMu becomes your next hub for ship upgrades, resources, Noviciate progression, and later base planning.
+  </figcaption>
+</figure>
+
+<h2 id="materials-table">
+  Materials, permits, and fuel in the FTL route
+</h2>
+
+Use this table as a **stuck lookup**, not as another route walkthrough. If the Workshop, Knowledge menu, Shipyard, or dock prompt says one specific item is missing, jump to that row and check what unlocks it, where it comes from, and what players usually forget.
+
+<GuideTable
+  caption="SpaceCraft FTL route materials, permits, and fuel blockers."
+  columns={materialColumns}
+  rows={materialRows}
+/>
+
+<h2 id="stuck-fixes">
+  FTL route stuck fixes
+</h2>
+
+<GuideTable
+  caption="Common SpaceCraft Scanalyzer Alpha and FTL problems."
+  columns={stuckColumns}
+  rows={stuckRows}
+/>
+
+<h2 id="mistakes">
+  Mistakes to avoid on the FTL route
+</h2>
+
+<GuideTable
+  caption="Common mistakes before unlocking FTL in SpaceCraft."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  SpaceCraft Scanalyzer Alpha and FTL FAQ
+</h2>
+
+### How do I unlock Scanalyzer Alpha in SpaceCraft?
+
+Follow the early Copper and Iron route, check the Knowledge menu for Modular Systems when the objective offers it, then craft Scanalyzer Alpha in the Workshop at Babylon.
+
+### What does Modular Systems permit do?
+
+Modular Systems is tied to the early ship-module and Shipyard progression path. Buy it as soon as Knowledge offers it so the first module route does not stall.
+
+### Why can’t I find the Scanalyzer Alpha recipe?
+
+Check the active objective and Knowledge menu. If Modular Systems or the current permit path is not handled yet, the Workshop/Shipyard route may not show what you expect.
+
+### Why is Scanalyzer Alpha not working?
+
+It is probably crafted but not installed. Return to the Shipyard, place Scanalyzer Alpha on the ship, and confirm the edit.
+
+### Where do I find Gray Quartz?
+
+Go to Solar Alpha 2 after installing Scanalyzer Alpha. Use radar near the High Peak route, scan the dark crystal-like Gray Quartz, then mine it.
+
+### What does Crystalline Focuser require?
+
+In current build examples, each Crystalline Focuser requires 1 Gray Quartz plus Wire. If you have Quartz but the craft is still blocked, process more Copper into Wire and check the Workshop count.
+
+### Why can’t I craft FTL Engine - Eco?
+
+Check four things: Electromagnetism must be unlocked, and the recipe needs Small Module Kit, Crystalline Focuser, Wire, and Silicon Gel.
+
+### Where do I buy Silicon Gel?
+
+Buy Silicon Gel from the Company Exchanger during the trade step. The early route asks you to buy 10.
+
+### How do I unlock Electromagnetism?
+
+Open Knowledge after the Silicon Gel step and buy Electromagnetism when the FTL route asks for it.
+
+### Why can’t I find Gravite?
+
+Gravite gives an approximate radar direction, not a perfect marker. Follow the direction, slow down, and search visually.
+
+### Do I need to mine Gravite?
+
+For the early route, treat Gravite as a scan/progression target. Follow the objective text instead of treating it like normal ore.
+
+### Why can’t I jump after installing FTL Engine - Eco?
+
+The engine must be installed and Magnetic Plasma must be filled. Use the station ship/dock prompt to fill Magnetic Plasma before taking off.
+
+### Where do I refill Magnetic Plasma?
+
+Use the station ship or dock prompt before departure. In the current build example, filling Magnetic Plasma costs 40 credits.
+
+### What should I do after the first FTL jump?
+
+Follow the route toward RakMu. Talk to the clerk, then use Bob for ship upgrades, Ingrid for Noviciate, and the Mining Bureau for resource work.

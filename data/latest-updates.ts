@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== SpaceCraft =====
+{
+  href: "/spacecraft",
+  game: "SpaceCraft",
+  title: "First 10 Hours Guide, FTL, Resources & Base",
+  description:
+    "Start here for SpaceCraft beginner route, Scanalyzer Alpha, FTL Engine, Magnetic Plasma, Mining Bureau, ship upgrades, and first base automation.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
+// ===== SpaceCraft =====
+{
+  href: "/spacecraft/beginner-guide",
+  game: "SpaceCraft",
+  title: "Beginner Guide & First Route",
+  description:
+    "Follow the first SpaceCraft route through Copper, Iron, Scanalyzer Alpha, Gray Quartz, Gravite, Silicon Gel, FTL, Magnetic Plasma, and RakMu.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
+// ===== SpaceCraft =====
+{
+  href: "/spacecraft/scanlyzer-alpha-ftl-engine",
+  game: "SpaceCraft",
+  title: "Scanalyzer Alpha & FTL Guide",
+  description:
+    "Fix Scanalyzer Alpha, find Gray Quartz and Gravite, craft Crystalline Focuser, unlock Electromagnetism, install FTL Engine, and refill Magnetic Plasma.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
+// ===== SpaceCraft =====
+{
+  href: "/spacecraft/resources-locations",
+  game: "SpaceCraft",
+  title: "Resources, Mining Bureau & Deposits Guide",
+  description:
+    "Find Copper, Iron, Gray Quartz, Gravite, B-Carbon, Silicate, Pyrite, Mining Bureau coordinates, deposits, tool gates, and refining choices.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+},
+
 // ===== Fears to Fathom - Scratch Creek =====
 {
   href: "/fears-to-fathom-scratch-creek",

@@ -1,0 +1,907 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const baseRouteColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Goal", label: "Goal" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const baseRouteRows = [
+  {
+    Step: "1",
+    Goal: "Unlock Personal Factory",
+    "What To Do":
+      "Progress until the Personal Factory branch appears, then prepare the Construction Tool and early base items.",
+    "Why It Matters":
+      "This is where SpaceCraft starts shifting from station crafting into your own production setup.",
+  },
+  {
+    Step: "2",
+    Goal: "Prepare the first base kit",
+    "What To Do":
+      "Get the Construction Tool, Base Core Drive, Base Deploy Kit, and the first building recipes you need.",
+    "Why It Matters":
+      "You need the base core before Extractors, Smelters, Pylons, and Drone Routes become a real loop.",
+  },
+  {
+    Step: "3",
+    Goal: "Choose a usable deposit",
+    "What To Do":
+      "Find an unclaimed Iron or Copper deposit before placing the Base Core Drive.",
+    "Why It Matters":
+      "SpaceCraft is online, so nearby starter deposits can be crowded or already claimed.",
+  },
+  {
+    Step: "4",
+    Goal: "Place the Base Core Drive",
+    "What To Do":
+      "Place the Base Core Drive near the deposit you want to automate.",
+    "Why It Matters":
+      "The core claims the base area, gives you the first power foundation, and anchors your build.",
+  },
+  {
+    Step: "5",
+    Goal: "Build Extractor, Smelter, and Pylon",
+    "What To Do":
+      "Place the Extractor on the deposit, place a Smelter nearby, then connect power with a Pylon.",
+    "Why It Matters":
+      "This is the first working automation loop: raw ore into ingots.",
+  },
+  {
+    Step: "6",
+    Goal: "Select the Smelter input",
+    "What To Do":
+      "Open the Smelter and choose the correct input, such as Iron Ore.",
+    "Why It Matters":
+      "A connected Smelter still does nothing if no recipe or input is selected.",
+  },
+  {
+    Step: "7",
+    Goal: "Create the first Drone Route",
+    "What To Do":
+      "Craft a Drone if the route tool asks for one, then create a route between buildings.",
+    "Why It Matters":
+      "Drones are the first step away from manual hauling inside your base.",
+  },
+];
+
+export const siteChoiceColumns = [
+  { key: "Resource", label: "Resource" },
+  { key: "Best Base Stage", label: "Best Base Stage" },
+  { key: "Why Use It", label: "Why Use It" },
+  { key: "Site Advice", label: "Site Advice" },
+];
+
+export const siteChoiceRows = [
+  {
+    Resource: "Iron",
+    "Best Base Stage": "First base",
+    "Why Use It":
+      "Iron feeds ingots, structural parts, early modules, and base expansion.",
+    "Site Advice":
+      "Best first-base target if you want a simple Extractor-to-Smelter loop.",
+  },
+  {
+    Resource: "Copper",
+    "Best Base Stage": "First base",
+    "Why Use It":
+      "Copper feeds Wire, coils, detectors, and repeated module chains.",
+    "Site Advice":
+      "Strong first-base target if Wire keeps blocking your upgrades.",
+  },
+  {
+    Resource: "Coal / Carbon",
+    "Best Base Stage": "Early expansion",
+    "Why Use It":
+      "Carbon-style resources become more important once Mining Bureau and production needs expand.",
+    "Site Advice":
+      "Good second-site target once Iron or Copper production is stable.",
+  },
+  {
+    Resource: "Quartz",
+    "Best Base Stage": "Second-stage base",
+    "Why Use It":
+      "Quartz supports Crystalline Focuser and mining laser upgrade paths.",
+    "Site Advice":
+      "Do not make it your first base unless you already have stable metal production.",
+  },
+  {
+    Resource: "Gravite",
+    "Best Base Stage": "Later scouting / special route",
+    "Why Use It":
+      "Gravite is more about special progression and resource scouting than first-base ingot production.",
+    "Site Advice":
+      "Mark useful locations, but do not force your first automation loop around it.",
+  },
+];
+
+export const scanFlowColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Action", label: "Action" },
+  { key: "What To Look For", label: "What To Look For" },
+];
+
+export const scanFlowRows = [
+  {
+    Step: "1",
+    Action: "Scan from orbit or high altitude",
+    "What To Look For":
+      "Resource icons, unknown markers, and planets that look worth checking before you commit to landing.",
+  },
+  {
+    Step: "2",
+    Action: "Open the map",
+    "What To Look For":
+      "Compare known points, resource markers, possible claimed areas, and the distance from busy starter routes.",
+  },
+  {
+    Step: "3",
+    Action: "Fly low over the planet",
+    "What To Look For":
+      "Confirm whether the marker is a real deposit, a loose resource, or an area another player already built around.",
+  },
+  {
+    Step: "4",
+    Action: "Check for claim or build blockers",
+    "What To Look For":
+      "Existing base objects, blocked build areas, claim indicators, or crowded player structures.",
+  },
+  {
+    Step: "5",
+    Action: "Place only after confirmation",
+    "What To Look For":
+      "Build only after you know the deposit supports the first Extractor loop you want.",
+  },
+];
+
+export const powerColumns = [
+  { key: "Power Option", label: "Power Option" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "Best Use", label: "Best Use" },
+  { key: "Watch Out For", label: "Watch Out For" },
+];
+
+export const powerRows = [
+  {
+    "Power Option": "Base Core Drive",
+    "What It Does": "Starts the base and supplies the first power foundation.",
+    "Best Use": "Your first small loop: one Extractor, one Smelter, and a compact setup.",
+    "Watch Out For":
+      "Do not assume starter power can support a growing factory forever.",
+  },
+  {
+    "Power Option": "Solar Plant",
+    "What It Does":
+      "Converts electromagnetic radiation into electricity without fuel.",
+    "Best Use":
+      "Early stable power expansion on open planets with good exposure and enough placement room.",
+    "Watch Out For":
+      "The description notes correct orientation and space. Place it in an open spot and rotate or confirm placement carefully.",
+  },
+  {
+    "Power Option": "Generator-style power",
+    "What It Does":
+      "Use this only if your current build exposes a generator option in the base menu.",
+    "Best Use":
+      "Backup or non-solar support when solar placement, day cycle, or planet conditions make solar less reliable.",
+    "Watch Out For":
+      "Do not build your whole base plan around a power source until you have the recipe and fuel/input confirmed in your build.",
+  },
+  {
+    "Power Option": "Battery / storage support",
+    "What It Does":
+      "Helps smooth power demand once the base grows.",
+    "Best Use":
+      "After the first machines are running and energy consumption starts spiking.",
+    "Watch Out For":
+      "Power storage is not a replacement for enough generation.",
+  },
+];
+
+export const buildingColumns = [
+  { key: "Building", label: "Building" },
+  { key: "Function", label: "Function" },
+  { key: "Key Materials Shown", label: "Key Materials Shown" },
+  { key: "When To Use", label: "When To Use" },
+];
+
+export const buildingRows = [
+  {
+    Building: "Command Tower",
+    Function:
+      "Expands the base over Level 2 land and doubles the maximum footprint.",
+    "Key Materials Shown":
+      "Stainless Plate, Structural Beam, Magnetic Coil, Concrete",
+    "When To Use":
+      "Use when your first base starts hitting footprint limits.",
+  },
+  {
+    Building: "Extractor",
+    Function:
+      "Must be placed over a resource deposit and automatically extracts raw ore.",
+    "Key Materials Shown": "Motor, Concrete",
+    "When To Use":
+      "Core first automation building. Start here for ore production.",
+  },
+  {
+    Building: "Pylon",
+    Function:
+      "Connects the base power grid to other buildings through electric cables.",
+    "Key Materials Shown": "Magnetic Coil",
+    "When To Use":
+      "Use when machines are too far from the base or not powered.",
+  },
+  {
+    Building: "Solar Plant",
+    Function:
+      "Generates electricity without fuel, but needs correct orientation and space.",
+    "Key Materials Shown": "Structural Beam, Stainless Plate, Solar Cell",
+    "When To Use":
+      "First stable power expansion once starter base power is not enough.",
+  },
+  {
+    Building: "Smelter",
+    Function:
+      "Converts raw ore into industrial ingots automatically.",
+    "Key Materials Shown": "Stainless Plate, Concrete",
+    "When To Use":
+      "First ore-to-ingot automation step after the Extractor.",
+  },
+  {
+    Building: "Landing Pad",
+    Function:
+      "Lets ships dock at the base and connect to its distribution system.",
+    "Key Materials Shown": "Stainless Plate, Concrete",
+    "When To Use":
+      "Later logistics and base shipping. Do not rush it before the local loop works.",
+  },
+  {
+    Building: "Micro-Furnace",
+    Function:
+      "A smaller and faster ore-to-ingot refining accessory.",
+    "Key Materials Shown": "Stainless Plate, Concrete, Calcite",
+    "When To Use":
+      "Useful for compact refining setups once your first Smelter loop is stable.",
+  },
+  {
+    Building: "Warehouse",
+    Function:
+      "Stores solid materials and can be moved in or out by drones.",
+    "Key Materials Shown":
+      "Metal Sheet, Structural Beam, Stainless Plate, Concrete",
+    "When To Use":
+      "Use once drones and multiple routes start mattering.",
+  },
+  {
+    Building: "Assembler",
+    Function:
+      "Turns basic resources into industrial compounds continuously.",
+    "Key Materials Shown":
+      "Structural Beam, Stainless Plate, Concrete, Motor",
+    "When To Use":
+      "Next step after ore smelting when you want component production.",
+  },
+  {
+    Building: "Drone Dispatcher",
+    Function:
+      "Manages multiple drone routes and links them into production chains.",
+    "Key Materials Shown": "Metal Sheet, Stainless Plate",
+    "When To Use":
+      "Key building for drone-based automation once one route becomes several.",
+  },
+  {
+    Building: "Trading Box",
+    Function:
+      "Lets same-corporation players leave or take shared gifts.",
+    "Key Materials Shown": "Metal Sheet",
+    "When To Use":
+      "Corporation or co-op utility. Not needed for the first solo automation loop.",
+  },
+];
+
+export const baseStatsColumns = [
+  { key: "Stat", label: "Base Stat" },
+  { key: "Example Value Shown", label: "Example Value Shown" },
+  { key: "What It Means", label: "What It Means" },
+];
+
+export const baseStatsRows = [
+  {
+    Stat: "Footprint",
+    "Example Value Shown": "0 / 50, later 9 / 50 in the first base setup",
+    "What It Means":
+      "How much building space your base is using. Add buildings carefully before hitting the limit.",
+  },
+  {
+    Stat: "Decoration",
+    "Example Value Shown": "0 / 50",
+    "What It Means":
+      "A separate base limit shown in the terminal. It matters less than footprint early.",
+  },
+  {
+    Stat: "Energy Consumption",
+    "Example Value Shown": "0 / 50, later 28 / 50 with early machines",
+    "What It Means":
+      "How much of your available power the base is using.",
+  },
+  {
+    Stat: "Technology Experience",
+    "Example Value Shown": "0 / 400, later +1 / 400 progress",
+    "What It Means":
+      "Production can feed base technology progress. Treat early automation as progression, not only convenience.",
+  },
+];
+
+export const coopColumns = [
+  { key: "Role", label: "Co-op Role" },
+  { key: "What To Handle", label: "What To Handle" },
+  { key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const coopRows = [
+  {
+    Role: "Layout planner",
+    "What To Handle":
+      "Base Core placement, footprint use, building spacing, and future expansion room.",
+    "Why It Helps":
+      "Prevents the team from blocking Extractors, Pylons, and later Warehouse routes.",
+  },
+  {
+    Role: "Automation builder",
+    "What To Handle":
+      "Extractor, Smelter, input selection, Drone Routes, and production checks.",
+    "Why It Helps":
+      "Keeps the first ore-to-ingot loop working while others gather materials.",
+  },
+  {
+    Role: "Resource scout",
+    "What To Handle":
+      "Orbit scans, map checks, unclaimed deposits, Mining Bureau leads, and second-base targets.",
+    "Why It Helps":
+      "Stops the group from building on a weak or already crowded site.",
+  },
+  {
+    Role: "Logistics runner",
+    "What To Handle":
+      "Moving missing materials, crafting Drones, carrying Silicon Gel, Concrete, Motors, and module parts.",
+    "Why It Helps":
+      "Keeps the build moving when one missing ingredient would otherwise stop everyone.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Likely Cause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    Problem: "I cannot place an Extractor.",
+    "Likely Cause": "The blueprint is not directly over a valid resource deposit.",
+    Fix:
+      "Move the blueprint over the deposit until placement becomes valid. If another base already controls the area, find another deposit.",
+  },
+  {
+    Problem: "My Smelter is not producing ingots.",
+    "Likely Cause": "No input is selected, ore is not reaching it, or power is not connected.",
+    Fix:
+      "Select the correct ore input first, then check Pylon power and item movement.",
+  },
+  {
+    Problem: "The building is not powered.",
+    "Likely Cause": "It is not connected to the base power grid.",
+    Fix:
+      "Use a Pylon and cable connection. Check Energy Consumption in the base terminal afterward.",
+  },
+  {
+    Problem: "Add Route says it requires a Drone.",
+    "Likely Cause": "You are trying to create a route before crafting a Drone.",
+    Fix:
+      "Craft at least one Drone, then return to the building and create the route.",
+  },
+  {
+    Problem: "The base site is blocked or already taken.",
+    "Likely Cause": "Another player may have claimed the deposit or built too close to it.",
+    Fix:
+      "Use the map, fly farther from the starter station, scan low, and look for another unclaimed deposit.",
+  },
+  {
+    Problem: "Solar Plant does not feel reliable.",
+    "Likely Cause": "Placement, orientation, exposure, or local conditions may be weakening the setup.",
+    Fix:
+      "Place it in open space, rotate it carefully, and do not rely on one power source for a growing base.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Building on the first visible deposit near the starter route",
+    "Why It Hurts":
+      "Nearby deposits are more likely to be crowded, claimed, or awkward to expand around.",
+    "Better Move":
+      "Use the unclaimed deposit scan flow above before placing the Base Core Drive.",
+  },
+  {
+    Mistake: "Trying to build a huge base immediately",
+    "Why It Hurts":
+      "You hit footprint, power, storage, or material limits before the first production loop works.",
+    "Better Move":
+      "Start with one deposit, one Extractor, one Smelter, one power connection, and one route.",
+  },
+  {
+    Mistake: "Ignoring Quartz and Gravite as later base targets",
+    "Why It Hurts":
+      "You may plan only around Iron and Copper, then need advanced materials later.",
+    "Better Move":
+      "Use Iron or Copper first, then scout Quartz and special resources for later expansion.",
+  },
+  {
+    Mistake: "Forgetting to check base power numbers",
+    "Why It Hurts":
+      "A base can look built but stop scaling once Energy Consumption gets close to its limit.",
+    "Better Move":
+      "Use the base terminal before adding more Extractors, Smelters, or routes.",
+  },
+  {
+    Mistake: "Skipping role splits in co-op",
+    "Why It Hurts":
+      "Everyone mines randomly while layout, routes, power, and missing parts go unmanaged.",
+    "Better Move":
+      "Use the co-op role table in this guide before the group starts placing buildings.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **SpaceCraft**, start your first base small: find an **unclaimed Iron or Copper deposit**, place the **Base Core Drive**, build **Extractor → Smelter → Pylon**, select the **Smelter input**, then craft a **Drone** and create your first **Drone Route**.
+
+Do not start with a giant factory. Your first goal is a compact loop that can claim land, connect power, process ore, and move materials without constant hand-carrying.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the SpaceCraft Early Access launch build. Prices, material requirements, footprint, energy, and technology values below are based on current in-game screenshots and may change in future balance patches.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-personal-factory-unlock.webp"
+    alt="SpaceCraft Personal Factory unlock for first base building"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Personal Factory is the point where base building starts to matter. Do not rush a huge factory before the first loop works.
+  </figcaption>
+</figure>
+
+<h2 id="base-building-automation-guide">
+  SpaceCraft base building and automation guide
+</h2>
+
+Base building in SpaceCraft is not only a crafting menu. It is where the game starts turning into a production and logistics game.
+
+Your first base has one job:
+
+**turn a nearby resource deposit into useful ingots without making you carry every item by hand.**
+
+The clean first-base route is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>unlock Personal Factory,</li>
+  <li>get the Base Core Drive and Construction Tool,</li>
+  <li>find an unclaimed resource deposit,</li>
+  <li>place the Base Core Drive close enough to that deposit,</li>
+  <li>build an Extractor directly on the deposit,</li>
+  <li>place a Smelter nearby,</li>
+  <li>connect power with a Pylon,</li>
+  <li>select the Smelter input,</li>
+  <li>then craft a Drone and create a Drone Route.</li>
+</ul>
+
+This guide focuses on the first reliable automation loop. It does not pretend to be an endgame mega-factory layout.
+
+If you are still before FTL, read the <Link href="/spacecraft/scanlyzer-alpha-ftl-engine">Scanalyzer Alpha and FTL guide</Link>. If you need resources for base parts, use the <Link href="/spacecraft/resources-locations">Resources Guide</Link>.
+
+<GuideTable
+  caption="First base automation route in SpaceCraft."
+  columns={baseRouteColumns}
+  rows={baseRouteRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="when-base-building-starts">
+  When does base building start?
+</h2>
+
+Base building starts once **Personal Factory** and the first construction items become available.
+
+The first items to understand are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Construction Tool</strong>, used to place base items.</li>
+  <li><strong>Base Core Drive</strong>, used to claim a base area and supply power.</li>
+  <li><strong>Base Deploy Kit</strong>, used for the first base deployment path.</li>
+  <li><strong>Extractor</strong>, used to pull ore from a deposit.</li>
+  <li><strong>Smelter</strong>, used to turn ore into ingots.</li>
+  <li><strong>Pylon</strong>, used to connect buildings to the power grid.</li>
+</ul>
+
+In the shown build, the Base Core Drive appears in the Company Exchange for **499.99 credits** and explains that it can claim the surrounding area and supply the base with electric power. Treat this price as a current-build value and verify it in your own shop before planning exact spending.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-base-core-drive-description.webp"
+    alt="SpaceCraft Base Core Drive description showing claim area and electric power"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Base Core Drive is the first major base item. In this build, it appears at 499.99 credits, but Early Access values can change.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-base-components-list.webp"
+    alt="SpaceCraft Personal Factory list with Construction Tool Base Command Center Extractor Smelter Pylon Cable and Base Deploy Kit"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first base kit revolves around Construction Tool, Base Core, Extractor, Smelter, Pylon, Cable, and deploy items.
+  </figcaption>
+</figure>
+
+<h2 id="where-to-build-first-base">
+  Where should you build your first base?
+</h2>
+
+Pick your first site by resource value and buildability, not by scenery. **Iron** and **Copper** are the safest first-base anchors, while **Quartz** and **Gravite** are better treated as later scouting or expansion targets.
+
+<GuideTable
+  caption="Which resources are worth building around in SpaceCraft."
+  columns={siteChoiceColumns}
+  rows={siteChoiceRows}
+/>
+
+<h2 id="find-unclaimed-resource-deposit">
+  How to find an unclaimed resource deposit
+</h2>
+
+Because SpaceCraft is an online game, the easiest deposits near busy starter routes may already be claimed or crowded. If you try to place a base too close to another player's setup, you can waste time wondering why your plan does not work.
+
+Before placing the Base Core Drive, use a quick scan flow instead of trusting the first marker you see. The goal is to confirm three things: the deposit is real, the site is not already claimed, and the base can still fit a compact Extractor, Smelter, and Pylon setup.
+
+<GuideTable
+  caption="Practical scan flow for finding unclaimed first-base deposits."
+  columns={scanFlowColumns}
+  rows={scanFlowRows}
+/>
+
+Do not force your first base onto a crowded deposit. A slightly farther unclaimed Iron or Copper site is better than a nearby site you cannot automate.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-rotalis-mining-outpost-deposits.webp"
+    alt="SpaceCraft low-altitude scan showing Copper Deposits for a possible mining outpost"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fly low and confirm actual deposits before building. Loose rocks are useful, but Extractors need real deposits.
+  </figcaption>
+</figure>
+
+<h2 id="base-terminal-footprint-energy">
+  Check footprint, energy, and technology experience
+</h2>
+
+After placing the base, check the base terminal before expanding.
+
+In the current build screenshots, the terminal shows practical limits such as:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Footprint</strong>, such as 0 / 50 before building and 9 / 50 after early placement.</li>
+  <li><strong>Decoration</strong>, shown separately from footprint.</li>
+  <li><strong>Energy Consumption</strong>, such as 0 / 50 at first and 28 / 50 after early machines.</li>
+  <li><strong>Technology Experience</strong>, such as 0 / 400 or early progress toward the next threshold.</li>
+</ul>
+
+These numbers may change with balance patches, but the reading habit matters: check the terminal before adding more buildings.
+
+<GuideTable
+  caption="Base terminal numbers shown in the current build; values may change."
+  columns={baseStatsColumns}
+  rows={baseStatsRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-first-base-terminal-footprint-energy.webp"
+    alt="SpaceCraft first base terminal showing footprint energy consumption and technology experience"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check footprint and energy before scaling. A first base can hit practical limits long before it looks large.
+  </figcaption>
+</figure>
+
+<h2 id="power-sources">
+  Power sources: Base Core, Solar Plant, and backup options
+</h2>
+
+Your first power source is the **Base Core Drive**, but the base will eventually need more power if you keep adding machines and routes.
+
+The most important confirmed early power expansion is the **Solar Plant**. It generates electricity without fuel, but its description notes that it takes space and must be oriented correctly.
+
+That means you should place solar in open space and rotate or confirm placement carefully. Do not squeeze it into a cramped, blocked, or awkward spot and then assume the power system is broken.
+
+<GuideTable
+  caption="Early power options and when to use them."
+  columns={powerColumns}
+  rows={powerRows}
+/>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="extractor-smelter-pylon">
+  Build the first Extractor, Smelter, and Pylon loop
+</h2>
+
+The first working loop is simple:
+
+**deposit → Extractor → Smelter → ingots**
+
+Place the **Extractor** directly on the deposit. Then place the **Smelter** close enough to keep the first layout compact. Use a **Pylon** and cable connection to connect the machines to the base power grid.
+
+This is the first point where the base becomes useful. Do not add Warehouse, Assembler, Command Tower, or Landing Pad before this basic loop works.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-extractor-smelter-pylon-setup.webp"
+    alt="SpaceCraft first automation setup with Extractor Smelter and Pylon"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start with the simplest loop: an Extractor on the deposit, a nearby Smelter, and a Pylon connection.
+  </figcaption>
+</figure>
+
+<h2 id="smelter-input">
+  Select the Smelter input
+</h2>
+
+A Smelter can be placed, powered, and still do nothing if you never select the input.
+
+Open the Smelter and choose the correct ore input, such as **Iron Ore**. In the shown setup, the Iron Ingot recipe needs Iron Ore, so the Smelter input must match the ore your Extractor is producing.
+
+If the Smelter is idle, check the input before rebuilding the entire base.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-smelter-iron-ore-input.webp"
+    alt="SpaceCraft Smelter input selecting Iron Ore for Iron Ingot production"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Select the Smelter input before troubleshooting everything else. A connected Smelter still needs the right recipe.
+  </figcaption>
+</figure>
+
+<h2 id="drone-route">
+  Create your first Drone Route
+</h2>
+
+After the first machine loop is ready, the next step is logistics.
+
+If the route tool says **requires a Drone**, it means you need to craft a Drone before the route can run. This is not a bug in the route system.
+
+The basic drone flow is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Open the route interaction on the building.</li>
+  <li>If the route requires a Drone, craft one.</li>
+  <li>Return to the base.</li>
+  <li>Create the route between the source and target building.</li>
+  <li>Watch for the route-created confirmation.</li>
+</ol>
+
+Drones are how the first base stops being manual carrying and starts becoming automation.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-drone-route-requires-drone.webp"
+    alt="SpaceCraft route tool showing that a Drone is required"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the route tool asks for a Drone, craft one first. The base cannot route items without logistics support.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-drone-route-created.webp"
+    alt="SpaceCraft Drone route created between base buildings"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the Drone Route is created, your base can start moving materials between buildings instead of relying on hand-carrying.
+  </figcaption>
+</figure>
+
+<h2 id="base-buildings-explained">
+  Base buildings and materials explained
+</h2>
+
+The table below uses the current in-game building list as a practical reference. Treat material requirements as current-build values because SpaceCraft is still in Early Access.
+
+<GuideTable
+  caption="SpaceCraft base buildings, functions, materials, and timing; current-build values may change."
+  columns={buildingColumns}
+  rows={buildingRows}
+/>
+
+The early priority is still simple: **Base Core Drive, Extractor, Smelter, Pylon, then Drone Route**. Buildings such as Warehouse, Assembler, Drone Dispatcher, Command Tower, Landing Pad, Micro-Furnace, and Trading Box become more important after the first local loop works.
+
+<h2 id="co-op-base-roles">
+  Co-op base roles: how to split the work
+</h2>
+
+In co-op, the biggest mistake is having everyone mine randomly while no one owns the layout, power, or drone routes.
+
+A cleaner multiplayer base has roles:
+
+<GuideTable
+  caption="Recommended co-op roles for SpaceCraft base building."
+  columns={coopColumns}
+  rows={coopRows}
+/>
+
+If you are playing with friends, agree on the first target **before** placing the Base Core Drive. The most common co-op mistake is arguing after the core is already down, when the site, footprint, and first deposit choice are harder to change.
+
+For corporation play, the **Trading Box** becomes more useful later because it lets same-corporation players leave or take shared gifts. Do not build the first solo automation loop around it, but remember it when the base becomes a group project.
+
+<h2 id="troubleshooting">
+  Base building troubleshooting
+</h2>
+
+<GuideTable
+  caption="Common SpaceCraft base building problems and fixes."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+<h2 id="mistakes">
+  Base building mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common SpaceCraft base automation mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="automation-complete">
+  When is the first automation setup complete?
+</h2>
+
+Your first automation setup is complete when the base can do these things:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>hold a claimed build area,</li>
+  <li>power one Extractor and one Smelter,</li>
+  <li>turn one deposit into ingots,</li>
+  <li>move materials through at least one Drone Route,</li>
+  <li>and still have enough footprint and energy left for the next upgrade.</li>
+</ul>
+
+That last point is important. A setup is not really stable if it only works while maxing out footprint or power. Once the first route works, expand based on the next bottleneck: add power if energy is tight, add Warehouse if storage is messy, add Assembler when you need industrial compounds, and use Command Tower when footprint becomes the real limit.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-base-automation-tutorial-complete.webp"
+    alt="SpaceCraft base automation tutorial completed after first working route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the first route works, expand based on the next bottleneck: power, storage, assembly, footprint, or logistics.
+  </figcaption>
+</figure>
+
+<h2 id="faq">
+  SpaceCraft base building FAQ
+</h2>
+
+### When can I start base building in SpaceCraft?
+
+Base building starts once Personal Factory and the first base construction items become available. Your first key items are Construction Tool, Base Core Drive, Extractor, Smelter, Pylon, Cable, and Base Deploy Kit.
+
+### What does the Base Core Drive do?
+
+The Base Core Drive claims the surrounding area and supplies electric power to the base. In the shown build, it appears in the Company Exchange for 499.99 credits, but Early Access values can change.
+
+### Where should I build my first base?
+
+Build near an unclaimed Iron or Copper deposit. These resources feed the most useful early crafting and automation chains.
+
+### How do I find an unclaimed resource point?
+
+Scan from orbit, open the map, fly low over the marker, check whether another player has already claimed or built around the area, then place your Base Core Drive only after confirming the deposit is usable.
+
+### Should I build around Quartz?
+
+Quartz is useful, especially for Crystalline Focuser and later upgrade paths, but it is usually better as a second-stage base target after Iron or Copper production is stable.
+
+### Should I build around Gravite?
+
+Not for your first base. Gravite is more useful as a special scouting or progression resource than as the anchor for your first ore-to-ingot loop.
+
+### Why can’t I place an Extractor?
+
+Extractors must be placed directly over a valid resource deposit. If the deposit is already claimed or the blueprint is not aligned with the deposit, placement may fail.
+
+### Why is my Smelter not working?
+
+Check power, input, and material flow. The most common issue is forgetting to select the correct Smelter input, such as Iron Ore.
+
+### How do I connect buildings to power?
+
+Use a Pylon and cable connection to link the building back to the base power grid. Then check Energy Consumption in the base terminal.
+
+### How does Solar Plant orientation work?
+
+The Solar Plant description says it needs correct orientation and space. Place it in an open area, rotate it carefully during placement, and avoid cramped or blocked spots.
+
+### What should I do if base power consumption is too high?
+
+Check the base terminal. If Energy Consumption is close to the limit, add more power before adding more Extractors, Smelters, Warehouses, or routes.
+
+### Does Drone Route have a range limit?
+
+The exact range can vary by setup and current build, so do not assume one Drone can solve every distance problem. If a route fails or feels inefficient, shorten the route, add storage, or reorganize buildings before scaling.
+
+### Why does Add Route require a Drone?
+
+The route tool needs an actual Drone before the route can run. Craft a Drone first, then create the route again.
+
+### Can I unclaim or move a base?
+
+Do not rely on moving a base as your main plan unless you have confirmed the current patch’s base removal or relocation option. Before placing the Base Core Drive, assume the site choice matters and scout carefully.
+
+### Is Trading Box useful solo?
+
+Not early. Trading Box is mainly useful for corporation or co-op sharing. Solo players should focus first on Extractor, Smelter, Pylon, power, and Drone Routes.
+
+### What should co-op players do differently?
+
+Split roles. One player handles layout, one handles automation, one scouts unclaimed deposits, and one moves missing materials. This is cleaner than everyone mining randomly.

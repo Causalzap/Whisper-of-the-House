@@ -1,0 +1,766 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const routeColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Goal", label: "Goal" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const routeRows = [
+  {
+    Step: "1",
+    Goal: "Leave Babylon safely",
+    "What To Do":
+      "Board your ship, fly toward Solar Alpha 1, manage boost battery, and slow down before landing or docking.",
+    "Why It Matters":
+      "Crashes can damage the ship and repairs cost credits, so the first flight is also a money-management lesson.",
+  },
+  {
+    Step: "2",
+    Goal: "Mine Copper and Iron",
+    "What To Do":
+      "On Solar Alpha 1, look for Copper/Cupric and Iron/Ferric-style stones or outcrops, then mine the objective materials.",
+    "Why It Matters":
+      "Copper becomes Wire, while Iron becomes Nuts and Bolts and early module parts.",
+  },
+  {
+    Step: "3",
+    Goal: "Return to Babylon",
+    "What To Do":
+      "Dock at Babylon, use the station machines, and process raw ore into the parts needed for Scanalyzer Alpha.",
+    "Why It Matters":
+      "You cannot push the first exploration route forward without station crafting.",
+  },
+  {
+    Step: "4",
+    Goal: "Craft Scanalyzer Alpha",
+    "What To Do":
+      "Use the Smelter and Workshop to make the Small Module Kit, Wire, and parts needed for Scanalyzer Alpha.",
+    "Why It Matters":
+      "Scanalyzer Alpha unlocks the Gray Quartz step on Solar Alpha 2.",
+  },
+  {
+    Step: "5",
+    Goal: "Install Scanalyzer Alpha",
+    "What To Do":
+      "Open the Shipyard, load your ship, drag Scanalyzer Alpha onto the hull, and confirm the edit.",
+    "Why It Matters":
+      "A crafted module does nothing until it is installed on the ship.",
+  },
+  {
+    Step: "6",
+    Goal: "Find High Peak and Gray Quartz",
+    "What To Do":
+      "Go to Solar Alpha 2, use radar to find the High Peak landmark, scan the dark crystal-like Gray Quartz, then mine it.",
+    "Why It Matters":
+      "Gray Quartz feeds the Crystalline Focuser, which blocks FTL Engine - Eco.",
+  },
+  {
+    Step: "7",
+    Goal: "Find Gravite",
+    "What To Do":
+      "Follow the approximate radar direction, slow down, visually locate the Gravite deposit, then scan it.",
+    "Why It Matters":
+      "Gravite teaches you that some resources cannot be tracked with a perfect marker.",
+  },
+  {
+    Step: "8",
+    Goal: "Buy Silicon Gel",
+    "What To Do":
+      "Use the Company Exchanger to sell enough value and buy the Silicon Gel required by the FTL route.",
+    "Why It Matters":
+      "Silicon Gel is an easy blocker if you sell the wrong materials or spend all your credits.",
+  },
+  {
+    Step: "9",
+    Goal: "Craft and install FTL Engine - Eco",
+    "What To Do":
+      "Unlock Electromagnetism, craft FTL Engine - Eco, install it in the Shipyard, and confirm the ship edit.",
+    "Why It Matters":
+      "The engine must be installed before the first interstellar jump route works.",
+  },
+  {
+    Step: "10",
+    Goal: "Refill Magnetic Plasma and reach RakMu",
+    "What To Do":
+      "At the station ship/dock prompt, refill Magnetic Plasma, then use the galaxy map to jump toward RakMu.",
+    "Why It Matters":
+      "FTL Engine - Eco is not enough by itself. Magnetic Plasma is the fuel gate for the first jump.",
+  },
+];
+
+export const flightColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const flightRows = [
+  {
+    Situation: "Approaching a planet",
+    "What To Do":
+      "Slow down before you get close to terrain. Do not stay in full boost while diving toward the surface.",
+    "Why It Matters":
+      "A hard impact can damage the ship, and repair costs can make early crafting and fuel decisions harder.",
+  },
+  {
+    Situation: "Using boost",
+    "What To Do":
+      "Use boost to cross distance, then let the battery recover when you are no longer rushing.",
+    "Why It Matters":
+      "Boost drains battery, and stopping boost lets the ship recharge over time.",
+  },
+  {
+    Situation: "Flying low to scan",
+    "What To Do":
+      "Fly low enough for markers and scans to matter, but keep enough control to avoid overshooting landmarks.",
+    "Why It Matters":
+      "Gray Quartz, Gravite, and early resource markers are easier to miss if you fly too fast.",
+  },
+  {
+    Situation: "Docking",
+    "What To Do":
+      "Line up carefully and avoid bumping the station or terrain on the way in.",
+    "Why It Matters":
+      "Even small damage can create repair costs before you are rich enough to ignore them.",
+  },
+];
+
+export const resourceColumns = [
+  { key: "Resource", label: "Resource" },
+  { key: "Visual / Deposit Name", label: "Visual / Deposit Name" },
+  { key: "Early Location", label: "Early Location" },
+  { key: "Why You Need It", label: "Why You Need It" },
+];
+
+export const resourceRows = [
+  {
+    Resource: "Copper Ore",
+    "Visual / Deposit Name":
+      "Look for Copper or Cupric-style stones early; later you may also see brassy outcrop-style copper sources.",
+    "Early Location": "Solar Alpha 1 first mining route",
+    "Why You Need It":
+      "Copper becomes Wire, which is used in Scanalyzer Alpha, FTL parts, detectors, and repeated module chains.",
+  },
+  {
+    Resource: "Iron Ore",
+    "Visual / Deposit Name":
+      "Look for Iron, Ferric, or Ferrous-style stones and outcrops.",
+    "Early Location": "Solar Alpha 1 first mining route",
+    "Why You Need It":
+      "Iron feeds Nuts and Bolts, Small Module Kit, basic parts, and later base-building materials.",
+  },
+  {
+    Resource: "Gray Quartz",
+    "Visual / Deposit Name":
+      "Dark crystal-like resource near the High Peak route; scan it before mining.",
+    "Early Location": "Solar Alpha 2 after Scanalyzer Alpha is installed",
+    "Why You Need It":
+      "Gray Quartz feeds Crystalline Focuser and the FTL Engine - Eco route.",
+  },
+  {
+    Resource: "Gravite",
+    "Visual / Deposit Name":
+      "A special radar-interference target that must be located visually after following the approximate direction.",
+    "Early Location": "Solar Alpha 2 exploration objective",
+    "Why You Need It":
+      "Needed for early exploration progression and teaches the visual-search resource pattern.",
+  },
+  {
+    Resource: "Silicon Gel",
+    "Visual / Deposit Name":
+      "Purchased from the Company Exchanger during the early trading objective.",
+    "Early Location": "Babylon station Company Exchanger",
+    "Why You Need It":
+      "Required for FTL Engine - Eco and later early module recipes such as cargo upgrades.",
+  },
+  {
+    Resource: "Magnetic Plasma",
+    "Visual / Deposit Name":
+      "Station ship/dock refill resource used by FTL travel.",
+    "Early Location": "Refill at the station before jumping",
+    "Why You Need It":
+      "FTL Engine - Eco cannot carry you through the first jump route without plasma.",
+  },
+];
+
+export const craftingColumns = [
+  { key: "Crafting Target", label: "Crafting Target" },
+  { key: "Main Blocker", label: "Main Blocker" },
+  { key: "Where It Fits", label: "Where It Fits" },
+];
+
+export const craftingRows = [
+  {
+    "Crafting Target": "Wire",
+    "Main Blocker": "Copper",
+    "Where It Fits":
+      "Use Copper to make Wire before trying to finish Scanalyzer Alpha or later detector chains.",
+  },
+  {
+    "Crafting Target": "Nuts and Bolts",
+    "Main Blocker": "Iron",
+    "Where It Fits":
+      "Use Iron to make the basic parts that feed Small Module Kit and early module crafting.",
+  },
+  {
+    "Crafting Target": "Small Module Kit",
+    "Main Blocker": "Wire plus basic metal parts",
+    "Where It Fits":
+      "Needed for Scanalyzer Alpha, FTL chain items, and many early ship modules.",
+  },
+  {
+    "Crafting Target": "Scanalyzer Alpha",
+    "Main Blocker": "Small Module Kit and early electronic parts",
+    "Where It Fits":
+      "Craft it after the first Solar Alpha 1 mining trip, then install it before Solar Alpha 2.",
+  },
+  {
+    "Crafting Target": "Crystalline Focuser",
+    "Main Blocker": "Gray Quartz",
+    "Where It Fits":
+      "This is the key bridge between the Solar Alpha 2 resource step and FTL Engine - Eco.",
+  },
+  {
+    "Crafting Target": "FTL Engine - Eco",
+    "Main Blocker": "Crystalline Focuser, Wire, Silicon Gel, and module parts",
+    "Where It Fits":
+      "Craft it after Electromagnetism is unlocked, then install it in the Shipyard.",
+  },
+  {
+    "Crafting Target": "Magnetic Plasma refill",
+    "Main Blocker": "Credits",
+    "Where It Fits":
+      "Refill at the station before the first FTL jump. In the current build shown, the refill prompt can cost 40 credits.",
+  },
+];
+
+export const rakmuColumns = [
+  { key: "Who / System", label: "Who / System" },
+  { key: "What It Starts", label: "What It Starts" },
+  { key: "What To Do First", label: "What To Do First" },
+];
+
+export const rakmuRows = [
+  {
+    "Who / System": "RakMu Clerk",
+    "What It Starts": "Affiliate orientation missions after your first solo interstellar jumps.",
+    "What To Do First":
+      "Talk to the clerk after docking. The clerk points you toward Bob, Ingrid, and the Mining Bureau.",
+  },
+  {
+    "Who / System": "Bob, Dock Officer",
+    "What It Starts": "Ship improvement route: cargo space, resource detector, mining laser, and battery.",
+    "What To Do First":
+      "Use Bob as your ship-upgrade direction. Cargo space and detector upgrades are usually the most useful early choices.",
+  },
+  {
+    "Who / System": "Ingrid",
+    "What It Starts": "Noviciate test route, which leads toward corporation eligibility.",
+    "What To Do First":
+      "Talk to Ingrid after the clerk if you want the Noviciate path and eventual corporation access.",
+  },
+  {
+    "Who / System": "Mining Bureau",
+    "What It Starts": "Resource sample work, paid resource information, and coordinate buying.",
+    "What To Do First":
+      "Start the first protocol, then use it when you need Carbon, Silicate, Pyrite, or other targeted resources.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+  Mistake: "Treating repair costs as harmless",
+  "Why It Hurts":
+    "Early credits are also needed for Silicon Gel, Magnetic Plasma, and basic crafting, so avoid damage you can prevent.",
+  "Better Move":
+    "Repair only when needed, but fly carefully enough that repair costs do not delay the FTL route.",
+},
+  {
+    Mistake: "Mining everything you see on Solar Alpha 1",
+    "Why It Hurts":
+      "The starter cargo hold fills quickly, and forced drops can waste useful materials.",
+    "Better Move":
+      "Mine the objective Copper and Iron first, then take extras only if you still have room.",
+  },
+  {
+    Mistake: "Crafting Scanalyzer Alpha but not installing it",
+    "Why It Hurts":
+      "Solar Alpha 2 becomes confusing because Gray Quartz requires the installed module.",
+    "Better Move":
+      "Use the Shipyard, place the module on the hull, and confirm the edit.",
+  },
+  {
+    Mistake: "Selling too much Gray Quartz",
+    "Why It Hurts":
+      "Gray Quartz feeds Crystalline Focuser and later mining laser upgrade paths.",
+    "Better Move":
+      "Keep enough Quartz until FTL Engine - Eco is crafted and installed.",
+  },
+  {
+    Mistake: "Thinking Gravite has a perfect marker",
+    "Why It Hurts":
+      "The radar only gives an approximate direction, so you can fly in circles waiting for a precise point.",
+    "Better Move":
+      "Follow the direction, slow down, and visually search for the deposit.",
+  },
+  {
+    Mistake: "Installing FTL but forgetting Magnetic Plasma",
+    "Why It Hurts":
+      "The engine is ready, but the first jump still fails because the ship is not fueled for FTL travel.",
+    "Better Move":
+      "Return to the station ship/dock prompt and refill Magnetic Plasma before leaving.",
+  },
+  {
+    Mistake: "Stopping at RakMu without choosing the next path",
+    "Why It Hurts":
+      "RakMu opens several systems at once, and wandering between NPCs can waste time.",
+    "Better Move":
+      "Talk to the clerk first, then choose Bob for ship upgrades, Ingrid for Noviciate, or Mining Bureau for resources.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **SpaceCraft**, your first-hour route is: fly carefully to **Solar Alpha 1**, mine **Copper** and **Iron**, return to **Babylon**, craft and install **Scanalyzer Alpha**, go to **Solar Alpha 2**, find **High Peak**, scan and mine **Gray Quartz**, locate **Gravite**, buy **Silicon Gel**, craft and install **FTL Engine - Eco**, refill **Magnetic Plasma**, then jump toward **RakMu**.
+
+The biggest beginner traps are crashing the ship, overfilling cargo, crafting modules without installing them, selling too much Quartz, and forgetting Magnetic Plasma before the first FTL jump.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the SpaceCraft Early Access launch build. Some prices and objective values are current-build values and may change with Early Access updates.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-beginner-solar-alpha-1-entry.webp"
+    alt="SpaceCraft beginner route flying toward Solar Alpha 1"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Your first clean route starts with a careful flight to Solar Alpha 1, not with grabbing every rock you see.
+  </figcaption>
+</figure>
+
+<h2 id="spacecraft-beginner-guide">
+  SpaceCraft beginner guide
+</h2>
+
+SpaceCraft starts as a mining and ship-editing tutorial, but the first hour has several easy failure points. The game asks you to mine early resources, process them at Babylon, install your first scanning module, unlock FTL, and reach RakMu.
+
+The important part is not doing everything. The important part is doing the first route cleanly:
+
+<GuideTable
+  caption="SpaceCraft first-hour route from Babylon to RakMu."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="first-flight-controls">
+  First flight tips: slow down, manage battery, avoid repair costs
+</h2>
+
+Before mining anything, learn the first flight rule: **boost is for distance, not for landing**.
+
+When you approach a planet, landmark, or station, slow down early. Hitting terrain or bumping into objects can damage the ship, and repairs cost credits. That matters because the first hour also asks you to buy Silicon Gel, refill Magnetic Plasma, and keep enough money for basic crafting.
+
+<GuideTable
+  caption="First flight and ship control mistakes to avoid."
+  columns={flightColumns}
+  rows={flightRows}
+/>
+
+If the ship battery drains while boosting, stop boosting and give it time to recharge. Do not panic just because the battery drops during travel; the problem is continuing to boost when you should be scanning, landing, or docking.
+
+<h2 id="solar-alpha-1-copper-iron">
+  Solar Alpha 1: mine Copper and Iron
+</h2>
+
+Your first resource stop is **Solar Alpha 1**. The goal is to mine the Copper and Iron needed for early station crafting.
+
+Look for resource labels and node types such as:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Copper / Cupric stones</strong> for Copper Ore.</li>
+  <li><strong>Iron / Ferric stones</strong> for Iron Ore.</li>
+  <li><strong>Brassy or Ferrous-style outcrops</strong> later when the same resource family appears in larger surface nodes.</li>
+</ul>
+
+Copper and Iron are not just sell items. Copper becomes Wire, and Iron becomes parts such as Nuts and Bolts. Both feed the Scanalyzer Alpha route.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-solar-alpha-1-iron-copper.webp"
+    alt="SpaceCraft Solar Alpha 1 Copper and Iron mining route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar Alpha 1 teaches the first resource loop: identify Copper and Iron, mine only what matters, then return to Babylon.
+  </figcaption>
+</figure>
+
+<h2 id="return-to-babylon">
+  Return to Babylon and use the station machines
+</h2>
+
+After the first mining trip, return to Babylon and dock. The early station has the machines you need to process ore and craft ship modules.
+
+The important machines are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Company Exchanger</strong>, used for buying and selling resources.</li>
+  <li><strong>Smelter</strong>, used to process ore into usable materials.</li>
+  <li><strong>Workshop</strong>, used to craft parts and modules.</li>
+  <li><strong>Shipyard</strong>, used to install modules on your ship.</li>
+</ul>
+
+This is where the beginner route becomes a crafting chain instead of a simple mining objective.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-babylon-shipyard-machines.webp"
+    alt="SpaceCraft Babylon station machines including Company Exchanger Smelter Workshop and Shipyard"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Babylon’s station machines are your first crafting hub: sell carefully, smelt ore, craft modules, then install them in the Shipyard.
+  </figcaption>
+</figure>
+
+<h2 id="craft-scanalyzer-alpha">
+  Craft Scanalyzer Alpha
+</h2>
+
+Your first major ship module is **Scanalyzer Alpha**.
+
+To craft it, process your Copper and Iron into the required parts. The main blockers are usually Wire, Nuts and Bolts, and the Small Module Kit. If you cannot craft Scanalyzer Alpha yet, check the subcomponents instead of leaving the station immediately.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-scanlyzer-alpha-recipe.webp"
+    alt="SpaceCraft Scanalyzer Alpha recipe in the Workshop"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scanalyzer Alpha is the first module that changes what you can identify and mine on Solar Alpha 2.
+  </figcaption>
+</figure>
+
+<h2 id="install-scanalyzer-alpha">
+  Install Scanalyzer Alpha in the Shipyard
+</h2>
+
+Crafting Scanalyzer Alpha is not enough. You must install it.
+
+Open the Shipyard, load your ship, enter the editor, drag Scanalyzer Alpha from inventory onto the hull, and confirm the edit. If the module stays in your inventory, Solar Alpha 2 will not behave the way the objective expects.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-install-scanlyzer-shipyard.webp"
+    alt="SpaceCraft installing Scanalyzer Alpha in the Shipyard"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Install Scanalyzer Alpha before leaving Babylon. The Shipyard confirm step is easy to forget.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="solar-alpha-2-high-peak-gray-quartz">
+  Solar Alpha 2: find High Peak and mine Gray Quartz
+</h2>
+
+After Scanalyzer Alpha is installed, go to **Solar Alpha 2**. Your next goal is to find the **High Peak** landmark and scan **Gray Quartz**.
+
+Use radar near the surface and watch for the High Peak route. Gray Quartz appears as a dark, crystal-like resource near the high landmark area. You may find the node before you can mine it, but you still need to scan it with the installed module first.
+
+The common mistake is flying too fast past the landmark or trying to mine the unknown node before scanning it.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-solar-alpha-2-gray-quartz.webp"
+    alt="SpaceCraft Solar Alpha 2 Gray Quartz near the High Peak route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    On Solar Alpha 2, use radar to reach the High Peak area, scan the Gray Quartz, then mine enough for the FTL chain.
+  </figcaption>
+</figure>
+
+<h2 id="find-gravite">
+  Find Gravite with radar direction and visual search
+</h2>
+
+Gravite is different from normal Copper or Iron. Its radio properties interfere with precise tracking, so radar gives you an approximate direction rather than a perfect location.
+
+Use this pattern:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Track the Gravite objective.</li>
+  <li>Use radar to get the general direction.</li>
+  <li>Slow down as the signal improves.</li>
+  <li>Search visually instead of waiting for a perfect marker.</li>
+  <li>Scan the Gravite once you find it.</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-gravite-radar-search.webp"
+    alt="SpaceCraft Gravite radar search on Solar Alpha 2"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gravite is a visual-search lesson. Follow the direction, slow down, and look for the deposit yourself.
+  </figcaption>
+</figure>
+
+<h2 id="company-exchanger-silicon-gel">
+  Use the Company Exchanger to buy Silicon Gel
+</h2>
+
+The FTL route needs **Silicon Gel**, and the early trading objective sends you to the **Company Exchanger**.
+
+The safe move is to sell only enough value to complete the trade step, then buy the required Silicon Gel. Do not dump every piece of Copper, Iron, or Gray Quartz unless you already know the next recipe is safe.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-company-exchanger-silicon-gel.webp"
+    alt="SpaceCraft Company Exchanger selling resources and buying Silicon Gel"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The trading step is about buying Silicon Gel, not emptying your entire cargo hold into the market.
+  </figcaption>
+</figure>
+
+<h2 id="unlock-electromagnetism-and-craft-ftl">
+  Unlock Electromagnetism and craft FTL Engine - Eco
+</h2>
+
+After Gray Quartz, Gravite, and the Silicon Gel step, unlock **Electromagnetism**. This opens the route into **FTL Engine - Eco**.
+
+The usual blockers are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>not enough Wire,</li>
+  <li>missing Silicon Gel,</li>
+  <li>missing Crystalline Focuser,</li>
+  <li>or not enough basic module parts.</li>
+</ul>
+
+If you are short on a part, check whether the missing item comes from Copper, Iron, or Gray Quartz before flying away.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-electromagnetism-permit.webp"
+    alt="SpaceCraft Electromagnetism permit unlock"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Electromagnetism is the permit gate before the first FTL Engine - Eco craft.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-ftl-engine-eco-recipe.webp"
+    alt="SpaceCraft FTL Engine Eco recipe"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    FTL Engine - Eco pulls together the whole starter route: Copper, Iron, Gray Quartz, Silicon Gel, and module crafting.
+  </figcaption>
+</figure>
+
+<h2 id="install-ftl-and-refill-magnetic-plasma">
+  Install FTL Engine - Eco and refill Magnetic Plasma
+</h2>
+
+After crafting **FTL Engine - Eco**, return to the Shipyard and install it on your ship. Confirm the edit before leaving the station.
+
+Then refill **Magnetic Plasma**. The first FTL route can fail here because the engine is installed, but the ship still needs plasma for the jump. In the current build shown, the station ship/dock prompt offers a Magnetic Plasma fill for **40 credits**. If you are short on money, sell a small amount of spare processed material and come back to the dock.
+
+Use this checklist before taking off:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>FTL Engine - Eco is installed, not just crafted.</li>
+  <li>Magnetic Plasma is refilled at the station.</li>
+  <li>You still have enough credits for possible repair or early travel mistakes.</li>
+  <li>The galaxy map route points toward the next system on the RakMu path.</li>
+</ul>
+
+<h2 id="reach-rakmu">
+  Reach RakMu
+</h2>
+
+After Magnetic Plasma is refilled, use the galaxy map to follow the jump route toward **RakMu**. You may need more than one jump, so use the map instead of guessing by sight.
+
+When you reach the station, dock carefully and talk to the clerk. RakMu is not the end of the beginner route. It is the point where the game opens into ship upgrades, Mining Bureau resource work, Noviciate progression, and eventually base building.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-rakmu-orientation-clerk.webp"
+    alt="SpaceCraft RakMu orientation clerk after the first interstellar route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    RakMu starts the next layer of progression. Talk to the clerk first so the station routes make sense.
+  </figcaption>
+</figure>
+
+<h2 id="what-to-do-at-rakmu">
+  What to do first at RakMu
+</h2>
+
+RakMu can feel vague because several routes open at once. Use this order if you want a clean transition after the first FTL jump:
+
+<GuideTable
+  caption="RakMu first steps after the beginner FTL route."
+  columns={rakmuColumns}
+  rows={rakmuRows}
+/>
+
+For most players, the easiest order is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Talk to the RakMu Clerk for orientation.</li>
+  <li>Talk to Bob to understand ship upgrades.</li>
+  <li>Talk to Ingrid if you want the Noviciate path and corporation access later.</li>
+  <li>Visit the Mining Bureau when you need targeted resources or sample contracts.</li>
+</ol>
+
+If you only have time for one next page, read the <Link href="/spacecraft/ship-upgrades-cargo-inventory">SpaceCraft Ship Upgrades Guide</Link>. Bob’s route explains why Cargo Hold, Resource Detector, Mining Laser, and Battery matter.
+
+<h2 id="early-resources-table">
+  Early resources and where to find them
+</h2>
+
+Use this table when you are still asking: “What does this resource look like, and where do I find it?” It is for recognizing Copper, Iron, Gray Quartz, Gravite, Silicon Gel, and Magnetic Plasma during the first route.
+
+<GuideTable
+  caption="Early SpaceCraft resources, visual names, locations, and beginner uses."
+  columns={resourceColumns}
+  rows={resourceRows}
+/>
+
+<h2 id="crafting-table">
+  Crafting blockers in the first hour
+</h2>
+
+Use this table for the opposite problem: you already know the resource, but the craft is still blocked. It helps you trace missing recipes back to Copper, Wire, Iron parts, Gray Quartz, Silicon Gel, or credits for Magnetic Plasma.
+
+<GuideTable
+  caption="First-hour SpaceCraft crafting targets and the material blockers behind them."
+  columns={craftingColumns}
+  rows={craftingRows}
+/>
+
+<h2 id="beginner-mistakes">
+  Beginner mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common SpaceCraft beginner mistakes and safer moves."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  SpaceCraft beginner FAQ
+</h2>
+
+### What should I do first in SpaceCraft?
+
+Fly to Solar Alpha 1, mine Copper and Iron, return to Babylon, craft and install Scanalyzer Alpha, then go to Solar Alpha 2 for Gray Quartz and Gravite.
+
+### How do I avoid crashing my ship early?
+
+Slow down before approaching planets, terrain, landmarks, or docking ports. Use boost for travel, then stop boosting when you need control.
+
+### Does boosting drain battery?
+
+Yes. Boosting drains ship battery, and stopping boost lets it recharge over time. Do not keep boosting when you are trying to scan or land.
+
+### What do Copper and Iron look like?
+
+Early Copper is tied to Copper or Cupric-style stones, while Iron is tied to Iron, Ferric, or Ferrous-style stones and outcrops. Check the resource label when you scan or target the node.
+
+### Where do I find Gray Quartz?
+
+Go to Solar Alpha 2 after installing Scanalyzer Alpha. Use radar to find the High Peak landmark, then look for the dark crystal-like Gray Quartz nodes, scan them, and mine them.
+
+### Why can’t I mine Gray Quartz?
+
+You probably have not scanned it yet, or Scanalyzer Alpha is crafted but not installed. Install the module in the Shipyard before returning to Solar Alpha 2.
+
+### How do I find Gravite?
+
+Use radar for the approximate direction, then search visually. Gravite interferes with precise radar tracking, so it does not behave like a normal ore marker.
+
+### Where do I get Silicon Gel?
+
+Buy Silicon Gel from the Company Exchanger during the trading objective. Sell only enough resources to afford the purchase unless you know the next recipe is safe.
+
+### How do I refill Magnetic Plasma?
+
+After installing FTL Engine - Eco, return to a station, board or access the ship/dock prompt, and refill Magnetic Plasma before jumping. In the current build shown, the refill prompt can cost 40 credits.
+
+### Why can’t I jump after installing FTL Engine - Eco?
+
+Check two things: the engine must be installed in the Shipyard, and Magnetic Plasma must be refilled before the jump.
+
+### Who should I talk to first at RakMu?
+
+Talk to the RakMu Clerk first. The clerk introduces the next routes: Bob for ship upgrades, Ingrid for Noviciate, and the Mining Bureau for resource work.
+
+### What does Bob do at RakMu?
+
+Bob starts the ship improvement route. He points you toward cargo space, resource detectors, mining lasers, and battery upgrades.
+
+### What does Ingrid do at RakMu?
+
+Ingrid starts the Noviciate test route. Noviciate rank matters later if you want corporation access.
+
+### What does the Mining Bureau do?
+
+The Mining Bureau helps with targeted resource work. It can give sample tasks, sell coordinates for resources, and pay for useful exploration information.
+
+### Should I build a base right after RakMu?
+
+Not immediately unless you already have the parts and a clear deposit target. Most players should first improve cargo, detector, mining laser, and resource knowledge before committing to the first base.

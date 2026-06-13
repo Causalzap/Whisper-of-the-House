@@ -1,0 +1,745 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const upgradePriorityColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Upgrade", label: "Upgrade" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Beginner Advice", label: "Beginner Advice" },
+];
+
+export const upgradePriorityRows = [
+  {
+    Priority: "1",
+    Upgrade: "Cargo Hold",
+    "Why It Matters":
+      "More cargo space means fewer forced drops, fewer station returns, and better resource runs.",
+    "Beginner Advice":
+      "Upgrade cargo first if your biggest problem is running out of storage while mining.",
+  },
+  {
+    Priority: "2",
+    Upgrade: "Resource Detector",
+    "Why It Matters":
+      "A better detector helps you find the resource you actually need instead of flying blindly.",
+    "Beginner Advice":
+      "Upgrade this when Mining Bureau targets or specific recipes start sending you across planets.",
+  },
+  {
+    Priority: "3",
+    Upgrade: "Mining Laser",
+    "Why It Matters":
+      "Better lasers let you mine tougher materials and make repeated mining runs smoother.",
+    "Beginner Advice":
+      "Upgrade when the resource is found but your current laser cannot handle it well.",
+  },
+  {
+    Priority: "4",
+    Upgrade: "Battery",
+    "Why It Matters":
+      "Battery upgrades improve maximum storage and charging behavior as modules stack up.",
+    "Beginner Advice":
+      "Upgrade after cargo, detector, and mining laser unless power is already your bottleneck.",
+  },
+];
+
+export const moduleColumns = [
+  { key: "Module", label: "Module" },
+  { key: "Current-Build Recipe / Stats Shown", label: "Current-Build Recipe / Stats Shown" },
+  { key: "Main Use", label: "Main Use" },
+  { key: "What To Check", label: "What To Check" },
+];
+
+export const moduleRows = [
+  {
+    Module: "Small Cargo Hold",
+    "Current-Build Recipe / Stats Shown":
+      "1 Small Module Kit, 6 Metal Sheet, 4 Silicon Gel",
+    "Main Use": "Increases ship cargo space for longer mining and material runs.",
+    "What To Check":
+      "Do not spend all Silicon Gel on other recipes before checking this upgrade.",
+  },
+  {
+    Module: "Simple Resource Detector",
+    "Current-Build Recipe / Stats Shown":
+      "1 Small Module Kit, 2 Magnetic Coil; installed module shows 100 SP and 1 patch slot",
+    "Main Use": "Improves resource detection over the crude detector route.",
+    "What To Check":
+      "If the recipe is blocked, trace the missing part back to Copper, Wire, and Magnetic Coil.",
+  },
+  {
+    Module: "Simple Mining Laser",
+    "Current-Build Recipe / Stats Shown":
+      "1 Small Module Kit, 2 Crystalline Focuser",
+    "Main Use": "Improves mining capability over the starter mining setup.",
+    "What To Check":
+      "This is where Gray Quartz matters again because Crystalline Focuser comes from Quartz.",
+  },
+  {
+    Module: "Overclocked Mining Laser",
+    "Current-Build Recipe / Stats Shown":
+      "200 SP system requirement, 3 patch slots, 1000 durability",
+    "Main Use": "A stronger laser option for harder materials.",
+    "What To Check":
+      "Do not install it blindly if your current System Support is already close to the limit.",
+  },
+  {
+    Module: "Flywheel Battery",
+    "Current-Build Recipe / Stats Shown":
+      "1 Small Module Kit, 1 Motor, 2 Concrete",
+    "Main Use": "Improves the ship's power storage and battery behavior.",
+    "What To Check":
+      "Battery upgrades matter more after your module load and travel range start growing.",
+  },
+];
+
+export const materialColumns = [
+  { key: "Material", label: "Material" },
+  { key: "Used In", label: "Used In" },
+  { key: "Advice", label: "Advice" },
+];
+
+export const materialRows = [
+  {
+    Material: "Copper",
+    "Used In": "Wire, Magnetic Coil chains, detectors, and repeated module recipes.",
+    Advice:
+      "Keep extra Copper because Wire and coils repeatedly block early upgrades.",
+  },
+  {
+    Material: "Iron",
+    "Used In": "Nuts and Bolts, module kits, and basic parts.",
+    Advice:
+      "Process enough for the current recipe, but do not overfill your cargo with low-priority ore.",
+  },
+  {
+    Material: "Gray Quartz",
+    "Used In": "Crystalline Focuser and mining laser upgrade chains.",
+    Advice:
+      "Do not sell all Quartz after FTL. Simple Mining Laser can need Crystalline Focuser.",
+  },
+  {
+    Material: "Silicon Gel",
+    "Used In": "FTL, Small Cargo Hold, and other early module paths.",
+    Advice:
+      "Small Cargo Hold uses 4 Silicon Gel in the shown build, so check cargo upgrades before trading it away.",
+  },
+  {
+    Material: "Concrete",
+    "Used In": "Battery and base-related recipes.",
+    Advice:
+      "Flywheel Battery uses Concrete in the shown build, and Concrete becomes more important once ship power and base building overlap.",
+  },
+  {
+    Material: "Magnetic Coil",
+    "Used In": "Resource Detector and electrical-style parts.",
+    Advice:
+      "Simple Resource Detector uses 2 Magnetic Coil in the shown build. Check Copper and Wire before trying to craft it.",
+  },
+];
+
+export const systemColumns = [
+  { key: "System Term", label: "System Term" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Where To Check", label: "Where To Check" },
+];
+
+export const systemRows = [
+  {
+    "System Term": "System Requirement",
+    "What It Means":
+      "How much ship system capacity a module needs to run.",
+    "Where To Check":
+      "Open the module details in the Shipyard editor. For example, Crude Resource Detector and Simple Resource Detector show 100 SP, while Overclocked Mining Laser shows 200 SP.",
+  },
+  {
+    "System Term": "System Support",
+    "What It Means":
+      "How many secondary systems your ship can support before heat management gets worse.",
+    "Where To Check":
+      "Check the Shipyard editor's Ship Stats / System panel. Current screenshots show examples like 1140 / 1620 SP and 1240 / 1620 SP.",
+  },
+  {
+    "System Term": "Overheating risk",
+    "What It Means":
+      "If system requirements exceed support, the ship has a harder time evacuating heat and can overheat faster.",
+    "Where To Check":
+      "Read the System Support tooltip before stacking detectors, lasers, batteries, cargo modules, Scanalyzer, and FTL parts.",
+  },
+  {
+    "System Term": "Patch Slots",
+    "What It Means":
+      "Upgrade or tuning slots on a module. More patch slots usually means more room for later performance patches if you have compatible patches.",
+    "Where To Check":
+      "Open the module details. Simple Resource Detector shows 1 patch slot; Overclocked Mining Laser shows 3 patch slots in the current screenshots.",
+  },
+];
+
+export const replacementColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Action", label: "Action" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const replacementRows = [
+  {
+    Step: "1",
+    Action: "Open the Shipyard editor and load your ship.",
+    "Why It Matters":
+      "Inventory modules do not work until installed on the ship.",
+  },
+  {
+    Step: "2",
+    Action: "Select the old installed module if the slot is already occupied.",
+    "Why It Matters":
+      "Your ship has limited valid slots, so upgrades often require removing or replacing an older module.",
+  },
+  {
+    Step: "3",
+    Action: "Use the remove / trash option when available.",
+    "Why It Matters":
+      "Freeing the slot is usually safer than trying to force the new module onto an invalid part of the hull.",
+  },
+  {
+    Step: "4",
+    Action: "Place the new module into the freed valid slot.",
+    "Why It Matters":
+      "The module must be physically placed on the ship layout before its stats count.",
+  },
+  {
+    Step: "5",
+    Action: "Check System load and confirm the ship edit.",
+    "Why It Matters":
+      "A placed module is not final until you confirm, and extra SP load can create heat problems later.",
+  },
+];
+
+export const troubleshootingColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Likely Cause", label: "Likely Cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const troubleshootingRows = [
+  {
+    Problem: "I keep running out of cargo space.",
+    "Likely Cause": "Starter cargo is too small for longer resource runs.",
+    Fix:
+      "Craft and install a Small Cargo Hold, and stop filling your ship with low-priority rocks before objective materials.",
+  },
+  {
+    Problem: "I crafted a module but nothing changed.",
+    "Likely Cause": "The module is still in inventory or the Shipyard edit was not confirmed.",
+    Fix:
+      "Open the Shipyard, place the module on the ship, then confirm the change before leaving.",
+  },
+  {
+    Problem: "I cannot craft the Small Cargo Hold.",
+    "Likely Cause": "Missing Small Module Kit, Metal Sheet, or Silicon Gel.",
+    Fix:
+      "In the shown build, Small Cargo Hold uses 1 Small Module Kit, 6 Metal Sheet, and 4 Silicon Gel.",
+  },
+  {
+    Problem: "I cannot craft the Simple Resource Detector.",
+    "Likely Cause": "Missing Small Module Kit or Magnetic Coil.",
+    Fix:
+      "In the shown build, Simple Resource Detector uses 1 Small Module Kit and 2 Magnetic Coil. Check Copper, Wire, and coil crafting.",
+  },
+  {
+    Problem: "I cannot craft the Simple Mining Laser.",
+    "Likely Cause": "Missing Small Module Kit or Crystalline Focuser.",
+    Fix:
+      "In the shown build, Simple Mining Laser uses 1 Small Module Kit and 2 Crystalline Focuser. Return to a Quartz source if Focuser is the blocker.",
+  },
+  {
+    Problem: "How do I replace an already-installed module?",
+    "Likely Cause": "The valid slot is occupied by an older detector, laser, or internal module.",
+    Fix:
+      "Open the Shipyard editor, select the old module, remove it if the editor allows it, place the new module in the freed slot, then confirm.",
+  },
+  {
+    Problem: "Overclocked Mining Laser is blocked.",
+    "Likely Cause": "You may be missing the earlier laser tier, materials, or enough System Support.",
+    Fix:
+      "Do not rush it. Finish cargo, detector, and Simple Mining Laser first if those are still weak, then check the 200 SP requirement.",
+  },
+  {
+    Problem: "The ship overheats or feels unstable after upgrades.",
+    "Likely Cause": "System requirements are pushing beyond available System Support.",
+    Fix:
+      "Check the Shipyard System panel. Current screenshots show examples like 1140 / 1620 SP and 1240 / 1620 SP; if your load is close to support, stop stacking modules blindly.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Upgrading mining power before cargo",
+    "Why It Hurts":
+      "A better laser still feels bad if you have to return after every small batch of ore.",
+    "Better Move":
+      "Upgrade cargo first if your mining trips keep ending because the hold is full.",
+  },
+  {
+    Mistake: "Ignoring Resource Detector",
+    "Why It Hurts":
+      "A better laser does not help if you cannot find the resource you need.",
+    "Better Move":
+      "Upgrade detector when Mining Bureau work or specific recipes make searching the bottleneck.",
+  },
+  {
+    Mistake: "Selling all Quartz after the FTL route",
+    "Why It Hurts":
+      "Quartz can come back through Crystalline Focuser and mining laser recipes.",
+    "Better Move":
+      "Keep spare Quartz until you know your next laser and module requirements.",
+  },
+  {
+    Mistake: "Ignoring patch slots as future value",
+    "Why It Hurts":
+      "Two modules may both work now, but the one with more patch slots may scale better later.",
+    "Better Move":
+      "Check patch slots when comparing advanced modules, but do not treat them as instant power.",
+  },
+  {
+    Mistake: "Stacking modules without checking System Support",
+    "Why It Hurts":
+      "If system requirements exceed support, heat management becomes worse.",
+    "Better Move":
+      "Check System Support before adding every detector, laser, battery, and cargo module you can craft.",
+  },
+  {
+    Mistake: "Forgetting the Shipyard confirm step",
+    "Why It Hurts":
+      "Placed modules are not useful if the ship edit is not saved.",
+    "Better Move":
+      "Always confirm after placing Cargo Hold, Resource Detector, Mining Laser, Battery, Scanalyzer, or FTL modules.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **SpaceCraft**, upgrade by bottleneck: **carry more first, find better second, mine harder third, and power up once modules start stressing System Support**. Cargo solves short mining trips, detectors solve resource searching, mining lasers solve tougher nodes, and batteries matter when power storage and charging become the limiter.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the SpaceCraft Early Access launch build. Recipe quantities, SP values, patch slots, and System Support examples below are based on current in-game screenshots and may change during Early Access.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-bob-ship-upgrade-priorities.webp"
+    alt="SpaceCraft Bob explaining mining lasers resource detectors cargo space and batteries"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bob frames your first ship upgrade choices around four problems: mining harder materials, detecting resources, carrying more cargo, and storing power.
+  </figcaption>
+</figure>
+
+<h2 id="ship-upgrades-guide">
+  SpaceCraft ship upgrades guide
+</h2>
+
+Ship upgrades in SpaceCraft are not only about making the ship stronger. They decide how long you can stay out, how much you can bring back, which resources you can detect, which materials you can mine, and whether your module setup can handle the heat.
+
+Use the table below as a route map, then read the section that matches your current blocker.
+
+<GuideTable
+  caption="Best early ship upgrade priority in SpaceCraft."
+  columns={upgradePriorityColumns}
+  rows={upgradePriorityRows}
+/>
+
+<h2 id="quick-module-recipe-lookup">
+  Quick module recipe lookup
+</h2>
+
+Use this table first if you are standing in the Workshop or Shipyard and just need the current-build recipe, SP cost, patch slots, or main blocker. The detailed sections below explain **when** each upgrade is worth doing, so they do not repeat every recipe line again.
+
+<GuideTable
+  caption="Early SpaceCraft ship modules, current-build recipes, stats, and upgrade timing."
+  columns={moduleColumns}
+  rows={moduleRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="best-first-upgrade">
+  Best first upgrade: Cargo Hold
+</h2>
+
+For most players, the best first ship upgrade is **Cargo Hold**.
+
+The reason is simple: your starter cargo space is the first thing that interrupts the route. You mine Copper, Iron, Quartz, Carbon, or random useful materials, then the ship hits the storage limit and forces you to drop cargo.
+
+A better mining laser does not fix that. A better detector does not fix that either. If the ship cannot bring materials home, every other upgrade feels worse.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-cargo-weight-limit.webp"
+    alt="SpaceCraft maximum storage exceeded warning while mining early resources"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Storage is the first real ship problem. If you keep seeing this warning, cargo should be your next upgrade.
+  </figcaption>
+</figure>
+
+<h2 id="small-cargo-hold">
+  Small Cargo Hold recipe
+</h2>
+
+The first cargo upgrade to care about is **Small Cargo Hold**.
+
+The current-build recipe is listed in the quick lookup table above. The important thing to notice is that **Small Cargo Hold spends Silicon Gel**, so do not assume every Gel should go into FTL or battery paths automatically.
+
+That recipe tells you why cargo upgrades are not free. They pull from the same early material pool as other modules, so do not spend all Silicon Gel before checking whether cargo is your next bottleneck.
+
+To use it, craft the module, open the Shipyard, place it on the ship, and confirm the edit.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-small-cargo-hold-recipe.webp"
+    alt="SpaceCraft Small Cargo Hold recipe with Small Module Kit Metal Sheet and Silicon Gel"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Small Cargo Hold is the first cargo upgrade to target. In the shown build, it needs Small Module Kit, Metal Sheet, and Silicon Gel.
+  </figcaption>
+</figure>
+
+<h2 id="resource-detector">
+  Resource Detector: upgrade when finding resources is the problem
+</h2>
+
+A better Mining Laser only helps after you find the resource. If you are flying around a planet and cannot locate the target, the **Resource Detector** is the better upgrade.
+
+Upgrade detector when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you are chasing Mining Bureau targets,</li>
+  <li>you need a specific material for a recipe,</li>
+  <li>you keep seeing common nodes instead of the resource blocking you,</li>
+  <li>or planet searching is taking longer than mining.</li>
+</ul>
+
+The **Simple Resource Detector** is an early step up from the crude detector route.
+
+The current-build recipe is listed in the quick lookup table above. If Simple Resource Detector is blocked, the missing part usually traces back to **Copper → Wire → Magnetic Coil**.
+
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-simple-resource-detector-recipe.webp"
+    alt="SpaceCraft Simple Resource Detector recipe with Small Module Kit and Magnetic Coil"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Simple Resource Detector uses Small Module Kit and Magnetic Coil. If it is blocked, check Copper, Wire, and coil crafting.
+  </figcaption>
+</figure>
+
+<h2 id="install-resource-detector">
+  Install or replace the Simple Resource Detector
+</h2>
+
+After crafting the detector, install it in the Shipyard editor.
+
+The key steps are:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Open the Shipyard terminal.</li>
+  <li>Load your ship.</li>
+  <li>Open the module editor.</li>
+  <li>If an older detector occupies the slot, remove it with the editor’s remove option.</li>
+  <li>Select the Simple Resource Detector.</li>
+  <li>Place it on a valid ship slot.</li>
+  <li>Check System load.</li>
+  <li>Confirm the edit.</li>
+</ol>
+
+This is the same trap as Scanalyzer Alpha and FTL Engine - Eco: the module does nothing if it stays in your inventory or if you leave before confirming.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-install-simple-resource-detector.webp"
+    alt="SpaceCraft installing Simple Resource Detector on the ship"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Install the Simple Resource Detector in the Shipyard editor, watch the System load, and confirm before searching again.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="mining-laser">
+  Mining Laser: upgrade when mining becomes the bottleneck
+</h2>
+
+Upgrade your **Mining Laser** when you can find the resource but the current laser is not enough.
+
+That usually happens when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you are leaving the starter Copper and Iron route,</li>
+  <li>resource nodes take too long to break,</li>
+  <li>the material seems too tough for your current laser,</li>
+  <li>or your next upgrade asks for materials beyond the starter loop.</li>
+</ul>
+
+The **Simple Mining Laser** is the early upgrade to check first.
+
+The current-build recipe is listed in the quick lookup table above. Its key blocker is **Crystalline Focuser**, which means Gray Quartz still matters after the FTL route. If you sold all Gray Quartz, the mining laser path can send you back to Solar Alpha 2.
+
+That means Quartz still matters after the FTL route. If you sold all Gray Quartz, the mining laser path can send you back to Solar Alpha 2.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-simple-mining-laser-recipe.webp"
+    alt="SpaceCraft Simple Mining Laser recipe with Small Module Kit and Crystalline Focuser"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Simple Mining Laser can be blocked by Crystalline Focuser, so Quartz still matters after your first FTL route.
+  </figcaption>
+</figure>
+
+<h2 id="overclocked-mining-laser">
+  Should you rush Overclocked Mining Laser?
+</h2>
+
+Do not rush **Overclocked Mining Laser** just because the name sounds better.
+
+The shown module has:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>200 SP</strong> system requirement,</li>
+  <li><strong>3</strong> patch slots,</li>
+  <li><strong>1000</strong> durability,</li>
+  <li>and a description focused on vaporizing many materials, though not precisely enough to cut through things.</li>
+</ul>
+
+The important hidden detail is **patch slots**. Patch slots are upgrade or tuning slots on the module. They are not instant power by themselves, but a module with more patch slots may scale better later once you have compatible patches.
+
+That makes Overclocked Mining Laser a serious upgrade, but also a bigger commitment. If your ship still has weak cargo or poor detection, the overclocked laser may not solve the problem you actually feel.
+
+A safe rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>If you cannot carry enough, upgrade cargo.</li>
+  <li>If you cannot find enough, upgrade detector.</li>
+  <li>If you can find and carry resources but cannot mine them well, upgrade laser.</li>
+  <li>If the module load is getting high, check System Support before adding more.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-overclocked-mining-laser-requirement.webp"
+    alt="SpaceCraft Overclocked Mining Laser with 200 SP system requirement 3 patch slots and 1000 durability"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Overclocked Mining Laser is stronger, but the 200 SP requirement and 3 patch slots mean you should compare power, support, and future scaling.
+  </figcaption>
+</figure>
+
+<h2 id="battery-upgrade">
+  Battery upgrades and Flywheel Battery
+</h2>
+
+Battery upgrades matter when the ship starts asking more from its power system.
+
+Bob’s advice is useful here: batteries are inefficient, but you still need them. The values that matter are **maximum power storage** and **charging speed**.
+
+The **Flywheel Battery** is an early battery upgrade to watch.
+
+The current-build recipe is listed in the quick lookup table above. Its key signal is that ship power upgrades begin overlapping with base-building materials such as Motor and Concrete.
+
+Do not treat battery as the automatic first upgrade. It matters more once you have more modules, longer trips, and higher power demand.
+
+
+Do not treat battery as the automatic first upgrade. It matters more once you have more modules, longer trips, and higher power demand.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-flywheel-battery-requirement.webp"
+    alt="SpaceCraft Flywheel Battery recipe with Small Module Kit Motor and Concrete"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Flywheel Battery becomes more important once power storage and charging speed start limiting longer routes.
+  </figcaption>
+</figure>
+
+<h2 id="system-support-heat">
+  System Support, SP, and overheating
+</h2>
+
+The most important hidden upgrade limit is **System Support**.
+
+Each module has a **System Requirement**, usually shown in SP. Your ship also has a System Support value. If total system requirements become greater than ship support, the ship has a harder time evacuating heat properly and may overheat faster.
+
+You can check this in the **Shipyard editor**:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>select a module to see its System Requirement,</li>
+  <li>look at the Ship Stats / System panel for current load and support,</li>
+  <li>compare the new module’s SP cost before confirming the edit.</li>
+</ul>
+
+In current screenshots, the ship shows examples such as **1140 / 1620 SP** and **1240 / 1620 SP**. Your own value can differ depending on installed modules and current build balance.
+
+<GuideTable
+  caption="System Support, SP, patch slots, and overheating terms."
+  columns={systemColumns}
+  rows={systemRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-system-capacity-heat.webp"
+    alt="SpaceCraft System Support explanation warning that higher system requirements can lead to faster overheating"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    System Support is not flavor text. If module requirements outgrow support, heat becomes harder to manage.
+  </figcaption>
+</figure>
+
+<h2 id="replace-installed-modules">
+  How to replace an installed ship module
+</h2>
+
+Ship slots are limited, so upgrading often means replacing something that is already installed.
+
+Use this process when a new detector, mining laser, battery, or internal module will not fit:
+
+<GuideTable
+  caption="How to replace an installed module in the SpaceCraft Shipyard."
+  columns={replacementColumns}
+  rows={replacementRows}
+/>
+
+The important habit is to check the ship after every edit. If the new module increases System load, you may solve one problem and create a heat problem later.
+
+<h2 id="materials-to-save">
+  Materials to save for ship upgrades
+</h2>
+
+Ship upgrades reuse many of the same early materials. Before selling everything, check your next module recipe.
+
+<GuideTable
+  caption="Materials worth saving for early SpaceCraft ship upgrades."
+  columns={materialColumns}
+  rows={materialRows}
+/>
+
+Quartz is the easiest one to waste. You need it for FTL progression, then you may need it again through Crystalline Focuser and mining laser upgrades.
+
+<h2 id="troubleshooting">
+  Ship upgrade troubleshooting
+</h2>
+
+<GuideTable
+  caption="Common SpaceCraft ship upgrade problems and fixes."
+  columns={troubleshootingColumns}
+  rows={troubleshootingRows}
+/>
+
+<h2 id="mistakes">
+  Ship upgrade mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common SpaceCraft ship upgrade mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  SpaceCraft ship upgrades FAQ
+</h2>
+
+### What should I upgrade first in SpaceCraft?
+
+For most players, upgrade Cargo Hold first. The starter ship fills quickly, and more storage makes every mining run more efficient.
+
+### How do I increase cargo space?
+
+Craft a Small Cargo Hold, install it through the Shipyard editor, and confirm the ship edit.
+
+### What does Small Cargo Hold require?
+
+In the shown build, Small Cargo Hold uses 1 Small Module Kit, 6 Metal Sheet, and 4 Silicon Gel.
+
+### When should I upgrade the Resource Detector?
+
+Upgrade it when finding resources becomes harder than mining them. This is especially useful for Mining Bureau targets and specific recipe materials.
+
+### What does Simple Resource Detector require?
+
+In the shown build, Simple Resource Detector uses 1 Small Module Kit and 2 Magnetic Coil.
+
+### How do I replace an installed detector?
+
+Open the Shipyard editor, select the old detector, remove it if the editor allows it, place the new detector in the freed slot, then confirm the ship edit.
+
+### When should I upgrade the Mining Laser?
+
+Upgrade your Mining Laser when your current laser cannot mine the materials you need or mining speed becomes the bottleneck.
+
+### What does Simple Mining Laser require?
+
+In the shown build, Simple Mining Laser uses 1 Small Module Kit and 2 Crystalline Focuser.
+
+### Should I rush Overclocked Mining Laser?
+
+Not immediately. Check cargo, detector, Quartz, previous module requirements, System Support, and heat first.
+
+### What are patch slots?
+
+Patch slots are upgrade or tuning slots on a module. They do not give instant power by themselves, but they can make a module scale better later if compatible patches are available.
+
+### When should I upgrade the battery?
+
+Upgrade battery when maximum power storage or charging speed starts limiting longer routes and module-heavy setups.
+
+### What does Flywheel Battery require?
+
+In the shown build, Flywheel Battery uses 1 Small Module Kit, 1 Motor, and 2 Concrete.
+
+### Where do I check System Support?
+
+Open the Shipyard editor and look at the Ship Stats / System panel. Current screenshots show examples such as 1140 / 1620 SP and 1240 / 1620 SP.
+
+### Why is my ship overheating?
+
+Your system requirements may be higher than your ship’s System Support. Reduce module load or improve support before stacking more upgrades.

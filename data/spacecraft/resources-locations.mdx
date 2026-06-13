@@ -1,0 +1,883 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const resourceRouteColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "Resource Target", label: "Resource Target" },
+  { key: "Where To Look", label: "Where To Look" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const resourceRouteRows = [
+  {
+    Stage: "Opening",
+    "Resource Target": "Copper and Iron",
+    "Where To Look": "Solar Alpha 1, using radar and surface labels.",
+    "Why It Matters":
+      "Copper and Iron feed Wire, Nuts and Bolts, Small Module Kit, Scanalyzer Alpha, and early ship upgrades.",
+  },
+  {
+    Stage: "After Scanalyzer Alpha",
+    "Resource Target": "Gray Quartz",
+    "Where To Look": "Solar Alpha 2 after Scanalyzer Alpha is installed.",
+    "Why It Matters":
+      "Gray Quartz is needed for the Crystalline Focuser and the FTL Engine - Eco route.",
+  },
+  {
+    Stage: "Early exploration",
+    "Resource Target": "Gravite",
+    "Where To Look": "Solar Alpha 2, following the radar direction and searching visually.",
+    "Why It Matters":
+      "Gravite teaches you that not every resource gives a perfect radar marker.",
+  },
+  {
+    Stage: "RakMu / Mining Bureau",
+    "Resource Target": "Carbon, Silicate, and Pyrite",
+    "Where To Look":
+      "Use Mining Bureau contracts, sample targets, and paid coordinates.",
+    "Why It Matters":
+      "These resources push you beyond the opening metals and into targeted sector exploration.",
+  },
+  {
+    Stage: "First base planning",
+    "Resource Target": "Deposits, not only stones",
+    "Where To Look":
+      "Look for actual resource deposits when planning Extractors and mining outposts.",
+    "Why It Matters":
+      "A deposit matters more for automation than a few loose rocks or outcrops.",
+  },
+];
+
+export const knownLocationColumns = [
+  { key: "Resource", label: "Resource" },
+  { key: "Known Early Lead", label: "Known Early Lead" },
+  { key: "How To Confirm", label: "How To Confirm" },
+  { key: "Beginner Use", label: "Beginner Use" },
+];
+
+export const knownLocationRows = [
+  {
+    Resource: "Copper Ore",
+    "Known Early Lead":
+      "Solar Alpha 1 for the opening route; later Copper Deposits can appear on planets such as Rotalis I.",
+    "How To Confirm":
+      "Use radar, low-altitude scanning, and the visible Copper or Copper Deposit label before landing or placing a base.",
+    "Beginner Use":
+      "Wire, Scanalyzer Alpha route, FTL parts, detectors, coils, and repeated early module chains.",
+  },
+  {
+    Resource: "Iron Ore",
+    "Known Early Lead":
+      "Solar Alpha 1 for the opening route; Iron Deposits are also a core first-base target.",
+    "How To Confirm":
+      "Check surface labels and deposit markers instead of relying only on rock color.",
+    "Beginner Use":
+      "Nuts and Bolts, Small Module Kit, ingots, basic parts, and first-base crafting.",
+  },
+  {
+    Resource: "Gray Quartz",
+    "Known Early Lead":
+      "Solar Alpha 2 after Scanalyzer Alpha is installed.",
+    "How To Confirm":
+      "Find the High Peak route, scan the dark crystal-like Gray Quartz, then mine it.",
+    "Beginner Use":
+      "Crystalline Focuser, FTL Engine - Eco, and later mining laser upgrade paths.",
+  },
+  {
+    Resource: "Gravite",
+    "Known Early Lead":
+      "Solar Alpha 2 exploration objective.",
+    "How To Confirm":
+      "Follow the approximate radar direction, slow down, and visually locate the target.",
+    "Beginner Use":
+      "Special scan progression and the first lesson that some resources do not give a perfect radar marker.",
+  },
+  {
+    Resource: "B-Carbon / Carbon",
+    "Known Early Lead":
+      "Mining Bureau Integration Protocol can ask for 30 B-Carbon; paid coordinates can point to a named system such as Zephon or Xachron in current-build examples.",
+    "How To Confirm":
+      "Track the Bureau beacon on the galaxy map, then scan the target planet before mining.",
+    "Beginner Use":
+      "Bureau Integration Protocol and broader post-RakMu resource progression.",
+  },
+  {
+    Resource: "Silicate",
+    "Known Early Lead":
+      "Mining Bureau Integration Protocol can ask for 6 Silicate.",
+    "How To Confirm":
+      "Use the Bureau target list or buy coordinates if you do not already know a local source.",
+    "Beginner Use":
+      "Bureau sample work and later crafting progression.",
+  },
+  {
+    Resource: "Pyrite",
+    "Known Early Lead":
+      "Mining Bureau Integration Protocol can ask for 3 Pyrite.",
+    "How To Confirm":
+      "Look for the resource label instead of trusting color alone; gold-looking nodes still need confirmation.",
+    "Beginner Use":
+      "Bureau sample work and early targeted exploration.",
+  },
+  {
+    Resource: "Silicon Gel",
+    "Known Early Lead":
+      "Company Exchanger during the first FTL route.",
+    "How To Confirm":
+      "Buy it directly when the early trade objective asks for it.",
+    "Beginner Use":
+      "FTL Engine - Eco and several early module recipes, including cargo-related paths.",
+  },
+];
+
+export const bureauColumns = [
+  { key: "Mining Bureau Option", label: "Mining Bureau Option" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "When To Use It", label: "When To Use It" },
+];
+
+export const bureauRows = [
+  {
+    "Mining Bureau Option": "Buy resource coordinates",
+    "What It Does":
+      "Lets you pay credits to locate a specific resource available in the sector.",
+    "When To Use It":
+      "Use it when a required resource is blocking progress and blind searching is wasting too much time.",
+  },
+  {
+    "Mining Bureau Option": "Find sample resources",
+    "What It Does":
+      "The Bureau gives you resource names, you bring samples, and you get paid.",
+    "When To Use It":
+      "Use it after RakMu when you want a guided reason to explore nearby systems.",
+  },
+  {
+    "Mining Bureau Option": "Sell planet information",
+    "What It Does":
+      "If you fully explore a planet and identify its points of interest, the Bureau can pay for that information.",
+    "When To Use It":
+      "Use it when you are already scanning a planet deeply instead of rushing one objective.",
+  },
+];
+
+export const bureauPlanetDataColumns = [
+  { key: "Planet Data Step", label: "Planet Data Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const bureauPlanetDataRows = [
+  {
+    "Planet Data Step": "Scan every resource type",
+    "What To Do":
+      "Fly low, scan the planet, and identify each visible resource family instead of only grabbing one sample.",
+    "Why It Matters":
+      "The Bureau wants useful geological information, not just one random rock.",
+  },
+  {
+    "Planet Data Step": "Find deposits, not only loose rocks",
+    "What To Do":
+      "Look for at least one true deposit marker when the objective asks for deposit information.",
+    "Why It Matters":
+      "Deposits matter for future Extractors and mining outposts.",
+  },
+  {
+    "Planet Data Step": "Check points of interest",
+    "What To Do":
+      "Do not leave after one scan if the planet still has unknown markers or obvious landmarks.",
+    "Why It Matters":
+      "A planet can look complete before the Bureau considers the information useful enough.",
+  },
+  {
+    "Planet Data Step": "Return to the Bureau",
+    "What To Do":
+      "Go back after the objective updates or after you have identified the required resources and deposits.",
+    "Why It Matters":
+      "The payout and next Bureau steps happen at the station, not on the planet surface.",
+  },
+];
+
+export const searchMethodColumns = [
+  { key: "Method", label: "Method" },
+  { key: "Best For", label: "Best For" },
+  { key: "Watch Out For", label: "Watch Out For" },
+];
+
+export const searchMethodRows = [
+  {
+    Method: "Radar scan",
+    "Best For": "Nearby normal resources, unknown nodes, and early resource checks.",
+    "Watch Out For":
+      "You still need to fly low enough and close enough for the scan to matter.",
+  },
+  {
+    Method: "Scanalyzer Alpha",
+    "Best For": "Gray Quartz and resources that need identification before mining.",
+    "Watch Out For":
+      "The module must be installed on your ship, not just crafted.",
+  },
+  {
+    Method: "Visual search",
+    "Best For": "Gravite and confusing radar signals.",
+    "Watch Out For":
+      "Do not fly too fast once the signal gets stronger. You can overshoot the target.",
+  },
+  {
+    Method: "Mining Bureau coordinates",
+    "Best For": "Specific resources such as Carbon, Silicate, or Pyrite.",
+    "Watch Out For":
+      "Coordinates cost credits, so do not buy every lead if you are broke.",
+  },
+  {
+    Method: "Deposit scouting",
+    "Best For": "First base and mining outpost planning.",
+    "Watch Out For":
+      "Loose stones help early crafting, but deposits matter more for Extractors.",
+  },
+];
+
+export const toolGateColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Likely Meaning", label: "Likely Meaning" },
+  { key: "What To Do", label: "What To Do" },
+];
+
+export const toolGateRows = [
+  {
+    Problem: "The node is found, but your laser will not cut it well.",
+    "Likely Meaning":
+      "Your current Mining Laser may be too weak for that material tier.",
+    "What To Do":
+      "Upgrade toward Simple Mining Laser or a later laser before wasting more time on the node.",
+  },
+  {
+    Problem: "You can see the resource, but the detector route feels unreliable.",
+    "Likely Meaning":
+      "Finding the resource is the bottleneck, not mining it.",
+    "What To Do":
+      "Upgrade Resource Detector before chasing rare resources across multiple planets.",
+  },
+  {
+    Problem: "The resource is not a normal solid rock.",
+    "Likely Meaning":
+      "Later resource types may require special tools or a different extraction method.",
+    "What To Do":
+      "Do not assume a stronger laser solves every resource type. Check the tool, recipe, and objective text first.",
+  },
+  {
+    Problem: "The node looks special or protected.",
+    "Likely Meaning":
+      "Some advanced nodes may require a different interaction before extraction.",
+    "What To Do":
+      "Mark the location and return after you have the correct tool or upgrade path confirmed.",
+  },
+];
+
+export const refiningColumns = [
+  { key: "Decision", label: "Decision" },
+  { key: "Use This When", label: "Use This When" },
+  { key: "Reason", label: "Reason" },
+];
+
+export const refiningRows = [
+  {
+    Decision: "Refine before crafting",
+    "Use This When":
+      "A recipe asks for ingots, sheets, nuts and bolts, coils, or processed parts.",
+    Reason:
+      "Most module and base recipes do not want raw rocks. They want processed materials.",
+  },
+  {
+    Decision: "Sell raw or spare material",
+    "Use This When":
+      "You only need credits for a specific purchase and the material is not in your next recipe chain.",
+    Reason:
+      "Selling everything can create the next blocker. Sell only what you can replace or no longer need.",
+  },
+  {
+    Decision: "Check output before bulk processing",
+    "Use This When":
+      "The Smelter gives multiple processing options or different outputs.",
+    Reason:
+      "Processing can trade inventory space, output rate, and future usefulness. Do not mass-process blindly.",
+  },
+  {
+    Decision: "Keep a reserve stack",
+    "Use This When":
+      "The resource appears in several early chains, such as Copper, Quartz, Silicon Gel, or Concrete.",
+    Reason:
+      "A small reserve prevents one recipe from forcing another long mining trip.",
+  },
+];
+
+export const depositColumns = [
+  { key: "Resource Object", label: "Resource Object" },
+  { key: "How To Treat It", label: "How To Treat It" },
+  { key: "Best Use", label: "Best Use" },
+];
+
+export const depositRows = [
+  {
+    "Resource Object": "Small stones / surface rocks",
+    "How To Treat It":
+      "Mine them manually when you need quick early materials.",
+    "Best Use": "Opening route, emergency materials, and small recipe gaps.",
+  },
+  {
+    "Resource Object": "Outcrops",
+    "How To Treat It":
+      "Often better than tiny stones because they can give more useful material per trip.",
+    "Best Use": "Manual mining before your base is online.",
+  },
+  {
+    "Resource Object": "Resource deposits",
+    "How To Treat It":
+      "Mark them for later because Extractors need deposits.",
+    "Best Use": "First base, mining outposts, and automated extraction.",
+  },
+  {
+    "Resource Object": "Special scan targets",
+    "How To Treat It":
+      "Scan them for progression or data before assuming they are normal mining nodes.",
+    "Best Use": "Gray Quartz, Gravite, exploration contracts, and Mining Bureau work.",
+  },
+];
+
+export const keepOrSellColumns = [
+  { key: "Category", label: "Category" },
+  { key: "Examples", label: "Examples" },
+  { key: "Keep / Sell Advice", label: "Keep / Sell Advice" },
+];
+
+export const keepOrSellRows = [
+  {
+    Category: "Core crafting resources",
+    Examples: "Copper, Iron, Gray Quartz, Silicon Gel",
+    "Keep / Sell Advice":
+      "Keep a reserve until Scanalyzer, FTL, cargo, detector, and laser recipes are solved.",
+  },
+  {
+    Category: "Bureau samples",
+    Examples: "B-Carbon, Silicate, Pyrite",
+    "Keep / Sell Advice":
+      "Keep enough to finish the active Bureau protocol before selling extras.",
+  },
+  {
+    Category: "Processed parts",
+    Examples: "Wire, ingots, Metal Sheet, Magnetic Coil",
+    "Keep / Sell Advice":
+      "Do not sell unless you know your next module does not need them.",
+  },
+  {
+    Category: "Luxury or spare valuables",
+    Examples: "Items with no active recipe or objective tie",
+    "Keep / Sell Advice":
+      "Safer to sell when you need credits, but still check active objectives first.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Mining every rock on Solar Alpha 1",
+    "Why It Hurts":
+      "Your starter cargo fills quickly, and overweight cargo forces you to drop items.",
+    "Better Move":
+      "Mine the required Copper and Iron first, then take extra Copper only if you still have room.",
+  },
+  {
+    Mistake: "Selling every piece of Gray Quartz",
+    "Why It Hurts":
+      "Gray Quartz feeds the Crystalline Focuser, which blocks FTL Engine - Eco and later laser paths.",
+    "Better Move":
+      "Sell only what you need for the trade objective and keep some Quartz until FTL and laser decisions are clear.",
+  },
+  {
+    Mistake: "Expecting Gravite to work like normal ore",
+    "Why It Hurts":
+      "The radar only gives an approximate direction, so chasing a perfect marker wastes time.",
+    "Better Move":
+      "Use the direction, slow down, and visually search the terrain.",
+  },
+  {
+    Mistake: "Ignoring the Mining Bureau",
+    "Why It Hurts":
+      "You can waste a lot of time hunting Carbon, Silicate, or Pyrite blindly.",
+    "Better Move":
+      "Use the Mining Bureau when a specific resource blocks progress.",
+  },
+  {
+    Mistake: "Confusing outcrops with automation deposits",
+    "Why It Hurts":
+      "Outcrops are useful for manual mining, but base Extractors need proper deposits.",
+    "Better Move":
+      "When planning a base, look for resource deposits instead of only loose stones.",
+  },
+  {
+    Mistake: "Trying to mine higher-tier nodes with the wrong tool",
+    "Why It Hurts":
+      "The resource may be visible, but the wrong laser or extraction tool turns the search into a dead end.",
+    "Better Move":
+      "Upgrade Mining Laser, Resource Detector, or the required special tool before forcing the node.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **SpaceCraft**, your first resource route is **Copper and Iron on Solar Alpha 1**, then **Gray Quartz and Gravite on Solar Alpha 2** after Scanalyzer Alpha. After RakMu, use the **Mining Bureau** for harder targets like **B-Carbon, Silicate, and Pyrite**. If a node is visible but will not mine properly, check your **Mining Laser tier**, Resource Detector, or required extraction tool.
+
+Use this route logic: **mine early metals manually, use Bureau coordinates for specific targets, scout true deposits for base automation, and check active objectives before trading resources away**.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the SpaceCraft Early Access launch build. Known locations, Bureau leads, resource names, tool requirements, and recipe outputs may change during Early Access.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-mining-bureau-resource-coordinates.webp"
+    alt="SpaceCraft Mining Bureau resource coordinates for Carbon Silicate and Pyrite"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After RakMu, the Mining Bureau becomes the safest way to stop guessing when you need a specific resource.
+  </figcaption>
+</figure>
+
+<h2 id="resources-locations-guide">
+  SpaceCraft resources and locations guide
+</h2>
+
+Resources in SpaceCraft are not just “pick up everything.” The first hours punish bad hauling, bad selling, weak tools, and blind searching.
+
+You need different resource habits at different stages:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Copper and Iron</strong> get your first parts moving.</li>
+  <li><strong>Gray Quartz</strong> pushes the Scanalyzer and FTL route forward.</li>
+  <li><strong>Gravite</strong> teaches you that some targets need visual search, not a perfect marker.</li>
+  <li><strong>Silicon Gel</strong> comes from the Company Exchanger and feeds FTL crafting.</li>
+  <li><strong>B-Carbon, Silicate, and Pyrite</strong> become important once the Mining Bureau starts giving sample work.</li>
+  <li><strong>Deposits</strong> matter later because Extractors need them for automation.</li>
+</ul>
+
+If you are still in the opening route, read the <Link href="/spacecraft/beginner-guide">SpaceCraft Beginner Guide</Link>. If your issue is specifically FTL, use the <Link href="/spacecraft/scanlyzer-alpha-ftl-engine">Scanalyzer Alpha and FTL guide</Link>.
+
+<GuideTable
+  caption="SpaceCraft resource route from the opening system to Mining Bureau work."
+  columns={resourceRouteColumns}
+  rows={resourceRouteRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="known-resource-locations">
+  Known resource locations and early leads
+</h2>
+
+Use this table when you need one answer in a hurry: **where the resource first shows up, how to confirm it, and why it matters**. Some entries are fixed early-route resources, while Mining Bureau leads can vary by current build, sector, and which coordinate you buy from the Prospecting Agent.
+
+<GuideTable
+  caption="Known SpaceCraft resource locations, confirmation methods, and beginner uses."
+  columns={knownLocationColumns}
+  rows={knownLocationRows}
+/>
+
+The strongest confirmed pattern is simple: **Solar Alpha 1 handles the opening metals, Solar Alpha 2 handles Scanalyzer resources, and the Mining Bureau handles targeted post-RakMu resources**. For B-Carbon, Silicate, and Pyrite, use the Bureau when you need a concrete lead instead of guessing planets one by one.
+
+<h2 id="copper-iron-location">
+  Copper and Iron location: Solar Alpha 1
+</h2>
+
+Your first real resource stop is **Solar Alpha 1**.
+
+The onboarding route asks you to gather **Iron Ore** and **Copper Ore**. Use radar near the surface, then mine the visible resource nodes. You should treat Copper and Iron as progression materials, not just things to sell.
+
+Copper is especially important because it becomes **Wire**, and Wire appears repeatedly in early module chains. Iron becomes basic parts such as **Nuts and Bolts** and supports the Small Module Kit route.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-solar-alpha-1-iron-copper.webp"
+    alt="SpaceCraft Solar Alpha 1 Copper and Iron resource nodes"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar Alpha 1 is your opening Copper and Iron stop. Mine the required amount first, then take extra Copper only if your cargo can handle it.
+  </figcaption>
+</figure>
+
+<h2 id="cargo-limit">
+  Do not overfill your starter cargo hold
+</h2>
+
+The first resource trap is cargo weight. It is tempting to mine every stone because every material feels useful, but the starter ship fills fast.
+
+If you exceed storage, the game forces you to drop cargo. That can waste the exact material you were trying to keep.
+
+Early priority:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Finish the required Copper and Iron objective.</li>
+  <li>Keep extra Copper if you have room.</li>
+  <li>Do not load random stones if the cargo warning is close.</li>
+  <li>Return to Babylon before your hold becomes a problem.</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-cargo-weight-limit.webp"
+    alt="SpaceCraft maximum storage exceeded warning while mining early resources"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Extra resources only help if you can bring them home. The first cargo limit is strict enough to shape your mining route.
+  </figcaption>
+</figure>
+
+<h2 id="gray-quartz-location">
+  Gray Quartz location: Solar Alpha 2
+</h2>
+
+After you craft and install **Scanalyzer Alpha**, the next important resource is **Gray Quartz** on **Solar Alpha 2**.
+
+You need to scan the resource before mining it. This is where Scanalyzer Alpha starts paying off. If you fly to Solar Alpha 2 without the module installed, the route becomes confusing quickly.
+
+Gray Quartz matters because it connects to the **Crystalline Focuser**, and the Crystalline Focuser connects to **FTL Engine - Eco**. It can also matter again later when mining laser upgrades pull you back into Quartz and focuser-style recipes.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-solar-alpha-2-gray-quartz.webp"
+    alt="SpaceCraft Gray Quartz on Solar Alpha 2 after Scanalyzer Alpha"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Solar Alpha 2 is the first place where Scanalyzer Alpha really matters. Scan Gray Quartz, mine it, and keep enough for FTL crafting.
+  </figcaption>
+</figure>
+
+<h2 id="gravite-location">
+  How to find Gravite
+</h2>
+
+Gravite is not a normal resource search.
+
+The radar gives you an approximate direction because Gravite interferes with precise tracking. That means you should not chase the marker like Copper or Iron.
+
+Use this method:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Use radar and watch the signal direction.</li>
+  <li>Fly more slowly once the signal gets stronger.</li>
+  <li>Look across the terrain for the deposit.</li>
+  <li>Approach and scan it.</li>
+</ol>
+
+This step is about scanning and progression. Do not waste time expecting a perfect pinpoint marker.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-gravite-radar-search.webp"
+    alt="SpaceCraft Gravite radar direction and visual search explanation"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gravite is found by direction and visual search. Slow down once the signal gets stronger.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="silicon-gel">
+  Where to get Silicon Gel
+</h2>
+
+**Silicon Gel** is not something you need to hunt manually during the first FTL route. The early trading objective sends you to the **Company Exchanger** to buy 10 Silicon Gel after selling enough resources.
+
+Before trading, check two things: your active objective and your next recipe. Sell only enough value to complete the trade step, then confirm you still have the materials needed for Crystalline Focuser, FTL Engine - Eco, and Magnetic Plasma travel.
+
+A safe pre-FTL check is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you have the Silicon Gel required by the FTL route,</li>
+  <li>you still have enough Copper or Wire for module parts,</li>
+  <li>you still have enough Gray Quartz for Crystalline Focuser,</li>
+  <li>and you still have credits for Magnetic Plasma if the next jump is coming.</li>
+</ul>
+
+<h2 id="mining-laser-tool-tier">
+  Why some resources cannot be mined yet
+</h2>
+
+Sometimes the problem is not the location. You found the resource, but your ship still cannot mine it properly.
+
+That usually means one of three things:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>your **Mining Laser** is too weak for the node,</li>
+  <li>your **Resource Detector** is too weak to find the right material consistently,</li>
+  <li>or the resource is an advanced type that needs a different extraction tool or interaction.</li>
+</ul>
+
+Bob’s upgrade route makes this clear: as you try to extract tougher materials, not every laser can cut through them. If a node refuses to cooperate, stop forcing it and check your tool tier.
+
+<GuideTable
+  caption="Resource tool and mining laser problems."
+  columns={toolGateColumns}
+  rows={toolGateRows}
+/>
+
+The safe upgrade order is not always “more laser.” If you cannot find the resource, improve detection first. If you can find it but cannot cut it, improve the Mining Laser. If the node is not a normal solid mineral, check the objective text before assuming a laser upgrade is enough.
+
+<h2 id="mining-bureau">
+  How the Mining Bureau helps you find resources
+</h2>
+
+After you reach RakMu, the **Mining Bureau** becomes one of the most useful resource systems.
+
+The Mining Bureau has two jobs:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>It can sell information when you need a specific resource in the sector.</li>
+  <li>It can pay you when you bring requested resource samples or useful planet data.</li>
+</ul>
+
+This matters because blind searching becomes expensive in time. If you need B-Carbon, Silicate, or Pyrite and cannot find them naturally, the Bureau gives you a more directed path.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-mining-bureau-explains-resources.webp"
+    alt="SpaceCraft Mining Bureau explaining resource information and planet data"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Mining Bureau is built for players who either need a resource they cannot find or have planet data to sell.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Mining Bureau options and when to use them."
+  columns={bureauColumns}
+  rows={bureauRows}
+/>
+
+
+<h2 id="mining-bureau-planet-information">
+  How selling planet information works
+</h2>
+
+The Mining Bureau can also buy useful planet information, but it is not the same as grabbing one rock and leaving.
+
+When the Bureau talks about planet data, think in terms of a full survey:
+
+<GuideTable
+  caption="How to prepare planet information for the Mining Bureau."
+  columns={bureauPlanetDataColumns}
+  rows={bureauPlanetDataRows}
+/>
+
+A good planet survey should identify the resources, deposits, and points of interest the objective cares about. In practice, that means flying lower, scanning more patiently, and checking whether the objective has actually updated before leaving.
+
+This is also why **deposit vs outcrop vs stone** matters. A planet with loose rocks can help your inventory today, but a planet with true deposits can help your future base.
+
+<h2 id="carbon-silicate-pyrite">
+  Carbon, Silicate, and Pyrite
+</h2>
+
+Once the Mining Bureau route starts, you may see targets like **B-Carbon**, **Silicate**, and **Pyrite**.
+
+Treat these differently from Copper and Iron. You do not need to brute-force every planet until you find them. Use one of three methods:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Check the Mining Bureau request and target list.</li>
+  <li>Buy coordinates if a specific resource is blocking you.</li>
+  <li>Scan planets carefully when you are already exploring that system.</li>
+</ol>
+
+If you are low on credits, do not buy every coordinate at once. Pick the resource that blocks your next objective.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-mining-bureau-carbon-silicate-pyrite.webp"
+    alt="SpaceCraft Mining Bureau resource targets Carbon Silicate and Pyrite"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    B-Carbon, Silicate, and Pyrite start to matter after the Mining Bureau gives you sample targets and resource leads.
+  </figcaption>
+</figure>
+
+<h2 id="refining-sell-or-smelt">
+  Should you refine resources or sell raw ore?
+</h2>
+
+The Smelter is not just a button you press after every trip. It is a decision point.
+
+Early on, you should refine when a recipe needs processed output, and sell only when you need credits and the material is not part of your next blocker.
+
+<GuideTable
+  caption="When to refine resources, sell raw materials, or keep a reserve."
+  columns={refiningColumns}
+  rows={refiningRows}
+/>
+
+For example, if you need Wire, detector parts, cargo upgrades, or FTL pieces, selling Copper or Quartz too early can make the next craft harder. If you only need a small amount of credits for Silicon Gel or a Bureau coordinate, sell the least important surplus instead of emptying your whole hold.
+
+<h2 id="how-to-search-resources">
+  Best ways to search for resources
+</h2>
+
+Use different search methods for different problems.
+
+<GuideTable
+  caption="Best resource search methods in SpaceCraft."
+  columns={searchMethodColumns}
+  rows={searchMethodRows}
+/>
+
+The main lesson is simple: normal rocks, scan targets, Bureau coordinates, and automation deposits are not the same thing.
+
+<h2 id="deposits-outcrops-stones">
+  Deposits, outcrops, and stones are not the same
+</h2>
+
+When you are still crafting by hand, small rocks and outcrops are fine. When you start planning a base, you need to think differently.
+
+A base Extractor needs a valid **deposit**. That means a planet with lots of loose resources is not automatically a good automation site unless it also has deposits that can support Extractors.
+
+<GuideTable
+  caption="How to treat different resource objects."
+  columns={depositColumns}
+  rows={depositRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-rotalis-mining-outpost-deposits.webp"
+    alt="SpaceCraft resource deposits suitable for a future mining outpost"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When a planet has actual deposits everywhere, mark it as a future mining outpost candidate instead of only treating it as a manual mining stop.
+  </figcaption>
+</figure>
+
+<h2 id="inventory-resource-categories">
+  Resource categories and what to keep
+</h2>
+
+As your route expands, your inventory stops being only Copper and Iron. You begin seeing categories such as Metal Ore, Mineral Ore, Crystal, Scrap, Luxury Item, Ingot, and Simple Product.
+
+Instead of repeating “do not sell everything,” use a keep-or-sell rule:
+
+<GuideTable
+  caption="Which resource categories to keep or sell in SpaceCraft."
+  columns={keepOrSellColumns}
+  rows={keepOrSellRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-resource-inventory-categories.webp"
+    alt="SpaceCraft inventory showing resource categories such as ore crystal scrap ingot and simple products"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    As resources diversify, group them by purpose: recipe blockers, Bureau samples, processed parts, and safe sell items.
+  </figcaption>
+</figure>
+
+<h2 id="resource-mistakes">
+  Resource mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common resource mistakes in SpaceCraft."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  SpaceCraft resources FAQ
+</h2>
+
+### Where do I find Copper in SpaceCraft?
+
+Copper appears early on Solar Alpha 1. Use radar near the surface and look for Copper or Cupri-style nodes during the opening mining objective. Copper Deposits can also appear on later planets and make strong first-base targets.
+
+### Where do I find Iron?
+
+Iron also appears on Solar Alpha 1 during the opening route. Mine it with Copper because both feed early module crafting. For base automation, look for actual Iron Deposits rather than only loose stones.
+
+### Where do I find Gray Quartz?
+
+Gray Quartz appears on Solar Alpha 2 after Scanalyzer Alpha is installed. Scan it first, then mine it. Keep enough for Crystalline Focuser and later upgrade paths.
+
+### Why can’t I find Gravite?
+
+Gravite does not give a perfect radar marker. Follow the approximate direction, slow down, and search visually.
+
+### Where do I get Silicon Gel?
+
+Buy Silicon Gel from the Company Exchanger during the trading objective. The early route asks you to buy 10, and later recipes can ask for more.
+
+### Where do I find Carbon or B-Carbon?
+
+After RakMu, use the Mining Bureau. The Integration Protocol can ask for B-Carbon, and paid coordinates can point you to a target system in the current build.
+
+### Where do I find Silicate?
+
+Use the Mining Bureau target list or buy coordinates if you do not already know a source. Silicate can become an early Bureau blocker after RakMu.
+
+### Where do I find Pyrite?
+
+Pyrite appears as a Mining Bureau target after RakMu. Use the Bureau if visual searching is taking too long, and confirm the resource label before assuming a gold-looking node is Pyrite.
+
+### What is the Mining Bureau for?
+
+The Mining Bureau helps you locate specific resources, buy coordinates, bring resource samples, and sell useful planet information.
+
+### How do I sell planet information to the Mining Bureau?
+
+Fully survey the planet instead of leaving after one scan. Identify resource types, deposits, and points of interest the objective cares about, then return to the Bureau when the exploration data is useful.
+
+### Why can’t I mine a resource I found?
+
+Your Mining Laser, Resource Detector, or extraction tool may be too weak for that resource. Upgrade your tools before forcing higher-tier nodes.
+
+### Should I refine ore before selling?
+
+Refine when a recipe needs ingots or processed parts. Sell raw or spare materials only when you need credits and the material is not part of your next recipe chain.
+
+### What resources should I keep early?
+
+Keep Copper, Iron, Gray Quartz, Silicon Gel, and active Bureau samples until you know your next recipe or objective does not need them.
+
+### What matters for a first mining base?
+
+Look for actual deposits, not only loose stones or outcrops. Extractors need valid resource deposits to automate mining.
