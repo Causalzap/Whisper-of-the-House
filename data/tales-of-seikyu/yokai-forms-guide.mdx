@@ -1,0 +1,627 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const formUnlockColumns = [
+  { key: "Form", label: "Form" },
+  { key: "How To Unlock", label: "How To Unlock" },
+  { key: "Main Use", label: "Main Use" },
+  { key: "First Priority", label: "First Priority" },
+];
+
+export const formUnlockRows = [
+  {
+    Form: "Human Form",
+    "How To Unlock": "Available from the start.",
+    "Main Use": "Talking, gifting, tools, normal combat, farming, crafting, and daily town routes.",
+    "First Priority":
+      "Use it for normal chores, then switch forms only when a task or blocker needs one.",
+  },
+  {
+    Form: "Boar Form",
+    "How To Unlock": "Unlocked early through the main story and farm setup route.",
+    "Main Use": "Tilling, breaking farm obstacles, charging, and early material cleanup.",
+    "First Priority":
+      "Use Boar Form when your farm, rocks, trees, or early obstacle routes are slowing you down.",
+  },
+  {
+    Form: "Slime Form",
+    "How To Unlock": "Gain the transformation scroll after defeating Anji, the first Tanuki boss in the Fox Ruins.",
+    "Main Use": "Underwater movement, water routes, water attacks, and farm watering.",
+    "First Priority":
+      "Unlock this before wasting whole days on water blockers or slow crop watering.",
+  },
+  {
+    Form: "Tengu Form",
+    "How To Unlock": "Gain the transformation scroll after defeating Fujiki, the second Tanuki boss in the Fox Ruins.",
+    "Main Use": "Flight, high ledges, long gaps, aerial routes, and defensive combat upgrades.",
+    "First Priority":
+      "Use it when walking, Boar movement, and Slime routes cannot reach a high path.",
+  },
+  {
+    Form: "Yuki-onna Form",
+    "How To Unlock": "Unlocked later through Fox Ruins story and boss progression after earlier forms.",
+    "Main Use": "Icy movement, hovering, late vertical routes, and areas that need more than Tengu control.",
+    "First Priority":
+      "Use it for later route checks, high spaces, and story gates that still feel blocked after Tengu.",
+  },
+  {
+    Form: "Fox Form",
+    "How To Unlock": "Unlock after learning Boar, Slime, Tengu, and Yuki-onna forms.",
+    "Main Use": "Final Fox Clan route progress and late transformation mechanics.",
+    "First Priority":
+      "Treat Fox Form as the final transformation route, not an early shortcut.",
+  },
+];
+
+export const formUseColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Best Form", label: "Best Form" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const formUseRows = [
+  {
+    Problem: "New farm plots, rocks, trees, and early field cleanup",
+    "Best Form": "Boar Form",
+    "Why It Works":
+      "Boar Form is built for force, charging, clearing, and fast farm cleanup.",
+  },
+  {
+    Problem: "Slow crop watering",
+    "Best Form": "Slime Form",
+    "Why It Works":
+      "Slime Form can replace the watering can once you learn how to collect and spend water efficiently.",
+  },
+  {
+    Problem: "Underwater paths or water-based blockers",
+    "Best Form": "Slime Form",
+    "Why It Works":
+      "Slime Form lets you move underwater and handle routes that Human or Boar Form cannot solve.",
+  },
+  {
+    Problem: "High ledges, aerial gaps, or vertical Fox Ruins paths",
+    "Best Form": "Tengu Form",
+    "Why It Works":
+      "Tengu Form gives you flight and route access that ground and water forms cannot provide.",
+  },
+  {
+    Problem: "Late vertical routes or ice-linked route checks",
+    "Best Form": "Yuki-onna Form",
+    "Why It Works":
+      "Yuki-onna Form is a later movement form that helps with routes that remain awkward after Tengu.",
+  },
+  {
+    Problem: "Final Fox Clan progression",
+    "Best Form": "Fox Form",
+    "Why It Works":
+      "Fox Form is the final transformation goal after the four earlier forms are learned.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "Form", label: "Form" },
+  { key: "Upgrade First If", label: "Upgrade First If" },
+  { key: "Why It Helps", label: "Why It Helps" },
+  { key: "Delay If", label: "Delay If" },
+];
+
+export const upgradeRows = [
+  {
+    Form: "Human Form",
+    "Upgrade First If":
+      "You are losing too much HP or energy during normal combat, farming, or long travel days.",
+    "Why It Helps":
+      "Human upgrades support general survival and daily stamina before form-specific routes matter.",
+    "Delay If":
+      "A specific Fox Ruins blocker clearly needs a transformation upgrade instead.",
+  },
+  {
+    Form: "Boar Form",
+    "Upgrade First If":
+      "Your farm cleanup, rock breaking, tree clearing, or charge routes feel slow.",
+    "Why It Helps":
+      "Boar upgrades make early farm work and force-based movement smoother.",
+    "Delay If":
+      "You already cleared your farm basics and your next blocker is water, air, or Fox Ruins progress.",
+  },
+  {
+    Form: "Slime Form",
+    "Upgrade First If":
+      "You want faster crop watering, better water collection, stronger water attacks, or smoother underwater routes.",
+    "Why It Helps":
+      "Slime upgrades improve daily farm watering and water-route control.",
+    "Delay If":
+      "You are not using water routes yet and your next blocker is a high ledge.",
+  },
+  {
+    Form: "Tengu Form",
+    "Upgrade First If":
+      "You need better flight control, more endurance, stronger defensive value, or more acceleration.",
+    "Why It Helps":
+      "Tengu upgrades make aerial movement less punishing and help with high-path exploration.",
+    "Delay If":
+      "You have not reached Tengu-gated routes or still need Slime for water blockers.",
+  },
+  {
+    Form: "Yuki-onna Form",
+    "Upgrade First If":
+      "Late vertical movement, hover control, or ice-linked route checks are blocking progress.",
+    "Why It Helps":
+      "Yuki-onna upgrades make later exploration more forgiving.",
+    "Delay If":
+      "You have not reached routes that specifically need it.",
+  },
+  {
+    Form: "Fox Form",
+    "Upgrade First If":
+      "Your current story route has opened Fox Form systems and late Fox Clan progression.",
+    "Why It Helps":
+      "Fox Form is the final transformation route, so upgrade it when the game starts asking for it.",
+    "Delay If":
+      "You still lack Boar, Slime, Tengu, or Yuki-onna.",
+  },
+];
+
+export const blockerColumns = [
+  { key: "Blocker", label: "Blocker" },
+  { key: "Likely Form Check", label: "Likely Form Check" },
+  { key: "What To Do", label: "What To Do" },
+];
+
+export const blockerRows = [
+  {
+    Blocker: "Farm cleanup is slow",
+    "Likely Form Check": "Boar Form",
+    "What To Do":
+      "Use Boar Form for field prep, rocks, trees, and force-based cleanup before spending the whole day with basic tools.",
+  },
+  {
+    Blocker: "Crop watering takes too much time",
+    "Likely Form Check": "Slime Form",
+    "What To Do":
+      "Use Slime Form near water, then water crops with its water ability instead of relying only on the watering can.",
+  },
+  {
+    Blocker: "A route goes underwater",
+    "Likely Form Check": "Slime Form",
+    "What To Do":
+      "Unlock Slime Form from the first Fox Ruins boss route, then return to the water path.",
+  },
+  {
+    Blocker: "A ledge or gap is too high",
+    "Likely Form Check": "Tengu Form",
+    "What To Do":
+      "Unlock Tengu Form from the second Fox Ruins boss route, then practice flight before attempting tight jumps.",
+  },
+  {
+    Blocker: "A high route still feels awkward after Tengu",
+    "Likely Form Check": "Yuki-onna Form",
+    "What To Do":
+      "Progress the later Fox Ruins route and return once Yuki-onna Form is available.",
+  },
+  {
+    Blocker: "A Fox route or final transformation check stays locked",
+    "Likely Form Check": "Fox Form",
+    "What To Do":
+      "Make sure Boar, Slime, Tengu, and Yuki-onna are all learned before chasing the final form.",
+  },
+  {
+    Blocker: "Fox Ruins enemies are draining too much HP",
+    "Likely Form Check": "Food, gear, and form upgrades",
+    "What To Do":
+      "Bring food, upgrade the form that matches the route, and use relic waypoints instead of forcing one long run.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Thinking Slime Form is only for underwater routes",
+    "Why It Hurts":
+      "You miss one of its best daily uses: replacing the watering can for crop watering.",
+    "Better Move":
+      "Use Slime Form for both farm watering and water-based exploration.",
+  },
+  {
+    Mistake: "Trying to unlock Fox Form before the prerequisite chain",
+    "Why It Hurts":
+      "Fox Form is the final transformation route and depends on earlier forms.",
+    "Better Move":
+      "Learn Boar, Slime, Tengu, and Yuki-onna first.",
+  },
+  {
+    Mistake: "Ignoring Tengu upgrades",
+    "Why It Hurts":
+      "Tengu movement can feel difficult if you never improve endurance, defense, or acceleration.",
+    "Better Move":
+      "Upgrade Tengu once aerial paths become your main blocker.",
+  },
+  {
+    Mistake: "Treating every water clue as a Slime-only puzzle",
+    "Why It Hurts":
+      "Some rooms may need later story, switches, bosses, or another form.",
+    "Better Move":
+      "Use Slime where it clearly fits, but return later if the room does not change.",
+  },
+  {
+    Mistake: "Spending all day forcing a blocked route",
+    "Why It Hurts":
+      "You lose farm time, food, and stamina without making progress.",
+    "Better Move":
+      "Leave the route, upgrade the needed form, prepare food, and come back with the right unlock.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Tales of Seikyu forms** are progression tools, not just movement skins. Use **Boar Form** for farm cleanup and force, **Slime Form** for water routes and crop watering, **Tengu Form** for flight and high routes, **Yuki-onna Form** for later hover and ice-linked routes, and **Fox Form** as the final transformation after the earlier forms are learned.
+
+Most key transformation unlocks come from **Fox Ruins progression**. Slime Form comes after defeating **Anji**, Tengu Form comes after defeating **Fujiki**, and Fox Form requires Boar, Slime, Tengu, and Yuki-onna first.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Tales of Seikyu 1.0. Form unlocks, skills, and upgrade behavior can change after patches, so check your current save before spending rare upgrade materials.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-forms-menu.webp"
+    alt="Tales of Seikyu forms menu showing transformation progress"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Forms solve different problems. The best form is the one that matches your current blocker.
+  </figcaption>
+</figure>
+
+<h2 id="yokai-forms-guide">
+  Tales of Seikyu Yokai Forms guide
+</h2>
+
+Yokai forms are one of the main progression systems in Tales of Seikyu.
+
+The mistake is treating them like simple cosmetics. Each form changes what you can do on the farm, in the overworld, and inside the Fox Ruins. If a path looks impossible, the answer is often not “try harder.” It is usually one of these:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>you need a different form,</li>
+  <li>you need to upgrade the form you already have,</li>
+  <li>or the room is meant for later story progress.</li>
+</ol>
+
+Use this guide with the <Link href="/tales-of-seikyu/fox-ruins-guide">Fox Ruins Guide</Link> if you are stuck underground, and the <Link href="/tales-of-seikyu/beginner-guide">Beginner Guide</Link> if you are still setting up your first week.
+
+<GuideTable
+  caption="Tales of Seikyu form unlock order, main use, and first priority."
+  columns={formUnlockColumns}
+  rows={formUnlockRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-forms-work">
+  How forms work
+</h2>
+
+Forms are task tools. They do not all replace each other.
+
+Human Form stays useful for normal tools, daily town life, gifts, crafting, and general play. Boar Form handles force and farm cleanup. Slime Form handles water. Tengu Form handles height. Yuki-onna Form helps later vertical and ice-linked route checks. Fox Form is the final transformation route after the earlier forms are learned.
+
+<GuideTable
+  caption="Which form to use for common problems."
+  columns={formUseColumns}
+  rows={formUseRows}
+/>
+
+<h2 id="boar-form">
+  Boar Form: farm cleanup, force, and early route control
+</h2>
+
+Boar Form is the first form most players rely on heavily.
+
+It is useful because it turns slow farm cleanup into a form-based route. Use it when you need to break obstacles, prepare land, charge through early blockers, or reduce how much time you spend on basic field work.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-boar-form-farming.webp"
+    alt="Tales of Seikyu Boar Form used for farming and field work"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Boar Form is your early force tool for farm work and obstacle cleanup.
+  </figcaption>
+</figure>
+
+<h3 id="boar-rush">
+  Boar Rush upgrade
+</h3>
+
+Once Boar Rush becomes available, the form gets more useful for movement and cleanup. It is still not the answer to every blocker, but it is worth using when a route asks for force instead of water, flight, or ice.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-boar-rush-upgrade.webp"
+    alt="Tales of Seikyu Boar Rush upgrade"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Boar Rush improves the form’s movement and force-based routing value.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="slime-form">
+  Slime Form: Anji, water routes, underwater movement, and farm watering
+</h2>
+
+Slime Form is the second major form check for most players.
+
+You gain the Slime transformation scroll after defeating **Anji**, the first Tanuki boss in the Fox Ruins. Once unlocked, Slime Form opens water routes, underwater paths, and water-based combat options.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-slime-form-unlock.webp"
+    alt="Tales of Seikyu Slime Form unlock after the Fox Ruins boss route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Slime Form turns water from a blocker into a route.
+  </figcaption>
+</figure>
+
+<h3 id="slime-underwater">
+  Underwater routes
+</h3>
+
+Use Slime Form when a path goes underwater or a Fox Ruins route expects water movement. Human Form and Boar Form will not solve those routes.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-slime-underwater.webp"
+    alt="Tales of Seikyu Slime Form moving underwater"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Slime Form is the safe answer for underwater paths and water-based route checks.
+  </figcaption>
+</figure>
+
+<h3 id="slime-farm-watering">
+  Slime Form can replace the watering can
+</h3>
+
+Slime Form is also useful on the farm.
+
+Once you are comfortable collecting and spending water, Slime Form can water crops much faster than basic manual watering. This is especially useful when your field grows larger and morning chores start eating too much of the day.
+
+Use it like this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>start near a water source,</li>
+  <li>fill Slime Form with water,</li>
+  <li>water crop lines efficiently,</li>
+  <li>refill when needed,</li>
+  <li>then switch back to Human Form for other chores.</li>
+</ul>
+
+Do not ignore Slime upgrades if watering, water collection, or water combat becomes part of your daily route.
+
+<h2 id="tengu-form">
+  Tengu Form: Fujiki, flight, high ledges, and aerial routes
+</h2>
+
+Tengu Form is the next major exploration jump after Slime.
+
+You gain the Tengu transformation scroll after defeating **Fujiki**, the second Tanuki boss in the Fox Ruins. This form is for flight, high ledges, gaps, and routes that cannot be solved from the ground or underwater.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-tengu-form-flight.webp"
+    alt="Tales of Seikyu Tengu Form flying over a high route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Tengu Form changes high routes from impossible paths into movement challenges.
+  </figcaption>
+</figure>
+
+Tengu can feel awkward at first. That does not mean the form is bad. It means you should practice outside tight rooms and invest in upgrades once aerial routing becomes important.
+
+Upgrade Tengu when you need:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>more endurance,</li>
+  <li>better acceleration,</li>
+  <li>more forgiving flight control,</li>
+  <li>or stronger defensive value during ruins routes.</li>
+</ul>
+
+<h2 id="yuki-onna-form">
+  Yuki-onna Form: later hover, ice-linked routes, and high spaces
+</h2>
+
+Yuki-onna Form is a later transformation and should not be treated like an early farm tool.
+
+It appears after deeper Fox Ruins and story progression, after earlier forms have already taught you force, water, and flight routing. Use it when Tengu is not enough, especially for late vertical movement, hover-style exploration, and ice-linked route checks.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-yuki-onna-form-card.webp"
+    alt="Tales of Seikyu Yuki-onna Form card in the forms menu"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Yuki-onna Form is a later transformation for routes that still feel blocked after earlier forms.
+  </figcaption>
+</figure>
+
+Use Yuki-onna Form when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a high route still feels awkward after Tengu,</li>
+  <li>a late story path points toward ice or hover movement,</li>
+  <li>or a Fox Ruins room clearly belongs to later form progression.</li>
+</ul>
+
+<h2 id="fox-form">
+  Fox Form: final transformation after the four earlier forms
+</h2>
+
+Fox Form is the final transformation route.
+
+Do not treat it as something you can rush immediately after Boar or Slime. Before Fox Form can become the real goal, you need the earlier form chain:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Boar Form,</li>
+  <li>Slime Form,</li>
+  <li>Tengu Form,</li>
+  <li>Yuki-onna Form,</li>
+  <li>then Fox Form.</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-fox-form-scroll.webp"
+    alt="Tales of Seikyu Fox Form scroll route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fox Form is the final transformation target, not an early replacement for Boar, Slime, Tengu, or Yuki-onna.
+  </figcaption>
+</figure>
+
+If your Fox route is not opening, check the earlier forms first. Missing Tengu or Yuki-onna progress is usually a stronger clue than trying random actions around a Fox blocker.
+
+<h2 id="form-upgrades">
+  Which form should you upgrade first?
+</h2>
+
+Upgrade the form that solves your next real blocker.
+
+If your farm is slow, Boar or Slime may matter most. If the Fox Ruins route has water, Slime matters. If it has height, Tengu or Yuki-onna matters. If the story is already pushing final form progress, Fox Form becomes the next target.
+
+<GuideTable
+  caption="How to choose form upgrades without wasting resources."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+<h2 id="blocked-routes">
+  What to do when a route is blocked
+</h2>
+
+When a route is blocked, read the obstacle before burning a whole day on it.
+
+<GuideTable
+  caption="Common route blockers and the form that usually solves them."
+  columns={blockerColumns}
+  rows={blockerRows}
+/>
+
+A blocked route is not always a failure. Sometimes it is the game telling you to get the next transformation scroll, upgrade a form, or return after a boss route.
+
+<h2 id="fox-ruins-form-routing">
+  Fox Ruins form routing
+</h2>
+
+The Fox Ruins are where form progression becomes most obvious.
+
+Early rooms teach you to think in form logic. A path may look like a combat room, but actually be a water route. A high ledge may look like missed movement tech, but actually be a Tengu check. A late room may feel impossible because it belongs to Yuki-onna or Fox Form progression.
+
+Use this simple route order:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Clear nearby rooms with your current forms.</li>
+  <li>Use relic waypoints before pushing deeper.</li>
+  <li>Bring food before boss routes.</li>
+  <li>After a boss, check for a transformation scroll or newly opened route.</li>
+  <li>Return to older blockers with the new form.</li>
+</ol>
+
+For room-specific routing, use the <Link href="/tales-of-seikyu/fox-ruins-guide">Fox Ruins Guide</Link>.
+
+<h2 id="mistakes">
+  Yokai form mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common form mistakes and safer choices."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  Tales of Seikyu Yokai Forms FAQ
+</h2>
+
+### How do I unlock Slime Form in Tales of Seikyu?
+
+Defeat Anji, the first Tanuki boss in the Fox Ruins, then collect the Slime transformation scroll.
+
+### What is Slime Form used for?
+
+Slime Form is used for underwater routes, water-based Fox Ruins checks, water attacks, and farm watering. It can replace the watering can once you learn how to manage water efficiently.
+
+### How do I unlock Tengu Form?
+
+Defeat Fujiki, the second Tanuki boss in the Fox Ruins, then collect the Tengu transformation scroll.
+
+### What is Tengu Form used for?
+
+Tengu Form is used for flight, high ledges, aerial gaps, and routes that cannot be reached by walking, Boar Form, or Slime Form.
+
+### How do I unlock Yuki-onna Form?
+
+Yuki-onna Form unlocks later through Fox Ruins story and boss progression after earlier forms. Keep progressing past Tengu routes and check the next transformation scroll when the story opens it.
+
+### What is Yuki-onna Form used for?
+
+Yuki-onna Form helps with later movement, hover-style exploration, ice-linked route checks, and high spaces that still feel awkward after Tengu.
+
+### How do I unlock Fox Form?
+
+Fox Form is the final transformation route. Learn Boar, Slime, Tengu, and Yuki-onna first, then continue the Fox Clan story route.
+
+### Is Fox Form better than every other form?
+
+Not for every task. Fox Form is the final transformation, but Boar, Slime, Tengu, and Yuki-onna still matter because each solves a different kind of blocker.
+
+### Which form should I upgrade first?
+
+Upgrade the form that solves your next blocker. Boar helps farm cleanup, Slime helps water and watering, Tengu helps high routes, Yuki-onna helps later vertical routes, and Fox Form matters after the final route opens.
+
+### Can Slime Form water crops?
+
+Yes. Slime Form can be used for crop watering once you are comfortable collecting and spending water. This can save time compared with basic watering can routes.
+
+### Why can’t I reach a high path in the Fox Ruins?
+
+If Slime and Boar cannot solve it, you probably need Tengu Form or later Yuki-onna progress. Return after the correct transformation unlocks.
+
+### Should I force a blocked room until it works?
+
+No. If the form that should solve it does nothing, leave the room, continue story or boss progress, and return later with the next form or upgrade.

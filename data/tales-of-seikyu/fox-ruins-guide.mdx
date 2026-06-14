@@ -1,0 +1,773 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const ruinsPrepColumns = [
+  { key: "Bring Or Do This", label: "Bring Or Do This" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Beginner Rule", label: "Beginner Rule" },
+];
+
+export const ruinsPrepRows = [
+  {
+    "Bring Or Do This": "Food",
+    "Why It Matters":
+      "Fox Ruins routes include enemies, long walks, puzzle rooms, and return trips.",
+    "Beginner Rule":
+      "Bring enough food before entering. Do not rely on finding recovery inside.",
+  },
+  {
+    "Bring Or Do This": "Inventory space",
+    "Why It Matters":
+      "Ruins rooms can give ore, monster drops, offering items, chest rewards, and clue items.",
+    "Beginner Rule":
+      "Empty your bag before a serious run. A full bag turns a good route into a forced return.",
+  },
+  {
+    "Bring Or Do This": "Weapon and form upgrades",
+    "Why It Matters":
+      "Some rooms include enemies or bosses. Later rooms may expect stronger combat tools.",
+    "Beginner Rule":
+      "If enemies feel too slow or dangerous, leave, upgrade, and return.",
+  },
+  {
+    "Bring Or Do This": "Manual save before major pushes",
+    "Why It Matters":
+      "Boss rooms, long routes, and form-gated paths can cost a lot of time.",
+    "Beginner Rule":
+      "Save before a boss or deep route if you are carrying valuable materials.",
+  },
+  {
+    "Bring Or Do This": "Offering materials",
+    "Why It Matters":
+      "Some altar gates require items such as meat or other materials.",
+    "Beginner Rule":
+      "When an altar asks for an item, write it down and bring it on the next run.",
+  },
+  {
+    "Bring Or Do This": "Waypoint habit",
+    "Why It Matters":
+      "Relic waypoints reduce repeated walking and help Free to Roam later.",
+    "Beginner Rule":
+      "Activate every waypoint immediately. Do not assume you will remember it.",
+  },
+];
+
+export const routeDecisionColumns = [
+  { key: "Room Situation", label: "Room Situation" },
+  { key: "Keep Going If", label: "Keep Going If" },
+  { key: "Leave And Return If", label: "Leave And Return If" },
+];
+
+export const routeDecisionRows = [
+  {
+    "Room Situation": "New normal room",
+    "Keep Going If":
+      "You have food, space, and can clear enemies without spending everything.",
+    "Leave And Return If":
+      "Your bag is full or every enemy takes too long to defeat.",
+  },
+  {
+    "Room Situation": "Offering altar",
+    "Keep Going If":
+      "You already have the required item and can safely unlock the next route.",
+    "Leave And Return If":
+      "You do not have the item. Write down the requirement instead of guessing.",
+  },
+  {
+    "Room Situation": "Relic waypoint",
+    "Keep Going If":
+      "You can activate it and still have enough time to check the next room.",
+    "Leave And Return If":
+      "You are low on food or close to a time-sensitive town event.",
+  },
+  {
+    "Room Situation": "Water route",
+    "Keep Going If":
+      "You have Slime Form or the room clearly gives a non-water route.",
+    "Leave And Return If":
+      "The route expects swimming, water movement, or an indoor/outdoor shortcut you cannot use yet.",
+  },
+  {
+    "Room Situation": "Gap, cliff, or high platform",
+    "Keep Going If":
+      "You already have the form or movement upgrade that reaches it.",
+    "Leave And Return If":
+      "The room looks built for Tengu Form or another later movement option.",
+  },
+  {
+    "Room Situation": "Boss door or obvious arena",
+    "Keep Going If":
+      "You have food, upgraded gear, and enough time to finish the fight.",
+    "Leave And Return If":
+      "You are underprepared. Boss rooms are not the place to test a weak setup.",
+  },
+];
+
+export const formGateColumns = [
+  { key: "Gate Type", label: "Gate Type" },
+  { key: "Likely Form Or Progress", label: "Likely Form Or Progress" },
+  { key: "What To Do", label: "What To Do" },
+];
+
+export const formGateRows = [
+  {
+    "Gate Type": "Loose rocks, obstacles, and brute-force routes",
+    "Likely Form Or Progress": "Boar Form or combat progress",
+    "What To Do":
+      "Clear what you can, but do not assume every blocked path is a Boar problem.",
+  },
+  {
+    "Gate Type": "Water, underwater paths, or slime-side enemies",
+    "Likely Form Or Progress": "Slime Form",
+    "What To Do":
+      "Return after Slime Form. It can also open shortcut logic between indoor and outdoor Fox Ruins sections.",
+  },
+  {
+    "Gate Type": "Large gaps, cliffs, ravines, or high platforms",
+    "Likely Form Or Progress": "Tengu Form",
+    "What To Do":
+      "Mark the room and come back after Tengu progress. Later ruins rooms can expect aerial crossing.",
+  },
+  {
+    "Gate Type": "Foxholes, Fox Halls, and hidden fox clues",
+    "Likely Form Or Progress": "Fox Form / Fox Transformation Scroll route",
+    "What To Do":
+      "Follow scrap paper, foxhole, and old Fox Halls clues instead of searching random rooms.",
+  },
+  {
+    "Gate Type": "Unclear elemental or late-form puzzle",
+    "Likely Form Or Progress": "Later story or later form progress",
+    "What To Do":
+      "Do not burn a whole day brute-forcing it. Note the clue and return after more forms.",
+  },
+];
+
+export const puzzleColumns = [
+  { key: "Puzzle Or Blocker", label: "Puzzle Or Blocker" },
+  { key: "What It Usually Means", label: "What It Usually Means" },
+  { key: "How To Approach It", label: "How To Approach It" },
+];
+
+export const puzzleRows = [
+  {
+    "Puzzle Or Blocker": "Glowing tofu count",
+    "What It Usually Means":
+      "A simple observation puzzle where you count the glowing tofu pieces in the room.",
+    "How To Approach It":
+      "Pause, count carefully, and answer with the number you actually saw.",
+  },
+  {
+    "Puzzle Or Blocker": "Offering altar",
+    "What It Usually Means":
+      "The route is item-gated, not combat-gated.",
+    "How To Approach It":
+      "Check the requirement, write it down, and bring the item on a later run.",
+  },
+  {
+    "Puzzle Or Blocker": "Foxhole or scrap paper clue",
+    "What It Usually Means":
+      "The route is pointing toward Fox Form or old Fox Halls progress.",
+    "How To Approach It":
+      "Track the clue and connect it to the Fox Transformation Scroll route.",
+  },
+  {
+    "Puzzle Or Blocker": "Water path you cannot use yet",
+    "What It Usually Means":
+      "The room probably expects Slime Form or a Slime shortcut.",
+    "How To Approach It":
+      "See the Slime Form section below instead of forcing the room early.",
+  },
+  {
+    "Puzzle Or Blocker": "Gap, ravine, or high platform",
+    "What It Usually Means":
+      "The room may expect Tengu Form or another later movement upgrade.",
+    "How To Approach It":
+      "Mark the room and return after Tengu progress.",
+  },
+  {
+  "Puzzle Or Blocker": "Water and fire cannot coexist",
+  "What It Usually Means":
+    "An elemental clue that is not solved by Slime Form alone in current community testing.",
+  "How To Approach It":
+    "Mark the room and return after more story or form progress. When revisiting, check nearby routes, switches, boss progress, or later transformation options.",
+},
+];
+
+export const bossPrepColumns = [
+  { key: "Boss Prep", label: "Boss Prep" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Safe Route", label: "Safe Route" },
+];
+
+export const bossPrepRows = [
+  {
+    "Boss Prep": "Manual save",
+    "Why It Matters":
+      "Bosses can cost food, time, and resources, especially if you enter with a weak route.",
+    "Safe Route":
+      "Save before a boss room or deep ruins push.",
+  },
+  {
+    "Boss Prep": "Food stack",
+    "Why It Matters":
+      "Bosses and late enemies can punish players who enter with tutorial-level supplies.",
+    "Safe Route":
+      "Bring cooked food or reliable snacks before committing.",
+  },
+  {
+    "Boss Prep": "Weapon upgrades",
+    "Why It Matters":
+      "Combat becomes much safer once your weapon and form route are not underleveled.",
+    "Safe Route":
+      "If fights feel slow, leave and upgrade before forcing the next boss.",
+  },
+  {
+    "Boss Prep": "Form readiness",
+    "Why It Matters":
+      "Some boss routes are tied to transformation progress or movement access.",
+    "Safe Route":
+      "If the path to the boss feels form-gated, return after Slime, Tengu, Fox, or later story progress.",
+  },
+  {
+    "Boss Prep": "Room count tracking",
+    "Why It Matters":
+      "Boss routes can open more rooms and move you toward Move Over, Yohji.",
+    "Safe Route":
+      "After a boss, revisit nearby doors, waypoints, and rooms before leaving.",
+  },
+];
+
+export const scrollRewardColumns = [
+  { key: "Thing To Watch", label: "Thing To Watch" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const scrollRewardRows = [
+  {
+    "Thing To Watch": "Transformation scrolls",
+    "Why It Matters":
+      "Fox Ruins progress can connect to multiple transformation scrolls, not only Fox Form.",
+    "Player Advice":
+      "Read the story clue before assuming every scroll is the one you are looking for.",
+  },
+  {
+    "Thing To Watch": "Treasure chests",
+    "Why It Matters":
+      "Side rooms can reward fertilizer, materials, ores, or other useful items.",
+    "Player Advice":
+      "If a room has a puzzle, count, altar, or side path, check for a chest before leaving.",
+  },
+  {
+    "Thing To Watch": "Mining rooms",
+    "Why It Matters":
+      "Fox Ruins can supply ores, minerals, and crafting materials.",
+    "Player Advice":
+      "Bring inventory space. A good mining room is wasted if your bag is already full.",
+  },
+  {
+    "Thing To Watch": "Relic waypoints",
+    "Why It Matters":
+      "Waypoints turn deep routes into repeatable routes and support Free to Roam.",
+    "Player Advice":
+      "Activate waypoints immediately, even if you plan to leave right after.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Entering with a full bag",
+    "Why It Hurts":
+      "You may have to leave before taking chest rewards, ore, drops, or offering materials.",
+    "Better Move":
+      "Empty your bag before entering and buy backpack space if possible.",
+  },
+  {
+    Mistake: "Ignoring relic waypoints",
+    "Why It Hurts":
+      "You make every future ruins run longer and slow down Free to Roam.",
+    "Better Move":
+      "Activate every waypoint the moment you find it.",
+  },
+  {
+    Mistake: "Trying to brute-force every water route",
+    "Why It Hurts":
+      "Some routes need Slime Form or an internal shortcut, not repeated jumping.",
+    "Better Move":
+      "Mark the route and return after Slime Form.",
+  },
+  {
+    Mistake: "Treating every gap as a Boar jump",
+    "Why It Hurts":
+      "Later ravines and high platforms can expect Tengu Form or later movement.",
+    "Better Move":
+      "If the gap looks impossible, stop and return after Tengu progress.",
+  },
+  {
+    Mistake: "Forcing the water/fire puzzle with Slime Form only",
+    "Why It Hurts":
+      "The clue is not confirmed as a simple fire-extinguishing puzzle in 1.0.",
+    "Better Move":
+      "Treat it as a later-form or story-gated puzzle until the exact interaction is confirmed.",
+  },
+  {
+    Mistake: "Fighting bosses underprepared",
+    "Why It Hurts":
+      "Bosses can drain food and time, and weak weapons make fights longer than needed.",
+    "Better Move":
+      "Save, bring food, and upgrade weapons or forms before serious boss attempts.",
+  },
+  {
+    Mistake: "Assuming 75 rooms are early-game content",
+    "Why It Hurts":
+      "Move Over, Yohji asks for 75 ruins rooms, and later rooms can require later forms and story progress.",
+    "Better Move":
+      "Track rooms steadily and return after Slime, Tengu, Fox, and boss progress.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The **Fox Ruins** are not a one-run dungeon. Bring food, empty inventory space, a weapon, and a manual save before deep pushes. Activate every **relic waypoint**, write down **offering altar** requirements, treat water paths as **Slime Form** routes, treat large gaps or high platforms as **Tengu Form** routes, and follow foxhole clues toward the **Fox Transformation Scroll**.
+
+For **Move Over, Yohji**, plan around the 1.0 achievement target of **75 ruins rooms**. Earlier routes will not clear everything. Later rooms can require more story progress, bosses, transformation scrolls, Slime shortcuts, Tengu aerial crossing, and form-gated returns.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the Tales of Seikyu 1.0 release. Fox Ruins room counts, boss routes, form gates, and puzzle behavior may change after patches.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-fox-ruins-entrance.webp"
+    alt="Tales of Seikyu Fox Ruins entrance"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Treat the first Fox Ruins trip as a scouting run. Learn the entrance, activate shortcuts, and mark blockers.
+  </figcaption>
+</figure>
+
+<h2 id="fox-ruins-guide">
+  Tales of Seikyu Fox Ruins guide
+</h2>
+
+The Fox Ruins are one of the first places where Tales of Seikyu stops being only a farming life sim and starts asking you to think like an explorer.
+
+You will find enemies, mining rooms, offering gates, clue rooms, foxholes, relic waypoints, scroll routes, chests, bosses, and form-gated paths. The mistake is trying to finish everything the first time you enter.
+
+A good Fox Ruins route is simple:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Bring food and empty inventory space.</li>
+  <li>Activate every relic waypoint immediately.</li>
+  <li>Write down offering requirements instead of guessing.</li>
+  <li>Mark water routes for Slime Form.</li>
+  <li>Mark gaps and high platforms for Tengu Form.</li>
+  <li>Follow foxhole clues toward the Fox Transformation Scroll.</li>
+  <li>Return after bosses, scrolls, and new form progress.</li>
+</ol>
+
+If you are still setting up your first week, use the <Link href="/tales-of-seikyu/beginner-guide">Beginner Guide</Link> first. If you are tracking forms, use the <Link href="/tales-of-seikyu/yokai-forms-guide">Yokai Forms Guide</Link>. If your target is 75 rooms, use this page together with the <Link href="/tales-of-seikyu/achievements-guide">Achievements Guide</Link>.
+
+<GuideTable
+  caption="What to prepare before pushing deeper into the Fox Ruins."
+  columns={ruinsPrepColumns}
+  rows={ruinsPrepRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="route-order">
+  What should you do first inside the Fox Ruins?
+</h2>
+
+Your first few Fox Ruins trips should not chase full completion. They should identify what each route needs.
+
+Use this order:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Clear simple rooms and enemies.</li>
+  <li>Mine useful materials only if you have inventory space.</li>
+  <li>Activate the first relic waypoint you find.</li>
+  <li>Open any room that needs only combat or a simple observation puzzle.</li>
+  <li>Write down altar requirements.</li>
+  <li>Leave water, ravine, and high-platform routes for later forms.</li>
+  <li>Return after Slime, Tengu, Fox, boss, or story progress.</li>
+</ol>
+
+<GuideTable
+  caption="How to decide whether to keep going or return later."
+  columns={routeDecisionColumns}
+  rows={routeDecisionRows}
+/>
+
+<h2 id="relic-waypoints">
+  Relic waypoints and Free to Roam tracking
+</h2>
+
+Relic waypoints are not optional convenience markers. They are part of how you make the Fox Ruins manageable.
+
+When you unlock a new relic waypoint, activate it immediately. This makes later offering runs, boss attempts, and room cleanup much faster. It also supports the **Free to Roam** achievement later.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-new-relic-waypoint.webp"
+    alt="Tales of Seikyu New Relic Teleport Waypoint unlocked message"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Activate every relic waypoint as soon as it appears. It saves time now and helps achievement cleanup later.
+  </figcaption>
+</figure>
+
+Do not walk past a waypoint because you are “just checking one more room.” That is how players forget which travel points they have already activated.
+
+<h2 id="offering-altars">
+  Offering altars and shrine requirements
+</h2>
+
+Some Fox Ruins routes are blocked by offerings. These are not puzzles you solve by attacking enemies.
+
+When an altar asks for an item, check the exact requirement and write it down. One early ruins altar asks for **10 Meat**, which makes it easy to waste a trip if you enter without enough materials.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-fox-ruins-offering-altar.webp"
+    alt="Tales of Seikyu Fox Ruins altar with Make Offering prompt"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If an altar asks for an item, treat it as a checklist entry. Do not try to brute-force the door.
+  </figcaption>
+</figure>
+
+Keep a reserve of common route materials such as meat, stone, ore, crops, and basic gathering items. Selling every useful item early can turn one altar into a multi-day delay.
+
+<h2 id="form-gates">
+  Form-gated rooms: Slime, Tengu, Fox, and later progress
+</h2>
+
+Fox Ruins rooms are often designed around transformation progress.
+
+If a route feels impossible, it may not be a skill problem. It may be a form gate.
+
+<GuideTable
+  caption="Common Fox Ruins form gates and how to handle them."
+  columns={formGateColumns}
+  rows={formGateRows}
+/>
+
+The safest habit is to mark the blocker, leave, and return later. This is much better than wasting a full day trying to force a route that clearly expects another form.
+
+<h2 id="slime-shortcuts">
+  Slime Form routes and internal shortcuts
+</h2>
+
+Slime Form matters inside the Fox Ruins, not only outside in rivers or lakes.
+
+If a route points toward water, underwater movement, or a path that seems to connect indoor and outdoor sections, treat it as a Slime Form route. Slime Form can open shortcut logic between different ruins sections, which makes later cleanup much easier.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-slime-underwater.webp"
+    alt="Tales of Seikyu Slime Form underwater travel explanation"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When water becomes the blocker, stop forcing the room and return after Slime Form progress.
+  </figcaption>
+</figure>
+
+Do not treat every water room as something you can solve on the first visit. Some routes are meant to become easier after the form unlock.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="tengu-form-ruins">
+  Tengu Form and later Fox Ruins rooms
+</h2>
+
+Some Fox Ruins rooms become readable only after you understand Tengu Form.
+
+If a room has a large gap, ravine, cliff, wind current, or elevated platform, do not assume you are missing a tiny jump angle. Later rooms can expect aerial crossing.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-tengu-form-flight.webp"
+    alt="Tales of Seikyu Tengu Form flying across an outdoor route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Tengu Form is the answer to many late movement blockers, especially gaps, cliffs, ravines, and high platforms.
+  </figcaption>
+</figure>
+
+Use this rule:
+
+<strong>If the gap looks designed for flight, leave it for Tengu progress.</strong>
+
+This is especially important if you are chasing **Move Over, Yohji**. Some later room count progress may not be realistic until you have the movement tools to reach the other side.
+
+<h2 id="water-fire-puzzle">
+  Water and fire cannot coexist puzzle
+</h2>
+
+The **“Water and fire cannot coexist”** clue is one of the most confusing Fox Ruins blockers because it looks like a direct Slime Form hint.
+
+Current community testing suggests **Slime Form alone does not solve this room**. Do not spend the whole day trying to extinguish the fire with Slime Form.
+
+Safe approach:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Read the clue and remember the room location.</li>
+  <li>Do not keep repeating Slime Form against the flame.</li>
+  <li>Check whether the room connects to a nearby route, switch, boss path, or later form gate.</li>
+  <li>If nothing changes, mark it as a later-progress puzzle.</li>
+  <li>Return after more story or form progress.</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-water-fire-puzzle.webp"
+    alt="Tales of Seikyu Fox Ruins Water and fire cannot coexist puzzle clue"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Slime Form alone does not appear to solve this room. Mark it and return after more story or form progress.
+  </figcaption>
+</figure>
+
+For now, treat this room as a return-later blocker instead of a Slime Form-only puzzle. If you cannot change the room state after checking nearby paths, leave a marker in your own notes and continue with other Fox Ruins routes.
+
+<h2 id="puzzles">
+  Common Fox Ruins puzzle logic
+</h2>
+
+Not every room is a combat room. Some rooms ask you to observe, count, pay, return later, or recognize a form gate.
+
+<GuideTable
+  caption="Common Fox Ruins puzzles and route blockers."
+  columns={puzzleColumns}
+  rows={puzzleRows}
+/>
+
+For the glowing tofu room, slow down and count what the room actually shows. If the game asks how many glowing tofu pieces were visible, answer based on observation instead of guessing.
+
+<h2 id="foxholes-scrolls">
+  Foxholes, scrap paper, and transformation scrolls
+</h2>
+
+Foxholes are not random decoration. They can connect to old Fox Halls, scrap paper clues, and transformation scroll progress.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-foxhole-scrap-paper.webp"
+    alt="Tales of Seikyu foxhole clue with old tattered scrap of paper"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Foxhole clues can point toward old Fox Halls and transformation progress.
+  </figcaption>
+</figure>
+
+The important part is not only finding a scroll. The important part is knowing which scroll the story is pointing you toward.
+
+Fox Ruins routes can include multiple transformation scrolls. Do not assume every scroll is Fox Form. Follow the story clue, then connect that clue to the room, foxhole, or old hall that explains what you are looking for.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-fox-form-scroll.webp"
+    alt="Tales of Seikyu Fox Ancestor mentioning the Fox Transformation Scroll hidden in Fox Halls"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Fox Transformation Scroll route is tied to old Fox Halls and foxhole clues.
+  </figcaption>
+</figure>
+
+For full transformation routing, use the <Link href="/tales-of-seikyu/yokai-forms-guide">Yokai Forms Guide</Link>.
+
+<h2 id="bosses">
+  Bosses and combat preparation
+</h2>
+
+Do not treat the Fox Ruins as a puzzle-only dungeon.
+
+Older Fox Ruins route data already included multiple bosses, and the 1.0 achievement route asks players to keep pushing much farther than the first few rooms. That means your combat setup matters.
+
+<GuideTable
+  caption="How to prepare before Fox Ruins bosses and deeper combat rooms."
+  columns={bossPrepColumns}
+  rows={bossPrepRows}
+/>
+
+The practical advice is simple: if a boss takes too long or drains every food item, leave and upgrade. Better weapons and form progress can turn a miserable fight into a normal route.
+
+
+<h2 id="rooms-count">
+  How many Fox Ruins rooms are there?
+</h2>
+
+The most important number for 1.0 achievement routing is **75 rooms**, because **Move Over, Yohji** asks you to unlock 75 ruins rooms.
+
+Older route data listed 50 Fox Ruins rooms in an earlier build, but 1.0 completion routing clearly pushes beyond the old early-access expectation. Treat the current route as a long-term cleanup project, not a first-week dungeon.
+
+What this means:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Early rooms teach combat, mining, offerings, and waypoints.</li>
+  <li>Mid-game rooms start using Slime, scrolls, and more complex blockers.</li>
+  <li>Later rooms can expect Tengu Form, bosses, and continued story progress.</li>
+  <li>You should track blocked rooms instead of assuming you failed the puzzle.</li>
+</ul>
+
+For achievement routing, pair this page with the <Link href="/tales-of-seikyu/achievements-guide">Achievements Guide</Link>.
+
+<h2 id="treasure-chests">
+  Scrolls, treasure chests, and optional rewards
+</h2>
+
+The Fox Ruins are worth exploring even when a room is not part of your main story objective.
+
+Older route data already showed that the ruins had multiple transformation scrolls and many treasure chests. Even if exact 1.0 counts change, the principle stays useful: check side rooms, puzzle rewards, mining rooms, and chest corners before leaving.
+
+<GuideTable
+  caption="Rewards and route items to watch for inside the Fox Ruins."
+  columns={scrollRewardColumns}
+  rows={scrollRewardRows}
+/>
+
+Do not run past a room just because it is not the current quest marker. If it has a puzzle, altar, foxhole, mining spot, or obvious side route, it may matter later.
+
+<h2 id="mistakes">
+  Fox Ruins mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common Fox Ruins mistakes and safer route choices."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="related-guides">
+  What to read next
+</h2>
+
+<div className="my-8 grid gap-4 md:grid-cols-2">
+  <Link
+    href="/tales-of-seikyu"
+    className="group rounded-2xl border border-slate-700 bg-slate-900/80 p-6 no-underline transition hover:border-amber-400/40 hover:bg-slate-900"
+  >
+    <h3 className="mb-2 text-lg font-semibold text-slate-100 transition group-hover:text-amber-300">
+      Tales of Seikyu Guide Hub
+    </h3>
+    <div className="text-sm leading-6 text-slate-300 transition group-hover:text-slate-200">
+      Return to the full route for beginner setup, forms, requests, romance, achievements, and long-term planning.
+    </div>
+  </Link>
+
+  <Link
+    href="/tales-of-seikyu/beginner-guide"
+    className="group rounded-2xl border border-slate-700 bg-slate-900/80 p-6 no-underline transition hover:border-amber-400/40 hover:bg-slate-900"
+  >
+    <h3 className="mb-2 text-lg font-semibold text-slate-100 transition group-hover:text-amber-300">
+      Beginner Guide
+    </h3>
+    <div className="text-sm leading-6 text-slate-300 transition group-hover:text-slate-200">
+      Prepare your first week with storage, backpack upgrades, trash cans, Slime Form, fishing, and shrines.
+    </div>
+  </Link>
+
+  <Link
+    href="/tales-of-seikyu/yokai-forms-guide"
+    className="group rounded-2xl border border-slate-700 bg-slate-900/80 p-6 no-underline transition hover:border-amber-400/40 hover:bg-slate-900"
+  >
+    <h3 className="mb-2 text-lg font-semibold text-slate-100 transition group-hover:text-amber-300">
+      Yokai Forms Guide
+    </h3>
+    <div className="text-sm leading-6 text-slate-300 transition group-hover:text-slate-200">
+      Use Boar, Slime, Fox, Tengu, and later forms to solve route blockers.
+    </div>
+  </Link>
+
+  <Link
+    href="/tales-of-seikyu/achievements-guide"
+    className="group rounded-2xl border border-slate-700 bg-slate-900/80 p-6 no-underline transition hover:border-amber-400/40 hover:bg-slate-900"
+  >
+    <h3 className="mb-2 text-lg font-semibold text-slate-100 transition group-hover:text-amber-300">
+      Achievements Guide
+    </h3>
+    <div className="text-sm leading-6 text-slate-300 transition group-hover:text-slate-200">
+      Track Move Over, Yohji, Free to Roam, Inari is Pleased, and 100% cleanup.
+    </div>
+  </Link>
+</div>
+
+<h2 id="faq">
+  Tales of Seikyu Fox Ruins FAQ
+</h2>
+
+### When should I enter the Fox Ruins?
+
+Enter when you have food, inventory space, a weapon, and enough time left in the day. Your first run should focus on scouting, relic waypoints, clues, and offering gates.
+
+### How do I solve the Water and fire cannot coexist puzzle?
+
+The exact 1.0 interaction is still being verified. Do not rely on Slime Form alone to extinguish the room. Mark the location, check nearby routes, and return after later form or story progress.
+
+### What does Slime Form unlock in the Fox Ruins?
+
+Slime Form helps with water routes, underwater movement, and some shortcut logic between indoor and outdoor ruins sections.
+
+### What does Tengu Form do in the Fox Ruins?
+
+Tengu Form helps with large gaps, ravines, cliffs, and elevated platforms. If a room looks impossible to cross by normal jumping, return after Tengu progress.
+
+### How many Fox Ruins rooms do I need for Move Over, Yohji?
+
+Move Over, Yohji asks you to unlock 75 ruins rooms. Treat it as a long-term 1.0 cleanup route, not something you finish during the first few visits.
+
+### Are there bosses in the Fox Ruins?
+
+Yes, the Fox Ruins should be treated as a dungeon with boss routes, not only puzzles. Save before major fights, bring food, and upgrade weapons or forms if combat feels too slow.
+
+### Are there multiple transformation scrolls?
+
+Yes, Fox Ruins routes can connect to multiple transformation scrolls. Do not assume every scroll is Fox Form; follow the story clue for the specific scroll you need.
+
+### Should I open every chest?
+
+Open chests when you can safely reach them and have inventory space. Puzzle rooms, side rooms, and mining routes can all lead to useful rewards.
+
+### What should I do if a room feels impossible?
+
+Stop forcing it. Mark the room as a form gate, offering gate, boss gate, or story gate, then return after new progress.
+
+### Should I sell ruins materials?
+
+Sell extras carefully, but keep useful drops, ores, meat, energy crystals, and unusual materials until you know whether they are needed for offerings, crafting, or upgrades.

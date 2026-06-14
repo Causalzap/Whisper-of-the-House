@@ -1,0 +1,688 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const requestTypeColumns = [
+  { key: "Request Type", label: "Request Type" },
+  { key: "How It Works", label: "How It Works" },
+  { key: "Beginner Advice", label: "Beginner Advice" },
+];
+
+export const requestTypeRows = [
+  {
+    "Request Type": "Short timed requests",
+    "How It Works":
+      "Most normal board requests use a short timer, commonly 3 days.",
+    "Beginner Advice":
+      "Accept only if you already have the item, can get it quickly, or the reward unlocks an important system.",
+  },
+  {
+    "Request Type": "Red stamp side quests",
+    "How It Works":
+      "Red stamp requests are long side quests and do not behave like normal short timed requests.",
+    "Beginner Advice":
+      "Do not panic if one does not show the same countdown. Treat red stamp quests as longer route goals.",
+  },
+  {
+    "Request Type": "Fishing requests",
+    "How It Works":
+      "Fish Please! style requests can ask for multiple of the same fish species.",
+    "Beginner Advice":
+      "Keep several common fish, not only one of each new species.",
+  },
+  {
+    "Request Type": "Material requests",
+    "How It Works":
+      "Lend A Hand! style requests ask for gathered, mined, or crafted materials.",
+    "Beginner Advice":
+      "Keep wood, stone, clay, ore, bamboo, hardwood, and common gathering items in storage.",
+  },
+  {
+    "Request Type": "Construction material requests",
+    "How It Works":
+      "More Planks, More Stone, More Hard Stuff! style requests ask for building materials.",
+    "Beginner Advice":
+      "Do not sell every basic material early. Construction requests overlap with crafting, upgrades, and facilities.",
+  },
+  {
+    "Request Type": "Cooking item requests",
+    "How It Works":
+      "Some cooking requests ask for pickled, dried, or other prepared items instead of normal stove dishes.",
+    "Beginner Advice":
+      "Keep ingredients and check the exact item name before assuming any cooked meal will work.",
+  },
+  {
+    "Request Type": "Facility or ranch requests",
+    "How It Works":
+      "Some requests connect to facilities, ranch progress, animals, or Sasaki-related upgrades.",
+    "Beginner Advice":
+      "Treat these as progression requests, not quick cash errands.",
+  },
+];
+
+export const earlyRequestColumns = [
+  { key: "Quest Or Request", label: "Quest Or Request" },
+  { key: "Who Or Where", label: "Who Or Where" },
+  { key: "What It Unlocks Or Teaches", label: "What It Unlocks Or Teaches" },
+  { key: "Beginner Note", label: "Beginner Note" },
+];
+
+export const earlyRequestRows = [
+  {
+    "Quest Or Request": "Teach a Yokai to Fish",
+    "Who Or Where": "Request Board, then Torleone on the docks",
+    "What It Unlocks Or Teaches": "Basic Rod and the early fishing system",
+    "Beginner Note":
+      "Take this early. Fishing supports food, money, fish requests, Kappa clues, and collection goals.",
+  },
+  {
+    "Quest Or Request": "Fish Please!",
+    "Who Or Where": "Request Board fishing request",
+    "What It Unlocks Or Teaches": "Fish request pattern",
+    "Beginner Note":
+      "Fish requests can ask for multiple of the same species. Keep several common fish in storage.",
+  },
+  {
+    "Quest Or Request": "Lend A Hand!",
+    "Who Or Where": "Request Board material request",
+    "What It Unlocks Or Teaches": "Basic material delivery logic",
+    "Beginner Note":
+      "Accept if the item is already in storage or easy to gather within the timer.",
+  },
+  {
+    "Quest Or Request": "More Planks, More Stone, More Hard Stuff!",
+    "Who Or Where": "Request Board construction material request",
+    "What It Unlocks Or Teaches": "Building material demand",
+    "Beginner Note":
+      "Keep wood, stone, bamboo, hardwood, and related materials instead of selling every stack.",
+  },
+  {
+    "Quest Or Request": "Bamboo-related delivery",
+    "Who Or Where": "Request Board or early material route",
+    "What It Unlocks Or Teaches": "Bamboo Forest routing and material planning",
+    "Beginner Note":
+      "Check the small path behind the farmhouse if you are trying to reach Bamboo Forest early.",
+  },
+  {
+    "Quest Or Request": "Ranch or facility request",
+    "Who Or Where": "Sasaki-related progress",
+    "What It Unlocks Or Teaches": "Facilities, animals, and later ranch goals",
+    "Beginner Note":
+      "These matter more once your farm income and material storage are stable.",
+  },
+];
+
+export const requestPriorityColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Take These Requests", label: "Take These Requests" },
+  { key: "Skip Or Delay These", label: "Skip Or Delay These" },
+];
+
+export const requestPriorityRows = [
+  {
+    Priority: "High",
+    "Take These Requests":
+      "System unlocks, Basic Rod, clear red stamp side quests, easy deliveries you can finish immediately.",
+    "Skip Or Delay These":
+      "Anything that sends you far away when you have no food, space, or time.",
+  },
+  {
+    Priority: "Medium",
+    "Take These Requests":
+      "Material requests using items you already have, simple fish requests, and early relationship requests for NPCs you care about.",
+    "Skip Or Delay These":
+      "Requests that require selling your last useful material stack.",
+  },
+  {
+    Priority: "Low",
+    "Take These Requests":
+      "Extra money requests after daily farming, fishing, and shrine routes are done.",
+    "Skip Or Delay These":
+      "Timed crop, rare fish, or prepared food requests you cannot finish within the current timer.",
+  },
+];
+
+export const keepColumns = [
+  { key: "Item Type", label: "Item Type" },
+  { key: "Why To Keep It", label: "Why To Keep It" },
+  { key: "Storage Rule", label: "Storage Rule" },
+];
+
+export const keepRows = [
+  {
+    "Item Type": "Fish",
+    "Why To Keep It":
+      "Fish requests can ask for multiple of the same species, while collection goals reward new species variety.",
+    "Storage Rule":
+      "Keep several common species for Fish Please! requests, and keep at least one of each new species for collection goals.",
+  },
+  {
+    "Item Type": "Wood and stone",
+    "Why To Keep It":
+      "Used in crafting, furniture, construction requests, facilities, and shrine offering routes.",
+    "Storage Rule":
+      "Never sell your last stack.",
+  },
+  {
+    "Item Type": "Bamboo and hardwood",
+    "Why To Keep It":
+      "Used in later building, crafting, requests, and route upgrades.",
+    "Storage Rule":
+      "Treat them as progression materials, not quick cash.",
+  },
+  {
+    "Item Type": "Clay, ore, and minerals",
+    "Why To Keep It":
+      "Used in crafting, forging, shrine bundles, construction requests, and upgrades.",
+    "Storage Rule":
+      "Store first, sell only after you have a reserve.",
+  },
+  {
+    "Item Type": "Crops",
+    "Why To Keep It":
+      "Used for timed requests, gifts, cooking, shrine offerings, and crop collection achievements.",
+    "Storage Rule":
+      "Sell extras, but keep a few of each crop.",
+  },
+  {
+    "Item Type": "Ingredients and prepared items",
+    "Why To Keep It":
+      "Cooking item requests can ask for pickled, dried, or prepared items rather than normal meals.",
+    "Storage Rule":
+      "See the cooking requests section below before using your last copy.",
+  },
+  {
+    "Item Type": "Meat and food",
+    "Why To Keep It":
+      "Food supports ruins routes, combat, offerings, and long travel days.",
+    "Storage Rule":
+      "Keep a food stack for exploration before selling extra meals.",
+  },
+];
+
+
+export const timerColumns = [
+  { key: "Board Signal", label: "Board Signal" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "What To Do", label: "What To Do" },
+];
+
+export const timerRows = [
+  {
+    "Board Signal": "Normal request with a short timer",
+    "What It Means":
+      "This is a timed request. Many short requests use a 3-day limit.",
+    "What To Do":
+      "Accept only if the item is ready or easy to get before the timer ends.",
+  },
+  {
+    "Board Signal": "Red stamp request",
+    "What It Means":
+      "This is a longer side quest and does not behave like a normal short timed request.",
+    "What To Do":
+      "Use it as a progression marker. Do not confuse it with short delivery jobs.",
+  },
+  {
+    "Board Signal": "Fish request",
+    "What It Means":
+      "The board may ask for several of the same fish.",
+    "What To Do":
+      "Check the exact species and quantity before selling common fish.",
+  },
+  {
+    "Board Signal": "Prepared food request",
+    "What It Means":
+      "The board may want pickled, dried, or prepared items.",
+    "What To Do":
+      "Check whether the item is a stove dish or a different prepared ingredient.",
+  },
+  {
+    "Board Signal": "Material request",
+    "What It Means":
+      "The board wants construction, gathering, mining, or crafting materials.",
+    "What To Do":
+      "Finish it only if you are not giving away materials needed for upgrades or offerings.",
+  },
+];
+
+export const requestBenefitColumns = [
+  { key: "Request Benefit", label: "Request Benefit" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Best Use", label: "Best Use" },
+];
+
+export const requestBenefitRows = [
+  {
+    "Request Benefit": "Gold",
+    "Why It Matters":
+      "Gold helps with seeds, backpack upgrades, tools, facilities, and basic progression.",
+    "Best Use":
+      "Use request income to solve practical blockers, not only to buy decoration early.",
+  },
+  {
+    "Request Benefit": "Affinity with the requesting character",
+    "Why It Matters":
+      "Request completion can raise relationship progress with the NPC who asked for help.",
+    "Best Use":
+      "Prioritize requests from characters you want to befriend, especially for BFF and Yokai-About-Town.",
+  },
+  {
+    "Request Benefit": "System unlocks",
+    "Why It Matters":
+      "Some requests open important systems such as fishing or facility progress.",
+    "Best Use":
+      "Take these before random money jobs.",
+  },
+  {
+    "Request Benefit": "Route clues",
+    "Why It Matters":
+      "Some requests point toward fishing, Kappa progress, Bamboo, ranch facilities, or later exploration.",
+    "Best Use":
+      "Use request text as routing information, not just a checklist.",
+  },
+];
+
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Accepting every timed request immediately",
+    "Why It Hurts":
+      "Normal short requests can expire, and some need items you cannot get in time.",
+    "Better Move":
+      "Check the timer, item name, quantity, and your storage before accepting.",
+  },
+  {
+    Mistake: "Confusing red stamp quests with short requests",
+    "Why It Hurts":
+      "You may panic over a quest that is actually a longer side quest.",
+    "Better Move":
+      "Treat red stamp requests as longer progression goals.",
+  },
+  {
+    Mistake: "Selling all common fish",
+    "Why It Hurts":
+      "Fish Please! style requests can ask for multiple of the same fish species.",
+    "Better Move":
+      "Keep several common fish after unlocking the Basic Rod.",
+  },
+  {
+    Mistake: "Only keeping one of each fish",
+    "Why It Hurts":
+      "One-of-each storage helps collections, but it does not cover same-species fish requests.",
+    "Better Move":
+      "Keep both new species and a few duplicates of common fish.",
+  },
+  {
+    Mistake: "Ignoring prepared food items",
+    "Why It Hurts":
+      "Cooking requests may ask for pickled, dried, or prepared items, not only stove meals.",
+    "Better Move":
+      "Check the exact request wording before selling or eating prepared items.",
+  },
+  {
+    Mistake: "Giving away your last building materials",
+    "Why It Hurts":
+      "Wood, stone, bamboo, hardwood, clay, and ore overlap with crafting, offerings, and upgrades.",
+    "Better Move":
+      "Complete material requests from surplus, not from your last useful stack.",
+  },
+  {
+    Mistake: "Ignoring who posted the request",
+    "Why It Hurts":
+      "Requests can improve affinity with the requesting character.",
+    "Better Move":
+      "Use requests to support friendship routes and social achievements.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The **Request Board** is not just side money in **Tales of Seikyu**. Use it to unlock systems, earn gold, raise affinity with requesting characters, and find route clues. Prioritize **Teach a Yokai to Fish** early: after accepting it, go to **Torleone on the docks** to get the **Basic Rod**.
+
+Normal short requests often use a **3-day timer**, while **red stamp requests** are longer side quests without the same short countdown. Keep several common fish, not only one of each species, because **Fish Please!** style requests can ask for multiple of the same fish.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the Tales of Seikyu 1.0 release. Request names, timers, rewards, and shop behavior may change after patches.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-request-board.webp"
+    alt="Tales of Seikyu Request Board with available requests"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Request Board is one of the best early routing tools. Read the request type before accepting everything.
+  </figcaption>
+</figure>
+
+<h2 id="request-board-guide">
+  Tales of Seikyu Request Board guide
+</h2>
+
+The Request Board looks simple, but it controls several important early routes.
+
+It can give you money, unlock systems, point you toward NPCs, raise affinity, and teach you which materials the game expects you to keep. The mistake is treating every request as a quick cash job.
+
+A good Request Board route is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Take system-unlock requests first.</li>
+  <li>Check whether the request is timed or red stamp.</li>
+  <li>Read the exact item and quantity.</li>
+  <li>Keep common fish and building materials in storage.</li>
+  <li>Use requests from important NPCs to support affinity goals.</li>
+  <li>Skip requests that would cost your last useful stack.</li>
+</ol>
+
+If you are still setting up your first week, use the <Link href="/tales-of-seikyu/beginner-guide">Beginner Guide</Link>. If you are planning social achievements, use the <Link href="/tales-of-seikyu/romance-gifts-marriage-guide">Romance, Gifts, and Marriage Guide</Link>.
+
+<GuideTable
+  caption="Main Request Board types and how beginners should handle them."
+  columns={requestTypeColumns}
+  rows={requestTypeRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="early-requests">
+  Early requests and quest names to know
+</h2>
+
+The early board is easier when you recognize the request pattern.
+
+Some request names tell you exactly what kind of job you are accepting. Others are more important because they unlock a system, not just a reward.
+
+<GuideTable
+  caption="Early Tales of Seikyu requests and what they teach or unlock."
+  columns={earlyRequestColumns}
+  rows={earlyRequestRows}
+/>
+
+Do not only look at the reward amount. A request that unlocks fishing or teaches a route is usually worth more than a small gold job.
+
+<h2 id="teach-a-yokai-to-fish">
+  Teach a Yokai to Fish and the Basic Rod
+</h2>
+
+**Teach a Yokai to Fish** is one of the most important early requests.
+
+After accepting it, go to **Torleone on the docks**. This route gives you the **Basic Rod**, which opens fishing as a real system instead of a later curiosity.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-fishing-job.webp"
+    alt="Tales of Seikyu fishing job route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Teach a Yokai to Fish is worth doing early because it opens fishing instead of only paying gold.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-fishing-rod-beginner.webp"
+    alt="Tales of Seikyu Beginner's Rod or Basic Rod unlock"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once you get the Basic Rod, fishing becomes useful for requests, food, Kappa clues, and collection goals.
+  </figcaption>
+</figure>
+
+Do this request early if it appears. It creates more options for the rest of your first week.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="timed-vs-red-stamp">
+  Timed requests vs red stamp side quests
+</h2>
+
+Not every request uses the same timer logic.
+
+Normal short requests often have a **3-day limit**. These are the jobs where you must check the item, quantity, and your storage before accepting.
+
+Red stamp requests are different. They are longer side quests and do not behave like the same short timed delivery jobs.
+
+<GuideTable
+  caption="How to read Request Board timers and request signals."
+  columns={timerColumns}
+  rows={timerRows}
+/>
+
+Use this rule:
+
+<strong>If it has a short timer, check your storage first. If it has a red stamp, treat it as a longer progression quest.</strong>
+
+This distinction matters because many players panic when a quest does not show the timer they expect. The board is mixing short jobs with longer side quest progress.
+
+<h2 id="request-priority">
+  Which requests should you accept first?
+</h2>
+
+The best request is not always the one with the biggest reward.
+
+Early on, prioritize requests that unlock systems, are easy to finish, improve an important relationship, or use items you already have.
+
+<GuideTable
+  caption="How to prioritize Request Board jobs in Tales of Seikyu."
+  columns={requestPriorityColumns}
+  rows={requestPriorityRows}
+/>
+
+Avoid accepting a timed request just because it is available. The timer matters less than whether you can actually finish the request without hurting your farm, upgrades, or offerings.
+
+<h2 id="fish-requests">
+  Fish Please and same-species fish requests
+</h2>
+
+Fish requests deserve special attention because they can ask for **multiple of the same fish species**.
+
+That means one-of-each storage is not enough. If you sell every duplicate fish, a simple Fish Please! request can become annoying.
+
+After you unlock the Basic Rod:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>keep several common fish,</li>
+  <li>keep at least one new fish species,</li>
+  <li>check the exact species name before accepting,</li>
+  <li>check the quantity,</li>
+  <li>and avoid selling all duplicates overnight.</li>
+</ul>
+
+This habit also supports later fishing achievements and Kappa-related routes.
+
+<h2 id="materials-to-keep">
+  Materials and items to keep for requests
+</h2>
+
+Request Board jobs are one of the main reasons you should not sell everything early.
+
+<GuideTable
+  caption="Items worth keeping for early and mid-game Request Board jobs."
+  columns={keepColumns}
+  rows={keepRows}
+/>
+
+The safest rule is simple: keep a reserve before selling extras.
+
+This matters most for fish, wood, stone, bamboo, hardwood, clay, ore, crops, prepared food, and meat.
+
+<h2 id="cooking-requests">
+  Cooking item requests
+</h2>
+
+Cooking-related requests can be easy to misunderstand.
+
+Some requests want prepared food items such as pickled or dried goods, not necessarily a normal stove-cooked dish. That means you should read the exact wording before assuming you already have the right item.
+
+Use this checklist:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Check the exact item name.</li>
+  <li>Confirm whether it is cooked, pickled, dried, or otherwise prepared.</li>
+  <li>Do not eat or sell your last copy before checking the board.</li>
+  <li>Keep ingredients if you are close to unlocking the needed preparation route.</li>
+</ul>
+
+This section becomes more important after your farm starts producing ingredient variety.
+
+<h2 id="request-benefits">
+  What Request Board jobs actually give you
+</h2>
+
+Requests are not only about gold.
+
+Completing a request can also raise your affinity with the requesting character. Some requests also unlock systems or point you toward routes you would otherwise miss.
+
+<GuideTable
+  caption="Request Board benefits beyond simple gold rewards."
+  columns={requestBenefitColumns}
+  rows={requestBenefitRows}
+/>
+
+If two requests are equally easy, choose the one from a character you care about. That lets the Request Board support your social route instead of becoming a separate chore.
+
+<h2 id="bamboo-and-building-materials">
+  Bamboo, planks, stone, and building requests
+</h2>
+
+Construction material requests are easy to underestimate because they use items that feel common.
+
+Wood and stone look basic, but they connect to storage, furniture, facilities, offerings, and building requests. Bamboo and hardwood can become even more painful if you sell them before you know the route.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-bamboo-quest.webp"
+    alt="Tales of Seikyu bamboo-related request"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bamboo and building materials are worth storing because request routes can ask for them before your economy is stable.
+  </figcaption>
+</figure>
+
+For early Bamboo Forest routing, use the <Link href="/tales-of-seikyu/beginner-guide">Beginner Guide</Link>.
+
+<h2 id="ranch-facility-requests">
+  Ranch and facility requests
+</h2>
+
+Some requests matter because they connect to facilities or ranch progress.
+
+These are not always the fastest money jobs, but they can support longer goals such as animal facilities, Animal Whisperer, First Brood, and farm expansion.
+
+<figure className="my-8">
+  <Image
+    src="/images/tales-of-seikyu/tales-of-seikyu-ranch-facilities-sasaki.webp"
+    alt="Tales of Seikyu Sasaki menu showing ranch facilities option"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Facility-related requests become more valuable once your storage, food, and basic income are stable.
+  </figcaption>
+</figure>
+
+Do not drain all building materials for a low-value timed request if the same materials are needed for facilities.
+
+<h2 id="achievement-connections">
+  Request Board achievement connections
+</h2>
+
+The Request Board connects to several achievements indirectly.
+
+Important links:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Something Fishy</strong> — fishing starts with the Basic Rod route.</li>
+  <li><strong>Oh Kappa, My Kappa</strong> — fishing progress can lead toward Kappa clues.</li>
+  <li><strong>BFF</strong> — request completion can help affinity with a specific character.</li>
+  <li><strong>Yokai-About-Town</strong> — doing requests for many residents supports wider friendship progress.</li>
+  <li><strong>Animal Whisperer</strong> and <strong>First Brood</strong> — ranch and facility progress can feed animal routes.</li>
+  <li><strong>Inari is Pleased</strong> — material storage matters because requests and offerings often compete for the same items.</li>
+</ul>
+
+If you are achievement-focused, do not treat requests as random errands. Use them to build systems, relationships, and material reserves.
+
+
+<h2 id="mistakes">
+  Request Board mistakes to avoid
+</h2>
+
+<GuideTable
+  caption="Common Request Board mistakes and safer choices."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  Tales of Seikyu Request Board FAQ
+</h2>
+
+### What is the most important early Request Board quest?
+
+Teach a Yokai to Fish is one of the most important early requests because it leads to Torleone on the docks and unlocks the Basic Rod.
+
+### Where do I get the Basic Rod?
+
+Accept Teach a Yokai to Fish, then go to Torleone on the docks. This starts your fishing route.
+
+### How long do normal requests last?
+
+Many normal short requests use a 3-day timer. Check the item, quantity, and your storage before accepting.
+
+### What does a red stamp request mean?
+
+A red stamp request is a longer side quest and does not behave like a normal short timed request. Treat it as progression content, not a quick timed delivery.
+
+### Should I accept every request?
+
+No. Accept system unlocks, easy deliveries, important NPC requests, and jobs you can finish without sacrificing your last useful materials.
+
+### Do requests raise friendship?
+
+Yes. Completing requests can raise affinity with the requesting character, which helps friendship and social achievement routes.
+
+### How should I prepare for Fish Please requests?
+
+Keep several common fish in storage. Fish requests can ask for multiple of the same species, not only one new fish.
+
+### Should I sell duplicate fish?
+
+Not all of them. Keep a few duplicates of common fish after unlocking the Basic Rod, especially if you are checking the Request Board often.
+
+### What materials should I keep for requests?
+
+Keep wood, stone, bamboo, hardwood, clay, ore, crops, ingredients, prepared food, meat, and several fish before selling extras.
+
+### Are cooking requests normal cooked meals?
+
+Not always. Some cooking item requests can ask for pickled, dried, or other prepared items. Read the exact item name before assuming a normal meal works.
+
+### Can Request Board jobs help achievements?
+
+Yes. Requests can support fishing, Kappa progress, friendship, ranch progress, material storage, and completion routes.
+
+### What should I skip early?
+
+Skip timed requests that need rare crops, rare fish, prepared food you cannot make yet, or materials you need for upgrades, offerings, or facilities.

@@ -140,8 +140,8 @@ const allGameGuides = [
   { title: 'Burglin\' Gnomes', href: '/burglin-gnomes'},
   { title: 'Fears to Fathom - Scratch Creek', href: '/fears-to-fathom-scratch-creek'},
   { title: 'SpaceCraft', href: '/spacecraft'},
+  { title: 'Tales of Seikyu', href: '/tales-of-seikyu'},
 
-  
 ];
 
 const exploreCards = [

@@ -12,6 +12,53 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Tales of Seikyu =====
+{
+  href: "/tales-of-seikyu",
+  game: "Tales of Seikyu",
+  title: "Beginner Route, Forms, Fox Ruins & Romance",
+  description:
+    "Start here for Tales of Seikyu farming, shrines, Request Board jobs, Basic Rod, Fox Ruins, Boar, Slime, Tengu, Yuki-onna, romance, and achievements.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== Tales of Seikyu =====
+{
+  href: "/tales-of-seikyu/yokai-forms-guide",
+  game: "Tales of Seikyu",
+  title: "Yokai Forms, Slime, Tengu & Fox Guide",
+  description:
+    "Unlock Boar, Slime, Tengu, Yuki-onna and Fox Form, use boss scrolls, form upgrades, Slime watering, Tengu flight, and blocked-route checks.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== Tales of Seikyu =====
+{
+  href: "/tales-of-seikyu/romance-gifts-marriage-guide",
+  game: "Tales of Seikyu",
+  title: "Romance, Gifts & Marriage Guide",
+  description:
+    "Plan loved gifts, birthdays, heart events, hug, kiss, sleepover, special ring, proposal, wedding, spouse life, and 1.0 romance routes.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== Tales of Seikyu =====
+{
+  href: "/tales-of-seikyu/fox-ruins-guide",
+  game: "Tales of Seikyu",
+  title: "Fox Ruins, Bosses, Scrolls & 75 Rooms",
+  description:
+    "Clear Fox Ruins with offerings, relic waypoints, foxholes, puzzles, bosses, form gates, transformation scrolls, treasure rooms, and 75-room routing.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
 // ===== SpaceCraft =====
 {
   href: "/spacecraft",
