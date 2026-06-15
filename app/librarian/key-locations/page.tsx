@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/librarian/key-locations`;
 
 export const metadata: Metadata = {
-  title: "Librarian All Key Locations & Chest Unlocks Guide",
+  title: "Librarian Key Locations | All Keys & Chest Rewards",
   description:
-    "Find all four hidden keys in Librarian: Tidy Up the Arcane Library, including the Crimson Octagon, Golden Diamond, Azure Star, and Emerald Club keys, plus every chest reward.",
+    "Find every key in Librarian: Tidy Up the Arcane Library, including Crimson, Golden, Emerald and Azure keys, chest rewards and best pickup route.",
   alternates: {
     canonical: pageUrl,
   },
@@ -38,7 +38,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "All Key Locations",
+          name: "Key Locations",
           item: pageUrl,
         },
       ],
@@ -51,20 +51,22 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Librarian: Tidy Up the Arcane Library All Key Locations and Chest Unlocks",
+        "Librarian: Tidy Up the Arcane Library Key Locations and Chest Rewards",
       description:
-        "This guide shows where to find every hidden key in Librarian: Tidy Up the Arcane Library, including the Crimson Octagon Key, Golden Diamond Key, Azure Star Key, and Emerald Club Key, plus the Jump, Sprint, and Carry Capacity chest rewards.",
+        "This guide shows the best route for finding every hidden key in Librarian: Tidy Up the Arcane Library, including the Crimson Octagon Key, Golden Diamond Key, Emerald Club Key, and Azure Star Key. It also explains which chest unlocks Jump, Sprint / Run, Carry Capacity +3, and Carry Capacity +2.",
       image: [
-        `${siteUrl}/images/librarian/librarian-crimson-octagon-key.webp`,
+        `${siteUrl}/images/librarian/librarian-crimson-octagon-key-location-starting-crest.webp`,
+        `${siteUrl}/images/librarian/librarian-crimson-octagon-key-pickup.webp`,
         `${siteUrl}/images/librarian/librarian-crimson-chest-jump.webp`,
         `${siteUrl}/images/librarian/librarian-golden-diamond-key-vase.webp`,
-        `${siteUrl}/images/librarian/librarian-azure-star-key-bookshelf.webp`,
         `${siteUrl}/images/librarian/librarian-emerald-club-key-bench.webp`,
         `${siteUrl}/images/librarian/librarian-sprint-unlock-note.webp`,
+        `${siteUrl}/images/librarian/librarian-azure-star-key-bookshelf.webp`,
+        `${siteUrl}/images/librarian/librarian-carry-capacity-15-books.webp`,
       ],
       inLanguage: "en",
       datePublished: "2026-05-05",
-      dateModified: "2026-05-05",
+      dateModified: "2026-06-15",
       about: [
         {
           "@type": "VideoGame",
@@ -80,7 +82,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Librarian: Tidy Up the Arcane Library chests",
+          name: "Librarian: Tidy Up the Arcane Library chest rewards",
         },
         {
           "@type": "Thing",
@@ -92,11 +94,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Azure Star Key",
+          name: "Emerald Club Key",
         },
         {
           "@type": "Thing",
-          name: "Emerald Club Key",
+          name: "Azure Star Key",
         },
         {
           "@type": "Thing",
@@ -108,15 +110,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Run",
+        },
+        {
+          "@type": "Thing",
           name: "Carry Capacity",
         },
         {
           "@type": "Thing",
-          name: "Efficiency Librarian",
+          name: "15 book capacity",
         },
         {
           "@type": "Thing",
-          name: "Anti-Magic Master",
+          name: "Efficiency Librarian",
         },
       ],
       isPartOf: {
@@ -144,7 +150,15 @@ const jsonLd = {
           name: "How many keys are in Librarian: Tidy Up the Arcane Library?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "There are four hidden keys in Librarian: Tidy Up the Arcane Library: Crimson Octagon, Golden Diamond, Azure Star, and Emerald Club.",
+            text: "There are four hidden keys in Librarian: Tidy Up the Arcane Library: Crimson Octagon, Golden Diamond, Emerald Club, and Azure Star.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is the best key order in Librarian: Tidy Up the Arcane Library?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The best key order is Crimson Octagon, Golden Diamond, Emerald Club, then Azure Star. Get the Crimson Octagon Key first because its chest unlocks Jump.",
           },
         },
         {
@@ -152,7 +166,7 @@ const jsonLd = {
           name: "Which key should I get first in Librarian: Tidy Up the Arcane Library?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Get the Crimson Octagon Key first. Its chest unlocks Jump, which makes the other key locations easier or possible to reach.",
+            text: "Get the Crimson Octagon Key first. Its chest unlocks Jump, which makes the Golden Diamond and Azure Star key locations easier to reach.",
           },
         },
         {
@@ -160,7 +174,7 @@ const jsonLd = {
           name: "Where is the Crimson Octagon Key in Librarian: Tidy Up the Arcane Library?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The Crimson Octagon Key is hanging under the crest or wall emblem directly ahead when you load into the library.",
+            text: "The Crimson Octagon Key is hanging under the University of Celesthall crest or wall emblem directly ahead when you load into the library.",
           },
         },
         {
@@ -176,7 +190,7 @@ const jsonLd = {
           name: "Where is the Golden Diamond Key in Librarian: Tidy Up the Arcane Library?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The Golden Diamond Key is hidden inside a decorative vase on the stair railing near the crimson chest area. Jump onto the railing decoration and look inside the vase.",
+            text: "The Golden Diamond Key is hidden inside a decorative vase on the stair railing near the crimson chest and stair area. Unlock Jump first, then look down into the vase.",
           },
         },
         {
@@ -184,7 +198,7 @@ const jsonLd = {
           name: "Why can I not find the Golden Diamond Key?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "You are probably looking on top of the vase instead of inside it. Jump onto the railing decoration and angle the camera down into the vase.",
+            text: "You are probably looking on top of the vase instead of inside it. Jump onto the railing decoration, move the camera above the vase, and look down inside it.",
           },
         },
         {
@@ -197,26 +211,10 @@ const jsonLd = {
         },
         {
           "@type": "Question",
-          name: "Where is the Azure Star Key in Librarian: Tidy Up the Arcane Library?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Walk to the back wall of the second floor, away from the staircase. As you face the back wall, the Azure Star Key is on top of the last bookshelf on your right.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What does the Azure Star Key unlock?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "The Azure Star Key unlocks Carry Capacity +2.",
-          },
-        },
-        {
-          "@type": "Question",
           name: "Where is the Emerald Club Key in Librarian: Tidy Up the Arcane Library?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "The Emerald Club Key is on the bench to the right of the scale table, buried under a pile of books. Clear the books from the bench to reveal it.",
+            text: "The Emerald Club Key is on the bench near the scale table, buried under a pile of books. Clear the books from the bench to reveal it.",
           },
         },
         {
@@ -229,26 +227,34 @@ const jsonLd = {
         },
         {
           "@type": "Question",
-          name: "Can I get the other keys without unlocking Jump first?",
+          name: "Where is the Azure Star Key in Librarian: Tidy Up the Arcane Library?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Some key spots may be reachable with awkward movement, but Jump makes the route straightforward. The Crimson Octagon Key does not require Jump because it is at ground level near the starting view, so get it first and avoid fighting the movement.",
+            text: "The Azure Star Key is on the second floor, on top of the right-side bookshelf near the far wall.",
           },
         },
         {
           "@type": "Question",
-          name: "Are key upgrades required for completion?",
+          name: "What does the Azure Star Key unlock?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Key upgrades are not the same as sorting rows, but they make the game much faster. Sprint and carry capacity upgrades are especially valuable.",
+            text: "The Azure Star Key unlocks Carry Capacity +2.",
           },
         },
         {
           "@type": "Question",
-          name: "Do chest upgrades count as magic for Anti-Magic Master?",
+          name: "How do you carry 15 books in Librarian: Tidy Up the Arcane Library?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Based on community testing, chest upgrades such as Jump, Sprint, and Carry Capacity are passive minor upgrades, not active major magic. Avoid active major spells such as Assemble, Insight, Shelf Guide, Sorting, and Auto-Shelving for Anti-Magic Master.",
+            text: "Open both carrying capacity chests. The Golden Diamond chest gives Carry Capacity +3, and the Azure Star chest gives Carry Capacity +2. Together, they let you carry 15 books.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Are key upgrades required to finish Librarian: Tidy Up the Arcane Library?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Key upgrades are not the same as sorting books, but they make the game much faster. Jump, Sprint or Run, and extra carrying capacity all save time across the full library.",
           },
         },
         {
@@ -256,7 +262,7 @@ const jsonLd = {
           name: "Should I get the keys before an Efficiency Librarian run?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. Get all four key upgrades before serious sorting. Jump unlocks the route, Sprint reduces travel time, and the carry upgrades matter most once you use Assemble. With +5 total carry capacity, a 10-book series can take about two trips instead of several smaller trips, which adds up across hundreds of rows.",
+            text: "Yes. Get all four key upgrades before serious sorting. Jump opens the route, Sprint or Run reduces travel time, and the carrying upgrades reduce the number of book trips.",
           },
         },
       ],
@@ -274,13 +280,13 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Librarian: Tidy Up the Arcane Library All Key Locations and Chest Unlocks"
-          description="Find every hidden key in Librarian: Tidy Up the Arcane Library, including the Crimson Octagon, Golden Diamond, Azure Star, and Emerald Club keys, plus every Jump, Sprint, and Carry Capacity chest reward."
+          title="Librarian Key Locations and Chest Rewards"
+          description="Find every key in Librarian: Tidy Up the Arcane Library, including the Crimson Octagon, Golden Diamond, Emerald Club, and Azure Star keys, plus the Jump, Sprint / Run, and Carry Capacity rewards."
           gameTitle="Librarian: Tidy Up the Arcane Library!"
           gameHref="/librarian"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 5, 2026"
+          updatedAt="June 15, 2026"
           toc={[
             {
               id: "all-key-locations",
@@ -299,12 +305,12 @@ export default function Page() {
               label: "Golden Diamond Key",
             },
             {
-              id: "azure-star-key",
-              label: "Azure Star Key",
-            },
-            {
               id: "emerald-club-key",
               label: "Emerald Club Key",
+            },
+            {
+              id: "azure-star-key",
+              label: "Azure Star Key",
             },
             {
               id: "chest-rewards",
@@ -321,7 +327,7 @@ export default function Page() {
             {
               id: "faq",
               label: "FAQ",
-            },
+            }
           ]}
           relatedLinks={[
             {
