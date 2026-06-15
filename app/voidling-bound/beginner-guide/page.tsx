@@ -42,6 +42,10 @@ href: "/voidling-bound",
 label: "Voidling Bound Guide Hub",
 },
 {
+  href: "/voidling-bound/breeding-guide",
+  label: "Voidling Bound Breeding Guide",
+},
+{
 href: "/voidling-bound/evolution-breeding-splicing-guide",
 label: "Evolution, Breeding, and Splicing Guide",
 },

@@ -61,6 +61,10 @@ label: "Evolution, Breeding, and Splicing Guide",
 href: "/voidling-bound/beginner-guide",
 label: "Voidling Bound Beginner Guide",
 },
+{
+  href: "/voidling-bound/breeding-guide",
+  label: "Voidling Bound Breeding Guide",
+},
 ];
 
 export const metadata: Metadata = {

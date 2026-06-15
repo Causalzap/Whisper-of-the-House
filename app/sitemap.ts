@@ -121,6 +121,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/voidling-bound/golden-egg-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/voidling-bound/mutagen-research-points-farm`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/voidling-bound/quackies-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/voidling-bound/breeding-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
 
     { url: `${base}/solarpunk/beginners-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/solarpunk/energy-system-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide

@@ -1,0 +1,1102 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const basicsColumns = [
+  { key: "Rule", label: "Rule" },
+  { key: "What It Means", label: "What It Means" },
+  { key: "Player Advice", label: "Player Advice" },
+];
+
+export const basicsRows = [
+  {
+    Rule: "Same species only",
+    "What It Means":
+      "The Pheromonal Nest uses two Voidlings from the same species line.",
+    "Player Advice":
+      "Keep useful duplicates from a species you actually want to build instead of releasing every extra copy.",
+  },
+  {
+    Rule: "Parents create the stat range",
+    "What It Means":
+      "The nest preview shows the possible offspring attribute range before breeding starts.",
+    "Player Advice":
+      "If the upper range is low, that parent pair cannot produce the stat target you want.",
+  },
+  {
+    Rule: "Early inheritance is reduced",
+    "What It Means":
+      "Before stronger Hatchery upgrades, offspring do not copy the full parent value.",
+    "Player Advice":
+      "Use early breeding for testing, but wait for Henry upgrades before chasing near-perfect stat lines.",
+  },
+  {
+    Rule: "Breeding has a point cap",
+    "What It Means":
+      "Breeding can pass a limited pool of inherited base attribute points before level-up allocation.",
+    "Player Advice":
+      "Use breeding for the inherited base line, then finish the final points through leveling.",
+  },
+  {
+    Rule: "Eggs hatch after mission clears",
+    "What It Means":
+      "After starting a breeding pair, complete a mission and return to inspect the egg result.",
+    "Player Advice":
+      "Run a useful mission while breeding is active instead of waiting at the ship.",
+  },
+  {
+    Rule: "Dual Natures come from breeding",
+    "What It Means":
+      "Pairing different Natures can create a Dual Nature child with two attribute bonuses.",
+    "Player Advice":
+      "Plan Nature and stat inheritance together instead of treating Nature as a bonus afterthought.",
+  },
+];
+
+export const capColumns = [
+  { key: "Mechanic", label: "Mechanic" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "Practical Meaning", label: "Practical Meaning" },
+];
+
+export const capRows = [
+  {
+    Mechanic: "Default inheritance percentage",
+    "What It Does":
+      "Early breeding can pass only part of a parent's attribute value.",
+    "Practical Meaning":
+      "This is why a strong parent can still produce a weaker child before Hatchery upgrades.",
+  },
+  {
+    Mechanic: "Hatchery percentage upgrades",
+    "What It Does":
+      "Henry's upgrades raise how much of a parent's attribute value can pass down.",
+    "Practical Meaning":
+      "An upgrade that says 80% means 80% of the parent's attribute value, not 80 stat points.",
+  },
+  {
+    Mechanic: "Inherited base point cap",
+    "What It Does":
+      "Breeding can pass up to 80 inherited base attribute points before level-up allocation.",
+    "Practical Meaning":
+      "Treat this as a total inherited-point cap, separate from Hatchery upgrades that use percentages.",
+  },
+  {
+    Mechanic: "Level-up points",
+    "What It Does":
+      "A level 20 Voidling can spend 20 manual attribute points.",
+    "Practical Meaning":
+      "The final 20 points are how a finished child can complete a 100-point base stat line.",
+  },
+  {
+    Mechanic: "Over-cap reduction",
+    "What It Does":
+      "If the inherited result goes beyond the cap, the game can reduce attributes back down.",
+    "Practical Meaning":
+      "Always inspect the child instead of assuming the strongest parent pair produced a perfect result.",
+  },
+];
+
+export const wranglerColumns = [
+  { key: "Goal", label: "Goal" },
+  { key: "How To Progress", label: "How To Progress" },
+  { key: "Why It Matters For Breeding", label: "Why It Matters For Breeding" },
+];
+
+export const wranglerRows = [
+  {
+    Goal: "Unlock better Henry upgrades",
+    "How To Progress":
+      "Increase Wrangler Rank by discovering and documenting new genes during missions and evolution paths.",
+    "Why It Matters For Breeding":
+      "More rank opens better Hatchery upgrades, which makes serious inheritance planning more reliable.",
+  },
+  {
+    Goal: "Improve parent value",
+    "How To Progress":
+      "Evolve Voidlings, test new paths, collect gene data, and keep strong same-species candidates.",
+    "Why It Matters For Breeding":
+      "Better parents and better upgrades work together. Strong parents alone are not enough if inheritance is still heavily reduced.",
+  },
+  {
+    Goal: "Reach late breeding tools",
+    "How To Progress":
+      "Keep raising Wrangler Rank until late Hatchery upgrades become available.",
+    "Why It Matters For Breeding":
+      "Spliced Breeding is a late option, so do not build your first parent plan around it.",
+  },
+];
+
+export const henryColumns = [
+  { key: "Upgrade", label: "Upgrade" },
+  { key: "What It Helps With", label: "What It Helps With" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const henryRows = [
+  {
+    Upgrade: "Additional Nest",
+    "What It Helps With":
+      "Adds another Pheromonal Nest so more breeding lines can run at once.",
+    "Why It Matters":
+      "You can test more parent pairs without waiting on one nest at a time.",
+  },
+  {
+    Upgrade: "Quality Nest Materials",
+    "What It Helps With":
+      "Improves the chance of inheriting better parent attributes.",
+    "Why It Matters":
+      "This reduces weak early rolls when parents already have useful stats.",
+  },
+  {
+    Upgrade: "Supplemental Vitamins",
+    "What It Helps With":
+      "Improves the quality of inherited parent values.",
+    "Why It Matters":
+      "Useful before you start combining multiple 20-stat parents.",
+  },
+  {
+    Upgrade: "Enhanced Baby Formula",
+    "What It Helps With":
+      "Gives the highest chance of inheriting the best attributes from parents.",
+    "Why It Matters":
+      "This is one of the key upgrades before chasing a near-perfect child.",
+  },
+  {
+    Upgrade: "Void Resonance Treatment",
+    "What It Helps With":
+      "Helps offspring inherit stronger raw attribute values from parents.",
+    "Why It Matters":
+      "Important when you want a child to carry a parent's 20-point stat instead of a reduced value.",
+  },
+  {
+    Upgrade: "Advanced Parental Care",
+    "What It Helps With":
+      "Allows offspring to inherit 80% of a parent's attribute value.",
+    "Why It Matters":
+      "This 80% is a percentage-based inheritance upgrade, not the 80-point inherited base cap.",
+  },
+  {
+    Upgrade: "Sunlight Therapy",
+    "What It Helps With":
+      "Pushes inheritance closer to the full parent value.",
+    "Why It Matters":
+      "Use it before serious all-20 breeding attempts instead of fixing every weak roll manually.",
+  },
+  {
+    Upgrade: "Spliced Breeding",
+    "What It Helps With":
+      "Allows spliced Voidlings to participate in breeding after the late upgrade is unlocked.",
+    "Why It Matters":
+      "This is a late correction tool, not the normal path for your first breeding project.",
+  },
+];
+
+export const parentColumns = [
+  { key: "Parent Setup", label: "Parent Setup" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "Use It For", label: "Use It For" },
+];
+
+export const parentRows = [
+  {
+    "Parent Setup": "20 Strength parent",
+    "Why It Matters":
+      "Strength improves attack power and critical damage.",
+    "Use It For":
+      "Physical damage routes, fast clears, and builds that already survive well.",
+  },
+  {
+    "Parent Setup": "20 Essence parent",
+    "Why It Matters":
+      "Essence improves elemental damage and status effect scaling.",
+    "Use It For":
+      "Poison, Burn, Frostbite, Static, Disintegrate, and ability-heavy elemental routes.",
+  },
+  {
+    "Parent Setup": "20 Vitality parent",
+    "Why It Matters":
+      "Vitality improves health, armor, and stamina.",
+    "Use It For":
+      "Safer parent lines, hard missions, and builds that need more room for mistakes.",
+  },
+  {
+    "Parent Setup": "20 Recuperation parent",
+    "Why It Matters":
+      "Recuperation affects reload, cooldown reduction, ultimate fill, and healing multiplier.",
+    "Use It For":
+      "Cooldown-heavy Voidlings, healing routes, and builds that need smoother ability uptime.",
+  },
+  {
+    "Parent Setup": "20 Agility parent",
+    "Why It Matters":
+      "Agility improves fire rate, movement speed, and critical chance.",
+    "Use It For":
+      "Fast ranged builds, movement-heavy species, and crit-friendly setups.",
+  },
+];
+
+export const routeColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Parent Pair", label: "Parent Pair" },
+  { key: "Goal", label: "Goal" },
+  { key: "What To Do Next", label: "What To Do Next" },
+];
+
+export const routeRows = [
+  {
+    Step: "1",
+    "Parent Pair": "20 Strength parent + 20 Essence parent",
+    Goal: "Create a child that can inherit both Strength and Essence.",
+    "What To Do Next":
+      "Keep the child if both stats roll high. If one stat misses, reroll or use the better child as the next parent.",
+  },
+  {
+    Step: "2",
+    "Parent Pair": "20 Recuperation parent + 20 Agility parent",
+    Goal: "Create a second child that can inherit Recuperation and Agility.",
+    "What To Do Next":
+      "Keep the child that carries both stats well. Do not release the parent pair until you compare the child result.",
+  },
+  {
+    Step: "3",
+    "Parent Pair": "Two-stat child + Vitality parent",
+    Goal: "Add Vitality to one of the strong child lines.",
+    "What To Do Next":
+      "Use the best child as the next parent if the roll gives you three strong inherited stats.",
+  },
+  {
+    Step: "4",
+    "Parent Pair": "Three-stat child + two-stat child",
+    Goal: "Give the offspring a chance to combine all five stat lines.",
+    "What To Do Next":
+      "Check the Pheromonal Nest range. You want each important stat to show a high upper range before starting.",
+  },
+  {
+    Step: "5",
+    "Parent Pair": "Best near-perfect child + missing-stat parent",
+    Goal: "Fix one failed inheritance line.",
+    "What To Do Next":
+      "Do not restart from zero if only one stat missed. Use the strongest child and reroll the weak line.",
+  },
+  {
+    Step: "6",
+    "Parent Pair": "Final child at level 20",
+    Goal: "Spend the remaining manual points.",
+    "What To Do Next":
+      "Use level-up allocation for the last points, then move to Nature, subspecies, and Splicing decisions.",
+  },
+];
+
+export const natureColumns = [
+  { key: "Nature", label: "Nature" },
+  { key: "Attribute Bonus", label: "Attribute Bonus" },
+  { key: "Player Use", label: "Player Use" },
+];
+
+export const natureRows = [
+  {
+    Nature: "Strong",
+    "Attribute Bonus": "Strength",
+    "Player Use":
+      "Use this for attack power, critical damage, and physical damage routes.",
+  },
+  {
+    Nature: "Witty",
+    "Attribute Bonus": "Essence",
+    "Player Use":
+      "Use this for elemental damage, status scaling, and ability-heavy routes.",
+  },
+  {
+    Nature: "Healthy",
+    "Attribute Bonus": "Vitality",
+    "Player Use":
+      "Use this for health, armor, stamina, and safer parent lines.",
+  },
+  {
+    Nature: "Tenacious",
+    "Attribute Bonus": "Recuperation",
+    "Player Use":
+      "Use this for cooldown, reload, healing, and ultimate-focused builds.",
+  },
+  {
+    Nature: "Agile",
+    "Attribute Bonus": "Agility",
+    "Player Use":
+      "Use this for fire rate, movement speed, and critical chance.",
+  },
+  {
+    Nature: "Relentless",
+    "Attribute Bonus": "Recuperation + Agility",
+    "Player Use":
+      "A confirmed Dual Nature example. Use it for fast builds that also want smoother recovery flow.",
+  },
+];
+
+export const dualNatureColumns = [
+  { key: "Parent Nature Pair", label: "Parent Nature Pair" },
+  { key: "Dual Nature", label: "Dual Nature" },
+  { key: "Attribute Pair", label: "Attribute Pair" },
+];
+
+export const dualNatureRows = [
+  {
+    "Parent Nature Pair": "Strong + Witty",
+    "Dual Nature": "Ferocious",
+    "Attribute Pair": "Strength + Essence",
+  },
+  {
+    "Parent Nature Pair": "Strong + Healthy",
+    "Dual Nature": "Robust",
+    "Attribute Pair": "Strength + Vitality",
+  },
+  {
+    "Parent Nature Pair": "Strong + Tenacious",
+    "Dual Nature": "Enduring",
+    "Attribute Pair": "Strength + Recuperation",
+  },
+  {
+    "Parent Nature Pair": "Strong + Agile",
+    "Dual Nature": "Athletic",
+    "Attribute Pair": "Strength + Agility",
+  },
+  {
+    "Parent Nature Pair": "Witty + Healthy",
+    "Dual Nature": "Lively",
+    "Attribute Pair": "Essence + Vitality",
+  },
+  {
+    "Parent Nature Pair": "Witty + Tenacious",
+    "Dual Nature": "Resourceful",
+    "Attribute Pair": "Essence + Recuperation",
+  },
+  {
+    "Parent Nature Pair": "Witty + Agile",
+    "Dual Nature": "Elegant",
+    "Attribute Pair": "Essence + Agility",
+  },
+  {
+    "Parent Nature Pair": "Healthy + Tenacious",
+    "Dual Nature": "Rugged",
+    "Attribute Pair": "Vitality + Recuperation",
+  },
+  {
+    "Parent Nature Pair": "Healthy + Agile",
+    "Dual Nature": "Spry",
+    "Attribute Pair": "Vitality + Agility",
+  },
+  {
+    "Parent Nature Pair": "Tenacious + Agile",
+    "Dual Nature": "Relentless",
+    "Attribute Pair": "Recuperation + Agility",
+  },
+];
+
+export const dualNatureRuleColumns = [
+  { key: "Parent Plan", label: "Parent Plan" },
+  { key: "Possible Result", label: "Possible Result" },
+  { key: "Important Rule", label: "Important Rule" },
+];
+
+export const dualNatureRuleRows = [
+  {
+    "Parent Plan": "Same Nature, same high rarity",
+    "Possible Result": "Keeps the target Nature more cleanly.",
+    "Important Rule":
+      "Use this when preserving an Exceptional single Nature matters more than making a Dual Nature.",
+  },
+  {
+    "Parent Plan": "Same Nature, different rarities",
+    "Possible Result": "Can drop to the lower rarity.",
+    "Important Rule":
+      "An Exceptional parent paired with a Notable version can produce the lower-tier result.",
+  },
+  {
+    "Parent Plan": "Different Nature types",
+    "Possible Result": "Can create a Dual Nature.",
+    "Important Rule":
+      "This is how you target two attribute bonuses on one child.",
+  },
+  {
+    "Parent Plan": "Different Nature types, different rarities",
+    "Possible Result": "Dual Nature rarity follows the lower parent rarity.",
+    "Important Rule":
+      "Use high-tier parents on both sides if you want a high-tier Dual Nature.",
+  },
+  {
+    "Parent Plan": "Useful Nature + poor stat line",
+    "Possible Result": "Good Nature, weak child.",
+    "Important Rule":
+      "Nature planning does not replace stat planning. You still need the parent line to carry good attributes.",
+  },
+];
+
+export const subspeciesColumns = [
+  { key: "Parent Pair", label: "Parent Pair" },
+  { key: "Offspring Subspecies Rule", label: "Offspring Subspecies Rule" },
+  { key: "Player Use", label: "Player Use" },
+];
+
+export const subspeciesRows = [
+  {
+    "Parent Pair": "Same species, same subspecies",
+    "Offspring Subspecies Rule":
+      "The offspring keeps that same subspecies.",
+    "Player Use":
+      "Use this when you want to preserve a specific evolved form, elemental route, look, or gene line.",
+  },
+  {
+    "Parent Pair": "Same species, different subspecies",
+    "Offspring Subspecies Rule":
+      "The offspring can return to the closest shared evolution point between both parents.",
+    "Player Use":
+      "Useful to reset or redirect a line, but risky if you wanted one exact subspecies.",
+  },
+  {
+    "Parent Pair": "Toxic Kwipeck + Flying Kwipeck",
+    "Offspring Subspecies Rule":
+      "The child can return to a shared earlier Kwipeck node such as Forest Kwipeck.",
+    "Player Use":
+      "Do not assume two advanced subspecies will produce either advanced parent form.",
+  },
+  {
+    "Parent Pair": "Golden Egg variant + same species parent",
+    "Offspring Subspecies Rule":
+      "The special Golden Egg variant can have a chance to pass forward.",
+    "Player Use":
+      "Keep Golden Egg variants until you know whether their look, Nature, genes, or variant value matters.",
+  },
+];
+
+export const splicingColumns = [
+  { key: "Question", label: "Question" },
+  { key: "Answer", label: "Answer" },
+  { key: "Best Move", label: "Best Move" },
+];
+
+export const splicingRows = [
+  {
+    Question: "Can a spliced Voidling breed?",
+    Answer:
+      "Not through normal breeding rules. Spliced Voidlings need the late Spliced Breeding upgrade before they can be used in that path.",
+    "Best Move":
+      "Assume Splicing ends the normal parent line unless you already have the late upgrade.",
+  },
+  {
+    Question: "When does Spliced Breeding unlock?",
+    Answer:
+      "Spliced Breeding is a late Hatchery upgrade tied to high Wrangler Rank, with Wrangler Level 45 required.",
+    "Best Move":
+      "Do not plan your first breeding route around it.",
+  },
+  {
+    Question: "Should I Splice before breeding?",
+    Answer:
+      "Usually no. Splicing is for final customization after the stat line, Nature, and species plan are ready.",
+    "Best Move":
+      "Finish breeding first, then Splice the final candidate.",
+  },
+  {
+    Question: "What does Splicing change?",
+    Answer:
+      "It can change genes, abilities, elemental affinity, appearance, modules, and mutated perks.",
+    "Best Move":
+      "Use Splicing to finish a build, not to create a parent line from scratch.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Starting serious breeding before Henry upgrades",
+    "Why It Hurts":
+      "Early inheritance is reduced, so strong parents can still produce lower-value children.",
+    "Better Move":
+      "Raise Wrangler Rank, buy Hatchery upgrades, then chase serious stat lines.",
+  },
+  {
+    Mistake: "Confusing 80% with 80 points",
+    "Why It Hurts":
+      "The 80% upgrade is a percentage of parent value, while the 80-point cap is a total inherited base point limit.",
+    "Better Move":
+      "Read percentage upgrades and inherited point caps as separate mechanics.",
+  },
+  {
+    Mistake: "Using two parents with the same maxed stat too early",
+    "Why It Hurts":
+      "You do not expand the child's possible stat ceiling enough.",
+    "Better Move":
+      "Pair parents that cover different 20-point stats, then combine successful children later.",
+  },
+  {
+    Mistake: "Forgetting Dual Nature planning",
+    "Why It Hurts":
+      "Dual Nature is one of the biggest long-term breeding rewards.",
+    "Better Move":
+      "Pair useful different Natures intentionally, and remember the Dual Nature rarity follows the lower parent rarity.",
+  },
+  {
+    Mistake: "Mixing subspecies without checking the result",
+    "Why It Hurts":
+      "Different subspecies can return the child to the closest shared evolution point instead of either parent form.",
+    "Better Move":
+      "Use same-subspecies parents when preserving the exact form matters.",
+  },
+  {
+    Mistake: "Splicing before the parent line is ready",
+    "Why It Hurts":
+      "Spliced Voidlings normally cannot continue standard breeding without a late upgrade.",
+    "Better Move":
+      "Finish the parent line first, then use Splicing for the final custom build.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Voidling Bound**, breeding is how you build stronger same-species offspring through the **Pheromonal Nest**. Use two Voidlings of the same species, check the offspring stat range, then complete a mission to hatch the egg.
+
+The most important rules are:
+
+- early offspring inherit reduced parent values until Henry's Hatchery upgrades improve inheritance;
+- an upgrade that says **80%** means a percentage of the parent's attribute value, not 80 stat points;
+- breeding can pass up to **80 inherited base attribute points**, while the final 20 points come from leveling;
+- Dual Natures come from breeding different Nature types;
+- same-subspecies parents preserve a form more cleanly;
+- different subspecies can fall back to a shared evolution point;
+- Splicing should usually happen after the breeding line is ready.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for Voidling Bound. This breeding guide covers the Pheromonal Nest, same-species breeding, Hatchery inheritance percentages, the 80-point inherited stat cap, Henry upgrades, Wrangler Rank, egg hatching, 20-stat routes, Dual Natures, subspecies inheritance, Golden Egg variants, Spliced Breeding, and Splicing timing.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-breeding-same-species-parents.webp"
+    alt="Voidling Bound Pheromonal Nest showing two same species Nimiod parents and possible inherited stat ranges"
+    width={666}
+    height={1024}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Pheromonal Nest shows the possible stat range before you start breeding. If the upper range is not high enough, the child cannot hit your target.
+  </figcaption>
+</figure>
+
+<h2 id="voidling-bound-breeding-guide">
+  Voidling Bound breeding guide
+</h2>
+
+Breeding in **Voidling Bound** is not just a way to hatch more Voidlings. It is the main system for turning useful duplicates into stronger next-generation candidates.
+
+A random pair can produce a random-looking result. A planned pair can combine strong inherited stats, useful Natures, and the subspecies line you actually want.
+
+Use this page when you want to answer:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>How does the Pheromonal Nest work?</li>
+  <li>Why are my offspring stats lower than the parents?</li>
+  <li>How do I get 20 in multiple stats?</li>
+  <li>What does the 80-point inherited cap mean?</li>
+  <li>How do Dual Natures work?</li>
+  <li>How does subspecies inheritance work?</li>
+  <li>Can spliced Voidlings breed later?</li>
+</ul>
+
+For the broader system order, use the <Link href="/voidling-bound/evolution-breeding-splicing-guide">Evolution, Breeding, and Splicing Guide</Link>. This page is the deeper breeding route.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="how-breeding-works">
+  How breeding works
+</h2>
+
+Breeding uses the **Pheromonal Nest**. Pick two Voidlings from the same species, check the possible offspring stat range, start breeding, then complete a mission to hatch the egg.
+
+<GuideTable
+  caption="Voidling Bound breeding basics."
+  columns={basicsColumns}
+  rows={basicsRows}
+/>
+
+The key detail is the stat range. If the nest shows **01–20** for Strength and Essence, the child can roll up to 20 in those stats. If a stat only shows a low upper range, that parent pair is not good enough for that stat yet.
+
+<h2 id="inheritance-penalty-and-cap">
+  50% inheritance penalty, Hatchery percentages, and the inherited point cap
+</h2>
+
+This is the part that explains most confusing breeding results.
+
+Before the right Hatchery upgrades, the child does not simply copy the best parent values. The inherited value is reduced, which is why two strong parents can still produce a weaker child.
+
+The long-term goal is to push inheritance closer to the full parent value through Henry's upgrades.
+
+<GuideTable
+  caption="Important breeding stat limits."
+  columns={capColumns}
+  rows={capRows}
+/>
+
+This is separate from percentage-based Hatchery upgrades. An upgrade that says **80%** refers to how much of a parent's attribute value can pass down. The **80-point cap** refers to the total inherited base attribute points the offspring can carry before level-up allocation.
+
+The practical build target is:
+
+<strong>80 inherited base points from breeding + 20 level-up points = a final 100-point base stat line.</strong>
+
+That is how a final level 20 Voidling can reach 20 in all five base attributes. Nature bonuses and monster part bonuses are separate layers.
+
+<h2 id="wrangler-rank-and-henry-upgrades">
+  Wrangler Rank and Henry upgrades
+</h2>
+
+Henry's Hatchery upgrades are gated behind **Wrangler Rank**. If Henry does not offer the upgrade you need yet, the answer is usually not “breed more.” The answer is to discover and document more genes through missions and evolution paths.
+
+<GuideTable
+  caption="How Wrangler Rank connects to breeding."
+  columns={wranglerColumns}
+  rows={wranglerRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-henry-breeding-upgrades.webp"
+    alt="Voidling Bound Henry breeding upgrades including Additional Nest, Quality Nest Materials, Advanced Parental Care and Enhanced Baby Formula"
+    width={1526}
+    height={868}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Henry's Hatchery upgrades are the difference between weak early inheritance and serious stat-line breeding.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Henry upgrades that matter for breeding."
+  columns={henryColumns}
+  rows={henryRows}
+/>
+
+Do not chase perfect stat lines before these upgrades are available. You can still test pairs early, but serious min-maxing is much cleaner once the inheritance penalty and inheritance ceiling are improved.
+
+<h2 id="prepare-parents">
+  How to prepare parent Voidlings
+</h2>
+
+A clean breeding project starts before you open the nest. Pick one species, keep useful duplicates, train parent candidates, and assign each parent a clear stat job.
+
+The simplest route is to train several same-species Voidlings to **level 20**, then max one attribute on each parent.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-training-level-20-parents.webp"
+    alt="Voidling Bound level 20 Nimiod breeding candidates with different maxed attributes"
+    width={804}
+    height={842}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A strong breeding project starts with several level 20 parents that each carry a different maxed attribute.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Parent setup for 20-stat breeding."
+  columns={parentColumns}
+  rows={parentRows}
+/>
+
+This does not mean every final build needs 20 in every stat. It means you are creating strong parent lines so you can decide later whether the final Voidling wants damage, survivability, cooldown flow, movement, or elemental scaling.
+
+<h2 id="how-to-breed-20-stats">
+  How to breed for 20 stats
+</h2>
+
+Once the parents are ready, combine different stat carriers in stages. The first goal is not all five stats at once. The first goal is a child that successfully carries two strong stat lines.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-offspring-inherited-strength-essence.webp"
+    alt="Voidling Bound offspring inheriting both Strength 20 and Essence 20 from parents"
+    width={652}
+    height={544}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is the first clean result you want: one child carrying two strong inherited stat lines.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Step-by-step route for stacking high stats through breeding."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+If a child is close but misses one stat, do not restart the project. Use that child as the next parent and pair it with the missing-stat parent.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="eggs-and-hatching">
+  Eggs and hatching after missions
+</h2>
+
+After you start breeding, the eggs do not need you to stand at the ship. Complete a mission, then come back and inspect the hatch results.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-breeding-egg-hatch-after-mission.webp"
+    alt="Voidling Bound egg hatching after breeding at the incubation station"
+    width={1000}
+    height={826}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Start breeding, clear a mission, then inspect the eggs. A safe mission is fine if your only goal is moving the breeding timer.
+  </figcaption>
+</figure>
+
+Pair breeding with something useful:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>farm the Mutagen type you already need,</li>
+  <li>run a safe Research Points route,</li>
+  <li>clean up a Golden Egg mission,</li>
+  <li>or replay an older mission while the nest works in the background.</li>
+</ul>
+
+<div className="my-4">
+  <Link href="/voidling-bound/mutagen-research-points-farm">
+    Need a useful mission while eggs hatch? Use the Mutagen and Research Points Farm Guide
+  </Link>
+</div>
+
+<h2 id="failed-inheritance-rolls">
+  Why inheritance can still fail
+</h2>
+
+A promising stat range is not the same thing as a guaranteed perfect child. Even with better upgrades, you still need to inspect the result.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-breeding-failed-inheritance-roll.webp"
+    alt="Voidling Bound breeding result that inherited Recuperation but missed Agility"
+    width={592}
+    height={488}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Not every egg inherits every ideal stat. Keep the best child and continue the line instead of restarting from nothing.
+  </figcaption>
+</figure>
+
+Use this rule:
+
+<strong>If the child carries most of the target line, keep it. If it misses too many important stats, reroll the pair.</strong>
+
+A near-perfect child is often more valuable than either original parent because it already carries several strong inherited values.
+
+<h2 id="max-20-all-stats">
+  Example: 20 in every base stat
+</h2>
+
+A final all-20 result is possible when your inherited base line and level-up allocation come together.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-max-20-all-stats-result.webp"
+    alt="Voidling Bound Nimiod with 20 Strength, 20 Essence, 20 Vitality, 20 Recuperation and 20 Agility"
+    width={1142}
+    height={906}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Assigning the final 20 level-up points at max level to confirm the 20/20/20/20/20 base stat line.
+  </figcaption>
+</figure>
+
+When checking a finished candidate, separate the numbers into layers:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>base white stats</strong> from breeding and level-up points,</li>
+  <li><strong>blue Nature bonuses</strong> from Nature tier,</li>
+  <li><strong>yellow monster part bonuses</strong> from modules or parts,</li>
+  <li>and later Splicing changes.</li>
+</ul>
+
+<h2 id="natures-and-dual-natures">
+  Natures and Dual Natures
+</h2>
+
+Natures are not just flavor text. They add attribute bonuses, and breeding is the way to create **Dual Natures**.
+
+Natures can appear in tiers:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Base</strong> — for example, Healthy or Tenacious.</li>
+  <li><strong>Notable</strong> — a stronger version, such as Notably Healthy.</li>
+  <li><strong>Exceptional</strong> — a stronger version, such as Exceptionally Healthy.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-nature-tiers-base-notable-exceptional.webp"
+    alt="Voidling Bound Nature tiers showing Tenacious, Notably Tenacious and Exceptionally Tenacious"
+    width={1872}
+    height={602}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Nature wording matters. Higher-tier wording gives a stronger blue attribute bonus.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Confirmed Nature bonuses and player uses."
+  columns={natureColumns}
+  rows={natureRows}
+/>
+
+The five base Nature bonuses and the Relentless example are confirmed by the current in-game examples. The full Dual Nature matrix below sourced from the Voidling Bound community Wiki Natures page, so use it as a lookup list and always verify the final Nature on your hatch result screen.
+
+<GuideTable
+  caption="Dual Nature combinations from the community Nature matrix."
+  columns={dualNatureColumns}
+  rows={dualNatureRows}
+/>
+
+A single Nature helps one attribute. A Dual Nature can help two attributes, which makes it one of the most important long-term breeding rewards.
+
+<h2 id="dual-nature-inheritance">
+  How Dual Nature inheritance works
+</h2>
+
+Nature type and Nature rarity are connected but not identical. That is why a parent pair can surprise you.
+
+<GuideTable
+  caption="Dual Nature inheritance rules."
+  columns={dualNatureRuleColumns}
+  rows={dualNatureRuleRows}
+/>
+
+The safest rule is:
+
+<strong>If you want a high-tier Dual Nature, use two useful high-tier Nature parents. If one parent is lower rarity, expect the result to follow the lower rarity.</strong>
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-nature-lower-tier-inheritance.webp"
+    alt="Voidling Bound Notably Healthy and Exceptionally Healthy Nature comparison for inheritance"
+    width={1104}
+    height={506}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If you mix Nature tiers, the offspring can follow the lower tier. Match strong Nature tiers when preserving rarity matters.
+  </figcaption>
+</figure>
+
+<h2 id="subspecies-inheritance">
+  Subspecies inheritance
+</h2>
+
+Subspecies matters when you are trying to preserve an evolved form, elemental route, Golden Egg variant, or future Splicing option.
+
+<GuideTable
+  caption="Subspecies inheritance rules in Voidling Bound breeding."
+  columns={subspeciesColumns}
+  rows={subspeciesRows}
+/>
+
+The important point is that **same species** does not always mean **same subspecies**. If two parents share the same subspecies, the result is cleaner. If they come from different subspecies branches, the child can fall back to the closest shared evolution point.
+
+This can also connect to Mutagen planning. If you are trying to preserve or redirect an elemental route, check the species line before breeding and use the <Link href="/voidling-bound/mutagen-research-points-farm">Mutagen and Research Points Farm Guide</Link> when the next evolution path needs a specific element.
+
+<h2 id="golden-egg-variants">
+  Golden Egg variants and breeding
+</h2>
+
+Golden Egg Voidlings can matter even if they are not your current main. They may carry unusual looks, useful Natures, rare traits, special variant value, or future Splicing value.
+
+Do not release a Golden Egg variant until you check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>its species,</li>
+  <li>its subspecies or variant identity,</li>
+  <li>its Nature and Nature tier,</li>
+  <li>its base stat spread,</li>
+  <li>and whether its genes or look may matter for Splicing later.</li>
+</ul>
+
+<div className="my-4">
+  <Link href="/voidling-bound/golden-egg-locations">
+    Need secret variants? Use the Golden Egg Locations Guide
+  </Link>
+</div>
+
+<h2 id="monster-parts-and-yellow-stats">
+  Monster parts and yellow stat bonuses
+</h2>
+
+After the base stat line and Nature are in place, monster parts and modules can add another bonus layer. These appear as yellow values on the attribute line.
+
+<figure className="my-8">
+  <Image
+    src="/images/voidling-bound/voidling-bound-monster-parts-yellow-stat-bonus.webp"
+    alt="Voidling Bound spliced Nimiod showing yellow stat bonuses from monster parts and modules"
+    width={636}
+    height={730}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Yellow stat bonuses come from monster parts or modules, not from the base breeding line alone.
+  </figcaption>
+</figure>
+
+Keep the build layers separate:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Breeding</strong> builds inherited base stats.</li>
+  <li><strong>Leveling</strong> adds the final manual attribute points.</li>
+  <li><strong>Nature</strong> adds blue attribute bonuses.</li>
+  <li><strong>Monster parts / modules</strong> add yellow bonuses.</li>
+  <li><strong>Splicing</strong> finishes genes, abilities, elements, appearance, and mutated perks.</li>
+</ul>
+
+<h2 id="spliced-breeding">
+  Spliced Breeding and when to Splice
+</h2>
+
+Splicing is powerful, but it is not the first step in a normal breeding project.
+
+<GuideTable
+  caption="Splicing and breeding rules."
+  columns={splicingColumns}
+  rows={splicingRows}
+/>
+
+For most players, the clean order is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Collect and inspect same-species candidates.</li>
+  <li>Raise Wrangler Rank and upgrade Henry's Hatchery.</li>
+  <li>Breed the inherited base stat line.</li>
+  <li>Plan the Nature or Dual Nature.</li>
+  <li>Preserve the subspecies or variant you want.</li>
+  <li>Only then Splice the final candidate.</li>
+</ol>
+
+<div className="my-4">
+  <Link href="/voidling-bound/evolution-breeding-splicing-guide">
+    Need the full system order? Read the Evolution, Breeding, and Splicing Guide
+  </Link>
+</div>
+
+<h2 id="what-to-keep-before-releasing">
+  What should you keep before releasing Voidlings?
+</h2>
+
+Do not release a Voidling only because it is low level. Low-level candidates can still matter if they have the right species, Nature, subspecies, or stat potential.
+
+Before releasing, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Species:</strong> do you need same-species parents later?</li>
+  <li><strong>Subspecies:</strong> are you preserving a specific evolution branch?</li>
+  <li><strong>Base stats:</strong> does it have a rare high roll or useful spread?</li>
+  <li><strong>Nature:</strong> is it Notable, Exceptional, or useful for a Dual Nature pair?</li>
+  <li><strong>Golden Egg origin:</strong> is it a special variant worth saving?</li>
+  <li><strong>Genes and modules:</strong> could it matter later for Splicing?</li>
+  <li><strong>Role:</strong> could it become a parent, backup, or element counter?</li>
+</ul>
+
+<h2 id="common-breeding-mistakes">
+  Common breeding mistakes
+</h2>
+
+<GuideTable
+  caption="Voidling Bound breeding mistakes and better choices."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The biggest mistake is treating breeding like a random egg generator. It is more useful as a controlled parent-line system: decide the species, decide the inherited stats, decide the Nature, decide the subspecies, then decide whether the final child is worth Splicing.
+
+
+<h2 id="faq">
+  Voidling Bound breeding FAQ
+</h2>
+
+### How do you breed Voidlings in Voidling Bound?
+
+Use the Pheromonal Nest, choose two Voidlings from the same species, check the possible offspring stat range, then start breeding. Complete a mission to hatch the egg and inspect the result.
+
+### Can you breed different species?
+
+No. Breeding is a same-species system. Keep useful duplicates from the species you want to build.
+
+### Why are my offspring stats lower than the parents?
+
+Early breeding has reduced inheritance. Henry's Hatchery upgrades improve how much of a parent's attribute value can pass down.
+
+### Does 80% mean 80 points?
+
+No. An upgrade that says 80% means 80% of a parent's attribute value can pass down. The 80-point cap is a separate inherited base point limit before level-up allocation.
+
+### What is the 80-point breeding cap?
+
+Breeding can pass up to 80 inherited base attribute points. The remaining 20 points come from leveling the final child, which is how a final build can reach 20 in all five base stats.
+
+### How do I get 20 in multiple stats?
+
+Train parent candidates to level 20, max one target stat on each parent, upgrade Henry's Hatchery, then breed parents that cover different stats. Keep children that inherit multiple strong stats and use them as the next parent line.
+
+### Is 20 the max base stat?
+
+20 is the target base value for each attribute. Nature bonuses and monster part bonuses can push displayed values higher, but the breeding route is focused on building the base stat line.
+
+### How do eggs hatch?
+
+After you start breeding, complete a mission. Return to the ship and inspect the egg at the incubation station.
+
+### How do you get Dual Natures?
+
+Breed two same-species Voidlings with different Natures. Dual Nature rarity follows the lower rarity between the parents, so use high-tier parents if you want a high-tier Dual Nature.
+
+### What are the Dual Nature combinations?
+
+Strong + Witty creates Ferocious, Strong + Healthy creates Robust, Strong + Tenacious creates Enduring, Strong + Agile creates Athletic, Witty + Healthy creates Lively, Witty + Tenacious creates Resourceful, Witty + Agile creates Elegant, Healthy + Tenacious creates Rugged, Healthy + Agile creates Spry, and Tenacious + Agile creates Relentless.
+
+### Can Nature rarity and Nature type inherit separately?
+
+Yes. Nature planning has two parts: the Nature type you want and the rarity tier you want. A parent with a useful high-tier Nature can still produce a lower-tier outcome if paired with a lower-rarity parent.
+
+### How does subspecies inheritance work?
+
+If both parents share the same subspecies, the child keeps that subspecies. If the parents are different subspecies, the child can return to the closest shared evolution point between the two parent lines.
+
+### Can Golden Egg variants pass through breeding?
+
+Golden Egg variants can have value for breeding and Splicing, and special variant traits may be worth preserving. Inspect them before releasing or using them as casual parents.
+
+### Can spliced Voidlings breed?
+
+Spliced Voidlings normally cannot breed through the standard system. A late Spliced Breeding upgrade can open a specialized path, but the safer rule is to finish breeding before Splicing.
+
+### How do I unlock more Henry upgrades?
+
+Raise Wrangler Rank by discovering and documenting new genes through missions and evolution paths. Higher rank unlocks more Hatchery upgrades from Henry.
+
+### Should I breed before Splicing?
+
+Yes for normal progression. Breed the base stats, Nature, and subspecies line first. Splicing should be the final custom-build step unless you already have the late Spliced Breeding upgrade and know exactly why you are using it.
+
+### Is breeding required for the main story?
+
+Perfect breeding is not required for basic story progress, but breeding becomes important if you want stronger parent lines, Dual Natures, better stats, late-game builds, and cleaner Splicing candidates.

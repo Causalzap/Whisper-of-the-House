@@ -39,6 +39,10 @@ href: "/voidling-bound",
 label: "Voidling Bound Guide Hub",
 },
 {
+  href: "/voidling-bound/breeding-guide",
+  label: "Voidling Bound Breeding Guide",
+},
+{
 href: "/voidling-bound/beginner-guide",
 label: "Voidling Bound Beginner Guide",
 },
