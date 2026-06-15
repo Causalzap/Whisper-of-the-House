@@ -58,6 +58,10 @@ label: "Solarpunk Research Progression Guide",
 href: "/solarpunk/farming-guide",
 label: "Solarpunk Farming Guide",
 },
+{
+  href: "/solarpunk/animals-guide",
+  label: "Solarpunk Animals Guide",
+},
 ];
 
 export const metadata: Metadata = {

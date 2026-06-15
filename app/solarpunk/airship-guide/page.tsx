@@ -51,6 +51,10 @@ href: "/solarpunk",
 label: "Solarpunk Guide Hub",
 },
 {
+  href: "/solarpunk/animals-guide",
+  label: "Solarpunk Animals Guide",
+},
+{
 href: "/solarpunk/beginners-guide",
 label: "Solarpunk Beginner Guide",
 },
