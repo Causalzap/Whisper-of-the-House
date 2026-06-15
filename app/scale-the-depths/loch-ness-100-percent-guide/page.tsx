@@ -31,6 +31,10 @@ const toc = [
 ];
 
 const relatedLinks = [
+  {
+    href: "/scale-the-depths/artifacts-guide",
+    label: "Scale the Depths Artifacts Guide",
+  },
 {
 href: "/scale-the-depths",
 label: "Scale the Depths Complete Guide",
