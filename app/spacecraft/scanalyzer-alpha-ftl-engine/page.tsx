@@ -103,6 +103,14 @@ const relatedLinks = [
     label: "SpaceCraft Beginner Guide",
   },
   {
+    href: "/spacecraft/permits-knowledge-unlock",
+    label: "SpaceCraft Permits and Knowledge Unlock Guide",
+    },
+    {
+    href: "/spacecraft/noviciate-corporation-unlock",
+    label: "SpaceCraft Noviciate and Corporation Unlock Guide",
+    },
+  {
     href: "/spacecraft/resources-locations",
     label: "SpaceCraft Resources Guide",
   },

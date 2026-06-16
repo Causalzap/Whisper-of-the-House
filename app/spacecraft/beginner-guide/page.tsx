@@ -110,6 +110,14 @@ const relatedLinks = [
     label: "SpaceCraft Ship Upgrades Guide",
   },
   {
+    href: "/spacecraft/permits-knowledge-unlock",
+    label: "SpaceCraft Permits and Knowledge Unlock Guide",
+    },
+    {
+    href: "/spacecraft/noviciate-corporation-unlock",
+    label: "SpaceCraft Noviciate and Corporation Unlock Guide",
+    },
+  {
     href: "/spacecraft/base-building-automation",
     label: "SpaceCraft Base Building and Automation Guide",
   },

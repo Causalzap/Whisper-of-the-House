@@ -1,0 +1,808 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const permitPriorityColumns = [
+{ key: "Permit", label: "Permit" },
+{ key: "Cost", label: "Cost" },
+{ key: "Main Unlocks", label: "Main Unlocks" },
+{ key: "Buy When", label: "Buy When" },
+];
+
+export const permitPriorityRows = [
+{
+Permit: "Modular Systems",
+Cost: "N/A",
+"Main Unlocks":
+"Scanalyzer Alpha, Small Module Kit, Nut and Bolt, Wire.",
+"Buy When":
+"Core opening unlock. Buy it when the Knowledge route first points you to modular system permits.",
+},
+{
+Permit: "Electromagnetism",
+Cost: "100 credits",
+"Main Unlocks":
+"Simple Mining Laser, Overclocked Mining Laser, Simple Resource Detector, Magnetic Coil.",
+"Buy When":
+"Core FTL unlock. Buy it when the first FTL route asks for Electromagnetism.",
+},
+{
+Permit: "Cargo Accommodation",
+Cost: "100 credits",
+"Main Unlocks":
+"Small Cargo Hold, Spot Light, Light Strip, Headlight, Metal Sheet.",
+"Buy When":
+"Early comfort/core utility. Buy once cargo space starts limiting mining trips, Bob upgrades, or corpo request deliveries.",
+},
+{
+Permit: "Ship Coating",
+Cost: "50 credits",
+"Main Unlocks": "Decoration access.",
+"Buy When":
+"Delay. It is cheap, but it does not solve FTL, cargo, base, or production blockers.",
+},
+{
+Permit: "Electric Motors",
+Cost: "150 credits",
+"Main Unlocks": "Flywheel Battery, Motor, Concrete.",
+"Buy When":
+"Buy when battery, motor, or power-related crafting becomes the blocker after the first FTL / RakMu route.",
+},
+{
+Permit: "Brand Management",
+Cost: "50 credits",
+"Main Unlocks": "Advanced decoration access.",
+"Buy When":
+"Delay. Buy for customization later, not during the first progression push.",
+},
+{
+Permit: "Personal Factory",
+Cost: "300 credits",
+"Main Unlocks":
+"Construction Tool, Base Command Center, Extractor, Smelter, Pylon, Cable, Base Deploy Kit, Stainless Plate.",
+"Buy When":
+"Core base unlock. Buy when you are ready to claim a base and build your first Extractor-to-Smelter loop.",
+},
+{
+Permit: "Chemical Explosives",
+Cost: "800 credits",
+"Main Unlocks":
+"Single-Tube Missile Launcher, Blasting Missile, Small Cartridge, Small Missile Airframe, Solid Explosive.",
+"Buy When":
+"Buy when the route starts asking for missile or shell-resource tasks. Delay if cargo, FTL, or base setup is still weak.",
+},
+{
+Permit: "Asteroid Mining",
+Cost: "1000 credits",
+"Main Unlocks":
+"Small Reactive Shield, Reactive Shield, Elmerium Engine.",
+"Buy When":
+"Later utility. Buy when asteroid, shield, or engine progression becomes the active route.",
+},
+{
+Permit: "Modular Structures",
+Cost: "300 credits",
+"Main Unlocks":
+"Structure access, Brick Cockpit, Cart Pusher Thruster, Hall Alternator.",
+"Buy When":
+"Delay slightly. It matters for changing ship structure, but the starter ship has enough room for early modules.",
+},
+{
+Permit: "Solar Panel",
+Cost: "300 credits",
+"Main Unlocks":
+"Small Solar Panel, Medium Solar Panel, Solar Plant, Solar Cell.",
+"Buy When":
+"Buy when your first base starts hitting power or expansion limits.",
+},
+{
+Permit: "Modular Systems 2",
+Cost: "2000 credits",
+"Main Unlocks":
+"Cargo Hold, Hi-Pi Laser, Overclocked Hi-Pi Laser, Module Kit, Strong Metal Sheet.",
+"Buy When":
+"Important mid-game ship upgrade. Buy when Small Cargo Hold and early tools are no longer enough.",
+},
+{
+Permit: "Automated Factories",
+Cost: "450 credits",
+"Main Unlocks":
+"Assembler, Warehouse, Landing Pad, Drone Dispatcher, Drone, Steel Ingot, Structural Beam, Microchip.",
+"Buy When":
+"Core automation unlock after your first Extractor-to-Smelter loop works.",
+},
+{
+Permit: "Customized Controls",
+Cost: "400 credits",
+"Main Unlocks":
+"Booster Control Mod, Mining Laser Control Mod.",
+"Buy When":
+"Optional utility. Buy when control mods are the blocker or when ship handling/mining control matters more than raw production.",
+},
+{
+Permit: "Ship of Steel",
+Cost: "3000 credits",
+"Main Unlocks":
+"Shipyard, steel ship parts, Nimbus Spoler, Warden Wing, Small Steel Part Casing, Support Hardware.",
+"Buy When":
+"Mid-game ship-building route. Buy when you are ready to build around steel parts and a Shipyard.",
+},
+{
+Permit: "Plumbing",
+Cost: "2500 credits",
+"Main Unlocks":
+"Chemical Factory, Cistern, Simple House Pump, Small Liquid Tank, Pump, Watertight Pipe.",
+"Buy When":
+"Buy when Interplanetary Logistics or fluid/base infrastructure starts asking for pumps, tanks, or pipe systems.",
+},
+{
+Permit: "Chemical Battery",
+Cost: "3000 credits",
+"Main Unlocks":
+"Battery Module, Chemical Battery.",
+"Buy When":
+"Later power-storage route. Delay until basic battery, ship support, and base power are already stable.",
+},
+{
+Permit: "Liquid Logistics",
+Cost: "800 credits",
+"Main Unlocks":
+"Liquid Extractor, Bottling Plant, Stainless Bottle.",
+"Buy When":
+"Buy when fuel, bottles, fluid movement, or liquid extraction becomes the active blocker.",
+},
+{
+Permit: "Better Titanium",
+Cost: "10000 credits",
+"Main Unlocks":
+"Titanium ship parts, Condor Wing, Small Titanium Part Casing, Titanium Part Casing, Heavy-Duty Beam, Inert Plate, B-Titanium Ingot.",
+"Buy When":
+"Later material tier. Buy after steel and mid-game ship/base routes are already useful.",
+},
+{
+Permit: "Modular Systems 3",
+Cost: "25000 credits",
+"Main Unlocks":
+"Factory, Large Cargo Hold, Large Module Kit, Hydraulic Actuator, High-Grade Metal Sheet, Unbendinium Ingot.",
+"Buy When":
+"Late mid-game / advanced factory route. Buy when Large Cargo Hold, Large Module Kit, and high-grade material chains are your next target.",
+},
+{
+Permit: "Advanced Frames",
+Cost: "50000 credits",
+"Main Unlocks":
+"Solid Frame parts, Small Solid Frame Casing, Unbending Beam.",
+"Buy When":
+"Late structure route. Delay until you are building around advanced frames, not first-base automation.",
+},
+{
+Permit: "Very Light Alloys",
+Cost: "50000 credits",
+"Main Unlocks":
+"Levinium parts, Small Levinium Part Casing, Very Light Plate, Levinium Ingot, Mercury.",
+"Buy When":
+"Late material route. Delay until late ship or alloy progression actually asks for Levinium and Mercury.",
+},
+];
+
+export const systemTypeColumns = [
+{ key: "System", label: "System" },
+{ key: "What It Controls", label: "What It Controls" },
+{ key: "How To Treat It", label: "How To Treat It" },
+];
+
+export const systemTypeRows = [
+{
+System: "Knowledge permits",
+"What It Controls":
+"Personal unlocks such as Modular Systems, Electromagnetism, Cargo Accommodation, Personal Factory, Automated Factories, and other permit modules.",
+"How To Treat It":
+"This is your main early progression map. Spend credits based on the next blocker, not on random nodes.",
+},
+{
+System: "Experience / level unlocks",
+"What It Controls":
+"Science, Technology, Exploration, and other progression levels can reveal additional tools, recipes, bases, structures, or higher-tier options.",
+"How To Treat It":
+"These are not always bought like normal permits. Keep earning experience through the route that matches the unlock you need.",
+},
+{
+System: "Laboratory analysis",
+"What It Controls":
+"Resource analysis, Science XP, extracted knowledge, and some recipe/resource unlock paths.",
+"How To Treat It":
+"If a recipe is missing even after buying a permit, check whether a resource still needs Laboratory analysis or a Science level requirement.",
+},
+{
+System: "Corpo permits",
+"What It Controls":
+"Corporation-side upgrades such as request capacity, request credits, station storage, shared ships, shared bases, and related corpo systems.",
+"How To Treat It":
+"Treat these separately from Knowledge permits. Finish Noviciate and the first corpo request before worrying about this system.",
+},
+];
+
+export const progressionRewardColumns = [
+{ key: "Progression", label: "Progression" },
+{ key: "Confirmed Data", label: "Confirmed Data" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const progressionRewardRows = [
+{
+Progression: "Science XP source",
+"Confirmed Data":
+"Science XP comes from studying minerals and organic resources at the Laboratory.",
+"Why It Matters":
+"Science progression is pushed through research and resource analysis, not normal station crafting.",
+},
+{
+Progression: "Laboratory analysis",
+"Confirmed Data":
+"Silicate analysis can unlock Silicon Ingot and Science XP. Hematite and Pyrite analysis can unlock crystal-matrix/resource knowledge and Science XP.",
+"Why It Matters":
+"Some missing recipes are not permit problems. They may be locked behind resource analysis.",
+},
+{
+Progression: "Science Level 2 requirement",
+"Confirmed Data":
+"Semiconductor Substrate is shown with a Requires Science level 2 tooltip while checking Hall Alternator.",
+"Why It Matters":
+"Science Level 2 can directly gate crafting chains, including parts that block ship or structure upgrades.",
+},
+{
+Progression: "Technology XP source",
+"Confirmed Data":
+"A base generates Technology XP by crafting items in automated Smelters and Factories. Deploying a new base building for the first time also gives Technology XP.",
+"Why It Matters":
+"Base automation is not only for materials. It is also how you push Technology progression.",
+},
+{
+Progression: "Interplanetary Logistics",
+"Confirmed Data":
+"The route explains that Interplanetary Logistics lets your base connect to stations and later to other bases.",
+"Why It Matters":
+"This confirms why Plumbing, Solar Plant, base development, and Technology points start mattering after the first local base loop.",
+},
+{
+Progression: "Progression-tree branches",
+"Confirmed Data":
+"The progression tree shows branches such as Plasma Containment, Crystal Structuring, Xenic Adaptation, and Combustion Engine.",
+"Why It Matters":
+"Some later systems are progression-gated. Do not assume every missing recipe is solved by buying a credit permit.",
+},
+{
+Progression: "Exploration Level 2 examples",
+"Confirmed Data":
+"The route shows Exploration Level 2 revealing examples such as Spectral Resource Detector, Cosmic Navigator, and Pathfinder Cockpit.",
+"Why It Matters":
+"Exploration progression can affect ship/navigation options, not just map completion.",
+},
+{
+Progression: "Technology Level 2 + Science Level 3",
+"Confirmed Data":
+"The later route data confirms mid-game rewards such as Crystalline Structures, Crystallizer access, an additional base, Construction Tool Mark 2, and a cargo-focused cockpit.",
+"Why It Matters":
+"Higher Science and Technology levels can unlock major mid-game options beyond the early permit tree.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Choice", label: "Better Choice" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Buying decoration permits early",
+"Why It Hurts":
+"Ship Coating and Brand Management are cheap, but they still spend credits that could solve FTL, cargo, base, or production blockers.",
+"Better Choice":
+"Buy functional permits first: Modular Systems, Electromagnetism, Cargo Accommodation, Personal Factory.",
+},
+{
+Mistake: "Treating all permits as equal",
+"Why It Hurts":
+"Some permits unlock core systems, while others only matter after your ship, base, or production route exists.",
+"Better Choice":
+"Buy by blocker: scanner, FTL, cargo, base, power, automation, then advanced systems.",
+},
+{
+Mistake: "Buying Personal Factory before you can support a base",
+"Why It Hurts":
+"The permit opens the route, but you still need credits, base parts, a good deposit, and enough materials.",
+"Better Choice":
+"Prepare the Base Core Drive, Construction Tool, and first resource target before overbuilding.",
+},
+{
+Mistake: "Unlocking Automated Factories before the first loop works",
+"Why It Hurts":
+"Warehouse, Assembler, Drone Dispatcher, and Landing Pad are powerful but can become dead unlocks if your first Extractor and Smelter are not stable.",
+"Better Choice":
+"Get one ore-to-ingot loop working first, then add storage and drone routing.",
+},
+{
+Mistake: "Confusing Corpo Permits with Knowledge permits",
+"Why It Hurts":
+"Corpo permits use corporation progression. They do not replace Modular Systems, Electromagnetism, or Personal Factory.",
+"Better Choice":
+"Handle corpo permits after Noviciate and the first corpo request. Use this guide for personal Knowledge unlock order.",
+},
+{
+Mistake: "Ignoring Laboratory analysis",
+"Why It Hurts":
+"You may buy the right permit but still miss recipes if key minerals or organic resources have not been analyzed.",
+"Better Choice":
+"Analyze resources at the Laboratory when a recipe chain points toward Science, Silicon Ingot, crystal matrices, or missing material knowledge.",
+},
+];
+
+export const blockerColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Likely Issue", label: "Likely Issue" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const blockerRows = [
+{
+Problem: "The Workshop or Shipyard route feels empty early.",
+"Likely Issue": "Modular Systems or the early Knowledge objective is not handled.",
+Fix:
+"Open Knowledge when the route asks for it and unlock Modular Systems before trying to craft advanced modules.",
+},
+{
+Problem: "FTL Engine - Eco is visible but the route does not move.",
+"Likely Issue": "Electromagnetism or the FTL ingredient chain is missing.",
+Fix:
+"Buy Electromagnetism when the FTL route asks for it, then check Small Module Kit, Crystalline Focuser, Wire, and Silicon Gel.",
+},
+{
+Problem: "Mining trips end too quickly.",
+"Likely Issue": "Cargo Accommodation has not been used for Small Cargo Hold.",
+Fix:
+"Buy Cargo Accommodation, craft Small Cargo Hold, and install it before longer mining or corpo request runs.",
+},
+{
+Problem: "You want a base but cannot place the core setup.",
+"Likely Issue": "Personal Factory or base construction items are not ready.",
+Fix:
+"Unlock Personal Factory, then prepare Construction Tool, Base Core Drive, Base Deploy Kit, Extractor, Smelter, and Pylon.",
+},
+{
+Problem: "The first base works but feels manual and messy.",
+"Likely Issue": "Automated Factories is not unlocked or not being used yet.",
+Fix:
+"After the first Extractor-to-Smelter loop works, unlock Automated Factories for Warehouse, Assembler, Drone Dispatcher, Drone, and Landing Pad.",
+},
+{
+Problem: "You need better cargo / laser / module parts after the first upgrades.",
+"Likely Issue": "Modular Systems 2 is becoming relevant.",
+Fix:
+"Buy Modular Systems 2 once the early ship and first base routes are stable and the next blocker is Cargo Hold, Hi-Pi Laser, Module Kit, or Strong Metal Sheet.",
+},
+{
+Problem: "A part tooltip says Requires Science level 2.",
+"Likely Issue": "You are missing Science progression, not a normal credit permit.",
+Fix:
+"Analyze minerals or organic resources at the Laboratory until the required Science level is reached.",
+},
+{
+Problem: "Your base exists, but Technology barely moves.",
+"Likely Issue": "The base is not producing enough through automated Smelters, Factories, or new building deployment.",
+Fix:
+"Claim available Technology XP from the base command system and keep expanding actual production, not just placing idle structures.",
+},
+{
+Problem: "You are spending credits but not solving your current blocker.",
+"Likely Issue": "You are buying later, cosmetic, or unrelated permits too early.",
+Fix:
+"Return to the full permit table and buy the permit that solves the next active route, not the cheapest or flashiest node.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **SpaceCraft**, buy permits by blocker, not by curiosity. Start with **Modular Systems** when the Knowledge route offers it, then buy **Electromagnetism** for the first FTL chain. After RakMu, **Cargo Accommodation** is one of the best practical 100-credit unlocks because it opens Small Cargo Hold. Buy **Personal Factory** when you are ready to claim a base, then move into **Solar Panel** and **Automated Factories** after the first Extractor-to-Smelter loop works.
+
+Do not treat every missing recipe as a permit problem. Some routes also need **Laboratory analysis**, **Science level**, **Technology XP**, or **Exploration progression**. If a recipe is missing after buying the right permit, check the progression requirement before spending credits on unrelated nodes. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the SpaceCraft Early Access launch build. Permit names, credit costs, unlock lists, and progression gates may change during Early Access.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-knowledge-menu-modular-systems.webp"
+    alt="SpaceCraft Knowledge permit tree showing Modular Systems Electromagnetism Cargo Accommodation Personal Factory Modular Structures and Solar Panel"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Knowledge tree is useful, but only if you buy around your current blocker instead of treating every node as equal.
+  </figcaption>
+</figure>
+
+<h2 id="spacecraft-permits-knowledge-unlock-guide">
+  SpaceCraft permits and Knowledge unlock guide
+</h2>
+
+The Knowledge menu can look like a normal tech tree, but SpaceCraft plays better when you treat every permit as a practical route unlock.
+
+If you only want the early answer:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Modular Systems</strong> opens the Scanalyzer Alpha and early ship-module route.</li>
+  <li><strong>Electromagnetism</strong> supports the first FTL, detector, laser, and Magnetic Coil route.</li>
+  <li><strong>Cargo Accommodation</strong> solves the first serious cargo problem.</li>
+  <li><strong>Personal Factory</strong> starts base building.</li>
+  <li><strong>Solar Panel</strong> and <strong>Automated Factories</strong> make your first base scalable.</li>
+  <li><strong>Modular Systems 2</strong> becomes important when basic cargo, lasers, and module parts are no longer enough.</li>
+</ul>
+
+For a complete reference, use the table below. It includes both urgent permits and delay nodes so you can compare the full tree without leaving the guide.
+
+<GuideTable
+caption="Complete SpaceCraft permit unlock table with cost, main unlocks, and recommended timing."
+columns={permitPriorityColumns}
+rows={permitPriorityRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="knowledge-permits-vs-level-unlocks-vs-corpo-permits">
+  Knowledge permits vs level unlocks vs corpo permits
+</h2>
+
+SpaceCraft has more than one progression system. This is why you can buy a permit and still find that a recipe, station option, or corporation system is not ready yet.
+
+<GuideTable
+caption="The main SpaceCraft unlock systems and how to treat them."
+columns={systemTypeColumns}
+rows={systemTypeRows}
+/>
+
+If you are trying to unlock corporation access, use the <Link href="/spacecraft/noviciate-corporation-unlock">SpaceCraft Noviciate and Corporation Unlock Guide</Link>. This page focuses on personal Knowledge permits and practical unlock order.
+
+<h2 id="electromagnetism-ftl">
+  Electromagnetism: the first FTL gate
+</h2>
+
+**Electromagnetism** is a small 100-credit unlock, but it sits on the critical early route. When the Interstellar Travel objective asks you to craft **FTL Engine - Eco**, it also points you toward unlocking Electromagnetism from the Knowledge section.
+
+This permit is important because it unlocks tools and parts that support early mining, detection, and Magnetic Coil progression.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-electromagnetism-permit-ftl.webp"
+    alt="SpaceCraft Interstellar Travel objective asking the player to unlock the Electromagnetism permit and craft FTL Engine Eco"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the FTL route asks for Electromagnetism, do not keep farming random resources first. The permit itself is the blocker.
+  </figcaption>
+</figure>
+
+Use the <Link href="/spacecraft/scanalyzer-alpha-ftl-engine">Scanalyzer Alpha and FTL Guide</Link> if the FTL Engine - Eco ingredient chain is still unclear.
+
+<h2 id="cargo-accommodation">
+  Cargo Accommodation: the first comfort upgrade that actually matters
+</h2>
+
+**Cargo Accommodation** is easy to underestimate because it is not as flashy as a new laser or a base unlock. In practice, it is one of the best early 100-credit purchases once mining trips start feeling too short.
+
+Buy it when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>your cargo fills before you finish the resource route,</li>
+  <li>you are making repeated station trips for Copper, Iron, Quartz, or upgrade parts,</li>
+  <li>Bob's route is pushing ship improvements,</li>
+  <li>or corpo requests start asking for materials you cannot comfortably carry.</li>
+</ul>
+
+Cargo Accommodation opens **Small Cargo Hold**, which is useful for ship upgrades, base prep, and early corporation deliveries.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-cargo-accommodation-permit.webp"
+    alt="SpaceCraft Cargo Accommodation permit showing Small Cargo Hold Spot Light Light Strip Headlight Metal Sheet and 100 credit cost"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cargo Accommodation is not cosmetic. Small Cargo Hold saves time on mining trips and request deliveries.
+  </figcaption>
+</figure>
+
+For the cargo module route, use the <Link href="/spacecraft/ship-upgrades-cargo-inventory">SpaceCraft Ship Upgrades Guide</Link>.
+
+<h2 id="personal-factory">
+  Personal Factory: when base building really starts
+</h2>
+
+**Personal Factory** is the major shift from station crafting into your own production setup.
+
+Do not buy it and immediately overbuild. The permit opens the base-building route, but you still need:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Construction Tool</strong>,</li>
+  <li><strong>Base Core Drive</strong> or the current base-core route item,</li>
+  <li><strong>Base Deploy Kit</strong>,</li>
+  <li><strong>Extractor</strong>,</li>
+  <li><strong>Smelter</strong>,</li>
+  <li><strong>Pylon</strong>,</li>
+  <li>enough credits for base parts,</li>
+  <li>and an unclaimed resource deposit worth building around.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-personal-factory-permit-300.webp"
+    alt="SpaceCraft Personal Factory permit costing 300 credits and unlocking Construction Tool Base Command Center Extractor Smelter Pylon Cable and Base Deploy Kit"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Personal Factory is the base-building gate. Buy it when you are ready to claim a production site, not just because it appears.
+  </figcaption>
+</figure>
+
+For placement, power, Extractors, Smelters, and Drone Routes, use the <Link href="/spacecraft/base-building-automation">SpaceCraft Base Building and Automation Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="automated-factories">
+  Automated Factories: buy it after the first loop works
+</h2>
+
+**Automated Factories** is the permit that turns a single mining outpost into a real factory system.
+
+It unlocks the buildings that matter after the first loop:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Warehouse</strong> for storage,</li>
+  <li><strong>Assembler</strong> for component production,</li>
+  <li><strong>Drone Dispatcher</strong> and <strong>Drone</strong> for routing,</li>
+  <li><strong>Landing Pad</strong> for connecting ship logistics to the base,</li>
+  <li>and industrial materials such as Steel Ingot, Structural Beam, and Microchip.</li>
+</ul>
+
+Do not rush it before one Extractor-to-Smelter loop works. The correct timing is when your base can already produce something, but the next blocker is storage, movement, or scaling.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-automated-factories-logistics.webp"
+    alt="SpaceCraft mid-game Knowledge tree showing Automated Factories Plumbing Liquid Logistics Ship of Steel Modular Systems 3 Advanced Frames and Very Light Alloys"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Automated Factories is the bridge from a small ore loop to storage, assembly, drones, landing, and real base logistics.
+  </figcaption>
+</figure>
+
+<h2 id="modular-systems-2">
+  Modular Systems 2: why the 2000-credit unlock matters
+</h2>
+
+**Modular Systems 2** is the first permit in this guide that feels expensive compared with the opening route, but it is not a cosmetic delay node.
+
+It unlocks the next practical ship-upgrade layer:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Cargo Hold</strong>,</li>
+  <li><strong>Hi-Pi Laser</strong>,</li>
+  <li><strong>Overclocked Hi-Pi Laser</strong>,</li>
+  <li><strong>Module Kit</strong>,</li>
+  <li><strong>Strong Metal Sheet</strong>.</li>
+</ul>
+
+Buy it when your early ship setup is no longer enough:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Small Cargo Hold no longer carries enough for longer routes,</li>
+  <li>early mining lasers feel too weak,</li>
+  <li>Module Kit becomes a repeated crafting blocker,</li>
+  <li>or Strong Metal Sheet starts appearing in ship/base upgrade chains.</li>
+</ul>
+
+Do not buy it before your first FTL, Cargo Accommodation, and base-start route are stable. Once those are done, Modular Systems 2 becomes one of the most important mid-game Knowledge unlocks.
+
+<h2 id="interplanetary-logistics-plumbing-liquid-logistics">
+  Interplanetary Logistics, Plumbing, and Liquid Logistics
+</h2>
+
+**Interplanetary Logistics** is the next base layer after your first local production loop. The route explains that Interplanetary Logistics will let your base connect to stations and later to other bases. Before that, the game asks you to master several intermediate steps.
+
+The confirmed blocker chain is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>get <strong>Carbon</strong>,</li>
+  <li>unlock the <strong>Plumbing</strong> permit,</li>
+  <li>earn <strong>Technology points</strong> from your base,</li>
+  <li>develop the base station,</li>
+  <li>and deploy / assemble a <strong>Solar Power Plant</strong>.</li>
+</ul>
+
+That means Plumbing is not just a random fluid node. It becomes relevant when the base route starts moving from a local mining loop toward station-connected logistics.
+
+Use this timing:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Still building the first Extractor-to-Smelter loop?</strong>{" "}
+    Delay Plumbing and Liquid Logistics.
+  </li>
+  <li>
+    <strong>Base works, but power and expansion are limiting you?</strong>{" "}
+    Prioritize Solar Panel and the base development tasks first.
+  </li>
+  <li>
+    <strong>The objective starts asking for pumps, tanks, bottles, or fluid movement?</strong>{" "}
+    Move into Liquid Logistics and Plumbing.
+  </li>
+  <li>
+    <strong>The route mentions station connection or future base connection?</strong>{" "}
+    You are entering the Interplanetary Logistics layer.
+  </li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-interplanetary-logistics-plumbing.webp"
+    alt="SpaceCraft Interplanetary Logistics objective explaining base connection to stations and future bases"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Interplanetary Logistics starts after the first local base loop and points toward station and future-base connections.
+  </figcaption>
+</figure>
+
+<h2 id="science-technology-exploration-progression">
+  Confirmed Science, Technology, and Exploration progression
+</h2>
+
+Not every SpaceCraft unlock is a normal credit purchase. Some tools and recipes come from **Laboratory analysis**, **Science level**, **Technology XP**, **Exploration progression**, or later progression-tree branches.
+
+This table only lists confirmed information from the current route data. Do not treat it as a complete final-version level chart yet, because SpaceCraft is still in Early Access.
+
+<GuideTable
+caption="Confirmed SpaceCraft Science, Technology, and Exploration progression data."
+columns={progressionRewardColumns}
+rows={progressionRewardRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-technology-level-unlocks.webp"
+    alt="SpaceCraft progression screen showing Exploration Technology Science Social and Combat level progress"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some unlocks are tied to progression levels such as Exploration, Technology, and Science, not only to credit-bought Knowledge permits.
+  </figcaption>
+</figure>
+
+<h2 id="common-permit-mistakes">
+  Common permit mistakes
+</h2>
+
+<GuideTable
+caption="Common SpaceCraft permit mistakes and better choices."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+<h2 id="permit-blocker-fixes">
+  Permit blocker fixes
+</h2>
+
+Use this table when it feels like you have the materials, but the game still will not show or complete the next craft.
+
+<GuideTable
+caption="Common SpaceCraft permit and progression blockers."
+columns={blockerColumns}
+rows={blockerRows}
+/>
+
+<h2 id="what-to-do-after-permits">
+  What to do after choosing your next permit
+</h2>
+
+Permits are not the finish line. Each one should push you into a practical route:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Modular Systems or Electromagnetism?</strong>{" "}
+    Continue through the <Link href="/spacecraft/scanalyzer-alpha-ftl-engine">Scanalyzer Alpha and FTL Guide</Link>.
+  </li>
+  <li>
+    <strong>Cargo Accommodation, Electric Motors, or Modular Systems 2?</strong>{" "}
+    Follow the <Link href="/spacecraft/ship-upgrades-cargo-inventory">Ship Upgrades Guide</Link>.
+  </li>
+  <li>
+    <strong>Personal Factory, Solar Panel, or Automated Factories?</strong>{" "}
+    Build through the <Link href="/spacecraft/base-building-automation">Base Building and Automation Guide</Link>.
+  </li>
+  <li>
+    <strong>Corpo permits?</strong>{" "}
+    Finish <Link href="/spacecraft/noviciate-corporation-unlock">Noviciate and Corporation Unlock</Link> first.
+  </li>
+  <li>
+    <strong>Resource or analysis blocker?</strong>{" "}
+    Use the <Link href="/spacecraft/resources-locations">Resources Guide</Link> and check whether the missing material needs Laboratory analysis.
+  </li>
+</ul>
+
+<h2 id="faq">
+  SpaceCraft permits and Knowledge FAQ
+</h2>
+
+### What permit should I unlock first in SpaceCraft?
+
+Unlock Modular Systems when the opening route points you to the Knowledge menu. It starts the early ship-module and Scanalyzer Alpha route.
+
+### Is Electromagnetism required for FTL?
+
+Yes. Buy Electromagnetism when the FTL route asks for it, then check the FTL Engine - Eco ingredient chain.
+
+### Is Cargo Accommodation worth it?
+
+Yes, once cargo space becomes the bottleneck. It opens Small Cargo Hold and makes mining trips, upgrade runs, and request deliveries easier.
+
+### When should I buy Personal Factory?
+
+Buy Personal Factory when you are ready to claim a base and build the first production loop. Do not buy it just to stare at base recipes without parts, credits, or a good deposit.
+
+### When should I buy Automated Factories?
+
+Buy Automated Factories after your first Extractor-to-Smelter loop works. It is strongest when storage, drone routing, landing, and production scaling are the next bottlenecks.
+
+### Is Modular Systems 2 worth 2000 credits?
+
+Yes, once the first FTL, Cargo Accommodation, and base-start routes are stable. Modular Systems 2 opens Cargo Hold, Hi-Pi Laser, Overclocked Hi-Pi Laser, Module Kit, and Strong Metal Sheet.
+
+### Are Corpo Permits the same as Knowledge permits?
+
+No. Knowledge permits are personal unlocks. Corpo permits are corporation-side upgrades that matter after Noviciate and the first corpo request.
+
+### Should I buy decoration permits early?
+
+Usually no. Ship Coating and Brand Management are cheap, but they do not solve FTL, cargo, base, power, or automation blockers.
+
+### How do I get Science XP in SpaceCraft?
+
+Study minerals and organic resources at the Laboratory. Resource analysis can give Science XP and may also unlock recipe or material knowledge.
+
+### How do I get Technology XP in SpaceCraft?
+
+Crafting items in automated Smelters and Factories inside your space base generates Technology XP. Deploying a new base building for the first time also gives Technology XP.
+
+### Why does a recipe say Requires Science level 2?
+
+That recipe is gated by Science progression, not only by a Knowledge permit. Analyze resources at the Laboratory until the required Science level is reached.
+
+### Why do I have materials but no recipe?
+
+Check Knowledge, Laboratory analysis, and progression levels. Some recipes stay unavailable until the relevant permit, resource analysis, blueprint access, or Science / Technology / Exploration requirement is unlocked.
+
+### What is the difference between permits and Science / Technology levels?
+
+Permits are bought unlocks in Knowledge. Science and Technology levels can reveal additional tools, recipes, bases, structures, and higher-tier options through progression.
+
+### Should I follow the full permit tree in order?
+
+No. Follow your active blocker. Buy the permit that solves your route now, then come back for later systems when they become relevant.

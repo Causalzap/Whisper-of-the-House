@@ -1,0 +1,617 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const unlockRouteColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Goal", label: "Goal" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Common Blocker", label: "Common Blocker" },
+];
+
+export const unlockRouteRows = [
+{
+Step: "1",
+Goal: "Reach RakMu",
+"What To Do":
+"Finish the first FTL route, refill Magnetic Plasma, and follow the galaxy map route to RakMu.",
+"Common Blocker":
+"Trying to start corporation content before the first FTL route is complete.",
+},
+{
+Step: "2",
+Goal: "Talk to the RakMu Clerk",
+"What To Do":
+"Use the clerk's orientation dialogue to identify the three new routes: Bob, Ingrid, and the Mining Bureau.",
+"Common Blocker":
+"Wandering between NPCs without realizing Ingrid is the corporation-access route.",
+},
+{
+Step: "3",
+Goal: "Start Ingrid's Noviciate test",
+"What To Do":
+"Talk to Instructor Ingrid Alvares and accept the Noviciate / Novvicia test.",
+"Common Blocker":
+"Doing Bob's ship upgrade route or Mining Bureau work and expecting that to unlock corporation access.",
+},
+{
+Step: "4",
+Goal: "Pass the cognitive test",
+"What To Do":
+"Inside the facility, use the handprint panels to unlock the required doors before moving on.",
+"Common Blocker":
+"Missing a handprint panel and assuming the locked door means the route is broken.",
+},
+{
+Step: "5",
+Goal: "Pass the physical test",
+"What To Do":
+"Use crouch when prompted, then climb the ladder and jump across the platforms to reach the exit.",
+"Common Blocker":
+"Stopping after the crouch section and missing the final ladder / platform route.",
+},
+{
+Step: "6",
+Goal: "Create or join a corpo",
+"What To Do":
+"After the assessment completes, leave the facility and follow the new corporation objective.",
+"Common Blocker":
+"Expecting an inventory item instead of a rank / interface unlock.",
+},
+{
+Step: "7",
+Goal: "Complete the first corpo request",
+"What To Do":
+"Visit the corporation desk route and complete the first request, such as the Module Kit Sample request shown in the current build.",
+"Common Blocker":
+"Creating a corpo but not starting the request loop that unlocks license points and later wholesale contracts.",
+},
+];
+
+export const testStepColumns = [
+{ key: "Test Step", label: "Test Step" },
+{ key: "Exact Action", label: "Exact Action" },
+{ key: "If You Are Stuck", label: "If You Are Stuck" },
+];
+
+export const testStepRows = [
+{
+"Test Step": "Enter the facility",
+"Exact Action":
+"Follow Ingrid's objective to the testing facility. The route starts with the cognitive test and then moves into the physical test.",
+"If You Are Stuck":
+"You are in the right place if the objective says to pass the cognitive and physical assessments.",
+},
+{
+"Test Step": "Open the cognitive-test doors",
+"Exact Action":
+"Look for handprint panels in the rooms and corridors. Interact with each panel to open the required doors.",
+"If You Are Stuck":
+"Backtrack and check the side walls. A locked door usually means one panel has not been used yet.",
+},
+{
+"Test Step": "Clear every door in the cognitive area",
+"Exact Action":
+"Keep unlocking doors until the route stops behaving like a panel puzzle and shifts into the movement section.",
+"If You Are Stuck":
+"Do not leave after the first door opens. The test is not finished until the game routes you into the physical section.",
+},
+{
+"Test Step": "Use crouch in the physical test",
+"Exact Action":
+"Hold the crouch key when the physical section asks for it and move through the low passage.",
+"If You Are Stuck":
+"This section uses first-person movement, not ship controls or crafting. Slow down and line up the movement.",
+},
+{
+"Test Step": "Climb and jump to the exit",
+"Exact Action":
+"Near the end, climb the ladder and use the platform jumps to reach the exit route.",
+"If You Are Stuck":
+"Look upward. The final route continues through a ladder and platform path, not another terminal.",
+},
+{
+"Test Step": "Confirm assessment completion",
+"Exact Action":
+"Leave once the game confirms the Cognitive and Physical Assessment is complete.",
+"If You Are Stuck":
+"After completion, check the corpo objective or interface instead of repeating the facility.",
+},
+];
+
+export const prerequisiteColumns = [
+{ key: "Check", label: "Check" },
+{ key: "Why It Matters", label: "Why It Matters" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const prerequisiteRows = [
+{
+Check: "First FTL route complete",
+"Why It Matters":
+"RakMu and Ingrid's route sit after the opening FTL progression.",
+Fix:
+"Finish Scanalyzer Alpha, Gray Quartz, Gravite, Electromagnetism, FTL Engine - Eco, and Magnetic Plasma first.",
+},
+{
+Check: "RakMu orientation started",
+"Why It Matters":
+"The clerk introduces Bob, Ingrid, and the Mining Bureau so the routes make sense.",
+Fix:
+"Dock at RakMu and talk to the Station Clerk before chasing corporation NPCs.",
+},
+{
+Check: "Noviciate assessment complete",
+"Why It Matters":
+"Ingrid states that Noviciate rank is required before joining or funding a corpo.",
+Fix:
+"Pass both the cognitive and physical parts of the test.",
+},
+{
+Check: "Early onboarding / blueprint access settled",
+"Why It Matters":
+"Some corporation options can still feel locked if earlier company progression is unfinished.",
+Fix:
+"Finish the early refined-ore sale / company onboarding route and confirm Knowledge / blueprint access is open.",
+},
+{
+Check: "Enough practical ship capacity",
+"Why It Matters":
+"First corpo requests and later wholesale contracts can ask for bulky materials.",
+Fix:
+"Buy Cargo Accommodation and craft Small Cargo Hold if cargo is already limiting your material runs.",
+},
+];
+
+export const corpoProgressColumns = [
+{ key: "System", label: "System" },
+{ key: "What It Unlocks", label: "What It Unlocks" },
+{ key: "Useful Detail", label: "Useful Detail" },
+];
+
+export const corpoProgressRows = [
+{
+System: "First corpo request",
+"What It Unlocks":
+"Starts the actual corporation progression loop after you create or join a corpo.",
+"Useful Detail":
+"The captured route used a Module Kit Sample request, so do not spend all module materials before checking the request.",
+},
+{
+System: "License points",
+"What It Unlocks":
+"Corporation-wide benefits that corpo owners can spend for all members.",
+"Useful Detail":
+"After the first corpo request, the game tells you to open the corpo interface and check Licenses.",
+},
+{
+System: "Corpo Permits tab",
+"What It Unlocks":
+"Access to corporation-side permit upgrades.",
+"Useful Detail":
+"In the captured build, the Corpo Permits tab itself was shown as a 5-corpo-credit unlock.",
+},
+{
+System: "Request-series upgrades",
+"What It Unlocks":
+"Request Space, Request Credits, Request Reputation, and related request scaling.",
+"Useful Detail":
+"Buy these after your corpo is actively completing requests. They make sense when request capacity, corpo-credit gain, or reputation gain becomes the bottleneck.",
+},
+{
+System: "Capacity-series upgrades",
+"What It Unlocks":
+"Station Storage, Fleet Capacity, Base Capacity, and other shared corporation limits.",
+"Useful Detail":
+"Treat these as mid-game corpo upgrades. They matter more once you are managing shared ships, shared bases, stored materials, or larger group logistics.",
+},
+{
+System: "Wholesale contracts",
+"What It Unlocks":
+"Larger long-term production contracts from the corporation desk.",
+"Useful Detail":
+"They appear after the first corporation request steps in the captured build.",
+},
+];
+
+
+export const soloChoiceColumns = [
+{ key: "Choice", label: "Choice" },
+{ key: "Best When", label: "Best When" },
+{ key: "Real Cost / Pressure", label: "Real Cost / Pressure" },
+];
+
+export const soloChoiceRows = [
+{
+Choice: "Create a solo corpo",
+"Best When":
+"You want full control over name, requests, permit direction, and shared progression.",
+"Real Cost / Pressure":
+"No large upfront material cost was confirmed in this route, but the pressure starts through corpo credits, request materials, and permit choices. The Corpo Permits tab was shown as a 5-corpo-credit unlock in the captured build.",
+},
+{
+Choice: "Join an existing corpo",
+"Best When":
+"You want group progress, shared production, or help with larger requests.",
+"Real Cost / Pressure":
+"Less solo production burden, but less control. The game itself warns you to choose associates carefully.",
+},
+{
+Choice: "Delay corpo progression",
+"Best When":
+"Your cargo, detector, mining laser, battery, or first base loop is still weak.",
+"Real Cost / Pressure":
+"You avoid spreading early materials too thin, but later requests, permits, wholesale contracts, and shared systems still require corporation access.",
+},
+];
+
+export const blockerColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const blockerRows = [
+{
+Problem: "I reached RakMu but do not know who starts corpo access.",
+"Likely Cause":
+"RakMu opens Bob, Ingrid, and Mining Bureau routes at the same time.",
+Fix:
+"Talk to the Station Clerk, then go to Ingrid. Ingrid starts the Noviciate route.",
+},
+{
+Problem: "The cognitive test door stays locked.",
+"Likely Cause":
+"A handprint panel was missed.",
+Fix:
+"Backtrack through the rooms and use every handprint panel before trying the locked door again.",
+},
+{
+Problem: "The physical test feels finished, but the objective remains.",
+"Likely Cause":
+"The final ladder and platform jump route was missed.",
+Fix:
+"Look upward near the end of the movement section, climb the ladder, and jump across to the exit path.",
+},
+{
+Problem: "I passed the test but cannot join or fund a corpo.",
+"Likely Cause":
+"An earlier onboarding, refined-ore sale, blueprint access, or interface step may still be unfinished.",
+Fix:
+"Finish remaining early company progression, then return to the corpo objective or interface.",
+},
+{
+Problem: "I created a corpo but nothing else happens.",
+"Likely Cause":
+"The next step is the first corpo request, not another Noviciate test.",
+Fix:
+"Follow the corporation desk objective and complete the first request.",
+},
+{
+Problem: "Wholesale contracts are not visible.",
+"Likely Cause":
+"The first corpo request / license step has not been completed yet.",
+Fix:
+"Complete the first request, open the corpo interface, check Licenses / Corpo Permits, then return to the corporation desk.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To unlock corporation access in **SpaceCraft**, finish the first FTL route, reach **RakMu**, talk to the **Station Clerk**, then start **Instructor Ingrid Alvares' Noviciate test**. The test has two parts: a cognitive door puzzle where you use **handprint panels** to unlock every required door, and a physical route where you crouch, climb a ladder, and jump across platforms to reach the exit.
+
+After the assessment is complete, you can create or join a corpo. If the option is still locked, finish any remaining early onboarding, refined-ore sale, blueprint access, or Knowledge-menu progression before checking the corpo interface again. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for the SpaceCraft Early Access launch build. Rank names, request rewards, corpo credit costs, permit effects, and corporation systems may change during Early Access.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-rakmu-clerk-ingrid-noviciate.webp"
+    alt="RakMu Station Clerk explaining that Ingrid gives the Noviciate test and that Noviciate rank lets players join or fund a corporation"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    RakMu opens several routes at once. The important corporation path is Ingrid's Noviciate test.
+  </figcaption>
+</figure>
+
+<h2 id="spacecraft-noviciate-corporation-unlock">
+  SpaceCraft Noviciate and corporation unlock route
+</h2>
+
+The corporation route starts after the first FTL route, but SpaceCraft does not put it on a single straight rail. RakMu introduces ship upgrades, Mining Bureau work, and Noviciate at the same time.
+
+Use this route map first:
+
+<GuideTable
+caption="SpaceCraft Noviciate and corporation unlock route."
+columns={unlockRouteColumns}
+rows={unlockRouteRows}
+/>
+
+If you are not at RakMu yet, finish the <Link href="/spacecraft/scanalyzer-alpha-ftl-engine">SpaceCraft Scanalyzer Alpha and FTL Guide</Link> first.
+
+<h2 id="start-ingrid-noviciate-test">
+  Start Ingrid's Noviciate test
+</h2>
+
+At RakMu, talk to the Station Clerk, then find **Instructor Ingrid Alvares**.
+
+Ingrid is the key NPC for corporation access. Her dialogue explains that you can join a corpo or fund one after earning your **Noviciate** rank by passing the test.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-noviciate-rank-required-for-corpo.webp"
+    alt="Instructor Ingrid Alvares explaining that Noviciate rank is required before joining or funding a corporation"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Ingrid confirms the gate clearly: pass the Noviciate test before trying to join or fund a corpo.
+  </figcaption>
+</figure>
+
+Bob is still useful for cargo, detector, laser, and battery upgrades. The Mining Bureau is still useful for resource leads. They just do not replace Ingrid's test.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="noviciate-test-walkthrough">
+  Noviciate test walkthrough: handprint panels, ladder, and platforms
+</h2>
+
+The Noviciate test is short, but the important details are easy to miss. The first half is a **cognitive test** built around handprint panels and locked doors. The second half is a **physical test** built around crouching, climbing, and jumping.
+
+<GuideTable
+caption="How to pass the SpaceCraft Noviciate cognitive and physical assessment."
+columns={testStepColumns}
+rows={testStepRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-noviciate-testing-facility.webp"
+    alt="Noviciate testing facility explaining that the cognitive test comes first and the physical test comes second"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The facility tells you the structure before you begin: cognitive test first, physical test second.
+  </figcaption>
+</figure>
+
+During the cognitive test, do not simply run forward and wait for the route to solve itself. Check each room for **handprint panels**. If a door remains locked, backtrack and look for another panel you did not use.
+
+During the physical test, hold crouch when prompted, then keep moving until you reach the final climb. Near the end, the route continues upward: climb the ladder, jump across the platforms, and follow the exit path.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-novician-title-corpo-interface.webp"
+    alt="SpaceCraft Cognitive and Physical Assessment complete message after finishing the Noviciate test"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When the assessment completes, leave the facility and check the corporation objective instead of repeating the test.
+  </figcaption>
+</figure>
+
+<h2 id="corpo-unlock-prerequisites">
+  If corpo is still locked, check these prerequisites
+</h2>
+
+Noviciate rank is the main corporation gate, but it is not the only progression layer in SpaceCraft. If the corpo option still looks locked after the assessment, check the earlier company route before assuming the quest is bugged.
+
+<GuideTable
+caption="Checks to make before joining, creating, or funding a corpo."
+columns={prerequisiteColumns}
+rows={prerequisiteRows}
+/>
+
+The safest sequence is: finish first FTL, talk to the RakMu Clerk, pass Ingrid's test, settle the early company onboarding / refined-ore sale path, confirm blueprint or Knowledge access, then open the corpo objective again.
+
+<h2 id="create-or-join-corpo">
+  Create your own corpo or join an existing one?
+</h2>
+
+After Noviciate, the game can ask you to **create your own corpo or join an existing corpo**.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-corpo-create-or-join.webp"
+    alt="SpaceCraft objective asking the player to create their own corpo or join an existing corpo"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After Noviciate, corporation access becomes a real objective: create your own corpo or join one.
+  </figcaption>
+</figure>
+
+Use this decision table:
+
+<GuideTable
+caption="Solo corpo vs joining another corporation."
+columns={soloChoiceColumns}
+rows={soloChoiceRows}
+/>
+
+For most solo players, creating your own corpo is fine if you want control. The important warning is that the cost moves from "can I create it?" to "can I feed the request and permit system after creating it?"
+
+<AdUnit placement="article_middle" />
+
+<h2 id="first-corpo-request">
+  First corpo request: start the corporation loop
+</h2>
+
+Creating or joining a corpo unlocks access. The actual corporation loop starts with the first corpo request.
+
+In the captured build, the first request route used a **Module Kit Sample**. That matters because Module Kits and related parts are also used by ship upgrades, FTL chains, and early factory progression.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-first-corpo-request.webp"
+    alt="SpaceCraft First Corpo Request objective asking the player to complete their first corpo request"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first corpo request turns the corporation unlock into a material-delivery loop.
+  </figcaption>
+</figure>
+
+Before feeding materials into a corpo request, check whether those same parts are needed for your ship, cargo hold, or base. A request can be worth doing, but it can also delay your immediate progression if you give away your last module parts too early.
+
+If cargo is already the limiting factor, buy **Cargo Accommodation** from the Knowledge menu when it is available. It unlocks **Small Cargo Hold**, which makes mining trips and request deliveries much less painful. For recipes and installation steps, use the <Link href="/spacecraft/ship-upgrades-cargo-inventory">SpaceCraft Ship Upgrades Guide</Link>.
+
+<h2 id="license-points-corpo-permits">
+  License points, corpo credits, and corpo permits
+</h2>
+
+After the first corpo request, the game starts explaining **license points**. License points can be spent by corpo owners to unlock benefits for all members.
+
+The corporation menu then leads into **Licenses** and **Corpo Permits**. In the captured build, the first few license unlocks cost **5 corpo credits**, and the **Corpo Permits** tab itself was shown as one of those early unlocks.
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-corpo-permit-tabs.webp"
+    alt="SpaceCraft Corporate Culture unlock showing the Corpo Permits tab and Permit Management right bought with corpo credits"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Corpo permits are separate from normal Knowledge permits. In this build, the Corpo Permits tab appears as an early corpo-credit unlock.
+  </figcaption>
+</figure>
+
+Use this table to understand what the early corporation systems are for:
+
+<GuideTable
+caption="Corporation systems after the Noviciate unlock."
+columns={corpoProgressColumns}
+rows={corpoProgressRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/spacecraft/spacecraft-corpo-permits-effects.webp"
+    alt="SpaceCraft corporation permit tree showing fleet capacity base capacity request space request credits request reputation license propaganda and station storage"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Later corpo permit nodes include fleet capacity, base capacity, request space, request credits, request reputation, license propaganda, and station storage.
+  </figcaption>
+</figure>
+
+<h2 id="when-wholesale-contracts-unlock">
+  When do wholesale contracts unlock?
+</h2>
+
+Wholesale contracts appear after the first corporation request steps in the captured build. The game presents them as longer-term, more demanding production contracts from the corporation desk.
+
+If you do not see them yet, do this first:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Finish Noviciate.</li>
+  <li>Create or join a corpo.</li>
+  <li>Complete the first corpo request.</li>
+  <li>Open the corpo interface and check Licenses.</li>
+  <li>Return to the corporation desk and check available requests again.</li>
+</ol>
+
+Do not rush wholesale contracts before your ship cargo and base output can support them. In the captured build, a later wholesale request could ask for hundreds of ingots, which turns it into a base-production problem rather than a simple hand-in.
+
+<h2 id="common-blockers">
+  Common blockers
+</h2>
+
+Use this table when the Noviciate or corpo route stops making sense:
+
+<GuideTable
+caption="Common SpaceCraft Noviciate and corporation blockers."
+columns={blockerColumns}
+rows={blockerRows}
+/>
+
+<h2 id="what-to-read-next">
+  What to do after this route
+</h2>
+
+Once corporation access is unlocked, do not jump into every system at once. Pick the next guide based on the blocker that is actually slowing you down.
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Still before RakMu?</strong>{" "}
+    Finish the <Link href="/spacecraft/scanalyzer-alpha-ftl-engine">Scanalyzer Alpha and FTL route</Link> before starting Noviciate.
+  </li>
+  <li>
+    <strong>Ship runs are too short?</strong>{" "}
+    Use the <Link href="/spacecraft/ship-upgrades-cargo-inventory">Ship Upgrades Guide</Link> for Cargo Hold, detector, laser, and battery decisions.
+  </li>
+  <li>
+    <strong>Mining Bureau is asking for Carbon, Silicate, Pyrite, or coordinates?</strong>{" "}
+    Use the <Link href="/spacecraft/resources-locations">Resources Guide</Link> instead of blind-searching planets.
+  </li>
+  <li>
+    <strong>Corpo requests need more materials than you can produce?</strong>{" "}
+    Stabilize your first factory loop with the <Link href="/spacecraft/base-building-automation">Base Building and Automation Guide</Link>.
+  </li>
+  <li>
+    <strong>Not sure which permit to buy next?</strong>{" "}
+    Use the <Link href="/spacecraft/permits-knowledge-unlock">Permits and Knowledge Unlock Guide</Link> before spending credits on random unlocks.
+  </li>
+</ul>
+
+<h2 id="faq">
+  SpaceCraft Noviciate and corporation FAQ
+</h2>
+
+### What is Noviciate in SpaceCraft?
+
+Noviciate is the rank route that unlocks corporation access. Talk to Ingrid at RakMu and pass the cognitive and physical assessment.
+
+### How do I pass the cognitive test?
+
+Use the handprint panels to unlock all required doors. If a door stays locked, backtrack and find the missing panel.
+
+### How do I pass the physical test?
+
+Hold crouch when prompted, then continue to the final ladder and platform jumps. The exit route is upward near the end.
+
+### Why can't I join or fund a corpo?
+
+Finish Ingrid's Noviciate test first. If the option is still locked, finish remaining early onboarding, refined-ore sale, blueprint access, or Knowledge-route steps.
+
+### Is Novician the same as Novvician?
+
+In Early Access, you may see Novician, Novvician, or Noviciate-related wording in different places. Treat them as the same corporation-access rank route unless a later patch changes the rank system.
+
+### Should I create a solo corpo?
+
+Yes, if you want control. The confirmed early pressure is not a huge startup material cost; it is the ongoing need for corpo credits, request materials, license choices, and production.
+
+### What should I do right after unlocking corpo access?
+
+Create or join a corpo, complete the first corpo request, and strongly consider Cargo Accommodation / Small Cargo Hold if cargo is already slowing down your deliveries.
+
+### Are corpo permits the same as Knowledge permits?
+
+No. Knowledge permits are personal unlocks like Modular Systems, Electromagnetism, Cargo Accommodation, Personal Factory, and Automated Factories. Corpo permits are corporation-side upgrades tied to corpo credits, licenses, requests, shared ships, shared bases, and storage.
+
+### When do wholesale contracts appear?
+
+They appear after early corporation request progression in the captured build. Finish the first corpo request, check Licenses / Corpo Permits, then return to the corporation desk.
