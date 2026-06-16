@@ -100,7 +100,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     { url: `${base}/spacecraft/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/spacecraft/base-building-automation`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/spacecraft/scanlyzer-alpha-ftl-engine`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
+    { url: `${base}/spacecraft/scanalyzer-alpha-ftl-engine`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/spacecraft/resources-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
     { url: `${base}/spacecraft/ship-upgrades-cargo-inventory`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
 

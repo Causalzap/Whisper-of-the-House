@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import ScanalyzerFtlContent from "@/data/spacecraft/scanlyzer-alpha-ftl-engine.mdx";
+import ScanalyzerFtlContent from "@/data/spacecraft/scanalyzer-alpha-ftl-engine.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/spacecraft/scanlyzer-alpha-ftl-engine`;
