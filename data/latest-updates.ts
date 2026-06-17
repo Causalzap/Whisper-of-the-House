@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== 33 Immortals =====
+{
+  href: "/33-immortals",
+  game: "33 Immortals",
+  title: "Guide Hub, Weapons, Relics, Bosses & 1.0 Tips",
+  description:
+  "Start here for 33 Immortals 1.0 beginner routes, weapon loops, Relic Wishing, boss mechanics, achievement routing, common mistakes, and run-stage roadmap.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+  },
+  
+  // ===== 33 Immortals =====
+  {
+  href: "/33-immortals/beginner-progression-guide",
+  game: "33 Immortals",
+  title: "Beginner Progression Guide",
+  description:
+  "Survive your first 33 Immortals runs with first 10 minutes routing, Dust, Bones, Shrines, Chambers, Secret Chambers, Unique Elites, and Ascension timing.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+  },
+  
+  // ===== 33 Immortals =====
+  {
+  href: "/33-immortals/weapons-unlock-upgrades-guide",
+  game: "33 Immortals",
+  title: "Weapons Unlock, Tier & Mastery Guide",
+  description:
+  "Choose the best 33 Immortals weapon with 1.0 tier signals, Bow recall, Glaive Temperance, Crossbows Pride, unlock costs, upgrade slots, and 48% Mastery.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+  },
+  
+  // ===== 33 Immortals =====
+  {
+  href: "/33-immortals/relics-paths-wishing-guide",
+  game: "33 Immortals",
+  title: "Relics, Paths & Wishing Guide",
+  description:
+  "Build better 33 Immortals runs with Relic Paths, key Relic names, Co-op Power, Co-Strike, Bones rerolls, dismantling, Relic Wishing, and boss Relics.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+  },
+  
 // ===== Tales of Seikyu =====
 {
   href: "/tales-of-seikyu",

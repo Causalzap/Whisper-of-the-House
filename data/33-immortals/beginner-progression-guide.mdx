@@ -1,0 +1,780 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const firstRunColumns = [
+{ key: "Phase", label: "Phase" },
+{ key: "What To Do", label: "What To Do" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const firstRunRows = [
+{
+Phase: "Spawn and scout",
+"What To Do":
+"Stay close enough to your small group, then move toward question marks, chests, jars, and safe reward fights.",
+"Why It Matters":
+"The opening phase is not about killing every enemy. It is about turning map time into bones, Dust, keys, relics, and upgrades.",
+},
+{
+Phase: "First 10 minutes",
+"What To Do":
+"Break jars, open chests, grab bones, check nearby objectives, and fight enemies that are guarding something useful.",
+"Why It Matters":
+"A run that enters Chambers with no bones, no upgrades, and no healing plan is already behind.",
+},
+{
+Phase: "Level-up ready",
+"What To Do":
+"Spend your purple level-up as soon as you find a useful stat choice.",
+"Why It Matters":
+"Holding power too long can make the next Chamber harder for no reason.",
+},
+{
+Phase: "Before Chambers",
+"What To Do":
+"Heal, buy teleport access if possible, bring a key, spend upgrades, and check whether enough players are nearby.",
+"Why It Matters":
+"Torture Chambers punish low health, scattered teams, and unspent resources.",
+},
+{
+Phase: "Secret Chamber appears",
+"What To Do":
+"Enter only if you are healthy, upgraded, and the group can spare the players.",
+"Why It Matters":
+"A successful Secret Chamber can reward surviving players with a Legendary Relic, but a failed entry can cost the run.",
+},
+{
+Phase: "Ascension begins",
+"What To Do":
+"Stop farming, check the map, regroup, and use teleport access if walking would make you late.",
+"Why It Matters":
+"Once the run shifts into Ascension, position and survival are worth more than one extra chest.",
+},
+];
+
+export const resourceColumns = [
+{ key: "Resource / System", label: "Resource / System" },
+{ key: "Use It For", label: "Use It For" },
+{ key: "Beginner Rule", label: "Beginner Rule" },
+];
+
+export const resourceRows = [
+{
+"Resource / System": "Dust / purple level-up",
+"Use It For": "Run stats such as damage, health, or team sustain.",
+"Beginner Rule":
+"Spend it when a useful choice appears. Do not carry unspent power into a dangerous room.",
+},
+{
+"Resource / System": "Bones",
+"Use It For": "Healing, keys, teleport access, rerolls, and upgrades.",
+"Beginner Rule":
+"Treat bones as your safety budget. Do not spend them all before Chambers.",
+},
+{
+"Resource / System": "Keys",
+"Use It For": "Opening locked rewards inside Chambers or reward rooms.",
+"Beginner Rule":
+"Try to bring at least one key before important Chambers so you do not leave strong rewards behind.",
+},
+{
+"Resource / System": "Teleport Stone / teleport access",
+"Use It For": "Regrouping when the team is already fighting or rotating.",
+"Beginner Rule":
+"Save it for moments where walking would make you late, especially before Chambers or Ascension.",
+},
+{
+"Resource / System": "Bone Shrine",
+"Use It For": "Healing, key purchase, teleport access, and run recovery.",
+"Beginner Rule":
+"Use it before the run collapses. Waiting until everyone is scattered often makes the shrine too late.",
+},
+{
+"Resource / System": "Combat Shrine / temporary shrine effects",
+"Use It For": "Short power windows, damage boosts, safety, or room pressure.",
+"Beginner Rule":
+"Use shrine effects before a real fight, Chamber, or Ascension push. Do not waste them while wandering.",
+},
+];
+
+export const statColumns = [
+{ key: "Stat Choice", label: "Stat Choice" },
+{ key: "Best When", label: "Best When" },
+{ key: "Beginner Advice", label: "Beginner Advice" },
+];
+
+export const statRows = [
+{
+"Stat Choice": "Health",
+"Best When": "You keep dying before Chambers or bosses.",
+"Beginner Advice":
+"Often the best correction for new players. A dead player contributes no damage.",
+},
+{
+"Stat Choice": "Damage",
+"Best When": "You are surviving, but rooms and bosses are taking too long.",
+"Beginner Advice":
+"A safe choice once your movement and survival are stable.",
+},
+{
+"Stat Choice": "Empathy / team sustain",
+"Best When": "You play near allies, revive often, or support random players.",
+"Beginner Advice":
+"Very useful in public groups because keeping people alive can be stronger than personal damage.",
+},
+];
+
+export const perkColumns = [
+{ key: "Perk Priority", label: "Perk Priority" },
+{ key: "When To Use It", label: "When To Use It" },
+{ key: "Why It Helps New Players", label: "Why It Helps New Players" },
+];
+
+export const perkRows = [
+{
+"Perk Priority": "Revive / revive-focused Perk",
+"When To Use It":
+"Equip it as soon as a revive-focused option opens, especially if you play public lobbies.",
+"Why It Helps New Players":
+"Most beginner runs fail from deaths snowballing. A revive Perk gives the team more recovery before the boss route collapses.",
+},
+{
+"Perk Priority": "Survival Perk",
+"When To Use It":
+"Use it when you keep entering Chambers with low health or dying before Ascension.",
+"Why It Helps New Players":
+"Survival Perks are not flashy, but they let you stay alive long enough to learn mechanics.",
+},
+{
+"Perk Priority": "Damage Perk",
+"When To Use It":
+"Use it once you are surviving rooms cleanly but fights feel slow.",
+"Why It Helps New Players":
+"Damage is better after you stop dying. Early damage does not help if you are down before the boss.",
+},
+{
+"Perk Priority": "Weapon or Co-op Power Perk",
+"When To Use It":
+"Use it after you know which weapon or role you want to play for several runs.",
+"Why It Helps New Players":
+"These Perks are stronger when they support a real plan instead of a weapon you may drop next run.",
+},
+];
+
+export const chamberColumns = [
+{ key: "Chamber Situation", label: "Chamber Situation" },
+{ key: "Good Decision", label: "Good Decision" },
+{ key: "Bad Decision", label: "Bad Decision" },
+];
+
+export const chamberRows = [
+{
+"Chamber Situation": "You have low health",
+"Good Decision": "Use a shrine or heal gate before entering.",
+"Bad Decision": "Enter alone and hope the room is easy.",
+},
+{
+"Chamber Situation": "You have unspent level-up power",
+"Good Decision": "Spend it before the Chamber if a useful choice is available.",
+"Bad Decision": "Carry unspent upgrades into a fight that could have been easier.",
+},
+{
+"Chamber Situation": "You have no key",
+"Good Decision": "Look for a key if time allows and the Chamber has locked rewards.",
+"Bad Decision": "Clear the room, then leave rewards behind.",
+},
+{
+"Chamber Situation": "A Secret Chamber appears",
+"Good Decision":
+"Enter healthy and upgraded if enough players can handle it. Surviving players can receive a Legendary Relic after success.",
+"Bad Decision":
+"Jump in underprepared just because the entrance is available.",
+},
+{
+"Chamber Situation": "Unique Elite nearby",
+"Good Decision": "Back off if you are alone. Wait for a crowd or a stronger group before committing.",
+"Bad Decision": "Try to solo it early and turn an optional threat into a death spiral.",
+},
+];
+
+export const uniqueEliteColumns = [
+{ key: "Enemy Situation", label: "Enemy Situation" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "Beginner Response", label: "Beginner Response" },
+];
+
+export const uniqueEliteRows = [
+{
+"Enemy Situation": "Unique Elite appears early",
+"What It Means":
+"This is usually more dangerous than a normal enemy pack and can punish low stats quickly.",
+"Beginner Response":
+"Do not solo it. Ping, wait for more players, or leave and return with a group.",
+},
+{
+"Enemy Situation": "Elite is guarding a useful reward",
+"What It Means":
+"The reward may be worth fighting for, but only if the team can clear it safely.",
+"Beginner Response":
+"Clear nearby small enemies first, then focus the elite with the group.",
+},
+{
+"Enemy Situation": "The group ignores the elite",
+"What It Means":
+"The lobby may not be ready or may be prioritizing another objective.",
+"Beginner Response":
+"Do not force it alone. Follow the larger route and come back if players gather.",
+},
+];
+
+export const lobbyColumns = [
+{ key: "Random Lobby Signal", label: "Random Lobby Signal" },
+{ key: "What It Usually Means", label: "What It Usually Means" },
+{ key: "How To Respond", label: "How To Respond" },
+];
+
+export const lobbyRows = [
+{
+"Random Lobby Signal": "Players ping or emote near a gate",
+"What It Usually Means": "They are trying to gather enough people for a Chamber or objective.",
+"How To Respond":
+"Move toward them if you are nearby and healthy. Do not start a faraway fight at the same time.",
+},
+{
+"Random Lobby Signal": "Several players stop at a shrine",
+"What It Usually Means": "The group is resetting health, keys, or teleport access before a hard room.",
+"How To Respond":
+"Use the shrine if you need it, then move with the group instead of wandering off.",
+},
+{
+"Random Lobby Signal": "The map shows one side underfilled",
+"What It Usually Means": "A Chamber or route may fail because too many players followed one crowd.",
+"How To Respond":
+"Rotate to the weaker side if you are close enough and not about to die.",
+},
+{
+"Random Lobby Signal": "A stronger player starts leading callouts",
+"What It Usually Means": "They probably know the route or mechanic better than the lobby.",
+"How To Respond":
+"Follow their pings, especially before Secret Chambers, Ascension, and boss routes.",
+},
+{
+"Random Lobby Signal": "Players are gray or scattered",
+"What It Usually Means": "The run is close to collapsing before the boss.",
+"How To Respond":
+"Slow down, heal, revive safely, and stop chasing solo rewards.",
+},
+];
+
+export const failureColumns = [
+{ key: "If You Died...", label: "If You Died..." },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "Fix Next Run", label: "Fix Next Run" },
+];
+
+export const failureRows = [
+{
+"If You Died...": "Before the first Chamber",
+"Likely Cause": "You chased empty fights, skipped shrines, or tried to solo a dangerous enemy.",
+"Fix Next Run":
+"Stay near rewards, avoid solo Unique Elites, and use healing before the first hard room.",
+},
+{
+"If You Died...": "Inside a Torture Chamber",
+"Likely Cause": "You entered low, late, alone, or without spending upgrades.",
+"Fix Next Run":
+"Spend your level-up, enter with players, and bring a key or shrine value when possible.",
+},
+{
+"If You Died...": "During a Secret Chamber",
+"Likely Cause": "The reward was tempting, but your group was not ready.",
+"Fix Next Run":
+"Treat Secret Chambers as high-risk rooms. Enter only when healthy and upgraded.",
+},
+{
+"If You Died...": "While rotating to Ascension",
+"Likely Cause": "You kept farming too long or had no teleport plan.",
+"Fix Next Run":
+"Stop farming earlier and save teleport access for late rotations.",
+},
+{
+"If You Died...": "At the boss with no resources left",
+"Likely Cause": "You spent bones greedily, skipped shrine timing, or reached Ascension with no emergency budget.",
+"Fix Next Run":
+"Before Ascension, try to keep enough bones for one emergency heal, key, teleport, or shrine decision. Do not spend your last bones on a small upgrade unless it directly helps the next boss fight.",
+},
+];
+
+export const checklistColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Check", label: "Check" },
+{ key: "Why", label: "Why" },
+];
+
+export const checklistRows = [
+{
+Step: "1",
+Check: "Move toward question marks, chests, jars, and reward fights.",
+Why: "The opening phase should build power, not waste time.",
+},
+{
+Step: "2",
+Check: "Spend your purple level-up when a useful choice appears.",
+Why: "Unspent power makes every next room harder.",
+},
+{
+Step: "3",
+Check: "Use Bone Shrines before dangerous rooms.",
+Why: "Healing, keys, and teleport access are strongest before the fight goes bad.",
+},
+{
+Step: "4",
+Check: "Do not solo Unique Elites.",
+Why: "Early elites can kill new players faster than normal packs.",
+},
+{
+Step: "5",
+Check: "Enter Chambers with health, players, and a plan.",
+Why: "Chambers are preparation checks, not just combat rooms.",
+},
+{
+Step: "6",
+Check: "Treat Secret Chambers as high-risk, high-reward rooms.",
+Why: "Legendary Relic rewards are valuable, but only surviving players benefit.",
+},
+{
+Step: "7",
+Check: "Stop farming when Ascension begins.",
+Why: "Late greed causes players to arrive weak, late, or alone.",
+},
+{
+Step: "8",
+Check: "Read lobby signals before splitting from the group.",
+Why:
+"Use the Random Lobby Communication table to understand emotes, pings, shrine stops, map gaps, and player movement before making solo decisions.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Killing every enemy you see",
+"Why It Hurts":
+"Enemies are everywhere, but not every fight gives useful rewards or timing.",
+"Better Move":
+"Fight around question marks, chests, jars, Chambers, and objectives.",
+},
+{
+Mistake: "Saving level-up choices for too long",
+"Why It Hurts":
+"Unspent power makes Chambers and elites harder than they need to be.",
+"Better Move":
+"Spend your purple upgrade when a useful stat choice appears.",
+},
+{
+Mistake: "Ignoring Perks after the first slot opens",
+"Why It Hurts":
+"Perks can change whether your team survives deaths, revives, and messy rooms.",
+"Better Move":
+"Equip a revive-focused or survival Perk early, then shift toward damage or weapon Perks after you stop dying.",
+},
+{
+Mistake: "Trying to solo Unique Elites",
+"Why It Hurts":
+"Unique Elites can delete new players before the group can help.",
+"Better Move":
+"Ping, back away, and return with more players.",
+},
+{
+Mistake: "Using shrine value too late",
+"Why It Hurts":
+"A heal, key, teleport, or temporary shrine effect is weaker after the group is already dead or scattered.",
+"Better Move":
+"Use shrine value before Chambers, Ascension, and boss routes.",
+},
+{
+Mistake: "Entering Secret Chambers only because they appear",
+"Why It Hurts":
+"Secret Chambers are worth doing for strong rewards, but they can punish weak or underfilled groups.",
+"Better Move":
+"Enter when healthy, upgraded, and grouped. Otherwise, let stronger players handle it.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For your first runs in **33 Immortals**, chase **question marks, chests, jars, bones, and useful fights** instead of clearing random enemies. Spend your purple level-up early, use **Bone Shrines** before hard rooms, avoid soloing **Unique Elites**, equip a revive or survival-focused **Perk** when your first slot opens, and enter **Torture Chambers** with health, players, and a key when possible.
+
+The simple rule is: **build power before Chambers, communicate before splitting, and stop farming before Ascension**. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for 33 Immortals 1.0. This beginner progression guide covers first runs, Dust and level-ups, bones, Bone Shrines, Teleport Stones, keys, beginner Perks, Unique Elites, Torture Chambers, Secret Chambers, Legendary Relic rewards, Ascension timing, emotes, random lobby communication, and how to diagnose failed runs.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-first-10-minutes-question-marks.webp"
+    alt="33 Immortals first 10 minutes route with question marks chests and bones"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In the opening phase, move toward question marks, chests, jars, and nearby fights that actually build your run.
+  </figcaption>
+</figure>
+
+<h2 id="beginner-progression-guide">
+  33 Immortals beginner progression guide
+</h2>
+
+The hardest part of learning **33 Immortals** is not memorizing every weapon, relic, or boss. It is learning the rhythm of a run.
+
+Most new-player deaths do not come from one impossible boss attack. They come from small mistakes stacking together:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>fighting away from rewards,</li>
+  <li>holding unspent level-up power,</li>
+  <li>entering Chambers low,</li>
+  <li>trying to solo dangerous elites,</li>
+  <li>using shrines too late,</li>
+  <li>or arriving at Ascension after the group has already moved.</li>
+</ul>
+
+This guide is built around that timeline. First you learn how to turn the opening minutes into power. Then you learn when to spend resources, when to follow the group, when to avoid bad fights, and how to diagnose why a run failed.
+
+For the main hub, read the <Link href="/33-immortals">33 Immortals Guide Hub</Link>. If you are already reaching bosses but wiping to mechanics, use the <Link href="/33-immortals/bosses-guide">Boss Mechanics Guide</Link> after this.
+
+<GuideTable
+caption="First run progression route in 33 Immortals."
+columns={firstRunColumns}
+rows={firstRunRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="first-10-minutes">
+  What to do in the first 10 minutes
+</h2>
+
+Your first job is not to clear the entire map. Your first job is to turn map time into useful power.
+
+Look for:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>question marks</strong> for events and rewards,</li>
+  <li><strong>chests and jars</strong> for bones and supplies,</li>
+  <li><strong>nearby enemies</strong> that guard something useful,</li>
+  <li><strong>purple level-up choices</strong> when your upgrade is ready,</li>
+  <li><strong>shrines</strong> before risky rooms,</li>
+  <li><strong>keys</strong> before important Chambers.</li>
+</ul>
+
+Do not chase every enemy across empty space. Enemies are everywhere. Rewards are not.
+
+A good beginner route keeps you close enough to the team, close enough to objectives, and rich enough in bones to recover before the run turns dangerous.
+
+<h2 id="level-up-stat-choice">
+  Spend your purple level-up before the next hard room
+</h2>
+
+The purple level-up choice is one of the easiest forms of power to waste. If you keep fighting while an upgrade is ready, you are making the next fight harder for no reason.
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-level-up-purple-stat-choice.webp"
+    alt="33 Immortals purple level up stat choice during early run progression"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Spend your level-up when a useful choice appears. Early stats matter more than waiting for a perfect moment.
+  </figcaption>
+</figure>
+
+Pick the stat that fixes your current problem.
+
+<GuideTable
+caption="Early stat choices for new players."
+columns={statColumns}
+rows={statRows}
+/>
+
+If you keep dying before Chambers, choose health or sustain. If you are surviving but fights are slow, choose damage. If you are playing near the team and reviving often, team sustain can be more valuable than it looks.
+
+<h2 id="beginner-perks">
+  Best beginner Perks: start with revive or survival
+</h2>
+
+Perks are easy to ignore when you are new because the game already asks you to learn weapons, relics, shrines, Chambers, and bosses. Do not ignore them.
+
+As soon as your first Perk slot opens, equip something that fixes the most common beginner problem: deaths snowballing.
+
+<GuideTable
+caption="Beginner Perk priority."
+columns={perkColumns}
+rows={perkRows}
+/>
+
+A revive-focused Perk is the safest early recommendation because public runs often collapse from missed revives and gray health, not from low damage alone. Once your runs feel stable, you can shift into damage, weapon-specific, or Co-op Power-focused Perks.
+
+Do not leave a Perk slot empty while waiting for the perfect build. A practical Perk now is better than an ideal Perk you never equip.
+
+<h2 id="bones-shrines-and-teleport">
+  Bones, Shrines, keys, and teleport access
+</h2>
+
+Bones are not just money. They are your run safety budget.
+
+You use them to heal, buy keys, gain teleport access, reroll or upgrade important choices, and recover before major fights. If you spend every bone greedily, you may reach the next Chamber with no way to fix the run.
+
+<GuideTable
+caption="Key beginner resources and shrine timing."
+columns={resourceColumns}
+rows={resourceRows}
+/>
+
+The best shrine habit is simple: **use shrine value before danger, not after the run has already collapsed**.
+
+A heal is strongest before the Chamber. A key matters before the locked chest. Teleport access matters before the team rotates. A temporary shrine effect matters before a fight that will actually use it.
+
+<h2 id="torture-chambers">
+  How to approach Torture Chambers
+</h2>
+
+Torture Chambers are where a messy run starts to show its problems.
+
+Before entering, check four things:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Do you have enough health?</li>
+  <li>Did you spend your level-up?</li>
+  <li>Do you have a key or enough bones to recover?</li>
+  <li>Are enough players entering the right Chamber?</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-torture-chamber-gate.webp"
+    alt="33 Immortals Torture Chamber gate before entering with the team"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A Chamber is not just a fight. It is a preparation check for health, upgrades, keys, and group timing.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Torture Chamber decisions for new players."
+columns={chamberColumns}
+rows={chamberRows}
+/>
+
+<h2 id="unique-elites">
+  Unique Elites: do not solo them early
+</h2>
+
+Unique Elites are one of the easiest ways for a new player to throw away a good opening.
+
+They look like a challenge you should take immediately. In reality, they are often group targets. If you are alone, under-upgraded, or already low, walking away is the correct play.
+
+<GuideTable
+caption="How to handle Unique Elites as a beginner."
+columns={uniqueEliteColumns}
+rows={uniqueEliteRows}
+/>
+
+If you see a Unique Elite near a reward, use the map, emote, or ping system to pull attention. Do not turn an optional elite into a solo death just because it is on your screen.
+
+<h2 id="secret-chambers">
+  Secret Chambers are high risk, high reward
+</h2>
+
+Secret Chambers are not just harder Torture Chambers. They are a risk decision.
+
+A successful Secret Chamber can reward surviving players with a **Legendary Relic**, which is why strong players may rush toward one when the run is healthy. That reward is real, but so is the danger.
+
+Use this rule:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Enter if you are healthy, upgraded, and grouped.</li>
+  <li>Enter if the team can spare the players.</li>
+  <li>Do not enter if you are already low, alone, or unsure of the room.</li>
+  <li>Do not follow blindly just because the door is open.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-secret-chamber-limited-players.webp"
+    alt="33 Immortals Secret Chamber entrance with limited player space"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Secret Chambers can be worth the risk, but only if enough prepared players survive the room.
+  </figcaption>
+</figure>
+
+The wrong lesson is “never enter Secret Chambers.” The right lesson is “do not enter them like they are free.”
+
+<AdUnit placement="article_middle" />
+
+<h2 id="ascension-starts">
+  When Ascension starts, stop farming
+</h2>
+
+Ascension changes the run.
+
+Once the team begins moving toward Ascension, the value of side farming drops sharply. This is where many new players lose the run without realizing it. They stay behind for one more reward, arrive late, lose health, or force the team to fight underfilled.
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-ascension-regroup-chamber-shortage.webp"
+    alt="33 Immortals players regrouping near Ascension after Chamber progress"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When the run shifts toward Ascension, stop playing alone. Check which group needs help and regroup before the team runs out of players.
+  </figcaption>
+</figure>
+
+Your priority becomes:
+
+Do not spend your last bones on a small upgrade right before the boss route unless that upgrade directly fixes the run. A safer beginner rule is to enter Ascension with enough bones for one emergency decision. If you cannot afford that, stop taking greedy side fights and regroup earlier.
+
+<h2 id="random-lobby-communication">
+  Random lobby communication: emotes, pings, and map awareness
+</h2>
+
+Random lobbies are not hopeless. They just need simple communication.
+
+You do not need to type an essay or lead 32 other players. You need to read the basic signals:
+
+<GuideTable
+caption="How to read random lobby signals."
+columns={lobbyColumns}
+rows={lobbyRows}
+/>
+
+The biggest random-lobby upgrade is learning when to follow and when to fill gaps.
+
+If three players ping a gate, they probably need bodies. If everyone runs to one side and the map shows another Chamber underfilled, rotate. If a player clearly understands the route, copy their movement until you know the pattern yourself.
+
+The worst random-lobby habit is silent solo play. You do not have to command the lobby, but you do need to respond to it.
+
+<h2 id="failed-run-diagnosis">
+  If you died before the boss, diagnose the run
+</h2>
+
+A failed run is useful if you know what killed it.
+
+Do not just say “bad team” or “bad build.” Ask where the run broke.
+
+<GuideTable
+caption="How to diagnose failed beginner runs."
+columns={failureColumns}
+rows={failureRows}
+/>
+
+This is the main difference between a beginner who improves and a beginner who repeats the same wipe. Your next run should fix the exact stage that killed the last one.
+
+<h2 id="first-run-checklist">
+  First run checklist
+</h2>
+
+Use this as a quick reminder before your next run.
+
+<GuideTable
+caption="Beginner run checklist."
+columns={checklistColumns}
+rows={checklistRows}
+/>
+
+<h2 id="common-mistakes">
+  Beginner mistakes to avoid
+</h2>
+
+<GuideTable
+caption="Common beginner mistakes in 33 Immortals."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+<h2 id="what-to-upgrade-first">
+  What should you upgrade first?
+</h2>
+
+In your first runs, do not try to build a perfect endgame setup. Upgrade what helps you survive the next phase.
+
+Good early priorities are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Revive or survival Perk:</strong> first priority when your slot opens and public runs are messy.</li>
+  <li><strong>Health or sustain stat:</strong> if you keep dying before Chambers or bosses.</li>
+  <li><strong>Damage stat:</strong> if you are already surviving but fights take too long.</li>
+  <li><strong>Relic upgrades:</strong> when the relic supports your current weapon, Path, or team role.</li>
+  <li><strong>Weapon progression:</strong> after you know which weapon you actually enjoy using.</li>
+</ul>
+
+Do not spread resources just because every menu has something to click. Your first goal is a stable run, not a perfect account.
+
+For weapon choices, read the <Link href="/33-immortals/weapons-unlock-upgrades-guide">Weapons Unlock and Upgrades Guide</Link>. For relic choices, use the <Link href="/33-immortals/relics-paths-wishing-guide">Relics, Paths and Wishing Guide</Link> after you understand the basic run flow.
+
+<h2 id="faq">
+  33 Immortals beginner progression FAQ
+</h2>
+
+### What should I do first in 33 Immortals?
+
+Start with the <a href="#first-10-minutes">first 10 minutes route</a>: move toward question marks, chests, jars, bones, and useful reward fights.
+
+### Should I save my purple level-up for later?
+
+No. Spend it when a useful choice appears. See <a href="#level-up-stat-choice">level-up stat choices</a>.
+
+### What Perk should beginners use first?
+
+A revive-focused or survival Perk is the safest early pick, especially in random lobbies. See <a href="#beginner-perks">beginner Perks</a>.
+
+### Should I fight Unique Elites alone?
+
+No. Unique Elites are group targets early. Back off, ping, and return with players. See <a href="#unique-elites">Unique Elites</a>.
+
+### Are Secret Chambers worth entering?
+
+Yes, when your group is ready. They can reward surviving players with a Legendary Relic, but they are risky. See <a href="#secret-chambers">Secret Chambers</a>.
+
+### When should I use Shrines?
+
+Use shrine value before dangerous rooms, Ascension, or boss routes. Waiting too long makes the shrine less useful.
+
+### What should I do when Ascension begins?
+
+Stop farming, check the map, regroup, and use teleport access if walking would make you late. See <a href="#ascension-starts">Ascension timing</a>.
+
+### How do I play better in random lobbies?
+
+Watch emotes, pings, map movement, and group behavior. Follow coordinated players or fill underfilled objectives. See <a href="#random-lobby-communication">random lobby communication</a>.
+
+### Why do my runs fall apart before the boss?
+
+Check where you died: before Chamber, inside Chamber, during Secret Chamber, while rotating, or at the boss with no resources. Use the <a href="#failed-run-diagnosis">failed run diagnosis</a> table.
+
+### What should I read next?
+
+Read the <Link href="/33-immortals/bosses-guide">Boss Mechanics Guide</Link> if your team reaches Ascension but wipes to mechanics, or the <Link href="/33-immortals/weapons-unlock-upgrades-guide">Weapons Guide</Link> if you need a weapon plan.

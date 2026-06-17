@@ -141,7 +141,8 @@ const allGameGuides = [
   { title: 'Fears to Fathom - Scratch Creek', href: '/fears-to-fathom-scratch-creek'},
   { title: 'SpaceCraft', href: '/spacecraft'},
   { title: 'Tales of Seikyu', href: '/tales-of-seikyu'},
-
+  { title: '33 Immortals', href: '/33-immortals'},
+  
 ];
 
 const exploreCards = [

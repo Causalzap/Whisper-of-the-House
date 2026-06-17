@@ -1,0 +1,639 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const tierColumns = [
+{ key: "Tier Signal", label: "Tier Signal" },
+{ key: "Weapons", label: "Weapons" },
+{ key: "Why Players Rate Them There", label: "Why Players Rate Them There" },
+{ key: "How To Use This", label: "How To Use This" },
+];
+
+export const tierRows = [
+{
+"Tier Signal": "S-tier signal",
+Weapons: "Bow of Hope, Glaive of Temperance, Crossbows of Pride",
+"Why Players Rate Them There":
+"Bow is safe and consistent, Glaive has a high ceiling once Temperance clicks, and Crossbows are strong when you brand first and spend Pride cleanly.",
+"How To Use This":
+"Start here if you want the strongest current ceiling, but still choose the weapon whose loop you can execute.",
+},
+{
+"Tier Signal": "A-tier signal",
+Weapons: "Sword of Justice, Staff of Sloth, Hooks of Gluttony",
+"Why Players Rate Them There":
+"These weapons are strong but ask for more role discipline: Justice management, team control, or pull and parry timing.",
+"How To Use This":
+"Pick these when their role fits your team or when you enjoy their resource loop.",
+},
+{
+"Tier Signal": "B-tier signal",
+Weapons: "Daggers of Greed",
+"Why Players Rate Them There":
+"Daggers can hit hard, but Takedown timing can throw new players into danger.",
+"How To Use This":
+"Treat Daggers as a weapon to grow into, not the safest first unlock.",
+},
+{
+"Tier Signal": "Still being assessed",
+Weapons: "Scepter of Charity",
+"Why Players Rate Them There":
+"Scepter is a 1.0 weapon built around mid-to-long range support, Blind, and team value, so its top-end ranking is still less settled.",
+"How To Use This":
+"Pick it if you want support and safer boss utility, not because you need a final tier-list answer today.",
+},
+];
+
+export const pickColumns = [
+{ key: "Your Problem", label: "Your Problem" },
+{ key: "Best Weapon Direction", label: "Best Weapon Direction" },
+{ key: "Why", label: "Why" },
+];
+
+export const pickRows = [
+{
+"Your Problem": "I keep dying before bosses",
+"Best Weapon Direction": "Bow of Hope, Crossbows of Pride, Scepter of Charity",
+Why:
+"Safer spacing lets you learn enemy patterns without taking every melee punish.",
+},
+{
+"Your Problem": "My team needs frontline stability",
+"Best Weapon Direction": "Sword of Justice",
+Why:
+"Sword can use Justice for offense or Guard, making it better for players who want controlled frontline play.",
+},
+{
+"Your Problem": "My random lobbies need control or support",
+"Best Weapon Direction": "Staff of Sloth, Scepter of Charity",
+Why:
+"Staff brings slows and control, while Scepter can weaken enemies with Blind and support allies from safer range.",
+},
+{
+"Your Problem": "I want mobility and aggressive melee",
+"Best Weapon Direction": "Hooks of Gluttony, Daggers of Greed",
+Why:
+"Hooks are easier to stabilize through pull and parry play. Daggers are riskier and punish mistimed commitment.",
+},
+{
+"Your Problem": "I want to learn a high-skill melee weapon",
+"Best Weapon Direction": "Glaive of Temperance",
+Why:
+"Glaive rewards spacing, edge hits, Temperance meter control, and strong attack chaining.",
+},
+];
+
+export const loopColumns = [
+{ key: "Weapon", label: "Weapon" },
+{ key: "Core Resource / Loop", label: "Core Resource / Loop" },
+{ key: "Use If", label: "Use If" },
+{ key: "Avoid If", label: "Avoid If" },
+];
+
+export const loopRows = [
+{
+Weapon: "Bow of Hope",
+"Core Resource / Loop":
+"Fire arrows, reposition, then recall arrows for return-path damage and stun. Recall is powerful, but your movement slows during the recall window.",
+"Use If":
+"You want safe ranged damage, simple uptime, and a strong first weapon for learning bosses.",
+"Avoid If":
+"You ignore recall timing or keep recalling while standing in danger.",
+},
+{
+Weapon: "Glaive of Temperance",
+"Core Resource / Loop":
+"Link light and heavy attacks while building Temperance. Once the Temperance meter is above half, damage rises sharply; spacing for edge hits gives the best payoff.",
+"Use If":
+"You want a high-ceiling melee weapon and are willing to practice spacing.",
+"Avoid If":
+"You want a simple weapon that performs well without meter and distance management.",
+},
+{
+Weapon: "Crossbows of Pride",
+"Core Resource / Loop":
+"Brand a target first, build Pride by hitting the branded target with Light Bolts, then spend Pride with a Heavy Bolt barrage.",
+"Use If":
+"You want a strong ranged boss weapon with a clear mark-build-spend loop.",
+"Avoid If":
+"You forget to brand first or keep swapping targets before Pride pays off.",
+},
+{
+Weapon: "Sword of Justice",
+"Core Resource / Loop":
+"Basic attacks generate Justice. Spend Justice on Heavy Slash for offense or Guard for immunity and survival.",
+"Use If":
+"You want a frontline weapon that can choose between damage and defensive timing.",
+"Avoid If":
+"You spend Justice randomly and have none left when you need Guard.",
+},
+{
+Weapon: "Staff of Sloth",
+"Core Resource / Loop":
+"Basic hits generate Sloth. Charged attacks and orbs help build pressure, then Sloth can be spent on Torpor to slow enemies in an area.",
+"Use If":
+"You want control, team value, and safer public-lobby fights.",
+"Avoid If":
+"You want pure personal damage without relying on teammates to capitalize on control.",
+},
+{
+Weapon: "Hooks of Gluttony",
+"Core Resource / Loop":
+"Use basic attacks, Hook pull, and Parry timing to generate or spend Gluttony value. Parry can turn enemy pressure into your own damage window.",
+"Use If":
+"You want mobile melee with a clearer defensive skill check than Daggers.",
+"Avoid If":
+"You miss parries often or hook yourself into unsafe packs.",
+},
+{
+Weapon: "Daggers of Greed",
+"Core Resource / Loop":
+"Build Greed through basic attacks and stun pressure, then spend it on Takedown for a scaling lunge.",
+"Use If":
+"You enjoy aggressive melee and can judge safe commitment windows.",
+"Avoid If":
+"You mistime Takedown and keep lunging into boss attacks or elite danger.",
+},
+{
+Weapon: "Scepter of Charity",
+"Core Resource / Loop":
+"Play mid-to-long range, chain attacks and abilities, and use Blind to make enemies run away, take more damage, and suffer damage over time.",
+"Use If":
+"You want a 1.0 support-specialist weapon for safer groups, Blind utility, and boss setup.",
+"Avoid If":
+"You only want a settled top-tier DPS pick; the community is still judging its ceiling.",
+},
+];
+
+export const unlockColumns = [
+{ key: "Unlock / Slot", label: "Unlock / Slot" },
+{ key: "Cost / Rule", label: "Cost / Rule" },
+{ key: "Planning Advice", label: "Planning Advice" },
+];
+
+export const unlockRows = [
+{
+"Unlock / Slot": "Weapon unlocks",
+"Cost / Rule": "All weapons cost 50 Eternal Shards to unlock in 1.0.",
+"Planning Advice":
+"Unlock weapons based on the loop you want to learn, not only the tier label.",
+},
+{
+"Unlock / Slot": "Scepter of Charity",
+"Cost / Rule":
+"Unlocked at its Weapon Shrine in Dark Woods for 50 Eternal Shards.",
+"Planning Advice":
+"Treat Scepter as a support-specialist 1.0 weapon with Blind utility and still-developing community ranking.",
+},
+{
+"Unlock / Slot": "First weapon upgrade slot",
+"Cost / Rule": "The first upgrade slot is free.",
+"Planning Advice":
+"Use it to test the upgrade that best supports your weapon loop.",
+},
+{
+"Unlock / Slot": "Second weapon upgrade slot",
+"Cost / Rule": "Costs 1000 Eternal Shards and 5 Paragons.",
+"Planning Advice":
+"Do not rush this on a weapon you are not committed to. It is a real account investment.",
+},
+{
+"Unlock / Slot": "Weapon upgrades per weapon",
+"Cost / Rule": "Each weapon has 6 weapon upgrades.",
+"Planning Advice":
+"Mastery is a long-term goal. Start with one main weapon before spreading upgrades everywhere.",
+},
+];
+
+export const masteryColumns = [
+{ key: "Mastery System", label: "Mastery System" },
+{ key: "1.0 Rule", label: "1.0 Rule" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const masteryRows = [
+{
+"Mastery System": "Master Gauge",
+"1.0 Rule":
+"Weapon upgrades now have a Master Gauge that fills as you fight with that weapon upgrade equipped.",
+"Why It Matters":
+"You need to actually play the weapon and upgrade, not just unlock it in the menu.",
+},
+{
+"Mastery System": "Single upgrade mastery",
+"1.0 Rule":
+"Each mastered Weapon Upgrade gives a permanent 1% damage increase.",
+"Why It Matters":
+"Even one mastered upgrade becomes account power, not just a temporary run choice.",
+},
+{
+"Mastery System": "Full mastery goal",
+"1.0 Rule":
+"Mastering all 48 Weapon Upgrades gives a 48% damage increase.",
+"Why It Matters":
+"This is the long-term reason weapon mastery matters. It gives endgame players a real target beyond unlocking weapons.",
+},
+{
+"Mastery System": "Co-op Power generation",
+"1.0 Rule":
+"Co-op Powers are available by default, but players need active actions to generate Co-op Power. Completing a weapon's first Feat level improves Co-op Power generation and unlocks passive generation.",
+"Why It Matters":
+"Weapon progress affects how often your team power comes online during real fights.",
+},
+];
+
+export const upgradePriorityColumns = [
+{ key: "Upgrade Decision", label: "Upgrade Decision" },
+{ key: "Good Move", label: "Good Move" },
+{ key: "Bad Move", label: "Bad Move" },
+];
+
+export const upgradePriorityRows = [
+{
+"Upgrade Decision": "Choosing your first upgraded weapon",
+"Good Move":
+"Pick the weapon you already use well for bosses and Chambers.",
+"Bad Move":
+"Upgrade a weapon only because it is S-tier while you still fail its loop.",
+},
+{
+"Upgrade Decision": "First upgrade slot",
+"Good Move":
+"Use the free slot to support your weapon's core loop.",
+"Bad Move":
+"Ignore the slot while struggling in fights that the upgrade could help.",
+},
+{
+"Upgrade Decision": "Second upgrade slot",
+"Good Move":
+"Buy it after you are sure the weapon is your main long-term choice.",
+"Bad Move":
+"Spend 1000 Eternal Shards and 5 Paragons on a weapon you may drop next run.",
+},
+{
+"Upgrade Decision": "Mastery grind",
+"Good Move":
+"Keep a useful upgrade equipped long enough to fill its Master Gauge.",
+"Bad Move":
+"Swap upgrades constantly and never finish mastery progress.",
+},
+{
+"Upgrade Decision": "Tier list vs execution",
+"Good Move":
+"Use tier lists as a signal, then judge whether you can execute the loop.",
+"Bad Move":
+"Force Glaive, Daggers, or another high-skill weapon while dying before the weapon pays off.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Following a tier list without learning the resource loop",
+"Why It Hurts":
+"A top-tier weapon still fails if you do not brand, recall, build Temperance, manage Justice, or spend the right resource.",
+"Better Move":
+"Pick a strong weapon, then learn the one loop that makes it strong.",
+},
+{
+Mistake: "Unlocking every weapon before committing to one",
+"Why It Hurts":
+"You delay upgrade slots, mastery progress, and real boss consistency.",
+"Better Move":
+"Test weapons lightly, then choose one main weapon for deeper upgrades.",
+},
+{
+Mistake: "Buying the second upgrade slot too early",
+"Why It Hurts":
+"1000 Eternal Shards and 5 Paragons is expensive if you are not sure about the weapon.",
+"Better Move":
+"Buy the second slot after the weapon is clearly part of your long-term route.",
+},
+{
+Mistake: "Ignoring Mastery after unlocking upgrades",
+"Why It Hurts":
+"Mastery gives permanent damage, and all 48 mastered upgrades add up to a 48% damage increase.",
+"Better Move":
+"Keep useful upgrades equipped long enough to actually fill the Master Gauge.",
+},
+{
+Mistake: "Treating Scepter like a solved DPS tier pick",
+"Why It Hurts":
+"Scepter is a 1.0 support-specialist weapon, and the community is still judging its top-end ranking.",
+"Better Move":
+"Use Scepter for Blind, support value, safer spacing, and team setup instead of expecting a settled tier answer.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For most players in **33 Immortals 1.0**, the strongest current weapon signal is **Bow of Hope**, **Glaive of Temperance**, and **Crossbows of Pride**. Bow is the safest ranged start, Crossbows are the cleanest brand-build-spend ranged loop, and Glaive has the highest melee ceiling if you can manage Temperance and spacing.
+
+The best unlock rule is: **use tier lists as a signal, but pick the weapon whose resource loop you can actually execute**. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026 for 33 Immortals 1.0. This guide covers weapon tier signals, weapon unlock costs, Scepter of Charity, Bow recall, Glaive Temperance, Crossbows Pride, Sword Justice, Staff Sloth, Hooks Gluttony, Daggers Greed, weapon upgrade slots, second slot cost, Master Gauges, known mastery stat signals, and the 48% full-mastery damage goal.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-weapon-upgrade-unlocked.webp"
+    alt="33 Immortals weapon upgrade unlocked screen for weapon progression"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Weapon choice is not only about unlocking the roster. Your long-term power comes from upgrade slots, Master Gauges, and actually playing the weapon well.
+  </figcaption>
+</figure>
+
+<h2 id="weapons-guide">
+  33 Immortals weapons guide
+</h2>
+
+A lot of players search for the **best weapon in 33 Immortals**, but the real answer has two layers.
+
+First, there is a current 1.0 tier signal. Bow, Glaive, and Crossbows are the clearest high-ceiling picks right now.
+
+Second, each weapon has a resource loop. If you do not understand that loop, the tier label will not save the run.
+
+This guide keeps both ideas together: quick tier signal, then the actual mechanics that make each weapon work.
+
+For first-run routing, read the <Link href="/33-immortals/beginner-progression-guide">Beginner Progression Guide</Link>. For boss survival, use the <Link href="/33-immortals/bosses-guide">Boss Mechanics Guide</Link>. For relic planning, read the <Link href="/33-immortals/relics-paths-wishing-guide">Relics, Paths and Wishing Guide</Link>.
+
+<GuideTable
+caption="Current 1.0 weapon tier signal."
+columns={tierColumns}
+rows={tierRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="which-weapon-to-unlock-first">
+  Which weapon should you unlock first?
+</h2>
+
+If you are new, do not start by asking only “what is S-tier?” Ask what problem you are trying to solve.
+
+<GuideTable
+caption="Weapon choice by player problem."
+columns={pickColumns}
+rows={pickRows}
+/>
+
+The safest practical unlock path is usually:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li><strong>Bow of Hope</strong> or <strong>Crossbows of Pride</strong> if you want safe ranged progress.</li>
+  <li><strong>Sword of Justice</strong> if you want a sturdier frontline weapon.</li>
+  <li><strong>Staff of Sloth</strong> or <strong>Scepter of Charity</strong> if your group needs support and control.</li>
+  <li><strong>Glaive of Temperance</strong> once you are ready to practice a high-ceiling melee loop.</li>
+  <li><strong>Hooks of Gluttony</strong> or <strong>Daggers of Greed</strong> when you want more aggressive commitment and mobility.</li>
+</ol>
+
+
+<h2 id="weapon-core-loops">
+  Weapon core resource loops
+</h2>
+
+This is the part most weapon guides skip or bury. You do not really know a weapon until you know what it builds, what it spends, and what mistake breaks the loop.
+
+<GuideTable
+caption="Every weapon's core loop and when to use it."
+columns={loopColumns}
+rows={loopRows}
+/>
+
+<h2 id="bow-of-hope">
+  Bow of Hope: safest ranged start
+</h2>
+
+Bow is strong because its loop is repeatable: shoot, reposition, recall. The recall is not just an ammo trick. It can damage and stun enemies on the return path, so your positioning before recall decides how much value you get.
+
+The main beginner mistake is recalling while standing in danger. The recall window can slow your movement, so treat recall like a planned damage line, not a panic button.
+
+<h2 id="glaive-of-temperance">
+  Glaive of Temperance: high ceiling, spacing required
+</h2>
+
+Glaive is strong because Temperance rewards clean chaining and spacing. Light and heavy attacks should flow together, and your damage rises sharply once the Temperance meter is above half.
+
+The real trick is distance. If you stand too close, you may lose the best edge-hit value. If you stand too far, you whiff or lose pressure. Glaive is S-tier because the ceiling is high, not because it plays itself.
+
+<h2 id="crossbows-of-pride">
+  Crossbows of Pride: brand first, spend Pride later
+</h2>
+
+Crossbows are one of the cleanest strong weapons for new players because the loop is easy to remember: **brand first, build Pride, then spend it with Heavy Bolt**.
+
+The mistake is swapping targets too early. If you brand an enemy and then keep shooting something else, your damage plan falls apart. Against bosses and elites, brand the priority target and stay disciplined.
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-crossbows-mastery-upgrade-slot.webp"
+    alt="33 Immortals Crossbows of Pride mastery and weapon upgrade slot"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Crossbows reward players who understand the full loop: brand, build Pride, spend Pride, then keep upgrade progress moving.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="sword-of-justice">
+  Sword of Justice: spend Justice on offense or safety
+</h2>
+
+Sword is built around **Justice**. Basic attacks generate Justice, and you spend it on Heavy Slash or Guard.
+
+That makes Sword a strong learning weapon if you want to understand timing. Spend Justice on damage when the fight is safe. Save Justice for Guard when the boss or elite is about to punish the group. Bad Sword play spends all Justice before the defensive moment arrives.
+
+<h2 id="staff-of-sloth">
+  Staff of Sloth: control works best near allies
+</h2>
+
+Staff is not only about personal damage. Its Sloth loop gives you control, and Torpor becomes valuable when teammates can hit slowed enemies.
+
+That means Staff is stronger when you play near the group. If you slow a pack and nobody is nearby to punish it, the weapon feels worse than it really is.
+
+<h2 id="hooks-of-gluttony">
+  Hooks of Gluttony: pull, parry, then punish
+</h2>
+
+Hooks sit between mobility and brawling. The hook lets you pull into enemies, while Parry can convert enemy attacks into your own pressure.
+
+The mistake is using Hook as a blind engage. Pulling into a dangerous pack without a parry plan is how Hooks players die early.
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-hooks-gluttony-parry.webp"
+    alt="33 Immortals Hooks of Gluttony parry and melee weapon loop"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Hooks become much safer when you treat Parry as part of the loop instead of only chasing pull damage.
+  </figcaption>
+</figure>
+
+<h2 id="daggers-of-greed">
+  Daggers of Greed: high risk melee commitment
+</h2>
+
+Daggers build Greed and spend it on Takedown. That sounds simple, but Takedown is commitment. If you lunge at the wrong moment, the weapon can move you into danger.
+
+Daggers are not bad because they lack damage. They are risky because the weapon asks you to already understand enemy timing, boss openings, and escape routes.
+
+<h2 id="scepter-of-charity">
+  Scepter of Charity: 1.0 support-specialist weapon
+</h2>
+
+Scepter of Charity is a 1.0 weapon built around mid-to-long range support and **Blind**. Blinded enemies run away, take more damage from attacks, and take damage over time for a short window.
+
+That makes Scepter valuable in messy groups and boss routes where weakening enemies matters. Its top-end tier is still being assessed, so treat it as a support-specialist weapon first and a solved DPS tier pick second.
+
+<h2 id="weapon-unlock-costs">
+  Weapon unlock costs and upgrade slots
+</h2>
+
+Weapon unlocks are cheaper in 1.0, but deep weapon investment still matters.
+
+<GuideTable
+caption="Weapon unlocks and upgrade slot planning."
+columns={unlockColumns}
+rows={unlockRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-weapon-shrine-upgrade-menu.webp"
+    alt="33 Immortals Weapon Shrine upgrade menu for weapon unlocks and upgrades"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Weapon Shrine is where testing turns into long-term investment. Do not buy deeper slots on a weapon you are not ready to main.
+  </figcaption>
+</figure>
+
+The important planning rule is simple: unlocking a weapon is cheap compared with committing to its upgrade path. Test several weapons, but only deepen the one you are ready to play for many runs.
+
+<h2 id="weapon-mastery">
+  Weapon Mastery and the 48% long-term damage goal
+</h2>
+
+Weapon Mastery is the reason upgrades matter long after the first unlock.
+
+<GuideTable
+caption="Weapon Mastery rules in 33 Immortals 1.0."
+columns={masteryColumns}
+rows={masteryRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/33-immortals/33-immortals-weapon-upgrade-token-prompt.webp"
+    alt="33 Immortals weapon upgrade token prompt for weapon progression"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mastery rewards consistency. If you keep changing weapons and upgrades, your long-term damage progress slows down.
+  </figcaption>
+</figure>
+
+The key number is **48%**. Each mastered Weapon Upgrade gives **1% damage**, and mastering all **48 Weapon Upgrades** gives **48% damage**. That does not mean you should grind all 48 immediately. It means every serious main weapon should eventually be part of a mastery plan.
+
+Known mastery stat signals can also affect your long-term main choice. Commonly listed examples include **Bow of Hope** leaning into **Attack**, **Sword of Justice** leaning into **Vitality**, **Daggers of Greed** leaning into **Critical Damage**, and **Staff of Sloth** leaning into **Empathy**. For **Glaive**, **Crossbows**, **Hooks**, and **Scepter**, confirm the current stat signal in the Weapon Shrine or Compendium before making a long-term investment.
+
+<h2 id="upgrade-priority">
+  What should you upgrade first?
+</h2>
+
+Upgrade the weapon you can already play under pressure.
+
+A tier-list weapon that you cannot execute is not a good first upgrade target. Your first serious upgrade path should help you clear Chambers, survive bosses, and keep the same weapon equipped long enough to build mastery.
+
+<GuideTable
+caption="Weapon upgrade priority decisions."
+columns={upgradePriorityColumns}
+rows={upgradePriorityRows}
+/>
+
+
+<h2 id="common-weapon-mistakes">
+  Common weapon mistakes
+</h2>
+
+<GuideTable
+caption="Common weapon unlock and upgrade mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+<h2 id="faq">
+  33 Immortals weapons FAQ
+</h2>
+
+### What is the best weapon in 33 Immortals 1.0?
+
+The clearest current high-ceiling signal is Bow of Hope, Glaive of Temperance, and Crossbows of Pride. See the <a href="#weapons-guide">tier signal table</a>.
+
+### What weapon should I unlock first?
+
+Most new players should start with Bow of Hope or Crossbows of Pride for safe ranged learning, then test Sword, Staff, Scepter, Glaive, Hooks, or Daggers based on role.
+
+### Is Bow of Hope good?
+
+Yes. Bow is one of the safest strong picks because recall gives ranged damage, stun value, and a repeatable learning loop.
+
+### Is Glaive of Temperance worth learning?
+
+Yes, if you want a high-ceiling melee weapon. It needs Temperance meter control and spacing, so it is stronger after practice.
+
+### Are Crossbows of Pride beginner-friendly?
+
+Yes. Crossbows are strong because the loop is clear: brand first, build Pride, then spend Pride with Heavy Bolt.
+
+### Is Sword of Justice good for beginners?
+
+Sword is good if you want frontline control. Learn to spend Justice on Guard when safety matters and Heavy Slash when the fight is safe.
+
+### Is Scepter of Charity good?
+
+Scepter is a 1.0 support-specialist weapon built around Blind and safer mid-to-long range team value. Its final tier ranking is still being assessed.
+
+### How much do weapons cost to unlock?
+
+As of 1.0, all weapons cost 50 Eternal Shards to unlock. Scepter of Charity is unlocked at its Weapon Shrine in Dark Woods for 50 Eternal Shards.
+
+### How much does the second weapon upgrade slot cost?
+
+The first upgrade slot is free. The second weapon upgrade slot costs 1000 Eternal Shards and 5 Paragons.
+
+### How does Weapon Mastery work?
+
+Weapon upgrades have a Master Gauge. Each mastered upgrade gives 1% damage, and mastering all 48 Weapon Upgrades gives 48% damage.
+
+### Should I follow a weapon tier list?
+
+Use tier lists as a signal, not as a command. A top-tier weapon only helps if you understand its resource loop.
+
+### What should I read next?
+
+Read the <Link href="/33-immortals/relics-paths-wishing-guide">Relics, Paths and Wishing Guide</Link> to build around your weapon, or the <Link href="/33-immortals/bosses-guide">Boss Mechanics Guide</Link> if your weapon feels fine but boss fights still collapse.
