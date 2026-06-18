@@ -12,6 +12,53 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== The Adventures of Elliot =====
+{
+  href: "/the-adventures-of-elliot",
+  game: "The Adventures of Elliot",
+  title: "Guide Hub, Walkthrough, Cats & Shards",
+  description:
+    "Start here for The Adventures of Elliot guides: Faie, Southern Caves, Ignite, Golden Bell, cats, Shards, Shrines, Secret Treasure Routes and trophies.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== The Adventures of Elliot =====
+{
+  href: "/the-adventures-of-elliot/walkthrough",
+  game: "The Adventures of Elliot",
+  title: "Walkthrough, Moon Mirror & Western Marge",
+  description:
+    "Follow the early route with Faie, Southern Caves, Ignite, Hammer, Magicite, Shards, cats, Golden Bell, time travel, Moon Mirror and Western Marge.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== The Adventures of Elliot =====
+{
+  href: "/the-adventures-of-elliot/cat-locations",
+  game: "The Adventures of Elliot",
+  title: "Cat Locations, Cat Needle & Rewards",
+  description:
+    "Find 50 cats with the Huther fountain traveler, meow clues, Cat Needle, Bomb Pouch, Quiver, Golden Egg, Katzenmeister and by-age tracking.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== The Adventures of Elliot =====
+{
+  href: "/the-adventures-of-elliot/shards-of-life-locations",
+  game: "The Adventures of Elliot",
+  title: "Shards of Life, Shrines & Secret Routes",
+  description:
+    "Track Shards of Life with route clues, 4-Shard HP upgrades, Shrines of Life, cracked walls, Secret Treasure Routes, caves and puzzle chests.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
 // ===== 33 Immortals =====
 {
   href: "/33-immortals",

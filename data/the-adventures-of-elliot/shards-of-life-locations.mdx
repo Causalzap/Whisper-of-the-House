@@ -1,0 +1,698 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const shardColumns = [
+{ key: "Shard Route", label: "Shard Route" },
+{ key: "Route Clue", label: "Route Clue" },
+{ key: "Required Tool / Progress", label: "Required Tool / Progress" },
+{ key: "Status", label: "Status" },
+];
+
+export const shardRows = [
+{
+"Shard Route": "Chamber of Light chest",
+"Route Clue":
+"The room name appears as Chamber of Light, with the reward chest on the central platform.",
+"Required Tool / Progress":
+"Reach the room and open the central chest.",
+Status: "Confirmed early pickup",
+},
+{
+"Shard Route": "Power-route chest",
+"Route Clue":
+"A power-looking building or reward route appears near the main path.",
+"Required Tool / Progress":
+"Route access during the early path.",
+Status: "Confirmed early pickup",
+},
+{
+"Shard Route": "Hidden cave chest",
+"Route Clue":
+"A small cave or side entrance appears off the main path.",
+"Required Tool / Progress":
+"Enter the cave, clear the short route, and open the chest inside.",
+Status: "Confirmed early pickup",
+},
+{
+"Shard Route": "Second nearby chest",
+"Route Clue":
+"Another reward chest appears close to a previous Shard route.",
+"Required Tool / Progress":
+"Scan the nearby room and exits before returning to the main path.",
+Status: "Confirmed early pickup",
+},
+{
+"Shard Route": "Grassy side-path chest",
+"Route Clue":
+"A visible treasure chest sits on the right side of a grassy path split.",
+"Required Tool / Progress":
+"Follow the side path, clear nearby enemies if needed, and open the chest.",
+Status: "Confirmed route pickup",
+},
+{
+"Shard Route": "Mirror puzzle chest",
+"Route Clue":
+"The route includes mirrors, light paths, or angle changes.",
+"Required Tool / Progress":
+"Work through the mirror route and check lower paths or side chests.",
+Status: "Confirmed route pickup",
+},
+{
+"Shard Route": "Bomb-rock path",
+"Route Clue":
+"A large rock blocks a reward path and the route suggests a bomb or tool can open the way.",
+"Required Tool / Progress":
+"Return with bombs or the correct route-opening tool, then open the reward path.",
+Status: "Confirmed route pickup",
+},
+{
+"Shard Route": "Secret Treasure Route",
+"Route Clue":
+"A cracked wall can be opened with bombs, leading into a hidden treasure route.",
+"Required Tool / Progress":
+"Bomb access. Break the cracked wall, enter the hidden route, and clear the small dungeon-style section.",
+Status: "System confirmed, exact Shard entries updating",
+},
+{
+"Shard Route": "Cracked-floor route",
+"Route Clue":
+"The room has cracked platforms or unstable floor sections over water.",
+"Required Tool / Progress":
+"Clear enemies if needed, move carefully across the cracked route, and open the chest.",
+Status: "Confirmed route pickup",
+},
+{
+"Shard Route": "Late cave challenge chest",
+"Route Clue":
+"A later cave route leads into a harder enemy or hazard section before the reward chest.",
+"Required Tool / Progress":
+"Route access and enough survivability for the cave challenge.",
+Status: "Confirmed pickup, exact area name updating",
+},
+{
+"Shard Route": "Second cracked-floor route",
+"Route Clue":
+"Another later route calls out cracks in the floor before a Shard reward.",
+"Required Tool / Progress":
+"Careful movement through the cracked-floor hazard.",
+Status: "Confirmed pickup, exact area name updating",
+},
+];
+
+export const systemColumns = [
+{ key: "System", label: "System" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "Player Rule", label: "Player Rule" },
+];
+
+export const systemRows = [
+{
+System: "Shard of Life",
+"What It Means":
+"A fragment-style health collectible usually found in reward chests, side routes, and some challenge locations.",
+"Player Rule":
+"Track every Shard by route clue because several pickup screens look similar.",
+},
+{
+System: "4 Shards of Life",
+"What It Means":
+"Collecting 4 Shards of Life gives a max HP increase.",
+"Player Rule":
+"Do not leave Shards for late cleanup if the route is already reachable.",
+},
+{
+System: "Shrine of Life",
+"What It Means":
+"A separate challenge-style location with combat, puzzles, and a reward route. It is not unlocked by collecting 4 Shards.",
+"Player Rule":
+"Treat Shrines of Life as their own map locations. Clear them when you are prepared, and track any Shard reward inside separately.",
+},
+{
+System: "Secret Treasure Route",
+"What It Means":
+"A hidden treasure route opened by bombing cracked walls.",
+"Player Rule":
+"Do not confuse cracked walls with ordinary rocks. Cracked walls can lead into hidden dungeon-style reward routes.",
+},
+];
+
+export const routeTypeColumns = [
+{ key: "Route Type", label: "Route Type" },
+{ key: "What It Usually Means", label: "What It Usually Means" },
+{ key: "Player Rule", label: "Player Rule" },
+];
+
+export const routeTypeRows = [
+{
+"Route Type": "Named chamber",
+"What It Usually Means":
+"A small challenge room or reward room may contain a chest with a Shard of Life.",
+"Player Rule":
+"Use the room name as your landmark so cleanup later is easier.",
+},
+{
+"Route Type": "Visible chest",
+"What It Usually Means":
+"A chest may be reachable now, or it may need another entrance, tool, story state, or age.",
+"Player Rule":
+"Try the obvious route once. If it clearly does not work, mark it and move on.",
+},
+{
+"Route Type": "Hidden cave",
+"What It Usually Means":
+"Short side caves can hide Shards, Magicite, money, or weapon-related rewards.",
+"Player Rule":
+"Enter nearby caves when you are stocked and the story is not pulling you away.",
+},
+{
+"Route Type": "Bomb rock",
+"What It Usually Means":
+"A large rock may block a normal reward path or shortcut.",
+"Player Rule":
+"Return with bombs or the correct tool and check what the opened route leads to.",
+},
+{
+"Route Type": "Cracked wall",
+"What It Usually Means":
+"A cracked wall can be opened with bombs and may lead to a Secret Treasure Route.",
+"Player Rule":
+"Treat cracked walls as hidden-route entrances, not as the same thing as ordinary bomb rocks.",
+},
+{
+"Route Type": "Secret Treasure Route",
+"What It Usually Means":
+"A small hidden dungeon-style area with treasure after you bomb open a cracked wall.",
+"Player Rule":
+"Clear the route carefully and track the entrance wall as your cleanup landmark.",
+},
+{
+"Route Type": "Cracked floor",
+"What It Usually Means":
+"The route is a movement check, often with a reward chest after the hazard.",
+"Player Rule":
+"Clear enemies first, then cross slowly instead of rushing into broken tiles.",
+},
+{
+"Route Type": "Mirror puzzle",
+"What It Usually Means":
+"Light, reflection, or angle changes may open a hidden or side reward route.",
+"Player Rule":
+"Look for lower paths, side chests, and mirror angle changes before leaving.",
+},
+{
+"Route Type": "Shrine of Life",
+"What It Usually Means":
+"A separate challenge location with combat, puzzles, and a reward route.",
+"Player Rule":
+"Do not treat Shrines as Shard-combination upgrades. Mark them as separate map locations.",
+},
+{
+"Route Type": "Age-changed route",
+"What It Usually Means":
+"A route blocked in one age may become easier or possible in another.",
+"Player Rule":
+"If a Shard seems impossible now, check the same area later after story progress.",
+},
+];
+
+export const checklistColumns = [
+{ key: "Track This", label: "Track This" },
+{ key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const checklistRows = [
+{
+"Track This": "Area",
+"Why It Helps":
+"The same route clue can appear in different regions, so the broad area still matters.",
+},
+{
+"Track This": "Age",
+"Why It Helps":
+"Time travel can change access, route layout, and whether a chest is reachable.",
+},
+{
+"Track This": "Room name",
+"Why It Helps":
+"Named rooms such as Chamber of Light are easier to remember than generic item popups.",
+},
+{
+"Track This": "Nearest landmark",
+"Why It Helps":
+"A cave entrance, cracked wall, bomb rock, mirror room, grassy split, or cracked floor is easier to use during cleanup.",
+},
+{
+"Track This": "Route type",
+"Why It Helps":
+"Bomb rocks, cracked walls, Secret Treasure Routes, Shrines of Life, and cracked-floor rooms are different cleanup categories.",
+},
+{
+"Track This": "Required tool or progress",
+"Why It Helps":
+"Some chests need bombs, a movement route, another age, a Shrine challenge, or later story progress.",
+},
+{
+"Track This": "Shard collected",
+"Why It Helps":
+"A simple yes/no note prevents you from revisiting the same reward route later.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Move", label: "Better Move" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Confusing Shards, Shrines, and HP upgrades",
+    "Why It Hurts":
+      "Shards of Life are collectible fragments, Shrines of Life are separate challenge locations, and 4 Shards give a max HP increase. Mixing these up makes cleanup notes confusing.",
+    "Better Move":
+      "Track Shards as individual pickups, Shrines as separate map locations, and max HP upgrades as the result of collecting 4 Shards.",
+  },
+  {
+    Mistake: "Confusing cracked walls with ordinary bomb rocks",
+    "Why It Hurts":
+      "Cracked walls can open Secret Treasure Routes, while bomb rocks usually block a visible path or reward route.",
+    "Better Move":
+      "Mark cracked walls separately and return with bombs to open the hidden route.",
+  },
+  {
+    Mistake: "Using only the Shard popup as your note",
+    "Why It Hurts":
+      "Several Shard reward screens look almost the same, so you may forget which route the Shard came from.",
+    "Better Move":
+      "Track the room name, entrance, puzzle, hazard, cracked wall, or route clue instead of only the final reward.",
+  },
+  {
+    Mistake: "Leaving Shards for the end",
+    "Why It Hurts":
+      "Shards of Life improve survivability, so delaying them makes later fights harder than necessary.",
+    "Better Move":
+      "Collect reachable Shards as soon as you find them and track blocked ones for cleanup.",
+  },
+  {
+    Mistake: "Forcing a blocked chest",
+    "Why It Hurts":
+      "Some rewards are visible before the required tool, route, story state, or age is available.",
+    "Better Move":
+      "Try the nearby route once, then move on if the solution clearly needs later progress.",
+  },
+  {
+    Mistake: "Skipping small caves or hidden routes",
+    "Why It Hurts":
+      "Short caves and Secret Treasure Routes can hide Shards, Magicite, and useful resources.",
+    "Better Move":
+      "Check nearby caves and cracked walls unless you are low on items or the story route is urgent.",
+  },
+  {
+    Mistake: "Rushing cracked-floor routes",
+    "Why It Hurts":
+      "Cracked-floor rooms are usually movement checks, and rushing can make you miss the reward path.",
+    "Better Move":
+      "Clear enemies first, cross carefully, and check the chest at the end of the hazard.",
+  },
+  {
+    Mistake: "Not writing down route clues",
+    "Why It Hurts":
+      "Cleanup becomes confusing once the game adds more ages, tools, Shrines, Secret Treasure Routes, and side paths.",
+    "Better Move":
+      "Track area, age, room name, nearby landmark, route type, and whether the Shard is already collected.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Shards of Life** are health-upgrade fragments in **The Adventures of Elliot: The Millennium Tales**. Collect **4 Shards of Life** to gain a max HP increase, and track each Shard by its route clue instead of only by the final reward popup.
+
+Do not confuse Shards of Life with **Shrines of Life**. A Shrine of Life is a separate challenge-style map location with combat, puzzles, and rewards. Also watch for **Secret Treasure Routes**: cracked walls can be opened with bombs and may lead into hidden treasure areas. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026. This Shards of Life guide covers confirmed Shard routes in The Adventures of Elliot: The Millennium Tales, including Chamber of Light, hidden caves, nearby reward chests, grassy side paths, mirror puzzles, bomb-rock paths, cracked walls, Secret Treasure Routes, cracked-floor routes, Shrine of Life distinctions, later cave challenge pickups, max HP tracking, and route-clue cleanup rules.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-adventures-of-elliot/the-adventures-of-elliot-shard-of-life-key-item.webp"
+    alt="Shard of Life key item in The Adventures of Elliot"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Shards of Life are key items worth tracking from the start because 4 Shards give a max HP increase.
+  </figcaption>
+</figure>
+
+<h2 id="shards-of-life-locations">
+  The Adventures of Elliot Shards of Life locations
+</h2>
+
+Shards of Life are some of the most valuable collectibles in **The Adventures of Elliot: The Millennium Tales**. They are not just completion filler. Four Shards of Life give Elliot a max HP increase, which makes caves, hazard rooms, Shrines, trials, and boss fights more forgiving.
+
+This page focuses on confirmed Shard routes and route clues. It avoids repeating the same reward popup for every entry, because the route clue is what helps you actually find the Shard again later.
+
+If you are still learning the opening route, read the <Link href="/the-adventures-of-elliot/beginner-guide">Beginner Guide</Link> first. If you want the route order around Southern Caves, Ignite, Heavy Hammer, the Golden Bell, Moon Mirror, and age switching, use the <Link href="/the-adventures-of-elliot/walkthrough">Walkthrough</Link>.
+
+<GuideTable
+caption="Confirmed Shard of Life routes."
+columns={shardColumns}
+rows={shardRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="shards-shrines-and-secret-routes">
+  Shards of Life, Shrines of Life, and Secret Treasure Routes
+</h2>
+
+These three systems are easy to mix up, so separate them from the start:
+
+<GuideTable
+caption="Shard, Shrine, and Secret Treasure Route basics."
+columns={systemColumns}
+rows={systemRows}
+/>
+
+The safe rule is:
+
+<strong>4 Shards of Life give a max HP increase. Shrines of Life are separate challenge locations. Cracked walls opened with bombs can lead to Secret Treasure Routes.</strong>
+
+That is why your notes should focus on route clues:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>room name,</li>
+  <li>nearby landmark,</li>
+  <li>cave entrance,</li>
+  <li>grassy path split,</li>
+  <li>bomb rock,</li>
+  <li>cracked wall,</li>
+  <li>Secret Treasure Route,</li>
+  <li>Shrine of Life,</li>
+  <li>mirror puzzle,</li>
+  <li>cracked-floor route,</li>
+  <li>or the age where the route appears.</li>
+</ul>
+
+<AdUnit placement="article_middle" />
+
+
+<h2 id="confirmed-route-details">
+  Confirmed route details
+</h2>
+
+The table above is the main checklist. The sections below explain the route types that are easiest to confuse during cleanup.
+
+<h3 id="chamber-of-light-shard">
+  Chamber of Light chest
+</h3>
+
+The **Chamber of Light** Shard is easy to recognize because the room name appears when you enter, and the reward chest sits on the central platform.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-adventures-of-elliot/the-adventures-of-elliot-chamber-of-light-shard-chest.webp"
+    alt="Chamber of Light chest for a Shard of Life in The Adventures of Elliot"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Chamber of Light is a strong route landmark because the room name and chest position make the Shard easy to identify later.
+  </figcaption>
+</figure>
+
+Use this as the model for tracking Shards. The useful note is not just “I picked up a Shard.” The useful note is **Chamber of Light chest**.
+
+<h3 id="side-cave-and-nearby-chests">
+  Side cave and nearby chest Shards
+</h3>
+
+Several confirmed Shards come from side routes that are easy to skip while following the main objective. These include hidden cave entrances, nearby follow-up chests, and reward routes close to power-looking buildings or route landmarks.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-adventures-of-elliot/the-adventures-of-elliot-shard-hidden-cave-entrance.webp"
+    alt="Hidden cave entrance leading to a Shard of Life in The Adventures of Elliot"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Small cave entrances can lead to high-value rewards, including Shards of Life.
+  </figcaption>
+</figure>
+
+After you collect one strong reward, scan the nearby room, exits, and side paths before leaving. Some Shards are close enough together that rushing back to the main route can make you miss the second chest.
+
+<h3 id="grassy-side-path-shard">
+  Grassy side-path chest
+</h3>
+
+One confirmed Shard chest is easier to track by the route layout than by the reward popup. The important clue is a grassy side path with a visible treasure chest on the right side of the path split.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-adventures-of-elliot/the-adventures-of-elliot-shard-grassy-path-treasure-chest.webp"
+    alt="Grassy side path treasure chest with a Shard of Life in The Adventures of Elliot"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Track this Shard by the grassy side-path layout and visible treasure chest instead of relying only on the final item popup.
+  </figcaption>
+</figure>
+
+When you see a visible chest near a path split, check the side path before moving deeper into the main route.
+
+<h3 id="mirror-puzzle-shard">
+  Mirror puzzle chest
+</h3>
+
+A confirmed Shard is tied to a mirror-style route. Mirror rooms are easy to under-check because players often solve the obvious path and leave before checking side rewards.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-adventures-of-elliot/the-adventures-of-elliot-shard-mirror-puzzle-route.webp"
+    alt="Mirror puzzle route leading to a Shard of Life in The Adventures of Elliot"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mirror routes can hide side rewards, so check lower paths, nearby chests, and mirror angle changes before leaving the puzzle area.
+  </figcaption>
+</figure>
+
+If the room uses light, reflection, or adjustable angles, look for extra chest paths before leaving after the main solution.
+
+<h3 id="bomb-rock-cracked-wall-and-secret-treasure-routes">
+  Bomb rocks, cracked walls, and Secret Treasure Routes
+</h3>
+
+Bomb rocks and cracked walls are not the same route clue.
+
+A **bomb rock** usually blocks a visible path or reward route. A **cracked wall** can be opened with bombs and may lead into a **Secret Treasure Route**, which is a small hidden dungeon-style treasure area.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-adventures-of-elliot/the-adventures-of-elliot-shard-bomb-rock-route.webp"
+    alt="Bomb-rock route leading to a Shard of Life in The Adventures of Elliot"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Bomb-rock routes are worth marking because they can lead to Shards and other strong rewards.
+  </figcaption>
+</figure>
+
+For cleanup, write them down differently:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Bomb rock:</strong> return with bombs or the correct route-opening tool.</li>
+  <li><strong>Cracked wall:</strong> return with bombs and check whether it opens a Secret Treasure Route.</li>
+  <li><strong>Secret Treasure Route:</strong> clear the hidden route and track the entrance wall as the landmark.</li>
+</ul>
+
+
+<h3 id="cracked-floor-shards">
+  Cracked-floor Shards
+</h3>
+
+Some Shards sit behind movement checks with cracked platforms or unstable floor sections.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-adventures-of-elliot/the-adventures-of-elliot-shard-cracked-floor-route.webp"
+    alt="Cracked-floor route leading to a Shard of Life in The Adventures of Elliot"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cracked-floor routes are easier to remember than generic Shard popups because the floor pattern is the real landmark.
+  </figcaption>
+</figure>
+
+For cracked-floor routes, clear nearby enemies first and cross carefully. The Shard is usually after the movement or hazard check, not at the entrance.
+
+<h3 id="shrine-of-life-notes">
+  Shrine of Life notes
+</h3>
+
+A **Shrine of Life** should be tracked as a separate map location, not as something unlocked by collecting Shards. Shrines are challenge-style routes with combat, puzzles, and rewards.
+
+If a Shrine contains a Shard of Life, record both the Shrine location and the Shard pickup in your tracking notes. This keeps Shrine cleanup and Shard cleanup from blending together.
+
+<h3 id="later-confirmed-shard-notes">
+  Later confirmed Shard notes
+</h3>
+
+Later routes confirm that Shards continue appearing in harder cave and hazard sections. Two useful patterns to keep in mind are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Late cave challenge chest:</strong> a Shard appears after a tougher cave route, so do not ignore reward chests after combat or hazard rooms.
+  </li>
+  <li>
+    <strong>Second cracked-floor route:</strong> another Shard appears after a route that calls out cracks in the floor, confirming that cracked-floor rooms remain important later.
+  </li>
+</ul>
+
+These entries should stay in the checklist as “exact area name updating” until the final route names are verified.
+
+<h2 id="route-types">
+  Route types that often hide Shards
+</h2>
+
+Shards are not all placed in one obvious menu. They can appear in ordinary chests, side caves, Secret Treasure Routes, Shrines of Life, puzzle rooms, cracked-floor routes, and later challenge routes.
+
+<GuideTable
+caption="Common route types for Shards of Life."
+columns={routeTypeColumns}
+rows={routeTypeRows}
+/>
+
+If you remember only one thing, remember this: **a visible chest is not always an available chest**. If the route is blocked, keep progressing and return later.
+
+<h2 id="tracking-checklist">
+  Shard tracking checklist
+</h2>
+
+Use this checklist while expanding your own Shard notes.
+
+<GuideTable
+caption="Shard of Life tracking checklist."
+columns={checklistColumns}
+rows={checklistRows}
+/>
+
+For your own notes, use this format:
+
+```txt id="2d3bp6"
+Area:
+Age:
+Room name:
+Nearby landmark:
+Route type:
+Required tool / progress:
+Shard collected:
+```
+
+This becomes more important once time travel, new tools, Shrines of Life, Secret Treasure Routes, and side paths start overlapping.
+
+<h2 id="common-mistakes">
+  Common Shard of Life mistakes
+</h2>
+
+<GuideTable
+caption="Shard of Life mistakes to avoid."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these pages with this guide:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/the-adventures-of-elliot/walkthrough">Walkthrough</Link> — for the route around Southern Caves, Ignite, Heavy Hammer, Golden Bell, Moon Mirror, and age switching.
+  </li>
+  <li>
+    <Link href="/the-adventures-of-elliot/beginner-guide">Beginner Guide</Link> — if you are still learning how to read blocked paths, tool checks, Magicite, weapons, cats, and early route habits.
+  </li>
+  <li>
+    <Link href="/the-adventures-of-elliot/cat-locations">Cat Locations</Link> — if you want to track cats and Katzenmeister rewards alongside Shards.
+  </li>
+  <li>
+    <Link href="/the-adventures-of-elliot/achievements-guide">Achievements Guide</Link> — if you are planning full completion, vitality level, cats, weapons, manuscripts, and endings.
+  </li>
+</ol>
+
+<h2 id="faq">
+  The Adventures of Elliot Shards of Life FAQ
+</h2>
+
+### What are Shards of Life?
+
+Shards of Life are health-upgrade fragments. Collecting 4 Shards of Life gives Elliot a max HP increase.
+
+### Are Shards of Life and Shrines of Life the same thing?
+
+No. Shards of Life are collectible fragments, while Shrines of Life are separate challenge-style locations with combat, puzzles, and rewards.
+
+### Do 4 Shards of Life unlock a Shrine of Life?
+
+No. Four Shards of Life give a max HP increase. A Shrine of Life is a separate map location, not something unlocked by collecting 4 Shards.
+
+### Can Shrines of Life contain Shards of Life?
+
+Yes, a Shrine of Life can contain a Shard reward, so track the Shrine location and the Shard pickup separately.
+
+### What are Secret Treasure Routes?
+
+Secret Treasure Routes are hidden treasure areas opened by bombing cracked walls. They are different from ordinary bomb-rock paths.
+
+### Should I collect Shards immediately?
+
+Collect reachable Shards immediately. If a Shard route is blocked by a tool, story objective, Shrine challenge, cracked wall, Secret Treasure Route, or another age, mark it by route clue and return later.
+
+### Why do several Shard pickups look the same?
+
+Many Shards end with similar chest or key-item screens. That is why this guide tracks Shards by route clues such as room names, cave entrances, grassy paths, bomb rocks, cracked walls, Secret Treasure Routes, mirror puzzles, and cracked floors.
+
+### Why can I see a chest but not reach it?
+
+That usually means the chest needs another entrance, tool, route, story step, Shrine challenge, Secret Treasure Route, or age. Do not waste too much time forcing it early.
+
+### Do cracked walls hide Shards?
+
+Cracked walls can open Secret Treasure Routes, which may contain Shards or other strong rewards. Return with bombs and track the wall location.
+
+### Are cracked-floor rooms worth checking?
+
+Yes. Cracked-floor rooms can hide rewards after a movement or hazard check.
+
+### What should I write down for Shard cleanup?
+
+Track area, age, room name, nearby landmark, route type, required tool or progress, and whether the Shard is already collected.
+
+### Is this a complete Shard of Life guide?
+
+Not yet. This is a confirmed-route version and will be expanded with more exact area names and late-game Shards as more routes are verified.
+
+### What should I read next?
+
+Use the <Link href="/the-adventures-of-elliot/cat-locations">Cat Locations guide</Link> for cats and rewards, the <Link href="/the-adventures-of-elliot/walkthrough">Walkthrough</Link> for route progress, or return to the <Link href="/the-adventures-of-elliot">Guide Hub</Link> for all available guides.

@@ -142,7 +142,8 @@ const allGameGuides = [
   { title: 'SpaceCraft', href: '/spacecraft'},
   { title: 'Tales of Seikyu', href: '/tales-of-seikyu'},
   { title: '33 Immortals', href: '/33-immortals'},
-  
+  { title: 'The Adventures of Elliot: The Millennium Tales', href: '/the-adventures-of-elliot'},
+
 ];
 
 const exploreCards = [
