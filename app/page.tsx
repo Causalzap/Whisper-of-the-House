@@ -143,7 +143,7 @@ const allGameGuides = [
   { title: 'Tales of Seikyu', href: '/tales-of-seikyu'},
   { title: '33 Immortals', href: '/33-immortals'},
   { title: 'The Adventures of Elliot: The Millennium Tales', href: '/the-adventures-of-elliot'},
-
+  { title: 'Steam Next Fest June 2026 Demo Guides', href: '/steam-next-fest'},
 ];
 
 const exploreCards = [
@@ -222,6 +222,13 @@ export default function Home() {
                   className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-3 font-semibold text-purple-900 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-purple-50"
                 >
                   Latest Updates
+                </a>
+
+                <a
+                  href="/steam-next-fest"
+                  className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-3 font-semibold text-purple-900 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-purple-50"
+                >
+                  Steam Next Fest June 2026 Demo Guides
                 </a>
 
                 <a

@@ -1,0 +1,1385 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const strategyOverviewColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "Main Goal", label: "Main Goal" },
+  { key: "What Wins The Phase", label: "What Wins The Phase" },
+];
+
+export const strategyOverviewRows = [
+  {
+    Phase: "Deployment",
+    "Main Goal":
+      "Pick a start that funnels enemy pathing into one main defensive face.",
+    "What Wins The Phase":
+      "Choose a zone with resources, usable buildings, and predictable enemy approach lines.",
+  },
+  {
+    Phase: "Opening defense",
+    "Main Goal":
+      "Survive the first waves without letting fast units, wasps, or vehicles break the base.",
+    "What Wins The Phase":
+      "Use early vision, garrisoned buildings, infantry screens, interceptors, MLRS range, and repairs.",
+  },
+  {
+    Phase: "Faction response",
+    "Main Goal":
+      "Adjust the first defense to the enemy faction instead of treating every run the same.",
+    "What Wins The Phase":
+      "Use more AK30 and interceptor coverage into Bandits, and a thicker close-range flame line into Mutants.",
+  },
+  {
+    Phase: "Frontline setup",
+    "Main Goal":
+      "Turn the enemy attack into a narrow kill zone.",
+    "What Wins The Phase":
+      "Layer infantry, trenches, heavy defenders, flame turrets, AK30s, interceptors, and crane repair coverage.",
+  },
+  {
+    Phase: "Secondary economy",
+    "Main Goal":
+      "Stop depending only on harvesters and build a scaling material engine.",
+    "What Wins The Phase":
+      "Add silos, power, material fabricators, and enough storage to keep production running.",
+  },
+  {
+    Phase: "Macro building scaling",
+    "Main Goal":
+      "Use Foundry, Arsenal, and Complector before the mass-production phase.",
+    "What Wins The Phase":
+      "Stack toughness, damage, and free Brute infantry support before your army output explodes.",
+  },
+  {
+    Phase: "Mass production",
+    "Main Goal":
+      "Create a repeating wave of infantry, tanks, armored cars, and support units.",
+    "What Wins The Phase":
+      "Group production buildings, enable cycle production, raise warehouses/pop cap, cluster new factories, and keep pressure moving.",
+  },
+  {
+    Phase: "Final push",
+    "Main Goal":
+      "Collapse enemy production and remove static structures.",
+    "What Wins The Phase":
+      "Bring the MCV forward, build on the front, relocate artillery, correct bomber paths, and switch pressure between flanks.",
+  },
+];
+
+export const controlColumns = [
+  { key: "Control / QoL", label: "Control / QoL" },
+  { key: "Use", label: "Use" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const controlRows = [
+  {
+    "Control / QoL": "Spacebar pause",
+    Use:
+      "Pause the game while still issuing commands.",
+    "Why It Matters":
+      "Use pause to plan buildings, repair, assign groups, and recover when hardest difficulty gets messy.",
+  },
+  {
+    "Control / QoL": "R",
+    Use:
+      "Deploy starting units.",
+    "Why It Matters":
+      "Use it immediately after the battle starts so early units can occupy buildings or screen the front.",
+  },
+  {
+    "Control / QoL": "Q",
+    Use:
+      "Deploy or build the selected early structure in the current tab.",
+    "Why It Matters":
+      "You will use this constantly for processors, power, and upgrades depending on the selected building group.",
+  },
+  {
+    "Control / QoL": "F1",
+    Use:
+      "Select main production / build queues.",
+    "Why It Matters":
+      "Use it to return to your MCV, factories, barracks, and build options without hunting the map.",
+  },
+  {
+    "Control / QoL": "F2",
+    Use:
+      "Select all units.",
+    "Why It Matters":
+      "Useful when you need a full army response or broad pressure command.",
+  },
+  {
+    "Control / QoL": "B",
+    Use:
+      "Repair.",
+    "Why It Matters":
+      "Repair damaged defenses, civilian buildings, and critical frontline structures before they collapse.",
+  },
+  {
+    "Control / QoL": "Control groups / T + number",
+    Use:
+      "Bind Foundries, production buildings, supply depots, or mixed groups.",
+    "Why It Matters":
+      "Use groups like 1 for production, 5 for Foundries, and 6 for supply depots or warehouses.",
+  },
+  {
+    "Control / QoL": "Disable screen select limiter",
+    Use:
+      "Let double-click same-type selection work across the whole map instead of only the visible screen.",
+    "Why It Matters":
+      "This is very useful when you forgot a control group and need to select all factories, depots, or matching buildings fast.",
+  },
+  {
+    "Control / QoL": "Phantom placement reposition",
+    Use:
+      "Select an already marked heavy-vehicle deployment phantom and move it directly.",
+    "Why It Matters":
+      "You do not need to drag the camera back to the original placement area and repeat the whole deployment setup.",
+  },
+  {
+    "Control / QoL": "Bomber flight correction",
+    Use:
+      "After setting a bombing direction, adjust the bomber flight path if the battle shifts.",
+    "Why It Matters":
+      "Bombing is not completely fire-and-forget. Correct the line if your first direction is slightly wrong.",
+  },
+  {
+    "Control / QoL": "O",
+    Use:
+      "Hide health bars and some map details.",
+    "Why It Matters":
+      "Useful when the screen becomes cluttered.",
+  },
+  {
+    "Control / QoL": "Delete",
+    Use:
+      "Delete a building or unit.",
+    "Why It Matters":
+      "Be careful. Deleting can damage nearby units or structures.",
+  },
+];
+
+export const factionColumns = [
+  { key: "Enemy Faction", label: "Enemy Faction" },
+  { key: "What They Pressure", label: "What They Pressure" },
+  { key: "Best Adjustment", label: "Best Adjustment" },
+];
+
+export const factionRows = [
+  {
+    "Enemy Faction": "Bandit Faction",
+    "What They Pressure":
+      "Light, fast units that punish weak vision, loose flanks, and slow reaction time.",
+    "Best Adjustment":
+      "Lean harder on AK30 coverage, interceptors, garrisons, spare turrets, and early warning around the base.",
+  },
+  {
+    "Enemy Faction": "Mutant Faction",
+    "What They Pressure":
+      "Heavy units, worms, flies, close-range pressure, and armor-heavy pushes.",
+    "Best Adjustment":
+      "Build a thicker melee stop line with infantry, trenches, flame turrets, Dreadnoughts, and repair coverage.",
+  },
+  {
+    "Enemy Faction": "Bandit opening",
+    "What They Pressure":
+      "Fast arrivals can hit before your base feels ready.",
+    "Best Adjustment":
+      "Do not delay vision. Launch interceptors and fill buildings before expanding too wide.",
+  },
+  {
+    "Enemy Faction": "Mutant opening",
+    "What They Pressure":
+      "The fight can become a close-range brawl if the front is too thin.",
+    "Best Adjustment":
+      "Put bodies and blockers in front of expensive defenses and use fire where enemies bunch up.",
+  },
+  {
+    "Enemy Faction": "Bandit mid-game",
+    "What They Pressure":
+      "Flanks, air harassment, and scattered fast pressure.",
+    "Best Adjustment":
+      "Keep checking side approaches and use extra AK30 / interceptor coverage instead of only one heavy kill zone.",
+  },
+  {
+    "Enemy Faction": "Mutant mid-game",
+    "What They Pressure":
+      "Heavy armor and dense pushes that can break a narrow line.",
+    "Best Adjustment":
+      "Upgrade durability, add more flame and trench layers, and use bombs before the heavy wave reaches your core.",
+  },
+];
+
+export const deploymentColumns = [
+  { key: "Deployment Rule", label: "Deployment Rule" },
+  { key: "Why It Matters", label: "Why It Matters" },
+  { key: "How To Apply It", label: "How To Apply It" },
+];
+
+export const deploymentRows = [
+  {
+    "Deployment Rule": "Do not choose only by nearby resources",
+    "Why It Matters":
+      "A rich start can still fail if enemy waves approach from too many angles.",
+    "How To Apply It":
+      "Look at the whole map and imagine the path enemy bases will take toward your MCV.",
+  },
+  {
+    "Deployment Rule": "Prioritize enemy funneling",
+    "Why It Matters":
+      "The hardest difficulty becomes much easier when most attacks crash into one prepared kill zone.",
+    "How To Apply It":
+      "Pick a zone where enemy pathing naturally channels into the same front or corner.",
+  },
+  {
+    "Deployment Rule": "Use civilian buildings",
+    "Why It Matters":
+      "Buildings can hold infantry, create early line-of-sight, and soak pressure.",
+    "How To Apply It":
+      "Start near structures you can garrison or defend without spreading too wide.",
+  },
+  {
+    "Deployment Rule": "Place MLRS / Topaz forward enough",
+    "Why It Matters":
+      "Long-range units need vision and time to damage incoming vehicles before they reach your base.",
+    "How To Apply It":
+      "Place them in a formation that supports the likely attack lane without being exposed alone.",
+  },
+  {
+    "Deployment Rule": "Use phantom repositioning",
+    "Why It Matters":
+      "Heavy-vehicle deployment placement can be adjusted without searching for the original ghost again.",
+    "How To Apply It":
+      "Select the phantom itself and move it if your first deployment marker is not where you want it.",
+  },
+  {
+    "Deployment Rule": "Keep the first base compact",
+    "Why It Matters":
+      "A huge early footprint is harder to power, repair, and defend.",
+    "How To Apply It":
+      "Build processors, power, machinery, and first defenses close enough that repairs and infantry can protect them.",
+  },
+];
+
+export const openingColumns = [
+  { key: "Opening Step", label: "Opening Step" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const openingRows = [
+  {
+    "Opening Step": "Deploy units and processor",
+    "What To Do":
+      "Start by deploying your units and first processing plant.",
+    "Why It Works":
+      "The first minute decides whether your economy starts cleanly or you spend the whole run repairing panic damage.",
+  },
+  {
+    "Opening Step": "Get early vision",
+    "What To Do":
+      "Use interceptors and building garrisons to reveal incoming waves.",
+    "Why It Works":
+      "MLRS and long-range fire only matter if they can see what is coming.",
+  },
+  {
+    "Opening Step": "Add a second processor quickly",
+    "What To Do":
+      "Go into two processing plants early if your resource position allows it.",
+    "Why It Works":
+      "You need enough income to power defenses, harvesters, repairs, and the first tech transition.",
+  },
+  {
+    "Opening Step": "Keep the base compact",
+    "What To Do":
+      "Place power, machinery, and processors close enough to defend and repair.",
+    "Why It Works":
+      "A compact base is easier to power and protect before the first expansion.",
+  },
+  {
+    "Opening Step": "Add vehicle production",
+    "What To Do":
+      "Build the machinery plant and begin harvesters or early vehicles as needed.",
+    "Why It Works":
+      "Harvesters keep the first economy alive, while vehicles later help remove artillery and heavier threats.",
+  },
+  {
+    "Opening Step": "Build the first defense package",
+    "What To Do":
+      "Use the frontline layering plan below once the first waves reveal their main attack lane.",
+    "Why It Works":
+      "This avoids a rigid turret list and lets you react to Bandits, Mutants, or map-specific pressure.",
+  },
+];
+
+export const defenseColumns = [
+  { key: "Defense Layer", label: "Defense Layer" },
+  { key: "Role", label: "Role" },
+  { key: "Placement Advice", label: "Placement Advice" },
+];
+
+export const defenseRows = [
+  {
+    "Defense Layer": "Infantry screen",
+    Role:
+      "Absorbs early target priority, blocks wasps, and protects heavier assets.",
+    "Placement Advice":
+      "Keep a thin line of infantry in front of Dreadnoughts and major defensive buildings.",
+  },
+  {
+    "Defense Layer": "Garrisoned buildings",
+    Role:
+      "Adds early firepower and gives the front more staying power.",
+    "Placement Advice":
+      "Fill useful buildings near the main attack lane before the first waves arrive.",
+  },
+  {
+    "Defense Layer": "Dreadnoughts / heavy defenders",
+    Role:
+      "Hold the main kill zone and punish concentrated enemy waves.",
+    "Placement Advice":
+      "Place them where enemy pathing naturally funnels, then protect them with infantry and repair coverage.",
+  },
+  {
+    "Defense Layer": "Construction crane repair",
+    Role:
+      "Repairs nearby structures quickly and can make a front-line heavy unit extremely hard to remove.",
+    "Placement Advice":
+      "Place a crane close enough to repair the key defender, but not so exposed that it becomes the first target.",
+  },
+  {
+    "Defense Layer": "Trenches",
+    Role:
+      "Slow infantry and prevent vehicles from driving straight into your defenses.",
+    "Placement Advice":
+      "Drag trenches across the approach lane and upgrade them when there is breathing room.",
+  },
+  {
+    "Defense Layer": "Flame turret",
+    Role:
+      "Kills infantry and dense short-range attackers.",
+    "Placement Advice":
+      "Prioritize flame turrets more against Mutants or any push that forces close combat.",
+  },
+  {
+    "Defense Layer": "AK30",
+    Role:
+      "Adds flexible defensive fire and helps against fast or air pressure.",
+    "Placement Advice":
+      "Prioritize more AK30s against Bandits, wasps, and loose flank pressure.",
+  },
+  {
+    "Defense Layer": "Interceptors",
+    Role:
+      "Provide vision and clean up wasps or sneaky units.",
+    "Placement Advice":
+      "Keep launching them around the base and flanks instead of only over the main fight.",
+  },
+];
+
+export const economyColumns = [
+  { key: "Economy Piece", label: "Economy Piece" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const economyRows = [
+  {
+    "Economy Piece": "Processing plants",
+    "What It Does":
+      "Process harvested resources and keep the first economy moving.",
+    "Why It Matters":
+      "Two early processors help fund the first defense and tech transition.",
+  },
+  {
+    "Economy Piece": "Harvesters",
+    "What It Does":
+      "Collect resources from nearby fields.",
+    "Why It Matters":
+      "They are strong early, but later they may travel farther and become slower or riskier.",
+  },
+  {
+    "Economy Piece": "Silos",
+    "What It Does":
+      "Increase material storage.",
+    "Why It Matters":
+      "Without enough storage, harvesters can sit idle because material is not wasted but cannot be accepted.",
+  },
+  {
+    "Economy Piece": "Material fabricators",
+    "What It Does":
+      "Create a secondary material economy and increase unit build limit.",
+    "Why It Matters":
+      "This is the backbone of the turtle strategy: survive behind defenses while fabricators become your main economy.",
+  },
+  {
+    "Economy Piece": "Power plants",
+    "What It Does":
+      "Support defenses, fabricators, production, and upgrades.",
+    "Why It Matters":
+      "Material fabricators and heavy defenses can push you deeply negative if power is ignored.",
+  },
+  {
+    "Economy Piece": "Supply depots",
+    "What It Does":
+      "Provide build radius and help extend expansion routes.",
+    "Why It Matters":
+      "They let you bridge gaps, place cranes, and support forward construction.",
+  },
+  {
+    "Economy Piece": "Warehouses",
+    "What It Does":
+      "Increase population or unit cap without costing parts in the observed strategy.",
+    "Why It Matters":
+      "Mass production needs a very high cap, and warehouses are the clean way to keep scaling.",
+  },
+];
+
+export const macroColumns = [
+  { key: "Macro Building", label: "Macro Building" },
+  { key: "Confirmed Role", label: "Confirmed Role" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const macroRows = [
+  {
+    "Macro Building": "Foundry",
+    "Confirmed Role":
+      "Upgrades vehicle toughness and supports durability scaling.",
+    "How To Use It":
+      "Build enough Foundries to reach the useful durability cap, then bind them to a control group for fast power plant upgrades.",
+  },
+  {
+    "Macro Building": "Arsenal",
+    "Confirmed Role":
+      "Upgrades unit damage and supports stronger new production waves.",
+    "How To Use It":
+      "Build multiple Arsenals before serious mass production so later waves hit harder.",
+  },
+  {
+    "Macro Building": "Complector",
+    "Confirmed Role":
+      "Produces free infantry called Brutes.",
+    "How To Use It":
+      "Use Complectors as part of the macro engine when you want infantry volume without spending normal unit supply the same way.",
+  },
+  {
+    "Macro Building": "Power plants around Complector",
+    "Confirmed Role":
+      "Power plants connected to a Complector can speed up Brute production.",
+    "How To Use It":
+      "Place power plants around Complectors when you want stronger free-infantry output.",
+  },
+  {
+    "Macro Building": "Connected war factories",
+    "Confirmed Role":
+      "Factories placed close together can visibly connect and help production scaling.",
+    "How To Use It":
+      "Cluster new war factories during the mass-production phase. Do not rebuild a stable base just for perfect spacing.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "Upgrade / Scaling Tool", label: "Upgrade / Scaling Tool" },
+  { key: "What To Check", label: "What To Check" },
+  { key: "Common Mistake", label: "Common Mistake" },
+];
+
+export const upgradeRows = [
+  {
+    "Upgrade / Scaling Tool": "Power plant upgrades",
+    "What To Check":
+      "Use Foundry control groups and upgrade plants that still need upgrades.",
+    "Common Mistake":
+      "Trying to scale fabricators while leaving the power grid deeply negative.",
+  },
+  {
+    "Upgrade / Scaling Tool": "Barracks tower upgrade",
+    "What To Check":
+      "Upgrade barracks once infantry production becomes part of the macro engine.",
+    "Common Mistake":
+      "Forgetting barracks upgrades because vehicle production feels more urgent.",
+  },
+  {
+    "Upgrade / Scaling Tool": "Vehicle / armored car upgrade",
+    "What To Check":
+      "Apply the upgrade to each relevant war factory if the game requires per-building upgrades.",
+    "Common Mistake":
+      "Assuming one upgrade automatically applies across all factories.",
+  },
+  {
+    "Upgrade / Scaling Tool": "Bunker / trench timing",
+    "What To Check":
+      "Upgrade defensive positions during breathing room.",
+    "Common Mistake":
+      "Upgrading while the structure is under fire and exposing it during the transition.",
+  },
+];
+
+export const buildOrderColumns = [
+  { key: "Timing", label: "Timing" },
+  { key: "Build / Action", label: "Build / Action" },
+  { key: "Reason", label: "Reason" },
+];
+
+export const buildOrderRows = [
+  {
+    Timing: "Start",
+    "Build / Action":
+      "Deploy units, processing plant, early garrisons, and interceptors.",
+    Reason:
+      "You need income and vision before the first wave makes contact.",
+  },
+  {
+    Timing: "First minute",
+    "Build / Action":
+      "Add second processing plant, power plant, and machinery plant.",
+    Reason:
+      "This gives enough economy and vehicle access to stabilize the base.",
+  },
+  {
+    Timing: "Early waves",
+    "Build / Action":
+      "Add the first layered defense package based on the enemy faction and attack lane.",
+    Reason:
+      "The goal is to create a defended funnel before heavy units arrive.",
+  },
+  {
+    Timing: "After first hold",
+    "Build / Action":
+      "Add trenches, silos, more power, and the first Foundries.",
+    Reason:
+      "Trenches slow the push, silos stop storage bottlenecks, and Foundries start the upgrade engine.",
+  },
+  {
+    Timing: "Mid-game setup",
+    "Build / Action":
+      "Build material fabricators, Arsenal, Complector, barracks, supply depots, and warehouses.",
+    Reason:
+      "This shifts the game from surviving waves to scaling your own economy and production.",
+  },
+  {
+    Timing: "Before attack",
+    "Build / Action":
+      "Raise warehouse cap, add more production, upgrade power, cluster new factories, and bind control groups.",
+    Reason:
+      "Mass unit output only works if your cap, power, production, and upgrades all scale together.",
+  },
+  {
+    Timing: "Attack phase",
+    "Build / Action":
+      "Cycle production, move pressure forward, correct bombers, relocate artillery, and bring the MCV up when safe.",
+    Reason:
+      "The enemy can replenish quickly, so you must keep pressure and forward build support at the same time.",
+  },
+];
+
+export const productionColumns = [
+  { key: "Production Tool", label: "Production Tool" },
+  { key: "How To Use It", label: "How To Use It" },
+  { key: "Common Mistake", label: "Common Mistake" },
+];
+
+export const productionRows = [
+  {
+    "Production Tool": "Control group 1",
+    "How To Use It":
+      "Put barracks, war factories, and relevant macro production into one production group.",
+    "Common Mistake":
+      "Selecting only one building and wondering why the army is not scaling.",
+  },
+  {
+    "Production Tool": "Cycle production",
+    "How To Use It":
+      "Turn on the cycle button so production buildings keep making units.",
+    "Common Mistake":
+      "Forgetting to turn the cycle state red / active before looking away.",
+  },
+  {
+    "Production Tool": "Mass pressure command",
+    "How To Use It":
+      "Once your economy can replace losses, send waves forward while you keep building behind them.",
+    "Common Mistake":
+      "Trying to push before the economy, cap, and rally points can support the losses.",
+  },
+  {
+    "Production Tool": "Warehouses",
+    "How To Use It":
+      "Use supply depot groups to mass build warehouses and raise the population cap.",
+    "Common Mistake":
+      "Adding factories without enough cap, then wasting production potential.",
+  },
+  {
+    "Production Tool": "Connected war factories",
+    "How To Use It":
+      "When adding new factories, place them close enough to connect so your late-game production layout scales better.",
+    "Common Mistake":
+      "Obsessing over factory linking too early instead of surviving the first waves, power demands, and economy transition.",
+  },
+  {
+    "Production Tool": "Pause production trick",
+    "How To Use It":
+      "Pause production briefly when you need material to spike for forward buildings, warehouses, or power recovery.",
+    "Common Mistake":
+      "Letting every production building drain the bank while the base still needs infrastructure.",
+  },
+];
+
+export const pushColumns = [
+  { key: "Push Tool", label: "Push Tool" },
+  { key: "What To Do", label: "What To Do" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const pushRows = [
+  {
+    "Push Tool": "Mass pressure",
+    "What To Do":
+      "Start pressure only after your production loop can replace losses.",
+    "Why It Works":
+      "The strategy is about replacement rate, not perfect individual unit control.",
+  },
+  {
+    "Push Tool": "Forward MCV",
+    "What To Do":
+      "Move and deploy the MCV close enough to build forward defenses and warehouses.",
+    "Why It Works":
+      "The enemy replenishes fast, so forward construction keeps pressure from stalling.",
+  },
+  {
+    "Push Tool": "Forward defenses",
+    "What To Do":
+      "Place flamethrowers, turrets, power, warehouses, and support buildings along the front.",
+    "Why It Works":
+      "Your forward line becomes the new safe zone instead of leaving production far behind.",
+  },
+  {
+    "Push Tool": "Artillery relocation",
+    "What To Do":
+      "Move artillery forward by selecting and dragging its hologram / placement projection.",
+    "Why It Works":
+      "Static artillery loses value if the battle moves beyond its range.",
+  },
+  {
+    "Push Tool": "Bomber correction",
+    "What To Do":
+      "After setting the bombing direction, adjust the bomber flight path if the target line changes.",
+    "Why It Works":
+      "You can still salvage a strike when the enemy moves or your first bombing direction is slightly wrong.",
+  },
+  {
+    "Push Tool": "Structure bombing",
+    "What To Do":
+      "Use heavy bombs and artillery bombardment to remove key enemy buildings.",
+    "Why It Works":
+      "Enemy buildings do not need to be fought forever once they are destroyed.",
+  },
+  {
+    "Push Tool": "Side switching",
+    "What To Do":
+      "Move the mass group and production rally from one side to another as the front opens.",
+    "Why It Works":
+      "Sweeping pressure prevents units from clogging one lane and lets you collapse the base from multiple angles.",
+  },
+];
+
+export const threatColumns = [
+  { key: "Threat", label: "Threat" },
+  { key: "Why It Is Dangerous", label: "Why It Is Dangerous" },
+  { key: "Best Response", label: "Best Response" },
+];
+
+export const threatRows = [
+  {
+    Threat: "Wasps / air attacks",
+    "Why It Is Dangerous":
+      "They can hit exposed units and punish a base with weak vision or anti-air.",
+    "Best Response":
+      "Keep infantry in front, deploy interceptors often, and add AK30 / BRT coverage where needed.",
+  },
+  {
+    Threat: "Bandit speed",
+    "Why It Is Dangerous":
+      "Fast light units can punish loose flanks before the turtle is ready.",
+    "Best Response":
+      "Use stronger interceptor coverage, extra AK30s, garrisons, and side turrets.",
+  },
+  {
+    Threat: "Mutant close-range pressure",
+    "Why It Is Dangerous":
+      "Heavy units, worms, and flies can force the battle into your defensive line.",
+    "Best Response":
+      "Use thicker infantry screens, trenches, flame turrets, Dreadnoughts, and repair coverage.",
+  },
+  {
+    Threat: "Enemy artillery",
+    "Why It Is Dangerous":
+      "It can outrange or punish static positions if ignored.",
+    "Best Response":
+      "Use tanks, bombs, or mass pressure to remove artillery before it grinds your front down.",
+  },
+  {
+    Threat: "Heavy waves around the timer",
+    "Why It Is Dangerous":
+      "Reinforcement waves can arrive while you are distracted by economy.",
+    "Best Response":
+      "Watch the side countdown, keep infantry cycling, and prepare heavy bombs for the largest pushes.",
+  },
+  {
+    Threat: "Sneaky flank units",
+    "Why It Is Dangerous":
+      "A single unit can slip through and damage economy while you are managing the main attack.",
+    "Best Response":
+      "Use interceptors, spare turrets, and occasional base scans to catch them early.",
+  },
+  {
+    Threat: "Storms",
+    "Why It Is Dangerous":
+      "Storms deal chip damage and can cause cascading building destruction if power plants are packed too tightly.",
+    "Best Response":
+      "Repair, spread critical power when possible, and avoid massive explosive clusters when you can.",
+  },
+  {
+    Threat: "Power collapse",
+    "Why It Is Dangerous":
+      "Fabricators, defenses, production, and upgrades all depend on power.",
+    "Best Response":
+      "Build many power plants, upgrade them through Foundries, and pause production if infrastructure falls behind.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Fails", label: "Why It Fails" },
+  { key: "Better Habit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Choosing a deployment zone only for resources",
+    "Why It Fails":
+      "You may get surrounded or attacked from too many angles.",
+    "Better Habit":
+      "Pick a zone that funnels enemy pathing into your main defense.",
+  },
+  {
+    Mistake: "Using the same plan into both factions",
+    "Why It Fails":
+      "Bandits and Mutants pressure different weaknesses.",
+    "Better Habit":
+      "Use more AK30 / interceptor coverage into Bandits and a stronger flame / melee stop line into Mutants.",
+  },
+  {
+    Mistake: "Not getting early vision",
+    "Why It Fails":
+      "Long-range units and artillery cannot help if they cannot see targets.",
+    "Better Habit":
+      "Use interceptors, garrisons, and forward sight before waves arrive.",
+  },
+  {
+    Mistake: "Letting harvesters idle at storage cap",
+    "Why It Fails":
+      "Your economy looks active, but materials cannot be accepted.",
+    "Better Habit":
+      "Build silos early so the first economy keeps moving.",
+  },
+  {
+    Mistake: "Upgrading bunkers while under fire",
+    "Why It Fails":
+      "The upgrade transition can expose the bunker and reduce its effective HP.",
+    "Better Habit":
+      "Upgrade when the front has breathing room.",
+  },
+  {
+    Mistake: "Ignoring infantry screens",
+    "Why It Fails":
+      "Wasps and enemy units can target heavy assets directly.",
+    "Better Habit":
+      "Keep cheap infantry in front of Dreadnoughts and turrets.",
+  },
+  {
+    Mistake: "Misreading Complector value",
+    "Why It Fails":
+      "Complector is not a barracks discount tool; its important role is free Brute output.",
+    "Better Habit":
+      "Use Complectors as macro buildings for free infantry and connect power when you want faster Brute production.",
+  },
+  {
+    Mistake: "Building fabricators without power",
+    "Why It Fails":
+      "The secondary economy is strong, but it can crash your power balance.",
+    "Better Habit":
+      "Pair every fabricator wave with serious power plant and upgrade planning.",
+  },
+  {
+    Mistake: "Adding production before cap",
+    "Why It Fails":
+      "Factories cannot matter if the army is already capped.",
+    "Better Habit":
+      "Mass build warehouses and supply depots before the full production phase.",
+  },
+  {
+    Mistake: "Leaving the MCV too far back forever",
+    "Why It Fails":
+      "The enemy base replenishes faster than a distant production line can pressure it.",
+    "Better Habit":
+      "Bring the MCV forward once the first mass wave is safe.",
+  },
+  {
+    Mistake: "Forgetting to pause production when broke",
+    "Why It Fails":
+      "Every factory drains the bank while infrastructure still needs material.",
+    "Better Habit":
+      "Pause the production group briefly, build power / warehouses / forward structures, then resume.",
+  },
+  {
+    Mistake: "Pushing one clogged lane forever",
+    "Why It Fails":
+      "Huge armies can jam and stop dealing damage.",
+    "Better Habit":
+      "Switch rally points and attack sides when the current lane becomes blocked.",
+  },
+];
+
+export const demoLimitColumns = [
+  { key: "Demo Limit", label: "Demo Limit" },
+  { key: "Safe To Say", label: "Safe To Say" },
+  { key: "Avoid Overclaiming", label: "Avoid Overclaiming" },
+];
+
+export const demoLimitRows = [
+  {
+    "Demo Limit": "Hardest difficulty route",
+    "Safe To Say":
+      "The turtle economy strategy can beat the hardest demo setting when the base funnels waves and scales fabricators.",
+    "Avoid Overclaiming":
+      "Do not claim this is the only viable final-release strategy.",
+  },
+  {
+    "Demo Limit": "Faction response",
+    "Safe To Say":
+      "Bandits and Mutants create different defensive priorities in the demo.",
+    "Avoid Overclaiming":
+      "Do not claim every final-release faction or campaign variant is solved.",
+  },
+  {
+    "Demo Limit": "Macro buildings",
+    "Safe To Say":
+      "Foundry, Arsenal, and Complector have distinct roles in the demo macro layer.",
+    "Avoid Overclaiming":
+      "Do not preserve outdated descriptions if the developer updates their functions.",
+  },
+  {
+    "Demo Limit": "Unit pathing",
+    "Safe To Say":
+      "Large armies can jam, stall, or get sidetracked.",
+    "Avoid Overclaiming":
+      "Do not promise that mass pressure is completely hands-free.",
+  },
+  {
+    "Demo Limit": "War factory linking",
+    "Safe To Say":
+      "Connected war factories are useful as a late-game production layout habit.",
+    "Avoid Overclaiming":
+      "Do not state an exact speed formula unless you have tested the current build directly.",
+  },
+  {
+    "Demo Limit": "Full release relevance",
+    "Safe To Say":
+      "Deployment choice, economy scaling, power planning, upgrades, and forward MCV pressure should remain useful fundamentals.",
+    "Avoid Overclaiming":
+      "Do not write final campaign routes from the demo alone.",
+  },
+];
+
+export const wishlistColumns = [
+  { key: "Wishlist If You Like", label: "Wishlist If You Like" },
+  { key: "Why Dust Front Fits", label: "Why Dust Front Fits" },
+];
+
+export const wishlistRows = [
+  {
+    "Wishlist If You Like": "Large-scale RTS battles",
+    "Why Dust Front Fits":
+      "The demo can reach enormous unit counts, layered fronts, and huge enemy bases.",
+  },
+  {
+    "Wishlist If You Like": "Turtle into overwhelming push",
+    "Why Dust Front Fits":
+      "The hardest strategy is about surviving waves, building a secondary economy, then crushing the map.",
+  },
+  {
+    "Wishlist If You Like": "Faction-specific defense planning",
+    "Why Dust Front Fits":
+      "Bandits and Mutants ask for different answers instead of one universal turret pattern.",
+  },
+  {
+    "Wishlist If You Like": "Base-building optimization",
+    "Why Dust Front Fits":
+      "Power, silos, fabricators, Foundries, Arsenals, Complectors, warehouses, and production layouts all matter.",
+  },
+  {
+    "Wishlist If You Like": "Minimal micro with big macro decisions",
+    "Why Dust Front Fits":
+      "Large production waves can work if your economy, rally points, and front-line construction are strong enough.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The strongest **Dust Front RTS demo** strategy is to pick a deployment zone that funnels enemy waves into one main defensive lane, survive behind layered defenses, then scale into material fabricators, Foundries, Arsenals, Complectors, warehouses, and mass production.
+
+The important correction is that **Complector produces free Brutes**, so treat it as a macro infantry engine, not a barracks-cost trick. Also adjust your defense by faction: **Bandits need more AK30 / interceptor coverage**, while **Mutants need a thicker close-range flame and blocker line**.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026. This Dust Front RTS demo guide covers hardest difficulty deployment zones, Bandit and Mutant faction responses, opening build order, early vision, interceptors, infantry screens, trenches, cranes, repairs, silos, material fabricators, Foundries, Arsenals, Complectors, free Brutes, warehouses, power management, screen select limiter, phantom placement repositioning, bomber flight correction, connected war factories, mass production, MCV forward pushes, artillery relocation, and common mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/dust-front-rts/dust-front-rts-deployment-zone-four.webp"
+    alt="Dust Front RTS deployment zone selection showing a start that funnels enemy paths"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The deployment zone matters because the whole strategy depends on funneling most enemy pressure into one prepared front.
+  </figcaption>
+</figure>
+
+<h2 id="dust-front-rts-demo-guide">
+  Dust Front RTS demo guide
+</h2>
+
+This **Dust Front RTS demo guide** is for players trying to beat the hardest difficulty without relying on perfect micro. The strategy is a classic turtle-to-snowball route: choose the right deployment zone, build a compact base, hold the first waves, stack economy, then overwhelm the enemy with constant production.
+
+The useful mindset is simple: **do not chase the enemy early**. Let the enemy walk into your kill zone while your base turns into an industrial machine.
+
+<GuideTable
+  caption="Dust Front RTS hardest difficulty strategy overview."
+  columns={strategyOverviewColumns}
+  rows={strategyOverviewRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="controls-and-qol">
+  Controls and QoL settings
+</h2>
+
+Dust Front has several small quality-of-life controls that matter on hardest difficulty. Spacebar pause is the obvious one, but screen select limiter, phantom placement repositioning, and bomber flight correction are also worth learning early.
+
+<GuideTable
+  caption="Useful Dust Front RTS controls and QoL features."
+  columns={controlColumns}
+  rows={controlRows}
+/>
+
+<h2 id="bandit-vs-mutant-faction">
+  Bandit vs Mutant faction differences
+</h2>
+
+Do not use the same first defense into every enemy. The demo has two enemy choices, and the correct defense changes depending on what pressure you are trying to stop.
+
+<GuideTable
+  caption="How to adjust against Bandits and Mutants."
+  columns={factionColumns}
+  rows={factionRows}
+/>
+
+
+
+<h2 id="best-deployment-zone">
+  Best deployment zone
+</h2>
+
+Do not pick a deployment zone only because it has resources nearby. The best zone is the one that makes the enemy path toward one main front.
+
+<GuideTable
+  caption="How to choose the best deployment zone."
+  columns={deploymentColumns}
+  rows={deploymentRows}
+/>
+
+The ideal start has three things: enough resources to open cleanly, civilian buildings you can use for early defense, and a pathing shape that pulls multiple enemy bases into the same defensive pocket.
+
+<h2 id="opening-build-order">
+  Opening build order
+</h2>
+
+The first build order is about stabilizing vision and economy before the first waves become too large.
+
+<GuideTable
+  caption="Opening build order for hardest difficulty."
+  columns={openingColumns}
+  rows={openingRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dust-front-rts/dust-front-rts-opening-building-garrison.webp"
+    alt="Dust Front RTS opening with infantry garrisoned in buildings near the first defensive front"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Early vision matters more than early aggression. Use interceptors, troop drops, and nearby buildings to see waves before they reach the base.
+  </figcaption>
+</figure>
+
+<h2 id="frontline-defense-layering">
+  Frontline defense layering
+</h2>
+
+The front line works because each layer protects the next. Infantry protects heavy defenders. Cranes repair key structures. Trenches slow vehicles. Interceptors and AK30s help with air and flank pressure. Flame turrets become more important when enemies bunch up or force close-range fighting.
+
+<GuideTable
+  caption="Best early defense layers."
+  columns={defenseColumns}
+  rows={defenseRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dust-front-rts/dust-front-rts-frontline-funnel-defenses.webp"
+    alt="Dust Front RTS frontline funnel using infantry trenches turrets and heavy defenders"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A good front does not need to cover the whole map. It needs to punish the path the enemy is actually using.
+  </figcaption>
+</figure>
+
+<h2 id="economy-and-material-fabricators">
+  Economy and material fabricators
+</h2>
+
+Your first economy comes from processors and harvesters. Your winning economy comes from material fabricators, storage, power, and enough cap to spend what you make.
+
+<GuideTable
+  caption="How the Dust Front economy scales."
+  columns={economyColumns}
+  rows={economyRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dust-front-rts/dust-front-rts-material-fabricators-economy.webp"
+    alt="Dust Front RTS material fabricators and power plants forming a secondary economy"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Material fabricators are the backbone of the turtle strategy, but they require serious power and storage planning.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="foundry-arsenal-and-complector">
+  Foundry, Arsenal, and Complector
+</h2>
+
+Foundry, Arsenal, and Complector are the macro layer that turns a stable defense into a scaling army. The key correction is that **Complector produces free Brutes**. Do not describe it as only a barracks discount tool.
+
+<GuideTable
+  caption="Macro buildings and what they actually do."
+  columns={macroColumns}
+  rows={macroRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dust-front-rts/dust-front-rts-foundry-arsenal-upgrades.webp"
+    alt="Dust Front RTS Foundry Arsenal and macro buildings used for durability damage and production scaling"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Macro buildings matter before mass production, because the army you build after them is much easier to scale.
+  </figcaption>
+</figure>
+
+<h2 id="upgrades-and-building-connections">
+  Upgrades and building connections
+</h2>
+
+Once the front is stable, your next job is not only “more units.” You need upgrades, power, connected production, and enough cap to make those units matter.
+
+<GuideTable
+  caption="Important upgrades and scaling checks."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+<h2 id="full-build-order-route">
+  Full build order route
+</h2>
+
+Use this route as a flexible order, not a rigid script. The exact map, enemy faction, and incoming waves can change, but the strategic order stays the same.
+
+<GuideTable
+  caption="Hardest difficulty build order route."
+  columns={buildOrderColumns}
+  rows={buildOrderRows}
+/>
+
+<h2 id="mass-production-setup">
+  Mass production setup
+</h2>
+
+Once the front is stable, the game changes. Your job is no longer to win every fight manually. Your job is to create a production system that replaces losses faster than the enemy can recover.
+
+<GuideTable
+  caption="How to set up mass production."
+  columns={productionColumns}
+  rows={productionRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dust-front-rts/dust-front-rts-mass-production-cycle.webp"
+    alt="Dust Front RTS production buildings cycling units for a mass production push"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The mass production stage needs production buildings, warehouses, power, upgrades, and rally points working together.
+  </figcaption>
+</figure>
+
+
+<h2 id="pushing-into-enemy-territory">
+  Pushing into enemy territory
+</h2>
+
+The push begins when you can replace losses quickly. At that point, your army becomes a moving production wave, and your job is to keep the wave supplied, redirected, and supported from the front.
+
+<GuideTable
+  caption="How to push into the enemy base."
+  columns={pushColumns}
+  rows={pushRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/dust-front-rts/dust-front-rts-mcv-forward-push.webp"
+    alt="Dust Front RTS MCV moving forward to build defenses and warehouses near the enemy base"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The MCV should move forward once the first waves can protect it. Forward building keeps the attack from stalling.
+  </figcaption>
+</figure>
+
+<h2 id="threats-to-watch">
+  Threats to watch
+</h2>
+
+The strategy is strong, but it is not automatic. The hardest difficulty still punishes blind spots, faction mismatch, power collapse, pathing jams, and poorly timed upgrades.
+
+<GuideTable
+  caption="Dangerous threats during the turtle strategy."
+  columns={threatColumns}
+  rows={threatRows}
+/>
+
+<h2 id="final-assault">
+  Final assault
+</h2>
+
+The final assault should feel less like one perfect attack and more like a moving industrial front. Keep production cycling, keep warehouses and power ahead of demand, correct bomber paths when the fight shifts, and switch attack sides when one lane becomes clogged.
+
+<figure className="my-8">
+  <Image
+    src="/images/dust-front-rts/dust-front-rts-final-assault-2000-cap.webp"
+    alt="Dust Front RTS final assault with a massive army pushing toward a 2000 unit cap"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the cap and economy are high enough, the final attack becomes overwhelming pressure rather than precise micro.
+  </figcaption>
+</figure>
+
+<h2 id="common-mistakes">
+  Common mistakes
+</h2>
+
+Most failed hardest difficulty runs do not fail because the player lacks one secret unit. They fail because the base never becomes a machine.
+
+<GuideTable
+  caption="Common Dust Front RTS mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="what-is-limited-in-the-demo">
+  What is limited in the demo
+</h2>
+
+This route is strong for the demo, but it should still be written carefully. Balance, caps, pathing, macro-building functions, and production interactions can change later.
+
+<GuideTable
+  caption="Dust Front RTS demo limits."
+  columns={demoLimitColumns}
+  rows={demoLimitRows}
+/>
+
+<h2 id="should-you-wishlist-dust-front-rts">
+  Should you wishlist Dust Front RTS?
+</h2>
+
+You should wishlist **Dust Front RTS** if you want a strategy demo built around large battles, faction-specific defense planning, base scaling, industrial production, overwhelming enemy pressure, and macro decisions that matter more than click-perfect unit control.
+
+<GuideTable
+  caption="Who should wishlist Dust Front RTS."
+  columns={wishlistColumns}
+  rows={wishlistRows}
+/>
+
+You may want to skip it if you only enjoy small tactical skirmishes, low-unit-count RTS combat, or campaigns where the best answer is always tight micro. Dust Front is at its best when the whole map turns into a production war.
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+<div>
+  Dust Front RTS is a heavy macro demo, so the best next page depends on what kind of Steam Next Fest game you want after it.
+</div>
+
+<div className="my-6 space-y-5">
+  <section>
+    <h3 className="text-lg font-semibold">
+      Compare more Steam Next Fest demos
+    </h3>
+    <div>
+      Go back to the{" "}
+      <Link href="/steam-next-fest">Steam Next Fest Hub</Link> if you are still choosing which demos have enough mechanics, routes, and player questions to support useful guides.
+    </div>
+  </section>
+
+  <section>
+    <h3 className="text-lg font-semibold">
+      Try a slower systems-heavy demo
+    </h3>
+    <div>
+      Read the{" "}
+      <Link href="/iron-nest">Iron Nest Demo Guide</Link> if you want another methodical demo, but with map tools, shell choice, and manual artillery operation instead of RTS macro.
+    </div>
+  </section>
+
+  <section>
+    <h3 className="text-lg font-semibold">
+      Try a chaotic co-op demo
+    </h3>
+    <div>
+      Read the{" "}
+      <Link href="/bombanana">BOMBANANA Demo Guide</Link> if you want a shorter group demo about communication, roles, wires, D-pad inputs, numpad math, and switch panels.
+    </div>
+  </section>
+</div>
+
+<h2 id="faq">
+  Dust Front RTS demo FAQ
+</h2>
+
+### What is Dust Front RTS?
+
+**Dust Front RTS** is a large-scale real-time strategy demo about deployment choice, base building, resource processing, faction-specific defense, macro buildings, production scaling, and massive attacks against an aggressive AI.
+
+### How do you beat Dust Front RTS on hardest difficulty?
+
+Pick a deployment zone that funnels enemy waves, build a compact early base, use infantry screens and interceptors for the first waves, stabilize with cranes and layered defenses, then scale into material fabricators, Foundries, Arsenals, Complectors, warehouses, and mass production.
+
+### What is the best deployment zone?
+
+The best deployment zone is the one that gives reasonable resources while forcing most enemy pathing into one main defensive front. In the observed route, the fourth deployment zone worked well because enemy bases naturally funneled toward one side.
+
+### What is the difference between Bandits and Mutants?
+
+Bandits focus more on light, fast pressure, so you want more AK30s, interceptors, garrisons, and flank warning. Mutants bring heavier units, worms, flies, and close-range pressure, so you need a thicker front line with infantry, trenches, flame turrets, Dreadnoughts, and repairs.
+
+### What does the Complector do?
+
+The Complector is a macro building that produces free infantry called Brutes. Power plants connected to it can speed up Brute production, so it should be treated as part of your free-infantry macro engine.
+
+### Should I pause the game?
+
+Yes. Spacebar pause is very useful while learning. You can issue commands while paused, which makes repairs, building placement, control groups, and panic recovery much easier.
+
+### How do I select all same-type buildings across the map?
+
+Disable the screen select limiter. With the limiter off, double-clicking an object can select matching objects across the whole map instead of only what is visible on the screen.
+
+### How does phantom placement repositioning work?
+
+If you already marked a heavy-vehicle deployment phantom, select the phantom itself and move it. This lets you adjust deployment without dragging the camera back and rebuilding the placement from scratch.
+
+### Can I correct bomber flight paths?
+
+Yes. After setting the bombing direction, you can adjust the bomber flight path post-targeting. Use this when the battle shifts or your first bombing line is not ideal.
+
+### Why is vision so important early?
+
+MLRS, artillery, and long-range fire need vision to hit incoming units. Use interceptors and building garrisons early so the enemy is seen before it reaches your defenses.
+
+### Why do I need infantry in front of Dreadnoughts?
+
+Infantry can absorb target priority, help against wasps, and protect heavier defenders from being focused too early. A thin infantry screen makes the whole front more stable.
+
+### Are trenches worth building?
+
+Yes. Trenches slow infantry and help stop vehicles from driving directly into your defenses. They are especially useful when enemy pathing is already funneled into one lane.
+
+### What do silos do?
+
+Silos increase material storage. Without storage, harvesters may sit idle because materials are not wasted but cannot be accepted.
+
+### What do material fabricators do?
+
+Material fabricators create a secondary economy and increase unit build limit. They are the backbone of the turtle strategy, but they require serious power planning.
+
+### What do Foundries do?
+
+Foundries upgrade vehicle toughness and support the durability side of your macro scaling. Build enough before mass production so later units and structures benefit more.
+
+### What do Arsenals do?
+
+Arsenals upgrade unit damage. Build them before mass production so later waves hit harder.
+
+### Should I build war factories next to each other?
+
+Yes, once you enter the mass-production stage, place new war factories close together so they can visibly connect. Treat connected factories as a production-speed layout bonus: useful when you are adding more factories anyway, but not important enough to tear down a working base or delay your first push.
+
+The practical rule is simple: **early game, survive first; mid and late game, cluster new factories when you scale production.**
+
+### Should I build large warehouses?
+
+The observed route prefers normal warehouses because they increase cap without costing parts, while large warehouses cost parts. For this strategy, mass normal warehouses are usually cleaner.
+
+### When should I move the MCV forward?
+
+Move the MCV forward after your mass wave can protect it. The MCV lets you build closer to the enemy, but losing it can ruin the push.
+
+### Why do my units get stuck?
+
+Huge armies can jam in narrow paths or chase bad targets. Switch rally points, pressure another side, and avoid forcing every unit through one clogged lane.
+
+### Is Dust Front RTS good for Steam Next Fest?
+
+Yes, if you like large-scale RTS battles, faction-specific defenses, base-building optimization, macro snowballing, industrial warfare, and overwhelming final assaults.

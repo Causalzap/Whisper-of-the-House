@@ -12,6 +12,53 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Iron Nest =====
+{
+  href: "/iron-nest",
+  game: "Iron Nest",
+  title: "Demo Guide, Map Tools, Shells & Aiming",
+  description:
+    "Start here for Iron Nest teleprinter orders, map grids, bearing, range, elevation, shell choice, powder charges, Star shell corrections, and Challenge Mode.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+},
+
+// ===== Dust Front RTS =====
+{
+  href: "/dust-front-rts",
+  game: "Dust Front RTS",
+  title: "Hardest Difficulty Strategy Guide",
+  description:
+    "Beat the Dust Front RTS demo with deployment zones, Bandit and Mutant counters, early vision, fabricators, Complector Brutes, warehouses, and MCV pushes.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+},
+
+// ===== BOMBANANA =====
+{
+  href: "/bombanana",
+  game: "BOMBANANA",
+  title: "Demo Guide, Roles, Modules & Callouts",
+  description:
+    "Defuse BOMBANANA with bomb handler and manual reader roles, wire LEDs, D-pad values, numpad math, switch panels, odd/even logic, and co-op mistakes.",
+  tagClass: "text-yellow-500",
+  hoverBorderClass: "hover:border-yellow-300",
+  hoverTitleClass: "group-hover:text-yellow-700",
+},
+
+// ===== Casualties Unknown =====
+{
+  href: "/casualties-unknown",
+  game: "Casualties Unknown",
+  title: "Demo Guide, Canteen, Crafting & Survival",
+  description:
+    "Survive Casualties Unknown with the canteen route, glowplants, bio-chem fluid, foliage bag, dirty water, lockpicking, body conditions, and early mistakes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
 // ===== The Adventures of Elliot =====
 {
   href: "/the-adventures-of-elliot",

@@ -1,0 +1,1280 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const demoBasicsColumns = [
+  { key: "Demo Part", label: "Demo Part" },
+  { key: "What It Teaches", label: "What It Teaches" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const demoBasicsRows = [
+  {
+    "Demo Part": "Calibration Fire",
+    "What It Teaches":
+      "Direct coordinates, map measurement, calculator use, shell loading, turret bearing, gun elevation, and the final fire-control check.",
+    "Why It Matters":
+      "This is the cleanest mission for learning how Iron Nest turns a map point into a fired shot.",
+  },
+  {
+    "Demo Part": "Fire & Light",
+    "What It Teaches":
+      "Spotter triangulation, H-shell target destruction, Star shell illumination, and correction-based follow-up shots.",
+    "Why It Matters":
+      "This is where the demo stops being simple coordinate work and starts testing your map logic.",
+  },
+  {
+    "Demo Part": "Liberation",
+    "What It Teaches":
+      "Repositioned Iron Nest coordinates, requisition, infantry targets, shell procurement, and left/right gun awareness.",
+    "Why It Matters":
+      "This mission adds logistics and repeat firing, so a clean workflow matters more than memorizing one tutorial shot.",
+  },
+  {
+    "Demo Part": "Challenge Mode",
+    "What It Teaches":
+      "Faster target solving, high-score pressure, shell choice, map cleanup, and support use.",
+    "Why It Matters":
+      "Challenge Mode turns the same systems into a speed and efficiency test.",
+  },
+];
+
+export const firingLoopColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "Goal", label: "Goal" },
+  { key: "What Can Go Wrong", label: "What Can Go Wrong" },
+];
+
+export const firingLoopRows = [
+  {
+    Phase: "Solve the shot",
+    Goal:
+      "Read the teleprinter, plot the target or spotters, measure from the correct origin, and calculate elevation.",
+    "What Can Go Wrong":
+      "You solve from the wrong position, keep old map lines, or copy a spotter bearing as if it were your turret bearing.",
+  },
+  {
+    Phase: "Prepare the gun",
+    Goal:
+      "Choose the shell, prepare powder charges, set turret bearing, and set gun elevation.",
+    "What Can Go Wrong":
+      "The shell, charge count, bearing, or elevation belongs to an older solution.",
+  },
+  {
+    Phase: "Commit the shot",
+    Goal:
+      "Use fire control, arm the correct gun, fire, then read the result or correction report.",
+    "What Can Go Wrong":
+      "You fire the wrong side, skip a confirmation, or ignore a follow-up report that changes the next shot.",
+  },
+];
+
+export const stationColumns = [
+  { key: "Station", label: "Station" },
+  { key: "What It Does", label: "What It Does" },
+  { key: "Beginner Use", label: "Beginner Use" },
+];
+
+export const stationRows = [
+  {
+    Station: "Teleprinter",
+    "What It Does":
+      "Receives orders, target coordinates, shell restrictions, spotter reports, and follow-up instructions.",
+    "Beginner Use":
+      "Read this before touching ammo. It tells you what kind of problem you are solving.",
+  },
+  {
+    Station: "Map table",
+    "What It Does":
+      "Lets you plot coordinates, use markers, draw measurement lines, read icons, and build the firing solution.",
+    "Beginner Use":
+      "This is where most beginner mistakes happen, so keep active lines and temporary marks separated.",
+  },
+  {
+    Station: "Ballistic calculator",
+    "What It Does":
+      "Converts measured range and powder-charge choice into gun elevation.",
+    "Beginner Use":
+      "Use it after the final target point is chosen, not while you are still guessing on the map.",
+  },
+  {
+    Station: "Fire control",
+    "What It Does":
+      "Shows the final firing state, arms the selected gun, and fires.",
+    "Beginner Use":
+      "Treat it as the final safety check, not the start of the solving process.",
+  },
+  {
+    Station: "Requisition console",
+    "What It Does":
+      "Lets you procure shells, powder charges, and support options when the mission allows it.",
+    "Beginner Use":
+      "Buy for the current target problem, not because a shell sounds stronger.",
+  },
+];
+
+export const teleprinterColumns = [
+  { key: "Teleprinter Info", label: "Teleprinter Info" },
+  { key: "What To Look For", label: "What To Look For" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const teleprinterRows = [
+  {
+    "Teleprinter Info": "Mission objective",
+    "What To Look For":
+      "Calibration, destruction, illumination, infantry clearing, or follow-up correction.",
+    "How To Use It":
+      "Decide whether you are solving a direct shot, a triangulation problem, a correction chain, or a logistics task.",
+  },
+  {
+    "Teleprinter Info": "Iron Nest coordinate",
+    "What To Look For":
+      "Your current firing position, which can change later in the demo.",
+    "How To Use It":
+      "Mark it first. The final firing line should start from this point.",
+  },
+  {
+    "Teleprinter Info": "Target coordinate",
+    "What To Look For":
+      "A direct grid coordinate or an approximate target area.",
+    "How To Use It":
+      "Plot it on the map, then measure final bearing and range from Iron Nest.",
+  },
+  {
+    "Teleprinter Info": "Spotter reports",
+    "What To Look For":
+      "Spotter coordinates and bearings toward a target.",
+    "How To Use It":
+      "Draw each bearing from the spotter position, find the intersection, then measure from Iron Nest.",
+  },
+  {
+    "Teleprinter Info": "Shell restriction",
+    "What To Look For":
+      "H only, Star shell only, or any other ammunition instruction.",
+    "How To Use It":
+      "Choose ammo after reading this line, not before.",
+  },
+  {
+    "Teleprinter Info": "Follow-up report",
+    "What To Look For":
+      "Recon photos, new targets, correction arrows, or updated battlefield information.",
+    "How To Use It":
+      "Treat the next message as a new solve. Do not blindly reuse the previous shot.",
+  },
+];
+
+export const gridColumns = [
+  { key: "Grid Element", label: "Grid Element" },
+  { key: "How To Read It", label: "How To Read It" },
+  { key: "Beginner Mistake", label: "Beginner Mistake" },
+];
+
+export const gridRows = [
+  {
+    "Grid Element": "Large grid square",
+    "How To Read It":
+      "Use the letter and number grid to find the broad area first.",
+    "Beginner Mistake":
+      "Stopping at the broad square and firing without refining the exact point.",
+  },
+  {
+    "Grid Element": "Subgrid position",
+    "How To Read It":
+      "Use the smaller internal position to place the marker more precisely inside the square.",
+    "Beginner Mistake":
+      "Reading the right large square but placing the target in the wrong internal position.",
+  },
+  {
+    "Grid Element": "Iron Nest marker",
+    "How To Read It":
+      "This is your firing origin for the final line.",
+    "Beginner Mistake":
+      "Using an old Iron Nest position after the turret has been repositioned.",
+  },
+  {
+    "Grid Element": "Target marker",
+    "How To Read It":
+      "This is the point you intend to hit, illuminate, or use as the center of an area effect.",
+    "Beginner Mistake":
+      "Leaving several possible target markers and measuring from the wrong one.",
+  },
+  {
+    "Grid Element": "Spotter marker",
+    "How To Read It":
+      "This is the origin for a spotter bearing line, not the firing origin.",
+    "Beginner Mistake":
+      "Drawing every bearing from Iron Nest even when the report belongs to a spotter.",
+  },
+];
+
+export const mapToolColumns = [
+  { key: "Map Tool", label: "Map Tool" },
+  { key: "Main Use", label: "Main Use" },
+  { key: "Best Beginner Habit", label: "Best Beginner Habit" },
+];
+
+export const mapToolRows = [
+  {
+    "Map Tool": "Red pencil",
+    "Main Use":
+      "Use it for the active firing solution, especially the final Iron Nest-to-target line.",
+    "Best Beginner Habit":
+      "Keep red clean. Delete wrong red measurements before calculating.",
+  },
+  {
+    "Map Tool": "Yellow pencil",
+    "Main Use":
+      "Use it for support work such as spotter bearings, correction lines, and temporary triangulation.",
+    "Best Beginner Habit":
+      "Use yellow to show how you found the target, not necessarily where the final shot goes.",
+  },
+  {
+    "Map Tool": "White pencil",
+    "Main Use":
+      "Use it for optional planning, secondary notes, or non-final references.",
+    "Best Beginner Habit":
+      "Reserve white for marks that should not be confused with the current shot.",
+  },
+  {
+    "Map Tool": "Drafting compass",
+    "Main Use":
+      "Helps with radius-based planning and area checks.",
+    "Best Beginner Habit":
+      "Use it when the question is coverage, not just point-to-point distance.",
+  },
+  {
+    "Map Tool": "Iris",
+    "Main Use":
+      "Previews shell effect or blast area around a chosen point.",
+    "Best Beginner Habit":
+      "Use it before area shots, infantry clusters, and any shot near friendly or civilian icons.",
+  },
+  {
+    "Map Tool": "Map Icon Key",
+    "Main Use":
+      "Explains battlefield symbols such as friendly, enemy, civilian, spotter, or objective icons.",
+    "Best Beginner Habit":
+      "Check unfamiliar icons before assuming a mark is safe to hit.",
+  },
+  {
+    "Map Tool": "Marker Icons",
+    "Main Use":
+      "Organize Iron Nest, targets, spotters, correction points, and guesses.",
+    "Best Beginner Habit":
+      "Use different markers for different jobs so your final measurement is not buried in clutter.",
+  },
+];
+
+export const irisColumns = [
+  { key: "Use Iris When", label: "Use Iris When" },
+  { key: "What To Check", label: "What To Check" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const irisRows = [
+  {
+    "Use Iris When": "Target groups are spread out",
+    "What To Check":
+      "Whether the shell effect covers the whole group or only the center.",
+    "Why It Matters":
+      "A good center hit can still miss part of the objective if the effect radius is too small.",
+  },
+  {
+    "Use Iris When": "A special shell has area behavior",
+    "What To Check":
+      "Whether the chosen shell's coverage fits the target shape.",
+    "Why It Matters":
+      "The best aim point for an area shell is often between targets, not on the first visible icon.",
+  },
+  {
+    "Use Iris When": "Friendly or civilian icons are nearby",
+    "What To Check":
+      "Whether the effect zone overlaps something you should not hit.",
+    "Why It Matters":
+      "The map is not only for accuracy. It also tells you what else is near the blast.",
+  },
+  {
+    "Use Iris When": "Challenge Mode rewards speed",
+    "What To Check":
+      "Whether one area shot can solve more than one target.",
+    "Why It Matters":
+      "Fast mode rewards efficient coverage, not just perfect single-point aim.",
+  },
+];
+
+export const calibrationColumns = [
+  { key: "Calibration Fire Step", label: "Calibration Fire Step" },
+  { key: "Specific Action", label: "Specific Action" },
+  { key: "Why It Works", label: "Why It Works" },
+];
+
+export const calibrationRows = [
+  {
+    "Calibration Fire Step": "Mark Iron Nest",
+    "Specific Action":
+      "Use the coordinate given by command as your firing position.",
+    "Why It Works":
+      "All final bearing and range work must start from the gun position.",
+  },
+  {
+    "Calibration Fire Step": "Mark the target",
+    "Specific Action":
+      "Place the target marker on the coordinate supplied by the order.",
+    "Why It Works":
+      "The first mission is a direct coordinate shot, so no triangulation is needed.",
+  },
+  {
+    "Calibration Fire Step": "Measure the line",
+    "Specific Action":
+      "Draw from Iron Nest to the target and copy the bearing and range.",
+    "Why It Works":
+      "Bearing is used for turret rotation. Range goes to the calculator.",
+  },
+  {
+    "Calibration Fire Step": "Calculate elevation",
+    "Specific Action":
+      "Input the measured range, choose powder charges, and record the elevation result.",
+    "Why It Works":
+      "Elevation is calculated from range and charge count, not guessed from the map.",
+  },
+  {
+    "Calibration Fire Step": "Prepare and lay the gun",
+    "Specific Action":
+      "Load the required shell, prepare the charges, rotate to bearing, and elevate to the calculated angle.",
+    "Why It Works":
+      "This turns the map-and-calculator solution into physical gun settings.",
+  },
+  {
+    "Calibration Fire Step": "Fire and read the result",
+    "Specific Action":
+      "Use fire control, arm the selected gun, fire, and wait for the report.",
+    "Why It Works":
+      "The shot is not finished until the game confirms the result or gives a correction.",
+  },
+];
+
+export const shellColumns = [
+  { key: "Shell Type", label: "Shell Type" },
+  { key: "Demo Status", label: "Demo Status" },
+  { key: "What It Is For", label: "What It Is For" },
+  { key: "Beginner Note", label: "Beginner Note" },
+];
+
+export const shellRows = [
+  {
+    "Shell Type": "AP",
+    "Demo Status": "Visible / context-dependent",
+    "What It Is For":
+      "Armor-piercing fire against harder or armored targets.",
+    "Beginner Note":
+      "Do not use AP as a default area-clearing shell.",
+  },
+  {
+    "Shell Type": "HE",
+    "Demo Status": "Visible / context-dependent",
+    "What It Is For":
+      "High-explosive fire for general destructive use.",
+    "Beginner Note":
+      "Use HE-style logic only when the mission asks for destructive effect.",
+  },
+  {
+    "Shell Type": "HCHE",
+    "Demo Status": "Visible / context-dependent",
+    "What It Is For":
+      "High-capacity explosive effect for clustered or larger-area targets.",
+    "Beginner Note":
+      "Check coverage before assuming the center point solves the whole target group.",
+  },
+  {
+    "Shell Type": "H",
+    "Demo Status": "Confirmed used in story demo",
+    "What It Is For":
+      "Early destructive missions, including calibration and hostile targets.",
+    "Beginner Note":
+      "This is the easiest shell to learn, but it is not correct for every objective.",
+  },
+  {
+    "Shell Type": "STAR",
+    "Demo Status": "Confirmed used in story demo",
+    "What It Is For":
+      "Illumination, scouting, and correction-based target work.",
+    "Beginner Note":
+      "Use it when the mission asks for Star shell or illumination behavior.",
+  },
+  {
+    "Shell Type": "SMOK",
+    "Demo Status": "Visible / demo-limited",
+    "What It Is For":
+      "Smoke, concealment, or obstruction-style effects depending on mission rules.",
+    "Beginner Note":
+      "Mark it as visible, but do not overclaim full behavior from limited demo use.",
+  },
+  {
+    "Shell Type": "PHOS",
+    "Demo Status": "Visible / demo-limited",
+    "What It Is For":
+      "Likely incendiary or phosphorous-style area effect.",
+    "Beginner Note":
+      "Mention it as a shell category, not as a fully solved damage system.",
+  },
+  {
+    "Shell Type": "TEAR",
+    "Demo Status": "Visible / demo-limited",
+    "What It Is For":
+      "Likely gas or suppression-style effect depending on mission rules.",
+    "Beginner Note":
+      "Treat it as specialized until more mission examples confirm exact behavior.",
+  },
+  {
+    "Shell Type": "Powder charges",
+    "Demo Status": "Confirmed core resource",
+    "What It Is For":
+      "Changes the calculator solution and whether the shot can reach.",
+    "Beginner Note":
+      "Use the calculator output as your source of truth.",
+  },
+];
+
+export const bearingColumns = [
+  { key: "Number", label: "Number" },
+  { key: "Where It Comes From", label: "Where It Comes From" },
+  { key: "Where It Goes", label: "Where It Goes" },
+];
+
+export const bearingRows = [
+  {
+    Number: "Bearing",
+    "Where It Comes From":
+      "Measured on the map from Iron Nest to the final target point.",
+    "Where It Goes":
+      "Turret rotation.",
+  },
+  {
+    Number: "Range",
+    "Where It Comes From":
+      "Measured on the map from Iron Nest to the final target point.",
+    "Where It Goes":
+      "Ballistic calculator.",
+  },
+  {
+    Number: "Powder charges",
+    "Where It Comes From":
+      "Chosen in the calculator as part of the firing solution.",
+    "Where It Goes":
+      "Loader and powder charge system.",
+  },
+  {
+    Number: "Elevation",
+    "Where It Comes From":
+      "Calculated after range and powder charge count are selected.",
+    "Where It Goes":
+      "Gun elevation controls.",
+  },
+];
+
+export const triangulationColumns = [
+  { key: "Triangulation Step", label: "Triangulation Step" },
+  { key: "How It Works", label: "How It Works" },
+  { key: "Common Error", label: "Common Error" },
+];
+
+export const triangulationRows = [
+  {
+    "Triangulation Step": "Place each spotter",
+    "How It Works":
+      "Use the field report coordinates to mark each spotter on the grid.",
+    "Common Error":
+      "Drawing spotter bearings from Iron Nest instead of from the spotter.",
+  },
+  {
+    "Triangulation Step": "Draw reported bearings",
+    "How It Works":
+      "From each spotter, draw a long line at the bearing reported by that spotter.",
+    "Common Error":
+      "Drawing short lines that never clearly cross.",
+  },
+  {
+    "Triangulation Step": "Find the intersection",
+    "How It Works":
+      "The target is near the crossing point of the spotter bearing lines.",
+    "Common Error":
+      "Aiming at one bearing line instead of the intersection.",
+  },
+  {
+    "Triangulation Step": "Measure from Iron Nest",
+    "How It Works":
+      "After the target point is found, draw the final firing line from Iron Nest to that point.",
+    "Common Error":
+      "Using the spotter-to-target distance as if it were the gun-to-target distance.",
+  },
+];
+
+export const correctionColumns = [
+  { key: "Correction Element", label: "Correction Element" },
+  { key: "Meaning", label: "Meaning" },
+  { key: "How To Use It", label: "How To Use It" },
+];
+
+export const correctionRows = [
+  {
+    "Correction Element": "Yellow distance number",
+    Meaning:
+      "Shows how far the desired point is from the shell impact point.",
+    "How To Use It":
+      "Move the next aim point by that distance instead of guessing.",
+  },
+  {
+    "Correction Element": "Yellow arrow",
+    Meaning:
+      "Shows the direction from the impact point toward the desired point.",
+    "How To Use It":
+      "Shift the next marker in that direction, then remeasure.",
+  },
+  {
+    "Correction Element": "New bearing",
+    Meaning:
+      "The corrected point can change turret rotation.",
+    "How To Use It":
+      "Dial the new bearing instead of leaving the previous shot's rotation.",
+  },
+  {
+    "Correction Element": "New range and elevation",
+    Meaning:
+      "The corrected point can change distance and calculator output.",
+    "How To Use It":
+      "Run the calculator again for the corrected point.",
+  },
+];
+
+export const liberationColumns = [
+  { key: "Liberation Issue", label: "Liberation Issue" },
+  { key: "What Changes", label: "What Changes" },
+  { key: "How To Handle It", label: "How To Handle It" },
+];
+
+export const liberationRows = [
+  {
+    "Liberation Issue": "Iron Nest is repositioned",
+    "What Changes":
+      "Your old firing origin may no longer be valid.",
+    "How To Handle It":
+      "Mark the new Iron Nest coordinate before drawing any final firing line.",
+  },
+  {
+    "Liberation Issue": "Requisition is authorized",
+    "What Changes":
+      "You can procure shells and powder charges for the operation.",
+    "How To Handle It":
+      "Read the target problem first, then buy the ammo and resources that match it.",
+  },
+  {
+    "Liberation Issue": "Infantry targets appear",
+    "What Changes":
+      "Area coverage and target grouping become more important.",
+    "How To Handle It":
+      "Use marker icons and Iris-style coverage thinking before choosing a center point.",
+  },
+  {
+    "Liberation Issue": "Right gun becomes relevant",
+    "What Changes":
+      "You may interact with a different loader, panel, or gun side than the one you used earlier.",
+    "How To Handle It":
+      "Check which side is loaded, which side is armed, and which side the control panel is showing.",
+  },
+  {
+    "Liberation Issue": "Repeated shots are needed",
+    "What Changes":
+      "The mission becomes a workflow problem, not a one-shot puzzle.",
+    "How To Handle It":
+      "After each report, clean the map and solve the next target as a new shot.",
+  },
+];
+
+export const requisitionColumns = [
+  { key: "Requisition Option", label: "Requisition Option" },
+  { key: "What It Helps With", label: "What It Helps With" },
+  { key: "Beginner Advice", label: "Beginner Advice" },
+];
+
+export const requisitionRows = [
+  {
+    "Requisition Option": "Destructive shells",
+    "What It Helps With":
+      "Hostile targets, infantry, and normal fire missions.",
+    "Beginner Advice":
+      "Buy based on the mission order, not on which shell sounds strongest.",
+  },
+  {
+    "Requisition Option": "Special shell types",
+    "What It Helps With":
+      "Illumination, area effects, smoke, chemical effects, or specialized mission rules.",
+    "Beginner Advice":
+      "Use the target type and map situation to decide whether special ammo is worth it.",
+  },
+  {
+    "Requisition Option": "Powder charges",
+    "What It Helps With":
+      "Longer shots, adjusted shots, and repeated corrections.",
+    "Beginner Advice":
+      "Keep enough charges for follow-up shots, especially when corrections are likely.",
+  },
+  {
+    "Requisition Option": "Reconnaissance support",
+    "What It Helps With":
+      "Revealing or confirming hidden targets and reducing blind guesses.",
+    "Beginner Advice":
+      "Use recon when the target area is uncertain or Challenge Mode speed matters.",
+  },
+];
+
+export const challengeColumns = [
+  { key: "Challenge Mode Tip", label: "Challenge Mode Tip" },
+  { key: "Why It Helps", label: "Why It Helps" },
+];
+
+export const challengeRows = [
+  {
+    "Challenge Mode Tip": "Plot before rushing the first shot.",
+    "Why It Helps":
+      "A clean map saves more time than correcting a bad early solution.",
+  },
+  {
+    "Challenge Mode Tip": "Use recon or Star shell scouting when targets are uncertain.",
+    "Why It Helps":
+      "Fresh information can be faster than guessing from weak clues.",
+  },
+  {
+    "Challenge Mode Tip": "Use coverage thinking for groups.",
+    "Why It Helps":
+      "One good area shot can outperform several slow single-target shots.",
+  },
+  {
+    "Challenge Mode Tip": "Clean temporary lines quickly.",
+    "Why It Helps":
+      "Old lines slow you down and increase the chance of copying the wrong number.",
+  },
+  {
+    "Challenge Mode Tip": "Do not over-polish every decimal when coverage is enough.",
+    "Why It Helps":
+      "Timed play rewards effective shots, not always tutorial-level perfection.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Fails", label: "Why It Fails" },
+  { key: "Better Habit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Treating the map as only a ruler",
+    "Why It Fails":
+      "The map also includes grid reading, icon meaning, markers, support lines, and coverage checks.",
+    "Better Habit":
+      "Use each map tool for a specific job instead of drawing everything as one line.",
+  },
+  {
+    Mistake: "Keeping old measurements on the map",
+    "Why It Fails":
+      "Old lines can show a believable but wrong bearing or range.",
+    "Better Habit":
+      "Delete temporary lines when they are no longer part of the active solution.",
+  },
+  {
+    Mistake: "Confusing spotter bearings with firing bearing",
+    "Why It Fails":
+      "Spotter bearings locate the target. They are not your turret bearing unless the spotter is at Iron Nest.",
+    "Better Habit":
+      "After triangulation, draw the final firing line from Iron Nest.",
+  },
+  {
+    Mistake: "Using one shell mindset for every objective",
+    "Why It Fails":
+      "Destruction, illumination, scouting, smoke, armor, and area effects are different problems.",
+    "Better Habit":
+      "Read the shell restriction and target type before loading.",
+  },
+  {
+    Mistake: "Ignoring coverage on grouped targets",
+    "Why It Fails":
+      "A perfect point hit can still fail if the effect radius does not cover the objective.",
+    "Better Habit":
+      "Use Iris-style radius thinking for groups and special shells.",
+  },
+  {
+    Mistake: "Buying requisition items too early",
+    "Why It Fails":
+      "You may spend on ammo or support that the target does not need.",
+    "Better Habit":
+      "Read the full order, inspect the map problem, then procure.",
+  },
+];
+
+export const demoLimitColumns = [
+  { key: "Demo Limit", label: "Demo Limit" },
+  { key: "Safe To Say", label: "Safe To Say" },
+  { key: "Avoid Overclaiming", label: "Avoid Overclaiming" },
+];
+
+export const demoLimitRows = [
+  {
+    "Demo Limit": "Full shell balance",
+    "Safe To Say":
+      "The demo shows or suggests multiple ammunition categories with different purposes.",
+    "Avoid Overclaiming":
+      "Do not claim exact final-release damage values or permanent meta rankings.",
+  },
+  {
+    "Demo Limit": "Upgrade progression",
+    "Safe To Say":
+      "Requisition and logistics exist in the demo.",
+    "Avoid Overclaiming":
+      "Do not call requisition a complete upgrade tree until full progression is confirmed.",
+  },
+  {
+    "Demo Limit": "Narrative consequences",
+    "Safe To Say":
+      "Orders, newspapers, and recon photos create strong moral uncertainty.",
+    "Avoid Overclaiming":
+      "Do not claim the full story outcome from demo missions alone.",
+  },
+  {
+    "Demo Limit": "Challenge Mode meta",
+    "Safe To Say":
+      "Map speed, recon, Star shells, shell coverage, and cleanup discipline matter.",
+    "Avoid Overclaiming":
+      "Do not present one route as the permanent best strategy while the game is still demo-limited.",
+  },
+];
+
+export const wishlistColumns = [
+  { key: "Wishlist If You Like", label: "Wishlist If You Like" },
+  { key: "Why Iron Nest Fits", label: "Why Iron Nest Fits" },
+];
+
+export const wishlistRows = [
+  {
+    "Wishlist If You Like": "Manual artillery simulation",
+    "Why Iron Nest Fits":
+      "The demo makes you handle target plotting, calculation, ammo, charges, turret bearing, elevation, and fire control yourself.",
+  },
+  {
+    "Wishlist If You Like": "Map-reading puzzles",
+    "Why Iron Nest Fits":
+      "Targets can require coordinates, grid reading, spotter triangulation, marker cleanup, and correction-based aiming.",
+  },
+  {
+    "Wishlist If You Like": "Immersive cockpit operation",
+    "Why Iron Nest Fits":
+      "You physically move between the teleprinter, map table, calculator, loader, fire controls, and living spaces.",
+  },
+  {
+    "Wishlist If You Like": "Slow tactical pressure",
+    "Why Iron Nest Fits":
+      "Good shots come from procedure and discipline, while Challenge Mode adds speed pressure.",
+  },
+  {
+    "Wishlist If You Like": "Dark war-story framing",
+    "Why Iron Nest Fits":
+      "The demo uses orders, newspapers, reports, and recon photos to make you question what the turret is really doing.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The **Iron Nest demo** teaches you how to operate a heavy artillery platform through map reading, coordinate plotting, shell choice, powder charges, calculator work, turret control, and fire-control checks.
+
+The most important beginner rule is this: **a missed shot usually starts before the gun fires**. If the origin point, map marker, shell, charge count, or follow-up report is wrong, the turret can feel inaccurate even when the final lever pull was fine.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 2026. This Iron Nest demo guide covers the firing loop, teleprinter orders, map grid, map tools, red/yellow/white pencils, Iris, shell types, powder charges, ballistic calculator, Calibration Fire, triangulation, Star shell corrections, Liberation, requisition, left/right gun handling, Challenge Mode, demo limits, common mistakes, and wishlist advice.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-demo-protocol.webp"
+    alt="Iron Nest demo protocol showing read measure calculate load rotate elevate and fire"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Iron Nest begins with a simple protocol, then builds map logic, ammo choice, corrections, and logistics around it.
+  </figcaption>
+</figure>
+
+
+
+<h2 id="iron-nest-demo-guide">
+  Iron Nest demo guide
+</h2>
+
+This **Iron Nest demo guide** is for players who feel overwhelmed by the turret, the map table, the teleprinter, the calculator, and the shell racks. Iron Nest is not a normal cannon shooter. The demo is about turning orders and map information into a firing solution, then operating the machine correctly enough to make the shell land where you intended.
+
+The useful mindset is simple: **solve first, operate second, fire last**. Do not start with the loader just because you know a shot is coming. Start with the order, understand the target problem, then move through the machine.
+
+<GuideTable
+  caption="Iron Nest demo basics."
+  columns={demoBasicsColumns}
+  rows={demoBasicsRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="demo-basics">
+  Demo basics
+</h2>
+
+The demo adds complexity in layers. **Calibration Fire** gives you a direct coordinate shot. **Fire & Light** adds spotter triangulation and Star shell corrections. **Liberation** adds repositioning, requisition, infantry targets, and left/right gun awareness. **Challenge Mode** turns these same systems into a faster scoring problem.
+
+Start by learning what each major station is for.
+
+<GuideTable
+  caption="Main Iron Nest stations."
+  columns={stationColumns}
+  rows={stationRows}
+/>
+
+
+<h2 id="firing-loop">
+  The firing loop
+</h2>
+
+The firing loop is the article's backbone. Every later section is just a deeper look at one part of this loop.
+
+<GuideTable
+  caption="Iron Nest firing loop."
+  columns={firingLoopColumns}
+  rows={firingLoopRows}
+/>
+
+<h2 id="teleprinter-orders">
+  Teleprinter orders and message logic
+</h2>
+
+The **teleprinter** is where most shots begin. It tells you what the mission wants before you decide where to aim or what to load.
+
+<GuideTable
+  caption="How to read teleprinter information."
+  columns={teleprinterColumns}
+  rows={teleprinterRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-teleprinter-orders.webp"
+    alt="Iron Nest teleprinter showing mission orders and target data"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Read the teleprinter before loading the gun. It defines the target problem and shell rules.
+  </figcaption>
+</figure>
+
+For direct coordinate missions, the teleprinter gives you the target point. For triangulation, it gives you spotter positions and bearings. For correction missions, it gives you the next adjustment after the impact.
+
+<h2 id="map-grid-and-coordinates">
+  Map grid and coordinates
+</h2>
+
+The map table is where most beginner mistakes start. If your coordinate or origin is wrong, the calculator and gun can be perfectly set and still miss.
+
+<GuideTable
+  caption="How to read the Iron Nest map grid."
+  columns={gridColumns}
+  rows={gridRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-map-target-coordinates.webp"
+    alt="Iron Nest map showing Iron Nest position and target coordinates"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mark your own position first, then place the target or spotters around it.
+  </figcaption>
+</figure>
+
+<h2 id="map-tools-pencils-iris-and-icons">
+  Map tools, pencils, Iris, and icons
+</h2>
+
+The map table is not just a distance ruler. It has tools for measurement, planning, radius checks, and symbol reading. Use the tools deliberately so your final shot does not get buried under temporary lines.
+
+<GuideTable
+  caption="Iron Nest map tools."
+  columns={mapToolColumns}
+  rows={mapToolRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-map-tools-overview.webp"
+    alt="Iron Nest map tools with pencils compass Iris and marker icons"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Separate final firing lines, support lines, markers, icons, and radius checks instead of treating every mark the same.
+  </figcaption>
+</figure>
+
+Iris deserves special attention because it changes how you think about grouped targets. You are no longer asking only “where is the point?” You are asking “does this shell effect cover the area I need?”
+
+<GuideTable
+  caption="When to use the Iris."
+  columns={irisColumns}
+  rows={irisRows}
+/>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="calibration-fire-route">
+  Calibration Fire route
+</h2>
+
+**Calibration Fire** is the best first mission to learn because it is a direct coordinate problem. You do not need spotter triangulation, recon, or a correction chain yet.
+
+<GuideTable
+  caption="Calibration Fire step-by-step route."
+  columns={calibrationColumns}
+  rows={calibrationRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-map-bearing-range.webp"
+    alt="Iron Nest map measurement showing bearing and range to a target"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first shot teaches the basic split: bearing goes to the turret, range goes to the calculator.
+  </figcaption>
+</figure>
+
+<h2 id="bearing-range-and-elevation">
+  Bearing, range, powder charges, and elevation
+</h2>
+
+These four numbers are connected, but they do not go to the same place. Mixing them up is one of the fastest ways to make Iron Nest feel harder than it is.
+
+<GuideTable
+  caption="Where each firing number comes from and where it goes."
+  columns={bearingColumns}
+  rows={bearingRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-calculator-elevation.webp"
+    alt="Iron Nest calculator converting range and powder charges into gun elevation"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The calculator connects range and powder charges to the elevation you set on the gun.
+  </figcaption>
+</figure>
+
+<h2 id="shell-types-and-powder-charges">
+  Shell types and powder charges
+</h2>
+
+Do not treat the demo as if it only has one explosive shell and one illumination shell. H and STAR are the clearest story-demo examples, but the shell system points toward a wider ammunition set.
+
+<GuideTable
+  caption="Iron Nest shell types and powder charges."
+  columns={shellColumns}
+  rows={shellRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-shell-menu-types.webp"
+    alt="Iron Nest shell selection showing multiple shell types"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    H and STAR are the easiest demo examples, but the shell menu points toward broader ammo planning.
+  </figcaption>
+</figure>
+
+
+<h2 id="triangulation">
+  Triangulation with spotters
+</h2>
+
+Triangulation begins when the game gives you spotter data instead of a clean target coordinate. Each spotter has a position and a reported bearing. Your job is to find where those lines cross, then build the final firing line from Iron Nest.
+
+<GuideTable
+  caption="How to triangulate targets in Iron Nest."
+  columns={triangulationColumns}
+  rows={triangulationRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-spotter-triangulation.webp"
+    alt="Iron Nest map with spotter bearing lines crossing near a target"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Spotter lines locate the target. They do not replace the final measurement from Iron Nest.
+  </figcaption>
+</figure>
+
+<h2 id="star-shell-corrections">
+  Star shell corrections
+</h2>
+
+Star shell missions work like a feedback loop. You fire for illumination or correction, read the observer response, move the target point, then solve the next shot.
+
+<GuideTable
+  caption="Star shell correction basics."
+  columns={correctionColumns}
+  rows={correctionRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-star-shell-correction.webp"
+    alt="Iron Nest Star shell correction note with yellow distance and arrow guidance"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Star shell correction is about adjusting the next shot, not repeating the previous one.
+  </figcaption>
+</figure>
+
+<h2 id="liberation-requisition-and-left-right-gun">
+  Liberation, requisition, and left/right gun handling
+</h2>
+
+Liberation is where the demo becomes more than a single-shot tutorial. Iron Nest is repositioned, requisition becomes relevant, infantry targets appear, and the right gun can enter your workflow.
+
+<GuideTable
+  caption="What changes in Liberation."
+  columns={liberationColumns}
+  rows={liberationRows}
+/>
+
+Liberation is the first mission where requisition starts to feel like a real decision instead of a background menu. The table above explains why the mission changes your workflow; the table below breaks down what you can actually prepare or procure before solving the next targets.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-requisition-console.webp"
+    alt="Iron Nest requisition console showing ammo and powder charge procurement"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Requisition is mission logistics. Read the target problem before buying shells or support.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Requisition and support options."
+  columns={requisitionColumns}
+  rows={requisitionRows}
+/>
+
+If you load one gun but read the other gun's panel, you can create a fake problem for yourself. The shot may look ready in your head while the actual armed side, shell state, or panel state says otherwise. In Liberation-style missions, always confirm **loaded side, armed side, and displayed side** before firing.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-right-gun-link.webp"
+    alt="Iron Nest right gun controls and linked gun handling"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Left and right gun handling matters once the mission stops behaving like a one-gun tutorial.
+  </figcaption>
+</figure>
+
+<h2 id="challenge-mode-tips">
+  Challenge Mode tips
+</h2>
+
+Challenge Mode uses the same systems, but the pressure changes. Story missions reward careful learning. Challenge Mode rewards clean solving, fast map cleanup, useful support choices, and efficient shell coverage.
+
+<GuideTable
+  caption="Iron Nest Challenge Mode tips."
+  columns={challengeColumns}
+  rows={challengeRows}
+/>
+
+<h2 id="common-mistakes">
+  Common mistakes
+</h2>
+
+Most Iron Nest mistakes happen before the shot leaves the gun. A failed shot usually starts with the wrong origin, wrong marker, wrong shell, bad coverage, or a logistics decision made too early.
+
+<GuideTable
+  caption="Common Iron Nest demo mistakes."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+<h2 id="what-is-limited-in-the-demo">
+  What is limited in the demo
+</h2>
+
+The demo shows enough systems to write a useful guide, but not enough to claim every full-release detail. Keep the language strong where the demo is clear and careful where systems are only visible, locked, or context-dependent.
+
+<GuideTable
+  caption="Iron Nest demo limits."
+  columns={demoLimitColumns}
+  rows={demoLimitRows}
+/>
+
+<h2 id="should-you-wishlist-iron-nest">
+  Should you wishlist Iron Nest?
+</h2>
+
+You should wishlist **Iron Nest** if you like slow, manual, systems-heavy games where the fun comes from operating a machine correctly. The demo is strongest when it makes you move between stations, solve a map problem, pick the right shell, and commit to a shot only after the turret is ready.
+
+<GuideTable
+  caption="Who should wishlist Iron Nest."
+  columns={wishlistColumns}
+  rows={wishlistRows}
+/>
+
+You may want to skip it if you are looking for a fast turret shooter, a simple tower defense game, or an arcade artillery game where the cannon is only a crosshair. Iron Nest is more about procedure, pressure, and the feeling of being inside a massive war machine.
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+<div>
+  Iron Nest is a slow, systems-heavy demo, so the best follow-up depends on what you want next.
+</div>
+
+<div className="my-6 space-y-5">
+  <section>
+    <h3 className="text-lg font-semibold">
+      Compare more Steam Next Fest demos
+    </h3>
+    <div>
+      Go back to the{" "}
+      <Link href="/steam-next-fest">Steam Next Fest Hub</Link> if you are still deciding which demos are worth playing. It is the better next stop for comparing demos by mechanics, guide value, and how much real player demand they may have.
+    </div>
+  </section>
+
+  <section>
+    <h3 className="text-lg font-semibold">
+      Try another tactical demo
+    </h3>
+    <div>
+      Read the{" "}
+      <Link href="/dust-front-rts">Dust Front RTS Guide</Link> if Iron Nest made you want more strategy, map pressure, and tactical decision-making, but not another cockpit-heavy artillery simulator.
+    </div>
+  </section>
+
+  <section>
+    <h3 className="text-lg font-semibold">
+      Switch to something lighter
+    </h3>
+    <div>
+      Try the{" "}
+      <Link href="/bombanana">Bombanana Guide</Link> if you want a faster, shorter demo after Iron Nest's slower aiming, loading, triangulation, and correction loop.
+    </div>
+  </section>
+</div>
+
+<h2 id="faq">
+  Iron Nest demo FAQ
+</h2>
+
+### What is Iron Nest?
+
+**Iron Nest** is a manual heavy turret simulation game where you operate a large artillery platform through orders, map plotting, shell loading, calculator work, turret bearing, elevation, and fire control.
+
+### What should I learn first in the Iron Nest demo?
+
+Learn the map table first. If you can read coordinates, mark Iron Nest, measure bearing and range, and keep temporary lines under control, the rest of the turret is much easier to understand.
+
+### What does the teleprinter do?
+
+The teleprinter gives mission orders, target data, coordinates, spotter reports, shell restrictions, and follow-up instructions. Read it before loading the gun.
+
+### How do I read the map grid in Iron Nest?
+
+Start with the large grid coordinate, then refine the point inside the smaller area. Always mark your own Iron Nest position before measuring the final firing line.
+
+### What are the red, yellow, and white pencils for?
+
+Use red for the active firing line, yellow for support work such as spotter bearings or corrections, and white for planning notes or secondary references. The exact color is less important than keeping the map readable.
+
+### What does the Iris do?
+
+The Iris helps preview shell effect or blast radius on the map. Use it when target coverage matters, especially for infantry clusters, area shells, or nearby friendly and civilian icons.
+
+### What is the difference between bearing, range, and elevation?
+
+Bearing is the horizontal turret angle, range is the measured distance from Iron Nest to the target, and elevation is the vertical gun angle calculated from range and powder charges.
+
+### How do powder charges work?
+
+Powder charges are part of the firing solution. The calculator uses range and charge count to produce the elevation angle, so the loaded charge count should match the calculation you are using.
+
+### Which shell should I use?
+
+Check the teleprinter first. If the order gives a shell restriction such as **H only** or **Star shell only**, follow that instruction before thinking about target type.
+
+If the mission does not lock you to one shell, choose by target role: **H / HE-style shells** are for destructive fire against normal targets and infantry, **AP** is for armored or harder targets, **HCHE** is better for dense groups or larger-area damage, and **STAR** is for illumination, scouting, or correction work. Treat **SMOK**, **PHOS**, and **TEAR** as specialized or demo-limited until more mission examples confirm their exact use.
+
+### How does triangulation work?
+
+Place each spotter on the map, draw each reported bearing from that spotter, find the intersection, then measure the final firing line from Iron Nest to that target point.
+
+### Why are my map numbers confusing?
+
+You probably have too many old lines or markers on the map. Delete bad measurements and keep the active firing solution clean.
+
+### What is requisition?
+
+Requisition is the logistics system for procuring shells, powder charges, and support options when the mission allows it.
+
+### What does reconnaissance do?
+
+Reconnaissance can reveal or confirm target areas, reducing blind guessing when a target is hidden, approximate, or time-sensitive.
+
+### Is Challenge Mode different from the story demo?
+
+Yes. It uses the same systems, but speed, target discovery, shell coverage, support choices, and map cleanup become more important.
+
+### Are all shell types fully available in the demo?
+
+Not necessarily. Some shell types are visible or implied while their full behavior may be locked, limited, or context-dependent in the demo.
+
+### Is Iron Nest a tower defense game?
+
+No. Iron Nest is closer to a manual artillery simulator or heavy turret operation sim than a tower defense placement game.
+
+### Should I wishlist Iron Nest?
+
+Wishlist Iron Nest if you enjoy manual simulation, map-reading puzzles, artillery calculation, immersive cockpit controls, slow tactical pressure, and dark war-story framing.
+
