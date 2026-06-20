@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Thank You For Your Application =====
+{
+  href: "/thank-you-for-your-application",
+  game: "Thank You For Your Application",
+  title: "Guide Hub, Resume Rules, Endings & Achievements",
+  description:
+  "Start here for Thank You For Your Application guides, resume rules, Thanks Letters, endings, achievements, Day 30, A02, Escape and job-hopping answers.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+  },
+  
+  // ===== Thank You For Your Application =====
+  {
+  href: "/thank-you-for-your-application/resume-rules-thanks-letter-guide",
+  game: "Thank You For Your Application",
+  title: "Resume Rules & Thanks Letter Guide",
+  description:
+  "Master resume rules, Thanks Letters, local vs non-local checks, certificates, Psychological Reports, forged docs and breakdown index limits.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+  },
+  
+  // ===== Thank You For Your Application =====
+  {
+  href: "/thank-you-for-your-application/endings-guide",
+  game: "Thank You For Your Application",
+  title: "Endings Guide, A02, Escape & Job for Life",
+  description:
+  "Get all endings with A02 True Ending, Escape, Job for Life, Day 30 ratings, Data Cleaning Module, breakdown limits and route checkpoints.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+  },
+  
+  // ===== Thank You For Your Application =====
+  {
+  href: "/thank-you-for-your-application/achievements-guide",
+  game: "Thank You For Your Application",
+  title: "Achievements Guide, Hidden Triggers & 100%",
+  description:
+  "Unlock all 15 Steam achievements with hidden triggers, Brain in a Vat, Work Life Not Balanced, A New Job for Life and safe cleanup order.",
+  tagClass: "text-sky-500",
+  hoverBorderClass: "hover:border-sky-300",
+  hoverTitleClass: "group-hover:text-sky-700",
+  },
+  
 // ===== Iron Nest =====
 {
   href: "/iron-nest",

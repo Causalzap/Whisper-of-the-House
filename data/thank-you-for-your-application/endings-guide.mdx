@@ -1,0 +1,722 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import Image from "next/image";
+
+export const endingColumns = [
+{ key: "Outcome", label: "Outcome" },
+{ key: "Category", label: "Category" },
+{ key: "Main Trigger", label: "Main Trigger" },
+{ key: "Best Checkpoint", label: "Best Checkpoint" },
+];
+
+export const endingRows = [
+{
+Outcome: "The Meaning of Work / A02 True Ending",
+Category: "Main story ending",
+"Main Trigger":
+"Follow A02's route, enter the Day 29 consciousness link, and choose (Do not reach out).",
+"Best Checkpoint":
+"Before Day 17 A02 scenes and before Day 29 apartment actions.",
+},
+{
+Outcome: "Escape",
+Category: "Main story ending",
+"Main Trigger":
+"Reply I agree to leave in K88's Day 27 work-shift Confidential Mail, then choose Leave apartment on Day 29.",
+"Best Checkpoint":
+"Before Day 27 work mail and before Day 29 apartment exit.",
+},
+{
+Outcome: "Job for Life",
+Category: "Main story ending",
+"Main Trigger":
+"Reach Day 30 with a clean A or B final evaluation, then accept permanent employment.",
+"Best Checkpoint": "Before Day 30 final evaluation.",
+},
+{
+Outcome: "Refuse Permanent Employment",
+Category: "Main story ending",
+"Main Trigger":
+"Reach Day 30 with a clean A or B final evaluation, then refuse permanent employment.",
+"Best Checkpoint": "Before Day 30 final evaluation.",
+},
+{
+Outcome: "Illegal Layoff",
+Category: "Main story ending / punishment route",
+"Main Trigger":
+"Reach final evaluation with a recorded H11 scanner violation or shock misuse.",
+"Best Checkpoint":
+"Before the violation, then before Day 30 final evaluation.",
+},
+{
+Outcome: "Failed Performance Review",
+Category: "Main story ending / performance route",
+"Main Trigger":
+"Reach Day 30 with a C or D final rating. Use the rating table below for the exact thresholds.",
+"Best Checkpoint": "Before Day 30 final evaluation.",
+},
+{
+Outcome: "A New Job for Life",
+Category: "Job-hopping outcome",
+"Main Trigger":
+"Enter the job-hopping final interview and give the correct four-answer chain.",
+"Best Checkpoint": "Before the job-hopping final interview.",
+},
+{
+Outcome: "Job-Hopping Failure",
+Category: "Job-hopping outcome",
+"Main Trigger":
+"Give a wrong answer during the job-hopping final interview.",
+"Best Checkpoint": "Before the job-hopping final interview.",
+},
+{
+Outcome: "Illegal Activity",
+Category: "Failure / punishment state",
+"Main Trigger":
+"After unlocking the Minato black-market route, end Day 24 without buying the Data Cleaning Module.",
+"Best Checkpoint": "Before ending Day 24.",
+},
+{
+Outcome: "Mental Breakdown",
+Category: "Failure / punishment state",
+"Main Trigger":
+"End a day over the breakdown-index limit.",
+"Best Checkpoint": "Before ending a high-breakdown day.",
+},
+{
+Outcome: "Bills Ending",
+Category: "Failure / punishment state",
+"Main Trigger":
+"Let rent or regular bills go overdue.",
+"Best Checkpoint": "Before spending money with bills due.",
+},
+{
+Outcome: "Residence Failure",
+Category: "Failure / punishment state",
+"Main Trigger":
+"Fail a residence / certificate payment when you do not have enough money for automatic payment.",
+"Best Checkpoint": "Before spending money during a residence-fee window.",
+},
+{
+Outcome: "Overtime Death",
+Category: "Failure / punishment state",
+"Main Trigger":
+"Work overtime for five consecutive days.",
+"Best Checkpoint":
+"Before starting the overtime streak. Patch 1.0.4 adds protection on the fourth overtime day, but this is still not safe for a clean route.",
+},
+{
+Outcome: "Probation Failure",
+Category: "Failure / early route state",
+"Main Trigger":
+"Fail the probation assessment.",
+"Best Checkpoint": "Before the probation review.",
+},
+];
+
+export const saveColumns = [
+{ key: "Checkpoint", label: "Checkpoint" },
+{ key: "Use It For", label: "Use It For" },
+{ key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const saveRows = [
+{
+Checkpoint: "Before the probation review",
+"Use It For": "I’m the Best, I’m the Worst, I Refuse to Answer, Probation Failure",
+"Why It Matters":
+"The review can branch into pass, fail, and refusal outcomes. Do not test failure on your clean route.",
+},
+{
+Checkpoint: "Before Day 17 A02 scenes",
+"Use It For": "Brain in a Vat, A02 route setup, The Meaning of Work preparation",
+"Why It Matters":
+"A02's route starts before the final days. Waiting until Day 29 may be too late.",
+},
+{
+Checkpoint: "Before ending Day 24",
+"Use It For": "Illegal Activity, Data Cleaning Module safety",
+"Why It Matters":
+"If you unlock the black-market route and end Day 24 without buying the Data Cleaning Module, the run can be pushed into Illegal Activity.",
+},
+{
+Checkpoint: "Before Day 27 work mail",
+"Use It For": "Escape",
+"Why It Matters":
+"K88's Confidential Mail appears during the work shift. If you miss it or reply differently, Day 29 escape may not appear.",
+},
+{
+Checkpoint: "Before Day 29 apartment actions",
+"Use It For": "A02 True Ending, Escape, A02-to-Job-for-Life branch",
+"Why It Matters":
+"Day 29 apartment choices can lock your final route quickly.",
+},
+{
+Checkpoint: "Before Day 30 final evaluation",
+"Use It For":
+"Job for Life, Refuse Permanent Employment, Illegal Layoff, Failed Performance Review",
+"Why It Matters":
+"Day 30 checks rating and recorded violations, then asks whether you accept permanent employment if your record is clean.",
+},
+{
+Checkpoint: "Before the job-hopping final interview",
+"Use It For": "A New Job for Life, Job-Hopping Failure",
+"Why It Matters":
+"One wrong answer can fail the job-hopping route.",
+},
+];
+
+export const ratingColumns = [
+{ key: "Rating", label: "Rating" },
+{ key: "Requirement", label: "Requirement" },
+{ key: "Ending Impact", label: "Ending Impact" },
+];
+
+export const ratingRows = [
+{
+Rating: "A",
+Requirement: "90% or higher",
+"Ending Impact":
+"Clean final routes are available if you also avoid recorded violations.",
+},
+{
+Rating: "B",
+Requirement: "75% or higher",
+"Ending Impact":
+"Clean final routes are available if you also avoid recorded violations.",
+},
+{
+Rating: "C",
+Requirement: "60% or higher",
+"Ending Impact":
+"Pushes toward Failed Performance Review instead of clean permanent-employment routes.",
+},
+{
+Rating: "D",
+Requirement: "Below 60%",
+"Ending Impact":
+"Pushes toward Failed Performance Review.",
+},
+];
+
+export const a02Columns = [
+{ key: "Step", label: "Step" },
+{ key: "Choice / Condition", label: "Choice / Condition" },
+{ key: "Route Result", label: "Route Result" },
+];
+
+export const a02Rows = [
+{
+Step: "Day 17",
+"Choice / Condition":
+"Choose to rest, continue A02's conversation, and connect to A02's consciousness.",
+"Route Result": "Starts the A02 consciousness route.",
+},
+{
+Step: "Data scene",
+"Choice / Condition":
+"Delete the memory data. If you have the Data Cleaning Module, the replace option can also keep the route moving.",
+"Route Result": "Keeps the A02 route alive.",
+},
+{
+Step: "Before Day 29",
+"Choice / Condition":
+"Keep the A02 route active and reach the apartment phase with breakdown index above 20.",
+"Route Result":
+"Enables the Day 29 Link consciousness branch.",
+},
+{
+Step: "Day 29",
+"Choice / Condition": "Interact with A02 and choose Link consciousness.",
+"Route Result":
+"Opens the final A02 branch.",
+},
+{
+Step: "Final A02 choice",
+"Choice / Condition": "Choose (Do not reach out).",
+"Route Result": "The Meaning of Work / A02 True Ending.",
+},
+{
+Step: "Final A02 choice",
+"Choice / Condition": "Choose (Take A01's hand).",
+"Route Result": "Branches away from The Meaning of Work and points toward Job for Life.",
+},
+];
+
+export const jobHoppingColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Correct Answer", label: "Correct Answer" },
+];
+
+export const jobHoppingRows = [
+{
+Step: "1",
+"Correct Answer":
+"I love working, and I want to contribute my efforts to the Minato Residents' Association.",
+},
+{
+Step: "2",
+"Correct Answer":
+"Really. Just thinking about working for you makes me feel excited.",
+},
+{
+Step: "3",
+"Correct Answer": "Because I believe Minato Communications has better prospects.",
+},
+{
+Step: "4",
+"Correct Answer":
+"I can efficiently complete tasks assigned by colleagues from different departments and comrades from the Association.",
+},
+];
+
+export const probationColumns = [
+{ key: "Probation Choice", label: "Probation Choice" },
+{ key: "Known Result / Use", label: "Known Result / Use" },
+{ key: "Advice", label: "Advice" },
+];
+
+export const probationRows = [
+{
+"Probation Choice":
+"K88 should not pass probation. He is arrogant and always full of hot air.",
+"Known Result / Use":
+"A confirmed pass example for C89 when the rest of the probation record is good. Targets I’m the Best.",
+Advice:
+"Use this if you simply want to pass the review and continue the main route.",
+},
+{
+"Probation Choice":
+"I shouldn't pass probation. I'm the worst among us.",
+"Known Result / Use":
+"Use this branch when testing probation failure / I’m the Worst.",
+Advice:
+"Do not continue this as your clean route unless you want the failure outcome.",
+},
+{
+"Probation Choice": "Refuse to answer the probation-related question.",
+"Known Result / Use": "Targets I Refuse to Answer.",
+Advice:
+"Use the same probation checkpoint if you are cleaning up review outcomes.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Thank You For Your Application** officially advertises **six final endings**, but this guide also tracks the extra failure and punishment states that can end or lock a run.
+
+For the main routes, keep checkpoints before **Day 17**, **Day 24**, **Day 27**, **Day 29**, **Day 30**, and the **job-hopping final interview**. The most important choices are: start A02 early, buy the Data Cleaning Module before ending Day 24 if you enter the black-market route, reply **I agree to leave** to K88's Day 27 work-shift mail for Escape, choose **(Do not reach out)** for The Meaning of Work, and use the four job-hopping answers exactly if you want A New Job for Life. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 20, 2026. Covers the six final endings, extra failure states, A02 route, Escape, Job for Life, job-hopping answers, Day 30 rating thresholds, Day 24 Data Cleaning Module risk, automatic checkpoints, and Patch 1.0.4 overtime autosave behavior.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-a02-apartment-concierge.webp"
+    alt="A02 apartment concierge in Thank You For Your Application"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Many ending routes start in the apartment, not at the interview desk.
+  </figcaption>
+</figure>
+
+<h2 id="thank-you-for-your-application-endings-guide">
+  Thank You For Your Application endings guide
+</h2>
+
+This **Thank You For Your Application endings guide** is built for route control. The game has six advertised final endings, but a normal player can also hit several failure or punishment states before reaching a clean final route.
+
+That difference matters. **Job for Life**, **Escape**, **The Meaning of Work**, **Refuse Permanent Employment**, **Illegal Layoff**, and **Failed Performance Review** are late-route outcomes. **Bills Ending**, **Residence Failure**, **Mental Breakdown**, **Overtime Death**, **Illegal Activity**, and **Probation Failure** are run-ending or route-locking states you still need to avoid or test carefully.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="ending-checklist">
+  Ending checklist
+</h2>
+
+Use this table as the main route map. The category column separates main story endings from job-hopping outcomes and failure states.
+
+<GuideTable
+caption="Thank You For Your Application endings and failure states."
+columns={endingColumns}
+rows={endingRows}
+/>
+
+<h2 id="best-checkpoints">
+  Best checkpoints for endings
+</h2>
+
+This game uses automatic checkpoints rather than free manual multi-save routing. Before you test a risky route, check what your current Load / Continue point actually returns to.
+
+<GuideTable
+caption="Best checkpoints for route planning."
+columns={saveColumns}
+rows={saveRows}
+/>
+
+Patch 1.0.4 added an extra automatic save when players choose overtime on the fourth overtime day to avoid a dead save file. Treat that as protection for the overtime issue only. It does not mean every ending route has free rollback protection.
+
+<h2 id="rating-thresholds">
+  Final evaluation rating thresholds
+</h2>
+
+Use this table as the single rating reference for Day 30. Other sections will refer back to these thresholds instead of repeating the same numbers.
+
+<GuideTable
+caption="Day 30 final evaluation rating thresholds."
+columns={ratingColumns}
+rows={ratingRows}
+/>
+
+<h2 id="a02-true-ending">
+  The Meaning of Work / A02 True Ending
+</h2>
+
+The A02 route is one of the easiest routes to miss because it starts before the final days. Do not wait until Day 29 to begin checking A02.
+
+<GuideTable
+caption="A02 route choices."
+columns={a02Columns}
+rows={a02Rows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-a02-status-menu.webp"
+    alt="A02 status menu in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A02 route progress starts from apartment interactions and later becomes a consciousness-link route.
+  </figcaption>
+</figure>
+
+The counterintuitive part is the **breakdown index above 20** requirement before the Day 29 consciousness link. Most of the game teaches you to keep breakdown low, but this route needs the value high enough to open the A02 branch.
+
+Do not choose **(Take A01's hand)** if you are aiming for **The Meaning of Work**. That choice points away from the A02 True Ending and toward **Job for Life**.
+
+<h2 id="escape-ending">
+  Escape Ending
+</h2>
+
+The Escape route starts from **work-shift mail**, not apartment mail.
+
+On Day 27, open K88's Confidential Mail during the work shift and reply:
+
+<strong>I agree to leave</strong>
+
+Then, on Day 29, use the apartment exit and choose:
+
+<strong>Leave apartment</strong>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-work-shift-mail-panel.webp"
+    alt="Work shift mail panel in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Escape starts from work-shift mail. Do not wait until apartment mail after clocking out.
+  </figcaption>
+</figure>
+
+The common mistake is checking only the apartment mail box after work. If you miss K88's Day 27 work mail or reply differently, the Day 29 escape option may not appear.
+
+<h2 id="day-30-final-evaluation">
+  Day 30 final evaluation routes
+</h2>
+
+Day 30 is where clean performance routes split. If your final rating is A or B and you have no recorded violations, the permanent-employment choice becomes the important branch.
+
+If your file has a recorded H11 scanner violation or shock misuse, that can override a normal clean route and push you toward **Illegal Layoff**. If your rating is C or D, the route points toward **Failed Performance Review** instead.
+
+<h2 id="job-for-life">
+  Job for Life
+</h2>
+
+**Job for Life** requires a clean Day 30 final evaluation and accepting permanent employment.
+
+Use this route if you want the stable company ending:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Keep your final rating at A or B.</li>
+  <li>Avoid recorded H11 scanner violations.</li>
+  <li>Avoid shock misuse.</li>
+  <li>Accept permanent employment when the final offer appears.</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-permanent-contract-explained.webp"
+    alt="Permanent contract explanation in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Performance evaluation connects directly to permanent contracts and the Job for Life route.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="refuse-permanent-employment">
+  Refuse Permanent Employment
+</h2>
+
+This route uses the same clean Day 30 setup as **Job for Life**, but you refuse the final offer instead of accepting it.
+
+Use this route if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>your final rating is A or B,</li>
+  <li>you have no recorded H11 scanner violation,</li>
+  <li>you have no shock misuse problem,</li>
+  <li>and you want the refusal branch instead of the company-stability branch.</li>
+</ul>
+
+Keep a checkpoint before Day 30 so you can test both accept and refuse from the same clean final evaluation.
+
+<h2 id="illegal-layoff">
+  Illegal Layoff
+</h2>
+
+**Illegal Layoff** is controlled by recorded violations, not only rating. The two major red flags are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>H11 scanner violation,</li>
+  <li>shock misuse.</li>
+</ul>
+
+If you want clean final routes, avoid both. If you are testing Illegal Layoff, do it from a checkpoint you are willing to abandon.
+
+<h2 id="failed-performance-review">
+  Failed Performance Review
+</h2>
+
+**Failed Performance Review** is the route for a weak final rating. Use the rating table above: C or D points away from the clean permanent-employment routes.
+
+This is different from Illegal Layoff. A bad rating means your work performance failed the final review. A recorded violation means your file can be punished even if your general work score would otherwise be high enough.
+
+<h2 id="job-hopping-success">
+  A New Job for Life / Job-Hopping Success
+</h2>
+
+The job-hopping route is answer-sensitive. Use the wording below, and if a later patch changes a line slightly, choose the option with the same meaning: loyal motivation, excitement to work, Minato Communications prospects, and cross-department teamwork.
+
+<GuideTable
+caption="Job-hopping final interview answer chain."
+columns={jobHoppingColumns}
+rows={jobHoppingRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-minato-residents-association-mail.webp"
+    alt="Minato Residents' Association mail in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Minato-related routes can open late-game job options, but the final interview still needs the correct answer chain.
+  </figcaption>
+</figure>
+
+<h2 id="job-hopping-failure">
+  Job-Hopping Failure
+</h2>
+
+Job-Hopping Failure happens when you enter the job-hopping final interview but give a wrong answer.
+
+Because the answer chain is strict, keep a checkpoint before the final interview. Do not mix this route with **What’s the point of working?** style answers. That achievement points toward a no-purpose work answer, while job-hopping success wants loyal-worker language.
+
+<h2 id="illegal-activity-ending">
+  Illegal Activity
+</h2>
+
+The **Illegal Activity** route is tied to the Day 24 black-market / Data Cleaning Module setup.
+
+The safe rule is simple:
+
+<strong>If you unlock the black-market route, buy the Data Cleaning Module before ending Day 24.</strong>
+
+If you end Day 24 without buying it, the run can be pushed into Illegal Activity.
+
+Use a checkpoint before ending Day 24 if you are testing this branch or trying to keep a clean A02 route.
+
+<h2 id="probation-failure">
+  Probation Failure
+</h2>
+
+The probation review is the first early branch. It can also be used for achievement cleanup, but do not test failure on your clean run.
+
+<GuideTable
+caption="Probation review choices to know."
+columns={probationColumns}
+rows={probationRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-probation-review-meeting.webp"
+    alt="Probation review meeting in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The probation review can branch into pass, fail, and refusal outcomes. Use the checkpoint before testing failure choices.
+  </figcaption>
+</figure>
+
+<h2 id="mental-breakdown">
+  Mental Breakdown
+</h2>
+
+Mental Breakdown happens when C89 ends a day over the breakdown-index limit.
+
+The important thresholds are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Day 4:</strong> 40.</li>
+  <li><strong>After Day 4:</strong> 35.</li>
+</ul>
+
+These are C89 survival thresholds, not candidate-screening thresholds. Candidate Psychological Evaluation Report rules can also use breakdown-index checks, such as a candidate rule requiring the value not to exceed 40%.
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-breakdown-index-apartment.webp"
+    alt="Breakdown index in the apartment in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Check C89's breakdown index before ending the day, especially after overtime or stressful route choices.
+  </figcaption>
+</figure>
+
+<h2 id="bills-and-residence-failure">
+  Bills Ending and Residence Failure
+</h2>
+
+Bills and residence payments are separate dangers.
+
+**Bills Ending** happens when normal rent or bills go overdue. **Residence Failure** is tied to residence / certificate payments and whether you have enough money for automatic payment.
+
+The safe habit is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>check bills before shopping,</li>
+  <li>keep money reserved for residence-related payments,</li>
+  <li>do not spend down to zero after a good workday,</li>
+  <li>and confirm payment status before sleeping.</li>
+</ul>
+
+<h2 id="overtime-death">
+  Overtime Death
+</h2>
+
+Overtime Death happens when you work overtime for five consecutive days.
+
+Patch 1.0.4 added an extra automatic save on the fourth overtime day to avoid a dead save file. That helps with the overtime trap, but it does not make the route safe for a normal ending plan.
+
+If you only want endings, do not stack five overtime days. If you are also cleaning up **Work Life Not Balanced**, use a route you are willing to abandon.
+
+<h2 id="recommended-ending-order">
+  Recommended ending order
+</h2>
+
+Use this order to reduce replay waste:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Play clean through probation and keep the probation checkpoint for pass / fail / refusal cleanup.</li>
+  <li>Start A02 route progress before Day 29.</li>
+  <li>Use Day 24 checkpoint if you unlock the black-market / Data Cleaning Module branch.</li>
+  <li>Use Day 27 work-mail checkpoint for Escape setup.</li>
+  <li>Use Day 29 apartment checkpoint for A02 True Ending, Escape, and A02 branch testing.</li>
+  <li>Use Day 30 checkpoint for Job for Life, Refuse Permanent Employment, Illegal Layoff, and Failed Performance Review.</li>
+  <li>Use the job-hopping final interview checkpoint for A New Job for Life and Job-Hopping Failure.</li>
+  <li>Clean up bills, residence, breakdown, overtime, and probation failure states only after your main route is safe.</li>
+</ol>
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these guides next:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/thank-you-for-your-application">Thank You For Your Application Guide Hub</Link> — for all related guides and common questions.
+  </li>
+  <li>
+    <Link href="/thank-you-for-your-application/final-evaluation-job-hopping-answers">Final Evaluation & Job-Hopping Answers</Link> — for Day 30 routes and the job-hopping answer chain.
+  </li>
+  <li>
+    <Link href="/thank-you-for-your-application/achievements-guide">Achievements Guide</Link> — for all 15 achievements, hidden achievements, A02, overtime, Escape, and job-hopping cleanup.
+  </li>
+  <li>
+    <Link href="/thank-you-for-your-application/beginner-guide">Beginner Guide</Link> — for Subsidy Mode, probation, pay, bills, A02, breakdown index, and checkpoint safety.
+  </li>
+  <li>
+    <Link href="/thank-you-for-your-application/resume-rules-thanks-letter-guide">Resume Rules & Thanks Letter Guide</Link> — for exact rejection reasons, Thanks Letters, certificates, reports, and forged document checks.
+  </li>
+</ol>
+
+<h2 id="faq">
+  Thank You For Your Application endings FAQ
+</h2>
+
+### How many endings are in Thank You For Your Application?
+
+The official launch note says the game has six final endings. This guide also tracks extra failure and punishment states that can end or lock a run before a clean final ending.
+
+### How do I get The Meaning of Work ending?
+
+Follow A02's route, reach Day 29 with breakdown index above 20, choose Link consciousness, then choose **(Do not reach out)**.
+
+### How do I get Escape ending?
+
+On Day 27, reply **I agree to leave** to K88's work-shift Confidential Mail. On Day 29, choose **Leave apartment** from the apartment exit.
+
+### How do I get Job for Life?
+
+Reach Day 30 with an A or B final rating, avoid H11 scanner violations and shock misuse, then accept permanent employment.
+
+### What causes Illegal Layoff?
+
+A recorded H11 scanner violation or shock misuse can push the final evaluation into Illegal Layoff.
+
+### What rating causes Failed Performance Review?
+
+A C or D final rating causes Failed Performance Review. The rating table in this guide shows the exact thresholds.
+
+### How do I avoid Illegal Activity?
+
+If you unlock the black-market route, buy the Data Cleaning Module before ending Day 24.
+
+### How do I avoid Mental Breakdown?
+
+Do not end the day over the breakdown-index limit. Day 4 uses 40, and after Day 4 the limit becomes 35.
+
+### What are the job-hopping answers?
+
+Use the four-answer chain listed in this guide: contribute to the Minato Residents' Association, feel excited to work, choose Minato Communications for better prospects, and promise cross-department teamwork.
+
+### Can I get all endings on one route?
+
+Not cleanly. Use checkpoints around Day 17, Day 24, Day 27, Day 29, Day 30, and the job-hopping final interview so you can branch without replaying the whole game.

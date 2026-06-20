@@ -144,6 +144,7 @@ const allGameGuides = [
   { title: '33 Immortals', href: '/33-immortals'},
   { title: 'The Adventures of Elliot: The Millennium Tales', href: '/the-adventures-of-elliot'},
   { title: 'Steam Next Fest June 2026 Demo Guides', href: '/steam-next-fest'},
+  { title: 'Thank You For Your Application', href: '/thank-you-for-your-application'},
 ];
 
 const exploreCards = [

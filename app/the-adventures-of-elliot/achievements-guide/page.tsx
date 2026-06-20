@@ -47,6 +47,10 @@ const relatedLinks = [
     label: "The Adventures of Elliot Walkthrough",
   },
   {
+    href: "/the-adventures-of-elliot/manuscript-locations",
+    label: "The Adventures of Elliot Manuscript Locations",
+    },
+  {
     href: "/the-adventures-of-elliot/cat-locations",
     label: "The Adventures of Elliot Cat Locations",
   },

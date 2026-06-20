@@ -58,6 +58,10 @@ const relatedLinks = [
     href: "/the-adventures-of-elliot/achievements-guide",
     label: "The Adventures of Elliot Achievements Guide",
   },
+  {
+    href: "/the-adventures-of-elliot/manuscript-locations",
+    label: "The Adventures of Elliot Manuscript Locations",
+    },
 ];
 
 export const metadata: Metadata = {

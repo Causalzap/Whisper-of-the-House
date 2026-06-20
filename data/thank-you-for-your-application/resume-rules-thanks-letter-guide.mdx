@@ -1,0 +1,645 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import Image from "next/image";
+
+export const routineColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Action", label: "Action" },
+{ key: "What To Check", label: "What To Check" },
+];
+
+export const routineRows = [
+{
+Step: "1",
+Action: "Read the Job Requirements tab before calling candidates.",
+"What To Check":
+"Today's education rule, document rule, internship / work-experience rule, Psychological Evaluation Report rule, local / non-local split, and breakdown-index limit.",
+},
+{
+Step: "2",
+Action: "Check whether the resume exists.",
+"What To Check":
+"If the candidate must provide a resume and there is no resume, reject for the missing resume requirement.",
+},
+{
+Step: "3",
+Action: "Identify local vs non-local status.",
+"What To Check":
+"Read the school / city on the resume, then compare it with the School Reference Table and the current rule. Early examples treat Aeropolis / Aropolis schools as local and Manato schools as non-local.",
+},
+{
+Step: "4",
+Action: "Check required documents.",
+"What To Check":
+"Graduation certificate, internship / work-experience proof, Psychological Evaluation Report, visa / residence-related documents, or company-related documents if the day asks for them.",
+},
+{
+Step: "5",
+Action: "Compare identity fields.",
+"What To Check":
+"Name, social number, school name, certificate stamp, assessment date, and other highlighted fields must match across documents.",
+},
+{
+Step: "6",
+Action: "Check numbers and limits.",
+"What To Check":
+"Candidate breakdown-index requirements can change by day. Do not approve only because the report exists; check the actual number.",
+},
+{
+Step: "7",
+Action: "Decide approve or reject.",
+"What To Check":
+"Approve only when every active rule passes. If one rule fails, select the exact failed field before generating a Thanks Letter.",
+},
+{
+Step: "8",
+Action: "Generate and attach the Thanks Letter.",
+"What To Check":
+"After selecting the failed reason, use the Thanks Letter button at the lower-right area of the interface, attach the generated ticket to the resume, then send the resume to the reject folder.",
+},
+{
+Step: "9",
+Action: "Confirm the folder choice.",
+"What To Check":
+"Green folder approves, red folder rejects. If extra documents are still attached, remove or handle them before confirming the folder.",
+},
+];
+
+export const localColumns = [
+{ key: "Candidate Signal", label: "Candidate Signal" },
+{ key: "How To Read It", label: "How To Read It" },
+{ key: "Common Rule Result", label: "Common Rule Result" },
+];
+
+export const localRows = [
+{
+"Candidate Signal": "Aeropolis / Aropolis school on the resume",
+"How To Read It":
+"Treat the candidate as local when the current rule and reference table classify the school as an Aeropolis / Aropolis school.",
+"Common Rule Result":
+"Local candidates usually need fewer extra anti-forgery documents early on, unless today's rule says otherwise.",
+},
+{
+"Candidate Signal": "University of Manato",
+"How To Read It":
+"Compare it with the non-local school list and current Job Requirements.",
+"Common Rule Result":
+"Non-local candidates may need a graduation certificate or other supporting document.",
+},
+{
+"Candidate Signal": "Manato Ocean University",
+"How To Read It":
+"Use the School Reference Table instead of guessing from the name.",
+"Common Rule Result":
+"If treated as non-local that day, check whether the extra certificate / proof is present.",
+},
+{
+"Candidate Signal": "Manato Community College",
+"How To Read It":
+"Use the School Reference Table and current education rule.",
+"Common Rule Result":
+"Can fail if the day excludes community college or requires a stronger academic background.",
+},
+{
+"Candidate Signal": "School name looks similar but not identical",
+"How To Read It":
+"Do not approve from memory. Compare exact spelling, school category, and certificate stamp.",
+"Common Rule Result":
+"Wrong-school and stamp-discrepancy mistakes can lower accuracy and pay.",
+},
+];
+
+export const documentColumns = [
+{ key: "Document / Field", label: "Document / Field" },
+{ key: "What To Check", label: "What To Check" },
+{ key: "Reject When", label: "Reject When" },
+];
+
+export const documentRows = [
+{
+"Document / Field": "Resume",
+"What To Check": "Candidate name, school, social number, and required background.",
+"Reject When":
+"The resume is missing, the school fails today's rule, or the resume conflicts with another document.",
+},
+{
+"Document / Field": "Graduation certificate",
+"What To Check":
+"Whether the candidate needs it, then compare name, social number, school, stamp, and date.",
+"Reject When":
+"The certificate is missing for a non-local / required candidate, or certificate details do not match the resume.",
+},
+{
+"Document / Field": "Internship / work experience",
+"What To Check":
+"Whether today's requirement asks for at least one internship or work-experience proof.",
+"Reject When":
+"The candidate does not meet the experience requirement, even if the school looks eligible.",
+},
+{
+"Document / Field": "Psychological Evaluation Report",
+"What To Check":
+"Presence, date of assessment, identity fields, and breakdown-index value.",
+"Reject When":
+"The report is missing, dated incorrectly, tied to the wrong identity, or outside the breakdown-index limit.",
+},
+{
+"Document / Field": "Name",
+"What To Check":
+"Name on resume compared with certificate, report, and any extra proof.",
+"Reject When":
+"Names do not match and no rule allows the mismatch.",
+},
+{
+"Document / Field": "Social number",
+"What To Check":
+"Social number on resume compared with certificate or report.",
+"Reject When":
+"Social numbers do not match. This is one of the fastest forged-document checks.",
+},
+{
+"Document / Field": "Date",
+"What To Check":
+"Assessment date, certificate date, or other highlighted date field.",
+"Reject When":
+"The document exists but the date is invalid. Select the date field, not missing document.",
+},
+{
+"Document / Field": "Breakdown index value",
+"What To Check":
+"Candidate report value against today's limit.",
+"Reject When":
+"The candidate's breakdown index exceeds the rule limit for that day.",
+},
+];
+
+export const thanksLetterColumns = [
+{ key: "Failed Case", label: "Failed Case" },
+{ key: "Select This Reason / Field", label: "Select This Reason / Field" },
+{ key: "Why This Is Easy To Miss", label: "Why This Is Easy To Miss" },
+];
+
+export const thanksLetterRows = [
+{
+"Failed Case": "Missing graduation certificate",
+"Select This Reason / Field": "Graduation certificate requirement.",
+"Why This Is Easy To Miss":
+"The resume can look valid, but the rule may require a certificate for non-local candidates.",
+},
+{
+"Failed Case": "Graduation certificate details do not match",
+"Select This Reason / Field": "The mismatched name, social number, school, stamp, or date field.",
+"Why This Is Easy To Miss":
+"Do not reject for missing certificate if the certificate exists. Reject for the wrong field.",
+},
+{
+"Failed Case": "Missing internship / work experience",
+"Select This Reason / Field": "Internship / work-experience requirement.",
+"Why This Is Easy To Miss":
+"Education and experience are separate checks. A good school does not replace the internship requirement.",
+},
+{
+"Failed Case": "Missing Psychological Evaluation Report",
+"Select This Reason / Field": "Psychological Evaluation Report requirement.",
+"Why This Is Easy To Miss":
+"The candidate may explain the missing report, but the rule still requires the document.",
+},
+{
+"Failed Case": "Invalid Psychological Evaluation Report date",
+"Select This Reason / Field": "Report date field.",
+"Why This Is Easy To Miss":
+"The report exists, so missing report is the wrong reason. Select the invalid date.",
+},
+{
+"Failed Case": "Identity mismatch",
+"Select This Reason / Field": "Name or social number mismatch.",
+"Why This Is Easy To Miss":
+"This is a forged-document check. The candidate can have every required paper and still fail.",
+},
+{
+"Failed Case": "Candidate breakdown index too high",
+"Select This Reason / Field": "Breakdown index / report value field.",
+"Why This Is Easy To Miss":
+"A report can be present but still fail because the number is outside the requirement.",
+},
+];
+
+export const breakdownColumns = [
+{ key: "Breakdown Check", label: "Breakdown Check" },
+{ key: "Known Limit / Rule", label: "Known Limit / Rule" },
+{ key: "How To Use It", label: "How To Use It" },
+];
+
+export const breakdownRows = [
+{
+"Breakdown Check": "Candidate Psychological Evaluation Report",
+"Known Limit / Rule":
+"Early rules can require a candidate breakdown index not to exceed 40%. Later workdays can show a 35 limit.",
+"How To Use It":
+"Check the current Job Requirements before deciding. Candidate limits are day rules, not permanent universal numbers.",
+},
+{
+"Breakdown Check": "C89's own breakdown index",
+"Known Limit / Rule":
+"Day 4 uses 40 as the survival limit; after Day 4, the practical danger limit becomes 35.",
+"How To Use It":
+"Check personal status before sleeping, after overtime, or after stressful route choices.",
+},
+{
+"Breakdown Check": "Candidate report present but value fails",
+"Known Limit / Rule":
+"Presence alone is not enough; the value must pass the day's threshold.",
+"How To Use It":
+"Reject for the breakdown-index value, not for missing Psychological Evaluation Report.",
+},
+{
+"Breakdown Check": "High personal stress before work",
+"Known Limit / Rule":
+"Your own breakdown does not change which candidate rule is correct, but it affects how safely you can continue the day or stack overtime.",
+"How To Use It":
+"Avoid overtime or risky route choices when C89's breakdown index is already near the limit.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Approving from school name alone",
+"Why It Hurts":
+"The candidate may still be missing a certificate, internship, report, or matching identity field.",
+Fix: "Use the full routine: school, required documents, identity fields, numbers, then decision.",
+},
+{
+Mistake: "Rejecting without a Thanks Letter",
+"Why It Hurts":
+"Once Thanks Letters are required, correct rejection still needs the correct reason attached.",
+Fix: "Select the failed field, generate the Thanks Letter, attach it, then reject.",
+},
+{
+Mistake: "Selecting missing report when only the date is wrong",
+"Why It Hurts":
+"The game can punish the wrong rejection reason even when the candidate should fail.",
+Fix: "If the report exists, select the invalid field such as date, identity, or value.",
+},
+{
+Mistake: "Ignoring local vs non-local status",
+"Why It Hurts":
+"Non-local candidates may need extra anti-forgery documents.",
+Fix: "Read the school / city field and compare it with the School Reference Table and current rule.",
+},
+{
+Mistake: "Forgetting the candidate breakdown-index value",
+"Why It Hurts":
+"A candidate can have a valid-looking report but fail the daily number limit.",
+Fix: "Compare the report value with today's Job Requirements.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In the game **Thank You For Your Application** on Steam, resume rules are not just pass or fail by school name. You need to read the **Job Requirements tab**, check local vs non-local status, verify required documents, compare forged-document fields, select the exact failed reason, generate a **Thanks Letter**, attach it, and then reject.
+
+The most common hard checks are **graduation certificate**, **internship / work experience**, **Psychological Evaluation Report**, **name / social number mismatch**, **invalid report date**, and **breakdown index**. Candidate breakdown-index limits can change by day; early rules can use **40%**, while later workdays can show a **35** limit.
+
+Standard Mode is timed, so use the same check order every shift. **Subsidy Mode** removes the interview time barrier, which makes it easier to learn Thanks Letter reasons before trying faster normal workdays. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 20, 2026 · Covers launch version through Patch 1.0.4, including Thanks Letter UI behavior, document checks, local vs non-local screening, breakdown-index limits, and automatic-save safety notes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-day-one-requirements.webp"
+    alt="Day 1 job requirements in Thank You For Your Application"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Job Requirements tab is the rule source. Read it before checking resumes or calling the next candidate.
+  </figcaption>
+</figure>
+
+<h2 id="resume-rules-thanks-letter-guide">
+  Thank You For Your Application resume rules and Thanks Letter guide
+</h2>
+
+This **Thank You For Your Application resume rules guide** explains how to approve, reject, and write the correct Thanks Letter reason during workdays. The goal is simple: make the right hiring decision and attach the right rejection reason before the game turns small mistakes into wage penalties or route damage.
+
+This page focuses on document screening. For full endings, use the <Link href="/thank-you-for-your-application/endings-guide">Endings Guide</Link>. For all Steam achievements, use the <Link href="/thank-you-for-your-application/achievements-guide">Achievements Guide</Link>.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="safe-workday-routine">
+  Safe routine for every workday
+</h2>
+
+Standard Mode is timed. Time runs during interviews, and no more candidates can be called after the end-of-day cutoff. Subsidy Mode removes the interview time barrier, but the document logic is the same.
+
+Use the same check order every shift. In Standard Mode, this routine only feels slow at first; after a few days, the fixed order helps you scan faster because you are no longer deciding what to check next.
+
+<GuideTable
+caption="Safe document check order."
+columns={routineColumns}
+rows={routineRows}
+/>
+
+<h2 id="local-vs-non-local-candidates">
+  Local vs non-local candidates
+</h2>
+
+Local vs non-local status changes which extra documents you should expect. Do not guess from the candidate portrait or dialogue. Read the school / city on the resume, then compare it with the current Job Requirements and School Reference Table.
+
+<GuideTable
+caption="How to read local and non-local candidate signals."
+columns={localColumns}
+rows={localRows}
+/>
+
+Early non-local checks use schools such as **University of Manato**, **Manato Ocean University**, and **Manato Community College** as obvious warning signs. If a candidate is treated as non-local that day, look for the required extra document before approving.
+
+<h2 id="document-checks">
+  Document checks: resume, certificate, internship, report, identity
+</h2>
+
+The safest way to screen a candidate is to separate document presence from document validity. A candidate can have the right document type and still fail because the name, social number, date, school, or value does not match.
+
+<GuideTable
+caption="Core document checks."
+columns={documentColumns}
+rows={documentRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-graduation-certificate-check.webp"
+    alt="Graduation certificate check in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Graduation certificates must match the resume, not merely exist.
+  </figcaption>
+</figure>
+
+<h2 id="thanks-letter-ui">
+  Thanks Letter UI: select reason, generate, attach, reject
+</h2>
+
+Once Thanks Letters are required, rejecting is a four-step action: select the failed field, press the Thanks Letter button at the lower-right area of the interface, attach the generated ticket to the resume, then send the resume to the red reject folder.
+
+The button only matters after you select the exact reason. If the report date is wrong, select the date. If the certificate is missing, select the certificate requirement. If the social number does not match, select the mismatched identity field.
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-thanks-letter-tutorial.webp"
+    alt="Thanks Letter tutorial in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A correct rejection still needs the correct Thanks Letter reason once the system is active.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="Thanks Letter rejection reasons."
+columns={thanksLetterColumns}
+rows={thanksLetterRows}
+/>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="graduation-certificate-rules">
+  Graduation certificate rules
+</h2>
+
+Graduation certificates are mainly an anti-forgery check. When the rule asks for one, do not stop at “certificate present.” Compare:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>candidate name,</li>
+  <li>social number,</li>
+  <li>school name,</li>
+  <li>school stamp,</li>
+  <li>certificate date,</li>
+  <li>and whether the school fits today's local / non-local rule.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-missing-graduation-certificate-thanks-letter.webp"
+    alt="Missing graduation certificate Thanks Letter in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the rule asks for a graduation certificate and the candidate does not provide it, reject for the certificate requirement.
+  </figcaption>
+</figure>
+
+<h2 id="internship-work-experience">
+  Internship and work experience rules
+</h2>
+
+Internship and work-experience checks are separate from school checks. A candidate can have the right school and still fail because today's rule asks for at least one internship or another work-experience proof.
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-missing-internship-rejection.webp"
+    alt="Missing internship rejection in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the day asks for internship or work experience, education alone is not enough.
+  </figcaption>
+</figure>
+
+When this rule is active, check the resume first, then any attached proof. If the candidate has no required experience, select the internship / work-experience requirement before generating the Thanks Letter.
+
+<h2 id="psychological-evaluation-report">
+  Psychological Evaluation Report rules
+</h2>
+
+Psychological Evaluation Reports can fail in three different ways:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>the report is missing,</li>
+  <li>the report exists but the date is invalid,</li>
+  <li>the report exists but the breakdown-index value fails the day's limit.</li>
+</ul>
+
+Do not treat these as the same rejection. The Thanks Letter reason should match the exact failure.
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-missing-psychological-evaluation-report.webp"
+    alt="Missing Psychological Evaluation Report in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Missing report and invalid report field are different rejection reasons.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-psychological-report-date-invalid.webp"
+    alt="Invalid Psychological Evaluation Report date in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the report date is invalid, select the date field instead of treating the whole report as missing.
+  </figcaption>
+</figure>
+
+<h2 id="breakdown-index-limits">
+  Breakdown index limits
+</h2>
+
+Do not mix up two different breakdown checks. **Candidate breakdown index** is a document-screening value on Psychological Evaluation Reports. **C89's own breakdown index** is your survival / route-safety value, checked through apartment status or A02.
+
+Candidate breakdown decides whether the applicant passes today's rule. C89's own breakdown does not change the correct hiring decision, but it can make overtime, sleep, and late route choices dangerous.
+
+<GuideTable
+caption="Breakdown index checks."
+columns={breakdownColumns}
+rows={breakdownRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/thank-you-for-your-application/thank-you-for-your-application-breakdown-index-apartment.webp"
+    alt="Breakdown index in the apartment in Thank You For Your Application"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    C89's own breakdown index is checked from personal status, while candidate breakdown values are checked from Psychological Evaluation Reports.
+  </figcaption>
+</figure>
+
+<h2 id="mental-health-and-document-checking">
+  Does your own mental health affect document checking?
+</h2>
+
+C89's own breakdown index does not change which candidate rule is correct. If a candidate fails the school rule, certificate rule, internship rule, or report-value rule, the correct document decision stays the same.
+
+What your own mental state changes is route safety. High breakdown makes overtime and end-of-day choices more dangerous. Before you keep working late, shop, sleep, or push a route scene, check personal status through A02 or the apartment status screen.
+
+<h2 id="when-to-approve">
+  When should you approve a candidate?
+</h2>
+
+Approve only when every active rule passes:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>the required resume is present,</li>
+  <li>school / local / non-local status passes today's rule,</li>
+  <li>all required extra documents are present,</li>
+  <li>identity fields match across documents,</li>
+  <li>dates and stamps are valid,</li>
+  <li>internship or work-experience requirements are met,</li>
+  <li>Psychological Evaluation Report rules pass,</li>
+  <li>and breakdown-index value is within today's allowed limit.</li>
+</ul>
+
+If any one of these fails, do not approve. Select the exact failed reason and generate the Thanks Letter.
+
+<h2 id="common-mistakes">
+  Common resume and Thanks Letter mistakes
+</h2>
+
+Use this table when your daily report shows wrong decisions, penalties, or unexpected accuracy loss.
+
+<GuideTable
+caption="Common document-checking mistakes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these guides next:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/thank-you-for-your-application/beginner-guide">Beginner Guide</Link> — for Subsidy Mode, probation, pay, bills, A02, breakdown index, and checkpoint safety.
+  </li>
+  <li>
+    <Link href="/thank-you-for-your-application/final-evaluation-job-hopping-answers">Final Evaluation & Job-Hopping Answers</Link> — for fixing Day 30 results, Illegal Layoff, Failed Performance Review, and job-hopping answers.
+  </li>
+  <li>
+    <Link href="/thank-you-for-your-application/endings-guide">Endings Guide</Link> — for A02, Escape, Job for Life, failure states, and ending checkpoints.
+  </li>
+  <li>
+    <Link href="/thank-you-for-your-application/achievements-guide">Achievements Guide</Link> — for all 15 Steam achievements, hidden achievements, overtime, A02, and route cleanup.
+  </li>
+  <li>
+    <Link href="/thank-you-for-your-application">Thank You For Your Application Guide Hub</Link> — for all related guides and common questions.
+  </li>
+</ol>
+
+<h2 id="faq">
+  Thank You For Your Application resume rules FAQ
+</h2>
+
+### What is the first thing I should check?
+
+Open the Job Requirements tab. It shows which school, document, internship, report, and breakdown-index rules are active that day. Read it before calling any candidate.
+
+### Where is the Thanks Letter button?
+
+After you select the failed requirement or invalid field, use the Thanks Letter button at the lower-right area of the interface. Generate the ticket, attach it to the resume, then reject.
+
+### Why did I lose money even though the candidate should fail?
+
+The pass / fail decision may be correct, but the Thanks Letter reason may be wrong or missing. Once Thanks Letters are required, the rejection reason matters.
+
+### How do I tell whether a candidate is local or non-local?
+
+Read the school / city shown on the resume and compare it with the School Reference Table and today's Job Requirements. Early examples treat Aeropolis / Aropolis schools as local and Manato schools as non-local.
+
+### Do non-local candidates always need a graduation certificate?
+
+Do not assume it forever. Check today's rule. When the rule says non-local graduates need a graduation certificate, reject non-local candidates who do not provide it.
+
+### What is the breakdown index limit?
+
+Candidate breakdown-index limits can change by day. Early report checks can use 40%, and later workdays can show 35. C89's own breakdown danger also uses 40 on Day 4 and 35 after Day 4.
+
+### Is missing Psychological Evaluation Report the same as invalid date?
+
+No. If the report is missing, select the missing report requirement. If the report exists but the date is invalid, select the report date field.
+
+### Does C89's own breakdown index change document rules?
+
+No. It does not change which candidate rule is correct. It affects route safety, overtime risk, and whether ending the day is dangerous.
+
+### Does Standard Mode have a time limit?
+
+Yes. Standard Mode is timed: time runs during interviews and the workday cuts off at the end-of-day limit. Subsidy Mode removes the interview time barrier.
+
+### Should I use this page or the Beginner Guide?
+
+Use this page when you are making document decisions or choosing Thanks Letter reasons. Use the Beginner Guide for broader survival topics like pay, bills, Subsidy Mode, A02, and first-run planning.
