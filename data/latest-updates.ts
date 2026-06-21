@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Guide Collections =====
+{
+  href: "/new-steam-game-guides",
+  game: "Guide Collections",
+  title: "New Steam Game Guides",
+  description:
+  "Find new Steam games with practical beginner paths, Steam snapshots, endings, achievements, builds, cozy progression, survival tips, and guide-backed review notes.",
+  tagClass: "text-purple-500",
+  hoverBorderClass: "hover:border-purple-300",
+  hoverTitleClass: "group-hover:text-purple-700",
+  },
+  
+  // ===== Guide Collections =====
+  {
+  href: "/best-games-with-multiple-endings",
+  game: "Guide Collections",
+  title: "Games With Multiple Endings",
+  description:
+  "Find games where endings, choices, route locks, true ending requirements, achievements, survival checks, and spoiler-light guide paths matter.",
+  tagClass: "text-rose-500",
+  hoverBorderClass: "hover:border-rose-300",
+  hoverTitleClass: "group-hover:text-rose-700",
+  },
+  
+  // ===== Guide Collections =====
+  {
+  href: "/best-steam-indie-games-with-guides",
+  game: "Guide Collections",
+  title: "Steam Indie Games With Guides",
+  description:
+  "Browse Steam indie and indie-scale games where guides help with first routes, builds, collectibles, achievements, automation, and progression.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+  // ===== Guide Collections =====
+  {
+  href: "/best-cozy-management-crafting-games",
+  game: "Guide Collections",
+  title: "Cozy Management & Crafting Games",
+  description:
+  "Find cozy, crafting, management, repair, life sim, automation, and base-building games with practical guide paths for early systems.",
+  tagClass: "text-amber-500",
+  hoverBorderClass: "hover:border-amber-300",
+  hoverTitleClass: "group-hover:text-amber-700",
+  },
+  
 // ===== Thank You For Your Application =====
 {
   href: "/thank-you-for-your-application",
