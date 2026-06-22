@@ -1,0 +1,750 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import Image from "next/image";
+
+export const unlockColumns = [
+{ key: "Order", label: "Order" },
+{ key: "Component", label: "Component" },
+{ key: "Why Unlock It", label: "Why Unlock It" },
+{ key: "First Good Use", label: "First Good Use" },
+];
+
+export const unlockRows = [
+{
+Order: "1",
+Component: "Lever",
+"Why Unlock It":
+"It is the simplest manual control and a useful emergency override for later circuits.",
+"First Good Use":
+"Switch a group of floodgates, valves, or powered buildings on and off together.",
+},
+{
+Order: "2",
+Component: "Depth Sensor / Stream Gauge",
+"Why Unlock It":
+"Water automation needs a real depth reading instead of guessing from the map view.",
+"First Good Use":
+"Open a reservoir outlet when water is above 2.0 m, or trigger emergency pumping below 0.5 m.",
+},
+{
+Order: "3",
+Component: "Flow Sensor",
+"Why Unlock It":
+"Depth tells you how much water is there. Flow tells you whether water is actually moving.",
+"First Good Use":
+"Detect whether a water-wheel or river-power channel is still active.",
+},
+{
+Order: "4",
+Component: "Relay",
+"Why Unlock It":
+"Relays let you combine conditions with AND, OR, NOT, or XOR logic.",
+"First Good Use":
+"Open a badwater outlet if contamination is detected OR badtide weather starts.",
+},
+{
+Order: "5",
+Component: "Timer / Delay",
+"Why Unlock It":
+"Water levels can bounce around a threshold and cause valves to flicker.",
+"First Good Use":
+"Wait a few moments before changing a valve or floodgate state.",
+},
+{
+Order: "6",
+Component: "Contamination Sensor",
+"Why Unlock It":
+"Badwater and badtides need fast reactions before toxic water reaches farms or pumps.",
+"First Good Use":
+"Close a clean-water inlet or open a badwater outlet when contamination rises above 5%.",
+},
+{
+Order: "7",
+Component: "Resource / Storage Counter",
+"Why Unlock It":
+"Powered buildings waste power if output storage is full or input storage is empty.",
+"First Good Use":
+"Pause a powered building when its output is already above your target reserve.",
+},
+{
+Order: "8",
+Component: "Population Counter",
+"Why Unlock It":
+"Population growth is useful only when food, water, and jobs can support it.",
+"First Good Use":
+"Open extra housing only when free beds reach zero and supplies are stable.",
+},
+];
+
+export const componentColumns = [
+{ key: "Component", label: "Component" },
+{ key: "Detects / Controls", label: "Detects / Controls" },
+{ key: "Best Use", label: "Best Use" },
+{ key: "Do Not Use It For", label: "Do Not Use It For" },
+];
+
+export const componentRows = [
+{
+Component: "Lever",
+"Detects / Controls": "Manual on/off signal.",
+"Best Use":
+"Emergency override, testing a new circuit, or controlling several outputs together.",
+"Do Not Use It For":
+"Fully automatic water control by itself. It is manual, not a sensor.",
+},
+{
+Component: "Depth Sensor / Stream Gauge",
+"Detects / Controls": "Water depth beneath its placement tile.",
+"Best Use":
+"Reservoir release, emergency low-water logic, and irrigation depth tuning.",
+"Do Not Use It For":
+"Detecting water flow or contamination. Use a Flow Sensor for movement and a Contamination Sensor for toxic water.",
+},
+{
+Component: "Flow Sensor",
+"Detects / Controls": "Whether water is moving through a channel.",
+"Best Use":
+"Water-wheel channels, flow-dependent power, and checking if a route is active.",
+"Do Not Use It For":
+"Checking water depth. Moving water and deep water are different problems.",
+},
+{
+Component: "Weather / Drought Sensor",
+"Detects / Controls": "Season or weather state such as drought or badtide.",
+"Best Use":
+"Switching gates, outlets, or production modes during non-temperate weather.",
+"Do Not Use It For":
+"Replacing water-level checks. Weather does not tell you how much water remains.",
+},
+{
+Component: "Contamination Sensor",
+"Detects / Controls": "Badwater contamination.",
+"Best Use":
+"Opening badwater outlets, closing clean-water inlets, or protecting reservoirs.",
+"Do Not Use It For":
+"A route that has no safe toxic-water exit.",
+},
+{
+Component: "Storage / Resource Counter",
+"Detects / Controls": "How much of a resource is stored.",
+"Best Use":
+"Pausing powered buildings when output is full or input is missing.",
+"Do Not Use It For":
+"Direct water-flow decisions unless the resource is actually the bottleneck.",
+},
+{
+Component: "Population Counter",
+"Detects / Controls": "Population, free beds, or related growth state.",
+"Best Use":
+"Controlled housing expansion after food and water are stable.",
+"Do Not Use It For":
+"Forcing growth during a water or food shortage.",
+},
+{
+Component: "Fill Valve",
+"Detects / Controls": "Allows water to fill an area up to a target behavior.",
+"Best Use":
+"Replacing older simple inlet logic where you want filling behavior.",
+"Do Not Use It For":
+"Precise slow release when flow rate matters more than fill state.",
+},
+{
+Component: "Throttling Valve",
+"Detects / Controls": "One-way outlet with adjustable flow rate.",
+"Best Use":
+"Slow reservoir release, irrigation tanks, badwater outlets, and stable controlled flow.",
+"Do Not Use It For":
+"Fixing a channel that floods because the route itself is wrong.",
+},
+];
+
+export const logicColumns = [
+{ key: "Logic", label: "Logic" },
+{ key: "Plain Meaning", label: "Plain Meaning" },
+{ key: "Timberborn Use Case", label: "Timberborn Use Case" },
+];
+
+export const logicRows = [
+{
+Logic: "AND",
+"Plain Meaning": "Trigger only when every condition is true.",
+"Timberborn Use Case":
+"Open a reservoir outlet only if water depth is above 2.0 m AND drought is active.",
+},
+{
+Logic: "OR",
+"Plain Meaning": "Trigger when any condition is true.",
+"Timberborn Use Case":
+"Open a badwater outlet if contamination is above 5% OR badtide weather starts.",
+},
+{
+Logic: "NOT",
+"Plain Meaning": "Invert the signal.",
+"Timberborn Use Case":
+"Pause a pump or factory when storage is NOT below the target threshold.",
+},
+{
+Logic: "XOR",
+"Plain Meaning": "Trigger when exactly one condition is true, but not both.",
+"Timberborn Use Case":
+"Use for special routing where one water source should feed a channel, but not both at once.",
+},
+{
+Logic: "Flip-Flop / Memory",
+"Plain Meaning":
+"Keep a state until another signal resets it.",
+"Timberborn Use Case":
+"Open a housing block once free beds hit zero, then keep it open. A Flip-Flop holds this state until a reset input fires.",
+},
+{
+Logic: "Timer / Delay",
+"Plain Meaning": "Wait before changing the output.",
+"Timberborn Use Case":
+"Stop a valve from opening and closing every few seconds near the same water level.",
+},
+];
+
+export const circuitColumns = [
+{ key: "Mini Circuit", label: "Mini Circuit" },
+{ key: "Inputs", label: "Inputs" },
+{ key: "Logic", label: "Logic" },
+{ key: "Output", label: "Output" },
+];
+
+export const circuitRows = [
+{
+"Mini Circuit": "Badwater outlet",
+Inputs:
+"Contamination Sensor > 5%; Weather Sensor = Badtide",
+Logic: "OR Relay",
+Output:
+"Open the badwater outlet valve or floodgate when either condition is true.",
+},
+{
+"Mini Circuit": "Drought reservoir release",
+Inputs:
+"Depth Sensor > 2.0 m; Weather Sensor = Drought",
+Logic: "AND Relay + short delay",
+Output:
+"Release water from the reservoir only when there is enough water and drought is active.",
+},
+{
+"Mini Circuit": "Emergency low-water trigger",
+Inputs:
+"Depth Sensor < 0.5 m",
+Logic:
+"Set the threshold directly on the Depth Sensor; no NOT relay needed.",
+Output:
+"Start emergency pumping, close an outlet, or alert you that the river buffer is almost gone.",
+},
+{
+"Mini Circuit": "Powered building pause",
+Inputs:
+"Output storage high; input storage low",
+Logic: "OR Relay or threshold pair",
+Output:
+"Pause the powered building when production would waste power or materials.",
+},
+{
+"Mini Circuit": "Controlled housing expansion",
+Inputs:
+"Free beds = 0; food reserve safe; water reserve safe",
+Logic: "AND Relay + Flip-Flop / Memory",
+Output:
+"Open the next housing block and keep it open until a reset condition fires.",
+},
+];
+
+export const flowColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Better Component", label: "Better Component" },
+{ key: "Why", label: "Why" },
+];
+
+export const flowRows = [
+{
+Problem: "You need a route to fill up to a target state.",
+"Better Component": "Fill Valve",
+Why: "It is better for filling behavior than dumping water freely.",
+},
+{
+Problem: "You need slow controlled release.",
+"Better Component": "Throttling Valve",
+Why: "It controls flow rate, which is safer for irrigation and badwater outlets.",
+},
+{
+Problem: "You need to hold or release by water height.",
+"Better Component": "Floodgate",
+Why: "Floodgates are height tools, not fine flow-rate tools.",
+},
+{
+Problem: "You need to measure whether a route is moving.",
+"Better Component": "Flow Sensor",
+Why: "Depth alone does not tell you whether water is flowing.",
+},
+{
+Problem: "You need to measure whether enough water remains.",
+"Better Component": "Depth Sensor / Stream Gauge",
+Why: "Flow can be active even when a reservoir is about to run out.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Breaks", label: "Why It Breaks" },
+{ key: "Better Fix", label: "Better Fix" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Automating before the manual route works",
+"Why It Breaks":
+"The logic may trigger correctly while water still flows to the wrong place.",
+"Better Fix":
+"Open and close the route by hand first, then automate the proven behavior.",
+},
+{
+Mistake: "Using OR when you need AND",
+"Why It Breaks":
+"The output triggers too easily and may open during unsafe conditions.",
+"Better Fix":
+"Use AND when every condition must be true before the gate, valve, or building changes.",
+},
+{
+Mistake: "Using AND when you need OR",
+"Why It Breaks":
+"The output waits for too many conditions and reacts too late.",
+"Better Fix":
+"Use OR when any danger condition should trigger the response.",
+},
+{
+Mistake: "No delay near a water threshold",
+"Why It Breaks":
+"The output changes the water level, which immediately changes the sensor reading again.",
+"Better Fix":
+"Add a timer, delay, or wider threshold so the system stops flickering.",
+},
+{
+Mistake: "Reading the wrong tile",
+"Why It Breaks":
+"The circuit behaves correctly, but the sensor is measuring a part of the system that does not matter.",
+"Better Fix":
+"Place sensors where the problem actually happens: reservoir depth, outlet flow, or contamination point.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For logic, remember this: **AND** means all conditions must be true, **OR** means any condition can trigger, **NOT** reverses a signal, and **XOR** is for “one but not both.” Most useful beginner circuits are simple: contamination above 5% OR badtide active opens a badwater outlet; water depth above 2.0 m AND drought active releases reservoir water.
+
+Do not wire ten conditions at once. Build one small circuit, test it, then add delay or memory only if the system needs it.
+
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 22, 2026. Covers Timberborn 1.0 automation components, levers, sensors, relays, AND / OR / NOT / XOR logic, flip-flops, timers, badwater circuits, reservoir release, powered building thresholds, population expansion, fill valves and throttling valves.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-automation-throttling-valves.webp"
+    alt="Throttling valves prepared for automation in Timberborn"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Automation is strongest when it controls a working system. Throttling valves are useful because they control flow rate instead of simply opening or closing.
+  </figcaption>
+</figure>
+
+<h2 id="timberborn-automation-guide">
+  Timberborn automation guide
+</h2>
+
+This **Timberborn automation guide** is for players who have working dams, reservoirs, badwater routes, factories, or housing plans and want those systems to run with less manual babysitting.
+
+Automation is not only about placing sensors. A good circuit needs four things:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a clear problem,</li>
+  <li>the right input signal,</li>
+  <li>the right logic mode,</li>
+  <li>a safe output that cannot ruin the colony if it triggers.</li>
+</ul>
+
+The shortest rule is: **manual route first, circuit second**. If a badwater outlet has nowhere safe to drain, an OR relay will not save it. If a reservoir floods when opened by hand, automation will only flood it more consistently.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="unlock-order">
+  Recommended automation unlock order
+</h2>
+
+If you are new to Timberborn automation, do not unlock everything randomly. Start with tools that are easy to test and useful as overrides.
+
+<GuideTable
+caption="Recommended Timberborn automation unlock order."
+columns={unlockColumns}
+rows={unlockRows}
+/>
+
+This order gives you practical control first. A Lever helps you test. A Depth Sensor helps you measure. A Relay lets you combine conditions. Timers and memory become useful only after you understand the basic signal.
+
+<h2 id="automation-components">
+  Automation components: what each one is for
+</h2>
+
+Most confusion comes from using the wrong input. A Flow Sensor is not a Depth Sensor. A Weather Sensor does not tell you how much water remains. A Resource Counter does not know whether a river is contaminated.
+
+<GuideTable
+caption="Timberborn automation components and best uses."
+columns={componentColumns}
+rows={componentRows}
+/>
+
+The first real question is always: **what am I trying to detect?**
+The second question is: **what should happen when that condition is true?**
+
+<h2 id="logic-gates">
+  Logic gates: when to use AND, OR, NOT, XOR, memory and delay
+</h2>
+
+Relays and logic parts are where Timberborn automation becomes useful. They are also where many players wire the right components in the wrong way.
+
+<GuideTable
+caption="Timberborn automation logic modes explained."
+columns={logicColumns}
+rows={logicRows}
+/>
+
+Use **AND** when you need safety. For example, do not release reservoir water unless the reservoir has enough depth **and** drought is active.
+
+Use **OR** when any danger should trigger a response. For example, open a badwater outlet if contamination appears **or** badtide weather begins.
+
+Use **NOT** when the default signal is backwards. If a building should run only when storage is low, you may need to invert a “storage is high” condition.
+
+Use **XOR** rarely. It is for special cases where one condition is allowed, but two at the same time should not trigger the output.
+
+Use **Memory / Flip-Flop** when you need the circuit to remember a state. This is useful for housing expansion or production modes that should stay on until a reset condition happens.
+
+<h2 id="mini-circuits">
+  Mini circuits you can copy
+</h2>
+
+Use these as starting patterns. Adjust thresholds for your map, drought length, water depth, and storage size.
+
+<GuideTable
+caption="Simple Timberborn automation circuit examples."
+columns={circuitColumns}
+rows={circuitRows}
+/>
+
+These examples are intentionally small. A five-part circuit that you understand is better than a giant network that you cannot debug.
+
+<h2 id="badwater-outlet-circuit">
+  Mini circuit 1: badwater outlet
+</h2>
+
+Badwater is the cleanest use case for OR logic.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-badtide-contamination-sensor-automation.webp"
+    alt="Contamination sensor and badtide weather automation in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A badwater circuit can open the toxic outlet when contamination appears or when badtide weather starts.
+  </figcaption>
+</figure>
+
+Use this simple version:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Input A: Contamination Sensor &gt; 5%.</li>
+  <li>Input B: Weather Sensor = Badtide.</li>
+  <li>Logic: OR Relay.</li>
+  <li>Output: open the badwater outlet floodgate or throttling valve.</li>
+</ul>
+
+Why OR? Because either condition is enough. If contamination is already in the system, the outlet should open. If a badtide has started, the outlet should prepare before toxic water reaches the main river.
+
+For the manual toxic-water route behind this circuit, use the <Link href="/timberborn/badwater-badtide-guide">Badwater and Badtide Guide</Link>.
+
+<h2 id="reservoir-release-circuit">
+  Mini circuit 2: drought reservoir release
+</h2>
+
+Reservoir release is usually an AND problem. You do not want to release water just because drought is active. You also do not want to release water just because the reservoir is full during normal weather.
+
+A safer pattern is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Input A: Depth Sensor &gt; 2.0 m.</li>
+  <li>Input B: Weather Sensor = Drought.</li>
+  <li>Logic: AND Relay.</li>
+  <li>Stability: short timer or delay.</li>
+  <li>Output: open throttling valve or adjust floodgate.</li>
+</ul>
+
+This circuit says: release water only when there is enough stored depth and the season actually needs it.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-stream-gauge-flow-rate.webp"
+    alt="Stream gauge measuring water depth flow and contamination in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use a depth or stream reading where the reservoir problem actually happens. A sensor on the wrong tile gives the right signal for the wrong place.
+  </figcaption>
+</figure>
+
+If the valve flickers, the threshold is probably too close to the water level that the valve itself changes. Add delay or use a wider target range.
+
+<h2 id="fill-valve-vs-throttling-valve">
+  Fill Valve vs Throttling Valve vs Floodgate
+</h2>
+
+These tools can look similar because they all affect water movement, but they solve different problems.
+
+<GuideTable
+caption="Which water automation output should you use?"
+columns={flowColumns}
+rows={flowRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-irrigation-tank-throttling-valve.webp"
+    alt="Throttling valve controlling water flow into an irrigation tank in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Use throttling valves when dumping the full flow would drain a reservoir, overfill a tank, or flood an irrigation route.
+  </figcaption>
+</figure>
+
+A floodgate is good for height. A throttling valve is good for flow rate. A fill valve is useful when the important behavior is filling a target area rather than releasing water slowly.
+
+For farm watering and underground routes, read the <Link href="/timberborn/irrigation-reservoir-guide">Timberborn Irrigation Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="delay-and-flicker">
+  Timers and delays: stop flickering circuits
+</h2>
+
+Flickering happens when the output changes the same value that the sensor reads.
+
+Example: a valve opens because water depth is high. The valve lowers the water depth. The sensor turns off. The valve closes. The depth rises again. The loop repeats.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-automation-delay-timer.webp"
+    alt="Timer and delay setup used to prevent automation flicker in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Add a timer or delay when a water-level circuit switches too quickly around the same threshold.
+  </figcaption>
+</figure>
+
+Use a timer or delay when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a valve opens and closes every few seconds,</li>
+  <li>water depth hovers near the threshold,</li>
+  <li>a gate changes the level that controls the gate,</li>
+  <li>a building turns on and off because storage is exactly near the limit.</li>
+</ul>
+
+Do not add ten more relays to fix flicker. First add time or widen the threshold.
+
+<h2 id="powered-building-circuit">
+  Mini circuit 3: powered building thresholds
+</h2>
+
+Powered buildings can waste power when outputs are full or inputs are missing. A threshold circuit pauses production before it burns power for nothing.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-automation-powered-building-thresholds.webp"
+    alt="Resource counter and threshold automation for powered buildings in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Resource counters let you pause powered buildings when the output is already full or the input chain is empty.
+  </figcaption>
+</figure>
+
+Use this pattern:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Input A: output storage above your target reserve.</li>
+  <li>Input B: input resource below your safe reserve.</li>
+  <li>Logic: OR Relay.</li>
+  <li>Output: pause the powered building.</li>
+</ul>
+
+Why OR? Either condition is enough to pause. If output is already high, production is wasteful. If input is too low, production cannot run properly.
+
+Add memory if you want the building to stay paused until the output drops below a lower reset threshold. That avoids rapid on/off switching near the same storage number.
+
+<h2 id="population-circuit">
+  Mini circuit 4: controlled housing expansion
+</h2>
+
+Population automation is useful, but it should not be your first automation project. It matters after food, water, and jobs are stable.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-automation-population-free-beds.webp"
+    alt="Population counter and free beds automation in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Free-beds logic can open housing step by step instead of letting population growth explode all at once.
+  </figcaption>
+</figure>
+
+A safe version needs multiple conditions:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Input A: free beds = 0.</li>
+  <li>Input B: food reserve above your safety target.</li>
+  <li>Input C: water reserve above your safety target.</li>
+  <li>Logic: AND Relay.</li>
+  <li>Memory / Flip-Flop: keep the next housing block enabled after it opens.</li>
+  <li>Output: enable the next housing section.</li>
+</ul>
+
+This is an AND circuit because all conditions should be true. Free beds alone should not trigger more housing if the colony is already short on water.
+
+<h2 id="automated-floodgates">
+  Automated floodgates: keep it simple first
+</h2>
+
+Automated floodgates are powerful for drought and badtide control, but they are also easy to overbuild.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-automated-floodgate-dam.webp"
+    alt="Automated floodgate set to close during non-temperate weather in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Weather-based floodgate control is useful only after the dam or reservoir already behaves correctly by hand.
+  </figcaption>
+</figure>
+
+Start with one clean behavior:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>close during non-temperate weather,</li>
+  <li>open only when upstream depth is high enough,</li>
+  <li>close if downstream water becomes unsafe,</li>
+  <li>release slowly through a valve if gate drops waste too much water.</li>
+</ul>
+
+If the gate is trying to store water, release water, prevent flooding, and block badwater all at once, split the job into separate circuits.
+
+<h2 id="common-mistakes">
+  Common Timberborn automation mistakes
+</h2>
+
+Most automation problems are logic problems, not component problems.
+
+<GuideTable
+caption="Common Timberborn automation mistakes and better fixes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+When a circuit fails, remove complexity. Test the sensor. Test the relay. Test the output. Then reconnect them one step at a time.
+
+<h2 id="best-first-automation-projects">
+  Best first automation projects
+</h2>
+
+Start with these projects in this order:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Lever-controlled floodgate or valve group.</li>
+  <li>Depth Sensor controlling a simple reservoir release.</li>
+  <li>Contamination Sensor + OR Relay opening a badwater outlet.</li>
+  <li>Resource Counter pausing one powered building.</li>
+  <li>Timer or delay added to a valve that flickers.</li>
+  <li>Population expansion with AND logic and memory, only after the colony is stable.</li>
+</ol>
+
+Avoid starting with a fully automated settlement. The fastest way to learn automation is to make one small circuit that does one job well.
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these Timberborn guides next:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/timberborn">Timberborn Guide Hub</Link> — for the full water survival and automation guide path.
+  </li>
+  <li>
+    <Link href="/timberborn/badwater-badtide-guide">Badwater and Badtide Guide</Link> — for the manual toxic-water route to build before badwater automation.
+  </li>
+  <li>
+    <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link> — for the water structures behind automated gates, reservoirs, and controlled outlets.
+  </li>
+  <li>
+    <Link href="/timberborn/irrigation-reservoir-guide">Timberborn Irrigation Guide</Link> — for reservoirs, underground irrigation, throttling valves, and flow tuning.
+  </li>
+  <li>
+    <Link href="/timberborn/first-drought-guide">Timberborn First Drought Guide</Link> — if basic clean-water survival is still unstable.
+  </li>
+</ol>
+
+<h2 id="faq">
+  Timberborn automation FAQ
+</h2>
+
+### What automation component should I unlock first?
+
+Start with a Lever, then a Depth Sensor or Stream Gauge, then Relay. This gives you manual control, measurement, and simple logic before complex circuits.
+
+### What is the difference between AND and OR in Timberborn automation?
+
+AND triggers only when every condition is true. OR triggers when any condition is true. Use AND for safety checks and OR for danger responses.
+
+### What is a good first badwater automation circuit?
+
+Use Contamination Sensor > 5% OR Badtide Weather as inputs, then open the badwater outlet valve or floodgate.
+
+### When should I use a timer or delay?
+
+Use a timer or delay when a valve, floodgate, or building flickers because the output changes the same value the sensor reads.
+
+### Is a Flow Sensor the same as a Depth Sensor?
+
+No. Flow Sensor checks whether water is moving. Depth Sensor or Stream Gauge checks water level. Use the one that matches the problem.
+
+### Should I automate population growth?
+
+Only later. Use population automation after food, water, jobs, and housing support are stable. It is not a first survival tool.

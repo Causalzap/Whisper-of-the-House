@@ -1,0 +1,939 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import Image from "next/image";
+
+export const numberColumns = [
+{ key: "Rule", label: "Rule" },
+{ key: "Planning Number", label: "Planning Number" },
+{ key: "How To Use It", label: "How To Use It" },
+];
+
+export const numberRows = [
+{
+Rule: "Beaver water demand",
+"Planning Number": "About 2.1–2.5 water per beaver per day.",
+"How To Use It":
+"Use this only to separate drinking-water math from crop-irrigation math. They are different problems.",
+},
+{
+Rule: "Small Tank",
+"Planning Number": "Stores 30 water.",
+"How To Use It":
+"Good for early drinking-water safety, not enough to support a serious irrigation system by itself.",
+},
+{
+Rule: "Large Tank",
+"Planning Number": "Stores 100 water.",
+"How To Use It":
+"Useful when you need a stronger drinking-water buffer while irrigation work is being built.",
+},
+{
+Rule: "Pump minimum depth",
+"Planning Number": "About 0.3 m minimum to operate.",
+"How To Use It":
+"A pump on shallow water can stop while the channel still looks wet. Deeper water access is safer.",
+},
+{
+Rule: "Reservoir depth",
+"Planning Number": "Aim for 2.0 m+ before relying on it as long-term drought storage.",
+"How To Use It":
+"A shallow pond can keep land green briefly, but deeper water survives longer dry seasons.",
+},
+{
+Rule: "Evaporation rate",
+"Planning Number": "About 0.045 m per exposed surface tile per day.",
+"How To Use It":
+"A wide shallow reservoir loses far more to evaporation than a deep compact one of the same volume.",
+},
+{
+Rule: "Low-water danger",
+"Planning Number": "Treat 0.5 m as a practical warning line.",
+"How To Use It":
+"Pump reach, irrigation radius, and crop safety can start failing quickly near this level.",
+},
+{
+Rule: "Canal width",
+"Planning Number": "One-tile-wide canals are usually the most space-efficient for irrigation.",
+"How To Use It":
+"Wider canals store more water, but they do not automatically give a much better irrigation radius on each side.",
+},
+{
+Rule: "Aquatic crops",
+"Planning Number": "They need direct water coverage, not just nearby irrigated soil.",
+"How To Use It":
+"Cattails and Spadderdock need a dedicated wet basin or controlled water route during drought.",
+},
+];
+
+export const mapColumns = [
+{ key: "Map / Farm Situation", label: "Map / Farm Situation" },
+{ key: "Best Irrigation Plan", label: "Best Irrigation Plan" },
+{ key: "Why", label: "Why" },
+];
+
+export const mapRows = [
+{
+"Map / Farm Situation": "Farm is beside a stable river",
+"Best Irrigation Plan":
+"Use simple river buffering first, then add reservoirs only when droughts get longer.",
+Why: "If the river stays deep enough, early underground irrigation may be unnecessary.",
+},
+{
+"Map / Farm Situation": "Outer farm tiles dry first",
+"Best Irrigation Plan":
+"Increase water depth near the farm or move the water route closer to the dry edge.",
+Why: "Irrigation coverage depends on water depth and terrain. The farthest tiles fail first as water level drops.",
+},
+{
+"Map / Farm Situation": "Natural deep hole nearby",
+"Best Irrigation Plan":
+"Turn it into a compact reservoir if you can fill it and release it safely.",
+Why: "Depth gives storage without exposing as much surface area to evaporation.",
+},
+{
+"Map / Farm Situation": "Farm is far from river",
+"Best Irrigation Plan":
+"Use a narrow canal, tunnel, or underground route aimed at the exact crop zone.",
+Why: "Refilling a whole river section may waste water just to reach a small farm.",
+},
+{
+"Map / Farm Situation": "Aquatic crops are drying",
+"Best Irrigation Plan":
+"Build a dedicated water-covered basin, not just an irrigation canal beside the crop.",
+Why: "Cattails and Spadderdock need water on their tiles, not merely green land nearby.",
+},
+{
+"Map / Farm Situation": "Badwater can reach the farm route",
+"Best Irrigation Plan":
+"Separate toxic flow before building permanent irrigation.",
+Why: "A clean drought channel can become a farm-killing route during badtide.",
+},
+];
+
+export const coverageColumns = [
+{ key: "Mechanic", label: "Mechanic" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "Practical Fix", label: "Practical Fix" },
+];
+
+export const coverageRows = [
+{
+Mechanic: "Water depth affects irrigation reach",
+"What It Means":
+"Deeper water can support a larger nearby green area than very shallow water.",
+"Practical Fix":
+"If outer tiles dry first, raise the water level or move water closer instead of only adding more tanks.",
+},
+{
+Mechanic: "Terrain shape matters",
+"What It Means":
+"A canal, ledge, basin, or tunnel can irrigate differently depending on height and nearby land.",
+"Practical Fix":
+"Check green coverage during drought, not only when the river is full.",
+},
+{
+Mechanic: "Far tiles fail first",
+"What It Means":
+"As water level drops, the edge of the irrigated area shrinks inward.",
+"Practical Fix":
+"Place critical crops closer to the water route and less urgent crops on the outer edge.",
+},
+{
+Mechanic: "One-tile canal efficiency",
+"What It Means":
+"For basic soil irrigation, a narrow canal often preserves more farmland than a wide canal.",
+"Practical Fix":
+"Use one-tile canals when the goal is coverage; use wider canals only when you also need storage volume.",
+},
+{
+Mechanic: "Aquatic crop requirement",
+"What It Means":
+"Aquatic crops need their own tiles covered by water.",
+"Practical Fix":
+"Keep Cattails and Spadderdock in a basin that stays wet through drought.",
+},
+];
+
+export const reservoirColumns = [
+{ key: "Design Check", label: "Design Check" },
+{ key: "Good Target", label: "Good Target" },
+{ key: "Failure Sign", label: "Failure Sign" },
+];
+
+export const reservoirRows = [
+{
+"Design Check": "Storage shape",
+"Good Target":
+"Compact and deep when the goal is stored water; narrow and close when the goal is irrigation coverage.",
+"Failure Sign":
+"A large-looking pool disappears quickly or fails to keep the farm edge green.",
+},
+{
+"Design Check": "Inlet",
+"Good Target":
+"A controlled route that fills before the drought warning becomes urgent.",
+"Failure Sign":
+"The reservoir exists, but it never fills enough to matter.",
+},
+{
+"Design Check": "Outlet",
+"Good Target":
+"A safe release path toward the farm, tunnel, pump, or irrigation zone.",
+"Failure Sign":
+"Stored water cannot reach the dry land or floods the wrong area.",
+},
+{
+"Design Check": "Green coverage",
+"Good Target":
+"The target crop or tree zone stays green late in the drought.",
+"Failure Sign":
+"The reservoir still has water, but outer farm tiles dry anyway.",
+},
+{
+"Design Check": "Access",
+"Good Target":
+"Paths, stairs, platforms, and build reach before the project becomes urgent.",
+"Failure Sign":
+"The plan is correct, but beavers cannot finish the wall, gate, valve, or tunnel.",
+},
+{
+"Design Check": "Clean-water separation",
+"Good Target":
+"Clean irrigation routes do not share an uncontrolled path with badwater.",
+"Failure Sign":
+"The same channel that saves crops in drought can poison them during badtide.",
+},
+];
+
+export const undergroundColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Goal", label: "Goal" },
+{ key: "Check Before Continuing", label: "Check Before Continuing" },
+];
+
+export const undergroundRows = [
+{
+Step: "1",
+Goal: "Pick the exact crop, tree, or farm zone you want to protect.",
+"Check Before Continuing":
+"Do not dig a long tunnel just because it looks advanced. Aim it at land that matters.",
+},
+{
+Step: "2",
+Goal: "Choose a water source that will still have water during drought.",
+"Check Before Continuing":
+"If the source runs dry at the same time as the farm, the tunnel does not solve the problem.",
+},
+{
+Step: "3",
+Goal: "Build access before blasting or tunneling too far.",
+"Check Before Continuing":
+"Long worker travel can delay the project more than the water design itself.",
+},
+{
+Step: "4",
+Goal: "Use a gate or throttling valve to control release.",
+"Check Before Continuing":
+"Full flow can drain storage or flood the route before the soil stabilizes.",
+},
+{
+Step: "5",
+Goal: "Check green coverage late in drought.",
+"Check Before Continuing":
+"The system is only successful if the target land stays green when the river is low.",
+},
+];
+
+export const flowColumns = [
+{ key: "Flow Problem", label: "Flow Problem" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const flowRows = [
+{
+"Flow Problem": "Outer farm tiles dry first",
+"Likely Cause":
+"Water level is too low, so the irrigation radius shrinks before the drought ends.",
+Fix: "Raise the local water depth, move the channel closer, or prioritize critical crops near the water route.",
+},
+{
+"Flow Problem": "Tunnel floods",
+"Likely Cause":
+"Too much water enters at once or the outlet is too small.",
+Fix: "Lower the valve rate, widen the outlet, or release in smaller stages.",
+},
+{
+"Flow Problem": "Land stays dry",
+"Likely Cause":
+"Water is too far away, too low, or not staying in the route long enough.",
+Fix: "Move the route closer, raise water level, or increase controlled flow slightly.",
+},
+{
+"Flow Problem": "Tank drains too fast",
+"Likely Cause":
+"The release rate is higher than the irrigation need.",
+Fix: "Start with a lower throttling valve setting and raise only if land stays dry.",
+},
+{
+"Flow Problem": "River refill wastes water",
+"Likely Cause":
+"You are exposing too much surface area for the amount of land you need to irrigate.",
+Fix: "Use a smaller canal or underground route aimed at the farm zone.",
+},
+{
+"Flow Problem": "Aquatic crops die during drought",
+"Likely Cause":
+"Their water-covered growing tiles dried out, even if nearby soil stayed green.",
+Fix: "Put aquatic crops in a dedicated basin that remains flooded through drought.",
+},
+];
+
+export const aquaticColumns = [
+{ key: "Crop Type", label: "Crop Type" },
+{ key: "What It Needs", label: "What It Needs" },
+{ key: "Drought Risk", label: "Drought Risk" },
+];
+
+export const aquaticRows = [
+{
+"Crop Type": "Normal land crops",
+"What It Needs":
+"Green irrigated land close enough to a water source.",
+"Drought Risk":
+"Outer tiles dry first when water level drops and irrigation radius shrinks.",
+},
+{
+"Crop Type": "Trees",
+"What It Needs":
+"Green land long enough for growth.",
+"Drought Risk":
+"Tree recovery becomes slow if the forest edge dries every drought.",
+},
+{
+"Crop Type": "Cattails",
+"What It Needs":
+"Direct water coverage on the growing tile.",
+"Drought Risk":
+"A dry riverbed or drained basin can kill the crop even if nearby land is green.",
+},
+{
+"Crop Type": "Spadderdock",
+"What It Needs":
+"Direct water coverage, usually with more reliable water depth than a shallow edge.",
+"Drought Risk":
+"If the water level drops too far, the crop fails because the tile is no longer covered.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "What It Looks Like", label: "What It Looks Like" },
+{ key: "Better Fix", label: "Better Fix" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Solving thirst but not soil",
+"What It Looks Like":
+"Tanks are full, but the farm still dries out.",
+"Better Fix":
+"Route water close enough to the soil and check green coverage late in drought.",
+},
+{
+Mistake: "Making canals wider for irrigation range",
+"What It Looks Like":
+"A two- or three-tile canal consumes farmland but does not save much more land on each side.",
+"Better Fix":
+"Use a one-tile canal for efficient coverage unless the canal also needs to store water.",
+},
+{
+Mistake: "Ignoring water depth near the farm",
+"What It Looks Like":
+"The closest crops survive, but the outer crops dry as drought continues.",
+"Better Fix":
+"Raise local depth, move the water route closer, or plant critical crops near the water.",
+},
+{
+Mistake: "Opening the valve too far",
+"What It Looks Like":
+"The tunnel floods, the tank drains, or the outlet overflows.",
+"Better Fix":
+"Start low, watch the gauge, and increase flow only if green coverage is still missing.",
+},
+{
+Mistake: "Planting aquatic crops in an unstable riverbed",
+"What It Looks Like":
+"Cattails or Spadderdock grow during flow season and die when drought drains the tiles.",
+"Better Fix":
+"Use a dedicated basin with enough stored water to stay covered through drought.",
+},
+{
+Mistake: "Letting badwater share the irrigation route",
+"What It Looks Like":
+"The farm survives drought but becomes unsafe during a badtide.",
+"Better Fix":
+"Separate clean irrigation from toxic-water routing before making the channel permanent.",
+},
+];
+
+export const recoveryColumns = [
+{ key: "If This Happened", label: "If This Happened" },
+{ key: "Diagnosis", label: "Diagnosis" },
+{ key: "Next Fix", label: "Next Fix" },
+];
+
+export const recoveryRows = [
+{
+"If This Happened": "Crops dried but beavers had drinking water",
+Diagnosis:
+"Water storage solved thirst, not soil irrigation.",
+"Next Fix":
+"Build a farm-focused water route or reservoir outlet near the crop zone.",
+},
+{
+"If This Happened": "Outer farm tiles dried first",
+Diagnosis:
+"Water depth fell and the irrigation radius no longer reached the edge.",
+"Next Fix":
+"Raise local water level, move the canal closer, or plant important crops nearer the source.",
+},
+{
+"If This Happened": "Reservoir was full but farms still dried",
+Diagnosis:
+"The stored water was too far away, too low, or not connected to the land.",
+"Next Fix":
+"Add a controlled outlet, narrow canal, or underground route aimed at the farm.",
+},
+{
+"If This Happened": "Reservoir emptied too early",
+Diagnosis:
+"Release was too fast, surface area was too large, or storage depth was too low.",
+"Next Fix":
+"Control the outlet and redesign the storage shape before the next long drought.",
+},
+{
+"If This Happened": "Aquatic crops died",
+Diagnosis:
+"The growing tiles lost direct water coverage.",
+"Next Fix":
+"Move them to a dedicated basin or keep the riverbed flooded with controlled storage.",
+},
+{
+"If This Happened": "Badwater touched the irrigation route",
+Diagnosis:
+"Clean irrigation and toxic routing were not separated.",
+"Next Fix":
+"Rebuild the channel plan with a dedicated badwater outlet before expanding farms.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To keep crops watered in **Timberborn**, plan irrigation around **water depth, coverage, and target land**, not only around stored water.
+
+Use these core numbers: a beaver drinks about **2.1–2.5 water per day** for planning, a **Small Tank stores 30**, a **Large Tank stores 100**, Water Pumps need about **0.3 m** to operate, exposed water evaporates at about **0.045 m per surface tile per day**, and a reservoir should usually reach **2.0 m+** before you rely on it through long droughts.
+
+For farms, water depth matters because irrigation coverage shrinks as water level drops. A one-tile canal is usually the most efficient soil-irrigation shape; wider canals are better only when you also need storage. Aquatic crops such as Cattails and Spadderdock need direct water coverage, not just green land nearby. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 22, 2026. Covers Timberborn 1.0 irrigation, crop drying, reservoir depth, evaporation, pump depth, irrigation radius, canal width, underground irrigation, aquatic crops, throttling valves, stream gauges, green coverage, badwater-safe routes, and post-drought recovery.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-drought-crop-risk.webp"
+    alt="Timberborn crops at risk when drought removes nearby irrigation"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In our 1.0 test colony, the first irrigation failure was not thirst. The beavers had tank water, but the crop land dried because the nearby water level dropped.
+  </figcaption>
+</figure>
+
+<h2 id="timberborn-irrigation-reservoir-guide">
+  Timberborn irrigation and reservoir guide
+</h2>
+
+This **Timberborn irrigation and reservoir guide** is for the point where drinking water is stable, but crops, trees, or farm districts still dry out during longer droughts.
+
+The important distinction is:
+
+**Water in storage keeps beavers alive. Water near soil keeps land green.**
+
+A full tank does not automatically irrigate a farm. A full reservoir does not help crops unless the water is close enough, deep enough, and connected to the land you want to protect.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="irrigation-numbers">
+  Irrigation numbers and planning rules
+</h2>
+
+Use these numbers as anchors. They are not a perfect formula for every map, but they keep irrigation planning from becoming guesswork.
+
+<GuideTable
+caption="Timberborn irrigation and reservoir planning numbers."
+columns={numberColumns}
+rows={numberRows}
+/>
+
+Use the drinking-water numbers for beaver survival. Use depth, surface area, canal shape, and coverage checks for crop survival. Those are different problems.
+
+<h2 id="map-and-farm-situations">
+  Map and farm situations: choose the right irrigation plan
+</h2>
+
+Do not build underground irrigation just because it exists. Pick the plan that matches the farm failure.
+
+<GuideTable
+caption="How map and farm position change the irrigation plan."
+columns={mapColumns}
+rows={mapRows}
+/>
+
+If crops dry only on the outer edge, the issue is often irrigation radius. If the entire farm dries, the source, outlet, or reservoir may be too weak. If aquatic crops die, the tile itself probably lost water coverage.
+
+<h2 id="coverage-and-water-depth">
+  Irrigation coverage: water depth changes the green radius
+</h2>
+
+A common beginner confusion is: **why do crops beside the water survive while crops slightly farther away dry out?**
+
+The answer is that irrigation coverage depends on water depth and local terrain. As drought lowers the water level, the green area can shrink. The farthest tiles from the water source usually dry first.
+
+<GuideTable
+caption="Timberborn irrigation coverage mechanics."
+columns={coverageColumns}
+rows={coverageRows}
+/>
+
+This changes how you should design farms:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Put critical crops closer to the canal, river, basin, or tunnel.</li>
+  <li>Use less important crops or spare land on the outer edge.</li>
+  <li>Check green coverage late in drought, not only during flow season.</li>
+  <li>If the edge dries first, fix depth or route position before adding more drinking-water tanks.</li>
+</ul>
+
+<h2 id="reservoir-before-tunnel">
+  Reservoir before tunnel: choose a real water source
+</h2>
+
+Before digging complicated tunnels, make sure you have a water source worth feeding from.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-reservoir-hole-plan.webp"
+    alt="Planning a reservoir hole in Timberborn for drought storage"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A natural hole can become strong drought storage if it has depth, a fill route, an outlet, and build access.
+  </figcaption>
+</figure>
+
+A good reservoir answers four questions:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>How does water enter?</li>
+  <li>How does water leave?</li>
+  <li>Which exact farm, forest, or aquatic-crop zone does it protect?</li>
+  <li>Can beavers build every wall, gate, valve, and path?</li>
+</ul>
+
+If those answers are unclear, fix the reservoir before building the irrigation route.
+
+<h2 id="reservoir-design-checks">
+  Reservoir design checks
+</h2>
+
+A reservoir should be deep enough for storage, close enough for coverage, controlled enough for release, and safe enough that badwater cannot hijack the route.
+
+<GuideTable
+caption="Timberborn reservoir design checks for irrigation."
+columns={reservoirColumns}
+rows={reservoirRows}
+/>
+
+A reservoir that stores water but fails coverage is not finished. The real test is whether the target land stays green late in drought.
+
+<h2 id="depth-over-width">
+  Depth over width: storage math, not just a slogan
+</h2>
+
+Depth matters because exposed surface evaporates. A wide shallow pond exposes more water surface, while a compact deep basin can store the same or greater volume with less surface loss.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-drought-proof-water-hole-depth.webp"
+    alt="Deepened drought-proof water hole in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Deepening a water hole increases useful storage without spreading the same water over a huge exposed surface.
+  </figcaption>
+</figure>
+
+Use this split:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>If the goal is **storage**, go deeper and more compact.</li>
+  <li>If the goal is **soil coverage**, place water closer to the land that dries.</li>
+  <li>If the goal is **aquatic crops**, keep the crop tiles directly covered by water.</li>
+</ul>
+
+<h2 id="canal-width">
+  Canal width: one tile is usually enough for irrigation
+</h2>
+
+A wider canal does not automatically mean a better farm. For soil irrigation, a **one-tile-wide canal** is usually the most space-efficient shape because it saves farmland while still bringing water close to both sides.
+
+Use wider canals only when you need something beyond coverage:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>more storage volume in the canal itself,</li>
+  <li>more flow capacity,</li>
+  <li>a wider river replacement,</li>
+  <li>a safer buffer before a pump or basin,</li>
+  <li>room for aquatic crops or water routes.</li>
+</ul>
+
+If the question is “should I make my canal wider?”, ask what problem you are solving. For farm coverage, move a narrow canal closer. For storage, increase depth or controlled volume.
+
+<h2 id="filling-a-reservoir">
+  Fill the reservoir before drought
+</h2>
+
+A reservoir that fills too late is only a hole. The best time to fill it is during flow season, before the drought warning becomes urgent.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-water-diverter-filling-pit.webp"
+    alt="Water diversion filling a reservoir pit in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A controlled diversion can fill a side reservoir before drought, but the inlet must finish early enough to matter.
+  </figcaption>
+</figure>
+
+Check the fill route before trusting it:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Does the inlet open from a reliable water source?</li>
+  <li>Can the reservoir reach useful depth before drought?</li>
+  <li>Does the outlet release water somewhere safe?</li>
+  <li>Will the route stay clean during badwater or badtide pressure?</li>
+</ol>
+
+For dam, levee, floodgate, spillway, and evaporation math, use the <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="underground-irrigation">
+  Underground irrigation: aim at the land that matters
+</h2>
+
+Underground irrigation is useful when you need to keep a specific farm or forest area green without refilling a large surface river.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-underground-irrigation-tunnel-layout.webp"
+    alt="Underground irrigation tunnel layout under farm land in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Run the underground route under or near the land you actually need to keep green. The goal is coverage, not tunnel length.
+  </figcaption>
+</figure>
+
+Use this order.
+
+<GuideTable
+caption="Underground irrigation build order."
+columns={undergroundColumns}
+rows={undergroundRows}
+/>
+
+In our test build, the underground route became valuable only after the reservoir and outlet were stable. Digging first and solving the water source later wasted too much time.
+
+<h2 id="flow-control">
+  Flow control: use throttling valves and gauges
+</h2>
+
+Once water starts moving into an irrigation tank, tunnel, canal, or basin, control the release. Full flow is rarely the safest first setting.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-irrigation-tank-throttling-valve.webp"
+    alt="Throttling valve controlling an irrigation tank in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A throttling valve helps feed an irrigation tank or tunnel without dumping too much water at once.
+  </figcaption>
+</figure>
+
+A good tuning habit is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>start with low flow,</li>
+  <li>watch the water level,</li>
+  <li>check whether the target land turns green,</li>
+  <li>increase flow only if the land stays dry,</li>
+  <li>lower flow if the tank drains too quickly or the route floods.</li>
+</ul>
+
+<GuideTable
+caption="Timberborn irrigation flow problems and fixes."
+columns={flowColumns}
+rows={flowRows}
+/>
+
+<h2 id="aquatic-crops">
+  Aquatic crops: Cattails and Spadderdock need covered tiles
+</h2>
+
+Aquatic crops are not normal irrigated crops. They need water on the growing tile itself. A canal beside the tile is not enough if the crop tile is dry.
+
+<GuideTable
+caption="Normal crops, trees, Cattails and Spadderdock during drought."
+columns={aquaticColumns}
+rows={aquaticRows}
+/>
+
+This is why aquatic crop beds should be planned like small reservoirs. Give them a basin, enough depth, and controlled refill so drought does not turn the growing tiles into dry ground.
+
+<h2 id="do-not-refill-everything">
+  Do not refill the whole river unless you mean to
+</h2>
+
+You can use stored water to refill a river section, but that does not mean it is efficient.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-underground-irrigation-flow.webp"
+    alt="Stored water flowing back into a river section for irrigation in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In our test, refilling the river restored irrigation, but it used far more water than feeding a smaller underground route.
+  </figcaption>
+</figure>
+
+The problem is surface area and target size. If your goal is only to keep one crop block or forest strip alive, refilling every tile of the old river can drain storage faster than expected.
+
+Use whole-river refill only when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>it is a short emergency,</li>
+  <li>the river also supports pumps or other key systems,</li>
+  <li>you have enough stored water to spend,</li>
+  <li>you are testing flow before building the final route.</li>
+</ul>
+
+For a long drought, a smaller controlled irrigation path is usually safer.
+
+<h2 id="green-coverage">
+  Check green coverage, not just water level
+</h2>
+
+A reservoir can be full and still fail the farm if the irrigation coverage does not reach the crops.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-underground-irrigation-green-coverage.webp"
+    alt="Green land coverage from underground irrigation in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The real success check is green coverage on the target land, especially late in drought.
+  </figcaption>
+</figure>
+
+After building the route, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Are the target crops still irrigated late in the drought?</li>
+  <li>Do outer farm tiles dry before inner farm tiles?</li>
+  <li>Does the water stay deep enough to maintain the needed radius?</li>
+  <li>Is the source draining too quickly?</li>
+  <li>Is the outlet flooding or overfilling?</li>
+  <li>Do aquatic crop tiles remain directly covered?</li>
+</ul>
+
+If the land still dries, change one thing at a time: route position, flow rate, outlet height, source depth, or crop placement.
+
+<h2 id="stream-gauge">
+  Use stream gauges to tune the route
+</h2>
+
+Guessing works for a quick test, but a stable irrigation system needs a way to read water behavior.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-stream-gauge-flow-rate.webp"
+    alt="Stream gauge used to tune underground irrigation flow rate in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A gauge helps you tune water depth and flow instead of opening valves blindly.
+  </figcaption>
+</figure>
+
+Place the gauge where it answers the real question:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>near the reservoir level if storage is the concern,</li>
+  <li>near the tunnel if flow is the concern,</li>
+  <li>near the outlet if flooding is the concern,</li>
+  <li>near the farm edge if green coverage is failing,</li>
+  <li>near the aquatic basin if crop tiles are drying out.</li>
+</ul>
+
+For advanced sensor and valve logic, read the <Link href="/timberborn/automation-guide">Timberborn Automation Guide</Link>.
+
+<h2 id="badwater-safe-irrigation">
+  Keep badwater out of irrigation routes
+</h2>
+
+Clean irrigation and toxic-water routing should not share an uncontrolled channel. If badwater can reach your farm route, solve that before expanding the irrigation system.
+
+Use the <Link href="/timberborn/badwater-badtide-guide">Badwater and Badtide Guide</Link> if your clean-water route shares space with a badwater source, badtide path, or toxic outlet.
+
+<h2 id="common-irrigation-mistakes">
+  Common irrigation mistakes
+</h2>
+
+Most irrigation failures come from solving the wrong problem: storing water without moving it to soil, moving water without enough depth, widening canals without a storage reason, or planting aquatic crops where the tile itself dries.
+
+<GuideTable
+caption="Common Timberborn irrigation mistakes and better fixes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+When a system fails, do not rebuild everything at once. Check source depth, outlet flow, route position, green coverage, canal width, aquatic tile coverage, and badwater safety in that order.
+
+<h2 id="after-drought-recovery">
+  After drought recovery: diagnose the irrigation failure
+</h2>
+
+Surviving the drought does not mean the farm system worked. Use the dry season as a diagnostic test.
+
+<GuideTable
+caption="What to fix after irrigation nearly fails."
+columns={recoveryColumns}
+rows={recoveryRows}
+/>
+
+The goal is to know which problem you had: not enough stored water, water too far away, water too shallow, flow too fast, canal too wide for its purpose, aquatic crop tiles drying, or badwater risk.
+
+<h2 id="recommended-irrigation-checklist">
+  Recommended irrigation checklist
+</h2>
+
+Use this checklist before committing to a large irrigation project:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Identify the exact land that dries first.</li>
+  <li>Decide whether the problem is drinking water, soil coverage, or aquatic crop coverage.</li>
+  <li>Choose a source that still has water during drought.</li>
+  <li>Use compact depth for storage, and close water routes for coverage.</li>
+  <li>Use one-tile canals for efficient irrigation unless you also need storage volume.</li>
+  <li>Build controlled fill and release before the drought warning becomes urgent.</li>
+  <li>Check green coverage late in drought, not only during flow season.</li>
+  <li>Keep aquatic crops directly covered by water.</li>
+  <li>Use gauges or visual checks to tune flow and depth.</li>
+  <li>Keep clean irrigation separated from badwater routes.</li>
+</ol>
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these Timberborn guides next:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/timberborn">Timberborn Guide Hub</Link> — for the full water survival and automation path.
+  </li>
+  <li>
+    <Link href="/timberborn/first-drought-guide">Timberborn First Drought Guide</Link> — if drinking water still fails before irrigation projects matter.
+  </li>
+  <li>
+    <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link> — for reservoir walls, floodgates, evaporation, spillways, outlets, and controlled diversion.
+  </li>
+  <li>
+    <Link href="/timberborn/badwater-badtide-guide">Badwater and Badtide Guide</Link> — for keeping toxic water out of farm irrigation routes.
+  </li>
+  <li>
+    <Link href="/timberborn/automation-guide">Automation Guide</Link> — for sensors, valves, timers, and automated flow control.
+  </li>
+</ol>
+
+<h2 id="faq">
+  Timberborn irrigation and reservoir FAQ
+</h2>
+
+### Why are my crops drying out even though I have water tanks?
+
+Tanks store drinking water. They do not irrigate soil unless water is routed close enough and deep enough to keep the farm green.
+
+### Why do the outer crops dry first?
+
+As water level drops, irrigation coverage can shrink. The farthest crop tiles from the water source often lose coverage first.
+
+### How deep should a Timberborn reservoir be?
+
+Use 2.0 m+ as a practical target before relying on it for longer droughts. Deeper compact storage is usually better than wide shallow storage.
+
+### How much water evaporates in Timberborn?
+
+A useful planning number is about 0.045 m per exposed surface tile per day. This is why wide shallow reservoirs lose more water than deep compact reservoirs with the same volume.
+
+### Should my irrigation canal be wider?
+
+Usually no if the goal is soil coverage. One-tile-wide canals are often the most space-efficient. Wider canals are useful when you also need storage volume or flow capacity.
+
+### Why did my Cattails or Spadderdock die?
+
+Aquatic crops need direct water coverage on their growing tiles. If drought drains the basin or riverbed, they can die even if nearby land is still green.
+
+### Should I refill the whole river to irrigate crops?
+
+Only as an emergency or test. It can waste a lot of water if you only need to keep a small farm zone green.
+
+### When is underground irrigation worth it?
+
+It is worth it when a specific farm or forest area keeps drying out and refilling the surface river wastes too much water.
+
+### Why is my underground irrigation not making land green?
+
+The route may be too far from the target soil, too shallow, too short, or not holding enough water. Check green coverage, not just water level.
+
+### Should I automate irrigation?
+
+Only after the manual system works. First confirm the source, outlet, flow, depth, and green coverage. Then add sensors or valves for reliability.

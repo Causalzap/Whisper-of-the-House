@@ -1,0 +1,744 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import Image from "next/image";
+
+export const numberColumns = [
+{ key: "Rule", label: "Rule" },
+{ key: "Planning Number", label: "Planning Number" },
+{ key: "How To Use It", label: "How To Use It" },
+];
+
+export const numberRows = [
+{
+Rule: "Average adult beaver water use",
+"Planning Number": "About 2.1 water per beaver per day.",
+"How To Use It":
+"Use this as the baseline math when you count how long stored water can last.",
+},
+{
+Rule: "Pump minimum depth",
+"Planning Number": "About 0.3 m minimum to operate.",
+"How To Use It":
+"Pumps placed on shallow edge water can stop while the channel still looks wet. Deeper water also pumps faster.",
+},
+
+{
+Rule: "Safer first-drought planning",
+"Planning Number": "Use 2.5 water per beaver per day as a practical buffer.",
+"How To Use It":
+"This gives room for hauling delays, work interruptions, and imperfect pump coverage.",
+},
+{
+Rule: "High-stress safety margin",
+"Planning Number": "Use 3 water per beaver per day only as a conservative buffer.",
+"How To Use It":
+"Useful on Hard, messy layouts, long walking routes, or when you want a simple overprepared target.",
+},
+{
+Rule: "Small Tank",
+"Planning Number": "Stores 30 water.",
+"How To Use It":
+"One full Small Tank covers about 10 beavers for roughly one day at a conservative 3/day estimate.",
+},
+{
+Rule: "Easy first drought",
+"Planning Number": "Often around 1 day.",
+"How To Use It":
+"A short event, but still a good time to learn tank filling and pump reach.",
+},
+{
+Rule: "Normal first drought",
+"Planning Number": "Often around 2–3 days.",
+"How To Use It":
+"Plan with real stored water, not only a pump beside the river.",
+},
+{
+Rule: "Hard first drought",
+"Planning Number": "Can be around 3–6 days.",
+"How To Use It":
+"Treat the first drought as a real test of water math, dam timing, and food storage.",
+},
+{
+Rule: "Evaporation",
+"Planning Number": "About 0.045 m per exposed water tile per day.",
+"How To Use It":
+"Wide shallow water loses more to evaporation than deep compact storage.",
+},
+{
+Rule: "Low-water warning",
+"Planning Number": "Treat 0.5 m as a practical danger line.",
+"How To Use It":
+"If water is near this level, pump reach, irrigation, and crop safety may fail soon.",
+},
+];
+
+export const mechanicsColumns = [
+{ key: "Drought Mechanic", label: "Drought Mechanic" },
+{ key: "What Happens", label: "What Happens" },
+{ key: "Beginner Meaning", label: "Beginner Meaning" },
+];
+
+export const mechanicsRows = [
+{
+"Drought Mechanic": "Water sources stop helping",
+"What Happens":
+"During drought, the map no longer receives normal clean-water source flow.",
+"Beginner Meaning":
+"The colony lives on stored water, dammed river water, and whatever remains reachable.",
+},
+{
+"Drought Mechanic": "Surface water keeps moving and disappearing",
+"What Happens":
+"Water can still drain, be pumped down, and evaporate while drought is active.",
+"Beginner Meaning":
+"A river that looks safe at the start can become too low before the drought ends.",
+},
+{
+"Drought Mechanic": "Tanks and rivers solve different problems",
+"What Happens":
+"Tanks store drinking water. River buffers and reservoirs keep water physically available on the map.",
+"Beginner Meaning":
+"You want both: stored drinking water and a water body that stays reachable.",
+},
+{
+"Drought Mechanic": "Later droughts get harder",
+"What Happens":
+"On Normal and Hard, droughts intensify over time instead of staying like the first one.",
+"Beginner Meaning":
+"Surviving once is not enough. Use the first drought as a diagnostic test.",
+},
+{
+"Drought Mechanic": "Evaporation punishes wide water",
+"What Happens":
+"Only exposed surface matters for evaporation, so wide shallow storage loses water faster.",
+"Beginner Meaning":
+"For storage, deep and compact is better than wide and shallow.",
+},
+];
+
+export const mapColumns = [
+{ key: "Starting Situation", label: "Starting Situation" },
+{ key: "Best First Drought Plan", label: "Best First Drought Plan" },
+{ key: "Why", label: "Why" },
+];
+
+export const mapRows = [
+{
+"Starting Situation": "Narrow river near the district",
+"Best First Drought Plan":
+"Build a small dam early while also filling tanks.",
+Why: "A narrow dam can finish in time and keep nearby water usable longer.",
+},
+{
+"Starting Situation": "Wide river or awkward dam site",
+"Best First Drought Plan":
+"Do not force the dam. Fill tanks, shorten paths, and build the dam later.",
+Why: "An unfinished dam stores nothing and can waste the first countdown.",
+},
+{
+"Starting Situation": "Pump placed on shallow edge water",
+"Best First Drought Plan":
+"Watch the water level closely and add tank storage before drought starts.",
+Why: "The pump may lose reach while visible water still remains in the channel.",
+},
+{
+"Starting Situation": "Iron Teeth start with deeper pump access",
+"Best First Drought Plan":
+"Use deep pump reach as an advantage, but still fill tanks before the river drops.",
+Why: "Deep access helps, but it does not remove the need for stored drinking water.",
+},
+{
+"Starting Situation": "Sparse forest",
+"Best First Drought Plan":
+"Avoid wide dam projects and protect logs for tanks, food, paths, and Forester setup.",
+Why: "A log shortage can stop the colony from finishing every other survival fix.",
+},
+{
+"Starting Situation": "Food is mostly still growing",
+"Best First Drought Plan":
+"Harvest what is ready and stop adding population.",
+Why: "Crops in drying soil are not the same as food in storage.",
+},
+];
+
+export const factionColumns = [
+{ key: "Faction / System", label: "Faction / System" },
+{ key: "First Drought Difference", label: "First Drought Difference" },
+{ key: "How To Use It", label: "How To Use It" },
+];
+
+export const factionRows = [
+{
+"Faction / System": "Folktails",
+"First Drought Difference":
+"Their basic Water Pump has limited depth reach compared with Iron Teeth.",
+"How To Use It":
+"Place pumps where water will remain reachable, and do not depend on a shallow edge pool.",
+},
+{
+"Faction / System": "Iron Teeth",
+"First Drought Difference":
+"Deep Water Pumps can reach much deeper water.",
+"How To Use It":
+"Use deeper channels and reservoirs as an advantage, but still fill storage before drought.",
+},
+{
+"Faction / System": "Folktails population",
+"First Drought Difference":
+"Extra housing encourages more population growth.",
+"How To Use It":
+"Do not build extra Lodges before the first drought unless water and food are clearly ahead.",
+},
+{
+"Faction / System": "Iron Teeth population",
+"First Drought Difference":
+"Breeding is easier to control through breeding infrastructure.",
+"How To Use It":
+"Pause or limit breeding if storage math is not safe.",
+},
+{
+"Faction / System": "Emergency population pressure",
+"First Drought Difference":
+"More beavers are only helpful if they can be fed and hydrated.",
+"How To Use It":
+"Pause growth first. Reassign workers to survival jobs before considering extreme population-management actions.",
+},
+];
+
+export const duringColumns = [
+{ key: "Watch During Drought", label: "Watch During Drought" },
+{ key: "Danger Sign", label: "Danger Sign" },
+{ key: "Response", label: "Response" },
+];
+
+export const duringRows = [
+{
+"Watch During Drought": "Stored water trend",
+"Danger Sign":
+"Water is falling faster than the remaining drought length.",
+Response:
+"Pause growth, keep pump work staffed if water remains reachable, and plan more storage next cycle.",
+},
+{
+"Watch During Drought": "Pump reach",
+"Danger Sign":
+"Pump productivity drops or stops while the river is visibly low.",
+Response:
+"Survive on tanks and plan deeper water access or a better pump position after the drought.",
+},
+{
+"Watch During Drought": "River or reservoir depth",
+"Danger Sign":
+"Water is approaching the 0.5 m warning range.",
+Response:
+"Stop starting water-dependent projects and expect pump or crop problems soon.",
+},
+{
+"Watch During Drought": "Crops and soil color",
+"Danger Sign":
+"Green land turns dry before crops are harvested.",
+Response:
+"Harvest what is ready and make irrigation the next-cycle fix.",
+},
+{
+"Watch During Drought": "Worker assignments",
+"Danger Sign":
+"Beavers are still building comfort, distant storage, or powered industry.",
+Response:
+"Move labor into pump, food, hauling, wood, and survival construction.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "What It Looks Like", label: "What It Looks Like" },
+{ key: "Better Fix", label: "Better Fix" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Trusting a shallow pump location",
+"What It Looks Like":
+"The pump stops before the channel looks completely dry.",
+"Better Fix":
+"Place pumps near deeper water, fill tanks earlier, or use Iron Teeth deep reach when available.",
+},
+{
+Mistake: "Forcing an early dam on a wide river",
+"What It Looks Like":
+"Logs and builder time go into a dam that is still unfinished when drought starts.",
+"Better Fix":
+"If the site is wide or awkward, store water first and build water control later.",
+},
+{
+Mistake: "Growing population during the countdown",
+"What It Looks Like":
+"More workers arrive exactly when water and food demand should stay flat.",
+"Better Fix":
+"Stop extra housing or breeding until the drought is over and buffers are ahead.",
+},
+{
+Mistake: "Confusing drinking water with irrigation",
+"What It Looks Like":
+"Beavers survive on tanks, but farms dry out and the next cycle starts weak.",
+"Better Fix":
+"Treat crop irrigation as a separate problem after the first drought.",
+},
+{
+Mistake: "Ignoring evaporation after the drought",
+"What It Looks Like":
+"A wide shallow pond looks safe, then disappears faster than expected over longer dry seasons.",
+"Better Fix":
+"Build deeper compact reservoirs for storage and use wide water only when you need irrigation coverage.",
+},
+];
+
+export const afterColumns = [
+{ key: "If This Happened", label: "If This Happened" },
+{ key: "Diagnosis", label: "Diagnosis" },
+{ key: "Next-Cycle Fix", label: "Next-Cycle Fix" },
+];
+
+export const afterRows = [
+{
+"If This Happened": "Tanks nearly hit zero",
+Diagnosis:
+"Your storage math was too thin for the actual drought length or population.",
+"Next-Cycle Fix":
+"Add tank capacity, reduce growth, and calculate with 2.5/day or higher safety margin.",
+},
+{
+"If This Happened": "Pump stopped early",
+Diagnosis:
+"The pump was placed on water that became too shallow or unreachable.",
+"Next-Cycle Fix":
+"Move pumps, deepen access, use a better dam site, or exploit Iron Teeth deep pumping.",
+},
+{
+"If This Happened": "Dam finished too late",
+Diagnosis:
+"The site was too wide, too far, or underbuilt for your worker count.",
+"Next-Cycle Fix":
+"Improve access, choose a narrower choke point, or rely on tanks first on this map.",
+},
+{
+"If This Happened": "Crops dried before harvest",
+Diagnosis:
+"Drinking water survived, but farm irrigation failed.",
+"Next-Cycle Fix":
+"Store more food before drought and start a reservoir or irrigation plan.",
+},
+{
+"If This Happened": "Logs ran out during recovery",
+Diagnosis:
+"The first drought distracted from the next bottleneck: wood replacement.",
+"Next-Cycle Fix":
+"Build or expand Forester planting zones before large water projects.",
+},
+{
+"If This Happened": "Everything barely survived",
+Diagnosis:
+"The colony passed the first test but is not ready for longer droughts.",
+"Next-Cycle Fix":
+"Fix water, food, wood, and science before adding new beds.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To survive the **first drought in Timberborn**, start with water math, not a fixed build order.
+
+A good baseline is about **2.1 water per adult beaver per day**. For beginner planning, use **2.5 water per beaver per day** as a safer target, and use **3/day** only as a conservative buffer for Hard Mode, messy layouts, or extra safety. A **Small Tank stores 30 water**, so one full Small Tank is not enough for a 10-beaver colony through a Normal first drought.
+
+During the drought, estimate survival time with this quick formula: **days left ≈ current stored water ÷ (beavers × daily water use)**. If that number is lower than the remaining drought days, pause growth, focus pump work, and prepare a stronger recovery plan after the river returns. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 22, 2026. Covers Timberborn 1.0 first drought survival, water math, difficulty-based drought length, Small Tank storage, pump reach, Folktails vs Iron Teeth pump differences, population control, evaporation, map-based dam timing, crop drying, worker triage, and what to fix after the first drought.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-first-drought-warning.webp"
+    alt="First drought warning timer in Timberborn"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In our 1.0 test start, the warning was not the time to expand. It was the final check for tank water, pump reach, food, worker assignments, and whether the dam plan was still realistic.
+  </figcaption>
+</figure>
+
+<h2 id="timberborn-first-drought-guide">
+  Timberborn first drought guide
+</h2>
+
+This **Timberborn first drought guide** is a decision tool for the first dry season. It is not a full beginner build order. The goal is to answer one question:
+
+**When the river stops helping, can this colony still drink, eat, pump, and recover?**
+
+The first drought tests five systems:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>stored drinking water,</li>
+  <li>pump reach as the river drops,</li>
+  <li>whether your dam plan can finish in time,</li>
+  <li>food already in storage,</li>
+  <li>population control before demand grows.</li>
+</ul>
+
+If one of those systems is weak, fix that first. Do not start a long-term beauty project while the survival timer is already running.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="what-drought-does">
+  What drought actually does
+</h2>
+
+When drought begins, normal water sources stop feeding the map. The water already on the map can still move, drain, be pumped down, and evaporate. That is why a river can look safe at the start of drought and still fail before the timer ends.
+
+<GuideTable
+caption="What drought changes in Timberborn."
+columns={mechanicsColumns}
+rows={mechanicsRows}
+/>
+
+This is the core mechanic behind every first-drought decision. Tanks are not optional. A dam is not useful until it is finished. A pump is not safe just because it touches water on day 1.
+
+<h2 id="first-drought-numbers">
+  First drought numbers: use baseline, safe, and conservative math
+</h2>
+
+The water number matters because it controls every storage decision.
+
+<GuideTable
+caption="Timberborn first drought planning numbers."
+columns={numberColumns}
+rows={numberRows}
+/>
+
+Here is the practical way to use the table:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use **2.1/day** when you want the baseline estimate.</li>
+  <li>Use **2.5/day** when planning a beginner-safe buffer.</li>
+  <li>Use **3/day** when playing Hard, using long paths, or deliberately overpreparing.</li>
+</ul>
+
+Example: 10 beavers on a Normal first drought of about 2–3 days need roughly 50–75 water using the 2.5/day planning value. That means one full Small Tank is too thin, two is workable, and three is much more comfortable if your pump or dam plan is risky.
+
+<h2 id="map-based-plan">
+  Map-based plan: dam early or tanks first?
+</h2>
+
+Do not force the same first drought plan on every map. River shape and pump depth matter.
+
+<GuideTable
+caption="How your starting map changes the first drought plan."
+columns={mapColumns}
+rows={mapRows}
+/>
+Use the table as the decision point, then use the dam section below only if the dam is still realistic for your map.
+
+In our test colony, the early dam worked only when the site could actually finish before the drought warning ended. On a wider start, the safer play was more storage, shorter paths, and a later dam.
+
+<h2 id="difficulty-and-scaling">
+  Difficulty matters: the first drought is not always the same
+</h2>
+
+A first drought on Easy, Normal, and Hard should not be planned with the same buffer.
+
+On Easy, the first drought is often short enough that a simple storage plan can carry you. On Normal, expect a real 2–3 day test. On Hard, the first drought can be long enough that weak tank math, shallow pumps, or an unfinished dam become colony-ending mistakes.
+
+The second lesson is more important: **future droughts get worse.**
+
+If you barely survive the first one, do not celebrate by adding many new beds. The first drought is the colony’s diagnostic report. Fix the system that almost failed before the next cycle becomes longer.
+
+<h2 id="water-tanks-and-pump-reach">
+  Water tanks and pump reach
+</h2>
+
+Stored water and pump reach are different problems.
+
+A tank tells you how long beavers can drink. A pump tells you whether you can keep adding water before and during the drought. If the pump loses reach, the colony switches from “still producing water” to “living only on storage.”
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-water-tank-no-storage.webp"
+    alt="Water pump needing more storage before drought in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the pump is active but storage is thin, build tanks while the river is still reachable.
+  </figcaption>
+</figure>
+
+Before the warning, confirm four things:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Your stored water covers the current population for the expected drought length.</li>
+  <li>Your pump has short paths to storage and enough free tank capacity.</li>
+  <li>Your food is partly in storage, not only still growing in fields.</li>
+  <li>Your first dam is either realistically finishable or intentionally delayed.</li>
+</ul>
+
+If the pump is on shallow edge water, be more conservative. Visible water is not always useful water. Once the level gets too low, the pump can stop while the channel still looks wet.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="finish-the-dam">
+  Finish the dam only if the site is realistic
+</h2>
+
+A completed dam is useful. An unfinished dam is just stored logs in the wrong shape.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-dam-complete-65-percent-buffer.webp"
+    alt="Completed first dam holding a river buffer in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A completed dam buys time, but it does not replace drinking-water storage.
+  </figcaption>
+</figure>
+
+Build the first dam early if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>the river is narrow,</li>
+  <li>the build site is close,</li>
+  <li>logs are available,</li>
+  <li>builders can reach it by short paths,</li>
+  <li>it can finish before the drought starts.</li>
+</ul>
+
+Delay the dam if:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>the river is wide,</li>
+  <li>the site needs too many blocks,</li>
+  <li>builders walk too far,</li>
+  <li>you still lack filled tanks,</li>
+  <li>food and storage are already behind.</li>
+</ul>
+
+For deeper water-control planning, read the <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link>.
+
+<h2 id="faction-and-population">
+  Faction and population control
+</h2>
+
+The first drought is not only a water problem. It is also a demand problem. More beavers can build faster, but they also drink and eat.
+
+<GuideTable
+caption="Folktails, Iron Teeth, pumps and first drought population control."
+columns={factionColumns}
+rows={factionRows}
+/>
+
+For Folktails, the easiest population brake is simple: do not keep adding housing before the first drought. For Iron Teeth, keep breeding infrastructure under control when water math is tight.
+
+Extreme population actions are not a normal beginner plan. The safer habit is to stop growth early, move workers into survival jobs, and recover the colony before expanding again.
+
+
+<h2 id="during-the-drought">
+  During the drought: calculate how many days you can last
+</h2>
+
+Once the drought starts, do not only look at the current water number. Compare stored water against the remaining drought length.
+
+Use this quick estimate:
+
+**Days left ≈ current stored water ÷ (beavers × daily water use)**
+
+For daily water use, use **2.1** as the baseline, **2.5** as a safer beginner estimate, or **3** if you want a conservative buffer.
+
+Example: if you have 60 stored water and 10 beavers, then:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>at 2.1/day, you have about 2.8 days,</li>
+  <li>at 2.5/day, you have about 2.4 days,</li>
+  <li>at 3/day, you have about 2.0 days.</li>
+</ul>
+
+If the estimate is lower than the remaining drought timer, stop growth, pause optional jobs, and focus only on water, food, pumping, hauling, and emergency construction.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-water-pump-draining-river.webp"
+    alt="Water pump lowering the river buffer during drought in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pumping during drought keeps beavers alive, but it can also lower the remaining river buffer. Watch both stored water and water level.
+  </figcaption>
+</figure>
+
+<GuideTable
+caption="What to watch during the first drought."
+columns={duringColumns}
+rows={duringRows}
+/>
+
+<h2 id="crops-during-drought">
+  Crops during drought: fields are not storage
+</h2>
+
+A crop in the field is not the same as food in storage. If nearby land loses irrigation, crops can dry before they become meals.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-drought-crop-risk.webp"
+    alt="Crops at risk when river water runs low during drought in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the water buffer runs out, nearby land can lose irrigation and crops may start drying before harvest.
+  </figcaption>
+</figure>
+
+The beginner fix is simple:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>plant carrots early,</li>
+  <li>harvest ready crops before drought gets dangerous,</li>
+  <li>keep food storage reachable by paths,</li>
+  <li>avoid population growth during the countdown,</li>
+  <li>plan better irrigation after the first drought if fields nearly failed.</li>
+</ul>
+
+For long-term farm stability, continue with the <Link href="/timberborn/irrigation-reservoir-guide">Timberborn Irrigation Guide</Link>.
+
+<h2 id="evaporation-after-drought">
+  Evaporation after the first drought
+</h2>
+
+Evaporation usually matters less than tank storage and pump reach during the first drought, but it matters as soon as you start building reservoirs. Wide shallow water loses more through exposed surface, while deep compact storage lasts longer.
+
+For reservoir depth, spillways, evaporation math, and controlled release, read the <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link>.
+
+<h2 id="common-first-drought-mistakes">
+  Common first drought mistakes
+</h2>
+
+These mistakes explain most first drought deaths without repeating the same tank/dam advice in different words.
+
+<GuideTable
+caption="Common Timberborn first drought mistakes and better fixes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+If the colony dies at the same point every run, find the row that matches the failure before you add more buildings.
+
+<h2 id="after-the-first-drought">
+  After the first drought: fix what almost failed
+</h2>
+
+Surviving the first drought is not the end. It is the diagnostic report for the second cycle.
+
+<GuideTable
+caption="What to fix after surviving the first drought."
+columns={afterColumns}
+rows={afterRows}
+/>
+
+Do not immediately add a large housing block just because the river returned. Future droughts intensify. First add the buffer that was missing: more water storage, better pump reach, better dam access, more food, tree planting, or science unlocks.
+
+<h2 id="recommended-first-drought-route">
+  Recommended first drought route
+</h2>
+
+Use this route as a clean checklist:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Count your beavers.</li>
+  <li>Estimate water demand with 2.1/day baseline or 2.5/day beginner-safe planning.</li>
+  <li>Use 3/day only if you want a conservative safety buffer.</li>
+  <li>Fill Small Tanks before the drought warning becomes urgent.</li>
+  <li>Apply the map-based dam decision: finish a realistic dam, or skip it and protect storage first.</li>
+  <li>Keep food moving into storage, not only growing in fields.</li>
+  <li>Stop population growth while water and food math are tight.</li>
+  <li>During drought, watch stored water trend, pump reach, river level, and crops.</li>
+  <li>After drought, fix the system that almost failed before adding beds.</li>
+</ol>
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these Timberborn guides next:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/timberborn">Timberborn Guide Hub</Link> — for the full water survival and automation path.
+  </li>
+  <li>
+    <Link href="/timberborn/beginner-guide">Timberborn Beginner Guide</Link> — for the full first 30 days route, Forester timing, green land rules, and Inventor science.
+  </li>
+  <li>
+    <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link> — for dams, floodgates, reservoirs, evaporation, pump depth, and map-based water control.
+  </li>
+  <li>
+    <Link href="/timberborn/irrigation-reservoir-guide">Irrigation and Reservoir Guide</Link> — for crops, reservoirs, and underground water routes during longer droughts.
+  </li>
+  <li>
+    <Link href="/timberborn/badwater-badtide-guide">Badwater and Badtide Guide</Link> — for the next water threat after basic drought control.
+  </li>
+</ol>
+
+<h2 id="faq">
+  Timberborn first drought FAQ
+</h2>
+
+### How much water does one beaver need per day?
+
+A useful baseline is about 2.1 water per adult beaver per day. For beginner planning, use 2.5/day. Use 3/day only as a conservative safety buffer.
+
+### Is one Small Tank enough for the first drought?
+
+Usually no. A Small Tank stores 30 water. For 10 beavers, that is only about one day if you use the conservative 3/day planning value.
+
+### Should I always build a dam before the first drought?
+
+No. Build it early only if the river is narrow, close, and reachable. If the site is wide or awkward, filled tanks are safer than an unfinished dam.
+
+### Why did my pump stop during drought?
+
+The river level likely dropped too low for the pump to keep working. Pump reach matters as much as the amount of visible water.
+
+### Is the first drought longer on Hard Mode?
+
+Yes, Hard can start with a much longer first drought than Easy or Normal. Use the forecast and plan with a larger water buffer.
+
+### Why do later droughts feel harder?
+
+On Normal and Hard, drought pressure increases over time. The first drought is only the first test, not the final water target.
+
+### Should I add more housing before the first drought?
+
+Only if water and food are clearly ahead. More beavers mean more labor, but they also increase water and food demand.
+
+### Why did my crops die even though beavers survived?
+
+Tanks solved drinking water, not soil irrigation. Crops need nearby water or green land to stay alive.
+
+### What should I fix first after the drought ends?
+
+Fix the system that almost failed: tank storage, pump reach, dam timing, food, logs, or crop irrigation.
+
+### Does evaporation matter for the first drought?
+
+Usually not as much as storage and pump reach, but it matters when you start building reservoirs. Deep compact storage loses less useful water than wide shallow storage.

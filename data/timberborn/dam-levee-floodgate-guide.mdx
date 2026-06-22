@@ -1,0 +1,1027 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import Image from "next/image";
+
+export const numberColumns = [
+{ key: "Tool / Rule", label: "Tool / Rule" },
+{ key: "Planning Number", label: "Planning Number" },
+{ key: "What It Means In Play", label: "What It Means In Play" },
+];
+
+export const numberRows = [
+{
+"Tool / Rule": "Dam",
+"Planning Number": "Holds about 65% of water height.",
+"What It Means In Play":
+"A cheap early buffer, but not a full wall and not adjustable.",
+},
+{
+"Tool / Rule": "Single / Double / Triple Floodgate",
+"Planning Number": "Controls about 1.0 m / 2.0 m / 3.0 m of water height.",
+"What It Means In Play":
+"Use higher gates for deeper reservoirs, badwater choke points, and controlled outlets.",
+},
+{
+"Tool / Rule": "Reservoir depth",
+"Planning Number": "Aim for 2.0 m+ before calling it long-term drought storage.",
+"What It Means In Play":
+"Shallow water may look full but can vanish before long droughts end.",
+},
+{
+"Tool / Rule": "Evaporation",
+"Planning Number": "About 0.045 water per exposed tile per day.",
+"What It Means In Play":
+"Wide shallow water loses more to evaporation than deep compact storage with the same volume.",
+},
+{
+"Tool / Rule": "Pump working depth",
+"Planning Number": "Water Pumps need roughly 0.3 m of water to keep working.",
+"What It Means In Play":
+"If the river drops too low, the pump can stop even when you still see water nearby.",
+},
+{
+"Tool / Rule": "Emergency low-water check",
+"Planning Number": "Treat below 0.5 m as a danger threshold.",
+"What It Means In Play":
+"Pumps, irrigation, and river buffers can fail soon after this point.",
+},
+{
+"Tool / Rule": "Spillway",
+"Planning Number": "Keep one safe overflow section lower than the rest of the dam wall.",
+"What It Means In Play":
+"A controlled overflow path is safer than letting water overtop somewhere random.",
+},
+];
+
+export const structureColumns = [
+{ key: "Structure", label: "Structure" },
+{ key: "Best Job", label: "Best Job" },
+{ key: "Use It When", label: "Use It When" },
+{ key: "Do Not Use It For", label: "Do Not Use It For" },
+];
+
+export const structureRows = [
+{
+Structure: "Dam",
+"Best Job": "Cheap first drought buffer.",
+"Use It When":
+"A narrow, reachable river section can be finished before drought.",
+"Do Not Use It For":
+"Full blocking, deep storage, badwater isolation, or precise level control.",
+},
+{
+Structure: "Levee",
+"Best Job": "Solid wall and channel shaping.",
+"Use It When":
+"You need reservoir sides, clean-water separation, badwater walls, or channel edges.",
+"Do Not Use It For":
+"Early oversized walls that consume logs before pumps, tanks, food, and Forester are safe.",
+},
+{
+Structure: "Floodgate",
+"Best Job": "Adjustable water height.",
+"Use It When":
+"You need to raise or lower a reservoir, divert water, or isolate badwater.",
+"Do Not Use It For":
+"A first-drought plan if science, planks, builders, and access are not ready.",
+},
+{
+Structure: "Reservoir",
+"Best Job": "Stored water for drought, irrigation, or controlled release.",
+"Use It When":
+"Simple river buffers stop carrying the colony through longer dry seasons.",
+"Do Not Use It For":
+"A wide shallow pond with no inlet, no outlet, and no build access.",
+},
+{
+Structure: "Throttling Valve",
+"Best Job": "Controlled flow rate.",
+"Use It When":
+"Opening a floodgate would release too much water too quickly.",
+"Do Not Use It For":
+"Fixing a route that already floods, traps water, or sends flow to the wrong place.",
+},
+];
+
+export const mapColumns = [
+{ key: "Map Situation", label: "Map Situation" },
+{ key: "Best First Move", label: "Best First Move" },
+{ key: "Why", label: "Why" },
+];
+
+export const mapRows = [
+{
+"Map Situation": "Narrow river near the starting district",
+"Best First Move": "Build a small dam early.",
+Why: "A short project can finish before the first drought and create a useful river buffer.",
+},
+{
+"Map Situation": "Wide river near the starting district",
+"Best First Move": "Prioritize filled tanks first, then dam later.",
+Why: "A half-built wide dam gives no drought safety. Stored water is more reliable.",
+},
+{
+"Map Situation": "Deep natural hole nearby",
+"Best First Move":
+"Plan it as a future reservoir, but do not rush it before the first survival loop works.",
+Why: "Deep holes are valuable only if you can fill them and release water safely.",
+},
+{
+"Map Situation": "Badwater source near the clean river",
+"Best First Move":
+"Reserve space for levees and floodgates before building farms downstream.",
+Why: "You may need a choke point later, and early farms can block the cleanest route.",
+},
+{
+"Map Situation": "Long walk to the dam site",
+"Best First Move":
+"Build paths and staging access before committing to the structure.",
+Why: "A correct dam in the wrong location still fails if builders spend the whole day walking.",
+},
+{
+"Map Situation": "Low log supply or sparse forest",
+"Best First Move":
+"Build only the smallest useful wall or dam.",
+Why: "Levees scale by block count, so oversized waterworks can starve the colony of logs.",
+},
+];
+
+export const evaporationColumns = [
+{ key: "Reservoir Shape", label: "Reservoir Shape" },
+{ key: "Stored Volume", label: "Stored Volume" },
+{ key: "Exposed Tiles", label: "Exposed Tiles" },
+{ key: "Daily Evaporation", label: "Daily Evaporation" },
+];
+
+export const evaporationRows = [
+{
+"Reservoir Shape": "10 × 3 surface, 6 m deep",
+"Stored Volume": "180 water",
+"Exposed Tiles": "30",
+"Daily Evaporation": "30 × 0.045 = 1.35 water/day",
+},
+{
+"Reservoir Shape": "Same 180 water at 2 m deep",
+"Stored Volume": "180 water",
+"Exposed Tiles": "90",
+"Daily Evaporation": "90 × 0.045 = 4.05 water/day",
+},
+{
+"Reservoir Shape": "Same volume, shallower design",
+"Stored Volume": "Same",
+"Exposed Tiles": "3× more exposed surface",
+"Daily Evaporation": "About 3× the evaporation loss",
+},
+];
+
+export const upgradeColumns = [
+{ key: "Stage", label: "Stage" },
+{ key: "Water Tool", label: "Water Tool" },
+{ key: "Target", label: "Target" },
+{ key: "Upgrade Trigger", label: "Upgrade Trigger" },
+];
+
+export const upgradeRows = [
+{
+Stage: "First drought",
+"Water Tool": "Small dam + tanks",
+Target: "Keep a basic river buffer and enough stored drinking water.",
+"Upgrade Trigger":
+"If the first drought was close, add tanks before chasing bigger gates.",
+},
+{
+Stage: "Second cycle",
+"Water Tool": "Better dam access or first floodgate",
+Target: "Start controlling river level instead of only reacting to drought.",
+"Upgrade Trigger":
+"Use floodgates when science, planks, builders, and paths are ready.",
+},
+{
+Stage: "Longer droughts",
+"Water Tool": "Deep side reservoir",
+Target: "Store 2.0 m+ of water in a controlled basin.",
+"Upgrade Trigger":
+"If farms or pumps fail before drought ends, shallow storage is no longer enough.",
+},
+{
+Stage: "Badwater pressure",
+"Water Tool": "Levee + floodgate choke point",
+Target: "Keep toxic flow away from the clean river and farm irrigation.",
+"Upgrade Trigger":
+"If badwater shares any route with clean water, build separation before expansion.",
+},
+{
+Stage: "Stable midgame",
+"Water Tool": "Throttling valve or automation",
+Target: "Release water slowly instead of dumping it all at once.",
+"Upgrade Trigger":
+"If opening a gate floods, wastes water, or drains storage too fast, control flow rate.",
+},
+];
+
+export const gateOperationColumns = [
+{ key: "Season / Situation", label: "Season / Situation" },
+{ key: "Gate Habit", label: "Gate Habit" },
+{ key: "Why", label: "Why" },
+];
+
+export const gateOperationRows = [
+{
+"Season / Situation": "Temperate season",
+"Gate Habit": "Keep storage gates closed or mostly closed while the reservoir fills.",
+Why: "The goal is to capture water before the drought timer becomes urgent.",
+},
+{
+"Season / Situation": "Reservoir is full",
+"Gate Habit": "Let overflow leave through a planned spillway or safe outlet.",
+Why: "A full reservoir without overflow planning can flood the wrong route.",
+},
+{
+"Season / Situation": "Drought begins",
+"Gate Habit": "Open the outlet slightly instead of fully opening the floodgate.",
+Why: "A small release can keep pumps or irrigation alive for longer without wasting the stored water.",
+},
+{
+"Season / Situation": "Water level near danger",
+"Gate Habit": "Lower release and protect the minimum water level near pumps.",
+Why: "Once water drops near pump failure depth, full release can end the drought buffer early.",
+},
+{
+"Season / Situation": "Route floods when opened",
+"Gate Habit": "Close, widen the outlet, or switch to a throttling valve later.",
+Why: "The release rate is higher than the channel capacity.",
+},
+];
+
+export const spillwayColumns = [
+{ key: "Part", label: "Part" },
+{ key: "Purpose", label: "Purpose" },
+{ key: "Beginner Mistake", label: "Beginner Mistake" },
+];
+
+export const spillwayRows = [
+{
+Part: "Main wall",
+Purpose: "Holds the reservoir and sets the maximum storage plan.",
+"Beginner Mistake":
+"Building every wall section to the same height with no safe overflow path.",
+},
+{
+Part: "Controlled gate",
+Purpose: "Releases water toward pumps, farms, or a side channel.",
+"Beginner Mistake":
+"Fully opening it during drought and draining the reservoir too quickly.",
+},
+{
+Part: "Spillway",
+Purpose: "Gives excess water a safe overflow route.",
+"Beginner Mistake":
+"Letting water overtop a random low spot, flood farms, or escape into badwater routes.",
+},
+{
+Part: "Outlet channel",
+Purpose: "Carries released or overflow water away safely.",
+"Beginner Mistake":
+"Building the wall but forgetting channel capacity downstream.",
+},
+];
+
+export const reservoirColumns = [
+{ key: "Design Check", label: "Design Check" },
+{ key: "Good Target", label: "Good Target" },
+{ key: "Failure Sign", label: "Failure Sign" },
+];
+
+export const reservoirRows = [
+{
+"Design Check": "Depth",
+"Good Target": "2.0 m+ for real drought storage; deeper is better when footprint is limited.",
+"Failure Sign":
+"The reservoir looks full at drought start but disappears before farms recover.",
+},
+{
+"Design Check": "Surface area",
+"Good Target": "Compact deep storage before wide exposed water.",
+"Failure Sign":
+"Evaporation burns through a wide shallow pool faster than expected.",
+},
+{
+"Design Check": "Inlet",
+"Good Target": "A controlled floodgate or channel that fills before the drought timer is low.",
+"Failure Sign":
+"The reservoir technically works but never fills enough to matter.",
+},
+{
+"Design Check": "Outlet",
+"Good Target": "A safe route that releases water without flooding farms, paths, or housing.",
+"Failure Sign":
+"Opening the gate saves one area and floods another.",
+},
+{
+"Design Check": "Access",
+"Good Target": "Paths, stairs, and platforms that let builders reach every wall and gate.",
+"Failure Sign":
+"The plan is correct, but key blocks stay unbuilt because beavers cannot reach them.",
+},
+{
+"Design Check": "Spillway",
+"Good Target": "A deliberate overflow route lower than the rest of the unsafe wall line.",
+"Failure Sign":
+"A full reservoir escapes through an unexpected tile and floods the wrong district.",
+},
+];
+
+export const diversionColumns = [
+{ key: "Diversion Type", label: "Diversion Type" },
+{ key: "How It Works", label: "How It Works" },
+{ key: "Use It For", label: "Use It For" },
+];
+
+export const diversionRows = [
+{
+"Diversion Type": "Simple side reservoir",
+"How It Works":
+"Open a gate from the main river into a side basin while water is flowing.",
+"Use It For":
+"Filling drought storage before the dry season starts.",
+},
+{
+"Diversion Type": "T-valve split",
+"How It Works":
+"At a T-shaped junction, put a gate on each branch. Open one branch and close the other to switch flow direction.",
+"Use It For":
+"Alternating farm districts, filling a secondary reservoir, or routing around obstacles.",
+},
+{
+"Diversion Type": "Badwater bypass",
+"How It Works":
+"Use levees and gates to keep toxic flow away from the clean river route.",
+"Use It For":
+"Badtide defense and badwater source management.",
+},
+{
+"Diversion Type": "Controlled release outlet",
+"How It Works":
+"Release stored water in small stages instead of opening the full gate.",
+"Use It For":
+"Keeping pumps or irrigation alive during drought without draining the reservoir too quickly.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "What It Looks Like", label: "What It Looks Like" },
+{ key: "Better Fix", label: "Better Fix" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Replacing the first dam with floodgates too early",
+"What It Looks Like":
+"The colony has an unfinished advanced gate and no working drought buffer.",
+"Better Fix":
+"Finish a small dam first, then upgrade after science, planks, and build access are stable.",
+},
+{
+Mistake: "Building a wide shallow reservoir",
+"What It Looks Like":
+"The storage looks impressive but loses too much water through exposed surface area.",
+"Better Fix":
+"Increase depth before width. A compact deep basin is more useful than a flat puddle.",
+},
+{
+Mistake: "Ignoring evaporation",
+"What It Looks Like":
+"Two reservoirs hold similar volume, but the wide one disappears much faster.",
+"Better Fix":
+"Estimate exposed surface tiles and remember the 0.045 water per tile per day evaporation rule.",
+},
+{
+Mistake: "Using levees as the first big construction project",
+"What It Looks Like":
+"Logs disappear into a wall while pumps, tanks, farms, or the dam lag behind.",
+"Better Fix":
+"Build only the levee blocks that change the current water route.",
+},
+{
+Mistake: "No spillway",
+"What It Looks Like":
+"A full reservoir overtops a random edge and floods the wrong area.",
+"Better Fix":
+"Plan a safe overflow section and outlet before calling the reservoir finished.",
+},
+{
+Mistake: "Ignoring trapped water",
+"What It Looks Like":
+"A pocket of water or badwater stays behind a gate and refuses to flush.",
+"Better Fix":
+"Check the inlet, outlet, and terrain lip before finalizing floodgate placement.",
+},
+{
+Mistake: "Opening a floodgate too far",
+"What It Looks Like":
+"A reservoir drains quickly, the outlet floods, or a channel overflows.",
+"Better Fix":
+"Use a smaller staged release, lower gate height, or a throttling valve later.",
+},
+];
+
+export const troubleshootingColumns = [
+{ key: "Problem", label: "Problem" },
+{ key: "Likely Cause", label: "Likely Cause" },
+{ key: "What To Try", label: "What To Try" },
+];
+
+export const troubleshootingRows = [
+{
+Problem: "My dam still lets water through",
+"Likely Cause":
+"That is how dams work. They hold part of the water height and let excess water pass.",
+"What To Try":
+"Use levees for full blocking or floodgates for adjustable height.",
+},
+{
+Problem: "My Water Pump stops even though I can still see water",
+"Likely Cause":
+"The water may be below the pump’s working depth, roughly 0.3 m.",
+"What To Try":
+"Add deeper storage, move the pump, or keep the reservoir level higher during drought.",
+},
+{
+Problem: "My floodgate project misses the drought",
+"Likely Cause":
+"You started it before science, planks, builders, and access were ready.",
+"What To Try":
+"Use a smaller dam and tanks first, then upgrade in the next wet season.",
+},
+{
+Problem: "My reservoir does not last",
+"Likely Cause":
+"It is too shallow, too wide, losing too much to evaporation, or releasing too much at once.",
+"What To Try":
+"Increase depth, shrink exposed surface, and control the outlet.",
+},
+{
+Problem: "My badwater route contaminates clean water",
+"Likely Cause":
+"The clean river and toxic route are still connected.",
+"What To Try":
+"Add a levee/floodgate choke point and verify the outlet direction during badtide.",
+},
+{
+Problem: "Water gets stuck behind a gate",
+"Likely Cause":
+"The gate or terrain creates a dead-end pocket.",
+"What To Try":
+"Move the gate, lower the terrain lip, or build a clearer outlet.",
+},
+{
+Problem: "The channel floods when I open the gate",
+"Likely Cause":
+"The outlet capacity is lower than the release rate.",
+"What To Try":
+"Widen/deepen the outlet, release in stages, or use a throttling valve.",
+},
+];
+
+export const releaseChecklistColumns = [
+{ key: "Check Before First Release", label: "Check Before First Release" },
+{ key: "What To Confirm", label: "What To Confirm" },
+];
+
+export const releaseChecklistRows = [
+{
+"Check Before First Release": "Storage depth",
+"What To Confirm":
+"The reservoir has enough depth to release water without instantly falling below the useful range.",
+},
+{
+"Check Before First Release": "Pump safety",
+"What To Confirm":
+"The release plan still keeps nearby pumps above working depth.",
+},
+{
+"Check Before First Release": "Outlet capacity",
+"What To Confirm":
+"The channel can carry the release without flooding farms, paths, or housing.",
+},
+{
+"Check Before First Release": "Spillway route",
+"What To Confirm":
+"Any overflow leaves through a planned safe path, not a random low tile.",
+},
+{
+"Check Before First Release": "No trapped pocket",
+"What To Confirm":
+"Water can enter and leave without getting stuck behind the gate.",
+},
+{
+"Check Before First Release": "Badwater separation",
+"What To Confirm":
+"Clean release routes do not connect to toxic-water paths.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Timberborn**, use a **dam** for a cheap first drought buffer, **levees** for solid walls, and **floodgates** when you need adjustable water height.
+
+The key numbers are simple: a dam holds about **65%** water height, single/double/triple floodgates control about **1.0 m / 2.0 m / 3.0 m**, exposed water evaporates at about **0.045 per tile per day**, and Water Pumps need roughly **0.3 m** water depth to keep working.
+
+For reservoirs, build deep and compact before wide and shallow. During temperate seasons, keep gates closed to store water. During drought, open outlets only slightly so the stored water lasts instead of dumping the whole reservoir at once. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 22, 2026. Covers Timberborn 1.0 dams, levees, floodgates, reservoir evaporation, 0.045/tile/day evaporation, pump depth, 65% dam buffers, 1/2/3 m floodgate planning, spillways, T-valve diversion, trapped water, throttling valves, badwater choke points, and drought storage troubleshooting.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-dam-complete-65-percent-buffer.webp"
+    alt="Completed Timberborn dam holding water behind an early river buffer"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In our 1.0 test colony, the first dam bought time, but the colony became stable only after tanks, deeper storage, and controlled release were added.
+  </figcaption>
+</figure>
+
+<h2 id="timberborn-dam-levee-floodgate-guide">
+  Timberborn dam, levee and floodgate guide
+</h2>
+
+This **Timberborn dam, levee and floodgate guide** explains which water-control structure to build, when to upgrade, and how to avoid wasting a whole season on the wrong project.
+
+The short version is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use **dams** when you need a fast early buffer.</li>
+  <li>Use **levees** when you need solid walls or separated channels.</li>
+  <li>Use **floodgates** when you need adjustable water height.</li>
+  <li>Use **reservoirs** when short river buffers no longer survive drought.</li>
+  <li>Use **throttling valves** when controlled flow rate matters more than gate height.</li>
+</ul>
+
+The real skill is reading the map: river width, depth, access, log supply, badwater direction, evaporation surface, and whether the build can finish before the next disaster.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="key-numbers">
+  Key water-control numbers
+</h2>
+
+Use these numbers as planning anchors. Map shape and difficulty still matter, but these values stop the guide from becoming vague advice.
+
+<GuideTable
+caption="Timberborn dam, floodgate, reservoir, evaporation and pump planning numbers."
+columns={numberColumns}
+rows={numberRows}
+/>
+
+The important lesson is that each structure solves a different numeric problem. A dam gives an early buffer. Floodgates control height. Reservoir depth increases stored volume. Evaporation punishes exposed surface. Pumps fail when the remaining water is too shallow.
+
+<h2 id="dam-vs-levee-vs-floodgate">
+  Dam vs levee vs floodgate: what each structure is for
+</h2>
+
+Before building a large water project, choose the right tool for the job.
+
+<GuideTable
+caption="Timberborn dam, levee, floodgate, reservoir and valve differences."
+columns={structureColumns}
+rows={structureRows}
+/>
+
+A dam is usually your first answer because it is cheap and fast. A levee is your wall. A floodgate is your controller. A reservoir is the storage system those pieces create.
+
+<h2 id="map-start-adjustments">
+  Map start adjustments: do not force one water build order
+</h2>
+
+Some starts have a perfect narrow dam site near the district. Other starts have wide rivers, awkward bends, sparse forests, or long walking routes.
+
+<GuideTable
+caption="How different map starts change your first water-control move."
+columns={mapColumns}
+rows={mapRows}
+/>
+
+In our 1.0 test colony, the first dam worked best only when the river was narrow and the build site was close. On a wider start, chasing the same early dam wasted logs and builder time; filled tanks were safer until the colony had better access.
+
+<h2 id="evaporation-and-depth">
+  Evaporation: why deep narrow reservoirs beat wide shallow ones
+</h2>
+
+Evaporation is the main reason “depth first, width second” is more than a slogan.
+
+A good planning rule is:
+
+**Every exposed water tile evaporates about 0.045 water per day.**
+
+That means two reservoirs with the same stored volume can behave very differently if one exposes much more surface area.
+
+<GuideTable
+caption="Reservoir evaporation example: same storage, different exposed surface."
+columns={evaporationColumns}
+rows={evaporationRows}
+/>
+
+This is why a deep 10 × 3 × 6 basin can be much more efficient than a wide 2 m-deep basin holding the same volume. The volume is the same, but the shallow version exposes more surface, so it loses more water every day.
+
+When you ask “how deep should my reservoir be?”, the practical answer is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>use 2.0 m+ as the early serious-storage target,</li>
+  <li>go deeper when the map gives you a natural hole or canyon,</li>
+  <li>avoid spreading water over huge shallow surfaces unless you need irrigation coverage,</li>
+  <li>keep exposed surface small when the goal is storage, not soil moisture.</li>
+</ul>
+
+<h2 id="why-first-dam-matters">
+  Why the first dam matters
+</h2>
+
+The first dam is not your final water system. It is a survival bridge.
+
+A dam keeps part of a river section usable during drought instead of letting everything drain away immediately. It also often doubles as a crossing, giving beavers access to wood or land on the other side.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-first-dam-river-start.webp"
+    alt="Early Timberborn dam location near a starting river"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A good first dam site is narrow, close, and reachable. If the river is too wide, tanks may be the better first drought answer.
+  </figcaption>
+</figure>
+
+Do not overbuild this first step. If drought is close, a small finished dam is better than a large advanced structure that never stores water.
+
+For the first drought checklist, read the <Link href="/timberborn/first-drought-guide">Timberborn First Drought Guide</Link>.
+
+<h2 id="when-to-upgrade">
+  When to upgrade from dam to floodgate
+</h2>
+
+You upgrade when you need control, not just storage.
+
+Floodgates become useful when you want to:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>hold water higher than a dam can,</li>
+  <li>choose when a reservoir fills,</li>
+  <li>split water between two routes,</li>
+  <li>protect farms from badwater,</li>
+  <li>release water only during drought,</li>
+  <li>prepare for automation later.</li>
+</ul>
+
+<GuideTable
+caption="Safe upgrade path from first dam to controlled waterworks."
+columns={upgradeColumns}
+rows={upgradeRows}
+/>
+
+If you are still surviving on one small water buffer, do not rush a complex floodgate plan. Unlocking a floodgate is not the same as having planks, builders, paths, and a safe outlet ready.
+
+<h2 id="gate-operation">
+  Gate operation: close to store, barely open to release
+</h2>
+
+Many reservoir failures happen after the build is finished. The gate is opened too far, the outlet floods, or the stored water disappears in a day.
+
+Use this habit:
+
+<GuideTable
+caption="How to operate reservoir gates through temperate seasons and drought."
+columns={gateOperationColumns}
+rows={gateOperationRows}
+/>
+
+The beginner rule is: **closed to store, barely open to sustain.**
+
+During temperate seasons, store water. When drought starts, do not immediately drop the whole gate. Open a small amount, watch the pump or irrigation zone, and only increase release if the target area still needs more water.
+
+<h2 id="levees-and-spillways">
+  Levees and spillways: walls need overflow plans
+</h2>
+
+Levees block water completely. That makes them useful for reservoir walls, channel sides, badwater barriers, and support blocks.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-levee-river-control.webp"
+    alt="Levees narrowing a Timberborn river for water control"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Levees are powerful because they fully block water, but every block is a real log investment. Build the smallest wall that changes the route.
+  </figcaption>
+</figure>
+
+A complete dam or reservoir design should include more than a tall wall. It needs a controlled release route and a spillway.
+
+<GuideTable
+caption="Main wall, gate, spillway and outlet roles."
+columns={spillwayColumns}
+rows={spillwayRows}
+/>
+
+A spillway is simply a planned safe overflow path. It should be lower than the parts of the wall where overflow would be dangerous. Without one, a full reservoir can escape through the weakest edge and flood farms, paths, or badwater routes.
+
+<h2 id="reservoir-planning">
+  Reservoir planning: depth first, outlet second
+</h2>
+
+A reservoir is not just a hole with water. A good reservoir has depth, low exposed surface, a controlled inlet, a safe outlet, build access, and overflow handling.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-reservoir-hole-plan.webp"
+    alt="Planning a deep reservoir hole in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A deep natural hole is valuable only if you can fill it before drought and release it without flooding the wrong area.
+  </figcaption>
+</figure>
+
+The planning rule is:
+
+**Depth first, width second.**
+
+A wide shallow river exposes a lot of surface and may still hold too little useful volume. A deeper controlled basin gives more drought value in the same footprint.
+
+<GuideTable
+caption="Reservoir design checks for drought storage."
+columns={reservoirColumns}
+rows={reservoirRows}
+/>
+
+<h2 id="diverting-water">
+  Diverting water and T-valves
+</h2>
+
+Once you have floodgates and levees, you can send water into a side reservoir, farm district, bypass, or badwater outlet.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-water-diverter-filling-pit.webp"
+    alt="Timberborn floodgate and levee system diverting water into a reservoir pit"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In our test build, the diverter was useful only after the inlet finished early enough to fill the pit before drought.
+  </figcaption>
+</figure>
+
+A useful advanced pattern is the **T-valve split**. At a T-shaped junction, build two branches and place a floodgate or controlled outlet on each branch. Open one branch and close the other to send the river in one direction. Swap the gate states to redirect the flow.
+
+<GuideTable
+caption="Timberborn diversion patterns, including T-valve splits."
+columns={diversionColumns}
+rows={diversionRows}
+/>
+
+Use a T-valve when you want to:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>alternate water between two farm districts,</li>
+  <li>fill a secondary reservoir after the main reservoir is full,</li>
+  <li>route around an obstacle,</li>
+  <li>separate normal clean flow from badwater or emergency flow.</li>
+</ul>
+
+Check three things before trusting any diversion:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Can builders reach every gate, wall, stair, and platform?</li>
+  <li>Will the river still feed farms, pumps, or irrigation that need water?</li>
+  <li>Where does overflow go if the reservoir fills too quickly?</li>
+</ol>
+
+If the answer is unclear, keep the diversion manual until you see how the water behaves.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="reservoir-depth">
+  Deepening a water hole for longer droughts
+</h2>
+
+When droughts become longer, shallow storage stops being enough. Increasing depth is usually more valuable than spreading water over more land.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-drought-proof-water-hole-depth.webp"
+    alt="Deepened water hole used for drought proofing in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Deepening a water hole increases useful volume without increasing exposed surface as much as a wide shallow basin.
+  </figcaption>
+</figure>
+
+This is where construction order matters. Build the pieces that actually hold water first. Symmetry, extra wall sections, and perfect cleanup can wait until the basin works.
+
+<h2 id="trapped-water">
+  Avoid trapped water and dead-end flow
+</h2>
+
+A floodgate in the wrong place can create trapped water. This is especially dangerous when the route carries badwater.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-trapped-water-floodgate-warning.webp"
+    alt="Floodgate layout warning for trapped water in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Before placing a floodgate, check whether the pocket can drain. If it cannot, the gate may trap water instead of controlling it.
+  </figcaption>
+</figure>
+
+A safe route has:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a clear inlet,</li>
+  <li>a clear outlet,</li>
+  <li>no dead-end pocket,</li>
+  <li>enough channel width for the release,</li>
+  <li>safe builder access.</li>
+</ul>
+
+If the layout is hard to read from above, simplify it. A slightly less elegant route that you understand is safer than a clever one that hides trapped water.
+
+<h2 id="throttling-valves">
+  Throttling valves: use flow control after the route works
+</h2>
+
+Floodgates control height. Throttling valves control flow rate.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-automation-throttling-valves.webp"
+    alt="Throttling valves used for controlled water flow in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A throttling valve is useful when dropping a floodgate would release too much water too quickly.
+  </figcaption>
+</figure>
+
+Use throttling valves when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>you want slow reservoir release,</li>
+  <li>a full gate opening floods the channel,</li>
+  <li>you are feeding a small irrigation route,</li>
+  <li>badwater should leave gradually,</li>
+  <li>future automation needs predictable flow.</li>
+</ul>
+
+Do not use valves to hide a broken route. First make sure water has a safe path. Then use valves to make that path more stable.
+
+For sensor and valve logic, continue with the <Link href="/timberborn/automation-guide">Timberborn Automation Guide</Link>.
+
+<h2 id="common-mistakes">
+  Common dam, levee and floodgate mistakes
+</h2>
+
+Most water-control failures are not caused by picking a bad structure. They happen because the structure is built too early, too wide, too shallow, without overflow, or without access.
+
+<GuideTable
+caption="Common Timberborn water-control mistakes and better fixes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+When something fails, do not add more pieces immediately. First check whether the inlet, outlet, depth, exposed surface, spillway, and builder access were correct.
+
+<h2 id="troubleshooting">
+  Troubleshooting dams, levees, floodgates and reservoirs
+</h2>
+
+Use this table when a water project behaves differently than expected.
+
+<GuideTable
+caption="Timberborn dam, levee, floodgate and reservoir troubleshooting."
+columns={troubleshootingColumns}
+rows={troubleshootingRows}
+/>
+
+If you are unsure what failed, pause and inspect the water path:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Where does water enter?</li>
+  <li>Where should it stop?</li>
+  <li>Where should it leave?</li>
+  <li>How deep is the storage?</li>
+  <li>How much surface area is exposed?</li>
+  <li>Can the outlet handle the release?</li>
+  <li>Can builders reach every structure?</li>
+</ol>
+
+That simple check catches most bad reservoir and floodgate designs before they cost a season.
+
+<h2 id="before-first-release">
+  Before the first release: final safety checklist
+</h2>
+
+The old “recommended build order” is less useful than one final operating checklist. Before opening a gate for the first time, confirm the system can release water safely.
+
+<GuideTable
+caption="Final checks before opening a Timberborn reservoir or floodgate outlet."
+columns={releaseChecklistColumns}
+rows={releaseChecklistRows}
+/>
+
+This is the moment where many working builds fail. The wall is finished, the gate exists, and the reservoir is full, but the first release floods a farm, drains the basin too fast, or sends water into the wrong channel.
+
+Open small, watch the route, then increase only if the target area still needs water.
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these Timberborn guides next:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/timberborn">Timberborn Guide Hub</Link> — for the full water survival and automation path.
+  </li>
+  <li>
+    <Link href="/timberborn/first-drought-guide">Timberborn First Drought Guide</Link> — if your first dam or water storage is still failing before drought ends.
+  </li>
+  <li>
+    <Link href="/timberborn/irrigation-reservoir-guide">Timberborn Irrigation Guide</Link> — for reservoir-fed farms, underground water, and drought-proof crop coverage.
+  </li>
+  <li>
+    <Link href="/timberborn/badwater-badtide-guide">Badwater and Badtide Guide</Link> — for keeping toxic water out of your main river and farm routes.
+  </li>
+  <li>
+    <Link href="/timberborn/automation-guide">Timberborn Automation Guide</Link> — for sensors, relays, timers, throttling valves, and automated floodgates.
+  </li>
+</ol>
+
+<h2 id="faq">
+  Timberborn dam, levee and floodgate FAQ
+</h2>
+
+### What does a dam do in Timberborn?
+
+A dam is an early water-buffer structure. It holds part of the water height and lets excess water pass, so it is not the same as a full wall.
+
+### Should I build a dam or tanks first?
+
+If the river is narrow and reachable, build the dam early. If the river is wide, far, or awkward, fill tanks first and build the dam later.
+
+### What is the difference between a dam and a floodgate?
+
+A dam has a fixed pass-through behavior. A floodgate can be adjusted, so you can control whether water is held, released, or diverted.
+
+### How tall are floodgates?
+
+Plan single, double, and triple floodgates as about 1.0 m, 2.0 m, and 3.0 m of controllable water height.
+
+### How much water evaporates in Timberborn?
+
+A useful planning number is about 0.045 water per exposed tile per day. This is why wide shallow reservoirs lose more water than deep compact reservoirs with the same volume.
+
+### Why does my Water Pump stop when I can still see water?
+
+The water may be too shallow. Water Pumps need roughly 0.3 m of water depth to keep working.
+
+### What is a spillway?
+
+A spillway is a planned overflow route. It should send extra water somewhere safe instead of letting a full reservoir overtop a random weak edge.
+
+### What is a T-valve in Timberborn?
+
+A T-valve is a water split where two gated branches let you switch the flow direction. Open one branch and close the other to redirect water.
+
+### How deep should a reservoir be?
+
+Use 2.0 m+ as a practical early target before treating a reservoir as serious drought storage. Deeper compact storage is usually better than wide shallow storage.
+
+### When should I automate floodgates?
+
+Automate only after the manual route works. Automation improves a safe system; it does not fix bad routing.

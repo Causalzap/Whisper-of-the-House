@@ -1,0 +1,684 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import Image from "next/image";
+
+export const numberColumns = [
+{ key: "Rule", label: "Rule" },
+{ key: "Planning Number", label: "Planning Number" },
+{ key: "How To Use It", label: "How To Use It" },
+];
+
+export const numberRows = [
+{
+Rule: "Water use",
+"Planning Number": "Plan around 3 water per beaver per day.",
+"How To Use It":
+"For 10 beavers and a 2–3 day early drought, think in the 60–90 water range before extra safety.",
+},
+{
+Rule: "Small Water Tank",
+"Planning Number": "Stores 30 water.",
+"How To Use It":
+"Two full small tanks are a useful early target if you have not unlocked larger storage.",
+},
+{
+Rule: "Large Water Tank",
+"Planning Number": "Stores 100 water.",
+"How To Use It":
+"A strong early science goal because it turns water storage from a scramble into a buffer.",
+},
+{
+Rule: "Path movement",
+"Planning Number": "Paths are roughly 30% faster than bare ground.",
+"How To Use It":
+"Short paths matter most around pumps, farms, builders, logs, and the first dam site.",
+},
+{
+Rule: "Inventor timing",
+"Planning Number": "Build the first Inventor around day 3–5.",
+"How To Use It":
+"At 14-hour workdays, one Inventor can produce about 14 science per day and start key unlocks before the second drought.",
+},
+];
+
+export const versionColumns = [
+{ key: "1.0 Beginner Change", label: "1.0 Beginner Change" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "Safe Response", label: "Safe Response" },
+];
+
+export const versionRows = [
+{
+"1.0 Beginner Change": "Disaster planning matters earlier",
+"What It Means":
+"Do not treat drought as a late-game event. The forecast should shape your first 30 days.",
+"Safe Response":
+"Build water storage and a first dam before the warning becomes an emergency.",
+},
+{
+"1.0 Beginner Change": "Badwater and badtides matter in the full game",
+"What It Means":
+"A clean-water start can later become a toxic-water routing problem.",
+"Safe Response":
+"Leave room for future floodgates, levees, and separated water paths.",
+},
+{
+"1.0 Beginner Change": "Automation and newer water tools changed old advice",
+"What It Means":
+"Older Early Access guides may mention older water-control habits or skip newer sensor/valve planning.",
+"Safe Response":
+"Use old advice only if it still fits 1.0 buildings, forecasts, and badwater pressure.",
+},
+{
+"1.0 Beginner Change": "Folktails remain the cleaner learning route",
+"What It Means":
+"Their early farming, tree planting, and water storage flow is easier for a first colony.",
+"Safe Response":
+"Learn with Folktails first, then try Iron Teeth after water, wood, and drought logic make sense.",
+},
+];
+
+export const routeColumns = [
+{ key: "Timing", label: "Timing" },
+{ key: "Build / Action", label: "Build / Action" },
+{ key: "Target", label: "Target" },
+{ key: "Adjust If", label: "Adjust If" },
+];
+
+export const routeRows = [
+{
+Timing: "Day 1",
+"Build / Action":
+"Pause, place short paths, Lumberjack Flags, Gatherer Flag, Water Pump, and basic storage.",
+Target:
+"Start logs, berries, and drinking water without wasting walking time.",
+"Adjust If":
+"Trees are far away: path to the closest dense patch first, then expand cutting zones.",
+},
+{
+Timing: "Day 1–2",
+"Build / Action":
+"Start a Farmhouse and plant carrots on green land.",
+Target:
+"Turn irrigated soil into food before the first drought pressure arrives.",
+"Adjust If":
+"Green land is limited: reserve it for farms and trees, then place buildings on dry brown ground.",
+},
+{
+Timing: "Day 2–3",
+"Build / Action":
+"Start the first small dam if a narrow, reachable river spot is nearby.",
+Target:
+"Finish a cheap river buffer before the drought timer reaches zero.",
+"Adjust If":
+"The river is wide or awkward: delay the dam, build more tanks first, and come back when logs and builders are ready.",
+},
+{
+Timing: "Day 3–5",
+"Build / Action":
+"Build the first Inventor and assign one worker when survival jobs can spare it.",
+Target:
+"Start banking science for Large Water Tank, Floodgate, or Lumber Mill.",
+"Adjust If":
+"The dam or pump is behind: temporarily move the worker back, then restart science as soon as water is stable.",
+},
+{
+Timing: "Day 4–5",
+"Build / Action":
+"Build a Forester and mark replacement tree zones.",
+Target:
+"Prevent the day 20–30 log collapse that happens when the starting forest disappears.",
+"Adjust If":
+"The map has very dense nearby forest: you can delay slightly, but do not wait until the cut zone is empty.",
+},
+{
+Timing: "Before first warning",
+"Build / Action":
+"Fill at least two Small Water Tanks if you are still on small storage.",
+Target:
+"Store drinking water before the pump loses river access.",
+"Adjust If":
+"Population is above 10: add more storage or reduce growth until water math is safe.",
+},
+{
+Timing: "Drought warning",
+"Build / Action":
+"Finish the dam if close, fill tanks, harvest food, and pause optional jobs.",
+Target:
+"Convert the countdown into survival work.",
+"Adjust If":
+"The dam will not finish: stop chasing it and focus on stored water, food, and worker safety.",
+},
+{
+Timing: "During drought",
+"Build / Action":
+"Watch stored water, pump reach, crop irrigation, and food count.",
+Target:
+"Keep the colony alive without expanding population.",
+"Adjust If":
+"Crops are drying: harvest what is ready and treat irrigation as the next-cycle fix.",
+},
+{
+Timing: "After first drought",
+"Build / Action":
+"Fix the system that almost failed: water, food, wood, science, paths, or river control.",
+Target:
+"Prepare for a longer second drought instead of simply growing bigger.",
+"Adjust If":
+"Everything barely survived: add buffers before adding beds.",
+},
+];
+
+export const mapColumns = [
+{ key: "Start Condition", label: "Start Condition" },
+{ key: "What To Change", label: "What To Change" },
+{ key: "Why", label: "Why" },
+];
+
+export const mapRows = [
+{
+"Start Condition": "Narrow river near the district",
+"What To Change":
+"Build the first dam early, usually around day 2–3.",
+Why: "A cheap narrow dam can finish before the first drought and hold a useful buffer.",
+},
+{
+"Start Condition": "Wide river or awkward dam site",
+"What To Change":
+"Delay the dam and prioritize tanks, food, and wood first.",
+Why: "A half-finished wide dam gives no safety. Stored water is more reliable than an unfinished project.",
+},
+{
+"Start Condition": "Sparse starting forest",
+"What To Change":
+"Build Forester earlier and avoid oversized log-heavy projects.",
+Why: "Wood shortage can silently stop tanks, dams, housing, and later levees.",
+},
+{
+"Start Condition": "Limited green land",
+"What To Change":
+"Reserve irrigated tiles for carrots, future crops, and trees.",
+Why: "Building on green land permanently reduces early food and tree capacity.",
+},
+{
+"Start Condition": "Long walks to work sites",
+"What To Change":
+"Spend logs on direct paths before expanding more jobs.",
+Why: "Path speed and reach can matter more than adding another unfinished building.",
+},
+{
+"Start Condition": "Early population pressure",
+"What To Change":
+"Stop adding housing until water and food buffers are ahead.",
+Why: "More beavers solve labor only if the colony can feed and hydrate them.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "What It Looks Like", label: "What It Looks Like" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Skipping the Forester",
+"What It Looks Like":
+"The first drought is fine, then construction slows because logs vanish around the early midgame.",
+Fix: "Build Forester around day 4–5 and plant replacements before nearby trees are gone.",
+},
+{
+Mistake: "Building on green land",
+"What It Looks Like":
+"Food feels tight even though the starting area looked fertile.",
+Fix: "Move housing, storage, science, and industry to dry brown ground whenever possible.",
+},
+{
+Mistake: "Treating the dam date as fixed",
+"What It Looks Like":
+"A huge river dam eats logs and still does not finish before drought.",
+Fix: "If the river is not narrow nearby, prioritize tanks first and build the dam after logistics improve.",
+},
+{
+Mistake: "Late science",
+"What It Looks Like":
+"The first drought is survived, but stronger storage and water control arrive too late.",
+Fix: "Start one Inventor around day 3–5, then pause it only when survival jobs need the worker.",
+},
+{
+Mistake: "Long bare-ground routes",
+"What It Looks Like":
+"Builders are assigned, but the dam, tanks, or farms finish too slowly.",
+Fix: "Use short paths around busy work zones before adding more distant construction.",
+},
+{
+Mistake: "Expanding beds before buffers",
+"What It Looks Like":
+"The colony grows, then water and food demand suddenly outruns storage.",
+Fix: "Add population only after water, food, and jobs are ahead of current demand.",
+},
+];
+
+export const afterDroughtColumns = [
+{ key: "If This Almost Failed", label: "If This Almost Failed" },
+{ key: "What It Means", label: "What It Means" },
+{ key: "Next Fix", label: "Next Fix" },
+];
+
+export const afterDroughtRows = [
+{
+"If This Almost Failed": "Stored water",
+"What It Means":
+"You had river access, but not enough drinking-water buffer.",
+"Next Fix":
+"Add tanks, extend pumping time, and read the First Drought Guide.",
+},
+{
+"If This Almost Failed": "Crop survival",
+"What It Means":
+"Your farm depended on water that disappeared too early.",
+"Next Fix":
+"Protect green land and move toward better irrigation or reservoirs.",
+},
+{
+"If This Almost Failed": "Logs",
+"What It Means":
+"The starting forest carried the opening, but replacement trees are not ready.",
+"Next Fix":
+"Expand Forester planting zones and delay log-heavy walls.",
+},
+{
+"If This Almost Failed": "Dam completion",
+"What It Means":
+"The site was too far, too wide, or underbuilt for your worker count.",
+"Next Fix":
+"Improve paths and build access before upgrading to floodgates or reservoirs.",
+},
+{
+"If This Almost Failed": "Science unlocks",
+"What It Means":
+"The first Inventor started too late or ran without enough work hours.",
+"Next Fix":
+"Keep one science worker active during safe periods and aim for water-control unlocks.",
+},
+{
+"If This Almost Failed": "Worker travel",
+"What It Means":
+"The layout worked on paper but wasted too much time in walking.",
+"Next Fix":
+"Shorten paths around pump, farm, dam, storage, and tree zones.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For a safe **Timberborn beginner start**, pick Folktails on a forgiving map, pause on day 1, then build short paths, wood, water, food, storage, a conditional first dam, an early Inventor, and a Forester.
+
+Use numbers instead of guesses: each beaver needs about **3 water per day**, a **Small Water Tank stores 30**, and a **Large Water Tank stores 100**. If your nearby river is narrow, start the first dam early. If the river is wide or awkward, delay the dam and prioritize filled tanks first.
+
+Protect green land for farms and trees, build most structures on dry brown ground, and start replacement tree planting before the starting forest disappears. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 22, 2026. Covers Timberborn 1.0 beginner start, Folktails, first 30 days, map-dependent dam timing, water math, tanks, Forester timing, green land rules, Inventor science, paths, first drought prep, and post-drought recovery.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-1-0-hard-mode-start.webp"
+    alt="Starting a Timberborn 1.0 colony on Hard Mode"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In our 1.0 test start, the stable opening was not the fanciest layout. It was the route that kept water, food, logs, science, and tree regrowth moving before the first drought exposed the weak point.
+  </figcaption>
+</figure>
+
+<h2 id="timberborn-beginner-guide">
+  Timberborn beginner guide: first 30 days
+</h2>
+
+This **Timberborn beginner guide** is written for the first 30 days, where most failed colonies die from one missing system rather than one dramatic mistake.
+
+If you are new, start with **Folktails** on a forgiving map. They are the cleaner learning faction because early farming, tree planting, and water storage are easier to understand before you add specialized systems.
+
+Your first colony has five jobs:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>store drinking water,</li>
+  <li>turn green land into food,</li>
+  <li>finish or postpone the first dam based on the map,</li>
+  <li>replace the trees you cut,</li>
+  <li>start science early enough for the second cycle.</li>
+</ul>
+
+Do those five things and the game becomes much easier to read.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="what-changed-in-1-0">
+  What changed in Timberborn 1.0 for beginners
+</h2>
+
+Many old Timberborn guides were written around Early Access habits. Some advice still works, but 1.0 beginners should be more careful about disasters, badwater planning, and newer water-control systems.
+
+<GuideTable
+caption="What Timberborn 1.0 changes for beginner planning."
+columns={versionColumns}
+rows={versionRows}
+/>
+
+The practical takeaway is simple: do not only copy an old build order. Check whether the advice still makes sense for 1.0 forecasts, water storage, badwater pressure, and the tools you actually have unlocked.
+
+<h2 id="day-one-paths">
+  Day 1: pause, plan paths, then unpause
+</h2>
+
+Pause immediately. The first mistake is letting beavers wander while you decide where everything goes.
+
+Build short paths to your first jobs:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Lumberjack Flags near reachable trees,</li>
+  <li>Gatherer Flag for berries,</li>
+  <li>Water Pump on reachable river water,</li>
+  <li>small storage near work areas,</li>
+  <li>an early route toward the first dam site if that site is realistic.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-disaster-forecast-ui.webp"
+    alt="Timberborn disaster forecast and early colony UI"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Watch the forecast early. Drought prep begins before the warning appears, not after the river is already dropping.
+  </figcaption>
+</figure>
+
+Paths are not cosmetic. A beaver on a path moves about 30% faster than on bare ground, so a short path network can be the difference between finishing survival work on time and watching it stall.
+
+<h2 id="beginner-numbers">
+  Beginner numbers that make planning easier
+</h2>
+
+Do not plan with “some water” or “enough food.” Timberborn becomes easier once you use rough numbers.
+
+<GuideTable
+caption="Timberborn beginner planning numbers."
+columns={numberColumns}
+rows={numberRows}
+/>
+
+These numbers are not perfect formulas for every difficulty and map. They are planning anchors. If you have 10 beavers and only one full Small Water Tank, you are not safely prepared for a normal early drought.
+
+<h2 id="first-30-days-route">
+  First 30 days route with map adjustments
+</h2>
+
+Use this as a practical route, not a rigid script. The exact day can shift by map, difficulty, river shape, forest density, and how far beavers must walk.
+
+<GuideTable
+caption="Timberborn beginner first 30 days route with conditional adjustments."
+columns={routeColumns}
+rows={routeRows}
+/>
+
+The key difference from a template build order is the dam condition: **a narrow, reachable river invites an early dam; a wide or awkward river asks for tanks first.**
+
+<h2 id="map-start-adjustments">
+  Map start adjustments: do not force one build order everywhere
+</h2>
+
+Timberborn maps do not all give you the same start. River width, forest density, green land, and walking distance can change the best early move.
+
+<GuideTable
+caption="How to adjust the beginner route for different map starts."
+columns={mapColumns}
+rows={mapRows}
+/>
+
+In our test colony, the safest first 30 days came from treating the first dam as conditional. When the river site was narrow, the dam paid off early. When the river was wide, filled tanks and food storage were safer than chasing an unfinished wall.
+
+<h2 id="water-and-first-dam">
+  Water and first dam: store water before the river fails
+</h2>
+
+A Water Pump is not enough. You need storage, and if the map allows it, a river buffer.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-first-dam-river-start.webp"
+    alt="Early dam location in Timberborn near the starting river"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Place the first dam only when the site is narrow and reachable enough to finish on time. A half-finished dam does not store water.
+  </figcaption>
+</figure>
+
+If the nearby river is narrow, start the dam early. If the river is wide, far, or awkward, build more storage first and come back once logs, builders, and access are better.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-water-tank-no-storage.webp"
+    alt="Water pump needing more water storage in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If the pump is working but storage is low, add tanks while the river is still reachable.
+  </figcaption>
+</figure>
+
+For a deeper drought checklist, use the <Link href="/timberborn/first-drought-guide">Timberborn First Drought Guide</Link>.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="green-land">
+  Green land rule: farms on green, buildings on brown
+</h2>
+
+Green irrigated land is valuable because it grows food and trees. Use it carefully.
+
+A simple rule works well:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Use green land for carrots, berries, trees, and future crop space.</li>
+  <li>Use dry brown land for housing, storage, science, and industry whenever possible.</li>
+  <li>Use paths to connect those zones instead of covering your best fertile strip.</li>
+</ul>
+
+This rule is especially important on starts with limited irrigated ground. Losing a few green tiles to housing can feel harmless on day 2 and painful when your food margin is thin during drought.
+
+<h2 id="forester">
+  Forester: do not let the wood economy silently collapse
+</h2>
+
+The Forester is easy to delay because your starting forest looks large. That is the trap.
+
+Trees take time to regrow. If you only cut the starting trees and never plant replacements, the colony can feel stable and then suddenly run out of logs around the early midgame.
+
+Build the first Forester around **day 4–5** if your opening allows it. Then mark planting zones before the nearby trees are gone.
+
+Use the Forester for:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>replacement trees near your starting district,</li>
+  <li>future log supply for dams, tanks, levees, and housing,</li>
+  <li>stable construction after the first drought,</li>
+  <li>avoiding emergency long-distance wood runs.</li>
+</ul>
+
+A Forester fixes the future, not the current empty stockpile. Build it before the shortage becomes visible.
+
+<h2 id="inventor-and-science">
+  Inventor and science: start earlier than you think
+</h2>
+
+The first Inventor should not wait until every survival structure is perfect. Build it around **day 3–5** and assign a worker when the colony can spare one.
+
+At a 14-hour workday, a single Inventor can produce about **14 science per day**. That means the first science building can meaningfully push you toward early unlocks before the second drought.
+
+Good early science goals include:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Large Water Tank if storage is the weak point,</li>
+  <li>Floodgate if river control is the weak point,</li>
+  <li>Lumber Mill if planks are blocking stronger structures,</li>
+  <li>map-specific unlocks only after water and food are safe.</li>
+</ul>
+
+Do not overstaff science if pumps, farms, builders, or lumberjacks are empty. The point is to start the science clock early, not starve survival jobs.
+
+<h2 id="food-and-farms">
+  Food and farms: carrots first, storage before drought
+</h2>
+
+Carrots are a safe first crop because they are simple and fast enough for early survival. Berries help while the farm gets started, but do not rely on berries alone.
+
+Your early food plan should be:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Gatherer Flag for berries,</li>
+  <li>Farmhouse on or near green land,</li>
+  <li>carrots planted early,</li>
+  <li>storage reachable by paths,</li>
+  <li>no unnecessary buildings covering future farm tiles.</li>
+</ul>
+
+The danger is not only running out of food today. The danger is having crops in the ground when irrigation disappears.
+
+<h2 id="first-drought-warning">
+  When the first drought warning appears
+</h2>
+
+When the first drought warning appears, stop expanding and check the survival systems.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-first-drought-warning.webp"
+    alt="First drought warning in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The warning is your final check: water tanks, food storage, dam progress, worker assignments, and pump reach.
+  </figcaption>
+</figure>
+
+Before the timer ends, check:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Are at least two Small Water Tanks full if you have not unlocked larger storage?</li>
+  <li>Is the first dam finished, or should you stop chasing it and rely on stored water?</li>
+  <li>Are crops harvested or close to harvest?</li>
+  <li>Are workers assigned to pumps, builders, farms, and wood?</li>
+  <li>Are optional jobs paused if survival work is behind?</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-dam-complete-65-percent-buffer.webp"
+    alt="Completed dam holding a 65 percent water buffer in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A completed dam keeps a usable river buffer. It does not replace stored drinking water, but it gives the colony time.
+  </figcaption>
+</figure>
+
+<h2 id="common-beginner-mistakes">
+  Common beginner mistakes
+</h2>
+
+These are diagnostic rows, not another build order. Use them when your colony keeps failing around the same point.
+
+<GuideTable
+caption="Common Timberborn beginner mistakes and fixes."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+Most early failures are not random. They usually come from one missing system: water storage, farm space, tree regrowth, science timing, path efficiency, or population control.
+
+<h2 id="after-the-first-drought">
+  After the first drought: fix what almost failed
+</h2>
+
+After the river returns, do not celebrate by expanding everywhere. First, identify what almost failed.
+
+<GuideTable
+caption="What to fix after the first drought."
+columns={afterDroughtColumns}
+rows={afterDroughtRows}
+/>
+
+A good second-cycle plan usually includes more water storage, stronger food margins, Forester planting zones working in the background, science moving toward water-control unlocks, and shorter paths around the busiest work areas.
+
+Only grow population when those systems are ahead of demand.
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these Timberborn guides next:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/timberborn">Timberborn Guide Hub</Link> — for the full water survival and automation path.
+  </li>
+  <li>
+    <Link href="/timberborn/first-drought-guide">Timberborn First Drought Guide</Link> — for the full drought warning checklist and emergency fixes.
+  </li>
+  <li>
+    <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link> — for choosing the right water-control structure.
+  </li>
+  <li>
+    <Link href="/timberborn/irrigation-reservoir-guide">Irrigation and Reservoir Guide</Link> — for keeping crops green during longer dry seasons.
+  </li>
+  <li>
+    <Link href="/timberborn/badwater-badtide-guide">Badwater and Badtide Guide</Link> — for keeping toxic water away from farms and clean-water routes.
+  </li>
+</ol>
+
+<h2 id="faq">
+  Timberborn beginner FAQ
+</h2>
+
+### Is Folktails still the best beginner pick in Timberborn 1.0?
+
+Yes for most new players. Folktails make the early loop easier to learn because farming, tree planting, and water storage are straightforward.
+
+### What if my starting river is too wide for an early dam?
+
+Do not force the day 2–3 dam. Prioritize filled tanks, food, wood, and paths first, then build the dam when the site is reachable and affordable.
+
+### Does Forester planting zone size matter?
+
+Yes. A tiny planting zone will not replace your starting forest fast enough. Mark enough nearby land that your future log supply grows while you handle drought prep.
+
+### Is it ever okay to build on green land?
+
+Sometimes, if the map gives you more fertile land than you need or the layout demands it. As a beginner rule, avoid it until you understand your food margin.
+
+### Should I run the Inventor during drought?
+
+Only if stored water, pump work, food harvest, and builder assignments are already safe. If survival jobs are behind, temporarily move the worker and restart science after the crisis.
+
+### What should I do if my first drought barely succeeds?
+
+Do not add many new beds. Fix the bottleneck first: water storage, food, Forester coverage, science unlocks, dam access, or path efficiency.

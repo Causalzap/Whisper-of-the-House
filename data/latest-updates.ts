@@ -12,6 +12,55 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== Timberborn =====
+{
+  href: "/timberborn",
+  game: "Timberborn",
+  title: "Guide Hub, Drought, Dams & Badwater",
+  description:
+  "Start here for Timberborn 1.0 beginner routes, first drought, water math, pump depth, dams, reservoirs, irrigation, badwater and automation.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+  // ===== Timberborn =====
+  {
+  href: "/timberborn/first-drought-guide",
+  game: "Timberborn",
+  title: "First Drought Guide",
+  description:
+  "Survive the first drought with 2.1 / 2.5 / 3 water math, tank targets, pump reach, difficulty scaling, population control and recovery fixes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+  // ===== Timberborn =====
+  {
+  href: "/timberborn/dam-levee-floodgate-guide",
+  game: "Timberborn",
+  title: "Dam, Levee & Floodgate Guide",
+  description:
+  "Choose dams, levees, floodgates, reservoirs, spillways and T-valves with 65% dam buffers, 1/2/3 m gates and evaporation math.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+  // ===== Timberborn =====
+  {
+  href: "/timberborn/irrigation-reservoir-guide",
+  game: "Timberborn",
+  title: "Irrigation & Reservoir Guide",
+  description:
+  "Keep crops watered with reservoir depth, 0.045 evaporation, pump depth, canal width, green coverage, Cattails, Spadderdock and drought recovery.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+  },
+  
+
 // ===== Guide Collections =====
 {
   href: "/new-steam-game-guides",

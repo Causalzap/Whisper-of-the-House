@@ -1,0 +1,760 @@
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import Image from "next/image";
+
+export const threatColumns = [
+{ key: "Threat", label: "Threat" },
+{ key: "Why It Matters", label: "Why It Matters" },
+{ key: "First Response", label: "First Response" },
+];
+
+export const threatRows = [
+{
+Threat: "Badwater",
+"Why It Matters":
+"It contaminates connected water, terrain, crops, and any beavers forced through it.",
+"First Response":
+"Keep it out of drinking water, farms, irrigation channels, and worker paths.",
+},
+{
+Threat: "Badtide",
+"Why It Matters":
+"It can turn a clean river plan into a toxic-water route for several days.",
+"First Response":
+"Prepare a dedicated toxic-water outlet before the badtide reaches your main river.",
+},
+{
+Threat: "Contaminated terrain",
+"Why It Matters":
+"Soil can remain unsafe after badwater recedes, and contamination can spread across nearby land.",
+"First Response":
+"Protect farm edges and avoid letting badwater sit beside crop zones.",
+},
+{
+Threat: "Badtide Drain",
+"Why It Matters":
+"Some maps have drain points that activate during badtides and release extra badwater.",
+"First Response":
+"Check the map for unexpected toxic-water sources before building farms downstream.",
+},
+{
+Threat: "Trapped badwater",
+"Why It Matters":
+"A bad gate or terrain pocket can leave toxic water behind after the main flow leaves.",
+"First Response":
+"Make sure the badwater route has a real exit, not a dead-end pool.",
+},
+];
+
+export const timingColumns = [
+{ key: "Setting / Situation", label: "Setting / Situation" },
+{ key: "What To Expect", label: "What To Expect" },
+{ key: "Planning Meaning", label: "Planning Meaning" },
+];
+
+export const timingRows = [
+{
+"Setting / Situation": "Default chance",
+"What To Expect":
+"Badtide starts around 40% chance by default.",
+"Planning Meaning":
+"Do not treat it as a rare event. Prepare after basic drought survival is stable.",
+},
+{
+"Setting / Situation": "After repeated droughts",
+"What To Expect":
+"After roughly seven consecutive droughts, the probability can reach 100%.",
+"Planning Meaning":
+"Do not wait until badtides feel common. Build a real toxic-water route before the colony reaches that point.",
+},
+{
+"Setting / Situation": "Easy difficulty",
+"What To Expect":
+"Badtides can be short, roughly around one day.",
+"Planning Meaning":
+"A small manual outlet may be enough while learning.",
+},
+{
+"Setting / Situation": "Hard difficulty",
+"What To Expect":
+"Badtides can last much longer, often in the 6–12 day range.",
+"Planning Meaning":
+"A weak outlet or small reservoir can fail before the season ends.",
+},
+{
+"Setting / Situation": "Long-running colony",
+"What To Expect":
+"Duration and pressure can become worse over time.",
+"Planning Meaning":
+"Plan for capacity, not just the first badtide you see.",
+},
+];
+
+export const contaminationColumns = [
+{ key: "Mechanic", label: "Mechanic" },
+{ key: "What Happens", label: "What Happens" },
+{ key: "Player Takeaway", label: "Player Takeaway" },
+];
+
+export const contaminationRows = [
+{
+Mechanic: "Connected water",
+"What Happens":
+"Badwater does not politely stay in one tile if it is connected to your main water body.",
+"Player Takeaway":
+"One bad connection can poison a much larger system than expected.",
+},
+{
+Mechanic: "Fast colony damage",
+"What Happens":
+"A single contaminated connection can ruin crops and settlement safety very quickly, even within a few in-game days.",
+"Player Takeaway":
+"Do not wait to see whether it gets worse. Cut off the route immediately.",
+},
+{
+Mechanic: "Contaminated terrain",
+"What Happens":
+"Soil can remain contaminated after badwater recedes and can spread sideways to nearby land.",
+"Player Takeaway":
+"Protect farm borders, not just the river channel.",
+},
+{
+Mechanic: "50% contamination danger",
+"What Happens":
+"High contamination, especially above roughly 50%, is dangerous enough to kill plants and damage the land.",
+"Player Takeaway":
+"Do not let farms sit beside toxic water and hope it clears by itself.",
+},
+{
+Mechanic: "Low contamination",
+"What Happens":
+"Lower contamination may look less dramatic, but it can still hurt beavers and make water unsafe.",
+"Player Takeaway":
+"Treat any contamination in drinking or irrigation routes as a real problem.",
+},
+];
+
+export const defenseColumns = [
+{ key: "Step", label: "Step" },
+{ key: "Goal", label: "Goal" },
+{ key: "Do This Before", label: "Do This Before" },
+];
+
+export const defenseRows = [
+{
+Step: "1",
+Goal: "Find every badwater source, badtide route, and possible Badtide Drain.",
+"Do This Before":
+"Placing farms, pumps, or reservoirs downstream.",
+},
+{
+Step: "2",
+Goal: "Choose where toxic water should leave the map or flow safely away.",
+"Do This Before":
+"Blocking the source completely or building an expensive wall.",
+},
+{
+Step: "3",
+Goal: "Separate clean and toxic water with levees, floodgates, or barriers.",
+"Do This Before":
+"Letting one river serve drinking water, farms, and badtide drainage.",
+},
+{
+Step: "4",
+Goal: "Make sure beavers can build and maintain the route safely.",
+"Do This Before":
+"Sending workers through badwater or contaminated terrain.",
+},
+{
+Step: "5",
+Goal: "Test the route manually.",
+"Do This Before":
+"Adding sensors, relays, timers, or automated valves.",
+},
+];
+
+export const routeColumns = [
+{ key: "Route Problem", label: "Route Problem" },
+{ key: "Why It Happens", label: "Why It Happens" },
+{ key: "Fix", label: "Fix" },
+];
+
+export const routeRows = [
+{
+"Route Problem": "Badwater enters the main river",
+"Why It Happens":
+"There is no separate toxic-water outlet, or the clean river gate is open at the wrong time.",
+Fix: "Add a levee/floodgate choke point and route toxic flow away from the settlement.",
+},
+{
+"Route Problem": "Badwater appears from an unexpected place",
+"Why It Happens":
+"The map may have a Badtide Drain or a hidden route that only matters during toxic seasons.",
+Fix: "Pause during badtide, trace the flow, and add a separate outlet or barrier at the real source.",
+},
+{
+"Route Problem": "The outlet floods",
+"Why It Happens":
+"The badwater channel is too narrow, too shallow, or suddenly receives too much flow.",
+Fix: "Widen or deepen the channel, then control the release instead of dumping everything at once.",
+},
+{
+"Route Problem": "Badwater stays trapped",
+"Why It Happens":
+"A gate, terrain lip, or dead-end pocket prevents toxic water from flushing out.",
+Fix: "Move the gate, lower the lip, or rebuild the outlet so badwater can leave.",
+},
+{
+"Route Problem": "Workers get contaminated",
+"Why It Happens":
+"The construction route crosses toxic water or contaminated soil.",
+Fix: "Build stairs, platforms, dry access, or temporary routes before the dangerous season starts.",
+},
+];
+
+export const extractColumns = [
+{ key: "Building / Step", label: "Building / Step" },
+{ key: "Role", label: "Role" },
+{ key: "Important Note", label: "Important Note" },
+];
+
+export const extractRows = [
+{
+"Building / Step": "Badwater Pump",
+Role: "Moves badwater into storage so it can be processed instead of ignored.",
+"Important Note":
+"Do not build the production chain before your farms and drinking water are protected.",
+},
+{
+"Building / Step": "Badwater Tank",
+Role: "Stores toxic water for processing.",
+"Important Note":
+"Keep it separate from clean-water logistics and plan overflow handling.",
+},
+{
+"Building / Step": "Centrifuge",
+Role: "Turns badwater and a small amount of logs into Extract.",
+"Important Note":
+"A common ratio is 4 badwater + 0.1 logs into 1 Extract per 0.75-hour cycle.",
+},
+{
+"Building / Step": "Fluid Dump",
+Role: "Disposes of excess badwater if storage becomes a problem.",
+"Important Note":
+"Use it carefully. Dumped badwater still needs a safe place to go.",
+},
+{
+"Building / Step": "Extract storage",
+Role: "Keeps the processed resource available for later buildings and recipes.",
+"Important Note":
+"Treat Extract as a midgame resource chain, not as your first badwater defense.",
+},
+];
+
+export const factionColumns = [
+{ key: "Faction", label: "Faction" },
+{ key: "Badwater Tool", label: "Badwater Tool" },
+{ key: "How To Think About It", label: "How To Think About It" },
+];
+
+export const factionRows = [
+{
+Faction: "Folktails",
+"Badwater Tool": "Contamination Barrier",
+"How To Think About It":
+"Good for protecting farm borders because it can block contamination spread without replacing your entire irrigation plan.",
+},
+{
+Faction: "Iron Teeth",
+"Badwater Tool": "Irrigation Barrier",
+"How To Think About It":
+"More demanding because protected zones may need their own clean-water delivery instead of relying on nearby soil moisture.",
+},
+{
+Faction: "Iron Teeth",
+"Badwater Tool": "Badwater Discharge",
+"How To Think About It":
+"Can turn badwater flow into reliable power, especially when paired with large water wheels and controlled channels.",
+},
+];
+
+export const mistakeColumns = [
+{ key: "Mistake", label: "Mistake" },
+{ key: "Why It Hurts", label: "Why It Hurts" },
+{ key: "Better Habit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+{
+Mistake: "Letting badwater touch your main irrigation route",
+"Why It Hurts":
+"Connected water can spread contamination far beyond the first tile.",
+"Better Habit":
+"Separate toxic flow from farm irrigation unless a gate safely controls the switch.",
+},
+{
+Mistake: "Ignoring contaminated terrain after badwater recedes",
+"Why It Hurts":
+"The visible badwater may be gone, but soil can remain unsafe and continue hurting crops.",
+"Better Habit":
+"Check soil and crop zones before replanting or expanding farms.",
+},
+{
+Mistake: "Blocking badwater without an outlet",
+"Why It Hurts":
+"Toxic water still needs somewhere to go, and a blocked route can flood nearby work areas.",
+"Better Habit":
+"Plan a safe exit first, then decide whether to block, divert, store, or process it.",
+},
+{
+Mistake: "Building the project through toxic worker paths",
+"Why It Hurts":
+"Beavers can become contaminated while constructing the defense.",
+"Better Habit":
+"Use stairs, platforms, dry-season access, or temporary paths before badtide arrives.",
+},
+{
+Mistake: "Automating before testing manually",
+"Why It Hurts":
+"Sensors cannot fix a route that already sends badwater to the wrong place.",
+"Better Habit":
+"Open and close the route by hand first, then automate the proven behavior.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To stop **badwater and badtides in Timberborn**, separate toxic water from clean water before it touches your farms, pumps, reservoirs, or worker paths.
+
+Badwater is dangerous because contamination can spread through connected water and leave terrain unsafe even after the visible flow recedes. A good defense is not just “block it.” You need to identify the source, give badwater a safe exit, protect farm borders, avoid trapped toxic pockets, and keep beavers out of contaminated paths.
+
+Once the colony is safe, badwater can become useful through Badwater Pump, storage, Centrifuge, and Extract production. Defense comes first. Production comes later. 
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: June 22, 2026. Covers Timberborn 1.0 badwater, badtides, contamination spread, contaminated terrain, Badtide Drains, floodgate choke points, badwater routing, Extract production, faction differences, trapped water, channel capacity, and automation timing.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-badwater-triple-floodgate.webp"
+    alt="Annotated badwater floodgate choke point in Timberborn"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A badwater defense starts with a choke point: keep clean water on one side, push toxic flow away from farms, and fix access before relying on the gate.
+  </figcaption>
+</figure>
+
+<h2 id="timberborn-badwater-badtide-guide">
+  Timberborn badwater and badtide guide
+</h2>
+
+This **Timberborn badwater and badtide guide** is for the point where drought survival is no longer the only problem. Once toxic water enters the map, a river that used to save your colony can become the thing that kills it.
+
+The core rule is:
+
+**Do not let badwater share your drinking, farming, or irrigation route unless you control exactly where it enters, where it leaves, and what land it touches.**
+
+A strong badwater plan answers five questions:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Where does toxic water enter?</li>
+  <li>Is there a Badtide Drain or unexpected source on this map?</li>
+  <li>Where can toxic water leave safely?</li>
+  <li>Which farm borders or clean-water routes need protection?</li>
+  <li>Can beavers build the defense without walking through badwater?</li>
+</ul>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="badwater-vs-badtide">
+  Badwater vs badtide: what you are defending against
+</h2>
+
+**Badwater** is the toxic water itself. **Badtide** is a toxic-water season that can push badwater through routes that may normally carry clean water.
+
+This distinction matters because a badwater defense is not only about the source. It is about the full route.
+
+<GuideTable
+caption="Timberborn badwater, badtide, terrain and map threats."
+columns={threatColumns}
+rows={threatRows}
+/>
+
+On default settings, badtides can start around a 40% chance, then become more likely after repeated droughts. On easy settings, a badtide may be short. On hard settings, you should plan for much longer events, often several days at a time.
+
+<GuideTable
+caption="Badtide timing and planning pressure."
+columns={timingColumns}
+rows={timingRows}
+/>
+
+The exact pressure depends on map, settings, difficulty, and cycle history. The planning lesson is stable: **a temporary manual gate may survive the first badtide, but a long colony needs a real toxic-water route.**
+
+<h2 id="why-badwater-is-dangerous">
+  Why badwater is dangerous: contamination spreads
+</h2>
+
+Badwater is not just ugly water flowing past your town. One bad connection can poison a clean river, ruin crops, contaminate terrain, and sicken workers before you finish fixing the gate that caused it.
+
+That is why badwater deserves a real route, not a temporary panic wall. If toxic water touches your main river or farm channel, the damage can spread much faster than a new player expects.
+
+<GuideTable
+caption="How badwater contamination hurts a Timberborn colony."
+columns={contaminationColumns}
+rows={contaminationRows}
+/>
+
+This is why badwater deserves immediate attention. A colony can survive a missed comfort building. It may not survive a poisoned farm belt, dead crops, contaminated drinking water, and sick workers at the same time.
+
+<h2 id="first-badwater-defense">
+  First badwater defense: separate clean and toxic flow
+</h2>
+
+Your first badwater defense should be manual and easy to understand. Use levees to block the wrong path and floodgates to decide when toxic water is allowed through the safe path.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-badwater-source-diversion-path.webp"
+    alt="Planning a separate badwater diversion path in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A separate badwater path is safer than asking the main river to handle clean water and toxic flow at the same time.
+  </figcaption>
+</figure>
+
+Use this order before building the full project.
+
+<GuideTable
+caption="Safe order for building a badwater defense."
+columns={defenseColumns}
+rows={defenseRows}
+/>
+
+This order matters because the route is more important than the wall. If badwater has no safe exit, blocking one tile can simply move the problem somewhere worse.
+
+<h2 id="badtide-drains">
+  Check for Badtide Drains before you trust the map
+</h2>
+
+Some maps have **Badtide Drains**. These can stay inactive during normal weather and drought, then release badwater during badtides. That makes them easy to forget during early town planning.
+
+If badwater appears from an unexpected place, do not assume the game bugged out. Pause and trace the flow. Look for extra drains, side channels, or terrain routes that only matter during toxic seasons.
+
+A good pre-badtide map check is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>follow every source and drain near your farm district,</li>
+  <li>check whether multiple badwater routes merge downstream,</li>
+  <li>avoid placing farms in a basin with no toxic-water exit,</li>
+  <li>protect low ground where badwater can pool,</li>
+  <li>plan an outlet before the first long badtide.</li>
+</ul>
+
+<h2 id="dual-purpose-reservoir">
+  Best early idea: one project, two jobs
+</h2>
+
+The best badwater projects often do two jobs. During drought, they protect or store clean water. During badtides, they give toxic water a controlled exit.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-badwater-dual-purpose-reservoir.webp"
+    alt="Dual-purpose Timberborn reservoir for drought resistance and badtide mitigation"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A strong project can support drought survival and badtide mitigation, but only if the clean route and toxic route are separated.
+  </figcaption>
+</figure>
+
+A floodgate by itself is not the defense. The defense is the full system:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>wall off the clean river,</li>
+  <li>open a safe toxic outlet,</li>
+  <li>protect farm borders,</li>
+  <li>avoid trapped badwater pockets,</li>
+  <li>keep worker access dry or elevated.</li>
+</ul>
+
+For the structure basics behind this, use the <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link>.
+
+<h2 id="badwater-rig-and-source-routing">
+  Badwater rig and source routing
+</h2>
+
+A badwater source can become useful later, but it is still dangerous until the route is controlled.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-badtide-divert-source-plan.webp"
+    alt="Badwater rig and badtide diversion planning in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A badwater rig can become useful later, but the source still needs safe routing and worker access first.
+  </figcaption>
+</figure>
+
+Do not send beavers through badwater just because the project is important. If they spend time in toxic water, treatment becomes another problem on top of the badtide.
+
+A safer plan is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>build dry access first,</li>
+  <li>add platforms or stairs where needed,</li>
+  <li>open a route for badwater to leave,</li>
+  <li>keep the main river closed off,</li>
+  <li>only then work around the source or rig.</li>
+</ol>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="extract-production">
+  Badwater is not only a threat: turn it into Extract later
+</h2>
+
+Once your colony can safely handle badwater, the next step is using it. Badwater can feed an Extract production chain instead of being treated only as waste.
+
+The basic idea is:
+
+<GuideTable
+caption="Badwater to Extract production chain."
+columns={extractColumns}
+rows={extractRows}
+/>
+
+The common Centrifuge conversion is:
+
+**4 badwater + 0.1 logs → 1 Extract per 0.75-hour cycle**
+
+That means one Centrifuge can process roughly **5.3 badwater per hour** before you account for logistics and downtime.
+
+Do not rush this chain before defense. Extract production is valuable, but it should come after:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>farms are protected,</li>
+  <li>clean-water pumps are safe,</li>
+  <li>badwater has a controlled route,</li>
+  <li>workers can reach buildings without contamination,</li>
+  <li>overflow has somewhere safe to go.</li>
+</ul>
+
+<h2 id="faction-differences">
+  Folktails vs Iron Teeth: badwater tools are different
+</h2>
+
+Badwater planning changes by faction. Do not copy the exact same farm-border plan between Folktails and Iron Teeth without checking the tools available.
+
+<GuideTable
+caption="Folktails vs Iron Teeth badwater tools."
+columns={factionColumns}
+rows={factionRows}
+/>
+
+For Folktails, think about protecting farmland and keeping contamination from spreading into crop zones. For Iron Teeth, think more carefully about dedicated clean-water delivery, protected irrigation, and whether badwater can also support power.
+
+<h2 id="avoid-trapped-water">
+  Avoid trapped badwater
+</h2>
+
+A floodgate in the wrong place can create a pocket that holds badwater. That is worse than it looks, because the main flow may leave while a toxic pool remains behind.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-trapped-water-floodgate-warning.webp"
+    alt="Floodgate placement warning that would trap water in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Before placing a gate, check whether the water pocket can actually drain. Trapped badwater can keep a route contaminated.
+  </figcaption>
+</figure>
+
+The quick check is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Does badwater enter from one side?</li>
+  <li>Can it leave from another side?</li>
+  <li>Is there a terrain lip that holds it in place?</li>
+  <li>Will lowering the floodgate flush it or trap it?</li>
+</ul>
+
+If the route is hard to understand, rebuild it simpler. A slightly less efficient design that you can read at a glance is better than a clever route that hides toxic pockets.
+
+<h2 id="channel-capacity">
+  Channel capacity: make the badwater path wide enough
+</h2>
+
+Once you know the safe direction for badwater, check whether the channel can carry the flow.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-badwater-channel-capacity.webp"
+    alt="Widening a Timberborn channel to handle badwater flow"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A badwater outlet needs enough width and depth. If it cannot handle the flow, it can overflow into places you meant to protect.
+  </figcaption>
+</figure>
+
+A narrow channel may survive a short test and fail during a long badtide. If multiple sources or drains combine, design for the combined flow, not the calm-season trickle.
+
+Use this troubleshooting table when the badwater path behaves badly.
+
+<GuideTable
+caption="Badwater route problems and fixes."
+columns={routeColumns}
+rows={routeRows}
+/>
+
+<h2 id="automation-timing">
+  When to automate badwater control
+</h2>
+
+Automation is useful after the route works manually.
+
+<figure className="my-8">
+  <Image
+    src="/images/timberborn/timberborn-badtide-contamination-sensor-automation.webp"
+    alt="Contamination sensor and badtide weather automation setup in Timberborn"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the route works manually, contamination sensors and badtide weather conditions can help open toxic outlets on time.
+  </figcaption>
+</figure>
+
+A simple automation starter is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Contamination Sensor &gt; 5%</li>
+  <li>OR</li>
+  <li>Weather Sensor = Badtide</li>
+  <li>Output: open badwater outlet valve or floodgate</li>
+</ul>
+
+Do not automate before you know the outlet is safe. If the route floods, traps water, or sends badwater toward farms, automation only makes that mistake happen faster.
+
+For the full logic setup, read the <Link href="/timberborn/automation-guide">Timberborn Automation Guide</Link>.
+
+<h2 id="common-badwater-mistakes">
+  Common badwater mistakes
+</h2>
+
+Most badwater failures come from treating toxic water like ordinary drought water. A route that is perfect for clean irrigation can be terrible during a badtide.
+
+<GuideTable
+caption="Common Timberborn badwater mistakes and safer habits."
+columns={mistakeColumns}
+rows={mistakeRows}
+/>
+
+When in doubt, make the badwater path boring. A clear route away from the settlement is easier to manage than a clever route that shares half its path with clean irrigation.
+
+<h2 id="recommended-badwater-plan">
+  Recommended badwater plan
+</h2>
+
+Use this plan when preparing your first serious badtide defense:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Find all badwater sources, badtide routes, and possible Badtide Drains.</li>
+  <li>Check whether toxic water can touch your main river or farm irrigation.</li>
+  <li>Choose a safe outlet direction.</li>
+  <li>Protect farm borders and clean-water routes first.</li>
+  <li>Build dry or elevated worker access.</li>
+  <li>Create a dedicated toxic-water channel with enough capacity.</li>
+  <li>Check for trapped water pockets and terrain lips.</li>
+  <li>Test the route manually during safe conditions.</li>
+  <li>After the route works, add sensors, valves, or badtide automation.</li>
+  <li>Later, build Badwater Pump, storage, Centrifuge, and Extract production if the colony can support it.</li>
+</ol>
+
+<h2 id="what-to-read-next">
+  What to read next
+</h2>
+
+Use these Timberborn guides next:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <Link href="/timberborn">Timberborn Guide Hub</Link> — for the full water survival and automation guide path.
+  </li>
+  <li>
+    <Link href="/timberborn/dam-levee-floodgate-guide">Dam, Levee and Floodgate Guide</Link> — for the water-control structures used in badwater defenses.
+  </li>
+  <li>
+    <Link href="/timberborn/automation-guide">Timberborn Automation Guide</Link> — for contamination sensors, badtide weather logic, valves, relays, and timers.
+  </li>
+  <li>
+    <Link href="/timberborn/irrigation-reservoir-guide">Timberborn Irrigation Guide</Link> — for keeping farms watered without letting toxic flow into crop routes.
+  </li>
+  <li>
+    <Link href="/timberborn/first-drought-guide">Timberborn First Drought Guide</Link> — if basic clean-water survival is still unstable.
+  </li>
+</ol>
+
+<h2 id="faq">
+  Timberborn badwater and badtide FAQ
+</h2>
+
+### How do I stop badwater in Timberborn?
+
+Give badwater a separate route away from your main river, farms, pumps, and clean irrigation. Use levees, floodgates, barriers, and safe outlets.
+
+### Why is badwater so dangerous?
+
+Badwater can contaminate connected water and terrain. If it reaches your farm or drinking route, the damage can spread far beyond the first tile.
+
+### What is a Badtide Drain?
+
+A Badtide Drain is a map feature that can release badwater during badtides. It may not matter during normal weather, so check the map before building downstream.
+
+### How long can badtides last?
+
+It depends on settings and difficulty. Easy badtides can be short, while hard badtides can last several days. Long colonies should plan for longer events over time.
+
+### Can contaminated terrain still hurt me after badwater leaves?
+
+Yes. Soil can remain unsafe after the visible badwater recedes, and contamination can continue affecting crops and nearby land.
+
+### Should I block badwater completely?
+
+Not always. Toxic water still needs somewhere to go. A controlled diversion is usually safer than trapping it.
+
+### How do I use badwater for Extract?
+
+Use Badwater Pump and storage, then process badwater in a Centrifuge. A common conversion is 4 badwater plus 0.1 logs into 1 Extract per 0.75-hour cycle.
+
+### What is different for Folktails and Iron Teeth?
+
+Folktails can use Contamination Barriers to protect farmland. Iron Teeth use different irrigation tools and can also use badwater discharge for power setups.
+
+### When should I automate badwater control?
+
+Automate only after the manual route works. A simple starter circuit is Contamination Sensor above 5% OR Badtide Weather opening the badwater outlet.
+
+### Why is badwater trapped behind my floodgate?
+
+The gate or terrain may have created a dead-end pocket. Check the inlet, outlet, and any terrain lip that prevents water from flushing away.
