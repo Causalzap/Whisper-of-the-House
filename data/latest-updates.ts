@@ -12,7 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
-// ===== Timberborn =====
+// ===== Moldwasher =====
+{
+  href: "/moldwasher",
+  game: "Moldwasher",
+  title: "Guide Hub, Walkthrough, Collectibles & Achievements",
+  description:
+    "Start here for Moldwasher route help, wide spray vs precise stream, tools, sink 0%, rice bags, hidden drops, Gamer Brain, and 27 achievements.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Moldwasher =====
+{
+  href: "/moldwasher/walkthrough",
+  game: "Moldwasher",
+  title: "Walkthrough, Levels, Tools & Stuck Fixes",
+  description:
+    "Beat Moldwasher with level tips for sink 0%, rice and rubbish bags, pickaxe unlock, air duct, dinner fight, Zen Mode, mold types, and hidden drop fixes.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Moldwasher =====
+{
+  href: "/moldwasher/hidden-objects-collectibles",
+  game: "Moldwasher",
+  title: "Hidden Objects & Collectibles Guide",
+  description:
+    "Find Moldwasher hidden drops, stickers, toys, cassettes, CDs, Gamer Brain, dog bowl, coffee, sticker fridge, gachapon rewards, and missing collectibles.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+
+// ===== Moldwasher =====
+{
+  href: "/moldwasher/achievements-guide",
+  game: "Moldwasher",
+  title: "Achievements Guide, 100% & Hidden Triggers",
+  description:
+    "Complete all 27 Moldwasher achievements with Gamer Brain, Sushi Set, HighGrow, Yakimeshi, Toasty, Waterboarding, FreshCash farming, and collectibles.",
+  tagClass: "text-emerald-500",
+  hoverBorderClass: "hover:border-emerald-300",
+  hoverTitleClass: "group-hover:text-emerald-700",
+},
+    // ===== Timberborn =====
 {
   href: "/timberborn",
   game: "Timberborn",

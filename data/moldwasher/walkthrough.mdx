@@ -1,0 +1,1045 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const routeColumns = [
+  { key: "stage", label: "Stage / Mission" },
+  { key: "mainGoal", label: "Main Goal" },
+  { key: "tools", label: "Tools" },
+  { key: "watchFor", label: "Watch For" },
+];
+
+export const routeRows = [
+  {
+    stage: "Opening room",
+    mainGoal:
+      "Enter the house, clean the home area, pick up the first coin, and open the map.",
+    tools: "Starter pressure washer",
+    watchFor:
+      "Small objects can need cleaning before they count as pickups.",
+  },
+  {
+    stage: "Early fridge jobs",
+    mainGoal:
+      "Clear the first fridge jobs, learn wide spray vs precise stream, and unlock the shop route.",
+    tools: "Pressure washer",
+    watchFor:
+      "Mold can grow back from missed edges. Read the result screen for hidden drops.",
+  },
+  {
+    stage: "Lo-fi system / first CD",
+    mainGoal:
+      "Clean the music reward and start playing CDs as they appear.",
+    tools: "Pressure washer",
+    watchFor:
+      "Music rewards connect to later CD and cassette cleanup.",
+  },
+  {
+    stage: "Garage toy batches",
+    mainGoal:
+      "Clean boxes, return for toy batches, and use the garage as a money loop.",
+    tools: "Pressure washer",
+    watchFor:
+      "Garage batches help with FreshCash, coins, toys, and later cleanup.",
+  },
+  {
+    stage: "Sticker fridge",
+    mainGoal:
+      "Remove unauthorized stickers with precise spray before clearing the rest.",
+    tools: "Precise stream",
+    watchFor:
+      "The sticker layer teaches why the tight stream matters.",
+  },
+  {
+    stage: "Fly fridge mission",
+    mainGoal:
+      "Control the fly, clean the eggs, and finish the floor without letting the fly re-dirty everything.",
+    tools: "Pressure washer, precise stream",
+    watchFor:
+      "Handle the moving problem before chasing final dirt.",
+  },
+  {
+    stage: "Dog bowl mission",
+    mainGoal:
+      "Clean the bowl before the beast returns and use the can / bowl shape for positioning.",
+    tools: "Pressure washer, precise stream",
+    watchFor:
+      "Some angles are easier from the bowl route than from the floor.",
+  },
+  {
+    stage: "Sink / clogged route",
+    mainGoal:
+      "Unclog the sink first, then clean the sponge, drain, basin, and edges.",
+    tools: "Required clog step, pressure washer",
+    watchFor:
+      "If the level looks stuck at 0%, the clog is usually the blocker.",
+  },
+  {
+    stage: "Pickaxe / hard object jobs",
+    mainGoal:
+      "Break cookies, crackers, walls, chunks, or crust before washing leftovers.",
+    tools: "Pickaxe / axe, pressure washer",
+    watchFor:
+      "Water does not solve hard objects by itself.",
+  },
+  {
+    stage: "Breakfast Station / Level 14",
+    mainGoal:
+      "Use it as a careful hidden-drop check if the result screen shows 0/1.",
+    tools: "Current required tool set",
+    watchFor:
+      "Search optional breakfast-side objects before leaving.",
+  },
+  {
+    stage: "Rice table / rubbish bag",
+    mainGoal:
+      "Move rice or rubbish bags into the target area instead of washing them like mold.",
+    tools: "Leaf blower",
+    watchFor:
+      "This is an object-movement objective.",
+  },
+  {
+    stage: "Flower pot",
+    mainGoal:
+      "Water the flowers and keep going until the blooms visually open.",
+    tools: "Water / pressure washer",
+    watchFor:
+      "The level can look clear before every flower is finished.",
+  },
+  {
+    stage: "Cockroach / compressor route",
+    mainGoal:
+      "Use fire on the cockroach, then return to normal cleaning.",
+    tools: "Flamethrower, pressure washer",
+    watchFor:
+      "Do not treat the cockroach as normal dirt.",
+  },
+  {
+    stage: "Air duct",
+    mainGoal:
+      "Use wind direction and object placement to move rice balls / loose pieces off the route.",
+    tools: "Leaf blower, pickaxe / breaker, washer",
+    watchFor:
+      "Position objects so the wind helps instead of fighting it.",
+  },
+  {
+    stage: "This dinner doesn't want to be cooked",
+    mainGoal:
+      "Cycle tools through the dinner fight: reveal, burn, cut / hit, blow, then clean leftovers.",
+    tools: "Washer, flamethrower, axe / pickaxe, leaf blower",
+    watchFor:
+      "If tentacles or arms stop responding, switch tools.",
+  },
+  {
+    stage: "Post-story cleanup",
+    mainGoal:
+      "Move to achievements and collectibles pages for 100% cleanup.",
+    tools: "All tools",
+    watchFor:
+      "Walkthrough ends at the route; 100% details are handled by dedicated guides.",
+  },
+];
+
+export const stuckColumns = [
+  { key: "stuckPoint", label: "Stuck Point" },
+  { key: "quickFix", label: "Quick Fix" },
+  { key: "whereToRead", label: "Detailed Section" },
+];
+
+export const stuckRows = [
+  {
+    stuckPoint: "A mission will not clear",
+    quickFix:
+      "Use Tab, check hidden edges, then ask whether the objective needs another tool.",
+    whereToRead: "Use Tab when the last spot will not clear",
+  },
+  {
+    stuckPoint: "No money for the next tool",
+    quickFix:
+      "Use short replays and garage toy batches instead of forcing harder missions.",
+    whereToRead: "Garage money loop",
+  },
+  {
+    stuckPoint: "Can't find pickaxe",
+    quickFix:
+      "Use the tool unlock section; do not keep spraying hard objects without checking the tool wall.",
+    whereToRead: "Best early upgrades and tool unlocks",
+  },
+  {
+    stuckPoint: "Sink level stuck at 0%",
+    quickFix:
+      "Use the sink section; the clog step must be handled before normal cleaning progress makes sense.",
+    whereToRead: "Sink / clogged route",
+  },
+  {
+    stuckPoint: "Breakfast Station level 14 hidden drop",
+    quickFix:
+      "Use the Breakfast Station note and verify the result screen before searching the whole map.",
+    whereToRead: "Breakfast Station hidden drop note",
+  },
+  {
+    stuckPoint: "Rubbish bag / rice bag",
+    quickFix:
+      "Use the blower section; treat rice and bags as movement objects.",
+    whereToRead: "Rice table, rubbish bag, and trash cleanup",
+  },
+  {
+    stuckPoint: "Air duct wind route",
+    quickFix:
+      "Use the air duct section; change position so wind helps move the object.",
+    whereToRead: "Air duct and wind jobs",
+  },
+  {
+    stuckPoint: "This dinner doesn't want to be cooked",
+    quickFix:
+      "Use the dinner fight section; cycle tools instead of forcing one tool.",
+    whereToRead: "This dinner doesn't want to be cooked walkthrough",
+  },
+  {
+    stuckPoint: "Possible launch-build bug",
+    quickFix:
+      "Switch tools first. If nothing responds, restart the level and check for updates.",
+    whereToRead: "Known issues and launch-build notes",
+  },
+];
+
+export const mechanicsColumns = [
+  { key: "mechanic", label: "Mechanic" },
+  { key: "whatItMeans", label: "What It Means" },
+  { key: "whatToDo", label: "What I Do" },
+];
+
+export const mechanicsRows = [
+  {
+    mechanic: "Left-click wide spray",
+    whatItMeans:
+      "Wide cleaning stream for open floors, walls, bowls, fridge surfaces, and normal mold.",
+    whatToDo:
+      "Use it when coverage matters more than precision.",
+  },
+  {
+    mechanic: "Right-click precise stream",
+    whatItMeans:
+      "Tighter stream for stickers, narrow angles, edge pixels, and stubborn leftovers.",
+    whatToDo:
+      "Use it when wide spray leaves small patches behind.",
+  },
+  {
+    mechanic: "Mold regrowth",
+    whatItMeans:
+      "Some mold can keep spreading from living edges or missed patches.",
+    whatToDo:
+      "Cut off the spreading edge first, then sweep inward.",
+  },
+  {
+    mechanic: "Pause / menu warning",
+    whatItMeans:
+      "Do not rely on pausing as your main anti-growth strategy during active mold rooms.",
+    whatToDo:
+      "Finish the active patch first, or switch to Zen Mode for a calmer route.",
+  },
+  {
+    mechanic: "Zen Mode",
+    whatItMeans:
+      "A slower, calmer mode for players who do not want constant regrowth pressure.",
+    whatToDo:
+      "Use it if normal mold speed feels stressful rather than satisfying.",
+  },
+  {
+    mechanic: "Auto-fire / auto-clean",
+    whatItMeans:
+      "A comfort option that reduces constant button holding during long cleaning sessions.",
+    whatToDo:
+      "Use it for comfort, but still aim and switch tools manually.",
+  },
+];
+
+export const upgradeColumns = [
+  { key: "phase", label: "Phase" },
+  { key: "buyFirst", label: "Buy First" },
+  { key: "why", label: "Why" },
+];
+
+export const upgradeRows = [
+  {
+    phase: "Opening",
+    buyFirst: "Pressure and radius on the starter washer",
+    why:
+      "Pressure helps with stubborn dirt, and radius makes wide early cleaning faster.",
+  },
+  {
+    phase: "Before leaf blower",
+    buyFirst: "Only enough washer upgrades to keep early jobs comfortable",
+    why:
+      "Saving for the next tool matters more than maxing one tool too early.",
+  },
+  {
+    phase: "After leaf blower",
+    buyFirst: "Leaf blower pressure / range",
+    why:
+      "Object-moving jobs become faster when the blower can push further.",
+  },
+  {
+    phase: "After dog bowl",
+    buyFirst: "Check for the pickaxe unlock",
+    why:
+      "In my run, the pickaxe appeared after the dog bowl route, and later jobs expect hard-object breaking.",
+  },
+  {
+    phase: "Mid game",
+    buyFirst: "Tools required by new mission icons",
+    why:
+      "Locked or slow missions usually mean you need a new tool, not another replay.",
+  },
+  {
+    phase: "Late game",
+    buyFirst: "Full tool purchases, then full upgrades",
+    why:
+      "This prepares you for late tool-cycle missions and later 100% cleanup.",
+  },
+];
+
+export const toolColumns = [
+  { key: "tool", label: "Tool" },
+  { key: "bestUse", label: "Best Use" },
+  { key: "switchWhen", label: "Switch When" },
+];
+
+export const toolRows = [
+  {
+    tool: "Pressure washer",
+    bestUse:
+      "Normal mold, floors, walls, fridge sections, sinks, bowls, and most early jobs.",
+    switchWhen:
+      "The target is hard, loose, burnable, or not reacting to water.",
+  },
+  {
+    tool: "Leaf blower",
+    bestUse:
+      "Rice, rubbish bags, loose objects, shelves, air duct pieces, and push-based objectives.",
+    switchWhen:
+      "The object needs to be cleaned, broken, or burned instead of moved.",
+  },
+  {
+    tool: "Pickaxe / axe",
+    bestUse:
+      "Hard clumps, crackers, cookies, walls, crust, and breakable late-game pieces.",
+    switchWhen:
+      "The object has broken apart and needs washing or blowing.",
+  },
+  {
+    tool: "Flamethrower",
+    bestUse:
+      "Mushrooms, cockroaches, rice achievement, and burnable mission objects.",
+    switchWhen:
+      "The burn trigger is done and the remaining mess is normal dirt.",
+  },
+  {
+    tool: "Full tool set",
+    bestUse:
+      "Air duct, late freezer routes, dinner fight, Sushi Set, and post-story cleanup.",
+    switchWhen:
+      "The level changes objective type mid-mission.",
+  },
+];
+
+export const moldTypeColumns = [
+  { key: "moldType", label: "Mold Type" },
+  { key: "howItBehaves", label: "How It Behaves" },
+  { key: "bestResponse", label: "Best Response" },
+];
+
+export const moldTypeRows = [
+  {
+    moldType: "Colorful mold",
+    howItBehaves:
+      "Basic visible mold that teaches spreading, edge control, and cleanup timing.",
+    bestResponse:
+      "Use wide spray for coverage, then precise stream on surviving edges.",
+  },
+  {
+    moldType: "Iridescent mold",
+    howItBehaves:
+      "Shiny or reflective grime can be harder to read against bright surfaces.",
+    bestResponse:
+      "Move the camera, sweep from multiple angles, and use Tab if the last spot hides.",
+  },
+  {
+    moldType: "Ghostly mold",
+    howItBehaves:
+      "Harder to track visually than normal mold.",
+    bestResponse:
+      "Remember where it appeared, sweep edges slowly, and do not leave just because it fades from view.",
+  },
+  {
+    moldType: "Inverted mold",
+    howItBehaves:
+      "A trickier variant where the obvious visual read may not match the easy cleaning route.",
+    bestResponse:
+      "Test wide spray and precise stream, then follow the part that actually reacts.",
+  },
+  {
+    moldType: "Sticky mold",
+    howItBehaves:
+      "Feels like it holds on longer than normal grime.",
+    bestResponse:
+      "Use sustained pressure or upgrades instead of quick spray passes.",
+  },
+  {
+    moldType: "Glowing mold",
+    howItBehaves:
+      "A high-visibility warning type that I treat as urgent.",
+    bestResponse:
+      "Clear the glowing area early so it does not become the source of more spread.",
+  },
+  {
+    moldType: "Crystalline mold",
+    howItBehaves:
+      "Looks more stubborn and can feel like it needs a stronger approach.",
+    bestResponse:
+      "Try precise stream first; if it still resists, check for a tool upgrade or another tool.",
+  },
+  {
+    moldType: "Mimic mold",
+    howItBehaves:
+      "Looks like an object or prop until it reacts.",
+    bestResponse:
+      "Spray suspicious objects once, especially in rooms with hidden drops or optional cleanup.",
+  },
+];
+
+export const issueColumns = [
+  { key: "issue", label: "Issue" },
+  { key: "whatItLooksLike", label: "What It Looks Like" },
+  { key: "temporaryFix", label: "Temporary Fix" },
+];
+
+export const issueRows = [
+  {
+    issue: "Rice or small objects stuck in walls",
+    whatItLooksLike:
+      "The level seems almost clear, but one piece is unreachable or missing.",
+    temporaryFix:
+      "Use Tab, change angle, try blower from the opposite side, then restart the level if the object is truly stuck.",
+  },
+  {
+    issue: "Hidden object not registering",
+    whatItLooksLike:
+      "The clear screen still shows a missing hidden drop after you cleaned the obvious item.",
+    temporaryFix:
+      "Replay the mission and check optional props; if it still fails, treat it as a launch-build issue.",
+  },
+  {
+    issue: "Dinner fight tool not responding",
+    whatItLooksLike:
+      "Tentacles, arms, or meat pieces stop reacting to the tool that worked a moment ago.",
+    temporaryFix:
+      "Cycle tools first: water, fire, axe / pickaxe, blower. Restart only after testing each tool.",
+  },
+  {
+    issue: "Leaf blower feels weak",
+    whatItLooksLike:
+      "Rice, toys, or air-duct objects move but do not reach the target.",
+    temporaryFix:
+      "Change angle, push from the outside toward the target, and upgrade blower range / pressure if available.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**For a smooth Moldwasher walkthrough, I follow the tool route: starter washer, precise stream, garage money loop, leaf blower, pickaxe / axe, flamethrower, air duct movement, then the late dinner fight.**
+
+Most stuck points come from using the wrong tool or leaving a special mechanic unfinished. Rice and rubbish bags need the blower, sink routes need the clog handled first, stickers need the precise stream, cockroaches need fire, hard chunks need the pickaxe, and **“This dinner doesn't want to be cooked”** needs several tools in sequence.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-opening-first-collectible.webp"
+    alt="Moldwasher opening room with the first coin and collectible."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Moldwasher starts with a tiny sushi cleaner, a home room, a coin, and the first cleaned collectible before the real mission map opens.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="full-walkthrough-route">
+  Full walkthrough route
+</h2>
+
+<GuideTable
+  caption="Moldwasher walkthrough route from opening room to late tool-cycle missions."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+This table is the route overview. The sections below focus on the missions that are most likely to stop progress, because those are the places where a written walkthrough is faster than scrubbing through a long video.
+
+---
+
+<h2 id="stuck-points">
+  Stuck points checklist
+</h2>
+
+<GuideTable
+  caption="Common Moldwasher stuck points and where to fix them."
+  columns={stuckColumns}
+  rows={stuckRows}
+/>
+
+Use this table as a navigation tool. The full steps live in the detailed sections below.
+
+---
+
+<h2 id="opening-and-first-fridge-jobs">
+  Opening and first fridge jobs
+</h2>
+
+At the start, clean the door, enter the house, clear the small home objects, then open the map. I do not skip the home shelf area because early pickups teach how later collectibles work.
+
+In the first fridge jobs, I use wide spray for open mold and precise stream for stubborn small patches. The main mistake is leaving one tiny living patch behind and letting it spread again.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-hidden-drops-counter.webp"
+    alt="Moldwasher clear screen showing hidden drops and extra cleaning."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Read the clear screen after each mission. If Hidden Drops says 0/1, replay that mission before moving too far ahead.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="lo-fi-system-first-cd">
+  Lo-fi system and first CD
+</h2>
+
+After the first fridge route, I clean the lo-fi system reward at home instead of treating it as decoration. This is where the music cleanup loop starts.
+
+My order is simple:
+
+1. Return home after the early fridge job.
+2. Clean the lo-fi system reward.
+3. Pick up or play the first CD when it appears.
+4. Keep checking later music rewards during collectible cleanup.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-first-cd-lofi-system.webp"
+    alt="Moldwasher lo-fi system and first CD reward."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The lo-fi system is not a hard mission, but it starts the CD and music reward loop.
+  </figcaption>
+</figure>
+
+This is not a major stuck point, so I do not over-explain it here. For all CDs, cassettes, stickers, toys, hidden drops, and Gamer Brain® cleanup, use the <Link href="/moldwasher/hidden-objects-collectibles">Hidden Objects & Collectibles Guide</Link>.
+
+---
+<h2 id="core-mechanics">
+  Core mechanics: spray modes, mold growth, Zen Mode, and pause warning
+</h2>
+
+<GuideTable
+  caption="Core Moldwasher mechanics that prevent early mistakes."
+  columns={mechanicsColumns}
+  rows={mechanicsRows}
+/>
+
+The biggest beginner mistake is using the same spray for everything. Wide spray handles open space. Precise stream handles sticker edges, tight corners, and stubborn leftovers.
+
+<GuideCallout title="Growth pressure tip">
+If mold growth feels stressful, do not keep spraying randomly. Finish one live edge at a time, or use Zen Mode for a calmer route.
+</GuideCallout>
+
+---
+
+<h2 id="best-upgrades">
+  Best early upgrades and tool unlocks
+</h2>
+
+<GuideTable
+  caption="Best Moldwasher upgrade and unlock order by phase."
+  columns={upgradeColumns}
+  rows={upgradeRows}
+/>
+
+I do not fully max the starter washer immediately unless I already have spare FreshCash. Early pressure and radius help, but the next tool often opens more missions than one extra washer upgrade.
+
+If you are asking **“where is the pickaxe?”**, clear the dog bowl route first, return home, and check the shop / tool wall. In my run, the pickaxe unlocked right after the bowl route.
+
+---
+
+<h2 id="garage-money-loop">
+  Garage money loop
+</h2>
+
+Once the garage opens, I treat it as my recovery point. Clean boxes, open toy batches, and return when new batches appear.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-garage-toy-batches.webp"
+    alt="Moldwasher garage toy batches for money, coins, and toy progress."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Garage toy batches are useful because they combine FreshCash, coins, toys, and achievement cleanup in one place.
+  </figcaption>
+</figure>
+
+In my run, garage toy batches paid about **$200 FreshCash** per batch. If I am short on the next tool, I replay short jobs or use the garage instead of forcing a harder mission with weak tools.
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="tools-guide">
+  Tools guide
+</h2>
+
+<GuideTable
+  caption="Moldwasher tools and when to switch."
+  columns={toolColumns}
+  rows={toolRows}
+/>
+
+The walkthrough gets much easier once I read the object type instead of the mission name. Water cleans mold, blower moves loose objects, pickaxe breaks hard pieces, and fire handles burn triggers.
+
+---
+
+<h2 id="sticker-fridge">
+  Sticker fridge: unauthorized stickers and precise stream
+</h2>
+
+The sticker fridge is the best early lesson for precise spray. The floor dirt is not the important part at first; the sticker layer is.
+
+My order is:
+
+1. Start with the sticker cluster.
+2. Use the precise stream instead of wide spray.
+3. Hold the stream on sticker edges until the sticker layer clears.
+4. Check the covered area before leaving.
+5. Switch back to wide spray for normal mold and floor cleanup.
+
+This is also a useful hidden-drop habit: when the game asks me to remove a cover layer, I always check what was hidden behind it before pressing Space.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-sticker-removal-hidden-drop.webp"
+    alt="Moldwasher sticker fridge mission using precise stream on unauthorized stickers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The sticker fridge teaches why precise stream matters: remove the cover layer, then check the area behind it.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="fly-fridge">
+  Fly fridge mission: dirty tracks and eggs
+</h2>
+
+The mission starts with a fly leaving dirty tracks while you are trying to clean the fridge.
+
+My order is:
+
+1. Spray the fly until it drops or stays controlled long enough to work.
+2. Clean the eggs and nearby floor while the fly is not moving around.
+3. Sweep the main fridge floor again because the fly may have re-dirtied it.
+4. Check the clear screen before leaving.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-waterboarding-fly-achievement.webp"
+    alt="Moldwasher fly fridge mission with the fly controlled by water."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The fly is the first priority. Control it, then clean the eggs and floor route.
+  </figcaption>
+</figure>
+
+The completion sign is simple: the floor stops re-dirtying, the eggs are gone, and the result screen appears clean instead of sending you back to chase one last patch.
+
+---
+
+<h2 id="dog-bowl">
+  Dog bowl mission
+</h2>
+
+The prompt is about cleaning the bowl before the dog returns, but the real trick is positioning.
+
+My order is:
+
+1. Clear the easy dirt around the mat first.
+2. Use the can / bowl shape as a ramp.
+3. Get into the upper or inside bowl angle.
+4. Clean the hard-to-reach surface from that position.
+5. Finish the remaining floor patches last.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-dog-bowl-hidden-drop.webp"
+    alt="Moldwasher dog bowl mission hidden drop and hard-to-reach area."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    For the dog bowl route, I use the can as a ramp and clean from the bowl angle instead of only spraying from the floor.
+  </figcaption>
+</figure>
+
+If the level feels almost done but not complete, climb back to the bowl angle before replaying the whole mission.
+
+---
+
+<h2 id="sink-clogged-route">
+  Sink / clogged route: stuck at 0% or not progressing
+</h2>
+
+The sink route can feel confusing because the first step is not normal washing.
+
+My order is:
+
+1. Start with the clog or blocked part of the sink.
+2. Use the required tool or interactable object to open the route.
+3. Clean the sponge, drain, and inner basin.
+4. Sweep the rim and edge objects once more before leaving.
+5. Check whether a reward or collectible appears after the drain is handled.
+
+The reason it can look stuck at 0% is that visible dirt is not the real first objective. Once the clog is fixed, the rest behaves like a normal sink-cleaning route.
+
+---
+
+<h2 id="breakfast-station-hidden-drop">
+  Breakfast Station / Level 14 hidden drop note
+</h2>
+
+Some players search for **Breakfast Station level 14 hidden drop** specifically. I treat it like a hidden-drop diagnosis rather than a normal story blocker.
+
+My order is:
+
+1. Clear the main breakfast mess first.
+2. Do not press Space immediately if the clear banner appears.
+3. Check optional breakfast-side objects that react to cleaning.
+4. Sweep behind props and under object edges.
+5. Confirm the result screen. If it still shows **0/1 Hidden Drops**, replay that exact level instead of searching the whole map.
+
+This section is intentionally cautious: I would rather verify the missing drop through the result screen than publish an exact position that may be wrong after a launch patch.
+
+---
+
+<h2 id="pickaxe-hard-objects">
+  Pickaxe jobs: cookies, crackers, walls, and hard chunks
+</h2>
+
+When the game introduces hard objects, I stop treating them like mold. The pickaxe / axe route is about breaking first, cleaning second.
+
+My order is:
+
+1. Hit the hard object until it breaks apart.
+2. Switch back to the washer for dust, grime, or exposed mold.
+3. Use the blower only if pieces need to move.
+4. Check corners after the object breaks, because new dirt can be exposed behind it.
+
+If water does nothing, that is usually the game telling me to break the object first.
+
+---
+
+<h2 id="rice-table-rubbish-bag">
+  Rice table, rubbish bag, and trash cleanup
+</h2>
+
+Rice and rubbish bags are object-movement checks. Spraying harder does not solve the real objective.
+
+My order is:
+
+1. Use the leaf blower, not the washer.
+2. Push rice toward the bag or target area.
+3. If you are moving a rubbish bag, push it toward the disposal / target zone instead of trying to clean it.
+4. Work from the outside inward so rice does not scatter behind you.
+5. Clean leftover dirt only after the movement objective is handled.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-rice-table-bag-cleanup.webp"
+    alt="Moldwasher rice table cleanup with the leaf blower and trash bag."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Rice is a movement puzzle. I use the blower and push it into the bag or target area instead of treating it like mold.
+  </figcaption>
+</figure>
+
+The completion sign is the rice or bag reaching the correct zone. If it is only scattering around the table, change your angle and push from the outside toward the target.
+
+---
+
+<h2 id="flower-pot">
+  Flower pot mission
+</h2>
+
+The flower pot route is easy to leave too early. The level can look almost clear while flowers are still opening.
+
+My order is:
+
+1. Water the pot and flowers directly.
+2. Watch for buds opening into full blooms.
+3. Keep spraying if any flower still looks closed or unfinished.
+4. Leave only after the clear state and progress feel stable.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-highgrow-flower-pot.webp"
+    alt="Moldwasher flower pot mission after watering every flower."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I use the flowers themselves as the checklist. If a bud still looks closed, I keep watering.
+  </figcaption>
+</figure>
+
+This section also helps with **HighGrow**, but the detailed achievement trigger is in the <Link href="/moldwasher/achievements-guide">Achievements Guide</Link>.
+
+---
+
+<h2 id="cockroach-and-flamethrower">
+  Cockroach and flamethrower route
+</h2>
+
+When cockroaches appear, I switch to the flamethrower first. Water is not the right tool for the main trigger.
+
+My order is:
+
+1. Burn the cockroach.
+2. Let the cockroach trigger finish.
+3. Switch back to the washer.
+4. Clean the remaining puddles, stains, and exposed dirt.
+5. Check small corners before leaving.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-toasty-cockroach-achievement.webp"
+    alt="Moldwasher cockroach mission using the flamethrower."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The cockroach is a fire trigger. Burn it first, then clean the rest normally.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="air-duct">
+  Air duct and wind jobs
+</h2>
+
+The air duct route is not about raw cleaning power. It is about wind direction, object movement, and breaking or positioning rice balls.
+
+My order is:
+
+1. Watch which direction the air is pushing.
+2. Break or loosen the rice ball / object if needed.
+3. Move the object close enough to the edge or airflow path.
+4. Let the wind push it instead of fighting the airflow.
+5. Clean the remaining grime after the object movement is solved.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-air-duct-rice-ball.webp"
+    alt="Moldwasher air duct mission with wind and rice ball movement."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In wind jobs, I stop fighting the air. I position the object so the airflow helps finish the push.
+  </figcaption>
+</figure>
+
+If the object keeps coming back to the middle, change your angle. The goal is not to overpower the wind; it is to make the wind do part of the work.
+
+---
+
+<h2 id="beef-monster-dinner-fight">
+  “This dinner doesn't want to be cooked” walkthrough
+</h2>
+
+This is the beef monster / dinner fight. It starts like a normal cleaning job, then becomes a tool-cycle level.
+
+My order is:
+
+1. Start with the washer to reveal the active parts.
+2. When water stops helping, switch to the flamethrower.
+3. Burn the parts that react to fire.
+4. Use the axe / pickaxe on arms, chunks, or exposed pieces that need to be hit.
+5. Use the leaf blower when the level asks you to move eyes, pieces, or loose parts.
+6. Return to the washer for final residue.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-dinner-fight-tool-cycle.webp"
+    alt="Moldwasher This dinner does not want to be cooked level using multiple tools."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This dinner doesn't want to be cooked is a tool-cycle level: wash, burn, cut or hit, blow, then clean the leftovers.
+  </figcaption>
+</figure>
+
+If the tentacles or arms seem unresponsive, do not keep spraying the same spot. Switch tools and test the active piece again. If every tool fails on the active target, restart the level once before assuming you missed an obvious step.
+
+---
+
+<h2 id="tab-missing-spot">
+  Use Tab when the last spot will not clear
+</h2>
+
+When a mission sits at 5/6, 8/9, or almost complete, I use Tab and sweep the places the camera hides:
+
+- under object edges
+- behind bowls or cans
+- inside sink rims
+- around egg routes
+- under shelf lips
+- behind broken pieces
+- on the back side of late-game objects
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-tab-missing-spot.webp"
+    alt="Moldwasher using Tab to find a tiny missing cleaning spot."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Tab is useful when the last dirty spot is hiding on an edge, under an object, or behind a prop.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="mold-types">
+  Mold types and how I respond to them
+</h2>
+
+<GuideTable
+  caption="Moldwasher mold types and practical responses."
+  columns={moldTypeColumns}
+  rows={moldTypeRows}
+/>
+
+I keep mold types here instead of at the top because they are most useful after you already understand the tool route. The important habit is to watch how the target reacts: wide spray, precise stream, stronger pressure, tool switch, or object movement.
+
+---
+
+<h2 id="known-issues">
+  Known issues and launch-build notes
+</h2>
+
+<GuideTable
+  caption="Launch-build issues and temporary fixes."
+  columns={issueColumns}
+  rows={issueRows}
+/>
+
+I keep this section separate because launch-build problems can change after patches. If a later update fixes one of these issues, treat the tool logic above as the main route and this table as a temporary troubleshooting note.
+
+---
+
+<h2 id="post-story-cleanup">
+  What to do after the story
+</h2>
+
+After the main storyline, I stop using the walkthrough as the main checklist. The story route is done; the remaining work is 100% cleanup.
+
+For hidden drops, stickers, toys, cassettes, CDs, garage batches, and Gamer Brain®, use the <Link href="/moldwasher/hidden-objects-collectibles">Hidden Objects & Collectibles Guide</Link>. For Sushi Set, HighGrow, Yakimeshi, Finally Inner Peace, tool upgrades, and all 27 achievements, use the <Link href="/moldwasher/achievements-guide">Achievements Guide</Link>.
+
+This keeps the walkthrough focused on mission flow instead of repeating two dedicated cleanup pages.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I progress in Moldwasher?
+
+Follow the route table first, then use the stuck points table to jump to the exact mission that is blocking you.
+
+### What is the difference between left click and right click?
+
+Left click is wide spray; right click is precise stream. Use the core mechanics section above for the full control logic.
+
+### What are the mold types in Moldwasher?
+
+Moldwasher includes several mold variants such as colorful, iridescent, ghostly, inverted, sticky, glowing, crystalline, and mimic-style mold. Use the mold types table above for responses.
+
+### Does pausing stop mold growth?
+
+I would not rely on pausing as your safety plan during active mold growth. Use the core mechanics section above and consider Zen Mode if the normal route feels stressful.
+
+### How do I turn on Zen Mode?
+
+Use Zen Mode when you want slower mold pressure and a calmer route. It is best treated as a comfort option rather than a separate walkthrough route.
+
+### Where do I get the pickaxe?
+
+In my run, the pickaxe became available after the dog bowl route. See the tool unlock section above before starting pickaxe-gated missions.
+
+### How do I beat the sink level if it is stuck at 0%?
+
+Use the sink / clogged route section above. The short version: the clog is the real first blocker.
+
+### How do I clean rice or dispose of rubbish bags?
+
+Use the rice table and rubbish bag section above. The short version: use the blower and move the object into the target area.
+
+### How do I beat the air duct level?
+
+Use the air duct section above. The key is to position the object so the wind helps move it.
+
+### How do I beat “This dinner doesn't want to be cooked”?
+
+Use the dinner fight section above. It is a tool-cycle level, not a single-tool cleaning job.
+
+### What should I do if a level seems bugged?
+
+Switch tools first. If the active object still does not respond to washer, fire, pickaxe / axe, or blower, restart the level and check for updates.
+
+### What should I do after finishing the story?
+
+Move to the dedicated 100% pages: the collectibles guide for hidden drops and Gamer Brain®, and the achievements guide for Sushi Set, HighGrow, Yakimeshi, and all 27 achievements.

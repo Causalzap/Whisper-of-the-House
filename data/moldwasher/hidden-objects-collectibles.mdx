@@ -1,0 +1,713 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const collectibleTypeColumns = [
+  { key: "type", label: "Collectible Type" },
+  { key: "whereItComesFrom", label: "Where It Comes From" },
+  { key: "whyItMatters", label: "Why It Matters" },
+];
+
+export const collectibleTypeRows = [
+  {
+    type: "Hidden drops",
+    whereItComesFrom:
+      "Mission-specific hidden items that appear after cleaning optional objects, covered spots, or suspicious side targets.",
+    whyItMatters:
+      "The clear screen can show whether that mission's hidden drop was collected.",
+  },
+  {
+    type: "Stickers",
+    whereItComesFrom:
+      "Opening room pickups, sticker-removal jobs, hidden drops, Decoration Room rewards, and gachapon cleanup.",
+    whyItMatters:
+      "All stickers are required for Apply Directly to the Forehead and Gamer Brain®.",
+  },
+  {
+    type: "Toys",
+    whereItComesFrom:
+      "Garage toy batches, cleaned boxes, hidden rewards, and gachapon rewards.",
+    whyItMatters:
+      "All toys are required for To Infinity and Beyond! and can become a late-game cleanup blocker.",
+  },
+  {
+    type: "Cassettes and CDs",
+    whereItComesFrom:
+      "Lo-fi system, media center, mission rewards, music pickups, and late reward cleanup.",
+    whyItMatters:
+      "Cassettes count toward Rewind time!, and CDs connect to Sushi! at the Disco.",
+  },
+  {
+    type: "Gachapon rewards",
+    whereItComesFrom:
+      "Spend coins at the gachapon machine after earning coins from missions and garage batches.",
+    whyItMatters:
+      "If hidden drops look complete but collection achievements are still missing, I check the reward pool next.",
+  },
+];
+
+export const routeColumns = [
+  { key: "order", label: "Order" },
+  { key: "check", label: "Check" },
+  { key: "whatToDo", label: "What To Do" },
+  { key: "why", label: "Why This Matters" },
+];
+
+export const routeRows = [
+  {
+    order: "1",
+    check: "Opening room",
+    whatToDo:
+      "Clean the starting shelf, map area, coin, and first small collectible before rushing into missions.",
+    why:
+      "The game teaches the basic rule: some collectibles must be cleaned before they count.",
+  },
+  {
+    order: "2",
+    check: "Lo-fi system and first CD",
+    whatToDo:
+      "After the first fridge job, clean the lo-fi system and pick up the music reward.",
+    why:
+      "Music rewards start early, and the media center becomes part of the collectible loop.",
+  },
+  {
+    order: "3",
+    check: "Hidden drop counter",
+    whatToDo:
+      "After each mission, check whether the result screen says the hidden drop was collected.",
+    why:
+      "If a mission shows 0/1, replay that mission before searching elsewhere.",
+  },
+  {
+    order: "4",
+    check: "Garage and toy batches",
+    whatToDo:
+      "Unlock the garage, clean the boxes, then return when new toy batches are ready.",
+    why:
+      "The garage is both a toy source and an efficient FreshCash / coin loop.",
+  },
+  {
+    order: "5",
+    check: "Sticker-removal fridge",
+    whatToDo:
+      "Use secondary cleaning mode on the stickers and check the area behind them.",
+    why:
+      "This is one of the clearest early hidden drops.",
+  },
+  {
+    order: "6",
+    check: "Coffee / espresso mission",
+    whatToDo:
+      "Clean the optional beans / coffee-side object before leaving the mission.",
+    why:
+      "The collectible appears from optional coffee cleanup, not the main mold objective alone.",
+  },
+  {
+    order: "7",
+    check: "Fly fridge mission",
+    whatToDo:
+      "Keep the fly wet, finish the eggs, then sweep the floor / egg area before leaving.",
+    why:
+      "The fly distracts you and can make you leave before checking the hidden pickup.",
+  },
+  {
+    order: "8",
+    check: "Dog bowl mission",
+    whatToDo:
+      "Use the can / bowl shape as a ramp and check the upper or inside bowl route.",
+    why:
+      "This hidden drop is more about positioning than raw cleaning power.",
+  },
+  {
+    order: "9",
+    check: "Decoration Room",
+    whatToDo:
+      "Place or move collectibles there and watch which category still keeps appearing.",
+    why:
+      "The room helps you notice whether stickers or toys are still incomplete.",
+  },
+  {
+    order: "10",
+    check: "Rice table and trash bag",
+    whatToDo:
+      "Use the leaf blower to move rice into the bag / trash area instead of washing it.",
+    why:
+      "This is a common 100% cleanup stuck point.",
+  },
+  {
+    order: "11",
+    check: "Late freezer / late tool checks",
+    whatToDo:
+      "Return to old-looking fridge or freezer routes after stronger tools unlock.",
+    why:
+      "Late tools make some sticker and hidden-drop checks easier to finish.",
+  },
+  {
+    order: "12",
+    check: "Gamer Brain® cleanup",
+    whatToDo:
+      "After hidden drops look complete, use the Gamer Brain® checklist directly below.",
+    why:
+      "The final blocker is usually a missing category: sticker, toy, cassette, CD, or gachapon reward.",
+  },
+];
+
+export const missingColumns = [
+  { key: "missing", label: "If You Are Missing" },
+  { key: "checkFirst", label: "Check First" },
+  { key: "nextStep", label: "Next Step" },
+];
+
+export const missingRows = [
+  {
+    missing: "One hidden drop",
+    checkFirst:
+      "Replay the mission that ended with 0/1 hidden drops or where you rushed the clear screen.",
+    nextStep:
+      "Sweep behind stickers, optional beans, bowl routes, floor corners, egg areas, and late freezer surfaces.",
+  },
+  {
+    missing: "Stickers",
+    checkFirst:
+      "Sticker-removal fridge, Decoration Room rewards, hidden drops, and gachapon rewards.",
+    nextStep:
+      "If no level shows 0/1 hidden drops, farm coins and keep pulling gachapon rewards.",
+  },
+  {
+    missing: "Toys",
+    checkFirst:
+      "Garage toy batches, cleaned boxes, reward boxes, and gachapon rewards.",
+    nextStep:
+      "Return to the garage when new batches appear before replaying long missions.",
+  },
+  {
+    missing: "Cassettes or CDs",
+    checkFirst:
+      "Lo-fi system, media center, music rewards, and late reward cleanup.",
+    nextStep:
+      "Play newly found music and check the media center before assuming the reward is missing.",
+  },
+  {
+    missing: "Gamer Brain®",
+    checkFirst:
+      "Every mission hidden drop counter, then stickers, toys, cassettes, CDs, and gachapon rewards.",
+    nextStep:
+      "Diagnose the category first. Do not replay random levels without a missing counter or missing reward type.",
+  },
+  {
+    missing: "Coins for gachapon",
+    checkFirst:
+      "Garage toy batches and short replayable jobs.",
+    nextStep:
+      "Use the fastest repeatable cleaning tasks instead of replaying long late-game missions.",
+  },
+];
+
+export const achievementColumns = [
+  { key: "achievement", label: "Achievement" },
+  { key: "requirement", label: "Requirement" },
+  { key: "steamRate", label: "Steam Rate*" },
+  { key: "focus", label: "Focus" },
+];
+
+export const achievementRows = [
+  {
+    achievement: "Rewind time!",
+    requirement: "Find all cassettes.",
+    steamRate: "18.8%",
+    focus:
+      "Music rewards, media center, cassettes, and late reward cleanup.",
+  },
+  {
+    achievement: "Sushi! at the Disco",
+    requirement: "Play 5 CDs.",
+    steamRate: "29.2%",
+    focus:
+      "Play CDs as you find them instead of leaving them unused.",
+  },
+  {
+    achievement: "To Infinity and Beyond!",
+    requirement: "Find all toys.",
+    steamRate: "8.6%",
+    focus:
+      "Garage toy batches, cleaned boxes, reward boxes, and gachapon.",
+  },
+  {
+    achievement: "Apply Directly to the Forehead",
+    requirement: "Find all stickers.",
+    steamRate: "5.6%",
+    focus:
+      "Sticker hidden drops, Decoration Room rewards, and gachapon.",
+  },
+  {
+    achievement: "Gamer Brain®",
+    requirement: "Find every collectible in the game.",
+    steamRate: "5.2%",
+    focus:
+      "Everything: hidden drops, stickers, toys, cassettes, CDs, and rewards.",
+  },
+  {
+    achievement: "It’s Not Gambling If You Know You're Gonna Win",
+    requirement: "Buy 25 decorations from the gachapon.",
+    steamRate: "31.3%",
+    focus:
+      "Farm coins and keep buying gachapon rewards.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To finish Moldwasher collectibles, I check mission hidden drops first, then clean up stickers, toys, cassettes, CDs, garage batches, and gachapon rewards.**
+
+The most important hidden-drop checks in my run were the **sticker-removal fridge**, **coffee / espresso mission**, **fly fridge mission**, and **dog bowl mission**. If **Gamer Brain®** does not unlock, I do not replay random missions. I check the result screen, identify the missing category, then finish the reward pool.
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-gamer-brain-complete.webp"
+    alt="Moldwasher Gamer Brain achievement unlocking after the final collectibles."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gamer Brain® is the final collectible check, so I leave it until hidden drops, stickers, toys, cassettes, CDs, and gachapon rewards are all cleaned up.
+  </figcaption>
+</figure>
+
+---
+
+<GuideCallout title="Hidden drop total note">
+I would not publish a fixed total hidden-drop count until every map node is checked in the same build. The safest tracker is the mission clear screen: if a mission shows **0/1 Hidden Drops**, replay that exact mission and search the optional objects below.
+</GuideCallout>
+
+---
+
+<h2 id="collectible-types">
+  What counts as a collectible?
+</h2>
+
+<GuideTable
+  caption="Moldwasher collectible types and how each one feeds 100% completion."
+  columns={collectibleTypeColumns}
+  rows={collectibleTypeRows}
+/>
+
+The achievement list confirms the main collectible goals: **Rewind time!** for cassettes, **To Infinity and Beyond!** for toys, **Apply Directly to the Forehead** for stickers, and **Gamer Brain®** for every collectible.
+
+---
+
+<h2 id="best-route">
+  Best route for hidden objects and collectibles
+</h2>
+
+<GuideTable
+  caption="Recommended Moldwasher hidden objects and collectibles route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+This route keeps the cleanup focused. I clean the required mold, check optional dirt, read the hidden drop result, and only then move to the next mission.
+
+<GuideCallout title="My rule for every mission">
+Before I leave a mission, I check three things: did the clear screen show the hidden drop, did I clean optional objects that reacted to the washer, and did I pick up anything that needed to be cleaned before collecting?
+</GuideCallout>
+
+---
+
+<h2 id="gamer-brain-cleanup">
+  How I finish Gamer Brain®
+</h2>
+
+For **Gamer Brain®**, I use this order:
+
+1. Check every mission result for hidden drops.
+2. Replay only missions that still show a missing hidden drop.
+3. Return to the garage when new toy batches are ready.
+4. Farm coins through short repeatable jobs.
+5. Buy gachapon rewards until sticker / toy / cassette progress stops moving.
+6. Place, play, or inspect new rewards when needed.
+7. Stop only when **Find every collectible in the game** unlocks.
+
+<GuideCallout title="Do not waste the final cleanup">
+If Gamer Brain® is still missing, do not replay the longest mission just because it feels important. I get better results by checking hidden drop counters first, then using garage and gachapon cleanup for the final reward pool.
+</GuideCallout>
+
+<AdUnit placement="article_middle" />
+
+---
+
+<h2 id="opening-room">
+  Opening room: first coin and first cleaned collectible
+</h2>
+
+The first room teaches the whole collectible loop. I do not rush straight to the map. I clean the shelf area, pick up the coin, clean the first small collectible, and only then start the first job.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-opening-first-collectible.webp"
+    alt="Moldwasher opening room first coin and collectible."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The opening room already has collectibles. If a small object reacts to cleaning, I clean it before assuming it is only decoration.
+  </figcaption>
+</figure>
+
+This matters because the same rule repeats later: a hidden item can be behind stickers, inside a bowl route, or attached to an optional object.
+
+---
+
+<h2 id="music-and-media-center">
+  Lo-fi system and first CD
+</h2>
+
+The first music reward appears early after the fridge route. I clean the lo-fi system, pick up the music reward, and play it instead of ignoring it.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-first-cd-lofi-system.webp"
+    alt="Moldwasher first CD and lo-fi system collectible."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Music rewards start early. I play CDs and check the media center as part of the collectible route.
+  </figcaption>
+</figure>
+
+For **Sushi! at the Disco**, play CDs when you find them. For **Rewind time!**, keep checking cassettes and music rewards during late cleanup.
+
+---
+
+<h2 id="hidden-drop-counter">
+  Always read the hidden drop counter
+</h2>
+
+The result screen is the most useful collectible tracker in the game. If a mission says the hidden drop was collected, I move on. If it shows **0/1**, I replay that mission before searching elsewhere.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-hidden-drops-counter.webp"
+    alt="Moldwasher hidden drops counter after a cleared mission."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The hidden drop counter is safer than memory. If it says 0/1, that mission still has something to find.
+  </figcaption>
+</figure>
+
+This is also why I avoid treating collectibles as only room decorations. Some are reward objects, some are cleaned pickups, and some only show up after optional cleaning.
+
+---
+
+<h2 id="garage-toys-and-coins">
+  Garage toy batches and coin farming
+</h2>
+
+The garage is not just a normal mission. After cleaning it, I keep returning when new toy batches become available.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-garage-toy-batches.webp"
+    alt="Moldwasher garage toy batches used for toy collectibles and rewards."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Garage toy batches are one of the best places to combine FreshCash, coins, toys, and cleanup progress.
+  </figcaption>
+</figure>
+
+In my run, toy batches paid about **$200 FreshCash** per batch. I use them when I need coins for gachapon, toys for **To Infinity and Beyond!**, or a quick money loop for late upgrades.
+
+---
+
+<h2 id="gachapon-rewards">
+  Gachapon rewards count toward cleanup
+</h2>
+
+Coins matter because the gachapon machine can keep feeding decorations, stickers, toys, and other collection rewards.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-gachapon-machine.webp"
+    alt="Moldwasher gachapon machine used to buy collectible rewards."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    If mission hidden drops look complete but collection achievements are still missing, I go back to coin farming and gachapon rewards.
+  </figcaption>
+</figure>
+
+The gachapon achievement asks for 25 decorations, but I also use the machine as a final cleanup tool. If all visible level checks look finished, the remaining item can still be in the reward pool.
+
+---
+
+<h2 id="sticker-removal-hidden-drop">
+  Sticker-removal fridge: “All unauthorized stickers must be removed”
+</h2>
+
+This is one of the cleanest early hidden-drop checks. The hidden item is tied to the sticker layer itself, not the floor dirt.
+
+I start with secondary / high-pressure mode and remove the stickers first. After the sticker cluster comes off, I check the spot that was covered before cleaning the rest of the floor. In my run, the pickup appeared from that covered sticker area, then the result screen confirmed **1/1 Hidden Drops**.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-sticker-removal-hidden-drop.webp"
+    alt="Moldwasher sticker-removal mission hidden drop behind stickers."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The sticker-removal hidden drop is behind the obvious objective. Clean the stickers first, then check what was covered.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="coffee-beans-collectible">
+  Coffee / espresso mission: “Clean everything that smells stronger than espresso”
+</h2>
+
+The collectible is tied to the coffee / bean object, not only the main mold patch. I treat this as an optional-object check.
+
+After the main grime is under control, I clean the beans / coffee-side object before leaving. In my run, the collectible appeared from that coffee-side cleanup, and the mission also connected to optional cleaning progress.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-coffee-beans-collectible.webp"
+    alt="Moldwasher coffee and espresso mission collectible."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In the espresso mission, I clean the beans / coffee-side object before leaving because it can reveal a collectible.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="fly-fridge-hidden-drop">
+  Fly fridge mission: “the fly is leaving dirty little tracks”
+</h2>
+
+The fly is the distraction. It can re-dirty the fridge while you are trying to check the hidden pickup.
+
+I spray the fly until it stays down long enough to work, then I clean the eggs and sweep the main floor / egg route before leaving. The pickup in this route is easy to miss because the fly pulls attention away from the floor and the clear banner can cover part of the view.
+
+<GuideCallout title="Fly fridge tip">
+Spray the fly first so it stops re-dirtying the area. Then check the floor / egg route before pressing Space.
+</GuideCallout>
+
+---
+
+<h2 id="dog-bowl-hidden-drop">
+  Dog bowl mission: “Clean the bowl before the beast returns”
+</h2>
+
+This is the first hidden drop where positioning matters more than aim. The hidden item is not just on the flat mat.
+
+I use the can and bowl shape as a route upward, then check the upper / inside bowl angle before finishing the easiest floor patches. In my run, the hidden object appeared around the bowl route, and the level also pushed me to use the environment for positioning.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-dog-bowl-hidden-drop.webp"
+    alt="Moldwasher dog bowl mission hidden drop and hard-to-reach area."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    For the dog bowl hidden drop, I use the can as a ramp and check the bowl route instead of only spraying the floor.
+  </figcaption>
+</figure>
+
+If the mission clears but the hidden drop is missing, replay it and reach the bowl route before cleaning the final easy patches.
+
+---
+
+<h2 id="decoration-room">
+  Use the Decoration Room as a category check
+</h2>
+
+Once the Decoration Room opens, I use it as a rough visual check for stickers and toys.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-decoration-room-unlocked.webp"
+    alt="Moldwasher Decoration Room unlocked for stickers and collectibles."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Decoration Room helps me see what type of reward I keep getting: stickers, toys, music, or decorations.
+  </figcaption>
+</figure>
+
+If I keep getting toys but no sticker achievement, I switch focus to sticker checks and gachapon. If I keep getting stickers but not toys, I return to garage toy batches.
+
+---
+
+<h2 id="rice-table-and-bag">
+  Rice table and trash bag cleanup
+</h2>
+
+The rice table is a common stuck point because the rice does not behave like normal mold. I use the leaf blower and push the rice toward the bag / trash area.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-rice-table-bag-cleanup.webp"
+    alt="Moldwasher rice table cleanup with the leaf blower and trash bag."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Rice is a movement problem. I use the blower and push it into the correct area instead of spraying it like mold.
+  </figcaption>
+</figure>
+
+This is not the same as a sticker or toy pickup, but it belongs in this guide because many players hit it while doing 100% cleanup.
+
+---
+
+<h2 id="tab-missing-spot">
+  Use Tab when the last tiny spot will not clear
+</h2>
+
+When a mission sits at 5/6, 8/9, or almost complete and I cannot see the final patch, I use Tab and sweep corners, backs of objects, and under edges.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-tab-missing-spot.webp"
+    alt="Moldwasher using Tab to find a tiny missing cleaning spot."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Tab is useful when one tiny dirty spot is hiding on an edge, under an object, or behind a mission prop.
+  </figcaption>
+</figure>
+
+A mission that is not properly cleared can delay rewards, hidden drops, or repeatable garage batches.
+
+---
+
+<h2 id="late-game-cleanup">
+  Late-game cleanup: return with better tools
+</h2>
+
+Do not panic if a mission feels incomplete early. Some late checks are easier after you have stronger tools, the flamethrower, or better upgrades.
+
+One late freezer / fridge-style route gave me another sticker-style hidden check after I returned with stronger tools.
+
+<figure className="my-8">
+  <Image
+    src="/images/moldwasher/moldwasher-late-freezer-sticker.webp"
+    alt="Moldwasher late freezer hidden drop and sticker cleanup."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Late fridge and freezer routes can still hide sticker progress, so I recheck them after tool upgrades.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="missing-collectible-checklist">
+  Missing one collectible? Check this first
+</h2>
+
+<GuideTable
+  caption="What to check when a Moldwasher collectible achievement is missing."
+  columns={missingColumns}
+  rows={missingRows}
+/>
+
+The important part is to diagnose the category. **To Infinity and Beyond!** points to toys. **Apply Directly to the Forehead** points to stickers. **Rewind time!** points to cassettes. **Gamer Brain®** means at least one collectible type is still incomplete.
+
+---
+
+<h2 id="achievement-targets">
+  Collectible achievements to track
+</h2>
+
+<GuideTable
+  caption="Collectible-related achievements in Moldwasher. Steam rates are based on June 24, 2026 achievement stats."
+  columns={achievementColumns}
+  rows={achievementRows}
+/>
+
+<GuideCallout title="Achievement data note">
+The Steam Rate column is based on Steam achievement stats copied on **June 24, 2026**, shortly after launch. Early percentages can move quickly, so I use them as a rarity and cleanup-priority signal rather than a permanent difficulty ranking.
+</GuideCallout>
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### How do I find all collectibles in Moldwasher?
+
+Use the mission clear screen first. Replay missions with missing hidden drops, then finish garage toy batches, music rewards, Decoration Room rewards, and gachapon rewards.
+
+### What counts as a collectible in Moldwasher?
+
+Collectibles include hidden drops, stickers, toys, cassettes, CDs, and reward-pool items. Use the collectible types table above to identify which category is incomplete.
+
+### How many hidden drops are in Moldwasher?
+
+I would not publish a fixed total until every map node is checked in the same build. The reliable method is to use each mission's clear screen and replay any mission that shows 0/1 Hidden Drops.
+
+### What should I do if a mission says 0/1 hidden drops?
+
+Replay that mission and look for optional dirt, hidden objects behind stickers, cleaned reward items, bowl routes, floor / egg areas, and areas blocked by props.
+
+### Where is the sticker-removal hidden drop?
+
+In the unauthorized sticker fridge mission, clean the stickers with secondary / high-pressure mode, then check the area that was covered by the stickers.
+
+### Where is the coffee / espresso collectible?
+
+In the espresso mission, clean the beans / coffee-side object before leaving. The collectible comes from optional coffee cleanup, not only the main mold objective.
+
+### Where is the fly fridge hidden drop?
+
+Control the fly first, then sweep the floor / egg route before pressing Space. The fly distracts you and can make you leave before checking the pickup.
+
+### Where is the dog bowl hidden drop?
+
+Use the can as a ramp and check the bowl route, especially the upper or inside bowl angle. Do not only clean the floor mat.
+
+### How do I fix Gamer Brain® not unlocking?
+
+Check every mission's hidden drop result first. If hidden drops are complete, diagnose the missing category: stickers, toys, cassettes, CDs, or gachapon rewards.
+
+### How do I diagnose all stickers, toys, or cassettes?
+
+Use the missing collectible table above. Stickers usually point to sticker checks and gachapon, toys point to garage batches, and cassettes / CDs point to music rewards and the media center.
+
+### What is the best coin farm for gachapon cleanup?
+
+Garage toy batches are the best loop in my run because they are short, pay about $200 FreshCash, and also support coins, toys, and final cleanup.
