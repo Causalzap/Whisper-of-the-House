@@ -185,7 +185,9 @@ const allGameGuides = [
   { title: 'Steam Next Fest June 2026 Demo Guides', href: '/steam-next-fest'},
   { title: 'Thank You For Your Application', href: '/thank-you-for-your-application'},
   { title: 'Timberborn', href: '/timberborn'},
-  { title: 'Moldwasher', href: '/moldwasher'}
+  { title: 'Moldwasher', href: '/moldwasher'},
+  { title: 'Warhammer 40,000: Darktide - Skitarii Class', href: '/darktide'},
+  
 ];
 
 const exploreCards = [

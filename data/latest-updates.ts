@@ -12,7 +12,56 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
-// ===== Moldwasher =====
+// ===== Darktide Skitarii =====
+{
+  href: "/darktide",
+  game: "Darktide",
+  title: "Skitarii Guide Hub",
+  description:
+  "Start here for Skitarii first-hour basics, Cog Tree, Servo Skull inputs, Capacitance, Redline, builds, weapons, and troubleshooting routes.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+  },
+  
+  // ===== Darktide Skitarii =====
+  {
+  href: "/darktide/best-skitarii-builds",
+  game: "Darktide",
+  title: "Best Skitarii Builds Guide",
+  description:
+  "Build Skitarii with Redline Capacitors, Surge-Extension, Power Overload, Arc Rifle Blaze Away, Chordclaw, Curios, shield route, and Auric tips.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+  },
+  
+  // ===== Darktide Skitarii =====
+  {
+  href: "/darktide/skitarii-weapons",
+  game: "Darktide",
+  title: "Skitarii Weapons Guide",
+  description:
+  "Choose Skitarii weapons by leveling role, Arc Maul safety, Phosphor vs Galvanic, Arc Rifle Blaze Away, Transonic Blades modes, and Power Sword charges.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+  },
+  
+  // ===== Darktide Skitarii =====
+  {
+  href: "/darktide/skitarii-servo-skull",
+  game: "Darktide",
+  title: "Servo Skull Guide",
+  description:
+  "Fix Skitarii Servo Skull with double-tap Tag, Blitz input, Data Interrogator, Medicae revive, Purgator fire, Noospheric Command, and shared Charges.",
+  tagClass: "text-red-500",
+  hoverBorderClass: "hover:border-red-300",
+  hoverTitleClass: "group-hover:text-red-700",
+  },
+  
+
+    // ===== Moldwasher =====
 {
   href: "/moldwasher",
   game: "Moldwasher",
