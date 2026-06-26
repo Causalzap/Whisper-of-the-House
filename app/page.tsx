@@ -187,6 +187,8 @@ const allGameGuides = [
   { title: 'Timberborn', href: '/timberborn'},
   { title: 'Moldwasher', href: '/moldwasher'},
   { title: 'Warhammer 40,000: Darktide - Skitarii Class', href: '/darktide'},
+  { title: 'The Last Caretaker', href: '/the-last-caretaker'},
+
   
 ];
 

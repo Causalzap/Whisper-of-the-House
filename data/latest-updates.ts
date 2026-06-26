@@ -12,6 +12,54 @@ export type LatestUpdateItem = {
   };
   
   export const latestUpdates: LatestUpdateItem[] = [
+// ===== The Last Caretaker =====
+{
+  href: "/the-last-caretaker",
+  game: "The Last Caretaker",
+  title: "New Horizons Guide, Project Eden & Ship Routes",
+  description:
+  "Start here for The Last Caretaker New Horizons, Project Eden, Oil Whale, Theta 9, wall outlets, power, fuel, routing, and ship cleanup decisions.",
+  tagClass: "text-cyan-500",
+  hoverBorderClass: "hover:border-cyan-300",
+  hoverTitleClass: "group-hover:text-cyan-700",
+  },
+  
+  // ===== The Last Caretaker =====
+  {
+  href: "/the-last-caretaker/new-horizons-guide",
+  game: "The Last Caretaker",
+  title: "New Horizons Guide",
+  description:
+  "Follow the Update 5 route through Pishon, Project Eden, Project Jonah, Oil Whale, Theta 9, Samples, Holo Memories, wall outlets, and new tools.",
+  tagClass: "text-cyan-500",
+  hoverBorderClass: "hover:border-cyan-300",
+  hoverTitleClass: "group-hover:text-cyan-700",
+  },
+  
+  // ===== The Last Caretaker =====
+  {
+  href: "/the-last-caretaker/oil-whale-guide",
+  game: "The Last Caretaker",
+  title: "Oil Whale & Project Jonah Guide",
+  description:
+  "Start Project Jonah, bring a mature human, dock beside the Oil Whale, handle 10,000L oil pulls, 75-100kW power, tanks, and transfer setup.",
+  tagClass: "text-cyan-500",
+  hoverBorderClass: "hover:border-cyan-300",
+  hoverTitleClass: "group-hover:text-cyan-700",
+  },
+  
+  // ===== The Last Caretaker =====
+  {
+  href: "/the-last-caretaker/project-eden-guide",
+  game: "The Last Caretaker",
+  title: "Project Eden First Roots Guide",
+  description:
+  "Start Project Eden at Pishon, craft Stainless Steel with oil, place Eden Frame, build Farming Platform, connect water and power, then grow first roots.",
+  tagClass: "text-cyan-500",
+  hoverBorderClass: "hover:border-cyan-300",
+  hoverTitleClass: "group-hover:text-cyan-700",
+  },
+  
 // ===== Darktide Skitarii =====
 {
   href: "/darktide",
