@@ -8,7 +8,7 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/librarian/achievements`;
 
 export const metadata: Metadata = {
-  title: "Librarian Achievements Guide: All 12 Achievements",
+  title: "Librarian Achievements Guide - All Endings, Routes & Hard Achievements",
   description:
     "100% achievement guide for Librarian: Tidy Up the Arcane Library. How to unlock Anti-Magic Master, Efficiency Librarian, You Are Fired & all others!",
   alternates: {

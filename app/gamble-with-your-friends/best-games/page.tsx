@@ -8,7 +8,7 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/gamble-with-your-friends/best-games`;
 
 export const metadata: Metadata = {
-  title: "Gamble With Your Friends Best Games Guide",
+  title: "Best Games in Gamble With Your Friends - Safer Picks & Strategy",
   description:
     "Find the best games to play in Gamble With Your Friends, including Roulette, Blackjack, Duck Race, Street Craps, Slots, Crash, HiLo, and later-floor game risks.",
   alternates: {

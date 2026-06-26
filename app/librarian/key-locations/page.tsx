@@ -8,7 +8,7 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/librarian/key-locations`;
 
 export const metadata: Metadata = {
-  title: "Librarian Key Locations | All Keys & Chest Rewards",
+  title: "Librarian Key Locations Guide - All Keys, Chests & Rewards",
   description:
     "Find every key in Librarian: Tidy Up the Arcane Library, including Crimson, Golden, Emerald and Azure keys, chest rewards and best pickup route.",
   alternates: {

@@ -8,7 +8,7 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/librarian`;
 
 export const metadata: Metadata = {
-  title: "Librarian: Tidy Up the Arcane Library Complete Guide",
+  title: "Librarian: Tidy Up the Arcane Library Guide, Keys & Abilities",
   description:
     "A complete Librarian: Tidy Up the Arcane Library guide hub covering key locations, chest unlocks, best abilities, shelf glow, book sorting, achievements, and common fixes.",
   alternates: {

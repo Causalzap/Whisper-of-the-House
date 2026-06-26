@@ -8,7 +8,7 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/gamble-with-your-friends/beginner-guide`;
 
 export const metadata: Metadata = {
-  title: "Gamble With Your Friends Beginner Guide & Quota Tips",
+  title: "Gamble With Your Friends Guide - How to Play, Strategy & Tips",
   description:
     "Learn how to survive your first Gamble With Your Friends runs with quota tips, tickets, items, body parts, shared-bank rules, floors, and beginner game picks.",
   alternates: {
