@@ -1,0 +1,510 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const phaseOrderColumns = [
+{ key: "order", label: "Order" },
+{ key: "section", label: "Fight Section" },
+{ key: "whatAppears", label: "What Appears" },
+{ key: "focus", label: "What I Focus On" },
+];
+
+export const phaseOrderRows = [
+{
+order: "1",
+section: "Opening ACT check",
+whatAppears:
+"Flowery blocks the route and the fight introduces Mercy progress instead of a normal damage race.",
+focus:
+"Read the ACT options, start building TP, and do not waste turns attacking blindly.",
+},
+{
+order: "2",
+section: "Posey / PoseyZ",
+whatAppears:
+"The timing-based Mercy option appears. Good timing can show about 10% Mercy.",
+focus:
+"Use it when HP is stable. If the timing goes badly, recover instead of forcing it again.",
+},
+{
+order: "3",
+section: "Blow Away",
+whatAppears:
+"A mash-based Mercy option appears. It gives smaller progress, around 5%, but is easier to execute.",
+focus:
+"Use it as the safer push when Posey timing feels shaky.",
+},
+{
+order: "4",
+section: "Orange dash / charge",
+whatAppears:
+"The soul movement changes into hold-to-charge and release-to-dash movement.",
+focus:
+"Dash through committed danger, not the first warning. Most deaths come from releasing too early.",
+},
+{
+order: "5",
+section: "Knife Cutting",
+whatAppears:
+"Aqua’s knife cutting mini-game interrupts the ACT loop with Spin Z / jump timing cues.",
+focus:
+"Time the cuts cleanly, use the TP recovery, then check HP before spending the next turn.",
+},
+{
+order: "6",
+section: "Justice trial",
+whatAppears:
+"Yellow / Blue trial logic enters the fight and turns the section into a TP and stability check.",
+focus:
+"Enter with TP ready, keep Ralsei alive, and follow the trial prompts instead of brute-forcing.",
+},
+{
+order: "7",
+section: "Around 50% Mercy",
+whatAppears:
+"The fight starts moving toward its route break.",
+focus:
+"Stop getting greedy. Heal or stabilize before pushing the last Mercy progress.",
+},
+{
+order: "8",
+section: "Fountain route",
+whatAppears:
+"The path opens toward the Dark Fountain, then the chapter continues into the ending beats.",
+focus:
+"Follow the route, seal the fountain, and keep the normal clear file separate from Weird Route.",
+},
+];
+
+export const decisionColumns = [
+{ key: "situation", label: "Current Situation" },
+{ key: "action", label: "Best Next Action" },
+{ key: "why", label: "Why" },
+];
+
+export const decisionRows = [
+{
+situation: "Everyone is healthy and TP is ready",
+action: "Posey / PoseyZ",
+why: "This is the highest-value Mercy push when your timing is good.",
+},
+{
+situation: "Posey timing keeps failing",
+action: "Blow Away",
+why: "It gives smaller but steadier Mercy progress.",
+},
+{
+situation: "HP is safe but TP is low",
+action: "Susie / Ralsei action or Defend",
+why: "You need a stronger next turn before Justice and the 50% Mercy push.",
+},
+{
+situation: "Kris is in danger",
+action: "Single-target heal",
+why: "Do not risk losing the route leader right before a transition.",
+},
+{
+situation: "Two characters are low",
+action: "Team heal",
+why: "Wide damage can snowball if you only patch one character.",
+},
+{
+situation: "Ralsei is down",
+action: "Revive or stabilize",
+why: "Recovery gets much worse without him.",
+},
+{
+situation: "Orange dash keeps hitting you",
+action: "Delay the dash",
+why: "You are probably releasing on the warning instead of the committed attack.",
+},
+{
+situation: "Justice keeps killing you",
+action: "Enter with more TP next attempt",
+why: "The mistake usually starts before the trial section.",
+},
+{
+situation: "Mercy is near 50%",
+action: "Heal before pushing",
+why: "The goal is to protect the route break, not win with perfect efficiency.",
+},
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**To beat Flowery in DELTARUNE Chapter 5, push Mercy instead of attacking. The fight opens with Posey / PoseyZ timing, adds Blow Away as a safer mash option, then layers Orange dash movement, Knife Cutting, and the Justice trial before the route breaks around 50% Mercy. Use Posey when you can hit the timing, Blow Away when you need steadier progress, save TP before Justice, and heal before forcing the final Mercy push.**
+</GuideQuickAnswer>
+
+---
+
+<figure className="my-8">
+  <Image
+    src="/images/deltarune/deltarune-chapter-5-flowery-final-boss-start.webp"
+    alt="DELTARUNE Chapter 5 Flowery final boss starting near the Dark Fountain."
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Flowery is a real final boss route, not just a cutscene before the fountain. The fight is built around Mercy progress, TP, timing checks, and mini-game sections.
+  </figcaption>
+</figure>
+
+---
+
+<h2 id="what-this-page-covers">
+  What this Flowery final boss guide covers
+</h2>
+
+This page covers the **normal Chapter 5 Flowery final boss route**: Posey / PoseyZ, Blow Away, Orange dash, Knife Cutting, Justice trial pressure, the route break around 50% Mercy, the fountain ending, and the Chapter 6 continuation.
+
+This is not the Pink / Miumu secret boss. If you are behind the Mystery Key and Pink Door, use these instead:
+
+<Link href="/deltarune/chapter-5-secret-boss-pink-coins">Pink Coins and Mystery Key Guide</Link>
+
+<Link href="/deltarune/chapter-5-secret-boss-guide">Pink / Miumu Secret Boss Guide</Link>
+
+This is also not the Weird Route / Side B ending. If your file starts with Kris refusing to get out of bed, Susie’s altered festival, and Noelle’s lake scene, use:
+
+<Link href="/deltarune/chapter-5-weird-route">Chapter 5 Weird Route Guide</Link>
+
+For Flowery, the main idea is simple: **do not damage-race him. Raise Mercy, manage TP, survive the mini-games, and push the fight safely to the route break.**
+
+---
+
+<h2 id="phase-order">
+  Phase order: what appears first
+</h2>
+
+Use this as the fight map. The exact number of turns can change depending on your Mercy gain and mistakes, but the route usually follows this order.
+
+<GuideTable
+caption="DELTARUNE Chapter 5 Flowery final boss phase order."
+columns={phaseOrderColumns}
+rows={phaseOrderRows}
+/>
+
+If you only remember one number, remember **50% Mercy**. That is the point I am trying to reach safely, not the point where I start showing off.
+
+---
+
+<h2 id="before-fight">
+  Before fighting Flowery
+</h2>
+
+Before I walk into Flowery, I check my inventory because the fight is longer than it first looks.
+
+I want at least a few real recovery tools, not only leftovers. The useful numbers I plan around are **Green Tea at about 180 HP**, **Deluxe Dinner at about 140 HP**, and a Chica Cola-style team heal at about **80 HP to everyone**. A revive item is also valuable if Ralsei goes down before a recovery turn. Tension items are useful, but I do not spend them casually unless I know exactly why I need TP.
+
+I do not need a perfect inventory. I just want enough healing to recover from one bad section. Flowery punishes weak prep through Posey timing mistakes, Orange dash mistakes, Knife Cutting mistakes, and Justice trial pressure.
+
+<GuideCallout title="Pre-fight check">
+If Kris, Susie, or Ralsei is already low before Flowery, heal before starting. This fight is about controlled Mercy progress, and starting in panic mode makes every ACT choice worse.
+</GuideCallout>
+
+---
+
+<h2 id="win-condition">
+  Flowery win condition: Mercy, not damage
+</h2>
+
+The Flowery fight is built around **Mercy progress**.
+
+Posey / PoseyZ can show about **10% Mercy**, but the result depends on timing. Blow Away gives a smaller mash-based increase around **5%**, but it is easier to execute. The fight starts moving into its route break around **50% Mercy**, so my goal is to reach that point safely rather than force attacks.
+
+The clean fight loop is:
+
+1. Build enough TP to use meaningful ACTs.
+2. Use Posey / PoseyZ when the party is safe.
+3. Use Blow Away when timing is shaky or I need steadier progress.
+4. Survive Orange dash and mini-game pressure without wasting every item.
+5. Enter Justice with enough TP and a living party.
+6. Stabilize before the final push toward 50% Mercy.
+
+If an ACT gives lower progress than expected, I do not immediately repeat it in panic. I reset the fight tempo first: heal if needed, build TP if needed, then push Mercy again.
+
+---
+
+<AdUnit placement="article_middle" />
+
+<h2 id="posey-poseyz">
+  Posey / PoseyZ: timing-based Mercy
+</h2>
+
+Posey / PoseyZ is the strongest early Mercy tool when I can hit the timing.
+
+The important detail is that the menu value is not a guarantee. A clean timing result can produce about **10% Mercy**, but bad timing can drop the gain sharply. That makes Posey a high-value, high-attention action: I use it when the party is safe enough that a mistimed turn will not immediately snowball into a wipe.
+
+When Posey goes badly, I do not keep forcing it every turn. I use the next turn to recover HP, build TP, or switch to Blow Away if I only need steady progress. The worst pattern is missing Posey, taking damage, then pressing Posey again while the party is already unstable.
+
+---
+
+<h2 id="blow-away">
+  Blow Away: safer but smaller progress
+</h2>
+
+Blow Away is the mash-based Mercy option.
+
+It usually gives less progress than a strong Posey turn, around **5%** in the route I use, but it has a clearer job: push Mercy without relying on precise Posey timing. That makes it useful after a bad Posey result, during a shaky attempt, or when I am close enough to the route break that smaller safe progress is better than a risky timing miss.
+
+I do not use Blow Away as the entire strategy. I use it as the fight’s safety valve. Posey is better when I am calm and stable. Blow Away is better when I need the fight to keep moving.
+
+---
+
+<h2 id="orange-dash">
+  Orange dash and charge timing
+</h2>
+
+The Orange Soul section changes the movement rules.
+
+The dash works like a charge-and-release action: hold to charge, then release to dash. The common mistake is releasing the dash as soon as the warning appears. If I dash too early, the dash can end before the actual danger reaches me.
+
+I get more consistent by waiting for the attack to commit, then dashing through the real danger instead of the first visual warning. Some blue bullets can also work like speed-boost objects, so I do not treat every object on screen as the same kind of threat.
+
+The fix for most Orange deaths is not “react faster.” It is **dash later and more deliberately**.
+
+---
+
+<h2 id="knife-cutting">
+  Knife Cutting: Spin Z, jump timing, and TP recovery
+</h2>
+
+Knife Cutting is not just a visual mini-game. It is one of the fight’s best TP recovery windows if I handle the timing cleanly.
+
+The section usually appears after Aqua calls for the knife cutting game. The useful cue is the **Spin Z / Knife** prompt. I treat it like a timing course: watch the jump or slash cue, press on rhythm, and let each clean hit feed TP back into the fight.
+
+<figure className="my-8">
+  <Image
+    src="/images/deltarune/deltarune-chapter-5-flowery-knife-cutting.webp"
+    alt="DELTARUNE Chapter 5 Flowery final boss Knife Cutting mini-game with Spin Z timing."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Knife Cutting is where I stop thinking only about dodging. Clean timing gives TP, so this section can set up the next Posey, Blow Away, heal, or Justice turn.
+  </figcaption>
+</figure>
+
+The real mistake is pressing too randomly. If my timing is off, the section can pull or move me in a way that feels automatic, and I lose control of the rhythm. When that happens, I stop trying to force every hit and focus on getting back into the timing pattern.
+
+If I come out healthy, I spend the next turn on Mercy progress. If two characters get clipped, I heal before forcing another ACT. If Ralsei goes down, I stabilize first because recovery gets worse without him.
+
+This is why Knife Cutting belongs before the Justice section in my mental route. If I do it cleanly, I can come out with enough TP to keep the fight under control. If I do it badly, I enter the next section low on HP and without the resources I wanted.
+
+---
+
+<h2 id="tp-management">
+  TP management before Justice
+</h2>
+
+TP is the fight’s second health bar.
+
+Susie and Ralsei actions can help build TP, and mini-game execution can support the loop. The fight becomes much harder if I spend TP as soon as I get it, then reach the Justice trial with an empty meter.
+
+My TP rule is simple: if HP is safe and TP is low, I build. If TP is high but Kris or Ralsei is in danger, I heal first. If the fight is moving toward Justice, I stop wasting TP on comfort actions and prepare for the trial.
+
+This is where the fight stops feeling random. If I arrive at Justice with a living party and enough TP, the section feels controlled. If I arrive empty, the same section feels like a wall.
+
+---
+
+<h2 id="justice-trial">
+  Justice trial: the resource exam
+</h2>
+
+The Justice section changes the rhythm of the fight.
+
+When Yellow / Blue trial logic appears, the fight is no longer just Posey into dodge into Posey. It becomes a route section where I need enough TP, enough HP, and enough party stability to answer what the trial is asking.
+
+The worst way to enter Justice is with Ralsei down, no TP, and Kris already low. The best way to enter is with the party alive, TP saved, and at least one emergency heal still available.
+
+If I fail the Justice section repeatedly, I usually look back at the previous turns. The problem is often not the trial itself. It is that I spent too much TP or delayed healing before arriving.
+
+---
+
+<h2 id="around-50-mercy">
+  Around 50% Mercy: protect the transition
+</h2>
+
+The fight starts pushing toward a route break around **50% Mercy**.
+
+This is where I stop trying to squeeze out perfect efficiency. If I am close to the break but one party member is low, I heal first. If I have enough TP to push but the next pattern can kill Kris, I stabilize first. The goal is to reach the transition, not to win a damage race.
+
+A lot of failed attempts happen because the player sees Mercy climbing and starts rushing. I do the opposite: the closer I am to the break, the more conservative I get.
+
+---
+
+<h2 id="decision-cheat-sheet">
+  Mid-fight decision table
+</h2>
+
+This table is not the fight timeline. It is for the moment when the menu is open and I need to decide what to press.
+
+<GuideTable
+caption="Mid-fight decisions for the DELTARUNE Chapter 5 Flowery final boss."
+columns={decisionColumns}
+rows={decisionRows}
+/>
+
+The phase table tells me **where I am in the fight**. This table tells me **what to do right now**.
+
+---
+
+<h2 id="route-break">
+  Route break: getting past Flowery
+</h2>
+
+Once the fight reaches the route break, Susie starts looking for a way through the flowers and toward the Dark Fountain.
+
+This is the moment where I stop thinking in strict boss turns and start following the route. I still keep the party safe, but I do not waste time trying to farm tiny advantages. If the route opens, I move.
+
+The important shift is mental: Flowery is no longer just a boss HP wall. He is blocking the way to the fountain. Once the route gives you a way through, take it.
+
+---
+
+<h2 id="after-flowery">
+  After Flowery: fountains and ending
+</h2>
+
+After the route break, Chapter 5 moves into the fountain ending. Seal the first fountain, but do not mentally check out yet. The chapter still has the second fountain surprise before the normal route fully resolves.
+
+<figure className="my-8">
+  <Image
+    src="/images/deltarune/deltarune-chapter-5-seal-first-fountain.webp"
+    alt="DELTARUNE Chapter 5 first Dark Fountain seal near the ending."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first seal feels final, but Chapter 5 still has one more fountain beat before the ending settles.
+  </figcaption>
+</figure>
+
+<figure className="my-8">
+  <Image
+    src="/images/deltarune/deltarune-chapter-5-second-fountain.webp"
+    alt="DELTARUNE Chapter 5 second fountain appearing after the first seal."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The second fountain is the final reminder that the chapter is not over the moment the first seal happens.
+  </figcaption>
+</figure>
+
+Once the Flowery aftermath begins, slow down and read the story context. The ending points toward plants, darkness, light, something stirring underneath town, and the next chapter route. I mark this file as my **normal clear file** and keep it separate from Weird Route / Side B.
+
+---
+
+<h2 id="chapter-6-ending">
+  Chapter 6 continuation
+</h2>
+
+The normal Chapter 5 route points forward to Chapter 6.
+
+<figure className="my-8">
+  <Image
+    src="/images/deltarune/deltarune-chapter-5-chapter-6-ending.webp"
+    alt="DELTARUNE Chapter 5 ending screen pointing toward Chapter 6."
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the Chapter 6 continuation appears, I keep this file clean and do not overwrite it with Side B testing.
+  </figcaption>
+</figure>
+
+This file is valuable because it is clean. If I want Pink / Miumu cleanup, Flower Item testing, foxes, or Secret Egg cleanup, I use a separate cleanup file. If I want Weird Route, I use a separate Side B file.
+
+---
+
+<h2 id="normal-vs-secret-vs-weird">
+  Normal final boss vs Secret Boss vs Weird Route
+</h2>
+
+Chapter 5 has several late-game paths, so make sure you are using the right guide.
+
+**Flowery final boss** is the normal route final fight and fountain ending. You are on that route now.
+
+**Pink / Miumu** is the secret boss behind the Mystery Key and Pink Door. Use the <Link href="/deltarune/chapter-5-secret-boss-guide">Secret Boss Guide</Link> if you are inside the hidden boss room.
+
+**Pink Coins / Mystery Key** is the unlock route for Pink / Miumu. Use the <Link href="/deltarune/chapter-5-secret-boss-pink-coins">Pink Coins and Mystery Key Guide</Link> if you still need 10 Pink Coins or the Pink Door.
+
+**Foxes / Secret Egg** are cleanup secrets and hidden checks. Use the <Link href="/deltarune/chapter-5-foxes-secret-egg">Foxes and Secret Egg Checklist</Link> if you are missing foxes or the egg route.
+
+**Weird Route / Side B** is the Noelle lake route. Use the <Link href="/deltarune/chapter-5-weird-route">Weird Route Guide</Link> if your file is heading toward Side B.
+
+If you only want a clean normal ending, beat Flowery first and save the clear file. Do not switch into Weird Route on that file.
+
+---
+
+<h2 id="common-mistakes">
+  Common Flowery final boss mistakes
+</h2>
+
+* **Trying to damage-race Flowery:** use ACT and Mercy progress instead.
+* **Mashing Posey randomly:** Posey needs timing; bad timing can give very low Mercy.
+* **Ignoring Blow Away:** it is smaller progress, but reliable when Posey timing is shaky.
+* **Dashing too early during Orange pressure:** wait for the attack to commit.
+* **Spending TP before Justice:** enter the trial section with resources.
+* **Letting Ralsei stay down:** recovery becomes worse without him.
+* **Using a team heal for one injured character:** save team heals for wide damage.
+* **Getting greedy near 50% Mercy:** stabilize before pushing the transition.
+* **Relaxing after the first fountain:** Chapter 5 still has the second fountain and ending route.
+* **Overwriting the normal clear file:** keep normal, cleanup, and Weird Route files separate.
+
+---
+
+<h2 id="faq">
+  FAQ
+</h2>
+
+### Is Flowery the Chapter 5 final boss?
+
+Yes. Flowery is the normal-route final boss / final route boss for Chapter 5. Pink / Miumu is the separate secret boss.
+
+### Can I beat Flowery by attacking?
+
+I do not recommend playing it as a damage race. The reliable route is to push Mercy with ACTs such as Posey, PoseyZ, and Blow Away.
+
+### What appears first in the Flowery fight?
+
+The fight starts with the Mercy / ACT loop, then introduces Posey / PoseyZ timing, Blow Away, Orange dash pressure, Knife Cutting, and later the Justice trial section.
+
+### How much Mercy does Posey give?
+
+Posey / PoseyZ can show about **10% Mercy**, but the actual gain depends on timing. Bad timing can make the gain much lower.
+
+### What does Blow Away do?
+
+Blow Away is a mash-based Mercy action. It gives smaller progress, around **5%** in the route I use, but it is easier to execute than Posey timing.
+
+### What Mercy number should I aim for?
+
+Aim to push toward about **50% Mercy**. That is where the fight starts moving toward the next major route break.
+
+### Why do I keep dying during Orange attacks?
+
+You are probably dashing too early. Hold to charge, wait for the attack to commit, then release the dash through the real danger.
+
+### What should I do before the Justice section?
+
+Keep TP ready and keep the party alive. If you enter Justice with no TP and weak HP, the section becomes much harder.
+
+### Does Chapter 5 end after sealing the first fountain?
+
+No. The first fountain seal is not the final ending. Be ready for the second fountain and the final route scenes.
+
+### Should I do Pink / Miumu before Flowery?
+
+Only if you are stocked and using a normal or cleanup file. If you just want the clean first ending, beat Flowery first and come back later.
+
+### Should I do Weird Route before Flowery?
+
+I would not. Weird Route leads toward Noelle’s lake scene and Side B. Keep it on a separate file after you have a normal clear.

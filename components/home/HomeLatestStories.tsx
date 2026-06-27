@@ -123,6 +123,7 @@ function FeaturedStoryImage({ story }: { story: DisplayStory }) {
         objectPosition: story.imagePosition ?? "center",
       }}
       loading="eager"
+      
       decoding="async"
     />
   </div>

@@ -132,6 +132,7 @@ const guideGroups: GuideGroup[] = [
     description:
       "Current and recently expanded guide hubs with walkthroughs, systems, achievements, endings, builds, or collectibles.",
     guides: [
+      { title: "Deltarune", href: "/deltarune" },
       { title: "The Last Caretaker", href: "/the-last-caretaker" },
       { title: "Warhammer 40,000: Darktide - Skitarii Class", href: "/darktide" },
       { title: "Moldwasher", href: "/moldwasher" },

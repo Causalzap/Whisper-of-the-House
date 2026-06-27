@@ -132,6 +132,162 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "DELTARUNE",
+    "game": "DELTARUNE",
+    "href": "/deltarune",
+    "slug": "deltarune",
+    "kind": "game",
+    "status": "active",
+    "accent": "purple",
+    "archiveCategory": "Older archive",
+    "label": "Chapter 5 Routes",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active Chapter 5 guide hub for all 19 Pink Coins, Mystery Key, Pink/Miumu, Flowery, foxes, Secret Egg, Weird Route, Side B, Sans Bread, and save-file planning.",
+    "coverage": [
+    "All 19 Pink Coins",
+    "Pink/Miumu secret boss",
+    "Flowery final boss",
+    "Weird Route and Side B"
+    ],
+    "image": "/images/home/deltarune-chapter-5-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "featuredHub": true,
+    "featuredHubSpotlight": true,
+    "featuredHubOrder": 1,
+    "footerFeatured": true
+    },
+    "pages": [
+    {
+    "title": "DELTARUNE Chapter 5 Guide Hub",
+    "href": "/deltarune",
+    "type": "Spotlight Coverage",
+    "description": "Start here for Chapter 5 route planning, all 19 Pink Coins, Mystery Key, Pink/Miumu, Flowery, foxes, Secret Egg, Weird Route, Side B, and save files.",
+    "image": "/images/home/deltarune-chapter-5-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "spotlightMeta": "Pink Coins, secret boss, Flowery, foxes, Egg, Weird Route, and Side B"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 1
+    }
+    },
+    {
+    "title": "All 19 Pink Coins & Mystery Key Guide",
+    "href": "/deltarune/chapter-5-secret-boss-pink-coins",
+    "type": "Collectibles",
+    "description": "Find all 19 Chapter 5 Pink Coins, get 10 for the Mystery Key, use extras for flower gear, check Petal Feather timing, Ferroll help, and Pink Door prep.",
+    "date": "Updated recently",
+    "image": "/images/home/deltarune-pink-coins.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestFeatured": true,
+    "latestOrder": 1,
+    "spotlightFeature": true,
+    "spotlightOrder": 1,
+    "spotlightMeta": "19 Pink Coins, Mystery Key, Pink Door, flower gear, and Ferroll"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 2
+    }
+    },
+    {
+    "title": "Pink/Miumu Secret Boss DOKI Guide",
+    "href": "/deltarune/chapter-5-secret-boss-guide",
+    "type": "Guide",
+    "description": "Beat Pink/Miumu with 15/15/20 DOKI targets, Purple Soul hearts, MegaFlirt, GigaFlirt, LovelyBoy, CAT gear, date answers, and DIE maze tips.",
+    "date": "Updated recently",
+    "image": "/images/home/deltarune-pink-miumu-secret-boss.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestFeatured": true,
+    "latestOrder": 2,
+    "spotlightFeature": true,
+    "spotlightOrder": 2,
+    "spotlightMeta": "DOKI, TP cap, GigaFlirt, LovelyBoy, dates, and DIE maze"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 3
+    }
+    },
+    {
+    "title": "Flowery Final Boss & Ending Guide",
+    "href": "/deltarune/chapter-5-final-boss-guide",
+    "type": "Guide",
+    "description": "Beat Flowery with Posey/PoseyZ timing, Blow Away, Orange dash, Knife Cutting, Justice trial, 50% Mercy, first fountain, and second fountain.",
+    "date": "Updated recently",
+    "image": "/images/home/deltarune-flowery-final-boss.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestOrder": 3,
+    "spotlightFeature": true,
+    "spotlightOrder": 3,
+    "spotlightMeta": "Flowery, Mercy route, Knife Cutting, Justice, and fountains"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 4
+    }
+    },
+    {
+    "title": "Foxes & Secret Egg Guide",
+    "href": "/deltarune/chapter-5-foxes-secret-egg",
+    "type": "Guide",
+    "description": "Find 3 foxes for Aqua, all 5 foxes for the Pink Coin room, avoid the sun-style mix-up, then solve the wheat, dog flower, watering can, and Egg route.",
+    "date": "Updated recently",
+    "image": "/images/home/deltarune-foxes-secret-egg.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestOrder": 4,
+    "spotlightFeature": true,
+    "spotlightOrder": 4,
+    "spotlightMeta": "3 foxes, 5 foxes, Pink Coin room, wheat route, dog flowers, and Egg"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 5
+    }
+    },
+    {
+    "title": "Chapter 5 Weird Route & Side B Guide",
+    "href": "/deltarune/chapter-5-weird-route",
+    "type": "Guide",
+    "description": "Start from the Chapter 4 Weird Route state, force Kris out of bed, get Bread from Sans, survive the lake Proceed timer, avoid Aborted route, and reach Side B.",
+    "date": "Updated recently",
+    "image": "/images/home/deltarune-weird-route-side-b.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestOrder": 5,
+    "spotlightFeature": true,
+    "spotlightOrder": 5,
+    "spotlightMeta": "Chapter 4 state, Sans Bread, lake timer, Shattered Rose, and Side B"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 6
+    }
+    }
+    ]
+    },
+    
+  
+  {
     "title": "The Last Caretaker",
     "game": "The Last Caretaker",
     "href": "/the-last-caretaker",
