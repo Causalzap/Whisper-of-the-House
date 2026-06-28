@@ -132,6 +132,140 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Frostpunk 2: Breach of Trust",
+    "game": "Frostpunk 2: Breach of Trust",
+    "href": "/frostpunk-2-breach-of-trust",
+    "slug": "frostpunk-2-breach-of-trust",
+    "kind": "game",
+    "status": "active",
+    "accent": "blue",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Aurora Routes",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active Breach of Trust guide hub for Aurora negotiation, Fishery Hubs, conquest, tremors, Emergency Shelter Hubs, Volcanic Night, evacuation, and Generator Core timing.",
+    "coverage": [
+    "Aurora negotiation",
+    "Fishery Hubs and food transfer",
+    "Conquer Aurora war route",
+    "Tremors and evacuation"
+    ],
+    "image": "/images/home/frostpunk-2-breach-of-trust-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "featuredHub": true,
+    "featuredHubSpotlight": true,
+    "featuredHubOrder": 1,
+    "footerFeatured": true
+    },
+    "pages": [
+    {
+    "title": "Frostpunk 2 Breach of Trust Guide Hub",
+    "href": "/frostpunk-2-breach-of-trust",
+    "type": "Spotlight Coverage",
+    "description": "Start here for Breach of Trust route planning, Aurora choices, food transfer, tremor safety, Volcanic Night, evacuation, and Generator Core timing.",
+    "image": "/images/home/frostpunk-2-breach-of-trust-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "spotlightMeta": "Aurora, Fishery Hubs, conquest, tremors, evacuation, and Generator Core"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 1
+    }
+    },
+    {
+    "title": "Breach of Trust Walkthrough",
+    "href": "/frostpunk-2-breach-of-trust/walkthrough",
+    "type": "Walkthrough",
+    "description": "Follow the full Breach of Trust route with Vote of Trust, Aurora negotiation or war, steam output, Emergency Shelter Hubs, Fishery Hubs, Volcanic Night, and Generator Core timing.",
+    "date": "Updated recently",
+    "image": "/images/home/frostpunk-2-breach-of-trust-walkthrough.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestFeatured": true,
+    "latestOrder": 1,
+    "spotlightFeature": true,
+    "spotlightOrder": 1,
+    "spotlightMeta": "Vote of Trust, Aurora choice, tremors, Fishery Hubs, and evacuation"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 2
+    }
+    },
+    {
+    "title": "Aurora Negotiation & Fishery Hub Guide",
+    "href": "/frostpunk-2-breach-of-trust/aurora-negotiation-fishery-hub-guide",
+    "type": "Guide",
+    "description": "Negotiate with Aurora, send promised resources, manage Strength and Defiance, build Fishery Hubs, transfer food, use Skyways, and fix New Edinburgh's food crisis.",
+    "date": "Updated recently",
+    "image": "/images/home/frostpunk-2-breach-of-trust-aurora-fishery.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestFeatured": true,
+    "latestOrder": 2,
+    "spotlightFeature": true,
+    "spotlightOrder": 2,
+    "spotlightMeta": "Aurora deals, promised resources, Fishery Hubs, food transfer, and Skyways"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 3
+    }
+    },
+    {
+    "title": "Conquer Aurora War Route Guide",
+    "href": "/frostpunk-2-breach-of-trust/conquer-aurora-war-route-guide",
+    "type": "Guide",
+    "description": "Conquer Aurora with Barracks, hired soldiers, conscription, Heavy Weaponry, attack timing, Flawless Victory planning, resistance control, and occupation recovery.",
+    "date": "Updated recently",
+    "image": "/images/home/frostpunk-2-breach-of-trust-conquer-aurora.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestOrder": 3,
+    "spotlightFeature": true,
+    "spotlightOrder": 3,
+    "spotlightMeta": "Barracks, conscription, Heavy Weaponry, attacks, resistance, and occupation"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 4
+    }
+    },
+    {
+    "title": "Tremor & Evacuation Guide",
+    "href": "/frostpunk-2-breach-of-trust/tremor-evacuation-guide",
+    "type": "Guide",
+    "description": "Survive Breach of Trust tremors and Volcanic Night with steam output control, Emergency Shelter Hub coverage, evacuation airships, and Generator Core timing.",
+    "date": "Updated recently",
+    "image": "/images/home/frostpunk-2-breach-of-trust-tremor-evacuation.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+    "latest": true,
+    "latestOrder": 4,
+    "spotlightFeature": true,
+    "spotlightOrder": 4,
+    "spotlightMeta": "Steam output, Emergency Shelter Hubs, Volcanic Night, airships, and Generator Core"
+    },
+    "archive": {
+    "showInCollections": true,
+    "order": 5
+    }
+    }
+    ]
+    },
+    
+  {
     "title": "DELTARUNE",
     "game": "DELTARUNE",
     "href": "/deltarune",
