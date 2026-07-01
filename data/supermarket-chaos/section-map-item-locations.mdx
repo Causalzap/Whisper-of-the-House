@@ -1,0 +1,632 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const sectionColumns = [
+  { key: "Route Zone", label: "Route Zone" },
+  { key: "First Check", label: "First Check" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const sectionRows = [
+  {
+    "Route Zone": "Produce / Fruit",
+    "First Check": "Fruit, vegetables, fresh produce, small loose food items",
+    "Why It Matters":
+      "Produce is visually easy, but small items can be hard to click cleanly. I clear obvious fruit early when I pass the area.",
+  },
+  {
+    "Route Zone": "Breakfasts / Sweets",
+    "First Check": "Cakes, chocolate chips, breakfast sweets, honey, some sweet pantry items",
+    "Why It Matters":
+      "This is one of the most misleading signs. I use it for cake-style and breakfast-sweet items, but I do not assume every candy-labeled product belongs here.",
+  },
+  {
+    "Route Zone": "Tea / Candies",
+    "First Check": "Tea boxes, coffee-style pantry items, sugar, and some baking/sweet shelf items",
+    "Why It Matters":
+      "The name is confusing. I treat this as a tea/sugar/baking-adjacent zone first, not as a simple all-candy aisle.",
+  },
+  {
+    "Route Zone": "Pasta / Condiments",
+    "First Check": "Pasta, sauces, canned vegetables, salt, pepper, mayonnaise, chips, shelf-stable pantry goods",
+    "Why It Matters":
+      "This zone catches many normal pantry items that do not fit breakfast, tea, ramen, or bread.",
+  },
+  {
+    "Route Zone": "Bread",
+    "First Check": "Sandwiches and bread-display items",
+    "Why It Matters":
+      "The bread sign is not always intuitive. If a bread-looking item fails, I check Breakfasts / Sweets or pantry logic next.",
+  },
+  {
+    "Route Zone": "Ramen",
+    "First Check": "Ramen cups, instant noodles, udon cups, noodle bowls",
+    "Why It Matters":
+      "Ramen is its own route zone. I do not mix it with pasta just because both are noodles.",
+  },
+  {
+    "Route Zone": "Bento",
+    "First Check": "Sushi rolls, prepared boxed meals, scallops or prepared seafood that fails Meat / Frozen",
+    "Why It Matters":
+      "Prepared food can look like frozen, meat, or seafood, but Bento catches several ready-to-eat items.",
+  },
+  {
+    "Route Zone": "Frozen",
+    "First Check": "Pizza, ice cream, fries, frozen-style packaged food",
+    "Why It Matters":
+      "Frozen is easy early, but not every cold-looking food belongs here. If seafood or prepared food fails, I check Bento or Dairy next.",
+  },
+  {
+    "Route Zone": "Dairy / Cheese",
+    "First Check": "Cheese, yogurt, milk, butter, some seafood-like chilled products if Meat / Frozen fails",
+    "Why It Matters":
+      "This area can catch products that look like they should be meat or frozen. I let shelf feedback decide.",
+  },
+  {
+    "Route Zone": "Meat",
+    "First Check": "Chicken wings, beef, ham, sliced meat, meat packs",
+    "Why It Matters":
+      "Meat is usually straightforward, but some seafood and prepared food may reject it.",
+  },
+  {
+    "Route Zone": "Drinks",
+    "First Check": "Soft drinks, soda, beer, alcohol, wine",
+    "Why It Matters":
+      "I separate bottle products by the sign: Soft Drinks, Alcohol, and Wine are not one universal bottle shelf.",
+  },
+  {
+    "Route Zone": "Toilet / Personal Care",
+    "First Check": "Shampoo, toothpaste, body wash, toilet paper, personal care items",
+    "Why It Matters":
+      "The sign can look odd, but this is where I check toiletries before trying general cleaning.",
+  },
+  {
+    "Route Zone": "Cleaning",
+    "First Check": "Bleach, multi cleaner, dish soap, housekeeping products",
+    "Why It Matters":
+      "Cleaning and personal care are separate problems. I do not put shampoo here just because the bottle shape looks similar.",
+  },
+  {
+    "Route Zone": "Books",
+    "First Check": "Books, book-like items, named book products",
+    "Why It Matters":
+      "Books are one of the safest early zones. Some item names sound technical but are actually books.",
+  },
+  {
+    "Route Zone": "iT / Electronics",
+    "First Check": "Routers, headphones, earbuds, gamepads, tech accessories",
+    "Why It Matters":
+      "This is another good early zone, but I watch item names because a tech-sounding title can still be a book.",
+  },
+  {
+    "Route Zone": "Home Decor",
+    "First Check": "Vases, decor pieces, picture frames, art frames, small home objects",
+    "Why It Matters":
+      "Home decor is visually distinct and useful for early cleanup, especially when food categories become messy.",
+  },
+];
+
+export const trickyColumns = [
+  { key: "Item / Family", label: "Item / Family" },
+  { key: "First Check", label: "First Check" },
+  { key: "Route Note", label: "Route Note" },
+];
+
+export const trickyRows = [
+  {
+    "Item / Family": "Sugar / brown sugar / raw cane sugar",
+    "First Check": "Tea / Candies",
+    "Route Note":
+      "Do not force sugar into Breakfasts / Sweets just because it sounds sweet. I treat sugar as a Tea / Candies / baking-adjacent item first.",
+  },
+  {
+    "Item / Family": "Chocolate chips / cake / honey",
+    "First Check": "Breakfasts / Sweets",
+    "Route Note":
+      "These are better examples of the breakfast-sweet logic than sugar. If one fails, switch to Tea / Candies instead of brute forcing.",
+  },
+  {
+    "Item / Family": "Candy jars / candy-labeled items",
+    "First Check": "Use shelf feedback between Breakfasts / Sweets and Tea / Candies",
+    "Route Note":
+      "The labels are inconsistent. I do not trust the word candy by itself; I test the likely zone once and move if the tag rejects it.",
+  },
+  {
+    "Item / Family": "Coffee / tea boxes",
+    "First Check": "Tea / Candies",
+    "Route Note":
+      "Coffee and tea-style pantry products usually belong with the tea side of the store, not the drink bottle area.",
+  },
+  {
+    "Item / Family": "Pasta / sauces / condiments",
+    "First Check": "Pasta / Condiments",
+    "Route Note":
+      "This is the safe fallback for many shelf-stable pantry goods that are not breakfast, tea, ramen, or bread.",
+  },
+  {
+    "Item / Family": "Sushi / scallops / prepared seafood",
+    "First Check": "Bento",
+    "Route Note":
+      "If the item behaves like a prepared meal, I check Bento before assuming Meat or Frozen.",
+  },
+  {
+    "Item / Family": "Instant ramen / udon cups",
+    "First Check": "Ramen",
+    "Route Note":
+      "Ramen has its own sign. I do not route instant noodle cups to Pasta / Condiments unless feedback forces it.",
+  },
+  {
+    "Item / Family": "Sandwiches / bread-looking items",
+    "First Check": "Bread, then Breakfasts / Sweets if rejected",
+    "Route Note":
+      "Bread logic is counterintuitive. A sandwich may fit Bread, while some bread-looking products may not.",
+  },
+  {
+    "Item / Family": "Shampoo / body wash / toothpaste",
+    "First Check": "Toilet / Personal Care",
+    "Route Note":
+      "These are not Cleaning just because they are bottles. I check personal care first.",
+  },
+  {
+    "Item / Family": "Bleach / multi cleaner / dish soap",
+    "First Check": "Cleaning",
+    "Route Note":
+      "These belong with housekeeping products, not personal care.",
+  },
+  {
+    "Item / Family": "Routers / gamepads / earbuds",
+    "First Check": "iT / Electronics",
+    "Route Note":
+      "Good early targets, but read the name before placing. A book about a technical topic can still be a Book item.",
+  },
+  {
+    "Item / Family": "Vases / frames / decor pieces",
+    "First Check": "Home Decor",
+    "Route Note":
+      "Usually one of the easiest visual categories to clear early.",
+  },
+];
+
+export const mixedColumns = [
+  { key: "Held Product", label: "Held Product" },
+  { key: "First Route", label: "First Route" },
+  { key: "If It Fails", label: "If It Fails" },
+];
+
+export const mixedRows = [
+  {
+    "Held Product": "Sodapop 1.5L",
+    "First Route": "Soft Drinks",
+    "If It Fails": "Check whether it is a different drink shelf, not Alcohol or Wine.",
+  },
+  {
+    "Held Product": "Nova Noir Wine",
+    "First Route": "Wine",
+    "If It Fails": "Check the exact bottle price tag inside the wine area.",
+  },
+  {
+    "Held Product": "Honey Jojoba Shampoo",
+    "First Route": "Toilet / Personal Care",
+    "If It Fails": "Check nearby personal care shelves before trying Cleaning.",
+  },
+  {
+    "Held Product": "Scallop Potato Gratin",
+    "First Route": "Bento / prepared food",
+    "If It Fails": "Try Frozen or Dairy / Cheese depending on the shelf feedback.",
+  },
+  {
+    "Held Product": "Salmon Sushi Roll 10pc",
+    "First Route": "Bento",
+    "If It Fails": "Check prepared-food shelves before Meat or Frozen.",
+  },
+  {
+    "Held Product": "Seafood Instant Ramen",
+    "First Route": "Ramen",
+    "If It Fails": "Check nearby ramen / noodle shelves, not Pasta first.",
+  },
+  {
+    "Held Product": "Wood Decor Piece 01",
+    "First Route": "Home Decor",
+    "If It Fails": "Check another decor shelf with the matching price tag.",
+  },
+  {
+    "Held Product": "French Sliced Ham",
+    "First Route": "Meat",
+    "If It Fails": "Check chilled meat shelves before Bento.",
+  },
+  {
+    "Held Product": "Tortilla Chips 365g",
+    "First Route": "Pasta / Condiments",
+    "If It Fails": "Check shelf-stable pantry shelves, not Breakfasts / Sweets first.",
+  },
+  {
+    "Held Product": "Sousou Brown Sugar",
+    "First Route": "Tea / Candies",
+    "If It Fails": "Check nearby sweet pantry shelves; do not scatter all sugars across multiple zones.",
+  },
+];
+
+export const stuckColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "What It Usually Means", label: "What It Usually Means" },
+  { key: "What I Do", label: "What I Do" },
+];
+
+export const stuckRows = [
+  {
+    Problem: "The item turns red on the shelf.",
+    "What It Usually Means": "Wrong section or wrong shelf family.",
+    "What I Do":
+      "I stop testing nearby shelves and change category family first.",
+  },
+  {
+    Problem: "The item is the right category but still will not fit.",
+    "What It Usually Means": "Right broad section, wrong exact shelf or price tag.",
+    "What I Do":
+      "I stay in the section and check nearby shelf labels before leaving the area.",
+  },
+  {
+    Problem: "A sweet item does not match the sign I expected.",
+    "What It Usually Means":
+      "Breakfasts / Sweets and Tea / Candies are split in a counterintuitive way.",
+    "What I Do":
+      "I test the other sweet/pantry zone once, then keep similar products together.",
+  },
+  {
+    Problem: "A bottle item keeps failing.",
+    "What It Usually Means":
+      "I may be mixing Soft Drinks, Wine, Alcohol, Cleaning, or Personal Care.",
+    "What I Do":
+      "I identify what the bottle is used for before testing another shelf.",
+  },
+  {
+    Problem: "A prepared food item fails Meat or Frozen.",
+    "What It Usually Means": "It may be Bento or another ready-meal shelf.",
+    "What I Do":
+      "I check Bento before forcing Meat / Frozen logic.",
+  },
+  {
+    Problem: "I know the category but forgot the shelf.",
+    "What It Usually Means": "This is a location problem, not a category problem.",
+    "What I Do":
+      "I use Shelf Finder or walk the section signs instead of guessing randomly.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Supermarket Chaos item locations**, I do not use real supermarket logic. I use the game’s section signs first, then shelf feedback. The most important trap is that **Breakfasts / Sweets** and **Tea / Candies** are not simple labels. Sugar, candy, cake, tea, coffee, and baking-style items can split in ways that feel wrong if you guess from real life.
+
+My route is: choose the broad section family, test one likely shelf, read the color feedback, and only then move to the next section. If the problem is a wrong category, use this section map. If the problem is a lost shelf inside the right category, use <Link href="/supermarket-chaos/best-upgrades-skills/">Shelf Finder</Link>.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the launch version of Supermarket Chaos. This guide focuses on section routing and tricky placement logic, not a full all-products database.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-section-labels-overview.webp"
+    alt="Supermarket Chaos opening store view with section signs and products scattered on the floor"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I treat the signs as route landmarks, not as perfect real-world supermarket categories.
+  </figcaption>
+</figure>
+
+<h2 id="supermarket-chaos-section-map-item-locations">
+  Supermarket Chaos section map and item locations
+</h2>
+
+Supermarket Chaos says the store has **4,668 products** spread across **16 sections**. That sounds like a normal supermarket map, but the actual sorting logic is stranger than that.
+
+The mistake I avoid is using real-life supermarket logic too confidently. Some signs behave exactly how I expect: pizza goes Frozen, routers go iT / Electronics, and vases go Home Decor. Other signs are less intuitive. The sweet and pantry areas are the biggest example: **Breakfasts / Sweets**, **Tea / Candies**, and **Pasta / Condiments** can all catch items that look similar at first.
+
+So this page does not try to become a 4,668-item database. It gives me a route map: where I check first, what I test next, and when I should stop guessing.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="section-map-tool">
+  Section map tool
+</h2>
+
+Use this as a quick routing tool. The goal is not to memorize every product name. The goal is to know where to walk first.
+
+<div className="my-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+  <div className="border-b border-slate-200 p-5">
+    <h3 className="text-xl font-semibold text-slate-950">
+      Product Family Router
+    </h3>
+
+    <div className="mt-2 text-sm leading-6 text-slate-600">
+      Pick the broad family first, then use shelf feedback to narrow the exact shelf. The boxes are only for this page session.
+    </div>
+  </div>
+
+  <div className="grid gap-4 p-5 md:grid-cols-2">
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <h4 className="mb-3 font-semibold text-slate-950">Sweet / pantry trap</h4>
+      <label className="mb-3 flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Check whether the product is cake / breakfast-sweet or tea / sugar / baking-adjacent.</span>
+      </label>
+      <label className="mb-3 flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Do not assume the word candy means one exact sign.</span>
+      </label>
+      <label className="flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Use feedback before moving a whole pile of sweets.</span>
+      </label>
+    </div>
+
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <h4 className="mb-3 font-semibold text-slate-950">Prepared food</h4>
+      <label className="mb-3 flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Check Bento for sushi, boxed meals, and ready-to-eat seafood.</span>
+      </label>
+      <label className="mb-3 flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Use Ramen for instant noodles and noodle cups.</span>
+      </label>
+      <label className="flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Try Frozen or Dairy only after the prepared-food logic fails.</span>
+      </label>
+    </div>
+
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <h4 className="mb-3 font-semibold text-slate-950">Bottle split</h4>
+      <label className="mb-3 flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Separate Soft Drinks, Wine, and Alcohol.</span>
+      </label>
+      <label className="mb-3 flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Put shampoo and toothpaste in Toilet / Personal Care first.</span>
+      </label>
+      <label className="flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Use Cleaning for bleach, dish soap, and housekeeping products.</span>
+      </label>
+    </div>
+
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <h4 className="mb-3 font-semibold text-slate-950">Easy early zones</h4>
+      <label className="mb-3 flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Clear Books, iT / Electronics, and Home Decor when I need safe progress.</span>
+      </label>
+      <label className="mb-3 flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Use Produce and Frozen for obvious visual items.</span>
+      </label>
+      <label className="flex gap-3 text-sm text-slate-700">
+        <input type="checkbox" className="mt-1 h-4 w-4 rounded border-slate-300" />
+        <span>Switch to Shelf Finder only after the broad section is correct.</span>
+      </label>
+    </div>
+  </div>
+
+  <div className="border-t border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600">
+    Rule I use: wrong category means I need section logic. Lost shelf means I need a finder tool.
+  </div>
+</div>
+
+<h2 id="quick-section-map">
+  Quick section map
+</h2>
+
+This table groups the store into route zones. Some signs are combined in the game, and some nearby signs behave like separate shelves, so I use this as a route map instead of a perfect official section list.
+
+<GuideTable
+  caption="Supermarket Chaos section routing map."
+  columns={sectionColumns}
+  rows={sectionRows}
+/>
+
+The most important change from a normal supermarket mindset is the pantry split. If I am holding sugar, coffee, candy jars, cake, honey, pasta, chips, or condiments, I do not assume the first word in the sign is enough. I test the strongest likely section once, then move quickly when the shelf feedback says no.
+
+<h2 id="tricky-item-placements">
+  Tricky item placements
+</h2>
+
+These are the product families I treat carefully. They are not the only confusing items, but they explain how I think through the store.
+
+<GuideTable
+  caption="Tricky Supermarket Chaos product families and first checks."
+  columns={trickyColumns}
+  rows={trickyRows}
+/>
+
+The key is to keep similar failed products together. If one sugar product belongs to Tea / Candies, I do not scatter the next sugar across Breakfasts / Sweets, Pasta / Condiments, and Bread. I keep the family together until the shelf feedback proves otherwise.
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-sugar-tea-candies-placement.webp"
+    alt="Supermarket Chaos sugar product near the Tea and Candies section"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Sugar is the warning example: the sign names are not always real-world logic, so I trust the game’s feedback before moving the whole product family.
+  </figcaption>
+</figure>
+
+
+<h2 id="mixed-inventory-example">
+  How I split a 10-product mixed inventory
+</h2>
+
+A real run usually does not fail because I cannot identify one item. It fails because I am holding a messy inventory and every product wants a different route.
+
+Here is how I split one mixed 10-item inventory before walking across the store.
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-too-heavy-10-items.webp"
+    alt="Supermarket Chaos inventory showing 10 mixed held products"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I do not place this kind of inventory in pickup order. I split it into drink, personal care, prepared food, decor, meat, pantry, and sugar routes.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How I route a 10-product mixed inventory."
+  columns={mixedColumns}
+  rows={mixedRows}
+/>
+
+This is why I like clearing by section family. If I am already near drinks, I place soda and wine first. If I am near personal care, I place shampoo before dragging it across the store. The route matters more than the order in the inventory bar.
+
+<h2 id="cleaning-housekeeping">
+  Cleaning, toilet, and personal care
+</h2>
+
+Cleaning and personal care are easy to mix because many products are bottles.
+
+My first split is based on use:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Use Toilet / Personal Care</strong> for shampoo, body wash, toothpaste, toilet paper, and similar bathroom products.
+  </li>
+  <li>
+    <strong>Use Cleaning</strong> for bleach, dish soap, multi cleaner, and housekeeping products.
+  </li>
+</ul>
+
+If I keep failing with a bottle item, I stop looking at the shape and read the item name. Bottle shape alone is not enough.
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-lucky-777-progress.webp"
+    alt="Supermarket Chaos Cleaning and Housekeeping section example"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cleaning and personal care look close at first, but they solve different product families.
+  </figcaption>
+</figure>
+
+<h2 id="what-to-do-when-item-will-not-fit">
+  What to do when an item will not fit
+</h2>
+
+When an item will not fit, I do not keep brute forcing the same row.
+
+<GuideTable
+  caption="What I check when a Supermarket Chaos item will not fit."
+  columns={stuckColumns}
+  rows={stuckRows}
+/>
+
+The short version is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Red tag means stop and reconsider the section.</li>
+  <li>White / correct feedback means stay near the same section family.</li>
+  <li>If the category is unclear, use this map.</li>
+  <li>If the category is clear but the shelf is lost, use Shelf Finder.</li>
+  <li>If the product is still confusing, park it in a small family pile and return later.</li>
+</ol>
+
+<h2 id="last-item-cleanup">
+  Last item cleanup
+</h2>
+
+The last few products are where bad early piles hurt the most.
+
+For late cleanup, I narrow the remaining item like this:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>check whether it is a category problem or an exact shelf problem,</li>
+  <li>separate sweet pantry items from Pasta / Condiments,</li>
+  <li>separate drinks from personal care and cleaning bottles,</li>
+  <li>check Bento before forcing prepared food into Meat or Frozen,</li>
+  <li>use Shelf Finder only after the broad section makes sense.</li>
+</ul>
+
+If you are chasing **One More!** or **Complete**, use the <Link href="/supermarket-chaos/achievements-guide/">achievements guide</Link> after this map. The section logic helps you find the last product, but the achievement route has its own checklist.
+
+<h2 id="common-mistakes">
+  Common section map mistakes
+</h2>
+
+These are the mistakes I avoid:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Trusting real supermarket logic too much:</strong> Supermarket Chaos uses its own sign logic, especially around sweets, bread, and pantry goods.
+  </li>
+  <li>
+    <strong>Treating Tea / Candies as all candy:</strong> I use feedback because sweet items split across multiple zones.
+  </li>
+  <li>
+    <strong>Ignoring Pasta / Condiments:</strong> many shelf-stable items route there when they do not fit breakfast, tea, ramen, or bread.
+  </li>
+  <li>
+    <strong>Mixing all bottles:</strong> drinks, wine, alcohol, shampoo, and cleaners are separate decisions.
+  </li>
+  <li>
+    <strong>Using upgrades for category confusion:</strong> finder tools help after I understand the section, not before.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Supermarket Chaos section map FAQ
+</h2>
+
+### How many sections are in Supermarket Chaos?
+
+The game lists **16 sections**, but several signs are paired or visually close, so I route by section families instead of trying to memorize a perfect list immediately.
+
+### Does sugar go in Breakfasts / Sweets or Tea / Candies?
+
+I check **Tea / Candies** first for sugar. Sugar is one of the best examples of why I do not rely on real supermarket logic.
+
+### Do all candy items go in Tea / Candies?
+
+No. Candy and sweet items can split between **Breakfasts / Sweets** and **Tea / Candies** depending on the exact product. I use shelf feedback instead of moving every candy-labeled item to one sign.
+
+### Where do chocolate chips and cakes go?
+
+I check **Breakfasts / Sweets** first for cake-style and chocolate-chip items.
+
+### Where do pasta and condiments go?
+
+Use **Pasta / Condiments** for pasta, sauces, canned pantry items, salt, pepper, mayonnaise, chips, and other shelf-stable goods that do not fit a more specific sign.
+
+### Where do sushi and instant ramen go?
+
+I check **Bento** for sushi and prepared boxed food. I check **Ramen** for instant ramen, udon cups, and noodle bowls.
+
+### Where do shampoo and toothpaste go?
+
+I check **Toilet / Personal Care** first. Cleaning products like bleach, dish soap, and multi cleaner belong in the Cleaning route instead.
+
+### Where do routers, headphones, and gamepads go?
+
+I check **iT / Electronics** first, but I still read the item name. Some technical-sounding products may actually be books.
+
+### Should I use Shelf Finder for every confusing item?
+
+No. Shelf Finder is best when I already know the section family but forgot the exact shelf. If the section itself is wrong, I need the map first.
+
+### Is this a full all-items list?
+
+No. This page is a section-routing guide. It is meant to help with wrong-category problems without turning the page into a giant 4,668-product database.

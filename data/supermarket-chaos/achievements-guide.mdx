@@ -1,0 +1,655 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const achievementToolRows = [
+  {
+    name: "First Stocked",
+    requirement: "Place your first product on the correct shelf.",
+    rate: "100.0%",
+    timing: "Opening tutorial",
+    group: "Quick",
+    risk: "None",
+    note: "This should unlock naturally when the tutorial placement succeeds.",
+  },
+  {
+    name: "100 Stocked",
+    requirement: "Correctly place 100 products on shelves.",
+    rate: "93.1%",
+    timing: "Early cleanup",
+    group: "Milestone",
+    risk: "Low",
+    note: "Use this as proof that the route is working; do not chase it separately.",
+  },
+  {
+    name: "Do Not Throw",
+    requirement:
+      "Throw 5 or more products in a row with no more than 1 second between throws.",
+    rate: "61.2%",
+    timing: "Early / before sorting",
+    group: "Action",
+    risk: "Medium",
+    note:
+      "Do it in a clear aisle before building careful piles. Switch to keyboard and mouse if controller timing feels awkward.",
+  },
+  {
+    name: "Music Duty",
+    requirement: "Change the music once at the computer.",
+    rate: "51.5%",
+    timing: "Opening",
+    group: "Action",
+    risk: "Low",
+    note: "Grab this near the start so you do not need to walk back later.",
+  },
+  {
+    name: "Lucky 777",
+    requirement: "Correctly place 777 products on shelves.",
+    rate: "48.1%",
+    timing: "First long milestone",
+    group: "Milestone",
+    risk: "Low",
+    note:
+      "This is where I switch from early cleanup into a longer section-by-section route.",
+  },
+  {
+    name: "Too Heavy",
+    requirement: "Hold 10 or more products at once.",
+    rate: "42.9%",
+    timing: "After Extra Carry",
+    group: "Upgrade",
+    risk: "Medium",
+    note:
+      "Buy Extra Carry until 10 held products is possible, then fill the inventory to 10/10.",
+  },
+  {
+    name: "1,000 Stocked",
+    requirement: "Correctly place 1,000 products on shelves.",
+    rate: "40.4%",
+    timing: "Early / mid cleanup",
+    group: "Milestone",
+    risk: "Low",
+    note: "Start using upgrades more often; manual scanning begins to slow down.",
+  },
+  {
+    name: "2,000 Stocked",
+    requirement: "Correctly place 2,000 products on shelves.",
+    rate: "21.1%",
+    timing: "Mid run",
+    group: "Milestone",
+    risk: "Medium",
+    note:
+      "Clean by section family instead of chasing single familiar-looking items.",
+  },
+  {
+    name: "3,000 Stocked",
+    requirement: "Correctly place 3,000 products on shelves.",
+    rate: "13.5%",
+    timing: "Late mid run",
+    group: "Milestone",
+    risk: "Medium",
+    note:
+      "Mixed temporary piles become expensive here. Reduce loose unknown products.",
+  },
+  {
+    name: "4,000 Stocked",
+    requirement: "Correctly place 4,000 products on shelves.",
+    rate: "9.5%",
+    timing: "Late cleanup",
+    group: "Milestone",
+    risk: "High",
+    note: "Use section rules and finder tools. Do not guess on edge-case products.",
+  },
+  {
+    name: "One More!",
+    requirement: "Correctly place 4,667 products on shelves. Just one more!",
+    rate: "8.6%",
+    timing: "Final item warning",
+    group: "Final",
+    risk: "High",
+    note:
+      "Slow down when this appears. One product remains before the full clear.",
+  },
+  {
+    name: "Complete",
+    requirement: "Correctly place all 4,668 products on shelves.",
+    rate: "8.5%",
+    timing: "Final 100%",
+    group: "Final",
+    risk: "Very High",
+    note:
+      "Use shelf feedback, Matchfinder, Shelf Finder, and section checks for the final product.",
+  },
+];
+
+export const riskBadgeClassMap = {
+  None: "rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700",
+  Low: "rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700",
+  Medium:
+    "rounded-full bg-yellow-100 px-2 py-0.5 text-xs font-medium text-yellow-700",
+  High: "rounded-full bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-700",
+  "Very High":
+    "rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700",
+};
+
+export const routeColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "Targets", label: "Targets" },
+  { key: "What I Do", label: "What I Do" },
+];
+
+export const routeRows = [
+  {
+    Stage: "Start",
+    Targets: "First Stocked, Music Duty, Do Not Throw",
+    "What I Do":
+      "Place the first item, change music once, then throw five products quickly in a clear aisle.",
+  },
+  {
+    Stage: "Early setup",
+    Targets: "100 Stocked, Too Heavy",
+    "What I Do":
+      "Clear easy categories, earn early money, and buy enough Extra Carry to reach a 10-product inventory.",
+  },
+  {
+    Stage: "First milestone",
+    Targets: "Lucky 777, 1,000 Stocked",
+    "What I Do":
+      "Use obvious section families first, then start leaning on upgrades once the store spreads out.",
+  },
+  {
+    Stage: "Mid run",
+    Targets: "2,000 and 3,000 Stocked",
+    "What I Do":
+      "Clean by section family instead of random pickup. This keeps the remaining products easier to read.",
+  },
+  {
+    Stage: "Late cleanup",
+    Targets: "4,000 Stocked, One More!, Complete",
+    "What I Do":
+      "Use Matchfinder, Shelf Finder, shelf feedback, and tricky placement checks before moving uncertain products.",
+  },
+];
+
+export const issueColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Most Likely Cause", label: "Most Likely Cause" },
+  { key: "What I Try", label: "What I Try" },
+];
+
+export const issueRows = [
+  {
+    Problem: "The Steam popup did not appear.",
+    "Most Likely Cause":
+      "Steam notifications, overlay settings, offline status, or a delayed achievement sync.",
+    "What I Try":
+      "I check the Steam achievement list before repeating the same condition.",
+  },
+  {
+    Problem: "Do Not Throw did not register.",
+    "Most Likely Cause":
+      "The throws were too slow, or I placed items instead of throwing them.",
+    "What I Try":
+      "I use an empty aisle, hold enough products, and throw five quickly without pausing.",
+  },
+  {
+    Problem: "Music Duty did not register.",
+    "Most Likely Cause":
+      "The music change did not confirm, or the popup was missed.",
+    "What I Try":
+      "I change music again, leave the computer, and check the Steam list.",
+  },
+  {
+    Problem: "Too Heavy did not register.",
+    "Most Likely Cause":
+      "The inventory was not actually at 10 products, or the achievement synced late.",
+    "What I Try":
+      "I wait until the inventory shows 10/10 or more, hold briefly, then check Steam.",
+  },
+  {
+    Problem: "A stocked milestone looks skipped.",
+    "Most Likely Cause":
+      "The popup was missed, or the count has not synced yet.",
+    "What I Try":
+      "I place a few more correct products, avoid moving random items, and check the achievement page.",
+  },
+];
+
+export const confusingColumns = [
+  { key: "Product Type", label: "Product Type" },
+  { key: "Why It Can Slow 100%", label: "Why It Can Slow 100%" },
+  { key: "Where I Check", label: "Where I Check" },
+];
+
+export const confusingRows = [
+  {
+    "Product Type": "Sugar / brown sugar",
+    "Why It Can Slow 100%":
+      "It looks like a simple pantry item, but sweet categories can overlap.",
+    "Where I Check":
+      "Breakfast / Sweets and Tea / Candies logic, then I follow shelf feedback.",
+  },
+  {
+    "Product Type": "Shampoo / toothpaste",
+    "Why It Can Slow 100%":
+      "The bottle shape makes it easy to confuse personal care with cleaning.",
+    "Where I Check":
+      "Toilet / Personal Care before general Cleaning / Housekeeping.",
+  },
+  {
+    "Product Type": "Wine / soda / alcohol",
+    "Why It Can Slow 100%":
+      "All are bottles, but the game separates Wine, Soft Drinks, and Alcohol.",
+    "Where I Check":
+      "The specific drink section, not just the nearest bottle shelf.",
+  },
+  {
+    "Product Type": "Sushi / scallops / ramen",
+    "Why It Can Slow 100%":
+      "Prepared food, frozen food, meat, bento, and ramen can look close at first.",
+    "Where I Check":
+      "Bento or Ramen logic before forcing Frozen or Meat.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To get every **Supermarket Chaos achievement**, I clear the quick actions early: place the first correct product, change the music once, and throw five products quickly for **Do Not Throw**. Then I set up **Extra Carry** for **Too Heavy** and let the rest of the list follow the long **4,668-product** cleanup route.
+
+The important milestones are **Lucky 777**, **4,000 Stocked**, **One More!**, and **Complete**. I do not treat 100% as an all-items database problem. I use section rules, finder skills, and shelf feedback so the final products do not turn into a random guessing loop.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 1, 2026. Achievement rates are a Steam snapshot from July 1, 2026 and can change as more players finish the 4,668-product route.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-4668-products-528-shelves.webp"
+    alt="Supermarket Chaos opening objective telling the player to put 4,668 items back onto the correct shelves"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The full achievement route is built around one huge task: put all 4,668 products back onto the correct shelves.
+  </figcaption>
+</figure>
+
+<h2 id="supermarket-chaos-achievements-guide">
+  Supermarket Chaos achievements guide
+</h2>
+
+Supermarket Chaos has **12 achievements** in the launch achievement list. The list is simple on paper, but the final achievements are rare because the game asks for a full-store cleanup, not a short challenge room.
+
+I split the route into three parts:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Quick actions:</strong> First Stocked, Music Duty, and Do Not Throw.
+  </li>
+  <li>
+    <strong>Inventory setup:</strong> Too Heavy.
+  </li>
+  <li>
+    <strong>Long progress milestones:</strong> 100, 777, 1,000, 2,000, 3,000, 4,000, 4,667, and 4,668 correctly placed products.
+  </li>
+</ul>
+
+The completion rates show where most players stop. In the July 1, 2026 Steam snapshot, **First Stocked** was at **100.0%**, while **Complete** was only **8.5%**. I put the rates directly into the checklist below so the tool works as both a route planner and a difficulty map.
+
+<h2 id="achievement-route-tool">
+  Supermarket Chaos achievement route tool
+</h2>
+
+Use this checklist while playing. It combines the achievement condition, rate, timing, and route note in one place so you do not need a second static achievement list.
+
+<div className="my-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+  <div className="border-b border-slate-200 p-5">
+    <h3 className="text-xl font-semibold text-slate-950">
+      Supermarket Chaos Achievement Checklist
+    </h3>
+
+    <div className="mt-2 text-sm leading-6 text-slate-600">
+      Track all 12 achievements, check the July 1, 2026 Steam rate snapshot, and focus on the blockers that matter for the 4,668-product clear.
+    </div>
+
+    <div className="mt-4 grid gap-3 text-sm md:grid-cols-4">
+      <div className="rounded-xl bg-slate-50 p-3">
+        <div className="text-slate-500">Total</div>
+        <div className="mt-1 font-semibold text-slate-950">
+          12 achievements
+        </div>
+      </div>
+
+      <div className="rounded-xl bg-slate-50 p-3">
+        <div className="text-slate-500">Rarest</div>
+        <div className="mt-1 font-semibold text-slate-950">
+          Complete — 8.5%
+        </div>
+      </div>
+
+      <div className="rounded-xl bg-slate-50 p-3">
+        <div className="text-slate-500">Final target</div>
+        <div className="mt-1 font-semibold text-slate-950">
+          4,668 products
+        </div>
+      </div>
+
+      <div className="rounded-xl bg-slate-50 p-3">
+        <div className="text-slate-500">Rate date</div>
+        <div className="mt-1 font-semibold text-slate-950">
+          July 1, 2026
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="hidden border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500 lg:grid lg:grid-cols-[44px_minmax(0,1fr)_minmax(0,1.25fr)_72px_minmax(0,0.8fr)_minmax(0,1.35fr)] lg:gap-4">
+    <div>Done</div>
+    <div>Achievement</div>
+    <div>Requirement</div>
+    <div>Rate</div>
+    <div>Timing</div>
+    <div>Route note</div>
+  </div>
+
+  <div className="divide-y divide-slate-100">
+    {achievementToolRows.map((item) => (
+      <div
+        key={item.name}
+        className="grid gap-3 p-4 text-sm lg:grid-cols-[44px_minmax(0,1fr)_minmax(0,1.25fr)_72px_minmax(0,0.8fr)_minmax(0,1.35fr)] lg:gap-4"
+      >
+        <div>
+          <input
+            type="checkbox"
+            className="h-4 w-4 rounded border-slate-300"
+            aria-label={`Mark ${item.name} complete`}
+          />
+        </div>
+
+        <div>
+          <div className="font-semibold text-slate-950">{item.name}</div>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+              {item.group}
+            </span>
+            <span className={riskBadgeClassMap[item.risk]}>
+              Risk: {item.risk}
+            </span>
+          </div>
+        </div>
+
+        <div className="text-slate-700">
+          <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 lg:hidden">
+            Requirement
+          </div>
+          {item.requirement}
+        </div>
+
+        <div className="font-semibold text-slate-900">
+          <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 lg:hidden">
+            Rate
+          </div>
+          {item.rate}
+        </div>
+
+        <div className="text-slate-700">
+          <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 lg:hidden">
+            Timing
+          </div>
+          {item.timing}
+        </div>
+
+        <div className="text-slate-700">
+          <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400 lg:hidden">
+            Route note
+          </div>
+          {item.note}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div className="border-t border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600">
+    Tip: finish Music Duty, Do Not Throw, and Too Heavy early, then treat the rest of the list as a long section-based cleanup route.
+  </div>
+</div>
+
+<h2 id="best-100-percent-route">
+  Best route for 100% achievements
+</h2>
+
+I use this order because it keeps the achievement route from fighting the main cleanup. Supermarket Chaos already asks me to sort thousands of products, so every achievement step should support that goal.
+
+<GuideTable
+  caption="Recommended Supermarket Chaos 100% achievement route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The route becomes much easier if I do the quick actions first, then focus on keeping the store readable. I do not want to reach 3,000 products with a floor full of mystery piles.
+
+<h2 id="how-long-100-percent-takes">
+  How long does 100% take?
+</h2>
+
+I would not treat Supermarket Chaos as a short 100% run.
+
+The cleanest checkpoint is **Lucky 777**. At that point, the counter shows **777 / 4,668** products placed, which is only about **16.6%** of the full product count. The same screen can still show dozens of shelves incomplete, so the run is nowhere near finished even when the first serious milestone appears.
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-lucky-777-progress.webp"
+    alt="Supermarket Chaos progress showing 777 out of 4668 products placed"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lucky 777 is only about 16.6% of the full 4,668-product route. I use it as the point where the run becomes a long cleanup plan.
+  </figcaption>
+</figure>
+
+For a first 100% clear, I would budget **several hours**, not one quick sitting. A rough first-clear expectation is **one long evening or multiple sessions**, especially if I am still learning confusing sections. The run gets faster once I know the store, buy good upgrades early, and stop guessing on tricky products.
+
+<h2 id="quick-action-achievements">
+  First Stocked, Music Duty, and Do Not Throw
+</h2>
+
+I finish the quick actions before the store becomes carefully organized.
+
+**First Stocked** is automatic once the first correct product lands on a shelf. **Music Duty** is the one I prefer to grab immediately, because the computer is easy to forget after I start carrying products across the store.
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-music-computer-achievement.webp"
+    alt="Supermarket Chaos computer prompt to change music for the Music Duty achievement"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I change the music once near the start, then leave the computer alone for the rest of the cleanup.
+  </figcaption>
+</figure>
+
+For **Do Not Throw**, I use a clear aisle and throw five products quickly. I do not do it near sorted shelves because the achievement is not worth creating a new mess. If the throw timing feels awkward on controller, I temporarily switch to keyboard and mouse for this one achievement, then return to my normal setup.
+
+<h2 id="too-heavy-achievement">
+  How I set up Too Heavy
+</h2>
+
+**Too Heavy** is the only achievement I actively build toward with upgrades. The requirement is holding **10 or more products at once**, so the clean setup is **Extra Carry**.
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-extra-carry-skills.webp"
+    alt="Supermarket Chaos Extra Carry skill screen showing the carry upgrade"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Extra Carry is the upgrade path that turns Too Heavy from an awkward task into a normal part of the route.
+  </figcaption>
+</figure>
+
+Once my inventory reaches **10/10**, I have the condition I need. I prefer using products I can place afterward so the achievement setup does not leave another mixed pile.
+
+<figure className="my-8">
+  <Image
+    src="/images/supermarket-chaos/supermarket-chaos-too-heavy-10-items.webp"
+    alt="Supermarket Chaos inventory showing 10 out of 10 held products for Too Heavy"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A 10/10 inventory is the clean check for Too Heavy. After this, I place the products instead of throwing them around.
+  </figcaption>
+</figure>
+
+<h2 id="known-achievement-issues">
+  What if an achievement does not pop?
+</h2>
+
+I do not assume every missing popup is a game bug. Steam achievement notifications can be easy to miss, and sometimes the visible popup is not the reliable proof. The first thing I check is the Steam achievement list itself.
+
+<GuideTable
+  caption="Achievement no-popup checks I use before repeating a task."
+  columns={issueColumns}
+  rows={issueRows}
+/>
+
+If an achievement still does not appear after the condition is clearly met, I try the safest fixes first:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>check that Steam is online,</li>
+  <li>check whether the Steam overlay or achievement notifications are disabled,</li>
+  <li>place one or two more correct products for milestone achievements,</li>
+  <li>repeat the quick action once in a clean area,</li>
+  <li>restart the game before doing anything destructive with the save.</li>
+</ul>
+
+I do not recommend deleting a save just because a popup did not appear. For a long 4,668-product run, that is the last option, not the first one.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="stocked-milestones">
+  Stocked milestones after Lucky 777
+</h2>
+
+After **Lucky 777**, I stop thinking about single achievements and start thinking about cleanup quality.
+
+The later stocked achievements are not separate puzzles. They are proof that the route is working:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>1,000 Stocked:</strong> upgrades should start helping more than raw walking.
+  </li>
+  <li>
+    <strong>2,000 Stocked:</strong> section routing matters more than picking random products.
+  </li>
+  <li>
+    <strong>3,000 Stocked:</strong> mixed piles become a real problem if I leave them unchecked.
+  </li>
+  <li>
+    <strong>4,000 Stocked:</strong> I move into final cleanup mode and stop guessing on edge cases.
+  </li>
+</ul>
+
+If the run feels slow here, I use the <Link href="/supermarket-chaos/best-upgrades-skills/">best upgrades and skills guide</Link>. Extra Carry, Matchfinder, Shelf Finder, and Matchfinder Plus matter more as the store becomes cleaner but the remaining products become harder to spot.
+
+<h2 id="one-more-complete">
+  One More! and Complete
+</h2>
+
+The final two achievements are the real 100% finish.
+
+**One More!** appears at **4,667** correctly placed products. I treat it as a warning, not a celebration. There is only one product left, so random movement is dangerous.
+
+For **Complete**, I narrow the final problem in this order:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Check incomplete shelf families.</li>
+  <li>Review the temporary piles I made earlier.</li>
+  <li>Check bottle categories separately: soda, wine, alcohol, shampoo, and cleaners.</li>
+  <li>Check food categories separately: bento, ramen, meat, frozen, and sweets.</li>
+  <li>Use finder skills only after the category makes sense.</li>
+</ol>
+
+This is why I do not recommend solving the game with a giant all-items list. The last product is easier to find when the store is still readable.
+
+<h2 id="confusing-items-that-block-100-percent">
+  Confusing items that can block 100%
+</h2>
+
+Most achievement guides stop at the requirements. That is not enough for Supermarket Chaos, because the rare achievements are blocked by the same thing: misplaced products.
+
+Here are the product families I watch when a run slows down:
+
+<GuideTable
+  caption="Confusing product families that can slow the 100% route."
+  columns={confusingColumns}
+  rows={confusingRows}
+/>
+
+For a full placement table, use the <Link href="/supermarket-chaos/section-map-item-locations/">section map and tricky placements guide</Link>. I only keep a few examples here because this page should stay focused on achievements.
+
+<h2 id="common-achievement-mistakes">
+  Common achievement mistakes
+</h2>
+
+These are the mistakes that actually cost time:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Waiting too long on Music Duty:</strong> I finish it before I start serious sorting.
+  </li>
+  <li>
+    <strong>Doing Do Not Throw in a crowded aisle:</strong> I use an empty area so I can recover the products quickly.
+  </li>
+  <li>
+    <strong>Trying Too Heavy before carry upgrades:</strong> I wait until 10 held products is actually possible.
+  </li>
+  <li>
+    <strong>Ignoring confusing sections:</strong> wrong sugar, shampoo, wine, or bento placement can slow the final 100%.
+  </li>
+  <li>
+    <strong>Rushing after One More!:</strong> at 4,667 products, I slow down and find the final product carefully.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Supermarket Chaos achievements FAQ
+</h2>
+
+### How many achievements are in Supermarket Chaos?
+
+Supermarket Chaos has **12 achievements** in the launch achievement list.
+
+### What are the rarest achievements?
+
+As of the July 1, 2026 Steam snapshot, the rarest achievements were **Complete** at **8.5%** and **One More!** at **8.6%**. These rates can change as more players finish the game.
+
+### How long does 100% take?
+
+I would plan for several hours, not a quick run. The **777 / 4,668** checkpoint is only about **16.6%** of the full product count, so a first clear is better treated as a long-session or multi-session cleanup.
+
+### What should I do if an achievement does not pop?
+
+Check the Steam achievement list first. If it is still locked, repeat the condition once, make sure Steam is online, and restart the game before doing anything risky with the save.
+
+### What upgrade helps with Too Heavy?
+
+**Extra Carry**. Too Heavy requires holding 10 or more products, so carry capacity is the setup.
+
+### Do I need an all-items list for Complete?
+
+No. A full all-items database is overkill for the achievement route. I get better results by using section rules, keeping the store readable, and relying on finder skills for the final cleanup.
+
+### Which guide should I use next?
+
+Use the <Link href="/supermarket-chaos/best-upgrades-skills/">best upgrades guide</Link> if the run feels too slow. Use the <Link href="/supermarket-chaos/section-map-item-locations/">section map and tricky placements guide</Link> if products keep going to the wrong shelf.

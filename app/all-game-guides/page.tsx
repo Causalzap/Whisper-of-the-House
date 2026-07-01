@@ -132,6 +132,8 @@ const guideGroups: GuideGroup[] = [
     description:
       "Current and recently expanded guide hubs with walkthroughs, systems, achievements, endings, builds, or collectibles.",
     guides: [
+      { title: "Supermarket Chaos", href: "/supermarket-chaos" },
+
       { title: "Frostpunk 2: Breach of Trust", href: "/frostpunk-2-breach-of-trust" },
       { title: "Deltarune", href: "/deltarune" },
       { title: "The Last Caretaker", href: "/the-last-caretaker" },
@@ -150,8 +152,6 @@ const guideGroups: GuideGroup[] = [
       { title: "SpaceCraft", href: "/spacecraft" },
       { title: "Tales of Seikyu", href: "/tales-of-seikyu" },
       { title: "33 Immortals", href: "/33-immortals" },
-      { title: "Realm of Ink", href: "/realm-of-ink" },
-      { title: "Subnautica 2", href: "/subnautica-2" },
     ],
   },
   {

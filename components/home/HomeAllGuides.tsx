@@ -15,6 +15,14 @@ type ArchiveGuide = {
 
 const featuredGuideHubs: FeaturedGuideHub[] = [
   {
+    title: "Supermarket Chaos",
+    href: "/supermarket-chaos",
+    category: "Sorting & Section Routes",
+    label: "Active Hub",
+    description:
+      "4,668-product cleanup, 16-section routing, beginner route, achievements, Extra Carry, Match Finder, Shelf Finder, and tricky item locations.",
+  },
+  {
     title: "The Last Caretaker",
     href: "/the-last-caretaker",
     category: "Survival Systems",
@@ -47,14 +55,6 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
       "Badtide defense, drought planning, dams, levees, floodgates, irrigation, reservoirs, and automation logic guides.",
   },
   {
-    title: "Thank You For Your Application",
-    href: "/thank-you-for-your-application",
-    category: "Endings & Routes",
-    label: "Route Locks",
-    description:
-      "Beginner tips, final evaluation answers, route locks, ratings, job outcomes, endings, and achievement cleanup.",
-  },
-  {
     title: "Steam Next Fest June 2026",
     href: "/steam-next-fest",
     category: "Demo Coverage",
@@ -65,6 +65,8 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  { title: "Supermarket Chaos", href: "/supermarket-chaos" },
+  { title: "Frostpunk 2: Breach of Trust", href: "/frostpunk-2-breach-of-trust" },
   { title: "The Last Caretaker", href: "/the-last-caretaker" },
   { title: "Darktide Skitarii", href: "/darktide" },
   { title: "Moldwasher", href: "/moldwasher" },
@@ -73,9 +75,7 @@ const previewGuides: ArchiveGuide[] = [
   { title: "Steam Next Fest June 2026", href: "/steam-next-fest" },
   { title: "SpaceCraft", href: "/spacecraft" },
   { title: "Tales of Seikyu", href: "/tales-of-seikyu" },
-  { title: "33 Immortals", href: "/33-immortals" },
   { title: "The Adventures of Elliot", href: "/the-adventures-of-elliot" },
-  { title: "Realm of Ink", href: "/realm-of-ink" },
   { title: "Subnautica 2", href: "/subnautica-2" },
   { title: "Whisper of the House", href: "/guides" },
   { title: "Starminer", href: "/starminer" },

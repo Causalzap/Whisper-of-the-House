@@ -132,6 +132,139 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Supermarket Chaos",
+    "game": "Supermarket Chaos",
+    "href": "/supermarket-chaos",
+    "slug": "supermarket-chaos",
+    "kind": "game",
+    "status": "active",
+    "accent": "blue",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Section Routes",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active Supermarket Chaos guide hub for the 4,668-product cleanup, 16-section routing, achievements, upgrades, tricky item locations, and shelf feedback.",
+    "coverage": [
+      "4,668-product cleanup route",
+      "16-section item routing",
+      "Achievements and 100% checklist",
+      "Extra Carry and finder upgrades"
+    ],
+    "image": "/images/home/supermarket-chaos-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 1,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Supermarket Chaos Guide Hub",
+        "href": "/supermarket-chaos",
+        "type": "Spotlight Coverage",
+        "description": "Start here for Supermarket Chaos route planning, beginner help, achievements, section map, item locations, upgrades, 4,668 products, and 16 sections.",
+        "image": "/images/home/supermarket-chaos-hub.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "spotlightMeta": "Beginner route, achievements, section map, upgrades, and 4,668 products"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Supermarket Chaos Beginner Guide",
+        "href": "/supermarket-chaos/beginner-guide",
+        "type": "Beginner Guide",
+        "description": "Start Supermarket Chaos with the first-hour route, section signs, controls, shelf feedback, Extra Carry timing, temporary piles, and beginner mistakes.",
+        "date": "Updated recently",
+        "image": "/images/home/supermarket-chaos-beginner-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 1,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "First-hour route, controls, shelf feedback, Extra Carry, and mistakes"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Supermarket Chaos Achievements Guide",
+        "href": "/supermarket-chaos/achievements-guide",
+        "type": "Achievements",
+        "description": "Unlock all 12 Supermarket Chaos achievements with the 100% checklist, Too Heavy, Lucky 777, One More, Complete, no-popup checks, and 4,668-product route.",
+        "date": "Updated recently",
+        "image": "/images/home/supermarket-chaos-achievements-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 2,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "12 achievements, Too Heavy, Lucky 777, One More, Complete, and 100%"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Supermarket Chaos Best Upgrades & Skills",
+        "href": "/supermarket-chaos/best-upgrades-skills",
+        "type": "Guide",
+        "description": "Plan the best Supermarket Chaos upgrades with Extra Carry, Match Finder, Shelf Finder, Match Finder+, current costs, level caps, and cleanup efficiency.",
+        "date": "Updated recently",
+        "image": "/images/home/supermarket-chaos-best-upgrades-skills.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestOrder": 3,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "Extra Carry, Match Finder, Shelf Finder, Match Finder+, costs, and level caps"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "Supermarket Chaos Section Map & Item Locations",
+        "href": "/supermarket-chaos/section-map-item-locations",
+        "type": "Guide",
+        "description": "Find Supermarket Chaos item locations with the 16-section map, Tea/Candies, Breakfast/Sweets, Pasta/Condiments, Bento, Ramen, iT, Cleaning, and shelf feedback.",
+        "date": "Updated recently",
+        "image": "/images/home/supermarket-chaos-section-map-item-locations.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestOrder": 4,
+          "spotlightFeature": true,
+          "spotlightOrder": 4,
+          "spotlightMeta": "16 sections, Tea/Candies, Breakfast/Sweets, Pasta/Condiments, Bento, Ramen, and tricky items"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      }
+    ]
+  },
+  {
     "title": "Frostpunk 2: Breach of Trust",
     "game": "Frostpunk 2: Breach of Trust",
     "href": "/frostpunk-2-breach-of-trust",
@@ -263,7 +396,7 @@ export const guideClusters = [
     }
     }
     ]
-    },
+  },
     
   {
     "title": "DELTARUNE",
