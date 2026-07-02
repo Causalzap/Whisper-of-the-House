@@ -15,9 +15,9 @@ const imageUrls = [
 ];
 
 export const metadata: Metadata = {
-title: "DELTARUNE Chapter 5 Weird Route & Side B Guide",
+title: "DELTARUNE Chapter 5 Weird Route: Side B & Save File",
 description:
-"Start Chapter 5 Weird Route from Chapter 4 state, get Bread from Sans, handle lake Proceed timer, 70 prompts, Aborted route, Shattered Rose and Side B.",
+"Follow the DELTARUNE Chapter 5 Weird Route with the Side B save-file requirement, Sans Bread step, lake Proceed timer, aborted route, Shattered Rose, and Thorn Ring / Twisted Sword notes.",
 alternates: {
 canonical: pageUrl,
 },
@@ -258,6 +258,10 @@ id: "hard-requirement",
 label: "Hard requirement",
 },
 {
+    id: "permanent-save-file",
+    label: "Permanent save file?",
+  },
+{
 id: "route-map",
 label: "Route map",
 },
@@ -294,16 +298,16 @@ id: "aborted-route",
 label: "Aborted route",
 },
 {
+    id: "thorn-ring-twisted-sword",
+    label: "Thorn Ring / Twisted Sword",
+  },
+{
 id: "how-to-avoid-abort",
 label: "Avoid aborting",
 },
 {
 id: "when-to-turn-back",
 label: "When to turn back",
-},
-{
-id: "file-management",
-label: "Save files",
 },
 {
 id: "normal-vs-weird",
