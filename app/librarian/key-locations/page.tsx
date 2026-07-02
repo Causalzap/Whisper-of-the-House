@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/librarian/key-locations`;
 
 export const metadata: Metadata = {
-  title: "Librarian Key Locations Guide - All Keys, Chests & Rewards",
+  title: "Librarian Tidy Up Keys: All 4 Key Locations & Chest Rewards",
   description:
-    "Find every key in Librarian: Tidy Up the Arcane Library, including Crimson, Golden, Emerald and Azure keys, chest rewards and best pickup route.",
+    "Find all 4 keys in Librarian: Tidy Up the Arcane Library, with screenshots for Crimson Octagon, Golden Diamond, Emerald Club, Azure Star, and every chest reward.",
   alternates: {
     canonical: pageUrl,
   },
@@ -280,7 +280,7 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Librarian Key Locations and Chest Rewards"
+          title="Librarian: Tidy Up the Arcane Library Key Locations and Chest Rewards"
           description="Find every key in Librarian: Tidy Up the Arcane Library, including the Crimson Octagon, Golden Diamond, Emerald Club, and Azure Star keys, plus the Jump, Sprint / Run, and Carry Capacity rewards."
           gameTitle="Librarian: Tidy Up the Arcane Library!"
           gameHref="/librarian"

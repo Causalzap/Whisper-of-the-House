@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/librarian/achievements`;
 
 export const metadata: Metadata = {
-  title: "Librarian Achievements Guide - All Endings, Routes & Hard Achievements",
+  title: "Librarian Tidy Up Achievements: 100% Route & All 12",
   description:
-    "100% achievement guide for Librarian: Tidy Up the Arcane Library. How to unlock Anti-Magic Master, Efficiency Librarian, You Are Fired & all others!",
+  "Unlock all 12 Librarian Tidy Up achievements with the best 100% route for Efficiency Librarian, Anti-Magic Master, You Are Fired, and Overtime Avoider.",  
   alternates: {
     canonical: pageUrl,
   },
@@ -51,9 +51,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Librarian: Tidy Up the Arcane Library Achievements Guide — All 12 Achievements",
+        "Librarian: Tidy Up the Arcane Library Achievements Guide and 100% Route",
       description:
-        "This guide explains how to unlock all 12 achievements in Librarian: Tidy Up the Arcane Library, including The Grand Librarian, Efficiency Librarian, Anti-Magic Master, You Are Fired, Overtime Avoider, magic achievements, and the recommended 100% route.",
+        "Unlock all 12 achievements in Librarian: Tidy Up the Arcane Library with a practical 100% route, separate Efficiency Librarian and Anti-Magic Master runs, You Are Fired setup, and Overtime Avoider Special Stage trigger.",
       image: [
         `${siteUrl}/images/librarian/librarian-achievements-overview.webp`,
         `${siteUrl}/images/librarian/librarian-400-rows-complete.webp`,
@@ -64,7 +64,7 @@ const jsonLd = {
       ],
       inLanguage: "en",
       datePublished: "2026-05-05",
-      dateModified: "2026-05-05",
+      dateModified: "2026-07-02",
       about: [
         {
           "@type": "VideoGame",
@@ -73,10 +73,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Librarian: Tidy Up the Arcane Library achievements",
-        },
-        {
-          "@type": "Thing",
-          name: "Librarian: Tidy Up the Arcane Library endings",
         },
         {
           "@type": "Thing",
@@ -308,7 +304,7 @@ export default function Page() {
           gameHref="/librarian"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 5, 2026"
+          updatedAt="July 2, 2026"
           toc={[
             {
               id: "all-achievements",
@@ -317,6 +313,10 @@ export default function Page() {
             {
               id: "recommended-route",
               label: "100% route",
+            },
+            {
+              id: "combine-achievements",
+              label: "Can you combine achievements?",
             },
             {
               id: "normal-magic-run",
@@ -343,8 +343,8 @@ export default function Page() {
               label: "Hardest achievements",
             },
             {
-              id: "normal-ending",
-              label: "Normal ending",
+              id: "completion-reward",
+              label: "Completion reward",
             },
             {
               id: "common-mistakes",

@@ -8,9 +8,9 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/librarian`;
 
 export const metadata: Metadata = {
-  title: "Librarian: Tidy Up the Arcane Library Guide, Keys & Abilities",
+  title: "Librarian Tidy Up Guide: Keys, Books, Abilities & 100%",
   description:
-    "A complete Librarian: Tidy Up the Arcane Library guide hub covering key locations, chest unlocks, best abilities, shelf glow, book sorting, achievements, and common fixes.",
+    "Complete Librarian: Tidy Up the Arcane Library guide for key locations, book sorting, best abilities, shelf glow fixes, achievements, and first-run routing.",
   alternates: {
     canonical: pageUrl,
   },
@@ -45,9 +45,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Librarian: Tidy Up the Arcane Library Complete Guide — Keys, Abilities, Shelf Glow, Sorting, Achievements, and Fixes",
+        "Librarian: Tidy Up the Arcane Library Guide Hub",
       description:
-        "This Librarian: Tidy Up the Arcane Library guide explains how to sort books, complete rows, unlock abilities, find all keys, open chests, understand blue shelf indicators, plan achievements, and troubleshoot common missing-book issues.",
+        "This guide helps players route Librarian: Tidy Up the Arcane Library with key upgrades, book sorting basics, best abilities, shelf indicators, achievements, first-run planning, and troubleshooting.",
       image: [
         `${siteUrl}/images/librarian/librarian-library-overview.webp`,
         `${siteUrl}/images/librarian/librarian-key-chests.webp`,
@@ -57,7 +57,7 @@ const jsonLd = {
       ],
       inLanguage: "en",
       datePublished: "2026-05-05",
-      dateModified: "2026-05-05",
+      dateModified: "2026-07-02",
       about: [
         {
           "@type": "VideoGame",
@@ -331,13 +331,13 @@ export default function Page() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GuideArticlePage
-          title="Librarian: Tidy Up the Arcane Library Complete Guide — Keys, Abilities, Shelf Glow, Sorting, Achievements, and Fixes"
-          description="Use this Librarian: Tidy Up the Arcane Library guide hub to find all key locations, unlock chest rewards, choose the best abilities, understand blue shelf indicators, sort books faster, plan achievements, and fix common missing-book issues."
+          title="Librarian: Tidy Up the Arcane Library Guide Hub"
+          description="Start here for the first-run route, key upgrades, book sorting basics, best abilities, shelf glow fixes, achievements, and troubleshooting in Librarian: Tidy Up the Arcane Library."
           gameTitle="Librarian: Tidy Up the Arcane Library!"
           gameHref="/librarian"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="May 5, 2026"
+          updatedAt="July 2, 2026"
           toc={[
             {
               id: "quick-facts",
