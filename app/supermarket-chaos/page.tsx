@@ -15,11 +15,11 @@ const imageUrls = [
 const toc = [
   {
     id: "supermarket-chaos-guide-hub",
-    label: "Guide hub",
+    label: "Start here",
   },
   {
     id: "what-are-you-stuck-on",
-    label: "Stuck points",
+    label: "Choose guide",
   },
   {
     id: "sections-not-all-items",
@@ -42,33 +42,33 @@ const toc = [
 const relatedLinks = [
   {
     href: "/supermarket-chaos/beginner-guide/",
-    label: "Supermarket Chaos Beginner Guide",
-  },
-  {
-    href: "/supermarket-chaos/achievements-guide/",
-    label: "Supermarket Chaos Achievements Guide",
-  },
-  {
-    href: "/supermarket-chaos/best-upgrades-skills/",
-    label: "Best Upgrades and Skills Guide",
+    label: "Beginner Route and First Upgrades",
   },
   {
     href: "/supermarket-chaos/section-map-item-locations/",
-    label: "Section Map and Tricky Item Locations",
+    label: "16-Section Map and Tricky Item Locations",
+  },
+  {
+    href: "/supermarket-chaos/best-upgrades-skills/",
+    label: "Best Upgrades and Skills Order",
+  },
+  {
+    href: "/supermarket-chaos/achievements-guide/",
+    label: "100% Achievements Guide",
   },
 ];
 
 export const metadata: Metadata = {
-  title: "Supermarket Chaos Guide Hub, Routes & 16 Sections",
+  title: "Supermarket Chaos Guide: Section Map, Upgrades & 100%",
   description:
-    "Start Supermarket Chaos with the right guide: beginner route, 100% achievements, section map, upgrades, 4,668 products and 16 sections.",
+    "Start Supermarket Chaos with a section-first route for 4,668 products, 16 store sections, best upgrades, item locations, achievements, and stuck fixes.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "Supermarket Chaos Guide Hub, Routes and 16 Sections",
+    title: "Supermarket Chaos Guide: Section Map, Upgrades and 100%",
     description:
-      "Choose the right Supermarket Chaos guide for the beginner route, achievements, section map, item locations, upgrades, 4,668 products, and 16 sections.",
+      "Start Supermarket Chaos with a section-first route for 4,668 products, 16 store sections, best upgrades, item locations, achievements, and stuck fixes.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -83,9 +83,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Supermarket Chaos Guide Hub, Routes & 16 Sections",
+    title: "Supermarket Chaos Guide: Section Map, Upgrades & 100%",
     description:
-      "Pick the right Supermarket Chaos guide for beginners, 100% achievements, section map, upgrades, and the 4,668-product cleanup.",
+      "Use a section-first route for 4,668 products, 16 sections, best upgrades, achievements, item locations, and stuck fixes.",
     images: [imageUrls[0]],
   },
 };
@@ -119,18 +119,22 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Supermarket Chaos Guide Hub: Beginner Route, Achievements, Section Map, Item Locations, Upgrades, 4,668 Products, and 16 Sections",
+        "Supermarket Chaos Guide: Section Map, Upgrades, Achievements, and 4,668 Products",
       description:
-        "A Supermarket Chaos guide hub that helps players choose the correct deeper guide based on their current stuck point. The hub routes new players to the beginner guide, achievement hunters to the 100% achievements guide, wrong-category product problems to the section map and item locations guide, and slow cleanup problems to the best upgrades and skills guide. It explains the core route idea for the 4,668-product cleanup across 16 sections without repeating the full first-hour route, achievement checklist, upgrade order, or item-location map.",
+        "A Supermarket Chaos guide hub for players sorting 4,668 products across 16 sections. It routes beginners to the first-run guide, stuck players to the section map and tricky item locations, slow cleanup problems to the best upgrades guide, and 100% players to the achievements route.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-07-01",
-      dateModified: "2026-07-01",
+      dateModified: "2026-07-02",
       articleSection: "Guides",
       about: [
         {
           "@type": "VideoGame",
           name: "Supermarket Chaos",
+        },
+        {
+          "@type": "Thing",
+          name: "Supermarket Chaos guide",
         },
         {
           "@type": "Thing",
@@ -154,7 +158,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Supermarket Chaos upgrades",
+        },
+        {
+          "@type": "Thing",
           name: "Supermarket Chaos best upgrades",
+        },
+        {
+          "@type": "Thing",
+          name: "Supermarket Chaos skills",
+        },
+        {
+          "@type": "Thing",
+          name: "Supermarket Chaos stuck fixes",
+        },
+        {
+          "@type": "Thing",
+          name: "Supermarket Chaos product placement",
         },
         {
           "@type": "Thing",
@@ -281,13 +301,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Choose the Right Supermarket Chaos Guide"
-          description="Use this hub to pick the right route: beginner guide, 100% achievements, section map, item locations, or best upgrades for the 4,668-product cleanup."
+          title="Supermarket Chaos Guide Hub: Section Map, Upgrades, Achievements"
+          description="Start here for the section-first route, 4,668-product cleanup, 16-section map, best upgrades, achievements, tricky item locations, and stuck fixes."
           gameTitle="Supermarket Chaos"
           gameHref="/supermarket-chaos/"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="July 1, 2026"
+          updatedAt="July 2, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
