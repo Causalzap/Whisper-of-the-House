@@ -132,6 +132,160 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "The Binding of Isaac: Rebirth",
+    "game": "The Binding of Isaac: Rebirth",
+    "href": "/the-binding-of-isaac-rebirth",
+    "slug": "the-binding-of-isaac-rebirth",
+    "kind": "game",
+    "status": "active",
+    "accent": "purple",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Route Map",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active The Binding of Isaac: Rebirth guide hub for DLC buying, first runs, beginner characters, unlock order, Repentance routes, Tainted characters, and Home.",
+    "coverage": [
+      "DLC buying and Complete Bundle route",
+      "First ten runs and beginner decisions",
+      "Best beginner characters and unlocks",
+      "Unlock order, Tainted characters, and Home route"
+    ],
+    "image": "/images/home/the-binding-of-isaac-rebirth-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 1,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "The Binding of Isaac: Rebirth Guide Hub",
+        "href": "/the-binding-of-isaac-rebirth",
+        "type": "Spotlight Coverage",
+        "description": "Start here for The Binding of Isaac: Rebirth route planning, DLC buying, beginner help, characters, unlock order, Repentance gates, Tainted characters, and Home.",
+        "image": "/images/home/the-binding-of-isaac-rebirth-hub.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "spotlightMeta": "DLC buying, first runs, characters, unlock order, Repentance, Tainted characters, and Home"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "The Binding of Isaac DLC Buying Guide",
+        "href": "/the-binding-of-isaac-rebirth/dlc-buying-guide",
+        "type": "Guide",
+        "description": "Choose Rebirth DLC with Complete Bundle price anchors, Afterbirth+, Repentance, Repentance+, sale advice, Steam bundle pricing, and when to wait.",
+        "date": "Updated recently",
+        "image": "/images/home/the-binding-of-isaac-rebirth-dlc-buying-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 1,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "Complete Bundle, Afterbirth+, Repentance, Repentance+, sale price, and when to wait"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "The Binding of Isaac Rebirth Beginner Guide",
+        "href": "/the-binding-of-isaac-rebirth/beginner-guide",
+        "type": "Beginner Guide",
+        "description": "Start Isaac with item rooms, shops, bombs, tinted rocks, Secret Rooms, D6, Devil Deals, Mom's Foot, first ten runs, and beginner mistakes.",
+        "date": "Updated recently",
+        "image": "/images/home/the-binding-of-isaac-rebirth-beginner-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 2,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "First ten runs, item rooms, shops, bombs, tinted rocks, D6, Devil Deals, and Mom"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "The Binding of Isaac Best Beginner Characters",
+        "href": "/the-binding-of-isaac-rebirth/best-beginner-characters",
+        "type": "Guide",
+        "description": "Choose Isaac, Magdalene, Lazarus, Azazel, Cain and delayed characters with unlock conditions, starting setups, Normal/Hard advice, and problem-based picks.",
+        "date": "Updated recently",
+        "image": "/images/home/the-binding-of-isaac-rebirth-best-beginner-characters.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestOrder": 3,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "Isaac, Magdalene, Lazarus, Azazel, Cain, unlocks, starting setups, and Normal/Hard"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "The Binding of Isaac Unlock Order Guide",
+        "href": "/the-binding-of-isaac-rebirth/unlock-order",
+        "type": "Guide",
+        "description": "Plan Isaac Rebirth unlocks with challenges, Donation Machine 600/999, Greed milestones, Boss Rush, Hush, Delirium, Repentance, and Soul Stones.",
+        "date": "Updated recently",
+        "image": "/images/home/the-binding-of-isaac-rebirth-unlock-order.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestOrder": 4,
+          "spotlightFeature": true,
+          "spotlightOrder": 4,
+          "spotlightMeta": "Challenges, Donation Machine, Greed milestones, Boss Rush, Hush, Delirium, and Soul Stones"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      },
+      {
+        "title": "The Binding of Isaac Tainted Characters Unlock Guide",
+        "href": "/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide",
+        "type": "Guide",
+        "description": "Unlock Tainted characters with Hush x3, Mother, Strange Door, The Fool, Dad's Note, Red Key, Cracked Key, Home, Dogma, and Beast routing.",
+        "date": "Updated recently",
+        "image": "/images/home/the-binding-of-isaac-rebirth-tainted-characters-unlock-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestOrder": 5,
+          "spotlightFeature": true,
+          "spotlightOrder": 5,
+          "spotlightMeta": "Hush x3, Mother, Strange Door, The Fool, Dad's Note, Red Key, Cracked Key, and Home"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 6
+        }
+      }
+    ]
+  },
+  {
     "title": "Supermarket Chaos",
     "game": "Supermarket Chaos",
     "href": "/supermarket-chaos",

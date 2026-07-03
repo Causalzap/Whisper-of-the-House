@@ -15,6 +15,14 @@ type ArchiveGuide = {
 
 const featuredGuideHubs: FeaturedGuideHub[] = [
   {
+    title: "The Binding of Isaac: Rebirth",
+    href: "/the-binding-of-isaac-rebirth",
+    category: "Roguelike Unlock Routes",
+    label: "Active Hub",
+    description:
+      "DLC buying, first ten runs, beginner characters, unlock order, Repentance routes, Tainted characters, Hush, Mother, Home, and Beast planning.",
+  },
+  {
     title: "Supermarket Chaos",
     href: "/supermarket-chaos",
     category: "Sorting & Section Routes",

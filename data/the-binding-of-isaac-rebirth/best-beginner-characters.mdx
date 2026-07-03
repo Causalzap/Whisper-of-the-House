@@ -1,0 +1,503 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const characterColumns = [
+  { key: "Character", label: "Character" },
+  { key: "Unlock And Starting Setup", label: "Unlock And Starting Setup" },
+  { key: "Best Beginner Use", label: "Best Beginner Use" },
+  { key: "When I Delay Them", label: "When I Delay Them" },
+];
+
+export const characterRows = [
+  {
+    Character: "Isaac",
+    "Unlock And Starting Setup":
+      "Unlocked by default. Starts with 3 red heart containers and 1 bomb. Later starts with D6 once D6 is unlocked.",
+    "Best Beginner Use":
+      "Best first teacher. He shows the normal item room, shop, boss, key, bomb, and health loop without hiding mistakes.",
+    "When I Delay Them":
+      "I do not delay Isaac. I only switch away once I can explain why my early runs are failing.",
+  },
+  {
+    Character: "Magdalene",
+    "Unlock And Starting Setup":
+      "Unlock by having 7 or more red heart containers at one time. Starts with 4 red heart containers and Yum Heart.",
+    "Best Beginner Use":
+      "Best safety pick when I keep dying because of health mistakes. More red health gives me more time to learn rooms.",
+    "When I Delay Them":
+      "I delay her if my main problem is speed, damage, or learning normal Isaac movement.",
+  },
+  {
+    Character: "Lazarus",
+    "Unlock And Starting Setup":
+      "Unlock by having 4 or more Soul Hearts or Black Hearts at one time in one run. Starts with 3 red heart containers and a revive plan.",
+    "Best Beginner Use":
+      "Best forgiving normal-style pick after I understand the first floors. One bad mistake does not instantly end the run.",
+    "When I Delay Them":
+      "I delay him if I am still using the revive as permission to play carelessly.",
+  },
+  {
+    Character: "Azazel",
+    "Unlock And Starting Setup":
+      "Unlock by making 3 Devil Room deals in one run. Starts with 3 Black Hearts, The Fool, flight, and short-ranged Brimstone.",
+    "Best Beginner Use":
+      "Best early clear character. Flight and burst damage make bosses, pits, and many room layouts much easier.",
+    "When I Delay Them":
+      "I delay him if I am trying to learn normal tear range, ground movement, and weak-start routing.",
+  },
+  {
+    Character: "Cain",
+    "Unlock And Starting Setup":
+      "Unlock by holding 55 coins at one time. Starts with 2 red heart containers, 1 key, and Lucky Foot.",
+    "Best Beginner Use":
+      "Best clean step after Isaac when I understand pickups, shops, and pills better.",
+    "When I Delay Them":
+      "I delay him if I still need Magdalene's health buffer or Lazarus's revive safety.",
+  },
+  {
+    Character: "Samson",
+    "Unlock And Starting Setup":
+      "Unlock by completing 2 floors in a row without taking damage. Starts with 3 red heart containers and Bloody Lust.",
+    "Best Beginner Use":
+      "Useful after I can avoid early damage and want a character that can turn damage taken into floor damage.",
+    "When I Delay Them":
+      "I delay him if I am still getting hit constantly, because I do not want to learn by taking damage on purpose.",
+  },
+  {
+    Character: "Judas",
+    "Unlock And Starting Setup":
+      "Unlock by defeating Satan. Starts with 1 red heart container, 3 coins, and The Book of Belial.",
+    "Best Beginner Use":
+      "Strong damage-focused character once I can dodge consistently and survive low-health starts.",
+    "When I Delay Them":
+      "I delay him as a beginner because 1 red heart is harsh when I am still learning patterns.",
+  },
+  {
+    Character: "Eve",
+    "Unlock And Starting Setup":
+      "Unlock by not picking up any heart pickups for 2 floors in a row. Starts with 2 red heart containers, Whore of Babylon, and Dead Bird.",
+    "Best Beginner Use":
+      "Good later when I understand low-health play, soul-heart protection, and risk control.",
+    "When I Delay Them":
+      "I delay her until I can manage red hearts and soul hearts without panicking.",
+  },
+  {
+    Character: "Eden",
+    "Unlock And Starting Setup":
+      "Unlock after completing Womb for the first time. Eden runs use Eden Tokens and start with random stats and items.",
+    "Best Beginner Use":
+      "Good for variety after I already understand normal run structure.",
+    "When I Delay Them":
+      "I delay Eden as a teacher because randomness makes it hard to learn one stable route.",
+  },
+  {
+    Character: "Lilith",
+    "Unlock And Starting Setup":
+      "Unlock by completing Greed Mode with Azazel. Starts with 1 red heart container, 2 Black Hearts, Box of Friends, Incubus, and Cambion Conception.",
+    "Best Beginner Use":
+      "Strong later when I understand familiar-based damage and active item timing.",
+    "When I Delay Them":
+      "I delay her early because she does not shoot normally and teaches a very different rhythm.",
+  },
+];
+
+export const problemColumns = [
+  { key: "My Problem", label: "My Problem" },
+  { key: "Character I Use", label: "Character I Use" },
+  { key: "If They Are Locked", label: "If They Are Locked" },
+  { key: "Reason", label: "Reason" },
+];
+
+export const problemRows = [
+  {
+    "My Problem": "I am still learning rooms, keys, bombs, shops, and bosses.",
+    "Character I Use": "Isaac",
+    "If They Are Locked": "Already available",
+    Reason:
+      "Isaac keeps the route simple and teaches the base game without a special safety net.",
+  },
+  {
+    "My Problem": "I die because I run out of health.",
+    "Character I Use": "Magdalene or Lazarus",
+    "If They Are Locked":
+      "Work toward 7 red heart containers for Magdalene or 4 Soul/Black Hearts for Lazarus.",
+    Reason:
+      "Magdalene gives a bigger red-heart buffer. Lazarus gives a second chance after one fatal mistake.",
+  },
+  {
+    "My Problem": "I can reach bosses but cannot finish them.",
+    "Character I Use": "Azazel",
+    "If They Are Locked": "Make 3 Devil Room deals in one run.",
+    Reason:
+      "Flight and short Brimstone give fast boss damage and safer positioning.",
+  },
+  {
+    "My Problem": "I want a better normal character after Isaac.",
+    "Character I Use": "Cain",
+    "If They Are Locked": "Hold 55 coins at one time.",
+    Reason:
+      "Cain feels cleaner once I understand pickups, shops, pills, and resource routing.",
+  },
+  {
+    "My Problem": "I want to practice Hard marks.",
+    "Character I Use": "A character I can already win with",
+    "If They Are Locked": "Use Isaac, Magdalene, Lazarus, or Azazel first.",
+    Reason:
+      "Hard mode is better for marking progress than for learning a character from zero.",
+  },
+  {
+    "My Problem": "I want high damage but keep dying early.",
+    "Character I Use": "Delay Judas",
+    "If They Are Locked": "Judas unlocks after defeating Satan.",
+    Reason:
+      "Judas is strong, but 1 red heart is not forgiving while I am still learning rooms.",
+  },
+  {
+    "My Problem": "I want low-health power.",
+    "Character I Use": "Delay Eve",
+    "If They Are Locked": "Avoid heart pickups for 2 floors in a row.",
+    Reason:
+      "Eve rewards low-health control, but that is not a good first lesson before soul-heart management makes sense.",
+  },
+  {
+    "My Problem": "I want a weird or advanced character.",
+    "Character I Use": "Delay Eden, Lilith, Bethany, Jacob and Esau",
+    "If They Are Locked":
+      "Use the unlock route guide when the base game is stable.",
+    Reason:
+      "These characters are better after the first-floor loop, unlock routing, and basic boss control are already comfortable.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The best beginner character in **The Binding of Isaac: Rebirth** is **Isaac** if you are learning the game from zero. Isaac is not always the easiest character, but he is the cleanest teacher because he does not hide normal movement, shop, key, bomb, item room, or boss mistakes.
+
+My practical route is: **Isaac to learn → Magdalene or Lazarus for safety → Azazel for easier clears → Cain once pickups and shops make sense**. I delay Judas, Eve, Eden, Lilith, Bethany, and Jacob and Esau until the base game no longer feels random.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for The Binding of Isaac: Rebirth, Repentance, and Repentance+. This guide focuses on early character choice, unlock conditions, starting setups, and which character solves which beginner problem.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-dlc-fresh-save-isaac.webp"
+    alt="The Binding of Isaac Rebirth fresh save character select with Isaac available first"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    On a fresh file, I start with Isaac because he teaches the real route: item room, shop, boss, health, keys, bombs, and mistakes.
+  </figcaption>
+</figure>
+
+<h2 id="best-beginner-characters">
+  Best beginner characters in The Binding of Isaac Rebirth
+</h2>
+
+I do not treat beginner characters as a pure tier list.
+
+A tier list tells me who is strong. That is useful, but it does not answer the beginner question I actually care about:
+
+<strong>Which character solves the problem that is killing my runs right now?</strong>
+
+That is why I separate characters into two roles:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Learning characters:</strong> characters that teach normal Isaac routing, resource use, and boss timing.
+  </li>
+  <li>
+    <strong>Winning characters:</strong> characters that make clears easier once I already understand what I am doing.
+  </li>
+</ul>
+
+Isaac belongs in the first group. Azazel often belongs in the second. Magdalene and Lazarus sit in the middle because they make mistakes less punishing.
+
+That framework is more useful than asking whether a character is S-tier. A strong character can win a run while teaching me habits that hurt later. A plain character can lose a run while teaching me exactly why I died.
+
+<h2 id="quick-ranking">
+  Quick ranking with unlocks and starting setup
+</h2>
+
+This table is the fast version. I am not ranking every character in the game. I am deciding who a new or returning player should use while the basics are still unstable.
+
+<GuideTable
+  caption="Best beginner characters in The Binding of Isaac Rebirth by unlock condition, starting setup, and use case."
+  columns={characterColumns}
+  rows={characterRows}
+/>
+
+The unlock column matters because a recommendation is not useful if the character is still locked. If I do not have Magdalene, Lazarus, Azazel, or Cain yet, the unlock requirement tells me what kind of run goal would open that option.
+
+<h2 id="by-problem">
+  Which character should I use for my problem?
+</h2>
+
+This is the most useful way to choose a beginner character.
+
+<GuideTable
+  caption="Which Binding of Isaac Rebirth beginner character to use by problem."
+  columns={problemColumns}
+  rows={problemRows}
+/>
+
+I use this table before I use a tier list. If my problem is health, I do not need the highest theoretical damage character. If my problem is learning normal movement, I do not need a character with flight. If my problem is boss damage, then Azazel may be exactly what I need.
+
+<h2 id="isaac-first">
+  Why I still start with Isaac
+</h2>
+
+I start with **Isaac** because he is the cleanest teacher.
+
+On a fresh file, Isaac is already available. He starts with **3 red heart containers** and **1 bomb**, and he plays the normal version of the game: normal movement, normal tears, normal item room value, normal shop decisions, and normal boss positioning.
+
+That matters because the first ten runs are not only about winning. They are about learning which decisions created the win or loss.
+
+Isaac teaches me:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>how to move without flight,</li>
+  <li>how to aim normal tears,</li>
+  <li>when one key should go to the item room,</li>
+  <li>when the shop is worth entering,</li>
+  <li>when a bomb target is actually worth the bomb,</li>
+  <li>and why a weak boss fight usually started with an earlier floor decision.</li>
+</ul>
+
+After **D6** is unlocked, Isaac becomes even more useful because he can start rerolling bad pedestal items. But I do not rely on D6 as a fresh-save assumption. The first lesson is still the base route.
+
+<h2 id="safety-picks">
+  Magdalene and Lazarus: safer ways to learn
+</h2>
+
+**Magdalene** is my health-buffer pick.
+
+She unlocks by reaching **7 or more red heart containers** at one time, and she starts with **4 red heart containers** plus **Yum Heart**. That makes her useful when the main problem is simple: I take too many hits before the run has time to develop.
+
+Magdalene does not automatically fix bad decisions. If I walk into every spike, waste every key, or enter every boss fight weak, extra health only delays the death. But if I am learning enemy patterns and need more room to make mistakes, she is a good answer.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-magdalene-character-select.webp"
+    alt="The Binding of Isaac Rebirth Magdalene character select showing a health-focused beginner option"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Magdalene is the safe pick when the problem is health, not when the problem is understanding the route.
+  </figcaption>
+</figure>
+
+**Lazarus** is my second-chance pick.
+
+He unlocks by holding **4 or more Soul Hearts or Black Hearts** at once in a run. I like him after the first floors make sense because his revive gives me a way to recover from one bad room or boss. That makes him forgiving without changing the whole control scheme.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-lazarus-revive-counter.webp"
+    alt="The Binding of Isaac Rebirth Lazarus revive counter showing the second-life safety mechanic"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Lazarus is forgiving because the revive gives me one more chance when a beginner mistake would normally end the run.
+  </figcaption>
+</figure>
+
+The difference between them is simple: Magdalene gives me more health before mistakes happen. Lazarus gives me a second chance after one big mistake happens.
+
+<h2 id="azazel">
+  Azazel: the easiest early clear, but not the best teacher
+</h2>
+
+**Azazel** is the character I use when I want a win.
+
+He unlocks by making **3 Devil Room deals** in one run. Once unlocked, he starts with **3 Black Hearts**, **The Fool**, flight, and short-ranged **Brimstone**. That kit solves a lot of beginner problems immediately.
+
+Flight makes pits and many room layouts safer. Short Brimstone gives fast burst damage. The Fool also matters later because teleport effects become important for route planning.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-azazel-flight-brimstone.webp"
+    alt="The Binding of Isaac Rebirth Azazel using flight and short Brimstone in an early run"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Azazel is powerful because flight and short Brimstone remove a lot of early pressure, but the short range still demands positioning.
+  </figcaption>
+</figure>
+
+The risk is that Azazel can hide normal-game problems. If I only play Azazel, I may stop learning ground movement, tear spacing, weak-start routing, and when a non-flying character should avoid a room.
+
+That does not make Azazel bad. It means I use him for the right job: clears, confidence, route access, and unlock momentum.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="cain-and-normal-upgrades">
+  Cain and other normal upgrades
+</h2>
+
+**Cain** is the early character I like when Isaac starts feeling too plain but I still want to learn the normal game.
+
+He unlocks by holding **55 coins** at one time. He starts with **2 red heart containers**, **1 key**, and **Lucky Foot**. That makes him feel better once I understand pickups, shops, and pill value.
+
+Cain is not as safe as Magdalene, not as forgiving as Lazarus, and not as explosive as Azazel. His value is that he still plays like a normal character while rewarding cleaner resource decisions.
+
+That is why I see him as a second-phase beginner pick. I do not use him to learn what a key is. I use him after I understand why keys, coins, and pills matter.
+
+<h2 id="characters-i-delay">
+  Characters I delay as a beginner
+</h2>
+
+Some characters are strong, but I do not rush them.
+
+**Samson** unlocks by completing **2 floors in a row without taking damage**. He can become stronger through damage-based play, but I delay him if I am still taking random hits. I do not want my first lesson to be “getting hit is fine.”
+
+**Judas** unlocks after defeating **Satan**. He starts with **1 red heart container**, **3 coins**, and **The Book of Belial**. The damage potential is real, but the health is not forgiving. I wait until I can dodge.
+
+**Eve** unlocks by avoiding heart pickups for **2 floors in a row**. She starts with **2 red heart containers**, **Whore of Babylon**, and **Dead Bird**. Her low-health power is useful later, but I wait until soul-heart and red-heart management make sense.
+
+**Eden** unlocks after completing **Womb** for the first time and uses **Eden Tokens**. Eden is fun, but random starts make them a poor first teacher.
+
+**Lilith** unlocks by completing **Greed Mode with Azazel**. She starts with familiar-based damage tools, including **Box of Friends** and **Incubus**. That can be strong, but it is not normal shooting practice.
+
+**Bethany** and **Jacob and Esau** are later learning projects. Their unlocks and playstyles are worth respecting, but I do not use them as early-game teachers.
+
+<h2 id="normal-or-hard">
+  Should I play these characters on Normal or Hard?
+</h2>
+
+I use **Normal** to learn a character and **Hard** when I am ready to care about marks.
+
+Hard matters long-term, but I do not force a new character on Hard if I have no idea how that character wins. That turns learning into frustration.
+
+The completion mark screen is useful because it shows what a character has done, but it can also push me into checklist brain too early.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-hard-mode-completion-marks.webp"
+    alt="The Binding of Isaac Rebirth character select showing hard mode completion marks"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Completion marks matter later. Early on, I use them as direction, not pressure.
+  </figcaption>
+</figure>
+
+My rule is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>First time on a character:</strong> Normal is fine if I am learning.
+  </li>
+  <li>
+    <strong>Character already feels stable:</strong> switch to Hard.
+  </li>
+  <li>
+    <strong>Going for serious marks:</strong> use Hard so the mark progress matters.
+  </li>
+  <li>
+    <strong>Testing a weird character:</strong> learn the mechanics before committing.
+  </li>
+</ul>
+
+I do not want to waste ten runs learning a character and then realize I need to repeat the same marks later. But I also do not want to hate the game because I forced Hard before I understood the character.
+
+<h2 id="learning-vs-winning">
+  Winning characters vs learning characters
+</h2>
+
+This is the main idea behind my beginner character route:
+
+<strong>The character that helps me win fastest is not always the character that helps me learn fastest.</strong>
+
+Isaac teaches normal decisions. Magdalene makes learning safer. Lazarus forgives one big mistake. Azazel helps me turn basic knowledge into wins. Cain rewards better pickup and shop decisions.
+
+That is the full progression. I do not need to restate it in every character section. When I am confused, I go back to the problem table: identify the failure, then choose the character that solves that failure.
+
+<h2 id="when-to-switch-guides">
+  When to use another guide
+</h2>
+
+This page is only about choosing beginner characters. If the problem changes, I switch guides.
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/beginner-guide/">Beginner Guide</Link> if you still do not know the item room, shop, boss, heart, key, and bomb route.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/unlock-order/">Unlock Order Guide</Link> if you know who to play but do not know what to unlock next.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/dlc-buying-guide/">DLC Buying Guide</Link> if you are deciding between Rebirth, Repentance, the Complete Bundle, and Repentance+.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide/">Tainted Characters Unlock Guide</Link> after Beast route and Home path start making sense.
+  </li>
+</ul>
+
+I do not try to rank every character in the game here. This page should answer one practical question: **who should I play next while I am still learning?**
+
+<h2 id="faq">
+  The Binding of Isaac best beginner characters FAQ
+</h2>
+
+### Who is the best beginner character in The Binding of Isaac: Rebirth?
+
+Isaac is the best first teacher because he starts simple and teaches the base room loop. Azazel is easier for early wins, but Isaac teaches the normal game better.
+
+### Should I start with Isaac or Azazel?
+
+Start with Isaac if you are learning. Use Azazel when you want easier clears, faster boss kills, or route access after the basics make sense.
+
+### How do I unlock Magdalene?
+
+Have 7 or more red heart containers at one time. She starts with 4 red heart containers and Yum Heart, making her a safer health-focused beginner pick.
+
+### How do I unlock Lazarus?
+
+Have 4 or more Soul Hearts or Black Hearts at one time in one run. I like Lazarus after the first floors make sense because his revive forgives one big mistake.
+
+### How do I unlock Azazel?
+
+Make 3 Devil Room deals in one run. Azazel starts with 3 Black Hearts, The Fool, flight, and short-ranged Brimstone.
+
+### How do I unlock Cain?
+
+Hold 55 coins at one time. Cain starts with 2 red heart containers, 1 key, and Lucky Foot, so he feels better once pickups and shops make sense.
+
+### Should beginners play Judas?
+
+I usually wait. Judas has strong damage potential and The Book of Belial, but he starts with only 1 red heart container.
+
+### Should beginners play Eve?
+
+Not at first. Eve rewards low-health control, and that is risky before soul hearts, red hearts, and deal safety make sense.
+
+### Should I play on Normal or Hard?
+
+Use Normal to learn. Use Hard when you are ready for serious completion marks and do not want to repeat progress later.
+
+### Who should I use after beating Mom?
+
+Use the problem table. If you need safety, try Magdalene or Lazarus. If you need clears, try Azazel. If you want a normal upgrade after Isaac, try Cain.
+
+### Are Tainted characters beginner-friendly?
+
+No. Tainted characters are later-game unlocks. Learn the base characters first, then move into Beast route and Tainted unlock planning.
+
+### What is the biggest beginner character mistake?
+
+The biggest mistake is treating a tier list as a route plan. Choose the character that solves your current problem instead of forcing the highest-ranked character every run.

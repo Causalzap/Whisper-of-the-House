@@ -1,0 +1,514 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const unlockRouteColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "What I Prioritize", label: "What I Prioritize" },
+  { key: "Why", label: "Why" },
+];
+
+export const unlockRouteRows = [
+  {
+    Stage: "1. Stable Mom clears",
+    "What I Prioritize":
+      "Learn the item room, shop, boss, health, key, and bomb loop before chasing deeper routes.",
+    Why:
+      "If I cannot reach Mom consistently, a long unlock checklist only creates noise.",
+  },
+  {
+    Stage: "2. High-value challenges",
+    "What I Prioritize":
+      "Clear the early challenges that add strong run tools, runes, cards, or damage items.",
+    Why:
+      "Good challenge rewards improve many future runs instead of only adding one completion mark.",
+  },
+  {
+    Stage: "3. Shop donation to 600",
+    "What I Prioritize":
+      "Build the regular shop Donation Machine toward 600 coins before worrying about 999.",
+    Why:
+      "Better shops help every character. The 999 goal is useful later, but 600 is the early power breakpoint.",
+  },
+  {
+    Stage: "4. Boss route unlocks",
+    "What I Prioritize":
+      "Work through Mom's Heart, Womb, It Lives, Cathedral, Sheol, Chest, Dark Room, Boss Rush, Hush, and Delirium when runs are strong.",
+    Why:
+      "Boss routes unlock the real midgame and create completion marks that matter across characters.",
+  },
+  {
+    Stage: "5. Practical character unlocks",
+    "What I Prioritize":
+      "Unlock and use characters that solve real problems: Magdalene, Lazarus, Azazel, Cain, then stronger or stranger characters later.",
+    Why:
+      "A new character is useful when I know what problem they solve, not just because the portrait is unlocked.",
+  },
+  {
+    Stage: "6. Repentance route rewards",
+    "What I Prioritize":
+      "Move into alt path, Mother, Beast, Tainted characters, and selected Repentance challenges after the base route is stable.",
+    Why:
+      "Repentance has excellent rewards, but rushing it before Hush, Mother, and Home make sense creates frustration.",
+  },
+  {
+    Stage: "7. Selective pool cleanup",
+    "What I Prioritize":
+      "Unlock Soul Stones, reverse cards, and late pool additions selectively before full completion cleanup.",
+    Why:
+      "Not every unlock improves the pool equally. I want power first, then checklist completion.",
+  },
+];
+
+export const challengeColumns = [
+  { key: "Challenge", label: "Challenge" },
+  { key: "Reward", label: "Reward" },
+  { key: "Why I Care", label: "Why I Care" },
+];
+
+export const challengeRows = [
+  {
+    Challenge: "2. High Brow",
+    Reward: "Jera",
+    "Why I Care":
+      "Jera is one of the most useful rune unlocks because duplication can turn a good room into a huge resource swing.",
+  },
+  {
+    Challenge: "3. Head Trauma",
+    Reward: "Ehwaz",
+    "Why I Care":
+      "Ehwaz adds crawl space and floor-routing utility. It is not always explosive, but it is useful long term.",
+  },
+  {
+    Challenge: "5. The Tank",
+    Reward: "Ansuz",
+    "Why I Care":
+      "Ansuz gives mapping information, which is especially helpful when I am learning floor routing.",
+  },
+  {
+    Challenge: "6. Solar System",
+    Reward: "Perthro",
+    "Why I Care":
+      "Perthro is a reroll rune. I like unlocking it early because rerolls can turn bad item rooms into real runs.",
+  },
+  {
+    Challenge: "8. Cat Got Your Tongue",
+    Reward: "Algiz",
+    "Why I Care":
+      "Algiz is a defensive rune that can save difficult boss routes, timed marks, or fragile late-game attempts.",
+  },
+  {
+    Challenge: "10. Cursed!",
+    Reward: "Credit Card",
+    "Why I Care":
+      "Credit Card can create huge shop, Devil Deal, or Angel Deal swings.",
+  },
+  {
+    Challenge: "17. Waka Waka",
+    Reward: "Death's Touch",
+    "Why I Care":
+      "Death's Touch is a strong damage unlock and one of the early challenge rewards I actually feel in later runs.",
+  },
+  {
+    Challenge: "18. The Host",
+    Reward: "Tech.5",
+    "Why I Care":
+      "Tech.5 is a useful damage addition that can show up naturally after unlock.",
+  },
+  {
+    Challenge: "19. The Family Man",
+    Reward: "Epic Fetus",
+    "Why I Care":
+      "Epic Fetus is a major run-changing unlock, but the challenge itself can be awkward, so I do it when I am ready.",
+  },
+  {
+    Challenge: "37. Bloody Mary",
+    Reward: "Sigil of Baphomet",
+    "Why I Care":
+      "A strong Repentance trinket reward. I do it after the base game no longer feels random.",
+  },
+  {
+    Challenge: "39. Isaac's Awakening",
+    Reward: "Spirit Sword",
+    "Why I Care":
+      "A powerful Repentance unlock, but it belongs after Mother route access is already realistic.",
+  },
+  {
+    Challenge: "43. Cantripped!",
+    Reward: "Reverse Justice",
+    "Why I Care":
+      "Reverse cards can be strong, but I unlock them selectively so I understand what I am adding to the pool.",
+  },
+];
+
+export const donationColumns = [
+  { key: "Machine", label: "Machine" },
+  { key: "Important Milestones", label: "Important Milestones" },
+  { key: "How I Use It", label: "How I Use It" },
+];
+
+export const donationRows = [
+  {
+    Machine: "Regular shop Donation Machine",
+    "Important Milestones":
+      "10 Blue Map, 20 Shop Upgrade lv.1, 50 There's Options, 100 Shop Upgrade lv.2, 150 Black Candle, 200 Shop Upgrade lv.3, 400 Red Candle, 600 Shop Upgrade lv.4, 900 Blue Candle, 999 Stop Watch.",
+    "How I Use It":
+      "My early target is 600 because stronger shops help every future run. I treat 999 as a later goal and avoid donating the 1000th coin because it explodes and resets the counter.",
+  },
+  {
+    Machine: "Greed Donation Machine",
+    "Important Milestones":
+      "2 Lucky Pennies, 14 Special Hanging Shopkeepers, 33 Wooden Nickel, 68 Cain holds Paper Clip, 111 Everything is Terrible 2, 234 Special Shopkeepers, 439 Eve holds Razor Blade, 500 Greedier, 666 Store Key, 879 The Lost holds Holy Mantle, 999 Generosity, 1000 Keeper.",
+    "How I Use It":
+      "This is separate from the shop machine. I care about 68 for Cain's Paper Clip, 879 for The Lost's Holy Mantle, and 1000 for Keeper, but I do not confuse these numbers with the normal shop donation route.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The best unlock order in **The Binding of Isaac: Rebirth** is not “unlock everything as fast as possible.” My rule is: **unlock the things that make future runs stronger before chasing full checklist completion**.
+
+My early route is: stabilize **Mom** clears, clear high-value **challenges**, push the regular shop **Donation Machine** toward **600**, build boss route access, unlock practical characters, then move into **Repentance**, **Tainted characters**, **Soul Stones**, and selective reverse card cleanup. Keep the regular Donation Machine and the **Greed Donation Machine** separate; their milestones are not the same.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for The Binding of Isaac: Rebirth, Repentance, and Repentance+. This guide focuses on practical unlock order, challenge rewards, donation machines, boss route marks, Repentance routes, Soul Stones, and avoiding weak pool clutter.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-post-it-completion-marks.webp"
+    alt="The Binding of Isaac Rebirth character select showing post-it completion marks"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Completion marks matter, but I do not let the checklist decide my first unlocks. I want unlocks that make the next run easier.
+  </figcaption>
+</figure>
+
+<h2 id="binding-of-isaac-unlock-order">
+  The Binding of Isaac Rebirth unlock order guide
+</h2>
+
+Isaac has a dangerous kind of progression.
+
+The game keeps unlocking things, but not every unlock helps the next run equally. Some rewards add strong cards, runes, shop upgrades, or boss-route tools. Others add noise, niche items, or late goals that only matter once I am already deep into completion.
+
+So I do not ask:
+
+<strong>What can I unlock next?</strong>
+
+I ask:
+
+<strong>What unlock makes future runs stronger?</strong>
+
+That one question changes the whole route. It keeps me from chasing completion marks before my run quality is good enough, and it keeps me from filling the item, rune, card, and trinket pools with rewards I do not understand yet.
+
+<h2 id="first-unlock-route">
+  First unlock route
+</h2>
+
+This is the route I use as the main map for a new or returning file.
+
+<GuideTable
+  caption="The Binding of Isaac Rebirth practical unlock order."
+  columns={unlockRouteColumns}
+  rows={unlockRouteRows}
+/>
+
+I keep this table as the master route. Later sections explain the important gates, but I do not repeat the full seven-step order again at the end.
+
+<h2 id="mom-first">
+  Step 1: stabilize Mom before chasing everything
+</h2>
+
+The first real goal is not Dead God. It is not Tainted characters. It is not perfect Hard marks.
+
+The first real goal is reaching and beating **Mom** often enough that the early floor loop stops feeling random.
+
+Before I worry about advanced unlocks, I want to understand:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>when to open the item room,</li>
+  <li>when a shop is worth a key,</li>
+  <li>when one bomb should be saved for a tinted rock or secret room,</li>
+  <li>when a Devil Deal is too expensive,</li>
+  <li>when a boss fight is safer than clearing more rooms,</li>
+  <li>and why a run died before the death screen.</li>
+</ul>
+
+If that loop still feels unstable, use the <Link href="/the-binding-of-isaac-rebirth/beginner-guide/">Beginner Guide</Link> before forcing a long unlock plan.
+
+<h2 id="challenges">
+  Step 2: do high-value challenges early
+</h2>
+
+I like early challenges because the right reward changes many future runs.
+
+A challenge reward is not just one mark. It can add a rune, card, item, or trinket that appears later when another character needs help. That is why I prioritize challenge rewards that improve future routing, defense, damage, or resource swings.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-challenges-unlock-menu.webp"
+    alt="The Binding of Isaac Rebirth challenge menu used for early high-value unlock planning"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I do not clear challenges randomly. I start with rewards that improve future runs instead of only adding checklist progress.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="High-value Binding of Isaac challenge unlocks I prioritize."
+  columns={challengeColumns}
+  rows={challengeRows}
+/>
+
+I do not treat this as a mandatory marathon. If a challenge feels miserable, I skip it and come back with more experience. The point is to add useful tools, not to burn out before the real file opens up.
+
+<h2 id="donation-machines">
+  Step 3: separate the two donation machines
+</h2>
+
+This is one of the easiest places to confuse unlock order.
+
+There are two different long-term donation tracks:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Regular shop Donation Machine:</strong> the machine that appears in shops and upgrades normal shop progression.
+  </li>
+  <li>
+    <strong>Greed Donation Machine:</strong> the machine that appears after Ultra Greed in Greed or Greedier mode.
+  </li>
+</ul>
+
+The numbers do not mean the same thing. When I say “push to 600 first,” I mean the regular shop Donation Machine. When I say “879 for The Lost's Holy Mantle,” I mean the Greed Donation Machine.
+
+<GuideTable
+  caption="Regular Donation Machine vs Greed Donation Machine milestones."
+  columns={donationColumns}
+  rows={donationRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-shop-donation-machine.webp"
+    alt="The Binding of Isaac Rebirth shop Donation Machine used for shop upgrade unlocks"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The regular shop Donation Machine is my early economy project. I push it toward 600 before treating 999 as urgent.
+  </figcaption>
+</figure>
+
+My practical donation rule is:
+
+<strong>Regular machine to 600 first, Greed machine milestones when I am actually playing Greed, and 999/1000 cleanup later.</strong>
+
+That keeps the economy route useful instead of turning donations into a separate grind too early.
+
+<h2 id="boss-route-unlocks">
+  Step 4: boss route unlocks and efficient mark stacking
+</h2>
+
+Once Mom and the Womb route are stable, I start caring about boss routes.
+
+The important route gates are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Mom's Heart / It Lives:</strong> opens the deeper structure of the file and starts making Womb clears meaningful.
+  </li>
+  <li>
+    <strong>Cathedral and Sheol:</strong> split the route toward Isaac / ??? and Satan / The Lamb progress.
+  </li>
+  <li>
+    <strong>Boss Rush:</strong> appears when Mom is defeated within the 20-minute window.
+  </li>
+  <li>
+    <strong>Hush:</strong> becomes a timed route after Mom's Heart / It Lives and later unlocks more progression.
+  </li>
+  <li>
+    <strong>Delirium:</strong> is reached through The Void, with a guaranteed entrance after Hush.
+  </li>
+</ul>
+
+The efficiency trick I keep in mind is the strong-run chain:
+
+<strong>Boss Rush → Hush → Delirium.</strong>
+
+If a run is powerful and fast enough, I can beat Mom within 20 minutes for Boss Rush, continue to beat Mom's Heart or It Lives within 30 minutes for Hush, then use the guaranteed Void entrance after Hush to attempt Delirium. I do not force this chain on weak runs, but when a run is clearly broken, this is one of the best ways to stack marks.
+
+That is the difference between casual progression and efficient progression. I do not need every run to be a triple-mark run. I need to recognize the run that can become one.
+
+<h2 id="character-unlocks">
+  Step 5: unlock characters that solve problems
+</h2>
+
+I do not unlock characters just to fill the select screen.
+
+A new character matters when they solve a real problem:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Magdalene:</strong> useful when health mistakes are ending runs too early.
+  </li>
+  <li>
+    <strong>Lazarus:</strong> useful when one bad mistake keeps ruining otherwise good starts.
+  </li>
+  <li>
+    <strong>Azazel:</strong> useful when I need easier clears, boss damage, flight, and route momentum.
+  </li>
+  <li>
+    <strong>Cain:</strong> useful after I understand coins, keys, shops, and pickup value.
+  </li>
+  <li>
+    <strong>Judas and Eve:</strong> useful later, after low-health play stops feeling like panic.
+  </li>
+</ul>
+
+If I am not sure who to use, I switch to the <Link href="/the-binding-of-isaac-rebirth/best-beginner-characters/">Best Beginner Characters Guide</Link>. This unlock page is about route priority; the character page is where I choose who solves my current run problem.
+
+<h2 id="repentance-route">
+  Step 6: Repentance route unlocks
+</h2>
+
+Repentance adds excellent long-term goals, but I do not rush them before the base route works.
+
+The big Repentance progression chain eventually includes:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>alternate path access,</li>
+  <li>Knife Piece 1 and Knife Piece 2,</li>
+  <li>Mother in Corpse II,</li>
+  <li>Strange Door,</li>
+  <li>Dad's Note and Ascent,</li>
+  <li>Home, Dogma, and Beast,</li>
+  <li>Tainted character unlocks,</li>
+  <li>and later Soul Stone / reverse card planning.</li>
+</ul>
+
+This is why I do not send a new player straight to Tainted characters. That route has several gates before the actual Home closet unlock. If that is the current problem, use the <Link href="/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide/">Tainted Characters Unlock Guide</Link> instead of trying to solve it from this page.
+
+<h2 id="soul-stones-reverse-cards">
+  Step 7: Soul Stones and reverse cards are selective cleanup
+</h2>
+
+Soul Stones and reverse cards can be powerful, but I do not blindly unlock all of them first.
+
+The reason is pool quality. Every new card, rune, trinket, or item changes what can appear later. Some additions are clearly useful. Others are niche, confusing, or only valuable once I understand the character that unlocks them.
+
+My rule is:
+
+<strong>Unlock the Soul Stones and reverse cards I actually want first, then finish the rest when I am closer to full completion.</strong>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-soul-stone-unlocks.webp"
+    alt="The Binding of Isaac Repentance Soul Stone unlock planning after Tainted character progress"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Soul Stones are not my first unlock goal. I treat them as later pool planning once Tainted routes are repeatable.
+  </figcaption>
+</figure>
+
+This is where the unlock route becomes less universal. If I love a specific Tainted character, I may chase their Soul Stone earlier. If I do not understand that character yet, I delay the unlock instead of adding noise to the pool.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="what-i-delay">
+  Unlocks I delay on purpose
+</h2>
+
+Delaying an unlock is not the same as ignoring it.
+
+I delay unlocks when they do one of these things:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>add a reward I do not understand yet,</li>
+  <li>require a route I cannot reach consistently,</li>
+  <li>push me into a character I am not ready to play,</li>
+  <li>make the item, card, rune, or trinket pool noisier before it becomes stronger,</li>
+  <li>or turn the game into checklist work before the run itself is fun.</li>
+</ul>
+
+This is especially true for late Repentance cleanup. I would rather unlock one useful thing and feel it in future runs than unlock five random things and forget what changed.
+
+<h2 id="when-to-switch-guides">
+  When to use another guide
+</h2>
+
+This page is for unlock order. If the problem is different, I switch guides.
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/beginner-guide/">Beginner Guide</Link> if Mom, item rooms, shops, bombs, blue hearts, and Devil Deals still feel confusing.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/best-beginner-characters/">Best Beginner Characters Guide</Link> if you know you need a better character but do not know who solves your current problem.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/dlc-buying-guide/">DLC Buying Guide</Link> if you are still deciding between Rebirth, Afterbirth, Afterbirth+, Repentance, Repentance+, and the Complete Bundle.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide/">Tainted Characters Unlock Guide</Link> when your current blocker is Hush, Mother, Strange Door, Dad's Note, Cracked Key, or Home.
+  </li>
+</ul>
+
+I do not try to make this page a full Dead God checklist. It should answer one practical question: **what unlocks should I prioritize before completion cleanup?**
+
+<h2 id="faq">
+  The Binding of Isaac unlock order FAQ
+</h2>
+
+### What should I unlock first in The Binding of Isaac: Rebirth?
+
+Start with stable Mom clears, then high-value challenge rewards, then regular shop Donation Machine progress toward 600. After that, move into boss route unlocks, practical character unlocks, Repentance routes, and selective pool cleanup.
+
+### Should I clear every challenge immediately?
+
+No. I start with high-value challenge rewards like Jera, Perthro, Algiz, Credit Card, Death's Touch, Tech.5, and later Repentance rewards. I skip miserable challenges until the file is stronger.
+
+### Is the regular Donation Machine the same as the Greed Donation Machine?
+
+No. The regular shop Donation Machine and the Greed Donation Machine are separate tracks with different milestones. The regular machine controls shop-related unlocks like 600 and 999, while the Greed machine has milestones like Cain's Paper Clip, The Lost's Holy Mantle, Generosity, and Keeper.
+
+### Should I donate to 600 or 999 first?
+
+I prioritize 600 on the regular shop Donation Machine because it upgrades shops for future runs. I treat 999 as a later goal for Stop Watch.
+
+### What happens if I donate the 1000th coin to the regular Donation Machine?
+
+The regular Donation Machine explodes and resets to 0. I avoid accidental 1000th donations after reaching 999.
+
+### Which Greed Donation Machine milestones matter most?
+
+The important ones I watch are 68 for Cain's Paper Clip, 879 for The Lost's Holy Mantle, 999 for Generosity, and 1000 for Keeper.
+
+### When should I try Boss Rush, Hush, and Delirium together?
+
+Only on a strong and fast run. If I can beat Mom within 20 minutes, continue to Hush within the 30-minute route, and the run is still strong, Hush gives a guaranteed Void entrance for Delirium.
+
+### Should I unlock every Soul Stone and reverse card immediately?
+
+No. I unlock the ones I want first, then clean up the rest later. Selective pool management is better than adding rewards I do not understand yet.
+
+### When should I start Repentance route unlocks?
+
+Start Repentance route planning after the base route feels stable. Hush, Mother, Strange Door, Dad's Note, Home, Beast, and Tainted characters are not first-night goals.
+
+### What is the biggest unlock order mistake?
+
+The biggest mistake is treating the checklist as the strategy. A good unlock route improves future runs first and saves completion cleanup for later.

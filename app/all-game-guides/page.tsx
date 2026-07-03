@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import { latestUpdates as rawLatestUpdates } from "@/data/latest-updates";
+import {
+  getActiveGuideHubs,
+  getFeaturedHubCount,
+  getGameArchiveGroups,
+  getGameCollectionCount,
+  getGuideEntryCount,
+  getLatestUpdatePages,
+  type ActiveGuideHub,
+  type ArchiveGuideGroup,
+} from "@/data/guideSelectors";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/all-game-guides/`;
@@ -29,36 +38,7 @@ export const metadata: Metadata = {
   },
 };
 
-type GuideLink = {
-  title: string;
-  href: string;
-};
-
-type ActiveGuideHub = GuideLink & {
-  label: string;
-  description: string;
-  coverage: string[];
-};
-
-type GuideGroup = {
-  title: string;
-  eyebrow: string;
-  description: string;
-  guides: GuideLink[];
-};
-
-type RawLatestUpdate = {
-  title?: string;
-  href?: string;
-  game?: string;
-  description?: string;
-  excerpt?: string;
-  summary?: string;
-  type?: string;
-  tag?: string;
-  category?: string;
-  date?: string;
-};
+type GuideLink = ArchiveGuideGroup["guides"][number];
 
 type NormalizedUpdate = {
   title: string;
@@ -73,206 +53,6 @@ type UpdateGroup = {
   game: string;
   updates: NormalizedUpdate[];
 };
-
-const activeGuideHubs: ActiveGuideHub[] = [
-  {
-    title: "The Last Caretaker",
-    href: "/the-last-caretaker",
-    label: "Survival Systems",
-    description:
-      "New Horizons, Project Eden, Oil Whale, ship routing, power, fuel, roots, samples, and cleanup decisions.",
-    coverage: ["New Horizons", "Project Eden", "Oil Whale", "Ship systems"],
-  },
-  {
-    title: "Warhammer 40,000: Darktide - Skitarii Class",
-    href: "/darktide",
-    label: "Builds & Combat",
-    description:
-      "Skitarii beginner routes, Cog Tree, Servo Skull inputs, Capacitance, Redline, builds, weapons, and troubleshooting.",
-    coverage: ["Best builds", "Weapons", "Servo Skull", "Beginner route"],
-  },
-  {
-    title: "Moldwasher",
-    href: "/moldwasher",
-    label: "Walkthrough & Collectibles",
-    description:
-      "Mission walkthroughs, hidden objects, collectibles, tools, stuck fixes, achievements, and 100% cleanup help.",
-    coverage: ["Walkthrough", "Collectibles", "Achievements", "Stuck fixes"],
-  },
-  {
-    title: "Timberborn",
-    href: "/timberborn",
-    label: "Colony Systems",
-    description:
-      "Badtide defense, drought planning, dams, levees, floodgates, irrigation, reservoirs, and automation logic.",
-    coverage: ["Badtides", "Automation", "Reservoirs", "Floodgates"],
-  },
-  {
-    title: "Thank You For Your Application",
-    href: "/thank-you-for-your-application",
-    label: "Endings & Route Locks",
-    description:
-      "Beginner tips, final evaluation answers, ratings, route locks, job outcomes, endings, and achievement cleanup.",
-    coverage: ["Endings", "Ratings", "Route locks", "Achievements"],
-  },
-  {
-    title: "Steam Next Fest June 2026 Demo Guides",
-    href: "/steam-next-fest",
-    label: "Demo Coverage",
-    description:
-      "Selected Steam demo guide hubs, first-hour help, route notes, systems, and discovery coverage.",
-    coverage: ["Demo picks", "First-hour help", "Event hubs", "Steam discovery"],
-  },
-];
-
-const guideGroups: GuideGroup[] = [
-  {
-    title: "Active guide hubs",
-    eyebrow: "Current Coverage",
-    description:
-      "Current and recently expanded guide hubs with walkthroughs, systems, achievements, endings, builds, or collectibles.",
-    guides: [
-      { title: "Supermarket Chaos", href: "/supermarket-chaos" },
-
-      { title: "Frostpunk 2: Breach of Trust", href: "/frostpunk-2-breach-of-trust" },
-      { title: "Deltarune", href: "/deltarune" },
-      { title: "The Last Caretaker", href: "/the-last-caretaker" },
-      { title: "Warhammer 40,000: Darktide - Skitarii Class", href: "/darktide" },
-      { title: "Moldwasher", href: "/moldwasher" },
-      { title: "Timberborn", href: "/timberborn" },
-      {
-        title: "Thank You For Your Application",
-        href: "/thank-you-for-your-application",
-      },
-      { title: "Steam Next Fest June 2026 Demo Guides", href: "/steam-next-fest" },
-      {
-        title: "The Adventures of Elliot: The Millennium Tales",
-        href: "/the-adventures-of-elliot",
-      },
-      { title: "SpaceCraft", href: "/spacecraft" },
-      { title: "Tales of Seikyu", href: "/tales-of-seikyu" },
-      { title: "33 Immortals", href: "/33-immortals" },
-    ],
-  },
-  {
-    title: "Cozy, crafting, survival & systems",
-    eyebrow: "Systems",
-    description:
-      "Games where progression, resources, crafting chains, base setup, colony pressure, and cleanup routes matter.",
-    guides: [
-      { title: "Whisper of the House", href: "/guides" },
-      { title: "SpaceCraft", href: "/spacecraft" },
-      { title: "Tales of Seikyu", href: "/tales-of-seikyu" },
-      { title: "Timberborn", href: "/timberborn" },
-      { title: "Moldwasher", href: "/moldwasher" },
-      {
-        title: "House Flipper Remastered Collection",
-        href: "/house-flipper-remastered-collection",
-      },
-      { title: "Solarpunk™", href: "/solarpunk" },
-      { title: "Outbound", href: "/outbound" },
-      { title: "Romestead", href: "/romestead" },
-      { title: "Starminer", href: "/starminer" },
-      { title: "Cheap Car Repair", href: "/cheap-car-repair" },
-      { title: "Paralives", href: "/paralives" },
-    ],
-  },
-  {
-    title: "RPG, action, builds & combat",
-    eyebrow: "Combat",
-    description:
-      "Guides focused on weapons, builds, bosses, character routes, class choices, combat pressure, and completion cleanup.",
-    guides: [
-      { title: "Warhammer 40,000: Darktide - Skitarii Class", href: "/darktide" },
-      {
-        title: "The Adventures of Elliot: The Millennium Tales",
-        href: "/the-adventures-of-elliot",
-      },
-      { title: "33 Immortals", href: "/33-immortals" },
-      { title: "Realm of Ink", href: "/realm-of-ink" },
-      { title: "GRIME II", href: "/grime-2" },
-      { title: "Soulmask", href: "/soulmask" },
-      { title: "Crystalfall", href: "/crystalfall" },
-      { title: "Sol Cesto", href: "/sol-cesto" },
-      { title: "Lucky Tower Ultimate", href: "/lucky-tower-ultimate" },
-      { title: "Vampire Crawlers", href: "/vampire-crawlers" },
-      { title: "The Spell Brigade", href: "/the-spell-brigade" },
-      { title: "Deep Rock Galactic: Rogue Core", href: "/deep-rock-galactic" },
-      { title: "Mina the Hollower", href: "/mina-the-hollower" },
-      { title: "Fatekeeper", href: "/fatekeeper" },
-      { title: "Gothic 1 Remake", href: "/gothic-1-remake" },
-    ],
-  },
-  {
-    title: "Story, endings, horror & route locks",
-    eyebrow: "Routes",
-    description:
-      "Pages for endings, choices, route locks, story progress, horror objectives, and spoiler-light outcome help.",
-    guides: [
-      {
-        title: "Thank You For Your Application",
-        href: "/thank-you-for-your-application",
-      },
-      { title: "The Long Dark Episode 5", href: "/the-long-dark-episode-5" },
-      { title: "I Am Jesus Christ", href: "/i-am-jesus-christ" },
-      { title: "The Occultist", href: "/the-occultist" },
-      { title: "MOUSE: P.I. For Hire", href: "/mouse-pi-for-hire" },
-      { title: "Directive 8020", href: "/directive-8020" },
-      { title: "ZERO PARADES: For Dead Spies", href: "/zero-parades" },
-      {
-        title: "Fears to Fathom - Scratch Creek",
-        href: "/fears-to-fathom-scratch-creek",
-      },
-      { title: "Magical Princess", href: "/magical-princess/endings-guide" },
-    ],
-  },
-  {
-    title: "Strategy, simulation, puzzle & discovery",
-    eyebrow: "Discovery",
-    description:
-      "Guide hubs and archive entries for puzzle logic, strategy systems, simulation planning, and Steam discovery coverage.",
-    guides: [
-      { title: "Steam Next Fest June 2026 Demo Guides", href: "/steam-next-fest" },
-      { title: "shapez 2 - Factory", href: "/shapez-2" },
-      { title: "Fracture Field", href: "/fracture-field" },
-      { title: "Heroes of Might and Magic: Olden Era", href: "/olden-era" },
-      { title: "Airborne Empire", href: "/airborne-empire" },
-      { title: "Pragmata", href: "/pragmata" },
-      { title: "Sintopia", href: "/sintopia" },
-      { title: "Road To Vostok", href: "/road-to-vostok" },
-      { title: "Subnautica 2", href: "/subnautica-2" },
-      { title: "Scale the Depths", href: "/scale-the-depths" },
-      { title: "Voidling Bound", href: "/voidling-bound" },
-    ],
-  },
-  {
-    title: "Older archive",
-    eyebrow: "Archive",
-    description:
-      "Earlier guides and smaller game collections kept available for readers looking for a specific older game, route, achievement, or puzzle answer.",
-    guides: [
-      { title: "Retro Rewind", href: "/retro-rewind" },
-      { title: "Hozy", href: "/guides/hozy" },
-      { title: "Pokemon Champions", href: "/pokemon-champions" },
-      { title: "Moomintroll: Winter's Warmth", href: "/moomintroll" },
-      { title: "Far Far West", href: "/far-far-west" },
-      { title: "Gamble With Your Friends", href: "/gamble-with-your-friends" },
-      { title: "Librarian: Tidy Up the Arcane Library!", href: "/librarian" },
-      { title: "Farever", href: "/farever" },
-      {
-        title: "Everything is Crab: The Animal Evolution Roguelite",
-        href: "/everything-is-crab",
-      },
-      { title: "Oaken Tower", href: "/oaken-tower" },
-      { title: "Dwarf Eats Mountain", href: "/dwarf-eats-mountain" },
-      {
-        title: "LEGO® Batman™: Legacy of the Dark Knight",
-        href: "/lego-batman",
-      },
-      { title: "Burglin' Gnomes", href: "/burglin-gnomes" },
-    ],
-  },
-];
 
 const faqItems = [
   {
@@ -297,23 +77,6 @@ const faqItems = [
   },
 ];
 
-function normalizeLatestUpdates(updates: RawLatestUpdate[]): NormalizedUpdate[] {
-  return updates
-    .filter((item) => item.href && item.title)
-    .map((item) => ({
-      title: item.title ?? "Guide",
-      href: item.href ?? "/",
-      game: item.game ?? "Game Guide",
-      description:
-        item.description ??
-        item.excerpt ??
-        item.summary ??
-        "Open this guide for route help, progression notes, achievements, systems, or completion details.",
-      type: item.type ?? item.tag ?? item.category ?? "Guide",
-      date: item.date ?? "",
-    }));
-}
-
 function groupUpdatesByGame(updates: NormalizedUpdate[]): UpdateGroup[] {
   const groups = new Map<string, NormalizedUpdate[]>();
 
@@ -329,23 +92,25 @@ function groupUpdatesByGame(updates: NormalizedUpdate[]): UpdateGroup[] {
   }));
 }
 
-function countUniqueGuides(groups: GuideGroup[]) {
-  const uniqueHrefs = new Set<string>();
+const activeGuideHubs = getActiveGuideHubs();
+const guideGroups = getGameArchiveGroups();
 
-  groups.forEach((group) => {
-    group.guides.forEach((guide) => {
-      uniqueHrefs.add(guide.href);
-    });
-  });
-
-  return uniqueHrefs.size;
-}
-
-const normalizedUpdates = normalizeLatestUpdates(
-  rawLatestUpdates as RawLatestUpdate[]
+const normalizedUpdates: NormalizedUpdate[] = getLatestUpdatePages().map(
+  (item) => ({
+    title: item.title,
+    href: item.href,
+    game: item.game,
+    description: item.description,
+    type: item.type,
+    date: item.date ?? "",
+  })
 );
 
 const recentUpdateGroups = groupUpdatesByGame(normalizedUpdates).slice(0, 18);
+
+const guideEntryCount = getGuideEntryCount();
+const gameCollectionCount = getGameCollectionCount();
+const featuredHubCount = getFeaturedHubCount();
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -510,7 +275,7 @@ function GuideCard({ guide }: { guide: GuideLink }) {
   );
 }
 
-function GuideGroupSection({ group }: { group: GuideGroup }) {
+function GuideGroupSection({ group }: { group: ArchiveGuideGroup }) {
   return (
     <section className="scroll-mt-24">
       <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
@@ -571,8 +336,6 @@ function FaqSection() {
 }
 
 export default function AllGameGuidesPage() {
-  const uniqueGuideCount = countUniqueGuides(guideGroups);
-
   return (
     <Layout>
       <main className="bg-slate-950 text-white">
@@ -619,12 +382,9 @@ export default function AllGameGuidesPage() {
               </div>
 
               <div className="grid grid-cols-3 gap-3">
-                <StatCard value={`${uniqueGuideCount}+`} label="Guide entries" />
-                <StatCard
-                  value={recentUpdateGroups.length}
-                  label="Game collections"
-                />
-                <StatCard value={activeGuideHubs.length} label="Featured hubs" />
+                <StatCard value={`${guideEntryCount}+`} label="Guide entries" />
+                <StatCard value={gameCollectionCount} label="Game collections" />
+                <StatCard value={featuredHubCount} label="Featured hubs" />
               </div>
             </div>
           </div>

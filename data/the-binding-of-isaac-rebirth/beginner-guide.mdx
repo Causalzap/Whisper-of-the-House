@@ -1,0 +1,701 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const firstRunColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What I Do", label: "What I Do" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const firstRunRows = [
+  {
+    Step: "1. Start with Isaac on Normal",
+    "What I Do":
+      "I use Isaac first and stay on Normal until the basic room loop makes sense.",
+    "Why It Matters":
+      "A fresh save starts simple. I want to learn movement, shooting, keys, bombs, coins, shops, and boss timing before making the run harder.",
+  },
+  {
+    Step: "2. Find the item room before forcing the boss",
+    "What I Do":
+      "If I have a key, I look for the treasure room before the boss room.",
+    "Why It Matters":
+      "One early item can turn a weak floor into a playable run, especially before I know enemy patterns.",
+  },
+  {
+    Step: "3. Spend bombs on visible value first",
+    "What I Do":
+      "I check tinted rocks, blocked pickups, useful chests, and strong secret room spots before bombing random walls.",
+    "Why It Matters":
+      "Bombs are an early safety tool. Wasting the only bomb can cost me soul-heart protection or a high-value room later.",
+  },
+  {
+    Step: "4. Enter the shop when I have money or a reason",
+    "What I Do":
+      "I treat 5 coins as small utility money and 15 coins as the real shop-item number.",
+    "Why It Matters":
+      "Walking into every shop with no money burns keys. A 15-cent item can be huge, but a broke shop visit is usually wasted.",
+  },
+  {
+    Step: "5. Protect red hearts before deal floors and big bosses",
+    "What I Do":
+      "I use soul hearts, blue hearts, and smart shop buys to keep red-heart damage under control.",
+    "Why It Matters":
+      "Red-heart damage can hurt deal chances, and later floors punish sloppy damage much harder.",
+  },
+  {
+    Step: "6. Treat Mom as the first real wall",
+    "What I Do":
+      "I do not judge the whole game before learning Mom's Foot patterns.",
+    "Why It Matters":
+      "Mom is the first big test of dodging, floor awareness, damage, health, and screen-reading at the same time.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why It Hurts" },
+  { key: "Better Habit", label: "Better Habit" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Going boss first with a weak build",
+    "Why It Hurts":
+      "A boss can end the run before I use the floor's free power.",
+    "Better Habit":
+      "Check for the item room first when I have a key and the map still has safe rooms left.",
+  },
+  {
+    Mistake: "Spending the last bomb on a random wall",
+    "Why It Hurts":
+      "The next room may have a tinted rock, chest, blocked pickup, or better secret room candidate.",
+    "Better Habit":
+      "Spend the last bomb only when I can name the value I am trying to get.",
+  },
+  {
+    Mistake: "Opening shops while broke",
+    "Why It Hurts":
+      "A shop visit can waste a key if I have no coins and no clear reason to enter.",
+    "Better Habit":
+      "Use 5 coins for small fixes, 15 coins for the main shop item, and 20 coins when I want a main item plus a backup pickup.",
+  },
+  {
+    Mistake: "Taking every Devil Deal",
+    "Why It Hurts":
+      "Trading red hearts for damage can kill a beginner run if I cannot dodge consistently yet.",
+    "Better Habit":
+      "Take a deal only when the item clearly carries the run or I have enough health to survive the next floor.",
+  },
+  {
+    Mistake: "Using D6 just because it is charged",
+    "Why It Hurts":
+      "A reroll can turn a usable item into something worse, especially if I do not know the room pool yet.",
+    "Better Habit":
+      "After D6 is unlocked, use it when the current pedestal item is bad, unsafe, or does not fit the run.",
+  },
+  {
+    Mistake: "Trying Repentance routes too early",
+    "Why It Hurts":
+      "Repentance adds harder rooms, bosses, and route decisions before I even understand Mom and the Womb.",
+    "Better Habit":
+      "Use the full version, but learn the game in layers: Basement, Caves, Depths, Mom, Womb, then deeper routes.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For your first **The Binding of Isaac: Rebirth** runs, start with **Isaac on Normal**, find the **item room** before forcing the boss, save keys for important locked rooms, spend bombs on visible value, and treat **Mom's Foot** as the first real wall.
+
+My beginner route is simple: **item room → useful pickups → shop only if I have money or a reason → boss → protect red hearts → repeat**. If Isaac has **D6** unlocked later, use it to reroll bad pedestal items, not as a panic button on every item you see.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for new Steam sale players starting The Binding of Isaac: Rebirth, Repentance, and Repentance+. This guide focuses on the first ten runs, not full Dead God completion.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-dlc-fresh-save-isaac.webp"
+    alt="The Binding of Isaac Rebirth fresh save character select showing Isaac as the starting character"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    On a fresh save, I keep the first goal small: start with Isaac, learn the floor loop, then move to stronger or safer characters later.
+  </figcaption>
+</figure>
+
+<h2 id="binding-of-isaac-beginner-guide">
+  The Binding of Isaac Rebirth beginner guide
+</h2>
+
+The first mistake I see new players make is treating Isaac like a game that should make sense immediately.
+
+It does not.
+
+A full Repentance setup is enormous. Repentance adds **130+ new items**, brings the game to **more than 700 items total**, and adds **100+ new enemies**, **25+ new bosses**, **100+ new achievements**, and **5,000+ room designs**. That is why I do not try to learn everything in the first night.
+
+My first ten runs have one job:
+
+<strong>learn the floor loop well enough that dying teaches me something.</strong>
+
+That means I care about the same small set of decisions every run:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Can I reach the item room?</li>
+  <li>Do I need this key now or later?</li>
+  <li>Is this shop worth entering with my current coins?</li>
+  <li>Do I have a real bomb target?</li>
+  <li>Do I have enough health to take a risky room?</li>
+  <li>Should I fight the boss now or clear more safe rooms first?</li>
+  <li>Can I keep red-heart damage under control before the next floor?</li>
+</ul>
+
+That is the whole beginner route. Not all characters. Not all endings. Not all unlocks. Just the run in front of me.
+
+<h2 id="normal-or-hard">
+  Should beginners start on Normal or Hard?
+</h2>
+
+I start on **Normal** when I am brand new or returning after a long break.
+
+Hard Mode matters later because completion marks matter, but it is a bad first lesson if I am still walking into spikes, confusing item rooms with shops, and losing health before the first boss.
+
+My rule is:
+
+<strong>Normal for learning. Hard when I can explain why I died.</strong>
+
+I switch to Hard after these things feel stable:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>I can clear Basement I without taking random contact damage every room.</li>
+  <li>I know where the item room, shop, boss room, curse room, and sacrifice room fit into my route.</li>
+  <li>I can save bombs instead of dropping them just to see what happens.</li>
+  <li>I understand that soul hearts are protection, not just extra health.</li>
+  <li>I can reach Mom with a build that still has a chance to win.</li>
+</ul>
+
+If I am still asking what every door does, I stay on Normal. The game is already dense enough.
+
+<h2 id="why-isaac-first">
+  Why I start with Isaac instead of Azazel or Magdalene
+</h2>
+
+I start with **Isaac** because he teaches the baseline game.
+
+That does not mean Isaac is always the easiest character. **Azazel** is usually easier for early clears because flight and short Brimstone solve many room problems immediately. **Magdalene** is safer when the main problem is health because she starts with more red-heart buffer. Those characters are useful, but they can hide the lesson I need from the first ten runs.
+
+Isaac forces me to learn the normal route:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>how to move without flight,</li>
+  <li>how to aim normal tears,</li>
+  <li>when one key should go to the item room,</li>
+  <li>when the shop is worth entering,</li>
+  <li>when a bomb target is actually worth the bomb,</li>
+  <li>and why a weak boss fight usually started with an earlier floor decision.</li>
+</ul>
+
+My practical split is:
+
+<strong>Isaac teaches the game. Magdalene gives more room to survive. Azazel helps me convert knowledge into faster wins.</strong>
+
+If you already know the first-floor loop and only want safer character routing, use the <Link href="/the-binding-of-isaac-rebirth/best-beginner-characters/">Best Beginner Characters Guide</Link>.
+
+<h2 id="first-ten-runs-route">
+  My first ten runs route
+</h2>
+
+This is the route I use when I want a clean beginner run instead of a panic run.
+
+<GuideTable
+  caption="The Binding of Isaac Rebirth first ten runs route."
+  columns={firstRunColumns}
+  rows={firstRunRows}
+/>
+
+The most important part is the item room. If I have a key, I usually want that room before the boss. A weak Isaac run with no item is exactly how early bosses start feeling unfair.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-first-item-room-route.webp"
+    alt="The Binding of Isaac Rebirth map route leading back to the first item room"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    When I can reach the item room safely, I usually do it before the boss. One early item can change the whole floor.
+  </figcaption>
+</figure>
+
+<h2 id="floor-priority">
+  What should I do on each floor?
+</h2>
+
+On each early floor, I ask one question:
+
+<strong>What can I safely gain before the boss?</strong>
+
+My default order is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <strong>Clear safe rooms first.</strong> I want coins, keys, bombs, and hearts without taking unnecessary damage.
+  </li>
+  <li>
+    <strong>Open the item room if I have a key.</strong> This is usually the biggest power spike on the floor.
+  </li>
+  <li>
+    <strong>Check the shop only when I have a reason.</strong> If I have 0 coins, I normally keep the key.
+  </li>
+  <li>
+    <strong>Spend bombs only on visible value.</strong> I look for tinted rocks, blocked pickups, chests, or strong secret room candidates before random walls.
+  </li>
+  <li>
+  <strong>Enter the boss room once the floor stops offering safe value.</strong> I keep the full yes/no checklist in the <Link href="#boss-room">boss room section</Link> below instead of repeating it here.
+</li>
+
+</ol>
+
+I do not full-clear every floor automatically. If the remaining rooms are dangerous and I already have what I need, I leave.
+
+That is one of the first real beginner judgments: **more rooms are not always more value**.
+
+<h2 id="stage-priority">
+  Basement, Caves, Depths, and Womb: what changes
+</h2>
+
+I do not play every stage with the same mindset.
+
+In **Basement**, I am mostly learning. I want the item room, basic pickups, and clean movement. If I take damage here, I ask whether it was enemy contact, bad spacing, or greed.
+
+In **Caves**, the run starts asking for better reactions. Enemy patterns get less forgiving, and a weak build begins to feel weak. This is where I stop assuming every room is worth clearing.
+
+In **Depths**, I start preparing for Mom. I care more about health, damage, and whether the floor still has useful locked rooms. I also start watching the clock if I am thinking about **Boss Rush**, because Boss Rush appears when Mom is beaten within **20 minutes**.
+
+In **Womb**, the route changes again. From Womb onward, floors normally do not generate item rooms or shops, and damage becomes a full heart. That means I do not wander just because the map has unopened rooms. I protect the build I already made.
+
+This is why the early floors matter so much. The first three chapters are where I build the run. Womb is where the run starts asking whether that build was good enough.
+
+<h2 id="keys-bombs-coins">
+  Keys, bombs, and coins: what I save and what I spend
+</h2>
+
+The early game gets much easier once I stop treating pickups like random candy.
+
+A key is not just a key. It is a possible item room, shop, library, chest, or future floor option.
+
+A bomb is not just damage. It can open a tinted rock, reach a chest, reveal a secret room, destroy a machine, or help kill a boss.
+
+Coins are weak until they cross a useful shop number. In many early shops, the item that matters is **15 cents**, so walking into a shop with 2 coins and one key can be a waste unless I need a heart, bomb, or key badly.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-shop-20-coins.webp"
+    alt="The Binding of Isaac Rebirth shop decision with enough coins to buy a 15 cent item"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A shop starts to matter when I have enough money to make a real decision. I treat 15 cents as the big early shop number.
+  </figcaption>
+</figure>
+
+My simple spending rules:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>One key:</strong> save it for the item room unless the shop is clearly more important.
+  </li>
+  <li>
+    <strong>One bomb:</strong> save it unless I see a tinted rock, strong chest, blocked pickup, or clear boss use.
+  </li>
+  <li>
+    <strong>Five coins:</strong> useful for small shop pickups, but not enough to force every shop.
+  </li>
+  <li>
+    <strong>Fifteen coins:</strong> now I can consider the main shop item.
+  </li>
+  <li>
+    <strong>Twenty coins or more:</strong> I can buy a main item and still consider a key, heart, or bomb if the shop offers one.
+  </li>
+</ul>
+
+<h2 id="tinted-rocks-secret-rooms">
+  Tinted rocks and secret rooms: where my bombs go
+</h2>
+
+Tinted rocks are the first bomb target I check.
+
+They are not just decorative rocks. Destroying a tinted rock can drop 1-3 rewards, including **Soul Hearts**, keys, bombs, locked chests, rare red chests, or **The Small Rock** after that item is unlocked. The main beginner reason I care is simple: soul hearts are one of the best early ways to protect red hearts.
+
+My bomb rule is:
+
+<strong>If I only have one bomb, I want a visible reason to spend it.</strong>
+
+That visible reason can be a tinted rock, a blocked soul heart, a strong chest, or a secret room candidate.
+
+For regular **Secret Rooms**, I look for map gaps that touch several rooms. A normal Secret Room is usually next to **3 or 4 rooms**, while a Super Secret Room is usually attached to only **1 room**. I also check whether the wall can actually have an entrance. If rocks, gaps, spikes, or awkward room geometry block the middle of the wall, I look somewhere else.
+
+This does not make every bomb perfect, but it turns bombing from a guess into a test.
+
+<h2 id="blue-hearts">
+  Why blue hearts matter
+</h2>
+
+Blue hearts, soul hearts, and similar protection matter because they sit in front of red hearts.
+
+That is the whole beginner lesson.
+
+If blue health absorbs the hit, I keep my red-heart containers safe. That can preserve future deal chances and keep the run alive before major bosses.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-blue-heart-before-mom.webp"
+    alt="The Binding of Isaac Rebirth shop pickup with a blue heart before a major boss fight"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I like buying or saving blue hearts before a major boss when my build is strong but my red health is exposed.
+  </figcaption>
+</figure>
+
+My beginner health rule is:
+
+<strong>If a blue heart protects the next deal chance or keeps me alive for Mom, it is usually worth more than a random gamble.</strong>
+
+I do not buy every heart. I buy health when the next fight is the thing that can end the run.
+
+<h2 id="boss-room">
+  When should I enter the boss room?
+</h2>
+
+I enter the boss room when one of these is true:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>I already found the item room.</li>
+  <li>The remaining rooms are more dangerous than useful.</li>
+  <li>I have enough health and damage to fight cleanly.</li>
+  <li>I am low on resources and the floor has stopped offering safe value.</li>
+</ul>
+
+I avoid going boss first when my build is still basic and I have a key available. Boss-first can work, but it is a bad beginner habit if I am skipping free power.
+
+Early bosses teach movement. They also teach panic. A boss like Dingle, Larry Jr., or Monstro can look simple, then trap me in poop, corners, creep, or projectiles if I stop moving.
+
+My boss rule is:
+
+<strong>Keep space first, deal damage second.</strong>
+
+If I am stuck in a corner, the run is already going wrong.
+
+<h2 id="mom-foot">
+  Mom's Foot is the first real wall
+</h2>
+
+The first big beginner wall is **Mom's Foot**.
+
+This fight is where the game checks whether I have learned more than damage. I need to watch the doors, listen for patterns, keep moving, and avoid getting trapped by enemies while trying to hit the boss.
+
+The scary part is not just the stomp. It is the way the room makes me split attention. I am watching the center, the doors, the shadows, the enemies, and my health at the same time.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-mom-foot-first-wall.webp"
+    alt="The Binding of Isaac Rebirth Mom's Foot boss fight as the first major beginner wall"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mom is the first fight where I stop treating the run as a random room clear and start reading the whole screen.
+  </figcaption>
+</figure>
+
+Before entering, I want the run to have a real plan:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>enough red or blue health to survive mistakes,</li>
+  <li>at least one useful damage or tears upgrade if possible,</li>
+  <li>a bomb or active item if it can help the fight,</li>
+  <li>no obvious item room left behind,</li>
+  <li>no easy shop heart sitting there if I can afford it.</li>
+</ul>
+
+If I lose to Mom, I do not call the run wasted. I ask what killed me: low damage, no health, panic movement, bad positioning, or not knowing when the stomp was coming.
+
+That answer matters more than the death.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="devil-deals">
+  Should beginners take Devil Deals?
+</h2>
+
+I do not take every Devil Deal as a beginner.
+
+A Devil Deal can be run-winning, but it is also one of the fastest ways to turn a playable run into a dead one. Trading red heart containers is dangerous when I am still bad at dodging.
+
+The deal system is also more numeric than it first looks. Avoiding red-heart damage matters, and destroying a shopkeeper adds **+10%** deal chance for the current floor. One common formula example is that no red-heart damage plus a destroyed shopkeeper can push the base deal chance above 100%, though recent deal-room penalties can still reduce what I actually see.
+
+That is why blue hearts, tinted rocks, and shop hearts connect to Devil Deals. They are not just health. They are deal protection.
+
+My rule is:
+
+<strong>I only take a Devil Deal when I know why it helps and I can survive the next floor without that health.</strong>
+
+I skip the deal when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>I am already low on red hearts,</li>
+  <li>I do not understand the item,</li>
+  <li>my dodging is not stable yet,</li>
+  <li>the item does not clearly fix damage, survivability, or room clearing,</li>
+  <li>I would be entering the next floor one mistake away from death.</li>
+</ul>
+
+This is one of the biggest differences between a beginner route and a highlight run. A great player can turn low health into speed. I need the health until I can prove I do not.
+
+<h2 id="run-changing-items">
+  Run-changing items I pay attention to early
+</h2>
+
+I do not need to memorize every item to start improving.
+
+I only need to recognize when an item changes the run. Some items are ordinary stat bumps. Some items completely rewrite how I should play.
+
+The names I pay attention to early are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Brimstone:</strong> a major damage and firing-pattern change. If I get this kind of carry item, I can route more confidently.
+  </li>
+  <li>
+    <strong>Mom's Knife:</strong> a run-defining offensive item later, and a good example of why unlock order eventually matters.
+  </li>
+  <li>
+    <strong>Sacred Heart:</strong> the kind of high-impact Angel item that can make a safe run much stronger.
+  </li>
+  <li>
+  <strong>The Small Rock:</strong> the tinted-rock payoff mentioned above, and a good reminder that bomb discipline can create real item value.
+</li>
+</ul>
+
+I am not saying I need these items to win. I am saying these names become anchors. When I see a strong item, I stop playing like the run is weak. When I see a weak or awkward item, I start thinking about whether I have a reroll, a shop option, or a safer floor route.
+
+<h2 id="d6">
+  What about Isaac's D6?
+</h2>
+
+The **D6** is important, but I do not treat it as a fresh-save assumption.
+
+On a true fresh file, Isaac may not start with D6 yet. After D6 is unlocked, Isaac starts with it, and it becomes one of the biggest reasons to keep playing him. The D6 rerolls item pedestals in the current room, so it is especially valuable when a room has multiple item choices.
+
+My D6 rule is:
+
+<strong>I reroll items that are low-value, unsafe, or bad for the current run. I do not reroll just because the D6 is charged.</strong>
+
+Good D6 targets include:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>an item room item that does not help damage, tears, health, or survival,</li>
+  <li>a shop item I can afford but do not want,</li>
+  <li>a Devil Deal or Angel item that is not worth the cost or opportunity,</li>
+  <li>a boss reward that does not fix the next floor.</li>
+</ul>
+
+Bad D6 targets include:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>a solid damage or tears item that already fixes the run,</li>
+  <li>health when health is the reason I can survive the next floor,</li>
+  <li>a reroll before I check whether another room has a better target,</li>
+  <li>an item I do not understand when I have no way to judge the average reroll.</li>
+</ul>
+
+The question is not “can I reroll?” The question is “is this item worse than the average item I could get from this room?”
+
+<h2 id="item-descriptions">
+  Item descriptions help, but they do not play the run for you
+</h2>
+
+Item descriptions make Isaac much easier to learn, especially now that the item pool is so large. If I can see what an item does, I make fewer blind mistakes.
+
+But I do not let item descriptions replace judgment.
+
+They help me answer:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>what this item does,</li>
+  <li>whether it is active or passive,</li>
+  <li>whether it changes damage, tears, speed, or survivability,</li>
+  <li>whether it creates a familiar, pickup, or special effect.</li>
+</ul>
+
+They do not answer:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>whether I should spend my last key,</li>
+  <li>whether I should take damage to enter a room,</li>
+  <li>whether I should buy now or save coins,</li>
+  <li>whether a Devil Deal is safe for my current skill level,</li>
+  <li>whether I should leave the floor,</li>
+  <li>whether a D6 reroll is better than the item already in front of me.</li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-item-description-mod.webp"
+    alt="The Binding of Isaac Rebirth item description helper explaining Jar of Flies"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Descriptions solve the “what does this do?” problem. They do not solve the route decision for me.
+  </figcaption>
+</figure>
+
+<h2 id="repentance-beginner">
+  Should a beginner rush Repentance content?
+</h2>
+
+I would buy Repentance during a strong sale, but I would not rush its harder routes.
+
+Repentance adds a huge amount of content. That is good long-term, but it is also why I keep the first plan narrow. If I start chasing alternate paths before I can beat Mom cleanly, I am just adding more ways to die.
+
+My beginner order is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Learn Basement and Caves room clearing.</li>
+  <li>Beat Mom's Foot.</li>
+  <li>Learn what Womb changes about damage and room value.</li>
+  <li>Start caring about unlock order.</li>
+  <li>Then move into Repentance route planning.</li>
+</ol>
+
+Use the full version if you own it. Just do not force the full version to be your first lesson.
+
+<h2 id="mistakes">
+  Beginner mistakes I try to avoid
+</h2>
+
+These are the mistakes that waste the most early runs.
+
+<GuideTable
+  caption="Common beginner mistakes in The Binding of Isaac Rebirth."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The theme is simple: do not spend resources just because the game gives you a button to press. Spend keys, bombs, coins, hearts, deals, and D6 charges when they fix the next problem.
+
+<h2 id="what-to-do-after-mom">
+  What should I do after beating Mom?
+</h2>
+
+After the first Mom kill, the game starts opening up. I do not turn this beginner page into the whole unlock route, but I do change the question.
+
+Before Mom, I ask:
+
+<strong>Can I survive the basic floor loop?</strong>
+
+After Mom, I ask:
+
+<strong>Which unlock makes future runs stronger?</strong>
+
+That usually means I start thinking about strong challenge rewards, shop donation progress, deeper boss routes, and safer characters. I also stop panicking about timed milestones. The **20-minute Boss Rush window** from the stage notes matters later, but I do not force that timer until my normal Mom route is stable.
+
+For the full order, use the <Link href="/the-binding-of-isaac-rebirth/unlock-order/">Unlock Order Guide</Link>. If you are choosing who to play next, use the <Link href="/the-binding-of-isaac-rebirth/best-beginner-characters/">Best Beginner Characters Guide</Link>.
+
+<h2 id="when-to-switch-guides">
+  When to use another guide
+</h2>
+
+This page is for the first ten runs and the first big walls. If the problem changes, I switch guides.
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/dlc-buying-guide/">DLC Buying Guide</Link> if you are deciding between Rebirth, Repentance, the Complete Bundle, and Repentance+.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/unlock-order/">Unlock Order Guide</Link> when you have beaten Mom and want the best unlocks first.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/best-beginner-characters/">Best Beginner Characters Guide</Link> if Isaac feels too plain and you want a safer next character.
+  </li>
+  <li>
+    Use the <Link href="/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide/">Tainted Characters Unlock Guide</Link> later, after Hush, Mother, Strange Door, and the Home route make sense.
+  </li>
+</ul>
+
+I do not try to turn this beginner page into a full wiki. It should answer one question: **what should I actually do in my first Isaac runs?**
+
+<h2 id="faq">
+  The Binding of Isaac Rebirth beginner FAQ
+</h2>
+
+### Should I start with Normal or Hard?
+
+Start on Normal if you are new. Move to Hard when you understand why you are dying and want completion marks to matter.
+
+### Why start with Isaac instead of Azazel?
+
+Isaac teaches the normal game. Azazel is easier for early wins because of flight and short Brimstone, but he can hide movement, range, and floor-routing mistakes that matter on other characters.
+
+### Is Magdalene better for new players?
+
+Magdalene is safer if you keep dying from health mistakes. I still like Isaac first because he teaches the baseline route more cleanly.
+
+### Should I go to the item room before the boss?
+
+Usually yes, if you have a key. One item can make the boss much easier.
+
+### When should I enter the shop?
+
+I like entering when I have money or a clear reason. If I have no coins and only one key, I usually save the key for the item room.
+
+### How many coins do I need for shop items?
+
+Many important shop items cost 15 cents. Smaller purchases can still help, but 15 cents is the number where the shop starts becoming a real power decision.
+
+### What should I use bombs for?
+
+Use bombs for tinted rocks, useful chests, strong secret room candidates, blocked pickups, or boss damage when you have extras. Do not waste your last bomb without a target.
+
+### How do I find Secret Rooms?
+
+Regular Secret Rooms are usually next to 3 or 4 rooms. I look for map gaps with several adjacent rooms and avoid walls blocked by rocks, gaps, spikes, or awkward room geometry.
+
+### Why are tinted rocks important?
+
+Tinted rocks can drop Soul Hearts and other rewards, making them one of the best early bomb targets. I check them before spending bombs on random walls.
+
+### Does Isaac start with D6?
+
+Not on every file. D6 is an unlock that later becomes Isaac's key active item. Once Isaac has D6, use it to reroll bad pedestal items instead of rerolling every item automatically.
+
+### Are blue hearts important?
+
+Yes. Blue hearts and soul hearts protect red hearts, which can help preserve deal chances and keep the run alive before major bosses.
+
+### Should I take Devil Deals as a beginner?
+
+Only if the item clearly helps and you can survive without the red hearts. Do not take every deal automatically.
+
+### Why do I keep dying to Mom's Foot?
+
+Usually because you are watching only the boss and not the whole room. Mom checks positioning, enemies, stomp timing, health, and damage at the same time.
+
+### Do item descriptions make the game easy?
+
+They make it clearer, not easy. They help with item effects, but you still need to make route, health, shop, D6, deal, and boss decisions yourself.
