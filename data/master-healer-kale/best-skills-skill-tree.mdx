@@ -1,0 +1,655 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const phaseColumns = [
+  { key: "Phase", label: "Phase" },
+  { key: "Buy First", label: "Buy First" },
+  { key: "Why I Prioritize It", label: "Why I Prioritize It" },
+];
+
+export const phaseRows = [
+  {
+    Phase: "First Goblin fights",
+    "Buy First":
+      "Grandpa Bagel armor or health, Kale Heal amount, and enough mana for one more cast.",
+    "Why I Prioritize It":
+      "The first wall is not damage. It is running out of mana while Grandpa Bagel is still taking hits.",
+  },
+  {
+    Phase: "First Ruby",
+    "Buy First":
+      "Party Heal if Madeleine or Klepon is getting hit; Meditate if Kale runs dry; Protection if one ally keeps dying at a specific moment.",
+    "Why I Prioritize It":
+      "Ruby should solve the last failure, not unlock a random spell because it looks strong.",
+  },
+  {
+    Phase: "Mid-game farming",
+    "Buy First":
+      "Madeleine magic scaling, Party Heal support, Meditate upgrades, and enough shield tools to stop sudden backline deaths.",
+    "Why I Prioritize It":
+      "Once normal fights are stable, clear speed matters. Madeleine usually becomes my most reliable damage route.",
+  },
+  {
+    Phase: "Hard dungeon setup",
+    "Buy First":
+      "Protection, shield upgrades, Haste, mana recovery, and the dungeon-specific spell I need, such as Esuna for Gravity Arena.",
+    "Why I Prioritize It":
+      "Hard dungeons are not all the same. Underwater Abyss asks for speed, Magma Core asks for Shield timing, and Winterfall Peak asks for mana recovery.",
+  },
+  {
+    Phase: "Nightmare and 100%",
+    "Buy First":
+      "Nightmare Mode, facility upgrades, Angel Form, and the missing Tavern branches needed for achievement cleanup.",
+    "Why I Prioritize It":
+      "At this point I am no longer just clearing the story. I am building toward Nightmare Demon King and 100% Tavern completion.",
+  },
+];
+
+export const problemColumns = [
+  { key: "If This Happens", label: "If This Happens" },
+  { key: "I Usually Buy", label: "I Usually Buy" },
+  { key: "I Avoid Buying", label: "I Avoid Buying" },
+];
+
+export const problemRows = [
+  {
+    "If This Happens": "Grandpa Bagel dies before the boss",
+    "I Usually Buy":
+      "Armor, max health, and healing upgrades that keep him above the danger line.",
+    "I Avoid Buying":
+      "Extra damage nodes that do nothing if the tank collapses before the party can use them.",
+  },
+  {
+    "If This Happens": "Kale reaches 0 mana too early",
+    "I Usually Buy":
+      "Max mana, Meditate, Meditate support nodes, and mana refund tools.",
+    "I Avoid Buying":
+      "More expensive spells that make the mana problem worse.",
+  },
+  {
+    "If This Happens": "Madeleine or Klepon gets sniped",
+    "I Usually Buy":
+      "Party Heal, Protection, ally max health, Last Will, and shield upgrades.",
+    "I Avoid Buying":
+      "Only upgrading Grandpa Bagel while ignoring backline damage.",
+  },
+  {
+    "If This Happens": "The dungeon timer or boss takes too long",
+    "I Usually Buy":
+      "Madeleine damage, Arcane/Dark/Holy upgrades, Haste, Fire Spread, Multi Shot, and Angel Form later.",
+    "I Avoid Buying":
+      "Pure safety nodes when the actual wall is clear speed.",
+  },
+  {
+    "If This Happens": "I am cleaning achievements",
+    "I Usually Buy":
+      "Data Bank, Reset Point, dungeon-specific spells, Training Facility, and Research Facility progress.",
+    "I Avoid Buying":
+      "Random filler nodes before I know which achievement condition I am solving.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Master Healer Kale best skills**, I start with survival before damage: **Grandpa Bagel armor / HP**, Kale's basic **Heal**, and enough mana to finish early fights. After the first Ruby, I choose based on the wall: **Party Heal** for backline damage, **Meditate** for mana problems, and **Protection** for shield checks.
+
+My preferred mid-game route is **Madeleine magic scaling**. At one 50% Tavern progress point, my damage board showed **Dark Magic 15.7K**, **Arcane Magic 14.0K**, **Holy Magic 10.8K**, **Fireball 9.19K**, and **Ice Magic 6.06K**, far ahead of the lower arrow lines. I still keep Klepon useful, but I do not split damage upgrades forever.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the full release of Master Healer Kale with Useless Party, including the v1.5 Reset Point quality-of-life change. This guide focuses on upgrade priority, skill tree decisions, spell choices, and practical build direction instead of listing every node like a wiki.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-damage-board-skill-tree-50.webp"
+    alt="Master Healer Kale Tavern skill tree at 50 percent with damage board showing magic damage ahead of arrow damage"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is the point where I stop guessing. When the damage board shows Dark Magic, Arcane Magic, Holy Magic, Fireball, and Ice Magic carrying the run, I feed that route instead of splitting every upgrade evenly.
+  </figcaption>
+</figure>
+
+<h2 id="master-healer-kale-best-skills">
+  Master Healer Kale best skills and skill tree guide
+</h2>
+
+The biggest mistake I made early was treating every new node like progress.
+
+In **Master Healer Kale with Useless Party**, a bad skill tree can still look busy. I can have more spells, more icons, more branches open, and still lose for the same reason: Grandpa Bagel drops too fast, Kale runs out of mana, or Madeleine gets clipped by enemies the basic Heal cannot cover.
+
+So I do not build the tree from left to right. I build it from the last failure.
+
+If I lost because the tank died, I buy tank survival.  
+If I lost because the fight lasted too long, I buy damage.  
+If I lost because everyone got hit, I buy party healing or shields.  
+If I lost because Kale could not keep casting, I buy mana recovery.
+
+That is the useful way to read this skill tree. Most fights are configuration checks. Once the setup is right, the party stands there and wins. Once the setup is wrong, adding one more random node usually only delays the next failed run.
+
+<h2 id="early-upgrade-priority">
+  Early upgrade priority: tank, Heal, mana, then damage
+</h2>
+
+In the first few fights, I care more about keeping the loop alive than dealing perfect damage.
+
+Kale starts with a basic **Heal** that restores **30 health**, costs **10 mana**, has a **2-second casting time**, and a **2-second cooldown**. That means early mistakes are expensive. If I heal Grandpa Bagel when he is missing only a few HP, I waste a cast and move closer to hitting 0 mana before the boss dies.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-basic-heal-timing.webp"
+    alt="Master Healer Kale basic Heal tooltip showing 30 heal amount 10 mana cost 2 second casting time and 2 second cooldown"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I do not spam the first Heal. With 30 healing for 10 mana, I wait until the missing health is real enough to justify the cast.
+  </figcaption>
+</figure>
+
+My first upgrade order is usually:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>
+    <strong>Grandpa Bagel armor or health.</strong> If he dies first, the party loses its front line.
+  </li>
+  <li>
+    <strong>Kale Heal amount.</strong> If the heal barely misses the amount I need, every fight becomes harder.
+  </li>
+  <li>
+    <strong>Max mana.</strong> One more cast can be the difference between a failed Goblin Leader attempt and a clear.
+  </li>
+  <li>
+    <strong>Basic party damage.</strong> I add damage after the fight lasts long enough for the damage to matter.
+  </li>
+</ol>
+
+I do not rush flashy damage before survival. More damage feels good, but it does not help if Grandpa Bagel falls before the party reaches the boss.
+
+<h2 id="grandpa-bagel-tank-route">
+  Grandpa Bagel tank route: boring upgrades that win early fights
+</h2>
+
+Grandpa Bagel is asleep, but the whole early game depends on him.
+
+The first real wall is usually simple: the tank runs out of health before the enemies die. When that happens, I stop pushing and buy tank stats.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-grandpa-bagel-armor-upgrade.webp"
+    alt="Master Healer Kale Grandpa Bagel armor upgrade showing early tank survival value"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Armor is not exciting, but it changes the first route. If Grandpa Bagel starts taking tiny hits instead of collapsing, Kale has enough time to heal and the party has enough time to kill.
+  </figcaption>
+</figure>
+
+I buy tank upgrades when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Grandpa Bagel dies before the boss room is under control,</li>
+  <li>Kale is forced to spend every cast on one target,</li>
+  <li>the fight looks stable until one big hit starts a collapse,</li>
+  <li>or I am trying to keep a no-ally-loss dungeon clean later.</li>
+</ul>
+
+I stop buying tank upgrades once Grandpa Bagel is no longer the weak link. That is the point where I start watching the next failure more carefully. If the fight is safe but slow, I buy damage. If the backline gets clipped, I buy Party Heal, Protection, or ally health. If Kale runs dry, I fix mana before adding more buttons.
+
+<h2 id="first-ruby-choice">
+  First Ruby choice: Party Heal, Meditate, or Protection?
+</h2>
+
+Ruby is where the skill tree starts making me choose.
+
+I do not spend the first Ruby just because a spell looks strong. I ask which failure is happening right now.
+
+**Party Heal** is my first real answer to multi-target damage. The node starts at **20 heal amount**, **20 mana cost**, **3-second casting time**, and **5-second cooldown**. It is not a free button. If only Grandpa Bagel is taking damage, Party Heal can be overkill. But once Madeleine or Klepon gets hit, it becomes much more important.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-party-heal-spell-node.webp"
+    alt="Master Healer Kale Party Heal spell node showing 20 heal amount 20 mana cost 3 second casting time and 5 second cooldown"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I buy Party Heal when the backline starts taking damage. Before that, I prefer strengthening the basic Heal and tank route.
+  </figcaption>
+</figure>
+
+**Meditate** is the choice when the party is alive but Kale cannot keep paying for spells. I buy it when fights are long, when dungeons start with bad mana, or when I need to cast expensive support tools.
+
+**Protection** is the choice when I need one ally to survive a specific window. The base node gives **40 shield**, costs **25 mana**, has a **3-second casting time**, and a **18-second cooldown**. That makes it more deliberate than Party Heal. I do not press it randomly; I use it before a dangerous hit or achievement condition.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-protection-shield-spell.webp"
+    alt="Master Healer Kale Protection spell node showing 40 shield 25 mana cost 3 second casting time and 18 second cooldown"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Protection is not my default heal. I use it when I can predict the dangerous window, especially later in Magma Core and no-ally-loss routes.
+  </figcaption>
+</figure>
+
+My first Ruby rule is:
+
+<strong>Party Heal for spread damage, Meditate for mana walls, Protection for specific survival checks.</strong>
+
+<h2 id="skill-tree-priority-by-phase">
+  Skill tree priority by phase
+</h2>
+
+This is the cleanest way I think about upgrades from the first dungeon to Nightmare.
+
+<GuideTable
+  caption="Master Healer Kale skill tree priority by phase."
+  columns={phaseColumns}
+  rows={phaseRows}
+/>
+
+I keep this order flexible. If a dungeon effect changes the problem, I change the next purchase.
+
+For example, **Winterfall Peak** starts Kale with **60% mana**, so Meditate jumps in priority. **Underwater Abyss** gives the party **100 seconds** before they run out of breath, but the hard achievement asks for 50 seconds, so damage and speed matter more than slow defense. **Magma Core** pushes Shield and Protection value because the Fire Dragon condition requires full-party shield timing.
+
+That is why I do not call one skill “best” in every situation. The best skill is the one that fixes the wall in front of me.
+
+<h2 id="madeleine-damage-route">
+  Madeleine damage route: the magic tree I trust most
+</h2>
+
+I like Madeleine because her route keeps adding real damage layers.
+
+On one mid-game board at **50% Tavern skill tree completion**, the damage board showed:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li><strong>Dark Magic:</strong> 15.7K</li>
+  <li><strong>Arcane Magic:</strong> 14.0K</li>
+  <li><strong>Holy Magic:</strong> 10.8K</li>
+  <li><strong>Fireball:</strong> 9.19K</li>
+  <li><strong>Ice Magic:</strong> 6.06K</li>
+  <li><strong>Arrow:</strong> 1.22K</li>
+  <li><strong>Poison Arrow:</strong> 933</li>
+  <li><strong>Bomb Arrow:</strong> 876</li>
+  <li><strong>Fire Arrow:</strong> 708</li>
+  <li><strong>Lightning Arrow:</strong> 626</li>
+</ul>
+
+That does not mean Klepon is useless. It means that, in that run, Madeleine was clearly carrying the damage. When I see numbers like that, I stop pretending every branch deserves equal money.
+
+The early magic nodes I value most are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Fire Spread:</strong> Madeleine's basic Fireball has a chance to hit all enemies. At the shown level, it improves from **15% to 20%**.
+  </li>
+  <li>
+    <strong>Arcane Advantage:</strong> Madeleine deals more damage to full-health enemies. At the shown level, it improves from **+50% to +75%**.
+  </li>
+  <li>
+    <strong>Multi Shot:</strong> Arcane Magic fires an additional projectile every few attacks. At the shown level, the trigger improves from every **5** attacks to every **4**.
+  </li>
+  <li>
+    <strong>Keep Going:</strong> kills during Initiative extend the duration. At the shown level, it improves from **+3s to +4s**.
+  </li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-multi-shot-arcane-magic.webp"
+    alt="Master Healer Kale Multi Shot node for Arcane Magic additional projectile timing"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Multi Shot is the kind of node I like once Madeleine is already carrying. It makes the winning route fire more often instead of starting a new half-built route.
+  </figcaption>
+</figure>
+
+The most important habit is to check the damage board instead of arguing with the tree. If magic is ahead, I feed magic. If another route is ahead in your run, feed that route instead.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="madeleine-vs-klepon">
+  Madeleine vs Klepon: which damage dealer should I invest in?
+</h2>
+
+I do not think of Madeleine vs Klepon as a permanent team choice. I think of it as a timing choice.
+
+**Madeleine** is the route I trust most once her magic tree starts stacking. Fireball can spread, Arcane Magic can multi-shot, Dark Magic can support magic-defense reduction, and Holy Magic can connect damage back into healing. That makes her feel better when the run has enough survival to let the magic route scale.
+
+**Klepon** is still useful, especially earlier when faster basic attacks, arrow upgrades, poison, and attack frequency can help clean up enemies. I do not ignore him. I just avoid the trap of keeping both damage routes perfectly even after the board already shows one side winning.
+
+My practical split is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Invest in Klepon</strong> when he is actually getting kills, applying useful pressure, or lagging behind level goals.
+  </li>
+  <li>
+    <strong>Invest in Madeleine</strong> when the magic damage board is already ahead and I need faster dungeon clears.
+  </li>
+  <li>
+    <strong>Do not split evenly forever</strong> unless the current dungeon specifically rewards both routes.
+  </li>
+</ul>
+
+If I am pushing story progression, I feed the route that is already winning fights. If I am cleaning achievements, I make sure both characters eventually get the levels and attack unlocks they need.
+
+<h2 id="dark-holy-and-support-scaling">
+  Dark, Holy, and support scaling: when the build starts to stack
+</h2>
+
+After the basic magic route is working, I start caring about nodes that multiply the whole setup instead of only adding one more attack.
+
+**Mind Break** is a good example. It makes Dark Magic reduce enemy magic defense and increases all damage dealt by Madeleine. At the shown level, the bonus improves from **+8% to +10% Madeleine damage**. That is not just one spell getting better. It helps the whole Madeleine route.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-mind-break-dark-magic.webp"
+    alt="Master Healer Kale Mind Break node showing Dark Magic reducing magic defense and increasing Madeleine damage"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I like Mind Break after Madeleine is already online. It supports the whole magic route instead of acting like a small isolated damage bump.
+  </figcaption>
+</figure>
+
+Holy scaling can also matter because it links damage and healing. **Firefly** makes each Holy Magic attack increase Kale's next Heal amount. At the shown level, it improves from **+2 to +4 healing amount**. I do not buy that because I want one bigger Heal. I buy it when my route already uses Holy Magic often enough to turn that bonus into a steady support layer.
+
+**Personal Bonding** extends **Soft Spoken** duration. At the shown level, it improves from **+6 to +8 seconds**. I treat that kind of node as a support pickup, not a first priority. It is useful after the core survival and damage route is stable.
+
+This is where the tree starts to become dangerous. There are many good nodes, but good is not the same as urgent. I buy these after I know the route they are supporting.
+
+<h2 id="protection-and-shield-route">
+  Protection and shield route: when I start buying shield upgrades
+</h2>
+
+I do not start the run as a shield build, but shields become important later.
+
+Protection is especially useful when a dungeon or achievement asks for a specific safe window. The base version is already clear: **40 shield**, **25 mana**, **3s cast**, **18s cooldown**. From there, the support nodes decide whether Protection is just an emergency button or a real route.
+
+The shield nodes I like are:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Reinforcement:</strong> Protection grants more shield. At the shown level, it improves from **+45 to +60 shield**.
+  </li>
+  <li>
+    <strong>Cloudy Day:</strong> casting Heal increases Kale's next Protection shield. At the shown level, it improves from **+2 to +3 shield**.
+  </li>
+  <li>
+    <strong>Optimization:</strong> Protection refunds mana when cast on Madeleine. At the shown level, it improves from **10 to 15 mana refund**.
+  </li>
+  <li>
+    <strong>Last Will:</strong> when Grandpa Bagel gets KO'd, Madeleine and Klepon gain shield. The shown upgrade moves from **0 to 10 shield**.
+  </li>
+</ul>
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-reinforcement-protection-shield.webp"
+    alt="Master Healer Kale Reinforcement node increasing Protection shield from 45 to 60"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I start caring about Reinforcement when Protection is part of the plan, not when I am still struggling with the first basic Heal loop.
+  </figcaption>
+</figure>
+
+I buy shield upgrades when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Magma Core or Fire Dragon timing is coming up,</li>
+  <li>Madeleine keeps dying during otherwise good attempts,</li>
+  <li>I am working on no-ally-loss achievements,</li>
+  <li>or I need a controlled defensive window instead of more raw healing.</li>
+</ul>
+
+I do not buy the entire shield branch early. If the run is still losing to low damage or 0 mana, shields alone do not solve it.
+
+<h2 id="haste-and-speed">
+  Haste and speed: when clear time becomes the wall
+</h2>
+
+There is a point where survival is no longer the reason I lose.
+
+That is when Haste starts to matter more. The shown Haste tooltip gives an ally **100% attack speed bonus for 10 seconds**, costs **20 mana**, has a **1-second casting time**, and a **65-second cooldown**. Those numbers make it a setup button, not a spam button.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-magma-core-haste-setup.webp"
+    alt="Master Healer Kale Magma Core battle with Haste tooltip showing 100 percent attack speed bonus for 10 seconds"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Haste becomes important when the route needs tempo. I want it ready for damage windows, speed clears, and fights where surviving longer is not the problem anymore.
+  </figcaption>
+</figure>
+
+I like Haste before:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>speed checks like Underwater Abyss cleanup,</li>
+  <li>bosses that already feel safe but take too long,</li>
+  <li>Madeleine burst windows,</li>
+  <li>and late fights where the party has enough survival but needs faster kills.</li>
+</ul>
+
+I do not like Haste when I am still missing basic survival. A faster party is great. A faster party with a dead tank is still a dead run.
+
+<h2 id="reset-point-and-data-bank">
+  Reset Point and Data Bank: when I stop guessing
+</h2>
+
+Two utility nodes make the tree much easier to manage.
+
+**Reset Point** is especially important in the full release because the **v1.5 patch added the right-click single-node reset flow**. Earlier, a bad branch could feel like a full-tree mistake. Now I can use Reset Point to refund gold, skill points, and Ruby, and I can right-click a skill node to reset it and connected nodes.
+
+That makes respec decisions much less scary. I still do not reset for every small mistake, but I use it when the build has clearly drifted away from the problem I am trying to solve.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-reset-skill-tree-node.webp"
+    alt="Master Healer Kale Reset Point node explaining that it refunds gold skill points and rubies used"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Reset Point is worth buying once I know enough to recognize a bad path. The v1.5 right-click reset change makes fixing a messy branch much less painful.
+  </figcaption>
+</figure>
+
+**Data Bank** displays the Tavern's skill tree completion percentage. I do not need it to beat the early game, but I like it once I start caring about **I Am The Best**, the 100% Tavern achievement.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-data-bank-skill-tree-percentage.webp"
+    alt="Master Healer Kale Data Bank node displaying Tavern skill tree completion percentage"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Data Bank is a cleanup tool. I buy it when I want the 100% Tavern route to be visible instead of guessing how much of the tree remains.
+  </figcaption>
+</figure>
+
+My simple split is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Reset Point</strong> fixes a wrong branch or a build that spent Ruby in the wrong place.
+  </li>
+  <li>
+    <strong>Data Bank</strong> helps me track the long 100% Tavern route instead of guessing.
+  </li>
+</ul>
+
+<h2 id="angel-form">
+  Angel Form: strong, but not an early-game answer
+</h2>
+
+**Angel Form** is one of the most important late-game tools, but I do not rush my whole build around it early.
+
+The node transforms Kale into Angel Form for **10 seconds**. During Angel Form, Kale's other spell cooldowns charge **50% faster** and restore **50% more health**. It costs **25 mana**, has a **3-second casting time**, and a **90-second cooldown**.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-angel-form-skill-tree.webp"
+    alt="Master Healer Kale Angel Form node showing 10 second duration faster cooldowns and stronger healing"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Angel Form is powerful because the 10-second window compresses healing and cooldowns. I only get full value when mana and spell layout are already prepared.
+  </figcaption>
+</figure>
+
+I buy Angel Form when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>I have enough spells to take advantage of the 10-second window,</li>
+  <li>I can enter the window with enough mana,</li>
+  <li>my spell layout is organized enough that I can cast quickly,</li>
+  <li>and I am working on endgame fights or **Machine Gun Punch**.</li>
+</ul>
+
+I do not buy it as a panic fix. If I cannot keep the party alive before Angel Form is ready, the problem is still the base route.
+
+<h2 id="nightmare-endgame-teaser">
+  Nightmare endgame nodes: do not solve them on this page
+</h2>
+
+After Demon King, Nightmare Mode changes the upgrade route because dungeons can be cleared in Nightmare Mode to collect Ruby again. That is where the big endgame nodes start to matter, including **Phoenix Staff**, **Phoenix Armor**, **God Armor**, and **Arcana Armor**.
+
+I do not try to solve that whole route here because it belongs to the endgame page. The important skill-tree lesson is simple: once Nightmare starts, Ruby spending becomes a long-term plan, not a quick early unlock.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-nightmare-mode-unlock.webp"
+    alt="Master Healer Kale Nightmare Mode node explaining that Nightmare dungeons allow Ruby to be collected again"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Nightmare Mode is where I stop treating Ruby as a one-time unlock resource. For the full endgame order, I switch to the Nightmare guide instead of forcing it into this skill-tree page.
+  </figcaption>
+</figure>
+
+Use the <Link href="/master-healer-kale/nightmare-mode-endgame/">Nightmare Mode Endgame Guide</Link> for the full post-Demon-King route, including Ruby refarming, Training Facility, Research Facility, major endgame nodes, and Nightmare Demon King preparation.
+
+<h2 id="what-not-to-buy-early">
+  What I do not buy early
+</h2>
+
+I skip or delay nodes when they do not solve the current wall.
+
+That does not mean the nodes are bad. It means the timing is wrong.
+
+I usually delay:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>late damage branches</strong> when Grandpa Bagel is still dying too fast,
+  </li>
+  <li>
+    <strong>extra spells</strong> when Kale already has a mana problem,
+  </li>
+  <li>
+    <strong>full shield investment</strong> before Protection is part of my real route,
+  </li>
+  <li>
+    <strong>100% Tavern filler nodes</strong> before Nightmare Ruby and facilities are online,
+  </li>
+  <li>
+    <strong>Angel Form</strong> before I have enough spells, mana, and cooldown control to use the 10-second window.
+  </li>
+</ul>
+
+The tree gets much easier once I stop asking “is this node good?” and start asking:
+
+<strong>Does this node fix the next failed dungeon?</strong>
+
+<h2 id="related-guides">
+  Related Master Healer Kale guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Start with the <Link href="/master-healer-kale/">Master Healer Kale Guide Hub</Link> if you are still learning the fight → Tavern → upgrade → push loop.
+  </li>
+  <li>
+    Use the <Link href="/master-healer-kale/achievements-guide/">Achievements Guide</Link> if your build question is tied to hard achievements like **Gotta Go Fast**, **It's Fire Burning**, **Machine Gun Punch**, or **I Am The Best**.
+  </li>
+  <li>
+    Use the <Link href="/master-healer-kale/nightmare-mode-endgame/">Nightmare Mode Endgame Guide</Link> after Demon King, when Ruby refarming, Training Facility, Research Facility, and Nightmare bosses become the main route.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Master Healer Kale best skills FAQ
+</h2>
+
+### What are the best early skills in Master Healer Kale?
+
+I start with Grandpa Bagel armor or health, Kale's Heal amount, and max mana. Early fights fail because the tank dies or Kale runs out of mana, not because the tree lacks fancy spells.
+
+### Should I buy Party Heal early?
+
+Buy Party Heal when more than one ally is taking damage. It starts at 20 healing to all allies, 20 mana, 3s casting time, and 5s cooldown, so it is valuable but not free.
+
+### Is Protection better than Party Heal?
+
+Protection is better for a specific dangerous window or shield condition. Party Heal is better when the whole party is taking damage repeatedly.
+
+### When should I buy Meditate?
+
+Buy Meditate when fights are stable but Kale runs out of mana. It also becomes important in mana-pressure dungeons like Winterfall Peak, where Kale starts with 60% mana.
+
+### Madeleine vs Klepon: which damage dealer should I invest in?
+
+I use the damage board to decide. Madeleine is my preferred mid-game carry when Fireball, Arcane Magic, Dark Magic, Holy Magic, and Ice Magic are already leading. Klepon is still worth upgrading for level 100, attack unlocks, utility pressure, and cleanup, but I do not keep both damage routes evenly funded after one side is clearly carrying.
+
+### When should I stop buying survival upgrades and start buying damage?
+
+I switch to damage when Grandpa Bagel survives the opening pressure, Kale is not running out of mana too early, and Madeleine or Klepon is not getting picked off by stray hits. If the party is alive but the dungeon still takes too long, the next wall is clear speed, not more healing.
+
+### When should I use Reset Skill Tree?
+
+Use Reset Skill Tree when your upgrades are solving the wrong problem or when you need to reorganize for achievements and 100% cleanup. In the full release, the v1.5 right-click reset change makes single-branch fixes much easier than a full blind rebuild.
+
+### Is Data Bank worth buying?
+
+Data Bank is worth it for cleanup because it shows Tavern skill tree completion percentage. I do not rush it before my basic build is stable.
+
+### When should I buy Angel Form?
+
+Buy Angel Form when you have enough spells, mana, and cooldown control to use the 10-second window. It is a late-game power tool, not a fix for a broken early build.
+
+### What should I buy first after Nightmare Mode unlocks?
+
+Do not decide that from this page alone. Nightmare Mode changes Ruby economy and opens a separate endgame route. Use the Nightmare Mode Endgame Guide for Phoenix Staff, Phoenix Armor, God Armor, Arcana Armor, Training Facility, Research Facility, and Nightmare Demon King preparation.

@@ -1,0 +1,439 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const routeColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "What I Do", label: "What I Do" },
+  { key: "Move On When", label: "Move On When" },
+];
+
+export const routeRows = [
+  {
+    Stage: "Opening fights",
+    "What I Do":
+      "I let Grandpa Bagel take the first hits, then cast Heal only after the missing health is worth the mana.",
+    "Move On When":
+      "Grandpa Bagel survives without Kale burning all mana before the boss room.",
+  },
+  {
+    Stage: "Goblin Leader",
+    "What I Do":
+      "If the party spreads damage and Kale runs dry, I stop forcing the same attempt and return to the Tavern for tank, Heal, or mana upgrades.",
+    "Move On When":
+      "Grandpa Bagel lives long enough for Madeleine and Klepon to finish the boss without Kale hitting 0 mana too early.",
+  },
+  {
+    Stage: "First Ruby",
+    "What I Do":
+      "I spend Ruby only after I know the wall: Party Heal for backline damage, Meditate for mana problems, or Protection for a specific survival window.",
+    "Move On When":
+      "The new spell solves the problem that ended the last run instead of adding another button I cannot afford.",
+  },
+  {
+    Stage: "Mid-game dungeons",
+    "What I Do":
+      "I read the dungeon effect before pushing. Some dungeons ask for mana recovery, some ask for speed, and some ask for shields or debuff tools.",
+    "Move On When":
+      "My healing, damage, and spell setup match the dungeon effect instead of only beating normal enemies.",
+  },
+  {
+    Stage: "Demon King and after",
+    "What I Do":
+      "I treat Demon King as a setup check, then move into Nightmare Mode, Ruby refarming, facilities, and cleanup after the clear.",
+    "Move On When":
+      "The normal Demon King clear is stable enough that I can start building for Nightmare instead of barely surviving the story.",
+  },
+];
+
+export const stuckColumns = [
+  { key: "If You Are Stuck", label: "If You Are Stuck" },
+  { key: "Likely Problem", label: "Likely Problem" },
+  { key: "Best Next Step", label: "Best Next Step" },
+];
+
+export const stuckRows = [
+  {
+    "If You Are Stuck": "Grandpa Bagel dies first",
+    "Likely Problem":
+      "The frontline is too weak, so Kale spends every cast trying to keep one target alive.",
+    "Best Next Step":
+      "Buy tank survival, armor, health, or stronger basic Heal before chasing damage.",
+  },
+  {
+    "If You Are Stuck": "Kale reaches 0 mana",
+    "Likely Problem":
+      "The fight lasts longer than the current mana plan can support.",
+    "Best Next Step":
+      "Add max mana, Meditate, or mana-support upgrades before unlocking more expensive spells.",
+  },
+  {
+    "If You Are Stuck": "Madeleine or Klepon dies",
+    "Likely Problem":
+      "The fight has moved beyond single-target tank healing.",
+    "Best Next Step":
+      "Start using Party Heal, Protection, ally health, or shield support.",
+  },
+  {
+    "If You Are Stuck": "The dungeon takes too long",
+    "Likely Problem":
+      "The party is safe enough, but clear speed is now the wall.",
+    "Best Next Step":
+      "Commit harder to the damage route already carrying the run, usually Madeleine magic in mid-game.",
+  },
+  {
+    "If You Are Stuck": "Achievements or Nightmare feel impossible",
+    "Likely Problem":
+      "You are trying an endgame condition before the account is ready.",
+    "Best Next Step":
+      "Use the focused achievement or Nightmare guide instead of forcing the main route.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Master Healer Kale with Useless Party**, I play the early game like a setup puzzle, not a normal boss rush. I let **Grandpa Bagel** tank, avoid wasting the first Heal, return to the **Tavern** when mana runs out, then buy the upgrade that fixes the current wall.
+
+My basic route is: **fight until the setup breaks → return to Tavern → upgrade tank, healing, or mana → spend Ruby on the spell that solves the wall → push the next dungeon → repeat**. After **Demon King**, the route shifts into **Nightmare Mode**, Ruby refarming, Training Facility, Research Facility, and 100% cleanup.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the full release of Master Healer Kale with Useless Party, including the v1.5 Reset Point quality-of-life change. This page focuses on the main route, stuck points, and which focused guide to use next.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-first-battle-healer-party.webp"
+    alt="Master Healer Kale opening scene with Kale introducing himself as the best healer in the land"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I do not treat the first screen like a normal RPG party. Kale is safe, Grandpa Bagel tanks, and the whole run depends on whether my Tavern setup can keep the useless party alive long enough to deal damage.
+  </figcaption>
+</figure>
+
+<h2 id="master-healer-kale-guide">
+  Master Healer Kale guide: what kind of game this really is
+</h2>
+
+**Master Healer Kale with Useless Party** looks like a healer RPG at first, but the real game is closer to an incremental setup loop.
+
+I am not dodging attacks or moving the party around the screen. Most of the time, I am watching health bars, mana, cooldowns, and whether my last Tavern choices were good enough. When a dungeon fails, the answer is usually not “play cleaner.” The answer is usually:
+
+<strong>I bought the wrong thing, pushed too early, or entered the next dungeon without solving the actual wall.</strong>
+
+The first run teaches that quickly. Kale begins with **Heal**, which restores **30 health**, costs **10 mana**, has a **2-second casting time**, and a **2-second cooldown**. That sounds small, but it creates the first real decision: if Grandpa Bagel is still close to full health, I wait. A 30-point heal on a target missing only a little health is wasted mana.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-basic-heal-timing.webp"
+    alt="Master Healer Kale basic Heal tooltip showing 30 heal amount 10 mana cost 2 second casting time and 2 second cooldown"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first real habit is simple: I wait until Grandpa Bagel has actually lost enough health before casting Heal. Early mana is too limited to waste on panic overhealing.
+  </figcaption>
+</figure>
+
+That rhythm carries the whole game. I test a dungeon, see what breaks, then use gold, skill points, and Ruby to fix that exact failure.
+
+<h2 id="beginner-route">
+  My route from first battle to Demon King
+</h2>
+
+This is the main route I follow. It is not a perfect script, because the right upgrade depends on what killed the last attempt, but the order keeps the early game from becoming messy.
+
+<GuideTable
+  caption="Master Healer Kale main route from the first battle to Demon King."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The most important part is knowing when to stop pushing.
+
+If I lose because Grandpa Bagel died too quickly, I buy tank survival. If I lose because Kale reached 0 mana, I buy mana or Meditate support. If Madeleine or Klepon starts getting hit by ranged enemies, I stop pretending single-target Heal is enough and move toward Party Heal or Protection.
+
+I do not stay in the same failed fight hoping the party suddenly becomes useful. They will not.
+
+<h2 id="first-wall-goblin-leader">
+  The first real wall: Goblin Leader
+</h2>
+
+The first boss that usually teaches the loop is **Goblin Leader**.
+
+The problem is not a complex boss pattern. The problem is that the party can spread damage across enemies while Grandpa Bagel keeps taking hits. If Kale runs out of mana before the enemies die, the fight collapses.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-goblin-leader-first-boss.webp"
+    alt="Master Healer Kale early Goblin Leader fight with Grandpa Bagel tanking and Kale managing basic Heal"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Goblin Leader is less about boss mechanics and more about whether my first Tavern upgrades gave Grandpa Bagel and Kale enough room to survive the early damage spread.
+  </figcaption>
+</figure>
+
+My early rule is:
+
+<strong>If I lose with enemies still alive and no mana left, I go back and buy survival before damage.</strong>
+
+That usually means stronger Heal, more max mana, Grandpa Bagel armor or health, or a small damage pickup only after the frontline can live long enough to use it.
+
+I do not overvalue damage during the first few fights. More damage feels good, but a dead tank gives the party no time to use it.
+
+<h2 id="how-to-read-a-failed-run">
+  How I read a failed run
+</h2>
+
+This is the diagnostic step I use before buying anything in the Tavern.
+
+<GuideTable
+  caption="How to read a failed Master Healer Kale run."
+  columns={stuckColumns}
+  rows={stuckRows}
+/>
+
+This table is intentionally simple. The detailed node-by-node choices belong in the <Link href="/master-healer-kale/best-skills-skill-tree/">Best Skills and Skill Tree Guide</Link>. On this page, I only need the route logic: identify the failure, buy the fix, then push again.
+
+<h2 id="first-ruby-choice">
+  First Ruby choice: Party Heal, Meditate, or Protection?
+</h2>
+
+Ruby is the first resource I do not like spending instantly.
+
+The mistake is buying the coolest spell instead of the spell that solves the next dungeon. I treat each Ruby purchase as a wall answer.
+
+The first three Ruby decisions are usually easy to read:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Party Heal</strong> when damage starts landing on more than one ally.
+  </li>
+  <li>
+    <strong>Meditate</strong> when the party survives but Kale cannot pay for enough spells.
+  </li>
+  <li>
+    <strong>Protection</strong> when one ally needs a shield before a specific hit or dungeon effect.
+  </li>
+</ul>
+
+I only spend Ruby immediately when I can name the next problem it solves. For exact spell numbers, Ruby costs, and the full Party Heal / Meditate / Protection comparison, use the <Link href="/master-healer-kale/best-skills-skill-tree/">Best Skills and Skill Tree Guide</Link>.
+
+<h2 id="when-to-farm-push-retreat">
+  When I farm, when I push, and when I retreat
+</h2>
+
+The cleanest way to play this game is to stop treating retreat as failure.
+
+I retreat when the dungeon has already answered the question. If I know I cannot survive the next room, staying longer only wastes time. A partial run still gives gold, skill points, levels, or enough information to make the next Tavern buy better.
+
+I push when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Grandpa Bagel is no longer dropping too fast,</li>
+  <li>Kale can finish the fight without hitting 0 mana too early,</li>
+  <li>Madeleine and Klepon are not dying to stray backline damage,</li>
+  <li>my damage is high enough that boss rooms do not drag on forever,</li>
+  <li>and the next dungeon effect does not demand a spell I skipped.</li>
+</ul>
+
+I farm when I am close to an important node, need another Ruby, need skill points for a survival or damage breakpoint, or want to prepare for a hard achievement instead of barely clearing the story.
+
+I retreat when the tank is dying before the boss, the party is taking damage I cannot cover, Kale is out of mana with too much fight left, or the dungeon effect clearly needs a tool I have not bought yet.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="dungeon-effects">
+  Dungeon effects that change the route
+</h2>
+
+Later dungeons stop being simple stat checks. Some of them tell me exactly what the build is missing.
+
+**Temple of Silence** can disable one of Kale's spells at the start of every stage, but basic Heal remains safe. I do not panic when a support spell disappears. I keep the basic healing rhythm stable, then work around the spells that are still available.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-temple-of-silence-meditate.webp"
+    alt="Master Healer Kale Temple of Silence battle with spell pressure and Meditate available"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    In Temple of Silence, I still build the fight around basic Heal. Losing a support spell hurts, but losing the healing rhythm hurts more.
+  </figcaption>
+</figure>
+
+The same idea applies to other dungeons:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Winterfall Peak</strong> starts Kale with reduced mana, so mana recovery matters immediately.
+  </li>
+  <li>
+    <strong>Underwater Abyss</strong> puts a hard timer on the party, so slow defensive play is not enough.
+  </li>
+  <li>
+    <strong>Magma Core</strong> rewards having Shield and Protection ready before the dangerous window starts.
+  </li>
+  <li>
+    <strong>Gravity Arena</strong> is where debuff tools like Esuna matter if I am chasing the related achievement.
+  </li>
+</ul>
+
+I do not turn this page into a full dungeon checklist because that would make the route harder to read. For exact achievement conditions like **Gotta Go Fast**, **It Takes A Moment**, **It's Fire Burning**, and **We Don't Do That Here**, use the <Link href="/master-healer-kale/achievements-guide/">Achievements Guide</Link>.
+
+<h2 id="damage-route">
+  Damage route: when Madeleine starts to pull ahead
+</h2>
+
+I still invest enough in Klepon to keep him useful, but I do not split damage forever.
+
+Once the run reaches the mid-game, Madeleine often becomes the route I trust most because her magic tree stacks multiple damage types and scaling effects. I use the damage board to confirm that instead of guessing from the skill tree.
+
+This page does not need to own the full damage-board data. The complete screenshot, exact mid-game damage numbers, and Madeleine vs Klepon upgrade logic belong in the <Link href="/master-healer-kale/best-skills-skill-tree/">Best Skills and Skill Tree Guide</Link>.
+
+My hub-level rule is simple:
+
+<strong>Support the damage route that is already clearing rooms, then use the other route for utility, levels, attack unlocks, or cleanup.</strong>
+
+<h2 id="demon-king">
+  Demon King is a setup check, not a traditional boss guide
+</h2>
+
+I do not build a separate boss route for every boss because that is not how the game usually asks me to improve.
+
+The **Demon King** is the clearest example. Before entering, I ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Can Grandpa Bagel survive long enough?</li>
+  <li>Can Kale recover enough mana during the fight?</li>
+  <li>Do I have party healing or shields for bad windows?</li>
+  <li>Do I have a damage route that actually ends the fight?</li>
+  <li>Do I have an emergency tool like Burst Heal, Protection, Raise, or Angel Form?</li>
+</ul>
+
+Once those answers are good, the fight can end quickly. If those answers are bad, staring at the boss name does not fix the setup.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-demon-king-final-boss.webp"
+    alt="Master Healer Kale Demon King final boss fight with endgame spells and party setup"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I treat Demon King as the final check for my build. If the setup is right, the battle itself is short.
+  </figcaption>
+</figure>
+
+The achievement data matches that feeling. **Part Of The Journey Is The End**, the normal Demon King clear, sits at **21.1%**. **Why So Serious?**, the Nightmare Demon King clear, drops to **5.5%**. The hard part is not seeing the boss once. The hard part is building far enough to beat the endgame version.
+
+<h2 id="after-demon-king">
+  What to do after beating Demon King
+</h2>
+
+Do not stop at the credits if you care about completion.
+
+After Demon King, **Nightmare Mode** unlocks for dungeons. The important part is that Nightmare dungeons let me collect **Ruby again**, and the new route leads into **Training Facility** and **Research Facility** scaling.
+
+<figure className="my-8">
+  <Image
+    src="/images/master-healer-kale/master-healer-kale-nightmare-mode-unlock.webp"
+    alt="Master Healer Kale Nightmare Mode node explaining that Nightmare dungeons let the player collect Ruby again"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Nightmare Mode is where I stop thinking only about the next dungeon clear and start planning Ruby refarms, facility upgrades, and final cleanup.
+  </figcaption>
+</figure>
+
+The post-Demon-King route is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>unlock Nightmare Mode,</li>
+  <li>refarm Ruby from safer Nightmare dungeons,</li>
+  <li>start Training Facility and Research Facility upgrades,</li>
+  <li>buy the major endgame node that fixes the next failed run,</li>
+  <li>then work toward Nightmare Demon King and 100% Tavern completion.</li>
+</ul>
+
+The details belong in the <Link href="/master-healer-kale/nightmare-mode-endgame/">Nightmare Mode Endgame Guide</Link>, because that page is where I handle Ruby refarming, major nodes, facility scaling, and the Nightmare Demon King checklist.
+
+<h2 id="which-guide-next">
+  Which Master Healer Kale guide should I use next?
+</h2>
+
+This page is the route map. If your problem is more specific, use the focused guide instead.
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Use the <Link href="/master-healer-kale/achievements-guide/">Achievements Guide</Link> if you are chasing **100% achievements**, hard dungeon achievements, or low-completion clears like **Machine Gun Punch**, **Gotta Go Fast**, **It's Fire Burning**, **I Am The Best**, and **Why So Serious?**
+  </li>
+  <li>
+    Use the <Link href="/master-healer-kale/best-skills-skill-tree/">Best Skills and Skill Tree Guide</Link> if you are stuck at the Tavern wondering whether to buy Heal, Party Heal, Protection, Meditate, Madeleine damage, Grandpa Bagel armor, Reset Point, or Angel Form.
+  </li>
+  <li>
+    Use the <Link href="/master-healer-kale/nightmare-mode-endgame/">Nightmare Mode Endgame Guide</Link> after Demon King, when the question changes from “can I clear the story?” to “how do I build enough stats for Nightmare and 100% cleanup?”
+  </li>
+</ul>
+
+I keep those separate because repeating every achievement and every skill node here would make this page worse. This page should answer the first question:
+
+<strong>What should I actually do when my Master Healer Kale run stops working?</strong>
+
+<h2 id="faq">
+  Master Healer Kale FAQ
+</h2>
+
+### Is Master Healer Kale a boss-fight game?
+
+Not really. Bosses matter, but the main challenge is configuration. If I lose, I usually fix the Tavern setup, spell order, mana plan, or damage route before trying again.
+
+### Should I heal Grandpa Bagel immediately?
+
+No. I wait until Grandpa Bagel has lost enough health to make the first Heal worthwhile. Early overhealing wastes mana and can make the boss room fail later.
+
+### Why am I stuck at Goblin Leader?
+
+Usually because Grandpa Bagel dies too fast or Kale runs out of mana before the party finishes enemies. I buy tank survival, better Heal value, or more mana before chasing bigger damage.
+
+### What should I spend my first Ruby on?
+
+Spend it based on the wall. Buy Party Heal when multiple allies take damage, Meditate when Kale runs out of mana, and Protection when one ally needs a shield for a specific danger window.
+
+### When should I farm instead of push?
+
+I farm when the next dungeon is barely failing and one upgrade would likely fix it. I push when the tank survives, Kale has enough mana, the backline is safe, and damage is fast enough.
+
+### Is Madeleine better than Klepon?
+
+Madeleine becomes my preferred mid-game damage route when the magic board is already ahead. Klepon is still useful for levels, attack unlocks, utility pressure, and cleanup, but I do not split damage evenly forever.
+
+### Should I use Reset Skill Tree?
+
+Yes, when the build has clearly gone in the wrong direction or when I am preparing for achievements and 100% cleanup. The v1.5 right-click reset change makes fixing a bad branch much easier.
+
+### How do I unlock Nightmare Mode?
+
+Beat Demon King, then buy the Nightmare Mode node in the Tavern tree. Nightmare Mode lets you clear dungeons again for Ruby and leads into Training Facility and Research Facility progress.
+
+### What should I do after Demon King?
+
+Start Nightmare planning. I refarm Ruby, upgrade party stats through Training Facility, improve Kale's spells through Research Facility, then work toward Nightmare Demon King and 100% Tavern cleanup.
+
+### Which guide should I read after this page?
+
+Read the Achievements Guide for 100%, the Best Skills guide for Tavern decisions, and the Nightmare Mode Endgame guide after the Demon King clear.

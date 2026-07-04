@@ -73,6 +73,7 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  { title: "Master Healer Kale with useless party", href: "/master-healer-kale" },
   { title: "Supermarket Chaos", href: "/supermarket-chaos" },
   { title: "Frostpunk 2: Breach of Trust", href: "/frostpunk-2-breach-of-trust" },
   { title: "The Last Caretaker", href: "/the-last-caretaker" },

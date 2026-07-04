@@ -132,6 +132,119 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Master Healer Kale with Useless Party",
+    "game": "Master Healer Kale with Useless Party",
+    "href": "/master-healer-kale",
+    "slug": "master-healer-kale",
+    "kind": "game",
+    "status": "active",
+    "accent": "emerald",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Route Map",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active Master Healer Kale guide hub for Heal timing, Goblin Leader, Ruby choices, best skills, achievements, Nightmare Mode, and 100% cleanup.",
+    "coverage": [
+      "Heal timing, Goblin Leader, and first Ruby route",
+      "Best skills, Tavern choices, and Madeleine damage",
+      "38 achievements, dungeon conditions, and 100% cleanup",
+      "Nightmare Mode, Ruby refarming, facilities, and Demon King"
+    ],
+    "image": "/images/home/master-healer-kale-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 1,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Master Healer Kale Guide Hub",
+        "href": "/master-healer-kale",
+        "type": "Spotlight Coverage",
+        "description": "Start here for Master Healer Kale route planning, Heal timing, Goblin Leader, Ruby choices, dungeon effects, Demon King, and Nightmare Mode.",
+        "image": "/images/home/master-healer-kale-hub.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "spotlightMeta": "Heal timing, Goblin Leader, Ruby choices, dungeon effects, Demon King, and Nightmare Mode"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Master Healer Kale Achievements Guide",
+        "href": "/master-healer-kale/achievements-guide",
+        "type": "Guide",
+        "description": "Clear all 38 Master Healer Kale achievements with completion rates, Gotta Go Fast, Machine Gun Punch, I Am The Best, Nightmare Demon King, and 100% Tavern.",
+        "date": "Updated recently",
+        "image": "/images/home/master-healer-kale-achievements-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 1,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "38 achievements, completion rates, dungeon conditions, spell chains, Nightmare, and 100% Tavern"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Master Healer Kale Best Skills and Skill Tree",
+        "href": "/master-healer-kale/best-skills-skill-tree",
+        "type": "Guide",
+        "description": "Choose Master Healer Kale best skills with Heal, Party Heal, Meditate, Protection, Reset Point, Madeleine vs Klepon, Angel Form, and Tavern priorities.",
+        "date": "Updated recently",
+        "image": "/images/home/master-healer-kale-best-skills-skill-tree.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 2,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "Heal, Party Heal, Meditate, Protection, Reset Point, Madeleine vs Klepon, and Angel Form"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Master Healer Kale Nightmare Mode Endgame",
+        "href": "/master-healer-kale/nightmare-mode-endgame",
+        "type": "Guide",
+        "description": "Prepare Master Healer Kale Nightmare Mode with Ruby refarming, Training Facility, Research Facility, Phoenix Staff, God Armor, Angel Form, and Nightmare Demon King.",
+        "date": "Updated recently",
+        "image": "/images/home/master-healer-kale-nightmare-mode-endgame.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 3,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "Nightmare Mode, Ruby refarming, Training Facility, Research Facility, Phoenix Staff, God Armor, and Demon King"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      }
+    ]
+  },
+  {
     "title": "The Binding of Isaac: Rebirth",
     "game": "The Binding of Isaac: Rebirth",
     "href": "/the-binding-of-isaac-rebirth",
