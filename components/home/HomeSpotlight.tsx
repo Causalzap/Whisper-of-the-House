@@ -309,7 +309,7 @@ export default function HomeSpotlight() {
             </div>
 
             <Link
-              href="/all-game-guides/"
+              href="/all-game-guides"
               className="inline-flex rounded-full border border-white/10 px-4 py-2 text-sm font-black text-slate-100 transition hover:border-purple-300/50 hover:bg-white/10 hover:text-white"
             >
               Browse archive →

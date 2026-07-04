@@ -300,7 +300,7 @@ export default function HomeLatestStories() {
           </div>
 
           <Link
-            href="/all-game-guides/"
+            href="/all-game-guides"
             className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/10 px-5 py-2.5 text-sm font-black text-slate-100 shadow-sm transition hover:-translate-y-0.5 hover:border-purple-300/50 hover:bg-white/[0.14] hover:text-white"
           >
             Browse all guides →

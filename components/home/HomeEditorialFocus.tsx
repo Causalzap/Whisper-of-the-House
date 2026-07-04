@@ -266,7 +266,7 @@ function GuideFormats() {
         </div>
 
         <Link
-          href="/all-game-guides/"
+          href="/all-game-guides"
           className="inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-black text-slate-100 transition hover:border-purple-300/60 hover:bg-white/[0.14] hover:text-white"
         >
           Browse all guides →
@@ -305,7 +305,7 @@ function ArchiveCta() {
         </div>
 
         <Link
-          href="/all-game-guides/"
+          href="/all-game-guides"
           className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-black text-purple-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-purple-50"
         >
           Open Guide Archive

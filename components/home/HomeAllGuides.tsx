@@ -155,7 +155,7 @@ export default function HomeAllGuides() {
               <h3 className="mt-2 text-2xl font-black text-white">Current guide clusters</h3>
             </div>
             <Link
-              href="/all-game-guides/"
+              href="/all-game-guides"
               className="hidden rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-slate-200 transition hover:border-purple-300 hover:text-white sm:inline-flex"
             >
               Complete archive →
@@ -234,7 +234,7 @@ export default function HomeAllGuides() {
               </p>
             </div>
             <Link
-              href="/all-game-guides/"
+              href="/all-game-guides"
               className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-black text-purple-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-purple-50"
             >
               Browse Complete Archive

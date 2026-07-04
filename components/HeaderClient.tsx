@@ -105,7 +105,7 @@ export default function HeaderClient({ featuredGuides }: HeaderClientProps) {
                         </h3>
 
                         <ActiveLink
-                          href="/all-game-guides/"
+                          href="/all-game-guides"
                           className="text-sm font-black text-cyan-300 hover:text-cyan-200"
                         >
                           View archive →
@@ -162,7 +162,7 @@ export default function HeaderClient({ featuredGuides }: HeaderClientProps) {
                           collectibles, and systems pages.
                         </p>
                         <ActiveLink
-                          href="/all-game-guides/"
+                          href="/all-game-guides"
                           className="mt-3 inline-flex rounded-full bg-white px-3 py-2 text-xs font-black text-slate-950 transition hover:bg-purple-50"
                         >
                           Browse all guides
@@ -288,7 +288,7 @@ export default function HeaderClient({ featuredGuides }: HeaderClientProps) {
 
             <div onClick={closeMobileMenu}>
               <ActiveLink
-                href="/all-game-guides/"
+                href="/all-game-guides"
                 className="flex items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-black text-slate-950 transition-colors hover:bg-purple-50"
               >
                 Browse All Game Guides

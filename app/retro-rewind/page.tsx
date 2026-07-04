@@ -159,7 +159,7 @@ export default function Page() {
           </p>
           <div className="mt-4">
             <Link
-              href="/retro-rewind/sku-codes/"
+              href="/retro-rewind/sku-codes"
               className="text-sm font-medium text-zinc-900 underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:text-zinc-100 dark:decoration-zinc-700"
             >
               Read the SKU Codes & Black Market Guide
@@ -228,7 +228,7 @@ export default function Page() {
             <ul className="list-inside list-disc space-y-3 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
               <li>
                 <Link
-                  href="/retro-rewind/sku-codes/"
+                  href="/retro-rewind/sku-codes"
                   className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
                 >
                   SKU codes, exact-title ordering, and when the Black Market is worth using
@@ -236,7 +236,7 @@ export default function Page() {
               </li>
               <li>
                 <Link
-                  href="/retro-rewind/is-the-black-market-worth-it/"
+                  href="/retro-rewind/is-the-black-market-worth-it"
                   className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
                 >
                   Black Market strategy and exact-title decisions
@@ -244,7 +244,7 @@ export default function Page() {
               </li>
               <li>
                 <Link
-                  href="/retro-rewind/when-to-replace-damaged-tape/"
+                  href="/retro-rewind/when-to-replace-damaged-tape"
                   className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
                 >
                   Damaged tapes, replacement timing, and rainy Friday demand
@@ -252,7 +252,7 @@ export default function Page() {
               </li>
               <li>
                 <Link
-                  href="/retro-rewind/custom-videos/"
+                  href="/retro-rewind/custom-videos"
                   className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
                 >
                   Custom TV videos, channel files, and playback fixes
@@ -260,7 +260,7 @@ export default function Page() {
               </li>
               <li>
                 <Link
-                  href="/retro-rewind/community/"
+                  href="/retro-rewind/community"
                   className="underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-600 dark:decoration-zinc-700"
                 >
                   Official Discord, bug-report channels, and community links
