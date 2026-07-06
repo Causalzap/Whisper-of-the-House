@@ -291,6 +291,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/paralives/best-early-game-skills-talents-careers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/paralives/job-performance-not-improving`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/paralives/level-skills-faster`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/paralives/best-mods-steam-workshop-install-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/paralives/money-cheats-paradimes`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/paralives/try-for-baby-not-showing`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     
     { url: `${base}/zero-parades/best-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/zero-parades/conditioning`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
