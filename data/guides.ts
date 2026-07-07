@@ -132,6 +132,164 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Esports Manager 2026",
+    "game": "Esports Manager 2026",
+    "href": "/esports-manager-2026",
+    "slug": "esports-manager-2026",
+    "kind": "game",
+    "status": "active",
+    "accent": "blue",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Route Map",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active Esports Manager 2026 guide hub for roster setup, scouting, contracts, sponsors, budget, training, tactics, achievements, and crash fixes.",
+    "coverage": [
+      "First-season route, roster setup, first contract, staff, and first tournament",
+      "Scouting, free agents, player page checks, contracts, paid transfers, and bench depth",
+      "Sponsors, six slots, objective rewards, income activation, Finance Manager, and transfer budget",
+      "Auto Schedule, three attributes, map practice, scrims, Tactic Creator, economy calls, and achievements"
+    ],
+    "image": "/images/home/esports-manager-2026-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 1,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Esports Manager 2026 Guide Hub",
+        "href": "/esports-manager-2026",
+        "type": "Spotlight Coverage",
+        "description": "Start here for Esports Manager 2026 roster setup, scouting, sponsors, budget, training, tactics, achievements, and crash fixes.",
+        "image": "/images/home/esports-manager-2026-hub.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "spotlightMeta": "Roster setup, scouting, sponsors, budget, training, tactics, achievements, and crash fixes"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Esports Manager 2026 Beginner Guide",
+        "href": "/esports-manager-2026/beginner-guide",
+        "type": "Guide",
+        "description": "Start Esports Manager 2026 with a first-season route for roster setup, first player signing, staff, training, sponsors, budget, and tournaments.",
+        "date": "Updated recently",
+        "image": "/images/home/esports-manager-2026-beginner-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 1,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "First-season route, roster setup, first signing, staff, training, sponsors, budget, and tournaments"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Esports Manager 2026 Scouting and Contracts Guide",
+        "href": "/esports-manager-2026/scouting-contracts-guide",
+        "type": "Guide",
+        "description": "Scout and sign better players with free agents, player page checks, contract duration, wage pressure, bench depth, and paid transfers.",
+        "date": "Updated recently",
+        "image": "/images/home/esports-manager-2026-scouting-contracts-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 2,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "Free agents, player page checks, contract duration, wage pressure, bench depth, and paid transfers"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Esports Manager 2026 Sponsors and Budget Guide",
+        "href": "/esports-manager-2026/sponsors-budget-guide",
+        "type": "Guide",
+        "description": "Choose the best Esports Manager 2026 sponsors by objective fit, six slots, income activation, rewards, Finance Manager, and transfer budget timing.",
+        "date": "Updated recently",
+        "image": "/images/home/esports-manager-2026-sponsors-budget-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 3,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "Sponsor tiers, six slots, objective rewards, income activation, Finance Manager, and transfer budget timing"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "Esports Manager 2026 Training and Tactics Guide",
+        "href": "/esports-manager-2026/training-tactics-guide",
+        "type": "Guide",
+        "description": "Train smarter with Auto Schedule, three attributes, map practice, scrims, Tactic Creator, timeouts, role fit, and economy calls.",
+        "date": "Updated recently",
+        "image": "/images/home/esports-manager-2026-training-tactics-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 4,
+          "spotlightFeature": true,
+          "spotlightOrder": 4,
+          "spotlightMeta": "Auto Schedule, three attributes, map practice, scrims, Tactic Creator, timeouts, role fit, and economy calls"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      },
+      {
+        "title": "Esports Manager 2026 Achievements Guide",
+        "href": "/esports-manager-2026/achievements-guide",
+        "type": "Guide",
+        "description": "Track all 21 Esports Manager 2026 achievements with checklist progress, Steam unlock rates, first-week goals, scouting, budget, academy, and Major routes.",
+        "date": "Updated recently",
+        "image": "/images/home/esports-manager-2026-achievements-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 5,
+          "spotlightFeature": true,
+          "spotlightOrder": 5,
+          "spotlightMeta": "21 achievements, checklist progress, Steam unlock rates, scouting, budget, academy, and Major cleanup"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 6
+        }
+      }
+    ]
+  },
+
+  {
     "title": "Master Healer Kale with Useless Party",
     "game": "Master Healer Kale with Useless Party",
     "href": "/master-healer-kale",
