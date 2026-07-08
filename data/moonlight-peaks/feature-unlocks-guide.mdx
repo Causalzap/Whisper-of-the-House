@@ -1,0 +1,598 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const unlockColumns = [
+  { key: "Feature", label: "Feature" },
+  { key: "Unlock Anchor", label: "Unlock anchor" },
+  { key: "What To Check", label: "What to check" },
+  { key: "Beginner Rule", label: "Beginner rule" },
+];
+
+export const unlockRows = [
+  {
+    Feature: "Fishing rod",
+    "Unlock Anchor": "Noel's fishing competition.",
+    "What To Check":
+      "Find Noel, accept the challenge, catch 3 fish, and return to him. Some routes frame it as a 250 gold wager.",
+    "Beginner Rule":
+      "Do not search every shop for the first rod. Noel is the early fishing gate.",
+  },
+  {
+    Feature: "Broken wand / spells",
+    "Unlock Anchor":
+      "Dinner Party / Night 18 stretch, then Luna, Sabrina, Fiona, and the Mana Extractor route.",
+    "What To Check":
+      "Wait for the magic story chain instead of buying spells before the wand is repaired.",
+    "Beginner Rule":
+      "A broken wand is normal early. Spellcasting is a story unlock, not a night-one control.",
+  },
+  {
+    Feature: "Aquaflux",
+    "Unlock Anchor":
+      "After the wand repair and magical crop route, Luna teaches the first watering spell.",
+    "What To Check":
+      "Use the magic book if the gesture is unclear, and watch your mana stars.",
+    "Beginner Rule":
+      "Treat Aquaflux as a mana-limited watering tool, not a free replacement for all farming.",
+  },
+  {
+  Feature: "Bug net",
+  "Unlock Anchor":
+    "After Orlock's Wine Scheme, A Bridge Too Far, Misty Shores, and Death encounters.",
+  "What To Check":
+    "Unlock Misty Shores / Ambrosia progress, then keep advancing until Death gives the net.",
+  "Beginner Rule":
+    "Visible bugs do not mean you already missed the net. The net is gated by Death.",
+},
+{
+  Feature: "Soul Blobs",
+  "Unlock Anchor": "After the bug net and Death route begin.",
+  "What To Check":
+    "Use the net on Soul Blobs once the route opens. The full collection route has 100 Soul Blobs.",
+  "Beginner Rule":
+    "Do not route around Soul Blobs before you have the net.",
+},
+{
+  Feature: "Longer nights",
+  "Unlock Anchor":
+    "Death rewards from the Soul Blob route, including the Antique Clock reward path.",
+  "What To Check":
+    "Open the settings after the clock reward and adjust Night Duration.",
+  "Beginner Rule":
+    "This is a quality-of-life unlock. It can extend nights from 15 minutes to 25 minutes.",
+},
+  {
+    Feature: "Job board",
+    "Unlock Anchor": "Alberta the Owl and later town progress.",
+    "What To Check":
+      "Look for the job board once the town has progressed far enough.",
+    "Beginner Rule":
+      "Do not plan the first week around jobs that are not available yet.",
+  },
+  {
+    Feature: "Vampsters",
+    "Unlock Anchor": "Later exploration and the Vampster collection side route.",
+    "What To Check":
+      "Look for small hidden creatures, then carry them back to the cave near Orlock's mansion.",
+    "Beginner Rule":
+      "Vampsters are a collection route, not an urgent first-week blocker.",
+  },
+  {
+    Feature: "Special shops",
+    "Unlock Anchor": "Map icons, weekend timing, and rotating town routines.",
+    "What To Check":
+      "Watch for Yabis, Sabrina's shop, snake merchants, and weekend midnight market timing.",
+    "Beginner Rule":
+      "Check the map and calendar before assuming a shop is gone.",
+  },
+  {
+    Feature: "Nokturna cards",
+    "Unlock Anchor": "Town progression, card play, dig spots, and occasional cross-system rewards.",
+    "What To Check":
+      "Fishing and exploration can connect back into card collection later.",
+    "Beginner Rule":
+      "Know the card game exists, but do not route the first week around it.",
+  },
+];
+
+export const mapColumns = [
+  { key: "Map Signal", label: "Map signal" },
+  { key: "What It Means", label: "What it means" },
+  { key: "How I Use It", label: "How I use it" },
+];
+
+export const mapRows = [
+  {
+    "Map Signal": "Character icons",
+    "What It Means": "Shows where residents are moving during the night.",
+    "How I Use It":
+      "I use this when an unlock depends on talking to Noel, Luna, Sabrina, Fiona, Death, or another specific character.",
+  },
+  {
+    "Map Signal": "Building numbers",
+    "What It Means": "Shows how many people are inside a building.",
+    "How I Use It":
+      "If someone looks missing, I check buildings before wandering around town.",
+  },
+  {
+    "Map Signal": "Shop hours",
+    "What It Means": "Shows whether a shop is open or closed.",
+    "How I Use It":
+      "I stop walking to closed shops and move the route to another errand.",
+  },
+  {
+    "Map Signal": "Story sparkles",
+    "What It Means": "Marks new character or story events.",
+    "How I Use It":
+      "I prioritize sparkles when I am missing a feature because many unlocks are story-gated.",
+  },
+];
+
+export const routeColumns = [
+  { key: "Symptom", label: "If this is missing..." },
+  { key: "Most Likely Route", label: "Most likely route" },
+  { key: "Do This Next", label: "Do this next" },
+];
+
+export const routeRows = [
+  {
+    Symptom: "I have no fishing rod",
+    "Most Likely Route": "Noel's competition has not been finished.",
+    "Do This Next":
+      "Find Noel, catch the 3 fish for the competition, and return to him.",
+  },
+  {
+    Symptom: "My wand is still broken",
+    "Most Likely Route":
+      "The Dinner Party / Night 18 magic chain has not reached Sabrina, Fiona, and the Mana Extractor step.",
+    "Do This Next":
+      "Keep progressing story events and do not buy extra spells expecting them to work immediately.",
+  },
+  {
+  Symptom: "I see bugs but have no net",
+  "Most Likely Route":
+    "Death has not given the net yet.",
+  "Do This Next":
+    "Check whether Orlock's Wine Scheme, A Bridge Too Far, and Misty Shores progress are far enough.",
+},
+{
+  Symptom: "I cannot catch Soul Blobs",
+  "Most Likely Route": "The net route has not opened yet.",
+  "Do This Next":
+    "Unlock the bug net first. Soul Blobs are part of the Death route.",
+},
+{
+  Symptom: "My nights are still only 15 minutes",
+  "Most Likely Route": "The clock reward from Soul Blobs has not been earned or applied.",
+  "Do This Next":
+    "Progress Soul Blobs, then check Night Duration in settings after the reward.",
+},
+  {
+    Symptom: "I cannot find jobs",
+    "Most Likely Route": "The Alberta / job-board stage is not open yet.",
+    "Do This Next":
+      "Keep progressing nights and town events. Do not plan early money around jobs too soon.",
+  },
+  {
+    Symptom: "I found a Vampster but do not know what to do",
+    "Most Likely Route": "You are in the collection side route.",
+    "Do This Next":
+      "Carry the Vampster in the proper form and bring it to the cave near Orlock's mansion.",
+  },
+];
+
+export const spellColumns = [
+  { key: "Step", label: "Magic step" },
+  { key: "What Happens", label: "What happens" },
+  { key: "Why It Matters", label: "Why it matters" },
+];
+
+export const spellRows = [
+  {
+    Step: "Broken wand",
+    "What Happens":
+      "You start with a wand problem and cannot use full spellcasting immediately.",
+    "Why It Matters":
+      "This prevents early spell purchases from feeling useful before the repair chain opens.",
+  },
+  {
+    Step: "Dinner Party / Night 18 stretch",
+    "What Happens":
+      "The magic route begins to matter around the later early-game story stretch.",
+    "Why It Matters":
+      "This gives players a timing anchor so they stop expecting spells on night one.",
+  },
+  {
+    Step: "Sabrina and Fiona",
+    "What Happens":
+      "The wand repair and Mana Extractor route involves the magic-focused town characters.",
+    "Why It Matters":
+      "If the wand is still broken, the fix is story progress, not another shop search.",
+  },
+  {
+    Step: "Aquaflux",
+    "What Happens":
+      "Luna teaches the first watering spell after the magical crop route advances.",
+    "Why It Matters":
+      "Aquaflux turns mana into farm value, but it still has limits.",
+  },
+  {
+    Step: "Mana stars",
+    "What Happens":
+      "Mana appears as blue star icons once spellcasting is active.",
+    "Why It Matters":
+      "I spend mana on route problems, not random casts.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Moonlight Peaks**, most missing features are not hidden shop items. They are gated by character and story progress.
+
+The fishing rod comes from **Noel's 3-fish competition**. The broken wand and spells unlock later through the **Dinner Party / Night 18 magic route**, involving **Sabrina, Fiona, the Mana Extractor, Luna, and Aquaflux**. The bug net comes through **Death** after progress around **Orlock's Wine Scheme**, **A Bridge Too Far**, and **Misty Shores**. Soul Blobs are a longer collection route with **100 total**, and the clock reward path can unlock **Night Duration**, including longer 25-minute nights.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the full release launch build of Moonlight Peaks. This guide covers feature unlocks, Noel's fishing rod, broken wand repair, Night 18 magic progress, Sabrina, Fiona, Mana Extractor, Aquaflux, Death, bug net, Soul Blobs, Antique Clock, Night Duration, Alberta's job board, Vampsters, special shops, Nokturna cards, map sparkles, and common missing-feature fixes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-feature-unlocks-death-soul-blobs.webp"
+    alt="Moonlight Peaks feature unlocks including Death bug net Soul Blobs longer nights and job board"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Many Moonlight Peaks features unlock through characters and story routes. If a tool or system is missing, I check the route before I check shops.
+  </figcaption>
+</figure>
+
+<h2 id="moonlight-peaks-feature-unlocks-guide">
+  Moonlight Peaks feature unlocks guide
+</h2>
+
+The most confusing part of **Moonlight Peaks** is not knowing whether you missed something or whether the game simply has not unlocked it yet.
+
+Most of the time, you did not miss it.
+
+The game holds back several major systems: fishing, spellcasting, bug catching, Soul Blobs, longer nights, jobs, Vampsters, special shops, and some card-game rewards. These systems open through characters, story events, map sparkles, and later nights.
+
+My rule is:
+
+<strong>if a feature is missing, check character progress before searching every shop.</strong>
+
+This matters because the fishing rod comes from Noel. The wand repair comes from the magic story chain. The net comes from Death. Longer nights come from the Soul Blob clock route. Jobs appear later through Alberta. Vampsters become their own collection route. Treating all of those as normal shop purchases wastes time.
+
+<h2 id="unlock-overview">
+  Feature unlock overview
+</h2>
+
+Use this table as the main unlock router. It combines the “what unlocks it?” and “what should I do next?” questions so the page does not repeat the same feature list twice.
+
+<GuideTable
+  caption="Moonlight Peaks feature unlocks and next checks."
+  columns={unlockColumns}
+  rows={unlockRows}
+/>
+
+The short version is:
+
+<strong>fishing is Noel, magic is story, net is Death, longer nights are Soul Blobs, jobs are Alberta, and rotating shops need map timing.</strong>
+
+If that sentence does not solve your problem, use the troubleshooting table later in this guide.
+
+<h2 id="use-map-for-unlocks">
+  Use the map before wandering
+</h2>
+
+The map is the fastest way to diagnose a missing feature.
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-map-character-locations.webp"
+    alt="Moonlight Peaks map with character icons building numbers shop hours and town navigation"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I check the map whenever a feature seems missing. Character icons, building numbers, shop hours, and story sparkles usually tell me where to go next.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Moonlight Peaks map signals for unlock troubleshooting."
+  columns={mapColumns}
+  rows={mapRows}
+/>
+
+Story sparkles are the most important signal. If a new event is available, I usually do that before random farm cleanup. A single story step can unlock more gameplay than an entire night of chopping weeds.
+
+<h2 id="fishing-unlock">
+  How to unlock fishing: Noel's 3-fish competition
+</h2>
+
+Fishing does not start as a simple shop purchase.
+
+The early route comes from **Noel**. He challenges you to a fishing competition, and the useful anchor is the **3-fish** requirement. Some routes also frame the challenge as a **250 gold** wager, so I do not start it with an empty plan.
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-noel-fishing-competition-three-fish.webp"
+    alt="Moonlight Peaks Noel fishing competition dialogue after catching three fish"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Noel's competition is the early fishing gate. Once I have the three fish, I return to him instead of wandering into more errands.
+  </figcaption>
+</figure>
+
+My fishing unlock route is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>find Noel,</li>
+  <li>accept the fishing challenge,</li>
+  <li>catch 3 fish,</li>
+  <li>return to Noel,</li>
+  <li>then treat fishing as a normal money and request route.</li>
+</ol>
+
+Fishing can also connect to other systems later. It can support money, stamina items, requests, and occasional card-related rewards. I still do not fish too late into the night just because a shadow looks tempting.
+
+For the full Misty Shores and fishing route, use the <Link href="/moonlight-peaks/misty-shores-mines-copper-guide/">Misty Shores, Mines and Copper Guide</Link>.
+
+<h2 id="wand-and-spell-unlock">
+  Broken wand and spell unlocks: why magic is missing
+</h2>
+
+The broken wand is the biggest missing-feature trap.
+
+You can see magical systems early. You can visit Web of Wonders. You may even see spells for sale. But that does not mean spellcasting is ready.
+
+<GuideTable
+  caption="Moonlight Peaks broken wand, spellcasting, and Aquaflux route."
+  columns={spellColumns}
+  rows={spellRows}
+/>
+
+The magic route belongs to later story progress. The useful timing anchor is the **Dinner Party / Night 18 stretch**, then the chain involving **Sabrina**, **Fiona**, the **Mana Extractor**, **Luna**, and magical crops.
+
+Once the wand route is repaired and Luna teaches **Aquaflux**, magic becomes practical. Aquaflux is the first watering spell, but I still treat it as a limited tool because it uses mana.
+
+My magic rule is:
+
+<strong>do not buy around magic until the wand is fixed and mana is visible.</strong>
+
+Before that point, I spend money on systems I can already use. After that point, I start thinking about which spell actually fixes the route: watering, harvesting, or another nightly bottleneck.
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-web-of-wonders-inventory-spells.webp"
+    alt="Moonlight Peaks Webb of Wonders shop for spells potions and magical upgrades"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Webb of Wonders matters for spells, but I do not treat spell purchases as useful until the broken wand and mana route are ready.
+  </figcaption>
+</figure>
+
+<h2 id="bug-net-death-unlock">
+  How to unlock the bug net: Death, Misty Shores, and A Bridge Too Far
+</h2>
+
+The bug net is not a starting tool, even though bugs appear early.
+
+The route anchor I use is:
+
+<strong>Orlock's Wine Scheme → A Bridge Too Far → Misty Shores / Ambrosia progress → Death encounters → bug net.</strong>
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-a-bridge-too-far-cursed-misty-shores.webp"
+    alt="Moonlight Peaks Orlock explaining the cursed Misty Shores bridge and A Bridge Too Far route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A Bridge Too Far is the key route anchor before later Death and bug-net progress. If Misty Shores is blocked, solve the bridge route first.
+  </figcaption>
+</figure>
+
+Some players reach the net around the Night 12 range, but I treat quest progress as the safer trigger than the exact date. If Misty Shores is still blocked or Death has not appeared enough, the net is probably not ready yet.
+
+My bug-net rule is:
+
+<strong>visible bugs are not proof that the net should already be in your inventory.</strong>
+
+Once Death gives the net, it opens two routes at once: normal bug catching and Soul Blobs.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="soul-blobs-and-night-duration">
+  Soul Blobs, Antique Clock, and longer nights
+</h2>
+
+Soul Blobs are not just random floating collectibles. They are tied to Death's route and the night-duration reward path.
+
+The full Soul Blob route has **100 Soul Blobs**. The clock reward path includes the **Antique Clock**, and after the relevant reward you should check **Night Duration** in settings.
+
+That setting matters because nights can be extended from **15 minutes** to **25 minutes**.
+
+This is a major quality-of-life unlock. Longer nights make mining, fishing, gifting, errands, and late returns easier.
+
+My rule is:
+
+<strong>after a clock reward, check settings before assuming the longer night is automatic.</strong>
+
+I do not try to finish all 100 Soul Blobs immediately. I fold them into normal routes once I have the net:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>catch Soul Blobs when they are already near my path,</li>
+  <li>do not chase them when the clock is close to morning,</li>
+  <li>combine them with town errands or map checks,</li>
+  <li>and revisit the setting after Death's reward.</li>
+</ul>
+
+<h2 id="job-board-unlock">
+  Job board unlock: Alberta the Owl
+</h2>
+
+The job board appears later through **Alberta the Owl**.
+
+I do not plan the first week around it. Early money should come from crops, safe selling, foraging, fishing once Noel opens it, and resource routes. Jobs become useful once the board exists and the request matches something I can finish without breaking the night.
+
+A job is worth taking when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>the item is already in storage,</li>
+  <li>the reward is better than my current route,</li>
+  <li>the time limit is realistic,</li>
+  <li>and the request does not pull me away from a key unlock.</li>
+</ul>
+
+I skip early jobs if they conflict with magic, Misty Shores, tool upgrades, or Death progress.
+
+<h2 id="vampsters">
+  Vampsters: the collectible route players miss
+</h2>
+
+Vampsters are a separate collectible route, and they are easy to miss if you only think about farming, mining, and fishing.
+
+They are small hidden creatures you carry back to the cave near Orlock's mansion. The important detail is that they are not normal inventory items. You have to carry them in the proper form and physically bring them back.
+
+My Vampster rule is:
+
+<strong>mark the route, but do not let one Vampster derail the whole night.</strong>
+
+If I find one early, I ask:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>am I in the right form to carry it?</li>
+  <li>do I know the path to the cave?</li>
+  <li>is there enough time before morning?</li>
+  <li>and am I interrupting a more important unlock?</li>
+</ul>
+
+If the answer is no, I remember the location and come back later. Vampsters are a collection route, not a reason to miss a story step or pass out.
+
+<h2 id="special-shops-and-nokturna">
+  Special shops, weekend routines, and Nokturna cards
+</h2>
+
+Some features are easy to confuse with missing content because they depend on timing or side systems.
+
+Yabis, the weekend midnight market, Sabrina's stock, snake merchants, and other rotating shop moments are not always available whenever you want them. I check the map and calendar before assuming something disappeared.
+
+Nokturna is similar. It is a card-game system that connects to town life and collection progress. Fishing and exploration can feed into card rewards later, but I do not route my first week around card hunting.
+
+My side-system rule is:
+
+<strong>learn the system name early, chase the full collection later.</strong>
+
+That keeps the first week focused on higher-impact unlocks: Town Hall, Chester, Noel, Misty Shores, Death, tools, and the magic route.
+
+<h2 id="missing-feature-troubleshooting">
+  Missing feature troubleshooting
+</h2>
+
+The overview table tells you where each feature comes from. This table is for when you are already stuck and need to identify the likely missing route.
+
+<GuideTable
+  caption="Moonlight Peaks missing-feature troubleshooting."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+Most missing-feature problems come from treating a story-gated unlock as a shop-gated unlock. If the tool is not there, check the character route. If the setting is missing, check the reward route. If the map shows a sparkle, do that before random cleanup.
+
+<h2 id="related-guides">
+  Related Moonlight Peaks guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the <Link href="/moonlight-peaks/">Moonlight Peaks Guide Hub</Link> if you need the full guide route.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/beginner-guide/">Beginner Guide</Link> for the first-week route, Chester, stamina, early money, and first purchases.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/misty-shores-mines-copper-guide/">Misty Shores, Mines and Copper Guide</Link> for Noel, fishing, A Bridge Too Far, Cave of Echoes, copper ore, and the mines.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/early-resources-tool-upgrades-guide/">Early Resources and Tool Upgrades Guide</Link> before spending ore or gold on the wrong upgrade.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/barn-animals-guide/">Barn and Animals Guide</Link> when you are ready for the 4,000 gold barn, feed, fertilizer, and animals.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Moonlight Peaks feature unlocks FAQ
+</h2>
+
+### How do I unlock fishing in Moonlight Peaks?
+
+Fishing unlocks through Noel's competition. Find Noel, start the challenge, catch 3 fish, and return to him.
+
+### Is Noel's fishing challenge a bet?
+
+Some routes frame the competition around a 250 gold wager, so do not start it completely unprepared.
+
+### Why is my wand still broken?
+
+The broken wand is part of the magic story route. Keep progressing toward the Dinner Party / Night 18 stretch, then follow the Luna, Sabrina, Fiona, and Mana Extractor chain.
+
+### How do I unlock Aquaflux?
+
+Aquaflux is taught by Luna after the wand repair and magical crop route progress. It is your first watering spell.
+
+### Where do I buy spells?
+
+Spells are tied to Webb of Wonders, but buying spells before the wand and mana route is ready will not solve the missing-magic problem.
+
+### How do I unlock the bug net?
+
+Progress Orlock's Wine Scheme, A Bridge Too Far, Misty Shores / Ambrosia, and Death encounters. Death gives the net later in that route.
+
+### Why do I see bugs but have no net?
+
+That is normal. Bugs can appear before the net is unlocked, so keep progressing Death and Misty Shores route anchors.
+
+### How many Soul Blobs are there?
+
+The full collection route has 100 Soul Blobs.
+
+### What does the Antique Clock do?
+
+The Antique Clock is tied to the Soul Blob reward path. After earning the reward, check Night Duration in settings.
+
+### How do I get longer nights?
+
+Progress the Soul Blob and Death reward route, then check Night Duration in settings. Longer nights can extend the night from 15 minutes to 25 minutes.
+
+### When does the job board unlock?
+
+The job board appears later through Alberta the Owl and town progress. Do not plan the first few nights around jobs.
+
+### What are Vampsters?
+
+Vampsters are hidden collectible creatures. You carry them back to the cave near Orlock's mansion instead of putting them in normal inventory.
+
+### Should I focus on Nokturna cards early?
+
+No. Nokturna matters later, but it should not replace early unlock priorities like fishing, magic, the net, Misty Shores, and tools.
+
+### Why is Misty Shores still blocked?
+
+Misty Shores is tied to A Bridge Too Far and the cursed bridge route. Follow the story and character steps instead of trying to force the bridge.

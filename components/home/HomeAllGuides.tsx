@@ -73,6 +73,7 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  { title: "Moonlight Peaks", href: "/moonlight-peaks" },
   { title: "Esports Manager 2026", href: "/esports-manager-2026" },
   { title: "Master Healer Kale with useless party", href: "/master-healer-kale" },
   { title: "Supermarket Chaos", href: "/supermarket-chaos" },

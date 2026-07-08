@@ -132,6 +132,163 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Moonlight Peaks",
+    "game": "Moonlight Peaks",
+    "href": "/moonlight-peaks",
+    "slug": "moonlight-peaks",
+    "kind": "game",
+    "status": "active",
+    "accent": "purple",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Route Map",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active Moonlight Peaks guide hub for first-week routing, Misty Shores, copper, tool upgrades, barn animals, magic, bug net, Soul Blobs, and feature unlocks.",
+    "coverage": [
+      "First-week route, Blood Grapes, Town Hall, Chester selling, stamina, sleep saving, Aquaflux awareness, and Hellkitten form",
+      "Orlock's Wine Scheme, A Bridge Too Far, Noel's fishing challenge, Misty Shores, Cave of Echoes, Copper Ore, and Copper Bars",
+      "Howling Hammer hours, Ridge's upgrade menu, pickaxe-first logic, Copper/Iron/Gold tool costs, Furnace recipes, and inventory timing",
+      "Barn cost, Luna's animal rotation, Cheeken, Piggoat, Draculamb, Cowcula, Fodder, fertilizer, Death, bug net, Soul Blobs, jobs, Vampsters, and Nokturna"
+    ],
+    "image": "/images/home/moonlight-peaks-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 2,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Moonlight Peaks Guide Hub",
+        "href": "/moonlight-peaks",
+        "type": "Spotlight Coverage",
+        "description": "Start here for Moonlight Peaks beginner route, Misty Shores, copper, tools, barn animals, magic, bug net, Soul Blobs, jobs, and unlocks.",
+        "image": "/images/home/moonlight-peaks-hub.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "spotlightMeta": "Beginner route, Misty Shores, copper, tools, barn animals, magic, bug net, Soul Blobs, and unlocks"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Moonlight Peaks Beginner Guide",
+        "href": "/moonlight-peaks/beginner-guide",
+        "type": "Guide",
+        "description": "Start Moonlight Peaks with Blood Grapes, Town Hall, Chester selling, sleep saving, Aquaflux, Hellkitten form, early money, and first buys.",
+        "date": "Updated recently",
+        "image": "/images/home/moonlight-peaks-beginner-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 6,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "Blood Grapes, Town Hall, Chester selling, sleep saving, Aquaflux, Hellkitten form, early money, and first buys"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Moonlight Peaks Misty Shores and Copper Guide",
+        "href": "/moonlight-peaks/misty-shores-mines-copper-guide",
+        "type": "Guide",
+        "description": "Unlock Misty Shores with A Bridge Too Far, finish Noel's fishing challenge, find Cave of Echoes copper, make Copper Bars, and prep mine runs.",
+        "date": "Updated recently",
+        "image": "/images/home/moonlight-peaks-misty-shores-mines-copper-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 7,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "A Bridge Too Far, Noel's 3-fish challenge, Cave of Echoes, Copper Ore, Copper Bars, and mining prep"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Moonlight Peaks Tool Upgrades Guide",
+        "href": "/moonlight-peaks/early-resources-tool-upgrades-guide",
+        "type": "Guide",
+        "description": "Upgrade tools with Howling Hammer hours, Ridge's menu, pickaxe-first order, Copper/Iron/Gold costs, Furnace bars, and sell-or-keep rules.",
+        "date": "Updated recently",
+        "image": "/images/home/moonlight-peaks-early-resources-tool-upgrades-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 8,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "Howling Hammer hours, Ridge's upgrade menu, tool costs, Copper/Iron/Gold Bars, Furnace recipes, and pickaxe-first logic"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "Moonlight Peaks Barn and Animals Guide",
+        "href": "/moonlight-peaks/barn-animals-guide",
+        "type": "Guide",
+        "description": "Build the Moonlight Peaks barn with cost, 10x6 size, 4 animal slots, Luna rotation, Cheeken, Cowcula, Piggoat, Draculamb, and Fodder.",
+        "date": "Updated recently",
+        "image": "/images/home/moonlight-peaks-barn-animals-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 9,
+          "spotlightFeature": true,
+          "spotlightOrder": 4,
+          "spotlightMeta": "4,000 gold barn, 10x6 placement, Luna rotation, Cheeken, Piggoat, Draculamb, Cowcula, Fodder, and fertilizer"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      },
+      {
+        "title": "Moonlight Peaks Feature Unlocks Guide",
+        "href": "/moonlight-peaks/feature-unlocks-guide",
+        "type": "Guide",
+        "description": "Unlock fishing, broken wand, Aquaflux, bug net, Death, Soul Blobs, Antique Clock, jobs, Vampsters, special shops, and Nokturna.",
+        "date": "Updated recently",
+        "image": "/images/home/moonlight-peaks-feature-unlocks-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 10,
+          "spotlightFeature": true,
+          "spotlightOrder": 5,
+          "spotlightMeta": "Fishing, broken wand, Aquaflux, Death, bug net, 100 Soul Blobs, Antique Clock, jobs, Vampsters, shops, and Nokturna"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 6
+        }
+      }
+    ]
+  },
+  {
     "title": "Esports Manager 2026",
     "game": "Esports Manager 2026",
     "href": "/esports-manager-2026",
@@ -155,7 +312,6 @@ export const guideClusters = [
     "imagePadding": true,
     "home": {
       "featuredHub": true,
-      "featuredHubSpotlight": true,
       "featuredHubOrder": 1,
       "footerFeatured": true
     },
@@ -313,7 +469,6 @@ export const guideClusters = [
     "imagePadding": true,
     "home": {
       "featuredHub": true,
-      "featuredHubSpotlight": true,
       "featuredHubOrder": 1,
       "footerFeatured": true
     },
@@ -426,7 +581,6 @@ export const guideClusters = [
     "imagePadding": true,
     "home": {
       "featuredHub": true,
-      "featuredHubSpotlight": true,
       "featuredHubOrder": 1,
       "footerFeatured": true
     },
@@ -580,8 +734,7 @@ export const guideClusters = [
     "imagePadding": true,
     "home": {
       "featuredHub": true,
-      "featuredHubSpotlight": true,
-      "featuredHubOrder": 1,
+      "featuredHubOrder": 3,
       "footerFeatured": true
     },
     "pages": [
@@ -847,7 +1000,6 @@ export const guideClusters = [
     "imagePadding": true,
     "home": {
     "featuredHub": true,
-    "featuredHubSpotlight": true,
     "featuredHubOrder": 1,
     "footerFeatured": true
     },
@@ -1093,7 +1245,6 @@ export const guideClusters = [
     "imagePosition": "center",
     "home": {
       "featuredHub": true,
-      "featuredHubOrder": 2,
       "footerFeatured": true
     },
     "pages": [
@@ -1177,8 +1328,7 @@ export const guideClusters = [
     "imagePosition": "center",
     "home": {
       "featuredHub": true,
-      "featuredHubOrder": 3,
-      "footerFeatured": true
+      "footerFeatured": false
     },
     "pages": [
       {
@@ -1389,7 +1539,6 @@ export const guideClusters = [
     "imagePosition": "center",
     "home": {
       "featuredHub": true,
-      "featuredHubOrder": 5,
       "footerFeatured": true
     },
     "pages": [

@@ -1,0 +1,585 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What I Do", label: "What I do" },
+  { key: "Why", label: "Why" },
+];
+
+export const buildRows = [
+  {
+    Step: "1",
+    "What I Do": "Trigger Luna's animal route and watch for Farm Animals for Sale.",
+    Why:
+      "That quest is the clean signal that the animal system is moving from introduction to purchase planning.",
+  },
+  {
+    Step: "2",
+    "What I Do": "Clear a full 10x6 barn space before visiting Howling Hammer.",
+    Why:
+      "The barn cannot be placed if debris blocks the footprint, and bad placement creates extra walking every night.",
+  },
+  {
+    Step: "3",
+    "What I Do": "Save 4,000 gold for the barn.",
+    Why:
+      "The barn is the building gate for farm animals. Luna will not let you bring animals home without one.",
+  },
+  {
+    Step: "4",
+    "What I Do": "Prepare Fodder before buying animals.",
+    Why:
+      "The barn helps with feeding, but animals still need food in the feeder or trough.",
+  },
+  {
+    Step: "5",
+    "What I Do": "Adopt one or two animals first, then watch Luna's daily rotation.",
+    Why:
+      "After the barn is built, Luna's available animals rotate. I do not fill all four slots on the first day.",
+  },
+  {
+    Step: "6",
+    "What I Do": "Build a second barn if I want more than 4 animals.",
+    Why:
+      "One barn holds 4 animals. If I want a larger ranch, I plan another barn instead of looking for a capacity upgrade.",
+  },
+];
+
+export const buildingColumns = [
+  { key: "Building", label: "Building" },
+  { key: "Cost", label: "Cost" },
+  { key: "Size / Time", label: "Size / time" },
+  { key: "Why It Matters Here", label: "Why it matters here" },
+];
+
+export const buildingRows = [
+  {
+    Building: "Well",
+    Cost: "1,500 gold",
+    "Size / Time": "6x6, 1 Night",
+    "Why It Matters Here":
+      "It stabilizes watering before the ranch loop adds another nightly routine.",
+  },
+  {
+    Building: "Barn",
+    Cost: "4,000 gold",
+    "Size / Time": "10x6, 1 Night",
+    "Why It Matters Here":
+      "It unlocks animal adoption, holds 4 animals, and starts the feed, goods, and fertilizer loop.",
+  },
+];
+
+export const animalColumns = [
+  { key: "Animal", label: "Animal" },
+  { key: "Known Cost", label: "Known cost" },
+  { key: "Produces", label: "Produces" },
+  { key: "My Early Rule", label: "My early rule" },
+];
+
+export const animalRows = [
+  {
+    Animal: "Cheeken",
+    "Known Cost": "1,200 coins",
+    Produces: "Eggs",
+    "My Early Rule":
+      "This is the first animal I expect to see. It is the clean starter pick for learning the ranch loop.",
+  },
+  {
+    Animal: "Piggoat",
+    "Known Cost": "3,500 coins",
+    Produces: "Piggoat Milk",
+    "My Early Rule":
+      "I consider it once the barn is stable and I want a different output from eggs.",
+  },
+  {
+    Animal: "Draculamb",
+    "Known Cost": "4,500 coins",
+    Produces: "Wool / Draculamb Milk",
+    "My Early Rule":
+      "I leave space for it instead of filling the whole barn with early duplicates.",
+  },
+  {
+    Animal: "Cowcula",
+    "Known Cost": "6,000 coins",
+    Produces: "Cowcula Milk",
+    "My Early Rule":
+      "This is a stronger money commitment, so I do not buy it before feed and routine checks are comfortable.",
+  },
+  {
+    Animal: "Bumpkin",
+    "Known Cost": "12,000 coins",
+    Produces: "Plops",
+    "My Early Rule":
+      "Treat this as a later seasonal option, not part of the first barn decision.",
+  },
+  {
+    Animal: "Stoney",
+    "Known Cost": "9,000 coins",
+    Produces: "Later-game animal produce",
+    "My Early Rule":
+      "I do not plan the first barn around winter animals before the early ranch loop is working.",
+  },
+];
+
+export const rotationColumns = [
+  { key: "System", label: "System" },
+  { key: "What Happens", label: "What happens" },
+  { key: "My Rule", label: "My rule" },
+];
+
+export const rotationRows = [
+  {
+    System: "Before the first barn",
+    "What Happens": "Luna's yard mainly shows Cheekens.",
+    "My Rule":
+      "I do not assume the full animal list is available before the barn exists.",
+  },
+  {
+    System: "After the barn",
+    "What Happens": "Luna's available animals rotate daily, usually with 3 choices outside her house.",
+    "My Rule":
+      "I check across multiple nights before deciding the animal I want is missing.",
+  },
+  {
+    System: "Color variants",
+    "What Happens": "Animal colors can rotate along with the animal selection.",
+    "My Rule":
+      "If I care about appearance, I wait for a better rotation instead of buying instantly.",
+  },
+  {
+    System: "Naming",
+    "What Happens": "You must name the animal yourself when adopting.",
+    "My Rule":
+      "I have a name ready before buying because the game may not suggest one for me.",
+  },
+  {
+    System: "More than 4 animals",
+    "What Happens": "One barn holds 4 animals.",
+    "My Rule":
+      "If I want more than 4, I plan a second barn instead of looking for a simple capacity upgrade.",
+  },
+];
+
+export const feedColumns = [
+  { key: "Feed System", label: "Feed system" },
+  { key: "What It Does", label: "What it does" },
+  { key: "My Rule", label: "My rule" },
+];
+
+export const feedRows = [
+  {
+    "Feed System": "Fodder",
+    "What It Does": "The basic animal feed made from farm cleanup materials through the refiner.",
+    "My Rule":
+      "Once animals are planned, I stop treating fiber as junk.",
+  },
+  {
+    "Feed System": "Premium Fodder",
+    "What It Does": "A higher feed tier made from 50 Fodder and 1 Mana Essence.",
+    "My Rule":
+      "I do not spend Mana Essence here until I know animals are already worth upgrading.",
+  },
+  {
+    "Feed System": "Feeder / trough",
+    "What It Does": "Holds food so animals can eat overnight.",
+    "My Rule":
+      "I check it before leaving the barn because automation only helps if food is loaded.",
+  },
+  {
+    "Feed System": "Feeder counter",
+    "What It Does": "Shows how many nights of food remain for the current barn.",
+    "My Rule":
+      "If the counter is low, I refill before starting a long mine or fishing route.",
+  },
+  {
+    "Feed System": "Animal goods",
+    "What It Does": "Animals produce goods such as eggs, milk, wool, or other creature-specific items.",
+    "My Rule":
+      "I visit the barn regularly instead of assuming every product collects itself.",
+  },
+  {
+    "Feed System": "Fertilizer",
+    "What It Does": "Animals help produce fertilizer for crop quality.",
+    "My Rule":
+      "I treat fertilizer as part of the crop route, not just an animal bonus.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why it hurts" },
+  { key: "Better Choice", label: "Better choice" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Buying the barn with no feed plan",
+    "Why It Hurts":
+      "A barn starts a daily animal routine, not just a one-time building purchase.",
+    "Better Choice":
+      "Prepare Fodder, fiber, and refiner access before adopting animals.",
+  },
+  {
+    Mistake: "Assuming Luna sells the same animals every day",
+    "Why It Hurts":
+      "The selection rotates after the barn is built, so one bad day does not mean the animal is unavailable.",
+    "Better Choice":
+      "Check Luna's yard across several nights before filling every slot.",
+  },
+  {
+    Mistake: "Filling the first barn with duplicates",
+    "Why It Hurts":
+      "Different animals support different goods, requests, and future crafting needs.",
+    "Better Choice":
+      "Use the first 4 slots for variety unless you have a specific money plan.",
+  },
+  {
+    Mistake: "Forgetting the naming prompt",
+    "Why It Hurts":
+      "Adoption asks you to name the animal yourself, and the game may not give a default suggestion.",
+    "Better Choice":
+      "Have a quick naming idea ready before buying.",
+  },
+  {
+    Mistake: "Looking for a simple capacity upgrade",
+    "Why It Hurts":
+      "One barn holds 4 animals, and current routing points toward another barn for more capacity.",
+    "Better Choice":
+      "Plan a second barn if you want a larger ranch.",
+  },
+  {
+    Mistake: "Ignoring barn placement",
+    "Why It Hurts":
+      "A bad 10x6 placement can block paths and add walking time every night.",
+    "Better Choice":
+      "Clear the area first and keep the barn close enough to check without blocking crops or exits.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Moonlight Peaks barn and animals**, the barn costs **4,000 gold**, uses a **10x6** placement area, takes **1 Night** to build, and holds **4 animals**. If you want more than 4 animals, plan a second barn.
+
+Animals start through Luna's route, including the **Farm Animals for Sale** step. Before your first barn, you will mostly see **Cheekens**. After the barn is built, Luna's available animals rotate daily, usually with **3 choices** outside her house. Early animal names to know are **Cheeken**, **Piggoat**, **Draculamb**, and **Cowcula**.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the full release launch build of Moonlight Peaks. This guide covers barn cost, 10x6 barn placement, four-animal capacity, Luna's animal rotation, Farm Animals for Sale, Cheeken, Cowcula, Piggoat, Draculamb, Fodder, Premium Fodder, refiner feed setup, feeder counter, animal goods, fertilizer, second barn planning, and common ranch mistakes.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-barn-cost-four-animals.webp"
+    alt="Moonlight Peaks barn purchase screen showing 4000 gold cost 10x6 size 1 Night build time and four animal capacity"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The barn is the animal gate: 4,000 gold, 10x6 space, 1 Night to build, and room for 4 animals.
+  </figcaption>
+</figure>
+
+<h2 id="moonlight-peaks-barn-animals-guide">
+  Moonlight Peaks barn and animals guide
+</h2>
+
+The animal system in **Moonlight Peaks** looks simple at first: meet Luna, see cute animals, build a barn, bring one home.
+
+The actual decision is more important than that.
+
+A barn is not a decoration purchase. It starts a daily ranch loop with feed, animal goods, fertilizer, space planning, and future animal choices. I only buy it when I can support that loop instead of just affording the building.
+
+My ranch rule is:
+
+<strong>build the barn when the farm can support animals, not just when the shop lets me buy one.</strong>
+
+That keeps the first animal route from slowing down tools, mining, watering, or early money.
+
+<h2 id="farm-animals-for-sale">
+  Farm Animals for Sale: how the animal route starts
+</h2>
+
+The animal route begins through Luna and the **Farm Animals for Sale** step.
+
+Before the first barn, Luna's yard is limited. You may only see Cheekens, which makes the system look smaller than it really is. After the barn is built, the selection opens up and starts rotating.
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-luna-chickens-eggs-fertilizer.webp"
+    alt="Moonlight Peaks Luna introducing Cheekens eggs and fertilizer before the barn route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Luna's animal route makes Cheekens tempting early, but the real gate is still the barn.
+  </figcaption>
+</figure>
+
+The clean route is:
+
+<GuideTable
+  caption="Moonlight Peaks barn and animal route order."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+I do not fill the first barn immediately. I build the barn, check what Luna offers across several nights, then choose animals based on output and money.
+
+<h2 id="barn-cost-and-placement">
+  Barn cost and placement
+</h2>
+
+The barn costs **4,000 gold**, uses **10x6** space, takes **1 Night** to build, and holds **4 animals**.
+
+The well matters only as a support check. If watering is still eating the night, fixing the crop route first usually makes saving for animals easier.
+
+<GuideTable
+  caption="Moonlight Peaks ranch building checks."
+  columns={buildingColumns}
+  rows={buildingRows}
+/>
+
+I removed the mill from this table on purpose. The mill is a Howling Hammer purchase, but it is not an animal-system decision. It belongs in the early resources and processing route, not in the barn guide.
+
+<h2 id="luna-animal-rotation">
+  Luna's animal rotation: do not judge the shop from one night
+</h2>
+
+After your barn is built, Luna's animals rotate.
+
+That means one visit is not enough to know what is available. The game can show different animals and color variants on different nights, so I do not spend all four barn slots just because the first day's selection looks limited.
+
+<GuideTable
+  caption="Moonlight Peaks Luna animal rotation and adoption details."
+  columns={rotationColumns}
+  rows={rotationRows}
+/>
+
+The naming detail is small but useful. When I adopt an animal, I have a name ready because the game expects me to choose one. That avoids sitting on the naming screen trying to think of something while I am just trying to finish the night.
+
+<h2 id="barn-capacity">
+  Barn capacity: one barn holds four animals
+</h2>
+
+Each barn holds **4 animals**.
+
+That number is the reason I avoid duplicate-heavy buying early. With only four slots, one bad impulse can crowd out better variety later.
+
+If I want more than 4 animals, I plan for a **second barn**. I do not assume there is a cheap capacity upgrade waiting in the same barn menu.
+
+My first-barn rule is:
+
+<strong>use the first 4 slots to learn the ranch loop and cover different outputs.</strong>
+
+That gives me eggs, milk-style products, wool-style products, fertilizer, and future request coverage instead of one repeated output.
+
+<h2 id="animal-options-and-first-picks">
+  Animal options and first picks
+</h2>
+
+These are the animal names I use in the guide. The important correction is that the animal names are **Cheeken**, **Cowcula**, **Piggoat**, and **Draculamb**.
+
+<GuideTable
+  caption="Moonlight Peaks animal options and early pick logic."
+  columns={animalColumns}
+  rows={animalRows}
+/>
+
+For a first barn, I start with one useful animal, then wait before filling every slot. If I see a Cowcula or Draculamb but the price would drain my upgrade money, I wait. The barn is only good if I can still afford feed, tools, and the next route.
+
+<h2 id="feed-fodder-and-refiner">
+  Feed, Fodder, Premium Fodder, and the refiner
+</h2>
+
+Animals need feed, and feed planning starts before the animal comes home.
+
+The basic chain is:
+
+<strong>fiber and cleanup materials → refiner → Fodder → feeder or trough.</strong>
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-refiner-animal-feed-fodder.webp"
+    alt="Moonlight Peaks refiner showing fodder and animal feed processing from grass or fiber"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once animals are planned, fiber becomes feed material. I keep enough cleanup resources to make Fodder before adopting too many animals.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Moonlight Peaks feeding systems for barn animals."
+  columns={feedColumns}
+  rows={feedRows}
+/>
+
+Premium Fodder is useful to know about, but I do not treat it as the first requirement. Early on, the main goal is simpler: keep normal Fodder available so the barn routine does not fail while I am busy mining, fishing, or doing story errands.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="animal-goods-and-fertilizer">
+  Animal goods and fertilizer
+</h2>
+
+Animals are worth the cost because they add value beyond simple daily income.
+
+They help in three ways:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Goods:</strong> animals produce items such as eggs, milk, wool, and other creature-specific products.
+  </li>
+  <li>
+    <strong>Fertilizer:</strong> animals help support fertilizer for better crop quality.
+  </li>
+  <li>
+    <strong>Route coverage:</strong> different outputs can help with requests, crafting, cooking, or future side jobs.
+  </li>
+</ul>
+
+This is why I prefer variety over four copies of the same animal. A mixed barn gives me more answers when the job board, crafting, or cooking asks for something specific.
+
+I still check the barn regularly. Some goods need a direct barn visit, and fertilizer is easy to forget if I treat animals as fully automatic.
+
+<h2 id="money-route-for-barn">
+  Money route: how I save for the barn
+</h2>
+
+The barn costs **4,000 gold**, but I do not fund it by selling upgrade-critical materials.
+
+I use safer income first:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>sell extra fish after keeping request items,</li>
+  <li>sell duplicate common forage,</li>
+  <li>process crops when the route is available,</li>
+  <li>use dig spots for money, seed bags, recipes, and blueprints,</li>
+  <li>and keep ore or bars if tool upgrades still need them.</li>
+</ul>
+
+The bad version of a barn purchase is spending everything, adopting one animal, then realizing I have no feed, no money cushion, and no upgrade materials left. I would rather wait one night and build a barn I can actually use.
+
+<h2 id="where-to-place-barn">
+  Where to place the barn
+</h2>
+
+The barn takes **10x6** space, so placement matters.
+
+I do not place it in the middle of the main crop route. I want it close enough to check nightly, but not blocking:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>the house-to-field path,</li>
+  <li>the farm exit route,</li>
+  <li>the well and crop area,</li>
+  <li>future walking paths,</li>
+  <li>or decorative space I already want to keep open.</li>
+</ul>
+
+If I have not cleared enough space yet, I wait. A bad barn location turns every night into extra walking.
+
+<h2 id="common-barn-mistakes">
+  Common barn and animal mistakes
+</h2>
+
+<GuideTable
+  caption="Moonlight Peaks barn and animal mistakes to avoid."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The main mistake is treating the barn as the finish line. It is not. The barn is the start of a routine. The purchase is only good if I can feed animals, collect goods, use fertilizer, and keep the rest of the farm route moving.
+
+<h2 id="related-guides">
+  Related Moonlight Peaks guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the <Link href="/moonlight-peaks/">Moonlight Peaks Guide Hub</Link> if you need the full route map.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/beginner-guide/">Beginner Guide</Link> for the first-week route, Chester, stamina, early money, and first purchases.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/early-resources-tool-upgrades-guide/">Early Resources and Tool Upgrades Guide</Link> before deciding between well, inventory, tools, and barn timing.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/misty-shores-mines-copper-guide/">Misty Shores, Mines and Copper Guide</Link> if copper ore, mining, or Cave of Echoes is blocking your next upgrade.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/feature-unlocks-guide/">Feature Unlocks Guide</Link> if jobs, bug net, soul blobs, fishing, magic, or special shops have not appeared yet.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Moonlight Peaks barn and animals FAQ
+</h2>
+
+### How much does the barn cost in Moonlight Peaks?
+
+The barn costs 4,000 gold at Howling Hammer.
+
+### How big is the barn?
+
+The barn uses a 10x6 placement area and takes 1 Night to build.
+
+### How many animals does one barn hold?
+
+One barn holds 4 animals.
+
+### How do I get more than 4 animals?
+
+Build another barn. One barn holds 4 animals, so a larger ranch needs another barn rather than a simple capacity upgrade.
+
+### How do I start raising animals?
+
+Follow Luna's animal route and watch for Farm Animals for Sale, then build a barn before adopting animals.
+
+### What animals can I get early?
+
+The key early names are Cheeken, Piggoat, Draculamb, and Cowcula. The selection can rotate after the barn is built.
+
+### Why do I only see Cheekens?
+
+Before the first barn, Luna's yard may only show Cheekens. After the barn is built, more animals can rotate into the daily selection.
+
+### Do Luna's animals change every day?
+
+Yes. After your barn is built, Luna's available animals can rotate daily, usually with 3 choices outside her house.
+
+### Do I need to name animals myself?
+
+Yes. When adopting, be ready to choose a name yourself instead of relying on a default suggestion.
+
+### How does feeding work?
+
+Use Fodder in the feeder or trough so animals can eat overnight. Premium Fodder is a higher feed tier, but normal Fodder is the first priority.
+
+### How do I make Fodder?
+
+Use the refiner with farm cleanup materials such as fiber. Once animals are planned, fiber becomes important feed material.
+
+### What is Premium Fodder?
+
+Premium Fodder is a higher-tier feed made from Fodder and Mana Essence. I wait on it until the basic animal route is stable.
+
+### Should I fill the barn with the same animal?
+
+Usually no. With only 4 slots, a mixed barn covers more goods, requests, and future crafting needs.
+
+### Do animals help with fertilizer?
+
+Yes. Animals help support fertilizer, which feeds back into crop quality.
+
+### Should I buy the barn before tool upgrades?
+
+Only if the ranch route is your next real bottleneck. If copper, tools, or inventory are blocking progress, solve those first.

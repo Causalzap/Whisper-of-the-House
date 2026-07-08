@@ -1,0 +1,652 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const upgradeOrderColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Upgrade", label: "Upgrade" },
+  { key: "Why I Choose It", label: "Why I choose it" },
+  { key: "When I Delay It", label: "When I delay it" },
+];
+
+export const upgradeOrderRows = [
+  {
+    Priority: "1",
+    Upgrade: "Pickaxe",
+    "Why I Choose It":
+      "Ore drives tool upgrades, copper bars, crafting, and stronger mining. A better pickaxe also lets me break larger mineral rocks.",
+    "When I Delay It":
+      "Only if Misty Shores and Cave of Echoes are still locked, because I cannot use the mining loop yet.",
+  },
+  {
+    Priority: "2",
+    Upgrade: "Axe",
+    "Why I Choose It":
+      "The axe clears larger logs, opens better farm paths, and supports wood-heavy crafting.",
+    "When I Delay It":
+      "If my main paths are already open and ore is still the real blocker.",
+  },
+  {
+    Priority: "3",
+    Upgrade: "Watering Can",
+    "Why I Choose It":
+      "It reduces water pressure once my crop patch is large enough to slow the night.",
+    "When I Delay It":
+      "If the well already solves the refill route or my crop patch is still small.",
+  },
+  {
+    Priority: "4",
+    Upgrade: "Shovel",
+    "Why I Choose It":
+      "It helps with dig spots and cleanup, but it usually does not open the ore chain first.",
+    "When I Delay It":
+      "If pickaxe, axe, or watering problems are still costing more time.",
+  },
+  {
+    Priority: "5",
+    Upgrade: "Scythe",
+    "Why I Choose It":
+      "It saves energy when clearing grass and harvesting later.",
+    "When I Delay It":
+      "Early on, I can harvest by hand and spend bars on higher-impact tools first.",
+  },
+  {
+    Priority: "Later",
+    Upgrade: "Fishing Rod",
+    "Why I Choose It":
+      "The Premium Fishing Rod helps with larger fish, but it needs Gold Bars.",
+    "When I Delay It":
+      "I treat it as mid-to-late game because the first big upgrade chain is still mining and tools.",
+  },
+];
+
+export const toolCostColumns = [
+  { key: "Tool", label: "Tool" },
+  { key: "Copper Upgrade", label: "Copper upgrade" },
+  { key: "Iron Upgrade", label: "Iron upgrade" },
+  { key: "Gold Upgrade", label: "Gold upgrade" },
+  { key: "My Note", label: "My note" },
+];
+
+export const toolCostRows = [
+  {
+    Tool: "Pickaxe",
+    "Copper Upgrade": "1,000 coins + Rusty Pickaxe + 3 Copper Bars",
+    "Iron Upgrade": "2,000 coins + Copper Pickaxe + 3 Iron Bars",
+    "Gold Upgrade": "3,500 coins + Iron Pickaxe + 3 Gold Bars",
+    "My Note":
+      "My first upgrade path because it gates better ore and makes the whole upgrade chain easier.",
+  },
+  {
+    Tool: "Axe",
+    "Copper Upgrade": "1,000 coins + Rusty Axe + 3 Copper Bars",
+    "Iron Upgrade": "2,000 coins + Copper Axe + 3 Iron Bars",
+    "Gold Upgrade": "3,500 coins + Iron Axe + 3 Gold Bars",
+    "My Note":
+      "Second priority if logs and farm paths are slowing movement or crafting.",
+  },
+  {
+    Tool: "Shovel",
+    "Copper Upgrade": "1,000 coins + Rusty Shovel + 3 Copper Bars",
+    "Iron Upgrade": "2,000 coins + Copper Shovel + 3 Iron Bars",
+    "Gold Upgrade": "3,500 coins + Iron Shovel + 3 Gold Bars",
+    "My Note":
+      "Useful, but I do not spend early bars here before the mining loop is stable.",
+  },
+  {
+    Tool: "Watering Can",
+    "Copper Upgrade": "1,000 coins + Rusty Watering Can + 3 Copper Bars",
+    "Iron Upgrade": "2,000 coins + Copper Watering Can + 3 Iron Bars",
+    "Gold Upgrade": "3,500 coins + Iron Watering Can + 3 Gold Bars",
+    "My Note":
+      "Good when crop scale grows; I delay it if the well already solves my refill problem.",
+  },
+  {
+    Tool: "Scythe",
+    "Copper Upgrade": "1,000 coins + Rusty Scythe + 3 Copper Bars",
+    "Iron Upgrade": "2,500 coins + Copper Scythe + 3 Iron Bars",
+    "Gold Upgrade": "No Gold tier",
+    "My Note":
+      "The Iron tier costs more than the standard Iron tool tier, and the scythe stops at Iron.",
+  },
+  {
+    Tool: "Fishing Rod",
+    "Copper Upgrade": "No Copper tier",
+    "Iron Upgrade": "No Iron tier",
+    "Gold Upgrade": "3,500 coins + Fishing Rod + 3 Gold Bars for Premium Fishing Rod",
+    "My Note":
+      "This is its own upgrade path, mainly for larger fish after the early Noel route.",
+  },
+];
+
+export const barColumns = [
+  { key: "Bar", label: "Bar" },
+  { key: "Furnace Recipe", label: "Furnace recipe" },
+  { key: "Main Use", label: "Main use" },
+  { key: "My Rule", label: "My rule" },
+];
+
+export const barRows = [
+  {
+    Bar: "Copper Bar",
+    "Furnace Recipe": "4 Copper Ore + 1 Charcoal",
+    "Main Use": "Copper tool upgrades, early crafting, and copper route progress.",
+    "My Rule":
+      "I keep copper until the active quest and first upgrade chain are clear.",
+  },
+  {
+    Bar: "Iron Bar",
+    "Furnace Recipe": "4 Iron Ore + 1 Charcoal",
+    "Main Use": "Iron tool upgrades and stronger midgame crafting.",
+    "My Rule":
+      "I save Iron Bars for the pickaxe path before spreading them across convenience upgrades.",
+  },
+  {
+    Bar: "Gold Bar",
+    "Furnace Recipe": "4 Gold Ore + 1 Charcoal",
+    "Main Use": "Gold tool upgrades and Premium Fishing Rod.",
+    "My Rule":
+      "I treat Gold Bars as late upgrade fuel, not quick sale material.",
+  },
+];
+
+export const purchaseColumns = [
+  { key: "Item", label: "Item" },
+  { key: "Cost / Size", label: "Cost / size" },
+  { key: "What It Fixes", label: "What it fixes" },
+  { key: "My Decision", label: "My decision" },
+];
+
+export const purchaseRows = [
+  {
+    Item: "Well",
+    "Cost / Size": "1,500 gold, 6x6, 1 Night",
+    "What It Fixes": "Watering can refill time.",
+    "My Decision":
+      "Buy when watering is already part of your money route and the pond refill walk is wasting time.",
+  },
+  {
+    Item: "Inventory upgrade",
+    "Cost / Size": "2,000 gold, +10 slots",
+    "What It Fixes": "Full bags during mining, fishing, foraging, and dig-spot runs.",
+    "My Decision":
+      "Buy before repeated long resource routes, not after the bag has already ruined several nights.",
+  },
+  {
+    Item: "Barn",
+    "Cost / Size": "4,000 gold, 10x6, 1 Night",
+    "What It Fixes": "Animal goods, fertilizer, and the first ranch loop.",
+    "My Decision":
+      "Do not rush it here. Use the Barn and Animals Guide before committing 4,000 gold.",
+  },
+  {
+    Item: "Mill",
+    "Cost / Size": "8,000 gold, 8x8, 1 Night",
+    "What It Fixes": "Later processing for sugar, rice, flour, coffee powder, and cocoa powder.",
+    "My Decision":
+      "Delay until the basic upgrade loop is stable. It is too expensive for a panic first-week buy.",
+  },
+];
+
+export const resourceColumns = [
+  { key: "Resource", label: "Resource" },
+  { key: "Where I Focus", label: "Where I focus" },
+  { key: "Why It Matters", label: "Why it matters" },
+];
+
+export const resourceRows = [
+  {
+    Resource: "Copper Ore",
+    "Where I Focus": "Cave of Echoes in Misty Shores after A Bridge Too Far opens the route.",
+    "Why It Matters":
+      "Copper Ore becomes Copper Bars, which pay for the first real tool upgrades.",
+  },
+  {
+    Resource: "Iron Ore",
+    "Where I Focus": "Larger ore progression after the pickaxe path improves.",
+    "Why It Matters":
+      "Iron Bars are needed for Iron upgrades and stronger midgame tools.",
+  },
+  {
+    Resource: "Gold Ore",
+    "Where I Focus": "Later ore progression after the mine route and pickaxe tier support it.",
+    "Why It Matters":
+      "Gold Bars pay for Gold upgrades and the Premium Fishing Rod.",
+  },
+  {
+    Resource: "Wood",
+    "Where I Focus": "Farm paths first, then larger logs after the axe route improves.",
+    "Why It Matters":
+      "Wood supports repairs, charcoal, crafting, and farm layout.",
+  },
+  {
+    Resource: "Fiber",
+    "Where I Focus": "Regular cleanup around the farm.",
+    "Why It Matters":
+      "Fiber becomes more useful once feed and animals enter the route.",
+  },
+  {
+    Resource: "Dig spots",
+    "Where I Focus": "Sparkly ground spots on the farm, beach, mines, and town outskirts.",
+    "Why It Matters":
+      "They can give money, seeds, recipes, blueprints, resources, or later Nocturna cards.",
+  },
+];
+
+export const sellColumns = [
+  { key: "Item Type", label: "Item type" },
+  { key: "Sell or Keep?", label: "Sell or keep?" },
+  { key: "Reason", label: "Reason" },
+];
+
+export const sellRows = [
+  {
+  "Item Type": "Copper / Iron / Gold Ore and Bars",
+  "Sell or Keep?": "Keep until the upgrade route is clear",
+  Reason:
+    "Ore becomes bars, and bars pay for tool tiers. I only sell extras after the active quest and next upgrade are safe.",
+},
+  {
+    "Item Type": "Common extra forage",
+    "Sell or Keep?": "Sell extras",
+    Reason:
+      "Forage is free to collect, but I still keep a small stack for gifts or requests.",
+  },
+  {
+    "Item Type": "Fish",
+    "Sell or Keep?": "Usually sell extras",
+    Reason:
+      "Fish can fund upgrades, but I keep anything tied to a request or stamina plan.",
+  },
+  {
+    "Item Type": "Food and juice",
+    "Sell or Keep?": "Keep useful recovery",
+    Reason:
+      "Stamina and mana recovery can make a mining or farming night succeed.",
+  },
+  {
+    "Item Type": "New items you do not understand yet",
+    "Sell or Keep?": "Keep one stack",
+    Reason:
+      "The first week introduces materials before you always know their use.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Moonlight Peaks tool upgrades**, go to **Ridge at Howling Hammer**. The shop is open **Monday to Friday, 6:00 p.m. to midnight**. Talk to Ridge, choose **Shop**, choose **I want to buy something**, then scroll to the **third tab** for tool upgrades.
+
+My upgrade order is **Pickaxe first**, then **Axe**, **Watering Can**, **Shovel**, and **Scythe**. The pickaxe comes first because better pickaxes unlock better mining, and mining supplies the Copper, Iron, and Gold Bars needed for every later upgrade.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the full release launch build of Moonlight Peaks. This guide covers Howling Hammer hours, Ridge's upgrade menu, tool upgrade costs, Copper Bars, Iron Bars, Gold Bars, Furnace recipes, Cave of Echoes ore routing, pickaxe-first priority, early purchase timing, inventory upgrades, and what not to sell before upgrading.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-howling-hammer-well-barn-mill-costs.webp"
+    alt="Moonlight Peaks Howling Hammer shop showing Well Barn and Mill costs"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Howling Hammer is where the early resource decisions start. I read the prices as a priority check, not a shopping list to buy from left to right.
+  </figcaption>
+</figure>
+
+<h2 id="moonlight-peaks-tool-upgrades-guide">
+  Moonlight Peaks tool upgrades and early resources guide
+</h2>
+
+The tool upgrade route in **Moonlight Peaks** has two parts.
+
+First, you need the right shop timing. **Howling Hammer is not open all week.** If you show up on the wrong day or after midnight, the upgrade route feels broken even when you have the bars ready.
+
+Second, you need the right upgrade order. The game lets you spend bars on several tools, but ore is the resource that feeds the whole chain. That is why I upgrade the pickaxe first.
+
+My tool rule is:
+
+<strong>upgrade the tool that unlocks the next resource loop, not the tool that only feels convenient tonight.</strong>
+
+That keeps the early game clean. Pickaxe improves ore. Ore becomes bars. Bars become better tools. Better tools open better resources.
+
+<h2 id="how-to-upgrade-tools">
+  How to upgrade tools at Howling Hammer
+</h2>
+
+To upgrade tools, go to **Howling Hammer** and talk to **Ridge**.
+
+The shop timing matters:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Open days:</strong> Monday to Friday.
+  </li>
+  <li>
+    <strong>Open hours:</strong> 6:00 p.m. to midnight.
+  </li>
+</ul>
+
+The menu path is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>talk to Ridge,</li>
+  <li>choose <strong>Shop</strong>,</li>
+  <li>choose <strong>I want to buy something</strong>,</li>
+  <li>scroll right to the <strong>third tab</strong>,</li>
+  <li>pick the tool upgrade you can afford.</li>
+</ol>
+
+This is a real early trap. If I need an upgrade on the weekend, I do not keep wandering around town. I use the time for mining, foraging, fishing, crop work, or resource prep, then return on the next open night.
+
+<h2 id="best-tool-upgrade-order">
+  Best tool upgrade order: pickaxe first
+</h2>
+
+My default upgrade order is:
+
+<GuideTable
+  caption="Moonlight Peaks early tool upgrade order."
+  columns={upgradeOrderColumns}
+  rows={upgradeOrderRows}
+/>
+
+The pickaxe is first because it controls the ore chain. A better pickaxe lets me break larger mineral rocks and reach the ore types needed for future upgrades.
+
+The axe is usually second because wood, logs, and blocked paths affect the whole farm layout. The watering can becomes important once the crop patch is large enough that water use slows the night. Shovel and scythe are still useful, but I do not spend early bars on them before the mining loop is stable.
+
+<h2 id="tool-upgrade-costs">
+  Tool upgrade costs and materials
+</h2>
+
+Each tool upgrade needs coins, the previous version of the tool, and **3 bars** of the matching metal. The main exception is the scythe, which stops at Iron, and the fishing rod, which has a single Premium upgrade.
+
+<GuideTable
+  caption="Moonlight Peaks tool upgrade costs and material requirements."
+  columns={toolCostColumns}
+  rows={toolCostRows}
+/>
+
+The price table changes how I spend bars.
+
+If I have only **3 Copper Bars**, I do not spread them around. I ask which upgrade opens the next material route. Most of the time, that means Copper Pickaxe first.
+
+If I already upgraded the pickaxe and farm paths are slowing me down, the axe becomes the next clean choice. If I am farming heavily and water is the bottleneck, the watering can moves up. I only push shovel or scythe earlier when a specific task needs them.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="ore-tiers-and-pickaxe-gates">
+  Ore tiers: Copper, Iron, and Gold
+</h2>
+
+The upgrade chain runs through three main ore tiers:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Copper</strong> for the first upgrade tier.
+  </li>
+  <li>
+    <strong>Iron</strong> for the second upgrade tier.
+  </li>
+  <li>
+    <strong>Gold</strong> for the third upgrade tier and Premium Fishing Rod.
+  </li>
+</ul>
+
+Ore is not just a money item. It is the upgrade fuel.
+
+The pickaxe matters because higher-tier pickaxes let you break stronger mineral rocks. If I delay the pickaxe too long, I may have coins but still lack the ore path needed for better tools.
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-mine-large-ore-node-six-ore.webp"
+    alt="Moonlight Peaks mine showing Copper Ore plus six and Iron Ore plus one drops"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Large ore clusters are worth prioritizing. A large cluster can drop 6 ore, while a regular node only drops 1 ore.
+  </figcaption>
+</figure>
+
+My mining priority is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>large ore clusters,</li>
+  <li>ore types needed for the next bar tier,</li>
+  <li>dig spots if I still have stamina and space,</li>
+  <li>regular rocks only when I also need stone or refined stone.</li>
+</ol>
+
+<h2 id="misty-shores-cave-of-echoes">
+  Misty Shores and Cave of Echoes: where the ore route starts
+</h2>
+
+The first serious ore route points toward **Cave of Echoes in Misty Shores**.
+
+This area opens through the **A Bridge Too Far** route, so I do not treat copper as a random farm rock problem. If I need Copper Ore and the area is still blocked, I go back to the story route instead of hitting every stone on the farm.
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-cave-of-echoes-copper-route.webp"
+    alt="Moonlight Peaks Copper Ore clue pointing to Cave of Echoes in Misty Shores"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The copper clue points directly to Cave of Echoes in Misty Shores. When I need Copper Ore, this is the route I follow.
+  </figcaption>
+</figure>
+
+For the full bridge, fishing, and cave route, use the <Link href="/moonlight-peaks/misty-shores-mines-copper-guide/">Misty Shores, Mines and Copper Guide</Link>. This page focuses on how that ore becomes upgrades.
+
+<h2 id="furnace-bars">
+  How to make Copper Bars, Iron Bars, and Gold Bars
+</h2>
+
+Ore does not become an upgrade by itself. You need bars.
+
+The bar chain uses the **Furnace**:
+
+<GuideTable
+  caption="Moonlight Peaks metal bar recipes and upgrade uses."
+  columns={barColumns}
+  rows={barRows}
+/>
+
+Charcoal matters because every bar recipe needs it. I do not turn all my wood into random crafting projects when I know a tool upgrade is coming. I keep enough wood moving through charcoal so the Furnace can turn ore into bars.
+
+My bar rule is:
+
+<strong>keep ore in groups of four and keep charcoal ready.</strong>
+
+That way, when I return from the mine, I can process bars instead of discovering that I have enough ore but no fuel.
+
+<h2 id="early-purchase-priority">
+  Early purchase priority: well, inventory, barn, mill
+</h2>
+
+Tool upgrades are not the only early money sink. Howling Hammer and Web of Wonders also create important purchase decisions.
+
+<GuideTable
+  caption="Moonlight Peaks early purchase priority for resource planning."
+  columns={purchaseColumns}
+  rows={purchaseRows}
+/>
+
+This table is the only place I make the full early purchase comparison on this page. The short version is:
+
+<strong>well fixes watering, inventory fixes long routes, barn starts animals, mill waits.</strong>
+
+For the full animal route, use the <Link href="/moonlight-peaks/barn-animals-guide/">Barn and Animals Guide</Link> before spending 4,000 gold on the barn.
+
+<h2 id="inventory-upgrade">
+  Inventory upgrade: buy space before repeated resource runs
+</h2>
+
+The first inventory upgrade costs **2,000 gold** and adds **10 inventory slots**.
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-inventory-upgrade-2000-gold.webp"
+    alt="Moonlight Peaks inventory upgrade costing 2000 gold and adding 10 inventory slots"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first inventory upgrade is a resource-route upgrade. The extra 10 slots matter most before repeated mine, fish, forage, and dig-spot runs.
+  </figcaption>
+</figure>
+
+I buy inventory space when the bag is ending my route before stamina or time does. That usually happens once I start mixing ore, fish, forage, dig-spot rewards, blueprints, and quest items in the same night.
+
+If I am only doing short errands in town, I can wait. If I am repeatedly leaving Cave of Echoes early because the bag is full, I buy the upgrade.
+
+<h2 id="resources-to-prioritize">
+  Resources to prioritize early
+</h2>
+
+Not every item deserves the same attention. I sort resources by whether they unlock progress, save time, or only create quick gold.
+
+<GuideTable
+  caption="Moonlight Peaks early resources and why they matter."
+  columns={resourceColumns}
+  rows={resourceRows}
+/>
+
+I use this table as my final check before selling through Chester. The sell price is not the real value. The real value is whether that material opens the next tool tier.
+
+<h2 id="what-not-to-sell">
+  What not to sell early
+</h2>
+
+Chester makes selling easy, but easy selling can become a trap.
+
+<figure className="my-8">
+  <Image
+    src="/images/moonlight-peaks/moonlight-peaks-chester-town-hall-shipping-bin.webp"
+    alt="Moonlight Peaks Chester shipping bin for selling items safely before sleep"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Chester lets me review the sell list before sleeping. I use that safety check before selling anything tied to tools, bars, quests, or recovery.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Moonlight Peaks early sell or keep decisions before upgrading tools."
+  columns={sellColumns}
+  rows={sellRows}
+/>
+
+My rule is:
+
+<strong>sell duplicate comfort items, keep progression items.</strong>
+
+A progression item is anything that can become a tool, bar, quest step, stamina recovery item, mana recovery item, recipe input, or new route unlock. Those items stay in storage until I know the next upgrade does not need them.
+
+<h2 id="when-to-stop-upgrading">
+  When to stop upgrading and save money
+</h2>
+
+A good upgrade makes the next few nights smoother. A bad upgrade feels nice once and then leaves me short for the real blocker.
+
+I stop spending when:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Howling Hammer is closed and I would only be wandering around waiting,</li>
+  <li>I am saving for the 2,000 gold inventory upgrade before a long mine route,</li>
+  <li>I need charcoal and ore before bars can actually be made,</li>
+  <li>I have only 3 bars and the pickaxe path is not finished,</li>
+  <li>I am close to the well or barn threshold but the purchase is not supported yet,</li>
+  <li>or the next upgrade adds comfort while a story route is still blocked.</li>
+</ul>
+
+The key question is:
+
+<strong>Will this upgrade open the next route, or just make tonight feel nicer?</strong>
+
+If it only makes tonight feel nicer, I usually wait.
+
+<h2 id="related-guides">
+  Related Moonlight Peaks guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Start with the <Link href="/moonlight-peaks/">Moonlight Peaks Guide Hub</Link> if you need the full route map for the cluster.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/beginner-guide/">Beginner Guide</Link> for the first-week route, Chester, stamina, early money, and first purchases.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/misty-shores-mines-copper-guide/">Misty Shores, Mines and Copper Guide</Link> for A Bridge Too Far, Copper Ore, Cave of Echoes, fishing rod, and the mining route.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/barn-animals-guide/">Barn and Animals Guide</Link> before spending 4,000 gold on your first barn.
+  </li>
+  <li>
+    Use the <Link href="/moonlight-peaks/feature-unlocks-guide/">Feature Unlocks Guide</Link> when fishing, bug net, soul blobs, jobs, or special shops have not appeared yet.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Moonlight Peaks early resources and tool upgrades FAQ
+</h2>
+
+### Where do I upgrade tools in Moonlight Peaks?
+
+Upgrade tools at Howling Hammer by talking to Ridge. Choose Shop, choose I want to buy something, then scroll to the third tab.
+
+### What are Howling Hammer's hours?
+
+Howling Hammer is open Monday to Friday from 6:00 p.m. to midnight.
+
+### What is the best first tool upgrade?
+
+I usually upgrade the pickaxe first because better pickaxes unlock better mining, and mining supplies the bars needed for later upgrades.
+
+### How much does a Copper tool upgrade cost?
+
+Most Copper tool upgrades cost 1,000 coins, the Rusty version of that tool, and 3 Copper Bars.
+
+### How much does an Iron tool upgrade cost?
+
+Most Iron upgrades cost 2,000 coins, the Copper version of that tool, and 3 Iron Bars. The Iron Scythe is different: it costs 2,500 coins, the Copper Scythe, and 3 Iron Bars.
+
+### How much does a Gold tool upgrade cost?
+
+Most Gold upgrades cost 3,500 coins, the Iron version of that tool, and 3 Gold Bars. The scythe does not have a Gold tier.
+
+### How do I make Copper Bars?
+
+Use the Furnace with 4 Copper Ore and 1 Charcoal to make a Copper Bar.
+
+### Where do I get Copper Ore?
+
+Copper Ore comes from the Cave of Echoes route in Misty Shores, which opens through A Bridge Too Far.
+
+### Should I sell ore or bars?
+
+Not early. Ore becomes bars, and bars pay for tool upgrades. I keep them until the upgrade and quest route is clear.
+
+### When should I buy the inventory upgrade?
+
+Buy the first inventory upgrade before repeated long resource runs. It costs 2,000 gold and adds 10 slots.
+
+### Should I buy the well or upgrade tools first?
+
+Buy based on the bottleneck. If watering wastes time every night, buy the well. If ore is blocking upgrades, prioritize pickaxe and mining.
+
+### Should I buy the barn before tool upgrades?
+
+Not usually. The barn costs 4,000 gold and starts the animal route, so check the Barn and Animals Guide before spending that money.
