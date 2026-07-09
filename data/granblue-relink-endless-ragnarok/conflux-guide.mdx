@@ -1,0 +1,693 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const portalColumns = [
+  { key: "Portal", label: "Portal" },
+  { key: "What It Usually Means", label: "What it usually means" },
+  { key: "My Rule", label: "My rule" },
+];
+
+export const portalRows = [
+  {
+    Portal: "Yellow Dexterity",
+    "What It Usually Means":
+      "A short objective room: find the right item, identify an NPC, chase a slime, hit a gimmick, or grab a treasure-style reward.",
+    "My Rule":
+      "I take yellow first when I want speed. I do the objective and leave instead of clearing every enemy by habit.",
+  },
+  {
+    Portal: "Red Strife",
+    "What It Usually Means":
+      "A direct combat room with enemy waves, elites, or a kill objective.",
+    "My Rule":
+      "I take red when I need points, combat rewards, or the party is strong enough to clear waves fast.",
+  },
+  {
+    Portal: "Green Limbo",
+    "What It Usually Means":
+      "A build room where I spend Conflux points on auras.",
+    "My Rule":
+      "I enter green when I have points to spend, when a boss is coming, or when the current aura setup has no clear damage plan.",
+  },
+  {
+    Portal: "Purple Boss",
+    "What It Usually Means":
+      "A boss room that checks whether the run's aura setup is ready.",
+    "My Rule":
+      "I spend points before the boss if I can. After the boss, I decide whether to continue or leave through the gray exit portal.",
+  },
+];
+
+export const yellowColumns = [
+  { key: "Yellow Objective", label: "Yellow objective" },
+  { key: "How I Clear It", label: "How I clear it" },
+  { key: "Mistake I Avoid", label: "Mistake I avoid" },
+];
+
+export const yellowRows = [
+  {
+    "Yellow Objective": "Find the correct NPC",
+    "How I Clear It":
+      "I read the hint, move directly through the room, and interact with the target as soon as I confirm it.",
+    "Mistake I Avoid":
+      "I do not stop to clear enemies unless they are physically blocking the interaction.",
+  },
+  {
+    "Yellow Objective": "Find an item",
+    "How I Clear It":
+      "I sweep the edges first, then cut through the center once I know the room layout.",
+    "Mistake I Avoid":
+      "I do not chase random combat drops while the objective route is the real goal.",
+  },
+  {
+    "Yellow Objective": "Chase a slime or rare target",
+    "How I Clear It":
+      "I hold burst skills until the target is exposed, then commit damage quickly.",
+    "Mistake I Avoid":
+      "I do not waste burst on filler enemies right before the target appears.",
+  },
+  {
+    "Yellow Objective": "Quick gimmick",
+    "How I Clear It":
+      "I solve the gimmick first, then leave.",
+    "Mistake I Avoid":
+      "I do not turn a fast objective room into a red combat room by fighting everything.",
+  },
+  {
+    "Yellow Objective": "Treasure-style room",
+    "How I Clear It":
+      "I grab the reward and keep the run moving.",
+    "Mistake I Avoid":
+      "I do not overthink a free value room when the next boss cycle is still ahead.",
+  },
+];
+
+export const auraColumns = [
+  { key: "Aura Text / Effect", label: "Aura text / effect" },
+  { key: "When I Take It", label: "When I take it" },
+  { key: "When I Skip It", label: "When I skip it" },
+];
+
+export const auraRows = [
+  {
+    "Aura Text / Effect": "Damage Cap increase",
+    "When I Take It":
+      "High priority when my main or AI companions are already near cap.",
+    "When I Skip It":
+      "I skip it only when the party is still far below cap and needs raw attack or crit first.",
+  },
+  {
+    "Aura Text / Effect": "Supplementary damage / extra hits",
+    "When I Take It":
+      "High priority before boss rooms and longer fights because it converts into real output.",
+    "When I Skip It":
+      "I rarely skip it unless the current run is dying from survival problems.",
+  },
+  {
+    "Aura Text / Effect": "Crit damage / attack",
+    "When I Take It":
+      "Good early when the build is not capped and rooms need faster clears.",
+    "When I Skip It":
+      "I skip small raw damage boosts when cap is already the bottleneck.",
+  },
+  {
+    "Aura Text / Effect": "Paralysis / control / status",
+    "When I Take It":
+      "Strong when enemies live long enough to interrupt the room or when a boss needs safer damage windows.",
+    "When I Skip It":
+      "I skip weak control when everything already dies instantly.",
+  },
+  {
+    "Aura Text / Effect": "Shield / survival",
+    "When I Take It":
+      "Good when the run is unstable, the next boss is dangerous, or AI companions are getting chipped down.",
+    "When I Skip It":
+      "I skip pure safety when the run is already safe and needs faster clears.",
+  },
+  {
+    "Aura Text / Effect": "Challenge Aura with a temporary downside",
+    "When I Take It":
+      "I take it only when the run is already stable and the reward solves a real bottleneck.",
+    "When I Skip It":
+      "I skip it before a boss if the downside can ruin the next room.",
+  },
+  {
+    "Aura Text / Effect": "Chaos Aura / rare effect",
+    "When I Take It":
+      "I take it when the effect fits my build, especially if it adds cap, control, burst, or strong utility.",
+    "When I Skip It":
+      "I do not take it just because it looks rare. Bad fit is still bad value.",
+  },
+];
+
+export const bossDecisionColumns = [
+  { key: "Moment", label: "Moment" },
+  { key: "Check", label: "Check" },
+  { key: "My Decision", label: "My decision" },
+];
+
+export const bossDecisionRows = [
+  {
+    Moment: "Before purple boss",
+    Check: "I have unspent points and a green room appeared.",
+    "My Decision":
+      "Spend before entering. A boss room is the worst place to remember I had unused Conflux points.",
+  },
+  {
+    Moment: "Before purple boss",
+    Check: "The build has no damage plan.",
+    "My Decision":
+      "I look for cap conversion, extra hits, attack, control, or burst value before committing.",
+  },
+  {
+    Moment: "Before purple boss",
+    Check: "A Challenge Aura downside is already hurting the run.",
+    "My Decision":
+      "I treat the boss as a risk check and prepare to leave after the clear.",
+  },
+  {
+    Moment: "After boss",
+    Check: "Boss died fast and the party is healthy.",
+    "My Decision":
+      "Continue. The run has damage, survival, and reward momentum.",
+  },
+  {
+    Moment: "After boss",
+    Check: "Boss died, but the party used too many revives.",
+    "My Decision":
+      "Use the gray exit portal. Keeping earned rewards is better than gambling a bad next section.",
+  },
+  {
+    Moment: "After boss",
+    Check: "The reward target is already secured.",
+    "My Decision":
+      "Exit if the next rooms no longer pay the bottleneck I entered for.",
+  },
+];
+
+export const cycleColumns = [
+  { key: "Cycle / Depth", label: "Cycle / depth" },
+  { key: "Where It Fits", label: "Where it fits" },
+  { key: "Best Use", label: "Best use" },
+  { key: "When I Move On", label: "When I move on" },
+];
+
+export const cycleRows = [
+  {
+    "Cycle / Depth": "Cycle 1",
+    "Where It Fits":
+      "The opening Conflux layer after the Seedhollow gate route.",
+    "Best Use":
+      "Learn portal flow, test yellow rooms, collect early rewards, and understand how auras carry the run.",
+    "When I Move On":
+      "Move on once clears are stable and the rewards stop solving the next upgrade.",
+  },
+  {
+    "Cycle / Depth": "Cycle 2",
+    "Where It Fits":
+      "The first catch-up layer after the opening cycle.",
+    "Best Use":
+      "Strengthen the party before harder story, Fatebreaker, or Chaos checks.",
+    "When I Move On":
+      "Move on when the reward pool no longer pays for the next wall.",
+  },
+  {
+    "Cycle / Depth": "Cycle 3",
+    "Where It Fits":
+      "The layer where Conflux starts becoming real weapon prep.",
+    "Best Use":
+      "Target stronger materials, including Terminus-related progress when available.",
+    "When I Move On":
+      "Move on when boss rooms are stable and a deeper cycle gives better rewards for the same time.",
+  },
+  {
+    "Cycle / Depth": "Higher cycles",
+    "Where It Fits":
+      "Later Endless Ragnarok progression after the basic Conflux loop is stable.",
+    "Best Use":
+      "Chaos prep, rare materials, Master Trait pressure, and focused reward chest farming.",
+    "When I Move On":
+      "Only move down if a lower cycle pays the exact bottleneck faster.",
+  },
+];
+
+export const chestColumns = [
+  { key: "Reward Shown", label: "Reward shown" },
+  { key: "Pick If", label: "Pick if" },
+  { key: "Skip If", label: "Skip if" },
+  { key: "My Rule", label: "My rule" },
+];
+
+export const chestRows = [
+  {
+    "Reward Shown": "Weapon material reward",
+    "Pick If":
+      "The active weapon is behind or the next Chaos wall is mostly weapon progress.",
+    "Skip If":
+      "The weapon is already ahead and the real issue is AI survival or trait progress.",
+    "My Rule":
+      "I pick the reward that moves the weapon I am actually using.",
+  },
+  {
+    "Reward Shown": "Terminus-related material reward",
+    "Pick If":
+      "I am entering serious endgame prep and can use the Terminus path soon.",
+    "Skip If":
+      "The party still needs basic weapon, survival, or character upgrades first.",
+    "My Rule":
+      "I do not chase Terminus-related rewards too early if the current wall is basic stability.",
+  },
+  {
+    "Reward Shown": "Trait / rare material reward",
+    "Pick If":
+      "Master Traits are blocking the next upgrade.",
+    "Skip If":
+      "The active party is still underbuilt and cannot use the rare material efficiently.",
+    "My Rule":
+      "Rare is only good when it fixes the next build decision.",
+  },
+  {
+    "Reward Shown": "Damage / cap-conversion reward",
+    "Pick If":
+      "Chaos damage is low and the party is already near cap.",
+    "Skip If":
+      "The party is still below cap and needs raw attack, weapon progress, or basic growth.",
+    "My Rule":
+      "When cap is the wall, I choose rewards that turn capped damage into real output.",
+  },
+  {
+    "Reward Shown": "General upgrade reward",
+    "Pick If":
+      "I am still broad-catching up multiple weak slots.",
+    "Skip If":
+      "A specific material reward is available for the exact wall I am facing.",
+    "My Rule":
+      "General rewards are fine early. Later, targeted rewards are better.",
+  },
+];
+
+export const resonanceColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Resonance Priority", label: "Resonance priority" },
+  { key: "Why", label: "Why" },
+];
+
+export const resonanceRows = [
+  {
+    Problem: "Rooms are too slow",
+    "Resonance Priority": "Damage",
+    Why:
+      "If normal rooms take too long, I want faster clears before comfort upgrades.",
+  },
+  {
+    Problem: "My build depends on skill burst",
+    "Resonance Priority": "Skill damage",
+    Why:
+      "Skill-focused characters need burst windows to delete targets cleanly.",
+  },
+  {
+    Problem: "Boss windows decide the run",
+    "Resonance Priority": "SBA / burst value",
+    Why:
+      "If the boss only gives short safe windows, burst value matters more than slow passive gains.",
+  },
+  {
+    Problem: "Main or AI companions keep dying",
+    "Resonance Priority": "Survival",
+    Why:
+      "A dead character does not use damage upgrades.",
+  },
+  {
+    Problem: "Run is already stable",
+    "Resonance Priority": "Damage or cap-conversion direction",
+    Why:
+      "Once the route is safe, I spend points to shorten repeat clears.",
+  },
+];
+
+export const mistakeColumns = [
+  { key: "Mistake", label: "Mistake" },
+  { key: "Why It Hurts", label: "Why it hurts" },
+  { key: "Better Choice", label: "Better choice" },
+];
+
+export const mistakeRows = [
+  {
+    Mistake: "Judging Conflux by Cycle 1 only",
+    "Why It Hurts":
+      "A geared party can outscale the opening cycle so hard that it hides bad portal and aura habits.",
+    "Better Choice":
+      "Use Cycle 1 to learn the route, then judge difficulty once bosses start surviving long enough to punish bad choices.",
+  },
+  {
+    Mistake: "Taking every red room",
+    "Why It Hurts":
+      "A full combat room can waste time when the run only needs objective progress or one more aura before the boss.",
+    "Better Choice":
+      "Take red for points or combat rewards. Take yellow when the objective is faster.",
+  },
+  {
+    Mistake: "Picking a big aura that does not solve the run",
+    "Why It Hurts":
+      "A raw damage aura does little if cap is already blocking damage, and a survival aura does little if the run is timing out.",
+    "Better Choice":
+      "Read the bottleneck first, then pick cap, extra hits, control, raw damage, or survival.",
+  },
+  {
+    Mistake: "Ignoring the gray exit after a messy boss",
+    "Why It Hurts":
+      "A boss clear with too many revives usually means the next section is worse, not better.",
+    "Better Choice":
+      "Exit when the run has paid out enough and the next section is more risk than value.",
+  },
+  {
+    Mistake: "Returning to easy cycles by habit",
+    "Why It Hurts":
+      "Safe cycles feel efficient, but they can stop paying the material that blocks the next upgrade.",
+    "Better Choice":
+      "Farm the cycle that pays the next failed clear, even if that means moving up once the party is ready.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Granblue Fantasy: Relink Endless Ragnarok**, I route **Conflux** with one rule: every room, aura, and chest has to solve the current run. I start from the **Seedhollow** Conflux route, take **yellow Dexterity** rooms for speed, use **red Strife** rooms when I need points, spend points in **green Limbo** rooms before important fights, prepare before **purple boss** rooms, and leave through the **gray exit portal** when the run has already become too risky.
+
+I do not farm Conflux blindly. I farm the cycle that pays for my current wall: weapon materials if the weapon is behind, cap or extra-hit rewards if Chaos damage is low, AI companion materials if a party slot is failing, and higher-cycle rewards when Master Traits or rare endgame materials become the bottleneck.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the Endless Ragnarok launch build of Granblue Fantasy: Relink. This guide focuses on Seedhollow Conflux unlock checks, portal routing, yellow objective rooms, aura choices, reward chests, Resonance points, cycle progression, gray exit portal decisions, and when to farm Conflux before Fatebreaker or Chaos.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-conflux-gate.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Conflux gate near the Quest Counter"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the Seedhollow Conflux gate opens, I treat Conflux as the main preparation route before harder Fatebreaker and Chaos checks.
+  </figcaption>
+</figure>
+
+<h2 id="conflux-guide">
+  Granblue Fantasy Relink Endless Ragnarok Conflux Guide: portals, auras, rewards, and when to leave
+</h2>
+
+**Conflux** is the solo route I use when Endless Ragnarok starts asking for stronger weapons, better AI companions, and cleaner Chaos prep.
+
+It is not just a random arena chain. Each run is a sequence of small rooms, portal choices, aura decisions, boss checks, reward chests, permanent upgrade pressure, and exit decisions.
+
+The important part is simple:
+
+<strong>Conflux is a route, not a grind button.</strong>
+
+If I know why I entered the run, I know which portal to take, which aura to buy, which chest to choose, and when to leave.
+
+<h2 id="conflux-routing-rule">
+  My Conflux routing rule
+</h2>
+
+Every Conflux decision follows the same three checks:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Room:</strong> does this portal move the run faster or give the points I need?
+  </li>
+  <li>
+    <strong>Aura:</strong> does this aura fix the current bottleneck, or is it just a bigger-looking number?
+  </li>
+  <li>
+    <strong>Reward:</strong> does this chest fix the next failed clear?
+  </li>
+</ul>
+
+That is why I route each run around the wall I am trying to break: portal speed, aura power, reward target, resonance progress, or gray-exit safety.
+
+<h2 id="how-to-unlock-conflux">
+  How to unlock Conflux in Seedhollow
+</h2>
+
+Conflux starts from the Endless Ragnarok route in **Seedhollow**. After the expansion opening sends me back into the city, I follow the new prompt around the main path and the Quest Counter side of town instead of farming old quests.
+
+The practical route is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>start the Endless Ragnarok route and return to Seedhollow,</li>
+  <li>follow the new expansion prompt around the Quest Counter path,</li>
+  <li>investigate the mysterious gate or back alley gate when the prompt appears,</li>
+  <li>talk to the representative by the Quest Counter when the game points me there,</li>
+  <li>then enter the first available Conflux cycle.</li>
+</ul>
+
+If the Seedhollow gate is not there yet, I continue the Endless Ragnarok story and side-objective route until the Conflux prompt appears. I do not farm random old quests to unlock Conflux.
+
+For the full starting route, use the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Endless Ragnarok Guide</Link>.
+
+<h2 id="how-conflux-works">
+  How Conflux works
+</h2>
+
+A Conflux run sends me through a chain of rooms. Each room gives me progress, points, rewards, or a chance to shape the build with auras.
+
+The loop is:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>choose a portal,</li>
+  <li>clear the room objective,</li>
+  <li>earn points or rewards,</li>
+  <li>spend points on auras when the route allows it,</li>
+  <li>prepare for the boss room,</li>
+  <li>then decide whether to continue or exit after a boss.</li>
+</ul>
+
+The first Conflux run can be deceptive. In my run, **Cycle 1 Inundation showed 1,500 recommended power** while my party was around **21,000 power**, so the opening cycle was a route check, not a real difficulty test.
+
+That is why I clear Cycle 1 quickly and wait for later cycles before judging the mode's real pressure.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-conflux-first-run.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Conflux Cycle 1 Inundation depth selection"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cycle 1 can start far below a geared save's power. I clear it quickly and wait for higher cycles before judging the mode's real difficulty.
+  </figcaption>
+</figure>
+
+<h2 id="portal-types">
+  Portal types: which door I take first
+</h2>
+
+The most important Conflux decision is the portal choice. I use this order unless the run gives me a specific reason to change:
+
+<strong>yellow for speed, red for points, green for aura spending, purple for boss checks.</strong>
+
+<GuideTable
+  caption="Granblue Relink Conflux portal choices."
+  columns={portalColumns}
+  rows={portalRows}
+/>
+
+Red rooms are not bad. I just do not enter them automatically. If the party already clears fast and I need points, red is fine. If a yellow objective can finish the room faster, I take yellow and keep the run moving.
+
+<h2 id="yellow-objectives">
+  Yellow Dexterity rooms: how I clear them fast
+</h2>
+
+Yellow rooms are where Conflux rewards objective play. The mistake is treating them like combat rooms.
+
+<GuideTable
+  caption="How I handle yellow Dexterity objectives."
+  columns={yellowColumns}
+  rows={yellowRows}
+/>
+
+This is why I usually prefer yellow rooms early. They keep the run short, get me to the next aura or boss faster, and reduce wasted time in rooms that do not match the goal of the run.
+
+<h2 id="aura-priorities">
+  Aura priorities: choose by bottleneck, not by the biggest number
+</h2>
+
+I do not pick auras by rarity or biggest-looking text. I pick the aura that fixes what the current run is missing.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-conflux-aura-selection.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Conflux aura selection with damage and utility choices"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I read aura choices around the current bottleneck. If damage is capped, I want cap conversion or extra hits. If the run is unstable, I take control or survival.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How I choose Conflux auras from the text on screen."
+  columns={auraColumns}
+  rows={auraRows}
+/>
+
+The table is the priority order I use in practice: cap or extra-hit value when damage is ready, raw damage when the party is still below cap, control when enemies interrupt the room, and survival only when the run is becoming unsafe.
+
+<h2 id="purple-boss-and-gray-exit">
+  Purple boss and gray exit decisions
+</h2>
+
+I treat every purple boss as two decisions: how to prepare before entering, and whether to continue after the boss dies.
+
+<GuideTable
+  caption="How I prepare before a Conflux boss and decide whether to leave after it."
+  columns={bossDecisionColumns}
+  rows={bossDecisionRows}
+/>
+
+The gray exit portal is not a failure button. I use it when the run has already paid out enough and the next section is likely to turn ugly.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="cycle-reward-roadmap">
+  Conflux cycles: which layer I farm
+</h2>
+
+I do not farm the lowest cycle just because it is comfortable. I farm the cycle that pays for the next upgrade.
+
+<GuideTable
+  caption="How I use and move between Conflux cycles."
+  columns={cycleColumns}
+  rows={cycleRows}
+/>
+
+Cycle 1 teaches the system. Later cycles start deciding whether Conflux is actually solving the problem in front of me. If the current cycle only gives materials I no longer need, I move up. If a lower cycle gives the exact bottleneck faster, I briefly move down and leave once the bottleneck is fixed.
+
+<h2 id="reward-chest-rules">
+  Reward chest rules by bottleneck
+</h2>
+
+Reward chests are where Conflux becomes targeted farming. I do not pick the chest that looks rare. I pick the chest that solves the current wall.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-conflux-cycle-3-weapon-awakening-materials.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Conflux Cycle 3 Procession weapon uncap and awakening materials"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cycle 3: Procession shows 9,000 recommended power and rewards for weapon uncap up to 6★ and awakening materials, which is where I start treating Conflux as real weapon prep instead of only a tutorial route.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Which Conflux reward chest I choose by current bottleneck."
+  columns={chestColumns}
+  rows={chestRows}
+/>
+
+My chest rule is:
+
+<strong>pick the reward that fixes the next failed clear.</strong>
+
+If the next wall is Chaos damage, I want damage conversion. If the next wall is AI survival, I feed the AI companion. If the next wall is weapon progress, I target weapon materials. This keeps Conflux from becoming random grinding.
+
+<h2 id="resonance-points">
+  Resonance points: what I upgrade first
+</h2>
+
+Once resonance points are available, I spend them like account progression, not like a random bonus menu.
+
+<GuideTable
+  caption="How I spend Resonance points by Conflux problem."
+  columns={resonanceColumns}
+  rows={resonanceRows}
+/>
+
+I do not buy defensive upgrades first when the actual problem is slow clears. I also do not buy pure damage first if the run is already collapsing before the boss. The point is to buy the upgrade that changes the next run, not the upgrade with the flashiest number.
+
+<h2 id="when-to-farm-before-chaos">
+  When I farm Conflux before Fatebreaker or Chaos
+</h2>
+
+I go back to Conflux before pushing Fatebreaker or Chaos when one of these things happens:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>my AI companions start dying before the boss is halfway down,</li>
+  <li>my main character is hitting damage cap too early and needs cap conversion,</li>
+  <li>the party clears but takes too long,</li>
+  <li>the next quest recommends a much stronger weapon setup,</li>
+  <li>or I unlock a new character but cannot gear them properly yet.</li>
+</ul>
+
+That is the point of Conflux. It lets me pause the story push, fix the party, and return with real upgrades instead of hoping for a perfect attempt.
+
+For the next difficulty route, use the <Link href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/">Fatebreaker and Chaos Progression Guide</Link>.
+
+<h2 id="common-mistakes">
+  Conflux mistakes I avoid
+</h2>
+
+<GuideTable
+  caption="Granblue Relink Conflux mistakes and better choices."
+  columns={mistakeColumns}
+  rows={mistakeRows}
+/>
+
+The pattern is simple: Conflux rewards smart routing. I move fast when the cycle is easy, slow down when enemies survive, and leave when the run has already turned against me.
+
+<h2 id="related-guides">
+  Related Granblue Relink Endless Ragnarok guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the <Link href="/granblue-relink-endless-ragnarok/">Granblue Relink Endless Ragnarok Guide Hub</Link> for the full DLC route.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Endless Ragnarok Guide</Link> if the Conflux gate or Quest Counter representative has not appeared yet.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/">Fatebreaker and Chaos Progression Guide</Link> when Conflux starts feeding Chaos quest prep.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/best-ai-team-builds/">Best AI Team Builds Guide</Link> if AI companions are the reason Chaos clears fail.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/">New Characters Unlock Guide</Link> before spending materials on a new main.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Granblue Relink Conflux FAQ
+</h2>
+
+### How do I unlock Conflux?
+
+Conflux starts from the Endless Ragnarok route in Seedhollow. Follow the expansion prompt around the Quest Counter path until the mysterious gate / back alley gate and Conflux representative route appears, then enter the first available cycle.
+
+### Is Conflux solo only?
+
+Yes. I treat Conflux as a solo progression route for strengthening my own party and AI companions before harder Fatebreaker or Chaos checks.
+
+### Do I lose rewards if I leave through the gray exit portal?
+
+The gray exit portal appears after a boss. I use it when the run has paid out enough and the next section is more risk than value.
+
+### Should I farm Cycle 1 for a long time?
+
+No. Cycle 1 is mostly for opening the system and learning the room flow. Once it is stable and the rewards stop solving upgrades, I move to the next layer.
+
+### Should I farm Conflux before Chaos quests?
+
+Yes, when the party is unstable. Use the <Link href="#when-to-farm-before-chaos">Conflux before Chaos checklist</Link> above if AI companions are dying, damage feels capped too low, weapons lag behind, or the next quest expects stronger prep.

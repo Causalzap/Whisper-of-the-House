@@ -1,0 +1,530 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const unlockPlanColumns = [
+  { key: "Character", label: "Character" },
+  { key: "How I Unlock Them", label: "How I unlock them" },
+  { key: "First-Pick Rule", label: "First-pick rule" },
+  { key: "Investment Rule", label: "Investment rule" },
+];
+
+export const unlockPlanRows = [
+  {
+    Character: "Eustace",
+    "How I Unlock Them":
+      "Use 1 normal Crewmate Card when he becomes available. The early Conflux tutorial route can provide the normal card for this first test.",
+    "First-Pick Rule":
+      "My safest first pick if I want range, mobility, and a lower-risk return to the DLC.",
+    "Investment Rule":
+      "Build first if ranged uptime feels good in real fights, not only on a training target.",
+  },
+  {
+    Character: "Beatrix",
+    "How I Unlock Them":
+      "Use 1 normal Crewmate Card when she becomes available. The early Conflux tutorial route can provide the normal card for this first test.",
+    "First-Pick Rule":
+      "My first pick if I want aggressive melee and I am ready to manage Delta Clock timing.",
+    "Investment Rule":
+      "Build first only if Delta Clock rhythm stays comfortable under boss pressure.",
+  },
+  {
+    Character: "Fediel",
+    "How I Unlock Them":
+      "Use 2 normal Crewmate Cards early if I want her before the story route catches up, or wait for her story-exclusive card.",
+    "First-Pick Rule":
+      "Worth an early unlock if I specifically want dark pressure, mobility, and a more involved rhythm.",
+    "Investment Rule":
+      "Medium-high build priority if the movement, near/far pressure, and resource rhythm feel controlled.",
+  },
+  {
+    Character: "Fraux",
+    "How I Unlock Them":
+      "Use 2 normal Crewmate Cards early if I want her before the story route catches up, or wait for her story-exclusive card.",
+    "First-Pick Rule":
+      "Worth an early unlock only if I already want a technical stance / gauge character.",
+    "Investment Rule":
+      "Medium-high build priority, but not plug-and-play. I only invest after the stance flow feels natural.",
+  },
+  {
+    Character: "Gallanza",
+    "How I Unlock Them":
+      "After the required Endless Ragnarok Chapter Ø Hard-difficulty quest and its cutscene, the route can hand over his exclusive Crewmate Card.",
+    "First-Pick Rule":
+      "Not my first generic-card target. If he is not available yet, I keep pushing the Endless Ragnarok route.",
+    "Investment Rule":
+      "Medium build priority. I test whether his heavy commitment and spin pressure make me greedy before spending rare materials.",
+  },
+  {
+    Character: "Maglielle",
+    "How I Unlock Them":
+      "After the required Endless Ragnarok Chapter Ø Hard-difficulty quest and its cutscene, the route can hand over her exclusive Crewmate Card.",
+    "First-Pick Rule":
+      "Not my first generic-card target. If she is not available yet, I keep pushing the Endless Ragnarok route.",
+    "Investment Rule":
+      "Medium build priority. I test veil gauge and floating weapon comfort before treating her as a main project.",
+  },
+];
+
+export const roleTestColumns = [
+  { key: "Character", label: "Character" },
+  { key: "First 5-Minute Test", label: "First 5-minute test" },
+  { key: "Manual or AI First", label: "Manual or AI first" },
+  { key: "Do Not Build If", label: "Do not build if" },
+];
+
+export const roleTestRows = [
+  {
+    Character: "Eustace",
+    "First 5-Minute Test":
+      "I check whether I can keep ranged uptime while moving, dodging, and setting up burst windows.",
+    "Manual or AI First":
+      "Manual first, then AI test. Ranged uptime can work well, but I still need to see how safely the AI keeps pressure.",
+    "Do Not Build If":
+      "The ranged setup or charge pacing feels awkward in real movement-heavy fights.",
+  },
+  {
+    Character: "Beatrix",
+    "First 5-Minute Test":
+      "I check whether Delta Clock rhythm stays stable when I have to dodge, reposition, and keep melee pressure.",
+    "Manual or AI First":
+      "Manual first. Delta Clock and melee rhythm are easier to judge by hand before trusting AI behavior.",
+    "Do Not Build If":
+      "I keep dropping rhythm or taking damage because I am forcing close-range uptime.",
+  },
+  {
+    Character: "Fediel",
+    "First 5-Minute Test":
+      "I check whether movement, dark pressure, near/far control, and resource rhythm stay clean when the boss moves.",
+    "Manual or AI First":
+      "Manual first. AI value needs testing because her pressure depends on how cleanly she uses the kit.",
+    "Do Not Build If":
+      "The resource flow feels messy or I cannot keep pressure without losing control.",
+  },
+  {
+    Character: "Fraux",
+    "First 5-Minute Test":
+      "I check whether stance and gauge changes feel natural before judging her damage.",
+    "Manual or AI First":
+      "Manual first. I do not make her my first AI experiment because stance / gauge behavior needs a real hand test.",
+    "Do Not Build If":
+      "I want an immediate plug-and-play character and do not want to learn a technical rhythm.",
+  },
+  {
+    Character: "Gallanza",
+    "First 5-Minute Test":
+      "I check whether spin pressure makes me overcommit and eat avoidable punishment.",
+    "Manual or AI First":
+      "Manual first, AI cautious. Heavy commitment windows can punish bad timing.",
+    "Do Not Build If":
+      "I keep getting greedy during spin windows or dislike slower recovery.",
+  },
+  {
+    Character: "Maglielle",
+    "First 5-Minute Test":
+      "I check whether veil gauge and floating weapon control feel smooth enough to build around.",
+    "Manual or AI First":
+      "Manual first, AI needs testing. Summoner-style behavior and gauge use need a real fight check.",
+    "Do Not Build If":
+      "The floating weapon style feels awkward or I want a simple direct melee character.",
+  },
+];
+
+export const investColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "What I Do", label: "What I do" },
+  { key: "What I Avoid", label: "What I avoid" },
+];
+
+export const investRows = [
+  {
+    Stage: "Unlock",
+    "What I Do":
+      "Spend the minimum cards needed to test the character I actually want.",
+    "What I Avoid":
+      "Unlocking all six immediately just because the roster screen allows it.",
+  },
+  {
+    Stage: "Training test",
+    "What I Do":
+      "Check basic attacks, unique rhythm, dodge comfort, and whether the character feels natural.",
+    "What I Avoid":
+      "Judging the character only from the description screen.",
+  },
+  {
+    Stage: "Low-risk quest",
+    "What I Do":
+      "Run a safe quest or early Conflux layer to see real uptime and survival.",
+    "What I Avoid":
+      "Throwing an underbuilt new character directly into Chaos.",
+  },
+  {
+    Stage: "Main or AI decision",
+    "What I Do":
+      "Decide whether the character is my manual main, an AI test, or a later project.",
+    "What I Avoid":
+      "Spending Chaos materials before I know the role.",
+  },
+  {
+    Stage: "Material commitment",
+    "What I Do":
+      "Only then start serious weapon, sigil, Master Trait, Conflux, and late weapon-path investment.",
+    "What I Avoid":
+      "Splitting rare materials across six half-built characters.",
+  },
+];
+
+export const catchupColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Conflux Use", label: "Conflux use" },
+  { key: "My Rule", label: "My rule" },
+];
+
+export const catchupRows = [
+  {
+    Problem: "New character is unlocked but underbuilt",
+    "Conflux Use":
+      "Run early or stable Conflux layers for materials and basic catch-up.",
+    "My Rule":
+      "I build the chosen character enough to test properly before judging them.",
+  },
+  {
+    Problem: "I cannot decide between two new characters",
+    "Conflux Use":
+      "Test each one in the same low-risk route.",
+    "My Rule":
+      "Same route, same party context, better comparison.",
+  },
+  {
+    Problem: "AI slot feels weak",
+    "Conflux Use":
+      "Use Conflux to feed the AI candidate without risking Chaos clears.",
+    "My Rule":
+      "If the AI still dies or wastes its kit, I do not force the role.",
+  },
+  {
+    Problem: "Late weapon path needs materials",
+    "Conflux Use":
+      "Check whether the weapon or Terminus path pulls from Conflux-specific materials before committing.",
+    "My Rule":
+      "I do not start a late build until I know where the next weapon materials come from.",
+  },
+  {
+    Problem: "Chaos materials are limited",
+    "Conflux Use":
+      "Use Conflux first, then spend rare Chaos rewards only after the role is clear.",
+    "My Rule":
+      "Chaos materials go to characters I already trust.",
+  },
+];
+
+export const shopColumns = [
+  { key: "Shop / Resource Check", label: "Shop / resource check" },
+  { key: "What I Look For", label: "What I look for" },
+  { key: "Why It Matters", label: "Why it matters" },
+];
+
+export const shopRows = [
+  {
+    "Shop / Resource Check": "Normal Crewmate Cards",
+    "What I Look For":
+      "Whether the early Conflux tutorial rewards have given me the normal cards for Beatrix or Eustace.",
+    "Why It Matters":
+      "Beatrix and Eustace are cheap first tests, so I do not need to overthink them if the cards are already supplied.",
+  },
+  {
+    "Shop / Resource Check": "2-card early unlocks",
+    "What I Look For":
+      "Whether spending 2 normal cards on Fraux or Fediel is worth it right now.",
+    "Why It Matters":
+      "If I am not in a hurry, waiting for their story-exclusive card can save normal cards.",
+  },
+  {
+    "Shop / Resource Check": "Exclusive cards / route unlocks",
+    "What I Look For":
+      "Whether Gallanza or Maglielle have opened through Chapter Ø Hard quest progress and the related cutscene.",
+    "Why It Matters":
+      "I do not spend generic cards blindly when the route can provide a cleaner exclusive-card unlock.",
+  },
+  {
+    "Shop / Resource Check": "Knick-Knack Shop",
+    "What I Look For":
+      "Available cards, upgrade items, sigils, and materials before I start manual farming.",
+    "Why It Matters":
+      "I check the shop before assuming a resource must be farmed from scratch.",
+  },
+  {
+    "Shop / Resource Check": "Weapon and sigil path",
+    "What I Look For":
+      "Damage Cap, survival, Supplementary Damage, and whether the new character's weapon path is ready for the content I want to test.",
+    "Why It Matters":
+      "A character can feel weak simply because the weapon or sigil setup is behind.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Granblue Fantasy: Relink Endless Ragnarok** adds six playable characters: **Beatrix**, **Eustace**, **Fraux**, **Fediel**, **Gallanza**, and **Maglielle**.
+
+My default order is **Eustace first for safety**, **Beatrix first for melee**, **Fediel / Fraux only if I accept the 2-card early cost**, and **Gallanza / Maglielle after their Chapter Ø Hard quest and exclusive Crewmate Card route opens**. Unlocking is the cheap part; real investment starts only after I know whether the character is my manual main, an AI test, or a later project.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the Endless Ragnarok launch build of Granblue Fantasy: Relink. This guide focuses on new character unlocks, Crewmate Card spending, who to unlock first, Beatrix, Eustace, Fraux, Fediel, Gallanza, Maglielle, Chapter Ø unlocks, manual vs AI testing, Conflux catch-up, and when to invest materials.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-new-characters-crew-cards.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok new characters and Crewmate Card unlocks"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first decision is not only who I can unlock. It is whether that character deserves cards, weapon materials, sigils, Conflux time, and later Chaos resources.
+  </figcaption>
+</figure>
+
+<h2 id="new-characters-unlock-guide">
+  Granblue Fantasy Relink Endless Ragnarok New Characters Guide: Who to Unlock First and When to Spend Crewmate Cards
+</h2>
+
+Endless Ragnarok adds six characters, but I do not build all six at once. Unlocking a character is cheap compared with preparing them for Conflux, Fatebreaker, or Chaos.
+
+My default pick is **Eustace** if I want the safest first test, **Beatrix** if I want melee, **Fediel / Fraux** only if I accept the 2-card early cost, and **Gallanza / Maglielle** when their Chapter Ø route and exclusive card unlock opens.
+
+The first question I ask is:
+
+<strong>Do I want to test this character, or am I ready to invest in them?</strong>
+
+Those are different decisions. A quick unlock is fine. A full build needs a role, a weapon plan, sigils, and a reason to spend rare materials.
+
+<h2 id="unlock-plan">
+  New character unlock plan: cards, route progress, and first pick
+</h2>
+
+The most important resource trap is spending normal Crewmate Cards too quickly.
+
+**Beatrix** and **Eustace** are the cleanest early tests because each uses **1 normal Crewmate Card**, and the early Conflux tutorial route can supply those cards. **Fraux** and **Fediel** are different because early unlocks can cost **2 normal Crewmate Cards** each, while waiting for their story route can save normal cards. **Gallanza** and **Maglielle** are not my first generic-card targets; I wait for the Chapter Ø Hard quest / cutscene route that hands over their exclusive Crewmate Cards.
+
+<GuideTable
+  caption="How I unlock and prioritize Endless Ragnarok new characters."
+  columns={unlockPlanColumns}
+  rows={unlockPlanRows}
+/>
+
+This is my practical order: **Eustace for safety, Beatrix for melee, Fediel or Fraux only if I accept the 2-card cost, then Gallanza or Maglielle when their exclusive route opens**.
+
+<h2 id="beatrix-eustace">
+  Beatrix and Eustace: the safest early tests
+</h2>
+
+**Beatrix** and **Eustace** are the easiest characters to test first because they each use **1 normal Crewmate Card** when available, and the early Conflux tutorial path can supply those first cards.
+
+I pick **Eustace** first when I want a safer ranged character. My first 5-minute test is not a training dummy check; I want to see whether I can keep ranged uptime while moving, dodging, and setting up burst windows in a real fight.
+
+I pick **Beatrix** first when I specifically want aggressive melee. My first 5-minute test is whether I can keep **Delta Clock** rhythm stable under pressure, not whether one burst number looks good.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-beatrix-delta-clock.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Beatrix Delta Clock"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Beatrix is a strong first melee test, but I only invest after Delta Clock timing feels comfortable in real fights.
+  </figcaption>
+</figure>
+
+<h2 id="fraux-fediel">
+  Fraux and Fediel: spend 2 cards early or wait?
+</h2>
+
+**Fraux** and **Fediel** are the characters I do not unlock casually on a low-card account. If I unlock them early, I expect to spend **2 normal Crewmate Cards**. If I wait for their story route, I can save those normal cards for other tests.
+
+That does not mean they are bad early unlocks. It means I need a reason.
+
+I unlock **Fraux** early if I specifically want a technical stance / gauge character and I am willing to learn her before judging her damage. My first 5-minute test is whether stance and gauge changes feel natural, not whether she immediately outdamages an old main.
+
+I unlock **Fediel** early if I want dark pressure, mobility, and a more involved character rhythm. My first 5-minute test is whether her movement, near/far pressure, and resource rhythm stay controlled when the boss starts moving.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-fediel-dark-mobility.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Fediel dark mobility character"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Fediel is worth testing early if I already want her style, but I do not spend 2 normal cards just to fill the roster.
+  </figcaption>
+</figure>
+
+<h2 id="gallanza-maglielle">
+  Gallanza and Maglielle: Chapter Ø route and exclusive cards
+</h2>
+
+I do not treat **Gallanza** and **Maglielle** as first generic-card targets. After the required **Endless Ragnarok Chapter Ø Hard-difficulty quest** and its cutscene, the route can hand over their exclusive Crewmate Cards. If they are not available yet, I keep pushing the DLC route instead of spending normal cards blindly.
+
+**Gallanza** is the heavy commitment test. My first 5-minute check is whether his spin pressure makes me greedy. If I keep eating punishment because I refuse to stop spinning, I wait before spending serious materials.
+
+**Maglielle** is the control and gauge test. Her floating weapon style has obvious novelty appeal, but I still treat that curiosity as a test, not an investment decision. My first 5-minute check is whether veil gauge and floating weapon control feel smooth enough to build around.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-maglielle-summoner-style.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Maglielle summoner style and floating weapons"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Maglielle is not just another damage slot. I test her veil gauge and floating weapon style before giving her rare materials.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="first-test-and-build-priority">
+  First-test checks and build priority
+</h2>
+
+Unlock order and build priority are not always the same. I can unlock a character for testing, but I only build them seriously after I know their role.
+
+<GuideTable
+  caption="How I test each new character before building them."
+  columns={roleTestColumns}
+  rows={roleTestRows}
+/>
+
+This is where I avoid the biggest mistake: mistaking an underbuilt character for a bad character. I give them enough gear to test fairly, but I do not spend Chaos materials until the role is clear.
+
+<h2 id="when-to-invest">
+  When I start spending real materials
+</h2>
+
+Unlocking is the cheap part. Building is the expensive part.
+
+<GuideTable
+  caption="How I move from unlock to real investment."
+  columns={investColumns}
+  rows={investRows}
+/>
+
+My rule is that Chaos materials go to characters I already trust. If a new character is still just a curiosity, I test them in Conflux or safer quests first.
+
+<h2 id="conflux-catch-up">
+  Using Conflux to build a new character
+</h2>
+
+Conflux is where I catch up a chosen new character without risking the main Chaos route.
+
+<GuideTable
+  caption="How I use Conflux for new character catch-up."
+  columns={catchupColumns}
+  rows={catchupRows}
+/>
+
+For portal choices, auras, reward chests, and when to leave, use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link>.
+
+<h2 id="knick-knack-shop">
+  Check cards, shop resources, and weapon paths before farming
+</h2>
+
+Before I start manual farming, I check the shop, saved cards, and the weapon path.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-crewmate-card-shop.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Crewmate Card shop and new character unlock resources"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I check cards and shop resources before spending time farming. The goal is to test one character properly, not half-build every new recruit.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="What I check before farming for a new character."
+  columns={shopColumns}
+  rows={shopRows}
+/>
+
+<h2 id="what-to-do-next">
+  What to do after unlocking a new character
+</h2>
+
+After unlocking a character, I pick only one next problem:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Need materials? Use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link>.
+  </li>
+  <li>
+    Want an AI slot? Check the <Link href="/granblue-relink-endless-ragnarok/best-ai-team-builds/">Best AI Team Builds Guide</Link>.
+  </li>
+  <li>
+    Moving into Chaos? Use the <Link href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/">Fatebreaker and Chaos Progression Guide</Link>.
+  </li>
+  <li>
+    DLC route not open? Return to the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Endless Ragnarok Guide</Link>.
+  </li>
+</ul>
+
+<h2 id="related-guides">
+  Related Granblue Relink Endless Ragnarok guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the <Link href="/granblue-relink-endless-ragnarok/">Granblue Relink Endless Ragnarok Guide Hub</Link> for the full route.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Endless Ragnarok Guide</Link> if the new character list is not appearing yet.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link> to catch up the character you choose.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/best-ai-team-builds/">Best AI Team Builds Guide</Link> before turning a new character into an AI slot.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/">Fatebreaker and Chaos Progression Guide</Link> before spending Chaos rewards.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Granblue Relink Endless Ragnarok new characters FAQ
+</h2>
+
+### Should I unlock every new character right away?
+
+No. I unlock the character I want to test first, then save cards and materials until I know who deserves a real build.
+
+### Who is the safest first unlock?
+
+**Eustace** is my safest first test because ranged uptime and mobility are easier to judge without committing to close-range pressure. **Beatrix** is my first pick if I specifically want melee.
+
+### Should I spend 2 normal Crewmate Cards on Fraux or Fediel?
+
+Only if I already want their style. If I am not in a hurry, I wait for the story route because their exclusive card path can save normal cards.
+
+### What if Gallanza or Maglielle is not available yet?
+
+Keep pushing Endless Ragnarok Chapter Ø and the required Hard-difficulty quest route. I do not spend generic cards blindly when their exclusive Crewmate Card path has not opened yet.
+
+### Can I use the new characters as AI immediately?
+
+I test manually first. A character can be strong by hand but still need AI behavior testing before becoming a party slot.
+
+### When should I spend Chaos or late weapon materials?
+
+Only after the role is clear. I use Conflux and safer quests first, then spend rare materials on the character I already trust.

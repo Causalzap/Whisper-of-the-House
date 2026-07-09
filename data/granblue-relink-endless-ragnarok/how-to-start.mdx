@@ -1,0 +1,507 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const playerTypeColumns = [
+  { key: "Player Type", label: "Player type" },
+  { key: "What Opens First", label: "What opens first" },
+  { key: "What I Do", label: "What I do" },
+];
+
+export const playerTypeRows = [
+  {
+    "Player Type": "Returning endgame save",
+    "What Opens First":
+      "The full Endless Ragnarok story route, the Seedhollow gate investigation, Conflux follow-up, and later Fatebreaker / Chaos systems.",
+    "What I Do":
+      "Load the finished save, go to Seedhollow, follow the new gate side quest, then use Conflux if the party needs catch-up materials.",
+  },
+  {
+    "Player Type": "Fresh or mid-story save",
+    "What Opens First":
+      "Some Endless Ragnarok content unlocks gradually as the base story progresses.",
+    "What I Do":
+      "Continue the base story and check Seedhollow side quests. I do not expect the full Fatebreaker / Chaos route immediately.",
+  },
+  {
+    "Player Type": "Chapter 6 save",
+    "What Opens First":
+      "Conflux can begin through a new Seedhollow side quest route before the full post-game chain.",
+    "What I Do":
+      "Check Seedhollow side quests and follow the shimmery gate / mysterious portal investigation when it appears.",
+  },
+  {
+    "Player Type": "Bought the Upgrade Kit but no route appears",
+    "What Opens First":
+      "Nothing appears until install, update, save progress, and Seedhollow routing are correct.",
+    "What I Do":
+      "Check the upgrade install, update version, base-game progress, Seedhollow side quests, the Quest Counter area, and any gate prompt.",
+  },
+];
+
+export const routeColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Where I Go", label: "Where I go" },
+  { key: "What I Check", label: "What I check" },
+];
+
+export const routeRows = [
+  {
+    Step: "Load the correct save",
+    "Where I Go":
+      "Use the save that has enough base-game progress for the route I am trying to start.",
+    "What I Check":
+      "For the full Endless Ragnarok story route, I use a save that has cleared The Tale of Bahamut's Rage (Proud).",
+  },
+  {
+    Step: "Go to Seedhollow",
+    "Where I Go":
+      "Return to Seedhollow and check new side quest prompts instead of farming old quests first.",
+    "What I Check":
+      "If I am on a finished save, I look for the new gate investigation route. If I am earlier in the story, I check Seedhollow side quests.",
+  },
+  {
+    Step: "Check the shimmery gate / mysterious portal side quest",
+    "Where I Go":
+      "Follow the Seedhollow side quest tied to the strange gate or portal prompt.",
+    "What I Check":
+      "I follow the current quest marker or NPC prompt instead of searching for an old Chapter 6 story route.",
+  },
+  {
+    Step: "Clear the early gate investigation",
+    "Where I Go":
+      "Enter the gate when the side quest sends me in and clear the first investigation.",
+    "What I Check":
+      "These first checks are route and system checks. I do not rebuild the entire party unless the game starts showing real pressure.",
+  },
+  {
+    Step: "Return when the gate route updates",
+    "Where I Go":
+      "Return to Seedhollow when the gate starts acting up again or the route sends me back.",
+    "What I Check":
+      "The route can ask for another early gate check before Conflux fully opens.",
+  },
+  {
+    Step: "Speak with the Quest Counter representative",
+    "Where I Go":
+      "Once the Conflux entry opens, speak with the monastery representative or acolyte near the Quest Counter.",
+    "What I Check":
+      "This is the clean Conflux entry point. From here, I start treating Conflux as a catch-up and material route.",
+  },
+  {
+    Step: "Continue toward Fatebreaker later",
+    "Where I Go":
+      "After the early systems are open, continue the Endless Ragnarok route toward the later Seofon and Tweyen trial.",
+    "What I Check":
+      "Fate Breaker grade and Chaos-level quests belong to the later route, not the first Seedhollow gate step.",
+  },
+];
+
+export const missingColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Likely Cause", label: "Likely cause" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const missingRows = [
+  {
+    Problem: "Endless Ragnarok is not showing up",
+    "Likely Cause":
+      "The upgrade is not installed, the game is not updated, or the save has not reached the required progress for the route.",
+    Fix:
+      "Confirm the Upgrade Kit is installed, update the game, load the right save, then check Seedhollow again.",
+  },
+  {
+    Problem: "I bought the DLC but only see some new content",
+    "Likely Cause":
+      "Fresh and mid-story saves unlock parts of the expansion gradually.",
+    Fix:
+      "Keep progressing the base story. I do not expect the full story route, Chaos, Master Traits, and deeper Conflux path immediately.",
+  },
+  {
+    Problem: "I see a gate prompt but cannot find the next step",
+    "Likely Cause":
+      "The route has not advanced to the next Seedhollow side quest step yet, or I am checking the wrong area.",
+    Fix:
+      "Re-check the active side quest, return to Seedhollow, and follow the current quest marker or nearby NPC prompt.",
+  },
+  {
+    Problem: "Conflux does not appear yet",
+    "Likely Cause":
+      "The save is either too early, or the Seedhollow side quest / Endless Ragnarok route has not reached the Conflux step.",
+    Fix:
+      "On a Chapter 6 save, check Seedhollow side quests. On a finished save, continue the gate investigation route until the Conflux representative appears near the Quest Counter.",
+  },
+  {
+    Problem: "I found Conflux but not Chaos",
+    "Likely Cause":
+      "Conflux can open earlier, while Chaos belongs to the later Fatebreaker route.",
+    Fix:
+      "Use Conflux for catch-up, then continue toward The Tale of Bahamut's Rage (Proud), the Seofon and Tweyen trial, Fate Breaker grade, and Chaos-level quests.",
+  },
+  {
+    Problem: "Chaos quests are not available",
+    "Likely Cause":
+      "Chaos belongs to the later Fatebreaker route, not the first Seedhollow gate step.",
+    Fix:
+      "Continue Endless Ragnarok until the Seofon and Tweyen trial, receive Fate Breaker grade, then start checking Chaos-level quests.",
+  },
+];
+
+export const powerColumns = [
+  { key: "Signal", label: "Signal" },
+  { key: "What It Means", label: "What it means" },
+  { key: "How I React", label: "How I react" },
+];
+
+export const powerRows = [
+  {
+    Signal: "Very low recommended power",
+    "What It Means":
+      "The route is still checking access and direction more than real endgame strength.",
+    "How I React":
+      "I clear the step and keep moving. I do not rebuild the whole party for an easy gate check.",
+  },
+  {
+    Signal: "Early Conflux recommended power",
+    "What It Means":
+      "Conflux is open, but the first layer may still be a learning route.",
+    "How I React":
+      "I use it to learn portals, rewards, and auras before judging the mode's real difficulty.",
+  },
+  {
+    Signal: "Higher Conflux or Chaos pressure",
+    "What It Means":
+      "The route is starting to test weapons, Damage Cap, AI survival, and repeat-clear quality.",
+    "How I React":
+      "I stop treating the mode as a tutorial and start fixing the actual wall.",
+  },
+];
+
+export const continueColumns = [
+  { key: "After Starting", label: "After starting" },
+  { key: "What I Do Next", label: "What I do next" },
+  { key: "Guide to Use", label: "Guide to use" },
+];
+
+export const continueRows = [
+  {
+    "After Starting": "I opened Conflux",
+    "What I Do Next":
+      "Learn the portal route, reward choices, aura logic, and when to leave instead of forcing a bad run.",
+    "Guide to Use":
+      "Use the Conflux Guide.",
+  },
+  {
+    "After Starting": "AI companions are weak",
+    "What I Do Next":
+      "Build one stable AI party before pushing Chaos or deeper Conflux.",
+    "Guide to Use":
+      "Use the Best AI Team Builds Guide.",
+  },
+  {
+    "After Starting": "Fatebreaker route opens",
+    "What I Do Next":
+      "Beat the Seofon and Tweyen trial, receive Fate Breaker grade, then start judging Chaos quests by repeat-clear quality.",
+    "Guide to Use":
+      "Use the Fatebreaker and Chaos Progression Guide.",
+  },
+  {
+    "After Starting": "New characters unlock",
+    "What I Do Next":
+      "Test who fits my playstyle before spending serious materials.",
+    "Guide to Use":
+      "Use the New Characters Unlock Guide.",
+  },
+];
+
+export const buyColumns = [
+  { key: "Situation", label: "Situation" },
+  { key: "Buy Now or Wait", label: "Buy now or wait" },
+  { key: "Why", label: "Why" },
+];
+
+export const buyRows = [
+  {
+    Situation: "I already cleared the base game and want more endgame",
+    "Buy Now or Wait": "Buy now",
+    Why:
+      "Endless Ragnarok is built around post-game systems: Conflux, Fatebreaker, Chaos, summons, Master Traits, and deeper farming.",
+  },
+  {
+    Situation: "I am mid-story and still enjoying Relink",
+    "Buy Now or Wait": "Buy if you plan to continue",
+    Why:
+      "Some content can unlock gradually, but the full route becomes more valuable as I approach endgame.",
+  },
+  {
+    Situation: "I just started Granblue Fantasy: Relink",
+    "Buy Now or Wait": "Wait unless you want the full package early",
+    Why:
+      "The strongest value is in later systems, so the expansion is not immediately necessary for the first hours.",
+  },
+  {
+    Situation: "I only want new characters",
+    "Buy Now or Wait": "Depends",
+    Why:
+      "Some characters can open earlier, but the expansion's main value is the endgame route, not only roster access.",
+  },
+  {
+    Situation: "I bounced off Relink before endgame",
+    "Buy Now or Wait": "Wait",
+    Why:
+      "Endless Ragnarok leans into the systems that matter most after the base story is already working for me.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To start **Granblue Fantasy: Relink Endless Ragnarok** on a returning endgame save, load a save that has cleared **The Tale of Bahamut's Rage (Proud)**, go to **Seedhollow**, follow the new **shimmery gate / mysterious portal** side quest, clear the early gate investigations, then speak with the **monastery representative near the Quest Counter** when **Conflux** opens.
+
+For a fresh or mid-story save, do not expect the entire DLC route at once. Some Endless Ragnarok content unlocks gradually as you progress, and **Conflux** can begin through a **Chapter 6 Seedhollow side quest**. The full story route, Fatebreaker grade, Chaos-level quests, Master Traits, and deeper endgame systems come later.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the Endless Ragnarok launch build of Granblue Fantasy: Relink. This guide focuses on how to start the DLC, Seedhollow side quests, the shimmery gate / mysterious portal, Chapter 6 Conflux access, returning-player requirements, fresh-save progression, and what to do if Endless Ragnarok is not showing up.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-mysterious-gate-info.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok shimmery gate and mysterious portal information in Seedhollow"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Seedhollow gate prompt is the first thing I check on a returning save. If the DLC route feels missing, I return to Seedhollow and follow the active gate side quest instead of farming random old quests.
+  </figcaption>
+</figure>
+
+<h2 id="how-to-start-endless-ragnarok">
+  How to Start Granblue Fantasy Relink Endless Ragnarok
+</h2>
+
+Endless Ragnarok is not just a menu button. The route depends on where your save is.
+
+A returning endgame save can move into the full DLC route quickly. A fresh or mid-story save sees the expansion more gradually. That distinction matters because it explains why one player may see a Seedhollow side quest while another player is already following the finished-save route into the later endgame chain.
+
+<GuideTable
+  caption="Returning players and new players start Endless Ragnarok differently."
+  columns={playerTypeColumns}
+  rows={playerTypeRows}
+/>
+
+If you are using an old completed save, start in Seedhollow. If you are still moving through the base game, keep progressing and check Seedhollow side quests as they appear.
+
+<h2 id="requirements">
+  Endless Ragnarok requirements: what must be done first?
+</h2>
+
+For the **full post-game route**, I treat **The Tale of Bahamut's Rage (Proud)** as the key requirement. For **progressive access**, I keep checking **Seedhollow side quests** as the base story advances.
+
+That distinction matters because not every Endless Ragnarok system opens at the same time.
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Full DLC story route:</strong> clear the required Proud quest and continue from Seedhollow.
+  </li>
+  <li>
+    <strong>Progressive DLC access:</strong> keep advancing the base game and check Seedhollow side quests.
+  </li>
+  <li>
+    <strong>Conflux:</strong> can begin from the Chapter 6 Seedhollow side quest route before the full Fatebreaker / Chaos chain.
+  </li>
+  <li>
+    <strong>Chaos and Fatebreaker:</strong> do not expect these at the first gate step; they belong to the later route.
+  </li>
+</ul>
+
+<h2 id="seedhollow-route">
+  Seedhollow route: shimmery gate, mysterious portal, and Conflux entry
+</h2>
+
+On a returning save, my first real route check is **Seedhollow**. I do not start by replaying random endgame quests. I look for the new side quest tied to the **shimmery gate / mysterious portal** prompt.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-seedhollow-portal.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Seedhollow gate route"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Seedhollow is the route anchor. When I lose the DLC thread, I return here and re-check the active side quest, gate prompt, and Quest Counter area.
+  </figcaption>
+</figure>
+
+Follow the route like this:
+
+<GuideTable
+  caption="The Seedhollow route I follow to start Endless Ragnarok."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+If the next step feels invisible, I do not search for an old Chapter 6 story NPC. I do three checks:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Re-check the active **Seedhollow side quest**.</li>
+  <li>Return to the **shimmery gate / mysterious portal** prompt if the route mentions the gate again.</li>
+  <li>Check the **Quest Counter area** for the monastery representative or acolyte once Conflux is ready to open.</li>
+</ul>
+
+<h2 id="dlc-not-showing-up">
+  Endless Ragnarok not showing up: what to check
+</h2>
+
+If the DLC is installed but the route does not appear, I check requirements in this order:
+
+<GuideTable
+  caption="How I troubleshoot Endless Ragnarok not showing up."
+  columns={missingColumns}
+  rows={missingRows}
+/>
+
+The main trap is mixing up three different states: the DLC is installed, the save has some progressive DLC access, and the save is ready for the full Endless Ragnarok endgame route. Those are not always the same thing.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="when-conflux-unlocks">
+  When does Conflux unlock? Chapter 6 side quest vs finished-save route
+</h2>
+
+Conflux can appear in two ways depending on save state.
+
+If I am on a **Chapter 6 or mid-story route**, I check **Seedhollow side quests**. That is where the early Conflux route can begin.
+
+If I am on a **finished save**, I follow the **Seedhollow gate investigation** and the Quest Counter side of town until the Conflux representative appears.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-conflux-gate.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Conflux gate in Seedhollow"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Conflux opens through the Seedhollow route, then becomes the first system I use for catch-up materials, weapon progress, and AI support.
+  </figcaption>
+</figure>
+
+For the full portal route, use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link>.
+
+<h2 id="recommended-power">
+  Recommended power: how I read the early numbers
+</h2>
+
+The exact recommended power can vary by route state, party setup, and how far the save has progressed. I use the early numbers as rough signals, not as permanent build rules.
+
+<GuideTable
+  caption="How I read early Endless Ragnarok and Conflux power checks."
+  columns={powerColumns}
+  rows={powerRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-conflux-first-run.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok first Conflux depth and recommended power"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I treat the first Conflux layer as a route and system check. Later cycles and Chaos quests are where I start judging weapons, cap conversion, and AI survival seriously.
+  </figcaption>
+</figure>
+
+If an early step is easy, I keep moving. If a later step drags or AI companions start dying, I stop and fix the party instead of brute-forcing the next quest.
+
+<h2 id="what-to-do-next">
+  What to do after starting Endless Ragnarok
+</h2>
+
+After the route opens, I decide the next guide by the problem I am solving.
+
+<GuideTable
+  caption="Where I go after the Endless Ragnarok route opens."
+  columns={continueColumns}
+  rows={continueRows}
+/>
+
+My usual order is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Open the route in Seedhollow.</li>
+  <li>Use Conflux when the party needs materials, weapon progress, or AI catch-up.</li>
+  <li>Build one stable AI party before harder endgame checks.</li>
+  <li>Move toward Fatebreaker grade and Chaos-level quests only when clears are stable.</li>
+  <li>Test new characters before spending serious Chaos materials on them.</li>
+</ol>
+
+<h2 id="buy-now-or-wait">
+  Should you buy Endless Ragnarok now or wait?
+</h2>
+
+Endless Ragnarok is strongest if you already like Relink's endgame loop. It adds more progression, more farming decisions, more build checks, and more reasons to return to Conflux and Chaos.
+
+<GuideTable
+  caption="Should you buy the Endless Ragnarok Upgrade Kit now or wait?"
+  columns={buyColumns}
+  rows={buyRows}
+/>
+
+<h2 id="related-guides">
+  Related Granblue Relink Endless Ragnarok guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the <Link href="/granblue-relink-endless-ragnarok/">Granblue Relink Endless Ragnarok Guide Hub</Link> for the full DLC route.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link> when the mode opens and you need portal, aura, and reward rules.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/">Fatebreaker and Chaos Progression Guide</Link> once the Seofon and Tweyen trial and Chaos route begin.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/best-ai-team-builds/">Best AI Team Builds Guide</Link> if AI companions are dying or the party cannot repeat clears.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/">New Characters Unlock Guide</Link> before spending materials on a new character.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Granblue Relink Endless Ragnarok start FAQ
+</h2>
+
+### How do I start Endless Ragnarok?
+
+On a returning endgame save, clear **The Tale of Bahamut's Rage (Proud)**, go to **Seedhollow**, follow the new **shimmery gate / mysterious portal** side quest, clear the early gate investigations, then speak with the **monastery representative near the Quest Counter** when Conflux opens.
+
+### What are the Endless Ragnarok requirements?
+
+The full story and endgame route requires late base-game progress, including **The Tale of Bahamut's Rage (Proud)**. Fresh and mid-story saves can still see some expansion content gradually, but the full Fatebreaker and Chaos route comes later.
+
+### Where do I go in Seedhollow?
+
+Check the active Seedhollow side quest tied to the **shimmery gate / mysterious portal**. Follow the quest marker or NPC prompt, clear the early gate investigation, then return when the route sends you back. Once Conflux opens, speak with the monastery representative near the Quest Counter.
+
+### Why is Endless Ragnarok not showing up?
+
+Check that the Upgrade Kit is installed, the game is updated, the correct save is loaded, and the save has enough progress for the route you are trying to start. Then return to Seedhollow and re-check side quests, gate prompts, or the Quest Counter area.
+
+### When does Conflux unlock, and should I farm it right away?
+
+Conflux can start through Seedhollow side quest progression around Chapter 6, and it also appears along the finished-save Endless Ragnarok route. I use early Conflux to learn the mode and collect useful materials, but I do not treat the first layer as the whole endgame.
+
+### Should new players buy Endless Ragnarok?
+
+New players can buy it as part of the full package, but the expansion's strongest value is later. If you are still deciding whether you like Relink's endgame loop, waiting is reasonable.

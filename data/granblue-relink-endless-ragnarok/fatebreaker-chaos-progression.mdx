@@ -1,0 +1,627 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const routeColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What Happens", label: "What happens" },
+  { key: "My Rule", label: "My rule" },
+];
+
+export const routeRows = [
+  {
+    Step: "Unlock Conflux from Chapter 6",
+    "What Happens":
+      "Conflux opens from a Chapter 6 side quest in Seedhollow.",
+    "My Rule":
+      "I use Conflux early as the catch-up route for weapons, sigils, AI companions, and material pressure.",
+  },
+  {
+    Step: "Clear The Tale of Bahamut's Rage (Proud)",
+    "What Happens":
+      "Clearing this Proud quest opens the Endless Ragnarok chapter path.",
+    "My Rule":
+      "If this is not cleared yet, I do not look for Fatebreaker promotion or Chaos-level quests.",
+  },
+  {
+    Step: "Clear the Seofon and Tweyen trial",
+    "What Happens":
+      "The trial acts as the Fatebreaker promotion test and leads into Fate Breaker skyfarer grade.",
+    "My Rule":
+      "Passing once is progress. Passing cleanly tells me the party is ready to keep pushing.",
+  },
+  {
+    Step: "Receive Fate Breaker grade",
+    "What Happens":
+      "The party enters the Fatebreaker-grade endgame route.",
+    "My Rule":
+      "From this point on, I judge quests by repeat-clear quality, not by access alone.",
+  },
+  {
+    Step: "Open Chaos-level quests",
+    "What Happens":
+      "Chaos becomes the first Fatebreaker-grade farming layer, followed later by Chaos+ and Chaos++.",
+    "My Rule":
+      "I farm the tier only when the clear is stable. If the tier exposes a build wall, I return to Conflux.",
+  },
+];
+
+export const readinessColumns = [
+  { key: "Check", label: "Readiness check" },
+  { key: "Before the Trial / Chaos", label: "Before the trial / Chaos" },
+  { key: "If It Fails in the Fight", label: "If it fails in the fight" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const readinessRows = [
+  {
+    Check: "Damage pace",
+    "Before the Trial / Chaos":
+      "Weapon path, Damage Cap, and Supplementary Damage should be strong enough that the fight does not drag.",
+    "If It Fails in the Fight":
+      "Clear time feels slow even when I am attacking cleanly.",
+    Fix:
+      "Fix weapon progress, cap conversion, or extra-hit value before farming the tier.",
+  },
+  {
+    Check: "Survival",
+    "Before the Trial / Chaos":
+      "Potion Hoarder, Auto Revive, HP, shield value, or defensive utility should stay on while learning.",
+    "If It Fails in the Fight":
+      "The clear burns too many revives or collapses before the main phase stabilizes.",
+    Fix:
+      "Keep safety until repeat clears are stable, then trim defensive slots later.",
+  },
+  {
+    Check: "AI companions",
+    "Before the Trial / Chaos":
+      "AI companions need enough gear, sigils, and role clarity to survive without being carried completely.",
+    "If It Fails in the Fight":
+      "AI companions die before the manual character can control the fight.",
+    Fix:
+      "Return to Conflux, strengthen the weak AI slot, or use Backup Character temporarily.",
+  },
+  {
+    Check: "Mechanics",
+    "Before the Trial / Chaos":
+      "I need to know the safe windows and the attacks that actually kill the run.",
+    "If It Fails in the Fight":
+      "The same telegraph kills me repeatedly.",
+    Fix:
+      "Practice the pattern. I do not treat repeated mechanic deaths as a pure material problem.",
+  },
+  {
+    Check: "Repeat-farm quality",
+    "Before the Trial / Chaos":
+      "A farm needs to be clean enough that the reward is worth the time.",
+    "If It Fails in the Fight":
+      "The quest clears once, but the run feels awful.",
+    Fix:
+      "Take the unlock, then rebuild before turning it into a repeat farm.",
+  },
+];
+
+export const chaosTierColumns = [
+  { key: "Tier", label: "Tier" },
+  { key: "How It Opens", label: "How it opens" },
+  { key: "When I Farm It", label: "When I farm it" },
+  { key: "When I Stop", label: "When I stop" },
+];
+
+export const chaosTierRows = [
+  {
+    Tier: "Chaos",
+    "How It Opens":
+      "After the Fate Breaker promotion, Chaos-level quests become the first Fatebreaker-grade farming layer.",
+    "When I Farm It":
+      "After a clean clear, when the quest pays sigils, materials, Master Trait progress, or weapon progress I actually need.",
+    "When I Stop":
+      "If AI companions die constantly, the weapon path is behind, or the clear only works with too many revives.",
+  },
+  {
+    Tier: "Chaos+",
+    "How It Opens":
+      "As Endless Ragnarok progression continues beyond the first Chaos layer.",
+    "When I Farm It":
+      "After normal Chaos is repeatable and the next reward pool is worth the higher pressure.",
+    "When I Stop":
+      "If I am still fixing the same survival or damage problem from normal Chaos.",
+  },
+  {
+    Tier: "Chaos++",
+    "How It Opens":
+      "During later Endless Ragnarok progression after the party is ready for deeper Fatebreaker-grade checks.",
+    "When I Farm It":
+      "When Chaos+ is stable and I am pushing late sigil, material, Master Trait, or build-refinement goals.",
+    "When I Stop":
+      "If the run still depends on constant revives, lucky AI behavior, or one perfect manual attempt.",
+  },
+];
+
+export const sigilColumns = [
+  { key: "Sigil / Trait", label: "Sigil / trait" },
+  { key: "What It Does", label: "What it does" },
+  { key: "First Source / Check", label: "First source / check" },
+  { key: "When I Use It", label: "When I use it" },
+];
+
+export const sigilRows = [
+  {
+    "Sigil / Trait": "Fatebreaker",
+    "What It Does":
+      "Boosts ATK, DEF, and DMG Cap in Fatebreaker-grade quests. At full value, I treat it as an ATK +50%, DEF +5%, and DMG Cap +50% style payoff.",
+    "First Source / Check":
+      "Chaos quest: A Trial of Two Eternities first-clear reward.",
+    "When I Use It":
+      "Core Chaos farming option when the party is living long enough to convert the bonus.",
+  },
+  {
+    "Sigil / Trait": "Celestial Lumen",
+    "What It Does":
+      "Rewards high-HP stability with ATK and DMG Cap value.",
+    "First Source / Check":
+      "Chaos quest: You're Being Watched chance drop.",
+    "When I Use It":
+      "Good when the party already survives cleanly and I want more stable output.",
+  },
+  {
+    "Sigil / Trait": "Celestial Terra",
+    "What It Does":
+      "Trades HP pressure for stronger DMG Cap value.",
+    "First Source / Check":
+      "Chaos+ quest: Abandon Hope first-clear reward.",
+    "When I Use It":
+      "I only use it when survival is controlled. I do not put it on a party that is already dying.",
+  },
+  {
+    "Sigil / Trait": "Divergence",
+    "What It Does":
+      "Adds recovery value through automatic healing or debuff recovery.",
+    "First Source / Check":
+      "Chaos quest: Jumbo Crab's Title Fight chance drop.",
+    "When I Use It":
+      "Useful during learning or unstable clears when survival problems are still deciding the run.",
+  },
+  {
+    "Sigil / Trait": "Damage Cap",
+    "What It Does":
+      "Raises the ceiling after the party is already reaching cap.",
+    "First Source / Check":
+      "Use training checks and fight results.",
+    "When I Use It":
+      "I add it when the party is capped or near cap, not when raw stats are still the wall.",
+  },
+  {
+    "Sigil / Trait": "Supplementary Damage V+",
+    "What It Does":
+      "Adds extra damage value that matters in longer endgame fights.",
+    "First Source / Check":
+      "Use it when the build is strong enough to convert extra-hit value.",
+    "When I Use It":
+      "Best after the core weapon and cap plan are already functional.",
+  },
+  {
+    "Sigil / Trait": "Alpha / Beta / Gamma",
+    "What It Does":
+      "High-end cap and damage routing tools depending on build direction.",
+    "First Source / Check":
+      "Use after the basic Chaos setup is stable.",
+    "When I Use It":
+      "I add them when I am optimizing repeat farms, not when the party is still struggling to survive.",
+  },
+  {
+    "Sigil / Trait": "Auto Revive / Potion Hoarder",
+    "What It Does":
+      "Keeps learning attempts from collapsing instantly.",
+    "First Source / Check":
+      "Use during the first Chaos clears and messy promotion clears.",
+    "When I Use It":
+      "I keep them until the tier is repeatable, then trim safety for damage.",
+  },
+];
+
+export const questColumns = [
+  { key: "Quest", label: "Quest" },
+  { key: "Why I Run It", label: "Why I run it" },
+  { key: "Farm Only If", label: "Farm only if" },
+];
+
+export const questRows = [
+  {
+    Quest: "A Trial of Two Eternities",
+    "Why I Run It":
+      "Fatebreaker first-clear value and early Chaos reward check.",
+    "Farm Only If":
+      "The clear is stable enough that the Fatebreaker reward path is worth repeating.",
+  },
+  {
+    Quest: "You're Being Watched",
+    "Why I Run It":
+      "Celestial Lumen chance drop and high-HP output testing.",
+    "Farm Only If":
+      "The party can stay healthy enough to make high-HP value realistic.",
+  },
+  {
+    Quest: "Jumbo Crab's Title Fight",
+    "Why I Run It":
+      "Divergence chance drop and recovery-value testing.",
+    "Farm Only If":
+      "I need recovery, learning safety, or a more forgiving setup for unstable clears.",
+  },
+  {
+    Quest: "Abandon Hope",
+    "Why I Run It":
+      "Celestial Terra first-clear check in Chaos+ progression.",
+    "Farm Only If":
+      "Survival is already controlled and the party can afford HP-pressure tradeoffs.",
+  },
+];
+
+export const wallColumns = [
+  { key: "Fight Symptom", label: "Fight symptom" },
+  { key: "Wall Type", label: "Wall type" },
+  { key: "What I Do Next", label: "What I do next" },
+];
+
+export const wallRows = [
+  {
+    "Fight Symptom": "Boss survives too long even when I am attacking cleanly",
+    "Wall Type": "Build wall",
+    "What I Do Next":
+      "Check weapon progress, Damage Cap, Supplementary Damage, and whether the right character is carrying the clear.",
+  },
+  {
+    "Fight Symptom": "AI companions drop before the main phase is stable",
+    "Wall Type": "Build wall",
+    "What I Do Next":
+      "Fix AI sigils, survival, Backup Character, or Conflux upgrades before pushing the tier.",
+  },
+  {
+    "Fight Symptom": "I die to the same telegraph repeatedly",
+    "Wall Type": "Skill wall",
+    "What I Do Next":
+      "Learn the dodge, block, or safe window. I do not solve a repeated pattern death with random farming.",
+  },
+  {
+    "Fight Symptom": "The clear works once but uses too many revives",
+    "Wall Type": "Repeat-farm wall",
+    "What I Do Next":
+      "Take the unlock, then go back to Conflux or safer sigils before farming the quest.",
+  },
+  {
+    "Fight Symptom": "The party fails only during short burst windows",
+    "Wall Type": "Burst planning wall",
+    "What I Do Next":
+      "Adjust SBA, Primal Burst, damage windows, and summon passives instead of only adding raw attack.",
+  },
+];
+
+export const summonColumns = [
+  { key: "Problem", label: "Problem" },
+  {
+    key: "Summon / Primal Burst Direction",
+    label: "Summon / Primal Burst direction",
+  },
+  { key: "Example Use Case", label: "Example use case" },
+  { key: "My Rule", label: "My rule" },
+];
+
+export const summonRows = [
+  {
+    Problem: "Boss window is short",
+    "Summon / Primal Burst Direction":
+      "Burst window value or passives that make short punish windows count.",
+    "Example Use Case":
+      "Ragnalia or Chaos bosses that only give brief safe damage windows.",
+    "My Rule":
+      "If the fight only gives small openings, I value burst timing more than slow passive gains.",
+  },
+  {
+    Problem: "Party survival is weak",
+    "Summon / Primal Burst Direction":
+      "Defensive value, support value, or safer passives.",
+    "Example Use Case":
+      "First Chaos clears where AI companions or the manual main are still getting clipped.",
+    "My Rule":
+      "I do not use summons to pretend the party is stable. I fix survival first.",
+  },
+  {
+    Problem: "Manual main carries the clear",
+    "Summon / Primal Burst Direction":
+      "Damage conversion that supports the main character's real rotation.",
+    "Example Use Case":
+      "The main character survives consistently and is responsible for most boss damage.",
+    "My Rule":
+      "I support the character actually carrying the clear.",
+  },
+  {
+    Problem: "AI companions keep dying",
+    "Summon / Primal Burst Direction":
+      "Do not rely on summons as the first fix.",
+    "Example Use Case":
+      "AI companions die before the fight reaches the real damage window.",
+    "My Rule":
+      "I fix AI gear, sigils, and Conflux upgrades before building a summon plan around weak AI.",
+  },
+  {
+    Problem: "Conflux rooms clear too slowly",
+    "Summon / Primal Burst Direction":
+      "General output or room-clear value.",
+    "Example Use Case":
+      "Repeated room routing where normal rooms take longer than they should.",
+    "My Rule":
+      "Conflux rewards fast routing, so I value anything that shortens repeated rooms without making bosses unsafe.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+In **Granblue Fantasy: Relink Endless Ragnarok**, I treat **Fatebreaker** as a progression route, not just a title unlock. The clean route is: unlock **Conflux** from the Chapter 6 side quest in **Seedhollow**, clear **The Tale of Bahamut's Rage (Proud)** to open the Endless Ragnarok chapter, beat the **Seofon and Tweyen trial**, receive **Fate Breaker** skyfarer grade, then begin **Chaos-level quests**.
+
+The most important rule is: **being able to enter Chaos does not mean Chaos is worth farming yet**. If the clear needs constant revives, AI companions keep dying, or the boss takes too long, I go back to Conflux, fix the weak slot, then return.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the Endless Ragnarok launch build of Granblue Fantasy: Relink. This guide focuses on Fatebreaker progression, Chapter 6 Conflux unlocks, The Tale of Bahamut's Rage (Proud), the Seofon and Tweyen trial, Chaos / Chaos+ / Chaos++ tiers, Fatebreaker sigils, first Chaos quests, Conflux farming decisions, summons, Primal Burst, and when to farm Chaos.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-seofon-tweyen-trial.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Seofon and Tweyen trial fight"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Seofon and Tweyen trial is the first major promotion check before Fate Breaker grade. I use this fight to judge whether the party is ready for Chaos or only ready to unlock the next step.
+  </figcaption>
+</figure>
+
+<h2 id="fatebreaker-chaos-progression">
+  Granblue Fantasy Relink Endless Ragnarok Fatebreaker Guide: Seofon and Tweyen Trial, Chaos Quests, and Farming Prep
+</h2>
+
+The Fatebreaker route is not one button. It is a chain of checks.
+
+<GuideTable
+  caption="My Fatebreaker and Chaos progression route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+That route matters because **unlocking** and **farming** are different goals. I can pass a quest once and still decide not to farm it yet. That is normal in Endless Ragnarok.
+
+<h2 id="seofon-tweyen-trial">
+  Seofon and Tweyen trial: the Fatebreaker promotion test
+</h2>
+
+This trial is where the route stops being simple story progress and starts asking whether my party can handle Fatebreaker-grade pressure.
+
+The goal is clear: beat **Seofon and Tweyen**, receive **Fate Breaker** grade, then start preparing for **Chaos-level quests**. A messy clear still moves the route forward, but I do not treat it as proof that the next tier is ready to farm.
+
+<GuideTable
+  caption="How I read readiness before and after the Fatebreaker promotion test."
+  columns={readinessColumns}
+  rows={readinessRows}
+/>
+
+If I pass the trial cleanly, I continue. If I pass with a messy revive-heavy clear, I take the promotion and rebuild before farming the next tier.
+
+<h2 id="fate-breaker-grade">
+  Fate Breaker grade: what changes after promotion
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-fate-breaker-grade.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Fate Breaker grade promotion"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    After the Seofon and Tweyen trial, Fate Breaker grade turns the route into repeat-clear evaluation. Access alone is no longer enough.
+  </figcaption>
+</figure>
+
+After the promotion, I stop asking only, "Can I enter the quest?" and start asking:
+
+<strong>Can I clear this quest cleanly enough that farming it is worth the time?</strong>
+
+That question controls the rest of the route: Chaos tiers, Fatebreaker sigils, Conflux returns, summons, Primal Burst timing, and whether my party is actually ready for repeat farming.
+
+<h2 id="chaos-level-quests">
+  Chaos-level quests: Ragnalia, Conflux, and the first farming layer
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-chaos-level-quests.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Ragnalia linked to the Conflux before Chaos-level quests"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The route connects Ragnalia appearances with the Conflux, so I keep Conflux in the loop whenever Chaos exposes a build problem.
+  </figcaption>
+</figure>
+
+Chaos is where Fatebreaker progression becomes a farming decision. I do not treat every Chaos quest as equal. I check the reward, the clear quality, and whether the party can repeat the fight without turning every run into a revive chain.
+
+<h2 id="chaos-tier-roadmap">
+  Chaos, Chaos+, and Chaos++ roadmap
+</h2>
+
+Fatebreaker-grade progression is not one flat difficulty. I treat **Chaos**, **Chaos+**, and **Chaos++** as separate farming decisions.
+
+<GuideTable
+  caption="When I push Chaos, Chaos+, or Chaos++."
+  columns={chaosTierColumns}
+  rows={chaosTierRows}
+/>
+
+The key is not pride. If Chaos is unstable, Chaos+ will not magically feel better. I stabilize the current tier before pushing up.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="fatebreaker-sigils">
+  Fatebreaker sigils and Chaos reward checks
+</h2>
+
+Fatebreaker-grade quests introduce sigil decisions that are worth reading carefully. I use the in-game sigil screen as the final check. The values below are route-planning anchors, but I still confirm the trait text in-game before replacing a stable setup.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-fatebreaker-sigil-screen.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Fatebreaker V+ sigil reward from A Trial of Two Eternities"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A Trial of Two Eternities can pay Fatebreaker V+ as a first-clear reward, which makes it one of the first Chaos quests I check before building a repeat farm.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Fatebreaker sigils and traits I check during Chaos progression."
+  columns={sigilColumns}
+  rows={sigilRows}
+/>
+
+My rule is simple: if a sigil makes the current tier faster without making the party unstable, I test it. If it creates survival problems, I keep the safer setup until clears are repeatable.
+
+<h2 id="first-chaos-quests">
+  First Chaos quests I check for sigil farming
+</h2>
+
+Once Chaos opens, I do not farm every quest equally. I look at what each quest pays and whether my party can repeat the clear.
+
+<GuideTable
+  caption="Chaos quests I check when building the first Fatebreaker farming route."
+  columns={questColumns}
+  rows={questRows}
+/>
+
+The important part is not the quest name alone. It is whether the reward solves the wall I am facing. If a quest drops the right trait but the clear is awful, I take the unlock and come back later.
+
+<h2 id="sigil-priority">
+  Sigil priority before I cut safety
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-chaos-sigil-priority.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Alpha Beta Gamma Divergence Potion Hoarder and Autorevive sigil setup"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I keep safety traits like Potion Hoarder and Autorevive while learning Chaos, then start trimming defensive value only after the tier becomes repeatable.
+  </figcaption>
+</figure>
+
+The common mistake is cutting survival too early because a new damage sigil looks stronger on paper. In practice, a dead party loses more damage than a defensive slot costs during learning. I keep Potion Hoarder, Autorevive, or similar safety until the run is stable, then start testing Alpha, Beta, Gamma, Fatebreaker, Celestial, and other damage-focused options.
+
+<h2 id="build-wall-skill-wall">
+  Build wall or skill wall?
+</h2>
+
+Fatebreaker and Chaos fights are useful because they show me what kind of wall I am hitting. I do not treat every failure the same way.
+
+<GuideTable
+  caption="How I read Fatebreaker and Chaos fight failures."
+  columns={wallColumns}
+  rows={wallRows}
+/>
+
+This is one of the most important habits in the route. If I die to the same telegraph five times, I do not go farm random materials. If the boss survives too long while I am playing cleanly, then I go fix the build.
+
+<h2 id="summons-primal-burst">
+  Summons and Primal Burst in Fatebreaker quests
+</h2>
+
+Summons and Primal Bursts matter more once I am in Conflux or Fatebreaker quests at Chaos or higher. I use them to support the problem the fight is actually presenting.
+
+<GuideTable
+  caption="How I choose summon and Primal Burst direction during Chaos progression."
+  columns={summonColumns}
+  rows={summonRows}
+/>
+
+I do not use summons to hide a broken build. If the AI companions are dying, I fix the AI. If the boss only gives short openings, I build around burst value. If Conflux rooms are slow, I use broader output to shorten the route.
+
+<h2 id="when-to-farm-chaos">
+  When I farm Chaos and when I return to Conflux
+</h2>
+
+I farm the current Chaos tier only when the clear is repeatable. If the fight exposes a weapon wall, AI survival problem, cap conversion gap, material bottleneck, or new character build gap, I go back to Conflux. If the failure is one repeated boss pattern, I practice the fight instead of farming random materials.
+
+For the Conflux material route, use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link>. For AI companion problems, use the <Link href="/granblue-relink-endless-ragnarok/best-ai-team-builds/">Best AI Team Builds Guide</Link>.
+
+<h2 id="new-characters-and-chaos">
+  Should I bring new characters into Chaos immediately?
+</h2>
+
+I unlock new characters early, but I do not spend Chaos materials on them until I know their role. New access is not the same as a finished build.
+
+If a character needs manual timing to shine, I test them as my main before forcing them into an AI slot. If they are underbuilt, I use Conflux first.
+
+For unlock order and first-pick logic, use the <Link href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/">New Characters Unlock Guide</Link>.
+
+<h2 id="mistakes">
+  The mistake I avoid
+</h2>
+
+The mistake I avoid is turning every unlock into a farm. If the trial or Chaos quest clears once but costs too many revives, exposes weak AI, or only works because of one lucky manual run, I take the progress and rebuild before repeating it.
+
+<h2 id="related-guides">
+  Related Granblue Relink Endless Ragnarok guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the <Link href="/granblue-relink-endless-ragnarok/">Granblue Relink Endless Ragnarok Guide Hub</Link> for the full DLC route.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link> when Chaos exposes a material, weapon, or AI wall.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/best-ai-team-builds/">Best AI Team Builds Guide</Link> if AI companions are dying before the fight stabilizes.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/">New Characters Unlock Guide</Link> before spending Chaos materials on a new character.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Endless Ragnarok Guide</Link> if the Fatebreaker route has not opened yet.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Granblue Relink Fatebreaker and Chaos FAQ
+</h2>
+
+### How do I unlock Fatebreaker?
+
+Progress Endless Ragnarok until the **Seofon and Tweyen trial** opens. Clearing that trial grants the **Fate Breaker** skyfarer grade and opens the Chaos-level progression path.
+
+### What are Chaos-level quests?
+
+Chaos-level quests are Fatebreaker-grade endgame quests that open after the Fatebreaker promotion. I treat them as repeat-farm checks, not just unlock checks.
+
+### Are Fatebreaker sigils worth using?
+
+Yes, when they solve the current Chaos problem. I check the in-game sigil text first, then test whether the trait improves damage, survival, cap conversion, or repeat-clear stability.
+
+### Should I use Conflux before Chaos?
+
+Yes, if the party has a build wall. Conflux is where I fix weapons, AI survival, cap conversion, materials, and new character gaps before repeating Chaos.
+
+### Should I push Chaos+ as soon as it opens?
+
+Only if normal Chaos is already stable. If Chaos still needs constant revives, lucky AI behavior, or one perfect manual run, I stay in the current tier or return to Conflux first.

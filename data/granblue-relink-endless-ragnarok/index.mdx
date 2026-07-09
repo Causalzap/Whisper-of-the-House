@@ -1,0 +1,584 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const playerColumns = [
+  { key: "Player State", label: "Player state" },
+  { key: "Start Here", label: "Start here" },
+  { key: "Next Guide", label: "Next guide" },
+];
+
+export const playerRows = [
+  {
+    "Player State": "Returning endgame save",
+    "Start Here":
+      "Use the full Endless Ragnarok route from Seedhollow after confirming the post-game requirement.",
+    "Next Guide": "How to Start Endless Ragnarok",
+  },
+  {
+    "Player State": "Fresh or mid-story save",
+    "Start Here":
+      "Keep progressing the base story. Some Endless Ragnarok systems unlock gradually instead of all at once.",
+    "Next Guide": "How to Start Endless Ragnarok",
+  },
+  {
+    "Player State": "Chapter 6 / mid-story Conflux access",
+    "Start Here":
+      "Check Seedhollow side quests. Conflux can begin through the Chapter 6 Seedhollow route.",
+    "Next Guide": "Conflux Guide",
+  },
+  {
+    "Player State": "DLC installed but no route appears",
+    "Start Here":
+      "Check install status, update version, save progress, Seedhollow side quests, and the Quest Counter area.",
+    "Next Guide": "How to Start Endless Ragnarok",
+  },
+  {
+    "Player State": "Already in Conflux",
+    "Start Here":
+      "Learn portal routing, aura choices, reward chests, cycles, and when to leave a run.",
+    "Next Guide": "Conflux Guide",
+  },
+  {
+    "Player State": "Chaos unlocked but clears are messy",
+    "Start Here":
+      "Stop treating access as farming. Check whether the wall is damage, survival, AI, or mechanics.",
+    "Next Guide": "Fatebreaker and Chaos Progression",
+  },
+  {
+    "Player State": "New characters unlocked",
+    "Start Here":
+      "Pick one character to test before spending serious Crewmate Cards, Conflux time, or Chaos materials.",
+    "Next Guide": "New Characters Unlock Guide",
+  },
+];
+
+export const routeColumns = [
+  { key: "Step", label: "Step" },
+  { key: "What I Do", label: "What I do" },
+  { key: "Why It Matters", label: "Why it matters" },
+];
+
+export const routeRows = [
+  {
+    Step: "1",
+    "What I Do":
+      "Check my save state first: returning endgame, Chapter 6 / mid-story, or fresh save.",
+    "Why It Matters":
+      "Endless Ragnarok does not open the same way for every player.",
+  },
+  {
+    Step: "2",
+    "What I Do":
+      "Start from Seedhollow or the Chapter 6 Seedhollow side quest route depending on progress.",
+    "Why It Matters":
+      "This prevents me from searching the wrong old route when the DLC is waiting on a side quest or story requirement.",
+  },
+  {
+    Step: "3",
+    "What I Do":
+      "Open Conflux when the route makes it available.",
+    "Why It Matters":
+      "Conflux is my first catch-up system for materials, weapons, AI companions, and early route pressure.",
+  },
+  {
+    Step: "4",
+    "What I Do":
+      "Stabilize one party before pushing harder systems.",
+    "Why It Matters":
+      "A stable main party and AI core matter more than spreading materials across every new option.",
+  },
+  {
+    Step: "5",
+    "What I Do":
+      "Push Fatebreaker and Chaos only when clears are repeatable.",
+    "Why It Matters":
+      "Being able to enter Chaos is not the same as being ready to farm Chaos.",
+  },
+  {
+    Step: "6",
+    "What I Do":
+      "Use new characters, Master Traits, summons, Primal Burst, and Weapon Transcendence to solve the current wall.",
+    "Why It Matters":
+      "These systems unlock at different points. I use the one that fixes the current problem instead of rebuilding everything at once.",
+  },
+];
+
+export const systemColumns = [
+  { key: "System", label: "System" },
+  { key: "What It Solves", label: "What it solves" },
+  { key: "Hub Rule", label: "Hub rule" },
+];
+
+export const systemRows = [
+  {
+    System: "Seedhollow start route",
+    "What It Solves":
+      "DLC not showing, wrong save state, missing route prompts, and early Conflux access.",
+    "Hub Rule":
+      "Start with save state and Seedhollow checks before farming old quests.",
+  },
+  {
+    System: "Conflux",
+    "What It Solves":
+      "Materials, weapon catch-up, AI companion catch-up, reward routing, and pre-Chaos rebuilding.",
+    "Hub Rule":
+      "Use Conflux when the party is behind; use the dedicated guide for portal and aura choices.",
+  },
+  {
+    System: "Fatebreaker and Chaos",
+    "What It Solves":
+      "Late progression, Chaos-level quests, Fatebreaker sigils, and repeat-farm decisions.",
+    "Hub Rule":
+      "Stable clears first, perfect drops later.",
+  },
+  {
+    System: "AI party setup",
+    "What It Solves":
+      "Solo instability, AI deaths, lost uptime, revive loops, and weak support slots.",
+    "Hub Rule":
+      "Build one reliable AI core before forcing deeper Chaos farms.",
+  },
+  {
+    System: "New characters",
+    "What It Solves":
+      "Who to unlock first, when to spend Crewmate Cards, and who deserves materials.",
+    "Hub Rule":
+      "Unlock quickly, test safely, invest slowly.",
+  },
+  {
+    System: "Master Traits",
+    "What It Solves":
+      "Late character scaling, style direction, cap conversion, and endgame refinement.",
+    "Hub Rule":
+      "Do not chase every trait before the route and party are stable.",
+  },
+  {
+    System: "Summons and Primal Burst",
+    "What It Solves":
+      "Burst windows, late fight pressure, Conflux value, and Fatebreaker quest value.",
+    "Hub Rule":
+      "Use them to support the fight problem, not to hide a broken build.",
+  },
+  {
+    System: "Weapon Transcendence",
+    "What It Solves":
+      "Late weapon growth and high-end farming goals.",
+    "Hub Rule":
+      "Treat it as a later investment after I know which characters and weapons I am actually using.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For a returning endgame save, use the **How to Start** guide to confirm the full requirement, then begin **Granblue Fantasy: Relink Endless Ragnarok** from **Seedhollow**. For a fresh or mid-story save, do not expect the full Fatebreaker and Chaos route immediately; some systems unlock progressively, and **Conflux** can begin through the **Chapter 6 Seedhollow side quest** route.
+
+My route is: **check your save state, open Seedhollow or Chapter 6 Conflux access, use Conflux to stabilize one party, then choose the next guide based on the wall**: start route, Conflux, AI team, Fatebreaker / Chaos, or new characters.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the Endless Ragnarok launch build of Granblue Fantasy: Relink. This hub routes players through start requirements, Seedhollow, Conflux, Fatebreaker, Chaos, AI teams, new characters, Master Traits, summons, Primal Burst, Weapon Transcendence, and common stuck points.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-hub.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok guide hub route overview"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Endless Ragnarok is easiest to route when I treat it as a chain of problems: start the DLC, open Conflux, stabilize the party, then push Fatebreaker and Chaos only when the current wall is solved.
+  </figcaption>
+</figure>
+
+<h2 id="granblue-relink-endless-ragnarok-guide">
+  Granblue Relink Endless Ragnarok Guide Hub
+</h2>
+
+This hub is the route map for **Granblue Fantasy: Relink Endless Ragnarok**. I use it to decide which system matters right now, which guide to read next, and when to stop pushing forward and rebuild.
+
+The biggest mistake is trying to handle everything at once. Endless Ragnarok adds Conflux, Fatebreaker, Chaos quests, new characters, Master Traits, summons, Primal Burst, and late weapon work. I do not treat those as one giant checklist. I solve the current wall first.
+
+<h2 id="start-here">
+  Start here: which player are you?
+</h2>
+
+The right first step depends on your save state. A returning endgame player, a Chapter 6 player, and a fresh save can all see different parts of Endless Ragnarok.
+
+<GuideTable
+  caption="Where to start based on your Endless Ragnarok save state."
+  columns={playerColumns}
+  rows={playerRows}
+/>
+
+If the route feels missing, do not assume the DLC is broken. First check whether you are on the right save state for the system you expect to see. For exact requirements and route checks, use the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Endless Ragnarok Guide</Link>.
+
+<h2 id="route-map">
+  Endless Ragnarok route map
+</h2>
+
+This is the route I use for the whole DLC. It is not a strict build order for every player; it is a decision map.
+
+<GuideTable
+  caption="My Endless Ragnarok route map."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The important pattern is simple: **one stable party first, deep optimization later**. If a system does not solve the current wall, I do not spend rare resources on it yet.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="choose-the-right-guide">
+  Choose the right guide
+</h2>
+
+Use these guide cards by problem, not by release order.
+
+<div className="my-8 grid gap-4 md:grid-cols-2">
+  <Link
+    href="/granblue-relink-endless-ragnarok/how-to-start/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-wide text-sky-400">
+      Start route
+    </div>
+    <h3 className="mt-2 text-lg font-semibold text-white">
+      How to Start Endless Ragnarok
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Use this if the DLC route is missing, Seedhollow is unclear, Conflux is not appearing, or you need the returning-save vs fresh-save path.
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/conflux-guide/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-wide text-sky-400">
+      Solo catch-up
+    </div>
+    <h3 className="mt-2 text-lg font-semibold text-white">
+      Conflux Guide
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Use this when Conflux opens and you need portal choices, aura priorities, reward chest rules, cycle routing, or gray exit timing.
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-wide text-sky-400">
+      Endgame route
+    </div>
+    <h3 className="mt-2 text-lg font-semibold text-white">
+      Fatebreaker and Chaos Progression
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Use this after the Seofon and Tweyen trial, Fate Breaker grade, or Chaos-level quests begin and you need to know whether to farm or rebuild.
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/best-ai-team-builds/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-wide text-sky-400">
+      Solo stability
+    </div>
+    <h3 className="mt-2 text-lg font-semibold text-white">
+      Best AI Team Builds
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Use this when AI companions die, lose uptime, or turn Conflux and Chaos into revive loops.
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-wide text-sky-400">
+      Character route
+    </div>
+    <h3 className="mt-2 text-lg font-semibold text-white">
+      New Characters Unlock Guide
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Use this before spending Crewmate Cards, Conflux time, or Chaos materials on Beatrix, Eustace, Fraux, Fediel, Gallanza, or Maglielle.
+    </p>
+  </Link>
+</div>
+
+<p className="my-6 text-sm text-slate-300">
+  For now, I treat <strong>Master Traits</strong>, <strong>Summons / Primal Burst</strong>, <strong>Fatebreaker sigils</strong>, and <strong>Weapon Transcendence</strong> as late-route systems after the party is stable. I do not chase those systems before the start route, Conflux, AI core, and Chaos readiness are under control.
+</p>
+
+<h2 id="systems-at-a-glance">
+  Endless Ragnarok systems at a glance
+</h2>
+
+I use this table to decide which system solves the current problem. The detailed mechanics belong in the dedicated guide pages.
+
+<GuideTable
+  caption="Endless Ragnarok systems and when I care about them."
+  columns={systemColumns}
+  rows={systemRows}
+/>
+
+The hub rule is: do not chase every system just because it unlocked. If AI is dying, fix AI. If Conflux rewards solve the material wall, farm Conflux. If Chaos is messy, do not pretend one ugly clear is a farm route.
+
+<h2 id="conflux">
+  Conflux: your first catch-up route
+</h2>
+
+Conflux is the first system I use when the party starts falling behind. It gives solo material farming, reward routing, cycle progression, and a safer place to catch up weapons or AI companions.
+
+I return to Conflux when the next fight feels slow, AI companions are dying, weapon progress is behind, or Chaos clears are not repeatable yet.
+
+For portal choices, auras, reward chests, cycles, and early exits, use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link>.
+
+<h2 id="fatebreaker-chaos">
+  Fatebreaker and Chaos: stable clears first
+</h2>
+
+Fatebreaker and Chaos are where I stop judging progress by access alone. Unlocking a quest does not mean I should farm it.
+
+My Chaos rule is:
+
+<strong>Stable clears first, perfect drops later.</strong>
+
+If the clear costs too many revives, AI companions keep dying, or the boss takes too long, I take the unlock and rebuild before farming. Use the <Link href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/">Fatebreaker and Chaos Progression Guide</Link> for Chaos, Chaos+, Chaos++, Fatebreaker sigils, and when to return to Conflux.
+
+<h2 id="ai-team">
+  AI team: build one reliable party first
+</h2>
+
+Endless Ragnarok exposes weak AI companions quickly. I do not build six different teams before I have one reliable core.
+
+My first AI goal is simple: one party that can survive, keep uptime, and support my main character through Conflux and early Chaos. After that, I start testing deeper characters and riskier setups.
+
+Use the <Link href="/granblue-relink-endless-ragnarok/best-ai-team-builds/">Best AI Team Builds Guide</Link> if AI companions are dying, losing uptime, or turning solo clears into revive loops.
+
+<h2 id="new-characters">
+  New characters: test before investing
+</h2>
+
+Endless Ragnarok adds **Beatrix**, **Eustace**, **Fraux**, **Fediel**, **Gallanza**, and **Maglielle**. I unlock and test them early, but I do not spend serious materials until I know whether the character will be my manual main, AI slot, or later project.
+
+The practical rule is:
+
+<strong>unlock quickly, test safely, invest slowly.</strong>
+
+Use the <Link href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/">New Characters Unlock Guide</Link> for Crewmate Card costs, first-pick order, manual vs AI testing, story / exclusive card unlocks, and when to use Conflux for catch-up.
+
+<h2 id="common-stuck-points">
+  Common stuck points
+</h2>
+
+Most Endless Ragnarok problems are not solved by pushing harder. They are solved by choosing the right system.
+
+<div className="my-8 grid gap-4 md:grid-cols-2">
+  <Link
+    href="/granblue-relink-endless-ragnarok/how-to-start/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <h3 className="text-base font-semibold text-white">
+      Endless Ragnarok is not showing up
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Check install status, game version, save progress, Seedhollow side quests, and the Quest Counter area.
+    </p>
+    <p className="mt-3 text-sm font-semibold text-sky-400">
+      Go to: How to Start Endless Ragnarok
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/how-to-start/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <h3 className="text-base font-semibold text-white">
+      Conflux does not appear
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      The Chapter 6 side quest or finished-save route may not have reached the Conflux entry yet.
+    </p>
+    <p className="mt-3 text-sm font-semibold text-sky-400">
+      Go to: How to Start Endless Ragnarok
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/conflux-guide/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <h3 className="text-base font-semibold text-white">
+      Conflux portals feel random
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      The mode is being treated as a grind button instead of a route with portal, aura, and reward decisions.
+    </p>
+    <p className="mt-3 text-sm font-semibold text-sky-400">
+      Go to: Conflux Guide
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/conflux-guide/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <h3 className="text-base font-semibold text-white">
+      Reward chests are confusing
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Match the reward chest to the current bottleneck instead of picking the rarest-looking option every time.
+    </p>
+    <p className="mt-3 text-sm font-semibold text-sky-400">
+      Go to: Conflux Guide
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/best-ai-team-builds/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <h3 className="text-base font-semibold text-white">
+      AI companions die too fast
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Weak AI sigils, survival, weapon progress, or role setup can turn solo clears into revive loops.
+    </p>
+    <p className="mt-3 text-sm font-semibold text-sky-400">
+      Go to: Best AI Team Builds
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <h3 className="text-base font-semibold text-white">
+      Chaos is unlocked but not worth farming
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      If the clear is slow, revive-heavy, or dependent on lucky AI behavior, diagnose the wall before farming.
+    </p>
+    <p className="mt-3 text-sm font-semibold text-sky-400">
+      Go to: Fatebreaker and Chaos Progression
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <h3 className="text-base font-semibold text-white">
+      New characters are available but resources are limited
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Treat unlock decisions and build decisions separately before spending cards, Conflux time, or Chaos materials.
+    </p>
+    <p className="mt-3 text-sm font-semibold text-sky-400">
+      Go to: New Characters Unlock Guide
+    </p>
+  </Link>
+
+  <Link
+    href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/"
+    className="rounded-xl border border-slate-800 bg-slate-950/60 p-5 transition hover:border-sky-500"
+  >
+    <h3 className="text-base font-semibold text-white">
+      Damage looks high but fights still drag
+    </h3>
+    <p className="mt-2 text-sm text-slate-300">
+      Check whether the wall is Damage Cap, Supplementary Damage, weapon path, AI uptime, or a true mechanics issue.
+    </p>
+    <p className="mt-3 text-sm font-semibold text-sky-400">
+      Go to: Fatebreaker and Chaos Progression
+    </p>
+  </Link>
+</div>
+
+When in doubt, I ask one question: **what is the actual wall?** If the route is missing, I go to the start guide. If the build is weak, I use Conflux. If AI is dying, I fix the party. If Chaos is messy, I stop farming and diagnose the clear.
+
+<h2 id="resource-rule">
+  The resource rule I use for the whole DLC
+</h2>
+
+Endless Ragnarok gives me a lot to spend on: new characters, AI companions, weapons, sigils, Master Traits, summons, and late upgrade paths.
+
+I do not spread rare resources evenly. I spend them where they unlock the next stable step.
+
+My resource order is usually:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Open the route and Conflux.</li>
+  <li>Stabilize one main party.</li>
+  <li>Fix AI survival and uptime.</li>
+  <li>Push Fatebreaker and Chaos only when clears are repeatable.</li>
+  <li>Build new characters after testing their role.</li>
+  <li>Use Master Traits, summons, and late weapon work to refine a party I already trust.</li>
+</ol>
+
+This keeps the DLC from turning into six half-built characters, unstable AI, and a Chaos farm that only works once.
+
+<h2 id="related-guides">
+  Related Granblue Relink Endless Ragnarok guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Start with the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Endless Ragnarok Guide</Link> if the route, requirements, or Conflux unlock are unclear.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link> for portal choices, aura priorities, reward chests, cycles, and exit timing.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/">Fatebreaker and Chaos Progression Guide</Link> when Chaos opens but clears are slow or messy.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/best-ai-team-builds/">Best AI Team Builds Guide</Link> if solo progress is unstable because of AI companions.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/">New Characters Unlock Guide</Link> before spending Crewmate Cards or rare materials.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Granblue Relink Endless Ragnarok FAQ
+</h2>
+
+### What should I do first in Endless Ragnarok?
+
+Check your save state first. Returning endgame saves should confirm the full post-game requirement and start from the Seedhollow route. Fresh or mid-story saves should keep progressing and check Seedhollow side quests as systems unlock gradually.
+
+### Why is Endless Ragnarok not showing up?
+
+The usual causes are install status, game version, save progress, or checking the wrong Seedhollow route. Use the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Guide</Link> before assuming the DLC is broken.
+
+### When does Conflux unlock?
+
+Conflux can begin through a Chapter 6 Seedhollow side quest route, and it also appears along the returning-save Endless Ragnarok route. Use it as a catch-up system before harder endgame checks.
+
+### Should I farm Conflux before Chaos?
+
+Yes, if the party has a build wall. I use Conflux when weapons, sigils, AI survival, or materials are behind before repeating Chaos-level quests.
+
+### Which guide should I read first?
+
+If the route is not open, read **How to Start**. If Conflux is open, read **Conflux Guide**. If Chaos is messy, read **Fatebreaker and Chaos**. If AI is dying, read **Best AI Team Builds**. If you are choosing characters, read **New Characters Unlock Guide**.
+
+### Should I build new characters immediately?
+
+No. I unlock and test new characters first, then spend serious materials only after I know whether the character is my manual main, AI slot, or later project.
+
+### When should I push Chaos?
+
+Push Chaos when the current clear is stable enough to repeat. If the first clear is revive-heavy, slow, or dependent on lucky AI behavior, take the unlock and rebuild before farming.

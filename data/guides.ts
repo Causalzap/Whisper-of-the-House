@@ -132,6 +132,164 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Granblue Relink Endless Ragnarok",
+    "game": "Granblue Fantasy: Relink",
+    "href": "/granblue-relink-endless-ragnarok",
+    "slug": "granblue-relink-endless-ragnarok",
+    "kind": "game",
+    "status": "active",
+    "accent": "purple",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Route Map",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active Granblue Relink Endless Ragnarok guide hub for start requirements, Seedhollow, Conflux, Fatebreaker, Chaos, AI teams, new characters, Crewmate Cards, summons, Master Traits, and late progression.",
+    "coverage": [
+      "Save-state checks, Seedhollow route, Chapter 6 Conflux access, DLC not showing up fixes, fresh-save vs returning-save routing, and what to do first",
+      "Conflux portal routing, aura priorities, reward chests, cycles, Resonance points, gray exit timing, and when to farm before Chaos",
+      "Seofon and Tweyen trial, Fate Breaker grade, Chaos-level quests, Fatebreaker sigils, stable-clear checks, and when to return to Conflux",
+      "Solo AI team setup, Eugen, Cagliostro, Zeta, Backup Character, Damage Cap, survival sigils, Conflux catch-up, and Chaos-ready party stability",
+      "Beatrix, Eustace, Fraux, Fediel, Gallanza, Maglielle, Crewmate Card costs, Chapter Ø unlocks, manual vs AI testing, and who to build first"
+    ],
+    "image": "/images/home/granblue-relink-endless-ragnarok-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 3,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Granblue Relink Endless Ragnarok Guide Hub",
+        "href": "/granblue-relink-endless-ragnarok",
+        "type": "Spotlight Coverage",
+        "description": "Start here for Endless Ragnarok requirements, Seedhollow, Conflux, Fatebreaker, Chaos, AI teams, new characters, summons, Master Traits, and stuck fixes.",
+        "image": "/images/home/granblue-relink-endless-ragnarok-hub.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "spotlightMeta": "Start route, Seedhollow, Conflux, Fatebreaker, Chaos, AI teams, new characters, summons, Master Traits, and stuck fixes"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Granblue Relink Endless Ragnarok: How to Start",
+        "href": "/granblue-relink-endless-ragnarok/how-to-start",
+        "type": "Guide",
+        "description": "Start Endless Ragnarok from Seedhollow, check requirements, unlock Conflux, fix DLC not showing up, and follow fresh or returning save routes.",
+        "date": "Updated recently",
+        "image": "/images/home/granblue-relink-endless-ragnarok-how-to-start.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 11,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "Seedhollow, save-state checks, Chapter 6 Conflux access, DLC not showing up, fresh-save routing, and returning-save route"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Granblue Relink Conflux Guide",
+        "href": "/granblue-relink-endless-ragnarok/conflux-guide",
+        "type": "Guide",
+        "description": "Route Conflux with Seedhollow unlock steps, portal choices, aura priorities, reward chests, cycles, Resonance points, and gray exit timing.",
+        "date": "Updated recently",
+        "image": "/images/home/granblue-relink-endless-ragnarok-conflux-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 12,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "Seedhollow Conflux route, portals, auras, reward chests, cycles, Resonance points, gray exit, and Chaos prep"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Granblue Relink Fatebreaker and Chaos Guide",
+        "href": "/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression",
+        "type": "Guide",
+        "description": "Beat Seofon and Tweyen, unlock Fatebreaker, route Chaos quests, check Fatebreaker sigils, and know when to return to Conflux.",
+        "date": "Updated recently",
+        "image": "/images/home/granblue-relink-endless-ragnarok-fatebreaker-chaos-progression.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 13,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "Seofon and Tweyen trial, Fate Breaker grade, Chaos quests, Fatebreaker sigils, stable clears, and Conflux rebuilds"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "Granblue Relink Best AI Team Builds",
+        "href": "/granblue-relink-endless-ragnarok/best-ai-team-builds",
+        "type": "Guide",
+        "description": "Build a stable Endless Ragnarok AI team for solo Conflux and Chaos with Eugen, Cagliostro, Zeta, Backup Character, sigils, and traits.",
+        "date": "Updated recently",
+        "image": "/images/home/granblue-relink-endless-ragnarok-best-ai-team-builds.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 14,
+          "spotlightFeature": true,
+          "spotlightOrder": 4,
+          "spotlightMeta": "Eugen, Cagliostro, Zeta, Backup Character, Damage Cap, survival sigils, AI uptime, Conflux catch-up, and Chaos stability"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      },
+      {
+        "title": "Granblue Relink New Characters Unlock Guide",
+        "href": "/granblue-relink-endless-ragnarok/new-characters-unlock-guide",
+        "type": "Guide",
+        "description": "Unlock Beatrix, Eustace, Fraux, Fediel, Gallanza and Maglielle, compare Crewmate Card costs, and decide who to build first.",
+        "date": "Updated recently",
+        "image": "/images/home/granblue-relink-endless-ragnarok-new-characters-unlock-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 15,
+          "spotlightFeature": true,
+          "spotlightOrder": 5,
+          "spotlightMeta": "Beatrix, Eustace, Fraux, Fediel, Gallanza, Maglielle, Crewmate Cards, Chapter Ø, manual vs AI, and Conflux investment"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 6
+        }
+      }
+    ]
+  },
+  {
     "title": "Moonlight Peaks",
     "game": "Moonlight Peaks",
     "href": "/moonlight-peaks",
@@ -1784,11 +1942,6 @@ export const guideClusters = [
     "image": "/images/home/33-immortals-hub.webp",
     "imageFit": "contain",
     "imagePosition": "center",
-    "home": {
-      "featuredHub": true,
-      "featuredHubOrder": 9,
-      "footerFeatured": true
-    },
     "pages": [
       {
         "title": "33 Immortals",

@@ -1,0 +1,637 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const coreColumns = [
+  { key: "Slot", label: "Slot" },
+  { key: "My Pick", label: "My pick" },
+  { key: "Job", label: "Job" },
+  { key: "Why I Use It", label: "Why I use it" },
+];
+
+export const coreRows = [
+  {
+    Slot: "Manual main",
+    "My Pick": "Your most finished character",
+    Job: "Primary damage, dodging, boss punish windows",
+    "Why I Use It":
+      "I control the character I already clear with. Endless Ragnarok is not where I swap mains before the new build is ready.",
+  },
+  {
+    Slot: "AI damage 1",
+    "My Pick": "Eugen",
+    Job: "Ranged uptime, paralysis openings, sniper vision value",
+    "Why I Use It":
+      "Eugen keeps pressure on moving bosses and has clear Master Trait routes for ranged AI damage.",
+  },
+  {
+    Slot: "AI support",
+    "My Pick": "Cagliostro",
+    Job: "Buffs, heals, revive safety, debuff value",
+    "Why I Use It":
+      "Cagliostro stabilizes early Chaos attempts. I build her around support-safe value instead of expecting AI to play Collapse++ like a human.",
+  },
+  {
+    Slot: "AI damage 2",
+    "My Pick": "Zeta",
+    Job: "Simple AI damage and loop pressure",
+    "Why I Use It":
+      "Zeta is best as AI when I keep her behavior simple. I strip her skills for auto-attack consistency before chasing fancy setups.",
+  },
+  {
+    Slot: "Flex",
+    "My Pick": "Backup Character or strongest finished AI",
+    Job: "Cover the weakest slot",
+    "Why I Use It":
+      "A finished borrowed character is better than forcing a half-built companion into Chaos.",
+  },
+];
+
+export const buildColumns = [
+  { key: "Character", label: "Character" },
+  { key: "Skills / Behavior", label: "Skills / behavior" },
+  { key: "Weapon / Sigils", label: "Weapon / sigils" },
+  { key: "Master Trait Direction", label: "Master Trait direction" },
+  { key: "When I Change It", label: "When I change it" },
+];
+
+export const buildRows = [
+  {
+    Character: "Eugen",
+    "Skills / Behavior":
+      "I use Eugen for ranged uptime. Detonator, Armor-Piercing Round, and Sumrak are the skill names I watch because they connect cleanly to his ranged, sniper, and skill-damage role.",
+    "Weapon / Sigils":
+      "Use his strongest endgame weapon first, then move into a Terminus weapon with Catastrophe when available. Apply the cap package after the training check shows he is near or over cap.",
+    "Master Trait Direction":
+      "Flawless Vision is my stable AI route for sniper vision and Damage Cap. Spitting Venom is strong when I want Skill DMG Cap and extra DEF Down value. Grenade Punch is a test route if grenade behavior is clean.",
+    "When I Change It":
+      "If Eugen keeps uptime but damage is low, I add cap conversion. If grenade behavior is inconsistent, I stay with Flawless Vision or Spitting Venom.",
+  },
+  {
+    Character: "Cagliostro",
+    "Skills / Behavior":
+      "I use her for Phantasmagoria, Reinforce, Rhizomata, and support safety. Pain Train is a damage option, but I do not build her AI around Collapse++ timing.",
+    "Weapon / Sigils":
+      "Zosimos is the named weapon I care about for her. I keep Potion Hoarder and Auto Revive while learning, then move into the cap package after clears stabilize.",
+    "Master Trait Direction":
+      "Crippling Combos gives debuffs, Truth levels, Skill DMG Cap, cooldown shortening, and Damage Cap per Basic Stats-type sigil. I use the support-safe parts first.",
+    "When I Change It":
+      "If Cagliostro keeps the party alive, I start trimming safety for cap and skill damage. If the team still revive-loops, I keep her defensive package.",
+  },
+  {
+    Character: "Zeta",
+    "Skills / Behavior":
+      "For AI Zeta, I strip all skills and let her auto attack when I want the most consistent behavior. I do not force skill-heavy AI unless I have tested it in the fight.",
+    "Weapon / Sigils":
+      "Use her strongest endgame weapon, then Terminus / Catastrophe when available. Once her auto-attack setup survives, move into the cap package and normal attack value.",
+    "Master Trait Direction":
+      "Intense Loops is the route I care about because it supports loop combo ATK, loop combo Damage Cap, Normal Attack Damage Cap, Spear of Arvess cap, and high EX Damage Cap.",
+    "When I Change It":
+      "If melee AI loses uptime, I replace Zeta temporarily with a ranged or safer slot. If she survives and keeps pressure, I push cap and normal attack value.",
+  },
+  {
+    Character: "Backup Character",
+    "Skills / Behavior":
+      "I borrow the strongest finished character that covers the current weak role.",
+    "Weapon / Sigils":
+      "I do not rebuild the whole route around a borrowed character. I use the borrowed slot to stabilize the party now.",
+    "Master Trait Direction":
+      "Treat the borrowed character as a bridge, not as the permanent account plan.",
+    "When I Change It":
+      "Once Conflux catches up my own AI companion, I replace the borrowed slot.",
+  },
+];
+
+export const capColumns = [
+  { key: "Training / Fight Result", label: "Training / fight result" },
+  { key: "What It Means", label: "What it means" },
+  { key: "What I Change", label: "What I change" },
+];
+
+export const capRows = [
+  {
+    "Training / Fight Result": "AI is below cap",
+    "What It Means":
+      "The character still converts raw attack, crit, skill damage, or weapon progress into real output.",
+    "What I Change":
+      "Add attack, crit, character-specific damage traits, skill value, or weapon progress.",
+  },
+  {
+    "Training / Fight Result": "AI is near cap",
+    "What It Means":
+      "The build is ready for cap conversion instead of more raw attack.",
+    "What I Change":
+      "Add Damage Cap, Supplementary Damage V+, Alpha / Beta / Gamma value, Fatebreaker, Celestial, or trait-based cap.",
+  },
+  {
+    "Training / Fight Result": "AI is over cap",
+    "What It Means":
+      "Extra attack is being wasted because the number is already blocked.",
+    "What I Change":
+      "Move stats into cap conversion, extra-hit value, cooldown value, utility, or role-specific Master Traits.",
+  },
+];
+
+export const stageColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "Eugen", label: "Eugen" },
+  { key: "Cagliostro", label: "Cagliostro" },
+  { key: "Zeta", label: "Zeta" },
+];
+
+export const stageRows = [
+  {
+    Stage: "Learning Chaos",
+    Eugen:
+      "Use Flawless Vision for stable sniper vision value. Keep the setup simple and do not force grenade traits yet.",
+    Cagliostro:
+      "Build support-safe first: Phantasmagoria, Reinforce, Rhizomata, Potion Hoarder, Auto Revive, and Crippling Combos utility.",
+    Zeta:
+      "Strip skills and use auto attacks for consistency. Add Intense Loops value only if she survives and keeps pressure.",
+  },
+  {
+    Stage: "Stable Chaos farming",
+    Eugen:
+      "Move into Spitting Venom or Grenade Punch if the fight rewards Skill DMG Cap, DEF Down, Detonator, Sumrak, or grenade pressure.",
+    Cagliostro:
+      "Trim extra safety and add Skill DMG Cap, debuff uptime, cooldown value, and Damage Cap per Basic Stats-type sigil.",
+    Zeta:
+      "Push Normal Attack Damage Cap, loop combo cap, Spear of Arvess cap, and general cap conversion.",
+  },
+  {
+    Stage: "Later optimization",
+    Eugen:
+      "Tune around the fight: sniper vision uptime for moving bosses, skill cap for burst windows, and grenade route only if behavior is clean.",
+    Cagliostro:
+      "Keep her if support plus debuff value improves clear consistency. Replace her if the team no longer needs safety.",
+    Zeta:
+      "Keep her if simple AI damage stays active. Replace her with ranged or premium AI if melee uptime drops.",
+  },
+];
+
+export const alternativeColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Alternative AI", label: "Alternative AI" },
+  { key: "Replace Who", label: "Replace who" },
+  { key: "When I Use Them", label: "When I use them" },
+];
+
+export const alternativeRows = [
+  {
+    Problem: "Melee AI loses uptime when the boss moves",
+    "Alternative AI": "Io or another ranged option",
+    "Replace Who": "Usually Zeta or the weakest melee AI",
+    "When I Use Them":
+      "I use a ranged option when the boss keeps pulling melee companions out of damage windows.",
+  },
+  {
+    Problem: "The team needs more safety",
+    "Alternative AI": "Katalina or Rosetta",
+    "Replace Who":
+      "Zeta if damage is enough; Cagliostro only if another support already covers survival",
+    "When I Use Them":
+      "I test them when the team is dying, not when the real problem is low Damage Cap.",
+  },
+  {
+    Problem: "The team needs sturdier melee pressure",
+    "Alternative AI": "Siegfried, Lancelot, or Charlotta",
+    "Replace Who": "Zeta or the weakest melee damage slot",
+    "When I Use Them":
+      "I test them when I want a harder-to-kill melee companion and the boss does not constantly leave melee range.",
+  },
+  {
+    Problem: "A premium character is already built",
+    "Alternative AI": "Sandalphon, Seofon, Tweyen, or Narmaya",
+    "Replace Who": "Zeta, flex slot, or manual main depending on investment",
+    "When I Use Them":
+      "I use them only when they are already geared enough to outperform my default core.",
+  },
+  {
+    Problem: "I want to test an Endless Ragnarok character",
+    "Alternative AI": "Beatrix, Eustace, Fraux, Fediel, Gallanza, or Maglielle",
+    "Replace Who": "Flex slot first",
+    "When I Use Them":
+      "I test them in Conflux before replacing Eugen, Cagliostro, or Zeta in Chaos.",
+  },
+];
+
+export const confluxColumns = [
+  { key: "Conflux Goal", label: "Conflux goal" },
+  { key: "Who Gets Materials", label: "Who gets materials" },
+  { key: "When I Stop", label: "When I stop" },
+];
+
+export const confluxRows = [
+  {
+    "Conflux Goal": "Catch up one weak AI",
+    "Who Gets Materials": "The AI companion causing failed Chaos clears",
+    "When I Stop":
+      "When that character survives and contributes enough that they are no longer the obvious weak slot.",
+  },
+  {
+    "Conflux Goal": "Raise team damage",
+    "Who Gets Materials": "Eugen, Zeta, or another steady damage AI",
+    "When I Stop":
+      "When Chaos clears stop timing out or dragging into dangerous late phases.",
+  },
+  {
+    "Conflux Goal": "Stabilize support",
+    "Who Gets Materials": "Cagliostro or the current support slot",
+    "When I Stop":
+      "When revive loops disappear and healing / buffs are enough to finish repeat clears.",
+  },
+  {
+    "Conflux Goal": "Test a new character",
+    "Who Gets Materials": "Only the new character I am actually considering",
+    "When I Stop":
+      "When I know whether they replace my manual main, an AI slot, or stay benched.",
+  },
+  {
+    "Conflux Goal": "Prepare for later Chaos tiers",
+    "Who Gets Materials": "The full active party of four",
+    "When I Stop":
+      "When the next Chaos tier becomes a mechanics check instead of a raw build check.",
+  },
+];
+
+export const diagnosisColumns = [
+  { key: "Symptom", label: "Symptom" },
+  { key: "What It Usually Means", label: "What it usually means" },
+  { key: "Fix", label: "Fix" },
+];
+
+export const diagnosisRows = [
+  {
+    Symptom: "AI dies before the boss is under control",
+    "What It Usually Means":
+      "The build is too greedy for the current Chaos stage.",
+    Fix:
+      "Add Auto Revive, Potion Hoarder, HP, shield value, defensive utility, or use Cagliostro / Backup Character.",
+  },
+  {
+    Symptom: "Boss takes too long to kill",
+    "What It Usually Means":
+      "The team is capped without enough conversion, missing Supplementary Damage V+, or using low-uptime AI.",
+    Fix:
+      "Use the cap package, then replace any AI that loses uptime in the fight.",
+  },
+  {
+    Symptom: "Boss keeps moving and melee AI stops contributing",
+    "What It Usually Means":
+      "The party has too much melee dependence.",
+    Fix:
+      "Use Eugen, Io, or another ranged option so damage continues during movement.",
+  },
+  {
+    Symptom: "Every clear becomes a revive loop",
+    "What It Usually Means":
+      "The team can enter Chaos but is not ready to farm it.",
+    Fix:
+      "Go back to Conflux, strengthen the weakest AI, and use Backup Character until the slot is fixed.",
+  },
+  {
+    Symptom: "Cagliostro feels weaker than expected",
+    "What It Usually Means":
+      "You are expecting manual Collapse++ behavior from AI.",
+    Fix:
+      "Use the support-safe Cagliostro setup explained above instead of building around manual combo timing.",
+  },
+  {
+    Symptom: "Power number looks high but damage is low",
+    "What It Usually Means":
+      "The stats are not solving the real bottleneck.",
+    Fix:
+      "Use training checks and fight results. Prioritize cap, uptime, and real hit value over paper power.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For **Granblue Fantasy: Relink Endless Ragnarok**, my first solo AI team for **Conflux and Chaos** is **manual main + Eugen + Cagliostro + Zeta**. Eugen handles ranged uptime with **Detonator**, **Armor-Piercing Round**, and **Sumrak** value; Cagliostro stabilizes early Chaos with **Phantasmagoria**, **Reinforce**, **Rhizomata**, and revive safety; and Zeta works best when I strip her skills and let her auto attack.
+
+I build this team around a clear rule: **reliable AI behavior first, cap conversion second, roster expansion last.** If one slot fails, I use **Backup Character** now, then farm **Conflux** for that exact companion.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last updated: July 2026 for the Endless Ragnarok launch build of Granblue Fantasy: Relink. This guide focuses on solo AI teams for Conflux and Chaos, Eugen, Cagliostro, Zeta, Backup Character, Terminus weapons, Catastrophe, Zosimos, Damage Cap, Supplementary Damage V+, AI skills, Master Traits, Conflux catch-up farming, and AI build diagnosis.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-ai-party-setup.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok party setup screen for solo AI team building"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I build around one finished party first. Endless Ragnarok punishes weak AI slots faster than the base-game route.
+  </figcaption>
+</figure>
+
+<h2 id="best-ai-team-builds">
+  Granblue Relink Endless Ragnarok best AI team for solo Conflux and Chaos
+</h2>
+
+This is not a broad character tier list. This is the AI team route I use when I want **solo Conflux**, **first Chaos clears**, and repeat farming without relying on matchmaking.
+
+The first team I build is:
+
+<GuideTable
+  caption="My first solo AI team for Endless Ragnarok Conflux and Chaos."
+  columns={coreColumns}
+  rows={coreRows}
+/>
+
+The core works because every slot has a job. Eugen keeps damage moving from range. Cagliostro keeps messy attempts alive. Zeta gives simple AI damage. The manual main stays as the character I already play well.
+
+I do not rebuild the whole roster at the start of Endless Ragnarok. I finish one party, then expand.
+
+<h2 id="character-builds">
+  Eugen, Cagliostro, and Zeta AI builds
+</h2>
+
+The names are only the first step. The build has to match what AI actually does well. This is where the team becomes stronger than a copied tier list.
+
+<GuideTable
+  caption="Concrete AI setup for Eugen, Cagliostro, Zeta, and Backup Character."
+  columns={buildColumns}
+  rows={buildRows}
+/>
+
+My rule is simple:
+
+<strong>AI builds need reliable behavior first, then numbers.</strong>
+
+That is why I do not build Cagliostro around perfect Collapse++ play, and I do not overload Zeta with skills when stripped auto attacks are more consistent. A simple AI setup that keeps attacking is stronger than a manual combo package the AI cannot execute.
+
+<h2 id="cagliostro-ai-controversy">
+  Cagliostro AI: why I still use her, and what I do not expect
+</h2>
+
+Cagliostro is the slot that needs the clearest explanation.
+
+The complaint that **Cagliostro AI does not play her charged Unique Attack / Collapse++ route like a manual player** is fair. I do not use her because I expect perfect Collapse++ combo finisher timing. I use her because she gives the party support safety while I am learning Chaos.
+
+That changes the build.
+
+I value:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    <strong>Phantasmagoria</strong> for team value,
+  </li>
+  <li>
+    <strong>Reinforce</strong> for defensive stability,
+  </li>
+  <li>
+    <strong>Rhizomata</strong> for revive safety,
+  </li>
+  <li>
+    <strong>Potion Hoarder</strong> and <strong>Auto Revive</strong> while clears are unstable,
+  </li>
+  <li>
+    then cap conversion and Skill DMG Cap after the team stops dying.
+  </li>
+</ul>
+
+I treat <strong>Pain Train</strong> and deeper Crippling Combos damage value as later optimizations, not the reason I bring her to first Chaos clears.
+
+This is the key difference: I use Cagliostro as a **stability slot first**, then convert her into more damage after the route is safe.
+
+<h2 id="damage-cap-and-sigils">
+  Damage Cap, weapons, and AI sigils
+</h2>
+
+Damage Cap is the first number I check when an AI companion looks strong but the fight still feels slow.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-damage-cap-training.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok training check for Damage Cap percentage"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I check Damage Cap before adding more attack. If the character is already capped, extra attack is wasted.
+  </figcaption>
+</figure>
+
+In the rest of this guide, I call this the <strong>cap package</strong>: **Damage Cap**, **Supplementary Damage V+**, **Alpha / Beta / Gamma** value, **Fatebreaker**, **Celestial**, and any Master Trait that converts capped damage into real output.
+
+<GuideTable
+  caption="How I read AI damage and sigil problems."
+  columns={capColumns}
+  rows={capRows}
+/>
+
+For weapons, my rule is practical:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    If a Terminus weapon is ready, I use it for <strong>Catastrophe</strong> value.
+  </li>
+  <li>
+    If it is not ready, I use the strongest awakened endgame weapon I have and keep progressing.
+  </li>
+  <li>
+    For Cagliostro, <strong>Zosimos</strong> is the named weapon I care about when building her seriously.
+  </li>
+  <li>
+    I do not freeze the whole Chaos route waiting for a perfect weapon if Conflux can still move the party forward.
+  </li>
+</ul>
+
+I only remove survival when the party proves it can repeat the clear.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="master-traits">
+  Master Traits for Eugen, Cagliostro, and Zeta AI
+</h2>
+
+Master Traits matter, but I do not use them like a full database checklist. For AI companions, I ask one question first:
+
+<strong>Does this trait improve the behavior the AI is already performing well?</strong>
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-eugen-master-traits-overview.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Eugen Master Traits overview"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Eugen is the clearest example of how I read AI Master Traits: Flawless Vision for sniper vision value, Grenade Punch for grenade pressure, and Spitting Venom for Skill DMG Cap or DEF Down value.
+  </figcaption>
+</figure>
+
+For **Eugen**, I start from **Flawless Vision** when I want stable sniper vision value. It gives his ranged AI role a clear direction: sniper vision, Damage Cap, and ranged uptime. I test **Grenade Punch** only when grenade behavior is consistent in the fight. I use **Spitting Venom** when the run needs Skill DMG Cap or extra DEF Down value.
+
+For **Cagliostro**, I read **Crippling Combos** differently for AI than I would for manual play. The flashy Collapse++ and charged Unique Attack route is not my first AI assumption. I care more about debuffs, Truth levels, Skill DMG Cap, cooldown shortening, Damage Cap per Basic Stats-type sigil, and support-safe value.
+
+For **Zeta**, I use **Intense Loops** only when it supports the behavior I actually want from AI: simple loop pressure, normal attacks, and Damage Cap. I do not rely on manual-perfect timing perks unless the AI is clearly landing that behavior in real fights.
+
+Summons follow the same rule. I do not build AI companions around gimmicks they cannot execute. I use summon passives that support the role: ranged damage for Eugen, support stability for Cagliostro, and repeatable damage windows for Zeta.
+
+<h2 id="ai-trait-stages">
+  AI Master Trait stages: learning Chaos vs farming Chaos
+</h2>
+
+I do not use the same AI setup for every stage. Early Chaos needs survival and consistency. Stable farming needs cap conversion and faster clears. Later optimization depends on the fight.
+
+<GuideTable
+  caption="How I adjust Eugen, Cagliostro, and Zeta as Chaos progress improves."
+  columns={stageColumns}
+  rows={stageRows}
+/>
+
+This staged approach is the reason I do not cut survival too early. A farming build only matters after the party proves it can finish the fight cleanly.
+
+<h2 id="alternative-ai-picks">
+  Alternative AI picks by problem
+</h2>
+
+Eugen, Cagliostro, and Zeta are my default core, but I do not force them into every account state. I change AI when the fight tells me what is failing.
+
+<GuideTable
+  caption="Alternative AI picks for Endless Ragnarok."
+  columns={alternativeColumns}
+  rows={alternativeRows}
+/>
+
+This is where the article differs from a simple tier list. I do not ask, "Who is best overall?" I ask, "Which slot is failing?"
+
+If the team dies, I fix survival. If the boss keeps moving, I add ranged uptime. If damage is low, I check cap conversion. If one character is simply unfinished, I borrow a Backup Character or farm Conflux for that slot.
+
+<h2 id="backup-character">
+  Backup Character: use it to cover the weak slot
+</h2>
+
+I use **Backup Character** when my roster is not ready but the route is open.
+
+<figure className="my-8">
+  <Image
+    src="/images/granblue-relink-endless-ragnarok/granblue-relink-endless-ragnarok-backup-character-enlist.webp"
+    alt="Granblue Fantasy Relink Endless Ragnarok Backup Character enlist feature"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Backup Character is the cleanest fix for a weak fourth slot. I use it to stabilize clears while my own AI catches up.
+  </figcaption>
+</figure>
+
+I do not treat Backup Character as a permanent excuse to ignore my roster. I treat it as a bridge.
+
+My route is:
+
+<ol className="my-6 list-decimal space-y-2 pl-6">
+  <li>Borrow the strongest character that covers the weak role.</li>
+  <li>Use that stability to keep clearing.</li>
+  <li>Farm Conflux for my own underbuilt AI.</li>
+  <li>Replace the borrowed slot once my own character is ready.</li>
+</ol>
+
+That keeps progress moving instead of waiting until every companion is finished.
+
+<h2 id="conflux-ai-farming-route">
+  Conflux AI farming route
+</h2>
+
+Conflux is where I catch up AI companions. I do not use it as a vague "farm more" answer. I farm with a target.
+
+<GuideTable
+  caption="How I use Conflux to catch up AI companions."
+  columns={confluxColumns}
+  rows={confluxRows}
+/>
+
+My Conflux rule is:
+
+<strong>farm until the weak slot stops being the reason the run fails.</strong>
+
+If Eugen needs damage, he gets the materials. If Cagliostro needs survival, she gets the materials. If Zeta is below cap, I fix her damage path. If a new character is only being tested, I do not dump the whole Conflux reward pool into them immediately.
+
+For room choices and reward routing, use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link>.
+
+<h2 id="ai-build-diagnosis">
+  AI build diagnosis: fix the symptom, not the tier list
+</h2>
+
+When the party fails, I use a diagnosis table instead of swapping characters randomly.
+
+<GuideTable
+  caption="How I fix AI team problems in Conflux and Chaos."
+  columns={diagnosisColumns}
+  rows={diagnosisRows}
+/>
+
+This is the fastest way to improve the team. If the symptom is death, I do not add more attack. If the symptom is low damage, I go back to the cap package. If the symptom is uptime, I change the role or the range profile.
+
+<h2 id="new-characters-as-ai">
+  Should new Endless Ragnarok characters be AI companions?
+</h2>
+
+I unlock new characters early, but I do not assume every new character is a good AI companion.
+
+My rule is:
+
+<strong>technical characters get manual testing before AI investment.</strong>
+
+Beatrix, Eustace, Fraux, Fediel, Gallanza, and Maglielle all bring strong playstyles, but the question for this page is different. I am not asking whether they are fun. I am asking whether the AI uses them well enough to replace a finished companion.
+
+I test a new character as AI in lower-risk content first. If they lose uptime, misuse the gauge, or need manual timing to shine, I keep them as a manual-main candidate instead of forcing them into the AI core.
+
+For unlock timing and first-pick decisions, use the <Link href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/">New Characters Unlock Guide</Link>.
+
+<h2 id="related-guides">
+  Related Granblue Relink Endless Ragnarok guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the <Link href="/granblue-relink-endless-ragnarok/">Granblue Relink Endless Ragnarok Guide Hub</Link> for the full DLC route.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/conflux-guide/">Conflux Guide</Link> to farm materials for the AI slot that is blocking progress.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression/">Fatebreaker and Chaos Progression Guide</Link> when AI weakness starts blocking Chaos clears.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/new-characters-unlock-guide/">New Characters Unlock Guide</Link> before replacing a finished AI companion with a new character.
+  </li>
+  <li>
+    Use the <Link href="/granblue-relink-endless-ragnarok/how-to-start/">How to Start Endless Ragnarok Guide</Link> if Conflux or Backup Character systems are not open yet.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Granblue Relink Endless Ragnarok AI team FAQ
+</h2>
+
+### What is the best AI team for Endless Ragnarok?
+
+My first solo AI team is manual main, Eugen, Cagliostro, and Zeta. Eugen covers ranged pressure, Cagliostro stabilizes early Chaos, and Zeta gives simple AI damage when I strip her skills for auto attacks.
+
+### What skills should Eugen AI use?
+
+I build Eugen around his ranged role, especially Detonator, Armor-Piercing Round, and Sumrak value. I do not force grenade-heavy behavior unless the AI is using it cleanly in the fight.
+
+### Why does Cagliostro AI feel weak sometimes?
+
+Because AI does not play her charged Unique Attack / Collapse++ route like a manual player. I use her as a support-safe slot first, then add damage after Chaos clears are stable.
+
+### Should Zeta AI use skills?
+
+For the most consistent setup, I strip Zeta's skills and let her auto attack. That keeps her behavior simple and pairs well with Intense Loops, normal attack value, and Damage Cap.
+
+### Should I use Backup Character or farm Conflux?
+
+Use Backup Character when one slot is blocking progress right now. Then farm Conflux to catch up your own AI companion and replace the borrowed slot later.
