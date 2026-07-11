@@ -1,0 +1,846 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const overviewColumns = [
+  { key: "Item", label: "100% item" },
+  { key: "Answer", label: "Answer" },
+  { key: "What It Means", label: "What it means" },
+];
+
+export const overviewRows = [
+  {
+    Item: "Total achievements",
+    Answer: "41",
+    "What It Means":
+      "The list covers named locations, newspapers, Warden keys, co-op counters, train upgrades, resources, purchases, and specific enemy kills.",
+  },
+  {
+    Item: "Co-op required",
+    Answer: "Yes",
+    "What It Means":
+      "Long Live the King requires reviving the lobby host. The two revive-count achievements also require another player.",
+  },
+  {
+    Item: "Recommended runs",
+    Answer: "3 or more",
+    "What It Means":
+      "Use one progression run, one controlled co-op run, and separate cleanup runs for long-run, resource, and currency goals.",
+  },
+  {
+    Item: "Main collectibles",
+    Answer: "6 Warden keys and 9 newspapers",
+    "What It Means":
+      "The six Warden keys unlock the Boss Door. Each newspaper corresponds to one numbered Warden story achievement.",
+  },
+  {
+    Item: "One-game requirements",
+    Answer:
+      "5 teammate revives, 9 times revived, 8 locations, 5 shop purchases, 5 stopper hands, and every monster type",
+    "What It Means":
+      "Treat these as fresh counters when a new game begins. Do not rely on progress carrying between runs.",
+  },
+  {
+    Item: "Official world structure",
+    Answer: "13 locations and mini-games, 3 starting points",
+    "What It Means":
+      "Starting position and branch order can change. Track completed location names instead of copying one fixed sequence of railway turns.",
+  },
+  {
+    Item: "Best combined route",
+    Answer: "Ring + Massacre + Monster Hunter",
+    "What It Means":
+      "All three benefit from one long run that visits many locations and covers as many distinct enemy encounters as possible.",
+  },
+  {
+    Item: "Steam rarity data",
+    Answer: "Snapshot from July 10, 2026",
+    "What It Means":
+      "The percentages show relative launch rarity. They will change as more players complete the game.",
+  },
+];
+
+export const achievementColumns = [
+  { key: "Achievement", label: "Achievement" },
+  { key: "Requirement", label: "Requirement" },
+  { key: "Steam Rate", label: "Steam rate (Jul 10)" },
+  { key: "Practical Route", label: "Practical route" },
+];
+
+export const achievementRows = [
+  {
+    Achievement: "All Aboard!",
+    Requirement: "Fix the train and start your escape.",
+    "Steam Rate": "95.4%",
+    "Practical Route":
+      "Attach the required train parts, add coal to the locomotive, and begin the escape.",
+  },
+  {
+    Achievement: "Prometheus",
+    Requirement: "Complete the Upper Village.",
+    "Steam Rate": "65.0%",
+    "Practical Route":
+      "Finish the named objective and wait for the mission-complete notification before leaving.",
+  },
+  {
+    Achievement: "Maze Breaker",
+    Requirement: "Complete the Trippy Grid.",
+    "Steam Rate": "58.5%",
+    "Practical Route":
+      "Collect the blue, green, red, and yellow maze keys. Use rocks and crouching instead of trying to permanently kill the clowns.",
+  },
+  {
+    Achievement: "Home Alone?",
+    Requirement: "Complete the Mystic Room.",
+    "Steam Rate": "51.0%",
+    "Practical Route":
+      "Finish the room objective and check the final reward area before returning to the train.",
+  },
+  {
+    Achievement: "To Hell and Back",
+    Requirement: "Revive teammates 5 times in one game.",
+    "Steam Rate": "47.8%",
+    "Practical Route":
+      "Perform five controlled teammate revives beside the train after removing nearby threats.",
+  },
+  {
+    Achievement: "Long Live the King",
+    Requirement: "Revive the lobby host.",
+    "Steam Rate": "46.7%",
+    "Practical Route":
+      "Confirm which player created the lobby, let that player go down safely, and revive them once.",
+  },
+  {
+    Achievement: "Eyes on the Water",
+    Requirement: "Complete the Iris Lake.",
+    "Steam Rate": "44.3%",
+    "Practical Route":
+      "Use one player to watch the giant eye while the other carries the six torches to the cave.",
+  },
+  {
+    Achievement: "Carnival of Rust",
+    Requirement: "Complete the Carousel.",
+    "Steam Rate": "43.8%",
+    "Practical Route":
+      "Inspect the carousel horses and perform the matching dance symbols. The gambling wheel is optional.",
+  },
+  {
+    Achievement: "Can't Stop the Music",
+    Requirement: "Complete the Music Rails.",
+    "Steam Rate": "38.1%",
+    "Practical Route":
+      "Number the five chimes from left to right and press them in the order 1, 2, 5, 4, 3.",
+  },
+  {
+    Achievement: "Night in the Woods",
+    Requirement: "Loot a secret stash in the deep forest.",
+    "Steam Rate": "36.8%",
+    "Practical Route":
+      "The achievement requires the dedicated Deep Forest secret stash, not an ordinary chest beside the railway.",
+  },
+  {
+    Achievement: "Cat tale",
+    Requirement: "Get revived 9 times.",
+    "Steam Rate": "34.7%",
+    "Practical Route":
+      "Use the same player for all nine controlled downs and revives during one game.",
+  },
+  {
+    Achievement: "Prisoners' Nightmares",
+    Requirement: "Learn Part 9 of the Warden's story.",
+    "Steam Rate": "31.5%",
+    "Practical Route":
+      "Read the Part 9 newspaper when found. Newspaper parts do not appear in numerical order.",
+  },
+  {
+    Achievement: "Step By Step",
+    Requirement: "Complete the Stepfall Bridge.",
+    "Steam Rate": "27.9%",
+    "Practical Route":
+      "Finish the named bridge objective and wait for its completion notification.",
+  },
+  {
+    Achievement: "Railway Juggernaut",
+    Requirement: "Mount a cannon on a train.",
+    "Steam Rate": "27.7%",
+    "Practical Route":
+      "Carry the cannon component back to the locomotive and mount it on the additional wagon.",
+  },
+  {
+    Achievement: "Pit Lord",
+    Requirement: "Complete the Acid Pit.",
+    "Steam Rate": "27.6%",
+    "Practical Route":
+      "Park the train close, bring healing, and finish the named location objective.",
+  },
+  {
+    Achievement: "Ring",
+    Requirement: "Complete 8 locations in one run.",
+    "Steam Rate": "27.1%",
+    "Practical Route":
+      "Track eight named mission completions. Houses, shops, treehouses, and ordinary loot stops do not count.",
+  },
+  {
+    Achievement: "Mind Lurker",
+    Requirement: "Complete the Tower.",
+    "Steam Rate": "25.9%",
+    "Practical Route":
+      "Treat the Tower as a movement and survival check and keep the train close enough to recover.",
+  },
+  {
+    Achievement: "Ghost Train Tragedy",
+    Requirement: "Learn Part 4 of the Warden's story.",
+    "Steam Rate": "25.3%",
+    "Practical Route":
+      "Read the Part 4 newspaper immediately when found.",
+  },
+  {
+    Achievement: "We Are the Champions",
+    Requirement: "Complete the Bootball Court.",
+    "Steam Rate": "23.8%",
+    "Practical Route":
+      "Finish the named court objective and confirm the mission before departing.",
+  },
+  {
+    Achievement: "Regulator",
+    Requirement: "Use a railroad switch 3 times.",
+    "Steam Rate": "23.0%",
+    "Practical Route":
+      "Count three deliberate switch interactions and check the map before changing branches.",
+  },
+  {
+    Achievement: "Untouchable",
+    Requirement: "Destroy 5 stopper hands in one game.",
+    "Steam Rate": "22.9%",
+    "Practical Route":
+      "Stay close to the locomotive during hand attacks and manually count five destroyed hands.",
+  },
+  {
+    Achievement: "Locked in the Cellar",
+    Requirement: "Learn Part 1 of the Warden's story.",
+    "Steam Rate": "22.0%",
+    "Practical Route":
+      "Part 1 was found during the Kettle Fork junction and windmill sequence.",
+  },
+  {
+    Achievement: "Home Run",
+    Requirement: "Kill a flying enemy with a bat.",
+    "Steam Rate": "21.1%",
+    "Practical Route":
+      "Keep a bat, avoid using the horn, and make sure the killing hit comes from the bat.",
+  },
+  {
+    Achievement: "Stern New Man",
+    Requirement: "Learn Part 5 of the Warden's story.",
+    "Steam Rate": "19.2%",
+    "Practical Route":
+      "Read the Part 5 newspaper immediately when found.",
+  },
+  {
+    Achievement: "Hat Simulator",
+    Requirement: "Obtain and equip 4 hats.",
+    "Steam Rate": "18.8%",
+    "Practical Route":
+      "Equip each new reward hat when it unlocks instead of waiting until the end of the run.",
+  },
+  {
+    Achievement: "Shopaholic",
+    Requirement: "Make 5 shop purchases in one game.",
+    "Steam Rate": "17.7%",
+    "Practical Route":
+      "Buy five useful low-cost items instead of purchasing the 200-gold Revolver only for the counter.",
+  },
+  {
+    Achievement: "Spy Detected",
+    Requirement: "Kill 3 mimics.",
+    "Steam Rate": "17.2%",
+    "Practical Route":
+      "Open suspicious containers only when the train is close and the team is ready to fight.",
+  },
+  {
+    Achievement: "Young Clerk's Misconduct",
+    Requirement: "Learn Part 3 of the Warden's story.",
+    "Steam Rate": "16.9%",
+    "Practical Route":
+      "Read the Part 3 newspaper immediately when found.",
+  },
+  {
+    Achievement: "The End of the Beginning",
+    Requirement: "Collect all Warden keys.",
+    "Steam Rate": "15.8%",
+    "Practical Route":
+      "Claim the final reward after major locations and confirm that all six Warden-key icons are filled.",
+  },
+  {
+    Achievement: "Last Train Home",
+    Requirement: "Slay the Warden.",
+    "Steam Rate": "14.4%",
+    "Practical Route":
+      "Collect all six Warden keys, confirm the Boss Door is unlocked, and defeat the Warden.",
+  },
+  {
+    Achievement: "Rails Are God's Veins",
+    Requirement: "Learn Part 2 of the Warden's story.",
+    "Steam Rate": "13.2%",
+    "Practical Route":
+      "Part 2 was found inside a small switch house beside the railway.",
+  },
+  {
+    Achievement: "Desolate Prison",
+    Requirement: "Learn Part 6 of the Warden's story.",
+    "Steam Rate": "13.0%",
+    "Practical Route":
+      "Read the Part 6 newspaper immediately when found.",
+  },
+  {
+    Achievement: "Strange Chemicals",
+    Requirement: "Learn Part 8 of the Warden's story.",
+    "Steam Rate": "13.0%",
+    "Practical Route":
+      "Part 8 was found beside the Iris Lake cave and shop area before completing the torch route.",
+  },
+  {
+    Achievement: "Why So Serious?",
+    Requirement: "Stagger a clown 10 times.",
+    "Steam Rate": "12.0%",
+    "Practical Route":
+      "Use one Trippy Grid clown near a safe room. Stagger it, retreat, wait for recovery, and repeat.",
+  },
+  {
+    Achievement: "Rock and Coal",
+    Requirement: "Hoard 200 rocks and 200 coal.",
+    "Steam Rate": "8.0%",
+    "Practical Route":
+      "Assign one player to hold the resources while another player fuels the train and spends combat rocks.",
+  },
+  {
+    Achievement: "The Head Warden",
+    Requirement: "Learn Part 7 of the Warden's story.",
+    "Steam Rate": "6.3%",
+    "Practical Route":
+      "Read the Part 7 newspaper immediately when found.",
+  },
+  {
+    Achievement: "Mythbuster",
+    Requirement: "Kill a golem with a pickaxe.",
+    "Steam Rate": "5.7%",
+    "Practical Route":
+      "Pull the golem close to the train and make sure the finishing hit comes from the pickaxe.",
+  },
+  {
+    Achievement: "Massacre",
+    Requirement: "Defeat 100 enemies.",
+    "Steam Rate": "3.0%",
+    "Practical Route":
+      "Build the count during a long Ring and Monster Hunter attempt instead of farming one dangerous encounter.",
+  },
+  {
+    Achievement: "We Rich!",
+    Requirement: "Collect 500 gold in your pocket.",
+    "Steam Rate": "2.6%",
+    "Practical Route":
+      "Stop unnecessary purchases and gambling until one player personally holds 500 gold.",
+  },
+  {
+    Achievement: "I Fear No One",
+    Requirement: "Buy 100 revolver ammo.",
+    "Steam Rate": "2.0%",
+    "Practical Route":
+      "Buy 17 six-round packs for 340 gold. Sixteen packs provide only 96 rounds.",
+  },
+  {
+    Achievement: "Monster Hunter",
+    Requirement: "Kill every type of monster in one game.",
+    "Steam Rate": "1.5%",
+    "Practical Route":
+      "Use one designated player for finishing hits and cover as many named locations and special encounters as possible.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+**Forest Escape: Last Train has 41 achievements, and full completion requires co-op.** I split the route into three passes: normal progression for locations, newspapers, Warden keys, and the final route; a controlled co-op run for revives and other one-game counters; then dedicated cleanup for resources, currency, purchases, and specific kills.
+
+I combine **Ring**, **Massacre**, and **Monster Hunter** in one long route. I recommend handling **We Rich!** and **I Fear No One** separately because one rewards saving gold while the other requires heavy spending.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: July 11, 2026, using the Early Access launch build. Steam global completion rates were captured on July 10, 2026 and will change as more players progress.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-map-boss-door-keys.webp"
+    alt="Forest Escape Last Train objective page showing nine newspapers six Warden keys and the Boss Door"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I use the train objective page as the main completion checklist: nine newspapers at the top and six Warden-key slots at the bottom.
+  </figcaption>
+</figure>
+
+<h2 id="achievement-overview">
+  Forest Escape Last Train achievement overview
+</h2>
+
+<GuideTable
+  caption="What to know before starting the Forest Escape: Last Train achievement route."
+  columns={overviewColumns}
+  rows={overviewRows}
+/>
+
+Steam completion rates are useful for comparing relative rarity, but they are not pure difficulty scores. A low percentage can also mean that an achievement appears late, requires co-op, conflicts with normal spending, or must be completed in one long game.
+
+<h2 id="achievement-roadmap">
+  My three-pass achievement roadmap
+</h2>
+
+### Pass 1: progression, locations, and collectibles
+
+Use the first committed run for:
+
+- named location completions;
+- every newspaper you find;
+- Warden-key rewards;
+- railroad switches and train upgrades;
+- and the final route after all six keys are collected.
+
+I do not slow down a strong progression run by deliberately farming nine revives, hoarding 200 coal, or refusing every useful purchase.
+
+### Pass 2: controlled co-op counters
+
+Use the second run for:
+
+- `To Hell and Back`;
+- `Long Live the King`;
+- `Cat tale`;
+- `Shopaholic`;
+- `Regulator`;
+- `Untouchable`;
+- `Why So Serious?`;
+- and missing hat or mimic counters.
+
+These are safer to plan near the train than inside Iris Lake, Trippy Grid, or another location where a failed revive can end the run.
+
+### Pass 3: long-run and resource cleanup
+
+Leave these for dedicated cleanup:
+
+- `Ring`;
+- `Massacre`;
+- `Monster Hunter`;
+- `Rock and Coal`;
+- `We Rich!`;
+- `I Fear No One`;
+- `Mythbuster`;
+- and `Home Run`.
+
+`We Rich!` and `I Fear No One` can technically be completed in the same run by reaching 500 gold first and spending afterward. I still prefer separate attempts because they encourage opposite spending strategies.
+
+<div className="my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <div className="font-semibold text-slate-100">
+    Co-op tracking note
+  </div>
+  <div className="mt-2 text-sm leading-6 text-slate-300">
+    Until shared credit is fully clear, use one designated player for kills, purchases, held currency, and Monster Hunter progress. This removes most uncertainty without changing the route.
+  </div>
+</div>
+
+<h2 id="all-achievements">
+  All 41 Forest Escape Last Train achievements
+</h2>
+
+<GuideTable
+  caption="All 41 achievements. Steam global completion rates were captured on July 10, 2026 and are not live values."
+  columns={achievementColumns}
+  rows={achievementRows}
+/>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="trippy-grid-warden-keys">
+  Trippy Grid keys and confirmed Warden-key rewards
+</h2>
+
+Forest Escape: Last Train uses two key systems that are easy to confuse.
+
+The four keys inside **Trippy Grid** are local puzzle keys:
+
+- Blue Key
+- Green Key
+- Red Key
+- Yellow Key
+
+They are not four of the six global Warden keys.
+
+### Blue Key
+
+In the blue section, pull the lever that opens a hidden wall. Enter the newly opened room and collect the Blue Key.
+
+### Green Key
+
+Move through the green section and listen for the repeating mechanical key sound. Follow it as it becomes louder until you reach the Green Key.
+
+### Red Key
+
+Enter the red section and follow the key sound. Disable or distract the clown blocking the route, then check the room and floor carefully for the Red Key.
+
+### Yellow Key
+
+Enter the yellow section and follow the same mechanical sound cue until you reach the Yellow Key.
+
+Crouch while moving through exposed corridors. The Trippy Grid rules explain that clowns react to sound, cannot be permanently killed, and can be distracted by throwing rocks away from your route.
+
+After collecting all four colored keys, return to the exit and claim the final location reward. That reward includes **one Warden key**.
+
+### Confirmed Warden-key rewards
+
+Two location rewards are confirmed:
+
+- **Iris Lake:** place all six torches, open the cave, and loot the final reward area.
+- **Trippy Grid:** collect all four internal colored keys, escape the maze, and claim the final reward.
+
+After completing both locations, the train objective page showed the blue and green Warden-key slots filled.
+
+The current sequence does not clearly show which of the two locations awarded which Warden-key color, so I track filled slots on the train instead of assigning an unproven color to either location.
+
+### How I avoid missing a Warden key
+
+After every major location, I:
+
+1. wait for `MISSION COMPLETE`;
+2. enter the final reward area;
+3. open the reward chest;
+4. check the floor around the chest;
+5. return to the train;
+6. confirm whether another Warden-key icon has filled.
+
+`The End of the Beginning` unlocks after collecting all six Warden keys. Before opening the Boss Door, confirm that all six icons are filled on the train objective page.
+
+<h2 id="warden-newspapers">
+  Warden newspaper checklist and confirmed positions
+</h2>
+
+The nine story parts do not appear in numerical order.
+
+The full achievement checklist is:
+
+1. `Locked in the Cellar` — Part 1
+2. `Rails Are God's Veins` — Part 2
+3. `Young Clerk's Misconduct` — Part 3
+4. `Ghost Train Tragedy` — Part 4
+5. `Stern New Man` — Part 5
+6. `Desolate Prison` — Part 6
+7. `The Head Warden` — Part 7
+8. `Strange Chemicals` — Part 8
+9. `Prisoners' Nightmares` — Part 9
+
+Confirmed positions from the current routes:
+
+- **Part 1:** during the Kettle Fork junction and windmill sequence.
+- **Part 2:** inside a small switch house beside the railway.
+- **Part 8:** beside the Iris Lake cave and shop area before the torch puzzle.
+
+I interact with a newspaper before searching the rest of the room. If the game reloads a checkpoint, I check the newspaper counter on the train again rather than assuming the interaction saved.
+
+<h2 id="ring-eight-locations">
+  Ring achievement: track eight named locations
+</h2>
+
+The official game description lists **13 unique locations and mini-games**, while the achievement list gives ten clearly named location objectives:
+
+1. Upper Village
+2. Trippy Grid
+3. Mystic Room
+4. Iris Lake
+5. Carousel
+6. Music Rails
+7. Stepfall Bridge
+8. Acid Pit
+9. Tower
+10. Bootball Court
+
+These are not necessarily all 13 locations. They are the ten locations that can currently be tied directly to a named completion achievement.
+
+`Ring` requires only eight completed locations in one run.
+
+I mark a location only after its named objective reaches `MISSION COMPLETE`. I do not count:
+
+- the starting station;
+- houses;
+- treehouses;
+- shops;
+- mining stops;
+- or ordinary railway chests.
+
+Because the game has **three starting points**, branch order can change between runs. I complete the first eight named locations the current railway route gives me instead of trying to copy one fixed left-and-right sequence.
+
+Keep a written checklist because the game does not show live `Ring` progress.
+
+<h2 id="revive-achievements">
+  Revive achievements without losing the run
+</h2>
+
+The three revive achievements track different actions:
+
+- `To Hell and Back`: perform five teammate revives in one game.
+- `Long Live the King`: revive the lobby host.
+- `Cat tale`: be revived nine times in one game.
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-revive-teammate.webp"
+    alt="Forest Escape Last Train Hold E prompt used to revive a fallen teammate"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Reviving requires holding E for several seconds. I remove the nearby threat before starting the interaction.
+  </figcaption>
+</figure>
+
+My controlled setup is:
+
+1. Park beside a weak enemy or known trap.
+2. Put food or Aid Kits on the train.
+3. Confirm which player needs the counter.
+4. Let only that player go down.
+5. Remove the nearby threat.
+6. Hold `E` to revive.
+7. Heal before repeating.
+
+A revived player does not return at full health. Repeating the down immediately is how a controlled farm becomes a full team wipe.
+
+For `Long Live the King`, verify which player created the lobby. For `Cat tale`, keep the same player as the revive target for all nine attempts.
+
+Use manual teammate revives for all three achievements.
+
+<h2 id="specific-combat-achievements">
+  Specific combat achievements
+</h2>
+
+### Mythbuster: kill a golem with a pickaxe
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-golem-mythbuster.webp"
+    alt="Forest Escape Last Train golem fought with a pickaxe for the Mythbuster achievement"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I pull the golem toward the train, stop using other weapons near the end, and protect the pickaxe finishing hit.
+  </figcaption>
+</figure>
+
+The achievement triggered after the golem was killed with the pickaxe.
+
+My route is:
+
+- keep the train close;
+- let one player hold a safer angle;
+- weaken the golem without spending every recovery item;
+- stop using guns or explosives when its health looks low;
+- land the final hit with the pickaxe.
+
+### Home Run: kill a flying enemy with a bat
+
+The horn drives flying enemies away, which is useful during normal survival and counterproductive for `Home Run`.
+
+Keep a bat ready, avoid using the horn, let the flying enemy reach the locomotive, and make sure the killing hit comes from the bat.
+
+### Why So Serious?: stagger one clown ten times
+
+Trippy Grid confirms that clowns can be disabled temporarily but cannot be permanently killed.
+
+One clown is enough:
+
+1. Choose one near a colored safe room.
+2. Stagger it.
+3. Retreat while it recovers.
+4. Repeat until the achievement triggers.
+5. Throw rocks away from your path when it needs to be repositioned.
+
+### Spy Detected: kill three mimics
+
+Open suspicious containers only when the train is close and the team is prepared for a fight. Manually count the three kills instead of assuming every unusual chest was a mimic.
+
+### Monster Hunter: use a route-coverage approach
+
+`Monster Hunter` requires every monster type to be killed in one game, but the game does not provide a live checklist.
+
+The safest route is:
+
+1. Use the designated player for finishing hits.
+2. Complete at least eight named locations.
+3. Do not skip Mimics, Golems, flying enemies, or location-specific encounters.
+4. Combine the attempt with `Ring` and `Massacre`.
+5. Continue exploring after 100 kills if `Monster Hunter` has not triggered.
+
+If the achievement does not unlock, If the achievement does not unlock, check for skipped location-specific encounters before farming more copies of ordinary enemies.
+
+<h2 id="resource-shop-achievements">
+  Resource and shop achievements
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-shop-respawn-token.webp"
+    alt="Forest Escape Last Train shop showing Revolver ammunition Aid Kit Respawn Token and Dynamite prices"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Six revolver rounds cost 20 gold. The shop also shows a 20-gold Aid Kit, 40-gold Respawn Token, 20-gold Dynamite, and 200-gold Revolver.
+  </figcaption>
+</figure>
+
+### Rock and Coal: hold 200 of each
+
+In co-op, assign one player as the hoarder.
+
+That player keeps rocks and coal. The other player fuels the locomotive, throws combat rocks, and handles normal spending.
+
+Do not start this counter during an unstable opening. The train still needs enough coal to reach the next locations and checkpoints.
+
+### We Rich!: hold 500 gold
+
+Once I commit to this achievement, I stop:
+
+- gambling;
+- buying cosmetics;
+- buying spare ammunition;
+- and purchasing anything that is not needed to keep the run alive.
+
+Keep the gold on the designated player rather than splitting it across the team.
+
+### Shopaholic: make five purchases in one game
+
+The shop has enough useful low-cost items to avoid buying the 200-gold Revolver only for the counter.
+
+A practical route uses combinations of:
+
+- Aid Kits for 20 gold;
+- ammunition packs for 20 gold;
+- Dynamite for 20 gold;
+- Respawn Tokens for 40 gold.
+
+Make all five purchases during the same game.
+
+### I Fear No One: exact ammunition cost
+
+The shop sells **6 revolver rounds for 20 gold**. The achievement requires buying at least 100 rounds.
+
+<div className="my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5">
+  <div className="font-semibold text-slate-100">
+    Minimum ammunition purchase
+  </div>
+  <div className="mt-3 space-y-1 text-sm text-slate-300">
+    <p>16 packs × 6 rounds = 96 rounds</p>
+    <p>17 packs × 6 rounds = 102 rounds</p>
+    <p>17 packs × 20 gold = 340 gold</p>
+  </div>
+</div>
+
+The minimum safe budget is **340 gold**.
+
+You can complete `We Rich!` and `I Fear No One` in the same run by reaching 500 gold first, waiting for `We Rich!` to unlock, and then spending 340 gold on ammunition.
+
+I still prefer separate runs because one route rewards saving while the other requires repeated spending.
+
+<h2 id="cleanup-order">
+  Final achievement cleanup order
+</h2>
+
+After normal progression, I use this order:
+
+1. Missing named locations.
+2. Missing newspapers.
+3. Missing Warden keys and `Last Train Home`.
+4. Co-op revive achievements.
+5. `Ring`, `Massacre`, and `Monster Hunter`.
+6. `Rock and Coal`.
+7. `We Rich!`.
+8. `I Fear No One`.
+9. Remaining hats, mimics, switches, stopper hands, and specific kills.
+
+This keeps conflicting goals apart and avoids repeating a full progression run because the wrong counter was forced too early.
+
+<h2 id="related-guides">
+  Related Forest Escape Last Train guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the{" "}
+    <Link href="/forest-escape-last-train">
+      Forest Escape Last Train Guide Hub
+    </Link>{" "}
+    for the complete guide route.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/forest-escape-last-train/beginner-guide/">
+      Beginner Guide
+    </Link>{" "}
+    for coal, braking, shops, revives, and first-run survival.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/forest-escape-last-train/locations-puzzle-guide/">
+      Locations & Puzzle Guide
+    </Link>{" "}
+    for Trippy Grid, Iris Lake, Carousel, and Music Rails.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Forest Escape Last Train achievements FAQ
+</h2>
+
+### How many achievements are in Forest Escape Last Train?
+
+There are 41 achievements in the Early Access launch list.
+
+### Are the Steam completion rates live?
+
+No. The percentages in this guide were captured on July 10, 2026 and will change as more players progress.
+
+### Can Forest Escape Last Train be completed 100% solo?
+
+No. The lobby-host revive achievement and the two revive-count achievements require another player.
+
+### Are the four Trippy Grid keys Warden keys?
+
+No. Blue, green, red, and yellow are local maze keys. Completing the maze then awards one global Warden key.
+
+### How many locations are in Forest Escape Last Train?
+
+The official description lists 13 unique locations and mini-games. Ten of them currently have clearly named location-completion achievements.
+
+### Do the three starting points change the achievement route?
+
+They change which branches and locations appear first, but they do not change the achievement requirements. Track completed location names instead of following one fixed turn sequence.
+
+### How much gold is required for I Fear No One?
+
+You need 17 ammunition packs. At 20 gold per pack, the minimum cost is 340 gold.
+
+### Can We Rich and I Fear No One be completed in the same run?
+
+Yes. Reach 500 gold first, unlock `We Rich!`, then spend 340 gold on ammunition. Separate runs are usually easier to manage.
+
+### How do I unlock Mythbuster?
+
+Kill a golem and make sure the finishing hit comes from the pickaxe.
+
+### What is the safest Ring route?
+
+Complete any eight named locations and keep a written checklist. Houses, shops, treehouses, and ordinary railway stops do not count.

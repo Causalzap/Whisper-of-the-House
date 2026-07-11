@@ -132,6 +132,119 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Forest Escape Last Train",
+    "game": "Forest Escape: Last Train",
+    "href": "/forest-escape-last-train",
+    "slug": "forest-escape-last-train",
+    "kind": "game",
+    "status": "active",
+    "accent": "emerald",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Route Map",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the active Forest Escape Last Train guide hub for first-run survival, train parts, controls, coal, shops, four verified puzzle solutions, all 41 achievements, Warden Keys, newspapers, and final-route planning.",
+    "coverage": [
+      "Three starting points, Easy vs Normal vs Hard, Front Light, Train Horn, Control Lever, confirmed controls, coal, furnace temperature, braking, reversing, derailment fixes, and first-run departure planning",
+      "Barricades, shop prices, Aid Kits, Respawn Tokens, Revolver ammo, early threats, safe revives, checkpoints, solo play, online co-op, and Engineer-Scout role division",
+      "Music Rails 1-2-5-4-3 sequence, Iris Lake six-torch route, Carousel horse emotes, Trippy Grid clown rules, and Blue, Green, Red, and Yellow Key solutions",
+      "All 41 achievements, Steam rarity snapshot, three-pass cleanup route, confirmed Warden-key rewards, newspaper tracking, Ring, Mythbuster, Monster Hunter planning, resources, gold, and ammunition"
+    ],
+    "image": "/images/home/forest-escape-last-train-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 4,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Forest Escape Last Train Guide Hub",
+        "href": "/forest-escape-last-train",
+        "type": "Spotlight Coverage",
+        "description": "Start here for first-run survival, four verified puzzle solutions, all 41 achievements, Warden Keys, newspapers, and final-route planning.",
+        "image": "/images/home/forest-escape-last-train-hub.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "spotlightMeta": "First-run survival, train controls, four verified puzzles, all 41 achievements, Warden Keys, newspapers, and final-route planning"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Forest Escape Last Train Beginner Guide",
+        "href": "/forest-escape-last-train/beginner-guide",
+        "type": "Guide",
+        "description": "Survive your first run with train-part locations, difficulty advice, confirmed controls, coal management, shop priorities, revives, checkpoints, and co-op roles.",
+        "date": "Updated recently",
+        "image": "/images/home/forest-escape-last-train-beginner-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 16,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "Three starting points, difficulty choice, train parts, controls, coal, furnace temperature, shops, revives, checkpoints, solo play, and co-op roles"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Forest Escape Last Train Puzzle Guide",
+        "href": "/forest-escape-last-train/locations-puzzle-guide",
+        "type": "Guide",
+        "description": "Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with the chime order, six-torch route, horse emotes, and all four colored maze keys.",
+        "date": "Updated recently",
+        "image": "/images/home/forest-escape-last-train-puzzle-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 17,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "Music Rails 1-2-5-4-3, Iris Lake six torches, Carousel horse emotes, Trippy Grid clown rules, and all four colored keys"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Forest Escape Last Train Achievements Guide",
+        "href": "/forest-escape-last-train/achievements-guide",
+        "type": "Guide",
+        "description": "Complete all 41 achievements with a three-pass roadmap, Warden-key rewards, newspaper tracking, revive routes, Ring planning, and exact resource calculations.",
+        "date": "Updated recently",
+        "image": "/images/home/forest-escape-last-train-achievements-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 18,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "All 41 achievements, Steam rarity snapshot, Warden Keys, newspapers, Ring, revives, Mythbuster, Monster Hunter, gold, and ammunition"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      }
+    ]
+  },
+  {
     "title": "Granblue Relink Endless Ragnarok",
     "game": "Granblue Fantasy: Relink",
     "href": "/granblue-relink-endless-ragnarok",

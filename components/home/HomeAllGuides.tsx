@@ -73,6 +73,8 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  
+  { title: "Forest Escape: Last Train", href: "/forest-escape-last-train" },
   { title: "Granblue Fantasy: Relink - Endless Ragnarok", href: "/granblue-relink-endless-ragnarok" },
   { title: "Moonlight Peaks", href: "/moonlight-peaks" },
   { title: "Esports Manager 2026", href: "/esports-manager-2026" },

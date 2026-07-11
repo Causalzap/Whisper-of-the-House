@@ -1,0 +1,845 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const controlColumns = [
+  { key: "Action", label: "Action" },
+  { key: "Input Or Control", label: "Input or control" },
+  { key: "Beginner Use", label: "Beginner use" },
+];
+
+export const controlRows = [
+  {
+    Action: "Interact, pick up, or install",
+    "Input Or Control": "Use the prompt shown on the object",
+    "Beginner Use":
+      "Train parts, loot, shops, switches, and puzzle objects display a contextual interaction prompt when you are close enough.",
+  },
+  {
+    Action: "Revive a teammate",
+    "Input Or Control": "Hold E at the fallen player's marker",
+    "Beginner Use":
+      "Remove or distract the nearby threat first. The interaction takes several seconds and does not restore full health.",
+  },
+  {
+    Action: "Flashlight",
+    "Input Or Control": "F",
+    "Beginner Use":
+      "Turn it on before entering houses, forests, tunnels, and dark puzzle locations.",
+  },
+  {
+    Action: "Throw a rock",
+    "Input Or Control": "Equip a rock, aim, then click LMB",
+    "Beginner Use":
+      "The rock launches immediately rather than charging. Use it for balloons, distractions, and early combat.",
+  },
+  {
+    Action: "Mine or attack",
+    "Input Or Control": "Equip the tool or weapon and use its attack input",
+    "Beginner Use":
+      "Some rock and coal deposits require several pickaxe hits before they are completely broken.",
+  },
+  {
+    Action: "Add coal",
+    "Input Or Control": "Equip coal, face the furnace, then click LMB",
+    "Beginner Use":
+      "Watch the furnace display while loading fuel. I aim for roughly 100°C before the first departure.",
+  },
+  {
+    Action: "Train Horn",
+    "Input Or Control": "Use G when the whistle prompt is available",
+    "Beginner Use":
+      "The mounted horn is especially useful for driving flying threats away from the locomotive.",
+  },
+  {
+    Action: "Move forward or reverse",
+    "Input Or Control": "Use the direction controls inside the locomotive",
+    "Beginner Use":
+      "Learn both directions before leaving. Reverse when a teammate, missed stop, or safe retreat route is behind the train.",
+  },
+  {
+    Action: "Brake",
+    "Input Or Control": "Use the red lever beside the driver controls",
+    "Beginner Use":
+      "Brake before anyone jumps off for coal, houses, shops, puzzles, or a downed teammate.",
+  },
+  {
+    Action: "Check the route",
+    "Input Or Control": "Use the train map and objective board",
+    "Beginner Use":
+      "Check the next branch before moving. The game has three possible starting points, so route order can change.",
+  },
+];
+
+export const trainPartColumns = [
+  { key: "Part", label: "Train part" },
+  { key: "Where To Search", label: "Where to search" },
+  { key: "Installation Point", label: "Installation point" },
+  { key: "Why It Matters", label: "Why it matters" },
+];
+
+export const trainPartRows = [
+  {
+    Part: "Front Light",
+    "Where To Search":
+      "Search the starting station, nearby rooms, ground loot, containers, balloons, and structures around the locomotive.",
+    "Installation Point": "The mounting point at the front of the locomotive",
+    "Why It Matters":
+      "Improves visibility during dark railway sections, night stops, and forest searches.",
+  },
+  {
+    Part: "Train Horn",
+    "Where To Search":
+      "Check the same station area, including side rooms, elevated loot, and nearby interactable objects.",
+    "Installation Point":
+      "The marked horn mount on the upper or side section of the locomotive",
+    "Why It Matters":
+      "Adds the horn and gives the team a reliable response to flying monsters near the train.",
+  },
+  {
+    Part: "Control Lever",
+    "Where To Search":
+      "Check station side areas, accessible buildings, containers, and nearby objects that resemble tools or scrap.",
+    "Installation Point": "The driver controls inside the locomotive",
+    "Why It Matters":
+      "Completes the train repair and enables movement. I install it after the opening station has been searched.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For a safe first run, search the entire starting station before moving the train. Find the **Front Light, Train Horn, and Control Lever**, mine rocks, pop the item balloons, collect coal, and load the furnace to roughly **100°C**.
+
+Install the Control Lever only after the opening area is cleared. Build a small amount of protection without spending every hammer, then leave with spare coal, rocks, and at least one recovery option.
+
+My main survival rule is the **one-revive-distance rule**: never explore so far that a teammate cannot be revived and both players cannot still return to the locomotive.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: July 11, 2026, using the Early Access launch build. This guide covers the three starting points, difficulty selection, confirmed controls, train-part routing, fuel management, checkpoints, solo and co-op play, and current launch-build troubleshooting.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-coal-furnace-100c.webp"
+    alt="Forest Escape Last Train locomotive furnace fueled to approximately 100 degrees Celsius"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Roughly 100°C is my opening fuel target before leaving the first station.
+  </figcaption>
+</figure>
+
+<h2 id="first-run-order">
+  Best Forest Escape Last Train first-run order
+</h2>
+
+The opening station is the safest time to learn the locomotive, collect basic resources, and find anything that would be expensive to return for later.
+
+I use this order:
+
+<ol className="my-6 list-decimal space-y-3 pl-6">
+  <li>
+    <strong>Search the station before touching the movement controls.</strong>{" "}
+    Check the platform, rooms, containers, nearby ground, balloons, side
+    structures, and the area around the locomotive.
+  </li>
+  <li>
+    <strong>Mine the closest stone deposits.</strong> Rocks let you pop
+    balloons, distract enemies, trigger distant targets, and fight without
+    spending ammunition.
+  </li>
+  <li>
+    <strong>Pop every reachable item balloon.</strong> Equip a rock, aim
+    slightly above the hanging item, and click once.
+  </li>
+  <li>
+    <strong>Find and install the Front Light and Train Horn.</strong> Fit them
+    while continuing to search because neither part starts the journey by
+    itself.
+  </li>
+  <li>
+    <strong>Mine the dark coal deposits.</strong> Check behind the station and
+    around nearby structures instead of searching only beside the railway.
+  </li>
+  <li>
+    <strong>Load the furnace.</strong> Equip coal and click the furnace until
+    the display is near 100°C.
+  </li>
+  <li>
+    <strong>Build only a small amount of protection.</strong> Cover one exposed
+    access point and preserve the remaining hammers.
+  </li>
+  <li>
+    <strong>Install the Control Lever last.</strong> Once the station is
+    cleared and the locomotive is fueled, fit the lever, inspect the route,
+    release the brake, and leave.
+  </li>
+</ol>
+
+Installing the Control Lever last is not a hidden requirement. It is a route decision that prevents me from leaving before the starting area has been properly searched.
+
+<h2 id="starting-points">
+  How the three starting points change your opening
+</h2>
+
+Forest Escape: Last Train has **three possible starting points**. The Early Access launch build also contains **13 locations and mini-games**, so two runs do not necessarily present their first branches in the same order.
+
+The starting point can change:
+
+- the station layout you search first;
+- which side structures are closest;
+- where the opening railway branches lead;
+- which named location appears early;
+- and the order in which shops, coal stops, and puzzle areas become practical.
+
+It does not change the basic opening job.
+
+At every starting station, I still:
+
+1. search the full local area;
+2. locate the three train parts;
+3. collect rocks and coal;
+4. identify the brake and direction controls;
+5. inspect the first railway branch;
+6. and leave only after the train is prepared.
+
+This is why I describe search zones instead of promising one exact coordinate for every train part.
+
+<h2 id="difficulty-choice">
+  Which difficulty should you choose?
+</h2>
+
+The game offers **Easy, Normal, and Hard**.
+
+### Choose Easy when learning solo
+
+Easy is the sensible first choice when:
+
+- playing alone;
+- learning the three train controls;
+- testing how far you can safely explore;
+- learning puzzle rules without a coordinated team;
+- or introducing players who are unfamiliar with co-op survival games.
+
+The purpose of the first run is to understand fuel, movement, revives, and route decisions—not to prove that the hardest setting is possible.
+
+### Choose Normal for a first co-op run
+
+Normal is my default recommendation for a new group.
+
+It leaves enough pressure for the train, enemies, and locations to matter without making every early mistake consume the entire recovery supply.
+
+Normal is especially appropriate when:
+
+- the group has not played together before;
+- nobody has committed to the Engineer role;
+- players are still learning the item and interaction prompts;
+- or the team wants to explore instead of rushing the route.
+
+### Choose Hard for a coordinated group
+
+Hard makes more sense after the group already understands:
+
+- who controls the locomotive;
+- who carries coal and healing;
+- how the team handles a downed player;
+- when to stop exploring;
+- and how to regroup before named locations.
+
+One early three-player review reported completing the game on the highest difficulty. The final boss initially felt overwhelming to that group, but became much more manageable after several attempts.
+
+That is the right expectation for a first Hard clear: treat the opening boss attempts as learning runs instead of spending every resource in panic during the first exchange.
+
+<h2 id="controls">
+  Confirmed controls and train interactions
+</h2>
+
+Many objects use contextual prompts, and custom bindings can change the exact key shown on screen. These are the launch-build interactions I rely on during a first run.
+
+<GuideTable
+  caption="Confirmed Forest Escape: Last Train controls and interactions for a first run."
+  columns={controlColumns}
+  rows={controlRows}
+/>
+
+### How to throw rocks
+
+The current mouse interaction is straightforward:
+
+1. Collect rocks from stone deposits.
+2. Equip the rock stack.
+3. Aim at the balloon, enemy, or distraction point.
+4. Click the left mouse button.
+
+The rock launches immediately. Holding the mouse button does not currently increase throw power.
+
+For balloons, I aim slightly above the hanging item instead of directly at the object below it.
+
+### Does the game support inverted mouse?
+
+An earlier build did not show a mouse-inversion option. The developer later stated that inverted mouse support was added in the following build.
+
+Check the current Controls menu before assuming the option is unavailable. When it is missing, update the game and restart before checking again.
+
+<h2 id="train-parts">
+  Where to find the Headlight, Horn, and Control Lever
+</h2>
+
+The three opening parts are found around the starting area, but their exact pickup positions can vary with the selected starting point.
+
+<GuideTable
+  caption="Where to search for the three opening train parts and where each part is installed."
+  columns={trainPartColumns}
+  rows={trainPartRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-starting-train-parts.webp"
+    alt="Forest Escape Last Train opening locomotive with the Front Light Horn and driver controls"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Front Light mounts at the front, the Horn uses the marked upper-side mount, and the Control Lever completes the driver controls.
+  </figcaption>
+</figure>
+
+### What to do when one part is missing
+
+Search in expanding circles:
+
+1. Walk around the entire station building.
+2. Check both sides of the railway and locomotive.
+3. Enter every accessible room.
+4. Look above for balloons or elevated loot.
+5. Mine enough rocks to reach target-based pickups.
+6. Check the nearest treehouse or side structure.
+7. Read item names before dropping anything.
+
+The Control Lever is easy to mistake for an ordinary tool or piece of scrap. Do not leave because the Front Light and Horn are already attached.
+
+<h2 id="rocks-and-coal">
+  Rocks, coal, and the first resource decision
+</h2>
+
+Rocks and coal solve different problems.
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-pickaxe-rocks-tutorial.webp"
+    alt="Forest Escape Last Train tutorial explaining how to mine rock deposits with the pickaxe"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Some deposits need several hits. Keep mining until the deposit is completely broken.
+  </figcaption>
+</figure>
+
+**Rocks** are the flexible early resource. I use them to:
+
+- pop balloons;
+- distract enemies;
+- soften early attackers;
+- trigger distant objects;
+- and save ammunition.
+
+**Coal** keeps the route alive. It is less flexible but more important whenever the locomotive reserve is falling.
+
+My decision rule is simple:
+
+> When the train needs fuel, coal comes before gold, optional houses, and speculative loot.
+
+Gold has no value if the locomotive cannot reach the next shop.
+
+<h2 id="coal-temperature">
+  How much coal does the train need?
+</h2>
+
+To add fuel:
+
+1. Put coal in an active inventory slot.
+2. Stand in front of the locomotive furnace.
+3. Aim at the furnace opening.
+4. Click the left mouse button.
+5. Watch the temperature display increase.
+
+I aim for **roughly 100°C** before leaving the first station. This gives me enough operating room to reach the first branch without immediately stopping for another mining trip.
+
+<div className="my-6 rounded-xl border border-amber-500/30 bg-amber-950/20 p-5">
+  <p className="font-semibold text-amber-100">
+    Known fuel limit
+  </p>
+  <p className="mt-2 text-sm leading-6 text-amber-50/80">
+    The current route confirms that approximately 100°C is a comfortable
+    opening target. It does not confirm an exact minimum movement temperature,
+    a fixed increase per coal piece, or one universal burn rate for every
+    difficulty and party size.
+  </p>
+</div>
+
+### When I stop for coal
+
+I stop when:
+
+- the display is clearly falling;
+- coal is visible close to the track;
+- the next named location is still far away;
+- or collecting it now is cheaper than reversing later.
+
+I do not stop for every deposit. One player should remain aware of the locomotive, enemies, and retreat route while the other mines.
+
+<h2 id="train-controls">
+  How to stop, reverse, and troubleshoot the train
+</h2>
+
+Before the first encounter, locate:
+
+- the forward control;
+- the reverse control;
+- and the red brake lever.
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-brake-red-lever.webp"
+    alt="Forest Escape Last Train red brake lever beside the locomotive driver controls"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I use the red brake lever before anyone leaves the locomotive.
+  </figcaption>
+</figure>
+
+My stopping procedure is:
+
+1. Call the stop before the scout jumps.
+2. Apply the brake.
+3. Confirm the train is no longer rolling.
+4. Check the map and surroundings.
+5. Leave one clear route back to the locomotive.
+
+Before reversing, make sure no teammate is standing behind the train or trying to board a moving wagon.
+
+### Why the train will not move
+
+Check these in order:
+
+1. The Control Lever is installed.
+2. Coal remains in the furnace.
+3. The brake is released.
+4. Forward or reverse has been selected.
+5. A stopper hand is not holding the locomotive.
+6. The train has not entered the derailment bug.
+
+### What to do when the train derails
+
+The developer's current temporary workaround is to operate the forward and backward lever until the locomotive begins moving correctly on the track again.
+
+The bug can be associated with an unstable connection. When lever switching does not help:
+
+1. stop both players from interacting with the train at once;
+2. check the internet connection;
+3. allow the host to operate the controls;
+4. restart from the last checkpoint when the train remains unusable.
+
+<h2 id="one-revive-distance">
+  Use the one-revive-distance rule
+</h2>
+
+My exploration limit is not a fixed number of meters.
+
+It is this:
+
+> If I cannot reach a downed teammate, complete the revive, and get both players back to the locomotive, we explored too far.
+
+Move the train closer before exploring when:
+
+- the next building is beyond a safe sprint back;
+- several enemies are between the scout and the railway;
+- the route disappears behind terrain;
+- or the engineer could not safely reach a downed player.
+
+The locomotive is transportation, storage, retreat point, horn platform, and the center of every recoverable route.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="barricades">
+  How many barricades should you build?
+</h2>
+
+Hammers disappear much faster than the opening pile suggests.
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-hammer-barricade.webp"
+    alt="Forest Escape Last Train player building a wooden barricade on the locomotive"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A large hammer supply can produce only a small protected section, so I preserve tools for later stops.
+  </figcaption>
+</figure>
+
+At the first station, cover one exposed access point and stop.
+
+Later encounters reveal more useful information:
+
+- which side enemies prefer to board;
+- where the Engineer stands;
+- whether another wagon needs protection;
+- and which section is actually receiving pressure.
+
+A complete-looking opening barricade is not worth leaving with no tools for the rest of the run.
+
+<h2 id="shop-priority">
+  What to buy first at the shop
+</h2>
+
+The early shop shows:
+
+- **Aid Kit:** 20 gold
+- **Revolver Ammo, 6 rounds:** 20 gold
+- **Respawn Token:** 40 gold
+- **Dynamite:** 20 gold
+- **Revolver:** 200 gold
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-shop-respawn-token.webp"
+    alt="Forest Escape Last Train shop showing Revolver Ammo Aid Kit Respawn Token Dynamite and Revolver prices"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Buy for the problem that is most likely to end the current run.
+  </figcaption>
+</figure>
+
+### Buy an Aid Kit when health is the immediate risk
+
+The 20-gold Aid Kit is my first purchase when:
+
+- one player is already low;
+- the next stop is a named location;
+- the team recently used a revive;
+- or no food remains.
+
+A powerful weapon does not solve a run where the next trap causes a down.
+
+### Buy a Respawn Token before a dangerous commitment
+
+The 40-gold Respawn Token is most valuable before:
+
+- a long solo push;
+- a dangerous puzzle location;
+- a route carrying important progress;
+- or a section where a teammate may not reach the revive marker.
+
+It is insurance, not a replacement for healing.
+
+### Buy ammunition only after the gun matters
+
+Six Revolver rounds cost 20 gold.
+
+I do not stock ammunition without a Revolver, and I do not spend 200 gold on the Revolver while fuel and healing are still unstable.
+
+The gun becomes reasonable after:
+
+- the train has spare coal;
+- health is covered;
+- the team expects a longer combat route;
+- and the purchase will not remove the last recovery option.
+
+### Buy Dynamite for a known problem
+
+Dynamite costs only 20 gold, but cheap does not mean urgent.
+
+I buy it when the route has already shown a blockage, dangerous target, or interaction where explosives have a clear use.
+
+<h2 id="early-threats">
+  Early enemies and train events
+</h2>
+
+### Flying enemies
+
+Use the Train Horn to drive flying threats away from the locomotive.
+
+Do not spend bullets on every flying attacker when the horn can reset the encounter safely.
+
+### Stopper hands
+
+Large hands can grab and stop the train.
+
+When this happens:
+
+1. return to the locomotive;
+2. locate the hand holding it;
+3. destroy the hand;
+4. confirm the brake and movement controls;
+5. continue only after the train responds.
+
+Do not let the entire team disappear inside a distant building while the train is being held.
+
+### Bear traps
+
+Watch the ground around houses, forest paths, loot, and narrow approaches.
+
+One trap can remove enough health to make the next normal enemy dangerous.
+
+### Suspicious containers and Mimics
+
+Open unusual containers only when:
+
+- the locomotive is close;
+- the team has enough health to fight;
+- and the route back is clear.
+
+Do not open suspicious loot while one player is already near death.
+
+### Normal attackers
+
+Start with rocks when possible, then spread out when the enemy reaches melee range.
+
+Do not stand directly behind a teammate using a gun or swinging a melee weapon.
+
+<h2 id="combat-and-revives">
+  How to revive a teammate safely
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-revive-teammate.webp"
+    alt="Forest Escape Last Train Hold E prompt used to revive a fallen teammate"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Remove or redirect the immediate threat before holding E at the revive marker.
+  </figcaption>
+</figure>
+
+My revive order is:
+
+1. Identify what caused the down.
+2. Kill it or pull it away.
+3. Check for a second threat.
+4. Hold `E` at the teammate marker.
+5. Give the revived player food or an Aid Kit.
+6. Return to the locomotive before continuing.
+
+The revive does not return the player at full health.
+
+Starting the interaction while an enemy is still standing on the marker is one of the fastest ways to lose both players.
+
+<h2 id="checkpoints-and-death">
+  Checkpoints, team wipes, and saved progress
+</h2>
+
+When every active player dies, the current attempt ends and the run must be restored from a checkpoint.
+
+After loading:
+
+1. check the current location;
+2. inspect both inventories;
+3. confirm recent shop purchases;
+4. recheck newspapers and Warden-key progress;
+5. and confirm that important rewards collected shortly before the wipe remain.
+
+The launch build has shown slow checkpoint loading and cases where a rejoining player lost carried items. Treat recent inventory changes as something to verify rather than assuming every item survived the reload.
+
+The game supports Steam Cloud, but that is not the same as having unrestricted manual save slots.
+
+Before ending an important session, I prefer to reach a clear checkpoint or route transition instead of quitting immediately after a major reward.
+
+<h2 id="solo-and-coop">
+  Solo, co-op, and offline play
+</h2>
+
+Forest Escape: Last Train supports **1–4 players**.
+
+Solo play is available, but the current build requires an internet connection. Offline play is not currently supported, although the developer plans to add it later.
+
+### My solo route
+
+When playing alone:
+
+- move the train closer before every search;
+- use shorter resource loops;
+- carry healing on the active character;
+- consider a Respawn Token before a dangerous location;
+- avoid suspicious loot while low;
+- and leave optional gold behind when the fuel reserve is falling.
+
+Nobody can reposition the train or complete a manual revive after a solo down.
+
+### My co-op role split
+
+With two players, I use two clear roles.
+
+**Engineer**
+
+- manages fuel;
+- controls forward, reverse, and brake;
+- keeps the locomotive within revive distance;
+- operates the horn;
+- and calls when the team must return.
+
+**Scout**
+
+- searches buildings;
+- mines nearby resources;
+- collects balloons and loot;
+- and reports threats before the Engineer leaves the train.
+
+Both players regroup for named locations, shops, major combat, and anything likely to contain important progression.
+
+With three or four players, keep one designated Engineer. More players do not help when everybody abandons the train.
+
+<h2 id="first-run-checklist">
+  First-run departure checklist
+</h2>
+
+Before leaving the starting station, confirm:
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>Front Light installed</li>
+  <li>Train Horn installed</li>
+  <li>Control Lever installed</li>
+  <li>Furnace loaded for the first departure</li>
+  <li>Spare coal collected</li>
+  <li>Rocks available for balloons and combat</li>
+  <li>At least one hammer or building option preserved</li>
+  <li>Forward, reverse, and brake controls identified</li>
+  <li>The first railway branch checked</li>
+  <li>At least one healing or recovery option available</li>
+</ul>
+
+<h2 id="common-mistakes">
+  First-run mistakes that end good attempts
+</h2>
+
+### Leaving before searching the full station
+
+Missing the Control Lever, coal, or balloons creates unnecessary backtracking before the route has properly started.
+
+### Treating the first fuel load as permanent
+
+The opening furnace target gets the train moving. It does not remove the need to collect coal throughout the run.
+
+### Spending every hammer immediately
+
+Opening barricades consume tools quickly. Protect one exposed section and preserve the rest.
+
+### Buying the Revolver before stabilizing the run
+
+A 200-gold weapon does not repair low health, an empty furnace, or a team with no recovery option.
+
+### Chasing loot beyond revive distance
+
+Move the locomotive closer before committing to a distant house, hill, or resource group.
+
+### Reviving before removing the threat
+
+The revive takes long enough for the second player to be downed during the interaction.
+
+### Letting every player leave the train
+
+One player should remain responsible for fuel, movement, braking, and the return route.
+
+### Starting on Hard without assigning roles
+
+Hard is much less forgiving when nobody owns the Engineer role or the group has no plan for coal, healing, and revives.
+
+<h2 id="related-guides">
+  Related Forest Escape Last Train guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the{" "}
+    <Link href="/forest-escape-last-train">
+      Forest Escape Last Train Guide Hub
+    </Link>{" "}
+    for the complete guide roadmap.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/forest-escape-last-train/locations-puzzle-guide/">
+      Locations & Puzzle Guide
+    </Link>{" "}
+    for Music Rails, Iris Lake, Carousel, and Trippy Grid.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/forest-escape-last-train/achievements-guide/">
+      Achievements Guide
+    </Link>{" "}
+    for all 41 achievements, Warden-key tracking, Ring planning, and cleanup routes.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Forest Escape Last Train beginner FAQ
+</h2>
+
+### Which difficulty should a beginner choose?
+
+Choose Easy for a first solo learning run. Choose Normal for a first co-op run or a group that has not assigned clear roles. Save Hard for a coordinated team that already understands fuel, revives, and train positioning.
+
+### How many starting points are there?
+
+There are three. The starting point changes the opening layout and early branch order, so train parts should be found by searching the full station rather than following one fixed coordinate list.
+
+### Can Forest Escape Last Train be played solo?
+
+Yes. It supports solo play and online co-op for up to four players.
+
+### Can Forest Escape Last Train be played offline?
+
+Not currently. Solo play still requires an internet connection. The developer plans to add offline support later.
+
+### Does Forest Escape Last Train support inverted mouse?
+
+An earlier build did not include the option, but the developer later said inverted mouse support had been added to the following build. Check the current Controls menu and update the game when the option is missing.
+
+### How do I throw rocks?
+
+Equip a rock, aim, and click the left mouse button. The current interaction releases the rock immediately rather than charging the throw.
+
+### Where are the Front Light, Horn, and Control Lever?
+
+Search the entire starting station, including rooms, containers, balloons, elevated loot, side structures, and both sides of the locomotive. Exact pickup positions can vary with the starting point.
+
+### Does the train need exactly 100°C to move?
+
+No exact minimum is confirmed here. This guide uses approximately 100°C as a comfortable opening fuel target.
+
+### Why will my train not move?
+
+Check the Control Lever, furnace fuel, brake, direction control, stopper hands, and possible derailment bug.
+
+### What should I do when the train derails?
+
+Operate the forward and backward lever to help the locomotive return to normal movement. When that fails, let the host control the train, check the connection, or reload the last checkpoint.
+
+### How do checkpoints work after a team wipe?
+
+Load the last checkpoint and immediately verify inventory, purchases, newspapers, keys, and recent rewards because the restored state may be earlier than the moment of death.
+
+### Is the final boss difficult?
+
+The first attempts can feel overwhelming, especially on Hard. A launch player group that completed the highest difficulty reported that the fight became much more manageable after learning its mechanics over several attempts.
