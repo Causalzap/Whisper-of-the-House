@@ -71,6 +71,10 @@ const relatedLinks = [
     label: "Beginner Guide",
   },
   {
+    href: "/forest-escape-last-train/warden-boss-guide",
+    label: "Warden Boss Guide",
+  },
+  {
     href: "/forest-escape-last-train/locations-puzzle-guide",
     label: "Locations & Puzzle Guide",
   },

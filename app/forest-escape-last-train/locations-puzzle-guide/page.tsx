@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
+
 import ForestEscapeLastTrainLocationsPuzzleGuideContent from "@/data/forest-escape-last-train/locations-puzzle-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/forest-escape-last-train`;
 const pageUrl = `${hubUrl}/locations-puzzle-guide`;
+const beginnerGuideUrl = `${hubUrl}/beginner-guide`;
+const wardenBossGuideUrl = `${hubUrl}/warden-boss-guide`;
+const achievementsGuideUrl = `${hubUrl}/achievements-guide`;
 
 const imageUrls = [
   `${siteUrl}/images/forest-escape-last-train/forest-escape-last-train-music-rails-chimes-order.webp`,
@@ -20,7 +25,10 @@ const imageUrls = [
   `${siteUrl}/images/forest-escape-last-train/forest-escape-last-train-trippy-grid-red-key.webp`,
 ];
 
-const toc = [
+const toc: Array<{
+  id: string;
+  label: string;
+}> = [
   {
     id: "locations-puzzle-overview",
     label: "Four puzzle solutions",
@@ -61,6 +69,10 @@ const relatedLinks = [
     label: "Beginner Guide",
   },
   {
+    href: "/forest-escape-last-train/warden-boss-guide",
+    label: "Warden Boss Guide",
+  },
+  {
     href: "/forest-escape-last-train/achievements-guide",
     label: "Achievements Guide",
   },
@@ -69,7 +81,7 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: "Forest Escape Last Train Puzzle Guide: 4 Solutions",
   description:
-    "Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with the chime sequence, six-torch route, horse-pose matching, and all four colored keys.",
+    "Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with the 1-2-5-4-3 chime order, six-torch route, horse poses, and four colored keys.",
   alternates: {
     canonical: pageUrl,
   },
@@ -78,14 +90,14 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Forest Escape Last Train Puzzle Guide: 4 Solutions",
     description:
-      "Get verified solutions for Music Rails, Iris Lake, Carousel, and Trippy Grid, including six torches and all four colored maze keys.",
+      "Get verified solutions for Music Rails, Iris Lake, Carousel, and Trippy Grid, including the chime order, six torches, horse poses, and four maze keys.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "Forest Escape Last Train Music Rails five-chime puzzle",
+        alt: "Forest Escape Last Train Music Rails five-chime puzzle solution",
       },
     ],
   },
@@ -93,7 +105,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Forest Escape Last Train Puzzle Guide: 4 Solutions",
     description:
-      "Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with verified routes and screenshots.",
+      "Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with verified routes, answers, and screenshots.",
     images: [imageUrls[0]],
   },
 };
@@ -107,22 +119,27 @@ const faqEntities = [
   {
     question: "How many torches are required at Iris Lake?",
     answer:
-      "The tested Iris Lake route requires six torches, one for each holder at the cave entrance.",
+      "The verified Iris Lake route requires six torches, one for each holder at the cave entrance.",
   },
   {
     question: "Is gambling required to complete Carousel?",
     answer:
-      "No. Complete Carousel by matching the pose symbols on the horses with the corresponding emotes. The gambling wheel is optional.",
+      "No. Complete Carousel by matching the pose symbols displayed on the horses with the corresponding visual emotes. The gambling wheel is optional.",
   },
   {
     question: "What keys are required in Trippy Grid?",
     answer:
-      "Trippy Grid requires the Blue, Green, Red, and Yellow Keys. Blue is behind a lever-opened hidden wall, Green and Yellow are found by following sound cues, and Red is collected in the guarded red section.",
+      "Trippy Grid requires the Blue, Green, Red, and Yellow Keys. Blue is behind a lever-opened hidden wall, Green and Yellow can be found by following sound cues, and Red is in the guarded red section.",
   },
   {
     question: "Can Trippy Grid clowns be killed?",
     answer:
       "No. The clowns can be knocked down or disabled temporarily, but they recover. Use rocks, crouching, and narrow side rooms to move around them.",
+  },
+  {
+    question: "Does completing Trippy Grid give four Warden Keys?",
+    answer:
+      "No. The Blue, Green, Red, and Yellow Keys are local Trippy Grid items. Completing the full maze awards one global Warden Key.",
   },
 ];
 
@@ -148,7 +165,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Puzzle Guide",
+          name: "Locations and Puzzle Guide",
           item: pageUrl,
         },
       ],
@@ -161,13 +178,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Forest Escape: Last Train Puzzle Guide — Four Verified Solutions",
+        "Forest Escape Last Train Puzzle Guide: Four Verified Solutions",
       description:
-        "This Forest Escape: Last Train puzzle guide provides verified solutions for Music Rails, Iris Lake, Carousel, and Trippy Grid. It covers the fixed 1-2-5-4-3 Music Rails chime sequence, the six-torch Iris Lake route and Watcher-Carrier strategy, the Carousel horse-symbol and emote puzzle, and the confirmed routes for the Blue, Green, Red, and Yellow Keys inside Trippy Grid.",
+        "A Forest Escape: Last Train puzzle guide with verified solutions for Music Rails, Iris Lake, Carousel, and Trippy Grid. It covers the 1-2-5-4-3 Music Rails sequence, the six-torch Iris Lake route, Carousel horse-pose matching, and the Blue, Green, Red, and Yellow Keys inside Trippy Grid.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-07-11",
-      dateModified: "2026-07-11",
+      dateModified: "2026-07-12",
+      articleSection: "Puzzle Guides",
       about: [
         {
           "@type": "VideoGame",
@@ -180,20 +198,22 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Forest Escape Last Train Music Rails solution",
+          name: "Music Rails solution",
         },
         {
           "@type": "Thing",
-          name: "Forest Escape Last Train Iris Lake torches",
+          name: "Iris Lake torch puzzle",
         },
         {
           "@type": "Thing",
-          name: "Forest Escape Last Train Carousel emotes",
+          name: "Carousel horse pose puzzle",
         },
         {
           "@type": "Thing",
-          name: "Forest Escape Last Train Trippy Grid keys",
+          name: "Trippy Grid keys",
         },
+      ],
+      mentions: [
         {
           "@type": "Thing",
           name: "Forest Escape Last Train Blue Key",
@@ -209,6 +229,32 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Forest Escape Last Train Yellow Key",
+        },
+        {
+          "@type": "Thing",
+          name: "Forest Escape Last Train Warden Key",
+        },
+      ],
+      isRelatedTo: [
+        {
+          "@type": "Article",
+          "@id": `${beginnerGuideUrl}#article`,
+          name: "Forest Escape Last Train Beginner Guide",
+          url: beginnerGuideUrl,
+        },
+        {
+          "@type": "Article",
+          "@id": `${wardenBossGuideUrl}#article`,
+          name: "Forest Escape Last Train Warden Boss Guide",
+          url: wardenBossGuideUrl,
+          description:
+            "A complete Warden guide covering The Depot, the Cannon Carriage, poison attacks, boss puzzles, weak points, and the final Ear phase.",
+        },
+        {
+          "@type": "Article",
+          "@id": `${achievementsGuideUrl}#article`,
+          name: "Forest Escape Last Train Achievements Guide",
+          url: achievementsGuideUrl,
         },
       ],
       isPartOf: {
@@ -257,12 +303,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Forest Escape: Last Train Puzzle Guide"
-          description="Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with verified sequences, six-torch routing, horse-emote clues, and all four colored maze keys."
+          description="Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with the 1-2-5-4-3 sequence, six-torch route, horse-pose clues, and all four colored maze keys."
           gameTitle="Forest Escape: Last Train"
           gameHref="/forest-escape-last-train"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="July 11, 2026"
+          updatedAt="July 12, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

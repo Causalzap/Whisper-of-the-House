@@ -143,12 +143,13 @@ export const guideClusters = [
     "label": "Route Map",
     "eyebrow": "Spotlight Hub",
     "hubStatus": "Active coverage",
-    "description": "Follow the active Forest Escape Last Train guide hub for first-run survival, train parts, controls, coal, shops, four verified puzzle solutions, all 41 achievements, Warden Keys, newspapers, and final-route planning.",
+    "description": "Follow the Forest Escape Last Train guide hub for first-run survival, puzzle solutions, The Depot Cannon Carriage, the complete Warden boss route, all 41 achievements, Warden Keys, and newspapers.",
     "coverage": [
-      "Three starting points, Easy vs Normal vs Hard, Front Light, Train Horn, Control Lever, confirmed controls, coal, furnace temperature, braking, reversing, derailment fixes, and first-run departure planning",
+      "Three starting points, Easy vs Normal vs Hard, Front Light, Train Horn, Control Lever, confirmed controls, Coal, furnace temperature, braking, reversing, derailment fixes, and first-run departure planning",
       "Barricades, shop prices, Aid Kits, Respawn Tokens, Revolver ammo, early threats, safe revives, checkpoints, solo play, online co-op, and Engineer-Scout role division",
       "Music Rails 1-2-5-4-3 sequence, Iris Lake six-torch route, Carousel horse emotes, Trippy Grid clown rules, and Blue, Green, Red, and Yellow Key solutions",
-      "All 41 achievements, Steam rarity snapshot, three-pass cleanup route, confirmed Warden-key rewards, newspaper tracking, Ring, Mythbuster, Monster Hunter planning, resources, gold, and ammunition"
+      "The Depot railway switches, Cannon Carriage attachment, six-key Boss Door, 1 Coal plus 2 Rock cannon cost, Eye and Ear swarms, poison movement, Warden platform puzzles, and final Ear strategy",
+      "All 41 achievements, three-pass cleanup route, confirmed Warden-key rewards, newspaper tracking, Ring, Mythbuster, Monster Hunter planning, resources, gold, and ammunition"
     ],
     "image": "/images/home/forest-escape-last-train-hub.webp",
     "imageFit": "contain",
@@ -164,12 +165,12 @@ export const guideClusters = [
         "title": "Forest Escape Last Train Guide Hub",
         "href": "/forest-escape-last-train",
         "type": "Spotlight Coverage",
-        "description": "Start here for first-run survival, four verified puzzle solutions, all 41 achievements, Warden Keys, newspapers, and final-route planning.",
+        "description": "Start here for first-run survival, four verified puzzle solutions, the complete Warden boss route, all 41 achievements, Warden Keys, and newspapers.",
         "image": "/images/home/forest-escape-last-train-hub.webp",
         "imageFit": "contain",
         "imagePadding": true,
         "home": {
-          "spotlightMeta": "First-run survival, train controls, four verified puzzles, all 41 achievements, Warden Keys, newspapers, and final-route planning"
+          "spotlightMeta": "First-run survival, four verified puzzles, The Depot, Cannon Carriage, complete Warden strategy, all 41 achievements, Warden Keys, and newspapers"
         },
         "archive": {
           "showInCollections": true,
@@ -180,7 +181,7 @@ export const guideClusters = [
         "title": "Forest Escape Last Train Beginner Guide",
         "href": "/forest-escape-last-train/beginner-guide",
         "type": "Guide",
-        "description": "Survive your first run with train-part locations, difficulty advice, confirmed controls, coal management, shop priorities, revives, checkpoints, and co-op roles.",
+        "description": "Survive your first run with train-part locations, difficulty advice, confirmed controls, Coal management, shop priorities, revives, checkpoints, and co-op roles.",
         "date": "Updated recently",
         "image": "/images/home/forest-escape-last-train-beginner-guide.webp",
         "imageFit": "contain",
@@ -191,7 +192,7 @@ export const guideClusters = [
           "latestOrder": 16,
           "spotlightFeature": true,
           "spotlightOrder": 1,
-          "spotlightMeta": "Three starting points, difficulty choice, train parts, controls, coal, furnace temperature, shops, revives, checkpoints, solo play, and co-op roles"
+          "spotlightMeta": "Three starting points, difficulty choice, train parts, controls, Coal, furnace temperature, shops, revives, checkpoints, solo play, and co-op roles"
         },
         "archive": {
           "showInCollections": true,
@@ -202,7 +203,7 @@ export const guideClusters = [
         "title": "Forest Escape Last Train Puzzle Guide",
         "href": "/forest-escape-last-train/locations-puzzle-guide",
         "type": "Guide",
-        "description": "Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with the chime order, six-torch route, horse emotes, and all four colored maze keys.",
+        "description": "Solve Music Rails, Iris Lake, Carousel, and Trippy Grid with the chime order, six-torch route, horse poses, and all four colored maze keys.",
         "date": "Updated recently",
         "image": "/images/home/forest-escape-last-train-puzzle-guide.webp",
         "imageFit": "contain",
@@ -213,11 +214,33 @@ export const guideClusters = [
           "latestOrder": 17,
           "spotlightFeature": true,
           "spotlightOrder": 2,
-          "spotlightMeta": "Music Rails 1-2-5-4-3, Iris Lake six torches, Carousel horse emotes, Trippy Grid clown rules, and all four colored keys"
+          "spotlightMeta": "Music Rails 1-2-5-4-3, Iris Lake six torches, Carousel horse poses, Trippy Grid clown rules, and all four colored keys"
         },
         "archive": {
           "showInCollections": true,
           "order": 3
+        }
+      },
+      {
+        "title": "Forest Escape Last Train Warden Boss Guide",
+        "href": "/forest-escape-last-train/warden-boss-guide",
+        "type": "Guide",
+        "description": "Beat the Warden with The Depot Cannon Carriage, six Warden Keys, cannon resource management, poison movement, platform puzzles, and final Ear strategy.",
+        "date": "Updated recently",
+        "image": "/images/home/forest-escape-last-train-warden-boss-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 18,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "The Depot, Cannon Carriage, six-key Boss Door, 1 Coal plus 2 Rock shots, poison, Eye and Ear swarms, boss puzzles, and final Ear"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
         }
       },
       {
@@ -232,14 +255,14 @@ export const guideClusters = [
         "home": {
           "latest": true,
           "latestFeatured": true,
-          "latestOrder": 18,
+          "latestOrder": 19,
           "spotlightFeature": true,
-          "spotlightOrder": 3,
-          "spotlightMeta": "All 41 achievements, Steam rarity snapshot, Warden Keys, newspapers, Ring, revives, Mythbuster, Monster Hunter, gold, and ammunition"
+          "spotlightOrder": 4,
+          "spotlightMeta": "All 41 achievements, Warden Keys, newspapers, Ring, revives, Mythbuster, Monster Hunter, gold, ammunition, and final-route achievements"
         },
         "archive": {
           "showInCollections": true,
-          "order": 4
+          "order": 5
         }
       }
     ]

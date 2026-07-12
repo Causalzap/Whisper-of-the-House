@@ -1,0 +1,1054 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const phaseColumns = [
+  { key: "Stage", label: "Stage" },
+  { key: "What Happens", label: "What happens" },
+  { key: "What To Do", label: "What to do" },
+  { key: "Main Failure", label: "Main failure" },
+];
+
+export const phaseRows = [
+  {
+    Stage: "The Depot",
+    "What Happens":
+      "You must attach the Cannon Carriage before entering the Warden route.",
+    "What To Do":
+      "Open the gates, change the railroad switches, and reverse the locomotive into the Cannon Carriage.",
+    "Main Failure":
+      "Reaching the Boss Door without the mounted cannons required for later weak points.",
+  },
+  {
+    Stage: "Boss Door",
+    "What Happens":
+      "The barrier opens after all six global Warden Keys are inserted.",
+    "What To Do":
+      "Check the train objective page, repair the carriage, stock Coal and Rock, and use the six keys.",
+    "Main Failure":
+      "Entering with weak fuel reserves or confusing Trippy Grid keys with global Warden Keys.",
+  },
+  {
+    Stage: "Mouth weak point",
+    "What Happens":
+      "A glowing point appears around the Warden's mouth or lower jaw.",
+    "What To Do":
+      "Keep the train moving, line up the cannon, and fire only while the glowing point takes damage.",
+    "Main Failure":
+      "Continuing to fire after the glow disappears and wasting Coal and Rock.",
+  },
+  {
+    Stage: "Eye and Ear swarms",
+    "What Happens":
+      "The Warden releases mouth-spawned Eyes and groups of flying Ears.",
+    "What To Do":
+      "Use handheld weapons on enemies close to the carriage and cannon fire only on dangerous ranged clusters.",
+    "Main Failure":
+      "Spending the entire cannon reserve on swarms before later weak-point windows.",
+  },
+  {
+    Stage: "Poison attack",
+    "What Happens":
+      "When the active Warden catches the train stopped, poison spreads across the carriage.",
+    "What To Do":
+      "Start moving immediately. The carriage is not a safe zone while the gas covers it.",
+    "Main Failure":
+      "Boarding the train and waiting inside the poison instead of driving away.",
+  },
+  {
+    Stage: "Whack-a-mole",
+    "What Happens":
+      "Moles appear from holes while some hold explosives.",
+    "What To Do":
+      "Hit normal moles with the Pickaxe, skip explosive targets, and reduce the counter to zero.",
+    "Main Failure":
+      "Hitting a mole holding an explosive and taking avoidable damage.",
+  },
+  {
+    Stage: "Owl Statues",
+    "What Happens":
+      "Four small Owl Statues have rotating faces and glowing eyes.",
+    "What To Do":
+      "Turn off each eye, break the four small statues, then destroy the central Owl and activate the switch.",
+    "Main Failure":
+      "Trying to break a small statue while its eye is still glowing.",
+  },
+  {
+    Stage: "Eye weak point",
+    "What Happens":
+      "A later cannon window exposes one of the Warden's eyes.",
+    "What To Do":
+      "Move until the cannon has a clean angle and fire directly into the exposed eye.",
+    "Main Failure":
+      "Firing at the protected face or discovering too late that the train is out of Coal.",
+  },
+  {
+    Stage: "Maze board",
+    "What Happens":
+      "Levers move connection points on a board with two yellow endpoints.",
+    "What To Do":
+      "Adjust the levers until one continuous path connects the left yellow point to the right one.",
+    "Main Failure":
+      "Changing several levers at once and losing track of which input moved each node.",
+  },
+  {
+    Stage: "Egg and Nest",
+    "What Happens":
+      "Chickens drop eggs and players receive a small trampoline.",
+    "What To Do":
+      "Bounce each egg along the platform and guide it into the nest without letting it hit the floor.",
+    "Main Failure":
+      "Crowding the same landing position or trying to carry the egg normally.",
+  },
+  {
+    Stage: "Final Ear",
+    "What Happens":
+      "The giant ear becomes the final cannon target after the platform objectives.",
+    "What To Do":
+      "Reposition the train, preserve enough Coal and Rock, and focus the mounted cannons on the exposed ear.",
+    "Main Failure":
+      "Entering the final window without cannon resources or trying to finish it with a handgun.",
+  },
+];
+
+export const resourceColumns = [
+  { key: "Resource", label: "Resource" },
+  { key: "Warden Use", label: "Warden use" },
+  { key: "Rule", label: "Rule" },
+];
+
+export const resourceRows = [
+  {
+    Resource: "Coal",
+    "Warden Use":
+      "Moves the train and pays part of every mounted-cannon shot.",
+    Rule:
+      "Do not treat the entire Coal supply as fuel. Every cannon shot also consumes 1 Coal.",
+  },
+  {
+    Resource: "Rock",
+    "Warden Use":
+      "Mounted-cannon ammunition and emergency ranged attacks.",
+    Rule:
+      "Every cannon shot consumes 2 Rock. Stop shooting immediately when the weak point closes.",
+  },
+  {
+    Resource: "Pickaxe",
+    "Warden Use":
+      "Whack-a-mole, Owl Statues, nearby mining points, and platform interactions.",
+    Rule:
+      "Keep at least one reliable puzzle runner alive and equipped.",
+  },
+  {
+    Resource: "Repair tools",
+    "Warden Use":
+      "Restore the train and Cannon Carriage during puzzle stops.",
+    Rule:
+      "Repair the Warden-facing side first instead of trying to perfect every barricade.",
+  },
+  {
+    Resource: "Healing",
+    "Warden Use":
+      "Keeps puzzle runners alive away from the carriage.",
+    Rule:
+      "Heal before starting a platform objective rather than waiting for someone to fall inside it.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To beat the **Warden** in Forest Escape: Last Train, first collect all **six
+Warden Keys** and attach the **Cannon Carriage at The Depot**.
+
+The fight follows one central loop: attack the Warden's current glowing weak
+point with the mounted cannon until he becomes dormant, stop at the next
+platform, solve its puzzle, activate the switch, and move on.
+
+Do not treat the train as a safe zone during poison. If the active Warden
+releases gas while the train is stopped, the poison can cover the entire
+carriage. Start moving immediately.
+
+Each mounted-cannon shot costs **1 Coal and 2 Rock**, so firing into an
+invulnerable body part can leave the train without enough Coal to escape the
+next poison attack.
+</GuideQuickAnswer>
+
+<div className="not-prose my-5">
+  <span className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-800">
+    Last verified: July 12, 2026 · Early Access launch build
+  </span>
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-boss-door-six-keys.webp"
+    alt="Forest Escape Last Train Boss Door opened after collecting six Warden Keys"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    The Warden route opens after all six global Warden Keys are inserted at the
+    barrier south of The Depot.
+  </figcaption>
+</figure>
+
+<h2 id="warden-fight-overview">
+  Forest Escape Last Train Warden fight overview
+</h2>
+
+The Warden is not a normal boss that can be damaged continuously.
+
+The complete fight alternates between:
+
+1. a glowing cannon weak point;
+2. Eye or flying-Ear pressure;
+3. a short dormant window;
+4. a platform puzzle;
+5. a switch that advances the fight;
+6. and another train movement section.
+
+My most important rule is:
+
+> Do not stop the train while the Warden is active. Damage the glowing weak
+> point first, wait for the dormant state, and only then brake beside the
+> platform puzzle.
+
+<GuideTable
+  caption="Warden weak points, platform objectives, correct response, and common failure conditions."
+  columns={phaseColumns}
+  rows={phaseRows}
+/>
+
+The table is best used as a mechanic checklist. When damage stops registering,
+do not assume the cannon is broken. Check whether:
+
+- the glowing weak point has closed;
+- the Warden is waiting for a platform switch;
+- the cannon lacks Coal or Rock;
+- or the train is positioned at the wrong angle.
+
+<h2 id="unlock-boss-door">
+  How to unlock the Warden Boss Door
+</h2>
+
+The barrier to the Warden requires **six global Warden Keys**.
+
+These are different from the Blue, Green, Red, and Yellow Keys inside Trippy
+Grid. Those four colored keys are local maze items. Completing the maze awards
+one global Warden Key.
+
+Before turning south toward the Boss Door:
+
+1. Open the objective page on the train.
+2. Confirm that all six Warden-key slots are filled.
+3. Confirm that the Cannon Carriage is attached.
+4. Repair the locomotive and the cannon wagon.
+5. Load Coal into the firebox.
+6. Gather a large Rock reserve.
+7. Put healing on the players leaving the train.
+8. Check that at least one player still has a Pickaxe.
+9. Insert the six keys at the barrier.
+
+You do not need every ordinary achievement before entering the final route.
+The practical requirements are the six keys and the mounted cannon wagon.
+
+For key tracking, use the{" "}
+<Link
+  href="/forest-escape-last-train/achievements-guide/#trippy-grid-warden-keys"
+  className="font-semibold text-emerald-700 hover:text-emerald-900"
+>
+  Warden Keys and newspapers section
+</Link>
+.
+
+<h2 id="the-depot-cannon-carriage">
+  The Depot: how to get the Cannon Carriage
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-depot-cannon-carriage.webp"
+    alt="Forest Escape Last Train locomotive reversing into the Cannon Carriage at The Depot"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    The Depot is the mandatory railway-switch location where the Cannon
+    Carriage is attached to the back of the train.
+  </figcaption>
+</figure>
+
+**The Depot** is located near the center of the map, before the Warden entrance.
+Its mission is to attach the additional carriage to the locomotive.
+
+The route is:
+
+1. Explore the Depot on foot.
+2. Open the gates blocking the railway.
+3. Inspect the junction switches before moving the locomotive.
+4. Change the switches so the rear of the train can line up with the Cannon
+   Carriage.
+5. Drive past a junction when needed to create enough reversing space.
+6. Reverse the locomotive slowly into the Cannon Carriage.
+7. Wait for the attachment to complete.
+8. Open the nearby reward chest.
+9. Reset the junction switches before leaving.
+
+Attaching the wagon completes the core requirement for the `Railway Juggernaut`
+achievement.
+
+After The Depot, a Giant Nose can chase the moving train and launch snot
+projectiles. The cannon can destroy dangerous projectiles, but every defensive
+shot costs the same **1 Coal and 2 Rock** needed for the final boss.
+
+I do not shoot every projectile. I save cannon fire for attacks that are about
+to hit the carriage and use movement or repairs for lower-risk pressure.
+
+<h2 id="warden-preparation">
+  What to bring before fighting the Warden
+</h2>
+
+<GuideTable
+  caption="Resources that matter during the final Warden route."
+  columns={resourceColumns}
+  rows={resourceRows}
+/>
+
+### Coal is both fuel and ammunition
+
+The biggest correction to ordinary train preparation is that Coal has two jobs.
+
+It moves the locomotive, but each cannon shot also consumes:
+
+- **1 Coal**
+- **2 Rock**
+
+This means rapid cannon fire can indirectly strand the train.
+
+A team can still have Rock available and fail to move because repeated cannon
+shots emptied the Coal reserve. That is especially dangerous when poison
+appears and immediate movement is required.
+
+<div className="not-prose my-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 shadow-sm">
+  <p className="font-bold text-amber-950">
+    Warden resource rule
+  </p>
+  <p className="mt-2 text-sm leading-6 text-amber-900">
+    Every cannon shot costs 1 Coal and 2 Rock. Coal is required for both
+    movement and cannon fire, so never unload into an invulnerable body part.
+    Preserve enough Coal to move the train after every platform.
+  </p>
+</div>
+
+### Do not enter with an exact minimum
+
+The number of shots needed changes with:
+
+- missed weak points;
+- poor cannon angles;
+- cannon fire spent on swarms;
+- the number of active Gunners;
+- and how quickly the team solves each platform.
+
+The arena provides chances to mine or collect more resources, but those should
+be treated as recovery opportunities, not the initial plan.
+
+### Bring repair tools
+
+The Warden, Eye swarms, flying Ears, poison pressure, and other enemies can
+damage the train while the team is solving puzzles.
+
+During every dormant platform window:
+
+1. solve the required puzzle;
+2. check Coal;
+3. collect nearby Rock;
+4. repair the most damaged side;
+5. heal;
+6. then activate the switch and leave.
+
+Do not let all four players stare at the same puzzle while the Cannon Carriage
+is being destroyed behind them.
+
+<h2 id="warden-team-roles">
+  Best co-op roles for the Warden fight
+</h2>
+
+A stable four-player clear is easier when every player has a persistent job.
+
+### Engineer
+
+The Engineer controls:
+
+- forward and reverse;
+- the brake;
+- Coal checks;
+- cannon positioning;
+- poison escapes;
+- and the call to stop at a dormant platform.
+
+The Engineer should not leave the controls during an active damage window.
+
+### Gunner
+
+The Gunner:
+
+- aims only at glowing weak points;
+- stops firing when damage ends;
+- clears dangerous ranged clusters;
+- watches the Coal and Rock cost;
+- and calls when the train needs to move for a better angle.
+
+A Gunner who fires continuously is more dangerous to the run than one who
+waits for a clean target.
+
+### Puzzle Runner
+
+The Puzzle Runner carries the Pickaxe and handles:
+
+- Whack-a-mole;
+- Owl Statues;
+- Maze-board levers;
+- the trampoline;
+- and the final platform switches.
+
+This player should receive healing before leaving the carriage.
+
+### Mechanic and Support
+
+The support player:
+
+- repairs the exposed carriage;
+- mines Coal and Rock;
+- clears enemies too close for the cannon;
+- watches for downed teammates;
+- and assists the Puzzle Runner after the mechanic is understood.
+
+With two players, combine Engineer and Gunner, then combine Puzzle Runner and
+Mechanic.
+
+<h2 id="warden-core-loop">
+  The Warden's core loop: damage, dormancy, puzzle, switch
+</h2>
+
+The most important part of the final fight is understanding when it is safe to
+stop.
+
+### While the Warden is active
+
+- Keep the locomotive moving.
+- Look for the glowing mouth, face, eye, or ear target.
+- Line up the mounted cannon.
+- Fire only while the health bar responds.
+- Clear Eye and Ear swarms that threaten the carriage.
+
+### When the Warden becomes dormant
+
+- Brake beside the next platform.
+- Leave the train.
+- Complete the platform puzzle.
+- Repair and refuel.
+- Activate the newly revealed switch.
+- Return to the carriage.
+- Start moving before the Warden becomes active again.
+
+Trying to solve a platform while the Warden is active exposes the stopped train
+to poison and additional enemy pressure.
+
+<h2 id="opening-swarms">
+  Opening attacks: Eye swarms and flying Ears
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-eye-ear-swarms.webp"
+    alt="Forest Escape Last Train Warden releasing Eye and flying Ear enemies around the Cannon Carriage"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    The Warden alternates between mouth-spawned Eye enemies and groups of
+    flying Ears while the train circles the arena.
+  </figcaption>
+</figure>
+
+The Warden uses two recurring enemy attacks:
+
+- he opens his mouth and releases a swarm of Eyes;
+- or he sends groups of flying Ears toward the train.
+
+The cannon can destroy clustered enemies at range, but it is expensive.
+Enemies standing directly beside or underneath the carriage may also sit
+outside the cannon's useful firing angle.
+
+My resource-saving response is:
+
+- cannon fire for large distant clusters;
+- handgun, bat, Pickaxe, or Rocks for enemies already on the carriage;
+- one player watches the rear while the Gunner faces the Warden;
+- and nobody spends cannon shots on a single weak enemy.
+
+These swarms are pressure mechanics. They are not the primary boss target.
+
+<h2 id="mouth-weak-point">
+  Mouth and lower-jaw weak point
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-mouth-weak-point.webp"
+    alt="Forest Escape Last Train mounted cannon aiming at the Warden glowing mouth weak point"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    Aim at the glowing mouth or exposed lower-jaw area rather than the
+    surrounding face.
+  </figcaption>
+</figure>
+
+The first obvious damage window appears around the Warden's mouth.
+
+Players may describe this as the mouth, chin, or lower jaw. The reliable
+indicator is not the body-part name—it is the visible glow and whether the
+health bar moves.
+
+To handle the window:
+
+1. Keep the train moving until the cannon reaches a clean side angle.
+2. Aim directly at the glowing area.
+3. Fire controlled shots.
+4. Watch the health bar.
+5. Stop immediately when the glow disappears or damage stops.
+6. Prepare for a dormant platform or another attack.
+
+Do not fire at the entire head. The protected face consumes ammunition without
+advancing the phase.
+
+<h2 id="whack-a-mole-puzzle">
+  Whack-a-mole puzzle: skip explosive targets
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-whack-a-mole-puzzle.webp"
+    alt="Forest Escape Last Train Warden whack-a-mole platform with safe and explosive targets"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    Hit ordinary moles with the Pickaxe, but leave any mole holding an explosive
+    untouched.
+  </figcaption>
+</figure>
+
+This platform has several holes and a counter.
+
+Normal moles rise briefly from the holes. Hit them with the Pickaxe to reduce
+the remaining counter.
+
+Some moles appear holding explosives. Do not hit them.
+
+A safe route is:
+
+1. Stand where you can see several holes.
+2. Wait for the target to rise fully.
+3. Confirm that it is not holding an explosive.
+4. Hit it once with the Pickaxe.
+5. Move your camera back toward the center.
+6. Continue until the counter reaches zero.
+7. Use the revealed switch while the Warden is dormant.
+
+In co-op, divide the holes between two players. Do not let everyone swing at
+the same target, because the next explosive mole can appear while the group is
+still attacking.
+
+<h2 id="poison-attack">
+  Warden poison attack: keep the train moving
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-poison-train.webp"
+    alt="Forest Escape Last Train Warden poison spreading across the stopped train"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    Poison can cover the entire stopped carriage. Being aboard the train does
+    not make the team safe.
+  </figcaption>
+</figure>
+
+The poison attack is a train-movement check.
+
+When the active Warden catches the train stopped, gas spreads across the
+carriage. Players standing aboard still take damage.
+
+The correct response is:
+
+1. Keep the Engineer near the controls while the Warden is active.
+2. Start moving as soon as the poison attack begins.
+3. Check the firebox immediately if the locomotive does not respond.
+4. Do not wait inside the carriage for the gas to disappear.
+5. Continue moving until the train leaves the covered area.
+
+<div className="not-prose my-6 rounded-2xl border border-red-200 bg-red-50 p-5 shadow-sm">
+  <p className="font-bold text-red-950">
+    The train is not a poison shelter
+  </p>
+  <p className="mt-2 text-sm leading-6 text-red-900">
+    Board the train to reach the controls, not to hide. If the carriage remains
+    stationary inside the gas, players aboard it continue taking damage.
+  </p>
+</div>
+
+This is why wasting Coal on invulnerable cannon shots is so dangerous. The team
+may reach the poison attack with Rock left but no Coal available to move.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="owl-statue-puzzle">
+  Owl Statue puzzle: turn off the eyes before breaking them
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-owl-statue-puzzle.webp"
+    alt="Forest Escape Last Train Warden platform with rotating Owl Statues and glowing eyes"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    Rotate each small Owl Statue until its eye stops glowing, then destroy it
+    with the Pickaxe.
+  </figcaption>
+</figure>
+
+The Owl platform contains four smaller statues around a large central Owl.
+
+Each small statue can be rotated or interacted with. One orientation turns its
+eye off.
+
+The solution is:
+
+1. Choose one small Owl.
+2. Interact with it until its eye is no longer glowing.
+3. Strike that statue with the Pickaxe.
+4. Repeat for all four small Owls.
+5. Break the large central Owl.
+6. Wait for the platform switch to appear.
+7. Activate the switch while the Warden is dormant.
+8. Return to the train.
+
+Do not start by attacking the central Owl. The four outer statues must be
+disabled and broken first.
+
+In co-op, assign one player to each side of the platform. Call out when an eye
+goes dark so another player does not rotate the same statue again.
+
+<h2 id="eye-weak-point">
+  Eye weak point: move the cannon into a clean angle
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-eye-weak-point.webp"
+    alt="Forest Escape Last Train Cannon Carriage firing at the Warden exposed eye"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    A later phase exposes one eye. Reposition the train until the mounted cannon
+    can hit the glowing target directly.
+  </figcaption>
+</figure>
+
+After a platform advances the fight, one of the Warden's eyes can become the
+next glowing target.
+
+The Engineer should call:
+
+- forward;
+- reverse;
+- brake;
+- left eye;
+- right eye;
+- and move again.
+
+The Gunner should wait for a direct angle instead of firing through the side of
+the face.
+
+If the cannon does not fire, check both resources:
+
+- at least 1 Coal;
+- at least 2 Rock.
+
+If the shot lands but the health bar does not move, the eye is protected or
+the cannon is hitting the surrounding face.
+
+<h2 id="maze-board-puzzle">
+  Maze board puzzle: connect the two yellow points
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-maze-board-puzzle.webp"
+    alt="Forest Escape Last Train Warden maze board with levers and yellow connection points"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    Use the levers to create a continuous route from the yellow point on the
+    left to the yellow point on the right.
+  </figcaption>
+</figure>
+
+This platform has a board covered with routes and movable connection nodes.
+
+Each lever changes one part of the board.
+
+The goal is to create one continuous path between:
+
+- the yellow point on the left;
+- and the yellow point on the right.
+
+My route is:
+
+1. Identify both yellow endpoints.
+2. Follow the existing line inward from the left endpoint.
+3. Find the first broken connection.
+4. Pull one lever.
+5. Check which node moved.
+6. Keep the change only if it extends the route.
+7. Continue toward the right endpoint.
+8. Activate the platform switch after the path is complete.
+
+Do not pull all the levers quickly. Changing one input at a time makes it much
+easier to understand which section of the line each lever controls.
+
+<h2 id="egg-nest-puzzle">
+  Egg and Nest puzzle: use the trampoline
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-egg-trampoline-puzzle.webp"
+    alt="Forest Escape Last Train player using a trampoline to bounce an egg toward the nest"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    Position the trampoline under each falling egg and guide the bounce toward
+    the nest without letting the egg hit the floor.
+  </figcaption>
+</figure>
+
+Two chickens drop eggs from one side of the platform. Players entering the
+objective receive a small trampoline.
+
+The egg must bounce across the platform and land in the nest.
+
+The safe co-op setup is:
+
+- Player 1 waits below the chickens.
+- Player 2 stands at the next landing point.
+- Player 3 covers the final approach to the nest.
+- The Engineer stays near the train.
+
+When an egg falls:
+
+1. Place the trampoline under its landing point.
+2. Let the egg bounce forward.
+3. Move the next trampoline into the predicted landing position.
+4. Continue the chain toward the nest.
+5. Do not allow the egg to hit the floor.
+
+Do not crowd the same bounce. Players can block one another or move the
+trampoline away from the correct landing point.
+
+In a smaller group, one player can follow the egg and reposition the
+trampoline between bounces, but this leaves less room for mistakes.
+
+<h2 id="final-ear-phase">
+  Final Warden phase: destroy the giant ear
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-final-ear-phase.webp"
+    alt="Forest Escape Last Train mounted cannons firing at the Warden giant ear during the final phase"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    Preserve enough Coal and Rock for the final ear window after the platform
+    puzzles are complete.
+  </figcaption>
+</figure>
+
+After the platform objectives, the giant ear becomes the final important cannon
+target.
+
+Before firing:
+
+1. Check the remaining Coal.
+2. Check the remaining Rock.
+3. Move until the cannon has a clean side angle.
+4. Apply the brake only when the target is exposed.
+5. Put available players on the mounted cannons.
+6. Focus the glowing ear.
+7. Stop firing if the target closes.
+8. Keep one player ready to refuel or revive.
+
+Handheld weapons are useful against the remaining swarms, but the mounted
+cannons provide the reliable boss damage.
+
+<figure className="my-8">
+  <Image
+    src="/images/forest-escape-last-train/forest-escape-last-train-warden-defeated.webp"
+    alt="Forest Escape Last Train Warden defeated after the final cannon phase"
+    width={1600}
+    height={900}
+    className="rounded-2xl border border-stone-200 shadow-sm"
+  />
+  <figcaption className="mt-3 text-sm leading-6 text-stone-600">
+    Completing the final cannon window defeats the Warden and starts the ending
+    sequence.
+  </figcaption>
+</figure>
+
+<h2 id="common-failures">
+  Why the Warden fight keeps failing
+</h2>
+
+### The train fills with poison
+
+The train stopped while the Warden was active.
+
+Start moving immediately. Do not remain aboard the stationary carriage and wait
+for the gas to end.
+
+### The train will not move during poison
+
+The Coal reserve may be empty.
+
+Remember that cannon shots consume Coal as well as Rock. Check the firebox
+before assuming the control lever is broken.
+
+### The cannon will not fire
+
+A shot requires **1 Coal and 2 Rock**. Check both resources.
+
+### Cannon shots land but deal no damage
+
+The current weak point is closed, the Warden is waiting for a platform switch,
+or the shot is hitting the protected face.
+
+### The team runs out of resources before the final ear
+
+Too many shots were spent on invulnerable body parts or individual swarm
+enemies.
+
+Use handheld weapons for nearby enemies and save cannon fire for glowing boss
+targets.
+
+### The Owl Statues will not break
+
+Their eyes are still glowing. Rotate each small Owl until the eye turns off,
+then use the Pickaxe.
+
+### The Whack-a-mole platform keeps damaging players
+
+Someone is hitting moles carrying explosives. Confirm the target before
+swinging.
+
+### The maze board does not progress
+
+Change one lever at a time and follow the route from the left yellow point.
+Randomly pulling every lever makes the board harder to read.
+
+### The eggs keep breaking
+
+The trampoline is missing the next landing point, or multiple players are
+crowding the same bounce.
+
+Spread the team along the path to the nest.
+
+### The platform switch does nothing
+
+The Warden may not be dormant yet. Return to the cannon, damage the glowing
+weak point, and activate the switch during the dormant window.
+
+<h2 id="solo-two-player">
+  Solo and two-player Warden adjustments
+</h2>
+
+The final route is much easier with four defined roles, but the same mechanics
+still apply in a smaller group.
+
+### Two players
+
+Use:
+
+- Player 1: Engineer and Gunner
+- Player 2: Puzzle Runner, Mechanic, and Support
+
+The Engineer should stay aboard until the Warden becomes dormant. The second
+player begins the platform objective while the Engineer checks Coal and repairs
+the carriage.
+
+### Solo
+
+The solo route is slower because every role belongs to one player.
+
+My priority order would be:
+
+1. make the Warden dormant;
+2. park directly beside the platform;
+3. check Coal;
+4. solve the puzzle;
+5. repair only critical damage;
+6. activate the switch;
+7. return to the controls immediately.
+
+Do not chase every swarm away from the train. Clear only the enemies blocking
+the next required action.
+
+<h2 id="warden-achievements">
+  Warden achievements
+</h2>
+
+The final route is tied to two major achievements:
+
+- **The End of the Beginning** — Collect all Warden Keys.
+- **Last Train Home** — Slay the Warden.
+
+Attaching the Cannon Carriage at The Depot also completes the core action for:
+
+- **Railway Juggernaut** — Mount a cannon on a train.
+
+For the complete 41-achievement route, use the{" "}
+<Link
+  href="/forest-escape-last-train/achievements-guide/"
+  className="font-semibold text-emerald-700 hover:text-emerald-900"
+>
+  Forest Escape Last Train Achievements Guide
+</Link>
+.
+
+<h2 id="related-guides">
+  Related Forest Escape Last Train guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the{" "}
+    <Link
+      href="/forest-escape-last-train"
+      className="font-semibold text-emerald-700 hover:text-emerald-900"
+    >
+      Forest Escape Last Train Guide Hub
+    </Link>{" "}
+    for the full guide roadmap.
+  </li>
+  <li>
+    Use the{" "}
+    <Link
+      href="/forest-escape-last-train/beginner-guide/"
+      className="font-semibold text-emerald-700 hover:text-emerald-900"
+    >
+      Beginner Guide
+    </Link>{" "}
+    for train controls, coal, repairs, shops, revives, and first-run survival.
+  </li>
+  <li>
+    Use the{" "}
+    <Link
+      href="/forest-escape-last-train/locations-puzzle-guide/"
+      className="font-semibold text-emerald-700 hover:text-emerald-900"
+    >
+      Locations and Puzzle Guide
+    </Link>{" "}
+    for Music Rails, Iris Lake, Carousel, Trippy Grid, and other named stops.
+  </li>
+  <li>
+    Use the{" "}
+    <Link
+      href="/forest-escape-last-train/achievements-guide/"
+      className="font-semibold text-emerald-700 hover:text-emerald-900"
+    >
+      Achievements Guide
+    </Link>{" "}
+    for Warden Keys, newspapers, one-run counters, and 100% planning.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Forest Escape Last Train Warden FAQ
+</h2>
+
+### How do I open the Warden Boss Door?
+
+Collect all six global Warden Keys and insert them at the barrier south of The
+Depot. Trippy Grid's four colored keys are local puzzle items and do not count
+as four separate Warden Keys.
+
+### Where do I get the cannon wagon?
+
+Complete The Depot. Open the gates, adjust the railroad switches, and reverse
+the locomotive into the Cannon Carriage.
+
+### How much does one cannon shot cost?
+
+Each mounted-cannon shot costs **1 Coal and 2 Rock**.
+
+### Does the Warden cannon use Coal?
+
+Yes. Coal powers the train and is also consumed by cannon fire.
+
+### Is the train safe during the poison attack?
+
+No. Poison can cover the entire stopped carriage and damage players aboard it.
+Start moving immediately.
+
+### Why does the Warden stop taking damage?
+
+The glowing weak point has closed, or the fight is waiting for a platform
+puzzle and switch. Stop firing to preserve resources.
+
+### How do I solve the Owl Statue puzzle?
+
+Rotate each small Owl until its eye stops glowing, break all four small statues
+with the Pickaxe, then break the large central Owl and activate the switch.
+
+### Which moles should I hit?
+
+Hit ordinary moles with the Pickaxe. Do not hit a mole holding an explosive.
+
+### How do I solve the Warden maze board?
+
+Use the levers to create one continuous route from the yellow point on the left
+to the yellow point on the right.
+
+### What do I do with the eggs?
+
+Use the trampoline to bounce the falling eggs across the platform and into the
+nest. The eggs break if they hit the floor.
+
+### What is the final Warden weak point?
+
+The giant ear is the final major cannon target after the platform objectives.
