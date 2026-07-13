@@ -1,0 +1,933 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const tierStatsColumns = [
+  { key: "Player", label: "Player" },
+  { key: "Tier", label: "Tier" },
+  { key: "Batting", label: "Batting" },
+  { key: "Running", label: "Running" },
+  { key: "Pitching", label: "Pitching" },
+  { key: "Fielding", label: "Fielding" },
+  { key: "Best Role", label: "Best role" },
+];
+
+export const tierStatsRows = [
+  {
+    Player: "Pablo Sanchez",
+    Tier: "S",
+    Batting: "10",
+    Running: "10",
+    Pitching: "9",
+    Fielding: "9",
+    "Best Role": "Middle-order run producer, LF, emergency ace",
+  },
+  {
+    Player: "Pete Wheeler",
+    Tier: "S",
+    Batting: "8",
+    Running: "10",
+    Pitching: "2",
+    Fielding: "7",
+    "Best Role": "Leadoff hitter, CF, primary base-stealing threat",
+  },
+  {
+    Player: "Angela Delvecchio",
+    Tier: "S",
+    Batting: "7",
+    Running: "4",
+    Pitching: "10",
+    Fielding: "1",
+    "Best Role": "Ace starting pitcher, lower-order bat",
+  },
+  {
+    Player: "Kenny Kawaguchi",
+    Tier: "S",
+    Batting: "3",
+    Running: "8",
+    Pitching: "10",
+    Fielding: "4",
+    "Best Role": "Ace starting pitcher, lower-order speed",
+  },
+  {
+    Player: "Kiesha Phillips",
+    Tier: "S",
+    Batting: "9",
+    Running: "9",
+    Pitching: "4",
+    Fielding: "6",
+    "Best Role": "Shortstop, middle-order hitter",
+  },
+  {
+    Player: "Achmed Khan",
+    Tier: "A",
+    Batting: "10",
+    Running: "7",
+    Pitching: "2",
+    Fielding: "5",
+    "Best Role": "Power hitter, 1B, second batting slot",
+  },
+  {
+    Player: "Amir Khan",
+    Tier: "A",
+    Batting: "7",
+    Running: "6",
+    Pitching: "8",
+    Fielding: "4",
+    "Best Role": "Secondary pitcher, 2B, sibling-pair utility",
+  },
+  {
+    Player: "Mikey Thomas",
+    Tier: "A",
+    Batting: "10",
+    Running: "4",
+    Pitching: "4",
+    Fielding: "7",
+    "Best Role": "Cleanup hitter, 3B or corner infield",
+  },
+  {
+    Player: "Luanne Lui",
+    Tier: "A",
+    Batting: "6",
+    Running: "10",
+    Pitching: "9",
+    Fielding: "4",
+    "Best Role": "RF, speed threat, relief pitcher",
+  },
+  {
+    Player: "Stephanie Morgan",
+    Tier: "A",
+    Batting: "6",
+    Running: "7",
+    Pitching: "5",
+    Fielding: "8",
+    "Best Role": "Shortstop or defensive infield replacement",
+  },
+  {
+    Player: "Ernie Steele",
+    Tier: "A",
+    Batting: "5",
+    Running: "6",
+    Pitching: "7",
+    Fielding: "10",
+    "Best Role": "Elite defensive specialist, utility pitcher",
+  },
+  {
+    Player: "Maria Luna",
+    Tier: "A with pink",
+    Batting: "6",
+    Running: "7",
+    Pitching: "3",
+    Fielding: "7",
+    "Best Role": "Conditional boosted hitter and fielder",
+  },
+  {
+    Player: "Ashley Webber",
+    Tier: "A when paired",
+    Batting: "5",
+    Running: "7",
+    Pitching: "6",
+    Fielding: "3",
+    "Best Role": "Sibling-pair utility player",
+  },
+  {
+    Player: "Sidney Webber",
+    Tier: "A when paired",
+    Batting: "5",
+    Running: "7",
+    Pitching: "6",
+    Fielding: "3",
+    "Best Role": "Sibling-pair utility player",
+  },
+];
+
+export const lineupColumns = [
+  { key: "Order", label: "Order" },
+  { key: "Player", label: "Player" },
+  { key: "Position", label: "Position" },
+  { key: "Role", label: "Why they are here" },
+];
+
+export const lineupRows = [
+  {
+    Order: "1",
+    Player: "Pete Wheeler",
+    Position: "CF",
+    Role:
+      "Combines 10 Running, 8 Batting, and 7 Fielding for leadoff pressure and center-field coverage.",
+  },
+  {
+    Order: "2",
+    Player: "Achmed Khan",
+    Position: "1B",
+    Role:
+      "Places a 10-rated bat ahead of Pablo while preserving the Khan pairing with Amir.",
+  },
+  {
+    Order: "3",
+    Player: "Pablo Sanchez",
+    Position: "LF",
+    Role:
+      "The best all-around run producer, with 10 Batting, 10 Running, and 9 Pitching.",
+  },
+  {
+    Order: "4",
+    Player: "Mikey Thomas",
+    Position: "3B",
+    Role:
+      "Adds 10 Batting and 7 Fielding to the cleanup and corner-infield roles.",
+  },
+  {
+    Order: "5",
+    Player: "Kiesha Phillips",
+    Position: "SS",
+    Role:
+      "Supplies 9 Batting, 9 Running, and enough fielding for the busiest infield position.",
+  },
+  {
+    Order: "6",
+    Player: "Amir Khan",
+    Position: "2B",
+    Role:
+      "Adds an 8-rated pitching option without using a roster spot on a pure pitcher.",
+  },
+  {
+    Order: "7",
+    Player: "Luanne Lui",
+    Position: "RF",
+    Role:
+      "Provides 10 Running and 9 Pitching as an outfielder, pinch runner, and relief arm.",
+  },
+  {
+    Order: "8",
+    Player: "Angela Delvecchio",
+    Position: "P",
+    Role:
+      "Starts with 10 Pitching while still contributing a 7-rated bat.",
+  },
+  {
+    Order: "9",
+    Player: "Kenny Kawaguchi",
+    Position: "C",
+    Role:
+      "Provides the second 10-rated starting pitcher while keeping his 3 Batting out of the top order.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The best standard-roster core is **Pablo Sanchez, Pete Wheeler, Angela
+Delvecchio, Kenny Kawaguchi, and Kiesha Phillips**.
+
+My balanced nine-player League team adds **Achmed Khan, Amir Khan, Mikey
+Thomas, and Luanne Lui**.
+
+Pete leads off and plays center field. Pablo bats third, Mikey hits cleanup,
+and Kiesha protects the middle of the order. Angela and Kenny alternate starts,
+while Pablo and Luanne provide relief innings.
+
+The strongest lineup is not the nine players with the highest Batting ratings.
+It needs **two elite starters, additional pitching depth, center-field speed,
+middle-infield coverage, and enough offense to score without creating several
+defensive holes**.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: July 13, 2026. The ratings below are base player-card values
+  before temporary Hot, Cold, Birthday, uniform-color, or teammate effects.
+  The main stats table covers the S- and A-tier players who matter most when
+  building a competitive League team.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/backyard-baseball/backyard-baseball-best-team-fielding-lineup.webp"
+    alt="Backyard Baseball 2026 fielding lineup with Angela pitching Pete in center field Mikey at third and Kenny catching"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The final alignment keeps Pete in center, Kiesha at shortstop, Mikey at
+    third, Angela pitching, and Kenny away from a long-throw infield position.
+  </figcaption>
+</figure>
+
+<h2 id="tier-list">
+  Backyard Baseball 2026 S and A Tier player stats
+</h2>
+
+This is a **League usefulness Tier List**, not a ranking based only on the sum
+of four ratings.
+
+I value players who solve more than one roster problem:
+
+- a hitter who can also pitch;
+- a fast runner who can cover center field;
+- an ace who does not completely weaken the batting order;
+- or a fielder who repairs a lineup already overloaded with sluggers.
+
+<GuideTable
+  caption="Base ratings and best roles for the S- and A-tier Backyard Kids in Backyard Baseball 2026."
+  columns={tierStatsColumns}
+  rows={tierStatsRows}
+/>
+
+### What S Tier means
+
+An S-tier player can be drafted early without already knowing the rest of the
+roster.
+
+Pablo, Pete, Angela, Kenny, and Kiesha each solve a high-value problem
+immediately:
+
+- Pablo provides elite offense and emergency pitching;
+- Pete provides leadoff speed and center-field range;
+- Angela and Kenny provide the two primary starters;
+- Kiesha adds offense, speed, and shortstop coverage.
+
+A Cold condition can still move one of them out of the starting lineup for a
+single game.
+
+### Competitive tournament cross-check
+
+The Welcome Backyard Tournament provides a useful competitive check on this
+Tier List because its players drafted for short, high-pressure matchups rather
+than a full casual League season.
+
+Tournament selections do not prove that one character is universally better
+than another. They are most useful when the same player appears repeatedly
+across independent teams, especially in high-value roles such as starting
+pitcher, leadoff hitter, shortstop, or center field.
+
+I use the tournament results as supporting evidence alongside base ratings and
+my own League games—not as a replacement for either one.
+
+### What A Tier means
+
+A-tier players are strong enough to start, but their value depends more on the
+role and surrounding roster.
+
+Examples:
+
+- Mikey is excellent when the team needs cleanup power and third-base fielding.
+- Luanne is valuable when speed and bullpen depth are both missing.
+- Ernie is better when defense matters more than adding another power hitter.
+- Ashley and Sidney move up when used together.
+- Maria moves up when the team is built around her pink-uniform condition.
+
+### B Tier
+
+Annie Frazier, Tony Delvecchio, Sally Dobbs, Dante Robinson, Lisa Crocket,
+Vicki Kawaguchi, Jorge Garcia, Dmitri Petrovich, and Jocinda Smith can all fill
+a useful role.
+
+I usually choose an S- or A-tier player first because the higher-tier option
+solves the same problem with fewer tradeoffs.
+
+### C Tier
+
+Billy Jean Blackwood, Gretchen Hasselhoff, Kimmy Eckman, Marky Dubois, Reese
+Worthington, Ricky Johnson, and Ronnie Dobbs are better suited to themed teams,
+challenge runs, favorite-character rosters, or a very specific active boost.
+
+C Tier does not mean unusable. It means I would not select the player early
+when building the safest all-purpose League team.
+
+<h2 id="best-team">
+  Best team, batting order, and fielding positions
+</h2>
+
+This is the balanced nine-player starting point I use for a normal League.
+
+<GuideTable
+  caption="Recommended batting order and fielding positions for a balanced Backyard Baseball 2026 League team."
+  columns={lineupColumns}
+  rows={lineupRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/backyard-baseball/backyard-baseball-best-team-batting-order.webp"
+    alt="Backyard Baseball 2026 batting order with Pete first Achmed second Pablo third and Mikey fourth"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The order puts speed first, concentrates run production in spots three
+    through five, and leaves the two pitching specialists near the bottom.
+  </figcaption>
+</figure>
+
+The order has three jobs:
+
+- **Pete and Achmed create the scoring opportunity.**
+- **Pablo, Mikey, and Kiesha convert it into runs.**
+- **Amir, Luanne, Angela, and Kenny preserve pitching and defensive depth.**
+
+Pablo is capable of hitting first, but that wastes part of his run-producing
+value. I prefer giving him a chance to bat with Pete or Achmed already on base.
+
+Kenny remains ninth because his value comes from pitching and running rather
+than regular contact.
+
+<h2 id="draft-plan">
+  How to draft the team
+</h2>
+
+I draft by roster need rather than by choosing nine favorite characters.
+
+The priority order is:
+
+1. elite all-around production;
+2. leadoff speed and center-field coverage;
+3. two starting pitchers;
+4. middle-order power;
+5. shortstop and third-base coverage;
+6. additional relief pitching;
+7. conditional boosts after the base roster works.
+
+### Start with Pablo and Pete
+
+Pablo is the safest first selection.
+
+His base ratings are:
+
+- 10 Batting;
+- 10 Running;
+- 9 Pitching;
+- 9 Fielding.
+
+He can produce runs, cover an outfield position, and enter as a high-quality
+relief pitcher.
+
+Pete is the movement engine of the team.
+
+<figure className="my-8">
+  <Image
+    src="/images/backyard-baseball/backyard-baseball-pete-wheeler-skill-ratings.webp"
+    alt="Pete Wheeler ratings showing 8 batting 10 running 2 pitching and 7 fielding in Backyard Baseball 2026"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pete's 10 Running, 8 Batting, and 7 Fielding make him the natural leadoff
+    hitter and center fielder.
+  </figcaption>
+</figure>
+
+Pete does not need 10 Batting to be an S-tier player. His value comes from
+reaching base, pressuring the defense, taking extra bases, and covering the
+largest part of the outfield.
+
+Do not move him into a low-movement position merely because another character
+can stand in center.
+
+### Secure Angela and Kenny before adding another slugger
+
+Angela and Kenny both have 10 Pitching, but the rest of their ratings are very
+different.
+
+Angela:
+
+- 7 Batting;
+- 4 Running;
+- 10 Pitching;
+- 1 Fielding.
+
+Kenny:
+
+- 3 Batting;
+- 8 Running;
+- 10 Pitching;
+- 4 Fielding.
+
+Angela provides more offense. Kenny provides more running and slightly more
+fielding.
+
+I alternate them as starting pitchers rather than exhausting one ace and
+treating the other as an emergency replacement.
+
+Pablo is the first relief option. Luanne, with 9 Pitching, gives the roster a
+fourth usable arm.
+
+### Solve shortstop and third base before adding more power
+
+Kiesha belongs at shortstop because her 9 Batting and 9 Running are supported
+by 6 Fielding.
+
+Mikey moves to third in the final alignment. His 10 Batting and 7 Fielding make
+him a better corner-infield fit than using Kenny there only because Kenny has a
+high Pitching rating.
+
+Pitching and Fielding are separate player-card values. A 10-rated pitcher is
+not automatically the best option for long throws across the diamond.
+
+Kenny at catcher is a practical way to protect the alignment, not a permanent
+rule. Against a team that steals aggressively, I am willing to test a stronger
+defensive catcher and move Kenny to another low-risk position.
+
+<h2 id="real-game-results">
+  What the lineup produced in one League game
+</h2>
+
+This was an unusually lopsided **six-inning Playground Pro League game** at
+Playground Commons with Errors enabled.
+
+It is not a projected season average or a controlled comparison between every
+player. I use the box score only to check whether the planned batting roles
+worked.
+
+In that game:
+
+- Kiesha went **5-for-5**;
+- recorded **7 RBIs**;
+- hit **1 home run**;
+- and finished with a **1.000 batting average**.
+
+Pablo went **4-for-5 with 6 RBIs and 1 home run**.
+
+The complete team finished with:
+
+- **29 hits in 43 at-bats**;
+- **22 runs**;
+- **3 home runs**;
+- and a **.674 team batting average**.
+
+<figure className="my-8">
+  <Image
+    src="/images/backyard-baseball/backyard-baseball-kiesha-phillips-five-for-five.webp"
+    alt="Backyard Baseball 2026 team statistics showing Kiesha Phillips five for five with seven RBIs and one home run"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Kiesha's five-hit, seven-RBI game shows why she stays in the middle of the
+    order instead of being treated only as a defensive shortstop.
+  </figcaption>
+</figure>
+
+Those numbers show the ceiling of the lineup in one blowout, not what I expect
+it to average across a full 14-game season.
+
+The useful conclusion is that the team has several players capable of carrying
+an inning. It does not depend entirely on Pablo producing every run.
+
+<h2 id="rotation">
+  Starting rotation and bullpen plan
+</h2>
+
+My pitching order is:
+
+1. Angela Delvecchio
+2. Kenny Kawaguchi
+3. Pablo Sanchez
+4. Luanne Lui
+5. Amir Khan when the score allows a lower-pressure option
+
+Angela and Kenny alternate starts.
+
+Pablo enters when I need a strong replacement without introducing a weak hitter
+into the lineup. Luanne provides another high-rated arm and can remain useful
+in right field when she is not pitching.
+
+### When to change pitchers
+
+I prepare the next pitcher when:
+
+- visible fatigue appears;
+- the selected pitch location begins drifting;
+- a useful pitch option becomes unavailable;
+- the opponent's strongest hitters are approaching;
+- or the current lead is large enough to preserve the starter for the next
+  League game.
+
+With a safe lead, I do not automatically use Angela or Kenny to finish the
+game. A weaker relief option can protect the ace for the next matchup.
+
+That decision is more useful than relying on one universal pitch count.
+
+<h2 id="boosts">
+  Player boosts, teammate effects, and temporary condition
+</h2>
+
+The stats table uses base ratings.
+
+It does not automatically include:
+
+- team-color conditions;
+- sibling or teammate effects;
+- Hot and Cold status;
+- or Birthday Boost.
+
+I treat a boost as a reason to reconsider two otherwise close players—not as a
+reason to abandon the team's pitching or defensive structure.
+
+### Maria Luna and pink uniforms
+
+Maria's player description directly connects her best performance with wearing
+her favorite pink uniform.
+
+In the correct setup, she produced a **325-foot home run**.
+
+<figure className="my-8">
+  <Image
+    src="/images/backyard-baseball/backyard-baseball-maria-luna-pink-boost-325-home-run.webp"
+    alt="Maria Luna hitting a 325 foot home run for a pink Backyard Baseball 2026 team"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Maria becomes a more attractive A-tier option when the team is already
+    using the pink condition associated with her player description.
+  </figcaption>
+</figure>
+
+I place Maria in conditional A Tier rather than permanent S Tier.
+
+The pink setup raises her upside, but choosing the team color around Maria is
+still a roster-building cost.
+
+### Ashley and Sidney Webber
+
+Ashley and Sidney have identical base ratings:
+
+- 5 Batting;
+- 7 Running;
+- 6 Pitching;
+- 3 Fielding.
+
+Their descriptions make the pairing the important part of the selection.
+
+I use them together only when both players have clear positions. A teammate
+effect is not valuable when the pair creates the same defensive weakness twice.
+
+### Achmed and Amir Khan
+
+Achmed provides 10 Batting and Amir provides 8 Pitching.
+
+That makes the pairing easier to justify than a boost combination made from two
+players with the same narrow role.
+
+The balanced lineup already has space for both:
+
+- Achmed at first base and second in the order;
+- Amir at second base and as a secondary pitcher.
+
+### Hot and Cold players
+
+When Hot and Cold Players is enabled, check the condition icons before every
+League game.
+
+I review:
+
+- the starting pitcher;
+- the first five batting positions;
+- shortstop and center field;
+- and any player selected mainly for one elite rating.
+
+The interface does not clearly expose one universal numerical formula for every
+Hot or Cold state. I use the icon as a lineup decision signal rather than
+claiming that every player receives the same fixed modifier.
+
+### Birthday Boost
+
+Birthday Boost is another temporary condition, not a permanent change to the
+base stats table.
+
+When a player receives a birthday-related condition:
+
+1. check the icon before confirming the lineup;
+2. compare the player with the normal starter;
+3. identify which role is actually improved;
+4. use the boost only when the position still makes sense.
+
+A temporary boost does not automatically make a low-fielding player the best
+shortstop or a weak pitcher the best starter.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="custom-kid-builds">
+  Best Custom Kid builds
+</h2>
+
+A Custom Kid receives **20 skill points** to distribute across Batting, Running,
+Pitching, and Fielding.
+
+Because each category begins at 1, the final visible ratings total 24.
+
+Do not spend the points until the rest of the team reveals its missing role.
+
+### Leadoff center fielder
+
+Use:
+
+- 6 Batting
+- 10 Running
+- 1 Pitching
+- 7 Fielding
+
+Choose this build when Pete or another true center-field runner is missing.
+
+It reaches base often enough, creates speed pressure, and has enough fielding
+to use the 10 Running rating in the largest outfield area.
+
+### Power corner infielder
+
+Use:
+
+- 10 Batting
+- 4 Running
+- 1 Pitching
+- 9 Fielding
+
+Choose this build when the roster already has speed and pitching but needs
+another middle-order hitter.
+
+Use the player at first or third rather than center field.
+
+### Two-way pitcher
+
+Use:
+
+- 7 Batting
+- 3 Running
+- 10 Pitching
+- 4 Fielding
+
+Choose this build when Angela or Kenny is missing and the team needs another
+ace without adding a completely empty batting slot.
+
+Do not create this build when Angela, Kenny, Pablo, Luanne, and Amir already
+provide enough pitching depth.
+
+### Balanced utility player
+
+Use:
+
+- 6 Batting
+- 6 Running
+- 6 Pitching
+- 6 Fielding
+
+This player can fill several positions and works well for a themed roster or a
+first Custom Kid experiment.
+
+The tradeoff is that the build does not outperform an S-tier specialist at any
+one job.
+
+<h2 id="alternative-teams">
+  Alternative team builds
+</h2>
+
+The balanced lineup is the safest general answer, but a different goal can
+justify a different roster.
+
+### Power-focused lineup
+
+Start with:
+
+- Pablo Sanchez
+- Kiesha Phillips
+- Mikey Thomas
+- Achmed Khan
+- Angela Delvecchio
+
+Then add:
+
+- one 10-rated runner;
+- a second elite pitcher;
+- and enough fielding to protect shortstop and center field.
+
+Do not draft nine slow power hitters. The extra offense can be lost through
+poor outfield coverage and weak baserunning.
+
+### Speed and defense lineup
+
+Start with:
+
+- Pete Wheeler
+- Luanne Lui
+- Kiesha Phillips
+- Stephanie Morgan
+- Ernie Steele
+
+Then add Pablo for offense and Angela or Kenny for the primary pitching role.
+
+This build is useful on larger fields, for stolen-base objectives, and for
+players who prefer pressure and defense over repeated home-run attempts.
+
+### Sibling-focused lineup
+
+Useful pairings include:
+
+- Achmed and Amir Khan;
+- Ashley and Sidney Webber;
+- Tony and Angela Delvecchio;
+- Sally and Ronnie Dobbs;
+- Kenny and Vicki Kawaguchi.
+
+Check the positions before committing.
+
+A themed team can activate useful relationships while still lacking a natural
+center fielder, shortstop, or second ace.
+
+<h2 id="mlb-players">
+  Where the seven MLB pros fit
+</h2>
+
+The seven unlockable MLB pros are:
+
+- Vladimir Guerrero
+- Jason Giambi
+- Sammy Sosa
+- Chipper Jones
+- Kenny Lofton
+- Mark McGwire
+- Jeff Bagwell
+
+I do not place them in the standard S/A table because most players begin League
+Play before all seven are unlocked.
+
+When one becomes available, replace a role—not merely a recognizable name.
+
+Before making the change, check whether removing the current player would cost:
+
+- center-field speed;
+- shortstop coverage;
+- one of the two primary pitchers;
+- or the only reliable relief option.
+
+Use the{" "}
+<Link href="/backyard-baseball/unlock-all-players/">
+  complete player unlock guide
+</Link>{" "}
+for each MLB pro's current condition and verification status.
+
+<h2 id="common-mistakes">
+  Team-building mistakes
+</h2>
+
+### Ranking players only by total rating points
+
+The location of the points matters more than the sum.
+
+A 10-rated skill can still be wasted when the player is placed in the wrong
+role.
+
+### Drafting only one elite pitcher
+
+Fatigue can force a change within one game and can affect the next League
+matchup.
+
+### Filling the batting order before solving defense
+
+Another power hitter does not repair shortstop, third base, catcher, or center
+field.
+
+### Treating the Tier List as permanent
+
+Hot and Cold status, boosts, opponent speed, and field dimensions can change
+the correct starter for one game.
+
+### Forcing a teammate boost without a position plan
+
+A relationship bonus is not worth creating two duplicated or weak defensive
+roles.
+
+### Building a Custom Kid before identifying the missing job
+
+Spend the 20 points after the rest of the roster shows whether the team needs
+speed, power, defense, or pitching.
+
+### Replacing every standard player with an MLB pro
+
+The unlocked player should improve a specific role. A famous power hitter does
+not automatically repair pitching depth or center-field coverage.
+
+<h2 id="related-guides">
+  Related Backyard Baseball guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the{" "}
+    <Link href="/backyard-baseball">
+      Backyard Baseball 2026 Guide Hub
+    </Link>{" "}
+    for modes, League progression, card packs, and the complete guide roadmap.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/backyard-baseball/unlock-all-players/">
+      Player Unlock Guide
+    </Link>{" "}
+    for special characters, hidden Backyard Kids, and all seven MLB pros.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/backyard-baseball/beginner-guide/">
+      Beginner Guide
+    </Link>{" "}
+    for batting, pitching, fielding, runner controls, and difficulty choices.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/backyard-baseball/achievements-guide/">
+      Achievements Guide
+    </Link>{" "}
+    to combine the League roster with championship, card, and unlock progress.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Backyard Baseball best players FAQ
+</h2>
+
+### Who is the best overall player?
+
+Pablo Sanchez is the safest overall first selection. He has 10 Batting,
+10 Running, 9 Pitching, and 9 Fielding.
+
+### Who is the best leadoff hitter?
+
+Pete Wheeler is the best standard leadoff option because he combines
+10 Running with 8 Batting and 7 Fielding.
+
+### Who are the best pitchers?
+
+Angela Delvecchio and Kenny Kawaguchi both have 10 Pitching. Pablo Sanchez has
+9 Pitching and is the strongest emergency relief option in the recommended
+lineup.
+
+### Who is the best shortstop?
+
+Kiesha Phillips is the best offensive shortstop option. Stephanie Morgan is a
+stronger defense-first alternative when the lineup already has enough power.
+
+### Does the Tier List include all player stats?
+
+The detailed table includes all S- and A-tier standard Backyard Kids. B- and
+C-tier players remain listed without a full stats table to keep the page focused
+on competitive team building rather than becoming a complete wiki database.
+
+### Is Maria Luna S Tier with a pink uniform?
+
+The pink condition makes Maria substantially more attractive, but I keep her in
+conditional A Tier because the team must be designed around that requirement.
+
+### What is the best Custom Kid build?
+
+Use 6/10/1/7 for a leadoff center fielder, 10/4/1/9 for a power corner
+infielder, or 7/3/10/4 for a two-way pitcher.
+
+### Should I add an MLB pro immediately after unlocking one?
+
+Only when the player improves a specific role without removing essential
+pitching, fielding, or center-field speed.

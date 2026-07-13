@@ -132,6 +132,142 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Backyard Baseball 2026",
+    "game": "Backyard Baseball 2026",
+    "href": "/backyard-baseball",
+    "slug": "backyard-baseball",
+    "kind": "game",
+    "status": "active",
+    "accent": "purple",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Team Planner",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the Backyard Baseball 2026 guide hub for beginner controls, all five difficulties, League Play, the S- and A-tier list, the best team and lineup, player unlocks, card packs, Tokens, and all 51 achievements.",
+    "coverage": [
+      "First-hour route, Tutorial, Quick Play, Pickup Game, Backyard Derby, Wiggle Ball, League Play, batting timing, pitching, manual fielding, runner control, sprinting, sliding, and Power-Up strategy",
+      "New Kid, Sandlot Star, Playground Pro, Backyard Legend, and Neighborhood Hero difficulty progression, Swing Spot Assist, Errors, Hot and Cold Players, Birthday Boost, day and night settings, and multiplayer availability",
+      "Eight-team and 14-game League structure, BYB All-City Playoffs, Super Entire Nation Tournament, Ultra Grand Championship, pitching stamina, substitutions, defensive alignment, postseason planning, and championship progression",
+      "Complete S- and A-tier player ratings, recommended nine-player team, batting order, fielding lineup, pitching rotation, Pete Wheeler, Pablo Sanchez, Angela Delvecchio, Kenny Kawaguchi, Kiesha Phillips, boosts, and Custom Kid builds",
+      "Sixteen known selectable unlocks, Mr. Clanky, Vinnie the Gooch, Sunny Day, six hidden Backyard Kids, seven MLB Pros, card and Token routes, all 51 achievements, five-phase 100% roadmap, hidden conditions, card collection, and unlock troubleshooting"
+    ],
+    "image": "/images/home/backyard-baseball-hub.webp",
+    "imageFit": "contain",
+    "imagePadding": true,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 5,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Backyard Baseball 2026 Guide Hub",
+        "href": "/backyard-baseball",
+        "type": "Spotlight Coverage",
+        "description": "Start here for beginner controls, six game modes, five difficulties, League Play, the S- and A-tier list, player unlocks, card packs, Tokens, and all 51 achievements.",
+        "image": "/images/home/backyard-baseball-hub.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "spotlightMeta": "First-hour route, six game modes, five difficulties, 14-game League, Tier List, best team, hidden players, MLB Pros, cards, Tokens, and all 51 achievements"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Backyard Baseball 2026 Beginner Guide",
+        "href": "/backyard-baseball/beginner-guide",
+        "type": "Guide",
+        "description": "Learn batting, pitching, fielding, runner control, sliding, stamina, substitutions, all six Power-Ups, and which of the five difficulties to choose.",
+        "date": "Updated recently",
+        "image": "/images/home/backyard-baseball-beginner-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 20,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "First-game settings, five difficulties, batting timing, pitching stamina, fielding, runner control, sliding, substitutions, and all six Power-Ups"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Backyard Baseball 2026 Best Players & Tier List",
+        "href": "/backyard-baseball/best-players-team-lineup",
+        "type": "Guide",
+        "description": "Compare S- and A-tier player ratings, copy the recommended nine-player team, and plan the best batting order, fielding lineup, rotation, boosts, and Custom Kid build.",
+        "date": "Updated recently",
+        "image": "/images/home/backyard-baseball-best-players-tier-list.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 21,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "S- and A-tier ratings, recommended nine-player roster, batting order, fielding lineup, pitching rotation, player boosts, and Custom Kid builds"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Backyard Baseball 2026 Unlock All Players Guide",
+        "href": "/backyard-baseball/unlock-all-players",
+        "type": "Guide",
+        "description": "Unlock Mr. Clanky, Vinnie the Gooch, Sunny Day, six hidden Backyard Kids, and seven MLB Pros with card, Token, Derby, Wiggle Ball, and League routes.",
+        "date": "Updated recently",
+        "image": "/images/home/backyard-baseball-unlock-all-players.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 22,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "Mr. Clanky, Vinnie, Sunny Day, six hidden Backyard Kids, seven MLB Pros, card pulls, Tokens, steals, Derby targets, and League routes"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "Backyard Baseball 2026 Achievements Guide",
+        "href": "/backyard-baseball/achievements-guide",
+        "type": "Guide",
+        "description": "Complete all 51 achievements with a five-phase 100% roadmap covering hidden conditions, strikeouts, League trophies, Power-Ups, player unlocks, and card collection.",
+        "date": "Updated recently",
+        "image": "/images/home/backyard-baseball-achievements-guide.webp",
+        "imageFit": "contain",
+        "imagePadding": true,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 23,
+          "spotlightFeature": true,
+          "spotlightOrder": 4,
+          "spotlightMeta": "All 51 achievements, five-phase roadmap, strikeout strategy, League double plays, postseason trophies, second championship, hidden conditions, and card cleanup"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      }
+    ]
+  },
+  {
     "title": "Forest Escape Last Train",
     "game": "Forest Escape: Last Train",
     "href": "/forest-escape-last-train",
