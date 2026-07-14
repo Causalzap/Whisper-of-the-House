@@ -1,0 +1,1070 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const tierListColumns = [
+  { key: "Tier", label: "Tier" },
+  { key: "Avatar", label: "Avatar" },
+  { key: "Best Use", label: "Best use" },
+  { key: "Main Risk", label: "Main risk" },
+];
+
+export const tierListRows = [
+  {
+    Tier: "S",
+    Avatar: "Chrono Child",
+    "Best Use":
+      "Safest first clear, unfamiliar bosses, stable Time Stop loops, and consistent Institute progression",
+    "Main Risk":
+      "Lower immediate burst than a completed specialist Build",
+  },
+  {
+    Tier: "A",
+    Avatar: "Blossom Blade",
+    "Best Use":
+      "Fast melee clearing, Swords, Bleed, and grouped-enemy Avatar Skill damage",
+    "Main Risk":
+      "Must remain close enough for Battojutsu, Swords, and Bleed to connect",
+  },
+  {
+    Tier: "A",
+    Avatar: "Golden Gunslinger",
+    "Best Use":
+      "Safe ranged damage, piercing projectiles, narrow rooms, and repeated Dash reloads",
+    "Main Risk":
+      "Needs an actual Gun package plus reload or projectile support",
+  },
+  {
+    Tier: "B",
+    Avatar: "Scarlet Pirate",
+    "Best Use":
+      "Cannon burst, Bombard damage, Health scaling, and short boss fights",
+    "Main Risk":
+      "Self-damage and reload problems can end a run faster than enemy damage",
+  },
+];
+
+export const buildSummaryColumns = [
+  { key: "Avatar", label: "Avatar" },
+  { key: "Build", label: "Build" },
+  { key: "Core Pieces", label: "Core pieces" },
+  { key: "Use It When", label: "Use it when" },
+];
+
+export const buildSummaryRows = [
+  {
+    Avatar: "Chrono Child",
+    Build: "Time-Slow Release",
+    "Core Pieces":
+      "Time Shield, Avatar Skill damage, release effects, Limited Time recovery",
+    "Use It When":
+      "The route fails from damage taken, boss patterns, or an unstable clock",
+  },
+  {
+    Avatar: "Blossom Blade",
+    Build: "Sword and Bleed",
+    "Core Pieces":
+      "Swords, nearby damage, Avatar Skill damage, Bleed, and sustain",
+    "Use It When":
+      "Enemies stay grouped and the route rewards close-range room clearing",
+  },
+  {
+    Avatar: "Golden Gunslinger",
+    Build: "Projectile Reload",
+    "Core Pieces":
+      "Gun-tagged weapons, Quick Reload, Pierce, Projectile Size, boss damage",
+    "Use It When":
+      "Close range is unsafe or enemies line up through narrow passages",
+  },
+  {
+    Avatar: "Scarlet Pirate",
+    Build: "Cannon Burst",
+    "Core Pieces":
+      "Cannons, Bombard damage, Reload Speed, maximum Health, and shields",
+    "Use It When":
+      "One large burst can finish an elite or boss before the clock becomes a problem",
+  },
+];
+
+export const problemColumns = [
+  { key: "Problem", label: "What ends the run?" },
+  { key: "Fix First", label: "Fix first" },
+  { key: "Wrong Fix", label: "Do not solve it with" },
+];
+
+export const problemRows = [
+  {
+    Problem: "Limited Time expires before the next elite",
+    "Fix First":
+      "Time recovery, slower Time Flow, movement speed, or a shorter route",
+    "Wrong Fix":
+      "Luck, item drop rate, or another equipment slot with nothing useful to equip",
+  },
+  {
+    Problem: "A same-level elite survives too long",
+    "Fix First":
+      "Attack, matching weapon bonuses, Avatar Skill damage, and elite damage",
+    "Wrong Fix":
+      "Starting Level alone; reaching the enemy sooner does not increase kill speed",
+  },
+  {
+    Problem: "One boss hit removes most of the run",
+    "Fix First":
+      "Health, Defense, a release shield, or earlier Time Stop timing",
+    "Wrong Fix":
+      "Faster Time Flow unless the added damage immediately shortens the fight",
+  },
+  {
+    Problem: "The Build has high numbers but low real damage",
+    "Fix First":
+      "Check the end-of-run damage report and remove attacks that rarely connect",
+    "Wrong Fix":
+      "Rarity color or Attack Multiplier without testing the actual attack pattern",
+  },
+  {
+    Problem: "The first Desert room feels harder than Terrae Motus",
+    "Fix First":
+      "A permanent main weapon, direct Attack, one time-recovery effect, and a normal-elite route",
+    "Wrong Fix":
+      "Optional challenge rooms before ordinary Desert enemies die consistently",
+  },
+  {
+    Problem: "A Time-Stealing enemy destroys the clock",
+    "Fix First":
+      "Direct single-target burst, aiming mode, movement speed, and immediate target priority",
+    "Wrong Fix":
+      "Clearing every common enemy while the marked target continues draining time",
+  },
+];
+
+export const chronoColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Take", label: "Take" },
+  { key: "Reason", label: "Reason" },
+];
+
+export const chronoRows = [
+  {
+    Priority: "Core",
+    Take: "Time Shield or another slower-Time-Flow effect",
+    Reason:
+      "Makes each displayed second last longer and gives more room to position the release attack.",
+  },
+  {
+    Priority: "Core",
+    Take: "Avatar Skill damage or a separate Time-Stop-end damage effect",
+    Reason:
+      "Chrono Child already attacks when Time Stop is released, so these choices reinforce the same loop.",
+  },
+  {
+    Priority: "High",
+    Take: "Limited Time recovery or maximum Limited Time",
+    Reason:
+      "Prevents a safe Build from expiring before the next elite.",
+  },
+  {
+    Priority: "High",
+    Take: "XP from elites and bosses",
+    Reason:
+      "Lets the route skip low-value common enemies and stay close to the next level bracket.",
+  },
+  {
+    Priority: "Support",
+    Take: "Health, Defense, or a shield after release",
+    Reason:
+      "Protects the moment when enemies and frozen projectiles begin moving again.",
+  },
+];
+
+export const blossomColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Take", label: "Take" },
+  { key: "Failure Sign", label: "Failure sign" },
+];
+
+export const blossomRows = [
+  {
+    Priority: "Weapons",
+    Take: "Swords with attack patterns that consistently reach the target",
+    "Failure Sign":
+      "Most slots contain ranged attacks that receive no Sword or melee scaling",
+  },
+  {
+    Priority: "Damage",
+    Take: "Nearby-enemy damage, melee damage, and Avatar Skill damage",
+    "Failure Sign":
+      "Battojutsu passes beside the target or the Build cannot stay close",
+  },
+  {
+    Priority: "Status",
+    Take: "Bleed chance, maximum Bleed stacks, and Bleed damage",
+    "Failure Sign":
+      "Only one isolated Bleed effect appears with no reliable application",
+  },
+  {
+    Priority: "Survival",
+    Take: "Life steal, Health, Defense, or close-range damage reduction",
+    "Failure Sign":
+      "One contact attack forces the Build out of melee range",
+  },
+  {
+    Priority: "Mobility",
+    Take: "Dash support only when it improves Battojutsu positioning",
+    "Failure Sign":
+      "Movement is already sufficient but enemies still survive too long",
+  },
+];
+
+export const gunslingerColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Take", label: "Take" },
+  { key: "Reason", label: "Reason" },
+];
+
+export const gunslingerRows = [
+  {
+    Priority: "Weapons",
+    Take: "Gun-tagged projectile weapons",
+    Reason:
+      "Golden Gunslinger's passive bonuses scale from equipped Guns.",
+  },
+  {
+    Priority: "Core",
+    Take: "Quick Reload",
+    Reason:
+      "Dash reloads the current projectile weapon and turns movement into damage uptime.",
+  },
+  {
+    Priority: "Core",
+    Take: "Projectile Size, Pierce, Projectile Count, or ranged damage",
+    Reason:
+      "Improves room coverage and lets one shot connect with multiple enemies.",
+  },
+  {
+    Priority: "Damage",
+    Take: "Echo of Death or another projectile-end effect",
+    Reason:
+      "Adds an AoE explosion when a projectile reaches the end of its path.",
+  },
+  {
+    Priority: "Boss",
+    Take: "Final damage against bosses and elites",
+    Reason:
+      "Prevents a strong room-clearing setup from stalling at Terrae Motus.",
+  },
+];
+
+export const pirateColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "Take", label: "Take" },
+  { key: "Risk Check", label: "Risk check" },
+];
+
+export const pirateRows = [
+  {
+    Priority: "Weapons",
+    Take: "Cannon and Bombard-tagged weapons",
+    "Risk Check":
+      "Confirm the weapon's explosion range before taking self-damage bonuses",
+  },
+  {
+    Priority: "Damage",
+    Take: "Bombard damage, direct Attack, and boss damage",
+    "Risk Check":
+      "More damage is not useful when the same explosion repeatedly hits the player",
+  },
+  {
+    Priority: "Reload",
+    Take: "Reload Speed or support for a single large shot",
+    "Risk Check":
+      "Check whether the weapon is actually waiting on reload rather than Attack Speed",
+  },
+  {
+    Priority: "Survival",
+    Take: "Maximum Health, shields, healing, and Health-based Attack",
+    "Risk Check":
+      "Do not rely on low-Health effects without Time Stop or healing ready",
+  },
+  {
+    Priority: "Burst",
+    Take: "Avatar Skill damage and a charged Hyper Skill",
+    "Risk Check":
+      "Keep the full burst available for the next elite or boss",
+  },
+];
+
+export const terraeColumns = [
+  { key: "Check", label: "Build check" },
+  { key: "Fight Now", label: "Fight now when" },
+  { key: "Return First", label: "Return first when" },
+];
+
+export const terraeRows = [
+  {
+    Check: "Final Institute elite",
+    "Fight Now":
+      "It dies in one short attack cycle and returns more time than the fight consumes.",
+    "Return First":
+      "The elite survives long enough to consume most of the time it restores.",
+  },
+  {
+    Check: "Limited Time",
+    "Fight Now":
+      "You enter the final route with roughly 20–25 seconds or strong recurring recovery.",
+    "Return First":
+      "You reach the boss below 10 seconds with no reliable recovery.",
+  },
+  {
+    Check: "Main damage source",
+    "Fight Now":
+      "One weapon or Avatar Skill clearly leads the damage report.",
+    "Return First":
+      "Damage is spread across several mismatched weapons that rarely connect.",
+  },
+  {
+    Check: "Survival",
+    "Fight Now":
+      "One mistake does not remove the entire remaining clock.",
+    "Return First":
+      "One hit causes a defeat or consumes most of the Limited Time.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+For a first Institute and Desert clear, **Chrono Child is the safest overall
+Avatar**. Its base Avatar Skill deals **550% damage to nearby enemies when Time
+Stop is released**, and every equipped weapon reduces Time Stop cooldown by
+**3%**.
+
+My verified launch Tier List places **Chrono Child in S Tier**, **Blossom Blade
+and Golden Gunslinger in A Tier**, and **Scarlet Pirate in B Tier**. Windborne
+Spearmaster and Frost Moon Hacker are not ranked here because the current
+material does not provide enough complete runs to publish reliable Builds.
+
+Choose upgrades based on the exact reason the run failed: add time when the
+route expires, damage when same-level elites survive too long, and Health or
+Defense when one boss hit removes most of the clock.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: July 14, 2026, using the full launch version. This page ranks
+  and explains four Avatars with verified skill panels, Tech Chips, and
+  Institute-to-Desert runs. It does not claim a final Stage 4, Zero difficulty,
+  or Multidimension Mode meta.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-avatar-skill-comparison.webp"
+    alt="Ascend to ZERO Avatar Skill comparison for Blossom Blade Golden Gunslinger and Chrono Child"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I choose the Avatar first, then buy and keep equipment that supports its
+    displayed skill and passive bonuses.
+  </figcaption>
+</figure>
+
+<h2 id="avatar-tier-list">
+  Verified Ascend to ZERO Avatar Tier List
+</h2>
+
+This is a progression Tier List for the Institute, Terrae Motus, and the first
+Desert route.
+
+I rank each Avatar by:
+
+1. how consistently it reaches the next elite;
+2. whether its core skill protects Limited Time;
+3. how dependent it is on one weapon category;
+4. and how safely it handles an unfamiliar boss.
+
+<GuideTable
+  caption="Verified launch Avatar Tier List for first clears and early Desert progression."
+  columns={tierListColumns}
+  rows={tierListRows}
+/>
+
+### Why only four Avatars are ranked
+
+Ascend to ZERO has six playable Avatars, but a Tier List is only useful when
+the ranking is based on complete combat loops rather than one achievement
+description.
+
+Windborne Spearmaster and Frost Moon Hacker remain outside this ranking until
+their Avatar Skill panels, passive bonuses, weapon interactions, and full boss
+runs are verified.
+
+Their character-specific achievement routes remain covered in the{" "}
+<Link href="/ascend-to-zero/achievements-guide/">
+  Ascend to ZERO Achievement Guide
+</Link>
+
+### Why Chrono Child is S Tier
+
+Chrono Child's base release deals **550% damage to nearby enemies**, and each
+equipped weapon reduces Time Stop cooldown by **3%**.
+
+The safest general upgrades also reinforce this same loop:
+
+- slower Time Flow;
+- shields after Time Stop;
+- Avatar Skill damage;
+- separate damage when Time Stop ends;
+- and Limited Time recovery.
+
+The Build remains functional even when one specific weapon does not appear.
+
+### Why Blossom Blade and Golden Gunslinger are A Tier
+
+Both can deal more practical damage than Chrono Child after their equipment
+package is complete.
+
+Blossom Blade needs Swords, close-range positioning, and enough sustain to
+remain beside the target.
+
+Golden Gunslinger needs actual Guns plus projectile and reload support. Without
+those pieces, its safe range does not compensate for the lost damage uptime.
+
+### Why Scarlet Pirate is B Tier
+
+Scarlet Pirate can create enormous boss burst, but the Build has more failure
+points:
+
+- self-damage from Bombard effects;
+- long reloads;
+- unsafe explosion ranges;
+- and greater dependence on Health and defensive support.
+
+A completed Pirate Build is strong. An incomplete one can destroy its own run.
+
+<h2 id="build-overview">
+  Best verified Build for each ranked Avatar
+</h2>
+
+<GuideTable
+  caption="The clearest early and mid-game Build direction for the four verified Avatars."
+  columns={buildSummaryColumns}
+  rows={buildSummaryRows}
+/>
+
+Tech Chip drops are random, so I build around functions rather than demanding
+one exact named list.
+
+When the ideal Chip does not appear, I choose another effect that solves the
+same problem:
+
+- time recovery when I cannot reach the next elite;
+- direct damage when a same-level target survives too long;
+- Health or shielding when one hit removes most of the run;
+- and weapon-specific effects after committing to one category.
+
+<h2 id="diagnose-build">
+  Diagnose why the Build keeps failing
+</h2>
+
+I do not replace the Avatar after every failed run. First, I identify what
+actually ended it.
+
+<GuideTable
+  caption="Build fixes based on the exact reason the run fails."
+  columns={problemColumns}
+  rows={problemRows}
+/>
+
+### Use the end-of-run damage report
+
+The final report shows which weapons, Avatar Skills, Gadgets, and triggered
+effects actually contributed damage.
+
+I remove a high-numbered item when:
+
+- its attack pattern misses repeatedly;
+- it spends too much time inactive;
+- its range does not match the route;
+- it receives no bonuses from the Avatar;
+- or it remains near the bottom of the report over several attempts.
+
+The displayed Attack Multiplier matters only when the attack consistently
+connects.
+
+<h2 id="weapon-tags">
+  Check weapon tags before buying or converting
+</h2>
+
+The game separates weapon and attack tags such as:
+
+- Sword;
+- Spear;
+- Gun;
+- Cannon;
+- Drone;
+- melee;
+- ranged;
+- projectile;
+- physical;
+- AoE;
+- and Bombard.
+
+Tags can overlap, but they are not interchangeable.
+
+A Budget Handgun and Budget Grenade Launcher are both ranged projectile
+weapons. One is tagged as a **Gun**, while the other is a **Cannon**.
+
+Golden Gunslinger receives passive scaling from equipped Guns. Scarlet Pirate
+receives its passive scaling from equipped Cannons.
+
+This is the only check I use before spending Coins or conversion resources:
+read the exact item tag rather than judging the weapon by appearance.
+
+### When I buy a permanent weapon
+
+I buy from Seis when:
+
+- the item has the correct tag;
+- the current permanent weapon is clearly underpowered;
+- the purchase fixes the problem shown in the damage report;
+- and enough Zero Coins remain for the next Time Machine Entry Fee.
+
+I skip it when the item is only a small numerical improvement or would force me
+to remove Limited Time, XP Gain, or another important Entry Stat.
+
+<h2 id="chrono-child-build">
+  Best Chrono Child Build: Time-Slow Release
+</h2>
+
+Chrono Child is my default first-clear Avatar.
+
+Its base Avatar Skill deals **550% damage to nearby enemies when Time Stop is
+released**. Each equipped weapon reduces Time Stop cooldown by **3%**.
+
+<GuideTable
+  caption="Chrono Child Time-Slow and release-damage priorities."
+  columns={chronoColumns}
+  rows={chronoRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-avatar-tech-chip-upgrade.webp"
+    alt="Ascend to ZERO Chrono Child Tech Chips Time Residue Time Shield and Heavy Skill"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Time Shield is my safest progression option. Heavy Skill offers more damage
+    but makes every missed Time Stop more expensive.
+  </figcaption>
+</figure>
+
+### My Chrono Child priority
+
+1. Time Shield or another slower-Time-Flow effect.
+2. Avatar Skill damage.
+3. A separate damage effect when Time Stop ends.
+4. Limited Time recovery.
+5. XP from elites and bosses.
+6. Health, Defense, or a release shield.
+7. Movement Speed only when reaching the next elite is the problem.
+
+### Time Residue, Time Shield, or Heavy Skill
+
+**Time Residue** increases Time Stop charges by one and raises cooldown by 5%.
+
+I take it when another freeze is more valuable than a small cooldown increase.
+
+**Time Shield** slows Time Flow by 15% and increases Damage Reduction by 5%.
+
+This is my most consistent choice while learning bosses.
+
+**Heavy Skill** increases Skill Damage by 35% but raises Time Stop cooldown by
+25%.
+
+I take it when the Build already survives safely and needs a larger release
+hit. I avoid it when repeated freezes are still necessary to cross boss
+patterns.
+
+### Base skill damage and Tech Chip damage are separate
+
+Chrono Child's base Avatar Skill is the displayed **550% nearby damage**.
+
+A Tech Chip that adds damage when Time Stop ends is a separate triggered
+effect. I keep those values separate when comparing damage instead of replacing
+the base 550% number with the Chip's percentage.
+
+### When faster Time Flow is worth taking
+
+Faster Time Flow can add strong Attack or Attack Speed bonuses, but the Limited
+Time clock also moves faster.
+
+I take it when the added damage shortens the fight more than the faster clock
+shortens the run.
+
+I avoid it when I already reach Terrae Motus or the next elite with fewer than
+10 seconds.
+
+<h2 id="blossom-blade-build">
+  Best Blossom Blade Build: Swords and Bleed
+</h2>
+
+Blossom Blade's Battojutsu advances forward during Time Stop and deals
+**1,050% damage**. Each equipped Sword increases Attack Speed by **3%**.
+
+<GuideTable
+  caption="Blossom Blade Sword, Bleed, and close-range priorities."
+  columns={blossomColumns}
+  rows={blossomRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-blossom-blade-build.webp"
+    alt="Ascend to ZERO Blossom Blade Avatar Skill Area Deployment Spatial Slash and Blood Leakage"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Build works when Battojutsu, Swords, nearby damage, and Bleed all
+    connect with the same target area.
+  </figcaption>
+</figure>
+
+### My Blossom Blade route
+
+1. Equip the strongest practical permanent Swords.
+2. Add nearby-enemy or melee damage.
+3. Add Avatar Skill damage and AoE.
+4. Take Blood Leakage or another reliable Bleed source.
+5. Add maximum Bleed stacks or Bleed damage.
+6. Add life steal, Health, or close-range Defense.
+7. Use Dash to line up Battojutsu rather than replacing damage choices with
+   unnecessary mobility.
+
+`Blood Leakage` adds **10% Bleed chance on hit** and increases maximum Bleed
+stacks by five.
+
+`Spatial Slash` deals damage equal to **300% of Attack** along the Dash path.
+
+`Area Deployment` creates a nearby damage zone whose damage increases closer
+to its center.
+
+These effects support the same close-range plan. I do not take one isolated
+Bleed effect and call it a complete Bleed Build.
+
+### Battojutsu must travel through the target
+
+I freeze before the enemy attack, move to the side or behind the group, and aim
+the forward movement through the target line.
+
+The Build can look weak even with strong numbers when Battojutsu travels into
+empty space.
+
+### When a lower-numbered Sword is better
+
+I replace a larger ranged weapon when it receives no Sword, melee, Bleed, or
+Avatar Skill bonuses and contributes little in the damage report.
+
+A weaker-looking Sword can produce more total damage after the passive Attack
+Speed, nearby damage, and Bleed effects are included.
+
+The dedicated ten-kill Blossom Blade achievement route is covered in the{" "}
+<Link href="/ascend-to-zero/achievements-guide/">
+  Achievements Guide
+</Link>{" "}
+instead of being repeated here.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="golden-gunslinger-build">
+  Best Golden Gunslinger Build: Projectile Reload
+</h2>
+
+Golden Gunslinger's Avatar Skill fires **16 bullets in all directions for one
+second during Time Stop**, dealing **200% damage**.
+
+Each equipped Gun increases Projectile Size by **3%**.
+
+<GuideTable
+  caption="Golden Gunslinger projectile, Pierce, and reload priorities."
+  columns={gunslingerColumns}
+  rows={gunslingerRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-golden-gunslinger-build.webp"
+    alt="Ascend to ZERO Golden Gunslinger Tech Chips Calm Flow Counterforce Explosion Echo of Death Time Guard Quick Reload and Armor Piercing Rounds"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Golden Gunslinger becomes reliable after the Build solves reload downtime
+    and commits to projectile effects that work together.
+  </figcaption>
+</figure>
+
+### Quick Reload is the core quality-of-life effect
+
+Quick Reload causes Dash to reload the projectile weapon currently being
+reloaded. It also grants a short Tactical Reload effect with **+50% Crit Chance
+for one second**.
+
+My combat loop becomes:
+
+1. Fire until the current magazine is empty.
+2. Activate Time Stop before the enemy pattern reaches me.
+3. Dash to a safe firing angle.
+4. Release Time Stop with the weapon reloaded.
+5. Repeat.
+
+This turns a movement input into damage uptime.
+
+### Echo of Death and Armor Piercing Rounds
+
+`Echo of Death` creates an explosion equal to **50% of the projectile's
+damage** when the projectile ends.
+
+I prefer it when projectiles finish inside a group or near a boss surrounded by
+common enemies.
+
+`Armor Piercing Rounds` increases Projectile Damage by **10% each time the
+projectile pierces a target**.
+
+I prefer it in narrow rooms where enemies naturally line up.
+
+### How I tell whether reload is the real problem
+
+I watch one complete attack cycle:
+
+- If the weapon fires often but damage remains low, I need Attack, Pierce,
+  Projectile Size, or boss damage.
+- If the weapon deals good damage but spends most of the fight inactive, I
+  need Quick Reload, Reload Speed, stamina, or magazine support.
+- If the projectile misses, more reload speed will not fix the Build.
+
+The Golden Gunslinger five-kill projectile achievement has a separate setup in
+the{" "}
+<Link href="/ascend-to-zero/achievements-guide/">
+  Achievements Guide
+</Link>
+
+<h2 id="scarlet-pirate-build">
+  Best Scarlet Pirate Build: Cannon Burst
+</h2>
+
+Scarlet Pirate fires one, three, or five bursts while time is frozen. Each
+burst deals **500% damage**.
+
+Every equipped Cannon increases Reload Speed by **2%** and maximum Health by
+**6%**.
+
+<GuideTable
+  caption="Scarlet Pirate Cannon, Bombard, reload, and Health priorities."
+  columns={pirateColumns}
+  rows={pirateRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-scarlet-pirate-build.webp"
+    alt="Ascend to ZERO Scarlet Pirate Avatar Skill Emergency Escape With Style and Single Cannon Shot"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pirate burst can erase bosses quickly, but I check blast range, self-damage,
+    and reload time before taking another damage modifier.
+  </figcaption>
+</figure>
+
+### My Scarlet Pirate route
+
+1. Equip Cannons or Bombard weapons.
+2. Add Bombard damage.
+3. Fix the actual reload bottleneck.
+4. Add direct Attack or boss damage.
+5. Add maximum Health.
+6. Add a shield or healing.
+7. Keep the Avatar or Hyper Skill ready for the next major target.
+
+### With Style is a calculated risk
+
+`With Style!` increases Bombard damage by **90%**, but damages the player when
+their own Bombard attack makes contact.
+
+I take it when:
+
+- the Cannon can attack from a safe distance;
+- I understand the explosion radius;
+- and the Build has Health, healing, or a shield.
+
+I skip it when the Cannon explodes close to the character or the boss forces
+close-range positioning.
+
+### Single Cannon Shot
+
+`Single Cannon Shot` fixes Ammo Capacity at one, increases Reload Speed by
+**60%**, and increases Bombard damage by **50%**.
+
+It works with a weapon already designed around one large hit.
+
+I avoid it when the Cannon needs several shots to complete its damage pattern.
+
+### Emergency Escape
+
+`Emergency Escape` activates Time Stop and fully restores Health when Health
+falls to 30% or below. It can activate once every 10 seconds.
+
+This is excellent for progression and risky Bombard Builds.
+
+It must be removed for the Scarlet Pirate achievement that requires manually
+activating Time Stop at 10 Health or less. The complete achievement setup is in
+the{" "}
+<Link href="/ascend-to-zero/achievements-guide/">
+  Achievements Guide
+</Link>
+
+<h2 id="terrae-motus-build-check">
+  Terrae Motus Build check
+</h2>
+
+Terrae Motus is the first fight that clearly exposes whether the Build is
+coherent.
+
+The Central Control Room is displayed at **Lv.20,000**, but matching that number
+exactly is not required. One confirmed approach reached the entrance at
+**Lv.19,803**.
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-terrae-motus-level-20000.webp"
+    alt="Ascend to ZERO player at Level 19803 approaching the Level 20000 Central Control Room boss"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I judge readiness by elite kill speed, remaining Limited Time, and the main
+    damage source—not by matching Lv.20,000 exactly.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How I decide whether to fight Terrae Motus or return to the Bunker."
+  columns={terraeColumns}
+  rows={terraeRows}
+/>
+
+Starting Level does not repair poor boss damage. It only reaches the same
+failed fight faster.
+
+When the last elite already dies quickly, additional farming can also be a
+mistake. I stop farming and enter the boss when another room would add levels
+without improving the weapon, Avatar Skill, time recovery, or survival.
+
+For the post-boss exit and Desert route, use the{" "}
+<Link href="/ascend-to-zero/how-to-unlock-stage-2-desert/">
+  Stage 2 and Desert Unlock Guide
+</Link>
+
+<h2 id="time-stealing-enemies">
+  How I adjust the Build for Time-Stealing enemies
+</h2>
+
+A wide AoE Build can waste valuable seconds clearing common enemies while the
+special target continues removing Limited Time.
+
+When a Time-Stealing enemy appears, I temporarily change target priority:
+
+1. Stop clearing the room indiscriminately.
+2. Activate Time Stop before the target moves out of reach.
+3. Move into the correct attack angle.
+4. Use aiming mode, a direct Avatar Skill, or the strongest single-target
+   weapon.
+5. Return to ordinary enemies only after the marked target dies.
+
+This is one situation where one fast single-target weapon is more useful than
+another large room-clearing effect.
+
+<h2 id="difficulty-scope">
+  How difficulty changes these recommendations
+</h2>
+
+This Tier List is written for launch progression and Normal first clears.
+
+On Easy and Normal, specialist Builds can outperform Chrono Child once their
+weapon package appears.
+
+On harder settings, reliable Health, Defense, shielding, and time recovery
+become more important. That generally favors Chrono Child's safe loop and makes
+Scarlet Pirate's self-damage choices less forgiving.
+
+I do not present this launch Tier List as a confirmed Stage 4, Zero difficulty,
+or Multidimension Mode ranking without complete runs from those modes.
+
+<h2 id="when-to-return">
+  When to continue the run and when to rebuild
+</h2>
+
+I continue when:
+
+- the latest elite dies quickly;
+- one main weapon clearly contributes damage;
+- the next boss is within a reachable progression bracket;
+- and at least one recovery effect keeps Limited Time stable.
+
+I return when:
+
+- a same-level elite consumes most of the time it restores;
+- the Build lacks a permanent main weapon;
+- the first Desert enemy survives several complete attack cycles;
+- one boss hit removes the rest of the clock;
+- or a valuable temporary item needs storage or conversion.
+
+A failed Build normally needs one clear fix:
+
+- the correct weapon category;
+- more direct damage;
+- one recovery effect;
+- enough Health for one mistake;
+- or a shorter route.
+
+It rarely needs every permanent upgrade at once.
+
+<h2 id="common-mistakes">
+  Build mistakes that waste the most runs
+</h2>
+
+### Ranking a specialist without its required equipment
+
+Blossom Blade without Swords, Golden Gunslinger without Guns, and Scarlet
+Pirate without Cannons do not show the actual strength of those Avatars.
+
+### Treating Starting Level as damage
+
+Starting Level skips solved rooms. It does not increase the damage dealt after
+reaching the boss.
+
+### Filling slots with unrelated attacks
+
+Every slot should add practical damage, survival, time, or a useful trigger.
+More equipment is not automatically a better Build.
+
+### Choosing faster Time Flow without checking kill speed
+
+The damage bonus must shorten the fight more than the faster clock shortens the
+run.
+
+### Entering optional challenge rooms too early
+
+I leave when the first enemy does not die quickly enough to repay the time
+spent.
+
+### Converting an item only because it is rare
+
+I convert equipment because it completes the Build, not because its border has
+a higher rarity.
+
+<h2 id="related-guides">
+  Related Ascend to ZERO guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the{" "}
+    <Link href="/ascend-to-zero/">
+      Ascend to ZERO Guide Hub
+    </Link>{" "}
+    for Time Stop, Entry Stats, permanent equipment, Conversion, and Bunker
+    progression.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/ascend-to-zero/how-to-unlock-stage-2-desert/">
+      Stage 2 and Desert Unlock Guide
+    </Link>{" "}
+    for Terrae Motus, the Institute exit, and the first Desert objective.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/ascend-to-zero/achievements-guide/">
+      Ascend to ZERO Achievement Guide
+    </Link>{" "}
+    for Avatar-specific challenge Builds and all 58 unlock conditions.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Ascend to ZERO Builds FAQ
+</h2>
+
+### What is the best Avatar for a first clear?
+
+Chrono Child is the safest verified first-clear Avatar because its release
+damage, slower-Time options, shields, and recovery all support the same combat
+loop.
+
+### What is the current Avatar Tier List?
+
+For verified Institute and early Desert progression: Chrono Child is S Tier;
+Blossom Blade and Golden Gunslinger are A Tier; Scarlet Pirate is B Tier.
+Windborne Spearmaster and Frost Moon Hacker are not ranked without complete
+Build data.
+
+### Why are only four Avatars ranked?
+
+A useful Tier List needs complete skill, weapon, Tech Chip, and boss-run
+evidence. The remaining two Avatars do not yet have enough verified material
+for reliable Build recommendations.
+
+### Which Avatar is best for melee?
+
+Blossom Blade is the strongest verified melee specialist when the Build has
+Swords, nearby damage, Bleed, and enough sustain to remain close.
+
+### Which Avatar is best for ranged damage?
+
+Golden Gunslinger is the most consistent verified ranged option when equipped
+with Guns, projectile scaling, and reload support.
+
+### How do I check whether a weapon matches the Avatar?
+
+Read the exact item tag in the inventory or shop. Do not judge it only by
+whether the attack looks ranged or fires a projectile.
+
+### How do I know reload is lowering my damage?
+
+Watch one full attack cycle. When the weapon deals good damage while firing but
+spends most of the fight inactive, solve reload, magazine, stamina, or Dash
+availability before adding more Attack Speed.
+
+### What is the safest Chrono Child Tech Chip?
+
+Time Shield is the safest verified progression choice because it slows Time
+Flow by 15% and adds 5% Damage Reduction.
+
+### What is the best Terrae Motus Build?
+
+Use one coherent Avatar and weapon package, boss damage, reliable time recovery,
+and enough survival for one mistake. Elite kill speed matters more than matching
+Lv.20,000 exactly.
+
+### How should I deal with Time-Stealing enemies?
+
+Stop clearing common enemies, use Time Stop to reach the marked target, and
+commit direct burst before it removes more Limited Time.
+
+### Are these final endgame Builds?
+
+No. These recommendations cover the Institute, Terrae Motus, and early Desert
+progression. Stage 4, Zero difficulty, and Multidimension Mode may produce a
+different final Meta.

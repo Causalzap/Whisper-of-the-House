@@ -1,0 +1,638 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const levelCheckColumns = [
+  { key: "Label", label: "What you see" },
+  { key: "Meaning", label: "What it means" },
+  { key: "Action", label: "What to do" },
+];
+
+export const levelCheckRows = [
+  {
+    Label: "Central Control Room — Lv.20,000",
+    Meaning:
+      "This is the level marker shown on the final Institute route leading to Terrae Motus.",
+    Action:
+      "Enter when the last Institute enemies still die efficiently. You do not need to match Lv.20,000 exactly.",
+  },
+  {
+    Label: "Terrae Motus",
+    Meaning:
+      "This is the Institute boss whose defeat opens the route toward Level Two.",
+    Action:
+      "Defeat Terrae Motus once. The optional One Strike achievement is not required.",
+  },
+  {
+    Label: "Reach Lv.20,000 in the Desert Zone",
+    Meaning:
+      "This is the first objective after Stage 2 and the Desert have already opened.",
+    Action:
+      "Gain the missing levels inside the Desert instead of returning to the Institute.",
+  },
+];
+
+export const unlockStepColumns = [
+  { key: "Step", label: "Step" },
+  { key: "Action", label: "Exact action" },
+  { key: "Confirmation", label: "How to confirm it worked" },
+];
+
+export const unlockStepRows = [
+  {
+    Step: "1",
+    Action:
+      "Continue through the Institute until the Central Control Room appears with a Lv.20,000 marker.",
+    Confirmation:
+      "The route leads to the final Institute boss instead of another normal combat room.",
+  },
+  {
+    Step: "2",
+    Action:
+      "Enter the Central Control Room and defeat Terrae Motus.",
+    Confirmation:
+      "The boss disappears and the EXIT beyond the arena becomes available.",
+  },
+  {
+    Step: "3",
+    Action:
+      "Walk through the EXIT after the boss instead of returning to the Bunker.",
+    Confirmation:
+      "The game begins the Level Two transition dialogue.",
+  },
+  {
+    Step: "4",
+    Action:
+      "Confirm that you want to continue beyond the Institute.",
+    Confirmation:
+      "The game displays Welcome to Level Two and sends the run toward the Desert.",
+  },
+  {
+    Step: "5",
+    Action:
+      "Complete the Reach Lv.20,000 in the Desert Zone objective.",
+    Confirmation:
+      "The next Desert route becomes available. The objective may complete immediately if your level is already high enough.",
+  },
+];
+
+export const firstDesertColumns = [
+  { key: "Situation", label: "What happens" },
+  { key: "Decision", label: "What I do" },
+  { key: "Reason", label: "Why" },
+];
+
+export const firstDesertRows = [
+  {
+    Situation: "I enter below Lv.20,000",
+    Decision:
+      "I activate Time Stop, identify the easiest nearby target, and gain the missing levels inside the Desert.",
+    Reason:
+      "The Desert objective is meant to be completed in the new zone. Returning to the Institute is unnecessary.",
+  },
+  {
+    Situation: "The objective completes immediately",
+    Decision:
+      "I continue toward the next route without searching for another trigger.",
+    Reason:
+      "The game has already detected that my current level meets or exceeds the objective.",
+  },
+  {
+    Situation: "Normal Desert enemies survive too long",
+    Decision:
+      "I avoid the optional challenge room and test the normal route first.",
+    Reason:
+      "A challenge room can trap the run before I know whether the current Build can handle the new biome.",
+  },
+  {
+    Situation: "One hit removes most of my Health or Limited Time",
+    Decision:
+      "I treat the Desert unlock as permanent progress and rebuild on the next loop.",
+    Reason:
+      "The first Desert entry does not need to become a complete stage clear.",
+  },
+];
+
+export const stuckColumns = [
+  { key: "Problem", label: "What looks wrong" },
+  { key: "Cause", label: "Likely cause" },
+  { key: "Fix", label: "What to do" },
+];
+
+export const stuckRows = [
+  {
+    Problem: "Terrae Motus is dead, but Level Two did not begin",
+    Cause:
+      "You are still inside the boss arena or have not used the post-boss EXIT.",
+    Fix:
+      "Locate the EXIT marker beyond the arena and continue forward.",
+  },
+  {
+    Problem: "The objective says Reach Lv.20,000 in the Desert",
+    Cause:
+      "Stage 2 is already unlocked. You are looking at its first objective.",
+    Fix:
+      "Continue into the Desert and gain the missing levels from Desert enemies.",
+  },
+  {
+    Problem: "The Lv.20,000 objective completed immediately",
+    Cause:
+      "Your level already met the requirement when the objective appeared.",
+    Fix:
+      "Continue forward. No restart or additional level farming is required.",
+  },
+  {
+    Problem: "I entered the Desert below Lv.20,000",
+    Cause:
+      "The transition does not require the player to enter at exactly Lv.20,000.",
+    Fix:
+      "Use Time Stop and gain levels from the first manageable Desert enemies.",
+  },
+  {
+    Problem: "I defeated a boss, but the Desert is still locked",
+    Cause:
+      "The required Institute boss is specifically Terrae Motus.",
+    Fix:
+      "Continue through the Institute until the Central Control Room route becomes available.",
+  },
+  {
+    Problem: "I cannot return to the Institute after entering the Desert",
+    Cause:
+      "The run has already crossed the Level Two transition.",
+    Fix:
+      "Complete the first Desert objective or allow the run to end, then improve the next entry setup in the Bunker.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To unlock Stage 2, follow the Institute route to the **Central Control Room**,
+defeat **Terrae Motus**, and walk through the **EXIT** after the boss arena.
+
+Do not return to the Bunker looking for a Stage 2 button. The first transition
+continues directly into the Level Two dialogue and then gives the objective
+**Reach Lv.20,000 in the Desert Zone**.
+
+That Desert objective appears after Stage 2 is already open. You do not need to
+reach Lv.20,000 before entering the Central Control Room or before entering the
+Desert.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-500 dark:text-slate-400">
+  Last verified: July 14, 2026, using the full launch version. This guide
+  focuses on the confirmed Institute-to-Desert route, the three different
+  Lv.20,000 labels, the post-boss EXIT, the Level Two dialogue, and the most
+  common progression blocks.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-terrae-motus-stage-2-exit.webp"
+    alt="Ascend to ZERO EXIT after defeating Terrae Motus in the Central Control Room"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The Stage 2 transition begins by walking through this EXIT. It is not
+    activated from a menu in the Underground Bunker.
+  </figcaption>
+</figure>
+
+<h2 id="three-level-20000-checks">
+  The three Lv.20,000 labels are not the same requirement
+</h2>
+
+This is the main source of confusion near the end of the Institute.
+
+The game places three similar-looking pieces of progression close together:
+
+1. the **Lv.20,000 Central Control Room** marker;
+2. the **Terrae Motus** boss inside that route;
+3. and the later objective to **Reach Lv.20,000 in the Desert Zone**.
+
+Only one action opens Stage 2:
+
+> Defeat Terrae Motus and use the EXIT after the fight.
+
+<GuideTable
+  caption="What each Lv.20,000 label means during the Institute-to-Desert transition."
+  columns={levelCheckColumns}
+  rows={levelCheckRows}
+/>
+
+The number on the Central Control Room is a route recommendation, not a door
+that checks whether the player has reached exactly Lv.20,000.
+
+You can enter while slightly below the displayed level if the final Institute
+enemies are still dying efficiently and the current Build remains stable.
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-terrae-motus-level-20000.webp"
+    alt="Ascend to ZERO player approaching the Level 20000 Central Control Room while below the recommended level"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The Central Control Room can be entered while slightly below its displayed
+    level. Treat the marker as a readiness warning, not an exact gate.
+  </figcaption>
+</figure>
+
+<h2 id="exact-unlock-route">
+  Exact Stage 2 and Desert unlock route
+</h2>
+
+The complete route is:
+
+<div className="my-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950/40">
+  <div className="flex gap-4 border-b border-slate-200 p-5 dark:border-slate-800">
+    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-black text-amber-800 dark:bg-amber-400/10 dark:text-amber-300">
+      1
+    </div>
+    <div>
+      <p className="font-bold text-slate-900 dark:text-slate-100">
+        Finish the Institute main route
+      </p>
+      <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        Continue until the Central Control Room appears with its Lv.20,000
+        marker.
+      </p>
+    </div>
+  </div>
+
+  <div className="flex gap-4 border-b border-slate-200 p-5 dark:border-slate-800">
+    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-black text-amber-800 dark:bg-amber-400/10 dark:text-amber-300">
+      2
+    </div>
+    <div>
+      <p className="font-bold text-slate-900 dark:text-slate-100">
+        Defeat Terrae Motus
+      </p>
+      <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        A normal successful kill is enough. One Strike is an optional
+        achievement.
+      </p>
+    </div>
+  </div>
+
+  <div className="flex gap-4 border-b border-slate-200 p-5 dark:border-slate-800">
+    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-black text-amber-800 dark:bg-amber-400/10 dark:text-amber-300">
+      3
+    </div>
+    <div>
+      <p className="font-bold text-slate-900 dark:text-slate-100">
+        Walk through the post-boss EXIT
+      </p>
+      <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        Continue forward instead of leaving the route to search the Bunker for
+        a new stage button.
+      </p>
+    </div>
+  </div>
+
+  <div className="flex gap-4 border-b border-slate-200 p-5 dark:border-slate-800">
+    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-black text-amber-800 dark:bg-amber-400/10 dark:text-amber-300">
+      4
+    </div>
+    <div>
+      <p className="font-bold text-slate-900 dark:text-slate-100">
+        Confirm that you want to continue
+      </p>
+      <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        Choose the dialogue option that moves the run beyond the protected
+        Institute.
+      </p>
+    </div>
+  </div>
+
+  <div className="flex gap-4 p-5">
+    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-sm font-black text-amber-800 dark:bg-amber-400/10 dark:text-amber-300">
+      5
+    </div>
+    <div>
+      <p className="font-bold text-slate-900 dark:text-slate-100">
+        Complete the first Desert objective
+      </p>
+      <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        Reach Lv.20,000 using enemies inside the Desert. The objective may
+        complete immediately when the current level is already high enough.
+      </p>
+    </div>
+  </div>
+</div>
+
+<GuideTable
+  caption="The confirmed sequence for leaving the Institute and entering Level Two."
+  columns={unlockStepColumns}
+  rows={unlockStepRows}
+/>
+
+The route does not require:
+
+- a Desert key;
+- a special Supply Shop purchase;
+- a separate stage-select menu;
+- Lv.20,000 Starting Level;
+- the One Strike achievement;
+- or another Terrae Motus clear.
+
+<h2 id="do-not-return-to-bunker">
+  Do not look for a Stage 2 button in the Bunker
+</h2>
+
+The first Level Two transition is route-based.
+
+The Bunker contains the Time Machine, Entry Stats, Supply Shop, Fate Editor,
+Avatar upgrades, and item processing, but none of those menus starts Stage 2.
+
+After Terrae Motus dies, I:
+
+1. let the victory effects finish;
+2. activate Time Stop before opening the inventory when needed;
+3. equip only an obvious upgrade;
+4. close the inventory;
+5. and walk through the visible EXIT.
+
+I do not spend the remaining clock comparing every temporary item.
+
+The progression trigger is the EXIT itself.
+
+<h2 id="level-two-dialogue">
+  Which dialogue choice continues to Level Two?
+</h2>
+
+After entering the EXIT, Mimesis explains that the Institute was protected from
+the unknown entities outside and asks whether I am sure I want to press on.
+
+Choose:
+
+**I will save the world from destruction.**
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-level-two-dialogue-choice.webp"
+    alt="Ascend to ZERO Level Two dialogue choice I will save the world from destruction"
+    width={1436}
+    height={852}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    This confirmation prompt appears after the Terrae Motus EXIT and before the
+    Desert objective begins.
+  </figcaption>
+</figure>
+
+The transition then moves into Level Two and gives the objective:
+
+**Reach Lv.20,000 in the Desert Zone**
+
+At this point, the Desert is already unlocked.
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-desert-level-20000-objective.webp"
+    alt="Ascend to ZERO Reach Level 20000 in the Desert Zone objective after unlocking Level Two"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    Reach Lv.20,000 in the Desert Zone is the first Level Two objective. It is
+    not the requirement used to open Level Two.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="desert-level-objective">
+  How the Desert Lv.20,000 objective works
+</h2>
+
+There are two normal outcomes when the new objective appears.
+
+### You enter below Lv.20,000
+
+Continue into the Desert and gain the missing levels there.
+
+The objective does not send you back to the Institute. A run can enter the new
+zone below the displayed objective and still progress by defeating the first
+manageable Desert enemies.
+
+### You enter at or above Lv.20,000
+
+The objective can complete immediately.
+
+When that happens, continue toward the next route. There is no second trigger
+to find.
+
+<GuideTable
+  caption="How I handle the first Desert objective and difficulty jump."
+  columns={firstDesertColumns}
+  rows={firstDesertRows}
+/>
+
+<h2 id="first-desert-room">
+  What to do in the first Desert room
+</h2>
+
+The Desert is an immediate difficulty increase.
+
+The first enemies can be around Lv.20,000 or slightly higher even when the
+character enters below that range.
+
+<figure className="my-8">
+  <Image
+    src="/images/ascend-to-zero/ascend-to-zero-desert-first-room-level-20000.webp"
+    alt="Ascend to ZERO player entering the Desert below the nearby enemy levels"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    Entering below the nearby enemy levels does not mean the transition failed.
+    Use the first manageable encounters to close the gap.
+  </figcaption>
+</figure>
+
+My first-room order is:
+
+1. Activate Time Stop before the room becomes crowded.
+2. Check which nearby enemy can be killed fastest.
+3. Equip an obvious post-boss upgrade when one is already available.
+4. Kill enough normal enemies to close the level gap.
+5. Target the first elite once its kill time is reasonable.
+6. Ignore optional challenge rooms until the normal route feels stable.
+
+### When I skip the first challenge room
+
+I skip it when:
+
+- the first normal enemy survives several complete attack cycles;
+- the Limited Time clock is already close to empty;
+- the main Avatar Skill or Hyper Skill is unavailable;
+- or one enemy attack removes most of my Health.
+
+The first Desert entry is a progression check, not a requirement to clear every
+optional encounter.
+
+### When I let the run end
+
+I stop forcing the attempt when:
+
+- ordinary enemies cannot be killed efficiently;
+- the first elite consumes the entire clock;
+- one hit repeatedly causes a defeat;
+- or the Institute Build depended on temporary equipment that will disappear.
+
+Stage 2 remains unlocked.
+
+I can return with a better permanent weapon, more Attack, additional Limited
+Time, or a stronger Entry Stat package.
+
+<h2 id="stage-two-stuck">
+  Why Stage 2 still looks locked
+</h2>
+
+<GuideTable
+  caption="The most common Stage 2 and Desert progression problems."
+  columns={stuckColumns}
+  rows={stuckRows}
+/>
+
+<h2 id="what-to-do-next">
+  What to do after unlocking the Desert
+</h2>
+
+The next decision depends on how the first Desert room feels.
+
+### Continue the current run when
+
+- normal Desert enemies die without consuming most of the clock;
+- the Lv.20,000 objective completes;
+- the first elite is reachable;
+- and the main weapon still contributes meaningful damage.
+
+### Return and rebuild when
+
+- normal enemies survive several complete attack cycles;
+- the main weapon was temporary;
+- one hit removes most of the run;
+- or the Build reaches every elite with an empty clock.
+
+For Avatar, weapon, Tech Chip, and Terrae Motus preparation, use the{" "}
+<Link href="/ascend-to-zero/best-builds/">
+  Ascend to ZERO Best Builds Guide
+</Link>
+
+For the broader progression route and future stage coverage, return to the{" "}
+<Link href="/ascend-to-zero/">
+  Ascend to ZERO Guide Hub
+</Link>
+
+<h2 id="achievement-confirmation">
+  Which achievement confirms the Terrae Motus clear?
+</h2>
+
+Defeating Terrae Motus unlocks:
+
+**End of the Predator — Defeat Terrae Motus**
+
+`One Strike` is a separate challenge for defeating Terrae Motus with one hit.
+It is not required for Stage 2.
+
+The full achievement route is covered in the{" "}
+<Link href="/ascend-to-zero/achievements-guide/">
+  Ascend to ZERO Achievement Guide
+</Link>
+
+<h2 id="related-guides">
+  Related Ascend to ZERO guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    Return to the{" "}
+    <Link href="/ascend-to-zero/">
+      Ascend to ZERO Guide Hub
+    </Link>{" "}
+    for Time Stop, Entry Stats, survivor services, permanent equipment, and
+    the broader progression route.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/ascend-to-zero/best-builds/">
+      Ascend to ZERO Best Builds Guide
+    </Link>{" "}
+    when Terrae Motus or the first Desert enemies survive too long.
+  </li>
+  <li>
+    Use the{" "}
+    <Link href="/ascend-to-zero/achievements-guide/">
+      Ascend to ZERO Achievement Guide
+    </Link>{" "}
+    for End of the Predator, One Strike, Avatar challenges, and all 58
+    achievement conditions.
+  </li>
+</ul>
+
+<h2 id="faq">
+  Ascend to ZERO Stage 2 and Desert FAQ
+</h2>
+
+### How do I unlock Stage 2 in Ascend to ZERO?
+
+Reach the Central Control Room, defeat Terrae Motus, and use the EXIT after the
+boss. Confirm that you want to continue beyond the Institute.
+
+### Do I need to be Lv.20,000 before fighting Terrae Motus?
+
+No. The displayed level is a recommendation for the final Institute route, not
+an exact requirement for entering the Central Control Room.
+
+### Do I need to be Lv.20,000 before entering the Desert?
+
+No. Reach Lv.20,000 in the Desert Zone is an objective given after the Desert
+has already opened.
+
+### Is the Central Control Room boss Terrae Motus?
+
+Yes. The Central Control Room is the Lv.20,000-marked boss route, and Terrae
+Motus is the boss inside it.
+
+### Where is the Stage 2 button in the Bunker?
+
+There is no separate button for the first transition. Use the EXIT after
+defeating Terrae Motus.
+
+### Which dialogue option continues the route?
+
+Choose “I will save the world from destruction” at the confirmation prompt
+after the Terrae Motus EXIT.
+
+### Why did the Desert objective complete immediately?
+
+Your current level already met or exceeded Lv.20,000 when the objective
+appeared.
+
+### Why am I below Lv.20,000 in the first Desert room?
+
+That is allowed. Gain the missing levels from enemies inside the Desert.
+
+### Why can I not go back after entering the Desert?
+
+The run has crossed the Level Two transition. Complete the new objective or
+allow the run to end, then improve the next setup in the Bunker.
+
+### Is One Strike required to open Stage 2?
+
+No. Any successful Terrae Motus kill can open the post-boss route.
+
+### What confirms that Terrae Motus counted?
+
+The boss disappears, the EXIT becomes available, the route continues into
+Level Two, and End of the Predator unlocks.

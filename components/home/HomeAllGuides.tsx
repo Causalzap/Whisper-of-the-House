@@ -73,6 +73,7 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  { title: "Ascend to ZERO", href: "/ascend-to-zero" },
   { title: "Backyard Baseball", href: "/backyard-baseball" },
   { title: "Forest Escape: Last Train", href: "/forest-escape-last-train" },
   { title: "Granblue Fantasy: Relink - Endless Ragnarok", href: "/granblue-relink-endless-ragnarok" },

@@ -132,6 +132,120 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Ascend to ZERO",
+    "game": "Ascend to ZERO",
+    "href": "/ascend-to-zero",
+    "slug": "ascend-to-zero",
+    "kind": "game",
+    "status": "active",
+    "accent": "amber",
+    "archiveCategory": "RPG, action, builds & combat",
+    "label": "Time-Loop Guide",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Active coverage",
+    "description": "Follow the Ascend to ZERO guide hub for Limited Time, Time Stop, first-run progression, survivor services, Entry Stats, item processing, Stage 2, verified Avatar builds, and all 58 achievements.",
+    "coverage": [
+      "First-run Institute route, the 30-second Limited Time clock, Time Stop, Avatar Skills, elite targeting, common-enemy farming, Area Expanders, and when to return to the Underground Bunker",
+      "Seis, Gabriella, Javier, Mai, and BIVI survivor unlocks, the Supply Shop, Time Machine Entry Stats, Warehouse, Conversion, Extraction, equipment upgrades, and Handbook progression",
+      "Attack, Defense, Health, Agility, and Luck, early Entry Stat priorities, Zero Coins, Zero Cells, Zero Keys, temporary versus permanent equipment, weapon slots, Gadget slots, and beginner Tech Chips",
+      "Terrae Motus, the Central Control Room, the post-boss EXIT, the Level Two dialogue choice, the three different Lv.20,000 labels, and the first Desert objective",
+      "Verified Chrono Child, Blossom Blade, Golden Gunslinger, and Scarlet Pirate builds, weapon tags, Tech Chip priorities, all 58 achievements, missable checks, Stage 4, Multidimension Mode, and BIVI cleanup"
+    ],
+    "image": "/images/ascend-to-zero/ascend-to-zero-limited-time-time-stop.webp",
+    "imageFit": "cover",
+    "imagePadding": false,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 6,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Ascend to ZERO Guide Hub",
+        "href": "/ascend-to-zero",
+        "type": "Guide Hub",
+        "description": "Start here for Limited Time, Time Stop, the Institute route, survivor services, Entry Stats, currencies, item processing, Tech Chips, Terrae Motus, and the Desert.",
+        "image": "/images/ascend-to-zero/ascend-to-zero-limited-time-time-stop.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "spotlightMeta": "Limited Time, Time Stop, elite routes, survivor services, Entry Stats, equipment processing, currencies, Terrae Motus, and Desert progression"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Ascend to ZERO Stage 2 & Desert Unlock Guide",
+        "href": "/ascend-to-zero/how-to-unlock-stage-2-desert",
+        "type": "Walkthrough",
+        "description": "Defeat Terrae Motus, use the post-boss EXIT, choose the correct Level Two dialogue, and understand why the Desert Lv.20,000 objective is not a prerequisite.",
+        "date": "Updated recently",
+        "image": "/images/ascend-to-zero/ascend-to-zero-terrae-motus-stage-2-exit.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 24,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "Central Control Room, Terrae Motus, post-boss EXIT, Level Two dialogue, three Lv.20,000 labels, and first Desert-room troubleshooting"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Ascend to ZERO Best Builds & Avatar Tier List",
+        "href": "/ascend-to-zero/best-builds",
+        "type": "Builds",
+        "description": "Compare the verified Avatar tier list, weapon tags, Tech Chip priorities, and practical builds for Chrono Child, Blossom Blade, Golden Gunslinger, and Scarlet Pirate.",
+        "date": "Updated recently",
+        "image": "/images/ascend-to-zero/ascend-to-zero-avatar-skill-comparison.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 25,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "Verified Avatar tier list, Chrono Child, Blossom Blade, Golden Gunslinger, Scarlet Pirate, weapon tags, Tech Chips, boss checks, and Build fixes"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Ascend to ZERO Achievements Guide",
+        "href": "/ascend-to-zero/achievements-guide",
+        "type": "Achievements",
+        "description": "Complete all 58 achievements with missable checks, a four-phase roadmap, Avatar setups, Conversion traps, Bunker milestones, Stage 4, Multidimension Mode, and BIVI cleanup.",
+        "date": "Updated recently",
+        "image": "/images/ascend-to-zero/ascend-to-zero-achievement-end-of-predator.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 26,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "All 58 achievements, missable checks, four-phase roadmap, Avatar challenges, Conversion setups, Stage 4, Mode 12, and BIVI completion"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      }
+    ]
+  },
+  {
     "title": "Backyard Baseball 2026",
     "game": "Backyard Baseball 2026",
     "href": "/backyard-baseball",
