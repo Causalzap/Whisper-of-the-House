@@ -1,0 +1,726 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const sceneCodeColumns = [
+  { key: "Time", label: "Time" },
+  { key: "Code", label: "Full scene code" },
+  { key: "Location", label: "Location" },
+  { key: "People", label: "People IDs" },
+];
+
+export const specialCodeColumns = [
+  { key: "Time", label: "Time" },
+  { key: "Code", label: "Full scene code" },
+  { key: "Location", label: "Location" },
+  { key: "People", label: "People IDs" },
+  { key: "Note", label: "What it unlocks" },
+];
+
+export const characterIdColumns = [
+  { key: "ID", label: "ID" },
+  { key: "Character", label: "Character" },
+  { key: "Photo", label: "Photo match" },
+  { key: "QuickClue", label: "Quick identifier" },
+];
+
+export const originalCharacterRows = [
+  {
+    ID: "1",
+    Character: "John Hobbes",
+    Photo: "Lark",
+    QuickClue: "Muddy shoes, car keys, and Rupert's invitation.",
+  },
+  {
+    ID: "2",
+    Character: "Annie Beaumont",
+    Photo: "Badger",
+    QuickClue: "Katherine's daughter and Victoria's sister.",
+  },
+  {
+    ID: "3",
+    Character: "Oswald Galley",
+    Photo: "Toad",
+    QuickClue: "Older Galley relative with the Chapel key and family sketch.",
+  },
+  {
+    ID: "4",
+    Character: "Tony Dauer",
+    Photo: "Otter",
+    QuickClue: "Helen's son, Eve's brother, and owner of the gun.",
+  },
+  {
+    ID: "5",
+    Character: "Martha Galley",
+    Photo: "Hedgehog",
+    QuickClue: "Rupert's wife, Eddie's mother, and the household host.",
+  },
+  {
+    ID: "6",
+    Character: "Edmund \"Eddie\" Galley",
+    Photo: "Weasel",
+    QuickClue: "Martha and Rupert's son; connected to Eve and Victoria.",
+  },
+  {
+    ID: "7",
+    Character: "Victoria \"Vic\" Beaumont",
+    Photo: "Raven",
+    QuickClue: "Annie's sister, Katherine's daughter, and Damian's partner.",
+  },
+  {
+    ID: "8",
+    Character: "Damian Maseko",
+    Photo: "Pike",
+    QuickClue: "Victoria's boyfriend and the strongly built car owner.",
+  },
+  {
+    ID: "9",
+    Character: "Helen Dauer",
+    Photo: "Ewe",
+    QuickClue: "Tony and Eve's mother; linked to the wine-stained dress.",
+  },
+  {
+    ID: "10",
+    Character: "Evelyn \"Eve\" Dauer",
+    Photo: "Goose",
+    QuickClue: "Helen's daughter, Tony's sister, and Eddie's fiancée.",
+  },
+  {
+    ID: "11",
+    Character: "Harry Thornton",
+    Photo: "Cod",
+    QuickClue: "The Galley household butler who prepares food and cocoa.",
+  },
+];
+
+export const act1SceneRows = [
+  { Time: "01", Code: "01-AT-2", Location: "Attic", People: "2", Note: "" },
+  { Time: "01", Code: "01-BI-6-10", Location: "Billiard Room", People: "6, 10", Note: "" },
+  { Time: "01", Code: "01-DI-7-8", Location: "Dining Room", People: "7, 8", Note: "" },
+  { Time: "01", Code: "01-HE-4-9", Location: "Helen's Room", People: "4, 9", Note: "" },
+  { Time: "01", Code: "01-LI-3-5", Location: "Living Room", People: "3, 5", Note: "" },
+  { Time: "01", Code: "01-QU-1-11", Location: "Quail Lane", People: "1, 11", Note: "" },
+  { Time: "02", Code: "02-AT-2-4", Location: "Attic", People: "2, 4", Note: "" },
+  { Time: "02", Code: "02-EN-1-6-7-10", Location: "Entrance", People: "1, 6, 7, 10", Note: "" },
+  { Time: "02", Code: "02-KI-11", Location: "Kitchen", People: "11", Note: "" },
+  { Time: "02", Code: "02-LI-5-8-9", Location: "Living Room", People: "5, 8, 9", Note: "" },
+  { Time: "02", Code: "02-OS-3", Location: "Oswald's Room", People: "3", Note: "" },
+  { Time: "03", Code: "03-AT-2-3", Location: "Attic", People: "2, 3", Note: "" },
+  { Time: "03", Code: "03-KI-10-11", Location: "Kitchen", People: "10, 11", Note: "" },
+  { Time: "03", Code: "03-LI-1-4-5-6-7-8-9", Location: "Living Room", People: "1, 4, 5, 6, 7, 8, 9", Note: "" },
+  { Time: "04", Code: "04-AT-2-7", Location: "Attic", People: "2, 7", Note: "" },
+  { Time: "04", Code: "04-BI-6-9", Location: "Billiard Room", People: "6, 9", Note: "" },
+  { Time: "04", Code: "04-HE-4", Location: "Helen's Room", People: "4", Note: "" },
+  { Time: "04", Code: "04-KI-3-10-11", Location: "Kitchen", People: "3, 10, 11", Note: "" },
+  { Time: "04", Code: "04-ST-1-5-8", Location: "Study", People: "1, 5, 8", Note: "" },
+  { Time: "05", Code: "05-AT-2-4", Location: "Attic", People: "2, 4", Note: "" },
+  { Time: "05", Code: "05-BI-6-7", Location: "Billiard Room", People: "6, 7", Note: "" },
+  { Time: "05", Code: "05-DI-1-5", Location: "Dining Room", People: "1, 5", Note: "" },
+  { Time: "05", Code: "05-KI-8-10-11", Location: "Kitchen", People: "8, 10, 11", Note: "" },
+  { Time: "05", Code: "05-LI-3-9", Location: "Living Room", People: "3, 9", Note: "" },
+  { Time: "06", Code: "06-DI-5-6-7", Location: "Dining Room", People: "5, 6, 7", Note: "" },
+  { Time: "06", Code: "06-ED-8-10", Location: "Eddie's Room", People: "8, 10", Note: "" },
+  { Time: "06", Code: "06-LI-2-9", Location: "Living Room", People: "2, 9", Note: "" },
+  { Time: "06", Code: "06-ST-1-11", Location: "Study", People: "1, 11", Note: "" },
+  { Time: "06", Code: "06-TO-3-4", Location: "Tony's Room", People: "3, 4", Note: "" },
+];
+
+export const act2SceneRows = [
+  { Time: "07", Code: "07-DI-1-2-4-5-6-7-8-9", Location: "Dining Room", People: "1, 2, 4, 5, 6, 7, 8, 9", Note: "" },
+  { Time: "07", Code: "07-ED-10", Location: "Eddie's Room", People: "10", Note: "" },
+  { Time: "07", Code: "07-KI-11", Location: "Kitchen", People: "11", Note: "" },
+  { Time: "07", Code: "07-ST-3", Location: "Study", People: "3", Note: "" },
+  { Time: "08", Code: "08-DI-2-7-8-9", Location: "Dining Room", People: "2, 7, 8, 9", Note: "" },
+  { Time: "08", Code: "08-ED-4-10", Location: "Eddie's Room", People: "4, 10", Note: "" },
+  { Time: "08", Code: "08-KI-1-6", Location: "Kitchen", People: "1, 6", Note: "" },
+  { Time: "08", Code: "08-MA-3-5", Location: "Martha's Room", People: "3, 5", Note: "" },
+  { Time: "09", Code: "09-DI-1-3", Location: "Dining Room", People: "1, 3", Note: "" },
+  { Time: "09", Code: "09-ED-6-10", Location: "Eddie's Room", People: "6, 10", Note: "" },
+  { Time: "09", Code: "09-MA-5-7", Location: "Martha's Room", People: "5, 7", Note: "" },
+  { Time: "09", Code: "09-TO-4-9", Location: "Tony's Room", People: "4, 9", Note: "" },
+  { Time: "09", Code: "09-VI-2-8", Location: "Victoria's Room", People: "2, 8", Note: "" },
+  { Time: "10", Code: "10-DI-2-3", Location: "Dining Room", People: "2, 3", Note: "" },
+  { Time: "10", Code: "10-ED-8", Location: "Eddie's Room", People: "8", Note: "" },
+  { Time: "10", Code: "10-LI-7-9", Location: "Living Room", People: "7, 9", Note: "" },
+  { Time: "10", Code: "10-MA-5-6", Location: "Martha's Room", People: "5, 6", Note: "" },
+  { Time: "10", Code: "10-TO-1-4", Location: "Tony's Room", People: "1, 4", Note: "" },
+  { Time: "11", Code: "11-BI-6-9", Location: "Billiard Room", People: "6, 9", Note: "" },
+  { Time: "11", Code: "11-LI-1-7-8", Location: "Living Room", People: "1, 7, 8", Note: "" },
+  { Time: "11", Code: "11-OS-2-3", Location: "Oswald's Room", People: "2, 3", Note: "" },
+  { Time: "11", Code: "11-TO-4-5", Location: "Tony's Room", People: "4, 5", Note: "" },
+  { Time: "12", Code: "12-BI-1-2-3-4-5-7-8-9", Location: "Billiard Room", People: "1, 2, 3, 4, 5, 7, 8, 9", Note: "" },
+  { Time: "12", Code: "12-TO-6", Location: "Tony's Room", People: "6", Note: "" },
+  { Time: "13", Code: "13-AT-2", Location: "Attic", People: "2", Note: "" },
+  { Time: "13", Code: "13-MA-5", Location: "Martha's Room", People: "5", Note: "" },
+  { Time: "13", Code: "13-OS-3", Location: "Oswald's Room", People: "3", Note: "" },
+  { Time: "13", Code: "13-ST-1", Location: "Study", People: "1", Note: "" },
+  { Time: "13", Code: "13-TO-4-6", Location: "Tony's Room", People: "4, 6", Note: "" },
+  { Time: "13", Code: "13-VI-7-8", Location: "Victoria's Room", People: "7, 8", Note: "" },
+];
+
+export const act3SceneRows = [
+  { Time: "14", Code: "14-AT-2-4", Location: "Attic", People: "2, 4", Note: "" },
+  { Time: "14", Code: "14-DI-1-3-5", Location: "Dining Room", People: "1, 3, 5", Note: "" },
+  { Time: "14", Code: "14-LI-6", Location: "Living Room", People: "6", Note: "" },
+  { Time: "14", Code: "14-VI-7", Location: "Victoria's Room", People: "7", Note: "" },
+  { Time: "15", Code: "15-DI-3-6", Location: "Dining Room", People: "3, 6", Note: "" },
+  { Time: "15", Code: "15-VI-1-2-4-5-7", Location: "Victoria's Room", People: "1, 2, 4, 5, 7", Note: "" },
+  { Time: "16", Code: "16-DI-5-7", Location: "Dining Room", People: "5, 7", Note: "" },
+  { Time: "16", Code: "16-KI-1-2-3-4-6", Location: "Kitchen", People: "1, 2, 3, 4, 6", Note: "" },
+  { Time: "17", Code: "17-DI-6-7", Location: "Dining Room", People: "6, 7", Note: "" },
+  { Time: "17", Code: "17-KI-2-3-4", Location: "Kitchen", People: "2, 3, 4", Note: "" },
+  { Time: "17", Code: "17-MA-1-5", Location: "Martha's Room", People: "1, 5", Note: "" },
+  { Time: "18", Code: "18-AT-1-4", Location: "Attic", People: "1, 4", Note: "" },
+  { Time: "18", Code: "18-KI-3", Location: "Kitchen", People: "3", Note: "" },
+  { Time: "18", Code: "18-MA-5-6", Location: "Martha's Room", People: "5, 6", Note: "" },
+  { Time: "18", Code: "18-VI-2-7", Location: "Victoria's Room", People: "2, 7", Note: "" },
+  { Time: "19", Code: "19-AT-1-2", Location: "Attic", People: "1, 2", Note: "" },
+  { Time: "19", Code: "19-DI-4-6", Location: "Dining Room", People: "4, 6", Note: "" },
+  { Time: "19", Code: "19-KI-3-5", Location: "Kitchen", People: "3, 5", Note: "" },
+  { Time: "20", Code: "20-DI-1", Location: "Dining Room", People: "1", Note: "" },
+  { Time: "20", Code: "20-KI-3-4", Location: "Kitchen", People: "3, 4", Note: "" },
+  { Time: "20", Code: "20-LI-2-5", Location: "Living Room", People: "2, 5", Note: "" },
+];
+
+export const act4SceneRows = [
+  { Time: "21", Code: "21-CH-3", Location: "Chapel", People: "3", Note: "" },
+  { Time: "21", Code: "21-LI-1-2-4", Location: "Living Room", People: "1, 2, 4", Note: "" },
+  { Time: "22", Code: "22-CH-2-3", Location: "Chapel", People: "2, 3", Note: "" },
+  { Time: "22", Code: "22-LI-1", Location: "Living Room", People: "1", Note: "" },
+  { Time: "23", Code: "23-CH-1-2", Location: "Chapel", People: "1, 2", Note: "" },
+  { Time: "24", Code: "24-DI-1", Location: "Dining Room", People: "1", Note: "" },
+  { Time: "25", Code: "25-AT-1", Location: "Attic", People: "1", Note: "" },
+  { Time: "26", Code: "26-EN-1", Location: "Entrance", People: "1", Note: "" },
+];
+
+export const modernSceneRows = [
+  { Time: "27", Code: "27-AT-66-75", Location: "Attic", People: "66, 75", Note: "" },
+  { Time: "27", Code: "27-DI-65-73", Location: "Dining Room", People: "65, 73", Note: "" },
+  { Time: "27", Code: "27-EN-67-70-74", Location: "Entrance", People: "67, 70, 74", Note: "" },
+  { Time: "28", Code: "28-BI-65-66", Location: "Billiard Room", People: "65, 66", Note: "" },
+  { Time: "28", Code: "28-DI-73-74", Location: "Dining Room", People: "73, 74", Note: "" },
+  { Time: "28", Code: "28-LI-67-70", Location: "Living Room", People: "67, 70", Note: "" },
+  { Time: "28", Code: "28-ST-64", Location: "Study", People: "64", Note: "" },
+  { Time: "29", Code: "29-BI-73", Location: "Billiard Room", People: "73", Note: "" },
+  { Time: "29", Code: "29-DI-66-67", Location: "Dining Room", People: "66, 67", Note: "" },
+  { Time: "29", Code: "29-LI-70-74", Location: "Living Room", People: "70, 74", Note: "" },
+  { Time: "30", Code: "30-LI-66-70", Location: "Living Room", People: "66, 70", Note: "" },
+  { Time: "30", Code: "30-ST-67-74", Location: "Study", People: "67, 74", Note: "" },
+  { Time: "31", Code: "31-KI-66", Location: "Kitchen", People: "66", Note: "" },
+  { Time: "31", Code: "31-LI-67-70", Location: "Living Room", People: "67, 70", Note: "Required opening solution for the modern investigation." },
+  { Time: "32", Code: "32-CH-64", Location: "Chapel", People: "64", Note: "Ervin Dolskey's final Chapel scene." },
+];
+
+export const hiddenAndFinalSceneRows = [
+  { Time: "01", Code: "01-ST-12", Location: "Study", People: "12", Note: "Hidden Rupert Galley scene; requires manual profile 12." },
+  { Time: "25", Code: "25-WI-K", Location: "Wintercote", People: "K", Note: "Hidden Katherine Beaumont scene; requires profile K and Wintercote." },
+  { Time: "00", Code: "00-LI-3-5-6-7-8-10-12", Location: "Living Room", People: "3, 5, 6, 7, 8, 10, 12", Note: "Final Scene 00 family photograph." },
+];
+
+<GuideQuickAnswer title="All Scene Codes">
+This page lists **all 106 valid reconstructions** needed to fill the original
+Galley House Timeline, solve both hidden victims, complete the modern
+investigation, and play Scene 00.
+
+A code always follows:
+
+```text
+TIME-LOCATION-PEOPLE
+```
+
+The three codes most likely to block progress are:
+
+```text
+01-ST-12
+25-WI-K
+31-LI-67-70
+```
+
+The final Scene 00 code is:
+
+```text
+00-LI-3-5-6-7-8-10-12
+```
+
+Use the tables as a direct answer sheet. For progressive clues and an
+explanation of why a code fails, use the Hints and Scene Solutions Guide
+instead.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Last verified: July 16, 2026. This page contains complete puzzle and story
+  spoilers for both scenarios and the final reconstruction.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-incident-at-galley-house/the-incident-at-galley-house-first-scene-code.webp"
+    alt="The Incident at Galley House opening 01-QU-1-11 scene code"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The opening reconstruction demonstrates the format: Time 01, Quail Lane,
+    and People 1 and 11.
+  </figcaption>
+</figure>
+
+<h2 id="how-to-read">
+  How to read and enter a scene code
+</h2>
+
+Every row separates the same three fields:
+
+- **Time** is the numbered Timeline slot.
+- **Location** is the two-letter machine abbreviation.
+- **People** includes every profile physically present, even when someone is
+  silent or already dead.
+
+For example:
+
+```text
+03-LI-1-4-5-6-7-8-9
+```
+
+means:
+
+- Time 03;
+- Living Room (`LI`);
+- People 1, 4, 5, 6, 7, 8, and 9.
+
+I do not need to rename every profile before using the list. The machine accepts
+the numeric or letter ID as long as the person and location have been added.
+
+<h2 id="person-id-reference">
+  Person 1–11 names and photo matches
+</h2>
+
+The code tables use IDs because that is what the machine accepts. This compact
+reference lets me translate those numbers without opening a separate character
+page every time.
+
+<GuideTable
+  caption="Original Galley House Person 1–11 name and animal-photo reference."
+  columns={characterIdColumns}
+  rows={originalCharacterRows}
+/>
+
+The numbered sequence also helps me read the later Timeline: Rupert is the
+manually created **Person 12**, while Katherine uses **Person K**. Neither
+belongs inside the ordinary 1–11 table.
+
+<div className="my-4">
+  {"For the complete room-abbreviation table and failed-code diagnosis, use the "}
+  <Link href="/the-incident-at-galley-house/hints/">
+    Hints and Scene Solutions Guide
+  </Link>
+  {"."}
+</div>
+
+<h2 id="original-act-1">
+  Original scenario codes: Times 01–06
+</h2>
+
+These are the opening movements through Quail Lane, the Entrance, the Living
+Room, the Study, the bedrooms, the Kitchen, and the first private
+conversations.
+
+<GuideTable
+  caption="All original Galley House scene codes for Times 01 through 06."
+  columns={sceneCodeColumns}
+  rows={act1SceneRows}
+/>
+
+### Opening route I use first
+
+The three supplied starting scenes are:
+
+```text
+01-QU-1-11
+02-EN-1-6-7-10
+03-LI-1-4-5-6-7-8-9
+```
+
+After those, I normally follow:
+
+```text
+04-ST-1-5-8
+05-DI-1-5
+06-ST-1-11
+```
+
+That route identifies the first major rooms and gives enough movement evidence
+to open the side scenes in the same time range.
+
+<h2 id="original-act-2">
+  Original scenario codes: Times 07–13
+</h2>
+
+This block covers dinner, the bedroom routes, the Billiard Room confrontation,
+the first visible deaths, and the household gathering at Time 12.
+
+<GuideTable
+  caption="All original Galley House scene codes for Times 07 through 13."
+  columns={sceneCodeColumns}
+  rows={act2SceneRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/the-incident-at-galley-house/the-incident-at-galley-house-timeline-evidence.webp"
+    alt="The Incident at Galley House Timeline filling with linked scene evidence"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    By Time 13, I use the Timeline to check which person and room combinations
+    remain unused instead of replaying every reconstruction.
+  </figcaption>
+</figure>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="original-act-3">
+  Original scenario codes: Times 14–20
+</h2>
+
+This section contains the second-day search, the collapsing household, the
+Kitchen and Dining Room routes, and the scenes leading toward the Chapel.
+
+<GuideTable
+  caption="All original Galley House scene codes for Times 14 through 20."
+  columns={sceneCodeColumns}
+  rows={act3SceneRows}
+/>
+
+<h2 id="original-act-4">
+  Original scenario codes: Times 21–26
+</h2>
+
+These are the final ordinary scenes in the original case.
+
+<GuideTable
+  caption="All original Galley House scene codes for Times 21 through 26."
+  columns={sceneCodeColumns}
+  rows={act4SceneRows}
+/>
+
+The last ordinary route is:
+
+```text
+21-CH-3
+22-CH-2-3
+23-CH-1-2
+24-DI-1
+25-AT-1
+26-EN-1
+```
+
+The two hidden victims are not included in this ordinary sequence because both
+require manual calibration.
+
+<h2 id="hidden-scenes">
+  Hidden victim and final Scene 00 codes
+</h2>
+
+<GuideTable
+  caption="The two manually calibrated victim scenes and the final Scene 00 reconstruction."
+  columns={specialCodeColumns}
+  rows={hiddenAndFinalSceneRows}
+/>
+
+### Person 12
+
+Create profile **12**, assign Rupert Galley and the Fox portrait, then use:
+
+```text
+01-ST-12
+```
+
+### Person K
+
+Create profile **K**, assign Katherine Beaumont and the Deer portrait, add
+Wintercote, then use:
+
+```text
+25-WI-K
+```
+
+<figure className="my-8">
+  <Image
+    src="/images/the-incident-at-galley-house/the-incident-at-galley-house-person-k-code.webp"
+    alt="The Incident at Galley House 25-WI-K hidden Katherine scene code"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Person K uses a letter profile and an off-site location, so it cannot be
+    completed by forcing another numbered house guest into the Timeline.
+  </figcaption>
+</figure>
+
+<div className="my-4">
+  {"For the evidence behind both hidden identities, use the "}
+  <Link href="/the-incident-at-galley-house/person-12-person-k/">
+    Person 12 and Person K Guide
+  </Link>
+  {"."}
+</div>
+
+<h2 id="modern-scene-codes">
+  Modern investigation codes: Times 27–32
+</h2>
+
+Insert the Admin Card and calibrate the modern IDs before using this section.
+
+The modern profiles used in the codes are:
+
+```text
+64 — Ervin Dolskey
+65 — Sam Moore
+66 — Megan "Meg" Patterson
+67 — Lawrence Dunn
+70 — Reya Beckon
+73 — Mason Gibbs
+74 — Pippa Smith
+75 — Jacqueline
+```
+
+<figure className="my-8">
+  <Image
+    src="/images/the-incident-at-galley-house/the-incident-at-galley-house-modern-id-list.webp"
+    alt="Modern investigation ID list in The Incident at Galley House"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I label the modern IDs before filling Times 27–32 so I do not have to
+    translate every conversation back into numbers.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="All valid modern investigation scene codes for Times 27 through 32."
+  columns={specialCodeColumns}
+  rows={modernSceneRows}
+/>
+
+### Start the modern scenario with Time 31
+
+The first required reconstruction is:
+
+```text
+31-LI-67-70
+```
+
+It uses:
+
+- Time 31;
+- Living Room;
+- Lawrence Dunn (67);
+- Reya Beckon (70).
+
+<figure className="my-8">
+  <Image
+    src="/images/the-incident-at-galley-house/the-incident-at-galley-house-time-31-reya-lawrence.webp"
+    alt="The Incident at Galley House 31-LI-67-70 modern scene code"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Time 31 is the modern scenario's main entry point. Reya is a participant,
+    not only the operator standing outside the reconstruction.
+  </figcaption>
+</figure>
+
+### Fill the earlier modern deaths
+
+Lawrence identifies four earlier thunderclaps:
+
+```text
+27 → 28 → 29 → 30
+```
+
+Each number represents one new death and one new set of reconstructions.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-incident-at-galley-house/the-incident-at-galley-house-modern-four-thunderclaps.webp"
+    alt="Lawrence connects four thunderclaps to modern Times 27 28 29 and 30"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The spoken 27–30 sequence is the quickest way to organize the modern code
+    table after solving Time 31.
+  </figcaption>
+</figure>
+
+### Finish with Ervin and Scene 00
+
+After ID 64 becomes available, complete:
+
+```text
+28-ST-64
+32-CH-64
+```
+
+Then use the photograph produced by the scanner to enter:
+
+```text
+00-LI-3-5-6-7-8-10-12
+```
+
+Do not replace Person 12 with Person 1. The final machine selection uses
+**3, 5, 6, 7, 8, 10, and 12**.
+
+<figure className="my-8">
+  <Image
+    src="/images/the-incident-at-galley-house/the-incident-at-galley-house-hallucination-final-code.webp"
+    alt="The Incident at Galley House final 00-LI-3-5-6-7-8-10-12 scene code"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Scene 00 uses the Living Room and the seven profiles shown in the restored
+    photograph.
+  </figcaption>
+</figure>
+
+<h2 id="achievement-only-codes">
+  Achievement-only inputs that are not valid scenes
+</h2>
+
+Do not count these as missing Spectronoeticist scenes.
+
+### Still Alive
+
+```text
+32-LI-70
+```
+
+This intentionally asks the machine to reconstruct Reya alone while she is
+still alive, so it fails as a normal scene and unlocks **Still Alive**.
+
+### TYPE HE-L-P
+
+Create profiles **L** and **P**, then use:
+
+```text
+00-HE-L-P
+```
+
+This is a wordplay achievement input, not part of the historical or modern
+Timeline.
+
+<div className="my-4">
+  {"For the full achievement route and cleanup order, use the "}
+  <Link href="/the-incident-at-galley-house/achievements-guide/">
+    Achievements Guide
+  </Link>
+  {"."}
+</div>
+
+<h2 id="code-not-working">
+  What to check when a listed code does not work
+</h2>
+
+A code from the tables can still be unavailable if the machine setup is
+incomplete.
+
+I check:
+
+1. the required location has been added under Locations;
+2. every required numeric or letter profile has been calibrated;
+3. the Admin Card is inserted for the modern scenario;
+4. ID 64 has been revealed before attempting Ervin's scenes;
+5. the code uses every participant shown in the row;
+6. the Time 00 photograph has been scanned before entering Scene 00.
+
+The code itself does not automatically create a missing room or profile.
+
+<h2 id="related-guides">
+  Related The Incident at Galley House guides
+</h2>
+
+<ul className="my-6 list-disc space-y-2 pl-6">
+  <li>
+    {"Use the "}
+    <Link href="/the-incident-at-galley-house/hints/">
+      Hints and Scene Solutions Guide
+    </Link>
+    {" when you want progressive clues instead of the full answer list."}
+  </li>
+  <li>
+    {"Use the "}
+    <Link href="/the-incident-at-galley-house/person-12-person-k/">
+      Person 12 and Person K Guide
+    </Link>
+    {" for Rupert, Katherine, Fox, Deer, and both manual calibrations."}
+  </li>
+  <li>
+    {"Read the "}
+    <Link href="/the-incident-at-galley-house/ending-explained/">
+      Ending Explained
+    </Link>
+    {" for Amelia West, the memory chain, Ervin's plan, and Scene 00's meaning."}
+  </li>
+  <li>
+    {"Use the "}
+    <Link href="/the-incident-at-galley-house/achievements-guide/">
+      Achievements Guide
+    </Link>
+    {" for Still Alive, TYPE HE-L-P, Hallucination, and completed-save cleanup."}
+  </li>
+  <li>
+    {"Return to the "}
+    <Link href="/the-incident-at-galley-house/">
+      The Incident at Galley House Guide Hub
+    </Link>
+    {" for the recommended reading order."}
+  </li>
+</ul>
+
+<h2 id="faq">
+  The Incident at Galley House All Scene Codes FAQ
+</h2>
+
+### Can I enter the scene codes out of story order?
+
+Yes, once the required time, room, and profiles are available. A code cannot
+unlock a location, hidden profile, Admin ID, or photograph that the machine has
+not registered yet.
+
+### Do character names matter when entering a code?
+
+No. The machine validates the numeric or letter IDs. I still rename confirmed
+profiles because the transcript and Timeline then display useful names, but a
+wrong label does not alter the underlying code and can be corrected later.
+
+### Do I need Person 12 and Person K before entering the modern scenario?
+
+I can continue after the main 1–11 route, but the original case is not truly
+complete until both hidden profiles are reconstructed. They also unlock
+separate achievements, so I resolve them before using the completed save for
+cleanup.
+
+### How many valid reconstructions are listed here?
+
+There are 106: 88 ordinary original scenes, two hidden-victim scenes, 15 valid
+modern scenes, and Scene 00. The two achievement-only inputs are shown
+separately and are not included in that total.
+
+### Can I return after the ending for a missed code?
+
+Yes. The completed save remains available for optional-scene and achievement
+cleanup, so I do not restart solely for one missing reconstruction.

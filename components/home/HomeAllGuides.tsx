@@ -73,6 +73,7 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  { title: "The Incident at Galley House", href: "/the-incident-at-galley-house" },
   { title: "Ascend to ZERO", href: "/ascend-to-zero" },
   { title: "Backyard Baseball", href: "/backyard-baseball" },
   { title: "Forest Escape: Last Train", href: "/forest-escape-last-train" },

@@ -132,6 +132,160 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "The Incident at Galley House",
+    "game": "The Incident at Galley House",
+    "href": "/the-incident-at-galley-house",
+    "slug": "the-incident-at-galley-house",
+    "kind": "game",
+    "status": "active",
+    "accent": "cyan",
+    "archiveCategory": "Story, endings, horror & route locks",
+    "label": "Deduction Mystery",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Complete first-wave coverage",
+    "description": "Follow The Incident at Galley House guide hub for progressive puzzle hints, all 106 scene codes, Person 1–11 identities, Person 12 and Person K, all 15 achievements, the modern investigation, and the full ending explanation.",
+    "coverage": [
+      "Reconstruction machine setup, Time-Location-People code structure, all room abbreviations, rejected-code diagnosis, silent participants, thunderclaps, early-game routing, and the exact Time 31 solution",
+      "All 106 valid reconstructions across Times 01–32, the original case, hidden profiles, modern IDs, Scene 00, achievement-only inputs, and Person 1–11 name and animal-portrait matches",
+      "Rupert Galley as Person 12, Katherine Beaumont as Person K, Fox and Deer evidence, Manual Calibration, Amelia West, Wintercote, 01-ST-12, and 25-WI-K",
+      "All 15 Steam achievements, launch completion-rate snapshot, Persistence, House Tour, Full House, Death Note, Still Alive, TYPE HE-L-P, Hallucination, Spectronoeticist, and completed-save cleanup",
+      "Amelia West, the emotional memory chain, the historical Galley House incident, modern thunderclaps, Pippa, Lawrence, Megan, Ervin Dolskey's containment plan, Reya's survival, Eleanor's memorial, and Scene 00"
+    ],
+    "image": "/images/the-incident-at-galley-house/the-incident-at-galley-house-scene-code-machine.webp",
+    "imageFit": "cover",
+    "imagePadding": false,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 7,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "The Incident at Galley House Guide Hub",
+        "href": "/the-incident-at-galley-house",
+        "type": "Guide Hub",
+        "description": "Start here for spoiler-safe hints, the complete scene-code walkthrough, hidden Person 12 and Person K solutions, all achievements, modern investigation help, and the ending explanation.",
+        "image": "/images/the-incident-at-galley-house/the-incident-at-galley-house-scene-code-machine.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "spotlightMeta": "Progressive hints, all 106 scene codes, Person 1–11 identities, Person 12 and K, achievements, modern investigation help, and ending spoilers"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "The Incident at Galley House All Scene Codes",
+        "href": "/the-incident-at-galley-house/all-scene-codes",
+        "type": "Walkthrough",
+        "description": "Find all 106 valid scene codes for Times 01–32, Person 1–11 names and portraits, Person 12, Person K, modern IDs, achievement inputs, and Scene 00.",
+        "date": "Updated recently",
+        "image": "/images/the-incident-at-galley-house/the-incident-at-galley-house-first-scene-code.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 27,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta": "All 106 original, hidden, modern, and Scene 00 reconstructions, plus Person 1–11 names, portraits, special codes, and code troubleshooting"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "The Incident at Galley House Hints & Scene Solutions",
+        "href": "/the-incident-at-galley-house/hints",
+        "type": "Puzzle Help",
+        "description": "Use progressive hints, fix rejected scene codes, decode every room abbreviation, solve Time 31, track thunderclaps, and find missing participants without revealing every answer.",
+        "date": "Updated recently",
+        "image": "/images/the-incident-at-galley-house/the-incident-at-galley-house-time-31-reya-lawrence.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestOrder": 28,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta": "Progressive scene hints, machine setup, all room abbreviations, rejected-code diagnosis, silent participants, thunderclaps, and Time 31"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "The Incident at Galley House Person 12 & Person K",
+        "href": "/the-incident-at-galley-house/person-12-person-k",
+        "type": "Puzzle Help",
+        "description": "Identify Rupert Galley as Person 12 and Katherine Beaumont as Person K, match Fox and Deer, and solve the hidden 01-ST-12 and 25-WI-K scenes.",
+        "date": "Updated recently",
+        "image": "/images/the-incident-at-galley-house/the-incident-at-galley-house-person-12-code.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestOrder": 29,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta": "Rupert Galley, Katherine Beaumont, Fox, Deer, Manual Calibration, Amelia West, Wintercote, 01-ST-12, and 25-WI-K"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "The Incident at Galley House Achievements Guide",
+        "href": "/the-incident-at-galley-house/achievements-guide",
+        "type": "Achievements",
+        "description": "Unlock all 15 achievements in one save with exact codes for Person 12, Person K, Still Alive, TYPE HE-L-P, Hallucination, Spectronoeticist, and Scene 00.",
+        "date": "Updated recently",
+        "image": "/images/the-incident-at-galley-house/the-incident-at-galley-house-achievement-progress.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestOrder": 30,
+          "spotlightRail": true,
+          "spotlightOrder": 4,
+          "spotlightMeta": "All 15 achievements, launch completion rates, hidden profiles, Still Alive, TYPE HE-L-P, Hallucination, Spectronoeticist, and one-save cleanup"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      },
+      {
+        "title": "The Incident at Galley House Ending Explained",
+        "href": "/the-incident-at-galley-house/ending-explained",
+        "type": "Endings",
+        "description": "Understand Amelia West, the emotional memory chain, modern thunderclaps, Ervin Dolskey's plan, why Reya survives, Eleanor's memorial, and Scene 00.",
+        "date": "Updated recently",
+        "image": "/images/the-incident-at-galley-house/the-incident-at-galley-house-ervin-emotional-connections-rule.webp",
+        "imageFit": "cover",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestOrder": 31,
+          "spotlightRail": true,
+          "spotlightOrder": 5,
+          "spotlightMeta": "Amelia West, the three memory-chain rules, Pippa, Lawrence, Megan, Ervin's containment plan, Reya's survival, Eleanor, and Scene 00"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 6
+        }
+      }
+    ]
+  },
+  {
     "title": "Ascend to ZERO",
     "game": "Ascend to ZERO",
     "href": "/ascend-to-zero",
