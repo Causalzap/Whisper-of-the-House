@@ -1,0 +1,626 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const contractProductColumns = [
+  { key: "contractItem", label: "Contract item" },
+  { key: "correctProduct", label: "What I verify" },
+  { key: "commonFailure", label: "Common failure" },
+];
+
+export const contractProductRows = [
+  {
+    contractItem: "Clay Block",
+    correctProduct: "The finished pallet label says Clay Block",
+    commonFailure: "Supplying raw Clay",
+  },
+  {
+    contractItem: "Clay Brick",
+    correctProduct:
+      "Clay Blocks completed the additional processing step into Clay Bricks",
+    commonFailure: "Sending Clay Blocks directly",
+  },
+  {
+    contractItem: "Stone Brick",
+    correctProduct: "The finished pallet says Stone Brick, not Stone Block",
+    commonFailure: "Stopping one production stage early",
+  },
+  {
+    contractItem: "Limestone Block",
+    correctProduct:
+      "The pallet still contains finished Limestone Blocks",
+    commonFailure: "Converting every Limestone Block into Cement",
+  },
+  {
+    contractItem: "Cement",
+    correctProduct: "The Forming Press produced finished Cement",
+    commonFailure: "Sending Limestone Blocks",
+  },
+  {
+    contractItem: "Crushed Coal",
+    correctProduct: "Raw Coal was processed into Crushed Coal",
+    commonFailure: "Sending unprocessed Coal",
+  },
+  {
+    contractItem: "Foam Glass",
+    correctProduct: "The tracked pallet contains finished Foam Glass",
+    commonFailure: "Assuming ordinary Glass will count",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To complete a contract, I check the exact finished products, compare them with
+my tracked warehouse stock, submit an offer I can realistically fulfill, and
+then select the accepted contract again inside the **Pallet Packer**.
+
+My manual route is:
+
+<div className="mt-4 space-y-1 font-mono text-sm leading-7">
+  <div>Check products, stock, machines, and deadline</div>
+  <div>→ Submit the contract offer</div>
+  <div>→ Select the accepted contract in the Pallet Packer</div>
+  <div>→ Place the correct finished-product pallet at the input</div>
+  <div>→ Keep Contract Output and Excess Output clear</div>
+  <div>→ Complete every product counter</div>
+  <div>→ Load the truck and use the Delivery Gate</div>
+</div>
+
+The item must match the exact processing stage. **Clay Block is not Clay
+Brick**, raw Coal is not Crushed Coal, and ordinary Glass is not Foam Glass.
+
+I never use **End Day** when an active contract has only one day remaining. In
+my run, advancing the day caused that contract to expire.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Tested solo on the launch-week build available July 18, 2026. Contract
+  prices, negotiation behavior, XP, deadlines, and machine rules may change in
+  later updates.
+</div>
+
+<h2 id="check-stock">
+  Check stock and choose a contract I can finish
+</h2>
+
+I do not rank contracts by the largest displayed payout.
+
+I rank them by **completion certainty**.
+
+Before submitting an offer, I check:
+
+- every exact finished-product name;
+- the quantity required for each product;
+- the delivery time;
+- tracked finished stock;
+- the machines needed for missing items;
+- and whether the relevant raw resources are still available.
+
+The Contracts screen does not always give me a convenient total for everything
+in the warehouse, so I sometimes leave the computer and inspect the pallets
+manually.
+
+My stock check is:
+
+1. write down each required product and quantity;
+2. inspect the pallets inside the marked storage area;
+3. separate finished goods from raw materials and intermediate products;
+4. identify the slowest missing production chain;
+5. accept only when that slow side is realistic.
+
+A pallet visible on the warehouse floor may not count as tracked stock when it
+is outside the marked storage zone.
+
+Raw material also does not count as a finished contract item.
+
+Having Clay in Factory Storage does not mean I already have Clay Bricks.
+Having Limestone Blocks does not mean I already have Cement.
+
+### My early contract priority
+
+I usually work through offers in this order:
+
+1. both finished products are already tracked;
+2. only one short production queue is missing;
+3. the raw materials exist and all required machines are ready;
+4. a short mining trip can provide the missing material;
+5. the order requires a new machine, license, or property.
+
+I usually stop at step four.
+
+A high-paying offer is not useful when one product requires another property
+or a machine I cannot yet buy.
+
+### Estimate the slowest product
+
+For a two-product contract, I calculate the time needed for the harder side.
+
+If I already have 20 Limestone Blocks but still need:
+
+- raw Clay;
+- Clay Block production;
+- the Forming Press;
+- and 15 Clay Bricks;
+
+then Clay Bricks determine whether the order is safe.
+
+I do not call the contract “almost finished” simply because the easier counter
+is ready.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-contract-pallet-packer.webp"
+    alt="Ore Factory Squad contract displayed in the Pallet Packer with separate product counters"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I check every product counter independently. One completed product does not
+    finish a multi-product contract.
+  </figcaption>
+</figure>
+
+<h2 id="contract-negotiation">
+  How contract negotiation works in my early runs
+</h2>
+
+The amount first shown on an offer is not always the highest price the customer
+will accept.
+
+My cleanest recorded comparison was a contract that accepted an offer worth
+approximately **$20 more** than the initial displayed amount.
+
+I also had higher offers accepted at roughly **$530** and **$760**, but I did
+not record the original displayed amounts for those two contracts.
+
+Because those starting values are missing, I do not use the examples to claim:
+
+- a best markup percentage;
+- a guaranteed accepted increase;
+- or a fixed negotiation formula.
+
+They prove only that a higher offer can succeed.
+
+My practical rule is:
+
+- raise the amount modestly when most products are already finished;
+- stay closer to the displayed value when mining or several machines are still
+  required;
+- avoid spending too much of the working day testing aggressive offers when I
+  still need time to produce and deliver;
+- and stop treating one successful markup as a rule for every customer.
+
+### Negotiation Rate is also an upgrade path
+
+The factory progression includes an improvement to **Negotiation Rate**.
+
+That means my opening contract results are not necessarily the final limit of
+the system.
+
+I treat the upgrade as a reason to retest offers later. Until I have recorded
+the displayed amount, submitted offer, accepted amount, and final payout across
+several upgraded contracts, I do not claim an exact benefit.
+
+<h2 id="select-pallet-packer">
+  Select the accepted contract in the Pallet Packer
+</h2>
+
+Accepting an offer on the computer does not automatically configure the
+Pallet Packer.
+
+I walk to the machine, open its interface, and select the accepted contract as
+the active delivery.
+
+The interface then shows:
+
+- the required products;
+- the amount already supplied;
+- the amount still missing;
+- and useful information about available stock.
+
+This is my final check before moving any pallets.
+
+### Factory Storage does not automatically complete the order
+
+The Pallet Packer can show that a product exists in stock, but my manual setup
+still requires a physical finished-product pallet at the machine input.
+
+The route is:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="space-y-1 font-mono text-sm leading-7 text-slate-700">
+    <div>Production machine</div>
+    <div>→ Finished-product pallet</div>
+    <div>→ Pallet Packer input</div>
+    <div>→ Contract Output</div>
+    <div>→ Completed delivery load</div>
+  </div>
+</div>
+
+I lower the finished pallet into the input area and look for:
+
+- **Pallet detected**;
+- the correct product counter;
+- and **Auto Start: On**.
+
+A detected pallet can still be useless when it contains the wrong product
+stage.
+
+### Partial and oversized pallets
+
+The input pallet does not need to be full.
+
+I can use a partial pallet when it contains enough of the correct product to
+advance the contract.
+
+I can also place a pallet containing more than the order needs. The packer uses
+the required quantity and sends the remaining items toward **Excess Output**.
+
+<h2 id="exact-product-stage">
+  Match the exact contract product
+</h2>
+
+The item label matters more than the material family.
+
+A contract checks the finished product stage, not merely whether two items came
+from the same raw material.
+
+<GuideTable
+  caption="Exact finished products accepted by tested contracts and the processing-stage mistakes that prevented progress."
+  columns={contractProductColumns}
+  rows={contractProductRows}
+/>
+
+I do not convert every intermediate product automatically.
+
+Limestone Block may be requested directly, so I reserve some before producing
+Cement. The same rule applies to Blocks that can later become Bricks.
+
+### Clay Block and Clay Brick
+
+My early Clay Brick contract failed because the pallet still contained Clay
+Blocks.
+
+The fix was not to reposition the pallet.
+
+I needed another production step to create the actual Clay Bricks.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-clay-block-vs-clay-brick.webp"
+    alt="Ore Factory Squad contract requiring Clay Brick while the available pallet contains Clay Block"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The material was related, but the processing stage was wrong. The contract
+    required finished Clay Bricks.
+  </figcaption>
+</figure>
+
+### Foam Glass contracts
+
+I treat Foam Glass as its own finished product.
+
+Sand or ordinary Glass in storage does not prove that a Foam Glass order is
+ready.
+
+I accept one only when:
+
+- finished Foam Glass is already tracked;
+- or its production chain is already running with enough deadline remaining.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="outputs">
+  Keep Contract Output and Excess Output clear
+</h2>
+
+The Pallet Packer handles two results:
+
+- products assigned to the contract;
+- products remaining after the required amount is taken.
+
+The completed delivery uses **Contract Output**.
+
+Leftover items use **Excess Output**.
+
+Those excess items are not automatically destroyed. I move them back into
+storage or send them to another production stage.
+
+### Fix Output blocked
+
+When the machine displays **Output blocked**, I inspect the physical output
+areas before changing the active contract.
+
+Common causes are:
+
+- a completed contract load still occupying Contract Output;
+- an excess pallet that has not been removed;
+- another pallet overlapping the output position;
+- or an input pallet placed so badly that it traps the result.
+
+I move the obstructing pallet first.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-pallet-packer-output-blocked.webp"
+    alt="Ore Factory Squad Pallet Packer showing Output blocked while a pallet occupies the output area"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Pallet Packer had enough material. It was waiting for physical output
+    space.
+  </figcaption>
+</figure>
+
+I leave enough room for:
+
+- the input pallet;
+- the completed contract load;
+- the excess pallet;
+- and the forklift approach.
+
+I create that space before starting a multi-product order.
+
+<h2 id="load-and-deliver">
+  Load the contract and use the Delivery Gate
+</h2>
+
+I wait until every required counter is complete and the finished delivery load
+has appeared.
+
+I then lift the completed load, place it fully inside the truck bed, and confirm
+that every required contract load is aboard before driving to the Delivery
+Gate.
+
+### Complete the final handoff
+
+At the marked Delivery Gate, I drive the loaded truck into the delivery area
+and use the available handoff prompt.
+
+In my tested deliveries, I did not manually unload every product pallet at the
+destination.
+
+The contract was complete when the payout and XP appeared.
+
+When no reward appears, I check:
+
+1. whether every required delivery load is on the truck;
+2. whether I entered the correct marked area;
+3. whether every product counter was complete;
+4. whether the contract was still active;
+5. whether a second required load remained at the warehouse.
+
+<h2 id="rewards-and-deadlines">
+  Fast Delivery Bonus, deadlines and night delivery
+</h2>
+
+One fully documented contract required:
+
+- **20 Clay Blocks**;
+- **20 Limestone Blocks**;
+- **40 total products**.
+
+Its base value was **$580**.
+
+Finishing it quickly added a **$58 Fast Delivery Bonus**, producing:
+
+- **$638 total payout**;
+- **200 XP**.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-contract-fast-delivery-bonus.webp"
+    alt="Ore Factory Squad completed contract showing a 580 dollar base payment 58 dollar Fast Delivery Bonus and 200 XP"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This recorded bonus was exactly 10% of the $580 base amount. I do not assume
+    every contract uses the same calculation without more complete tests.
+  </figcaption>
+</figure>
+
+Other completed contracts awarded **300 XP** and **400 XP**, but I did not
+record their displayed price, accepted price, deadline, bonus, and products as
+one complete dataset.
+
+I therefore do not claim that:
+
+- two-product contracts always give more XP;
+- higher negotiated prices increase XP;
+- or the Fast Delivery Bonus is always 10%.
+
+### Machines work at night
+
+Active machines continued producing after dark.
+
+This allowed me to finish a nearly complete queue without advancing the day.
+
+New contract offers could not be sent at night, but the v1.0.1 launch hotfix
+removed the restriction that prevented delivery calls at night.
+
+I did not separately record a night-delivery reward screen, so I do not claim
+whether delivering after dark changes the Fast Delivery Bonus.
+
+### End Day can expire the contract
+
+An active contract with **1 day remaining** expired when I used End Day.
+
+My rule is:
+
+- continue producing overnight when the missing products can be finished;
+- attempt the delivery before ending the day;
+- and sacrifice the speed bonus when the alternative is losing the entire
+  contract.
+
+<h2 id="manual-and-offsite-contracts">
+  Manual contracts and Off-site Worker Contracts
+</h2>
+
+The Pallet Packer route is a manual factory contract:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="space-y-1 font-mono text-sm leading-7 text-slate-700">
+    <div>Accept customer order</div>
+    <div>→ Produce the goods</div>
+    <div>→ Pack the delivery</div>
+    <div>→ Load the truck</div>
+    <div>→ Complete the handoff</div>
+  </div>
+</div>
+
+The employee interface also includes **Offsite Contract** work.
+
+I treat that as a separate worker-management system rather than an automatic
+replacement for the Pallet Packer.
+
+I did not verify:
+
+- its exact payout;
+- whether it awards company XP;
+- how long the employee remains unavailable;
+- whether it consumes warehouse products;
+- or which employee type performs best.
+
+Until those values are tested, manual deliveries remain my predictable route
+for cash and progression.
+
+<h2 id="troubleshooting">
+  Additional contract troubleshooting
+</h2>
+
+<div className="my-6 grid gap-4 md:grid-cols-2">
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+    <h3 className="font-semibold text-slate-900">
+      Stock exists on the floor but is missing from my count
+    </h3>
+    <p className="mt-2 text-sm text-slate-700">
+      I move the finished pallet fully inside the marked storage area before
+      using it to judge whether a contract is ready.
+    </p>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+    <h3 className="font-semibold text-slate-900">
+      The wrong accepted contract is selected
+    </h3>
+    <p className="mt-2 text-sm text-slate-700">
+      I reopen the Pallet Packer and select the intended delivery before adding
+      another product pallet.
+    </p>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+    <h3 className="font-semibold text-slate-900">
+      I cannot remove the detected pallet by hand
+    </h3>
+    <p className="mt-2 text-sm text-slate-700">
+      Once a pallet is positioned in the machine area, I use the forklift
+      rather than trying to pick it up manually.
+    </p>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+    <h3 className="font-semibold text-slate-900">
+      A packed delivery becomes an empty red pallet
+    </h3>
+    <p className="mt-2 text-sm text-slate-700">
+      I update to v1.0.1 or later before rebuilding the order. The launch
+      hotfix addressed prepared delivery pallets turning into empty red pallets
+      after packaging.
+    </p>
+  </div>
+</div>
+
+<h2 id="related-guides">
+  Related Ore Factory Squad guides
+</h2>
+
+<ul className="my-6 list-disc space-y-3 pl-6">
+  <li>
+    {"Return to the "}
+    <Link
+      href="/ore-factory-squad/beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Beginner Guide
+    </Link>
+    {" for the Greenpark Lot to Level 5 opening route."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/how-to-sell-products/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      How to Sell Products guide
+    </Link>
+    {" when finished stock is not detected by the warehouse computer."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/find-limestone-make-cement/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Limestone and Cement guide
+    </Link>
+    {" when Limestone Blocks or Cement are the slow side of the order."}
+  </li>
+
+  <li>
+    {"Continue with the "}
+    <Link
+      href="/ore-factory-squad/smelt-copper-iron-ingots/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Copper and Iron Smelting guide
+    </Link>
+    {" when contracts begin requesting metal Ingots."}
+  </li>
+</ul>
+
+<h2 id="faq">
+  Ore Factory Squad contracts FAQ
+</h2>
+
+### Can I deliver a contract at night?
+
+The v1.0.1 hotfix removed the restriction that prevented delivery calls at
+night.
+
+Active machines can also continue processing after dark. I did not separately
+verify whether a nighttime handoff changes the Fast Delivery Bonus.
+
+### Can I switch active contracts in the Pallet Packer?
+
+The machine allows an accepted contract to be selected as the active delivery.
+
+I clear the current outputs before changing selection. I did not verify what
+happens to partially packed products when switching midway through an order.
+
+### Why does the game say Contract limit reached?
+
+The game limits simultaneous active contracts, and a later upgrade increases
+contract capacity.
+
+I did not verify the exact default solo limit, so I finish or cancel an
+existing order before treating the warning as a bug.
+
+### Can I carry multiple contract deliveries in one truck?
+
+Multiple completed loads can physically fit when the truck has enough space.
+
+I still verify and hand off each active order separately rather than assuming
+one visit completes every contract automatically.

@@ -1,0 +1,734 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const metalUnlockColumns = [
+  { key: "progression", label: "Progression stage" },
+  { key: "verifiedUnlocks", label: "Verified unlocks" },
+  { key: "use", label: "What I use it for" },
+  { key: "costStatus", label: "Recorded cost" },
+];
+
+export const metalUnlockRows = [
+  {
+  progression: "Level 4",
+  verifiedUnlocks:
+    "Metal Processing License #1 and Smelting Furnace appeared on the unlock screen",
+  use: "Convert raw Copper and Iron into Ingots",
+  costStatus:
+    "Metal Processing License #1: $2,000; Smelting Furnace: $1,500; confirmed core setup: $3,500 before pallet and operating costs",
+},
+  {
+    progression: "Level 5",
+    verifiedUnlocks:
+      "Metal Processing License #2 and Fabrication Station appeared on the unlock screen",
+    use:
+      "Later metal production; the exact Plate recipe was not verified in this guide",
+    costStatus:
+      "A later metal-related License was shown at $4,000 in my progression",
+  },
+];
+
+export const ingotRecipeColumns = [
+  { key: "product", label: "Finished product" },
+  { key: "rawInput", label: "Raw input" },
+  { key: "machine", label: "Machine" },
+  { key: "verifiedResult", label: "Verified result" },
+  { key: "ratioAndTime", label: "Ratio and time" },
+];
+
+export const ingotRecipeRows = [
+  {
+    product: "Copper Ingot",
+    rawInput: "Copper in Factory Storage",
+    machine: "Smelting Furnace",
+    verifiedResult:
+      "Selecting the Copper Ingot recipe produced Copper Ingots on the output pallet",
+    ratioAndTime:
+      "Exact input ratio and per-Ingot time were not recorded",
+  },
+  {
+    product: "Iron Ingot",
+    rawInput: "Iron in Factory Storage",
+    machine: "Smelting Furnace",
+    verifiedResult:
+      "The same furnace could be switched to the Iron Ingot recipe",
+    ratioAndTime:
+      "Exact input ratio and per-Ingot time were not recorded",
+  },
+];
+
+export const furnaceTroubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const furnaceTroubleshootingRows = [
+  {
+    problem: "The Smelting Furnace cannot see Copper or Iron",
+    likelyCause:
+      "The mined material is still inside the truck, backpack, or mining box",
+    fix:
+      "Unload the box through the Sorting Station and confirm that the metal appears in Factory Storage",
+  },
+  {
+    problem: "The furnace is placed but has no usable metal recipe",
+    likelyCause:
+      "The first Metal Processing License has not been activated",
+    fix:
+      "Open Licenses and activate the Level 4 Metal Processing License before trying to run the furnace",
+  },
+  {
+    problem: "Iron is stored but the machine continues making Copper",
+    likelyCause:
+      "The previous Copper recipe or production queue is still active",
+    fix:
+      "Stop or finish the current queue, select Iron Ingot, confirm the quantity, and press Start",
+  },
+  {
+    problem: "The machine has metal but remains idle",
+    likelyCause:
+      "No active recipe, production quantity, output, or Start command is set",
+    fix:
+      "Select the Ingot recipe, enter a quantity, verify the output pallet, and press Start",
+  },
+  {
+    problem: "The furnace stops during a long production queue",
+    likelyCause:
+      "The output pallet is full, missing, blocked, or no longer detected",
+    fix:
+      "Move the finished pallet, provide a clear output pallet, and restart the remaining queue",
+  },
+  {
+    problem: "The machine will not make Copper Plate or Iron Plate",
+    likelyCause:
+      "The Smelting Furnace only completes the Ingot stage",
+    fix:
+      "Produce Ingots here; Plates require a later production stage that is not covered by this guide",
+  },
+  {
+    problem: "Finished Ingots do not appear in Contracts or Stock Sell",
+    likelyCause:
+      "The product pallet is outside the marked storage area",
+    fix:
+      "Move the finished Ingot pallet fully inside the marked storage boundary",
+  },
+  {
+    problem: "The wrong License was purchased",
+    likelyCause:
+      "The Level 5 metal License was confused with the first Level 4 License",
+    fix:
+      "Use the first Metal Processing License for Copper and Iron Ingots; Level 5 is not required for the first Ingot stage",
+  },
+];
+
+export const furnacePurchaseColumns = [
+  { key: "situation", label: "Current situation" },
+  { key: "decision", label: "My decision" },
+  { key: "reason", label: "Reason" },
+];
+
+export const furnacePurchaseRows = [
+  {
+    situation:
+      "Copper or Iron is already visible in Factory Storage and an Ingot contract is available",
+    decision: "Buy the License and Smelting Furnace",
+    reason:
+      "The machine can begin producing a useful contract item immediately",
+  },
+  {
+    situation:
+      "I own a Forest property but have not returned a test load to the factory",
+    decision: "Wait",
+    reason:
+      "I confirm that the property actually supplies Copper or Iron before spending on the production chain",
+  },
+  {
+    situation:
+      "The active contract requests Copper Plate or Iron Plate",
+    decision: "Do not buy the furnace for that order alone",
+    reason:
+      "The Smelting Furnace stops at Ingots and does not complete the Plate stage",
+  },
+  {
+    situation:
+      "The furnace purchase would consume all operating cash",
+    decision: "Complete another basic contract first",
+    reason:
+      "I still need money for the License, output handling, daily costs, and the next delivery",
+  },
+  {
+    situation:
+      "A $2,500 loan lets the furnace begin working immediately",
+    decision: "Consider financing",
+    reason:
+      "My tested loan required $2,900 repayment, so I borrow only for an immediately productive setup",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+The first Copper and Iron smelting stage appeared on my **Level 4 unlock
+screen**.
+
+My complete route is:
+
+<div className="mt-4 space-y-1 font-mono text-sm leading-7">
+  <div>Mine Copper or Iron</div>
+  <div>→ Pack it into a mining box</div>
+  <div>→ Return the box to the factory</div>
+  <div>→ Unload it through the Sorting Station</div>
+  <div>→ Confirm the metal in Factory Storage</div>
+  <div>→ Activate the first Metal Processing License</div>
+  <div>→ Place the $1,500 Smelting Furnace</div>
+  <div>→ Select Copper Ingot or Iron Ingot</div>
+  <div>→ Provide a clear output pallet</div>
+  <div>→ Enter the quantity and press Start</div>
+</div>
+
+One Smelting Furnace can make both **Copper Ingots** and **Iron Ingots**, but
+the machine does not automatically switch recipes when another metal enters
+storage.
+
+The Smelting Furnace stops at **Ingots**. It does not directly produce Copper
+Plate or Iron Plate.
+
+I did not record the exact raw-metal ratio or production time, so I do not
+publish an invented 1:1 recipe or an estimated seconds-per-Ingot value.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Tested during launch-week progression available July 18, 2026. The verified
+  values in this guide include the Level 4 unlock screen, the $1,500 Smelting
+  Furnace price, the Copper and Iron production route, the 120-item output
+  display observed in one setup, and the $2,500 loan with $2,900 repayment.
+  Recipe ratios, production times, mixed-pallet behavior, and queue-cancellation
+  results still require controlled testing.
+</div>
+
+<h2 id="level-four-unlock">
+  Level 4 Smelting Furnace unlock and setup cost
+</h2>
+
+The **Level 4 unlock screen** showed:
+
+- Metal Processing License;
+- Dynamite;
+- All Detection;
+- Smelting Furnace;
+- Pallet Drop Zone;
+- Forest.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-level-four-unlocks.webp"
+    alt="Ore Factory Squad Level 4 unlock screen showing the Metal Processing License Smelting Furnace and Forest"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Level 4 screen opened the first Copper and Iron processing stage. I did
+    not need to wait for the later Level 5 metal License to begin making
+    Ingots.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Verified metal-processing unlocks and costs from my Level 4 and Level 5 progression."
+  columns={metalUnlockColumns}
+  rows={metalUnlockRows}
+/>
+
+### The Smelting Furnace costs $1,500
+
+The Marketplace displayed the Smelting Furnace at **$1,500**.
+
+That is the confirmed machine price.
+
+The confirmed setup costs are:
+
+- **Metal Processing License #1: $2,000**;
+- **Smelting Furnace: $1,500**;
+- **confirmed minimum setup cost: $3,500**.
+
+I did not verify whether the output pallet creates an additional purchase cost,
+or whether selling or relocating the furnace provides a refund.
+
+I therefore do not present `$1,500` as the complete metal-processing cost.
+
+It is the machine price only.
+
+### Activate the first License before running the furnace
+
+I use this order:
+
+```text
+Level 4 unlock screen
+→ Licenses
+→ First Metal Processing License
+→ Marketplace
+→ Smelting Furnace
+→ Place and configure the machine
+```
+
+I do not claim the Marketplace prevents the furnace from being purchased first.
+
+The important tested requirement is that the first Metal Processing License is
+active before I expect the furnace to process raw metals.
+
+### Level 5 is not required for Copper or Iron Ingots
+
+The later Level 5 screen showed **Metal Processing License #2**.
+
+That is not the License I used to begin the first Copper and Iron Ingot stage.
+
+I do not buy the Level 5 metal License merely because an Iron Ingot contract
+appears.
+
+<h2 id="factory-storage">
+  Get Copper and Iron into Factory Storage
+</h2>
+
+The furnace does not use a mining box parked beside the machine.
+
+The raw metal must first enter the factory's internal storage system.
+
+My complete transport route is:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="space-y-1 font-mono text-sm leading-7 text-slate-700">
+    <div>Copper or Iron deposit</div>
+    <div>→ Backpack</div>
+    <div>→ Packed mining box</div>
+    <div>→ Mining Lift or manual return route</div>
+    <div>→ Truck</div>
+    <div>→ Factory Sorting Station</div>
+    <div>→ Factory Storage</div>
+    <div>→ Smelting Furnace</div>
+    <div>→ Finished Ingot pallet</div>
+  </div>
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-sorting-station-storage.webp"
+    alt="Ore Factory Squad Sorting Station transferring mined Copper and Iron into Factory Storage"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A mining box must pass through the Sorting Station before the Smelting
+    Furnace can use its Copper or Iron from Factory Storage.
+  </figcaption>
+</figure>
+
+### Confirm the metal before spending money
+
+Before purchasing the License or furnace, I open the factory inventory and
+confirm that at least one of these appears:
+
+- Copper;
+- Iron.
+
+This prevents a common expensive mistake:
+
+```text
+Buy the License
+→ Buy the furnace
+→ Discover that the active property has no usable metal
+```
+
+When Greenpark no longer supports the next production chain, I first choose and
+test a suitable Forest listing through the{" "}
+<Link
+  href="/ore-factory-squad/remaining-resources-switch-property/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Remaining Resources and Property guide
+</Link>
+{"."}
+
+I bring one test box back to the factory and verify its contents before
+committing to a large metal setup.
+
+<h2 id="make-ingots">
+  How to make Copper and Iron Ingots
+</h2>
+
+Both products use the same basic machine workflow.
+
+<GuideTable
+  caption="Verified Copper and Iron Smelting Furnace routes. Exact input ratios and production times were not recorded."
+  columns={ingotRecipeColumns}
+  rows={ingotRecipeRows}
+/>
+
+My manual setup sequence is:
+
+1. open the Smelting Furnace interface;
+2. select **Copper Ingot** or **Iron Ingot**;
+3. enter the quantity I want to produce;
+4. confirm that the correct raw metal exists in Factory Storage;
+5. provide an available output pallet;
+6. press **Start**;
+7. wait until the first correct Ingot appears before leaving the machine.
+
+### Make Copper Ingots
+
+For Copper, I verify:
+
+```text
+Factory Storage contains Copper
+→ Active recipe says Copper Ingot
+→ Output pallet is available
+→ Quantity is set
+→ Start
+```
+
+I watch the first output.
+
+If Copper is stored but nothing appears, I do not immediately mine more. I
+check the active recipe, output, and Start state first.
+
+### Switch the furnace to Iron Ingots
+
+Factory Storage containing Iron does not automatically change a Copper queue.
+
+To switch metals, I:
+
+1. inspect whether the Copper queue is still active;
+2. stop or finish that queue;
+3. select **Iron Ingot**;
+4. enter the Iron quantity;
+5. verify the output pallet;
+6. press Start;
+7. confirm that the first Iron Ingot appears.
+
+I do not assume that Copper and Iron can run simultaneously in one queue.
+
+### How much should I smelt?
+
+I match the active contract first.
+
+Until later production recipes are fully documented, I keep part of the raw
+Copper and Iron instead of converting every stored unit automatically.
+
+This avoids using the entire metal reserve before I know whether another recipe
+or contract needs the raw material.
+
+<h2 id="furnace-setup">
+  Smelting Furnace input, output and pallet setup
+</h2>
+
+The furnace reads its raw input from **Factory Storage**.
+
+I do not carry loose Copper or Iron directly into the machine.
+
+The physical space around the furnace is mainly needed for:
+
+- the machine itself;
+- its finished-product output;
+- a product pallet;
+- forklift access;
+- and enough room to remove a completed pallet.
+
+### My output displayed room for 120 items
+
+In one tested setup, the metal output displayed capacity for up to **120
+items**.
+
+I treat this as an observation from that output setup.
+
+I do not claim that:
+
+- every Ingot pallet always has a universal capacity of 120;
+- every pallet type uses the same limit;
+- Copper and Iron can be mixed on one pallet;
+- an upgrade cannot change the displayed capacity;
+- or a 121st Ingot was tested and rejected.
+
+The practical lesson is simpler:
+
+> One available pallet gave me enough room to begin a long metal queue, but I
+> still checked the output before leaving the furnace unattended.
+
+### Move finished Ingots into tracked storage
+
+After production, the Ingot pallet is a physical finished-product pallet.
+
+To make it available to warehouse systems, I move it fully inside the marked
+storage area.
+
+The handling difference is:
+
+```text
+Raw Copper or Iron
+→ Factory Storage through the Sorting Station
+
+Finished Copper or Iron Ingots
+→ Physical product pallet in marked storage
+```
+
+A finished Ingot pallet left beside the furnace may not be counted correctly
+for Contracts or Stock Sell.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="ingots-vs-plates">
+  Why the Smelting Furnace does not make Plates
+</h2>
+
+The Smelting Furnace completes this stage:
+
+```text
+Raw Copper
+→ Copper Ingot
+
+Raw Iron
+→ Iron Ingot
+```
+
+It does not complete:
+
+```text
+Copper Ingot
+→ Copper Plate
+
+Iron Ingot
+→ Iron Plate
+```
+
+Copper Plate and Iron Plate belong to a later production stage.
+
+I did not complete a controlled test of the exact Plate machine, License,
+recipe ratio, or production time, so this guide stops at Ingots.
+
+I do not use several uncertain names interchangeably or imply that the
+Smelting Furnace is broken when Plate recipes do not appear.
+
+### Do not confuse the Level 5 unlocks with the first Ingot stage
+
+The Level 5 screen included:
+
+- Metal Processing License #2;
+- Fabrication Station;
+- Warehouse Automation License;
+- Pallet Dispenser;
+- Factory Size expansion;
+- another Pickaxe upgrade.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-level-five-unlocks.webp"
+    alt="Ore Factory Squad Level 5 unlock screen showing Metal Processing License 2 and Fabrication Station"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This is a later progression panel. The first Copper and Iron Ingot route was
+    already available through the Level 4 License and Smelting Furnace.
+  </figcaption>
+</figure>
+
+An Iron Ingot contract does not by itself mean that I need Metal Processing
+License #2.
+
+I use the Level 4 furnace route first.
+
+<h2 id="troubleshooting">
+  Why the Smelting Furnace is not making Ingots
+</h2>
+
+<GuideTable
+  caption="Checks for missing raw metal, wrong recipes, inactive queues, blocked output pallets, Plate confusion, and tracked-stock problems."
+  columns={furnaceTroubleshootingColumns}
+  rows={furnaceTroubleshootingRows}
+/>
+
+My fastest diagnostic order is:
+
+1. confirm Copper or Iron in Factory Storage;
+2. confirm the first Metal Processing License is active;
+3. select the exact Ingot recipe;
+4. enter a production quantity;
+5. verify the output pallet;
+6. press Start;
+7. watch the first finished item;
+8. move the finished pallet into marked storage.
+
+### Do not mine another load before checking the active recipe
+
+When Iron is available but the machine continues producing Copper, the problem
+is not necessarily missing Iron.
+
+The previous Copper recipe may still be active.
+
+I reopen the furnace and verify the recipe label before returning to the
+property.
+
+### Do not rebuild the furnace because the output stopped
+
+A full or obstructed output can stop production even when the machine has
+enough raw material.
+
+I first:
+
+- inspect the output pallet;
+- move completed Ingots away;
+- provide a clear pallet;
+- confirm the remaining quantity;
+- restart the queue.
+
+I rebuild or relocate the furnace only after the current input, recipe, and
+output have been checked.
+
+<h2 id="worth-buying">
+  Is the Smelting Furnace worth buying or financing?
+</h2>
+
+The furnace is worth buying when it immediately removes a real production
+bottleneck.
+
+<GuideTable
+  caption="When I buy, delay, or finance the first Copper and Iron smelting setup."
+  columns={furnacePurchaseColumns}
+  rows={furnacePurchaseRows}
+/>
+
+My purchase checklist is:
+
+```text
+Copper or Iron confirmed in Factory Storage
+→ Ingot contract or immediate production use exists
+→ First Metal Processing License is available
+→ $1,500 furnace can be purchased
+→ Output space is ready
+→ Operating cash remains
+```
+
+### My tested loan cost
+
+One loan offered:
+
+- **Borrowed:** $2,500;
+- **Repayment:** $2,900;
+- **Total borrowing cost:** $400.
+
+<div className="my-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-amber-950">
+  <strong>My financing rule:</strong> I use the loan only when Copper or Iron is
+  already stored and the furnace can begin a useful queue immediately. I do not
+  borrow merely to test whether the machine might become useful later.
+</div>
+
+I do not expand the loan section into a full repayment guide because I did not
+record:
+
+- the exact repayment schedule;
+- whether early repayment changes the total;
+- whether a second loan can be taken;
+- or how negative cash affects repayment.
+
+<h2 id="related-guides">
+  Related Ore Factory Squad guides
+</h2>
+
+<ul className="my-6 list-disc space-y-3 pl-6">
+  <li>
+    {"Return to the "}
+    <Link
+      href="/ore-factory-squad/beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Beginner Guide
+    </Link>
+    {" for the Greenpark Lot to Level 5 opening route and early upgrade order."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/remaining-resources-switch-property/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Remaining Resources and Property guide
+    </Link>
+    {" when Greenpark cannot supply the Copper or Iron needed for the smelting route."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/mining-lift-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Mining Lift guide
+    </Link>
+    {" when repeated metal loads must be returned from the Mid or Deep Layer."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/complete-contracts-pallet-packer/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Contracts and Pallet Packer guide
+    </Link>
+    {" after the required Copper or Iron Ingots are ready for delivery."}
+  </li>
+
+  <li>
+    {"Check the "}
+    <Link
+      href="/ore-factory-squad/how-to-sell-products/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      How to Sell Products guide
+    </Link>
+    {" when a finished Ingot pallet is not appearing in tracked warehouse stock."}
+  </li>
+</ul>
+
+<h2 id="faq">
+  Ore Factory Squad Copper and Iron Smelting FAQ
+</h2>
+
+### Can one Smelting Furnace make both Copper and Iron Ingots?
+
+Yes.
+
+I used the same Smelting Furnace for Copper and Iron by changing the active
+recipe.
+
+The machine did not automatically switch when Iron entered Factory Storage, so
+I reopened the interface, selected Iron Ingot, confirmed the output, and
+started the new queue.
+
+### Does the Smelting Furnace keep running when I leave the warehouse?
+
+In my tested run, I started metal production and returned to other work while
+the furnace continued processing.
+
+I did not separately verify whether an unfinished queue always survives:
+
+- End Day;
+- saving and reloading;
+- moving the machine;
+- or every later game update.
+
+### Can the first Smelting Furnace process Scrap?
+
+I did not find Scrap in the available first-furnace recipe list during my
+tested setup.
+
+I therefore do not treat Scrap as a confirmed Smelting Furnace input or promise
+that it produces Ingots.
+
+Until a later License or machine proves otherwise, I keep or sell Scrap instead
+of building the Copper and Iron route around an unverified Scrap recipe.

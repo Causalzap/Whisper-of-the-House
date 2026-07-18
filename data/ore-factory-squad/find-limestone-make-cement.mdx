@@ -1,0 +1,607 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const limestoneComparisonColumns = [
+  { key: "material", label: "Material" },
+  { key: "confirmation", label: "How I confirm it" },
+  { key: "productionRoute", label: "Production route" },
+];
+
+export const limestoneComparisonRows = [
+  {
+    material: "Limestone",
+    confirmation: "Limestone Detector target or item label",
+    productionRoute: "Limestone Block → Cement",
+  },
+  {
+    material: "Sandstone",
+    confirmation: "Sandstone item or crate label",
+    productionRoute: "Sand",
+  },
+  {
+    material: "Limestone Block",
+    confirmation: "Finished Stone Crusher product",
+    productionRoute: "Valid Forming Press input for Cement",
+  },
+  {
+    material: "Sand",
+    confirmation: "Finished Sandstone product",
+    productionRoute: "Cannot be used for Cement",
+  },
+];
+
+export const cementConversionColumns = [
+  { key: "cementNeeded", label: "Cement needed" },
+  { key: "blocksRequired", label: "Limestone Blocks required" },
+  { key: "formingPressTime", label: "Forming Press time" },
+];
+
+export const cementConversionRows = [
+  {
+    cementNeeded: "1",
+    blocksRequired: "2",
+    formingPressTime: "5 seconds",
+  },
+  {
+    cementNeeded: "5",
+    blocksRequired: "10",
+    formingPressTime: "25 seconds",
+  },
+  {
+    cementNeeded: "10",
+    blocksRequired: "20",
+    formingPressTime: "50 seconds",
+  },
+  {
+    cementNeeded: "20",
+    blocksRequired: "40",
+    formingPressTime: "100 seconds",
+  },
+  {
+    cementNeeded: "30",
+    blocksRequired: "60",
+    formingPressTime: "150 seconds",
+  },
+];
+
+export const cementTroubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const cementTroubleshootingRows = [
+  {
+    problem: "Forming Press sees no usable material",
+    likelyCause: "The input is still raw Limestone",
+    fix: "Make Limestone Blocks in the Stone Crusher first",
+  },
+  {
+    problem: "Stone Crusher keeps making Sand",
+    likelyCause: "Sandstone is selected or loaded",
+    fix: "Change the input and selected recipe to Limestone Block",
+  },
+  {
+    problem: "Block pallet is beside the Press but nothing happens",
+    likelyCause: "The pallet is outside the input detection area",
+    fix: "Reposition the pallet at the Forming Press input",
+  },
+  {
+    problem: "The machine has Blocks but remains idle",
+    likelyCause: "Cement is not selected or Start was not pressed",
+    fix: "Select Cement, confirm the output setup, and press Start",
+  },
+  {
+    problem: "The machine produces fewer Cement than expected",
+    likelyCause: "The recipe consumes two Blocks for every Cement",
+    fix:
+      "Divide the available Blocks by two and leave any odd Block as a remainder",
+  },
+  {
+    problem: "The machine stops during a long queue",
+    likelyCause: "The output pallet is full or blocking the output",
+    fix: "Move the finished pallet and provide open output space",
+  },
+  {
+    problem: "Finished Cement is missing from tracked stock",
+    likelyCause: "The product pallet is outside the marked storage area",
+    fix: "Move the Cement pallet fully inside the marked storage boundary",
+  },
+  {
+    problem: "The Detector is close but no Limestone is visible",
+    likelyCause:
+      "The target is above, below, behind, or slightly past the current tunnel",
+    fix: "Rescan the floor, ceiling, walls, and previous position",
+  },
+  {
+    problem: "Remaining Resources lists Limestone but the reading is distant",
+    likelyCause: "The remaining estimate may belong to another property layer",
+    fix: "Return to the Mining Lift and scan from the correct depth",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To find Limestone, I first open **Properties → Remaining Resources** and check
+whether the active property still lists Limestone in the Surface, Mid, or Deep
+Layer.
+
+If Limestone remains underground, my route is:
+
+<div className="mt-4 space-y-1 font-mono text-sm leading-7">
+  <div>Set the Detector target to Limestone</div>
+  <div>→ Follow readings that become shorter</div>
+  <div>→ Check above and below when the target is close but invisible</div>
+  <div>→ Mine and pack the Limestone</div>
+  <div>→ Return it through the Mining Lift and Sorting Station</div>
+  <div>→ Use the Stone Crusher to make Limestone Blocks</div>
+  <div>→ Use the Forming Press to make Cement</div>
+</div>
+
+The tested Cement recipe is:
+
+**2 Limestone Blocks → 1 Cement in 5 seconds**
+
+Raw Limestone cannot skip the Stone Crusher and go directly into the Cement
+recipe.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Tested solo on the launch-week build available July 18, 2026. Resource
+  quantities and exact layer distribution can vary, so I use Remaining
+  Resources and Detector readings instead of relying on one fixed Limestone
+  coordinate.
+</div>
+
+<h2 id="remaining-resources">
+  Check Remaining Resources before digging
+</h2>
+
+I do not begin by choosing a corner and digging straight down.
+
+I open the warehouse computer and use:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="font-mono text-sm leading-7 text-slate-700">
+    Computer → Properties → Active Property → Remaining Resources
+  </div>
+</div>
+
+The property panel separates its estimate into:
+
+- **Surface Layer**;
+- **Mid Layer**;
+- **Deep Layer**.
+
+A Surface value of zero does not mean the entire property has no Limestone.
+
+In one later Greenpark Lot snapshot, the surface had already been depleted
+while the panel still showed approximately:
+
+- **Mid Layer: 0–2 Limestone**;
+- **Deep Layer: 2–6 Limestone**.
+
+These ranges are estimates, not exact coordinates or guaranteed item counts.
+
+I use them as a decision tool:
+
+- Limestone in Surface means shallow excavation is still reasonable;
+- Limestone only in Mid means I reuse an established lower route;
+- Limestone only in Deep means I prepare the Mining Lift before widening more
+  tunnels;
+- no Limestone in any layer means I stop searching that property.
+
+My Greenpark Lot contained enough Limestone for early Cement production, but I
+do not treat its quantity or exact layer distribution as a fixed spawn for
+every save.
+
+<h2 id="detector">
+  How I follow the Limestone Detector
+</h2>
+
+I set the Detector target specifically to **Limestone** rather than leaving it
+on a broad search mode.
+
+Then I compare consecutive distance readings.
+
+In one search, the distance moved through:
+
+- **2.1 m**;
+- **1.3 m**;
+- **1.4 m**.
+
+The drop from 2.1 m to 1.3 m told me I was moving toward the target. The slight
+increase to 1.4 m suggested I had moved past the closest point.
+
+When another movement caused the reading to jump toward **6.5 m**, I returned
+to the previous position instead of extending the same tunnel.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-limestone-detector-reading.webp"
+    alt="Ore Factory Squad Detector showing a close Limestone reading underground"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the reading reaches roughly one to two meters, I stop digging a long
+    straight tunnel and search the immediate area in smaller steps.
+  </figcaption>
+</figure>
+
+### The Detector measures three-dimensional distance
+
+A short reading does not prove that the Limestone is directly in front of me.
+
+The target may be:
+
+- behind the current wall;
+- below the floor;
+- above the tunnel ceiling;
+- or slightly behind my current position.
+
+When the Detector is close but no Limestone is visible, I:
+
+1. rotate and compare the reading in several directions;
+2. move one small step and scan again;
+3. check the floor and ceiling;
+4. remove a small amount of ordinary terrain;
+5. stop when the distance suddenly becomes much longer.
+
+I do not keep digging forward merely because the Detector continues making a
+sound.
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 px-5 py-4 text-sky-950">
+  <strong>Detector cost:</strong> the upgrade cost me
+  <strong> $500</strong>. It became useful after the easy surface deposits were
+  disturbed and I needed one specific material. I delay it while visible
+  Limestone remains or when the Forming Press is the more urgent purchase.
+</div>
+
+When Limestone remains only in Mid or Deep, I establish a reusable vertical
+route before chasing individual readings. The{" "}
+<Link
+  href="/ore-factory-squad/mining-lift-guide/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Mining Lift guide
+</Link>
+{" covers placement, extensions, blocked ladders, and safe return routes."}
+
+<h2 id="limestone-vs-sandstone">
+  Limestone vs Sandstone
+</h2>
+
+Underground lighting and surrounding soil can make color-based identification
+unreliable.
+
+I confirm the material through the Detector target, item or crate label, and
+Stone Crusher recipe rather than color alone.
+
+<GuideTable
+  caption="How Limestone, Sandstone, and their processed outputs differ in the tested production chain."
+  columns={limestoneComparisonColumns}
+  rows={limestoneComparisonRows}
+/>
+
+The quickest production check is the Crusher result:
+
+- if the machine produces **Sand**, the input or selected recipe is Sandstone;
+- if I need Cement, the first finished product must be **Limestone Block**.
+
+<h2 id="transport-limestone">
+  Get the Limestone back to the factory
+</h2>
+
+Mined Limestone enters my backpack until the inventory reaches its limit.
+
+My early backpack held **50 items**, so I pack the collected material before
+continuing a long deep-layer search.
+
+The manual return route is:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="space-y-1 font-mono text-sm leading-7 text-slate-700">
+    <div>Mine Limestone into the backpack</div>
+    <div>→ Pack the collected materials into a crate</div>
+    <div>→ Move the crate through the Mining Lift route</div>
+    <div>→ Load it onto the truck</div>
+    <div>→ Return to the factory</div>
+    <div>→ Unload the crate into the Sorting Station</div>
+  </div>
+</div>
+
+The Sorting Station separates the crate contents and transfers the raw
+Limestone into the factory's internal resource storage.
+
+This is different from finished-product storage:
+
+- raw Limestone enters internal **Factory Storage** through the Sorting
+  Station;
+- finished Limestone Blocks and Cement remain on physical product pallets;
+- contracts and Stock Sell count those finished products when their pallets are
+  inside the marked storage area.
+
+I return once I have enough Limestone for the current production target or the
+nearest Detector reading becomes too distant to justify another tunnel.
+
+<h2 id="cement-recipe">
+  Limestone to Cement recipe
+</h2>
+
+Cement uses a two-machine production chain.
+
+Raw Limestone cannot be converted directly by the Forming Press.
+
+The complete manual route is:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="space-y-1 font-mono text-sm leading-7 text-slate-700">
+    <div>Raw Limestone</div>
+    <div>→ Sorting Station</div>
+    <div>→ Internal Factory Storage</div>
+    <div>→ Stone Crusher</div>
+    <div>→ Limestone Block product pallet</div>
+    <div>→ Forming Press input</div>
+    <div>→ Cement product pallet</div>
+    <div>→ Marked storage area</div>
+  </div>
+</div>
+
+The tested Forming Press recipe is:
+
+- **Input:** 2 Limestone Blocks;
+- **Output:** 1 Cement;
+- **Production time:** 5 seconds.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-cement-recipe-forming-press.webp"
+    alt="Ore Factory Squad Forming Press Cement recipe requiring two Limestone Blocks and five seconds"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Cement is a second-stage product. The Forming Press consumes two finished
+    Limestone Blocks for every Cement.
+  </figcaption>
+</figure>
+
+### Limestone Block conversion amounts
+
+<GuideTable
+  caption="Exact Forming Press inputs and processing times for common Cement production totals."
+  columns={cementConversionColumns}
+  rows={cementConversionRows}
+/>
+
+In one factory check, I had **61 Limestone Blocks**.
+
+At the tested 2:1 recipe, that was enough for:
+
+- **30 Cement**;
+- with **1 Limestone Block** remaining.
+
+An odd Block does not produce half a Cement. It remains available until I add
+another Limestone Block.
+
+I did not record the Stone Crusher's complete raw-Limestone-to-Block ratio and
+processing time, so this conversion table begins with finished Limestone
+Blocks rather than inventing a full raw-ore calculation.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="forming-press">
+  Feed Limestone Blocks into the Forming Press
+</h2>
+
+In my manual setup, I complete the physical machine route rather than expecting
+the Forming Press to pull finished Blocks automatically from the warehouse.
+
+My sequence is:
+
+1. select **Limestone Block** on the Stone Crusher;
+2. make sure a product pallet is available at the Crusher output;
+3. let the Crusher produce the required Blocks;
+4. move the Limestone Block pallet to the Forming Press input;
+5. select the **Cement** recipe;
+6. make sure a valid output pallet is ready;
+7. press **Start**.
+
+The critical distinction is that the Forming Press needs **Limestone Blocks**,
+not raw Limestone.
+
+I also check the machine interface after positioning the input. A pallet placed
+beside the machine but outside its input detection area may not supply the
+recipe.
+
+### My tested 20-Cement output
+
+I confirmed one Cement output reaching **20 units**.
+
+That amount required:
+
+- **40 Limestone Blocks**;
+- **100 seconds** of uninterrupted Forming Press time.
+
+I did not separately test whether another pallet or later setup can hold more,
+so I treat 20 as my confirmed output amount rather than claiming it is the
+absolute capacity in every configuration.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-cement-output-pallet.webp"
+    alt="Ore Factory Squad Cement output pallet containing 20 completed Cement products"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I confirmed an output containing 20 Cement. I clear the finished pallet
+    before beginning another long production queue.
+  </figcaption>
+</figure>
+
+Later conveyor automation can reduce manual pallet movement, but it does not
+remove the product stages: Limestone must still become Limestone Blocks before
+it becomes Cement.
+
+<h2 id="cement-troubleshooting">
+  Why the Forming Press is not making Cement
+</h2>
+
+<GuideTable
+  caption="Checks for Limestone location, Stone Crusher output, Forming Press input, blocked output, and missing tracked stock."
+  columns={cementTroubleshootingColumns}
+  rows={cementTroubleshootingRows}
+/>
+
+The most common production failure is skipping the intermediate stage.
+
+The Forming Press does not complete:
+
+```text
+Raw Limestone → Cement
+```
+
+It requires:
+
+```text
+Raw Limestone → Limestone Block → Cement
+```
+
+<h2 id="keep-or-convert">
+  How many Limestone Blocks should I keep?
+</h2>
+
+I do not automatically convert every Limestone Block into Cement.
+
+Contracts treat **Limestone Block** and **Cement** as separate finished
+products.
+
+One documented early contract required **20 Limestone Blocks**, while another
+later order required Cement.
+
+My inventory rule is:
+
+1. check accepted contracts;
+2. reserve the exact number of Limestone Blocks already required;
+3. convert only the excess into Cement;
+4. keep both product pallets inside the marked storage area.
+
+For example, with **61 Limestone Blocks** and an active requirement for 20
+Blocks:
+
+- reserve **20 Limestone Blocks**;
+- leave **41 Blocks** available;
+- produce **20 Cement** from 40 Blocks;
+- keep **1 extra Limestone Block**.
+
+That is safer than converting all 61 and returning underground because the next
+contract needs the intermediate product.
+
+For packing and delivery after the products are ready, use the{" "}
+<Link
+  href="/ore-factory-squad/complete-contracts-pallet-packer/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Contracts and Pallet Packer guide
+</Link>
+{"."}
+
+<h2 id="related-guides">
+  Related Ore Factory Squad guides
+</h2>
+
+<ul className="my-6 list-disc space-y-3 pl-6">
+  <li>
+    {"Return to the "}
+    <Link
+      href="/ore-factory-squad/beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Beginner Guide
+    </Link>
+    {" for the complete Greenpark Lot to Level 5 opening route."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/mining-lift-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Mining Lift guide
+    </Link>
+    {" when Limestone remains only in the Mid or Deep Layer."}
+  </li>
+
+  <li>
+    {"Check the "}
+    <Link
+      href="/ore-factory-squad/remaining-resources-switch-property/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Remaining Resources and Property guide
+    </Link>
+    {" before abandoning a property that still lists deep Limestone."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/complete-contracts-pallet-packer/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Contracts and Pallet Packer guide
+    </Link>
+    {" after the required Limestone Blocks or Cement are ready."}
+  </li>
+</ul>
+
+<h2 id="faq">
+  Ore Factory Squad Limestone and Cement FAQ
+</h2>
+
+### Why do 61 Limestone Blocks only make 30 Cement?
+
+The recipe consumes two complete Limestone Blocks for each Cement. Sixty Blocks
+produce 30 Cement, while the final odd Block remains unused until another Block
+is added.
+
+### Does Cement production continue after dark?
+
+Yes. An active Forming Press continued processing after nightfall in my test.
+
+This confirms that production can continue during the nighttime period. It
+does not prove that an unfinished queue always survives End Day, a save reload,
+or every later update.
+
+### Why does my Cement not appear in contracts or Stock Sell?
+
+Raw resources and finished products use different storage handling.
+
+Raw Limestone enters internal Factory Storage through the Sorting Station.
+Finished Cement must remain on a product pallet inside the marked storage area
+before the warehouse stock system can count it for contracts and Stock Sell.
+
+### What does a Remaining Resources range such as 0–2 mean?
+
+It is an estimate for that property layer, not a guaranteed exact quantity or
+coordinate.
+
+I use it to decide whether another Detector search is reasonable, not as proof
+that two easy deposits remain.
+
+### Should I buy the Detector or Forming Press first?
+
+I buy the Detector first when the bottleneck is locating a specific Limestone
+deposit below the surface.
+
+I prioritize the Forming Press when Limestone Blocks are already stored and
+Cement is the product preventing a contract from being completed.

@@ -73,6 +73,7 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  { title: "Ore Factory Squad ⛏️", href: "/ore-factory-squad" },
   { title: "The Incident at Galley House", href: "/the-incident-at-galley-house" },
   { title: "Ascend to ZERO", href: "/ascend-to-zero" },
   { title: "Backyard Baseball", href: "/backyard-baseball" },

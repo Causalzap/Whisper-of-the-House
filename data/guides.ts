@@ -132,6 +132,265 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "Ore Factory Squad",
+    "game": "Ore Factory Squad",
+    "href": "/ore-factory-squad",
+    "slug": "ore-factory-squad",
+    "kind": "game",
+    "status": "active",
+    "accent": "amber",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Factory Route",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Complete first-wave coverage",
+    "description":
+      "Follow the Ore Factory Squad guide hub from Greenpark Lot to Level 5 with factory storage, Stock Sell, contracts, the Mining Lift, Cement, property switching, Dynamite, Copper, Iron, and the first Smelting Furnace setup.",
+    "coverage": [
+      "Greenpark Lot purchase, the first 12 ore, Sorting Station setup, Factory Storage, tracked product pallets, early upgrades, first sales, contracts, Mining Lift progression, and the Level 5 route",
+      "Marked storage, Stock Sell demand, partial pallets, finished-product tracking, direct sales, exact contract products, Pallet Packer setup, blocked outputs, deadlines, truck loading, and delivery",
+      "Lift Head placement, Lift Extensions, Ladder is blocked fixes, packed mining-box transfer, Surface, Mid, and Deep Layers, Remaining Resources, and efficient shaft planning",
+      "Limestone detection, Limestone Blocks, the tested 2:1 Cement recipe, Forming Press setup, Dynamite costs, reduced yield, Secret Cave access, and precision mining",
+      "Greenpark removal, the one-Active-Property restriction, Westmont, Forest listings, Copper and Iron test loads, the $2,000 Metal Processing License #1, the $1,500 Smelting Furnace, Ingots, and Plates"
+    ],
+    "image":
+      "/images/ore-factory-squad/ore-factory-squad-first-property-purchase.webp",
+    "imageFit": "cover",
+    "imagePosition": "center",
+    "imagePadding": false,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 9,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Ore Factory Squad Guide Hub",
+        "href": "/ore-factory-squad",
+        "type": "Guide Hub",
+        "description":
+          "Start here for Greenpark-to-Level-5 progression, factory storage, sales, contracts, Mining Lift routes, Cement, property switching, Dynamite, Copper, Iron, and smelting.",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-first-property-purchase.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "spotlightMeta":
+            "Greenpark to Level 5, factory storage, Stock Sell, contracts, Mining Lift, Cement, properties, Dynamite, Copper, Iron, and first-stage smelting"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Ore Factory Squad Beginner Guide",
+        "href": "/ore-factory-squad/beginner-guide",
+        "type": "Beginner Guide",
+        "description":
+          "Follow the tested Greenpark Lot to Level 5 route with the first 12 ore, Sorting Station, storage, sales, contracts, upgrades, Mining Lift, and early metal progression.",
+        "date": "Updated recently",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-first-property-purchase.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 37,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta":
+            "Greenpark Lot, first 12 ore, Sorting Station, Factory Storage, sales, contracts, upgrades, Mining Lift, Remaining Resources, and Level 5"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Ore Factory Squad How to Sell Products",
+        "href": "/ore-factory-squad/how-to-sell-products",
+        "type": "Systems",
+        "description":
+          "Fix products missing from Stock Sell, place finished pallets inside marked storage, read buyer demand, sell partial pallets, and protect useful contract stock.",
+        "date": "Updated recently",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-stock-sell-coal-offer.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestOrder": 32,
+          "spotlightRail": true,
+          "spotlightOrder": 8,
+          "spotlightMeta":
+            "Marked storage, tracked inventory, partial pallets, buyer demand, Stock Sell offers, night restrictions, XP, and sell-or-keep decisions"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Ore Factory Squad Contracts & Pallet Packer Guide",
+        "href": "/ore-factory-squad/complete-contracts-pallet-packer",
+        "type": "Systems",
+        "description":
+          "Choose achievable contracts, match exact finished products, configure the Pallet Packer, clear blocked outputs, load the truck, and complete delivery before the deadline.",
+        "date": "Updated recently",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-contract-pallet-packer.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 36,
+          "spotlightFeature": true,
+          "spotlightOrder": 4,
+          "spotlightMeta":
+            "Contract selection, negotiation, exact product stages, Pallet Packer setup, Contract Output, Excess Output, blocked outputs, deadlines, bonuses, and delivery"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "Ore Factory Squad Mining Lift Guide",
+        "href": "/ore-factory-squad/mining-lift-guide",
+        "type": "Systems",
+        "description":
+          "Place the Mining Lift Head, add Extensions safely, fix Ladder is blocked, move packed mining boxes, and build a practical route through lower resource layers.",
+        "date": "Updated recently",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-mining-lift-full-depth-route.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestOrder": 35,
+          "spotlightRail": true,
+          "spotlightOrder": 5,
+          "spotlightMeta":
+            "Lift Head placement, $10 Extensions, Ladder is blocked, upper and lower landings, packed mining boxes, electrical obstacles, and shaft depth"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      },
+      {
+        "title": "Ore Factory Squad Limestone & Cement Guide",
+        "href": "/ore-factory-squad/find-limestone-make-cement",
+        "type": "Guide",
+        "description":
+          "Find Limestone below the Surface, distinguish it from Sandstone, make Limestone Blocks, use the Forming Press, and calculate the tested 2:1 Cement recipe.",
+        "date": "Updated recently",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-cement-recipe-forming-press.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestOrder": 34,
+          "spotlightRail": true,
+          "spotlightOrder": 6,
+          "spotlightMeta":
+            "Remaining Resources, Detector readings, Limestone versus Sandstone, Limestone Blocks, the 2:1 Cement recipe, Forming Press setup, and output troubleshooting"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 6
+        }
+      },
+      {
+        "title": "Ore Factory Squad Remaining Resources & Property Guide",
+        "href": "/ore-factory-squad/remaining-resources-switch-property",
+        "type": "Systems",
+        "description":
+          "Read Surface, Mid, and Deep reserves, fix Remove your first property first, recover Greenpark safely, and choose Westmont or Forest for the next production stage.",
+        "date": "Updated recently",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-remove-first-property-warning.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 38,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta":
+            "Remaining Resources, Surface, Mid and Deep Layers, Greenpark recovery, one Active Property, Westmont, Forest, Woodland Lot, Copper, Iron, and test loads"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 7
+        }
+      },
+      {
+        "title": "Ore Factory Squad Dynamite Guide",
+        "href": "/ore-factory-squad/dynamite-worth-it",
+        "type": "Guide",
+        "description":
+          "Decide when Dynamite is worth using with the $600 unlock, $50 throws, reduced resource yield, Secret Cave access, safe blast placement, and tool comparisons.",
+        "date": "Updated recently",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-dynamite-cost-reduced-yield.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestOrder": 33,
+          "spotlightRail": true,
+          "spotlightOrder": 7,
+          "spotlightMeta":
+            "$600 unlock, $50 throws, repeated blast costs, reduced resource yield, Secret Caves, safe use, Detector targeting, Pickaxe cleanup, and Mining Lift routes"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 8
+        }
+      },
+      {
+        "title": "Ore Factory Squad Copper & Iron Ingot Guide",
+        "href": "/ore-factory-squad/smelt-copper-iron-ingots",
+        "type": "Systems",
+        "description":
+          "Buy Metal Processing License #1 and the Smelting Furnace, move Copper and Iron into Factory Storage, make Ingots, switch recipes, and fix missing output.",
+        "date": "Updated recently",
+        "image":
+          "/images/ore-factory-squad/ore-factory-squad-level-four-unlocks.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 39,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta":
+            "$2,000 Metal Processing License #1, $1,500 Smelting Furnace, $3,500 confirmed budget, Factory Storage, Copper and Iron Ingots, recipe switching, output pallets, and Plates"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 9
+        }
+      }
+    ]
+  },
+  {
     "title": "The Incident at Galley House",
     "game": "The Incident at Galley House",
     "href": "/the-incident-at-galley-house",

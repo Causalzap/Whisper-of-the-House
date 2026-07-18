@@ -1,0 +1,816 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const earlyUpgradeColumns = [
+  { key: "priority", label: "Priority" },
+  { key: "upgrade", label: "Upgrade" },
+  { key: "testedCost", label: "Tested cost" },
+  { key: "buyWhen", label: "Buy it when" },
+  { key: "reason", label: "What it fixes" },
+];
+
+export const earlyUpgradeRows = [
+  {
+    priority: "1",
+    upgrade: "Shovel digging speed",
+    testedCost: "$400",
+    buyWhen:
+      "Ordinary soil is taking more time than the resource deposit itself",
+    reason:
+      "Shortens almost every new route because useful deposits begin behind normal terrain",
+  },
+  {
+    priority: "2",
+    upgrade: "Pickaxe",
+    testedCost: "$300",
+    buyWhen:
+      "Exposed Stone, ore, or other mineable material is the slow part of the trip",
+    reason:
+      "Improves the precise resource-recovery stage after the route has been opened",
+  },
+  {
+    priority: "3",
+    upgrade: "Detector",
+    testedCost: "$500",
+    buyWhen:
+      "The easy Surface deposits are disturbed and I need one specific material",
+    reason:
+      "Provides direction and distance instead of relying on random excavation",
+  },
+  {
+    priority: "Delay",
+    upgrade: "Backpack capacity",
+    testedCost: "$500",
+    buyWhen:
+      "The bag repeatedly fills before the truck, factory, or production line can use the load",
+    reason:
+      "Adds carrying room, but does not locate missing resources or repair a blocked production chain",
+  },
+  {
+    priority: "Delay",
+    upgrade: "Jackhammer",
+    testedCost: "$1,500 displayed price",
+    buyWhen:
+      "Repeated mechanical excavation has become the main long-term bottleneck",
+    reason:
+      "Avoids spending a large early contract payout before the basic factory loop is stable",
+  },
+  {
+    priority: "Later",
+    upgrade: "Advanced licenses and automation",
+    testedCost: "Varies",
+    buyWhen:
+      "The matching material, machines, logistics equipment, and operating cash are already available",
+    reason:
+      "Prevents buying an isolated license that cannot yet produce or move anything useful",
+  },
+];
+
+export const levelFiveDecisionColumns = [
+  { key: "currentBottleneck", label: "Current bottleneck" },
+  { key: "nextPurchase", label: "My next purchase" },
+  { key: "Condition", label: "Condition I verify first" },
+];
+
+export const levelFiveDecisionRows = [
+  {
+    currentBottleneck: "Copper or Iron cannot be turned into Ingots",
+    nextPurchase: "Metal Processing route and Smelting Furnace",
+    Condition:
+      "Raw Copper or Iron is already in Factory Storage and Ingot contracts are appearing",
+  },
+  {
+    currentBottleneck: "Manual pallet movement is consuming most of the workday",
+    nextPurchase: "Warehouse Automation",
+    Condition:
+      "I can afford the license and the required robot, Drop Zones, and pallet equipment",
+  },
+  {
+    currentBottleneck: "A known resource exists but takes too long to reach",
+    nextPurchase: "Digging or mining-tool upgrade",
+    Condition:
+      "Remaining Resources and Detector readings confirm the deposit is still worth recovering",
+  },
+  {
+    currentBottleneck: "The active property does not contain the required metal",
+    nextPurchase: "Replacement property",
+    Condition:
+      "Basic-material reserves are ready and Greenpark cargo has been recovered",
+  },
+  {
+    currentBottleneck: "Cash is too low for the complete next production chain",
+    nextPurchase: "No major purchase yet",
+    Condition:
+      "I complete another achievable basic contract instead of buying one incomplete system component",
+  },
+];
+
+export const beginnerTroubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "firstCheck", label: "First check" },
+  { key: "fix", label: "Fix" },
+];
+
+export const beginnerTroubleshootingRows = [
+  {
+    problem: "The Detector direction keeps changing",
+    firstCheck:
+      "Whether the previous position produced a shorter reading or the target may be above or below",
+    fix:
+      "Return to the last short reading, change elevation, and scan again before digging a long tunnel",
+  },
+  {
+    problem: "The Pallet Packer says Output blocked",
+    firstCheck:
+      "Contract Output, Excess Output, and overlapping pallets around the machine",
+    fix:
+      "Move the completed delivery or excess pallet before changing the recipe or active contract",
+  },
+  {
+    problem: "A contract disappeared after End Day",
+    firstCheck: "Whether the contract had only one day remaining",
+    fix:
+      "Check the timer before End Day and finish production or delivery during the current night",
+  },
+  {
+    problem: "The forklift will not lift a pallet cleanly",
+    firstCheck:
+      "Fork height, approach angle, and whether another pallet blocks the forks",
+    fix:
+      "Approach straight, lower the forks fully, and clear nearby pallets before lifting",
+  },
+  {
+    problem: "A machine keeps producing the wrong item",
+    firstCheck:
+      "The selected input, active recipe, output destination, and current queue",
+    fix:
+      "Stop the queue, select the exact recipe, and watch the first new output before leaving",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+My safest opening route is:
+
+1. buy Greenpark Lot and return after collecting the tutorial's **12 ore**;
+2. use the Sorting Station and free Stone Crusher to start the factory loop;
+3. place finished pallets inside the marked storage area;
+4. make one Stock Sale, then use Contracts for most early XP;
+5. upgrade the Shovel, Pickaxe, and Detector only when each solves a current
+   problem;
+6. build a Mining Lift for the lower layers and reach Level 5 before committing
+   to expensive automation.
+
+I do not buy every new unlock immediately.
+
+I keep enough cash to complete the next contract, then spend on the machine,
+license, property, or mining upgrade that removes the current bottleneck.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Tested on the launch-week build available July 18, 2026. Prices, payouts,
+  unlock levels, and balance values may change in later updates.
+</div>
+
+<h2 id="opening-route">
+  The opening route I use from an empty warehouse
+</h2>
+
+The early tutorial became much easier once I stopped treating every new menu as
+something I needed to use immediately.
+
+I begin in this order:
+
+1. enter the warehouse;
+2. turn on the power;
+3. open the garage doors;
+4. create the company on the computer;
+5. open **Properties**;
+6. buy Greenpark Lot;
+7. collect the truck keys;
+8. drive to the marked property.
+
+Greenpark Lot started with the seller asking around **$800**.
+
+I offered **$700**, then **$730**, and finally bought it for **$750**.
+
+I do not spend time comparing every other property during the tutorial.
+
+My Greenpark Lot contained:
+
+- Stone;
+- Clay;
+- Sandstone;
+- Limestone;
+- Coal.
+
+That was enough to learn the basic mining, processing, storage, sales, and
+contract systems.
+
+A different property becomes useful once I know which resource or production
+stage is blocking progress.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-first-property-purchase.webp"
+    alt="Ore Factory Squad negotiation for Greenpark Lot ending at a 750 dollar purchase price"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Greenpark Lot started near $800. My lower offers were rejected before the
+    seller accepted $750.
+  </figcaption>
+</figure>
+
+<h2 id="first-dig">
+  First dig: collect 12 ore and return
+</h2>
+
+The first major beginner trap is staying at the property too long.
+
+The tutorial asks for **12 ore**.
+
+Once I have those 12 items, I:
+
+1. pack them into a mining crate;
+2. place the crate on the truck;
+3. return to the warehouse.
+
+I do not fill the entire truck first.
+
+Returning advances the tutorial and gives me access to the Sorting Station and
+the free Stone Crusher.
+
+Another long Surface-mining session before that point only produces resources
+I cannot process efficiently yet.
+
+### When I keep mining
+
+After the basic factory loop is working, I continue mining when:
+
+- the Detector shows a stable target within roughly **1–3 meters**;
+- the target matches an active contract or immediate production need;
+- the backpack and truck still have useful capacity;
+- and I do not need to return for a daytime transaction.
+
+### When I turn back
+
+I return when:
+
+- I have enough material for the current contract;
+- the **50-item** backpack or truck is effectively full;
+- fatigue is causing long blinks and noticeably slower work;
+- or I still need to complete Stock Sell, submit a contract offer, or purchase a
+  property before night.
+
+Mining and active machines can continue after dark.
+
+I treat night as a restriction on certain business transactions rather than
+the end of all productive work.
+
+<h2 id="sorting-station">
+  Build the factory loop before buying more machines
+</h2>
+
+Back at the warehouse, I unload the mining crate into the Sorting Station.
+
+The Sorting Station separates the crate contents and transfers the raw
+materials into Factory Storage.
+
+Machines can then use those stored resources without me carrying each raw item
+directly to the machine.
+
+My first production chain is:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="space-y-1 font-mono text-sm leading-7 text-slate-700">
+    <div>Truck crate</div>
+    <div>→ Sorting Station</div>
+    <div>→ Factory Storage</div>
+    <div>→ Stone Crusher</div>
+    <div>→ Finished product</div>
+    <div>→ Product pallet</div>
+    <div>→ Marked storage area</div>
+  </div>
+</div>
+
+The Stone Crusher is free during the tutorial, so I place it before spending
+money on another machine.
+
+For the first Sand production test, I:
+
+1. select Sandstone as the input;
+2. select Sand as the output;
+3. provide a valid product pallet;
+4. press **Start**.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-sorting-station-storage.webp"
+    alt="Ore Factory Squad Sorting Station transferring a mined crate into Factory Storage"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first crate goes through the Sorting Station before I try to use the
+    material in a production machine.
+  </figcaption>
+</figure>
+
+### Why a machine says it has no material
+
+When the warehouse contains the resource but a machine does not use it, I
+check:
+
+1. whether the mining crate went through the Sorting Station;
+2. whether the resource appears in Factory Storage;
+3. whether the correct input is selected;
+4. whether the correct recipe is active;
+5. whether a valid output pallet or area exists;
+6. whether I pressed Start.
+
+A machine can contain the right material and still remain idle when no recipe,
+output, or active queue has been selected.
+
+<h2 id="storage-area">
+  Finished products must stay on a pallet inside storage
+</h2>
+
+The factory lets me place pallets almost anywhere, but the warehouse computer
+does not treat every floor position as tracked inventory.
+
+To sell a finished product or use it in a contract, I move its pallet fully
+inside the marked storage area.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-product-pallet-storage-area.webp"
+    alt="Ore Factory Squad tutorial explaining that products must remain on pallets inside the storage area"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A pallet can be visible inside the warehouse and still remain untracked
+    until it is placed inside the marked storage zone.
+  </figcaption>
+</figure>
+
+If a product does not appear on the computer, I reposition the existing pallet
+before producing another batch.
+
+I place it flat and fully inside the zone instead of leaving one edge across
+the boundary.
+
+For missing stock, partial pallets, Stock Sell prices, and tracked inventory,
+use the{" "}
+<Link
+  href="/ore-factory-squad/how-to-sell-products/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  How to Sell Products guide
+</Link>
+{"."}
+
+<h2 id="first-sale">
+  Make one Stock Sale, but do not build the whole route around it
+</h2>
+
+My first Stock Sell transaction used:
+
+- **6 Sand**;
+- **$11 per unit**;
+- **$66 total revenue**.
+
+That transaction is useful because it confirms that:
+
+- a partial pallet can be sold;
+- the marked storage area is tracking the pallet;
+- and the warehouse computer recognizes the product.
+
+After that first test, I use Stock Sell mainly for:
+
+- immediate operating cash;
+- severe overstock;
+- blocked storage space;
+- or the final amount needed for one specific purchase.
+
+I do not sell every useful product merely because an offer exists.
+
+I keep a small reserve of commonly requested processed materials and sell only
+the surplus after accounting for the next likely contract or production step.
+
+<h2 id="contracts">
+  Use Contracts as the main early progression route
+</h2>
+
+Contracts require more preparation than Stock Sell, but they provide a stronger
+early progression route.
+
+Before accepting one, I check:
+
+- the exact product names;
+- the required quantities;
+- tracked finished stock;
+- the machines needed for missing products;
+- available raw resources;
+- and the remaining delivery time.
+
+The exact product name matters.
+
+These are separate contract items:
+
+- Clay Block and Clay Brick;
+- Stone Block and Stone Brick;
+- Limestone Block and Cement;
+- Coal and Crushed Coal.
+
+My first repeatable contract route is:
+
+1. accept an offer on the warehouse computer;
+2. select that contract inside the Pallet Packer;
+3. produce the exact requested products;
+4. keep Contract Output and Excess Output clear;
+5. move the completed delivery load with the forklift;
+6. place every required load on the truck;
+7. finish the handoff before the deadline.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-contract-pallet-packer.webp"
+    alt="Ore Factory Squad Contract 208 requiring 20 Clay Blocks and 20 Limestone Blocks"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Contract #208 required 20 Clay Blocks and 20 Limestone Blocks with two days
+    remaining. I check both counters before loading the truck.
+  </figcaption>
+</figure>
+
+One documented early order had a base payment of **$580**.
+
+Finishing it quickly added a **$58 Fast Delivery Bonus**, bringing the payout
+to **$638** and awarding **200 XP**.
+
+That is why I prefer an immediately achievable contract over a larger order
+that requires an unavailable machine, another property, or an extra full day
+of mining.
+
+For rejected products, Pallet Packer setup, blocked outputs, contract
+expiration, and final delivery, use the{" "}
+<Link
+  href="/ore-factory-squad/complete-contracts-pallet-packer/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Contracts and Pallet Packer guide
+</Link>
+{"."}
+
+<AdUnit placement="article_middle" />
+
+<h2 id="upgrade-order">
+  My early upgrade order
+</h2>
+
+I buy upgrades that shorten the next complete mining, production, or contract
+cycle.
+
+I do not rank an upgrade only by how exciting it looks in the unlock menu.
+
+<GuideTable
+  caption="My tested early upgrade order and the bottleneck each purchase needs to solve."
+  columns={earlyUpgradeColumns}
+  rows={earlyUpgradeRows}
+/>
+
+The first three purchases solve different stages:
+
+```text
+Shovel
+→ Opens the route
+
+Pickaxe
+→ Recovers the exposed resource
+
+Detector
+→ Locates the next specific target
+```
+
+The order can change when one stage is already working well.
+
+For example, I delay the Detector while Limestone remains visible, but buy it
+earlier when a contract requires one resource that I can no longer locate from
+the Surface.
+
+The Backpack upgrade is less urgent when:
+
+- the truck is already full;
+- the factory cannot process the current stock;
+- the missing contract item is not in the active property;
+- or the production line is blocked.
+
+More carrying capacity does not repair those bottlenecks.
+
+<h2 id="mining-lift">
+  Build a narrow Mining Lift route instead of clearing everything
+</h2>
+
+My first instinct was to flatten the entire Surface.
+
+That made the site look tidy but spent too much time removing ordinary
+material.
+
+Once useful resources moved into the Mid and Deep Layers, I placed a Mining
+Lift along the property edge.
+
+The initial tested costs were:
+
+- **$25** for the Lift Head;
+- **$10** for each Lift Extension.
+
+My construction sequence is:
+
+1. place the Lift Head on a clear property edge;
+2. face the attached ladder toward terrain I can excavate;
+3. clear one narrow section below it;
+4. add one Extension;
+5. test the ladder downward and back upward;
+6. clear the ladder face and landing when access fails;
+7. add another Extension only after the current connection works.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-mining-lift-extension.webp"
+    alt="Ore Factory Squad Lift Extension placement showing a 10 dollar price"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Extensions are inexpensive, but placing several before testing the shaft
+    can hide a blocked ladder connection and create more repair work.
+  </figcaption>
+</figure>
+
+When I see **Ladder is blocked**, I stop adding Extensions.
+
+I clear:
+
+- the ladder face;
+- the Extension joint;
+- the upper landing;
+- the lower landing;
+- and enough room to step away from the ladder.
+
+I then test the same section from both directions.
+
+For Lift Head placement, packed-box transfer, blocked ladders, electrical
+obstacles, and shaft depth, use the{" "}
+<Link
+  href="/ore-factory-squad/mining-lift-guide/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Mining Lift guide
+</Link>
+{"."}
+
+<h2 id="remaining-resources">
+  Check the resource layers before abandoning Greenpark Lot
+</h2>
+
+A property can look empty from above while still containing useful resources
+below the Surface.
+
+From the warehouse computer, I open:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="space-y-1 font-mono text-sm leading-7 text-slate-700">
+    <div>Properties</div>
+    <div>→ Active Property</div>
+    <div>→ Remaining Resources</div>
+  </div>
+</div>
+
+My heavily mined Greenpark Lot still showed lower-layer reserves including:
+
+- Stone;
+- Clay;
+- Limestone;
+- Sandstone;
+- Coal.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-property-remaining-resources.webp"
+    alt="Ore Factory Squad Greenpark Lot Remaining Resources screen showing Surface Mid and Deep Layers"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Surface Layer was nearly exhausted, but the Mid and Deep Layers still
+    contained resources worth checking before I removed the property.
+  </figcaption>
+</figure>
+
+I keep Greenpark when:
+
+- the remaining resources match active contracts;
+- the Mining Lift already reaches the useful layer;
+- the Detector still gives practical readings;
+- and the recovery time remains reasonable.
+
+I prepare to switch when:
+
+- the next production chain requires Copper or Iron;
+- Greenpark does not list those metals;
+- the factory already has enough basic-material reserves;
+- and the remaining deposits no longer justify another full mining day.
+
+The tested early-game system allows only one Active Property at a time.
+
+I recover important crates and useful site items before removing Greenpark.
+
+For the full Greenpark, Westmont, Forest, Remaining Resources, and property
+switching decision, use the{" "}
+<Link
+  href="/ore-factory-squad/remaining-resources-switch-property/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Remaining Resources and Property guide
+</Link>
+{"."}
+
+<h2 id="level-five">
+  What Level 5 actually changes
+</h2>
+
+I reached Level 5 after completing a contract that paid **$1,221**.
+
+The Level 5 unlock screen included:
+
+- Metal Processing License #2;
+- Warehouse Automation License;
+- Factory Size expansion;
+- another Pickaxe upgrade;
+- Fabrication Station;
+- Pallet Dispenser.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-level-five-unlocks.webp"
+    alt="Ore Factory Squad Level 5 unlock screen showing Metal Processing License 2 and warehouse automation"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Level 5 presents several expensive systems at once. I choose the next
+    purchase by bottleneck rather than buying the entire unlock panel.
+  </figcaption>
+</figure>
+
+In my launch-week run, the first Metal Processing License and the Smelting
+Furnace became available at **Level 4**.
+
+The Level 5 panel showed **Metal Processing License #2**, not the first
+Copper-and-Iron Ingot stage.
+
+I choose the next purchase through this decision table:
+
+<GuideTable
+  caption="How I choose between metal processing, automation, property switching, and mining upgrades after reaching Level 5."
+  columns={levelFiveDecisionColumns}
+  rows={levelFiveDecisionRows}
+/>
+
+I do not buy Warehouse Automation merely because it unlocked.
+
+The license, robot, Drop Zones, Pallet Dispenser, and related logistics
+equipment form a larger system.
+
+Buying one component without a planned route does not automatically replace the
+forklift.
+
+I consider the beginner opening complete when I have:
+
+- a reliable Sorting Station loop;
+- working basic production machines;
+- tracked storage pallets;
+- a repeatable contract route;
+- upgraded mining tools;
+- a usable Mining Lift;
+- and enough cash to choose the next production stage deliberately.
+
+<h2 id="quick-fixes">
+  Five problems I check before restarting or buying another machine
+</h2>
+
+Before rebuilding a machine, abandoning a contract, or spending more money, I
+run through these checks:
+
+<GuideTable
+  caption="Common early-game problems and the first fixes I test before restarting or buying more equipment."
+  columns={beginnerTroubleshootingColumns}
+  rows={beginnerTroubleshootingRows}
+/>
+
+These checks matter because many early failures are caused by:
+
+- the wrong processing stage;
+- an untracked pallet;
+- physical output obstruction;
+- a deadline crossing End Day;
+- or a route problem rather than a missing upgrade.
+
+I spend money only after the existing setup has been checked.
+
+<h2 id="next-steps">
+  Where I go after Level 5
+</h2>
+
+<ul className="my-6 list-disc space-y-3 pl-6">
+  <li>
+    {"Check the "}
+    <Link
+      href="/ore-factory-squad/remaining-resources-switch-property/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Remaining Resources and Property guide
+    </Link>
+    {" before removing Greenpark Lot or choosing a property for Copper and Iron."}
+  </li>
+
+  <li>
+    {"Continue with the "}
+    <Link
+      href="/ore-factory-squad/smelt-copper-iron-ingots/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Copper and Iron Smelting guide
+    </Link>
+    {" once raw metal is in Factory Storage and Ingot contracts begin appearing."}
+  </li>
+</ul>
+
+<h2 id="faq">
+  Ore Factory Squad beginner FAQ
+</h2>
+
+### Should I buy Metal Processing or Warehouse Automation first?
+
+I choose Metal Processing when Copper or Iron is already in Factory Storage and
+Ingot contracts are appearing.
+
+I choose Warehouse Automation only when manual pallet movement has become the
+real bottleneck and I can afford the license plus the required logistics
+equipment.
+
+When neither condition is true, I continue completing basic contracts and
+improving the mining route instead of buying either system early.
+
+### Does Level 5 give me a free Warehouse Robot?
+
+No.
+
+Level 5 unlocks access to later logistics systems, but it does not place a
+robot, Drop Zone, or Pallet Dispenser in the warehouse automatically.
+
+I still need to purchase and configure the required equipment. Until that setup
+is complete, the forklift remains part of the normal pallet route.
+
+### Can machines keep working overnight?
+
+Yes. My active machines continued processing after dark.
+
+Before using End Day, I check the contract timer because an order with one day
+remaining expired when I advanced the day.
+
+I let nearly completed production finish before moving to the next morning.
+
+### Is Westmont Property a good replacement for Greenpark Lot?
+
+Westmont was listed at **$700** and covered **2,000 m²**, but its preview still
+focused on Limestone, Clay, Stone, Sandstone, and Coal.
+
+It can replace Greenpark as another basic-material property, but it does not
+solve a Copper or Iron bottleneck.
+
+I continue comparing listings when metal processing is the reason for moving.
+
+### Can I use a controller with the forklift?
+
+Yes. I tested an Xbox-style controller with the forklift.
+
+Lifting, fine movement, and fine steering worked.
+
+I still preferred keyboard controls when placing pallets tightly inside the
+marked storage area or aligning a completed contract load with the truck.

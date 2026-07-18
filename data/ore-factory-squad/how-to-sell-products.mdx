@@ -1,0 +1,586 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const stockSellExampleColumns = [
+  { key: "product", label: "Product" },
+  { key: "trackedStock", label: "Tracked stock" },
+  { key: "buyerDemand", label: "Buyer Demand" },
+  { key: "unitPrice", label: "Unit price" },
+  { key: "quantitySold", label: "Sold" },
+  { key: "result", label: "Sale result" },
+];
+
+export const stockSellExampleRows = [
+  {
+    product: "Sand",
+    trackedStock: "6",
+    buyerDemand: "Higher than available stock",
+    unitPrice: "$11",
+    quantitySold: "6",
+    result: "$66 earned; 0 Sand left",
+  },
+  {
+    product: "Coal",
+    trackedStock: "90",
+    buyerDemand: "41",
+    unitPrice: "$12",
+    quantitySold: "41",
+    result: "$492 earned; 49 Coal left",
+  },
+];
+
+export const stockSellTroubleshootingColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "likelyCause", label: "Likely cause" },
+  { key: "fix", label: "Fix" },
+];
+
+export const stockSellTroubleshootingRows = [
+  {
+    problem: "Product is visible but absent from Stock Sell",
+    likelyCause:
+      "The pallet is outside or partly outside the marked storage area",
+    fix: "Move the whole pallet inside the marked boundary",
+  },
+  {
+    problem: "Raw resource exists in internal storage but is not listed",
+    likelyCause:
+      "The resource has not been transferred into tracked pallet stock",
+    fix: "Place the sellable resource on a physical product pallet",
+  },
+  {
+    problem: "The wrong product appears",
+    likelyCause: "A machine produced a different processing stage",
+    fix: "Check the exact pallet label and the machine's selected recipe",
+  },
+  {
+    problem: "The displayed stock count is lower than expected",
+    likelyCause: "One or more relevant pallets may not be tracked",
+    fix:
+      "Inspect every pallet containing that item and reposition any pallet touching the storage boundary",
+  },
+  {
+    problem: "Stock Sell cannot complete the transaction",
+    likelyCause: "It is nighttime",
+    fix: "Return during daytime or use End Day",
+  },
+  {
+    problem: "The sale does not advance an active contract",
+    likelyCause: "Stock Sell and Contracts are separate systems",
+    fix: "Use the Pallet Packer, truck, and Delivery Gate instead",
+  },
+  {
+    problem: "The Stock Sell tutorial opens the wrong app on controller",
+    likelyCause: "Launch-version controller issue",
+    fix: "Update the game to v1.0.1 or later",
+  },
+];
+
+export const sellingRouteColumns = [
+  { key: "route", label: "Route" },
+  { key: "requiredSetup", label: "Required setup" },
+  { key: "completionMethod", label: "Completion method" },
+  { key: "bestUse", label: "Best use" },
+];
+
+export const sellingRouteRows = [
+  {
+    route: "Stock Sell",
+    requiredSetup: "Tracked product pallet inside marked storage",
+    completionMethod: "Confirm the warehouse computer offer",
+    bestUse: "Immediate cash and surplus reduction",
+  },
+  {
+    route: "Contract",
+    requiredSetup: "Accepted order and exact requested products",
+    completionMethod: "Pallet Packer, truck, and Delivery Gate",
+    bestUse: "Planned production, larger rewards, and progression XP",
+  },
+];
+
+export const sellOrKeepColumns = [
+  { key: "inventorySituation", label: "Inventory situation" },
+  { key: "decision", label: "My decision" },
+];
+
+export const sellOrKeepRows = [
+  {
+    inventorySituation: "Large surplus of an easy basic resource",
+    decision: "Sell up to the buyer's Demand",
+  },
+  {
+    inventorySituation: "Product required by an accepted contract",
+    decision: "Reserve the exact contract quantity before selling",
+  },
+  {
+    inventorySituation: "Multi-stage product such as Cement",
+    decision:
+      "Check Contracts and intermediate-product needs before using Stock Sell",
+  },
+  {
+    inventorySituation: "Machine output is filling with unneeded stock",
+    decision: "Sell part of the surplus when the current offer is useful",
+  },
+  {
+    inventorySituation: "Cash is negative or a required purchase is blocked",
+    decision: "Sell enough replaceable surplus to restore operating cash",
+  },
+  {
+    inventorySituation: "The current offer is low but cash is stable",
+    decision: "Keep stock that still has a clear production use",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+To sell products in Ore Factory Squad, I place the sellable stock on a physical
+product pallet and move the entire pallet inside the factory's **marked storage
+area**.
+
+I then use:
+
+<div className="mt-4 space-y-1 font-mono text-sm leading-7">
+  <div>Warehouse computer</div>
+  <div>→ Stock Sell</div>
+  <div>→ Select a listed product</div>
+  <div>→ Check tracked stock, Demand, and price per unit</div>
+  <div>→ Confirm the sale during daytime</div>
+</div>
+
+A pallet does not need to be full. I completed my first sale with only
+**6 Sand** at **$11 per unit**, earning **$66**.
+
+Stock Sell does not use the Pallet Packer and does not complete an active
+contract. Contracts follow a separate packing and delivery route.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Tested solo on the launch-week build available July 18, 2026 and updated for
+  the v1.0.1 controller tutorial fix. Market offers, prices, Demand, XP, and
+  inventory behavior may change in later updates.
+</div>
+
+<h2 id="stock-sell-inventory">
+  Put products into Stock Sell inventory
+</h2>
+
+The warehouse computer does not count every item that is physically visible
+inside the factory.
+
+For stock to appear in Stock Sell, I use this route:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="space-y-1 font-mono text-sm leading-7 text-slate-700">
+    <div>Raw resource or machine output</div>
+    <div>→ Transfer the sellable item onto a product pallet</div>
+    <div>→ Move the pallet with the forklift</div>
+    <div>→ Place it fully inside the marked storage area</div>
+    <div>→ Open Stock Sell on the warehouse computer</div>
+  </div>
+</div>
+
+A pallet parked beside a machine, near the warehouse wall, or partly across the
+storage border may not be counted.
+
+When a product is missing, I reposition the existing pallet before producing
+another batch.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-product-pallet-storage-area.webp"
+    alt="Ore Factory Squad product pallets placed inside the marked factory storage area"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Stock Sell tracks physical product pallets inside the marked area. I place
+    the whole pallet inside the boundary rather than leaving it on the edge.
+  </figcaption>
+</figure>
+
+### Internal resource storage and pallet stock are different
+
+Crates unloaded into the Sorting Station are separated and transferred into
+the factory's internal resource storage.
+
+That does not mean every stored material is automatically ready for Stock Sell.
+
+For my manual sales:
+
+- the Sorting Station handles incoming crate contents;
+- machines or transfer controls place sellable stock onto physical pallets;
+- the marked storage area makes those pallets visible to the warehouse stock
+  system.
+
+This distinction matters for raw Coal as well as processed products such as
+Sand and Cement.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-sorting-station-storage.webp"
+    alt="Ore Factory Squad Sorting Station transferring collected resources into internal Factory Storage"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Sorting Station handles incoming resources. Stock Sell uses the
+    separately tracked stock placed on physical pallets in the marked area.
+  </figcaption>
+</figure>
+
+### A partial pallet can be sold
+
+My first recorded Stock Sell used only **6 Sand**.
+
+The listed price was **$11 per unit**, so the sale returned:
+
+**6 × $11 = $66**
+
+I did not need to wait until the pallet reached its maximum stack.
+
+This makes Stock Sell useful when I need immediate cash from a small surplus
+rather than a full production run.
+
+<h2 id="read-stock-sell-offer">
+  Read stock, Demand and price before selling
+</h2>
+
+The three values I check are:
+
+- **Stock:** how many tracked units I currently have;
+- **Demand:** how many units the buyer wants;
+- **Price per unit:** the value of each unit included in the sale.
+
+The buyer does not necessarily purchase everything I own.
+
+### Recorded Stock Sell examples
+
+<GuideTable
+  caption="Recorded Stock Sell transactions from the tested build. Prices and buyer Demand may change."
+  columns={stockSellExampleColumns}
+  rows={stockSellExampleRows}
+/>
+
+The Sand sale shows that I can complete a transaction even when my available
+stock is lower than the buyer's full Demand.
+
+The Coal sale shows the opposite situation: I had **90 Coal**, but the buyer
+wanted only **41**.
+
+The sale used 41 units and left **49 Coal** in stock.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-stock-sell-coal-offer.webp"
+    alt="Ore Factory Squad Stock Sell offer showing 90 Coal in stock 41 Demand and 12 dollars per unit"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I had 90 Coal, but this buyer wanted 41 at $12 each. The transaction was
+    worth $492 and did not clear all Coal from storage.
+  </figcaption>
+</figure>
+
+In these two tests, the completed quantity matched whichever was lower:
+
+- my tracked stock;
+- or the buyer's Demand.
+
+I did not need a full pallet or enough stock to satisfy a Demand larger than my
+inventory.
+
+### Do not treat one displayed price as a permanent value
+
+I observed several different unit prices while checking Stock Sell, including
+offers around **$5**, **$6**, **$8**, **$11**, and **$12** for different listed
+stock.
+
+Those examples prove that displayed offers can differ. They do not prove that
+waiting until the next day always produces a better price.
+
+I confirm a sale when:
+
+- I need the cash now;
+- the item is a genuine surplus;
+- and selling the requested quantity will not block a contract or production
+  chain.
+
+<h2 id="stock-sell-troubleshooting">
+  Why products do not appear in Stock Sell
+</h2>
+
+<GuideTable
+  caption="Checks for missing Stock Sell inventory, nighttime restrictions, contract confusion, and the controller tutorial issue."
+  columns={stockSellTroubleshootingColumns}
+  rows={stockSellTroubleshootingRows}
+/>
+
+I do not begin by rebuilding the product.
+
+The fastest check is usually:
+
+1. inspect the exact pallet label;
+2. verify that the whole pallet is inside the marked area;
+3. close and reopen Stock Sell;
+4. confirm that it is still daytime.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="stock-sell-vs-contracts">
+  Stock Sell vs Contracts
+</h2>
+
+Stock Sell and Contracts can use similar products, but they are different money
+routes.
+
+<GuideTable
+  caption="How Stock Sell differs from a full Contract delivery."
+  columns={sellingRouteColumns}
+  rows={sellingRouteRows}
+/>
+
+Stock Sell is the shorter route:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="font-mono text-sm leading-7 text-slate-700">
+    Marked storage pallet → Stock Sell → Immediate transaction
+  </div>
+</div>
+
+Contracts require more steps:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 shadow-sm">
+  <div className="font-mono text-sm leading-7 text-slate-700">
+    Accepted contract → Exact products → Pallet Packer → Truck → Delivery Gate
+  </div>
+</div>
+
+### Cash speed and XP are not the same decision
+
+One recorded Cement Stock Sell awarded **40 XP**.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-stock-sale-40-xp.webp"
+    alt="Ore Factory Squad completed Cement Stock Sell awarding 40 XP"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This Cement sale awarded 40 XP. The quantity and cash were not recorded in
+    the same result, so I do not use it to claim a universal Stock Sell XP
+    formula.
+  </figcaption>
+</figure>
+
+A recorded early contract awarded **300 XP**, while another completed contract
+awarded **400 XP**.
+
+Those samples do not prove that every contract gives more XP than every Stock
+Sell transaction, but they explain why I use Contracts as my main progression
+route and Stock Sell as my liquidity route.
+
+Selling an item through Stock Sell does not satisfy a contract requiring the
+same product.
+
+It may instead remove the tracked stock I needed for that order.
+
+For the full delivery route, use the{" "}
+<Link
+  href="/ore-factory-squad/complete-contracts-pallet-packer/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Contracts and Pallet Packer guide
+</Link>
+{"."}
+
+<h2 id="what-to-sell">
+  What should I sell or keep?
+</h2>
+
+I do not use a fixed “best product to sell” ranking because current Demand,
+unit price, contracts, and replacement difficulty can change the decision.
+
+I use this priority instead:
+
+<GuideTable
+  caption="How I decide whether tracked stock should be sold or reserved."
+  columns={sellOrKeepColumns}
+  rows={sellOrKeepRows}
+/>
+
+### Reserve contract stock first
+
+Before confirming a sale, I check:
+
+- active contract quantities;
+- products already waiting for the Pallet Packer;
+- intermediate products needed for another recipe;
+- and how difficult the item will be to replace.
+
+For example, I do not sell every Limestone Block when the next order may
+require Blocks directly or I still need them for Cement.
+
+The same rule applies to:
+
+- Clay Blocks and Clay Bricks;
+- Stone Blocks and Stone Bricks;
+- Glass and Foam Glass;
+- raw Coal and Crushed Coal.
+
+### Recovering from negative cash
+
+After daily costs pushed my balance to **-$18**, Stock Sell was still available.
+
+I had:
+
+- **90 Coal** in tracked stock;
+- a buyer Demand of **41**;
+- and an offer of **$12 per unit**.
+
+Selling those 41 Coal produced **$492** and restored usable cash without
+requiring a contract delivery.
+
+This is where Stock Sell is strongest: converting an existing surplus into
+immediate operating money.
+
+I still avoid selling every unit of a resource merely because the balance is
+negative. I sell enough replaceable stock to recover, then preserve anything
+needed by active production.
+
+<h2 id="night-restrictions">
+  Why Stock Sell is unavailable at night
+</h2>
+
+The factory can continue operating after dark, but the business applications
+have daytime restrictions.
+
+At night, I could continue:
+
+- moving pallets;
+- processing resources;
+- arranging the warehouse;
+- preparing tomorrow's stock.
+
+I could not:
+
+- complete Stock Sell transactions;
+- send new contract offers;
+- purchase properties.
+
+<figure className="my-8">
+  <Image
+    src="/images/ore-factory-squad/ore-factory-squad-sales-unavailable-at-night.webp"
+    alt="Ore Factory Squad notice explaining that sales contract offers and property purchases are unavailable at night"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Night does not stop factory work, but it blocks the final Stock Sell
+    transaction until daytime.
+  </figcaption>
+</figure>
+
+When I reach the computer after dark, I use the remaining time to:
+
+1. finish production;
+2. move sellable pallets into the marked storage area;
+3. reserve contract stock;
+4. clear blocked machine outputs;
+5. use End Day when I am ready for the next daytime window.
+
+I do not use End Day solely because the current offer looks weak. I have not
+established that every new day guarantees a higher unit price.
+
+<h2 id="related-guides">
+  Related Ore Factory Squad guides
+</h2>
+
+<ul className="my-6 list-disc space-y-3 pl-6">
+  <li>
+    {"Return to the "}
+    <Link
+      href="/ore-factory-squad/beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Beginner Guide
+    </Link>
+    {" for the complete Greenpark Lot to Level 5 opening route."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/complete-contracts-pallet-packer/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Contracts and Pallet Packer guide
+    </Link>
+    {" when the product belongs to an accepted delivery instead of a Stock Sell offer."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/ore-factory-squad/find-limestone-make-cement/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Limestone and Cement guide
+    </Link>
+    {" before selling Limestone Blocks needed for Cement production."}
+  </li>
+
+  <li>
+    {"Check the "}
+    <Link
+      href="/ore-factory-squad/remaining-resources-switch-property/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Remaining Resources and Property guide
+    </Link>
+    {" when deciding whether a sold basic resource will be easy to replace."}
+  </li>
+</ul>
+
+<h2 id="faq">
+  Ore Factory Squad Stock Sell FAQ
+</h2>
+
+### What happens to the pallet after a Stock Sell transaction?
+
+When I sold all 6 Sand, the products disappeared and the empty blue pallet
+remained in the factory.
+
+In the partial Coal sale, the unsold stock remained available rather than the
+transaction clearing all 90 Coal.
+
+### Can I complete a sale when buyer Demand is higher than my stock?
+
+Yes. The Sand buyer wanted more than the 6 units I had, but the sale still
+completed for the available six.
+
+I did not need to produce the buyer's full Demand before confirming the
+transaction.
+
+### Does Stock Sell complete an active contract?
+
+No. Even when Stock Sell lists the same product required by a contract, the
+sale does not advance the contract counters.
+
+It can instead remove stock that the Pallet Packer still needs.
+
+### Why does Stock Sell open the wrong computer app with a controller?
+
+Update to **v1.0.1 or later**.
+
+The launch hotfix corrected a controller issue that could open the wrong
+application during the Stock Sell tutorial.
