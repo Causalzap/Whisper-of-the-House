@@ -8,7 +8,6 @@
 // - Add spoke pages under cluster.pages.
 // - Use cluster.home.featuredHub to show a hub on the homepage.
 // - Use page.home.latest to show a page in Latest Stories.
-// - Use page.archive.showInCollections = false only when a page should stay out of /all-game-guides/.
 
 export type HomeAccent =
   | "purple"
@@ -131,6 +130,138 @@ export type GuideCluster = HomeImageFields & {
 };
 
 export const guideClusters = [
+  {
+    "title": "Happy's Humble Burger Cult",
+    "game": "Happy's Humble Burger Cult",
+    "href": "/happys-humble-burger-cult",
+    "slug": "happys-humble-burger-cult",
+    "kind": "game",
+    "status": "active",
+    "accent": "rose",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "Shift Survival",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Complete first-wave coverage",
+    "description":
+      "Follow the Happy's Humble Burger Cult guide hub from the Tutorial and first restaurant through core sandwich recipes, Weird Sandwich fixes, Salmon Nuggets, bagging, quota, Overtime, Closeout Duties, and the elevator escape.",
+    "coverage": [
+      "Tutorial route, essential controls, Solo versus Co-op, first restaurant orientation, contract and modifier choices, the first three-item order, Simulation Stability, first quota, and first elevator escape",
+      "Order categories, verified Deep Sea Sammy, Vegan Surprise, Dairy Fairy, and Peppery Breast stacks, Weird Sandwich fixes, Salmon Nuggets, baked goods, drinks, bagging, incorrect deliveries, Pickup, Drive-Thru, kitchen roles, and Toe",
+      "Quota versus completed shifts, Overtime decisions, clock-out sequence, Closeout Duty streak scaling, Restock, grease, rat traps, Thermostats, appliances, fires, trash, Solo priorities, Co-op splits, and Escape",
+      "July 18 balance patch changes, one-duty fresh streaks, remaining Stability delaying Joy, Pacifist Mode, input rebinding, troubleshooting, and tested launch-week evidence boundaries"
+    ],
+    "image":
+      "/images/happys-humble-burger-cult/happys-humble-burger-cult-first-lobby-order.webp",
+    "imageFit": "cover",
+    "imagePosition": "center",
+    "imagePadding": false,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 10,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "Happy's Humble Burger Cult Guide Hub",
+        "href": "/happys-humble-burger-cult",
+        "type": "Guide Hub",
+        "description":
+          "Start here for the first shift, core recipes, Weird Sandwiches, Salmon Nuggets, bagging errors, quota, Overtime, Closeout Duties, and the elevator escape.",
+        "image":
+          "/images/happys-humble-burger-cult/happys-humble-burger-cult-first-lobby-order.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "spotlightMeta":
+            "First shift, Solo and Co-op, core recipes, Weird Sandwiches, Salmon Nuggets, bagging, quota, Overtime, Closeout Duties, and elevator escape"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "Happy's Humble Burger Cult First Shift Guide",
+        "href": "/happys-humble-burger-cult/beginner-guide",
+        "type": "Beginner Guide",
+        "description":
+          "Complete the first shift with the Tutorial, essential controls, Solo or Co-op roles, first restaurant route, modifier choice, first order, quota, Closeout, and elevator.",
+        "date": "Updated recently",
+        "image":
+          "/images/happys-humble-burger-cult/happys-humble-burger-cult-first-restaurant-tablet-map.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 40,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta":
+            "Tutorial, essential controls, Solo versus Co-op, first restaurant route, contract and modifier choice, first three-item order, quota, Closeout, and elevator"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "Happy's Humble Burger Cult Orders & Kitchen Guide",
+        "href": "/happys-humble-burger-cult/orders-kitchen-guide",
+        "type": "Systems",
+        "description":
+          "Follow core sandwich stacks, fix Weird Sandwiches, find Salmon Nuggets, bag orders correctly, diagnose incorrect deliveries, and separate Lobby, Pickup, and Drive-Thru.",
+        "date": "Updated recently",
+        "image":
+          "/images/happys-humble-burger-cult/happys-humble-burger-cult-recipe-list-over-picture.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 41,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta":
+            "Deep Sea Sammy, Vegan Surprise, Dairy Fairy, Peppery Breast, Weird Sandwich fixes, Salmon Nuggets, bagging, delivery errors, Pickup, Drive-Thru, roles, and Toe"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "Happy's Humble Burger Cult Quota & Closeout Guide",
+        "href": "/happys-humble-burger-cult/quota-overtime-closeout-guide",
+        "type": "Systems",
+        "description":
+          "Understand quota, decide whether Overtime is worth it, clock out correctly, complete Restock and Thermostat tasks, clear Closeout, and unlock the elevator.",
+        "date": "Updated recently",
+        "image":
+          "/images/happys-humble-burger-cult/happys-humble-burger-cult-closeout-duty-list.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 42,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta":
+            "Quota versus shift completion, Overtime, clock-out, duty streak scaling, Restock, grease, traps, Thermostats, appliances, fires, trash, Solo route, and Escape"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      }
+    ]
+  },
   {
     "title": "Ore Factory Squad",
     "game": "Ore Factory Squad",

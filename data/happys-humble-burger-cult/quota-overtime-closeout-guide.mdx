@@ -1,0 +1,572 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const coreRecipeColumns = [
+  { key: "recipe", label: "Sandwich" },
+  { key: "base", label: "Patty / base" },
+  { key: "observedStack", label: "Observed middle stack" },
+  { key: "easyMiss", label: "Easy mistake" },
+];
+
+export const coreRecipeRows = [
+  {
+    recipe: "Deep Sea Sammy",
+    base: "Fish patty",
+    observedStack: "Cheese → onion → pickles → mayo",
+    easyMiss:
+      "Mayo is difficult to see in the recipe picture. Check the written list and the required bun.",
+  },
+  {
+    recipe: "Vegan Surprise",
+    base: "No patty",
+    observedStack: "2 lettuce → 2 tomatoes → onion → pickles → mayo",
+    easyMiss:
+      "The duplicate lettuce and tomatoes matter. One of each produced the wrong order in my run.",
+  },
+  {
+    recipe: "Dairy Fairy",
+    base: "Beef patty",
+    observedStack: "Bacon → 3 cheese → tomato → onion → mustard",
+    easyMiss:
+      "The three separate cheese pieces are the defining count; do not read them as one generic cheese step.",
+  },
+  {
+    recipe: "Peppery Breast",
+    base: "Chicken patty",
+    observedStack: "Lettuce → 2 bacon → 2 pickles → hot sauce",
+    easyMiss:
+      "Both bacon and pickles are doubled. I check the text before placing the top bun.",
+  },
+];
+
+export const deliveryErrorColumns = [
+  { key: "error", label: "Failure type" },
+  { key: "symptom", label: "What I see" },
+  { key: "check", label: "What I check first" },
+  { key: "recovery", label: "Recovery" },
+];
+
+export const deliveryErrorRows = [
+  {
+    error: "Wrong named recipe",
+    symptom:
+      "The sandwich looks valid, but the customer ordered a different burger.",
+    check:
+      "Compare the completed sandwich name with the order before checking every topping.",
+    recovery:
+      "Build the requested named sandwich. In one run, the team had to remake the order after submitting Burger Burger instead of Biggly Piggly.",
+  },
+  {
+    error: "Wrong bag contents",
+    symptom:
+      "The bag has an extra item, a missing item, or the wrong side or drink.",
+    check:
+      "Repeat the order channel, sandwich, side, drink, and total item count.",
+    recovery:
+      "Do not submit the bag. Move to a clean bag if the current contents cannot be corrected reliably.",
+  },
+  {
+    error: "Wrong delivery channel",
+    symptom:
+      "The food is correct, but delivery still fails at Lobby, Pickup, or Drive-Thru.",
+    check:
+      "Confirm which queue created the order and where that channel accepts the bag.",
+    recovery:
+      "Carry the bag to the matching station before submission. If the order remains active after the failed submission, rebuild it and deliver it to the correct channel.",
+  },
+  {
+    error: "Expired order",
+    symptom:
+      "The customer or queue disappears before the bag is accepted.",
+    check:
+      "Check whether the order timer ended or the customer was interrupted at the register.",
+    recovery:
+      "Clear the abandoned bag from the active workspace. I only reuse an item when it exactly matches a new unmodified order.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+I complete orders with one fixed workflow:
+
+<div className="mt-4 space-y-1 font-mono text-sm leading-7">
+  <div>Read the full customer order</div>
+  <div>→ translate each item into a kitchen category</div>
+  <div>→ name one order owner and one physical bag</div>
+  <div>→ read the written recipe list</div>
+  <div>→ cook the patty and longest side in parallel</div>
+  <div>→ verify every requested item and the delivery channel</div>
+  <div>→ submit only after the final item-count call</div>
+</div>
+
+The errors that cost me the most time were a hidden sauce, duplicate ingredients
+that looked optional, a correct item entering the wrong bag, and a finished bag
+going to the wrong order channel.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-400">
+  Tested on launch-week builds available in July 2026. Recipe names, ingredient
+  stacks, order channels, station behavior, and balance may change in later
+  updates. The recipe table below records only stacks I could reconstruct from
+  successful or corrected orders; it is not an all-recipes list.
+</div>
+
+<h2 id="order-categories">
+  Translate menu names into kitchen jobs
+</h2>
+
+The themed food names are harder to remember than the work they create.
+
+When a customer asks for a **Deep Sea Sammy**, **Hot Pie**, and **Strawberry
+Jacuzzi**, I do not carry those three names around the restaurant. I translate
+them into:
+
+> One sandwich, one baked item, one drink. Three items total.
+
+<figure className="my-8">
+  <Image
+    src="/images/happys-humble-burger-cult/happys-humble-burger-cult-first-lobby-order.webp"
+    alt="Happy's Humble Burger Cult lobby order for a Deep Sea Sammy, Hot Pie, and Strawberry Jacuzzi"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I classify the three themed names before pressing Submit. That tells the
+    kitchen which stations must work and gives the bag owner a final count of
+    three.
+  </figcaption>
+</figure>
+
+The four terminal categories lead me to four station groups:
+
+- **Burgers & Sandwiches:** recipe display, Freezer, Grill, and assembly station;
+- **Fried Foods:** Fryer and the Fried Foods storage;
+- **Baked Goods:** the oven or baked-goods station;
+- **Drinks & Shakes:** the matching drink machine and its nearby cups.
+
+The player at the register becomes the **order caller**. That player reads the
+request once, assigns the sandwich, names the extra categories, and repeats only
+corrections. Four people repeating every item produced more duplicate food than
+useful information.
+
+<h2 id="kitchen-stations">
+  My kitchen route after the order reaches the queue
+</h2>
+
+I use the same sequence for every standard Lobby order:
+
+<div className="my-4 space-y-1 font-mono text-sm leading-7">
+  <div>kitchen order queue</div>
+  <div>→ written recipe display</div>
+  <div>→ Freezer for the correct patty</div>
+  <div>→ Grill</div>
+  <div>→ burger assembly station</div>
+  <div>→ Fryer, oven, or drink machine</div>
+  <div>→ one named bag</div>
+  <div>→ the order's Lobby, Pickup, or Drive-Thru submission point</div>
+</div>
+
+I do not take a random patty before checking the recipe. Beef, chicken, pork,
+and fish are easy to confuse in a dark kitchen, and the wrong patty invalidates
+an otherwise correct sandwich.
+
+On the first restaurant, the Freezer and Grill are nearly opposite each other.
+I take the patty, close the Freezer, turn to the Grill, and then return to the
+assembly side. I do not circle the entire kitchen.
+
+The Bagging Station is the final station, not an optional staging shelf.
+Finished food does not enter the order automatically.
+
+<h2 id="core-recipes">
+  Core sandwich stacks I verified
+</h2>
+
+The recipe picture helps me recognize the shape, but the written list is the
+source I trust for sauces, counts, and duplicate ingredients.
+
+<GuideTable
+  caption="Launch-week sandwich stacks reconstructed from orders I completed or corrected. Check the current in-game board for the required bottom and top bun."
+  columns={coreRecipeColumns}
+  rows={coreRecipeRows}
+/>
+
+The table alone is not enough to build each sandwich safely. The bun, ingredient direction, duplicate counts, and Complex Order changes can still turn a correct-looking stack into a Weird Sandwich. A wrong bun was
+enough to create a `Weird Sandwich` in the Tutorial, and bun names or art are
+more reliable on the current recipe board than in a spoken callout.
+
+<figure className="my-8">
+  <Image
+    src="/images/happys-humble-burger-cult/happys-humble-burger-cult-recipe-list-over-picture.webp"
+    alt="Happy's Humble Burger Cult recipe display with a written ingredient list beside the sandwich picture"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mayo was easy to miss in the picture but clear in the written list. I read
+    from the bottom bun upward and use the image only as a shape check.
+  </figcaption>
+</figure>
+
+<h2 id="weird-sandwich">
+  Follow the recipe and stop a Weird Sandwich early
+</h2>
+
+My bottom-to-top check is:
+
+1. correct bottom bun;
+2. correct patty or meatless base;
+3. every topping in the listed order;
+4. duplicate ingredients in the listed count;
+5. every sauce;
+6. correct top bun.
+
+When Complex Orders are enabled, I read the base recipe first and the customer's
+modification second. A visible condition such as **No Bacon** or **No Tomato**
+overrides the normal stack for that one order.
+
+I do not build the standard sandwich and attempt surgery afterward.
+
+<figure className="my-8">
+  <Image
+    src="/images/happys-humble-burger-cult/happys-humble-burger-cult-weird-sandwich-wrong-bun.webp"
+    alt="Happy's Humble Burger Cult Weird Sandwich created after the wrong bun was used"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The wrong bun created a Weird Sandwich before the rest of the order was
+    finished. Once the label appears, I discard the build instead of spending
+    more ingredients on it.
+  </figcaption>
+</figure>
+
+### I rebuild immediately when
+
+- the bun or patty is wrong;
+- the station labels the result `Weird Sandwich`;
+- I cannot remember whether a hidden sauce was added;
+- a required duplicate ingredient is missing;
+- or another player added an unknown item to my stack.
+
+### I keep the current build when
+
+- the sandwich itself is correct and only waiting for a side or drink;
+- the patty is ready but has not burnt;
+- or the order caller catches a missing topping before I close the sandwich.
+
+<h2 id="cooking-states">
+  How to recognize cooked and burnt food
+</h2>
+
+I do not publish a universal number of seconds for patties, fries, nuggets,
+pies, or cookies yet. The available runs did not isolate each station cleanly
+enough to separate actual cook time from pauses, events, and delayed pickups.
+
+What I can verify is more useful during a live shift:
+
+- the Tutorial says a patty changes color when it is cooked;
+- patties can continue past ready and burn;
+- Fries and Salmon Nuggets can burn when nobody owns the Fryer;
+- pies and cookies should be checked while the sandwich is being assembled;
+- and leaving a finished item unattended is more dangerous than starting it a
+  few seconds late.
+
+My low-risk timing rule is:
+
+> Start the patty and one requested side or baked item together. Assign a person
+> to each active appliance, then remove the food as soon as its ready state is
+> visible.
+
+I prepare only one small spare batch of a common side when the team is stable.
+I do not fill the kitchen with speculative fries or cookies while an active
+order is still missing its sandwich.
+
+<h2 id="sides-and-drinks">
+  Salmon Nuggets, baked goods, drinks, and cups
+</h2>
+
+### Salmon Nuggets
+
+Salmon Nuggets are a prepared Fried Food item stored near or below the Fries
+area. I do not take a raw fish patty and search for a cutting station.
+
+One team spent more than a minute carrying raw fish around before finding the
+actual Salmon Nuggets beside the Fryer supplies.
+
+<figure className="my-8">
+  <Image
+    src="/images/happys-humble-burger-cult/happys-humble-burger-cult-salmon-nuggets-under-fries.webp"
+    alt="Happy's Humble Burger Cult Salmon Nuggets stored below the Fries section near the Fryer"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Salmon Nuggets are their own Fried Food supply. Raw fish is used for a fish
+    sandwich, not converted into nuggets.
+  </figcaption>
+</figure>
+
+### Baked goods
+
+I start a requested Hot Pie or Cookie while the patty cooks, then give that
+appliance to one named player. In one kitchen, the team lost Fries twice because
+everyone assumed somebody else was watching them.
+
+### Drinks and shakes
+
+I read the exact drink name and use the cup supplied beside the matching machine.
+I do not move an empty cup from one drink setup to another and assume it will
+work.
+
+I have not added a hard red-cup-versus-clear-cup table because the available
+launch-week material did not show both cup types and machines clearly enough for
+a version-safe rule. The station layout or UI should be treated as the current
+source until that pairing is retested.
+
+Toe prepared drinks and baked items in several shifts, but Toe did not complete
+the bag. I still collected the item, checked it against the active request, and
+placed it in the correct order.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="bagging-errors">
+  Bagging and fixing incorrect deliveries
+</h2>
+
+A correct sandwich can still become a failed order at the Bagging Station.
+
+I keep one physical bag beside the player who owns the order. The bag is named
+by its delivery channel as soon as the request enters the kitchen:
+
+- `Lobby`;
+- `Pickup`;
+- or `Drive-Thru`.
+
+<figure className="my-8">
+  <Image
+    src="/images/happys-humble-burger-cult/happys-humble-burger-cult-bagging-station-first-order.webp"
+    alt="Happy's Humble Burger Cult Bagging Station with a completed sandwich ready to be combined with the remaining order items"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I keep the sandwich and its bag together, then add the baked item and drink
+    only after repeating the original request.
+  </figcaption>
+</figure>
+
+Before submission, the bag owner calls:
+
+> Channel. Sandwich. Side or baked item. Drink. Total item count.
+
+For the first three-item Lobby order, my check was:
+
+> Lobby. Deep Sea Sammy. Hot Pie. Strawberry Jacuzzi. Three items.
+
+<GuideTable
+  caption="The four delivery failures I encountered and the order in which I diagnose them."
+  columns={deliveryErrorColumns}
+  rows={deliveryErrorRows}
+/>
+
+In one Co-op run, the team delivered a valid Burger Burger when the request was
+for a Biggly Piggly. The game returned `Order Delivery Was Incorrect`, and the
+team began remaking the order rather than trying to edit the submitted bag.
+
+<figure className="my-8">
+  <Image
+    src="/images/happys-humble-burger-cult/happys-humble-burger-cult-order-delivery-incorrect.webp"
+    alt="Happy's Humble Burger Cult Order Delivery Was Incorrect warning after the wrong named sandwich was submitted"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I check the named sandwich first. A burger can be internally valid and still
+    belong to the wrong customer recipe.
+  </figcaption>
+</figure>
+
+A later bag also failed because it contained too many items. More food is not a
+bonus; an unrequested drink, side, or duplicate can invalidate the order.
+
+<h2 id="order-channels">
+  Lobby, Pickup, and Drive-Thru are separate queues
+</h2>
+
+I never treat the three delivery channels as interchangeable.
+
+### Lobby
+
+The customer orders at the front register. I return the completed bag to the
+Lobby fulfillment point.
+
+### Pickup
+
+Pickup adds a separate order section. The first time my team enabled it, we
+finished the food and then lost time asking who should receive the bag.
+
+<figure className="my-8">
+  <Image
+    src="/images/happys-humble-burger-cult/happys-humble-burger-cult-pickup-orders-separate-station.webp"
+    alt="Happy's Humble Burger Cult Pickup Orders enabled with a separate order queue and delivery area"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Pickup is a separate queue, not another Lobby customer. I assign it to one
+    player before accepting the first Pickup order.
+  </figcaption>
+</figure>
+
+### Drive-Thru
+
+Drive-Thru orders use their own service side. I do not carry a Drive-Thru bag to
+the Lobby just because the sandwich name matches another active request.
+
+The available English material did not provide a clean enough frame to publish
+a precise Drive-Thru submission-point diagram, so I keep the rule narrow:
+identify the Drive-Thru queue and its service window before enabling the lever.
+
+I leave Pickup and Drive-Thru disabled when:
+
+- the team still expires normal Lobby orders;
+- nobody knows the extra submission point;
+- the kitchen does not have a fixed bag owner;
+- or two players are already duplicating food.
+
+<h2 id="kitchen-roles">
+  My two-player split and how I use Toe
+</h2>
+
+Two players can finish shifts, but both players cannot own the same sandwich.
+
+### Player 1: order caller, sandwich, and bag
+
+- reads the request and names the categories;
+- checks the written recipe;
+- cooks the patty and assembles the sandwich;
+- keeps the active bag beside that station;
+- performs the final item-count call.
+
+### Player 2: sides, drinks, and kitchen control
+
+- prepares Fries, Nuggets, Cookies, Pies, and drinks;
+- watches the active Fryer or oven;
+- closes the Freezer;
+- handles a Grill fire that blocks the route;
+- brings each completed item to the named bag.
+
+When two sandwich-heavy orders arrive, I use the second prep station and give
+each station one owner and one bag.
+
+<figure className="my-8">
+  <Image
+    src="/images/happys-humble-burger-cult/happys-humble-burger-cult-second-prep-station.webp"
+    alt="Happy's Humble Burger Cult second burger prep station used to separate two active Co-op sandwich orders"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A second prep station helps only when each sandwich has a named owner. Two
+    unclaimed stations create two places for ingredients to become mixed.
+  </figcaption>
+</figure>
+
+Toe is secondary-item support, not an order owner. When Toe produces something,
+I still identify it, compare it with the request, collect it, and bag it. I also
+check that the second player did not already make the same item.
+
+<div className="my-8 rounded-xl border border-slate-700 bg-slate-900/60 p-5 text-sm leading-7 text-slate-300">
+  <strong className="text-white">My four kitchen-control rules:</strong>{" "}
+  Close the Freezer after taking the patty; never leave an active appliance without a named player watching it; keep no more than one small spare side batch; and never move another player’s sandwich or bag without calling it out.
+</div>
+
+<h2 id="related-guides">
+  Related Happy's Humble Burger Cult guides
+</h2>
+
+<ul className="my-6 list-disc space-y-3 pl-6">
+  <li>
+    {"Return to the "}
+    <Link
+      href="/happys-humble-burger-cult/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Happy's Humble Burger Cult Guide Hub
+    </Link>
+    {" for the cluster reading order, modes, contracts, and progression overview."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/happys-humble-burger-cult/beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      First Shift Guide
+    </Link>
+    {" for the Tutorial, first restaurant route, first order, and first clear."}
+  </li>
+
+  <li>
+    {"Once quota is met, continue with the "}
+    <Link
+      href="/happys-humble-burger-cult/quota-overtime-closeout-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Quota, Overtime and Closeout Guide
+    </Link>
+    {"."}
+  </li>
+</ul>
+
+<h2 id="faq">
+  Happy's Humble Burger Cult Orders and Kitchen FAQ
+</h2>
+
+### Can I remove one wrong ingredient from a Weird Sandwich?
+
+I did not find a reliable one-layer removal method. Because the wrong bun
+immediately created a Weird Sandwich in the Tutorial, I rebuild before adding
+more ingredients rather than risk losing the entire order timer.
+
+### Can I reuse food after an order expires?
+
+Only when the item exactly matches a new live order and has no customer-specific
+Complex Order modification. Otherwise, I clear it from the active station so it
+cannot enter the next bag by mistake.
+
+### Does one extra item make the whole bag incorrect?
+
+It can. One Co-op bag was rejected after the team discovered too many items
+inside. I match the exact item count instead of treating extra Fries or a spare
+drink as harmless.
+
+### Why can I not find Salmon Nuggets beside the raw fish?
+
+Raw fish is a sandwich patty. Salmon Nuggets are a separate Fried Food supply
+near or below the Fries storage, so I search the Fryer side rather than the
+Freezer.
+
+### Can Toe replace the second kitchen player?
+
+No. Toe can reduce secondary-item work, but a player still has to identify the
+finished item, collect it, prevent duplicates, place it in the correct bag, and
+submit the order.
+
+### When should I enable Pickup or Drive-Thru?
+
+After the team can clear Lobby orders without expiry and one player can point to
+the extra queue's submission point before service starts. I do not learn an
+extra channel while an active bag is already waiting.
