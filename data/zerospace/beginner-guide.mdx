@@ -1,0 +1,734 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const beginnerResourceColumns = [
+  { key: "resource", label: "Resource" },
+  { key: "howItWorks", label: "How it works" },
+  { key: "myCheck", label: "What I check first" },
+];
+
+export const beginnerResourceRows = [
+  {
+    resource: "Hexite",
+    howItWorks:
+      "The basic resource is generated automatically by active bases and pays for many buildings and standard units.",
+    myCheck:
+      "If Hexite is low, I stop adding production structures and let the current economy catch up before spending again.",
+  },
+  {
+    resource: "Flux",
+    howItWorks:
+      "Harvesters collect Flux from discovered nodes. Research and stronger units often require it.",
+    myCheck:
+      "If I have Hexite but cannot train the next unit, I confirm that a Harvester is active and has a Flux node to work.",
+  },
+  {
+    resource: "Supply",
+    howItWorks:
+      "Supply Platforms raise the number of units I can field. Reaching the cap blocks additional units from completing.",
+    myCheck:
+      "I add another Supply Platform while units are still training instead of waiting for the queue to stop.",
+  },
+  {
+    resource: "Experience",
+    howItWorks:
+      "Control Towers provide experience that unlocks faction talents during a match.",
+    myCheck:
+      "I capture a nearby safe tower early, but I do not sacrifice the hero or opening army for a tower I cannot hold.",
+  },
+];
+
+export const beginnerProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "checkFirst", label: "Check first" },
+  { key: "whatIFix", label: "What I fix" },
+];
+
+export const beginnerProblemRows = [
+  {
+    problem: "Units will not complete",
+    checkFirst: "Supply → Flux → Hexite",
+    whatIFix:
+      "I add Supply before building more production, then confirm the unit's Flux cost and available Hexite.",
+  },
+  {
+    problem: "Production suddenly stopped",
+    checkFirst: "Active structures and production category",
+    whatIFix:
+      "I confirm that the Barracks or Factory is alive, selected, and not waiting on a missing resource.",
+  },
+  {
+    problem: "No Flux income",
+    checkFirst: "Harvester and discovered Flux node",
+    whatIFix:
+      "I create a Harvester from the Operating Tower and keep it out of the combat selection.",
+  },
+  {
+    problem: "My army stays too small",
+    checkFirst: "Idle queues and excessive buildings",
+    whatIFix:
+      "I use one active production structure before spending on several Barracks that the economy cannot support.",
+  },
+  {
+    problem: "The hero feels weak",
+    checkFirst: "Army support and ability timing",
+    whatIFix:
+      "I stop sending the hero alone and use it to support infantry, capture nearby objectives, and retreat before being surrounded.",
+  },
+  {
+    problem: "The expansion keeps dying",
+    checkFirst: "Original base and travel route",
+    whatIFix:
+      "I secure the first base and the route to the blue expansion Hexagon before investing in another Operating Tower.",
+  },
+];
+
+New to ZeroSpace? The first systems I needed to understand were not advanced
+units or perfect build orders. They were resource flow, Supply management,
+Flux harvesting, production timing, and knowing when the first base was stable
+enough to expand.
+
+This guide focuses on those early decisions. It explains why units stop
+building, how Harvesters and Flux nodes work, when to add Supply, how I use the
+hero without throwing it away, and how I recover after a bad opening fight.
+
+It is designed for the first Tutorial, AI match, or early Campaign mission—not
+for optimizing one competitive faction build.
+
+<GuideQuickAnswer title="ZeroSpace Beginner Guide: Resources, Supply, Flux, Heroes and First Base Tips">
+  <p>
+    I start by completing the Tutorial, learning Attack Move, and building one
+    reliable production cycle. Hexite comes from active bases, while Flux
+    requires a Harvester from the Operating Tower. Supply is a unit cap, so I
+    add another Supply Platform before the current queue becomes blocked.
+  </p>
+
+  <p className="mt-3">
+    My first army stays small: one hero, basic infantry, and enough defense to
+    protect the base. I capture the nearest safe Control Tower, but I do not
+    push into unexplored ground before replacements are available. I expand
+    only after the first Harvester is working, production is active, and the
+    original base can survive without the entire army standing beside it.
+  </p>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-slate-700 bg-slate-900/60 p-5 text-sm leading-6 text-slate-300">
+  <strong className="text-white">Early Access note.</strong>{" "}
+  Costs, build times, balance, and default controls may change. The numbers
+  below come from the English Early Access build I played, while the resource
+  checks and decision rules should remain useful after smaller balance updates.
+</div>
+
+<h2 id="first-ten-minutes">
+  Your first 10 minutes in ZeroSpace
+</h2>
+
+I do not use a strict second-by-second build order when learning a new faction.
+Instead, I complete five checkpoints in sequence.
+
+<ol className="my-6 list-decimal space-y-4 pl-6">
+  <li>
+    <strong>Complete the Tutorial objectives.</strong> I learn where production,
+    army selection, the build menu, and top-bar abilities are before entering a
+    busier mode.
+  </li>
+
+  <li>
+    <strong>Build one production structure.</strong> One active Barracks is
+    more useful than two idle Barracks competing for the same resources.
+  </li>
+
+  <li>
+    <strong>Create a Harvester.</strong> I start Flux income before filling the
+    queue with units that require Flux.
+  </li>
+
+  <li>
+    <strong>Capture the nearest safe objective.</strong> I use the hero and
+    starting units to take a nearby Control Tower without pushing deep into the
+    map.
+  </li>
+
+  <li>
+    <strong>Expand after the economy is stable.</strong> I wait until the first
+    base has working production, enough Supply, active Flux income, and a
+    defendable route to the expansion.
+  </li>
+</ol>
+
+My first ten minutes are successful when I can answer three questions:
+
+- What resource is currently limiting production?
+- Can the original base survive if the army moves away?
+- Do I have a safe reason to leave the base right now?
+
+<h2 id="tutorial-and-controls">
+  Finish the Tutorial and learn four controls first
+</h2>
+
+I initially tried to learn ZeroSpace by opening the build menu in an
+unrestricted match. I could see buildings, research, mercenaries, hero
+abilities, and production categories, but I did not understand which part of
+the interface controlled the next unit I needed.
+
+The Tutorial presents those systems in a better order:
+
+1. choose a hero;
+2. place a defensive structure;
+3. capture a Control Tower;
+4. use a faction ability;
+5. build production;
+6. start Flux harvesting;
+7. train basic units;
+8. add Supply;
+9. expand;
+10. unlock advanced production and mercenaries.
+
+I learn four controls before worrying about the full keybinding list:
+
+- **A:** Attack Move;
+- **B:** open the build menu;
+- **Tab:** access or cycle through production;
+- **top-bar ability:** use the currently available faction power.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-tutorial-attack-move-control-tower.webp"
+    alt="ZeroSpace Tutorial directing the hero toward the eastern Control Tower"
+    width={904}
+    height={776}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I use Attack Move when advancing into uncertain ground so the army responds
+    to enemies encountered along the route.
+  </figcaption>
+</figure>
+
+I use normal movement when I need to:
+
+- retreat without stopping to fight;
+- leave an enemy ability area;
+- move behind a frontline unit;
+- or occupy one exact position.
+
+My rule is:
+
+> I use Attack Move when the route is uncertain and direct movement when the
+> destination matters more than fighting anything on the way.
+
+<h2 id="resources">
+  How Hexite, Flux, Supply, and Experience work
+</h2>
+
+The economy became much easier once I stopped treating every resource like a
+traditional worker-mined mineral.
+
+<GuideTable
+  caption="The resources and checks I use during the first hour."
+  columns={beginnerResourceColumns}
+  rows={beginnerResourceRows}
+/>
+
+<h3 id="hexite">
+  Hexite comes from active bases
+</h3>
+
+Hexite is the basic resource generated by active bases. I do not create a
+normal worker and assign it to a visible Hexite mineral line before producing
+my first units.
+
+When Hexite income feels too slow, I check whether:
+
+- the current Operating Tower is active;
+- I added more production than one base can support;
+- I spent too much on structures that are not helping the next fight;
+- or I am ready for a second base.
+
+I do not add another Barracks simply because the first queue is empty. I first
+check whether I can afford to keep both queues active.
+
+<h3 id="flux">
+  Create a Harvester to get Flux
+</h3>
+
+Flux requires an active Harvester.
+
+I create it from the Operating Tower. Once completed, it automatically moves
+toward the nearest available Flux node and starts gathering.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-arcadia-harvester-flux.webp"
+    alt="ZeroSpace Flux Harvesting tutorial explaining Harvesters, Operating Towers, and discovered Flux nodes"
+    width={1422}
+    height={498}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A Harvester automatically travels to the nearest Flux node. I keep it
+    outside my combat selection and let it work without manual army commands.
+  </figcaption>
+</figure>
+
+The Tutorial also states that I can create one Harvester for every discovered
+Flux node.
+
+That gives scouting an economic purpose. Finding another node can support
+another Harvester and increase the amount of advanced production I can sustain.
+
+<h3 id="supply">
+  Supply controls how large the army can become
+</h3>
+
+Supply is a unit cap rather than spendable income.
+
+A production queue may appear funded but still refuse to finish because the
+army has reached its supported Supply.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-tutorial-supply-platform-warning.webp"
+    alt="ZeroSpace Tutorial recommending another Supply Platform before reaching the supported Supply limit"
+    width={920}
+    height={616}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I add Supply while units are still training. Waiting for the queue to stop
+    creates an avoidable gap in army growth.
+  </figcaption>
+</figure>
+
+I normally place the next Supply Platform when:
+
+- several units are already queued;
+- a second production structure is coming online;
+- or the next army cycle will approach the current cap.
+
+<h2 id="first-base">
+  My first base setup
+</h2>
+
+I keep the first base compact but leave a clear movement lane through it.
+
+My opening setup is:
+
+1. one Supply or defensive platform;
+2. one Barracks;
+3. one Harvester;
+4. enough infantry to protect the hero and base;
+5. another Supply Platform before the cap;
+6. advanced production only after the first army is functional.
+
+One Campaign Barracks tooltip shows:
+
+- **100** resource cost;
+- **30 seconds** to construct;
+- **1,000 health**;
+- Commando production.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-barracks-commandos.webp"
+    alt="ZeroSpace Barracks tooltip showing a cost of 100, a 30-second build time, 1,000 health, and Commando production"
+    width={872}
+    height={736}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I begin with one active Barracks. I add another only when the economy can
+    support both queues or a Campaign objective explicitly requires it.
+  </figcaption>
+</figure>
+
+I avoid placing every structure in one tight block.
+
+Large units, infantry, Harvesters, and reinforcements can obstruct one another
+when they all try to leave through the same narrow gap.
+
+<h2 id="common-problems">
+  Common ZeroSpace problems and fixes
+</h2>
+
+This is the troubleshooting order I use before rebuilding the base or assuming
+a unit is bugged.
+
+<GuideTable
+  caption="The first checks I use for common ZeroSpace beginner problems."
+  columns={beginnerProblemColumns}
+  rows={beginnerProblemRows}
+/>
+
+<h3 id="unit-queue-blocked">
+  Why the unit queue is blocked
+</h3>
+
+When a unit will not complete, I check:
+
+1. current Supply and maximum Supply;
+2. whether the unit requires Flux;
+3. available Hexite;
+4. the selected production category;
+5. whether the production structure is still alive.
+
+I do not solve the problem by immediately adding another Barracks.
+
+More production makes a Supply or Flux shortage worse because the additional
+queues compete for the same limited resources.
+
+<h3 id="no-flux-income">
+  Why Flux income is not working
+</h3>
+
+The usual causes are:
+
+- no Harvester was created;
+- no Flux node has been discovered;
+- the Harvester was pulled into an army selection;
+- or the Harvester was destroyed while moving between the base and node.
+
+I select the Operating Tower, confirm that the Harvester exists, and then check
+the path to the node.
+
+<h3 id="army-too-small">
+  Why the army stays small
+</h3>
+
+An army can remain small even with several production buildings when:
+
+- the queues are waiting for Supply;
+- Flux income is too low;
+- too many structures were built before units;
+- reinforcements are walking alone into enemy-controlled ground;
+- or the hero keeps dying before the main army arrives.
+
+I would rather operate one continuous production queue than three queues that
+start and stop.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="hero-management">
+  Use the hero early, but keep it with the army
+</h2>
+
+Heroes are strongest during the opening stage and become support pieces as the
+army grows.
+
+The Tutorial states that a dead hero respawns at the base for free after a
+short delay. That prevents one mistake from permanently removing the hero, but
+an early death still costs:
+
+- map pressure;
+- scouting;
+- access to hero abilities;
+- protection for the first infantry group;
+- and time around the nearest Control Tower.
+
+My opening route is:
+
+<div className="my-6 rounded-lg border border-slate-700 bg-slate-950/70 p-4 font-mono text-sm leading-7 text-slate-200">
+  <div>base</div>
+  <div>→ nearest safe Control Tower</div>
+  <div>→ clear the small defenders</div>
+  <div>→ capture the objective</div>
+  <div>→ retreat when badly damaged</div>
+  <div>→ rejoin the first infantry group</div>
+</div>
+
+I stop using the hero alone once the enemy can surround it or field enough
+damage to force a quick retreat.
+
+The Protectorate Tutorial also demonstrates a top-bar **Beam Up** ability that
+returns the hero to the base. I use it when the nearby objective is already
+secured and walking home would risk losing the hero.
+
+<h2 id="production-management">
+  Manage production without returning the camera to base
+</h2>
+
+Once several production structures are active, clicking each building becomes
+unnecessarily slow.
+
+The Tutorial explains that production structures can be selected together
+through **Tab**.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-tutorial-production-tab.webp"
+    alt="ZeroSpace Tutorial explaining that multiple production structures can be selected with the Tab key"
+    width={924}
+    height={614}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I use the shared production interface to find idle structures without
+    moving the camera away from the army.
+  </figcaption>
+</figure>
+
+I keep four responsibilities separate:
+
+- hero;
+- main combat army;
+- new reinforcements;
+- Harvesters.
+
+New units rally behind the frontline. I merge them into the army after they
+arrive rather than sending them individually through contested ground.
+
+<h2 id="expansion">
+  When I take a second base
+</h2>
+
+Expansion locations are represented by blue Hexagons on the map.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-tutorial-expansion-blue-hexagon.webp"
+    alt="ZeroSpace Tutorial explaining that expansion locations are represented by blue Hexagons"
+    width={924}
+    height={616}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I secure the route to the blue Hexagon before spending on another Operating
+    Tower.
+  </figcaption>
+</figure>
+
+I expand when:
+
+- the first base has working production;
+- at least one Harvester is active;
+- the next Supply cycle is covered;
+- the route is under control;
+- and the original base can survive without the entire army.
+
+I delay the expansion when:
+
+- an enemy army has disappeared into the fog;
+- the first base lacks defensive coverage;
+- I am already Supply blocked;
+- or the expansion would consume resources needed for replacement units.
+
+An unfinished second base does not protect the first base from an attack already
+in progress.
+
+<h2 id="advanced-units">
+  Advanced units and support systems
+</h2>
+
+Striders and Mercenaries are useful, but I learn them after the basic economy
+and production cycle are stable.
+
+<h3 id="strider">
+  Use the Strider as protected transport
+</h3>
+
+The Strider is a large walker that can transport infantry.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-strider-load-unload.webp"
+    alt="ZeroSpace infantry and large transport units fighting around a mission objective"
+    width={904}
+    height={776}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I use the Strider to move infantry across exposed routes, then unload before
+    the formation becomes surrounded.
+  </figcaption>
+</figure>
+
+My sequence is:
+
+1. gather infantry beside the Strider;
+2. load before crossing exposed ground;
+3. stop outside the main enemy formation;
+4. unload while there is room to deploy;
+5. let the infantry form a line before pushing farther.
+
+I do not drive directly into the middle of an enemy group and unload there.
+The infantry can emerge surrounded while the Strider blocks the easiest retreat
+route.
+
+I have not confirmed that every infantry type deals full damage while loaded,
+so I treat the Strider as transport rather than a permanent firing platform.
+
+<h3 id="mercenaries">
+  Save Mercenary charges for immediate pressure
+</h3>
+
+Mercenary hiring works differently from normal unit training.
+
+Mercenaries deploy as soon as the resources are spent, but each hire consumes
+a Mercenary charge that replenishes over time.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-mercenary-charge-deployment.webp"
+    alt="ZeroSpace tutorial explaining that Mercenaries deploy immediately and consume a replenishing Mercenary charge"
+    width={974}
+    height={628}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    This example shows two available charges and another group returning in 14
+    seconds. I preserve a charge when I expect an emergency defense.
+  </figcaption>
+</figure>
+
+I hire Mercenaries when I need:
+
+- immediate frontline units;
+- a role the primary faction currently lacks;
+- emergency defense before normal production finishes;
+- or support for an attack already moving.
+
+I do not spend every charge merely because it is ready. Normal production can
+replace routine losses; immediate deployment is more valuable when a base or
+Control Tower is about to fall.
+
+<h2 id="common-mistakes">
+  Beginner mistakes I stopped making
+</h2>
+
+### Searching for a Hexite worker
+
+Hexite comes from active bases. The worker-style unit I manage is the Harvester
+collecting Flux.
+
+### Adding production before stabilizing the economy
+
+Several idle Barracks do not create a larger army. I fix Supply and income
+before adding more queues.
+
+### Pulling the Harvester into combat
+
+I keep Harvesters outside broad army selections and let them move to Flux nodes
+automatically.
+
+### Moving normally through unexplored ground
+
+I use Attack Move so the army responds to enemies encountered along the route.
+
+### Sending the hero too far ahead
+
+I use the hero to capture a nearby objective, then rejoin the first army instead
+of pushing alone into the enemy side of the map.
+
+### Expanding during an active attack
+
+I stabilize the original base and route first. An unfinished expansion does not
+defend structures already under pressure.
+
+### Spending every Mercenary charge
+
+I keep one available when the next mission wave or counterattack is likely to
+require immediate reinforcements.
+
+<h2 id="related-guides">
+  Related ZeroSpace guides
+</h2>
+
+<ul className="my-6 list-disc space-y-3 pl-6">
+  <li>
+    {"Return to the "}
+    <Link
+      href="/zerospace/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Guide Hub
+    </Link>
+    {" for the recommended reading order and current Early Access coverage."}
+  </li>
+
+  <li>
+    {"Follow Operation Moby, bridge decisions, and the complete Act 1 route in the "}
+    <Link
+      href="/zerospace/campaign-walkthrough-choices/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Campaign Walkthrough and Choices Guide
+    </Link>
+    {"."}
+  </li>
+
+  <li>
+    {"Use the "}
+    <Link
+      href="/zerospace/mission-3-arcadia-walkthrough/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Mission 3 Arcadia Walkthrough
+    </Link>
+    {" for the complete colony-defense route, Old Bessie, southern flank, and evacuation decision."}
+  </li>
+
+  <li>
+    {"Learn alliance selection, Jump Fuel, Capture Points, and System Mastery in the "}
+    <Link
+      href="/zerospace/galactic-war-beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Galactic War Beginner Guide
+    </Link>
+    {"."}
+  </li>
+</ul>
+
+<h2 id="faq">
+  ZeroSpace Beginner Guide FAQ
+</h2>
+
+### How do I get Flux in ZeroSpace?
+
+Create a Harvester from the Operating Tower. It automatically travels to the
+nearest discovered Flux node. The Tutorial allows one Harvester for each Flux
+node discovered on the map.
+
+### Why is my unit queue blocked?
+
+Check Supply first, followed by Flux, Hexite, the selected production category,
+and whether the production structure is alive. Building another Barracks does
+not fix a resource or Supply block.
+
+### How does Supply work in ZeroSpace?
+
+Supply is the unit cap. Supply Platforms increase the number of units the army
+can support. Add another platform before reaching the limit so queued units do
+not stop completing.
+
+### When should I expand in ZeroSpace?
+
+Expand after the original base has active production, working Flux income,
+enough Supply for the next army cycle, and a safe route to the blue expansion
+Hexagon.
+
+### How do heroes respawn in ZeroSpace?
+
+The Tutorial states that a dead hero returns to the base for free after a short
+delay. The real penalty is losing map pressure, abilities, and protection for
+the army while the hero is unavailable.
+
+### Why do I have Hexite but still cannot train a unit?
+
+The unit may also require Flux, or the army may be at its Supply cap. Check both
+before adding another production structure.
+
+### Do Mercenaries use a normal production queue?
+
+No. They deploy immediately after hiring, but each hire consumes a Mercenary
+charge that replenishes over time.
+
+### Can infantry attack while loaded in a Strider?
+
+I have not confirmed that every infantry type continues dealing full damage
+while loaded. I use the Strider as protected transport and unload before the
+main fight.

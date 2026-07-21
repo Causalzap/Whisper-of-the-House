@@ -131,6 +131,164 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    "title": "ZeroSpace",
+    "game": "ZeroSpace",
+    "href": "/zerospace",
+    "slug": "zerospace",
+    "kind": "game",
+    "status": "active",
+    "accent": "blue",
+    "archiveCategory": "Strategy, simulation, puzzle & discovery",
+    "label": "RTS Command",
+    "eyebrow": "Spotlight Hub",
+    "hubStatus": "Complete first-wave coverage",
+    "description":
+      "Follow the ZeroSpace guide hub for beginner economy and production, the Act 1 Campaign walkthrough, Mission 3 Arcadia, Old Bessie, the final swarm, alliances, Capture Points, Jump Fuel, and System Mastery.",
+    "coverage": [
+      "Beginner RTS economy, Hexite, Flux, Supply, blocked production, Production Tab routing, Harvesters, heroes, expansions, Strider transport, Mercenary charges, and first-base troubleshooting",
+      "Act 1 mission order, Operation Moby, the Trisaris diversion, ship boarding, five Koru Hearts, City Uprising, Deru Laboratory, four bunkers, Machine Works, Trinity, Kris, and confirmed choice consequences",
+      "Mission 3 Arcadia opening build, Supply Platform rocket turrets, Flux timing, Bastions, Moran heavy gunners, Old Bessie, the southern Grell source, final swarm preparation, and the Colonists-or-Militia evacuation choice",
+      "Galactic War alliances, galaxy-map routing, Capture Points, occupation bonuses, Jump Fuel, Credits, Influence, Commander XP, four-level System Mastery, Play Co-op, Play with AI, and system-capture troubleshooting"
+    ],
+    "image":
+      "/images/zerospace/zerospace-galactic-war-galaxy-map.webp",
+    "imageFit": "cover",
+    "imagePosition": "center",
+    "imagePadding": false,
+    "home": {
+      "featuredHub": true,
+      "featuredHubSpotlight": true,
+      "featuredHubOrder": 11,
+      "footerFeatured": true
+    },
+    "pages": [
+      {
+        "title": "ZeroSpace Guide Hub",
+        "href": "/zerospace",
+        "type": "Guide Hub",
+        "description":
+          "Start here for beginner economy, Act 1 missions and choices, the Mission 3 Arcadia defense, Old Bessie, the final swarm, Capture Points, Jump Fuel, and System Mastery.",
+        "image":
+          "/images/zerospace/zerospace-galactic-war-galaxy-map.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "spotlightMeta":
+            "Beginner economy, Act 1 Campaign, Mission 3 Arcadia, Old Bessie, final swarm, alliances, Capture Points, Jump Fuel, and System Mastery"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 1
+        }
+      },
+      {
+        "title": "ZeroSpace Beginner Guide",
+        "href": "/zerospace/beginner-guide",
+        "type": "Beginner Guide",
+        "description":
+          "Learn Hexite, Flux, Supply, production queues, Harvesters, heroes, expansion timing, Strider transport, Mercenary deployment, and the first stable base route.",
+        "date": "Updated recently",
+        "image":
+          "/images/zerospace/zerospace-tutorial-production-tab.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 43,
+          "spotlightFeature": true,
+          "spotlightOrder": 1,
+          "spotlightMeta":
+            "Hexite, Flux, Supply, blocked production, Production Tab, Harvesters, heroes, expansion timing, Striders, Mercenaries, and first-base troubleshooting"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 2
+        }
+      },
+      {
+        "title": "ZeroSpace Act 1 Campaign Walkthrough",
+        "href": "/zerospace/campaign-walkthrough-choices",
+        "type": "Walkthrough",
+        "description":
+          "Complete Act 1 with Operation Moby objectives, the Trisaris decision, ship boarding, five Koru Hearts, Deru Laboratory, Machine Works, Trinity, and confirmed choices.",
+        "date": "Updated recently",
+        "image":
+          "/images/zerospace/zerospace-operation-moby-forward-base.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 44,
+          "spotlightFeature": true,
+          "spotlightOrder": 2,
+          "spotlightMeta":
+            "Operation Moby, Trisaris, ship boarding, Kris, five Koru Hearts, City Uprising, Deru Laboratory, four bunkers, Machine Works, Trinity, and confirmed choices"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 3
+        }
+      },
+      {
+        "title": "ZeroSpace Mission 3 Arcadia Walkthrough",
+        "href": "/zerospace/mission-3-arcadia-walkthrough",
+        "type": "Walkthrough",
+        "description":
+          "Stabilize the Arcadia base, start Flux income, upgrade rocket turrets, kill Old Bessie, destroy the southern Grell source, survive the final swarm, and choose an evacuation route.",
+        "date": "Updated recently",
+        "image":
+          "/images/zerospace/zerospace-arcadia-final-swarm.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 45,
+          "spotlightFeature": true,
+          "spotlightOrder": 3,
+          "spotlightMeta":
+            "Opening build, Flux timing, rocket turrets, Bastions, heavy gunners, Old Bessie, southern Grell source, final swarm, and Colonists-or-Militia choice"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 4
+        }
+      },
+      {
+        "title": "ZeroSpace Galactic War Guide",
+        "href": "/zerospace/galactic-war-beginner-guide",
+        "type": "Systems",
+        "description":
+          "Understand alliances, Capture Points, Jump Fuel, occupation bonuses, System Mastery, Credits, Influence, Commander XP, system travel, Co-op, and AI missions.",
+        "date": "Updated recently",
+        "image":
+          "/images/zerospace/zerospace-galactic-war-galaxy-map.webp",
+        "imageFit": "cover",
+        "imagePosition": "center",
+        "imagePadding": false,
+        "home": {
+          "latest": true,
+          "latestFeatured": true,
+          "latestOrder": 46,
+          "spotlightFeature": true,
+          "spotlightOrder": 4,
+          "spotlightMeta":
+            "Alliances, galaxy map, Capture Points, occupation bonuses, Jump Fuel, Credits, Influence, Commander XP, four-level System Mastery, Co-op, and AI"
+        },
+        "archive": {
+          "showInCollections": true,
+          "order": 5
+        }
+      }
+    ]
+  },
+  {
     "title": "Happy's Humble Burger Cult",
     "game": "Happy's Humble Burger Cult",
     "href": "/happys-humble-burger-cult",

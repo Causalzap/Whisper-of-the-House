@@ -1,0 +1,989 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const missionOverviewColumns = [
+  { key: "mission", label: "Mission" },
+  { key: "objective", label: "Main objective" },
+  { key: "failurePoint", label: "Common failure point" },
+];
+
+export const missionOverviewRows = [
+  {
+    mission: "Opening Landing",
+    objective: "Regroup with Kris and reach Operation Moby.",
+    failurePoint:
+      "Losing infantry by chasing enemies through dense terrain.",
+  },
+  {
+    mission: "Operation Moby",
+    objective:
+      "Build 4 Supply Platforms, 2 Barracks, and train 8 Commandos.",
+    failurePoint:
+      "Attacking the Thresher position before retaking the southern airfield.",
+  },
+  {
+    mission: "Aegis Oath",
+    objective:
+      "Spend permanent upgrades and complete the available bridge conversations.",
+    failurePoint:
+      "Launching the next mission before checking new crew dialogue.",
+  },
+  {
+    mission: "Trisaris / Arcadia",
+    objective:
+      "Defend the colony and choose whether to evacuate the Colonists or Militia.",
+    failurePoint:
+      "Reaching the final swarm while Old Bessie or the southern Grell source is still active.",
+  },
+  {
+    mission: "Ship Boarding",
+    objective:
+      "Restore communications, clear the hangar route, and protect the cargo.",
+    failurePoint:
+      "Walking into overlapping Detonator mine zones before destroying them.",
+  },
+  {
+    mission: "Eterus",
+    objective: "Extract 5 Koru Hearts.",
+    failurePoint:
+      "Starting another extraction before the previous Grell response is cleared.",
+  },
+  {
+    mission: "City Uprising",
+    objective:
+      "Move through the city, rescue useful units, and reach the magistrate.",
+    failurePoint:
+      "Forcing the direct route through barricades and sniper fire.",
+  },
+  {
+    mission: "Arcadia Reservoirs",
+    objective:
+      "Protect the reservoirs and intercept incoming military vehicles.",
+    failurePoint:
+      "Sending the entire army after a convoy while a reservoir is exposed.",
+  },
+  {
+    mission: "Deru Laboratory",
+    objective:
+      "Collect 3 access fragments, defend the laboratory, and overload the reactor.",
+    failurePoint:
+      "Continuing to explore after the third fragment triggers the final attack.",
+  },
+  {
+    mission: "Four Bunkers",
+    objective: "Keep all 4 bunkers alive.",
+    failurePoint:
+      "Chasing Mondar's transmission instead of defending the active bunker.",
+  },
+  {
+    mission: "Machine Works",
+    objective: "Neutralize 6 Fabricator Blocks.",
+    failurePoint:
+      "Attacking a Fabricator before destroying its supporting signal jammer.",
+  },
+  {
+    mission: "Trinity Counteroffensive",
+    objective:
+      "Open reinforcement sites, remove artillery and anti-air, and retake the Ecology Dome.",
+    failurePoint:
+      "Attacking the central base before completing its support objectives.",
+  },
+];
+
+export const confirmedChoiceColumns = [
+  { key: "choice", label: "Choice" },
+  { key: "confirmed", label: "Confirmed consequence" },
+  { key: "unverified", label: "Still unverified" },
+];
+
+export const confirmedChoiceRows = [
+  {
+    choice: "Prioritize people",
+    confirmed:
+      "This establishes the command principle Aster follows when the Trisaris distress signal arrives.",
+    unverified:
+      "I have not confirmed a visible relationship score or ending change from this answer alone.",
+  },
+  {
+    choice: "Divert to Trisaris",
+    confirmed:
+      "Later dialogue remembers the no-diversion order, Sherman disapproves, and the Aegis Oath loses standing.",
+    unverified:
+      "I have not completed the refusal route far enough to compare every later mission and conversation.",
+  },
+  {
+    choice: "Evacuate the Colonists",
+    confirmed:
+      "The Militia is left behind, and later conversations acknowledge the burden of deciding who survived.",
+    unverified:
+      "I have not verified whether the Militia route changes later support, relationships, or the ending.",
+  },
+  {
+    choice: "Use the peaceful Shakru extraction",
+    confirmed:
+      "The cooperating Shakru are not treated as the direct enemy, although Grell still attack the extraction sites.",
+    unverified:
+      "I have not compared every later Shakru conversation with an aggressive completion.",
+  },
+  {
+    choice: "Pursue Mondar",
+    confirmed:
+      "Sherman calls the decision insubordination and attempts to remove Aster from command. The crew follows Aster.",
+    unverified:
+      "Consequences beyond the current Act 1 ending are not available in this route.",
+  },
+];
+
+ZeroSpace Act 1 is easier to complete when I treat it as a series of mission
+problems instead of one long story recap. Operation Moby tests production and
+objective order. Trisaris tests colony defense and command choices. Eterus
+requires five Koru Hearts, while later missions introduce access fragments,
+signal jammers, Fabricator Blocks, protected bunkers, and reinforcement sites.
+
+This walkthrough focuses on what must remain alive, which objective should be
+completed first, when a detour is safer than a direct attack, and which choice
+consequences I could actually confirm. It does not repeat every conversation or
+summarize lore that does not change the route.
+
+<GuideQuickAnswer title="ZeroSpace Act 1 Campaign Walkthrough: What to Do First">
+  <span>
+    Complete each mission dependency before attacking its final target. In
+    Operation Moby, finish the four Supply Platforms, two Barracks, and eight
+    Commandos before retaking the southern airfield. At Trisaris, remove the
+    permanent Grell attack sources before the evacuation. On Eterus, defend one
+    Koru Heart extraction at a time until all five are collected.
+  </span>
+
+  <br />
+  <br />
+
+  <span>
+    Later missions follow the same rule: collect all three Deru access
+    fragments before returning to the laboratory, destroy the Machine Works
+    signal jammer before its Fabricator Block, and open Trinity reinforcement
+    sites before committing to the central base.
+  </span>
+
+  <span className="mt-4 block text-sm font-semibold">
+    Jump directly to a mission:
+  </span>
+
+  <span className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+    <Link
+      href="#operation-moby"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Operation Moby
+    </Link>
+
+    <Link
+      href="#trisaris-choice"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Trisaris
+    </Link>
+
+    <Link
+      href="#ship-boarding"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Ship Boarding
+    </Link>
+
+    <Link
+      href="#eterus"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Eterus
+    </Link>
+
+    <Link
+      href="#deru-lab"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Deru Laboratory
+    </Link>
+
+    <Link
+      href="#machine-works"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Machine Works
+    </Link>
+
+    <Link
+      href="#trinity-counteroffensive"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Trinity
+    </Link>
+  </span>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm leading-6 text-slate-700">
+  <strong className="text-slate-950">Completed route.</strong>{" "}
+  This walkthrough follows one Act 1 path: Aster prioritizes people, answers
+  the Trisaris distress signal, evacuates the Colonists, uses the peaceful
+  Shakru extraction, and pursues Mondar after Sherman orders the Aegis Oath to
+  stand down. Confirmed consequences are separated from branches I have not
+  completed.
+</div>
+
+<h2 id="act-one-mission-list">
+  ZeroSpace Act 1 mission list
+</h2>
+
+Use the jump links above to open a specific section, or use this overview to
+identify the objective currently blocking progress.
+
+<GuideTable
+  caption="ZeroSpace Act 1 missions, main objectives, and the failure point I check first."
+  columns={missionOverviewColumns}
+  rows={missionOverviewRows}
+/>
+
+<h2 id="opening-landing">
+  Opening Landing walkthrough: keep the first squad alive
+</h2>
+
+The Campaign begins with a damaged deployment and a small surviving force.
+There is no economy available to replace careless losses, so I use the opening
+as a movement and ability test rather than a race to clear the entire map.
+
+My priorities are:
+
+1. regroup the surviving infantry;
+2. keep the squad behind Aster during the first engagement;
+3. cross the river with the available movement ability;
+4. approach enemy positions from open ground or high ground;
+5. reach Kris Diaz and the surviving strike force;
+6. use the Striders to continue toward Operation Moby.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-operation-moby-opening.webp"
+    alt="ZeroSpace Operation Moby walkthrough opening mission with Aster regrouping the surviving squad"
+    width={1060}
+    height={804}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The opening rewards surviving units. I regroup instead of clearing every
+    isolated Grell pack before continuing toward Operation Moby.
+  </figcaption>
+</figure>
+
+Dense grass is the main visibility trap. When enemies engage from inside it, I
+pull the squad toward open terrain instead of allowing individual infantry to
+chase separate targets.
+
+Injured units remain behind Aster during the final approach. Reaching the next
+phase with a larger surviving force is worth more than clearing an unnecessary
+group at the edge of the route.
+
+<h2 id="operation-moby">
+  Operation Moby walkthrough: 4 Supply Platforms, 2 Barracks and 8 Commandos
+</h2>
+
+Operation Moby is the first mission where a clear objective list can be mistaken
+for a general suggestion.
+
+The required setup is:
+
+- rebuild the Forward Base;
+- build **4 Supply Platforms**;
+- build **2 Barracks**;
+- train **8 Commandos**.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-operation-moby-forward-base.webp"
+    alt="ZeroSpace Operation Moby walkthrough objectives requiring four Supply Platforms, two Barracks, and eight Commandos"
+    width={1218}
+    height={886}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    I wait for the visible counters to reach 4/4, 2/2, and 8/8 before treating
+    the forward-base objective as complete.
+  </figcaption>
+</figure>
+
+One Barracks tooltip in this mission shows:
+
+- **100** resource cost;
+- **30 seconds** to build;
+- **1,000 health**;
+- Commando production.
+
+I place the Barracks along the outside of the base so they do not block the
+route around the Operating Tower.
+
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 p-5">
+  <div className="font-semibold text-slate-950">
+    Safer Operation Moby setup
+  </div>
+
+  <div className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+    <div>1. Rebuild the Forward Base.</div>
+    <div>2. Establish enough Supply for the first production cycle.</div>
+    <div>3. Construct the first Barracks.</div>
+    <div>4. Queue Commandos while the second Barracks is building.</div>
+    <div>5. Finish all four Supply Platforms.</div>
+    <div>6. Wait until all eight Commandos are trained.</div>
+    <div>7. Leave a small group near the Operating Tower.</div>
+    <div>8. Send the main force toward the southern airfield.</div>
+  </div>
+</div>
+
+When a Commando queue is blocked by Supply, Flux, or Hexite, use the{" "}
+<Link
+  href="/zerospace/beginner-guide/#common-problems"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  ZeroSpace production troubleshooting guide
+</Link>
+{" "}
+before placing another Barracks.
+
+<h3 id="operation-moby-airfield">
+  Retake the southern airfield before attacking the Thresher
+</h3>
+
+The direct route toward the Grell colony is protected by an entrenched Thresher
+position. A frontal attack drains the force before the main assault.
+
+Kris identifies an overrun airfield to the south.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-operation-moby-airfield.webp"
+    alt="ZeroSpace Operation Moby southern airfield used to remove the entrenched Thresher position"
+    width={1244}
+    height={890}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Retaking the southern airfield provides the support needed to remove the
+    Thresher position without sacrificing the main force.
+  </figcaption>
+</figure>
+
+The safer order is:
+
+1. turn south when the Thresher warning appears;
+2. clear the airfield perimeter;
+3. activate the available air support;
+4. remove the entrenched position;
+5. regroup before entering the main colony;
+6. keep a defensive group near the Operating Tower.
+
+The detour takes less time than replacing an army lost to the frontal route.
+
+<h2 id="aegis-oath">
+  Aegis Oath bridge guide: upgrades, crew and command choices
+</h2>
+
+After Operation Moby, Aster is promoted to Prefect and given command of the
+Aegis Oath.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-aster-prefect-promotion.webp"
+    alt="Aster being promoted to Prefect during the ZeroSpace Act 1 Campaign"
+    width={1362}
+    height={926}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The promotion opens permanent unit progression, Field Commander decisions,
+    crew conversations, and galaxy-map mission selection.
+  </figcaption>
+</figure>
+
+Before opening the next destination, I:
+
+1. speak to every available crew member;
+2. spend permanent unit upgrades;
+3. check Field Commander or companion assignments;
+4. read the cargo and destination briefing;
+5. open the galaxy map last.
+
+Mera Arcadia joins the bridge as a Legate and later becomes central to split
+objectives and command decisions.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-mera-arcadia-bridge.webp"
+    alt="Mera Arcadia meeting Aster on the Aegis Oath bridge in ZeroSpace"
+    width={1250}
+    height={930}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Mera serves as both a bridge officer and field commander. Her conflict with
+    Kris becomes part of the rules-versus-lives decision thread.
+  </figcaption>
+</figure>
+
+Hel asks Aster what matters most during a mission. This route selects the
+people-first response.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-what-matters-most-choice.webp"
+    alt="Hel asking Prefect Aster what matters most during a ZeroSpace Campaign mission"
+    width={1306}
+    height={878}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The answer establishes the principle tested by the next no-diversion order.
+    I have not confirmed a numerical relationship change from this conversation
+    alone.
+  </figcaption>
+</figure>
+
+<h2 id="trisaris-choice">
+  Should you answer the Trisaris distress signal?
+</h2>
+
+The Aegis Oath is carrying confidential cargo to Trinity under a direct order
+not to divert.
+
+A distress signal from a Trisaris outpost forces Aster to choose between the
+delivery order and the people requesting help.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-arcadia-distress-signal.webp"
+    alt="ZeroSpace Trisaris choice walkthrough showing the distress signal that diverts the Aegis Oath from Trinity"
+    width={1192}
+    height={872}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Answering the signal is a real diversion from the Trinity delivery. Later
+    conversations remember that Aster changed course against the original
+    order.
+  </figcaption>
+</figure>
+
+I answer the distress signal.
+
+That starts the Arcadia colony-defense mission, which includes:
+
+- Supply Platforms with rocket-turret upgrades;
+- Flux Harvesters and Bastions;
+- Old Bessie;
+- a southern Grell attack source;
+- the final swarm;
+- and the evacuation decision.
+
+The detailed defense route remains in the{" "}
+<Link
+  href="/zerospace/mission-3-arcadia-walkthrough/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Mission 3 Arcadia Walkthrough
+</Link>
+{" "}
+so this Campaign page does not repeat the same build order.
+
+At Campaign level, the confirmed consequences are:
+
+- Sherman disapproves of the diversion;
+- the no-diversion order is referenced later;
+- the Aegis Oath loses standing;
+- Kris and Mera continue arguing over protocol versus lives;
+- Hel frames command as responsibility for imperfect choices.
+
+The final decision panel uses the formal options:
+
+- **Evacuate the Colonists**
+- **Evacuate the Militia**
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-colonists-or-militia-choice.webp"
+    alt="ZeroSpace Trisaris evacuation choice between Evacuate the Colonists and Evacuate the Militia"
+    width={1020}
+    height={628}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    My completed route evacuates the Colonists. The decision panel labels the
+    other group as the Militia.
+  </figcaption>
+</figure>
+
+I have not completed the Militia branch far enough to compare every later
+support, relationship, or ending difference.
+
+<h2 id="ship-boarding">
+  ZeroSpace ship boarding walkthrough and the Kris ending
+</h2>
+
+Valkaru forces board the Aegis Oath, disable communications, capture the hangar,
+and move toward the confidential cargo.
+
+The immediate goal is reopening the route through the ship rather than chasing
+every isolated boarder.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-ship-boarding-mission.webp"
+    alt="ZeroSpace ship boarding walkthrough objective to restore Aegis Oath communications"
+    width={1238}
+    height={926}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    I clear the route toward communications and the hangar before searching
+    rooms that no longer block the main objective.
+  </figcaption>
+</figure>
+
+The first section follows this dependency chain:
+
+1. clear the nearby boarders;
+2. destroy the Detonators;
+3. cross after their mine coverage is gone;
+4. activate the raised console;
+5. move the blocking platform;
+6. regroup at the hangar gate.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-detonators-console-platform.webp"
+    alt="ZeroSpace ship boarding Detonators and overlapping mine zones beside the movable platform console"
+    width={1282}
+    height={802}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Detonators create visible overlapping danger zones. I destroy them from
+    range before sending Aster to the platform console.
+  </figcaption>
+</figure>
+
+The team later splits:
+
+- Aster and Hel clear the Observation Deck;
+- Mera and Kris secure Hydroponics;
+- the groups regroup near the cargo route.
+
+Once the route is open, I return to the shared objective instead of continuing
+to search the cleared deck.
+
+In this completed route, Kris stays behind during the final retreat.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-kris-mission-ending.webp"
+    alt="Aster reaching the wounded Kris during the ZeroSpace ship boarding mission ending"
+    width={1536}
+    height={1024}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Aster reaches Kris during the final sequence, but the mission does not show
+    a combat objective or optional rescue prompt that prevents his sacrifice in
+    this route.
+  </figcaption>
+</figure>
+
+Faster mine clearing, lower damage, and a cleaner route did not reveal an
+alternate rescue objective in this completion.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="eterus">
+  Eterus walkthrough: how many Koru Hearts do you need?
+</h2>
+
+The Eterus mission requires **five Koru Hearts** for the infant Leviathan.
+
+Each extraction follows the same cycle:
+
+1. reach the marked Koru Heart;
+2. position or call the specialized Harvester;
+3. secure the site before extraction begins;
+4. defend the Harvester;
+5. clear the resulting Grell attack;
+6. regroup before moving to the next site.
+
+The fourth Heart does not complete the mission. It advances the objective to
+one final extraction, making the required total five.
+
+A Shakru group offers a ritual extraction that avoids treating them as the
+direct enemy.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-eterus-shakru-pacifist-choice.webp"
+    alt="ZeroSpace Eterus walkthrough peaceful Shakru choice while collecting five Koru Hearts"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The peaceful option avoids a direct fight with the cooperating Shakru, but
+    Grell still attack during the extraction.
+  </figcaption>
+</figure>
+
+I begin the next extraction only after:
+
+- the previous attack has ended;
+- the defense group has regrouped;
+- injured units have repositioned;
+- and optional research pickups are on a safe route.
+
+Overlapping two extraction cycles creates more pressure without finishing the
+objective faster.
+
+<h2 id="city-uprising">
+  City Uprising walkthrough: use the side streets
+</h2>
+
+The city operation combines Free Corsair resistance, civilians, barricades,
+snipers, military vehicles, and a route toward the magistrate.
+
+The safer approach is to use side streets to flank protected shooters, secure
+the available secondary base, rescue useful Commandos, and capture vehicles
+already on the route.
+
+Barricades can create shortcuts, but destroying every obstacle is unnecessary.
+The objective is opening a safe line to the magistrate with enough units left
+to respond if negotiation fails.
+
+<h2 id="arcadia-reservoirs">
+  Arcadia Reservoir defense: fortify before chasing convoys
+</h2>
+
+The reservoir operation becomes difficult when the whole army leaves a fixed
+objective to pursue one vehicle group.
+
+I first place defenses where approaches overlap and keep a mobile group between
+the protected sites. Convoys and data pads become worthwhile only during a gap
+between attacks.
+
+When a reservoir is already taking sustained damage, the structure takes
+priority over a vehicle that can still be intercepted later.
+
+<h2 id="deru-lab">
+  Deru Laboratory walkthrough: 3 fragments and the ZeroSpace reactor
+</h2>
+
+The Deru laboratory cannot be opened until Phobos reconstructs an access key
+from **three fragments** found in nearby alien structures.
+
+The mission order is:
+
+1. establish the Operating Tower;
+2. secure the laboratory perimeter;
+3. collect the three fragments;
+4. rescue nearby survivors during safe gaps;
+5. return when the third fragment triggers the major attack;
+6. defend until access is restored;
+7. enter the laboratory;
+8. overload the ZeroSpace reactor;
+9. escape before the countdown ends.
+
+Once the final fragment is collected, I stop exploring. The following warning
+is the mission's signal to return to the laboratory.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-deru-zerospace-reactor-overload.webp"
+    alt="ZeroSpace Deru Laboratory walkthrough reactor overload and escape objective"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    After starting the overload, I use the shortest cleared route out instead
+    of fighting for rooms behind the escape path.
+  </figcaption>
+</figure>
+
+<h2 id="four-bunkers">
+  Protect the four bunkers before chasing Mondar
+</h2>
+
+The later Celestari operation contains **four bunkers** that must survive.
+
+It also includes Black Watch prisoners, armored attackers, and an apparent
+Mondar transmission.
+
+The priority is defending whichever bunker is currently threatened. Useful
+anti-armor units handle the heavy targets, while prisoners are rescued only
+after the active bunker is stable.
+
+After all four bunkers survive, the apparent Mondar transmission is revealed
+to be a recording. Reaching it faster does not replace the defense objectives.
+
+<h2 id="machine-works">
+  Arcadia Machine Works: destroy the signal jammer first
+</h2>
+
+Arcadia Machine Works contains **six Fabricator Blocks**.
+
+Each Fabricator can add more pressure while a Sun Corp signal jammer disables
+nearby automated defenses.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-machine-works-signal-jammer.webp"
+    alt="ZeroSpace Arcadia Machine Works walkthrough signal jammer disabling automated defenses"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Destroying the jammer restores the nearby automated defenses, which then
+    support the attack on the corresponding Fabricator Block.
+  </figcaption>
+</figure>
+
+For each active section:
+
+1. identify the Fabricator Block;
+2. locate its supporting jammer;
+3. destroy the jammer;
+4. let the restored defenses engage;
+5. neutralize the Fabricator;
+6. regroup before the next block becomes active.
+
+The jammer is usually the cheaper and safer first target.
+
+<h2 id="trinity-counteroffensive">
+  Trinity Counteroffensive walkthrough: reinforcements before the main base
+</h2>
+
+The Act 1 counteroffensive includes several linked objectives:
+
+- secure reinforcement landing sites;
+- destroy west-wing artillery;
+- remove east-wing anti-air;
+- allow Orion Squadron to attack the battleship;
+- destroy the central Valkaru base;
+- retake the Ecology Dome.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-trinity-reinforcement-landing-sites.webp"
+    alt="ZeroSpace Trinity counteroffensive walkthrough showing optional reinforcement landing sites before the main assault"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Opening nearby landing sites adds allied forces to the final assault. I
+    secure them before committing to the central Valkaru base.
+  </figcaption>
+</figure>
+
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 p-5">
+  <div className="font-semibold text-slate-950">
+    Safer Trinity objective order
+  </div>
+
+  <div className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+    <div>1. Secure the western landing site.</div>
+    <div>2. Open nearby reinforcement positions.</div>
+    <div>3. Destroy the west-wing artillery.</div>
+    <div>4. Remove the east-wing anti-air defenses.</div>
+    <div>5. Allow Orion Squadron to engage the battleship.</div>
+    <div>6. Regroup the allied forces.</div>
+    <div>7. Destroy the central Valkaru base.</div>
+    <div>8. Move immediately to the Ecology Dome.</div>
+  </div>
+</div>
+
+The extra landing sites cost time and resources, but they add Moran, Free
+Corsair, and Arandi support for the central assault.
+
+I skip only a distant landing site when reaching it would expose the current
+army or delay an active failure condition.
+
+At the end of the operation, the Leviathan, Tanner, and Mondar disappear
+through the anomaly. Sherman orders Aster to stand down. This route pursues
+Mondar.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-act-1-insubordination-ending.webp"
+    alt="Aster disobeying Sherman and pursuing Mondar at the end of the ZeroSpace Act 1 Campaign"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Sherman calls the pursuit insubordination and attempts to relieve Aster of
+    command. The crew follows Aster in this completed route.
+  </figcaption>
+</figure>
+
+<h2 id="confirmed-consequences">
+  Confirmed ZeroSpace Act 1 choice consequences
+</h2>
+
+A dialogue reaction is a confirmed consequence, but it is not automatically
+proof of a different combat mission, reward, relationship score, or ending.
+
+<GuideTable
+  caption="Choices, visible consequences, and branches that remain unverified in this completed route."
+  columns={confirmedChoiceColumns}
+  rows={confirmedChoiceRows}
+/>
+
+The Trisaris diversion has the strongest visible follow-up because later
+conversations explicitly reference:
+
+- the original cargo mission;
+- the no-diversion order;
+- Sherman's disapproval;
+- and the Aegis Oath's damaged standing.
+
+<h2 id="when-to-restart">
+  When I restart an Act 1 mission
+</h2>
+
+I continue after ordinary infantry losses when the required structure, hero,
+economy, and route remain intact.
+
+I restart when:
+
+- the Operating Tower or another mandatory structure is about to fall before
+  the economy is functional;
+- a fixed objective such as a reservoir, bunker, or laboratory is lost;
+- a permanent attack source remains active when the final wave begins;
+- the required hero is trapped or nearly dead before the next phase;
+- production placement blocks movement between defensive fronts;
+- or the mobile army cannot return before the protected objective collapses.
+
+A damaged army can recover through production, rescued units, allied support,
+and mission reinforcements. A destroyed mandatory objective usually cannot.
+
+<h2 id="related-guides">
+  Related ZeroSpace guides
+</h2>
+
+<div className="my-6 space-y-4">
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+    <Link
+      href="/zerospace/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Guide Hub
+    </Link>
+
+    <div className="mt-2 text-sm leading-6 text-slate-700">
+      Start with the recommended reading order and current Early Access guide
+      coverage.
+    </div>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+    <Link
+      href="/zerospace/beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Beginner Guide
+    </Link>
+
+    <div className="mt-2 text-sm leading-6 text-slate-700">
+      Fix Supply blocks, Flux income, production queues, hero management, and
+      expansion timing.
+    </div>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+    <Link
+      href="/zerospace/mission-3-arcadia-walkthrough/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Mission 3 Arcadia Walkthrough
+    </Link>
+
+    <div className="mt-2 text-sm leading-6 text-slate-700">
+      Follow the complete Trisaris defense route, Old Bessie timing, southern
+      Grell source, final swarm, and evacuation choice.
+    </div>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+    <Link
+      href="/zerospace/galactic-war-beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Galactic War Beginner Guide
+    </Link>
+
+    <div className="mt-2 text-sm leading-6 text-slate-700">
+      Learn alliance selection, Jump Fuel, Capture Points, missions, and System
+      Mastery.
+    </div>
+  </div>
+</div>
+
+<h2 id="faq">
+  ZeroSpace Act 1 Campaign FAQ
+</h2>
+
+### How do I complete Operation Moby?
+
+Wait until the objective counters show four completed Supply Platforms, two
+completed Barracks, and eight trained Commandos. Commandos still inside the
+production queue may not count yet. Retake the southern airfield before
+attacking the entrenched Thresher, and keep the Operating Tower protected after
+the production objective finishes.
+
+### Should I answer the Trisaris distress signal?
+
+Answering it starts the Arcadia colony-defense mission. Later dialogue refers
+back to the no-diversion order, Sherman disapproves, and the Aegis Oath loses
+standing. I have not completed the refusal branch far enough to compare every
+later reward or mission.
+
+### How many Koru Hearts are required on Eterus?
+
+Five. The objective does not complete after the fourth extraction; it advances
+to one final Koru Heart. Clear the previous Grell response before beginning the
+next ritual so two attack cycles do not overlap.
+
+### Can Kris survive the ship boarding mission?
+
+I have not found a verified rescue route. The mission provides no optional
+rescue objective during the cargo-route retreat, and completing the Detonator
+section faster did not reveal another prompt in this route.
+
+### What happens if Aster disobeys Sherman?
+
+Sherman calls the pursuit of Mondar insubordination and attempts to remove
+Aster from command. The Aegis Oath crew follows Aster and continues the
+pursuit. Consequences after the current Act 1 ending remain unconfirmed.
+
+### Does the peaceful Shakru option remove combat from Eterus?
+
+No. It prevents a direct fight with the cooperating Shakru, but Grell still
+attack during their ritual extractions. The peaceful route changes who causes
+the conflict; it does not make the mission combat-free.
+
+### Why can I not enter the Deru Laboratory?
+
+Phobos needs all three access fragments from the surrounding alien structures.
+The third fragment also triggers the mission's return phase, so searching for
+more optional objectives at that point can leave the laboratory undefended.
+
+### Should I chase Mondar during the four-bunker mission?
+
+No. Protect the four bunkers in the order they are threatened. Mondar's apparent
+transmission is later revealed to be a recording, so reaching it does not
+replace the bunker-defense objective.

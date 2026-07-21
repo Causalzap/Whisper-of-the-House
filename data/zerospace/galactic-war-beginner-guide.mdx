@@ -1,0 +1,1089 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const galacticOverviewColumns = [
+  { key: "system", label: "System" },
+  { key: "purpose", label: "What it controls" },
+  { key: "beginnerCheck", label: "Beginner check" },
+];
+
+export const galacticOverviewRows = [
+  {
+    system: "Alliance",
+    purpose:
+      "The strategic side that receives your Capture Point contributions.",
+    beginnerCheck:
+      "Alliance choice does not permanently lock the combat faction used inside missions.",
+  },
+  {
+    system: "Star system",
+    purpose:
+      "A location containing missions, an occupation bonus, and a four-level Mastery track.",
+    beginnerCheck:
+      "Select the system and read its panel before spending travel resources.",
+  },
+  {
+    system: "Capture Points",
+    purpose:
+      "Determine which alliance is closest to controlling the selected system.",
+    beginnerCheck:
+      "One mission adds progress but does not guarantee immediate ownership.",
+  },
+  {
+    system: "Occupation Bonus",
+    purpose:
+      "A temporary benefit received by the alliance currently controlling the system.",
+    beginnerCheck:
+      "The bonus disappears when another alliance takes control.",
+  },
+  {
+    system: "System Mastery",
+    purpose:
+      "Four levels of permanent personal bonuses earned by completing missions in that system.",
+    beginnerCheck:
+      "Earned Mastery remains even after the system changes ownership.",
+  },
+  {
+    system: "Jump Fuel",
+    purpose:
+      "The strategic resource used to travel between Galactic War systems.",
+    beginnerCheck:
+      "Check the displayed travel cost before selecting a distant front.",
+  },
+  {
+    system: "Credits",
+    purpose:
+      "A personal currency used to improve items equipped through the Arsenal.",
+    beginnerCheck:
+      "Upgrade items used by the commander you actually play.",
+  },
+  {
+    system: "Influence",
+    purpose:
+      "A strategic resource spent through planet menus to support alliance buffs.",
+    beginnerCheck:
+      "Use it on an active or valuable front rather than an uncontested system.",
+  },
+];
+
+export const galacticMapColumns = [
+  { key: "mapState", label: "System state" },
+  { key: "meaning", label: "What it means" },
+  { key: "recommendedAction", label: "Recommended action" },
+];
+
+export const galacticMapRows = [
+  {
+    mapState: "Alliance controlled",
+    meaning:
+      "Your alliance owns the system and currently receives its occupation bonus.",
+    recommendedAction:
+      "Defend it when the point balance is close or the bonus is especially useful.",
+  },
+  {
+    mapState: "Enemy controlled",
+    meaning:
+      "Another alliance owns the system and has the current strategic advantage.",
+    recommendedAction:
+      "Attack when the system is reachable and allied players are already contributing there.",
+  },
+  {
+    mapState: "Neutral",
+    meaning:
+      "No alliance has secured control of the system.",
+    recommendedAction:
+      "Use a nearby neutral system when the main front is too expensive or too heavily defended.",
+  },
+  {
+    mapState: "Contested",
+    meaning:
+      "Two or more alliances are actively adding Capture Points in the same system.",
+    recommendedAction:
+      "Prioritize close contests where one completed mission can influence the balance.",
+  },
+  {
+    mapState: "Recently captured",
+    meaning:
+      "Ownership has changed and the stored Capture Point totals have been reduced.",
+    recommendedAction:
+      "Expect an immediate counterattack or a third alliance entering the weakened contest.",
+  },
+];
+
+export const progressionColumns = [
+  { key: "progression", label: "Progression" },
+  { key: "howItWorks", label: "How it works" },
+  { key: "myPriority", label: "My priority" },
+];
+
+export const progressionRows = [
+  {
+    progression: "Commander XP",
+    howItWorks:
+      "Mission experience levels the selected commander and unlocks additional units, upgrades, and play styles.",
+    myPriority:
+      "I develop one reliable commander before spreading early XP across every available option.",
+  },
+  {
+    progression: "System Mastery",
+    howItWorks:
+      "Each system has four Mastery levels that grant permanent personal bonuses.",
+    myPriority:
+      "I revisit nearby systems with useful bonuses instead of chasing temporary ownership alone.",
+  },
+  {
+    progression: "Items",
+    howItWorks:
+      "Mission completion can award items that are equipped through the Arsenal.",
+    myPriority:
+      "I check the Arsenal after several missions because rewards may not be equipped automatically.",
+  },
+  {
+    progression: "Credits",
+    howItWorks:
+      "Credits improve equipped items and increase their effectiveness.",
+    myPriority:
+      "I upgrade a useful item for my main commander instead of investing in every early drop.",
+  },
+  {
+    progression: "Influence",
+    howItWorks:
+      "Influence supports alliance buffs through the selected planet or system menu.",
+    myPriority:
+      "I spend it where allied players are actively attacking or defending.",
+  },
+  {
+    progression: "Occupation Bonus",
+    howItWorks:
+      "The controlling alliance temporarily receives the selected system's ownership benefit.",
+    myPriority:
+      "I separate this temporary map benefit from permanent System Mastery.",
+  },
+];
+
+export const galacticProblemColumns = [
+  { key: "problem", label: "Problem" },
+  { key: "checkFirst", label: "Check first" },
+  { key: "fix", label: "What I do" },
+];
+
+export const galacticProblemRows = [
+  {
+    problem: "The ship will not move",
+    checkFirst:
+      "Current location, selected system, Jump Fuel cost, and travel confirmation",
+    fix:
+      "I select one destination, confirm that I can pay the displayed cost, and wait for the travel state before clicking elsewhere.",
+  },
+  {
+    problem: "A mission win did not capture the system",
+    checkFirst: "Current Capture Point balance",
+    fix:
+      "I confirm whether the mission only reduced the enemy lead or whether more alliance missions are still required.",
+  },
+  {
+    problem: "The occupation bonus disappeared",
+    checkFirst: "Current system owner",
+    fix:
+      "I check whether another alliance captured the system. Personal Mastery remains even when the occupation bonus changes.",
+  },
+  {
+    problem: "No useful mission is available nearby",
+    checkFirst: "Adjacent neutral and contested systems",
+    fix:
+      "I work through a connected front instead of spending most of my Jump Fuel crossing the galaxy.",
+  },
+  {
+    problem: "The first mission feels impossible",
+    checkFirst:
+      "Difficulty, protected objective, blocker, and mission failure condition",
+    fix:
+      "I switch to Normal and Play with AI until I understand the target order.",
+  },
+  {
+    problem: "Progression feels slow",
+    checkFirst: "Commander choice and System Mastery spread",
+    fix:
+      "I stop changing commander and system after every mission and build progress in a smaller connected area.",
+  },
+];
+
+Galactic War is ZeroSpace's persistent cooperative strategy mode. Every
+completed mission affects two different layers: it advances my own commander
+and System Mastery while also adding Capture Points to an alliance-controlled
+galaxy map.
+
+That combination creates most of the early confusion. Winning a mission does
+not always capture a system, an occupation bonus is not the same as permanent
+Mastery, and the resources shown on the Galactic War map do not all perform the
+same job.
+
+This guide explains how I choose an alliance, select a useful first system,
+spend Jump Fuel, read Capture Points, launch missions with players or AI, and
+turn mission rewards into lasting progression.
+
+<GuideQuickAnswer title="ZeroSpace Galactic War Guide: What You Need to Know First">
+  <span>
+    Start by choosing an alliance, locating your current position, and selecting
+    one nearby neutral or contested system. Read its occupation bonus, Mastery
+    track, mission options, and Jump Fuel cost before travelling. For the first
+    mission, I use one familiar commander, Normal difficulty, and Play with AI
+    unless I already understand the objective.
+  </span>
+
+  <br />
+  <br />
+
+  <span>
+    Mission victories add Capture Points to the selected system, but one win
+    may not be enough to capture it. Occupation bonuses belong to the alliance
+    currently controlling that system. Commander XP, items, and earned
+    four-level System Mastery are personal progression that remains useful even
+    after ownership changes.
+  </span>
+
+  <span className="mt-4 block text-sm font-semibold">
+    Jump directly to:
+  </span>
+
+  <span className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+    <Link
+      href="#capture-points"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Capture Points
+    </Link>
+
+    <Link
+      href="#galactic-resources"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Galactic War Resources
+    </Link>
+
+    <Link
+      href="#jump-fuel"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Jump Fuel
+    </Link>
+
+    <Link
+      href="#system-mastery"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      System Mastery
+    </Link>
+
+    <Link
+      href="#common-problems"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      Problems and Fixes
+    </Link>
+  </span>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm leading-6 text-slate-700">
+  <strong className="text-slate-950">Early Access scope.</strong>{" "}
+  Galactic War is still presented as an evolving mode. This guide covers the
+  playable systems I could verify: alliance selection, system travel, Capture
+  Points, occupation bonuses, Commander XP, four-level System Mastery, items,
+  Credits, Influence, Play Co-op, and Play with AI.
+</div>
+
+<h2 id="galactic-war-at-a-glance">
+  ZeroSpace Galactic War at a glance
+</h2>
+
+This overview separates the strategic map, temporary alliance benefits, and
+permanent personal progression.
+
+<GuideTable
+  caption="The main Galactic War systems and the first thing I check for each one."
+  columns={galacticOverviewColumns}
+  rows={galacticOverviewRows}
+/>
+
+The distinction I keep in mind is:
+
+> Capture Points and occupation bonuses belong to the shared war. Commander
+> XP, items, and earned Mastery belong to my personal progression.
+
+<h2 id="what-is-galactic-war">
+  What is Galactic War in ZeroSpace?
+</h2>
+
+Galactic War is a persistent cooperative PvE mode built around a shared galaxy
+map.
+
+Instead of completing an isolated match and returning to an unchanged menu, I
+select a system whose strategic balance can be affected by the mission result.
+
+Three layers are active at once:
+
+1. **Mission objective:** complete the current PvE scenario.
+2. **System conflict:** add Capture Points toward alliance control.
+3. **Personal progression:** earn Commander XP, Mastery, items, Credits, and
+   Influence.
+
+This explains why a successful mission can still leave the system under enemy
+control. The mission succeeded, but the wider Capture Point balance may still
+favor another alliance.
+
+<h2 id="choose-alliance">
+  How alliances work in ZeroSpace Galactic War
+</h2>
+
+Galactic War begins with alliance selection.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-galactic-war-choose-alliance.webp"
+    alt="ZeroSpace Galactic War guide alliance selection screen before entering the shared galaxy map"
+    width={1600}
+    height={900}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The alliance receives my strategic contributions. It does not permanently
+    lock the combat faction or commander used inside missions.
+  </figcaption>
+</figure>
+
+I separate the two choices like this:
+
+- **Alliance:** the strategic side I support on the galaxy map.
+- **Commander and combat faction:** the army setup used inside a mission.
+
+I can remain in the same alliance while testing different commanders or
+playable factions.
+
+For a first choice, I look at:
+
+- which alliance I want to support;
+- where its territory is located;
+- which nearby systems are already contested;
+- and whether allied activity is concentrated on one front.
+
+If the alliance screen appears unresponsive, I use the alliance emblem or
+selection control rather than clicking colored territory behind the panel.
+
+<h2 id="read-galaxy-map">
+  How to read the Galactic War galaxy map
+</h2>
+
+After selecting an alliance, I locate:
+
+- the current system or ship marker;
+- territory owned by my alliance;
+- enemy-controlled systems;
+- nearby neutral systems;
+- contested fronts;
+- and the shortest useful route.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-galactic-war-galaxy-map.webp"
+    alt="ZeroSpace Galactic War galaxy map guide showing allied territory, enemy systems, neutral locations, and contested fronts"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    I begin with connected systems near my current position rather than
+    consuming most of my travel resource before completing a mission.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="How I interpret the main Galactic War system states."
+  columns={galacticMapColumns}
+  rows={galacticMapRows}
+/>
+
+A system with a powerful bonus is not automatically the best destination.
+
+The more useful first target is usually:
+
+- reachable in one short move;
+- already contested by my alliance;
+- and offering a mission I can complete on Normal difficulty.
+
+<h2 id="capture-points">
+  How do Capture Points work in ZeroSpace?
+</h2>
+
+Completing a mission adds Capture Points for my alliance in the selected
+system.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-galactic-war-capture-points.webp"
+    alt="ZeroSpace Galactic War Capture Points tutorial explaining mission contributions and system ownership"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The mission contributes to the system from which it was launched. One
+    victory may reduce an enemy lead without immediately changing ownership.
+  </figcaption>
+</figure>
+
+The alliance with the strongest Capture Point position can take control and
+receive the occupation bonus.
+
+That produces three possible results after a win:
+
+1. my alliance gains ground but remains behind;
+2. the system becomes closely contested;
+3. the mission provides enough progress to change ownership.
+
+When ownership changes, the accumulated Capture Point totals are significantly
+reduced.
+
+This creates a strategic opening:
+
+- the previous owner may counterattack;
+- the new owner may need immediate defense;
+- a third alliance may enter while both totals are weakened.
+
+A newly captured system is therefore not automatically safe.
+
+<h3 id="why-cant-i-capture-a-system">
+  Why can’t I capture a system after winning?
+</h3>
+
+One mission contributes points; it does not guarantee control.
+
+I check:
+
+- the remaining point difference;
+- whether allied players are completing missions in the same system;
+- whether another alliance has recently captured it;
+- and whether I accidentally launched from a different system.
+
+When the enemy lead is large, several alliance victories may be required.
+
+<h2 id="occupation-bonus">
+  How occupation bonuses work
+</h2>
+
+The alliance controlling a system receives its occupation bonus.
+
+Visible examples include:
+
+- **10% maximum unit energy and regeneration**;
+- **+10 maximum Supply**.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-galactic-war-occupation-bonus.webp"
+    alt="ZeroSpace Galactic War occupation bonus system panel showing a temporary alliance benefit"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Occupation bonuses vary by system. They remain active only while the
+    alliance controls that location.
+  </figcaption>
+</figure>
+
+These values are examples from individual systems, not bonuses shared by every
+planet.
+
+I compare the bonus with the missions I am currently playing:
+
+- maximum Supply helps army-heavy scenarios;
+- energy and regeneration support ability-heavy armies;
+- production bonuses help missions with weak starting economies.
+
+When another alliance captures the system, the occupation bonus can disappear.
+That does not remove personal Mastery already earned there.
+
+<h2 id="galactic-resources">
+  ZeroSpace Galactic War resources explained
+</h2>
+
+The Galactic War interface shows several resources that perform unrelated
+jobs.
+
+The cleanest distinction is:
+
+| Resource | Used for |
+| --- | --- |
+| Jump Fuel | Travelling between systems |
+| Credits | Improving personal Arsenal items |
+| Influence | Supporting alliance buffs |
+| Hexite and Flux | Building and producing units inside missions |
+
+Hexite and Flux belong to the RTS mission economy. They are not used to improve
+items or support the alliance map.
+
+<h3 id="jump-fuel">
+  What is Jump Fuel in ZeroSpace?
+</h3>
+
+Jump Fuel is the strategic travel resource used between Galactic War systems.
+
+One selected destination displayed a **Jump Fuel cost of 9**.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-galactic-war-jump-fuel-cost.webp"
+    alt="ZeroSpace Galactic War Jump Fuel cost of nine shown on a selected destination system"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The travel cost is shown on the selected destination. Jump Fuel replenishes
+    over time, so unnecessary long-distance moves delay the next useful jump.
+  </figcaption>
+</figure>
+
+When travel appears not to work, I check:
+
+1. my current system;
+2. the intended destination;
+3. the displayed Jump Fuel cost;
+4. whether enough fuel is available;
+5. whether the travel action was confirmed;
+6. whether the interface has entered a travel or matchmaking state.
+
+Repeatedly selecting different systems while waiting makes the current
+destination harder to identify.
+
+<h3 id="credits">
+  What are Credits used for?
+</h3>
+
+Credits improve items equipped through the Arsenal.
+
+I do not spend them across every early reward.
+
+My order is:
+
+1. choose the commander I use most often;
+2. open the Arsenal;
+3. compare the available items;
+4. equip the item that supports that commander;
+5. spend Credits on that item.
+
+This gives me one functional setup sooner than partially upgrading several
+items I may never use.
+
+<h3 id="influence">
+  What does Influence do?
+</h3>
+
+Influence supports alliance buffs through the planet or system menu.
+
+It is not an item-upgrade currency.
+
+I spend Influence when:
+
+- the system is on an active front;
+- the alliance is close to capturing or losing it;
+- other allied players are completing missions there;
+- and the selected buff has a clear effect.
+
+I hold it when the system is uncontested or the alliance has moved to a
+different front.
+
+<h3 id="mission-resources">
+  Are Hexite and Flux used on the Galactic War map?
+</h3>
+
+Hexite and Flux are primarily mission resources.
+
+Inside an RTS scenario:
+
+- bases generate Hexite;
+- Harvesters gather Flux;
+- Supply limits army size;
+- and those resources pay for units, buildings, and upgrades.
+
+The{" "}
+<Link
+  href="/zerospace/beginner-guide/"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  ZeroSpace Beginner Guide
+</Link>
+{" "}
+covers those systems in detail.
+
+<h2 id="choose-first-system">
+  Which Galactic War system should I choose first?
+</h2>
+
+My first system meets three conditions:
+
+1. it is reachable without spending most of my Jump Fuel;
+2. my alliance is already attacking or defending it;
+3. the mission is understandable at Normal difficulty.
+
+A defensive mission is useful when:
+
+- the system is alliance controlled;
+- the Capture Point balance is close;
+- and the occupation bonus is worth preserving.
+
+An offensive mission is useful when:
+
+- the destination is nearby;
+- the enemy lead is recoverable;
+- and allied players are already contributing there.
+
+A distant system with no allied activity is usually a poor first investment,
+even when its occupation bonus looks strong.
+
+<h2 id="launch-mission">
+  How to start a Galactic War mission
+</h2>
+
+After selecting or reaching a system, I inspect:
+
+- commander;
+- difficulty;
+- mission modifier or planet bonus;
+- Play Co-op;
+- Play with AI.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-galactic-war-mission-launch.webp"
+    alt="ZeroSpace Galactic War mission launch panel with commander, difficulty, Play Co-op, and Play with AI options"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Play Co-op searches for another player. Play with AI begins the cooperative
+    scenario with computer-controlled support.
+  </figcaption>
+</figure>
+
+I start on **Normal**.
+
+Before launching, I identify:
+
+1. what structure or unit must survive;
+2. what enemy mechanic blocks progress;
+3. whether the mission contains simultaneous objectives;
+4. when I need to abandon a side objective;
+5. whether the selected commander can handle the mission role.
+
+One Siege Walker scenario illustrates this clearly:
+
+- the ZeroSpace Relay must survive;
+- shield generators protect the walkers;
+- attacking shielded walkers wastes time;
+- the generators must be destroyed first.
+
+The largest enemy on the screen is not always the first objective.
+
+<h2 id="first-mission-checklist">
+  My first Galactic War mission checklist
+</h2>
+
+### What must survive?
+
+The failure condition may be:
+
+- a Relay;
+- an Operating Tower;
+- a settlement;
+- a Fabricator;
+- or a timed extraction target.
+
+### What prevents progress?
+
+The blocker may be:
+
+- shield generators;
+- portals;
+- artillery;
+- anti-air defenses;
+- or an enemy production source.
+
+### Should the players split?
+
+Splitting works when one army can defend while the other removes a blocker.
+
+Both armies stay together when:
+
+- the mission starts with few units;
+- a major wave is already active;
+- or the objective requires concentrated damage.
+
+### When should I return from a side objective?
+
+I turn back when:
+
+- the protected structure is taking sustained damage;
+- a countdown begins;
+- the ally repeatedly pings the main objective;
+- or the return route is becoming unsafe.
+
+### When should I increase the difficulty?
+
+I move above Normal after completing the same mission type without losing the
+protected objective or misunderstanding the target order.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="personal-progression">
+  ZeroSpace Galactic War progression explained
+</h2>
+
+Galactic War rewards personal progression while I contribute to a shared
+alliance campaign.
+
+<GuideTable
+  caption="Personal progression, alliance progression, and how I prioritize each reward."
+  columns={progressionColumns}
+  rows={progressionRows}
+/>
+
+<h2 id="system-mastery">
+  How does System Mastery work?
+</h2>
+
+Each system has a Mastery track containing **four levels**.
+
+Earned levels provide permanent personal bonuses that continue applying even
+if another alliance later captures the system.
+
+Visible examples include:
+
+- **+1% building production**;
+- **+1% unit health and shields**.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-galactic-war-system-mastery.webp"
+    alt="ZeroSpace Galactic War four-level System Mastery panel showing permanent building production and unit bonuses"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Mastery is personal and persistent. The occupation bonus belongs to the
+    alliance currently controlling the system.
+  </figcaption>
+</figure>
+
+For early progression, I concentrate on a small group of connected systems.
+
+That approach:
+
+- reduces travel costs;
+- makes mission objectives familiar;
+- builds Mastery more consistently;
+- and supports the same alliance front repeatedly.
+
+I move to another system when:
+
+- the next useful Mastery threshold has been reached;
+- the alliance no longer needs pressure there;
+- or a nearby system offers a more valuable permanent bonus.
+
+<h3 id="does-mastery-reset">
+  Does System Mastery reset when a planet is captured?
+</h3>
+
+No. Ownership and Mastery are separate.
+
+A system changing hands can remove the alliance occupation bonus, but previously
+earned Mastery remains part of personal progression.
+
+<h2 id="commander-xp">
+  How Commander XP works
+</h2>
+
+Mission experience levels the selected commander and unlocks new units,
+upgrades, and play styles.
+
+I develop one default commander first.
+
+I switch when:
+
+- the mission requires a role the current commander handles poorly;
+- a newly unlocked unit is worth testing;
+- or the first commander's basic roster is already functional.
+
+Constantly changing commanders can leave several options partly developed
+without one dependable setup for harder missions.
+
+<h2 id="items-and-arsenal">
+  Items and the Arsenal
+</h2>
+
+Mission completion can award items for the Arsenal.
+
+I check the Arsenal after several missions because an item reward may not be
+equipped automatically.
+
+My first upgrade goes to an item that:
+
+- supports my main commander;
+- affects a unit used in most missions;
+- or improves a weakness I repeatedly encounter.
+
+I avoid investing Credits in an item merely because it was the first one
+awarded.
+
+<h2 id="after-mission">
+  What to check after completing a mission
+</h2>
+
+After a victory, I return to the galaxy map and check:
+
+1. how the Capture Point balance changed;
+2. whether the system became contested;
+3. whether ownership changed;
+4. which occupation bonus is active;
+5. whether System Mastery advanced;
+6. whether the commander gained a level;
+7. whether an item or Credits were awarded;
+8. how much Jump Fuel remains.
+
+A mission can provide the final contribution that changes ownership.
+
+<figure className="my-8">
+  <Image
+    src="/images/zerospace/zerospace-galactic-war-system-captured.webp"
+    alt="ZeroSpace Galactic War system captured message showing control of Draconus Reach passing to the Obsidian Order"
+    width={1600}
+    height={900}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    This mission tipped the balance and transferred control of Draconus Reach.
+    The reduced post-capture point totals left the system open to another fight.
+  </figcaption>
+</figure>
+
+After a capture, I either:
+
+- remain and help defend the new ownership;
+- or move with the allied front toward another nearby system.
+
+<h2 id="coop-or-ai">
+  Should you choose Play Co-op or Play with AI?
+</h2>
+
+I use **Play with AI** when:
+
+- learning an unfamiliar mission;
+- testing a new commander;
+- checking the objective order;
+- or practising Normal difficulty.
+
+I use **Play Co-op** when:
+
+- the mission contains simultaneous objectives;
+- one army can defend while another removes a blocker;
+- a higher difficulty requires better coordination;
+- or the map contains several permanent attack sources.
+
+In co-op, I choose one clear responsibility:
+
+- defend the fixed objective;
+- destroy shield generators;
+- close portals;
+- secure an expansion;
+- handle a side route;
+- or reinforce the final attack.
+
+Following the other player with the entire army often leaves one objective
+uncovered.
+
+<h2 id="common-problems">
+  Common ZeroSpace Galactic War problems and fixes
+</h2>
+
+<GuideTable
+  caption="The first checks I use when Galactic War travel, missions, or progression appear not to work."
+  columns={galacticProblemColumns}
+  rows={galacticProblemRows}
+/>
+
+<h3 id="ship-will-not-move">
+  Why won’t my ship move in Galactic War?
+</h3>
+
+The usual causes are:
+
+- the destination is selected but travel is not confirmed;
+- the destination costs more Jump Fuel than is available;
+- the current location is unclear;
+- or the interface is already searching for a mission.
+
+I select one destination, read its cost, confirm the action, and wait before
+clicking another system.
+
+<h3 id="mission-did-not-capture">
+  Why did my mission not capture the planet?
+</h3>
+
+A victory adds Capture Points rather than granting automatic ownership.
+
+The remaining enemy lead may still be larger than the mission contribution.
+Allied players need to continue completing missions in the same system.
+
+<h3 id="occupation-bonus-disappeared">
+  Why did my occupation bonus disappear?
+</h3>
+
+Another alliance probably captured the system.
+
+Occupation bonuses belong to the current owner. Earned System Mastery remains
+personal and does not disappear with the bonus.
+
+<h3 id="influence-not-personal-upgrade">
+  Why can’t I use Influence to upgrade an item?
+</h3>
+
+Influence and Credits have different purposes.
+
+Credits improve personal Arsenal items. Influence supports alliance buffs
+through the planet or system menu.
+
+<h3 id="third-alliance-capture">
+  Why can a third alliance take a system so quickly?
+</h3>
+
+Ownership changes significantly reduce the existing Capture Point totals.
+
+That leaves the new owner and previous owner with a weaker point position,
+allowing the third alliance to enter the contest more easily.
+
+<h2 id="related-guides">
+  Related ZeroSpace guides
+</h2>
+
+<div className="my-6 space-y-4">
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+    <Link
+      href="/zerospace/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Guide Hub
+    </Link>
+
+    <div className="mt-2 text-sm leading-6 text-slate-700">
+      Start with the recommended reading order and current Early Access
+      coverage.
+    </div>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+    <Link
+      href="/zerospace/beginner-guide/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Beginner Guide
+    </Link>
+
+    <div className="mt-2 text-sm leading-6 text-slate-700">
+      Learn Hexite, Flux, Supply, production management, heroes, and expansion
+      timing before entering persistent Galactic War missions.
+    </div>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+    <Link
+      href="/zerospace/campaign-walkthrough-choices/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Act 1 Campaign Walkthrough
+    </Link>
+
+    <div className="mt-2 text-sm leading-6 text-slate-700">
+      Follow Operation Moby, Trisaris, Koru Hearts, Deru Laboratory, Trinity,
+      and the confirmed Campaign choices.
+    </div>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+    <Link
+      href="/zerospace/mission-3-arcadia-walkthrough/"
+      className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+    >
+      ZeroSpace Mission 3 Arcadia Walkthrough
+    </Link>
+
+    <div className="mt-2 text-sm leading-6 text-slate-700">
+      Complete the colony defense, Old Bessie fight, southern Grell source,
+      final swarm, and evacuation choice.
+    </div>
+  </div>
+</div>
+
+<h2 id="faq">
+  ZeroSpace Galactic War FAQ
+</h2>
+
+### How do Capture Points work in ZeroSpace Galactic War?
+
+Each completed mission adds Capture Points to the alliance in the system from
+which the mission was launched. One win may only reduce the enemy lead. A
+system changes ownership when the overall point balance is sufficient, not
+simply because one mission was completed.
+
+### Does System Mastery reset when another alliance captures the system?
+
+No. Earned Mastery is permanent personal progression. The occupation bonus may
+disappear when ownership changes, but the Mastery levels already earned remain
+active.
+
+### What is Jump Fuel used for?
+
+Jump Fuel pays for travel between Galactic War systems. It is separate from
+Hexite and Flux used inside RTS missions. A distant route can consume enough
+fuel to delay the next strategic move, so I work through connected systems
+first.
+
+### What does Influence do in Galactic War?
+
+Influence supports alliance buffs through the selected planet or system menu.
+It does not improve Arsenal items. Credits are the currency used for personal
+item upgrades.
+
+### Why did I win but not capture the system?
+
+The mission added Capture Points, but another alliance may still have the
+stronger total. The result may also have changed the system from enemy
+controlled to contested without transferring ownership.
+
+### Can I play Galactic War without another player?
+
+Yes. Select Play with AI from the mission panel. I use it to learn objective
+order, test commanders, and practise Normal difficulty before choosing Play
+Co-op.
+
+### Does my alliance lock the faction I can play?
+
+No. Alliance membership controls strategic contributions on the galaxy map.
+The commander and combat faction used inside missions remain separate choices.
+
+### Why did a third alliance capture a system after my alliance won it?
+
+When ownership changes, stored Capture Point totals are significantly reduced.
+That weaker post-capture balance allows the third alliance to enter and contest
+the system quickly.
+
+### Should I always travel to the system with the best occupation bonus?
+
+No. Travel cost, current location, alliance activity, mission difficulty, and
+the current Capture Point balance may matter more than the bonus itself. A
+nearby contested system usually provides more immediate value.
