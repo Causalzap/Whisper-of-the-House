@@ -139,19 +139,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/guides/hozy/dreams-explained/",
+              href: "/guides/hozy/dreams-explained",
               label: "Hozy Dreams Explained",
             },
             {
-              href: "/guides/hozy/penthouse-layout-guide/",
+              href: "/guides/hozy/penthouse-layout-guide",
               label: "Hozy Penthouse Layout Guide",
             },
             {
-              href: "/guides/hozy/cafe-layout-tips/",
+              href: "/guides/hozy/cafe-layout-tips",
               label: "Hozy Cafe Layout Tips",
             },
             {
-              href: "/guides/hozy/",
+              href: "/guides/hozy",
               label: "Hozy Guide Hub",
             },
           ]}

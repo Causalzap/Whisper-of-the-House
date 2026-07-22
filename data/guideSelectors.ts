@@ -591,19 +591,19 @@ import {
         title: "Walkthrough hubs",
         description:
           "Story routes, mission flow, early walls, cleanup order, and where-to-go-next help.",
-        href: "/all-game-guides/",
+        href: "/all-game-guides",
       },
       {
         title: "Achievement guides",
         description:
           "Unlock notes, hidden triggers, route-specific requirements, and 100% cleanup pages.",
-        href: "/all-game-guides/",
+        href: "/all-game-guides",
       },
       {
         title: "Systems guides",
         description:
           "Automation, crafting chains, base setup, survival pressure, and progression planning.",
-        href: "/all-game-guides/",
+        href: "/all-game-guides",
       },
     ];
   }
@@ -617,21 +617,21 @@ import {
     return [
       {
         title: "Walkthroughs that route the first hour",
-        href: "/all-game-guides/",
+        href: "/all-game-guides",
         eyebrow: "Routes",
         description:
           "Start fast, avoid early mistakes, and understand which systems matter before the game opens up.",
       },
       {
         title: "Achievements without wiki overload",
-        href: "/all-game-guides/",
+        href: "/all-game-guides",
         eyebrow: "Completion",
         description:
           "Use practical unlock notes, missable warnings, cleanup order, and route-specific requirements.",
       },
       {
         title: "Systems guides for complex games",
-        href: "/all-game-guides/",
+        href: "/all-game-guides",
         eyebrow: "Systems",
         description:
           "Break down crafting, automation, base setup, resources, survival pressure, and progression walls.",

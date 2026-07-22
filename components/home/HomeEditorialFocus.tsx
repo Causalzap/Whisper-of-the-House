@@ -123,24 +123,24 @@ const editorialSteps: EditorialStep[] = [
 const trustLinks: TrustLink[] = [
   {
     label: "About",
-    href: "/about/",
+    href: "/about",
     description: "Who runs the site and what the guide publication covers.",
   },
   {
     label: "Privacy Policy",
-    href: "/privacy-policy/",
+    href: "/privacy-policy",
     description:
       "How site data, analytics, advertising, and privacy choices are handled.",
   },
   {
     label: "Terms of Service",
-    href: "/terms-of-service/",
+    href: "/terms-of-service",
     description:
       "The basic terms for using the site, reading guides, and accessing content.",
   },
   {
     label: "Contact",
-    href: "/contact/",
+    href: "/contact",
     description: "Reach the site for corrections, questions, or coverage notes.",
   },
 ];

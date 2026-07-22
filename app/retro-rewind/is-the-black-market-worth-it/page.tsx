@@ -77,7 +77,7 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/retro-rewind/when-to-replace-damaged-tape/",
+              href: "/retro-rewind/when-to-replace-damaged-tape",
               label: "When to Replace a Damaged Tape in Retro Rewind",
             },
           ]}

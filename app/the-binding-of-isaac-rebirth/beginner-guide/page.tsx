@@ -101,23 +101,23 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/the-binding-of-isaac-rebirth/",
+    href: "/the-binding-of-isaac-rebirth",
     label: "The Binding of Isaac: Rebirth Guide Hub",
   },
   {
-    href: "/the-binding-of-isaac-rebirth/dlc-buying-guide/",
+    href: "/the-binding-of-isaac-rebirth/dlc-buying-guide",
     label: "DLC Buying Guide",
   },
   {
-    href: "/the-binding-of-isaac-rebirth/unlock-order/",
+    href: "/the-binding-of-isaac-rebirth/unlock-order",
     label: "Unlock Order Guide",
   },
   {
-    href: "/the-binding-of-isaac-rebirth/best-beginner-characters/",
+    href: "/the-binding-of-isaac-rebirth/best-beginner-characters",
     label: "Best Beginner Characters",
   },
   {
-    href: "/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide/",
+    href: "/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide",
     label: "Tainted Characters Unlock Guide",
   },
 ];

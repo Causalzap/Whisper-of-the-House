@@ -5211,7 +5211,7 @@ export const guideClusters = [
   {
     "title": "Airborne Empire",
     "game": "Airborne Empire",
-    "href": "/airborne-empire/kingsfell-guide/",
+    "href": "/airborne-empire/kingsfell-guide",
     "slug": "airborne-empire",
     "kind": "game",
     "status": "archive",
@@ -5225,7 +5225,7 @@ export const guideClusters = [
     "pages": [
       {
         "title": "Kingsfell Guide",
-        "href": "/airborne-empire/kingsfell-guide/",
+        "href": "/airborne-empire/kingsfell-guide",
         "type": "Guide",
         "description": "When to enter the final biome, how to prepare your city, Jet Engine timing, and the safest way to approach the endgame push.",
         "archive": {
@@ -5235,7 +5235,7 @@ export const guideClusters = [
       },
       {
         "title": "Pirate Queen Guide",
-        "href": "/airborne-empire/pirate-queen-guide/",
+        "href": "/airborne-empire/pirate-queen-guide",
         "type": "Guide",
         "description": "How to beat the final boss with the safest city setup, better anti-air control, cleaner approach timing, and smarter flank rotation.",
         "archive": {
@@ -5245,7 +5245,7 @@ export const guideClusters = [
       },
       {
         "title": "Tilt, Lift, and Balance Guide",
-        "href": "/airborne-empire/tilt-lift-balance-guide/",
+        "href": "/airborne-empire/tilt-lift-balance-guide",
         "type": "Guide",
         "description": "Fix unstable layouts, solve the not enough lift to support weight warning, improve propulsion, and know when to rebuild instead of patching.",
         "archive": {
@@ -5255,7 +5255,7 @@ export const guideClusters = [
       },
       {
         "title": "Jet Engine Guide",
-        "href": "/airborne-empire/jet-engine-guide/",
+        "href": "/airborne-empire/jet-engine-guide",
         "type": "Guide",
         "description": "When Jet Engine becomes relevant, how to rebuild your city around it, and why it matters so much in Kingsfell and the Pirate Queen fight.",
         "archive": {
@@ -5979,7 +5979,7 @@ export const guideClusters = [
     "pages": [
       {
         "title": "Oil Rig Guide",
-        "href": "/all-will-fall/oil-rig-guide/",
+        "href": "/all-will-fall/oil-rig-guide",
         "type": "Guide",
         "description": "Best early build order, first raise timing, and the 500% Rain Catcher setup.",
         "archive": {
@@ -5989,7 +5989,7 @@ export const guideClusters = [
       },
       {
         "title": "Tanker Truck Guide",
-        "href": "/all-will-fall/tanker-truck-guide/",
+        "href": "/all-will-fall/tanker-truck-guide",
         "type": "Guide",
         "description": "Early build order, fuel math, and how to keep zone progression from stalling out.",
         "archive": {
@@ -5999,7 +5999,7 @@ export const guideClusters = [
       },
       {
         "title": "Tornado Race Guide",
-        "href": "/all-will-fall/tornado-race-guide/",
+        "href": "/all-will-fall/tornado-race-guide",
         "type": "Guide",
         "description": "Day 60 timeline, Thruster Engines, Power Grid timing, and evacuation planning.",
         "archive": {
@@ -6009,7 +6009,7 @@ export const guideClusters = [
       },
       {
         "title": "Collapse Troubleshooting",
-        "href": "/all-will-fall/collapse-troubleshooting/",
+        "href": "/all-will-fall/collapse-troubleshooting",
         "type": "Guide",
         "description": "Why buildings fail, what stability problems look like, and how to fix them fast.",
         "archive": {

@@ -184,15 +184,15 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles/",
+              href: "/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles",
               label: "How to Beat Trick Room in Pokemon Champions Doubles",
             },
             {
-              href: "/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles/",
+              href: "/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles",
               label: "How to Counter Incineroar in Pokemon Champions Doubles",
             },
             {
-              href: "/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles/",
+              href: "/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles",
               label: "How to Deal With Sneasler in Pokemon Champions Doubles",
             },
             {

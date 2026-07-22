@@ -171,15 +171,15 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-occultist/",
+              href: "/the-occultist",
               label: "The Occultist Guide Hub",
             },
             {
-              href: "/the-occultist/all-medallion-locations/",
+              href: "/the-occultist/all-medallion-locations",
               label: "All Medallion Locations",
             },
             {
-              href: "/the-occultist/all-altar-locations/",
+              href: "/the-occultist/all-altar-locations",
               label: "All Altar Locations",
             },
           ]}

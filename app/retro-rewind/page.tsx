@@ -15,31 +15,31 @@ export const metadata: Metadata = {
 
 const coreGuides = [
   {
-    href: "/retro-rewind/sku-codes/",
+    href: "/retro-rewind/sku-codes",
     title: "Retro Rewind SKU Codes & Black Market Guide",
     description:
       "Learn how to find SKU codes, use them in the Black Market, and decide when exact VHS replacement is actually worth the extra cost.",
   },
   {
-    href: "/retro-rewind/is-the-black-market-worth-it/",
+    href: "/retro-rewind/is-the-black-market-worth-it",
     title: "Is the Black Market Worth It in Retro Rewind?",
     description:
       "Learn when the shady Tape Dealer is actually worth using, when regular PC orders are better, and how to avoid overusing exact-title purchases.",
   },
   {
-    href: "/retro-rewind/when-to-replace-damaged-tape/",
+    href: "/retro-rewind/when-to-replace-damaged-tape",
     title: "Damaged Tapes in Retro Rewind: Replace, Wait, or Trash?",
     description:
       "A decision guide for broken tapes, replacement costs, rainy Friday timing, and when to replace revenue instead of chasing the exact same title.",
   },
   {
-    href: "/retro-rewind/custom-videos/",
+    href: "/retro-rewind/custom-videos",
     title: "How to Add Your Own Videos to Retro Rewind",
     description:
       "Learn how to replace TV channel files, use the correct filename and format, and avoid common custom video playback problems.",
   },
   {
-    href: "/retro-rewind/community/",
+    href: "/retro-rewind/community",
     title: "Retro Rewind Discord, Community, and Official Links",
     description:
       "Find the official Discord, the best places to report bugs, where players share custom content, and which community spaces are most useful.",

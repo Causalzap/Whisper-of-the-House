@@ -10,7 +10,7 @@ const trustLinks = [
 ];
 
 const browseLinks = [
-  { label: "All Game Guides", href: "/all-game-guides/" },
+  { label: "All Game Guides", href: "/all-game-guides" },
   { label: "Latest Stories", href: "/#latest-updates" },
   { label: "Featured Hubs", href: "/#featured-games" },
 ];

@@ -135,19 +135,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/crystalfall/beginner-guide/",
+              href: "/crystalfall/beginner-guide",
               label: "Crystalfall Beginner Guide",
             },
             {
-              href: "/crystalfall/fireball-build-guide/",
+              href: "/crystalfall/fireball-build-guide",
               label: "Best Fireball Build in Crystalfall for Beginners",
             },
             {
-              href: "/crystalfall/crafting-sockets-gem-fusion-guide/",
+              href: "/crystalfall/crafting-sockets-gem-fusion-guide",
               label: "Crystalfall Crafting, Sockets, and Gem Fusion Guide",
             },
             {
-              href: "/crystalfall/inventory-stash-guide/",
+              href: "/crystalfall/inventory-stash-guide",
               label: "Crystalfall Inventory and Stash Guide",
             },
           ]}

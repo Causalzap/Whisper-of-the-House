@@ -5,7 +5,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import DlcBuyingGuideContent from "@/data/the-binding-of-isaac-rebirth/dlc-buying-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-binding-of-isaac-rebirth/dlc-buying-guide/`;
+const pageUrl = `${siteUrl}/the-binding-of-isaac-rebirth/dlc-buying-guide`;
 
 const imageUrls = [
   `${siteUrl}/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-repentance-new-run.webp`,

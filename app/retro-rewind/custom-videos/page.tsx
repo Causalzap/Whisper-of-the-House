@@ -83,11 +83,11 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/retro-rewind/is-the-black-market-worth-it/",
+              href: "/retro-rewind/is-the-black-market-worth-it",
               label: "Is the Black Market Worth It in Retro Rewind?",
             },
             {
-              href: "/retro-rewind/when-to-replace-damaged-tape/",
+              href: "/retro-rewind/when-to-replace-damaged-tape",
               label: "When to Replace a Damaged Tape in Retro Rewind",
             },
           ]}

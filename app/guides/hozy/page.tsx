@@ -73,25 +73,25 @@ const jsonLd = [
           "@type": "ListItem",
           position: 1,
           name: "Hozy Dreams Explained",
-          url: `${siteUrl}/guides/hozy/dreams-explained/`,
+          url: `${siteUrl}/guides/hozy/dreams-explained`,
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Hozy Penthouse Layout Guide",
-          url: `${siteUrl}/guides/hozy/penthouse-layout-guide/`,
+          url: `${siteUrl}/guides/hozy/penthouse-layout-guide`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: "Hozy Hardest Levels Ranked",
-          url: `${siteUrl}/guides/hozy/hardest-levels-ranked/`,
+          url: `${siteUrl}/guides/hozy/hardest-levels-ranked`,
         },
         {
           "@type": "ListItem",
           position: 4,
           name: "Hozy Cafe Layout Tips",
-          url: `${siteUrl}/guides/hozy/cafe-layout-tips/`,
+          url: `${siteUrl}/guides/hozy/cafe-layout-tips`,
         },
       ],
     },
@@ -139,19 +139,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/guides/hozy/dreams-explained/",
+              href: "/guides/hozy/dreams-explained",
               label: "Hozy Dreams Explained",
             },
             {
-              href: "/guides/hozy/penthouse-layout-guide/",
+              href: "/guides/hozy/penthouse-layout-guide",
               label: "Hozy Penthouse Layout Guide",
             },
             {
-              href: "/guides/hozy/hardest-levels-ranked/",
+              href: "/guides/hozy/hardest-levels-ranked",
               label: "Hozy Hardest Levels Ranked",
             },
             {
-              href: "/guides/hozy/cafe-layout-tips/",
+              href: "/guides/hozy/cafe-layout-tips",
               label: "Hozy Cafe Layout Tips",
             },
           ]}

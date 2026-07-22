@@ -13,7 +13,7 @@ import {
 } from "@/data/guideSelectors";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/all-game-guides/`;
+const pageUrl = `${siteUrl}/all-game-guides`;
 
 export const metadata: Metadata = {
   title: "All Game Guides Archive | Whisper of the House",

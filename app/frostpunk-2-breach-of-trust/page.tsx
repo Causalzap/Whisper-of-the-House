@@ -5,7 +5,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import BreachOfTrustContent from "@/data/frostpunk-2-breach-of-trust/index.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/frostpunk-2-breach-of-trust/`;
+const pageUrl = `${siteUrl}/frostpunk-2-breach-of-trust`;
 
 const imageUrls = [
 `${siteUrl}/images/frostpunk-2-breach-of-trust/frostpunk-2-breach-of-trust-route-choice.webp`,
@@ -73,19 +73,19 @@ label: "FAQ",
 
 const relatedLinks = [
 {
-href: "/frostpunk-2-breach-of-trust/walkthrough/",
+href: "/frostpunk-2-breach-of-trust/walkthrough",
 label: "Breach of Trust Walkthrough",
 },
 {
-href: "/frostpunk-2-breach-of-trust/aurora-negotiation-fishery-hub-guide/",
+href: "/frostpunk-2-breach-of-trust/aurora-negotiation-fishery-hub-guide",
 label: "Aurora Negotiation and Fishery Hub Guide",
 },
 {
-href: "/frostpunk-2-breach-of-trust/conquer-aurora-war-route-guide/",
+href: "/frostpunk-2-breach-of-trust/conquer-aurora-war-route-guide",
 label: "Conquer Aurora War Route Guide",
 },
 {
-href: "/frostpunk-2-breach-of-trust/tremor-evacuation-guide/",
+href: "/frostpunk-2-breach-of-trust/tremor-evacuation-guide",
 label: "Tremor and Evacuation Guide",
 },
 ];

@@ -157,15 +157,15 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-occultist/",
+              href: "/the-occultist",
               label: "The Occultist Guide Hub",
             },
             {
-              href: "/the-occultist/codex-lumina-fragments/",
+              href: "/the-occultist/codex-lumina-fragments",
               label: "Codex Lumina Fragments",
             },
             {
-              href: "/the-occultist/all-altar-locations/",
+              href: "/the-occultist/all-altar-locations",
               label: "All Altar Locations",
             },
           ]}

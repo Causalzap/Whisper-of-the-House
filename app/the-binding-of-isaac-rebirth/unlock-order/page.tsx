@@ -5,7 +5,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import UnlockOrderContent from "@/data/the-binding-of-isaac-rebirth/unlock-order.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-binding-of-isaac-rebirth/unlock-order/`;
+const pageUrl = `${siteUrl}/the-binding-of-isaac-rebirth/unlock-order`;
 
 const imageUrls = [
   `${siteUrl}/images/the-binding-of-isaac-rebirth/the-binding-of-isaac-rebirth-post-it-completion-marks.webp`,
@@ -67,23 +67,23 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/the-binding-of-isaac-rebirth/",
+    href: "/the-binding-of-isaac-rebirth",
     label: "The Binding of Isaac: Rebirth Guide Hub",
   },
   {
-    href: "/the-binding-of-isaac-rebirth/beginner-guide/",
+    href: "/the-binding-of-isaac-rebirth/beginner-guide",
     label: "Beginner Guide",
   },
   {
-    href: "/the-binding-of-isaac-rebirth/best-beginner-characters/",
+    href: "/the-binding-of-isaac-rebirth/best-beginner-characters",
     label: "Best Beginner Characters",
   },
   {
-    href: "/the-binding-of-isaac-rebirth/dlc-buying-guide/",
+    href: "/the-binding-of-isaac-rebirth/dlc-buying-guide",
     label: "DLC Buying Guide",
   },
   {
-    href: "/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide/",
+    href: "/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide",
     label: "Tainted Characters Unlock Guide",
   },
 ];

@@ -5,7 +5,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import SupermarketChaosAchievementsGuideContent from "@/data/supermarket-chaos/achievements-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/supermarket-chaos/achievements-guide/`;
+const pageUrl = `${siteUrl}/supermarket-chaos/achievements-guide`;
 
 const imageUrls = [
   `${siteUrl}/images/supermarket-chaos/supermarket-chaos-4668-products-528-shelves.webp`,
@@ -68,19 +68,19 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/supermarket-chaos/",
+    href: "/supermarket-chaos",
     label: "Supermarket Chaos Guide Hub",
   },
   {
-    href: "/supermarket-chaos/beginner-guide/",
+    href: "/supermarket-chaos/beginner-guide",
     label: "Supermarket Chaos Beginner Guide",
   },
   {
-    href: "/supermarket-chaos/best-upgrades-skills/",
+    href: "/supermarket-chaos/best-upgrades-skills",
     label: "Best Upgrades and Skills Guide",
   },
   {
-    href: "/supermarket-chaos/section-map-item-locations/",
+    href: "/supermarket-chaos/section-map-item-locations",
     label: "Section Map and Tricky Item Locations",
   },
 ];

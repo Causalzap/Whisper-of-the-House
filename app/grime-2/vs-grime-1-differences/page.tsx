@@ -154,19 +154,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/grime-2/",
+              href: "/grime-2",
               label: "GRIME II Guide Hub",
             },
             {
-              href: "/grime-2/best-early-weapons/",
+              href: "/grime-2/best-early-weapons",
               label: "GRIME II Best Early Weapons",
             },
             {
-              href: "/grime-2/kankan-guide/",
+              href: "/grime-2/kankan-guide",
               label: "GRIME II Kankan Guide",
             },
             {
-              href: "/grime-2/blade-mammoth-boss-guide/",
+              href: "/grime-2/blade-mammoth-boss-guide",
               label: "How to Beat Blade Mammoth in GRIME II",
             },
           ]}

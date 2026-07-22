@@ -147,19 +147,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/grime-2/",
+              href: "/grime-2",
               label: "GRIME II Guide Hub",
             },
             {
-              href: "/grime-2/kankan-guide/",
+              href: "/grime-2/kankan-guide",
               label: "GRIME II Kankan Guide",
             },
             {
-              href: "/grime-2/blade-mammoth-boss-guide/",
+              href: "/grime-2/blade-mammoth-boss-guide",
               label: "How to Beat Blade Mammoth in GRIME II",
             },
             {
-              href: "/grime-2/vs-grime-1-differences/",
+              href: "/grime-2/vs-grime-1-differences",
               label: "GRIME II vs GRIME 1 Differences",
             },
           ]}

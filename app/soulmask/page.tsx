@@ -154,19 +154,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/soulmask/shifting-sands-beginner-guide/",
+              href: "/soulmask/shifting-sands-beginner-guide",
               label: "Shifting Sands Beginner Guide",
             },
             {
-              href: "/soulmask/cross-map-transfer-guide/",
+              href: "/soulmask/cross-map-transfer-guide",
               label: "Cross-Map Transfer Guide",
             },
             {
-              href: "/soulmask/airship-guide/",
+              href: "/soulmask/airship-guide",
               label: "Airship Guide",
             },
             {
-              href: "/soulmask/tribesmen-guide/",
+              href: "/soulmask/tribesmen-guide",
               label: "Tribesmen Guide",
             },
           ]}

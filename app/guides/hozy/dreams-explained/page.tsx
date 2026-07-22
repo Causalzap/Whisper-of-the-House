@@ -138,19 +138,19 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/guides/hozy/penthouse-layout-guide/",
+              href: "/guides/hozy/penthouse-layout-guide",
               label: "Hozy Penthouse Layout Guide",
             },
             {
-              href: "/guides/hozy/hardest-levels-ranked/",
+              href: "/guides/hozy/hardest-levels-ranked",
               label: "Hozy Hardest Levels Ranked",
             },
             {
-              href: "/guides/hozy/cafe-layout-tips/",
+              href: "/guides/hozy/cafe-layout-tips",
               label: "Hozy Cafe Layout Tips",
             },
             {
-              href: "/guides/hozy/",
+              href: "/guides/hozy",
               label: "Hozy Guides",
             },
           ]}

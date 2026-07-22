@@ -5,7 +5,7 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import SupermarketChaosBeginnerGuideContent from "@/data/supermarket-chaos/beginner-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/supermarket-chaos/beginner-guide/`;
+const pageUrl = `${siteUrl}/supermarket-chaos/beginner-guide`;
 
 const imageUrls = [
   `${siteUrl}/images/supermarket-chaos/supermarket-chaos-section-labels-overview.webp`,
@@ -66,19 +66,19 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/supermarket-chaos/",
+    href: "/supermarket-chaos",
     label: "Supermarket Chaos Guide Hub",
   },
   {
-    href: "/supermarket-chaos/achievements-guide/",
+    href: "/supermarket-chaos/achievements-guide",
     label: "Supermarket Chaos Achievements Guide",
   },
   {
-    href: "/supermarket-chaos/best-upgrades-skills/",
+    href: "/supermarket-chaos/best-upgrades-skills",
     label: "Best Upgrades and Skills Guide",
   },
   {
-    href: "/supermarket-chaos/section-map-item-locations/",
+    href: "/supermarket-chaos/section-map-item-locations",
     label: "Section Map and Tricky Item Locations",
   },
 ];

@@ -70,19 +70,19 @@ label: "FAQ",
 
 const relatedLinks = [
 {
-href: "/frostpunk-2-breach-of-trust/",
+href: "/frostpunk-2-breach-of-trust",
 label: "Frostpunk 2 Breach of Trust Guide Hub",
 },
 {
-href: "/frostpunk-2-breach-of-trust/aurora-negotiation-fishery-hub-guide/",
+href: "/frostpunk-2-breach-of-trust/aurora-negotiation-fishery-hub-guide",
 label: "Aurora Negotiation and Fishery Hub Guide",
 },
 {
-href: "/frostpunk-2-breach-of-trust/conquer-aurora-war-route-guide/",
+href: "/frostpunk-2-breach-of-trust/conquer-aurora-war-route-guide",
 label: "Conquer Aurora War Route Guide",
 },
 {
-href: "/frostpunk-2-breach-of-trust/tremor-evacuation-guide/",
+href: "/frostpunk-2-breach-of-trust/tremor-evacuation-guide",
 label: "Tremor and Evacuation Guide",
 },
 ];

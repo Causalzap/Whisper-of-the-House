@@ -169,15 +169,15 @@ export default function Page() {
           ]}
           relatedLinks={[
             {
-              href: "/the-occultist/",
+              href: "/the-occultist",
               label: "The Occultist Guide Hub",
             },
             {
-              href: "/the-occultist/codex-lumina-fragments/",
+              href: "/the-occultist/codex-lumina-fragments",
               label: "Codex Lumina Fragments",
             },
             {
-              href: "/the-occultist/planetarium-star-moon-puzzle-solution/",
+              href: "/the-occultist/planetarium-star-moon-puzzle-solution",
               label: "Planetarium Star and Moon Puzzle Solution",
             },
           ]}

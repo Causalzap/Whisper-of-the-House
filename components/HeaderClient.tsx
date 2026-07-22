@@ -14,7 +14,7 @@ type HeaderClientProps = {
 
 const primaryNav = [
   { label: "Home", href: "/" },
-  { label: "All Guides", href: "/all-game-guides/" },
+  { label: "All Guides", href: "/all-game-guides" },
   { label: "About", href: "/about" },
 ];
 
@@ -26,7 +26,7 @@ const quickLinks = [
   },
   {
     label: "Guide Archive",
-    href: "/all-game-guides/",
+    href: "/all-game-guides",
     description: "Browse every game hub, guide collection, and archive entry.",
   },
   {
