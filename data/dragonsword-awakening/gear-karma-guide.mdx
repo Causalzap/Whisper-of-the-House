@@ -1,0 +1,743 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const upgradeStageColumns = [
+  { key: "stage", label: "Progress stage" },
+  { key: "gearGoal", label: "Gear goal" },
+  { key: "karmaGoal", label: "Karma goal" },
+  { key: "reforgeRule", label: "Reforge rule" },
+];
+
+export const upgradeStageRows = [
+  {
+    stage: "Early story",
+    gearGoal:
+      "Use story and dungeon drops, then complete the first useful two-piece effect.",
+    karmaGoal:
+      "Equip a Basic Karma that supports the active hero's current damage plan.",
+    reforgeRule:
+      "Skip reforging; the item is too likely to be replaced.",
+  },
+  {
+    stage: "Midgame",
+    gearGoal:
+      "Finish one useful three-piece core and fill the remaining slots with a second two-piece bonus.",
+    karmaGoal:
+      "Upgrade the matching Basic Karma used by the main damage dealer.",
+    reforgeRule:
+      "Reroll only a piece expected to stay in the core build.",
+  },
+  {
+    stage: "Endgame preparation",
+    gearGoal:
+      "Improve main stats and useful offensive substats without breaking the working set structure.",
+    karmaGoal:
+      "Add the core hero's Exclusive Karma when its character-specific effect changes the real rotation.",
+    reforgeRule:
+      "Set a Gold limit before rolling and accept a strong functional result.",
+  },
+  {
+    stage: "Second team",
+    gearGoal:
+      "Begin after the first team's field driver and important Signal partners are functional.",
+    karmaGoal:
+      "Use lower-investment Basic Karma until the second lineup earns long-term resources.",
+    reforgeRule:
+      "Do not take Gold away from unfinished core pieces on the first team.",
+  },
+];
+
+export const mainStatDecisionColumns = [
+  { key: "buildNeed", label: "What the build needs" },
+  { key: "mainStat", label: "Main-stat direction" },
+  { key: "check", label: "What I check before crafting" },
+];
+
+export const mainStatDecisionRows = [
+  {
+    buildNeed: "More consistent critical hits",
+    mainStat: "Critical Hit Chance",
+    check:
+      "The current Crit Chance is too low for existing Crit Damage to matter reliably.",
+  },
+  {
+    buildNeed: "Stronger critical hits",
+    mainStat: "Critical Damage",
+    check:
+      "The character already crits often enough for the larger multiplier to be useful.",
+  },
+  {
+    buildNeed: "Broad damage improvement",
+    mainStat: "Attack Power",
+    check:
+      "The kit benefits across the full rotation rather than only during one condition.",
+  },
+  {
+    buildNeed: "Condition-focused damage",
+    mainStat: "Matching condition damage",
+    check:
+      "The hero and team repeatedly create the listed condition during normal combat.",
+  },
+];
+
+export const reforgeDecisionColumns = [
+  { key: "category", label: "Decision" },
+  { key: "examples", label: "Examples" },
+  { key: "action", label: "What I do" },
+];
+
+export const reforgeDecisionRows = [
+  {
+    category: "Must keep",
+    examples:
+      "The main condition, Attack, Crit, or another stat central to the character's real damage.",
+    action:
+      "Keep the line and judge the remaining roll around it.",
+  },
+  {
+    category: "Acceptable",
+    examples:
+      "Defense Ignore, general Attack Power, or a secondary condition the team can still activate.",
+    action:
+      "Accept when the piece already has the core condition and enough useful offense.",
+  },
+  {
+    category: "Replace",
+    examples:
+      "An unrelated condition, defensive filler on a pure damage piece, or a stat the current team never uses.",
+    action:
+      "Reroll only when the item is a long-term piece and the cost still fits the budget.",
+  },
+];
+
+export const karmaComparisonColumns = [
+  { key: "feature", label: "Feature" },
+  { key: "basic", label: "Basic Karma" },
+  { key: "exclusive", label: "Exclusive Karma" },
+];
+
+export const karmaComparisonRows = [
+  {
+    feature: "Who can use it",
+    basic:
+      "A general condition or stat option that can bridge more than one build.",
+    exclusive:
+      "Character-specific and tied to that hero's own mechanic.",
+  },
+  {
+    feature: "Main source used here",
+    basic:
+      "World Boss reward pools; the actual reward remains random.",
+    exclusive:
+      "Hero Log reward, Tower of Trials exchange currency, or exchange value recovered from dismantling.",
+  },
+  {
+    feature: "Early role",
+    basic:
+      "Makes the core hero functional before the long-term character item is available.",
+    exclusive:
+      "Usually delayed until the first team and the hero's gear direction are stable.",
+  },
+  {
+    feature: "Duplicate or unwanted item",
+    basic:
+      "Duplicates can support ascension, so I invest only in the option equipped by the core team.",
+    exclusive:
+      "An unwanted item can be dismantled after checking the return preview and equipment status.",
+  },
+  {
+    feature: "When I invest deeply",
+    basic:
+      "When the effect matches the build and the Exclusive Karma is not immediately obtainable.",
+    exclusive:
+      "When the effect changes a skill or mechanic used in the normal rotation.",
+  },
+];
+
+export const testedBuildColumns = [
+  { key: "hero", label: "Tested hero" },
+  { key: "gearDirection", label: "Gear direction" },
+  { key: "statDirection", label: "Useful stat direction" },
+  { key: "karmaDirection", label: "Karma direction" },
+];
+
+export const testedBuildRows = [
+  {
+    hero: "Charlotte",
+    gearDirection:
+      "A Poison-oriented three-piece core plus a useful two-piece bonus.",
+    statDirection:
+      "Crit Chance for consistency, then Crit Damage and Attack where the current pieces support them.",
+    karmaDirection:
+      "Poison Basic Karma as a bridge; her Exclusive Karma becomes valuable when I use its clone-detonation effect.",
+  },
+  {
+    hero: "Reina",
+    gearDirection:
+      "Three Azure Gale pieces plus a second two-piece bonus used by the current team.",
+    statDirection:
+      "Airborne Additional Damage, Crit Damage, Attack, and Defense Ignore in the tested damage setup.",
+    karmaDirection:
+      "An Airborne-focused Basic Karma while the character-specific long-term option is still unavailable.",
+  },
+];
+
+export const resourceSourceColumns = [
+  { key: "need", label: "Current need" },
+  { key: "source", label: "Source I check" },
+  { key: "decision", label: "Why I run it" },
+];
+
+export const resourceSourceRows = [
+  {
+    need: "Gold",
+    source: "Regional Missions",
+    decision:
+      "One visible mission reward provides 50,000 Gold, enough to fund crafting or one shown late reforge.",
+  },
+  {
+    need: "Forging Mold",
+    source: "Regional Mission reward list",
+    decision:
+      "Use it when selecting a main stat for a core equipment craft.",
+  },
+  {
+    need: "Skill materials",
+    source: "Regional Mission secondary rewards",
+    decision:
+      "Choose the mission whose reward completes the next skill breakpoint.",
+  },
+  {
+    need: "Basic Karma",
+    source: "World Boss reward pool",
+    decision:
+      "Target a pool containing the condition used by the main hero, while treating the drop as random.",
+  },
+  {
+    need: "Exclusive Karma",
+    source: "Hero Logs, Tower currency, and dismantle exchange value",
+    decision:
+      "Complete the character-specific build after the first team is fixed.",
+  },
+  {
+    need: "Missing crafting material",
+    source: "Mission Medal Exchange",
+    decision:
+      "Buy only the material that completes the next useful upgrade.",
+  },
+];
+
+DragonSword Awakening gives me several ways to improve one character at once: gear
+level, set bonuses, selected main stats, reforged substats, Basic Karma, Exclusive
+Karma, and skills. The expensive mistake is treating every system as an equal
+priority.
+
+I finish one functional damage package first. That means a useful set structure, a
+main stat that supports the real rotation, a matching Basic Karma, and enough skill
+investment to clear the next activity. Reforging and Exclusive Karma come later,
+after I know the item and hero will remain in the core team.
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Quick answer:</strong>{" "}
+  Read the listed set tiers before crafting, use a three-piece core plus a useful
+  two-piece bonus when the panel stops at three, visibly apply the intended main
+  stat, and reserve Forging Molds for equipment I expect to keep. Use a matching
+  Basic Karma first, reforge only long-term pieces, and exchange for Exclusive Karma
+  after the first team is stable.
+</div>
+
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-slate-900">English PC launch-build note.</strong>{" "}
+  The set effects, crafting costs, stat snapshot, mission rewards, and Karma routes
+  below come from the English interface used for this guide. I check the current
+  in-game panel before spending because balance values and reward pools can change.
+</div>
+
+<h2 id="upgrade-path">
+  Gear and Karma upgrade path by progression stage
+</h2>
+
+<GuideTable
+  caption="The spending rule changes as equipment becomes less temporary. Early gear only needs to work; endgame gear must justify its Gold and character-specific resources."
+  columns={upgradeStageColumns}
+  rows={upgradeStageRows}
+/>
+
+Before spending, I answer four questions:
+
+1. Which hero is dealing most of the damage?
+2. What condition does that hero create during the normal rotation?
+3. Which listed set tier supports that plan?
+4. Will this item remain equipped long enough to justify a main-stat resource or
+   reforge?
+
+The first complete build belongs to the field driver. Secondary heroes need enough
+gear and Karma to survive their entries, but equal investment across three
+characters delays the first working damage setup.
+
+For the role and investment order of the tested teams, use the{" "}
+<Link
+  href="/dragonsword-awakening/best-team-comps"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  DragonSword Awakening team comps guide
+</Link>
+.
+
+<h2 id="gear-set-tiers">
+  Read gear set tiers before crafting five matching pieces
+</h2>
+
+The Azure Gale Top is the clearest complete set example in the current build data.
+
+Its panel shows:
+
+- **2 Set:** Airborne Additional Damage **+15%**
+- **3 Set:** Attack Power **+10% for 8 seconds** after using an Active Skill
+
+The same screen shows **5,000 Gold** for the chest craft and three material
+requirements with counts of **2, 3, and 3**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-azure-gale-top-set-effect.webp"
+    alt="DragonSword Awakening Azure Gale Top showing the two-piece and three-piece effects and a 5000 Gold crafting cost"
+    width={412}
+    height={455}
+    className="mx-auto h-auto w-full max-w-xl rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Azure Gale lists a two-piece Airborne bonus and a three-piece Attack Power
+    effect. The panel does not show another set tier at four or five pieces.
+  </figcaption>
+</figure>
+
+When the displayed bonuses stop at three pieces, I use a **3+2 setup**:
+
+- three pieces from the main set to activate its final listed tier;
+- two pieces from another set with a bonus the character or team can trigger.
+
+Five matching pieces can still have individually useful stats, but they do not create
+an extra set tier when the panel lists no four-piece or five-piece effect.
+
+The second set follows the actual combat loop. An Airborne bonus is valuable when the
+character repeatedly launches or fights in the air. A Stun or Poison bonus is poor
+when the current lineup rarely creates that state.
+
+### When I craft and when I wait
+
+I craft when the new item completes a useful set tier, supports the core hero's real
+condition, and will survive the next part of progression.
+
+I wait when:
+
+- the next story section is replacing gear quickly;
+- the materials only produce one isolated piece;
+- the set effect does not match the current team;
+- or the recipe is new but does not solve the current damage or survival problem.
+
+One higher-rarity item can still be a downgrade when equipping it breaks a working
+set effect.
+
+<h2 id="main-stats-forging-molds">
+  Main stats and how Forging Molds work
+</h2>
+
+A Forging Mold is used while crafting equipment to select the intended main stat. Its
+tooltip states that it is destroyed after use, so I treat every Mold as a one-use
+decision and reserve it for a core piece rather than temporary story gear.
+
+Regional Mission rewards are one source I check for Forging Molds.
+
+### Apply the selected main stat before confirming
+
+On controller, opening the stat list is not the same as applying the selection.
+
+My sequence is:
+
+1. open the Blacksmith and highlight the equipment;
+2. use the displayed selection input to open the main-stat menu;
+3. highlight the intended stat;
+4. press the selection input again;
+5. verify that the stat remains visibly selected;
+6. confirm the craft only after that state is shown.
+
+### Which main stat I choose
+
+<GuideTable
+  caption="I choose the stat that fixes the current build rather than using one universal priority for every hero."
+  columns={mainStatDecisionColumns}
+  rows={mainStatDecisionRows}
+/>
+
+I also inspect the value shown for the equipment slot. In the tested crafting
+preview, the chest displayed a larger Critical Damage value than smaller slots such
+as gloves or headgear.
+
+That is an observed comparison, not a complete slot database. I use the value in the
+current preview before consuming the Mold instead of assuming the same stat has the
+same strength on every slot.
+
+<h2 id="reforging">
+  How I reforge and when I stop
+</h2>
+
+Reforging becomes expensive because one useful line makes the next roll feel
+tempting. I define the acceptable result before pressing the button.
+
+<GuideTable
+  caption="A reforge is successful when the piece fits the real build at an acceptable cost, not only when every line looks offensive."
+  columns={reforgeDecisionColumns}
+  rows={reforgeDecisionRows}
+/>
+
+For the tested Airborne setup, useful lines include Airborne Additional Damage,
+Critical Damage, Attack, and Defense Ignore. Burn, Bleed, Frost, or Stun are not
+automatically valuable when the hero and team do not use them.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-reforge-50000-gold-cost.webp"
+    alt="DragonSword Awakening reforge screen showing a 50000 Gold reroll cost"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The shown reforge costs 50,000 Gold. I reserve this price for a long-term piece
+    whose missing line materially changes the build.
+  </figcaption>
+</figure>
+
+One shown reroll costs **50,000 Gold**, compared with **5,000 Gold** for the shown
+Azure Gale Top craft. That creates a useful budget comparison: one late reroll can
+equal ten copies of the demonstrated craft cost.
+
+My stop rule is:
+
+> Keep a long-term piece when it already has the main condition plus two useful
+> offensive lines.
+
+A functional Airborne piece with Airborne Additional Damage, Critical Damage, and
+Defense Ignore is more useful to that build than a higher-looking total filled with
+conditions it never activates.
+
+I skip the roll when the item is temporary, outside the intended 3+2 structure, or
+already good enough to clear the next activity.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="verify-build">
+  Verify the build on the character panel and in one repeatable fight
+</h2>
+
+Set effects and reforge lines can look good separately. I check the character panel
+after a meaningful group of changes, then test the same enemy or activity.
+
+One Level 70 Charlotte snapshot shows:
+
+- Attack: **1,360**
+- Defense: **394**
+- Max HP: **9,184**
+- Critical Hit Chance: **39.20%**
+- Critical Damage: **81.80%**
+- Max Stamina: **240**
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-charlotte-level-70-stats.webp"
+    alt="DragonSword Awakening Level 70 Charlotte stats showing 1360 Attack and 39.20 percent Critical Hit Chance"
+    width={725}
+    height={498}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    This is a finished-build snapshot used to audit changes, not a universal target
+    that every Charlotte must reach.
+  </figcaption>
+</figure>
+
+The numbers help me ask better questions:
+
+- Did Critical Damage rise without enough Critical Hit Chance to make it consistent?
+- Did Attack rise while a useful set effect stopped activating?
+- Did defensive stats replace too many offensive lines on a field driver?
+- Does the same enemy now require fewer complete rotations?
+
+I compare the same encounter before and after the change. Different enemies,
+difficulty levels, and arena conditions make raw panel comparisons less useful.
+
+<h2 id="karma-comparison">
+  Basic Karma vs Exclusive Karma
+</h2>
+
+<GuideTable
+  caption="Basic Karma is the bridge into a working build. Exclusive Karma becomes the long-term choice when its character-specific effect matters to the normal rotation."
+  columns={karmaComparisonColumns}
+  rows={karmaComparisonRows}
+/>
+
+The important decision is not simply which item has the rarer name. It is whether the
+effect supports the hero currently receiving field time and resources.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="basic-karma">
+  How I choose and farm Basic Karma
+</h2>
+
+I equip a Basic Karma that supports the hero's repeated condition or broad damage
+plan.
+
+Examples from the tested builds are:
+
+- Poison support for Charlotte;
+- Airborne support for Reina;
+- general Crit or offensive support when the build has not settled on one reliable
+  condition.
+
+World Bosses can reward Basic Karma. I inspect the displayed reward pool and choose
+the boss that can drop the condition I need, but the actual result remains random.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-world-boss-basic-karma-drop.webp"
+    alt="DragonSword Awakening World Boss reward showing a Basic Karma for the targeted damage condition"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    I choose the World Boss by its visible Karma pool. A matching drop is possible,
+    not guaranteed.
+  </figcaption>
+</figure>
+
+The demonstrated World Boss is Level 80 because the displayed level reflects the
+current Mercenary progression. I check the level in my own menu rather than treating
+that example as a fixed entry requirement.
+
+Duplicate Basic Karma can support ascension. I deepen the investment when:
+
+- the Karma is equipped by a core hero;
+- its effect matches the build;
+- and the long-term Exclusive Karma is not immediately available.
+
+A temporary bridge only needs enough investment to keep progression moving.
+
+<h2 id="exclusive-karma">
+  Exclusive Karma, Hero Logs, Tower exchange, and dismantling
+</h2>
+
+Exclusive Karma can add a character-specific mechanic rather than only a general
+stat bonus. Charlotte's option, for example, enables the clone-detonation interaction
+used in her build.
+
+The routes shown in the source material are:
+
+- complete an available Hero Log that directly rewards that hero's Exclusive Karma;
+- earn exchange currency through Tower of Trials;
+- dismantle an unwanted Exclusive Karma and use the returned value toward another
+  character.
+
+I spend the exchange currency after confirming:
+
+1. the hero remains in the first three-character team;
+2. the exclusive effect changes a skill or mechanic used in combat;
+3. the hero already has functional gear;
+4. and the team direction is unlikely to change immediately.
+
+### Dismantle only after checking the preview
+
+An unused Exclusive Karma can be converted into exchange value, but the original item
+is consumed.
+
+Before confirming, I verify that:
+
+- the item is not equipped;
+- it is not needed for an immediate ascension;
+- and the preview shows the return I expect.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-exclusive-karma-dismantle-exchange.webp"
+    alt="DragonSword Awakening dismantle preview converting an unwanted Exclusive Karma into exchange value"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The dismantle preview shows the exchange return before the original Exclusive
+    Karma is consumed.
+  </figcaption>
+</figure>
+
+Hero Logs are particularly useful when the relevant quest is available and Tower of
+Trials is not yet comfortable. They can provide the character-specific reward
+directly instead of requiring the full exchange route.
+
+<h2 id="tested-build-directions">
+  Tested character build directions
+</h2>
+
+<GuideTable
+  caption="These are focused examples from the builds used in the source material, not a ranking of every hero or every gear set."
+  columns={testedBuildColumns}
+  rows={testedBuildRows}
+/>
+
+For characters not listed here, I repeat the same method:
+
+1. identify the condition created in the normal rotation;
+2. read every listed set tier;
+3. choose one three-piece core and one useful two-piece effect;
+4. correct the most important main-stat weakness;
+5. equip a Basic Karma that supports the same plan;
+6. pursue the Exclusive Karma only when its unique mechanic matters.
+
+This avoids pretending that one Crit, Airborne, Poison, or Attack template fits every
+hero.
+
+<h2 id="resource-route">
+  Gold, Forging Mold, Karma, and material sources
+</h2>
+
+<GuideTable
+  caption="I farm the reward that fixes the current bottleneck instead of clearing every available activity."
+  columns={resourceSourceColumns}
+  rows={resourceSourceRows}
+/>
+
+The Regional Mission screen shows a daily reset at **9:00 AM**, but the English panel
+used here does not identify the time zone. I use the in-game countdown or observe the
+reset before planning around a real-world clock.
+
+The visible Sudden Mission examples show **300 EXP** and different secondary rewards,
+including skill materials, a Forging Mold source, and one mission with **50,000
+Gold**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-regional-boss-rewards.webp"
+    alt="DragonSword Awakening Regional Mission screen showing a daily 9 AM reset and a visible 50000 Gold reward"
+    width={917}
+    height={522}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    I read the secondary reward before entering. The best mission is the one that
+    completes the next upgrade, not necessarily the hardest available fight.
+  </figcaption>
+</figure>
+
+My compact daily order is:
+
+1. Regional Mission reward that fixes the current Gold, Mold, or skill-material
+   bottleneck;
+2. World Boss whose displayed pool contains a useful Basic Karma;
+3. available Hero Log for a core-team character;
+4. story or dungeon progression when the current activity is inefficient.
+
+I leave a farming activity when one failed dodge removes most of a hero's health, the
+boss survives every full rotation with little progress, or the reward does not solve
+the current build problem.
+
+<h2 id="medal-exchange">
+  Use Mission Medal Exchange as a gap closer
+</h2>
+
+Mission medals can purchase crafting and skill materials. I use the shop to finish a
+specific upgrade rather than trying to empty it.
+
+A purchase is worthwhile when it:
+
+- completes the next useful set tier;
+- supplies the missing material for a planned main-stat craft;
+- reaches an important skill breakpoint;
+- or helps the core hero enter the next activity cleanly.
+
+Buying stacks of every material in advance can trap currency in a character or set I
+later abandon. The shop works best after I know the exact missing item.
+
+<h2 id="mistakes">
+  Gear and Karma mistakes that cost the most
+</h2>
+
+<div className="my-6 rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-amber-900">The five mistakes I avoid:</strong>
+  <ul className="mt-3 list-disc space-y-2 pl-5 marker:text-amber-500">
+    <li>
+      Crafting five matching pieces without checking whether the listed bonus tiers
+      stop at three.
+    </li>
+    <li>
+      Confirming a craft before the intended main stat is visibly applied.
+    </li>
+    <li>
+      Spending a Forging Mold or expensive reforge on temporary story equipment.
+    </li>
+    <li>
+      Enhancing every Basic Karma drop instead of the option used by the core team.
+    </li>
+    <li>
+      Spending Exclusive Karma currency before choosing the first long-term team.
+    </li>
+  </ul>
+</div>
+
+<h2 id="faq">
+  DragonSword Awakening gear and Karma FAQ
+</h2>
+
+### Is a five-piece set always better than a 3+2 setup?
+
+No. Read the listed tiers. Azure Gale shows effects at two and three pieces, so the
+fourth and fifth pieces do not unlock another tier on that panel. A useful second
+two-piece bonus can provide more value.
+
+### What does the Azure Gale set do?
+
+Two pieces give **Airborne Additional Damage +15%**. Three pieces give **Attack Power
++10% for 8 seconds** after an Active Skill.
+
+### How much does the Azure Gale Top cost to craft?
+
+The visible example costs **5,000 Gold** and shows three material requirements with
+counts of **2, 3, and 3**. Check the current Blacksmith panel before spending in case
+a later patch changes the recipe.
+
+### Is a Forging Mold consumed?
+
+Yes. The tooltip used for this guide states that the Forging Mold is destroyed after
+use. Reserve it for a main-stat craft expected to stay in the build.
+
+### When is a 50,000 Gold reforge worth it?
+
+When the equipment is a long-term core piece and the missing line materially changes
+the build. Stop when the piece already has its main condition plus two useful
+offensive lines.
+
+### Should I upgrade Basic Karma or wait for Exclusive Karma?
+
+Upgrade the matching Basic Karma when it belongs to the core hero and the Exclusive
+option is not immediately obtainable. Keep the investment lower when it is only a
+short-term bridge.
+
+### Can I target a specific Basic Karma from a World Boss?
+
+You can choose a boss whose displayed reward pool contains the condition you want,
+but the actual reward is random.
+
+### Should I dismantle an unwanted Exclusive Karma?
+
+Check whether it is equipped or needed for ascension, then inspect the return preview.
+Dismantling is useful when the recovered value advances an Exclusive Karma for a hero
+you actually use.
+
+### Does the Regional Mission reset use local or server time?
+
+The shown English panel says **“Resets daily at 9:00 AM”** without identifying the
+time zone. Use the in-game countdown or observe one reset before setting a fixed
+schedule.

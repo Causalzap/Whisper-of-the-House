@@ -1,0 +1,1024 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const chapterOverviewColumns = [
+  { key: "chapter", label: "Chapter" },
+  { key: "route", label: "Main route" },
+  { key: "blocker", label: "Common blocker" },
+  { key: "fix", label: "Direct fix" },
+];
+
+export const chapterOverviewRows = [
+  {
+    chapter: "1",
+    route:
+      "Reach Orbis, join Johnny's group, unlock the first Familiar, and finish the first Guild loop.",
+    blocker: "The Goblin treasure cave appears to have no entrance.",
+    fix: "Shoot the explosive barrels beside the rock blocking the cave.",
+  },
+  {
+    chapter: "2",
+    route:
+      "Recover Alboin's large gear-shaped part and reactivate the ancient device.",
+    blocker: "The device still looks inactive after the gear is returned.",
+    fix: "Stay beside the machine and use the additional control.",
+  },
+  {
+    chapter: "3",
+    route:
+      "Enter the Dragon Cult altar, recover the worship object, and finish the funeral errands.",
+    blocker: "The objective teleports the party deeper into the ruin.",
+    fix: "Treat the teleport as scripted and continue through the progressing corridor.",
+  },
+  {
+    chapter: "4",
+    route:
+      "Receive Bardok's note, restore the Barrier Stone route, and report north.",
+    blocker: "The restoration sounds like a material-farming objective.",
+    fix: "Follow the prepared story interaction; the required setup is already in place.",
+  },
+  {
+    chapter: "5",
+    route:
+      "Track the golem route, cross the fog, investigate the Rock Tribe, rescue Reina, and defend the fortress.",
+    blocker: "The road ends while the objective remains beyond the obstruction.",
+    fix: "Climb the cliff beside the blocked road and continue from the higher route.",
+  },
+  {
+    chapter: "6",
+    route:
+      "Deliver Ewald's letter, follow the Ropi meeting route, and clear the mural-door ruin.",
+    blocker: "The inner ruin door has no visible exterior switch.",
+    fix: "Use the earlier mural as the visual key and reproduce its arrangement.",
+  },
+  {
+    chapter: "7",
+    route:
+      "Gather True Dragon intelligence, attend the briefing, and prepare the operation.",
+    blocker: "The story appears to stall while the party looks for Alboin.",
+    fix: "Go to the palace when the meeting begins; Alboin appears in the briefing sequence.",
+  },
+  {
+    chapter: "8",
+    route:
+      "Find the Dragon nest, take the egg, pursue the Worm, and complete the Ursula operation.",
+    blocker: "The egg is lost and Ursula repeatedly leaves the current area.",
+    fix: "Follow every changed objective instead of returning to the previous nest or arena.",
+  },
+];
+
+export const chapterCheckpointColumns = [
+  { key: "chapter", label: "Chapter" },
+  { key: "checkpoint", label: "Fight or puzzle checkpoint" },
+  { key: "response", label: "What I do" },
+  { key: "success", label: "Progress signal" },
+];
+
+export const chapterCheckpointRows = [
+  {
+    chapter: "1",
+    checkpoint: "Goblin camp and blocked cave",
+    response:
+      "Finish the camp, heal if needed, then detonate the barrels before entering the cave.",
+    success: "The cave is cleared and the route returns to Orbis.",
+  },
+  {
+    chapter: "2",
+    checkpoint: "Ancient device",
+    response:
+      "Recover the gear, install it, and remain at the machine for the second interaction.",
+    success: "The mechanism visibly starts operating.",
+  },
+  {
+    chapter: "3",
+    checkpoint: "Dragon Cult altar teleport",
+    response:
+      "Continue deeper after the teleport instead of searching for the original pickup room.",
+    success: "The party exits through the story route.",
+  },
+  {
+    chapter: "4",
+    checkpoint: "Barrier Stone and fortress arrival",
+    response:
+      "Use Bardok's prepared restoration route, then clear the active fortress attack.",
+    success: "The objective changes to the northern investigation.",
+  },
+  {
+    chapter: "5",
+    checkpoint: "Fog cliff, Rock Tribe, Reina rescue, fortress defense",
+    response:
+      "Use the cliff, finish each active combat state, and clear the enemies around Reina.",
+    success: "Reina orders an immediate return and the fortress defense begins.",
+  },
+  {
+    chapter: "6",
+    checkpoint: "Ropi route and mural door",
+    response:
+      "Follow the scripted meeting sequence, then copy the earlier mural in the later room.",
+    success: "The inner ruin door opens.",
+  },
+  {
+    chapter: "7",
+    checkpoint: "Palace briefing and lightning-crystal test",
+    response:
+      "Attend the meeting, follow the research explanation, and complete the operation preparation.",
+    success: "The groups receive their Chapter 8 roles.",
+  },
+  {
+    chapter: "8",
+    checkpoint: "Worm pursuit, trap operation, Lv.70 Ursula",
+    response:
+      "Follow every relocated marker, preserve one working team, and continue after both retreats.",
+    success: "Eona's Legacy fires and the story returns to Orbis.",
+  },
+];
+
+DragonSword Awakening has eight main-story chapters, but the hardest progression
+problems are rarely ordinary damage checks. I am more often blocked by a route that
+looks closed, an objective that moves to another map level, or a scripted failure
+that looks like a broken quest.
+
+This walkthrough follows the Chapter 1–8 main route and focuses on those decisions:
+where I go next, which combat state must be finished before the marker advances, and
+when an apparent failure is actually the intended story route.
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Quick route answer:</strong>{" "}
+  The main physical blockers are the explosive barrels beside the Chapter 1 cave,
+  the additional control on the Chapter 2 device, the cliff beside the Chapter 5 fog
+  road, and the earlier mural used as the Chapter 6 door key. In Chapter 8, keep
+  following the relocated objective after the egg is lost or Ursula leaves the arena.
+</div>
+
+<div className="my-6 rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-amber-900">Full story spoilers.</strong>{" "}
+  This route names major Chapter 1–8 events, the Six Heroes, Ropi, the Dragon Egg
+  plan, Ursula, Eona's Legacy, and the ending sequence. Stop at the chapter you are
+  currently playing when you only need the next objective.
+</div>
+
+<h2 id="chapter-overview">
+  DragonSword Awakening Chapter 1–8 route at a glance
+</h2>
+
+<GuideTable
+  caption="Use this table to find the chapter where the objective stopped making sense."
+  columns={chapterOverviewColumns}
+  rows={chapterOverviewRows}
+/>
+
+These chapter labels describe the main route. They do not mean that every optional
+chest, Hero Log, or side request must be completed before the story can continue.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="before-starting">
+  Before starting the full walkthrough
+</h2>
+
+I keep one three-character team functional instead of stopping after every mission to
+perfect the entire roster.
+
+I return to Orbis for upgrades when:
+
+- normal enemies survive several complete team rotations;
+- one ordinary boss hit removes most of the active hero's health;
+- teammate Signal inputs rarely appear because the lineup does not create matching
+  conditions;
+- or a newly unlocked system directly fixes the current bottleneck.
+
+For early systems, character investment, and daily priorities, use the{" "}
+<Link
+  href="/dragonsword-awakening/beginner-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  DragonSword Awakening beginner guide
+</Link>
+.
+
+For set bonuses, main stats, Forging Molds, reforging, and Karma, use the{" "}
+<Link
+  href="/dragonsword-awakening/gear-karma-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  gear and Karma guide
+</Link>
+.
+
+### Route-adjacent loot vs later cleanup
+
+I take visible chests and short detours that sit beside the active route. I leave
+underwater paths, Moon Key chests, and ledges that clearly require a later Familiar
+or movement ability.
+
+Repeatedly circling a movement-gated object usually wastes more time than returning
+after the related system opens.
+
+### Chapter completion checkpoints
+
+<GuideTable
+  caption="Each chapter needs one clear completion signal. Finish the active combat or interaction before assuming the marker is broken."
+  columns={chapterCheckpointColumns}
+  rows={chapterCheckpointRows}
+/>
+
+<h2 id="chapter-1">
+  Chapter 1: Reach Orbis, join the Guild, and open the Goblin cave
+</h2>
+
+**Starting route:** Follow Castella through the opening escape and reach Orbis.
+
+**Main blocker:** The Goblin treasure cave below Elli's hill looks sealed.
+
+**Chapter completion signal:** The first Guild loop and cave are finished, and the
+party returns to Orbis.
+
+### Reach Orbis and join Johnny's mercenary group
+
+The opening path is mostly linear. I follow Castella, clear the enemies blocking the
+escape route, and continue toward Orbis.
+
+After the city meetings, Lute joins Johnny, Castella, and Aria. The story group now
+contains four people, but the active combat party still uses three heroes.
+
+I continue into the Mercenary Guild route before investing in a second complete
+team.
+
+### Accept both early Guild requests before leaving
+
+At the Guild Office, I accept the lunch delivery and lost-sheep requests together.
+They share the same outward route.
+
+My order is:
+
+1. accept both requests;
+2. unlock and summon the first Familiar;
+3. deliver the lunch;
+4. continue to Elli's farm above the large-tree hill;
+5. speak with Elli and recover the sheep;
+6. clear the Goblin camp when the request expands;
+7. open the treasure cave below the hill;
+8. return to Orbis after the cave encounter.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-first-familiar-unlock.webp"
+    alt="DragonSword Awakening unlocking the first Familiar before leaving Orbis on the Chapter 1 Guild route"
+    width={466}
+    height={194}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    I summon the first Familiar before the lunch and farm route. Completing both
+    requests in one loop avoids an unnecessary walk back from Elli's hill.
+  </figcaption>
+</figure>
+
+### Find the sheep before returning to the Guild
+
+After delivering the lunch, I continue to the farm. Elli waits near the upper route
+around the large-tree hill.
+
+I speak with her first, follow the nearby search path, and bring the sheep back. The
+request then expands into the Goblin camp objective.
+
+Finish that extension while already outside Orbis. Returning immediately after the
+sheep only creates another trip through the same area.
+
+### Blow open the Goblin treasure cave
+
+After the camp, Elli points toward the cave below the hill. A large rock covers the
+entrance.
+
+The solution is beside the rock:
+
+1. face the blocked entrance;
+2. locate the explosive barrels beside it;
+3. create enough distance to avoid the blast;
+4. shoot the barrels;
+5. enter after the rock breaks.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-goblin-treasure-cave-explosive-crate.webp"
+    alt="DragonSword Awakening explosive barrels beside the rock blocking the Chapter 1 Goblin treasure cave"
+    width={592}
+    height={525}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The rock is the cave entrance. The barrels beside it are the intended route, not
+    an optional combat prop.
+  </figcaption>
+</figure>
+
+The cave contains another encounter. Heal before entering when the Goblin camp left
+the active party low.
+
+<h2 id="chapter-2">
+  Chapter 2: Recover Alboin's gear and activate the ancient device
+</h2>
+
+**Starting route:** Meet Alboin beside the partially disassembled device.
+
+**Main blocker:** Returning the large gear does not immediately activate the
+mechanism.
+
+**Chapter completion signal:** The ancient device visibly begins operating.
+
+Alboin explains that he dismantled part of the ancient machine while studying it and
+that Goblins stole a component shaped like a large gear.
+
+### Follow the Goblins away from the device
+
+The missing part is not hidden around the machine.
+
+My route is:
+
+1. speak with Alboin;
+2. follow the direction the Goblins escaped;
+3. clear the groups blocking the path;
+4. recover the large gear-shaped component;
+5. return to Alboin;
+6. install the component;
+7. remain beside the machine for the remaining interaction.
+
+### Use the additional control after returning the gear
+
+The first restored state can look incomplete. Leaving at this point makes the
+objective appear bugged.
+
+Stay in the device area and interact with the additional control. The successful
+state is not merely the gear sitting in place; the mechanism itself starts moving.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-ancient-device-activated.webp"
+    alt="DragonSword Awakening Chapter 2 ancient device moving after the recovered gear and additional control are used"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The installed gear is only the first step. I stay beside the device until the
+    second interaction makes the mechanism visibly operate.
+  </figcaption>
+</figure>
+
+Return to Orbis here when the Goblin route exposed a clear damage or survival
+problem. Chapter 3 contains a longer interior route.
+
+<h2 id="chapter-3">
+  Chapter 3: Enter the Dragon Cult altar and continue after the teleport
+</h2>
+
+**Starting route:** Return to the Organa Order and accept the altar retrieval
+objective connected to Isera's funeral.
+
+**Main blocker:** The worship object triggers a forced teleport instead of completing
+the retrieval.
+
+**Chapter completion signal:** The party escapes the altar and completes the funeral
+and faction-letter sequence.
+
+The Order sends the party to a discovered Dragon Cult altar to retrieve a worship
+object. The recovered Dragon Dust is intended for the funeral preparations.
+
+### Treat the teleport as part of the altar
+
+The confusing moment occurs when the party reaches the apparent objective. Touching
+it triggers a trap and moves everyone deeper into the ruin.
+
+The new area is not a separate open-world destination, and the route has not failed.
+
+After the teleport:
+
+1. confirm the party is still inside the Dragon Cult architecture;
+2. use the statues, altar walls, and corridors to orient the route;
+3. follow the only path that continues deeper;
+4. clear the enemies blocking the interior;
+5. finish the real retrieval and exit through the story route.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-dragon-cult-teleport-trap.webp"
+    alt="DragonSword Awakening party teleported deeper into the Chapter 3 Dragon Cult altar"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The teleport is scripted. The next route is deeper inside the altar rather than
+    back toward the original pickup room.
+  </figcaption>
+</figure>
+
+### Finish the funeral and faction-letter loop
+
+After returning, the Order continues the funeral preparations. The party then
+delivers letters explaining the Order's intentions to the other major factions,
+including the royal side and Amber merchants.
+
+Complete these deliveries before repeatedly checking the Mercenary Guild for another
+normal job. The next progression comes from the faction conversations and story
+summons.
+
+<h2 id="chapter-4">
+  Chapter 4: Bardok's note, the Barrier Stone, and the northern fortress
+</h2>
+
+**Starting route:** Wake in the village and speak with Karina.
+
+**Main blocker:** The Barrier Stone route sounds like a material-gathering problem,
+but the preparation is already complete.
+
+**Chapter completion signal:** The restoration is reported to Ewald and the story
+assigns the northern fortress route.
+
+### Go to the hill behind the village
+
+Karina explains that a hooded person moved the party to safety and asked them to come
+to the hill behind the village.
+
+Follow that instruction immediately after the opening conversations.
+
+At the hill, the party receives:
+
+- Bardok's note;
+- the method for restoring the Barrier Stone;
+- and confirmation that the required preparation has already been left in place.
+
+This is not a request to farm a new crafting ingredient.
+
+### Complete the prepared Barrier Stone route
+
+The reliable order is:
+
+1. wake and speak with Karina;
+2. go to the hill behind the village;
+3. receive Bardok's note and restoration instructions;
+4. follow the active marker through the prepared route;
+5. clear enemies blocking the story interaction;
+6. use the available Barrier Stone interaction;
+7. return to Ewald when the objective changes.
+
+The story—not an inventory checklist—confirms completion by moving the party back to
+the royal report and the northern assignment.
+
+The source material confirms this sequence but does not preserve a reliable English
+client label for every interaction. I therefore do not invent an exact quest title
+or button prompt.
+
+### Resolve the fortress attack before searching for the contact
+
+The northern visit begins as information gathering, but the fortress comes under
+attack as the party arrives.
+
+Finish the active attackers first. Running past the battle toward the earlier marker
+leaves the defense state unresolved.
+
+After the immediate threat is cleared, resume the conversations and investigation
+that lead into Chapter 5.
+
+<h2 id="chapter-5">
+  Chapter 5: Golem trail, fog cliff, Rock Tribe, Reina rescue, and fortress defense
+</h2>
+
+**Starting route:** Join the northern investigation after the fortress report.
+
+**Main blocker:** The apparent road is deliberately blocked while the objective
+remains on the other side.
+
+**Chapter completion signal:** Reina returns to the fortress and the defense sequence
+reaches its immediate aftermath.
+
+### Inspect the attacked cart and follow the golem trail
+
+The party follows tracks through the fog and finds an attacked research or scout
+route. A survivor explains that Dragon Cultists are attempting to wake and move a
+golem toward the fortress.
+
+The key sequence is:
+
+1. follow the cart or dragged-object tracks;
+2. inspect the attacked site;
+3. speak with the survivor;
+4. secure the survivor as the story directs;
+5. pursue the cultist and golem route immediately.
+
+The blocked path that follows is part of the ambush route.
+
+### Climb beside the blocked fog road
+
+At the obstruction, the marker remains beyond the road. The route is vertical.
+
+1. stop at the blocked road;
+2. look beside the obstruction;
+3. use the climbable cliff;
+4. continue across the upper path;
+5. drop back toward the cultist route after passing the blockage.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-northern-fog-blocked-road-cliff.webp"
+    alt="DragonSword Awakening climbable cliff beside the blocked Chapter 5 northern fog road"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The marker is correct, but the road is not. I climb beside the obstruction and
+    continue from the higher level.
+  </figcaption>
+</figure>
+
+Aggressive Ents and cultist groups occupy the route. Clear the enemies directly
+blocking the climb instead of searching the entire fog forest for another road.
+
+### Continue deeper when the golem has not moved
+
+After catching the cultists, the party checks for movement traces. When the golem has
+not yet left, search farther inside rather than returning to the fortress.
+
+The objective shifts toward the original golem area and the Rock Tribe
+investigation.
+
+### Infiltrate the Rock Tribe while Reina creates the distraction
+
+The knights draw the Orcs' attention while the party enters to gather information.
+
+Finish the infiltration state before returning:
+
+- clear the groups assigned to the infiltration route;
+- inspect the prepared weapons and supplies;
+- defeat the high-ranking Rock Tribe warrior blocking the escape;
+- finish the conversation confirming what the Orcs are preparing.
+
+Leaving after the first Orc group does not complete the investigation.
+
+<AdUnit placement="article_middle" />
+
+### Rescue Reina without searching indefinitely for the Lich
+
+A surviving apprentice reports that Reina's unit was overwhelmed by three sources of
+pressure:
+
+- charging Orcs;
+- Skeleton ambushes and repeated resurrection;
+- and a Lich's magic.
+
+However, in the recorded rescue phase, the Lich is not visible after the party
+arrives. Reina later confirms that the caster was no longer present.
+
+My rescue priority is therefore:
+
+1. follow the apprentice to the marked entrance;
+2. break through the Orc and Skeleton groups surrounding the route;
+3. clear enemies trapping the active character;
+4. reach Reina instead of searching side areas for the missing Lich;
+5. finish the active rescue combat state;
+6. listen for the immediate return order.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-reina-rescue-lich-skeletons.webp"
+    alt="DragonSword Awakening Chapter 5 Reina rescue battle with Orc and Skeleton groups"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The Lich explains why the knights were overwhelmed, but the rescue phase shown
+    here advances by clearing the Orc and Skeleton pressure around Reina.
+  </figcaption>
+</figure>
+
+This is more accurate than telling the player to keep hunting an off-screen Lich
+before the rescue can advance.
+
+### Return when the fortress attack warning appears
+
+After the investigation and rescue, the story warns that the attack may begin within
+a day, two days, or immediately.
+
+Once the return objective appears, stop clearing northern side paths.
+
+At the fortress:
+
+1. follow Reina to each active defense point;
+2. finish the marked group before moving;
+3. keep enemies near the defense area rather than chasing distant stragglers;
+4. preserve the main damage dealer for the larger threats after the regular waves.
+
+The defense transitions into the wider True Dragon crisis and the next Six Heroes
+route.
+
+<h2 id="chapter-6">
+  Chapter 6: Deliver Ewald's letter, meet Ropi, and solve the mural door
+</h2>
+
+**Starting route:** Return to Ewald after the fortress operation.
+
+**Main blocker:** Chapter 6 combines a long character-following route with a ruin door
+whose key was shown earlier.
+
+**Chapter completion signal:** The Ropi scenes and later mural-door route are
+complete, and the story moves into the True Dragon response.
+
+### Deliver the letter to Ropi's old cabin
+
+Ewald believes Ropi is still near Orbis and asks the party to leave a letter where he
+previously stayed.
+
+The route is:
+
+1. receive Ewald's Six Heroes request;
+2. travel to the old cabin;
+3. clear the monsters gathered around it;
+4. enter and place the letter in the visible location;
+5. inspect the cabin until Ropi appears;
+6. listen for his message about the meeting place;
+7. report the response to Ewald.
+
+Do not wait beside the letter for a separate pickup. Ropi appears as part of the
+cabin scene and supplies the next appointment.
+
+### Follow the meeting route instead of waiting in Orbis
+
+After the report, Ewald leaves for the meeting. Follow the current travel and
+dialogue markers.
+
+The route later connects with other Six Heroes information and leads to Ropi's
+meeting. Continue through the active conversations rather than repeatedly returning
+to the palace or cabin.
+
+Ropi refuses Ewald's request to reunite around Orbis, but he provides information
+about the approaching True Dragon.
+
+### Ropi's offer to Lute is scripted
+
+Ropi later asks Lute to leave with him. Lute refuses because he wants to remain close
+to people he can help.
+
+This is a story scene, not a route branch:
+
+- Lute remains with the current group;
+- there is no alternate map exit to choose;
+- and the main objective resumes after the conversation.
+
+### Use the first mural as the later door key
+
+Chapter 6 includes a ruin route with two connected mural moments.
+
+The useful solution is:
+
+1. inspect the first mural when the party identifies it as the clue;
+2. keep its arrangement in mind;
+3. continue until the later inner door appears inactive;
+4. inspect the mural in that room;
+5. reproduce the earlier wall arrangement using the room mechanism;
+6. continue when the door opens.
+
+> The mural is a visual key supplied earlier in the same route. There is no reason to
+> leave the ruin and search outside for a separate lever.
+
+The transcript confirms that copying the earlier wall opens the door, but it does not
+preserve a reliable text description of every visual symbol or input. I do not add an
+invented symbol order.
+
+<h2 id="chapter-7">
+  Chapter 7: Gather True Dragon intelligence and prepare Eona's Legacy
+</h2>
+
+**Starting route:** Accept the kingdom-backed large-scale True Dragon request.
+
+**Main blocker:** The party can spend too long searching for Alboin before the palace
+meeting.
+
+**Chapter completion signal:** The operation roles, lightning countermeasure, and
+departure to the designated hills are confirmed.
+
+Chapter 7 explains why the Chapter 8 plan uses a living Dragon, an egg, a trap, a
+lightning-absorbing crystal, and Eona's Legacy.
+
+### Finish the faction information loop
+
+The route gathers information from the royal side, the Organa Order, Amber merchants,
+and Alboin.
+
+The useful conclusions are:
+
+- the True Dragon moves too quickly to track continuously;
+- it slows down because it hunts and consumes other Dragons;
+- the cult has internal factions rather than one perfectly unified command;
+- and the ancient records point toward Eona's Legacy.
+
+### Go to the palace when the meeting begins
+
+The party attempts to find Alboin before the announced royal meeting, but he may not
+appear on the city search route before the deadline.
+
+When the meeting time arrives:
+
+1. stop searching the city;
+2. go to the palace;
+3. complete the current faction conversation markers;
+4. enter the operation briefing.
+
+Alboin appears there as the expert presenting the ancient research. Missing him in
+the city is not a progression failure.
+
+### Learn why Eona's Legacy is the finishing plan
+
+At the briefing, Alboin connects the ancient record to **Eona's Legacy** and explains
+that it is an ancient weapon, not merely a research device.
+
+The operation assigns distinct roles:
+
+- royal knights establish and tighten the perimeter;
+- the trap team prepares the restraint;
+- the Order supports the trap and barrier;
+- the party searches for a Dragon nest;
+- Kalien draws the adult Dragon away;
+- Johnny's group takes the egg to the trap area;
+- Lute prepares Eona's Legacy;
+- other knights and mercenaries clear monsters drawn into the operation.
+
+The egg is bait. The adult Dragon must remain alive long enough to attract the True
+Dragon, and Eona's Legacy is intended to finish the target.
+
+### Understand the lightning-crystal test
+
+The operation also uses a crystal that reacts to lightning.
+
+The test establishes:
+
+- ordinary physical attacks do not easily break it;
+- it absorbs nearby lightning energy;
+- it has a finite capacity;
+- and it explodes after enough lightning is stored.
+
+This explains why the kingdom chooses a location containing the crystal. Ursula's
+lightning can become part of the operation rather than only an environmental threat.
+
+### Finish the preparation markers before searching for the nest
+
+At the operation area, complete the assigned preparation objectives before wandering
+into the Dragon nest search.
+
+The trap team may request nearby local materials used to keep Worms away long enough
+for the operation. Collect the marked items and return before beginning the main nest
+route.
+
+<h2 id="chapter-8">
+  Chapter 8: Find the nest, lose the Dragon Egg, and finish the Ursula operation
+</h2>
+
+**Starting route:** Search the designated hills for a Dragon and an intact egg.
+
+**Main blocker:** Several planned steps fail, but each failure creates the next
+objective.
+
+**Chapter completion signal:** Eona's Legacy fires and the royal ceremony and
+follow-up conversations finish.
+
+### Follow the large Worm tunnel after finding broken eggs
+
+The first nest search may lead to broken eggs and signs that Worms attacked the area.
+
+When that happens, inspect the route rather than searching the same chamber:
+
+1. look for an unusually large, smooth Worm tunnel;
+2. confirm that the traces come from another direction;
+3. use the tunnel to cross the mountain route;
+4. continue where Dragon and Worm battle marks remain;
+5. reach the intact nest.
+
+The large tunnel is the route to the successful nest, not only background scenery.
+
+### Wait for Kalien before taking the egg
+
+At the intact nest:
+
+1. let the operation threaten or distract the adult Dragon;
+2. wait for Kalien to draw it away;
+3. enter after the Dragon leaves;
+4. take the egg;
+5. begin the return route.
+
+Fighting the adult Dragon to the death at its nest is not the intended objective.
+
+### Chase the Worm when it steals the egg
+
+A large Worm takes the egg during the return.
+
+Follow it immediately:
+
+1. enter the large Worm tunnel;
+2. continue toward its nest;
+3. clear only groups blocking the pursuit;
+4. search the marked chamber;
+5. return toward the surface when the objective changes.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-worm-nest-dragon-egg-route.webp"
+    alt="DragonSword Awakening Chapter 8 party pursuing the Worm that stole the Dragon Egg"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The missing egg moves the objective into the Worm nest. The original Dragon nest
+    is no longer the active route.
+  </figcaption>
+</figure>
+
+When the surface or operation-area marker appears, leave the nest. The group has run
+out of time to find another egg, and Kalien is still dealing with the adult Dragon.
+
+> The failed egg plan is a scripted complication, not a failed quest state.
+
+### Follow the split operation objectives
+
+The failed egg plan causes the group to divide:
+
+- one part returns to the trap area;
+- Castella and Lute move toward the ancient device;
+- the Order adds a barrier;
+- the trap releases its sleep effect;
+- and the operation proceeds with the adult Dragon still present.
+
+Follow the current character and objective marker rather than trying to reunite the
+party manually.
+
+### Follow Ursula after every retreat
+
+Ursula arrives and transforms into the Lv.70 final boss.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-final-true-dragon-transformation.webp"
+    alt="DragonSword Awakening Ursula transforming before the Chapter 8 final boss battle"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The transformation begins the main final encounter. I preserve one complete team
+    rotation for the first readable opening.
+  </figcaption>
+</figure>
+
+The battle does not remain in one arena.
+
+- Follow the relocated objective after the first retreat.
+- Follow again after the next encounter.
+- Use the signal sequence after the second escape.
+- Continue once the allied groups begin catching up.
+
+An empty arena is a route transition, not a waiting phase.
+
+For lightning responses, team choice, the pursuit phases, Lute's power, and the
+ending explanation, use the{" "}
+<Link
+  href="/dragonsword-awakening/ending-final-boss"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Ursula final boss and ending guide
+</Link>
+.
+
+### Continue after Eona's Legacy fires
+
+Eona's Legacy completes the operation's final attack.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-eonas-legacy-final-shot.webp"
+    alt="DragonSword Awakening Eona's Legacy striking Ursula at the end of Chapter 8"
+    width={1920}
+    height={1080}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The ancient weapon is the finishing step, but the main story continues after the
+    combat interface disappears.
+  </figcaption>
+</figure>
+
+Complete:
+
+1. the battlefield aftermath;
+2. the return to Orbis;
+3. the royal ceremony;
+4. the later conversations about Lute, Ropi, and the unknown device operator.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-dragon-sword-ending-ceremony.webp"
+    alt="DragonSword Awakening royal ceremony naming the new generation Dragon Sword"
+    width={1133}
+    height={517}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The final battle is not the last objective. Continue through the Orbis ceremony
+    and the remaining story conversations.
+  </figcaption>
+</figure>
+
+<h2 id="common-stuck-points">
+  Common DragonSword Awakening story blockers
+</h2>
+
+### The Chapter 1 cave has no entrance
+
+Shoot the explosive barrels beside the rock.
+
+### The ancient device still does nothing
+
+Remain beside the machine and use the additional control after returning the gear.
+
+### The Chapter 3 object disappeared
+
+It triggered a scripted teleport. Continue deeper into the altar.
+
+### I cannot find a Barrier Stone crafting material
+
+Do not farm one. Bardok's note confirms that the required preparation is already in
+place. Follow the marked interaction route.
+
+### The northern fog road is blocked
+
+Climb the cliff beside the obstruction.
+
+### I cannot find the Lich during Reina's rescue
+
+The Lich explains the earlier ambush, but it is not present in the recorded rescue
+phase. Clear the Orc and Skeleton pressure around Reina.
+
+### The Chapter 6 ruin door has no switch
+
+Copy the arrangement shown by the earlier mural in the same route.
+
+### I cannot find Alboin before the briefing
+
+Go to the palace when the meeting begins. He appears in the briefing sequence.
+
+### The Dragon Egg is gone
+
+Follow the Worm into its nest, then return to the operation area when the objective
+changes.
+
+### Ursula left the arena
+
+Follow the relocated marker. The final encounter continues in another area.
+
+<h2 id="faq">
+  DragonSword Awakening walkthrough FAQ
+</h2>
+
+### How many main-story chapters are in DragonSword Awakening?
+
+The completed main route covered here contains eight chapters.
+
+### Should I clear every chest before leaving a chapter?
+
+No. I take visible chests and short detours, but leave routes that require underwater
+travel, a Moon Key, a later Familiar skill, or another locked movement option.
+
+### When should I stop the story and upgrade?
+
+Stop when normal enemies survive several full rotations, one boss hit removes most
+of a hero's health, or the team cannot create its own Signal conditions. A new menu
+appearing is not by itself a reason to pause the story.
+
+### Is Ropi's offer a route choice?
+
+Not in the Chapter 6 route covered here. Lute remains with the group and the main
+story continues after the scripted conversation.
+
+### Does the Chapter 6 transcript provide the exact mural symbol order?
+
+No. It confirms that the earlier mural is copied to open the later door, but the text
+material does not preserve a reliable symbol-by-symbol answer. A screenshot of the
+reference mural and mechanism is still the best future addition.
+
+### Can I recover the Dragon Egg and restore the original plan?
+
+The party pursues the Worm, but the operation continues after the objective returns
+to the surface. Do not keep searching every chamber after the marker changes.
+
+### Is the final battle over when the combat UI disappears?
+
+No. Continue through the battlefield aftermath, Orbis return, royal ceremony, and
+later conversations.
+
+### Does this walkthrough prove that the game has only one ending?
+
+No. It covers the complete scripted Chapter 1–8 route shown in the source material.
+That does not prove that no hidden condition, future update, or later expansion can
+add another ending.

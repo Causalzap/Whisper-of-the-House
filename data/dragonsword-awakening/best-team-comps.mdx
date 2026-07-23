@@ -1,0 +1,554 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const teamOptionColumns = [
+  { key: "team", label: "Team option" },
+  { key: "bestFor", label: "Best for" },
+  { key: "execution", label: "Execution" },
+  { key: "mainRisk", label: "Main risk" },
+  { key: "buildFirst", label: "Build first" },
+];
+
+export const teamOptionRows = [
+  {
+    team: "Cerese / Othello / Dana — Ranged",
+    bestFor:
+      "Learning boss patterns, preserving arena visibility, and getting a more repeatable clear in the difficult encounters I tested.",
+    execution: "Medium",
+    mainRisk:
+      "Retreating into a wall and losing the space that makes the team safer.",
+    buildFirst:
+      "The ranged hero carrying the field phase, then Othello, then the second ranged hero.",
+  },
+  {
+    team: "Charlotte / Johnny / Reina — Action",
+    bestFor:
+      "Aerial movement, close-range pressure, fast reactions, and frequent manual switching.",
+    execution: "High",
+    mainRisk:
+      "Persistent hazards, difficult aerial tracking, and losing Charlotte before the next safe handoff.",
+    buildFirst: "Charlotte → Johnny → Reina",
+  },
+  {
+    team: "Cerese / Othello / Reina — Hybrid",
+    bestFor:
+      "A tested Dana replacement when I want to keep the Cerese–Othello core and add more ground mobility.",
+    execution: "Medium to high",
+    mainRisk:
+      "Less of the original ranged rhythm and more pressure on Reina's entry timing.",
+    buildFirst:
+      "The ranged field hero, then Othello, then Reina to a functional level.",
+  },
+  {
+    team: "Core duo + Lute — Survival",
+    bestFor:
+      "Encounters where the remaining pair already works together but healing is the real bottleneck.",
+    execution: "Low to medium",
+    mainRisk:
+      "Lower damage and no fix for a pair whose Signal opportunities do not connect.",
+    buildFirst:
+      "Finish the two damage heroes before investing heavily in Lute.",
+  },
+];
+
+export const roleInvestmentColumns = [
+  { key: "hero", label: "Hero" },
+  { key: "job", label: "Practical job" },
+  { key: "firstBuildTarget", label: "First build target" },
+];
+
+export const roleInvestmentRows = [
+  {
+    hero: "Charlotte",
+    job: "Action-team field driver",
+    firstBuildTarget:
+      "A complete three-piece Poison-oriented set, a useful two-piece bonus, matching Karma, and core skills.",
+  },
+  {
+    hero: "Johnny",
+    job: "Ground continuation",
+    firstBuildTarget:
+      "Enough survivability and damage to finish the grounded entry without taking Charlotte's premium materials.",
+  },
+  {
+    hero: "Reina",
+    job: "Mobile bridge or hybrid third",
+    firstBuildTarget:
+      "Functional gear and an Airborne-focused basic Karma while waiting for a stronger character-specific option.",
+  },
+  {
+    hero: "Cerese / Dana",
+    job: "Flexible ranged field pair",
+    firstBuildTarget:
+      "Complete whichever hero opens most fights and stays active between Othello entries; keep the other ranged hero functional.",
+  },
+  {
+    hero: "Othello",
+    job: "Close-range pivot",
+    firstBuildTarget:
+      "Second ranged-team priority so he survives the distance change and returns the fight to range.",
+  },
+  {
+    hero: "Lute",
+    job: "Healing and recovery substitute",
+    firstBuildTarget:
+      "Functional healing and survivability after the two-character core is already built.",
+  },
+];
+
+DragonSword Awakening teams work through conditions, Signal opportunities, and
+switching. Three individually strong heroes can still feel disconnected when no one
+creates the next teammate's entry condition or when the lineup has no safe way to
+recover after its first sequence.
+
+This guide covers two complete teams, one tested hybrid, and one Lute survival
+variation. I use them as practical starting points rather than a universal ranking
+of every possible three-character formation.
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Quick answer:</strong>{" "}
+  Cerese, Othello, and Dana are my default recommendation when I am still learning a
+  boss or struggling to maintain close-range pressure. I use Charlotte, Johnny, and
+  Reina when I want faster execution and can manage the extra camera, dodge, and
+  aerial pressure.
+</div>
+
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-slate-900">English PC launch-build note.</strong>{" "}
+  These recommendations come from repeated use of the two Level 70 lineups in
+  difficult and endgame encounters. I compare rotation consistency, spacing,
+  survivability, Signal availability, and execution burden. Major balance or roster
+  changes may alter the recommendations.
+</div>
+
+<h2 id="best-teams-at-a-glance">
+  Best teams at a glance
+</h2>
+
+<GuideTable
+  caption="The best option is the one whose complete sequence I can reproduce without losing a hero or missing the next Signal opportunity."
+  columns={teamOptionColumns}
+  rows={teamOptionRows}
+/>
+
+The ranged team was the more repeatable option in the difficult encounters I tested.
+The action team gave me more movement and aggression, but only while I could keep the
+boss visible and stop the aerial route before the next dangerous attack.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="team-synergy">
+  How a complete team works
+</h2>
+
+A complete team needs three jobs:
+
+1. **Field driver:** stays active, lands safe hits, and creates the next repeatable
+   condition.
+2. **Signal answer:** enters when that condition activates the teammate input.
+3. **Bridge:** extends pressure, restores spacing, or carries the fight back to the
+   field driver.
+
+The team also needs a fallback plan when Super Armor prevents its normal launch or
+juggle route.
+
+After spending an Active Skill, I continue attacking while it is safe. Hits make the
+skill return faster, so I do not stand outside the fight waiting for every icon to
+refill.
+
+My reusable combat rule is:
+
+1. spend one safe Active Skill;
+2. continue a short recovery string;
+3. create Break or the required condition;
+4. confirm that the teammate input is active;
+5. use the Signal Skill;
+6. leave before the follow-up becomes unsafe;
+7. return to the field driver after the important actions recover.
+
+Break is the clearest early condition to read.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-break-signal-skill.webp"
+    alt="DragonSword Awakening enemy entering Break while a teammate Signal Skill becomes available"
+    width={713}
+    height={634}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    I wait for the real Break state and the active teammate input. A visible portrait
+    by itself does not mean the Signal Skill is ready.
+  </figcaption>
+</figure>
+
+### Why a favorite-character team can work early and fail later
+
+Normal story encounters can hide both a synergy problem and a build problem.
+
+Before replacing the entire roster, I separate them:
+
+- **Synergy problem:** the current heroes do not create the conditions needed by the
+  next Signal input.
+- **Build problem:** the team works mechanically, but its gear, Karma, or skill
+  investment is not ready for the activity.
+
+Changing characters does not solve weak gear. More gear does not solve a Signal
+sequence that never starts.
+
+<h2 id="ranged-team">
+  Cerese, Othello, and Dana
+</h2>
+
+This is my default recommendation for players who are learning boss patterns or
+repeatedly losing the active hero at close range. In the difficult encounters I
+tested, it gave me a calmer route because Cerese and Dana handled most of the ranged
+phase while Othello covered the distance change.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-ranged-team-cerese-othello-dana.webp"
+    alt="DragonSword Awakening ranged team with Cerese Othello and Dana"
+    width={942}
+    height={509}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Cerese and Dana handle the ranged phase in my tested setup, while Othello acts as
+    the close-range pivot before I reopen the distance.
+  </figcaption>
+</figure>
+
+### Cerese and Dana trade field time; Othello has the fixed job
+
+I do not force this lineup into one permanent Cerese-first or Dana-first script.
+
+In my tested use, Cerese and Dana traded field time depending on position, current
+skill availability, and which hero had the stronger working build. Othello had the
+more consistent job: enter when the boss closed distance, finish the immediate
+close-range phase, and create enough time to move back out.
+
+The ranged pair can therefore rotate, but Othello is the pivot that keeps the team
+from collapsing when the arena becomes crowded.
+
+### My ranged sequence
+
+1. open with the better-positioned ranged hero;
+2. preserve a lateral exit lane while using the first safe ranged action;
+3. use the available teammate input before the boss forces me into the wall side of
+   the arena;
+4. bring Othello into the close-range phase;
+5. finish the immediate job instead of extending the melee exchange;
+6. move sideways rather than continuing directly backward;
+7. return to Cerese or Dana after the exit lane opens.
+
+The main resource is **space**. Straight-line retreat eventually puts the team
+against a wall, removes the wider camera view, and turns a ranged lineup into an
+awkward close-range team.
+
+### Who I build first
+
+I complete whichever of Cerese or Dana:
+
+- starts most encounters in my current setup;
+- remains active between Othello entries;
+- and already has the stronger usable set and Karma.
+
+Othello receives the second investment because he handles the most dangerous
+distance change. The second ranged hero needs enough investment to survive and
+maintain the sequence before I begin expensive reforges.
+
+Because Cerese and Dana trade the field phase, I use actual encounter time—not a
+fixed universal order—to decide which one receives the first complete build.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="action-team">
+  Charlotte, Johnny, and Reina
+</h2>
+
+This is the higher-input option. It was my action-heavy endgame lineup, but its value
+depends on execution more than the ranged team's value does.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-action-team-charlotte-johnny-reina.webp"
+    alt="DragonSword Awakening action team with Charlotte Johnny and Reina"
+    width={856}
+    height={576}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    Charlotte drives the active pressure, Johnny returns the sequence to the ground,
+    and Reina carries the team into the next safe position.
+  </figcaption>
+</figure>
+
+### Charlotte is the field driver
+
+Charlotte receives the first investment because she has the broadest movement and
+pressure toolkit in this trio. Her sequence moves between the ground and air, and
+her air dash lets me redirect movement instead of committing to one long arc.
+
+I use Charlotte to open the fight, test whether the target can be launched, and stay
+active until the next teammate opportunity or boss pattern appears.
+
+I stop the aerial route when the target resists launch, the camera loses the boss, or
+the next active hitbox begins.
+
+### Johnny is the ground continuation
+
+Johnny returns to the floor quickly during his attack sequence. I use that property
+instead of trying to make him imitate Charlotte.
+
+He takes over when Charlotte's safe aerial pressure ends or when I need a shorter
+grounded continuation before the next swap. His job is to keep the team attacking
+without leaving Charlotte exposed in the air.
+
+### Reina is the mobile bridge
+
+Reina has a sprint-style movement and a separate dodge action. That gives her two
+different ground options for repositioning and defense.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-reina-sprint-dodge-options.webp"
+    alt="DragonSword Awakening Reina using separate sprint and dodge actions"
+    width={518}
+    height={192}
+    className="mx-auto h-auto w-full max-w-2xl rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    I use Reina's longer movement to restore space and preserve the shorter defensive
+    action for the next committed attack.
+  </figcaption>
+</figure>
+
+### My action-team sequence
+
+1. open with Charlotte and test the target's launch response;
+2. continue only while the camera and boss pattern remain readable;
+3. use the lit teammate input before the safe aerial window ends;
+4. let Johnny return the sequence to the ground;
+5. use Reina to cross space or avoid the next committed attack;
+6. return to Charlotte after her important actions recover.
+
+The difference from the ranged team is where each hero takes over: Charlotte during
+active pressure, Johnny at the ground transition, and Reina during movement and
+recovery.
+
+### Investment order and basic build
+
+My order is **Charlotte → Johnny → Reina**.
+
+For Charlotte, my tested build direction is:
+
+- three pieces from a Poison-oriented set;
+- a useful two-piece bonus instead of forcing five matching pieces;
+- Critical Damage, Critical Chance, and Attack-oriented stats where the current gear
+  supports them;
+- and the clone-detonation effect shown on her Exclusive Karma.
+
+Johnny receives enough gear to survive and contribute during his grounded entry.
+For Reina, I use an Airborne-focused basic Karma as a practical bridge because it
+matches the launch-heavy parts of the current rotation while I wait for a stronger
+character-specific option.
+
+I stop using this lineup when persistent hazards cover the close-range area, the
+camera makes aerial tracking unreliable, or Charlotte repeatedly dies before the
+next safe handoff.
+
+For complete crafting, reforge, and Karma decisions, use the{" "}
+<Link
+  href="/dragonsword-awakening/gear-karma-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  gear and Karma guide
+</Link>
+.
+
+<h2 id="hybrid-replacements">
+  Tested hybrid and replacement rules
+</h2>
+
+The most practical hybrid I tested is **Cerese, Othello, and Reina**.
+
+In my tests, Reina worked as a useful third member beside Cerese and Othello because
+her separate sprint and dodge actions helped restore spacing after the close-range
+phase. I use the hybrid when Dana is missing or when I want more ground mobility.
+
+The trade-off is clear:
+
+- Cerese keeps the ranged side of the setup;
+- Othello remains the close-range pivot;
+- Reina replaces part of the original ranged rhythm with movement and recovery.
+
+This does not make the hybrid identical to Cerese, Othello, and Dana. It is a roster
+solution that preserves the tested core while changing the third member's job.
+
+### My three-step replacement check
+
+For any other missing member, I use this order:
+
+1. identify the condition the remaining two heroes create consistently;
+2. filter for heroes whose Signal requirement can answer that condition;
+3. compare role fit, survivability, spacing, and mobility before individual damage.
+
+**Condition compatibility comes first, role fit second, and personal damage third.**
+
+A high-damage hero is a poor replacement when the remaining pair never activates
+that hero's entry condition.
+
+<h2 id="role-investment">
+  Role and minimum investment
+</h2>
+
+<GuideTable
+  caption="This is the minimum resource structure I use before dividing premium materials across a second complete team."
+  columns={roleInvestmentColumns}
+  rows={roleInvestmentRows}
+/>
+
+A secondary hero does not need the same spending as the field driver. A hero who
+appears for one short Signal window needs enough gear to survive and complete that
+job; the field driver receives the complete set, matching Karma, and core skill
+investment first.
+
+<h2 id="lute-survival">
+  When Lute is worth using
+</h2>
+
+I build Lute after the primary damage core, not before it.
+
+I add him when:
+
+- the remaining pair already reaches its important Signal opportunities;
+- the team has enough damage but cannot survive the complete encounter;
+- an outgoing hero repeatedly leaves the field at low health;
+- or learning the boss safely matters more than maximum burst.
+
+There is also a useful switching detail in my tested setup: the outgoing hero remains
+on the field briefly after the new character enters. During that overlap, Lute can
+heal the outgoing hero before the hero disappears.
+
+I remove Lute when the team survives comfortably and the lower damage makes the
+fight unnecessarily long.
+
+Healing cannot repair an incompatible Signal sequence. If the teammate input never
+appears, I fix the condition mismatch before adding Lute.
+
+<h2 id="defensive-switching">
+  Defensive switching and Super Armor
+</h2>
+
+A switch gives a brief protected entry window. I use it to cross one clearly timed
+impact and then move.
+
+I do not switch into:
+
+- a lingering field;
+- overlapping projectiles;
+- a multi-hit spin;
+- or an attack that remains active after the entry animation.
+
+The protection is brief and can end when I commit to the next attack or Signal
+action. I treat switching as a bridge between heroes, not a shield that replaces
+dodging.
+
+Some enemies also show a white bar beneath the health bar. I watch the bar and the
+enemy's actual reaction before committing to a long air string.
+
+<figure className="my-8">
+  <Image
+    src="/images/dragonsword-awakening/dragonsword-awakening-enemy-white-stagger-bar.webp"
+    alt="DragonSword Awakening enemy with a white stagger bar beneath the health bar"
+    width={667}
+    height={574}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500">
+    The white bar is visible beneath the enemy's health. I still test whether the
+    target actually launches before extending the aerial sequence.
+  </figcaption>
+</figure>
+
+When Super Armor keeps the enemy planted and attacking through my hits, I:
+
+1. stop the long air route;
+2. leave the counterattack area;
+3. use shorter Active Skill windows;
+4. build Break with safe hits;
+5. use the teammate input only after it becomes active.
+
+This matters most for Charlotte because her mobility makes one more aerial extension
+look attractive even when the target is about to ignore the launch and hit back.
+
+<h2 id="troubleshooting">
+  Common team problems
+</h2>
+
+### The teammate input never becomes active
+
+I reproduce one condition at a time and watch the enemy state and teammate icon. I
+do not rebuild the whole team until I know which condition is missing.
+
+### The team spends too long waiting for skills
+
+I continue safe attacks after spending an Active Skill. Hits shorten the downtime;
+standing outside the fight does not.
+
+### Charlotte keeps getting hit in the air
+
+I stop extending when the target resists launch, the camera loses the boss, or the
+next active hitbox begins.
+
+### The ranged team keeps getting trapped
+
+I preserve a lateral exit lane and stop retreating directly into the wall. Othello
+handles the close-range phase, then I reopen the distance.
+
+### Switching still takes damage
+
+I used the switch against a lingering or multi-hit attack, or I remained inside the
+hazard after the protected entry ended.
+
+### A favorite-character team clears story but fails harder content
+
+I check both compatibility and build quality. Easier encounters can hide a broken
+Signal route, while harder activities also punish incomplete gear, Karma, and skill
+investment.
+
+<h2 id="faq">
+  DragonSword Awakening team comps FAQ
+</h2>
+
+### Which team should I build first for boss learning?
+
+I start with Cerese, Othello, and Dana because the ranged setup keeps more of the
+boss and arena visible. I move to Charlotte, Johnny, and Reina when I can maintain
+close pressure without losing the next attack in the camera.
+
+### Can Reina replace Dana?
+
+Cerese, Othello, and Reina was the most practical hybrid in my tests. Reina adds
+ground movement and recovery, but the lineup is less purely ranged than the Dana
+version.
+
+### When should I add Lute?
+
+After the other two heroes already reach their important Signal opportunities. I add
+Lute when healing solves the real bottleneck and remove him when survival is stable.
+
+### Which hero receives the first complete gear and Karma build?
+
+Charlotte in the action team. In the ranged team, I complete whichever of Cerese or
+Dana currently carries the field phase, then build Othello for the close-range
+transition.
+
+### Can I use any three heroes together?
+
+Yes in easier content if I understand their kits, but harder encounters expose weak
+condition compatibility and unfinished builds. I keep favorite characters together
+only after checking that the remaining pair can activate the next Signal entry.
