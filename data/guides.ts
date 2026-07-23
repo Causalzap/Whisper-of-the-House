@@ -131,6 +131,191 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    title: "DragonSword Awakening",
+    game: "DragonSword Awakening",
+    href: "/dragonsword-awakening",
+    slug: "dragonsword-awakening",
+    kind: "game",
+    status: "active",
+    accent: "purple",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Action RPG",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the DragonSword Awakening guide hub for beginner progression, Chapters 1–8, tested team comps, Signal Skills, gear sets, reforging, Basic and Exclusive Karma, Lv.70 Ursula, and the ending.",
+    coverage: [
+      "First-team investment, Fate's Invitation, early resources, Signal Skills, Active Skill recovery, Regional Missions, World Bosses, Master Skills, Treasure Maps, Familiars, and early progression troubleshooting",
+      "Complete Chapter 1–8 main route, the Goblin treasure cave, Alboin's ancient device, Dragon Cult teleport, Bardok's Barrier Stone, northern fog cliff, Rock Tribe investigation, Reina rescue, Ropi, the mural door, Dragon Egg, Worm nest, and final operation",
+      "Tested Cerese, Othello, and Dana ranged team, Charlotte, Johnny, and Reina action team, Cerese–Othello–Reina hybrid, Lute survival variation, Signal conditions, switching, rotations, replacements, and investment order",
+      "3+2 gear set construction, Azure Gale effects, crafted main stats, Forging Molds, reforge stop rules, Gold costs, Basic Karma, Exclusive Karma, World Boss drops, Hero Logs, dismantling, and Mission Medal resources",
+      "Chapter 8 preparation, Dragon Egg and Worm route, Lv.70 Ursula, lightning attacks, both pursuit phases, signal flare, Lute's Dragon-like power, Eona's Legacy, Ropi, the royal ceremony, and the ending"
+    ],
+    image:
+      "/images/dragonsword-awakening/dragonsword-awakening-final-true-dragon-transformation.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 12,
+      footerFeatured: true
+    },
+    pages: [
+      {
+        title: "DragonSword Awakening Guide Hub",
+        href: "/dragonsword-awakening",
+        type: "Guide Hub",
+        description:
+          "Choose the right DragonSword Awakening guide for beginner progression, Chapters 1–8, team builds, gear and Karma, Lv.70 Ursula, or the ending.",
+        image:
+          "/images/dragonsword-awakening/dragonsword-awakening-final-true-dragon-transformation.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Beginner progression, Chapters 1–8, tested teams, Signal Skills, gear sets, reforging, Karma, Lv.70 Ursula, and ending coverage"
+        },
+        archive: {
+          showInCollections: true,
+          order: 1
+        }
+      },
+      {
+        title: "DragonSword Awakening Beginner Guide",
+        href: "/dragonsword-awakening/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Choose a first team, protect early resources, use Fate's Invitation, activate Signal Skills, and prioritize Regional Missions, World Bosses, Master Skills, and Treasure Maps.",
+        date: "Updated recently",
+        image:
+          "/images/dragonsword-awakening/dragonsword-awakening-break-signal-skill.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 47,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "First team, Fate's Invitation, Signal Skills, early resources, Regional Missions, World Bosses, Master Skills, Treasure Maps, and progression troubleshooting"
+        },
+        archive: {
+          showInCollections: true,
+          order: 2
+        }
+      },
+      {
+        title: "DragonSword Awakening Chapter 1–8 Walkthrough",
+        href: "/dragonsword-awakening/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Complete Chapters 1–8 with fixes for the Goblin cave, ancient device, Dragon Cult teleport, Barrier Stone, fog road, Reina rescue, mural door, Dragon Egg, Worm nest, and final operation.",
+        date: "Updated recently",
+        image:
+          "/images/dragonsword-awakening/dragonsword-awakening-northern-fog-blocked-road-cliff.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 48,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Chapters 1–8, Goblin cave, ancient device, Dragon Cult altar, Barrier Stone, fog cliff, Reina rescue, Ropi, mural door, Dragon Egg, Worm nest, and final operation"
+        },
+        archive: {
+          showInCollections: true,
+          order: 3
+        }
+      },
+      {
+        title: "DragonSword Awakening Best Team Comps",
+        href: "/dragonsword-awakening/best-team-comps",
+        type: "Builds",
+        description:
+          "Compare tested ranged, action, hybrid, and Lute team variations with Signal conditions, rotations, switching, replacements, defensive responses, and investment priorities.",
+        date: "Updated recently",
+        image:
+          "/images/dragonsword-awakening/dragonsword-awakening-ranged-team-cerese-othello-dana.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 49,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Cerese ranged team, Charlotte action team, Reina hybrid, Lute survival variation, Signal Skills, rotations, switching, replacements, and investment order"
+        },
+        archive: {
+          showInCollections: true,
+          order: 4
+        }
+      },
+      {
+        title: "DragonSword Awakening Gear & Karma Guide",
+        href: "/dragonsword-awakening/gear-karma-guide",
+        type: "Systems",
+        description:
+          "Build 3+2 gear sets, choose crafted main stats, use Forging Molds safely, control reforge costs, farm Basic Karma, and plan Exclusive Karma upgrades and dismantling.",
+        date: "Updated recently",
+        image:
+          "/images/dragonsword-awakening/dragonsword-awakening-reforge-50000-gold-cost.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 50,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "3+2 gear sets, Azure Gale, main stats, Forging Molds, 50,000 Gold reforges, Basic Karma, Exclusive Karma, dismantling, World Bosses, and material routes"
+        },
+        archive: {
+          showInCollections: true,
+          order: 5
+        }
+      },
+      {
+        title: "DragonSword Awakening Ursula Final Boss & Ending",
+        href: "/dragonsword-awakening/ending-final-boss",
+        type: "Endings",
+        description:
+          "Beat Lv.70 Ursula, follow the Dragon Egg and Worm route, survive lightning and both pursuits, use the signal flare, and understand Eona's Legacy, Lute, Ropi, and the ending.",
+        date: "Updated recently",
+        image:
+          "/images/dragonsword-awakening/dragonsword-awakening-ursula-transformation.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 51,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Dragon Egg, Worm route, Lv.70 Ursula, lightning attacks, both pursuits, signal flare, Lute's Dragon power, Eona's Legacy, Ropi, ceremony, and ending"
+        },
+        archive: {
+          showInCollections: true,
+          order: 6
+        }
+      }
+    ]
+  },
+  {
     "title": "ZeroSpace",
     "game": "ZeroSpace",
     "href": "/zerospace",

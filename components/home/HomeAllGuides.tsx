@@ -73,6 +73,7 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  { title: "DragonSword : Awakening", href: "/dragonsword-awakening" },
   { title: "Zerospace", href: "/zerospace" },
   { title: "Happy's Humble Burger Cult", href: "/happys-humble-burger-cult" },
   { title: "Ore Factory Squad ⛏️", href: "/ore-factory-squad" },
