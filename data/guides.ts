@@ -129,7 +129,7 @@ export type GuideCluster = HomeImageFields & {
   pages: GuidePage[];
 };
 
-export const guideClusters = [
+export const guideClusters: GuideCluster[] = [
   {
     title: "Tears of Metal",
     game: "Tears of Metal",
@@ -4650,6 +4650,10 @@ export const guideClusters = [
     "archiveCategory": "Strategy, simulation, puzzle & discovery",
     "label": "Builds & Combat",
     "description": "Start here for builds, Poison scaling, 10-win strategy, level vs reroll decisions, 3-star items, perk unlocks, and common run mistakes.",
+    image: "/images/oaken-tower/hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
     "coverage": [
       "Guide Hub",
       "Builds",
@@ -5178,6 +5182,10 @@ export const guideClusters = [
     "archiveCategory": "Older archive",
     "label": "Completion",
     "description": "Start here for Gamble With Your Friends guides, including beginner routes, tickets, items, body parts, best games, item combos, Street Craps, and achievements.",
+    image: "/images/gamble-with-your-friends/hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
     "coverage": [
       "Achievements",
       "Beginner Guide",
@@ -5471,6 +5479,10 @@ export const guideClusters = [
     "archiveCategory": "Cozy, crafting, survival & systems",
     "label": "Completion",
     "description": "Start here for Librarian guides, including all key locations, chest unlocks, best abilities, blue shelf indicators, book sorting, achievements, and common missing-book fixes.",
+    image: "/images/librarian/hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
     "coverage": [
       "Achievements",
       "Collectibles",

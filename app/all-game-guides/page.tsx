@@ -1,128 +1,268 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+
 import Layout from "../../components/Layout";
 import {
-  getActiveGuideHubs,
-  getFeaturedHubCount,
-  getGameArchiveGroups,
-  getGameCollectionCount,
-  getGuideEntryCount,
-  getLatestUpdatePages,
-  type ActiveGuideHub,
-  type ArchiveGuideGroup,
-} from "@/data/guideSelectors";
+  guideClusters,
+  type GuideCluster,
+  type GuidePageType,
+  type HomeAccent,
+  type HomeImageFit,
+} from "@/data/guides";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/all-game-guides`;
 
 export const metadata: Metadata = {
-  title: "All Game Guides Archive | Whisper of the House",
+  title: "All PC & Indie Game Guides | Whisper of the House",
   description:
-    "Browse PC and indie game guide hubs, walkthroughs, achievements, endings, builds, collectibles, systems guides, puzzle help, and game collections.",
+    "Browse PC and indie game guide hubs for walkthroughs, beginner guides, achievements, builds, endings, collectibles, bosses, puzzle solutions, and system help.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title: "All Game Guides Archive | Whisper of the House",
+    title: "All PC & Indie Game Guides | Whisper of the House",
     description:
-      "Browse active guide hubs, walkthroughs, achievements, endings, builds, collectibles, systems guides, puzzle help, and older game collections.",
+      "Browse complete game guide hubs with walkthroughs, beginner routes, achievements, builds, endings, collectibles, bosses, puzzles, and system help.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "All Game Guides Archive | Whisper of the House",
+    title: "All PC & Indie Game Guides | Whisper of the House",
     description:
-      "Browse active guide hubs, walkthroughs, achievements, endings, builds, collectibles, systems guides, puzzle help, and older game collections.",
+      "Browse complete PC and indie game guide hubs, walkthroughs, achievements, builds, endings, collectibles, and puzzle solutions.",
   },
 };
 
-type GuideLink = ArchiveGuideGroup["guides"][number];
+type ArchiveCategory = GuideCluster["archiveCategory"];
 
-type NormalizedUpdate = {
-  title: string;
-  href: string;
-  game: string;
-  description: string;
-  type: string;
-  date: string;
+type HubImageProps = {
+  image?: string;
+  alt: string;
+  fallbackTitle: string;
+  imageFit?: HomeImageFit;
+  imagePosition?: string;
+  imagePadding?: boolean;
+  priority?: boolean;
+  sizes: string;
 };
 
-type UpdateGroup = {
-  game: string;
-  updates: NormalizedUpdate[];
+type CategoryMeta = {
+  id: string;
+  shortLabel: string;
+  title: string;
+  description: string;
+  accent: HomeAccent;
+};
+
+const HUB_PAGE_TYPES = new Set<GuidePageType>([
+  "Guide Hub",
+  "Class Guide Hub",
+  "Event Hub",
+  "Spotlight Coverage",
+]);
+
+const typedGuideClusters =
+  guideClusters as readonly GuideCluster[];
+
+/**
+ * data/guides.ts is maintained newest to oldest.
+ *
+ * No date sorting or latestOrder sorting is used here.
+ */
+const publishedClusters = typedGuideClusters.filter(
+  (cluster) => cluster.status !== "upcoming"
+);
+
+const publishedGameHubs = publishedClusters.filter(
+  (cluster) => cluster.kind === "game"
+);
+
+const specialCollections = publishedClusters.filter(
+  (cluster) => cluster.kind !== "game"
+);
+
+const newestGameHubs = publishedGameHubs.slice(0, 9);
+
+const activeGameHubCount = publishedGameHubs.filter(
+  (cluster) => cluster.status === "active"
+).length;
+
+const totalGuidePageCount = publishedClusters.reduce(
+  (total, cluster) => total + cluster.pages.length,
+  0
+);
+
+const categoryOrder: readonly ArchiveCategory[] = [
+  "Cozy, crafting, survival & systems",
+  "RPG, action, builds & combat",
+  "Story, endings, horror & route locks",
+  "Strategy, simulation, puzzle & discovery",
+  "Older archive",
+];
+
+const categoryMeta: Record<ArchiveCategory, CategoryMeta> = {
+  "Cozy, crafting, survival & systems": {
+    id: "cozy-survival-systems",
+    shortLabel: "Cozy & Survival",
+    title: "Cozy, crafting, survival and system guides",
+    description:
+      "Browse cozy games, crafting routes, survival priorities, management systems, resource planning, upgrades, and progression help.",
+    accent: "emerald",
+  },
+  "RPG, action, builds & combat": {
+    id: "rpg-action-builds",
+    shortLabel: "RPG & Action",
+    title: "RPG, action, build and combat guides",
+    description:
+      "Find character builds, skill priorities, team setups, weapons, boss strategies, combat routes, classes, and progression advice.",
+    accent: "rose",
+  },
+  "Story, endings, horror & route locks": {
+    id: "story-endings-routes",
+    shortLabel: "Story & Endings",
+    title: "Story, ending, horror and route-lock guides",
+    description:
+      "Explore walkthrough routes, ending requirements, hidden scenes, codes, decisions, story locks, achievements, and spoiler-aware help.",
+    accent: "amber",
+  },
+  "Strategy, simulation, puzzle & discovery": {
+    id: "strategy-simulation-puzzles",
+    shortLabel: "Strategy & Puzzle",
+    title: "Strategy, simulation, puzzle and discovery guides",
+    description:
+      "Browse simulations, strategy games, management routes, puzzle solutions, exploration help, objectives, maps, and discovery systems.",
+    accent: "blue",
+  },
+  "Older archive": {
+    id: "older-game-archive",
+    shortLabel: "Older Archive",
+    title: "Older and evergreen game guide hubs",
+    description:
+      "Find established walkthrough collections and evergreen guides that remain useful for specific games, routes, mechanics, and completion goals.",
+    accent: "purple",
+  },
+};
+
+const categoryGroups = categoryOrder
+  .map((category) => ({
+    category,
+    meta: categoryMeta[category],
+    hubs: publishedGameHubs.filter(
+      (cluster) => cluster.archiveCategory === category
+    ),
+  }))
+  .filter((group) => group.hubs.length > 0);
+
+const accentClasses: Record<
+  HomeAccent,
+  {
+    badge: string;
+    text: string;
+    border: string;
+    glow: string;
+    soft: string;
+  }
+> = {
+  purple: {
+    badge: "bg-purple-400/15 text-purple-200",
+    text: "text-purple-200",
+    border: "hover:border-purple-300/45",
+    glow: "from-purple-500/20 via-purple-500/5 to-transparent",
+    soft: "bg-purple-400/10",
+  },
+  blue: {
+    badge: "bg-blue-400/15 text-blue-200",
+    text: "text-blue-200",
+    border: "hover:border-blue-300/45",
+    glow: "from-blue-500/20 via-blue-500/5 to-transparent",
+    soft: "bg-blue-400/10",
+  },
+  emerald: {
+    badge: "bg-emerald-400/15 text-emerald-200",
+    text: "text-emerald-200",
+    border: "hover:border-emerald-300/45",
+    glow: "from-emerald-500/20 via-emerald-500/5 to-transparent",
+    soft: "bg-emerald-400/10",
+  },
+  amber: {
+    badge: "bg-amber-400/15 text-amber-200",
+    text: "text-amber-200",
+    border: "hover:border-amber-300/45",
+    glow: "from-amber-500/20 via-amber-500/5 to-transparent",
+    soft: "bg-amber-400/10",
+  },
+  rose: {
+    badge: "bg-rose-400/15 text-rose-200",
+    text: "text-rose-200",
+    border: "hover:border-rose-300/45",
+    glow: "from-rose-500/20 via-rose-500/5 to-transparent",
+    soft: "bg-rose-400/10",
+  },
+  cyan: {
+    badge: "bg-cyan-400/15 text-cyan-200",
+    text: "text-cyan-200",
+    border: "hover:border-cyan-300/45",
+    glow: "from-cyan-500/20 via-cyan-500/5 to-transparent",
+    soft: "bg-cyan-400/10",
+  },
 };
 
 const faqItems = [
   {
     question: "How do I find guides for a specific game?",
     answer:
-      "Start with the featured guide hubs near the top of this page, then use the game collections and category sections to browse related guides.",
+      "Start with the newest game hubs, or open one of the archive categories below. Every game card links to a dedicated hub containing its available walkthroughs and practical guides.",
   },
   {
-    question: "What types of guides are included?",
+    question: "What types of game guides are included?",
     answer:
-      "The archive includes walkthroughs, beginner routes, achievements, endings, builds, collectibles, puzzle solutions, combat help, and system explainers.",
+      "The archive includes beginner guides, walkthroughs, achievements, builds, boss guides, endings, collectibles, puzzle solutions, system explanations, and completion routes.",
   },
   {
-    question: "Why are some games listed in more than one category?",
+    question: "Why are the guides organized around game hubs?",
     answer:
-      "Some games fit multiple player needs. For example, a survival game may also have achievements, systems, collectibles, or route-lock pages.",
+      "A game hub provides one clear starting point and links to the focused guides for that game. This makes it easier to find a specific solution without browsing a large wiki-style index.",
   },
   {
-    question: "Where are older guides kept?",
+    question: "Where can I find older game guides?",
     answer:
-      "Older single-page guides and smaller game collections stay in the archive sections so readers can still find them when they need a specific game or topic.",
+      "Open the Older Archive category near the bottom of the directory. Older hubs remain available when their walkthroughs, mechanics, achievements, or puzzle solutions are still useful.",
   },
 ];
 
-function groupUpdatesByGame(updates: NormalizedUpdate[]): UpdateGroup[] {
-  const groups = new Map<string, NormalizedUpdate[]>();
-
-  updates.forEach((update) => {
-    const current = groups.get(update.game) ?? [];
-    current.push(update);
-    groups.set(update.game, current);
-  });
-
-  return Array.from(groups.entries()).map(([game, groupedUpdates]) => ({
-    game,
-    updates: groupedUpdates.slice(0, 4),
-  }));
+function getSpokeCount(cluster: GuideCluster) {
+  return cluster.pages.filter(
+    (page) =>
+      page.href !== cluster.href &&
+      !HUB_PAGE_TYPES.has(page.type)
+  ).length;
 }
 
-const activeGuideHubs = getActiveGuideHubs();
-const guideGroups = getGameArchiveGroups();
-
-const normalizedUpdates: NormalizedUpdate[] = getLatestUpdatePages().map(
-  (item) => ({
-    title: item.title,
-    href: item.href,
-    game: item.game,
-    description: item.description,
-    type: item.type,
-    date: item.date ?? "",
-  })
-);
-
-const recentUpdateGroups = groupUpdatesByGame(normalizedUpdates).slice(0, 18);
-
-const guideEntryCount = getGuideEntryCount();
-const gameCollectionCount = getGameCollectionCount();
-const featuredHubCount = getFeaturedHubCount();
-
-const jsonLd = {
+const collectionJsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "All Game Guides Archive",
+  name: "All PC and Indie Game Guides",
   url: pageUrl,
   description:
-    "A complete archive of Whisper of the House game guide hubs, walkthroughs, achievements, ending routes, build pages, collectible guides, system guides, game collections, and older archive entries.",
+    "A complete directory of Whisper of the House PC and indie game guide hubs, walkthroughs, achievements, builds, endings, collectibles, bosses, puzzle solutions, and system guides.",
   isPartOf: {
     "@type": "WebSite",
     name: "Whisper of the House",
     url: siteUrl,
+  },
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: publishedGameHubs.length,
+    itemListElement: publishedGameHubs.map((cluster, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: cluster.title,
+      url: `${siteUrl}${cluster.href}`,
+    })),
   },
 };
 
@@ -158,177 +298,345 @@ const faqJsonLd = {
   })),
 };
 
-function StatCard({ value, label }: { value: string | number; label: string }) {
+function HubImage({
+  image,
+  alt,
+  fallbackTitle,
+  imageFit = "cover",
+  imagePosition = "center",
+  imagePadding = false,
+  priority = false,
+  sizes,
+}: HubImageProps) {
+  if (!image) {
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-500/15 via-slate-900 to-blue-500/10 p-6">
+        <div className="max-w-[84%] text-center">
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-purple-300">
+            Guide Hub
+          </p>
+
+          <p className="mt-3 line-clamp-3 text-lg font-black leading-tight text-white">
+            {fallbackTitle}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const fitClass =
+    imageFit === "contain"
+      ? "object-contain"
+      : "object-cover";
+
+  const paddingClass = imagePadding
+    ? "p-3 sm:p-4"
+    : "";
+
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-center">
-      <div className="text-2xl font-black text-white">{value}</div>
-      <div className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+    <div
+      className={`relative h-full w-full overflow-hidden ${
+        imageFit === "contain"
+          ? "bg-slate-950"
+          : "bg-slate-900"
+      }`}
+    >
+      <Image
+        src={image}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        className={`h-full w-full ${fitClass} ${paddingClass} transition-transform duration-500 group-hover:scale-[1.025]`}
+        style={{
+          objectPosition: imagePosition,
+        }}
+      />
+
+      {imageFit === "cover" ? (
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent" />
+      ) : null}
+    </div>
+  );
+}
+
+function ArchiveStat({
+  value,
+  label,
+}: {
+  value: string | number;
+  label: string;
+}) {
+  return (
+    <div className="px-4 py-4 text-center sm:px-5">
+      <div className="text-xl font-black text-white sm:text-2xl">
+        {value}
+      </div>
+
+      <div className="mt-1 text-[10px] font-black uppercase tracking-[0.1em] text-slate-500">
         {label}
       </div>
     </div>
   );
 }
 
-function ActiveHubCard({ hub }: { hub: ActiveGuideHub }) {
+function NewestHubCard({
+  cluster,
+  priority = false,
+}: {
+  cluster: GuideCluster;
+  priority?: boolean;
+}) {
+  const color = accentClasses[cluster.accent];
+  const spokeCount = getSpokeCount(cluster);
+
   return (
     <Link
-      href={hub.href}
-      className="group rounded-3xl border border-white/10 bg-white/[0.06] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-purple-300/60 hover:bg-white/[0.08] hover:shadow-lg"
+      href={cluster.href}
+      className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900/45 transition-all duration-300 hover:-translate-y-1 hover:bg-slate-900/70 hover:shadow-xl ${color.border}`}
     >
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-purple-400/15 px-3 py-1 text-xs font-black text-purple-200">
-          {hub.label}
-        </span>
-        <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-200">
-          Guide Hub
-        </span>
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <HubImage
+          image={cluster.image}
+          alt={`${cluster.title} guide hub`}
+          fallbackTitle={cluster.title}
+          imageFit={cluster.imageFit ?? "cover"}
+          imagePosition={cluster.imagePosition ?? "center"}
+          imagePadding={cluster.imagePadding ?? false}
+          priority={priority}
+          sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
+        />
       </div>
 
-      <h2 className="text-xl font-black leading-snug text-white group-hover:text-purple-200">
-        {hub.title}
-      </h2>
-
-      <p className="mt-3 text-sm leading-relaxed text-slate-300">
-        {hub.description}
-      </p>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {hub.coverage.map((item) => (
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-center justify-between gap-3">
           <span
-            key={item}
-            className="rounded-full bg-white/10 px-2.5 py-1 text-xs font-semibold text-slate-300"
+            className={`rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.08em] ${color.badge}`}
           >
-            {item}
+            {cluster.label}
           </span>
-        ))}
-      </div>
 
-      <div className="mt-5 text-sm font-black text-purple-200">
-        Open guide hub →
+          <span className="text-xs font-bold text-slate-500">
+            {spokeCount} {spokeCount === 1 ? "guide" : "guides"}
+          </span>
+        </div>
+
+        <h3 className="mt-4 line-clamp-2 text-xl font-black leading-snug text-white transition-colors group-hover:text-purple-100">
+          {cluster.title}
+        </h3>
+
+        <div className={`mt-auto pt-5 text-sm font-black ${color.text}`}>
+          Open guide hub
+          <span
+            aria-hidden="true"
+            className="ml-2 inline-block transition-transform group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </div>
       </div>
     </Link>
   );
 }
 
-function UpdateGroupCard({ group }: { group: UpdateGroup }) {
-  return (
-    <article className="rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-sm">
-      <div className="mb-4 flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-black uppercase tracking-wide text-purple-300">
-            Guide Collection
-          </p>
-          <h3 className="mt-1 text-xl font-black text-white">{group.game}</h3>
-        </div>
+function DirectoryHubCard({
+  cluster,
+}: {
+  cluster: GuideCluster;
+}) {
+  const color = accentClasses[cluster.accent];
+  const spokeCount = getSpokeCount(cluster);
 
-        <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-300">
-          {group.updates.length} guides
-        </span>
-      </div>
-
-      <div className="space-y-3">
-        {group.updates.map((update) => (
-          <Link
-            key={`${group.game}-${update.href}`}
-            href={update.href}
-            className="group/link block rounded-2xl border border-white/10 bg-slate-900/70 p-4 transition hover:border-purple-300/50 hover:bg-slate-900"
-          >
-            <div className="mb-2 flex flex-wrap gap-2">
-              <span className="rounded-full bg-purple-400/15 px-2.5 py-1 text-[11px] font-black text-purple-200">
-                {update.type}
-              </span>
-
-              {update.date ? (
-                <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-semibold text-slate-300">
-                  {update.date}
-                </span>
-              ) : null}
-            </div>
-
-            <h4 className="text-sm font-black leading-snug text-white group-hover/link:text-purple-200">
-              {update.title}
-            </h4>
-
-            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-400">
-              {update.description}
-            </p>
-          </Link>
-        ))}
-      </div>
-    </article>
-  );
-}
-
-function GuideCard({ guide }: { guide: GuideLink }) {
   return (
     <Link
-      href={guide.href}
-      className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-purple-300/50 hover:bg-white/[0.08]"
+      href={cluster.href}
+      className={`group relative flex min-h-[145px] flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-950/45 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-900/75 hover:shadow-lg ${color.border}`}
     >
-      <span className="text-sm font-bold leading-snug text-slate-200 group-hover:text-purple-100">
-        {guide.title}
-      </span>
-      <span className="shrink-0 text-sm font-black text-purple-300 transition-transform group-hover:translate-x-1">
-        →
-      </span>
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b ${color.glow}`}
+      />
+
+      <div className="relative flex h-full flex-col">
+        <div className="flex items-center justify-between gap-3">
+          <span
+            className={`rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.08em] ${color.badge}`}
+          >
+            {cluster.label}
+          </span>
+
+          <span className="shrink-0 text-xs font-bold text-slate-600">
+            {spokeCount} {spokeCount === 1 ? "guide" : "guides"}
+          </span>
+        </div>
+
+        <h3 className="mt-4 line-clamp-2 text-lg font-black leading-snug text-white transition-colors group-hover:text-purple-100">
+          {cluster.title}
+        </h3>
+
+        <div className={`mt-auto pt-5 text-sm font-black ${color.text}`}>
+          Open hub
+
+          <span
+            aria-hidden="true"
+            className="ml-2 inline-block transition-transform group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </div>
+      </div>
     </Link>
   );
 }
 
-function GuideGroupSection({ group }: { group: ArchiveGuideGroup }) {
+function CategoryDirectorySection({
+  group,
+  defaultOpen = false,
+}: {
+  group: (typeof categoryGroups)[number];
+  defaultOpen?: boolean;
+}) {
+  const color = accentClasses[group.meta.accent];
+
   return (
-    <section className="scroll-mt-24">
-      <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-purple-300">
-            {group.eyebrow}
-          </p>
-          <h2 className="mt-2 text-2xl font-black text-white">{group.title}</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-300">
-            {group.description}
+    <details
+      id={group.meta.id}
+      open={defaultOpen}
+      className="group scroll-mt-24 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]"
+    >
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-5 transition hover:bg-white/[0.035] md:px-7 md:py-6 [&::-webkit-details-marker]:hidden">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-3">
+            <span
+              className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] ${color.badge}`}
+            >
+              {group.hubs.length}{" "}
+              {group.hubs.length === 1 ? "hub" : "hubs"}
+            </span>
+
+            <span className="text-xs font-bold text-slate-500">
+              {group.meta.shortLabel}
+            </span>
+          </div>
+
+          <h2 className="mt-3 text-xl font-black leading-tight text-white md:text-2xl">
+            {group.meta.title}
+          </h2>
+
+          <p className="mt-2 max-w-4xl text-sm leading-relaxed text-slate-400">
+            {group.meta.description}
           </p>
         </div>
 
-        <span className="w-fit rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs font-bold text-slate-300">
-          {group.guides.length} guides
+        <span
+          aria-hidden="true"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.045] text-lg font-black text-purple-200 transition-transform group-open:rotate-180"
+        >
+          ↓
         </span>
-      </div>
+      </summary>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {group.guides.map((guide) => (
-          <GuideCard
-            key={`${group.title}-${guide.title}-${guide.href}`}
-            guide={guide}
-          />
-        ))}
+      <div className="border-t border-white/10 px-5 pb-6 pt-5 md:px-7 md:pb-7">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {group.hubs.map((cluster) => (
+            <DirectoryHubCard
+              key={cluster.href}
+              cluster={cluster}
+            />
+          ))}
+        </div>
       </div>
-    </section>
+    </details>
   );
 }
 
-function FaqSection() {
+function SpecialCollectionCard({
+  cluster,
+}: {
+  cluster: GuideCluster;
+}) {
+  const color = accentClasses[cluster.accent];
+  const pageCount = cluster.pages.length;
+
   return (
-    <section className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 md:p-6">
-      <div className="mb-6">
-        <p className="text-sm font-semibold uppercase tracking-wide text-purple-300">
-          Archive FAQ
+    <Link
+      href={cluster.href}
+      className={`group relative flex min-h-[180px] flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900/45 p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-slate-900/70 hover:shadow-xl ${color.border}`}
+    >
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${color.glow}`}
+      />
+
+      <div className="relative flex h-full flex-col">
+        <div className="flex items-center justify-between gap-3">
+          <span
+            className={`rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.08em] ${color.badge}`}
+          >
+            {cluster.kind === "event" ? "Event Hub" : "Collection"}
+          </span>
+
+          <span className="text-xs font-bold text-slate-600">
+            {pageCount} {pageCount === 1 ? "page" : "pages"}
+          </span>
+        </div>
+
+        <h3 className="mt-4 text-xl font-black leading-snug text-white transition-colors group-hover:text-purple-100">
+          {cluster.title}
+        </h3>
+
+        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-400">
+          {cluster.description}
         </p>
-        <h2 className="mt-2 text-2xl font-black text-white">
+
+        <div className={`mt-auto pt-5 text-sm font-black ${color.text}`}>
+          Open collection
+          <span
+            aria-hidden="true"
+            className="ml-2 inline-block transition-transform group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function ArchiveFaq() {
+  return (
+    <section className="rounded-[2rem] border border-white/10 bg-white/[0.025] p-5 md:p-7">
+      <div>
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-purple-300">
+          Guide Archive FAQ
+        </p>
+
+        <h2 className="mt-3 text-2xl font-black text-white md:text-3xl">
           Finding the right game guide
         </h2>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="mt-7 grid gap-3 md:grid-cols-2">
         {faqItems.map((item) => (
-          <article
+          <details
             key={item.question}
-            className="rounded-2xl border border-white/10 bg-slate-900/75 p-5"
+            className="group rounded-2xl border border-white/[0.08] bg-slate-950/45"
           >
-            <h3 className="font-black text-white">{item.question}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-300">
+            <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-4 font-black text-white [&::-webkit-details-marker]:hidden">
+              <span>{item.question}</span>
+
+              <span
+                aria-hidden="true"
+                className="shrink-0 text-purple-300 transition-transform group-open:rotate-45"
+              >
+                +
+              </span>
+            </summary>
+
+            <p className="border-t border-white/[0.08] px-5 py-4 text-sm leading-relaxed text-slate-400">
               {item.answer}
             </p>
-          </article>
+          </details>
         ))}
       </div>
     </section>
@@ -338,144 +646,249 @@ function FaqSection() {
 export default function AllGameGuidesPage() {
   return (
     <Layout>
-      <main className="bg-slate-950 text-white">
+      <main
+        id="main-content"
+        className="min-h-screen bg-slate-950 text-white"
+      >
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(collectionJsonLd),
+          }}
         />
 
-        <section className="relative isolate overflow-hidden px-4 py-16 md:py-20">
-          <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-96 w-96 -translate-x-1/2 rounded-full bg-purple-500/20 blur-3xl" />
-          <div className="pointer-events-none absolute right-0 top-20 -z-10 h-96 w-96 translate-x-1/3 rounded-full bg-blue-500/10 blur-3xl" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbJsonLd),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqJsonLd),
+          }}
+        />
+
+        <section className="relative isolate overflow-hidden px-4 pb-14 pt-16 md:pb-16 md:pt-20">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/3 top-0 -z-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-purple-500/15 blur-3xl"
+          />
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-0 top-16 -z-10 h-96 w-96 translate-x-1/3 rounded-full bg-blue-500/[0.08] blur-3xl"
+          />
 
           <div className="container mx-auto max-w-6xl">
-            <div className="grid gap-8 lg:grid-cols-[1fr_0.7fr] lg:items-end">
+            <div className="grid gap-9 lg:grid-cols-[1fr_430px] lg:items-end">
               <div>
                 <Link
                   href="/"
-                  className="mb-5 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-black text-slate-200 transition hover:border-purple-300/60 hover:bg-white/10 hover:text-white"
+                  className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-sm font-black text-slate-300 transition hover:border-purple-300/45 hover:bg-white/[0.08] hover:text-white"
                 >
                   ← Back to homepage
                 </Link>
 
-                <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-purple-300">
-                  Complete Archive
+                <p className="mt-7 text-xs font-black uppercase tracking-[0.2em] text-purple-300">
+                  Complete Guide Directory
                 </p>
 
-                <h1 className="text-4xl font-black tracking-tight text-white md:text-5xl">
-                  Complete game guide archive
+                <h1 className="mt-3 max-w-4xl text-4xl font-black leading-tight tracking-tight text-white md:text-5xl">
+                  All PC and indie game guide hubs
                 </h1>
 
                 <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">
-                  Browse active guide hubs, walkthroughs, achievements, endings,
-                  builds, collectibles, system explainers, puzzle solutions, and
-                  older PC game guide collections in one place.
+                  Browse walkthroughs, beginner guides, achievements,
+                  builds, boss help, endings, collectibles, puzzle
+                  solutions, and system guides organized around each game.
                 </p>
+
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <a
+                    href="#newest-game-hubs"
+                    className="inline-flex min-h-11 items-center justify-center rounded-xl bg-purple-500 px-5 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-purple-400"
+                  >
+                    Browse newest hubs
+                  </a>
+
+                  <a
+                    href="#complete-directory"
+                    className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] px-5 text-sm font-black text-slate-200 transition hover:-translate-y-0.5 hover:border-purple-300/40 hover:bg-white/[0.08] hover:text-white"
+                  >
+                    Open complete directory
+                  </a>
+                </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
-                <StatCard value={`${guideEntryCount}+`} label="Guide entries" />
-                <StatCard value={gameCollectionCount} label="Game collections" />
-                <StatCard value={featuredHubCount} label="Featured hubs" />
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035]">
+                <div className="grid grid-cols-3 divide-x divide-white/10">
+                  <ArchiveStat
+                    value={publishedGameHubs.length}
+                    label="Game hubs"
+                  />
+
+                  <ArchiveStat
+                    value={totalGuidePageCount}
+                    label="Guide pages"
+                  />
+
+                  <ArchiveStat
+                    value={activeGameHubCount}
+                    label="Active hubs"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="px-4 pb-16 md:pb-20">
-          <div className="container mx-auto max-w-6xl space-y-14">
-            <section>
-              <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-wide text-purple-300">
-                    Featured Guide Hubs
-                  </p>
-                  <h2 className="mt-2 text-3xl font-black text-white">
-                    Start with the main game hubs
-                  </h2>
-                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300">
-                    These hubs collect the most useful routes, systems,
-                    achievements, endings, builds, and cleanup guides for
-                    currently featured games.
-                  </p>
-                </div>
+        <section
+          id="newest-game-hubs"
+          className="scroll-mt-24 px-4 pb-20"
+        >
+          <div className="container mx-auto max-w-6xl">
+            <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-purple-300">
+                  Newest Guide Hubs
+                </p>
 
-                <Link
-                  href="/#latest-updates"
-                  className="inline-flex w-fit items-center justify-center rounded-full border border-white/10 bg-white/10 px-5 py-2.5 text-sm font-black text-slate-100 transition hover:border-purple-300/50 hover:bg-white/[0.14]"
-                >
-                  Homepage latest stories →
-                </Link>
+                <h2 className="mt-3 text-3xl font-black text-white md:text-4xl">
+                  Start with our latest game coverage
+                </h2>
+
+                <p className="mt-3 max-w-3xl text-base leading-relaxed text-slate-400">
+                  These are the newest game guide hubs currently available
+                  in the archive.
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-                {activeGuideHubs.map((hub) => (
-                  <ActiveHubCard key={hub.href} hub={hub} />
-                ))}
-              </div>
-            </section>
+              <a
+                href="#complete-directory"
+                className="inline-flex w-fit items-center text-sm font-black text-purple-200 transition hover:text-white"
+              >
+                Browse every game hub →
+              </a>
+            </div>
 
-            {recentUpdateGroups.length > 0 ? (
-              <section>
-                <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              {newestGameHubs.map((cluster, index) => (
+                <NewestHubCard
+                  key={cluster.href}
+                  cluster={cluster}
+                  priority={index < 2}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="complete-directory"
+          className="scroll-mt-24 px-4 pb-20 pt-4 md:pb-24 md:pt-6"
+        >
+          <div className="container mx-auto max-w-6xl">
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.02] p-5 md:p-8">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-28 -top-28 h-80 w-80 rounded-full bg-purple-500/[0.08] blur-3xl"
+              />
+
+              <div className="relative">
+                <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                   <div>
-                    <p className="text-sm font-semibold uppercase tracking-wide text-purple-300">
-                      Game Guide Collections
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-purple-300">
+                      Complete Archive
                     </p>
-                    <h2 className="mt-2 text-3xl font-black text-white">
-                      Browse related guides by game
+
+                    <h2 className="mt-3 text-3xl font-black text-white md:text-4xl">
+                      Browse every game hub by category
                     </h2>
-                    <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300">
-                      Each collection groups related walkthroughs, achievements,
-                      endings, builds, collectibles, puzzle help, and system
-                      guides for the same game.
+
+                    <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-400">
+                      Expand a category to find its complete list of game
+                      hubs. Each hub leads to the focused guides available
+                      for that game.
                     </p>
                   </div>
 
-                  <span className="w-fit rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs font-bold text-slate-300">
-                    {normalizedUpdates.length} guide pages
+                  <span className="w-fit rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-xs font-black text-slate-400">
+                    {publishedGameHubs.length} game hubs
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-                  {recentUpdateGroups.map((group) => (
-                    <UpdateGroupCard key={group.game} group={group} />
-                  ))}
-                </div>
-              </section>
-            ) : null}
+                <nav
+                  aria-label="Game guide archive categories"
+                  className="mt-7 flex flex-wrap gap-2.5"
+                >
+                  {categoryGroups.map((group) => {
+                    const color =
+                      accentClasses[group.meta.accent];
 
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 md:p-6">
-              <div className="mb-8">
-                <p className="text-sm font-semibold uppercase tracking-wide text-purple-300">
-                  Browse by Category
+                    return (
+                      <a
+                        key={group.meta.id}
+                        href={`#${group.meta.id}`}
+                        className={`rounded-full border border-white/10 px-4 py-2 text-sm font-bold transition hover:-translate-y-0.5 ${color.soft} ${color.text} ${color.border}`}
+                      >
+                        {group.meta.shortLabel}
+                        <span className="ml-2 text-xs opacity-60">
+                          {group.hubs.length}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </nav>
+
+                <div className="mt-8 space-y-4">
+                {categoryGroups.map((group) => (
+                  <CategoryDirectorySection
+                    key={group.meta.id}
+                    group={group}
+                  />
+                ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {specialCollections.length > 0 ? (
+          <section className="px-4 pb-20 pt-4 md:pb-24 md:pt-6">
+            <div className="container mx-auto max-w-6xl">
+              <div className="mb-7">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-purple-300">
+                  Events & Collections
                 </p>
-                <h2 className="mt-2 text-3xl font-black text-white">
-                  Full guide archive
+
+                <h2 className="mt-3 text-3xl font-black text-white">
+                  Special guide collections
                 </h2>
-                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-300">
-                  Use these categories when you know the type of game or guide
-                  you need. Some games appear in more than one section when they
-                  support multiple player needs.
+
+                <p className="mt-3 max-w-3xl text-base leading-relaxed text-slate-400">
+                  Browse event coverage and curated guide collections that
+                  are not tied to a single game hub.
                 </p>
               </div>
 
-              <div className="space-y-10">
-                {guideGroups.map((group) => (
-                  <GuideGroupSection key={group.title} group={group} />
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {specialCollections.map((cluster) => (
+                  <SpecialCollectionCard
+                    key={cluster.href}
+                    cluster={cluster}
+                  />
                 ))}
               </div>
-            </section>
+            </div>
+          </section>
+        ) : null}
 
-            <FaqSection />
+        <section className="px-4 pb-20 md:pb-24">
+          <div className="container mx-auto max-w-6xl">
+            <ArchiveFaq />
           </div>
         </section>
       </main>

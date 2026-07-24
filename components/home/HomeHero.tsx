@@ -1,101 +1,49 @@
 import Link from "next/link";
 
-type EditorPick = {
+type HeroAccent =
+  | "purple"
+  | "blue"
+  | "emerald"
+  | "amber"
+  | "rose"
+  | "cyan";
+
+type FeaturedGuide = {
   title: string;
   href: string;
   game: string;
   type: string;
   description: string;
-  accent: "purple" | "blue" | "emerald" | "amber" | "rose" | "cyan";
+  highlights: string[];
+  accent: HeroAccent;
 };
 
-type HeroStat = {
-  value: string;
-  label: string;
+const featuredGuide: FeaturedGuide = {
+  title: "New Horizons Guide, Project Eden & Ship Routes",
+  href: "/the-last-caretaker/new-horizons-guide",
+  game: "The Last Caretaker",
+  type: "Walkthrough",
+  description:
+    "Route New Horizons, Project Eden, Oil Whale, power, fuel, wall outlets, and ship cleanup decisions without wasting a run.",
+  highlights: ["Project Eden", "Oil Whale", "Ship routes"],
+  accent: "purple",
 };
 
-type GuideType = {
-  label: string;
-  href: string;
-};
-
-const editorPicks: EditorPick[] = [
-  {
-    title: "New Horizons Guide, Project Eden & Ship Routes",
-    href: "/the-last-caretaker/new-horizons-guide",
-    game: "The Last Caretaker",
-    type: "Walkthrough",
-    description:
-      "Route New Horizons, Project Eden, Oil Whale, power, fuel, wall outlets, and ship cleanup decisions.",
-    accent: "purple",
-  },
-  {
-    title: "Best Skitarii Builds Guide",
-    href: "/darktide/best-skitarii-builds",
-    game: "Darktide Skitarii",
-    type: "Builds",
-    description:
-      "Build around Redline, Cog Tree choices, Servo Skull inputs, weapons, and safer early class routes.",
-    accent: "rose",
-  },
-  {
-    title: "Moldwasher Collectibles Guide",
-    href: "/moldwasher/collectibles-guide",
-    game: "Moldwasher",
-    type: "Collectibles",
-    description:
-      "Find hidden objects, stickers, CDs, toys, tricky corners, cleanup spots, and 100% collection checks.",
-    accent: "emerald",
-  },
-];
-
-const heroStats: HeroStat[] = [
-  {
-    value: "60+",
-    label: "Guide hubs",
-  },
-  {
-    value: "6",
-    label: "Guide formats",
-  },
-  {
-    value: "Updated",
-    label: "Around releases",
-  },
-];
-
-const guideTypes: GuideType[] = [
-  {
-    label: "Walkthroughs",
-    href: "/#featured-games",
-  },
-  {
-    label: "Achievements",
-    href: "/#latest-updates",
-  },
-  {
-    label: "Endings",
-    href: "/best-games-with-multiple-endings",
-  },
-  {
-    label: "Builds",
-    href: "/#featured-games",
-  },
-  {
-    label: "Collectibles",
-    href: "/#latest-updates",
-  },
-  {
-    label: "Puzzle Solutions",
-    href: "/#all-game-guides",
-  },
-];
+const guideTypes = [
+  "Walkthroughs",
+  "Beginner Guides",
+  "Achievements",
+  "Endings",
+  "Builds",
+  "Puzzle Help",
+] as const;
 
 const accentClasses: Record<
-  EditorPick["accent"],
+  HeroAccent,
   {
     badge: string;
     border: string;
+    button: string;
     glow: string;
     text: string;
   }
@@ -103,37 +51,43 @@ const accentClasses: Record<
   purple: {
     badge: "bg-purple-400/15 text-purple-100",
     border: "hover:border-purple-300/60",
-    glow: "from-purple-500/20 to-fuchsia-500/10",
+    button: "bg-purple-500 hover:bg-purple-400",
+    glow: "from-purple-500/25 via-fuchsia-500/10 to-transparent",
     text: "text-purple-200",
   },
   blue: {
     badge: "bg-blue-400/15 text-blue-100",
     border: "hover:border-blue-300/60",
-    glow: "from-blue-500/20 to-cyan-500/10",
+    button: "bg-blue-500 hover:bg-blue-400",
+    glow: "from-blue-500/25 via-cyan-500/10 to-transparent",
     text: "text-blue-200",
   },
   emerald: {
     badge: "bg-emerald-400/15 text-emerald-100",
     border: "hover:border-emerald-300/60",
-    glow: "from-emerald-500/20 to-teal-500/10",
+    button: "bg-emerald-500 hover:bg-emerald-400",
+    glow: "from-emerald-500/25 via-teal-500/10 to-transparent",
     text: "text-emerald-200",
   },
   amber: {
     badge: "bg-amber-400/15 text-amber-100",
     border: "hover:border-amber-300/60",
-    glow: "from-amber-500/20 to-orange-500/10",
+    button: "bg-amber-500 hover:bg-amber-400",
+    glow: "from-amber-500/25 via-orange-500/10 to-transparent",
     text: "text-amber-200",
   },
   rose: {
     badge: "bg-rose-400/15 text-rose-100",
     border: "hover:border-rose-300/60",
-    glow: "from-rose-500/20 to-red-500/10",
+    button: "bg-rose-500 hover:bg-rose-400",
+    glow: "from-rose-500/25 via-red-500/10 to-transparent",
     text: "text-rose-200",
   },
   cyan: {
     badge: "bg-cyan-400/15 text-cyan-100",
     border: "hover:border-cyan-300/60",
-    glow: "from-cyan-500/20 to-sky-500/10",
+    button: "bg-cyan-500 hover:bg-cyan-400",
+    glow: "from-cyan-500/25 via-sky-500/10 to-transparent",
     text: "text-cyan-200",
   },
 };
@@ -141,216 +95,233 @@ const accentClasses: Record<
 function SearchBox() {
   return (
     <form
-      action="/guides"
+      action="/all-game-guides"
       method="get"
-      className="mx-auto flex max-w-xl flex-col gap-3 sm:flex-row lg:mx-0"
+      role="search"
+      className="mx-auto max-w-2xl lg:mx-0"
     >
       <label htmlFor="home-guide-search" className="sr-only">
-        Search game guides
+        Search PC and indie game guides
       </label>
 
-      <input
-        id="home-guide-search"
-        type="search"
-        name="q"
-        placeholder="Search game guides..."
-        className="min-h-12 flex-1 rounded-2xl border border-white/15 bg-white px-4 text-slate-950 shadow-sm outline-none placeholder:text-slate-500 focus:border-purple-300"
-      />
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="relative min-w-0 flex-1">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500"
+          >
+            <path
+              d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
 
-      <button
-        type="submit"
-        className="min-h-12 rounded-2xl bg-white px-6 font-bold text-purple-950 shadow-lg transition hover:-translate-y-0.5 hover:bg-purple-50"
-      >
-        Search
-      </button>
+          <input
+            id="home-guide-search"
+            type="search"
+            name="q"
+            placeholder="Search a game, boss, item, achievement, or puzzle..."
+            autoComplete="off"
+            className="min-h-14 w-full rounded-2xl border border-white/15 bg-white py-3 pl-12 pr-4 text-base text-slate-950 shadow-xl outline-none placeholder:text-slate-500 focus:border-purple-300 focus:ring-4 focus:ring-purple-300/20"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="min-h-14 shrink-0 rounded-2xl bg-white px-7 font-black text-purple-950 shadow-xl transition hover:-translate-y-0.5 hover:bg-purple-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-300/40"
+        >
+          Find a Guide
+        </button>
+      </div>
+
+      <p className="mt-3 text-center text-xs leading-relaxed text-slate-400 lg:text-left">
+        Search by game title or the exact problem stopping your run.
+      </p>
     </form>
   );
 }
 
-function HeroStats() {
+function GuideTypeLabels() {
   return (
-    <div className="grid grid-cols-3 gap-3 pt-2">
-      {heroStats.map((stat) => (
-        <div
-          key={stat.label}
-          className="rounded-2xl border border-white/10 bg-white/10 px-3 py-4 text-center backdrop-blur-sm"
-        >
-          <div className="text-xl font-black text-white md:text-2xl">
-            {stat.value}
-          </div>
-          <div className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-slate-300">
-            {stat.label}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function GuideTypePills() {
-  return (
-    <div className="flex flex-wrap justify-center gap-3 pt-2 lg:justify-start">
-      {guideTypes.map((item) => (
-        <Link
-          key={item.label}
-          href={item.href}
-          className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white/90 transition hover:border-purple-200 hover:bg-white/15 hover:text-white"
-        >
-          {item.label}
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-function EditorPickCard({ pick, index }: { pick: EditorPick; index: number }) {
-  const color = accentClasses[pick.accent];
-
-  return (
-    <Link
-      href={pick.href}
-      className={`group block rounded-3xl border border-white/10 bg-white/[0.07] p-4 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.1] ${color.border}`}
-    >
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-2">
-          <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${color.badge}`}>
-            {pick.type}
-          </span>
-          <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs font-semibold text-slate-200">
-            {pick.game}
-          </span>
-        </div>
-
-        <span className="text-xs font-black text-slate-500">
-          0{index + 1}
-        </span>
-      </div>
-
-      <h3 className="text-base font-black leading-snug text-white group-hover:text-purple-100">
-        {pick.title}
-      </h3>
-
-      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-300">
-        {pick.description}
+    <div aria-label="Types of game guides covered">
+      <p className="mb-3 text-center text-xs font-bold uppercase tracking-[0.16em] text-slate-400 lg:text-left">
+        Guide coverage
       </p>
 
-      <div className={`mt-4 text-sm font-bold ${color.text}`}>
-        Read guide →
-      </div>
-    </Link>
+      <ul className="flex flex-wrap justify-center gap-2 lg:justify-start">
+        {guideTypes.map((item) => (
+          <li key={item}>
+            <span className="inline-flex rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-sm font-semibold text-slate-300">
+              {item}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-function EditorialPanel() {
+function FeaturedGuideCard({ guide }: { guide: FeaturedGuide }) {
+  const color = accentClasses[guide.accent];
+
   return (
-    <div className="relative">
-      <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-transparent blur-2xl" />
+    <aside
+      aria-labelledby="home-featured-guide-title"
+      className="relative mx-auto w-full max-w-xl lg:mx-0 lg:max-w-none"
+    >
+      <div
+        aria-hidden="true"
+        className={`absolute -inset-5 rounded-[2.5rem] bg-gradient-to-br ${color.glow} blur-3xl`}
+      />
 
-      <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/80 p-5 shadow-2xl backdrop-blur-md">
-        <div className="mb-5 rounded-3xl border border-white/10 bg-gradient-to-br from-purple-500/20 to-blue-500/10 p-5">
-          <div className="mb-4 flex items-start justify-between gap-4">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-wide text-purple-200">
-                Editor&apos;s Desk
-              </p>
-              <h2 className="mt-2 text-2xl font-black leading-tight text-white">
-                Active guide coverage
-              </h2>
-            </div>
+      <div
+        className={`group relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/85 shadow-2xl backdrop-blur-md transition duration-300 hover:-translate-y-1 ${color.border}`}
+      >
+        <div className="border-b border-white/10 bg-gradient-to-br from-white/[0.08] to-transparent p-6 md:p-7">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span
+              className={`rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-wide ${color.badge}`}
+            >
+              Featured Guide
+            </span>
 
-            <span className="rounded-full bg-white px-3 py-1 text-xs font-black text-purple-950">
-              New
+            <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs font-bold text-slate-300">
+              {guide.type}
             </span>
           </div>
 
-          <p className="text-sm leading-relaxed text-slate-200">
-            Practical routes for new PC and indie games: first-hour help, route
-            locks, builds, achievements, collectibles, endings, and systems that
-            players actually search for while playing.
+          <p className={`mt-7 text-sm font-black ${color.text}`}>
+            {guide.game}
+          </p>
+
+          <h2
+            id="home-featured-guide-title"
+            className="mt-3 text-3xl font-black leading-tight tracking-tight text-white md:text-4xl"
+          >
+            {guide.title}
+          </h2>
+
+          <p className="mt-4 text-base leading-relaxed text-slate-300">
+            {guide.description}
           </p>
         </div>
 
-        <div className="space-y-3">
-          {editorPicks.map((pick, index) => (
-            <EditorPickCard key={pick.href} pick={pick} index={index} />
-          ))}
-        </div>
+        <div className="p-6 md:p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+            Inside this guide
+          </p>
 
-        <div className="mt-5 grid grid-cols-2 gap-3">
-          <Link
-            href="/#latest-updates"
-            className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-center text-sm font-bold text-white transition hover:bg-white/15"
-          >
-            Latest Updates
-          </Link>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {guide.highlights.map((highlight) => (
+              <span
+                key={highlight}
+                className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs font-semibold text-slate-200"
+              >
+                {highlight}
+              </span>
+            ))}
+          </div>
 
-          <Link
-            href="/#all-game-guides"
-            className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-center text-sm font-bold text-white transition hover:bg-white/15"
-          >
-            All Game Guides
-          </Link>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href={guide.href}
+              className={`inline-flex min-h-12 flex-1 items-center justify-center rounded-xl px-5 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-300/30 ${color.button}`}
+            >
+              Read Featured Guide
+              <span
+                aria-hidden="true"
+                className="ml-2 transition-transform group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </Link>
+
+            <Link
+              href="/#featured-games"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.07] px-5 text-sm font-bold text-slate-100 transition hover:border-purple-300/40 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300"
+            >
+              Explore Guide Hubs
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }
 
 export default function HomeHero() {
   return (
-    <section className="relative overflow-hidden bg-slate-950 px-4 pt-20 pb-16 text-white md:pt-24 md:pb-20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.22),transparent_32%),radial-gradient(circle_at_top_right,rgba(59,130,246,0.16),transparent_30%),linear-gradient(135deg,#020617_0%,#111827_48%,#1e1b4b_100%)]" />
-      <div className="container relative mx-auto max-w-6xl">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="space-y-7 text-center lg:text-left">
-            <div className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-purple-100 shadow-sm backdrop-blur-sm">
-              Independent PC & indie game guide publication
+    <section className="relative isolate overflow-hidden bg-slate-950 px-4 pb-16 pt-16 text-white md:pb-20 md:pt-20 lg:pb-24 lg:pt-24">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-20 bg-[linear-gradient(135deg,#020617_0%,#0f172a_48%,#1e1b4b_100%)]"
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_15%,rgba(168,85,247,0.24),transparent_32%),radial-gradient(circle_at_88%_10%,rgba(59,130,246,0.16),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(124,58,237,0.10),transparent_38%)]"
+      />
+
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.07] px-4 py-2 text-sm font-bold text-purple-100 shadow-sm backdrop-blur-sm">
+              <span
+                aria-hidden="true"
+                className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.85)]"
+              />
+              Player-first PC & indie game guides
             </div>
 
-            <div>
-              <h1 className="text-4xl font-black leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-                Practical guides for new PC and indie games
-              </h1>
+            <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-black leading-[1.04] tracking-tight text-white md:text-5xl lg:mx-0 lg:text-6xl">
+              Practical guides for the PC and indie games you&apos;re playing now
+            </h1>
 
-              <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-200 md:text-xl lg:mx-0">
-                Whisper of the House covers walkthroughs, endings, achievements,
-                builds, collectibles, puzzle solutions, boss help, and first-hour
-                routes for Steam, indie, cozy, survival, RPG, puzzle, and strategy
-                games.
-              </p>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl lg:mx-0">
+              Find walkthroughs, beginner routes, achievements, endings,
+              builds, collectibles, and puzzle solutions for new PC and indie
+              games.
+            </p>
+
+            <div className="mt-8">
+              <SearchBox />
             </div>
 
-            <SearchBox />
-
-            <div className="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-              <Link
-                href="/#latest-updates"
-                className="inline-flex items-center justify-center rounded-2xl bg-white px-7 py-3 font-black text-purple-950 shadow-lg transition hover:-translate-y-0.5 hover:bg-purple-50"
-              >
-                Latest Updates
-              </Link>
-
-              <Link
-                href="/#featured-games"
-                className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/10 px-7 py-3 font-bold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/15"
-              >
-                Featured Hubs
-              </Link>
-
-              <Link
-                href="/#all-game-guides"
-                className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/10 px-7 py-3 font-bold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/15"
-              >
-                All Game Guides
-              </Link>
+            <div className="mt-7">
+              <GuideTypeLabels />
             </div>
 
-            <GuideTypePills />
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-slate-400 lg:justify-start">
+              <span className="inline-flex items-center gap-2">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-purple-300"
+                />
+                Specific routes and decisions
+              </span>
 
-            <HeroStats />
-          </div>
+              <span className="inline-flex items-center gap-2">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-purple-300"
+                />
+                Updated around releases
+              </span>
 
-          <EditorialPanel />
+              <Link
+                href="/all-game-guides"
+                className="font-bold text-purple-200 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300"
+              >
+                Browse all game guides →
+              </Link>
+            </div>
+          </div>  
+
+          <FeaturedGuideCard guide={featuredGuide} />
         </div>
       </div>
     </section>
