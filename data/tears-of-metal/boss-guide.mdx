@@ -1,0 +1,777 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const bossComparisonColumns = [
+  { key: "boss", label: "Boss" },
+  { key: "coreMistake", label: "Core Mistake" },
+  { key: "mainCue", label: "Main Cue" },
+  { key: "safeResponse", label: "Safe Response" },
+  { key: "bestPunish", label: "Best Punish" },
+];
+
+export const bossComparisonRows = [
+  {
+    boss: "Gilles, The Hog",
+    coreMistake:
+      "Starting a long combo before the current attack is truly over",
+    mainCue:
+      "Raised weapon, extended swing string, or second-form transformation",
+    safeResponse:
+      "Create distance, wait for impact and recovery, then re-enter",
+    bestPunish:
+      "One Heavy, Finisher, Special, or Ally Command sequence",
+  },
+  {
+    boss: "Iseult, The Banshee",
+    coreMistake:
+      "Chasing through unsafe ground or committing to the wrong body",
+    mainCue:
+      "Erupting Earth, relocation, and multiple possible Iseult targets",
+    safeResponse:
+      "Reposition, test the target with a short hit, then commit",
+    bestPunish:
+      "One direct combo after the real target and safe route are confirmed",
+  },
+];
+
+export const gillesColumns = [
+  { key: "cue", label: "Attack or Cue" },
+  { key: "response", label: "What I Do" },
+  { key: "punish", label: "Punish Window" },
+  { key: "avoid", label: "What I Avoid" },
+];
+
+export const gillesRows = [
+  {
+    cue: "Short normal swing",
+    response:
+      "Block while Stamina is healthy, then watch for the next movement",
+    punish:
+      "Only after Gilles clearly stops the current string",
+    avoid:
+      "Starting Heavy after the first pause",
+  },
+  {
+    cue: "Extended swing string",
+    response:
+      "Block the readable start, then leave before Block Stamina breaks",
+    punish:
+      "After the final swing and recovery",
+    avoid:
+      "Holding Block until the bar is empty",
+  },
+  {
+    cue: "Overhead weapon raise",
+    response:
+      "Move outside the impact area and keep Gilles in view",
+    punish:
+      "After the slam lands and the recovery finishes",
+    avoid:
+      "Finishing another hit while the weapon is still rising",
+  },
+  {
+    cue: "Second-form transformation",
+    response:
+      "Create space and watch the first empowered sequence",
+    punish:
+      "The first confirmed recovery after the transition",
+    avoid:
+      "Spending every Special before the form change",
+  },
+  {
+    cue: "Ranged pressure or nearby Fodders",
+    response:
+      "Clear the closest interruption while Gilles resets",
+    punish:
+      "Return before the next boss string begins",
+    avoid:
+      "Watching only Gilles while Commanders are overwhelmed",
+  },
+];
+
+export const iseultColumns = [
+  { key: "mechanic", label: "Mechanic" },
+  { key: "response", label: "What I Do" },
+  { key: "attack", label: "When I Attack" },
+  { key: "avoid", label: "Common Mistake" },
+];
+
+export const iseultRows = [
+  {
+    mechanic: "Erupting Earth",
+    response:
+      "Leave the marked ground and move toward a clear lane",
+    attack:
+      "After the hazard stops controlling the route",
+    avoid:
+      "Crossing the area to preserve damage or a combo",
+  },
+  {
+    mechanic: "Relocation",
+    response:
+      "Track Iseult from distance and keep the camera wide",
+    attack:
+      "After her movement stops",
+    avoid:
+      "Using a Special while she is still changing position",
+  },
+  {
+    mechanic: "Clone phase",
+    response:
+      "Test one target with the shortest safe hit",
+    attack:
+      "When the main boss health bar responds",
+    avoid:
+      "Committing Heavy or Special before confirmation",
+  },
+  {
+    mechanic: "Nearby soldiers",
+    response:
+      "Clear the group interfering with movement or defense",
+    attack:
+      "While Iseult is unavailable or relocating",
+    avoid:
+      "Hunting every distant Fodder and missing the next boss window",
+  },
+];
+
+Gilles and Iseult punish two different mistakes.
+
+**Gilles punishes long animation commitments.** I lose when I start Heavy, a full
+combo, or a rescue before his current attack is truly finished.
+
+**Iseult punishes target and ground misreads.** I lose when I chase through
+Erupting Earth, spend a Special while she is relocating, or commit to an
+unconfirmed clone.
+
+<GuideQuickAnswer title="How I Beat Gilles and Iseult">
+  <p>
+    Against <strong>Gilles</strong>, I watch one complete attack string, create
+    distance when the weapon rises, and return for one damage sequence after the
+    impact and recovery.
+  </p>
+
+  <p className="mt-3">
+    Against <strong>Iseult</strong>, I treat unsafe-ground and clone cycles as
+    observation phases. I reposition first, test a target with one short hit, and
+    commit only after the real body and a clear route are confirmed.
+  </p>
+</GuideQuickAnswer>
+
+<GuideTable
+  caption="The decision that matters most against each Tears of Metal boss."
+  columns={bossComparisonColumns}
+  rows={bossComparisonRows}
+/>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">
+    Last tested: July 24, 2026.
+  </strong>{" "}
+  Steam Early Access launch build. Gilles and Iseult were tested in solo
+  Campaigns, with boss-role changes checked in a two-player Campaign.
+</div>
+
+<h2 id="boss-ready-check">
+  My boss-ready check before selecting the node
+</h2>
+
+I do not need a perfect build. I need enough health to survive one mistake and one
+short damage loop that works against a single target.
+
+Before entering either boss node, I check:
+
+- health can survive one failed Dodge or broken Block;
+- Strike or Heavy has one reliable boss-damage payoff;
+- at least one useful Commander or Companion is still alive;
+- the current battlefield has been swept for Chicken, Coins, and rewards;
+- remaining Coins are assigned to healing or a specific upgrade;
+- Special and the most useful Ally Command are ready or close to ready.
+
+For Gilles, I want a short test attack plus one strong Finisher.
+
+For Iseult, I want a quick Strike for clone checks, direct boss damage, movement
+support, and enough area pressure to remove nearby soldiers without depending on
+their deaths for all of my damage.
+
+Critical health, maximum Threat, and a mostly dead army are three separate problems
+before the fight even begins. Route, Threat, Chest, and healing decisions are
+covered in the{" "}
+<Link
+  href="/tears-of-metal/beginner-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  first Campaign and Act 1 route guide
+</Link>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="gilles">
+  How I beat Gilles, The Hog
+</h2>
+
+Gilles is the Act 1 boss at the Great Gates.
+
+His size makes him easy to track, but it also fills the camera and hides smaller
+enemies, Commanders, and ground effects around my hero.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-gilles-the-hog-boss.webp"
+    alt="Tears of Metal Gilles The Hog entering the Act 1 boss fight at the Great Gates"
+    width={1024}
+    height={768}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I keep Gilles near the edge of the camera instead of standing directly
+    underneath him. I need enough space to see his next swing and nearby threats.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Gilles attack cues, defenses, and safe punish windows."
+  columns={gillesColumns}
+  rows={gillesRows}
+/>
+
+<h3 id="gilles-first-form">
+  Gilles first form: test the opening before committing
+</h3>
+
+I begin defensively and watch one complete attack string.
+
+My opening loop is:
+
+1. stay outside the first swing;
+2. Block the readable follow-up while Stamina is healthy;
+3. leave before the Block bar breaks;
+4. wait until Gilles stops moving;
+5. use one short Strike or Ally Command to confirm the recovery;
+6. complete one Heavy, Finisher, or direct combo;
+7. leave before the next string begins.
+
+A high-Threat Gilles sequence removed roughly half of my health in three hits.
+That changed the fight from trading damage into taking one confirmed punish at a
+time.
+
+### When I Block and when I move
+
+I Block a short normal swing when I can see the entire attack and still have enough
+Block Stamina for the follow-up.
+
+I move or Dodge when:
+
+- the swing string is continuing longer than my Block bar can support;
+- the weapon is raised for the overhead slam;
+- another enemy is attacking from outside the camera;
+- or I am already recovering from a slow Heavy animation.
+
+I do not force a Block through a large ground impact. Moving out preserves both
+health and Block Stamina for the next direct exchange.
+
+### Do not let lock-on hide the battlefield
+
+I do not hold lock-on so tightly that Gilles fills the entire camera.
+
+When he crosses the arena, I briefly release or adjust the camera, relocate the
+nearest ranged threat, and rebuild the angle from open ground.
+
+That matters most when:
+
+- an Archer is firing from behind Gilles;
+- a Commander is in danger;
+- Chicken or a recovery interaction is near the arena edge;
+- or the overhead weapon animation is partially outside the frame.
+
+<h3 id="gilles-overhead-slam">
+  Overhead slam: the raised weapon is the warning
+</h3>
+
+The raised weapon is not the attack window. It is the signal to leave.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-gilles-overhead-slam-telegraph.webp"
+    alt="Tears of Metal Gilles raising his weapon before the overhead slam"
+    width={1046}
+    height={768}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I move out while the weapon is rising, wait for the slam and recovery, then
+    return for one complete punish.
+  </figcaption>
+</figure>
+
+My response is:
+
+1. stop the current combo;
+2. move outside the impact area;
+3. keep Gilles visible without circling underneath him;
+4. wait for the weapon to land;
+5. wait through the recovery;
+6. return with one Wallace Heavy, Brienne combo, Special, or Ally Command sequence.
+
+I attempt a second string only when Gilles is clearly staggered or held by control.
+A normal slam recovery gives me one reliable punish, not permission to empty every
+animation into him.
+
+<h3 id="gilles-army">
+  How I use the army against Gilles
+</h3>
+
+I preserve Command Energy before entering the Great Gates.
+
+Spearmen pressure protected targets during a confirmed opening. Archers continue
+dealing damage while I retreat from the counterattack.
+
+My usual order is:
+
+1. wait for the boss string to finish;
+2. send Spearmen;
+3. complete one personal damage sequence;
+4. send Archers while leaving;
+5. rescue a valuable Commander during the next reset.
+
+I do not cross an active slam to rescue a low-value unit.
+
+I rescue an Archer, Companion, or Commander carrying an important Ally Emblem when
+I can first move Gilles away from the rescue position.
+
+
+<h3 id="gilles-second-form">
+  Gilles second form: save the burst for the transition
+</h3>
+
+Gilles changes visibly before the stronger part of the fight.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-gilles-second-form.webp"
+    alt="Tears of Metal Gilles entering his stronger second form"
+    width={1024}
+    height={768}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The visible transformation is my phase cue. I create space, watch the first
+    empowered sequence, and spend the saved burst on the first confirmed recovery.
+  </figcaption>
+</figure>
+
+I use the transformation itself instead of trying to time an exact health
+percentage.
+
+My second-form plan is:
+
+1. stop attacking during the transformation;
+2. create distance before the first empowered sequence;
+3. keep enough room to leave a larger impact area if the empowered attack expands beyond its first-form range;
+4. watch which part of the familiar attack string has changed;
+5. send the army when the first recovery begins;
+6. use the saved Special or strongest Finisher;
+7. leave again before Gilles restarts.
+
+The reliable change is increased punishment and pressure after the transformation.
+I do not treat the first second-form attack as safe merely because an earlier
+version of the same animation could be Blocked.
+
+If the attack produces a large impact area or empties Block Stamina too quickly, I
+move out instead of testing the limit with another trade.
+
+<h3 id="gilles-failures">
+  Why my Gilles attempts fail
+</h3>
+
+### Heavy starts during a wind-up
+
+I mistake a pause for the end of the attack string.
+
+**Fix:** use one short Strike or Ally Command before committing to Heavy.
+
+### The army dies while I watch the boss
+
+Ranged enemies and nearby Fodders keep pressuring Commanders outside the center of
+the camera.
+
+**Fix:** clear the nearest interruption during Gilles’s recovery, then return.
+
+### I rescue through an active attack
+
+The rescue attempt is interrupted or costs most of the health bar.
+
+**Fix:** pull Gilles away from the rescue position and return after the next slam or
+long recovery.
+
+### I enter at critical health
+
+The damage build works, but one missed defense ends the Campaign.
+
+**Fix:** skip the final optional node or speculative Chest and buy recovery before
+the Great Gates.
+
+<h3 id="gilles-reward">
+  What happens after beating Gilles
+</h3>
+
+The successful Act 1 clear awarded a **Dragonstone Shard** and moved the Campaign
+**Beyond the Gates**.
+
+I collect the reward and check the surviving army before selecting the first Act 2
+node. The boss victory does not revive lost units or repair a weak formation by
+itself.
+
+Dragonstone Shard and permanent upgrade decisions are covered in the{" "}
+<Link
+  href="/tears-of-metal/village-upgrades"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Village upgrades and progression guide
+</Link>
+
+<h2 id="iseult">
+  How I beat Iseult, The Banshee
+</h2>
+
+Iseult is the Act 2 boss.
+
+I beat her by separating movement phases from damage phases instead of trying to
+maintain constant pressure.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-iseult-the-banshee-boss.webp"
+    alt="Tears of Metal Iseult The Banshee entering the Act 2 boss fight"
+    width={782}
+    height={774}
+    className="mx-auto h-auto w-full max-w-4xl rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Iseult rewards short confirmation attacks, movement discipline, and one direct
+    combo after the real target stops relocating.
+  </figcaption>
+</figure>
+
+<GuideTable
+  caption="Iseult mechanics, safe responses, and attack windows."
+  columns={iseultColumns}
+  rows={iseultRows}
+/>
+
+<h3 id="iseult-preparation">
+  Iseult preparation: direct damage and movement first
+</h3>
+
+One successful attempt entered with:
+
+- **50 HP**;
+- no healing shrine waiting on the boss node;
+- **+30% Strike Damage** purchased immediately before the fight;
+- direct Strike and Heavy damage already working.
+
+The Strike purchase was worth it because Strike was already my safe confirmation
+attack.
+
+I would choose healing instead when one ground hit can immediately end the run.
+
+My minimum Iseult setup is:
+
+- a short Strike that can test a possible clone safely;
+- direct boss damage that does not require a Fodder death;
+- Dodge, movement, or another way to leave Erupting Earth;
+- enough area pressure to clear the nearby group;
+- one saved burst for a confirmed target.
+
+The complete Wallace and Brienne routes are in the{" "}
+<Link
+  href="/tears-of-metal/best-builds"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Wallace and Brienne build guide
+</Link>
+
+<h3 id="iseult-erupting-earth">
+  Erupting Earth: leave first and attack later
+</h3>
+
+When the marked ground expands, I abandon the current combo and move toward a clear
+lane.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-iseult-erupting-earth.webp"
+    alt="Tears of Metal Iseult Erupting Earth covering a large circular area"
+    width={1024}
+    height={773}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The correct response is movement, not damage. I wait until the route to Iseult
+    is clear before rebuilding the combo.
+  </figcaption>
+</figure>
+
+My sequence is:
+
+1. stop attacking;
+2. move out of the marked area;
+3. keep the camera wide enough to see Iseult and nearby soldiers;
+4. wait for her relocation to finish;
+5. confirm the target using the clone method below;
+6. complete one direct combo;
+7. leave before the next ground cycle.
+
+I do not rely on Block against Erupting Earth. I leave the marked area and preserve
+Block Stamina for direct attacks from the boss or nearby soldiers.
+
+I also do not spend a Special while Iseult is moving. Even a strong attack is wasted
+when the target relocates before the damage connects.
+
+<h3 id="iseult-clones">
+  How I find the real Iseult during the clone phase
+</h3>
+
+I use the shortest safe attack as a test.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-iseult-clone-phase.webp"
+    alt="Tears of Metal Iseult clone phase with multiple possible boss targets"
+    width={778}
+    height={790}
+    className="mx-auto h-auto w-full max-w-4xl rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I test one target with a short hit and watch the main boss health bar. Heavy,
+    Special, and long Finishers stay unused until the real body is confirmed.
+  </figcaption>
+</figure>
+
+The check is:
+
+1. approach from open ground;
+2. use the shortest Strike or quick hit;
+3. watch the main boss health bar;
+4. leave immediately when the tested body does not reduce it;
+5. test the next reachable target;
+6. commit only after the main health bar responds.
+
+Damage numbers can be difficult to read inside the crowd, so the main boss health
+bar is my primary confirmation.
+
+I do not treat lock-on behavior, Ally targeting, a single animation, or visual noise
+as proof when the health bar does not move.
+
+In two-player co-op, one player tests targets while the other preserves Special and
+clears the nearby group.
+
+<h3 id="iseult-adds">
+  Why I clear the nearby soldiers
+</h3>
+
+The smaller enemies can consume defensive effects, interrupt the clone check, and
+force me across unsafe ground.
+
+I clear the group already affecting the current lane when:
+
+- several soldiers are surrounding the hero;
+- a defensive effect has limited charges or duration;
+- Iseult is relocating;
+- the next target check would begin inside the crowd.
+
+I do not hunt every distant Fodder. I remove enough pressure to make the next clone
+check and direct combo safe.
+
+Brienne’s Burning and Combust are strong here because the group creates additional
+death-burst value. Wallace can use Vortex and Heavy explosions to clear the space
+around the real target.
+
+<AdUnit placement="article_middle" />
+
+<h3 id="iseult-openings">
+  The Iseult punish window I use
+</h3>
+
+After the real target is confirmed, I attack only when:
+
+- Erupting Earth no longer blocks the route;
+- Iseult has finished relocating;
+- nearby soldiers are not interrupting the approach;
+- the tested body reduced the main boss health bar;
+- one direct combo can finish before she moves again.
+
+I complete one Strike-to-Heavy sequence or another short direct combo, then leave.
+
+I do not force a second string after the movement cue has already begun.
+
+Near the end of the successful fight, I gave up one possible hit and waited for the
+next clean cycle. The final safe opening was more valuable than preserving the
+combo.
+
+<h3 id="iseult-reward">
+  What happens after beating Iseult
+</h3>
+
+Confirmed after the clear:
+
+- the Campaign entered the next region;
+- the hero recovered health during the transition;
+- soldiers that had already died remained unavailable;
+- the surviving army condition carried into the next route decision.
+
+I inspect the remaining formation before selecting the first Act 3 node.
+
+The health recovery is not a complete reset. A run with several dead Commanders
+still enters the next region with weaker Ally Commands, fewer Emblems, and less
+battlefield coverage.
+
+<h2 id="threat-differences">
+  Normal vs high Threat boss fights
+</h2>
+
+In these runs, high Threat increased punishment and reduced recovery margin while
+the core visual cues remained readable.
+
+The clearest example was Gilles: a three-hit sequence removed roughly half of the
+health bar during a high-Threat attempt.
+
+High Threat changes my decisions in four ways:
+
+- I trade less health for damage;
+- I use one punish instead of forcing a second string;
+- I value healing and surviving Commanders more;
+- I stop taking optional nodes earlier.
+
+A boss can feel completely different even when the central mechanic is unchanged.
+Entering with higher Threat, lower health, fewer Commanders, and an unfinished
+single-target loop compounds every mistake.
+
+<h2 id="wallace-or-brienne">
+  Wallace or Brienne: minimum builds for each boss
+</h2>
+
+### Gilles
+
+I prefer **Wallace** while learning the fight.
+
+Minimum setup:
+
+- one short Strike or Ally Command to test openings;
+- one strong Heavy or direct Finisher;
+- Block Stamina or reliable Dodge timing;
+- at least one Archer or ranged Commander;
+- Special saved for the second form.
+
+Brienne works, but I use shorter strings and leave before preserving Direct Hits
+becomes greedy.
+
+### Iseult
+
+I prefer **Brienne** when I already understand the movement cycle.
+
+Minimum setup:
+
+- short Strike for clone checks;
+- direct Strike or Heavy boss damage;
+- Dodge or movement support;
+- one area option for nearby soldiers;
+- damage that does not depend entirely on enemy deaths.
+
+Wallace remains the safer choice when survival is the main weakness.
+
+Vortex helps clear the group, but his slow Heavy must begin only after the real
+target and safe lane are confirmed.
+
+<h2 id="two-player-co-op">
+  What changes in two-player co-op boss fights
+</h2>
+
+These role changes come from a **two-player Campaign**.
+
+Against Gilles:
+
+- one player keeps the boss centered and tests the recovery;
+- the second clears ranged threats and rescues Commanders;
+- both attack during the same confirmed punish window;
+- the player with the stronger burst preserves it for the second form.
+
+Against Iseult:
+
+- one player checks the possible real body;
+- the second clears nearby soldiers and preserves Special;
+- both stop attacking when Erupting Earth controls the route;
+- the confirmed target is called out before either player commits a long combo.
+
+I do not send both players toward separate clones without communicating. That splits
+the army, rescue coverage, and visibility.
+
+Host rules, route confirmation, shared Chests, healing, revive costs, and spectator
+behavior are covered in the{" "}
+<Link
+  href="/tears-of-metal/co-op-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Tears of Metal co-op guide
+</Link>
+
+<div className="my-8 rounded-2xl border border-amber-200 bg-amber-50 px-6 py-5 text-sm leading-7 text-slate-700 shadow-sm">
+  <strong className="text-amber-900">The two rules I keep during the fight:</strong>
+
+  <ul className="mt-3 list-disc space-y-2 pl-5 marker:text-amber-500">
+    <li>Gilles: never begin the long punish before the recovery starts.</li>
+    <li>Iseult: never spend burst before confirming the real target and a safe lane.</li>
+  </ul>
+</div>
+
+<h2 id="faq">
+  Tears of Metal Gilles and Iseult FAQ
+</h2>
+
+### Should I stay locked on Gilles?
+
+Not constantly. Lock-on helps during the direct exchange, but I release or adjust
+the camera when Gilles fills the screen and hides ranged enemies, Commander danger,
+or the next ground attack.
+
+### Can I Block Gilles?
+
+I Block short, readable swings while Block Stamina is healthy. I leave an extended
+string before the bar breaks and move out of the overhead slam instead of trying to
+Block the large impact.
+
+### How do I find the real Iseult?
+
+Use the shortest safe hit and watch whether the main boss health bar decreases.
+Preserve Heavy, Special, and long Finishers until that response confirms the target.
+
+### Can I Block Erupting Earth?
+
+I do not rely on Block for Erupting Earth. I leave the marked ground, preserve Block
+Stamina, and return after the hazard stops controlling the route.
+
+### Does defeating Iseult revive dead Allies?
+
+No. In the successful run covered here, the hero recovered health, but dead soldiers remained unavailable. The hero recovered during the transition,
+but soldiers that had already died remained unavailable in the next region.
+
+### Why is the same boss harder on another run?
+
+Check Threat, current health, surviving Commanders, and the build before assuming
+the mechanics changed. High Threat gives mistakes less margin, and a damaged army
+makes the same punish window harder to use.
+
+### Is Wallace or Brienne better for Gilles?
+
+Wallace is my safer choice because Block, deliberate Heavy openings, and Archer
+support fit the fight. Brienne works when I keep attack strings short and avoid
+trading health for Direct Hits.
+
+### Is Wallace or Brienne better for Iseult?
+
+Brienne is strong when movement and short target checks are comfortable. Wallace is
+safer when survival is the problem, but Heavy must wait until the real target and
+safe lane are confirmed.

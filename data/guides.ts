@@ -131,6 +131,191 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters = [
   {
+    title: "Tears of Metal",
+    game: "Tears of Metal",
+    href: "/tears-of-metal",
+    slug: "tears-of-metal",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Army Roguelite",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the Tears of Metal guide hub for the first Campaign and Act 1 route, Wallace and Brienne builds, Village upgrades, co-op Host and resource rules, and Gilles and Iseult boss fights.",
+    coverage: [
+      "First Campaign route to the Great Gates, Threat thresholds, Block, Parry and Dodge decisions, Beacon and Archer Tower priority, Commander rescues, Healing Fonts, Chests, Wallace starter builds, and Gilles preparation",
+      "Tested Wallace Delayed Heat, Heavy explosion and Vortex build, Brienne Direct Hits, Burning and Combust build, required Emblems, fallback choices, army formations, encounter fit, and solo or co-op adjustments",
+      "Triskeles, Statues, Gems, Scrolls, Dragonstone Shards, Wallace permanent upgrades, Barracks training, Recruitment Drive, Military Advantage, Marriott, Market, Cartographer, Pilgrim's Itinerary, and Ally Monikers",
+      "Multiplayer lobby setup, Host-owned item pool, Friends visibility, Lobby Code, shared Village cursors, route confirmation, personal pickups, shared paid Chests, separate Coins, healing assignment, revive costs, and battlefield roles",
+      "Gilles normal strings, overhead slam and second form, Iseult Erupting Earth, relocation and clone checks, main-health-bar target confirmation, high-Threat adjustments, minimum Wallace and Brienne builds, and two-player boss roles",
+    ],
+    image:
+      "/images/tears-of-metal/tears-of-metal-gilles-the-hog-boss.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 13,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Tears of Metal Guide Hub",
+        href: "/tears-of-metal",
+        type: "Guide Hub",
+        description:
+          "Start here for the first Campaign route, Wallace and Brienne builds, Village progression, co-op Host and resource rules, and Gilles and Iseult boss help.",
+        image:
+          "/images/tears-of-metal/tears-of-metal-gilles-the-hog-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "First Campaign route, Threat, Wallace and Brienne builds, Village upgrades, co-op Host rules, loot, Coins, revives, Gilles, and Iseult",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Tears of Metal Beginner Guide",
+        href: "/tears-of-metal/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Plan the Act 1 route to the Great Gates, control Threat, prioritize Beacons and rescues, spend Coins safely, build Wallace, and prepare for Gilles.",
+        date: "Updated recently",
+        image:
+          "/images/tears-of-metal/tears-of-metal-act-one-route-great-gates.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 53,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Act 1 route, Threat stop rules, Block and Dodge decisions, Beacons, Archer Towers, Commander rescues, Healing Fonts, Chests, Wallace starter builds, and Gilles preparation",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Best Wallace & Brienne Builds in Tears of Metal",
+        href: "/tears-of-metal/best-builds",
+        type: "Builds",
+        description:
+          "Build Wallace with Delayed Heat, Heavy explosions, and Vortex, or Brienne with Direct Hits, Burning, Combust, and reliable fallback Emblems.",
+        date: "Updated recently",
+        image:
+          "/images/tears-of-metal/tears-of-metal-wallace-ravager-delayed-heat.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 54,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Wallace Delayed Heat, Heavy explosions, Vortex, Brienne Direct Hits, Burning, Combust, required Emblems, fallback choices, army formations, solo, co-op, and encounter fit",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Tears of Metal Village Upgrades & Upgrade Order",
+        href: "/tears-of-metal/village-upgrades",
+        type: "Systems",
+        description:
+          "Choose early hero and Barracks upgrades, understand permanent currencies, compare Market and Cartographer, unlock Marriott, and assign Ally Monikers.",
+        date: "Updated recently",
+        image:
+          "/images/tears-of-metal/tears-of-metal-barracks-upgrades.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 52,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Triskeles, Statues, Gems, Scrolls, Dragonstone Shards, Wallace stats, Barracks upgrades, Recruitment Drive, Military Advantage, Market, Cartographer, Marriott, and Monikers",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Tears of Metal Co-op Guide",
+        href: "/tears-of-metal/co-op-guide",
+        type: "Systems",
+        description:
+          "Choose the right Host, start a multiplayer Campaign, confirm routes, assign loot and healing, preserve separate Coins, and handle revive costs safely.",
+        date: "Updated recently",
+        image:
+          "/images/tears-of-metal/tears-of-metal-co-op-route-vote-flag.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 55,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Host-owned item pool, Friends lobby, Lobby Code, shared Village cursors, route voting, personal pickups, shared paid Chests, separate Coins, healing, revives, and battlefield roles",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "Tears of Metal Gilles & Iseult Boss Guide",
+        href: "/tears-of-metal/boss-guide",
+        type: "Bosses",
+        description:
+          "Beat Gilles and Iseult with tested attack cues, safe punish windows, Erupting Earth movement, clone checks, Threat advice, and two-player roles.",
+        date: "Updated recently",
+        image:
+          "/images/tears-of-metal/tears-of-metal-iseult-clone-phase.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 56,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Gilles attack strings, overhead slam, second form, Iseult Erupting Earth, relocation, clone checks, main boss health bar confirmation, high Threat, minimum builds, and co-op roles",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+    ],
+  },
+  {
     title: "DragonSword Awakening",
     game: "DragonSword Awakening",
     href: "/dragonsword-awakening",

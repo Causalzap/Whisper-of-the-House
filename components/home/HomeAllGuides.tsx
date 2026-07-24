@@ -73,6 +73,7 @@ const featuredGuideHubs: FeaturedGuideHub[] = [
 ];
 
 const previewGuides: ArchiveGuide[] = [
+  { title: "Tears of Metal", href: "/tears-of-metal" },
   { title: "DragonSword : Awakening", href: "/dragonsword-awakening" },
   { title: "Zerospace", href: "/zerospace" },
   { title: "Happy's Humble Burger Cult", href: "/happys-humble-burger-cult" },

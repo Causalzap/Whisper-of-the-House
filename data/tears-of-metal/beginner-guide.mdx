@@ -1,0 +1,502 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const routeColumns = [
+  { key: "route", label: "Route" },
+  { key: "path", label: "Path" },
+  { key: "whenToUse", label: "When I Use It" },
+];
+
+export const routeRows = [
+  {
+    route: "Safe clear",
+    path: "Emblem → healing/economy → shortest line to Great Gates",
+    whenToUse:
+      "Block timing, health, or Captain damage is still inconsistent.",
+  },
+  {
+    route: "Balanced clear",
+    path: "Emblem → matching Emblem → one repair node → Great Gates",
+    whenToUse:
+      "The second Emblem completes the same Strike, Heavy, Dodge, or Block loop.",
+  },
+  {
+    route: "Greedy route",
+    path: "Several Emblems → permanent reward → merchant → boss",
+    whenToUse:
+      "Health is high, healing is confirmed, and the build still lacks a real payoff.",
+  },
+];
+
+export const failureColumns = [
+  { key: "failure", label: "Failure" },
+  { key: "signs", label: "Signs" },
+  { key: "correction", label: "Next-Run Correction" },
+];
+
+export const failureRows = [
+  {
+    failure: "Route",
+    signs: "The build works, but Threat and HP deteriorate before the boss.",
+    correction:
+      "Turn toward the Great Gates as soon as the core loop is complete.",
+  },
+  {
+    failure: "Build",
+    signs:
+      "Captains survive several safe combos or Emblems are spread across unused actions.",
+    correction: "Reinforce one trigger and one payoff.",
+  },
+  {
+    failure: "Economy",
+    signs:
+      "No Coins remain for healing, or the saved merchant is no longer reachable.",
+    correction: "Reserve one visible heal and spend when the path closes.",
+  },
+  {
+    failure: "Combat",
+    signs: "A Beacon or Tower stays active, or a key Commander dies.",
+    correction:
+      "Remove the structure and protect the Ally before returning to the Captain.",
+  },
+];
+
+My first Tears of Metal Campaigns failed because I added one route too many,
+crossed another Threat threshold, spent the last useful Coins on a Chest, and
+reached the next Captain or Gilles without enough health to survive one mistake.
+
+My cleanest Act 1 clear used one Emblem for a repeatable Wallace damage loop, one
+detour for health or economy, and then the Great Gates before the next reward became
+less valuable than the added risk.
+
+<GuideQuickAnswer title="My First-Campaign Plan">
+  <p>
+    I take one useful Emblem route, one repair or economy detour, and then the
+    shortest useful line to the Great Gates. I stop exploring when health falls
+    below half without a confirmed heal, the next battle crosses another Threat
+    marker, or my current combo already kills Captains safely.
+  </p>
+
+  <ul className="mt-3 list-disc space-y-1 pl-5">
+    <li>High HP and an incomplete build: take one matching Emblem node.</li>
+    <li>Low HP: route to a visible Font or take the shortest line to the Great Gates.</li>
+    <li>Build already handles Captains: stop collecting random Emblems.</li>
+    <li>Merchant path is closed: spend the Coins I was saving.</li>
+    <li>Next fight crosses a Threat marker: continue only for a run-defining reward.</li>
+  </ul>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Early Access launch-build scope.</strong>{" "}
+  Map layouts, rewards, and prices can vary between Campaigns. The routes and values
+  below come from early solo and two-player runs on the launch build.
+</div>
+
+<h2 id="best-act-one-route">
+  Best Act 1 route for a first clear
+</h2>
+
+I read the full connection to the Great Gates before selecting the first node. A
+short first step can still force several extra fights later, so I judge the complete
+line rather than one icon at a time.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-act-one-route-great-gates.webp"
+    alt="Tears of Metal Act 1 Campaign map with short and long routes leading toward the Great Gates"
+    width={1536}
+    height={864}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I plan the line to the Great Gates before clicking the first branch. An extra
+    Emblem or economy node only matters when I can survive every battle required to
+    reach it.
+  </figcaption>
+</figure>
+
+I use three route patterns:
+
+<GuideTable
+  caption="Three Act 1 route patterns for a first Tears of Metal clear."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+The safe route is my default. I use the balanced route when the second Emblem
+completes the first one, and the greedy route only after the run is already stable.
+
+Nodes showing values such as **+10** or **+12** can be attractive, but I do not cross
+several extra battles solely for one economy reward. Every completed battle also
+raises Threat.
+
+### The stop rules I use
+
+I turn toward the Great Gates when any one of these becomes true:
+
+- health is below half and no healing stop is visible;
+- the next fight crosses another Threat marker;
+- my main attack already clears Captains during one safe opening;
+- important Commanders are dead or repeatedly entering danger;
+- the next reward does not repair damage, survival, economy, or army strength.
+
+One Wallace run had already produced roughly **14,000 damage** and a best combo
+chain of **75**. I still took another branch, entered the Monastery section with
+only **7 HP**, and died to a Pikeman Captain.
+
+That run did not need more damage. It needed a shorter route.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="threat-level">
+  How Threat Level works and when to stop exploring
+</h2>
+
+The Threat tooltip confirms two rules:
+
+- Threat increases after battles and each failed objective.
+- Every visible threshold increases battle difficulty.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-threat-threshold-tooltip.webp"
+    alt="Tears of Metal Threat Level tooltip explaining that battles and failed objectives increase difficulty"
+    width={1024}
+    height={510}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I use each visible marker as a route checkpoint. The tooltip confirms the
+    difficulty increase without displaying an exact enemy-stat percentage.
+  </figcaption>
+</figure>
+
+I treat the meter as a route signal:
+
+- **Early:** take the Emblem that gives the build a usable trigger.
+- **Middle:** add a node only when it repairs a specific weakness.
+- **High:** route toward healing or the boss.
+- **Maximum:** Lu Bu can appear, so I do not reach it deliberately on a first clear.
+
+In my Early Access launch-build run, defeating Lu Bu reduced Threat by only
+**one level**. That result is too small to justify filling the meter just to fight
+him. I treat Lu Bu as a recovery opportunity for a strong run that already went
+long, not as a first-clear farming plan.
+
+A failed timed objective also raises Threat. I only begin one when it does not
+conflict with a Commander rescue, active Beacon, or confirmed healing stop. Merchant,
+shrine, and event nodes are not treated as guaranteed increases unless the meter
+actually moves.
+
+<h2 id="block-parry-dodge">
+  Block, Parry, or Dodge: the defensive routine I use
+</h2>
+
+I Block short, readable attack strings and release before the Block bar breaks.
+Against a guard-breaking Captain attack, I either time the parry or leave the lane;
+I do not force the timing when the camera is crowded.
+
+I save Dodge for:
+
+- large ground attacks;
+- charge lanes;
+- the moment Block Stamina is close to breaking;
+- or a crowded situation where I no longer have safe positioning.
+
+Against ordinary soldiers, constant Dodging wastes the escape I need for the
+Captain. Against Gilles, leaving one opening early is safer than finishing a long
+combo with no defensive option ready.
+
+<h2 id="target-priority">
+  Target priority: emergency rescue first, then structures and Captains
+</h2>
+
+A Commander already in immediate danger overrides the normal order. I remove the
+one threat blocking the rescue, save the Ally, and return to the objective.
+
+When no emergency rescue is active, I use this order:
+
+1. Beacon or enemy-buff structure;
+2. Archer Tower or permanent ranged structure;
+3. Captain or shielded elite;
+4. active objective;
+5. remaining soldiers;
+6. Coins, Chicken, and Chests before leaving.
+
+### Destroy the Beacon before spending Specials
+
+Beacons strengthen the fight around them. I move around the main group, destroy the
+Beacon, and only then spend Specials and Ally Commands on the Captain.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-beacon-enemy-buff.webp"
+    alt="Tears of Metal enemy Beacon active near buffed soldiers and a Captain"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I remove the source of the enemy buff before committing the resources meant for
+    the elite target.
+  </figcaption>
+</figure>
+
+The range is not clear enough to plan around, so I remove the Beacon rather than
+guessing where its effect ends.
+
+### Rescue the Commanders the build depends on
+
+When a Commander is in danger, I stop chasing Fodders and move to the rescue
+position.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-ally-rescue-saved.webp"
+    alt="Tears of Metal green SAVED confirmation after rescuing Alasdair Bruce"
+    width={1140}
+    height={920}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The green SAVED message confirms the rescue. I protect the Commanders carrying
+    the Ally Emblems and formation value the run depends on.
+  </figcaption>
+</figure>
+
+I do not rescue through an active Captain attack. I pull the elite away, remove the
+nearest structure when necessary, and return during the next safe window.
+
+On several clear-area stages, defeating the important elites completed the
+objective while distant Fodders remained. I follow the objective marker rather than
+automatically hunting every soldier.
+
+<h2 id="healing-vs-chest">
+  Healing Font vs Chest: what to spend Coins on
+</h2>
+
+Health does not refill automatically after an ordinary battle. Before leaving, I
+sweep the area for Chicken, Coins, Chests, and unused healing.
+
+The early values I encountered included:
+
+- a basic Chest costing **75 Coins**;
+- a Healing Font costing **100 Coins**;
+- that Font moving displayed health from **6 HP to 27 HP**;
+- a later Chest costing **200 Coins**;
+- and a **+30% Strike Damage** reward from that 200-Coin Chest.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-healing-font-100-coins.webp"
+    alt="Tears of Metal Healing Font costing 100 Coins during an early Campaign"
+    width={924}
+    height={787}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    At 6 HP, I pay the 100 Coins. The Font raised the displayed health to 27, which
+    was enough to survive another serious hit but not a full refill.
+  </figcaption>
+</figure>
+
+### I buy healing when
+
+- health is near one quarter or lower;
+- a Captain, Tower, unknown event, or boss is next;
+- and one missed attack would end the Campaign.
+
+At **6 HP**, I buy the Font. At moderate health with Chicken nearby and another
+recovery option ahead, I keep the Coins.
+
+### I open a Chest when
+
+- the build still lacks an effect on the action I use most;
+- the reward improves Captain or boss damage;
+- and healing money remains.
+
+The **200-Coin Chest** was worth buying when it added **+30% Strike Damage** to a
+Strike-centered run. I skip it when the combo already works and health is the real
+weakness.
+
+### I save for a merchant when
+
+- it remains connected to the route;
+- I can arrive with enough Coins;
+- and the fights before it are safe.
+
+Once the path closes, I spend the reserve on a useful Chest or healing. Unused Coins
+do not move into the Village after death.
+
+Chicken is free but small. I use it to repair moderate damage and leave it untouched
+at full health. I do not rely on it when one Captain hit can already end the run.
+
+For permanent hero, Market, Cartographer, and Barracks spending, use the{" "}
+<Link
+  href="/tears-of-metal/village-upgrades"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Village upgrades and progression guide
+</Link>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="starter-build">
+  Simple Wallace starter builds for Act 1
+</h2>
+
+For a first clear, I give one action a setup, a payoff, and enough safety to finish
+the combo. Advanced hero and Clan combinations stay on the full Builds page.
+
+### Safe Wallace Vortex build
+
+My safer route is:
+
+- **Heavy:** Crusader Vortex Heavy;
+- **support:** one Block, healing, or Block Stamina effect;
+- **army:** Spearmen for protected targets and Archers for damage while I reposition.
+
+In the launch-build Emblem description, Vortex Heavy deals **15 Smite Damage**, and
+its Heavy Finisher creates a Vortex dealing another **15 Smite Damage**. The Vortex
+attracts and briefly stuns Fodders, which gives me a cleaner Captain opening.
+
+My sequence is:
+
+1. Block or Dodge the Captain's first attack;
+2. send Spearmen toward the protected target;
+3. finish Heavy to create the Vortex;
+4. let Archers attack while I leave the counterattack;
+5. repeat only after the next safe opening.
+
+I use this setup when survival and crowd control matter more than maximum damage.
+
+### Damage-focused Wallace Ravager build
+
+When Block and Dodge timing already feels reliable, I use Ravager as the damage
+setup.
+
+In the launch-build description, Heated Strike applies **15 Delayed Heat**, and its
+Strike Finisher applies **30 Delayed Heat in a wave**. I then look for a Heavy
+explosion or another payoff that triggers the stored damage while the enemies are
+grouped.
+
+One working Strike-to-Heavy loop is more valuable than four unrelated effects. I
+stop once it damages Captains reliably and has a safe exit; another node must fix a
+specific weakness.
+
+The full Wallace, Brienne, Ravager, Crusader, Alchemist, Burning, Combust, and
+Explosion routes are in the{" "}
+<Link
+  href="/tears-of-metal/best-builds"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  best builds and Emblem synergies guide
+</Link>
+
+<h2 id="great-gates">
+  Great Gates and Gilles preparation checklist
+</h2>
+
+I enter the Great Gates when the run can survive one mistake, not when every slot
+looks perfect.
+
+Before selecting the node, I confirm:
+
+- health is high enough to survive one missed Dodge or broken Block;
+- my main attack deals reliable boss damage;
+- at least one useful Commander or Companion is alive;
+- the current battlefield has been swept for Chicken, Coins, and rewards;
+- remaining Coins have a clear purpose;
+- and my Special is available or close to ready.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-gilles-the-hog-boss.webp"
+    alt="Tears of Metal Gilles The Hog at the Great Gates during the Act 1 boss fight"
+    width={1140}
+    height={920}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gilles punishes long animation commitments. I wait for an attack to finish,
+    complete one damage sequence, and leave before starting another.
+  </figcaption>
+</figure>
+
+My minimum Gilles plan is:
+
+1. begin defensively and watch one complete attack string;
+2. stay far enough away to see smaller enemies and ground hazards;
+3. use a short Strike or Ally Command to test the opening;
+4. commit after his large ground attack finishes;
+5. let Archers continue damaging him while I reposition;
+6. save the Special for his stronger second form when phase one is already stable.
+
+I leave after one safe sequence instead of forcing a second combo into his recovery.
+
+The full phase breakdown, ground-slam timing, second-form plan, army use, and Iseult
+fight are in the{" "}
+<Link
+  href="/tears-of-metal/boss-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Tears of Metal boss guide
+</Link>
+
+<h2 id="why-run-failed">
+  Why the run failed: route, build, economy, or combat
+</h2>
+
+I diagnose the failure before buying another permanent damage upgrade.
+
+<GuideTable
+  caption="How I diagnose a failed Campaign and correct it on the next run."
+  columns={failureColumns}
+  rows={failureRows}
+/>
+
+A failed Campaign does not preserve Coins or run-specific Emblems. Permanent
+currencies already awarded and Village upgrades already purchased remain available;
+some heroes, items, and other unlocks still require their own conditions.
+
+<h2 id="faq">
+  Tears of Metal first Campaign FAQ
+</h2>
+
+### Does health refill after every battle?
+
+No. I check for Chicken, Coins, Chests, and paid healing before leaving. Once the
+countdown begins, I do not assume I can return later.
+
+### Does a failed objective increase Threat?
+
+Yes. The tooltip explicitly includes failed objectives. Because the exact amount
+is not displayed, I treat an optional timed event as a real route cost.
+
+### Can Chicken replace a Healing Font?
+
+Not at critical health. Chicken is useful cleanup healing, but I still buy a Font
+when one Captain attack can end the run, and I avoid consuming Chicken at full
+health.
+
+### Do I need to kill every enemy before leaving?
+
+Not always. On several clear-area stages, defeating the important elites completed
+the objective while distant Fodders remained. I follow the objective marker and
+completion prompt rather than hunting every soldier automatically.
+
+### What happens at maximum Threat?
+
+Lu Bu can appear. In my launch-build run, beating him reduced Threat by one level
+rather than resetting the full meter, so I do not deliberately reach maximum Threat
+during a first-clear attempt.
+
+### What carries over after a failed Campaign?
+
+Coins and run-specific Emblems do not become permanent Village stock. Permanent
+currencies already awarded and upgrades already purchased remain available. Some
+hero, item, and content unlocks still require their own conditions, so I check the
+Village menu before assuming a failed run completed them.

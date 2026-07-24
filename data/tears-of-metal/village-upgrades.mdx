@@ -1,0 +1,543 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const currencyColumns = [
+  { key: "currency", label: "Currency" },
+  { key: "mainUse", label: "Main Use" },
+  { key: "earlyRule", label: "My Early Rule" },
+];
+
+export const currencyRows = [
+  {
+    currency: "Coins",
+    mainUse: "Healing, Chests, merchants, and current-Campaign purchases",
+    earlyRule: "Spend them before the run ends; they do not become Village currency",
+  },
+  {
+    currency: "Triskeles",
+    mainUse: "Permanent hero skills and stat upgrades",
+    earlyRule: "Focus the hero I am using instead of spreading the first purchases",
+  },
+  {
+    currency: "Statues",
+    mainUse: "Barracks, roster, Companion, and Ally Command upgrades",
+    earlyRule: "Strengthen one command branch that already has a battlefield job",
+  },
+  {
+    currency: "Gems",
+    mainUse: "Permanent Campaign and challenge-related improvements",
+    earlyRule: "Wait until the next purchase solves a named problem",
+  },
+  {
+    currency: "Scrolls",
+    mainUse: "Permanent finance, luck, or economy progression",
+    earlyRule: "Do not buy a general economy effect without a route that can use it",
+  },
+  {
+    currency: "Dragonstone Shards",
+    mainUse: "Large hero, weapon, equipment, skill, or trial unlocks",
+    earlyRule: "Save for a named unlock instead of spending the first Shard blindly",
+  },
+];
+
+export const failureColumns = [
+  { key: "failure", label: "Last Campaign Failure" },
+  { key: "firstPurchase", label: "First Purchase I Test" },
+  { key: "reason", label: "Why" },
+];
+
+export const failureRows = [
+  {
+    failure: "Died at critical HP while damage was already good",
+    firstPurchase: "Hardy Constitution: +20% Max HP",
+    reason: "The run needs survivability, not another small damage increase",
+  },
+  {
+    failure: "Block Stamina broke during normal Captain pressure",
+    firstPurchase: "+25 Max Block Stamina",
+    reason: "A larger guard creates enough time to leave the string safely",
+  },
+  {
+    failure: "Safe Heavy openings still failed to finish Captains",
+    firstPurchase: "Brute Force: +5% Heavy Damage",
+    reason: "The execution window works; the payoff is the bottleneck",
+  },
+  {
+    failure: "Ally Commands reached the target but felt weak",
+    firstPurchase: "+20% damage for the command type I use most",
+    reason: "The command is reliable and now needs a stronger result",
+  },
+  {
+    failure: "Healing Shrines rarely appeared on usable routes",
+    firstPurchase: "Cartographer and Pilgrim’s Itinerary",
+    reason: "The route pool, not hero damage, is limiting recovery",
+  },
+  {
+    failure: "I reached merchants with Coins but weak options",
+    firstPurchase: "Market investment",
+    reason: "The shop is reachable and its item pool can change boss preparation",
+  },
+  {
+    failure: "Route greed or maximum Threat ended a working run",
+    firstPurchase: "Nothing yet",
+    reason: "Permanent upgrades do not repair a route that should have ended earlier",
+  },
+];
+
+export const persistenceColumns = [
+  { key: "system", label: "System" },
+  { key: "persists", label: "Persists?" },
+  { key: "note", label: "Practical Meaning" },
+];
+
+export const persistenceRows = [
+  {
+    system: "Coins",
+    persists: "No",
+    note: "Spend them during the current Campaign",
+  },
+  {
+    system: "Hero Emblems and run build",
+    persists: "No",
+    note: "Rebuild the action loop next Campaign",
+  },
+  {
+    system: "Hero upgrades",
+    persists: "Yes",
+    note: "Stats and unlocked commands remain permanent",
+  },
+  {
+    system: "Barracks upgrades",
+    persists: "Yes",
+    note: "Recruitment, roster, Companion, and command upgrades remain",
+  },
+  {
+    system: "Ally Monikers",
+    persists: "Yes",
+    note: "The chosen Commander receives a lasting buff",
+  },
+  {
+    system: "Dragonstone Shards",
+    persists: "Yes",
+    note: "Keep them for large Village unlocks",
+  },
+  {
+    system: "Market and Cartographer investments",
+    persists: "Yes",
+    note: "They influence future Campaign pools",
+  },
+];
+
+My early Tears of Metal Village order is based on the last Campaign failure.
+
+For Wallace, I usually:
+
+1. spend **50 Triskeles** to unlock special soldier commands;
+2. choose one hero stat that fixes the last death;
+3. use Statues on the Ally Command I actually issue;
+4. choose Market or Cartographer only after the route problem is clear;
+5. save Gems, Scrolls, and Dragonstone Shards without a named target.
+
+<GuideQuickAnswer title="What I Upgrade First">
+  <p>
+    I unlock Wallace’s soldier commands for <strong>50 Triskeles</strong>, then
+    choose between <strong>+20% Max HP</strong>,
+    <strong>+25 Max Block Stamina</strong>, and
+    <strong>+5% Heavy Damage</strong> based on the previous run.
+  </p>
+
+  <p className="mt-3">
+    Next, I strengthen one frequently used Ally Command. I build the Market when
+    merchants are reachable with Coins, and the Cartographer when Shrines and
+    encounter availability are the real problem.
+  </p>
+</GuideQuickAnswer>
+
+<GuideTable
+  caption="The first permanent purchase I test after each type of failed Campaign."
+  columns={failureColumns}
+  rows={failureRows}
+/>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Last tested: July 24, 2026.</strong>{" "}
+  Steam Early Access launch build. The hero-stat order below is Wallace-specific;
+  the Barracks, Market, Cartographer, Companion, Moniker, and currency rules apply
+  more broadly.
+</div>
+
+<h2 id="currency-priority">
+  Tears of Metal currency priority
+</h2>
+
+<GuideTable
+  caption="What each Tears of Metal currency is for and how I treat it early."
+  columns={currencyColumns}
+  rows={currencyRows}
+/>
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-gems-currency.webp"
+    alt="Tears of Metal Gems currency description in the Village progression menu"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Gems are permanent progression currency. I wait until the next purchase has a
+    clear Campaign job.
+  </figcaption>
+</figure>
+
+Coins solve the current run. Once a planned merchant is no longer reachable, I use
+the reserve on healing or a useful Chest instead of dying with it.
+
+Triskeles strengthen the selected hero. Statues strengthen the army at the
+Barracks. I keep the first purchases concentrated because an upgrade on an unused
+hero or command branch does not improve the next clear attempt.
+
+Gilles awarded one Dragonstone Shard in the confirmed Act 1 clear. I save it until
+I can name the weapon, skill, equipment item, hero option, or trial I intend to
+unlock.
+
+The current-run Coin decisions are covered in the{" "}
+<Link
+  href="/tears-of-metal/beginner-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  first Campaign and Act 1 route guide
+</Link>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="first-wallace-upgrades">
+  The first Wallace upgrades I buy
+</h2>
+
+Wallace’s observed early options included:
+
+- special soldier commands for **50 Triskeles**;
+- **Hardy Constitution:** permanently increase Max HP by **20%**;
+- a permanent **+25 Max Block Stamina** upgrade;
+- **Brute Force:** permanently increase Heavy Damage by **5%**.
+
+I unlock soldier commands first because they add a new tactical tool. Infantry can
+pressure the central group, Spearmen can target protected enemies, and Archers can
+keep dealing damage while Wallace repositions.
+
+### Hardy Constitution after a survival failure
+
+One Wallace Campaign produced roughly **14,000 damage** and a best combo chain of
+**75**. I still extended the route, entered the Monastery section with **7 HP**, and
+died to a Pikeman Captain.
+
+The run already had damage. It needed a shorter route, better healing discipline,
+and more room for one mistake. The **+20% Max HP** upgrade directly tested that
+failure.
+
+### Block Stamina when the guard is the bottleneck
+
+I take **+25 Max Block Stamina** when normal Captain strings repeatedly empty the
+Block bar even though I am releasing and repositioning correctly.
+
+I do not buy it to compensate for standing inside a large ground attack that should
+have been Dodged.
+
+### Brute Force after execution is stable
+
+I take **+5% Heavy Damage** when Wallace survives, Heavy begins after a safe
+opening, and Captains still live through correctly executed Finishers.
+
+It does not repair an early Heavy animation, maximum Threat, or critical health.
+
+For complete Ravager and Crusader loops, use the{" "}
+<Link
+  href="/tears-of-metal/best-builds"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Wallace and Brienne build guide
+</Link>
+
+<h2 id="hero-or-army">
+  Hero or army: which one I upgrade first
+</h2>
+
+I upgrade the **hero** when:
+
+- Wallace dies to direct damage;
+- Block Stamina breaks before I can leave;
+- or a correctly timed boss punish lacks damage.
+
+I upgrade the **army** when:
+
+- Wallace survives but Ally Commands barely affect the target;
+- shielded Captains remain active after Spearmen arrive;
+- ranged pressure continues because Archers are weak;
+- or Commander selection limits the formation.
+
+The 7-HP Monastery failure above was a route and survival problem, not evidence that
+the hero or army needed another damage purchase.
+
+<h2 id="barracks-upgrades">
+  Best early Barracks upgrades
+</h2>
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-barracks-upgrades.webp"
+    alt="Tears of Metal Barracks showing Commander, Companion, roster, and Ally Command upgrades"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I buy the option that changes the next army selection or strengthens a command
+    I already use.
+  </figcaption>
+</figure>
+
+The observed early options included:
+
+- **Recruitment Drive:** select **one additional Commander unit** before a Campaign;
+- **Military Advantage:** increase the Commander roster by **2**;
+- an upgrade that allows **one extra Companion**;
+- Infantry, Spearmen, and Archer training with **+20% Ally Command Damage** for the
+  selected troop type.
+
+Recruitment Drive matters when the active formation cannot cover frontline,
+shielded targets, ranged structures, and rescues.
+
+Military Advantage matters when useful Commanders are being excluded from the
+reserve.
+
+For command damage, I follow usage:
+
+- Infantry for central groups;
+- Spearmen for protected or shielded enemies;
+- Archers for ranged pressure and boss damage while repositioning.
+
+The first **+20%** goes to the command already reaching the correct target.
+
+<h2 id="marriott-companion">
+  Marriott and Tools of the Trade
+</h2>
+
+Completing **Tools of the Trade** unlocked **Marriott**, leader of Clan McGregor, as
+a Companion for later Campaigns.
+
+Companions are stronger than ordinary Allies and bring powerful Ally Emblems, so
+this quest expands future army selection rather than only rewarding the current
+run.
+
+I take it when the route can absorb the extra battle without pushing a collapsing
+run through another dangerous Threat marker.
+
+<h2 id="market-or-cartographer">
+  Market or Cartographer: which one I build first
+</h2>
+
+### Market when merchants are usable
+
+The Market invests in wandering-merchant options.
+
+**Special Discount I** gives a chance for a random Campaign item to receive a
+**30% discount**.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-market-special-discount.webp"
+    alt="Tears of Metal Market Special Discount I with a chance for a random item to receive a 30 percent discount"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The discount matters only when the route reaches a merchant and I still have
+    enough Coins to buy the item.
+  </figcaption>
+</figure>
+
+I choose the Market when merchants appear on routes I can survive, I reach them with
+Coins, and their item pool is the bottleneck.
+
+I do not prioritize it when I repeatedly die before the shop.
+
+### Cartographer when the map pool is the problem
+
+The Cartographer affects what can appear during future Campaigns.
+
+**Pilgrim’s Itinerary** increases the chance of finding Shrines.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-cartographer-shrine-upgrades.webp"
+    alt="Tears of Metal Cartographer Pilgrim’s Itinerary increasing the chance of finding Shrines"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I prioritize Pilgrim’s Itinerary when Shrine access—not merchant quality—keeps
+    ending otherwise workable Campaigns.
+  </figcaption>
+</figure>
+
+I choose it when usable Healing Shrines rarely appear, route encounters are the
+repeated failure, or Coins are not the limiting resource.
+
+The upgrade raises the chance of finding Shrines; it does not guarantee one on
+every map.
+
+### Co-op uses the Host’s pool
+
+In the tested multiplayer lobby, the Guest received a warning that only items owned
+by the Host would be active during the Campaign.
+
+A Guest should not assume their own Market or Cartographer investments change the
+Host’s current pool. Host selection and separate Coin rules are covered in the{" "}
+<Link
+  href="/tears-of-metal/co-op-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Tears of Metal co-op guide
+</Link>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="ally-monikers">
+  How I choose an Ally Moniker
+</h2>
+
+When a Campaign ends, I can assign a Moniker to a Commander. The game describes it
+as a lasting buff.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-ally-moniker-lasting-buff.webp"
+    alt="Tears of Metal Ally Moniker selection granting a lasting Commander buff"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I assign the Moniker to a Commander I expect to select again.
+  </figcaption>
+</figure>
+
+Observed options included:
+
+- **Scrappy:** deal **10% bonus damage to Fodders**;
+- **Fiddler:** an objective reward has a **+1% chance** to be replaced by a better
+  version;
+- **Medic:** increase HP recovered when healing by **5%**.
+
+Other observed directions included rescue time, Captain damage, Special charge,
+healing discounts, and a starting item.
+
+I match the effect to the Commander’s job. Fodder damage goes to a crowd-clear unit;
+Captain damage to an elite-focused Commander; Medic to a formation repeatedly
+limited by recovery.
+
+<h2 id="what-persists">
+  What persists after a failed Campaign?
+</h2>
+
+<GuideTable
+  caption="What carries over from a Tears of Metal Campaign into the Village."
+  columns={persistenceColumns}
+  rows={persistenceRows}
+/>
+
+Campaign power solves the current route. Village power changes later routes.
+
+A failed Campaign can still produce useful permanent progress, but I do not extend
+a lost run solely because a permanent reward might appear.
+
+<h2 id="first-three-returns">
+  My first three Village returns
+</h2>
+
+### First return
+
+Unlock Wallace’s commands for **50 Triskeles**, then buy one stat based on the
+failure:
+
+- Max HP after a low-health death;
+- Block Stamina after repeated guard breaks;
+- Heavy Damage only after safe Heavy windows are working.
+
+### Second return
+
+Strengthen the command used most, or take Recruitment Drive or Military Advantage
+when army selection is the bottleneck.
+
+### Third return
+
+Choose:
+
+- **Market** when merchants are reachable but weak;
+- **Cartographer** when Shrine or encounter availability is the problem;
+- or **save resources** when neither has a defined purpose.
+
+After that, I stop following a universal order. Each purchase becomes a test for the
+next Campaign.
+
+<div className="my-8 rounded-2xl border border-amber-200 bg-amber-50 px-6 py-5 text-sm leading-7 text-slate-700 shadow-sm">
+  <strong className="text-amber-900">
+    Three Village mistakes I avoid:
+  </strong>
+
+  <ul className="mt-3 list-disc space-y-2 pl-5 marker:text-amber-500">
+    <li>Buying damage immediately after a survival or route failure.</li>
+    <li>Splitting early Statues across several Ally Command branches.</li>
+    <li>Investing in a building the next route cannot realistically use.</li>
+  </ul>
+</div>
+
+<h2 id="faq">
+  Tears of Metal Village upgrade FAQ
+</h2>
+
+### What should I upgrade first?
+
+For Wallace, unlock soldier commands for 50 Triskeles. Then choose Max HP, Block
+Stamina, or Heavy Damage based on the previous failure.
+
+### Is Hardy Constitution always the best first stat?
+
+No. It is best after a low-health failure. Block Stamina fits repeated guard breaks;
+Heavy Damage fits safe Finishers that still lack damage.
+
+### Should I spread Triskeles across every hero?
+
+Not early. Strengthen the hero used for the next clear. Brienne and Ruadh have
+different action loops, so I do not copy Wallace’s Heavy-focused order into their
+trees without testing their options.
+
+### Which Ally Command should I upgrade first?
+
+Upgrade the troop type already reaching its intended target: Infantry for groups,
+Spearmen for protected enemies, or Archers for ranged pressure.
+
+### Should I build the Market or Cartographer first?
+
+Market for reachable merchants and weak items. Cartographer for poor Shrine and
+encounter availability.
+
+### Do my upgrades work when I join another player?
+
+The tested warning stated that the Host’s owned items were active. Choose the Host
+based on the stronger relevant progression pool.
+
+### What should I buy with my first Dragonstone Shard?
+
+Save it until a specific weapon, equipment item, skill, hero option, or trial is the
+target.
+
+### Are Ally Monikers permanent?
+
+The game describes the selected Moniker as a lasting buff on the chosen Commander.

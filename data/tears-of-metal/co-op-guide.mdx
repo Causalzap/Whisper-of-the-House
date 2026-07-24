@@ -1,0 +1,579 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const lootColumns = [
+  { key: "interaction", label: "Interaction" },
+  { key: "observedRule", label: "Observed Rule" },
+  { key: "teamAction", label: "Team Action" },
+];
+
+export const lootRows = [
+  {
+    interaction: "Battlefield pickup",
+    observedRule: "Personal in one tested case",
+    teamAction: "Call out the item and intended player before collecting it",
+  },
+  {
+    interaction: "75-Coin paid Chest",
+    observedRule: "One payment opened the Chest for both players",
+    teamAction: "Confirm both players received the reward before paying again",
+  },
+  {
+    interaction: "Coins",
+    observedRule: "Separate player balances",
+    teamAction: "Each player keeps an individual healing and revive reserve",
+  },
+  {
+    interaction: "Healing",
+    observedRule: "Collected by one player and could not be handed back",
+    teamAction: "Assign the healing before anyone collects it",
+  },
+  {
+    interaction: "Revive",
+    observedRule: "The surviving player pays the displayed revive cost",
+    teamAction: "Do not rely on the downed player’s Coins",
+  },
+];
+
+export const planColumns = [
+  { key: "stage", label: "Stage" },
+  { key: "teamCheck", label: "Team Check" },
+];
+
+export const planRows = [
+  {
+    stage: "Village",
+    teamCheck:
+      "The player with the stronger owned-item pool Hosts; choose complementary hero and army roles",
+  },
+  {
+    stage: "Route",
+    teamCheck:
+      "Check both health bars and both Coin balances before confirming the next node",
+  },
+  {
+    stage: "Merchant",
+    teamCheck:
+      "Visit only when at least one player can afford a useful purchase",
+  },
+  {
+    stage: "First down",
+    teamCheck:
+      "Read the displayed revive price, rebuild each player’s reserve, and shorten the route",
+  },
+  {
+    stage: "Boss",
+    teamCheck:
+      "Both players can survive one mistake and at least one player can control nearby enemies",
+  },
+];
+
+Tears of Metal co-op works best when I treat the Campaign as a shared route with
+**separate health, Coins, item decisions, and failure risks**.
+
+The Host determines the Campaign’s available owned-item pool in the tested lobby.
+Both players can move through the Village, confirm route choices, fight, rescue
+Commanders, and receive shared rewards from some paid interactions, but that does
+not make every pickup or resource communal.
+
+The most important co-op rule is simple:
+
+> A reward can benefit both players without their Coins, health, or immediate
+> survival resources becoming shared.
+
+<GuideQuickAnswer title="My Two-Player Co-op Rules">
+  <ul className="list-disc space-y-2 pl-5">
+    <li>
+      The player with the stronger owned-item pool Hosts the Campaign.
+    </li>
+    <li>
+      Both players check health and Coins before confirming the next route node.
+    </li>
+    <li>
+      Free pickups are assigned before collection instead of assumed to be shared.
+    </li>
+    <li>
+      Each player preserves an individual Coin reserve for healing or reviving.
+    </li>
+    <li>
+      Structures and Captains are cleared before either player begins a risky revive.
+    </li>
+  </ul>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">
+    Last tested: July 24, 2026.
+  </strong>{" "}
+  Steam Early Access launch build. The rules below come from a two-player Campaign.
+  The lobby supports up to four players, but I do not assume that every revive cost
+  or reward interaction scales identically in a four-player run.
+</div>
+
+<h2 id="start-co-op">
+  How I start a Tears of Metal co-op Campaign
+</h2>
+
+The multiplayer lobby includes:
+
+- Friends visibility;
+- a maximum-player setting of **4**;
+- and a Lobby Code.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-co-op-lobby-friends-code.webp"
+    alt="Tears of Metal multiplayer lobby with Friends visibility, Max Players set to four, and a Lobby Code"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I choose the Host before creating the lobby because the Host’s owned-item pool
+    affects what is available during the Campaign.
+  </figcaption>
+</figure>
+
+In the tested session, the Guest accepted the invitation but remained in the menu
+until the Host pressed **Start Game**.
+
+My startup order is:
+
+1. choose the player with the stronger progression and owned-item pool as Host;
+2. set the lobby visibility and maximum player count;
+3. share the Lobby Code when the invitation does not immediately place the Guest;
+4. wait until the Guest appears in the lobby;
+5. have the Host press Start Game;
+6. assign hero and battlefield roles before selecting the first Campaign node.
+
+I do not assume that accepting the invite alone begins the Campaign.
+
+<h2 id="choose-host">
+  Which player should Host?
+</h2>
+
+In the tested lobby, the Guest received a warning that the multiplayer Campaign
+used items owned by the Host.
+
+That makes Host selection a build decision, not just a connection decision.
+
+I choose the Host by checking:
+
+- unlocked weapons;
+- owned item and reward pools;
+- permanent Village upgrades;
+- hero options;
+- and the type of build both players want to assemble.
+
+A newer account can still join, but I do not make it Host when the other player has
+a meaningfully stronger item pool.
+
+The Host does not need to be the strongest mechanical player. The Host needs to
+provide the Campaign pool that gives the team the best available options.
+
+For permanent unlock priorities, use the{" "}
+<Link
+  href="/tears-of-metal/village-upgrades"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Village upgrades and progression guide
+</Link>
+
+<h2 id="shared-village">
+  What both players can do in the Village
+</h2>
+
+Both players could move their cursors around the Village at the same time.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-co-op-shared-village-cursors.webp"
+    alt="Tears of Metal co-op Village screen showing two player cursors active at the same time"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Both players can inspect the Village together, so I divide the preparation
+    checks instead of making one player read every menu.
+  </figcaption>
+</figure>
+
+I split the Village preparation:
+
+### Player one checks
+
+- hero and weapon choice;
+- Emblem direction;
+- current damage loop;
+- and whether the planned build needs direct damage, control, or survival.
+
+### Player two checks
+
+- available army and Commander coverage;
+- healing and defensive weaknesses;
+- route economy;
+- and which player should preserve Coins for the first revive.
+
+Before leaving the Village, we agree on complementary jobs.
+
+A practical two-player split is:
+
+- **Wallace:** frontal pressure, Vortex, shielded Captains, and deliberate boss openings;
+- **Brienne:** ranged structures, flank pressure, fast rescues, and nearby Fodder clearing.
+
+The exact heroes can change. The important part is avoiding two players who both
+expect the other person to control the Captain, destroy the Beacon, or rescue the
+Commander.
+
+The tested Wallace and Brienne combat routes are in the{" "}
+<Link
+  href="/tears-of-metal/best-builds"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Wallace and Brienne build guide
+</Link>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="route-voting">
+  How route confirmation works
+</h2>
+
+Route selection required confirmation rather than silently moving both players as
+soon as one person clicked.
+
+The map displayed a flag marker and a waiting state while the other player had not
+confirmed.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-co-op-route-vote-flag.webp"
+    alt="Tears of Metal co-op Campaign map showing a route flag and confirmation state while waiting for another player"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I treat the route flag as a final team check: both players review health,
+    Coins, Threat, and the reward before confirming.
+  </figcaption>
+</figure>
+
+Before either player confirms, we check:
+
+- both health bars;
+- both Coin balances;
+- current Threat;
+- whether the next node crosses a Threat marker;
+- which player still needs a core Emblem;
+- whether the visible reward solves a real build problem;
+- and whether the merchant or healing route remains reachable afterward.
+
+One player being healthy does not make the team healthy.
+
+One player having enough Coins does not mean both players can survive a future
+revive or healing decision.
+
+I reject a detour when:
+
+- one player is already near critical health;
+- the next battle crosses another Threat marker;
+- the reward only improves the player whose build is already complete;
+- or the detour removes access to healing needed by the weaker player.
+
+For full route and Threat stopping rules, use the{" "}
+<Link
+  href="/tears-of-metal/beginner-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  first Campaign and Act 1 route guide
+</Link>
+
+<h2 id="shared-loot">
+  What loot and resources are shared?
+</h2>
+
+Co-op rewards are mixed. I do not use one universal rule for every object.
+
+<GuideTable
+  caption="Observed Tears of Metal co-op loot, Coin, healing, and revive rules."
+  columns={lootColumns}
+  rows={lootRows}
+/>
+
+### Free battlefield pickups
+
+In one tested case, a free battlefield pickup behaved as a personal collection
+rather than automatically duplicating for both players.
+
+Because of that, we call out:
+
+- the item;
+- the effect;
+- which build benefits;
+- and which player is collecting it.
+
+I do not race toward a pickup simply because it appeared beside my hero.
+
+### Paid Chests
+
+A paid Chest costing **75 Coins** was opened by one payment and became available to
+both players in the tested Campaign.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-co-op-shared-paid-chest.webp"
+    alt="Tears of Metal co-op paid Chest costing 75 Coins and opening for both players after one payment"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    One player paid the 75-Coin price and both players received access to the Chest
+    reward. We verify the result before spending from the second balance.
+  </figcaption>
+</figure>
+
+The team decision is still not automatic.
+
+Before paying, I ask:
+
+- which player is losing the Coins;
+- whether that player still has a healing reserve;
+- whether the reward improves one or both builds;
+- and whether a revive is likely before the next economy node.
+
+A shared reward can still create an individual economy problem.
+
+### Coins remain separate
+
+Each player keeps a separate Coin balance.
+
+I do not plan around transferring Coins after a mistake. The player expected to
+perform a revive needs enough Coins in their own balance.
+
+That changes how we spend:
+
+- the healthier player can preserve revive money;
+- the injured player can preserve healing money;
+- the player with the larger balance can fund a shared paid interaction;
+- and neither player spends down to zero without checking the next battle.
+
+### Assign healing before collection
+
+Healing collected by one player could not simply be handed back afterward.
+
+I assign it before collection based on:
+
+1. current health;
+2. role in the next battle;
+3. ability to survive one Captain attack;
+4. and which player must remain standing to perform a revive.
+
+The lowest health bar usually gets the healing, but not always.
+
+When the low-health player is playing safely at range and the frontline player is
+about to enter a Captain or boss node, the frontline survival threshold can be the
+more important team resource.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="revives">
+  How revives and revive costs work
+</h2>
+
+The surviving player performs the revive and pays the displayed Coin cost.
+
+In the tested Campaign, the displayed price was **250 Coins** during one revive and
+later appeared as **350 Coins**.
+
+<figure className="my-8">
+  <Image
+    src="/images/tears-of-metal/tears-of-metal-co-op-revive-cost-350.webp"
+    alt="Tears of Metal co-op revive prompt showing a cost of 350 Coins"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The surviving player needed 350 Coins for this revive. I read the displayed
+    price each time instead of assuming the earlier cost will remain unchanged.
+  </figcaption>
+</figure>
+
+The downed player’s Coins do not solve the survivor’s payment problem.
+
+After the first down, I immediately change the route:
+
+- both players rebuild a personal reserve;
+- optional paid Chests receive more scrutiny;
+- merchant detours must offer a clear survival improvement;
+- and the team takes fewer battles before healing or the boss.
+
+### Clear the revive area first
+
+I do not begin the revive while:
+
+- a Beacon is active;
+- an Archer Tower controls the lane;
+- a Captain is standing over the body;
+- or several enemies can interrupt the interaction.
+
+My revive order is:
+
+1. move the Captain away from the body;
+2. destroy the structure controlling the area;
+3. clear the nearest Fodders;
+4. confirm the Coin cost;
+5. begin the revive;
+6. protect the returning player until they can move again.
+
+Attempting the revive immediately can convert one downed player into a failed
+Campaign.
+
+When the revive opportunity was missed, the downed player could continue by
+spectating. I treat spectating as the fallback, not the plan.
+
+
+
+<h2 id="battlefield-roles">
+  How I divide battlefield roles
+</h2>
+
+I do not have both players attack the same ordinary soldier while a Beacon, Tower,
+Captain, or Commander rescue remains unresolved.
+
+My default split is:
+
+### Frontline player
+
+- keeps the Captain or boss facing one direction;
+- Blocks or Dodges the readable attacks;
+- creates control with Vortex, stun, or army pressure;
+- and calls the safe punish window.
+
+### Mobile player
+
+- destroys Beacons and Archer Towers;
+- rescues Commanders;
+- clears ranged interruptions;
+- collects assigned resources;
+- and returns during the confirmed elite opening.
+
+Against a dense group, one player controls the Captain while the other clears the
+Fodders that would interrupt the main combo.
+
+Against a boss, both players use the same punish window rather than taking turns
+triggering overlapping attack strings.
+
+For Gilles and Iseult role divisions, use the{" "}
+<Link
+  href="/tears-of-metal/boss-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Gilles and Iseult boss guide
+</Link>
+
+
+
+<h2 id="co-op-plan">
+  My full co-op Campaign plan
+</h2>
+
+<GuideTable
+  caption="The team check I make at each stage of a two-player Campaign."
+  columns={planColumns}
+  rows={planRows}
+/>
+
+This plan prevents the most common co-op failure pattern:
+
+> A strong player continues routing as though the weaker health bar, smaller Coin
+> balance, and lost revive reserve do not affect the whole Campaign.
+
+After one player goes down, the correct response is usually a shorter route—not a
+more aggressive detour intended to replace the lost resources.
+
+<div className="my-8 rounded-2xl border border-amber-200 bg-amber-50 px-6 py-5 text-sm leading-7 text-slate-700 shadow-sm">
+  <strong className="text-amber-900">
+    Three co-op mistakes that can end the Campaign:
+  </strong>
+
+  <ul className="mt-3 list-disc space-y-2 pl-5 marker:text-amber-500">
+    <li>Starting with the wrong Host item pool.</li>
+    <li>Spending Coins without preserving an individual revive reserve.</li>
+    <li>Attempting a revive before structures and Captains are cleared.</li>
+  </ul>
+</div>
+
+<h2 id="faq">
+  Tears of Metal co-op FAQ
+</h2>
+
+### How many players does Tears of Metal co-op support?
+
+The lobby displays a maximum-player setting of four. The detailed loot, Coin, route,
+and revive observations in this guide come from a two-player Campaign.
+
+### Does accepting an invitation start the Campaign?
+
+Not in the tested session. The Guest accepted the invitation but remained in the
+menu until the Host pressed Start Game.
+
+### Does the Host affect the available items?
+
+Yes in the tested lobby. The Guest received a warning that the Campaign used items
+owned by the Host, so I let the account with the stronger owned-item pool Host.
+
+### Do all players need to confirm the route?
+
+The tested route screen displayed a flag and a waiting state while another player
+had not confirmed. I use that pause to compare both health bars, Coin balances, and
+the next reward.
+
+### Is all co-op loot shared?
+
+No single rule covers every interaction. A free battlefield pickup behaved as
+personal in one tested case, while one payment opened a 75-Coin Chest for both
+players.
+
+### Are Coins shared?
+
+No. Players maintain separate balances. Each player needs their own reserve for
+healing, purchases, or a revive they may need to perform.
+
+### Can players transfer Coins?
+
+I did not have a direct Coin-transfer option in the tested Campaign. Team spending
+must be planned around the balance held by the player who will make the payment.
+
+### Can healing be given to another player after collection?
+
+The collected healing could not be handed back in the tested interaction. Assign
+the healing before anyone picks it up.
+
+### Who pays for a revive?
+
+The surviving player pays the displayed cost. Do not rely on Coins held by the
+downed player.
+
+### Does the revive always cost 350 Coins?
+
+The displayed cost changed during the tested Campaign: one revive showed 250 Coins
+and a later revive showed 350. Read the current prompt every time and shorten the
+route after the first down.
+
+### What happens when a player is not revived?
+
+The downed player could spectate after the revive opportunity ended in the tested
+session. The surviving player then had to continue without the second active hero.
+
+### Should both players use the same build?
+
+No. Complementary roles are easier to manage. One player should provide frontal
+control and single-target pressure while the other handles structures, rescues,
+ranged threats, or fast crowd clearing.
