@@ -1,0 +1,597 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const unlockColumns = [
+  { key: "level", label: "Level" },
+  { key: "unlock", label: "Key Unlock" },
+  { key: "decision", label: "What Changes in My Route" },
+];
+
+export const unlockRows = [
+  {
+    level: "5",
+    unlock: "Weapon Printing",
+    decision:
+      "Run Weapons during Weed growth time instead of replacing the Weed line.",
+  },
+  {
+    level: "10",
+    unlock: "Storage Rack",
+    decision:
+      "Buy storage when mixed boxes and blocked walking routes are causing delivery errors.",
+  },
+  {
+    level: "13",
+    unlock: "Acid Disposal",
+    decision:
+      "Add disposal jobs between existing production cycles after the tutorial works.",
+  },
+  {
+    level: "15",
+    unlock: "Worker Assignments and Botanical Intern",
+    decision:
+      "Automate one proven Weed strain before adding more Pots, strains, or Workers.",
+  },
+  {
+    level: "18",
+    unlock: "Violet Nebula Seed",
+    decision:
+      "Test one batch and check demand before replacing the strain already supporting orders.",
+  },
+  {
+    level: "21",
+    unlock: "Dealer and Booster",
+    decision:
+      "Hire a Dealer only when surplus stock exists and the core production loop is stable.",
+  },
+  {
+    level: "22",
+    unlock: "Gunsmith",
+    decision:
+      "Use a Gunsmith when assembled Weapon parts are the bottleneck, not when Printers lack materials.",
+  },
+  {
+    level: "30",
+    unlock: "LSD Synthesising",
+    decision:
+      "Build one complete LSD Sheet route while the established lines continue funding the setup.",
+  },
+  {
+    level: "32",
+    unlock: "Companies and Botanical Recruit",
+    decision:
+      "Compare the Recruit's higher cost with the actual time or output gained over the Intern.",
+  },
+  {
+    level: "37",
+    unlock: "Botanical Assistant",
+    decision:
+      "Upgrade for a proven movement or efficiency limit, not to repair missing supplies or tasks.",
+  },
+  {
+    level: "38",
+    unlock: "Aircraft and Smuggler's Island access",
+    decision:
+      "Finish the required progression step before treating the new travel area as an active production route.",
+  },
+];
+
+Reputation becomes the main progression gate in Dirty Business. Cash can be
+recovered through another production cycle, but a locked Worker tier, tutorial,
+Company, LSD system, or aircraft interaction still requires the correct
+Reputation Level.
+
+The most consistent route is not buying every new Store item. It is keeping
+compatible production lines active, delivering products with the correct
+quantity and quality, and spending only when an unlock removes the bottleneck
+that is currently stopping completed orders.
+
+<GuideQuickAnswer title="The Reputation Route I Recommend">
+  <ol className="mt-3 list-decimal space-y-1 pl-5">
+    <li>Reach Level 5 with clean Weed orders and limited optional spending.</li>
+    <li>Run Weapon Printing while the next Weed batch is growing.</li>
+    <li>Use Level 10 storage when box clutter is slowing packing and delivery.</li>
+    <li>Add Acid Disposal at Level 13 between the existing production cycles.</li>
+    <li>Prepare racks, supplies, and Worker funding before reaching Level 15.</li>
+    <li>Automate one proven strain, then stabilize Weapons before hiring a Dealer or Gunsmith.</li>
+    <li>Reach Level 30 through clean parallel production rather than waiting beside one machine.</li>
+    <li>Build one complete LSD route, then prepare Companies, stronger Workers, and aircraft access through Level 38.</li>
+  </ol>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Early Access scope.</strong>{" "}
+  This guide gives a detailed Level 1–38 route using July 2026 Early Access
+  progression screens and in-game order results. Levels 38–100 are covered as a
+  long-term operating strategy rather than a claimed fastest route. Cash Forging
+  is not assigned a fixed level here because separate Early Access screens
+  displayed conflicting unlock numbers.
+</div>
+
+<h2 id="how-reputation-works">
+  How Orders turn into Reputation
+</h2>
+
+Customer Orders are the most controllable Reputation source in the early and
+midgame. The reliable sequence is:
+
+1. produce the requested item;
+2. match the requested quantity and quality;
+3. close and identify each box;
+4. assign the boxes in the Delivery screen;
+5. check the penalty preview;
+6. complete the clean batch and collect the result.
+
+One Murkwood OG order sample showed:
+
+- **1 Pack: 130 U-Notes and 3 Reputation**;
+- **2 Packs: 260 U-Notes and 6 Reputation**;
+- **3 Packs: 390 U-Notes and 9 Reputation**.
+
+A clean group of orders using the same sample finished at **1,040 U-Notes and
+24 Reputation** with **0% Penalties**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-order-penalty-zero.webp"
+    alt="Dirty Business clean delivery summary showing 1040 U-Notes, 24 Reputation, and zero penalties"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A clean Murkwood OG batch returned 1,040 U-Notes and 24 Reputation. The
+    zero-penalty summary is the final check before I submit a batch for
+    progression.
+  </figcaption>
+</figure>
+
+The same order screen showed the cost of sending the wrong quality. Two
+Low-Quality mismatches each displayed a **-50%** result. The combined delivery
+finished at **842.40 U-Notes and 18 Reputation** with **33.3% Penalties**.
+
+That sample does not prove one universal Reputation formula for every product.
+It does prove that forcing incorrect stock through an order can reduce both the
+money and Reputation earned from the batch.
+
+The full box-assignment and penalty route is covered in the{" "}
+<Link
+  href="/dirty-business/orders-delivery-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business Orders and Delivery guide
+</Link>
+
+### When I use large and small orders
+
+I prefer larger compatible orders when the stock is already known and packed,
+because they reduce repeated trips between production, Packing Tables, the
+elevator, and the tablet.
+
+I still accept a small order when it:
+
+- clears an awkward leftover box;
+- uses a product that would otherwise sit idle;
+- completes the current Reputation Level;
+- does not delay a larger clean batch.
+
+I wait when the requested quality is unclear, the product is scattered across
+unknown boxes, or the Delivery preview shows a penalty.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="key-unlocks">
+  Key Reputation unlocks
+</h2>
+
+This is a route table, not an all-items database. It focuses on the levels that
+change production, staffing, automation, or access.
+
+<GuideTable
+  caption="The main Reputation breakpoints I use to plan cash, rooms, staffing, and production."
+  columns={unlockColumns}
+  rows={unlockRows}
+/>
+
+<h2 id="levels-1-5">
+  Levels 1–5: keep the Weed loop small and repeatable
+</h2>
+
+Before Level 5, the goal is not maximum floor coverage. It is a short loop that
+can repeatedly create clean orders:
+
+1. grow one available strain;
+2. harvest and pack it;
+3. activate only orders supported by current stock;
+4. deliver without penalties;
+5. restock Seeds, Soil, Watering Cans, Plastic Packs, and boxes.
+
+I avoid filling the room with Pots or buying every optional expansion at this
+stage. Level 5 introduces the first major second product line, so cash and floor
+space are more useful when they remain available for that tutorial.
+
+In one progression route, Level 5 was reached with about **5,000 U-Notes**
+available. The tutorial supplied its starting Weapon equipment in that session,
+so I waited for the tutorial order before spending money on the adjacent room.
+
+<h2 id="levels-5-13">
+  Levels 5–13: run Weed and Weapons on different timers
+</h2>
+
+Level 5 unlocks **Weapon Printing**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-5-weapon-printing-unlock.webp"
+    alt="Dirty Business reaching Reputation Level 5 and unlocking Weapon Printing"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Weapon Printing gives me useful work during Weed growth time. The value is
+    the parallel timer, not an immediate need to abandon the first product line.
+  </figcaption>
+</figure>
+
+The working cycle is:
+
+1. water and check the active Weed batch;
+2. refill the Weapon Printer;
+3. assemble finished parts;
+4. pack the product that already has a clean order;
+5. return to whichever line is about to stop.
+
+I add another Printer only when Carbon, Polymer, Alloy, assembly space, and order
+demand can keep it active. An empty second Printer adds capacity on paper but
+does not shorten the route to the next level.
+
+### Level 10: storage before speed when boxes are the problem
+
+Storage Racks unlock at **Level 10**.
+
+In one co-op route, a Double LED Light cost **1,800 U-Notes** and showed a
+**35% growth-speed** increase. That did not automatically make it the correct
+purchase. When full boxes, empty boxes, filaments, and packing supplies had no
+fixed location, storage removed more wasted movement than another growth-speed
+upgrade.
+
+I buy the Light first when the room is organized and the production line is
+mostly waiting for plants.
+
+I buy storage first when:
+
+- full and empty boxes are mixed together;
+- the same boxes are repeatedly reopened;
+- the elevator route is blocked;
+- supplies disappear into floor clutter.
+
+<h2 id="levels-13-15">
+  Levels 13–15: add Acid Disposal and prepare the Worker area
+</h2>
+
+Level 13 unlocks **Acid Disposal**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-13-acid-disposal-unlock.webp"
+    alt="Dirty Business reaching Reputation Level 13 and starting the Acid Disposal tutorial"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Acid Disposal becomes a third activity between Weed and Weapon cycles. I
+    finish the tutorial before accepting enough work to fill the new room.
+  </figcaption>
+</figure>
+
+The first Acid Drum setup used **two Hydrochloric Acid containers**. I complete
+available disposal work between the established production cycles, but I do not
+stockpile incoming items before the Drum and collection route work correctly.
+
+The important preparation is for Level 15. Before the final Level 14 orders, I
+clear space for the Worker Supply Rack and Worker Product Rack, then prepare:
+
+- Seeds and Soil;
+- Watering Cans;
+- Plastic Packs;
+- one strain with recurring demand;
+- several days of Worker funding.
+
+
+<h2 id="levels-15-22">
+  Levels 15–22: automate one proven route before adding staff
+</h2>
+
+Level 15 unlocks **Worker Assignments** and the first Botanical Intern.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-15-worker-assignments.webp"
+    alt="Dirty Business reaching Reputation Level 15 and unlocking Worker Assignments"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I prepare the racks and supplies before hiring. A Worker unlock is useful
+    only when the complete task route already has inputs, output space, and
+    funding.
+  </figcaption>
+</figure>
+
+The Botanical Intern shown in the Staffing Hub had:
+
+- Hiring Cost: **0**;
+- Daily Fee: **300**;
+- Tier 1;
+- one-star Efficiency;
+- one-star Movement Speed.
+
+A balance of **1,500 U-Notes** covers five daily payments at that rate. I begin
+with one strain and confirm that one complete cycle reaches the Product Rack
+before expanding the task queue.
+
+The detailed balance, supply, task, and Idle checks are in the{" "}
+<Link
+  href="/dirty-business/workers-not-working"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business Workers Not Working guide
+</Link>
+
+Level 18 unlocks the **Violet Nebula Seed** in this route. I test a small batch
+and inspect the available orders before replacing a strain that is already
+creating Reputation.
+
+Level 21 adds a **Dealer** and a Booster option. Level 22 exposes the first
+**Gunsmith** tier. These solve different problems:
+
+- hire a Dealer when repeatable surplus stock is waiting for another sales route;
+- hire a Gunsmith when completed Weapon parts are waiting for manual assembly;
+- hire neither when the actual problem is missing inputs, empty Printers, or no
+  stock to sell.
+
+<h2 id="levels-22-30">
+  Levels 22–30: keep every long process moving
+</h2>
+
+The next major production system does not arrive until Level 30, so this section
+is mainly about removing idle time.
+
+The stable combination is:
+
+- a Botanical Worker maintains one Weed strain;
+- Weapon production runs whenever materials are available;
+- Acid Disposal fills gaps between the two product lines;
+- clean customer batches are submitted as soon as compatible stock is ready.
+
+My action priority is:
+
+1. collect completed output before racks or tables fill;
+2. refill any production station that is completely stopped;
+3. complete clean orders already supported by stock;
+4. refill the Worker route before its current tasks run out;
+5. start optional experiments only after the proven lines are moving.
+
+I do not stand beside one slow machine. When Weed is growing, I move to Weapons.
+When a Printer is running, I check packing and Orders. When the Worker route is
+supplied, I use the free time for Acid Disposal or inventory cleanup.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="levels-30-38">
+  Levels 30–38: add LSD, Companies, stronger Workers, and aircraft access
+</h2>
+
+Level 30 unlocks **LSD Synthesising**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-30-lsd-unlock.webp"
+    alt="Dirty Business progression screen showing LSD unlocking at Reputation Level 30"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    LSD is a multi-stage route. I build one complete LSD Sheet before spending
+    on extra Slugs, Tanks, or processing capacity.
+  </figcaption>
+</figure>
+
+The first route uses Basic Slug, Slug Food, a Slug Tank, Slug Extract, a
+Distiller, Blotting Paper, and a final dispensing step.
+
+The expansion decision comes from the queue:
+
+- if the Distiller is waiting for extract, add Slug capacity;
+- if extract is waiting for the Distiller, add processing capacity.
+
+The complete production sequence is in the{" "}
+<Link
+  href="/dirty-business/how-to-make-lsd"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business LSD guide
+</Link>
+
+Level 32 opens **Companies** and the Botanical Recruit. Level 37 opens the
+Botanical Assistant.
+
+The Staffing Hub showed:
+
+- Botanical Intern: Hiring Cost **0**, Daily Fee **300**;
+- Botanical Recruit: Hiring Cost **18,000**, Daily Fee **420**;
+- Botanical Assistant: Hiring Cost **25,000**, Daily Fee **550**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-botanist-daily-fee-balance.webp"
+    alt="Dirty Business Staffing Hub comparing the Botanical Intern, Recruit, and Assistant costs"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Higher Worker tiers cost more to hire and maintain. Their value comes from
+    improving a route that already has supplies, tasks, and output space.
+  </figcaption>
+</figure>
+
+Compared with the Intern, the Recruit adds **18,000 U-Notes** in hiring cost and
+**120 U-Notes per day**. That upgrade makes sense when its additional movement
+or efficiency creates more usable output than the extra cost. It does not make
+sense when the Intern is Idle because a rack is empty.
+
+Level 38 opens the next aircraft and Smuggler's Island access checks.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-38-aircraft-access.webp"
+    alt="Dirty Business Smuggler's Island or aircraft interaction requiring Reputation Level 38"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Reaching Level 38 opens the next access check, but the active tutorial and
+    location setup still have to be completed before the route becomes usable.
+  </figcaption>
+</figure>
+
+At this stage I finish the active progression step and confirm what the next
+aircraft interaction requires. Detailed cargo, flight, and island preparation
+belongs in a separate aircraft guide rather than turning this page into a travel
+walkthrough.
+
+
+
+<h2 id="levels-38-100">
+  Levels 38–100: turn the base into a volume operation
+</h2>
+
+The current material does not support one verified fastest product from Level 38
+to 100. The reliable strategy is to keep several counters and production lines
+moving together:
+
+- automate a stable Weed route;
+- keep Weapon inputs and assembly supplied;
+- use LSD only after its complete processing chain is stable;
+- add Companies and aircraft work without allowing the original base to stop;
+- prioritize clean Orders already supported by inventory;
+- expand the station that has a visible queue instead of buying equal numbers of
+  every machine.
+
+Steam achievements mark Reputation checkpoints at Levels **10, 25, 67, and
+100**. The complete achievement route is covered in the{" "}
+<Link
+  href="/dirty-business/achievements-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business achievements guide
+</Link>
+
+The remaining high-value test for this page is a controlled comparison of
+Reputation per minute across Weed, Weapons, LSD, later products, and aircraft
+work. Until those timings are measured under the same conditions, this guide
+describes the most stable route rather than claiming one activity is universally
+fastest.
+
+<h2 id="buy-now-or-wait">
+  Buy the unlock now or wait?
+</h2>
+
+I buy immediately when an unlock removes the current blocker:
+
+- Storage when boxes are causing order mistakes;
+- a Worker when manual Weed work prevents every other task;
+- a Gunsmith when completed Weapon parts are waiting;
+- another Distiller when Slug Extract is accumulating;
+- more Slug capacity when the Distiller is waiting;
+- a stronger Worker when a fully supplied route is limited by movement or
+  efficiency.
+
+I wait when the purchase only adds unsupported capacity:
+
+- another Pot without Soil, Seeds, water, and Light coverage;
+- another Printer without Carbon, Polymer, Alloy, and assembly capacity;
+- another Worker without tasks, balance, and rack supplies;
+- a Dealer without repeatable surplus stock;
+- a Large Slug Tank while Extract is already queued;
+- a new product when existing clean Orders are ready to ship.
+
+The correct purchase converts waiting time into completed output. It is not
+automatically the newest item in the Store.
+
+<h2 id="solo-coop">
+  Solo and co-op leveling differences
+</h2>
+
+In solo, the Level 15 Worker is more valuable because it protects one production
+line while the player handles Weapons, Acid, Orders, or LSD. I keep the number
+of active manual systems lower until that first automated route works reliably.
+
+In co-op, two players can divide Weed and Weapons earlier, but tutorial purchases
+and shared cash need coordination. Before one player orders a second Printer,
+extra Tank, or room, both players should confirm that the next required tutorial
+purchase is still funded.
+
+The progression priorities remain the same in both modes:
+
+1. keep inputs supplied;
+2. prevent output from blocking the station;
+3. submit clean compatible Orders;
+4. spend on the current bottleneck.
+
+<h2 id="faq">
+  Dirty Business leveling and Reputation FAQ
+</h2>
+
+### What is the most consistent way to gain Reputation?
+
+Use clean customer Orders supported by products already in stock, and keep
+different production timers running in parallel. The current data does not prove
+one universal fastest product by Reputation per minute.
+
+### Do larger Orders always give more Reputation?
+
+The Murkwood OG sample scaled from 3 Reputation for one Pack to 6 for two and 9
+for three. Check the displayed reward because other products and qualities may
+use different values.
+
+### Do penalties reduce Reputation as well as money?
+
+Yes in the captured delivery comparison. The wrong-quality batch finished at 18
+Reputation instead of the 24-Reputation clean sample and showed 33.3% Penalties.
+
+### Should I accept only large Orders?
+
+No. Use a small clean Order when it clears leftover stock, finishes the current
+level, or prevents a product line from sitting idle.
+
+### Is the first Botanical Intern free?
+
+The Staffing Hub showed a Hiring Cost of 0 and a Daily Fee of 300. It still
+needs balance, supplies, tasks, and Product Rack space.
+
+### Is the Level 32 Botanical Recruit automatically better value?
+
+No. It costs 18,000 to hire and 420 per day, compared with 0 and 300 for the
+Intern. Upgrade when the functioning route is limited by Worker speed rather
+than missing inputs or space.
+
+### Does reaching Level 38 immediately give me a working aircraft?
+
+No. Level 38 opens the next access check, but the current tutorial and location
+setup still have to be completed.
+
+### What level does Cash Forging unlock?
+
+The available Early Access screens conflict between Level 40 and Level 48. Check
+the current Progression or Tutorial UI in the installed build before planning
+the purchase around one fixed level.

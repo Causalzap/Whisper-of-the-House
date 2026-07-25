@@ -1,0 +1,735 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideCallout from "@/components/guides/GuideCallout";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+import ProgressChecklist from "@/components/tools/ProgressChecklist";
+import { dirtyBusinessAchievementChecklistItems } from "@/data/checklists/dirty-business/achievements";
+
+export const roadmapColumns = [
+  { key: "item", label: "Roadmap Item" },
+  { key: "currentAnswer", label: "Current Answer" },
+];
+
+export const roadmapRows = [
+  {
+    item: "Achievements",
+    currentAnswer: "75",
+  },
+  {
+    item: "Estimated time",
+    currentAnswer:
+      "Not published yet; the extreme Order, product, aircraft, trash, and Store counters still need measured rates.",
+  },
+  {
+    item: "Difficulty",
+    currentAnswer:
+      "The one-time actions are simple. The main challenge is late-game volume and automation.",
+  },
+  {
+    item: "Missable achievements",
+    currentAnswer:
+      "No confirmed missables, but reset behavior and every one-time trigger have not been verified.",
+  },
+  {
+    item: "Minimum saves",
+    currentAnswer:
+      "This guide plans the route on one save; it is not yet a guarantee that every counter and trigger is one-save safe.",
+  },
+  {
+    item: "Co-op required",
+    currentAnswer:
+      "No achievement description explicitly requires co-op. Host and second-player ownership rules still need testing.",
+  },
+  {
+    item: "Main grind",
+    currentAnswer:
+      "10,000 Orders, 25,000 products, 15,000 Store items, 10,000 trash, aircraft cargo, airdrops, fuel, and distance.",
+  },
+  {
+    item: "Tested scope",
+    currentAnswer:
+      "July 2026 Early Access achievement list and the first confirmed progression routes.",
+  },
+];
+
+export const routeColumns = [
+  { key: "step", label: "Step" },
+  { key: "goal", label: "Goal" },
+  { key: "why", label: "Why This Order Works" },
+];
+
+export const routeRows = [
+  {
+    step: "1",
+    goal:
+      "Finish the opening tutorials, place the first Store order, and complete one clean Weed sale.",
+    why:
+      "The common opening achievements unlock without interrupting the production route.",
+  },
+  {
+    step: "2",
+    goal:
+      "Add Weapons at Level 5, buy one useful room, and remove a locked board during a real expansion.",
+    why:
+      "The same spending improves the base while clearing Loaded, Corner Office, and Breaking And Entering.",
+  },
+  {
+    step: "3",
+    goal:
+      "Start Acid Disposal at Level 13 and hire the first Botanical Intern at Level 15.",
+    why:
+      "These system achievements also create background work and automation for later counters.",
+  },
+  {
+    step: "4",
+    goal:
+      "Feed one Unicorn only after 10,000 U-Notes is spare, then hire one Dealer and purchase one Company when surplus exists.",
+    why:
+      "Expensive one-time achievements should not drain the production lines funding the long grind.",
+  },
+  {
+    step: "5",
+    goal:
+      "Sell the first LSD at Level 30 and complete one Banknote Bundle route when Cash Forging becomes available.",
+    why:
+      "The first-sale achievements confirm that each later production chain works before scaling it.",
+  },
+  {
+    step: "6",
+    goal:
+      "Keep Weed, Weapons, LSD, banknotes, Orders, acid work, earnings, spending, and Reputation moving together.",
+    why:
+      "A normal sale can support several achievement families without creating a separate grind for each one.",
+  },
+  {
+    step: "7",
+    goal:
+      "Leave aircraft, trolley, 10,000-Order, 25,000-product, 15,000-Store-item, and 10,000-trash goals for the automated endgame.",
+    why:
+      "These thresholds are too large to chase efficiently before the base and late logistics systems are stable.",
+  },
+];
+
+export const blockerColumns = [
+  { key: "achievement", label: "Likely Long Blocker" },
+  { key: "requirement", label: "Requirement" },
+  { key: "route", label: "Best Current Route" },
+];
+
+export const blockerRows = [
+  {
+    achievement: "Bombs Away",
+    requirement: "Airdrop 50,000 cargo.",
+    route:
+      "Use the largest verified airdrop load and combine each run with flight distance, fuel, and other aircraft counters.",
+  },
+  {
+    achievement: "No Days Off",
+    requirement: "Deliver 10,000 customer Orders.",
+    route:
+      "Let normal multi-unit Orders build money and products first; use smaller clean Orders only when the Order count becomes the remaining blocker.",
+  },
+  {
+    achievement: "Market Saturation",
+    requirement: "Sell 25,000 products.",
+    route:
+      "Keep several automated product lines active and verify which later sale channels advance the total-product counter.",
+  },
+  {
+    achievement: "Doing My Part",
+    requirement: "Burn 100,000 L of aircraft fuel.",
+    route:
+      "Do not make empty fuel runs until cargo, airdrop, speed, and distance goals have already been combined.",
+  },
+  {
+    achievement: "Minimalist",
+    requirement: "Trash 10,000 items.",
+    route:
+      "Let normal packaging and rejected production waste accumulate before choosing a deliberate late-game trash method.",
+  },
+  {
+    achievement: "Black Friday",
+    requirement: "Order 15,000 Store items.",
+    route:
+      "Buy real consumables and production inputs in bulk; verify how bundled Store deliveries count before mass ordering.",
+  },
+];
+
+export const overlapColumns = [
+  { key: "action", label: "Action" },
+  { key: "directProgress", label: "Direct Progress" },
+  { key: "verify", label: "Still Worth Verifying" },
+];
+
+export const overlapRows = [
+  {
+    action: "Complete a clean Weed Order",
+    directProgress:
+      "Customer Orders, Weed sales, earnings, spending through restocking, and Reputation.",
+    verify:
+      "Confirm the exact increase to the broader total-product counter in the current build.",
+  },
+  {
+    action: "Complete a clean Weapon Order",
+    directProgress:
+      "Customer Orders, Weapon sales, earnings, restocking spend, and Reputation.",
+    verify:
+      "Check whether every accepted Weapon condition contributes equally to total products.",
+  },
+  {
+    action: "Complete an LSD sale",
+    directProgress:
+      "LSD sales and the customer or distribution route used for that sale.",
+    verify:
+      "Confirm total-product progress and whether Dealer or Company LSD sales count the same as customer Orders.",
+  },
+  {
+    action: "Complete a Banknote Bundle sale",
+    directProgress:
+      "Banknote sales and the selected sales route.",
+    verify:
+      "Confirm whether the bundle advances total products and which distribution systems count.",
+  },
+  {
+    action: "Receive and dissolve Acid Disposal jobs",
+    directProgress:
+      "Dump-received and item-dissolved milestones are separate achievement families.",
+    verify:
+      "Measure how many dissolvable items each dump contributes and which disposal actions count.",
+  },
+  {
+    action: "Fly an aircraft cargo route",
+    directProgress:
+      "The route can be planned around distance, fuel, speed, cargo delivery, or airdrop goals.",
+    verify:
+      "Measure progress per flight and confirm whether delivery and airdrop can advance during the same run.",
+  },
+];
+
+export const counterCheckColumns = [
+  { key: "counter", label: "Counter" },
+  { key: "DoNotAssume", label: "Do Not Assume" },
+  { key: "test", label: "Useful Controlled Test" },
+];
+
+export const counterCheckRows = [
+  {
+    counter: "Store items",
+    DoNotAssume:
+      "One Store transaction equals one item.",
+    test:
+      "Compare a delivery containing one item with a bulk box of identical consumables.",
+  },
+  {
+    counter: "Trash",
+    DoNotAssume:
+      "A box and every item inside it all count separately.",
+    test:
+      "Compare one loose wrapper, one empty box, and one box containing several items.",
+  },
+  {
+    counter: "Placed objects",
+    DoNotAssume:
+      "Moving an existing object counts as placing another object.",
+    test:
+      "Check the counter before initial placement, relocation, storage, and replacement.",
+  },
+  {
+    counter: "Total products",
+    DoNotAssume:
+      "Every Weed, Weapon, LSD, banknote, Dealer, Company, or aircraft sale counts identically.",
+    test:
+      "Sell one known unit through each route and compare the visible achievement progress.",
+  },
+  {
+    counter: "Customer Orders",
+    DoNotAssume:
+      "A multi-product customer request counts as several Orders.",
+    test:
+      "Complete one single-product and one mixed Order, then compare the Order counter.",
+  },
+];
+
+export const finalCheckColumns = [
+  { key: "missing", label: "If You Are Missing" },
+  { key: "checkFirst", label: "Check First" },
+  { key: "nextMove", label: "Next Move" },
+];
+
+export const finalCheckRows = [
+  {
+    missing: "One early achievement",
+    checkFirst:
+      "Back in Business and the exact opening action that triggered it on this save.",
+    nextMove:
+      "Use a fresh save and check Steam after each tutorial action instead of guessing from the description.",
+  },
+  {
+    missing: "A Worker, Dealer, Company, room, or first-sale achievement",
+    checkFirst:
+      "Whether the player who needs the achievement performed the action in co-op.",
+    nextMove:
+      "Repeat the smallest safe action on that player's own session before rebuilding the entire save.",
+  },
+  {
+    missing: "A product or Order counter",
+    checkFirst:
+      "The category, sales route, product condition, and exact threshold in the checklist.",
+    nextMove:
+      "Run one controlled sale and check progress before committing to a large grind.",
+  },
+  {
+    missing: "An Acid achievement",
+    checkFirst:
+      "Whether the missing goal counts dumps received or items dissolved.",
+    nextMove:
+      "Increase the side of the route that is behind instead of only accepting more jobs.",
+  },
+  {
+    missing: "An aircraft achievement",
+    checkFirst:
+      "Distance, fuel, speed, delivered cargo, and airdropped cargo as separate counters.",
+    nextMove:
+      "Choose the next flight around the specific unfinished counter and record progress per run.",
+  },
+];
+
+<GuideQuickAnswer title="Quick Answer">
+  <strong>Dirty Business has 75 achievements in the July 2026 Early Access list.</strong>{" "}
+  My route is to clear inexpensive one-time actions when their systems become useful,
+  keep the production counters overlapping on one main save, and delay the extreme
+  Order, product, trash, Store, aircraft, and trolley goals until the operation is automated.
+</GuideQuickAnswer>
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-achievement-corner-office-room-purchase.webp"
+    alt="Dirty Business purchasing a useful room while progressing the Corner Office achievement"
+    width={1280}
+    height={720}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I combine achievements with upgrades the base already needs. This 2,000-U-Note
+    room advanced Corner Office while solving a real storage problem.
+  </figcaption>
+</figure>
+
+<GuideCallout title="Achievement data note">
+  The Steam Rate values in the checklist come from the supplied launch-period
+  achievement snapshot. These percentages can move quickly during Early Access,
+  so I use them as a cleanup-priority signal rather than a permanent difficulty ranking.
+  The visible descriptions provide thresholds but do not expose every internal counter,
+  co-op ownership rule, or reset behavior.
+</GuideCallout>
+
+<h2 id="all-achievements-checklist">
+  All achievements checklist
+</h2>
+
+The checklist replaces the long static 75-item list. Search an achievement name,
+filter by system or cleanup risk, hide completed items, and jump to the section
+that explains the route.
+
+<ProgressChecklist
+  storageKey="dirty-business-achievements-guide"
+  title="Track your progress"
+  description="Track all 75 Dirty Business achievements, search requirements, filter late-game grinds, and save progress in this browser."
+  items={dirtyBusinessAchievementChecklistItems}
+  shareText="I am tracking my Dirty Business achievement progress on Whisper of the House."
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="achievement-roadmap">
+  Achievement roadmap and current 100% scope
+</h2>
+
+<GuideTable
+  caption="What is confirmed, what is a route recommendation, and what still needs controlled testing."
+  columns={roadmapColumns}
+  rows={roadmapRows}
+/>
+
+The key distinction is between a **one-save strategy** and a verified one-save
+guarantee. I keep one main operation so all long counters can overlap, but I do
+not claim that every trigger, co-op action, or Early Access counter is proven
+safe across every save reset and version.
+
+<GuideTable
+  caption="Recommended order for the Dirty Business achievement route."
+  columns={routeColumns}
+  rows={routeRows}
+/>
+
+
+<h2 id="one-save-strategy">
+  How I plan the one-time achievements on one save
+</h2>
+
+I divide the list into:
+
+- **one-time system actions**, completed when the system becomes useful;
+- **lifetime counters**, left running through normal production and distribution.
+
+The rule is simple: complete cheap actions at the natural progression point, but
+do not sacrifice the cash or floor space needed to keep the base operating.
+
+### Opening achievements, the first room, and the first Weapon
+
+The opening route naturally covers **Fresh Stock**, **Sold**, and **Green Light**.
+At Level 5, I print and sell one valid Weapon for **Loaded** while the Weed line
+continues growing.
+
+I purchase the first room for **Corner Office** only when the current floor needs
+storage or another production zone. **Breaking And Entering** is paired with a
+locked board on an expansion route I already intend to use.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-order-penalty-zero.webp"
+    alt="Dirty Business clean customer delivery with zero penalties for achievement progress"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Clean Orders advance the useful progression route without sacrificing part
+    of the payout or Reputation to a preventable quality penalty.
+  </figcaption>
+</figure>
+
+The full assignment, penalty, completion, and payment sequence is in the{" "}
+<Link
+  href="/dirty-business/orders-delivery-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business Customer Orders guide
+</Link>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="back-in-business">
+  Back in Business: what the current description proves
+</h2>
+
+**Back in Business** only says:
+
+```text
+Old habits die hard.
+```
+
+That description does not identify the trigger. Its high completion rate suggests
+an opening action, but the supplied list does not prove whether it is tied to
+entering the old base, restoring equipment, beginning production, or another
+tutorial state.
+
+I let it unlock during the opening route rather than publishing a guessed step.
+The clean test is a new save with Steam checked after every tutorial action. Once
+that trigger is isolated, this section should be replaced with the exact action
+and a matching screenshot.
+
+<h2 id="acid-worker-dealer-company">
+  Acid, Worker, Dealer, and Company achievements
+</h2>
+
+### Acid Disposal
+
+Level 13 opens the first Acid Disposal route. The setup I used needed **two
+Hydrochloric Acid containers** before the Drum was ready.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-achievement-acid-drum-two-cans.webp"
+    alt="Dirty Business Acid Disposal setup using two Hydrochloric Acid containers"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Dumps received and items dissolved are separate achievement families. I keep
+    enough acid capacity to prevent one counter from running far ahead of the other.
+  </figcaption>
+</figure>
+
+The first dump and first dissolved item clear the one-time Acid achievements.
+The 10, 250, and 1,000 dissolution goals, plus the 250 and 1,000 dump goals, are
+late counters. I add another Drum only when incoming work regularly waits longer
+than the active cycle.
+
+### First Worker, Dealer, and Company
+
+Level 15 opens Worker Assignments. The first Botanical Intern displayed:
+
+- Hiring Cost: **0** during the tutorial;
+- Daily Fee: **300 U-Notes**;
+- one-star Efficiency;
+- one-star Movement Speed.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-botanist-daily-fee-balance.webp"
+    alt="Dirty Business Staffing Hub showing the first Botanical Intern and daily fee"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Hiring the first Worker clears the one-time achievement, but the route still
+    needs balance, matching tasks, inputs, equipment, and Product Rack space.
+  </figcaption>
+</figure>
+
+A repeat hire displayed **12,000 U-Notes**, so firing the tutorial Intern is not
+my first troubleshooting step. The complete setup is in the{" "}
+<Link
+  href="/dirty-business/workers-not-working"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business Botanist Not Working guide
+</Link>
+
+I hire the first Dealer only when repeatable surplus exists. I purchase the first
+Company only when doing so will not empty Worker balances or stop the product
+lines funding the rest of the checklist.
+
+<h2 id="hidden-and-special">
+  Hidden and special achievements
+</h2>
+
+### Six. Seven.
+
+The hidden **Six. Seven.** achievement requires **Reputation Level 67**. It is a
+midpoint on the longer route to **Kingpin** at Level 100, not a separate action.
+
+### Believe
+
+**Believe** requires feeding a Unicorn once. The Ice Cream Unicorn cost
+**10,000 U-Notes** in my route.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-achievement-believe-feed-unicorn.webp"
+    alt="Dirty Business feeding Weed to the Ice Cream Unicorn for the Believe achievement"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I wait until 10,000 U-Notes is spare. Believe needs one feed, so it should not
+    replace an essential early room, Worker balance, or production purchase.
+  </figcaption>
+</figure>
+
+<h2 id="lsd-and-banknotes">
+  LSD and banknote achievements
+</h2>
+
+LSD Synthesising unlocks at Level 30. I clear **Taste the Rainbow** with the first
+complete LSD sale, then leave the 50, 500, and 5,000 sales goals for a stable,
+repeatable line.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-30-lsd-unlock.webp"
+    alt="Dirty Business LSD Synthesising Store and Level 30 starter route"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The first sale proves the chain works. The later LSD achievements are
+    automation targets, not a reason to overbuild the first batch.
+  </figcaption>
+</figure>
+
+The equipment, five-Extract Distiller step, Too Hot fix, and final LSD Sheet
+sequence are in the{" "}
+<Link
+  href="/dirty-business/how-to-make-lsd"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business LSD guide
+</Link>
+
+The banknote line starts with **Legal Tender**, followed by 50, 250, and 1,000
+Banknote Bundles. Separate Early Access screens showed conflicting Cash Forging
+unlock numbers, so I check the current Store and Tutorial requirement instead of
+publishing one unsupported level.
+
+<h2 id="overlap-long-counters">
+  How I overlap the long achievement counters
+</h2>
+
+<GuideTable
+  caption="Production actions that can support several achievement families, plus the counter behavior that still needs verification."
+  columns={overlapColumns}
+  rows={overlapRows}
+/>
+
+The strongest route is not to finish one category and shut it down. I keep proven
+Weed and Weapon production running when LSD, banknotes, Companies, and aircraft
+systems arrive. The older lines continue feeding Orders, cash, Reputation, and
+their own category thresholds.
+
+<h2 id="hardest-achievements">
+  Likely longest achievements
+</h2>
+
+The lowest launch-period rates cluster around extreme volume goals. Those rates
+will move, but the requirements themselves show where the main workload sits.
+
+<GuideTable
+  caption="Achievements most likely to remain late-game blockers based on their published thresholds."
+  columns={blockerColumns}
+  rows={blockerRows}
+/>
+
+I do not estimate completion hours until the production, Order, aircraft, trash,
+and Store counters have controlled per-hour measurements. A percentage from the
+first Early Access days is not a reliable completion-time calculator.
+
+<h2 id="store-trash-object-counters">
+  Store items, trash, objects, and total-product rules
+</h2>
+
+The achievement wording gives the targets but not every internal counting rule.
+Before committing to thousands of repeated actions, I run a small controlled test.
+
+<GuideTable
+  caption="Counter rules that should be verified before a large achievement grind."
+  columns={counterCheckColumns}
+  rows={counterCheckRows}
+/>
+
+For Store milestones, I buy Seeds, Soil, Plastic Packs, filaments, acid, Worker
+inputs, and fuel the operation will actually consume. For trash, I allow normal
+packaging and rejected output to accumulate before choosing a deliberate grind.
+For placed objects, I do not assume relocation counts as a new placement.
+
+<h2 id="aircraft-and-trolley">
+  Aircraft and platform trolley achievements
+</h2>
+
+Aircraft access appears around the Level 38 progression stage, but unlocking the
+area is not the same as having an efficient cargo route.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-38-aircraft-access.webp"
+    alt="Dirty Business aircraft and Smuggler's Island access at the Level 38 progression stage"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Aircraft achievements form the largest late-game block. I stabilize the route
+    before turning distance, fuel, cargo, speed, and airdrops into a dedicated grind.
+  </figcaption>
+</figure>
+
+I plan each late flight around the unfinished counters:
+
+1. carry real cargo;
+2. add useful distance;
+3. consume fuel that still counts toward the target;
+4. use an airdrop when that counter is unfinished;
+5. test the 300 km/h requirement with a suitable aircraft or route.
+
+Cargo delivery and airdropped cargo are separate achievement families. The next
+high-value test is recording load size, distance, fuel use, delivered cargo, and
+airdropped cargo after one run so the page can publish estimated runs instead of
+general advice.
+
+The trolley goals are **25 km** and **100 km**. I leave them until the trolley is
+already useful for moving boxes rather than pushing an empty platform during the
+early production grind.
+
+<h2 id="coop-achievements">
+  How I handle achievements in co-op
+</h2>
+
+No achievement description explicitly says co-op is required, but the supplied
+data does not explain who receives credit in a shared session.
+
+Until ownership is tested, I use a conservative rule:
+
+- the player who needs a room, Worker, Dealer, Company, or first-sale achievement
+  performs the action;
+- the player who needs an aircraft counter drives or completes the route;
+- both players check Steam progress before and after a controlled Order or sale;
+- I avoid changing Host immediately before a large counter threshold.
+
+This prevents a long shared grind from depending on an unverified assumption
+about Host, executor, passenger, or all-player credit.
+
+<h2 id="missing-achievement-checklist">
+  Missing one achievement? Check this first
+</h2>
+
+<GuideTable
+  caption="Final checks when one Dirty Business achievement is still missing."
+  columns={finalCheckColumns}
+  rows={finalCheckRows}
+/>
+
+The searchable checklist remains the main tracker. This table is only for
+deciding which system to test next.
+
+<h2 id="faq">
+  Dirty Business achievements FAQ
+</h2>
+
+### How many achievements are in Dirty Business?
+
+The July 2026 Early Access achievement list contains **75 achievements**.
+
+### Is this a verified one-save 100% roadmap?
+
+Not yet. It is a one-save strategy designed to overlap the long counters. Every
+trigger, co-op ownership rule, reset behavior, and late counter has not been
+verified across all builds.
+
+### How long does 100% completion take?
+
+The current evidence does not support an honest time estimate. The 10,000-Order,
+25,000-product, aircraft, trash, and Store counters need measured progress rates.
+
+### What is the hidden Six. Seven. achievement?
+
+Reach **Reputation Level 67**.
+
+### What unlocks Back in Business?
+
+The visible description only says `Old habits die hard`. The exact opening
+trigger has not been isolated, so I do not publish a guessed action.
+
+### Are any achievements confirmed missable?
+
+No confirmed missables are identified by the supplied descriptions, but that is
+not proof that every one-time trigger, reset, and co-op state is recoverable.
+
+### Does ordering 100 Store items mean 100 separate Store transactions?
+
+The description says items, not transactions. The exact behavior of bulk boxes
+should be checked against visible achievement progress before a 15,000-item grind.
+
+### Are Acid dumps and dissolved items the same counter?
+
+No. The achievement list has separate milestones for dumps received and items
+dissolved.
+
+### Should I grind aircraft achievements as soon as access opens?
+
+No. Stabilize the aircraft, cargo, fuel, and funding route first, then combine
+distance, speed, fuel, delivery, and airdrop goals wherever the current system
+allows it.
+
+### Does every product sale count toward total products?
+
+That should be verified by sales route. Weed, Weapons, LSD, banknotes, Dealer,
+Company, and aircraft distribution may not all update the broader counter in the
+same way.

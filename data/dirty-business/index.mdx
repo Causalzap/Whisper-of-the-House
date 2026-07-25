@@ -1,0 +1,718 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const progressionRows = [
+  {
+    stage: "Opening–Level 5",
+    priority:
+      "Learn Store deliveries, Weed production, clean customer Orders, payment collection, and Reputation.",
+    resourceLabel: "Customer Orders & Delivery",
+    resourceHref: "/dirty-business/orders-delivery-guide",
+  },
+  {
+    stage: "Level 5–13",
+    priority:
+      "Add Weapon Printing during Weed growth time and buy storage only when boxes or walking routes become the bottleneck.",
+    resourceLabel: "Leveling & Reputation",
+    resourceHref: "/dirty-business/leveling-reputation-unlocks",
+  },
+  {
+    stage: "Level 13–15",
+    priority:
+      "Fit Acid Disposal between existing cycles and prepare the room, inputs, Racks, and balance for the first Worker.",
+    resourceLabel: "Leveling & Reputation",
+    resourceHref: "/dirty-business/leveling-reputation-unlocks",
+  },
+  {
+    stage: "Level 15–30",
+    priority:
+      "Automate one proven Weed strain, keep Weapons supplied, and add Dealer or Gunsmith support only for a visible bottleneck.",
+    resourceLabel: "Botanist Not Working",
+    resourceHref: "/dirty-business/workers-not-working",
+  },
+  {
+    stage: "Level 30–38",
+    priority:
+      "Complete one LSD Sheet route, delay Companies until repeatable surplus exists, and prepare for aircraft access.",
+    resourceLabel: "How to Make LSD",
+    resourceHref: "/dirty-business/how-to-make-lsd",
+  },
+  {
+    stage: "Late game / 100%",
+    priority:
+      "Keep older lines active while adding banknotes, Companies, aircraft, cargo, airdrops, and long achievement counters.",
+    resourceLabel: "All 75 Achievements",
+    resourceHref: "/dirty-business/achievements-guide",
+  },
+];
+
+export const priorityColumns = [
+  { key: "symptom", label: "Visible Symptom" },
+  { key: "priority", label: "Fix This First" },
+  { key: "wait", label: "Do Not Buy Yet" },
+];
+
+export const priorityRows = [
+  {
+    symptom: "Finished boxes block tables, racks, or paths",
+    priority:
+      "Collect, identify, separate, assign, and deliver the existing output.",
+    wait:
+      "More Pots, Printers, Slugs, Workers, or other upstream capacity.",
+  },
+  {
+    symptom: "A production station is completely stopped",
+    priority:
+      "Restore its input, free its output, or finish the occupied processing step.",
+    wait:
+      "A duplicate station that will stop for the same reason.",
+  },
+  {
+    symptom: "Weed is growing and the room is stable",
+    priority:
+      "Use the wait for Weapons, packing, Orders, Acid Disposal, or inventory cleanup.",
+    wait:
+      "A random upgrade that creates another manual production line.",
+  },
+  {
+    symptom: "A Worker is Idle",
+    priority:
+      "Read Current Status and fix the named task, input, equipment, balance, or Product Rack blocker.",
+    wait:
+      "A stronger Worker tier or replacement hire.",
+  },
+  {
+    symptom: "Slug Extract is waiting",
+    priority:
+      "Clear or expand the Distiller and final LSD processing side.",
+    wait:
+      "More Slugs or Tanks that increase the same queue.",
+  },
+  {
+    symptom: "Customer Orders consume all finished stock",
+    priority:
+      "Keep the proven lines supplied and submit clean compatible Orders.",
+    wait:
+      "A Dealer or Company with no repeatable surplus to distribute.",
+  },
+  {
+    symptom: "Known surplus remains after normal Orders",
+    priority:
+      "Test one Dealer or Company route and record the result.",
+    wait:
+      "Several new distribution systems before the first route is understood.",
+  },
+];
+
+export const distributionColumns = [
+  { key: "system", label: "System" },
+  { key: "role", label: "Main Role" },
+  { key: "useWhen", label: "Use It When" },
+  { key: "doNotAssume", label: "Do Not Assume" },
+];
+
+export const distributionRows = [
+  {
+    system: "Customer Orders",
+    role:
+      "The most controlled early and midgame route for known products, cash, and displayed Reputation.",
+    useWhen:
+      "Product, quantity, quality, condition, and assigned boxes can all be verified.",
+    doNotAssume:
+      "A box on the elevator is assigned before its card is attached to the customer in Delivery.",
+  },
+  {
+    system: "Dealer",
+    role:
+      "Moves repeatable packaged surplus that the base can keep supplied.",
+    useWhen:
+      "Clean customer Orders leave known stock waiting and the core production loop remains funded.",
+    doNotAssume:
+      "Dealer sales give the same Reputation or achievement progress as customer Orders.",
+  },
+  {
+    system: "Company",
+    role:
+      "Adds a later distribution layer for output beyond ordinary customer demand.",
+    useWhen:
+      "Repeatable surplus exists and the purchase will not empty Worker balances or stop production.",
+    doNotAssume:
+      "The first Company has a known payback time, throughput, or Reputation rate.",
+  },
+  {
+    system: "Aircraft",
+    role:
+      "Handles high-volume late distribution through cargo delivery and airdrops.",
+    useWhen:
+      "Level 38 access, the related tutorial, funding, aircraft, pilot, cargo supply, and route are stable.",
+    doNotAssume:
+      "Cargo, airdrops, distance, fuel, and speed all advance from every flight.",
+  },
+];
+
+Dirty Business is easier when I treat the underground base as one connected
+operation rather than a collection of unrelated tutorials.
+
+Inputs feed production. Production creates identifiable output. Customer Orders
+turn that output into cash and Reputation. Reputation opens Weapon Printing,
+Acid Disposal, Workers, Dealers, Gunsmiths, LSD, Companies, stronger staff, and
+aircraft access. Storage, quality control, packaging, and distribution decide
+whether those unlocks become useful capacity or another blocked room.
+
+This Hub has two jobs:
+
+1. send the player to the focused guide that solves the current problem;
+2. answer the smaller but valuable topics that do not yet need separate pages.
+
+<GuideQuickAnswer title="Where I Start">
+  <ul className="mt-3 space-y-2">
+    <li>
+      <strong>Missing Packs, penalties, or no payment:</strong>{" "}
+      open the Customer Orders guide.
+    </li>
+    <li>
+      <strong>Leveling, Reputation, key unlocks, or what to buy next:</strong>{" "}
+      open the Leveling and Reputation guide.
+    </li>
+    <li>
+      <strong>Idle Botanist, empty Supply Rack, or stuck Worker tutorial:</strong>{" "}
+      open the Botanist Not Working guide.
+    </li>
+    <li>
+      <strong>Level 30 Slugs, Distiller, Too Hot, or first LSD Sheet:</strong>{" "}
+      open the LSD production guide.
+    </li>
+    <li>
+      <strong>All 75 achievements and late cleanup:</strong>{" "}
+      open the searchable achievement checklist.
+    </li>
+    <li>
+      <strong>Beginner priorities, Co-op, saves, quality, Weapons, Acid, or
+      distribution:</strong>{" "}
+      use the Hub sections below.
+    </li>
+  </ul>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Early Access scope.</strong>{" "}
+  This cluster uses July 2026 Early Access progression screens, customer Order
+  results, the first Worker setup, the first LSD route, and the 75-achievement
+  list. Exact prices, unlock requirements, save behavior, quality recipes,
+  distribution rewards, and synchronization rules may change.
+</div>
+
+<h2 id="guides">
+  Dirty Business guides
+</h2>
+
+<div className="my-8 grid gap-5 md:grid-cols-2">
+  <Link
+    href="/dirty-business/leveling-reputation-unlocks"
+    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md"
+  >
+    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
+      Beginner Progression
+    </p>
+    <h3 className="mt-2 text-xl font-bold text-slate-950">
+      Leveling, Reputation & Key Unlocks
+    </h3>
+    <p className="mt-3 text-sm leading-7 text-slate-600">
+      Follow the Level 1–38 route, compare clean and penalized Order results,
+      prepare for Workers and LSD, and decide whether a purchase removes the
+      current bottleneck.
+    </p>
+  </Link>
+
+  <Link
+    href="/dirty-business/orders-delivery-guide"
+    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md"
+  >
+    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
+      Orders & Quality Control
+    </p>
+    <h3 className="mt-2 text-xl font-bold text-slate-950">
+      Customer Orders & Delivery Fixes
+    </h3>
+    <p className="mt-3 text-sm leading-7 text-slate-600">
+      Fix Missing Packs, quality and Deformed-product penalties, Elevator Isn't
+      Clear, missing payment, box assignment, and Co-op tablet problems.
+    </p>
+  </Link>
+
+  <Link
+    href="/dirty-business/workers-not-working"
+    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md"
+  >
+    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
+      Worker Automation
+    </p>
+    <h3 className="mt-2 text-xl font-bold text-slate-950">
+      Botanist Not Working
+    </h3>
+    <p className="mt-3 text-sm leading-7 text-slate-600">
+      Read Current Status, match tasks and strains, supply the correct inputs,
+      clear unavailable equipment, and recover the Level 15 tutorial.
+    </p>
+  </Link>
+
+  <Link
+    href="/dirty-business/how-to-make-lsd"
+    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md"
+  >
+    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
+      Level 30 Production
+    </p>
+    <h3 className="mt-2 text-xl font-bold text-slate-950">
+      How to Make the First LSD Sheet
+    </h3>
+    <p className="mt-3 text-sm leading-7 text-slate-600">
+      Follow the Slug Extract, Distiller, temperature, Blotting Paper, dispensing,
+      and final boxing sequence.
+    </p>
+  </Link>
+
+  <Link
+    href="/dirty-business/achievements-guide"
+    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md md:col-span-2"
+  >
+    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">
+      100% Progress
+    </p>
+    <h3 className="mt-2 text-xl font-bold text-slate-950">
+      All 75 Achievements & Searchable Checklist
+    </h3>
+    <p className="mt-3 text-sm leading-7 text-slate-600">
+      Search and save every achievement, solve the hidden Level 67 goal, and
+      plan the long Order, product, Store, Acid, LSD, aircraft and trolley
+      counters.
+    </p>
+  </Link>
+</div>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="beginner-progression">
+  Beginner progression
+</h2>
+
+<div className="my-8 overflow-x-auto rounded-xl border border-slate-200">
+  <table className="w-full border-collapse text-left text-sm">
+    <thead className="bg-slate-50 text-slate-700">
+      <tr>
+        <th className="border-b border-slate-200 px-4 py-3 font-semibold">
+          Stage
+        </th>
+        <th className="border-b border-slate-200 px-4 py-3 font-semibold">
+          Main Priority
+        </th>
+        <th className="border-b border-slate-200 px-4 py-3 font-semibold">
+          Open This Resource
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {progressionRows.map((row) => (
+        <tr key={row.stage} className="align-top">
+          <td className="border-b border-slate-100 px-4 py-4 font-semibold text-slate-900">
+            {row.stage}
+          </td>
+          <td className="border-b border-slate-100 px-4 py-4 leading-6 text-slate-600">
+            {row.priority}
+          </td>
+          <td className="border-b border-slate-100 px-4 py-4">
+            <Link
+              href={row.resourceHref}
+              className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+            >
+              {row.resourceLabel}
+            </Link>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+The overall route is: learn one complete Weed-to-Order cycle, add Weapons during
+growth time, use Acid Disposal during another wait, automate one proven strain,
+then add LSD and later distribution without shutting down the lines already
+funding progression.
+
+<h2 id="best-production-priorities">
+  Best production priorities
+</h2>
+
+The most useful priority is not the newest unlock. It is the step that releases
+the current stopped timer or blocked output.
+
+<GuideTable
+  caption="The production decision I make from the visible queue instead of the unlock screen."
+  columns={priorityColumns}
+  rows={priorityRows}
+/>
+
+My short operating order is:
+
+1. clear finished output before it blocks the next cycle;
+2. restore a completely stopped station;
+3. pack and deliver clean products already supported by stock;
+4. restock a Worker before the next task reaches an empty input;
+5. clear processing or distribution queues before expanding upstream capacity;
+6. buy only the upgrade that changes one of those states.
+
+<h2 id="quality-and-deformed-products">
+  Quality and Deformed products
+</h2>
+
+Customer Orders check more than the product name.
+
+For Weed, verify strain, quantity, and displayed quality. For Weapons, verify
+the exact type, quantity, and whether the product is normal or Deformed.
+
+A correct quantity can still lose money and Reputation. In one Murkwood OG
+comparison:
+
+- clean batch: **1,040 U-Notes and 24 Reputation** with **0% Penalties**;
+- wrong-quality batch: **842.40 U-Notes and 18 Reputation** with
+  **33.3% Penalties**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-order-penalty-zero.webp"
+    alt="Dirty Business clean customer Order showing zero penalties and Reputation progress"
+    width={1280}
+    height={720}
+    priority={true}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I isolate any selected Order that raises the penalty before completing the batch.
+  </figcaption>
+</figure>
+
+My storage split is:
+
+```text
+Left Rack
+→ known Low Quality Weed
+
+Middle Rack
+→ known Medium or higher Quality Weed
+
+Right Rack
+→ normal Weapons and other finished products
+
+Floor beside Order Delivery Elevator
+→ current outgoing boxes only
+
+Separate rejected area
+→ Deformed, wrong-quality, or unidentified products
+```
+
+The cluster confirms the delivery-side quality rule. It does not yet claim that
+one Lamp, Soil, Fertilizer, or other single input always produces a fixed Weed
+quality tier.
+
+The{" "}
+<Link
+  href="/dirty-business/orders-delivery-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Customer Orders guide
+</Link>{" "}
+contains the full Missing Packs, penalty, box, Deformed-product, completion, and
+payment workflow.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="weapon-printing">
+  Weapon Printing summary
+</h2>
+
+Weapon Printing unlocks at Reputation Level **5** in the documented route.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-5-weapon-printing-unlock.webp"
+    alt="Dirty Business reaching Reputation Level 5 and unlocking Weapon Printing"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I add Weapons during the Weed growth timer instead of replacing the first line.
+  </figcaption>
+</figure>
+
+The early loop is: keep printing inputs available, start the Printer, collect
+parts, assemble the Weapon, separate Deformed output, and wait for a matching
+clean Order.
+
+Buy another Printer only when materials, assembly, space, and demand can keep it
+active. Add a Gunsmith when manual assembly is the visible queue, not when the
+Printer itself lacks inputs.
+
+<h2 id="acid-disposal">
+  Acid Disposal summary
+</h2>
+
+Acid Disposal opens at Reputation Level **13** in the documented route. The
+first setup used an Acid Drum and **two Hydrochloric Acid containers**.
+
+The system has two separate flows:
+
+1. receive the incoming dump or evidence;
+2. dissolve its items using the Acid route.
+
+Those are also separate achievement counters. Receiving more dumps does not
+automatically finish the dissolution milestones.
+
+I finish and supply one Drum before accepting enough jobs to create a blocked
+pile. Acid Disposal fits between Weed, Weapon, packing, and delivery cycles; the
+current material does not prove that it is the fastest Reputation activity.
+
+<h2 id="coop">
+  Solo and Co-op priorities
+</h2>
+
+Solo needs earlier automation and stricter control over the number of manual
+production lines. Co-op reduces walking and idle time, but shared interfaces,
+money, stock, and tutorials need clear ownership.
+
+My two-player split is:
+
+- **Player 1:** activates Orders, controls Delivery, checks penalties, completes
+  the batch, and collects payment;
+- **Player 2:** runs production, counts and packs products, and places closed
+  boxes on the Order Delivery Elevator;
+- **Both:** clear elevators, restock assigned lines, and confirm shared cash
+  before a large purchase.
+
+With more players, assign one owner to each major system instead of crowding the
+same machine. Only one player should control the tablet during a delivery batch.
+The player who needs a one-time room, Worker, Dealer, Company, sale, or aircraft
+achievement should perform that action because Co-op credit ownership is not
+fully verified.
+
+<h2 id="save-backup-demo-transfer">
+  Save, backup, and Demo transfer
+</h2>
+
+Developer messaging during the Demo period said save transfer was intended, but
+the exact current import workflow should be verified before deleting the
+original Demo data. The official announcement is available in the{" "}
+<a
+  href="https://steamcommunity.com/app/4324480/allnews/"
+  target="_blank"
+  rel="noreferrer"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business Steam news feed
+</a>
+
+The current Steam store also lists **Steam Cloud** support. Check the{" "}
+<a
+  href="https://store.steampowered.com/app/4324480/Dirty_Business/"
+  target="_blank"
+  rel="noreferrer"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  official Steam store page
+</a>{" "}
+before relying on Cloud status.
+
+Before the first Early Access load:
+
+1. close the Demo normally;
+2. wait for Steam synchronization to finish;
+3. keep the Demo and its local data intact;
+4. do not overwrite or rename the original save;
+5. load the transferred save and verify Reputation, cash, rooms, Workers,
+   inventory, equipment, Orders, Acid state, and tutorials;
+6. create a separate new save before testing Early Access-only systems.
+
+The exact current manual save-folder path has not been verified for this guide.
+Do not assume the installation directory contains the save. A useful manual
+backup requires confirming which local files actually change when the game
+saves, then copying the entire confirmed save directory to a dated folder after
+the game and Steam Cloud have finished writing.
+
+<h2 id="dealer-company-aircraft">
+  Dealer, Company, and aircraft overview
+</h2>
+
+These are distribution systems, not replacements for a functioning production
+line.
+
+<GuideTable
+  caption="How I decide whether the next distribution layer is ready."
+  columns={distributionColumns}
+  rows={distributionRows}
+/>
+
+The safe sequence is:
+
+```text
+prove the product line
+→ build repeatable surplus
+→ test one distribution route
+→ record cash, Reputation, inventory, and achievement changes
+→ scale only after the first route is understood
+```
+
+Dealer access appears around Level 21 in the documented route. Companies appear
+at Level 32. Level 38 opens the next aircraft and Smuggler's Island access
+check.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-38-aircraft-access.webp"
+    alt="Dirty Business Level 38 aircraft and Smuggler's Island access check"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Level 38 is an access check, not proof that the aircraft, pilot, cargo,
+    funding, and route are already operational.
+  </figcaption>
+</figure>
+
+Before scaling an aircraft route, record cargo loaded, cargo delivered, cargo
+airdropped, distance, fuel, maximum speed, cash, displayed Reputation, and
+achievement progress from one controlled flight.
+
+<h2 id="worker-automation">
+  Worker automation summary
+</h2>
+
+Level 15 opens the first Botanist. Prepare one strain, a matching task, unpacked
+inputs, available equipment, clear Product Rack space, and enough Worker balance
+before expecting automation.
+
+When the Worker stops, read **Current Status** first. A higher-tier Worker does
+not fix missing Seeds, Soil, Watering Cans, Plastic Packs, tasks, equipment, or
+output space. Avoid moving or manually taking over the exact Pot or station the
+Worker is trying to use.
+
+The{" "}
+<Link
+  href="/dirty-business/workers-not-working"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Botanist Not Working guide
+</Link>{" "}
+contains the status table, costs, supply checks, equipment diagnosis, and
+tutorial recovery sequence.
+
+<h2 id="lsd">
+  LSD production summary
+</h2>
+
+Level 30 opens a multi-stage LSD line. Complete one full LSD Sheet before buying
+extra Slugs, Tanks, or processing capacity.
+
+Scale from the visible queue:
+
+- Distiller waiting for Extract → increase the Slug side;
+- Extract waiting for the Distiller or final stage → increase processing.
+
+The{" "}
+<Link
+  href="/dirty-business/how-to-make-lsd"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  LSD production guide
+</Link>{" "}
+contains the confirmed starter prices, five-Extract Distiller step, Too Hot fix,
+Blotting Paper, dispensing sequence, Tank capacity, and later Slug upgrades.
+
+<h2 id="achievements">
+  Achievement summary
+</h2>
+
+The supplied July 2026 Early Access list contains **75 achievements**. The
+searchable checklist groups one-time actions and long counters for Orders,
+products, Store items, trash, money, Reputation, Acid, LSD, banknotes,
+aircraft, cargo, airdrops, and trolley distance.
+
+The hidden **Six. Seven.** achievement requires Reputation Level **67**.
+
+Open the{" "}
+<Link
+  href="/dirty-business/achievements-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business achievements guide
+</Link>{" "}
+to search all 75 items, save progress in the browser, and diagnose a missing
+counter.
+
+<h2 id="recommended-order">
+  Recommended reading order
+</h2>
+
+For a new save:
+
+1. **Hub:** understand the full operating loop.
+2. **Orders:** learn box assignment, penalties, completion, and payment.
+3. **Leveling:** plan Reputation breakpoints and purchases.
+4. **Workers:** automate one stable Weed route after Level 15.
+5. **LSD:** build one complete Sheet after Level 30.
+6. **Achievements:** convert the mature base into a long-counter route.
+
+For an existing save, start with the symptom rather than the level.
+
+<h2 id="faq">
+  Dirty Business guide FAQ
+</h2>
+
+### Which guide should a beginner read first?
+
+Read Customer Orders first when the delivery or payment workflow is unclear.
+Read Leveling first when Orders already work and the next question is
+progression or purchasing.
+
+### What is the best production priority?
+
+Clear finished output and restore completely stopped stations first. Add
+capacity only after the input, processing, output, and distribution queues are
+understood.
+
+### Why does a correct product still receive a penalty?
+
+The Order can also check strain, quality, condition, and quantity. Wrong-quality
+Weed or a Deformed Weapon can reduce the result.
+
+### How should two players divide the work?
+
+Let one player control Orders and Delivery while the other handles production,
+packing, and box placement. With more players, assign one owner to each major
+system.
+
+### Can the Demo save transfer to Early Access?
+
+Developer messaging said transfer was intended, but preserve the original Demo
+data and verify the imported level, cash, rooms, inventory, Workers, and
+tutorials before deleting or overwriting anything.
+
+### Where is the Dirty Business save folder?
+
+The exact current Early Access path has not been verified for this guide.
+Confirm which files change when saving before claiming that a manual backup is
+complete.
+
+### When should I hire a Dealer or buy a Company?
+
+After the base produces repeatable surplus that clean customer Orders no longer
+consume. Do not add distribution while the original production route is
+underfunded.
+
+### Does Level 38 immediately give me a usable aircraft?
+
+No. Level 38 opens the next access check. The tutorial, aircraft, pilot, cargo,
+funding, and route still have to be prepared.

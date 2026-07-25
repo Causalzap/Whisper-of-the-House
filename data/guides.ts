@@ -131,6 +131,189 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Dirty Business",
+    game: "Dirty Business",
+    href: "/dirty-business",
+    slug: "dirty-business",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Crime Business Sim",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the Dirty Business guide hub for beginner progression, customer Orders, Reputation unlocks, product quality, Botanist automation, Weapon Printing, Acid Disposal, LSD production, co-op, save transfer, Companies, aircraft, and all 75 achievements.",
+    coverage: [
+      "Beginner progression from the first Weed Order through Levels 5, 13, 15, 30, 32, 37, and 38, with clean Reputation gains, production priorities, storage decisions, and buy-now-versus-wait rules",
+      "Customer Order activation, product packing, Order Delivery Elevator assignment, Missing Packs fixes, quality requirements, Deformed Weapons, penalties, Complete Selected Orders, Collect Payment, box organization, and co-op tablet roles",
+      "Botanist hiring, Worker balance, task and strain matching, Supply Rack inputs, Seeds, Soil, Watering Cans, Plastic Packs, unavailable equipment, Product Rack output, Idle statuses, and stuck Worker tutorials",
+      "Weapon Printing, Gunsmith timing, Acid Disposal, Hydrochloric Acid setup, Slugs, Slug Extract, Distiller temperature, Blotting Paper, first LSD Sheet, production bottlenecks, and capacity decisions",
+      "Demo save transfer, Steam Cloud safety, manual backup checks, Dealers, Companies, aircraft access, cargo, airdrops, late distribution, and the searchable checklist for all 75 achievements",
+    ],
+    image: "/images/dirty-business/dirty-business-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 14,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Dirty Business Guide Hub",
+        href: "/dirty-business",
+        type: "Guide Hub",
+        description:
+          "Start here for beginner progression, production priorities, customer Orders, quality, co-op, save safety, Weapon Printing, Acid Disposal, Workers, LSD, distribution, and achievements.",
+        image: "/images/home/dirty-business-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Beginner progression, production priorities, Orders, quality, Deformed products, Weapon Printing, Acid Disposal, co-op, saves, Workers, LSD, Companies, aircraft, and achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Dirty Business Leveling & Reputation Guide",
+        href: "/dirty-business/leveling-reputation-unlocks",
+        type: "Beginner Guide",
+        description:
+          "Follow the Level 1–38 Reputation route, plan key unlocks, overlap Weed and Weapon production, prepare Workers and LSD, and buy only upgrades that remove real bottlenecks.",
+        date: "Updated recently",
+        image:
+          "/images/dirty-business/dirty-business-level-5-weapon-printing-unlock.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 57,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Level 1–38 route, clean Reputation Orders, penalty comparison, Weapon Printing, Acid Disposal, Worker costs, LSD, Companies, aircraft access, and buy-or-wait decisions",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Dirty Business Customer Orders & Delivery Guide",
+        href: "/dirty-business/orders-delivery-guide",
+        type: "Systems",
+        description:
+          "Complete customer Orders, assign elevator boxes, fix Missing Packs, quality and Deformed-product penalties, missing payment, box confusion, and co-op tablet issues.",
+        date: "Updated recently",
+        image:
+          "/images/dirty-business/dirty-business-delivery-drag-box-to-order.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 58,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Order activation, packing, Delivery assignment, Missing Packs, quality requirements, Deformed Weapons, penalty isolation, Complete Selected Orders, Collect Payment, boxes, and co-op",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Dirty Business Botanist Not Working Guide",
+        href: "/dirty-business/workers-not-working",
+        type: "Systems",
+        description:
+          "Fix an Idle Botanist with the correct task, strain, Worker balance, Supply Rack inputs, available Pots and packing stations, Product Rack space, and tutorial recovery steps.",
+        date: "Updated recently",
+        image:
+          "/images/dirty-business/dirty-business-worker-no-plastic-bags.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 59,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Botanist Current Status, Worker balance, task and strain matching, Seeds, Soil, Watering Cans, Plastic Packs, unavailable equipment, Product Rack output, and tutorial fixes",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Dirty Business How to Make LSD",
+        href: "/dirty-business/how-to-make-lsd",
+        type: "Systems",
+        description:
+          "Make the first LSD Sheet with Basic Slugs, Slug Food, Slug Extract, the five-Extract Distiller step, Too Hot fix, Blotting Paper, dispensing, and capacity upgrades.",
+        date: "Updated recently",
+        image:
+          "/images/dirty-business/dirty-business-level-30-lsd-unlock.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 60,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Level 30 LSD unlock, Basic Slug, Slug Tank, Slug Food, Slug Extract, five-Extract Distiller load, Too Hot, Blotting Paper, Dispense, first Sheet, and bottlenecks",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "Dirty Business Achievements Guide",
+        href: "/dirty-business/achievements-guide",
+        type: "Achievements",
+        description:
+          "Track all 75 achievements with a searchable checklist, one-save strategy, hidden Level 67 goal, production counters, Acid, LSD, banknotes, aircraft, cargo, and trolley cleanup.",
+        date: "Updated recently",
+        image:
+          "/images/dirty-business/dirty-business-achievement-believe-feed-unicorn.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 61,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "All 75 achievements, searchable checklist, one-save strategy, Six. Seven., Back in Business, Acid, Workers, Unicorn, LSD, banknotes, aircraft, cargo, airdrops, and trolley",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+    ],
+  },
+  {
     title: "Tears of Metal",
     game: "Tears of Metal",
     href: "/tears-of-metal",

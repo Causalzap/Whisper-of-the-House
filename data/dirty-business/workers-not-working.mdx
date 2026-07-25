@@ -1,0 +1,561 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const workerStatusColumns = [
+  { key: "status", label: "Status or Condition" },
+  { key: "meaning", label: "What It Means" },
+  { key: "firstCheck", label: "First Check" },
+  { key: "avoid", label: "What I Avoid" },
+];
+
+export const workerStatusRows = [
+  {
+    status: "No task / empty queue",
+    meaning:
+      "The Botanist has been hired but has no production instruction to follow.",
+    firstCheck:
+      "Assign one Pack Up task for the exact strain placed on the Worker Supply Rack.",
+    avoid:
+      "Do not move every Pot or buy duplicate racks before assigning the task.",
+  },
+  {
+    status: "Wrong strain or missing growing input",
+    meaning:
+      "The task exists, but the Worker cannot start the requested strain with the current Seeds, Soil, or Watering Cans.",
+    firstCheck:
+      "Match the Seed Pack to the task, then check unused Soil and Watering Cans.",
+    avoid:
+      "Do not assume a 5/5 task queue proves that the production inputs match.",
+  },
+  {
+    status: "IDLE (No Plastic Pack On Supply Racks)",
+    meaning:
+      "The route has reached the packing stage, but the Worker has no Plastic Pack available.",
+    firstCheck:
+      "Place unused Plastic Packs in the Worker input setup.",
+    avoid:
+      "Do not cancel the task or replace the Worker.",
+  },
+  {
+    status: "No available Pot or packing station",
+    meaning:
+      "The required equipment may be missing, still boxed, occupied, blocked, or unavailable to the assigned route.",
+    firstCheck:
+      "Confirm the equipment is unpacked, idle, reachable, and not being used by a player or another Worker.",
+    avoid:
+      "Do not keep adding supplies when the physical station is the blocker.",
+  },
+  {
+    status: "IDLE (Waiting For The Plant To Grow)",
+    meaning:
+      "The Worker has reached a valid waiting stage while the crop timer continues.",
+    firstCheck:
+      "Check that the planted crop has light, water, and visible growth progress.",
+    avoid:
+      "Do not reset the Worker or manually take over the same Pot.",
+  },
+  {
+    status: "Walking To Pack Weed Buds",
+    meaning:
+      "The Worker has accepted the task and is moving to the next production step.",
+    firstCheck:
+      "Leave the assigned path and station clear.",
+    avoid:
+      "Do not interrupt the station because the animation looks slow.",
+  },
+  {
+    status: "Product Rack unavailable or full",
+    meaning:
+      "The Worker has no clear destination for completed output.",
+    firstCheck:
+      "Clear the Worker Product Rack and remove unrelated boxes from the output area.",
+    avoid:
+      "Do not expand the upstream Pots while finished output has nowhere to go.",
+  },
+];
+
+My first Botanist looked broken. I had hired the Worker, placed the required
+equipment, added money, and assigned a task, but he still stood around while I
+continued doing the growing and packing myself.
+
+The useful clue was not his animation. It was the **Current Status** line in
+Worker Management. Once I treated that message as a supply-chain diagnosis, the
+setup became much easier to fix.
+
+<GuideQuickAnswer title="How I Fix the First Botanist">
+  <ol className="mt-3 list-decimal space-y-1 pl-5">
+    <li>Confirm the Worker still has a positive balance.</li>
+    <li>Assign one task for the exact strain supplied to the Worker route.</li>
+    <li>Unpack and place the matching Seeds, Soil, Watering Cans, and Plastic Packs.</li>
+    <li>Confirm the Pots, Light, packing station, and Product Rack are available.</li>
+    <li>Read Current Status instead of judging the Worker by where he is standing.</li>
+    <li>Fix the blocker named by the status, reopen Management, and follow the next status.</li>
+    <li>Leave assigned equipment alone long enough for the Worker to resume.</li>
+  </ol>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Early Access scope.</strong>{" "}
+  This guide focuses on the Level 15 Botanist tutorial and the first stable
+  Worker setup in the July 2026 Early Access build. Worker prices, task limits,
+  and status wording may change, so the Current Status message in a newer build
+  should take priority over older wording.
+</div>
+
+<h2 id="worker-statuses">
+  Botanist status messages at a glance
+</h2>
+
+The exact wording can vary, but the diagnosis follows the same rule:
+
+> **Fix the current named blocker, reopen Worker Management, and follow the next
+> status until the Botanist reaches a valid waiting state or produces output.**
+
+A new warning after a fix does not mean the first fix failed. It usually means
+the Worker has advanced far enough to check the next dependency.
+
+<GuideTable
+  caption="Use the current Worker status to identify the next blocked stage instead of rebuilding the entire setup."
+  columns={workerStatusColumns}
+  rows={workerStatusRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="unlock-and-hire">
+  How I unlock and hire the first Botanist
+</h2>
+
+Worker Assignments unlock at **Reputation Level 15**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-level-15-worker-assignments.webp"
+    alt="Dirty Business reaching Reputation Level 15 and unlocking Worker Assignments"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Level 15 opens the first Worker Assignment tutorial and the equipment needed
+    to create an input and output route.
+  </figcaption>
+</figure>
+
+The tutorial asks for two separate objects:
+
+- **Worker Supply Rack:** the input side of the production loop;
+- **Worker Product Rack:** the destination for completed output.
+
+I place the Supply Rack beside the growing area and keep the Product Rack on a
+clear side where completed boxes can be removed without blocking the Worker's
+path.
+
+The Staffing Hub is easier to find by following the tutorial marker than by
+searching locked rooms. Once the first Botanical Intern appears, I hire and fund
+that one Worker before expanding the setup.
+
+<h3 id="worker-balance">
+  Add money before expecting production
+</h3>
+
+The first Botanical Intern showed:
+
+- Hiring Cost: **0** during the tutorial;
+- Daily Fee: **300 U-Notes**;
+- Tier 1;
+- one-star Efficiency;
+- one-star Movement Speed.
+
+I added **1,500 U-Notes**, enough to cover five daily fees:
+
+```text
+300 × 5 days = 1,500 U-Notes
+```
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-botanist-daily-fee-balance.webp"
+    alt="Dirty Business Botanical Intern showing a 300 U-Note daily fee and Worker balance"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    I use 1,500 as a practical first balance because it gives me five days to
+    test the route without locking a large amount of cash into it.
+  </figcaption>
+</figure>
+
+The free tutorial hire should not be treated as a permanent price. Repeating the
+hire after resetting the setup displayed **12,000 U-Notes**.
+
+That is why firing and rehiring is not my first troubleshooting step. I inspect
+the existing Worker's balance, task, supplies, equipment, and status first.
+
+<h2 id="assign-task">
+  How I assign a Botanist task that actually starts
+</h2>
+
+Hiring and funding the Botanist are not enough. Open Worker Management, select
+the Worker, and assign a task that matches the exact strain supplied to the
+route.
+
+For the first setup, I used **Pack Up Mermaid Lagoon**.
+
+The name initially sounded like a packaging-only task. Once the complete route
+was available, the Botanist also planted the strain, waited for it to grow, and
+continued toward the packed output.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-worker-task-assignment.webp"
+    alt="Dirty Business Botanical Intern assigned Pack Of Mermaid Lagoon with Walking To Pack Weed Buds status"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The task, strain, and Current Status are visible in the same Management
+    screen. Walking To Pack Weed Buds confirms that the Worker has accepted the
+    route.
+  </figcaption>
+</figure>
+
+My first stable setup is:
+
+> **One Botanist, one strain, one Supply Rack route, and one clear Product Rack.**
+
+I begin with one task. After one complete cycle reaches the Product Rack, I add
+more. A queue showing **5/5** means the Worker has assigned work; it does not
+prove that the matching strain, supplies, equipment, and output space are
+available.
+
+<h2 id="supplies-and-equipment">
+  Supplies and equipment the first Botanist needs
+</h2>
+
+For the Mermaid Lagoon route, I keep these inputs available:
+
+- an unused Mermaid Lagoon Seed Pack;
+- unused Soil Packs;
+- Watering Cans with water;
+- Plastic Packs for the packing step.
+
+The supplies must be unpacked and placed in the Worker input setup. A Seed Pack
+left inside a Store delivery box beside the rack does not count as a usable
+Worker input.
+
+The production side also needs:
+
+- empty Weed Pots;
+- an active Light covering those Pots;
+- the Weed packing station;
+- available Product Rack space;
+- a clear walking route between each step.
+
+I do not fill the Supply Rack with several strains during the first setup.
+Matching one task to one strain removes the easiest source of ambiguity.
+
+<h2 id="follow-status-chain">
+  Follow the status chain instead of resetting the Worker
+</h2>
+
+A Botanist often reveals one dependency at a time.
+
+A typical troubleshooting chain can look like:
+
+```text
+Task assigned
+→ matching Seed and Soil available
+→ Pot available
+→ waiting for plant to grow
+→ Plastic Pack required
+→ Product Rack required
+→ completed output
+```
+
+Fixing the Seed does not guarantee immediate output. It allows the Worker to
+reach the Soil, Pot, growth, packaging, or output check.
+
+After every change, I reopen Management and read the new Current Status. I do
+not keep changing several parts of the room at once because that makes it
+impossible to know which correction worked.
+
+<h2 id="idle-reasons">
+  Why the Botanist is idle or not moving
+</h2>
+
+<h3 id="no-plastic-packs">
+  IDLE: No Plastic Pack On Supply Racks
+</h3>
+
+This message means the route has reached the packaging stage but lacks the
+required Plastic Pack.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-worker-no-plastic-bags.webp"
+    alt="Dirty Business Botanical Intern status showing IDLE No Plastic Pack On Supply Racks"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Current Status identifies the blocked production stage directly. I add
+    Plastic Packs instead of changing the task or hiring another Worker.
+  </figcaption>
+</figure>
+
+Place unused Plastic Packs in the input setup, then reopen Management. If the
+status changes, the Worker has advanced to the next dependency.
+
+<h3 id="waiting-for-plant">
+  IDLE: Waiting For The Plant To Grow
+</h3>
+
+This is a normal production state, not a failure.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-worker-waiting-for-plant.webp"
+    alt="Dirty Business Botanical Intern status showing IDLE Waiting For The Plant To Grow"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The Worker is waiting on the same crop timer as the player. I check the
+    plant's light, water, and growth, then leave the route alone.
+  </figcaption>
+</figure>
+
+When the crop is planted, lit, watered, and progressing, I move to Weapons,
+Orders, or base organization instead of resetting the Botanist.
+
+<h3 id="task-queue-full">
+  The task queue is 5/5, but the Botanist is still idle
+</h3>
+
+The queue count only proves that tasks exist.
+
+It does not prove that:
+
+- the supplied Seed matches the task;
+- Soil is available;
+- a usable Watering Can is present;
+- Plastic Packs are available;
+- a Pot or packing station is free;
+- the Product Rack has space.
+
+In my setup, a full queue still stalled until the correct Mermaid Lagoon route
+had its matching supplies.
+
+<h2 id="no-available-equipment">
+  Fix No Available Pot, packing station, or output space
+</h2>
+
+When the Botanist appears to have every material but still cannot continue, I
+check the physical equipment in this order:
+
+1. **Unpacked:** the Pot, station, or rack is not still inside a Store box.
+2. **Idle:** the machine or Pot is not in the middle of another incompatible action.
+3. **Unoccupied:** a player or another Worker is not using it.
+4. **Reachable:** boxes, racks, or furniture are not blocking the walking route.
+5. **Relevant:** the equipment belongs to the strain and task currently assigned.
+6. **Output available:** the Product Rack has room for the completed box.
+
+Adding more Seeds cannot fix an occupied Pot. Adding more Pots cannot fix a full
+Product Rack. The Current Status should determine which side of the route needs
+attention.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="do-not-take-over">
+  Why I stop touching the Worker's assigned equipment
+</h2>
+
+A Botanist can yield when I act as if I am taking over the same job.
+
+That creates a misleading loop:
+
+1. I see the Worker standing still.
+2. I plant, water, harvest, or pack the assigned batch myself.
+3. The Worker continues waiting because I am now performing that step.
+4. I conclude that the AI is broken and keep taking over.
+
+After the balance, task, supplies, and equipment pass, I step away from the
+assigned Pot and station long enough for the Worker to resume.
+
+I use that time to:
+
+- assemble Weapons;
+- refill Printers;
+- sort customer boxes;
+- complete clean Orders;
+- collect payment.
+
+In co-op, one player can maintain Worker inputs while the other handles Orders.
+Both players repeatedly interacting with the same assigned equipment makes the
+status harder to interpret.
+
+<h2 id="product-rack">
+  How I use the Worker Product Rack
+</h2>
+
+The Supply Rack feeds the Botanist. The Product Rack is the end of the route.
+
+I keep the Product Rack clear enough that a completed box is immediately
+visible. When output appears, I move it to:
+
+- the Order Delivery Elevator when a matching customer is ready;
+- a known storage position when waiting for an Order;
+- a separate quality-check area when the grade is unclear.
+
+A clear Product Rack helps distinguish three different situations:
+
+- the Worker has not produced anything;
+- the Worker completed the batch and is waiting for collection;
+- the output area is blocking the next cycle.
+
+Before assigning a Worker-produced box to a customer, I still verify its product,
+strain, quantity, and quality. Automation removes labor; it does not remove the
+delivery checks covered in the{" "}
+<Link
+  href="/dirty-business/orders-delivery-guide"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business Customer Orders guide
+</Link>
+
+<h2 id="tutorial-not-progressing">
+  What I do when the Worker tutorial will not progress
+</h2>
+
+The Level 15 tutorial did not always register the Mermaid Lagoon Seed Pack even
+when I placed the requested item on the Worker Supply Rack.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-worker-tutorial-seed-pack-stuck.webp"
+    alt="Dirty Business Worker Assignment tutorial still asking for a Mermaid Lagoon Seed Pack after it was placed on the Supply Rack"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A tutorial objective can remain stuck even while Worker Management and the
+    assigned production route continue to function.
+  </figcaption>
+</figure>
+
+I use the least destructive fixes first:
+
+1. remove the Seed Pack from its Store delivery box;
+2. place one unused Pack directly on the Worker Supply Rack input;
+3. confirm that I am using the Supply Rack rather than the Product Rack;
+4. finish the current tablet interaction and place the item again;
+5. save, return to the main menu, and reload.
+
+A reload did not repair every tutorial state in my route. More importantly, the
+Botanist could still accept tasks and produce afterward.
+
+When Worker Management works but one tutorial checkbox remains stuck, I do not
+fire the Worker, buy duplicate racks, or spend **12,000 U-Notes** on another
+hire solely to clear that instruction.
+
+I only consider an earlier save when:
+
+- Worker Management never becomes usable;
+- no task can be assigned;
+- the Botanist cannot consume any valid input;
+- the problem survives a normal reload.
+
+<h2 id="when-worker-is-worth-it">
+  When the first Botanist is worth hiring
+</h2>
+
+The first Botanist is useful when manual Weed repetition is preventing progress
+elsewhere.
+
+I fund one when:
+
+- the assigned strain has repeat customer demand;
+- Seeds, Soil, water, and Plastic Packs can be restocked reliably;
+- the growing and packing area has a clear route;
+- the Product Rack can be kept organized;
+- the freed time will be used for Weapons, Orders, Acid Disposal, or another
+  active system.
+
+I wait before adding another Worker when:
+
+- the first Botanist still stops because inputs are missing;
+- the Product Rack is already difficult to manage;
+- the daily balance is close to empty;
+- cash is needed for essential production equipment;
+- current Orders do not consume the additional output.
+
+The **300-U-Note daily fee** is known, but the current route does not establish a
+universal payback time. The practical value is the player time released for
+another profitable activity.
+
+Higher Botanist tiers cost more and should improve a route that already works;
+they do not repair a missing task, empty Supply Rack, occupied Pot, or full
+Product Rack.
+
+For the Level 15 unlock and later Recruit and Assistant costs, use the{" "}
+<Link
+  href="/dirty-business/leveling-reputation-unlocks"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business leveling and Reputation guide
+</Link>
+
+After the setup works, I check it only at natural transition points: keep
+several days of balance available, restock the exact task inputs, clear the
+Product Rack, and follow any new Current Status message.
+
+<h2 id="faq">
+  Dirty Business Botanist FAQ
+</h2>
+
+### Does Pack Up only make the Botanist bag finished Weed?
+
+No in the working Level 15 route. With the correct strain, supplies, and
+equipment available, the Botanist also planted and waited through the growing
+stage before packing the output.
+
+### Is Waiting For The Plant To Grow an error?
+
+No. It is a valid waiting state. Check that the crop has light, water, and
+visible growth progress, then leave the Botanist alone.
+
+### Why is the task queue 5/5 while the Botanist is idle?
+
+The queue only shows assigned tasks. It does not confirm matching Seeds, Soil,
+Watering Cans, Plastic Packs, usable equipment, or Product Rack space.
+
+### Should I fire a Botanist who is not moving?
+
+Check the existing Worker first. The first tutorial hire was free, while the
+repeat hire displayed 12,000 U-Notes.
+
+### Can I manually help the Botanist?
+
+Avoid taking over the exact Pot or station the Worker is trying to use. Handle
+restocking, Orders, Weapons, and output collection instead.
+
+### How much money should I add to the first Botanist?
+
+The first Botanical Intern charged 300 U-Notes per day. I started with 1,500,
+which covered five daily fees, but that is a practical test balance rather than
+a required minimum.
+
+### Does this page cover Gunsmiths, Chemists, and Counterfeiters?
+
+No. This page focuses on the Level 15 Botanist and first Worker setup. Other
+Worker roles can use the same status-first diagnostic method, but their inputs,
+equipment, and normal waiting states are different.

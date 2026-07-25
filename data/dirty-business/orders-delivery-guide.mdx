@@ -1,0 +1,585 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const orderErrorColumns = [
+  { key: "message", label: "Message or Symptom" },
+  { key: "usuallyMeans", label: "What It Usually Means" },
+  { key: "firstFix", label: "First Fix to Try" },
+];
+
+export const orderErrorRows = [
+  {
+    message: "Missing Packs",
+    usuallyMeans:
+      "The active Order cannot count every required Pack from the boxes currently assigned to that customer.",
+    firstFix:
+      "Open Delivery, confirm the box card is attached to the correct customer, then recheck product, strain, quality, and quantity.",
+  },
+  {
+    message: "Penalty above 0%",
+    usuallyMeans:
+      "At least one selected Order contains a quality, condition, product, or quantity mismatch.",
+    firstFix:
+      "Remove the most recently selected Order and check whether the penalty returns to 0%.",
+  },
+  {
+    message: "Elevator Isn't Clear",
+    usuallyMeans:
+      "A box, loose item, player, or unresolved delivery state is still occupying the elevator platform.",
+    firstFix:
+      "Remove everything from the platform, finish the current interaction, and try again.",
+  },
+  {
+    message: "Order completed, but no money",
+    usuallyMeans:
+      "The delivery stage finished, but its payment has not been collected.",
+    firstFix:
+      "Check Collect Payment before producing or delivering the same Order again.",
+  },
+  {
+    message: "Tablet Is Currently in Use",
+    usuallyMeans:
+      "Another player is controlling the tablet or the same interface in co-op.",
+    firstFix:
+      "Let one player finish the current assignment before the other opens the tablet.",
+  },
+];
+
+Dirty Business customer Orders are not completed just by placing a closed box on
+an elevator. The physical box must also be assigned to the correct customer in
+Delivery, marked for delivery, included in the selected batch, and followed by
+payment collection.
+
+The full customer-order chain is:
+
+**Activate Order → Pack Product → Close Box → Order Delivery Elevator → Assign Box in Delivery → Mark for Delivery → Check Penalty → Complete Selected Orders → Collect Payment**
+
+<GuideQuickAnswer title="How I Complete a Customer Order">
+  <ol className="mt-3 list-decimal space-y-1 pl-5">
+    <li>Activate only an Order that current stock can satisfy.</li>
+    <li>Match the requested product, strain, quality or condition, and quantity.</li>
+    <li>Pack the items, close the box, and place it on the Order Delivery Elevator.</li>
+    <li>Open Delivery and drag the box card onto the correct customer.</li>
+    <li>Select Mark for Delivery.</li>
+    <li>Confirm the selected batch shows 0% Penalties.</li>
+    <li>Choose Complete Selected Orders.</li>
+    <li>Use Collect Payment before assuming the delivery failed.</li>
+  </ol>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Early Access scope.</strong>{" "}
+  This page covers customer Orders completed through the Order Delivery
+  Elevator in the July 2026 Early Access build. Dealer sales, Companies,
+  aircraft cargo, and island distribution are separate systems. UI labels and
+  synchronization behavior may change in later patches.
+</div>
+
+<h2 id="order-errors">
+  Dirty Business order errors at a glance
+</h2>
+
+Most failed deliveries come from one of three layers:
+
+1. the physical product or box does not match;
+2. the box is on the elevator but not assigned in Delivery;
+3. the delivery is complete but payment is still waiting.
+
+<GuideTable
+  caption="Start with the message or symptom on screen, then test the smallest likely fix before producing more stock."
+  columns={orderErrorColumns}
+  rows={orderErrorRows}
+/>
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="complete-one-order">
+  How I complete one Order step by step
+</h2>
+
+I learned the interface with one active Order and one known box. Once that full
+chain worked, batching customers became much easier because every failed step
+had a clear place to check.
+
+<h3 id="check-order-requirements">
+  1. Check product, strain, quality, condition, and quantity
+</h3>
+
+Before activating the customer, read every requirement shown on the Order card.
+
+For Weed, check:
+
+- the exact strain;
+- the requested quality;
+- the required number of Packs.
+
+For Weapons, check:
+
+- the exact Weapon type;
+- quantity;
+- whether any item is Deformed or otherwise penalized.
+
+For Mixed Orders, treat every line as a separate requirement. Supplying the Weed
+portion does not satisfy the Weapon portion, and the Order can continue to show
+Missing Packs until every line is assigned.
+
+<h3 id="pack-and-close-box">
+  2. Pack the product and close the box
+</h3>
+
+Loose Packs are not a completed delivery box.
+
+Place the correct items into an empty box, verify the count, and close it before
+moving it to the delivery platform. During the early tutorial, one box could
+hold up to **six Packs**, but use the amount required by the active Order instead
+of treating a full box as the default.
+
+While learning the interface, keep one product, one strain, and one quality in
+each box. This makes the box card and penalty preview much easier to trust.
+
+<h3 id="use-order-delivery-elevator">
+  3. Use the correct elevator
+</h3>
+
+Dirty Business has two elevators that are easy to confuse:
+
+- **Store Elevator:** receives machines, supplies, packaging, and other Store purchases;
+- **Order Delivery Elevator:** holds closed boxes ready for customer assignment.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-order-delivery-elevator.webp"
+    alt="Dirty Business closed customer order boxes placed on the Order Delivery Elevator"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A closed box must be placed on the Order Delivery Elevator before its card
+    can be assigned to a customer.
+  </figcaption>
+</figure>
+
+Putting the box on the correct platform makes it available to Delivery, but it
+does not assign it automatically.
+
+<h3 id="assign-box-to-customer">
+  4. Drag the box card onto the customer
+</h3>
+
+Open Delivery and find the card representing the box on the elevator.
+
+Drag that box card onto the matching customer Order. This is the step that
+separates physical placement from UI assignment.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-delivery-drag-box-to-order.webp"
+    alt="Dirty Business Delivery screen dragging an elevator box card onto a customer order"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    A correct box can sit on the elevator and still count as missing until its
+    card is assigned to the intended customer.
+  </figcaption>
+</figure>
+
+If the customer still shows Missing Packs after the drag, inspect the assignment
+and box contents before returning to production.
+
+<h3 id="mark-for-delivery">
+  5. Mark the Order for delivery
+</h3>
+
+Once the assigned box satisfies the Order, select **Mark for Delivery**.
+
+That status prepares the customer for the outgoing batch. It does not finish the
+selected Orders or collect the money.
+
+<h3 id="check-penalty">
+  6. Check the penalty before completing the batch
+</h3>
+
+Look at the penalty summary before pressing the final completion button.
+
+A clean batch should show:
+
+```text
+0% Penalties
+```
+
+If the value is above zero, isolate the selected Order causing it before
+submitting the batch.
+
+<h3 id="complete-and-collect">
+  7. Complete Selected Orders, then collect payment
+</h3>
+
+After the selected Orders show the expected boxes and penalty result, choose
+**Complete Selected Orders**.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-complete-selected-orders.webp"
+    alt="Dirty Business Delivery screen showing the Complete Selected Orders action after marking customer orders"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Mark for Delivery prepares the batch. Complete Selected Orders is the next
+    action that actually finishes the selected customer deliveries.
+  </figcaption>
+</figure>
+
+Payment is a separate state. If the products disappear but the balance does not
+change, check **Collect Payment** before producing another batch.
+
+<h2 id="missing-packs">
+  Why Missing Packs appears
+</h2>
+
+`Missing Packs` does not always mean the base lacks enough products. It means
+the active customer cannot count every required Pack from the boxes currently
+assigned to that Order.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-missing-packs-order-error.webp"
+    alt="Dirty Business customer order showing the Missing Packs error in the Delivery screen"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Missing Packs is often an assignment or matching problem, not a reason to
+    produce more stock immediately.
+  </figcaption>
+</figure>
+
+I diagnose it in this order.
+
+<h3 id="missing-packs-unassigned">
+  1. The box is on the elevator but not assigned
+</h3>
+
+Open Delivery and verify that the box card is visibly attached to the intended
+customer. Physical placement and customer assignment are separate actions.
+
+<h3 id="missing-packs-reserved">
+  2. Another active Order is confusing the assignment
+</h3>
+
+When several customers are active, it becomes harder to see which box is meant
+for which request.
+
+Remove unrelated active Orders and test the stuck customer with one known box.
+If the error clears, the problem was assignment overlap or inventory confusion
+rather than production.
+
+<h3 id="missing-packs-product">
+  3. The product or strain is wrong
+</h3>
+
+A box containing the correct number of Packs can still fail if the customer
+requested another Weed strain or product category.
+
+Compare the customer card with the packed item name instead of relying on box
+position or color.
+
+<h3 id="missing-packs-quality">
+  4. The quality is wrong
+</h3>
+
+A Medium Quality Order is not cleanly satisfied by Low Quality Weed.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-medium-quality-order-requirement.webp"
+    alt="Dirty Business customer order requiring Medium Quality Weed"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Quantity alone is not enough. The packed Weed must also match the requested
+    strain and quality.
+  </figcaption>
+</figure>
+
+Keep differently graded products in separate boxes until their production-side
+quality rules are clear. This page treats quality as a delivery requirement
+rather than guessing that one Lamp, Soil, or Fertilizer always creates a fixed
+tier.
+
+<h3 id="missing-packs-mixed-order">
+  5. A Mixed Order still has another missing line
+</h3>
+
+A customer requesting two product types can continue to show Missing Packs even
+when one line is fully supplied.
+
+Expand the Order card and verify every product line separately.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="penalties">
+  Quality, Deformed Weapons, and delivery penalties
+</h2>
+
+A delivery can be accepted while still losing money and Reputation.
+
+In one Murkwood OG comparison:
+
+- a clean batch returned **1,040 U-Notes and 24 Reputation** with **0% Penalties**;
+- a wrong-quality batch returned **842.40 U-Notes and 18 Reputation** with **33.3% Penalties**;
+- two mismatched Orders each showed a **-50%** result.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-order-penalty-zero.webp"
+    alt="Dirty Business clean delivery summary showing 1040 U-Notes, 24 Reputation, and zero penalties"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    The zero-penalty summary is the safest final check before submitting the
+    selected customer batch.
+  </figcaption>
+</figure>
+
+That comparison is why I do not send the wrong quality simply to clear floor
+space. The batch can lose both cash and progression.
+
+A Deformed Weapon follows the same decision logic. If Delivery accepts it with a
+penalty, compare the displayed loss with the value of reprinting it. A product
+being technically accepted does not make it a clean delivery.
+
+<h3 id="isolate-penalty">
+  How I isolate the Order causing a penalty
+</h3>
+
+When the batch shows a penalty above zero:
+
+1. remove the most recently selected Order;
+2. check whether the penalty returns to zero;
+3. if it does, inspect only that customer's product, quality, condition, and quantity;
+4. if it does not, restore it and remove the next selected Order;
+5. repeat until the bad Order is isolated.
+
+This is faster than reopening every box in the room.
+
+<h2 id="bug-or-player-error">
+  Is the delivery stuck because of a bug or an assignment mistake?
+</h2>
+
+Treat it as an assignment mistake first when:
+
+- the box is visible but not attached to the customer;
+- another active Order may be confusing the same stock;
+- strain, quality, condition, or quantity does not match;
+- the previous batch has not been completed or paid;
+- the wrong elevator is being used.
+
+Start considering a session or synchronization issue when:
+
+- the host and second player see different customer or box states;
+- an assigned box was moved and cannot be reassigned;
+- the platform is physically empty but still reported as blocked;
+- the same correct setup works only after reopening the tablet.
+
+My recovery order is:
+
+1. let the host control Delivery;
+2. remove and reassign the box;
+3. clear the elevator platform;
+4. close and reopen the tablet;
+5. save and reload the session;
+6. confirm the game is updated before reporting the issue.
+
+Do not begin by rebuilding the product. Reproducing the same correct box will
+not fix a stale assignment state.
+
+<h2 id="elevator-and-payment">
+  Fix Elevator Isn't Clear and missing payment
+</h2>
+
+<h3 id="elevator-isnt-clear">
+  Elevator Isn't Clear
+</h3>
+
+Clear both the platform and the surrounding interaction area.
+
+Check for:
+
+- a closed delivery box;
+- an empty Store box;
+- loose packaging or products;
+- a player standing inside the platform;
+- a box still attached to an unresolved delivery;
+- a Store delivery waiting on the other elevator.
+
+After removing the obstruction, step away from the elevator and reopen the
+relevant interface.
+
+<h3 id="completed-no-money">
+  The Order completed, but I received no money
+</h3>
+
+Check **Collect Payment** before repeating the Order.
+
+<figure className="my-8">
+  <Image
+    src="/images/dirty-business/dirty-business-collect-payment.webp"
+    alt="Dirty Business customer order interface showing the Collect Payment action after delivery"
+    width={1280}
+    height={720}
+    className="h-auto w-full rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Delivery completion and payment collection are separate states. Collect the
+    payment before assuming the Order failed or producing the same goods again.
+  </figcaption>
+</figure>
+
+Before returning to production, verify that:
+
+1. the Order is no longer waiting in the selected batch;
+2. Collect Payment is available;
+3. the balance changes after collection.
+
+<h2 id="box-rules">
+  The reliable box rule I use for early deliveries
+</h2>
+
+For clean early deliveries, use one clearly identified box per active customer.
+Keep one product, strain, and quality in that box, assign it only after the
+customer is active, and do not move it again before completion.
+
+This avoids ambiguous split-box and excess-quantity behavior while the
+interface is still unfamiliar. Multi-box and multi-customer splitting may
+behave differently across Early Access builds, so I do not rely on it for clean
+Reputation batches.
+
+<h2 id="box-organization">
+  The box layout I use
+</h2>
+
+A simple storage map makes the Delivery screen easier to trust:
+
+```text
+Left Rack
+→ Low Quality Weed
+
+Middle Rack
+→ Medium or higher Quality Weed
+
+Right Rack
+→ Weapons and other finished products
+
+Floor beside Order Delivery Elevator
+→ Closed boxes for the current outgoing batch only
+
+Separate rejected area
+→ Deformed, wrong-quality, or unidentified products
+```
+
+Keep incoming Store purchases out of the outbound area. After a delivery wave,
+clear both elevators before opening another large Store shipment or customer
+batch.
+
+<h2 id="coop-orders">
+  The co-op Order routine I recommend
+</h2>
+
+In co-op, one player should own the tablet and Delivery screen for the current
+batch.
+
+A clean division is:
+
+- **Player 1:** activates customers, assigns boxes, checks penalties, completes
+  the batch, and collects payment;
+- **Player 2:** counts products, packs boxes, closes them, and places them on the
+  Order Delivery Elevator.
+
+Both players can help production, but they should not independently activate
+customers or move already assigned boxes.
+
+Tutorial progress can also be player-specific. If one player's tutorial object
+is active, the other player should avoid taking over the same machine or box
+until the step registers.
+
+Worker-produced products introduce a separate set of supply, task, balance, and
+rack checks. Those are covered in the{" "}
+<Link
+  href="/dirty-business/workers-not-working"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business Workers Not Working guide
+</Link>
+
+<h2 id="faq">
+  Dirty Business Customer Orders FAQ
+</h2>
+
+### Why does Dirty Business say Missing Packs when the box is on the elevator?
+
+The box must also be assigned to the correct customer in Delivery. Then verify
+product, strain, quality, and quantity.
+
+### Which elevator is used for customer Orders?
+
+Use the **Order Delivery Elevator**. The Store Elevator is for items purchased
+from the Store.
+
+### Is Mark for Delivery the final step?
+
+No. Check the penalty, use **Complete Selected Orders**, and then collect the
+payment.
+
+### Why did the products disappear without adding money?
+
+Check **Collect Payment** before repeating the Order; delivery and payment
+collection are separate steps.
+
+### Do delivery penalties reduce Reputation?
+
+They did in the compared Murkwood OG batches. The clean result showed 24
+Reputation, while the wrong-quality batch showed 18 Reputation and 33.3%
+Penalties.
+
+### Can I deliver the wrong quality?
+
+Delivery may accept it with a penalty. That can reduce both U-Notes and
+Reputation, so wait for the correct quality unless the displayed tradeoff is
+intentional.
+
+### What does the red X do?
+
+It removed an activated Order during the early route. Do not treat it as a send
+or completion button. Its cancellation consequences still need a separate
+controlled test.
+
+### Can one box satisfy multiple customers?
+
+For reliable early deliveries, use one identifiable box per active customer.
+Do not depend on split-box behavior for a clean progression batch.
+
+### What should I do when everything matches but Delivery still does not work?
+
+Let the host reassign the box, clear the elevator, reopen the tablet, and reload
+the session before producing another box.
+
+For the Reputation impact of clean and penalized Orders, continue with the{" "}
+<Link
+  href="/dirty-business/leveling-reputation-unlocks"
+  className="font-semibold text-sky-700 underline decoration-sky-300 underline-offset-4 hover:text-sky-900"
+>
+  Dirty Business leveling and Reputation guide
+</Link>
