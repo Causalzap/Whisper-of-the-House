@@ -131,6 +131,167 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Grim Dawn: Fangs of Asterkarn",
+    game: "Grim Dawn: Fangs of Asterkarn",
+    href: "/grim-dawn-fangs-of-asterkarn",
+    slug: "grim-dawn-fangs-of-asterkarn",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "ARPG Expansion",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the Grim Dawn: Fangs of Asterkarn guide hub for the Fort Ikon and Frostveil route, Garmir and the missing Scouts, Wereraven leveling, Ritual of Cleansing materials, Soul Echoes, Ascension, Elderveil, and Awakened Epic items.",
+    coverage: [
+      "Expansion requirements, the Fort Ikon northwest entrance, Frostveil Riftgate, the correct eastern route, Garmir the Lost, missing Scouts, Ulfgarn, Journey to Kurnhold, Hearth in the Blizzard, Rock Feathers, and common story progression blocks",
+      "Cold and Frostburn Wereraven leveling with the Berserker mastery bar, Ice Talons, Cold Snap, Rallying Cry, Tsunami, Viper, Blizzard, Behemoth, Energy fixes, gear priorities, attributes, Veteran decisions, and the later Occultist transition",
+      "Ritual of Cleansing routes for the Ashen Heart of the Void, three Blood Basins, Blood of Ch'thon, Naddo the Anointed, Embers of the First Flame, Root of Bargoll, Bargoll, Essence of Ugdenbog, and all three Kurnhold turn-ins",
+      "Soul Echoes, Soul Fragments, Ashes of Awakening, the Altar of Ascension, Jornn the Runekeeper, Inventor Alteration, Elderveil, Elder Noltukari, the Runed Orb, supported Epic recipes, and the correct Awaken-first-then-Ascend order",
+    ],
+    image:
+      "/images/grim-dawn-fangs-of-asterkarn/grim-dawn-asterkarn-incident-frostveil-rift.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 15,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Grim Dawn: Fangs of Asterkarn Guide Hub",
+        href: "/grim-dawn-fangs-of-asterkarn",
+        type: "Guide Hub",
+        description:
+          "Start here for the Fort Ikon entrance, Frostveil and Kurnhold story order, Berserker transformations, optional quests, returning-player preparation, and the correct walkthrough, build, or Ascension guide.",
+        image:
+          "/images/grim-dawn-fangs-of-asterkarn/grim-dawn-asterkarn-incident-frostveil-rift.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Fort Ikon entrance, Frostveil route, Kurnhold progression, Berserker transformations, optional quests, Wereraven build, Ritual materials, Soul Echoes, and Ascension",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "The Asterkarn Incident Walkthrough",
+        href:
+          "/grim-dawn-fangs-of-asterkarn/the-asterkarn-incident-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Leave Fort Ikon, activate the Frostveil Riftgate, avoid the northwest Hearth detour, defeat Garmir, find the missing Scouts, speak to Ulfgarn, and fix incomplete quest progress.",
+        date: "Updated recently",
+        image:
+          "/images/grim-dawn-fangs-of-asterkarn/grim-dawn-asterkarn-incident-frostveil-rift.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 62,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Scout Avirs, Fort Ikon entrance, Frostveil Riftgate, north-then-east route, Hearth detour, Garmir, missing Scouts, Ulfgarn, Frozen Aster, and Journey to Kurnhold",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Grim Dawn Wereraven Leveling Build",
+        href: "/grim-dawn-fangs-of-asterkarn/wereraven-leveling-build",
+        type: "Builds",
+        description:
+          "Level a self-cast Cold and Frostburn Wereraven with the right Berserker skill order, Ice Talons rotation, devotions, Energy fixes, gear, attributes, and Occultist timing.",
+        date: "Updated recently",
+        image:
+          "/images/grim-dawn-fangs-of-asterkarn/grim-dawn-wereraven-mastery-bar-unlock.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 63,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Berserker mastery bar, Wereraven, Ice Talons, Cold Snap, Rallying Cry, Tsunami, Viper, Blizzard, Behemoth, Energy sustain, gear, attributes, and Occultist",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Grim Dawn Ritual of Cleansing Walkthrough",
+        href:
+          "/grim-dawn-fangs-of-asterkarn/ritual-of-cleansing-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Find the Ashen Heart of the Void, activate all three Blood Basins, recover the Embers, kill Root of Bargoll and Bargoll, and complete every Kurnhold material turn-in.",
+        date: "Updated recently",
+        image:
+          "/images/grim-dawn-fangs-of-asterkarn/grim-dawn-ritual-cleansing-ashen-heart-void.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 64,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Ashen Heart of the Void, Blood of Ch'thon, three Blood Basins, World's Tear, Naddo, Embers of the First Flame, Root of Bargoll, Bargoll, and all material turn-ins",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Grim Dawn Soul Echoes & Awakened Epic Items",
+        href:
+          "/grim-dawn-fangs-of-asterkarn/soul-echoes-awaken-epic-items",
+        type: "Systems",
+        description:
+          "Farm Soul Echoes and Ashes, find Elderveil and the Runed Orb, understand Ascended Affixes, Awaken supported Epic items, and avoid using the wrong upgrade order.",
+        date: "Updated recently",
+        image:
+          "/images/grim-dawn-fangs-of-asterkarn/grim-dawn-soul-echo-recipe-200k.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 65,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Soul Echoes, Soul Fragments, Ashes of Awakening, Altar mechanics, Jornn, Inventor Alteration, Elderveil, Elder Noltukari, Runed Orb recipes, and Awaken-first-then-Ascend",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+  {
     title: "Dirty Business",
     game: "Dirty Business",
     href: "/dirty-business",

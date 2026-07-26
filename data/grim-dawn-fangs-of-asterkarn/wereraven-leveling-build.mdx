@@ -1,0 +1,774 @@
+import Image from "next/image";
+import Link from "next/link";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const buildOverviewColumns = [
+  { key: "Category", label: "Category" },
+  { key: "Leveling Choice", label: "Leveling Choice" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const buildOverviewRows = [
+  {
+    Category: "Primary mastery",
+    "Leveling Choice": "Berserker",
+    "Why It Matters":
+      "Unlocks Wereraven, Ice Talons, Cold Snap, Rallying Cry, and the mastery attributes used throughout leveling.",
+  },
+  {
+    Category: "Second mastery",
+    "Leveling Choice": "Occultist, selected later",
+    "Why It Matters":
+      "Preserves the planned Blood of Dreeg, Aspect of the Guardian, and Familiar transition without splitting early skill points.",
+  },
+  {
+    Category: "Main damage",
+    "Leveling Choice": "Cold and Frostburn",
+    "Why It Matters":
+      "Matches the native Wereraven leveling skills and supports a mobile hit-and-reposition playstyle.",
+  },
+  {
+    Category: "Main attack",
+    "Leveling Choice": "Ice Talons",
+    "Why It Matters":
+      "Used repeatedly against priority targets and as the main devotion trigger.",
+  },
+  {
+    Category: "Pack clear",
+    "Leveling Choice": "Cold Snap",
+    "Why It Matters":
+      "Most useful when several enemies have reached the character at the same time.",
+  },
+  {
+    Category: "Early devotion",
+    "Leveling Choice": "Tsunami",
+    "Why It Matters":
+      "Provides a reliable Cold and Frostburn proc before critical-hit devotions become consistent.",
+  },
+  {
+    Category: "Main leveling problems",
+    "Leveling Choice": "Energy and defense",
+    "Why It Matters":
+      "Damage usually clears normal packs before sustain and survivability are fully solved.",
+  },
+];
+
+export const gearPriorityColumns = [
+  { key: "Priority", label: "Priority" },
+  { key: "What I Look For", label: "What I Look For" },
+  { key: "Why It Matters", label: "Why It Matters" },
+];
+
+export const gearPriorityRows = [
+  {
+    Priority: "1",
+    "What I Look For": "Required resistances",
+    "Why It Matters":
+      "One exposed resistance can erase the value of every offensive upgrade.",
+  },
+  {
+    Priority: "2",
+    "What I Look For": "Health and Defensive Ability",
+    "Why It Matters":
+      "The build needs enough time for Rallying Cry, regeneration, and movement to work.",
+  },
+  {
+    Priority: "3",
+    "What I Look For": "Energy Regeneration and casting speed",
+    "Why It Matters":
+      "Ice Talons cannot deal damage when the Energy bar is empty or casts are too slow.",
+  },
+  {
+    Priority: "4",
+    "What I Look For": "Wereraven and Ice Talons skill bonuses",
+    "Why It Matters":
+      "Directly improves the skills used in every encounter.",
+  },
+  {
+    Priority: "5",
+    "What I Look For": "Cold and Frostburn damage",
+    "Why It Matters":
+      "Scales the native damage package after sustain and defenses are functional.",
+  },
+  {
+    Priority: "6",
+    "What I Look For": "Offensive Ability",
+    "Why It Matters":
+      "Improves hit and critical-hit consistency and makes Blizzard more reliable.",
+  },
+  {
+    Priority: "7",
+    "What I Look For": "Useful modifiers and granted skills",
+    "Why It Matters":
+      "Can solve a specific boss, sustain, or mobility problem.",
+  },
+];
+
+export const levelingProblemColumns = [
+  { key: "Problem", label: "Problem" },
+  { key: "Likely Cause", label: "Likely Cause" },
+  { key: "What I Change", label: "What I Change" },
+];
+
+export const levelingProblemRows = [
+  {
+    Problem: "Ice Talons empties my Energy bar",
+    "Likely Cause": "Too little regeneration or too many unnecessary casts.",
+    "What I Change":
+      "Add Ectoplasm, keep regeneration on gear, stop overcasting, and reserve Cold Snap for grouped enemies.",
+  },
+  {
+    Problem: "Normal packs die but bosses take too long",
+    "Likely Cause":
+      "Low Offensive Ability, weak devotion uptime, missing resistance reduction, or an unsustainable rotation.",
+    "What I Change":
+      "Refresh Rallying Cry, verify Tsunami or Blizzard bindings, add Viper, and fix Energy before adding more area damage.",
+  },
+  {
+    Problem: "Blizzard barely triggers",
+    "Likely Cause": "The build is not landing enough critical hits.",
+    "What I Change":
+      "Raise Offensive Ability and bind Blizzard to a skill used consistently.",
+  },
+  {
+    Problem: "I keep dying despite high Cold Damage",
+    "Likely Cause":
+      "Health, Defensive Ability, or a major resistance was traded away.",
+    "What I Change":
+      "Restore the missing defensive layer before equipping another damage item.",
+  },
+  {
+    Problem: "Weapon-pool skills never activate",
+    "Likely Cause":
+      "Wereraven has its own basic attack and cannot trigger them.",
+    "What I Change":
+      "Remove the unused WPS points and invest in the form, its attacks, or utility.",
+  },
+  {
+    Problem: "A new weapon lowers sheet DPS",
+    "Likely Cause":
+      "Sheet weapon DPS does not describe the full Wereraven spell package.",
+    "What I Change":
+      "Compare global Cold and Frostburn, casting speed, skill ranks, Offensive Ability, Energy, and defenses instead.",
+  },
+  {
+    Problem: "Summon Familiar feels weak",
+    "Likely Cause":
+      "It has not received enough skill points or pet equipment.",
+    "What I Change":
+      "Keep leveling through Berserker and delay the Familiar transition.",
+  },
+  {
+    Problem: "Veteran bosses take several minutes",
+    "Likely Cause":
+      "The 10% experience bonus is no longer compensating for slower clears or deaths.",
+    "What I Change":
+      "Switch to Normal until Health, resistances, Energy, and gear improve.",
+  },
+];
+
+I level this character as a **self-cast Cold and Frostburn Wereraven**, not as
+a pet build.
+
+Berserker supplies the transformation, the attacks I use in every fight, and
+most of the early attributes. I select Occultist as the planned second mastery,
+but I do not slow the leveling route by investing heavily in Summon Familiar
+before the equipment for that later hybrid is available.
+
+The build is simple when its priorities stay in the correct order: unlock
+Wereraven, keep Ice Talons sustainable, use Cold Snap for close-range clearing,
+maintain Rallying Cry, and repair Energy Regeneration and defenses before
+stacking more damage.
+
+<GuideQuickAnswer title="Wereraven Leveling Route">
+  <ol className="mt-3 list-decimal space-y-2 pl-5">
+    <li>Advance the Berserker mastery bar to the 10-point Wereraven threshold.</li>
+    <li>Take Wereraven immediately and build around Ice Talons.</li>
+    <li>Add one early point to Rallying Cry and keep it on the hotbar.</li>
+    <li>Use Cold Snap when enemies reach melee range or gather around you.</li>
+    <li>Take Tsunami first and bind it to Ice Talons.</li>
+    <li>Add Viper and continue toward Blizzard after Offensive Ability improves.</li>
+    <li>Use Behemoth earlier when repeated hits become the main leveling wall.</li>
+    <li>Prioritize resistances, Health, Defensive Ability, and Energy Regeneration.</li>
+    <li>Choose weapons for global bonuses, casting speed, and skill ranks rather than weapon DPS.</li>
+    <li>Delay the full Summon Familiar investment until the planned endgame transition.</li>
+  </ol>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Build scope.</strong>{" "}
+  This is a fresh-character route tested through the early and middle campaign
+  on Veteran. It covers the Cold and Frostburn Wereraven used for leveling,
+  not a completed level 94 Familiar hybrid. Tooltip values can vary with skill
+  rank, equipment bonuses, and later balance patches.
+</div>
+
+<GuideTable
+  caption="Wereraven leveling build overview."
+  columns={buildOverviewColumns}
+  rows={buildOverviewRows}
+/>
+
+<h2 id="skill-order">
+  Wereraven leveling skill order
+</h2>
+
+<h3 id="unlock-wereraven">
+  Levels 1–10: unlock Wereraven first
+</h3>
+
+Wereraven becomes available after advancing the **Berserker mastery bar to its
+10-point threshold**. This is a mastery-bar requirement, not a requirement to
+wait until character level 10.
+
+I place the opening points into the Berserker bar until the Wereraven node is
+available, then take the transformation immediately. I skip Werewolf,
+weapon-pool skills, and unrelated dual-wield attacks because they do not
+support the combat loop used by this route.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-wereraven-mastery-bar-unlock.webp"
+    alt="Grim Dawn Berserker mastery tree showing the Wereraven unlock requirement"
+    width={566}
+    height={471}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    Wereraven is unlocked through the Berserker mastery bar. The form has its
+    own basic attack and cannot trigger weapon-pool skills.
+  </figcaption>
+</figure>
+
+Character level 10 is relevant for selecting a second mastery. It does not
+control the Wereraven unlock.
+
+<h3 id="early-points">
+  Early checkpoint: Wereraven, Ice Talons, and Rallying Cry
+</h3>
+
+One useful early checkpoint in my run was:
+
+<div className="my-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 font-mono text-sm leading-7 text-slate-700">
+  <p>Wereraven: 6 points</p>
+  <p>Ice Talons: 3 points</p>
+  <p>Rallying Cry: 1 point</p>
+</div>
+
+This is not a rigid level-by-level allocation. Equipment can add skill ranks,
+and advancing the mastery bar sometimes gives more value than immediately
+adding another point to an attack.
+
+The priority is:
+
+<ol className="my-5 list-decimal space-y-2 pl-6">
+  <li>Unlock Wereraven.</li>
+  <li>Raise Ice Talons until normal enemies die comfortably.</li>
+  <li>Take one point in Rallying Cry.</li>
+  <li>Continue advancing the Berserker mastery bar.</li>
+  <li>Add Cold Snap when close-range packs become uncomfortable.</li>
+</ol>
+
+I use **Ice Talons** as the repeatable attack against single targets,
+spread-out enemies, and anything I want to hit while repositioning.
+
+I use **Cold Snap** when several enemies close the distance. I do not spend its
+Energy on one distant target when Ice Talons can finish the same enemy.
+
+<h3 id="rallying-cry">
+  Keep Rallying Cry active
+</h3>
+
+Rallying Cry is an active buff and heal, not a passive bonus.
+
+Even one early point gives enough value to justify a hotbar slot. In the tested
+setup, rank 1 restored a portion of Health and added movement speed and
+Offensive Ability for a long duration.
+
+I activate it:
+
+- before bosses and Hero enemies;
+- before entering a dense room;
+- after returning from town;
+- and whenever the previous buff expires.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-wereraven-early-skill-order.webp"
+    alt="Grim Dawn Wereraven hotbar with Rallying Cry, Ice Talons, Cold Snap, and Evade"
+    width={360}
+    height={257}
+    className="mx-auto h-auto w-full max-w-lg rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-lg text-sm text-slate-400">
+    The leveling hotbar stays compact: Wereraven, Rallying Cry, Ice Talons,
+    Cold Snap, Evade, and emergency consumables.
+  </figcaption>
+</figure>
+
+I do not immediately max every Rallying Cry modifier. The mastery bar and the
+two Wereraven attacks affect every fight and normally deserve the early points
+first.
+
+<h3 id="levels-10-25">
+  Levels 10–25: strengthen the core without spreading points
+</h3>
+
+After unlocking the form, I keep most new points inside Berserker.
+
+My priorities during this phase are:
+
+1. keep Ice Talons strong enough for normal enemies;
+2. continue raising the mastery bar;
+3. add points to the useful Wereraven nodes;
+4. maintain one point in Rallying Cry;
+5. raise Cold Snap when pack pressure becomes the problem.
+
+I select Occultist at character level 10 only when I am committed to the later
+hybrid. Selecting it does not mean I must immediately invest in Summon
+Familiar.
+
+Splitting the opening points evenly between Wereraven and Familiar produces
+two underdeveloped damage packages. The self-cast Wereraven is already doing
+the leveling work, so I finish that foundation first.
+
+<h3 id="levels-25-50">
+  Levels 25–50: keep advancing Berserker and solve the real wall
+</h3>
+
+Once Ice Talons clears normal enemies, it is tempting to stop advancing the
+mastery bar and place every point into visible damage nodes.
+
+That improves easy packs but can delay:
+
+- mastery attributes;
+- later Wereraven nodes;
+- Health and survivability;
+- and the utility needed for Heroes and bosses.
+
+During the middle campaign, I use this order:
+
+<ol className="my-5 list-decimal space-y-2 pl-6">
+  <li>Keep Ice Talons at a comfortable clearing rank.</li>
+  <li>Advance the Berserker mastery bar.</li>
+  <li>Improve Wereraven and its relevant modifiers.</li>
+  <li>Add Cold Snap for pack clear.</li>
+  <li>Add defensive or boss utility only when a specific problem appears.</li>
+</ol>
+
+If normal enemies die quickly but a boss barely moves, I check Energy,
+Offensive Ability, devotion bindings, and resistance reduction before adding
+more area damage.
+
+If normal enemies die quickly but I am being burst down, I stop adding damage
+and repair the defensive layer that is failing.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="rotation">
+  Wereraven leveling rotation
+</h2>
+
+The route does not need a crowded hotbar.
+
+My standard sequence is:
+
+<ol className="my-5 list-decimal space-y-2 pl-6">
+  <li>Enter Wereraven before engaging.</li>
+  <li>Activate Rallying Cry.</li>
+  <li>Use Ice Talons on the first priority target.</li>
+  <li>Reposition while Frostburn and devotion damage continue ticking.</li>
+  <li>Use Cold Snap when multiple enemies reach close range.</li>
+  <li>Use Evade to leave ground effects instead of finishing one extra cast.</li>
+</ol>
+
+Ice Talons is the repeatable skill. Cold Snap is the close-range answer, not a
+replacement for every Ice Talons cast.
+
+<h3 id="weapon-stats">
+  Which weapon stats actually help Wereraven?
+</h3>
+
+Wereraven has its own basic attack and cannot trigger weapon-pool skills.
+Ice Talons and Cold Snap also do not rely on a normal weapon-damage component
+in this leveling setup.
+
+That changes how I compare weapons.
+
+I prioritize:
+
+- global Cold and Frostburn bonuses;
+- casting speed;
+- Offensive Ability;
+- bonuses to Wereraven, Ice Talons, or Cold Snap;
+- useful skill modifiers;
+- Energy Regeneration;
+- resistances and defensive statistics;
+- and helpful granted skills.
+
+I place less value on:
+
+- the weapon's displayed DPS;
+- flat damage that only applies through weapon damage;
+- weapon-pool skill bonuses;
+- and an attack-speed increase when the build needs casting speed.
+
+A weapon with lower sheet DPS can still be the clear upgrade when it provides
+global Cold damage, casting speed, and skill ranks.
+
+<h3 id="winds-of-asterkarn">
+  Is Winds of Asterkarn required?
+</h3>
+
+No. Winds of Asterkarn can work with Wereraven and can be useful against dense
+groups or targets that allow safe channeling.
+
+I do not make it the center of this leveling route because remaining in place
+is dangerous in areas filled with ground effects. Ice Talons lets me attack
+and reposition more freely.
+
+I test Winds when:
+
+- Energy sustain is already stable;
+- enemies stay inside the channel;
+- and the encounter does not punish standing still.
+
+I skip it when the existing Ice Talons and Cold Snap package already clears
+comfortably.
+
+<h2 id="devotions">
+  Wereraven leveling devotion route
+</h2>
+
+My devotion plan has three jobs:
+
+1. add an early damage proc;
+2. improve Cold damage against tougher enemies;
+3. add recovery when incoming damage becomes the wall.
+
+<h3 id="tsunami">
+  Take Tsunami first
+</h3>
+
+Tsunami is the first offensive devotion I use because it can trigger from the
+attack I am already pressing throughout every map.
+
+I bind **Tsunami to Ice Talons**.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-wereraven-tsunami-glacial-talon.webp"
+    alt="Grim Dawn Tsunami devotion tooltip with Cold, Lightning, and Frostburn damage"
+    width={279}
+    height={293}
+    className="mx-auto h-auto w-full max-w-sm rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-sm text-sm text-slate-400">
+    Tsunami provides a reliable early Cold and Frostburn proc and levels
+    consistently when attached to Ice Talons.
+  </figcaption>
+</figure>
+
+I do not bind it to a utility skill that may go several packs without being
+pressed.
+
+<h3 id="viper-blizzard">
+  Add Viper and move toward Blizzard
+</h3>
+
+Viper becomes important when Heroes and bosses take much longer than normal
+packs. More percentage damage is not always the missing piece; reducing enemy
+Elemental Resistance can improve the damage already on the build.
+
+The later route I tested moves through:
+
+- Viper;
+- Sailor's Guide;
+- Scholar's Light;
+- and then Blizzard.
+
+Blizzard fits the Cold and Frostburn theme but requires critical hits to
+trigger. I do not abandon a reliable Tsunami setup simply because Blizzard is
+available on the devotion map.
+
+If Blizzard rarely activates, I check Offensive Ability and its skill binding
+before changing the route.
+
+<h3 id="behemoth">
+  Take Behemoth earlier when survival becomes the problem
+</h3>
+
+I move toward Behemoth when:
+
+1. normal enemies still die at an acceptable speed;
+2. repeated hits force immediate potions, retreats, or deaths.
+
+Giant's Blood adds an emergency recovery layer. It does not replace capped
+resistances or a reasonable Health pool.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-wereraven-behemoth-giants-blood.webp"
+    alt="Grim Dawn Giant's Blood devotion tooltip with healing and Health Regeneration"
+    width={197}
+    height={248}
+    className="mx-auto h-auto w-full max-w-xs rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-xs text-sm text-slate-400">
+    Giant's Blood is a chance-on-hit recovery proc with a cooldown, not a
+    permanent substitute for defenses.
+  </figcaption>
+</figure>
+
+If the build is dying because one resistance is far below the others, I fix
+that resistance before expecting Behemoth to solve the encounter.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="energy">
+  How I solve Wereraven Energy problems
+</h2>
+
+Energy is the most persistent mechanical issue in this leveling route.
+
+Ice Talons is used repeatedly, and unnecessary Cold Snap casts can empty the
+bar during long packs and bosses.
+
+One Ectoplasm helps but is not the entire solution.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-wereraven-ectoplasm-energy-fix.webp"
+    alt="Grim Dawn Ectoplasm component providing Energy and Energy Regeneration"
+    width={246}
+    height={215}
+    className="mx-auto h-auto w-full max-w-sm rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-sm text-sm text-slate-400">
+    Ectoplasm is a useful early source of Energy Regeneration, but the rest of
+    the equipment still needs to support sustained casting.
+  </figcaption>
+</figure>
+
+I fix Energy in this order:
+
+<ol className="my-5 list-decimal space-y-2 pl-6">
+  <li>Add Ectoplasm to an eligible jewelry slot.</li>
+  <li>Keep Energy Regeneration on at least one useful equipment piece.</li>
+  <li>Do not replace that item for a minor Cold Damage increase.</li>
+  <li>Stop recasting into enemies already dying from Frostburn.</li>
+  <li>Use Cold Snap only when its area coverage is needed.</li>
+  <li>Carry Elixirs of Spirit for bosses and unusually dense areas.</li>
+</ol>
+
+Elixirs are an emergency resource. If Energy empties during every normal pack,
+the permanent equipment setup needs more regeneration.
+
+I do not place every attribute point into Spirit to hide the problem. Spirit
+can satisfy caster requirements and enlarge the Energy pool, but Physique,
+Health, and Defensive Ability matter more when the character is dying before
+the larger pool becomes useful.
+
+<h2 id="gear">
+  Wereraven leveling gear priorities
+</h2>
+
+I compare equipment in this order:
+
+<GuideTable
+  caption="Wereraven leveling gear priorities."
+  columns={gearPriorityColumns}
+  rows={gearPriorityRows}
+/>
+
+A larger Cold Damage number does not make an item an upgrade when it also
+removes several hundred Health, an important resistance, Defensive Ability, or
+the Energy Regeneration keeping the rotation active.
+
+<h3 id="components">
+  Components I use to solve specific problems
+</h3>
+
+I use components to repair the weakest part of the current character rather
+than installing the same damage component in every slot.
+
+Useful examples from the tested route include:
+
+- **Ectoplasm** when Energy Regeneration is insufficient;
+- **Aether Soul** in an eligible Amulet or Medal when Aether damage is the
+  current threat;
+- broader resistance components when several defenses are low;
+- Health, Armor, or regeneration components after the major resistances are
+  stable.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-wereraven-aether-soul-component.webp"
+    alt="Grim Dawn Aether Soul component beside the character resistance panel"
+    width={646}
+    height={276}
+    className="mx-auto h-auto w-full max-w-4xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-4xl text-sm text-slate-400">
+    Aether Soul fits Amulets and Medals and can solve an exposed Aether
+    resistance while also adding Defensive Ability.
+  </figcaption>
+</figure>
+
+I do not heavily overcap one resistance while leaving another major weakness
+exposed.
+
+<h3 id="vendor-gear">
+  When I buy or keep vendor gear
+</h3>
+
+I buy or stash an item when it solves a defined problem:
+
+- a ring with a large bonus to Ice Talons;
+- an Amulet with Frostburn and Energy Regeneration;
+- an item that caps the resistance needed in the next region;
+- a caster weapon or off-hand that improves both damage and sustain;
+- or a component blueprint that fixes a known weakness.
+
+A future item is worth keeping when I can equip it soon and it directly
+improves the main attack. It is not a reason to dismantle the current setup
+before meeting its requirement.
+
+I skip an item when:
+
+- it adds damage but removes the resistance keeping me alive;
+- its granted skill does not help the normal combat loop;
+- it mainly supports weapon attacks or weapon-pool skills;
+- or it is an expensive temporary purchase shortly before another planned
+  upgrade.
+
+<h2 id="attributes">
+  Wereraven attribute points
+</h2>
+
+I use **Physique as the default**.
+
+Physique helps equipment requirements, Health, and Defensive Ability. Those
+benefits remain useful in every region and difficulty.
+
+I add Spirit only when:
+
+1. an important caster item requires it;
+2. the Energy pool remains too small after fixing regeneration;
+3. the defensive panel is already stable.
+
+Offensive Ability is important because Blizzard and other critical-hit effects
+cannot trigger reliably without critical hits.
+
+Defensive Ability solves the opposite problem. If enemies begin landing
+frequent or large critical hits, another Cold Damage roll will not protect the
+character.
+
+<h2 id="occultist">
+  When I select Occultist
+</h2>
+
+I select **Occultist at character level 10** only because it is the planned
+second mastery for the later hybrid.
+
+I do not immediately divide the leveling points evenly between the two
+masteries.
+
+Berserker already supplies:
+
+- Wereraven;
+- Ice Talons and Cold Snap;
+- Rallying Cry;
+- mastery attributes;
+- and the damage used in every fight.
+
+My early Occultist plan is:
+
+<ol className="my-5 list-decimal space-y-2 pl-6">
+  <li>Select Occultist when the character plan is confirmed.</li>
+  <li>Continue spending primarily in Berserker.</li>
+  <li>Consider Blood of Dreeg when its heal and support justify the mastery investment.</li>
+  <li>Consider Aspect of the Guardian when its defenses solve a current problem.</li>
+  <li>Delay the complete Summon Familiar package.</li>
+</ol>
+
+Summon Familiar is not a one-point leveling companion that automatically
+carries the route. It needs skill investment and pet-supporting equipment to
+become a real damage package.
+
+The planned level 94 Wereraven and Familiar setup is a separate endgame
+transition. Until that equipment, the Familiar investment, and the final
+damage conversion are equipped and tested together, I continue leveling as a
+self-cast Cold and Frostburn Wereraven.
+
+<h2 id="stuck">
+  Wereraven leveling problems and fixes
+</h2>
+
+<GuideTable
+  caption="Common Wereraven leveling problems and fixes."
+  columns={levelingProblemColumns}
+  rows={levelingProblemRows}
+/>
+
+<h2 id="faq">
+  Grim Dawn Wereraven leveling FAQ
+</h2>
+
+### Can Wereraven trigger weapon-pool skills?
+
+No. Wereraven has its own basic attack and cannot trigger weapon-pool skills.
+Do not spend leveling points on WPS nodes expecting them to activate in the
+form.
+
+### Should I use weapon DPS to compare upgrades?
+
+Not by itself. This route values global Cold and Frostburn bonuses, casting
+speed, Offensive Ability, Energy Regeneration, skill ranks, and defenses more
+than the displayed weapon DPS.
+
+### Is Tsunami or Blizzard better while leveling?
+
+Tsunami is the more reliable early proc. Blizzard becomes stronger after the
+build has enough Offensive Ability to land critical hits consistently. I use
+Tsunami first and transition toward Blizzard later.
+
+### Why choose Occultist without leveling Summon Familiar?
+
+Occultist preserves the planned Blood of Dreeg, Aspect of the Guardian, and
+endgame Familiar route. It does not require splitting the early skill points
+before the Wereraven package is complete.
+
+### Should I use Winds of Asterkarn?
+
+It is optional. Use it when the build can sustain the Energy cost and the
+encounter allows safe channeling. Ice Talons remains the more mobile core of
+this route.
+
+### Can I turn Veteran off after starting?
+
+Yes. Veteran can be toggled. Switch to Normal when the extra enemy durability
+or repeated deaths remove the value of its experience bonus.
+
+### When should I take Behemoth?
+
+Take Behemoth when normal clearing remains comfortable but repeated hits force
+immediate potions, retreats, or deaths. Fix exposed resistances first.
+
+### When does the Familiar hybrid begin?
+
+The full hybrid begins after the required endgame equipment and Familiar
+investment are available. Until then, this guide remains a self-cast Cold and
+Frostburn Wereraven leveling route.
+
+<div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-700">
+  Looking for more expansion routes and build guides? Return to the{" "}
+  <Link
+    href="/grim-dawn-fangs-of-asterkarn"
+    className="font-semibold text-sky-700 hover:text-sky-900"
+  >
+    Fangs of Asterkarn guide hub
+  </Link>
+</div>

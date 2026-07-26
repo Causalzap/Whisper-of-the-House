@@ -1,0 +1,651 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const systemColumns = [
+  { key: "System", label: "System" },
+  { key: "Input", label: "Input" },
+  { key: "Result", label: "Result" },
+  { key: "Service", label: "Service / Location" },
+];
+
+export const systemRows = [
+  {
+    System: "Soul material farming",
+    Input: "Heroes, bosses, and enabled Ascendant mechanics",
+    Result: "Soul Echoes, Ashes of Awakening, and other rare materials",
+    Service: "Campaign areas affected by the Ascension Altar",
+  },
+  {
+    System: "Echo processing",
+    Input: "Soul Echoes plus the materials shown in the current recipe",
+    Result: "Soul Fragments",
+    Service: "Runed Orb in Elderveil",
+  },
+  {
+    System: "Item Ascension",
+    Input: "An existing item plus the displayed components and soul materials",
+    Result: "One additional Ascended Affix",
+    Service: "Jornn the Runekeeper in Kurnhold",
+  },
+  {
+    System: "Epic Awakening",
+    Input: "Supported Epic, Ashes of Awakening, recipe materials, and Iron Bits",
+    Result: "A fixed Legendary version of the Epic",
+    Service: "Runed Orb in Elderveil",
+  },
+  {
+    System: "Item Alteration",
+    Input: "An item plus the cost shown for the selected reroll",
+    Result: "New seed, prefix, suffix, or Ascended Affix",
+    Service: "Inventor",
+  },
+];
+
+export const stuckColumns = [
+  { key: "What I See", label: "What I See" },
+  { key: "Most Likely Cause", label: "Most Likely Cause" },
+  { key: "What I Do", label: "What I Do" },
+];
+
+export const stuckRows = [
+  {
+    "What I See": "The Altar of Ascension is still locked",
+    "Most Likely Cause":
+      "The Kurn story or the altar objective has not been completed.",
+    "What I Do":
+      "Continue Kurnhold progression until the Altar of Ascension objective becomes available, then return to the sacred site.",
+  },
+  {
+    "What I See": "Heroes and bosses are not dropping Soul Echoes",
+    "Most Likely Cause":
+      "The relevant Ascendant mechanic may not be active, or the test sample is too small.",
+    "What I Do":
+      "Check the altar settings and complete several named-enemy runs before treating the system as broken.",
+  },
+  {
+    "What I See": "Jornn or the Inventor says I am missing Soul Fragments",
+    "Most Likely Cause":
+      "The Soul Echoes have not been processed, or the materials are stored elsewhere.",
+    "What I Do":
+      "Check the Runed Orb conversion recipe, personal stash, transfer stash, and other characters.",
+  },
+  {
+    "What I See": "I cannot find Elderveil",
+    "Most Likely Cause":
+      "I stayed on the central path near Guardian's Sorrow.",
+    "What I Do":
+      "Travel west from the Rift, move along the outer wall, and test the narrow dark opening.",
+  },
+  {
+    "What I See": "The Runed Orb has no recipe for my Epic",
+    "Most Likely Cause":
+      "The exact item version is unsupported or the recipe is not yet unlocked.",
+    "What I Do":
+      "Search the exact item name, verify its Normal, Empowered, or Mythical version, and continue the relevant progression before saving more copies.",
+  },
+  {
+    "What I See": "My Ascended Affix disappeared after Awakening",
+    "Most Likely Cause":
+      "Awakening consumed the Ascended Epic and created a new Legendary item.",
+    "What I Do":
+      "Awaken an unascended Epic first, then Ascend the finished Legendary.",
+  },
+  {
+    "What I See": "I own the Epic but cannot complete the recipe",
+    "Most Likely Cause":
+      "The recipe still needs Ashes, another material, Iron Bits, or a different base version.",
+    "What I Do":
+      "Preserve the Epic and follow the exact Runed Orb ingredient list instead of dismantling the only eligible copy.",
+  },
+];
+
+**Soul Echoes, Soul Fragments, Ascension, and Epic Awakening are connected,
+but they are not the same system.**
+
+The most expensive mistake is Ascending a blue Epic and Awakening it
+afterward. Awakening consumes the original Epic to create a new Legendary
+item, so I always **Awaken first and Ascend the finished Legendary second**.
+
+<GuideQuickAnswer title="The Upgrade Order I Use">
+  <ol className="mt-3 list-decimal space-y-2 pl-5">
+    <li>Unlock the Altar of Ascension and Jornn the Runekeeper in Kurnhold.</li>
+    <li>Find Elderveil west of the Guardian&apos;s Sorrow Rift.</li>
+    <li>Speak with Elder Noltukari and inspect the Runed Orb.</li>
+    <li>Farm Soul Echoes and Ashes through the Ascendant mechanics I can clear efficiently.</li>
+    <li>Check whether the exact Epic has a visible Runed Orb recipe.</li>
+    <li>Awaken the Epic into its Legendary version.</li>
+    <li>Take the completed Legendary to Jornn and add its Ascended Affix.</li>
+    <li>Use an Inventor later when I need to reroll the seed or an individual affix.</li>
+  </ol>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border-l-4 border-amber-400 bg-amber-50 px-5 py-4 text-sm leading-7 text-slate-700">
+  <strong className="text-amber-900">
+    Awaken first, then Ascend.
+  </strong>{" "}
+  Awakening creates a new Legendary item and consumes the original Epic.
+  I do not spend Ascension materials on the blue item first because its
+  Ascended Affix will not transfer to the newly crafted Legendary.
+</div>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Tested-version note.</strong>{" "}
+  This guide follows the English UI in Grim Dawn v1.3.0.1, July 2026.
+  Awakening eligibility, conversion ratios, unlock thresholds, and reroll
+  costs should be checked against the current Runed Orb or Inventor panel
+  after future patches.
+</div>
+
+<GuideTable
+  caption="How Soul Echoes, Ascension, Awakening, and Alteration connect."
+  columns={systemColumns}
+  rows={systemRows}
+/>
+
+<h2 id="unlock-services">
+  How I unlock the Ascension and Awakening services
+</h2>
+
+I first reach the Kurn settlement and continue its story until I can complete
+the **Altar of Ascension** objective.
+
+The first time I found the sacred site, the game told me to earn the Kurn&apos;s
+trust. I did not try to unlock it by reaching Level 100 or placing random
+materials on the platform. I continued the local quests and returned when the
+altar objective became available.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-altar-of-ascension-quest-complete.webp"
+    alt="Grim Dawn Altar of Ascension quest completion in the Kurn settlement"
+    width={359}
+    height={278}
+    className="mx-auto h-auto w-full max-w-lg rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-lg text-sm text-slate-400">
+    Completing the altar objective opens the central Ascension system, but
+    Jornn, the Inventor, Elder Noltukari, and the Runed Orb remain separate
+    interactions.
+  </figcaption>
+</figure>
+
+I separate the services by what they actually do:
+
+- the **Altar of Ascension** changes campaign loot and enables selected
+  Ascendant mechanics;
+- **Jornn the Runekeeper** adds the first Ascended Affix to an item;
+- an **Inventor** rerolls the item seed, prefix, suffix, or existing
+  Ascended Affix;
+- the **Runed Orb** processes Soul Echoes and displays supported Epic
+  Awakening recipes;
+- **Elder Noltukari** is the named NPC I find inside the hidden Elderveil
+  area, not the crafting interface itself.
+
+I do not look for an Epic recipe in the center of the altar. The altar affects
+the world; the Runed Orb handles the hidden-area recipes.
+
+The exact reputation or quest threshold for every Elderveil recipe was not
+shown clearly in this run, so I do not invent a faction rank. If I can reach
+the Orb but a service is missing, I continue the local progression and return
+after the next reputation or quest update.
+
+<h3 id="full-mode-versus-altar">
+  Full Ascendant Mode versus individual altar mechanics
+</h3>
+
+Full Ascendant Mode requires a **Level 100 character on Ultimate**.
+
+I turn it on only after the build can already clear ordinary Ultimate Heroes
+and bosses without repeated deaths. A harder mode does not improve my material
+income when every run becomes much slower.
+
+The Ascension Altar can also enable individual Ascendant mechanics on other
+difficulties. That lets me target particular encounters and rewards without
+turning on the complete mode.
+
+I use the altar when I want more chances at features such as:
+
+- Tempest Totems;
+- Resplendent Troves;
+- enemies or containers Marked by the Void;
+- enhanced Roguelike dungeon rewards;
+- or other specific mechanics shown in the current altar interface.
+
+I add only the mechanics my build can clear efficiently. Turning on every
+option at once is not automatically the fastest material farm.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="soul-materials">
+  Soul Echoes, Soul Fragments, and Ashes of Awakening
+</h2>
+
+These are separate materials with different roles.
+
+<h3 id="soul-echoes">
+  How I get Soul Echoes
+</h3>
+
+Heroes and bosses can drop echoes of their souls while the relevant Ascendant
+mechanics are active.
+
+I therefore prioritize named enemies instead of clearing every ordinary pack.
+A useful route gives me several Heroes, bosses, Totems, or high-value
+encounters without long empty sections between them.
+
+My basic farming loop is:
+
+<ol className="my-5 list-decimal space-y-2 pl-6">
+  <li>Check the current Ascension Altar settings.</li>
+  <li>Select only the mechanics the build can clear consistently.</li>
+  <li>Choose a route with several named targets.</li>
+  <li>Kill enough normal enemies to reach those targets safely.</li>
+  <li>Collect every soul-material drop before opening a portal.</li>
+  <li>Reset after the valuable encounters are complete.</li>
+</ol>
+
+I do not claim that one route is permanently best without recording repeated
+runs. The real comparison is time spent, named targets killed, materials
+received, and deaths per run.
+
+<h3 id="soul-fragments">
+  How I turn Soul Echoes into Soul Fragments
+</h3>
+
+Soul Echoes can be processed into Soul Fragments through the **Runed Orb** in
+Elderveil.
+
+I open the Orb and use the conversion recipe shown in the current UI. I do
+not hard-code an Echo-to-Fragment ratio into this guide until I have captured
+the live recipe clearly, because conversion requirements can change between
+development versions and hotfixes.
+
+When an Ascension or Alteration service says I am missing Soul Fragments, I
+check:
+
+- whether the Echoes are still unprocessed;
+- personal inventory;
+- personal stash;
+- transfer stash;
+- another character;
+- and the exact Runed Orb recipe requirements.
+
+I do not resume farming until I confirm that I genuinely lack the materials
+rather than merely storing them in another location.
+
+<h3 id="ashes-awakening">
+  How I get Ashes of Awakening
+</h3>
+
+**Ashes of Awakening** are a key material for turning supported Epic items into
+their Awakened Legendary versions.
+
+They are primarily associated with Ascendant content. The Altar can also
+enable individual mechanics such as Resplendent Troves and Marked by the Void
+on other difficulties, giving me ways to look for Ashes without enabling the
+complete Ascendant Mode.
+
+My decision is:
+
+- use full Ascendant Mode when the Level 100 Ultimate build clears it
+  efficiently;
+- use selected altar mechanics when full mode makes each run too slow;
+- prioritize Heroes, bosses, upgraded containers, Troves, Totems, and enhanced
+  dungeon rewards;
+- and save the Ashes until I have inspected the complete Legendary output.
+
+Different Inventor operations may show different costs. I use the current
+Alteration panel for each seed, prefix, suffix, or Ascended Affix reroll
+instead of assuming that every reroll consumes the same material.
+
+<h2 id="item-ascension">
+  How item Ascension works
+</h2>
+
+I take the existing item to **Jornn the Runekeeper** near the Ascension Altar.
+
+Ascension does not change an Epic into a Legendary. It adds one extra
+**Ascended Affix** to the item I already own.
+
+Ascended Affixes fall into two broad groups:
+
+- regular combat attributes, such as Offensive Ability, Defensive Ability,
+  critical damage, or another stat appropriate to the item slot;
+- mastery modifiers that affect skills associated with the masteries of the
+  character performing the Ascension.
+
+That class connection matters. When I want modifiers from a specific mastery
+combination, I perform the Ascension on the character using those masteries.
+
+<h3 id="ascended-affix-tiers">
+  Why the item base matters
+</h3>
+
+The item&apos;s base category affects the mastery modifiers it can receive.
+
+A common, non-MI base that has normal affixes and is displayed as a Magic item
+can access the stronger tier of certain mastery modifiers.
+
+Monster Infrequents, Epics, and Legendaries use the standard tier of mastery
+modifiers. They remain valuable because their base statistics and existing
+skill support are far more predictable.
+
+<div className="my-6 grid gap-4 md:grid-cols-2">
+  <div className="rounded-xl border border-violet-200 bg-violet-50 p-5 text-sm leading-7 text-slate-700">
+    <strong className="block text-violet-900">
+      Common non-MI base with affixes
+    </strong>
+    Can access stronger versions of some mastery modifiers. The category of
+    the base matters; this does not mean every unmodified white drop is
+    automatically the best Ascension target.
+  </div>
+
+  <div className="rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+    <strong className="block text-sky-900">
+      MI, Epic, or Legendary base
+    </strong>
+    Uses the standard mastery-modifier tier but starts with more reliable
+    build-specific statistics, resistances, and skill bonuses.
+  </div>
+</div>
+
+I do not Ascend only purple items by habit. I compare the base item, existing
+affixes, available modifier tier, and the role the final item needs to fill.
+
+<h3 id="reroll-affix">
+  How I reroll an Ascended Affix
+</h3>
+
+After the initial Ascension, I take the item to an **Inventor** and open
+Alteration.
+
+I choose the exact part I want to reroll rather than replacing the entire item:
+
+- item seed;
+- prefix;
+- suffix;
+- or Ascended Affix.
+
+I read the displayed materials and Iron Bits before confirming. I do not treat
+the cost of a seed reroll, normal affix reroll, and Ascended Affix reroll as
+one universal recipe.
+
+I stop rerolling when the current result already supports the build or when
+another attempt would consume the materials needed to Ascend a more important
+slot.
+
+
+
+<h2 id="awaken-epic">
+  How I Awaken an Epic item
+</h2>
+
+Awakening consumes a supported Epic and creates its designed Legendary
+version.
+
+The original blue item is not simply recolored. I treat the output as a new
+piece of equipment and do not expect an attached Ascended Affix to survive.
+
+My order is:
+
+<ol className="my-5 list-decimal space-y-2 pl-6">
+  <li>Preserve any component or augment I do not want to lose.</li>
+  <li>Take the unascended Epic to the Runed Orb.</li>
+  <li>Find the recipe matching the exact Epic version.</li>
+  <li>Inspect the Legendary output before spending anything.</li>
+  <li>Pay the Ashes, additional materials, and Iron Bits.</li>
+  <li>Compare and equip the newly created Legendary.</li>
+  <li>Take that Legendary to Jornn for Ascension afterward.</li>
+</ol>
+
+<h3 id="eligible-epics">
+  Which Epic items can be Awakened?
+</h3>
+
+A blue rarity and a high Required Player Level do not guarantee an Awakening
+recipe.
+
+Earlier development information referenced item-level 84 and 94 Epics, while
+current live discussions do not fully agree on whether every earlier category
+remained in the release build.
+
+I therefore use one reliable rule:
+
+> An Epic is currently Awakenable when its exact version has a visible Runed
+> Orb recipe.
+
+I verify:
+
+- the complete item name;
+- Normal, Empowered, Mythical, or other version;
+- the base item required by the recipe;
+- the Legendary output;
+- and every material listed by the current UI.
+
+I keep one uncertain copy until I have searched the live recipe list. I do not
+collect an entire set based only on an old item-level rule.
+
+<h3 id="awakening-recipe">
+  Read the complete Runed Orb recipe before crafting
+</h3>
+
+One recipe I inspected produced **Lokharr&apos;s Visage**, a Level 94 Awakened
+Caster Helm.
+
+The recipe charged **200,000 Iron Bits** in addition to the required base
+equipment and other materials.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-soul-echo-recipe-200k.webp"
+    alt="Grim Dawn Runed Orb recipe for Lokharr's Visage costing 200000 Iron Bits"
+    width={438}
+    height={500}
+    className="mx-auto h-auto w-full max-w-xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-xl text-sm text-slate-400">
+    This specific Runed Orb recipe produces Lokharr&apos;s Visage and costs
+    200,000 Iron Bits before the other listed ingredients are counted.
+  </figcaption>
+</figure>
+
+I also inspected a four-piece recipe list where every piece charged 200,000
+Iron Bits. Completing all four would therefore require **800,000 Iron Bits**
+before the remaining ingredients.
+
+That is a real example, not a universal price for every Awakened Epic.
+
+I calculate the full set cost before making the first piece. One affordable
+craft can become an unfinished set when the next three pieces consume the
+money needed for augments, components, and other upgrades.
+
+<h3 id="compare-result">
+  When I craft the Awakened result and when I wait
+</h3>
+
+I compare the output against the item I am actually replacing.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-awakened-epic-before-after.webp"
+    alt="Grim Dawn comparison between a current Epic item and a candidate Legendary equipment result"
+    width={479}
+    height={406}
+    className="mx-auto h-auto w-full max-w-2xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
+    I compare Armor, Health, resistances, damage types, and skill modifiers
+    before deciding whether the candidate Legendary improves the active build.
+  </figcaption>
+</figure>
+
+<div className="my-6 grid gap-4 md:grid-cols-2">
+  <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-sm leading-7 text-slate-700">
+    <strong className="block text-emerald-900">
+      I craft it now when
+    </strong>
+    The output supports my current masteries and main damage type, replaces a
+    weak slot, preserves critical resistances, and leaves enough resources for
+    the rest of the setup.
+  </div>
+
+  <div className="rounded-xl border border-rose-200 bg-rose-50 p-5 text-sm leading-7 text-slate-700">
+    <strong className="block text-rose-900">
+      I wait when
+    </strong>
+    It is my only copy, the Legendary supports another class, the swap breaks
+    a necessary resistance, or one recipe would consume nearly all of my
+    Ashes and Iron Bits.
+  </div>
+</div>
+
+<AdUnit placement="article_middle" />
+
+<h2 id="elderveil">
+  How I find Elderveil, Elder Noltukari, and the Runed Orb
+</h2>
+
+Elderveil is a hidden area **west of the Guardian&apos;s Sorrow Rift**.
+
+I did not find it by remaining on the obvious central path. I moved toward
+the outside wall and tested a narrow dark opening that initially looked like
+part of the environment.
+
+My route is:
+
+<ol className="my-5 list-decimal space-y-2 pl-6">
+  <li>Travel to the Guardian&apos;s Sorrow Rift.</li>
+  <li>Move west toward the outer edge of the area.</li>
+  <li>Leave the central route and follow the wall.</li>
+  <li>Test the narrow dark opening instead of trusting only the minimap.</li>
+  <li>Follow the concealed route into Elderveil.</li>
+  <li>Speak with Elder Noltukari.</li>
+  <li>Inspect the separate Runed Orb service nearby.</li>
+</ol>
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-soul-echo-elder-noltukari-location.webp"
+    alt="Grim Dawn Elder Noltukari inside the hidden Elderveil area west of Guardian's Sorrow"
+    width={522}
+    height={409}
+    className="mx-auto h-auto w-full max-w-2xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
+    Elder Noltukari waits inside Elderveil. This screenshot shows the
+    destination; the concealed entrance lies west of the Guardian&apos;s
+    Sorrow Rift.
+  </figcaption>
+</figure>
+
+If I reach a normal dead end with no NPC or crafting service, I return toward
+Guardian&apos;s Sorrow and make a slower wall-hugging pass. The correct opening
+is close enough that searching the entire surrounding region is unnecessary.
+
+<h3 id="elder-noltukari">
+  Elder Noltukari and the Runed Orb are separate
+</h3>
+
+The name displayed in the English UI is **Elder Noltukari**.
+
+He asks about the character&apos;s contact with the Aetherials and introduces
+the hidden group. I finish the available dialogue before checking the nearby
+service.
+
+<figure className="my-8">
+  <Image
+    src="/images/grim-dawn-fangs-of-asterkarn/grim-dawn-soul-echo-elder-noltukari-dialogue.webp"
+    alt="Grim Dawn dialogue with Elder Noltukari inside Elderveil"
+    width={426}
+    height={431}
+    className="mx-auto h-auto w-full max-w-xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-xl text-sm text-slate-400">
+    Elder Noltukari is the named NPC in Elderveil. The Runed Orb is a separate
+    crafting service rather than his personal vendor window.
+  </figcaption>
+</figure>
+
+If the Runed Orb is present but a recipe is unavailable, I check:
+
+- whether the dialogue has been completed;
+- whether the exact base Epic is in my inventory;
+- whether I am searching the correct item version;
+- and whether another local quest or reputation update remains unfinished.
+
+I do not invent an exact reputation threshold until it is visible in the
+current faction or recipe UI.
+
+<h2 id="inventory">
+  How I store Epics and soul materials
+</h2>
+
+I keep one dedicated stash section for this system.
+
+I separate:
+
+- confirmed Awakening base items;
+- unsupported or uncertain Epics awaiting a recipe check;
+- duplicate Epics safe to consume;
+- finished Awakened Legendaries;
+- Soul Echoes;
+- Soul Fragments;
+- and Ashes of Awakening.
+
+I do not Ascend the only copy of an Epic that I still intend to Awaken.
+
+Once the current Runed Orb confirms that an item has no recipe and it does not
+support my active build, I can sell or dismantle duplicate copies without
+checking the same item every session.
+
+<h2 id="stuck">
+  Soul Echo, Ascension, and Awakening stuck fixes
+</h2>
+
+<GuideTable
+  caption="Common Soul Echo, Ascension, and Awakening problems."
+  columns={stuckColumns}
+  rows={stuckRows}
+/>
+
+<h2 id="faq">
+  Soul Echoes and Awakened Epic items FAQ
+</h2>
+
+### Can I use another character to Ascend the same item?
+
+Yes, but the character performing the Ascension affects the available mastery
+modifier pool. I use the mastery combination that I want the final item to
+support.
+
+### Can the Inventor reroll only one part of an item?
+
+Yes. Alteration can target the item seed, prefix, suffix, or Ascended Affix
+separately. I check the material cost for the selected operation before
+confirming it.
+
+### Why did I receive a defensive-looking mastery modifier?
+
+Mastery modifiers can affect defensive, passive, support, or offensive skills.
+A defensive result tied to one of the character&apos;s masteries is not
+automatically a regular affix or a bug.
+
+<div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-700">
+  Still unlocking Kurnhold&apos;s late systems? Complete the{" "}
+  <Link
+    href="/grim-dawn-fangs-of-asterkarn/ritual-of-cleansing-walkthrough"
+    className="font-semibold text-sky-700 hover:text-sky-900"
+  >
+    Ritual of Cleansing walkthrough
+  </Link>{" "}
+  or return to the{" "}
+  <Link
+    href="/grim-dawn-fangs-of-asterkarn"
+    className="font-semibold text-sky-700 hover:text-sky-900"
+  >
+    Fangs of Asterkarn guide hub
+  </Link>
+</div>
