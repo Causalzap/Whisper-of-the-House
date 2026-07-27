@@ -24,6 +24,17 @@ const FEATURED_HUB_HREFS = [
   "/dragonsword-awakening",
 ] as const;
 
+/**
+ * 首页保留最近 8 个 Game Hub。
+ *
+ * 以每 1–2 天新增一个游戏的节奏计算，
+ * 8 个位置大约覆盖最近 8–16 天，既保持“最新感”，
+ * 也不会让首页 Latest 区域过快失去刚发布的项目。
+ */
+const LATEST_GAME_HUB_LIMIT = 8;
+
+const LATEST_SPOKE_LIMIT = 2;
+
 type GuideImageProps = {
   image?: string;
   alt: string;
@@ -31,7 +42,7 @@ type GuideImageProps = {
   imageFit?: HomeImageFit;
   imagePosition?: string;
   imagePadding?: boolean;
-  priority?: boolean;
+  quality?: number;
   sizes: string;
 };
 
@@ -149,7 +160,7 @@ const latestGameHubs = typedGuideClusters
       cluster.status !== "upcoming" &&
       !featuredHubHrefSet.has(cluster.href)
   )
-  .slice(0, 8);
+  .slice(0, LATEST_GAME_HUB_LIMIT);
 
 function GuideImage({
   image,
@@ -158,7 +169,7 @@ function GuideImage({
   imageFit = "cover",
   imagePosition = "center",
   imagePadding = false,
-  priority = false,
+  quality = 74,
   sizes,
 }: GuideImageProps) {
   if (!image) {
@@ -198,7 +209,7 @@ function GuideImage({
         src={image}
         alt={alt}
         fill
-        priority={priority}
+        quality={quality}
         sizes={sizes}
         className={`h-full w-full ${fitClass} ${paddingClass} transition-transform duration-500 group-hover:scale-[1.025]`}
         style={{
@@ -281,7 +292,8 @@ function FeaturedHubCard({
           imagePadding={
             cluster.imagePadding ?? false
           }
-          sizes="(min-width: 1280px) 280px, (min-width: 640px) 50vw, 100vw"
+          quality={72}
+          sizes="(min-width: 1280px) 280px, (min-width: 640px) calc(50vw - 2rem), 100vw"
         />
       </Link>
 
@@ -410,10 +422,8 @@ function SpokeLink({
 
 function LatestGuideHubCard({
   cluster,
-  priority = false,
 }: {
   cluster: GuideCluster;
-  priority?: boolean;
 }) {
   const color = accentClasses[cluster.accent];
   const spokes = getSpokePages(cluster);
@@ -422,11 +432,14 @@ function LatestGuideHubCard({
    * 首页只展示两个 Spoke。
    * 完整列表留给 Hub 页面。
    */
-  const visibleSpokes = spokes.slice(0, 2);
+  const visibleSpokes = spokes.slice(
+    0,
+    LATEST_SPOKE_LIMIT
+  );
 
   return (
     <article
-      className={`group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/45 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-slate-900/65 hover:shadow-xl ${color.border}`}
+      className={`group flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/45 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-slate-900/65 hover:shadow-xl ${color.border}`}
     >
       <Link
         href={cluster.href}
@@ -440,18 +453,18 @@ function LatestGuideHubCard({
           imageFit={cluster.imageFit ?? "cover"}
           imagePosition={cluster.imagePosition ?? "center"}
           imagePadding={cluster.imagePadding ?? false}
-          priority={priority}
-          sizes="(min-width: 1024px) 550px, 100vw"
+          quality={76}
+          sizes="(min-width: 1280px) 560px, (min-width: 1024px) calc(50vw - 3rem), 100vw"
         />
       </Link>
 
-      <div className="relative p-5 md:p-6">
+      <div className="relative flex flex-1 flex-col p-5 md:p-6">
         <div
           aria-hidden="true"
           className={`pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${color.glow} opacity-55`}
         />
 
-        <div className="relative">
+        <div className="relative flex h-full flex-col">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <span
               className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.08em] ${color.badge}`}
@@ -465,13 +478,13 @@ function LatestGuideHubCard({
             </span>
           </div>
 
-          <h3 className="mt-4 text-2xl font-black leading-tight text-white transition-colors group-hover:text-purple-100 md:text-3xl">
+          <h3 className="mt-4 line-clamp-2 text-2xl font-black leading-tight text-white transition-colors group-hover:text-purple-100 md:text-3xl">
             <Link href={cluster.href}>
               {cluster.title}
             </Link>
           </h3>
 
-          <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-400">
+          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-400 lg:line-clamp-2">
             {cluster.description}
           </p>
 
@@ -493,7 +506,7 @@ function LatestGuideHubCard({
             </div>
           ) : null}
 
-          <div className="mt-5 flex justify-end border-t border-white/10 pt-5">
+          <div className="mt-auto flex justify-end border-t border-white/10 pt-5">
             <Link
               href={cluster.href}
               className={`inline-flex items-center text-sm font-black ${color.text}`}
@@ -528,7 +541,7 @@ function LatestGuideHubsSection() {
         <SectionHeading
           eyebrow="Latest Guide Hubs"
           title="Explore our newest game guide hubs"
-          description="Choose a recent PC or indie game, then open its beginner guides, walkthroughs, builds, achievements, endings, boss help, collectibles, and puzzle solutions."
+          description="Browse the newest PC and indie games added to our guide library, then open their beginner guides, walkthroughs, builds, achievements, endings, boss help, collectibles, and puzzle solutions."
           action={
             <Link
               href="/all-game-guides"
@@ -547,11 +560,10 @@ function LatestGuideHubsSection() {
         />
 
         <div className="grid gap-5 lg:grid-cols-2">
-          {latestGameHubs.map((cluster, index) => (
+          {latestGameHubs.map((cluster) => (
             <LatestGuideHubCard
               key={cluster.href}
               cluster={cluster}
-              priority={index < 2}
             />
           ))}
         </div>

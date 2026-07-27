@@ -14,23 +14,29 @@ import type { GameDnaGame } from "@/lib/game-dna/recommendations";
 
 export type GamePickerModalProps = {
   isOpen: boolean;
-  games: GameDnaGame[];
-  selectedGameIds: string[];
+  games: readonly GameDnaGame[];
+  selectedGameIds: readonly string[];
 
   selectedCount: number;
   requiredCount?: number;
 
   /**
-   * 用户点击的是第几个空位。
-   * 仅用于弹窗中的提示文案。
+   * The grid position currently being filled or replaced.
    */
   targetSlotNumber?: number | null;
 
   onAddGame: (gameId: string) => void;
   onClose: () => void;
 
+  /**
+   * Optional display caps.
+   *
+   * Leave these undefined to show every available game and every search
+   * result. This is the recommended behavior for the current 30-game pool.
+   */
   popularLimit?: number;
   searchLimit?: number;
+
   closeOnSelect?: boolean;
 };
 
@@ -52,80 +58,143 @@ export default function GamePickerModal({
   targetSlotNumber = null,
   onAddGame,
   onClose,
-  popularLimit = 12,
-  searchLimit = 24,
+  popularLimit,
+  searchLimit,
   closeOnSelect = true,
 }: GamePickerModalProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] =
+    useState("");
 
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const dialogRef =
+    useRef<HTMLDivElement>(null);
+
+  const resultsScrollRef =
+    useRef<HTMLDivElement>(null);
+
+  const searchInputRef =
+    useRef<HTMLInputElement>(null);
+
   const previousActiveElementRef =
     useRef<HTMLElement | null>(null);
 
   const titleId = useId();
   const descriptionId = useId();
   const resultsStatusId = useId();
+  const searchInputId = useId();
 
-  const normalizedRequiredCount = Math.max(
-    1,
-    Math.floor(requiredCount)
-  );
-
-  const isComplete =
-    selectedCount >= normalizedRequiredCount;
-
-  const selectedGameIdSet = useMemo(
-    () => new Set(selectedGameIds),
-    [selectedGameIds]
-  );
-
-  const searchResults = useMemo(() => {
-    const availableGames = games.filter(
-      (game) => !selectedGameIdSet.has(game.id)
+  const normalizedRequiredCount =
+    Math.max(
+      1,
+      Math.floor(requiredCount),
     );
 
+  const isComplete =
+    selectedCount >=
+    normalizedRequiredCount;
+
+  const selectedGameIdSet = useMemo(
+    () =>
+      new Set(selectedGameIds),
+    [selectedGameIds],
+  );
+
+  /**
+   * Every game not already present in the 3×3 grid.
+   *
+   * With a 30-game catalog and 8 selected games, this should contain 22 games.
+   */
+  const availableGames = useMemo(
+    () =>
+      games.filter(
+        (game) =>
+          !selectedGameIdSet.has(
+            game.id,
+          ),
+      ),
+    [
+      games,
+      selectedGameIdSet,
+    ],
+  );
+
+  /**
+   * Keep both the displayed items and the true total so the UI can tell the
+   * user whether a caller has explicitly applied a result cap.
+   */
+  const resultState = useMemo(() => {
     const normalizedQuery =
-      normalizeSearchText(searchQuery);
+      normalizeSearchText(
+        searchQuery,
+      );
 
     if (!normalizedQuery) {
-      return availableGames.slice(0, popularLimit);
+      return {
+        items: applyOptionalLimit(
+          availableGames,
+          popularLimit,
+        ),
+        total:
+          availableGames.length,
+      };
     }
 
-    return availableGames
-      .map((game) => ({
-        game,
-        score: calculateSearchScore(
+    const matchedGames =
+      availableGames
+        .map((game) => ({
           game,
-          normalizedQuery
-        ),
-      }))
-      .filter(({ score }) => score > 0)
-      .sort((a, b) => {
-        if (b.score !== a.score) {
-          return b.score - a.score;
-        }
+          score:
+            calculateSearchScore(
+              game,
+              normalizedQuery,
+            ),
+        }))
+        .filter(
+          ({ score }) =>
+            score > 0,
+        )
+        .sort((left, right) => {
+          if (
+            right.score !==
+            left.score
+          ) {
+            return (
+              right.score -
+              left.score
+            );
+          }
 
-        return a.game.title.localeCompare(
-          b.game.title
-        );
-      })
-      .slice(0, searchLimit)
-      .map(({ game }) => game);
+          return left.game.title.localeCompare(
+            right.game.title,
+            "en",
+          );
+        })
+        .map(({ game }) => game);
+
+    return {
+      items: applyOptionalLimit(
+        matchedGames,
+        searchLimit,
+      ),
+      total: matchedGames.length,
+    };
   }, [
-    games,
+    availableGames,
     popularLimit,
     searchLimit,
     searchQuery,
-    selectedGameIdSet,
   ]);
 
+  const searchResults =
+    resultState.items;
+
   /**
-   * 打开弹窗时：
-   * - 记录之前获得焦点的元素；
-   * - 禁止背景滚动；
-   * - 清空旧搜索；
-   * - 自动聚焦搜索框。
+   * Opening behavior:
+   *
+   * - remember the previously focused element;
+   * - lock background scrolling;
+   * - clear stale search text;
+   * - reset the result list to the top;
+   * - focus the search field.
    */
   useEffect(() => {
     if (!isOpen) {
@@ -133,33 +202,59 @@ export default function GamePickerModal({
     }
 
     previousActiveElementRef.current =
-      document.activeElement instanceof HTMLElement
+      document.activeElement instanceof
+      HTMLElement
         ? document.activeElement
         : null;
 
     const previousOverflow =
       document.body.style.overflow;
 
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow =
+      "hidden";
+
     setSearchQuery("");
 
-    const focusTimer = window.setTimeout(() => {
-      searchInputRef.current?.focus();
-    }, 50);
+    resultsScrollRef.current?.scrollTo({
+      top: 0,
+    });
+
+    const focusTimer =
+      window.setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 50);
 
     return () => {
-      window.clearTimeout(focusTimer);
+      window.clearTimeout(
+        focusTimer,
+      );
+
       document.body.style.overflow =
         previousOverflow;
 
-      window.requestAnimationFrame(() => {
-        previousActiveElementRef.current?.focus();
-      });
+      window.requestAnimationFrame(
+        () => {
+          previousActiveElementRef.current?.focus();
+        },
+      );
     };
   }, [isOpen]);
 
   /**
-   * Esc 关闭和 Tab 焦点锁定。
+   * A new query should always start at the top of the result list.
+   */
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    resultsScrollRef.current?.scrollTo({
+      top: 0,
+    });
+  }, [isOpen, searchQuery]);
+
+  /**
+   * Escape closes the modal and Tab remains trapped inside it.
    */
   useEffect(() => {
     if (!isOpen) {
@@ -167,7 +262,7 @@ export default function GamePickerModal({
     }
 
     const handleKeyDown = (
-      event: KeyboardEvent
+      event: KeyboardEvent,
     ) => {
       if (event.key === "Escape") {
         event.preventDefault();
@@ -182,24 +277,33 @@ export default function GamePickerModal({
         return;
       }
 
-      const focusableElements = Array.from(
-        dialogRef.current.querySelectorAll<HTMLElement>(
-          FOCUSABLE_SELECTOR
-        )
-      ).filter(
-        (element) =>
-          !element.hasAttribute("disabled") &&
-          element.getAttribute("aria-hidden") !==
-            "true"
-      );
+      const focusableElements =
+        Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            FOCUSABLE_SELECTOR,
+          ),
+        ).filter(
+          (element) =>
+            !element.hasAttribute(
+              "disabled",
+            ) &&
+            element.getAttribute(
+              "aria-hidden",
+            ) !== "true",
+        );
 
-      if (focusableElements.length === 0) {
+      if (
+        focusableElements.length ===
+        0
+      ) {
         event.preventDefault();
         dialogRef.current.focus();
         return;
       }
 
-      const firstElement = focusableElements[0];
+      const firstElement =
+        focusableElements[0];
+
       const lastElement =
         focusableElements[
           focusableElements.length - 1
@@ -207,28 +311,30 @@ export default function GamePickerModal({
 
       if (
         event.shiftKey &&
-        document.activeElement === firstElement
+        document.activeElement ===
+          firstElement
       ) {
         event.preventDefault();
-        lastElement.focus();
+        lastElement?.focus();
       } else if (
         !event.shiftKey &&
-        document.activeElement === lastElement
+        document.activeElement ===
+          lastElement
       ) {
         event.preventDefault();
-        firstElement.focus();
+        firstElement?.focus();
       }
     };
 
     document.addEventListener(
       "keydown",
-      handleKeyDown
+      handleKeyDown,
     );
 
     return () => {
       document.removeEventListener(
         "keydown",
-        handleKeyDown
+        handleKeyDown,
       );
     };
   }, [isOpen, onClose]);
@@ -238,19 +344,24 @@ export default function GamePickerModal({
   }
 
   const handleBackdropClick = (
-    event: MouseEvent<HTMLDivElement>
+    event: MouseEvent<HTMLDivElement>,
   ) => {
-    if (event.target === event.currentTarget) {
+    if (
+      event.target ===
+      event.currentTarget
+    ) {
       onClose();
     }
   };
 
   const handleSelectGame = (
-    game: GameDnaGame
+    game: GameDnaGame,
   ) => {
     if (
       isComplete ||
-      selectedGameIdSet.has(game.id)
+      selectedGameIdSet.has(
+        game.id,
+      )
     ) {
       return;
     }
@@ -259,27 +370,60 @@ export default function GamePickerModal({
 
     if (closeOnSelect) {
       onClose();
-    } else {
-      setSearchQuery("");
-
-      window.requestAnimationFrame(() => {
-        searchInputRef.current?.focus();
-      });
+      return;
     }
+
+    setSearchQuery("");
+
+    window.requestAnimationFrame(
+      () => {
+        resultsScrollRef.current?.scrollTo({
+          top: 0,
+        });
+
+        searchInputRef.current?.focus();
+      },
+    );
   };
 
   const clearSearch = () => {
     setSearchQuery("");
 
-    window.requestAnimationFrame(() => {
-      searchInputRef.current?.focus();
-    });
+    window.requestAnimationFrame(
+      () => {
+        resultsScrollRef.current?.scrollTo({
+          top: 0,
+        });
+
+        searchInputRef.current?.focus();
+      },
+    );
   };
 
-  const remainingCount = Math.max(
-    0,
-    normalizedRequiredCount - selectedCount
-  );
+  const remainingCount =
+    Math.max(
+      0,
+      normalizedRequiredCount -
+        selectedCount,
+    );
+
+  const modalTitle =
+    targetSlotNumber
+      ? `Choose a game for position ${targetSlotNumber}`
+      : "Add a game to your grid";
+
+  const resultStatus =
+    buildResultStatus({
+      isComplete,
+      hasQuery:
+        Boolean(
+          searchQuery.trim(),
+        ),
+      shownCount:
+        searchResults.length,
+      totalCount:
+        resultState.total,
+    });
 
   return (
     <div
@@ -289,7 +433,9 @@ export default function GamePickerModal({
         "bg-slate-950/60 backdrop-blur-[2px]",
         "sm:items-center sm:p-5",
       ].join(" ")}
-      onMouseDown={handleBackdropClick}
+      onMouseDown={
+        handleBackdropClick
+      }
       role="presentation"
     >
       <div
@@ -297,7 +443,9 @@ export default function GamePickerModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        aria-describedby={descriptionId}
+        aria-describedby={
+          descriptionId
+        }
         tabIndex={-1}
         className={[
           "flex w-full flex-col overflow-hidden",
@@ -322,7 +470,7 @@ export default function GamePickerModal({
                 id={titleId}
                 className="mt-1 text-xl font-black tracking-tight text-slate-950 sm:text-2xl"
               >
-                Add a game to your grid
+                {modalTitle}
               </h2>
 
               <p
@@ -330,8 +478,8 @@ export default function GamePickerModal({
                 className="mt-1 text-xs leading-5 text-slate-500 sm:text-sm"
               >
                 {targetSlotNumber
-                  ? `Choose the game for position ${targetSlotNumber}.`
-                  : "Search for a title and add it to your favorite-games grid."}
+                  ? "Search or browse every available game, then choose one for this grid position."
+                  : "Search or browse every available game and add one to your favorite-games grid."}
               </p>
             </div>
 
@@ -356,7 +504,7 @@ export default function GamePickerModal({
 
           <div className="px-4 pb-4 sm:px-6">
             <label
-              htmlFor="game-picker-search"
+              htmlFor={searchInputId}
               className="sr-only"
             >
               Search the game library
@@ -367,18 +515,22 @@ export default function GamePickerModal({
 
               <input
                 ref={searchInputRef}
-                id="game-picker-search"
+                id={searchInputId}
                 type="search"
                 value={searchQuery}
                 onChange={(event) =>
-                  setSearchQuery(event.target.value)
+                  setSearchQuery(
+                    event.target.value,
+                  )
                 }
                 placeholder="Search by game title"
                 autoComplete="off"
                 autoCapitalize="off"
                 spellCheck={false}
                 disabled={isComplete}
-                aria-describedby={resultsStatusId}
+                aria-describedby={
+                  resultsStatusId
+                }
                 className={[
                   "min-h-12 w-full rounded-2xl",
                   "border border-slate-300 bg-white",
@@ -393,7 +545,8 @@ export default function GamePickerModal({
                 ].join(" ")}
               />
 
-              {searchQuery && !isComplete ? (
+              {searchQuery &&
+              !isComplete ? (
                 <button
                   type="button"
                   onClick={clearSearch}
@@ -421,26 +574,21 @@ export default function GamePickerModal({
                 className="text-xs font-bold text-slate-500"
                 aria-live="polite"
               >
-                {isComplete
-                  ? "Your grid is already complete."
-                  : searchQuery.trim()
-                    ? `${searchResults.length} ${
-                        searchResults.length === 1
-                          ? "result"
-                          : "results"
-                      }`
-                    : "Popular choices"}
+                {resultStatus}
               </p>
 
               <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-700">
                 {selectedCount} /{" "}
-                {normalizedRequiredCount}
+                {
+                  normalizedRequiredCount
+                }
               </span>
             </div>
           </div>
         </div>
 
         <div
+          ref={resultsScrollRef}
           className={[
             "min-h-0 flex-1 overflow-y-auto",
             "bg-slate-50 px-3 py-3",
@@ -448,18 +596,25 @@ export default function GamePickerModal({
           ].join(" ")}
         >
           {isComplete ? (
-            <CompleteGridNotice onClose={onClose} />
-          ) : searchResults.length > 0 ? (
+            <CompleteGridNotice
+              onClose={onClose}
+            />
+          ) : searchResults.length >
+            0 ? (
             <div className="grid gap-2 sm:grid-cols-2">
-              {searchResults.map((game) => (
-                <GamePickerResult
-                  key={game.id}
-                  game={game}
-                  onSelect={() =>
-                    handleSelectGame(game)
-                  }
-                />
-              ))}
+              {searchResults.map(
+                (game) => (
+                  <GamePickerResult
+                    key={game.id}
+                    game={game}
+                    onSelect={() =>
+                      handleSelectGame(
+                        game,
+                      )
+                    }
+                  />
+                ),
+              )}
             </div>
           ) : (
             <EmptySearchState
@@ -475,7 +630,8 @@ export default function GamePickerModal({
               {isComplete
                 ? "Remove a game before adding another."
                 : `${remainingCount} ${
-                    remainingCount === 1
+                    remainingCount ===
+                    1
                       ? "position"
                       : "positions"
                   } remaining`}
@@ -515,15 +671,20 @@ function GamePickerResult({
 }) {
   const metadata = [
     game.releaseYear,
-    ...(game.genres ?? []).slice(0, 2),
+    ...(game.genres ?? []).slice(
+      0,
+      2,
+    ),
   ]
     .filter(
       (
-        value
-      ): value is string | number =>
+        value,
+      ): value is
+        | string
+        | number =>
         value !== undefined &&
         value !== null &&
-        value !== ""
+        value !== "",
     )
     .join(" · ");
 
@@ -531,7 +692,7 @@ function GamePickerResult({
     <button
       type="button"
       onClick={onSelect}
-      aria-label={`Add ${game.title} to your grid`}
+      aria-label={`Choose ${game.title} for your grid`}
       className={[
         "group flex w-full items-center gap-3",
         "rounded-2xl border border-slate-200",
@@ -549,10 +710,11 @@ function GamePickerResult({
     >
       <div className="relative h-[72px] w-12 shrink-0 overflow-hidden rounded-lg bg-slate-200">
         <Image
-          src={game.cover}
-          alt=""
+          src={game.image ?? game.cover}
+          alt={`${game.title} game cover`}
           fill
           sizes="48px"
+          quality={76}
           className="object-cover"
         />
       </div>
@@ -606,8 +768,9 @@ function CompleteGridNotice({
       </h3>
 
       <p className="mt-2 text-sm leading-6 text-slate-600">
-        Close the picker and remove or replace one
-        of your selected games before adding another.
+        Close the picker and remove or
+        replace one of your selected
+        games before adding another.
       </p>
 
       <button
@@ -651,7 +814,7 @@ function EmptySearchState({
       <p className="mt-2 text-sm leading-6 text-slate-500">
         {query.trim()
           ? `We could not find “${query.trim()}”. Try a shorter title, another spelling, or an alternate name.`
-          : "Start typing a game title to search the library."}
+          : "No unselected games are currently available."}
       </p>
 
       {query.trim() ? (
@@ -669,49 +832,79 @@ function EmptySearchState({
 
 function calculateSearchScore(
   game: GameDnaGame,
-  normalizedQuery: string
+  normalizedQuery: string,
 ) {
   const normalizedTitle =
-    normalizeSearchText(game.title);
+    normalizeSearchText(
+      game.title,
+    );
 
-  const normalizedAliases = (
-    game.aliases ?? []
-  ).map(normalizeSearchText);
+  const normalizedAliases =
+    (game.aliases ?? []).map(
+      normalizeSearchText,
+    );
 
   const titleWords =
     normalizedTitle.split(" ");
 
   let score = 0;
 
-  if (normalizedTitle === normalizedQuery) {
+  if (
+    normalizedTitle ===
+    normalizedQuery
+  ) {
     score = 120;
   } else if (
-    normalizedTitle.startsWith(normalizedQuery)
+    normalizedTitle.startsWith(
+      normalizedQuery,
+    )
   ) {
     score = 95;
   } else if (
     titleWords.some((word) =>
-      word.startsWith(normalizedQuery)
+      word.startsWith(
+        normalizedQuery,
+      ),
     )
   ) {
     score = 75;
   } else if (
-    normalizedTitle.includes(normalizedQuery)
+    normalizedTitle.includes(
+      normalizedQuery,
+    )
   ) {
     score = 60;
   }
 
-  for (const alias of normalizedAliases) {
-    if (alias === normalizedQuery) {
-      score = Math.max(score, 100);
-    } else if (
-      alias.startsWith(normalizedQuery)
+  for (
+    const alias of
+    normalizedAliases
+  ) {
+    if (
+      alias === normalizedQuery
     ) {
-      score = Math.max(score, 75);
+      score = Math.max(
+        score,
+        100,
+      );
     } else if (
-      alias.includes(normalizedQuery)
+      alias.startsWith(
+        normalizedQuery,
+      )
     ) {
-      score = Math.max(score, 50);
+      score = Math.max(
+        score,
+        75,
+      );
+    } else if (
+      alias.includes(
+        normalizedQuery,
+      )
+    ) {
+      score = Math.max(
+        score,
+        50,
+      );
     }
   }
 
@@ -720,20 +913,85 @@ function calculateSearchScore(
       0,
       12 -
         Math.floor(
-          normalizedTitle.length / 8
-        )
+          normalizedTitle.length /
+            8,
+        ),
     );
   }
 
   return score;
 }
 
-function normalizeSearchText(value: string) {
+function applyOptionalLimit<T>(
+  items: readonly T[],
+  limit: number | undefined,
+): T[] {
+  if (
+    limit === undefined ||
+    !Number.isFinite(limit)
+  ) {
+    return [...items];
+  }
+
+  const normalizedLimit =
+    Math.max(
+      0,
+      Math.floor(limit),
+    );
+
+  return items.slice(
+    0,
+    normalizedLimit,
+  );
+}
+
+function buildResultStatus({
+  isComplete,
+  hasQuery,
+  shownCount,
+  totalCount,
+}: {
+  isComplete: boolean;
+  hasQuery: boolean;
+  shownCount: number;
+  totalCount: number;
+}) {
+  if (isComplete) {
+    return "Your grid is already complete.";
+  }
+
+  const noun =
+    hasQuery
+      ? totalCount === 1
+        ? "result"
+        : "results"
+      : totalCount === 1
+        ? "game available"
+        : "games available";
+
+  if (
+    shownCount < totalCount
+  ) {
+    return `Showing ${shownCount} of ${totalCount} ${noun}`;
+  }
+
+  return `${totalCount} ${noun}`;
+}
+
+function normalizeSearchText(
+  value: string,
+) {
   return value
     .toLocaleLowerCase("en-US")
     .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
+    .replace(
+      /[\u0300-\u036f]/g,
+      "",
+    )
+    .replace(
+      /[^a-z0-9]+/g,
+      " ",
+    )
     .trim();
 }
 

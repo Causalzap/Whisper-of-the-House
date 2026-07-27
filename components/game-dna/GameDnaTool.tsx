@@ -12,12 +12,15 @@ import GameDnaResults from "@/components/game-dna/GameDnaResults";
 import GamePickerModal from "@/components/game-dna/GamePickerModal";
 import RecommendedGames from "@/components/game-dna/RecommendedGames";
 import SelectedGameGrid from "@/components/game-dna/SelectedGameGrid";
+import GameDnaNextStep from "@/components/game-dna/GameDnaNextStep";
 
 import {
   buildGameDnaProfile,
   buildGuideRecommendations,
   calculateAverageTraits,
   type GameDnaGame,
+  type GameDnaProfileData,
+  type GameDnaTraits,
 } from "@/lib/game-dna/recommendations";
 
 export {
@@ -31,9 +34,17 @@ export type {
 } from "@/lib/game-dna/recommendations";
 
 type GameDnaToolProps = {
-  games: GameDnaGame[];
+  games: readonly GameDnaGame[];
   requiredCount?: number;
   className?: string;
+};
+
+type StoredGameDnaProfile = {
+  version: 1;
+  selectedGameIds: string[];
+  averageTraits: GameDnaTraits;
+  profile: GameDnaProfileData;
+  generatedAt: string;
 };
 
 type GtagFunction = (
@@ -52,6 +63,9 @@ type GtagFunction = (
  */
 const STORAGE_KEY =
   "whisper-game-dna-selected-games-v3";
+
+export const GAME_DNA_PROFILE_STORAGE_KEY =
+  "whisper-game-dna-profile-v1";
 
 export default function GameDnaTool({
   games,
@@ -292,16 +306,23 @@ export default function GameDnaTool({
   const invalidateResults =
     useCallback(() => {
       setHasRevealed(false);
+
+      try {
+        window.localStorage.removeItem(
+          GAME_DNA_PROFILE_STORAGE_KEY
+        );
+      } catch {
+        // localStorage 不可用时不阻断工具。
+      }
     }, []);
 
   /**
    * 打开游戏选择器。
    *
-   * 当前数据结构使用连续数组，不允许九宫格中间留空，
-   * 所以无论点击哪个空格，都会填入下一个可用位置。
+   * 空位点击会填写该位置；普通追加时使用下一个位置。
    */
   const openGamePicker = useCallback(
-    (_requestedSlotNumber?: number) => {
+    (requestedSlotNumber?: number) => {
       if (
         selectedCount >=
         normalizedRequiredCount
@@ -309,11 +330,28 @@ export default function GameDnaTool({
         return;
       }
 
-      const nextAvailableSlot =
+      const fallbackSlotNumber =
         selectedCount + 1;
 
+      const nextSlotNumber =
+        typeof requestedSlotNumber ===
+          "number" &&
+        Number.isFinite(
+          requestedSlotNumber
+        )
+          ? Math.max(
+              1,
+              Math.min(
+                normalizedRequiredCount,
+                Math.floor(
+                  requestedSlotNumber
+                )
+              )
+            )
+          : fallbackSlotNumber;
+
       setTargetSlotNumber(
-        nextAvailableSlot
+        nextSlotNumber
       );
 
       setIsPickerOpen(true);
@@ -322,8 +360,9 @@ export default function GameDnaTool({
         "game_dna_picker_opened",
         {
           target_slot:
-            nextAvailableSlot,
-          selected_count: selectedCount,
+            nextSlotNumber,
+          selected_count:
+            selectedCount,
         }
       );
     },
@@ -358,6 +397,10 @@ export default function GameDnaTool({
       const nextSelectedCount =
         selectedGameIds.length + 1;
 
+      const resolvedTargetSlot =
+        targetSlotNumber ??
+        nextSelectedCount;
+
       setSelectedGameIds(
         (currentGameIds) => {
           if (
@@ -370,10 +413,26 @@ export default function GameDnaTool({
             return currentGameIds;
           }
 
-          return [
+          const insertionIndex =
+            Math.max(
+              0,
+              Math.min(
+                resolvedTargetSlot - 1,
+                currentGameIds.length
+              )
+            );
+
+          const nextGameIds = [
             ...currentGameIds,
-            gameId,
           ];
+
+          nextGameIds.splice(
+            insertionIndex,
+            0,
+            gameId
+          );
+
+          return nextGameIds;
         }
       );
 
@@ -387,8 +446,7 @@ export default function GameDnaTool({
           selected_count:
             nextSelectedCount,
           target_slot:
-            targetSlotNumber ??
-            nextSelectedCount,
+            resolvedTargetSlot,
         }
       );
 
@@ -416,7 +474,20 @@ export default function GameDnaTool({
 
   const removeGame = useCallback(
     (gameId: string) => {
-      const game = gameMap.get(gameId);
+      const removedIndex =
+        selectedGameIds.indexOf(
+          gameId
+        );
+
+      if (removedIndex === -1) {
+        return;
+      }
+
+      const game =
+        gameMap.get(gameId);
+
+      const removedSlotNumber =
+        removedIndex + 1;
 
       setSelectedGameIds(
         (currentGameIds) =>
@@ -435,16 +506,34 @@ export default function GameDnaTool({
 
       invalidateResults();
 
+      /**
+       * 删除后直接进入替换流程。
+       * 新选择的游戏会通过 addGame 插回原来的位置。
+       */
+      setTargetSlotNumber(
+        removedSlotNumber
+      );
+
+      setIsPickerOpen(true);
+
       trackEvent(
         "game_dna_game_removed",
         {
           game_id: gameId,
           game_title:
             game?.title ?? gameId,
+          removed_slot:
+            removedSlotNumber,
+          replacement_picker_opened:
+            true,
         }
       );
     },
-    [gameMap, invalidateResults]
+    [
+      gameMap,
+      invalidateResults,
+      selectedGameIds,
+    ]
   );
 
   const moveGame = useCallback(
@@ -602,13 +691,49 @@ export default function GameDnaTool({
         return;
       }
 
+      const nextProfile =
+        buildGameDnaProfile(
+          averageTraits
+        );
+
       setHasRevealed(true);
+
+      const storedProfile:
+        StoredGameDnaProfile = {
+          version: 1,
+          selectedGameIds: [
+            ...selectedGameIds,
+          ],
+          averageTraits: {
+            ...averageTraits,
+          },
+          profile: nextProfile,
+          generatedAt:
+            new Date().toISOString(),
+        };
+
+      try {
+        window.localStorage.setItem(
+          GAME_DNA_PROFILE_STORAGE_KEY,
+          JSON.stringify(
+            storedProfile
+          )
+        );
+      } catch {
+        // localStorage 不可用时仍正常展示结果。
+      }
 
       trackEvent(
         "game_dna_revealed",
         {
           selected_count:
             selectedCount,
+          primary_trait:
+            nextProfile.traits[0]?.id ??
+            "unknown",
+          secondary_trait:
+            nextProfile.traits[1]?.id ??
+            "unknown",
         }
       );
 
@@ -623,8 +748,10 @@ export default function GameDnaTool({
         }
       );
     }, [
+      averageTraits,
       isComplete,
       selectedCount,
+      selectedGameIds,
     ]);
 
   const resetTool = useCallback(() => {
@@ -637,6 +764,10 @@ export default function GameDnaTool({
     try {
       window.localStorage.removeItem(
         STORAGE_KEY
+      );
+
+      window.localStorage.removeItem(
+        GAME_DNA_PROFILE_STORAGE_KEY
       );
     } catch {
       // localStorage 不可用时忽略。
@@ -730,6 +861,18 @@ export default function GameDnaTool({
               onReset={resetTool}
             />
           </div>
+
+          <GameDnaNextStep
+            isVisible={
+              hasRevealed && isComplete
+            }
+            profileTitle={
+              profile?.title
+            }
+            selectedGameCount={
+              selectedCount
+            }
+          />
 
           <RecommendedGames
             recommendations={

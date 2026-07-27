@@ -4,6 +4,13 @@ import type {
   GameDnaTraits,
 } from "@/lib/game-dna/recommendations";
 
+/**
+ * Platforms currently exposed as filters in the quick recommender UI.
+ *
+ * The shared IGDB catalog may also contain "mobile" and "web".
+ * Those catalog values remain valid on GameDnaGame, but they do not
+ * need to appear as selectable filters on this page.
+ */
 export type GamePlatform =
   | "any"
   | "pc"
@@ -38,25 +45,22 @@ export type RecommendationRole =
   | "more-match"
   | "surprise";
 
-export type RecommenderGame = GameDnaGame & {
-  /**
-   * Optional platform metadata.
-   *
-   * When this field is missing, the game remains eligible instead of being
-   * excluded by a platform filter.
-   */
-  platforms?: Array<Exclude<GamePlatform, "any">>;
-
-  /**
-   * Optional play-mode metadata.
-   */
-  playModes?: Array<Exclude<GamePlayMode, "any">>;
-
-  /**
-   * Optional session-length metadata.
-   */
-  sessionStyles?: GameSessionStyle[];
-};
+/**
+ * The quick recommender uses the shared Game DNA game shape directly.
+ *
+ * Do not redefine `platforms` or `playModes` here. GameDnaGame already
+ * carries the normalized values from the shared IGDB catalog, including
+ * possible "mobile" and "web" platform values. Narrowing that property
+ * here would make the shared catalog incompatible with this component.
+ */
+export type RecommenderGame =
+  GameDnaGame & {
+    /**
+     * Optional session-length metadata maintained by the quick
+     * recommender when it is available.
+     */
+    sessionStyles?: GameSessionStyle[];
+  };
 
 export type ExperienceOption = {
   id: ExperiencePreferenceId;
@@ -97,14 +101,16 @@ export type RecommendationCandidate = {
   closestFavorite: ClosestFavoriteMatch | null;
 };
 
-export type RecommendationResult = RecommendationCandidate & {
-  role: RecommendationRole;
-  explanation: RecommendationExplanation;
-};
+export type RecommendationResult =
+  RecommendationCandidate & {
+    role: RecommendationRole;
+    explanation: RecommendationExplanation;
+  };
 
 export type RecommendationContext = {
   selectedGames: RecommenderGame[];
-  selectedExperienceIds: ExperiencePreferenceId[];
+  selectedExperienceIds:
+    ExperiencePreferenceId[];
   platform: GamePlatform;
   playMode: GamePlayMode;
   userTraits: GameDnaTraits;

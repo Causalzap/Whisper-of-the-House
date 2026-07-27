@@ -76,15 +76,19 @@ export default function SelectedGameGrid({
       <header className="flex items-center justify-between gap-4 border-b border-slate-100 px-4 py-3 sm:px-5 sm:py-4">
         <div className="min-w-0">
           <p className="text-[11px] font-black uppercase tracking-[0.18em] text-sky-700">
-            Your Games
+          START WITH YOUR FAVORITES
           </p>
 
           <h2
             id="selected-games-title"
             className="mt-1 text-lg font-black tracking-tight text-slate-950 sm:text-xl"
           >
-            Build Your 3×3 Grid
+            Which 9 Games Feel Most Like You?
           </h2>
+
+          <p className="mt-2 max-w-xl text-sm leading-6 text-slate-500">
+            Pick the games you know well and would happily play again.
+          </p>
         </div>
 
         <div

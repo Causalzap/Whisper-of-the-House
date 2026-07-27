@@ -22,21 +22,7 @@ import type {
   RecommenderGame,
 } from "@/lib/game-recommender/types";
 
-export default function RecommenderForm({
-  selectedGames,
-  maximumFavoriteGames,
-  canAddMoreGames,
-  platform,
-  playMode,
-  selectedExperienceIds,
-  canGenerate,
-  onOpenPicker,
-  onRemoveGame,
-  onChangePlatform,
-  onChangePlayMode,
-  onToggleExperience,
-  onGenerate,
-}: {
+type RecommenderFormProps = {
   selectedGames: RecommenderGame[];
   maximumFavoriteGames: number;
   canAddMoreGames: boolean;
@@ -56,7 +42,38 @@ export default function RecommenderForm({
     experienceId: ExperiencePreferenceId,
   ) => void;
   onGenerate: () => void;
-}) {
+};
+
+export default function RecommenderForm({
+  selectedGames,
+  maximumFavoriteGames,
+  canAddMoreGames,
+  platform,
+  playMode,
+  selectedExperienceIds,
+  canGenerate,
+  onOpenPicker,
+  onRemoveGame,
+  onChangePlatform,
+  onChangePlayMode,
+  onToggleExperience,
+  onGenerate,
+}: RecommenderFormProps) {
+  const selectedMoodCount =
+    selectedExperienceIds.length;
+
+  /**
+   * Current Mood is required.
+   *
+   * This local check prevents the button from
+   * becoming active if a parent component
+   * accidentally passes canGenerate=true
+   * without a selected mood.
+   */
+  const isReadyToGenerate =
+    canGenerate &&
+    selectedMoodCount > 0;
+
   return (
     <section
       aria-labelledby="quick-recommender-title"
@@ -77,17 +94,16 @@ export default function RecommenderForm({
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              Tell us what you want to play
-              today. Adding games you already
-              like is optional, but it makes
-              similar-game recommendations
-              more precise.
+              Choose the mood that fits today,
+              then use platform, play mode, and
+              favorite games to narrow the
+              shortlist.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2 text-[11px] font-black">
             <span className="rounded-full bg-sky-50 px-3 py-1.5 text-sky-700">
-              1–3 quick choices
+              1–3 mood choices
             </span>
 
             <span className="rounded-full bg-slate-100 px-3 py-1.5 text-slate-600">
@@ -100,9 +116,9 @@ export default function RecommenderForm({
       <div className="space-y-7 p-4 sm:p-6">
         <OptionSection
           step="01"
-          eyebrow="Current Mood"
+          eyebrow="Current Mood · Required"
           title="What kind of game do you want today?"
-          description="Choose up to three. This is the strongest signal for what fits your current session."
+          description="Choose at least one, up to three. This is the main signal for what fits your current session."
         >
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {EXPERIENCE_OPTIONS.map(
@@ -114,7 +130,7 @@ export default function RecommenderForm({
 
                 const isDisabled =
                   !isSelected &&
-                  selectedExperienceIds.length >=
+                  selectedMoodCount >=
                     MAXIMUM_MOOD_SELECTIONS;
 
                 return (
@@ -133,6 +149,23 @@ export default function RecommenderForm({
               },
             )}
           </div>
+
+          <p
+            role="status"
+            aria-live="polite"
+            className={[
+              "mt-2 text-xs font-semibold",
+              selectedMoodCount > 0
+                ? "text-sky-700"
+                : "text-amber-700",
+            ].join(" ")}
+          >
+            {selectedMoodCount} /{" "}
+            {MAXIMUM_MOOD_SELECTIONS} selected
+            {selectedMoodCount === 0
+              ? " · Choose at least one mood to continue."
+              : ""}
+          </p>
         </OptionSection>
 
         <OptionSection
@@ -203,32 +236,45 @@ export default function RecommenderForm({
           <button
             type="button"
             onClick={onGenerate}
-            disabled={!canGenerate}
+            disabled={!isReadyToGenerate}
+            aria-describedby="recommender-generate-help"
             className={[
-              "inline-flex min-h-12 w-full items-center justify-center",
-              "rounded-full px-5 py-3 text-sm font-black transition",
-              canGenerate
+              "inline-flex min-h-12 w-full",
+              "items-center justify-center",
+              "rounded-full px-5 py-3",
+              "text-sm font-black transition",
+              isReadyToGenerate
                 ? [
                     "bg-sky-600 text-white shadow-sm",
-                    "hover:-translate-y-0.5 hover:bg-sky-700 hover:shadow-md",
-                    "focus-visible:outline-none focus-visible:ring-2",
-                    "focus-visible:ring-sky-500 focus-visible:ring-offset-2",
+                    "hover:-translate-y-0.5",
+                    "hover:bg-sky-700",
+                    "hover:shadow-md",
+                    "focus-visible:outline-none",
+                    "focus-visible:ring-2",
+                    "focus-visible:ring-sky-500",
+                    "focus-visible:ring-offset-2",
                   ].join(" ")
-                : "cursor-not-allowed bg-slate-100 text-slate-400",
+                : [
+                    "cursor-not-allowed",
+                    "bg-slate-100",
+                    "text-slate-400",
+                  ].join(" "),
             ].join(" ")}
           >
-            {canGenerate
+            {isReadyToGenerate
               ? "Find My Next Game"
-              : "Choose a Mood or Favorite Game"}
+              : "Choose at Least One Mood"}
 
             <SparkIcon />
           </button>
 
-          <p className="mt-2 text-center text-[11px] font-semibold leading-5 text-slate-400">
-            Platform and play mode work as
-            filters. Choose at least one mood
-            or favorite game to create a
-            meaningful recommendation.
+          <p
+            id="recommender-generate-help"
+            className="mt-2 text-center text-[11px] font-semibold leading-5 text-slate-400"
+          >
+            Choose at least one mood.
+            Platform, play mode, and favorite
+            games refine the recommendation.
           </p>
         </div>
       </div>

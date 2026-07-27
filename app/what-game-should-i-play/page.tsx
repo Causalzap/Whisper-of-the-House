@@ -4,20 +4,31 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import QuickGameRecommender from "@/components/game-recommender/QuickGameRecommender";
+import IgdbAttribution from "@/components/site/IgdbAttribution";
 
-import { gameDnaGames } from "@/data/game-dna/games";
+import {
+  GAMES,
+} from "@/data/game-recommender/games";
 
-const siteUrl =
-  "https://www.whisperofthehouse.com";
+import {
+  toGameDnaGames,
+} from "@/lib/game-dna/recommendations";
 
-const pageUrl =
-  `${siteUrl}/what-game-should-i-play`;
+const siteName = "Whisper of the House";
+const siteUrl = "https://www.whisperofthehouse.com";
+const pagePath = "/what-game-should-i-play";
+const pageUrl = `${siteUrl}${pagePath}`;
+const recommenderGames =
+  toGameDnaGames(GAMES);
+
+const gameCount =
+  recommenderGames.length;
 
 const metadataTitle =
-  "What Game Should I Play? Free Game Recommendation Quiz";
+  "What Game Should I Play? Free Game Recommender";
 
 const metadataDescription =
-  "Choose games you like, your platform, and how you want to play. Get personalized video game recommendations instantly. Free and no login.";
+  `Pick games you already enjoy, choose a platform and playstyle, and get personalized recommendations from ${gameCount} PC and console games. Free, with no sign-in.`;
 
 const pageShellClassName = [
   "mx-auto w-full",
@@ -27,8 +38,11 @@ const pageShellClassName = [
 ].join(" ");
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+
   title: metadataTitle,
   description: metadataDescription,
+  applicationName: siteName,
 
   alternates: {
     canonical: pageUrl,
@@ -37,9 +51,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: pageUrl,
-    siteName: "Whisper of the House",
+    siteName,
     title: metadataTitle,
     description: metadataDescription,
+    locale: "en_US",
   },
 
   twitter: {
@@ -51,6 +66,14 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
@@ -59,167 +82,196 @@ const howItWorksItems = [
     number: "01",
     title: "Choose games you already like",
     description:
-      "Select up to three games that represent your taste. These choices give the recommender a starting point.",
+      "Pick up to three favorites. One is enough to start, while two or three usually produce a more specific shortlist.",
   },
   {
     number: "02",
-    title: "Tell us what you want today",
+    title: "Describe what fits today",
     description:
-      "Choose your platform, preferred play mode, and the kind of experience you are looking for right now.",
+      "Choose a platform, solo or multiplayer preference, and up to a few moods or playstyle priorities.",
   },
   {
     number: "03",
-    title: "Get personalized matches",
+    title: "Open your best matches",
     description:
-      "The recommender compares your choices with each game's playstyle traits and ranks the closest matches.",
+      "Review the strongest recommendations, compare why they fit, and jump into a guide hub when we have one.",
   },
-];
+] as const;
 
 const recommendationSignals = [
   {
     title: "Games you already enjoy",
     description:
-      "Your selected favorites reveal patterns in exploration, progression, combat, strategy, story, crafting, and other gameplay traits.",
+      "Your favorites help identify the kinds of exploration, combat, progression, strategy, story, crafting, and systems you tend to enjoy.",
   },
   {
-    title: "Your platform",
+    title: "What fits this session",
     description:
-      "Narrow the results to PC, Steam, PlayStation, Xbox, Nintendo Switch, or games available across multiple platforms.",
+      "A game that suits a long weekend may not suit a short evening. Platform, play mode, and current mood help narrow the list.",
   },
   {
-    title: "How you want to play",
+    title: "Useful next steps",
     description:
-      "Look for solo, co-op, multiplayer, relaxing, challenging, story-rich, strategic, or progression-focused games.",
+      "When one of the recommended games has a guide hub on this site, the result includes a direct route into practical help.",
   },
-];
+] as const;
 
 const faqItems = [
   {
     question: "What game should I play?",
     answer:
-      "Choose a few games you already enjoy, select your platform and current preferences, and the recommender will rank games that best match your taste.",
+      "Choose one to three games you already enjoy, then add any platform, play-mode, or mood preferences that matter today. The tool will create a ranked shortlist of games that fit those choices.",
   },
   {
-    question:
-      "How does the game recommendation quiz work?",
+    question: "Do I need to choose three favorite games?",
     answer:
-      "Each game is scored across gameplay traits such as exploration, progression, systems, crafting, story, combat, strategy, puzzle solving, survival, and social play. Your answers are compared with those scores to generate personalized matches.",
+      "No. One favorite game or one playstyle preference is enough to generate results. Adding more favorites usually makes the shortlist more specific.",
   },
   {
-    question:
-      "Can you recommend games based on games I already like?",
+    question: "How does the game recommendation quiz work?",
     answer:
-      "Yes. You can select up to three games you enjoy. The tool uses their shared gameplay traits as the foundation for your recommendations.",
+      "Each game has a human-reviewed playstyle profile covering exploration, progression, systems, crafting, story, combat, strategy, puzzles, survival, and social play. The tool compares your choices with those profiles and applies your platform and play-mode filters.",
   },
   {
-    question:
-      "What game should I play next on Steam?",
+    question: "Can it recommend games based on games I already like?",
     answer:
-      "Select PC or Steam as your platform preference. The recommender will prioritize matching PC games in the current library.",
+      "Yes. Your selected favorites form the starting point for the recommendation. Games you already selected are used as references and are not repeated as new recommendations.",
   },
   {
-    question:
-      "Are the game recommendations random?",
+    question: "What game should I play next on Steam or PC?",
     answer:
-      "No. Results are ranked using your selected games, platform, play mode, and gameplay preferences. A small wildcard option may be shown separately when it offers useful variety.",
+      "Choose PC or Steam in the platform options. The results will prioritize matching games that are available on PC in the current game pool.",
   },
   {
-    question:
-      "Do I need to create an account?",
+    question: "Are the recommendations random?",
     answer:
-      "No. The game recommendation quiz is free and does not require an account or login.",
+      "The main results are not random. They are ordered from the closest fit to the broader matches. A separate surprise option can surface another suitable game from outside the main shortlist.",
   },
   {
-    question:
-      "What is the difference between this tool and Game DNA?",
+    question: "Do I need to create an account?",
     answer:
-      "This page gives you a quick recommendation after a few choices. Game DNA asks you to select nine favorite games and creates a more detailed gaming playstyle profile.",
+      "No. The tool is free to use, requires no sign-in, and does not create a public profile. Your current selections remain in the browser while you use the page.",
   },
-];
+  {
+    question: "What is the difference between this tool and Game DNA?",
+    answer:
+      "This page is designed for a quick decision using up to three favorite games and a few current preferences. Game DNA uses a nine-game grid to create a more detailed playstyle profile before recommending what to play next.",
+  },
+] as const;
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "What Game Should I Play?",
-    url: pageUrl,
-    description: metadataDescription,
-    applicationCategory:
-      "EntertainmentApplication",
-    operatingSystem: "Any",
-    browserRequirements:
-      "Requires JavaScript and a modern web browser.",
-    isAccessibleForFree: true,
+const structuredData = {
+  "@context": "https://schema.org",
 
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-
-    creator: {
+  "@graph": [
+    {
       "@type": "Organization",
-      name: "Whisper of the House",
-      url: siteUrl,
+      "@id": `${siteUrl}/#organization`,
+      name: siteName,
+      url: `${siteUrl}/`,
     },
 
-    featureList: [
-      "Personalized video game recommendations",
-      "Recommendations based on games you like",
-      "Platform preference filtering",
-      "Solo, co-op, and multiplayer filtering",
-      "Gameplay mood and playstyle matching",
-      "Matching game guide hubs",
-      "No account required",
-    ],
-  },
-
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: siteName,
+      url: `${siteUrl}/`,
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
       },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "What Game Should I Play?",
-        item: pageUrl,
-      },
-    ],
-  },
+      inLanguage: "en",
+    },
 
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: metadataTitle,
+      description: metadataDescription,
+      isPartOf: {
+        "@id": `${siteUrl}/#website`,
       },
-    })),
-  },
-];
+      about: {
+        "@id": `${pageUrl}#application`,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+      inLanguage: "en",
+    },
+
+    {
+      "@type": "WebApplication",
+      "@id": `${pageUrl}#application`,
+      name: "What Game Should I Play?",
+      url: pageUrl,
+      description: metadataDescription,
+      applicationCategory: "EntertainmentApplication",
+      operatingSystem: "Any",
+      browserRequirements:
+        "Requires JavaScript and a modern web browser.",
+      isAccessibleForFree: true,
+      creator: {
+        "@id": `${siteUrl}/#organization`,
+      },
+      featureList: [
+        "Recommendations based on games you already enjoy",
+        "Platform preference filtering",
+        "Solo, cooperative, and multiplayer filtering",
+        "Current mood and playstyle matching",
+        "Direct links to matching game guide hubs",
+        "No account required",
+      ],
+    },
+
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: `${siteUrl}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "What Game Should I Play?",
+          item: pageUrl,
+        },
+      ],
+    },
+
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
 
 export default function WhatGameShouldIPlayPage() {
   return (
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f3f6fa] text-slate-950">
+      <main
+        id="main-content"
+        className="min-h-screen bg-[#f3f6fa] text-slate-950"
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd).replace(
+            __html: JSON.stringify(structuredData).replace(
               /</g,
-              "\\u003c"
+              "\\u003c",
             ),
           }}
         />
@@ -234,7 +286,7 @@ export default function WhatGameShouldIPlayPage() {
 
         <FaqSection />
 
-        <OwnershipNotice />
+        <CreditsSection />
       </main>
 
       <Footer />
@@ -244,7 +296,10 @@ export default function WhatGameShouldIPlayPage() {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden border-b border-slate-200 bg-[#f4f8fc]">
+    <section
+      aria-labelledby="what-game-heading"
+      className="relative overflow-hidden border-b border-slate-200 bg-[#f4f8fc]"
+    >
       <div
         aria-hidden="true"
         className={[
@@ -282,7 +337,10 @@ function HeroSection() {
             /
           </span>
 
-          <span className="text-sky-700">
+          <span
+            aria-current="page"
+            className="text-sky-700"
+          >
             What Game Should I Play?
           </span>
         </nav>
@@ -290,10 +348,11 @@ function HeroSection() {
         <div className="mt-5 grid gap-7 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
           <div className="max-w-[850px]">
             <p className="text-[10px] font-black uppercase tracking-[0.26em] text-sky-700">
-              Free Game Recommendation Quiz
+              Free Game Recommender
             </p>
 
             <h1
+              id="what-game-heading"
               className={[
                 "mt-2 max-w-[850px]",
                 "text-4xl font-black leading-[1.06]",
@@ -312,17 +371,16 @@ function HeroSection() {
                 "sm:text-lg sm:leading-8",
               ].join(" ")}
             >
-              Choose a few games you enjoy and tell us
-              what you want to play today. Get
-              personalized video game recommendations
-              based on your taste, platform, and preferred
-              playstyle.
+              Start with games you already enjoy, then add the
+              platform, play mode, or mood that fits today. The
+              tool turns those choices into a practical shortlist
+              instead of another generic list of popular games.
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-bold text-slate-500">
               <span className="inline-flex items-center gap-2">
                 <CheckIcon />
-                Personalized matches
+                {gameCount} games to compare
               </span>
 
               <span className="inline-flex items-center gap-2">
@@ -332,7 +390,7 @@ function HeroSection() {
 
               <span className="inline-flex items-center gap-2">
                 <CheckIcon />
-                No login
+                No sign-in
               </span>
             </div>
           </div>
@@ -369,6 +427,7 @@ function ToolSection() {
   return (
     <section
       id="game-recommender"
+      aria-label="Game recommendation tool"
       className={[
         "scroll-mt-20",
         "bg-[linear-gradient(180deg,#eaf1f7_0%,#f5f8fb_100%)]",
@@ -389,7 +448,9 @@ function ToolSection() {
         >
           <div className="min-w-0">
             <QuickGameRecommender
-              games={gameDnaGames}
+              games={recommenderGames}
+              maximumFavoriteGames={3}
+              resultLimit={8}
             />
           </div>
 
@@ -489,12 +550,13 @@ function PrivacyCard() {
 
         <div className="min-w-0">
           <h2 className="text-sm font-black text-slate-950">
-            No account required
+            Private by default
           </h2>
 
           <p className="mt-1.5 text-xs leading-5 text-slate-600">
-            Use the game recommendation quiz without
-            creating an account or public profile.
+            No sign-in, account, or public profile is required.
+            Your current choices stay in this browser while you
+            use the tool.
           </p>
         </div>
       </div>
@@ -578,7 +640,10 @@ function HowItWorksMobile() {
 
 function RecommendationSignalsSection() {
   return (
-    <section className="border-t border-slate-200 bg-white">
+    <section
+      aria-labelledby="recommendation-signals-heading"
+      className="border-t border-slate-200 bg-white"
+    >
       <div
         className={[
           pageShellClassName,
@@ -587,56 +652,52 @@ function RecommendationSignalsSection() {
       >
         <div className="max-w-3xl">
           <p className="text-[10px] font-black uppercase tracking-[0.22em] text-sky-700">
-            Personalized Recommendations
+            Built Around Your Session
           </p>
 
-          <h2 className="mt-2 text-3xl font-black tracking-tight text-slate-950">
+          <h2
+            id="recommendation-signals-heading"
+            className="mt-2 text-3xl font-black tracking-tight text-slate-950"
+          >
             Find games based on games you like
           </h2>
 
           <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
-            The recommendations are not picked from a
-            random list. They are ranked using the games
-            you enjoy and the kind of experience you want
-            to play next.
+            The shortlist starts with your taste, then adjusts
+            for what you are actually in the mood to play now.
           </p>
         </div>
 
         <div className="mt-7 grid gap-4 md:grid-cols-3">
-          {recommendationSignals.map(
-            (item, index) => (
-              <article
-                key={item.title}
+          {recommendationSignals.map((item, index) => (
+            <article
+              key={item.title}
+              className={[
+                "rounded-[1.5rem]",
+                "border border-slate-200",
+                "bg-[#f7f9fc] p-5",
+              ].join(" ")}
+            >
+              <span
                 className={[
-                  "rounded-[1.5rem]",
-                  "border border-slate-200",
-                  "bg-[#f7f9fc] p-5",
+                  "flex h-9 w-9 items-center",
+                  "justify-center rounded-full",
+                  "bg-sky-50 text-xs font-black",
+                  "text-sky-700",
                 ].join(" ")}
               >
-                <span
-                  className={[
-                    "flex h-9 w-9 items-center",
-                    "justify-center rounded-full",
-                    "bg-sky-50 text-xs font-black",
-                    "text-sky-700",
-                  ].join(" ")}
-                >
-                  {String(index + 1).padStart(
-                    2,
-                    "0"
-                  )}
-                </span>
+                {String(index + 1).padStart(2, "0")}
+              </span>
 
-                <h3 className="mt-4 text-lg font-black text-slate-950">
-                  {item.title}
-                </h3>
+              <h3 className="mt-4 text-lg font-black text-slate-950">
+                {item.title}
+              </h3>
 
-                <p className="mt-2 text-sm leading-7 text-slate-600">
-                  {item.description}
-                </p>
-              </article>
-            )
-          )}
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                {item.description}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -645,7 +706,10 @@ function RecommendationSignalsSection() {
 
 function GameDnaSection() {
   return (
-    <section className="border-t border-slate-200 bg-[#eef4f9]">
+    <section
+      aria-labelledby="game-dna-next-step-heading"
+      className="border-t border-slate-200 bg-[#eef4f9]"
+    >
       <div
         className={[
           pageShellClassName,
@@ -668,14 +732,17 @@ function GameDnaSection() {
               Want a Deeper Profile?
             </p>
 
-            <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">
+            <h2
+              id="game-dna-next-step-heading"
+              className="mt-2 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl"
+            >
               Reveal your full Gaming DNA
             </h2>
 
             <p className="mt-3 text-sm leading-7 text-slate-600">
-              Pick nine favorite games to discover your
-              strongest playstyle traits, build a 3×3 grid,
-              and get a more detailed gaming profile.
+              Pick nine favorite games to reveal your strongest
+              playstyle traits, build a shareable 3×3 grid, and
+              get recommendations from a more detailed profile.
             </p>
           </div>
 
@@ -706,7 +773,10 @@ function GameDnaSection() {
 
 function FaqSection() {
   return (
-    <section className="border-t border-slate-200 bg-[#f7f9fc]">
+    <section
+      aria-labelledby="game-recommendation-faq-heading"
+      className="border-t border-slate-200 bg-[#f7f9fc]"
+    >
       <div
         className={[
           pageShellClassName,
@@ -725,14 +795,17 @@ function FaqSection() {
               Frequently Asked Questions
             </p>
 
-            <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">
+            <h2
+              id="game-recommendation-faq-heading"
+              className="mt-2 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl"
+            >
               Game Recommendation FAQ
             </h2>
 
             <p className="mt-3 max-w-sm text-sm leading-7 text-slate-600">
-              Learn how the quiz chooses matches, how to
-              find a game for Steam, and how it differs from
-              the full Game DNA tool.
+              Learn how the shortlist is built, how existing
+              favorites are handled, and when the full Game DNA
+              tool is the better choice.
             </p>
           </div>
 
@@ -790,19 +863,26 @@ function FaqSection() {
   );
 }
 
-function OwnershipNotice() {
+function CreditsSection() {
   return (
-    <section className="border-t border-slate-200 bg-white">
+    <section
+      aria-label="Game data and ownership credits"
+      className="border-t border-slate-200 bg-white"
+    >
       <div
         className={[
           pageShellClassName,
-          "py-5 text-center",
+          "flex flex-col items-center gap-3 py-5 text-center",
         ].join(" ")}
       >
+        <IgdbAttribution
+          variant="compact"
+          tone="light"
+        />
+
         <p className="text-[11px] leading-5 text-slate-500">
-          Game titles, cover artwork, trademarks, and
-          related materials belong to their respective
-          owners.
+          Game titles, cover artwork, trademarks, and related
+          materials belong to their respective owners.
         </p>
       </div>
     </section>

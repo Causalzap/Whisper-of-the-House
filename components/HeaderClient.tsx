@@ -36,6 +36,21 @@ const quickLinks = [
   },
 ];
 
+const gameTools = [
+  {
+    label: "What Game Should I Play?",
+    href: "/what-game-should-i-play",
+    description:
+      "Get quick recommendations based on your current mood, platform, and favorite games.",
+  },
+  {
+    label: "Gaming DNA",
+    href: "/game-dna",
+    description:
+      "Build a deeper playstyle profile from nine favorite games.",
+  },
+] as const;
+
 export default function HeaderClient({ featuredGuides }: HeaderClientProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -174,6 +189,81 @@ export default function HeaderClient({ featuredGuides }: HeaderClientProps) {
               </div>
             </li>
 
+            <li className="group relative">
+  <button
+    type="button"
+    className="nav-link flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold text-slate-200 transition-all duration-300 hover:bg-white/10 hover:text-white"
+  >
+    Find a Game
+
+    <svg
+      className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </button>
+
+  <div className="invisible absolute left-1/2 top-full w-[430px] -translate-x-1/2 pt-3 opacity-0 transition-all duration-300 ease-in-out group-hover:visible group-hover:opacity-100">
+    <div className="rounded-3xl border border-white/10 bg-slate-950/95 p-4 shadow-2xl backdrop-blur-md">
+      <div className="mb-3">
+        <p className="text-xs font-black uppercase tracking-[0.16em] text-cyan-300">
+          Game Tools
+        </p>
+
+        <p className="mt-1 text-xs leading-relaxed text-slate-400">
+          Find a game for today or build a deeper profile from your favorites.
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        {gameTools.map((item) => (
+          <ActiveLink
+            key={item.href}
+            href={item.href}
+            className="group/item block rounded-2xl border border-white/10 bg-white/[0.06] p-4 transition-all duration-300 hover:border-cyan-300/50 hover:bg-white/[0.1]"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <div className="text-sm font-black text-white group-hover/item:text-cyan-200">
+                  {item.label}
+                </div>
+
+                <p className="mt-1 text-xs leading-relaxed text-slate-400">
+                  {item.description}
+                </p>
+              </div>
+
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 20 20"
+                fill="none"
+                className="h-4 w-4 shrink-0 text-cyan-300 transition-transform group-hover/item:translate-x-0.5"
+              >
+                <path
+                  d="m8 5 5 5-5 5"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </ActiveLink>
+        ))}
+      </div>
+    </div>
+  </div>
+</li>
+
             {primaryNav.slice(1).map((item) => (
               <li key={item.href}>
                 <ActiveLink
@@ -261,6 +351,34 @@ export default function HeaderClient({ featuredGuides }: HeaderClientProps) {
                 </ActiveLink>
               </div>
             </div>
+            
+            <div>
+  <div className="mb-3 text-sm font-black uppercase tracking-wide text-cyan-300">
+    Find a Game
+  </div>
+
+  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+    {gameTools.map((item) => (
+      <div
+        key={item.href}
+        onClick={closeMobileMenu}
+      >
+        <ActiveLink
+          href={item.href}
+          className="block rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 transition-colors hover:border-cyan-300/40 hover:bg-white/10"
+        >
+          <div className="text-sm font-black text-white">
+            {item.label}
+          </div>
+
+          <p className="mt-1 text-xs leading-relaxed text-slate-400">
+            {item.description}
+          </p>
+        </ActiveLink>
+      </div>
+    ))}
+  </div>
+</div>
 
             <div>
               <div className="mb-3 text-sm font-black uppercase tracking-wide text-purple-300">

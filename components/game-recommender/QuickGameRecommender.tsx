@@ -2,6 +2,7 @@
 
 import {
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -42,6 +43,21 @@ export type {
   GamePlayMode,
   RecommenderGame,
 } from "@/lib/game-recommender/types";
+
+function normalizePositiveInteger(
+  value: number,
+  fallback: number,
+  minimum = 1,
+) {
+  if (!Number.isFinite(value)) {
+    return Math.max(minimum, fallback);
+  }
+
+  return Math.max(
+    minimum,
+    Math.floor(value),
+  );
+}
 
 export default function QuickGameRecommender({
   games,
@@ -90,16 +106,21 @@ export default function QuickGameRecommender({
   const resultsRef =
     useRef<HTMLDivElement>(null);
 
+  const shouldScrollToResultsRef =
+    useRef(false);
+
   const normalizedMaximumFavoriteGames =
-    Math.max(
-      1,
-      Math.floor(maximumFavoriteGames),
+    normalizePositiveInteger(
+      maximumFavoriteGames,
+      3,
     );
 
-  const normalizedResultLimit = Math.max(
-    INITIAL_VISIBLE_RESULTS,
-    Math.floor(resultLimit),
-  );
+  const normalizedResultLimit =
+    normalizePositiveInteger(
+      resultLimit,
+      INITIAL_VISIBLE_RESULTS,
+      INITIAL_VISIBLE_RESULTS,
+    );
 
   const gameMap = useMemo(
     () =>
@@ -111,6 +132,42 @@ export default function QuickGameRecommender({
       ),
     [games],
   );
+
+  /**
+   * Keep the current selection valid when the game pool
+   * changes during development or after a data update.
+   */
+  useEffect(() => {
+    setSelectedGameIds(
+      (currentGameIds) => {
+        const nextGameIds =
+          currentGameIds
+            .filter((gameId) =>
+              gameMap.has(gameId),
+            )
+            .slice(
+              0,
+              normalizedMaximumFavoriteGames,
+            );
+
+        const isUnchanged =
+          nextGameIds.length ===
+            currentGameIds.length &&
+          nextGameIds.every(
+            (gameId, index) =>
+              gameId ===
+              currentGameIds[index],
+          );
+
+        return isUnchanged
+          ? currentGameIds
+          : nextGameIds;
+      },
+    );
+  }, [
+    gameMap,
+    normalizedMaximumFavoriteGames,
+  ]);
 
   const selectedGames = useMemo(
     () =>
@@ -266,19 +323,53 @@ export default function QuickGameRecommender({
     normalizedMaximumFavoriteGames;
 
   /**
-   * Platform and play mode are filters.
-   * A mood or favorite game is required to create a meaningful ranking.
-   */
+ * Current Mood is required.
+ *
+ * Platform, play mode, and favorite games refine the result,
+ * but they do not describe what the player wants to play today.
+ */
   const canGenerate =
-    selectedGames.length > 0 ||
     selectedExperienceIds.length > 0;
 
   const invalidateResults =
     useCallback(() => {
+      shouldScrollToResultsRef.current =
+        false;
+
       setHasGenerated(false);
       setShowAllResults(false);
       setSurpriseGameId(null);
     }, []);
+
+  useEffect(() => {
+    if (
+      !hasGenerated ||
+      !shouldScrollToResultsRef.current
+    ) {
+      return;
+    }
+
+    shouldScrollToResultsRef.current =
+      false;
+
+    const frameId =
+      window.requestAnimationFrame(
+        () => {
+          resultsRef.current?.scrollIntoView(
+            {
+              behavior: "smooth",
+              block: "start",
+            },
+          );
+        },
+      );
+
+    return () => {
+      window.cancelAnimationFrame(
+        frameId,
+      );
+    };
+  }, [hasGenerated]);
 
   const openPicker = useCallback(() => {
     if (!canAddMoreGames) {
@@ -444,6 +535,9 @@ export default function QuickGameRecommender({
         return;
       }
 
+      shouldScrollToResultsRef.current =
+        true;
+
       setHasGenerated(true);
       setShowAllResults(false);
       setSurpriseGameId(null);
@@ -457,17 +551,6 @@ export default function QuickGameRecommender({
           play_mode: playMode,
           experience_count:
             selectedExperienceIds.length,
-        },
-      );
-
-      window.requestAnimationFrame(
-        () => {
-          resultsRef.current?.scrollIntoView(
-            {
-              behavior: "smooth",
-              block: "start",
-            },
-          );
         },
       );
     }, [
@@ -551,6 +634,9 @@ export default function QuickGameRecommender({
     ]);
 
   const resetTool = useCallback(() => {
+    shouldScrollToResultsRef.current =
+      false;
+
     setSelectedGameIds([]);
     setPlatform("any");
     setPlayMode("any");

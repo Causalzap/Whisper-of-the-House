@@ -3,18 +3,30 @@ import Link from "next/link";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import GameDnaSeoContent from "@/components/game-dna/GameDnaSeoContent";
 import GameDnaTool from "@/components/game-dna/GameDnaTool";
+import IgdbAttribution from "@/components/site/IgdbAttribution";
 
-import { gameDnaGames } from "@/data/game-dna/games";
+import { GAMES } from "@/data/game-recommender/games";
 
-const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/game-dna`;
+import {
+  toGameDnaGames,
+} from "@/lib/game-dna/recommendations";
+
+const gameDnaGames =
+  toGameDnaGames(GAMES);
+
+const siteUrl =
+  "https://www.whisperofthehouse.com";
+
+const pageUrl =
+  `${siteUrl}/game-dna`;
 
 const metadataTitle =
-  "Game DNA – Pick 9 Games & Reveal Your Playstyle";
+  "Gaming DNA Test: Pick 9 Games & Reveal Your Playstyle";
 
 const metadataDescription =
-  "Pick nine favorite games, build a 3×3 grid, reveal your playstyle, and discover matching games and guide hubs. Free, private, and no login.";
+  "Pick nine games you love to reveal your Gaming DNA, strongest gameplay traits, and personalized game recommendations. Free, private, and no login.";
 
 const pageShellClassName = [
   "mx-auto w-full",
@@ -56,25 +68,25 @@ const howItWorksItems = [
     number: "01",
     title: "Choose nine games",
     description:
-      "Click the highlighted empty position, search the library, and add a game that represents your taste.",
+      "Start with games you know well and genuinely enjoy—not titles you only plan to try.",
   },
   {
     number: "02",
-    title: "Arrange your grid",
+    title: "Make the grid yours",
     description:
-      "Remove, replace, and reorder your selections before generating your Gaming DNA.",
+      "Swap, remove, or drag games around until the nine picks feel like a fair snapshot of your taste.",
   },
   {
     number: "03",
-    title: "Reveal your playstyle",
+    title: "Reveal your Gaming DNA",
     description:
-      "Your nine games are compared across ten gameplay traits to identify your strongest preferences.",
+      "We compare the shared gameplay patterns behind your picks and turn them into a ten-trait profile.",
   },
   {
     number: "04",
-    title: "Find your next game",
+    title: "See what fits next",
     description:
-      "Matching games are ranked by similarity, with direct links to relevant guide hubs when available.",
+      "Explore close matches, see why they fit, and jump into a guide hub when practical help is available.",
   },
 ];
 
@@ -82,37 +94,37 @@ const faqItems = [
   {
     question: "What is the Game DNA tool?",
     answer:
-      "Game DNA analyzes nine of your favorite games and creates a playstyle profile based on the mechanics and experiences that appear most often in your selections.",
+      "Game DNA starts with nine games you already know and enjoy. It looks for the gameplay patterns they share, then turns those patterns into a readable ten-trait playstyle profile.",
   },
   {
     question: "Do I need to create an account?",
     answer:
-      "No. Game DNA does not require an account or login. Your current selections are stored locally in your browser so you can return and continue later.",
+      "No. Your grid and generated profile stay in this browser, so you can leave and come back without creating an account.",
   },
   {
     question: "How do I add a game to my grid?",
     answer:
-      "Click the highlighted empty position in the 3×3 grid. A game picker will open, allowing you to search the library and select a title.",
+      "Click any empty square in the 3×3 grid, then search or browse the game picker. You can replace or reorder a choice at any time before revealing the result.",
   },
   {
     question: "How are the game recommendations calculated?",
     answer:
-      "Each game has scores for exploration, progression, systems, crafting, story, combat, strategy, puzzle solving, survival, and social play. Your nine selections are combined and compared with other games in the library.",
+      "Every game uses the same ten-trait scale: exploration, progression, systems, crafting, story, combat, strategy, puzzle solving, survival, and social play. Your nine picks are averaged into one profile, then compared with the rest of the library. Guide coverage may break a close tie, but it does not create the match.",
   },
   {
     question: "What does a title like Progression Architect mean?",
     answer:
-      "It is the name of your generated playstyle profile. The title summarizes the strongest gameplay preferences found across your nine selected games.",
+      "It is a readable name for the strongest pattern in your grid. For example, Progression Architect usually points to a player who enjoys visible upgrades, deeper systems, and long-term growth.",
   },
   {
     question: "Why do some recommendations link to guide hubs?",
     answer:
-      "When a matching game has coverage on Whisper of the House, the recommendation links directly to its walkthroughs, beginner guides, builds, achievements, and other practical help.",
+      "When a close match already has useful coverage on Whisper of the House or a related guide site, the result links straight to that hub. Games without guides can still be valid matches.",
   },
   {
     question: "Are my game selections uploaded?",
     answer:
-      "The current version stores selected game IDs in your browser. It does not create a public profile or require personal information.",
+      "No. The tool stores selected game IDs and your generated profile locally in this browser. It does not create a public profile or ask for personal information.",
   },
 ];
 
@@ -120,8 +132,10 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "Game DNA",
+    name: "Gaming DNA Test",
+    alternateName: "Game DNA",
     url: pageUrl,
+    inLanguage: "en",
     description: metadataDescription,
     applicationCategory: "EntertainmentApplication",
     operatingSystem: "Any",
@@ -201,6 +215,10 @@ export default function GameDnaPage() {
         <HeroSection />
 
         <ToolSection />
+
+        <GameDnaSeoContent />
+
+        <QuickRecommenderCta />
 
         <FaqSection />
 
@@ -292,9 +310,9 @@ function HeroSection() {
                   "sm:text-[15px] sm:leading-7",
                 ].join(" ")}
               >
-                Build a favorite-games 3×3, discover the gameplay
-                traits that define your taste, and find matching
-                games with practical guide coverage.
+                Pick nine games you genuinely love. We will map the
+                gameplay patterns they share, show what keeps pulling
+                you back, and point you toward games that fit.
               </p>
   
               <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-bold text-slate-500">
@@ -577,6 +595,97 @@ function HowItWorksMobile() {
   );
 }
 
+function QuickRecommenderCta() {
+  return (
+    <section className="border-t border-slate-200 bg-[#eef3f8]">
+      <div
+        className={[
+          pageShellClassName,
+          "py-8 sm:py-10 lg:py-12",
+        ].join(" ")}
+      >
+        <div
+          className={[
+            "overflow-hidden rounded-[1.75rem]",
+            "border border-sky-100",
+            "bg-white shadow-sm",
+          ].join(" ")}
+        >
+          <div
+            className={[
+              "grid gap-6 p-5",
+              "sm:p-6 lg:p-8",
+              "lg:grid-cols-[minmax(0,1fr)_auto]",
+              "lg:items-center",
+            ].join(" ")}
+          >
+            <div className="max-w-3xl">
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-sky-700">
+                Need a Faster Recommendation?
+              </p>
+
+              <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">
+                Find a game that fits what you
+                want to play today
+              </h2>
+
+              <p className="mt-3 text-sm leading-7 text-slate-600">
+                Gaming DNA reveals your
+                longer-term playstyle. For a
+                quicker answer, choose your
+                current mood, platform, play
+                mode, and a few favorite games
+                to get a practical shortlist.
+              </p>
+
+              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold text-slate-500">
+                <span className="inline-flex items-center gap-2">
+                  <HeroCheckIcon />
+                  Takes about one minute
+                </span>
+
+                <span className="inline-flex items-center gap-2">
+                  <HeroCheckIcon />
+                  No login
+                </span>
+
+                <span className="inline-flex items-center gap-2">
+                  <HeroCheckIcon />
+                  Built for today&apos;s mood
+                </span>
+              </div>
+            </div>
+
+            <div className="flex lg:justify-end">
+              <Link
+                href="/what-game-should-i-play"
+                className={[
+                  "inline-flex min-h-11",
+                  "items-center justify-center",
+                  "rounded-full bg-sky-600",
+                  "px-5 py-2.5",
+                  "text-sm font-black text-white",
+                  "shadow-sm transition",
+                  "hover:-translate-y-0.5",
+                  "hover:bg-sky-700",
+                  "hover:shadow-md",
+                  "focus-visible:outline-none",
+                  "focus-visible:ring-2",
+                  "focus-visible:ring-sky-500",
+                  "focus-visible:ring-offset-2",
+                ].join(" ")}
+              >
+                Find My Next Game
+                <ArrowRightIcon />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FaqSection() {
   return (
     <section className="border-t border-slate-200 bg-[#f7f9fc]">
@@ -681,33 +790,6 @@ function OwnershipNotice() {
   );
 }
 
-function CheckIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 20 20"
-      fill="none"
-      className="h-4 w-4 shrink-0 text-sky-300"
-    >
-      <circle
-        cx="10"
-        cy="10"
-        r="8"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-
-      <path
-        d="m6.5 10 2.2 2.2 4.8-4.8"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 function ArrowDownIcon() {
   return (
     <svg
@@ -718,6 +800,25 @@ function ArrowDownIcon() {
     >
       <path
         d="M10 4v12m0 0 5-5m-5 5-5-5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 20 20"
+      fill="none"
+      className="ml-2 h-4 w-4"
+    >
+      <path
+        d="m8 5 5 5-5 5"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"

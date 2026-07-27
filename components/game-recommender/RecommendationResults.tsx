@@ -1,20 +1,27 @@
 "use client";
 
-import Link from "next/link";
-
 import RecommendationCard from "@/components/game-recommender/RecommendationCard";
 
 import {
   INITIAL_VISIBLE_RESULTS,
 } from "@/lib/game-recommender/config";
 
-import {
-  trackRecommenderEvent,
-} from "@/lib/game-recommender/analytics";
-
 import type {
   RecommendationResult,
 } from "@/lib/game-recommender/types";
+
+type RecommendationResultsProps = {
+  recommendations: RecommendationResult[];
+  totalResultCount: number;
+  showAllResults: boolean;
+  surpriseRecommendation:
+    | RecommendationResult
+    | null;
+  canSurprise: boolean;
+  onShowMore: () => void;
+  onSurpriseMe: () => void;
+  onReset: () => void;
+};
 
 export default function RecommendationResults({
   recommendations,
@@ -25,22 +32,38 @@ export default function RecommendationResults({
   onShowMore,
   onSurpriseMe,
   onReset,
-}: {
-  recommendations: RecommendationResult[];
-  totalResultCount: number;
-  showAllResults: boolean;
-  surpriseRecommendation: RecommendationResult | null;
-  canSurprise: boolean;
-  onShowMore: () => void;
-  onSurpriseMe: () => void;
-  onReset: () => void;
-}) {
+}: RecommendationResultsProps) {
+  const remainingResultCount =
+    Math.max(
+      0,
+      totalResultCount -
+        INITIAL_VISIBLE_RESULTS,
+    );
+
+  const hasMoreResults =
+    !showAllResults &&
+    remainingResultCount > 0;
+
   return (
     <section
       aria-labelledby="recommendation-results-title"
-      className="mt-6 overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-sm"
+      aria-live="polite"
+      className={[
+        "mt-6 overflow-hidden",
+        "rounded-[1.75rem]",
+        "border border-slate-200",
+        "bg-white shadow-sm",
+      ].join(" ")}
     >
-      <header className="flex flex-col gap-4 border-b border-slate-100 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <header
+        className={[
+          "flex flex-col gap-4",
+          "border-b border-slate-100",
+          "px-4 py-5",
+          "sm:flex-row sm:items-center",
+          "sm:justify-between sm:px-6",
+        ].join(" ")}
+      >
         <div className="max-w-2xl">
           <p className="text-[10px] font-black uppercase tracking-[0.22em] text-sky-700">
             Personalized Results
@@ -55,7 +78,7 @@ export default function RecommendationResults({
 
           <p className="mt-2 text-sm leading-6 text-slate-600">
             Start with the closest overall
-            match, compare a strong
+            match, compare a familiar
             alternative, or try the wildcard
             when you want something less
             obvious.
@@ -65,7 +88,21 @@ export default function RecommendationResults({
         <button
           type="button"
           onClick={onReset}
-          className="inline-flex min-h-10 items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-black text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+          className={[
+            "inline-flex min-h-10",
+            "shrink-0 items-center",
+            "justify-center rounded-full",
+            "border border-slate-300",
+            "bg-white px-4 py-2",
+            "text-sm font-black",
+            "text-slate-700 transition",
+            "hover:border-slate-400",
+            "hover:bg-slate-50",
+            "focus-visible:outline-none",
+            "focus-visible:ring-2",
+            "focus-visible:ring-sky-500",
+            "focus-visible:ring-offset-2",
+          ].join(" ")}
         >
           Start Over
         </button>
@@ -73,11 +110,21 @@ export default function RecommendationResults({
 
       {recommendations.length > 0 ? (
         <>
-          <div className="grid gap-4 p-4 sm:p-6 lg:grid-cols-2">
+          <div
+            className={[
+              "grid auto-rows-fr",
+              "items-stretch gap-4",
+              "p-4 sm:p-6",
+              "lg:grid-cols-2",
+            ].join(" ")}
+          >
             {recommendations.map(
               (recommendation) => (
                 <RecommendationCard
-                  key={`${recommendation.role}-${recommendation.game.id}`}
+                  key={[
+                    recommendation.role,
+                    recommendation.game.id,
+                  ].join("-")}
                   recommendation={
                     recommendation
                   }
@@ -87,47 +134,89 @@ export default function RecommendationResults({
           </div>
 
           <div className="border-t border-slate-100 px-4 py-5 sm:px-6">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              {!showAllResults &&
-              totalResultCount >
-                INITIAL_VISIBLE_RESULTS ? (
-                <button
-                  type="button"
-                  onClick={onShowMore}
-                  className="inline-flex min-h-10 items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-black text-slate-700 transition hover:border-sky-300 hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
-                >
-                  Show{" "}
-                  {totalResultCount -
-                    INITIAL_VISIBLE_RESULTS}{" "}
-                  More Matches
-                </button>
-              ) : (
-                <p className="text-xs font-semibold text-slate-500">
-                  Showing your strongest
-                  available matches.
-                </p>
-              )}
+            <div
+              className={[
+                "flex flex-col gap-4",
+                "sm:flex-row",
+                "sm:items-start",
+                "sm:justify-between",
+              ].join(" ")}
+            >
+              <div>
+                {hasMoreResults ? (
+                  <button
+                    type="button"
+                    onClick={onShowMore}
+                    className={[
+                      "inline-flex min-h-10",
+                      "items-center justify-center",
+                      "rounded-full",
+                      "border border-slate-300",
+                      "bg-white px-4 py-2",
+                      "text-sm font-black",
+                      "text-slate-700 transition",
+                      "hover:border-sky-300",
+                      "hover:bg-sky-50",
+                      "hover:text-sky-700",
+                      "focus-visible:outline-none",
+                      "focus-visible:ring-2",
+                      "focus-visible:ring-sky-500",
+                      "focus-visible:ring-offset-2",
+                    ].join(" ")}
+                  >
+                    Show{" "}
+                    {remainingResultCount}{" "}
+                    More{" "}
+                    {remainingResultCount === 1
+                      ? "Match"
+                      : "Matches"}
+                  </button>
+                ) : (
+                  <p className="pt-2 text-xs font-semibold text-slate-500">
+                    Showing your strongest
+                    available matches.
+                  </p>
+                )}
+              </div>
 
               <div className="flex flex-col gap-1 sm:items-end">
                 <button
                   type="button"
                   onClick={onSurpriseMe}
                   disabled={!canSurprise}
+                  aria-describedby="surprise-me-help"
                   className={[
-                    "inline-flex min-h-10 items-center justify-center rounded-full",
-                    "px-4 py-2 text-sm font-black transition",
-                    "focus-visible:outline-none focus-visible:ring-2",
-                    "focus-visible:ring-sky-500 focus-visible:ring-offset-2",
+                    "inline-flex min-h-10",
+                    "items-center justify-center",
+                    "rounded-full px-4 py-2",
+                    "text-sm font-black",
+                    "transition",
+                    "focus-visible:outline-none",
+                    "focus-visible:ring-2",
+                    "focus-visible:ring-sky-500",
+                    "focus-visible:ring-offset-2",
                     canSurprise
-                      ? "bg-slate-950 text-white hover:bg-slate-800"
-                      : "cursor-not-allowed bg-slate-200 text-slate-400",
+                      ? [
+                          "bg-slate-950",
+                          "text-white",
+                          "hover:-translate-y-0.5",
+                          "hover:bg-slate-800",
+                        ].join(" ")
+                      : [
+                          "cursor-not-allowed",
+                          "bg-slate-200",
+                          "text-slate-400",
+                        ].join(" "),
                   ].join(" ")}
                 >
                   Surprise Me
                   <ShuffleIcon />
                 </button>
 
-                <span className="text-[11px] font-semibold text-slate-400">
+                <span
+                  id="surprise-me-help"
+                  className="max-w-sm text-[11px] font-semibold leading-5 text-slate-400 sm:text-right"
+                >
                   {canSurprise
                     ? "Picks from compatible games beyond the ranked results."
                     : "No additional compatible games are available yet."}
@@ -136,57 +225,76 @@ export default function RecommendationResults({
             </div>
 
             {surpriseRecommendation ? (
-              <div className="mt-5 border-t border-slate-100 pt-5">
-                <RecommendationCard
-                  recommendation={
-                    surpriseRecommendation
-                  }
-                />
-              </div>
+              <section
+                aria-labelledby="surprise-result-title"
+                className="mt-5 border-t border-slate-100 pt-5"
+              >
+                <div className="mb-4">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-amber-700">
+                    Surprise Result
+                  </p>
+
+                  <h3
+                    id="surprise-result-title"
+                    className="mt-1 text-lg font-black text-slate-950"
+                  >
+                    A compatible game outside
+                    your ranked shortlist
+                  </h3>
+
+                  <p className="mt-1 text-xs leading-5 text-slate-500">
+                    This pick still matches your
+                    filters, but it takes the
+                    recommendation in a less
+                    obvious direction.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1">
+                  <RecommendationCard
+                    recommendation={
+                      surpriseRecommendation
+                    }
+                  />
+                </div>
+              </section>
             ) : null}
 
-            <div className="mt-5 rounded-2xl border border-sky-100 bg-sky-50/60 p-4">
-              <p className="text-xs font-black uppercase tracking-[0.14em] text-sky-700">
-                Want a deeper profile?
-              </p>
-
-              <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p className="max-w-2xl text-sm leading-6 text-slate-600">
-                  Build a 3×3 grid of nine
-                  favorite games to reveal your
-                  longer-term Gaming DNA.
-                </p>
-
-                <Link
-                  href="/game-dna"
-                  onClick={() =>
-                    trackRecommenderEvent(
-                      "quick_recommender_game_dna_click",
-                      {
-                        source:
-                          "recommendation_results",
-                      },
-                    )
-                  }
-                  className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full border border-sky-300 bg-white px-4 py-2 text-xs font-black text-sky-800 transition hover:border-sky-500 hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
-                >
-                  Build Your Gaming DNA
-                </Link>
-              </div>
-            </div>
           </div>
         </>
       ) : (
-        <div className="p-6 text-center">
+        <div className="px-5 py-10 text-center sm:px-6">
           <p className="text-base font-black text-slate-800">
-            No matching games found
+            No Matching Games Found
           </p>
 
-          <p className="mt-2 text-sm leading-6 text-slate-500">
+          <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-slate-500">
             Try another platform, remove a
             play-mode filter, or choose a
             broader mood.
           </p>
+
+          <button
+            type="button"
+            onClick={onReset}
+            className={[
+              "mt-5 inline-flex min-h-10",
+              "items-center justify-center",
+              "rounded-full border",
+              "border-slate-300 bg-white",
+              "px-4 py-2",
+              "text-sm font-black",
+              "text-slate-700 transition",
+              "hover:border-sky-300",
+              "hover:text-sky-700",
+              "focus-visible:outline-none",
+              "focus-visible:ring-2",
+              "focus-visible:ring-sky-500",
+              "focus-visible:ring-offset-2",
+            ].join(" ")}
+          >
+            Change My Choices
+          </button>
         </div>
       )}
     </section>

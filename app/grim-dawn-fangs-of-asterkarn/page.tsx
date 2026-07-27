@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
+import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
 
 import FangsOfAsterkarnHubContent from "@/data/grim-dawn-fangs-of-asterkarn/index.mdx";
 
@@ -343,6 +344,12 @@ export default function Page() {
         >
           <FangsOfAsterkarnHubContent />
         </GuideArticlePage>
+
+        <GameDiscoveryCta
+          gameTitle="Grim Dawn: Fangs of Asterkarn"
+          heading="Looking for another game after Fangs of Asterkarn?"
+          description="Use the quick recommender to find something that fits your current mood, platform, and play mode, or build a broader Gaming DNA profile from nine games you already love."
+        />
       </main>
 
       <Footer />
