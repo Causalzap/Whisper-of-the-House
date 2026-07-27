@@ -1,0 +1,699 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const automationColumns = [
+  { key: "symptom", label: "What I See" },
+  { key: "firstCheck", label: "What I Check First" },
+  { key: "fix", label: "What Usually Fixes It" },
+];
+
+export const automationRows = [
+  {
+    symptom: "Courier, Maintenance, or another automation building is missing",
+    firstCheck: "Town Rankings, Claim Rewards, and EGO Tech",
+    fix:
+      "Finish the current progression step and purchase the required unlock before troubleshooting the route.",
+  },
+  {
+    symptom: "I cannot select a Townie for the job",
+    firstCheck: "Invitation request and available housing",
+    fix:
+      "Complete the Townie's request, give them a housing slot, then return to the workplace and assign them.",
+  },
+  {
+    symptom: "An industry worker stands beside the Time Clock",
+    firstCheck: "Demand, selected recipe, and Storage locks",
+    fix:
+      "Create demand with an active recipe or lock the required resource in Storage.",
+  },
+  {
+    symptom: "Mining or Forestry workers never enter the resource area",
+    firstCheck: "Industry Zone connection",
+    fix:
+      "Extend the zone until it reaches the Mine Entrance or Deep Forest Entrance.",
+  },
+  {
+    symptom: "The Courier Building is finished but the Courier does not leave",
+    firstCheck: "Road access, worker assignment, source, and destination",
+    fix:
+      "Connect the building to a road and confirm that a requested item can move between two usable inventories.",
+  },
+  {
+    symptom: "A processor has ingredients but production has stopped",
+    firstCheck: "Selected recipe and output space",
+    fix:
+      "Clear the finished item, free an output slot, and confirm that the processor still has an active recipe.",
+  },
+  {
+    symptom: "Garbage returns and Garbirds keep appearing",
+    firstCheck: "Full bins, Garbage Disposal, and Maintenance capacity",
+    fix:
+      "Drive the Garbirds away, then remove the garbage backlog that allowed them to appear.",
+  },
+];
+
+**Go-Go Town automation** fails when one link in the supply chain is missing.
+
+I diagnose it in this order:
+
+**unlock → Townie → demand → tool or processor → Storage → Courier →
+destination**
+
+That first step is important. If the Courier Building is not in my Build menu,
+I do not have a Courier route problem yet. I have a progression or EGO Tech
+problem.
+
+When the building exists but the worker does nothing, I move forward through the
+chain one link at a time.
+
+<GuideQuickAnswer title="My Go-Go Town Automation Check">
+  <ol className="mt-3 list-decimal space-y-2 pl-5">
+    <li>Confirm that the required building or system has actually been unlocked.</li>
+    <li>Complete the Townie's invitation request and provide an available housing slot.</li>
+    <li>Assign that Townie to the correct Time Clock, shop, Courier Building, or Maintenance Office.</li>
+    <li>Open the final shop or processor and select the recipe I want to supply.</li>
+    <li>Check that the required tool and processor exist in the correct Industry Zone.</li>
+    <li>Connect Mining and Forestry Zones to their matching resource entrances.</li>
+    <li>Inspect Storage locks, free slots, input stock, and processor output.</li>
+    <li>Trace one complete Courier trip from the source to the destination.</li>
+    <li>For garbage problems, check bins, disposal, Maintenance, and Garbirds separately.</li>
+  </ol>
+</GuideQuickAnswer>
+
+<div className="my-6 rounded-xl border border-sky-200 bg-sky-50 p-5 text-sm leading-7 text-slate-700">
+  <strong className="text-sky-900">Version note.</strong>{" "}
+  This troubleshooting route follows the redesigned Town Rankings, EGO Tech,
+  Townie, Storage, Courier, Industry Zone, and garbage systems used in Go-Go
+  Town 1.0.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/go-go-town/go-go-town-worker-no-demand.webp"
+    alt="Go-Go Town tutorial explaining that workers only collect resources when demand exists"
+    width={359}
+    height={406}
+    priority={true}
+    className="mx-auto h-auto w-full max-w-md rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-md text-sm text-slate-400">
+    A correct worker assignment is not enough. I create demand before changing
+    the worker, tool, or Industry Zone.
+  </figcaption>
+</figure>
+
+<h2 id="quick-diagnosis">
+  Start With the Symptom
+</h2>
+
+<GuideTable
+  caption="Common Go-Go Town automation problems and the first place I check."
+  columns={automationColumns}
+  rows={automationRows}
+/>
+
+The first check tells me where to enter the chain. It does not mean every other
+link is correct.
+
+For example:
+
+- connecting a Courier Building to a road does not help when its source Storage
+  is empty;
+- creating demand does not help when the Industry Zone cannot reach the Mine;
+- hiring a Townie does not help when that Townie has no housing slot;
+- clearing loose garbage does not prevent Garbirds when the bins immediately
+  fill again.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="system-not-unlocked">
+  Check Whether the Automation System Is Actually Unlocked
+</h2>
+
+A missing building and a broken building are different problems.
+
+If I cannot find Courier, Maintenance, a processor, or another automation
+option in the Build menu, I stop searching the map and open the Phone.
+
+I check:
+
+1. the current Town Goals;
+2. whether a completed bracket still has a reward waiting to be claimed;
+3. the newest available EGO Tech tier;
+4. older EGO Tech tiers I may have skipped;
+5. the Rebuy section after confirming that the first unlock was purchased.
+
+Town Rank and EGO Tech do not purchase each other automatically.
+
+I can advance the tournament while leaving an older Tech node unpurchased. When
+a supposedly available system is missing, I scan backward through the tiers
+before assuming the save is broken.
+
+EGO comes from happy tourists. When I am short of the EGO needed for an
+automation unlock, I inspect the tourist route rather than waiting beside the
+Build menu.
+
+I check which desire tourists are repeatedly missing, whether the matching
+service is open and stocked, and whether garbage is lowering the quality of the
+area.
+
+I do not buy random decoration solely to generate EGO. I fix the specific
+Shopping, Hunger, Exploration, Entertainment, Rest, or Health gap that visitors
+are actually showing.
+
+For missing goals, unclaimed rewards, EGO Tech tiers, Rebuy, or buildings that
+never appeared, I use the{" "}
+<Link
+  href="/go-go-town/progression-stuck/"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Go-Go Town progression stuck guide
+</Link>
+.
+
+<h2 id="townie-requirements">
+  Get a Townie Into the Job Before Testing the Chain
+</h2>
+
+Inviting a Townie, housing a Townie, and assigning a Townie are three separate
+steps.
+
+When a Townie arrives, they usually give me an invitation request. Completing
+that request makes them available to join, but it does not automatically place
+them in a home or workplace.
+
+My route is:
+
+1. complete the Townie's request;
+2. invite them into town;
+3. open a tent, house, or apartment with a free slot;
+4. assign the Townie to that housing;
+5. walk to the workplace;
+6. manage the Time Clock, shop, Courier Building, or Maintenance Office;
+7. select the same Townie as its worker;
+8. close and reopen the workplace to confirm the assignment.
+
+<figure className="my-8">
+  <Image
+    src="/images/go-go-town/go-go-town-townie-housing-before-job.webp"
+    alt="Go-Go Town tutorial assigning a Townie to housing before giving them a job"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    I give the Townie a housing slot first, then return to the workplace and
+    make the job assignment separately.
+  </figcaption>
+</figure>
+
+When the worker selection is empty, I do not build another workplace.
+
+I check whether:
+
+- every available Townie is already assigned;
+- the new Townie is still waiting for an invitation request;
+- the Townie has joined but has no home;
+- the housing building is full;
+- or I accidentally assigned the Townie to another shop or service.
+
+I invite another Townie when I already have a specific open job and an available
+housing slot.
+
+I wait when I have neither. A larger population does not repair a production
+chain that still has no recipe or demand.
+
+<h2 id="workers-standing-still">
+  Why My Workers Are Standing Still
+</h2>
+
+The first time I assigned a worker to Forestry, the worker stood beside the Time
+Clock without collecting anything.
+
+The worker was housed. The assignment was correct. The missing link was demand.
+
+Workers do not collect every available resource automatically. I create demand
+in one of two ways:
+
+1. select a shop or processor recipe that consumes the resource;
+2. lock that resource in Storage so workers maintain a stockpile.
+
+I check the destination first.
+
+When I want wood for a shop, I walk to that shop, manage it, and confirm that
+its selected recipe actually uses wood. I then return to Forestry and watch the
+worker.
+
+The result tells me what to do next:
+
+- **The worker starts moving:** the problem was missing demand.
+- **The worker stays at the Time Clock:** I check housing, assignment, tools,
+  Storage, and the zone.
+- **The worker gathers resources but the shop remains empty:** I move to
+  Courier and destination checks.
+- **The worker stops after filling Storage:** the requested demand may already
+  be satisfied.
+
+Workers normally collect enough to cover current demand. They do not need to
+move continuously when every requested inventory is already full.
+
+<h3 id="tools-processors">
+  Check the Tool and Processor Separately
+</h3>
+
+An Industry Zone is not a single production building.
+
+A working raw-material chain can require:
+
+- the correct Industry Zone;
+- a Time Clock;
+- an assigned Townie;
+- a gathering tool;
+- raw-material Storage;
+- a processor;
+- an active processor recipe;
+- and output space.
+
+When raw materials appear but the refined product does not, I stop checking the
+worker.
+
+I walk to the processor and verify:
+
+1. the correct recipe is selected;
+2. the input item is present;
+3. the finished item has somewhere to go;
+4. the output is not already blocking production.
+
+This distinction matters with materials such as Fiber Boards. I look in the
+Forestry production chain rather than searching Farming simply because the word
+“fiber” sounds agricultural.
+
+<figure className="my-8">
+  <Image
+    src="/images/go-go-town/go-go-town-storage-lock-four-items.webp"
+    alt="Go-Go Town tutorial showing how to lock Wood in Storage with the L key"
+    width={360}
+    height={407}
+    className="mx-auto h-auto w-full max-w-md rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-md text-sm text-slate-400">
+    Locking an item creates continuing stockpile demand. I only lock resources I
+    deliberately want this Storage to accept.
+  </figcaption>
+</figure>
+
+<h2 id="storage-locks">
+  Use Storage Locks Without Blocking Other Items
+</h2>
+
+Each Storage can lock up to **four unique item types**.
+
+Once I lock an item, that Storage only accepts its selected locked items, and
+workers continue gathering them while space remains.
+
+That is useful for:
+
+- wood needed across several construction projects;
+- stone or Metal required by repeated upgrades;
+- an ingredient used by several shops;
+- or a processor that needs a reliable input buffer.
+
+It can also create a hidden bottleneck.
+
+When I lock four low-priority resources in one general Storage, there may be no
+valid slot for the material needed by the current recipe.
+
+My early layout is simpler:
+
+- one Storage beside the Industry Zone for raw materials;
+- one beside the processors for refined materials;
+- shop Storage reserved for the selected recipe;
+- one or two deliberate locks instead of four automatic locks.
+
+I change or remove a lock when:
+
+- the Storage remains full of an item I am no longer using;
+- the processor cannot unload;
+- a Courier arrives but cannot deposit anything;
+- or another required item has no valid destination.
+
+I do not add another Storage until I know whether the current one is full
+because of useful stock or because of the wrong locks.
+
+<h2 id="industry-zone-connection">
+  Connect Mining and Forestry to Their Entrances
+</h2>
+
+Mining and Forestry workers need the Industry Zone itself to reach the matching
+resource entrance.
+
+For Forestry, I extend the zone to the **Deep Forest Entrance**.
+
+For Mining, I extend it to the **Mine Entrance**.
+
+<figure className="my-8">
+  <Image
+    src="/images/go-go-town/go-go-town-industry-zone-entrance-connection.webp"
+    alt="Go-Go Town reminder to connect Mining and Forestry Zones to their resource entrances"
+    width={371}
+    height={415}
+    className="mx-auto h-auto w-full max-w-md rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-md text-sm text-slate-400">
+    A normal road does not replace the Industry Zone connection. I edit the zone
+    until it touches the correct entrance.
+  </figcaption>
+</figure>
+
+I open zone editing and follow the colored area from the Time Clock toward the
+entrance.
+
+A small visual gap can stop workers from traveling into the Mine or Deep Forest.
+
+I diagnose the result like this:
+
+- **Worker never enters the resource area:** check the zone connection.
+- **Worker enters but returns with nothing:** check the tool, demand, and
+  Storage.
+- **Raw resources arrive but nothing is refined:** check the processor.
+- **Refined materials exist but never reach the shop:** check the Courier.
+
+<h2 id="courier-unlock">
+  Courier Building Missing From the Build Menu
+</h2>
+
+Courier is not useful to troubleshoot until the system is unlocked.
+
+When I cannot find the Courier Building, I check Town Rankings and EGO Tech
+instead of searching every Build category.
+
+I also confirm that I have:
+
+- claimed the latest completed bracket reward;
+- purchased the relevant EGO Tech option;
+- enough materials to finish the building;
+- a Townie who can be housed and assigned.
+
+In my early 1.0 route, the Courier Building itself displayed a price of **150
+Coins**. Construction then required **2 Metal and 3 Fiber Boards**.
+
+I gather those materials before placing the building. An unfinished shell
+cannot make deliveries, even when it looks as though the Courier service has
+already been placed.
+
+I do not write a fixed Town Rank into my diagnosis. The safer check is whether
+the unlock is visible in my current EGO Tech and whether the preceding bracket
+reward has been claimed.
+
+<h2 id="courier-not-working">
+  Why My Courier Is Not Working
+</h2>
+
+My first Courier failure happened before the first delivery: the building did
+not have proper road access.
+
+<figure className="my-8">
+  <Image
+    src="/images/go-go-town/go-go-town-courier-road-access.webp"
+    alt="Go-Go Town Courier Building showing its 150 Coin price and placement beside a road"
+    width={592}
+    height={382}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    I finish the road connection, construction materials, housing, and worker
+    assignment before judging Courier speed.
+  </figcaption>
+</figure>
+
+I start at the Courier Building and trace a continuous road back into town.
+
+Then I manage the building and confirm that a housed Townie is assigned.
+
+Once the Courier begins moving, I follow one complete trip:
+
+1. Which source does the Courier visit?
+2. Does that inventory contain the requested item?
+3. Is the item compatible with the destination?
+4. Does the destination have free space?
+5. Is its recipe still requesting the item?
+6. Does the Courier successfully deposit it?
+
+A walking Courier is not automatically a useful Courier.
+
+When the worker repeatedly walks to an empty Storage, the route is valid but the
+source chain is broken.
+
+When the worker reaches the shop but cannot deposit, the destination may be full
+or may no longer request that item.
+
+<h3 id="courier-too-slow">
+  Shorten the Route Before Adding Another Courier
+</h3>
+
+At later Town Ranks, my Courier could be working correctly but spend most of the
+day crossing the map.
+
+I first improve the layout:
+
+- move frequently used Storage closer to the shops;
+- group shops with similar ingredient needs;
+- keep processors close to raw-material Storage;
+- remove unnecessary road detours;
+- avoid making one Courier serve distant districts on opposite sides of town.
+
+I add a second Courier only when:
+
+- the first worker is assigned;
+- the road is continuous;
+- source and destination inventories both work;
+- the route is already reasonably direct;
+- and the Courier is moving almost constantly but demand still exceeds delivery
+  speed.
+
+That is the one place where another Courier solves the problem: the chain works,
+but its capacity is too low.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="storage-full">
+  Fix “No Space” and Processors That Stop
+</h2>
+
+`No Space` does not always refer to my backpack.
+
+I check where the message appeared:
+
+- **On my character:** clear a backpack slot or use a vehicle.
+- **At raw-material Storage:** remove surplus stock or adjust its locks.
+- **At a processor:** remove the finished output.
+- **At shop Storage:** sell or remove current stock.
+- **At a Courier destination:** free a valid slot for the delivered item.
+
+<figure className="my-8">
+  <Image
+    src="/images/go-go-town/go-go-town-storage-no-space.webp"
+    alt="Go-Go Town No Space warning while trying to collect Wood"
+    width={392}
+    height={403}
+    className="mx-auto h-auto w-full max-w-md rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-md text-sm text-slate-400">
+    I identify which inventory is full. Clearing my backpack does not help when
+    the blocked inventory belongs to a processor or shop.
+  </figcaption>
+</figure>
+
+A processor can contain all required ingredients and still appear idle when its
+finished product has nowhere to go.
+
+I remove one output item and watch the next cycle.
+
+If production resumes, I have confirmed an output bottleneck. I then create
+dedicated refined-material Storage or shorten the route to the next destination.
+
+When the processor still does nothing, I recheck its selected recipe and input
+items before rebuilding it.
+
+<h2 id="garbage-automation">
+  Fix Garbage, Dirty Ground, and Maintenance
+</h2>
+
+Garbage cleanup has separate parts:
+
+1. **Garbage Bins** collect trash from busy areas.
+2. **Garbage Disposal** receives the collected trash.
+3. **Maintenance workers** move trash through the service.
+4. The **Bubble Gun** cleans dirty or smelly ground.
+
+<figure className="my-8">
+  <Image
+    src="/images/go-go-town/go-go-town-garbage-maintenance-worker.webp"
+    alt="Go-Go Town tutorial assigning a Maintenance Worker to handle garbage"
+    width={292}
+    height={406}
+    className="mx-auto h-auto w-full max-w-sm rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-sm text-sm text-slate-400">
+    Maintenance needs a housed and assigned Townie, but the town still needs
+    bins, disposal capacity, and a practical cleanup route.
+  </figcaption>
+</figure>
+
+When garbage piles up, I walk the full cleanup route:
+
+1. start at the busiest shops or attractions;
+2. inspect nearby bins;
+3. check whether they are full;
+4. follow the path toward Garbage Disposal;
+5. confirm that Maintenance has an assigned worker;
+6. watch whether the worker can complete one pickup;
+7. use the Bubble Gun on dirty ground left behind.
+
+Trash and dirty ground are not the same state.
+
+A clean bin route does not remove stains automatically. The Bubble Gun does not
+replace Garbage Disposal.
+
+I place more bins when tourists generate garbage faster than the current bins
+can hold it.
+
+I add another Maintenance worker only after the current worker, disposal, and
+walking route are confirmed to work.
+
+<h2 id="garbirds">
+  How I Get Rid of Garbirds
+</h2>
+
+Garbirds begin appearing when the town has too much garbage.
+
+They make the problem worse by running around and flicking trash out of bins, so
+I handle the immediate creature and the underlying garbage backlog separately.
+
+<figure className="my-8">
+  <Image
+    src="/images/go-go-town/go-go-town-garbird-infestation.webp"
+    alt="Go-Go Town Garbird infestation caused by too much garbage in town"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    Driving a Garbird away stops the immediate disruption. It does not fix the
+    full bins and missing cleanup capacity that allowed it to appear.
+  </figcaption>
+</figure>
+
+To scare a Garbird away, I use one of these:
+
+- a vehicle horn;
+- the vehicle itself;
+- an Industry tool such as the Blower;
+- a thrown item;
+- or a high five.
+
+The vehicle horn was the easiest option when my truck or bike was already
+nearby. I drive toward the bird, use the horn, and keep pressure on it until it
+leaves.
+
+I do not stop after the warning disappears.
+
+I immediately:
+
+1. empty the nearest full bins;
+2. clear loose garbage;
+3. check Garbage Disposal capacity;
+4. confirm the Maintenance assignment;
+5. add bins near the tourist hotspot if needed;
+6. clean the dirty ground with the Bubble Gun.
+
+When Garbirds return quickly, I treat that as evidence that the garbage system
+is still undersized or too slow.
+
+It is not proof that the Garbird removal action failed.
+
+<h2 id="reset-checklist">
+  My Least-Destructive Reset Checklist
+</h2>
+
+When every visible part looks correct but the chain still does not update, I use
+this order:
+
+1. Save the game.
+2. Confirm that the system is unlocked in EGO Tech.
+3. Reopen housing and verify the Townie still lives there.
+4. Unassign and reassign the affected workplace.
+5. Confirm the final destination recipe.
+6. Remove and reapply the relevant Storage lock.
+7. Clear one slot at both the source and destination.
+8. Recheck the Industry Zone entrance connection.
+9. Follow one complete Courier or Maintenance trip.
+10. Reload the save only after recording the current assignments and recipes.
+
+I do not delete the entire district first.
+
+Removing the Time Clock, Storage, processor, road, and destination at the same
+time destroys the evidence that tells me which link was failing.
+
+For the overall order of Industries, shops, Townies, EGO, and Town Rankings,
+return to the{" "}
+<Link
+  href="/go-go-town/"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Go-Go Town 1.0 guide hub
+</Link>
+.
+
+<h2 id="faq">
+  Go-Go Town Automation FAQ
+</h2>
+
+### Why is the Courier Building missing from my Build menu?
+
+I treat that as a progression problem rather than a Courier route problem. I
+check the current Town Goals, claim any completed bracket reward, and inspect
+both current and older EGO Tech tiers. Rebuy only helps after the original
+unlock has been purchased.
+
+### Why can I invite a Townie but not assign them to a job?
+
+Inviting does not automatically provide housing. I place the Townie in a tent,
+house, or apartment with a free slot, then manage the workplace and assign the
+same Townie separately. I also check that they are not already working
+somewhere else.
+
+### Can I operate a shop while I wait for another Townie?
+
+Yes. I stand behind the counter and run the shop manually. I use this to keep
+Coins and EGO moving while I complete a Townie request or build more housing,
+but I still need the correct recipe and ingredients.
+
+### Why does a worker stop after collecting resources successfully?
+
+The current demand may already be satisfied. Workers collect enough to cover
+active demand unless I create continuing stockpile demand with a Storage lock.
+I check whether the destination and locked Storage are already full before
+changing the worker.
+
+### Why does `No Space` remain after I empty my backpack?
+
+The blocked inventory may belong to Storage, a processor, shop stock, vehicle,
+or Courier destination. I reproduce the message and note which object I am
+interacting with before clearing more items.
+
+### Does a Garbird mean my Maintenance Worker is broken?
+
+Not necessarily. Garbirds appear when garbage has built up and can scatter more
+trash from bins. I scare the Garbird away, then check whether bin capacity,
+Garbage Disposal, walking distance, or Maintenance staffing caused the original
+backlog.
+
+### Why is my EGO full but an automation building is still unavailable?
+
+A full EGO meter does not purchase an unlock automatically. I open EGO Tech,
+find the required node, and buy it. When the node is unavailable, I return to
+Town Rankings and check the active goals and unclaimed rewards.

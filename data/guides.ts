@@ -131,6 +131,138 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Go-Go Town!",
+    game: "Go-Go Town!",
+    href: "/go-go-town",
+    slug: "go-go-town",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Town Management Sim",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the Go-Go Town 1.0 guide hub from Forestry, Mining and the Town Hall through shops, Townies, EGO Tech, Tourist Tracker, automation, Challenge 10, Agent Peanut, the Safe, Bunker Network, and Town Deed.",
+    coverage: [
+      "Complete 1.0 progression route from the TownCo. tutorial, Forestry, Mining, Planks, Bricks, Town Hall, Train Station, first shop, housing, Townies, Tourist Tracker, Import, Export, Creative Mode, and Challenge 10 preparation",
+      "Worker demand, Townie housing and assignments, Storage locks, processors, Industry Zone connections, Courier road access, full inventories, Garbage Disposal, Maintenance, Bubble Gun cleanup, and Garbirds",
+      "Top Town Tournament goals, Claim Rewards, Town Rank versus EGO Tech, Rebuy, missing buildings, Tourism Hub No Spot, Advanced Materials Factory setup, missing recipes, and progression reset checks",
+      "Challenge 10, number-one Town Ranking, Agent Peanut, Town Co. Safe location and code, TownCo. Bunker Door Key, surface bunker entrances, Unable to Pass to Destination, red bunker door, and Town Deed"
+    ],
+    image:
+      "/images/go-go-town/go-go-town-town-hall-complete-train-station.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 16,
+      footerFeatured: true
+    },
+    pages: [
+      {
+        title: "Go-Go Town 1.0 Guide Hub",
+        href: "/go-go-town",
+        type: "Guide Hub",
+        description:
+          "Start with Forestry and Mining, finish the Town Hall, run the first shop, house Townies, spend EGO safely, automate stable routes, use Import wisely, and prepare for Challenge 10.",
+        image:
+          "/images/go-go-town/go-go-town-town-hall-complete-train-station.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Forestry, Mining, Town Hall, first shop, housing, Townies, Tourist Tracker, EGO Tech, automation, Import, Creative Mode, and Challenge 10"
+        },
+        archive: {
+          showInCollections: true,
+          order: 1
+        }
+      },
+      {
+        title: "Go-Go Town Automation Not Working Guide",
+        href: "/go-go-town/automation-not-working",
+        type: "Systems",
+        description:
+          "Fix idle workers, unassignable Townies, stopped processors, Storage blocks, Courier routes, Industry Zone access, garbage buildup, Maintenance failures, and Garbirds.",
+        date: "Updated recently",
+        image:
+          "/images/go-go-town/go-go-town-worker-no-demand.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 66,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Townie housing and jobs, worker demand, tools, processors, Storage locks, Couriers, Industry Zone access, Maintenance, garbage, and Garbirds"
+        },
+        archive: {
+          showInCollections: true,
+          order: 2
+        }
+      },
+      {
+        title: "Go-Go Town Progression Stuck Guide",
+        href: "/go-go-town/progression-stuck",
+        type: "Systems",
+        description:
+          "Fix Town Goals that will not advance, unclaimed rewards, locked EGO Tech, missing Rebuy items, Tourism Hub No Spot, unfinished buildings, and recipes that never appear.",
+        date: "Updated recently",
+        image:
+          "/images/go-go-town/go-go-town-rank-nine-tech-tier-six.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 67,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Town Goals, Claim Rewards, Town Rank versus EGO Tech, Tourist Tracker, Rebuy, missing buildings, Tourism Hub, factories, recipes, and Creative Mode"
+        },
+        archive: {
+          showInCollections: true,
+          order: 3
+        }
+      },
+      {
+        title: "Go-Go Town Agent Peanut Safe Code Guide",
+        href: "/go-go-town/agent-peanut-safe-code",
+        type: "Endings",
+        description:
+          "Reach number one, find Agent Peanut, open the Town Co. Safe, collect the Bunker Door Key, fix blocked bunker destinations, open the red door, and discover the Town Deed.",
+        date: "Updated recently",
+        image:
+          "/images/go-go-town/go-go-town-safe-locked-code-required.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: true,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 68,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Challenge 10, number-one ranking, Agent Peanut, Safe code, Bunker Door Key, bunker entrances, destination errors, red door, and Town Deed"
+        },
+        archive: {
+          showInCollections: true,
+          order: 4
+        }
+      }
+    ]
+  },
+  {
     title: "Grim Dawn: Fangs of Asterkarn",
     game: "Grim Dawn: Fangs of Asterkarn",
     href: "/grim-dawn-fangs-of-asterkarn",
