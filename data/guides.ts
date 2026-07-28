@@ -131,6 +131,239 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Scrap Mechanic",
+    game: "Scrap Mechanic",
+    href: "/scrap-mechanic",
+    slug: "scrap-mechanic",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Cozy, crafting, survival & systems",
+    label: "Survival Engineering",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the Scrap Mechanic 1.0 guide hub from the first Grow Lab and Hubert's Warehouse route through the Trash Bot boss, Mining Site 01, Plasma Drill vehicles, ore processing, Vault Quotas, the Small Tank Watchtower quest, and all 34 achievements.",
+    coverage: [
+      "First Grow Lab preparation, route order, combat checks, progression rewards, later Grow Lab rules, keys, respawn planning, and safe exits",
+      "Hubert's Lost and Found route, regular Warehouse Keys, Farmbot drops, Warehouse Master Key differences, the correct story marker, and locked-door troubleshooting",
+      "Story Warehouse preparation, Anti-theft protection, Utility rooms, Return Chutes, Trash Bot damage windows, backpack recovery, Lorenzo, the Mining Site 01 reveal, Plasma Drill Level 1, and the five-minute self-destruct escape",
+      "Mining Site 01 access, Plasma Drill Terramass detection, ore ejection, fixed-drill failures, Turret Seat aiming, Sticky Wheels, Electric Engine power, multiple drills, and underground return decisions",
+      "Crushbot input, Residual Ore, Prospector materials, water and connection failures, Ore Balls, the Caster, heavy Ingot transport, Vault Quotas, buffer storage, and automated processing",
+      "Hubert's Small Tank location, Warehouse loot window, Watchtower material requirements, hologram placement failures, Fire Extinguisher reward, and the searchable route for all 34 achievements",
+    ],
+    image:
+      "/images/scrap-mechanic/scrap-mechanic-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 17,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Scrap Mechanic 1.0 Guide Hub",
+        href: "/scrap-mechanic",
+        type: "Guide Hub",
+        description:
+          "Choose the correct route for early Grow Labs, Warehouse access, the story Warehouse, Mining Site 01, ore processing, Hubert's Watchtower, or achievement cleanup.",
+        image:
+          "/images/scrap-mechanic/scrap-mechanic-story-warehouse-exterior.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Grow Labs, Warehouse keys, Trash Bot, Mining Site 01, Plasma Drill vehicles, ore processing, Vault Quotas, Watchtower construction, and achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Scrap Mechanic First Grow Lab Walkthrough",
+        href: "/scrap-mechanic/first-grow-lab-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Prepare for the first Grow Lab, follow the interior route, handle its combat and progression checks, collect the reward, and leave without losing the next objective.",
+        date: "Updated recently",
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 69,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "First Grow Lab access, preparation, combat route, progression checks, reward, exit, and later numbered Lab rules",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Scrap Mechanic Warehouse Key Guide",
+        href: "/scrap-mechanic/warehouse-key",
+        type: "Guide",
+        description:
+          "Get the regular Warehouse Key from Hubert or Farmbot drops, distinguish it from the Master Key, follow the correct story marker, and fix a locked entrance.",
+        date: "Updated recently",
+        image:
+          "/images/scrap-mechanic/scrap-mechanic-hubert-spare-warehouse-key.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 70,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Lost and Found, Hubert's spare key, Farmbot drops, regular versus Master Key, carried inventory, story marker, and locked-door fixes",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Scrap Mechanic Warehouse Walkthrough",
+        href: "/scrap-mechanic/warehouse-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear the story Warehouse, beat the Trash Bot, recover your backpack, use the Master Key, reveal Mining Site 01, and escape the self-destruct.",
+        date: "Updated recently",
+        image:
+          "/images/scrap-mechanic/scrap-mechanic-trashbot-exposed-head.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 71,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Anti-theft lock, Utility elevators, Return Chute, Trash Bot weak point, backpack recovery, Lorenzo, Master Key, Mining Site 01, and self-destruct",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Scrap Mechanic Hubert Watchtower & Small Tank",
+        href: "/scrap-mechanic/hubert-watchtower-small-tank",
+        type: "Walkthrough",
+        description:
+          "Find and collect the physical Small Tank, prepare the Watchtower materials, place every hologram part correctly, and claim Hubert's Fire Extinguisher.",
+        date: "Updated recently",
+        image:
+          "/images/scrap-mechanic/scrap-mechanic-hubert-watchtower-small-tank-installed.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 72,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Small Tank location, Warehouse Anti-theft lock, loot timing, bulk materials, hologram placement, hidden parts, and Fire Extinguisher reward",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "Scrap Mechanic Mining Site 01 Guide",
+        href: "/scrap-mechanic/mining-guide",
+        type: "Systems",
+        description:
+          "Enter Mining Site 01, identify valid Terramass, collect ejected Ore, fix Plasma Drill vehicles, aim with the Turret Seat, and plan traction and power.",
+        date: "Updated recently",
+        image:
+          "/images/scrap-mechanic/scrap-mechanic-mining-site-01-gyro-core-map.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: true,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 73,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Mining access, Terramass meter, ore ejection, fixed-drill failures, Turret Seat clearance, Sticky Wheels, Electric Engine, Batteries, and multiple drills",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+      {
+        title: "Scrap Mechanic Ore Processing Guide",
+        href: "/scrap-mechanic/ore-processing-guide",
+        type: "Systems",
+        description:
+          "Process mined Ore with the Crushbot and Prospector, form Ore Balls, cast and haul Ingots, protect Vault Quotas, and repair failed automation.",
+        date: "Updated recently",
+        image:
+          "/images/scrap-mechanic/scrap-mechanic-crushbot-manual-ore-input.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 74,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Crushbot input, Residual Ore, Prospector water and materials, connections, Ore Balls, Caster, Ingots, Vault Quotas, buffers, and automation",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+      {
+        title: "Scrap Mechanic Achievements Guide",
+        href: "/scrap-mechanic/achievements",
+        type: "Achievements",
+        description:
+          "Track all 34 achievements with story milestones, combat counters, construction goals, Vault targets, vehicle challenges, and long-term cleanup priorities.",
+        date: "Updated recently",
+        image:
+          "/images/scrap-mechanic/scrap-mechanic-vault-10000-quota.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 75,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "All 34 achievements, story milestones, Grow Labs, Trash Bot, Minerbots, construction goals, Vault value, vehicles, and long-term counters",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+    ],
+  },
+  {
     title: "Go-Go Town!",
     game: "Go-Go Town!",
     href: "/go-go-town",
@@ -151,7 +384,7 @@ export const guideClusters: GuideCluster[] = [
       "Challenge 10, number-one Town Ranking, Agent Peanut, Town Co. Safe location and code, TownCo. Bunker Door Key, surface bunker entrances, Unable to Pass to Destination, red bunker door, and Town Deed"
     ],
     image:
-      "/images/go-go-town/go-go-town-town-hall-complete-train-station.webp",
+      "/images/go-go-town/go-go-town-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,

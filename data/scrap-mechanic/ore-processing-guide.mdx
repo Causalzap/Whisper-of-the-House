@@ -1,0 +1,875 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const processingDecisionColumns = [
+  {
+    key: "decision",
+    label: "Decision",
+  },
+  {
+    key: "trigger",
+    label: "Trigger",
+  },
+  {
+    key: "action",
+    label: "What I Do",
+  },
+  {
+    key: "avoid",
+    label: "What I Avoid",
+  },
+];
+
+export const processingDecisionRows = [
+  {
+    decision: "Keep the first batch manual",
+    trigger:
+      "I have not yet confirmed which side accepts input or where the output appears.",
+    action:
+      "Feed one Ore chunk by hand, watch one complete cycle, and identify the output side.",
+    avoid:
+      "Building a large pipe network around an untested machine orientation.",
+  },
+  {
+    decision: "Add a buffer chest",
+    trigger:
+      "Residual Ore is waiting while the Prospector finishes its current cycle.",
+    action:
+      "Place one input chest before the Prospector and one output chest after it.",
+    avoid:
+      "Leaving loose items beside an intake and assuming the machine will collect them.",
+  },
+  {
+    decision: "Automate the line",
+    trigger:
+      "Every mining trip returns several chunks and I am repeating the same transfers by hand.",
+    action:
+      "Connect input storage, the processing machine, water where required, and output storage.",
+    avoid:
+      "Automating before one manual item has successfully reached the final chest.",
+  },
+  {
+    decision: "Add more Prospectors",
+    trigger:
+      "One Prospector runs continuously while the Residual Ore input chest remains full.",
+    action:
+      "Add another Prospector only when water supply and output storage still have capacity.",
+    avoid:
+      "Adding machines when the current Prospector is idle or the real problem is a blocked pipe.",
+  },
+  {
+    decision: "Finish processing before mining again",
+    trigger:
+      "An Ore Ball, finished Ingots, or a nearly completed Vault Quota is waiting.",
+    action:
+      "Move the Ball, collect the Ingots, and deposit the current value first.",
+    avoid:
+      "Spending another hour underground while finished progression value remains unclaimed.",
+  },
+  {
+    decision: "Return to the mine",
+    trigger:
+      "The line is stable, storage has space, and the current batch cannot reach the next Quota.",
+    action:
+      "Restock the mining vehicle and collect only the additional value I still need.",
+    avoid:
+      "Expanding the processing system when extraction is now the actual bottleneck.",
+  },
+];
+
+Mining Terramass is only the first half of Scrap Mechanic's underground loop.
+
+The physical Ore still has to pass through a **Crushbot**, any **Residual Ore**
+must be washed by a water-fed **Prospector Bot**, accepted material has to form
+an Ore Ball inside the Mining Hub, and the finished Ingots must reach the
+**Vault** before they contribute to the next Quota.
+
+The first time I attempted this, I dropped an Ore chunk beside the Crushbot and
+waited. Nothing happened.
+
+The machine only started after I picked the chunk up and placed it directly
+into the Crushbot.
+
+<GuideQuickAnswer title="My Ore Processing Route in 6 Steps">
+  <ol className="mt-3 list-decimal space-y-2 pl-5">
+    <li>
+      Bring the physical Ore chunks back from the mine and hand-feed one chunk
+      into the Crushbot.
+    </li>
+    <li>
+      Watch where the first result appears, then separate direct processed
+      material from Residual Ore.
+    </li>
+    <li>
+      Send only Residual Ore through a water-fed Prospector and keep several
+      output slots free for mixed materials.
+    </li>
+    <li>
+      Deliver accepted processed material to its matching Mining Hub intake and
+      wait for the Ore Ball.
+    </li>
+    <li>
+      Move the Ball along the colored route to the Caster, then carry the heavy
+      Ingots to the Vault.
+    </li>
+    <li>
+      Keep Credits deposited until the current Quota unlocks, and automate only
+      when manual transfers become the real bottleneck.
+    </li>
+  </ol>
+</GuideQuickAnswer>
+
+<h2 id="processing-chain">
+  The Ore Processing Chain I Follow
+</h2>
+
+I divide the underground system into four jobs:
+
+1. **Plasma Drill:** extracts Terramass and ejects physical Ore;
+2. **Crushbot:** breaks physical Ore into processed results;
+3. **Prospector Bot:** washes Residual Ore and reveals mixed materials;
+4. **Caster and Vault:** convert accepted batches into Ingots and Quota value.
+
+The mining guide ends when the Plasma Drill ejects the physical Ore.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-plasma-drill-ore-ejection.webp"
+    alt="Scrap Mechanic Plasma Drill ejecting a physical Ore chunk after its collection meter fills"
+    width={550}
+    height={332}
+    priority={true}
+    className="mx-auto h-auto w-full max-w-2xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
+    The ejected Ore is a physical object that still has to be collected,
+    transported, and processed.
+  </figcaption>
+</figure>
+
+The complete extraction setup is covered in the{" "}
+<Link
+  href="/scrap-mechanic/mining-guide"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Scrap Mechanic mining guide
+</Link>
+
+This guide begins with the loose Ore sitting beside the processing machines.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="universal-connection-check">
+  The Input and Output Check I Run Before Troubleshooting Anything Else
+</h2>
+
+The most common fault in my Mining Hub machines was not missing power.
+
+It was an input, output, Vacuum Tube, or Pump facing the wrong direction.
+
+I use the same test before troubleshooting the Crushbot, Prospector, or complete
+automation line:
+
+1. disconnect the large storage network;
+2. place one test item into the machine manually;
+3. watch which side accepts it;
+4. wait for the full cycle;
+5. identify the exact point where the result appears;
+6. reconnect one input chest and one output chest;
+7. test one more item before filling either chest.
+
+This establishes the machine direction once.
+
+Later sections only describe problems unique to that machine rather than
+repeating the complete input-and-output explanation.
+
+A pipe that visually touches a port is not proof that the item is moving in the
+correct direction.
+
+<h2 id="first-crushbot">
+  How I Use the Crushbot for the First Time
+</h2>
+
+For the first batch, I process one Ore chunk manually.
+
+I place the Crushbot on a stable surface, pick up the mined Ore, and interact
+with the machine while carrying it.
+
+Dropping the chunk beside the Crushbot does nothing.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-crushbot-manual-ore-input.webp"
+    alt="Scrap Mechanic player placing a mined Ore chunk directly into the Crushbot"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    The first Ore must be picked up and inserted into the Crushbot; leaving it
+    on the floor beside the machine does not start the cycle.
+  </figcaption>
+</figure>
+
+One manual cycle confirms:
+
+- the Ore type is accepted;
+- the machine is placed correctly;
+- the output side is clear;
+- the result is not trapped underneath the Crushbot;
+- the Crushbot itself works before automation is added.
+
+I collect the first result by hand before connecting storage.
+
+That lets me read the item label and decide whether it belongs in direct
+processing storage or the Residual Ore chest.
+
+<h2 id="crushbot-not-working">
+  Why My Crushbot Is Not Taking the Ore
+</h2>
+
+### The Ore is only sitting beside the machine
+
+I pick the chunk up and insert it through the interaction point.
+
+The Crushbot does not automatically collect loose Ore from the floor unless I
+have built a functioning collection system.
+
+### I am feeding Residual Ore back into the Crushbot
+
+The Crushbot accepts the physical Ore produced by the Plasma Drill.
+
+Residual Ore is already a later processing result. I move it to the Prospector
+rather than cycling it through the Crushbot again.
+
+### Manual input works, but the input chest does not
+
+That means the Crushbot itself is working.
+
+I inspect:
+
+- Vacuum Tube direction;
+- Pump direction;
+- whether the chest is connected to the actual input side;
+- whether the chest contains the same item used in the successful manual test;
+- whether a switch or button is activating the expected connection.
+
+I return to the universal one-item test before replacing the Crushbot.
+
+<h2 id="crushbot-output">
+  What the Crushbot Outputs and Where Each Result Goes
+</h2>
+
+The Crushbot can create more than one kind of processed result.
+
+The most important split is:
+
+- **direct processed material:** keep it labeled and send it to the matching
+  Mining Hub intake when required;
+- **Residual Ore:** wash it in the Prospector before deciding where it belongs.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-residual-ore-after-crushbot.webp"
+    alt="Scrap Mechanic Residual Ore produced after processing mined Ore in the Crushbot"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    Residual Ore is the Crushbot output I route into the water-fed Prospector
+    line.
+  </figcaption>
+</figure>
+
+I do not claim a complete fixed list of every direct Crushbot result from this
+run because the captured material does not clearly show every item label.
+
+Instead, I sort each result by the name displayed in-game.
+
+My first storage layout uses:
+
+- one chest for unprocessed physical Ore;
+- one chest for Residual Ore;
+- one chest with several free slots for revealed Prospector materials;
+- one clear loading area for finished Ingots.
+
+This prevents the Prospector from consuming the wrong material and keeps heavy
+Ingots out of normal storage planning.
+
+<h2 id="prospector-bot">
+  How the Prospector Bot Works
+</h2>
+
+The Prospector washes Residual Ore and reveals the material hidden inside it.
+
+It requires water.
+
+The machine can be supplied manually or connected to a Water Container, and its
+rear ports provide separate material input and output connections.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-prospector-water-input-output.webp"
+    alt="Scrap Mechanic Prospector showing its water requirement and separate input and output connections"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    Water supply, Residual Ore input, and processed-material output are separate
+    parts of the Prospector setup.
+  </figcaption>
+</figure>
+
+My first test is deliberately small:
+
+1. fill or connect the Water Container;
+2. verify the input and output symbols;
+3. insert one Residual Ore item;
+4. wait for one complete wash cycle;
+5. confirm that water is consumed;
+6. confirm that a revealed material reaches the output.
+
+A mixed result is normal.
+
+The Prospector does not guarantee one specific material from every Residual Ore
+item.
+
+<h2 id="prospector-materials">
+  Materials I Confirmed From the Prospector
+</h2>
+
+The revealed output in my run included:
+
+- **Metal Block 1**;
+- **Chemical**;
+- **Quartz**;
+- **Sand**;
+- **Crimsonite**.
+
+I handle them differently.
+
+### Metal Block 1
+
+I send Metal into the active machine, vehicle, and structural crafting queues
+rather than depositing every piece immediately.
+
+Mining upgrades and processing infrastructure can consume large amounts of
+Metal, so selling or converting all of it can create another surface-resource
+grind.
+
+### Chemical
+
+I reserve Chemical for systems that already consume it, especially Battery
+crafting and Sticky Wheel operation.
+
+If the mining vehicle uses Sticky Wheels, Chemical output can directly reduce
+the cost of the next underground trip.
+
+### Quartz
+
+I store Quartz separately.
+
+It appears in machine and progression recipes, so I avoid mixing it into a
+general output chest where it is difficult to count.
+
+### Sand
+
+I keep Sand in its own labeled stack until a current recipe or Mining Hub intake
+requires it.
+
+The important decision is not to treat every revealed material as immediate
+Vault value.
+
+### Crimsonite
+
+Crimsonite appeared as a named Prospector result in my run.
+
+I preserve it until its current recipe, station, or progression use is clear
+rather than consuming a rarer output experimentally.
+
+<h2 id="prospector-not-working">
+  Why My Prospector Bot Is Not Working
+</h2>
+
+I run the universal input-and-output test first.
+
+After direction is confirmed, the Prospector has four additional failure points.
+
+### The Water Container is connected but empty
+
+A connected empty container still leaves the Prospector unable to wash Residual
+Ore.
+
+I check the actual water level instead of treating the visible pipe as proof of
+supply.
+
+### The Residual Ore is beside the intake rather than inside it
+
+Loose items near a port are not the same as items moving through the input.
+
+For manual testing, I insert one item directly. For automation, I use an input
+buffer chest.
+
+### The control will not connect
+
+In my automated build, one control connection refused to register while the
+machines merely looked close together.
+
+Placing the controls and processing machines on a small continuous Concrete
+foundation removed the ambiguity.
+
+I treat this as a diagnostic from my build, not a rule that every Mining Hub
+machine requires a giant shared floor.
+
+### The Prospector is working, but no result appears
+
+I wait for a complete cycle and inspect the output chest.
+
+A mixed Prospector result needs several free storage slots. A chest with many
+nearly full stacks can run out of usable space earlier than expected.
+
+### The input chest remains full
+
+If the Prospector is cycling continuously, this is a throughput problem.
+
+If the Prospector is idle, it is still a connection, water, or input problem.
+Adding another machine will not fix it.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="confirmed-numbers">
+  Ore Processing Numbers I Could Actually Confirm
+</h2>
+
+I keep verified values separate from estimates.
+
+The confirmed numbers from this route are:
+
+- one deposited valuable was worth **2,500 Credits**;
+- that deposit completed the first **10,000 Quota**;
+- reaching 10,000 unlocked the next Access Card and mine-floor progression;
+- a later active Quota increased to **100,000**;
+- one Prospector eventually became too slow;
+- I expanded from **1 Prospector to 3 Prospectors**.
+
+The following values were not reliably captured:
+
+- a fixed amount of Residual Ore required for one revealed material;
+- a guaranteed Prospector output ratio;
+- exact water consumed per Residual Ore cycle;
+- one universal Credit value for every Ingot;
+- one universal material amount required to form every Ore Ball.
+
+I therefore do not turn one observed deposit into a rule such as:
+
+> Every Ingot is worth 2,500 Credits.
+
+The screenshot proves one accepted valuable and one Quota change, not a global
+price table.
+
+<h2 id="ore-ball">
+  How I Turn Processed Material Into an Ore Ball
+</h2>
+
+The Mining Hub has fixed intake stations for accepted processed materials.
+
+I deliver the correct batch to its matching station using a container, Vacuum
+Pump, or controlled manual setup.
+
+When the required batch is accepted, the Hub forms a large Ore Ball on the
+upper platform.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-mining-hub-ore-ball.webp"
+    alt="Scrap Mechanic processed material forming a large Ore Ball above the Mining Hub transport system"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    The Ore Ball confirms that the Mining Hub intake accepted the processed
+    batch.
+  </figcaption>
+</figure>
+
+If no Ball appears, I check:
+
+- the item label matches the intake;
+- the material left the input chest;
+- the Pump faces the correct direction;
+- the intake has received enough material;
+- the item is a revealed material rather than unwashed Residual Ore;
+- I am watching the correct Ball platform.
+
+I test one material type at a time.
+
+Feeding several unrelated items into one intake makes it much harder to
+identify what the station is still missing.
+
+<h2 id="caster-route">
+  How I Move the Ore Ball to the Caster
+</h2>
+
+The Mining Hub uses colored transport lines and sloped transfer points.
+
+I navigate one transfer at a time rather than trying to memorize the complete
+Hub as one route.
+
+In my first run:
+
+- the **turquoise line** helped me reach the upper Ball platform;
+- the **red line** led toward the Caster side;
+- the other colored lines connected intermediate ramps and transfer points.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-mining-hub-colored-lines.webp"
+    alt="Scrap Mechanic Mining Hub colored transport lines leading from the Ore Ball platform toward the Caster"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    I follow the colored route between the Ball platform, transfer ramps, and
+    Caster instead of wandering through the lower Hub.
+  </figcaption>
+</figure>
+
+My movement sequence is:
+
+1. identify the Ball's current platform;
+2. find the next marked ramp;
+3. push or strike the Ball toward that ramp;
+4. follow it to the next stop;
+5. repeat until it enters the Caster.
+
+When the Ball rests against the lip of a ramp, I use one controlled Hammer hit.
+
+Repeated full-strength hits can knock it away from the intended transport line
+and create more recovery work.
+
+<h2 id="caster-ingots">
+  How the Caster Produces Ingots
+</h2>
+
+Once the Ball enters the Caster, the Hub handles the final conversion.
+
+I wait beside the output area rather than standing below the moving Ball route.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-caster-ingots-output.webp"
+    alt="Scrap Mechanic Mining Hub Caster producing finished Ingots from an Ore Ball"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    I wait for the complete Caster cycle before moving the hauling vehicle into
+    the output area.
+  </figcaption>
+</figure>
+
+The Ingots are heavy physical objects.
+
+A large load compressed my suspension and made the vehicle much less stable
+than an ordinary inventory run.
+
+My hauling setup uses:
+
+- a low loading platform;
+- strengthened suspension when the vehicle begins sitting too low;
+- weight distributed across the complete bed;
+- no unnecessary mining equipment on the hauling trip;
+- enough Fuel or Batteries for the full route;
+- slower turns and braking.
+
+I prefer a simple low trailer over rebuilding the entire mining vehicle around
+Ingot transport.
+
+The mining rig needs drill clearance and traction. The hauling platform needs a
+low center of gravity and predictable weight distribution.
+
+Those are different jobs.
+
+<h2 id="vault">
+  How I Deposit Ingots in the Vault
+</h2>
+
+I carry accepted valuables to the Vault deposit point.
+
+The Vault converts them into Credits and adds that value toward the active
+Quota.
+
+One item in my route displayed **2,500 Credits** and completed the first
+**10,000 Quota**.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-vault-10000-quota.webp"
+    alt="Scrap Mechanic Vault reaching the 10000 Quota after a 2500 Credit valuable is deposited"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    Reaching the 10,000 Quota unlocked the next Access Card and mine-floor
+    progression in my run.
+  </figcaption>
+</figure>
+
+Lorenzo warns that the Vault permits withdrawals but can leave the balance in
+the red.
+
+My spending rule is:
+
+- below the current Quota, leave the Credits deposited;
+- after reaching the target, confirm the Access Card or floor unlock;
+- spend only the surplus after the progression state updates.
+
+The next observed objective increased to **100,000**.
+
+During that run, I reached approximately 95,000 and then about 96,000. I did
+not capture the post-100,000 reward, so I do not claim what unlocks after that
+threshold.
+
+The achievement route eventually requires a Vault value of **2,000,000**. That
+long-term target is covered in the{" "}
+<Link
+  href="/scrap-mechanic/achievements"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Scrap Mechanic achievements guide
+</Link>
+
+<h2 id="processing-decisions">
+  When I Automate, Add Machines, or Return to Mining
+</h2>
+
+The current bottleneck decides the next step.
+
+<GuideTable
+  caption="Ore processing decisions based on the problem currently slowing the loop."
+  columns={processingDecisionColumns}
+  rows={processingDecisionRows}
+/>
+
+This replaces several nearly identical “when I do X” checklists.
+
+The key distinction is:
+
+- **broken line:** fix direction, water, control, or storage;
+- **slow line:** add capacity;
+- **empty line:** return to mining;
+- **finished value waiting:** complete the Caster and Vault route first.
+
+More machines solve throughput.
+
+They do not solve missing input.
+
+<h2 id="automation-layout">
+  How I Build the Automated Processing Layout
+</h2>
+
+I build the first automatic line on a compact Concrete frame near water and the
+Mining Hub elevator.
+
+The frame keeps the controls easy to identify and leaves enough space behind
+each machine for the ports.
+
+My build order is:
+
+1. place the Water Container;
+2. place the first Prospector with access to both rear ports;
+3. add an input buffer chest;
+4. add an output chest with several free slots;
+5. connect the water line;
+6. connect the Residual Ore input;
+7. connect the revealed-material output;
+8. add the switch, button, or Pump control;
+9. test one Residual Ore item;
+10. expand only after that item reaches the output chest.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-automated-ore-processing-running.webp"
+    alt="Scrap Mechanic automated Prospector line washing Residual Ore and sending the output into storage"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    I consider the line functional only after one Residual Ore item reaches the
+    intended output chest.
+  </figcaption>
+</figure>
+
+I test with one item rather than a full chest because it shows:
+
+- whether the item leaves the input;
+- whether water is consumed;
+- whether the Prospector cycles;
+- where the result appears;
+- whether the correct output chest receives it.
+
+A full chest hides those transitions and makes one reversed connection harder
+to diagnose.
+
+The Craftbot is optional.
+
+It does not make the Crushbot, Prospector, Caster, or Vault function. I place
+one near the revealed-material storage only when I want to use the output
+without transporting it back to the surface.
+
+<h2 id="automation-not-working">
+  Why My Automated Ore Processing Line Is Not Working
+</h2>
+
+### The Water Container is connected, but nothing is washing
+
+Check the actual water level.
+
+A correct pipe connected to an empty container still provides no water.
+
+Then confirm that the line reaches the Prospector's water connection rather
+than a material port.
+
+### The switch or button will not connect
+
+Place the control on the same continuous structure as the parts it needs to
+control.
+
+A small Concrete bridge fixed this problem in my build.
+
+I test this before replacing every Vacuum Tube.
+
+### The input chest is full, but nothing enters the Prospector
+
+Run the universal direction check again.
+
+Then confirm:
+
+- the chest contains Residual Ore;
+- the Pump points away from the chest and toward the Prospector;
+- the input port is not being used as the output;
+- the Prospector has water;
+- the machine is not blocked by its current cycle.
+
+### The item enters, but no result reaches storage
+
+Watch one complete wash cycle.
+
+Then inspect:
+
+- the first output tube;
+- missing corners or T-pieces;
+- the connection to the output chest;
+- available chest slots;
+- whether the result dropped onto the floor.
+
+Mixed Prospector outputs can fill several partial stacks, so total empty space
+is less useful than having several completely free slots.
+
+### The line works, but the backlog grows
+
+That is not a connection failure.
+
+It means extraction is delivering Residual Ore faster than the current
+Prospector capacity can wash it.
+
+Only after water and output storage remain stable do I add another Prospector.
+
+<h2 id="multiple-prospectors">
+  Why I Expanded From One Prospector to Three
+</h2>
+
+I began with one Prospector.
+
+Later, two Ore Balls were already ready elsewhere in the Hub while the single
+Prospector was still working through a large Residual Ore backlog.
+
+At that point I added **two more Prospectors**, bringing the line to three.
+
+<figure className="my-8">
+  <Image
+    src="/images/scrap-mechanic/scrap-mechanic-three-prospector-bots.webp"
+    alt="Scrap Mechanic automated ore processing line expanded from one to three Prospector Bots"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-3xl text-sm text-slate-400">
+    Three Prospectors became worthwhile only after the single-Bot line remained
+    active while Residual Ore continued accumulating.
+  </figcaption>
+</figure>
+
+The additional Bots shared the general water and output network.
+
+Before expanding, I verify that:
+
+- the first Prospector is continuously active;
+- the input chest remains full;
+- the Water Container is not emptying too quickly;
+- the output chest has room;
+- the tubes are not already blocked.
+
+If the original machine is idle, another Prospector only creates a second idle
+machine.
+
+<h2 id="when-to-return">
+  When I Leave the Processing Area and Return to the Mine
+</h2>
+
+I first clear any progression value already waiting:
+
+- move an available Ore Ball;
+- collect finished Ingots;
+- deposit accepted valuables;
+- check whether the Vault crosses its target;
+- confirm whether a new Access Card or floor unlock appears.
+
+Only then do I decide whether another mining trip is needed.
+
+I return underground when:
+
+- no finished Ingot is waiting;
+- no Ore Ball is ready;
+- the processing line is stable;
+- water and output storage have capacity;
+- the current Vault balance still needs more value.
+
+This prevents unnecessary vehicle upgrades.
+
+After depositing the existing batch, I may discover that the next step requires
+only one short mining run rather than another Plasma Drill, another Prospector,
+or a completely new hauler.
+
+<h2 id="faq">
+  Ore Processing Edge Cases
+</h2>
+
+### Does each Prospector need its own Water Container?
+
+No. Multiple Prospectors can draw from the same connected water network.
+
+They still need enough shared water for every active wash cycle, and each
+machine needs a clear material input and output path. If the first Prospector
+works but the additional Bots remain idle, I check their individual material
+connections before adding another Water Container.
+
+### Should I keep rare Prospector materials or send everything to the Vault?
+
+I keep at least one labeled stack of a newly revealed material until I know its
+current crafting or progression use.
+
+Metal, Chemical, Quartz, Sand, and Crimsonite do not all have the same immediate
+value to my build. Depositing or consuming every new material can leave me
+short when the next machine, vehicle upgrade, or Station asks for that exact
+resource.
