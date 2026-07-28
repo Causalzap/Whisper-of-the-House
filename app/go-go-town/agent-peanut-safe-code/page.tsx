@@ -11,17 +11,24 @@ const hubUrl = `${siteUrl}/go-go-town`;
 const pageUrl = `${hubUrl}/agent-peanut-safe-code`;
 
 const metadataTitle =
-  "Go-Go Town Agent Peanut Safe Code & Town Deed Guide";
+  "Go-Go Town Agent Peanut Safe Code, Key & Town Deed";
 
 const metadataDescription =
-  "Finish the Agent Peanut endgame route in Go-Go Town: reach #1, get the Safe code, open the Town Co. Safe, unlock the red bunker door, and claim the Town Deed.";
+  "Finish Challenge 10, trigger the Town Deed call, find Agent Peanut, open the Town Co. Safe, get the Bunker Door Key, and claim the Town Deed.";
+
 const imageUrls = [
+  `${siteUrl}/images/go-go-town/go-go-town-boss-town-deed-secret-location.webp`,
+  `${siteUrl}/images/go-go-town/go-go-town-top-town-tournament-final-reward.webp`,
   `${siteUrl}/images/go-go-town/go-go-town-safe-locked-code-required.webp`,
   `${siteUrl}/images/go-go-town/go-go-town-bunker-network-entrance-unlock.webp`,
   `${siteUrl}/images/go-go-town/go-go-town-bunker-network-interior.webp`,
 ];
 
 const toc = [
+  {
+    id: "after-winning-tournament",
+    label: "After winning the tournament",
+  },
   {
     id: "safe-locked",
     label: "Why the Safe is locked",
@@ -33,10 +40,6 @@ const toc = [
   {
     id: "agent-peanut-requirements",
     label: "Agent Peanut requirements",
-  },
-  {
-    id: "agent-toffee",
-    label: "Agent Toffee vs Peanut",
   },
   {
     id: "agent-peanut-not-appearing",
@@ -51,12 +54,8 @@ const toc = [
     label: "Open the Safe",
   },
   {
-    id: "terrain-controls",
-    label: "Terrain controls",
-  },
-  {
     id: "bunker-network",
-    label: "Bunker Network unlocks",
+    label: "Unlock the Bunker Network",
   },
   {
     id: "bunker-interior",
@@ -68,15 +67,15 @@ const toc = [
   },
   {
     id: "red-bunker-door",
-    label: "Red bunker door",
+    label: "Open the red bunker door",
   },
   {
     id: "town-deed",
     label: "Find the Town Deed",
   },
   {
-    id: "when-to-return",
-    label: "When to return",
+    id: "where-to-go-next",
+    label: "Where to go next",
   },
   {
     id: "troubleshooting-checklist",
@@ -90,67 +89,54 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/go-go-town",
+    href: "/go-go-town/",
     label: "Go-Go Town 1.0 Guide Hub",
   },
   {
-    href: "/go-go-town/progression-stuck",
-    label: "Town Rank, EGO & Progression Fixes",
+    href: "/go-go-town/progression-stuck/",
+    label: "Town Goals, EGO Tech & Progression Fixes",
   },
   {
-    href: "/go-go-town/automation-not-working",
+    href: "/go-go-town/automation-not-working/",
     label: "Workers, Couriers & Automation Fixes",
   },
 ];
 
 const faqEntities = [
   {
-    question: "Can I open the Town Co. Safe when I first find it?",
+    question:
+      "Does the Boss's Town Deed call happen before or after the final reward?",
     answer:
-      "No. The early interaction only displays the locked message. Return after finishing Challenge 10, reaching number one in Town Rankings, and speaking to Agent Peanut.",
+      "It happens after the final Top Town Tournament reward is claimed and the tournament conversation finishes. Wait through the apparent ending for the Boss's follow-up call about the hidden Town Deed.",
   },
   {
-    question: "Is the Safe code entered through the Phone?",
+    question: "Can I use a Safe code from another save?",
     answer:
-      "No. Finish Agent Peanut's dialogue, travel back to the physical Town Co. Safe, and interact with it there. The Phone and Jailbreak App are unrelated to this objective.",
-  },
-  {
-    question: "Do I need to pay Agent Toffee before opening the Safe?",
-    answer:
-      "Agent Toffee and Agent Peanut have separate objectives. Toffee asks for 30,000 Coins, while Peanut provides the Safe route. Finish both station conversations, but Toffee's payment is not the Safe code.",
-  },
-  {
-    question: "Why is Agent Peanut not appearing?",
-    answer:
-      "Confirm Challenge 10, claim the final reward, verify the number-one ranking, finish pending TownCo. and Train Station dialogue, leave the platform, and return after the arrival sequence updates.",
-  },
-  {
-    question: "Do I need to return to Agent Peanut after opening the Safe?",
-    answer:
-      "Yes when his invitation objective remains active. Collecting the TownCo. Bunker Door Key and reporting the discovery are separate quest steps.",
+      "Do not rely on another save's number. The Town Co. Safe is controlled by the current quest state, so complete Agent Peanut's dialogue and use the code connected to the current town.",
   },
   {
     question:
-      "Does one surface bunker entrance unlock every underground door?",
+      "Do Agent Toffee or the other final agents unlock Peanut's Safe?",
     answer:
-      "No. Each surface entrance connects to a specific bunker route. Enter the local bunker wing, activate its switch, and then return to the shared underground network.",
+      "No. The final agents can appear during the same Train Station window, but their objectives are separate. Their requirements and rewards do not provide Agent Peanut's Safe code.",
   },
   {
     question:
-      "Does my constructed TownCo. Bunker entrance unlock missing destinations?",
+      "Do I need to unlock every Bunker Network entrance before finding the Town Deed?",
     answer:
-      "No. It provides a convenient entrance into the shared network, but the other surface entrances and their connected routes still need to be discovered and activated.",
+      "No. You need a working route into the shared network and access to the deeper story corridor. Unrelated surface destinations may remain locked, although activating more entrances makes navigation easier.",
   },
   {
     question:
-      "Why does the bunker say it cannot pass to the destination?",
+      "Can my constructed TownCo. Bunker entrance replace the surface entrances?",
     answer:
-      "The connected route is missing an entrance, switch, or navigation activation. Return to the corresponding surface region or local bunker wing instead of repeatedly testing the blocked door.",
+      "No. A constructed entrance shortens repeated trips into an accessible network, but each destination still requires its matching surface entrance and activation.",
   },
   {
-    question: "Where is the Town Deed?",
+    question:
+      "Can I open the Town Co. Safe as soon as I find the northwest plot?",
     answer:
-      "The Town Deed is found at the desks in the back of the deeper bunker room. Opening the red door or entering the room does not complete the objective by itself.",
+      "No. Buying the land and reaching the entrance only reveals the early locked state. The Safe remains progression-locked until the final tournament sequence and Agent Peanut dialogue are complete.",
   },
 ];
 
@@ -166,14 +152,14 @@ export const metadata: Metadata = {
     title:
       "Go-Go Town Agent Peanut Safe Code, Bunker Key & Town Deed",
     description:
-      "Finish the final Town Rankings trigger, find Agent Peanut, open the northwest Town Co. Safe, navigate the Bunker Network, and discover the Town Deed.",
+      "Win Challenge 10, trigger the Boss's Town Deed call, find Agent Peanut, open the northwest Safe, navigate the Bunker Network, and claim the deed.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
-        width: 540,
-        height: 448,
-        alt: "Go-Go Town Town Co Safe displaying that it is locked before Agent Peanut provides the code",
+        width: 1280,
+        height: 720,
+        alt: "Go-Go Town Boss revealing that TownCo agents hid the Town Deed in a secret location",
       },
     ],
   },
@@ -181,7 +167,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Find Agent Peanut, open the locked Town Co. Safe, get the Bunker Door Key, fix bunker route errors, and discover the Town Deed.",
+      "Trigger the Town Deed call, get Agent Peanut's Safe code and Bunker Door Key, open the red bunker door, and claim the deed.",
     images: [imageUrls[0]],
   },
 };
@@ -223,17 +209,29 @@ const jsonLd = {
       headline:
         "Go-Go Town Agent Peanut Safe Code, Bunker Door Key and Town Deed Guide",
       description:
-        "A complete Go-Go Town endgame guide for the Agent Peanut route. It explains the Challenge 10 and number-one Town Rankings requirements, why the Town Co. Safe remains locked early, where to find the Safe, how to receive the code, collect the TownCo. Bunker Door Key, finish Peanut's invitation, check the available terrain controls, activate surface bunker entrances, fix the Unable to Pass to Destination error, open the deeper red bunker door, and interact with the rear desks to discover the Town Deed.",
+        "A complete Go-Go Town endgame route covering Top Town Tournament Challenge 10, the final tournament reward, the Boss's follow-up Town Deed call, Agent Peanut's Train Station requirements, the northwest Town Co. Safe, the numeric Safe code, the TownCo. Bunker Door Key, surface bunker entrances, the constructed bunker shortcut, the green central chamber, the Unable to Pass to Destination error, the deeper red bunker door, and the rear desks where the Town Deed objective completes.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-07-27",
-      dateModified: "2026-07-27",
+      dateModified: "2026-07-28",
       about: [
         {
           "@type": "VideoGame",
           name: "Go-Go Town!",
           url: hubUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town Top Town Tournament Challenge 10",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town final tournament reward",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town Boss Town Deed call",
         },
         {
           "@type": "Thing",
@@ -278,10 +276,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Go-Go Town Town Deed",
-        },
-        {
-          "@type": "Thing",
-          name: "Go-Go Town terrain controls",
         },
       ],
       isPartOf: {
@@ -330,12 +324,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="How I Get Agent Peanut's Safe Code and the Town Deed"
-          description="Follow the final route from Challenge 10 and the Train Station to the northwest Town Co. Safe, the Bunker Door Key, the underground red door, and the rear desks that complete the Town Deed objective."
+          description="I follow the post-tournament Town Deed call to Agent Peanut, the northwest Safe, the Bunker Door Key, the red bunker door, and the rear desks."
           gameTitle="Go-Go Town!"
-          gameHref="/go-go-town"
+          gameHref="/go-go-town/"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="July 27, 2026"
+          updatedAt="July 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

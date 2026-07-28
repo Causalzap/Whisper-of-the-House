@@ -14,7 +14,7 @@ const metadataTitle =
   "Go-Go Town 1.0 Guide: Progression, EGO & Automation";
 
 const metadataDescription =
-  "Build a stable Go-Go Town 1.0 route from Forestry and Mining to Town Hall, EGO Tech, automation, Import, Creative Mode, Challenge 10 and the endgame.";
+  "Build a stable Go-Go Town 1.0 route from Forestry and Mining through Town Hall, EGO Tech, automation, Import, Treasures, Challenge 10 and the final Agents.";
 
 const imageUrls = [
   `${siteUrl}/images/go-go-town/go-go-town-four-industries-tutorial.webp`,
@@ -22,6 +22,7 @@ const imageUrls = [
   `${siteUrl}/images/go-go-town/go-go-town-town-rankings-app.webp`,
   `${siteUrl}/images/go-go-town/go-go-town-tourist-desires-ego.webp`,
   `${siteUrl}/images/go-go-town/go-go-town-final-town-goals.webp`,
+  `${siteUrl}/images/go-go-town/go-go-town-boss-town-deed-secret-location.webp`,
 ];
 
 const toc = [
@@ -46,8 +47,8 @@ const toc = [
     label: "When to automate",
   },
   {
-    id: "import-export-expansion",
-    label: "Import, Export & expansion",
+    id: "import-treasures-expansion",
+    label: "Import, Treasures & expansion",
   },
   {
     id: "creative-mode",
@@ -55,7 +56,7 @@ const toc = [
   },
   {
     id: "challenge-ten",
-    label: "Challenge 10 preparation",
+    label: "Challenge 10 & final Agents",
   },
   {
     id: "faq",
@@ -81,36 +82,37 @@ const relatedLinks = [
 const faqEntities = [
   {
     question:
-      "When should I import a material instead of producing it?",
+      "Can I move buildings or Industry Zone signs after placing them?",
     answer:
-      "Import a material when a small quantity of one discovered item is blocking a required construction project. When a shop or processor consumes the same material repeatedly, build or repair a permanent production chain instead.",
+      "Yes. Use the pencil option in the Build Menu to reposition existing Props, including buildings and Zone signs. This is useful when an early layout blocks a road or leaves a processor outside the correct Industry Zone.",
   },
   {
-    question: "What should I export first in Go-Go Town?",
+    question: "Why can I no longer import another vehicle?",
     answer:
-      "Export renewable surplus that is not reserved for a Town Goal, construction project, recipe, or EGO Tech purchase. Keep a deliberate reserve of processed construction materials until the next bracket requirements are known.",
-  },
-  {
-    question:
-      "Should I expand the map before buying my first Courier?",
-    answer:
-      "Usually not. Keep the first industries, Storage, shop, and housing close together. Expand after the current district has a real space problem or a new plot opens a required progression or resource route.",
+      "Vehicle imports can temporarily reach a purchase limit before the Catalogue restocks. Wait for the restock instead of assuming the vehicle was permanently removed or buying another vehicle type you do not need.",
   },
   {
     question:
-      "Why is EGO still slow when every tourist desire has a building?",
+      "Do the three final Agents only appear at a particular time of day?",
     answer:
-      "A building can exist without serving tourists effectively. Check whether it is open, staffed, stocked, reachable, clean, and close to the route visitors actually use. Use Tourist Tracker to identify the weakest result before buying another service.",
+      "No. Once the number-one ranking and Challenge 10 requirements are complete, check the Train Station without waiting for a particular time of day. Pending dialogue and arrival sequences matter more than the in-game clock.",
   },
   {
-    question: "Can Creative Mode complete my normal Town Goals?",
+    question:
+      "What should I do before my Coin or EGO wallet reaches its cap?",
     answer:
-      "No. Creative Mode is useful for testing construction, terrain, and district layouts without normal economic pressure. Normal progression still requires its own goals, rewards, EGO Tech purchases, buildings, recipes, and workers.",
+      "Spend the currency on a planned unlock, required construction project, or scheduled challenge before continuing to earn more. Leaving a wallet capped can waste Coins or EGO the town would otherwise generate.",
   },
   {
-    question: "When is a second Courier worth buying?",
+    question:
+      "Does unlocking the Jailbreak App disable Story Mode achievements?",
     answer:
-      "Add a second Courier when the first Courier is correctly assigned, has a direct road, moves almost constantly, and still cannot keep a functioning destination stocked. A stationary first Courier needs diagnosis rather than duplication.",
+      "No. Unlocking the hidden Jailbreak App does not disable Story Mode achievement progress. Individual codes can still provide specific items, currency, or Townies, so keep those rewards separate from the normal progression route.",
+  },
+  {
+    question: "Is the Import App available in Creative Mode?",
+    answer:
+      "Yes. The Import App can also be used in Creative Mode. It is useful when a layout test needs a particular discovered item or vehicle without waiting for a normal Story Mode production chain.",
   },
 ];
 
@@ -124,10 +126,12 @@ export const metadata: Metadata = {
     type: "article",
     url: pageUrl,
     title:
-      "Go-Go Town 1.0 Guide: First Town, EGO Tech, Automation and Challenge 10",
+      "Go-Go Town 1.0 Guide: Progression, Treasures & Final Agents",
     description:
-      "Follow a complete Go-Go Town route from the four industries and Town Hall through shops, Townies, Tourist Tracker, EGO Tech, automation, Import, Creative Mode and Challenge 10.",
+      "Follow the route from Forestry, Mining and Town Hall through shops, Townies, Tourist Tracker, EGO Tech, automation, Import, Treasure Hunting, Challenge 10 and the final Agents.",
     siteName: "Whisper of the House",
+    publishedTime: "2026-07-27",
+    modifiedTime: "2026-07-28",
     images: [
       {
         url: imageUrls[0],
@@ -141,7 +145,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Plan your first town, spend EGO with purpose, automate stable production, use Import wisely, and prepare for Challenge 10 in Go-Go Town 1.0.",
+      "Build the first town, spend EGO around active goals, automate stable routes, manage Import and Treasures, and prepare for the final Agents.",
     images: [imageUrls[0]],
   },
 };
@@ -175,14 +179,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Go-Go Town 1.0 Guide: Progression Route, EGO Tech, Automation and Challenge 10",
+        "Go-Go Town 1.0 Guide: Progression Route, EGO Tech, Automation and Final Agents",
       description:
-        "A complete Go-Go Town 1.0 progression hub covering the opening TownCo. tutorial, Forestry, Mining, Planks, Bricks, Town Hall construction, the Train Station, the first working shop, housing and Townie assignments, Coins, EGO, thumbs-up progress, Town Rankings, Claim Rewards, EGO Tech, Rebuy, Tourist Tracker, tourist desires, Courier automation, Import and Export decisions, map expansion, Creative Mode, Challenge 10 preparation, and the transition into the Agent Peanut endgame route.",
+        "A complete Go-Go Town 1.0 progression hub covering the TownCo. tutorial, Forestry, Mining, Planks, Bricks, Town Hall construction, the Train Station, the first working shop, housing and Townie assignments, Coins, EGO, thumbs-up progression, Town Rankings, Claim Rewards, EGO Tech, Rebuy, Tourist Tracker, tourist desires, Courier automation, the Import App, Treasure Hunting, duplicate Treasures, map expansion, Creative Mode, Challenge 10, the final tournament reward, the Boss's Town Deed call, Agent Toffee, Agent Peppermint, Agent Peanut, and the transition into the final Safe and bunker route.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-07-27",
-      dateModified: "2026-07-27",
+      dateModified: "2026-07-28",
       about: [
         {
           "@type": "VideoGame",
@@ -215,7 +219,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Go-Go Town housing",
+          name: "Go-Go Town housing and job assignments",
         },
         {
           "@type": "Thing",
@@ -223,7 +227,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Go-Go Town EGO Tech",
+          name: "Go-Go Town Claim Rewards",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town EGO Tech and Rebuy",
         },
         {
           "@type": "Thing",
@@ -239,11 +247,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Go-Go Town Couriers",
+        },
+        {
+          "@type": "Thing",
           name: "Go-Go Town Import App",
         },
         {
           "@type": "Thing",
-          name: "Go-Go Town Export App",
+          name: "Go-Go Town Treasure Hunting",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town Collections App",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town duplicate Treasures",
         },
         {
           "@type": "Thing",
@@ -252,6 +272,26 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Go-Go Town Challenge 10",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town final tournament reward",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town Boss Town Deed call",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town Agent Toffee",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town Agent Peppermint",
+        },
+        {
+          "@type": "Thing",
+          name: "Go-Go Town Agent Peanut",
         },
       ],
       isPartOf: {
@@ -300,12 +340,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Go-Go Town 1.0 Guide: My Full Progression Route"
-          description="Start with Forestry and Mining, finish the Town Hall, open a working first shop, spend EGO with purpose, automate stable routes, and prepare cleanly for Challenge 10."
+          description="I build the first production loop, spend EGO around active Town Goals, automate only working routes, then prepare Treasures, Coins, and the final Agent sequence."
           gameTitle="Go-Go Town!"
           gameHref="/go-go-town/"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="July 27, 2026"
+          updatedAt="July 28, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
