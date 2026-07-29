@@ -60,19 +60,19 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/sir-we-have-an-orc-problem/best-turrets-builds/",
+    href: "/sir-we-have-an-orc-problem/best-turrets-builds",
     label: "Best Turrets, Builds & Tier List",
   },
   {
-    href: "/sir-we-have-an-orc-problem/best-upgrades-farming/",
+    href: "/sir-we-have-an-orc-problem/best-upgrades-farming",
     label: "Best Upgrades & Farming",
   },
   {
-    href: "/sir-we-have-an-orc-problem/level-3-2-guide/",
+    href: "/sir-we-have-an-orc-problem/level-3-2-guide",
     label: "Level 3.2 Guide",
   },
   {
-    href: "/sir-we-have-an-orc-problem/level-6-1-6-2-guide/",
+    href: "/sir-we-have-an-orc-problem/level-6-1-6-2-guide",
     label: "Levels 6.1 & 6.2 Guide",
   },
 ];
@@ -289,7 +289,7 @@ export default function Page() {
           title="The Route I Use From the First 400 Orcs to Level 6.2"
           description="Start here for controls, abilities, resource conditions, achievement restrictions and the checks that tell me whether to move a tower, buy an upgrade, farm a shorter stage or save an ability for the final rush."
           gameTitle="Sir, We Have an Orc Problem"
-          gameHref="/sir-we-have-an-orc-problem/"
+          gameHref="/sir-we-have-an-orc-problem"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="July 29, 2026"

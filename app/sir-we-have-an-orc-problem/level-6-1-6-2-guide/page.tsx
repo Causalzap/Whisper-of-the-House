@@ -83,19 +83,19 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/sir-we-have-an-orc-problem/",
+    href: "/sir-we-have-an-orc-problem",
     label: "Sir, We Have an Orc Problem Guide Hub",
   },
   {
-    href: "/sir-we-have-an-orc-problem/best-turrets-builds/",
+    href: "/sir-we-have-an-orc-problem/best-turrets-builds",
     label: "Best Turrets, Builds & Tier List",
   },
   {
-    href: "/sir-we-have-an-orc-problem/best-upgrades-farming/",
+    href: "/sir-we-have-an-orc-problem/best-upgrades-farming",
     label: "Best Upgrades & Farming",
   },
   {
-    href: "/sir-we-have-an-orc-problem/level-3-2-guide/",
+    href: "/sir-we-have-an-orc-problem/level-3-2-guide",
     label: "Level 3.2 Guide",
   },
 ];
@@ -312,7 +312,7 @@ export default function Page() {
           title="How I Cleared Levels 6.1 and 6.2 Without Rebuilding Everything"
           description="I fix the weak outer route on Level 6.1, preserve the layout when it already reaches the end, and save my strongest burst and control tools for the final Level 6.2 acceleration."
           gameTitle="Sir, We Have an Orc Problem"
-          gameHref="/sir-we-have-an-orc-problem/"
+          gameHref="/sir-we-have-an-orc-problem"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="July 29, 2026"

@@ -89,19 +89,19 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/sir-we-have-an-orc-problem/",
+    href: "/sir-we-have-an-orc-problem",
     label: "Sir, We Have an Orc Problem Guide Hub",
   },
   {
-    href: "/sir-we-have-an-orc-problem/best-turrets-builds/",
+    href: "/sir-we-have-an-orc-problem/best-turrets-builds",
     label: "Best Turrets, Builds & Tier List",
   },
   {
-    href: "/sir-we-have-an-orc-problem/level-3-2-guide/",
+    href: "/sir-we-have-an-orc-problem/level-3-2-guide",
     label: "Level 3.2 Guide",
   },
   {
-    href: "/sir-we-have-an-orc-problem/level-6-1-6-2-guide/",
+    href: "/sir-we-have-an-orc-problem/level-6-1-6-2-guide",
     label: "Levels 6.1 & 6.2 Guide",
   },
 ];
@@ -326,7 +326,7 @@ export default function Page() {
           title="The Upgrade Route I Use to Farm Faster Without Overbuilding"
           description="I buy enough combat power to unlock a stable farm, compare useful payout against completion time, and return to progression as soon as one planned upgrade fixes the lane that stopped the previous run."
           gameTitle="Sir, We Have an Orc Problem"
-          gameHref="/sir-we-have-an-orc-problem/"
+          gameHref="/sir-we-have-an-orc-problem"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="July 29, 2026"

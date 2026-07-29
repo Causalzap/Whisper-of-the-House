@@ -69,19 +69,19 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/sir-we-have-an-orc-problem/",
+    href: "/sir-we-have-an-orc-problem",
     label: "Sir, We Have an Orc Problem Guide Hub",
   },
   {
-    href: "/sir-we-have-an-orc-problem/best-upgrades-farming/",
+    href: "/sir-we-have-an-orc-problem/best-upgrades-farming",
     label: "Best Upgrades & Farming",
   },
   {
-    href: "/sir-we-have-an-orc-problem/level-3-2-guide/",
+    href: "/sir-we-have-an-orc-problem/level-3-2-guide",
     label: "Level 3.2 Guide",
   },
   {
-    href: "/sir-we-have-an-orc-problem/level-6-1-6-2-guide/",
+    href: "/sir-we-have-an-orc-problem/level-6-1-6-2-guide",
     label: "Levels 6.1 & 6.2 Guide",
   },
 ];
@@ -310,7 +310,7 @@ export default function Page() {
           title="How I Build Around Each Turret Without Creating New Leaks"
           description="I use Gunners as the reliable core, apply burn before the main kill zone, aim Cannon and Mortar knockback away from the exit, and reserve Tesla Coils and active abilities for the enemies the main line misses."
           gameTitle="Sir, We Have an Orc Problem"
-          gameHref="/sir-we-have-an-orc-problem/"
+          gameHref="/sir-we-have-an-orc-problem"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="July 29, 2026"

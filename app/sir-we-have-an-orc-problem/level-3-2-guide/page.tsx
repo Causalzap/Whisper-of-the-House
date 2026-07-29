@@ -280,7 +280,7 @@ export default function Page() {
           title="How I Fixed Every Route on Level 3.2"
           description="I treat the bottom, middle and top as separate problems: cover the hidden lower path first, stop adding damage to a stable middle, and move the next useful tower toward the top when it becomes the final leak."
           gameTitle="Sir, We Have an Orc Problem"
-          gameHref="/sir-we-have-an-orc-problem/"
+          gameHref="/sir-we-have-an-orc-problem"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
           updatedAt="July 29, 2026"
