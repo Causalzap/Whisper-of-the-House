@@ -131,6 +131,173 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Sir, We Have an Orc Problem",
+    game: "Sir, We Have an Orc Problem",
+    href: "/sir-we-have-an-orc-problem",
+    slug: "sir-we-have-an-orc-problem",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Incremental Tower Defense",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the Sir, We Have an Orc Problem guide hub for turret builds and tier rankings, upgrade order and farming efficiency, the Level 3.2 three-route wall, and Level 6.1 and 6.2 perfect-clear progression.",
+    coverage: [
+      "Core controls, manual and Automatic Missile behavior, survival versus perfect-clear rewards, active ability roles, recurring enemy behavior, progression checkpoints, failure diagnosis, and restricted achievement conditions",
+      "Gunner, Cannon, Flamethrower, Laser, Mortar, and Tesla Coil roles, progression-focused turret tier list, firing angles, burn coverage, Laser geometry, late cleanup, knockback direction, layered builds, and ability support",
+      "Stage-based upgrade planner, survival and perfect-clear resources, early Gunner breakpoints, Penetration, Rapid Fire, Automatic Missile, short-stage farming, Level 3.1 bonuses, Silver Orc economy, tower-count decisions, and late-game payout calculations",
+      "Level 3.2 route diagnosis for the overlooked bottom path, crowded middle pocket, final top-route leak, enemy pressure phases, farming-versus-repositioning decisions, fresh-save route, and transition into Level 4",
+      "Level 6.1 top-left and bottom-left route fixes, final-wave pressure, Level 6.2 ability timing, survived-versus-perfect-clear conditions, Against All Odds, Four-tified restrictions, tower-only adjustments, and endgame troubleshooting",
+    ],
+    image:
+      "/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-layered-burn-gunner-tesla-build.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 18,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Sir, We Have an Orc Problem Guide Hub",
+        href: "/sir-we-have-an-orc-problem",
+        type: "Guide Hub",
+        description:
+          "Start here for controls, abilities, reward conditions, enemy behavior, achievement restrictions, progression checks, and the correct turret, farming, Level 3.2, or endgame guide.",
+        image:
+          "/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-layered-burn-gunner-tesla-build.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Controls, abilities, survival and perfect-clear rewards, enemy behavior, achievements, turret builds, upgrade farming, Level 3.2, and Levels 6.1–6.2",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title:
+          "Sir, We Have an Orc Problem Best Turrets & Tier List",
+        href:
+          "/sir-we-have-an-orc-problem/best-turrets-builds",
+        type: "Builds",
+        description:
+          "Rank every turret for reliable progression, compare Gunner, Cannon and Flamethrower, fix Laser and Mortar placement, control knockback, and build a layered defense.",
+        date: "Updated recently",
+        image:
+          "/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-layered-burn-gunner-tesla-build.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 76,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Turret tier list, Gunner, Cannon, Flamethrower, Laser, Mortar, Tesla Coil, firing angles, knockback, layered builds, abilities, and build troubleshooting",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title:
+          "Sir, We Have an Orc Problem Best Upgrades & Farming",
+        href:
+          "/sir-we-have-an-orc-problem/best-upgrades-farming",
+        type: "Systems",
+        description:
+          "Follow the stage-based upgrade planner, compare survival and perfect-clear resources, farm short stages efficiently, and know when cheap stats beat another tower.",
+        date: "Updated recently",
+        image:
+          "/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-late-game-40k-farm.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 77,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Upgrade planner, resource types, perfect-clear bonus, Penetration, Rapid Fire, Automatic Missile, short-stage farming, Level 3.1 bonuses, Silver Orcs, and late-game payouts",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title:
+          "Sir, We Have an Orc Problem Level 3.2 Guide",
+        href:
+          "/sir-we-have-an-orc-problem/level-3-2-guide",
+        type: "Walkthrough",
+        description:
+          "Beat Level 3.2 by covering the overlooked bottom route, avoiding an overbuilt middle, reinforcing the top, and knowing whether to farm or reposition.",
+        date: "Updated recently",
+        image:
+          "/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-level-3-2-bottom-leak.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 78,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Level 3.2 quick facts, hidden bottom route, middle pressure pocket, top-route leaks, enemy phases, farming decisions, clear sequence, and Level 4 transition",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title:
+          "Sir, We Have an Orc Problem Levels 6.1 & 6.2 Guide",
+        href:
+          "/sir-we-have-an-orc-problem/level-6-1-6-2-guide",
+        type: "Walkthrough",
+        description:
+          "Fix Level 6.1 outer-route leaks, preserve Nuke or Cryo Beam for the Level 6.2 final rush, and separate survival, perfect clear, and achievement conditions.",
+        date: "Updated recently",
+        image:
+          "/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-level-6-2-perfect-clear.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 79,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Level 6.1 outer routes, final-wave pressure, Level 6.2 acceleration, Nuke and Cryo timing, perfect clear, Against All Odds, Four-tified, and tower-only adjustments",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+  {
     title: "Scrap Mechanic",
     game: "Scrap Mechanic",
     href: "/scrap-mechanic",

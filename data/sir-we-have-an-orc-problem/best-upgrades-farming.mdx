@@ -1,0 +1,849 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import AdUnit from "@/components/ads/AdUnit";
+
+export const upgradePlannerColumns = [
+  {
+    key: "progress",
+    label: "Progress Point",
+  },
+  {
+    key: "prioritize",
+    label: "What I Prioritize",
+  },
+  {
+    key: "delay",
+    label: "What I Delay",
+  },
+  {
+    key: "return",
+    label: "When I Return to Progression",
+  },
+];
+
+export const upgradePlannerRows = [
+  {
+    progress: "Levels 1.1–2.2",
+    prioritize:
+      "Gunner Fire Rate, Gunner Damage, and enough tower count to create one reliable kill zone",
+    delay:
+      "Expensive economy chains, unnecessary Range, and upgrades for towers that are not solving a route",
+    return:
+      "When I can survive consistently or lose only a small number near the end",
+  },
+  {
+    progress: "Level 3.1",
+    prioritize:
+      "Penetration, Rapid Fire, the fixed end-of-battle bonus, then Silver Orc chance after the farm is stable",
+    delay: "More economy while the layout still collapses early",
+    return:
+      "When repeated runs fund the next useful combat breakpoint",
+  },
+  {
+    progress: "Level 3.2",
+    prioritize:
+      "Cheap Damage, Fire Rate, Burn, and Penetration nodes for towers already covering the map",
+    delay:
+      "The 8.17K thirteenth Gunner unless one route has no coverage",
+    return:
+      "When the bottom and middle hold and only one identifiable route still leaks",
+  },
+  {
+    progress: "Levels 4.x–5.x",
+    prioritize:
+      "Automatic Missile for repeat runs, one controlled round of economy purchases, then upgrades for towers already doing useful damage",
+    delay:
+      "New branches bought only to test them, and active upgrades that do not shorten or stabilize the run",
+    return:
+      "When the farm completes with little intervention and the next purchase solves a visible progression problem",
+  },
+  {
+    progress: "Levels 6.1–6.2",
+    prioritize:
+      "One meaningful tower-count, damage, cleanup, or emergency-ability breakpoint",
+    delay:
+      "Full-tree completion and expensive nodes unrelated to the final leak",
+    return:
+      "When the defense reaches the last surge and the remaining problem is placement or ability timing",
+  },
+];
+
+export const dataSnapshotColumns = [
+  {
+    key: "value",
+    label: "Value",
+  },
+  {
+    key: "source",
+    label: "Where I Observed It",
+  },
+  {
+    key: "use",
+    label: "How I Use It",
+  },
+];
+
+export const dataSnapshotRows = [
+  {
+    value: "400 orcs",
+    source: "Opening stage",
+    use:
+      "Separates the survival result from killing every enemy",
+  },
+  {
+    value: "+5 shots per second",
+    source: "Rapid Fire",
+    use:
+      "A major Gunner breakpoint after the firing line is already correct",
+  },
+  {
+    value: "113 per battle",
+    source: "Level 3.1 Bonus Resources 3",
+    use:
+      "Makes repeat speed more valuable once the stage is stable",
+  },
+  {
+    value: "1% Silver Orc chance",
+    source: "First Silver Orc node",
+    use:
+      "A long-term economy upgrade, not an immediate damage fix",
+  },
+  {
+    value: "8.17K, 12 → 13 Gunners",
+    source: "Later More Gunners node",
+    use:
+      "The main comparison for cheap stats versus an expensive tower-count purchase",
+  },
+  {
+    value: "40.7K total",
+    source: "One failed late-game run",
+    use:
+      "A snapshot for estimating runs to a target, not a guaranteed payout",
+  },
+  {
+    value: "About 1.36 million",
+    source: "Full upgrade-tree completion in an older, harder build",
+    use:
+      "Historical scale only; not a current final-stage requirement",
+  },
+];
+
+The fastest way I progressed in Sir, We Have an Orc Problem was not by
+buying every new tower or economy node as soon as it appeared.
+
+I progressed faster after separating every purchase into three questions:
+
+1. Does this upgrade make the current defense strong enough to reach the next
+   stage?
+2. Does it increase the value of several future farming runs?
+3. Does it solve a missing firing angle that no cheaper stat upgrade can fix?
+
+My biggest upgrade mistake was saving for expensive tower-count nodes while
+leaving affordable Fire Rate, Damage, Burn, and Penetration upgrades
+untouched.
+
+My biggest farming mistake was assuming that the newest stage had to be the
+best source of resources.
+
+A shorter stage can pay less per completion and still produce much more per
+minute.
+
+<div className="my-5 border-l-4 border-slate-300 pl-4">
+  <p className="m-0 font-semibold text-slate-900">
+    Data checked on July 29, 2026.
+  </p>
+  <p className="mb-0 mt-1 text-sm leading-6 text-slate-600">
+    Upgrade prices and payouts can change after balance patches. The values
+    below are a launch-period snapshot; the 1.36 million full-tree total is
+    clearly marked as older-balance data.
+  </p>
+</div>
+
+<GuideQuickAnswer title="My Upgrade and Farming Route">
+  <ol className="mt-3 list-decimal space-y-2 pl-5">
+    <li>
+      Buy enough early Gunner Fire Rate and Damage to survive before investing
+      heavily in economy.
+    </li>
+    <li>
+      Identify whether the next upgrade requires survival currency or the
+      separate perfect-clear resource.
+    </li>
+    <li>
+      Add the first affordable end-of-battle bonus once the current farming
+      stage is already stable.
+    </li>
+    <li>
+      Prioritize Penetration and Rapid Fire when several enemies cross the
+      same Gunner firing line.
+    </li>
+    <li>
+      Buy Automatic Missile when repeated clicking prevents me from checking
+      leaks, tower angles, and farming results.
+    </li>
+    <li>
+      Farm the shortest cleared stage that produces the resource I currently
+      need.
+    </li>
+    <li>
+      Before saving 8.17K for one additional Gunner, check whether several
+      cheap combat nodes can fix the current lane.
+    </li>
+    <li>
+      Return to progression as soon as the purchased upgrade addresses the
+      failure from the previous attempt.
+    </li>
+  </ol>
+</GuideQuickAnswer>
+
+<h2 id="upgrade-planner">
+  Static Upgrade Planner and Priority Order
+</h2>
+
+This is the progression planner I use instead of trying to fill the upgrade
+tree evenly.
+
+The exact position of a node can shift with balance changes, so the table
+focuses on the decision each stage range asks me to make.
+
+<GuideTable
+  caption="Upgrade priorities by progression stage."
+  columns={upgradePlannerColumns}
+  rows={upgradePlannerRows}
+  minWidth="1180px"
+  stickyFirstColumn
+/>
+
+This is not a command to buy every item in one row.
+
+I stop as soon as the current wall is fixed.
+
+For example, if one Fire Rate upgrade turns a near-clear into a stable clear,
+I do not remain on the farming stage until the rest of that branch is maxed.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="data-snapshot">
+  Upgrade Prices and Farming Values Used in This Guide
+</h2>
+
+<GuideTable
+  caption="Launch-period upgrade and farming values used in this guide."
+  columns={dataSnapshotColumns}
+  rows={dataSnapshotRows}
+  minWidth="920px"
+  stickyFirstColumn
+/>
+
+The first five upgrade values and the 40.7K result come from the launch-period
+build used for this route.
+
+The **1.36 million** total belongs to a tougher earlier balance state. I keep
+it only as a reference for how large full-tree completion can become.
+
+I do not use it to estimate what a current save needs to finish Level 6.2.
+
+<h2 id="resource-types">
+  Survival Resources and Perfect-Clear Resources
+</h2>
+
+The game does not treat surviving and killing every orc as the same result.
+
+<figure className="my-8">
+  <Image
+    src="/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-survive-perfect-clear-resources.webp"
+    alt="Sir We Have an Orc Problem upgrade tree explaining survival and perfect-clear resources"
+    width={357}
+    height={635}
+    priority={true}
+    className="mx-auto h-auto w-full max-w-sm rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-sm text-sm text-slate-500">
+    I check which resource the target node needs before choosing the stage I
+    will repeat.
+  </figcaption>
+</figure>
+
+On the opening stage, I can receive progression for surviving even when some
+of the **400 orcs** escape.
+
+Killing all 400 provides the separate clean-win result.
+
+That creates my first farming rule:
+
+> I choose the farming stage after choosing the target upgrade, not the other
+> way around.
+
+Before repeating a stage, I check:
+
+- which resource the target node requires;
+- whether the run only needs to survive;
+- whether every enemy must die;
+- whether my layout can produce that result consistently;
+- how long one complete attempt takes;
+- whether one leak makes the entire run useless for the current target.
+
+An imperfect survival can still be productive.
+
+It becomes a wasted farming run only when it fails to produce the currency I
+am currently trying to earn.
+
+<h2 id="perfect-clear-bonus">
+  When the Perfect Clear Bonus Is Worth Farming
+</h2>
+
+I do not chase a perfect clear on every farming run.
+
+I chase it when:
+
+- the next upgrade requires the clean-win resource;
+- the stage is already close to perfect;
+- one placement or small stat upgrade can remove the remaining leak;
+- restarting after one escape saves more time than finishing the run.
+
+I stop chasing it when the layout still loses entire groups.
+
+If several routes collapse, I first farm the normal repeatable resource and
+improve the defense. Trying to force a perfect result from an unstable layout
+usually produces less progress per minute.
+
+I also distinguish between one late straggler and a complete damage failure.
+
+One straggler tells me to adjust cleanup, targeting, or one affordable
+breakpoint.
+
+A full wave reaching the exit tells me to return to broader combat upgrades.
+
+<h2 id="early-upgrades">
+  My Early Upgrade Order
+</h2>
+
+I begin with Gunner Fire Rate and Damage.
+
+The first maps reward concentrated continuous fire more reliably than a wide
+collection of partially upgraded branches.
+
+My early order is:
+
+1. enough Gunners to cover the actual route;
+2. Fire Rate;
+3. Damage;
+4. enough Range to create a useful firing angle;
+5. early missile improvements only when the manual shot is making a visible
+   difference;
+6. the first economy purchase after the stage becomes repeatable.
+
+### Why I do not buy Range automatically
+
+Range is valuable when it allows a tower to reach a corridor, corner, or
+second section of the path.
+
+It is not a general damage upgrade.
+
+If the Gunner already reaches its assigned kill zone, Fire Rate and Damage
+usually improve the current result more directly.
+
+### Why I delay some economy nodes
+
+Economy upgrades pay over several future runs.
+
+That makes them strong when the current farm is stable and weak when the next
+combat node would immediately unlock a better stage.
+
+I buy economy when I expect to repeat the current route several times.
+
+I delay it when one affordable combat purchase can convert the current wall
+into a new farming option.
+
+<h2 id="penetration-rapid-fire">
+  Penetration and Rapid Fire Are My First Gunner Breakpoints
+</h2>
+
+Penetration matters once several enemies move through the same straight firing
+line.
+
+Without it, the front target absorbs the shot.
+
+With it, the same attack can continue into the packed group behind that
+target.
+
+I buy Penetration after confirming that the Gunner remains aimed through a
+crowded lane. I do not buy it to fix a tower that spends the battle rotating
+between scattered targets.
+
+Rapid Fire is the next clear breakpoint.
+
+<figure className="my-8">
+  <Image
+    src="/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-rapid-fire-five-shots.webp"
+    alt="Sir We Have an Orc Problem Rapid Fire upgrade adding five Gunner shots per second"
+    width={365}
+    height={351}
+    className="mx-auto h-auto w-full max-w-md rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-md text-sm text-slate-500">
+    Rapid Fire adds five shots per second, so I save for it after the Gunner
+    line is already concentrating those shots on the correct route.
+  </figcaption>
+</figure>
+
+The purchase order is:
+
+1. correct the firing line;
+2. make enemies cross that line in a group;
+3. buy Penetration;
+4. buy Rapid Fire;
+5. add Range only when the tower still loses contact with the route.
+
+This is the page where I track the exact Rapid Fire value.
+
+The{" "}
+<Link
+  href="/sir-we-have-an-orc-problem/best-turrets-builds"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  best turrets and builds guide
+</Link>
+{" "}focuses on where Gunners belong in the defense instead of repeating the
+upgrade calculation.
+
+<h2 id="automatic-missile">
+  When Automatic Missile Is Worth Buying
+</h2>
+
+Automatic Missile does more than remove repeated clicking.
+
+It gives me more attention for:
+
+- checking the first leaking route;
+- watching whether knockback moves enemies forward;
+- comparing one farming result with the previous run;
+- deciding when a clean-win attempt has already failed;
+- using active abilities during the dangerous part of the battle.
+
+I buy it once the manual missile is already contributing useful damage and
+repeated clicking is interfering with those decisions.
+
+I delay it when an entire route lacks tower coverage.
+
+Automation cannot replace a permanent firing line.
+
+Automatic Missile also does not make the run fully unattended in the tested
+build. The shot still follows the mouse position, so I leave the cursor aimed
+at a useful route before looking away.
+
+<h2 id="short-stage-farming">
+  My Farming Efficiency Formula
+</h2>
+
+The highest unlocked stage is not automatically the best farm.
+
+I compared a stage containing about **2,000 orcs** with a much shorter cleared
+stage using an end-of-battle bonus.
+
+The short stage produced only about half as much per run, but it finished
+roughly five times faster.
+
+<p className="my-4 font-semibold text-slate-900">
+  Example: 0.5 payout × 5 completions = approximately 2.5 times the resources
+  in the same amount of time.
+</p>
+
+<figure className="my-8">
+  <Image
+    src="/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-short-stage-farming.webp"
+    alt="Sir We Have an Orc Problem short-stage farming comparison using a fixed end-of-battle bonus"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-2xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-2xl text-sm text-slate-500">
+    A lower reward can be the better farm when I can complete and restart the
+    stage several times faster.
+  </figcaption>
+</figure>
+
+The reusable formula is:
+
+<p className="my-4 font-semibold text-slate-900">
+  Farming efficiency = useful payout per run ÷ total completion time.
+</p>
+
+“Useful payout” means the resource required by my target upgrade.
+
+A stage that gives more total currency can still be worse when most of that
+currency is not the type I currently need.
+
+Once the defense kills enemies soon after they spawn, spawn timing becomes the
+main limit.
+
+At that point, more tower damage may shorten the final walk of one enemy, but
+it does not make the complete enemy count appear five times faster.
+
+That is when I stop optimizing the farming layout and prioritize restart speed.
+
+<h2 id="level-3-1-farm">
+  Why I Use Level 3.1 as a Mid-Game Farm
+</h2>
+
+Level 3.1 became useful after I reached the fixed
+**113-resource end-of-battle bonus**.
+
+<figure className="my-8">
+  <Image
+    src="/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-level-3-1-end-battle-bonus.webp"
+    alt="Sir We Have an Orc Problem Bonus Resources 3 granting 113 after Level 3.1 or higher"
+    width={380}
+    height={350}
+    className="mx-auto h-auto w-full max-w-md rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-md text-sm text-slate-500">
+    A fixed 113 at the end of each eligible battle rewards fast, repeatable
+    clears rather than simply choosing the stage with the largest enemy count.
+  </figcaption>
+</figure>
+
+One run around this point returned roughly **5.5K**, but I do not treat that
+as a guaranteed Level 3.1 payout.
+
+The total also depends on:
+
+- regular kills;
+- current economy upgrades;
+- Silver Orc spawns;
+- percentage bonuses;
+- whether the run survives or clears perfectly.
+
+The nearby Silver Orc node added a **1% spawn chance**.
+
+<figure className="my-8">
+  <Image
+    src="/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-silver-orc-one-percent.webp"
+    alt="Sir We Have an Orc Problem Silver Orc upgrade adding a one percent spawn chance"
+    width={356}
+    height={350}
+    className="mx-auto h-auto w-full max-w-md rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-md text-sm text-slate-500">
+    I buy Silver Orc chance after the farming stage is stable because it
+    improves future payouts without adding immediate defensive damage.
+  </figcaption>
+</figure>
+
+I buy Silver Orc upgrades when:
+
+- the current farming layout already survives reliably;
+- I expect to repeat several more battles;
+- the next combat purchase is too expensive to reach in one run;
+- a chance-based payout will not determine whether the current stage survives.
+
+I delay them when one affordable combat node can unlock the next stage.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="cheap-vs-expensive">
+  Cheap Combat Upgrades vs the 8.17K Thirteenth Gunner
+</h2>
+
+Level 3.2 gave me the clearest upgrade decision in the run.
+
+The next `More Gunners` node cost **8.17K** and increased the limit from
+**12 to 13**.
+
+<figure className="my-8">
+  <Image
+    src="/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-level-3-2-more-turrets-cost.webp"
+    alt="Sir We Have an Orc Problem More Gunners upgrade costing 8.17K and increasing the limit from 12 to 13"
+    width={424}
+    height={350}
+    className="mx-auto h-auto w-full max-w-md rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-md text-sm text-slate-500">
+    I buy the thirteenth Gunner only when it creates a firing angle the
+    existing twelve cannot provide.
+  </figcaption>
+</figure>
+
+At the same time, several combat nodes still cost only a few hundred resources.
+
+Buying those cheaper upgrades improved a previous result of roughly
+**2,000 kills** to more than **3,000** without unlocking Gunner number thirteen.
+
+That gives me a repeatable decision rule.
+
+### I buy cheap stats when
+
+- the existing tower is already aimed at the correct route;
+- the route survives most of the battle;
+- the remaining enemies leave with low health;
+- Fire Rate, Damage, Burn, or Penetration can improve several existing towers;
+- the tower-count upgrade requires many more farming runs.
+
+### I buy another tower when
+
+- one entrance receives almost no permanent damage;
+- moving an existing tower opens a different route;
+- the map has more independent pressure zones than the current count can cover;
+- cheap stats improve the safe lanes but cannot create a missing firing angle.
+
+This is the difference between a damage problem and a geometry problem.
+
+The full route-specific adjustments remain in the{" "}
+<Link
+  href="/sir-we-have-an-orc-problem/level-3-2-guide"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Level 3.2 guide
+</Link>
+{" "}rather than being repeated here.
+
+<h2 id="levels-4-5">
+  My Upgrade Priorities Through Levels 4.x and 5.x
+</h2>
+
+After Level 3.2, I stop trying to develop every branch at the same speed.
+
+I alternate between economy and combat.
+
+My cycle is:
+
+1. stabilize a repeatable stage;
+2. buy one economy node that will affect several future runs;
+3. complete another run;
+4. buy combat upgrades for the towers already producing useful damage;
+5. test the blocked stage again;
+6. repeat only when the last purchase addressed a real weakness.
+
+This is also the point where Automatic Missile becomes more valuable.
+
+Repeated runs require less mechanical attention, so I can compare:
+
+- which route begins leaking first;
+- whether a new upgrade changed the result;
+- how much the completion payout changed;
+- whether another run is still worth the time.
+
+I do not unlock a new tower branch only because it became available.
+
+Before investing, I check the{" "}
+<Link
+  href="/sir-we-have-an-orc-problem/best-turrets-builds"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  turret and build roles
+</Link>
+{" "}and ask whether that branch solves the current map.
+
+If the current defense already reaches the late wave, another general Damage,
+Fire Rate, Burn, or Penetration node can be more useful than starting a new
+branch from zero.
+
+<h2 id="abilities-and-farming">
+  How Active Abilities Affect Farming Efficiency
+</h2>
+
+I separate farming abilities from progression abilities.
+
+On a stable short farm, permanent towers should handle almost every enemy.
+
+Using Nuke, Cryo Beam, Strafing Run, or another active effect on every cycle
+usually adds manual attention without changing the spawn speed that limits the
+run.
+
+I invest in an active ability when it does one of three things:
+
+- converts an unstable stage into a repeatable survival;
+- protects a required perfect-clear result;
+- saves the final surge of a progression stage.
+
+I delay the upgrade when the ability only makes an already safe middle section
+look cleaner.
+
+### When an ability improves farming
+
+An active ability improves the farm when one predictable group is responsible
+for most failures.
+
+If one Cryo Beam or Nuke turns that stage into a consistent completion, the
+ability can increase useful resources per minute by preventing restarts.
+
+### When an ability does not improve farming
+
+It does not improve the farm when:
+
+- the permanent layout already clears every group;
+- the completion time is limited by enemy spawning;
+- several separate routes collapse;
+- I must watch the entire battle to use the ability correctly;
+- the upgrade currency would unlock a stronger permanent breakpoint instead.
+
+I do not need every active branch maxed before finishing progression.
+
+The final-stage route succeeded without a fully maxed Cryo Beam, so I do not
+treat active completion as a prerequisite for Level 6.2.
+
+<h2 id="late-game-farming">
+  How I Calculate a Late-Game Farming Target
+</h2>
+
+Late-game farming becomes much easier when I choose the purchase before
+starting the loop.
+
+One failed run returned **40.7K** in total.
+
+<figure className="my-8">
+  <Image
+    src="/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-late-game-40k-farm.webp"
+    alt="Sir We Have an Orc Problem failed late-game run paying 40.7K total resources"
+    width={290}
+    height={351}
+    className="mx-auto h-auto w-full max-w-sm rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-sm text-sm text-slate-500">
+    This 40.7K result included regular kills, Silver Orcs, flat bonuses, a
+    50% modifier, and a Level Bonus, so I treat it as a snapshot rather than a
+    fixed payout.
+  </figcaption>
+</figure>
+
+The breakdown was:
+
+- **6.12K** from regular kills;
+- **9.65K** from Silver Orcs;
+- **2K** from a flat bonus;
+- **8.88K** from the displayed 50% bonus;
+- **14K** from the Level Bonus.
+
+For a target near **123K**, three similar results would produce approximately
+**122.1K**.
+
+That is close enough when the save already holds a small amount of the
+required resource.
+
+The calculation tells me two things:
+
+1. how many repetitions I expect to need;
+2. whether the target upgrade is worth delaying progression for that long.
+
+I stop the loop once I reach the purchase.
+
+I do not continue farming merely because the stage can still pay more.
+
+<h2 id="when-to-return">
+  When I Stop Farming and Return to the Blocked Stage
+</h2>
+
+I return when the new purchase matches the failure I observed.
+
+My return conditions are:
+
+- a missing route now has another tower available;
+- a nearly successful Gunner line now has Penetration or Rapid Fire;
+- a burn route now has enough Damage or Tick Rate to finish stragglers;
+- Automatic Missile lets me watch the dangerous routes instead of clicking;
+- one active improvement can cover the final surge;
+- the next upgrade requires a resource the current farm cannot produce
+  efficiently.
+
+I do not wait until every affordable node is filled.
+
+That creates overfarming: I spend several additional runs improving a layout
+that was already strong enough to move forward.
+
+For the final progression decisions, continue with the{" "}
+<Link
+  href="/sir-we-have-an-orc-problem/level-6-1-6-2-guide"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Levels 6.1 and 6.2 guide
+</Link>
+
+<h2 id="troubleshooting">
+  Upgrade and Farming Troubleshooting
+</h2>
+
+### The newest stage pays more, but progression feels slower
+
+Time complete attempts from Start to the next restart.
+
+A stage paying twice as much is worse when it takes five times longer and both
+stages produce the same required resource.
+
+### I bought economy and the current stage did not improve
+
+Economy affects future purchases, not the enemies already reaching the exit.
+
+Buy combat first when one affordable breakpoint can unlock a stronger farm.
+
+### I bought Range and the lane still leaks
+
+Check whether the tower already reached the enemy path.
+
+Range creates an angle. It does not increase Fire Rate, Damage, Burn, or
+Penetration.
+
+### The next tower-count node is too expensive
+
+Identify whether the problem is missing coverage or insufficient damage.
+
+Buy the tower count when a route has no firing angle. Buy cheap stats when the
+existing towers are already attacking the correct lane.
+
+### My payout changed even though I repeated the same stage
+
+Check the result breakdown.
+
+Silver Orc spawns, percentage bonuses, regular kills, Level Bonus, survival,
+and perfect-clear results can change the total.
+
+<h2 id="faq">
+  Upgrades and Farming FAQ
+</h2>
+
+### Can Automatic Missile make farming fully AFK?
+
+Not completely in the build I tested.
+
+Automatic Missile removed repeated clicking, but its shots still followed the
+mouse position. I leave the cursor aimed at a useful section before looking
+away.
+
+### Is 40.7K guaranteed from the late-game farming stage?
+
+No.
+
+That result included 9.65K from Silver Orcs and an 8.88K percentage bonus.
+Chance-based spawns and active modifiers can change the next result.
+
+### Do I need about 1.36 million resources to finish the game?
+
+No.
+
+That total came from completing the entire upgrade tree in an older, harder
+balance state. It is not the current price of finishing Level 6.2.
+
+### Can a failed run be a better farm than a successful run?
+
+Yes, when the failed run ends quickly and still produces the resource required
+by the target upgrade.
+
+It is worse when the missing survival or perfect-clear result removes the
+specific currency I need.
+
+### Should I keep farming after buying the planned upgrade?
+
+Usually not.
+
+I return to the blocked stage and test the purchase. Another farming loop is
+only useful when the same failure still appears and the next upgrade addresses
+that failure directly.
+
+For the full content route, return to the{" "}
+<Link
+  href="/sir-we-have-an-orc-problem"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Sir, We Have an Orc Problem guide hub
+</Link>
