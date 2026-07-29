@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
 import AscendToZeroGuideContent from "@/data/ascend-to-zero/index.mdx";
+import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/ascend-to-zero`;
@@ -347,6 +348,12 @@ export default function Page() {
         >
           <AscendToZeroGuideContent />
         </GuideArticlePage>
+
+        <GameDiscoveryCta
+          gameTitle="Ascend to ZERO"
+          heading="Looking for another game after Ascend to ZERO?"
+          description="Use the quick recommender to find something that fits your current mood, platform, and play mode, or build a broader Gaming DNA profile from nine games you already love."
+        />
       </main>
 
       <Footer />
