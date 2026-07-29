@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import EsportsManager2026Content from "@/data/esports-manager-2026/index.mdx";
+import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
+
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/esports-manager-2026`;
@@ -340,6 +342,13 @@ export default function Page() {
         >
           <EsportsManager2026Content />
         </GuideArticlePage>
+
+        <GameDiscoveryCta
+          gameTitle="Esports Manager 2026 Guide Hub"
+          heading="Looking for another game after Esports Manager 2026 Guide Hub?"
+          description="Use the quick recommender to find something that fits your current mood, platform, and play mode, or build a broader Gaming DNA profile from nine games you already love."
+        />
+
       </main>
       <Footer />
     </>

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
 import TearsOfMetalGuideContent from "@/data/tears-of-metal/index.mdx";
+import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/tears-of-metal`;
@@ -277,6 +278,13 @@ export default function Page() {
         >
           <TearsOfMetalGuideContent />
         </GuideArticlePage>
+
+        <GameDiscoveryCta
+          gameTitle="Tears of Metal"
+          heading="Looking for another game after Tears of Metal?"
+          description="Use the quick recommender to find something that fits your current mood, platform, and play mode, or build a broader Gaming DNA profile from nine games you already love."
+        />
+
       </main>
 
       <Footer />
