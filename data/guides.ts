@@ -131,6 +131,191 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Bills Must Be Paid",
+    game: "Bills Must Be Paid",
+    href: "/bills-must-be-paid",
+    slug: "bills-must-be-paid",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Incremental Bill Survival",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the Bills Must Be Paid guide hub for first-cycle priorities, bill reserves, Big Toni loans, bankruptcy timing, Legacy Points, Skill Tree upgrades, Rings and Bracelets, all 27 achievements, and the complete 100% route.",
+    coverage: [
+      "Beginner progression, first-cycle priorities, accuracy achievements, bill reserves, desk diagnosis, temporary versus permanent progression, bankruptcy decisions, and the correct guide for each bottleneck",
+      "Damage, Spawn, Stamina, Hammer, Loot, Luck, Midas Touch, Super Jackpot, high-HP Piggy walls, desk troubleshooting, and the late King Piggy Skill Tree branches required for Maxed Out",
+      "Bill protection, early-payment decisions, recoverable versus dead cycles, Big Toni loan terms, daily earnings cuts, repayment, bankruptcy timing, and verified bill checkpoints",
+      "Legacy Point conversion, first Prestige purchases, Early Speed Ring, Early Piggy Ring, Crit Ring, Damage Ring III, Orb Ring, Double Loot Ring, and the final Prestige Jewelry reset",
+      "All 27 achievements, accuracy and first-hit setups, gambling, Piggy Shuffle, loan achievements, Super Jackpot, Piggy and Coin collections, King Piggy, Taxes, Keep Playing, Maxed Out, and the complete cycle-by-cycle 100% route",
+    ],
+    image:
+      "/images/bills-must-be-paid/bills-must-be-paid-spawn-bottleneck-empty-desk.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 19,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Bills Must Be Paid Guide Hub",
+        href: "/bills-must-be-paid",
+        type: "Guide Hub",
+        description:
+          "Start here for the core loop, first-cycle route, bill protection, desk bottlenecks, bankruptcy planning, post-game order, and the correct detailed guide for your current problem.",
+        image:
+          "/images/bills-must-be-paid/bills-must-be-paid-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "First-cycle priorities, bill reserves, desk diagnosis, bankruptcy, Legacy Points, King Piggy, Taxes, post-game order, achievements, upgrades, and Prestige",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Bills Must Be Paid Best Upgrades & Skill Tree",
+        href: "/bills-must-be-paid/best-upgrades-skill-tree",
+        type: "Systems",
+        description:
+          "Choose Damage, Spawn, Stamina, Hammers, Loot, Midas Touch, and Super Jackpot by reading the desk, then find the late King Piggy branches required for Maxed Out.",
+        date: "Updated recently",
+        image:
+          "/images/bills-must-be-paid/bills-must-be-paid-super-jackpot-skill-tree-node.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 80,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Desk bottlenecks, Damage versus Speed, Starting Piggies, Spawn Rate, Stamina, Hammer breakpoints, Loot, Midas Touch, Super Jackpot, and King Piggy branches",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Bills Must Be Paid Bills, Loans & Bankruptcy Guide",
+        href: "/bills-must-be-paid/bills-loans-bankruptcy",
+        type: "Systems",
+        description:
+          "Protect bill money, judge early payments, calculate whether a cycle can recover, use Big Toni safely, and time bankruptcy without wasting paid-bill progress.",
+        date: "Updated recently",
+        image:
+          "/images/bills-must-be-paid/bills-must-be-paid-big-tony-loan-terms.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 81,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Bill reserves, early payments, verified checkpoints, Big Toni interest and daily cuts, repayment, recoverable cycles, Legacy Points, and bankruptcy timing",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Bills Must Be Paid Prestige, Rings & Bracelets",
+        href: "/bills-must-be-paid/prestige-rings-bracelets",
+        type: "Systems",
+        description:
+          "Spend Legacy Points on permanent Damage, Starting Piggies, Stamina, Loot and Crit, compare early-payment Rings, and save completion jewelry for the final reset.",
+        date: "Updated recently",
+        image:
+          "/images/bills-must-be-paid/bills-must-be-paid-double-loot-ring-one-million.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 82,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Legacy Point conversion, first Prestige purchases, Early Speed Ring, Early Piggy Ring, Crit Ring, Damage Ring III, Orb Ring, Double Loot Ring, and final reset order",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Bills Must Be Paid Achievements Guide",
+        href: "/bills-must-be-paid/achievements-guide",
+        type: "Achievements",
+        description:
+          "Unlock all 27 achievements with safe setups for accuracy, Strong Start, Multismasher, Piggy Shuffle, Big Toni, Super Jackpot, collections, Maxed Out, and Prestige Jewelry.",
+        date: "Updated recently",
+        image:
+          "/images/bills-must-be-paid/bills-must-be-paid-maxed-out-achievement.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 83,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "All 27 achievements, accuracy route, Strong Start, Multismasher, gambling, Piggy Shuffle, Big Toni, Super Jackpot, collections, Freedom, Maxed Out, and Prestige Jewelry",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "Bills Must Be Paid 100% Walkthrough",
+        href: "/bills-must-be-paid/100-percent-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the full cycle route from opening achievements and the first bankruptcy through Big Toni, every collection, King Piggy, Taxes, Maxed Out, and the final Prestige.",
+        date: "Updated recently",
+        image:
+          "/images/bills-must-be-paid/bills-must-be-paid-prestige-jewelry-achievement.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 84,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Cycle 1 setup, first Prestige, Cycle 2 achievements, winning cycle, Piggy and Coin collections, King Piggy, Taxes, Keep Playing, Maxed Out, and final jewelry",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+    ],
+  },
+  {
     title: "Sir, We Have an Orc Problem",
     game: "Sir, We Have an Orc Problem",
     href: "/sir-we-have-an-orc-problem",
