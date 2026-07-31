@@ -131,6 +131,218 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "How Many Dudes?",
+    game: "How Many Dudes?",
+    href: "/how-many-dudes",
+    slug: "how-many-dudes",
+    kind: "game",
+    status: "active",
+    accent: "purple",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Army-Building Roguelite",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the How Many Dudes? guide hub for five-Type team building, tested Warlock, Cyborg and Cave builds, the Round 100 route, the G.O.A.T. at Round 105, Relic shop decisions, Tier 2 unlocks, and all 69 achievements.",
+    coverage: [
+      "Core roster rules, five-Type role planning, Dude Families, Daily Dude, Pocket Dice, Relic Pool decisions, recovery priorities, progression checkpoints, and the correct focused guide for each bottleneck",
+      "Three Tier 1-clearing teams built around Warlock and Chef, Cyborg and General, or Cave and Cleric, with recruit order, role checks, Relic priorities, scaling decisions, and route-specific result references",
+      "Round 1–100 route planning, Business Dude 15-round investments, Scavenger 11-round Relic loans, Round 60 Separator, safer late fights, Round 94 decisions, and the Round 100 Gorilla pack",
+      "Rounds 101–104 recovery, final-shop priorities, Round 105 modifiers, 250 Rams, G.O.A.T. Stomp, Dude Juice and Health Potion timing, Bottled Lightning limits, and the final boss order",
+      "Andon Cord, Shadowy Funnel, Time Sink, Time Trigger, Heroic Medal, Shield Belt, Copper Bolts, Cave Painting, late consumables, trigger requirements, and early-versus-late shop decisions",
+      "Regular, Silver and Gold Stars, five Gold-Star Dude Types for Tier 2, the 20-Silver-Star Pocket Dice reward, Ensemble at 75 Discoveries, Endless limitations, and all 69 achievements",
+    ],
+    image:
+      "/images/how-many-dudes/how-many-dudes-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 20,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "How Many Dudes? Guide Hub",
+        href: "/how-many-dudes",
+        type: "Guide Hub",
+        description:
+          "Start here for five-Type roster planning, Dude Families, recovery, Relic Pool decisions, progression checkpoints, and the correct build, Round 100, G.O.A.T., Tier 2, Relic, or achievement guide.",
+        image:
+          "/images/how-many-dudes/how-many-dudes-warlock-chef-time-ranger-mutant-build.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Five-Type roster roles, Dude Families, Daily Dude, Pocket Dice, Relic Pool, recovery, builds, Round 100, G.O.A.T., Tier 2, Relics, and achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "How Many Dudes Best Builds",
+        href: "/how-many-dudes/best-builds",
+        type: "Builds",
+        description:
+          "Compare three Tier 1-clearing five-Type teams built around Warlock, Cyborg, or Cave, with recruit order, role checks, Relic priorities, scaling decisions, and result references.",
+        date: "Updated recently",
+        image:
+          "/images/how-many-dudes/how-many-dudes-cyborg-samurai-assassin-franken-general-build.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 85,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Warlock, Chef, Time, Mutant and Ranger; Cyborg, Samurai, Assassin, Franken and General; Cave, Cleric, Vampire, Ghost and Medic",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "How Many Dudes Round 100 Guide",
+        href: "/how-many-dudes/round-100-guide",
+        type: "Walkthrough",
+        description:
+          "Build the roster through Round 100, time Business investments and Relic loans, avoid expensive late losses, prepare recovery items, and beat the Gorilla pack.",
+        date: "Updated recently",
+        image:
+          "/images/how-many-dudes/how-many-dudes-round-100-frenzied-gorilla-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 86,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Five roster jobs, Business Dude timing, Scavenger loans, Round 60 Separator, safer Rounds 81–99, Frenzied Gorillas, Meteor, and Dude Juice",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "How Many Dudes G.O.A.T. Boss Guide",
+        href: "/how-many-dudes/goat-boss-guide",
+        type: "Bosses",
+        description:
+          "Repair the roster through Rounds 101–104, read the final modifier, clear 250 Rams, survive G.O.A.T. Stomp, and time Dude Juice and Health Potion.",
+        date: "Updated recently",
+        image:
+          "/images/how-many-dudes/how-many-dudes-round-105-goat-250-rams.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 87,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Rounds 101–104, final shop, 250 Rams, Taunt Resistance, Crit Avoidance, G.O.A.T. Stomp, Dude Juice, Health Potion, and Bottled Lightning",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "How Many Dudes Relic Combinations",
+        href: "/how-many-dudes/relic-combinations",
+        type: "Systems",
+        description:
+          "Choose Relics by the problem they solve, compare Warlock, Time, General, Franken and Cave packages, and prepare the right consumables for late bosses.",
+        date: "Updated recently",
+        image:
+          "/images/how-many-dudes/how-many-dudes-andon-cord-shadowy-funnel-time-sink.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 88,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Andon Cord, Shadowy Funnel, Time Sink, Time Trigger, Heroic Medal, Shield Belt, Copper Bolts, Cave Painting, and late consumables",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "How Many Dudes Tier 2 Progression Guide",
+        href: "/how-many-dudes/tier-2-progression",
+        type: "Systems",
+        description:
+          "Earn Silver and Gold Stars, unlock Tier 2 with five Gold-Star Dude Types, claim the Pocket Dice reward, reach 75 Discoveries, and avoid wasted Endless runs.",
+        date: "Updated recently",
+        image:
+          "/images/how-many-dudes/how-many-dudes-five-gold-stars-unlock-tier-2.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 89,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Regular, Silver and Gold Stars, five Gold-Star Dude Types, Tier 2, 20 Silver Stars, extra Pocket Dice, 75 Discoveries, Ensemble, and Endless",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+      {
+        title: "How Many Dudes Achievements Guide",
+        href: "/how-many-dudes/achievements-guide",
+        type: "Achievements",
+        description:
+          "Track all 69 achievements with a searchable checklist covering discoveries, Dude Types, Relics, Stars, bosses, economy, consumables, and progression cleanup.",
+        date: "Updated recently",
+        image:
+          "/images/how-many-dudes/how-many-dudes-stars-regular-silver-gold.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 90,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "All 69 achievements, searchable checklist, discoveries, Dude Types, Relics, Stars, Round 100, G.O.A.T., economy, consumables, and progression cleanup",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Bills Must Be Paid",
     game: "Bills Must Be Paid",
     href: "/bills-must-be-paid",
@@ -152,7 +364,7 @@ export const guideClusters: GuideCluster[] = [
       "All 27 achievements, accuracy and first-hit setups, gambling, Piggy Shuffle, loan achievements, Super Jackpot, Piggy and Coin collections, King Piggy, Taxes, Keep Playing, Maxed Out, and the complete cycle-by-cycle 100% route",
     ],
     image:
-      "/images/bills-must-be-paid/bills-must-be-paid-spawn-bottleneck-empty-desk.webp",
+      "/images/bills-must-be-paid/bills-must-be-paid-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
@@ -337,7 +549,7 @@ export const guideClusters: GuideCluster[] = [
       "Level 6.1 top-left and bottom-left route fixes, final-wave pressure, Level 6.2 ability timing, survived-versus-perfect-clear conditions, Against All Odds, Four-tified restrictions, tower-only adjustments, and endgame troubleshooting",
     ],
     image:
-      "/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-layered-burn-gunner-tesla-build.webp",
+      "/images/sir-we-have-an-orc-problem/sir-we-have-an-orc-problem-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
