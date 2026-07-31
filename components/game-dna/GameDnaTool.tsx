@@ -13,6 +13,7 @@ import GamePickerModal from "@/components/game-dna/GamePickerModal";
 import RecommendedGames from "@/components/game-dna/RecommendedGames";
 import SelectedGameGrid from "@/components/game-dna/SelectedGameGrid";
 import GameDnaNextStep from "@/components/game-dna/GameDnaNextStep";
+import GameDnaSocialShare from "@/components/game-dna/GameDnaSocialShare";
 
 import {
   buildGameDnaProfile,
@@ -22,6 +23,10 @@ import {
   type GameDnaProfileData,
   type GameDnaTraits,
 } from "@/lib/game-dna/recommendations";
+
+import {
+  parseGameDnaResultParams,
+} from "@/lib/game-dna/social-share";
 
 export {
   GAME_DNA_TRAIT_IDS,
@@ -100,6 +105,9 @@ export default function GameDnaTool({
 
   const hasInitializedRef = useRef(false);
 
+  const shouldScrollToSharedResultRef =
+    useRef(false);
+
   const normalizedRequiredCount = Math.max(
     1,
     Math.floor(requiredCount)
@@ -117,12 +125,11 @@ export default function GameDnaTool({
   );
 
   /**
-   * 首次加载：
+   * 首次加载优先级：
    *
-   * 1. 读取 localStorage。
-   * 2. 读取 ?game= 参数。
-   * 3. Hub 传入的游戏优先排在第一位。
-   * 4. 不自动展示结果，用户仍需主动点击 Reveal。
+   * 1. 可恢复的社媒分享结果：?games=...&reveal=1
+   * 2. 浏览器 localStorage 中的历史选择
+   * 3. Hub 传入的单个预选游戏：?game=...
    */
   useEffect(() => {
     if (
@@ -138,6 +145,48 @@ export default function GameDnaTool({
       games.map((game) => game.id)
     );
 
+    const queryParams =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const sharedResult =
+      parseGameDnaResultParams(
+        queryParams,
+        validGameIds,
+        normalizedRequiredCount
+      );
+
+    if (
+      sharedResult.isSharedResult &&
+      sharedResult.gameIds.length > 0
+    ) {
+      setSelectedGameIds(
+        sharedResult.gameIds
+      );
+
+      setHasRevealed(
+        sharedResult.shouldReveal
+      );
+
+      setHasLoadedStorage(true);
+
+      shouldScrollToSharedResultRef.current =
+        sharedResult.shouldReveal;
+
+      trackEvent(
+        "game_dna_shared_result_opened",
+        {
+          selected_count:
+            sharedResult.gameIds.length,
+          auto_revealed:
+            sharedResult.shouldReveal,
+        }
+      );
+
+      return;
+    }
+
     let savedGameIds: string[] = [];
 
     try {
@@ -151,57 +200,73 @@ export default function GameDnaTool({
           JSON.parse(storedValue);
 
         if (Array.isArray(parsedValue)) {
-          savedGameIds = parsedValue.filter(
-            (value): value is string =>
-              typeof value === "string" &&
-              validGameIds.has(value)
-          );
+          savedGameIds =
+            parsedValue.filter(
+              (
+                value
+              ): value is string =>
+                typeof value ===
+                  "string" &&
+                validGameIds.has(value)
+            );
         }
       }
     } catch {
       savedGameIds = [];
     }
 
-    const queryParams =
-      new URLSearchParams(
-        window.location.search
-      );
-
     const preselectedGameId =
       queryParams.get("game");
 
     let nextGameIds = uniqueValues(
       savedGameIds
-    ).slice(0, normalizedRequiredCount);
+    ).slice(
+      0,
+      normalizedRequiredCount
+    );
 
     if (
       preselectedGameId &&
-      validGameIds.has(preselectedGameId)
+      validGameIds.has(
+        preselectedGameId
+      )
     ) {
       nextGameIds = [
         preselectedGameId,
         ...nextGameIds.filter(
           (gameId) =>
-            gameId !== preselectedGameId
+            gameId !==
+            preselectedGameId
         ),
-      ].slice(0, normalizedRequiredCount);
+      ].slice(
+        0,
+        normalizedRequiredCount
+      );
 
       const preselectedGame =
-        gameMap.get(preselectedGameId);
+        gameMap.get(
+          preselectedGameId
+        );
 
       trackEvent(
         "game_dna_preselected",
         {
-          game_id: preselectedGameId,
+          game_id:
+            preselectedGameId,
           game_title:
             preselectedGame?.title ??
             preselectedGameId,
-          source: "query_parameter",
+          source:
+            "query_parameter",
         }
       );
     }
 
-    setSelectedGameIds(nextGameIds);
+    setSelectedGameIds(
+      nextGameIds
+    );
+
+    setHasRevealed(false);
     setHasLoadedStorage(true);
   }, [
     gameMap,
@@ -280,6 +345,25 @@ export default function GameDnaTool({
     isComplete,
   ]);
 
+  useEffect(() => {
+    if (
+      !profile ||
+      !shouldScrollToSharedResultRef.current
+    ) {
+      return;
+    }
+
+    shouldScrollToSharedResultRef.current =
+      false;
+
+    window.requestAnimationFrame(() => {
+      resultsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  }, [profile]);
+
   const recommendations = useMemo(
     () =>
       buildGuideRecommendations({
@@ -314,6 +398,16 @@ export default function GameDnaTool({
       } catch {
         // localStorage 不可用时不阻断工具。
       }
+
+      /**
+       * 用户修改分享结果中的九宫格后，
+       * 清除旧的分享参数，避免刷新时恢复旧结果。
+       */
+      clearGameDnaQueryParameters([
+        "v",
+        "games",
+        "reveal",
+      ]);
     }, []);
 
   /**
@@ -774,30 +868,15 @@ export default function GameDnaTool({
     }
 
     /**
-     * 清除 Hub 自动预选参数，
-     * 避免刷新页面后再次加入该游戏。
+     * 清除 Hub 预选参数和社媒分享参数，
+     * 避免刷新页面后重新恢复旧九宫格。
      */
-    try {
-      const url = new URL(
-        window.location.href
-      );
-
-      url.searchParams.delete("game");
-
-      const nextUrl = [
-        url.pathname,
-        url.search,
-        url.hash,
-      ].join("");
-
-      window.history.replaceState(
-        window.history.state,
-        "",
-        nextUrl
-      );
-    } catch {
-      // URL 清理失败不影响重置。
-    }
+    clearGameDnaQueryParameters([
+      "game",
+      "v",
+      "games",
+      "reveal",
+    ]);
 
     trackEvent(
       "game_dna_reset",
@@ -860,6 +939,32 @@ export default function GameDnaTool({
               }
               onReset={resetTool}
             />
+
+            <GameDnaSocialShare
+              profileTitle={
+                profile.title
+              }
+              selectedGameIds={
+                selectedGameIds
+              }
+              requiredCount={
+                normalizedRequiredCount
+              }
+              resultPathname="/game-dna"
+              onShare={(platform) => {
+                trackEvent(
+                  "game_dna_shared",
+                  {
+                    platform,
+                    profile_title:
+                      profile.title,
+                    selected_count:
+                      selectedCount,
+                  }
+                );
+              }}
+              className="mt-4"
+            />
           </div>
 
           <GameDnaNextStep
@@ -902,6 +1007,59 @@ export default function GameDnaTool({
   );
 }
 
+function clearGameDnaQueryParameters(
+  parameterNames: readonly string[]
+) {
+  if (
+    typeof window === "undefined"
+  ) {
+    return;
+  }
+
+  try {
+    const url = new URL(
+      window.location.href
+    );
+
+    let didChange = false;
+
+    for (
+      const parameterName
+      of parameterNames
+    ) {
+      if (
+        url.searchParams.has(
+          parameterName
+        )
+      ) {
+        url.searchParams.delete(
+          parameterName
+        );
+
+        didChange = true;
+      }
+    }
+
+    if (!didChange) {
+      return;
+    }
+
+    const nextUrl = [
+      url.pathname,
+      url.search,
+      url.hash,
+    ].join("");
+
+    window.history.replaceState(
+      window.history.state,
+      "",
+      nextUrl
+    );
+  } catch {
+    // URL 清理失败不影响工具主流程。
+  }
+}
+
 function uniqueValues(
   values: string[]
 ) {
@@ -909,6 +1067,7 @@ function uniqueValues(
     new Set(values)
   );
 }
+
 
 function trackEvent(
   eventName: string,

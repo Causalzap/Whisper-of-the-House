@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import GameDnaSeoContent from "@/components/game-dna/GameDnaSeoContent";
 import GameDnaTool from "@/components/game-dna/GameDnaTool";
-import IgdbAttribution from "@/components/site/IgdbAttribution";
 
 import { GAMES } from "@/data/game-recommender/games";
 

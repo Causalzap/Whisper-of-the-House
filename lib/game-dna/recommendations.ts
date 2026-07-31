@@ -1059,7 +1059,7 @@ function buildProfileTitle(
       "Experimental Builder",
 
     "systems-progression":
-      "Optimization Architect",
+      "Systems Optimizer",
 
     "combat-progression":
       "Build-Focused Fighter",
@@ -1107,7 +1107,7 @@ function buildProfileTitle(
       "Build-Focused Fighter",
 
     "progression-systems":
-      "Optimization Architect",
+      "Systems Optimizer",
 
     "story-puzzle":
       "Narrative Investigator",
