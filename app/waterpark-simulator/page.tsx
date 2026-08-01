@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
 import WaterparkSimulatorContent from "@/data/waterpark-simulator/index.mdx";
+import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/waterpark-simulator`;
@@ -278,6 +279,13 @@ export default function Page() {
         >
           <WaterparkSimulatorContent />
         </GuideArticlePage>
+
+        <GameDiscoveryCta
+          gameTitle="Waterpark Simulator"
+          heading="Looking for another game after Waterpark Simulator?"
+          description="Use the quick recommender to find something that fits your current mood, platform, and play mode, or build a broader Gaming DNA profile from nine games you already love."
+        />
+
       </main>
 
       <Footer />
