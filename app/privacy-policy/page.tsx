@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
       <main className="privacy-page">
         <section className="privacy-card">
           <h1>Privacy Policy</h1>
-          <p className="last-updated">Last updated: May 19, 2026</p>
+          <p className="last-updated">Last updated: August 2, 2026</p>
 
           <p>
             At Whisper of the House, we respect your privacy. This Privacy Policy explains what
@@ -53,7 +53,7 @@ const PrivacyPolicy = () => {
           <p>
             We may use cookies and similar technologies to improve your browsing experience,
             understand website traffic, remember preferences, analyze how visitors use our site,
-            and support affiliate tracking where applicable.
+            and support advertising and measurement technologies where applicable.
           </p>
 
           <p>
@@ -74,33 +74,37 @@ const PrivacyPolicy = () => {
             location, referral source, pages visited, session duration, and other usage data.
           </p>
 
-          <h2>5. Affiliate Links and Tracking</h2>
+          <h2>5. Advertising and Monumetric</h2>
+
           <p>
-            Some pages on Whisper of the House may contain affiliate links. If you click an affiliate
-            link and make a purchase or complete another qualifying action, we may earn a commission
-            at no additional cost to you.
+            This Site is affiliated with Monumetric (dba for The Blogger Network, LLC)
+            for the purposes of placing advertising on the Site, and Monumetric will
+            collect and use certain data for advertising purposes. To learn more about
+            Monumetric&apos;s data usage, click here:{' '}
+            <a
+              href="https://www.monumetric.com/publisher-advertising-privacy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="privacy-link"
+            >
+              Publisher Advertising Privacy
+            </a>.
+          </p>
+
+          <h2>6. Affiliate Links and Tracking</h2>
+
+          <p>
+            Some pages may contain affiliate links in the future. If affiliate links are
+            used, we will provide an appropriate disclosure on the relevant page.
           </p>
 
           <p>
-            We may participate in affiliate programs, including programs operated by Awin and other
-            affiliate networks. These networks, advertisers, and merchants may use cookies, tracking
-            links, or similar technologies to record clicks, referrals, purchases, commissions, and
-            other performance-related information.
+            If you click an affiliate link and complete a qualifying action, we may earn
+            a commission at no additional cost to you. Affiliate relationships do not
+            control our editorial opinions, rankings, or recommendations.
           </p>
 
-          <p>
-            This information may be used for attribution, reporting, payment, fraud prevention,
-            analytics, and compliance purposes. You can learn more about Awin&apos;s data practices
-            by reviewing Awin&apos;s own privacy information.
-          </p>
-
-          <p>
-            We aim to clearly disclose affiliate relationships on pages that contain affiliate links.
-            Our editorial content and game guides are created independently, and affiliate
-            commissions do not control our opinions, rankings, or recommendations.
-          </p>
-
-          <h2>6. Third-Party Links</h2>
+          <h2>7. Third-Party Links</h2>
           <p>
             Our website may link to third-party websites, including official game stores, Steam
             pages, publisher websites, affiliate advertisers, retailers, software providers, and
@@ -114,11 +118,11 @@ const PrivacyPolicy = () => {
             and terms.
           </p>
 
-          <h2>7. Sharing Your Information</h2>
+          <h2>8. Sharing Your Information</h2>
           <p>
             We do not sell your personal information. We may share limited information with service
             providers that help us operate the website, such as hosting providers, analytics tools,
-            security services, email providers, and affiliate networks.
+            security services, email providers, and advertising partners.
           </p>
 
           <p>
@@ -126,14 +130,14 @@ const PrivacyPolicy = () => {
             fraud or abuse, or to comply with legal processes.
           </p>
 
-          <h2>8. Data Security</h2>
+          <h2>9. Data Security</h2>
           <p>
             We take reasonable steps to protect information from unauthorized access, loss, misuse,
             alteration, or disclosure. However, no method of transmission over the internet or method
             of electronic storage is completely secure.
           </p>
 
-          <h2>9. Children&apos;s Privacy</h2>
+          <h2>10. Children&apos;s Privacy</h2>
           <p>
             Our website is not intended for children under the age of 13. We do not knowingly collect
             personal information from children under 13.
@@ -144,7 +148,7 @@ const PrivacyPolicy = () => {
             so we can take appropriate action.
           </p>
 
-          <h2>10. Your Rights and Choices</h2>
+          <h2>11. Your Rights and Choices</h2>
           <p>
             Depending on your location, you may have the right to access, correct, update, or request
             deletion of your personal information. You may also have the right to object to or
@@ -164,13 +168,13 @@ const PrivacyPolicy = () => {
             </a>.
           </p>
 
-          <h2>11. Changes to This Privacy Policy</h2>
+          <h2>12. Changes to This Privacy Policy</h2>
           <p>
             We may update this Privacy Policy from time to time. Any changes will be posted on this
             page with an updated &quot;Last updated&quot; date.
           </p>
 
-          <h2>12. Contact Us</h2>
+          <h2>13. Contact Us</h2>
           <p>
             If you have any questions about this Privacy Policy, please contact us at{' '}
             <a href="mailto:support@whisperofthehouse.com" className="privacy-link">
