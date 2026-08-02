@@ -133,7 +133,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/bills-must-be-paid`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/how-many-dudes`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/waterpark-simulator`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    
+    { url: `${base}/quasimorph`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+
+    { url: `${base}/quasimorph/beginner-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/quasimorph/contracts-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/quasimorph/ship-upgrades`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/quasimorph/loot-priority`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/quasimorph/wounds-infection-medicine`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/quasimorph/start-realware-storyline`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/quasimorph/quasimorphosis-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
 
     { url: `${base}/waterpark-simulator/research-points`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/waterpark-simulator/increase-satisfaction`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },

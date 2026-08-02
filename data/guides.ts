@@ -131,6 +131,244 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Quasimorph",
+    game: "Quasimorph",
+    href: "/quasimorph",
+    slug: "quasimorph",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Turn-Based Extraction RPG",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the Quasimorph 1.0 guide hub from the tutorial and first contracts through loot priority, wounds and infection, Quasimorphosis, Magnum upgrades, faction barter, and the verified opening RealWare storyline.",
+    coverage: [
+      "Stable early-campaign route from the tutorial and first Conveyor through replaceable loadouts, nearby contract selection, objective-first extraction, post-mission unloading, and buy-wait-turn-back decisions",
+      "Contract cards, Beneficiary and Victim choices, travel and expiration checks, Difficulty, Floors, Power Concentration, mission objectives, random events, and the decision to take, wait, change side, or leave the board",
+      "Mission items, production and mercenary mind chips, Magnum components, common-material caps, weapon and armour comparisons, dismantling, barter goods, full-backpack decisions, and extraction timing",
+      "Health Monitor triage, Stealth-Walk-Run restrictions, Bandages and Splints, Rag and Plastic emergency stabilization, infection risk, Auto-Doc limits, medical loadouts, and wounded-route extraction decisions",
+      "Conveyor, Monitoring, Scanner, Capsule, Scavengers, Recycling, Clone Rank, Engineering, late branches, verified upgrade values, and a bottleneck-based Magnum purchase order",
+      "Quasimorphosis meter decisions, Ecolapse timing, phasing enemies, resistance checks, Baron fights, post-Baron danger, and the verified RealWare opening from the AnCom data choice through the Palace Asteroid EMP Scorcher objective",
+    ],
+    image:
+      "/images/quasimorph/quasimorph-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 22,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Quasimorph Guide Hub",
+        href: "/quasimorph",
+        type: "Guide Hub",
+        description:
+          "Start here for the stable campaign loop, contract and extraction priorities, barter and faction decisions, opening story choice, and the correct focused guide for the problem blocking the current run.",
+        image:
+          "/images/quasimorph/quasimorph-quasimorphosis-grasp-152.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Stable campaign loop, contracts, loot, wounds, Quasimorphosis, Magnum upgrades, barter, factions, story choice, and buy-wait-turn-back rules",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Quasimorph Beginner Guide",
+        href: "/quasimorph/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Finish the tutorial, unload the first operator, install the Conveyor, build a replaceable loadout, use Stealth, Walk and Run correctly, complete the objective first, and reset the Magnum after extraction.",
+        date: "Updated recently",
+        image:
+          "/images/quasimorph/quasimorph-first-mission-operator-class-loadout.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 97,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Tutorial unload, Conveyor, first destination, replaceable operator loadout, Stealth-Walk-Run, Health and Quasimorphosis checks, objective-first route, and post-extraction reset",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Quasimorph Contracts Guide",
+        href: "/quasimorph/contracts-guide",
+        type: "Systems",
+        description:
+          "Read Beneficiary, Victim, Reward, travel, Time remains, Difficulty, Floors, Power Concentration and objectives, then decide when to take, wait, change side or skip the contract.",
+        date: "Updated recently",
+        image:
+          "/images/quasimorph/quasimorph-ancom-espionage-venus-contract.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 98,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Beneficiary and Victim, travel, expiration, Difficulty, Floors, Power Concentration, objective text, random events, bad boards, and take-wait-turn-back decisions",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Quasimorph Loot Priority Guide",
+        href: "/quasimorph/loot-priority",
+        type: "Systems",
+        description:
+          "Decide what to keep, drop, dismantle, trade or extract first, from mission items and permanent chips to Magnum components, weapons, armour and capped common materials.",
+        date: "Updated recently",
+        image:
+          "/images/quasimorph/quasimorph-production-chip-shuttle-priority.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 99,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Objective slots, production and mind chips, Magnum components, material caps, weapon and armour checks, dismantling, barter, full backpacks, and extraction timing",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Quasimorph Wounds & Infection Guide",
+        href: "/quasimorph/wounds-infection-medicine",
+        type: "Systems",
+        description:
+          "Read the Health Monitor, leave Run before treatment, use Bandages, Splints, Rags and Plastic correctly, manage infection risk, check Auto-Docs, and know when to extract.",
+        date: "Updated recently",
+        image:
+          "/images/quasimorph/quasimorph-autodoc-heal-60-hp-five-batteries.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 100,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Health Monitor, body-part injuries, Pain, movement restrictions, Bandages, Splints, eight-turn Rag and Plastic stabilization, infection risk, Auto-Docs, and extraction",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "Quasimorph Ship Upgrades Guide",
+        href: "/quasimorph/ship-upgrades",
+        type: "Systems",
+        description:
+          "Choose the next Magnum upgrade by the current bottleneck, from Conveyor, Monitoring and Scanner to Capsule, Scavengers, Clone Rank, Engineering and specialized late branches.",
+        date: "Updated recently",
+        image:
+          "/images/quasimorph/quasimorph-monitoring-upgrade-tree.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 101,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Conveyor, Monitoring charges and Reload, Scanner floors, Capsule slots and charges, Scavengers, Clone Rank, Engineering, late branches, and buy-wait-turn-back rules",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+      {
+        title: "Quasimorphosis, Ecolapse & Barons Guide",
+        href: "/quasimorph/quasimorphosis-guide",
+        type: "Systems",
+        description:
+          "Read the Quasimorphosis meter, prepare for Ecolapse, avoid wasting attacks on phasing enemies, check Baron resistances, survive the kill, and decide whether to continue or extract.",
+        date: "Updated recently",
+        image:
+          "/images/quasimorph/quasimorph-quasimorphosis-grasp-152.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 102,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Quasimorphosis thresholds, Ecolapse, first-turn invulnerability, phasing enemies, resistance checks, Baron fights, post-Baron danger, and continue-or-extract decisions",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+      {
+        title: "How to Start the RealWare Storyline",
+        href: "/quasimorph/start-realware-storyline",
+        type: "Walkthrough",
+        description:
+          "Give the opening AnCom data to RealWare, wait for contact, find the correct AnCom Espionage contract, hack the PCPU, and prepare for the Palace Asteroid EMP Scorcher objective.",
+        date: "Updated recently",
+        image:
+          "/images/quasimorph/quasimorph-realware-emp-scorcher-objective.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 103,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "AnCom PCPU recipient choice, RealWare waiting period, matching Espionage contract, PCPU hack, Palace Asteroid, EMP Scorcher, Covert Operations, and go-or-wait preparation",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+    ],
+  },
+  {
     title: "Waterpark Simulator",
     game: "Waterpark Simulator",
     href: "/waterpark-simulator",
