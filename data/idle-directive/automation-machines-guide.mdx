@@ -1,0 +1,827 @@
+import Link from "next/link";
+import Image from "next/image";
+import AdUnit from "@/components/ads/AdUnit";
+
+If a machine is powered but inactive, I check three things before moving it:
+
+1. does its input need to touch it directly?
+2. does it need a specific point of interest?
+3. does it have compatible storage with free capacity?
+
+Those three checks solve most early automation failures.
+
+My first Spinner stopped because its Repeater was connected through Wire instead
+of touching it. My first Biogenerator had Biomass nearby but no directly
+connected Biocell. My Salvager was powered at a location with no Metal, and my
+Collector had nowhere to place the items it could see.
+
+I now build automation in this order:
+
+> create temporary power → repair Navigation → move to a useful POI → add
+> matching storage → automate one resource chain → replace temporary machines →
+> test Auto Explore with one controlled route.
+
+This page focuses on machine behavior, resource throughput, Replicator use and
+map automation. Exact tile-by-tile arrangements are kept in the{" "}
+<Link
+  href="/idle-directive/layout-examples"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  IDLE_DIRECTIVE layout examples guide
+</Link>
+.
+
+> Output values below are observed examples, not universal maximums. Machine
+> level, Augments, amplifiers and the number of active processing batches can
+> change the result substantially.
+
+<h2 id="connection-rules">Check the Machine's Connection Rule First</h2>
+
+A green power connection does not prove that a machine can perform its job.
+
+I separate machines into three functional groups.
+
+<div className="my-6 grid gap-4 md:grid-cols-2">
+  <div className="rounded-xl border border-slate-700 p-4">
+    <h3 className="mt-0 text-lg font-semibold">Direct-contact machines</h3>
+    <p className="mb-2">
+      These need a specific neighbouring machine or fuel source.
+    </p>
+    <ul className="mb-0">
+      <li>Repeater → active generator</li>
+      <li>Biocell → Biogenerator</li>
+      <li>Amplifier → supported neighbouring machine</li>
+    </ul>
+  </div>
+
+  <div className="rounded-xl border border-slate-700 p-4">
+    <h3 className="mt-0 text-lg font-semibold">POI-dependent machines</h3>
+    <p className="mb-2">
+      These can be connected correctly and still remain inactive at the wrong
+      location.
+    </p>
+    <ul className="mb-0">
+      <li>Salvager → Metal-bearing POI</li>
+      <li>Harvester → Biomass-bearing POI</li>
+      <li>Grabber → compatible items at the current POI</li>
+    </ul>
+  </div>
+
+  <div className="rounded-xl border border-slate-700 p-4">
+    <h3 className="mt-0 text-lg font-semibold">Storage-dependent machines</h3>
+    <p className="mb-2">
+      These stop when the destination is missing, incompatible or full.
+    </p>
+    <ul className="mb-0">
+      <li>Collector → matching storage for Scavenge results</li>
+      <li>Grabber → matching storage for POI items</li>
+      <li>Furnace → Scrap input and room for the resulting Metal</li>
+    </ul>
+  </div>
+
+  <div className="rounded-xl border border-slate-700 p-4">
+    <h3 className="mt-0 text-lg font-semibold">Processing machines</h3>
+    <p className="mb-2">
+      These need enough input, Energy and downstream capacity to keep running.
+    </p>
+    <ul className="mb-0">
+      <li>Furnace → Scrap</li>
+      <li>Decomposer → Carcasses</li>
+      <li>Biogenerator → Biomass through a Biocell</li>
+    </ul>
+  </div>
+</div>
+
+When a machine stops, I inspect the chain from left to right:
+
+> source → storage → processor → output storage or consumer.
+
+I do not upgrade the final machine until I know the problem is actually at the
+final machine.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="spinner-repeater">Use a Spinner and Repeater as Temporary Power</h2>
+
+A Spinner is useful because it can provide opening Energy before I have a
+complete fuel chain.
+
+A level-one Spinner in the tested opening generated **0.500 Energy per second**
+while spinning.
+
+The limitation is that the Spinner is an active generator. It needs repeated
+activation.
+
+A Repeater automates that activation, but it must touch the Spinner directly.
+
+Wire can connect both machines to the wider power network. Wire does not transmit
+the Repeater trigger across the grid.
+
+My opening route is:
+
+1. place the Spinner where at least one activation side remains open;
+2. connect one Repeater directly to it;
+3. connect the setup to powered Wiring;
+4. watch whether the Spinner slows down between activations;
+5. add or replace the Repeater only when the timing is the bottleneck;
+6. stop investing once the setup supports Navigation and Mobility.
+
+A standard early Repeater can trigger every four seconds.
+
+The later **Repeater (2s)** automatically triggers a directly connected active
+generator every two seconds. When I find one, it can replace weaker Repeater
+coverage and recover Body Space.
+
+<figure className="my-8">
+  <Image
+    src="/images/idle-directive/idle-directive-spinner-repeater-early-power.webp"
+    alt="IDLE_DIRECTIVE Spinner connected directly to Repeaters for temporary automated Energy generation"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-4xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-4xl text-sm text-slate-400">
+    The Repeater must touch the Spinner it controls. I use this group to restore
+    Navigation and begin moving, not as the permanent centre of the machine.
+  </figcaption>
+</figure>
+
+I keep the Spinner setup when:
+
+- the Recycler and Navigation Computer would otherwise create negative Energy;
+- I do not have a reliable Biomass source;
+- the grid still has room for storage and processing;
+- one inexpensive upgrade makes total Energy income positive.
+
+I stop expanding it when:
+
+- another Spinner requires another large Repeater group;
+- storage or a Furnace no longer fits;
+- a Biogenerator can replace several temporary pieces;
+- an amplifier needs the same neighbouring tiles;
+- the machine already has enough Energy to reach the next POI.
+
+The opening Spinner has completed its job once movement is stable.
+
+<h2 id="biogenerator-not-working">Fix a Biogenerator That Produces No Energy</h2>
+
+The Biogenerator needs two different connections:
+
+- powered Wiring;
+- a directly connected Biocell containing Biomass.
+
+Biomass does not travel through ordinary Wire.
+
+A Biomass container placed elsewhere in the Body Grid does not fuel the
+Biogenerator automatically.
+
+My troubleshooting order is:
+
+1. confirm the Biogenerator is switched on;
+2. confirm it is connected to the powered Wiring network;
+3. place a Biocell directly against the required side;
+4. fill the Biocell from Biomass storage;
+5. check the Biocell's current contents;
+6. compare generation with the Energy consumption of the complete machine.
+
+<figure className="my-8">
+  <Image
+    src="/images/idle-directive/idle-directive-biogenerator-direct-biocell-connection.webp"
+    alt="IDLE_DIRECTIVE Biogenerator connected directly to a Biocell containing Biomass"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-4xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-4xl text-sm text-slate-400">
+    Wiring carries Energy, but it does not carry Biomass. The Biocell must touch
+    the Biogenerator directly.
+  </figcaption>
+</figure>
+
+A normal Biocell can be refilled and emptied manually.
+
+One tested Biocell had **3,520 Biomass capacity** after substantial upgrading.
+
+A Refilling Biocell begins with much less capacity—the captured level-one version
+held only **20 Biomass**—but it automatically refills when empty, with a
+**30-second cooldown**.
+
+I use the normal Biocell when:
+
+- the generator is still temporary;
+- Biomass consumption is low;
+- I am watching the machine;
+- its much larger upgraded capacity provides a useful buffer.
+
+I use the Refilling Biocell when:
+
+- the Biogenerator is the main power source;
+- Auto Explore will move the machine unattended;
+- manual refilling is repeatedly stopping the whole system;
+- the cooldown and available Biomass supply can support consumption.
+
+A large generation number is not enough by itself.
+
+One tested Biogenerator II produced **437.5 Energy per second** with a **25%
+Energy Amplification** bonus, but it also consumed **7 Biomass per second**.
+
+I therefore check both:
+
+- net Energy after every active machine is included;
+- whether Biomass storage is rising or falling.
+
+<h2 id="collection-machines">Give Each Collection Machine One Job</h2>
+
+Collector, Grabber, Salvager and Harvester solve different bottlenecks.
+
+I do not keep all four active at every location.
+
+### Collector
+
+The Collector clears resources and upgrade materials from completed Scavenge
+results when matching storage is available.
+
+I use it when the Scavenge grid remains full long enough to slow down the next
+Scavenge action.
+
+I check four things when it appears inactive:
+
+1. are there completed Scavenge results?
+2. does matching storage exist?
+3. does that storage have free capacity?
+4. is the Collector powered and charged?
+
+The Collector does not harvest Metal or Biomass from the current map location.
+
+### Grabber
+
+The Grabber moves compatible items from the current POI into matching storage.
+
+It is useful for resources such as Scrap and Carcasses.
+
+It cannot place:
+
+- Scrap into a Machinery container;
+- Carcasses into Scrap storage;
+- an item into a full container;
+- a resource that no longer exists at the current POI.
+
+When its tooltip reports no materials, I check the POI and storage before adding
+another Grabber.
+
+I move when the location is exhausted.
+
+### Salvager
+
+The Salvager harvests Metal from a compatible location.
+
+I install it when:
+
+- Metal is the current bottleneck;
+- the POI still contains Metal;
+- I plan to remain long enough for the machine to recover its space and Energy
+  cost;
+- storage or spending capacity can absorb the output.
+
+I do not upgrade it at a location with no Metal.
+
+### Harvester
+
+The Harvester collects Biomass from a compatible location.
+
+I prioritize it when the Biogenerator is draining the Biomass buffer faster than
+the existing chain can replace it.
+
+I turn it off or leave it behind when:
+
+- the POI has no Biomass;
+- Biomass storage remains full;
+- Metal, Machinery or Rare Metal is the actual bottleneck;
+- the machine is moving to a Trader, Spire or Terminal.
+
+<h2 id="automated-metal">Automate Metal From Scrap Without Overbuilding</h2>
+
+My basic Metal chain is:
+
+> Scrap source → Scrap Box → Furnace → Metal.
+
+The storage step prevents intermittent collection from disrupting the Furnace.
+
+Without Scrap storage:
+
+- a Grabber may have nowhere to place Scrap;
+- a Scrap Scavenger cannot maintain a useful buffer;
+- the Furnace waits whenever the current POI is empty.
+
+An early Furnace converted:
+
+- **1 Scrap**
+- into **50 Metal**
+- every **60 seconds**.
+
+A developed Furnace II converted:
+
+- **1 Scrap**
+- into **60 Metal**
+- every **15 seconds**.
+
+The captured level-58 Furnace II could process up to **58 Scrap at a time**.
+It was processing **20 batches** and consuming **120 Energy per second** at that
+load.
+
+A level-20 Scrap Scavenger generated:
+
+- **20 Scrap**
+- every **30 seconds**;
+- while consuming **2.10 Energy per second**.
+
+That equals **40 Scrap per minute**.
+
+With 20 concurrent 15-second Furnace batches, the tested Furnace configuration
+could consume up to 80 Scrap per minute. One level-20 Scrap Scavenger therefore
+did not justify adding another Furnace.
+
+<figure className="my-8">
+  <Image
+    src="/images/idle-directive/idle-directive-scrap-furnace-metal-chain.webp"
+    alt="IDLE_DIRECTIVE Scrap Box, Scrap Scavenger and Furnace II forming an automated Metal chain"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-4xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-4xl text-sm text-slate-400">
+    This Furnace II converted one Scrap into 60 Metal every 15 seconds. I compare
+    its active batches with the incoming Scrap rate before duplicating either
+    side of the chain.
+  </figcaption>
+</figure>
+
+I add Scrap production when:
+
+- the Furnace is powered but regularly waits for input;
+- the Scrap Box remains nearly empty;
+- Metal production stops whenever I leave a Scrap-bearing POI.
+
+I improve Furnace throughput when:
+
+- Scrap storage stays full;
+- the Furnace remains active continuously;
+- Metal output is still slower than current spending.
+
+I add storage when:
+
+- the source and Furnace are both fast enough;
+- short interruptions cause Scrap to be lost;
+- Auto Explore will move away before the Furnace finishes the buffer.
+
+I stop investing when Metal accumulates faster than I can spend it.
+
+At that point, another resource is limiting progression.
+
+<h2 id="automated-biomass">Balance Carcass Production Against Biomass Consumption</h2>
+
+A sustainable Biomass chain can be built as:
+
+> Cultivator or Carcass POI → Carcass storage → Decomposer → Biomass storage →
+> Biocell → Biogenerator.
+
+A Harvester can add direct Biomass income at a valid POI.
+
+A Cultivator and Decomposer provide a stationary route that does not depend on
+remaining at a Biomass location.
+
+In the tested developed setup:
+
+- a level-17 Cultivator produced **17 Carcasses every 60 seconds**;
+- a level-25 Decomposer II converted **1 Carcass into 12 Biomass every 10
+  seconds**;
+- the Decomposer II could process up to **25 Carcasses at a time**;
+- the Biogenerator II consumed **7 Biomass per second**.
+
+Seventeen Carcasses produce:
+
+> 17 × 12 = 204 Biomass per minute.
+
+That equals approximately:
+
+> 3.4 Biomass per second.
+
+One level-17 Cultivator therefore did **not** sustainably fuel that
+Biogenerator II by itself.
+
+The generator consumed 7 Biomass per second while the Cultivator supplied the
+equivalent of about 3.4. Stored Biomass, POI harvesting, another Cultivator or
+another Carcass source had to cover the deficit.
+
+<figure className="my-8">
+  <Image
+    src="/images/idle-directive/idle-directive-carcass-biomass-biogenerator-chain.webp"
+    alt="IDLE_DIRECTIVE Cultivator, Decomposer II, Biomass storage and Biogenerator II automation chain"
+    width={1280}
+    height={720}
+    className="mx-auto h-auto w-full max-w-4xl rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-4xl text-sm text-slate-400">
+    A full Biomass container can hide an unsustainable chain. I compare Carcass
+    conversion with the Biogenerator's seven-Biomass-per-second consumption
+    before upgrading the generator again.
+  </figcaption>
+</figure>
+
+I watch the storage trend for several minutes while:
+
+- Mobility remains active;
+- the Furnace and Recycler are running;
+- the machine leaves a Biomass POI;
+- the Biogenerator remains at normal load.
+
+I increase Biomass input when storage trends downward.
+
+I upgrade the Biogenerator when:
+
+- Biomass storage remains stable or rises;
+- Energy output is the actual bottleneck;
+- the amplifier and fuel chain can support the higher level.
+
+I add storage when:
+
+- average production is sufficient;
+- short interruptions still empty the Biocell;
+- Auto Explore will leave the source behind.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="amplifiers">Match Each Amplifier to the Correct Target</h2>
+
+Amplifiers are adjacency machines.
+
+Connecting them to the same Wiring network is not enough. The supported target
+must occupy a valid neighbouring tile.
+
+### Concentrator
+
+The Concentrator supports neighbouring Energy Cells.
+
+I use it when enough strong Energy Cells can occupy its active sides.
+
+I do not preserve several weak cells simply to fill the shape. I compare the
+complete cluster's output and occupied tiles with the generator that could use
+the same space.
+
+The exact Concentrator arrangements are shown in the{" "}
+<Link
+  href="/idle-directive/layout-examples"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  layout examples guide
+</Link>
+.
+
+### Energy Amplifier
+
+The Energy Amplifier increases the output of supported neighbouring Energy
+producers.
+
+The captured level-five version provided **25% amplification**.
+
+I use it beside the strongest Biogenerator or other compatible producer.
+
+One later Energy Amplifier upgrade required:
+
+- 10 Rare Metal;
+- 7 Amplifiers;
+- 7 Magnets;
+
+and added another 5% in that setup.
+
+I do not pay that cost while the fuel chain is already running dry. Increasing
+generation also increases the importance of maintaining its input.
+
+### Power Amplifier
+
+The Power Amplifier improves neighbouring Harvesters and Salvagers.
+
+The tested level-one version provided a **25% output increase**.
+
+I place the strongest valid location machine beside it first.
+
+I do not expect it to:
+
+- amplify a distant machine;
+- make a Salvager work at a POI without Metal;
+- make a Harvester work at a POI without Biomass;
+- solve full storage;
+- improve a Collector or Furnace.
+
+The full rebuild where temporary Spinner equipment is removed to open amplifier
+sides belongs in the{" "}
+<Link
+  href="/idle-directive/layout-examples#harvesting-layout"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Power Amplifier layout example
+</Link>
+.
+
+<h2 id="upgrade-duplicate-replace">Upgrade, Duplicate or Replace Based on the Bottleneck</h2>
+
+Before spending resources, I ask where the chain is slowing down.
+
+### Upgrade the source when processors wait empty
+
+Examples:
+
+- the Furnace waits for Scrap;
+- the Decomposer waits for Carcasses;
+- Biomass storage falls while the Biogenerator remains active;
+- a Collector clears the grid faster than I can generate new results.
+
+I improve collection or production first.
+
+### Upgrade processing when input storage remains full
+
+Examples:
+
+- the Scrap Box remains full while Metal production is slow;
+- Carcass storage remains full;
+- completed Scavenge results accumulate;
+- the current processing cycle is slower than incoming material.
+
+I improve or duplicate the processor.
+
+### Add storage when both sides are fast enough
+
+I add capacity when:
+
+- input production and processing are both strong;
+- the chain fails only during brief interruptions;
+- Auto Explore leaves the location unattended;
+- several machines share the same buffer.
+
+### Replace equipment when the stronger item saves real space
+
+I do not replace every Mark I item immediately.
+
+I replace it when the new version solves a measurable problem:
+
+- a 2-second Repeater replaces multiple weaker Repeaters;
+- Furnace II removes a full Scrap backlog;
+- Collector II clears results before the next Scavenge;
+- a larger container replaces several small containers;
+- a larger Battery opens enough tiles for another machine.
+
+I do not protect temporary equipment because it was useful earlier.
+
+<h2 id="storage-bottlenecks">Treat Storage as an Active Part of Automation</h2>
+
+Storage tells me which part of the chain is failing.
+
+I keep separate containers for resources with separate processing paths:
+
+- Scrap;
+- Carcasses;
+- Biomass;
+- Machinery;
+- Magnets;
+- Amplifiers;
+- Processors;
+- Wires when I am frequently rebuilding.
+
+A Materials Case normally stores one selected category. Placing Magnets inside
+one does not make it accept Machinery or Processors automatically.
+
+When a machine stops moving items, I check storage before assuming the machine
+is broken.
+
+### Empty input storage
+
+The source is too slow or the current POI is exhausted.
+
+### Permanently full input storage
+
+Processing is too slow.
+
+### Falling fuel storage
+
+The generator consumes more than the chain produces.
+
+### Full output storage
+
+Adding more collection or processing will not help until I spend, move or expand
+the output capacity.
+
+### Empty storage during Auto Explore
+
+The route may be leaving the required resource too early or visiting the wrong
+POI types.
+
+Storage is the visible buffer between each stage of the machine. I use it as a
+diagnostic tool, not only as additional capacity.
+
+<h2 id="replicator-taskmasters">Use the Replicator for a Known Bottleneck</h2>
+
+I do not craft random machines because the Replicator has an empty slot.
+
+Before starting a recipe, I check:
+
+1. is the recipe or Blueprint already unlocked?
+2. which exact missing machine is blocking the current chain?
+3. do I have every required component?
+4. can the machine remain powered during crafting?
+5. will one completed item improve throughput immediately?
+
+In one Power Amplifier attempt, the recipe displayed **288 seconds**, but one
+Amplifier component was still missing.
+
+Starting or unlocking the recipe did not solve that missing input.
+
+I craft one copy, test it and then decide whether more copies are useful.
+
+I prioritize extra Replicator slots when multiple confirmed recipes are waiting.
+
+I prioritize Replicator speed when long crafting times are the bottleneck.
+
+I do not prioritize either when:
+
+- the required Blueprint is still locked;
+- rare components are missing;
+- the completed machine has no valid place in the current chain;
+- basic Metal or Biomass production is still unstable.
+
+The full Trader → Lab Key → Lab → Blueprint progression is covered in the{" "}
+<Link
+  href="/idle-directive"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  main IDLE_DIRECTIVE progression guide
+</Link>
+.
+
+The Augment cost and the best Prestige for unlocking the Replicator are covered
+in the{" "}
+<Link
+  href="/idle-directive/first-prestige-best-augments"
+  className="font-semibold text-sky-700 hover:text-sky-900"
+>
+  Prestige and Augments guide
+</Link>
+.
+
+### Taskmasters are a late Replicator investment
+
+Taskmasters provide passive Trader Reputation and Augment progress, but their
+early return is slow.
+
+In the tested setup:
+
+- one Taskmaster required **3,600 seconds** to craft;
+- the Replicator could queue up to five at a time in that configuration;
+- one deployed Taskmaster produced about **one Augment Point per hour**;
+- six Taskmasters running overnight produced only about **31 points**.
+
+That means the first Taskmaster does not quickly repay the crafting time,
+Replicator occupancy and Blueprint progression used to create it.
+
+I delay Taskmasters until:
+
+- Replicator speed has been improved;
+- several crafting slots are available;
+- essential machines are no longer waiting in the queue;
+- Auto Repair and repair rewards are already producing stronger active progress;
+- the current run is intended to continue for many hours.
+
+I do not use Taskmasters as the first solution to Trader Reputation.
+
+Manual Tasks and Reputation Augments create more immediate progress during the
+earlier runs.
+
+I craft Taskmasters when the alternative is leaving an upgraded Replicator idle
+overnight.
+
+<h2 id="auto-explore">Configure Auto Explore Around the Current Machine</h2>
+
+Auto Explore can automate movement, but it cannot correct a bad resource chain.
+
+It may move away from the POI that fuels the machine, visit a Lab without a key,
+fill every storage container or repeatedly reach repairs the machine cannot
+afford.
+
+I open:
+
+> Map → Options → Automation Settings
+
+My first controlled setup is:
+
+1. choose one exploration pattern;
+2. enable only POI types the machine can currently use;
+3. disable Labs until I have a Lab Access Key;
+4. choose when to leave based on the resource I am collecting;
+5. leave Wait for Grabbers off until collection and storage are proven;
+6. leave Auto Repair off until the resource buffers can pay for repairs;
+7. watch one complete route before leaving the machine unattended.
+
+<figure className="my-8">
+  <Image
+    src="/images/idle-directive/idle-directive-auto-explore-settings.webp"
+    alt="IDLE_DIRECTIVE Automation Settings using a west-east exploration pattern and leaving after Metal is exhausted"
+    width={614}
+    height={1062}
+    className="mx-auto h-auto w-full max-w-sm rounded-xl"
+  />
+  <figcaption className="mx-auto mt-3 max-w-sm text-sm text-slate-400">
+    I begin with a narrow route: useful POIs, one exploration direction and a
+    clear resource-exhaustion rule. I add repairs only after the machine can pay
+    their resource cost repeatedly.
+  </figcaption>
+</figure>
+
+### When to move after Metal is exhausted
+
+I use this when:
+
+- Salvagers are active;
+- Metal is the current bottleneck;
+- the POI's remaining Biomass does not support the current machine;
+- storage and processing can absorb the collected Metal.
+
+### When to move after Biomass is exhausted
+
+I use this when:
+
+- Harvesters support the Biogenerator;
+- Biomass storage is falling;
+- Metal is already sufficient;
+- the machine needs to rebuild its fuel buffer.
+
+### When to leave immediately
+
+I use this only when:
+
+- exploration or travel is the current objective;
+- no local collection machine needs time;
+- the next Spire, Trader or repair target matters more than resources;
+- continuous movement remains Energy-positive.
+
+### When to wait for Grabbers
+
+I enable this after confirming:
+
+- the Grabber is powered;
+- the POI contains compatible items;
+- matching storage has enough free capacity;
+- waiting does not trap the route at an exhausted location.
+
+I turn Auto Explore off and return manually when:
+
+- Scrap, Carcass or Biomass storage is full;
+- the fuel buffer trends downward;
+- the machine visits unusable POIs;
+- a specific Trader, Spire or Terminal becomes the next objective;
+- Auto Repair repeatedly fails to start;
+- movement consumes the Energy safety margin.
+
+In the tested launch build, maximum movement speed could occasionally cause Auto
+Explore to stall. Reducing the speed slightly helped movement resume.
+
+I treat that as version-specific troubleshooting, not a universal rule.
+
+<h2 id="automation-readiness">Know When the Machine Is Ready to Run Unattended</h2>
+
+I consider a chain automated only when it survives a complete cycle without
+manual rescue.
+
+For a stationary Metal chain, that means:
+
+> generate or collect Scrap → store it → process it → receive Metal → continue
+> without clearing a full box.
+
+For a Biomass power chain, that means:
+
+> produce or collect Carcasses → convert them → store Biomass → refill the
+> Biocell → power the generator without a falling long-term buffer.
+
+For Auto Explore, that means:
+
+> leave one POI → travel → collect → store → process → leave again without
+> running out of Energy or filling storage.
+
+Before stepping away, I check:
+
+- total Energy remains positive while every required machine is active;
+- direct-contact machines still touch after the latest rebuild;
+- the current POI matches the active Salvager or Harvester;
+- input and output containers have room;
+- Biomass production covers average consumption;
+- processing capacity matches incoming materials;
+- the exploration route includes only usable destinations;
+- the stop condition prevents the machine from consuming its final safety
+  buffer.
+
+My automation loop is:
+
+> identify the current bottleneck → automate only that stage → watch one complete
+> cycle → compare source and processing rates → expand the slower side → remove
+> temporary equipment when it blocks the next system.
+
+That keeps the Body Grid functional without turning every new item into another
+machine that looks active but produces no permanent progress.

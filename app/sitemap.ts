@@ -134,6 +134,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/how-many-dudes`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/waterpark-simulator`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
     { url: `${base}/quasimorph`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
+    { url: `${base}/idle-directive`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },
+
+    { url: `${base}/idle-directive/first-prestige-best-augments`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/idle-directive/automation-machines-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/idle-directive/layout-examples`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
+    { url: `${base}/idle-directive/achievements-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
 
     { url: `${base}/quasimorph/beginner-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
     { url: `${base}/quasimorph/contracts-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },

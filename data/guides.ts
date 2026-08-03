@@ -131,6 +131,165 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "IDLE_DIRECTIVE",
+    game: "IDLE_DIRECTIVE",
+    href: "/idle-directive",
+    slug: "idle-directive",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Incremental Automation",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Complete first-wave coverage",
+    description:
+      "Follow the IDLE_DIRECTIVE guide hub from the first Scavenge and Navigation repair through Spires, Prestige, Traders, Labs, Blueprints, automation, Terminals, layouts, and all 43 achievements.",
+    coverage: [
+      "Fresh-start progression from Diagnostics, Scanners and Scavenge through Recycler repair, Navigation, Mobility, the first Spire, Signal Decryption, Traders, Labs, Blueprints, the Replicator, and Terminal progression",
+      "Four-point and 26-point first Prestige routes, System Reset losses, Signal Decryption, Tasks, Auto Explore, Repair Speed, repair rewards, the 40-point Replicator unlock, Reactor decisions, and later Augment spending",
+      "Spinner and Repeater contact, Biogenerator and Biocell fuel, Collector, Grabber, Salvager and Harvester roles, automated Metal and Biomass chains, storage bottlenecks, Taskmasters, and Auto Explore settings",
+      "Post-reset bootstrap, Concentrator and Energy Cell cluster, Power Amplifier harvesting wing, stationary dual-resource base, Battery placement, storage placement, expansion space, and rebuild decisions",
+      "All 43 achievements, including 50 million installed Energy Capacity, 300% Energy Efficiency, item level 250, exploration, travel, repairs, Trader Reputation, Omega, Directive Complete, and Launch",
+    ],
+    image:
+      "/images/idle-directive/idle-directive-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 23,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "IDLE_DIRECTIVE Guide Hub",
+        href: "/idle-directive",
+        type: "Guide Hub",
+        description:
+          "Start here for the complete route from the first Scavenge and Navigation repair through Spires, Prestige, Trader Tasks, Labs, Blueprints, the Replicator, and Terminals.",
+        image:
+          "/images/idle-directive/idle-directive-spire-decrypt-trader-locations.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Fresh start, Recycler, Navigation, Mobility, Spires, Prestige, Traders, Tasks, Labs, Blueprints, Replicator, Terminals, automation, layouts, and achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "IDLE_DIRECTIVE First Prestige & Best Augments",
+        href: "/idle-directive/first-prestige-best-augments",
+        type: "Systems",
+        description:
+          "Compare four-point and 26-point first Prestiges, understand what System Reset removes, prioritize Signal Decryption, Tasks and Auto Explore, and plan later Augments.",
+        date: "Updated recently",
+        image:
+          "/images/idle-directive/idle-directive-first-prestige-reset-summary.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 104,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Four-point and 26-point resets, Reset losses, Signal Decryption, Tasks, Auto Explore, Repair Speed, repair rewards, Replicator timing, Reactors, and later Prestiges",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "IDLE_DIRECTIVE Automation & Machines Guide",
+        href: "/idle-directive/automation-machines-guide",
+        type: "Systems",
+        description:
+          "Fix machine connections, automate Metal and Biomass, diagnose storage bottlenecks, use the Replicator and Taskmasters, and configure Auto Explore safely.",
+        date: "Updated recently",
+        image:
+          "/images/idle-directive/idle-directive-scrap-furnace-metal-chain.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 105,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Spinner and Repeater, Biogenerator and Biocell, collection machines, Scrap-to-Metal, Carcass-to-Biomass, storage, amplifiers, Replicator, Taskmasters, and Auto Explore",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "IDLE_DIRECTIVE Layout Examples",
+        href: "/idle-directive/layout-examples",
+        type: "Systems",
+        description:
+          "Use four working Body Grid layouts for post-reset power, Concentrator Energy Cells, amplified harvesting, and stationary Metal and Biomass automation.",
+        date: "Updated recently",
+        image:
+          "/images/idle-directive/idle-directive-power-amplifier-harvester-layout.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 106,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Post-reset bootstrap, Concentrator cluster, Power Amplifier harvesting wing, dual-resource base, Batteries, storage, expansion space, and rebuild signals",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "IDLE_DIRECTIVE Achievements Guide",
+        href: "/idle-directive/achievements-guide",
+        type: "Achievements",
+        description:
+          "Complete all 43 IDLE_DIRECTIVE achievements, including 50 million Energy Capacity, 300% Efficiency, level 250, Trader Reputation, Omega, Terminals, and Launch.",
+        date: "Updated recently",
+        image:
+          "/images/idle-directive/idle-directive-achievements-overview-14-of-43.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 107,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "All 43 achievements, installed Energy Capacity, 300% Efficiency, item level 250, exploration, travel, repairs, Traders, Omega, Directive Complete, and Launch",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+  {
     title: "Quasimorph",
     game: "Quasimorph",
     href: "/quasimorph",
