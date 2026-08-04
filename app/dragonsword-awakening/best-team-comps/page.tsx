@@ -11,10 +11,11 @@ const hubUrl = `${siteUrl}/dragonsword-awakening`;
 const pageUrl = `${hubUrl}/best-team-comps`;
 
 const metadataTitle =
-  "DragonSword Awakening Best Teams: Builds & Replacements";
+  "DragonSword Awakening Best Team Comps & Builds";
+
 const metadataDescription =
-  "Find the best DragonSword Awakening team for your playstyle with tested ranged, action, hybrid and Lute comps, rotations, gear priorities and replacements.";
-  
+  "Compare Cerese/Othello/Dana, Charlotte/Johnny/Reina, Reina replacement and Lute teams, with rotations, build order and Signal Skill fixes.";
+
 const imageUrls = [
   `${siteUrl}/images/dragonsword-awakening/dragonsword-awakening-ranged-team-cerese-othello-dana.webp`,
   `${siteUrl}/images/dragonsword-awakening/dragonsword-awakening-action-team-charlotte-johnny-reina.webp`,
@@ -29,28 +30,28 @@ const toc = [
     label: "Best teams at a glance",
   },
   {
-    id: "team-synergy",
-    label: "How a complete team works",
+    id: "cerese-othello-team",
+    label: "Best Cerese & Othello team",
   },
   {
-    id: "ranged-team",
-    label: "Cerese, Othello & Dana",
+    id: "charlotte-team",
+    label: "Best Charlotte team",
   },
   {
-    id: "action-team",
-    label: "Charlotte, Johnny & Reina",
+    id: "reina-replacement-team",
+    label: "Best Reina replacement team",
   },
   {
-    id: "hybrid-replacements",
-    label: "Hybrid & replacements",
-  },
-  {
-    id: "role-investment",
-    label: "Role & minimum investment",
-  },
-  {
-    id: "lute-survival",
+    id: "lute-team",
     label: "When to use Lute",
+  },
+  {
+    id: "beginner-team",
+    label: "Which team to build first",
+  },
+  {
+    id: "team-synergy",
+    label: "Signal Skills & replacements",
   },
   {
     id: "defensive-switching",
@@ -91,30 +92,29 @@ const relatedLinks = [
 
 const faqEntities = [
   {
-    question: "Which team should I build first for boss learning?",
+    question: "What is the best DragonSword Awakening team for learning bosses?",
     answer:
-      "Start with Cerese, Othello, and Dana because the ranged setup keeps more of the boss and arena visible. Move to Charlotte, Johnny, and Reina when you can maintain close pressure without losing the next attack in the camera.",
+      "I start with Cerese, Othello, and Dana. The two ranged heroes preserve arena visibility, while Othello handles the dangerous close-range phase before I reopen the distance.",
+  },
+  {
+    question: "What is the best Charlotte team?",
+    answer:
+      "My tested Charlotte team is Charlotte, Johnny, and Reina. Charlotte drives the field phase, Johnny returns the sequence to the ground, and Reina restores position before the next Charlotte entry.",
   },
   {
     question: "Can Reina replace Dana?",
     answer:
-      "Cerese, Othello, and Reina was the most practical hybrid in my tests. Reina adds ground movement and recovery, but the lineup is less purely ranged than the Dana version.",
+      "Yes. Cerese, Othello, and Reina was my most practical tested replacement team. It keeps the Cerese–Othello core but trades part of Dana's ranged rhythm for Reina's ground mobility and recovery.",
   },
   {
-    question: "When should I add Lute?",
+    question: "When should I use Lute?",
     answer:
-      "Add Lute after the other two heroes already reach their important Signal opportunities. Use him when healing solves the real bottleneck and remove him when survival is stable.",
+      "I add Lute only after the other two heroes already produce their important Signal opportunities. He is useful when healing is the real bottleneck, but I remove him when the lower team damage makes the fight unnecessarily long.",
   },
   {
-    question:
-      "Which hero receives the first complete gear and Karma build?",
+    question: "Who should I build first?",
     answer:
-      "Build Charlotte first in the action team. In the ranged team, complete whichever of Cerese or Dana currently carries the field phase, then build Othello for the close-range transition.",
-  },
-  {
-    question: "Can I use any three heroes together?",
-    answer:
-      "Yes in easier content if you understand their kits, but harder encounters expose weak condition compatibility and unfinished builds. Keep favorite characters together only after checking that the remaining pair can activate the next Signal entry.",
+      "I build Charlotte first in the action team. In the ranged team, I complete whichever of Cerese or Dana carries most of the field time, then build Othello for the close-range transition.",
   },
 ];
 
@@ -127,12 +127,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title:
-      "DragonSword Awakening Best Team Comps: Ranged, Action, Hybrid & Lute",
-    description:
-      "Compare the Cerese ranged team, Charlotte action team, a Reina hybrid, and a Lute survival variation with practical rotations, investment order, replacement rules, and Signal Skill fixes.",
+    title: metadataTitle,
+    description: metadataDescription,
     siteName: "Whisper of the House",
-    images: imageUrls,
+    images: [
+      {
+        url: imageUrls[0],
+        alt: "DragonSword Awakening team with Cerese, Othello and Dana",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -177,14 +180,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "DragonSword Awakening Best Team Comps: Ranged, Action, Hybrid and Lute Teams",
+        "DragonSword Awakening Best Team Comps and Builds: Cerese, Charlotte, Reina, Othello and Lute Teams",
       description:
-        "A hands-on DragonSword Awakening team guide comparing Cerese, Othello and Dana; Charlotte, Johnny and Reina; a Cerese, Othello and Reina hybrid; and a Lute survival variation. It explains field roles, switching sequences, Signal opportunities, Super Armor decisions, replacement rules, minimum investment, gear direction and common team failures.",
+        "A tested DragonSword Awakening team guide comparing Cerese, Othello and Dana; Charlotte, Johnny and Reina; a Cerese, Othello and Reina replacement team; and a Lute survival variation. It includes rotations, Signal Skill conditions, investment order, replacement rules, Super Armor decisions and practical team fixes.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-07-23",
-      dateModified: "2026-07-23",
+      dateModified: "2026-08-04",
       about: [
         {
           "@type": "VideoGame",
@@ -193,15 +196,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "DragonSword Awakening best teams",
+          name: "DragonSword Awakening best team comps",
         },
         {
           "@type": "Thing",
-          name: "DragonSword Awakening team comps",
+          name: "DragonSword Awakening builds",
         },
         {
           "@type": "Thing",
-          name: "Cerese, Othello and Dana team",
+          name: "Cerese and Othello team",
         },
         {
           "@type": "Thing",
@@ -209,11 +212,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Cerese, Othello and Reina hybrid team",
+          name: "Cerese, Othello and Reina team",
         },
         {
           "@type": "Thing",
-          name: "DragonSword Awakening Lute team",
+          name: "DragonSword Awakening Lute build",
         },
         {
           "@type": "Thing",
@@ -277,13 +280,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="DragonSword Awakening Best Team Comps: Ranged, Action, Hybrid and Lute Teams"
-          description="Compare the team options I use, see where each lineup works, follow the actual handoff roles, and decide who gets gear, Karma, healing, or a replacement first."
+          title="DragonSword Awakening Best Team Comps"
+          description="Compare the teams I actually used for boss learning, high-input action play, Dana replacement and survival, then follow the rotation, investment and Signal rules for each lineup."
           gameTitle="DragonSword Awakening"
           gameHref="/dragonsword-awakening"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="July 23, 2026"
+          updatedAt="August 4, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

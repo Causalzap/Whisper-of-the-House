@@ -10,7 +10,16 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/grim-dawn-fangs-of-asterkarn`;
 const pageUrl = `${hubUrl}/ritual-of-cleansing-walkthrough`;
 
+const metadataTitle =
+  "Grim Dawn Ritual of Cleansing: Ugdenbog & Bargoll Essences";
+
+const metadataDescription =
+  "Complete Ritual of Cleansing, find both Essence of Ugdenbog drops, reach Bargoll's hidden path, open the World's Tear, and recover every material.";
+
 const imageUrls = [
+  `${siteUrl}/images/grim-dawn-fangs-of-asterkarn/grim-dawn-secrets-of-ugdenbog-essence-requirements.webp`,
+  `${siteUrl}/images/grim-dawn-fangs-of-asterkarn/grim-dawn-root-of-bargoll-ugdenbog-target.webp`,
+  `${siteUrl}/images/grim-dawn-fangs-of-asterkarn/grim-dawn-bargoll-hidden-path-location.webp`,
   `${siteUrl}/images/grim-dawn-fangs-of-asterkarn/grim-dawn-ritual-cleansing-skald-magwyn.webp`,
   `${siteUrl}/images/grim-dawn-fangs-of-asterkarn/grim-dawn-ritual-cleansing-ember-first-flame-map.webp`,
   `${siteUrl}/images/grim-dawn-fangs-of-asterkarn/grim-dawn-ritual-cleansing-embers-first-flame.webp`,
@@ -24,6 +33,10 @@ const toc = [
     label: "Before you start",
   },
   {
+    id: "ugdenbog-essences",
+    label: "Ugdenbog & Bargoll essences",
+  },
+  {
     id: "best-order",
     label: "Best material order",
   },
@@ -34,10 +47,6 @@ const toc = [
   {
     id: "ashen-heart",
     label: "Ashen Heart of the Void",
-  },
-  {
-    id: "ugdenbog-essences",
-    label: "Ugdenbog & Bargoll essences",
   },
   {
     id: "finish",
@@ -73,54 +82,56 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-  title:
-    "Grim Dawn Ritual of Cleansing Guide: Heart, Embers & Bargoll",
-  description:
-    "Find the Ashen Heart, Embers of the First Flame, and Bargoll essences, open the World's Tear, beat Naddo, and fix every quest block.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Grim Dawn Ritual of Cleansing Walkthrough",
-    description:
-      "Follow all three material routes, activate the Blood Basins, recover the Ashen Heart, find the Embers, and separate Root of Bargoll from Bargoll.",
+    title: metadataTitle,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[4],
-        alt: "Grim Dawn quest progress after recovering the Ashen Heart of the Void from the World's Tear",
+        url: imageUrls[2],
+        alt: "Hidden swamp path in Ugdenbog leading toward Bargoll during Ritual of Cleansing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Grim Dawn Ritual of Cleansing: All Material Locations",
-    description:
-      "Open the World's Tear, recover the Ashen Heart, find the Embers and Bargoll essences, and fix blocked Ritual of Cleansing objectives.",
-    images: [imageUrls[4]],
+    title: metadataTitle,
+    description: metadataDescription,
+    images: [imageUrls[2]],
   },
 };
 
 const faqEntities = [
   {
     question:
-      "Do the old expansion areas need to be unlocked on my current difficulty?",
+      "Do the older expansion areas need to be unlocked on my current difficulty?",
     answer:
-      "Yes. Ritual of Cleansing can send you to Ugdenbog or the Tomb of the Eldritch Sun even when that character has not opened the complete route on the selected difficulty. Continue the relevant Ashes of Malmouth or Forgotten Gods campaign progression.",
+      "Yes. Ritual of Cleansing can point to Ugdenbog or the Tomb of the Eldritch Sun even when that route is still closed on the current character and difficulty. Continue the relevant Ashes of Malmouth or Forgotten Gods progression instead of searching Asterkarn for another entrance.",
+  },
+  {
+    question:
+      "Does every yellow Bog Golem drop Essence of Ugdenbog?",
+    answer:
+      "No reliable rule in my run supported that. I followed the quest marker and checked the smaller Bargoll-like targets, but one apparent target did not advance the objective. Continue through other Ugdenbog branches until the quest counter updates.",
   },
   {
     question:
       "Can I return one ritual material before collecting the other two?",
     answer:
-      "Yes. Each apprentice controls a separate quest branch. You can return the Ashen Heart, Embers, or Ugdenbog essences as soon as that branch is complete, then continue the remaining searches.",
+      "Yes. Each apprentice controls a separate branch. You can deliver the Ashen Heart, Embers, or Ugdenbog essences as soon as that branch is complete, although collecting the remaining materials first usually saves an extra trip to Kurnhold.",
   },
   {
     question:
-      'Why does another guide call the item "Ahsen Heart of the Void"?',
+      "Are the two Root of Bargoll targets located beside Bargoll?",
     answer:
-      "The current English quest progress used for this guide spells the item Ashen Heart of the Void. This guide follows the spelling displayed directly in the game UI.",
+      "Do not plan around that. Bargoll is reached through the hidden pocket south-east of the Ugdenbog Rift, while the two Essence of Ugdenbog targets require a broader sweep through separate swamp branches.",
   },
 ];
 
@@ -159,13 +170,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Grim Dawn Ritual of Cleansing Walkthrough: Ashen Heart, Embers, Blood Basins, and Bargoll Essences",
+        "Grim Dawn Ritual of Cleansing Walkthrough: Essence of Ugdenbog, Bargoll, Embers, and Ashen Heart",
       description:
-        "This Grim Dawn: Fangs of Asterkarn Ritual of Cleansing walkthrough explains how to accept all three material quests, reach the Tomb of the Eldritch Sun, recover the Embers of the First Flame, offer Blood of Ch'thon at three Blood Basins, enter the World's Tear, defeat Naddo the Anointed, recover the Ashen Heart of the Void, find two Root of Bargoll elites, locate Bargoll at his current fixed hidden location, complete every material turn-in, and diagnose blocked quest states.",
+        "A complete Ritual of Cleansing walkthrough for Grim Dawn: Fangs of Asterkarn. It explains how to accept all three material branches, find two Essence of Ugdenbog targets, reach Bargoll through the hidden path south-east of the Ugdenbog Rift, collect the Embers of the First Flame, activate three Blood Basins, enter the World's Tear, defeat Naddo the Anointed, recover the Ashen Heart of the Void, and complete every Kurnhold turn-in.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-07-26",
-      dateModified: "2026-07-26",
+      dateModified: "2026-08-04",
       about: [
         {
           "@type": "VideoGame",
@@ -175,6 +186,30 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Ritual of Cleansing",
+        },
+        {
+          "@type": "Thing",
+          name: "Secrets of Ugdenbog",
+        },
+        {
+          "@type": "Thing",
+          name: "Essence of Ugdenbog",
+        },
+        {
+          "@type": "Thing",
+          name: "Essence of Bargoll",
+        },
+        {
+          "@type": "Thing",
+          name: "Root of Bargoll",
+        },
+        {
+          "@type": "Thing",
+          name: "Bargoll, the Mouldering Mound",
+        },
+        {
+          "@type": "Thing",
+          name: "Ugdenbog Rift",
         },
         {
           "@type": "Thing",
@@ -207,22 +242,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Ashen Heart of the Void",
-        },
-        {
-          "@type": "Thing",
-          name: "Root of Bargoll",
-        },
-        {
-          "@type": "Thing",
-          name: "Bargoll, the Mouldering Mound",
-        },
-        {
-          "@type": "Thing",
-          name: "Essence of Ugdenbog",
-        },
-        {
-          "@type": "Thing",
-          name: "Essence of Bargoll",
         },
         {
           "@type": "Thing",
@@ -274,13 +293,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Complete Ritual of Cleansing Without Missing a Material"
-          description="Follow the exact route I use to unlock the Tomb, activate all three Blood Basins, recover the Ashen Heart, separate Root of Bargoll from Bargoll, and complete every Kurnhold turn-in without searching the wrong region."
+          title="Grim Dawn Ritual of Cleansing Walkthrough"
+          description="Follow the route I use to collect both Essence of Ugdenbog drops, find Bargoll's hidden path, recover the Embers and Ashen Heart, and finish every Kurnhold turn-in without searching the wrong region."
           gameTitle="Grim Dawn: Fangs of Asterkarn"
           gameHref="/grim-dawn-fangs-of-asterkarn"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="July 26, 2026"
+          updatedAt="August 4, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -1,762 +1,641 @@
-// app/sitemap.ts
 import type { MetadataRoute } from 'next';
 
 export const dynamic = 'force-static';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = 'https://www.whisperofthehouse.com';
-
-  // 1) 动态数据示例（如果有）
-  // const guides = await fetch(`${base}/api/guides`).then(r => r.json());
-  // const guideUrls = guides.map((g: { slug: string; updatedAt?: string }) => ({
-  //   url: `${base}/guides/${g.slug}`,
-  //   lastModified: g.updatedAt ? new Date(g.updatedAt) : new Date(),
-  //   changeFrequency: 'weekly' as const,
-  //   priority: 0.7,
-  // }));
-
-  // 2) 静态页面
-  const staticUrls: MetadataRoute.Sitemap = [
-    { url: `${base}/`, changeFrequency: 'weekly', priority: 1, lastModified: new Date() },
-    { url: `${base}/guides`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },
-    { url: `${base}/winter-burrow`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },
-    { url: `${base}/routine-guide`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },
-
-    { url: `${base}/retro-rewind`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },
-   
-    { url: `${base}/i-am-alone`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/collection`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/abnormal-points-collection`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/play-online`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/papas-wingeria`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/steal-brainrot`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/vikings-an-archers-journey`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/tree-house-maker`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/horseshoeing`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/panda-resort`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/puppet-master`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/blumgi-slime`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/grow-a-garden`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/guide/hozy`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-long-dark-episode-5`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/i-am-jesus-christ`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/all-will-fall`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-occultist`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/soulmask`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/crystalfall`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/sol-cesto`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/pokemon-champions`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/grime-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/road-to-vostok`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/mouse-pi-for-hire/collectibles-hub`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/pragmata`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/sintopia`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/airborne-empire`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/lucky-tower-ultimate`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/vampire-crawlers`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/holovillage-our-cozy-days`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/shapez-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/fracture-field`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moomintroll`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/far-far-west/secret-missions`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/olden-era`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/gamble-with-your-friends`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/magical-princess/endings-guide`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/librarian`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/farever`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/everything-is-crab`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-spell-brigade`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/outbound`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/directive-8020`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/subnautica-2`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/oaken-tower`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dwarf-eats-mountain`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/lego-batman`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/deep-rock-galactic`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/zero-parades`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/paralives`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/romestead`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/starminer`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/cheap-car-repair`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/mina-the-hollower`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scale-the-depths`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/fatekeeper`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/realm-of-ink`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/house-flipper-remastered-collection`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/gothic-1-remake`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/solarpunk`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/voidling-bound`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/burglin-gnomes`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/fears-to-fathom-scratch-creek`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/spacecraft`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/tales-of-seikyu`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/33-immortals`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-adventures-of-elliot`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/steam-next-fest`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/iron-nest`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/bombanana`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/casualties-unknown`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dust-front-rts`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/thank-you-for-your-application`, changeFrequency: 'weekly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/best-cozy-management-crafting-games`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/best-games-with-multiple-endings`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/best-steam-indie-games-with-guides`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/new-steam-game-guides`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/timberborn`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moldwasher`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/darktide`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-last-caretaker`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/deltarune`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/frostpunk-2-breach-of-trust`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/supermarket-chaos`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-binding-of-isaac-rebirth`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/master-healer-kale`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/esports-manager-2026`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moonlight-peaks`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/granblue-relink-endless-ragnarok`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/forest-escape-last-train`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/backyard-baseball`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ascend-to-zero`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-incident-at-galley-house`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ore-factory-squad`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/happys-humble-burger-cult`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/zerospace`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dragonsword-awakening`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/tears-of-metal`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dirty-business`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/grim-dawn-fangs-of-asterkarn`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/game-dna`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/what-game-should-i-play`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/go-go-town`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scrap-mechanic`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/sir-we-have-an-orc-problem`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/bills-must-be-paid`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/how-many-dudes`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/waterpark-simulator`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/quasimorph`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/idle-directive`, changeFrequency: 'monthly', priority: 0.8, lastModified: new Date() },
-
-    { url: `${base}/idle-directive/first-prestige-best-augments`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/idle-directive/automation-machines-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/idle-directive/layout-examples`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/idle-directive/achievements-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/quasimorph/beginner-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/quasimorph/contracts-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/quasimorph/ship-upgrades`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/quasimorph/loot-priority`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/quasimorph/wounds-infection-medicine`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/quasimorph/start-realware-storyline`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/quasimorph/quasimorphosis-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/waterpark-simulator/research-points`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/waterpark-simulator/increase-satisfaction`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/waterpark-simulator/make-money`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/waterpark-simulator/staff-guide`, changeFrequency: 'monthly', priority:0.7, lastModified: new Date() },
-    { url: `${base}/waterpark-simulator/museum-guide`, changeFrequency: 'monthly', priority:0.7, lastModified: new Date() },
-    { url: `${base}/waterpark-simulator/achievements-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/how-many-dudes/goat-boss-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/how-many-dudes/best-builds`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/how-many-dudes/round-100-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/how-many-dudes/relic-combinations`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/how-many-dudes/tier-2-progression`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/how-many-dudes/achievements-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/bills-must-be-paid/100-percent-walkthrough`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/bills-must-be-paid/achievements-guide`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/bills-must-be-paid/best-upgrades-skill-tree`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/bills-must-be-paid/bills-loans-bankruptcy`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/bills-must-be-paid/prestige-rings-bracelets`, changeFrequency: 'monthly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/sir-we-have-an-orc-problem/best-turrets-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/sir-we-have-an-orc-problem/best-upgrades-farming`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/sir-we-have-an-orc-problem/level-3-2-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/sir-we-have-an-orc-problem/level-6-1-6-2-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/scrap-mechanic/first-grow-lab-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scrap-mechanic/warehouse-key`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scrap-mechanic/warehouse-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scrap-mechanic/hubert-watchtower-small-tank`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scrap-mechanic/mining-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scrap-mechanic/achievements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scrap-mechanic/ore-processing-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/go-go-town/agent-peanut-safe-code`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/go-go-town/automation-not-working`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/go-go-town/progression-stuck`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/grim-dawn-fangs-of-asterkarn/wereraven-leveling-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/grim-dawn-fangs-of-asterkarn/the-asterkarn-incident-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/grim-dawn-fangs-of-asterkarn/ritual-of-cleansing-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/grim-dawn-fangs-of-asterkarn/soul-echoes-awaken-epic-items`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/dirty-business/orders-delivery-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dirty-business/workers-not-working`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dirty-business/leveling-reputation-unlocks`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dirty-business/how-to-make-lsd`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dirty-business/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/tears-of-metal/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/tears-of-metal/best-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/tears-of-metal/village-upgrades`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/tears-of-metal/co-op-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/tears-of-metal/boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/dragonsword-awakening/walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dragonsword-awakening/ending-final-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dragonsword-awakening/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dragonsword-awakening/gear-karma-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/dragonsword-awakening/best-team-comps`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-   
-    { url: `${base}/zerospace/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/zerospace/galactic-war-beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/zerospace/campaign-walkthrough-choices`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/zerospace/mission-3-arcadia-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/happys-humble-burger-cult/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/happys-humble-burger-cult/quota-overtime-closeout-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/happys-humble-burger-cult/orders-kitchen-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    
-    { url: `${base}/ore-factory-squad/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ore-factory-squad/how-to-sell-products`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ore-factory-squad/complete-contracts-pallet-packer`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ore-factory-squad/mining-lift-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ore-factory-squad/find-limestone-make-cement`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ore-factory-squad/remaining-resources-switch-property`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ore-factory-squad/dynamite-worth-it`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ore-factory-squad/smelt-copper-iron-ingots`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/the-incident-at-galley-house/hints`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-incident-at-galley-house/person-12-person-k`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-incident-at-galley-house/ending-explained`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-incident-at-galley-house/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-incident-at-galley-house/all-scene-codes`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/ascend-to-zero/how-to-unlock-stage-2-desert`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ascend-to-zero/best-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/ascend-to-zero/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/forest-escape-last-train/unlock-all-players`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/forest-escape-last-train/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/forest-escape-last-train/best-players-team-lineup`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/forest-escape-last-train/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/forest-escape-last-train/locations-puzzle-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/forest-escape-last-train/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/forest-escape-last-train/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/forest-escape-last-train/warden-boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/granblue-relink-endless-ragnarok/how-to-start`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/granblue-relink-endless-ragnarok/conflux-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/granblue-relink-endless-ragnarok/best-ai-team-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/granblue-relink-endless-ragnarok/new-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/moonlight-peaks/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moonlight-peaks/misty-shores-mines-copper-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moonlight-peaks/early-resources-tool-upgrades-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moonlight-peaks/feature-unlocks-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moonlight-peaks/barn-animals-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    
-    { url: `${base}/esports-manager-2026/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/esports-manager-2026/training-tactics-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/esports-manager-2026/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/esports-manager-2026/scouting-contracts-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/esports-manager-2026/sponsors-budget-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/master-healer-kale/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/master-healer-kale/best-skills-skill-tree`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/master-healer-kale/nightmare-mode-endgame`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/the-binding-of-isaac-rebirth/dlc-buying-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-binding-of-isaac-rebirth/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-binding-of-isaac-rebirth/unlock-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-binding-of-isaac-rebirth/best-beginner-characters`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    
-    { url: `${base}/supermarket-chaos/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/supermarket-chaos/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/supermarket-chaos/best-upgrades-skills`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/supermarket-chaos/section-map-item-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    
-    { url: `${base}/frostpunk-2-breach-of-trust/walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/frostpunk-2-breach-of-trust/aurora-negotiation-fishery-hub-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/frostpunk-2-breach-of-trust/conquer-aurora-war-route-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/frostpunk-2-breach-of-trust/tremor-evacuation-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/deltarune/chapter-5-final-boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/deltarune/chapter-5-foxes-secret-egg`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/deltarune/chapter-5-secret-boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/deltarune/chapter-5-secret-boss-pink-coins`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/deltarune/chapter-5-weird-route`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/the-last-caretaker/new-horizons-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-last-caretaker/project-eden-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-last-caretaker/oil-whale-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-last-caretaker/research-outpost-theta-9-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-last-caretaker/power-fuel-wall-outlets`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/darktide/best-skitarii-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/darktide/skitarii-servo-skull`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/darktide/skitarii-weapons`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/moldwasher/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moldwasher/walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/moldwasher/hidden-objects-collectibles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/timberborn/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/timberborn/first-drought-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/timberborn/dam-levee-floodgate-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/timberborn/badwater-badtide-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/timberborn/irrigation-reservoir-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/timberborn/automation-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    
-    { url: `${base}/thank-you-for-your-application/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/thank-you-for-your-application/endings-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/thank-you-for-your-application/final-evaluation-job-hopping-answers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/thank-you-for-your-application/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/thank-you-for-your-application/resume-rules-thanks-letter-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/the-adventures-of-elliot/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-adventures-of-elliot/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-adventures-of-elliot/cat-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-adventures-of-elliot/walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-adventures-of-elliot/shards-of-life-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/the-adventures-of-elliot/manuscript-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/33-immortals/beginner-progression-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/33-immortals/weapons-unlock-upgrades-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/33-immortals/relics-paths-wishing-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/33-immortals/bosses-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/33-immortals/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/tales-of-seikyu/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/tales-of-seikyu/fox-ruins-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/tales-of-seikyu/yokai-forms-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/tales-of-seikyu/request-board-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/tales-of-seikyu/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/tales-of-seikyu/romance-gifts-marriage-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-
-    { url: `${base}/spacecraft/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/spacecraft/base-building-automation`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/spacecraft/scanalyzer-alpha-ftl-engine`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/spacecraft/resources-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/spacecraft/ship-upgrades-cargo-inventory`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/spacecraft/noviciate-corporation-unlock`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/spacecraft/permits-knowledge-unlock`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-
-
-    { url: `${base}/fears-to-fathom-scratch-creek/walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/fears-to-fathom-scratch-creek/ending-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/fears-to-fathom-scratch-creek/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-
-    { url: `${base}/burglin-gnomes/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/burglin-gnomes/tasks-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/burglin-gnomes/survival-enemies-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/burglin-gnomes/co-op-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/burglin-gnomes/materials-upgrades-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-
-    { url: `${base}/voidling-bound/all-collectibles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/voidling-bound/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/voidling-bound/evolution-breeding-splicing-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/voidling-bound/golden-egg-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/voidling-bound/mutagen-research-points-farm`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/voidling-bound/quackies-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/voidling-bound/breeding-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-
-    { url: `${base}/solarpunk/beginners-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/solarpunk/energy-system-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/solarpunk/airship-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/solarpunk/farming-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/solarpunk/research-progression-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/solarpunk/animals-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    
-    { url: `${base}/gothic-1-remake/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/perfect-start`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/early-ore-weapons-armor`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/best-faction`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/old-camp-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/old-mine-diegos-list`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/new-camp-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/swamp-camp-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/skills-trainers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/gothic-1-remake/lockpicking-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-
-    { url: `${base}/house-flipper-remastered-collection/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered beginner guide
-    { url: `${base}/house-flipper-remastered-collection/first-jobs-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered first jobs walkthrough
-    { url: `${base}/house-flipper-remastered-collection/money-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered money guide
-    { url: `${base}/house-flipper-remastered-collection/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered achievements guide
-    { url: `${base}/house-flipper-remastered-collection/dlc-content-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // House Flipper Remastered DLC content guide
-
-    { url: `${base}/realm-of-ink/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/realm-of-ink/best-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/realm-of-ink/endless-rupture-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/realm-of-ink/final-boss-true-ending`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/realm-of-ink/ink-gems-curios-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/realm-of-ink/oread-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/fatekeeper/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/fatekeeper/best-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/fatekeeper/boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/fatekeeper/best-weapons`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/fatekeeper/best-spells`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/scale-the-depths/huatulco-100-percent-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scale-the-depths/loch-ness-100-percent-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scale-the-depths/outer-banks-100-percent-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scale-the-depths/point-nemo-100-percent-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scale-the-depths/all-collectibles-secrets`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scale-the-depths/achievement-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/scale-the-depths/artifacts-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/mina-the-hollower/where-to-go-first`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/mina-the-hollower/how-to-get-map`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/mina-the-hollower/bones-farming`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/mina-the-hollower/best-starting-weapon`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/mina-the-hollower/fast-travel`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/mina-the-hollower/best-early-trinkets`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/mina-the-hollower/all-trinkets-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/cheap-car-repair/daddys-little-girl-mission`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/cheap-car-repair/controls-drop-items-save-tools`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/cheap-car-repair/how-to-make-money`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/cheap-car-repair/story-missions-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/cheap-car-repair/cars-parts-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-  
-    { url: `${base}/starminer/beginner-first-hour`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/starminer/controls-dampeners-ship-spinning`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/starminer/early-research-progression`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/starminer/how-to-mine-scanner-laser`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/starminer/money-selling-resources`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-    { url: `${base}/starminer/power-heat-low-energy`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },    // 其它固定页……
-
-    { url: `${base}/romestead/dungeon-traps-death-recovery`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/romestead/farmstead-workers-food-logistics`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/romestead/first-day-base-building`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/romestead/giant-owl-guardian-of-minerva`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/romestead/gods-offerings-boss-progression`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/romestead/base-layout-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/romestead/raid-defense-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/paralives/paramaker-stats-vibes-personality`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/paralives/best-early-game-skills-talents-careers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/paralives/job-performance-not-improving`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/paralives/level-skills-faster`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/paralives/best-mods-steam-workshop-install-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/paralives/money-cheats-paradimes`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/paralives/try-for-baby-not-showing`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    
-    { url: `${base}/zero-parades/best-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/zero-parades/conditioning`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/zero-parades/disco-elysium-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/zero-parades/stress-exertion`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/zero-parades/early-game`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/deep-rock-galactic/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/deep-rock-galactic/best-class`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/deep-rock-galactic/cooper-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/deep-rock-galactic/rogue-core-vs-drg`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/deep-rock-galactic/solo-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/deep-rock-galactic/upgrades-explained`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-   
-    { url: `${base}/lego-batman/carmine-falcone`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/red-bricks`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/batgirl-unlock`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/firefly-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/poison-ivy-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/bane-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/escaped-zoo-animals`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/mr-freeze-boss`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/new-beginnings-docks-collectibles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/radio-towers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/absolute-batman-suit`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/all-subwayne-tunnel-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/lego-batman/how-to-farm-studs-fast`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/dwarf-eats-mountain/build-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/dwarf-eats-mountain/prestige-ascension-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/dwarf-eats-mountain/runners-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/dwarf-eats-mountain/artifacts-mithril-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/dwarf-eats-mountain/best-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/dwarf-eats-mountain/endgame-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/subnautica-2/biomods-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/co-op-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/collector-leviathan`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/digestion-adaptation`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/early-resources`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/first-base-setup`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/fully-functional-fabricator`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/navigation-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/oxygen-air-tank-rebreather`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/sonic-resonator-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/tadpole-submarine`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/welcome-center-habitat-builder`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/subnautica-2/what-to-do-first`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/oaken-tower/poison-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/oaken-tower/10-wins-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/oaken-tower/level-vs-reroll`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/oaken-tower/3-star-items`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/oaken-tower/perk-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/oaken-tower/bleed-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/oaken-tower/burn-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/oaken-tower/frosty-build`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/directive-8020/all-endings`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/directive-8020/all-monster-scenes-alien-duplicates`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/directive-8020/all-secrets-simms-recordings-o-death`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/directive-8020/character-survival-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/directive-8020/choices-consequences`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
- 
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/outbound/leave-first-biome`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/outbound/energy-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/outbound/early-resources`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/outbound/blueprints-workstations-upgrades`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/outbound/storage-backpack-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/the-spell-brigade/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-spell-brigade/best-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-spell-brigade/best-spells-elements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-spell-brigade/gold-farm`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-spell-brigade/solo-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-spell-brigade/wizard-unlocks`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-spell-brigade/trial-covenants-masteries-prestige`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/everything-is-crab/achievements-challenges-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/everything-is-crab/best-builds`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/everything-is-crab/boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/everything-is-crab/progression-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/everything-is-crab/selective-pressure-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/farever/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/farever/classes-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/farever/codeex-leveling-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/farever/mount-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/farever/weapon-skills-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/librarian/achievements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/librarian/best-abilities`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/librarian/book-sorting`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/librarian/key-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/magical-princess/forbidden-research-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/magical-princess/two-queens-ending-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/magical-princess/true-ending-heir-of-the-stargazer`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/magical-princess/golden-ending-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/magical-princess/career-endings-requirements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/gamble-with-your-friends/achievements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/gamble-with-your-friends/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/gamble-with-your-friends/best-games`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/gamble-with-your-friends/best-item-combos`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/gamble-with-your-friends/craps-cheese-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/gamble-with-your-friends/tickets-items-body-parts`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-     { url: `${base}/gamble-with-your-friends/all-endings-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/gamble-with-your-friends/bugged-achievements`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/gamble-with-your-friends/quota-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/gamble-with-your-friends/save-scum-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/olden-era/best-buildings-first`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/cant-unlock-subclass`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/chronomancer-vs-soulweaver`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/focus-points`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/force-subclass`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/how-to-unlock-subclasses`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/olden-era/law-points-astrology-points`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/necropolis-common-mistakes`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/necropolis-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/necropolis-skeletal-archers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/necropolis-week-1-build-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/olden-era/subclass-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/far-far-west/area-41-symbol-order`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/far-far-west/cactus-day-joker-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/far-far-west/canyon-secret-medallion-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/far-far-west/ghost-bell-shard-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/far-far-west/snowman-parts-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/far-far-west/woodlands-mushroom-sequence`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/far-far-west/all-secret-jokers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/moomintroll/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/moomintroll/ending-explained`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/moomintroll/great-winter-bonfire`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/moomintroll/little-my-snowball-fight`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/moomintroll/side-quests`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/moomintroll/tool-upgrades`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/moomintroll/vase-piece-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/fracture-field/achievements-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/fracture-field/beginner-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/fracture-field/prestige-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/fracture-field/progression-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/shapez-2/mam-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/shapez-2/manufacture-mode-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/shapez-2/trade-station-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/shapez-2/wires-belt-filter-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/shapez-2/space-belts-trains-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
- 
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/holovillage-our-cozy-days/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/holovillage-our-cozy-days/early-combat-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/holovillage-our-cozy-days/fishing-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/holovillage-our-cozy-days/how-to-invite-villagers`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/holovillage-our-cozy-days/shop-money-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-  
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/vampire-crawlers/all-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/vampire-crawlers/best-characters-for-beginners`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/vampire-crawlers/secret-characters-how-to-unlock`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/vampire-crawlers/best-early-upgrades`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/vampire-crawlers/combo-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/vampire-crawlers/early-evolutions`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/airborne-empire/jet-engine-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/airborne-empire/kingsfell-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/airborne-empire/pirate-queen-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/airborne-empire/tilt-lift-balance-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-   
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/sintopia/best-hell-layout-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/sintopia/hearos-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/sintopia/overworld-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/sintopia/saints-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-  
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/mouse-pi-for-hire/baseball-card-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/mouse-pi-for-hire/buy-back-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/mouse-pi-for-hire/missable-side-job-rewards`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/mouse-pi-for-hire/missables-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/mouse-pi-for-hire/mouseberg-herald-comic-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/mouse-pi-for-hire/weapon-schematics-secret-figurines-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/road-to-vostok/area-05-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/road-to-vostok/generalist-and-doctor-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/road-to-vostok/permadeath-save-and-stash-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/road-to-vostok/all-shelter-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    
-     // ⬇️ 把 4 篇文章补上
-     { url: `${base}/grime-2/blade-mammoth-boss-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/grime-2/kankan-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/grime-2/vs-grime-1-differences`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-     { url: `${base}/grime-2/best-early-weapons`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/sol-cesto/all-characters-unlock-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/sol-cesto/flute-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/sol-cesto/how-to-unlock-huntress`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/sol-cesto/how-to-unlock-lizard`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/crystalfall/beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/crystalfall/crafting-sockets-gem-fusion-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/crystalfall/fireball-build-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/crystalfall/inventory-stash-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/soulmask/airship-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/soulmask/cross-map-transfer-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/soulmask/shifting-sands-beginner-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/soulmask/tribesmen-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/the-occultist/all-altar-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-occultist/all-medallion-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-occultist/codex-lumina-fragments`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-occultist/clock-room-sundial-puzzle-solution`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-occultist/greenhouse-statue-puzzle-solution`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-occultist/mausoleum-door-lion-key-puzzle-solution`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-occultist/planetarium-star-moon-puzzle-solution`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/the-long-dark-episode-5/search-party-achievement`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-long-dark-episode-5/what-to-do-after-the-autopsy`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-long-dark-episode-5/where-to-go-after-terry`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-long-dark-episode-5/how-to-get-to-desperation-bay`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/all-will-fall/oil-rig-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/all-will-fall/tanker-truck-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/all-will-fall/tornado-race-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/all-will-fall/collapse-troubleshooting`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    // ⬇️ 把 4 篇文章补上
-    { url: `${base}/i-am-jesus-christ/apostles-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/i-am-jesus-christ/miracles-list`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/i-am-jesus-christ/walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/i-am-jesus-christ/who-should-play`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/the-long-dark-episode-5/episode-5-ending-explained`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-long-dark-episode-5/episode-5-missing-people-locations`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-long-dark-episode-5/episode-5-walkthrough`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/the-long-dark-episode-5/whats-in-astrids-hardcase-explained`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/guides/hozy/cafe-layout-tips`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/guides/hozy/dreams-explained`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/guides/hozy/hardest-levels-ranked`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/guides/hozy/penthouse-layout-guide`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/retro-rewind/is-the-black-market-worth-it`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/retro-rewind/when-to-replace-damaged-tape`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/retro-rewind/custom-videos`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-    { url: `${base}/retro-rewind/community`, changeFrequency: 'weekly', priority: 0.7, lastModified: new Date() },
-
-    { url: `${base}/guides/beginner-guide`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/guides/game-progression-guide`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/guides/top-tips-and-tricks`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/guides/hidden-secrets`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/guides/organize-and-uncover-secrets`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-
-    { url: `${base}/winter-burrow/winter-burrow-early-survival-guide`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/winter-burrow/winter-burrow-owl-chase-part2-guide`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/winter-burrow/winter-burrow-gnawtusk-rescue-chapter-guide`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/winter-burrow/winter-burrow-bufo-request-part4-guide`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/winter-burrow/winter-burrow-finding-poliwog-walkthrough`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/i-am-alone/how-to-get-all-endings-yes-im-alone`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-
-    { url: `${base}/routine-guide/chapter-1-birth-stealth-walkthrough`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/routine-guide/chapter-2-incision-stealth-walkthrough`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/routine-guide/chapter-3-re-create-stealth-walkthrough`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/routine-guide/chapter-4-adrift-stealth-walkthrough`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/routine-guide/chapter-5-endure-stealth-walkthrough`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-    { url: `${base}/routine-guide/chapter-6-legacy-stealth-walkthrough`, changeFrequency: 'monthly', priority: 0.6, lastModified: new Date() },
-
-];
-
-  return [
-    ...staticUrls,
-    // ...guideUrls, // 有动态内容时解开
-  ];
+const baseUrl = 'https://www.whisperofthehouse.com';
+
+// Keep one canonical path per indexable page.
+// Historical pages intentionally omit lastModified when the real date is unknown.
+const paths = [
+  '/',
+  '/guides',
+  '/winter-burrow',
+  '/routine-guide',
+  '/retro-rewind',
+  '/i-am-alone',
+  '/collection',
+  '/abnormal-points-collection',
+  '/play-online',
+  '/papas-wingeria',
+  '/steal-brainrot',
+  '/vikings-an-archers-journey',
+  '/tree-house-maker',
+  '/horseshoeing',
+  '/panda-resort',
+  '/puppet-master',
+  '/blumgi-slime',
+  '/grow-a-garden',
+  '/guide/hozy',
+  '/the-long-dark-episode-5',
+  '/i-am-jesus-christ',
+  '/all-will-fall',
+  '/the-occultist',
+  '/soulmask',
+  '/crystalfall',
+  '/sol-cesto',
+  '/pokemon-champions',
+  '/grime-2',
+  '/road-to-vostok',
+  '/mouse-pi-for-hire/collectibles-hub',
+  '/pragmata',
+  '/sintopia',
+  '/airborne-empire',
+  '/lucky-tower-ultimate',
+  '/vampire-crawlers',
+  '/holovillage-our-cozy-days',
+  '/shapez-2',
+  '/fracture-field',
+  '/moomintroll',
+  '/far-far-west/secret-missions',
+  '/olden-era',
+  '/gamble-with-your-friends',
+  '/magical-princess/endings-guide',
+  '/librarian',
+  '/farever',
+  '/everything-is-crab',
+  '/the-spell-brigade',
+  '/outbound',
+  '/directive-8020',
+  '/subnautica-2',
+  '/oaken-tower',
+  '/dwarf-eats-mountain',
+  '/lego-batman',
+  '/deep-rock-galactic',
+  '/zero-parades',
+  '/paralives',
+  '/romestead',
+  '/starminer',
+  '/cheap-car-repair',
+  '/mina-the-hollower',
+  '/scale-the-depths',
+  '/fatekeeper',
+  '/realm-of-ink',
+  '/house-flipper-remastered-collection',
+  '/gothic-1-remake',
+  '/solarpunk',
+  '/voidling-bound',
+  '/burglin-gnomes',
+  '/fears-to-fathom-scratch-creek',
+  '/spacecraft',
+  '/tales-of-seikyu',
+  '/33-immortals',
+  '/the-adventures-of-elliot',
+  '/steam-next-fest',
+  '/iron-nest',
+  '/bombanana',
+  '/casualties-unknown',
+  '/dust-front-rts',
+  '/thank-you-for-your-application',
+  '/best-cozy-management-crafting-games',
+  '/best-games-with-multiple-endings',
+  '/best-steam-indie-games-with-guides',
+  '/new-steam-game-guides',
+  '/timberborn',
+  '/moldwasher',
+  '/darktide',
+  '/the-last-caretaker',
+  '/deltarune',
+  '/frostpunk-2-breach-of-trust',
+  '/supermarket-chaos',
+  '/the-binding-of-isaac-rebirth',
+  '/master-healer-kale',
+  '/esports-manager-2026',
+  '/moonlight-peaks',
+  '/granblue-relink-endless-ragnarok',
+  '/forest-escape-last-train',
+  '/backyard-baseball',
+  '/ascend-to-zero',
+  '/the-incident-at-galley-house',
+  '/ore-factory-squad',
+  '/happys-humble-burger-cult',
+  '/zerospace',
+  '/dragonsword-awakening',
+  '/tears-of-metal',
+  '/dirty-business',
+  '/grim-dawn-fangs-of-asterkarn',
+  '/game-dna',
+  '/what-game-should-i-play',
+  '/go-go-town',
+  '/scrap-mechanic',
+  '/sir-we-have-an-orc-problem',
+  '/bills-must-be-paid',
+  '/how-many-dudes',
+  '/waterpark-simulator',
+  '/quasimorph',
+  '/idle-directive',
+  '/idle-directive/first-prestige-best-augments',
+  '/idle-directive/automation-machines-guide',
+  '/idle-directive/layout-examples',
+  '/idle-directive/achievements-guide',
+  '/quasimorph/beginner-guide',
+  '/quasimorph/contracts-guide',
+  '/quasimorph/ship-upgrades',
+  '/quasimorph/loot-priority',
+  '/quasimorph/wounds-infection-medicine',
+  '/quasimorph/start-realware-storyline',
+  '/quasimorph/quasimorphosis-guide',
+  '/waterpark-simulator/research-points',
+  '/waterpark-simulator/increase-satisfaction',
+  '/waterpark-simulator/make-money',
+  '/waterpark-simulator/staff-guide',
+  '/waterpark-simulator/museum-guide',
+  '/waterpark-simulator/achievements-guide',
+  '/how-many-dudes/goat-boss-guide',
+  '/how-many-dudes/best-builds',
+  '/how-many-dudes/round-100-guide',
+  '/how-many-dudes/relic-combinations',
+  '/how-many-dudes/tier-2-progression',
+  '/how-many-dudes/achievements-guide',
+  '/bills-must-be-paid/100-percent-walkthrough',
+  '/bills-must-be-paid/achievements-guide',
+  '/bills-must-be-paid/best-upgrades-skill-tree',
+  '/bills-must-be-paid/bills-loans-bankruptcy',
+  '/bills-must-be-paid/prestige-rings-bracelets',
+  '/sir-we-have-an-orc-problem/best-turrets-builds',
+  '/sir-we-have-an-orc-problem/best-upgrades-farming',
+  '/sir-we-have-an-orc-problem/level-3-2-guide',
+  '/sir-we-have-an-orc-problem/level-6-1-6-2-guide',
+  '/scrap-mechanic/first-grow-lab-walkthrough',
+  '/scrap-mechanic/warehouse-key',
+  '/scrap-mechanic/warehouse-walkthrough',
+  '/scrap-mechanic/hubert-watchtower-small-tank',
+  '/scrap-mechanic/mining-guide',
+  '/scrap-mechanic/achievements',
+  '/scrap-mechanic/ore-processing-guide',
+  '/go-go-town/agent-peanut-safe-code',
+  '/go-go-town/automation-not-working',
+  '/go-go-town/progression-stuck',
+  '/grim-dawn-fangs-of-asterkarn/wereraven-leveling-build',
+  '/grim-dawn-fangs-of-asterkarn/the-asterkarn-incident-walkthrough',
+  '/grim-dawn-fangs-of-asterkarn/ritual-of-cleansing-walkthrough',
+  '/grim-dawn-fangs-of-asterkarn/soul-echoes-awaken-epic-items',
+  '/dirty-business/orders-delivery-guide',
+  '/dirty-business/workers-not-working',
+  '/dirty-business/leveling-reputation-unlocks',
+  '/dirty-business/how-to-make-lsd',
+  '/dirty-business/achievements-guide',
+  '/tears-of-metal/beginner-guide',
+  '/tears-of-metal/best-builds',
+  '/tears-of-metal/village-upgrades',
+  '/tears-of-metal/co-op-guide',
+  '/tears-of-metal/boss-guide',
+  '/tears-of-metal/characters-companion-unlocks',
+  '/dragonsword-awakening/walkthrough',
+  '/dragonsword-awakening/ending-final-boss',
+  '/dragonsword-awakening/beginner-guide',
+  '/dragonsword-awakening/gear-karma-guide',
+  '/dragonsword-awakening/best-team-comps',
+  '/zerospace/beginner-guide',
+  '/zerospace/galactic-war-beginner-guide',
+  '/zerospace/campaign-walkthrough-choices',
+  '/zerospace/mission-3-arcadia-walkthrough',
+  '/happys-humble-burger-cult/beginner-guide',
+  '/happys-humble-burger-cult/quota-overtime-closeout-guide',
+  '/happys-humble-burger-cult/orders-kitchen-guide',
+  '/ore-factory-squad/beginner-guide',
+  '/ore-factory-squad/how-to-sell-products',
+  '/ore-factory-squad/complete-contracts-pallet-packer',
+  '/ore-factory-squad/mining-lift-guide',
+  '/ore-factory-squad/find-limestone-make-cement',
+  '/ore-factory-squad/remaining-resources-switch-property',
+  '/ore-factory-squad/dynamite-worth-it',
+  '/ore-factory-squad/smelt-copper-iron-ingots',
+  '/the-incident-at-galley-house/hints',
+  '/the-incident-at-galley-house/person-12-person-k',
+  '/the-incident-at-galley-house/ending-explained',
+  '/the-incident-at-galley-house/achievements-guide',
+  '/the-incident-at-galley-house/all-scene-codes',
+  '/ascend-to-zero/how-to-unlock-stage-2-desert',
+  '/ascend-to-zero/best-builds',
+  '/ascend-to-zero/achievements-guide',
+  '/forest-escape-last-train/unlock-all-players',
+  '/forest-escape-last-train/beginner-guide',
+  '/forest-escape-last-train/best-players-team-lineup',
+  '/forest-escape-last-train/achievements-guide',
+  '/forest-escape-last-train/locations-puzzle-guide',
+  '/forest-escape-last-train/warden-boss-guide',
+  '/granblue-relink-endless-ragnarok/how-to-start',
+  '/granblue-relink-endless-ragnarok/conflux-guide',
+  '/granblue-relink-endless-ragnarok/fatebreaker-chaos-progression',
+  '/granblue-relink-endless-ragnarok/best-ai-team-builds',
+  '/granblue-relink-endless-ragnarok/new-characters-unlock-guide',
+  '/moonlight-peaks/beginner-guide',
+  '/moonlight-peaks/misty-shores-mines-copper-guide',
+  '/moonlight-peaks/early-resources-tool-upgrades-guide',
+  '/moonlight-peaks/feature-unlocks-guide',
+  '/moonlight-peaks/barn-animals-guide',
+  '/esports-manager-2026/beginner-guide',
+  '/esports-manager-2026/training-tactics-guide',
+  '/esports-manager-2026/achievements-guide',
+  '/esports-manager-2026/scouting-contracts-guide',
+  '/esports-manager-2026/sponsors-budget-guide',
+  '/master-healer-kale/achievements-guide',
+  '/master-healer-kale/best-skills-skill-tree',
+  '/master-healer-kale/nightmare-mode-endgame',
+  '/the-binding-of-isaac-rebirth/dlc-buying-guide',
+  '/the-binding-of-isaac-rebirth/beginner-guide',
+  '/the-binding-of-isaac-rebirth/unlock-order',
+  '/the-binding-of-isaac-rebirth/tainted-characters-unlock-guide',
+  '/the-binding-of-isaac-rebirth/best-beginner-characters',
+  '/supermarket-chaos/achievements-guide',
+  '/supermarket-chaos/beginner-guide',
+  '/supermarket-chaos/best-upgrades-skills',
+  '/supermarket-chaos/section-map-item-locations',
+  '/frostpunk-2-breach-of-trust/walkthrough',
+  '/frostpunk-2-breach-of-trust/aurora-negotiation-fishery-hub-guide',
+  '/frostpunk-2-breach-of-trust/conquer-aurora-war-route-guide',
+  '/frostpunk-2-breach-of-trust/tremor-evacuation-guide',
+  '/deltarune/chapter-5-final-boss-guide',
+  '/deltarune/chapter-5-foxes-secret-egg',
+  '/deltarune/chapter-5-secret-boss-guide',
+  '/deltarune/chapter-5-secret-boss-pink-coins',
+  '/deltarune/chapter-5-weird-route',
+  '/the-last-caretaker/new-horizons-guide',
+  '/the-last-caretaker/project-eden-guide',
+  '/the-last-caretaker/oil-whale-guide',
+  '/the-last-caretaker/research-outpost-theta-9-guide',
+  '/the-last-caretaker/power-fuel-wall-outlets',
+  '/darktide/best-skitarii-builds',
+  '/darktide/skitarii-servo-skull',
+  '/darktide/skitarii-weapons',
+  '/moldwasher/achievements-guide',
+  '/moldwasher/walkthrough',
+  '/moldwasher/hidden-objects-collectibles',
+  '/timberborn/beginner-guide',
+  '/timberborn/first-drought-guide',
+  '/timberborn/dam-levee-floodgate-guide',
+  '/timberborn/badwater-badtide-guide',
+  '/timberborn/irrigation-reservoir-guide',
+  '/timberborn/automation-guide',
+  '/thank-you-for-your-application/achievements-guide',
+  '/thank-you-for-your-application/endings-guide',
+  '/thank-you-for-your-application/final-evaluation-job-hopping-answers',
+  '/thank-you-for-your-application/beginner-guide',
+  '/thank-you-for-your-application/resume-rules-thanks-letter-guide',
+  '/the-adventures-of-elliot/achievements-guide',
+  '/the-adventures-of-elliot/beginner-guide',
+  '/the-adventures-of-elliot/cat-locations',
+  '/the-adventures-of-elliot/walkthrough',
+  '/the-adventures-of-elliot/shards-of-life-locations',
+  '/the-adventures-of-elliot/manuscript-locations',
+  '/33-immortals/beginner-progression-guide',
+  '/33-immortals/weapons-unlock-upgrades-guide',
+  '/33-immortals/relics-paths-wishing-guide',
+  '/33-immortals/bosses-guide',
+  '/33-immortals/achievements-guide',
+  '/tales-of-seikyu/beginner-guide',
+  '/tales-of-seikyu/fox-ruins-guide',
+  '/tales-of-seikyu/yokai-forms-guide',
+  '/tales-of-seikyu/request-board-guide',
+  '/tales-of-seikyu/achievements-guide',
+  '/tales-of-seikyu/romance-gifts-marriage-guide',
+  '/spacecraft/beginner-guide',
+  '/spacecraft/base-building-automation',
+  '/spacecraft/scanalyzer-alpha-ftl-engine',
+  '/spacecraft/resources-locations',
+  '/spacecraft/ship-upgrades-cargo-inventory',
+  '/spacecraft/noviciate-corporation-unlock',
+  '/spacecraft/permits-knowledge-unlock',
+  '/fears-to-fathom-scratch-creek/walkthrough',
+  '/fears-to-fathom-scratch-creek/ending-guide',
+  '/fears-to-fathom-scratch-creek/achievements-guide',
+  '/burglin-gnomes/beginner-guide',
+  '/burglin-gnomes/tasks-guide',
+  '/burglin-gnomes/survival-enemies-guide',
+  '/burglin-gnomes/co-op-guide',
+  '/burglin-gnomes/materials-upgrades-guide',
+  '/voidling-bound/all-collectibles',
+  '/voidling-bound/beginner-guide',
+  '/voidling-bound/evolution-breeding-splicing-guide',
+  '/voidling-bound/golden-egg-locations',
+  '/voidling-bound/mutagen-research-points-farm',
+  '/voidling-bound/quackies-locations',
+  '/voidling-bound/breeding-guide',
+  '/solarpunk/beginners-guide',
+  '/solarpunk/energy-system-guide',
+  '/solarpunk/airship-guide',
+  '/solarpunk/farming-guide',
+  '/solarpunk/research-progression-guide',
+  '/solarpunk/animals-guide',
+  '/gothic-1-remake/beginner-guide',
+  '/gothic-1-remake/perfect-start',
+  '/gothic-1-remake/early-ore-weapons-armor',
+  '/gothic-1-remake/best-faction',
+  '/gothic-1-remake/old-camp-walkthrough',
+  '/gothic-1-remake/old-mine-diegos-list',
+  '/gothic-1-remake/new-camp-walkthrough',
+  '/gothic-1-remake/swamp-camp-walkthrough',
+  '/gothic-1-remake/skills-trainers',
+  '/gothic-1-remake/lockpicking-guide',
+  '/house-flipper-remastered-collection/beginner-guide',
+  '/house-flipper-remastered-collection/first-jobs-walkthrough',
+  '/house-flipper-remastered-collection/money-guide',
+  '/house-flipper-remastered-collection/achievements-guide',
+  '/house-flipper-remastered-collection/dlc-content-guide',
+  '/realm-of-ink/beginner-guide',
+  '/realm-of-ink/best-builds',
+  '/realm-of-ink/endless-rupture-guide',
+  '/realm-of-ink/final-boss-true-ending',
+  '/realm-of-ink/ink-gems-curios-guide',
+  '/realm-of-ink/oread-guide',
+  '/fatekeeper/beginner-guide',
+  '/fatekeeper/best-build',
+  '/fatekeeper/boss-guide',
+  '/fatekeeper/best-weapons',
+  '/fatekeeper/best-spells',
+  '/scale-the-depths/huatulco-100-percent-guide',
+  '/scale-the-depths/loch-ness-100-percent-guide',
+  '/scale-the-depths/outer-banks-100-percent-guide',
+  '/scale-the-depths/point-nemo-100-percent-guide',
+  '/scale-the-depths/all-collectibles-secrets',
+  '/scale-the-depths/achievement-guide',
+  '/scale-the-depths/artifacts-guide',
+  '/mina-the-hollower/where-to-go-first',
+  '/mina-the-hollower/how-to-get-map',
+  '/mina-the-hollower/bones-farming',
+  '/mina-the-hollower/best-starting-weapon',
+  '/mina-the-hollower/fast-travel',
+  '/mina-the-hollower/best-early-trinkets',
+  '/mina-the-hollower/all-trinkets-guide',
+  '/cheap-car-repair/daddys-little-girl-mission',
+  '/cheap-car-repair/controls-drop-items-save-tools',
+  '/cheap-car-repair/how-to-make-money',
+  '/cheap-car-repair/story-missions-walkthrough',
+  '/cheap-car-repair/cars-parts-guide',
+  '/starminer/beginner-first-hour',
+  '/starminer/controls-dampeners-ship-spinning',
+  '/starminer/early-research-progression',
+  '/starminer/how-to-mine-scanner-laser',
+  '/starminer/money-selling-resources',
+  '/starminer/power-heat-low-energy',
+  '/romestead/dungeon-traps-death-recovery',
+  '/romestead/farmstead-workers-food-logistics',
+  '/romestead/first-day-base-building',
+  '/romestead/giant-owl-guardian-of-minerva',
+  '/romestead/gods-offerings-boss-progression',
+  '/romestead/base-layout-guide',
+  '/romestead/raid-defense-guide',
+  '/paralives/paramaker-stats-vibes-personality',
+  '/paralives/best-early-game-skills-talents-careers',
+  '/paralives/job-performance-not-improving',
+  '/paralives/level-skills-faster',
+  '/paralives/best-mods-steam-workshop-install-guide',
+  '/paralives/money-cheats-paradimes',
+  '/paralives/try-for-baby-not-showing',
+  '/zero-parades/best-build',
+  '/zero-parades/conditioning',
+  '/zero-parades/disco-elysium-guide',
+  '/zero-parades/stress-exertion',
+  '/zero-parades/early-game',
+  '/deep-rock-galactic/beginner-guide',
+  '/deep-rock-galactic/best-class',
+  '/deep-rock-galactic/cooper-guide',
+  '/deep-rock-galactic/rogue-core-vs-drg',
+  '/deep-rock-galactic/solo-guide',
+  '/deep-rock-galactic/upgrades-explained',
+  '/lego-batman/carmine-falcone',
+  '/lego-batman/red-bricks',
+  '/lego-batman/batgirl-unlock',
+  '/lego-batman/firefly-boss',
+  '/lego-batman/poison-ivy-boss',
+  '/lego-batman/bane-boss',
+  '/lego-batman/escaped-zoo-animals',
+  '/lego-batman/mr-freeze-boss',
+  '/lego-batman/new-beginnings-docks-collectibles',
+  '/lego-batman/radio-towers',
+  '/lego-batman/absolute-batman-suit',
+  '/lego-batman/all-subwayne-tunnel-locations',
+  '/lego-batman/how-to-farm-studs-fast',
+  '/dwarf-eats-mountain/build-order',
+  '/dwarf-eats-mountain/prestige-ascension-guide',
+  '/dwarf-eats-mountain/runners-guide',
+  '/dwarf-eats-mountain/artifacts-mithril-guide',
+  '/dwarf-eats-mountain/best-builds',
+  '/dwarf-eats-mountain/endgame-guide',
+  '/subnautica-2/biomods-guide',
+  '/subnautica-2/co-op-guide',
+  '/subnautica-2/collector-leviathan',
+  '/subnautica-2/digestion-adaptation',
+  '/subnautica-2/early-resources',
+  '/subnautica-2/first-base-setup',
+  '/subnautica-2/fully-functional-fabricator',
+  '/subnautica-2/navigation-guide',
+  '/subnautica-2/oxygen-air-tank-rebreather',
+  '/subnautica-2/sonic-resonator-guide',
+  '/subnautica-2/tadpole-submarine',
+  '/subnautica-2/welcome-center-habitat-builder',
+  '/subnautica-2/what-to-do-first',
+  '/oaken-tower/poison-build',
+  '/oaken-tower/10-wins-guide',
+  '/oaken-tower/level-vs-reroll',
+  '/oaken-tower/3-star-items',
+  '/oaken-tower/perk-unlock-guide',
+  '/oaken-tower/bleed-build',
+  '/oaken-tower/burn-build',
+  '/oaken-tower/frosty-build',
+  '/directive-8020/all-endings',
+  '/directive-8020/all-monster-scenes-alien-duplicates',
+  '/directive-8020/all-secrets-simms-recordings-o-death',
+  '/directive-8020/character-survival-guide',
+  '/directive-8020/choices-consequences',
+  '/outbound/leave-first-biome',
+  '/outbound/energy-guide',
+  '/outbound/early-resources',
+  '/outbound/blueprints-workstations-upgrades',
+  '/outbound/storage-backpack-guide',
+  '/the-spell-brigade/achievements-guide',
+  '/the-spell-brigade/best-builds',
+  '/the-spell-brigade/best-spells-elements',
+  '/the-spell-brigade/gold-farm',
+  '/the-spell-brigade/solo-guide',
+  '/the-spell-brigade/wizard-unlocks',
+  '/the-spell-brigade/trial-covenants-masteries-prestige',
+  '/everything-is-crab/achievements-challenges-guide',
+  '/everything-is-crab/best-builds',
+  '/everything-is-crab/boss-guide',
+  '/everything-is-crab/progression-guide',
+  '/everything-is-crab/selective-pressure-guide',
+  '/farever/beginner-guide',
+  '/farever/classes-guide',
+  '/farever/codeex-leveling-guide',
+  '/farever/mount-guide',
+  '/farever/weapon-skills-guide',
+  '/librarian/achievements',
+  '/librarian/best-abilities',
+  '/librarian/book-sorting',
+  '/librarian/key-locations',
+  '/magical-princess/forbidden-research-guide',
+  '/magical-princess/two-queens-ending-guide',
+  '/magical-princess/true-ending-heir-of-the-stargazer',
+  '/magical-princess/golden-ending-guide',
+  '/magical-princess/career-endings-requirements',
+  '/gamble-with-your-friends/achievements',
+  '/gamble-with-your-friends/beginner-guide',
+  '/gamble-with-your-friends/best-games',
+  '/gamble-with-your-friends/best-item-combos',
+  '/gamble-with-your-friends/craps-cheese-guide',
+  '/gamble-with-your-friends/tickets-items-body-parts',
+  '/gamble-with-your-friends/all-endings-guide',
+  '/gamble-with-your-friends/bugged-achievements',
+  '/gamble-with-your-friends/quota-guide',
+  '/gamble-with-your-friends/save-scum-guide',
+  '/olden-era/best-buildings-first',
+  '/olden-era/cant-unlock-subclass',
+  '/olden-era/chronomancer-vs-soulweaver',
+  '/olden-era/focus-points',
+  '/olden-era/force-subclass',
+  '/olden-era/how-to-unlock-subclasses',
+  '/olden-era/law-points-astrology-points',
+  '/olden-era/necropolis-common-mistakes',
+  '/olden-era/necropolis-guide',
+  '/olden-era/necropolis-skeletal-archers',
+  '/olden-era/necropolis-week-1-build-order',
+  '/olden-era/subclass-guide',
+  '/far-far-west/area-41-symbol-order',
+  '/far-far-west/cactus-day-joker-locations',
+  '/far-far-west/canyon-secret-medallion-locations',
+  '/far-far-west/ghost-bell-shard-locations',
+  '/far-far-west/snowman-parts-locations',
+  '/far-far-west/woodlands-mushroom-sequence',
+  '/far-far-west/all-secret-jokers',
+  '/moomintroll/achievements-guide',
+  '/moomintroll/ending-explained',
+  '/moomintroll/great-winter-bonfire',
+  '/moomintroll/little-my-snowball-fight',
+  '/moomintroll/side-quests',
+  '/moomintroll/tool-upgrades',
+  '/moomintroll/vase-piece-locations',
+  '/fracture-field/achievements-guide',
+  '/fracture-field/beginner-walkthrough',
+  '/fracture-field/prestige-guide',
+  '/fracture-field/progression-guide',
+  '/shapez-2/mam-guide',
+  '/shapez-2/manufacture-mode-guide',
+  '/shapez-2/trade-station-guide',
+  '/shapez-2/wires-belt-filter-guide',
+  '/shapez-2/space-belts-trains-guide',
+  '/holovillage-our-cozy-days/beginner-guide',
+  '/holovillage-our-cozy-days/early-combat-guide',
+  '/holovillage-our-cozy-days/fishing-guide',
+  '/holovillage-our-cozy-days/how-to-invite-villagers',
+  '/holovillage-our-cozy-days/shop-money-guide',
+  '/vampire-crawlers/all-characters-unlock-guide',
+  '/vampire-crawlers/best-characters-for-beginners',
+  '/vampire-crawlers/secret-characters-how-to-unlock',
+  '/vampire-crawlers/best-early-upgrades',
+  '/vampire-crawlers/combo-guide',
+  '/vampire-crawlers/early-evolutions',
+  '/airborne-empire/jet-engine-guide',
+  '/airborne-empire/kingsfell-guide',
+  '/airborne-empire/pirate-queen-guide',
+  '/airborne-empire/tilt-lift-balance-guide',
+  '/sintopia/best-hell-layout-guide',
+  '/sintopia/hearos-guide',
+  '/sintopia/overworld-guide',
+  '/sintopia/saints-guide',
+  '/mouse-pi-for-hire/baseball-card-locations',
+  '/mouse-pi-for-hire/buy-back-guide',
+  '/mouse-pi-for-hire/missable-side-job-rewards',
+  '/mouse-pi-for-hire/missables-guide',
+  '/mouse-pi-for-hire/mouseberg-herald-comic-locations',
+  '/mouse-pi-for-hire/weapon-schematics-secret-figurines-guide',
+  '/road-to-vostok/area-05-guide',
+  '/road-to-vostok/generalist-and-doctor-locations',
+  '/road-to-vostok/permadeath-save-and-stash-guide',
+  '/road-to-vostok/all-shelter-locations',
+  '/pokemon-champions/how-to-beat-tailwind-pokemon-champions-doubles',
+  '/pokemon-champions/how-to-beat-trick-room-pokemon-champions-doubles',
+  '/pokemon-champions/how-to-counter-incineroar-pokemon-champions-doubles',
+  '/pokemon-champions/how-to-deal-with-sneasler-pokemon-champions-doubles',
+  '/grime-2/blade-mammoth-boss-guide',
+  '/grime-2/kankan-guide',
+  '/grime-2/vs-grime-1-differences',
+  '/grime-2/best-early-weapons',
+  '/sol-cesto/all-characters-unlock-guide',
+  '/sol-cesto/flute-guide',
+  '/sol-cesto/how-to-unlock-huntress',
+  '/sol-cesto/how-to-unlock-lizard',
+  '/crystalfall/beginner-guide',
+  '/crystalfall/crafting-sockets-gem-fusion-guide',
+  '/crystalfall/fireball-build-guide',
+  '/crystalfall/inventory-stash-guide',
+  '/soulmask/airship-guide',
+  '/soulmask/cross-map-transfer-guide',
+  '/soulmask/shifting-sands-beginner-guide',
+  '/soulmask/tribesmen-guide',
+  '/the-occultist/all-altar-locations',
+  '/the-occultist/all-medallion-locations',
+  '/the-occultist/codex-lumina-fragments',
+  '/the-occultist/clock-room-sundial-puzzle-solution',
+  '/the-occultist/greenhouse-statue-puzzle-solution',
+  '/the-occultist/mausoleum-door-lion-key-puzzle-solution',
+  '/the-occultist/planetarium-star-moon-puzzle-solution',
+  '/the-long-dark-episode-5/search-party-achievement',
+  '/the-long-dark-episode-5/what-to-do-after-the-autopsy',
+  '/the-long-dark-episode-5/where-to-go-after-terry',
+  '/the-long-dark-episode-5/how-to-get-to-desperation-bay',
+  '/all-will-fall/oil-rig-guide',
+  '/all-will-fall/tanker-truck-guide',
+  '/all-will-fall/tornado-race-guide',
+  '/all-will-fall/collapse-troubleshooting',
+  '/i-am-jesus-christ/apostles-locations',
+  '/i-am-jesus-christ/miracles-list',
+  '/i-am-jesus-christ/walkthrough',
+  '/i-am-jesus-christ/who-should-play',
+  '/the-long-dark-episode-5/episode-5-ending-explained',
+  '/the-long-dark-episode-5/episode-5-missing-people-locations',
+  '/the-long-dark-episode-5/episode-5-walkthrough',
+  '/the-long-dark-episode-5/whats-in-astrids-hardcase-explained',
+  '/guides/hozy/cafe-layout-tips',
+  '/guides/hozy/dreams-explained',
+  '/guides/hozy/hardest-levels-ranked',
+  '/guides/hozy/penthouse-layout-guide',
+  '/retro-rewind/is-the-black-market-worth-it',
+  '/retro-rewind/when-to-replace-damaged-tape',
+  '/retro-rewind/custom-videos',
+  '/retro-rewind/community',
+  '/guides/beginner-guide',
+  '/guides/game-progression-guide',
+  '/guides/top-tips-and-tricks',
+  '/guides/hidden-secrets',
+  '/guides/organize-and-uncover-secrets',
+  '/winter-burrow/winter-burrow-early-survival-guide',
+  '/winter-burrow/winter-burrow-owl-chase-part2-guide',
+  '/winter-burrow/winter-burrow-gnawtusk-rescue-chapter-guide',
+  '/winter-burrow/winter-burrow-bufo-request-part4-guide',
+  '/winter-burrow/winter-burrow-finding-poliwog-walkthrough',
+  '/i-am-alone/how-to-get-all-endings-yes-im-alone',
+  '/routine-guide/chapter-1-birth-stealth-walkthrough',
+  '/routine-guide/chapter-2-incision-stealth-walkthrough',
+  '/routine-guide/chapter-3-re-create-stealth-walkthrough',
+  '/routine-guide/chapter-4-adrift-stealth-walkthrough',
+  '/routine-guide/chapter-5-endure-stealth-walkthrough',
+  '/routine-guide/chapter-6-legacy-stealth-walkthrough',
+] as const;
+
+type SitemapPath = (typeof paths)[number];
+
+// Add a date only after a page receives a meaningful content update.
+// Do not use new Date() here: that would mark every deployment as a page update.
+const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/what-game-should-i-play': '2026-08-04',
+  '/scrap-mechanic/first-grow-lab-walkthrough': '2026-08-04',
+  '/grim-dawn-fangs-of-asterkarn/ritual-of-cleansing-walkthrough':
+    '2026-08-04',
+  '/grim-dawn-fangs-of-asterkarn/soul-echoes-awaken-epic-items':
+    '2026-08-04',
+  '/dragonsword-awakening/best-team-comps': '2026-08-04',
+  '/tears-of-metal': '2026-08-04',
+  '/tears-of-metal/characters-companion-unlocks': '2026-08-04',
+};
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return Array.from(new Set<SitemapPath>(paths)).map((path) => {
+    const lastModified = lastModifiedByPath[path];
+
+    return {
+      url: `${baseUrl}${path}`,
+      ...(lastModified ? { lastModified } : {}),
+    };
+  });
 }

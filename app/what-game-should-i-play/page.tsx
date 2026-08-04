@@ -28,7 +28,7 @@ const metadataTitle =
   "What Game Should I Play? Free Game Recommender";
 
 const metadataDescription =
-  `Pick games you already enjoy, choose a platform and playstyle, and get personalized recommendations from ${gameCount} PC and console games. Free, with no sign-in.`;
+  `Choose a mood, platform, play mode, and optional favorite games to get personalized recommendations from ${gameCount} PC and console games. Free, with no sign-in.`;
 
 const pageShellClassName = [
   "mx-auto w-full",
@@ -80,39 +80,66 @@ export const metadata: Metadata = {
 const howItWorksItems = [
   {
     number: "01",
-    title: "Choose games you already like",
+    title: "Choose what you feel like playing",
     description:
-      "Pick up to three favorites. One is enough to start, while two or three usually produce a more specific shortlist.",
+      "Start with at least one mood or playstyle, such as relaxing, story-rich, challenging, strategic, exploratory, or co-op friendly.",
   },
   {
     number: "02",
-    title: "Describe what fits today",
+    title: "Narrow the session",
     description:
-      "Choose a platform, solo or multiplayer preference, and up to a few moods or playstyle priorities.",
+      "Add your platform and choose solo, co-op, or multiplayer so the shortlist fits how you can actually play today.",
   },
   {
     number: "03",
-    title: "Open your best matches",
+    title: "Add favorites and compare matches",
     description:
-      "Review the strongest recommendations, compare why they fit, and jump into a guide hub when we have one.",
+      "Optionally add games you already enjoy, then review the strongest recommendations and why each one fits your choices.",
   },
 ] as const;
 
 const recommendationSignals = [
   {
+    title: "Your mood and energy",
+    description:
+      "Choose whether you want to relax, follow a story, solve difficult systems, explore freely, make steady progress, or play with other people.",
+  },
+  {
+    title: "How you can play today",
+    description:
+      "Platform and play mode remove recommendations that do not fit the session. A great co-op game is not useful when you are playing alone.",
+  },
+  {
     title: "Games you already enjoy",
     description:
-      "Your favorites help identify the kinds of exploration, combat, progression, strategy, story, crafting, and systems you tend to enjoy.",
+      "Favorites help identify the combat, exploration, progression, strategy, crafting, storytelling, and systems you tend to prefer.",
+  },
+] as const;
+
+const decisionSteps = [
+  {
+    number: "01",
+    title: "Start with your mood",
+    description:
+      "Decide whether you want something relaxing, challenging, story-driven, strategic, social, or focused on exploration.",
   },
   {
-    title: "What fits this session",
+    number: "02",
+    title: "Check your time and attention",
     description:
-      "A game that suits a long weekend may not suit a short evening. Platform, play mode, and current mood help narrow the list.",
+      "A long RPG may fit a free weekend, while a run-based game, puzzle, or short match may work better for a brief evening.",
   },
   {
-    title: "Useful next steps",
+    number: "03",
+    title: "Choose how you are playing",
     description:
-      "When one of the recommended games has a guide hub on this site, the result includes a direct route into practical help.",
+      "Narrow the list by platform and by whether you are playing solo, with one friend, or with a larger group.",
+  },
+  {
+    number: "04",
+    title: "Use favorites as reference points",
+    description:
+      "Look for the specific qualities you want again, such as exploration, progression, combat, systems, story, or crafting—not just the same genre.",
   },
 ] as const;
 
@@ -120,32 +147,37 @@ const faqItems = [
   {
     question: "What game should I play?",
     answer:
-      "Choose one to three games you already enjoy, then add any platform, play-mode, or mood preferences that matter today. The tool will create a ranked shortlist of games that fit those choices.",
+      "Choose a game that fits your current mood, available time, platform, and whether you are playing alone or with other people. A relaxing or run-based game can suit a short, low-energy session, while a story-heavy RPG or complex strategy game may fit a longer one. The recommender combines those factors with games you already enjoy to create a more specific shortlist.",
+  },
+  {
+    question: "Why can’t I decide what game to play?",
+    answer:
+      "Decision fatigue usually happens when you compare too many games at once or focus on what you think you should finish. Narrow the choice by your mood, available time, platform, and play mode before comparing individual titles.",
+  },
+  {
+    question: "What should I play when nothing sounds fun?",
+    answer:
+      "Choose something with a low commitment and a quick feedback loop, such as a short puzzle, a run-based game, a familiar comfort game, or a multiplayer match. Avoid starting a long story-heavy game unless you are ready to give it your attention.",
   },
   {
     question: "Do I need to choose three favorite games?",
     answer:
-      "No. One favorite game or one playstyle preference is enough to generate results. Adding more favorites usually makes the shortlist more specific.",
+      "No. A mood or playstyle choice is enough to generate results. Favorite games are optional, but adding one to three can make the shortlist more specific by showing the tool what kinds of experiences you already enjoy.",
   },
   {
     question: "How does the game recommendation quiz work?",
     answer:
-      "Each game has a human-reviewed playstyle profile covering exploration, progression, systems, crafting, story, combat, strategy, puzzles, survival, and social play. The tool compares your choices with those profiles and applies your platform and play-mode filters.",
-  },
-  {
-    question: "Can it recommend games based on games I already like?",
-    answer:
-      "Yes. Your selected favorites form the starting point for the recommendation. Games you already selected are used as references and are not repeated as new recommendations.",
+      "Each game has a human-reviewed playstyle profile covering exploration, progression, systems, crafting, story, combat, strategy, puzzles, survival, and social play. The tool compares your mood and playstyle choices with those profiles, then applies your platform, play-mode, and optional favorite-game signals.",
   },
   {
     question: "What game should I play next on Steam or PC?",
     answer:
-      "Choose PC or Steam in the platform options. The results will prioritize matching games that are available on PC in the current game pool.",
+      "Choose PC or Steam in the platform options. The results will prioritize matching games that are available on PC in the current game pool, then rank them by how well they fit your other choices.",
   },
   {
     question: "Are the recommendations random?",
     answer:
-      "The main results are not random. They are ordered from the closest fit to the broader matches. A separate surprise option can surface another suitable game from outside the main shortlist.",
+      "The main recommendations are not random. They are ranked from the closest fit to broader matches based on your selected mood, playstyle, platform, play mode, and optional favorites. A separate surprise option may surface another suitable game outside the main shortlist.",
   },
   {
     question: "Do I need to create an account?",
@@ -155,7 +187,7 @@ const faqItems = [
   {
     question: "What is the difference between this tool and Game DNA?",
     answer:
-      "This page is designed for a quick decision using up to three favorite games and a few current preferences. Game DNA uses a nine-game grid to create a more detailed playstyle profile before recommending what to play next.",
+      "This quick recommender helps you choose a game for the session you have today using your mood, platform, play mode, and up to three optional favorites. Game DNA uses a nine-game grid to build a deeper, reusable profile of your long-term playstyle before recommending what to play next.",
   },
 ] as const;
 
@@ -214,10 +246,11 @@ const structuredData = {
         "@id": `${siteUrl}/#organization`,
       },
       featureList: [
-        "Recommendations based on games you already enjoy",
+        "Current mood and playstyle matching",
         "Platform preference filtering",
         "Solo, cooperative, and multiplayer filtering",
-        "Current mood and playstyle matching",
+        "Optional recommendations based on games you already enjoy",
+        "Explanations for why each game fits",
         "Direct links to matching game guide hubs",
         "No account required",
       ],
@@ -281,6 +314,8 @@ export default function WhatGameShouldIPlayPage() {
         <ToolSection />
 
         <RecommendationSignalsSection />
+
+        <DecisionGuideSection />
 
         <GameDnaSection />
 
@@ -371,10 +406,10 @@ function HeroSection() {
                 "sm:text-lg sm:leading-8",
               ].join(" ")}
             >
-              Start with games you already enjoy, then add the
-              platform, play mode, or mood that fits today. The
-              tool turns those choices into a practical shortlist
-              instead of another generic list of popular games.
+              Choose the mood you want today, then narrow the
+              results by platform, play mode, and games you already
+              enjoy. The tool creates a practical shortlist instead
+              of another generic list of popular games.
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-bold text-slate-500">
@@ -659,12 +694,13 @@ function RecommendationSignalsSection() {
             id="recommendation-signals-heading"
             className="mt-2 text-3xl font-black tracking-tight text-slate-950"
           >
-            Find games based on games you like
+            Find a game that fits the session you have today
           </h2>
 
           <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">
-            The shortlist starts with your taste, then adjusts
-            for what you are actually in the mood to play now.
+            The best choice depends on more than your favorite
+            genre. Your mood, platform, play mode, and current energy
+            can change what feels right from one session to the next.
           </p>
         </div>
 
@@ -698,6 +734,114 @@ function RecommendationSignalsSection() {
               </p>
             </article>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DecisionGuideSection() {
+  return (
+    <section
+      aria-labelledby="how-to-decide-heading"
+      className="border-t border-slate-200 bg-[#f7f9fc]"
+    >
+      <div
+        className={[
+          pageShellClassName,
+          "py-10 sm:py-12 lg:py-14",
+        ].join(" ")}
+      >
+        <div className="max-w-3xl">
+          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-sky-700">
+            A Simple Decision Framework
+          </p>
+
+          <h2
+            id="how-to-decide-heading"
+            className="mt-2 text-3xl font-black tracking-tight text-slate-950"
+          >
+            How to Decide What Game to Play
+          </h2>
+
+          <div className="mt-4 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
+            <p>
+              Choosing a game becomes easier when you stop comparing
+              your entire library and focus on the session you actually
+              have today.
+            </p>
+
+            <p>
+              Start with your mood, then consider how much time and
+              attention you have. Narrow the list by platform and play
+              mode, and use games you already enjoy as reference points
+              for the specific qualities you want again.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {decisionSteps.map((item) => (
+            <article
+              key={item.number}
+              className={[
+                "rounded-[1.5rem]",
+                "border border-slate-200",
+                "bg-white p-5 shadow-sm",
+              ].join(" ")}
+            >
+              <span
+                className={[
+                  "flex h-9 w-9 items-center",
+                  "justify-center rounded-full",
+                  "bg-sky-50 text-xs font-black",
+                  "text-sky-700",
+                ].join(" ")}
+              >
+                {item.number}
+              </span>
+
+              <h3 className="mt-4 text-base font-black leading-6 text-slate-950">
+                {item.title}
+              </h3>
+
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                {item.description}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <div
+          className={[
+            "mt-7 rounded-[1.5rem]",
+            "border border-sky-100",
+            "bg-sky-50/70 p-5 sm:p-6",
+          ].join(" ")}
+        >
+          <p className="text-sm leading-7 text-slate-700 sm:text-base">
+            The recommender above combines these signals and turns them
+            into a ranked shortlist, so you do not need to compare every
+            game in your backlog manually.
+          </p>
+
+          <a
+            href="#game-recommender"
+            className={[
+              "mt-4 inline-flex min-h-10 items-center",
+              "justify-center rounded-full",
+              "bg-sky-600 px-4 py-2",
+              "text-sm font-black text-white",
+              "transition hover:bg-sky-700",
+              "focus-visible:outline-none",
+              "focus-visible:ring-2",
+              "focus-visible:ring-sky-500",
+              "focus-visible:ring-offset-2",
+            ].join(" ")}
+          >
+            Find a Game for This Session
+            <ArrowDownIcon />
+          </a>
         </div>
       </div>
     </section>
@@ -740,9 +884,10 @@ function GameDnaSection() {
             </h2>
 
             <p className="mt-3 text-sm leading-7 text-slate-600">
-              Pick nine favorite games to reveal your strongest
-              playstyle traits, build a shareable 3×3 grid, and
-              get recommendations from a more detailed profile.
+              This quick recommender helps with the session you
+              have today. Game DNA uses nine favorite games to reveal
+              your strongest playstyle traits, build a shareable 3×3
+              grid, and create a deeper long-term profile.
             </p>
           </div>
 

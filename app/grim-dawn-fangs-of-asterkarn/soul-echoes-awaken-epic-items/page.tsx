@@ -10,6 +10,12 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/grim-dawn-fangs-of-asterkarn`;
 const pageUrl = `${hubUrl}/soul-echoes-awaken-epic-items`;
 
+const metadataTitle =
+  "Grim Dawn Ascension Altar: Soul Echoes, Fragments & Ashes";
+
+const metadataDescription =
+  "Find the Ascension Altar and Jornn, turn Soul Echoes into Soul Fragments, farm Ashes of Awakening, and Awaken Epic items in the correct order.";
+
 const imageUrls = [
   `${siteUrl}/images/grim-dawn-fangs-of-asterkarn/grim-dawn-altar-of-ascension-quest-complete.webp`,
   `${siteUrl}/images/grim-dawn-fangs-of-asterkarn/grim-dawn-soul-echo-recipe-200k.webp`,
@@ -20,28 +26,28 @@ const imageUrls = [
 
 const toc = [
   {
-    id: "unlock-services",
-    label: "Unlock Ascension services",
+    id: "ascension-altar",
+    label: "Ascension Altar",
+  },
+  {
+    id: "jornn-runekeeper",
+    label: "Jornn the Runekeeper",
   },
   {
     id: "soul-materials",
-    label: "Soul Echoes, Fragments & Ashes",
+    label: "Soul Echoes & Fragments",
   },
   {
     id: "item-ascension",
-    label: "How item Ascension works",
+    label: "Item Ascension",
   },
   {
     id: "awaken-epic",
-    label: "How to Awaken an Epic",
+    label: "Awaken Epic items",
   },
   {
     id: "elderveil",
     label: "Elderveil & Runed Orb",
-  },
-  {
-    id: "inventory",
-    label: "Store Epics & materials",
   },
   {
     id: "stuck",
@@ -73,50 +79,52 @@ const relatedLinks = [
 ];
 
 export const metadata: Metadata = {
-  title: "Grim Dawn Soul Echoes, Ascension & Awakened Epics",
-  description:
-    "Find Soul Echoes, Ashes of Awakening, Elderveil and the Runed Orb, then Awaken Epics first, Ascend them safely, and fix missing recipes.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Grim Dawn Soul Echoes & Awakened Epic Items Guide",
-    description:
-      "Unlock Ascension, find Elderveil and the Runed Orb, farm soul materials, Awaken eligible Epics, and avoid losing an Ascended Affix.",
+    title: metadataTitle,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[1],
-        alt: "Grim Dawn Runed Orb recipe for Lokharr's Visage costing 200000 Iron Bits",
+        url: imageUrls[0],
+        alt: "Grim Dawn Altar of Ascension objective completed in Kurnhold",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Grim Dawn Soul Echoes, Ashes & Awakened Epics",
-    description:
-      "Learn the correct Awaken-then-Ascend order, find Elderveil, use the Runed Orb, process Soul Echoes, and fix unavailable recipes.",
-    images: [imageUrls[1]],
+    title: metadataTitle,
+    description: metadataDescription,
+    images: [imageUrls[0]],
   },
 };
 
 const faqEntities = [
   {
-    question: "Can I use another character to Ascend the same item?",
+    question: "Are Soul Echoes and Soul Fragments the same material?",
     answer:
-      "Yes, but the character performing the Ascension affects the available mastery modifier pool. Use the mastery combination you want the final item to support.",
+      "No. Soul Echoes are farming drops, while Soul Fragments are processed materials used by Ascension and Alteration services. Use the current Runed Orb conversion recipe in Elderveil to turn Echoes into Fragments.",
+  },
+  {
+    question: "Should I Awaken an Epic before Ascending it?",
+    answer:
+      "Yes. Awakening consumes the original Epic and creates a new Legendary item. Awaken the unascended Epic first, then take the finished Legendary to Jornn for its Ascended Affix.",
+  },
+  {
+    question: "Can another character Ascend the same item?",
+    answer:
+      "Yes, but the character performing the Ascension affects the available mastery-modifier pool. Use the mastery combination you want the finished item to support.",
   },
   {
     question: "Can the Inventor reroll only one part of an item?",
     answer:
-      "Yes. Alteration can target the item seed, prefix, suffix, or Ascended Affix separately. Check the displayed material cost for the selected operation before confirming it.",
-  },
-  {
-    question: "Why did I receive a defensive-looking mastery modifier?",
-    answer:
-      "Mastery modifiers can affect defensive, passive, support, or offensive skills. A defensive result tied to one of the character's masteries is not automatically a regular affix or a bug.",
+      "Yes. Alteration can target the item seed, prefix, suffix, or Ascended Affix separately. Check the displayed material and Iron Bit cost before confirming the selected reroll.",
   },
 ];
 
@@ -142,7 +150,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Soul Echoes and Awakened Epic Items",
+          name: "Ascension Altar and Soul Echoes Guide",
           item: pageUrl,
         },
       ],
@@ -155,18 +163,30 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Grim Dawn Soul Echoes and Awakened Epic Items Guide: Ascension, Ashes of Awakening, Elderveil, and the Runed Orb",
+        "Grim Dawn Ascension Altar Guide: Soul Echoes, Soul Fragments, Ashes of Awakening, and Awakened Epic Items",
       description:
-        "This Grim Dawn: Fangs of Asterkarn guide explains how Soul Echoes, Soul Fragments, Ashes of Awakening, item Ascension, Ascended Affixes, Epic Awakening, and Inventor Alteration connect. It covers the correct Awaken-first-then-Ascend order, the requirements for full Ascendant Mode and individual Altar mechanics, how to find Elderveil west of Guardian's Sorrow, where to meet Elder Noltukari, how to use the Runed Orb, how to evaluate supported Epic recipes, and how to diagnose missing materials, locked services, unsupported items, and lost Ascended Affixes.",
+        "A practical Grim Dawn: Fangs of Asterkarn guide to unlocking the Ascension Altar and Jornn the Runekeeper, farming Soul Echoes and Ashes of Awakening, processing Soul Echoes into Soul Fragments, adding Ascended Affixes, finding Elderveil and the Runed Orb, Awakening supported Epic items, and avoiding the mistake of Ascending an Epic before Awakening it.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-07-26",
-      dateModified: "2026-07-26",
+      dateModified: "2026-08-04",
       about: [
         {
           "@type": "VideoGame",
           name: "Grim Dawn: Fangs of Asterkarn",
           url: hubUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Altar of Ascension",
+        },
+        {
+          "@type": "Thing",
+          name: "Ascendant Mode",
+        },
+        {
+          "@type": "Thing",
+          name: "Jornn the Runekeeper",
         },
         {
           "@type": "Thing",
@@ -179,14 +199,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Ashes of Awakening",
-        },
-        {
-          "@type": "Thing",
-          name: "Altar of Ascension",
-        },
-        {
-          "@type": "Thing",
-          name: "Ascendant Mode",
         },
         {
           "@type": "Thing",
@@ -203,10 +215,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Awakened Epic Items",
-        },
-        {
-          "@type": "Thing",
-          name: "Jornn the Runekeeper",
         },
         {
           "@type": "Thing",
@@ -278,13 +286,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Awaken Epics Before Ascending Them in Grim Dawn"
-          description="Follow the order I use to unlock the Altar, find Elderveil and the Runed Orb, process Soul Echoes, collect Ashes of Awakening, craft an Awakened Legendary, and add its Ascended Affix without wasting the original Epic."
+          title="Grim Dawn Ascension Altar, Soul Echoes and Awakened Items"
+          description="Follow the route I use to unlock the Altar and Jornn, process Soul Echoes into Soul Fragments, farm Ashes of Awakening, and Awaken Epic items before adding an Ascended Affix."
           gameTitle="Grim Dawn: Fangs of Asterkarn"
           gameHref="/grim-dawn-fangs-of-asterkarn"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="July 26, 2026"
+          updatedAt="August 4, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

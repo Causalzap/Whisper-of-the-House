@@ -11,10 +11,10 @@ const hubUrl = `${siteUrl}/scrap-mechanic`;
 const pageUrl = `${hubUrl}/first-grow-lab-walkthrough`;
 
 const metadataTitle =
-  "Scrap Mechanic First Grow Lab Walkthrough & Carrot Seeds";
+  "Scrap Mechanic First Grow Lab Walkthrough & Completion Guide";
 
 const metadataDescription =
-  "Clear the first Scrap Mechanic Grow Lab, find Carrot Seeds, open the red-target door, recover a dropped bag, and trigger quest completion.";
+  "Complete Scrap Mechanic Grow Lab 1, open the red-target door, find the Carrot Seeds, pass the Large Chest, and trigger the final quest banner.";
 
 const imageUrls = [
   `${siteUrl}/images/scrap-mechanic/scrap-mechanic-first-grow-lab-central-chamber.webp`,
@@ -31,35 +31,15 @@ const imageUrls = [
 const toc = [
   {
     id: "how-to-start",
-    label: "Start A Farmers Side Hustle",
-  },
-  {
-    id: "how-long",
-    label: "How long it takes",
-  },
-  {
-    id: "what-to-bring",
-    label: "What to bring",
+    label: "Start the first Grow Lab",
   },
   {
     id: "entering-the-lab",
-    label: "Enter the Grow Lab",
+    label: "Enter Grow Lab 1",
   },
   {
     id: "central-chamber",
-    label: "Navigate the central chamber",
-  },
-  {
-    id: "combat",
-    label: "Grow Lab combat",
-  },
-  {
-    id: "recover-dropped-bag",
-    label: "Recover a dropped bag",
-  },
-  {
-    id: "unlocks-and-loot",
-    label: "Net Block and Schematics",
+    label: "Follow the central route",
   },
   {
     id: "red-target",
@@ -70,12 +50,32 @@ const toc = [
     label: "Find the Carrot Seeds",
   },
   {
+    id: "completion",
+    label: "Finish after the Large Chest",
+  },
+  {
     id: "boss",
     label: "Does it have a Boss?",
   },
   {
-    id: "completion",
-    label: "Complete the Grow Lab",
+    id: "unlocks-and-loot",
+    label: "Net Block and Schematics",
+  },
+  {
+    id: "what-to-bring",
+    label: "What to bring",
+  },
+  {
+    id: "combat",
+    label: "Grow Lab combat",
+  },
+  {
+    id: "recover-dropped-bag",
+    label: "Recover a dropped bag",
+  },
+  {
+    id: "how-long",
+    label: "How long it takes",
   },
   {
     id: "what-completion-unlocks",
@@ -126,41 +126,42 @@ const faqEntities = [
   {
     question: "What quest starts the first Grow Lab in Scrap Mechanic?",
     answer:
-      "The first Grow Lab route begins through the quest A Farmers Side Hustle. Its early objective asks the player to find out what Hubert is doing and talk to him before the objective changes to entering the Grow Lab.",
+      "The first Grow Lab begins through A Farmers Side Hustle. Talk to Hubert, then follow the active objective to the marked Grow Lab entrance.",
   },
   {
-    question: "How long does the first Scrap Mechanic Grow Lab take?",
+    question: "Do I need a Grow Lab key for the first Grow Lab?",
     answer:
-      "A prepared first clear should take about 30 to 45 minutes. A blind attempt can take closer to 50 minutes when it includes a death, dropped-bag recovery, extra food collection, and optional room exploration.",
+      "No separate overworld key was required for this first story visit. The active Hubert quest provided the progression state needed to enter. Later Grow Labs use their own key progression.",
+  },
+  {
+    question: "Where are the Carrot Seeds in the first Scrap Mechanic Grow Lab?",
+    answer:
+      "The Carrot Seeds are in the late combat section before the final Large Chest. Check the ground near the defeated Bots instead of searching inside the chest.",
+  },
+  {
+    question: "Does opening the Large Chest complete the first Grow Lab quest?",
+    answer:
+      "No. Enter the passage behind the Large Chest and drop into the plant-filled chamber. The Main Quest completion banner appears after reaching that final area.",
   },
   {
     question: "Does the first Scrap Mechanic Grow Lab have a Boss?",
     answer:
-      "The documented first Grow Lab route did not contain a named Boss or visible Boss health bar. It ended with several Bots, a Large Chest, and a final drop into the plant-filled completion area.",
+      "The documented first Grow Lab did not contain a named Boss or visible Boss health bar. Its final section ended with several Bots, a Large Chest, and the drop into the completion chamber.",
   },
   {
-    question:
-      "Where are the Carrot Seeds in the first Scrap Mechanic Grow Lab?",
+    question: "How long does the first Scrap Mechanic Grow Lab take?",
     answer:
-      "The Carrot Seeds are found in the late combat section before the final Large Chest. They are not inside the Large Chest, so check the ground near the defeated Bots before entering the completion passage.",
+      "A prepared first clear should take about 30 to 45 minutes. A blind attempt can take closer to 50 minutes when it includes a death, dropped-bag recovery, and optional exploration.",
   },
   {
-    question:
-      "Does opening the Large Chest complete the first Grow Lab quest?",
+    question: "Should I bring a vehicle Bed to the first Grow Lab?",
     answer:
-      "Not immediately. After opening the Large Chest, continue through the passage behind it and drop into the plant-filled chamber. The Main Quest completion banner appears after entering that final area.",
+      "Yes. A vehicle Bed near the entrance makes a death much easier to recover from and avoids another long drive from an older respawn point.",
   },
   {
-    question:
-      "Should I bring a vehicle Bed to the first Scrap Mechanic Grow Lab?",
+    question: "Do Schematic Boxes immediately unlock Craftbot recipes?",
     answer:
-      "Yes. A vehicle Bed near the Grow Lab entrance turns a death into a short recovery. Without one, the player may respawn at an older Bed and need to drive back across the map.",
-  },
-  {
-    question:
-      "Do Schematic Boxes immediately unlock Craftbot recipes?",
-    answer:
-      "No. Schematic Boxes are collected as physical loot and processed later through the Schematic system. Picking one up does not automatically reveal every Craftbot recipe or complete the Grow Lab.",
+      "No. Schematic Boxes are physical loot that must be processed later. Picking one up does not automatically reveal every Craftbot recipe or complete the Grow Lab.",
   },
 ];
 
@@ -173,10 +174,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title:
-      "Scrap Mechanic First Grow Lab Walkthrough and Carrot Seed Route",
-    description:
-      "Follow my complete first Grow Lab route from A Farmers Side Hustle through the elevator, central chamber, red-target door, Carrot Seeds, Large Chest, and final quest-completion drop.",
+    title: metadataTitle,
+    description: metadataDescription,
     siteName: "Whisper of the House",
     images: [
       {
@@ -190,8 +189,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
-    description:
-      "Find the Carrot Seeds, open the red-target door, recover a dropped bag, and finish the first Grow Lab without missing the final quest trigger.",
+    description: metadataDescription,
     images: [imageUrls[0]],
   },
 };
@@ -231,14 +229,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Scrap Mechanic First Grow Lab Walkthrough: Carrot Seeds, Red Target, and Quest Completion",
-      description:
-        "A practical walkthrough for the first Scrap Mechanic Grow Lab in the A Farmers Side Hustle quest line. The guide covers preparation, vehicle Bed placement, expected completion time, the entrance elevator, central chamber navigation, ranged and close-range combat, dropped-bag recovery, the Net Block unlock, Schematic Boxes, the red-marked Hammer target, the Carrot Seed pickup, the final Large Chest, the plant-filled quest-completion area, later Grow Lab progression, and fixes for doors or objectives that fail to advance.",
+        "Scrap Mechanic First Grow Lab Walkthrough & Completion Guide",
+      description: metadataDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-07-28",
-      dateModified: "2026-07-28",
+      dateModified: "2026-08-04",
       about: [
         {
           "@type": "VideoGame",
@@ -248,6 +245,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Scrap Mechanic first Grow Lab",
+        },
+        {
+          "@type": "Thing",
+          name: "Scrap Mechanic Growlab 1",
         },
         {
           "@type": "Thing",
@@ -276,10 +277,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Scrap Mechanic Growlab champion",
-        },
-        {
-          "@type": "Thing",
-          name: "Scrap Mechanic dropped bag recovery",
         },
         {
           "@type": "Thing",
@@ -331,13 +328,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Cleared the First Scrap Mechanic Grow Lab"
-          description="I follow A Farmers Side Hustle through the elevator and central chamber, collect the Carrot Seeds, open the red-target door, and continue past the Large Chest until the quest actually completes."
+          title="Scrap Mechanic First Grow Lab Walkthrough"
+          description="Follow A Farmers Side Hustle through Grow Lab 1, open the red-target door, collect the Carrot Seeds, and continue beyond the Large Chest until the final quest banner appears."
           gameTitle="Scrap Mechanic"
           gameHref="/scrap-mechanic"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="July 28, 2026"
+          updatedAt="August 4, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
