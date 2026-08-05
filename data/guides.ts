@@ -131,6 +131,218 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Big Walk",
+    game: "Big Walk",
+    href: "/big-walk",
+    slug: "big-walk",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Co-op Puzzle Adventure",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Opening-to-Green-Key coverage",
+    description:
+      "Follow the Big Walk guide hub from the four-Head tutorial and drawbridge through the Red Tower, Map Room, puzzle solutions, five-Head Green route, multiplayer systems, and all 12 achievements.",
+    coverage: [
+      "First-session planning, player-count world versions, Host saves, proximity voice, Lost and Found, equipment priorities, Train Station staging, and return-or-leave decisions",
+      "Four opening Heads, glass enclosure, symbol room, simultaneous switches, blank key, four cutters, drawbridge activation, and key-fits-but-does-not-work fixes",
+      "Five-Head Red Tower route, three-Head return threshold, second blank key, five cutters, Map Room entry, completion flags, portable map, Compass, and Laser Pointers",
+      "Two-player solutions for the communication room, timed maze, basketball, projectile relay, five-pose platforms, Green Path order, counting symbols, and blindfold panels",
+      "Five-Head Green Tower route, Train Station Head cache, four-Head carrying setup, fifth-Head recovery, final receiver run, and blank Green Key",
+      "All 12 achievements in progression order, including Backpack, Map Room, hip item, Chairlift, Train, Tunnel, endings, Shiny, and complete completion",
+    ],
+    image:
+      "/images/big-walk/big-walk-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 24,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Big Walk Guide and Walkthrough Hub",
+        href: "/big-walk",
+        type: "Guide Hub",
+        description:
+          "Start here for the four-Head tutorial, Red Tower and Map Room route, puzzle solutions, five-Head Green route, multiplayer systems, and achievement checklist.",
+        image:
+          "/images/big-walk/big-walk-map-room-completion-flags.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Tutorial, drawbridge, Red Tower, Map Room, puzzle solutions, Green Tower, Host saves, multiplayer, and all 12 achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Big Walk Beginner Guide",
+        href: "/big-walk/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Choose the right player-count version, organize equipment, use Lost and Found, stage items at the Train Station, and know when to return Heads or end the session.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-player-count-version-selection.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 108,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Player-count versions, Host saves, communication checks, carry priority, Train Station staging, Backpack use, return thresholds, and Lost and Found",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Big Walk Tutorial and Drawbridge Walkthrough",
+        href: "/big-walk/tutorial-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Find all four tutorial Heads, solve the glass, symbol and switch rooms, shape the blank key through four cutters, and open the drawbridge.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-drawbridge-open.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 109,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Four tutorial Heads, glass enclosure, symbol communication, simultaneous switches, blank key, four cutters, drawbridge, and stuck-key fixes",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Big Walk Red Tower and Map Room Guide",
+        href: "/big-walk/how-to-unlock-map",
+        type: "Walkthrough",
+        description:
+          "Reach the Red Tower, return five Heads, follow all five key cutters, open the Map Room, and use completion flags, the portable map, Compass, and Laser Pointers.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-red-tower-blinking-light-route.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 110,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Red beacon route, five-slot receiver, three-Head return, second blank key, five cutters, Map Room, flags, portable map, Compass, and Laser Pointers",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Big Walk Puzzle Solutions",
+        href: "/big-walk/puzzles",
+        type: "Puzzle Help",
+        description:
+          "Solve the communication room, timed maze, basketball, projectile relay, five-pose, Green Path, counting-symbol, and blindfold puzzles.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-green-path-order-complete.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 111,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Communication room, timed maze, basketball, projectile relay, five poses, Green Path order, counting symbols, blindfold panels, and puzzle fixes",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "Big Walk Green Tower and Green Key Guide",
+        href: "/big-walk/green-tower-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Use the Train Station as a Head cache, collect five Green-route rewards, move four Heads in one load, recover the fifth, and claim the blank Green Key.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-green-tower-five-heads-complete.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 112,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Five-slot Green receiver, Train Station cache, puzzle selection, three-Head protection, four-Head load, fifth-Head recovery, and blank Green Key",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+      {
+        title: "Big Walk Achievements Guide",
+        href: "/big-walk/achievements",
+        type: "Achievements",
+        description:
+          "Track all 12 achievements in progression order and fix common unlock problems for the Backpack, Map Room, hip item, transport, endings, and Shiny.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-hip-belt-map.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 113,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "All 12 achievements, Backpack, Map Room, hip belt, Chairlift, Train, highest point, Tunnel, Wall, endings, Shiny, and complete finish",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "IDLE_DIRECTIVE",
     game: "IDLE_DIRECTIVE",
     href: "/idle-directive",

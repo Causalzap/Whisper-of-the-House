@@ -611,6 +611,13 @@ const paths = [
   '/routine-guide/chapter-4-adrift-stealth-walkthrough',
   '/routine-guide/chapter-5-endure-stealth-walkthrough',
   '/routine-guide/chapter-6-legacy-stealth-walkthrough',
+  '/big-walk',
+  '/big-walk/beginner-guide',
+  '/big-walk/tutorial-walkthrough',
+  '/big-walk/how-to-unlock-map',
+  '/big-walk/puzzles',
+  '/big-walk/green-tower-walkthrough',
+  '/big-walk/achievements',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -618,6 +625,14 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/big-walk': '2026-08-05',
+  '/big-walk/beginner-guide': '2026-08-05',
+  '/big-walk/tutorial-walkthrough': '2026-08-05',
+  '/big-walk/how-to-unlock-map': '2026-08-05',
+  '/big-walk/puzzles': '2026-08-05',
+  '/big-walk/green-tower-walkthrough': '2026-08-05',
+  '/big-walk/achievements': '2026-08-05',
+  
   '/what-game-should-i-play': '2026-08-04',
   '/scrap-mechanic/first-grow-lab-walkthrough': '2026-08-04',
   '/grim-dawn-fangs-of-asterkarn/ritual-of-cleansing-walkthrough':
@@ -627,6 +642,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/dragonsword-awakening/best-team-comps': '2026-08-04',
   '/tears-of-metal': '2026-08-04',
   '/tears-of-metal/characters-companion-unlocks': '2026-08-04',
+
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
