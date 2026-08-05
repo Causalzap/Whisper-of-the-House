@@ -218,6 +218,14 @@ const relatedLinks = [
     href: "/big-walk/green-tower-walkthrough",
     label: "Green Tower and Green Key Guide",
   },
+  {
+    href: "/big-walk/yellow-tower-tunnel",
+    label: "Yellow Tower and Tunnel Guide",
+  },
+  {
+    href: "/big-walk/blue-tower-train",
+    label: "Blue Tower and Train Guide",
+  },
 ];
 
 export default function Page() {

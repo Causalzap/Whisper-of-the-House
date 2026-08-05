@@ -618,6 +618,8 @@ const paths = [
   '/big-walk/puzzles',
   '/big-walk/green-tower-walkthrough',
   '/big-walk/achievements',
+  '/big-walk/blue-tower-train',
+  '/big-walk/yellow-tower-tunnel'
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -632,7 +634,9 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/big-walk/puzzles': '2026-08-05',
   '/big-walk/green-tower-walkthrough': '2026-08-05',
   '/big-walk/achievements': '2026-08-05',
-  
+  '/big-walk/blue-tower-train': '2026-08-05',
+  '/big-walk/yellow-tower-tunnel': '2026-08-05',
+
   '/what-game-should-i-play': '2026-08-04',
   '/scrap-mechanic/first-grow-lab-walkthrough': '2026-08-04',
   '/grim-dawn-fangs-of-asterkarn/ritual-of-cleansing-walkthrough':

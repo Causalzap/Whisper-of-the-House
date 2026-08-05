@@ -85,7 +85,7 @@ const jsonLd = {
       headline:
         "Big Walk Beginner Guide: Player Count, Communication, Equipment, Train Station Staging, Backpack Use, and Return Rules",
       description:
-        "This Big Walk beginner guide explains how to choose the correct player-count version, regroup and test proximity voice, use Lost and Found, finish the opening route without repeating the full tutorial walkthrough, prioritize Heads, Backpack, Walkie-talkies and lights, use the inactive Train Station as a staging point, return to the Red Tower after three Heads, decide when to wait for daylight or leave a puzzle, and end a session at a clear checkpoint.",
+        "This Big Walk beginner guide explains how to choose the correct player-count version, regroup and test proximity voice, assign multiplayer roles, use Flares without disrupting puzzle communication, recover after a disconnect, use Lost and Found, prioritize Heads and equipment, stage items at the Train Station, return to the Red Tower after three Heads, and end a session at a clear checkpoint.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-05",
@@ -106,6 +106,18 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Big Walk proximity voice",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk multiplayer roles",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Flare gun",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk disconnect recovery",
         },
         {
           "@type": "Thing",
@@ -159,6 +171,10 @@ const toc = [
   {
     id: "regroup-first",
     label: "Regroup and test communication",
+  },
+  {
+    id: "multiplayer-roles",
+    label: "Multiplayer roles and recovery",
   },
   {
     id: "finish-tutorial",
@@ -218,6 +234,14 @@ const relatedLinks = [
   {
     href: "/big-walk/green-tower-walkthrough",
     label: "Green Tower and Green Key Guide",
+  },
+  {
+    href: "/big-walk/yellow-tower-tunnel",
+    label: "Yellow Tower and Tunnel Guide",
+  },
+  {
+    href: "/big-walk/blue-tower-train",
+    label: "Blue Tower and Train Guide",
   },
   {
     href: "/big-walk/achievements",

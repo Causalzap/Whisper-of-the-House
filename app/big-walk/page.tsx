@@ -27,12 +27,20 @@ const relatedLinks = [
     label: "Red Tower and Map Room Guide",
   },
   {
-    href: "/big-walk/puzzles",
-    label: "Big Walk Puzzle Solutions",
-  },
-  {
     href: "/big-walk/green-tower-walkthrough",
     label: "Green Tower and Green Key Guide",
+  },
+  {
+    href: "/big-walk/yellow-tower-tunnel",
+    label: "Yellow Tower and Tunnel Guide",
+  },
+  {
+    href: "/big-walk/blue-tower-train",
+    label: "Blue Tower and Train Guide",
+  },
+  {
+    href: "/big-walk/puzzles",
+    label: "Big Walk Puzzle Solutions",
   },
   {
     href: "/big-walk/achievements",
@@ -42,19 +50,24 @@ const relatedLinks = [
 
 const faqEntities = [
   {
-    question: "Is there one fixed tower order in Big Walk?",
+    question: "Is there one fixed colored-tower order in Big Walk?",
     answer:
-      "The opening drawbridge and Red Tower provide the clearest early route. After the Map Room opens, the island offers more choice. This guide hub uses Green as the next collection route.",
+      "No. This guide uses Green, then Yellow, then Blue because the Yellow Tunnel shortens the route toward the Blue region.",
+  },
+  {
+    question: "Are Head rewards locked to a tower color?",
+    answer:
+      "No. Any completed physical Head can be inserted into the active receiver.",
   },
   {
     question: "Do I need to solve every puzzle near a tower?",
     answer:
-      "No. The Red and Green receivers each need five Heads while additional challenge sites remain available.",
+      "No. Each receiver requires a fixed number of Heads while additional challenge sites remain available.",
   },
   {
-    question: "Can I play Big Walk solo?",
+    question: "Does the Map Room activate the Tram, Tunnel, or Train?",
     answer:
-      "Big Walk progression is built for cooperative roles. The selectable world versions begin at two players.",
+      "No. The Map Room provides route and completion information. Each transport system has its own progression route.",
   },
   {
     question: "Can the group continue without the original Host?",
@@ -62,21 +75,16 @@ const faqEntities = [
       "The Host owns the save and world progress. The same Host needs to start that save again.",
   },
   {
-    question: "Does entering the Map Room activate the Train or Chairlift?",
+    question: "Can Big Walk be played solo?",
     answer:
-      "No. The Map Room provides navigation and completion information. The Train and Chairlift have their own progression routes.",
-  },
-  {
-    question: "What should I do immediately after crossing the drawbridge?",
-    answer:
-      "Use the Train Station as the first regrouping point, locate the red blinking beacon, and begin collecting five Heads for the Red Tower.",
+      "The selectable world versions begin at two players, and the progression is built around cooperative roles.",
   },
 ];
 
 export const metadata: Metadata = {
-  title: "Big Walk Guide: Walkthrough, Map, Puzzles & Green Key",
+  title: "Big Walk Guide: Towers, Map, Train, Tunnel & Puzzles",
   description:
-    "Follow Big Walk from the four-Head tutorial through the Red Tower, Map Room, puzzle routes, five Green Heads, Green Key, multiplayer, and achievements.",
+    "Follow Big Walk from the tutorial through Red, Green, Yellow and Blue Towers, the Map Room, Tunnel, Train, puzzles, multiplayer, and achievements.",
   alternates: {
     canonical: pageUrl,
   },
@@ -85,7 +93,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Big Walk Guide and Walkthrough Hub",
     description:
-      "Choose the right guide for the tutorial, Red Tower, Map Room, puzzle solutions, Green Tower, multiplayer progression, and all 12 achievements.",
+      "Choose the right guide for the tutorial, colored towers, Map Room, Yellow Tunnel, Blue Train, puzzle solutions, multiplayer, and achievements.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -100,7 +108,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Big Walk Guide and Walkthrough Hub",
     description:
-      "Start with the tutorial, unlock the Map Room, solve blocked puzzles, complete the Green receiver, and track all 12 achievements.",
+      "Complete the tutorial, unlock the Map Room, finish the colored towers, open the Tunnel, activate the Train, and track all achievements.",
     images: [socialImageUrl],
   },
 };
@@ -134,9 +142,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Big Walk Guide and Walkthrough Hub: Tutorial, Red Tower, Map Room, Puzzles, Green Key, Multiplayer, and Achievements",
+        "Big Walk Guide and Walkthrough Hub: Towers, Map Room, Yellow Tunnel, Blue Train, Puzzles, Multiplayer, and Achievements",
       description:
-        "This Big Walk guide hub connects the four-Head tutorial and drawbridge route, five-Head Red Tower and Map Room route, individual puzzle solutions, five-Head Green Tower route, multiplayer and Host-save guidance, and all 12 achievements.",
+        "This Big Walk guide hub connects the four-Head tutorial, Red Tower and Map Room, Green receiver route, Yellow Tower and Tunnel, Blue Tower and Train, puzzle solutions, multiplayer planning, reconnect recovery, and all 12 achievements.",
       image: [socialImageUrl],
       inLanguage: "en",
       datePublished: "2026-08-05",
@@ -152,10 +160,6 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk tutorial",
-        },
-        {
-          "@type": "Thing",
           name: "Big Walk Red Tower",
         },
         {
@@ -164,15 +168,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk puzzle solutions",
-        },
-        {
-          "@type": "Thing",
           name: "Big Walk Green Tower",
         },
         {
           "@type": "Thing",
-          name: "Big Walk Green Key",
+          name: "Big Walk Yellow Tower",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Yellow Tunnel",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Blue Tower",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Train",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk puzzle solutions",
         },
         {
           "@type": "Thing",
@@ -236,7 +252,7 @@ const toc = [
   },
   {
     id: "progression",
-    label: "Progression and receiver counts",
+    label: "Receiver counts and Heads",
   },
   {
     id: "opening-route",
@@ -255,8 +271,16 @@ const toc = [
     label: "Green Tower route",
   },
   {
+    id: "yellow-route",
+    label: "Yellow Tower and Tunnel",
+  },
+  {
+    id: "blue-route",
+    label: "Blue Tower and Train",
+  },
+  {
     id: "multiplayer",
-    label: "Multiplayer and Host saves",
+    label: "Multiplayer roles and recovery",
   },
   {
     id: "achievements",
@@ -285,7 +309,7 @@ export default function Page() {
 
         <GuideArticlePage
           title="Big Walk Guide and Walkthrough Hub"
-          description="Follow the early progression route from the four-Head tutorial through the Red Tower, Map Room, Green receiver, multiplayer systems, and all 12 achievements."
+          description="Follow the practical route from the four-Head tutorial through the Red, Green, Yellow and Blue Towers, Map Room, Tunnel, Train, multiplayer systems, and all 12 achievements."
           gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"

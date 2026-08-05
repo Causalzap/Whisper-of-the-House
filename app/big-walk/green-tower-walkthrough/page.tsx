@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import BigWalkGreenTowerWalkthroughContent from "@/data/big-walk/green-tower-walkthrough.mdx";
+import BigWalkGreenTowerContent from "@/data/big-walk/green-tower-walkthrough.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/big-walk`;
@@ -19,33 +19,33 @@ const imageUrls = [
 ];
 
 export const metadata: Metadata = {
-  title: "Big Walk Green Tower Guide: 5 Heads & Green Key",
+  title: "Big Walk Green Tower Guide: Key, Chairlift & Big Sit",
   description:
-    "Collect five Heads, use the Train Station as a cache, move four Heads in one load, recover the fifth, and unlock the blank Green Key in Big Walk.",
+    "Return five Green Heads, shape the key through five cutters, activate the Chairlift beside Green Tower, and ride it to unlock Big Sit.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Big Walk Green Tower and Green Key Guide",
+    title: "Big Walk Green Tower, Key and Chairlift Guide",
     description:
-      "Plan the five-Head Green route, protect rewards at the Train Station, organize the final carry, and complete the Green receiver.",
+      "Use the Train Station as a Head cache, finish the Green key cutters, activate the Chairlift, and unlock Big Sit.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[3],
         width: 902,
         height: 570,
-        alt: "Big Walk Green Tower receiver completed with all five Heads",
+        alt: "Big Walk Green Tower receiver completed with five Heads",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Big Walk Green Tower Guide",
+    title: "Big Walk Green Tower and Chairlift Guide",
     description:
-      "Use the Train Station as a Head cache, carry four rewards in one load, recover the fifth, and claim the blank Green Key.",
+      "Collect five Heads, finish the Green key route, activate the Chairlift, and unlock Big Sit.",
     images: [imageUrls[3]],
   },
 };
@@ -72,7 +72,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Green Tower Walkthrough",
+          name: "Green Tower and Chairlift Guide",
           item: pageUrl,
         },
       ],
@@ -85,9 +85,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Big Walk Green Tower Walkthrough: Five Heads, Train Station Cache, Final Carry, and Green Key",
+        "Big Walk Green Tower, Green Key and Chairlift Guide: Five Heads, Five Cutters, Big Sit, and Big Climb Access",
       description:
-        "This Big Walk Green Tower walkthrough explains how to locate the five-slot Green receiver, use the Train Station as a Head cache, choose five nearby rewards, protect the first three Heads, finish the last two split-role challenges, carry four Heads in one two-player load, recover the fifth cached Head, return directly to Green, complete the receiver, and collect the blank Green Key.",
+        "This Big Walk Green Tower walkthrough explains how to use the inactive Train Station as a Head cache, collect and return five physical Heads, assign the blank Green Key, finish all five cutters, distinguish the Train Station from the Chairlift station beside Green Tower, activate the lift, board a moving chair for Big Sit, and use the upper route toward Big Climb.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-05",
@@ -107,23 +107,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Big Walk Green key cutters",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Chairlift",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Big Sit achievement",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Big Climb achievement",
+        },
+        {
+          "@type": "Thing",
           name: "Big Walk five Heads",
-        },
-        {
-          "@type": "Thing",
-          name: "Big Walk Train Station cache",
-        },
-        {
-          "@type": "Thing",
-          name: "Big Walk Head carrying",
-        },
-        {
-          "@type": "Thing",
-          name: "Big Walk Green receiver",
-        },
-        {
-          "@type": "Thing",
-          name: "Big Walk Backpack",
         },
       ],
       isPartOf: {
@@ -164,7 +164,7 @@ const toc = [
   },
   {
     id: "finish-last-two",
-    label: "Finish the last two challenges",
+    label: "Finish the last two",
   },
   {
     id: "carry-four-heads",
@@ -183,12 +183,32 @@ const toc = [
     label: "Get the Green Key",
   },
   {
+    id: "green-key-cutters",
+    label: "Finish all five cutters",
+  },
+  {
+    id: "find-chairlift-station",
+    label: "Find the Chairlift station",
+  },
+  {
+    id: "activate-chairlift",
+    label: "Activate the Chairlift",
+  },
+  {
+    id: "unlock-big-sit",
+    label: "Unlock Big Sit",
+  },
+  {
+    id: "big-climb-route",
+    label: "Start the Big Climb route",
+  },
+  {
     id: "session-checkpoint",
-    label: "Use the key as a checkpoint",
+    label: "Green route checkpoint",
   },
   {
     id: "stuck",
-    label: "Green Tower fixes",
+    label: "Green route fixes",
   },
   {
     id: "faq",
@@ -202,16 +222,16 @@ const relatedLinks = [
     label: "Big Walk Guide Hub",
   },
   {
-    href: "/big-walk/beginner-guide",
-    label: "Big Walk Beginner Guide",
-  },
-  {
-    href: "/big-walk/tutorial-walkthrough",
-    label: "Tutorial and Drawbridge Walkthrough",
-  },
-  {
     href: "/big-walk/how-to-unlock-map",
-    label: "How to Unlock the Map Room",
+    label: "Red Tower and Map Room Guide",
+  },
+  {
+    href: "/big-walk/yellow-tower-tunnel",
+    label: "Yellow Tower and Tunnel Guide",
+  },
+  {
+    href: "/big-walk/blue-tower-train",
+    label: "Blue Tower and Train Guide",
   },
   {
     href: "/big-walk/puzzles",
@@ -235,8 +255,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Big Walk Green Tower and Green Key Guide"
-          description="Collect five Heads, use the Train Station as a cache, organize the final carry, complete the Green receiver, and claim the blank Green Key."
+          title="Big Walk Green Tower, Green Key and Chairlift Guide"
+          description="Use the Train Station as a five-Head cache, finish every Green key cutter, activate the Chairlift beside Green Tower, and ride it to unlock Big Sit."
           gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"
@@ -245,7 +265,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BigWalkGreenTowerWalkthroughContent />
+          <BigWalkGreenTowerContent />
         </GuideArticlePage>
       </main>
 

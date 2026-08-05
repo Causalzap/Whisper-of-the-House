@@ -212,6 +212,14 @@ const relatedLinks = [
     label: "Tutorial and Drawbridge Walkthrough",
   },
   {
+    href: "/big-walk/yellow-tower-tunnel",
+    label: "Yellow Tower and Tunnel Guide",
+  },
+  {
+    href: "/big-walk/blue-tower-train",
+    label: "Blue Tower and Train Guide",
+  },
+  {
     href: "/big-walk/how-to-unlock-map",
     label: "How to Unlock the Map Room",
   },
