@@ -619,6 +619,7 @@ const paths = [
   '/big-walk/green-tower-walkthrough',
   '/big-walk/achievements',
   '/big-walk/blue-tower-train',
+  '/big-walk/ending-guide',
   '/big-walk/yellow-tower-tunnel'
 ] as const;
 
@@ -627,15 +628,16 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-  '/big-walk': '2026-08-05',
+  '/big-walk': '2026-08-06',
   '/big-walk/beginner-guide': '2026-08-05',
   '/big-walk/tutorial-walkthrough': '2026-08-05',
   '/big-walk/how-to-unlock-map': '2026-08-05',
-  '/big-walk/puzzles': '2026-08-05',
+  '/big-walk/puzzles': '2026-08-06',
   '/big-walk/green-tower-walkthrough': '2026-08-05',
-  '/big-walk/achievements': '2026-08-05',
-  '/big-walk/blue-tower-train': '2026-08-05',
+  '/big-walk/achievements': '2026-08-06',
+  '/big-walk/blue-tower-train': '2026-08-06',
   '/big-walk/yellow-tower-tunnel': '2026-08-05',
+  '/big-walk/ending-guide': '2026-08-06',
 
   '/what-game-should-i-play': '2026-08-04',
   '/scrap-mechanic/first-grow-lab-walkthrough': '2026-08-04',

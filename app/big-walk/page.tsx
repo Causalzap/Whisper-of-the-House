@@ -46,6 +46,10 @@ const relatedLinks = [
     href: "/big-walk/achievements",
     label: "All 12 Big Walk Achievements",
   },
+  {
+    href: "/big-walk/ending-guide",
+    label: "Big Walk Endings and True Ending Guide",
+  },
 ];
 
 const faqEntities = [
@@ -277,6 +281,10 @@ const toc = [
   {
     id: "blue-route",
     label: "Blue Tower and Train",
+  },
+  {
+    id: "late-game-endings",
+    label: "Wall and endings",
   },
   {
     id: "multiplayer",

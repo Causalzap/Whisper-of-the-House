@@ -226,6 +226,10 @@ const relatedLinks = [
     href: "/big-walk/achievements",
     label: "Big Walk Achievements Checklist",
   },
+  {
+    href: "/big-walk/ending-guide",
+    label: "Big Walk Endings and True Ending Guide",
+  },
 ];
 
 export default function Page() {

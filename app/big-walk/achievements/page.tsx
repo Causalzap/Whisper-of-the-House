@@ -226,6 +226,10 @@ const relatedLinks = [
     href: "/big-walk/blue-tower-train",
     label: "Blue Tower and Train Guide",
   },
+  {
+    href: "/big-walk/ending-guide",
+    label: "Big Walk Endings and True Ending Guide",
+  },
 ];
 
 export default function Page() {

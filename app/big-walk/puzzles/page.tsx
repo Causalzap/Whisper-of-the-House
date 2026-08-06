@@ -21,10 +21,10 @@ const imageUrls = [
 ];
 
 export const metadata: Metadata = {
-  title: "Big Walk Puzzle Solutions: Path, Counting & Blindfold",
+  title: "Big Walk Puzzle Solutions: Counting, Blindfold & Timed Puzzles",
   description:
-    "Solve Big Walk's timed maze, basketball, projectile, five-pose, green path, counting-symbol, and blindfold panel puzzles with two-player steps.",
-  alternates: {
+  "Solve Big Walk's communication room, timed maze, basketball, projectile relay, five-pose, Green Path, counting, and blindfold puzzles.",
+    alternates: {
     canonical: pageUrl,
   },
   openGraph: {
@@ -189,6 +189,10 @@ const toc = [
     label: "Blindfold panel puzzle",
   },
   {
+    id: "puzzles-required-for-big-game",
+    label: "Puzzles required for Big Game",
+  },
+  {
     id: "stuck",
     label: "Puzzle fixes",
   },
@@ -230,6 +234,10 @@ const relatedLinks = [
   {
     href: "/big-walk/achievements",
     label: "Big Walk Achievements Checklist",
+  },
+  {
+    href: "/big-walk/ending-guide",
+    label: "Big Walk Endings and True Ending Guide",
   },
 ];
 

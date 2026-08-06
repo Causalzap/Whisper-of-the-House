@@ -141,19 +141,19 @@ export const guideClusters: GuideCluster[] = [
     archiveCategory: "Strategy, simulation, puzzle & discovery",
     label: "Co-op Puzzle Adventure",
     eyebrow: "Spotlight Hub",
-    hubStatus: "Opening-to-Green-Key coverage",
+    hubStatus: "Tutorial-to-Endings coverage",
     description:
-      "Follow the Big Walk guide hub from the four-Head tutorial and drawbridge through the Red Tower, Map Room, puzzle solutions, five-Head Green route, multiplayer systems, and all 12 achievements.",
+      "Follow the Big Walk guide hub from the opening tutorial and Map Room through the Green Chairlift, Yellow Tunnel, Blue Train, puzzle solutions, achievements, Big Goodbye, and the Big Game ending.",
     coverage: [
       "First-session planning, player-count world versions, Host saves, proximity voice, Lost and Found, equipment priorities, Train Station staging, and return-or-leave decisions",
       "Four opening Heads, glass enclosure, symbol room, simultaneous switches, blank key, four cutters, drawbridge activation, and key-fits-but-does-not-work fixes",
-      "Five-Head Red Tower route, three-Head return threshold, second blank key, five cutters, Map Room entry, completion flags, portable map, Compass, and Laser Pointers",
-      "Two-player solutions for the communication room, timed maze, basketball, projectile relay, five-pose platforms, Green Path order, counting symbols, and blindfold panels",
-      "Five-Head Green Tower route, Train Station Head cache, four-Head carrying setup, fifth-Head recovery, final receiver run, and blank Green Key",
-      "All 12 achievements in progression order, including Backpack, Map Room, hip item, Chairlift, Train, Tunnel, endings, Shiny, and complete completion",
+      "Five-Head Red Tower route, second blank key, five cutters, Map Room entry, completion flags, portable map, Compass, and Laser Pointers",
+      "Puzzle solutions for the communication room, timed maze, basketball, projectile relay, five-pose platforms, Green Path order, counting symbols, and blindfold panels",
+      "Five-Head Green Tower route, Train Station Head cache, Green Key cutters, Chairlift activation, Big Sit, and the upper route toward Yellow",
+      "Yellow Tower and Tunnel progression, Blue Tower and Train progression, Big Tunnel, Big Ride, and late-game route preparation",
+      "Big Goodbye, seven purple post-game puzzles, remaining normal puzzle cleanup, the final key, hidden completion room, Big Game, and all 12 achievements",
     ],
-    image:
-      "/images/big-walk/big-walk-hub.webp",
+    image: "/images/big-walk/big-walk-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
@@ -169,7 +169,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/big-walk",
         type: "Guide Hub",
         description:
-          "Start here for the four-Head tutorial, Red Tower and Map Room route, puzzle solutions, five-Head Green route, multiplayer systems, and achievement checklist.",
+          "Start here for the tutorial, Red Tower and Map Room, Green Chairlift, Yellow Tunnel, Blue Train, puzzle solutions, achievements, and both Big Walk endings.",
         image:
           "/images/big-walk/big-walk-map-room-completion-flags.webp",
         imageFit: "cover",
@@ -177,7 +177,7 @@ export const guideClusters: GuideCluster[] = [
         imagePadding: false,
         home: {
           spotlightMeta:
-            "Tutorial, drawbridge, Red Tower, Map Room, puzzle solutions, Green Tower, Host saves, multiplayer, and all 12 achievements",
+            "Tutorial, drawbridge, Red Tower, Map Room, Green Chairlift, Yellow Tunnel, Blue Train, puzzle solutions, achievements, Big Goodbye, and Big Game",
         },
         archive: {
           showInCollections: true,
@@ -215,7 +215,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/big-walk/tutorial-walkthrough",
         type: "Walkthrough",
         description:
-          "Find all four tutorial Heads, solve the glass, symbol and switch rooms, shape the blank key through four cutters, and open the drawbridge.",
+          "Find all four tutorial Heads, solve the glass, symbol, and switch rooms, shape the blank key through four cutters, and open the drawbridge.",
         date: "Updated recently",
         image:
           "/images/big-walk/big-walk-drawbridge-open.webp",
@@ -241,7 +241,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/big-walk/how-to-unlock-map",
         type: "Walkthrough",
         description:
-          "Reach the Red Tower, return five Heads, follow all five key cutters, open the Map Room, and use completion flags, the portable map, Compass, and Laser Pointers.",
+          "Reach Red Tower, return five Heads, follow all five key cutters, open the Map Room, and use completion flags, the portable map, Compass, and Laser Pointers.",
         date: "Updated recently",
         image:
           "/images/big-walk/big-walk-red-tower-blinking-light-route.webp",
@@ -255,7 +255,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 3,
           spotlightMeta:
-            "Red beacon route, five-slot receiver, three-Head return, second blank key, five cutters, Map Room, flags, portable map, Compass, and Laser Pointers",
+            "Red beacon route, five-slot receiver, Head returns, second blank key, five cutters, Map Room, flags, portable map, Compass, and Laser Pointers",
         },
         archive: {
           showInCollections: true,
@@ -289,11 +289,11 @@ export const guideClusters: GuideCluster[] = [
         },
       },
       {
-        title: "Big Walk Green Tower and Green Key Guide",
+        title: "Big Walk Green Tower and Chairlift Guide",
         href: "/big-walk/green-tower-walkthrough",
         type: "Walkthrough",
         description:
-          "Use the Train Station as a Head cache, collect five Green-route rewards, move four Heads in one load, recover the fifth, and claim the blank Green Key.",
+          "Use the Train Station as a Head cache, complete the five-Head Green route, finish the Green Key cutters, activate the Chairlift, and unlock Big Sit.",
         date: "Updated recently",
         image:
           "/images/big-walk/big-walk-green-tower-five-heads-complete.webp",
@@ -307,7 +307,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 5,
           spotlightMeta:
-            "Five-slot Green receiver, Train Station cache, puzzle selection, three-Head protection, four-Head load, fifth-Head recovery, and blank Green Key",
+            "Green receiver, Train Station cache, carrying plan, Green Key cutters, Chairlift activation, Big Sit, and the upper route toward Yellow",
         },
         archive: {
           showInCollections: true,
@@ -319,7 +319,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/big-walk/achievements",
         type: "Achievements",
         description:
-          "Track all 12 achievements in progression order and fix common unlock problems for the Backpack, Map Room, hip item, transport, endings, and Shiny.",
+          "Track all 12 achievements in progression order and fix unlock problems for equipment, transport, Big Wall, Big Goodbye, Big Game, and Shiny.",
         date: "Updated recently",
         image:
           "/images/big-walk/big-walk-hip-belt-map.webp",
@@ -333,11 +333,89 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 6,
           spotlightMeta:
-            "All 12 achievements, Backpack, Map Room, hip belt, Chairlift, Train, highest point, Tunnel, Wall, endings, Shiny, and complete finish",
+            "All 12 achievements, Backpack, Map Room, hip belt, Chairlift, highest point, Tunnel, Train, Wall, both endings, Shiny, and complete finish",
         },
         archive: {
           showInCollections: true,
           order: 7,
+        },
+      },
+      {
+        title: "Big Walk Yellow Tower and Tunnel Guide",
+        href: "/big-walk/yellow-tower-tunnel",
+        type: "Walkthrough",
+        description:
+          "Reach Yellow from the Green Chairlift route, return five Heads, solve the Yellow challenges, finish all five key cutters, open the Tunnel, and unlock Big Tunnel.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-yellow-tunnel-door-open.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 114,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Green Chairlift approach, Yellow receiver, button and signal puzzles, five key cutters, underground Tunnel, Big Tunnel, and the route toward Blue",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+      {
+        title: "Big Walk Blue Tower and Train Guide",
+        href: "/big-walk/blue-tower-train",
+        type: "Walkthrough",
+        description:
+          "Complete the Blue Tower route, return five Heads, find the easy-to-miss key cutter, activate the Train loop, and unlock Big Ride.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-blue-train-activated.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 115,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Blue receiver, puzzle roles, five key cutters, cutter under the rock, Train activation, moving carriage, Big Ride, and late-game handoff",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+      {
+        title: "Big Walk Endings Guide",
+        href: "/big-walk/ending-guide",
+        type: "Endings",
+        description:
+          "Unlock Big Goodbye, continue on the same save, complete every remaining puzzle, collect the final key, and reach the Big Game ending.",
+        date: "Updated recently",
+        image:
+          "/images/big-walk/big-walk-big-game-completion-message.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 116,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Final black sphere, Wave Goodbye, Big Goodbye, seven purple puzzles, full puzzle cleanup, final key, hidden room, and Big Game",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
         },
       },
     ],
