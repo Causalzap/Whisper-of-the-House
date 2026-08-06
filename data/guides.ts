@@ -131,6 +131,245 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Fields of Mistria",
+    game: "Fields of Mistria",
+    href: "/fields-of-mistria",
+    slug: "fields-of-mistria",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "Cozy, crafting, survival & systems",
+    label: "Cozy Farming RPG",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Mines-to-Marriage coverage",
+    description:
+      "Follow the Fields of Mistria 1.0 guide hub from Stone Star and the Mines through the Water Seal, Deep Woods, Saturday Market Plaza, Bell Tower, marriage, and all 69 achievements.",
+    coverage: [
+      "Early progression from the Museum meeting and Renown farming through Stone Star, the Mines reopening, first Bag Upgrade, ladder access, and the Floor 5 elevator checkpoint",
+      "Floor 20 Water Tablet route, Eiland and Juniper translation, Ruby, Stone Loach, Lantern Moth, Upper Mines Mushroom, active-inventory checks, and Summon Rain",
+      "Fire Seal and Dragon's Breath progression, Eastern Road barrier, Deep Woods navigation, Caldarus temple, shrine teleport, Hardwood, and the Deep Woods Forage Set",
+      "Gold Star Plaza expansion, all five construction materials, Voidite and monster-drop farming routes, Donation Box hand-in, Stillwell missions, and Zorel's music shop",
+      "Bell Tower repair route, Dragon-Forged Core and Fang recipes, Ancient Firefly, Void Herbs, Void Stone, Monster Cores, Crystal Resonator, and bell selection",
+      "Dating and marriage from Eight Hearts and 10 Hearts through Elsie's Engagement Ring recipe, proposal confirmation, wedding date, planning choices, outfits, ceremony, and I do",
+      "All 69 achievements in one-save order, including Town Ranks, seals, repairs, relationships, skills, economy, Museum sets, Stillwell missions, marriage, and family goals",
+    ],
+    image:
+      "/images/fields-of-mistria/fields-of-mistria-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 25,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Fields of Mistria Guide Hub",
+        href: "/fields-of-mistria",
+        type: "Guide Hub",
+        description:
+          "Start here for the progression route from Stone Star and the Mines through seals, Deep Woods, Saturday Market Plaza, Bell Tower, marriage, and achievement cleanup.",
+        image:
+          "/images/fields-of-mistria/fields-of-mistria-saturday-market-plaza-complete.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Stone Star, Mines, Water Seal, later seals, Deep Woods, Saturday Market Plaza, Bell Tower, marriage, and all 69 achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "How to Unlock the Mines in Fields of Mistria",
+        href: "/fields-of-mistria/how-to-unlock-mines",
+        type: "Walkthrough",
+        description:
+          "Reach Stone Star, trigger the Mine reopening meeting, prepare the first descent, enter by ladder, and secure the Floor 5 elevator checkpoint.",
+        date: "Updated recently",
+        image:
+          "/images/fields-of-mistria/fields-of-mistria-mines-reopening.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 117,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Museum meeting, Renown, Stone Star, reopening letter, Mine entrance, Bag Upgrade, collapsed shaft, ladder access, and Floor 5",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Fields of Mistria Water Seal Guide",
+        href: "/fields-of-mistria/water-seal-guide",
+        type: "Puzzle Help",
+        description:
+          "Find the Floor 20 Water Tablet, complete Eiland and Juniper's translation route, collect all four offerings, open the seal, and unlock Summon Rain.",
+        date: "Updated recently",
+        image:
+          "/images/fields-of-mistria/fields-of-mistria-water-seal-opened.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 118,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Floor 20 tablet, Water Tablet Rubbing, Eiland, Juniper, Ruby, Stone Loach, Lantern Moth, Upper Mines Mushroom, altar, and Summon Rain",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "How to Unlock the Deep Woods in Fields of Mistria",
+        href: "/fields-of-mistria/how-to-unlock-deep-woods",
+        type: "Walkthrough",
+        description:
+          "Complete the Fire Seal, unlock Dragon's Breath, burn the Eastern Road barrier, follow the forest route to Caldarus, and activate the Deep Woods teleport.",
+        date: "Updated recently",
+        image:
+          "/images/fields-of-mistria/fields-of-mistria-deep-woods-eastern-road-route.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 119,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Fire Seal, Dragon's Breath, Eastern Road entrance, magical barrier, lower-right route, grave-marker landmark, Caldarus, teleport, and Hardwood",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Fields of Mistria Saturday Market Plaza Guide",
+        href: "/fields-of-mistria/saturday-market-plaza",
+        type: "Guide",
+        description:
+          "Reach Gold Star, gather all five Plaza materials, use the tested Mine farming routes, report to Adeline, and unlock Stillwell and Zorel.",
+        date: "Updated recently",
+        image:
+          "/images/fields-of-mistria/fields-of-mistria-saturday-market-plaza-complete.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 120,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Gold Star, Nora's letter, Manor House meeting, Voidite, Refined Stone, Mistril Ingots, Monster Cores, Monster Blocks, Adeline, Stillwell, and Zorel",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "Fields of Mistria Bell Tower Guide",
+        href: "/fields-of-mistria/bell-tower-guide",
+        type: "Walkthrough",
+        description:
+          "Start Zorel's Bell Tower quest, craft the Dragon-Forged Core and Fang, finish the Donation Box, select a bell sound, and unlock Ringing Ovation.",
+        date: "Updated recently",
+        image:
+          "/images/fields-of-mistria/fields-of-mistria-bell-tower-repaired.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 121,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Zorel's letter, Adeline and Landen, Refined Stone, Hardwood, Dragon-Forged Core, Dragon-Forged Fang, Ancient Firefly, Void materials, and bell sounds",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+      {
+        title: "Fields of Mistria Marriage Guide",
+        href: "/fields-of-mistria/marriage-guide",
+        type: "Guide",
+        description:
+          "Reach 10 Hearts while Dating, receive Elsie's Engagement Ring recipe, propose, choose a wedding date, complete the planning conversations, and get married.",
+        date: "Updated recently",
+        image:
+          "/images/fields-of-mistria/fields-of-mistria-marriage-ceremony.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 122,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Dating, 10 Hearts, Elsie's recipe, Engagement Ring, proposal confirmation, other relationships, wedding date, flowers, cake, meal, outfits, ceremony, and I do",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+      {
+        title: "Fields of Mistria Achievements Guide",
+        href: "/fields-of-mistria/achievements-guide",
+        type: "Achievements",
+        description:
+          "Track all 69 achievements with a one-save roadmap for Town Ranks, seals, repairs, relationships, skills, economy, Museum sets, Stillwell, marriage, and family goals.",
+        date: "Updated recently",
+        image:
+          "/images/fields-of-mistria/fields-of-mistria-stone-star-rank.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 123,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "All 69 achievements, old-save unlocks, Town Ranks, seals, repairs, relationships, marriage, skills, money, ranching, Museum sets, Stillwell, Parent, and Time Flies",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+    ],
+  },
+  {
     title: "Big Walk",
     game: "Big Walk",
     href: "/big-walk",

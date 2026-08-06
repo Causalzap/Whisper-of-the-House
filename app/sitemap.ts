@@ -620,7 +620,16 @@ const paths = [
   '/big-walk/achievements',
   '/big-walk/blue-tower-train',
   '/big-walk/ending-guide',
-  '/big-walk/yellow-tower-tunnel'
+  '/big-walk/yellow-tower-tunnel',
+
+  '/fields-of-mistria',
+  '/fields-of-mistria/achievements-guide',
+  '/fields-of-mistria/bell-tower-guide',
+  '/fields-of-mistria/marriage-guide',
+  '/fields-of-mistria/how-to-unlock-mines',
+  '/fields-of-mistria/saturday-market-plaza',
+  '/fields-of-mistria/water-seal-guide',
+  '/fields-of-mistria/how-to-unlock-deep-woods',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -628,6 +637,15 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/fields-of-mistria': '2026-08-06',
+  '/fields-of-mistria/achievements-guide': '2026-08-06',
+  '/fields-of-mistria/bell-tower-guide': '2026-08-06',
+  '/fields-of-mistria/marriage-guide': '2026-08-06',
+  '/fields-of-mistria/how-to-unlock-mines': '2026-08-06',
+  '/fields-of-mistria/saturday-market-plaza': '2026-08-06',
+  '/fields-of-mistria/water-seal-guide': '2026-08-06',
+  '/fields-of-mistria/how-to-unlock-deep-woods': '2026-08-06',
+
   '/big-walk': '2026-08-06',
   '/big-walk/beginner-guide': '2026-08-05',
   '/big-walk/tutorial-walkthrough': '2026-08-05',
