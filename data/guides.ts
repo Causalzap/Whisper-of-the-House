@@ -131,6 +131,216 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Iron Nest",
+    game: "Iron Nest",
+    href: "/iron-nest",
+    slug: "iron-nest",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Heavy Artillery Simulator",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Calibration-to-Gorge coverage",
+    description:
+      "Follow the Iron Nest guide hub from the firing loop and Calibration Fire through Fire and Light, Liberation, Counter-Battery, Iron Road, Siege of Cartagena, and The Gorge.",
+    coverage: [
+      "Core operating loop from teleprinter orders and map plotting through bearing, range, powder charges, elevation, loading, turret rotation, firing, confirmation, and bad-shot recovery",
+      "Calibration Fire fundamentals, direct coordinates, map cleanup, shell roles, requisition decisions, reconnaissance, Emergency Move, Position Reports, and left-right gun handling",
+      "Fire and Light spotter triangulation, two follow-up hostile elements, Star Shell-only palace illumination, the 3.28 km observer correction, and Starburst confirmed",
+      "Liberation repositioning, the first three infantry targets, P4 reconnaissance, the Underground AP Required supply cache, final urban targets, friendly safety, and minimum-assets decisions",
+      "Counter-Battery pre-calculation and CBT extensions, plus Iron Road train waypoints, shell flight timing, two AP emplacements, optional targets, and War Horn timing",
+      "Siege of Cartagena chained installations, coastal batteries, Emergency Move recovery, eight-unit threshold and smoke breakout, followed by The Gorge manual observed-fire route",
+    ],
+    image: "/images/iron-nest/iron-nest-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 26,
+      footerFeatured: true,
+    },
+    pages: [
+      {
+        title: "Iron Nest Guide and Walkthrough Hub",
+        href: "/iron-nest",
+        type: "Guide Hub",
+        description:
+          "Learn the shared firing loop, map tools, shell roles, requisition, reconnaissance, dual-gun controls, troubleshooting, and six campaign mission routes.",
+        image: "/images/iron-nest/iron-nest-map-tools-overview.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Calibration Fire, teleprinter orders, map tools, firing solutions, shells, requisition, reconnaissance, dual guns, troubleshooting, and six mission walkthroughs",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+      {
+        title: "Iron Nest Fire and Light Walkthrough",
+        href: "/iron-nest/fire-and-light-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Triangulate the opening target, clear the follow-up hostile pair, switch to Star Shells, apply the 3.28 km correction, and confirm the palace starburst.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-fire-and-light-star-shell-correction.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 124,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Two spotters, opening H shot, follow-up hostiles, palace illumination, first Star Shell, 3.28 km correction, corrected solution, and Starburst confirmed",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+      {
+        title: "Iron Nest Liberation Walkthrough",
+        href: "/iron-nest/liberation-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Replace the old firing origin, destroy five infantry targets, complete the P4 recon, clear the AP-only cache, protect friendlies, and preserve assets.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-liberation-underground-cache-ap-solution.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 125,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Repositioned Nest, three opening infantry, P4 recon, underground AP cache, final two infantry, danger-close shell choice, and minimum assets",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+      {
+        title: "Iron Nest Counter-Battery Walkthrough",
+        href: "/iron-nest/counter-battery-mission",
+        type: "Walkthrough",
+        description:
+          "Prepare three artillery solutions before the first impact starts the CBT, extend the timer, find the fresh battery, and clear every remaining hostile.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-counter-battery-timer-extended.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 126,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Three opening artillery positions, two-gun preload, first-impact timer trigger, CBT extensions, four remaining hostiles, fresh recon, and sector clear",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+      {
+        title: "Iron Nest Iron Road Walkthrough",
+        href: "/iron-nest/iron-road-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Build the train waypoints, subtract shell flight time, destroy both AP emplacements, protect the allied route, and sound the War Horn safely.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-iron-road-train-firing-solution.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 127,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Train timetable, 6 km and 4 km and 2 km waypoints, shell flight time, two AP emplacements, optional targets, allied route, and War Horn",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+      {
+        title: "Iron Nest Siege of Cartagena Walkthrough",
+        href: "/iron-nest/siege-of-cartagena-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Solve the chained installations, destroy two coastal batteries, recover after Emergency Move, clear eight units, and complete both smoke requests.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-siege-of-cartagena-breakout-success.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 128,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Signal station, assembly area, field command, coastal batteries, Emergency Move, two Position Reports, eight units, War Horn, smoke, and breakout",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+      {
+        title: "Iron Nest The Gorge Walkthrough",
+        href: "/iron-nest/the-gorge-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Restart the damaged Nest, scout east from K4 9:0, correct manual shots without the calculator, protect the convoy, and stop when the pass is clear.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-the-gorge-pass-clear.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 129,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Manual engine restart, unavailable ballistic computer, K4 9:0, eastbound recon, ranging shots, impact correction, convoy safety, and pass clear",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Fields of Mistria",
     game: "Fields of Mistria",
     href: "/fields-of-mistria",
@@ -5618,33 +5828,6 @@ export const guideClusters: GuideCluster[] = [
         "archive": {
           "showInCollections": true,
           "order": 4
-        }
-      }
-    ]
-  },
-  {
-    "title": "Iron Nest",
-    "game": "Iron Nest",
-    "href": "/iron-nest",
-    "slug": "iron-nest",
-    "kind": "game",
-    "status": "archive",
-    "accent": "amber",
-    "archiveCategory": "Strategy, simulation, puzzle & discovery",
-    "label": "Demo Coverage",
-    "description": "Start here for Iron Nest teleprinter orders, map grids, bearing, range, elevation, shell choice, powder charges, Star shell corrections, and Challenge Mode.",
-    "coverage": [
-      "Event Guide"
-    ],
-    "pages": [
-      {
-        "title": "Demo Guide, Map Tools, Shells & Aiming",
-        "href": "/iron-nest",
-        "type": "Event Guide",
-        "description": "Start here for Iron Nest teleprinter orders, map grids, bearing, range, elevation, shell choice, powder charges, Star shell corrections, and Challenge Mode.",
-        "archive": {
-          "showInCollections": true,
-          "order": 1
         }
       }
     ]

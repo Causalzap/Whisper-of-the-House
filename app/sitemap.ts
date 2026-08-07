@@ -81,7 +81,6 @@ const paths = [
   '/33-immortals',
   '/the-adventures-of-elliot',
   '/steam-next-fest',
-  '/iron-nest',
   '/bombanana',
   '/casualties-unknown',
   '/dust-front-rts',
@@ -630,6 +629,14 @@ const paths = [
   '/fields-of-mistria/saturday-market-plaza',
   '/fields-of-mistria/water-seal-guide',
   '/fields-of-mistria/how-to-unlock-deep-woods',
+
+  '/iron-nest',
+  '/iron-nest/fire-and-light-walkthrough',
+  '/iron-nest/liberation-walkthrough',
+  '/iron-nest/counter-battery-mission',
+  '/iron-nest/iron-road-walkthrough',
+  '/iron-nest/siege-of-cartagena-walkthrough',
+  '/iron-nest/the-gorge-walkthrough',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -637,6 +644,14 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/iron-nest': '2026-08-07',
+  '/iron-nest/fire-and-light-walkthrough': '2026-08-07',
+  '/iron-nest/liberation-walkthrough': '2026-08-07',
+  '/iron-nest/counter-battery-mission': '2026-08-07',
+  '/iron-nest/iron-road-walkthrough': '2026-08-07',
+  '/iron-nest/siege-of-cartagena-walkthrough': '2026-08-07',
+  '/iron-nest/the-gorge-walkthrough': '2026-08-07',
+
   '/fields-of-mistria': '2026-08-06',
   '/fields-of-mistria/achievements-guide': '2026-08-06',
   '/fields-of-mistria/bell-tower-guide': '2026-08-06',
