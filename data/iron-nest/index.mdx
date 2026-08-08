@@ -14,749 +14,912 @@ export const firingLoopRows = [
   {
     Step: "1. Read",
     "What To Do":
-      "Read the complete teleprinter order, including the firing origin, target clues, shell restriction, timer trigger, and stand-down condition.",
+      "Read the complete order and identify the current Iron Nest position, target clues, shell requirement, timer trigger, support condition, and stand-down condition.",
     "Do Not Continue Until":
-      "You know whether the task is destruction, illumination, reconnaissance, smoke support, movement recovery, or timed interception.",
+      "You know what the current mission phase is actually asking you to solve.",
   },
   {
-    Step: "2. Plot",
+    Step: "2. Locate",
     "What To Do":
-      "Mark the current Iron Nest position, target coordinates, spotters, friendly units, protected locations, and temporary reference points.",
+      "Use coordinates, spotter bearings, distances, reconnaissance, corrections, Position Reports, or movement data to establish the target and firing origin.",
     "Do Not Continue Until":
-      "The final target marker is supported by the order rather than by a visual guess.",
+      "The target marker and current Iron Nest marker are both defensible rather than guessed.",
   },
   {
     Step: "3. Calculate",
     "What To Do":
-      "Draw the final line from Iron Nest to the target, record bearing and range, then calculate charge count and elevation.",
+      "Draw one final line from the current Iron Nest position to the confirmed target, then record bearing, range, charges, and elevation.",
     "Do Not Continue Until":
-      "The firing card identifies the target, shell, charge count, elevation, and intended gun side.",
+      "The firing card belongs to this target, this firing origin, and the intended gun.",
   },
   {
     Step: "4. Prepare",
     "What To Do":
-      "Load the correct shell and charges, rotate the turret, set the selected gun elevation, and check the armed side.",
+      "Load the required shell and charges, rotate the turret, set elevation, and confirm the correct left or right gun is armed.",
     "Do Not Continue Until":
-      "The physical loader and gun controls match the firing card.",
+      "The physical gun state matches the firing card.",
   },
   {
     Step: "5. Fire and confirm",
     "What To Do":
-      "Fire, wait for impact, read the next report, and treat any correction or new target as a fresh solve.",
+      "Fire, wait for impact or the next report, then treat every correction, movement, new target, or phase change as new information.",
     "Do Not Continue Until":
-      "The game confirms the hit, gives a correction, or issues the next mission phase.",
-  },
-];
-
-export const shellRoleColumns = [
-  { key: "Shell", label: "Shell" },
-  { key: "Use It When", label: "Use It When" },
-  { key: "Do Not Use It As", label: "Do Not Use It As" },
-];
-
-export const shellRoleRows = [
-  {
-    Shell: "H",
-    "Use It When":
-      "The order calls for normal destructive fire against infantry, installations, or other unarmored targets.",
-    "Do Not Use It As":
-      "A replacement for AP when the target is marked armored, underground, or danger-close.",
-  },
-  {
-    Shell: "HCHE",
-    "Use It When":
-      "A dense group can be covered safely by a larger effect area and the surrounding map is clear of friendly or protected icons.",
-    "Do Not Use It As":
-      "The default choice merely because several red icons appear close together.",
-  },
-  {
-    Shell: "AP",
-    "Use It When":
-      "The target is armored, underground, explicitly marked AP Required, or needs a precise danger-close hit.",
-    "Do Not Use It As":
-      "A forgiving shot against an uncertain infantry marker.",
-  },
-  {
-    Shell: "STAR",
-    "Use It When":
-      "The order requires illumination, observer correction, target searching, or a Star Shell fire mission.",
-    "Do Not Use It As":
-      "Destructive ammunition or a reason to repeat an unchanged firing card after a correction.",
-  },
-  {
-    Shell: "SMK",
-    "Use It When":
-      "A friendly unit requests smoke at a specific coordinate during an advance or breakout.",
-    "Do Not Use It As":
-      "A general map-covering shell bought before the support coordinate arrives.",
-  },
-];
-
-export const recoveryColumns = [
-  { key: "Problem", label: "What Went Wrong" },
-  { key: "Return To", label: "Return To" },
-  { key: "Check First", label: "Check First" },
-];
-
-export const recoveryRows = [
-  {
-    Problem: "The target position is unclear",
-    "Return To": "Teleprinter and map",
-    "Check First":
-      "Reference coordinates, spotter origins, reported bearings, search sectors, reconnaissance coverage, and whether the order changed.",
-  },
-  {
-    Problem: "The target is known but the firing card looks wrong",
-    "Return To": "Map and calculator",
-    "Check First":
-      "Current Iron Nest origin, final bearing, range, charge count, target marker, and whether the Nest moved.",
-  },
-  {
-    Problem: "The firing card is correct but the shell misses",
-    "Return To": "Loader and gun controls",
-    "Check First":
-      "Shell type, physical charge count, selected gun, turret bearing, elevation, and left/right card assignment.",
-  },
-  {
-    Problem: "The target was destroyed but the mission continues",
-    "Return To": "Teleprinter",
-    "Check First":
-      "Additional hostiles, a new reconnaissance stage, support requests, War Horn conditions, optional targets, and the final stand-down message.",
+      "The game confirms the hit, provides a correction, changes the objective, or authorizes stand down.",
   },
 ];
 
 <GuideQuickAnswer title="Quick Answer">
-**Iron Nest is solved in this order: read, plot, calculate, load, rotate,
-elevate, fire, and confirm.**
+**Iron Nest is solved in this order: read, locate, calculate, prepare, fire,
+and confirm.**
 
-Mark the current Iron Nest coordinate before drawing any final firing line.
-Spotter bearings, correction arrows, railway waypoints, Position Reports, and
-search directions help you locate a point; they are not automatically the
-bearing that goes into the turret.
+The most important rule is that **spotter bearings, distance reports,
+corrections, railway waypoints, vessel courses, and Position Reports help you
+locate a point — they are not automatically the bearing that goes into the
+turret.**
 
-Do not copy coordinates from another operation as permanent answers. Use the
-real numbers in each walkthrough to understand the process, then rebuild the
-solution from the orders in your own run.
+Once the target is known, draw a fresh line from the **current Iron Nest
+position** to that target. That final line gives the bearing and range for the
+shot.
 
-This hub covers the shared firing systems and Calibration Fire. Use the mission
-walkthroughs below for Fire and Light, Liberation, Counter-Battery, Iron Road,
-Siege of Cartagena, and The Gorge.
+This Hub covers the full campaign from **Mission 1 — Calibration Fire** through
+**Mission 15 — White Shells**, with focused walkthroughs for Missions 2–15,
+triangulation help, firing decisions, troubleshooting, and all four confirmed
+endings.
+
+If the map itself is blocking you, start with
+<Link href="/iron-nest/how-to-triangulate">
+  How to Triangulate in Iron Nest
+</Link>
+If a specific mission is blocking you, jump directly to its walkthrough below.
 </GuideQuickAnswer>
 
 <div className="my-4 text-sm text-slate-500 dark:text-slate-400">
-  Last updated: Aug 7, 2026. This Iron Nest guide hub covers the complete firing
-  loop, Calibration Fire, teleprinter orders, map plotting, bearing, range,
-  powder charges, elevation, map cleanup, shell selection, requisition,
-  reconnaissance, movement recovery, left and right gun handling, Challenge
-  Mode basics, universal troubleshooting, and six mission walkthroughs.
+  Last updated: Aug 8, 2026. This Iron Nest guide covers the shared firing
+  loop, Calibration Fire, Missions 2–15, triangulation, firing solutions,
+  shell decisions, requisition, dual-gun handling, troubleshooting, White
+  Shells, and all four confirmed endings.
 </div>
 
 <figure className="my-8">
   <Image
     src="/images/iron-nest/iron-nest-demo-protocol.webp"
-    alt="Iron Nest operating protocol showing read measure calculate load rotate elevate and fire"
+    alt="Iron Nest operating protocol showing the firing process from locating a target through firing and confirmation"
     width={1600}
     height={900}
     priority={true}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-    The individual missions change the target problem, but the operating order
-    remains read, measure, calculate, prepare, fire, and confirm.
+    The missions keep changing the target problem, but I still solve every shot
+    by locating the point first and building the firing solution second.
   </figcaption>
 </figure>
 
-<h2 id="iron-nest-guide">
-  How to operate Iron Nest without guessing
+<h2 id="how-iron-nest-works">
+  How Iron Nest actually works
 </h2>
 
-The gun usually does exactly what I tell it to do. The difficult part is making
-sure I told it the right thing.
+The gun usually does exactly what I tell it to do.
 
-A miss commonly begins several stations before the firing lever:
+Most of my bad shots started several stations earlier:
 
-- the teleprinter order was only partly read;
-- Iron Nest was marked at an old position;
-- a spotter bearing was copied into the turret;
-- the final line began at the target or spotter instead of the Nest;
-- the calculator used the wrong range;
-- the loader contains a different charge count from the firing card;
-- the left gun is loaded while the right gun is armed;
-- a correction report arrived but the previous solution was reused.
+- I copied a spotter bearing into the turret;
+- I measured from an old Iron Nest position;
+- I treated an approximate search area as an exact target;
+- I reused a firing card after the Nest moved;
+- I loaded a different charge count from the one used in the calculation;
+- I prepared one gun and armed the other;
+- I fired again before reading the report from the previous impact.
 
-I use one repeatable firing loop across the campaign.
+The campaign becomes much easier once I separate **finding the target** from
+**firing at the target**.
 
 <GuideTable
-  caption="The Iron Nest firing loop."
+  caption="The firing loop I use throughout the Iron Nest campaign."
   columns={firingLoopColumns}
   rows={firingLoopRows}
 />
 
-The most important stopping point is between calculation and loading.
+The most important stopping point is between **Locate** and **Calculate**.
 
-Do not buy or load a shell simply because a target will eventually need to be
-fired upon. Confirm what the target is, where it is, and what the order requires
-first.
+If I still have two believable target positions, I do not buy an expensive
+shell and hope the blast radius solves my uncertainty.
+
+I solve the location problem first.
 
 <AdUnit placement="article_after_first_h2" />
 
-<h2 id="mission-walkthroughs">
-  Iron Nest mission walkthroughs
+<h2 id="campaign-walkthroughs">
+  Iron Nest campaign walkthroughs
 </h2>
 
-The Hub explains shared systems. Each walkthrough below starts where the common
-firing loop stops being enough.
+The Hub keeps the shared systems in one place.
 
-<div className="my-8 grid gap-5 md:grid-cols-2">
-  <section className="group rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-lg dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/40">
-    <h3 className="mt-0 text-xl font-semibold leading-snug">
-      <Link
-        href="/iron-nest/fire-and-light-walkthrough"
-        className="text-sky-700 no-underline transition-colors hover:text-sky-900 hover:underline dark:text-sky-300 dark:hover:text-sky-200"
-      >
-        Fire and Light Walkthrough
-      </Link>
-    </h3>
-    <div className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
-      Use two spotters to locate the opening hostile target, clear the
-      reconnaissance follow-up pair, then complete a Star Shell illumination
-      mission by applying the observer correction from the first impact.
-    </div>
-  </section>
+Each mission page starts where the normal firing loop stops being enough:
+moving targets, hidden positions, timers, chained intelligence, friendly-fire
+risk, or a special completion condition.
 
-  <section className="group rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-lg dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/40">
-    <h3 className="mt-0 text-xl font-semibold leading-snug">
-      <Link
-        href="/iron-nest/liberation-walkthrough"
-        className="text-sky-700 no-underline transition-colors hover:text-sky-900 hover:underline dark:text-sky-300 dark:hover:text-sky-200"
-      >
-        Liberation Walkthrough
-      </Link>
-    </h3>
-    <div className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
-      Replace the old firing origin, destroy the first three infantry targets,
-      complete the required P4 reconnaissance, use AP on the underground cache,
-      and protect friendlies during the final two shots.
-    </div>
-  </section>
-
-  <section className="group rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-lg dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/40">
-    <h3 className="mt-0 text-xl font-semibold leading-snug">
-      <Link
-        href="/iron-nest/counter-battery-mission"
-        className="text-sky-700 no-underline transition-colors hover:text-sky-900 hover:underline dark:text-sky-300 dark:hover:text-sky-200"
-      >
-        Counter-Battery Walkthrough
-      </Link>
-    </h3>
-    <div className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
-      Prepare all three opening artillery shots before the first impact starts
-      the CBT, use the shell-flight window efficiently, and locate the later
-      battery when prior reconnaissance is no longer reliable.
-    </div>
-  </section>
-
-  <section className="group rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-lg dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/40">
-    <h3 className="mt-0 text-xl font-semibold leading-snug">
-      <Link
-        href="/iron-nest/iron-road-walkthrough"
-        className="text-sky-700 no-underline transition-colors hover:text-sky-900 hover:underline dark:text-sky-300 dark:hover:text-sky-200"
-      >
-        Iron Road Walkthrough
-      </Link>
-    </h3>
-    <div className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
-      Build future train waypoints from the timetable, subtract shell flight
-      time, destroy two AP emplacements, and sound the War Horn only after the
-      allied assault route is safe.
-    </div>
-  </section>
-
-  <section className="group rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-lg dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/40">
-    <h3 className="mt-0 text-xl font-semibold leading-snug">
-      <Link
-        href="/iron-nest/siege-of-cartagena-walkthrough"
-        className="text-sky-700 no-underline transition-colors hover:text-sky-900 hover:underline dark:text-sky-300 dark:hover:text-sky-200"
-      >
-        Siege of Cartagena Walkthrough
-      </Link>
-    </h3>
-    <div className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
-      Solve three chained installations, find both coastal batteries, recover
-      correctly after Emergency Move, clear the breakout threshold, and answer
-      both live Smoke Shell requests.
-    </div>
-  </section>
-
-  <section className="group rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-lg dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/40">
-    <h3 className="mt-0 text-xl font-semibold leading-snug">
-      <Link
-        href="/iron-nest/the-gorge-walkthrough"
-        className="text-sky-700 no-underline transition-colors hover:text-sky-900 hover:underline dark:text-sky-300 dark:hover:text-sky-200"
-      >
-        The Gorge Walkthrough
-      </Link>
-    </h3>
-    <div className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
-      Restart the damaged Nest, scout east from the supplied position, fire
-      without the ballistic calculator, and correct each new shot from the
-      previous impact while protecting the convoy.
-    </div>
-  </section>
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-700 dark:bg-slate-900/60">
+  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+    Mission 1
+  </div>
+  <div className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-100">
+    Calibration Fire
+  </div>
+  <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+    Learn the basic Iron Nest → target → bearing and range → charges and
+    elevation → fire loop. The compact walkthrough remains on this Hub.
+  </div>
 </div>
 
-Exact coordinates and firing values can change between operations. The mission
-pages use verified examples to show what a completed solution looks like, but
-the stable answer is always the route used to build it.
+<h3 id="early-campaign" className="mt-10">
+  Early campaign
+</h3>
 
-<h2 id="calibration-fire">
-  Calibration Fire: learn the complete firing cycle
+<div className="my-6 grid gap-3 md:grid-cols-2">
+  <Link
+    href="/iron-nest/fire-and-light-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 2
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Fire and Light
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Triangulate the opening target, clear the follow-up pair, then correct the
+      Star Shell illumination shot.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/liberation-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 3
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Liberation
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Rebuild the firing origin, complete P4 reconnaissance, clear the
+      underground AP cache, and protect friendlies.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/counter-battery-mission"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 4
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Counter-Battery
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Pre-calculate the opening batteries, manage the CBT, then locate the fresh
+      artillery position.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/iron-road-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 5
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Iron Road
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Intercept the moving train, destroy both AP emplacements, then time the
+      War Horn safely.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/siege-of-cartagena-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 6
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Siege of Cartagena
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Solve chained installations, recover after Emergency Move, and complete
+      the smoke-assisted breakout.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/the-gorge-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 7
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      The Gorge
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Restart the damaged Nest and use manual observed-fire corrections until
+      the pass is clear.
+    </div>
+  </Link>
+</div>
+
+<h3 id="mid-campaign" className="mt-10">
+  Mid campaign
+</h3>
+
+<div className="my-6 grid gap-3 md:grid-cols-2">
+  <Link
+    href="/iron-nest/rock-of-gibraltar-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 8
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Rock of Gibraltar
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Locate HMS Rockingham without aerial recon, respect the 11:08 firing
+      restriction, then optionally intercept the moving vessel.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/dead-reckoning-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 9
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Dead Reckoning
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Reveal hidden primary positions with Tear, solve the late Field Command
+      correction, then decide whether to continue cleanup.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/fire-on-call-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 10
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Fire on Call
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Answer live support calls, reposition friendlies with Smoke, and handle
+      Tear-then-H and danger-close shots safely.
+    </div>
+  </Link>
+</div>
+
+<h3 id="late-campaign" className="mt-10">
+  Late campaign
+</h3>
+
+<div className="my-6 grid gap-3 md:grid-cols-2">
+  <Link
+    href="/iron-nest/high-tide-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 11
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      High Tide
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Manage multiple landing-craft intercepts across both guns and hold the
+      defensive line until relief arrives at 07:14.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/blind-fire-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 12
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Blind Fire
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Locate four AA batteries through Alpha and Bravo without reconnaissance
+      or shell-impact imagery.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/phantom-battery-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 13
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Phantom Battery
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Recover your own position after movement, locate a mobile battery, and use
+      enemy spotters for 90-second CBT extensions.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/final-harvest-walkthrough"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 14
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      Final Harvest
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Pre-plan the moving train and static targets, then balance
+      counter-battery pressure with live support calls.
+    </div>
+  </Link>
+
+  <Link
+    href="/iron-nest/white-shells-endings"
+    className="group rounded-xl border border-slate-200 bg-white p-5 no-underline transition hover:border-slate-400 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+  >
+    <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+      Mission 15
+    </div>
+    <div className="mt-2 text-lg font-semibold text-slate-900 group-hover:text-sky-700 dark:text-slate-100 dark:group-hover:text-sky-300">
+      White Shells and All Endings
+    </div>
+    <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+      Reach all four endings through PRPG, chemical submission, Atomic
+      destruction, or the prepared betrayal route.
+    </div>
+  </Link>
+</div>
+
+Exact coordinates, bearings, ranges, and elevations can change between
+operations.
+
+The mission guides use real completed-run values so you can see what a valid
+solution looks like. The reusable answer is the route that produced those
+numbers.
+
+<h2 id="triangulation">
+  Stuck on triangulation?
 </h2>
 
-Calibration Fire remains in the Hub because it is the cleanest version of the
-shared system.
+One of the easiest Iron Nest mistakes is treating a spotter bearing as a turret
+bearing.
 
-The order gives a direct Iron Nest coordinate and target coordinate. There is
-no triangulation, moving target, Counter-Battery Timer, reconnaissance search,
-or correction chain.
+It is not.
+
+A clean Fire and Light example used:
+
+- **96° from Spotter 1**
+- **53° from Spotter 2**
+
+Those observations located the hostile position.
+
+The final line from Iron Nest to that intersection was instead approximately:
+
+- **65.7° bearing**
+- **12.91 km range**
+
+So if my turret bearing is identical to one of the spotter reports, I stop
+before firing.
+
+Later missions extend the same location logic into:
+
+- bearing-and-distance intersections;
+- chained reference points;
+- Position Reports after Emergency Move;
+- listening-post reports;
+- moving-target course projections.
+
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/60">
+  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+    Map help
+  </div>
+  <div className="mt-2 text-lg font-semibold">
+    <Link
+      href="/iron-nest/how-to-triangulate"
+      className="text-sky-700 no-underline hover:underline dark:text-sky-300"
+    >
+      How to Triangulate in Iron Nest
+    </Link>
+  </div>
+  <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+    Two-spotter intersections, bearing origins, distance constraints, chained
+    reference points, ambiguous solutions, and Position Reports after movement.
+  </div>
+</div>
+
+<h2 id="calibration-fire">
+  Calibration Fire: learn the basic shot
+</h2>
+
+Calibration Fire stays on the Hub because it strips away almost every later
+complication.
+
+There is no moving target, Counter-Battery Timer, hidden garrison, chained
+reference point, or Emergency Move.
 
 My route is:
 
-1. Read the complete order.
-2. Mark Iron Nest.
-3. Mark the calibration target.
-4. Draw one final line from Iron Nest to the target.
-5. Record the bearing and range.
-6. Enter the range into the ballistic calculator.
-7. Select a charge count that reaches the target.
-8. Record the resulting elevation.
-9. Load the required shell and the same number of charges.
-10. Rotate the turret to the measured bearing.
-11. Set the selected gun to the calculated elevation.
-12. Arm the correct gun and fire.
-13. Wait for the calibration confirmation before touching the map again.
+1. Mark the supplied Iron Nest position and target.
+2. Draw the final line from Iron Nest to the target and record bearing and
+   range.
+3. Use that range to choose charges and elevation.
+4. Load the same shell and charge count shown on the firing card.
+5. Rotate, elevate, fire, and wait for confirmation.
 
 <figure className="my-8">
   <Image
     src="/images/iron-nest/iron-nest-map-bearing-range.webp"
-    alt="Iron Nest map measurement showing the final bearing and range from the Nest to a calibration target"
+    alt="Iron Nest map measurement showing the final bearing and range from Iron Nest to a calibration target"
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-    Bearing goes to the turret. Range goes to the calculator. The calculator
-    returns the elevation for the selected charge count.
+    The final map line has two jobs: bearing goes to turret rotation, and range
+    goes into the firing calculation.
   </figcaption>
 </figure>
 
-Do not rush through Calibration Fire because the target is simple. It is the
-best place to establish habits that become essential once later missions add
-timers and multiple guns.
+The habit I want from Calibration Fire is not speed.
 
-<h2 id="teleprinter-and-map">
-  Read the teleprinter, then build the map
+It is refusing to touch the gun until the firing card is internally consistent.
+
+<h2 id="read-the-order">
+  Read the order before touching the gun
 </h2>
 
-I read the teleprinter before visiting the loader or requisition console.
+I read every page of the teleprinter before visiting requisition or loading a
+shell.
 
-A complete order can contain several different kinds of information:
+A later paragraph can completely change what the mission is asking me to do.
 
-- the current Iron Nest coordinate;
-- direct target coordinates;
-- spotter coordinates and bearings;
-- distances from reference points;
-- approximate search directions;
-- a shell restriction;
-- a timer and its actual trigger;
-- a reconnaissance card;
-- a movement or Position Report;
-- a War Horn condition;
-- a final stand-down condition.
+For example:
+
+- Counter-Battery explains what actually starts the CBT;
+- Rock of Gibraltar says **do not fire before 11:08**;
+- High Tide defines the objective as holding until **07:14**;
+- Dead Reckoning requires Tear to expose hidden positions reliably;
+- Fire on Call changes the battle only after the War Horn;
+- several missions allow stand down while optional targets still remain.
 
 <figure className="my-8">
   <Image
     src="/images/iron-nest/iron-nest-teleprinter-orders.webp"
-    alt="Iron Nest teleprinter displaying mission objectives coordinates and firing restrictions"
+    alt="Iron Nest teleprinter displaying mission objectives coordinates restrictions and stand down conditions"
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-    Read every page of the order. The final paragraph often changes when the
-    timer starts or what actually completes the mission.
+    The last lines of an order can matter more than the first coordinate:
+    timer trigger, shell restriction, support condition, or stand-down state.
   </figcaption>
 </figure>
 
-The order determines what kind of map problem I am solving.
+When I read positional information, I keep the origin attached to the number.
 
-### Direct coordinate
+A bearing from a spotter begins at that spotter.
 
-Mark the supplied target and measure from Iron Nest.
+A correction begins at the previous impact.
 
-### Spotter intersection
+A vessel course begins at the reported vessel position.
 
-Draw each bearing from the named spotter, place the target at the intersection,
-then measure a separate final line from Iron Nest.
+A Position Report begins at its named reference point.
 
-### Bearing and distance
+Only the **final firing line** begins at Iron Nest.
 
-Begin both measurements at the reference named in the report. Do not assume
-that every distance begins at the Nest.
-
-### Search sector
-
-Words such as east, south, or southeast define an area to investigate. They are
-not automatically precise firing bearings.
-
-### Correction
-
-Begin the correction at the previous impact point and move in the reported
-direction by the reported distance.
-
-### Position Report
-
-A single report gives a possible line containing Iron Nest. Two reports provide
-the intersection needed for a reliable new firing origin.
-
-<h2 id="map-tools-and-cleanup">
-  Use map tools for separate jobs
+<h2 id="build-final-solution">
+  Build one final firing solution after the target is known
 </h2>
 
-The map becomes unreliable when every pencil line is treated as equally
-important.
+Once the target is confirmed, I simplify the map.
 
-My normal map convention is:
-
-- **red:** final Iron Nest-to-target firing line;
-- **yellow:** spotter bearings, corrections, search work, and temporary support
-  measurements;
-- **white:** optional notes and planning references;
-- **markers:** Iron Nest, confirmed targets, spotters, impacts, friendlies, and
-  guesses;
-- **Drafting Compass:** distance circles and radius-based construction;
-- **Iris:** shell effect and danger-close checks.
-
-<figure className="my-8">
-  <Image
-    src="/images/iron-nest/iron-nest-map-tools-overview.webp"
-    alt="Iron Nest map tools including pencils compass Iris markers and icon references"
-    width={1600}
-    height={900}
-    className="rounded-xl"
-  />
-  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-    Support lines explain how the target was found. The final red line explains
-    where the gun should point.
-  </figcaption>
-</figure>
-
-I delete temporary construction lines after the target marker is confirmed.
-
-Keep:
+I keep:
 
 - the current Iron Nest marker;
-- confirmed target markers;
-- friendly and protected icons;
-- the active final firing line;
-- an impact marker still needed for correction.
+- the confirmed target;
+- nearby friendly or protected positions;
+- one correction point if it is still active;
+- the current final firing line.
 
-Delete or relabel:
+I remove or stop trusting:
 
-- rejected intersections;
-- old firing origins;
+- rejected candidate intersections;
+- old Iron Nest positions;
 - destroyed targets;
-- expired waypoint solutions;
+- expired moving-target waypoints;
 - pre-move firing lines;
-- completed correction points;
-- reconnaissance lines that no longer define the search area.
+- corrections that belonged to an earlier impact.
 
-A cluttered map creates errors that still look mathematically valid.
+A complete firing state needs four linked values:
 
-<h2 id="bearing-range-charges-elevation">
-  Keep bearing, range, charges, and elevation together
-</h2>
-
-A complete firing card needs four connected values:
-
-- **Bearing:** measured from the current Iron Nest position to the final target
-  point and entered into turret rotation.
-- **Range:** measured on the same final line and entered into the calculator.
-- **Powder charges:** selected as part of the calculator solution and physically
-  loaded into the gun.
-- **Elevation:** returned by the calculator for that exact range and charge
-  count, then set on the selected gun.
+- **bearing**
+- **range**
+- **powder charges**
+- **elevation**
 
 <figure className="my-8">
   <Image
     src="/images/iron-nest/iron-nest-calculator-elevation.webp"
-    alt="Iron Nest ballistic calculator converting range and powder charge count into gun elevation"
+    alt="Iron Nest firing calculator converting range and powder charge count into gun elevation"
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-    Changing the charge count changes the elevation. The physical loader must
-    match the calculator card.
+    Elevation only belongs to the same range and charge count used to produce
+    that firing card.
   </figcaption>
 </figure>
 
-I write the target number and gun side beside the values.
+After Iron Nest moves, I may keep a confirmed enemy marker if the enemy itself
+did not move.
 
-A firing card without a target label becomes dangerous when several solutions
-have similar bearings. A firing card without a gun-side label becomes dangerous
-once both elevations are prepared.
+I do **not** keep the old bearing, range, charges, or elevation.
 
-After Iron Nest moves, keep confirmed target markers but discard every old
-bearing, range, charge, and elevation. The firing origin changed, so the
-solution changed.
+The firing origin changed.
 
-<h2 id="shells-and-target-choice">
-  Choose the shell after confirming the target
+The firing solution changed with it.
+
+<h2 id="shell-choice">
+  Choose the shell for the actual problem
 </h2>
 
-Shell choice is not a permanent tier list.
+I stopped asking:
 
-The correct shell depends on:
+**Which shell is strongest?**
 
-- what the order explicitly authorizes;
-- target construction;
-- target certainty;
-- enemy spacing;
-- friendly and protected positions;
-- whether the goal is destruction, illumination, smoke, or correction.
+The better questions are:
 
-<GuideTable
-  caption="Iron Nest shell roles."
-  columns={shellRoleColumns}
-  rows={shellRoleRows}
-/>
+- How certain is the target position?
+- What type of target is it?
+- What is close to it?
+- What does the order require?
+- Am I trying to destroy, reveal, illuminate, or reposition something?
+
+The broad roles are simple:
+
+- **H:** normal destructive fire against soft targets and installations.
+- **HCHE:** useful when several soft targets fit safely inside a larger effect
+  area.
+- **AP / APHE:** armored, underground, hardened, or precision targets.
+- **STAR:** illumination and correction missions.
+- **SMK:** support calls and friendly repositioning.
+- **TEAR:** expose hidden positions before the destructive follow-up.
 
 <figure className="my-8">
   <Image
     src="/images/iron-nest/iron-nest-shell-menu-types.webp"
-    alt="Iron Nest ammunition menu showing destructive armor piercing illumination and support shell categories"
+    alt="Iron Nest ammunition menu showing destructive illumination smoke and specialist shell options"
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-    A specialized shell is useful when it solves a specialized target problem,
-    not simply because it appears later in the ammunition list.
+    Specialized ammunition is useful when it solves a specific mission
+    problem, not simply because it appears later in the ammunition list.
   </figcaption>
 </figure>
 
-The target role can matter as much as the target icon.
+The campaign itself gives better examples than a generic tier list.
 
-For example, AP can be correct for:
+**Liberation:**  
+The underground cache becomes an AP problem once its target state is confirmed.
 
-- an armored emplacement;
-- an underground cache;
-- a precise infantry position surrounded by friendlies.
+**Fire and Light:**  
+The final sequence is an illumination and observer-correction problem, so STAR
+is the actual mission tool.
 
-The last case does not make the infantry armored. It makes a smaller, centered
-impact safer than a larger H-shell effect.
+**Siege of Cartagena:**  
+SMK is required for the live breakout support.
+
+**Fire on Call:**  
+One H request put the enemy only about **0.25 km** from friendlies. A precise AP
+hit was safer than using the larger requested blast blindly.
+
+**Blind Fire:**  
+A later chained target can have more positional uncertainty than an early
+battery. More effect-area tolerance can be useful when the wider shot is safe.
 
 <AdUnit placement="article_middle" />
 
-<h2 id="requisition-recon-and-movement">
-  Spend requisition after the current problem is known
+<h2 id="requisition">
+  Spend requisition only to remove a specific problem
 </h2>
 
-I use requisition to solve the active mission stage, not to fill every magazine.
+I get better results when every purchase answers a question.
 
-Buy when:
+### Rock of Gibraltar
 
-- the target is confirmed;
-- the shell requirement is known;
-- the firing card is nearly ready;
-- a reconnaissance gap genuinely blocks progress;
-- an authorized movement or Position Report is required for recovery.
+If The Mole → Dockmaster's House → Rockingham chain already converges cleanly,
+I do not buy a Forward Observer.
 
-Wait when:
+If two believable Rockingham points remain, the observer has a clear job:
+remove that ambiguity before I spend AP.
 
-- the target marker is still a guess;
-- an issued reconnaissance card has not resolved;
-- a current shell is still in flight;
-- an impact report may reveal additional enemies;
-- the mission may change shell type in the next phase;
-- the final stand-down message has already appeared.
+### Dead Reckoning
+
+I do not buy destructive ammunition for all three primary positions before Tear
+has revealed what those targets actually are.
+
+**Tear first. Read the target state. Buy second.**
+
+### Phantom Battery
+
+After Emergency Move, one Position Report can leave Iron Nest somewhere along
+an entire line.
+
+If my next AP shot depends on the exact firing origin, I pay for the second
+report rather than guessing.
+
+### High Tide
+
+The mission already feeds me constant landing-craft movement reports.
+
+Extra reconnaissance does not help much when my real bottleneck is keeping the
+two guns and several moving-target solutions organized.
+
+### Final Harvest
+
+Some longer solutions use three or four powder charges.
+
+I replenish powder before a priority gun is loaded and waiting for a charge I
+no longer have.
 
 <figure className="my-8">
   <Image
     src="/images/iron-nest/iron-nest-requisition-console.webp"
-    alt="Iron Nest requisition console used to procure shells charges reconnaissance and operational support"
+    alt="Iron Nest requisition console used for ammunition reconnaissance Position Reports and mission support"
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-    Requisition is part of the firing decision. Buying before solving can leave
-    the wrong shell in the loader and weaken efficiency results.
+    I spend requisition when it removes a specific uncertainty, protects a live
+    deadline, or supplies a firing solution I already know I need.
   </figcaption>
 </figure>
 
-A reconnaissance request should remove uncertainty that matters.
+The easiest purchase to avoid is anything made after command has already said:
 
-Good reconnaissance:
+**Primary objective complete. You may Stand down.**
 
-- crosses the named grid;
-- covers a large unphotographed strip;
-- searches a reported enemy sector;
-- confirms a target type before AP or HCHE is purchased;
-- reveals whether a shot is safe near friendlies.
+At that point I decide whether I am deliberately pursuing optional cleanup.
 
-Weak reconnaissance:
+I do not let leftover red icons make that decision for me.
 
-- overlaps a clear image;
-- searches an old target position after command says it moved;
-- is ordered before the current image develops;
-- photographs a broad region without crossing the suspected target area.
-
-Emergency Move follows a different rule. Use it when remaining in place is more
-dangerous than rebuilding the firing solution.
-
-After moving:
-
-1. Delete the old Iron Nest marker.
-2. Delete all final firing lines.
-3. Keep target markers only when the targets themselves did not move.
-4. Request enough position information to locate the new Nest.
-5. Recalculate every shot from the new origin.
-
-<h2 id="left-and-right-guns">
-  Treat the left and right guns as separate firing states
+<h2 id="dual-guns">
+  Treat LEFT and RIGHT as separate firing states
 </h2>
 
-Once both guns are active, I stop thinking of Iron Nest as one cannon with two
-levers.
+Once both guns matter, I stop thinking of Iron Nest as one cannon with two
+triggers.
 
 Each side can have its own:
 
 - shell;
-- powder-charge count;
+- powder charges;
 - elevation;
-- loaded state;
-- armed state;
-- firing card.
+- target;
+- launch time;
+- loaded state.
 
 <figure className="my-8">
   <Image
     src="/images/iron-nest/iron-nest-right-gun-link.webp"
-    alt="Iron Nest left and right gun controls showing separate loading and elevation states"
+    alt="Iron Nest left and right gun controls showing separate firing states"
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-    Confirm the loaded side, displayed side, elevated side, and armed side before
-    pulling the firing lever.
+    Before firing, I check that the loaded side, firing card, elevation, and
+    armed side all belong to the same target.
   </figcaption>
 </figure>
 
-Before every two-gun sequence, I label the cards `LEFT` and `RIGHT`.
+Different missions reward different two-gun habits.
 
-Then I verify:
+**Counter-Battery:**  
+Preloading two known artillery solutions can save critical CBT time.
 
-1. Left card matches the left loader.
-2. Right card matches the right loader.
-3. Both charge counts match their cards.
-4. Both elevations are set on the correct sides.
-5. The turret begins at the first planned bearing.
-6. The second target bearing can be reached without confusing the cards.
+**High Tide:**  
+I prefer one live landing-craft solution per gun. New contacts stay on the map
+until a gun becomes free.
 
-Two preloaded guns are valuable in Counter-Battery and other timed missions,
-but they also make a reversed firing card twice as expensive.
+**Fire on Call:**  
+When the next support request is unknown, leaving one gun flexible can be more
+valuable than filling both.
 
-<h2 id="return-to-the-right-station">
-  Return to the station that owns the error
+**Final Harvest:**  
+One side can stay committed to a timed or counter-battery shot while the other
+remains available for live support.
+
+The dangerous mistake is not preloading.
+
+It is allowing a new target to overwrite the shell, charges, or elevation that
+belong to the target already assigned to that gun.
+
+<h2 id="troubleshooting">
+  If the shot is wrong, return to the station that owns the error
 </h2>
 
-When a shot fails, I do not restart the entire process immediately.
+I no longer restart the entire solve after every miss.
 
-I return to the part of the Nest that owns the missing information.
+I first decide **what kind of information is wrong**.
 
-<GuideTable
-  caption="Where to return when an Iron Nest shot or mission is stuck."
-  columns={recoveryColumns}
-  rows={recoveryRows}
-/>
+### The target position is unclear
 
-This separation prevents random correction.
+Return to the teleprinter and map.
 
-When the shell lands on the correct bearing line but at the wrong distance, I
-do not redraw every spotter report. I inspect the range, charges, elevation, and
-impact correction.
+Check:
 
-When the shell lands in a completely different direction, I do not begin by
-buying another shell. I inspect the final firing line, turret bearing, selected
-gun, and whether an old card was used.
+- coordinate origin;
+- correct spotter;
+- distance origin;
+- search sector;
+- latest reconnaissance;
+- impact correction;
+- whether the objective changed.
 
-When the target is destroyed but the mission remains active, I do not fire at
-the same coordinate again. I read the next teleprinter message.
+If the problem is geometry, use the
+<Link href="/iron-nest/how-to-triangulate">
+  triangulation guide
+</Link>
+
+### The target is known but the turret bearing looks wrong
+
+Redraw the final line from the **current Iron Nest marker**.
+
+This catches:
+
+- a spotter bearing copied into the turret;
+- an old firing origin;
+- a moving-target course used as the gun bearing;
+- a correction measured from the wrong point.
+
+### The bearing looks right but the impact distance is wrong
+
+Check:
+
+- final range;
+- physical charge count;
+- elevation;
+- whether the card belongs to this target;
+- whether the target moved after the solution was calculated.
+
+### The firing card looks right but the gun behaves wrong
+
+Check:
+
+- shell type;
+- left or right loader;
+- selected gun;
+- charge count;
+- elevation on that side;
+- armed state.
+
+### The target was destroyed but the mission continues
+
+Return to the teleprinter.
+
+Do not automatically fire at the same coordinate again.
+
+The mission may have:
+
+- a second phase;
+- optional targets;
+- a reconnaissance task;
+- a War Horn requirement;
+- a live support request;
+- a stand-down message you have not read yet.
+
+This becomes especially important later in the campaign.
+
+Rock of Gibraltar, Dead Reckoning, Fire on Call, High Tide, Final Harvest, and
+White Shells all have points where **continuing to fire** and **finishing the
+required objective** are no longer the same thing.
+
+<h2 id="white-shells-endings">
+  White Shells has four confirmed endings
+</h2>
+
+Mission 15 changes the question.
+
+I am no longer trying to find one correct military target.
+
+I am deciding what Iron Nest does with the final order.
+
+The four confirmed ending achievements are:
+
+- **A City in Celebration**
+- **A City Subdued**
+- **The Road Not Taken**
+- **A City Silent**
+
+Three routes can be triggered by what I fire into Barcelona.
+
+The fourth — **The Road Not Taken** — becomes a real combat sequence after Iron
+Nest turns against its own High Command.
+
+<div className="my-6 rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/60">
+  <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400 dark:text-slate-500">
+    Final mission
+  </div>
+
+  <div className="mt-2 text-lg font-semibold">
+    <Link
+      href="/iron-nest/white-shells-endings"
+      className="text-sky-700 no-underline hover:underline dark:text-sky-300"
+    >
+      White Shells Endings Guide — All 4 Endings
+    </Link>
+  </div>
+
+  <div className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+    PRPG, chemical submission, Atomic destruction, and the prepared betrayal
+    route — including why destroying High Command alone is not enough.
+  </div>
+</div>
+
+I do **not** improvise The Road Not Taken.
+
+My failed route was:
+
+**attack High Command → discover I still need to fight → run out of prepared
+options.**
+
+The successful route reversed that:
+
+**recon → mark retaliation targets → calculate shots → buy shells and powder →
+attack command → execute the prepared sequence.**
+
+That is also why Mission 15 and the endings stay on one Spoke rather than being
+split into two pages that would repeat almost the same setup.
 
 <h2 id="challenge-mode">
-  Challenge Mode stays a systems test
+  Challenge Mode uses the same system, with less room for waste
 </h2>
 
-Challenge Mode uses the same map and gun systems, but mistakes cost more time.
+Challenge Mode still rewards the same firing discipline:
 
-The useful habits are:
+- locate before loading;
+- keep active firing cards organized;
+- avoid duplicate shots while an impact is unresolved;
+- buy reconnaissance only when it removes useful uncertainty;
+- use safe multi-target effects when they genuinely save time;
+- stop refining decimals once the shell's safe effect area already solves the
+  problem.
 
-- solve the target before rushing the loader;
-- keep only one active firing solution visible;
-- assign left and right cards clearly;
-- use one shot for multiple targets only when the effect area is safe;
-- use reconnaissance when it removes more time than it costs;
-- wait for confirmations instead of firing duplicate shells;
-- stop refining decimals when the target effect already provides safe coverage.
+I am keeping Challenge Mode on the Hub for now.
 
-This Hub does not claim a complete high-score route or permanent Challenge Mode
-meta. A useful standalone Challenge guide needs verified scoring rules, target
-generation, ending conditions, and repeatable high-score runs.
+I do not yet have enough verified scoring data, target-generation rules, and
+repeatable high-score runs to claim a complete standalone Challenge Mode meta.
 
-<h2 id="universal-mistakes">
-  Universal mistakes to fix before blaming the gun
-</h2>
-
-### The final line begins at the wrong origin
-
-Spotter reports locate the target. The firing line begins at the current Iron
-Nest marker.
-
-### An old Iron Nest marker remains after movement
-
-Every bearing, range, charge count, and elevation must be recalculated from the
-new position.
-
-### The physical charge count does not match the calculator
-
-A correct elevation belongs to one specific range-and-charge combination.
-
-### The wrong gun side is armed
-
-Check loaded side, elevated side, displayed side, and armed side.
-
-### A search direction is treated as an exact target bearing
-
-Use east, south, and southeast to define a sector. Confirm the target before
-building the firing card.
-
-### A correction is applied from Iron Nest
-
-Observer corrections normally begin at the previous impact point.
-
-### A new order is treated as part of the old shot
-
-Clear completed lines and solve the new phase from its own instructions.
-
-### The mission is assumed complete after the main explosion
-
-Wait for the teleprinter's completion or stand-down message. Some missions add
-new targets, support calls, reconnaissance stages, or optional cleanup after the
-first objective.
-
-### Coordinates from another run are copied as fixed answers
-
-The worked values in this cluster show the process and provide a reality check.
-Your operation's orders remain the source of truth.
+Until that changes, the campaign remains the best preparation: learn how to
+build a correct firing solution quickly, then learn when **not** to spend
+another thirty seconds perfecting one.

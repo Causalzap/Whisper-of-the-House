@@ -1,0 +1,613 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import AdUnit from "@/components/ads/AdUnit";
+
+<GuideQuickAnswer title="Quick Answer">
+To triangulate in **Iron Nest**, place every spotter at the coordinate printed
+in the order, then draw each reported bearing **from that spotter**.
+
+The point where the observations agree is the target.
+
+Do not put a spotter bearing directly into the turret.
+
+After locating the target, draw a completely new line from the **current Iron
+Nest position to the target**. That final line gives the bearing and range you
+actually use for the shot.
+
+A clean Fire and Light example uses spotter reports of **96°** and **53°**.
+Those observations locate the enemy, but the final firing solution from Iron
+Nest is approximately **65.7° / 12.91 km**.
+
+Later missions add distance measurements, chained reference points, and
+Position Reports, but the rule stays the same: **locate the point first, then
+measure the shot from Iron Nest.**
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-500 dark:text-slate-400">
+  Last updated: Aug 8, 2026. This guide covers two-spotter triangulation,
+  bearing origins, line intersections, bearing-and-distance problems, chained
+  reference points, Position Reports after movement, ambiguous intersections,
+  and the mistakes that make a correct-looking map produce a bad shot.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-fire-and-light-opening-triangulation.webp"
+    alt="Iron Nest map showing two spotter bearing lines intersecting at the Fire and Light target"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The two spotter bearings locate the enemy. Neither spotter bearing is the
+    final turret bearing.
+  </figcaption>
+</figure>
+
+<h2 id="how-triangulation-works">
+  How to triangulate in Iron Nest
+</h2>
+
+The mistake that caused me the most confusion early on was treating every
+bearing in the teleprinter as a gun bearing.
+
+It is not.
+
+A bearing belongs to the position named in the report.
+
+If the order says:
+
+**96° from Spotter 1**
+
+I begin that line at Spotter 1.
+
+If it then says:
+
+**53° from Spotter 2**
+
+I begin the second line at Spotter 2.
+
+The intersection tells me where the enemy is.
+
+Only after that point is fixed do I solve the actual artillery shot.
+
+My basic route is:
+
+1. Mark the current Iron Nest position.
+2. Mark Spotter 1.
+3. Mark Spotter 2.
+4. Draw Spotter 1's reported bearing from Spotter 1.
+5. Draw Spotter 2's reported bearing from Spotter 2.
+6. Extend both lines until their intersection is clear.
+7. Put one target marker at that intersection.
+8. Draw a fresh line from Iron Nest to the target.
+9. Read the bearing and range from that final line.
+10. Continue with the normal firing solution.
+
+The first six steps answer:
+
+**Where is the target?**
+
+The final measurement answers:
+
+**Where does Iron Nest point?**
+
+Mixing those two problems together is why a map can look correct while the
+shell still goes somewhere completely different.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="fire-and-light-example">
+  Fire and Light is the cleanest triangulation example
+</h2>
+
+Mission 2 — Fire and Light gives one of the easiest real examples to check
+against.
+
+In one operation:
+
+- Iron Nest was at **H3 5:5**;
+- Spotter 1 was at **L9 8:6**;
+- Spotter 2 was at **L2 3:8**;
+- Spotter 1 reported **96°**;
+- Spotter 2 reported **53°**.
+
+I place the two spotters before drawing anything.
+
+Then I draw:
+
+- a long **96°** line from Spotter 1;
+- a long **53°** line from Spotter 2.
+
+Their intersection gives the hostile position.
+
+What matters is what happens next.
+
+I do **not** enter 96° or 53° into the turret.
+
+I draw a new line from Iron Nest to the intersection. In that operation the
+result was approximately:
+
+- **65.7° bearing**
+- **12.91 km range**
+
+The completed firing solution then used:
+
+- **3 powder charges**
+- approximately **51.64° elevation**
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-fire-and-light-first-h-solution.webp"
+    alt="Iron Nest Fire and Light firing solution showing the final gun bearing after triangulating the target"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The target was found with 96° and 53° spotter reports, but the actual
+    Iron Nest-to-target bearing was about 65.7°.
+  </figcaption>
+</figure>
+
+This gives me a very fast troubleshooting check:
+
+**If my turret bearing is identical to one of the spotter bearings, I probably
+skipped the final Iron Nest-to-target measurement.**
+
+The complete mission route is in the
+<Link href="/iron-nest/fire-and-light-walkthrough">
+  Fire and Light walkthrough
+</Link>
+
+<h2 id="bearing-origin">
+  Every bearing has an origin
+</h2>
+
+I now read every positional report as if the game had written the origin in
+bold.
+
+Instead of seeing:
+
+**96°**
+
+I read:
+
+**From Spotter 1, draw 96°.**
+
+Instead of seeing a Position Report such as:
+
+**336° from A9 4:7**
+
+I read:
+
+**Starting at A9 4:7, Iron Nest lies somewhere along the 336° line.**
+
+That change in thinking fixes a surprising number of mistakes.
+
+Before drawing any bearing, I ask three questions:
+
+- **Where does this line begin?**
+- **What point am I trying to locate?**
+- **Is this an observation bearing or the final firing bearing?**
+
+If I cannot answer all three from the current order, I return to the
+teleprinter before adding another line to the map.
+
+<h2 id="draw-long-lines">
+  Draw observation lines long enough to prove the intersection
+</h2>
+
+Correct bearings are still useless when I draw them too short.
+
+I do not stop a line where I think the enemy probably is.
+
+I extend both observations far enough that they visibly cross.
+
+Then I zoom in.
+
+For a clean two-spotter problem, I want a small intersection area rather than a
+wide wedge.
+
+If two lines almost meet but do not form one perfect point, I check the setup
+before trying to compensate manually.
+
+My order is:
+
+1. recheck both spotter coordinates;
+2. recheck the internal subgrid positions;
+3. confirm each bearing belongs to the correct spotter;
+4. make sure neither line was drawn in the opposite direction;
+5. remove old lines that may be confusing the result.
+
+Only after those checks do I consider a small mismatch to be observation error.
+
+I do not simply place the enemy halfway between two badly constructed lines.
+
+<h2 id="bearing-and-distance">
+  Later missions combine bearings with distances
+</h2>
+
+Iron Nest eventually stops giving two neat bearing lines.
+
+Rock of Gibraltar is a good example.
+
+The first reference point, **The Mole**, still behaves like normal
+triangulation.
+
+One operation used:
+
+- **096° from Spotter 1**
+- **051° from Spotter 2**
+
+Those lines located The Mole.
+
+The next point, **Dockmaster's House**, changed the problem.
+
+Its reports gave approximately:
+
+- **5.69 km from The Mole**
+- **086° from Spotter 1**
+
+Now I am not looking for two bearing lines to cross.
+
+I need the point where the distance from The Mole agrees with the bearing from
+Spotter 1.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-rock-of-gibraltar-reference-chain.webp"
+    alt="Iron Nest Rock of Gibraltar map showing chained bearing and distance measurements through The Mole Dockmaster's House and HMS Rockingham"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    Rock of Gibraltar turns one triangulation result into the origin of another
+    measurement, so an early placement error can carry through the whole chain.
+  </figcaption>
+</figure>
+
+This is where I stop thinking in terms of “draw two lines.”
+
+The more useful rule is:
+
+> Use every independent observation to narrow the same point.
+
+That observation may be:
+
+- a bearing;
+- a distance;
+- a second spotter bearing;
+- another known reference point;
+- a Position Report.
+
+<h2 id="two-possible-points">
+  What to do when two locations both look possible
+</h2>
+
+A bearing-and-distance construction can leave me with two believable
+possibilities.
+
+Rock of Gibraltar produced exactly that problem around Dockmaster's House.
+
+The wrong response is:
+
+**This is a coastal mission, so I will choose the point closer to the water.**
+
+That can be a useful sanity check, but it should not decide the solution.
+
+Instead, I keep both candidate points temporarily and use the next independent
+report.
+
+For HMS Rockingham, another operation supplied approximately:
+
+- **6.09 km from Dockmaster's House**
+- **062° from Spotter 2**
+
+When those measurements were added, the Rockingham solution converged on one
+consistent point.
+
+That is when I delete the rejected candidate.
+
+I requisition additional positional information only if the mission's own
+remaining constraints still leave two believable final locations.
+
+I do not buy a Forward Observer just because the first intermediate point looks
+messy.
+
+The full chained route is covered in the
+<Link href="/iron-nest/rock-of-gibraltar-walkthrough">
+  Rock of Gibraltar walkthrough
+</Link>
+
+<h2 id="chained-measurements">
+  Chained measurements amplify an early mistake
+</h2>
+
+Siege of Cartagena makes this problem explicit.
+
+The mission warns that spotter bearings can carry an error margin of up to about
+**0.5°**, and that errors compound through chained measurements.
+
+That matters because later measurements may begin from points I calculated
+myself.
+
+If Reference Point 1 is slightly wrong:
+
+- Reference Point 2 begins from the wrong place;
+- the next distance is displaced;
+- the next bearing intersects somewhere else;
+- the final target can drift much farther than the original error.
+
+When the end of a chain looks wrong, I do not keep adjusting the final marker.
+
+I return to the **earliest uncertain link**.
+
+For example:
+
+- if the third point looks wrong, I recheck the second;
+- if the second depends on the first, I recheck the first;
+- if the first came from two spotters, I recheck those original bearings.
+
+This is why I keep useful construction lines until the target is confirmed.
+
+Once I know which solution is valid, I remove rejected lines before creating
+the final firing line.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="position-reports">
+  Position Reports use triangulation to find Iron Nest
+</h2>
+
+Triangulation is not only used to find enemies.
+
+After an Emergency Move, I can have the opposite problem:
+
+**I know where the enemies are, but I no longer know where Iron Nest is.**
+
+A Position Report gives me a bearing from a known reference point.
+
+One report can tell me the line on which Iron Nest sits.
+
+It usually cannot tell me one exact position.
+
+In one recovery sequence, the first report gave approximately:
+
+- reference point **A9 4:7**
+- bearing **336°**
+
+That means Iron Nest lies somewhere along the 336° line from A9 4:7.
+
+It does **not** mean Iron Nest is at A9 4:7.
+
+It also does not give me a safe new firing origin by itself.
+
+A second report then gave approximately:
+
+- reference point **B9 7:5**
+- bearing **303°**
+
+Now the two independent lines can intersect.
+
+That intersection gives the new Iron Nest position.
+
+<div className="my-7 grid gap-4 md:grid-cols-2">
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/60">
+    <div className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+      Finding an enemy
+    </div>
+    <div className="font-semibold text-slate-900 dark:text-slate-100">
+      Known spotters
+    </div>
+    <div className="mt-2 text-slate-600 dark:text-slate-300">
+      Intersect their observations to locate the enemy.
+    </div>
+  </div>
+
+  <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900/60">
+    <div className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+      After Emergency Move
+    </div>
+    <div className="font-semibold text-slate-900 dark:text-slate-100">
+      Known reference points
+    </div>
+    <div className="mt-2 text-slate-600 dark:text-slate-300">
+      Intersect Position Reports to locate Iron Nest.
+    </div>
+  </div>
+</div>
+
+The geometry is the same.
+
+What changes is the unknown point.
+
+Once I locate Iron Nest again, I delete every old firing line and rebuild my
+shots from the new origin.
+
+I can keep a confirmed enemy marker if that enemy did not move.
+
+I cannot keep its old bearing, range, or firing solution.
+
+<h2 id="one-position-report">
+  Why one Position Report is not enough
+</h2>
+
+This was one of the easiest mistakes for me to make because a Position Report
+looks very specific.
+
+A report such as:
+
+**336° from A9 4:7**
+
+still describes an entire line.
+
+Every possible point along that line satisfies the report.
+
+If I choose a convenient point on it and calculate a shot, the calculator can
+still give me completely reasonable numbers.
+
+The problem is that I calculated them from a firing origin that may not be
+where Iron Nest actually is.
+
+My rule after movement is:
+
+<div className="my-7 rounded-xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/60 dark:bg-amber-950/20">
+  <div className="font-semibold text-amber-950 dark:text-amber-200">
+    One report gives me a line. Two useful reports can give me an intersection.
+  </div>
+  <div className="mt-2 text-amber-900/80 dark:text-amber-100/80">
+    I do not rebuild expensive AP shots until the new firing origin is pinned
+    down.
+  </div>
+</div>
+
+If the mission has moved Iron Nest and my next live shot depends on its exact
+position, the second Position Report is worth the requisition.
+
+Trying to save that cost by guessing can waste the shell, the timer, and the
+entire firing solution.
+
+<h2 id="when-to-buy-more-intel">
+  When I buy another Position Report or observer
+</h2>
+
+I do not requisition extra information simply because the map looks busy.
+
+I wait when:
+
+- two supplied bearings already meet cleanly;
+- a bearing and distance leave one defensible point;
+- another free mission constraint can resolve the current ambiguity;
+- I have not yet checked whether I used the correct origin.
+
+I buy another positional report when:
+
+- one Position Report leaves Iron Nest somewhere along a line;
+- two target locations remain equally plausible;
+- a chained construction no longer overlaps well enough to justify an
+  expensive shot;
+- an AP shot depends on choosing between two candidate points;
+- Emergency Move has made the old firing origin unusable.
+
+More information is useful when it removes a specific uncertainty.
+
+It does not fix a solution built from the wrong spotter or reference point.
+
+<h2 id="lines-do-not-cross">
+  If the triangulation lines do not cross, work backward
+</h2>
+
+When two observations should describe the same location but do not, I use this
+order.
+
+### Check the origin
+
+Did I begin each line at the named spotter or reference point?
+
+### Check the coordinate
+
+Did I place the correct grid square and internal subgrid position?
+
+### Check the bearing
+
+Did I read 096° correctly, or accidentally reverse the line?
+
+### Check which spotter owns the report
+
+A perfectly drawn bearing from the wrong spotter is still wrong.
+
+### Check the previous link
+
+If this is a chained problem, is the reference point I am measuring from itself
+uncertain?
+
+### Then consider the reported error
+
+A small mismatch can come from observation uncertainty.
+
+A large mismatch usually means the construction is wrong.
+
+I do not solve a large mismatch by dropping a target marker somewhere between
+the lines and hoping the shell radius covers it.
+
+<h2 id="target-found-but-miss">
+  Why a correctly triangulated target can still miss
+</h2>
+
+Triangulation only solves the location problem.
+
+If the target marker looks good but the shot still fails, I check what happened
+after the target was found.
+
+### The turret is using a spotter bearing
+
+The firing bearing must be measured from Iron Nest.
+
+### The range begins at a spotter or reference point
+
+The calculator needs the range from Iron Nest to the final target.
+
+### Iron Nest moved
+
+The enemy marker can still be valid while every old firing number becomes
+invalid.
+
+### Two candidate target markers are still on the map
+
+Delete the rejected one before measuring the final line.
+
+### The firing card belongs to the old position
+
+A changed origin or changed target means a new bearing and range.
+
+### I fired before the location was actually resolved
+
+If I still cannot explain why one candidate is correct and another is wrong, I
+am not ready to spend the expensive shell.
+
+<h2 id="triangulation-workflow">
+  The triangulation workflow I use now
+</h2>
+
+My current process is deliberately repetitive in one useful way:
+
+1. Read the complete positional report.
+2. Mark every known spotter or reference point.
+3. Identify who owns each bearing or distance.
+4. Draw long support lines.
+5. Add distance constraints from their named origins.
+6. Keep multiple candidates when the information genuinely allows them.
+7. Use the next independent observation to remove ambiguity.
+8. Mark one final target or one final Iron Nest position.
+9. Delete rejected construction.
+10. Draw a fresh firing line from the current Iron Nest marker.
+11. Use that final line for bearing and range.
+12. Buy or load the final destructive shell only when both origin and target are
+    defensible.
+
+If the problem is still at the **locating stage**, I stay on the map.
+
+If the target is known but the firing numbers look wrong, I rebuild the final
+Iron Nest-to-target line.
+
+If Iron Nest has moved, I stop using every old firing card until its new
+position is confirmed.
+
+For a basic two-spotter problem, use the
+<Link href="/iron-nest/fire-and-light-walkthrough">
+  Fire and Light walkthrough
+</Link>
+
+For chained bearings and distances, use the
+<Link href="/iron-nest/rock-of-gibraltar-walkthrough">
+  Rock of Gibraltar walkthrough
+</Link>
+
+For chained measurements with explicit observation error, use the
+<Link href="/iron-nest/siege-of-cartagena-walkthrough">
+  Siege of Cartagena walkthrough
+</Link>

@@ -631,12 +631,21 @@ const paths = [
   '/fields-of-mistria/how-to-unlock-deep-woods',
 
   '/iron-nest',
+  '/iron-nest/how-to-triangulate',
   '/iron-nest/fire-and-light-walkthrough',
   '/iron-nest/liberation-walkthrough',
   '/iron-nest/counter-battery-mission',
   '/iron-nest/iron-road-walkthrough',
   '/iron-nest/siege-of-cartagena-walkthrough',
   '/iron-nest/the-gorge-walkthrough',
+  '/iron-nest/rock-of-gibraltar-walkthrough',
+  '/iron-nest/dead-reckoning-walkthrough',
+  '/iron-nest/fire-on-call-walkthrough',
+  '/iron-nest/high-tide-walkthrough',
+  '/iron-nest/blind-fire-walkthrough',
+  '/iron-nest/phantom-battery-walkthrough',
+  '/iron-nest/final-harvest-walkthrough',
+  '/iron-nest/white-shells-endings',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -644,13 +653,23 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-  '/iron-nest': '2026-08-07',
+  '/iron-nest': '2026-08-08',
   '/iron-nest/fire-and-light-walkthrough': '2026-08-07',
   '/iron-nest/liberation-walkthrough': '2026-08-07',
   '/iron-nest/counter-battery-mission': '2026-08-07',
   '/iron-nest/iron-road-walkthrough': '2026-08-07',
   '/iron-nest/siege-of-cartagena-walkthrough': '2026-08-07',
   '/iron-nest/the-gorge-walkthrough': '2026-08-07',
+
+  '/iron-nest/how-to-triangulate': '2026-08-08',
+  '/iron-nest/rock-of-gibraltar-walkthrough': '2026-08-08',
+  '/iron-nest/dead-reckoning-walkthrough': '2026-08-08',
+  '/iron-nest/fire-on-call-walkthrough': '2026-08-08',
+  '/iron-nest/high-tide-walkthrough': '2026-08-08',
+  '/iron-nest/blind-fire-walkthrough': '2026-08-08',
+  '/iron-nest/phantom-battery-walkthrough': '2026-08-08',
+  '/iron-nest/final-harvest-walkthrough': '2026-08-08',
+  '/iron-nest/white-shells-endings': '2026-08-08',
 
   '/fields-of-mistria': '2026-08-06',
   '/fields-of-mistria/achievements-guide': '2026-08-06',

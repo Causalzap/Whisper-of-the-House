@@ -141,53 +141,86 @@ export const guideClusters: GuideCluster[] = [
     archiveCategory: "Strategy, simulation, puzzle & discovery",
     label: "Heavy Artillery Simulator",
     eyebrow: "Spotlight Hub",
-    hubStatus: "Calibration-to-Gorge coverage",
+    hubStatus: "Full campaign + all endings coverage",
+  
     description:
-      "Follow the Iron Nest guide hub from the firing loop and Calibration Fire through Fire and Light, Liberation, Counter-Battery, Iron Road, Siege of Cartagena, and The Gorge.",
+      "Follow the complete Iron Nest guide from Calibration Fire and triangulation through all 15 campaign missions, moving targets, counter-battery fire, live support, Final Harvest, and all four White Shells endings.",
+  
     coverage: [
-      "Core operating loop from teleprinter orders and map plotting through bearing, range, powder charges, elevation, loading, turret rotation, firing, confirmation, and bad-shot recovery",
-      "Calibration Fire fundamentals, direct coordinates, map cleanup, shell roles, requisition decisions, reconnaissance, Emergency Move, Position Reports, and left-right gun handling",
-      "Fire and Light spotter triangulation, two follow-up hostile elements, Star Shell-only palace illumination, the 3.28 km observer correction, and Starburst confirmed",
-      "Liberation repositioning, the first three infantry targets, P4 reconnaissance, the Underground AP Required supply cache, final urban targets, friendly safety, and minimum-assets decisions",
-      "Counter-Battery pre-calculation and CBT extensions, plus Iron Road train waypoints, shell flight timing, two AP emplacements, optional targets, and War Horn timing",
-      "Siege of Cartagena chained installations, coastal batteries, Emergency Move recovery, eight-unit threshold and smoke breakout, followed by The Gorge manual observed-fire route",
+      "Core operating loop from teleprinter orders and target location through bearing, range, powder charges, elevation, loading, turret rotation, firing, confirmation, and bad-shot recovery",
+      "Triangulation with spotter bearings, bearing-and-distance intersections, chained reference points, Position Reports, firing-origin recovery, and the difference between observation bearings and turret bearings",
+      "Missions 2–7: Fire and Light, Liberation, Counter-Battery, Iron Road, Siege of Cartagena, and The Gorge, including Star Shell corrections, AP targets, train interception, Emergency Move, Smoke support, and manual observed fire",
+      "Missions 8–10: Rock of Gibraltar, Dead Reckoning, and Fire on Call, covering HMS Rockingham, moving-vessel interception, Tear Shell reveals, hidden targets, War Horn timing, live support calls, and danger-close fire",
+      "Missions 11–14: High Tide, Blind Fire, Phantom Battery, and Final Harvest, including multiple moving landing craft, chained blind-fire geometry, mobile counter-battery threats, listening posts, train timing, and live support",
+      "Mission 15 White Shells with PRPG, chemical and Atomic routes, The Road Not Taken betrayal sequence, all four ending achievements, plus Challenge Mode fundamentals",
     ],
+  
     image: "/images/iron-nest/iron-nest-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
+  
     home: {
       featuredHub: true,
       featuredHubSpotlight: true,
       featuredHubOrder: 26,
       footerFeatured: true,
     },
+  
     pages: [
       {
-        title: "Iron Nest Guide and Walkthrough Hub",
+        title: "Iron Nest Guide: Missions, Triangulation & Shells",
         href: "/iron-nest",
         type: "Guide Hub",
         description:
-          "Learn the shared firing loop, map tools, shell roles, requisition, reconnaissance, dual-gun controls, troubleshooting, and six campaign mission routes.",
-        image: "/images/iron-nest/iron-nest-map-tools-overview.webp",
+          "Use the complete campaign directory, shared firing loop, shell decisions, requisition strategy, dual-gun handling, troubleshooting, and all four endings.",
+        image: "/images/iron-nest/iron-nest-demo-protocol.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
         home: {
           spotlightMeta:
-            "Calibration Fire, teleprinter orders, map tools, firing solutions, shells, requisition, reconnaissance, dual guns, troubleshooting, and six mission walkthroughs",
+            "Complete campaign hub with Missions 1–15, firing solutions, triangulation, shells, requisition, troubleshooting, moving targets, counter-battery fire, and all four endings",
         },
         archive: {
           showInCollections: true,
           order: 1,
         },
       },
+  
+      {
+        title: "How to Triangulate in Iron Nest",
+        href: "/iron-nest/how-to-triangulate",
+        type: "Systems",
+        description:
+          "Use spotter bearings, distance constraints, chained references, intersections, and Position Reports without confusing observation bearings with turret bearings.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-fire-and-light-opening-triangulation.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 130,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Spotter bearings, bearing origins, distance constraints, intersections, chained references, Position Reports, firing-origin recovery, and triangulation troubleshooting",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
       {
         title: "Iron Nest Fire and Light Walkthrough",
         href: "/iron-nest/fire-and-light-walkthrough",
         type: "Walkthrough",
         description:
-          "Triangulate the opening target, clear the follow-up hostile pair, switch to Star Shells, apply the 3.28 km correction, and confirm the palace starburst.",
+          "Triangulate the opening target, clear the follow-up hostile pair, switch to Star Shells, apply the observer correction, and complete Mission 2.",
         date: "Updated recently",
         image:
           "/images/iron-nest/iron-nest-fire-and-light-star-shell-correction.webp",
@@ -199,21 +232,22 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 124,
           spotlightFeature: true,
-          spotlightOrder: 1,
+          spotlightOrder: 2,
           spotlightMeta:
-            "Two spotters, opening H shot, follow-up hostiles, palace illumination, first Star Shell, 3.28 km correction, corrected solution, and Starburst confirmed",
+            "Mission 2 with two-spotter triangulation, opening H shot, follow-up hostiles, palace illumination, Star Shell correction, and Starburst confirmed",
         },
         archive: {
           showInCollections: true,
-          order: 2,
+          order: 3,
         },
       },
+  
       {
         title: "Iron Nest Liberation Walkthrough",
         href: "/iron-nest/liberation-walkthrough",
         type: "Walkthrough",
         description:
-          "Replace the old firing origin, destroy five infantry targets, complete the P4 recon, clear the AP-only cache, protect friendlies, and preserve assets.",
+          "Replace the firing origin, clear the opening infantry, complete P4 reconnaissance, destroy the AP-only cache, and protect nearby friendlies.",
         date: "Updated recently",
         image:
           "/images/iron-nest/iron-nest-liberation-underground-cache-ap-solution.webp",
@@ -225,21 +259,22 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 125,
           spotlightFeature: true,
-          spotlightOrder: 2,
+          spotlightOrder: 3,
           spotlightMeta:
-            "Repositioned Nest, three opening infantry, P4 recon, underground AP cache, final two infantry, danger-close shell choice, and minimum assets",
+            "Mission 3 with repositioning, three opening infantry, P4 reconnaissance, underground AP cache, final urban targets, and friendly-fire decisions",
         },
         archive: {
           showInCollections: true,
-          order: 3,
+          order: 4,
         },
       },
+  
       {
         title: "Iron Nest Counter-Battery Walkthrough",
         href: "/iron-nest/counter-battery-mission",
         type: "Walkthrough",
         description:
-          "Prepare three artillery solutions before the first impact starts the CBT, extend the timer, find the fresh battery, and clear every remaining hostile.",
+          "Pre-calculate the opening artillery positions, manage the Counter-Battery Timer, use both guns efficiently, and locate the fresh battery.",
         date: "Updated recently",
         image:
           "/images/iron-nest/iron-nest-counter-battery-timer-extended.webp",
@@ -251,21 +286,22 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 126,
           spotlightFeature: true,
-          spotlightOrder: 3,
+          spotlightOrder: 4,
           spotlightMeta:
-            "Three opening artillery positions, two-gun preload, first-impact timer trigger, CBT extensions, four remaining hostiles, fresh recon, and sector clear",
+            "Mission 4 with three opening artillery positions, two-gun preload, first-impact CBT trigger, timer extensions, fresh reconnaissance, and final cleanup",
         },
         archive: {
           showInCollections: true,
-          order: 4,
+          order: 5,
         },
       },
+  
       {
         title: "Iron Nest Iron Road Walkthrough",
         href: "/iron-nest/iron-road-walkthrough",
         type: "Walkthrough",
         description:
-          "Build the train waypoints, subtract shell flight time, destroy both AP emplacements, protect the allied route, and sound the War Horn safely.",
+          "Build future train waypoints, subtract shell flight time, destroy both AP emplacements, protect the allied route, and time the War Horn.",
         date: "Updated recently",
         image:
           "/images/iron-nest/iron-nest-iron-road-train-firing-solution.webp",
@@ -277,21 +313,22 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 127,
           spotlightFeature: true,
-          spotlightOrder: 4,
+          spotlightOrder: 5,
           spotlightMeta:
-            "Train timetable, 6 km and 4 km and 2 km waypoints, shell flight time, two AP emplacements, optional targets, allied route, and War Horn",
+            "Mission 5 with train timetable, future waypoints, shell flight time, two AP emplacements, optional targets, allied route, and War Horn timing",
         },
         archive: {
           showInCollections: true,
-          order: 5,
+          order: 6,
         },
       },
+  
       {
         title: "Iron Nest Siege of Cartagena Walkthrough",
         href: "/iron-nest/siege-of-cartagena-walkthrough",
         type: "Walkthrough",
         description:
-          "Solve the chained installations, destroy two coastal batteries, recover after Emergency Move, clear eight units, and complete both smoke requests.",
+          "Solve the chained installations, destroy both coastal batteries, recover after Emergency Move, clear the breakout threshold, and answer Smoke calls.",
         date: "Updated recently",
         image:
           "/images/iron-nest/iron-nest-siege-of-cartagena-breakout-success.webp",
@@ -303,21 +340,22 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 128,
           spotlightFeature: true,
-          spotlightOrder: 5,
+          spotlightOrder: 6,
           spotlightMeta:
-            "Signal station, assembly area, field command, coastal batteries, Emergency Move, two Position Reports, eight units, War Horn, smoke, and breakout",
+            "Mission 6 with signal station, assembly area, Field Command, coastal batteries, Emergency Move, Position Reports, War Horn, Smoke, and breakout",
         },
         archive: {
           showInCollections: true,
-          order: 6,
+          order: 7,
         },
       },
+  
       {
         title: "Iron Nest The Gorge Walkthrough",
         href: "/iron-nest/the-gorge-walkthrough",
         type: "Walkthrough",
         description:
-          "Restart the damaged Nest, scout east from K4 9:0, correct manual shots without the calculator, protect the convoy, and stop when the pass is clear.",
+          "Restart the damaged Nest, scout east, operate without the ballistic calculator, correct manual shots, protect the convoy, and clear the pass.",
         date: "Updated recently",
         image:
           "/images/iron-nest/iron-nest-the-gorge-pass-clear.webp",
@@ -329,13 +367,229 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 129,
           spotlightFeature: true,
-          spotlightOrder: 6,
+          spotlightOrder: 7,
           spotlightMeta:
-            "Manual engine restart, unavailable ballistic computer, K4 9:0, eastbound recon, ranging shots, impact correction, convoy safety, and pass clear",
+            "Mission 7 with engine restart, unavailable ballistic calculator, eastbound reconnaissance, manual ranging, impact corrections, convoy safety, and pass clear",
         },
         archive: {
           showInCollections: true,
-          order: 7,
+          order: 8,
+        },
+      },
+  
+      {
+        title: "Iron Nest Rock of Gibraltar Walkthrough",
+        href: "/iron-nest/rock-of-gibraltar-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Locate HMS Rockingham without aerial reconnaissance, wait until 11:08, use AP, then optionally calculate the moving-vessel interception.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-rockingham-ap-solution.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 131,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Mission 8 with The Mole, Dockmaster's House, HMS Rockingham, 11:08 restriction, Forward Observer decisions, AP firing solution, and optional moving vessel",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title: "Iron Nest Dead Reckoning Walkthrough",
+        href: "/iron-nest/dead-reckoning-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Reveal hidden targets with Tear Shells, clear the three primary positions, solve the late Field Command correction, and time the War Horn.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-dead-reckoning-tear-shell-reveal.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 132,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Mission 9 with Tear Shell reveals, hidden positions, first primary targets, late Field Command correction, shell choice, War Horn, and optional cleanup",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title: "Iron Nest Fire on Call Walkthrough",
+        href: "/iron-nest/fire-on-call-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Answer timed frontline support calls with Tear, H and Smoke, move friendlies out of danger, and use precise AP fire for danger-close targets.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-fire-on-call-danger-close-ap.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 133,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "Mission 10 with War Horn preparation, live support calls, Tear-then-H sequences, Smoke repositioning, support deadlines, danger-close AP, and stand-down",
+        },
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+  
+      {
+        title: "Iron Nest High Tide Walkthrough",
+        href: "/iron-nest/high-tide-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Track multiple landing craft, calculate moving AP intercepts, manage both guns, fall back toward the beach when necessary, and hold until 07:14.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-high-tide-first-intercept-solution.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 134,
+          spotlightFeature: true,
+          spotlightOrder: 11,
+          spotlightMeta:
+            "Mission 11 with multiple landing craft, future intercepts, AP launch timing, dual-gun target queues, beach fallback, and the 07:14 survival objective",
+        },
+        archive: {
+          showInCollections: true,
+          order: 12,
+        },
+      },
+  
+      {
+        title: "Iron Nest Blind Fire Walkthrough",
+        href: "/iron-nest/blind-fire-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Build Alpha and Bravo, locate all four AA batteries, manage chained positional error, and fire without normal reconnaissance or impact imagery.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-blind-fire-reference-alpha.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 135,
+          spotlightFeature: true,
+          spotlightOrder: 12,
+          spotlightMeta:
+            "Mission 12 with reconnaissance blackout, Reference Alpha, AA Batteries 1–2, Reference Bravo, Batteries 3–4, chained error, shell tolerance, and Forward Observer decisions",
+        },
+        archive: {
+          showInCollections: true,
+          order: 13,
+        },
+      },
+  
+      {
+        title: "Iron Nest Phantom Battery Walkthrough",
+        href: "/iron-nest/phantom-battery-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Restart and relocate Iron Nest, recover your firing origin, use listening posts, gain +90s CBT from enemy spotters, and destroy the mobile battery.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-phantom-battery-listening-post-intersection.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 136,
+          spotlightFeature: true,
+          spotlightOrder: 13,
+          spotlightMeta:
+            "Mission 13 with engine restart, Emergency Move, Position Reports, listening-post triangulation, AP targets, enemy spotter +90s extensions, and mobile battery tracking",
+        },
+        archive: {
+          showInCollections: true,
+          order: 14,
+        },
+      },
+  
+      {
+        title: "Iron Nest Final Harvest Walkthrough",
+        href: "/iron-nest/final-harvest-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Time the train intercept, pre-plan static targets, manage counter-battery fire, answer live support calls, watch powder, and stop when the objective is complete.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-final-harvest-train-schedule.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 137,
+          spotlightFeature: true,
+          spotlightOrder: 14,
+          spotlightMeta:
+            "Mission 14 with train schedule and launch timing, Reference Alpha, Fire Direction Centers, AA battery, counter-battery phase, live H support, powder management, and stand-down",
+        },
+        archive: {
+          showInCollections: true,
+          order: 15,
+        },
+      },
+  
+      {
+        title: "Iron Nest White Shells Endings Guide",
+        href: "/iron-nest/white-shells-endings",
+        type: "Endings",
+        description:
+          "Unlock all four White Shells endings through PRPG, chemical submission, Atomic destruction, or The Road Not Taken betrayal route.",
+        date: "Updated recently",
+        image:
+          "/images/iron-nest/iron-nest-white-shells-road-not-taken-ending.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 138,
+          spotlightFeature: true,
+          spotlightOrder: 15,
+          spotlightMeta:
+            "Mission 15 and all four endings: A City in Celebration, A City Subdued, A City Silent, The Road Not Taken, betrayal preparation, retaliation priorities, and achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 16,
         },
       },
     ],

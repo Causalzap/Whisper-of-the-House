@@ -1,0 +1,678 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import AdUnit from "@/components/ads/AdUnit";
+
+<GuideQuickAnswer title="Quick Answer">
+**Mission 13 — Phantom Battery starts with Iron Nest already under fire.**
+
+Restart the engines first, then execute the required Emergency Move. The Nest
+relocates to an unknown position, so do not reuse your old firing origin.
+
+Use Position Reports to rebuild your own location while the three fixed
+listening posts collect bearings on the Phantom Battery. Once two useful
+observations agree, mark the battery and prepare the shot.
+
+The real trap is that the Phantom Battery is **mobile**. A location that was
+correct a moment ago can become stale after the battery fires or repositions.
+
+Enemy spotters are your time reserve: **each destroyed spotter adds 90 seconds
+to the Counter-Battery Timer**. I use them when the timer is too tight to
+rebuild my own position and get a fresh AP solution safely.
+
+In one successful final engagement, the confirmed battery was fired on at about
+**277.4°**, with **2 charges** and approximately **27.72° elevation**. The exact
+numbers change because both Iron Nest and the Phantom Battery can move.
+</GuideQuickAnswer>
+
+<div className="my-4 text-sm text-slate-500 dark:text-slate-400">
+  Last updated: Aug 8, 2026. Phantom Battery is Mission 13 in the Iron Nest
+  campaign. This walkthrough focuses on the opening damage state, engine
+  restart, unknown-location recovery, listening-post bearings, enemy spotters,
+  90-second timer extensions, the mobile battery, repeated movement, and the
+  final AP engagement.
+</div>
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-phantom-battery-listening-post-orders.webp"
+    alt="Iron Nest Phantom Battery orders describing the unknown relocation three listening posts and enemy spotter timer extensions"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The mission gives me two separate problems at once: find the Phantom Battery
+    and keep rebuilding Iron Nest's own firing position after movement.
+  </figcaption>
+</figure>
+
+<h2 id="phantom-battery-route">
+  Mission 13: Phantom Battery route at a glance
+</h2>
+
+Phantom Battery was the first mission where I died before I had really started
+solving the artillery problem.
+
+The opening attack damages Iron Nest, the engine has to be restarted, and the
+mission immediately expects an Emergency Move.
+
+After that, the usual assumption that I know where my gun is no longer holds.
+
+My reliable route is:
+
+1. Restart the engine correctly.
+2. Do not leave the controls on the starter position.
+3. Execute the required Emergency Move.
+4. Read the new coarse relocation area.
+5. Request enough Position Reports to recover Iron Nest's actual position.
+6. Mark all three fixed listening posts.
+7. Wait for the Phantom Battery to fire and generate fresh bearing reports.
+8. Intersect those reports to get a current battery position.
+9. Decide whether the timer allows a battery shot immediately.
+10. If the timer is too low, destroy an enemy spotter for another 90 seconds.
+11. Use AP once the battery position is confirmed.
+12. Move again whenever the Counter-Battery Timer becomes unsafe.
+13. Delete every old Iron Nest firing line after movement.
+14. Watch for `mobile` or `repositioning` before firing at an old battery marker.
+15. Rebuild both positions when necessary.
+16. Finish the current battery position with a fresh AP solution.
+17. Stop after the threat is neutralized.
+
+The basic geometry for finding Iron Nest from reports is already covered in
+<Link href="/iron-nest/how-to-triangulate">
+  How to Triangulate in Iron Nest
+</Link>
+
+The
+<Link href="/iron-nest/counter-battery-mission">
+  Counter-Battery walkthrough
+</Link>
+covers the earlier version of the timer mechanic.
+
+Phantom Battery is different because **both sides of the firing line can
+change**.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="restart-before-moving">
+  Restart the engine before trying to escape
+</h2>
+
+The opening attack puts Iron Nest into a damaged state immediately.
+
+On my first attempt, I spent too long fighting the restart controls and then
+tried to execute the move without being certain the engine was actually
+running.
+
+That run ended almost immediately.
+
+The important sequence on the successful restart was:
+
+1. use the starter;
+2. get the engine operating normally;
+3. move the engine controls out of the start state and into **RUN**;
+4. confirm the Nest is actually running;
+5. then execute Emergency Move.
+
+I do not start repairing every minor damaged system before moving.
+
+The hostile battery is already engaging me.
+
+The first priority is:
+
+**engine → movement → position**
+
+not:
+
+**engine → repair everything → organize ammunition → eventually move**
+
+The engine controls themselves are the same system already encountered in The
+Gorge, so I reuse the same reference image rather than creating another copy.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-the-gorge-engine-restart.webp"
+    alt="Iron Nest engine restart controls used after the opening Phantom Battery strike"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    Once the engine catches, make sure the controls are left in the normal
+    running state before executing the move.
+  </figcaption>
+</figure>
+
+For the more detailed restart sequence, the
+<Link href="/iron-nest/the-gorge-walkthrough">
+  The Gorge walkthrough
+</Link>
+already covers the controls.
+
+<h2 id="first-emergency-move">
+  The first Emergency Move deliberately removes your firing origin
+</h2>
+
+After the successful restart, my first move relocated Iron Nest somewhere inside
+**R2**.
+
+That is not an exact coordinate.
+
+It is only a coarse area.
+
+This distinction matters because I can already receive useful information about
+the Phantom Battery while still not knowing exactly where **I** am.
+
+Knowing the enemy position alone is not enough to fire.
+
+I still need a valid Iron Nest-to-target line.
+
+So after moving, I immediately treat every old firing value as dead:
+
+- old turret bearing;
+- old range;
+- old charge choice;
+- old elevation;
+- old red firing line.
+
+I can keep fixed listening-post markers.
+
+I cannot keep a firing solution built from a firing origin that no longer
+exists.
+
+<h2 id="locate-iron-nest">
+  Rebuild Iron Nest's position before spending the expensive shot
+</h2>
+
+My first location recovery was messy because I tried to interpret the reports
+while the battery was still firing and the Nest was shaking.
+
+The lesson from that attempt was simple:
+
+**a coarse relocation grid is not enough for a precise AP shot.**
+
+Later in the same mission, a much cleaner recovery used two independent
+Position Reports.
+
+One reported a line from approximately:
+
+- **T4 8:1**
+- bearing about **256°**
+
+Another used:
+
+- **N4 5:5**
+- bearing about **168°**
+
+Their intersection gave me a workable new Iron Nest position.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-phantom-battery-position-reports.webp"
+    alt="Iron Nest Phantom Battery map using two Position Reports to recover Iron Nest location after Emergency Move"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    I solve my own position before building another expensive AP card. A good
+    battery marker is useless if my firing origin is still a guess.
+  </figcaption>
+</figure>
+
+I requisition the second report when the first one still leaves me somewhere
+along a line.
+
+I do **not** try to save requisition by choosing an arbitrary point and hoping
+the AP radius forgives it.
+
+The entire mission is built around precise counter-battery fire.
+
+A guessed firing origin defeats that purpose.
+
+<h2 id="place-listening-posts">
+  Mark all three listening posts before the battery speaks again
+</h2>
+
+The mission deploys **three listening posts** in the sector.
+
+They are fixed reference points.
+
+Their job is to give me bearings when the Phantom Battery re-engages.
+
+That means I want all three on the map before I start interpreting any battery
+report.
+
+I do not need all three bearings every time.
+
+I need enough independent information to support one current battery position.
+
+A clean pair of useful bearings can be enough.
+
+The mistake is drawing a battery bearing from Iron Nest.
+
+Listening-post bearings begin at the listening post named in the report.
+
+That is the same origin rule used everywhere else in the campaign, but Phantom
+Battery makes mistakes much more expensive because the Counter-Battery Timer is
+running while I solve them.
+
+<h2 id="find-phantom-battery">
+  Let the listening posts find the battery before you guess
+</h2>
+
+In one engagement, the battery re-opened fire and the listening posts began
+producing fresh bearings.
+
+One of the reports included a bearing around **258°** from its listening post.
+
+Once another useful constraint was added, the two lines produced a believable
+crossing.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-phantom-battery-listening-post-intersection.webp"
+    alt="Iron Nest Phantom Battery map showing listening post bearings intersecting at a suspected battery position"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The listening posts tell me where the enemy fired from. I still measure the
+    final artillery shot separately from the current Iron Nest position.
+  </figcaption>
+</figure>
+
+This is where I make the first big mission decision.
+
+### If the battery point is clean and I have enough time
+
+I build the firing solution immediately.
+
+### If the battery point is still weak
+
+I wait for another useful report instead of spending an armor-piercing round on
+a guess.
+
+### If the timer is already too low
+
+I switch priorities and kill an enemy spotter for more time.
+
+That last option is what makes Phantom Battery different from a simple “find the
+intersection and shoot” puzzle.
+
+<h2 id="first-battery-shot">
+  My first battery shot proved the location — and exposed the shell requirement
+</h2>
+
+My first confident battery solution produced a worked example around:
+
+- **287.5° bearing**
+- **3 charges**
+- approximately **42.54° elevation**
+
+The shot reached the suspected Phantom Battery position.
+
+It did not finish the mission.
+
+Instead, the target state made it clear that the position required a precise
+armor-piercing follow-up.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-phantom-battery-ap-required.webp"
+    alt="Iron Nest Phantom Battery target revealed at the listening post intersection with an armor piercing requirement"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    Once the target is confirmed as an AP problem, I stop experimenting with
+    wider destructive shells and prepare the precise follow-up.
+  </figcaption>
+</figure>
+
+This is when I buy AP.
+
+Not when the mission starts.
+
+Not when I first see a vague bearing.
+
+Not while I still have two possible intersections.
+
+I buy it when I have:
+
+- a current battery location;
+- a current Iron Nest location;
+- enough time to construct the final shot.
+
+That ordering matters because the Phantom Battery can move before I use the
+shell.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="move-before-timer-expires">
+  Move before the Counter-Battery Timer reaches the desperate stage
+</h2>
+
+The worst moments in this mission came when I tried to squeeze one more solution
+out of a nearly dead timer.
+
+At one point I was down to only a handful of seconds before impact.
+
+That is too late to start thinking about movement.
+
+My rule became:
+
+**If I cannot finish a verified shot inside the remaining timer, I move first.**
+
+After moving:
+
+1. discard the old firing line;
+2. keep the last known battery marker only as historical information;
+3. recover Iron Nest's new position;
+4. wait for current enemy information;
+5. rebuild the shot.
+
+This feels slower, but surviving the move gives me another solve.
+
+Trying to save ten seconds with stale coordinates can end the entire run.
+
+<h2 id="enemy-spotters">
+  Enemy spotters are 90-second time extensions
+</h2>
+
+The opening orders give one of the most useful numbers in the mission:
+
+**each destroyed enemy spotter adds 90 seconds to the Counter-Battery Timer.**
+
+I treat those spotters as a time resource.
+
+I do not automatically clear every spotter before touching the Phantom Battery.
+
+That wastes the information advantage I already have when the battery itself is
+well located.
+
+I shoot a spotter when:
+
+- the battery has repositioned and I need time to find it again;
+- Emergency Move forced me to rebuild my own position;
+- the timer is too short for another full AP calculation;
+- a spotter is already well located and cheap to remove.
+
+During one recovery, I prepared two known spotters across the two guns so I
+could remove them quickly rather than handling them one at a time.
+
+The purpose was not simply extra kills.
+
+It was buying enough time to solve the moving battery again.
+
+This is the decision that keeps the mission under control:
+
+> **Battery position certain + enough time → shoot battery.**
+>
+> **Battery uncertain + timer collapsing → shoot a spotter.**
+
+<h2 id="phantom-battery-moves">
+  Do not assume the Phantom Battery stays where you found it
+</h2>
+
+This is the biggest trap in the mission.
+
+After I finally had a good battery position, prepared AP, moved, rebuilt my own
+position, and fired again, the expected target was no longer there.
+
+The reason became clear:
+
+**the Phantom Battery is mobile.**
+
+Later reports explicitly described it as:
+
+- `mobile`;
+- `repositioning`.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-phantom-battery-mobile-repositioning.webp"
+    alt="Iron Nest Phantom Battery report showing that the enemy battery is mobile and repositioning"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    Once the battery starts repositioning, yesterday's perfect marker becomes
+    today's miss.
+  </figcaption>
+</figure>
+
+One attempted follow-up used approximately:
+
+- **300.2° bearing**
+- **4.04 km range**
+- **2 charges**
+- **24.24° elevation**
+
+The card itself was internally consistent.
+
+The problem was the target.
+
+The battery was still moving.
+
+That is an important distinction.
+
+When a well-built AP shot misses a mobile Phantom Battery, I do not immediately
+assume:
+
+- calculator error;
+- wrong charges;
+- wrong AP shell;
+- broken gun.
+
+I first ask:
+
+**Was the target still at that marker when I fired?**
+
+If the latest message says `repositioning`, I stop using the old target point.
+
+<h2 id="when-to-wait-for-new-bearing">
+  When I wait instead of firing another AP
+</h2>
+
+Once the battery is mobile, firing faster is not automatically better.
+
+I wait when:
+
+- the last report explicitly says the battery is repositioning;
+- only one fresh listening-post bearing is available;
+- my target marker is still based on the previous firing position;
+- I just executed Emergency Move and have not recovered my own location;
+- the AP shot would be based on two stale assumptions at once.
+
+I fire when:
+
+- Iron Nest's position is current;
+- the battery's latest position is supported by fresh information;
+- no `mobile` update has invalidated it;
+- the timer still covers loading and shell flight.
+
+The expensive mistake is trying to solve uncertainty by firing more AP rounds.
+
+Phantom Battery rewards **current information**, not volume of fire.
+
+<h2 id="off-map-position">
+  What I did when a Position Report seemed to put Iron Nest off the map
+</h2>
+
+One later Emergency Move created another strange problem.
+
+The reports put Iron Nest somewhere around **M1**, but plotting the information
+made the position appear to fall beyond the useful map edge.
+
+Rather than build a firing solution from a point I did not trust, I used a
+controlled movement.
+
+I moved Iron Nest roughly **2 km north**.
+
+That brought the firing origin back into a part of the map I could work with.
+
+Then I requested fresh positional information.
+
+One recovery used distance constraints around:
+
+- **3.72 km from P1 9:5**
+- **1.36 km from L1 7:9**
+
+Those measurements converged on the new firing position.
+
+I would not treat those coordinates as a required Phantom Battery route.
+
+The reusable lesson is:
+
+> If the relocation data puts Iron Nest somewhere I cannot map reliably, I do
+> not pretend the edge of the map is an exact firing origin.
+
+A short controlled move plus new reports is safer than spending another AP
+round from a guessed point.
+
+<h2 id="final-phantom-battery-shot">
+  Rebuild both ends of the line for the final AP shot
+</h2>
+
+The final successful engagement only happened after I stopped carrying old
+solutions forward.
+
+I had:
+
+- a current Iron Nest position;
+- a current battery point;
+- AP loaded;
+- enough time left to finish the setup.
+
+In that operation, the final firing state used approximately:
+
+- **277.4° bearing**
+- **2 powder charges**
+- **27.72° elevation**
+
+Both gun controls were prepared around the same confirmed solution before the
+shot.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-phantom-battery-threat-neutral.webp"
+    alt="Iron Nest Phantom Battery final AP engagement followed by threat neutral confirmation"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The final hit came from a fresh firing origin aimed at a fresh battery
+    position. Reusing either stale endpoint had already caused misses earlier in
+    the mission.
+  </figcaption>
+</figure>
+
+The hit destroyed the Phantom Battery and command confirmed the threat was
+neutralized.
+
+That is the point where I stop.
+
+I do not continue clearing every remaining hostile icon simply because extra
+targets may still exist.
+
+The mission is about hunting the opposing battery.
+
+Once it is gone, the required problem is solved.
+
+<h2 id="phantom-battery-stuck">
+  Phantom Battery mistakes that cost me entire attempts
+</h2>
+
+### Starting Emergency Move before the engine is actually running
+
+The opening sequence is unforgiving. Finish the restart and leave the controls
+in the running state first.
+
+### Treating R2 as an exact Iron Nest coordinate
+
+The first relocation only narrows the Nest to an area.
+
+### Trying to solve only the enemy position
+
+A perfect battery marker still cannot produce a firing solution when I do not
+know my own current position.
+
+### Drawing listening-post bearings from Iron Nest
+
+Each bearing begins at the named listening post.
+
+### Buying AP before the battery position is defensible
+
+The battery can relocate while I am still solving the map. Buy the expensive
+shot when I am ready to use it.
+
+### Chasing spotters while the battery is already exposed
+
+Spotters buy time. They are most useful when I actually need more time.
+
+### Ignoring the 90-second extension
+
+When the timer is too low for another full solution, a known spotter can be more
+valuable than a rushed battery shot.
+
+### Firing at the previous battery marker after a `mobile` update
+
+The old point can be mathematically perfect and tactically useless.
+
+### Assuming a missed AP means AP is wrong
+
+In one attempted shot, the battery had simply moved away from the solved point.
+
+### Keeping old firing lines after Emergency Move
+
+The target may remain valid, but the bearing and range from Iron Nest do not.
+
+### Guessing an off-map firing origin
+
+If the positional reports produce a point I cannot reliably use, I reposition
+and request new information.
+
+### Waiting until the last few seconds to move
+
+Emergency Move is useful only if I survive long enough to execute it.
+
+<h2 id="phantom-battery-completion">
+  Phantom Battery completion and achievements
+</h2>
+
+The mission-completion achievement is **Mirror Image — Hunt the Phantom
+Battery**.
+
+The all-Gold achievement is **Master Gunner — Earn gold on all medals in
+"Phantom Battery."**
+
+The available achievement data confirms those two unlocks, but it does not
+expose the exact numerical Gold thresholds, so I do not treat any particular
+shell count, Emergency Move count, or requisition total as a guaranteed
+all-Gold formula.
+
+The useful repeat-run priorities are:
+
+- restart cleanly;
+- avoid unnecessary Emergency Moves;
+- use spotters as timer extensions rather than random side targets;
+- do not waste AP on a repositioning battery;
+- rebuild your own position correctly after every move;
+- stop as soon as the Phantom Battery is confirmed destroyed.
+
+For the underlying Position Report geometry, use the
+<Link href="/iron-nest/how-to-triangulate">
+  Iron Nest triangulation guide
+</Link>
+
+For the earlier fixed-target Counter-Battery system, use the
+<Link href="/iron-nest/counter-battery-mission">
+  Counter-Battery walkthrough
+</Link>
