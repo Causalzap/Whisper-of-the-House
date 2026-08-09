@@ -131,6 +131,293 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Sovereign Tower",
+    game: "Sovereign Tower",
+    href: "/sovereign-tower",
+    slug: "sovereign-tower",
+    kind: "game",
+    status: "active",
+    accent: "purple",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Fantasy Kingdom Management",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Act 1–3 routes + timeline coverage",
+  
+    description:
+      "Follow the Sovereign Tower guide hub through Act 1 and Act 2 routing, Demon Power rewinds, Knight questlines, county alliances, King Slayer, the Golden Key, and major timeline decisions.",
+  
+    coverage: [
+      "Act 1 first-clear routing through early Gold management, Groveshire versus Gavault, county-alliance timing, Dragon Knight preparation objectives, final-party setup, and the Act 1 Demon checkpoint",
+      "Demon Power rewind rules, retained Knight knowledge, event markers, changed audiences, failed-loop diagnosis, Before murder timing, Act locks, and now-or-never checkpoints",
+      "Gwendan's 350 Gold debt, Tower murder investigation, inconsistent evidence, occult influence, dismissal before the murder, victim survival, Map Room recall, and True Noble Soul progression",
+      "Groveshire beast investigation through the Black Forest, Angelica's Wolf resolution, county alliance, Good Boy, the human curse reveal, cure decision, Sir Rufus transformation, and Wolf Habits",
+      "Act 2 scheduling around the eight-slot Round Table, Clovermont, the Tower murder, Gideon recruitment, South Bay, temporary Knight absences, five-circle King Slayer pressure, and the final Act checkpoint",
+      "South Bay Wish-Granting Lamp route through the Tower Library, Djinn Island, stolen Lamp, auction recovery, Yannis survival, Ligia recruitment, plus the alternate political-instability alliance route",
+      "King Slayer preparation from the five-circle warning through late emergencies, final resolution choices, four-Knight purification, 2–5 Damage Risk, Glass Blade, Spectral Eye, and the Act 2 rewind checkpoint",
+      "Golden Key progression from Angelica's clue and zero-risk search assignment through obtaining the relic, the Emperor's peace offer, the 13-cycle refusal route, and give-or-keep planning",
+    ],
+    image:
+      "/images/sovereign-tower/sovereign-tower-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 27,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Sovereign Tower Guide: Walkthrough, Rewind, Knights & Routes",
+        href: "/sovereign-tower",
+        type: "Guide Hub",
+        description:
+          "Start here for Act routes, Demon Power, Knight planning, Gwendan, Wolf and Rufus, South Bay, King Slayer, the Golden Key, and the major decisions that shape each timeline.",
+        image:
+          "/images/sovereign-tower/sovereign-tower-act-2-round-table-eight-slots.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Act 1 and Act 2 routes, Demon Power, Knight planning, Groveshire, Gwendan, Wolf and Rufus, South Bay, King Slayer, Golden Key, and timeline checkpoints",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Sovereign Tower Act 1 Best Route & Dragon Knight Guide",
+        href: "/sovereign-tower/act-1-best-route",
+        type: "Walkthrough",
+        description:
+          "Choose Groveshire or Gavault, protect early Gold, secure an allied county, prioritize the Dragon Knight objectives, and stop at the Act 1 point of no return.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-act-1-dragon-knight-objectives.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 139,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Groveshire vs Gavault, early Gold, allied county, Merchant 10, Noble 8, 400 Gold, Dragon Knight preparation, final party, and Act 1 checkpoint",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Sovereign Tower Demon Power Guide: Rewind & Timeline Rules",
+        href: "/sovereign-tower/demon-power",
+        type: "Systems",
+        description:
+          "Learn what Demon Power keeps, how to choose a rewind point, why outcomes can repeat, how event markers work, and when an older Act becomes inaccessible.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-demon-power-cycle-selector.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 140,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Rewind rules, retained Knight knowledge, cycle selector, Before murder markers, changed audiences, failed rewinds, Act locks, and now-or-never checkpoints",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Sovereign Tower Gwendan Guide: Murder, Debt & True Noble Soul",
+        href: "/sovereign-tower/gwendan-questline",
+        type: "Guide",
+        description:
+          "Handle Gwendan's 350 Gold debt, investigate the Tower murder, confront the inconsistent evidence, prevent the killing, dismiss him safely, and continue his personal route.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-gwendan-inconsistent-evidence.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 141,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "350 Gold debt, Tower murder, inconsistent evidence, occult whispers, Before murder intervention, temporary dismissal, victim survival, recall, and True Noble Soul",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Sovereign Tower Wolf Guide: Curse, Rufus & Good Boy",
+        href: "/sovereign-tower/groveshire-wolf",
+        type: "Guide",
+        description:
+          "Solve the Groveshire beast route, use Angelica to recruit the Wolf, unlock Good Boy, reveal the human curse, choose whether to cure it, and continue as Sir Rufus.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-wolf-joins-round-table.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 142,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Black Forest, Beast is a Wolf, Angelica, Groveshire alliance, Wolf recruitment, Good Boy, curse reveal, cure choice, Sir Rufus, and Wolf Habits",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Sovereign Tower Act 2 Walkthrough: Murder to King Slayer",
+        href: "/sovereign-tower/act-2-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Plan Act 2 around the eight-slot Round Table, Tower murder, Gideon, South Bay, the Wolf-to-Rufus transition, King Slayer's five circles, and the final Demon checkpoint.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-act-2-round-table-eight-slots.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 143,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Eight-slot Round Table, Clovermont, Tower murder, Gwendan intervention, Gideon, South Bay scheduling, Wolf-to-Rufus absence, five circles, final resolution, and Act 2 checkpoint",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Sovereign Tower South Bay Lamp Guide: Yannis & Ligia",
+        href: "/sovereign-tower/south-bay-lamp",
+        type: "Walkthrough",
+        description:
+          "Find the Wish-Granting Lamp through the Tower Library, Djinn Island and auction, save Yannis for the clean route, or recover South Bay after his death.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-south-bay-wish-granting-lamp.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 144,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Ligia, three-cycle investigation, Tower Library, Djinn Island, stolen Lamp, auction, Yannis survival, South Bay alliance, political instability, and Ligia recruitment",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Sovereign Tower King Slayer: Purification, Glass Blade & Eye",
+        href: "/sovereign-tower/king-slayer",
+        type: "Bosses",
+        description:
+          "Handle the five-circle countdown, compare the final King Slayer resolutions, prepare the four-Knight purification route, manage 2–5 Damage Risk, and earn the Spectral Eye.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-king-slayer-purification-choice.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 145,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Five-circle countdown, sorceress support, late emergencies, final resolution choice, four-Knight purification, 2–5 Damage Risk, Glass Blade, Spectral Eye, and Act 2 lock",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Sovereign Tower Golden Key: How to Get It & Emperor Choice",
+        href: "/sovereign-tower/golden-key",
+        type: "Guide",
+        description:
+          "Follow Angelica's clue to the Golden Key, complete the zero-risk search assignment, obtain the relic, and decide whether to give it to the Emperor or keep expanding.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-golden-key-obtained.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 146,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Angelica clue, mysterious manor, Search for the golden key, zero Damage Risk, Spectral Eye, Golden Key obtained, Emperor peace offer, and 13 cycles until ruin",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+    ],
+  },
+  {
     title: "Iron Nest",
     game: "Iron Nest",
     href: "/iron-nest",

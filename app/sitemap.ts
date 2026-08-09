@@ -646,6 +646,16 @@ const paths = [
   '/iron-nest/phantom-battery-walkthrough',
   '/iron-nest/final-harvest-walkthrough',
   '/iron-nest/white-shells-endings',
+
+  '/sovereign-tower',
+  '/sovereign-tower/act-1-best-route',
+  '/sovereign-tower/act-2-walkthrough',
+  '/sovereign-tower/demon-power',
+  '/sovereign-tower/gwendan-questline',
+  '/sovereign-tower/groveshire-wolf',
+  '/sovereign-tower/south-bay-lamp',
+  '/sovereign-tower/king-slayer',
+  '/sovereign-tower/golden-key',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -653,6 +663,16 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/sovereign-tower': '2026-08-09',
+  '/sovereign-tower/act-1-best-route': '2026-08-09',
+  '/sovereign-tower/act-2-walkthrough': '2026-08-09',
+  '/sovereign-tower/demon-power': '2026-08-09',
+  '/sovereign-tower/gwendan-questline': '2026-08-09',
+  '/sovereign-tower/groveshire-wolf': '2026-08-09',
+  '/sovereign-tower/south-bay-lamp': '2026-08-09',
+  '/sovereign-tower/king-slayer': '2026-08-09',
+  '/sovereign-tower/golden-key': '2026-08-09',
+  
   '/iron-nest': '2026-08-08',
   '/iron-nest/fire-and-light-walkthrough': '2026-08-07',
   '/iron-nest/liberation-walkthrough': '2026-08-07',
