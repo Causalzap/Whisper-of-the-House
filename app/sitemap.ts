@@ -663,7 +663,8 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-  '/sovereign-tower': '2026-08-09',
+
+  
   '/sovereign-tower/act-1-best-route': '2026-08-09',
   '/sovereign-tower/act-2-walkthrough': '2026-08-09',
   '/sovereign-tower/demon-power': '2026-08-09',
@@ -672,7 +673,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/sovereign-tower/south-bay-lamp': '2026-08-09',
   '/sovereign-tower/king-slayer': '2026-08-09',
   '/sovereign-tower/golden-key': '2026-08-09',
-  
+
   '/iron-nest': '2026-08-08',
   '/iron-nest/fire-and-light-walkthrough': '2026-08-07',
   '/iron-nest/liberation-walkthrough': '2026-08-07',
