@@ -1,4 +1,5 @@
 // app/layout.tsx
+
 import type { Metadata } from "next";
 import Script from "next/script";
 import "../styles/globals.css";
@@ -19,14 +20,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <head>
         <meta
           name="impact-site-verification"
           content="5b77d168-34a3-4c38-b27b-6db13d6bd8ba"
-          {...({ value: "5b77d168-34a3-4c38-b27b-6db13d6bd8ba" } as any)}
+          {...({
+            value: "5b77d168-34a3-4c38-b27b-6db13d6bd8ba",
+          } as any)}
+        />
+
+        <Script
+          id="mediavine-script"
+          src="//scripts.mediavine.com/tags/ef7c02f6-3b8c-44f1-a81a-4ebf11f77ea5.js"
+          strategy="beforeInteractive"
+          data-noptimize="1"
+          data-cfasync="false"
         />
 
         <Script
@@ -38,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body>
-        {children} 
+        {children}
 
         <GoogleAnalytics gaId="G-CKPEMMMTCR" />
       </body>
