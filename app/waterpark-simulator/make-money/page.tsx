@@ -20,23 +20,23 @@ const imageUrls = [
 export const metadata: Metadata = {
   title: "Waterpark Simulator Money Guide: Profit on Hard Mode",
   description:
-    "Separate building costs from real losses, control staff and stock, and use a tested Hard Mode route to keep your waterpark profitable.",
+    "Fix negative Daily Profit, control staff and stock costs, use Night Shift well, and expand without wrecking Hard Mode cash flow.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Make Money in Waterpark Simulator",
+    title: "Waterpark Simulator Money Guide: Profit on Hard Mode",
     description:
-      "Read negative Daily Profit correctly, protect your operating reserve, control wages and expand only after a no-build test day.",
+      "Separate construction spending from real operating losses, protect your reserve, use Night Shift profitably, and know when to expand or wait.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1280,
         height: 720,
-        alt: "Waterpark Simulator Day 1 report showing negative profit caused mainly by building expenses",
+        alt: "Waterpark Simulator Day 1 report showing negative Daily Profit caused mainly by building expenses",
       },
     ],
   },
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Waterpark Simulator Money Guide",
     description:
-      "Diagnose negative Daily Profit, control staff and stock costs, and expand without destroying Hard Mode cash flow.",
+      "Diagnose negative Daily Profit, control staff and stock, use Night Shift, and expand without destroying Hard Mode cash flow.",
     images: [imageUrls[0]],
   },
 };
@@ -86,11 +86,11 @@ const jsonLd = {
       headline:
         "Waterpark Simulator Money Guide: How to Make Profit on Hard Mode",
       description:
-        "This Waterpark Simulator money guide explains how to separate temporary construction losses from recurring operating losses, read the Daily Report, protect a restock and wage reserve, upgrade attractions that already earn, increase ticket and tip income, use Poster Marketing safely, decide when vending machines and Restockers are worth buying, control staff salaries and Staff Overflow costs, evaluate the Mafia loan, and run a no-build test day before expanding or deleting facilities.",
+        "A practical Waterpark Simulator Hard Mode money guide covering negative Daily Profit, construction versus operating losses, early cash reserves, attraction upgrades, tickets, tips, Poster Marketing, vending machines, Night Shift, staff costs, Mafia cash, no-build test days, and buy-wait-turn-back expansion decisions.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-01",
-      dateModified: "2026-08-01",
+      dateModified: "2026-08-10",
       about: [
         {
           "@type": "VideoGame",
@@ -99,6 +99,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Waterpark Simulator money",
+        },
+        {
+          "@type": "Thing",
+          name: "Waterpark Simulator make money",
         },
         {
           "@type": "Thing",
@@ -111,6 +115,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Waterpark Simulator building expenses",
+        },
+        {
+          "@type": "Thing",
+          name: "Waterpark Simulator operating costs",
+        },
+        {
+          "@type": "Thing",
+          name: "Waterpark Simulator Night Shift",
         },
         {
           "@type": "Thing",
@@ -130,7 +142,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Waterpark Simulator Mafia loan",
+          name: "Waterpark Simulator Mafia money",
         },
         {
           "@type": "Thing",
@@ -169,12 +181,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="How I Make Money and Diagnose Negative Daily Profit"
-          description="Separate expansion spending from recurring losses, protect wages and stock, and test one normal operating day before cutting staff or selling attractions."
+          description="Separate building expenses from recurring losses, protect the operating reserve, use Night Shift once the park can support it, and test one normal day before making cuts."
           gameTitle="Waterpark Simulator"
           gameHref="/waterpark-simulator"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 1, 2026"
+          updatedAt="August 10, 2026"
           toc={[
             {
               id: "read-daily-report",
@@ -190,19 +202,23 @@ export default function Page() {
             },
             {
               id: "tickets-tips-and-marketing",
-              label: "Tickets, tips and marketing",
+              label: "Tickets, tips & marketing",
             },
             {
               id: "vending-machines",
               label: "Vending machines",
             },
             {
+              id: "night-shift",
+              label: "Is Night Shift worth it?",
+            },
+            {
               id: "staff-costs",
               label: "Staff costs",
             },
             {
-              id: "mafia-loan",
-              label: "Mafia loan",
+              id: "mafia-money",
+              label: "Mafia money",
             },
             {
               id: "construction-loss-vs-operating-loss",
@@ -219,6 +235,14 @@ export default function Page() {
               label: "Waterpark Simulator Guide Hub",
             },
             {
+              href: "/waterpark-simulator/mafia-guide",
+              label: "Mafia Loan & Sabotage Guide",
+            },
+            {
+              href: "/waterpark-simulator/5-star-diamond-prestige-guide",
+              label: "5-Star & Diamond Prestige Guide",
+            },
+            {
               href: "/waterpark-simulator/research-points",
               label: "Research Points & Unlock Order",
             },
@@ -229,10 +253,6 @@ export default function Page() {
             {
               href: "/waterpark-simulator/staff-guide",
               label: "Staff Hiring & Employee Limits",
-            },
-            {
-              href: "/waterpark-simulator/museum-guide",
-              label: "Museum Quests & Theme Rewards",
             },
             {
               href: "/waterpark-simulator/achievements-guide",

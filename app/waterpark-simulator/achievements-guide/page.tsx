@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import WaterparkSimulatorAchievementsGuideContent from "@/data/waterpark-simulator/achievements-guide.mdx";
+import WaterparkSimulatorAchievementsContent from "@/data/waterpark-simulator/achievements-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/waterpark-simulator`;
@@ -18,39 +18,37 @@ const imageUrls = [
   `${siteUrl}/images/waterpark-simulator/waterpark-simulator-pool-poop-cleanup.webp`,
   `${siteUrl}/images/waterpark-simulator/waterpark-simulator-six-worker-staff-setup.webp`,
   `${siteUrl}/images/waterpark-simulator/waterpark-simulator-zipline-ride.webp`,
-  `${siteUrl}/images/waterpark-simulator/waterpark-simulator-custom-slide-editor.webp`,
   `${siteUrl}/images/waterpark-simulator/waterpark-simulator-trumpet-solo.webp`,
-  `${siteUrl}/images/waterpark-simulator/waterpark-simulator-yogi-wooden-hot-tub-quest.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "Waterpark Simulator 1.0 Achievements: All 71 Unlocks",
+  title: "Waterpark Simulator Achievements Guide: All 71 Unlocks",
   description:
-    "Unlock all 71 achievements with a Beach and Hard Mode route for stars, maps, Yogi quests, long grinds, Security, Zipline and Custom Slides.",
+    "Track all 71 Waterpark Simulator achievements with exact conditions, efficient counter routes, Beach and City goals, Hard Mode, Diamond, Yogi and 1.0 unlocks.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Waterpark Simulator 1.0 Achievements Guide",
+    title: "Waterpark Simulator Achievements Guide: All 71 Unlocks",
     description:
-      "Route all 71 achievements through one Beach save, a separate City run, Yogi quests, long maintenance counters and the new 1.0 systems.",
+      "Complete all 71 achievements with a practical route for Prestige, Beach and City maps, maintenance counters, sales, Yogi, Security and one-off actions.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1280,
         height: 720,
-        alt: "Waterpark Simulator Beach Map reaching three-star Prestige",
+        alt: "Waterpark Simulator Beach Map reaching three-star Prestige and unlocking progression achievements",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Waterpark Simulator: All 71 Achievements",
+    title: "Waterpark Simulator Achievements Guide",
     description:
-      "Use one long Beach and Hard Mode save for most achievements, then finish City Map, Yogi, Diamond, Zipline and Custom Slide unlocks.",
+      "Track all 71 achievements, long counters, map requirements, Prestige milestones and one-off cleanup triggers.",
     images: [imageUrls[0]],
   },
 };
@@ -90,13 +88,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Waterpark Simulator 1.0 Achievements Guide: All 71 Unlocks and a 100% Route",
+        "Waterpark Simulator Achievements Guide: All 71 Unlock Conditions",
       description:
-        "This Waterpark Simulator achievements guide covers all 71 achievements available in version 1.0. It explains how to combine general Prestige, Beach Map and Hard Mode achievements in one long-running save, when to create a separate City Map park, and how to plan cleaning, repair, puddle, trash, visitor, revenue, food-sale and staff counters before employees automate the required actions. It also covers Diamond Prestige, Security removals, Yogi's three-, four- and five-star achievements, the hidden Enlightenment Isn't Cheap condition, Zipline riding, Custom Slide creation, character customization and the new 1.0 map achievements.",
+        "A practical Waterpark Simulator achievement guide covering all 71 version 1.0 achievements, Beach and City Map requirements, Normal and Hard Prestige milestones, long cleaning and repair counters, revenue and sales goals, Security, Yogi, Diamond Prestige, Custom Slides, Ziplines and final 100% cleanup planning.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-01",
-      dateModified: "2026-08-01",
+      dateModified: "2026-08-10",
       about: [
         {
           "@type": "VideoGame",
@@ -108,27 +106,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Waterpark Simulator 1.0 achievements",
+          name: "Waterpark Simulator all 71 achievements",
         },
         {
           "@type": "Thing",
-          name: "Waterpark Simulator 71 achievements",
+          name: "Waterpark Simulator Beach Map achievements",
         },
         {
           "@type": "Thing",
-          name: "Waterpark Simulator Beach Map",
+          name: "Waterpark Simulator City Map achievements",
         },
         {
           "@type": "Thing",
-          name: "Waterpark Simulator City Map",
+          name: "Waterpark Simulator Hard Mode achievements",
         },
         {
           "@type": "Thing",
-          name: "Waterpark Simulator Hard Mode",
-        },
-        {
-          "@type": "Thing",
-          name: "Waterpark Simulator Diamond Prestige",
+          name: "Waterpark Simulator Diamond achievement",
         },
         {
           "@type": "Thing",
@@ -136,27 +130,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Enlightenment Isn't Cheap achievement",
+          name: "Waterpark Simulator Security achievement",
         },
         {
           "@type": "Thing",
-          name: "Order Restored achievement",
-        },
-        {
-          "@type": "Thing",
-          name: "High Above the Park achievement",
-        },
-        {
-          "@type": "Thing",
-          name: "Slide Architect achievement",
-        },
-        {
-          "@type": "Thing",
-          name: "Waterpark Simulator Zipline",
-        },
-        {
-          "@type": "Thing",
-          name: "Waterpark Simulator Custom Slides",
+          name: "Waterpark Simulator Slide Architect",
         },
       ],
       isPartOf: {
@@ -190,33 +168,33 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Route All 71 Achievements in Version 1.0"
-          description="Use one developed Beach and Hard Mode park for the long counters, keep manual jobs away from staff when they matter, then finish City Map, Yogi, Diamond and the remaining one-action unlocks."
+          title="How I Route All 71 Waterpark Simulator Achievements"
+          description="Use one long-running Hard Mode Beach save for most counters, combine overlapping Prestige goals, then switch to City and short cleanup sessions only when the achievement actually requires it."
           gameTitle="Waterpark Simulator"
           gameHref="/waterpark-simulator"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 1, 2026"
+          updatedAt="August 10, 2026"
           toc={[
             {
               id: "achievement-roadmap",
-              label: "100% achievement route",
+              label: "My achievement route",
             },
             {
               id: "version-1-achievements",
-              label: "New 1.0 achievements",
+              label: "1.0 achievement additions",
             },
             {
               id: "progression-achievements",
-              label: "Prestige and maps",
+              label: "Prestige & map achievements",
             },
             {
               id: "maintenance-achievements",
-              label: "Cleaning and safety",
+              label: "Cleaning, repair & safety",
             },
             {
               id: "money-sales-staff-achievements",
-              label: "Money, sales and staff",
+              label: "Revenue, sales & staff",
             },
             {
               id: "one-off-achievements",
@@ -228,7 +206,11 @@ export default function Page() {
             },
             {
               id: "achievement-checklist",
-              label: "Final 100% checklist",
+              label: "100% cleanup checklist",
+            },
+            {
+              id: "achievement-owner-guides",
+              label: "Related Owner guides",
             },
           ]}
           relatedLinks={[
@@ -237,20 +219,24 @@ export default function Page() {
               label: "Waterpark Simulator Guide Hub",
             },
             {
-              href: "/waterpark-simulator/research-points",
-              label: "Research Points & Unlock Order",
+              href: "/waterpark-simulator/5-star-diamond-prestige-guide",
+              label: "5-Star & Diamond Prestige Guide",
             },
             {
-              href: "/waterpark-simulator/staff-guide",
-              label: "Staff Hiring & Employee Limits",
+              href: "/waterpark-simulator/custom-slides-guide",
+              label: "Custom Slides Guide",
             },
             {
               href: "/waterpark-simulator/museum-guide",
               label: "Museum Quests & Theme Rewards",
             },
             {
-              href: "/waterpark-simulator/increase-satisfaction",
-              label: "Increase Satisfaction",
+              href: "/waterpark-simulator/staff-guide",
+              label: "Staff Hiring & Employee Limits",
+            },
+            {
+              href: "/waterpark-simulator/research-points",
+              label: "Research Points & Unlock Order",
             },
             {
               href: "/waterpark-simulator/make-money",
@@ -258,7 +244,7 @@ export default function Page() {
             },
           ]}
         >
-          <WaterparkSimulatorAchievementsGuideContent />
+          <WaterparkSimulatorAchievementsContent />
         </GuideArticlePage>
       </main>
 

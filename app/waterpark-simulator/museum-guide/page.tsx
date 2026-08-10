@@ -22,7 +22,7 @@ const imageUrls = [
 export const metadata: Metadata = {
   title: "Waterpark Simulator Museum Guide: Quests & Rewards",
   description:
-    "Complete Goldie, Poseidon, Yogi and Aztec quests, understand Museum rewards and star gates, and plan expensive themed builds safely.",
+    "Complete Goldie, Poseidon, Yogi and Aztec quests, spend Museum rewards, solve star gates and progress toward the Wonder Attraction.",
   alternates: {
     canonical: pageUrl,
   },
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Waterpark Simulator Museum Quests and Rewards Guide",
     description:
-      "Follow the Pirate, Ocean, Wellness and Aztec routes, solve three- and four-star locks, and avoid building themed areas before the park can support them.",
+      "Follow Pirate, Ocean, Wellness and Aztec routes, solve Museum star gates, manage expensive themed builds and reach the Wonder Attraction path.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1280,
         height: 720,
-        alt: "Waterpark Simulator Museum opening notification introducing quests, special resources and exclusive attractions",
+        alt: "Waterpark Simulator Museum opening notification introducing quests, special resources, exclusive attractions and the Wonder Attraction route",
       },
     ],
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Waterpark Simulator Museum Guide",
     description:
-      "Complete Goldie, Poseidon, Yogi and Aztec quests, spend theme rewards correctly and understand Museum star gates.",
+      "Complete Goldie, Poseidon, Yogi and Aztec quests, spend theme rewards and progress through Museum star gates toward the Wonder Attraction.",
     images: [imageUrls[0]],
   },
 };
@@ -88,11 +88,11 @@ const jsonLd = {
       headline:
         "Waterpark Simulator Museum Guide: Goldie, Poseidon, Yogi and Aztec Quests",
       description:
-        "This Waterpark Simulator Museum guide explains how to unlock and reach the Museum, how Pirate, Ocean and Aztec rewards differ from normal Research Points, and why some quest branches remain locked behind three- or four-star Park Prestige. It covers Goldie's rescue and cleaning route, Poseidon's trash and building-cleaning objectives, Yogi's fountain, Wooden Hot Tub, Sauna and high-Prestige lounger tasks, the beginning of the Aztec route, manual quest conflicts with staff, and the operating checks used before committing to expensive themed facilities such as the $3,000 Ocean Ripple Slide and $5,250 Ocean Pool.",
+        "A practical Waterpark Simulator Museum guide covering the Museum unlock, Pirate, Ocean, Wellness and Aztec progression, Goldie, Poseidon and Yogi quests, separate Museum rewards, three- and four-star gates, themed facility costs, manual quest conflicts with staff, Ocean and Wellness build decisions, and the late-game Museum route toward a Wonder Attraction before handing off to the five-star and Diamond Prestige progression.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-01",
-      dateModified: "2026-08-01",
+      dateModified: "2026-08-10",
       about: [
         {
           "@type": "VideoGame",
@@ -136,7 +136,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Waterpark Simulator Wellness facilities",
+          name: "Waterpark Simulator Wellness",
         },
         {
           "@type": "Thing",
@@ -144,7 +144,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Waterpark Simulator Wonder Attraction",
+        },
+        {
+          "@type": "Thing",
+          name: "Waterpark Simulator Pirate Wonder Attraction",
+        },
+        {
+          "@type": "Thing",
           name: "Waterpark Simulator Wooden Hot Tub",
+        },
+        {
+          "@type": "Thing",
+          name: "Waterpark Simulator Sauna",
         },
         {
           "@type": "Thing",
@@ -195,12 +207,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="How I Progress Every Museum Route Without Breaking the Park"
-          description="Complete Goldie, Poseidon, Yogi and Aztec objectives during normal operation, spend theme rewards carefully, and stop when the next build is star-gated or unaffordable."
+          description="Complete Goldie, Poseidon, Yogi and Aztec quests during normal operation, spend theme rewards carefully, solve star gates and continue the Museum route toward the Wonder Attraction."
           gameTitle="Waterpark Simulator"
           gameHref="/waterpark-simulator"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 1, 2026"
+          updatedAt="August 10, 2026"
           toc={[
             {
               id: "unlock-museum",
@@ -231,6 +243,10 @@ export default function Page() {
               label: "Aztec route",
             },
             {
+              id: "museum-to-diamond",
+              label: "Museum to Wonder Attraction",
+            },
+            {
               id: "museum-quest-route",
               label: "Museum quest day route",
             },
@@ -243,6 +259,10 @@ export default function Page() {
             {
               href: "/waterpark-simulator",
               label: "Waterpark Simulator Guide Hub",
+            },
+            {
+              href: "/waterpark-simulator/5-star-diamond-prestige-guide",
+              label: "5-Star & Diamond Prestige Guide",
             },
             {
               href: "/waterpark-simulator/research-points",

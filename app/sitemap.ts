@@ -133,12 +133,17 @@ const paths = [
   '/quasimorph/wounds-infection-medicine',
   '/quasimorph/start-realware-storyline',
   '/quasimorph/quasimorphosis-guide',
+
   '/waterpark-simulator/research-points',
   '/waterpark-simulator/increase-satisfaction',
   '/waterpark-simulator/make-money',
   '/waterpark-simulator/staff-guide',
   '/waterpark-simulator/museum-guide',
   '/waterpark-simulator/achievements-guide',
+  '/waterpark-simulator/5-star-diamond-prestige-guide',
+  '/waterpark-simulator/mafia-guide',
+  '/waterpark-simulator/custom-slides-guide',
+
   '/how-many-dudes/goat-boss-guide',
   '/how-many-dudes/best-builds',
   '/how-many-dudes/round-100-guide',
@@ -670,7 +675,15 @@ type SitemapPath = (typeof paths)[number];
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
-  
+  '/waterpark-simulator': '2026-08-10',
+  '/waterpark-simulator/make-money': '2026-08-10',
+  '/waterpark-simulator/staff-guide': '2026-08-10',
+  '/waterpark-simulator/museum-guide': '2026-08-10',
+  '/waterpark-simulator/5-star-diamond-prestige-guide': '2026-08-10',
+  '/waterpark-simulator/mafia-guide': '2026-08-10',
+  '/waterpark-simulator/custom-slides-guide': '2026-08-10',
+  '/waterpark-simulator/achievements-guide': '2026-08-10',
+
   '/sovereign-tower/act-1-best-route': '2026-08-09',
   '/sovereign-tower/act-2-walkthrough': '2026-08-09',
   '/sovereign-tower/demon-power': '2026-08-09',

@@ -1959,218 +1959,325 @@ export const guideClusters: GuideCluster[] = [
       },
     ],
   },
+
   {
-    title: "Waterpark Simulator",
-    game: "Waterpark Simulator",
-    href: "/waterpark-simulator",
-    slug: "waterpark-simulator",
-    kind: "game",
-    status: "active",
-    accent: "cyan",
-    archiveCategory: "Strategy, simulation, puzzle & discovery",
-    label: "Waterpark Management Sim",
-    eyebrow: "Spotlight Hub",
-    hubStatus: "Complete first-wave coverage",
-    description:
-      "Follow the Waterpark Simulator 1.0 guide hub from the Hard Mode Beach Map tutorial through four stars, with tested routes for Research Points, Satisfaction, money, staff, Museum quests, themed rewards, expansion decisions, and all 71 achievements.",
-    coverage: [
-      "Continuous Hard Mode Beach Map route from the tutorial through four stars, including the first ticket, shower and trash objectives, daily operating loops, Park Size gates, Museum timing, high-Prestige slides, capacity, Chlorine, Night Shift, Zipline, Custom Slides, and buy-or-wait decisions",
-      "Closing-time Research Point route, cleaning and repair actions, the Modern Toilets and Mop Upgrade chain into Chlorine, ticket and vending priorities, Hiring Level Up, Park Size, and staff competing for maintenance work",
-      "Satisfaction diagnosis from a 60% failure to a 94% day with 103 guests, including empty pools, waiting for service, dirty water, trash, showers, overcrowding, decoration, and one-day recovery testing",
-      "Hard Mode cash flow, construction losses versus operating losses, early reserves, attraction upgrades, tickets, tips, Poster Marketing, vending machines, staff costs, Mafia loans, no-build test days, and expansion rules",
-      "Ticket Worker, Janitor, Maintenance, Vendor, Restocker, Security and Mascot decisions, candidate stats, assignments, breaks, Hiring Level, Staff Overflow, idle-worker fixes, and a tested six-worker roster",
-      "Goldie, Poseidon, Yogi and Aztec Museum routes, Pirate, Ocean and Wellness rewards, three- and four-star gates, themed construction costs, manual quest conflicts, and the searchable route for all 71 achievements",
-    ],
-    image:
-      "/images/waterpark-simulator/waterpark-simulator-hub.webp",
-    imageFit: "cover",
-    imagePosition: "center",
-    imagePadding: false,
-    home: {
-      featuredHub: true,
-      featuredHubSpotlight: true,
-      featuredHubOrder: 21,
-      footerFeatured: true,
-    },
-    pages: [
-      {
-        title: "Waterpark Simulator Guide Hub",
-        href: "/waterpark-simulator",
-        type: "Guide Hub",
-        description:
-          "Start here for the tested Hard Mode Beach Map route from the tutorial through four stars, daily operating priorities, expansion timing, guest capacity, Museum entry, and the correct focused guide for each bottleneck.",
-        image:
-          "/images/waterpark-simulator/waterpark-simulator-four-star-achievement.webp",
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-        home: {
-          spotlightMeta:
-            "Tutorial to four stars, daily operating loop, Park Size, Museum timing, Ocean Prestige gate, capacity, Chlorine, Night Shift, Zipline, Custom Slides, and progression fixes",
-        },
-        archive: {
-          showInCollections: true,
-          order: 1,
-        },
-      },
-      {
-        title: "Waterpark Simulator Research Points & Unlock Order",
-        href: "/waterpark-simulator/research-points",
-        type: "Systems",
-        description:
-          "Earn Research Points through a closing-time maintenance route, unlock Chlorine at the right time, and choose ticket, vending, Hiring Level or Park Size upgrades by the park's current bottleneck.",
-        date: "Updated recently",
-        image:
-          "/images/waterpark-simulator/waterpark-simulator-end-of-day-research-loop.webp",
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-        home: {
-          latest: true,
-          latestFeatured: true,
-          latestOrder: 91,
-          spotlightFeature: true,
-          spotlightOrder: 1,
-          spotlightMeta:
-            "Closing-time maintenance loop, Research actions, Chlorine chain, dirty-water limits, ticket and vending priorities, Hiring Level, Park Size, and staff competition",
-        },
-        archive: {
-          showInCollections: true,
-          order: 2,
-        },
-      },
-      {
-        title: "Waterpark Simulator Satisfaction Guide",
-        href: "/waterpark-simulator/increase-satisfaction",
-        type: "Systems",
-        description:
-          "Fix low or apparently stuck Satisfaction by diagnosing empty pools, service queues, trash, dirty water, missing showers, overcrowding and premature expansion.",
-        date: "Updated recently",
-        image:
-          "/images/waterpark-simulator/waterpark-simulator-60-percent-satisfaction-no-water.webp",
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-        home: {
-          latest: true,
-          latestFeatured: true,
-          latestOrder: 92,
-          spotlightFeature: true,
-          spotlightOrder: 2,
-          spotlightMeta:
-            "60% to 94% recovery, empty pools, waiting for service, disgusting complaints, trash, showers, capacity, decoration, and one-day testing",
-        },
-        archive: {
-          showInCollections: true,
-          order: 3,
-        },
-      },
-      {
-        title: "Waterpark Simulator Money Guide",
-        href: "/waterpark-simulator/make-money",
-        type: "Systems",
-        description:
-          "Separate construction spending from real operating losses, protect wages and stock, control staff costs, use marketing safely, and expand after a no-build test day.",
-        date: "Updated recently",
-        image:
-          "/images/waterpark-simulator/waterpark-simulator-day-1-daily-report.webp",
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-        home: {
-          latest: true,
-          latestFeatured: true,
-          latestOrder: 93,
-          spotlightFeature: true,
-          spotlightOrder: 3,
-          spotlightMeta:
-            "Daily Profit diagnosis, operating reserve, attraction upgrades, tickets, tips, Poster Marketing, vending, staff costs, Mafia loan, no-build test, and expansion",
-        },
-        archive: {
-          showInCollections: true,
-          order: 4,
-        },
-      },
-      {
-        title: "Waterpark Simulator Staff Guide",
-        href: "/waterpark-simulator/staff-guide",
-        type: "Systems",
-        description:
-          "Choose the first hire by the current bottleneck, compare employee stats, assign Vendors, manage breaks and Staff Overflow, and fix workers who appear idle.",
-        date: "Updated recently",
-        image:
-          "/images/waterpark-simulator/waterpark-simulator-first-ticket-worker-brock.webp",
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-        home: {
-          latest: true,
-          latestFeatured: true,
-          latestOrder: 94,
-          spotlightFeature: true,
-          spotlightOrder: 4,
-          spotlightMeta:
-            "Ticket Worker, Janitor, Maintenance, Vendors, Restocker, Security, Mascot, stats, assignments, breaks, Hiring Level, Staff Overflow, and idle-worker fixes",
-        },
-        archive: {
-          showInCollections: true,
-          order: 5,
-        },
-      },
-      {
-        title: "Waterpark Simulator Museum Guide",
-        href: "/waterpark-simulator/museum-guide",
-        type: "Guide",
-        description:
-          "Complete Goldie, Poseidon, Yogi and Aztec quests, spend Pirate, Ocean and Wellness rewards, solve star gates, and delay themed builds until the park can support them.",
-        date: "Updated recently",
-        image:
-          "/images/waterpark-simulator/waterpark-simulator-museum-unlocked.webp",
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-        home: {
-          latest: true,
-          latestFeatured: true,
-          latestOrder: 95,
-          spotlightFeature: true,
-          spotlightOrder: 5,
-          spotlightMeta:
-            "Museum unlock, Pirate and Ocean rewards, three- and four-star gates, Goldie, Poseidon, Yogi, Aztec, Wellness facilities, quest days, and staff conflicts",
-        },
-        archive: {
-          showInCollections: true,
-          order: 6,
-        },
-      },
-      {
-        title: "Waterpark Simulator Achievements Guide",
-        href: "/waterpark-simulator/achievements-guide",
-        type: "Achievements",
-        description:
-          "Track all 71 achievements with a searchable checklist covering Beach and City maps, Hard Mode, Museum and Yogi tasks, staff, sales, cleaning, rides, Prestige and Diamond progression.",
-        date: "Updated recently",
-        image:
-          "/images/waterpark-simulator/waterpark-simulator-zipline-ride.webp",
-        imageFit: "cover",
-        imagePosition: "center",
-        imagePadding: false,
-        home: {
-          latest: true,
-          latestFeatured: true,
-          latestOrder: 96,
-          spotlightFeature: true,
-          spotlightOrder: 6,
-          spotlightMeta:
-            "All 71 achievements, Beach and City maps, Hard Mode, Museum and Yogi, staff, sales, cleaning, Custom Slides, Zipline, five stars, and Diamond Prestige",
-        },
-        archive: {
-          showInCollections: true,
-          order: 7,
-        },
-      },
-    ],
+  title: "Waterpark Simulator",
+  game: "Waterpark Simulator",
+  href: "/waterpark-simulator",
+  slug: "waterpark-simulator",
+  kind: "game",
+  status: "active",
+  accent: "cyan",
+  archiveCategory: "Strategy, simulation, puzzle & discovery",
+  label: "Waterpark Management Sim",
+  eyebrow: "Spotlight Hub",
+  hubStatus: "Tutorial-to-Diamond + systems coverage",
+
+  description:
+    "Follow the Waterpark Simulator 1.0 guide hub from the Hard Mode Beach Map tutorial through four stars, then continue into five stars and Diamond with focused guides for Research, Satisfaction, money, staff, Museum quests, Mafia, Custom Slides, and all 71 achievements.",
+
+  coverage: [
+    "Continuous Hard Mode Beach Map route from the tutorial through four stars, including first-star objectives, daily operating loops, Park Size gates, Museum timing, the Ocean Prestige gate, guest capacity, Chlorine, and buy-wait-turn-back decisions",
+
+    "Five-star and Diamond progression from the $500,000 cumulative earnings and two 4-Prestige Slide requirements through five stars, $1,000,000 cumulative earnings, a 6-Prestige Wonder Attraction, Research bottlenecks, layout rebuilding, and the final Diamond trigger",
+
+    "Closing-time Research Point route, cleaning and repair actions, the Modern Toilets and Mop Upgrade chain into Chlorine, ticket and vending priorities, Hiring Level Up, Park Size, and staff competing for maintenance work",
+
+    "Satisfaction diagnosis from a 60% failure to a 94% day with 103 guests, including empty pools, waiting for service, dirty water, trash, showers, overcrowding, decoration, and one-day recovery testing",
+
+    "Hard Mode cash flow, construction losses versus operating losses, early reserves, attraction upgrades, tickets, tips, Poster Marketing, vending machines, Night Shift, staff costs, no-build test days, and expansion rules",
+
+    "Ticket Worker, Janitor, Maintenance, Vendor, Restocker, Security, Entertainer and Mascot decisions, candidate stats, assignments, breaks, Hiring Level, Staff Overflow, idle-worker fixes, and a tested six-worker core",
+
+    "Goldie, Poseidon, Yogi and Aztec Museum routes, Pirate, Ocean and Wellness rewards, star gates, themed construction costs, manual quest conflicts, and the late Museum branch toward a Wonder Attraction",
+
+    "Mafia decision route covering the tested $750 offer and later $7,500 settlement demand, refusal, sabotage warnings, crew attacks, catching Mafia, damaged attractions, and recovery priorities",
+
+    "Custom Slides from the Research unlock and editor through landing-first planning, short test routes, uphill sections, long routes, overshoots, segment costs, Advanced Custom Slides, and build troubleshooting",
+
+    "All 71 achievements with Beach and City Map milestones, Hard Mode, Diamond, Yogi, Security, Custom Slides, Zipline, long cleaning and sales counters, and an efficient 100% cleanup route",
+  ],
+
+  image:
+    "/images/waterpark-simulator/waterpark-simulator-hub.webp",
+  imageFit: "cover",
+  imagePosition: "center",
+  imagePadding: false,
+
+  home: {
+    featuredHub: true,
+    featuredHubSpotlight: true,
+    featuredHubOrder: 21,
+    footerFeatured: true,
   },
+
+  pages: [
+    {
+      title: "Waterpark Simulator Guide Hub",
+      href: "/waterpark-simulator",
+      type: "Guide Hub",
+      description:
+        "Start here for the Hard Mode Beach Map route from the tutorial through four stars, then use focused guides for five stars, Diamond, Research, money, staff, Museum quests and other bottlenecks.",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-four-star-achievement.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        spotlightMeta:
+          "Tutorial to four stars, daily operating loop, Park Size, Museum timing, Ocean Prestige gate, capacity, Chlorine, late-game handoff, and progression fixes",
+      },
+      archive: {
+        showInCollections: true,
+        order: 1,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator Research Points & Unlock Order",
+      href: "/waterpark-simulator/research-points",
+      type: "Systems",
+      description:
+        "Earn Research Points through a closing-time maintenance route, unlock Chlorine at the right time, and choose ticket, vending, Hiring Level or Park Size upgrades by the park's current bottleneck.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-end-of-day-research-loop.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 91,
+        spotlightFeature: true,
+        spotlightOrder: 1,
+        spotlightMeta:
+          "Closing-time maintenance loop, Research actions, Chlorine chain, dirty-water limits, ticket and vending priorities, Hiring Level, Park Size, and staff competition",
+      },
+      archive: {
+        showInCollections: true,
+        order: 2,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator Satisfaction Guide",
+      href: "/waterpark-simulator/increase-satisfaction",
+      type: "Systems",
+      description:
+        "Fix low or apparently stuck Satisfaction by diagnosing empty pools, service queues, trash, dirty water, missing showers, overcrowding and premature expansion.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-60-percent-satisfaction-no-water.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 92,
+        spotlightFeature: true,
+        spotlightOrder: 2,
+        spotlightMeta:
+          "60% to 94% recovery, empty pools, waiting for service, disgusting complaints, trash, showers, capacity, decoration, and one-day testing",
+      },
+      archive: {
+        showInCollections: true,
+        order: 3,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator Money Guide",
+      href: "/waterpark-simulator/make-money",
+      type: "Systems",
+      description:
+        "Separate construction spending from real operating losses, protect wages and stock, use Night Shift once the park is ready, and expand only after a stable no-build test day.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-day-1-daily-report.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 93,
+        spotlightFeature: true,
+        spotlightOrder: 3,
+        spotlightMeta:
+          "Daily Profit diagnosis, operating reserve, attraction upgrades, tickets, tips, Poster Marketing, vending, Night Shift, staff costs, no-build test, and expansion",
+      },
+      archive: {
+        showInCollections: true,
+        order: 4,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator Staff Guide",
+      href: "/waterpark-simulator/staff-guide",
+      type: "Systems",
+      description:
+        "Choose hires by the park's current bottleneck, compare employee stats, manage assignments and limits, and add Security, Entertainers and Mascots only when the core roster is stable.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-first-ticket-worker-brock.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 94,
+        spotlightFeature: true,
+        spotlightOrder: 4,
+        spotlightMeta:
+          "Ticket Worker, Janitor, Maintenance, Vendors, Restocker, Security, Entertainer, Mascot, stats, assignments, breaks, Hiring Level, Staff Overflow, and idle-worker fixes",
+      },
+      archive: {
+        showInCollections: true,
+        order: 5,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator Museum Guide",
+      href: "/waterpark-simulator/museum-guide",
+      type: "Guide",
+      description:
+        "Complete Goldie, Poseidon, Yogi and Aztec quests, spend theme rewards, solve Museum star gates, manage themed builds, and progress toward the Wonder Attraction path.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-museum-unlocked.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 95,
+        spotlightFeature: true,
+        spotlightOrder: 5,
+        spotlightMeta:
+          "Museum unlock, Pirate, Ocean and Aztec rewards, Goldie, Poseidon, Yogi, Wellness, star gates, quest days, staff conflicts, and the Wonder Attraction path",
+      },
+      archive: {
+        showInCollections: true,
+        order: 6,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator 5-Star & Diamond Prestige Guide",
+      href: "/waterpark-simulator/5-star-diamond-prestige-guide",
+      type: "Walkthrough",
+      description:
+        "Reach five stars with $500,000 earned and two 4-Prestige Slides, then reach Diamond with $1,000,000 earned and a 6-Prestige Wonder Attraction.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-diamond-objectives.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 153,
+        spotlightFeature: true,
+        spotlightOrder: 6,
+        spotlightMeta:
+          "$500K earned, two 4-Prestige Slides, five stars, $1M earned, 6-Prestige Wonder Attraction, Museum handoff, Research bottlenecks, layout rebuilding, and Diamond",
+      },
+      archive: {
+        showInCollections: true,
+        order: 7,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator Mafia Guide",
+      href: "/waterpark-simulator/mafia-guide",
+      type: "Guide",
+      description:
+        "Follow the tested Mafia route from the first cash offer through the later settlement demand, refusal, sabotage warning, crew attack, catching Mafia and attraction repairs.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-mafia-sabotage-warning.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 152,
+        spotlightFeature: true,
+        spotlightOrder: 7,
+        spotlightMeta:
+          "Mafia cash offer, tested $750 to $7,500 demand, refusal, Mafia trouble warning, sabotage crew, catching Mafia, damaged attractions, and recovery",
+      },
+      archive: {
+        showInCollections: true,
+        order: 8,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator Custom Slides Guide",
+      href: "/waterpark-simulator/custom-slides-guide",
+      type: "Systems",
+      description:
+        "Unlock Custom Slides, plan the landing first, build short test routes, control height, fix overshoots, extend long slides and decide when Advanced Custom Slides are worth it.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-custom-slide-editor.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 154,
+        spotlightFeature: true,
+        spotlightOrder: 8,
+        spotlightMeta:
+          "Custom Slides unlock, editor, landing-first planning, segment costs, short test routes, uphill sections, long routes, overshoot fixes, and Advanced Custom Slides",
+      },
+      archive: {
+        showInCollections: true,
+        order: 9,
+      },
+    },
+
+    {
+      title: "Waterpark Simulator Achievements Guide",
+      href: "/waterpark-simulator/achievements-guide",
+      type: "Achievements",
+      description:
+        "Track all 71 achievements with exact conditions and an efficient route across Beach and City maps, Hard Mode, long counters, Yogi, Security, five stars and Diamond.",
+      date: "Updated recently",
+      image:
+        "/images/waterpark-simulator/waterpark-simulator-zipline-ride.webp",
+      imageFit: "cover",
+      imagePosition: "center",
+      imagePadding: false,
+      home: {
+        latest: true,
+        latestFeatured: true,
+        latestOrder: 96,
+        spotlightFeature: true,
+        spotlightOrder: 9,
+        spotlightMeta:
+          "All 71 achievements, Beach and City maps, Hard Mode, Museum and Yogi, Security, sales, cleaning, Custom Slides, Zipline, five stars, and Diamond Prestige",
+      },
+      archive: {
+        showInCollections: true,
+        order: 10,
+      },
+    },
+  ],
+},
+
   {
     title: "How Many Dudes?",
     game: "How Many Dudes?",
