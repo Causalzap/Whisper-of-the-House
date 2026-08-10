@@ -20,11 +20,90 @@ const imageUrls = [
   `${siteUrl}/images/big-walk/big-walk-blindfold-symbol-panels.png`,
 ];
 
+const relatedLinks = [
+  {
+    href: "/big-walk",
+    label: "Big Walk Guide Hub",
+  },
+  {
+    href: "/big-walk/peg-puzzle",
+    label: "Big Walk Peg Puzzle Solution",
+  },
+  {
+    href: "/big-walk/4166-1899-puzzle",
+    label: "4166 1899 Puzzle Solution",
+  },
+  {
+    href: "/big-walk/purple-puzzles",
+    label: "All 7 Big Walk Purple Puzzles",
+  },
+  {
+    href: "/big-walk/tutorial-walkthrough",
+    label: "Tutorial and Drawbridge Walkthrough",
+  },
+  {
+    href: "/big-walk/how-to-unlock-map",
+    label: "Red Tower and Map Room Guide",
+  },
+  {
+    href: "/big-walk/green-tower-walkthrough",
+    label: "Green Tower and Chairlift Guide",
+  },
+  {
+    href: "/big-walk/yellow-tower-tunnel",
+    label: "Yellow Tower and Tunnel Guide",
+  },
+  {
+    href: "/big-walk/blue-tower-train",
+    label: "Blue Tower and Train Guide",
+  },
+  {
+    href: "/big-walk/ending-guide",
+    label: "Big Walk Endings and Big Game Guide",
+  },
+];
+
+const faqEntities = [
+  {
+    question:
+      "Is the colored Peg Puzzle the same as the five-pose telescope puzzle?",
+    answer:
+      "No. The telescope puzzle asks one player to observe five distant poses and communicate their order. The colored Peg Puzzle uses loose colored pieces to reproduce the surrounding landscape on a Pegboard.",
+  },
+  {
+    question: "Should I activate a timed puzzle as soon as I find it?",
+    answer:
+      "Usually no. First identify the destination and place every required player in position, then activate the timed object.",
+  },
+  {
+    question: "Is it worth waiting for daylight in Big Walk puzzles?",
+    answer:
+      "Yes when a challenge depends on distant poses, small objects, terrain, or color differences. Indoor puzzles with clearly visible controls usually do not need daylight.",
+  },
+  {
+    question:
+      "Should both players experiment with puzzle controls at the same time?",
+    answer:
+      "Usually no. Communication and sequence puzzles are easier to troubleshoot when one player operates the controls and another observes the result.",
+  },
+  {
+    question:
+      "Are Big Walk puzzle layouts identical in every player-count world?",
+    answer:
+      "No. The central mechanic can remain the same while different player-count worlds add or change roles, controls, and interactions.",
+  },
+  {
+    question: "Where should I go if a Big Walk puzzle is not covered here?",
+    answer:
+      "Use the main Big Walk Hub for progression questions, or the dedicated Peg Puzzle, 4166 and 1899 coordinate puzzle, and Purple Puzzles guides for those larger challenge routes.",
+  },
+];
+
 export const metadata: Metadata = {
   title: "Big Walk Puzzle Solutions: Counting, Blindfold & Timed Puzzles",
   description:
-  "Solve Big Walk's communication room, timed maze, basketball, projectile relay, five-pose, Green Path, counting, and blindfold puzzles.",
-    alternates: {
+    "Solve Big Walk's communication, timed maze, basketball, relay, five-pose, Green Path, counting-symbol, and blindfold puzzles with practical fixes.",
+  alternates: {
     canonical: pageUrl,
   },
   openGraph: {
@@ -32,7 +111,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Big Walk Puzzle Solutions",
     description:
-      "Step-by-step solutions for the timed maze, five-pose platforms, green path order, counting-symbol room, blindfold panels, and more.",
+      "Solve eight Big Walk puzzle mechanics with practical role setups, communication systems, reset rules, sequence logic, and troubleshooting.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -47,7 +126,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Big Walk Puzzle Solutions",
     description:
-      "Solve the green path, counting-symbol, blindfold, timed maze, five-pose, basketball, and projectile relay puzzles.",
+      "Solve the timed maze, five-pose telescope, Green Path, counting-symbol, blindfold, basketball, relay, and communication puzzles.",
     images: [imageUrls[3]],
   },
 };
@@ -87,13 +166,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Big Walk Puzzle Solutions: Green Communication Room, Timed Maze, Basketball, Projectile Relay, Five-Pose Platforms, Green Path, Counting Symbols, and Blindfold Panels",
+        "Big Walk Puzzle Solutions: Communication, Timed, Pose, Path, Counting, and Blindfold Puzzles",
       description:
-        "This Big Walk puzzle guide explains the two-player solutions for the green communication room, timed maze handoff, basketball challenge, timed projectile relay, five-pose platforms, green path-order field, counting and symbol room, and blindfold panel building. It also covers role assignments, communication methods, reset rules, daylight decisions, and fixes for lost Head rewards or changing sequence results.",
+        "A Big Walk puzzle guide covering the green communication room, timed maze, basketball challenge, projectile relay, five-pose telescope puzzle, green path-order field, counting-symbol room, and blindfold panel building.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-05",
-      dateModified: "2026-08-05",
+      dateModified: "2026-08-10",
       about: [
         {
           "@type": "VideoGame",
@@ -121,7 +200,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk five-pose puzzle",
+          name: "Big Walk five-pose telescope puzzle",
         },
         {
           "@type": "Thing",
@@ -129,11 +208,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk counting and symbol puzzle",
+          name: "Big Walk counting and symbols puzzle",
         },
         {
           "@type": "Thing",
-          name: "Big Walk blindfold puzzle",
+          name: "Big Walk blindfold panel puzzle",
         },
       ],
       isPartOf: {
@@ -152,6 +231,18 @@ const jsonLd = {
         "@id": `${pageUrl}#breadcrumb`,
       },
     },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      mainEntity: faqEntities.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer,
+        },
+      })),
+    },
   ],
 };
 
@@ -162,7 +253,7 @@ const toc = [
   },
   {
     id: "timed-maze",
-    label: "Timed maze puzzle",
+    label: "Timed maze",
   },
   {
     id: "basketball-puzzle",
@@ -170,11 +261,11 @@ const toc = [
   },
   {
     id: "projectile-relay",
-    label: "Projectile relay puzzle",
+    label: "Projectile relay",
   },
   {
     id: "five-pose",
-    label: "Five-pose platform puzzle",
+    label: "Five-pose telescope puzzle",
   },
   {
     id: "green-path-order",
@@ -182,15 +273,15 @@ const toc = [
   },
   {
     id: "counting-symbols",
-    label: "Counting and symbol puzzle",
+    label: "Counting and symbols",
   },
   {
     id: "blindfold-puzzle",
     label: "Blindfold panel puzzle",
   },
   {
-    id: "puzzles-required-for-big-game",
-    label: "Puzzles required for Big Game",
+    id: "dedicated-puzzle-guides",
+    label: "More puzzle guides",
   },
   {
     id: "stuck",
@@ -199,45 +290,6 @@ const toc = [
   {
     id: "faq",
     label: "FAQ",
-  },
-];
-
-const relatedLinks = [
-  {
-    href: "/big-walk",
-    label: "Big Walk Guide Hub",
-  },
-  {
-    href: "/big-walk/beginner-guide",
-    label: "Big Walk Beginner Guide",
-  },
-  {
-    href: "/big-walk/tutorial-walkthrough",
-    label: "Tutorial and Drawbridge Walkthrough",
-  },
-  {
-    href: "/big-walk/yellow-tower-tunnel",
-    label: "Yellow Tower and Tunnel Guide",
-  },
-  {
-    href: "/big-walk/blue-tower-train",
-    label: "Blue Tower and Train Guide",
-  },
-  {
-    href: "/big-walk/how-to-unlock-map",
-    label: "How to Unlock the Map Room",
-  },
-  {
-    href: "/big-walk/green-tower-walkthrough",
-    label: "Green Tower and Green Key Guide",
-  },
-  {
-    href: "/big-walk/achievements",
-    label: "Big Walk Achievements Checklist",
-  },
-  {
-    href: "/big-walk/ending-guide",
-    label: "Big Walk Endings and True Ending Guide",
   },
 ];
 
@@ -254,12 +306,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Big Walk Puzzle Solutions"
-          description="Solve the green communication room, timed maze, basketball, projectile relay, five-pose, green path, counting-symbol, and blindfold puzzles."
+          description="Solve eight common Big Walk puzzle mechanics with practical role setups, communication systems, timing rules, sequence logic, and troubleshooting."
           gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 5, 2026"
+          updatedAt="August 10, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -28,7 +28,7 @@ const relatedLinks = [
   },
   {
     href: "/big-walk/green-tower-walkthrough",
-    label: "Green Tower and Green Key Guide",
+    label: "Green Tower and Chairlift Guide",
   },
   {
     href: "/big-walk/yellow-tower-tunnel",
@@ -39,8 +39,28 @@ const relatedLinks = [
     label: "Blue Tower and Train Guide",
   },
   {
+    href: "/big-walk/black-tower",
+    label: "Black Tower and Black Key Guide",
+  },
+  {
     href: "/big-walk/puzzles",
     label: "Big Walk Puzzle Solutions",
+  },
+  {
+    href: "/big-walk/peg-puzzle",
+    label: "Big Walk Peg Puzzle Solution",
+  },
+  {
+    href: "/big-walk/4166-1899-puzzle",
+    label: "4166 1899 Puzzle Solution",
+  },
+  {
+    href: "/big-walk/how-to-get-shiny",
+    label: "How to Get Shiny",
+  },
+  {
+    href: "/big-walk/purple-puzzles",
+    label: "All 7 Purple Puzzles",
   },
   {
     href: "/big-walk/achievements",
@@ -48,71 +68,72 @@ const relatedLinks = [
   },
   {
     href: "/big-walk/ending-guide",
-    label: "Big Walk Endings and True Ending Guide",
+    label: "Big Walk Endings and Big Game Guide",
   },
 ];
 
 const faqEntities = [
   {
-    question: "Is there one fixed colored-tower order in Big Walk?",
+    question: "What is the best tower order for a first Big Walk playthrough?",
     answer:
-      "No. This guide uses Green, then Yellow, then Blue because the Yellow Tunnel shortens the route toward the Blue region.",
+      "This walkthrough uses Red, Green, Yellow, Blue, then Black. Red unlocks the Map Room first, while Green, Yellow, and Blue progressively add the Chairlift, Tunnel, and Train. The colored-tower order is a routing preference rather than a mandatory sequence.",
   },
   {
-    question: "Are Head rewards locked to a tower color?",
+    question: "When should I return to the Map Room in Big Walk?",
     answer:
-      "No. Any completed physical Head can be inserted into the active receiver.",
+      "Return when the group no longer knows which puzzle is worth doing next, after a major transport unlock if players have become scattered, and again during full-completion cleanup. There is no need to return after every puzzle.",
   },
   {
-    question: "Do I need to solve every puzzle near a tower?",
+    question:
+      "Should I complete every side puzzle before entering the Black Tower?",
     answer:
-      "No. Each receiver requires a fixed number of Heads while additional challenge sites remain available.",
+      "Not necessarily. For the normal Big Goodbye route, prioritize the progression the Black route currently requires. Full normal-puzzle and Purple Puzzle cleanup matters when continuing toward Big Game.",
   },
   {
-    question: "Does the Map Room activate the Tram, Tunnel, or Train?",
+    question: "Is Shiny required for the main Big Walk ending?",
     answer:
-      "No. The Map Room provides route and completion information. Each transport system has its own progression route.",
+      "No. Shiny is treated as an optional achievement route rather than a required step in the normal tower-to-Big-Goodbye progression.",
   },
   {
-    question: "Can the group continue without the original Host?",
+    question: "Are the seven Purple Puzzles the final seven puzzles in Big Walk?",
     answer:
-      "The Host owns the save and world progress. The same Host needs to start that save again.",
+      "Not necessarily. They are seven new post-game challenges, but normal puzzles skipped before Big Goodbye can still remain unfinished.",
   },
   {
-    question: "Can Big Walk be played solo?",
+    question: "Should I start a new save after Big Goodbye?",
     answer:
-      "The selectable world versions begin at two players, and the progression is built around cooperative roles.",
+      "No. Continue the same active save to complete the seven Purple Puzzles, remaining normal challenges, final-key route, and Big Game ending.",
   },
 ];
 
 export const metadata: Metadata = {
-  title: "Big Walk Guide: Towers, Map, Train, Tunnel & Puzzles",
+  title: "Big Walk Walkthrough & Guide: Towers, Puzzles & Endings",
   description:
-    "Follow Big Walk from the tutorial through Red, Green, Yellow and Blue Towers, the Map Room, Tunnel, Train, puzzles, multiplayer, and achievements.",
+    "Follow Big Walk from the tutorial through every tower, Map Room, Chairlift, Tunnel, Train, Black Tower, puzzles, Big Goodbye, and Big Game.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Big Walk Guide and Walkthrough Hub",
+    title: "Big Walk Walkthrough and Guide Hub",
     description:
-      "Choose the right guide for the tutorial, colored towers, Map Room, Yellow Tunnel, Blue Train, puzzle solutions, multiplayer, and achievements.",
+      "Follow the full progression route through the colored towers, transport network, Black Tower, puzzles, Big Goodbye, Purple cleanup, and Big Game.",
     siteName: "Whisper of the House",
     images: [
       {
         url: socialImageUrl,
         width: 1856,
         height: 824,
-        alt: "Big Walk Map Room island model with towers, routes, and completion flags",
+        alt: "Big Walk Map Room island model showing towers, routes, and puzzle completion flags",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Big Walk Guide and Walkthrough Hub",
+    title: "Big Walk Walkthrough and Guide Hub",
     description:
-      "Complete the tutorial, unlock the Map Room, finish the colored towers, open the Tunnel, activate the Train, and track all achievements.",
+      "Follow the full Big Walk route from the tutorial and colored towers through the Black Tower, endings, Purple Puzzles, and Big Game.",
     images: [socialImageUrl],
   },
 };
@@ -146,13 +167,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Big Walk Guide and Walkthrough Hub: Towers, Map Room, Yellow Tunnel, Blue Train, Puzzles, Multiplayer, and Achievements",
+        "Big Walk Walkthrough and Guide: Towers, Puzzles, Transport, Big Goodbye, and Big Game",
       description:
-        "This Big Walk guide hub connects the four-Head tutorial, Red Tower and Map Room, Green receiver route, Yellow Tower and Tunnel, Blue Tower and Train, puzzle solutions, multiplayer planning, reconnect recovery, and all 12 achievements.",
+        "A Big Walk progression hub covering the tutorial, Red Tower and Map Room, Green Chairlift, Yellow Tunnel, Blue Train, Black Tower and Wall, main ending, post-game Purple Puzzles, optional puzzle routes, achievements, and Big Game completion.",
       image: [socialImageUrl],
       inLanguage: "en",
       datePublished: "2026-08-05",
-      dateModified: "2026-08-05",
+      dateModified: "2026-08-10",
       about: [
         {
           "@type": "VideoGame",
@@ -161,6 +182,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Big Walk walkthrough",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk progression",
         },
         {
           "@type": "Thing",
@@ -176,11 +201,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Big Walk Chairlift",
+        },
+        {
+          "@type": "Thing",
           name: "Big Walk Yellow Tower",
         },
         {
           "@type": "Thing",
-          name: "Big Walk Yellow Tunnel",
+          name: "Big Walk Tunnel",
         },
         {
           "@type": "Thing",
@@ -192,15 +221,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk puzzle solutions",
+          name: "Big Walk Black Tower",
         },
         {
           "@type": "Thing",
-          name: "Big Walk multiplayer",
+          name: "Big Walk Black Key",
         },
         {
           "@type": "Thing",
-          name: "Big Walk achievements",
+          name: "Big Walk Purple Puzzles",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Big Goodbye",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk Big Game",
         },
       ],
       isPartOf: {
@@ -252,27 +289,27 @@ const jsonLd = {
 const toc = [
   {
     id: "choose-a-guide",
-    label: "Choose the right guide",
+    label: "Choose your guide",
   },
   {
     id: "progression",
-    label: "Receiver counts and Heads",
+    label: "How progression works",
   },
   {
     id: "opening-route",
-    label: "Four-Head opening route",
+    label: "Tutorial and drawbridge",
   },
   {
     id: "red-tower-route",
-    label: "Red Tower route",
+    label: "Red Tower and Map Room",
   },
   {
     id: "map-room",
-    label: "Use the Map Room",
+    label: "When to use the Map Room",
   },
   {
     id: "green-route",
-    label: "Green Tower route",
+    label: "Green Tower and Chairlift",
   },
   {
     id: "yellow-route",
@@ -283,24 +320,40 @@ const toc = [
     label: "Blue Tower and Train",
   },
   {
-    id: "late-game-endings",
-    label: "Wall and endings",
+    id: "black-route",
+    label: "Black Tower and Wall",
+  },
+  {
+    id: "ending-route",
+    label: "Black Sphere and Big Goodbye",
+  },
+  {
+    id: "post-game-route",
+    label: "Post-game Purple Puzzles",
+  },
+  {
+    id: "optional-puzzles",
+    label: "Optional puzzle routes",
+  },
+  {
+    id: "achievement-route",
+    label: "Achievement checkpoints",
   },
   {
     id: "multiplayer",
-    label: "Multiplayer roles and recovery",
-  },
-  {
-    id: "achievements",
-    label: "Achievements as checkpoints",
+    label: "Multiplayer roles",
   },
   {
     id: "stuck",
-    label: "Progression fixes",
+    label: "What to do when stuck",
   },
   {
     id: "faq",
     label: "FAQ",
+  },
+  {
+    id: "complete-route",
+    label: "Full progression route",
   },
 ];
 
@@ -316,13 +369,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Big Walk Guide and Walkthrough Hub"
-          description="Follow the practical route from the four-Head tutorial through the Red, Green, Yellow and Blue Towers, Map Room, Tunnel, Train, multiplayer systems, and all 12 achievements."
+          title="Big Walk Walkthrough and Guide"
+          description="Follow the practical progression route from the tutorial and Map Room through the Chairlift, Tunnel, Train, Black Tower, Big Goodbye, Purple Puzzles, and Big Game."
           gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 5, 2026"
+          updatedAt="August 10, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

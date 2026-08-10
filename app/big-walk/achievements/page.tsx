@@ -15,19 +15,95 @@ const imageUrls = [
   `${siteUrl}/images/big-walk/big-walk-hip-belt-map.png`,
 ];
 
+const relatedLinks = [
+  {
+    href: "/big-walk",
+    label: "Big Walk Guide Hub",
+  },
+  {
+    href: "/big-walk/tutorial-walkthrough",
+    label: "Tutorial and Drawbridge Walkthrough",
+  },
+  {
+    href: "/big-walk/how-to-unlock-map",
+    label: "Red Tower and Map Room Guide",
+  },
+  {
+    href: "/big-walk/green-tower-walkthrough",
+    label: "Green Tower and Chairlift Guide",
+  },
+  {
+    href: "/big-walk/yellow-tower-tunnel",
+    label: "Yellow Tower and Tunnel Guide",
+  },
+  {
+    href: "/big-walk/blue-tower-train",
+    label: "Blue Tower and Train Guide",
+  },
+  {
+    href: "/big-walk/black-tower",
+    label: "Black Tower and Black Key Guide",
+  },
+  {
+    href: "/big-walk/how-to-get-shiny",
+    label: "How to Get Shiny and Big Makeover",
+  },
+  {
+    href: "/big-walk/purple-puzzles",
+    label: "All 7 Big Walk Purple Puzzles",
+  },
+  {
+    href: "/big-walk/ending-guide",
+    label: "Big Walk Endings and Big Game Guide",
+  },
+];
+
+const faqEntities = [
+  {
+    question: "How many achievements are in Big Walk?",
+    answer: "Big Walk has 12 achievements.",
+  },
+  {
+    question:
+      "Should I follow achievement rarity when deciding what to do next?",
+    answer:
+      "No. Progression order is more useful. Optional equipment and hidden interactions can be rarer than later main-route achievements.",
+  },
+  {
+    question: "Are Big Goodbye and Big Game the same completion state?",
+    answer:
+      "No. Big Goodbye is the normal campaign ending, while Big Game is the later full-completion achievement.",
+  },
+  {
+    question: "Does Big Game require Big Makeover?",
+    answer:
+      "Big Makeover is treated as a separate Shiny achievement. The confirmed Big Game route is based on full puzzle completion, the final-key check, and the hidden ending route.",
+  },
+  {
+    question: "Can I still work on achievements after Big Goodbye?",
+    answer:
+      "Yes. Continue on the same save to complete Purple Puzzles, unfinished normal challenges, Big Game cleanup, and optional achievements skipped earlier.",
+  },
+  {
+    question: "Is Big View triggered by picking up the portable map?",
+    answer:
+      "No. Big View unlocks by entering the physical Map Room. The portable map can instead be used for Big Help by attaching it to an equipped hip belt.",
+  },
+];
+
 export const metadata: Metadata = {
-  title: "Big Walk Achievements: All 12 Unlock Requirements",
+  title: "Big Walk Achievements Guide: All 12 Unlock Requirements",
   description:
-    "Track all 12 Big Walk achievements, including Backpack, Map Room, hip item, Chairlift, Train, Tunnel, endings, Shiny, and full completion.",
+    "Track all 12 Big Walk achievements, exact unlock triggers, progression order, and fixes for Backpack, Map Room, transport, endings, and Shiny.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Big Walk Achievements: All 12 Requirements",
+    title: "Big Walk Achievements: All 12 Unlock Requirements",
     description:
-      "Use a progression-order checklist for Big Walk, Big Pack, Big View, Big Help, transport, ending, Shiny, and full-completion achievements.",
+      "Find the exact trigger for all 12 Big Walk achievements, when to attempt each one, and what to check when an unlock does not appear.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -40,9 +116,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Big Walk Achievements Guide",
+    title: "Big Walk Achievements: All 12 Unlock Requirements",
     description:
-      "Track all 12 achievements and fix common unlock problems for Backpack, Map Room, hip items, transport, endings, and Shiny.",
+      "Track all 12 achievements and troubleshoot Backpack, Map Room, Chairlift, Tunnel, Train, Wall, ending, and Shiny unlocks.",
     images: [imageUrls[1]],
   },
 };
@@ -82,13 +158,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Big Walk Achievements Guide: All 12 Unlock Requirements and Progress Checklist",
+        "Big Walk Achievements Guide: All 12 Unlock Requirements and Trigger Fixes",
       description:
-        "This Big Walk achievements guide lists all 12 achievements and explains the unlock requirements for Big Walk, Big Pack, Big View, Big Help, Big Sit, Big Climb, Big Ride, Big Tunnel, Big Goodbye, Big Wall, Big Game, and Big Makeover. It also includes a progression-order checklist and fixes for common unlock problems.",
+        "A Big Walk achievement guide covering all 12 unlock triggers, progression order, Backpack and hip-item equipment checks, Map Room, Chairlift, highest point, Tunnel, Train, Wall, Big Goodbye, Big Game, and Big Makeover.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-05",
-      dateModified: "2026-08-05",
+      dateModified: "2026-08-10",
       about: [
         {
           "@type": "VideoGame",
@@ -120,7 +196,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Big Climb achievement",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Tunnel achievement",
+        },
+        {
+          "@type": "Thing",
           name: "Big Ride achievement",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Wall achievement",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Goodbye achievement",
         },
         {
           "@type": "Thing",
@@ -146,6 +238,18 @@ const jsonLd = {
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      mainEntity: faqEntities.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer,
+        },
+      })),
     },
   ],
 };
@@ -173,15 +277,27 @@ const toc = [
   },
   {
     id: "transport-achievements",
-    label: "Big Sit, Ride, and Climb",
+    label: "Sit, Climb, Tunnel, and Ride",
   },
   {
-    id: "late-achievements",
-    label: "Late-game achievements",
+    id: "big-wall",
+    label: "Big Wall",
   },
   {
-    id: "completion-checklist",
-    label: "Completion checklist",
+    id: "big-goodbye",
+    label: "Big Goodbye",
+  },
+  {
+    id: "big-game",
+    label: "Big Game",
+  },
+  {
+    id: "big-makeover",
+    label: "Big Makeover",
+  },
+  {
+    id: "achievement-route-decisions",
+    label: "When to chase achievements",
   },
   {
     id: "stuck",
@@ -190,45 +306,6 @@ const toc = [
   {
     id: "faq",
     label: "FAQ",
-  },
-];
-
-const relatedLinks = [
-  {
-    href: "/big-walk",
-    label: "Big Walk Guide Hub",
-  },
-  {
-    href: "/big-walk/beginner-guide",
-    label: "Big Walk Beginner Guide",
-  },
-  {
-    href: "/big-walk/tutorial-walkthrough",
-    label: "Tutorial and Drawbridge Walkthrough",
-  },
-  {
-    href: "/big-walk/how-to-unlock-map",
-    label: "How to Unlock the Map Room",
-  },
-  {
-    href: "/big-walk/puzzles",
-    label: "Big Walk Puzzle Solutions",
-  },
-  {
-    href: "/big-walk/green-tower-walkthrough",
-    label: "Green Tower and Green Key Guide",
-  },
-  {
-    href: "/big-walk/yellow-tower-tunnel",
-    label: "Yellow Tower and Tunnel Guide",
-  },
-  {
-    href: "/big-walk/blue-tower-train",
-    label: "Blue Tower and Train Guide",
-  },
-  {
-    href: "/big-walk/ending-guide",
-    label: "Big Walk Endings and True Ending Guide",
   },
 ];
 
@@ -245,12 +322,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Big Walk Achievements Guide"
-          description="Track all 12 achievements in progression order, understand each unlock requirement, and fix common Backpack, Map Room, hip item, transport, ending, and Shiny problems."
+          description="Track all 12 achievements by their exact trigger, complete them in a practical progression order, and fix common unlock problems."
           gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 5, 2026"
+          updatedAt="August 10, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

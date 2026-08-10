@@ -11,8 +11,8 @@ const hubUrl = `${siteUrl}/big-walk`;
 const pageUrl = `${hubUrl}/ending-guide`;
 
 const imageUrls = [
-  `${siteUrl}/images/big-walk/big-walk-ending-building-across-water.webp`,
   `${siteUrl}/images/big-walk/big-walk-final-sphere-mechanism.webp`,
+  `${siteUrl}/images/big-walk/big-walk-ending-building-across-water.webp`,
   `${siteUrl}/images/big-walk/big-walk-wave-goodbye-ending-prompt.webp`,
   `${siteUrl}/images/big-walk/big-walk-big-goodbye-final-room.webp`,
   `${siteUrl}/images/big-walk/big-walk-broken-sphere-after-ending.webp`,
@@ -20,38 +20,109 @@ const imageUrls = [
   `${siteUrl}/images/big-walk/big-walk-final-key-spawn-location.webp`,
   `${siteUrl}/images/big-walk/big-walk-true-ending-secret-room-stairs.webp`,
   `${siteUrl}/images/big-walk/big-walk-true-ending-short-reading.webp`,
+  `${siteUrl}/images/big-walk/big-walk-true-ending-white-exit.webp`,
   `${siteUrl}/images/big-walk/big-walk-big-game-completion-message.webp`,
+];
+
+const socialImageUrl =
+  `${siteUrl}/images/big-walk/big-walk-wave-goodbye-ending-prompt.webp`;
+
+const relatedLinks = [
+  {
+    href: "/big-walk",
+    label: "Big Walk Guide Hub",
+  },
+  {
+    href: "/big-walk/black-tower",
+    label: "Black Tower and Black Key Guide",
+  },
+  {
+    href: "/big-walk/purple-puzzles",
+    label: "All 7 Big Walk Purple Puzzles",
+  },
+  {
+    href: "/big-walk/achievements",
+    label: "Big Walk Achievements Guide",
+  },
+  {
+    href: "/big-walk/puzzles",
+    label: "Big Walk Puzzle Solutions",
+  },
+  {
+    href: "/big-walk/how-to-unlock-map",
+    label: "Red Tower and Map Room Guide",
+  },
+  {
+    href: "/big-walk/green-tower-walkthrough",
+    label: "Green Tower and Chairlift Guide",
+  },
+  {
+    href: "/big-walk/yellow-tower-tunnel",
+    label: "Yellow Tower and Tunnel Guide",
+  },
+  {
+    href: "/big-walk/blue-tower-train",
+    label: "Blue Tower and Train Guide",
+  },
+];
+
+const faqEntities = [
+  {
+    question: "Do I need 100% completion for Big Goodbye?",
+    answer:
+      "No. Big Goodbye finishes the normal main route. Full puzzle completion is required for Big Game.",
+  },
+  {
+    question: "Can I continue after Big Goodbye?",
+    answer:
+      "Yes. Continue the same save to complete the seven Purple Puzzles, unfinished normal challenges, final-key route, and Big Game ending.",
+  },
+  {
+    question: "Is Big Game a different branching choice?",
+    answer:
+      "No. Big Game follows Big Goodbye on the same save. Reaching one ending does not permanently block the other.",
+  },
+  {
+    question: "What is the building across the water called?",
+    answer:
+      "There is no clear proper name confirmed here, so this guide refers to it as the ending building or the building across the water.",
+  },
+  {
+    question: "Can I keep playing after Big Game?",
+    answer:
+      "Yes. The final completion screen still provides a Continue option after full completion.",
+  },
 ];
 
 export const metadata: Metadata = {
   title: "Big Walk Endings Guide: Big Goodbye & Big Game",
   description:
-    "Unlock Big Goodbye and the Big Game true ending, complete the purple puzzles, find the final key, and understand Big Walk's ending.",
+    "Unlock Big Goodbye and Big Game, finish the Black Sphere, find the final key, enter the hidden room, and fix 100% completion problems.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Big Walk Endings and True Ending Guide",
+    title: "Big Walk Endings Guide: Big Goodbye & Big Game",
     description:
-      "Reach the Wave Goodbye ending, finish every post-game puzzle, get the final key, and unlock the Big Game true ending.",
+      "Finish the Black Sphere, use Wave Goodbye, continue post-game cleanup, find the final key, and reach Big Walk's full-completion ending.",
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[2],
+        url: socialImageUrl,
         width: 1412,
         height: 1012,
-        alt: "Wave Goodbye prompt at the Big Walk ending building",
+        alt: "Wave Goodbye prompt outside the Big Walk ending building",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Big Walk Endings and True Ending Guide",
+    title: "Big Walk Endings Guide: Big Goodbye & Big Game",
     description:
-      "Unlock Big Goodbye, complete the seven purple puzzles, find the final key, and reach the Big Game true ending.",
-    images: [imageUrls[2]],
+      "Reach Big Goodbye, complete post-game cleanup, find the final key, and unlock the Big Game ending.",
+    images: [socialImageUrl],
   },
 };
 
@@ -90,13 +161,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Big Walk Endings Guide: How to Unlock Big Goodbye and the Big Game True Ending",
+        "Big Walk Endings Guide: How to Unlock Big Goodbye and Big Game",
       description:
-        "This Big Walk endings guide explains how to finish the Black Tower and final black sphere route, reach the building across the water, use Wave Goodbye to unlock Big Goodbye, complete the seven purple post-game puzzles, make the final key appear, enter the hidden room, and understand the Big Game true ending.",
+        "A Big Walk endings guide covering the final Black Sphere, Wave Goodbye, Big Goodbye, post-game completion state, final key, hidden completion room, Big Game ending, and final-key troubleshooting.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-06",
-      dateModified: "2026-08-06",
+      dateModified: "2026-08-10",
       about: [
         {
           "@type": "VideoGame",
@@ -108,11 +179,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk Big Goodbye ending",
+          name: "Big Walk Big Goodbye",
         },
         {
           "@type": "Thing",
-          name: "Big Walk Big Game ending",
+          name: "Big Walk Big Game",
         },
         {
           "@type": "Thing",
@@ -120,19 +191,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Big Walk Black Sphere",
+        },
+        {
+          "@type": "Thing",
           name: "Big Walk Wave Goodbye",
         },
         {
           "@type": "Thing",
-          name: "Big Walk black sphere",
-        },
-        {
-          "@type": "Thing",
-          name: "Big Walk purple puzzles",
-        },
-        {
-          "@type": "Thing",
           name: "Big Walk final key",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk hidden completion room",
         },
         {
           "@type": "Thing",
@@ -155,88 +226,69 @@ const jsonLd = {
         "@id": `${pageUrl}#breadcrumb`,
       },
     },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      mainEntity: faqEntities.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer,
+        },
+      })),
+    },
   ],
 };
 
 const toc = [
   {
-    id: "all-big-walk-endings-at-a-glance",
-    label: "All endings at a glance",
-  },
-  {
     id: "how-to-get-the-big-goodbye-ending",
-    label: "Unlock Big Goodbye",
+    label: "How to get Big Goodbye",
   },
   {
-    id: "what-happens-in-the-big-goodbye-ending",
+    id: "black-sphere-ending-route",
+    label: "Complete the Black Sphere",
+  },
+  {
+    id: "wave-goodbye-ending",
+    label: "Wave Goodbye route",
+  },
+  {
+    id: "what-happens-in-big-goodbye",
     label: "Big Goodbye ending",
   },
   {
-    id: "what-changes-after-the-first-ending",
-    label: "Post-game changes",
+    id: "what-changes-after-big-goodbye",
+    label: "What changes post-game",
   },
   {
-    id: "how-to-get-the-big-game-true-ending",
-    label: "Unlock Big Game",
+    id: "how-to-get-the-big-game-ending",
+    label: "How to get Big Game",
   },
   {
-    id: "what-happens-in-the-big-game-true-ending",
-    label: "Big Game true ending",
+    id: "final-key-location",
+    label: "Final key location",
   },
   {
-    id: "big-goodbye-vs-big-game",
-    label: "Big Goodbye vs. Big Game",
-  },
-  {
-    id: "big-walk-true-ending-explained",
-    label: "True ending explained",
+    id: "hidden-completion-room",
+    label: "Hidden completion room",
   },
   {
     id: "why-the-final-key-is-not-appearing",
     label: "Final key not appearing",
   },
   {
-    id: "does-big-walk-have-multiple-endings",
-    label: "Multiple endings FAQ",
+    id: "big-walk-ending-explained",
+    label: "Ending explained",
   },
   {
-    id: "is-the-black-tower-the-same-as-the-black-sphere",
-    label: "Black Tower vs. sphere",
+    id: "ending-faq",
+    label: "Endings FAQ",
   },
   {
     id: "final-takeaway",
-    label: "Final takeaway",
-  },
-];
-
-const relatedLinks = [
-  {
-    href: "/big-walk",
-    label: "Big Walk Guide Hub",
-  },
-  {
-    href: "/big-walk/how-to-unlock-map",
-    label: "Red Tower and Map Room Guide",
-  },
-  {
-    href: "/big-walk/green-tower-walkthrough",
-    label: "Green Tower and Green Key Guide",
-  },
-  {
-    href: "/big-walk/yellow-tower-tunnel",
-    label: "Yellow Tower and Tunnel Guide",
-  },
-  {
-    href: "/big-walk/blue-tower-train",
-    label: "Blue Tower and Train Guide",
-  },
-  {
-    href: "/big-walk/puzzles",
-    label: "Big Walk Puzzle Solutions",
-  },
-  {
-    href: "/big-walk/achievements",
-    label: "Big Walk Achievements Checklist",
+    label: "Big Goodbye vs. Big Game",
   },
 ];
 
@@ -253,12 +305,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Big Walk Endings Guide"
-          description="Unlock Big Goodbye, complete the seven purple post-game puzzles, find the final key, and reach the Big Game true ending."
+          description="Finish the Black Sphere for Big Goodbye, then complete post-game cleanup, find the final key, and reach the hidden Big Game ending."
           gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 6, 2026"
+          updatedAt="August 10, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
