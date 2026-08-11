@@ -156,7 +156,7 @@ export const guideClusters: GuideCluster[] = [
     ],
   
     image:
-      "/images/pax-autocratica/pax-autocratica-first-elysia-expedition.webp",
+      "/images/pax-autocratica/pax-autocratica-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
