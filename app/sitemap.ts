@@ -667,6 +667,13 @@ const paths = [
   '/sovereign-tower/south-bay-lamp',
   '/sovereign-tower/king-slayer',
   '/sovereign-tower/golden-key',
+
+  '/pax-autocratica',
+  '/pax-autocratica/elysia-walkthrough',
+  '/pax-autocratica/capture-enemies-prisoners',
+  '/pax-autocratica/work-schedule',
+  '/pax-autocratica/core-fragments',
+  '/pax-autocratica/mec-kong-boss-guide',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -674,14 +681,20 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-
+  '/pax-autocratica': '2026-08-11',
+  '/pax-autocratica/elysia-walkthrough': '2026-08-11',
+  '/pax-autocratica/capture-enemies-prisoners': '2026-08-11',
+  '/pax-autocratica/work-schedule': '2026-08-11',
+  '/pax-autocratica/core-fragments': '2026-08-11',
+  '/pax-autocratica/mec-kong-boss-guide': '2026-08-11',
+  
   '/waterpark-simulator': '2026-08-10',
   '/waterpark-simulator/make-money': '2026-08-10',
   '/waterpark-simulator/staff-guide': '2026-08-10',
   '/waterpark-simulator/museum-guide': '2026-08-10',
   '/waterpark-simulator/5-star-diamond-prestige-guide': '2026-08-10',
   '/waterpark-simulator/mafia-guide': '2026-08-10',
-  '/waterpark-simulator/custom-slides-guide': '2026-08-10',
+
   '/waterpark-simulator/achievements-guide': '2026-08-10',
 
   '/sovereign-tower/act-1-best-route': '2026-08-09',

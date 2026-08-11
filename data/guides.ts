@@ -131,6 +131,208 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Pax Autocratica",
+    game: "Pax Autocratica",
+    href: "/pax-autocratica",
+    slug: "pax-autocratica",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Colony Sim & FPS Roguelite",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Early game to Elysia clear coverage",
+  
+    description:
+      "Follow the Pax Autocratica guide hub from the first 4 Titanite and Command Center repair through Elysia progression, Capture Rounds, prisoners, working hours, Core builds, and MEC-KONG 7X.",
+  
+    coverage: [
+      "Opening route from 4 Titanite and the Command Center repair through Barracks research, first weapon transfer, A20, first expedition, Resource Transport Station timing, and bottleneck-based research decisions",
+      "Elysia progression through Expedition Progress, Enemy Strength, return timing, 100% progress, both Decisive Battles, the final blockade, sector overlord, and post-Elysia army preparation",
+      "Capture Rounds with F and hold-F controls, displayed Capture Rate, lower-health and higher-quality capture bonuses, target selection, Prison research, captive storage, capacity, Willpower, Convictions, Indoctrination, and Electroshock",
+      "Work Schedule troubleshooting through Victory Square, Unified Labor research, Directives, Daily working hours, Issue Directive, tested 20-hour and 15-hour schedules, 24h Paid Time Off, and worker-shortage diagnosis",
+      "Core Fragment decisions with Weapon Core terminology, Nebula Assault Rifle, Electric Bouncer, Missile Core, duplicate upgrades, Extended Magazine, Power Reload, return-to-base resets, and Core Seeds",
+      "MEC-KONG 7X boss preparation with Lv.10 identification, Laser Rifle use, sustained Gatling pressure, Critical Health recovery, grenade openings, Second Chance, and the final Elysia victory",
+    ],
+  
+    image:
+      "/images/pax-autocratica/pax-autocratica-first-elysia-expedition.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 28,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Pax Autocratica Beginner Guide & Early-Game Walkthrough",
+        href: "/pax-autocratica",
+        type: "Guide Hub",
+        description:
+          "Start with 4 Titanite, repair the Command Center, research the Barracks, equip the first weapon, launch the first expedition, and let real colony bottlenecks decide what to build next.",
+        image:
+          "/images/pax-autocratica/pax-autocratica-first-elysia-expedition.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "4 Titanite, Command Center, Barracks, first weapon, A20, first expedition, Resource Transport Station, research priorities, and early colony bottlenecks",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Pax Autocratica Elysia Walkthrough & Progression Guide",
+        href: "/pax-autocratica/elysia-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Progress through Elysia with safer return timing, Expedition Progress and Enemy Strength decisions, both Decisive Battles, the final blockade, and the sector clear.",
+        date: "Updated recently",
+        image:
+          "/images/pax-autocratica/pax-autocratica-return-to-base-100-percent.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 155,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "First expedition, Expedition Progress, Enemy Strength, Return to Base at 100%, first and second Decisive Battles, blockade, MEC-KONG 7X, and Elysia secured",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Pax Autocratica Capture Enemies & Prisoners Guide",
+        href: "/pax-autocratica/capture-enemies-prisoners",
+        type: "Systems",
+        description:
+          "Use Capture Rounds, improve Capture Rate, choose worthwhile targets, manage Prison capacity and captive storage, then convert prisoners into useful colony workers.",
+        date: "Updated recently",
+        image:
+          "/images/pax-autocratica/pax-autocratica-capture-rounds-tutorial.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 156,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Capture Rounds, F controls, Capture Rate, target health, stronger enemies, Prison blueprint, captive storage, Willpower, Convictions, Indoctrination, and Electroshock",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Pax Autocratica Work Schedule & Overworked Soldiers Guide",
+        href: "/pax-autocratica/work-schedule",
+        type: "Systems",
+        description:
+          "Unlock Unified Labor, change Daily working hours, recover exhausted soldiers with Paid Time Off, and tell an unsustainable schedule from a real worker shortage.",
+        date: "Updated recently",
+        image:
+          "/images/pax-autocratica/pax-autocratica-20-hour-workday.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 157,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Victory Square, Unified Labor, Directives, Daily working hours, Issue Directive, 20-hour and 15-hour schedules, 24h Paid Time Off, Exhausted soldiers, and labor shortages",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Pax Autocratica Core Fragments & Weapon Cores Guide",
+        href: "/pax-autocratica/core-fragments",
+        type: "Builds",
+        description:
+          "Choose Core Fragments around your current weapon, stack useful duplicate upgrades, compare tested effects, understand resets, and use Core Seeds for future runs.",
+        date: "Updated recently",
+        image:
+          "/images/pax-autocratica/pax-autocratica-core-fragment-storage-pod.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 158,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Core Fragments, Weapon Cores, Nebula Assault Rifle, Electric Bouncer, Missile Core, duplicate upgrades, Extended Magazine, Power Reload, resets, and Core Seeds",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Pax Autocratica MEC-KONG 7X Boss Guide",
+        href: "/pax-autocratica/mec-kong-boss-guide",
+        type: "Bosses",
+        description:
+          "Beat MEC-KONG 7X by managing Gatling pressure, healing before another burst becomes lethal, using grenade openings, and keeping the build that already carried the run.",
+        date: "Updated recently",
+        image:
+          "/images/pax-autocratica/pax-autocratica-mec-kong-gatling-gun.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 159,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "MEC-KONG 7X Lv.10, final Elysia fight, Laser Rifle, Gatling pressure, 4/314 Critical Health, healing, grenades, Second Chance, and Boss Victory",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+    ],
+  },
+  {
     title: "Sovereign Tower",
     game: "Sovereign Tower",
     href: "/sovereign-tower",
