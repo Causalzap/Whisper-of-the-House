@@ -131,6 +131,363 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Doloc Town",
+    game: "Doloc Town",
+    href: "/doloc-town",
+    slug: "doloc-town",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Cozy, crafting, survival & systems",
+    label: "Post-Apocalyptic Farming RPG",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Progression + farm systems + completion coverage",
+
+    description:
+      "Use the Doloc Town guide hub for main-story progression, Environmental Modifier repair, money decisions, crop profit, acid rain, automation, genetics, fishing, fish breeding, livestock, and all 80 achievements.",
+
+    coverage: [
+      "Main-story progression from the opening farm through River Valley, Guild and Jetpack unlocks, the Treaty Port night meeting, Copper Pickaxe gate, Environmental Modifier handoff, Wetlands, Old City Ruins, and later story stages",
+      "Environmental Modifier troubleshooting from the Core Extractor and Core Sample through Small Batteries, rear-panel circuit repair, Phase 1 activation, and the handoff back into regional progression",
+      "Farm economy decisions with early Gold protection, 500G and 4,000G bag upgrades, 1,500G Copper Pickaxe budgeting, sell-versus-recycle choices, broke recovery, and the Best Crops and Profit Calculator",
+      "Crop survival and scale through Acid Rain, End Crops, Plastic Mulch, Weather Station planning, sprinklers, generators, power storage, Automation Workbench, Drone Stations, Farming Drones, and specialized drones",
+      "Late farm systems through Gene 101, Gene Activation Chamber, Archive Attic, Gene Capsules, cloning, multi-gene synthesis, livestock sheds, feeding, breeding, manure, and expansion decisions",
+      "Fishing from Light Man's free Old Fishing Rod through cast and meter controls, rod upgrades, weather and water clues, Salmon Fest, Fish Tanks, roe, parent ratios, rare variants, and Abundant Collection",
+      "All 80 achievements with hidden triggers, story milestones, long counters, faction and relationship cleanup, festival goals, automation targets, and a practical 100% completion order",
+    ],
+
+    image: "/images/doloc-town/doloc-town-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 29,
+      footerFeatured: true,
+    },
+
+    pages: [
+      {
+        title: "Doloc Town Guide: Walkthrough, Farming, Fishing & More",
+        href: "/doloc-town",
+        type: "Guide Hub",
+        description:
+          "Start here to choose the right Doloc Town guide for progression, money, crops, weather, automation, genetics, fishing, livestock, and achievement cleanup.",
+        image: "/images/doloc-town/doloc-town-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Walkthrough, Environmental Modifier, money, crop calculator, Acid Rain, automation, genetics, fishing, fish breeding, livestock, and all 80 achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+
+      {
+        title: "Doloc Town Walkthrough: Main Story & Progression Guide",
+        href: "/doloc-town/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the main story from the starting farm through River Valley, Treaty Port, the Environmental Modifier, Wetlands, Old City, and late progression handoffs.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-river-valley-jetpack-double-jump.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 160,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Starting farm, River Valley, Guild, Jetpack, Treaty Port 6–10 PM meeting, Copper Pickaxe, Environmental Modifier handoff, Wetlands, and Old City",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+
+      {
+        title: "Doloc Town Environmental Modifier Guide",
+        href: "/doloc-town/environmental-modifier",
+        type: "Systems",
+        description:
+          "Find the Core Extractor, bring back the Core Sample, build the correct Small Batteries, repair the rear circuit, troubleshoot the terminal, and activate Phase 1.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-environmental-modifier-machine.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 161,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Core Extractor, Core Sample, Environmental Modifier, 2 Small Batteries, 5 Electric Wires, rear-panel repair, troubleshooting, and 30 Energy Phase 1",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+
+      {
+        title: "Doloc Town Money Guide: Gold, Spending & Early Priorities",
+        href: "/doloc-town/money-guide",
+        type: "Guide",
+        description:
+          "Protect early Gold, time bag upgrades, stack side quests, save for progression tools, choose between selling and recycling, and recover after overspending.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-money-first-bag-upgrade-500g.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 162,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "100G mixed seed gamble, 500G first bag, side-quest income, 1,500G Copper Pickaxe reserve, sell vs recycle, 4,000G bag, and broke recovery",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+
+      {
+        title: "Doloc Town Best Crops & Profit Calculator",
+        href: "/doloc-town/best-crops",
+        type: "Systems",
+        description:
+          "Compare Doloc Town crops by climate, genes, sell method, profit per day, profit per tile, growth time, seed cost, and direct versus processed value.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-seed-shop-early-crops.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 163,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Interactive crop calculator with climate, genes, crop type, direct or processed sale, profit per day, profit per tile, growth time, and seed cost",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+
+      {
+        title: "Doloc Town Acid Rain: Crop Protection & Weather Guide",
+        href: "/doloc-town/acid-rain",
+        type: "Guide",
+        description:
+          "Protect crops with End Crops, two-day Plastic Mulch, Weather Station forecasts, indoor growing, and practical decisions for severe weather.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-acid-rain-warning.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 164,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Acid Rain, End Crops, two-day Plastic Mulch, Weather Station, Light and Heavy Rain, Early and Harsh Dry periods, indoor crops, and exposed equipment",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+
+      {
+        title: "Doloc Town Farming Automation Guide",
+        href: "/doloc-town/farming-automation",
+        type: "Systems",
+        description:
+          "Automate farming with sprinklers, generators, power storage, Rubber, the Automation Workbench, Drone Stations, Farming Drones, and specialized drones.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-manual-to-automatic-sprinkler.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 165,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Manual and Automatic Sprinklers, Simple Generator, power storage, Rubber, Automation Workbench, Basic Drone, Drone Stations, Farming Drone, and large-scale automation",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+
+      {
+        title: "Doloc Town Crop Genetics Guide",
+        href: "/doloc-town/crop-genetics",
+        type: "Systems",
+        description:
+          "Progress from the Gene Activation Chamber and Archive Attic to Gene Capsules, cloning, Gene Synthesizer, multi-gene crops, backups, and troubleshooting.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-achievements-gene-activation-chamber.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 166,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Gene 101, Gene Activation Chamber, latent genes, Archive Attic, Gene Capsules, duplication, Gene Synthesizer, three-gene crops, and Seed Compressor backups",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+
+      {
+        title: "Doloc Town Fishing Guide: Rods, Controls & Rare Fish",
+        href: "/doloc-town/fishing-guide",
+        type: "Guide",
+        description:
+          "Take Light Man's free Old Fishing Rod, learn cast and meter controls, upgrade rods only when needed, use weather and water clues, and prepare for Salmon Fest.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-fishing-controls-cast-and-lift.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 167,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Old Fishing Rod, cast distance, lift timing, hold and release meter control, yellow bonus windows, rod upgrades, RNG, weather fish, Salmon Fest, and rare catches",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+
+      {
+        title: "Doloc Town Fish Breeding: Variants, Roe & Tank Guide",
+        href: "/doloc-town/fish-breeding",
+        type: "Systems",
+        description:
+          "Breed fish variants with Fish Tanks, roe, fry, parent ratios, Salmon Fest stock, Large Fish Tanks, advanced chains, and the Abundant Collection route.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-fish-breeding-fish-tank-tech.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 168,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Fish Tank, Fish Incubator, roe and fry, Blackback Sardine, small-tank ratios, Large Fish Tank, Koi, Shiny Golden Fish, and Abundant Collection",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+
+      {
+        title: "Doloc Town Animals: Livestock, Feeding & Breeding Guide",
+        href: "/doloc-town/animals",
+        type: "Guide",
+        description:
+          "Unlock the Small Livestock Shed, build a reliable feeding loop, raise the first Stilttail Pheasant, save the first Egg, breed animals, and expand safely.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-livestock-shed-materials.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 169,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "Small Livestock Shed, Feeding Trough, Alfalfa, Stilttail Pheasant, first Egg, animal prices, Breeding Room, Animal Toilet, manure, and Noah's Ark planning",
+        },
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+
+      {
+        title: "Doloc Town Achievements: Hidden, Rare & 100% Guide",
+        href: "/doloc-town/achievements",
+        type: "Achievements",
+        description:
+          "Track all 80 achievements with hidden triggers, rare goals, story milestones, fishing, genes, factions, festivals, automation, and a practical 100% cleanup order.",
+        date: "Updated recently",
+        image:
+          "/images/doloc-town/doloc-town-achievements-trash-bin.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 170,
+          spotlightFeature: true,
+          spotlightOrder: 11,
+          spotlightMeta:
+            "All 80 achievements, hidden actions, trash and Lank, exploration secrets, fishing and farm counters, genetics, factions, festivals, automation, and 100% cleanup",
+        },
+        archive: {
+          showInCollections: true,
+          order: 12,
+        },
+      },
+    ],
+  },
+  {
     title: "Pax Autocratica",
     game: "Pax Autocratica",
     href: "/pax-autocratica",

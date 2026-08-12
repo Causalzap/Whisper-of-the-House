@@ -674,6 +674,20 @@ const paths = [
   '/pax-autocratica/work-schedule',
   '/pax-autocratica/core-fragments',
   '/pax-autocratica/mec-kong-boss-guide',
+
+  '/doloc-town',
+  '/doloc-town/walkthrough',
+  '/doloc-town/environmental-modifier',
+  '/doloc-town/money-guide',
+  '/doloc-town/best-crops',
+  '/doloc-town/acid-rain',
+  '/doloc-town/farming-automation',
+  '/doloc-town/crop-genetics',
+  '/doloc-town/fishing-guide',
+  '/doloc-town/fish-breeding',
+  '/doloc-town/animals',
+  '/doloc-town/achievements',
+  
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -681,6 +695,19 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/doloc-town': '2026-08-12',
+  '/doloc-town/walkthrough': '2026-08-12',
+  '/doloc-town/environmental-modifier': '2026-08-12',
+  '/doloc-town/money-guide': '2026-08-12',
+  '/doloc-town/best-crops': '2026-08-12',
+  '/doloc-town/acid-rain': '2026-08-12',
+  '/doloc-town/farming-automation': '2026-08-12',
+  '/doloc-town/crop-genetics': '2026-08-12',
+  '/doloc-town/fishing-guide': '2026-08-12',
+  '/doloc-town/fish-breeding': '2026-08-12',
+  '/doloc-town/animals': '2026-08-12',
+  '/doloc-town/achievements': '2026-08-12',
+
   '/pax-autocratica': '2026-08-11',
   '/pax-autocratica/elysia-walkthrough': '2026-08-11',
   '/pax-autocratica/capture-enemies-prisoners': '2026-08-11',
