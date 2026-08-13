@@ -131,6 +131,313 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "War in the North: Legacy Edition",
+    game: "The Lord of the Rings: War in the North - Legacy Edition",
+    href: "/war-in-the-north-legacy-edition",
+    slug: "war-in-the-north-legacy-edition",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Action RPG & Co-op Adventure",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Campaign + builds + 100% coverage",
+  
+    description:
+      "Use the War in the North Legacy Edition guide hub for the full campaign walkthrough, Legacy changes, Eradan, Farin and Andriel builds, weapons and Mithril, Secrets, side quests, all seven Lidless Eye Scrolls, achievements, and co-op help.",
+  
+    coverage: [
+      "Full campaign progression from Bree and Fornost through Sarn Ford, the Barrow-downs, Rivendell, the Ettenmoors, Mount Gundabad, Nordinbad, Mirkwood, the Grey Mountains, Carn Dûm, and the final Agandaûr battle",
+      "Legacy Edition changes including seamless character hot-swapping, updated party Health, Mana and EXP information, refined target locking, autosave, modern co-op support, gyro controls, and current PC requirements",
+      "Eradan, Farin and Andriel build decisions through Evasion, Sanctuary, War-cry, skill priorities, stat allocation, solo survival, respec timing, character switching, and harder-difficulty planning",
+      "Weapons and Mithril decisions through sockets, jewels, species-specific damage, the tested 25,671 vs about 11,000 Orc damage comparison, weapon-versus-armor investment, Legendary gear, and vendor buying rules",
+      "25-Secret route through Fornost, the Barrow-downs and Amon Gorthad, with Ranger caches, Farin walls, Andriel hidden routes, nested Secrets, later backup locations, and Seeker troubleshooting",
+      "Side quests and missables from Bree through Fornost, Sarn Ford, Rivendell, Mount Gundabad, Nordinbad and Mirkwood, including Truesilver, Work of Westernesse, Athelas, Black Pearl, and Glorihirin",
+      "All seven Cult of the Lidless Eye Scrolls in campaign order from the Fornost Battlements through the Ettenmoors, Mount Gundabad, Wulfrun, Urgost's Lair, and the final Elrond hand-in",
+      "All 46 achievements with a three-clear Normal to Heroic to Legendary roadmap, single-playthrough counters, Secrets, quests, co-op requirements, missables, and Eagle Savior",
+      "Online and split-screen co-op, Steam Remote Play Together, current crossplay status, host and client save precautions, joining problems, revives, and Fellowship coordination",
+    ],
+  
+    image:
+      "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 30,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title: "War in the North Legacy Edition Guide: Walkthrough & Builds",
+        href: "/war-in-the-north-legacy-edition",
+        type: "Guide Hub",
+        description:
+          "Start here for campaign progression, Legacy Edition changes, character builds, weapons and Mithril, Secrets, side quests, achievements, Scrolls, and co-op.",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-urgost-deal.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Walkthrough, Legacy changes, Eradan, Farin and Andriel builds, weapons, Mithril, 25 Secrets, side quests, seven Lidless Eye Scrolls, all 46 achievements, and co-op",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Walkthrough",
+        href: "/war-in-the-north-legacy-edition/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the campaign from Bree and Fornost through the Barrow-downs, Ettenmoors, Mount Gundabad, Mirkwood, Nordinbad, Carn Dûm, and Agandaûr.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-carn-dum-final-bridge.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 171,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Bree, Fornost, Sarn Ford, Barrow-downs, Rivendell, Bargrisar, Mount Gundabad, Wulfrun, Saenathra, Urgost, Nordinbad siege, Carn Dûm, and Agandaûr",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Changes: What's New",
+        href: "/war-in-the-north-legacy-edition/legacy-edition-changes",
+        type: "Guide",
+        description:
+          "See what changed from the original game, including character hot-swapping, updated party UI, refined target lock, autosave, co-op, gyro, and PC changes.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-party-hud-bars.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 172,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Seamless hot-swap, updated party Health Mana EXP UI, refined target locking, autosave, bug fixes, online and split-screen co-op, gyro, PC requirements, and old-guide checks",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Best Character & Builds",
+        href: "/war-in-the-north-legacy-edition/best-character-builds",
+        type: "Builds",
+        description:
+          "Compare Eradan, Farin, and Andriel for solo play, then build around Evasion, Sanctuary, War-cry, stat priorities, respec timing, and harder difficulties.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-andriel-sanctuary.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 173,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Eradan vs Farin vs Andriel, Evasion, Sanctuary, War-cry, Heavy Shot, stat priorities, character switching, respec timing, solo survival, and harder difficulties",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Weapons & Mithril Guide",
+        href: "/war-in-the-north-legacy-edition/weapons-mithril-upgrades",
+        type: "Systems",
+        description:
+          "Choose weapons, sockets, jewels and species bonuses, compare Mithril with sockets, decide between weapons and armor, and avoid wasting upgrades.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-andriel-staff-two-sockets.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 174,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Mithril unlock, weapon vs armor, sockets, 6 vs 8 Mithril upgrades, 25,671 vs about 11,000 damage test, Orc bonuses, Legendary gear, vendors, and upgrade priorities",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Secrets: 25-Secret Route",
+        href: "/war-in-the-north-legacy-edition/secrets",
+        type: "Collectibles",
+        description:
+          "Find 25 Secrets through Fornost, the Barrow-downs, and Amon Gorthad, then use later backup locations if an early Secret fails to register.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-barrow-downs-nested-secret.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 175,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "15 Fornost Secrets, 9 Barrow-downs Secrets, Amon Gorthad 25th Secret, Ranger caches, Farin walls, Andriel routes, nested Secrets, backups, and Seeker troubleshooting",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Side Quests & Missables",
+        href: "/war-in-the-north-legacy-edition/side-quests",
+        type: "Guide",
+        description:
+          "Complete side quests in campaign order, keep the right quest items, know when to return to each hub, and avoid missing late hand-ins.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-truesilver-mithril-return.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 176,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Rowlie's Gift, Otto's Arsenal, Work of Westernesse, Seer's Words, Athelas, Last Sons of Cardolan, The Poet, Truesilver, Black Pearl, and Glorihirin",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Lidless Eye Scroll Locations",
+        href: "/war-in-the-north-legacy-edition/lidless-eye-scrolls",
+        type: "Collectibles",
+        description:
+          "Find all seven Cult of the Lidless Eye Scrolls in campaign order from Fornost through Urgost's Lair and finish the investigation with Elrond.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-lidless-eye-scroll-1-fornost.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 177,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Seven Lidless Eye Scrolls: Fornost, Coldfells, High Moors, Mount Gundabad, Wulfrun, Urgost's Lair, Carn Dûm Captain, and final Elrond hand-in",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Achievements: 100% Roadmap",
+        href: "/war-in-the-north-legacy-edition/achievements",
+        type: "Achievements",
+        description:
+          "Get all 46 achievements with a Normal to Heroic to Legendary route, single-playthrough counters, missables, Secrets, co-op, and Eagle Savior.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-agandaur-final-battle.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 178,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "All 46 achievements, Normal Heroic Legendary clears, NG+ carryover, single-playthrough counters, 25 Secrets, 15 quests, co-op, missables, and Eagle Savior",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title: "War in the North Legacy Edition Co-op & Crossplay Guide",
+        href: "/war-in-the-north-legacy-edition/co-op-crossplay-troubleshooting",
+        type: "Guide",
+        description:
+          "Set up online or split-screen co-op, understand Remote Play Together and current crossplay status, test saves, and troubleshoot multiplayer progress.",
+        date: "Updated recently",
+        image:
+          "/images/war-in-the-north-legacy-edition/war-in-the-north-legacy-edition-revive-companion.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 179,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Three-player Fellowship, online co-op, split-screen, Steam Remote Play Together, crossplay status, host and client saves, reconnect testing, revives, and Sanctuary",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+    ],
+  },
+  {
     title: "Doloc Town",
     game: "Doloc Town",
     href: "/doloc-town",

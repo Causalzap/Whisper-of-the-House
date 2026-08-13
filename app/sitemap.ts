@@ -687,6 +687,17 @@ const paths = [
   '/doloc-town/fish-breeding',
   '/doloc-town/animals',
   '/doloc-town/achievements',
+
+  '/war-in-the-north-legacy-edition',
+  '/war-in-the-north-legacy-edition/walkthrough',
+  '/war-in-the-north-legacy-edition/legacy-edition-changes',
+  '/war-in-the-north-legacy-edition/best-character-builds',
+  '/war-in-the-north-legacy-edition/weapons-mithril-upgrades',
+  '/war-in-the-north-legacy-edition/secrets',
+  '/war-in-the-north-legacy-edition/side-quests',
+  '/war-in-the-north-legacy-edition/lidless-eye-scrolls',
+  '/war-in-the-north-legacy-edition/achievements',
+  '/war-in-the-north-legacy-edition/co-op-crossplay-troubleshooting',
   
 ] as const;
 
@@ -695,6 +706,18 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/war-in-the-north-legacy-edition': '2026-08-13',
+  '/war-in-the-north-legacy-edition/walkthrough': '2026-08-13',
+  '/war-in-the-north-legacy-edition/legacy-edition-changes': '2026-08-13',
+  '/war-in-the-north-legacy-edition/best-character-builds': '2026-08-13',
+  '/war-in-the-north-legacy-edition/weapons-mithril-upgrades': '2026-08-13',
+  '/war-in-the-north-legacy-edition/secrets': '2026-08-13',
+  '/war-in-the-north-legacy-edition/side-quests': '2026-08-13',
+  '/war-in-the-north-legacy-edition/lidless-eye-scrolls': '2026-08-13',
+  '/war-in-the-north-legacy-edition/achievements': '2026-08-13',
+  '/war-in-the-north-legacy-edition/co-op-crossplay-troubleshooting':
+    '2026-08-13',
+    
   '/doloc-town': '2026-08-12',
   '/doloc-town/walkthrough': '2026-08-12',
   '/doloc-town/environmental-modifier': '2026-08-12',
