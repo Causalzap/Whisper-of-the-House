@@ -35,6 +35,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Force insecure ad assets to be blocked */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="block-all-mixed-content"
+        />
+
         {/* Mediavine site verification */}
         <meta
           name="impact-site-verification"
