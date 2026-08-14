@@ -698,6 +698,17 @@ const paths = [
   '/war-in-the-north-legacy-edition/lidless-eye-scrolls',
   '/war-in-the-north-legacy-edition/achievements',
   '/war-in-the-north-legacy-edition/co-op-crossplay-troubleshooting',
+
+  '/servant-of-the-lake',
+  '/servant-of-the-lake/walkthrough',
+  '/servant-of-the-lake/puzzle-solutions',
+  '/servant-of-the-lake/waking-up-aldous',
+  '/servant-of-the-lake/coffee-puzzle',
+  '/servant-of-the-lake/laundry-puzzle',
+  '/servant-of-the-lake/bathroom-puzzle',
+  '/servant-of-the-lake/alchemy-puzzle',
+  '/servant-of-the-lake/achievements',
+  '/servant-of-the-lake/secret-ending',
   
 ] as const;
 
@@ -706,6 +717,17 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/servant-of-the-lake': '2026-08-14',
+  '/servant-of-the-lake/walkthrough': '2026-08-14',
+  '/servant-of-the-lake/puzzle-solutions': '2026-08-14',
+  '/servant-of-the-lake/waking-up-aldous': '2026-08-14',
+  '/servant-of-the-lake/coffee-puzzle': '2026-08-14',
+  '/servant-of-the-lake/laundry-puzzle': '2026-08-14',
+  '/servant-of-the-lake/bathroom-puzzle': '2026-08-14',
+  '/servant-of-the-lake/alchemy-puzzle': '2026-08-14',
+  '/servant-of-the-lake/achievements': '2026-08-14',
+  '/servant-of-the-lake/secret-ending': '2026-08-14',
+  
   '/war-in-the-north-legacy-edition': '2026-08-13',
   '/war-in-the-north-legacy-edition/walkthrough': '2026-08-13',
   '/war-in-the-north-legacy-edition/legacy-edition-changes': '2026-08-13',

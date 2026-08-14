@@ -32,6 +32,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isProduction = process.env.NODE_ENV === "production";
+
   return (
     <html lang="en">
       <head>
@@ -47,14 +49,16 @@ export default function RootLayout({
           content="5b77d168-34a3-4c38-b27b-6db13d6bd8ba"
         />
 
-        {/* Mediavine Script Wrapper */}
-        <Script
-          id="mediavine-script"
-          src="//scripts.mediavine.com/tags/ef7c02f6-3b8c-44f1-a81a-4ebf11f77ea5.js"
-          strategy="beforeInteractive"
-          data-noptimize="1"
-          data-cfasync="false"
-        />
+        {/* Mediavine Script Wrapper - production only */}
+        {isProduction && (
+          <Script
+            id="mediavine-script"
+            src="//scripts.mediavine.com/tags/ef7c02f6-3b8c-44f1-a81a-4ebf11f77ea5.js"
+            strategy="beforeInteractive"
+            data-noptimize="1"
+            data-cfasync="false"
+          />
+        )}
       </head>
 
       <body>

@@ -17,7 +17,7 @@ const primaryButtonClassName = [
   "items-center justify-center",
   "rounded-full bg-sky-600",
   "px-5 py-2.5",
-  "text-sm font-black text-white",
+  "text-sm font-black text-white no-underline",
   "shadow-sm transition",
   "hover:-translate-y-0.5",
   "hover:bg-sky-700",
@@ -34,7 +34,7 @@ const secondaryButtonClassName = [
   "rounded-full border",
   "border-sky-200 bg-white",
   "px-5 py-2.5",
-  "text-sm font-black text-sky-800",
+  "text-sm font-black text-sky-800 no-underline",
   "transition",
   "hover:-translate-y-0.5",
   "hover:border-sky-400",
@@ -68,6 +68,7 @@ export default function GameDiscoveryCta({
     <section
       aria-label={`Game discovery tools after ${gameTitle}`}
       className={[
+        "not-prose",
         "border-t border-slate-200",
         "bg-[#f3f6fa]",
       ].join(" ")}

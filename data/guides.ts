@@ -131,6 +131,318 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Servant of the Lake",
+    game: "Servant of the Lake",
+    href: "/servant-of-the-lake",
+    slug: "servant-of-the-lake",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Story, endings, horror & route locks",
+    label: "Rusty Lake Puzzle Adventure",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "3-day walkthrough + puzzles + secrets",
+  
+    description:
+      "Use the Servant of the Lake guide hub for the full three-day walkthrough, puzzle solutions, Waking up Aldous, Coffee, Laundry, Bathroom and Alchemy puzzles, all 49 achievements, and the Secret Ending.",
+  
+    coverage: [
+      "Complete three-day progression through all 24 main tasks from The Arrival and Preparing Breakfast through Waking up Aldous, Day 2 chores, Day 3 Alchemy and dinner, and The Departure",
+      "Quick puzzle solutions for Preparing Breakfast, flowers and flag, Waking up William, Cleaning the Floors, Cellar Time Pieces and tools, dinner preparation, serving rules, and post-game handoffs",
+      "Waking up Aldous progression through the 7:00 alarm, Razor, shaving and earlobe sequence, Cloth, crow interaction, Berries, exercise route, dressing, and the final Day 1 morning checkpoint",
+      "Preparing Coffee with Alexandra 3, Aldous 1 and William 5, the 315 code, Coffee Beans, Ground Coffee, serving Aldous, and the handoff to William",
+      "Doing the Washing from dirty clothes and the baby's diaper through wet laundry, the seven-piece 0-to-6 clothesline order, Bathroom Key, and the direct transition into Helping with Bathing",
+      "Helping with Bathing through the category puzzle, sliding puzzle, Scissors, Soap, stitches, Maggot, mouse, Comb, directional bubbles, 281 lock, pendant, and Alexandra's Bronze Time Piece",
+      "Assisting in Alchemy through Left and Right symbols, cabinet code 2451, Egg, Oil, Acid, Blood, Strange Fruit, Juice, and the final Egg-first Elixir recipe",
+      "All 49 achievements with 24 main task achievements, 25 optional achievements, Notebook chapter replay, A Perfect Hunt, Tickling Mr. William, additional-task cleanup, and the Secret Location achievement",
+      "Secret Ending route from Kate's post-game note and the 4:05 clock through the Bathroom clue, nine-step Alchemy maze, Attic constellation, bronze-silver-gold clue, secret chamber, Telescope, Watch Clip, and You've found him!",
+    ],
+  
+    image:
+      "/images/servant-of-the-lake/servant-of-the-lake-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 31,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Servant of the Lake Guide: Walkthrough, Puzzles & Secrets",
+        href: "/servant-of-the-lake",
+        type: "Guide Hub",
+        description:
+          "Start here for the three-day walkthrough, puzzle solutions, Aldous, Coffee, Laundry, Bathroom, Alchemy, achievements, Secret Ending, and Rusty Lake: Roots connection.",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-day-1-arrival.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Three-day walkthrough, puzzle solutions, Waking up Aldous, Coffee 315, Laundry 0–6, Bathroom 281, Alchemy 2451, 49 achievements, Secret Ending, and Roots connection",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title: "Servant of the Lake Walkthrough: All 3 Days",
+        href: "/servant-of-the-lake/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow all 24 main tasks across Day 1, Day 2 and Day 3, with progression checkpoints, room handoffs, puzzle links, and the route through The Departure.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-day-1-arrival.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 180,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "All 24 main tasks across three days, progression checkpoints, Aldous, William, Laundry, Bathroom, Cellar, Alchemy, dinner, and The Departure",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title: "Servant of the Lake Puzzle Solutions & Codes",
+        href: "/servant-of-the-lake/puzzle-solutions",
+        type: "Puzzle Help",
+        description:
+          "Quickly solve Breakfast, flowers, flag, William, floor puzzles, Coffee, Laundry, Bathroom, Cellar, Alchemy, dinner, and other three-day blockers.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-coffee-315-code.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 181,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Breakfast, flowers, flag, William, floor puzzles, Coffee 315, Laundry 0–6, Bathroom 281, Cellar Time Pieces, Alchemy 2451, and dinner rules",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title: "Servant of the Lake Waking Up Aldous Guide",
+        href: "/servant-of-the-lake/waking-up-aldous",
+        type: "Puzzle Help",
+        description:
+          "Wake Aldous at 7:00, get the Razor, finish the shaving and earlobe chain, clean his ear, get the Berries, solve the exercise sequence, and dress him.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-aldous-clock-700.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 182,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "7:00 alarm, Razor, shaving, earlobe, Cloth, crow, Berries, Toy Soldier exercise sequence, dressing, and Day 1 morning completion",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title: "Servant of the Lake Coffee Puzzle: 315 Code & Beans",
+        href: "/servant-of-the-lake/coffee-puzzle",
+        type: "Puzzle Help",
+        description:
+          "Use Alexandra, Aldous and William's pointing clues to get 315, unlock the Coffee Beans, grind them, serve Aldous, and continue to William.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-coffee-315-code.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 183,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Alexandra 3, Aldous 1, William 5, Coffee code 315, Coffee Beans, Ground Coffee, serve Aldous first, and bring coffee to William",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title: "Servant of the Lake Laundry Puzzle: 0-6 Order & Key",
+        href: "/servant-of-the-lake/laundry-puzzle",
+        type: "Puzzle Help",
+        description:
+          "Collect and wash the dirty clothes and diaper, hang all seven pieces, arrange them from 0 to 6 line markings, and get the Bathroom Key.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-laundry-clothes-order.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 184,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Dirty clothes, baby and diaper, wet laundry, seven-piece clothesline, 0–6 line order, Bathroom Key, and Helping with Bathing handoff",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Servant of the Lake Bathroom Puzzle: 281 & Time Piece",
+        href: "/servant-of-the-lake/bathroom-puzzle",
+        type: "Puzzle Help",
+        description:
+          "Solve Alexandra's Bathroom chain through Scissors, Soap, Maggot, mouse, Comb, bubbles, code 281, pendant, and the Bronze Time Piece.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-bathroom-281-code.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 185,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Bathroom Key, category puzzle, sliding puzzle, Scissors, Soap, Maggot, mouse, Comb, bubbles, 281, pendant, and Bronze Time Piece",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Servant of the Lake Alchemy Puzzle: 2451 & Elixir",
+        href: "/servant-of-the-lake/alchemy-puzzle",
+        type: "Puzzle Help",
+        description:
+          "Use code 2451, decode Left and Right, make Egg, Oil, Acid, Blood, Strange Fruit and Juice, then mix the final Elixir in the correct order.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-alchemy-2451-code.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 186,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Left and Right symbols, cabinet code 2451, Egg, Oil, Acid, Blood, Strange Fruit, Juice, Elixir order, and Alchemy troubleshooting",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Servant of the Lake Achievements: 49 & 100% Guide",
+        href: "/servant-of-the-lake/achievements",
+        type: "Achievements",
+        description:
+          "Track all 49 achievements, use Notebook replay for the 25 optional tasks, get A Perfect Hunt, and clean up the post-game achievement route.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-achievements-notebook.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 187,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "49 achievements, 24 main tasks, 25 optional achievements, Notebook chapter replay, Tickling William, A Perfect Hunt, additional tasks, and You've found him!",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "Servant of the Lake Secret Ending & You've Found Him",
+        href: "/servant-of-the-lake/secret-ending",
+        type: "Endings",
+        description:
+          "Follow Kate's hidden route through 4:05, the Bathroom clue, Alchemy maze, Attic constellation, secret chamber, Telescope, castle, and Watch Clip.",
+        date: "Updated recently",
+        image:
+          "/images/servant-of-the-lake/servant-of-the-lake-secret-ending-405-clock.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 188,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Kate's note, five past four, 4:05 clock, Bathroom clue, nine-step maze, Attic constellation, bronze-silver-gold symbols, secret chamber, Telescope, castle, and Watch Clip",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+    ],
+  },
+  {
     title: "War in the North: Legacy Edition",
     game: "The Lord of the Rings: War in the North - Legacy Edition",
     href: "/war-in-the-north-legacy-edition",
