@@ -10,17 +10,52 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/servant-of-the-lake`;
 const pageUrl = `${hubUrl}/walkthrough`;
 
+const metadataTitle =
+  "Servant of the Lake Walkthrough: All 24 Tasks (Day 1–3)";
+
+const metadataDescription =
+  "Follow all 24 Servant of the Lake tasks from The Arrival to The Departure, with Day 1–3 routes, progression items, checkpoints, and stuck fixes.";
+
 const imageUrls = [
   `${siteUrl}/images/servant-of-the-lake/servant-of-the-lake-walkthrough-day-1-arrival.webp`,
   `${siteUrl}/images/servant-of-the-lake/servant-of-the-lake-walkthrough-day-2-morning.webp`,
   `${siteUrl}/images/servant-of-the-lake/servant-of-the-lake-walkthrough-day-3-morning.webp`,
 ];
 
-const toc = [
-  {
-    id: "how-i-use-this-walkthrough",
-    label: "How I use this walkthrough",
+export const metadata: Metadata = {
+  title: metadataTitle,
+  description: metadataDescription,
+  alternates: {
+    canonical: pageUrl,
   },
+  openGraph: {
+    type: "article",
+    url: pageUrl,
+    title: metadataTitle,
+    description:
+      "Complete the full three-day Servant of the Lake route across all 24 main tasks, from The Arrival through the Cellar, Alchemy, Dinner, and The Departure.",
+    siteName: "Whisper of the House",
+    publishedTime: "2026-08-14",
+    modifiedTime: "2026-08-15",
+    images: [
+      {
+        url: imageUrls[0],
+        width: 1280,
+        height: 720,
+        alt: "The Arrival at the Vanderboom estate in Servant of the Lake",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: metadataTitle,
+    description:
+      "Follow all 24 main tasks across Day 1, Day 2, and Day 3 with progression checkpoints, key handoffs, and stuck fixes.",
+    images: [imageUrls[0]],
+  },
+};
+
+const toc = [
   {
     id: "day-1-walkthrough",
     label: "Day 1 walkthrough",
@@ -38,16 +73,28 @@ const toc = [
     label: "Waking up Aldous",
   },
   {
-    id: "day-1-afternoon",
-    label: "Day 1 afternoon",
+    id: "day-1-reception",
+    label: "Preparing the Reception",
   },
   {
-    id: "day-1-evening",
-    label: "Day 1 evening",
+    id: "day-1-guests",
+    label: "Welcoming the Guests",
   },
   {
-    id: "day-1-night",
-    label: "Day 1 night",
+    id: "day-1-tea",
+    label: "Serving Tea",
+  },
+  {
+    id: "day-1-reunion",
+    label: "Opening the Reunion",
+  },
+  {
+    id: "day-1-night-watch",
+    label: "The Night Watch",
+  },
+  {
+    id: "day-1-attic",
+    label: "Searching the Attic",
   },
   {
     id: "day-2-walkthrough",
@@ -78,8 +125,12 @@ const toc = [
     label: "Helping with Bathing",
   },
   {
-    id: "day-2-night",
-    label: "Day 2 night & Cellar",
+    id: "day-2-night-duties",
+    label: "Night Time Duties",
+  },
+  {
+    id: "day-2-cellar",
+    label: "Inspecting the Cellar",
   },
   {
     id: "day-3-walkthrough",
@@ -118,8 +169,8 @@ const toc = [
     label: "After the main ending",
   },
   {
-    id: "shortest-route-rule",
-    label: "My shortest route rule",
+    id: "walkthrough-stuck",
+    label: "If I'm stuck",
   },
 ];
 
@@ -130,23 +181,7 @@ const relatedLinks = [
   },
   {
     href: "/servant-of-the-lake/puzzle-solutions",
-    label: "Puzzle Solutions",
-  },
-  {
-    href: "/servant-of-the-lake/coffee-puzzle",
-    label: "Coffee Puzzle Guide",
-  },
-  {
-    href: "/servant-of-the-lake/laundry-puzzle",
-    label: "Laundry Puzzle Guide",
-  },
-  {
-    href: "/servant-of-the-lake/bathroom-puzzle",
-    label: "Bathroom Puzzle Guide",
-  },
-  {
-    href: "/servant-of-the-lake/alchemy-puzzle",
-    label: "Alchemy Puzzle Guide",
+    label: "All Puzzle Solutions",
   },
   {
     href: "/servant-of-the-lake/achievements",
@@ -157,40 +192,6 @@ const relatedLinks = [
     label: "Secret Ending Guide",
   },
 ];
-
-export const metadata: Metadata = {
-  title: "Servant of the Lake Walkthrough: Day 1, 2 & 3",
-  description:
-    "Follow all 24 main tasks across Day 1, Day 2, and Day 3 with progression checkpoints, backtracking advice, and links to exact puzzle solutions.",
-  alternates: {
-    canonical: pageUrl,
-  },
-  openGraph: {
-    type: "article",
-    url: pageUrl,
-    title: "Servant of the Lake Walkthrough: Day 1, 2 & 3",
-    description:
-      "Follow the full three-day Servant of the Lake route from The Arrival through Coffee, the Cellar, Alchemy, Dinner, and The Departure.",
-    siteName: "Whisper of the House",
-    publishedTime: "2026-08-14",
-    modifiedTime: "2026-08-14",
-    images: [
-      {
-        url: imageUrls[0],
-        width: 1280,
-        height: 720,
-        alt: "Beginning the three-day servant job in Servant of the Lake",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Servant of the Lake Walkthrough: Day 1, 2 & 3",
-    description:
-      "Follow all 24 main tasks through the three-day story with clear progression checkpoints and links to the major puzzle solutions.",
-    images: [imageUrls[0]],
-  },
-};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -222,15 +223,19 @@ const jsonLd = {
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": pageUrl,
+      },
       url: pageUrl,
-      headline: "Servant of the Lake Walkthrough: Day 1, 2 & 3",
+      headline:
+        "Servant of the Lake Walkthrough: All 24 Tasks Across Day 1, Day 2 and Day 3",
       description:
-        "A complete Servant of the Lake progression walkthrough covering all 24 main tasks across Day 1, Day 2, and Day 3, including when to continue, when to backtrack, which progression items must be collected before leaving a task, how Coffee leads into William, how Laundry and the Bathroom connect, when to enter the Cellar, how Day 3 moves from the Cat search into Alchemy and Dinner, and when to switch to post-game achievement and Secret Ending cleanup.",
+        "A complete Servant of the Lake walkthrough covering all 24 main-story tasks from The Arrival to The Departure, including Day 1 estate duties, Day 2 progression handoffs such as the Bathroom Key and Bronze Time Piece, the Cellar route, Day 3 Alchemy and dinner progression, completion checkpoints, backtracking decisions, and post-game routes for achievements and the Secret Ending.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-14",
-      dateModified: "2026-08-14",
-      mainEntityOfPage: pageUrl,
+      dateModified: "2026-08-15",
       about: [
         {
           "@type": "VideoGame",
@@ -255,7 +260,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Servant of the Lake progression",
+          name: "Servant of the Lake 24 tasks",
         },
         {
           "@type": "Thing",
@@ -295,13 +300,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Servant of the Lake Walkthrough"
-          description="Follow the full three-day servant route without getting buried in every puzzle at once. I use the Notebook, progression items, and clear handoffs to know when to continue and when to backtrack."
+          title="Servant of the Lake Full Walkthrough"
+          description="I follow all 24 main tasks across Day 1, Day 2, and Day 3, using the Notebook, progression items, and clear completion checkpoints to know where to go next."
           gameTitle="Servant of the Lake"
           gameHref="/servant-of-the-lake"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 14, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

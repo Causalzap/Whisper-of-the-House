@@ -9,6 +9,12 @@ import ServantOfTheLakeContent from "@/data/servant-of-the-lake/index.mdx";
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/servant-of-the-lake`;
 
+const metadataTitle =
+  "Servant of the Lake Guide: Walkthrough, Puzzles & Achievements";
+
+const metadataDescription =
+  "Use this Servant of the Lake guide for the Day 1–3 walkthrough, puzzle solutions, 49 achievements, hidden tasks, Secret Ending, and Roots connection.";
+
 const imageUrls = [
   `${siteUrl}/images/servant-of-the-lake/servant-of-the-lake-walkthrough-day-1-arrival.webp`,
   `${siteUrl}/images/servant-of-the-lake/servant-of-the-lake-achievements-notebook.webp`,
@@ -17,122 +23,36 @@ const imageUrls = [
 ];
 
 export const metadata: Metadata = {
-  title: "Servant of the Lake Guide: Walkthrough, Puzzles & Secrets",
-  description:
-    "Use this Servant of the Lake guide hub for the walkthrough, puzzle solutions, achievements, Secret Ending, and Rusty Lake: Roots connection.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Servant of the Lake Guide: Walkthrough, Puzzles & Secrets",
+    title: metadataTitle,
     description:
-      "Follow the three-day story, solve the biggest blockers, clean up achievements, find the Secret Ending, and understand the connection to Rusty Lake: Roots.",
+      "Start with the full three-day walkthrough, jump to exact puzzle guides when blocked, then use the achievement checklist and Secret Ending route after The Departure.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-14",
-    modifiedTime: "2026-08-14",
+    modifiedTime: "2026-08-15",
     images: [
       {
         url: imageUrls[0],
         width: 1280,
         height: 720,
-        alt: "Beginning the servant weekend at the Vanderboom estate in Servant of the Lake",
+        alt: "Beginning the three-day servant route at the Vanderboom estate in Servant of the Lake",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Servant of the Lake Guide: Walkthrough, Puzzles & Secrets",
+    title: metadataTitle,
     description:
-      "Walkthrough, puzzle answers, achievements, Secret Ending, and the Rusty Lake: Roots connection in one guide hub.",
+      "Day 1–3 walkthrough, puzzle solutions, all 49 achievements, hidden tasks, the Secret Ending, and the Rusty Lake: Roots connection.",
     images: [imageUrls[0]],
   },
-};
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "BreadcrumbList",
-      "@id": `${pageUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: siteUrl,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Servant of the Lake Guide",
-          item: pageUrl,
-        },
-      ],
-    },
-    {
-      "@type": "Article",
-      "@id": `${pageUrl}#article`,
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": pageUrl,
-      },
-      headline:
-        "Servant of the Lake Guide: Walkthrough, Puzzle Solutions, Achievements and Secret Ending",
-      description:
-        "A practical Servant of the Lake guide hub for the full three-day progression route, Day 1–3 puzzle solutions, Waking up Aldous, Coffee, Laundry, Bathroom and Alchemy blockers, achievement cleanup, the Secret Ending, and the game's connection to Rusty Lake: Roots.",
-      image: imageUrls,
-      inLanguage: "en",
-      datePublished: "2026-08-14",
-      dateModified: "2026-08-14",
-      about: [
-        {
-          "@type": "VideoGame",
-          name: "Servant of the Lake",
-        },
-        {
-          "@type": "Thing",
-          name: "Servant of the Lake walkthrough",
-        },
-        {
-          "@type": "Thing",
-          name: "Servant of the Lake puzzle solutions",
-        },
-        {
-          "@type": "Thing",
-          name: "Waking up Aldous",
-        },
-        {
-          "@type": "Thing",
-          name: "Servant of the Lake achievements",
-        },
-        {
-          "@type": "Thing",
-          name: "Servant of the Lake Secret Ending",
-        },
-        {
-          "@type": "VideoGame",
-          name: "Rusty Lake: Roots",
-        },
-      ],
-      isPartOf: {
-        "@type": "WebSite",
-        "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
-      },
-    },
-  ],
 };
 
 const toc = [
@@ -169,11 +89,19 @@ const toc = [
 const relatedLinks = [
   {
     href: "/servant-of-the-lake/walkthrough",
-    label: "Servant of the Lake Walkthrough",
+    label: "Full Walkthrough",
   },
   {
     href: "/servant-of-the-lake/puzzle-solutions",
-    label: "Puzzle Solutions & Codes",
+    label: "All Puzzle Solutions & Codes",
+  },
+  {
+    href: "/servant-of-the-lake/achievements",
+    label: "Achievements & Hidden Checklist",
+  },
+  {
+    href: "/servant-of-the-lake/secret-ending",
+    label: "Secret Ending & You've Found Him",
   },
   {
     href: "/servant-of-the-lake/waking-up-aldous",
@@ -195,15 +123,108 @@ const relatedLinks = [
     href: "/servant-of-the-lake/alchemy-puzzle",
     label: "Alchemy Puzzle Guide",
   },
-  {
-    href: "/servant-of-the-lake/achievements",
-    label: "Achievements & 100% Guide",
-  },
-  {
-    href: "/servant-of-the-lake/secret-ending",
-    label: "Secret Ending Guide",
-  },
 ];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Servant of the Lake Guide",
+          item: pageUrl,
+        },
+      ],
+    },
+    {
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      url: pageUrl,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": pageUrl,
+      },
+      headline:
+        "Servant of the Lake Guide: Walkthrough, Puzzle Solutions, Achievements and Secret Ending",
+      description:
+        "A practical Servant of the Lake guide hub covering the full 24-task Day 1–3 progression route, puzzle solutions and dedicated blocker guides, all 49 achievements including task-linked hidden achievements, Notebook replay after The Departure, the Secret Ending and You've found him! route, and the connection to Rusty Lake: Roots.",
+      image: imageUrls,
+      inLanguage: "en",
+      datePublished: "2026-08-14",
+      dateModified: "2026-08-15",
+      articleSection: [
+        "Walkthrough",
+        "Puzzle Solutions",
+        "Achievements",
+        "Secret Ending",
+      ],
+      about: [
+        {
+          "@type": "VideoGame",
+          name: "Servant of the Lake",
+          url: pageUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Servant of the Lake guide",
+        },
+        {
+          "@type": "Thing",
+          name: "Servant of the Lake walkthrough",
+        },
+        {
+          "@type": "Thing",
+          name: "Servant of the Lake puzzle solutions",
+        },
+        {
+          "@type": "Thing",
+          name: "Servant of the Lake achievements",
+        },
+        {
+          "@type": "Thing",
+          name: "Servant of the Lake hidden achievements",
+        },
+        {
+          "@type": "Thing",
+          name: "Servant of the Lake Secret Ending",
+        },
+        {
+          "@type": "Thing",
+          name: "Notebook replay",
+        },
+        {
+          "@type": "VideoGame",
+          name: "Rusty Lake: Roots",
+        },
+      ],
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": `${siteUrl}#website`,
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@type": "Organization",
+        "@id": `${siteUrl}#organization`,
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+    },
+  ],
+};
 
 export default function Page() {
   return (
@@ -220,12 +241,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Servant of the Lake Guide"
-          description="I use this hub to move through the three-day Vanderboom weekend without mixing progression, exact puzzle answers, achievement cleanup, and the hidden ending into one giant walkthrough."
+          description="I use this hub to choose the right route: the full walkthrough for progression, puzzle guides for blockers, the 49-achievement checklist after The Departure, and the Secret Ending for Kate's post-game investigation."
           gameTitle="Servant of the Lake"
           gameHref="/servant-of-the-lake"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 14, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -11,44 +11,44 @@ const hubUrl = `${siteUrl}/big-walk`;
 const pageUrl = `${hubUrl}/how-to-unlock-map`;
 
 const imageUrls = [
-  `${siteUrl}/images/big-walk/big-walk-red-tower-blinking-light-route.png`,
-  `${siteUrl}/images/big-walk/big-walk-red-tower-five-head-slots.png`,
-  `${siteUrl}/images/big-walk/big-walk-map-room-key-cutter-arrow.png`,
   `${siteUrl}/images/big-walk/big-walk-map-room-door-open.png`,
   `${siteUrl}/images/big-walk/big-walk-map-room-completion-flags.png`,
   `${siteUrl}/images/big-walk/big-walk-portable-map-open.png`,
+  `${siteUrl}/images/big-walk/big-walk-red-tower-five-head-slots.png`,
+  `${siteUrl}/images/big-walk/big-walk-map-room-key-cutter-arrow.png`,
+  `${siteUrl}/images/big-walk/big-walk-red-tower-blinking-light-route.png`,
   `${siteUrl}/images/big-walk/big-walk-map-room-compass-laser-pointers.png`,
 ];
 
 export const metadata: Metadata = {
-  title: "Big Walk Map Guide: Red Tower, 5 Heads & Key Cutters",
+  title: "Big Walk Map: How to Unlock the Map Room & Use the Map",
   description:
-    "Reach the Red Tower, return five Heads, follow all five key cutters, open the Map Room, and use flags, the portable map, Compass, and Laser Pointers.",
+    "Unlock the Big Walk map with 5 Heads and 5 key cutters. See the Map Room, portable map, completion flags, and how navigation works.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Unlock the Map Room in Big Walk",
+    title: "Big Walk Map: How to Unlock the Map Room & Use the Map",
     description:
-      "Follow the Red Tower route, return five Heads, shape the blank key through five cutters, and use the physical map without mistaking it for a GPS.",
+      "Unlock the Red Tower Map Room with five Heads and five key cutters, then use the physical island map, portable map, flags, and navigation tools.",
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[4],
-        width: 1856,
-        height: 824,
-        alt: "Big Walk physical island map with blue completion flags and empty flagpoles inside the Map Room",
+        url: imageUrls[0],
+        width: 1786,
+        height: 792,
+        alt: "Big Walk Map Room with the physical island map inside the Red Tower",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Big Walk Map Room and Red Tower Guide",
+    title: "Big Walk Map: Unlock the Map Room & Use the Map",
     description:
-      "Return five Heads, complete the Red Tower key-cutter route, open the Map Room, and understand flags, map sections, Compass, and Laser Pointers.",
-    images: [imageUrls[4]],
+      "Open the Red Tower Map Room with five Heads and five key cutters, then use the physical island map, portable map, flags, and navigation tools.",
+    images: [imageUrls[0]],
   },
 };
 
@@ -74,7 +74,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "How to Unlock the Map",
+          name: "Big Walk Map and Map Room",
           item: pageUrl,
         },
       ],
@@ -87,17 +87,21 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Big Walk Map Guide: How to Reach the Red Tower, Return Five Heads, Complete the Key Cutters, and Open the Map Room",
+        "Big Walk Map Guide: How to Unlock the Map Room and Use the Map",
       description:
-        "This Big Walk map guide follows the route from the tutorial drawbridge to the Red Tower, explains why I return after three of the five required Heads, shows how the blank key moves through five cutter stations, identifies the upper Map Room entrance, explains blue completion flags and empty flagpoles, and shows how to use the portable map, Compass, and Laser Pointers without expecting a live player marker.",
+        "A complete Big Walk map and Map Room guide explaining how to unlock the Red Tower with five Heads and five key cutters, how the physical island model works, how to read completion flags, and how to use the portable map for navigation and coordinate puzzles.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-05",
-      dateModified: "2026-08-05",
+      dateModified: "2026-08-15",
       about: [
         {
           "@type": "VideoGame",
           name: "Big Walk",
+        },
+        {
+          "@type": "Thing",
+          name: "Big Walk map",
         },
         {
           "@type": "Thing",
@@ -121,15 +125,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Big Walk completion flags",
+        },
+        {
+          "@type": "Thing",
           name: "Big Walk Compass",
         },
         {
           "@type": "Thing",
           name: "Big Walk Laser Pointers",
-        },
-        {
-          "@type": "Thing",
-          name: "Big View achievement",
         },
       ],
       isPartOf: {
@@ -152,6 +156,10 @@ const jsonLd = {
 };
 
 const toc = [
+  {
+    id: "big-walk-map-explained",
+    label: "Map and Map Room explained",
+  },
   {
     id: "route-to-red-tower",
     label: "Route to the Red Tower",
@@ -204,16 +212,20 @@ const relatedLinks = [
     label: "Big Walk Guide Hub",
   },
   {
+    href: "/big-walk/4166-1899-puzzle",
+    label: "4166 / 1899 Coordinate Puzzle Solution",
+  },
+  {
+    href: "/big-walk/puzzles",
+    label: "Big Walk Puzzle Solutions",
+  },
+  {
     href: "/big-walk/beginner-guide",
     label: "Big Walk Beginner Guide",
   },
   {
     href: "/big-walk/tutorial-walkthrough",
     label: "Tutorial and Drawbridge Walkthrough",
-  },
-  {
-    href: "/big-walk/puzzles",
-    label: "Big Walk Puzzle Solutions",
   },
   {
     href: "/big-walk/green-tower-walkthrough",
@@ -249,13 +261,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Unlock the Map Room in Big Walk"
-          description="Follow the Red Tower beacon, return five Heads, complete all five key cutters, and use the physical Map Room, portable map, Compass, and Laser Pointers correctly."
+          title="How to Unlock and Use the Map in Big Walk"
+          description="I unlock the Red Tower Map Room, use the physical island model, read completion flags, and carry the portable map without mistaking it for GPS."
           gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 5, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

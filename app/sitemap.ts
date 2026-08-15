@@ -633,6 +633,8 @@ const paths = [
   '/big-walk/achievements',
 
   '/fields-of-mistria',
+  '/fields-of-mistria/engagement-ring',
+  '/fields-of-mistria/bell-tower-guide',
   '/fields-of-mistria/achievements-guide',
   '/fields-of-mistria/bell-tower-guide',
   '/fields-of-mistria/marriage-guide',
@@ -661,12 +663,14 @@ const paths = [
   '/sovereign-tower',
   '/sovereign-tower/act-1-best-route',
   '/sovereign-tower/act-2-walkthrough',
+  '/sovereign-tower/act-3-walkthrough',
   '/sovereign-tower/demon-power',
   '/sovereign-tower/gwendan-questline',
   '/sovereign-tower/groveshire-wolf',
   '/sovereign-tower/south-bay-lamp',
   '/sovereign-tower/king-slayer',
   '/sovereign-tower/golden-key',
+  '/sovereign-tower/endings',
 
   '/pax-autocratica',
   '/pax-autocratica/elysia-walkthrough',
@@ -717,17 +721,21 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-  '/servant-of-the-lake': '2026-08-14',
-  '/servant-of-the-lake/walkthrough': '2026-08-14',
+  '/fields-of-mistria': '2026-08-15',
+  '/fields-of-mistria/engagement-ring': '2026-08-15',
+  '/fields-of-mistria/bell-tower-guide': '2026-08-15',
+
+  '/servant-of-the-lake': '2026-08-15',
+  '/servant-of-the-lake/walkthrough': '2026-08-15',
   '/servant-of-the-lake/puzzle-solutions': '2026-08-14',
   '/servant-of-the-lake/waking-up-aldous': '2026-08-14',
   '/servant-of-the-lake/coffee-puzzle': '2026-08-14',
   '/servant-of-the-lake/laundry-puzzle': '2026-08-14',
   '/servant-of-the-lake/bathroom-puzzle': '2026-08-14',
   '/servant-of-the-lake/alchemy-puzzle': '2026-08-14',
-  '/servant-of-the-lake/achievements': '2026-08-14',
+  '/servant-of-the-lake/achievements': '2026-08-15',
   '/servant-of-the-lake/secret-ending': '2026-08-14',
-  
+
   '/war-in-the-north-legacy-edition': '2026-08-13',
   '/war-in-the-north-legacy-edition/walkthrough': '2026-08-13',
   '/war-in-the-north-legacy-edition/legacy-edition-changes': '2026-08-13',
@@ -769,14 +777,20 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
   '/waterpark-simulator/achievements-guide': '2026-08-10',
 
-  '/sovereign-tower/act-1-best-route': '2026-08-09',
-  '/sovereign-tower/act-2-walkthrough': '2026-08-09',
-  '/sovereign-tower/demon-power': '2026-08-09',
-  '/sovereign-tower/gwendan-questline': '2026-08-09',
-  '/sovereign-tower/groveshire-wolf': '2026-08-09',
-  '/sovereign-tower/south-bay-lamp': '2026-08-09',
-  '/sovereign-tower/king-slayer': '2026-08-09',
-  '/sovereign-tower/golden-key': '2026-08-09',
+  '/sovereign-tower': '2026-08-15',
+
+'/sovereign-tower/act-1-best-route': '2026-08-15',
+'/sovereign-tower/act-2-walkthrough': '2026-08-09',
+'/sovereign-tower/act-3-walkthrough': '2026-08-15',
+
+'/sovereign-tower/demon-power': '2026-08-15',
+'/sovereign-tower/gwendan-questline': '2026-08-15',
+'/sovereign-tower/groveshire-wolf': '2026-08-09',
+'/sovereign-tower/south-bay-lamp': '2026-08-09',
+'/sovereign-tower/king-slayer': '2026-08-09',
+'/sovereign-tower/golden-key': '2026-08-15',
+
+'/sovereign-tower/endings': '2026-08-15',
 
   '/iron-nest': '2026-08-08',
   '/iron-nest/fire-and-light-walkthrough': '2026-08-07',
@@ -796,9 +810,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/iron-nest/final-harvest-walkthrough': '2026-08-08',
   '/iron-nest/white-shells-endings': '2026-08-08',
 
-  '/fields-of-mistria': '2026-08-06',
   '/fields-of-mistria/achievements-guide': '2026-08-06',
-  '/fields-of-mistria/bell-tower-guide': '2026-08-06',
   '/fields-of-mistria/marriage-guide': '2026-08-06',
   '/fields-of-mistria/how-to-unlock-mines': '2026-08-06',
   '/fields-of-mistria/saturday-market-plaza': '2026-08-06',
@@ -809,7 +821,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
   '/big-walk/beginner-guide': '2026-08-05',
   '/big-walk/tutorial-walkthrough': '2026-08-05',
-  '/big-walk/how-to-unlock-map': '2026-08-05',
+  '/big-walk/how-to-unlock-map': '2026-08-15',
   '/big-walk/green-tower-walkthrough': '2026-08-05',
   '/big-walk/yellow-tower-tunnel': '2026-08-05',
   '/big-walk/blue-tower-train': '2026-08-06',
@@ -820,8 +832,8 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   
   '/big-walk/puzzles': '2026-08-10',
   '/big-walk/peg-puzzle': '2026-08-10',
-  '/big-walk/4166-1899-puzzle': '2026-08-10',
-  '/big-walk/how-to-get-shiny': '2026-08-10',
+  '/big-walk/4166-1899-puzzle': '2026-08-15',
+  '/big-walk/how-to-get-shiny': '2026-08-15',
   '/big-walk/achievements': '2026-08-10',
 
   '/what-game-should-i-play': '2026-08-04',

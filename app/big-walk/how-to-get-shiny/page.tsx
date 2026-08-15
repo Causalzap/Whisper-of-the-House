@@ -11,42 +11,42 @@ const hubUrl = `${siteUrl}/big-walk`;
 const pageUrl = `${hubUrl}/how-to-get-shiny`;
 
 const imageUrls = [
+  `${siteUrl}/images/big-walk/big-walk-shiny-secret-location.webp`,
   `${siteUrl}/images/big-walk/big-walk-shiny-blue-tunnel-entrance.webp`,
   `${siteUrl}/images/big-walk/big-walk-shiny-green-pipe-turn.webp`,
   `${siteUrl}/images/big-walk/big-walk-shiny-multicolor-bridge.webp`,
   `${siteUrl}/images/big-walk/big-walk-shiny-red-zigzag-stairs.webp`,
-  `${siteUrl}/images/big-walk/big-walk-shiny-secret-location.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "Big Walk How to Get Shiny: Big Makeover Guide",
+  title: "Big Walk Shiny Location: Big Makeover Achievement Guide",
   description:
-    "Follow the Blue tunnel route through the green pipe, multicolor bridge, and red stairs to find Shiny and complete Big Makeover.",
+    "Find Shiny in Big Walk through the Blue tunnel entrance. Follow the green pipe, multicolor bridge, and red stairs to complete Big Makeover.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Get Shiny in Big Walk",
+    title: "Big Walk Shiny Location & Big Makeover Guide",
     description:
-      "Use the Blue tunnel entrance, follow six visual checkpoints, find the hidden Shiny area, and complete Big Makeover.",
+      "Find the hidden Shiny location through the Blue tunnel entrance, then use the new colors to complete the Big Makeover achievement.",
     siteName: "Whisper of the House",
     images: [
       {
-        url: `${siteUrl}/images/big-walk/big-walk-shiny-secret-location.webp`,
-        alt: "Hidden Shiny location in the Big Walk underground tunnels",
+        url: imageUrls[0],
+        width: 1280,
+        height: 720,
+        alt: "Big Walk Shiny location hidden underground for the Big Makeover achievement",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Get Shiny in Big Walk",
+    title: "Big Walk Shiny Location & Big Makeover Guide",
     description:
-      "Find the hidden underground Shiny location and finish the Big Makeover achievement.",
-    images: [
-      `${siteUrl}/images/big-walk/big-walk-shiny-secret-location.webp`,
-    ],
+      "Find Shiny through the Blue tunnel entrance, follow the underground landmarks, and use the new colors to complete Big Makeover.",
+    images: [imageUrls[0]],
   },
 };
 
@@ -72,7 +72,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "How to Get Shiny",
+          name: "Shiny Location & Big Makeover",
           item: pageUrl,
         },
       ],
@@ -84,13 +84,14 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "How to Get Shiny in Big Walk: Big Makeover Guide",
+      headline:
+        "Big Walk Shiny Location: How to Complete the Big Makeover Achievement",
       description:
-        "A Big Walk Shiny route covering the Yellow progression prerequisite, Blue tunnel entrance, green pipe, mixed-color tunnels, multicolor bridge, red stairs, hidden Shiny area, and Big Makeover completion.",
+        "A Big Walk Shiny location guide covering the Yellow Tower prerequisite, Blue tunnel entrance, green pipe route, mixed-color tunnels, multicolor bridge, red zigzag stairs, hidden underground Shiny area, and Big Makeover achievement completion.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-10",
-      dateModified: "2026-08-10",
+      dateModified: "2026-08-15",
       about: [
         {
           "@type": "VideoGame",
@@ -98,11 +99,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk Shiny",
+          name: "Big Walk Shiny location",
         },
         {
           "@type": "Thing",
-          name: "Big Walk Big Makeover",
+          name: "Big Makeover achievement",
         },
         {
           "@type": "Thing",
@@ -110,7 +111,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk secret location",
+          name: "Big Walk Blue tunnel entrance",
         },
       ],
       isPartOf: {
@@ -155,7 +156,7 @@ const toc = [
   },
   {
     id: "where-to-find-shiny",
-    label: "Find Shiny",
+    label: "Shiny location",
   },
   {
     id: "shiny-route-not-working",
@@ -206,13 +207,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How to Get Shiny in Big Walk"
-          description="Start from the Blue tunnel entrance, follow the colored underground landmarks, reach the hidden Shiny area, and complete Big Makeover."
+          title="Where to Find Shiny and Complete Big Makeover"
+          description="I enter from the Blue side, follow the underground landmarks to Shiny, and use the new colors before leaving to complete Big Makeover."
           gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 10, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

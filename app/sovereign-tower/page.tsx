@@ -10,10 +10,10 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/sovereign-tower`;
 
 const metadataTitle =
-  "Sovereign Tower Guide: Walkthrough, Rewind, Knights & Routes";
+  "Sovereign Tower Guide: Walkthrough, Rewind, Knights & Endings";
 
 const metadataDescription =
-  "Sovereign Tower guide hub for Act routes, Demon Power, Knight planning, Gwendan, Wolf, South Bay, King Slayer, Golden Key, and key decisions.";
+  "Plan Sovereign Tower Act 1–3 routes, Demon Power, Knights, Gwendan, South Bay, King Slayer, Golden Key, Arthur, and endings without wasting cycles.";
 
 const imageUrls = [
   `${siteUrl}/images/sovereign-tower/sovereign-tower-round-table-quest-requirements.webp`,
@@ -69,7 +69,15 @@ const toc = [
   },
   {
     id: "act-3",
-    label: "Act 3 & Golden Key",
+    label: "Act 3 & Arthur",
+  },
+  {
+    id: "golden-key",
+    label: "Golden Key",
+  },
+  {
+    id: "endings",
+    label: "Endings",
   },
   {
     id: "achievement-targets",
@@ -82,9 +90,9 @@ const toc = [
 ];
 
 /*
- * The Hub already links directly to every important Sovereign Tower spoke
- * inside the article, so I keep the bottom recommendation block intentionally
- * small rather than repeating the whole cluster.
+ * The Hub already links directly to the route-specific guides inside the
+ * article, so the bottom recommendation block stays focused on the main
+ * progression pages rather than repeating the whole cluster.
  */
 const relatedLinks = [
   {
@@ -100,27 +108,33 @@ const relatedLinks = [
     label: "Act 2 Walkthrough",
   },
   {
-    href: "/sovereign-tower/king-slayer",
-    label: "King Slayer Guide",
+    href: "/sovereign-tower/act-3-walkthrough",
+    label: "Act 3 Walkthrough",
   },
   {
     href: "/sovereign-tower/golden-key",
     label: "Golden Key Guide",
+  },
+  {
+    href: "/sovereign-tower/endings",
+    label: "Endings & Final Routes Guide",
   },
 ];
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: "Sovereign Tower Guide",
     description:
-      "Plan Sovereign Tower around deadlines, Knight availability, Demon Power, Act routes, county alliances, King Slayer, and the Golden Key.",
+      "Plan every Sovereign Tower Act around deadlines, Knight availability, Demon Power, county routes, King Slayer, the Golden Key, Arthur, and the final branches.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -131,11 +145,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Sovereign Tower Guide",
     description:
-      "Walkthrough routes, Knight planning, Demon Power, Gwendan, King Slayer, Golden Key, and the decisions that matter across each Act.",
+      "Act 1–3 walkthrough routes, Knight planning, Demon Power, King Slayer, Golden Key, Arthur, endings, and the decisions that matter across a full run.",
     images: [imageUrls[0]],
   },
 };
@@ -161,23 +176,31 @@ const jsonLd = {
         },
       ],
     },
+
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
+
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": pageUrl,
       },
+
       headline:
-        "Sovereign Tower Guide: Walkthrough Routes, Demon Power, Knights, and Major Decisions",
+        "Sovereign Tower Guide: Act 1–3 Walkthrough, Demon Power, Knights, Golden Key, and Endings",
+
       description:
-        "A player-focused Sovereign Tower guide hub covering how I prioritize deadlines, duration, Knight slots and Damage Risk; use Knight stats, attributes and preferences; decide when to spend Gold on equipment or repairs; plan faction satisfaction; route Act 1 through Groveshire and the Dragon Knight; use Demon Power without blindly repeating timelines; manage the eight-slot Round Table and major Act 2 routes; handle the Tower murder, South Bay and King Slayer; and approach the Golden Key and Emperor decision in Act 3 without treating unverified final outcomes as a complete endings guide.",
+        "A player-focused Sovereign Tower guide hub covering the full run from Act 1 through Act 3 and the final branches. It explains how I prioritize deadlines, duration, Knight slots and Damage Risk; use Knight stats, attributes, preferences and affinity; decide when equipment, repairs and mounts are worth the Gold; route Act 1 through Groveshire and the Dragon Knight; use Demon Power without blindly repeating timelines; manage the eight-slot Round Table, Tower murder, South Bay, Wolf and Rufus, and King Slayer during Act 2; finish permanent county and Knight progression before Arthur closes Act 3; approach the two confirmed Golden Key acquisition routes and Emperor decision; and separate final-route preparation from the actual ending consequences and character epilogues.",
+
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
+
       datePublished: "2026-08-09",
-      dateModified: "2026-08-09",
+      dateModified: "2026-08-15",
+
       articleSection: "Sovereign Tower Guides",
+
       about: [
         {
           "@type": "VideoGame",
@@ -234,6 +257,10 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Sovereign Tower Rufus",
+        },
+        {
+          "@type": "Thing",
           name: "Sovereign Tower South Bay",
         },
         {
@@ -244,19 +271,30 @@ const jsonLd = {
           "@type": "Thing",
           name: "Sovereign Tower Golden Key",
         },
+        {
+          "@type": "Thing",
+          name: "Sovereign Tower Arthur",
+        },
+        {
+          "@type": "Thing",
+          name: "Sovereign Tower endings",
+        },
       ],
+
       isPartOf: {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       publisher: {
         "@type": "Organization",
         "@id": `${siteUrl}#organization`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
@@ -276,13 +314,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Plan Your Sovereign Tower Run Without Wasting Cycles"
-          description="Use this hub to choose the right route for each Act, manage Knights and Gold around real deadlines, understand Demon Power, and jump directly to the guide for the problem blocking your run."
+          title="Plan Your Sovereign Tower Run From Act 1 to the Final Branch"
+          description="Use this hub to plan every Act around real deadlines, keep the right Knights available, spend Gold only when an assignment needs it, use Demon Power deliberately, and jump to the dedicated route guide when one decision blocks your run."
           gameTitle="Sovereign Tower"
           gameHref="/sovereign-tower"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 9, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

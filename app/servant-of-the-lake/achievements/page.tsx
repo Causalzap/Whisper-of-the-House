@@ -10,6 +10,12 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/servant-of-the-lake`;
 const pageUrl = `${hubUrl}/achievements`;
 
+const metadataTitle =
+  "Servant of the Lake Achievements: All 49 & Hidden Guide";
+
+const metadataDescription =
+  "Track all 49 Servant of the Lake achievements, including 24 hidden tasks, Notebook replay, 100% cleanup, and the You've found him! secret route.";
+
 const imageUrls = [
   `${siteUrl}/images/servant-of-the-lake/servant-of-the-lake-achievements-notebook.webp`,
   `${siteUrl}/images/servant-of-the-lake/servant-of-the-lake-tickling-william.webp`,
@@ -18,38 +24,99 @@ const imageUrls = [
 ];
 
 export const metadata: Metadata = {
-  title: "Servant of the Lake Achievements: 49 & 100% Guide",
-  description:
-    "Track all 49 Servant of the Lake achievements, use chapter replay for 25 optional tasks, get A Perfect Hunt, and plan your post-game 100% cleanup.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Servant of the Lake Achievements: 49 & 100% Guide",
+    title: metadataTitle,
     description:
-      "Use the three-day achievement list and post-game Notebook replay to clean up all 49 achievements without restarting the full story.",
+      "Track all 49 achievements with a checklist, then use Notebook replay to clear all 24 hidden achievements and the final post-game secret.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-14",
-    modifiedTime: "2026-08-14",
+    modifiedTime: "2026-08-15",
     images: [
       {
         url: imageUrls[0],
         width: 1280,
         height: 720,
-        alt: "Servant of the Lake Notebook showing tasks and achievement progress",
+        alt: "Servant of the Lake Notebook showing task and hidden achievement progress",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Servant of the Lake Achievements: 49 & 100% Guide",
+    title: metadataTitle,
     description:
-      "All 49 achievements, 25 optional tasks, chapter-replay cleanup, A Perfect Hunt, and the Secret Location achievement route.",
+      "Track all 49 Servant of the Lake achievements, clear the 24 hidden tasks with Notebook replay, and finish the post-game secret.",
     images: [imageUrls[0]],
   },
 };
+
+const toc = [
+  {
+    id: "all-achievements-checklist",
+    label: "All 49 achievements",
+  },
+  {
+    id: "best-100-percent-route",
+    label: "Best 100% route",
+  },
+  {
+    id: "story-achievements",
+    label: "24 story achievements",
+  },
+  {
+    id: "day-1-hidden-achievements",
+    label: "Day 1 hidden achievements",
+  },
+  {
+    id: "day-2-hidden-achievements",
+    label: "Day 2 hidden achievements",
+  },
+  {
+    id: "day-3-hidden-achievements",
+    label: "Day 3 hidden achievements",
+  },
+  {
+    id: "post-game-replay",
+    label: "Notebook replay",
+  },
+  {
+    id: "youve-found-him",
+    label: "You've found him!",
+  },
+  {
+    id: "missing-achievement",
+    label: "Missing an achievement?",
+  },
+  {
+    id: "achievement-cleanup-rule",
+    label: "49/49 cleanup rule",
+  },
+];
+
+const relatedLinks = [
+  {
+    href: "/servant-of-the-lake",
+    label: "Servant of the Lake Guide Hub",
+  },
+  {
+    href: "/servant-of-the-lake/walkthrough",
+    label: "Full Walkthrough",
+  },
+  {
+    href: "/servant-of-the-lake/puzzle-solutions",
+    label: "Puzzle Solutions & Codes",
+  },
+  {
+    href: "/servant-of-the-lake/secret-ending",
+    label: "Secret Ending & You've Found Him",
+  },
+];
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -81,22 +148,24 @@ const jsonLd = {
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
+      url: pageUrl,
       mainEntityOfPage: {
         "@type": "WebPage",
         "@id": pageUrl,
       },
       headline:
-        "Servant of the Lake Achievements Guide: All 49 Achievements and 100% Cleanup",
+        "Servant of the Lake Achievements Guide: All 49, Hidden Achievements and 100% Cleanup",
       description:
-        "A Servant of the Lake achievement guide covering all 49 achievements, the 24 main story task achievements, 25 optional achievements, Notebook chapter replay, Tickling Mr. William, A Perfect Hunt, You've found him!, and post-game additional-task cleanup.",
+        "A complete Servant of the Lake achievement guide covering all 49 achievements: 24 story task achievements, 24 task-linked hidden achievements, the You've found him! secret achievement, Notebook chapter replay, 100% cleanup, and difficult triggers including Serving Matcha Latte, A Perfect Hunt, Checking the Furniture, Finishing Touch, Safety Test, and First Aid.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-14",
-      dateModified: "2026-08-14",
+      dateModified: "2026-08-15",
       about: [
         {
           "@type": "VideoGame",
           name: "Servant of the Lake",
+          url: hubUrl,
         },
         {
           "@type": "Thing",
@@ -104,7 +173,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Servant of the Lake hidden achievements",
+        },
+        {
+          "@type": "Thing",
           name: "Servant of the Lake 100% completion",
+        },
+        {
+          "@type": "Thing",
+          name: "Notebook chapter replay",
+        },
+        {
+          "@type": "Thing",
+          name: "Serving Matcha Latte",
         },
         {
           "@type": "Thing",
@@ -112,19 +193,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Tickling Mr. William",
+          name: "Checking the Furniture",
+        },
+        {
+          "@type": "Thing",
+          name: "Finishing Touch",
+        },
+        {
+          "@type": "Thing",
+          name: "First Aid",
         },
         {
           "@type": "Thing",
           name: "You've found him!",
-        },
-        {
-          "@type": "Thing",
-          name: "Additional tasks",
-        },
-        {
-          "@type": "Thing",
-          name: "Notebook chapter replay",
         },
       ],
       isPartOf: {
@@ -146,68 +227,6 @@ const jsonLd = {
   ],
 };
 
-const toc = [
-  {
-    id: "my-100-percent-route",
-    label: "My 100% route",
-  },
-  {
-    id: "day-1-achievements",
-    label: "Day 1 achievements",
-  },
-  {
-    id: "day-2-achievements",
-    label: "Day 2 achievements",
-  },
-  {
-    id: "tickling-william",
-    label: "Tickling Mr. William",
-  },
-  {
-    id: "perfect-hunt",
-    label: "A Perfect Hunt",
-  },
-  {
-    id: "day-3-achievements",
-    label: "Day 3 achievements",
-  },
-  {
-    id: "seasoning-the-soup",
-    label: "Seasoning the Soup",
-  },
-  {
-    id: "youve-found-him",
-    label: "You've found him!",
-  },
-  {
-    id: "post-game-cleanup",
-    label: "Post-game cleanup",
-  },
-  {
-    id: "achievement-priority",
-    label: "Achievements to finish last",
-  },
-];
-
-const relatedLinks = [
-  {
-    href: "/servant-of-the-lake",
-    label: "Servant of the Lake Guide Hub",
-  },
-  {
-    href: "/servant-of-the-lake/walkthrough",
-    label: "Servant of the Lake Walkthrough",
-  },
-  {
-    href: "/servant-of-the-lake/puzzle-solutions",
-    label: "Puzzle Solutions & Codes",
-  },
-  {
-    href: "/servant-of-the-lake/secret-ending",
-    label: "Secret Ending & You've Found Him",
-  },
-];
-
 export default function Page() {
   return (
     <>
@@ -222,13 +241,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Servant of the Lake Achievements & 100% Guide"
-          description="I finish the three-day story first, then use Notebook chapter replay to clean up the 25 optional achievements, including A Perfect Hunt and the post-game Secret Location route."
+          title="Servant of the Lake Achievements & Hidden Achievements Guide"
+          description="I track all 49 achievements with the checklist, finish the three-day story first, then use Notebook replay to clear the 24 hidden tasks and the final post-game secret."
           gameTitle="Servant of the Lake"
           gameHref="/servant-of-the-lake"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 14, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

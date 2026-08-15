@@ -10,14 +10,17 @@ const hubUrl = `${siteUrl}/sovereign-tower`;
 const pageUrl = `${hubUrl}/golden-key`;
 
 const metadataTitle =
-  "Sovereign Tower Golden Key Guide: How to Get It & Emperor Choice";
+  "Sovereign Tower Golden Key: How to Get It & Emperor Choice";
 
 const metadataDescription =
-  "Find the Golden Key through Angelica, complete Search for the golden key, and understand the Emperor peace choice and 13-cycle warning.";
+  "Get the Golden Key through Angelica or full county unification, compare 0 vs 1–5 Damage Risk, and understand the Emperor choice and 13-cycle warning.";
 
 const imageUrls = [
   `${siteUrl}/images/sovereign-tower/sovereign-tower-golden-key-angelica-clue.webp`,
   `${siteUrl}/images/sovereign-tower/sovereign-tower-search-golden-key-assignment.webp`,
+  `${siteUrl}/images/sovereign-tower/sovereign-tower-golden-key-all-counties-unlocked.webp`,
+  `${siteUrl}/images/sovereign-tower/sovereign-tower-golden-key-all-counties-search-risk.webp`,
+  `${siteUrl}/images/sovereign-tower/sovereign-tower-golden-key-all-counties-search-success.webp`,
   `${siteUrl}/images/sovereign-tower/sovereign-tower-golden-key-obtained.webp`,
   `${siteUrl}/images/sovereign-tower/sovereign-tower-golden-key-emperor-peace-offer.webp`,
   `${siteUrl}/images/sovereign-tower/sovereign-tower-golden-key-thirteen-cycle-warning.webp`,
@@ -26,11 +29,11 @@ const imageUrls = [
 const toc = [
   {
     id: "golden-key-route",
-    label: "Golden Key route",
+    label: "Two Golden Key routes",
   },
   {
-    id: "angelica-clue",
-    label: "Angelica's clue",
+    id: "angelica-route",
+    label: "Angelica route",
   },
   {
     id: "ask-nicely",
@@ -41,8 +44,24 @@ const toc = [
     label: "Search for the Golden Key",
   },
   {
-    id: "angelica-availability",
-    label: "Keep Angelica available",
+    id: "angelica-magic",
+    label: "Angelica Magic setup",
+  },
+  {
+    id: "angelica-repair",
+    label: "Angelica repair decision",
+  },
+  {
+    id: "all-counties-route",
+    label: "All-counties route",
+  },
+  {
+    id: "all-counties-search",
+    label: "Kingdom-wide search",
+  },
+  {
+    id: "all-counties-search-success",
+    label: "Search success",
   },
   {
     id: "golden-key-obtained",
@@ -57,8 +76,12 @@ const toc = [
     label: "13-cycle warning",
   },
   {
-    id: "give-or-keep",
-    label: "Give or keep the Key",
+    id: "how-to-use-golden-key",
+    label: "How to use the Key",
+  },
+  {
+    id: "do-you-need-all-counties",
+    label: "Do you need all counties?",
   },
   {
     id: "golden-key-stuck",
@@ -72,50 +95,53 @@ const relatedLinks = [
     label: "Sovereign Tower Guide Hub",
   },
   {
+    href: "/sovereign-tower/act-3-walkthrough",
+    label: "Act 3 Walkthrough",
+  },
+  {
+    href: "/sovereign-tower/endings",
+    label: "Endings & Golden Key Ending Guide",
+  },
+  {
     href: "/sovereign-tower/king-slayer",
     label: "King Slayer Guide",
   },
   {
-    href: "/sovereign-tower/act-2-walkthrough",
-    label: "Act 2 Walkthrough",
-  },
-  {
     href: "/sovereign-tower/demon-power",
     label: "Demon Power & Rewind Guide",
-  },
-  {
-    href: "/sovereign-tower/south-bay-lamp",
-    label: "South Bay Legendary Lamp Guide",
   },
 ];
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: "Sovereign Tower Golden Key Guide",
     description:
-      "Follow Angelica's Golden Key route, prepare the major quest, recover the relic, and decide whether the Emperor's peace offer is worth ending expansion.",
+      "Use Angelica's manor route or unite all counties to open the kingdom-wide Golden Key search, then decide whether to keep the Key or accept the Emperor's offer.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "Angelica explaining where she saw the Golden Key in Sovereign Tower",
+        alt: "Angelica explaining the first confirmed route to the Golden Key in Sovereign Tower",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Sovereign Tower Golden Key Guide",
     description:
-      "Get the Golden Key through Angelica, use the right quest setup, and understand the Emperor's peace offer and 13-cycle consequence.",
+      "Get the Golden Key through Angelica or full county unification, then plan around the Emperor choice and the 13-cycle late-game window.",
     images: [imageUrls[0]],
   },
 };
@@ -147,6 +173,7 @@ const jsonLd = {
         },
       ],
     },
+
     {
       "@type": "Article",
       "@id": `${pageUrl}#article`,
@@ -154,16 +181,22 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
+
       headline:
-        "Sovereign Tower Golden Key Guide: Angelica Route, Search Quest, and Emperor Choice",
+        "Sovereign Tower Golden Key Guide: Angelica Route, All Counties Route, and Emperor Choice",
+
       description:
-        "A player-focused Sovereign Tower Golden Key guide explaining how Angelica unlocks the route after remembering a manor in the Almore forest near Enberg, why the Golden Key is not a normal Map Room location, which dialogue branch I used successfully, how to prepare Search for the golden key, why the 0 Damage Risk assignment does not require an unnecessary armor repair, how the Spectral Eye's +3 MAG can help Angelica, when the legendary Golden Key is actually confirmed as obtained, what the Emperor offers in exchange for it, why peace ends further expansion, and how refusing the handover led my route into a 13-cycle preparation period.",
+        "A player-focused Sovereign Tower Golden Key guide covering both confirmed acquisition routes. The first uses Angelica's memory of a manor in the Almore forest near Enberg and the zero-Damage-Risk Search for the golden key assignment, where the Spectral Eye's +3 MAG can help cover her weak Magic. The second opens after all counties of Britannia are united and launches a kingdom-wide Golden Key search with 1–5 Damage Risk. The guide also explains how the Key is confirmed as obtained, why having it does not immediately activate its final use, what the Emperor offers in exchange for it, why peace ends further expansion, and how refusing the handover creates a 13-cycle preparation window before the late Arthur conflict.",
+
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
+
       datePublished: "2026-08-09",
-      dateModified: "2026-08-09",
+      dateModified: "2026-08-15",
+
       articleSection: "Sovereign Tower Guides",
+
       about: [
         {
           "@type": "VideoGame",
@@ -181,6 +214,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Sovereign Tower Angelica Golden Key",
+        },
+        {
+          "@type": "Thing",
+          name: "Sovereign Tower all counties Golden Key",
+        },
+        {
+          "@type": "Thing",
+          name: "Sovereign Tower Legend of the Golden Key",
         },
         {
           "@type": "Thing",
@@ -208,6 +249,10 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Sovereign Tower keep Golden Key",
+        },
+        {
+          "@type": "Thing",
           name: "Sovereign Tower 13 cycles",
         },
         {
@@ -215,18 +260,21 @@ const jsonLd = {
           name: "Sovereign Tower Act 3",
         },
       ],
+
       isPartOf: {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       publisher: {
         "@type": "Organization",
         "@id": `${siteUrl}#organization`,
         name: "Whisper of the House",
         url: siteUrl,
       },
+
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
@@ -246,13 +294,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Find the Golden Key Without Searching the Whole Map"
-          description="Wait for Angelica's clue, keep her available for the major quest, use what you already own to cover her stats, and understand what the Emperor's peace offer actually closes."
+          title="Get the Golden Key Through Angelica or Full County Unification"
+          description="Use Angelica's 0-risk manor route when it appears, or unite Britannia to unlock the 1–5 Damage Risk kingdom-wide search, then decide whether to keep the Key for the late Arthur branch."
           gameTitle="Sovereign Tower"
           gameHref="/sovereign-tower"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 9, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

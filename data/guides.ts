@@ -141,21 +141,21 @@ export const guideClusters: GuideCluster[] = [
     archiveCategory: "Story, endings, horror & route locks",
     label: "Rusty Lake Puzzle Adventure",
     eyebrow: "Spotlight Hub",
-    hubStatus: "3-day walkthrough + puzzles + secrets",
+    hubStatus: "24-task walkthrough + puzzles + 49-achievement tool",
   
     description:
-      "Use the Servant of the Lake guide hub for the full three-day walkthrough, puzzle solutions, Waking up Aldous, Coffee, Laundry, Bathroom and Alchemy puzzles, all 49 achievements, and the Secret Ending.",
+      "Use the Servant of the Lake guide hub for the full 24-task Day 1–3 walkthrough, puzzle solutions, dedicated Coffee, Laundry, Bathroom and Alchemy guides, all 49 achievements with a hidden-achievement checklist, and the Secret Ending route.",
   
     coverage: [
-      "Complete three-day progression through all 24 main tasks from The Arrival and Preparing Breakfast through Waking up Aldous, Day 2 chores, Day 3 Alchemy and dinner, and The Departure",
-      "Quick puzzle solutions for Preparing Breakfast, flowers and flag, Waking up William, Cleaning the Floors, Cellar Time Pieces and tools, dinner preparation, serving rules, and post-game handoffs",
-      "Waking up Aldous progression through the 7:00 alarm, Razor, shaving and earlobe sequence, Cloth, crow interaction, Berries, exercise route, dressing, and the final Day 1 morning checkpoint",
-      "Preparing Coffee with Alexandra 3, Aldous 1 and William 5, the 315 code, Coffee Beans, Ground Coffee, serving Aldous, and the handoff to William",
-      "Doing the Washing from dirty clothes and the baby's diaper through wet laundry, the seven-piece 0-to-6 clothesline order, Bathroom Key, and the direct transition into Helping with Bathing",
-      "Helping with Bathing through the category puzzle, sliding puzzle, Scissors, Soap, stitches, Maggot, mouse, Comb, directional bubbles, 281 lock, pendant, and Alexandra's Bronze Time Piece",
+      "Full 24-task progression from The Arrival through all Day 1, Day 2 and Day 3 duties to The Departure, with clear task handoffs and completion checkpoints",
+      "Puzzle solutions for shorter blockers including Breakfast, flowers and flag, Waking up William, Cleaning the Floors, Cellar Time Pieces and tools, dinner preparation, serving rules, and other task-specific puzzles",
+      "Waking up Aldous through the 7:00 alarm, Razor, shaving and earlobe sequence, Cloth, crow interaction, Berries, exercise route, dressing, and the final Day 1 morning checkpoint",
+      "Preparing Coffee with Alexandra 3, Aldous 1 and William 5, code 315, Coffee Beans, Ground Coffee, serving Aldous, and the handoff to William",
+      "Doing the Washing from dirty clothes and the baby's diaper through wet laundry, the seven-piece 0-to-6 clothesline order, Bathroom Key, and the transition into Helping with Bathing",
+      "Helping with Bathing through the category puzzle, sliding puzzle, Scissors, Soap, stitches, Maggot, mouse, Comb, directional bubbles, code 281, pendant, and Alexandra's Bronze Time Piece",
       "Assisting in Alchemy through Left and Right symbols, cabinet code 2451, Egg, Oil, Acid, Blood, Strange Fruit, Juice, and the final Egg-first Elixir recipe",
-      "All 49 achievements with 24 main task achievements, 25 optional achievements, Notebook chapter replay, A Perfect Hunt, Tickling Mr. William, additional-task cleanup, and the Secret Location achievement",
-      "Secret Ending route from Kate's post-game note and the 4:05 clock through the Bathroom clue, nine-step Alchemy maze, Attic constellation, bronze-silver-gold clue, secret chamber, Telescope, Watch Clip, and You've found him!",
+      "All 49 achievements with an interactive checklist covering 24 story achievements, 24 task-linked hidden achievements, Notebook replay, hidden triggers, cleanup risk, and the You've found him! secret achievement",
+      "Secret Ending route from Kate's post-game note and the 4:05 clock through the Bathroom clue, nine-step Alchemy maze, Attic constellation, bronze-silver-gold clue, secret chamber, Telescope, castle, and You've found him!",
     ],
   
     image:
@@ -174,19 +174,19 @@ export const guideClusters: GuideCluster[] = [
     pages: [
       {
         title:
-          "Servant of the Lake Guide: Walkthrough, Puzzles & Secrets",
+          "Servant of the Lake Guide: Walkthrough, Puzzles & Achievements",
         href: "/servant-of-the-lake",
         type: "Guide Hub",
         description:
-          "Start here for the three-day walkthrough, puzzle solutions, Aldous, Coffee, Laundry, Bathroom, Alchemy, achievements, Secret Ending, and Rusty Lake: Roots connection.",
+          "Start here for the Day 1–3 walkthrough, puzzle solutions, dedicated puzzle guides, the 49-achievement checklist, Secret Ending, and Rusty Lake: Roots connection.",
         image:
-          "/images/servant-of-the-lake/servant-of-the-lake-day-1-arrival.webp",
+          "/images/servant-of-the-lake/servant-of-the-lake-hub.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
         home: {
           spotlightMeta:
-            "Three-day walkthrough, puzzle solutions, Waking up Aldous, Coffee 315, Laundry 0–6, Bathroom 281, Alchemy 2451, 49 achievements, Secret Ending, and Roots connection",
+            "24-task walkthrough, puzzle solutions, Coffee 315, Laundry 0–6, Bathroom 281, Alchemy 2451, 49-achievement checklist, hidden achievements, Secret Ending, and Roots connection",
         },
         archive: {
           showInCollections: true,
@@ -195,14 +195,15 @@ export const guideClusters: GuideCluster[] = [
       },
   
       {
-        title: "Servant of the Lake Walkthrough: All 3 Days",
+        title:
+          "Servant of the Lake Walkthrough: All 24 Tasks (Day 1–3)",
         href: "/servant-of-the-lake/walkthrough",
         type: "Walkthrough",
         description:
-          "Follow all 24 main tasks across Day 1, Day 2 and Day 3, with progression checkpoints, room handoffs, puzzle links, and the route through The Departure.",
+          "Follow all 24 main tasks from The Arrival to The Departure, with Day 1–3 routes, progression items, completion checkpoints, puzzle handoffs, and stuck fixes.",
         date: "Updated recently",
         image:
-          "/images/servant-of-the-lake/servant-of-the-lake-day-1-arrival.webp",
+          "/images/servant-of-the-lake/servant-of-the-lake-walkthrough-day-1-arrival.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
@@ -213,7 +214,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 1,
           spotlightMeta:
-            "All 24 main tasks across three days, progression checkpoints, Aldous, William, Laundry, Bathroom, Cellar, Alchemy, dinner, and The Departure",
+            "All 24 Notebook tasks across Day 1–3, progression checkpoints, Aldous, William, Laundry, Bathroom, Cellar, Alchemy, dinner, The Departure, and post-game handoff",
         },
         archive: {
           showInCollections: true,
@@ -226,7 +227,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/servant-of-the-lake/puzzle-solutions",
         type: "Puzzle Help",
         description:
-          "Quickly solve Breakfast, flowers, flag, William, floor puzzles, Coffee, Laundry, Bathroom, Cellar, Alchemy, dinner, and other three-day blockers.",
+          "Quickly solve Breakfast, flowers, flag, William, floor puzzles, Coffee, Laundry, Bathroom, Cellar, Alchemy, dinner, and other Day 1–3 blockers.",
         date: "Updated recently",
         image:
           "/images/servant-of-the-lake/servant-of-the-lake-coffee-315-code.webp",
@@ -387,11 +388,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Servant of the Lake Achievements: 49 & 100% Guide",
+          "Servant of the Lake Achievements: All 49 & Hidden Guide",
         href: "/servant-of-the-lake/achievements",
         type: "Achievements",
         description:
-          "Track all 49 achievements, use Notebook replay for the 25 optional tasks, get A Perfect Hunt, and clean up the post-game achievement route.",
+          "Track all 49 achievements with an interactive checklist, clear the 24 task-linked hidden achievements through Notebook replay, and finish the You've found him! secret route.",
         date: "Updated recently",
         image:
           "/images/servant-of-the-lake/servant-of-the-lake-achievements-notebook.webp",
@@ -405,7 +406,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 8,
           spotlightMeta:
-            "49 achievements, 24 main tasks, 25 optional achievements, Notebook chapter replay, Tickling William, A Perfect Hunt, additional tasks, and You've found him!",
+            "Interactive 49-achievement checklist: 24 story achievements, 24 hidden task achievements, Notebook replay, Matcha Latte, A Perfect Hunt, Checking the Furniture, Finishing Touch, First Aid, and You've found him!",
         },
         archive: {
           showInCollections: true,
@@ -419,7 +420,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/servant-of-the-lake/secret-ending",
         type: "Endings",
         description:
-          "Follow Kate's hidden route through 4:05, the Bathroom clue, Alchemy maze, Attic constellation, secret chamber, Telescope, castle, and Watch Clip.",
+          "Follow Kate's post-game missing-brother route through 4:05, the Bathroom clue, Alchemy maze, Attic constellation, secret chamber, Telescope, castle, and You've found him!.",
         date: "Updated recently",
         image:
           "/images/servant-of-the-lake/servant-of-the-lake-secret-ending-405-clock.webp",
@@ -433,7 +434,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 9,
           spotlightMeta:
-            "Kate's note, five past four, 4:05 clock, Bathroom clue, nine-step maze, Attic constellation, bronze-silver-gold symbols, secret chamber, Telescope, castle, and Watch Clip",
+            "Kate's note, five past four, 4:05 clock, Bathroom clue, nine-step maze, Attic constellation, bronze-silver-gold symbols, secret chamber, Telescope, castle, and You've found him!",
         },
         archive: {
           showInCollections: true,
@@ -1591,6 +1592,61 @@ export const guideClusters: GuideCluster[] = [
         archive: {
           showInCollections: true,
           order: 9,
+        },
+      },
+      {
+        title:
+          "Sovereign Tower Act 3 Walkthrough & Golden Key Route",
+        href: "/sovereign-tower/act-3-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Progress through Act 3 after King Slayer, manage the Golden Key and Emperor route, prioritize late-game decisions, and prepare for the final timeline outcomes.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-golden-key-thirteen-cycle-warning.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 147,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Act 3 progression, Golden Key timing, Emperor route, remaining-cycle pressure, late Knight and county decisions, final preparation, and timeline checkpoints",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+      
+      {
+        title:
+          "Sovereign Tower Endings Guide: Choices & Final Routes",
+        href: "/sovereign-tower/endings",
+        type: "Endings",
+        description:
+          "Compare Sovereign Tower ending routes, understand the late choices that lead to each outcome, and use Demon Power when you need to return for another ending.",
+        date: "Updated recently",
+        image:
+          "/images/sovereign-tower/sovereign-tower-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 148,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "Major endings, late-game choices, Golden Key consequences, final route requirements, outcome cleanup, and Demon Power rewind planning",
+        },
+        archive: {
+          showInCollections: true,
+          order: 11,
         },
       },
     ],

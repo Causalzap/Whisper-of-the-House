@@ -19,9 +19,9 @@ const imageUrls = [
 ];
 
 export const metadata: Metadata = {
-  title: "Big Walk 4166 1899 Puzzle Solution & Coordinates",
+  title: "Big Walk 4166 1899 Puzzle Solution & Camo Button Location",
   description:
-    "Read 4166 and 1899 as map coordinates, reach the hidden button, split the team correctly, and open the glass box in Big Walk.",
+    "4166 and 1899 are coordinates, not a code. Read them as 41.66/18.99, find the hidden camo button, and leave one player at the glass box.",
   alternates: {
     canonical: pageUrl,
   },
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Big Walk 4166 1899 Puzzle Solution",
     description:
-      "Use 41.66 and 18.99 to locate the remote button, then coordinate two players to open the glass box and collect the red piece.",
+      "Read 4166 and 1899 as 41.66/18.99, follow the route to the hidden camo button, and keep one player beside the glass box.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -41,10 +41,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Big Walk 4166 1899 Puzzle Solution",
-    description:
-      "Find the 41.66 / 18.99 location, remote button, and glass-box reward in Big Walk.",
-    images: [
+  title: "Big Walk 4166 1899 Puzzle Solution",
+  description:
+    "4166 / 1899 means 41.66 / 18.99. Find the hidden camo button and leave one player at the glass box to collect the red piece.",
+  images: [
       `${siteUrl}/images/big-walk/big-walk-4166-1899-coordinate-board.webp`,
     ],
   },
@@ -84,13 +84,13 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "Big Walk 4166 1899 Puzzle Solution and Coordinates",
+      headline: "Big Walk 4166 1899 Puzzle Solution and Camo Button Location",
       description:
-        "A Big Walk coordinate-puzzle guide explaining what 4166 and 1899 mean, how to locate 41.66 and 18.99, where the hidden remote button is, and how two players open the glass box.",
+      "A complete solution for the Big Walk 4166 1899 coordinate puzzle, including how to read 4166 and 1899 as 41.66 and 18.99, where to find the hidden camouflage button box, and how two players open the distant glass box.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-10",
-      dateModified: "2026-08-10",
+      dateModified: "2026-08-15",
       about: [
         {
           "@type": "VideoGame",
@@ -102,11 +102,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Big Walk coordinates",
+          name: "Big Walk 41.66 18.99 coordinates",
         },
         {
           "@type": "Thing",
-          name: "Big Walk hidden button",
+          name: "Big Walk camo button",
         },
         {
           "@type": "Thing",
@@ -147,7 +147,7 @@ const toc = [
   },
   {
     id: "where-is-4166-hidden-button",
-    label: "Find the hidden button",
+    label: "4166 / 1899 camo button",
   },
   {
     id: "how-two-players-solve-4166-1899",
@@ -206,13 +206,12 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Big Walk 4166 1899 Puzzle Solution"
-          description="Decode 4166 and 1899 as coordinates, find the camouflage-box button, and use two players to open the remote glass box."
-          gameTitle="Big Walk"
+          title="Big Walk 4166 / 1899 Puzzle Solution"
+          description="I read 4166 and 1899 as 41.66 / 18.99, find the hidden camo button, and leave one player at the glass box for the remote trigger."          gameTitle="Big Walk"
           gameHref="/big-walk"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 10, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

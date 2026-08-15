@@ -174,7 +174,7 @@ const jsonLd = {
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-09",
-      dateModified: "2026-08-09",
+      dateModified: "2026-08-15",
       articleSection: "Sovereign Tower Guides",
       about: [
         {
@@ -256,7 +256,7 @@ export default function Page() {
           gameHref="/sovereign-tower"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 9, 2026"
+          updatedAt="August 15, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
