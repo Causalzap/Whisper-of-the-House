@@ -131,6 +131,323 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Hell Let Loose: Vietnam",
+    game: "Hell Let Loose: Vietnam",
+    href: "/hell-let-loose-vietnam",
+    slug: "hell-let-loose-vietnam",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "50v50 Tactical Shooter",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "First-match + faction systems + 49 achievements",
+  
+    description:
+      "Use the Hell Let Loose: Vietnam guide hub to learn the first-match loop, fix bad spawn routes, understand NVA Tunnels and US helicopters, unlock leadership, build better loadouts, run USA Commander, and track all 49 achievements.",
+  
+    coverage: [
+      "First-match route through Getting Started, Tactical Map habits, PC radio channels, first-role choices, useful spawn selection, objective play, and redeploy timing",
+      "Outpost and Garrison decisions through squad versus team spawning, 50- and 100-supply Garrison costs, 200-meter spacing, territory restrictions, Specialist supply runs, and collapsed-network recovery",
+      "Exact Connect a Tunnel to a Garrison Tutorial solution using the pre-placed E5 Tunnel, Tactical Map selection order, Garrison Fast Travel, and the later friendly-Tunnel dismantle step",
+      "NVA Tunnel network planning through placement, connections, Fast Travel, five-link routing, distance limits, the five-minute placement cooldown, relay decisions, Enemy Near warnings, and dismantling",
+      "US helicopter controls through pitch, roll, yaw, Collective, takeoff, landing, Transport and Supply jobs, Recon Flare use, co-pilot work, Auto-Level, and Helipad recovery",
+      "Squad Leader and Commander unlock requirements through Getting Started, Squad Leader and Commander Tutorials, Requirements Not Met diagnosis, completion verification, and training-registration troubleshooting",
+      "Role progression and loadout decisions through weapon and equipment unlocks, Utility and Lethal slots, weight limits, Medic progression, Machine Gunner equipment, and Tutorial-versus-live loadout differences",
+      "USA Commander decision-making through Resource Nodes, defensive spawn redundancy, helicopter assignments, Commander Outpost use, 150-Munition Supply Drops, Recon, Reinforce, Napalm, Artillery, and backline Tunnel pressure",
+      "All 49 achievements with an interactive checklist, four hidden achievements, one-match requirements, six map-win targets, four mode-win grinds, twelve Roles at Level 5, Career progression, Node builds, and final 100% cleanup",
+    ],
+  
+    image:
+      "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 32,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Hell Let Loose Vietnam Guide: Beginner, Tunnels & More",
+        href: "/hell-let-loose-vietnam",
+        type: "Guide Hub",
+        description:
+          "Start with the first-match route, then solve spawn problems, NVA Tunnels, US helicopters, leadership locks, progression, USA Commander play, and achievements.",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-beginner-tactical-map.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Beginner route, spawn network, NVA Tunnels, Tunnel Tutorial blocker, US helicopters, leadership unlocks, progression, USA Commander, and all 49 achievements",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam Beginner Guide: First Match Tips",
+        href: "/hell-let-loose-vietnam/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Learn the first-match routine through Getting Started, radio controls, role choice, Tactical Map checks, useful spawns, objective play, and redeploy timing.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-beginner-tactical-map.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 189,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Getting Started, Tactical Map, C Unit Radio, V Proximity Chat, first infantry role, Medic support play, useful spawns, objectives, and redeploy timing",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam Spawn, Garrison & Outpost Guide",
+        href: "/hell-let-loose-vietnam/spawn-garrison-outpost-guide",
+        type: "Systems",
+        description:
+          "Use Outposts and Garrisons correctly, understand supply costs and territory rules, check 200-meter spacing, and rebuild a collapsed spawn network.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-spawn-network-outpost-garrison.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 190,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Outpost vs Garrison, 0-supply OPs, 50-supply friendly Garrisons, 100-supply enemy Garrisons, 200m spacing, territory rules, Specialist supplies, and spawn recovery",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam Connect Tunnel to Garrison Tutorial",
+        href: "/hell-let-loose-vietnam/tutorial-connect-tunnel-garrison",
+        type: "Puzzle Help",
+        description:
+          "Finish the Squad Leader Tutorial blocker by connecting the pre-placed E5 Tunnel to the Garrison from the Tactical Map, then continue through Fast Travel.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-tutorial-connect-tunnel-garrison.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 191,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Connect a Tunnel to a Garrison, E5 pre-placed Tunnel, Tactical Map selection order, Tunnel first then Garrison, Fast Travel, and friendly Tunnel dismantle",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam NVA Tunnels Guide",
+        href: "/hell-let-loose-vietnam/nva-tunnels-guide",
+        type: "Systems",
+        description:
+          "Build and manage NVA Tunnel routes with placement rules, Tactical Map connections, Fast Travel, network limits, relay planning, cooldowns, and troubleshooting.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-tunnel-network-live-map.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 192,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Tunnel placement, Tactical Map connections, Tunnel-to-Tunnel and Tunnel-to-Garrison routes, five connections, distance limits, 5-minute cooldown, Fast Travel, Enemy Near, and dismantling",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam Helicopter Controls Guide",
+        href: "/hell-let-loose-vietnam/helicopter-controls",
+        type: "Systems",
+        description:
+          "Learn helicopter controls, Collective, takeoff and landing, Transport and Supply jobs, Recon Flare use, co-pilot tasks, Auto-Level, and Helipad recovery.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-helicopter-controls-keybinds.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 193,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Pitch, roll, yaw, Increase and Reduce Collective, takeoff, hover and landing, Supply Drop, Transport Helicopter, Recon Flare, Auto-Level, co-pilot, and Helipad",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam Unlock Squad Leader & Commander",
+        href: "/hell-let-loose-vietnam/unlock-squad-leader-commander",
+        type: "Guide",
+        description:
+          "Fix Requirements Not Met for Squad Leader and Commander, confirm the required Basic Training Tutorials, and troubleshoot completed training that still appears locked.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-commander-training-requirements.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 194,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Squad Leader requires Getting Started plus Squad Leader Training; Commander requires Getting Started, Squad Leader and Commander Tutorials; Requirements Not Met and registration troubleshooting",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam Progression & Loadouts Guide",
+        href: "/hell-let-loose-vietnam/progression-loadouts",
+        type: "Systems",
+        description:
+          "Understand Role Progression, weapon and equipment unlocks, slot expansion, loadout weight, Medic and Machine Gunner milestones, and missing Tutorial equipment.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-us-medic-progression.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 195,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Role Levels, weapon and equipment unlocks, Utility and Lethal slots, weight, US Medic progression, NVA Machine Gunner unlocks, Tutorial equipment, and loadout tradeoffs",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam USA Commander Guide & Abilities",
+        href: "/hell-let-loose-vietnam/usa-commander-guide",
+        type: "Guide",
+        description:
+          "Run USA Commander with better Resource Nodes, defensive spawns, helicopter assignments, Munitions spending, Commander Outpost use, and ability timing.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-usa-commander-layered-garrisons.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 196,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Resource Nodes, layered Garrisons, helicopter assignments, Tunnel pressure, Commander Outpost, 150-Munition Supply Drop, Recon, Reinforce, Napalm, Artillery, and defensive recovery",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "Hell Let Loose Vietnam Achievements: All 49 Checklist",
+        href: "/hell-let-loose-vietnam/achievements",
+        type: "Achievements",
+        description:
+          "Track all 49 achievements with an interactive checklist, clear the four hidden achievements, overlap map and mode wins, and finish the longest 100% grinds.",
+        date: "Updated recently",
+        image:
+          "/images/hell-let-loose-vietnam/hell-let-loose-vietnam-achievements-progress.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 197,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Interactive 49-achievement checklist, four hidden achievements, Guardian Angel, pilot and one-match requirements, six 3-win maps, four 20-win modes, 12 Roles at Level 5, Nodes, and 100% cleanup",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+    ],
+  },
+  {
     title: "Servant of the Lake",
     game: "Servant of the Lake",
     href: "/servant-of-the-lake",

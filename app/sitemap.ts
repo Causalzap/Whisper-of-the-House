@@ -714,6 +714,16 @@ const paths = [
   '/servant-of-the-lake/achievements',
   '/servant-of-the-lake/secret-ending',
   
+  '/hell-let-loose-vietnam',
+  '/hell-let-loose-vietnam/beginner-guide',
+  '/hell-let-loose-vietnam/spawn-garrison-outpost-guide',
+  '/hell-let-loose-vietnam/tutorial-connect-tunnel-garrison',
+  '/hell-let-loose-vietnam/nva-tunnels-guide',
+  '/hell-let-loose-vietnam/helicopter-controls',
+  '/hell-let-loose-vietnam/unlock-squad-leader-commander',
+  '/hell-let-loose-vietnam/progression-loadouts',
+  '/hell-let-loose-vietnam/usa-commander-guide',
+  '/hell-let-loose-vietnam/achievements',
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -721,6 +731,17 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/hell-let-loose-vietnam': '2026-08-16',
+  '/hell-let-loose-vietnam/beginner-guide': '2026-08-16',
+  '/hell-let-loose-vietnam/spawn-garrison-outpost-guide': '2026-08-16',
+  '/hell-let-loose-vietnam/tutorial-connect-tunnel-garrison': '2026-08-16',
+  '/hell-let-loose-vietnam/nva-tunnels-guide': '2026-08-16',
+  '/hell-let-loose-vietnam/helicopter-controls': '2026-08-16',
+  '/hell-let-loose-vietnam/unlock-squad-leader-commander': '2026-08-16',
+  '/hell-let-loose-vietnam/progression-loadouts': '2026-08-16',
+  '/hell-let-loose-vietnam/usa-commander-guide': '2026-08-16',
+  '/hell-let-loose-vietnam/achievements': '2026-08-16',
+  
   '/fields-of-mistria': '2026-08-15',
   '/fields-of-mistria/engagement-ring': '2026-08-15',
   '/fields-of-mistria/bell-tower-guide': '2026-08-15',

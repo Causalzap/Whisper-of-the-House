@@ -20,7 +20,7 @@ import {
 const FEATURED_HUB_HREFS = [
   "/librarian",
   "/gamble-with-your-friends",
-  "/oaken-tower",
+  "/iron-nest",
   "/dragonsword-awakening",
 ] as const;
 
