@@ -131,6 +131,243 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Ghost Recon Wildlands",
+    game: "Tom Clancy's Ghost Recon Wildlands",
+    href: "/ghost-recon-wildlands",
+    slug: "ghost-recon-wildlands",
+    kind: "game",
+    status: "active",
+    accent: "blue",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Open-World Tactical Shooter",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Last Rites + Predator + 2026 settings",
+  
+    description:
+      "Use the Ghost Recon Wildlands guide hub for the 2026 return: complete Last Rites, find its progression-critical intel, understand the ending, beat Predator, tune Ghost Parameters and World settings, and compare the free update with Definitive Edition.",
+  
+    coverage: [
+      "Returning-player route through the 2026 update, Last Rites first, the regular Bolivia campaign afterward, Predator as a separate contained challenge, and the correct guide for each blocker",
+      "Complete six-mission Last Rites progression through Operation: Lazarus, Deadly Obsession, And Your Enemies Closer, Vow of Silence, With Extreme Prejudice, and The Price of Freedom",
+      "Progression-critical Last Rites intel through the Unidad outpost, black site, Victor Vargas evidence, hidden Data Server, cultist clues, high-level cultist, and Penitentes stronghold",
+      "Last Rites ending through Ines Cortez, La Llorona, Emily Price, the failed asset history, terminate-to-exfiltrate order change, martyr problem, and final debrief",
+      "The Jungle Moved Predator mission through Caimanes, three investigation areas, Thermal Vision decision, hard-cover boss fight, self-destruct escape, and Predator Biomask",
+      "2026 gameplay customization through One Primary Weapon, Tactical Reload, Revive, Difficulty, HUD, AI squad size, alarms, jammers, SAM launchers, time, weather, and World and Session settings",
+      "2026 update overview through Last Rites, returning Predator content, 4K and 60 FPS support, PC controller support, free rewards, and free-update-versus-Definitive-Edition decisions",
+    ],
+  
+    image:
+      "/images/ghost-recon-wildlands/ghost-recon-wildlands-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 33,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Ghost Recon Wildlands Guide: Last Rites & Predator",
+        href: "/ghost-recon-wildlands",
+        type: "Guide Hub",
+        description:
+          "Start here for the 2026 returning-player route, Last Rites, Intel, the ending, Predator, Ghost Parameters, settings, and Definitive Edition decisions.",
+        image:
+          "/images/ghost-recon-wildlands/ghost-recon-wildlands-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Last Rites, progression Intel, ending explained, Predator, Ghost Parameters, 2026 settings, free update, and Definitive Edition",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Ghost Recon Wildlands Last Rites Walkthrough",
+        href:
+          "/ghost-recon-wildlands/last-rites-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Complete all six Last Rites missions, survive the Data Server upload, handle the drone and tripwire objectives, reach the old gold mine, and extract Ines Cortez.",
+        date: "Updated recently",
+        image:
+          "/images/ghost-recon-wildlands/ghost-recon-wildlands-last-rites-briefing-la-llorona.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 198,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "All six Last Rites missions, Data Server defense, drone eavesdrop, tripwires, old gold mine, terminate-to-exfiltrate change, and Ines extraction",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Ghost Recon Wildlands Last Rites Intel Locations",
+        href:
+          "/ghost-recon-wildlands/last-rites-intel-locations",
+        type: "Guide",
+        description:
+          "Find every progression-critical Last Rites intel trigger, including the Unidad outpost, black site, Vargas evidence, hidden Data Server, cultist clues, and stronghold intel.",
+        date: "Updated recently",
+        image:
+          "/images/ghost-recon-wildlands/ghost-recon-wildlands-last-rites-unidad-outpost-intel.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 199,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Unidad outpost intel, black site, Victor Vargas evidence, hidden Data Server, drone cultist clue, high-level cultist, stronghold intel, and stuck progression",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Ghost Recon Wildlands Last Rites Ending Explained",
+        href:
+          "/ghost-recon-wildlands/last-rites-ending-explained",
+        type: "Endings",
+        description:
+          "Understand who La Llorona really is, what happened to Ines Cortez, Emily Price's role, why the kill order becomes an extraction, and what the final debrief means.",
+        date: "Updated recently",
+        image:
+          "/images/ghost-recon-wildlands/ghost-recon-wildlands-last-rites-ines-price-confrontation.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 200,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Ines Cortez, La Llorona, Emily Price, CIA asset history, murdered children, martyr problem, exfiltration order, and final debrief",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Ghost Recon Wildlands Predator Mission Guide",
+        href:
+          "/ghost-recon-wildlands/predator-mission",
+        type: "Bosses",
+        description:
+          "Start The Jungle Moved in Caimanes, finish all three investigation areas, fight Predator from hard cover, survive the self-destruct, and unlock the Predator Biomask.",
+        date: "Updated recently",
+        image:
+          "/images/ghost-recon-wildlands/ghost-recon-wildlands-predator-the-jungle-moved-caimanes.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 201,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "The Jungle Moved, Caimanes, three investigation areas, Thermal Vision, hard-cover boss strategy, Confirm Predator's death, self-destruct, and Biomask",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Ghost Recon Wildlands Ghost Parameters & Settings Guide",
+        href:
+          "/ghost-recon-wildlands/ghost-parameters",
+        type: "Systems",
+        description:
+          "Choose Ghost Parameters, Difficulty, HUD and World settings for One Primary, Tactical Reload, revives, squad size, SAMs, alarms, jammers, time, weather, and survival.",
+        date: "Updated recently",
+        image:
+          "/images/ghost-recon-wildlands/ghost-recon-wildlands-ghost-parameters-menu.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 202,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "One Primary Weapon, Tactical Reload, Revive, health regeneration, Difficulty, HUD, AI squad size, alarms, jammers, SAMs, time, weather, and World settings",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Ghost Recon Wildlands 2026 Update: What Changed",
+        href:
+          "/ghost-recon-wildlands/2026-update",
+        type: "Guide",
+        description:
+          "See what changed in Wildlands in 2026, including Last Rites, Predator, gameplay customization, 4K and 60 FPS, free rewards, and the Definitive Edition difference.",
+        date: "Updated recently",
+        image:
+          "/images/ghost-recon-wildlands/ghost-recon-wildlands-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 203,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Last Rites, Predator return, Ghost Parameters, Difficulty and HUD, 4K 60 FPS, PC controller support, free rewards, and free update vs Definitive Edition",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Hell Let Loose: Vietnam",
     game: "Hell Let Loose: Vietnam",
     href: "/hell-let-loose-vietnam",

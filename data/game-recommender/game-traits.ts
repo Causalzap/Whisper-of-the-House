@@ -2128,6 +2128,1379 @@ export const GAME_TRAIT_KEYS = [
     social: 5.0,
   },
 
+   // Counter-Strike 2
+   "counter-strike-2": {
+    exploration: 0.5,
+    progression: 2.5,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 0.5,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Dota 2
+  "dota-2": {
+    exploration: 0.5,
+    progression: 3.0,
+    systems: 5.0,
+    crafting: 0.0,
+    story: 1.0,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // PUBG: Battlegrounds
+  "pubg-battlegrounds": {
+    exploration: 2.5,
+    progression: 2.5,
+    systems: 3.5,
+    crafting: 0.5,
+    story: 0.5,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.0,
+    survival: 4.5,
+    social: 4.5,
+  },
+
+  // Apex Legends
+  "apex-legends": {
+    exploration: 2.0,
+    progression: 3.0,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.0,
+    survival: 3.5,
+    social: 5.0,
+  },
+
+  // Rust
+  "rust": {
+    exploration: 4.5,
+    progression: 4.5,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 0.5,
+    combat: 4.5,
+    strategy: 4.5,
+    puzzle: 0.5,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Dead by Daylight
+  "dead-by-daylight": {
+    exploration: 1.5,
+    progression: 3.5,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 1.5,
+    combat: 3.5,
+    strategy: 4.5,
+    puzzle: 1.0,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Rainbow Six Siege
+  "rainbow-six-siege": {
+    exploration: 1.0,
+    progression: 3.0,
+    systems: 4.5,
+    crafting: 0.0,
+    story: 1.0,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.5,
+    survival: 2.0,
+    social: 5.0,
+  },
+
+  // Marvel Rivals
+  "marvel-rivals": {
+    exploration: 1.0,
+    progression: 2.5,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 1.5,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Delta Force
+  "delta-force": {
+    exploration: 2.5,
+    progression: 3.5,
+    systems: 4.0,
+    crafting: 0.5,
+    story: 1.5,
+    combat: 5.0,
+    strategy: 4.5,
+    puzzle: 0.0,
+    survival: 3.0,
+    social: 5.0,
+  },
+
+  // Team Fortress 2
+  "team-fortress-2": {
+    exploration: 1.0,
+    progression: 1.5,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 1.0,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Left 4 Dead 2
+  "left-4-dead-2": {
+    exploration: 2.0,
+    progression: 2.0,
+    systems: 3.0,
+    crafting: 0.0,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 3.0,
+    puzzle: 0.5,
+    survival: 4.0,
+    social: 5.0,
+  },
+
+  // Destiny 2
+  "destiny-2": {
+    exploration: 4.0,
+    progression: 5.0,
+    systems: 4.5,
+    crafting: 2.0,
+    story: 4.0,
+    combat: 5.0,
+    strategy: 3.5,
+    puzzle: 2.5,
+    survival: 2.0,
+    social: 5.0,
+  },
+
+  // Path of Exile
+  "path-of-exile": {
+    exploration: 3.5,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 4.0,
+    story: 3.0,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 1.0,
+    survival: 2.0,
+    social: 3.0,
+  },
+
+  // Path of Exile 2
+  "path-of-exile-2": {
+    exploration: 4.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 4.0,
+    story: 3.5,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 1.0,
+    survival: 2.5,
+    social: 3.0,
+  },
+
+  // Hearts of Iron IV
+  "hearts-of-iron-iv": {
+    exploration: 1.0,
+    progression: 4.0,
+    systems: 5.0,
+    crafting: 0.0,
+    story: 0.5,
+    combat: 1.0,
+    strategy: 5.0,
+    puzzle: 0.5,
+    survival: 2.5,
+    social: 3.0,
+  },
+
+  // The Elder Scrolls V: Skyrim - Special Edition
+  "the-elder-scrolls-v-skyrim-special-edition": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 4.0,
+    crafting: 3.5,
+    story: 4.0,
+    combat: 4.0,
+    strategy: 2.5,
+    puzzle: 2.0,
+    survival: 2.0,
+    social: 1.0,
+  },
+
+  // Fallout 4
+  "fallout-4": {
+    exploration: 5.0,
+    progression: 4.5,
+    systems: 4.0,
+    crafting: 4.5,
+    story: 3.5,
+    combat: 4.0,
+    strategy: 3.0,
+    puzzle: 2.0,
+    survival: 2.5,
+    social: 1.0,
+  },
+
+  // Fallout 76
+  "fallout-76": {
+    exploration: 5.0,
+    progression: 4.5,
+    systems: 4.5,
+    crafting: 4.5,
+    story: 3.0,
+    combat: 4.0,
+    strategy: 3.0,
+    puzzle: 1.5,
+    survival: 3.5,
+    social: 5.0,
+  },
+
+  // Mount & Blade II: Bannerlord
+  "mount-and-blade-ii-bannerlord": {
+    exploration: 4.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 2.0,
+    story: 2.5,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.5,
+    survival: 2.0,
+    social: 3.5,
+  },
+
+  // Total War: Warhammer III
+  "total-war-warhammer-iii": {
+    exploration: 2.0,
+    progression: 4.0,
+    systems: 5.0,
+    crafting: 0.0,
+    story: 2.0,
+    combat: 4.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 2.0,
+    social: 3.0,
+  },
+
+  // Ark: Survival Evolved
+  "ark-survival-evolved": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 2.0,
+    combat: 4.0,
+    strategy: 4.0,
+    puzzle: 0.5,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Ark: Survival Ascended
+  "ark-survival-ascended": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 2.0,
+    combat: 4.0,
+    strategy: 4.0,
+    puzzle: 0.5,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Black Myth: Wukong
+  "black-myth-wukong": {
+    exploration: 3.5,
+    progression: 4.5,
+    systems: 3.5,
+    crafting: 1.5,
+    story: 4.0,
+    combat: 5.0,
+    strategy: 3.0,
+    puzzle: 2.0,
+    survival: 2.0,
+    social: 0.5,
+  },
+
+  // Ready or Not
+  "ready-or-not": {
+    exploration: 1.5,
+    progression: 2.5,
+    systems: 4.5,
+    crafting: 0.0,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.5,
+    survival: 3.0,
+    social: 5.0,
+  },
+
+  // R.E.P.O.
+  "repo": {
+    exploration: 3.0,
+    progression: 3.0,
+    systems: 4.0,
+    crafting: 1.0,
+    story: 1.0,
+    combat: 2.5,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Peak
+  "peak": {
+    exploration: 4.0,
+    progression: 3.0,
+    systems: 3.0,
+    crafting: 0.5,
+    story: 0.5,
+    combat: 0.0,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Lethal Company
+  "lethal-company": {
+    exploration: 4.0,
+    progression: 3.5,
+    systems: 4.0,
+    crafting: 1.0,
+    story: 1.0,
+    combat: 2.0,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Sons of the Forest
+  "sons-of-the-forest": {
+    exploration: 5.0,
+    progression: 4.0,
+    systems: 4.0,
+    crafting: 5.0,
+    story: 3.0,
+    combat: 4.0,
+    strategy: 3.0,
+    puzzle: 1.0,
+    survival: 5.0,
+    social: 4.0,
+  },
+
+  // Once Human
+  "once-human": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 3.0,
+    combat: 4.0,
+    strategy: 4.0,
+    puzzle: 1.0,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Geometry Dash
+  "geometry-dash": {
+    exploration: 1.0,
+    progression: 4.0,
+    systems: 2.0,
+    crafting: 0.0,
+    story: 0.0,
+    combat: 0.0,
+    strategy: 2.5,
+    puzzle: 1.0,
+    survival: 1.0,
+    social: 1.5,
+  },
+
+  // Street Fighter 6
+  "street-fighter-6": {
+    exploration: 1.5,
+    progression: 3.5,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 2.5,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Farming Simulator 25
+  "farming-simulator-25": {
+    exploration: 3.0,
+    progression: 4.5,
+    systems: 5.0,
+    crafting: 3.5,
+    story: 0.5,
+    combat: 0.0,
+    strategy: 4.5,
+    puzzle: 0.5,
+    survival: 0.5,
+    social: 3.5,
+  },
+
+  // Escape from Tarkov
+  "escape-from-tarkov": {
+    exploration: 3.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 3.0,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Battlefield 6
+  "battlefield-6": {
+    exploration: 1.5,
+    progression: 3.0,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.0,
+    survival: 2.0,
+    social: 5.0,
+  },
+
+  // Slay the Spire II
+  "slay-the-spire-2": {
+    exploration: 2.5,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 1.5,
+    story: 1.5,
+    combat: 4.0,
+    strategy: 5.0,
+    puzzle: 2.0,
+    survival: 2.0,
+    social: 2.5,
+  },
+
+  // Payday 2
+  "payday-2": {
+    exploration: 2.0,
+    progression: 4.5,
+    systems: 4.0,
+    crafting: 1.0,
+    story: 2.5,
+    combat: 5.0,
+    strategy: 4.5,
+    puzzle: 0.5,
+    survival: 3.0,
+    social: 5.0,
+  },
+
+  // War Thunder
+  "war-thunder": {
+    exploration: 1.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 0.0,
+    story: 0.5,
+    combat: 5.0,
+    strategy: 4.5,
+    puzzle: 0.0,
+    survival: 2.0,
+    social: 5.0,
+  },
+
+  // Naraka: Bladepoint
+  "naraka-bladepoint": {
+    exploration: 2.5,
+    progression: 3.5,
+    systems: 4.0,
+    crafting: 0.5,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.0,
+    survival: 3.0,
+    social: 5.0,
+  },
+
+  // Overwatch
+  "overwatch-2": {
+    exploration: 1.0,
+    progression: 3.0,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 1.5,
+    combat: 5.0,
+    strategy: 4.5,
+    puzzle: 0.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Diablo IV
+  "diablo-iv": {
+    exploration: 4.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 3.0,
+    story: 4.0,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.5,
+    survival: 2.0,
+    social: 4.0,
+  },
+
+  // Final Fantasy XIV Online
+  "final-fantasy-xiv-online": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 5.0,
+    combat: 4.0,
+    strategy: 3.5,
+    puzzle: 2.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // V Rising
+  "v-rising": {
+    exploration: 4.5,
+    progression: 5.0,
+    systems: 4.5,
+    crafting: 5.0,
+    story: 2.0,
+    combat: 4.5,
+    strategy: 4.0,
+    puzzle: 1.0,
+    survival: 4.5,
+    social: 4.0,
+  },
+
+  // Forza Horizon 6
+  "forza-horizon-6": {
+    exploration: 4.5,
+    progression: 4.0,
+    systems: 4.0,
+    crafting: 1.0,
+    story: 1.5,
+    combat: 1.0,
+    strategy: 2.0,
+    puzzle: 0.0,
+    survival: 0.0,
+    social: 4.0,
+  },
+
+  // Monster Hunter Wilds
+  "monster-hunter-wilds": {
+    exploration: 4.5,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 3.5,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 1.0,
+    survival: 2.0,
+    social: 4.0,
+  },
+
+  // Clair Obscur: Expedition 33
+  "clair-obscur-expedition-33": {
+    exploration: 4.0,
+    progression: 4.5,
+    systems: 4.0,
+    crafting: 1.0,
+    story: 5.0,
+    combat: 4.5,
+    strategy: 4.5,
+    puzzle: 2.0,
+    survival: 1.0,
+    social: 0.5,
+  },
+
+  // Kingdom Come: Deliverance II
+  "kingdom-come-deliverance-ii": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 3.5,
+    story: 5.0,
+    combat: 4.5,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 3.0,
+    social: 1.5,
+  },
+
+  // Doom: The Dark Ages
+  "doom-the-dark-ages": {
+    exploration: 3.0,
+    progression: 4.0,
+    systems: 3.0,
+    crafting: 0.5,
+    story: 3.0,
+    combat: 5.0,
+    strategy: 3.0,
+    puzzle: 1.5,
+    survival: 2.0,
+    social: 0.0,
+  },
+
+  // Assassin's Creed Shadows
+  "assassin-s-creed-shadows": {
+    exploration: 5.0,
+    progression: 4.5,
+    systems: 4.0,
+    crafting: 3.0,
+    story: 4.5,
+    combat: 4.5,
+    strategy: 3.5,
+    puzzle: 1.5,
+    survival: 1.5,
+    social: 1.0,
+  },
+
+  // Split Fiction
+  "split-fiction": {
+    exploration: 3.5,
+    progression: 3.0,
+    systems: 3.0,
+    crafting: 0.0,
+    story: 4.5,
+    combat: 3.5,
+    strategy: 2.5,
+    puzzle: 4.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Hades II
+  "hades-ii": {
+    exploration: 3.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 3.0,
+    story: 4.5,
+    combat: 5.0,
+    strategy: 4.5,
+    puzzle: 1.5,
+    survival: 2.0,
+    social: 0.0,
+  },
+
+  // Hollow Knight: Silksong
+  "hollow-knight-silksong": {
+    exploration: 5.0,
+    progression: 4.5,
+    systems: 4.0,
+    crafting: 1.0,
+    story: 3.5,
+    combat: 5.0,
+    strategy: 3.0,
+    puzzle: 3.0,
+    survival: 2.0,
+    social: 0.0,
+  },
+
+  // Schedule I
+  "schedule-i": {
+    exploration: 4.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 2.0,
+    combat: 2.5,
+    strategy: 4.5,
+    puzzle: 1.0,
+    survival: 3.0,
+    social: 4.0,
+  },
+
+  // ARC Raiders
+  "arc-raiders": {
+    exploration: 4.0,
+    progression: 4.5,
+    systems: 4.0,
+    crafting: 3.0,
+    story: 2.5,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.5,
+    survival: 4.0,
+    social: 5.0,
+  },
+
+  // The Elder Scrolls IV: Oblivion Remastered
+  "the-elder-scrolls-iv-oblivion-remastered": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 4.0,
+    crafting: 3.0,
+    story: 4.0,
+    combat: 3.5,
+    strategy: 2.5,
+    puzzle: 2.0,
+    survival: 1.5,
+    social: 1.0,
+  },
+
+  // Final Fantasy VII Rebirth
+  "final-fantasy-vii-rebirth": {
+    exploration: 4.5,
+    progression: 4.5,
+    systems: 4.0,
+    crafting: 1.0,
+    story: 5.0,
+    combat: 4.5,
+    strategy: 4.0,
+    puzzle: 3.0,
+    survival: 1.0,
+    social: 1.0,
+  },
+
+  // Marvel's Spider-Man 2
+  "marvel-s-spider-man-2": {
+    exploration: 4.5,
+    progression: 4.0,
+    systems: 3.0,
+    crafting: 0.5,
+    story: 4.5,
+    combat: 4.5,
+    strategy: 2.5,
+    puzzle: 2.0,
+    survival: 1.0,
+    social: 0.0,
+  },
+
+  // Ghost of Tsushima: Director's Cut
+  "ghost-of-tsushima-director-s-cut": {
+    exploration: 5.0,
+    progression: 4.5,
+    systems: 3.5,
+    crafting: 2.5,
+    story: 5.0,
+    combat: 4.5,
+    strategy: 3.0,
+    puzzle: 2.0,
+    survival: 1.5,
+    social: 2.0,
+  },
+
+  // God of War Ragnarök
+  "god-of-war-ragnarok": {
+    exploration: 3.5,
+    progression: 4.5,
+    systems: 3.5,
+    crafting: 2.5,
+    story: 5.0,
+    combat: 5.0,
+    strategy: 3.0,
+    puzzle: 3.0,
+    survival: 1.0,
+    social: 0.0,
+  },
+
+  // Horizon Forbidden West
+  "horizon-forbidden-west": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 4.0,
+    crafting: 4.0,
+    story: 4.5,
+    combat: 4.5,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 2.0,
+    social: 0.0,
+  },
+
+  // The Last of Us Part II Remastered
+  "the-last-of-us-part-ii-remastered": {
+    exploration: 3.0,
+    progression: 3.5,
+    systems: 3.0,
+    crafting: 2.0,
+    story: 5.0,
+    combat: 4.0,
+    strategy: 4.0,
+    puzzle: 2.5,
+    survival: 4.0,
+    social: 0.0,
+  },
+
+  // Silent Hill 2
+  "silent-hill-2": {
+    exploration: 4.0,
+    progression: 2.5,
+    systems: 2.0,
+    crafting: 0.0,
+    story: 5.0,
+    combat: 2.5,
+    strategy: 2.0,
+    puzzle: 4.0,
+    survival: 4.0,
+    social: 0.0,
+  },
+
+  // Resident Evil Village
+  "resident-evil-village": {
+    exploration: 4.0,
+    progression: 4.0,
+    systems: 3.0,
+    crafting: 2.5,
+    story: 4.0,
+    combat: 4.0,
+    strategy: 3.0,
+    puzzle: 3.0,
+    survival: 4.0,
+    social: 0.0,
+  },
+
+  // Alan Wake II
+  "alan-wake-2": {
+    exploration: 4.0,
+    progression: 3.0,
+    systems: 3.0,
+    crafting: 0.5,
+    story: 5.0,
+    combat: 3.0,
+    strategy: 3.0,
+    puzzle: 4.0,
+    survival: 4.0,
+    social: 0.0,
+  },
+
+  // Warhammer 40,000: Space Marine II
+  "warhammer-40-000-space-marine-2": {
+    exploration: 2.5,
+    progression: 4.0,
+    systems: 3.0,
+    crafting: 1.0,
+    story: 3.5,
+    combat: 5.0,
+    strategy: 3.0,
+    puzzle: 0.5,
+    survival: 2.0,
+    social: 4.0,
+  },
+
+  // Metaphor: ReFantazio
+  "metaphor-refantazio": {
+    exploration: 4.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 1.0,
+    story: 5.0,
+    combat: 4.5,
+    strategy: 5.0,
+    puzzle: 2.0,
+    survival: 1.0,
+    social: 0.5,
+  },
+
+  // Persona 3 Reload
+  "persona-3-reload": {
+    exploration: 3.5,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 1.0,
+    story: 5.0,
+    combat: 4.0,
+    strategy: 4.5,
+    puzzle: 2.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Dragon's Dogma II
+  "dragon-s-dogma-2": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 4.0,
+    crafting: 3.0,
+    story: 3.5,
+    combat: 5.0,
+    strategy: 3.5,
+    puzzle: 2.0,
+    survival: 2.0,
+    social: 1.0,
+  },
+
+  // Assassin's Creed Odyssey
+  "assassin-s-creed-odyssey": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 4.0,
+    crafting: 3.0,
+    story: 4.5,
+    combat: 4.5,
+    strategy: 3.5,
+    puzzle: 1.5,
+    survival: 1.5,
+    social: 1.0,
+  },
+
+  // Kingdom Come: Deliverance
+  "kingdom-come-deliverance": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 3.0,
+    story: 5.0,
+    combat: 4.0,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 3.0,
+    social: 1.0,
+  },
+
+  // Assassin's Creed Black Flag Resynced
+  "assassin-s-creed-black-flag-resynced": {
+    exploration: 5.0,
+    progression: 4.0,
+    systems: 3.5,
+    crafting: 2.5,
+    story: 4.5,
+    combat: 4.0,
+    strategy: 3.0,
+    puzzle: 1.0,
+    survival: 1.0,
+    social: 0.0,
+  },
+
+  // Marvel Tokon: Fighting Souls
+  "marvel-tokon-fighting-souls": {
+    exploration: 0.5,
+    progression: 2.5,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 1.5,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 0.0,
+    social: 5.0,
+  },
+
+  // Fortnite
+  "fortnite": {
+    exploration: 3.0,
+    progression: 3.0,
+    systems: 4.5,
+    crafting: 3.0,
+    story: 1.5,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.5,
+    survival: 4.0,
+    social: 5.0,
+  },
+
+  // League of Legends
+  "league-of-legends": {
+    exploration: 1.0,
+    progression: 3.5,
+    systems: 5.0,
+    crafting: 0.0,
+    story: 1.0,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Valorant
+  "valorant": {
+    exploration: 1.0,
+    progression: 3.0,
+    systems: 4.5,
+    crafting: 0.0,
+    story: 1.0,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Rocket League
+  "rocket-league": {
+    exploration: 1.0,
+    progression: 2.5,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 0.5,
+    combat: 3.5,
+    strategy: 4.0,
+    puzzle: 0.0,
+    survival: 0.5,
+    social: 5.0,
+  },
+
+  // Roblox
+  "roblox": {
+    exploration: 4.0,
+    progression: 2.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 1.0,
+    combat: 2.5,
+    strategy: 2.5,
+    puzzle: 2.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // World of Warcraft
+  "world-of-warcraft": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 5.0,
+    combat: 4.5,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Genshin Impact
+  "genshin-impact": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 5.0,
+    crafting: 3.5,
+    story: 5.0,
+    combat: 4.5,
+    strategy: 4.0,
+    puzzle: 3.0,
+    survival: 1.0,
+    social: 3.0,
+  },
+
+  // Wuthering Waves
+  "wuthering-waves": {
+    exploration: 5.0,
+    progression: 5.0,
+    systems: 4.5,
+    crafting: 2.5,
+    story: 4.0,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 1.0,
+    social: 2.5,
+  },
+
+  // Zenless Zone Zero
+  "zenless-zone-zero": {
+    exploration: 3.0,
+    progression: 5.0,
+    systems: 4.5,
+    crafting: 1.5,
+    story: 4.5,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 1.5,
+    survival: 1.0,
+    social: 1.5,
+  },
+
+  // The Legend of Zelda: Breath of the Wild
+  "the-legend-of-zelda-breath-of-the-wild": {
+    exploration: 5.0,
+    progression: 4.0,
+    systems: 5.0,
+    crafting: 3.5,
+    story: 3.5,
+    combat: 4.0,
+    strategy: 3.5,
+    puzzle: 5.0,
+    survival: 3.0,
+    social: 0.0,
+  },
+
+  // The Legend of Zelda: Tears of the Kingdom
+  "the-legend-of-zelda-tears-of-the-kingdom": {
+    exploration: 5.0,
+    progression: 4.5,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 4.0,
+    combat: 4.0,
+    strategy: 4.0,
+    puzzle: 5.0,
+    survival: 3.0,
+    social: 0.0,
+  },
+
+  // Animal Crossing: New Horizons
+  "animal-crossing-new-horizons": {
+    exploration: 4.5,
+    progression: 4.0,
+    systems: 5.0,
+    crafting: 5.0,
+    story: 1.0,
+    combat: 0.0,
+    strategy: 2.5,
+    puzzle: 1.0,
+    survival: 0.0,
+    social: 5.0,
+  },
+
+  // Mario Kart 8 Deluxe
+  "mario-kart-8-deluxe": {
+    exploration: 1.0,
+    progression: 2.0,
+    systems: 3.0,
+    crafting: 0.0,
+    story: 0.0,
+    combat: 3.0,
+    strategy: 4.0,
+    puzzle: 0.0,
+    survival: 0.0,
+    social: 5.0,
+  },
+
+  // Super Mario Odyssey
+  "super-mario-odyssey": {
+    exploration: 5.0,
+    progression: 4.0,
+    systems: 3.0,
+    crafting: 0.0,
+    story: 2.5,
+    combat: 2.5,
+    strategy: 2.0,
+    puzzle: 4.0,
+    survival: 1.0,
+    social: 1.5,
+  },
+
+  // Super Smash Bros. Ultimate
+  "super-smash-bros-ultimate": {
+    exploration: 1.0,
+    progression: 3.0,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 0.0,
+    social: 5.0,
+  },
+
+  // Pokémon Legends: Arceus
+  "pokemon-legends-arceus": {
+    exploration: 5.0,
+    progression: 4.5,
+    systems: 4.0,
+    crafting: 4.0,
+    story: 3.0,
+    combat: 3.5,
+    strategy: 3.5,
+    puzzle: 1.0,
+    survival: 2.0,
+    social: 1.0,
+  },
+
+  // Bloodborne
+  "bloodborne": {
+    exploration: 4.5,
+    progression: 5.0,
+    systems: 4.0,
+    crafting: 1.5,
+    story: 4.5,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 2.0,
+    survival: 3.0,
+    social: 2.0,
+  },
+
+  // Big Walk
+  "big-walk": {
+    exploration: 5.0,
+    progression: 2.5,
+    systems: 2.0,
+    crafting: 0.0,
+    story: 1.0,
+    combat: 0.0,
+    strategy: 2.0,
+    puzzle: 3.5,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Grounded 2
+  "grounded-2": {
+    exploration: 5.0,
+    progression: 4.5,
+    systems: 4.5,
+    crafting: 5.0,
+    story: 3.5,
+    combat: 4.0,
+    strategy: 3.5,
+    puzzle: 2.0,
+    survival: 5.0,
+    social: 4.5,
+  },
+
+  // ReStory: Chill Electronics Repairs
+  "restory-chill-electronics-repairs": {
+    exploration: 1.5,
+    progression: 4.0,
+    systems: 4.0,
+    crafting: 4.5,
+    story: 3.5,
+    combat: 0.0,
+    strategy: 3.0,
+    puzzle: 3.0,
+    survival: 0.0,
+    social: 3.5,
+  },
+
+  // Corsair Cove
+  "corsair-cove": {
+    exploration: 3.5,
+    progression: 4.5,
+    systems: 5.0,
+    crafting: 4.0,
+    story: 2.0,
+    combat: 3.0,
+    strategy: 5.0,
+    puzzle: 1.0,
+    survival: 2.0,
+    social: 1.0,
+  },
+
+  // Grain Rot
+  "grain-rot": {
+    exploration: 4.0,
+    progression: 4.0,
+    systems: 4.5,
+    crafting: 4.5,
+    story: 1.5,
+    combat: 3.5,
+    strategy: 4.0,
+    puzzle: 1.0,
+    survival: 5.0,
+    social: 5.0,
+  },
+
+  // Hell Let Loose: Vietnam
+  "hell-let-loose-vietnam": {
+    exploration: 2.0,
+    progression: 2.5,
+    systems: 4.0,
+    crafting: 0.0,
+    story: 0.5,
+    combat: 5.0,
+    strategy: 5.0,
+    puzzle: 0.0,
+    survival: 3.0,
+    social: 5.0,
+  },
+
+  // Tom Clancy's Ghost Recon: Wildlands
+  "ghost-recon-wildlands": {
+    exploration: 5.0,
+    progression: 4.0,
+    systems: 4.0,
+    crafting: 2.0,
+    story: 3.5,
+    combat: 5.0,
+    strategy: 4.5,
+    puzzle: 1.0,
+    survival: 2.0,
+    social: 4.5,
+  },
+
+  // Fields of Mistria
+  "fields-of-mistria": {
+    exploration: 4.0,
+    progression: 4.5,
+    systems: 4.5,
+    crafting: 4.0,
+    story: 3.5,
+    combat: 2.0,
+    strategy: 3.5,
+    puzzle: 1.0,
+    survival: 1.0,
+    social: 5.0,
+  },
+
+  // Mistfall Hunter
+  "mistfall-hunter": {
+    exploration: 3.5,
+    progression: 4.5,
+    systems: 4.5,
+    crafting: 2.0,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 0.5,
+    survival: 4.0,
+    social: 5.0,
+  },
+
+  // Sephiria
+  "sephiria": {
+    exploration: 3.5,
+    progression: 5.0,
+    systems: 4.5,
+    crafting: 1.0,
+    story: 2.0,
+    combat: 5.0,
+    strategy: 4.0,
+    puzzle: 1.0,
+    survival: 2.0,
+    social: 3.5,
+  },
+
+
   
 
   } satisfies Record<string, GameTraits>;

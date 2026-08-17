@@ -589,4 +589,727 @@ export type GameSeed = {
         igdbId: 151665,
         expectedName: "Palworld",
       },
+
+      {
+        id: "counter-strike-2",
+        igdbId: 242408,
+        expectedName: "Counter-Strike 2",
+      },
+      {
+        id: "dota-2",
+        igdbId: 2963,
+        expectedName: "Dota 2",
+      },
+      {
+        id: "pubg-battlegrounds",
+        igdbId: 27789,
+        expectedName: "PUBG: Battlegrounds",
+      },
+      {
+        id: "apex-legends",
+        igdbId: 114795,
+        expectedName: "Apex Legends",
+      },
+      {
+        id: "rust",
+        igdbId: 3277,
+        expectedName: "Rust",
+      },
+      {
+        id: "dead-by-daylight",
+        igdbId: 18866,
+        expectedName: "Dead by Daylight",
+      },
+      {
+        id: "rainbow-six-siege",
+        igdbId: 7360,
+        expectedName: "Rainbow Six Siege",
+      },
+      {
+        id: "marvel-rivals",
+        igdbId: 294041,
+        expectedName: "Marvel Rivals",
+      },
+      {
+        id: "delta-force",
+        igdbId: 262186,
+        expectedName: "Delta Force",
+      },
+      {
+        id: "team-fortress-2",
+        igdbId: 891,
+        expectedName: "Team Fortress 2",
+      },
+      {
+        id: "left-4-dead-2",
+        igdbId: 124,
+        expectedName: "Left 4 Dead 2",
+      },
+      {
+        id: "destiny-2",
+        igdbId: 25657,
+        expectedName: "Destiny 2",
+      },
+      {
+        id: "path-of-exile",
+        igdbId: 1911,
+        expectedName: "Path of Exile",
+      },
+      {
+        id: "path-of-exile-2",
+        igdbId: 125642,
+        expectedName: "Path of Exile 2",
+      },
+      {
+        id: "hearts-of-iron-iv",
+        igdbId: 15894,
+        expectedName: "Hearts of Iron IV",
+      },
+      {
+        id: "the-elder-scrolls-v-skyrim-special-edition",
+        igdbId: 19457,
+        expectedName: "The Elder Scrolls V: Skyrim - Special Edition",
+      },
+      {
+        id: "fallout-4",
+        igdbId: 9630,
+        expectedName: "Fallout 4",
+      },
+      {
+        id: "fallout-76",
+        igdbId: 103020,
+        expectedName: "Fallout 76",
+      },
+      {
+        id: "mount-and-blade-ii-bannerlord",
+        igdbId: 9608,
+        expectedName: "Mount & Blade II: Bannerlord",
+      },
+      {
+        id: "total-war-warhammer-iii",
+        igdbId: 143114,
+        expectedName: "Total War: Warhammer III",
+      },
+      {
+        id: "ark-survival-evolved",
+        igdbId: 10239,
+        expectedName: "Ark: Survival Evolved",
+      },
+      {
+        id: "ark-survival-ascended",
+        igdbId: 250509,
+        expectedName: "Ark: Survival Ascended",
+      },
+      {
+        id: "black-myth-wukong",
+        igdbId: 136879,
+        expectedName: "Black Myth: Wukong",
+      },
+      {
+        id: "ready-or-not",
+        igdbId: 28489,
+        expectedName: "Ready or Not",
+      },
+      {
+        id: "repo",
+        igdbId: 332780,
+        expectedName: "R.E.P.O.",
+      },
+      {
+        id: "peak",
+        igdbId: 349524,
+        expectedName: "Peak",
+      },
+      {
+        id: "lethal-company",
+        igdbId: 212089,
+        expectedName: "Lethal Company",
+      },
+      {
+        id: "sons-of-the-forest",
+        igdbId: 127346,
+        expectedName: "Sons of the Forest",
+      },
+      {
+        id: "once-human",
+        igdbId: 204538,
+        expectedName: "Once Human",
+      },
+      {
+        id: "geometry-dash",
+        igdbId: 11642,
+        expectedName: "Geometry Dash",
+      },
+      {
+        id: "street-fighter-6",
+        igdbId: 191692,
+        expectedName: "Street Fighter 6",
+      },
+      {
+        id: "farming-simulator-25",
+        igdbId: 306822,
+        expectedName: "Farming Simulator 25",
+      },
+      {
+        id: "escape-from-tarkov",
+        igdbId: 15536,
+        expectedName: "Escape from Tarkov",
+      },
+      {
+        id: "battlefield-6",
+        igdbId: 317407,
+        expectedName: "Battlefield 6",
+      },
+      {
+        id: "slay-the-spire-2",
+        igdbId: 296831,
+        expectedName: "Slay the Spire II",
+      },
+      {
+        id: "payday-2",
+        igdbId: 2058,
+        expectedName: "Payday 2",
+      },
+      {
+        id: "war-thunder",
+        igdbId: 2165,
+        expectedName: "War Thunder",
+      },
+      {
+        id: "naraka-bladepoint",
+        igdbId: 127352,
+        expectedName: "Naraka: Bladepoint",
+      },
+      {
+        id: "overwatch-2",
+        igdbId: 125174,
+        expectedName: "Overwatch",
+      },
+      {
+        id: "diablo-iv",
+        igdbId: 125165,
+        expectedName: "Diablo IV",
+      },
+      {
+        id: "final-fantasy-xiv-online",
+        igdbId: 386,
+        expectedName: "Final Fantasy XIV Online",
+      },
+      {
+        id: "v-rising",
+        igdbId: 148228,
+        expectedName: "V Rising",
+      },
+      {
+        id: "forza-horizon-6",
+        igdbId: 348330,
+        expectedName: "Forza Horizon 6",
+      },
+      {
+        id: "monster-hunter-wilds",
+        igdbId: 279661,
+        expectedName: "Monster Hunter Wilds",
+      },
+      {
+        id: "clair-obscur-expedition-33",
+        igdbId: 305152,
+        expectedName: "Clair Obscur: Expedition 33",
+      },
+      {
+        id: "kingdom-come-deliverance-ii",
+        igdbId: 298526,
+        expectedName: "Kingdom Come: Deliverance II",
+      },
+      {
+        id: "doom-the-dark-ages",
+        igdbId: 302704,
+        expectedName: "Doom: The Dark Ages",
+      },
+      {
+        id: "assassin-s-creed-shadows",
+        igdbId: 300976,
+        expectedName: "Assassin's Creed Shadows",
+      },
+      {
+        id: "split-fiction",
+        igdbId: 325594,
+        expectedName: "Split Fiction",
+      },
+      {
+        id: "hades-ii",
+        igdbId: 228525,
+        expectedName: "Hades II",
+      },
+      {
+        id: "hollow-knight-silksong",
+        igdbId: 115289,
+        expectedName: "Hollow Knight: Silksong",
+      },
+      {
+        id: "schedule-i",
+        igdbId: 328373,
+        expectedName: "Schedule I",
+      },
+      {
+        id: "arc-raiders",
+        igdbId: 185258,
+        expectedName: "ARC Raiders",
+      },
+      {
+        id: "the-elder-scrolls-iv-oblivion-remastered",
+        igdbId: 267306,
+        expectedName: "The Elder Scrolls IV: Oblivion Remastered",
+      },
+      {
+        id: "final-fantasy-vii-rebirth",
+        igdbId: 133236,
+        expectedName: "Final Fantasy VII Rebirth",
+      },
+      {
+        id: "marvel-s-spider-man-2",
+        igdbId: 127044,
+        expectedName: "Marvel's Spider-Man 2",
+      },
+      {
+        id: "ghost-of-tsushima-director-s-cut",
+        igdbId: 153700,
+        expectedName: "Ghost of Tsushima: Director's Cut",
+      },
+      {
+        id: "god-of-war-ragnarok",
+        igdbId: 112875,
+        expectedName: "God of War Ragnarök",
+      },
+      {
+        id: "horizon-forbidden-west",
+        igdbId: 112874,
+        expectedName: "Horizon Forbidden West",
+      },
+      {
+        id: "the-last-of-us-part-ii-remastered",
+        igdbId: 277143,
+        expectedName: "The Last of Us Part II Remastered",
+      },
+      {
+        id: "silent-hill-2",
+        igdbId: 222341,
+        expectedName: "Silent Hill 2",
+      },
+      {
+        id: "resident-evil-village",
+        igdbId: 55163,
+        expectedName: "Resident Evil Village",
+      },
+      {
+        id: "alan-wake-2",
+        igdbId: 185246,
+        expectedName: "Alan Wake II",
+      },
+      {
+        id: "warhammer-40-000-space-marine-2",
+        igdbId: 185252,
+        expectedName: "Warhammer 40,000: Space Marine II",
+      },
+      {
+        id: "metaphor-refantazio",
+        igdbId: 26602,
+        expectedName: "Metaphor: ReFantazio",
+      },
+      {
+        id: "persona-3-reload",
+        igdbId: 252647,
+        expectedName: "Persona 3 Reload",
+      },
+      {
+        id: "dragon-s-dogma-2",
+        igdbId: 115060,
+        expectedName: "Dragon's Dogma II",
+      },
+      {
+        id: "assassin-s-creed-odyssey",
+        igdbId: 103054,
+        expectedName: "Assassin's Creed Odyssey",
+      },
+      {
+        id: "kingdom-come-deliverance",
+        igdbId: 4843,
+        expectedName: "Kingdom Come: Deliverance",
+      },
+      {
+        id: "assassin-s-creed-black-flag-resynced",
+        igdbId: 337738,
+        expectedName: "Assassin's Creed Black Flag Resynced",
+      },
+      {
+        id: "marvel-tokon-fighting-souls",
+        igdbId: 347132,
+        expectedName: "Marvel Tokon: Fighting Souls",
+      },
+      {
+        id: "fortnite",
+        igdbId: 1905,
+        expectedName: "Fortnite",
+      },
+      {
+        id: "league-of-legends",
+        igdbId: 115,
+        expectedName: "League of Legends",
+      },
+      {
+        id: "valorant",
+        igdbId: 126459,
+        expectedName: "Valorant",
+      },
+      {
+        id: "rocket-league",
+        igdbId: 11198,
+        expectedName: "Rocket League",
+      },
+      {
+        id: "roblox",
+        igdbId: 17269,
+        expectedName: "Roblox",
+      },
+      {
+        id: "world-of-warcraft",
+        igdbId: 123,
+        expectedName: "World of Warcraft",
+      },
+      {
+        id: "genshin-impact",
+        igdbId: 119277,
+        expectedName: "Genshin Impact",
+      },
+      {
+        id: "wuthering-waves",
+        igdbId: 202956,
+        expectedName: "Wuthering Waves",
+      },
+      {
+        id: "zenless-zone-zero",
+        igdbId: 200551,
+        expectedName: "Zenless Zone Zero",
+      },
+      {
+        id: "the-legend-of-zelda-breath-of-the-wild",
+        igdbId: 7346,
+        expectedName: "The Legend of Zelda: Breath of the Wild",
+      },
+      {
+        id: "the-legend-of-zelda-tears-of-the-kingdom",
+        igdbId: 119388,
+        expectedName: "The Legend of Zelda: Tears of the Kingdom",
+      },
+      {
+        id: "animal-crossing-new-horizons",
+        igdbId: 109462,
+        expectedName: "Animal Crossing: New Horizons",
+      },
+      {
+        id: "mario-kart-8-deluxe",
+        igdbId: 26764,
+        expectedName: "Mario Kart 8 Deluxe",
+      },
+      {
+        id: "super-mario-odyssey",
+        igdbId: 26758,
+        expectedName: "Super Mario Odyssey",
+      },
+      {
+        id: "super-smash-bros-ultimate",
+        igdbId: 90101,
+        expectedName: "Super Smash Bros. Ultimate",
+      },
+      {
+        id: "pokemon-legends-arceus",
+        igdbId: 144054,
+        expectedName: "Pokémon Legends: Arceus",
+      },
+      {
+        id: "bloodborne",
+        igdbId: 7334,
+        expectedName: "Bloodborne",
+      },
+      {
+        id: "big-walk",
+        igdbId: 279624,
+        expectedName: "Big Walk",
+      },
+      {
+        id: "grounded-2",
+        igdbId: 348187,
+        expectedName: "Grounded 2",
+      },
+      {
+        id: "restory-chill-electronics-repairs",
+        igdbId: 380960,
+        expectedName: "ReStory: Chill Electronics Repairs",
+      },
+      {
+        id: "corsair-cove",
+        igdbId: 398638,
+        expectedName: "Corsair Cove",
+      },
+      {
+        id: "grain-rot",
+        igdbId: 400575,
+        expectedName: "Grain Rot",
+      },
+      {
+        id: "hell-let-loose-vietnam",
+        igdbId: 362063,
+        expectedName: "Hell Let Loose: Vietnam",
+      },
+      {
+        id: "ghost-recon-wildlands",
+        igdbId: 11171,
+        expectedName: "Tom Clancy's Ghost Recon: Wildlands",
+      },
+      {
+        id: "fields-of-mistria",
+        igdbId: 226035,
+        expectedName: "Fields of Mistria",
+      },
+      {
+        id: "mistfall-hunter",
+        igdbId: 320141,
+        expectedName: "Mistfall Hunter",
+      },
+      {
+        id: "sephiria",
+        igdbId: 278379,
+        expectedName: "Sephiria",
+      },
+  
+  // Group B: 46 existing guide-covered games
+      {
+        id: "grim-dawn-fangs-of-asterkarn",
+        igdbId: 298931,
+        expectedName: "Grim Dawn: Fangs of Asterkarn",
+      },
+      {
+        id: "dirty-business",
+        igdbId: 398532,
+        expectedName: "Dirty Business",
+      },
+      {
+        id: "tears-of-metal",
+        igdbId: 305011,
+        expectedName: "Tears of Metal",
+      },
+      {
+        id: "dragonsword-awakening",
+        igdbId: 398217,
+        expectedName: "DragonSword: Awakening",
+      },
+      {
+        id: "zerospace",
+        igdbId: 262659,
+        expectedName: "ZeroSpace",
+      },
+      {
+        id: "happys-humble-burger-cult",
+        igdbId: 407065,
+        expectedName: "Happy's Humble Burger Cult",
+      },
+      {
+        id: "ore-factory-squad",
+        igdbId: 395307,
+        expectedName: "Ore Factory Squad",
+      },
+      {
+        id: "the-incident-at-galley-house",
+        igdbId: 350434,
+        expectedName: "The Incident at Galley House",
+      },
+      {
+        id: "ascend-to-zero",
+        igdbId: 316425,
+        expectedName: "Ascend to Zero",
+      },
+      {
+        id: "backyard-baseball",
+        igdbId: 393033,
+        expectedName: "Backyard Baseball",
+      },
+      {
+        id: "forest-escape-last-train",
+        igdbId: 389724,
+        expectedName: "Forest Escape: Last Train",
+      },
+      {
+        id: "granblue-relink-endless-ragnarok",
+        igdbId: 388441,
+        expectedName: "Granblue Fantasy: Relink - Endless Ragnarok",
+      },
+      {
+        id: "moonlight-peaks",
+        igdbId: 237123,
+        expectedName: "Moonlight Peaks",
+      },
+      {
+        id: "esports-manager-2026",
+        igdbId: 285684,
+        expectedName: "Esports Manager 2026",
+      },
+      {
+        id: "master-healer-kale",
+        igdbId: 406380,
+        expectedName: "Master Healer Kale With Useless Party",
+      },
+      {
+        id: "supermarket-chaos",
+        igdbId: 407502,
+        expectedName: "Supermarket Chaos",
+      },
+      {
+        id: "frostpunk-2-breach-of-trust",
+        igdbId: 397575,
+        expectedName: "Frostpunk 2: Breach of Trust",
+      },
+      {
+        id: "deltarune",
+        igdbId: 171233,
+        expectedName: "Deltarune",
+      },
+      {
+        id: "the-last-caretaker",
+        igdbId: 333443,
+        expectedName: "The Last Caretaker",
+      },
+      {
+        id: "darktide",
+        igdbId: 402515,
+        expectedName: "Warhammer 40,000: Darktide - Skitarii",
+      },
+      {
+        id: "moldwasher",
+        igdbId: 342738,
+        expectedName: "Moldwasher",
+      },
+      {
+        id: "thank-you-for-your-application",
+        igdbId: 312791,
+        expectedName: "Thank You For Your Application",
+      },
+      {
+        id: "33-immortals",
+        igdbId: 252828,
+        expectedName: "33 Immortals",
+      },
+      {
+        id: "tales-of-seikyu",
+        igdbId: 245733,
+        expectedName: "Tales of Seikyu",
+      },
+      {
+        id: "spacecraft",
+        igdbId: 324574,
+        expectedName: "SpaceCraft",
+      },
+      {
+        id: "orb-of-creation",
+        igdbId: 182972,
+        expectedName: "Orb of Creation",
+      },
+      {
+        id: "sand-raiders",
+        igdbId: 252846,
+        expectedName: "Sand: Raiders Of Sophie",
+      },
+      {
+        id: "dave-the-diver-in-the-jungle",
+        igdbId: 325582,
+        expectedName: "Dave the Diver: In the Jungle",
+      },
+      {
+        id: "backrooms-lost-runners",
+        igdbId: 364009,
+        expectedName: "Backrooms Lost Runners",
+      },
+      {
+        id: "echoes-of-aincrad",
+        igdbId: 393932,
+        expectedName: "Echoes of Aincrad",
+      },
+      {
+        id: "meccha-chameleon",
+        igdbId: 405028,
+        expectedName: "Meccha Chameleon",
+      },
+      {
+        id: "lost-castle-2",
+        igdbId: 263225,
+        expectedName: "Lost Castle 2",
+      },
+      {
+        id: "tabletop-tavern",
+        igdbId: 373282,
+        expectedName: "Tabletop Tavern",
+      },
+      {
+        id: "witchspire",
+        igdbId: 362094,
+        expectedName: "Witchspire",
+      },
+      {
+        id: "arms-of-god",
+        igdbId: 324148,
+        expectedName: "Arms of God",
+      },
+      {
+        id: "blasphemous-2-the-third-sin",
+        igdbId: 404910,
+        expectedName: "Blasphemous II: The Third Sin",
+      },
+      {
+        id: "slots-and-diapers",
+        igdbId: 392541,
+        expectedName: "Slots & Diapers",
+      },
+      {
+        id: "serpents-gaze",
+        igdbId: 380138,
+        expectedName: "Serpent's Gaze",
+      },
+      {
+        id: "fortune-mill",
+        igdbId: 403497,
+        expectedName: "Fortune Mill",
+      },
+      {
+        id: "lumentale-memories-of-trey",
+        igdbId: 231484,
+        expectedName: "LumenTale: Memories of Trey",
+      },
+      {
+        id: "crashout-crew",
+        igdbId: 372144,
+        expectedName: "Crashout Crew",
+      },
+      {
+        id: "tower-of-babel",
+        igdbId: 329785,
+        expectedName: "Tower of Babel: Survivors of Chaos",
+      },
+      {
+        id: "town-to-city",
+        igdbId: 329736,
+        expectedName: "Town to City",
+      },
+      {
+        id: "teamfight-manager-2",
+        igdbId: 369638,
+        expectedName: "Teamfight Manager 2",
+      },
+      {
+        id: "dq7-reimagined",
+        igdbId: 366884,
+        expectedName: "Dragon Quest VII Reimagined",
+      },
+      {
+        id: "the-house-always-wins",
+        igdbId: 378526,
+        expectedName: "The House Always Wins",
+      },
   ] satisfies readonly GameSeed[];

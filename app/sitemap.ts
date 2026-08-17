@@ -724,6 +724,15 @@ const paths = [
   '/hell-let-loose-vietnam/progression-loadouts',
   '/hell-let-loose-vietnam/usa-commander-guide',
   '/hell-let-loose-vietnam/achievements',
+
+  '/ghost-recon-wildlands',
+  '/ghost-recon-wildlands/last-rites-walkthrough',
+  '/ghost-recon-wildlands/last-rites-intel-locations',
+  '/ghost-recon-wildlands/last-rites-ending-explained',
+  '/ghost-recon-wildlands/predator-mission',
+  '/ghost-recon-wildlands/ghost-parameters',
+  '/ghost-recon-wildlands/2026-update',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -731,6 +740,14 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/ghost-recon-wildlands': '2026-08-17',
+  '/ghost-recon-wildlands/last-rites-walkthrough': '2026-08-17',
+  '/ghost-recon-wildlands/last-rites-intel-locations': '2026-08-17',
+  '/ghost-recon-wildlands/last-rites-ending-explained': '2026-08-17',
+  '/ghost-recon-wildlands/predator-mission': '2026-08-17',
+  '/ghost-recon-wildlands/ghost-parameters': '2026-08-17',
+  '/ghost-recon-wildlands/2026-update': '2026-08-17',
+  
   '/hell-let-loose-vietnam': '2026-08-16',
   '/hell-let-loose-vietnam/beginner-guide': '2026-08-16',
   '/hell-let-loose-vietnam/spawn-garrison-outpost-guide': '2026-08-16',
