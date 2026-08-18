@@ -131,6 +131,535 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Mortal Shell 2",
+    game: "Mortal Shell II",
+    href: "/mortal-shell-2",
+    slug: "mortal-shell-2",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Soulslike Action RPG",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Progression + Shells + weapons + boss blockers",
+  
+    description:
+      "Use the Mortal Shell 2 guide hub to solve progression blockers, recover Ova, unlock all eight Shells, choose melee weapons and Sidearms, clear major bosses and dungeons, manage difficulty, and reach the endings without wasting upgrades.",
+  
+    coverage: [
+      "Main progression from Marrow Keep and Widow's Overlook through Fainweald, Ova recovery, the Gloom Siphon, Mether's Breath, Outskirts of Mammon, the Unfound Path, and endgame",
+      "All eight main Shells with practical unlock and investment decisions, plus dedicated Gragu, Eredrim, Genessa, and Sariel routes",
+      "All eight melee weapons with moveset, Tarstone and Infusion decisions, plus dedicated Axe & Dagger, Veteran's Battle Axe, and Great Martyr's Blade acquisition routes",
+      "All eight Sidearms with locations, Resolve economy, Coin investment decisions, Slayer Seal interaction, and early-versus-late acquisition priorities",
+      "Major progression and boss blockers including the opening Tar Golem, Magdalena the Lady of the Woods, Sariel and the Chamber of Becoming, King's Crypt traps, Shrine of Trials, and Martyr's Prison",
+      "Difficulty decisions through Standard play, Slayer Seal, its achievement warning, Thestus and Night Mode, tougher encounters, traps, farming, and challenge timing",
+      "Ending progression through the Unfound Path, Zmey, post-boss cleanup, Send Ova, the main ending and NG+ commitment, plus the Baghead secret ending",
+    ],
+  
+    image:
+      "/images/mortal-shell-2/mortal-shell-2-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 34,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Mortal Shell 2 Guide: Progression, Shells, Weapons & Bosses",
+        href: "/mortal-shell-2",
+        type: "Guide Hub",
+        description:
+          "Start here when you are stuck. Jump to progression, Ova, Shells, weapons, Sidearms, bosses, difficulty, Night Mode, or the endings without replaying a full walkthrough.",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-marrow-keep-home.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Progression, Ova and Mether's Breath, all eight Shells, melee weapons, Sidearms, Tar Golem, Magdalena, Sariel, difficulty, Night Mode, and endings",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Progression Guide: Best Route & Where to Go",
+        href: "/mortal-shell-2/progression-guide",
+        type: "Walkthrough",
+        description:
+          "Follow the main route from Marrow Keep through early Shell and weapon decisions, Ova progression, Mammon, the Unfound Path, and endgame without clearing every branch too early.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-outskirts-of-mammon-teleporter.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 204,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Marrow Keep, Widow's Overlook, Fainweald, Mushroom Village, Ova, corruption gates, Outskirts of Mammon, Unfound Path, underpowered checks, and endgame",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Ova & Gloom Siphon: Mether's Breath Guide",
+        href: "/mortal-shell-2/ova-gloom-siphon",
+        type: "Systems",
+        description:
+          "Recover Unblemished Ova, return them to the Gloom Siphon, unlock Mether's Breath, cleanse corruption, and use revitalized Beacons for faster travel.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-path-blocked-by-corruption.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 205,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Blocked by corruption, Unblemished Ova, Milos, Gloom Siphon, Mether's Breath, corruption cleansing, revitalized Beacons, and fast travel",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 All Shell Locations & Best Shells to Use",
+        href: "/mortal-shell-2/all-shells-locations",
+        type: "Guide",
+        description:
+          "Find Tiel, Proxima, Gragu, Eredrim, Smert, Genessa, Lazlo, and Sariel, compare their playstyles, and decide which Shells are actually worth your Glimpses.",
+        date: "Updated recently",
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 206,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Tiel, Proxima, Gragu, Eredrim, Smert, Genessa, Lazlo, Sariel, unlock order, playstyle comparison, early investment, and Glimpse decisions",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Weapons Guide: Best Weapons & Infusions",
+        href: "/mortal-shell-2/weapons-guide",
+        type: "Builds",
+        description:
+          "Compare all eight melee weapons, test their movesets, choose useful Tarstones and Infusions, and avoid wasting upgrade materials on weapons you do not enjoy.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-veterans-battle-axe-running-heavy.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 207,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Iconoclast, Axe & Dagger, Veteran's Battle Axe, Great Martyr's Blade, Obsidian Hammer, Axatana, Black Needle, Clockwork Scythe, Tarstones, and Infusions",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Sidearms Guide: All Locations & Best First Pick",
+        href: "/mortal-shell-2/sidearms-guide",
+        type: "Guide",
+        description:
+          "Find all eight Sidearms, understand Resolve-powered ranged combat, compare early and gated options, and decide which weapon is worth spending Coin on first.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-sidearm-resolve-tutorial.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 208,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Naylshotte, Troubadour's Lute, Forgotten Crossbow, Salvaged Trebuchaxe, Caged Hystrix, Cursed Child, Triarch Repeater, Ballistazooka, Resolve, and Coin",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Heart of Vatra: Gragu & Berserker's Stone",
+        href: "/mortal-shell-2/heart-of-vatra-gragu",
+        type: "Guide",
+        description:
+          "Unlock Gragu through the Temple of Vatra, light all three candles, collect Berserker's Stone before the Heart, escape the temple, and return the Heart of Vatra.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-heart-of-vatra-altar.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 209,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Mushroom Village, One-Legged Wolf, Gragu, Temple of Vatra, three candles, Berserker's Stone warning, Heart of Vatra, escape route, and Shell unlock",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Eredrim Guide: How to Unlock Him Early",
+        href: "/mortal-shell-2/how-to-unlock-eredrim",
+        type: "Guide",
+        description:
+          "Unlock Eredrim through Gloomshade Grove and Citadel access, or use the faster wall-bag shortcut, activate the nearby Beacon, and defeat the Warden.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-eredrim-citadel-bag-shortcut.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 210,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Gloomshade Grove, Blood-Cursed Lithopod, Citadel access, early wall-bag shortcut, Beacon, Warden, Eredrim location, and whether he is worth rushing",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Genessa Guide: How to Unlock Her",
+        href: "/mortal-shell-2/how-to-unlock-genessa",
+        type: "Guide",
+        description:
+          "Follow the Genessa route through Outskirts of Mammon and Revenant Graves, recover Sester's Censer, clear the encounter, and return to Marrow Keep.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-outskirts-of-mammon-teleporter.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 211,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Outskirts of Mammon, battlefield route, bridge drop, teleport gate, Revenant Graves, Sester's Censer, encounter, return to Marrow Keep, and Genessa unlock",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Sariel Boss Guide: Statuettes & Rewards",
+        href: "/mortal-shell-2/sariel-boss-guide",
+        type: "Bosses",
+        description:
+          "Reach Sariel from Outskirts of Mammon, survive all three encounters, destroy the four statuettes to stop his revive, and collect the Shell and weapon rewards.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-sariel-four-statuettes.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 212,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Outskirts of Mammon, southern keep, Sariel temple, Beacon, three encounters, Chamber of Becoming, four statuettes, revive fix, Clockwork Scythe, and Caged Hystrix",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Axe & Dagger: Shrine of Trials & Chapel Key",
+        href: "/mortal-shell-2/shrine-of-trials-axe-dagger",
+        type: "Guide",
+        description:
+          "Use the hidden archway near Mushroom Village, walk through the hidden statue, collect the Chapel Key, clear Shrine of Trials, and get the Axe & Dagger.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-axe-dagger-hidden-archway.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 213,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "Mushroom Village, hidden archway, hidden statue, Chapel Key, Shrine of Trials, Axe & Dagger pickup, Duality, and early weapon decision",
+        },
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 King's Crypt: Veteran's Battle Axe Guide",
+        href: "/mortal-shell-2/kings-crypt-veterans-battle-axe",
+        type: "Guide",
+        description:
+          "Reach King's Crypt through Black Ridge Pass, survive its wall arrows and floor-spike traps, clear the main route, and collect the Veteran's Battle Axe.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-kings-crypt-floor-spikes.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 214,
+          spotlightFeature: true,
+          spotlightOrder: 11,
+          spotlightMeta:
+            "Black Ridge Pass, King's Crypt, wall arrows, floor spikes, trap corridors, final trap section, Veteran's Battle Axe, running heavy, and early detour decision",
+        },
+        archive: {
+          showInCollections: true,
+          order: 12,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Great Martyr's Blade: Location & Frost",
+        href: "/mortal-shell-2/great-martyrs-blade",
+        type: "Guide",
+        description:
+          "Open the Gloomshade Grove route, handle the shared Citadel prerequisite, reach Martyr's Prison, collect the Great Martyr's Blade, and decide when Frost is worth chasing.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-weapon.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 215,
+          spotlightFeature: true,
+          spotlightOrder: 12,
+          spotlightMeta:
+            "Gloomshade Grove, Blood-Cursed Lithopod, Citadel prerequisite, Martyr's Prison, Great Martyr's Blade, slow moveset, Frost, and investment timing",
+        },
+        archive: {
+          showInCollections: true,
+          order: 13,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Tar Golem Guide: Must You Beat It?",
+        href: "/mortal-shell-2/tar-golem",
+        type: "Bosses",
+        description:
+          "Learn whether the opening Tar Golem must be defeated, what happens when you win or lose, how to retry the fight, and whether its Health resets.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-tar-golem-first-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 216,
+          spotlightFeature: true,
+          spotlightOrder: 13,
+          spotlightMeta:
+            "Opening Tar Golem, expected-loss structure, win vs lose outcome, rear-cliff retry, full Health reset, unlimited attempts, and whether the fight is worth forcing",
+        },
+        archive: {
+          showInCollections: true,
+          order: 14,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Magdalena Boss Guide: Charge, Break & Wasps",
+        href: "/mortal-shell-2/magdalena-boss-guide",
+        type: "Bosses",
+        description:
+          "Beat Magdalena by controlling the arena edge, dodging her charge late, keeping melee punishes short, using Break windows, and surviving the wasp swarm and summons.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-magdalena-lady-of-the-woods-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 217,
+          spotlightFeature: true,
+          spotlightOrder: 14,
+          spotlightMeta:
+            "Glutted Mire, arena-edge positioning, late charge dodge, fire ring, Corrosive Stone, first and second Break, wasp swarm, summons, and Magdalena's Memento",
+        },
+        archive: {
+          showInCollections: true,
+          order: 15,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Difficulty Settings: Slayer Seal & Night",
+        href: "/mortal-shell-2/difficulty-settings",
+        type: "Systems",
+        description:
+          "Understand why there is no normal Easy mode menu, how Slayer Seal lowers combat difficulty, its achievement warning, and when to use Standard or Night.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-slayer-seal-difficulty.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 218,
+          spotlightFeature: true,
+          spotlightOrder: 15,
+          spotlightMeta:
+            "No Easy Normal Hard menu, Standard difficulty, Slayer Seal, Break Damage, Slayer Punch, achievement warning, boss help, Night Mode, and when to switch",
+        },
+        archive: {
+          showInCollections: true,
+          order: 16,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Night Mode Guide: Thestus, Changes & Rewards",
+        href: "/mortal-shell-2/night-mode",
+        type: "Systems",
+        description:
+          "Unlock Night Mode with Thestus, understand tougher encounters, traps and support enemies, and decide when the better rewards are worth the added difficulty.",
+        date: "Updated recently",
+        image:
+          "/images/mortal-shell-2/mortal-shell-2-thestus-night-mode.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 219,
+          spotlightFeature: true,
+          spotlightOrder: 16,
+          spotlightMeta:
+            "Thestus, Night challenges, tougher enemies, traps, support healers, better rewards, farming, progression efficiency, and when to turn Night off",
+        },
+        archive: {
+          showInCollections: true,
+          order: 17,
+        },
+      },
+  
+      {
+        title:
+          "Mortal Shell 2 Endings Guide: Send Ova & Baghead Ending",
+        href: "/mortal-shell-2/endings",
+        type: "Endings",
+        description:
+          "Understand the Unfound Path, Zmey, post-boss cleanup, the Send Ova commitment, the main ending and NG+ transition, and the separate Baghead secret ending.",
+        date: "Updated recently",
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 220,
+          spotlightFeature: true,
+          spotlightOrder: 17,
+          spotlightMeta:
+            "Walk the Unfound Path, Zmey, Marrow Keep cleanup, Send Ova, true point of no return, main ending, NG+ commitment, Baghead ending, credits, and reload behavior",
+        },
+        archive: {
+          showInCollections: true,
+          order: 18,
+        },
+      },
+    ],
+  },
+  {
     title: "Ghost Recon Wildlands",
     game: "Tom Clancy's Ghost Recon Wildlands",
     href: "/ghost-recon-wildlands",

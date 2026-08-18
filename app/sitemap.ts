@@ -733,6 +733,25 @@ const paths = [
   '/ghost-recon-wildlands/ghost-parameters',
   '/ghost-recon-wildlands/2026-update',
 
+  '/mortal-shell-2',
+  '/mortal-shell-2/progression-guide',
+  '/mortal-shell-2/ova-gloom-siphon',
+  '/mortal-shell-2/all-shells-locations',
+  '/mortal-shell-2/weapons-guide',
+  '/mortal-shell-2/sidearms-guide',
+  '/mortal-shell-2/heart-of-vatra-gragu',
+  '/mortal-shell-2/how-to-unlock-eredrim',
+  '/mortal-shell-2/how-to-unlock-genessa',
+  '/mortal-shell-2/sariel-boss-guide',
+  '/mortal-shell-2/shrine-of-trials-axe-dagger',
+  '/mortal-shell-2/kings-crypt-veterans-battle-axe',
+  '/mortal-shell-2/great-martyrs-blade',
+  '/mortal-shell-2/tar-golem',
+  '/mortal-shell-2/magdalena-boss-guide',
+  '/mortal-shell-2/difficulty-settings',
+  '/mortal-shell-2/night-mode',
+  '/mortal-shell-2/endings',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -740,6 +759,25 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/mortal-shell-2': '2026-08-18',
+  '/mortal-shell-2/progression-guide': '2026-08-18',
+  '/mortal-shell-2/ova-gloom-siphon': '2026-08-18',
+  '/mortal-shell-2/all-shells-locations': '2026-08-18',
+  '/mortal-shell-2/weapons-guide': '2026-08-18',
+  '/mortal-shell-2/sidearms-guide': '2026-08-18',
+  '/mortal-shell-2/heart-of-vatra-gragu': '2026-08-18',
+  '/mortal-shell-2/how-to-unlock-eredrim': '2026-08-18',
+  '/mortal-shell-2/how-to-unlock-genessa': '2026-08-18',
+  '/mortal-shell-2/sariel-boss-guide': '2026-08-18',
+  '/mortal-shell-2/shrine-of-trials-axe-dagger': '2026-08-18',
+  '/mortal-shell-2/kings-crypt-veterans-battle-axe': '2026-08-18',
+  '/mortal-shell-2/great-martyrs-blade': '2026-08-18',
+  '/mortal-shell-2/tar-golem': '2026-08-18',
+  '/mortal-shell-2/magdalena-boss-guide': '2026-08-18',
+  '/mortal-shell-2/difficulty-settings': '2026-08-18',
+  '/mortal-shell-2/night-mode': '2026-08-18',
+  '/mortal-shell-2/endings': '2026-08-18',
+
   '/ghost-recon-wildlands': '2026-08-17',
   '/ghost-recon-wildlands/last-rites-walkthrough': '2026-08-17',
   '/ghost-recon-wildlands/last-rites-intel-locations': '2026-08-17',
