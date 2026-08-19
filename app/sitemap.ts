@@ -752,6 +752,13 @@ const paths = [
   '/mortal-shell-2/night-mode',
   '/mortal-shell-2/endings',
 
+  '/crimson-desert',
+  '/crimson-desert/trading-guide',
+  '/crimson-desert/farming-ranching-guide',
+  '/crimson-desert/hunting-guide',
+  '/crimson-desert/abyss-artifacts-guide',
+  '/crimson-desert/side-quests-guide',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -759,6 +766,13 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/crimson-desert': '2026-08-19',
+  '/crimson-desert/trading-guide': '2026-08-19',
+  '/crimson-desert/farming-ranching-guide': '2026-08-19',
+  '/crimson-desert/hunting-guide': '2026-08-19',
+  '/crimson-desert/abyss-artifacts-guide': '2026-08-19',
+  '/crimson-desert/side-quests-guide': '2026-08-19',
+  
   '/mortal-shell-2': '2026-08-18',
   '/mortal-shell-2/progression-guide': '2026-08-18',
   '/mortal-shell-2/ova-gloom-siphon': '2026-08-18',

@@ -131,6 +131,207 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Crimson Desert",
+    game: "Crimson Desert",
+    href: "/crimson-desert",
+    slug: "crimson-desert",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Open-World Action RPG",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Trading + farming + hunting + Abyss Artifacts + quest blockers",
+  
+    description:
+      "Use the Crimson Desert guide hub to plan profitable trading routes, manage farming and ranching, solve hunting challenges, spend Abyss Artifacts intelligently, and fix missing or stuck side quests without losing track of progression.",
+  
+    coverage: [
+      "Buyer-first trading through current price checks, Packaged Trade Goods, Royal Trading Posts, multi-stop routes, wagon risk, Buy-versus-Sell checks, and knowing when a detour is no longer worth the profit",
+      "Farming and ranching through watering, fertilizer, Rubber Trees, Cacao, Howling Hill Ranch, livestock capacity, breeding pairs, feed management, overcrowding, and deciding when camp production is worth another stop",
+      "Hunting through variable wildlife spawns, White Crow's Gaze conditions, Feather of the Earth, Wild Showdown, Pine Broom, special-animal decisions, and The End of Myth legendary targets",
+      "Abyss Artifact spending through Health, Stamina, Spirit and skill priorities, Research and material gates, camp-storage checks, save-versus-spend decisions, and the distinction between Abyss Artifacts and Sealed Abyss Artifact objectives",
+      "Missing and stuck side-quest troubleshooting through Halted Research, Research Institute availability, locked Oongka, quest prerequisites, A Special Blueprint, Faction progress, and knowing when progression matters more than another map search",
+    ],
+  
+    image:
+      "/images/crimson-desert/crimson-desert-wagon-off-trade-route-risk.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 35,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Crimson Desert Guide: Trading, Farming, Hunting & Progression",
+        href: "/crimson-desert",
+        type: "Guide Hub",
+        description:
+          "Start here when progression stalls. Jump to trading, farming and ranching, hunting, Abyss Artifact decisions, or missing and stuck side-quest troubleshooting.",
+        image:
+          "/images/crimson-desert/crimson-desert-wagon-off-trade-route-risk.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Trading routes, farming and ranching, White Crow's Gaze hunting, Abyss Artifact spending, Research blockers, locked characters, and side-quest troubleshooting",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Crimson Desert Trading Guide: Routes, Prices & Wagons",
+        href: "/crimson-desert/trading-guide",
+        type: "Systems",
+        description:
+          "Plan profitable trades by finding the buyer first, comparing current prices and detours, combining useful stops, and protecting valuable Packaged Goods on the wagon.",
+        date: "Updated recently",
+        image:
+          "/images/crimson-desert/crimson-desert-84450-packaged-salt-sale.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 221,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Buyer-first routes, Packaged Cheese and Salt, Royal Trading Posts, current prices, Buy vs Sell checks, multi-stop planning, detours, and wagon risk",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Crimson Desert Farming Guide: Crops, Ranching & Livestock",
+        href: "/crimson-desert/farming-ranching-guide",
+        type: "Systems",
+        description:
+          "Manage crops and livestock with better watering, fertilizer, Rubber Tree and Cacao decisions, ranch capacity, breeding pairs, feed, and overcrowding cleanup.",
+        date: "Updated recently",
+        image:
+          "/images/crimson-desert/crimson-desert-fertilizer-water-crops.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 222,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Howling Hill Ranch, watering, fertilizer, Water Backpack, Rubber Trees, Cacao, ranch capacity, breeding pairs, livestock feed, and overcrowding",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Crimson Desert Hunting Guide: White Crow's Gaze & Animals",
+        href: "/crimson-desert/hunting-guide",
+        type: "Guide",
+        description:
+          "Handle variable animal spawns, Feather of the Earth, Wild Showdown, Pine Broom, special-animal decisions, and The End of Myth legendary hunts.",
+        date: "Updated recently",
+        image:
+          "/images/crimson-desert/crimson-desert-feather-of-the-earth-kiwi.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 223,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Random wildlife spawns, wolf checks, Feather of the Earth, Kiwi catching, Wild Showdown, Pine Broom, special animals, and The End of Myth",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Crimson Desert Abyss Artifacts Guide: What to Spend Them On",
+        href: "/crimson-desert/abyss-artifacts-guide",
+        type: "Systems",
+        description:
+          "Decide whether to spend Abyss Artifacts on Health, Stamina, Spirit or skills, identify Research and material gates, and know when saving them is better.",
+        date: "Updated recently",
+        image:
+          "/images/crimson-desert/crimson-desert-save-21-abyss-artifacts.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 224,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Health vs Stamina vs Spirit, skill upgrades, Research gates, missing materials, camp storage, save vs spend, and Sealed Abyss Artifact distinction",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Crimson Desert Side Quests Guide: Missing & Stuck Quests",
+        href: "/crimson-desert/side-quests-guide",
+        type: "Guide",
+        description:
+          "Fix missing and stuck side content by checking Halted Research, locked Oongka, Research Institute availability, prerequisites, Faction progress, and quest state.",
+        date: "Updated recently",
+        image:
+          "/images/crimson-desert/crimson-desert-halted-research-22-hours.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 225,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Halted Research, Research Institute problems, locked Oongka, The Void, missing prerequisites, House Roberts progress, A Special Blueprint, and quest-state diagnosis",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+    ],
+  },
+  {
     title: "Mortal Shell 2",
     game: "Mortal Shell II",
     href: "/mortal-shell-2",
