@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaContent from "@/data/bombanana/bombanana.mdx";
 import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
+
+import BombananaContent from "@/data/bombanana/bombanana.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/bombanana`;
@@ -16,76 +18,68 @@ const imageUrls = [
 ];
 
 const toc = [
-  { id: "bombanana-demo-guide", label: "Demo guide" },
-  { id: "roles-and-teamwork", label: "Roles and teamwork" },
-  { id: "communication-flow", label: "Communication flow" },
-  { id: "demo-level-progression", label: "Level progression" },
-  { id: "module-overview", label: "Module overview" },
-  { id: "wires-guide", label: "Wires guide" },
   {
-    id: "dpad-directional-pad-guide",
-    label: "D-pad guide",
+    id: "manual-quick-reference",
+    label: "Manual quick reference",
   },
   {
-    id: "numpad-math-module",
-    label: "Numpad math",
+    id: "how-many-levels",
+    label: "How many levels?",
   },
   {
-    id: "numpad-odd-even-greater-less-priority",
-    label: "Numpad priority",
+    id: "how-to-play",
+    label: "How to play",
   },
   {
-    id: "switch-panel-guide",
-    label: "Switch panel",
+    id: "wires-manual",
+    label: "Wires manual",
   },
   {
-    id: "pre-game-role-plan",
-    label: "Pre-game role plan",
-  },
-  { id: "common-mistakes", label: "Common mistakes" },
-  {
-    id: "what-is-limited-in-the-demo",
-    label: "Demo limits",
+    id: "direction-manual",
+    label: "Direction / D-pad",
   },
   {
-    id: "should-you-wishlist-bombanana",
-    label: "Should you wishlist it?",
+    id: "calculation-manual",
+    label: "Calculation / numpad",
   },
-  { id: "what-to-read-next", label: "What to read next" },
-  { id: "faq", label: "FAQ" },
+  {
+    id: "switch-manual",
+    label: "Switch module",
+  },
+  {
+    id: "levels-1-7",
+    label: "Levels 1–7",
+  },
+  {
+    id: "best-module-order",
+    label: "Best module order",
+  },
+  {
+    id: "common-mistakes",
+    label: "Common mistakes",
+  },
+  {
+    id: "faq",
+    label: "FAQ",
+  },
 ];
 
-const relatedLinks = [
-  {
-    href: "/steam-next-fest",
-    label: "Compare More Steam Next Fest Demos",
-  },
-  {
-    href: "/dust-front-rts",
-    label: "Try a Strategy-Focused Demo After BOMBANANA",
-  },
-  {
-    href: "/iron-nest",
-    label: "Try a Slower Systems Demo After BOMBANANA",
-  },
-  {
-    href: "/casualties-unknown",
-    label: "Casualties Unknown Demo Guide",
-  },
-];
+const relatedLinks: {
+  href: string;
+  label: string;
+}[] = [];
 
 export const metadata: Metadata = {
-  title: "BOMBANANA Demo Guide: Roles, Modules & Callouts",
+  title: "BOMBANANA Manual & Guide: Modules, Levels & Solutions",
   description:
-    "Learn BOMBANANA demo roles, wire callouts, D-pad, numpad math, switch panels, seven levels, odd/even priority and co-op mistakes.",
+    "BOMBANANA manual and guide for wires, D-pad, numpad math, switch modules, all 7 current levels, role communication, and puzzle solutions.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
-    title:
-      "BOMBANANA Demo Guide: Roles, Modules, Callouts, Numpad Math and Switch Panels",
+    title: "BOMBANANA Manual & Guide: Modules, Levels & Solutions",
     description:
-      "Learn how to play the BOMBANANA demo with Blind, Deaf and Mute roles, clean callout rules, wires, D-pad, numpad math, odd/even and greater-than/less-than priority, switch panels, demo level progression, common mistakes and wishlist advice.",
+      "Use this BOMBANANA manual for wires, Direction and Braille, numpad math, switch rules, all 7 current levels, communication, and puzzle solutions.",
     url: pageUrl,
     siteName: "Whisper of the House",
     type: "article",
@@ -94,15 +88,15 @@ export const metadata: Metadata = {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "BOMBANANA tutorial book explaining bomb modules, roles, time, mistakes and braille.",
+        alt: "BOMBANANA manual showing bomb modules, roles, Braille, and puzzle instructions.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BOMBANANA Demo Guide: Roles, Modules & Callouts",
+    title: "BOMBANANA Manual & Guide: Modules, Levels & Solutions",
     description:
-      "Learn BOMBANANA roles, wire callouts, D-pad, numpad math, switch panels, seven levels and co-op mistakes.",
+      "BOMBANANA manual for wires, D-pad, numpad math, switches, all 7 current levels, role communication, and puzzle solutions.",
     images: [imageUrls[0]],
   },
 };
@@ -123,13 +117,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Steam Next Fest",
-          item: `${siteUrl}/steam-next-fest`,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "BOMBANANA Demo Guide",
+          name: "BOMBANANA Manual & Guide",
           item: pageUrl,
         },
       ],
@@ -141,14 +129,13 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "BOMBANANA Demo Guide: Roles, Wire Callouts, D-pad, Numpad Math, Switch Panels and Level Progression",
+      headline: "BOMBANANA Manual & Guide: Modules, Levels & Solutions",
       description:
-        "A player-focused BOMBANANA demo guide covering Blind, Deaf and Mute roles, role-limited communication, clean module callouts, demo level progression, wire modules, D-pad and directional pad modules, numpad math, odd/even logic, greater-than and less-than ambiguity, jumbled keypads, switch panels, pre-game role planning, common co-op mistakes, demo limits and Steam Next Fest wishlist advice.",
+        "A player-focused BOMBANANA manual and guide covering wires, Direction and Braille, calculation and numpad logic, odd and even answers, switch-panel rules, all seven current levels, role communication, module order, and common puzzle mistakes.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-06-19",
-      dateModified: "2026-06-19",
+      dateModified: "2026-08-20",
       articleSection: "Guides",
       about: [
         {
@@ -157,59 +144,55 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA demo guide",
+          name: "BOMBANANA manual",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA roles",
+          name: "BOMBANANA guide",
         },
         {
           "@type": "Thing",
-          name: "Blind Deaf Mute co-op",
+          name: "BOMBANANA levels",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA callouts",
+          name: "BOMBANANA wires",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA wire module",
+          name: "BOMBANANA Direction module",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA D-pad module",
+          name: "BOMBANANA D-pad",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA numpad module",
+          name: "BOMBANANA Braille",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA math module",
+          name: "BOMBANANA calculation module",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA odd even",
+          name: "BOMBANANA numpad",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA greater than less than",
+          name: "BOMBANANA odd even answers",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA switch panel",
+          name: "BOMBANANA switch module",
         },
         {
           "@type": "Thing",
-          name: "BOMBANANA seven levels",
+          name: "BOMBANANA Level 5",
         },
         {
           "@type": "Thing",
-          name: "bomb defusal co-op game",
-        },
-        {
-          "@type": "Thing",
-          name: "Steam Next Fest demo",
+          name: "BOMBANANA Level 7",
         },
       ],
       isPartOf: {
@@ -234,147 +217,57 @@ const jsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "What is BOMBANANA?",
+          name: "How many levels are in BOMBANANA?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "BOMBANANA is a three-player co-op bomb-defusal game where Blind, Deaf, and Mute monkeys must solve bomb modules with limited communication.",
+              "The current playable version of BOMBANANA has 7 levels, with Level 7 as the current maximum.",
           },
         },
         {
           "@type": "Question",
-          name: "How many players do you need for BOMBANANA?",
+          name: "Is Level 5 the final BOMBANANA level?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "The BOMBANANA demo structure is built around three roles: Blind, Deaf, and Mute. The game works best when each player accepts their communication restriction instead of trying to bypass it.",
+              "No. Level 5 introduces the switch panel as a major new mechanic, but the current progression continues through Levels 6 and 7.",
           },
         },
         {
           "@type": "Question",
-          name: "How many levels are in the BOMBANANA demo?",
+          name: "What should I call out first for every BOMBANANA module?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "The BOMBANANA demo has seven difficulty tiers. Early levels focus on wires and basic role communication, while the middle levels start adding D-pad, numpad, and math logic. Around Level 4 to 5, the numpad becomes more important because results can involve odd/even and greater-than/less-than style decisions instead of just typing the raw answer.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Should we use external voice chat in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "No. The tutorial specifically tells players not to use external voice chat. The point is to solve modules through the game's role-limited communication.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What should we communicate first in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "Always start with the module name and module position. Then give the details the manual holder needs, such as wire count, LED color, center number, math expression, or switch color order.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "How do wires work in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "For wires, communicate the number of wires, the wire colors from left to right, and the LED color. Do not cut until the answer is repeated and confirmed.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "How does the D-pad module work in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "For the D-pad, communicate the LED color and center value, then use the shared left/right perspective to press the correct direction. If the module changes after a mistake, call the new state again.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "How does the numpad module work in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "For numpad modules, solve the visible math expression, identify odd or even if needed, read the LED state, handle comparison clues if they apply, then press the target number given by the manual logic. The keypad may be jumbled, so press the number itself, not a normal keypad position.",
+              "Start with the module name and position. Then give only the state that module needs: wire count and LED for Wires, LED and Braille for Direction, equation result plus LED and odd or even for Numpad, or the full light order and four numbers for Switches.",
           },
         },
         {
           "@type": "Question",
           name:
-            "If a BOMBANANA numpad result is both odd and greater than 5, which rule wins?",
+            "Why does the BOMBANANA numpad need another number after I solve the equation?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "Do not let the bomb handler guess. The manual holder should use the LED color and the manual's branch order to choose the final target number. The handler should report the full state, such as result 67, odd, greater than 5, yellow LED, then wait for the final key.",
+              "The calculation module is two-stage. Enter the raw equation result first, then use the LED color and odd or even classification to determine the final single-digit key.",
           },
         },
         {
           "@type": "Question",
-          name: "How does the switch panel work in BOMBANANA?",
+          name: "Why do BOMBANANA switch answers change between runs?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "For switch panels, communicate the top light color order, the full digit string, and each switch state. Press enter only after all switch positions are confirmed.",
+              "The switch panel does not use one universal color-to-position rule. The light order selects the rule family, while the four numbers determine which conditions apply in that setup.",
           },
         },
         {
           "@type": "Question",
-          name: "What does the Blind role do in BOMBANANA?",
+          name: "What should I do if a BOMBANANA switch answer is wrong?",
           acceptedAnswer: {
             "@type": "Answer",
             text:
-              "The Blind player handles the bomb, locates modules by touch, and may read or interpret tactile information such as dots or braille-style values.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What does the Deaf role do in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "The Deaf player can participate in communication but cannot rely on hearing the team, so visual confirmation and clear gestures matter.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What does the Mute role do in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "The Mute player holds the defusal instructions and must use gestures instead of voice, so the team should agree on basic signs before starting.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Why do we keep failing the first BOMBANANA modules?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "Most early failures come from incomplete callouts, not hard puzzles. Say the module name, wire count, LED color, number, or stage before asking for an answer.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What should we do after a wrong input in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "Re-read the module state. The LED, number, stage, or required answer may have changed after the mistake.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Is BOMBANANA good for Steam Next Fest?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "Yes, if your group likes short, chaotic, communication-heavy demos. It is especially strong as a party-game demo because every failure teaches a better team rule.",
+              "Do not immediately press Enter again. Re-read the complete light order and all four numbers, identify which physical switch needs to change, correct it, and then confirm the full panel before pressing Enter.",
           },
         },
       ],
@@ -386,19 +279,21 @@ export default function Page() {
   return (
     <>
       <Header />
+
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
+
         <GuideArticlePage
-          title="Defuse BOMBANANA Without Losing the Callout"
-          description="Use this BOMBANANA demo guide to understand Blind, Deaf and Mute roles, wire callouts, D-pad inputs, numpad math, switch panels, seven demo tiers, and the mistakes that make teams fail."
+          title="BOMBANANA Manual & Guide"
+          description="Use this BOMBANANA manual to solve wires, Direction and Braille, numpad math, switch modules, all seven current levels, and the communication mistakes that cost runs."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
-          breadcrumbBaseHref="/steam-next-fest"
-          breadcrumbBaseLabel="Steam Next Fest"
-          updatedAt="June 19, 2026"
+          updatedAt="August 20, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
@@ -406,11 +301,12 @@ export default function Page() {
         </GuideArticlePage>
 
         <GameDiscoveryCta
-          gameTitle="Bombanana"
-          heading="Looking for another game after Bombanana?"
+          gameTitle="BOMBANANA"
+          heading="Looking for another game after BOMBANANA?"
           description="Use the quick recommender to find something that fits your current mood, platform, and play mode, or build a broader Gaming DNA profile from nine games you already love."
         />
       </main>
+
       <Footer />
     </>
   );
