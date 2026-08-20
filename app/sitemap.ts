@@ -759,6 +759,18 @@ const paths = [
   '/crimson-desert/abyss-artifacts-guide',
   '/crimson-desert/side-quests-guide',
 
+  '/project-pitt',
+'/project-pitt/progression-guide',
+'/project-pitt/automation-layouts',
+'/project-pitt/duck-automation',
+'/project-pitt/cash-register-automation',
+'/project-pitt/pinata-automation',
+'/project-pitt/anomaly-guide',
+'/project-pitt/200kg-platform-what-next',
+'/project-pitt/secret-ending',
+'/project-pitt/achievements',
+'/project-pitt/troubleshooting',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -766,6 +778,18 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/project-pitt': '2026-08-20',
+  '/project-pitt/progression-guide': '2026-08-20',
+  '/project-pitt/automation-layouts': '2026-08-20',
+  '/project-pitt/duck-automation': '2026-08-20',
+  '/project-pitt/cash-register-automation': '2026-08-20',
+  '/project-pitt/pinata-automation': '2026-08-20',
+  '/project-pitt/anomaly-guide': '2026-08-20',
+  '/project-pitt/200kg-platform-what-next': '2026-08-20',
+  '/project-pitt/secret-ending': '2026-08-20',
+  '/project-pitt/achievements': '2026-08-20',
+  '/project-pitt/troubleshooting': '2026-08-20',
+
   '/crimson-desert': '2026-08-19',
   '/crimson-desert/trading-guide': '2026-08-19',
   '/crimson-desert/farming-ranching-guide': '2026-08-19',

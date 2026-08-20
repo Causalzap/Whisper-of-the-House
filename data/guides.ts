@@ -131,6 +131,347 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Project P.I.T.T.",
+    game: "Project P.I.T.T.",
+    href: "/project-pitt",
+    slug: "project-pitt",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Incremental Factory Automation",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Progression + automation + 23 achievements + Secret Ending",
+  
+    description:
+      "Use the Project P.I.T.T. guide hub to follow progression from Ducks through Cash Registers, Piñatas and Anomalies, fix automation layouts, solve the 200 kg and 0% blockers, complete all 23 achievements, troubleshoot stuck progression, and reach the Secret Ending.",
+  
+    coverage: [
+      "Main progression from early Ducks and Cash Registers through Phase 3 Piñatas, Phase 4 Anomalies, the camera and fuse branch, the 200 kg platform, the 0% gate, and hidden-route handoff",
+      "Automation decisions through straight Duck lanes, Cash Register landings, Cushion and Slick Panels, staged Fans, Sticky Tools, containment, catches, jams, overshoot, undershoot, and knowing when to stop upgrading",
+      "Product-specific automation for Ducks, Cash Registers and Piñatas, including the Duck 5-second to 2-second production jump, Cash Register soft landings and handoffs, controlled Piñata breaks, Candy containment, and late combo support",
+      "Anomaly production through the one Duck plus one Cash Register plus one Piñata recipe, ingredient buffers, Intern Substitute, output physics, supply balancing, Anomaly crates, and hidden-route preparation",
+      "Hidden progression through the 200 kg platform, the 0% device, Anomaly gate requirement, clone room, mining layers, UV clues, Access Card, elevator code 2640, and the Secret Ending",
+      "All 23 achievements with launch-window unlock-rate context, combo and loose-product goals, all 10 Gambling Crates, hidden-route achievement groups, late factory grinds, and a practical 100% cleanup order",
+      "Troubleshooting for scripted Phase 3 destruction, stuck 0% progression, inactive Anomaly workbench states, achievement unlock problems, Secret Ending state issues, and recording-related hitching",
+    ],
+  
+    image: "/images/project-pitt/project-pitt-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 36,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Project P.I.T.T. Guide: Progression, Automation & Endings",
+        href: "/project-pitt",
+        type: "Guide Hub",
+        description:
+          "Start here to identify your current product, blocker, or late-game objective, then jump to the one Project P.I.T.T. guide that owns the full solution.",
+        image: "/images/project-pitt/project-pitt-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Progression, automation layouts, Ducks, Cash Registers, Piñatas, Anomalies, 200 kg and 0% blockers, achievements, troubleshooting, and Secret Ending",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Progression Guide: What to Do Next",
+        href: "/project-pitt/progression-guide",
+        type: "Walkthrough",
+        description:
+          "Follow the run from Ducks to Cash Registers, Phase 3 Piñatas, Phase 4 Anomalies, the camera and fuse branch, the 200 kg blocker, and the hidden route without overbuilding each stage.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-phase-3-pinata-unlocked.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 226,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Ducks to Cash Registers, Phase 3, Piñatas, Phase 4, Anomalies, cameras, three fuses, 200 kg branch, and hidden-route handoff",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Automation Layout Helper: Fix Jams & Airflow",
+        href: "/project-pitt/automation-layouts",
+        type: "Systems",
+        description:
+          "Fix jams, overshoot, undershoot, weak airflow, bad catches, containment problems and moving tools by diagnosing the first visible automation failure.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-duck-straight-catcher-layout.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 227,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Jams, overshoot, undershoot, Fans, containment, catch zones, Cushion, Slick, Sticky Tools, Duck routes, and early Cash Register layouts",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Duck Automation Guide: 12 to 30 Ducks/Min",
+        href: "/project-pitt/duck-automation",
+        type: "Systems",
+        description:
+          "Build a reliable Duck lane, scale the automatic source from 12 to 30 Ducks per minute, add a roof and Sticky Tools only when needed, and know when to stop investing.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-duck-auto-machine-2-second-rate.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 228,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Automated Duck Workbench, straight lane, staged Fans, roof timing, Sticky Tools, 5 seconds to 2 seconds, 12 to 30 Ducks/min, Bumpers, and Magnet recovery",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Cash Register Automation Guide",
+        href: "/project-pitt/cash-register-automation",
+        type: "Systems",
+        description:
+          "Build a Cash Register route with soft landings, Cushion and Slick Panels, Piston handoffs, stronger Fans, manual-plus-auto merging, and smart Phase 3 stop timing.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-cash-register-cushion-slick-transfer.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 229,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Cash Register geometry, Cushion landing, Slick transport, Piston handoff, manual and automatic merge, Industrial Fan bottlenecks, upgrades, and Phase 3 warning",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Piñata Automation Guide: Candy & $10M Setup",
+        href: "/project-pitt/pinata-automation",
+        type: "Systems",
+        description:
+          "Keep Piñatas intact during soft transport, create one controlled break point near the Pit, contain Candy, and buy the $10 million automatic source only after the lane works.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-pinata-break-wall-candy.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 230,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Phase 3 Piñatas, Cushion transport, intentional break point, Candy containment, $10M automation, second source, Duck combo support, and production timing",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Anomaly Guide: Recipe, Workbench & Crates",
+        href: "/project-pitt/anomaly-guide",
+        type: "Systems",
+        description:
+          "Make Anomalies with one Duck, one Cash Register and one Piñata, balance ingredient buffers, use Intern Substitute, control output physics, and switch to crates for bulk farming.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-anomaly-workbench-recipe.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 231,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "1 Duck + 1 Cash Register + 1 Piñata recipe, ingredient buffers, Intern Substitute, Anomaly physics, supply balancing, crates, and hidden-route preparation",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. 200kg Platform & 0% Gate Solution",
+        href: "/project-pitt/200kg-platform-what-next",
+        type: "Puzzle Help",
+        description:
+          "Solve the 200 kg platform, understand why the next device stays at 0%, know when to leave if Anomalies are locked, and open the hidden gate when you return.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-200kg-platform-206-open.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 232,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "200 kg platform, stable weight, working 206 kg example, bulkhead opening, 0% device, Anomaly timing, 100% gate, and hidden-route handoff",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Secret Ending Guide: Code 2640 & UV Clues",
+        href: "/project-pitt/secret-ending",
+        type: "Endings",
+        description:
+          "Follow the post-gate route through the clone room, four mining layers, UV clues, Access Card, elevator code 2640, and the Project P.I.T.T. Secret Ending.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-secret-ending-elevator-override.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 233,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Clone room, 200-clone objective, four mining layers, UV Lamp, 0-4-6-2 clues, Access Card, elevator code 2640, and Secret Ending",
+        },
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Achievements Guide: All 23 Requirements",
+        href: "/project-pitt/achievements",
+        type: "Achievements",
+        description:
+          "Track all 23 Project P.I.T.T. achievements, their requirements and launch-window unlock rates, then finish hidden-route, collectible, combo and factory-grind cleanup efficiently.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-achievements-remaining-eight.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 234,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "All 23 achievements, x100 x200 x300 combos, 500 and 1,000 loose products, 10 Gambling Crates, hidden-route badges, $1T, 400/min, and 100% cleanup",
+        },
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title:
+          "Project P.I.T.T. Troubleshooting: Bugs & Stuck Progression",
+        href: "/project-pitt/troubleshooting",
+        type: "Guide",
+        description:
+          "Diagnose scripted Phase 3 destruction, stuck progression, the 0% device, Anomaly workbench problems, missing achievements, Secret Ending state issues, and recording hitching.",
+        date: "Updated recently",
+        image:
+          "/images/project-pitt/project-pitt-phase-3-factory-break.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 235,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "Phase 3 destruction, stuck 0%, Anomaly workbench state, missing achievements, Secret Ending unlock state, real-problem checks, reload order, and recording hitching",
+        },
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+    ],
+  },
+  {
     title: "Crimson Desert",
     game: "Crimson Desert",
     href: "/crimson-desert",
@@ -155,7 +496,7 @@ export const guideClusters: GuideCluster[] = [
     ],
   
     image:
-      "/images/crimson-desert/crimson-desert-wagon-off-trade-route-risk.webp",
+      "/images/crimson-desert/crimson-desert-hub.webp",
     imageFit: "cover",
     imagePosition: "center",
     imagePadding: false,
