@@ -131,6 +131,236 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "How to Fish",
+    game: "How to Fish",
+    href: "/how-to-fish",
+    slug: "how-to-fish",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Fishing Adventure & Boss Progression",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "Island progression + bosses + 28 achievements",
+  
+    description:
+      "Use the How to Fish guide hub to follow the full island progression route, solve Leech and Tourist quest blockers, defeat every major boss, manage weapon and boat upgrades, and complete all 28 achievements.",
+  
+    coverage: [
+      "Main progression from the opening Lighthouse Keeper and Spider Crab through Island 2, Island 3, Island 4, the military and volcano sequence, the Mutated Bowhead Whale, and the final route toward the mainland",
+      "Island 2 progression through the 0/3 Leech request, ground-pickup Leeches, NPC bait conversion, Giant Piranha preparation, Giant Piranha Skeleton hand-in, Island 3 Flash Drive, and Radar route",
+      "Island 3 progression through the Tourist's Endangered Species request, valid catch checks, Carrot reward, Pufferfish preparation, tree-circling strategy, Pufferfish Tail hand-in, and Island 4 coordinates",
+      "Boss progression through Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, and Mutated Bowhead Whale, including trigger checks, ranged-combat decisions, cover, positioning, and Dynamite",
+      "Upgrade decisions through the 150 Shotgun, 230 Big Motor, 650 SMG, 600 Compensator, weapon-control problems, food preparation, and knowing when combat matters more than travel speed",
+      "All 28 achievements with story cleanup, Killscore, 360 no scope, cooking, casino and money goals, boat and gear upgrades, Easy, Collector, Fishipedia, Bean, Handyman, and 100% planning",
+    ],
+  
+    image:
+      "/images/how-to-fish/how-to-fish-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 37,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "How to Fish Walkthrough: Island Progression & Bosses",
+        href: "/how-to-fish",
+        type: "Guide Hub",
+        description:
+          "Follow the main route across every island, identify the NPC request or boss blocking progression, use Flash Drives and Radar correctly, and reach the final story sequence.",
+        image:
+          "/images/how-to-fish/how-to-fish-terrorizing-bird-tuna-quest.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          spotlightMeta:
+            "Island progression, Spider Crab, Leeches, Giant Piranha, Tourist, Carrot, Pufferfish, Terrorizing Bird, Whale experiment, Radar, and final route",
+        },
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "How to Fish Boss Guide: All Bosses & Best Strategies",
+        href: "/how-to-fish/boss-guide",
+        type: "Bosses",
+        description:
+          "Beat Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, and Mutated Bowhead Whale with trigger checks, preparation, positioning, ranged-damage decisions, and Dynamite.",
+        date: "Updated recently",
+        image:
+          "/images/how-to-fish/how-to-fish-mutated-bowhead-whale-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 236,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, Mutated Bowhead Whale, boss triggers, Dynamite, ranged damage, cover, and preparation",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "How to Fish Leech Bait: Find 3 Leeches on Island 2",
+        href: "/how-to-fish/leech-bait",
+        type: "Guide",
+        description:
+          "Find all three Leeches as ground pickups on Island 2, complete the 0/3 request, return them to the NPC, prepare the boss bait, and trigger the Giant Piranha.",
+        date: "Updated recently",
+        image:
+          "/images/how-to-fish/how-to-fish-leech-ground-location.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 237,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Island 2, 0/3 Leeches, ground pickups, NPC hand-in, Leech bait conversion, boss trigger, and Giant Piranha handoff",
+        },
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "How to Fish Giant Piranha: Boss, Skeleton & Island 3",
+        href: "/how-to-fish/giant-piranha",
+        type: "Bosses",
+        description:
+          "Prepare for the Giant Piranha, choose between the 150 Shotgun and 230 Big Motor, keep pressure on the boss, collect its Skeleton, and unlock Island 3.",
+        date: "Updated recently",
+        image:
+          "/images/how-to-fish/how-to-fish-giant-piranha-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 238,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "150 Shotgun, 230 Big Motor, Giant Piranha fight, food, ranged damage, Giant Piranha Skeleton, Island 3 Flash Drive, and Radar",
+        },
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "How to Fish Endangered Fish: Tourist & Carrot Guide",
+        href: "/how-to-fish/endangered-fish",
+        type: "Guide",
+        description:
+          "Complete the Tourist's Island 3 request by finding a creature with the Endangered Species status, keep the catch intact, and receive the Carrot for Pufferfish.",
+        date: "Updated recently",
+        image:
+          "/images/how-to-fish/how-to-fish-endangered-species-tag.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 239,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Island 3 Tourist, Endangered Species status, Needlefish, valid catch checks, no Endangered Bait, Carrot reward, and Pufferfish prerequisite",
+        },
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "How to Fish Pufferfish: Carrot, Boss Fight & Tail",
+        href: "/how-to-fish/pufferfish",
+        type: "Bosses",
+        description:
+          "Prepare before using the Carrot, beat the Pufferfish with the tree-circling route, fix SMG recoil problems, collect the Pufferfish Tail, and unlock Island 4.",
+        date: "Updated recently",
+        image:
+          "/images/how-to-fish/how-to-fish-pufferfish-dodge-route.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 240,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Carrot boss trigger, 650 SMG, 600 Compensator, tree-circling route, later Pufferfish phase, Pufferfish Tail, Tourist hand-in, and Island 4",
+        },
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "How to Fish Achievements: All 28 Unlock Requirements",
+        href: "/how-to-fish/achievements",
+        type: "Achievements",
+        description:
+          "Track all 28 achievements and clean up Killscore, cooking, casino, boat, gear, boss, collection, Fishipedia, Bean, Handyman, and other 100% challenges.",
+        date: "Updated recently",
+        image:
+          "/images/how-to-fish/how-to-fish-achievements-360-no-scope.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 241,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "All 28 achievements, Killscore, 360 no scope, Shark and grill, roulette, Legendary skins, Rich! Millionaire, Easy, Collector, Fishipedia, Bean, and Handyman",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Project P.I.T.T.",
     game: "Project P.I.T.T.",
     href: "/project-pitt",

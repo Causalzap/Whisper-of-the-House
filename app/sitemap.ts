@@ -771,6 +771,14 @@ const paths = [
 '/project-pitt/achievements',
 '/project-pitt/troubleshooting',
 
+'/how-to-fish',
+'/how-to-fish/leech-bait',
+'/how-to-fish/giant-piranha',
+'/how-to-fish/endangered-fish',
+'/how-to-fish/pufferfish',
+'/how-to-fish/boss-guide',
+'/how-to-fish/achievements',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -778,6 +786,16 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+
+  '/how-to-fish': '2026-08-21',
+  '/how-to-fish/leech-bait': '2026-08-21',
+  '/how-to-fish/giant-piranha': '2026-08-21',
+  '/how-to-fish/endangered-fish': '2026-08-21',
+  '/how-to-fish/pufferfish': '2026-08-21',
+  '/how-to-fish/boss-guide': '2026-08-21',
+  '/how-to-fish/achievements': '2026-08-21',
+
+  
   '/bombanana': '2026-08-20',
 
   '/project-pitt': '2026-08-20',
