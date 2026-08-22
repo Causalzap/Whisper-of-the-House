@@ -54,7 +54,7 @@ export default function RootLayout({
           <Script
             id="mediavine-script"
             src="//scripts.mediavine.com/tags/ef7c02f6-3b8c-44f1-a81a-4ebf11f77ea5.js"
-            strategy="afterInteractive"
+            strategy="beforeInteractive"
             data-noptimize="1"
             data-cfasync="false"
           />
