@@ -10,77 +10,93 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/heart-of-vatra-gragu`;
 
 const metadataTitle =
-  "Mortal Shell 2 Heart of Vatra: Gragu & Berserker Stone";
+  "Mortal Shell 2 Heart of Vatra & Gragu Unlock Guide";
 
 const metadataDescription =
-  "Unlock Gragu with the Heart of Vatra, solve the three-candle Temple puzzle, get Berserker's Stone first, and escape after the temple routes close.";
+  "Find the Heart of Vatra, reach the Temple of Vatra, get Berserker's Stone first, escape after taking the Heart, and unlock Gragu.";
 
 const imageUrls = [
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-mushroom-village-beacon.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-heart-of-vatra-altar.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-gragu-one-legged-wolf-tavern.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-jump-gate.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-three-candles.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-berserker-stone-vatra-chest.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-heart-of-vatra-altar.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-sealed-after-heart.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-mushroom-village-beacon.webp`,
 ];
 
 const toc = [
   {
-    id: "gragu-unlock-order",
-    label: "Gragu unlock order",
+    id: "heart-of-vatra-location",
+    label: "Heart of Vatra location",
   },
   {
-    id: "why-gragu-wont-join",
-    label: "Why Gragu won't join",
+    id: "how-to-unlock-gragu",
+    label: "How to unlock Gragu",
+  },
+  {
+    id: "find-gragu",
+    label: "Where to find Gragu",
   },
   {
     id: "route-from-mushroom-village",
     label: "Route from Mushroom Village",
   },
   {
-    id: "find-gragu",
-    label: "Find Gragu",
-  },
-  {
-    id: "reach-temple-of-vatra",
+    id: "temple-of-vatra",
     label: "Reach Temple of Vatra",
   },
   {
-    id: "do-not-take-heart-yet",
-    label: "Do not take the Heart yet",
+    id: "before-taking-heart",
+    label: "Before taking the Heart",
   },
   {
-    id: "berserkers-stone-warning",
-    label: "Get Berserker's Stone first",
+    id: "three-offerings",
+    label: "Three offerings",
   },
   {
-    id: "three-candles",
-    label: "Light the three candles",
+    id: "berserkers-stone",
+    label: "Get Berserker's Stone",
   },
   {
     id: "take-heart-of-vatra",
-    label: "Take the Heart of Vatra",
+    label: "Take Heart of Vatra",
+  },
+  {
+    id: "temple-seals",
+    label: "Why the temple seals",
   },
   {
     id: "escape-temple",
-    label: "Escape the temple",
+    label: "Escape Temple of Vatra",
   },
   {
-    id: "return-heart-to-gragu",
-    label: "Return the Heart to Gragu",
+    id: "what-to-do-with-heart",
+    label: "What to do with the Heart",
   },
   {
-    id: "gragu-after-unlock",
-    label: "After unlocking Gragu",
+    id: "give-heart-to-gragu",
+    label: "Give the Heart to Gragu",
   },
   {
-    id: "if-berserkers-stone-was-missed",
-    label: "Missed Berserker's Stone?",
+    id: "gragu-abilities",
+    label: "Gragu abilities",
+  },
+  {
+    id: "gragu-wont-unlock",
+    label: "Gragu not unlocking",
+  },
+  {
+    id: "heart-before-berserkers-stone",
+    label: "Heart before Berserker's Stone?",
+  },
+  {
+    id: "is-heart-missable",
+    label: "Is Heart of Vatra missable?",
   },
   {
     id: "heart-of-vatra-route",
-    label: "Full Heart of Vatra route",
+    label: "Route recap",
   },
 ];
 
@@ -98,8 +114,12 @@ const relatedLinks = [
     label: "All Shell Locations",
   },
   {
+    href: "/mortal-shell-2/weapons-guide",
+    label: "Best Weapons & Tier List",
+  },
+  {
     href: "/mortal-shell-2/ova-gloom-siphon",
-    label: "Ova & Gloom Siphon Guide",
+    label: "Ova, Gloom Siphon & Mether's Breath",
   },
 ];
 
@@ -112,26 +132,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title:
-      "Mortal Shell 2 Heart of Vatra: Gragu & Berserker's Stone Route",
+    title: metadataTitle,
     description:
-      "Find Gragu, reach the Temple of Vatra, light all three candles, collect Berserker's Stone before the Heart, and escape after the temple changes.",
+      "Find the Heart of Vatra, solve the three-offering chest, collect Berserker's Stone, escape the Temple of Vatra, and unlock Gragu.",
     siteName: "Whisper of the House",
-    modifiedTime: "2026-08-18",
+    publishedTime: "2026-08-18",
+    modifiedTime: "2026-08-22",
     images: [
       {
-        url: imageUrls[4],
-        alt: "Berserker's Stone chest inside the Temple of Vatra in Mortal Shell 2",
+        url: imageUrls[0],
+        width: 1600,
+        height: 900,
+        alt: "Heart of Vatra on the altar inside the Temple of Vatra in Mortal Shell 2",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Mortal Shell 2 Heart of Vatra: Gragu & Berserker's Stone",
+    title: metadataTitle,
     description:
-      "The safe Temple of Vatra order: light three candles, collect Berserker's Stone, then take the Heart and return it to Gragu.",
-    images: [imageUrls[4]],
+      "Heart of Vatra location, Temple of Vatra route, Berserker's Stone warning, and the full Gragu unlock sequence.",
+    images: [imageUrls[0]],
   },
 };
 
@@ -170,13 +191,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Heart of Vatra Guide: Gragu, Berserker's Stone and Temple of Vatra",
+        "Mortal Shell 2 Heart of Vatra & Gragu Unlock Guide",
       description:
-        "A practical Mortal Shell 2 Heart of Vatra guide covering how to find Gragu at the One-Legged Wolf, reach the Temple of Vatra from Mushroom Village, light all three candles, collect Berserker's Stone before taking the Heart, escape after the temple routes close, and return the Heart to unlock Gragu.",
+        "A complete Mortal Shell 2 Heart of Vatra guide covering the Temple of Vatra route, Gragu the Insatiable, the three offerings, Berserker's Stone, what changes after taking the Heart, how to escape the temple, and how to unlock Gragu.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-08-18",
+      datePublished: "2026-08-18",
+      dateModified: "2026-08-22",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -190,7 +212,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Gragu",
+          name: "Heart of Vatra location",
         },
         {
           "@type": "Thing",
@@ -198,11 +220,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Berserker's Stone",
+          name: "Gragu the Insatiable",
+        },
+        {
+          "@type": "Thing",
+          name: "Gragu unlock",
         },
         {
           "@type": "Thing",
           name: "One-Legged Wolf",
+        },
+        {
+          "@type": "Thing",
+          name: "Berserker's Stone",
+        },
+        {
+          "@type": "Thing",
+          name: "Temple of Vatra three offerings",
+        },
+        {
+          "@type": "Thing",
+          name: "Mushroom Village",
         },
       ],
       isPartOf: {
@@ -236,13 +274,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Get the Heart of Vatra and Unlock Gragu"
-          description="I find Gragu at the One-Legged Wolf, clear the three-candle reward before touching the Heart, then escape the changed temple and bring the Heart back."
+          title="Mortal Shell 2 Heart of Vatra & Gragu Unlock Guide"
+          description="I find Gragu at the One-Legged Wolf, reach the Temple of Vatra, collect Berserker's Stone before taking the Heart, then escape and bring it back to unlock his Shell."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 18, 2026"
+          updatedAt="August 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

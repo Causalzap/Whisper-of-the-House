@@ -10,22 +10,30 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/how-to-unlock-genessa`;
 
 const metadataTitle =
-  "Mortal Shell 2 Genessa Guide: How to Unlock Her";
+  "Mortal Shell 2 Genessa Unlock Guide: Sester's Censer Route";
 
 const metadataDescription =
-  "Follow the Genessa unlock route through Outskirts of Mammon and Revenant Graves, get Sester's Censer, beat the encounter, and return to Marrow Keep.";
+  "Unlock Genessa in Mortal Shell 2 by reaching Revenant Graves, getting Sester's Censer, beating its encounter, and returning to Marrow Keep.";
 
 const imageUrls = [
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-genessa-revenant-graves-sensor.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-outskirts-of-mammon-teleporter.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-genessa-bridge-gap.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-genessa-lower-teleport-gate.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-genessa-revenant-graves-wall.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-genessa-revenant-graves-sensor.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-genessa-sensor-boss.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-genessa-sensor-dialogue.webp`,
 ];
 
 const toc = [
+  {
+    id: "where-is-genessa",
+    label: "Where is Genessa?",
+  },
+  {
+    id: "how-to-unlock-genessa",
+    label: "How to unlock Genessa",
+  },
   {
     id: "why-genessa-doesnt-unlock",
     label: "Why Genessa does not unlock",
@@ -35,11 +43,11 @@ const toc = [
     label: "Open Outskirts of Mammon",
   },
   {
-    id: "cross-battlefield",
-    label: "Cross the battlefield",
+    id: "outskirts-of-mammon-route",
+    label: "Cross the Outskirts",
   },
   {
-    id: "bridge-gap",
+    id: "genessa-bridge-gap",
     label: "Drop beside the bridge",
   },
   {
@@ -51,28 +59,36 @@ const toc = [
     label: "Reach Revenant Graves",
   },
   {
-    id: "sesters-censer",
-    label: "Find Sester's Censer",
+    id: "sesters-censer-location",
+    label: "Sester's Censer location",
   },
   {
-    id: "censer-encounter",
+    id: "sesters-censer-encounter",
     label: "Beat the Censer encounter",
   },
   {
-    id: "return-to-marrow-keep",
+    id: "return-to-genessa",
     label: "Return to Genessa",
+  },
+  {
+    id: "genessa-not-unlocking",
+    label: "Genessa still not unlocking?",
   },
   {
     id: "where-to-upgrade-genessa",
     label: "Where to upgrade Genessa",
   },
   {
-    id: "genessa-current-build-warning",
-    label: "Current build warning",
+    id: "worth-unlocking-genessa-early",
+    label: "Worth unlocking early?",
   },
   {
-    id: "worth-unlocking-early",
-    label: "Is Genessa worth rushing?",
+    id: "genessa-bond",
+    label: "Genessa Bond progression",
+  },
+  {
+    id: "genessa-route",
+    label: "Genessa route recap",
   },
 ];
 
@@ -93,6 +109,10 @@ const relatedLinks = [
     href: "/mortal-shell-2/all-shells-locations",
     label: "All Shell Locations",
   },
+  {
+    href: "/mortal-shell-2/weapons-guide",
+    label: "Best Weapons & Tier List",
+  },
 ];
 
 export const metadata: Metadata = {
@@ -104,23 +124,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Mortal Shell 2 Genessa: Sester's Censer Unlock Route",
+    title: metadataTitle,
     description:
-      "Take the bridge drop from Outskirts of Mammon, reach Revenant Graves, recover Sester's Censer, and bring it back to Genessa at Marrow Keep.",
+      "Take the hidden bridge drop from the Outskirts of Mammon, reach Revenant Graves, recover Sester's Censer, and return to Genessa at Marrow Keep.",
     siteName: "Whisper of the House",
-    modifiedTime: "2026-08-18",
+    publishedTime: "2026-08-18",
+    modifiedTime: "2026-08-22",
     images: [
       {
         url: imageUrls[0],
-        alt: "Outskirts of Mammon teleporter on the route to unlock Genessa in Mortal Shell 2",
+        width: 1600,
+        height: 900,
+        alt: "Sester's Censer at Revenant Graves on the Genessa unlock route in Mortal Shell 2",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mortal Shell 2 Genessa: How to Unlock Her",
+    title: metadataTitle,
     description:
-      "The full route to Sester's Censer through Outskirts of Mammon and Revenant Graves, plus the final return to Genessa at Marrow Keep.",
+      "Find Genessa, reach Revenant Graves, get Sester's Censer, beat its encounter, and return to Marrow Keep to unlock her.",
     images: [imageUrls[0]],
   },
 };
@@ -147,7 +170,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "How to Unlock Genessa",
+          name: "Genessa Unlock Guide",
           item: pageUrl,
         },
       ],
@@ -160,13 +183,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Genessa Guide: How to Unlock Genessa with Sester's Censer",
+        "Mortal Shell 2 Genessa Unlock Guide: Sester's Censer Route",
       description:
-        "A practical Mortal Shell 2 Genessa unlock guide covering the route from Marrow Keep through the Outskirts of Mammon, the hidden bridge drop and lower teleport, Revenant Graves, Sester's Censer and its encounter, the return to Genessa, where to upgrade her afterward, and the current-build Bond progression precaution.",
+        "A complete Mortal Shell 2 Genessa unlock guide covering her location at Marrow Keep, the Outskirts of Mammon bridge drop, lower teleport, Revenant Graves, Sester's Censer location and encounter, the return to Genessa, and her post-unlock progression.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-08-18",
+      datePublished: "2026-08-18",
+      dateModified: "2026-08-22",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -180,7 +204,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "How to unlock Genessa",
+        },
+        {
+          "@type": "Thing",
+          name: "Genessa location",
+        },
+        {
+          "@type": "Thing",
           name: "Sester's Censer",
+        },
+        {
+          "@type": "Thing",
+          name: "Sester's Censer location",
         },
         {
           "@type": "Thing",
@@ -189,6 +225,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Outskirts of Mammon",
+        },
+        {
+          "@type": "Thing",
+          name: "Marrow Keep",
         },
       ],
       isPartOf: {
@@ -222,13 +262,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Unlock Genessa in Mortal Shell 2"
-          description="I open the Outskirts of Mammon route, take the easy-to-miss bridge drop to Revenant Graves, recover Sester's Censer, and bring it back to Genessa."
+          title="Mortal Shell 2 Genessa Unlock Guide: Sester's Censer Route"
+          description="I start from Marrow Keep, take the easy-to-miss bridge drop in the Outskirts of Mammon, reach Revenant Graves, beat the Sester's Censer encounter, and bring it back to unlock Genessa."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 18, 2026"
+          updatedAt="August 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

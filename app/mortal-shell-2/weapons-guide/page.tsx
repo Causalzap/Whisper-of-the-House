@@ -10,23 +10,35 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/weapons-guide`;
 
 const metadataTitle =
-  "Mortal Shell 2 Weapons Guide: Best Weapons & Infusions";
+  "Mortal Shell 2 Best Weapons & Tier List: All 8 Ranked";
 
 const metadataDescription =
-  "Compare all 8 Mortal Shell 2 melee weapons, their locations, Tarstones and Infusions, plus which early and late weapons are worth upgrading.";
+  "Rank all 8 Mortal Shell 2 weapons, compare the best early and late-game picks, and see their Infusions, Tarstones, locations, and when to switch.";
 
 const imageUrls = [
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-axatana-stasis.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-iconoclast-blood-curse.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-axe-dagger-duality.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-veterans-battle-axe-running-heavy.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-frost.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-obsidian-hammer-stasis.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-axatana-stasis.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-black-needle-phantom.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-clockwork-scythe-chainsaw.webp`,
 ];
 
 const toc = [
+  {
+    id: "best-weapon",
+    label: "Best weapon overall",
+  },
+  {
+    id: "weapon-tier-list",
+    label: "Weapon tier list",
+  },
+  {
+    id: "best-early-weapon",
+    label: "Best early weapon",
+  },
   {
     id: "how-i-choose-a-weapon",
     label: "How I choose a weapon",
@@ -64,16 +76,20 @@ const toc = [
     label: "Clockwork Scythe",
   },
   {
-    id: "best-early-weapon",
-    label: "Best early weapon",
+    id: "best-status-weapons",
+    label: "Best status weapons",
+  },
+  {
+    id: "which-weapon-should-i-use",
+    label: "Which weapon should I use?",
   },
   {
     id: "later-weapons",
-    label: "Which late weapon to use",
+    label: "When to switch weapons",
   },
   {
     id: "upgrade-rule",
-    label: "My upgrade rule",
+    label: "Weapon upgrade rule",
   },
 ];
 
@@ -87,10 +103,6 @@ const relatedLinks = [
     label: "Progression Guide",
   },
   {
-    href: "/mortal-shell-2/sidearms-guide",
-    label: "Sidearms Guide",
-  },
-  {
     href: "/mortal-shell-2/shrine-of-trials-axe-dagger",
     label: "Shrine of Trials & Axe and Dagger",
   },
@@ -100,7 +112,11 @@ const relatedLinks = [
   },
   {
     href: "/mortal-shell-2/great-martyrs-blade",
-    label: "Great Martyr's Blade & Martyr's Prison",
+    label: "Great Martyr's Blade Guide",
+  },
+  {
+    href: "/mortal-shell-2/sidearms-guide",
+    label: "Sidearms Guide",
   },
 ];
 
@@ -113,26 +129,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Mortal Shell 2 Weapons Guide: Which Weapons I Upgrade",
+    title: metadataTitle,
     description:
-      "Compare all eight melee weapons by moveset, Tarstones, Infusions, acquisition cost, and the combat problems each one actually solves.",
+      "Compare all eight Mortal Shell 2 melee weapons, including my best overall, early-game, heavy, status, and late-game picks.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-18",
+    modifiedTime: "2026-08-22",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "Iconoclast applying Blood Curse to an enemy in Mortal Shell 2",
+        alt: "Axatana Stasis build in Mortal Shell 2",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mortal Shell 2 Weapons Guide: Which Weapons I Upgrade",
+    title: metadataTitle,
     description:
-      "My picks for early and late melee weapons, with the Tarstones, Infusions, and movesets that make each weapon worth investing in.",
+      "All 8 Mortal Shell 2 weapons ranked, with the best early and late-game picks, Infusions, Tarstones, and weapon-switching advice.",
     images: [imageUrls[0]],
   },
 };
@@ -172,14 +188,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Weapons Guide: All Melee Weapons, Infusions and Upgrade Choices",
+        "Mortal Shell 2 Best Weapons & Tier List: All 8 Ranked",
       description:
-        "A practical Mortal Shell 2 weapons guide covering all eight main melee weapons: Iconoclast, Axe & Dagger, Veteran's Battle Axe, Great Martyr's Blade, Obsidian Hammer, Axatana, Black Needle, and Clockwork Scythe. It compares their base movesets, running attacks, Tarstone options, unique Infusions, Resolve requirements, acquisition cost, and the situations where I think each weapon is worth upgrading instead of spending resources simply because it is a later unlock.",
+        "A complete Mortal Shell 2 weapons guide ranking all eight melee weapons, including the best overall and early-game choices, movesets, Tarstones, Infusions, weapon locations, status builds, and when each weapon is worth switching to.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-18",
+      dateModified: "2026-08-22",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -197,15 +213,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 weapon locations",
+          name: "Mortal Shell 2 weapon tier list",
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 Infusions",
+          name: "Mortal Shell 2 early weapons",
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 Tarstones",
+          name: "Axatana",
         },
         {
           "@type": "Thing",
@@ -229,31 +245,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Axatana",
-        },
-        {
-          "@type": "Thing",
           name: "Black Needle",
         },
         {
           "@type": "Thing",
           name: "Clockwork Scythe",
-        },
-        {
-          "@type": "Thing",
-          name: "Blood Curse",
-        },
-        {
-          "@type": "Thing",
-          name: "Frost",
-        },
-        {
-          "@type": "Thing",
-          name: "Stasis",
-        },
-        {
-          "@type": "Thing",
-          name: "Phantom",
         },
       ],
       isPartOf: {
@@ -287,13 +283,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Mortal Shell 2 Weapons I’d Actually Spend Upgrades On"
-          description="I compare all eight melee weapons by how they really play, then decide which movesets, Tarstones, and Infusions are worth building around."
+          title="Mortal Shell 2 Best Weapons & Tier List: All 8 Ranked"
+          description="I compare all eight melee weapons, explain why Axatana is my best overall pick, choose the best early weapons, and break down which Infusions and Tarstones make each weapon worth using."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 18, 2026"
+          updatedAt="August 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -10,75 +10,98 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/great-martyrs-blade`;
 
 const metadataTitle =
-  "Mortal Shell 2 Great Martyr's Blade: Location & Frost";
+  "Mortal Shell 2 Great Martyr's Blade Location & Frost Guide";
 
 const metadataDescription =
-  "Find the Great Martyr's Blade in Mortal Shell 2 through Gloomshade Grove and Martyr's Prison, then see when the later Frost upgrade is worth chasing.";
+  "Find the Great Martyr's Blade through Gloomshade Grove and Martyr's Prison, then learn its Frost build, best setup, and whether the weapon is worth using.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-weapon.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-route-map.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-martyrs-prison-location-map.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-martyrs-prison.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-frost.webp`,
 ];
 
 const toc = [
   {
-    id: "great-martyrs-blade-route",
-    label: "Great Martyr's Blade route",
+    id: "great-martyrs-blade-location",
+    label: "Great Martyr's Blade location",
   },
   {
-    id: "why-i-wait-before-upgrading",
-    label: "Why I wait before upgrading",
+    id: "blood-cursed-lithopod",
+    label: "Blood-Cursed Lithopod",
   },
   {
-    id: "start-from-north",
-    label: "Start from the north",
-  },
-  {
-    id: "citadel-access",
-    label: "Open Citadel access",
-  },
-  {
-    id: "routes-split",
-    label: "Where the routes split",
+    id: "eredrim-route-split",
+    label: "Where the Eredrim route splits",
   },
   {
     id: "martyrs-prison",
     label: "Reach Martyr's Prison",
   },
   {
-    id: "clear-martyrs-prison",
-    label: "Clear Martyr's Prison",
+    id: "how-to-get-great-martyrs-blade",
+    label: "How to get the Blade",
   },
   {
-    id: "great-martyrs-blade-location",
-    label: "Get the Great Martyr's Blade",
+    id: "is-great-martyrs-blade-good",
+    label: "Is the Blade good?",
   },
   {
-    id: "test-before-spending",
-    label: "Test before upgrading",
+    id: "moveset",
+    label: "Moveset",
   },
   {
-    id: "frost",
-    label: "Why Frost matters",
+    id: "why-it-feels-slow",
+    label: "Why it feels slow",
+  },
+  {
+    id: "best-tarstones",
+    label: "Best Tarstones",
+  },
+  {
+    id: "frost-build",
+    label: "Best Frost build",
   },
   {
     id: "frost-location",
-    label: "When Frost becomes available",
+    label: "Where to get Frost",
+  },
+  {
+    id: "captives-scabstone",
+    label: "Captive's Scabstone",
+  },
+  {
+    id: "frost-and-scabstone",
+    label: "Frost + Scabstone setup",
   },
   {
     id: "should-i-rush-frost",
     label: "Should I rush Frost?",
   },
   {
-    id: "worth-getting",
-    label: "Is the Blade worth getting?",
+    id: "worth-getting-early",
+    label: "Worth getting early?",
   },
   {
-    id: "great-martyrs-blade-route-summary",
-    label: "Route summary",
+    id: "battle-axe-vs-great-martyrs-blade",
+    label: "Blade vs Battle Axe",
+  },
+  {
+    id: "blade-vs-axatana",
+    label: "Blade vs Axatana",
+  },
+  {
+    id: "upgrade-priority",
+    label: "When to upgrade it",
+  },
+  {
+    id: "cant-reach-martyrs-prison",
+    label: "Can't reach Martyr's Prison?",
+  },
+  {
+    id: "great-martyrs-blade-route",
+    label: "Route recap",
   },
 ];
 
@@ -89,7 +112,7 @@ const relatedLinks = [
   },
   {
     href: "/mortal-shell-2/weapons-guide",
-    label: "Weapons Guide",
+    label: "Best Weapons & Tier List",
   },
   {
     href: "/mortal-shell-2/how-to-unlock-eredrim",
@@ -114,25 +137,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title:
-      "Mortal Shell 2 Great Martyr's Blade: Martyr's Prison & Frost",
+    title: metadataTitle,
     description:
-      "Open the Gloomshade Grove route, reach Martyr's Prison, collect the Great Martyr's Blade, and decide when the later Frost detour is worth making.",
+      "Find the Great Martyr's Blade in Martyr's Prison, open the route through Gloomshade Grove, and build the weapon around Frost and Captive's Scabstone.",
     siteName: "Whisper of the House",
-    modifiedTime: "2026-08-18",
+    publishedTime: "2026-08-18",
+    modifiedTime: "2026-08-22",
     images: [
       {
         url: imageUrls[0],
+        width: 1600,
+        height: 900,
         alt: "Great Martyr's Blade weapon in Mortal Shell 2",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Mortal Shell 2 Great Martyr's Blade: Location & Frost",
+    title: metadataTitle,
     description:
-      "How I reach Martyr's Prison for the Great Martyr's Blade and decide whether its later Frost upgrade is worth chasing.",
+      "Great Martyr's Blade location, Martyr's Prison route, Frost build, Captive's Scabstone, and whether the weapon is worth using.",
     images: [imageUrls[0]],
   },
 };
@@ -159,7 +183,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Great Martyr's Blade",
+          name: "Great Martyr's Blade Guide",
           item: pageUrl,
         },
       ],
@@ -172,13 +196,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Great Martyr's Blade Guide: Martyr's Prison, Location and Frost",
+        "Mortal Shell 2 Great Martyr's Blade Location & Frost Guide",
       description:
-        "A practical Mortal Shell 2 Great Martyr's Blade guide covering the route through Gloomshade Grove, the shared Citadel prerequisite, the Blood-Cursed Lithopod, the split from the Eredrim route, Martyr's Prison, the weapon pickup, its slow moveset, and when the later Frost upgrade is worth pursuing.",
+        "A complete Mortal Shell 2 Great Martyr's Blade guide covering its location, Gloomshade Grove, the Blood-Cursed Lithopod, Martyr's Prison, moveset, Frost build, Captive's Scabstone, Tarstones, upgrade timing, and weapon comparisons.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-08-18",
+      datePublished: "2026-08-18",
+      dateModified: "2026-08-22",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -189,6 +214,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Great Martyr's Blade",
+        },
+        {
+          "@type": "Thing",
+          name: "Great Martyr's Blade location",
         },
         {
           "@type": "Thing",
@@ -204,7 +233,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Great Martyr's Blade Frost build",
+        },
+        {
+          "@type": "Thing",
           name: "Frost",
+        },
+        {
+          "@type": "Thing",
+          name: "Captive's Scabstone",
+        },
+        {
+          "@type": "Thing",
+          name: "Great Martyr's Blade Tarstones",
         },
       ],
       isPartOf: {
@@ -238,13 +279,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Get the Great Martyr's Blade and Decide When to Use Frost"
-          description="I open the shared Gloomshade Grove route, split away from the Eredrim path for Martyr's Prison, collect the greatsword, and only chase Frost after deciding the slow weapon is worth keeping."
+          title="Mortal Shell 2 Great Martyr's Blade Location & Frost Guide"
+          description="I route through Gloomshade Grove and Martyr's Prison for the Great Martyr's Blade, then build around Frost and Captive's Scabstone once I know the slow greatsword fits my playstyle."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 18, 2026"
+          updatedAt="August 22, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
