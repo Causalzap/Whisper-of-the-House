@@ -141,18 +141,19 @@ export const guideClusters: GuideCluster[] = [
     archiveCategory: "Strategy, simulation, puzzle & discovery",
     label: "Fishing Adventure & Boss Progression",
     eyebrow: "Spotlight Hub",
-    hubStatus: "Island progression + bosses + 28 achievements",
+    hubStatus: "All 5 areas + bosses + 49 creatures + 28 achievements",
   
     description:
-      "Use the How to Fish guide hub to follow the full island progression route, solve Leech and Tourist quest blockers, defeat every major boss, manage weapon and boat upgrades, and complete all 28 achievements.",
+      "Use the How to Fish guide hub to follow all five progression areas, solve NPC and bait blockers, defeat every major boss, find all 49 creatures, and complete all 28 achievements.",
   
     coverage: [
-      "Main progression from the opening Lighthouse Keeper and Spider Crab through Island 2, Island 3, Island 4, the military and volcano sequence, the Mutated Bowhead Whale, and the final route toward the mainland",
-      "Island 2 progression through the 0/3 Leech request, ground-pickup Leeches, NPC bait conversion, Giant Piranha preparation, Giant Piranha Skeleton hand-in, Island 3 Flash Drive, and Radar route",
-      "Island 3 progression through the Tourist's Endangered Species request, valid catch checks, Carrot reward, Pufferfish preparation, tree-circling strategy, Pufferfish Tail hand-in, and Island 4 coordinates",
-      "Boss progression through Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, and Mutated Bowhead Whale, including trigger checks, ranged-combat decisions, cover, positioning, and Dynamite",
-      "Upgrade decisions through the 150 Shotgun, 230 Big Motor, 650 SMG, 600 Compensator, weapon-control problems, food preparation, and knowing when combat matters more than travel speed",
-      "All 28 achievements with story cleanup, Killscore, 360 no scope, cooking, casino and money goals, boat and gear upgrades, Easy, Collector, Fishipedia, Bean, Handyman, and 100% planning",
+      "Main progression from the Lighthouse and Spider Crab through Island 2, Island 3, Island 4, the military and Volcano area, the Mutated Bowhead Whale, and the final route toward the mainland",
+      "Opening progression through Beer, Empty Beer Can bait, the Spider Crab self-stun window, Spider Crab Shell, Boat Keys, and the 10-cost Radar",
+      "Island 2 progression through the 0/3 Leech request, ground-pickup Leeches, NPC bait conversion, Giant Piranha preparation, Giant Piranha Skeleton, Island 3 Flash Drive, and Radar route",
+      "Island 3 progression through the Tourist's Endangered Species request, valid catch checks, Carrot reward, Pufferfish preparation, tree-circling strategy, Pufferfish Tail, and Island 4 coordinates",
+      "Late-game boss progression through the Terrorizing Bird, Tuna trigger, Bowhead Whale experiment, Volcano encounter, and Mutated Bowhead Whale, including positioning, ranged-damage decisions, and Dynamite",
+      "All 49 normal creatures across the Lighthouse, Forest, Desert, Rocks, and Volcano areas, with lure pools, Boss Lures, story triggers, missing-creature diagnosis, Collector, and separate Fishipedia Drip cleanup",
+      "All 28 achievements with Killscore, 360 no scope, cooking, casino and money goals, boat and gear upgrades, Easy, Collector, Fishipedia, Bean, Handyman, and a practical 100% route",
     ],
   
     image:
@@ -171,19 +172,19 @@ export const guideClusters: GuideCluster[] = [
     pages: [
       {
         title:
-          "How to Fish Walkthrough: Island Progression & Bosses",
+          "How to Fish Walkthrough: All Islands & Progression Guide",
         href: "/how-to-fish",
         type: "Guide Hub",
         description:
-          "Follow the main route across every island, identify the NPC request or boss blocking progression, use Flash Drives and Radar correctly, and reach the final story sequence.",
+          "Follow the main route across all five areas, solve NPC progression gates, use Radar coordinates, reach every major boss, and finish the Volcano and mainland route.",
         image:
-          "/images/how-to-fish/how-to-fish-terrorizing-bird-tuna-quest.webp",
+          "/images/how-to-fish/how-to-fish-scientist-whale-mission.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
         home: {
           spotlightMeta:
-            "Island progression, Spider Crab, Leeches, Giant Piranha, Tourist, Carrot, Pufferfish, Terrorizing Bird, Whale experiment, Radar, and final route",
+            "Five progression areas, Lighthouse, Spider Crab, Leeches, Giant Piranha, Tourist, Carrot, Pufferfish, Terrorizing Bird, scientist, Volcano, Radar, and final route",
         },
         archive: {
           showInCollections: true,
@@ -193,25 +194,25 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "How to Fish Boss Guide: All Bosses & Best Strategies",
-        href: "/how-to-fish/boss-guide",
+          "How to Fish Spider Crab: Stun, Beer Can & Boat Keys",
+        href: "/how-to-fish/spider-crab",
         type: "Bosses",
         description:
-          "Beat Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, and Mutated Bowhead Whale with trigger checks, preparation, positioning, ranged-damage decisions, and Dynamite.",
+          "Get the Empty Beer Can, trigger the Spider Crab, use its self-stun window, keep the Spider Crab Shell, unlock the Boat Keys, and buy the Radar.",
         date: "Updated recently",
         image:
-          "/images/how-to-fish/how-to-fish-mutated-bowhead-whale-boss.webp",
+          "/images/how-to-fish/how-to-fish-spider-crab-stun-window.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
         home: {
           latest: true,
           latestFeatured: true,
-          latestOrder: 236,
+          latestOrder: 242,
           spotlightFeature: true,
           spotlightOrder: 1,
           spotlightMeta:
-            "Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, Mutated Bowhead Whale, boss triggers, Dynamite, ranged damage, cover, and preparation",
+            "Beer, Empty Beer Can, Spider Crab trigger, self-stun window, Knife timing, Spider Crab Shell, Boat Keys, Radar, and Lighthouse progression",
         },
         archive: {
           showInCollections: true,
@@ -253,7 +254,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/how-to-fish/giant-piranha",
         type: "Bosses",
         description:
-          "Prepare for the Giant Piranha, choose between the 150 Shotgun and 230 Big Motor, keep pressure on the boss, collect its Skeleton, and unlock Island 3.",
+          "Prepare for the Giant Piranha, choose between the 150 Shotgun and 230 Big Motor, collect its Skeleton, complete the NPC hand-in, and unlock Island 3.",
         date: "Updated recently",
         image:
           "/images/how-to-fish/how-to-fish-giant-piranha-boss.webp",
@@ -267,7 +268,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 3,
           spotlightMeta:
-            "150 Shotgun, 230 Big Motor, Giant Piranha fight, food, ranged damage, Giant Piranha Skeleton, Island 3 Flash Drive, and Radar",
+            "150 Shotgun, 230 Big Motor, Giant Piranha fight, food, ranged damage, Giant Piranha Skeleton, Island 3 Flash Drive, Radar, and Tourist handoff",
         },
         archive: {
           showInCollections: true,
@@ -281,7 +282,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/how-to-fish/endangered-fish",
         type: "Guide",
         description:
-          "Complete the Tourist's Island 3 request by finding a creature with the Endangered Species status, keep the catch intact, and receive the Carrot for Pufferfish.",
+          "Complete the Tourist's Island 3 request by finding a creature with the Endangered Species status, keep the catch intact, and get the Carrot for Pufferfish.",
         date: "Updated recently",
         image:
           "/images/how-to-fish/how-to-fish-endangered-species-tag.webp",
@@ -309,7 +310,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/how-to-fish/pufferfish",
         type: "Bosses",
         description:
-          "Prepare before using the Carrot, beat the Pufferfish with the tree-circling route, fix SMG recoil problems, collect the Pufferfish Tail, and unlock Island 4.",
+          "Prepare before using the Carrot, beat the Pufferfish with the tree-circling route, fix SMG recoil, collect the Pufferfish Tail, and unlock Island 4.",
         date: "Updated recently",
         image:
           "/images/how-to-fish/how-to-fish-pufferfish-dodge-route.webp",
@@ -323,7 +324,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 5,
           spotlightMeta:
-            "Carrot boss trigger, 650 SMG, 600 Compensator, tree-circling route, later Pufferfish phase, Pufferfish Tail, Tourist hand-in, and Island 4",
+            "Carrot boss trigger, 650 SMG, 600 Compensator, tree-circling route, later Pufferfish phase, Pufferfish Tail, Tourist hand-in, Island 4, and Terrorizing Bird handoff",
         },
         archive: {
           showInCollections: true,
@@ -333,11 +334,67 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "How to Fish Achievements: All 28 Unlock Requirements",
+          "How to Fish Boss Guide: All Bosses & Best Strategies",
+        href: "/how-to-fish/boss-guide",
+        type: "Bosses",
+        description:
+          "Follow the main boss order from Spider Crab to Mutated Bowhead Whale, fix missing triggers, use better positioning, and know when upgrades or Dynamite actually help.",
+        date: "Updated recently",
+        image:
+          "/images/how-to-fish/how-to-fish-mutated-bowhead-whale-boss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 236,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, Mutated Bowhead Whale, boss triggers, Tuna, Dynamite, Volcano boundary, ranged damage, and positioning",
+        },
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "How to Fish All 49 Creatures: Locations & Collector Guide",
+        href: "/how-to-fish/all-fish-locations",
+        type: "Collectibles",
+        description:
+          "Find all 49 creatures by island, lure, Boss Lure, and story trigger, diagnose missing encyclopedia slots, and separate Collector from Fishipedia Drip cleanup.",
+        date: "Updated recently",
+        image:
+          "/images/how-to-fish/how-to-fish-sunfish-beginner-boss-lure.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 243,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "All 49 creatures, encyclopedia slots, Lighthouse, Forest, Desert, Rocks, Volcano, lure pools, Boss Lures, Collector, Fishipedia, Drip variants, and missing-creature diagnosis",
+        },
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "How to Fish Achievements: All 28 & 100% Guide",
         href: "/how-to-fish/achievements",
         type: "Achievements",
         description:
-          "Track all 28 achievements and clean up Killscore, cooking, casino, boat, gear, boss, collection, Fishipedia, Bean, Handyman, and other 100% challenges.",
+          "Track all 28 achievements and finish Killscore, cooking, casino, gear, boat, Collector, Fishipedia, Easy, Bean, Handyman, and the remaining 100% cleanup.",
         date: "Updated recently",
         image:
           "/images/how-to-fish/how-to-fish-achievements-360-no-scope.webp",
@@ -349,13 +406,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 241,
           spotlightFeature: true,
-          spotlightOrder: 6,
+          spotlightOrder: 8,
           spotlightMeta:
-            "All 28 achievements, Killscore, 360 no scope, Shark and grill, roulette, Legendary skins, Rich! Millionaire, Easy, Collector, Fishipedia, Bean, and Handyman",
+            "All 28 achievements, Killscore, 360 no scope, cooking, roulette, Legendary skins, Rich! Millionaire, Easy, Collector, Fishipedia, Bean, Handyman, and 100% route",
         },
         archive: {
           showInCollections: true,
-          order: 7,
+          order: 9,
         },
       },
     ],

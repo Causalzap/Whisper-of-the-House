@@ -10,38 +10,37 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/how-to-fish`;
 
 const imageUrls = [
-  `${siteUrl}/images/how-to-fish/how-to-fish-terrorizing-bird-tuna-quest.webp`,
   `${siteUrl}/images/how-to-fish/how-to-fish-scientist-whale-mission.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "How to Fish Walkthrough: Island Progression & Bosses",
+  title: "How to Fish Walkthrough: All Islands & Progression Guide",
   description:
-    "Follow the full How to Fish progression route across every island, solve NPC gates, defeat the main bosses, use the Radar, and finish the story.",
+    "Follow the How to Fish story across all five islands, solve NPC gates, use Radar coordinates, unlock bosses, and finish the Volcano route.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Fish Walkthrough and Island Progression Guide",
+    title: "How to Fish Walkthrough: All Islands & Progression Guide",
     description:
-      "Follow the main story from the Lighthouse Keeper through Islands 2–4, the military and volcano route, and the Mutated Bowhead Whale finale.",
+      "Follow the full story from the Lighthouse through all five island areas, boss gates, Radar coordinates, the scientist, and the Volcano finale.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "Island NPC explaining that Tuna attracts the Terrorizing Bird in How to Fish",
+        alt: "Scientist explaining the Bowhead Whale experiment during late-game progression in How to Fish",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Fish Walkthrough & Guide",
+    title: "How to Fish Walkthrough & Progression Guide",
     description:
-      "Follow every main island progression gate, NPC hand-in, boss sequence, Radar route, and the final story path in How to Fish.",
+      "Follow all five island areas, solve NPC progression gates, use Radar coordinates, and reach the final Volcano and mainland route.",
     images: [imageUrls[0]],
   },
 };
@@ -75,13 +74,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "How to Fish Walkthrough and Guide: Island Progression, Bosses, Radar Routes, and Story",
+        "How to Fish Walkthrough: All Islands and Progression Guide",
       description:
-        "This How to Fish walkthrough follows the main progression route from the opening island through Island 2, Island 3, Island 4, the military and volcano sequence, and the final mainland route. It explains how NPC requests, bait, boss trophies, Flash Drives, and Radar updates connect each stage, while directing detailed Leech, Giant Piranha, Endangered Species, Pufferfish, boss, and achievement problems to their dedicated guides.",
+        "A practical How to Fish walkthrough covering all five main island areas, NPC progression gates, Radar coordinates, the Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, scientist and Bowhead Whale experiment, Mutated Bowhead Whale, upgrade decisions, and the final route toward the mainland.",
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-21",
-      dateModified: "2026-08-21",
+      dateModified: "2026-08-23",
       about: [
         {
           "@type": "VideoGame",
@@ -101,11 +100,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "How to Fish Radar",
+        },
+        {
+          "@type": "Thing",
           name: "How to Fish bosses",
         },
         {
           "@type": "Thing",
-          name: "Radar",
+          name: "Bowhead Whale",
         },
         {
           "@type": "Thing",
@@ -137,8 +140,16 @@ const toc = [
     label: "How progression works",
   },
   {
-    id: "first-island",
-    label: "First island",
+    id: "how-many-islands",
+    label: "How many islands",
+  },
+  {
+    id: "lighthouse",
+    label: "Lighthouse",
+  },
+  {
+    id: "radar-coordinates",
+    label: "Radar and coordinates",
   },
   {
     id: "island-2",
@@ -154,27 +165,35 @@ const toc = [
   },
   {
     id: "military-volcano",
-    label: "Military and volcano",
+    label: "Military and Volcano",
   },
   {
-    id: "final-boss",
-    label: "Final boss route",
-  },
-  {
-    id: "finish-the-game",
-    label: "Finish the game",
+    id: "mutated-bowhead-whale",
+    label: "Mutated Bowhead Whale",
   },
   {
     id: "upgrade-priority",
     label: "Upgrade priority",
   },
   {
-    id: "where-i-go-when-stuck",
+    id: "all-fish",
+    label: "All 49 creatures",
+  },
+  {
+    id: "after-story",
+    label: "After the story",
+  },
+  {
+    id: "where-to-go-when-stuck",
     label: "Where to go when stuck",
   },
 ];
 
 const relatedLinks = [
+  {
+    href: "/how-to-fish/spider-crab",
+    label: "Spider Crab & Boat Keys Guide",
+  },
   {
     href: "/how-to-fish/leech-bait",
     label: "Leech Bait Guide",
@@ -196,6 +215,10 @@ const relatedLinks = [
     label: "How to Fish Boss Guide",
   },
   {
+    href: "/how-to-fish/all-fish-locations",
+    label: "All 49 Creatures & Collector Guide",
+  },
+  {
     href: "/how-to-fish/achievements",
     label: "How to Fish Achievements",
   },
@@ -213,13 +236,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How to Fish Walkthrough & Guide"
-          description="Follow the complete main progression route across every island, understand which NPC request or boss is blocking you, and know exactly when to move on instead of wasting money or farming the wrong objective."
+          title="How to Fish Walkthrough & Progression Guide"
+          description="Follow the main route across all five island areas, understand which NPC request or boss is blocking you, use the Radar correctly, and know when to move on instead of farming the wrong objective."
           gameTitle="How to Fish"
           gameHref="/how-to-fish"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 21, 2026"
+          updatedAt="August 23, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

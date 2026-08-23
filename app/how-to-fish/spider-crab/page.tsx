@@ -4,48 +4,47 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import HowToFishBossGuideContent from "@/data/how-to-fish/boss-guide.mdx";
+import HowToFishSpiderCrabContent from "@/data/how-to-fish/spider-crab.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/how-to-fish`;
-const pageUrl = `${hubUrl}/boss-guide`;
+const pageUrl = `${hubUrl}/spider-crab`;
 
 const imageUrls = [
-  `${siteUrl}/images/how-to-fish/how-to-fish-dynamite-boss-strategy.webp`,
-  `${siteUrl}/images/how-to-fish/how-to-fish-terrorizing-bird-boss.webp`,
-  `${siteUrl}/images/how-to-fish/how-to-fish-mutated-bowhead-whale-volcano-boundary.webp`,
-  `${siteUrl}/images/how-to-fish/how-to-fish-mutated-bowhead-whale-boss.webp`,
+  `${siteUrl}/images/how-to-fish/how-to-fish-spider-crab-empty-beer-can.webp`,
+  `${siteUrl}/images/how-to-fish/how-to-fish-spider-crab-stun-window.webp`,
+  `${siteUrl}/images/how-to-fish/how-to-fish-spider-crab-shell-boat-keys.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "How to Fish Boss Guide: All Bosses & Best Strategies",
+  title: "How to Fish Spider Crab: Stun, Beer Can & Boat Keys",
   description:
-    "Beat every How to Fish story boss with the right triggers, positioning, upgrades, Dynamite use, and Mutated Bowhead Whale strategy.",
+    "Beat the Spider Crab in How to Fish, get the Empty Beer Can, use its self-stun window, keep the Shell, unlock Boat Keys, and buy the Radar.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Fish Boss Guide: All Bosses & Best Strategies",
+    title: "How to Fish Spider Crab: Stun, Beer Can & Boat Keys",
     description:
-      "Follow the boss route from Spider Crab to Mutated Bowhead Whale, fix missing triggers, and prepare each fight without wasting money on the wrong upgrades.",
+      "Learn how to trigger and beat the Spider Crab, use its self-stun opening, keep the Shell, and unlock the Boat Keys and Radar.",
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[3],
+        url: imageUrls[1],
         width: 1600,
         height: 900,
-        alt: "Mutated Bowhead Whale fighting in the Volcano area in How to Fish",
+        alt: "Spider Crab stunned after its own attack in How to Fish",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Fish Boss Guide",
+    title: "How to Fish Spider Crab Guide",
     description:
-      "Beat Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, and Mutated Bowhead Whale with better triggers, positioning, and preparation.",
-    images: [imageUrls[3]],
+      "Get the Empty Beer Can, use the Spider Crab self-stun window, keep its Shell, and unlock the Boat Keys and Radar.",
+    images: [imageUrls[1]],
   },
 };
 
@@ -71,7 +70,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Boss Guide",
+          name: "Spider Crab",
           item: pageUrl,
         },
       ],
@@ -83,12 +82,13 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "How to Fish Boss Guide: All Bosses and Best Strategies",
+      headline:
+        "How to Fish Spider Crab Guide: Empty Beer Can, Stun, Shell and Boat Keys",
       description:
-        "A practical How to Fish boss guide covering the story route from Spider Crab through Giant Piranha, Pufferfish, Terrorizing Bird, and Mutated Bowhead Whale, including boss triggers, positioning, upgrade decisions, Dynamite use, Volcano fight boundaries, and progression hand-ins.",
+        "A practical Spider Crab guide for How to Fish covering the Lighthouse Keeper Beer quest, Empty Beer Can bait, the Spider Crab self-stun window, melee preparation, Spider Crab Shell hand-in, Boat Keys, and the Radar.",
       image: imageUrls,
       inLanguage: "en",
-      datePublished: "2026-08-21",
+      datePublished: "2026-08-23",
       dateModified: "2026-08-23",
       about: [
         {
@@ -97,31 +97,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "How to Fish bosses",
-        },
-        {
-          "@type": "Thing",
           name: "Spider Crab",
         },
         {
           "@type": "Thing",
-          name: "Giant Piranha",
+          name: "Empty Beer Can",
         },
         {
           "@type": "Thing",
-          name: "Pufferfish",
+          name: "Spider Crab stun",
         },
         {
           "@type": "Thing",
-          name: "Terrorizing Bird",
+          name: "Spider Crab Shell",
         },
         {
           "@type": "Thing",
-          name: "Mutated Bowhead Whale",
+          name: "Boat Keys",
         },
         {
           "@type": "Thing",
-          name: "How to Fish Dynamite",
+          name: "Radar",
         },
       ],
       isPartOf: {
@@ -145,55 +141,51 @@ const jsonLd = {
 
 const toc = [
   {
-    id: "boss-order",
-    label: "Boss order",
+    id: "how-to-start",
+    label: "How to start",
   },
   {
-    id: "before-spending",
-    label: "Before spending",
+    id: "empty-beer-can",
+    label: "Empty Beer Can",
   },
   {
-    id: "first-three-bosses",
-    label: "First three bosses",
+    id: "before-fight",
+    label: "Fight preparation",
   },
   {
-    id: "dynamite",
-    label: "Dynamite strategy",
+    id: "how-to-stun",
+    label: "How to stun Spider Crab",
   },
   {
-    id: "terrorizing-bird",
-    label: "Terrorizing Bird",
+    id: "why-i-keep-dying",
+    label: "Why the fight fails",
   },
   {
-    id: "mutated-bowhead-whale",
-    label: "Mutated Bowhead Whale",
+    id: "after-kill",
+    label: "Spider Crab Shell",
   },
   {
-    id: "boss-wont-spawn",
-    label: "Boss not spawning",
+    id: "boat-keys",
+    label: "Boat Keys and Radar",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/how-to-fish",
-    label: "How to Fish Walkthrough & Guide Hub",
+    label: "How to Fish Walkthrough & Progression Guide",
   },
   {
-    href: "/how-to-fish/spider-crab",
-    label: "Spider Crab & Boat Keys Guide",
+    href: "/how-to-fish/leech-bait",
+    label: "Leech Bait Guide",
   },
   {
-    href: "/how-to-fish/giant-piranha",
-    label: "Giant Piranha Guide",
+    href: "/how-to-fish/boss-guide",
+    label: "How to Fish Boss Guide",
   },
   {
-    href: "/how-to-fish/pufferfish",
-    label: "Pufferfish Boss Guide",
-  },
-  {
-    href: "/how-to-fish/achievements",
-    label: "How to Fish Achievements",
+    href: "/how-to-fish/all-fish-locations",
+    label: "All 49 Creatures & Collector Guide",
   },
 ];
 
@@ -209,8 +201,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How to Fish Boss Guide"
-          description="Follow the main boss route from Spider Crab to Mutated Bowhead Whale, fix missing triggers, prepare each fight correctly, and know when positioning matters more than another upgrade."
+          title="How to Fish Spider Crab Guide"
+          description="Get the Empty Beer Can, use the Spider Crab's self-stun opening, keep the Shell after the fight, and finish the Lighthouse Keeper hand-in for the Boat Keys and Radar."
           gameTitle="How to Fish"
           gameHref="/how-to-fish"
           breadcrumbBaseHref="/"
@@ -219,7 +211,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <HowToFishBossGuideContent />
+          <HowToFishSpiderCrabContent />
         </GuideArticlePage>
       </main>
 

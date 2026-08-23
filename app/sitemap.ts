@@ -772,11 +772,13 @@ const paths = [
 '/project-pitt/troubleshooting',
 
 '/how-to-fish',
+'/how-to-fish/spider-crab',
 '/how-to-fish/leech-bait',
 '/how-to-fish/giant-piranha',
 '/how-to-fish/endangered-fish',
 '/how-to-fish/pufferfish',
 '/how-to-fish/boss-guide',
+'/how-to-fish/all-fish-locations',
 '/how-to-fish/achievements',
 
 ] as const;
@@ -787,15 +789,17 @@ type SitemapPath = (typeof paths)[number];
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
-  '/how-to-fish': '2026-08-21',
-  '/how-to-fish/leech-bait': '2026-08-21',
-  '/how-to-fish/giant-piranha': '2026-08-21',
-  '/how-to-fish/endangered-fish': '2026-08-21',
-  '/how-to-fish/pufferfish': '2026-08-21',
-  '/how-to-fish/boss-guide': '2026-08-21',
-  '/how-to-fish/achievements': '2026-08-21',
+  '/how-to-fish': '2026-08-23',
+  '/how-to-fish/spider-crab': '2026-08-23',
+  '/how-to-fish/leech-bait': '2026-08-23',
+  '/how-to-fish/giant-piranha': '2026-08-23',
+  '/how-to-fish/endangered-fish': '2026-08-23',
+  '/how-to-fish/pufferfish': '2026-08-23',
+  '/how-to-fish/boss-guide': '2026-08-23',
+  '/how-to-fish/all-fish-locations': '2026-08-23',
+  '/how-to-fish/achievements': '2026-08-23',
 
-  
+
   '/bombanana': '2026-08-20',
 
   '/project-pitt': '2026-08-20',

@@ -1,50 +1,49 @@
+
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import HowToFishAchievementsContent from "@/data/how-to-fish/achievements.mdx";
+import HowToFishAllFishLocationsContent from "@/data/how-to-fish/all-fish-locations.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/how-to-fish`;
-const pageUrl = `${hubUrl}/achievements`;
+const pageUrl = `${hubUrl}/all-fish-locations`;
 
 const imageUrls = [
-  `${siteUrl}/images/how-to-fish/how-to-fish-achievements-360-no-scope.webp`,
-  `${siteUrl}/images/how-to-fish/how-to-fish-achievements-legendary-skin.webp`,
-  `${siteUrl}/images/how-to-fish/how-to-fish-achievements-all-in-green.webp`,
-  `${siteUrl}/images/how-to-fish/how-to-fish-achievements-boat-fly.webp`,
+  `${siteUrl}/images/how-to-fish/how-to-fish-drip-rock-crab.webp`,
+  `${siteUrl}/images/how-to-fish/how-to-fish-sunfish-beginner-boss-lure.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "How to Fish Achievements: All 28 & 100% Guide",
+  title: "How to Fish All 49 Creatures: Locations & Collector Guide",
   description:
-    "Complete all 28 How to Fish achievements with a practical 100% route for Collector, Fishipedia, Bean, Handyman, Killscore, casino, and more.",
+    "Find all 49 How to Fish creatures by island, lure, and boss trigger, with Collector, Fishipedia, missing-creature, and cleanup tips.",
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Fish Achievements: All 28 & 100% Guide",
+    title: "How to Fish All 49 Creatures: Locations & Collector Guide",
     description:
-      "Complete all 28 achievements with an efficient cleanup route for collection, Killscore, cooking, casino, Bean, Easy, Handyman, and more.",
+      "Complete all 49 creature entries with island locations, lure pools, boss triggers, missing-creature checks, and Collector and Fishipedia guidance.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "360 no scope achievement unlocking after a trick shot kill in How to Fish",
+        alt: "Drip Rock Crab caught while completing the How to Fish creature encyclopedia",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Fish Achievements: All 28 & 100% Guide",
+    title: "How to Fish All 49 Creatures & Collector Guide",
     description:
-      "Complete all 28 achievements with a practical route through story cleanup, collection, Killscore, Bean, Handyman, and other challenges.",
+      "Find all 49 creatures by island, lure, and special trigger, then clean up Collector and Fishipedia without fishing every area at random.",
     images: [imageUrls[0]],
   },
 };
@@ -71,7 +70,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Achievements",
+          name: "All 49 Creatures",
           item: pageUrl,
         },
       ],
@@ -83,12 +82,13 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline: "How to Fish Achievements: All 28 and 100% Guide",
+      headline:
+        "How to Fish All 49 Creatures: Locations, Lures, Collector and Fishipedia Guide",
       description:
-        "A practical guide to all 28 How to Fish achievements, including the best 100% cleanup order and focused strategies for Killscore, cooking, casino and money, gear, boat challenges, Collector, Fishipedia, Bean, Easy, and Handyman.",
+        "A complete How to Fish creature guide covering all 49 normal encyclopedia entries across the Lighthouse, Forest, Desert, Rocks, and Volcano areas, including lure pools, boss triggers, easy-to-miss creatures, Collector cleanup, and the separate Fishipedia Drip collection.",
       image: imageUrls,
       inLanguage: "en",
-      datePublished: "2026-08-21",
+      datePublished: "2026-08-23",
       dateModified: "2026-08-23",
       about: [
         {
@@ -97,11 +97,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "How to Fish achievements",
+          name: "How to Fish creatures",
         },
         {
           "@type": "Thing",
-          name: "How to Fish 100 percent completion",
+          name: "How to Fish all fish",
+        },
+        {
+          "@type": "Thing",
+          name: "How to Fish creature locations",
         },
         {
           "@type": "Thing",
@@ -113,11 +117,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Bean achievement",
-        },
-        {
-          "@type": "Thing",
-          name: "Handyman achievement",
+          name: "How to Fish Drip creatures",
         },
       ],
       isPartOf: {
@@ -141,63 +141,39 @@ const jsonLd = {
 
 const toc = [
   {
-    id: "all-achievements-checklist",
-    label: "All 28 achievements",
+    id: "collector-vs-fishipedia",
+    label: "Collector vs Fishipedia",
   },
   {
-    id: "best-100-percent-route",
-    label: "Best 100% route",
+    id: "all-49-creatures",
+    label: "All 49 creatures",
   },
   {
-    id: "killscore-achievements",
-    label: "Killscore achievements",
+    id: "missing-creatures",
+    label: "Missing creatures",
   },
   {
-    id: "cooking-achievements",
-    label: "Cooking achievements",
+    id: "cleanup-route",
+    label: "Best cleanup route",
   },
   {
-    id: "casino-money-achievements",
-    label: "Casino and money",
+    id: "separate-entries",
+    label: "Similar creature names",
   },
   {
-    id: "gear-and-boat",
-    label: "Gear and boat",
-  },
-  {
-    id: "one-off-achievements",
-    label: "One-off achievements",
-  },
-  {
-    id: "easy-fast-boss",
-    label: "Easy: 10-second boss",
-  },
-  {
-    id: "collector-fishipedia",
-    label: "Collector and Fishipedia",
-  },
-  {
-    id: "bean-speedrun",
-    label: "Bean speedrun",
-  },
-  {
-    id: "handyman",
-    label: "Handyman",
-  },
-  {
-    id: "final-cleanup",
-    label: "Final cleanup",
+    id: "drip-creatures",
+    label: "Drip creature cleanup",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/how-to-fish",
-    label: "How to Fish Walkthrough & Guide Hub",
+    label: "How to Fish Walkthrough & Progression Guide",
   },
   {
-    href: "/how-to-fish/all-fish-locations",
-    label: "All 49 Creatures & Collector Guide",
+    href: "/how-to-fish/achievements",
+    label: "How to Fish Achievements",
   },
   {
     href: "/how-to-fish/spider-crab",
@@ -206,14 +182,6 @@ const relatedLinks = [
   {
     href: "/how-to-fish/boss-guide",
     label: "How to Fish Boss Guide",
-  },
-  {
-    href: "/how-to-fish/giant-piranha",
-    label: "Giant Piranha Guide",
-  },
-  {
-    href: "/how-to-fish/pufferfish",
-    label: "Pufferfish Boss Guide",
   },
 ];
 
@@ -229,8 +197,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How to Fish Achievements Guide"
-          description="Track all 28 achievements and use a practical 100% cleanup route for Killscore, cooking, casino, collection, boat challenges, Bean, Easy, and Handyman."
+          title="How to Fish All 49 Creatures & Collector Guide"
+          description="Find every normal creature across all five areas, match missing encyclopedia slots to the right lure or boss trigger, and separate Collector cleanup from Fishipedia Drip hunting."
           gameTitle="How to Fish"
           gameHref="/how-to-fish"
           breadcrumbBaseHref="/"
@@ -239,7 +207,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <HowToFishAchievementsContent />
+          <HowToFishAllFishLocationsContent />
         </GuideArticlePage>
       </main>
 
