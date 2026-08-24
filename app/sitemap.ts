@@ -781,6 +781,18 @@ const paths = [
 '/how-to-fish/all-fish-locations',
 '/how-to-fish/achievements',
 
+'/no-more-room-in-hell-2',
+  '/no-more-room-in-hell-2/combat-survival-guide',
+  '/no-more-room-in-hell-2/achievements',
+  '/no-more-room-in-hell-2/early-extraction',
+  '/no-more-room-in-hell-2/how-to-cure-infection',
+  '/no-more-room-in-hell-2/broadway-walkthrough',
+  '/no-more-room-in-hell-2/beaulieu-hospital-walkthrough',
+  '/no-more-room-in-hell-2/lewiston-walkthrough',
+  '/no-more-room-in-hell-2/raven-rock-walkthrough',
+  '/no-more-room-in-hell-2/pottsville-walkthrough',
+  '/no-more-room-in-hell-2/power-plant-walkthrough',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -788,6 +800,17 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/no-more-room-in-hell-2': '2026-08-24',
+  '/no-more-room-in-hell-2/combat-survival-guide': '2026-08-24',
+  '/no-more-room-in-hell-2/achievements': '2026-08-24',
+  '/no-more-room-in-hell-2/early-extraction': '2026-08-24',
+  '/no-more-room-in-hell-2/how-to-cure-infection': '2026-08-24',
+  '/no-more-room-in-hell-2/broadway-walkthrough': '2026-08-24',
+  '/no-more-room-in-hell-2/beaulieu-hospital-walkthrough': '2026-08-24',
+  '/no-more-room-in-hell-2/lewiston-walkthrough': '2026-08-24',
+  '/no-more-room-in-hell-2/raven-rock-walkthrough': '2026-08-24',
+  '/no-more-room-in-hell-2/pottsville-walkthrough': '2026-08-24',
+  '/no-more-room-in-hell-2/power-plant-walkthrough': '2026-08-24',
 
   '/how-to-fish': '2026-08-23',
   '/how-to-fish/spider-crab': '2026-08-23',
@@ -798,7 +821,6 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/how-to-fish/boss-guide': '2026-08-23',
   '/how-to-fish/all-fish-locations': '2026-08-23',
   '/how-to-fish/achievements': '2026-08-23',
-
 
   '/bombanana': '2026-08-20',
 

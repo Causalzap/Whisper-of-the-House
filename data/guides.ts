@@ -131,6 +131,305 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "No More Room in Hell 2",
+    game: "No More Room in Hell 2",
+    href: "/no-more-room-in-hell-2",
+    slug: "no-more-room-in-hell-2",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "Story, endings, horror & route locks",
+    label: "Co-op Survival Horror & Zombie Extraction",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "Maps + achievements + survival systems + progression + combat decisions",
+  
+    description:
+      "Use the No More Room in Hell 2 guide hub to survive objective and extraction missions, learn map routes, plan achievement progression, understand combat systems, and solve the most common survival blockers without wasting runs.",
+  
+    coverage: [
+      "Main objective progression across all six core maps including Broadway, Beaulieu Hospital, Lewiston, Raven Rock, Pottsville, and Power Plant, with route decisions, objective order, extraction timing, and dangerous sections",
+      "Combat and survival fundamentals including stamina management, melee decisions, firearms, ammunition choices, healing timing, barricades, infected threats, and surviving high-pressure objective phases",
+      "All 35 achievements with a practical 100% route covering map clears, difficulty completions, Responder progression, Pacifist, Pulling a Trigger Is Like Ordering Takeout, weapon challenges, Nightmare, and final cleanup",
+      "Early Extraction decisions including when leaving early is correct, how objective progress affects risk, and how to avoid losing valuable runs",
+      "Infection management through symptoms, cure items, serum preparation, and when continuing a mission becomes too risky",
+      "Future system coverage including Survival Mode, weapons, skills, enemy types, and progression guides as the game receives more updates",
+    ],
+  
+    image:
+      "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 33,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "No More Room in Hell 2 Guide: Maps, Achievements & Survival",
+        href: "/no-more-room-in-hell-2",
+        type: "Guide Hub",
+        description:
+          "Start here for No More Room in Hell 2 progression, map walkthroughs, achievements, combat decisions, extraction strategy, and survival systems.",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Six objective maps, achievements, combat survival, infection, extraction decisions, Responder progression, and future systems",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Combat & Survival Guide",
+        href: "/no-more-room-in-hell-2/combat-survival-guide",
+        type: "Systems",
+        description:
+          "Learn stamina management, melee timing, firearm decisions, ammunition control, healing windows, barricades, and survival choices that keep runs alive.",
+        date: "Updated recently",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-combat-survival-guide.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 201,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Stamina, melee, firearms, ammo management, healing timing, barricades, runners, Prime zombies, and survival decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Achievements Guide: All 35 & 100% Route",
+        href: "/no-more-room-in-hell-2/achievements",
+        type: "Achievements",
+        description:
+          "Complete all 35 achievements with an efficient 100% route covering maps, Responder progression, Pacifist, weapon challenges, Nightmare, and cleanup.",
+        date: "Updated recently",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-pacifist-extraction.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 202,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "All 35 achievements, Pacifist, weapon challenges, map clears, Responder goals, Nightmare, and 100% cleanup",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Early Extraction Guide",
+        href: "/no-more-room-in-hell-2/early-extraction",
+        type: "Guide",
+        description:
+          "Understand when extracting early is the right decision, how to protect a successful run, and when pushing objectives is too risky.",
+        date: "Updated recently",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-early-extraction.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 203,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Extraction timing, risk decisions, failed objectives, survival priorities, and protecting successful runs",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Infection Cure Guide",
+        href: "/no-more-room-in-hell-2/how-to-cure-infection",
+        type: "Systems",
+        description:
+          "Learn how infection works, when symptoms become dangerous, how to use cure items, and when abandoning a run is smarter.",
+        date: "Updated recently",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-infection-cure.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 204,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Infection stages, cure items, serum timing, symptoms, and survival decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Broadway Walkthrough",
+        href: "/no-more-room-in-hell-2/broadway-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear Broadway with objective order, safer routes, extraction preparation, and practical survival decisions.",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-broadway.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Beaulieu Hospital Walkthrough",
+        href: "/no-more-room-in-hell-2/beaulieu-hospital-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the Hospital route, handle objectives, manage infected pressure, and prepare before dangerous sections.",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-beaulieu-hospital.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Lewiston Walkthrough",
+        href: "/no-more-room-in-hell-2/lewiston-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Complete Lewiston objectives with route guidance, extraction planning, and survival tips.",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-lewiston.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Raven Rock Walkthrough",
+        href: "/no-more-room-in-hell-2/raven-rock-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Navigate Raven Rock objectives, dangerous encounters, and extraction decisions.",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-raven-rock.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Pottsville Walkthrough",
+        href: "/no-more-room-in-hell-2/pottsville-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear Pottsville objectives while managing zombie pressure, positioning, and extraction risk.",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-pottsville.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title:
+          "No More Room in Hell 2 Power Plant Walkthrough",
+        href: "/no-more-room-in-hell-2/power-plant-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Finish the Power Plant mission with objective routing, combat preparation, and safer extraction planning.",
+        image:
+          "/images/no-more-room-in-hell-2/no-more-room-in-hell-2-power-plant.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+    ],
+  },
+  {
     title: "How to Fish",
     game: "How to Fish",
     href: "/how-to-fish",
