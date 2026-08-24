@@ -205,7 +205,7 @@ function FavoriteGameCover({
         alt={`${game.title} game cover`}
         fill
         sizes="48px"
-        quality={76}
+        quality={75}
         className="object-cover"
         onError={() => {
           setActiveCandidateIndex(

@@ -21,7 +21,7 @@ const FEATURED_HUB_HREFS = [
   "/librarian",
   "/gamble-with-your-friends",
   "/iron-nest",
-  "/dragonsword-awakening",
+  "/how-to-fish",
 ] as const;
 
 /**
@@ -292,7 +292,7 @@ function FeaturedHubCard({
           imagePadding={
             cluster.imagePadding ?? false
           }
-          quality={72}
+          quality={75}
           sizes="(min-width: 1280px) 280px, (min-width: 640px) calc(50vw - 2rem), 100vw"
         />
       </Link>
@@ -453,7 +453,7 @@ function LatestGuideHubCard({
           imageFit={cluster.imageFit ?? "cover"}
           imagePosition={cluster.imagePosition ?? "center"}
           imagePadding={cluster.imagePadding ?? false}
-          quality={76}
+          quality={75}
           sizes="(min-width: 1280px) 560px, (min-width: 1024px) calc(50vw - 3rem), 100vw"
         />
       </Link>
