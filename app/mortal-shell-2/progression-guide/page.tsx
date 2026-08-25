@@ -10,10 +10,13 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/progression-guide`;
 
 const metadataTitle =
-  "Mortal Shell 2 Progression Guide: Best Route & Where to Go";
+  "Mortal Shell 2 Progression Guide: Best Route & Where to Go First";
 
 const metadataDescription =
-  "Follow my Mortal Shell 2 progression route through Fainweald, Ova and Mether's Breath to Mammon, with clear next steps through the Unfound Path.";
+  "Follow my Mortal Shell 2 progression route from Marrow Keep through Fainweald, Ova, Mether's Breath and Mammon, with clear next steps to the Unfound Path.";
+
+const articleDescription =
+  "A practical Mortal Shell 2 progression guide covering where to go first, the route through Fainweald, when to prioritize Unblemished Ova, how Mether's Breath changes blocked routes, when to move into Mammon, and how to recognize the Walk the Unfound Path endgame transition.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-widows-overlook-first-beacon.webp`,
@@ -25,7 +28,7 @@ const imageUrls = [
 const toc = [
   {
     id: "how-i-approach-progression",
-    label: "How I approach progression",
+    label: "Progression route at a glance",
   },
   {
     id: "tar-golem",
@@ -41,7 +44,7 @@ const toc = [
   },
   {
     id: "fainweald-first",
-    label: "Why I stay in Fainweald",
+    label: "Where to go first",
   },
   {
     id: "mushroom-village",
@@ -57,15 +60,15 @@ const toc = [
   },
   {
     id: "corruption-and-methers-breath",
-    label: "Corruption & Mether's Breath",
+    label: "Mether's Breath & corruption",
   },
   {
     id: "when-i-return-to-marrow-keep",
-    label: "When I return to Marrow Keep",
+    label: "When to return to Marrow Keep",
   },
   {
     id: "when-to-move-to-mammon",
-    label: "When I move to Mammon",
+    label: "When to go to Mammon",
   },
   {
     id: "outskirts-of-mammon",
@@ -87,6 +90,10 @@ const toc = [
     id: "unfound-path",
     label: "Walk the Unfound Path",
   },
+  {
+    id: "progression-rule",
+    label: "Progression rule",
+  },
 ];
 
 const relatedLinks = [
@@ -100,7 +107,7 @@ const relatedLinks = [
   },
   {
     href: "/mortal-shell-2/weapons-guide",
-    label: "Weapons Guide",
+    label: "Best Weapons & Weapon Tier List",
   },
   {
     href: "/mortal-shell-2/ova-gloom-siphon",
@@ -119,18 +126,20 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Mortal Shell 2 Progression Guide: Where I Go Next",
+    title: metadataTitle,
     description:
-      "Follow the route I use from early Fainweald through Ova progression and Mether's Breath, then into Mammon and the Unfound Path.",
+      "Follow the route I use from Marrow Keep through Fainweald, Ova progression and Mether's Breath, then into Mammon and the Unfound Path.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-18",
+    modifiedTime: "2026-08-25",
     images: [
       {
         url: imageUrls[0],
@@ -140,11 +149,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Mortal Shell 2 Progression Guide: Where I Go Next",
+    title: metadataTitle,
     description:
-      "My route through Fainweald, Ova progression, Mether's Breath, Mammon, and the Unfound Path without clearing every detour.",
+      "My Mortal Shell 2 progression route through Fainweald, Ova, Mether's Breath and Mammon, with clear guidance on where to go next.",
     images: [imageUrls[0]],
   },
 };
@@ -184,14 +194,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Progression Guide: Best Route From Fainweald to Mammon",
-      description:
-        "A practical Mortal Shell 2 progression guide following the route I use from Marrow Keep and Widow's Overlook through early Fainweald, Mushroom Village, Shell and weapon decisions, Unblemished Ova, the Gloom Siphon, Mether's Breath, corruption-gated routes, the transition into Mammon, late-game blockers, and the Walk the Unfound Path endgame objective.",
+        "Mortal Shell 2 Progression Guide: Best Route & Where to Go First",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-18",
+      dateModified: "2026-08-25",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -202,6 +211,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Mortal Shell 2 progression",
+        },
+        {
+          "@type": "Thing",
+          name: "Mortal Shell 2 progression route",
+        },
+        {
+          "@type": "Thing",
+          name: "Mortal Shell 2 where to go first",
         },
         {
           "@type": "Thing",
@@ -279,13 +296,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Mortal Shell 2 Progression Route I Actually Follow"
-          description="I stabilize my build in Fainweald, let Ova progression open the world, then move into Mammon when my Shell, weapon, and routes are ready."
+          title="Mortal Shell 2 Progression Guide: Best Route & Where to Go First"
+          description="I start in Fainweald, let Ova progression and Mether's Breath open the blocked routes, then move into Mammon once my Shell and weapon are ready. This is the order I use when I want to keep moving without clearing every detour."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 18, 2026"
+          updatedAt="August 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

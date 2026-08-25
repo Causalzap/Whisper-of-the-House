@@ -13,7 +13,10 @@ const metadataTitle =
   "Mortal Shell 2 Great Martyr's Blade Location & Frost Guide";
 
 const metadataDescription =
-  "Find the Great Martyr's Blade through Gloomshade Grove and Martyr's Prison, then learn its Frost build, best setup, and whether the weapon is worth using.";
+  "Find the Great Martyr's Blade in Martyr's Prison, then build around Frost and Captive's Scabstone, with route blockers, comparisons, and upgrade timing.";
+
+const articleDescription =
+  "A practical Mortal Shell 2 Great Martyr's Blade guide covering its Martyr's Prison location, the Gloomshade Grove and Blood-Cursed Lithopod route, the Eredrim route split, Frost build, Captive's Scabstone, Tarstones, weapon comparisons, and when the Blade is worth upgrading.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-weapon.webp`,
@@ -112,7 +115,7 @@ const relatedLinks = [
   },
   {
     href: "/mortal-shell-2/weapons-guide",
-    label: "Best Weapons & Tier List",
+    label: "Best Weapons & Weapon Tier List",
   },
   {
     href: "/mortal-shell-2/how-to-unlock-eredrim",
@@ -131,18 +134,20 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
     description:
-      "Find the Great Martyr's Blade in Martyr's Prison, open the route through Gloomshade Grove, and build the weapon around Frost and Captive's Scabstone.",
+      "Find the Great Martyr's Blade through Gloomshade Grove and Martyr's Prison, then learn why Frost and Captive's Scabstone make the slow greatsword much stronger.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-22",
+    modifiedTime: "2026-08-25",
     images: [
       {
         url: imageUrls[0],
@@ -152,11 +157,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Great Martyr's Blade location, Martyr's Prison route, Frost build, Captive's Scabstone, and whether the weapon is worth using.",
+      "Great Martyr's Blade location, Martyr's Prison route, Frost build, Captive's Scabstone, comparisons, and upgrade timing.",
     images: [imageUrls[0]],
   },
 };
@@ -197,13 +203,12 @@ const jsonLd = {
       },
       headline:
         "Mortal Shell 2 Great Martyr's Blade Location & Frost Guide",
-      description:
-        "A complete Mortal Shell 2 Great Martyr's Blade guide covering its location, Gloomshade Grove, the Blood-Cursed Lithopod, Martyr's Prison, moveset, Frost build, Captive's Scabstone, Tarstones, upgrade timing, and weapon comparisons.",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-22",
+      dateModified: "2026-08-25",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -247,6 +252,14 @@ const jsonLd = {
           "@type": "Thing",
           name: "Great Martyr's Blade Tarstones",
         },
+        {
+          "@type": "Thing",
+          name: "Veteran's Battle Axe",
+        },
+        {
+          "@type": "Thing",
+          name: "Axatana",
+        },
       ],
       isPartOf: {
         "@type": "WebSite",
@@ -280,12 +293,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Mortal Shell 2 Great Martyr's Blade Location & Frost Guide"
-          description="I route through Gloomshade Grove and Martyr's Prison for the Great Martyr's Blade, then build around Frost and Captive's Scabstone once I know the slow greatsword fits my playstyle."
+          description="I get the Great Martyr's Blade through Gloomshade Grove and Martyr's Prison, test its slow moveset before spending heavily, then build around Frost and Captive's Scabstone when I want heavy control and large punish windows."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 22, 2026"
+          updatedAt="August 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

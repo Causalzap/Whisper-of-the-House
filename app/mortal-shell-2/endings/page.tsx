@@ -13,7 +13,10 @@ const metadataTitle =
   "Mortal Shell 2 Endings Guide: Main & Baghead Secret Ending";
 
 const metadataDescription =
-  "Get both Mortal Shell 2 endings: solve Baghead's nothing quest, finish the Unfound Path, beat Zmey, and know when Send Ova starts New Game Plus.";
+  "Mortal Shell 2 has two endings: Baghead's secret ending and the main ending. Get both in one run and know when Send Ova starts New Game Plus.";
+
+const articleDescription =
+  "A complete Mortal Shell 2 endings guide covering both ending sequences, Baghead's nothing quest and Special Moonshine solution, the Bag Holder achievement, the 168 Ova requirement, Walk the Unfound Path, Zmey the Unbidden, the real Send Ova point of no return, the main ending, and New Game Plus.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-baghead-joke-ending.webp`,
@@ -35,7 +38,7 @@ const toc = [
   },
   {
     id: "what-happens-baghead-ending",
-    label: "What happens in Baghead ending?",
+    label: "What happens after Baghead?",
   },
   {
     id: "bag-holder",
@@ -59,15 +62,15 @@ const toc = [
   },
   {
     id: "after-zmey",
-    label: "What happens after Zmey?",
+    label: "Can you play after Zmey?",
   },
   {
     id: "point-of-no-return",
-    label: "Real point of no return",
+    label: "Point of no return",
   },
   {
     id: "send-kin-to-heavens",
-    label: "Send Ova and main ending",
+    label: "Main ending",
   },
   {
     id: "harbinger-stays-behind",
@@ -110,25 +113,27 @@ const relatedLinks = [
   },
   {
     href: "/mortal-shell-2/weapons-guide",
-    label: "Weapons Guide",
+    label: "Best Weapons & Weapon Tier List",
   },
 ];
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
     description:
-      "Get the Baghead secret ending, finish the main ending, learn what happens after Zmey, and know exactly when Send Ova moves the save into New Game Plus.",
+      "Mortal Shell 2 has two ending sequences. Get Baghead's secret ending, finish the Unfound Path and Zmey, then use Send Ova when you are ready for New Game Plus.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-22",
+    modifiedTime: "2026-08-25",
     images: [
       {
         url: imageUrls[0],
@@ -138,11 +143,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "How to get the Baghead secret ending and main ending, plus the real Send Ova point of no return before New Game Plus.",
+      "Get both Mortal Shell 2 endings in one run, solve Baghead's nothing quest, beat Zmey, and know why Send Ova is the real point of no return.",
     images: [imageUrls[0]],
   },
 };
@@ -183,13 +189,12 @@ const jsonLd = {
       },
       headline:
         "Mortal Shell 2 Endings Guide: Main & Baghead Secret Ending",
-      description:
-        "A complete Mortal Shell 2 endings guide covering the Baghead secret ending, the nothing and Special Moonshine solution, Bag Holder achievement, the Unfound Path, Zmey the Unbidden, Send Ova, the main ending, and New Game Plus.",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-22",
+      dateModified: "2026-08-25",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -294,12 +299,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Mortal Shell 2 Endings Guide: Main & Baghead Secret Ending"
-          description="I trigger Baghead's secret ending first, then finish the Unfound Path and Zmey before using Send Ova for the main ending and New Game Plus."
+          description="There are two ending sequences I can get in one playthrough. I do Baghead's secret ending first, then finish the Unfound Path and Zmey before using Send Ova for the main ending and New Game Plus."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 22, 2026"
+          updatedAt="August 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

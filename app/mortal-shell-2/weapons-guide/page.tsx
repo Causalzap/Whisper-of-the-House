@@ -10,10 +10,13 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/weapons-guide`;
 
 const metadataTitle =
-  "Mortal Shell 2 Best Weapons & Tier List: All 8 Ranked";
+  "Mortal Shell 2 Best Weapons & Weapon Tier List: All 8 Ranked";
 
 const metadataDescription =
-  "Rank all 8 Mortal Shell 2 weapons, compare the best early and late-game picks, and see their Infusions, Tarstones, locations, and when to switch.";
+  "Axatana is my best overall Mortal Shell 2 weapon. See all 8 ranked, plus the best early picks, Infusions, Tarstones, locations, and when each is worth using.";
+
+const articleDescription =
+  "Axatana is my best overall Mortal Shell 2 weapon, but the strongest choice changes by progression and build. This guide ranks all eight melee weapons and compares their movesets, Infusions, Tarstones, locations, and best uses.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-axatana-stasis.webp`,
@@ -37,11 +40,7 @@ const toc = [
   },
   {
     id: "best-early-weapon",
-    label: "Best early weapon",
-  },
-  {
-    id: "how-i-choose-a-weapon",
-    label: "How I choose a weapon",
+    label: "Best early weapons",
   },
   {
     id: "iconoclast",
@@ -80,14 +79,6 @@ const toc = [
     label: "Best status weapons",
   },
   {
-    id: "which-weapon-should-i-use",
-    label: "Which weapon should I use?",
-  },
-  {
-    id: "later-weapons",
-    label: "When to switch weapons",
-  },
-  {
     id: "upgrade-rule",
     label: "Weapon upgrade rule",
   },
@@ -123,18 +114,20 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
     description:
-      "Compare all eight Mortal Shell 2 melee weapons, including my best overall, early-game, heavy, status, and late-game picks.",
+      "Axatana is my best overall pick. Compare all eight Mortal Shell 2 melee weapons, including the best early, late-game, heavy, and status choices.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-22",
+    modifiedTime: "2026-08-25",
     images: [
       {
         url: imageUrls[0],
@@ -144,11 +137,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "All 8 Mortal Shell 2 weapons ranked, with the best early and late-game picks, Infusions, Tarstones, and weapon-switching advice.",
+      "Axatana leads my Mortal Shell 2 weapon tier list. See all 8 weapons ranked, plus the best early picks, Infusions, Tarstones, and status builds.",
     images: [imageUrls[0]],
   },
 };
@@ -175,7 +169,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Weapons Guide",
+          name: "Best Weapons & Weapon Tier List",
           item: pageUrl,
         },
       ],
@@ -188,14 +182,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Best Weapons & Tier List: All 8 Ranked",
-      description:
-        "A complete Mortal Shell 2 weapons guide ranking all eight melee weapons, including the best overall and early-game choices, movesets, Tarstones, Infusions, weapon locations, status builds, and when each weapon is worth switching to.",
+        "Mortal Shell 2 Best Weapons & Weapon Tier List: All 8 Ranked",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-22",
+      dateModified: "2026-08-25",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -283,13 +276,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Mortal Shell 2 Best Weapons & Tier List: All 8 Ranked"
-          description="I compare all eight melee weapons, explain why Axatana is my best overall pick, choose the best early weapons, and break down which Infusions and Tarstones make each weapon worth using."
+          title="Mortal Shell 2 Best Weapons & Weapon Tier List: All 8 Ranked"
+          description="Axatana is my best overall pick, but the right weapon changes with progression and build. I rank all eight melee weapons and explain the Infusions, Tarstones, and situations that make each one worth using."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 22, 2026"
+          updatedAt="August 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
