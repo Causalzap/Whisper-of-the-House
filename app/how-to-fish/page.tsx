@@ -9,24 +9,126 @@ import HowToFishContent from "@/data/how-to-fish/index.mdx";
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/how-to-fish`;
 
+const metadataTitle =
+  "How to Fish Walkthrough: All Islands & Progression Guide";
+
+const metadataDescription =
+  "How to Fish has five main island stops. Follow the full progression route, solve NPC and boss gates, use Radar coordinates, and reach the Volcano finale.";
+
+const articleDescription =
+  "A practical How to Fish walkthrough covering all five main island stops, how island progression works, NPC and boss gates, Radar coordinates, the Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, scientist's Bowhead Whale experiment, Mutated Bowhead Whale, and the final route toward the mainland.";
+
 const imageUrls = [
   `${siteUrl}/images/how-to-fish/how-to-fish-scientist-whale-mission.webp`,
 ];
 
+const toc = [
+  {
+    id: "how-many-islands",
+    label: "How many islands?",
+  },
+  {
+    id: "how-progression-works",
+    label: "How island progression works",
+  },
+  {
+    id: "lighthouse",
+    label: "Island 1: Lighthouse",
+  },
+  {
+    id: "radar-coordinates",
+    label: "Radar and coordinates",
+  },
+  {
+    id: "island-2",
+    label: "Island 2: Forest",
+  },
+  {
+    id: "island-3",
+    label: "Island 3: Desert",
+  },
+  {
+    id: "island-4",
+    label: "Island 4: Rocks",
+  },
+  {
+    id: "military-volcano",
+    label: "Island 5: Military & Volcano",
+  },
+  {
+    id: "mutated-bowhead-whale",
+    label: "Mutated Bowhead Whale",
+  },
+  {
+    id: "upgrade-priority",
+    label: "When to upgrade",
+  },
+  {
+    id: "all-fish",
+    label: "All 49 creatures",
+  },
+  {
+    id: "after-story",
+    label: "After the story",
+  },
+  {
+    id: "where-to-go-when-stuck",
+    label: "Where to go when stuck",
+  },
+];
+
+const relatedLinks = [
+  {
+    href: "/how-to-fish/spider-crab",
+    label: "How to Beat the Spider Crab",
+  },
+  {
+    href: "/how-to-fish/leech-bait",
+    label: "Leech Bait Guide",
+  },
+  {
+    href: "/how-to-fish/giant-piranha",
+    label: "Giant Piranha Guide",
+  },
+  {
+    href: "/how-to-fish/endangered-fish",
+    label: "Endangered Fish & Carrot Guide",
+  },
+  {
+    href: "/how-to-fish/pufferfish",
+    label: "How to Beat the Pufferfish",
+  },
+  {
+    href: "/how-to-fish/boss-guide",
+    label: "All Bosses & Strategies",
+  },
+  {
+    href: "/how-to-fish/all-fish-locations",
+    label: "All 49 Creatures & Locations",
+  },
+  {
+    href: "/how-to-fish/achievements",
+    label: "All 28 Achievements",
+  },
+];
+
 export const metadata: Metadata = {
-  title: "How to Fish Walkthrough: All Islands & Progression Guide",
-  description:
-    "Follow the How to Fish story across all five islands, solve NPC gates, use Radar coordinates, unlock bosses, and finish the Volcano route.",
+  title: metadataTitle,
+  description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Fish Walkthrough: All Islands & Progression Guide",
+    title: metadataTitle,
     description:
-      "Follow the full story from the Lighthouse through all five island areas, boss gates, Radar coordinates, the scientist, and the Volcano finale.",
+      "How to Fish has five main island stops. Follow the route from the Lighthouse through Island 2, Island 3, Island 4, the military and Volcano area, and the final mainland progression.",
     siteName: "Whisper of the House",
+    publishedTime: "2026-08-21",
+    modifiedTime: "2026-08-25",
     images: [
       {
         url: imageUrls[0],
@@ -36,11 +138,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "How to Fish Walkthrough & Progression Guide",
+    title: metadataTitle,
     description:
-      "Follow all five island areas, solve NPC progression gates, use Radar coordinates, and reach the final Volcano and mainland route.",
+      "Follow all five How to Fish island stops, solve NPC and boss progression gates, use Radar coordinates, and reach the Volcano and final mainland route.",
     images: [imageUrls[0]],
   },
 };
@@ -74,17 +177,19 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "How to Fish Walkthrough: All Islands and Progression Guide",
-      description:
-        "A practical How to Fish walkthrough covering all five main island areas, NPC progression gates, Radar coordinates, the Spider Crab, Giant Piranha, Pufferfish, Terrorizing Bird, scientist and Bowhead Whale experiment, Mutated Bowhead Whale, upgrade decisions, and the final route toward the mainland.",
+        "How to Fish Walkthrough: All Islands & Progression Guide",
+      description: articleDescription,
+      url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-21",
-      dateModified: "2026-08-23",
+      dateModified: "2026-08-25",
+      articleSection: "How to Fish Guides",
       about: [
         {
           "@type": "VideoGame",
           name: "How to Fish",
+          url: pageUrl,
         },
         {
           "@type": "Thing",
@@ -97,6 +202,26 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "How to Fish islands",
+        },
+        {
+          "@type": "Thing",
+          name: "How many islands are in How to Fish",
+        },
+        {
+          "@type": "Thing",
+          name: "How to Fish Island 2",
+        },
+        {
+          "@type": "Thing",
+          name: "How to Fish Island 3",
+        },
+        {
+          "@type": "Thing",
+          name: "How to Fish Island 4",
+        },
+        {
+          "@type": "Thing",
+          name: "How to Fish Island 5",
         },
         {
           "@type": "Thing",
@@ -134,96 +259,6 @@ const jsonLd = {
   ],
 };
 
-const toc = [
-  {
-    id: "how-progression-works",
-    label: "How progression works",
-  },
-  {
-    id: "how-many-islands",
-    label: "How many islands",
-  },
-  {
-    id: "lighthouse",
-    label: "Lighthouse",
-  },
-  {
-    id: "radar-coordinates",
-    label: "Radar and coordinates",
-  },
-  {
-    id: "island-2",
-    label: "Island 2",
-  },
-  {
-    id: "island-3",
-    label: "Island 3",
-  },
-  {
-    id: "island-4",
-    label: "Island 4",
-  },
-  {
-    id: "military-volcano",
-    label: "Military and Volcano",
-  },
-  {
-    id: "mutated-bowhead-whale",
-    label: "Mutated Bowhead Whale",
-  },
-  {
-    id: "upgrade-priority",
-    label: "Upgrade priority",
-  },
-  {
-    id: "all-fish",
-    label: "All 49 creatures",
-  },
-  {
-    id: "after-story",
-    label: "After the story",
-  },
-  {
-    id: "where-to-go-when-stuck",
-    label: "Where to go when stuck",
-  },
-];
-
-const relatedLinks = [
-  {
-    href: "/how-to-fish/spider-crab",
-    label: "Spider Crab & Boat Keys Guide",
-  },
-  {
-    href: "/how-to-fish/leech-bait",
-    label: "Leech Bait Guide",
-  },
-  {
-    href: "/how-to-fish/giant-piranha",
-    label: "Giant Piranha Guide",
-  },
-  {
-    href: "/how-to-fish/endangered-fish",
-    label: "Endangered Fish & Carrot Guide",
-  },
-  {
-    href: "/how-to-fish/pufferfish",
-    label: "Pufferfish Boss Guide",
-  },
-  {
-    href: "/how-to-fish/boss-guide",
-    label: "How to Fish Boss Guide",
-  },
-  {
-    href: "/how-to-fish/all-fish-locations",
-    label: "All 49 Creatures & Collector Guide",
-  },
-  {
-    href: "/how-to-fish/achievements",
-    label: "How to Fish Achievements",
-  },
-];
-
 export default function Page() {
   return (
     <>
@@ -232,17 +267,19 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
 
         <GuideArticlePage
-          title="How to Fish Walkthrough & Progression Guide"
-          description="Follow the main route across all five island areas, understand which NPC request or boss is blocking you, use the Radar correctly, and know when to move on instead of farming the wrong objective."
+          title="How to Fish Walkthrough: All Islands & Progression Guide"
+          description="There are five main island stops in How to Fish. I follow the route from the Lighthouse through the Forest, Desert, Rocks, and military/Volcano area, using NPC hand-ins and Radar coordinates to know when each stage is actually finished."
           gameTitle="How to Fish"
           gameHref="/how-to-fish"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 23, 2026"
+          updatedAt="August 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

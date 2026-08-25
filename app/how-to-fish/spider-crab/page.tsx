@@ -10,40 +10,111 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/how-to-fish`;
 const pageUrl = `${hubUrl}/spider-crab`;
 
+const metadataTitle =
+  "How to Beat the Spider Crab Boss in How to Fish";
+
+const metadataDescription =
+  "Beat the Spider Crab by getting Empty Beer Can bait, waiting for its self-stun, and attacking while dazed. Keep the Shell for Boat Keys and Radar.";
+
+const articleDescription =
+  "A practical How to Fish Spider Crab boss guide covering the Empty Beer Can bait, Lighthouse Keeper quest, self-stun strategy, melee preparation, Spider Crab Shell, Boat Keys, and Radar.";
+
 const imageUrls = [
   `${siteUrl}/images/how-to-fish/how-to-fish-spider-crab-empty-beer-can.webp`,
   `${siteUrl}/images/how-to-fish/how-to-fish-spider-crab-stun-window.webp`,
   `${siteUrl}/images/how-to-fish/how-to-fish-spider-crab-shell-boat-keys.webp`,
 ];
 
+const toc = [
+  {
+    id: "how-to-beat-spider-crab",
+    label: "How to beat Spider Crab",
+  },
+  {
+    id: "how-to-start",
+    label: "How to catch Spider Crab",
+  },
+  {
+    id: "empty-beer-can",
+    label: "Get the Empty Beer Can",
+  },
+  {
+    id: "before-fight",
+    label: "Fight preparation",
+  },
+  {
+    id: "how-to-stun",
+    label: "How to stun Spider Crab",
+  },
+  {
+    id: "why-i-keep-dying",
+    label: "Why the fight fails",
+  },
+  {
+    id: "after-kill",
+    label: "Spider Crab Shell",
+  },
+  {
+    id: "boat-keys",
+    label: "Boat Keys and Radar",
+  },
+];
+
+const relatedLinks = [
+  {
+    href: "/how-to-fish",
+    label: "How to Fish Walkthrough & Guide Hub",
+  },
+  {
+    href: "/how-to-fish/leech-bait",
+    label: "Leech Bait Guide",
+  },
+  {
+    href: "/how-to-fish/boss-guide",
+    label: "All Bosses & Strategies",
+  },
+  {
+    href: "/how-to-fish/giant-piranha",
+    label: "Giant Piranha Guide",
+  },
+  {
+    href: "/how-to-fish/all-fish-locations",
+    label: "All Fish & Creature Locations",
+  },
+];
+
 export const metadata: Metadata = {
-  title: "How to Fish Spider Crab: Stun, Beer Can & Boat Keys",
-  description:
-    "Beat the Spider Crab in How to Fish, get the Empty Beer Can, use its self-stun window, keep the Shell, unlock Boat Keys, and buy the Radar.",
+  title: metadataTitle,
+  description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Fish Spider Crab: Stun, Beer Can & Boat Keys",
+    title: metadataTitle,
     description:
-      "Learn how to trigger and beat the Spider Crab, use its self-stun opening, keep the Shell, and unlock the Boat Keys and Radar.",
+      "Get the Empty Beer Can, bait the Spider Crab into its own dazed state, attack during the stun window, then keep the Shell for the Boat Keys.",
     siteName: "Whisper of the House",
+    publishedTime: "2026-08-23",
+    modifiedTime: "2026-08-25",
     images: [
       {
         url: imageUrls[1],
         width: 1600,
         height: 900,
-        alt: "Spider Crab stunned after its own attack in How to Fish",
+        alt: "Spider Crab dazed after its own attack in How to Fish",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "How to Fish Spider Crab Guide",
+    title: metadataTitle,
     description:
-      "Get the Empty Beer Can, use the Spider Crab self-stun window, keep its Shell, and unlock the Boat Keys and Radar.",
+      "Beat the Spider Crab with its self-stun window, get the Empty Beer Can bait, keep the Shell, and unlock the Boat Keys and Radar.",
     images: [imageUrls[1]],
   },
 };
@@ -70,7 +141,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Spider Crab",
+          name: "Spider Crab Boss Guide",
           item: pageUrl,
         },
       ],
@@ -83,21 +154,31 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "How to Fish Spider Crab Guide: Empty Beer Can, Stun, Shell and Boat Keys",
-      description:
-        "A practical Spider Crab guide for How to Fish covering the Lighthouse Keeper Beer quest, Empty Beer Can bait, the Spider Crab self-stun window, melee preparation, Spider Crab Shell hand-in, Boat Keys, and the Radar.",
+        "How to Beat the Spider Crab Boss in How to Fish",
+      description: articleDescription,
+      url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-23",
-      dateModified: "2026-08-23",
+      dateModified: "2026-08-25",
+      articleSection: "How to Fish Guides",
       about: [
         {
           "@type": "VideoGame",
           name: "How to Fish",
+          url: hubUrl,
         },
         {
           "@type": "Thing",
-          name: "Spider Crab",
+          name: "Spider Crab boss",
+        },
+        {
+          "@type": "Thing",
+          name: "How to beat Spider Crab",
+        },
+        {
+          "@type": "Thing",
+          name: "Spider Crab boss strategy",
         },
         {
           "@type": "Thing",
@@ -139,56 +220,6 @@ const jsonLd = {
   ],
 };
 
-const toc = [
-  {
-    id: "how-to-start",
-    label: "How to start",
-  },
-  {
-    id: "empty-beer-can",
-    label: "Empty Beer Can",
-  },
-  {
-    id: "before-fight",
-    label: "Fight preparation",
-  },
-  {
-    id: "how-to-stun",
-    label: "How to stun Spider Crab",
-  },
-  {
-    id: "why-i-keep-dying",
-    label: "Why the fight fails",
-  },
-  {
-    id: "after-kill",
-    label: "Spider Crab Shell",
-  },
-  {
-    id: "boat-keys",
-    label: "Boat Keys and Radar",
-  },
-];
-
-const relatedLinks = [
-  {
-    href: "/how-to-fish",
-    label: "How to Fish Walkthrough & Progression Guide",
-  },
-  {
-    href: "/how-to-fish/leech-bait",
-    label: "Leech Bait Guide",
-  },
-  {
-    href: "/how-to-fish/boss-guide",
-    label: "How to Fish Boss Guide",
-  },
-  {
-    href: "/how-to-fish/all-fish-locations",
-    label: "All 49 Creatures & Collector Guide",
-  },
-];
-
 export default function Page() {
   return (
     <>
@@ -197,17 +228,19 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
 
         <GuideArticlePage
-          title="How to Fish Spider Crab Guide"
-          description="Get the Empty Beer Can, use the Spider Crab's self-stun opening, keep the Shell after the fight, and finish the Lighthouse Keeper hand-in for the Boat Keys and Radar."
+          title="How to Beat the Spider Crab Boss in How to Fish"
+          description="I get the Empty Beer Can from the Lighthouse Keeper, give the Spider Crab room to attack, then move in only when it dazes itself. After the fight, I keep the Shell for the Boat Keys and buy the Radar before leaving."
           gameTitle="How to Fish"
           gameHref="/how-to-fish"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 23, 2026"
+          updatedAt="August 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

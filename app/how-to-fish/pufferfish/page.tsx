@@ -10,6 +10,15 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/how-to-fish`;
 const pageUrl = `${hubUrl}/pufferfish`;
 
+const metadataTitle =
+  "How to Beat the Pufferfish Boss in How to Fish";
+
+const metadataDescription =
+  "Beat the Pufferfish boss on Island 3 by using a tree to break its charges, prepare before spending the Carrot, then collect the Tail and unlock Island 4.";
+
+const articleDescription =
+  "A practical How to Fish Pufferfish boss guide covering the Carrot trigger, the safest tree strategy, ranged weapon preparation, the 650 SMG and 600 Compensator, the later purple-hazard phase, the Pufferfish Tail, and the Island 4 unlock.";
+
 const imageUrls = [
   `${siteUrl}/images/how-to-fish/how-to-fish-pufferfish-carrot-bait.webp`,
   `${siteUrl}/images/how-to-fish/how-to-fish-pufferfish-smg-first-attempt.webp`,
@@ -19,34 +28,112 @@ const imageUrls = [
   `${siteUrl}/images/how-to-fish/how-to-fish-island-4-flash-drive.webp`,
 ];
 
+const toc = [
+  {
+    id: "how-to-beat-pufferfish",
+    label: "How to beat the Pufferfish",
+  },
+  {
+    id: "get-carrot-first",
+    label: "Get the Carrot first",
+  },
+  {
+    id: "prepare-before-carrot",
+    label: "Prepare before the fight",
+  },
+  {
+    id: "tree-dodge-route",
+    label: "Best tree strategy",
+  },
+  {
+    id: "when-to-shoot",
+    label: "When to shoot",
+  },
+  {
+    id: "smg-and-upgrades",
+    label: "SMG and upgrades",
+  },
+  {
+    id: "carrot-is-consumed",
+    label: "Failed Carrot attempts",
+  },
+  {
+    id: "later-phase",
+    label: "Later Pufferfish phase",
+  },
+  {
+    id: "stay-ranged",
+    label: "Stay at range",
+  },
+  {
+    id: "pufferfish-tail",
+    label: "Pufferfish Tail",
+  },
+  {
+    id: "unlock-island-4",
+    label: "Unlock Island 4",
+  },
+  {
+    id: "leave-for-island-4",
+    label: "Leave for Island 4",
+  },
+];
+
+const relatedLinks = [
+  {
+    href: "/how-to-fish",
+    label: "How to Fish Walkthrough & Guide Hub",
+  },
+  {
+    href: "/how-to-fish/endangered-fish",
+    label: "Endangered Fish & Carrot Guide",
+  },
+  {
+    href: "/how-to-fish/boss-guide",
+    label: "All Bosses & Strategies",
+  },
+  {
+    href: "/how-to-fish/giant-piranha",
+    label: "Giant Piranha Guide",
+  },
+  {
+    href: "/how-to-fish/achievements",
+    label: "How to Fish Achievements",
+  },
+];
+
 export const metadata: Metadata = {
-  title: "How to Fish Pufferfish: Carrot, Boss Fight & Tail",
-  description:
-    "Beat the Pufferfish on Island 3 with the Carrot and tree route, decide when to upgrade your weapon, keep the Tail, and unlock Island 4.",
+  title: metadataTitle,
+  description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Beat the Pufferfish and Unlock Island 4",
+    title: metadataTitle,
     description:
-      "Prepare before using the Carrot, circle trees to break the Pufferfish's approach, secure the Pufferfish Tail, and finish the Tourist hand-in.",
+      "Use a large tree to interrupt the Pufferfish's charges, shoot while it repositions, prepare before spending the Carrot, and collect the Tail for Island 4.",
     siteName: "Whisper of the House",
+    publishedTime: "2026-08-21",
+    modifiedTime: "2026-08-25",
     images: [
       {
         url: imageUrls[2],
         width: 1600,
         height: 900,
-        alt: "Pufferfish dodge route showing how to circle a tree and interrupt charge attacks in How to Fish",
+        alt: "Player circling a tree to interrupt the Pufferfish boss charge in How to Fish",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "How to Fish Pufferfish Boss Guide",
+    title: metadataTitle,
     description:
-      "Use the Carrot safely, fight around trees, fix SMG recoil problems, keep the Pufferfish Tail, and unlock the route to Island 4.",
+      "Beat the Pufferfish with the tree strategy, prepare before using the Carrot, manage ranged damage, collect the Tail, and unlock Island 4.",
     images: [imageUrls[2]],
   },
 };
@@ -73,7 +160,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Pufferfish Guide",
+          name: "Pufferfish Boss Guide",
           item: pageUrl,
         },
       ],
@@ -86,21 +173,31 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "How to Fish Pufferfish Guide: Carrot, Tree Strategy, Pufferfish Tail, and Island 4",
-      description:
-        "This How to Fish Pufferfish guide covers the full Island 3 boss progression after obtaining the Carrot. It explains why the Carrot should not be used before preparing, how failed attempts can force another prerequisite loop, when the 650 SMG and 600 Compensator make sense, how to circle trees to disrupt the Pufferfish's direct approach, how to survive the later phase, why the Pufferfish Tail must be collected after the kill, and how the Tourist hand-in unlocks the Island 4 route.",
+        "How to Beat the Pufferfish Boss in How to Fish",
+      description: articleDescription,
+      url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-21",
-      dateModified: "2026-08-21",
+      dateModified: "2026-08-25",
+      articleSection: "How to Fish Guides",
       about: [
         {
           "@type": "VideoGame",
           name: "How to Fish",
+          url: hubUrl,
         },
         {
           "@type": "Thing",
-          name: "Pufferfish",
+          name: "Pufferfish boss",
+        },
+        {
+          "@type": "Thing",
+          name: "How to beat Pufferfish",
+        },
+        {
+          "@type": "Thing",
+          name: "Pufferfish boss strategy",
         },
         {
           "@type": "Thing",
@@ -146,76 +243,6 @@ const jsonLd = {
   ],
 };
 
-const toc = [
-  {
-    id: "get-carrot-first",
-    label: "Get the Carrot first",
-  },
-  {
-    id: "prepare-before-carrot",
-    label: "Prepare before using it",
-  },
-  {
-    id: "carrot-is-consumed",
-    label: "Failed Carrot attempts",
-  },
-  {
-    id: "smg-and-upgrades",
-    label: "SMG and upgrades",
-  },
-  {
-    id: "tree-dodge-route",
-    label: "Tree dodge route",
-  },
-  {
-    id: "when-to-shoot",
-    label: "When to shoot",
-  },
-  {
-    id: "stay-ranged",
-    label: "Stay at range",
-  },
-  {
-    id: "later-phase",
-    label: "Later Pufferfish phase",
-  },
-  {
-    id: "pufferfish-tail",
-    label: "Pufferfish Tail",
-  },
-  {
-    id: "unlock-island-4",
-    label: "Unlock Island 4",
-  },
-  {
-    id: "leave-for-island-4",
-    label: "Leave for Island 4",
-  },
-];
-
-const relatedLinks = [
-  {
-    href: "/how-to-fish",
-    label: "How to Fish Walkthrough & Guide Hub",
-  },
-  {
-    href: "/how-to-fish/endangered-fish",
-    label: "Endangered Fish & Carrot Guide",
-  },
-  {
-    href: "/how-to-fish/boss-guide",
-    label: "How to Fish Boss Guide",
-  },
-  {
-    href: "/how-to-fish/giant-piranha",
-    label: "Giant Piranha Guide",
-  },
-  {
-    href: "/how-to-fish/achievements",
-    label: "How to Fish Achievements",
-  },
-];
-
 export default function Page() {
   return (
     <>
@@ -224,17 +251,19 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
 
         <GuideArticlePage
-          title="How to Fish Pufferfish Boss Guide"
-          description="Prepare before spending the Carrot, use trees to control the Pufferfish instead of fighting in open ground, fix weapon-control problems, collect the Pufferfish Tail, and finish the Tourist hand-in for Island 4."
+          title="How to Beat the Pufferfish Boss in How to Fish"
+          description="I fight the Island 3 Pufferfish around one large tree instead of running into open ground, shoot while its charge is interrupted, and stay ranged until it dies. I also prepare before spending the Carrot because a failed attempt can cost another one."
           gameTitle="How to Fish"
           gameHref="/how-to-fish"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 21, 2026"
+          updatedAt="August 25, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
