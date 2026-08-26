@@ -10,133 +10,98 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/how-to-fish`;
 const pageUrl = `${hubUrl}/achievements`;
 
+const metadataTitle =
+  "How to Fish Achievements: All 28 & 100% Guide";
+
+const metadataDescription =
+  "Complete all 28 How to Fish achievements with an efficient 100% route for Bean, Handyman, Fishipedia, Killscore, cooking, casino, and more.";
+
 const imageUrls = [
   `${siteUrl}/images/how-to-fish/how-to-fish-achievements-360-no-scope.webp`,
+  `${siteUrl}/images/how-to-fish/how-to-fish-achievements-start-grill.webp`,
   `${siteUrl}/images/how-to-fish/how-to-fish-achievements-legendary-skin.webp`,
   `${siteUrl}/images/how-to-fish/how-to-fish-achievements-all-in-green.webp`,
+  `${siteUrl}/images/how-to-fish/how-to-fish-achievements-let-me-go-seagull.webp`,
   `${siteUrl}/images/how-to-fish/how-to-fish-achievements-boat-fly.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "How to Fish Achievements: All 28 & 100% Guide",
-  description:
-    "Complete all 28 How to Fish achievements with a practical 100% route for Collector, Fishipedia, Bean, Handyman, Killscore, casino, and more.",
+  title: metadataTitle,
+  description: metadataDescription,
   alternates: {
     canonical: pageUrl,
   },
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "How to Fish Achievements: All 28 & 100% Guide",
-    description:
-      "Complete all 28 achievements with an efficient cleanup route for collection, Killscore, cooking, casino, Bean, Easy, Handyman, and more.",
+    title: metadataTitle,
+    description: metadataDescription,
     siteName: "Whisper of the House",
-    images: [
-      {
-        url: imageUrls[0],
-        width: 1600,
-        height: 900,
-        alt: "360 no scope achievement unlocking after a trick shot kill in How to Fish",
-      },
-    ],
+    images: imageUrls.map((url) => ({
+      url,
+      alt: "How to Fish achievements and 100% completion guide",
+    })),
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to Fish Achievements: All 28 & 100% Guide",
-    description:
-      "Complete all 28 achievements with a practical route through story cleanup, collection, Killscore, Bean, Handyman, and other challenges.",
+    title: metadataTitle,
+    description: metadataDescription,
     images: [imageUrls[0]],
   },
 };
 
-const jsonLd = {
+const breadcrumbJsonLd = {
   "@context": "https://schema.org",
-  "@graph": [
+  "@type": "BreadcrumbList",
+  itemListElement: [
     {
-      "@type": "BreadcrumbList",
-      "@id": `${pageUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: siteUrl,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "How to Fish Guide",
-          item: hubUrl,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "Achievements",
-          item: pageUrl,
-        },
-      ],
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: siteUrl,
     },
     {
-      "@type": "Article",
-      "@id": `${pageUrl}#article`,
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": pageUrl,
-      },
-      headline: "How to Fish Achievements: All 28 and 100% Guide",
-      description:
-        "A practical guide to all 28 How to Fish achievements, including the best 100% cleanup order and focused strategies for Killscore, cooking, casino and money, gear, boat challenges, Collector, Fishipedia, Bean, Easy, and Handyman.",
-      image: imageUrls,
-      inLanguage: "en",
-      datePublished: "2026-08-21",
-      dateModified: "2026-08-23",
-      about: [
-        {
-          "@type": "VideoGame",
-          name: "How to Fish",
-        },
-        {
-          "@type": "Thing",
-          name: "How to Fish achievements",
-        },
-        {
-          "@type": "Thing",
-          name: "How to Fish 100 percent completion",
-        },
-        {
-          "@type": "Thing",
-          name: "Collector achievement",
-        },
-        {
-          "@type": "Thing",
-          name: "Fishipedia achievement",
-        },
-        {
-          "@type": "Thing",
-          name: "Bean achievement",
-        },
-        {
-          "@type": "Thing",
-          name: "Handyman achievement",
-        },
-      ],
-      isPartOf: {
-        "@type": "WebSite",
-        "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
-      },
-      breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
-      },
+      "@type": "ListItem",
+      position: 2,
+      name: "How to Fish Guide",
+      item: hubUrl,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Achievements",
+      item: pageUrl,
     },
   ],
+};
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "How to Fish Achievements Guide: All 28 Unlocks",
+  description: metadataDescription,
+  image: imageUrls,
+  datePublished: "2026-08-23",
+  dateModified: "2026-08-26",
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": pageUrl,
+  },
+  about: {
+    "@type": "VideoGame",
+    name: "How to Fish",
+    url: hubUrl,
+  },
+  author: {
+    "@type": "Organization",
+    name: "Whisper of the House",
+    url: siteUrl,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Whisper of the House",
+    url: siteUrl,
+  },
 };
 
 const toc = [
@@ -166,7 +131,7 @@ const toc = [
   },
   {
     id: "one-off-achievements",
-    label: "One-off achievements",
+    label: "Seagulls and boat physics",
   },
   {
     id: "easy-fast-boss",
@@ -217,31 +182,44 @@ const relatedLinks = [
   },
 ];
 
-export default function Page() {
+export default function HowToFishAchievementsPage() {
   return (
     <>
       <Header />
 
-      <main>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd).replace(
+            /</g,
+            "\\u003c",
+          ),
+        }}
+      />
 
-        <GuideArticlePage
-          title="How to Fish Achievements Guide"
-          description="Track all 28 achievements and use a practical 100% cleanup route for Killscore, cooking, casino, collection, boat challenges, Bean, Easy, and Handyman."
-          gameTitle="How to Fish"
-          gameHref="/how-to-fish"
-          breadcrumbBaseHref="/"
-          breadcrumbBaseLabel="Home"
-          updatedAt="August 23, 2026"
-          toc={toc}
-          relatedLinks={relatedLinks}
-        >
-          <HowToFishAchievementsContent />
-        </GuideArticlePage>
-      </main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(
+            /</g,
+            "\\u003c",
+          ),
+        }}
+      />
+
+      <GuideArticlePage
+        title="How to Fish Achievements Guide: All 28 Unlocks"
+        description="Track every achievement, follow an efficient three-pass 100% route, and use reliable setups for Bean, Handyman, Fishipedia, Easy, Killscore, cooking, and casino challenges."
+        gameTitle="How to Fish"
+        gameHref="/how-to-fish"
+        breadcrumbBaseHref="/how-to-fish"
+        breadcrumbBaseLabel="How to Fish Guide"
+        updatedAt="August 26, 2026"
+        toc={toc}
+        relatedLinks={relatedLinks}
+      >
+        <HowToFishAchievementsContent />
+      </GuideArticlePage>
 
       <Footer />
     </>

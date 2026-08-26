@@ -1,1293 +1,611 @@
 import Link from "next/link";
 import Image from "next/image";
 import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+export const creatureColumns = [
+  { key: "entry", label: "#" },
+  { key: "creature", label: "Creature" },
+  { key: "requirement", label: "Rod / Lure / Trigger" },
+  { key: "check", label: "What I Check" },
+];
+
+export const crabRodRows = [
+  {
+    entry: "1",
+    creature: "Clam",
+    requirement: "Ground creature",
+    check: "Pick one up around the starting area and kill it",
+  },
+  {
+    entry: "2",
+    creature: "Brown Crab",
+    requirement: "Crab Fishing Rod; starting pool",
+    check: "Separate entry from Blue Crab and Rock Crab",
+  },
+  {
+    entry: "3",
+    creature: "Blue Crab",
+    requirement: "Crab Fishing Rod",
+    check: "Does not share progress with the other crab species",
+  },
+  {
+    entry: "4",
+    creature: "Rock Crab",
+    requirement: "Crab Fishing Rod; Free Lure or Hot Dog",
+    check: "Check its exact slot instead of relying on the general crab count",
+  },
+  {
+    entry: "5",
+    creature: "Shrimp",
+    requirement: "Crab Fishing Rod; Free Lure",
+    check: "Regular Crab Fishing Rod catch; no special trigger",
+  },
+  {
+    entry: "6",
+    creature: "Lobster",
+    requirement: "Crab Fishing Rod; Hot Dog",
+    check: "Use Hot Dog if this larger crustacean entry is still blank",
+  },
+  {
+    entry: "8",
+    creature: "Piranha",
+    requirement: "Crab Fishing Rod; Hot Dog",
+    check: "Separate entry from the Giant Piranha story boss",
+  },
+];
+
+export const freeBeginnerRows = [
+  {
+    entry: "9",
+    creature: "Mackerel",
+    requirement: "Fishing Rod; Free Lure",
+    check: "Regular Free Lure catch; no special trigger",
+  },
+  {
+    entry: "10",
+    creature: "Gar",
+    requirement: "Fishing Rod; Free Lure",
+    check: "Keep using Free Lure if this exact slot is blank",
+  },
+  {
+    entry: "11",
+    creature: "Pike",
+    requirement: "Fishing Rod; Free Lure or Beginner Lure",
+    check: "Separate entry from The Old Pike",
+  },
+  {
+    entry: "12",
+    creature: "Cod",
+    requirement: "Fishing Rod; Beginner Lure",
+    check: "Regular Beginner Lure catch; no Boss Lure required",
+  },
+  {
+    entry: "13",
+    creature: "Goldfish",
+    requirement: "Fishing Rod; Free Lure or Beginner Lure",
+    check: "Can appear with either of the two early Lures",
+  },
+  {
+    entry: "14",
+    creature: "Perch",
+    requirement: "Fishing Rod; Beginner Lure",
+    check: "Regular Beginner Lure catch; no special trigger",
+  },
+  {
+    entry: "15",
+    creature: "Triggerfish",
+    requirement: "Fishing Rod; Beginner Lure",
+    check: "Regular Beginner Lure catch; no special trigger",
+  },
+];
+
+export const standardLureRows = [
+  {
+    entry: "19",
+    creature: "Angelfish",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Regular Standard Lure catch; no special trigger",
+  },
+  {
+    entry: "20",
+    creature: "Boxfish",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Regular Standard Lure catch; no special trigger",
+  },
+  {
+    entry: "21",
+    creature: "Catfish",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Regular Standard Lure catch; no special trigger",
+  },
+  {
+    entry: "22",
+    creature: "Sea Urchin",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Can remain dangerous while I continue fishing",
+  },
+  {
+    entry: "23",
+    creature: "Seahorse",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Can also satisfy the Tourist’s endangered-creature request",
+  },
+  {
+    entry: "24",
+    creature: "Clownfish",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Check separately from the similarly sized Standard catches",
+  },
+  {
+    entry: "25",
+    creature: "Bluegill",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Regular Standard Lure catch; no Boss Lure required",
+  },
+  {
+    entry: "26",
+    creature: "Salmon",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Stay with the Standard pool instead of changing islands",
+  },
+  {
+    entry: "27",
+    creature: "Needlefish",
+    requirement: "Fishing Rod; Standard Lure",
+    check: "Another valid endangered creature for the Tourist",
+  },
+];
+
+export const professionalLureRows = [
+  {
+    entry: "30",
+    creature: "Parrotfish",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Regular Professional Lure catch; no special trigger",
+  },
+  {
+    entry: "31",
+    creature: "Voxelfish",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Regular Professional Lure catch; no special trigger",
+  },
+  {
+    entry: "32",
+    creature: "Bass",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Regular Professional Lure catch; no special trigger",
+  },
+  {
+    entry: "33",
+    creature: "Halibut",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Separate entry from Flounder",
+  },
+  {
+    entry: "34",
+    creature: "Eel",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Regular Professional Lure catch; no special trigger",
+  },
+  {
+    entry: "35",
+    creature: "Tigerfish",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Can continue attacking after a released catch",
+  },
+  {
+    entry: "36",
+    creature: "Flying Fish",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Check the exact name instead of relying on its movement",
+  },
+  {
+    entry: "37",
+    creature: "Sengarat",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Regular Professional Lure catch; no special trigger",
+  },
+  {
+    entry: "38",
+    creature: "Red Snapper",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Regular Professional Lure catch; no special trigger",
+  },
+  {
+    entry: "39",
+    creature: "Flounder",
+    requirement: "Fishing Rod; Professional Lure",
+    check: "Easy to overlook in the largest regular Lure pool",
+  },
+];
+
+export const scientificLureRows = [
+  {
+    entry: "42",
+    creature: "Anglerfish",
+    requirement: "Fishing Rod; Scientific Lure",
+    check: "Regular Scientific Lure catch; no special trigger",
+  },
+  {
+    entry: "43",
+    creature: "Blobfish",
+    requirement: "Fishing Rod; Scientific Lure",
+    check: "Regular Scientific Lure catch; no special trigger",
+  },
+  {
+    entry: "44",
+    creature: "Oarfish",
+    requirement: "Fishing Rod; Scientific Lure",
+    check: "Use the encyclopedia name rather than judging by visual size",
+  },
+  {
+    entry: "45",
+    creature: "Superdwarf Fish",
+    requirement: "Fishing Rod; Scientific Lure",
+    check: "Small regular catch from the Scientific pool",
+  },
+  {
+    entry: "46",
+    creature: "Stonefish",
+    requirement: "Fishing Rod; Scientific Lure",
+    check: "Regular Scientific Lure catch; separate from Goblin Shark",
+  },
+];
+
+export const bossLureRows = [
+  {
+    entry: "16",
+    creature: "Sunfish",
+    requirement: "Beginner Boss Lure",
+    check: "The Old Pike is not the only entry in this pool",
+  },
+  {
+    entry: "17",
+    creature: "The Old Pike",
+    requirement: "Beginner Boss Lure",
+    check: "Separate entry from the normal Pike",
+  },
+  {
+    entry: "28",
+    creature: "Blue Shark",
+    requirement: "Standard Boss Lure",
+    check: "Keep it if the Grillmaster objective is still active",
+  },
+  {
+    entry: "40",
+    creature: "Tuna",
+    requirement: "Professional Boss Lure",
+    check: "Keep it to trigger the Terrorizing Bird",
+  },
+  {
+    entry: "47",
+    creature: "Goblin Shark",
+    requirement: "Scientific Boss Lure",
+    check: "Optional and separate from the normal Scientific pool",
+  },
+];
+
+export const storyCreatureRows = [
+  {
+    entry: "7",
+    creature: "Spider Crab",
+    requirement: "Empty Beer Can",
+    check: "Complete the Lighthouse Keeper sequence for the boss trigger",
+  },
+  {
+    entry: "18",
+    creature: "Giant Piranha",
+    requirement: "Modified Leech",
+    check: "Complete the three-Leech quest before attempting the boss",
+  },
+  {
+    entry: "29",
+    creature: "Pufferfish",
+    requirement: "Carrot",
+    check: "Locked behind the Tourist’s endangered-creature chain",
+  },
+  {
+    entry: "41",
+    creature: "Albatross",
+    requirement: "Tuna",
+    check: "Obtained through the Terrorizing Bird encounter",
+  },
+  {
+    entry: "48",
+    creature: "Bowhead Whale",
+    requirement: "Fish Bucket from the Scientist",
+    check: "Part of the Scientist’s late-game experiment",
+  },
+  {
+    entry: "49",
+    creature: "Mutated Bowhead Whale",
+    requirement: "Bowhead Whale and Volcano sequence",
+    check: "Final progression boss; separate from the normal Bowhead Whale",
+  },
+];
 
 <GuideQuickAnswer title="Quick Answer">
-*How to Fish* has **49 normal creature entries** to complete for **Collector**.
+*How to Fish* has **49 normal creature entries** for **Collector** and a separate **49-entry Drip collection** for **Fishipedia**.
 
-I do not try to finish all 49 during my first trip through the story. I unlock the later islands and lure tiers first, then open the encyclopedia with `Tab` and clean up the missing slots by area.
+I open the encyclopedia with `Tab` before starting cleanup.
 
-The five collection areas are:
+For ordinary catches, the **Rod and equipped Lure** determine the available creature pool. I do not need to return to a specific island for every normal fish once I own the correct equipment.
 
-**Lighthouse**
+The exceptions are:
 
-→ **Island 2 / Forest**
+- **Clam**, which is found on the ground;
+- optional creatures summoned with **Boss Lures**;
+- story creatures that require a quest item, NPC hand-in, or boss trigger.
 
-→ **Island 3 / Desert**
+My cleanup order is:
 
-→ **Island 4 / Rocks**
+**regular Rod and Lure pools**
 
-→ **Island 5 / Volcano**
+→ **Boss Lure creatures**
 
-The encyclopedia also has a separate **49-slot Drip collection** used for **Fishipedia**. Normal creatures and their Drip versions are tracked independently.
+→ **missing story creatures**
 
-If I am close to 49/49 but still missing entries, I check the unusual early creatures, boss-lure pools, and optional bosses before I start fishing every island again.
+→ **Drip variants for Fishipedia**
+
+I still kill every missing creature after catching it. Catching or releasing the correct species without completing the kill does not satisfy the achievement requirement.
 </GuideQuickAnswer>
 
 <h2 id="collector-vs-fishipedia">
-  Collector and Fishipedia track different collections
+  How the 49-creature Collector checklist works
 </h2>
 
-The two collection achievements are easy to mix together because both use the same encyclopedia.
+Both collection achievements use the same encyclopedia, but they check different sides of it.
 
-For **Collector**, I need to find and kill every normal creature type.
+**Collector** requires all 49 normal creature types.
 
-For **Fishipedia**, I need the separate **Drip creatures**.
+**Fishipedia** requires the separate Drip variant of every creature.
 
-I use `Tab` to check which side is actually incomplete.
+A normal catch does not fill its Drip slot, and finding a Drip variant does not replace the normal entry. I use `Tab` to identify the exact blank rather than relying only on the total or trying to remember which creatures I have seen.
 
-A normal catch does not fill its Drip slot, and getting a Drip does not mean I should ignore the normal entry.
+I do not hold up the story waiting for rare Drip variants. If later Lures, Boss Lures, or quest encounters are still locked, I finish the <Link href="/how-to-fish">main progression route</Link> first.
 
-I also do not stop story progression just to wait for a rare Drip.
-
-If I still have islands or lure tiers locked, I finish the <Link href="/how-to-fish">main progression route</Link> first. Once every major area is accessible, collection cleanup becomes much faster.
-
-The <Link href="/how-to-fish/achievements#collector-fishipedia">Achievements guide</Link> covers where Collector and Fishipedia fit into the full 100% route.
+The <Link href="/how-to-fish/achievements#collector-fishipedia">Achievements guide</Link> places Collector and Fishipedia within the wider 100% route.
 
 <h2 id="all-49-creatures">
-  All 49 creatures by island, lure, and trigger
+  All 49 creatures by Rod, Lure, and special trigger
 </h2>
 
-I group the collection by the area where I can actually obtain each creature.
+The encyclopedia numbers remain useful when only one or two entries are blank, but the practical question is not always which island I am missing.
 
-That is more useful to me than sorting by price or by the order I happened to discover them.
+For regular creatures, I first identify the correct **Rod and Lure pool**. The island usually tells me where that equipment becomes available, not necessarily the only place where its creatures can be caught.
 
-Normal creatures come from an island&apos;s regular fishing pool.
+Boss Lures and story creatures work differently, so I handle them after the regular pools.
 
-Boss-lure catches, quest bosses, and other special creatures have their own trigger.
+<h2 id="regular-lure-pools">
+  Regular Rod and Lure pools
+</h2>
 
-<h3 id="lighthouse-creatures">
-  Lighthouse — entries 1 to 7
+<h3 id="crab-rod-pool">
+  Ground creature and Crab Fishing Rod pool
 </h3>
 
-The opening area has several entries that are easy to mentally collapse into "the crab island."
+This group contains the opening Clam, the early crustaceans, and the normal Piranha.
 
-<div className="my-8 rounded-xl border border-slate-200 dark:border-slate-800">
-  <table className="w-full border-collapse text-left text-sm">
-    <thead className="bg-slate-50 dark:bg-slate-900/60">
-      <tr>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          #
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Creature
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Type
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Rod / Bait / Trigger
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          What I check
-        </th>
-      </tr>
-    </thead>
+<GuideTable
+  caption="Ground creature and Crab Fishing Rod entries."
+  columns={creatureColumns}
+  rows={crabRodRows}
+/>
 
-    <tbody>
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          1
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Clam
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Ground creature
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          No bait
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Pick one up around the opening area
-        </td>
-      </tr>
+**Clam** is the first entry I recheck when the total looks wrong. It feels like a tutorial pickup rather than part of the collection, but I still need to kill it for the entry to register.
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          2
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Brown Crab
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Crab Fishing Rod / starting pool
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          One of the earliest Crab Fishing Rod catches
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          3
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Blue Crab
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Crab Fishing Rod / Lighthouse pool
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Separate entry from the other early crabs
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          4
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Rock Crab
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Crab Fishing Rod / Free Lure or Hot Dog
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Common early catch
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          5
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Shrimp
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Crab Fishing Rod / Free Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Common early catch
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          6
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Lobster
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Crab Fishing Rod / Hot Dog
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Stay in the Lighthouse pool if this slot is blank
-        </td>
-      </tr>
-
-      <tr>
-        <td className="px-3 py-3">
-          7
-        </td>
-        <td className="px-3 py-3 font-semibold">
-          Spider Crab
-        </td>
-        <td className="px-3 py-3">
-          Story boss
-        </td>
-        <td className="px-3 py-3">
-          Empty Beer Can
-        </td>
-        <td className="px-3 py-3">
-          Opening progression boss
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-**Clam** is one of the first entries I recheck when my total looks wrong.
-
-It does not feel like a normal fishing target because I can simply pick it up during the opening section.
-
-Brown Crab and Blue Crab are also worth checking individually. Catching several early crabs does not mean every crab entry has registered.
+Brown Crab, Blue Crab, and Rock Crab occupy separate slots. Catching several crabs does not prove that all three species have registered.
 
 <figure className="my-8">
   <Image
     src="/images/how-to-fish/how-to-fish-drip-rock-crab.webp"
-    alt="A Drip Rock Crab caught on the Lighthouse island in How to Fish"
+    alt="A Drip Rock Crab caught with the Crab Fishing Rod in How to Fish"
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-400">
-    Drip creatures have their own Fishipedia progress. I still need the normal creature entry separately for Collector.
+    The Drip Rock Crab belongs to Fishipedia. I still need the normal Rock Crab entry for Collector.
   </figcaption>
 </figure>
 
-The **Spider Crab** is not part of the ordinary Lighthouse fishing pool.
-
-If that entry is missing, I finish the Lighthouse Keeper&apos;s Beer sequence. The <Link href="/how-to-fish/spider-crab">Spider Crab guide</Link> covers the Empty Beer Can trigger, fight, Shell, and Boat Keys.
-
-<h3 id="island-2-creatures">
-  Island 2 / Forest — entries 8 to 18
+<h3 id="free-beginner-pools">
+  Free Lure and Beginner Lure pools
 </h3>
 
-Island 2 introduces normal fish, a separate Beginner Boss Lure pool, and the Giant Piranha quest boss.
+I switch between Free and Beginner Lures instead of assuming one inexpensive Lure covers every early Fishing Rod entry.
 
-<div className="my-8 rounded-xl border border-slate-200 dark:border-slate-800">
-  <table className="w-full border-collapse text-left text-sm">
-    <thead className="bg-slate-50 dark:bg-slate-900/60">
-      <tr>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          #
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Creature
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Type
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Rod / Bait / Trigger
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          What I check
-        </th>
-      </tr>
-    </thead>
+<GuideTable
+  caption="Free Lure and Beginner Lure creature entries."
+  columns={creatureColumns}
+  rows={freeBeginnerRows}
+/>
 
-    <tbody>
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          8
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Piranha
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Crab Fishing Rod / Hot Dog
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Separate entry from Giant Piranha
-        </td>
-      </tr>
+The normal **Pike** does not cover **The Old Pike**. The latter belongs to the Beginner Boss Lure pool and has its own encyclopedia slot.
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          9
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Mackerel
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Free Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Basic Forest pool
-        </td>
-      </tr>
+<h3 id="standard-lure-pool">
+  Standard Lure pool
+</h3>
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          10
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Gar
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Free Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Basic Forest pool
-        </td>
-      </tr>
+The Standard Lure contains nine normal entries. Blue Shark does not belong to this pool because it requires the separate Standard Boss Lure.
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          11
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Pike
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Free Lure or Beginner Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Separate entry from The Old Pike
-        </td>
-      </tr>
+<GuideTable
+  caption="Normal creatures available from the Standard Lure pool."
+  columns={creatureColumns}
+  rows={standardLureRows}
+/>
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          12
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Cod
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Beginner Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Beginner Lure pool
-        </td>
-      </tr>
+Sea Urchin may remain dangerous while I fish. If the Tourist objective is still active, Seahorse and Needlefish can also satisfy the endangered-creature requirement.
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          13
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Goldfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Free Lure or Beginner Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal Forest pool
-        </td>
-      </tr>
+The <Link href="/how-to-fish/endangered-fish">Endangered Fish guide</Link> covers that requirement and the Carrot hand-in.
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          14
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Perch
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Beginner Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Beginner Lure pool
-        </td>
-      </tr>
+<h3 id="professional-lure-pool">
+  Professional Lure pool
+</h3>
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          15
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Triggerfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Beginner Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Beginner Lure pool
-        </td>
-      </tr>
+The Professional Lure has ten normal entries, making it the largest regular cleanup pool.
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          16
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Sunfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Special catch
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Beginner Boss Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Easy to miss if I stop after catching The Old Pike
-        </td>
-      </tr>
+<GuideTable
+  caption="Normal creatures available from the Professional Lure pool."
+  columns={creatureColumns}
+  rows={professionalLureRows}
+/>
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          17
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          The Old Pike
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Optional boss-lure catch
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Beginner Boss Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Separate entry from normal Pike
-        </td>
-      </tr>
+I inspect `Tab` after each new species instead of assuming the pool is complete because I have caught several valuable fish.
 
-      <tr>
-        <td className="px-3 py-3">
-          18
-        </td>
-        <td className="px-3 py-3 font-semibold">
-          Giant Piranha
-        </td>
-        <td className="px-3 py-3">
-          Story boss
-        </td>
-        <td className="px-3 py-3">
-          Modified Leech
-        </td>
-        <td className="px-3 py-3">
-          Requires the Island 2 Leech quest
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+Repeated releases can leave aggressive Tigerfish nearby, so I clear them before concentrating on the next result.
 
-**Sunfish** is the catch I specifically watch for when clearing the Beginner Boss Lure pool.
+<h3 id="scientific-lure-pool">
+  Scientific Lure pool
+</h3>
 
-Getting The Old Pike once does not mean that lure tier is finished.
+The normal Scientific Lure produces five regular entries.
+
+<GuideTable
+  caption="Normal creatures available from the Scientific Lure pool."
+  columns={creatureColumns}
+  rows={scientificLureRows}
+/>
+
+Goblin Shark is not part of this table. It requires the separate Scientific Boss Lure.
+
+<h2 id="boss-lure-creatures">
+  Creatures that require Boss Lures
+</h2>
+
+Boss Lures are separate items from their normal Lure tiers. Finishing every regular Beginner, Standard, Professional, or Scientific catch does not complete the corresponding Boss Lure entries.
+
+<GuideTable
+  caption="Creature entries that require a Boss Lure."
+  columns={creatureColumns}
+  rows={bossLureRows}
+/>
+
+**Sunfish** is one of the first Boss Lure entries I recheck. Catching The Old Pike does not mean the Beginner Boss Lure pool is complete.
 
 <figure className="my-8">
   <Image
     src="/images/how-to-fish/how-to-fish-sunfish-beginner-boss-lure.webp"
-    alt="Sunfish caught with the Beginner Boss Lure on Island 2 in How to Fish"
+    alt="Sunfish caught with the Beginner Boss Lure in How to Fish"
     width={1600}
     height={900}
     className="rounded-xl"
   />
   <figcaption className="mt-3 text-sm text-slate-400">
-    Sunfish can appear while I am working the Beginner Boss Lure pool, so I keep using that lure if its encyclopedia slot is still blank.
+    I keep using the Beginner Boss Lure if Sunfish is still blank, even after The Old Pike has registered.
   </figcaption>
 </figure>
 
-The **Giant Piranha** uses a completely different progression path.
+I keep the **Blue Shark** if the Grillmaster objective is still active. Returning it to the Grillmaster provides the lighter used to start the grill.
 
-If that entry is missing and I still have the three-Leech objective, I follow the <Link href="/how-to-fish/leech-bait">Leech Bait route</Link> first.
+I also keep the **Tuna** while the related story objective is active because it becomes bait for the Terrorizing Bird.
 
-Once the converted bait is ready, the <Link href="/how-to-fish/giant-piranha">Giant Piranha guide</Link> covers the fight and progression hand-in.
+<h2 id="story-creatures">
+  Story creatures and quest triggers
+</h2>
 
-<h3 id="island-3-creatures">
-  Island 3 / Desert — entries 19 to 29
-</h3>
+These six entries do not come from repeatedly cycling an ordinary Lure pool.
 
-Most of the Desert collection comes from the Standard Lure pool.
+<GuideTable
+  caption="Story creature entries and their required triggers."
+  columns={creatureColumns}
+  rows={storyCreatureRows}
+/>
 
-The Blue Shark and Pufferfish are the two catches I treat separately.
+If **Spider Crab** is missing, I follow the <Link href="/how-to-fish/spider-crab">Empty Beer Can and Spider Crab route</Link>.
 
-<div className="my-8 rounded-xl border border-slate-200 dark:border-slate-800">
-  <table className="w-full border-collapse text-left text-sm">
-    <thead className="bg-slate-50 dark:bg-slate-900/60">
-      <tr>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          #
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Creature
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Type
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Rod / Bait / Trigger
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          What I check
-        </th>
-      </tr>
-    </thead>
+For **Giant Piranha**, the <Link href="/how-to-fish/leech-bait">Leech Bait guide</Link> covers the ground pickups and bait hand-in, while the <Link href="/how-to-fish/giant-piranha">Giant Piranha guide</Link> covers the fight.
 
-    <tbody>
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          19
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Angelfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
+The <Link href="/how-to-fish/pufferfish">Pufferfish guide</Link> covers the Tourist, Carrot, boss trigger, and Tail.
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          20
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Boxfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
+The Bowhead Whale and Mutated Bowhead Whale belong to the Scientist and Volcano progression. I do not keep spending Scientific Lures while waiting for either Whale to appear.
 
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          21
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Catfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          22
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Sea Urchin
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          23
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Seahorse
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          24
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Clownfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          25
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Bluegill
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          26
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Salmon
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          27
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Needlefish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Standard Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          28
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Blue Shark
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Optional boss-lure catch
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Standard Boss Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Separate from the regular Standard Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="px-3 py-3">
-          29
-        </td>
-        <td className="px-3 py-3 font-semibold">
-          Pufferfish
-        </td>
-        <td className="px-3 py-3">
-          Story boss
-        </td>
-        <td className="px-3 py-3">
-          Carrot
-        </td>
-        <td className="px-3 py-3">
-          Locked behind the Tourist progression chain
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-**Endangered Species** does not add another creature slot.
-
-It is a status used by the Tourist quest.
-
-If I still do not have the Carrot, I solve the <Link href="/how-to-fish/endangered-fish">Endangered Species requirement</Link> first.
-
-Once the Tourist gives me the Carrot, the remaining story entry is the <Link href="/how-to-fish/pufferfish">Pufferfish</Link>.
-
-That distinction prevents me from wasting Standard Lures on a creature that requires a quest trigger instead.
-
-<h3 id="island-4-creatures">
-  Island 4 / Rocks — entries 30 to 41
-</h3>
-
-Island 4 has the largest regular pool in my cleanup route.
-
-I work through the Professional Lure entries before switching to the Tuna and Terrorizing Bird sequence.
-
-<div className="my-8 rounded-xl border border-slate-200 dark:border-slate-800">
-  <table className="w-full border-collapse text-left text-sm">
-    <thead className="bg-slate-50 dark:bg-slate-900/60">
-      <tr>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          #
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Creature
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Type
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Rod / Bait / Trigger
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          What I check
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          30
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Parrotfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          31
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Voxelfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          32
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Bass
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          33
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Halibut
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          34
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Eel
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          35
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Tigerfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          36
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Flying Fish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          37
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Sengarat
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          38
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Red Snapper
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          39
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Flounder
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Professional Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Easy to overlook in the large Island 4 pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          40
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Tuna
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Boss-lure catch
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Professional Boss Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Used to trigger the island boss
-        </td>
-      </tr>
-
-      <tr>
-        <td className="px-3 py-3">
-          41
-        </td>
-        <td className="px-3 py-3 font-semibold">
-          Albatross
-        </td>
-        <td className="px-3 py-3">
-          Story boss
-        </td>
-        <td className="px-3 py-3">
-          Tuna
-        </td>
-        <td className="px-3 py-3">
-          Terrorizing Bird encounter
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-**Flounder** is one of the entries I check when Island 4 looks finished but my total is still short.
-
-It appears alongside the other Professional Lure catches, so I keep working that pool rather than assuming I already saw every Island 4 fish.
-
-Tuna is different.
-
-I use the **Professional Boss Lure** for Tuna, then keep the Tuna because it is what brings back the Terrorizing Bird.
-
-If Tuna is already registered but the Albatross slot is still blank, I stop fishing and complete the <Link href="/how-to-fish/boss-guide#terrorizing-bird">Terrorizing Bird route</Link>.
-
-<h3 id="island-5-creatures">
-  Island 5 / Volcano — entries 42 to 49
-</h3>
-
-The Volcano has fewer regular creatures, but several entries sit outside the normal Scientific Lure pool.
-
-<div className="my-8 rounded-xl border border-slate-200 dark:border-slate-800">
-  <table className="w-full border-collapse text-left text-sm">
-    <thead className="bg-slate-50 dark:bg-slate-900/60">
-      <tr>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          #
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Creature
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Type
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Rod / Bait / Trigger
-        </th>
-        <th className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          What I check
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          42
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Anglerfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Scientific Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Scientific Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          43
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Blobfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Scientific Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Scientific Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          44
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Oarfish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Scientific Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Scientific Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          45
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Superdwarf Fish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Scientific Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Scientific Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          46
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Stonefish
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Normal
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fishing Rod / Scientific Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Scientific Lure pool
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          47
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Goblin Shark
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Optional mini-boss
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Scientific Boss Lure
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Separate boss-lure catch
-        </td>
-      </tr>
-
-      <tr>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          48
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 font-semibold dark:border-slate-800">
-          Bowhead Whale
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Story catch
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Fish Bucket
-        </td>
-        <td className="border-b border-slate-200 px-3 py-3 dark:border-slate-800">
-          Required for the scientist&apos;s experiment
-        </td>
-      </tr>
-
-      <tr>
-        <td className="px-3 py-3">
-          49
-        </td>
-        <td className="px-3 py-3 font-semibold">
-          Mutated Bowhead Whale
-        </td>
-        <td className="px-3 py-3">
-          Final boss
-        </td>
-        <td className="px-3 py-3">
-          Bowhead Whale / Volcano sequence
-        </td>
-        <td className="px-3 py-3">
-          Final progression creature
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-The lure names matter here.
-
-**Scientific Lure** and **Scientific Boss Lure** are not interchangeable.
-
-I use the normal Scientific Lure for Anglerfish, Blobfish, Oarfish, Superdwarf Fish, and Stonefish.
-
-The **Goblin Shark** comes from the boss-lure side, so completing the normal scientific pool does not automatically finish Island 5.
-
-The Bowhead Whale and Mutated Bowhead Whale are different again.
-
-I do not keep throwing Scientific Lures hoping either one appears.
-
-They belong to the scientist and Volcano progression chain.
-
-If one of those final entries is missing, I return to the late-game progression route. The <Link href="/how-to-fish/boss-guide#mutated-bowhead-whale">Mutated Bowhead Whale section</Link> covers the final fight itself.
+The <Link href="/how-to-fish/boss-guide#mutated-bowhead-whale">Mutated Bowhead Whale strategy</Link> covers the final fight.
 
 <h2 id="missing-creatures">
-  Missing creatures: what I check before fishing every island again
+  The entries I check first near 49/49
 </h2>
 
-When I am only a few entries short, I stop treating the collection as 49 random possibilities.
+When only a few entries remain, I stop changing Lures and repeating encounters at random.
 
-The first five names I recheck are:
+The first entries I recheck are:
 
-**Clam**
+- **Clam**, because it feels like an opening pickup rather than a collection entry;
+- **Brown Crab** and **Blue Crab**, because the early crab species are easy to combine in memory;
+- **Sunfish**, because The Old Pike can make the Beginner Boss Lure pool look complete;
+- **Flounder**, because it is easy to overlook among ten Professional Lure creatures;
+- **Goblin Shark**, because the Scientific Boss Lure is optional;
+- whichever story creature still has a blank encyclopedia slot.
 
-→ **Brown Crab**
-
-→ **Blue Crab**
-
-→ **Sunfish**
-
-→ **Flounder**
-
-They are easy to miss for different reasons.
-
-**Clam** feels like a tutorial pickup rather than a fishing target.
-
-**Brown Crab** and **Blue Crab** can disappear into the noise of the opening crab pool.
-
-**Sunfish** sits in a pool I might mistakenly consider complete after getting The Old Pike.
-
-**Flounder** is easy to overlook among Island 4&apos;s many Professional Lure catches.
-
-If all five are already filled, I stop relying on the total and inspect the actual blank encyclopedia slots.
-
-That tells me which island I should return to.
+I trust the exact blank in `Tab`. Its number tells me which Rod, Lure, Boss Lure, or story trigger I should check next.
 
 <h2 id="cleanup-route">
-  Best cleanup order after the story
+  Best Collector and Fishipedia cleanup order
 </h2>
 
-Once all five areas are available, I clear the cheap normal pools before I spend money on special lures.
+Once every Rod and Lure tier is available, I clear the inexpensive regular pools first:
 
-My order is:
+**Crab Fishing Rod**
 
-**Lighthouse basic entries**
+→ **Free and Beginner Lures**
 
-→ **Island 2 normal and Beginner pools**
+→ **Standard Lure**
 
-→ **Island 3 Standard pool**
+→ **Professional Lure**
 
-→ **Island 4 Professional pool**
+→ **Scientific Lure**
 
-→ **Island 5 Scientific pool**
+I inspect `Tab` between pools. If all regular entries are complete, I move to the more expensive or time-consuming checks:
 
-→ **remaining Boss Lure catches**
+**Beginner Boss Lure**
+
+→ **Standard Boss Lure**
+
+→ **Professional Boss Lure**
+
+→ **Scientific Boss Lure**
 
 → **remaining story creatures**
 
-There is no reason to burn expensive boss bait if the missing slot is just a Mackerel, Seahorse, or Flounder.
+There is no reason to repeat an expensive Boss Lure if the blank entry belongs to a regular pool. There is also no reason to continue ordinary fishing if the blank belongs to a quest boss.
 
-After the ordinary pools are complete, the remaining blanks become much easier to diagnose.
-
-If the missing entry belongs to a **normal pool**, I stay with that island&apos;s regular lure.
-
-If it belongs to a **Boss Lure pool**, I switch to the corresponding Boss Lure.
-
-If it is a **story creature**, I retrace the NPC progression trigger instead of fishing randomly.
+After Collector reaches 49/49, I stop repeating normal entries that are already complete and move to the missing Drip variants.
 
 <h2 id="separate-entries">
-  Similar names can still use separate encyclopedia slots
+  Similar creature names can use separate encyclopedia slots
 </h2>
 
-A few entries look similar enough that I originally assumed one catch covered both.
+Several names are similar enough that one catch can feel as though it should cover both entries.
 
 It does not.
 
-**Pike** and **The Old Pike** are separate creatures.
+- **Pike** and **The Old Pike** are separate.
+- **Piranha** and **Giant Piranha** are separate.
+- **Halibut** and **Flounder** are separate.
+- Brown Crab, Blue Crab, and Rock Crab each have their own slot.
+- **Bowhead Whale** and **Mutated Bowhead Whale** are separate.
 
-**Piranha** and **Giant Piranha** are separate creatures.
-
-The early crab species also occupy individual slots.
-
-The same rule applies to the story and boss variants later in the game.
-
-When my collection total looks wrong, I trust the exact encyclopedia entries rather than remembering that I have "already caught a Pike" or "already killed a Piranha."
+When the total looks wrong, I trust the exact encyclopedia name instead of remembering that I have already caught “a Pike,” “a crab,” or “a Whale.”
 
 <h2 id="drip-creatures">
-  Fishipedia cleanup starts after the normal 49 are under control
+  Fishipedia and faster Drip cleanup
 </h2>
 
-Once the normal side reaches **49/49**, I stop repeating the Collector route.
+A Drip creature comes from the corresponding creature pool but registers on the separate Fishipedia side.
 
-If the Drip counter still has blanks, I switch to those missing variants specifically.
+For a regular creature, I equip the same Rod and Lure used for its normal version. For a Boss Lure or story creature, I repeat the corresponding special trigger instead of fishing an unrelated regular pool.
 
-A Drip creature comes from the same general creature pool as its normal counterpart, but it registers separately.
+Drip variants are visually distinctive and continue to respawn. Spending one at the Reel of Fortune does not erase its encyclopedia record.
 
-My cleanup is therefore much narrower:
+### Cycle ordinary results when hunting one Drip variant
 
-**identify the missing Drip entry**
+When the only missing result is a Drip variant from a regular Lure pool, I cast as far as possible and watch the creature notification while reeling.
 
-→ **return to that creature&apos;s island**
+If the result is not Drip, I immediately use the cancel or release input and begin reeling again. With clean timing, the same cast can cycle through several candidates before I need another full cast.
 
-→ **use the lure for that pool**
+I slow down as soon as a Drip name appears. Repeating the input automatically can release the exact variant I need.
 
-→ **keep fishing until the Drip variant appears**
+Aggressive creatures require extra caution. A released Tigerfish can leave the water and attack while I am concentrating on the next result. If repeated releases begin filling the area with hostile creatures, I clear them before continuing.
 
-I still kill Drip creatures whenever I encounter them naturally during progression.
-
-I just do not hold up the story waiting for every variant.
-
-Once all islands and lure tiers are unlocked, deliberate Fishipedia cleanup is much easier to organize.
+This method only speeds up rarity checks. It does not replace choosing the correct Rod, Lure, Boss Lure, or story trigger.

@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -11,15 +10,18 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/how-to-fish`;
 const pageUrl = `${hubUrl}/all-fish-locations`;
 
+const primaryImageUrl =
+  `${siteUrl}/images/how-to-fish/how-to-fish-sunfish-beginner-boss-lure.webp`;
+
 const imageUrls = [
+  primaryImageUrl,
   `${siteUrl}/images/how-to-fish/how-to-fish-drip-rock-crab.webp`,
-  `${siteUrl}/images/how-to-fish/how-to-fish-sunfish-beginner-boss-lure.webp`,
 ];
 
 export const metadata: Metadata = {
   title: "How to Fish All 49 Creatures: Locations & Collector Guide",
   description:
-    "Find all 49 How to Fish creatures by island, lure, and boss trigger, with Collector, Fishipedia, missing-creature, and cleanup tips.",
+    "Find all 49 How to Fish creatures by island, lure, and boss trigger, then finish Collector and separate normal entries from Fishipedia Drip variants.",
   alternates: {
     canonical: pageUrl,
   },
@@ -28,14 +30,14 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "How to Fish All 49 Creatures: Locations & Collector Guide",
     description:
-      "Complete all 49 creature entries with island locations, lure pools, boss triggers, missing-creature checks, and Collector and Fishipedia guidance.",
+      "Complete all 49 normal creature entries with the correct island, lure pool, Boss Lure, or story trigger, then clean up Collector and Fishipedia.",
     siteName: "Whisper of the House",
     images: [
       {
-        url: imageUrls[0],
+        url: primaryImageUrl,
         width: 1600,
         height: 900,
-        alt: "Drip Rock Crab caught while completing the How to Fish creature encyclopedia",
+        alt: "Sunfish caught with the Beginner Boss Lure while completing the How to Fish creature collection",
       },
     ],
   },
@@ -43,8 +45,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Fish All 49 Creatures & Collector Guide",
     description:
-      "Find all 49 creatures by island, lure, and special trigger, then clean up Collector and Fishipedia without fishing every area at random.",
-    images: [imageUrls[0]],
+      "Match every missing creature entry to the correct island, lure, Boss Lure, or story trigger without fishing every area again.",
+    images: [primaryImageUrl],
   },
 };
 
@@ -83,29 +85,18 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "How to Fish All 49 Creatures: Locations, Lures, Collector and Fishipedia Guide",
+        "How to Fish All 49 Creatures and Collector Guide",
       description:
-        "A complete How to Fish creature guide covering all 49 normal encyclopedia entries across the Lighthouse, Forest, Desert, Rocks, and Volcano areas, including lure pools, boss triggers, easy-to-miss creatures, Collector cleanup, and the separate Fishipedia Drip collection.",
+        "A complete guide to all 49 normal creature entries in How to Fish, organized by island, lure pool, Boss Lure, and story trigger, with Collector and Fishipedia cleanup advice.",
       image: imageUrls,
       inLanguage: "en",
+      articleSection: "Game Guides",
       datePublished: "2026-08-23",
-      dateModified: "2026-08-23",
+      dateModified: "2026-08-26",
       about: [
         {
           "@type": "VideoGame",
           name: "How to Fish",
-        },
-        {
-          "@type": "Thing",
-          name: "How to Fish creatures",
-        },
-        {
-          "@type": "Thing",
-          name: "How to Fish all fish",
-        },
-        {
-          "@type": "Thing",
-          name: "How to Fish creature locations",
         },
         {
           "@type": "Thing",
@@ -114,10 +105,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Fishipedia achievement",
-        },
-        {
-          "@type": "Thing",
-          name: "How to Fish Drip creatures",
         },
       ],
       isPartOf: {
@@ -142,7 +129,7 @@ const jsonLd = {
 const toc = [
   {
     id: "collector-vs-fishipedia",
-    label: "Collector vs Fishipedia",
+    label: "How Collector works",
   },
   {
     id: "all-49-creatures",
@@ -173,7 +160,7 @@ const relatedLinks = [
   },
   {
     href: "/how-to-fish/achievements",
-    label: "How to Fish Achievements",
+    label: "How to Fish Achievements Guide",
   },
   {
     href: "/how-to-fish/spider-crab",
@@ -193,17 +180,19 @@ export default function Page() {
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
 
         <GuideArticlePage
           title="How to Fish All 49 Creatures & Collector Guide"
-          description="Find every normal creature across all five areas, match missing encyclopedia slots to the right lure or boss trigger, and separate Collector cleanup from Fishipedia Drip hunting."
+          description="Use the 49-entry creature checklist to match every blank encyclopedia slot to the correct island, lure pool, Boss Lure, or story trigger, then handle Fishipedia Drip variants separately."
           gameTitle="How to Fish"
           gameHref="/how-to-fish"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 23, 2026"
+          updatedAt="August 26, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
