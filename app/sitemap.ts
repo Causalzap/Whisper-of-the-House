@@ -793,6 +793,16 @@ const paths = [
   '/no-more-room-in-hell-2/pottsville-walkthrough',
   '/no-more-room-in-hell-2/power-plant-walkthrough',
 
+  '/aliens-fireteam-elite-2',
+  '/aliens-fireteam-elite-2/walkthrough',
+  '/aliens-fireteam-elite-2/beginner-guide',
+  '/aliens-fireteam-elite-2/rescue-and-recovery-walkthrough',
+  '/aliens-fireteam-elite-2/boarding-party-walkthrough',
+  '/aliens-fireteam-elite-2/rock-bottom-walkthrough',
+  '/aliens-fireteam-elite-2/ancient-anomaly-walkthrough',
+  '/aliens-fireteam-elite-2/final-endeavor-walkthrough',
+  '/aliens-fireteam-elite-2/achievements',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -800,6 +810,16 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/aliens-fireteam-elite-2': '2026-08-26',
+  '/aliens-fireteam-elite-2/walkthrough': '2026-08-26',
+  '/aliens-fireteam-elite-2/beginner-guide': '2026-08-26',
+  '/aliens-fireteam-elite-2/rescue-and-recovery-walkthrough': '2026-08-26',
+  '/aliens-fireteam-elite-2/boarding-party-walkthrough': '2026-08-26',
+  '/aliens-fireteam-elite-2/rock-bottom-walkthrough': '2026-08-26',
+  '/aliens-fireteam-elite-2/ancient-anomaly-walkthrough': '2026-08-26',
+  '/aliens-fireteam-elite-2/final-endeavor-walkthrough': '2026-08-26',
+  '/aliens-fireteam-elite-2/achievements': '2026-08-26',
+  
   '/no-more-room-in-hell-2': '2026-08-24',
   '/no-more-room-in-hell-2/combat-survival-guide': '2026-08-24',
   '/no-more-room-in-hell-2/achievements': '2026-08-24',

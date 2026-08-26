@@ -131,6 +131,317 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Aliens: Fireteam Elite 2",
+    game: "Aliens: Fireteam Elite 2",
+    href: "/aliens-fireteam-elite-2",
+    slug: "aliens-fireteam-elite-2",
+    kind: "game",
+    status: "active",
+    accent: "rose",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Co-op Horde Shooter & Campaign",
+    eyebrow: "Spotlight Hub",
+    hubStatus: "14 missions + Kits + Queen + 30 achievements",
+  
+    description:
+      "Use the Aliens: Fireteam Elite 2 guide hub to follow all 14 campaign missions, choose and build a Kit, fix progression blockers, clear every campaign, defeat the Xenomorph Queen, and complete all 30 achievements.",
+  
+    coverage: [
+      "Complete 14-mission campaign order from Banshee Down through Rescue and Recovery, Boarding Party, Rock Bottom, Ancient Anomaly, and Final Endeavor, including Endeavor debrief gates and locked-mission troubleshooting",
+      "Beginner progression through Duelist, Machinist, Marauder, Hunter, Medic and Specialist, Perk Grid connections, Combat Rating, weapon slots, Requisition spending, weapon ranks, Augments, damage types, ammo and Aid Kit management",
+      "Rescue and Recovery through Piping Hot, Breaking and Entering and Synth Headache, including Piper, the signal jammer, colony intel terminals, Esther, security resets, turrets and landing-pad extraction",
+      "Boarding Party through Bomb Squad, Dumpster Diving and Sleep Study, including the Demetrius warhead terminals, Cargo Bay upload, cryopods, Engine Bay and final holdout",
+      "Rock Bottom through Power Problems, Running on Fumes and Hive Mind, including mine terminals, battery breakers, reactor pressure, Acidium plumbing, self-destruct consoles, Hive escape and late cryopod intel",
+      "Ancient Anomaly through the quarry and Engineer ship, including turret routes, corrupted uploads, chained intel objectives, hybrid cryopods, four-console progression and the final command-room defense",
+      "Final Endeavor through Dr. Pierce's mine route, lockdown override, laboratory investigation, the first Queen escape sequence, the real Xenomorph Queen boss fight and campaign ending",
+      "All 30 achievements with an interactive checklist and efficient 100% route covering campaign clears, Intense, Extreme and Insane, Pure Professionals, Specialist, Horde Mode, weapon ranks, attachments, Augments and kill counters",
+    ],
+  
+    image:
+      "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 38,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Aliens Fireteam Elite 2 Guide: Walkthrough, Kits & Tips",
+        href: "/aliens-fireteam-elite-2",
+        type: "Guide Hub",
+        description:
+          "Start here for the campaign route, Kit and progression decisions, locked-mission fixes, solo and co-op help, difficulty, the Queen, and post-game cleanup.",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-guide-speak-to-ship-crew.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "14 missions, campaign order, Kits, Combat Rating, locked missions, solo and co-op, difficulty, Xenomorph Queen, and post-game progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Aliens Fireteam Elite 2 Walkthrough & Mission Order",
+        href: "/aliens-fireteam-elite-2/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow all 14 campaign missions in order, learn what unlocks each stage, fix locked mission cards, and continue from Prologue through Final Endeavor.",
+        date: "Updated recently",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-walkthrough-rescue-and-recovery-mission-order.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 244,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "All 14 missions, Prologue, Rescue and Recovery, Boarding Party, Rock Bottom, Ancient Anomaly, Final Endeavor, Endeavor debriefs, and locked mission fixes",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Aliens Fireteam Elite 2 Beginner Guide & Tips",
+        href: "/aliens-fireteam-elite-2/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Start with the right Kit, Perk Grid, weapons, Combat Rating, damage types, Requisition spending, weapon ranks, Augments, ammo habits, and difficulty.",
+        date: "Updated recently",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-beginner-guide-perk-grid-combat-rating.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 245,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Duelist, Machinist, Marauder, Hunter, Medic, Specialist, Perk Grid, Combat Rating, weapon ranks, Augments, thermal and electric damage, Requisition, ammo, and Aid Kits",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Aliens Fireteam Elite 2 Rescue & Recovery Walkthrough",
+        href:
+          "/aliens-fireteam-elite-2/rescue-and-recovery-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear Piping Hot, Breaking and Entering, and Synth Headache with the jammer, Piper, colony intel, Esther, security terminals, turrets, and extraction explained.",
+        date: "Updated recently",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-piping-hot-signal-jammer.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 246,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Piping Hot, Piper, signal jammer, Breaking and Entering, colony intel, Synth Headache, Esther, security terminals, turrets, and landing-pad extraction",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Aliens Fireteam Elite 2 Boarding Party Walkthrough",
+        href:
+          "/aliens-fireteam-elite-2/boarding-party-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear Bomb Squad, Dumpster Diving, and Sleep Study with the Demetrius warhead terminals, Cargo Bay upload, cryopods, Engine Bay, and final holdout.",
+        date: "Updated recently",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-boarding-party-bomb-squad-warheads.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 247,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Bomb Squad, three warhead terminals, Dumpster Diving, Cargo Bay upload, Sleep Study, cryopods, Engine Bay, Synthetics, and final holdout",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Aliens Fireteam Elite 2 Rock Bottom Walkthrough",
+        href:
+          "/aliens-fireteam-elite-2/rock-bottom-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear Power Problems, Running on Fumes, and Hive Mind with the mine terminals, breakers, reactor valve, Acidium plumbing, Hive, and intel sequence.",
+        date: "Updated recently",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-rock-bottom-power-plant-pressure-valve.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 248,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Power Problems, door terminals, battery breakers, reactor pressure valve, Running on Fumes, Acidium, self-destruct consoles, Hive Mind, cryopods, and intel",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Aliens Fireteam Elite 2 Ancient Anomaly Walkthrough",
+        href:
+          "/aliens-fireteam-elite-2/ancient-anomaly-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear all three Ancient Anomaly missions with the quarry turrets, Engineer ship objectives, corrupted upload, hybrid cryopods, consoles, and final defense.",
+        date: "Updated recently",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-ancient-anomaly-mission-5-3-95-percent-casualty.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 249,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Quarry turrets, Dr. Pierce, Engineer ship, corrupted upload, chained intel, hybrid cryopods, four consoles, 95% casualty report, and command-room defense",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Aliens Fireteam Elite 2 Final Endeavor Walkthrough",
+        href:
+          "/aliens-fireteam-elite-2/final-endeavor-walkthrough",
+        type: "Bosses",
+        description:
+          "Clear Final Endeavor, follow Dr. Pierce through the mines, escape the first Queen encounter, and defeat the Xenomorph Queen in the real boss fight.",
+        date: "Updated recently",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-final-endeavor-queen-boss-fight.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 250,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Reckoning, Dr. Pierce, mine lockdown, final laboratory, first Queen escape, real Xenomorph Queen fight, ammo management, adds, arena rotation, and ending",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Aliens Fireteam Elite 2 Achievements Guide: All 30",
+        href: "/aliens-fireteam-elite-2/achievements",
+        type: "Achievements",
+        description:
+          "Track all 30 achievements and finish campaign clears, difficulty runs, Pure Professionals, Specialist, Horde Mode, weapons, attachments, Augments, and kill counters.",
+        date: "Updated recently",
+        image:
+          "/images/aliens-fireteam-elite-2/aliens-fireteam-elite-2-achievements-difficulty-selection.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 251,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "All 30 achievements, campaign clears, Intense, Extreme, Insane, Pure Professionals, Specialist, Horde Mode, weapon ranks, 50 attachments, five Augments, and kill counters",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+    ],
+  },
+  {
     title: "No More Room in Hell 2",
     game: "No More Room in Hell 2",
     href: "/no-more-room-in-hell-2",
