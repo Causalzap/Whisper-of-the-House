@@ -14,7 +14,7 @@ const metadataTitle =
   "Iron Nest Guide: Missions, Triangulation & Shells";
 
 const metadataDescription =
-  "Complete Iron Nest missions with triangulation, firing solutions, shell choices, troubleshooting, and walkthroughs from Fire and Light to all four endings.";
+  "Complete Iron Nest missions with walkthroughs, triangulation, the Fire Mission Helper, firing solutions, shell choices, troubleshooting, and all four endings.";
 
 const imageUrls = [
   `${siteUrl}/images/iron-nest/iron-nest-demo-protocol.webp`,
@@ -119,6 +119,11 @@ const supportPages = [
     label: "How to Triangulate in Iron Nest",
     schemaName: "How to Triangulate in Iron Nest",
   },
+  {
+    href: "/iron-nest/how-to-triangulate",
+    label: "How to Triangulate in Iron Nest",
+    schemaName: "How to Triangulate in Iron Nest",
+  },
 ];
 
 const toc = [
@@ -174,12 +179,12 @@ const toc = [
 
 const relatedLinks = [
   {
-    href: "/iron-nest/how-to-triangulate",
-    label: "How to Triangulate in Iron Nest",
+    href: "/iron-nest/fire-mission-helper",
+    label: "Fire Mission Helper & Calculator",
   },
   {
-    href: "/iron-nest/high-tide-walkthrough",
-    label: "High Tide Walkthrough",
+    href: "/iron-nest/how-to-triangulate",
+    label: "How to Triangulate in Iron Nest",
   },
   {
     href: "/iron-nest/phantom-battery-walkthrough",
@@ -202,7 +207,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "Iron Nest Guide: Campaign Missions, Triangulation & Endings",
     description:
-      "Follow the Iron Nest campaign from Calibration Fire through White Shells, with mission walkthroughs, triangulation help, shell decisions, troubleshooting, and all four endings.",
+      "Follow the Iron Nest campaign from Calibration Fire through White Shells, with mission walkthroughs, the Fire Mission Helper, triangulation help, shell decisions, and all four endings.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -253,12 +258,12 @@ const jsonLd = {
       headline:
         "Iron Nest Guide: Campaign Missions, Triangulation, Firing Solutions, Shells, and All Endings",
       description:
-        "A player-focused Iron Nest guide covering the shared read, locate, calculate, prepare, fire, and confirm loop; Calibration Fire; campaign walkthroughs from Mission 2 Fire and Light through Mission 15 White Shells; spotter triangulation and Position Reports; bearing, range, powder charges, and elevation; shell choice based on target certainty and friendly positions; requisition decisions; left and right gun management; troubleshooting for bad shots and incomplete objectives; moving targets in Iron Road, Rock of Gibraltar, and High Tide; hidden positions in Dead Reckoning; live fire support in Fire on Call; blind chained intelligence; Phantom Battery recovery and counter-battery pressure; Final Harvest target scheduling; and all four confirmed White Shells endings.",
+        "A player-focused Iron Nest guide covering the shared read, locate, calculate, prepare, fire, and confirm loop; Calibration Fire; campaign walkthroughs from Mission 2 Fire and Light through Mission 15 White Shells; the Fire Mission Helper; spotter triangulation and Position Reports; bearing, range, powder charges, and elevation; shell choice based on target certainty and friendly positions; requisition decisions; left and right gun management; troubleshooting for bad shots and incomplete objectives; moving targets in Iron Road, Rock of Gibraltar, and High Tide; hidden positions in Dead Reckoning; live fire support in Fire on Call; blind chained intelligence; Phantom Battery recovery and counter-battery pressure; Final Harvest target scheduling; and all four confirmed White Shells endings.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-06-19",
-      dateModified: "2026-08-08",
+      dateModified: "2026-08-27",
       articleSection: "Iron Nest Guides",
       about: [
         {
@@ -277,6 +282,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Iron Nest triangulation",
+        },
+        {
+          "@type": "Thing",
+          name: "Iron Nest Fire Mission Helper",
+        },
+        {
+          "@type": "Thing",
+          name: "Iron Nest ballistic calculator",
         },
         {
           "@type": "Thing",
@@ -359,12 +372,12 @@ export default function Page() {
 
         <GuideArticlePage
           title="Iron Nest Guide: Campaign Missions, Firing Help, and Endings"
-          description="Start with the shared firing loop, jump to the mission that is blocking you, or open the triangulation guide when bearings and Position Reports stop making sense."
+          description="Start with the shared firing loop, use the Fire Mission Helper when you already have the reports, or jump to the walkthrough for the mission that is blocking you."
           gameTitle="Iron Nest"
           gameHref="/iron-nest"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 8, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

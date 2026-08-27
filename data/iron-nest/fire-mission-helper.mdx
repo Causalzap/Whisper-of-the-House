@@ -1,0 +1,453 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import AdUnit from "@/components/ads/AdUnit";
+import FireMissionHelper from "@/components/iron-nest/FireMissionHelper";
+
+<GuideQuickAnswer title="Quick Answer">
+I use the **IRON NEST Fire Mission Helper** when I already have the reports but do
+not want to spend the next minute drawing circles, extending bearings, measuring
+the final line, and then moving everything into the ballistic calculator.
+
+The tool has three jobs:
+
+- **Fire Solution** — enter my Iron Nest position and the target position to get
+  bearing, distance, recommended powder charge, and gun elevation.
+- **Locate Target** — combine two bearing or distance reports to estimate the
+  target position.
+- **Find My Position** — combine two position-report distances after an Emergency
+  Move to recover my Iron Nest position.
+
+A known sector such as **M3** can be added when the game already tells me which
+grid contains the answer. That is especially useful when two distance circles
+produce two possible intersections.
+
+For the verified tutorial example, **H3 5:5 → Q4 4:2** gives approximately
+**85.5° bearing, 8.92 km, 2 powder charges, and 53.52° elevation**.
+</GuideQuickAnswer>
+
+<FireMissionHelper />
+
+<div className="my-4 text-sm text-slate-500 dark:text-slate-400">
+  Last updated: Aug 27, 2026. I use this helper for coordinate plotting,
+  listening-post reports, Emergency Move position recovery, and normal firing
+  solutions. Moving-target lead and shell flight-time scheduling still need the
+  in-game mission information.
+</div>
+
+<h2 id="what-this-helper-solves">
+  What the IRON NEST Fire Mission Helper actually solves
+</h2>
+
+The normal firing process in *IRON NEST* is not difficult because no single
+calculation is especially complicated.
+
+It becomes difficult when several of them have to happen in sequence while new
+reports are still arriving.
+
+My normal chain is:
+
+**find my own position → locate the target → measure bearing and distance → pick
+powder → calculate elevation → set the gun**
+
+The in-game ballistic calculator handles the last part well once I already know
+the target distance.
+
+The part that costs me time is everything before that.
+
+That becomes most obvious in missions such as
+<Link href="/iron-nest/phantom-battery-walkthrough">
+  {" "}Phantom Battery
+</Link>
+where an Emergency Move can leave me knowing only the general sector containing
+Iron Nest while listening posts are simultaneously reporting the enemy battery
+from different reference positions.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-fire-mission-helper-ballistic-calculator.webp"
+    alt="IRON NEST in-game ballistic calculator showing distance, powder charge selection, and gun elevation calculation"
+    width={1600}
+    height={900}
+    priority={true}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The in-game calculator is already good at converting a known distance and
+    powder charge into elevation. The helper is most useful for getting to that
+    point faster.
+  </figcaption>
+</figure>
+
+That is why I do not use this page as a replacement for the game's own plotting
+tools.
+
+I use it to remove the repetitive arithmetic between receiving a report and
+getting a usable firing card.
+
+<AdUnit placement="article_after_first_h2" />
+
+<h2 id="fire-solution">
+  Fire Solution: when I already know my position and the target
+</h2>
+
+This is the fastest mode.
+
+I enter two coordinates:
+
+- **Iron Nest position**
+- **Target position**
+
+The helper returns:
+
+- target bearing from Iron Nest;
+- distance in kilometers;
+- the lowest powder charge that can reach that distance;
+- the required gun elevation;
+- other valid higher-charge arcs.
+
+Coordinates can be written in the same format I already use while playing.
+
+For example:
+
+**H3 5:5**
+
+and:
+
+**Q4 4:2**
+
+can also be entered compactly as:
+
+**H355**
+
+and:
+
+**Q442**
+
+The tutorial case is a useful check because the values are easy to compare with
+the game.
+
+From **H3 5:5** to **Q4 4:2**, my firing card reads approximately:
+
+- **85.5° bearing**
+- **8.92 km**
+- **2 powder charges**
+- **53.52° elevation**
+
+The same workflow is useful anywhere I have already solved the target on the
+map but still need to move the result to the gun quickly.
+
+<h2 id="locate-target">
+  Locate Target: combine listening-post and spotter reports
+</h2>
+
+The second mode is the one I care about most in
+<Link href="/iron-nest/phantom-battery-walkthrough">
+  {" "}Phantom Battery
+</Link>
+
+The game does not always hand me one clean coordinate.
+
+Instead, I can receive combinations such as:
+
+- a bearing from one listening post;
+- a distance from another listening post;
+- two bearings;
+- or two distances.
+
+The helper accepts any two of those report types.
+
+For a bearing report, I enter:
+
+**report origin + bearing**
+
+For a distance report, I enter:
+
+**report origin + distance**
+
+It then finds the point where the two reports agree.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-fire-mission-helper-phantom-triangulation.webp"
+    alt="IRON NEST Phantom Battery map showing listening post reports, a 258 degree bearing line, 9.53 kilometer distance, and the target intersection"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    This is the type of Phantom Battery plotting I want the Locate Target mode
+    to shorten: one listening post supplies a bearing, another supplies distance,
+    and their intersection becomes the working target.
+  </figcaption>
+</figure>
+
+A real Phantom Battery sequence gave me information including a
+**258° listening-post bearing** and a **9.53 km distance** from another known
+position.
+
+On paper, I can draw the line and circle manually.
+
+In the middle of counter-battery pressure, I would rather enter the two reports
+and use the intersection immediately.
+
+For the underlying map method and how I decide which report should be trusted,
+I still use my
+<Link href="/iron-nest/how-to-triangulate">
+  {" "}IRON NEST triangulation guide
+</Link>
+
+The helper is the fast version once I understand what the report means.
+
+<h2 id="find-my-position">
+  Find My Position after an Emergency Move
+</h2>
+
+The third mode solves a different problem.
+
+Sometimes I know where the enemy is, but I no longer know exactly where **I**
+am.
+
+After an Emergency Move, the game can tell me that Iron Nest is somewhere
+inside a sector without giving the exact point.
+
+That is enough to continue if I request position information from known
+references.
+
+One working example gave me:
+
+- reference at **P1 9:5**, distance **3.72 km**;
+- reference at **L1 7:9**, distance **1.36 km**;
+- Iron Nest somewhere inside **M3**.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-fire-mission-helper-find-my-position.webp"
+    alt="IRON NEST position reports showing Iron Nest 3.72 kilometers from P1 9:5 and 1.36 kilometers from L1 7:9 after an Emergency Move"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    Two known reference positions and two distances can recover my Iron Nest
+    location. The reported sector helps discard the wrong intersection.
+  </figcaption>
+</figure>
+
+Geometrically, each distance creates a circle around its reference point.
+
+Two circles can intersect twice.
+
+That is why the optional **Known Sector** field matters.
+
+If High Command has already told me:
+
+**Iron Nest new location somewhere within M3**
+
+I enter **M3** so the helper can prefer the intersection inside that grid.
+
+Position reports are rounded, so if neither mathematical intersection falls
+cleanly inside the reported sector, I recheck the raw candidates instead of
+assuming the calculation has failed.
+
+Once I have the position, I press **Use as Iron Nest** and the result moves
+straight into Fire Solution.
+
+That removes the part of Phantom Battery where I would otherwise solve my
+location, copy it down, clear the board, and then start a second calculation for
+the target.
+
+<h2 id="powder-and-elevation">
+  How powder charge and elevation work in the helper
+</h2>
+
+For the firing solutions I verified in-game, the relationship is consistent:
+
+**elevation = distance × 12 ÷ powder charges**
+
+The normal range rule is also straightforward:
+
+**one powder charge adds roughly 5 km of maximum range**
+
+That gives the helper a simple default behavior:
+
+> use the lowest charge count that can reach the measured target.
+
+For example, the verified firing-card samples include:
+
+- **8.92 km / 2 charges → 53.52°**
+- **10.46 km / 3 charges → 41.84°**
+- **13.40 km / 3 charges → 53.60°**
+- **14.42 km / 3 charges → 57.68°**
+
+The important detail is that the recommended charge is not necessarily the
+**only** valid charge.
+
+More powder can produce a lower firing arc at the same distance.
+
+<figure className="my-8">
+  <Image
+    src="/images/iron-nest/iron-nest-fire-mission-helper-low-arc-comparison.webp"
+    alt="IRON NEST firing cards comparing two powder charges at about 49.92 degrees elevation with five charges at about 19.97 degrees for the same target direction"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+    The same target can have more than one valid firing arc. In this comparison,
+    increasing the powder charge produces a much lower gun elevation.
+  </figcaption>
+</figure>
+
+That is why the result card also shows **Alternative lower arcs**.
+
+I normally use the lowest valid charge because it conserves powder and is the
+simplest solution to carry straight back to the gun.
+
+I use a higher charge when I deliberately want a flatter arc and have enough
+powder to justify it.
+
+<h2 id="moving-targets">
+  Moving targets still need timing, not just a firing solution
+</h2>
+
+The helper can calculate the static firing solution for a future intercept
+point.
+
+It does **not** mean I can ignore time.
+
+This matters in missions such as
+<Link href="/iron-nest/iron-road-walkthrough">
+  {" "}Iron Road
+</Link>
+and
+<Link href="/iron-nest/final-harvest-walkthrough">
+  {" "}Final Harvest
+</Link>
+
+For a landing craft or train, I still need to determine:
+
+1. where the target will be;
+2. when it will arrive there;
+3. the firing solution to that future point;
+4. how long the shell will be in flight;
+5. when to pull the firing lever.
+
+A real landing-craft solution at **13.40 km** used:
+
+- **297.5° bearing**
+- **3 powder charges**
+- **53.60° elevation**
+- approximately **35 seconds of shell flight time**
+
+The helper currently handles the coordinate and ballistic side of that chain.
+
+I still use the in-game timing information for the final launch moment.
+
+That is intentional because getting the impact time wrong by twenty seconds is
+more damaging than saving a few seconds on the map calculation.
+
+<AdUnit placement="article_middle" />
+
+<h2 id="common-mistakes">
+  Fire Mission Helper mistakes that can still give me a bad shot
+</h2>
+
+### Entering the listening-post bearing as the final gun bearing
+
+A listening-post bearing describes the direction **from that listening post**.
+
+After locating the target, I still need the bearing **from Iron Nest to the
+target**.
+
+Fire Solution handles that second bearing automatically.
+
+### Using a distance report from the wrong reference
+
+A distance is only useful when I attach it to the exact position that generated
+the report.
+
+I do not enter the convoy position I wish had made the observation.
+
+I enter the one printed in the actual position report.
+
+### Forgetting the known sector after an Emergency Move
+
+Two distance circles can produce two valid geometric intersections.
+
+If the game says Iron Nest is somewhere in **M3**, I enter M3.
+
+That small piece of information is often what turns two possible answers into
+one useful answer.
+
+### Treating an estimated intersection as perfect information
+
+Reports and manual map reading can still contain rounding.
+
+If an intersection lands very close to a grid boundary, I check the original
+report before committing an expensive shell.
+
+### Using more powder just because the helper lists it
+
+Other valid arcs are alternatives, not automatic recommendations.
+
+My normal solution is still the lowest charge that reaches the target.
+
+### Expecting the helper to lead a moving target automatically
+
+The helper solves the point I enter.
+
+For a train, landing craft, or another moving target, I first calculate the
+future intercept position.
+
+### Forgetting that an Emergency Move invalidates the old firing origin
+
+Once Iron Nest relocates, every old Iron-Nest-to-target bearing and distance is
+obsolete.
+
+I find my new position before reusing the target.
+
+<h2 id="when-to-use-guides">
+  When I leave the helper and go back to the walkthrough
+</h2>
+
+The Fire Mission Helper is useful when my problem is:
+
+> I have the numbers. Help me turn them into a firing solution.
+
+It is not supposed to own every IRON NEST mechanic.
+
+If I do not understand how to interpret the map reports in the first place, I
+use the
+<Link href="/iron-nest/how-to-triangulate">
+  {" "}triangulation guide
+</Link>
+
+If I am under the specific Emergency Move, listening-post, and enemy-battery
+pressure of the campaign mission, I use the
+<Link href="/iron-nest/phantom-battery-walkthrough">
+  {" "}Phantom Battery walkthrough
+</Link>
+
+For moving trains and firing-time planning, the
+<Link href="/iron-nest/iron-road-walkthrough">
+  {" "}Iron Road walkthrough
+</Link>
+covers the simpler version, while
+<Link href="/iron-nest/final-harvest-walkthrough">
+  {" "}Final Harvest
+</Link>
+combines moving targets with a much busier counter-battery sequence.
+
+For live requests where the main problem is choosing and servicing the correct
+fire mission before the deadline, I use the
+<Link href="/iron-nest/fire-on-call-walkthrough">
+  {" "}Fire on Call walkthrough
+</Link>
+
+The division I use is simple:
+
+I use the walkthrough when I still need the route or mission logic.
+
+I use the helper when I already have the reports and only need to turn them
+into a usable firing solution.

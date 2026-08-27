@@ -4252,14 +4252,15 @@ export const guideClusters: GuideCluster[] = [
     archiveCategory: "Strategy, simulation, puzzle & discovery",
     label: "Heavy Artillery Simulator",
     eyebrow: "Spotlight Hub",
-    hubStatus: "Full campaign + all endings coverage",
+    hubStatus: "Full campaign + fire-control tool + all endings",
   
     description:
-      "Follow the complete Iron Nest guide from Calibration Fire and triangulation through all 15 campaign missions, moving targets, counter-battery fire, live support, Final Harvest, and all four White Shells endings.",
+      "Follow the complete Iron Nest guide from Calibration Fire and triangulation through all 15 campaign missions, with an interactive Fire Mission Helper for position reports, target location, firing solutions, and all four White Shells endings.",
   
     coverage: [
       "Core operating loop from teleprinter orders and target location through bearing, range, powder charges, elevation, loading, turret rotation, firing, confirmation, and bad-shot recovery",
       "Triangulation with spotter bearings, bearing-and-distance intersections, chained reference points, Position Reports, firing-origin recovery, and the difference between observation bearings and turret bearings",
+      "Interactive Fire Mission Helper with Find My Position, Locate Target, and Fire Solution modes for combining reports and converting confirmed coordinates into bearing, range, powder charges, and elevation",
       "Missions 2–7: Fire and Light, Liberation, Counter-Battery, Iron Road, Siege of Cartagena, and The Gorge, including Star Shell corrections, AP targets, train interception, Emergency Move, Smoke support, and manual observed fire",
       "Missions 8–10: Rock of Gibraltar, Dead Reckoning, and Fire on Call, covering HMS Rockingham, moving-vessel interception, Tear Shell reveals, hidden targets, War Horn timing, live support calls, and danger-close fire",
       "Missions 11–14: High Tide, Blind Fire, Phantom Battery, and Final Harvest, including multiple moving landing craft, chained blind-fire geometry, mobile counter-battery threats, listening posts, train timing, and live support",
@@ -4284,14 +4285,14 @@ export const guideClusters: GuideCluster[] = [
         href: "/iron-nest",
         type: "Guide Hub",
         description:
-          "Use the complete campaign directory, shared firing loop, shell decisions, requisition strategy, dual-gun handling, troubleshooting, and all four endings.",
+          "Use the complete campaign directory, Fire Mission Helper, shared firing loop, triangulation, shell decisions, troubleshooting, and all four endings.",
         image: "/images/iron-nest/iron-nest-demo-protocol.webp",
         imageFit: "cover",
         imagePosition: "center",
         imagePadding: false,
         home: {
           spotlightMeta:
-            "Complete campaign hub with Missions 1–15, firing solutions, triangulation, shells, requisition, troubleshooting, moving targets, counter-battery fire, and all four endings",
+            "Complete campaign hub with Missions 1–15, the Fire Mission Helper, triangulation, firing solutions, shells, moving targets, counter-battery fire, troubleshooting, and all four endings",
         },
         archive: {
           showInCollections: true,
@@ -4299,6 +4300,32 @@ export const guideClusters: GuideCluster[] = [
         },
       },
   
+      {
+        title: "IRON NEST Fire Mission Helper & Triangulation Calculator",
+        href: "/iron-nest/fire-mission-helper",
+        type: "Systems",
+        description:
+          "Recover the Iron Nest position from reports, locate targets from bearing or distance data, then calculate bearing, range, powder charges, and elevation.",
+        date: "New",
+        image:
+          "/images/iron-nest/iron-nest-fire-mission-helper-ui.webp",
+        imageFit: "contain",
+        imagePosition: "center",
+        imagePadding: true,
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 253,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Interactive Find My Position, Locate Target, and Fire Solution helper for Position Reports, triangulation, bearing, range, powder charges, and elevation",
+        },
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
       {
         title: "How to Triangulate in Iron Nest",
         href: "/iron-nest/how-to-triangulate",
@@ -4316,13 +4343,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 130,
           spotlightFeature: true,
-          spotlightOrder: 1,
+          spotlightOrder: 2,
           spotlightMeta:
             "Spotter bearings, bearing origins, distance constraints, intersections, chained references, Position Reports, firing-origin recovery, and triangulation troubleshooting",
         },
         archive: {
           showInCollections: true,
-          order: 2,
+          order: 3,
         },
       },
   
@@ -4343,13 +4370,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 124,
           spotlightFeature: true,
-          spotlightOrder: 2,
+          spotlightOrder: 3,
           spotlightMeta:
             "Mission 2 with two-spotter triangulation, opening H shot, follow-up hostiles, palace illumination, Star Shell correction, and Starburst confirmed",
         },
         archive: {
           showInCollections: true,
-          order: 3,
+          order: 4,
         },
       },
   
@@ -4370,13 +4397,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 125,
           spotlightFeature: true,
-          spotlightOrder: 3,
+          spotlightOrder: 4,
           spotlightMeta:
             "Mission 3 with repositioning, three opening infantry, P4 reconnaissance, underground AP cache, final urban targets, and friendly-fire decisions",
         },
         archive: {
           showInCollections: true,
-          order: 4,
+          order: 5,
         },
       },
   
@@ -4397,13 +4424,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 126,
           spotlightFeature: true,
-          spotlightOrder: 4,
+          spotlightOrder: 5,
           spotlightMeta:
             "Mission 4 with three opening artillery positions, two-gun preload, first-impact CBT trigger, timer extensions, fresh reconnaissance, and final cleanup",
         },
         archive: {
           showInCollections: true,
-          order: 5,
+          order: 6,
         },
       },
   
@@ -4424,13 +4451,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 127,
           spotlightFeature: true,
-          spotlightOrder: 5,
+          spotlightOrder: 6,
           spotlightMeta:
             "Mission 5 with train timetable, future waypoints, shell flight time, two AP emplacements, optional targets, allied route, and War Horn timing",
         },
         archive: {
           showInCollections: true,
-          order: 6,
+          order: 7,
         },
       },
   
@@ -4451,13 +4478,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 128,
           spotlightFeature: true,
-          spotlightOrder: 6,
+          spotlightOrder: 7,
           spotlightMeta:
             "Mission 6 with signal station, assembly area, Field Command, coastal batteries, Emergency Move, Position Reports, War Horn, Smoke, and breakout",
         },
         archive: {
           showInCollections: true,
-          order: 7,
+          order: 8,
         },
       },
   
@@ -4478,13 +4505,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 129,
           spotlightFeature: true,
-          spotlightOrder: 7,
+          spotlightOrder: 8,
           spotlightMeta:
             "Mission 7 with engine restart, unavailable ballistic calculator, eastbound reconnaissance, manual ranging, impact corrections, convoy safety, and pass clear",
         },
         archive: {
           showInCollections: true,
-          order: 8,
+          order: 9,
         },
       },
   
@@ -4505,13 +4532,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 131,
           spotlightFeature: true,
-          spotlightOrder: 8,
+          spotlightOrder: 9,
           spotlightMeta:
             "Mission 8 with The Mole, Dockmaster's House, HMS Rockingham, 11:08 restriction, Forward Observer decisions, AP firing solution, and optional moving vessel",
         },
         archive: {
           showInCollections: true,
-          order: 9,
+          order: 10,
         },
       },
   
@@ -4532,13 +4559,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 132,
           spotlightFeature: true,
-          spotlightOrder: 9,
+          spotlightOrder: 10,
           spotlightMeta:
             "Mission 9 with Tear Shell reveals, hidden positions, first primary targets, late Field Command correction, shell choice, War Horn, and optional cleanup",
         },
         archive: {
           showInCollections: true,
-          order: 10,
+          order: 11,
         },
       },
   
@@ -4559,13 +4586,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 133,
           spotlightFeature: true,
-          spotlightOrder: 10,
+          spotlightOrder: 11,
           spotlightMeta:
             "Mission 10 with War Horn preparation, live support calls, Tear-then-H sequences, Smoke repositioning, support deadlines, danger-close AP, and stand-down",
         },
         archive: {
           showInCollections: true,
-          order: 11,
+          order: 12,
         },
       },
   
@@ -4586,13 +4613,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 134,
           spotlightFeature: true,
-          spotlightOrder: 11,
+          spotlightOrder: 12,
           spotlightMeta:
             "Mission 11 with multiple landing craft, future intercepts, AP launch timing, dual-gun target queues, beach fallback, and the 07:14 survival objective",
         },
         archive: {
           showInCollections: true,
-          order: 12,
+          order: 13,
         },
       },
   
@@ -4613,13 +4640,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 135,
           spotlightFeature: true,
-          spotlightOrder: 12,
+          spotlightOrder: 13,
           spotlightMeta:
             "Mission 12 with reconnaissance blackout, Reference Alpha, AA Batteries 1–2, Reference Bravo, Batteries 3–4, chained error, shell tolerance, and Forward Observer decisions",
         },
         archive: {
           showInCollections: true,
-          order: 13,
+          order: 14,
         },
       },
   
@@ -4640,13 +4667,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 136,
           spotlightFeature: true,
-          spotlightOrder: 13,
+          spotlightOrder: 14,
           spotlightMeta:
             "Mission 13 with engine restart, Emergency Move, Position Reports, listening-post triangulation, AP targets, enemy spotter +90s extensions, and mobile battery tracking",
         },
         archive: {
           showInCollections: true,
-          order: 14,
+          order: 15,
         },
       },
   
@@ -4667,13 +4694,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 137,
           spotlightFeature: true,
-          spotlightOrder: 14,
+          spotlightOrder: 15,
           spotlightMeta:
             "Mission 14 with train schedule and launch timing, Reference Alpha, Fire Direction Centers, AA battery, counter-battery phase, live H support, powder management, and stand-down",
         },
         archive: {
           showInCollections: true,
-          order: 15,
+          order: 16,
         },
       },
   
@@ -4694,13 +4721,13 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 138,
           spotlightFeature: true,
-          spotlightOrder: 15,
+          spotlightOrder: 16,
           spotlightMeta:
             "Mission 15 and all four endings: A City in Celebration, A City Subdued, A City Silent, The Road Not Taken, betrayal preparation, retaliation priorities, and achievements",
         },
         archive: {
           showInCollections: true,
-          order: 16,
+          order: 17,
         },
       },
     ],

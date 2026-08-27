@@ -659,6 +659,7 @@ const paths = [
   '/iron-nest/phantom-battery-walkthrough',
   '/iron-nest/final-harvest-walkthrough',
   '/iron-nest/white-shells-endings',
+  '/iron-nest/fire-mission-helper',
 
   '/sovereign-tower',
   '/sovereign-tower/act-1-best-route',
@@ -975,6 +976,7 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 '/sovereign-tower/endings': '2026-08-15',
 
   '/iron-nest': '2026-08-08',
+  '/iron-nest/fire-mission-helper': '2026-08-27',
   '/iron-nest/fire-and-light-walkthrough': '2026-08-07',
   '/iron-nest/liberation-walkthrough': '2026-08-07',
   '/iron-nest/counter-battery-mission': '2026-08-07',
