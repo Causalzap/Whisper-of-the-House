@@ -10,101 +10,73 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/great-martyrs-blade`;
 
 const metadataTitle =
-  "Mortal Shell 2 Great Martyr's Blade Location & Frost Guide";
+  "Mortal Shell 2 Great Martyr's Blade Location & Frost Build";
 
 const metadataDescription =
-  "Find the Great Martyr's Blade in Martyr's Prison, then build around Frost and Captive's Scabstone, with route blockers, comparisons, and upgrade timing.";
+  "Find the Great Martyr's Blade in Martyr's Prison, get Warden's Stone for Frost, use the One-Legged Wolf shortcut, and decide when the weapon is worth upgrading.";
 
 const articleDescription =
-  "A practical Mortal Shell 2 Great Martyr's Blade guide covering its Martyr's Prison location, the Gloomshade Grove and Blood-Cursed Lithopod route, the Eredrim route split, Frost build, Captive's Scabstone, Tarstones, weapon comparisons, and when the Blade is worth upgrading.";
+  "A practical Mortal Shell 2 Great Martyr's Blade guide covering its Martyr's Prison location, the One-Legged Wolf and City of Penance shortcut, Warden's Stone, Frost, the Blood-Cursed Lithopod route, Captive's Scabstone, upgrade timing, and weapon comparisons.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-weapon.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-route-map.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-martyrs-prison.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-frost.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-wardens-stone-map-location.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-wardens-stone-one-legged-wolf-route.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-wardens-stone-city-of-penance-teleport.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-wardens-stone-pickup.webp`,
 ];
 
 const toc = [
   {
     id: "great-martyrs-blade-location",
-    label: "Great Martyr's Blade location",
+    label: "Blade location & how to get",
+  },
+  {
+    id: "route-to-martyrs-prison",
+    label: "Fast route to Martyr's Prison",
   },
   {
     id: "blood-cursed-lithopod",
-    label: "Blood-Cursed Lithopod",
-  },
-  {
-    id: "eredrim-route-split",
-    label: "Where the Eredrim route splits",
+    label: "Gloomshade Grove route",
   },
   {
     id: "martyrs-prison",
-    label: "Reach Martyr's Prison",
-  },
-  {
-    id: "how-to-get-great-martyrs-blade",
-    label: "How to get the Blade",
+    label: "Get the Great Martyr's Blade",
   },
   {
     id: "is-great-martyrs-blade-good",
     label: "Is the Blade good?",
   },
   {
-    id: "moveset",
-    label: "Moveset",
-  },
-  {
-    id: "why-it-feels-slow",
-    label: "Why it feels slow",
-  },
-  {
-    id: "best-tarstones",
-    label: "Best Tarstones",
-  },
-  {
     id: "frost-build",
-    label: "Best Frost build",
+    label: "Warden's Stone & Frost build",
   },
   {
-    id: "frost-location",
-    label: "Where to get Frost",
+    id: "wardens-stone-upgrade",
+    label: "Upgrade Warden's Stone?",
   },
   {
     id: "captives-scabstone",
     label: "Captive's Scabstone",
   },
   {
-    id: "frost-and-scabstone",
-    label: "Frost + Scabstone setup",
-  },
-  {
-    id: "should-i-rush-frost",
-    label: "Should I rush Frost?",
-  },
-  {
     id: "worth-getting-early",
     label: "Worth getting early?",
   },
   {
-    id: "battle-axe-vs-great-martyrs-blade",
-    label: "Blade vs Battle Axe",
-  },
-  {
-    id: "blade-vs-axatana",
-    label: "Blade vs Axatana",
-  },
-  {
     id: "upgrade-priority",
-    label: "When to upgrade it",
+    label: "When to upgrade the Blade",
+  },
+  {
+    id: "weapon-comparisons",
+    label: "Weapon comparisons",
   },
   {
     id: "cant-reach-martyrs-prison",
-    label: "Can't reach Martyr's Prison?",
-  },
-  {
-    id: "great-martyrs-blade-route",
-    label: "Route recap",
+    label: "Route troubleshooting",
   },
 ];
 
@@ -144,10 +116,10 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: metadataTitle,
     description:
-      "Find the Great Martyr's Blade through Gloomshade Grove and Martyr's Prison, then learn why Frost and Captive's Scabstone make the slow greatsword much stronger.",
+      "Find the Great Martyr's Blade in Martyr's Prison, use the One-Legged Wolf shortcut to reach City of Penance and Warden's Stone, then build the Blade around Frost.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-25",
+    modifiedTime: "2026-08-27",
     images: [
       {
         url: imageUrls[0],
@@ -162,7 +134,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Great Martyr's Blade location, Martyr's Prison route, Frost build, Captive's Scabstone, comparisons, and upgrade timing.",
+      "Great Martyr's Blade location, Martyr's Prison route, Warden's Stone, Frost build, Captive's Scabstone, and upgrade timing.",
     images: [imageUrls[0]],
   },
 };
@@ -189,7 +161,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Great Martyr's Blade Guide",
+          name: "Great Martyr's Blade",
           item: pageUrl,
         },
       ],
@@ -202,13 +174,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Great Martyr's Blade Location & Frost Guide",
+        "Great Martyr's Blade Location, Warden's Stone & Frost Build",
       description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-25",
+      dateModified: "2026-08-27",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -230,6 +202,22 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Warden's Stone",
+        },
+        {
+          "@type": "Thing",
+          name: "Frost Infusion",
+        },
+        {
+          "@type": "Thing",
+          name: "City of Penance",
+        },
+        {
+          "@type": "Thing",
+          name: "One-Legged Wolf",
+        },
+        {
+          "@type": "Thing",
           name: "Gloomshade Grove",
         },
         {
@@ -238,19 +226,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Great Martyr's Blade Frost build",
-        },
-        {
-          "@type": "Thing",
-          name: "Frost",
-        },
-        {
-          "@type": "Thing",
           name: "Captive's Scabstone",
         },
         {
           "@type": "Thing",
-          name: "Great Martyr's Blade Tarstones",
+          name: "Eredrim",
         },
         {
           "@type": "Thing",
@@ -292,13 +272,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Mortal Shell 2 Great Martyr's Blade Location & Frost Guide"
-          description="I get the Great Martyr's Blade through Gloomshade Grove and Martyr's Prison, test its slow moveset before spending heavily, then build around Frost and Captive's Scabstone when I want heavy control and large punish windows."
+          title="Great Martyr's Blade Location, Warden's Stone & Frost Build"
+          description="I use the One-Legged Wolf shortcut to reach City of Penance, open the Warden's Stone route, continue to Martyr's Prison for the Great Martyr's Blade, then build around Frost if the slow greatsword fits my playstyle."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 25, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

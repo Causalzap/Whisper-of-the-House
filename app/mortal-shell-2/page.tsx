@@ -9,72 +9,220 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/mortal-shell-2`;
 
 const metadataTitle =
-  "Mortal Shell 2 Guide Hub: Map, Area Order & Progression";
+  "Mortal Shell 2 Guide: Progression, Map & Area Order";
 
 const metadataDescription =
-  "Use this Mortal Shell 2 guide hub for map and area order, progression blockers, Shell and weapon detours, bosses, Night Mode, Zmey, and endgame.";
+  "Use this Mortal Shell 2 guide for progression, map and area order, Shell and weapon detours, blockers, bosses, achievements, endings, and NG+.";
 
 const heroImage =
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-marrow-keep-home.webp`;
 
 const toc = [
   {
-    id: "how-the-world-opens",
-    label: "How progression works",
+    id: "where-to-go-next",
+    label: "Where to go next",
   },
   {
-    id: "map-area-order",
-    label: "Map & area order",
+    id: "world-progression",
+    label: "Progression & area order",
   },
   {
-    id: "detours",
-    label: "Worthwhile detours",
+    id: "corruption-gates",
+    label: "Black corruption",
   },
   {
-    id: "progression-blockers",
-    label: "Progression blockers",
+    id: "detour-value",
+    label: "Which detours are worth it",
   },
   {
-    id: "endgame-signals",
-    label: "Zmey & endgame",
+    id: "route-too-early",
+    label: "When a route is too early",
   },
   {
-    id: "focused-guides",
-    label: "Focused guides",
+    id: "combat-difficulty",
+    label: "Combat difficulty",
   },
   {
-    id: "when-i-turn-back",
-    label: "When to turn back",
+    id: "tar-golem",
+    label: "Tar Golem",
+  },
+  {
+    id: "boss-detours",
+    label: "Boss detours",
+  },
+  {
+    id: "completion-route",
+    label: "Achievements & cleanup",
+  },
+  {
+    id: "endgame",
+    label: "Endgame & NG+",
+  },
+  {
+    id: "how-i-read-the-world",
+    label: "How I read the world",
+  },
+];
+
+const guideItems = [
+  {
+    position: 1,
+    name: "Mortal Shell 2 Progression Guide",
+    url: `${pageUrl}/progression-guide`,
+    description:
+      "Follow the main progression route, area order, major gates, and path into the Unfound Path and endgame.",
+  },
+  {
+    position: 2,
+    name: "Ova & Gloom Siphon Guide",
+    url: `${pageUrl}/ova-gloom-siphon`,
+    description:
+      "Recover Ova, use the Gloom Siphon, unlock Mether's Breath, clear corruption gates, and advance Beacon travel.",
+  },
+  {
+    position: 3,
+    name: "All Shell Locations",
+    url: `${pageUrl}/all-shells-locations`,
+    description:
+      "Find all eight permanent Shells and compare the route cost of unlocking each one.",
+  },
+  {
+    position: 4,
+    name: "Heart of Vatra & Gragu Guide",
+    url: `${pageUrl}/heart-of-vatra-gragu`,
+    description:
+      "Complete the Temple of Vatra offerings, recover the Heart, escape the sealed route, and unlock Gragu.",
+  },
+  {
+    position: 5,
+    name: "Eredrim Unlock Guide",
+    url: `${pageUrl}/how-to-unlock-eredrim`,
+    description:
+      "Follow the Citadel-side route and complete the progression needed to unlock Eredrim.",
+  },
+  {
+    position: 6,
+    name: "Genessa Unlock Guide",
+    url: `${pageUrl}/how-to-unlock-genessa`,
+    description:
+      "Reach Revenant Graves, complete the Sester's Censer route, and return to unlock Genessa.",
+  },
+  {
+    position: 7,
+    name: "Sariel & Chamber of Becoming Guide",
+    url: `${pageUrl}/sariel-boss-guide`,
+    description:
+      "Follow the Chamber of Becoming route, defeat Sariel, and complete the Shell progression tied to the encounter.",
+  },
+  {
+    position: 8,
+    name: "Best Weapons & Weapon Tier List",
+    url: `${pageUrl}/weapons-guide`,
+    description:
+      "Compare all eight melee weapons, their practical strengths, acquisition value, Infusions, and Tarstone setups.",
+  },
+  {
+    position: 9,
+    name: "All Sidearm Locations & Best Sidearm",
+    url: `${pageUrl}/sidearms-guide`,
+    description:
+      "Find all eight Sidearms, compare their acquisition routes, and decide which ranged option fits the current Resolve economy.",
+  },
+  {
+    position: 10,
+    name: "Great Martyr's Blade & Frost Guide",
+    url: `${pageUrl}/great-martyrs-blade`,
+    description:
+      "Reach the Great Martyr's Blade, complete the relevant prison route, and plan its Frost setup.",
+  },
+  {
+    position: 11,
+    name: "Shrine of Trials & Axe and Dagger Guide",
+    url: `${pageUrl}/shrine-of-trials-axe-dagger`,
+    description:
+      "Get the Chapel Key, solve the Shrine of Trials puzzles, and collect Axe & Dagger.",
+  },
+  {
+    position: 12,
+    name: "King's Crypt & Veteran's Battle Axe Guide",
+    url: `${pageUrl}/kings-crypt-veterans-battle-axe`,
+    description:
+      "Navigate King's Crypt traps, reach the lowest level, defeat the final guard, and collect the Veteran's Battle Axe.",
+  },
+  {
+    position: 13,
+    name: "Tar Golem Guide",
+    url: `${pageUrl}/tar-golem`,
+    description:
+      "Learn whether the opening Tar Golem must be beaten, what changes after a win or loss, and how retries work.",
+  },
+  {
+    position: 14,
+    name: "Magdalena Boss Guide",
+    url: `${pageUrl}/magdalena-boss-guide`,
+    description:
+      "Beat Magdalena, the Lady of the Woods, by reading her punish windows and later-phase pressure.",
+  },
+  {
+    position: 15,
+    name: "Difficulty Settings Guide",
+    url: `${pageUrl}/difficulty-settings`,
+    description:
+      "Understand combat difficulty options, Slayer Seal decisions, and when a broader difficulty change makes sense.",
+  },
+  {
+    position: 16,
+    name: "Night Mode Guide",
+    url: `${pageUrl}/night-mode`,
+    description:
+      "Unlock Night through Thestus and decide when its extra pressure and rewards are worth using.",
+  },
+  {
+    position: 17,
+    name: "Mortal Shell 2 Trophy & Achievement Guide",
+    url: `${pageUrl}/achievements`,
+    description:
+      "Track all 53 achievements, protect the first-playthrough trophy windows, and plan collection and NG+ cleanup.",
+  },
+  {
+    position: 18,
+    name: "Mortal Shell 2 Endings Guide",
+    url: `${pageUrl}/endings`,
+    description:
+      "Handle the main ending, Baghead secret ending, Send Ova decision, final commitment, and New Game Plus transition.",
   },
 ];
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "website",
     url: pageUrl,
     title: metadataTitle,
     description:
-      "Understand the Mortal Shell 2 map and area order, decide which Shell and weapon detours are worth taking, solve progression blockers, and prepare for the final stretch.",
+      "Decide where to go next in Mortal Shell 2, recognize progression gates, judge Shell and weapon detours, and route bosses, achievements, endings, and NG+ to the right guide.",
     siteName: "Whisper of the House",
     images: [
       {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Marrow Keep and the central progression hub in Mortal Shell 2",
+        alt: "Marrow Keep and the central progression area in Mortal Shell 2",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Map, area order, progression blockers, Shell and weapon routes, bosses, Night Mode, Zmey, and endgame help for Mortal Shell 2.",
+      "Progression, map and area order, worthwhile detours, Shells, weapons, bosses, achievements, endings, and NG+ for Mortal Shell 2.",
     images: [heroImage],
   },
 };
@@ -106,10 +254,10 @@ const jsonLd = {
       url: pageUrl,
       name: metadataTitle,
       description:
-        "A Mortal Shell 2 guide hub for understanding the world map and area order, choosing useful Shell and weapon detours, solving corruption and progression blockers, finding focused boss and equipment guides, and preparing for Zmey, the Unfound Path, and endgame.",
+        "A Mortal Shell 2 guide hub for deciding where to go next, reading progression gates and optional branches, choosing worthwhile Shell, weapon and Sidearm detours, handling boss and difficulty problems, tracking achievements, and preparing for endings and New Game Plus.",
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-22",
+      dateModified: "2026-08-27",
       primaryImageOfPage: {
         "@type": "ImageObject",
         url: heroImage,
@@ -120,6 +268,15 @@ const jsonLd = {
         {
           "@type": "VideoGame",
           name: "Mortal Shell II",
+          url: pageUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Mortal Shell 2 guide",
+        },
+        {
+          "@type": "Thing",
+          name: "Mortal Shell 2 progression",
         },
         {
           "@type": "Thing",
@@ -131,7 +288,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 progression",
+          name: "Mortal Shell 2 where to go next",
         },
         {
           "@type": "Thing",
@@ -143,7 +300,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Zmey",
+          name: "Mortal Shell 2 Sidearms",
+        },
+        {
+          "@type": "Thing",
+          name: "Mortal Shell 2 achievements",
+        },
+        {
+          "@type": "Thing",
+          name: "Mortal Shell 2 endings",
+        },
+        {
+          "@type": "Thing",
+          name: "Mortal Shell 2 New Game Plus",
         },
         {
           "@type": "Thing",
@@ -153,9 +322,18 @@ const jsonLd = {
       breadcrumb: {
         "@id": `${pageUrl}#breadcrumb`,
       },
+      mainEntity: {
+        "@id": `${pageUrl}#guides`,
+      },
       isPartOf: {
         "@type": "WebSite",
         "@id": `${siteUrl}#website`,
+        name: "Whisper of the House",
+        url: siteUrl,
+      },
+      publisher: {
+        "@type": "Organization",
+        "@id": `${siteUrl}#organization`,
         name: "Whisper of the House",
         url: siteUrl,
       },
@@ -163,112 +341,20 @@ const jsonLd = {
     {
       "@type": "ItemList",
       "@id": `${pageUrl}#guides`,
-      name: "Mortal Shell 2 Focused Guides",
-      numberOfItems: 17,
-      itemListElement: [
-        {
+      name: "Mortal Shell 2 Guides",
+      numberOfItems: guideItems.length,
+      itemListElement: guideItems.map(
+        ({ position, name, url, description }) => ({
           "@type": "ListItem",
-          position: 1,
-          url: `${pageUrl}/progression-guide`,
-          name: "Mortal Shell 2 Progression Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          url: `${pageUrl}/ova-gloom-siphon`,
-          name: "Ova & Gloom Siphon Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          url: `${pageUrl}/night-mode`,
-          name: "Night Mode Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 4,
-          url: `${pageUrl}/difficulty-settings`,
-          name: "Difficulty Settings Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 5,
-          url: `${pageUrl}/all-shells-locations`,
-          name: "All Shell Locations",
-        },
-        {
-          "@type": "ListItem",
-          position: 6,
-          url: `${pageUrl}/heart-of-vatra-gragu`,
-          name: "Heart of Vatra & Gragu Unlock Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 7,
-          url: `${pageUrl}/how-to-unlock-eredrim`,
-          name: "Eredrim Unlock Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 8,
-          url: `${pageUrl}/how-to-unlock-genessa`,
-          name: "Genessa Unlock Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 9,
-          url: `${pageUrl}/sariel-boss-guide`,
-          name: "Sariel & Chamber of Becoming Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 10,
-          url: `${pageUrl}/weapons-guide`,
-          name: "Best Weapons & Tier List",
-        },
-        {
-          "@type": "ListItem",
-          position: 11,
-          url: `${pageUrl}/sidearms-guide`,
-          name: "Sidearms Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 12,
-          url: `${pageUrl}/great-martyrs-blade`,
-          name: "Great Martyr's Blade & Frost Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 13,
-          url: `${pageUrl}/shrine-of-trials-axe-dagger`,
-          name: "Shrine of Trials & Axe and Dagger Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 14,
-          url: `${pageUrl}/kings-crypt-veterans-battle-axe`,
-          name: "King's Crypt & Veteran's Battle Axe Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 15,
-          url: `${pageUrl}/tar-golem`,
-          name: "Tar Golem Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 16,
-          url: `${pageUrl}/magdalena-boss-guide`,
-          name: "Magdalena Boss Guide",
-        },
-        {
-          "@type": "ListItem",
-          position: 17,
-          url: `${pageUrl}/endings`,
-          name: "Mortal Shell 2 Endings Guide",
-        },
-      ],
+          position,
+          item: {
+            "@type": "Article",
+            name,
+            url,
+            description,
+          },
+        }),
+      ),
     },
   ],
 };
@@ -285,13 +371,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Mortal Shell 2 Guide Hub: Map, Area Order & What to Do Next"
-          description="I use Marrow Keep as my anchor, read the map as a set of progression and optional branches, and decide which Shell, weapon, boss, or endgame route is actually worth doing next."
+          title="Mortal Shell 2 Guide: Progression, Map & What to Do Next"
+          description="I use Marrow Keep as my anchor, separate progression gates from optional branches, and decide when a Shell, weapon, boss, achievement, or endgame route is actually worth doing."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 22, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
         >
           <MortalShell2Content />

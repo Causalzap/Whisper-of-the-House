@@ -10,10 +10,13 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/kings-crypt-veterans-battle-axe`;
 
 const metadataTitle =
-  "Mortal Shell 2 King's Crypt: Veteran's Battle Axe Guide";
+  "Mortal Shell 2 Veteran's Battle Axe Location & King's Crypt Guide";
 
 const metadataDescription =
-  "Reach King's Crypt through Black Ridge Pass, survive its arrow and floor-spike traps, and find the Veteran's Battle Axe at the end of the route.";
+  "Find the Veteran's Battle Axe on the lowest level of King's Crypt, north of Black Ridge Pass, with trap routes, the final guard, and missable loot.";
+
+const articleDescription =
+  "A practical Mortal Shell 2 Veteran's Battle Axe and King's Crypt guide covering the route north from Black Ridge Pass, the King's Crypt entrance, wall-arrow traps, floor spikes, the lowest-level weapon location, final guard, optional hidden wall and loot, running heavy attack, and whether the early dungeon detour is worth doing.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-kings-crypt-route-map.webp`,
@@ -27,20 +30,16 @@ const imageUrls = [
 
 const toc = [
   {
-    id: "kings-crypt-route",
-    label: "King's Crypt route",
-  },
-  {
-    id: "why-kings-crypt-is-dangerous",
-    label: "Why King's Crypt is dangerous",
+    id: "veterans-battle-axe-location",
+    label: "Battle Axe location",
   },
   {
     id: "reach-kings-crypt",
     label: "Reach King's Crypt",
   },
   {
-    id: "enter-kings-crypt",
-    label: "Entering the Crypt",
+    id: "kings-crypt-walkthrough",
+    label: "King's Crypt walkthrough",
   },
   {
     id: "wall-arrows",
@@ -51,28 +50,28 @@ const toc = [
     label: "Floor-spike traps",
   },
   {
-    id: "side-rooms",
-    label: "Which side rooms to skip",
+    id: "optional-secret-wall",
+    label: "Optional hidden wall",
   },
   {
     id: "final-trap-section",
-    label: "Final trap section",
+    label: "Reach the lowest level",
+  },
+  {
+    id: "final-guard",
+    label: "Final guard",
   },
   {
     id: "veterans-battle-axe",
-    label: "Veteran's Battle Axe",
+    label: "Get Veteran's Battle Axe",
   },
   {
-    id: "check-dorsalite",
-    label: "Check nearby rewards",
+    id: "running-heavy",
+    label: "Why the Axe is good",
   },
   {
     id: "worth-doing-early",
-    label: "Is King's Crypt worth it early?",
-  },
-  {
-    id: "kings-crypt-route-summary",
-    label: "Route summary",
+    label: "Worth doing early?",
   },
 ];
 
@@ -83,7 +82,7 @@ const relatedLinks = [
   },
   {
     href: "/mortal-shell-2/weapons-guide",
-    label: "Weapons Guide",
+    label: "Best Weapons & Weapon Tier List",
   },
   {
     href: "/mortal-shell-2/progression-guide",
@@ -98,30 +97,36 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Mortal Shell 2 King's Crypt: Traps & Veteran's Battle Axe",
+    title: metadataTitle,
     description:
-      "Follow the Black Ridge Pass route to King's Crypt, survive the wall arrows and floor spikes, and collect the Veteran's Battle Axe.",
+      "Start north of Black Ridge Pass, descend through King's Crypt, survive the arrow and floor traps, and collect the Veteran's Battle Axe on the lowest level.",
     siteName: "Whisper of the House",
-    modifiedTime: "2026-08-18",
+    publishedTime: "2026-08-18",
+    modifiedTime: "2026-08-27",
     images: [
       {
-        url: imageUrls[3],
-        alt: "Floor spike traps inside King's Crypt in Mortal Shell 2",
+        url: imageUrls[5],
+        width: 1600,
+        height: 900,
+        alt: "Veteran's Battle Axe pickup on the lowest level of King's Crypt in Mortal Shell 2",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Mortal Shell 2 King's Crypt & Veteran's Battle Axe",
+    title: metadataTitle,
     description:
-      "How I reach King's Crypt, handle its arrow and floor traps, and get the Veteran's Battle Axe without wasting the run.",
-    images: [imageUrls[3]],
+      "King's Crypt route, wall arrows, floor spikes, lowest-level Battle Axe location, final guard, missable loot, and the Veteran's Battle Axe.",
+    images: [imageUrls[5]],
   },
 };
 
@@ -160,13 +165,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 King's Crypt Guide: Veteran's Battle Axe and Trap Route",
-      description:
-        "A practical Mortal Shell 2 King's Crypt guide covering the route through Black Ridge Pass, wall-arrow traps, floor spikes, the final trap section, the Veteran's Battle Axe location, nearby rewards, and when the early dungeon detour is worth doing.",
+        "Mortal Shell 2 Veteran's Battle Axe Location & King's Crypt Guide",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
-      dateModified: "2026-08-18",
+      datePublished: "2026-08-18",
+      dateModified: "2026-08-27",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -176,11 +181,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Veteran's Battle Axe",
+        },
+        {
+          "@type": "Thing",
+          name: "Veteran's Battle Axe location",
+        },
+        {
+          "@type": "Thing",
+          name: "How to get Veteran's Battle Axe",
+        },
+        {
+          "@type": "Thing",
           name: "King's Crypt",
         },
         {
           "@type": "Thing",
-          name: "Veteran's Battle Axe",
+          name: "King's Crypt walkthrough",
         },
         {
           "@type": "Thing",
@@ -188,7 +205,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "King's Crypt traps",
+          name: "King's Crypt wall-arrow traps",
+        },
+        {
+          "@type": "Thing",
+          name: "King's Crypt floor spikes",
+        },
+        {
+          "@type": "Thing",
+          name: "King's Crypt hidden wall",
         },
         {
           "@type": "Thing",
@@ -226,13 +251,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Survive King's Crypt and Get the Veteran's Battle Axe"
-          description="The enemies are not my biggest problem in King's Crypt. I slow down for the wall arrows and floor spikes, clear the main route, and grab the Veteran's Battle Axe near the end."
+          title="Veteran's Battle Axe Location & King's Crypt Guide"
+          description="I start north of Black Ridge Pass, descend through King's Crypt while avoiding wall arrows and floor spikes, clear the final guard, and collect the Veteran's Battle Axe on the lowest level."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 18, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

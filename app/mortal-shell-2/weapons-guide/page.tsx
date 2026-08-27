@@ -10,23 +10,23 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/weapons-guide`;
 
 const metadataTitle =
-  "Mortal Shell 2 Best Weapons & Weapon Tier List: All 8 Ranked";
+  "Mortal Shell 2 Best Weapons Tier List: All 8 Ranked";
 
 const metadataDescription =
-  "Axatana is my best overall Mortal Shell 2 weapon. See all 8 ranked, plus the best early picks, Infusions, Tarstones, locations, and when each is worth using.";
+  "Axatana is my best overall Mortal Shell 2 weapon. See all 8 melee weapons ranked, plus the best early picks, builds, Infusions, Tarstones, and locations.";
 
 const articleDescription =
-  "Axatana is my best overall Mortal Shell 2 weapon, but the strongest choice changes by progression and build. This guide ranks all eight melee weapons and compares their movesets, Infusions, Tarstones, locations, and best uses.";
+  "A practical Mortal Shell 2 weapon tier list ranking all eight melee weapons, with Axatana as the best overall pick plus early-game choices, acquisition locations, Infusions, Tarstones, Frost, Stasis, Blood Curse, Trauma, Phantom, and upgrade decisions.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-axatana-stasis.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-iconoclast-blood-curse.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-axe-dagger-duality.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-veterans-battle-axe-running-heavy.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-great-martyrs-blade-frost.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-clockwork-scythe-chainsaw.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-veterans-battle-axe-running-heavy.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-axe-dagger-duality.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-iconoclast-blood-curse.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-obsidian-hammer-stasis.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-black-needle-phantom.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-clockwork-scythe-chainsaw.webp`,
 ];
 
 const toc = [
@@ -36,43 +36,43 @@ const toc = [
   },
   {
     id: "weapon-tier-list",
-    label: "Weapon tier list",
+    label: "All 8 weapons ranked",
   },
   {
     id: "best-early-weapon",
     label: "Best early weapons",
   },
   {
-    id: "iconoclast",
-    label: "Iconoclast",
-  },
-  {
-    id: "axe-and-dagger",
-    label: "Axe & Dagger",
-  },
-  {
-    id: "veterans-battle-axe",
-    label: "Veteran's Battle Axe",
+    id: "axatana",
+    label: "Axatana",
   },
   {
     id: "great-martyrs-blade",
     label: "Great Martyr's Blade",
   },
   {
+    id: "clockwork-scythe",
+    label: "Clockwork Scythe",
+  },
+  {
+    id: "veterans-battle-axe",
+    label: "Veteran's Battle Axe",
+  },
+  {
+    id: "axe-and-dagger",
+    label: "Axe & Dagger",
+  },
+  {
+    id: "iconoclast",
+    label: "Iconoclast",
+  },
+  {
     id: "obsidian-hammer",
     label: "Obsidian Hammer",
   },
   {
-    id: "axatana",
-    label: "Axatana",
-  },
-  {
     id: "black-needle",
     label: "Black Needle",
-  },
-  {
-    id: "clockwork-scythe",
-    label: "Clockwork Scythe",
   },
   {
     id: "best-status-weapons",
@@ -80,7 +80,7 @@ const toc = [
   },
   {
     id: "upgrade-rule",
-    label: "Weapon upgrade rule",
+    label: "Which weapon to upgrade",
   },
 ];
 
@@ -103,7 +103,7 @@ const relatedLinks = [
   },
   {
     href: "/mortal-shell-2/great-martyrs-blade",
-    label: "Great Martyr's Blade Guide",
+    label: "Great Martyr's Blade & Warden's Stone",
   },
   {
     href: "/mortal-shell-2/sidearms-guide",
@@ -124,10 +124,10 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: metadataTitle,
     description:
-      "Axatana is my best overall pick. Compare all eight Mortal Shell 2 melee weapons, including the best early, late-game, heavy, and status choices.",
+      "Axatana is my best overall pick. Compare all eight Mortal Shell 2 melee weapons, including the best early, Frost, Stasis, heavy, and high-investment choices.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-25",
+    modifiedTime: "2026-08-27",
     images: [
       {
         url: imageUrls[0],
@@ -142,7 +142,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Axatana leads my Mortal Shell 2 weapon tier list. See all 8 weapons ranked, plus the best early picks, Infusions, Tarstones, and status builds.",
+      "Axatana leads my Mortal Shell 2 weapon tier list. Compare all 8 melee weapons, early picks, locations, Infusions, Tarstones, and status builds.",
     images: [imageUrls[0]],
   },
 };
@@ -169,7 +169,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Best Weapons & Weapon Tier List",
+          name: "Best Weapons Tier List",
           item: pageUrl,
         },
       ],
@@ -182,13 +182,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Best Weapons & Weapon Tier List: All 8 Ranked",
+        "Mortal Shell 2 Best Weapons Tier List: All 8 Ranked",
       description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-25",
+      dateModified: "2026-08-27",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -198,7 +198,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 weapons",
+          name: "Mortal Shell 2 best weapons",
         },
         {
           "@type": "Thing",
@@ -210,7 +210,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 early weapons",
+          name: "Mortal Shell 2 melee weapons",
         },
         {
           "@type": "Thing",
@@ -218,11 +218,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Iconoclast",
+          name: "Great Martyr's Blade",
         },
         {
           "@type": "Thing",
-          name: "Axe & Dagger",
+          name: "Warden's Stone",
+        },
+        {
+          "@type": "Thing",
+          name: "Clockwork Scythe",
         },
         {
           "@type": "Thing",
@@ -230,7 +234,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Great Martyr's Blade",
+          name: "Axe & Dagger",
+        },
+        {
+          "@type": "Thing",
+          name: "Iconoclast",
         },
         {
           "@type": "Thing",
@@ -242,7 +250,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Clockwork Scythe",
+          name: "Frost",
+        },
+        {
+          "@type": "Thing",
+          name: "Stasis",
+        },
+        {
+          "@type": "Thing",
+          name: "Blood Curse",
+        },
+        {
+          "@type": "Thing",
+          name: "Phantom",
         },
       ],
       isPartOf: {
@@ -276,13 +296,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Mortal Shell 2 Best Weapons & Weapon Tier List: All 8 Ranked"
-          description="Axatana is my best overall pick, but the right weapon changes with progression and build. I rank all eight melee weapons and explain the Infusions, Tarstones, and situations that make each one worth using."
+          title="Mortal Shell 2 Best Weapons Tier List: All 8 Ranked"
+          description="Axatana is my best overall melee weapon, but Great Martyr's Blade, Clockwork Scythe, and the early-game options all win in specific builds. I rank all eight by moveset, acquisition timing, Infusions, Tarstones, and practical use."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 25, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

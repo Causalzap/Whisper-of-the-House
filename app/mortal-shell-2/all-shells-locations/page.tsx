@@ -10,10 +10,13 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/all-shells-locations`;
 
 const metadataTitle =
-  "Mortal Shell 2 All Shell Locations & Best Shells to Use";
+  "Mortal Shell 2 All Shell Locations & How to Unlock All 8";
 
 const metadataDescription =
-  "Find all 8 Mortal Shell 2 Shell locations, compare each playstyle, and see which early and late-game Shells are actually worth spending your Glimpses on.";
+  "Find all 8 permanent Mortal Shell 2 Shell locations and unlock requirements for Tiel, Proxima, Gragu, Eredrim, Smert, Genessa, Lazlo, and Sariel.";
+
+const articleDescription =
+  "A complete Mortal Shell 2 Shell locations guide covering all eight permanent post-prologue Shells: Tiel, Proxima, Gragu, Eredrim, Smert, Genessa, Lazlo, and Sariel, including their locations, unlock requirements, route blockers, and which Shells are easiest to collect first.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-tiel-location-graveyard.webp`,
@@ -24,56 +27,48 @@ const imageUrls = [
 
 const toc = [
   {
-    id: "before-spending-glimpses",
-    label: "Before spending Glimpses",
+    id: "all-shell-locations",
+    label: "All 8 Shell locations",
   },
   {
-    id: "harros",
-    label: "Harros",
-  },
-  {
-    id: "fainweald-shells",
-    label: "Fainweald Shells",
+    id: "how-shell-unlocks-work",
+    label: "How Shell unlocks work",
   },
   {
     id: "tiel",
-    label: "Tiel",
+    label: "Tiel location",
   },
   {
     id: "proxima",
-    label: "Proxima",
+    label: "Proxima location",
   },
   {
     id: "gragu",
-    label: "Gragu",
+    label: "Gragu location",
   },
   {
     id: "eredrim",
-    label: "Eredrim",
+    label: "Eredrim location",
   },
   {
     id: "smert",
-    label: "Smert",
-  },
-  {
-    id: "mammon-shells",
-    label: "Mammon Shells",
+    label: "Smert location",
   },
   {
     id: "genessa",
-    label: "Genessa",
+    label: "Genessa location",
   },
   {
     id: "lazlo",
-    label: "Lazlo",
+    label: "Lazlo location",
   },
   {
     id: "sariel",
-    label: "Sariel",
+    label: "Sariel location",
   },
   {
     id: "which-shell-first",
-    label: "Which Shell I unlock first",
+    label: "Which Shell to unlock first",
   },
 ];
 
@@ -107,18 +102,20 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Mortal Shell 2 All Shell Locations & Which Shell to Use",
+    title: metadataTitle,
     description:
-      "Find Tiel, Proxima, Gragu, Eredrim, Smert, Genessa, Lazlo, and Sariel, then decide which Shell is actually worth your Glimpses.",
+      "Find Tiel, Proxima, Gragu, Eredrim, Smert, Genessa, Lazlo, and Sariel, with the route and unlock requirement for every permanent Shell.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-18",
+    modifiedTime: "2026-08-27",
     images: [
       {
         url: imageUrls[0],
@@ -128,11 +125,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Mortal Shell 2 All Shell Locations & Which Shell to Use",
+    title: metadataTitle,
     description:
-      "Find all eight main Shells and decide which early, Fainweald, and Mammon unlocks are actually worth investing Glimpses in.",
+      "All 8 permanent Mortal Shell 2 Shell locations, unlock requirements, route blockers, and the easiest Shells to collect first.",
     images: [imageUrls[0]],
   },
 };
@@ -172,14 +170,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 All Shell Locations and Which Shells Are Worth Investing In",
-      description:
-        "A practical Mortal Shell 2 Shell guide covering all eight main post-prologue Shells: Tiel, Proxima, Gragu, Eredrim, Smert, Genessa, Lazlo, and Sariel. It explains where each Shell fits into Fainweald or Mammon progression, how expensive each unlock route is, the combat identity of each Shell, and when I think it is worth committing limited Glimpses instead of spreading resources across the entire roster.",
+        "Mortal Shell 2 All Shell Locations & How to Unlock All 8",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-18",
+      dateModified: "2026-08-27",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -193,11 +190,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 best Shell",
+          name: "Mortal Shell 2 all Shells",
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 which Shell to use",
+          name: "How to unlock all Shells",
         },
         {
           "@type": "Thing",
@@ -233,15 +230,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Harros",
+        },
+        {
+          "@type": "Thing",
           name: "Fainweald",
         },
         {
           "@type": "Thing",
           name: "Mammon",
-        },
-        {
-          "@type": "Thing",
-          name: "Glimpses",
         },
       ],
       isPartOf: {
@@ -275,13 +272,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Every Mortal Shell 2 Shell I’d Actually Consider Building"
-          description="I find all eight main Shells, compare what each one is good at, and decide which unlocks are worth the route and which deserve my limited Glimpses."
+          title="Mortal Shell 2 All Shell Locations & How to Unlock All 8"
+          description="I show where to find Tiel, Proxima, Gragu, Eredrim, Smert, Genessa, Lazlo, and Sariel, what each unlock actually requires, and which Shells are easiest to collect first."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 18, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

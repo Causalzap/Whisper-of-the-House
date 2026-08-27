@@ -10,10 +10,13 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/sidearms-guide`;
 
 const metadataTitle =
-  "Mortal Shell 2 Sidearms Guide: All Locations & Best First Pick";
+  "Mortal Shell 2 All 8 Sidearm Locations & Best Sidearm";
 
 const metadataDescription =
-  "Find all 8 Mortal Shell 2 Sidearms, where to get each one, how Resolve affects ranged combat, and which Sidearms are worth spending Coin on first.";
+  "Find all 8 Mortal Shell 2 Sidearms, their exact dungeons and requirements, the best Sidearm for each role, and how to unlock ranged upgrades.";
+
+const articleDescription =
+  "A complete Mortal Shell 2 Sidearm guide covering all eight ranged weapons — Naylshotte, Troubadour's Lute, Forgotten Crossbow, Salvaged Trebuchaxe, Triarch Repeater, Ballistazooka, Cursed Child, and Caged Hystrix — with exact acquisition routes, key requirements, the best Sidearms for sustained damage, burst and early progression, Resolve interactions, Obsidian Lathe upgrades, and the Guns. Lots of Guns achievement.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-sidearm-resolve-tutorial.webp`,
@@ -27,12 +30,16 @@ const imageUrls = [
 
 const toc = [
   {
-    id: "how-sidearms-work",
-    label: "How Sidearms work",
+    id: "best-sidearm",
+    label: "Best Sidearm",
   },
   {
-    id: "sidearm-upgrade-rule",
-    label: "When I upgrade Sidearms",
+    id: "all-sidearm-locations",
+    label: "All 8 Sidearm locations",
+  },
+  {
+    id: "how-sidearms-work",
+    label: "How Sidearms work",
   },
   {
     id: "naylshotte",
@@ -51,14 +58,6 @@ const toc = [
     label: "Salvaged Trebuchaxe",
   },
   {
-    id: "caged-hystrix",
-    label: "Caged Hystrix",
-  },
-  {
-    id: "cursed-child",
-    label: "Cursed Child",
-  },
-  {
     id: "triarch-repeater",
     label: "Triarch Repeater",
   },
@@ -67,24 +66,24 @@ const toc = [
     label: "Ballistazooka",
   },
   {
-    id: "which-sidearm-first",
-    label: "Which Sidearm I get first",
+    id: "cursed-child",
+    label: "Cursed Child",
   },
   {
-    id: "resolve-economy",
-    label: "Resolve economy",
+    id: "caged-hystrix",
+    label: "Caged Hystrix",
   },
   {
-    id: "slayer-seal-sidearms",
-    label: "Slayer Seal & Sidearms",
+    id: "sidearm-build-synergy",
+    label: "Sidearm build synergy",
   },
   {
-    id: "when-i-spend-coin",
-    label: "When I spend Coin",
+    id: "how-to-upgrade-sidearms",
+    label: "How to upgrade Sidearms",
   },
   {
-    id: "my-sidearm-rule",
-    label: "My Sidearm rule",
+    id: "guns-lots-of-guns",
+    label: "Guns. Lots of Guns",
   },
 ];
 
@@ -95,15 +94,15 @@ const relatedLinks = [
   },
   {
     href: "/mortal-shell-2/weapons-guide",
-    label: "Weapons Guide",
+    label: "Best Weapons & Weapon Tier List",
   },
   {
     href: "/mortal-shell-2/progression-guide",
     label: "Progression Guide",
   },
   {
-    href: "/mortal-shell-2/difficulty-settings",
-    label: "Difficulty Settings Guide",
+    href: "/mortal-shell-2/heart-of-vatra-gragu",
+    label: "Heart of Vatra & Gragu",
   },
   {
     href: "/mortal-shell-2/sariel-boss-guide",
@@ -114,33 +113,36 @@ const relatedLinks = [
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Mortal Shell 2 Sidearms: All 8 Locations & Which I Get First",
+    title: metadataTitle,
     description:
-      "Find Naylshotte, Troubadour's Lute, Forgotten Crossbow, Caged Hystrix, Ballistazooka and every other Sidearm, then decide which are worth upgrading.",
+      "Find every Mortal Shell 2 Sidearm, including the Damp Key Crossbow route, Sariel's Caged Hystrix, Sentry's Grave Ballistazooka, and the best Sidearm for each role.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-18",
+    modifiedTime: "2026-08-27",
     images: [
       {
-        url: imageUrls[0],
+        url: imageUrls[4],
         width: 1600,
         height: 900,
-        alt: "Sidearm Resolve tutorial in Mortal Shell 2",
+        alt: "Caged Hystrix Sidearm pickup in Mortal Shell 2",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Mortal Shell 2 Sidearms: All Locations & Best First Pick",
+    title: metadataTitle,
     description:
-      "Where I find all eight Sidearms, which ones are cheap early pickups, and when I finally spend Coin upgrading one.",
-    images: [imageUrls[0]],
+      "All 8 Sidearm locations, best overall and early picks, Resolve mechanics, Obsidian Lathe upgrades, and Guns. Lots of Guns.",
+    images: [imageUrls[4]],
   },
 };
 
@@ -166,7 +168,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Sidearms Guide",
+          name: "Sidearm Locations & Best Sidearm",
           item: pageUrl,
         },
       ],
@@ -179,14 +181,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Sidearms Guide: All 8 Locations and Which Sidearm to Get First",
-      description:
-        "A practical Mortal Shell 2 Sidearms guide covering all eight ranged weapons — Naylshotte, Troubadour's Lute, Forgotten Crossbow, Salvaged Trebuchaxe, Caged Hystrix, Cursed Child, Triarch Repeater, and Ballistazooka — including where each one is found, how difficult its acquisition route is, how Sidearms spend Resolve, useful Tarstone interactions, Slayer Seal Break Damage, and when I think a Sidearm is worth spending Coin on.",
+        "Mortal Shell 2 All 8 Sidearm Locations & Best Sidearm",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-18",
+      dateModified: "2026-08-27",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -204,7 +205,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 Resolve",
+          name: "Mortal Shell 2 best Sidearm",
+        },
+        {
+          "@type": "Thing",
+          name: "Mortal Shell 2 ranged weapons",
         },
         {
           "@type": "Thing",
@@ -220,15 +225,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Damp Key",
+        },
+        {
+          "@type": "Thing",
           name: "Salvaged Trebuchaxe",
-        },
-        {
-          "@type": "Thing",
-          name: "Caged Hystrix",
-        },
-        {
-          "@type": "Thing",
-          name: "Cursed Child",
         },
         {
           "@type": "Thing",
@@ -240,15 +241,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Wounding Stone",
+          name: "Subjugated Guardian",
         },
         {
           "@type": "Thing",
-          name: "Ember Seed Stone",
+          name: "Cursed Child",
         },
         {
           "@type": "Thing",
-          name: "Slayer Seal",
+          name: "Caged Hystrix",
+        },
+        {
+          "@type": "Thing",
+          name: "Resolve",
+        },
+        {
+          "@type": "Thing",
+          name: "Obsidian Lathe",
+        },
+        {
+          "@type": "Thing",
+          name: "Guns. Lots of Guns",
         },
       ],
       isPartOf: {
@@ -282,13 +295,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="All 8 Mortal Shell 2 Sidearms and Which I Get First"
-          description="I start with Naylshotte, pick up cheap optional Sidearms when they fit my route, and only spend Coin once a ranged weapon actually works with my Resolve economy."
+          title="All 8 Sidearm Locations & Best Sidearm in Mortal Shell 2"
+          description="I track down all eight Sidearms, explain the key or boss that blocks each pickup, and compare Caged Hystrix, Forgotten Crossbow, Salvaged Trebuchaxe, and the best early ranged options."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 18, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

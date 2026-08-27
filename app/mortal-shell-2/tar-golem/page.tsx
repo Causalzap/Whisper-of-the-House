@@ -10,10 +10,13 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/tar-golem`;
 
 const metadataTitle =
-  "Mortal Shell 2 Tar Golem: Can You Beat It & What Happens?";
+  "Mortal Shell 2 Tar Golem: How to Beat It & What Happens";
 
 const metadataDescription =
-  "Can you beat the Tar Golem in Mortal Shell 2? Learn whether the fight is mandatory, what happens if you win or lose, and how to retry bad attempts.";
+  "Beat the Tar Golem and unlock No, You Still Can't Win, or lose and continue normally. See the fight strategy, retry method, and what happens after either result.";
+
+const articleDescription =
+  "A practical Mortal Shell 2 Tar Golem guide covering how to beat the opening boss, whether victory is required, the No You Still Can't Win achievement, what happens after winning or losing, whether the fight is a scripted loss, Perfect Guards, retrying with the rear cliff, Health resets, and whether Tar Golem respawns.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-tar-golem-first-boss.webp`,
@@ -36,56 +39,28 @@ const toc = [
     label: "Is it a scripted loss?",
   },
   {
-    id: "what-happens-if-you-lose",
-    label: "What happens if you lose?",
-  },
-  {
     id: "what-happens-if-you-beat-tar-golem",
     label: "What happens if you win?",
   },
   {
-    id: "should-you-beat-tar-golem",
-    label: "Should you beat Tar Golem?",
-  },
-  {
-    id: "how-to-retry-tar-golem",
-    label: "How to retry the fight",
-  },
-  {
-    id: "does-tar-golem-health-reset",
-    label: "Does Tar Golem health reset?",
+    id: "what-happens-if-you-lose",
+    label: "What happens if you lose?",
   },
   {
     id: "how-to-beat-tar-golem",
     label: "How to beat Tar Golem",
   },
   {
-    id: "tar-golem-first-attempt",
-    label: "What to learn first",
+    id: "how-to-retry-tar-golem",
+    label: "How to retry the fight",
   },
   {
-    id: "tar-golem-no-healing",
-    label: "Fighting without healing",
+    id: "does-tar-golem-respawn",
+    label: "Does Tar Golem respawn?",
   },
   {
-    id: "when-to-reset-tar-golem",
-    label: "When to reset",
-  },
-  {
-    id: "tar-golem-keeps-killing-me",
-    label: "If Tar Golem keeps killing you",
-  },
-  {
-    id: "tar-golem-win-vs-loss",
-    label: "Win vs loss",
-  },
-  {
-    id: "tar-golem-faq",
-    label: "Tar Golem FAQ",
-  },
-  {
-    id: "tar-golem-decision",
-    label: "My Tar Golem rule",
+    id: "should-you-beat-tar-golem",
+    label: "Should you beat it?",
   },
 ];
 
@@ -93,6 +68,10 @@ const relatedLinks = [
   {
     href: "/mortal-shell-2",
     label: "Mortal Shell 2 Guide Hub",
+  },
+  {
+    href: "/mortal-shell-2/achievements",
+    label: "Achievements Guide",
   },
   {
     href: "/mortal-shell-2/progression-guide",
@@ -106,27 +85,25 @@ const relatedLinks = [
     href: "/mortal-shell-2/weapons-guide",
     label: "Best Weapons & Tier List",
   },
-  {
-    href: "/mortal-shell-2/all-shells-locations",
-    label: "All Shell Locations",
-  },
 ];
 
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
     type: "article",
     url: pageUrl,
     title: metadataTitle,
     description:
-      "The Tar Golem can be beaten, but victory is not required. See what happens after a win or loss, how the scripted-loss question works, and how to retry the fight.",
+      "Tar Golem is beatable but not mandatory. Learn how to win, unlock No, You Still Can't Win, retry bad attempts, and understand what happens after either outcome.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-22",
+    modifiedTime: "2026-08-27",
     images: [
       {
         url: imageUrls[0],
@@ -136,11 +113,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Can you beat Tar Golem, do you have to win, what happens after a loss, and how do retries work? Here's the full opening boss answer.",
+      "How to beat Tar Golem, unlock No, You Still Can't Win, retry the opening boss, and understand why victory is not required to progress.",
     images: [imageUrls[0]],
   },
 };
@@ -180,14 +158,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Tar Golem: Can You Beat It & What Happens?",
-      description:
-        "A complete Mortal Shell 2 Tar Golem guide explaining whether the opening boss can be beaten, whether victory is required, whether the fight is a scripted loss, what happens after winning or losing, how to retry using the rear cliff, why the boss returns to full Health, and how to approach the fight if you want the win.",
+        "Mortal Shell 2 Tar Golem: How to Beat It & What Happens",
+      description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-22",
+      dateModified: "2026-08-27",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -201,11 +178,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 Tar Golem",
+          name: "Mortal Shell 2 Tar Golem boss",
         },
         {
           "@type": "Thing",
-          name: "Mortal Shell 2 opening boss",
+          name: "How to beat Tar Golem",
         },
         {
           "@type": "Thing",
@@ -221,15 +198,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Tar Golem win",
+          name: "No, You Still Can't Win",
         },
         {
           "@type": "Thing",
-          name: "Tar Golem loss",
+          name: "Tar Golem achievement",
         },
         {
           "@type": "Thing",
           name: "Tar Golem retry",
+        },
+        {
+          "@type": "Thing",
+          name: "Tar Golem respawn",
+        },
+        {
+          "@type": "Thing",
+          name: "Disciple's Grotto",
         },
       ],
       isPartOf: {
@@ -263,13 +248,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Mortal Shell 2 Tar Golem: Can You Beat It & What Happens?"
-          description="Yes, the Tar Golem can be beaten, but I do not need to win to continue. I explain what happens after either result, how retries work, and how I approach the fight when I actually want the kill."
+          title="Tar Golem Guide: How to Beat It, Trophy & What Happens"
+          description="The Tar Golem can be beaten, but victory is not required to progress. I explain how to get the No, You Still Can't Win achievement, fight it safely, retry bad attempts, and what happens after either outcome."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 22, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

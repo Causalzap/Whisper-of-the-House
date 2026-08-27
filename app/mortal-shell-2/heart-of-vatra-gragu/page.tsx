@@ -10,22 +10,25 @@ const hubUrl = `${siteUrl}/mortal-shell-2`;
 const pageUrl = `${hubUrl}/heart-of-vatra-gragu`;
 
 const metadataTitle =
-  "Mortal Shell 2 Heart of Vatra & Gragu Unlock Guide";
+  "Mortal Shell 2 Heart of Vatra Location & Gragu Unlock";
 
 const metadataDescription =
-  "Find the Heart of Vatra, get Berserker's Stone before taking it, escape the Temple of Vatra, and return the Heart to Gragu to unlock his Shell.";
+  "Find the Heart of Vatra, light all three Temple offerings, get Berserker's Stone, escape the sealed route, and return the Heart to unlock Gragu.";
 
 const articleDescription =
-  "A practical Mortal Shell 2 Heart of Vatra and Gragu guide covering where to find Gragu, the route to the Temple of Vatra, all three offerings, Berserker's Stone, what happens after taking the Heart, how to escape the sealed temple, and how to unlock Gragu the Insatiable.";
+  "Find the Heart of Vatra in Mortal Shell 2, reach the Temple of Vatra from One-Legged Wolf, collect the Synaptic Vessel, locate all three offerings, get Berserker's Stone, escape after the temple seals, and return the Heart to unlock Gragu.";
 
 const imageUrls = [
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-heart-of-vatra-altar.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-gragu-one-legged-wolf-tavern.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-jump-gate.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-three-candles.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-synaptic-vessel.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-offering-left-chest.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-offering-statue-pillar.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-offering-brickwork.webp`,
   `${siteUrl}/images/mortal-shell-2/mortal-shell-2-berserker-stone-vatra-chest.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-sealed-after-heart.webp`,
-  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-mushroom-village-beacon.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-route-blocked-after-heart.webp`,
+  `${siteUrl}/images/mortal-shell-2/mortal-shell-2-temple-of-vatra-escape-route.webp`,
 ];
 
 const toc = [
@@ -34,28 +37,20 @@ const toc = [
     label: "Heart of Vatra location",
   },
   {
-    id: "how-to-unlock-gragu",
-    label: "How to unlock Gragu",
-  },
-  {
-    id: "find-gragu",
-    label: "Where to find Gragu",
-  },
-  {
-    id: "route-from-mushroom-village",
-    label: "Route from Mushroom Village",
-  },
-  {
-    id: "temple-of-vatra",
-    label: "Reach Temple of Vatra",
+    id: "temple-of-vatra-route",
+    label: "Route to Temple of Vatra",
   },
   {
     id: "before-taking-heart",
     label: "Before taking the Heart",
   },
   {
+    id: "synaptic-vessel",
+    label: "Synaptic Vessel location",
+  },
+  {
     id: "three-offerings",
-    label: "Three offerings",
+    label: "Three offering locations",
   },
   {
     id: "berserkers-stone",
@@ -66,40 +61,20 @@ const toc = [
     label: "Take the Heart of Vatra",
   },
   {
-    id: "temple-seals",
-    label: "Why the temple seals",
+    id: "temple-sealed-after-heart",
+    label: "Temple sealed after Heart",
   },
   {
     id: "escape-temple",
     label: "Escape Temple of Vatra",
   },
   {
-    id: "what-to-do-with-heart",
-    label: "What to do with the Heart",
-  },
-  {
     id: "give-heart-to-gragu",
     label: "Unlock Gragu's Shell",
   },
   {
-    id: "gragu-abilities",
-    label: "Gragu abilities",
-  },
-  {
     id: "gragu-wont-unlock",
-    label: "Gragu not unlocking",
-  },
-  {
-    id: "heart-before-berserkers-stone",
-    label: "Took the Heart too early?",
-  },
-  {
-    id: "is-heart-missable",
-    label: "Is the Heart missable?",
-  },
-  {
-    id: "heart-of-vatra-route",
-    label: "Route recap",
+    label: "Troubleshooting",
   },
 ];
 
@@ -113,16 +88,16 @@ const relatedLinks = [
     label: "Progression Guide",
   },
   {
+    href: "/mortal-shell-2/ova-gloom-siphon",
+    label: "Ova, Gloom Siphon & Mether's Breath",
+  },
+  {
     href: "/mortal-shell-2/all-shells-locations",
     label: "All Shell Locations",
   },
   {
-    href: "/mortal-shell-2/weapons-guide",
-    label: "Best Weapons & Weapon Tier List",
-  },
-  {
-    href: "/mortal-shell-2/ova-gloom-siphon",
-    label: "Ova, Gloom Siphon & Mether's Breath",
+    href: "/mortal-shell-2/achievements",
+    label: "Achievements Guide",
   },
 ];
 
@@ -139,16 +114,16 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: metadataTitle,
     description:
-      "Find the Heart of Vatra, collect Berserker's Stone first, escape the changed Temple of Vatra, and bring the Heart back to Gragu to unlock his Shell.",
+      "Find the Heart of Vatra, solve all three Temple offerings, get Berserker's Stone, escape the sealed Temple of Vatra, and unlock Gragu.",
     siteName: "Whisper of the House",
     publishedTime: "2026-08-18",
-    modifiedTime: "2026-08-25",
+    modifiedTime: "2026-08-27",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "Heart of Vatra on the altar inside the Temple of Vatra in Mortal Shell 2",
+        alt: "Heart of Vatra held by the kneeling statue inside the Temple of Vatra in Mortal Shell 2",
       },
     ],
   },
@@ -157,7 +132,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Heart of Vatra location, Temple of Vatra route, three offerings, Berserker's Stone warning, escape route, and the full Gragu unlock.",
+      "Heart of Vatra location, all three Temple offerings, Berserker's Stone, sealed Temple escape route, and Gragu unlock.",
     images: [imageUrls[0]],
   },
 };
@@ -184,7 +159,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Heart of Vatra & Gragu",
+          name: "Heart of Vatra Location & Gragu Unlock",
           item: pageUrl,
         },
       ],
@@ -197,13 +172,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Mortal Shell 2 Heart of Vatra & Gragu Unlock Guide",
+        "Heart of Vatra Location, Temple Offerings & Gragu Unlock",
       description: articleDescription,
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-18",
-      dateModified: "2026-08-25",
+      dateModified: "2026-08-27",
       articleSection: "Mortal Shell 2 Guides",
       about: [
         {
@@ -225,6 +200,18 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Temple of Vatra offerings",
+        },
+        {
+          "@type": "Thing",
+          name: "Berserker's Stone",
+        },
+        {
+          "@type": "Thing",
+          name: "Synaptic Vessel",
+        },
+        {
+          "@type": "Thing",
           name: "Gragu the Insatiable",
         },
         {
@@ -234,18 +221,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "One-Legged Wolf",
-        },
-        {
-          "@type": "Thing",
-          name: "Berserker's Stone",
-        },
-        {
-          "@type": "Thing",
-          name: "Temple of Vatra three offerings",
-        },
-        {
-          "@type": "Thing",
-          name: "Mushroom Village",
         },
       ],
       isPartOf: {
@@ -279,13 +254,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Mortal Shell 2 Heart of Vatra & Gragu Unlock Guide"
-          description="I find Gragu at the One-Legged Wolf, reach the Temple of Vatra, collect Berserker's Stone before taking the Heart, then escape the sealed temple and return the Heart to unlock his Shell."
+          title="Heart of Vatra Location, Temple Offerings & Gragu Unlock"
+          description="Find the Heart of Vatra in the Temple of Vatra, collect the Synaptic Vessel and Berserker's Stone first, escape after the route seals, then return the Heart to Gragu to unlock his Shell."
           gameTitle="Mortal Shell 2"
           gameHref="/mortal-shell-2"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 25, 2026"
+          updatedAt="August 27, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
