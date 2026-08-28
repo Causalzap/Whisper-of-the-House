@@ -131,6 +131,346 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "STAR WARS Zero Company",
+    game: "STAR WARS Zero Company",
+    href: "/star-wars-zero-company",
+    slug: "star-wars-zero-company",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Turn-Based Tactical RPG",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "14 chapters + classes + 53 achievements + Expert/Beskar + Permadeath",
+  
+    description:
+      "Use the STAR WARS Zero Company guide hub to follow the 14-chapter campaign, manage Cycles and Operators, solve the 80,000-Credit debt, recruit Tel-Rea, choose classes and difficulty, handle Permadeath, and plan all 53 achievements.",
+  
+    coverage: [
+      "Complete 14-chapter Critical Mission route from Serelonus and Gorga through Republic Intelligence, Cortilius, Lunata, Order 66, Captain Rex, Umbara, the final pursuit of Fathom, and the epilogue",
+      "First-run campaign planning through Holotable expiry timers, Operations versus Tactical Missions, Intel, Influence, Recruitment, Den conversations, Zone Rewards, Action Points, Call for Backup, Advantage, Overwatch, Bonds, Focus Points, Cross Training, and early upgrades",
+      "All eight starting specializations — Assault, Gunslinger, Heavy, Medic, Soldier, Sharpshooter, Scout, and Scoundrel — with Hawks recommendations, weapon-class fit, locked talents, Focus progression, and permanent Cross Training bonuses",
+      "Gorga's In Debt to the Hutts route through the 80,000-Credit warning, nine-Cycle pressure, Brookner choices, Lothal, Kaller or Dantooine, Republic Intelligence payment, and Payback without grinding the displayed debt",
+      "Dark Waters progression through Takali Canal, the canal drain, underground Fathom route, blocked shot, convert rescue, Shadow Plague reveal, and Hawks' first meeting with Tel-Rea",
+      "Smuggler's Den through Three Tower District, the Vinsar Materials service entrance, warehouse reinforcements, Destroyer Droid, battle-droid shipment, and the exact progression point where Tel-Rea joins Zero Company",
+      "Permadeath and injury management through Downed Operators, Rally, risky Operations, Medical Beds, MedBay timing, Bacta recovery, Trick's special recovery talent, permanent loss, and the Memorial",
+      "Story, Normal, Hard and Expert difficulty decisions, including Expert's tougher combat, reduced effective weapon range, lower starting Bonds, disabled Bacta Tank, Permadeath versus Beskar Mode, and Expert + Beskar planning",
+      "All 53 achievements with an interactive checklist covering Very High Bonds, 50 Optional Missions, 20 Operators, 1,138 Tactical Mission kills, Astromechs, Operator stories, combat cleanup, Captain, Legend, and 100% campaign planning",
+    ],
+  
+    image:
+      "/images/star-wars-zero-company/star-wars-zero-company-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 39,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "STAR WARS Zero Company Guide: Walkthrough, Choices & Tips",
+        href: "/star-wars-zero-company",
+        type: "Guide Hub",
+        description:
+          "Start here for the Critical route, Cycles, difficulty, injuries, the 80,000-Credit debt, Tel-Rea, classes, choices, Order 66, achievements, and the ending.",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-holotable-objectives-expire.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "14 chapters, Critical Missions, Cycles, difficulty, Permadeath, Gorga's debt, Tel-Rea, classes, Order 66, Trick, achievements, and ending",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "STAR WARS Zero Company Walkthrough & Mission Order",
+        href: "/star-wars-zero-company/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow the full 14-chapter Critical route from Serelonus through Gorga, Cortilius, Lunata, Order 66, Captain Rex, Umbara, Fathom, and the epilogue.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-walkthrough-luunata-citadel-briefing.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 254,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "All 14 chapters, Critical Mission order, Serelonus, Gorga, Republic Intelligence, Cortilius, Lunata, Order 66, Captain Rex, Umbara, Fathom, and epilogue",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "STAR WARS Zero Company Beginner Guide & First-Run Tips",
+        href: "/star-wars-zero-company/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Plan Cycles, prioritize expiring work, manage Intel and Operators, claim Influence rewards, use the Den, spend AP and Advantage better, and avoid common first-run mistakes.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-call-for-backup.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 255,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Cycles, Operations vs Tactical Missions, expiry timers, Intel, Influence, Recruitment, Den conversations, AP, Call for Backup, Advantage, Overwatch, Bonds, and upgrades",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "STAR WARS Zero Company Classes & Specializations Guide",
+        href: "/star-wars-zero-company/classes-specializations",
+        type: "Builds",
+        description:
+          "Compare all eight specializations, choose Hawks' starting role and weapon class, use locked talents and Focus Points, and shape Operators through Cross Training.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-eight-starting-specializations.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 256,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Assault, Gunslinger, Heavy, Medic, Soldier, Sharpshooter, Scout, Scoundrel, Hawks builds, weapon classes, locked talents, Focus Points, and Cross Training",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "STAR WARS Zero Company Achievements & Trophies Guide",
+        href: "/star-wars-zero-company/achievements-trophies",
+        type: "Achievements",
+        description:
+          "Track all 53 achievements with Bonds, Optional Missions, roster goals, Astromechs, Operator stories, combat cleanup, Captain, Legend, and 100% planning.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-do-or-do-not-90-percent-miss.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 257,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "All 53 achievements, Very High Bonds, 50 Optional Missions, 20 Operators, 1,138 kills, Astromechs, Operator stories, combat cleanup, Captain, and Legend",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "In Debt to the Hutts Walkthrough: 80,000 Credits Guide",
+        href:
+          "/star-wars-zero-company/in-debt-to-the-hutts-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear Gorga's 80,000-Credit debt without grinding by following Brookner, Lothal, the next Gorga contract, Republic Intelligence, and Payback.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-in-debt-80000-nine-cycles.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 258,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "80,000 Credits, nine Cycles, Brookner choice, 50 Intel, Lothal, Kaller or Dantooine, Republic Intelligence payment, and Payback",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Dark Waters Walkthrough: Takali Canal, Fathom & Tel-Rea",
+        href: "/star-wars-zero-company/dark-waters-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Drain Takali Canal, follow the underground route to Fathom, handle the blocked shot and convert rescue, survive the fight, and meet Tel-Rea.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-dark-waters-tel-rea-first-meeting.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 259,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Takali Canal, drain route, underground tunnels, Fathom initiation, blocked shot, convert rescue, Shadow Plague, and Tel-Rea's first meeting",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Smuggler's Den Walkthrough & Tel-Rea Recruitment Guide",
+        href:
+          "/star-wars-zero-company/smugglers-den-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Find the Vinsar Materials service entrance, survive the warehouse reinforcements, expose the battle-droid shipment, and recruit Tel-Rea after Smuggler's Den.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-smugglers-den-tel-rea-joins.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 260,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Three Tower District, Vinsar Materials, service entrance, warehouse waves, Destroyer Droid, battle-droid shipment, Hadrix, and Tel-Rea recruitment",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "STAR WARS Zero Company Permadeath & Injuries Guide",
+        href: "/star-wars-zero-company/permadeath-injuries",
+        type: "Systems",
+        description:
+          "Manage Downed Operators, Rally, injury risk, MedBay recovery, risky Operations, Bacta treatment, Trick's exception, permanent death, and roster losses.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-medbay-one-cycle-three-injuries.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 261,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Downed Operators, Rally, injuries, Operation risk, MedBay recovery, Bacta Tank, Trick, three-Injury danger, Permadeath, and Memorial",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "STAR WARS Zero Company Difficulty, Expert & Beskar Guide",
+        href: "/star-wars-zero-company/difficulty-settings",
+        type: "Systems",
+        description:
+          "Compare Story, Normal, Hard and Expert, understand Expert's major changes, separate Permadeath from Beskar Mode, and plan an Expert + Beskar run.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-difficulty-settings-story-normal-hard-expert.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 262,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Story, Normal, Hard, Expert, tougher enemies, reduced weapon range, lower Bonds, disabled Bacta Tank, Permadeath vs Beskar, Captain, and Legend",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+    ],
+  },
+  {
     title: "Aliens: Fireteam Elite 2",
     game: "Aliens: Fireteam Elite 2",
     href: "/aliens-fireteam-elite-2",

@@ -805,6 +805,18 @@ const paths = [
   '/aliens-fireteam-elite-2/final-endeavor-walkthrough',
   '/aliens-fireteam-elite-2/achievements',
 
+  '/star-wars-zero-company',
+  '/star-wars-zero-company/walkthrough',
+  '/star-wars-zero-company/beginner-guide',
+  '/star-wars-zero-company/classes-specializations',
+  '/star-wars-zero-company/achievements-trophies',
+  '/star-wars-zero-company/in-debt-to-the-hutts-walkthrough',
+  '/star-wars-zero-company/dark-waters-walkthrough',
+  '/star-wars-zero-company/smugglers-den-walkthrough',
+  '/star-wars-zero-company/permadeath-injuries',
+  '/star-wars-zero-company/difficulty-settings',
+
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -812,6 +824,17 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/star-wars-zero-company': '2026-08-28',
+  '/star-wars-zero-company/walkthrough': '2026-08-28',
+  '/star-wars-zero-company/beginner-guide': '2026-08-28',
+  '/star-wars-zero-company/classes-specializations': '2026-08-28',
+  '/star-wars-zero-company/achievements-trophies': '2026-08-28',
+  '/star-wars-zero-company/in-debt-to-the-hutts-walkthrough': '2026-08-28',
+  '/star-wars-zero-company/dark-waters-walkthrough': '2026-08-28',
+  '/star-wars-zero-company/smugglers-den-walkthrough': '2026-08-28',
+  '/star-wars-zero-company/permadeath-injuries': '2026-08-28',
+  '/star-wars-zero-company/difficulty-settings': '2026-08-28',
+  
   '/aliens-fireteam-elite-2': '2026-08-26',
   '/aliens-fireteam-elite-2/walkthrough': '2026-08-26',
   '/aliens-fireteam-elite-2/beginner-guide': '2026-08-26',
