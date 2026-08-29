@@ -10,10 +10,10 @@ const hubUrl = `${siteUrl}/star-wars-zero-company`;
 const pageUrl = `${hubUrl}/achievements-trophies`;
 
 const metadataTitle =
-  "STAR WARS Zero Company Achievements & Trophies Guide";
+  "STAR WARS Zero Company Trophy Guide & 53 Achievements";
 
 const metadataDescription =
-  "Plan all 53 Zero Company achievements, including Bonds, 50 Optional Missions, 20 Operators, Astromechs, combat cleanup, Expert, and Beskar Mode.";
+  "Track all 53 Zero Company achievements with a 100% roadmap for Bonds, 50 Optional Missions, Astromechs, combat cleanup, Expert and Beskar.";
 
 const imageUrls = [
   `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-do-or-do-not-90-percent-miss.webp`,
@@ -21,51 +21,35 @@ const imageUrls = [
 ];
 
 const toc = [
-    {
-      id: "all-achievements",
-      label: "All 53 achievements",
-    },
-    {
-      id: "achievement-roadmap",
-      label: "Achievement roadmap",
-    },
-    {
-      id: "natural-achievements",
-      label: "Natural achievements",
-    },
-    {
-      id: "long-term-achievements",
-      label: "Long-term requirements",
-    },
-    {
-      id: "bond-achievements",
-      label: "Very High Bonds",
-    },
-    {
-      id: "character-stories",
-      label: "Character stories",
-    },
-    {
-      id: "astromechs",
-      label: "Astromechs",
-    },
-    {
-      id: "combat-cleanup",
-      label: "Combat cleanup",
-    },
-    {
-      id: "permadeath-achievement",
-      label: "Operator loss",
-    },
-    {
-      id: "weapon-mods",
-      label: "Weapon Mods",
-    },
-    {
-      id: "difficulty-achievements",
-      label: "Difficulty achievements",
-    },
-  ];
+  {
+    id: "achievement-roadmap",
+    label: "53-achievement roadmap",
+  },
+  {
+    id: "start-early",
+    label: "What to start early",
+  },
+  {
+    id: "natural-achievements",
+    label: "What unlocks naturally",
+  },
+  {
+    id: "combat-cleanup",
+    label: "Combat cleanup",
+  },
+  {
+    id: "roster-cleanup",
+    label: "Roster & cleanup risks",
+  },
+  {
+    id: "difficulty-achievements",
+    label: "Expert & Beskar",
+  },
+  {
+    id: "before-finishing-campaign",
+    label: "Before finishing the campaign",
+  },
+];
 
 const relatedLinks = [
   {
@@ -77,24 +61,16 @@ const relatedLinks = [
     label: "Complete Walkthrough & Mission Order",
   },
   {
-    href: "/star-wars-zero-company/beginner-guide",
-    label: "Beginner Guide",
-  },
-  {
-    href: "/star-wars-zero-company/classes-specializations",
-    label: "Classes & Specializations Guide",
-  },
-  {
-    href: "/star-wars-zero-company/smugglers-den-walkthrough",
-    label: "Smuggler's Den & Tel-Rea Guide",
-  },
-  {
     href: "/star-wars-zero-company/permadeath-injuries",
-    label: "Permadeath & Injuries Guide",
+    label: "Injuries, Permadeath & Aurelio",
   },
   {
     href: "/star-wars-zero-company/difficulty-settings",
-    label: "Difficulty Settings Guide",
+    label: "Best Difficulty & Beskar Mode",
+  },
+  {
+    href: "/star-wars-zero-company/classes-specializations",
+    label: "Best Classes & Specializations",
   },
 ];
 
@@ -107,24 +83,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "STAR WARS Zero Company Achievements & Trophies",
+    title: metadataTitle,
     description:
-      "Use a 53-achievement checklist with timing advice for Bonds, character stories, Optional Missions, Astromechs, combat cleanup, and Expert + Beskar.",
+      "Use a 53-achievement roadmap that starts long counters and Bonds early, lets story unlocks happen naturally, and saves awkward cleanup and Expert + Beskar for the right time.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "A 90 percent shot for the Do or Do Not achievement in STAR WARS Zero Company",
+        alt: "A 90 percent or higher shot missing for the Do or Do Not achievement in STAR WARS Zero Company",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "STAR WARS Zero Company Achievements & Trophies",
+    title: metadataTitle,
     description:
-      "Plan all 53 achievements without leaving Bonds, roster goals, Optional Missions, Astromechs, and Beskar cleanup until the end.",
+      "Plan all 53 Zero Company achievements without leaving Bonds, Optional Missions, Astromechs, roster goals and Expert + Beskar until the end.",
     images: [imageUrls[0]],
   },
 };
@@ -164,14 +140,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "STAR WARS Zero Company Achievements & Trophies Guide: All 53 Achievements",
+        "STAR WARS Zero Company Trophy Guide and All 53 Achievements",
       description:
-        "A player-focused STAR WARS Zero Company achievement guide covering all 53 launch achievements and when I handle them during a campaign. It separates natural story unlocks from long-term requirements such as 50 Optional Missions, 20 Operators in one campaign, 1,138 Tactical Mission kills, all Zone Rewards, Very High Bond pairings, character stories, four-Astromech squad requirements, Hutt Roulette prizes, four Weapon Mods on one weapon, specific combat challenges, and the dedicated Expert plus Beskar Mode run.",
+        "A player-focused STAR WARS Zero Company achievement and trophy roadmap for all 53 launch achievements. It covers which requirements to start early, including 50 Optional Missions, 1,138 Tactical Mission kills, 20 Operators, all Zone Rewards, Hutt Roulette, Very High Bond pairings, six Operator stories and Astromech recruitment; which story achievements unlock naturally; when to handle combat cleanup, four Weapon Mods and Operator loss; and how to prepare for the Expert plus Beskar Legend run.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-28",
-      dateModified: "2026-08-28",
+      dateModified: "2026-08-29",
       articleSection: "STAR WARS Zero Company Guides",
       about: [
         {
@@ -185,15 +161,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company trophies",
+          name: "STAR WARS Zero Company trophy guide",
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company all 53 achievements",
+          name: "STAR WARS Zero Company 53 achievements",
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company achievement guide",
+          name: "STAR WARS Zero Company 100 percent",
         },
         {
           "@type": "Thing",
@@ -201,7 +177,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company 50 Optional Missions",
+          name: "STAR WARS Zero Company Active Duty",
         },
         {
           "@type": "Thing",
@@ -213,7 +189,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Weapon Mods",
+          name: "STAR WARS Zero Company A Natural Part of Life",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Fully Geared",
         },
         {
           "@type": "Thing",
@@ -259,13 +239,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Plan All 53 Achievements Without Creating a Late-Game Grind"
-          description="I let the easy and story achievements happen naturally, start Bonds and long campaign counters early, then save awkward combat goals and Expert + Beskar for deliberate cleanup."
+          title="All 53 Achievements and the 100% Route I Would Use"
+          description="I start the long counters, required Bonds and roster goals while the campaign still gives me useful work, let story unlocks come naturally, and leave awkward combat conditions and Expert + Beskar until the squad is ready."
           gameTitle="STAR WARS Zero Company"
           gameHref="/star-wars-zero-company"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 28, 2026"
+          updatedAt="August 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

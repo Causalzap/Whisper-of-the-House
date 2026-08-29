@@ -3,49 +3,50 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
-import InDebtToTheHuttsContent from "@/data/star-wars-zero-company/in-debt-to-the-hutts-walkthrough.mdx";
+import ChoicesConsequencesContent from "@/data/star-wars-zero-company/choices-consequences.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const hubUrl = `${siteUrl}/star-wars-zero-company`;
-const pageUrl = `${hubUrl}/in-debt-to-the-hutts-walkthrough`;
+const pageUrl = `${hubUrl}/choices-consequences`;
 
 const metadataTitle =
-  "Zero Company In Debt to the Hutts: 80,000 Credits Guide";
+  "STAR WARS Zero Company Choices & Consequences Guide";
 
 const metadataDescription =
-  "Do not grind Zero Company's 80,000-Credit debt. Follow Bruckner, Lothal, Pick Your Poison and Republic Intelligence, then clear it with Payback.";
+  "Best Zero Company choices for Kaller or Dantooine, Gorga's Revenge, Bruckner, Dilemmas and Crisis decisions, with rewards and consequences.";
 
 const imageUrls = [
-  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-in-debt-80000-nine-cycles.webp`,
-  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-lothal-pirates-mission.webp`,
-  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-republic-intelligence-debt-payment.webp`,
-  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-payback-operation.webp`,
+  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-pick-your-poison-kaller-dantooine.webp`,
+  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-gorgas-revenge-bruckner-choice.webp`,
+  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-trade-federation-defector-dilemma.webp`,
+  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-relief-ship-choice.webp`,
+  `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-crisis-choice-enemy-upgrade.webp`,
 ];
 
 const toc = [
   {
-    id: "how-to-pay-80000-credit-debt",
-    label: "How to clear the 80,000 debt",
+    id: "kaller-or-dantooine",
+    label: "Kaller or Dantooine",
   },
   {
-    id: "gorga-critical-chain",
-    label: "Protect Intel for Gorga",
+    id: "gorgas-revenge-bruckner",
+    label: "Gorga's Revenge",
   },
   {
-    id: "lothal-next-step",
-    label: "Complete Lothal",
+    id: "dilemmas-and-bonds",
+    label: "Dilemmas & Bonds",
   },
   {
-    id: "pick-your-poison-debt",
-    label: "Pick Your Poison",
+    id: "credit-choices",
+    label: "Choices that cost Credits",
   },
   {
-    id: "republic-intelligence-contract",
-    label: "Republic Intelligence payment",
+    id: "crisis-decisions",
+    label: "Crisis decisions",
   },
   {
-    id: "payback",
-    label: "Finish with Payback",
+    id: "before-confirming-a-choice",
+    label: "Before confirming a choice",
   },
 ];
 
@@ -55,20 +56,20 @@ const relatedLinks = [
     label: "STAR WARS Zero Company Guide Hub",
   },
   {
-    href: "/star-wars-zero-company/choices-consequences",
-    label: "Choices & Consequences Guide",
+    href: "/star-wars-zero-company/in-debt-to-the-hutts-walkthrough",
+    label: "In Debt to the Hutts Walkthrough",
+  },
+  {
+    href: "/star-wars-zero-company/difficulty-settings",
+    label: "Difficulty & Beskar Mode",
   },
   {
     href: "/star-wars-zero-company/walkthrough",
     label: "Complete Walkthrough & Mission Order",
   },
   {
-    href: "/star-wars-zero-company/beginner-guide",
-    label: "Beginner Guide",
-  },
-  {
-    href: "/star-wars-zero-company/difficulty-settings",
-    label: "Best Difficulty & Beskar Mode",
+    href: "/star-wars-zero-company/classes-specializations",
+    label: "Best Classes & Specializations",
   },
 ];
 
@@ -83,14 +84,14 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: metadataTitle,
     description:
-      "Clear Gorga's 80,000-Credit debt by advancing Bruckner, Lothal and Pick Your Poison until the Republic Intelligence contract provides the money for Payback.",
+      "Choose between Kaller and Dantooine, decide what to do with Bruckner, and handle Dilemmas and Crisis choices around the resources and consequences that matter.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "STAR WARS Zero Company In Debt to the Hutts showing an 80,000-Credit debt with nine Cycles remaining",
+        alt: "Pick Your Poison choice between Kaller and Dantooine in STAR WARS Zero Company",
       },
     ],
   },
@@ -98,7 +99,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: metadataTitle,
     description:
-      "Do not farm 80,000 Credits. Advance Gorga's Critical chain until Republic Intelligence provides the money, then resolve Payback.",
+      "Kaller or Dantooine, Gorga's Revenge, Bruckner, Bond reactions, Credit choices and Crisis decisions in STAR WARS Zero Company.",
     images: [imageUrls[0]],
   },
 };
@@ -125,7 +126,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "In Debt to the Hutts",
+          name: "Choices & Consequences",
           item: pageUrl,
         },
       ],
@@ -138,13 +139,13 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "STAR WARS Zero Company In Debt to the Hutts: How to Clear the 80,000-Credit Debt",
+        "STAR WARS Zero Company Choices and Consequences Guide",
       description:
-        "A player-focused STAR WARS Zero Company walkthrough for In Debt to the Hutts explaining why the displayed 80,000-Credit debt should not be farmed directly, how to use the nine-Cycle window, why Gorga's Critical Operations take priority over optional Intel spending, how Bruckner leads into Lothal, why either Pick Your Poison route continues the debt chain, when Republic Intelligence provides enough money to repay Gorga, and why Payback should be resolved before another Tactical Mission.",
+        "A player-focused STAR WARS Zero Company choices guide covering Pick Your Poison and the Kaller or Dantooine decision, Gorga's Revenge and Bruckner, Dilemmas that affect Bonds and resources, Credit-dependent choices such as Relief Ship, and Crisis decisions where ignoring one threat can allow an enemy upgrade to take effect.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
-      datePublished: "2026-08-28",
+      datePublished: "2026-08-29",
       dateModified: "2026-08-29",
       articleSection: "STAR WARS Zero Company Guides",
       about: [
@@ -155,23 +156,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company In Debt to the Hutts",
+          name: "STAR WARS Zero Company choices",
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company 80,000 Credits",
+          name: "STAR WARS Zero Company consequences",
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Gorga debt",
-        },
-        {
-          "@type": "Thing",
-          name: "STAR WARS Zero Company Bruckner",
-        },
-        {
-          "@type": "Thing",
-          name: "STAR WARS Zero Company Lothal",
+          name: "STAR WARS Zero Company Kaller or Dantooine",
         },
         {
           "@type": "Thing",
@@ -179,11 +172,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Republic Intelligence",
+          name: "STAR WARS Zero Company Gorga's Revenge",
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Payback",
+          name: "STAR WARS Zero Company Bruckner",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Dilemmas",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Bond choices",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Crisis decisions",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Relief Ship",
         },
       ],
       isPartOf: {
@@ -217,8 +226,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="How I Clear the 80,000-Credit Debt Without Grinding"
-          description="I stop treating Gorga's 80,000 Credits as a farming target, protect Intel for the Critical chain, move through Lothal and Pick Your Poison, then use the Republic Intelligence contract to clear the debt through Payback."
+          title="Best Choices and What They Actually Change"
+          description="I choose Kaller when I want the stronger early weapon-and-Credits package, judge Gorga and Bruckner around the resources I need now, and treat later Dilemmas and Crisis decisions as tradeoffs between Credits, Bonds, time, and future enemy pressure."
           gameTitle="STAR WARS Zero Company"
           gameHref="/star-wars-zero-company"
           breadcrumbBaseHref="/"
@@ -227,7 +236,7 @@ export default function Page() {
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <InDebtToTheHuttsContent />
+          <ChoicesConsequencesContent />
         </GuideArticlePage>
       </main>
 

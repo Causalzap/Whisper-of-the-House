@@ -10,10 +10,10 @@ const hubUrl = `${siteUrl}/star-wars-zero-company`;
 const pageUrl = `${hubUrl}/permadeath-injuries`;
 
 const metadataTitle =
-  "STAR WARS Zero Company Permadeath & Injuries Guide";
+  "STAR WARS Zero Company Injuries, Permadeath & Aurelio";
 
 const metadataDescription =
-  "Learn how Downed Operators, Rally, injuries, MedBay treatment, the third-injury death rule, Bacta recovery, Trick, and Permadeath work.";
+  "Learn how Zero Company injuries and Permadeath work, when to use the MedBay, what happens at 3 injuries, and whether Aurelio can be saved.";
 
 const imageUrls = [
   `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-permadeath-third-injury-kia.webp`,
@@ -25,40 +25,36 @@ const imageUrls = [
 
 const toc = [
   {
-    id: "how-injuries-work",
-    label: "How injuries work",
+    id: "can-operators-die",
+    label: "Can Operators die?",
   },
   {
-    id: "rally-vs-healing",
-    label: "Rally vs healing",
+    id: "can-you-save-aurelio",
+    label: "Can you save Aurelio?",
   },
   {
-    id: "operation-injuries",
-    label: "Operation injury risk",
+    id: "when-to-heal-injuries",
+    label: "When to heal injuries",
   },
   {
     id: "heal-injuries-medbay",
-    label: "Heal injuries at the MedBay",
-  },
-  {
-    id: "medbay-one-cycle",
-    label: "Why treatment takes a Cycle",
+    label: "Using the MedBay",
   },
   {
     id: "bacta-tank",
-    label: "When to use the Bacta Tank",
+    label: "When to use Bacta",
   },
   {
-    id: "trick-injury-exception",
-    label: "Trick's injury exception",
+    id: "trick-first-down",
+    label: "Trick's first Down",
   },
   {
-    id: "permadeath",
-    label: "Permanent death",
+    id: "permadeath-vs-beskar",
+    label: "Permadeath vs Beskar",
   },
   {
-    id: "a-natural-part-of-life",
-    label: "A Natural Part of Life",
+    id: "permanent-operator-loss",
+    label: "Permanent Operator loss",
   },
 ];
 
@@ -68,20 +64,20 @@ const relatedLinks = [
     label: "STAR WARS Zero Company Guide Hub",
   },
   {
-    href: "/star-wars-zero-company/beginner-guide",
-    label: "Beginner Guide",
+    href: "/star-wars-zero-company/difficulty-settings",
+    label: "Best Difficulty & Beskar Mode",
   },
   {
-    href: "/star-wars-zero-company/difficulty-settings",
-    label: "Difficulty Settings, Expert & Beskar",
+    href: "/star-wars-zero-company/classes-specializations",
+    label: "Best Classes & Specializations",
   },
   {
     href: "/star-wars-zero-company/achievements-trophies",
     label: "Achievements & Trophies Guide",
   },
   {
-    href: "/star-wars-zero-company/classes-specializations",
-    label: "Classes & Specializations Guide",
+    href: "/star-wars-zero-company/walkthrough",
+    label: "Complete Walkthrough & Mission Order",
   },
 ];
 
@@ -94,24 +90,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "STAR WARS Zero Company Permadeath & Injuries Guide",
+    title: metadataTitle,
     description:
-      "Manage Downed Operators, Rally, MedBay treatment and permanent loss without letting stacked injuries destroy your roster.",
+      "See how Downed Operators become injured, when two injuries should send someone to the MedBay, why the third can kill them, and why Aurelio cannot be saved.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "STAR WARS Zero Company showing that a third injury can kill an Operator with Permadeath enabled",
+        alt: "STAR WARS Zero Company warning that a third injury kills an Operator when Permadeath is enabled",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "STAR WARS Zero Company Permadeath & Injuries Guide",
+    title: metadataTitle,
     description:
-      "Learn when to Rally, when to use the MedBay, how the third injury becomes lethal, and when an Operator should stay out of the next Mission.",
+      "How injuries, Rally, MedBay treatment, Permadeath, Trick's first Down and Aurelio's tutorial death work in STAR WARS Zero Company.",
     images: [imageUrls[0]],
   },
 };
@@ -138,7 +134,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Permadeath & Injuries",
+          name: "Injuries & Permadeath",
           item: pageUrl,
         },
       ],
@@ -151,14 +147,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "STAR WARS Zero Company Permadeath and Injuries Guide",
+        "STAR WARS Zero Company Injuries, Permadeath and Aurelio Guide",
       description:
-        "A player-focused guide to STAR WARS Zero Company's injury and permanent-death systems, including what happens when an Operator becomes Downed, how Rally works, how injuries stack, the third-injury death limit, Medical Bed treatment, one-Cycle recovery, Bacta Tank use, Trick's For My Brothers talent, the Memorial, and the A Natural Part of Life achievement.",
+        "A player-focused STAR WARS Zero Company guide to Downed Operators, Rally, injuries, the three-injury permanent-death rule, Aurelio's unavoidable tutorial death, MedBay treatment, one-Cycle recovery, Bacta Tank use, Dangerous Operation injury risk, Trick's first-down protection, Permadeath, Beskar Mode, and permanent Operator loss.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-28",
-      dateModified: "2026-08-28",
+      dateModified: "2026-08-29",
       articleSection: "STAR WARS Zero Company Guides",
       about: [
         {
@@ -168,11 +164,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "STAR WARS Zero Company injuries",
+        },
+        {
+          "@type": "Thing",
           name: "STAR WARS Zero Company Permadeath",
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company injuries",
+          name: "STAR WARS Zero Company Operator death",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Aurelio",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company save Aurelio",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company tutorial death",
         },
         {
           "@type": "Thing",
@@ -188,15 +200,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Medical Bed",
-        },
-        {
-          "@type": "Thing",
           name: "STAR WARS Zero Company Bacta Tank",
         },
         {
           "@type": "Thing",
           name: "STAR WARS Zero Company Trick",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company For My Brothers",
         },
         {
           "@type": "Thing",
@@ -234,13 +246,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Keep Injuries From Becoming Permanent Losses"
-          description="I use Rally to finish the current fight, check injury count afterward, and send high-risk Operators to the MedBay before one more knockdown turns into a permanent roster loss."
+          title="How Injuries, Permadeath and Aurelio's Death Work"
+          description="I treat one Injury as a scheduling problem, two as a reason to pull an Operator from danger, and the third as a permanent-loss risk. Aurelio is different: his tutorial death cannot be prevented."
           gameTitle="STAR WARS Zero Company"
           gameHref="/star-wars-zero-company"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 28, 2026"
+          updatedAt="August 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

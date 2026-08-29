@@ -10,10 +10,10 @@ const hubUrl = `${siteUrl}/star-wars-zero-company`;
 const pageUrl = `${hubUrl}/walkthrough`;
 
 const metadataTitle =
-  "STAR WARS Zero Company Walkthrough & Mission Order";
+  "STAR WARS Zero Company Walkthrough & 14-Chapter Order";
 
 const metadataDescription =
-  "Follow all 14 chapters from Serelonus to Fathom, with Critical Mission order, Luunata, Order 66, Trick, Rex, Umbara, and the ending.";
+  "Follow the full Zero Company walkthrough and Critical Mission order across all 14 chapters, from Serelonus through Order 66, Umbara and Fathom.";
 
 const imageUrls = [
   `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-walkthrough-luunata-citadel-briefing.webp`,
@@ -28,39 +28,35 @@ const imageUrls = [
 const toc = [
   {
     id: "campaign-order",
-    label: "14-chapter order",
+    label: "14-chapter campaign order",
   },
   {
-    id: "prologue",
-    label: "Prologue",
+    id: "serelonus-and-the-den",
+    label: "Serelonus & the Den",
   },
   {
-    id: "business-as-usual",
-    label: "Business As Usual",
+    id: "gorga-and-the-debt",
+    label: "Gorga & the 80,000 debt",
   },
   {
     id: "republic-intelligence",
     label: "Republic Intelligence",
   },
   {
-    id: "cortilius",
-    label: "Cortilius",
+    id: "cortilius-investigation",
+    label: "Cortilius investigation",
   },
   {
-    id: "dark-waters",
-    label: "Dark Waters",
+    id: "dark-waters-and-tel-rea",
+    label: "Dark Waters & Tel-Rea",
   },
   {
-    id: "smugglers-den",
+    id: "smugglers-den-and-recruitment",
     label: "Smuggler's Den",
   },
   {
-    id: "jedi-undercover",
-    label: "Jedi Undercover",
-  },
-  {
-    id: "casualties-of-war",
-    label: "Casualties of War",
+    id: "midgame-operator-stories",
+    label: "Midgame Operator stories",
   },
   {
     id: "luunata",
@@ -71,20 +67,12 @@ const toc = [
     label: "Tighten the Noose",
   },
   {
-    id: "viquist",
-    label: "Viquist",
+    id: "viquist-and-order-66",
+    label: "Viquist & Order 66",
   },
   {
-    id: "order-66",
-    label: "Order 66",
-  },
-  {
-    id: "captain-rex",
-    label: "Captain Rex & Trick",
-  },
-  {
-    id: "umbara",
-    label: "Umbara",
+    id: "rex-and-umbara",
+    label: "Captain Rex & Umbara",
   },
   {
     id: "back-to-business",
@@ -110,10 +98,6 @@ const relatedLinks = [
     label: "STAR WARS Zero Company Guide Hub",
   },
   {
-    href: "/star-wars-zero-company/beginner-guide",
-    label: "Beginner Guide",
-  },
-  {
     href: "/star-wars-zero-company/in-debt-to-the-hutts-walkthrough",
     label: "In Debt to the Hutts Walkthrough",
   },
@@ -127,7 +111,7 @@ const relatedLinks = [
   },
   {
     href: "/star-wars-zero-company/achievements-trophies",
-    label: "Achievements & Trophies Guide",
+    label: "53 Achievements & Trophy Roadmap",
   },
 ];
 
@@ -140,9 +124,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "STAR WARS Zero Company Walkthrough & Mission Order",
+    title: metadataTitle,
     description:
-      "Follow the full 14-chapter campaign through Gorga, Cortilius, Luunata, Order 66, Captain Rex, Umbara, Cineurore, and the final fight with Fathom.",
+      "Follow Zero Company's Critical story route through all 14 chapters, including Gorga, Cortilius, Luunata, Order 66, Captain Rex, Umbara, Cineurore and Fathom.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -155,9 +139,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "STAR WARS Zero Company Walkthrough & Mission Order",
+    title: metadataTitle,
     description:
-      "Follow the Critical story route across all 14 chapters, including Luunata, Order 66, Trick, Captain Rex, Umbara, and the final Fathom fight.",
+      "The full 14-chapter Zero Company Critical Mission route from Serelonus through Order 66, Umbara, Cineurore and the final Fathom fight.",
     images: [imageUrls[0]],
   },
 };
@@ -197,14 +181,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "STAR WARS Zero Company Walkthrough & Mission Order: All 14 Chapters",
+        "STAR WARS Zero Company Walkthrough and 14-Chapter Mission Order",
       description:
-        "A player-focused STAR WARS Zero Company walkthrough covering the complete 14-chapter campaign and Critical Mission progression from Serelonus and the Den through Gorga, Republic Intelligence, Cortilius, Dark Waters, Smuggler's Den, Jedi Undercover, Casualties of War, Luunata, Tighten the Noose, the interrupted Viquist assault, Order 66, Trick's inhibitor chip, Captain Rex, Umbara, Back to Business, Cineurore, the multi-stage final Fathom battle, and the epilogue. It focuses on which story milestone comes next while leaving detailed mission routes to their dedicated guides.",
+        "A player-focused STAR WARS Zero Company walkthrough following the full 14-chapter Critical Mission route from Serelonus and the Den through Gorga's debt, Republic Intelligence, Cortilius, Dark Waters, Tel-Rea, Smuggler's Den, Luunata, Viquist, Order 66, Captain Rex, Umbara, Back to Business, Cineurore, the multi-stage Fathom fight and the epilogue. The route focuses on what advances the story next, when to return to the Den, when optional work is worth a Cycle, when extraction matters more than clearing enemies, and how to prepare for the final pursuit.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-28",
-      dateModified: "2026-08-28",
+      dateModified: "2026-08-29",
       articleSection: "STAR WARS Zero Company Guides",
       about: [
         {
@@ -226,11 +210,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company 14 chapters",
+          name: "STAR WARS Zero Company Critical Missions",
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Critical Missions",
+          name: "STAR WARS Zero Company 14 chapters",
         },
         {
           "@type": "Thing",
@@ -239,10 +223,6 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "STAR WARS Zero Company Order 66",
-        },
-        {
-          "@type": "Thing",
-          name: "STAR WARS Zero Company Trick",
         },
         {
           "@type": "Thing",
@@ -296,13 +276,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Follow the Critical Route Through All 14 Chapters"
-          description="I use the Critical Mission chain as the campaign spine, take optional work only when the timers allow it, and follow the story from Serelonus through Luunata, Order 66, Umbara, Cineurore, and Fathom."
+          title="Complete Walkthrough and Critical Mission Route"
+          description="I follow the Critical chain through all 14 chapters, return to the Den when major Missions change the roster or open new work, and only spend extra Cycles when the current story deadline leaves room."
           gameTitle="STAR WARS Zero Company"
           gameHref="/star-wars-zero-company"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 28, 2026"
+          updatedAt="August 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

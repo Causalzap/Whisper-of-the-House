@@ -10,10 +10,10 @@ const hubUrl = `${siteUrl}/star-wars-zero-company`;
 const pageUrl = `${hubUrl}/difficulty-settings`;
 
 const metadataTitle =
-  "STAR WARS Zero Company Difficulty, Expert & Beskar Guide";
+  "STAR WARS Zero Company Best Difficulty & Beskar Mode";
 
 const metadataDescription =
-  "Compare Story, Normal, Hard and Expert, learn what Expert changes, how Beskar Mode works, and whether Expert + Beskar is right for your run.";
+  "Choose the best Zero Company difficulty, see what Expert changes, understand Beskar Mode, and compare Cautious, Risky, Dangerous and Extreme missions.";
 
 const imageUrls = [
   `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-difficulty-settings-story-normal-hard-expert.webp`,
@@ -25,19 +25,27 @@ const imageUrls = [
 const toc = [
   {
     id: "which-difficulty",
-    label: "Which difficulty to choose",
+    label: "Best difficulty to choose",
+  },
+  {
+    id: "campaign-vs-mission-difficulty",
+    label: "Mission difficulty",
   },
   {
     id: "expert-difficulty",
     label: "What Expert changes",
   },
   {
-    id: "expert-weapon-range",
-    label: "Expert weapon range",
+    id: "expert-combat",
+    label: "Playing on Expert",
   },
   {
-    id: "expert-bacta-bonds",
-    label: "Bacta Tank & Bonds",
+    id: "expert-recovery",
+    label: "Expert recovery",
+  },
+  {
+    id: "expert-bonds",
+    label: "Bonds on Expert",
   },
   {
     id: "beskar-mode",
@@ -55,6 +63,10 @@ const toc = [
     id: "difficulty-achievements",
     label: "Captain & Legend",
   },
+  {
+    id: "my-difficulty-pick",
+    label: "My first-run settings",
+  },
 ];
 
 const relatedLinks = [
@@ -67,12 +79,12 @@ const relatedLinks = [
     label: "Permadeath & Injuries Guide",
   },
   {
-    href: "/star-wars-zero-company/beginner-guide",
-    label: "Beginner Guide",
+    href: "/star-wars-zero-company/classes-specializations",
+    label: "Best Classes & Specializations",
   },
   {
-    href: "/star-wars-zero-company/classes-specializations",
-    label: "Classes & Specializations Guide",
+    href: "/star-wars-zero-company/walkthrough",
+    label: "Complete Walkthrough & Mission Order",
   },
   {
     href: "/star-wars-zero-company/achievements-trophies",
@@ -89,24 +101,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "STAR WARS Zero Company Difficulty, Expert & Beskar Guide",
+    title: metadataTitle,
     description:
-      "Choose between Story, Normal, Hard and Expert, then decide whether Beskar's persistent-save rules belong in the same campaign.",
+      "Choose between Story, Normal, Hard and Expert, understand mission difficulty, and decide whether Beskar's persistent save belongs in your campaign.",
     siteName: "Whisper of the House",
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "STAR WARS Zero Company difficulty settings showing Normal difficulty, Beskar Mode and Permadeath",
+        alt: "STAR WARS Zero Company Story, Normal, Hard and Expert difficulty settings",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "STAR WARS Zero Company Difficulty, Expert & Beskar Guide",
+    title: metadataTitle,
     description:
-      "See what Expert actually changes, how Beskar differs from Permadeath, and when I would combine Expert and Beskar.",
+      "Best first-run difficulty, Expert changes, mission danger levels, Beskar Mode, Permadeath and the Expert + Beskar Legend run.",
     images: [imageUrls[0]],
   },
 };
@@ -133,7 +145,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Difficulty Settings",
+          name: "Difficulty & Beskar Mode",
           item: pageUrl,
         },
       ],
@@ -146,14 +158,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "STAR WARS Zero Company Difficulty Settings, Expert and Beskar Mode Guide",
+        "STAR WARS Zero Company Best Difficulty, Expert and Beskar Mode Guide",
       description:
-        "A player-focused guide to choosing difficulty in STAR WARS Zero Company, covering Story, Normal, Hard and Expert, Expert's tougher enemies and enhanced damage, reduced effective weapon range, lower initial Bonds and disabled Bacta Tank, how Beskar Mode uses one persistent save, how Beskar differs from Permadeath, and what is required for the Captain and Legend achievements.",
+        "A player-focused STAR WARS Zero Company difficulty guide covering Story, Normal, Hard and Expert, which setting works best for a first campaign, the reduced weapon range, tougher enemies, lower starting Bonds and disabled Bacta Tank on Expert, Cautious, Risky, Dangerous and Extreme mission difficulty, Beskar Mode's persistent save, the difference between Beskar and Permadeath, and the Expert + Beskar requirement for Legend.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-28",
-      dateModified: "2026-08-28",
+      dateModified: "2026-08-29",
       articleSection: "STAR WARS Zero Company Guides",
       about: [
         {
@@ -163,19 +175,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "STAR WARS Zero Company best difficulty",
+        },
+        {
+          "@type": "Thing",
           name: "STAR WARS Zero Company difficulty settings",
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Story difficulty",
-        },
-        {
-          "@type": "Thing",
-          name: "STAR WARS Zero Company Normal difficulty",
-        },
-        {
-          "@type": "Thing",
-          name: "STAR WARS Zero Company Hard difficulty",
+          name: "STAR WARS Zero Company difficulty levels",
         },
         {
           "@type": "Thing",
@@ -184,6 +192,22 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "STAR WARS Zero Company Beskar Mode",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company mission difficulty",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Risky missions",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Dangerous missions",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Extreme missions",
         },
         {
           "@type": "Thing",
@@ -233,13 +257,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Choose the Difficulty Before You Commit the Run"
-          description="I use Normal to learn the systems, Hard when I already understand tactical positioning, and save Expert or Expert + Beskar for campaigns where I am ready for shorter effective range, harsher recovery, and permanent consequences."
+          title="Best Difficulty for Your First Run and Beskar Mode"
+          description="I use Normal while learning Zero Company's systems, prefer Hard for an experienced first run, and save Expert + Beskar for a campaign where I already understand mission pressure, injuries, reinforcements, and when getting out matters more than clearing the map."
           gameTitle="STAR WARS Zero Company"
           gameHref="/star-wars-zero-company"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 28, 2026"
+          updatedAt="August 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

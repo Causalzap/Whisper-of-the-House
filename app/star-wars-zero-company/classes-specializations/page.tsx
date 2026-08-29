@@ -10,10 +10,10 @@ const hubUrl = `${siteUrl}/star-wars-zero-company`;
 const pageUrl = `${hubUrl}/classes-specializations`;
 
 const metadataTitle =
-  "STAR WARS Zero Company Classes & Specializations Guide";
+  "STAR WARS Zero Company Best Classes & Specializations";
 
 const metadataDescription =
-  "Compare all 8 specializations, choose the best starting class for Hawks, pair weapons by range and AP, and build with talents and Cross Training.";
+  "Best Zero Company classes and specializations for Hawks, Kabb, Trick and Jay, plus respecs, weapons, Scout, Medic, Heavy and Cross Training.";
 
 const imageUrls = [
   `${siteUrl}/images/star-wars-zero-company/star-wars-zero-company-eight-starting-specializations.webp`,
@@ -26,59 +26,43 @@ const imageUrls = [
 const toc = [
   {
     id: "best-starting-specialization",
-    label: "Best starting class",
+    label: "Best class for Hawks",
   },
   {
-    id: "specialization-not-permanent",
+    id: "can-you-change-specialization",
     label: "Changing specialization",
   },
   {
+    id: "best-operator-specializations",
+    label: "Best Operator roles",
+  },
+  {
     id: "gunslinger",
-    label: "Gunslinger",
-  },
-  {
-    id: "assault",
-    label: "Assault",
-  },
-  {
-    id: "soldier",
-    label: "Soldier",
-  },
-  {
-    id: "scout",
-    label: "Scout",
+    label: "Gunslinger Hawks",
   },
   {
     id: "scoundrel",
     label: "Scoundrel",
   },
   {
-    id: "heavy",
-    label: "Heavy",
-  },
-  {
-    id: "medic",
-    label: "Medic",
-  },
-  {
-    id: "sharpshooter",
-    label: "Sharpshooter",
+    id: "assault-soldier-sharpshooter",
+    label: "Assault, Soldier & Sharpshooter",
   },
   {
     id: "weapon-class",
-    label: "Weapon classes",
+    label: "Best weapon class",
   },
   {
     id: "locked-talents",
-    label: "Locked talents",
+    label: "Unique talents",
   },
   {
     id: "cross-training",
     label: "Cross Training",
   },
   {
-    id: "my-first-run-picks",
-    label: "My first-run picks",
+    id: "best-first-run-squad",
+    label: "First-run squad roles",
   },
 ];
 
@@ -92,16 +76,16 @@ const relatedLinks = [
     label: "Beginner Guide",
   },
   {
+    href: "/star-wars-zero-company/difficulty-settings",
+    label: "Difficulty Settings & Beskar Mode",
+  },
+  {
+    href: "/star-wars-zero-company/permadeath-injuries",
+    label: "Permadeath & Injuries Guide",
+  },
+  {
     href: "/star-wars-zero-company/walkthrough",
     label: "Complete Walkthrough & Mission Order",
-  },
-  {
-    href: "/star-wars-zero-company/achievements-trophies",
-    label: "Achievements & Trophies Guide",
-  },
-  {
-    href: "/star-wars-zero-company/smugglers-den-walkthrough",
-    label: "Smuggler's Den & Tel-Rea Guide",
   },
 ];
 
@@ -114,9 +98,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "STAR WARS Zero Company Classes & Specializations Guide",
+    title: metadataTitle,
     description:
-      "Compare all eight specializations, choose a starting Hawks role, match weapons to range and Action Points, and shape builds with talents and Cross Training.",
+      "Choose the best specialization for Hawks and build Kabb, Trick and Jay around their real combat roles, unique talents and Cross Training.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -129,9 +113,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "STAR WARS Zero Company Classes & Specializations Guide",
+    title: metadataTitle,
     description:
-      "Choose between Gunslinger, Assault, Medic, Heavy and the other specializations without getting trapped by your opening class choice.",
+      "Best Hawks specialization, Operator class pairings, respecs, weapon choices and Cross Training in STAR WARS Zero Company.",
     images: [imageUrls[0]],
   },
 };
@@ -158,7 +142,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Classes & Specializations",
+          name: "Best Classes & Specializations",
           item: pageUrl,
         },
       ],
@@ -171,14 +155,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "STAR WARS Zero Company Classes & Specializations Guide: Best Starting Class and Hawks Builds",
+        "STAR WARS Zero Company Best Classes & Specializations Guide",
       description:
-        "A player-focused STAR WARS Zero Company classes and specializations guide covering all eight starting roles for Hawks: Assault, Gunslinger, Heavy, Medic, Soldier, Sharpshooter, Scout, and Scoundrel. It explains why I prefer Gunslinger with a Blaster Rifle or Assault on a first campaign, when I change specialization, how weapon class and specialization are chosen separately, why pistol range and Action Point costs affect real combat performance, which roles I want elsewhere in the squad, how locked Operator talents shape long-term builds, and how I use permanent Cross Training bonuses to reinforce the job each Operator already performs.",
+        "A player-focused STAR WARS Zero Company class and specialization guide covering all eight specializations, the best Hawks roles, when specialization changes are worth making, and practical Operator builds for Kabb, Trick and Jay. It explains why Scout is a strong long-term Hawks choice, when Gunslinger or Assault fits better, why Kabb works naturally as a Heavy, why Trick can make an unusually safe Medic, how Scoundrel and Sharpshooter fit Jay, how weapon range and Action Point costs affect builds, and how unique talents, Bonds and Cross Training shape long-term squad roles.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-08-28",
-      dateModified: "2026-08-28",
+      dateModified: "2026-08-29",
       articleSection: "STAR WARS Zero Company Guides",
       about: [
         {
@@ -188,11 +172,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company classes",
+          name: "STAR WARS Zero Company best classes",
         },
         {
           "@type": "Thing",
           name: "STAR WARS Zero Company specializations",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company best specialization",
         },
         {
           "@type": "Thing",
@@ -204,7 +192,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "STAR WARS Zero Company Scout",
+        },
+        {
+          "@type": "Thing",
           name: "STAR WARS Zero Company Gunslinger",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Scoundrel",
         },
         {
           "@type": "Thing",
@@ -216,11 +212,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Scout",
-        },
-        {
-          "@type": "Thing",
-          name: "STAR WARS Zero Company Scoundrel",
+          name: "STAR WARS Zero Company Sharpshooter",
         },
         {
           "@type": "Thing",
@@ -232,7 +224,15 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "STAR WARS Zero Company Sharpshooter",
+          name: "STAR WARS Zero Company Kabb build",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Trick build",
+        },
+        {
+          "@type": "Thing",
+          name: "STAR WARS Zero Company Jay build",
         },
         {
           "@type": "Thing",
@@ -278,13 +278,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Choose a Specialization Around How You Actually Fight"
-          description="I start Hawks with Gunslinger and a Blaster Rifle for flexible ranged pressure, or Assault when I expect to keep moving, then change roles when the abilities stop matching the turns I actually take."
+          title="Best Classes and Specializations for Hawks and Your Squad"
+          description="I use Scout when I want Hawks feeding Advantage and setting up the squad, then build Kabb, Trick and Jay around the jobs their unique talents already make them good at."
           gameTitle="STAR WARS Zero Company"
           gameHref="/star-wars-zero-company"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="August 28, 2026"
+          updatedAt="August 29, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

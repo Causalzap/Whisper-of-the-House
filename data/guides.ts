@@ -142,21 +142,22 @@ export const guideClusters: GuideCluster[] = [
     label: "Turn-Based Tactical RPG",
     eyebrow: "Spotlight Hub",
     hubStatus:
-      "14 chapters + classes + 53 achievements + Expert/Beskar + Permadeath",
+      "14 chapters + choices + classes + 53 achievements + Expert/Beskar",
   
     description:
-      "Use the STAR WARS Zero Company guide hub to follow the 14-chapter campaign, manage Cycles and Operators, solve the 80,000-Credit debt, recruit Tel-Rea, choose classes and difficulty, handle Permadeath, and plan all 53 achievements.",
+      "Use the STAR WARS Zero Company guide hub to plan a first run, follow the 14-chapter Critical route, build a flexible squad, handle choices and injuries, clear Gorga's debt, recruit Tel-Rea, and plan all 53 achievements.",
   
     coverage: [
-      "Complete 14-chapter Critical Mission route from Serelonus and Gorga through Republic Intelligence, Cortilius, Lunata, Order 66, Captain Rex, Umbara, the final pursuit of Fathom, and the epilogue",
-      "First-run campaign planning through Holotable expiry timers, Operations versus Tactical Missions, Intel, Influence, Recruitment, Den conversations, Zone Rewards, Action Points, Call for Backup, Advantage, Overwatch, Bonds, Focus Points, Cross Training, and early upgrades",
-      "All eight starting specializations — Assault, Gunslinger, Heavy, Medic, Soldier, Sharpshooter, Scout, and Scoundrel — with Hawks recommendations, weapon-class fit, locked talents, Focus progression, and permanent Cross Training bonuses",
-      "Gorga's In Debt to the Hutts route through the 80,000-Credit warning, nine-Cycle pressure, Brookner choices, Lothal, Kaller or Dantooine, Republic Intelligence payment, and Payback without grinding the displayed debt",
+      "Complete 14-chapter Critical Mission route from Serelonus and Gorga through Republic Intelligence, Cortilius, Luunata, Order 66, Captain Rex, Umbara, Cineurore, the final pursuit of Fathom, and the epilogue",
+      "First-run campaign planning around Holo Table expiry timers, Cycles, Operations versus Tactical Missions, Intel, Influence, Recruitment, Den conversations, Action Points, Call for Backup, Advantage, Overwatch, Bonds, Focus Points, Cross Training, and early upgrades",
+      "All eight starting specializations — Assault, Gunslinger, Heavy, Medic, Soldier, Sharpshooter, Scout, and Scoundrel — with Hawks recommendations, weapon-class fit, specialization changes, locked talents, Focus progression, and Cross Training",
+      "Major choices and consequences including Kaller or Dantooine, Pick Your Poison, Gorga's Revenge, Bruckner, Dilemmas, Bond reactions, Credit tradeoffs, Relief Ship, and Crisis decisions",
+      "Gorga's In Debt to the Hutts route through the 80,000-Credit warning, nine-Cycle pressure, Bruckner, Lothal, Pick Your Poison, the Republic Intelligence payment, and Payback without grinding the displayed debt",
       "Dark Waters progression through Takali Canal, the canal drain, underground Fathom route, blocked shot, convert rescue, Shadow Plague reveal, and Hawks' first meeting with Tel-Rea",
-      "Smuggler's Den through Three Tower District, the Vinsar Materials service entrance, warehouse reinforcements, Destroyer Droid, battle-droid shipment, and the exact progression point where Tel-Rea joins Zero Company",
-      "Permadeath and injury management through Downed Operators, Rally, risky Operations, Medical Beds, MedBay timing, Bacta recovery, Trick's special recovery talent, permanent loss, and the Memorial",
-      "Story, Normal, Hard and Expert difficulty decisions, including Expert's tougher combat, reduced effective weapon range, lower starting Bonds, disabled Bacta Tank, Permadeath versus Beskar Mode, and Expert + Beskar planning",
-      "All 53 achievements with an interactive checklist covering Very High Bonds, 50 Optional Missions, 20 Operators, 1,138 Tactical Mission kills, Astromechs, Operator stories, combat cleanup, Captain, Legend, and 100% campaign planning",
+      "Smuggler's Den through Three Tower District, the Vinsar Materials service entrance, warehouse reinforcements, Destroyer Droid, battle-droid shipment, and the progression point where Tel-Rea joins Zero Company",
+      "Injury and Permadeath management through Downed Operators, Rally, the three-Injury death rule, MedBay recovery, Bacta treatment, Trick's first-down protection, Aurelio, permanent loss, and the Memorial",
+      "Story, Normal, Hard and Expert difficulty decisions, including reduced effective weapon range, lower starting Bonds, disabled Bacta Tank, Permadeath versus Beskar Mode, and Expert + Beskar planning",
+      "All 53 achievements with an interactive checklist and 100% roadmap covering Very High Bonds, 50 Optional Missions, 20 Operators, 1,138 Tactical Mission kills, Astromechs, Operator stories, combat cleanup, Captain, and Legend",
     ],
   
     image:
@@ -175,11 +176,11 @@ export const guideClusters: GuideCluster[] = [
     pages: [
       {
         title:
-          "STAR WARS Zero Company Guide: Walkthrough, Choices & Tips",
+          "STAR WARS Zero Company Guide: First Run, Choices & Builds",
         href: "/star-wars-zero-company",
         type: "Guide Hub",
         description:
-          "Start here for the Critical route, Cycles, difficulty, injuries, the 80,000-Credit debt, Tel-Rea, classes, choices, Order 66, achievements, and the ending.",
+          "Start here for Critical Missions, Holo Table timing, difficulty, roster planning, choices, injuries, major roadblocks, the story route, and 100% completion.",
         image:
           "/images/star-wars-zero-company/star-wars-zero-company-holotable-objectives-expire.webp",
         imageFit: "cover",
@@ -188,7 +189,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "14 chapters, Critical Missions, Cycles, difficulty, Permadeath, Gorga's debt, Tel-Rea, classes, Order 66, Trick, achievements, and ending",
+            "First-run planning, Critical Missions, Cycles, difficulty, roster depth, choices, Order 66, Trick, achievements, ending, and postgame",
         },
   
         archive: {
@@ -199,11 +200,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "STAR WARS Zero Company Walkthrough & Mission Order",
+          "STAR WARS Zero Company Walkthrough & 14-Chapter Order",
         href: "/star-wars-zero-company/walkthrough",
         type: "Walkthrough",
         description:
-          "Follow the full 14-chapter Critical route from Serelonus through Gorga, Cortilius, Lunata, Order 66, Captain Rex, Umbara, Fathom, and the epilogue.",
+          "Follow the full 14-chapter Critical route from Serelonus through Gorga, Cortilius, Luunata, Order 66, Captain Rex, Umbara, Cineurore, Fathom, and the epilogue.",
         date: "Updated recently",
         image:
           "/images/star-wars-zero-company/star-wars-zero-company-walkthrough-luunata-citadel-briefing.webp",
@@ -218,7 +219,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 1,
           spotlightMeta:
-            "All 14 chapters, Critical Mission order, Serelonus, Gorga, Republic Intelligence, Cortilius, Lunata, Order 66, Captain Rex, Umbara, Fathom, and epilogue",
+            "All 14 chapters, Critical Mission order, Serelonus, Gorga, Republic Intelligence, Cortilius, Luunata, Order 66, Captain Rex, Umbara, Cineurore, Fathom, and epilogue",
         },
   
         archive: {
@@ -259,11 +260,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "STAR WARS Zero Company Classes & Specializations Guide",
+          "STAR WARS Zero Company Best Classes & Specializations",
         href: "/star-wars-zero-company/classes-specializations",
         type: "Builds",
         description:
-          "Compare all eight specializations, choose Hawks' starting role and weapon class, use locked talents and Focus Points, and shape Operators through Cross Training.",
+          "Compare all eight specializations, choose Hawks' role and weapon class, change specialization when the build stops fitting, and shape Operators through talents, Focus Points, and Cross Training.",
         date: "Updated recently",
         image:
           "/images/star-wars-zero-company/star-wars-zero-company-eight-starting-specializations.webp",
@@ -278,7 +279,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 3,
           spotlightMeta:
-            "Assault, Gunslinger, Heavy, Medic, Soldier, Sharpshooter, Scout, Scoundrel, Hawks builds, weapon classes, locked talents, Focus Points, and Cross Training",
+            "Assault, Gunslinger, Heavy, Medic, Soldier, Sharpshooter, Scout, Scoundrel, Hawks builds, weapon classes, specialization changes, talents, Focus Points, and Cross Training",
         },
   
         archive: {
@@ -289,11 +290,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "STAR WARS Zero Company Achievements & Trophies Guide",
+          "STAR WARS Zero Company Trophy Guide & 53 Achievements",
         href: "/star-wars-zero-company/achievements-trophies",
         type: "Achievements",
         description:
-          "Track all 53 achievements with Bonds, Optional Missions, roster goals, Astromechs, Operator stories, combat cleanup, Captain, Legend, and 100% planning.",
+          "Track all 53 achievements with a 100% roadmap for long counters, Very High Bonds, roster goals, Astromechs, Operator stories, combat cleanup, Expert, and Beskar.",
         date: "Updated recently",
         image:
           "/images/star-wars-zero-company/star-wars-zero-company-do-or-do-not-90-percent-miss.webp",
@@ -308,7 +309,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 4,
           spotlightMeta:
-            "All 53 achievements, Very High Bonds, 50 Optional Missions, 20 Operators, 1,138 kills, Astromechs, Operator stories, combat cleanup, Captain, and Legend",
+            "All 53 achievements, 50 Optional Missions, 1,138 kills, 20 Operators, Very High Bonds, Astromechs, Operator stories, combat cleanup, Expert, and Legend",
         },
   
         archive: {
@@ -319,12 +320,12 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "In Debt to the Hutts Walkthrough: 80,000 Credits Guide",
+          "Zero Company In Debt to the Hutts: 80,000 Credits Guide",
         href:
           "/star-wars-zero-company/in-debt-to-the-hutts-walkthrough",
         type: "Walkthrough",
         description:
-          "Clear Gorga's 80,000-Credit debt without grinding by following Brookner, Lothal, the next Gorga contract, Republic Intelligence, and Payback.",
+          "Do not grind the 80,000-Credit debt. Follow Bruckner, Lothal, Pick Your Poison and Republic Intelligence, then clear Gorga's debt through Payback.",
         date: "Updated recently",
         image:
           "/images/star-wars-zero-company/star-wars-zero-company-in-debt-80000-nine-cycles.webp",
@@ -339,7 +340,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 5,
           spotlightMeta:
-            "80,000 Credits, nine Cycles, Brookner choice, 50 Intel, Lothal, Kaller or Dantooine, Republic Intelligence payment, and Payback",
+            "80,000 Credits, nine Cycles, Bruckner, Lothal, Pick Your Poison, Republic Intelligence payment, and Payback without grinding",
         },
   
         archive: {
@@ -385,7 +386,7 @@ export const guideClusters: GuideCluster[] = [
           "/star-wars-zero-company/smugglers-den-walkthrough",
         type: "Walkthrough",
         description:
-          "Find the Vinsar Materials service entrance, survive the warehouse reinforcements, expose the battle-droid shipment, and recruit Tel-Rea after Smuggler's Den.",
+          "Find the Vinsar Materials service entrance, survive warehouse reinforcements, expose the battle-droid shipment, and recruit Tel-Rea after Smuggler's Den.",
         date: "Updated recently",
         image:
           "/images/star-wars-zero-company/star-wars-zero-company-smugglers-den-tel-rea-joins.webp",
@@ -400,7 +401,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 7,
           spotlightMeta:
-            "Three Tower District, Vinsar Materials, service entrance, warehouse waves, Destroyer Droid, battle-droid shipment, Hadrix, and Tel-Rea recruitment",
+            "Three Tower District, Vinsar Materials, service entrance, warehouse reinforcements, Destroyer Droid, battle-droid shipment, Hadrix, and Tel-Rea recruitment",
         },
   
         archive: {
@@ -411,11 +412,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "STAR WARS Zero Company Permadeath & Injuries Guide",
+          "STAR WARS Zero Company Injuries, Permadeath & Aurelio",
         href: "/star-wars-zero-company/permadeath-injuries",
         type: "Systems",
         description:
-          "Manage Downed Operators, Rally, injury risk, MedBay recovery, risky Operations, Bacta treatment, Trick's exception, permanent death, and roster losses.",
+          "Learn how Downed Operators, Injuries, Rally and MedBay recovery work, what happens at three Injuries, when Bacta helps, how Trick differs, and whether Aurelio can be saved.",
         date: "Updated recently",
         image:
           "/images/star-wars-zero-company/star-wars-zero-company-medbay-one-cycle-three-injuries.webp",
@@ -430,7 +431,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 8,
           spotlightMeta:
-            "Downed Operators, Rally, injuries, Operation risk, MedBay recovery, Bacta Tank, Trick, three-Injury danger, Permadeath, and Memorial",
+            "Downed Operators, Rally, Injuries, three-Injury death rule, MedBay, Bacta Tank, Trick, Aurelio, Permadeath, Memorial, and permanent loss",
         },
   
         archive: {
@@ -441,11 +442,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "STAR WARS Zero Company Difficulty, Expert & Beskar Guide",
+          "STAR WARS Zero Company Best Difficulty & Beskar Mode",
         href: "/star-wars-zero-company/difficulty-settings",
         type: "Systems",
         description:
-          "Compare Story, Normal, Hard and Expert, understand Expert's major changes, separate Permadeath from Beskar Mode, and plan an Expert + Beskar run.",
+          "Choose between Story, Normal, Hard and Expert, understand what Expert changes, separate Permadeath from Beskar, and decide when Expert + Beskar is worth attempting.",
         date: "Updated recently",
         image:
           "/images/star-wars-zero-company/star-wars-zero-company-difficulty-settings-story-normal-hard-expert.webp",
@@ -460,12 +461,42 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 9,
           spotlightMeta:
-            "Story, Normal, Hard, Expert, tougher enemies, reduced weapon range, lower Bonds, disabled Bacta Tank, Permadeath vs Beskar, Captain, and Legend",
+            "Story, Normal, Hard, Expert, reduced weapon range, lower starting Bonds, disabled Bacta Tank, Permadeath vs Beskar, first-run difficulty, Captain, and Legend",
         },
   
         archive: {
           showInCollections: true,
           order: 10,
+        },
+      },
+  
+      {
+        title:
+          "STAR WARS Zero Company Choices & Consequences Guide",
+        href: "/star-wars-zero-company/choices-consequences",
+        type: "Guide",
+        description:
+          "Choose between Kaller and Dantooine, decide what to do with Bruckner, and judge Dilemmas, Bonds, Credits and Crisis decisions by what they actually change.",
+        date: "Updated recently",
+        image:
+          "/images/star-wars-zero-company/star-wars-zero-company-pick-your-poison-kaller-dantooine.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 263,
+          spotlightFeature: true,
+          spotlightOrder: 10,
+          spotlightMeta:
+            "Kaller or Dantooine, Pick Your Poison, Gorga's Revenge, Bruckner, Dilemmas, Bond reactions, Relief Ship, Credits, and Crisis decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 11,
         },
       },
     ],
