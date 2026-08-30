@@ -131,6 +131,312 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Big Ambitions",
+    game: "Big Ambitions",
+    href: "/big-ambitions",
+    slug: "big-ambitions",
+    kind: "game",
+    status: "active",
+    accent: "emerald",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+    label: "Business Management & Tycoon Simulation",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "1.0 progression + businesses + HR + logistics + factories + 126 achievements",
+  
+    description:
+      "Use the Big Ambitions 1.0 guide hub to choose what to build next, scale employees and HR, automate warehouses and logistics, set better prices, manufacture with factories, compete with Special Rivals, and complete all 126 achievements.",
+  
+    coverage: [
+      "Full 1.0 progression from the first profitable business through the second-business objective, Headquarters, warehouse automation, Product Manufacturing, factories, multi-district expansion, and late-game company scaling",
+      "Business selection by progression stage, current market demand, startup burden, staffing, customer capacity, property fit, competition, and supply requirements across Gym, Hairdresser, Fast Food, Supermarket, Clothing, Electronics, Jewelry, and other business types",
+      "Employee and HR management from recruitment and candidate demands through schedules, training, HR Managers, Headhunters, absence coverage, resignations, retirements, automatic replacement, and large-workforce scaling",
+      "Warehouse and logistics automation through Purchasing Agents, importer supply, pallet storage, Smart Delivery, delivery vehicles, Logistics Managers, store stock targets, route capacity, shortage diagnosis, and multi-warehouse scaling",
+      "Factory manufacturing through building choice, usable floor area, production layouts, product selection, raw materials, Factory Workers, storage, production-line scaling, finished-goods bottlenecks, and 1.0 overproduction pressure",
+      "Pricing decisions from manual local-market checks and Store Insight diagnosis through neighborhood pricing, Pricing Managers, Current Price, Suggested Price, Market Price, Apply Suggested Prices, and repricing after competitive changes",
+      "Special Rival strategy through Rival profiles, first warnings versus Active Rivalry, profitable target selection, direct competition, income pressure, Rival-owned property, business takeover negotiations, and Arch-nemesis defeat requirements",
+      "All 126 achievements with an interactive checklist and practical route covering long counters, specialist workforces, Executive Producer Factory production, Arch-nemesis, property and luxury goals, casino, age milestones, golf, tennis, and the three hidden achievements",
+    ],
+  
+    image: "/images/big-ambitions/big-ambitions-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 40,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Big Ambitions Guide: Progression, Businesses & Systems",
+        href: "/big-ambitions",
+        type: "Guide Hub",
+        description:
+          "Start here to identify what your Big Ambitions 1.0 company needs next, then jump to the guide for progression, businesses, employees, logistics, factories, pricing, Rivals, or achievements.",
+        image:
+          "/images/big-ambitions/big-ambitions-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Big Ambitions 1.0 progression, business selection, employees, Headquarters, warehouse logistics, Market Insider, pricing, factories, Special Rivals, and 126 achievements",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Big Ambitions Progression Guide: What to Do & Unlock Next",
+        href: "/big-ambitions/progression-guide",
+        type: "Guide",
+        description:
+          "Follow Big Ambitions 1.0 from the first business through the second-business objective, Headquarters, warehouses, Product Manufacturing, factories, and multi-district expansion.",
+        date: "Updated recently",
+        image:
+          "/images/big-ambitions/big-ambitions-1-0-business-choice-menu.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 264,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "First business, $15,000 opening loan, second-business objective, Headquarters timing, warehouse unlock, Product Manufacturing, Factory handoff, and multi-district progression",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Big Ambitions Best Businesses: What to Open at Each Stage",
+        href: "/big-ambitions/best-businesses",
+        type: "Guide",
+        description:
+          "Compare Big Ambitions 1.0 businesses by stage, demand, staffing, startup cost, capacity, property fit, competition, and supply burden before opening the next location.",
+        date: "Updated recently",
+        image:
+          "/images/big-ambitions/big-ambitions-market-insider-first-business-demand.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 265,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Gym, Hairdresser, Fast Food, Supermarket, Clothing, Electronics, demand, Traffic Index, customer capacity, equipment cost, property fit, and competition",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Big Ambitions Employees & HR Guide: Hiring and Automation",
+        href: "/big-ambitions/employees-hr-guide",
+        type: "Systems",
+        description:
+          "Manage recruitment, employee demands, schedules and training, then scale through HR Managers, Headhunters, absence coverage, and automatic employee replacement.",
+        date: "Updated recently",
+        image:
+          "/images/big-ambitions/big-ambitions-headhunter-automatic-replacement.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 266,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Recruitment, candidate skill and wage, employee demands, scheduling, training, HR Managers, Headhunters, sick calls, resignations, retirements, and automatic replacement",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Big Ambitions Warehouse & Logistics Guide: Smart Delivery",
+        href: "/big-ambitions/warehouse-logistics-guide",
+        type: "Systems",
+        description:
+          "Build a reliable supply chain with Purchasing Agents, warehouses, Smart Delivery, delivery vehicles, Logistics Managers, stock targets, and delivery troubleshooting.",
+        date: "Updated recently",
+        image:
+          "/images/big-ambitions/big-ambitions-logistics-manager-delivery-destinations.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 267,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Purchasing Agents, importers, warehouses, pallet storage, Smart Delivery, stock targets, delivery vehicles, Logistics Managers, store restocking, shortages, and second warehouses",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Big Ambitions Factory Guide: Manufacturing & Production",
+        href: "/big-ambitions/factory-guide",
+        type: "Systems",
+        description:
+          "Set up and scale Big Ambitions 1.0 manufacturing with the right Factory building, products, raw materials, workers, storage, production lines, and output balance.",
+        date: "Updated recently",
+        image:
+          "/images/big-ambitions/big-ambitions-factory-production-floor.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 268,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Factory timing, usable floor area, post-rework layouts, manufactured products, raw materials, Factory Workers, storage, production lines, overproduction, and stopped-line troubleshooting",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Big Ambitions Pricing Guide: Best Prices & Pricing Manager",
+        href: "/big-ambitions/pricing-guide",
+        type: "Systems",
+        description:
+          "Set prices using local markets and Store Insight, then manage multiple locations with Current, Suggested and Market Price through the Pricing Manager.",
+        date: "Updated recently",
+        image:
+          "/images/big-ambitions/big-ambitions-pricing-manager-suggested-prices.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 269,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Manual pricing, Store Insight, neighborhood markets, service and product prices, Pricing Manager, Current Price, Suggested Price, Market Price, Apply Suggested Prices, and Rival repricing",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Big Ambitions Rivals Guide: Special Rivals & Takeovers",
+        href: "/big-ambitions/rivals-guide",
+        type: "Guide",
+        description:
+          "Understand Special Rivals and Active Rivalry, choose profitable targets, create direct competition, negotiate takeovers, handle Rival property, and work toward defeating all four.",
+        date: "Updated recently",
+        image:
+          "/images/big-ambitions/big-ambitions-active-rivalry-income-impact.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 270,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Special Rivals, first warnings, Active Rivalry, profitable targets, direct competition, Rival income, property ownership, business takeovers, former Rivals, and Arch-nemesis",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Big Ambitions Achievements Guide: All 126 & Checklist",
+        href: "/big-ambitions/achievements",
+        type: "Achievements",
+        description:
+          "Track all 126 Big Ambitions achievements with an interactive checklist and route for long counters, employees, factories, Rivals, property, sports, luxury goals, and hidden achievements.",
+        date: "Updated recently",
+        image:
+          "/images/big-ambitions/big-ambitions-golf-tennis-activities-map.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 271,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "All 126 achievements, persistent checklist, long counters, specialist employees, Executive Producer, Arch-nemesis, Hoarder, Insomnia, property, casino, golf, tennis, Bullseye, Hostile Takeover, and Pound Sand",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+    ],
+  },
+  {
     title: "STAR WARS Zero Company",
     game: "STAR WARS Zero Company",
     href: "/star-wars-zero-company",

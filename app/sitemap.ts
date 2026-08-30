@@ -817,6 +817,15 @@ const paths = [
   '/star-wars-zero-company/difficulty-settings',
   '/star-wars-zero-company/choices-consequences',
 
+  '/big-ambitions',
+  '/big-ambitions/progression-guide',
+  '/big-ambitions/best-businesses',
+  '/big-ambitions/achievements',
+  '/big-ambitions/employees-hr-guide',
+  '/big-ambitions/warehouse-logistics-guide',
+  '/big-ambitions/factory-guide',
+  '/big-ambitions/pricing-guide',
+  '/big-ambitions/rivals-guide',
 
 ] as const;
 
@@ -825,6 +834,16 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/big-ambitions': '2026-08-30',
+  '/big-ambitions/progression-guide': '2026-08-30',
+  '/big-ambitions/best-businesses': '2026-08-30',
+  '/big-ambitions/achievements': '2026-08-30',
+  '/big-ambitions/employees-hr-guide': '2026-08-30',
+  '/big-ambitions/warehouse-logistics-guide': '2026-08-30',
+  '/big-ambitions/factory-guide': '2026-08-30',
+  '/big-ambitions/pricing-guide': '2026-08-30',
+  '/big-ambitions/rivals-guide': '2026-08-30',
+
   '/star-wars-zero-company': '2026-08-29',
   '/star-wars-zero-company/walkthrough': '2026-08-29',
   '/star-wars-zero-company/beginner-guide': '2026-08-28',
