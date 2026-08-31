@@ -827,6 +827,17 @@ const paths = [
   '/big-ambitions/pricing-guide',
   '/big-ambitions/rivals-guide',
 
+  '/breathedge-2',
+  '/breathedge-2/walkthrough',
+  '/breathedge-2/outskirts-walkthrough',
+  '/breathedge-2/depot-walkthrough',
+  '/breathedge-2/attendant-parts',
+  '/breathedge-2/antenna-locations',
+  '/breathedge-2/cold-protection',
+  '/breathedge-2/oxygen-guide',
+  '/breathedge-2/resources-crafting',
+  '/breathedge-2/ending',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -834,6 +845,17 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/breathedge-2': '2026-08-31',
+  '/breathedge-2/walkthrough': '2026-08-31',
+  '/breathedge-2/outskirts-walkthrough': '2026-08-31',
+  '/breathedge-2/depot-walkthrough': '2026-08-31',
+  '/breathedge-2/attendant-parts': '2026-08-31',
+  '/breathedge-2/antenna-locations': '2026-08-31',
+  '/breathedge-2/cold-protection': '2026-08-31',
+  '/breathedge-2/oxygen-guide': '2026-08-31',
+  '/breathedge-2/resources-crafting': '2026-08-31',
+  '/breathedge-2/ending': '2026-08-31',
+
   '/big-ambitions': '2026-08-30',
   '/big-ambitions/progression-guide': '2026-08-30',
   '/big-ambitions/best-businesses': '2026-08-30',

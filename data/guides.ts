@@ -131,6 +131,344 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Breathedge 2",
+    game: "Breathedge 2",
+    href: "/breathedge-2",
+    slug: "breathedge-2",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Cozy, crafting, survival & systems",
+    label: "Open-World Space Survival & Crafting",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "Chapter 1 + Outskirts + Depot + survival systems + Early Access ending",
+  
+    description:
+      "Use the Breathedge 2 guide hub to follow Chapter 1, clear the Station Outskirts and Depot, solve antenna and Attendant objectives, extend oxygen range, reach 100 Cold Protection, identify important resources, and understand the current Early Access ending.",
+  
+    coverage: [
+      "Complete Chapter 1 progression from the crashed train and Station Outskirts through communications, the cold gate, Depot, jammer triangulation, military facility, shuttle route, cooling system, signal jammer, and current Early Access story cutoff",
+      "Station Outskirts progression through the External Module, train recovery, food and water setup, interphone and communications route, ticket booth, Public Oxygen Station, Attendant side route, 100 Cold Protection gate, Antenna Debris, and Depot transition",
+      "Depot progression through Raise Ambient Temperature to 100%, Service Warmer repairs, Light Bulbs, route planning between heat sources, Foreman calibration, Small Engine research, and the final heater",
+      "Three Antennas progression through the damaged station antenna, sector frequency data, homemade beacon, Tuning Unit, battery, Electrical Tape, government probe, onboard clock, electronics repair, both Antenna Debris parts, and New Coordinates Detected",
+      "Attendant reconstruction through the body below the station platform, head near the starting train benches, and the hard-to-see arm beside the blue machinery bridge and three orange-ball landmark",
+      "Cold Protection progression through the 100-point requirement, Space Suit wardrobe, Cardboard and Foam insulation, a practical 106 Cold setup, secondary stat tradeoffs, Frostbite, Hypothermia, and retreat decisions",
+      "Oxygen management through the Public Oxygen Station, Ice, Oxyworms, Purified Oxygen, Oxyworm Nests, longer exploration routes, turnaround decisions, and the difference between Oxygen and Gas",
+      "Resource and crafting priorities through Electronics, Wires, Electrical Tape, Aluminum, Plastic, Light Bulbs, Rubber, Refined Metal, Titanium, Ice, insulation materials, object recognition, scavenging decisions, and the Backpack upgrade from 110 to 185 carry weight",
+      "Current Early Access ending through signal jammer retrieval, Mary's 779014-EE5 coordinates, the betrayal, the Chapter 1 cutoff, post-ending scavenging, and what remains playable afterward",
+    ],
+  
+    image:
+      "/images/breathedge-2/breathedge-2-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 41,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Breathedge 2 Guide: Walkthrough, Survival & Chapter 1",
+        href: "/breathedge-2",
+        type: "Guide Hub",
+        description:
+          "Start here for the Chapter 1 route, Outskirts and Depot progression, hidden objectives, oxygen, Cold Protection, resources, crafting, and the current Early Access ending.",
+        image:
+          "/images/breathedge-2/breathedge-2-chapter-one-mary.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Chapter 1, Station Outskirts, Depot, Attendant, Three Antennas, oxygen, Cold Protection, resources, crafting, signal jammer, and Early Access ending",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Walkthrough: Complete Chapter 1 Guide",
+        href: "/breathedge-2/walkthrough",
+        type: "Walkthrough",
+        description:
+          "Follow Chapter 1 from the crashed train through the Outskirts and Depot, then triangulate the jammer, clear the facility and reach the current story ending.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-outskirts-external-module-battery.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 272,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Crashed train, Outskirts communications, Cold Protection gate, Depot, antenna route, jammer triangulation, military facility, shuttle, cooling system, signal jammer, and Chapter 1 ending",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Outskirts Walkthrough: Train, Antennas & Depot",
+        href: "/breathedge-2/outskirts-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Power the crashed train, stabilize food and water, restore communications, repair the oxygen station, clear the cold gate and antenna debris, then reach Depot.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-outskirts-overview.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 273,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "External Module, crashed train, food and water, communications, ticket booth, Public Oxygen Station, Attendant, 100 Cold Protection, Antenna Debris, and Depot transition",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Depot Walkthrough: Service Warmers & Foreman",
+        href: "/breathedge-2/depot-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Raise Depot temperature to 100%, repair Service Warmers, find Light Bulbs, solve the Foreman test, research Small Engines, and finish the heating route.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-depot-area-discovered.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 274,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Depot, 17% to 100% ambient temperature, Service Warmers, Light Bulbs, repair materials, heat-source routing, Foreman calibration, Small Engines, and final heater",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Attendant Parts: Body, Head & Arm Locations",
+        href: "/breathedge-2/attendant-parts",
+        type: "Puzzle Help",
+        description:
+          "Find the Attendant body, head and hidden arm in the Station Outskirts, including the bridge, blue machinery and three-orange-ball landmark.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-attendant-arm-bridge-landmark.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 275,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Assemble the Attendant, body location, head location, hidden arm, small metal bridge, blue machinery, three orange balls, and Welcome to the Outskirts",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Three Antennas & Antenna Debris Locations",
+        href: "/breathedge-2/antenna-locations",
+        type: "Puzzle Help",
+        description:
+          "Repair the damaged antenna, homemade beacon and government probe, then find both 0/2 Antenna Debris parts and unlock New Coordinates.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-three-antennas-journal.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 276,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Three Antennas, sector frequency map, homemade beacon, Tuning Unit, battery, Electrical Tape, government probe, onboard clock, 0/2 Antenna Debris, and New Coordinates",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Cold Protection Guide: How to Reach 100+",
+        href: "/breathedge-2/cold-protection",
+        type: "Systems",
+        description:
+          "Reach 100 Cold Protection with Space Suit upgrades and insulation, understand protection tradeoffs, and survive colder routes without losing the run.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-cold-protection-106.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 277,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Raise Cold Protection to 100, Space Suit wardrobe, Cardboard, Foam, practical 106 Cold setup, secondary stat tradeoffs, Frostbite, Hypothermia, and retreat decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Oxygen Guide: Station, Oxyworms & Refills",
+        href: "/breathedge-2/oxygen-guide",
+        type: "Systems",
+        description:
+          "Repair the Public Oxygen Station, unlock Purified Oxygen, use Oxyworm Nests, manage Ice, and extend the range of longer Chapter 1 trips.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-public-oxygen-station-repaired.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 278,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "Public Oxygen Station, repair materials, Ice, Oxyworms, Purified Oxygen, 120 Oxygen refill, Oxyworm Nests, exploration range, turnaround planning, and Oxygen vs Gas",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Resources & Crafting Guide: What to Keep",
+        href: "/breathedge-2/resources-crafting",
+        type: "Systems",
+        description:
+          "Recognize important Chapter 1 materials, decide what to keep and spend, solve repair bottlenecks, and know when Titanium is worth using on the Backpack.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-backpack-185-capacity.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 279,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Electronics, Wires, Electrical Tape, Aluminum, Plastic, Light Bulbs, Rubber, Refined Metal, Titanium, Ice, insulation, Backpack, 110 to 185 capacity, and scavenging priorities",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "Breathedge 2 Ending Explained: Mary, Betrayal & Chapter 2",
+        href: "/breathedge-2/ending",
+        type: "Endings",
+        description:
+          "Understand Mary's 779014-EE5 coordinates, the betrayal, the current Chapter 1 cutoff, whether Chapter 2 is playable, and what remains afterward.",
+        date: "Updated recently",
+        image:
+          "/images/breathedge-2/breathedge-2-early-access-ending.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 280,
+          spotlightFeature: true,
+          spotlightOrder: 9,
+          spotlightMeta:
+            "Signal jammer, Mary, 779014-EE5, betrayal, Early Access story cutoff, Chapter 2 status, post-ending scavenging, and Chapter 1 completion",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+    ],
+  },
+  {
     title: "Big Ambitions",
     game: "Big Ambitions",
     href: "/big-ambitions",
