@@ -838,6 +838,8 @@ const paths = [
   '/breathedge-2/resources-crafting',
   '/breathedge-2/ending',
 
+  '/bombanana/module-solver',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -911,6 +913,8 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/how-to-fish/achievements': '2026-08-23',
 
   '/bombanana': '2026-08-20',
+  '/bombanana/module-solver': '2026-09-01',
+
 
   '/project-pitt': '2026-08-20',
   '/project-pitt/progression-guide': '2026-08-20',

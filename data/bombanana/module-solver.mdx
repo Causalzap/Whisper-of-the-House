@@ -1,0 +1,110 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import BombananaModuleSolver from "@/components/tools/BombananaModuleSolver";
+
+
+<section
+  id="quick-answer"
+  className="scroll-mt-24"
+>
+  <GuideQuickAnswer title="Quick Answer">
+
+  Use the solver after you know which panel is active. Enter the state it asks for, make one input, then look at the bomb again. If the panel changes, treat that new state as a fresh problem instead of carrying the previous answer forward.
+
+  </GuideQuickAnswer>
+</section>
+
+
+<figure className="my-8">
+  <Image
+    src="/images/bombanana/bombanana-wire-module-live-run.webp"
+    alt="BOMBANANA wire module during a live bomb run"
+    width={556}
+    height={518}
+    priority={true}
+    className="mx-auto h-auto w-full max-w-xl rounded-xl"
+  />
+
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once I know which panel I am dealing with, I want the current state in the solver before the timer forces another rushed call.
+  </figcaption>
+</figure>
+
+
+When I already recognize the panel, reopening the whole manual is usually slower than the decision I am trying to make. I read what is on the bomb now, put that state into the solver, and turn the result into one physical input.
+
+The current tool covers **Wire, Arrow / Direction, and Calculator**. Those are the panels where a short lookup can replace a much longer back-and-forth during a run.
+
+
+<BombananaModuleSolver />
+
+
+<h2
+  id="from-panel-state-to-button-press"
+  className="scroll-mt-24"
+>
+  From panel state to button press
+</h2>
+
+
+Each lookup stays attached to one panel and one state.
+
+**Wire:** I enter the wire count, LED, and colors from left to right. The useful result is not just a color; I want the physical wire position before anyone cuts.
+
+**Arrow:** I enter the LED and current Braille number, use the returned direction once, then look at the panel again. If another stage appears, I start a new lookup with the new state.
+
+**Calculator:** I calculate the equation and enter that result first. If the module stays active and a new LED appears, that is the second stage. I select the new LED in the solver and use the final keypad number it returns.
+
+
+<h2
+  id="what-i-check-before-the-input"
+  className="scroll-mt-24"
+>
+  What I check before the input
+</h2>
+
+
+A correct lookup can still turn into a failed input if the last handoff is unclear.
+
+- **Wire:** can the bomb handler identify the exact wire from its position?
+- **Arrow:** am I still looking at the same LED and Braille number I entered?
+- **Calculator:** did the panel actually finish, or did it move into the LED stage?
+
+I also keep different module calls separate. If Calculator information starts coming in while someone is still waiting for an Arrow direction, it becomes too easy to attach the right answer to the wrong panel.
+
+
+<h2
+  id="when-i-stop-and-read-the-panel-again"
+  className="scroll-mt-24"
+>
+  When I stop and read the panel again
+</h2>
+
+
+I stop the lookup and re-read the bomb when:
+
+- the LED was missed, changed, or called differently by two players;
+- the wire colors were not given from left to right;
+- an Arrow press advanced the module;
+- the Calculator accepted the equation but did not clear;
+- two module callouts overlapped;
+- the answer is correct on screen but the bomb handler cannot tell which control to use.
+
+At that point I only need the state of the panel that is still active. Repeating old information is usually worse than taking a second to read the new state cleanly.
+
+
+<h2
+  id="when-i-need-the-manual-instead"
+  className="scroll-mt-24"
+>
+  When I need the manual instead
+</h2>
+
+
+The solver works best once I can identify the panel and read the information it needs. If I am still unsure how the Blind, Deaf, and Mute roles should pass a call, why a module behaves differently, or what to do with a Switch panel, another lookup is not the answer.
+
+That is when I return to the <Link href="/bombanana">BOMBANANA manual and guide</Link>, sort out the mechanic, and come back once the panel state makes sense.
+
+During the actual solve, I keep it simpler: **read what is on the bomb now, get one answer, make one input, then check what changed.**

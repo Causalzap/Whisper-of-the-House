@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
 import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
 
-import BombananaContent from "@/data/bombanana/bombanana.mdx";
+import BombananaContent from "@/data/bombanana/index.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/bombanana`;
