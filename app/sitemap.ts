@@ -840,6 +840,12 @@ const paths = [
 
   '/bombanana/module-solver',
 
+  '/neverness-to-everness',
+  '/neverness-to-everness/chapter-6-fogden-game-walkthrough',
+  '/neverness-to-everness/duskmoor-100-percent-guide',
+  '/neverness-to-everness/duskmoor-anomaly-commissions',
+  '/neverness-to-everness/gauntlet-of-valor-guide',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -847,6 +853,12 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/neverness-to-everness': '2026-09-02',
+  '/neverness-to-everness/chapter-6-fogden-game-walkthrough': '2026-09-02',
+  '/neverness-to-everness/duskmoor-100-percent-guide': '2026-09-02',
+  '/neverness-to-everness/duskmoor-anomaly-commissions': '2026-09-02',
+  '/neverness-to-everness/gauntlet-of-valor-guide': '2026-09-02',
+
   '/breathedge-2': '2026-08-31',
   '/breathedge-2/walkthrough': '2026-08-31',
   '/breathedge-2/outskirts-walkthrough': '2026-08-31',
@@ -914,7 +926,6 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
 
   '/bombanana': '2026-08-20',
   '/bombanana/module-solver': '2026-09-01',
-
 
   '/project-pitt': '2026-08-20',
   '/project-pitt/progression-guide': '2026-08-20',

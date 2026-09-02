@@ -131,6 +131,194 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Neverness to Everness",
+    game: "Neverness to Everness",
+    href: "/neverness-to-everness",
+    slug: "neverness-to-everness",
+    kind: "game",
+    status: "active",
+    accent: "purple",
+    archiveCategory: "RPG, action, builds & combat",
+    label: "Urban Open-World RPG & Anomaly Exploration",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "Version 1.3 + Chapter 6 + Duskmoor 100% + 6 Anomaly Commissions + Gauntlet 1–99",
+  
+    description:
+      "Use the Neverness to Everness guide hub to decide what to do next in Version 1.3, unlock and clear Chapter 6: Fogden Game, finish Duskmoor at 100%, solve all six Anomaly Commissions, and push Gauntlet of Valor through Floor 99 into Infinity.",
+  
+    coverage: [
+      "Version 1.3 progression from Fighting with a Dragon into Chapter 6: Fogden Game, then onward to Duskmoor exploration or Gauntlet of Valor depending on whether story, region completion, or combat is the current goal",
+      "Chapter 6: Fogden Game through the abandoned-building TV route, disappearing right-corridor entrance, 10 Lumen Circles, Daffodil route, Shackled Past, Helm of Theseus, Linko and Nitsa, Eternal Present, future route, Madam T, Fog Coffin Colossus, and the final Bureau report",
+      "Duskmoor 100% exploration through all 50 Oracle Stones, Wertheimer Tower, ReroRero Phone Booths, check-ins, the motorcycle 80 km/h speed check, Teardrop Lake, western jumps, mountain cleanup, volleyball, and missing-completion troubleshooting",
+      "All six Duskmoor Anomaly Commissions — Fawn Alone, Lantern Parade, Twin Blooms, Finale: Da Capo, Sunken Door, and Storybook Skirmish — including trigger conditions, missing-spawn fixes, Mirror Wraith, rewards, achievements, and Annulith totals",
+      "Gauntlet of Valor progression through Floors 1–99, short-timer breakpoints, late boss floors, Floor 99, Infinite Floor, Mystery Buttons, Warren Gold Coins, first-clear rewards, and the decision between Infinity and other farming routes",
+    ],
+  
+    image:
+      "/images/neverness-to-everness/neverness-to-everness-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 42,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Neverness to Everness 1.3 Guide: Story, Duskmoor & Gauntlet",
+        href: "/neverness-to-everness",
+        type: "Guide Hub",
+        description:
+          "Start here to decide whether your next NTE 1.3 goal is Chapter 6, Duskmoor completion, a stuck Anomaly Commission, or Gauntlet of Valor.",
+        image:
+          "/images/neverness-to-everness/nte-chapter-6-fogden-building.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Version 1.3 progression, Chapter 7 before Chapter 6, Fogden Game, Duskmoor exploration, Anomaly Commissions, Gauntlet of Valor, Floor 99, and Infinity",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "NTE Chapter 6 Fogden Game Walkthrough & Puzzle Guide",
+        href:
+          "/neverness-to-everness/chapter-6-fogden-game-walkthrough",
+        type: "Walkthrough",
+        description:
+          "Clear Chapter 6 from the abandoned-building TV puzzle through 10 Lumen Circles, Shackled Past, the Helm of Theseus, final battle, and Bureau report.",
+        date: "Updated recently",
+        image:
+          "/images/neverness-to-everness/nte-chapter-6-fogden-building.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 281,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Fighting with a Dragon requirement, abandoned building, TV chain, right corridor, 10 Lumen Circles, Shackled Past, Helm of Theseus, Madam T, Fog Coffin Colossus, and Bureau report",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "NTE Duskmoor 100% Guide: All 50 Oracle Stones & Check-Ins",
+        href:
+          "/neverness-to-everness/duskmoor-100-percent-guide",
+        type: "Collectibles",
+        description:
+          "Clear Duskmoor with all 50 Oracle Stones, check-ins, road and lake routes, the 80 km/h motorcycle check, mountain cleanup, and missing-progress fixes.",
+        date: "Updated recently",
+        image:
+          "/images/neverness-to-everness/nte-duskmoor-tower-start.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 282,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "50 Oracle Stones, Wertheimer Tower, ReroRero Phone Booths, 80 km/h check-in, Teardrop Lake, western jumps, mountain Stone, volleyball, and stuck-below-100% fixes",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "NTE Duskmoor Anomaly Commissions Guide: All 6 & Rewards",
+        href:
+          "/neverness-to-everness/duskmoor-anomaly-commissions",
+        type: "Guide",
+        description:
+          "Complete all six Duskmoor Anomaly Commissions with trigger and spawn fixes, Twin Blooms resets, Mirror Wraith strategy, achievements, and Annulith rewards.",
+        date: "Updated recently",
+        image:
+          "/images/neverness-to-everness/nte-duskmoor-fawn-alone-night-route.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 283,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Fawn Alone, Lantern Parade, Twin Blooms, Finale: Da Capo, Sunken Door, Storybook Skirmish, Divergent Flowers, Mirror Wraith, rewards, and Annulith",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "NTE Gauntlet of Valor Guide: Floor 1–99, Infinity & Rewards",
+        href:
+          "/neverness-to-everness/gauntlet-of-valor-guide",
+        type: "Guide",
+        description:
+          "Push Gauntlet of Valor through Floors 1–99, diagnose late-floor walls, clear Floor 99, unlock Infinity, and judge the Mystery Button and Gold Coin rewards.",
+        date: "Updated recently",
+        image:
+          "/images/neverness-to-everness/nte-gauntlet-floor-99-boss-rush.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 284,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Floors 1–99, Floor 81 timer, Floors 90–98 bosses, Floor 99, Infinite Floor, Mystery Buttons, Warren Gold Coins, rewards, and farming value",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+    ],
+  },
+  {
     title: "Breathedge 2",
     game: "Breathedge 2",
     href: "/breathedge-2",
