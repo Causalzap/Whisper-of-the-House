@@ -3,99 +3,101 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaSymbolContent from "@/data/bombanana/symbol.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/symbol`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
+  `${siteUrl}/images/bombanana/bombanana-symbol-module.webp`,
+  `${siteUrl}/images/bombanana/bombanana-symbol-module-manual.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "find-sounding-symbol",
+    label: "Find the sounding symbol",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "why-first-attempts-fail",
+    label: "Why first attempts fail",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "four-stages",
+    label: "The four stages",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "clean-run",
+    label: "A clean Symbol solve",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "name-the-shapes",
+    label: "Name shapes consistently",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "similar-symbols",
+    label: "Similar symbol traps",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
+    id: "when-not-to-press",
+    label: "When not to press",
   },
   {
-    id: "communication",
-    label: "Communication failures",
+    id: "after-wrong-input",
+    label: "Reset after a mistake",
   },
   {
-    id: "manual",
-    label: "Other modules",
+    id: "level-8-practice",
+    label: "Practice on Level 8",
   },
   {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "symbol-or-communication",
+    label: "Rule or relay problem?",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
+    href: "/bombanana/piano",
+    label: "BOMBANANA Piano Guide",
   },
   {
-    href: "/bombanana/wire",
-    label: "BOMBANANA Cable / Wire Guide",
-  },
-  {
-    href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
+    href: "/bombanana/soundboard",
+    label: "BOMBANANA Soundboard Guide",
   },
   {
     href: "/bombanana/roles",
-    label: "BOMBANANA Roles Guide",
+    label: "BOMBANANA Roles & Communication Guide",
   },
   {
     href: "/bombanana/levels",
     label: "BOMBANANA Levels & Walkthrough",
+  },
+  {
+    href: "/bombanana/chaos",
+    label: "BOMBANANA Chaos Guide",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
   },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Symbol Guide: Sound, Stages & Buttons",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Find the sounding symbol, use the current stage to choose the right button, avoid shape mix-ups, and know when to replay Level 8.",
 
   alternates: {
     canonical:
@@ -104,10 +106,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Symbol Guide: Sound, Stages & Buttons",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Find the active sounding shape, keep the current stage straight, and turn each Symbol lookup into one confirmed color-button input.",
 
     url:
       pageUrl,
@@ -130,7 +132,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA Symbol Module with selectable shapes and colored answer buttons.",
       },
     ],
   },
@@ -140,10 +142,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Symbol Guide: Sound, Stages & Buttons",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Use the sounding symbol and current stage to choose the correct BOMBANANA Symbol button.",
 
     images: [
       imageUrls[0],
@@ -178,7 +180,6 @@ const jsonLd = {
           item:
             siteUrl,
         },
-
         {
           "@type":
             "ListItem",
@@ -192,7 +193,6 @@ const jsonLd = {
           item:
             `${siteUrl}/bombanana`,
         },
-
         {
           "@type":
             "ListItem",
@@ -201,14 +201,13 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Symbol Guide",
 
           item:
             pageUrl,
         },
       ],
     },
-
 
     {
       "@type":
@@ -226,10 +225,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Symbol Module Guide: Sound, Stages and Buttons",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Symbol Module guide covering how to identify the sounding shape, preserve a stable symbol name, use the current stage for the color-button answer, avoid look-alike symbol mistakes, recover after a bad input, and use Level 8 as the first fixed practice checkpoint.",
 
       image:
         imageUrls,
@@ -251,53 +250,57 @@ const jsonLd = {
           name:
             "BOMBANANA",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA module solver",
+            "BOMBANANA Symbol Module",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Cable Module",
+            "BOMBANANA sounding symbol",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Direction Module",
+            "BOMBANANA Symbol stages",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Calculator Module",
+            "BOMBANANA Symbol buttons",
         },
+      ],
 
+      mentions: [
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Braille",
+            "BOMBANANA Level 8",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA Level 10",
+        },
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Level 11",
         },
       ],
 
@@ -355,15 +358,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Symbol Module Guide"
+          description="Find the shape that is actually producing sound, keep the stage current, and turn one clear symbol description into the correct color-button input."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaSymbolContent />
         </GuideArticlePage>
       </main>
 

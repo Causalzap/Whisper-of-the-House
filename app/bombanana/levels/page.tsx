@@ -3,73 +3,64 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaLevelsContent from "@/data/bombanana/levels.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/levels`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
+  `${siteUrl}/images/bombanana/bombanana-campaign-level-11-select.webp`,
+  `${siteUrl}/images/bombanana/bombanana-piano-yellow-light.webp`,
   `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "all-levels",
+    label: "All 30 Campaign levels",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "levels-1-7",
+    label: "Levels 1–7",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "levels-8-15",
+    label: "Levels 8–15",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "levels-16-20",
+    label: "Levels 16–20",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "levels-21-24",
+    label: "Levels 21–24",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "levels-25-30",
+    label: "Levels 25–30",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
+    id: "first-appearances",
+    label: "Module first appearances",
   },
   {
-    id: "communication",
-    label: "Communication failures",
-  },
-  {
-    id: "manual",
-    label: "Other modules",
-  },
-  {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "replay-or-push",
+    label: "Replay or keep pushing",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
+    href: "/bombanana/module-solver",
+    label: "BOMBANANA Module Solver & Manual",
   },
   {
     href: "/bombanana/wire",
@@ -77,25 +68,29 @@ const relatedLinks = [
   },
   {
     href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
+    label: "BOMBANANA Calculator Guide & Solver",
   },
   {
     href: "/bombanana/roles",
     label: "BOMBANANA Roles Guide",
   },
   {
-    href: "/bombanana/levels",
-    label: "BOMBANANA Levels & Walkthrough",
+    href: "/bombanana/achievements",
+    label: "BOMBANANA Achievements Guide",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
   },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Levels & Walkthrough: All 30 Campaign Levels",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "See all 30 BOMBANANA Campaign levels, timers, modules, Chaos setups, first appearances, progression breakpoints, and when to replay or push ahead.",
 
   alternates: {
     canonical:
@@ -104,10 +99,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Levels & Walkthrough: All 30 Campaign Levels",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Follow BOMBANANA's 30-level Campaign from early Cable and Calculator training through Switch, Maze, Morse, Monkey-Says, and Random Hard endgame bombs.",
 
     url:
       pageUrl,
@@ -130,7 +125,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA Campaign level selector showing Level 11.",
       },
     ],
   },
@@ -140,10 +135,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Levels & Walkthrough: All 30 Campaign Levels",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "See every BOMBANANA Campaign level, module progression, first fixed appearances, Chaos setups, and the major difficulty breakpoints.",
 
     images: [
       imageUrls[0],
@@ -201,7 +196,7 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Levels & Walkthrough",
 
           item:
             pageUrl,
@@ -226,10 +221,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Levels & Walkthrough: All 30 Campaign Levels",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Campaign walkthrough covering all 30 levels, timers, fixed and random module compositions, Chaos combinations, first fixed module appearances, progression breakpoints, late-game Random Hard structure, and when a team should replay an earlier section instead of pushing forward.",
 
       image:
         imageUrls,
@@ -257,7 +252,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA module solver",
+            "BOMBANANA Campaign",
         },
 
         {
@@ -265,7 +260,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Cable Module",
+            "BOMBANANA levels",
         },
 
         {
@@ -273,7 +268,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Direction Module",
+            "BOMBANANA level walkthrough",
         },
 
         {
@@ -281,7 +276,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Calculator Module",
+            "BOMBANANA module progression",
         },
 
         {
@@ -289,15 +284,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Braille",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA Random Hard modules",
         },
       ],
 
@@ -355,15 +342,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Levels & Walkthrough: All 30 Campaign Levels"
+          description="See the full Campaign structure, where each major module first appears, what changes at each progression breakpoint, and when a weak module is worth practicing before the next level."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaLevelsContent />
         </GuideArticlePage>
       </main>
 

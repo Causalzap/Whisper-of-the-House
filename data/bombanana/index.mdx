@@ -1,599 +1,529 @@
 import Image from "next/image";
-import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
-import GuideTable from "@/components/GuideTable";
 import Link from "next/link";
 
-export const manualColumns = [
-  { key: "Module", label: "Module" },
-  { key: "Call Out", label: "Call Out" },
-  { key: "Critical Rule", label: "Critical Rule" },
-];
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
 
-export const manualRows = [
-  {
-    Module: "Wires / Cables",
-    "Call Out": "Wire count → LED color → wire colors left to right",
-    "Critical Rule":
-      "Repeat the final answer as both color and physical position before cutting.",
-  },
-  {
-    Module: "Direction / D-pad",
-    "Call Out": "LED color → Braille number",
-    "Critical Rule":
-      "Use one agreed left/right perspective for the entire run.",
-  },
-  {
-    Module: "Calculation / Numpad",
-    "Call Out": "Equation → raw result → LED color → odd/even",
-    "Critical Rule":
-      "The raw equation result is not the final key. Wait for the LED + odd/even lookup.",
-  },
-  {
-    Module: "Switch Panel",
-    "Call Out": "Full light order → all four numbers → switch positions",
-    "Critical Rule":
-      "The light order selects the rule family, and later rules can depend on earlier numbers.",
-  },
-];
 
-export const levelColumns = [
-  { key: "Level", label: "Level" },
-  { key: "Main Pressure", label: "Main Pressure" },
-  { key: "What Changes", label: "What Changes" },
-];
+<section id="quick-answer" className="scroll-mt-24">
+  <GuideQuickAnswer title="Find the Bottleneck Before You Retry">
 
-export const levelRows = [
-  {
-    Level: "Level 1",
-    "Main Pressure": "Wires",
-    "What Changes":
-      "Teaches the basic Blind / Deaf / Mute communication chain and final cut confirmation.",
-  },
-  {
-    Level: "Level 2",
-    "Main Pressure": "Direction / D-pad",
-    "What Changes":
-      "Adds LED + Braille direction calls and makes left/right perspective important.",
-  },
-  {
-    Level: "Level 3",
-    "Main Pressure": "Calculation / Numpad",
-    "What Changes":
-      "Adds a two-stage math module with a jumbled keypad and an LED + odd/even final key.",
-  },
-  {
-    Level: "Level 4",
-    "Main Pressure": "Combined modules",
-    "What Changes":
-      "Stacks familiar modules and punishes slow or overlapping callouts.",
-  },
-  {
-    Level: "Level 5",
-    "Main Pressure": "Switch Panel",
-    "What Changes":
-      "Introduces the manual-heavy switch logic. Level 5 is not the final level.",
-  },
-  {
-    Level: "Level 6",
-    "Main Pressure": "Multiple math + switch checks",
-    "What Changes":
-      "More information has to be kept separate while the timer leaves less room for re-explaining rules.",
-  },
-  {
-    Level: "Level 7",
-    "Main Pressure": "Full communication stress test",
-    "What Changes":
-      "The current playable version tops out here and can combine multiple switches, direction, and math.",
-  },
-];
+  **BOMBANANA** is built around three players sharing incomplete information as Blind, Deaf, and Mute. The full Campaign has **30 levels**, with **Endless** and **Custom** outside the main route.
 
-export const communicationColumns = [
-  { key: "Signal", label: "Signal" },
-  { key: "Meaning", label: "Recommended Meaning" },
-  { key: "Use", label: "When To Use It" },
-];
+  If the bomb is running and I already know what panel I am looking at, I go straight to the <Link href="/bombanana/module-solver">Module Solver</Link> for Cable, Direction, or Calculator.
 
-export const communicationRows = [
-  {
-    Signal: "Nod / thumbs up",
-    Meaning: "Yes / correct / do it",
-    Use: "Fast confirmation for wires, directions, and switches.",
-  },
-  {
-    Signal: "Shake / thumbs down",
-    Meaning: "No / wrong / leave it",
-    Use: "Stops the handler from turning every question into a long guessing loop.",
-  },
-  {
-    Signal: "Repeat once",
-    Meaning: "Repeat the last item",
-    Use: "Use when only one color, number, or direction was missed.",
-  },
-  {
-    Signal: "Repeat twice",
-    Meaning: "Re-read the entire module state",
-    Use: "Especially useful for switch rules that compare one number with another color's number.",
-  },
-  {
-    Signal: "Point + number",
-    Meaning: "Physical position",
-    Use: "Use first / second / third / fourth when color alone is not enough.",
-  },
-  {
-    Signal: "Rewind / undo",
-    Meaning: "Go back to the previous switch",
-    Use: "Needed when a later comparison reveals an earlier toggle was wrong.",
-  },
-];
+  If the problem is bigger than one lookup, I fix the actual bottleneck instead:
 
-export const wireExampleColumns = [
-  { key: "Observed Setup", label: "Observed Setup" },
-  { key: "Confirmed Action", label: "Confirmed Action" },
-  { key: "Why It Matters", label: "Why It Matters" },
-];
+  - physical Cable instructions → <Link href="/bombanana/wire">Cable / Wire</Link>
+  - Direction and Braille → <Link href="/bombanana/direction">Direction</Link>
+  - two-stage math → <Link href="/bombanana/calculator">Calculator</Link>
+  - hearing a symbol but not knowing which shape matters → <Link href="/bombanana/symbol">Symbol</Link>
+  - matching Braille and a light to a note sequence → <Link href="/bombanana/piano">Piano</Link>
+  - finding the sounding button and its 3×3 pattern → <Link href="/bombanana/soundboard">Soundboard</Link>
+  - keeping four lights and four numbers straight before Enter → <Link href="/bombanana/switch">Switch</Link>
+  - Chaos keeps interrupting the solve → <Link href="/bombanana/chaos">Chaos</Link>
+  - the answer keeps getting lost between players → <Link href="/bombanana/roles">Roles & Communication</Link>
+  - I need to know what to practice next → <Link href="/bombanana/levels">Levels & Walkthrough</Link>
 
-export const wireExampleRows = [
-  {
-    "Observed Setup": "3 wires, red LED, yellow / blue / green",
-    "Confirmed Action": "Cut the blue middle wire.",
-    "Why It Matters":
-      "Color alone is not enough; the final call should include the physical position.",
-  },
-  {
-    "Observed Setup": "3 wires, green LED, yellow / blue / green",
-    "Confirmed Action": "Cut the yellow first wire.",
-    "Why It Matters":
-      "The same wire colors can produce a different answer when the LED changes.",
-  },
-  {
-    "Observed Setup": "4 wires, green LED, first wire red",
-    "Confirmed Action": "A successful run cut the first red wire.",
-    "Why It Matters":
-      "Wire count belongs at the start of every callout because three-wire and four-wire branches differ.",
-  },
-];
+  </GuideQuickAnswer>
+</section>
 
-export const directionColumns = [
-  { key: "LED + Braille", label: "LED + Braille" },
-  { key: "Direction", label: "Observed Direction" },
-];
-
-export const directionRows = [
-  { "LED + Braille": "Red 1", Direction: "Up" },
-  { "LED + Braille": "Red 5", Direction: "Left" },
-  { "LED + Braille": "Red 7", Direction: "Right" },
-  { "LED + Braille": "Red 9", Direction: "Up" },
-  { "LED + Braille": "Green 1", Direction: "Left" },
-  { "LED + Braille": "Green 6", Direction: "Down" },
-  { "LED + Braille": "Green 7", Direction: "Up" },
-  { "LED + Braille": "Blue 1", Direction: "Right" },
-  { "LED + Braille": "Blue 3", Direction: "Up" },
-  { "LED + Braille": "Blue 6", Direction: "Left" },
-  { "LED + Braille": "Blue 7", Direction: "Down" },
-  { "LED + Braille": "Blue 9", Direction: "Left" },
-  { "LED + Braille": "Yellow 1", Direction: "Down" },
-  { "LED + Braille": "Yellow 2", Direction: "Left" },
-  { "LED + Braille": "Yellow 3", Direction: "Up" },
-  { "LED + Braille": "Yellow 5", Direction: "Up" },
-  { "LED + Braille": "Yellow 6", Direction: "Right" },
-  { "LED + Braille": "Yellow 7", Direction: "Left" },
-];
-
-export const numpadMapColumns = [
-  { key: "LED Color", label: "LED Color" },
-  { key: "Odd Result", label: "Odd Result" },
-  { key: "Even Result", label: "Even Result" },
-];
-
-export const numpadMapRows = [
-  { "LED Color": "Red", "Odd Result": "3", "Even Result": "5" },
-  { "LED Color": "Green", "Odd Result": "2", "Even Result": "9" },
-  { "LED Color": "Blue", "Odd Result": "0", "Even Result": "1" },
-  { "LED Color": "Yellow", "Odd Result": "7", "Even Result": "0" },
-];
-
-export const switchExampleColumns = [
-  { key: "Light Order + Numbers", label: "Light Order + Numbers" },
-  { key: "Observed Successful State", label: "Observed Successful State" },
-  { key: "What It Shows", label: "What It Shows" },
-];
-
-export const switchExampleRows = [
-  {
-    "Light Order + Numbers":
-      "Red / Yellow / Blue / Green — 4 / 3 / 2 / 6",
-    "Observed Successful State": "Down / Down / Up / Down",
-    "What It Shows":
-      "Some positions can depend on comparisons with another color's number.",
-  },
-  {
-    "Light Order + Numbers":
-      "Red / Yellow / Blue / Green — 7 / 9 / 3 / 6",
-    "Observed Successful State": "Up / Up / Down / Down",
-    "What It Shows":
-      "The same light order can produce a different switch pattern when the numbers change.",
-  },
-  {
-    "Light Order + Numbers":
-      "Red / Yellow / Blue / Green — 1 / 4 / 3 / 6",
-    "Observed Successful State": "Down / Up / Down / Down",
-    "What It Shows":
-      "The full four-number state matters; one number at a time is easy to misread or forget.",
-  },
-  {
-    "Light Order + Numbers":
-      "Red / Green / Blue / Yellow — 7 / 1 / 8 / 9",
-    "Observed Successful State": "Up / Up / Up / Up",
-    "What It Shows":
-      "Changing the light order moves the manual reader into a different rule family.",
-  },
-  {
-    "Light Order + Numbers":
-      "Green / Blue / Yellow / Red — 7 / 2 / 4 / 8",
-    "Observed Successful State": "Only the first switch up",
-    "What It Shows":
-      "Never carry a rule from one color order into another.",
-  },
-];
-
-<GuideQuickAnswer title="Quick Answer">
-**BOMBANANA** is a three-player co-op bomb-defusal game built around incomplete communication between Blind, Deaf, and Mute monkeys. The fastest way to stop losing runs is to standardize every callout: **module → position → required state → manual answer → repeat → confirm → input**.
-
-For the current playable version, there are **7 levels**. Wires need **wire count + LED + colors**, Direction needs **LED + Braille**, Numpad needs **equation result + LED + odd/even**, and Switches need the **full light order + all four numbers** before you touch Enter.
-</GuideQuickAnswer>
-
-<div className="my-4 text-sm text-slate-400">
-  Updated August 20, 2026. This is the main BOMBANANA manual and guide on the site. The current playable version contains 7 levels; module rules and level structure will be rechecked when the playable content changes.
-</div>
 
 <figure className="my-8">
   <Image
-    src="/images/bombanana/bombanana-tutorial-book.webp"
-    alt="BOMBANANA manual showing bomb modules, role restrictions, mistakes and Braille information"
+    src="/images/bombanana/bombanana-hub.webp"
+    alt="BOMBANANA three-player co-op bomb defusal gameplay"
     width={1600}
     height={900}
     priority={true}
-    className="rounded-xl"
+    className="mx-auto h-auto w-full rounded-xl"
   />
+
   <figcaption className="mt-3 text-sm text-slate-400">
-    I use the manual as a reference sheet, not something to read from the beginning while the timer is running. The team should already know what information each module needs.
+    A correct manual answer is only useful if it reaches the bomb handler in a form that can actually be used.
   </figcaption>
 </figure>
 
-<h2 id="manual-quick-reference">
-  BOMBANANA Manual Quick Reference
+
+<h2 id="what-the-game-tests" className="scroll-mt-24">
+  The Bomb Is Only Half of What the Team Is Solving
 </h2>
 
-If I only have a few seconds to identify a module, this is the information I call first. The main pattern is that **the manual holder should never have to ask what module we are talking about**.
+The opening levels can make BOMBANANA look like a stack of small logic puzzles.
 
-<GuideTable
-  caption="BOMBANANA manual quick reference."
-  columns={manualColumns}
-  rows={manualRows}
-/>
+That impression does not survive for long.
 
-The biggest improvement is to stop narrating everything on the bomb. I finish one module, say it is done, and only then start the next callout from the module name again.
+Blind handles the bomb.
 
-When I already know which panel is active and only need the next input, I use the <Link href="/bombanana/module-solver">BOMBANANA Module Solver</Link>. It handles Wire, Arrow / Direction, and Calculator without making me scan the manual again during the run.
+Mute has the manual.
 
-<h2 id="how-many-levels">
-  How Many Levels Are in BOMBANANA?
+Deaf sits between them.
+
+Those restrictions mean a team can understand the puzzle rule perfectly and still lose because the useful answer never arrives intact.
+
+A Cable lookup may return the correct color, while Blind needs a physical position.
+
+A Direction answer may be correct, while two players mean opposite things by “left.”
+
+A longer module can survive the lookup and then fail because the second or third value disappears during the relay.
+
+So before learning another rule, I ask a more useful question:
+
+**Where did the information stop being useful?**
+
+That question is the fastest way I know to separate a puzzle problem from a communication problem.
+
+
+<h2 id="diagnose-the-failure" className="scroll-mt-24">
+  Four Failures Can Look Like the Same Bad Run
 </h2>
 
-The **current playable BOMBANANA version has 7 levels**. Level 5 is not the end: the run continues through Level 6 and then Level 7, which is the current maximum.
+### I do not understand the rule
 
-The progression is useful because each level tells you what kind of communication failure the game is testing next. Early levels teach the language. Later levels test whether the same language still works when several modules appear together.
+The panel is visible, but I still do not know which information matters.
 
-<GuideTable
-  caption="BOMBANANA current level progression."
-  columns={levelColumns}
-  rows={levelRows}
-/>
+That needs the module guide.
 
-I would not memorize the exact module order as if every run were a fixed walkthrough. The useful part is knowing **what new pressure appears by that point** and which manual section your team should already understand.
+For the modules with mature dedicated pages:
 
-<h2 id="how-to-play">
-  How to Play BOMBANANA
-</h2>
+- <Link href="/bombanana/wire">Cable / Wire</Link>
+- <Link href="/bombanana/direction">Direction</Link>
+- <Link href="/bombanana/calculator">Calculator</Link>
+- <Link href="/bombanana/symbol">Symbol</Link>
+- <Link href="/bombanana/piano">Piano</Link>
+- <Link href="/bombanana/soundboard">Soundboard</Link>
+- <Link href="/bombanana/switch">Switch</Link>
 
-BOMBANANA only becomes manageable after the team stops treating it like normal co-op voice chat. Each player loses a different communication tool, so the group has to pass information through a chain instead of everyone shouting at the bomb at once.
+### I know the rule but cannot make the physical input
 
-### Blind
+Cable is the cleanest example.
 
-Blind handles the bomb and interacts with the physical modules. The important habit is to describe **position and state**, not just whatever detail seems most obvious. If I am on wires, I say the wire count and LED before the colors. If I am on Direction, I give the LED and Braille value before asking for a direction.
+Knowing the target color is not the same as telling Blind which cable to cut.
 
-### Deaf
+This is a translation problem, not another table lookup.
 
-Deaf is the visual relay. The role becomes much easier when I face the Mute player for the answer, translate the gesture into one instruction, then turn back to the bomb handler. Trying to follow two conversations at once is where clean information turns into noise.
+### The module changed and we kept using the old answer
 
-### Mute
+Some panels have stages or changing states.
 
-Mute holds the manual and has the correct logic but cannot simply explain it. The best questions are therefore short and answerable with **yes / no / number / direction / repeat**. A question like “Do we flip the second switch?” is much easier to answer than “What are we supposed to do with this panel?”
+A correct input can make the previous answer stale immediately.
 
-<h3>Agree on a small signal dictionary first</h3>
+When that happens, I read what the panel shows **now** instead of defending what was correct five seconds ago.
 
-The signal system does not need to be clever. It only needs to be consistent.
+### Everybody knows the answer and we still fail
 
-<GuideTable
-  caption="Useful BOMBANANA communication signals."
-  columns={communicationColumns}
-  rows={communicationRows}
-/>
+At that point I stop blaming the puzzle.
 
-The most valuable signal in later levels is **repeat all**. On the switch panel, the manual reader may discover that the current rule compares a number with the red value or another earlier value. If the team only repeats the last number, the manual holder still cannot solve the condition.
+If the right information repeatedly disappears between Mute, Deaf, and Blind, the problem belongs in the <Link href="/bombanana/roles">Roles & Communication Guide</Link>.
 
-<h2 id="wires-manual">
-  BOMBANANA Wires Manual
-</h2>
-
-Wires are the best module for learning the communication format because the information package is small:
-
-**wire count → LED color → wire colors left to right → final cut as color + position**.
-
-Do not skip the count. Three-wire and four-wire cases are not interchangeable. Do not stop at the color either; I repeat the final instruction as something like **“blue, second wire from the left”** before cutting.
 
 <figure className="my-8">
   <Image
-    src="/images/bombanana/bombanana-wire-module-led.webp"
-    alt="BOMBANANA wire module with colored cables and an LED condition"
+    src="/images/bombanana/bombanana-bomb-timer-mistakes.webp"
+    alt="BOMBANANA bomb timer and remaining mistake allowance"
     width={1600}
     height={900}
-    className="rounded-xl"
+    className="mx-auto h-auto w-full max-w-3xl rounded-xl"
   />
+
   <figcaption className="mt-3 text-sm text-slate-400">
-    The useful wire callout is not just a list of colors. Count, LED, left-to-right order, then one confirmed target.
+    The timer makes inefficient communication expensive long before every module itself becomes difficult.
   </figcaption>
 </figure>
 
-### Verified wire examples
 
-These are useful as worked examples, not as a substitute for the full in-game table.
-
-<GuideTable
-  caption="Observed BOMBANANA wire setups and successful actions."
-  columns={wireExampleColumns}
-  rows={wireExampleRows}
-/>
-
-The pattern worth remembering is not “red LED means X.” It is that the manual answer only makes sense after the team has delivered the **complete wire state**.
-
-<h2 id="direction-manual">
-  BOMBANANA Direction / D-pad and Braille Manual
+<h2 id="solver-or-guide" className="scroll-mt-24">
+  A Solver Helps Only After the Inputs Are Trustworthy
 </h2>
 
-Direction looks simple until the team realizes two different information channels are involved. The visible player calls the **LED color**, while the tactile / Braille value supplies the number. The manual holder combines those two pieces and returns a direction.
+There is a big difference between:
 
-My callout format is:
+**“I don't understand this panel.”**
 
-**Direction, [position]. [LED color]. Braille [number]. Waiting for direction.**
+and:
 
-The second problem is perspective. Players facing one another naturally mirror left and right, so we agree before the run that **left and right always mean the bomb handler's perspective**. Once that rule is fixed, the module becomes much faster.
+**“I have three cables, a Green light, and these three colors. Which position do I cut?”**
 
-### Observed LED + Braille direction reference
+The second problem is ready for a solver.
 
-The combinations below were repeated successfully in the runs I checked. I exclude combinations where the callouts conflicted rather than pretending every noisy attempt is a reliable manual answer.
+The current <Link href="/bombanana/module-solver">BOMBANANA Module Solver</Link> handles:
 
-<GuideTable
-  caption="Observed BOMBANANA Direction / D-pad combinations."
-  columns={directionColumns}
-  rows={directionRows}
-/>
+**Cable / Wire**
 
-If a wrong input resets or changes the panel, I start the callout again from the new LED and Braille number. Reusing the previous answer after the state changes is an easy way to burn another mistake.
+**Direction**
 
-<h2 id="calculation-manual">
-  BOMBANANA Calculation / Numpad Manual
+and:
+
+**Calculator**
+
+For those modules, the fastest path during a live bomb is:
+
+**read the required state → enter it → take the answer → act → look at the panel again**
+
+I do not use the solver as a substitute for understanding which fields belong to the current module.
+
+Bad input produces a very fast bad answer.
+
+
+<h2 id="campaign-learning-curve" className="scroll-mt-24">
+  The 30-Level Campaign Changes What the Team Has to Be Good At
 </h2>
 
-The Numpad is where the game stops being “just do the math.” It is a **two-stage module**.
+The Campaign is more useful as a training curve than as thirty separate bombs to memorize.
 
-1. Read the equation carefully and calculate the result.
-2. Enter that raw result on the keypad.
-3. Read the new LED color and classify the result as odd or even.
-4. Use the LED + odd/even mapping to get the final single digit.
+I think about it in five stretches.
 
-That third step is where many runs fail. The equation can be correct and the module can still be unfinished.
+### Levels 1–7: build a usable language
 
-<figure className="my-8">
-  <Image
-    src="/images/bombanana/bombanana-numpad-math-module.webp"
-    alt="BOMBANANA numpad math module with an equation, LED and shuffled keypad"
-    width={1600}
-    height={900}
-    className="rounded-xl"
-  />
-  <figcaption className="mt-3 text-sm text-slate-400">
-    Enter the raw equation result first. After that, the LED and odd/even state determine the final single-digit key.
-  </figcaption>
-</figure>
+The early game teaches short state packets and basic relay discipline.
 
-### Numpad final-key reference
+This is where Cable, Direction, Calculator, and the easier module pool expose whether the team can finish one conversation before starting another.
 
-<GuideTable
-  caption="Observed BOMBANANA LED and odd/even final-key mapping."
-  columns={numpadMapColumns}
-  rows={numpadMapRows}
-/>
+I would rather fix bad left/right language here than carry it into a level with several other problems active.
 
-A few concrete examples make the sequence easier to remember:
+### Levels 8–15: descriptions and sequences get longer
 
-- **54 + 6 = 60 → Green + even → final key 9**
-- **55 + 8 = 63 → Yellow + odd → final key 7**
-- **26 → Blue + even → final key 1**
-- **51 → Green + odd → final key 2**
-- **89 → Red + odd → final key 3**
-- **58 → Red + even → final key 5**
-- **54 - 30 = 24 → Yellow + even → final key 0**
+Symbol, Piano, and Soundboard change the amount of information being moved.
 
-The keypad itself can be shuffled. I always press the **printed number**, never the place where that number would normally sit on a standard keypad.
+A vague description that only wastes two seconds on an early Cable can become much more expensive when the team is holding a stage, color, Braille value, sound target, or note sequence.
 
-<h2 id="switch-manual">
-  BOMBANANA Switch Module Manual
+The dedicated <Link href="/bombanana/symbol">Symbol</Link>, <Link href="/bombanana/piano">Piano</Link>, and <Link href="/bombanana/soundboard">Soundboard</Link> guides own those procedures.
+
+### Levels 16–20: state integrity becomes the wall
+
+Switch enters as a fixed Campaign problem at Level 16.
+
+This is where partial information becomes especially dangerous because several ordered values belong to one solve.
+
+Maze also enters this part of the Campaign.
+
+If Level 16 already turns one Switch state into three rereads, I fix that before trying to learn the same communication habit under a busier bomb.
+
+### Levels 21–24: late modules arrive before the random-hard stretch
+
+Morse first becomes a fixed Campaign problem at **Level 21**.
+
+Monkey-Says follows at **Level 23**.
+
+If either one is the reason the team cannot advance, I use its first fixed appearance as the practice point instead of hoping a later random combination will be easier.
+
+### Levels 25–30: procedure matters more than memorizing a layout
+
+The final stretch leans heavily on **Random Hard** slots.
+
+By this point the question is no longer whether I remember one exact Level 27 bomb.
+
+It is whether the team's procedures still work when the module mix changes.
+
+The exact timers, module compositions, first fixed appearances, mistake limits, and all thirty Campaign setups stay in the <Link href="/bombanana/levels">Levels & Walkthrough</Link>.
+
+
+<h2 id="when-to-retry" className="scroll-mt-24">
+  One Explosion Is Noise; the Same Failure Twice Is a Pattern
 </h2>
 
-The Switch panel is the first module where partial information is genuinely dangerous. I do not solve it one color at a time as the numbers arrive. I collect the whole state first:
+I do not restart my whole approach after every bad run.
 
-**full light order → all four numbers → solve each physical switch → confirm all four → Enter**.
+A misclick is a misclick.
 
-<figure className="my-8">
-  <Image
-    src="/images/bombanana/bombanana-switch-module.webp"
-    alt="BOMBANANA switch module with four colored lights, four switch positions and Enter"
-    width={1600}
-    height={900}
-    className="rounded-xl"
-  />
-  <figcaption className="mt-3 text-sm text-slate-400">
-    The Switch panel is a four-part state, not four independent yes/no questions. Read the whole color order and all four numbers first.
-  </figcaption>
-</figure>
+A single missed warning can happen.
 
-### Why the light order matters
+A player can simply forget one value.
 
-The light order tells the manual holder **which rule family is active**. That is why the same color can require a different switch state in another run. A Red / Yellow / Blue / Green panel cannot safely reuse the logic from Green / Blue / Yellow / Red.
+The useful signal is repetition.
 
-### Why all four numbers matter
+If the same module causes the same failure twice, I stop feeding attempts into the next level.
 
-Some rules are direct, but others compare the current value with another color's number. In one successful sequence, a later switch depended on whether its number was greater than or less than the red value. If I only hear the current number, I may have to stop and request the entire sequence again.
+That might be:
 
-This is why our repeat language matters so much:
+- Cable repeatedly reaching Blind as a color instead of a position;
+- Direction repeatedly producing “your left or my left?”;
+- Calculator repeatedly confusing the raw result with the final key;
+- Soundboard repeatedly starting with all nine buttons instead of finding the sound first;
+- Switch repeatedly losing part of its full state;
+- a solved answer repeatedly disappearing somewhere in the role relay.
 
-- **repeat once** = say the last item again
-- **repeat twice** = re-read the full light order and all four numbers
+At that point another immediate retry is usually just another chance to reproduce the same mistake.
 
-### Verified switch setups
+I change one thing first.
 
-These examples show the behavior of the current manual without pretending they form a complete universal answer table.
 
-<GuideTable
-  caption="Observed BOMBANANA switch setups completed successfully."
-  columns={switchExampleColumns}
-  rows={switchExampleRows}
-/>
-
-The useful takeaway is that the switch state is generated from **both the order and the numbers**. If an answer looks inconsistent with the previous run, first check whether the color order changed before assuming the manual is wrong.
-
-<h2 id="levels-1-7">
-  BOMBANANA Levels 1–7 Guide
+<h2 id="module-decisions" className="scroll-mt-24">
+  Different Modules Reward Different Kinds of Discipline
 </h2>
 
-The level section is most useful as a progression guide. I use it to know which manual mechanic the team should be comfortable with before moving on, not as a fixed list of every module that must appear in the same position every run.
+The fastest improvement comes from stopping the assumption that every panel wants the same style of callout.
 
-### Level 1 — Learn the wire callout
+### Cable turns a lookup into a physical instruction
 
-Level 1 is where I establish the core rhythm: **module → state → answer → repeat → act**. The puzzle itself is simple enough that almost every failure comes from communication rather than logic.
+The manual can identify a color.
 
-If the Blind player hears only “cut blue,” that is still incomplete. I want “blue, second wire from the left” before the cut.
+Blind needs a position.
 
-### Level 2 — Add Direction and Braille
+The <Link href="/bombanana/wire">Cable / Wire Guide</Link> owns the full count, LED, target-color, and physical-position flow.
 
-Level 2 adds the Direction / D-pad problem. The important lesson is that the LED and Braille number belong together. Early attempts often fail because one player gives the color while another player assumes the number is decorative or already understood.
+### Direction combines a small rule with a perspective problem
 
-This is also where I lock the team's left/right perspective. Doing it later is too expensive.
+The exact answer comes from the light and Braille state.
 
-### Level 3 — The Numpad is two-stage
+The expensive mistake is often what happens after the answer is known.
 
-Level 3 introduces the math / Numpad flow. The common mistake is celebrating after the equation result is accepted. The LED that appears next is not decoration; it starts the second lookup.
+The <Link href="/bombanana/direction">Direction Guide</Link> owns the full mapping; the broader perspective convention belongs with Roles.
 
-Once the team starts saying **“result 63, Yellow, odd”** instead of just “63,” the module becomes much more reliable.
+### Calculator changes jobs halfway through
 
-### Level 4 — Stop talking over modules
+It starts as arithmetic.
 
-By Level 4, the challenge is less about discovering a new rule and more about maintaining clean separation between familiar modules. I say **“done”** after each solved panel and then restart the next callout from its name.
+After the raw result is entered, it becomes a second lookup.
 
-This prevents the manual holder from finishing a Numpad lookup while the bomb handler has already started describing Direction.
+That state change is why the <Link href="/bombanana/calculator">Calculator Guide</Link> keeps the complete worked examples and final-key logic in one place.
 
-### Level 5 — Switches become the real wall
+### Symbol, Piano, and Soundboard are not just “more difficult tables”
 
-Level 5 is **not the final level**. It is important because the Switch panel becomes the major new manual-heavy problem.
+They create longer chains.
 
-A successful Level 5 sequence included wires, Direction, and a four-switch panel. The first attempts became chaotic because the team read colors and numbers piecemeal. The later successful approach was much cleaner: collect the full light order, collect the full number string, then resolve switches one by one before Enter.
+Symbol cares about the sounding shape and current stage.
 
-### Level 6 — More state, less recovery time
+Piano holds an octave, active light, and note sequence.
 
-Level 6 can combine Direction, more than one math input, and Switch logic in the same run. The main danger is carrying stale information from one panel into the next.
+Soundboard first searches for the sounding button, then turns its state into a 3×3 input pattern.
 
-I reset the callout format every time we move modules. If we leave Numpad and move to Switches, the first words should be **“Switches, [position]”**, not another number with no context.
+Trying to describe everything visible at once makes all three harder than they need to be.
 
-### Level 7 — Current final level
+### Switch punishes incomplete state
 
-Level 7 is the current maximum. In the runs I checked it could include **multiple Switch panels plus Direction and math**, which turns the level into a communication stress test rather than a brand-new tutorial.
+Switch is different again.
 
-The best run solved the Switch state first, moved through Direction with short LED + number calls, then finished the math with only seconds left. That is exactly why I do not want to learn a new communication language on Level 7; every signal should already be automatic.
+Its useful input is a complete ordered state rather than one color or one number arriving in isolation.
 
-<h2 id="best-module-order">
-  Best Module Order in BOMBANANA
+The <Link href="/bombanana/switch">Switch Guide</Link> is where I keep that full read → resolve → confirm → Enter process.
+
+
+<h2 id="chaos-priority" className="scroll-mt-24">
+  Chaos Changes the Meaning of “What Should We Solve Next?”
 </h2>
 
-There is no single order I force onto every bomb, but I use one practical rule: **take the fastest familiar win first, then spend the saved time on the manual-heavy panel**.
+A normal defusal module has an answer.
 
-My default priority is:
+Chaos creates an ongoing demand for attention.
 
-1. **Wires** if the state is immediately readable.
-2. **Direction** once the team has the LED + Braille mapping and perspective locked down.
-3. **Numpad** if the arithmetic is straightforward and the manual holder is ready for the second-stage key.
-4. **Switches** when the whole team can stop and give the manual holder the complete state cleanly.
+That is why I do not force one universal module order onto every bomb.
 
-The exception is a level with multiple Switch panels or an awkward bomb layout. In that case I may start with the slow module while everyone is calm instead of saving it for the final ten seconds.
+A familiar panel that can be finished immediately may be worth clearing.
 
-<h2 id="common-mistakes">
-  Common BOMBANANA Mistakes
+A Chaos control already moving toward danger can override that plan.
+
+The practical question becomes:
+
+**What action keeps the run alive without destroying the state we were already solving?**
+
+I stabilize urgent danger first, then return to a confirmed current state on the interrupted module.
+
+The full Campaign ramp from one Chaos control to stacked Alarm, Pressure, and Slider pressure belongs in the <Link href="/bombanana/chaos">Chaos Guide</Link>.
+
+
+<h2 id="buy-or-skip" className="scroll-mt-24">
+  The Three-Person Group Matters More Than the Puzzle List
 </h2>
 
-The failures that cost us the most time were usually not obscure puzzle rules. They were communication errors that repeated across several modules.
+I would buy BOMBANANA when I already have **three people** who enjoy getting better at communication together.
 
-### Giving information without naming the module
+The strongest part of the game is the improvement curve:
 
-“Red, seven” is useless if the manual holder does not know whether I mean Direction, Numpad, or Switches. Start with the module and position.
+a call that takes thirty confused seconds becomes a short packet;
 
-### Forgetting wire count
+a shape that had three different names gets one stable name;
 
-Three-wire and four-wire cases use different branches. Wire count belongs before the colors.
+a failed relay turns into a repeatable convention;
 
-### Mirroring left and right
+a role swap suddenly makes the whole group faster.
 
-When players face each other, one person's left is the other's right. Decide whose perspective is authoritative before the timer starts.
+That is the fun loop.
 
-### Treating the math result as the final Numpad answer
+I would hesitate when getting three people together is already going to be the hardest part of every session.
 
-The raw equation result is only stage one. After it is entered, read the new LED and odd/even state before pressing the final key.
+The core design expects Blind, Deaf, and Mute to hold different pieces of the solution.
 
-### Reading Switch information one item at a time
+If my group mainly wants puzzles where one person can understand the answer and simply read it aloud, BOMBANANA's restrictions may feel like friction rather than the point of the game.
 
-Switch rules can refer back to another color's number. Read the complete light order and complete four-number string first.
+So my purchase decision is less:
 
-### Pressing Enter with one uncertain switch
+**“Do these individual puzzles look clever?”**
 
-A panel with three confirmed switches and one guess is still a failed panel. If one state is uncertain, use the rewind or repeat-all signal before Enter.
+and more:
 
-### Reusing the old state after a mistake
+**“Will these three people enjoy solving communication mistakes together?”**
 
-A wrong input can change the state you are looking at. Re-read the module instead of repeating the previous answer automatically.
 
-<h2 id="faq">
-  BOMBANANA FAQ
+<h2 id="roles-and-swapping" className="scroll-mt-24">
+  A Bad Role Fit Can Look Like a Hard Module
 </h2>
 
-### How many levels are in BOMBANANA?
+Sometimes the puzzle is not getting harder.
 
-The current playable version has **7 levels**, and Level 7 is the current maximum.
+The wrong player is simply doing the wrong job.
 
-### Is Level 5 the final BOMBANANA level?
+If Mute consistently finds the correct manual answer but cannot compress it into something Deaf can relay, another hour of memorizing the table may not fix the run.
 
-No. Level 5 is where the Switch panel becomes a major new mechanic, but the current progression continues through Levels 6 and 7.
+If Deaf keeps losing ordered states, longer modules will magnify that weakness.
 
-### What should I call out first for every module?
+If Blind understands every instruction but hesitates because physical positions are vague, the group needs cleaner action language.
 
-Start with the **module name and position**. Then give only the state that module needs: wire count and LED for Wires, LED + Braille for Direction, equation result + LED + odd/even for Numpad, or full light order + four numbers for Switches.
+I consider a role swap when the same type of failure survives across several different modules.
 
-### Why does the Numpad need another number after I solve the equation?
+That tells me the bottleneck probably belongs to the player-role fit rather than one rule.
 
-Because the calculation module is two-stage. The equation result is entered first, then the LED color and odd/even classification select the final single-digit key.
+The full Blind / Deaf / Mute workflow, gesture conventions, physical-position language, and swap decisions are in the <Link href="/bombanana/roles">Roles Guide</Link>.
 
-### Why do Switch answers change between runs?
 
-Because the panel does not use one universal color-to-position rule. The **light order selects the rule family**, and the four numbers determine which conditions are true in that run.
+<h2 id="modes" className="scroll-mt-24">
+  Campaign First, Then Choose Endless or Custom for a Reason
+</h2>
 
-### What should I do if a Switch answer turns out to be wrong?
+The full release includes:
 
-Do not immediately press Enter again. Re-read the full color order and all four numbers, identify which physical switch needs to change, correct it, and only then confirm the full panel.
+**Campaign**
+
+**Endless**
+
+and:
+
+**Custom**
+
+Campaign is where I start.
+
+Its progression gives the team a chance to discover one weakness at a time before the harder module pools and heavier Chaos combinations arrive.
+
+Endless makes more sense once the basic procedures already work.
+
+At that point I am testing how long the team can preserve those procedures while pressure keeps accumulating.
+
+Custom serves a different purpose.
+
+I use it when I want more control over the kind of run the group is practicing rather than treating the next Campaign clear as the only useful result.
+
+The mode choice becomes simple:
+
+**still learning how modules work → Campaign**
+
+**testing sustained execution → Endless**
+
+**practicing or experimenting with a chosen setup → Custom**
+
+
+<h2 id="late-game-bottlenecks" className="scroll-mt-24">
+  Maze, Morse, and Monkey-Says Are Better Practiced Before the Final Six Levels
+</h2>
+
+Not every later module needs to become a separate study project immediately.
+
+The Campaign already gives useful checkpoints.
+
+**Maze** first gets a fixed slot at **Level 18**.
+
+**Morse** first gets a fixed slot at **Level 21**.
+
+**Monkey-Says** first gets a fixed slot at **Level 23**.
+
+If one of those modules is eating most of the timer, I would rather practice around its first fixed appearance than wait for Levels 25–30, where Random Hard slots make the surrounding bomb less predictable.
+
+That gives me a cleaner diagnosis:
+
+**Is this specific module still the problem, or does the team fall apart only after several hard states are active at once?**
+
+Those are different problems, and they need different fixes.
+
+
+<h2 id="completion" className="scroll-mt-24">
+  Finishing Level 30 and Finishing the Game Are Different Goals
+</h2>
+
+The current Steam achievement set has **23 achievements**.
+
+A player going for full completion has different priorities from a group still learning Campaign modules.
+
+The cleanup includes Campaign milestones, Endless targets, repeated actions, hidden achievements, and several goals that are much faster when grouped into the same session.
+
+I keep the complete **23 / 23** checklist and cleanup route on the <Link href="/bombanana/achievements">BOMBANANA Achievements Guide</Link> rather than mixing those goals into the Campaign walkthrough.
+
+
+<h2 id="session-stop" className="scroll-mt-24">
+  I Stop the Session When the Retry Has No New Information
+</h2>
+
+There is a useful difference between frustration and diagnosis.
+
+If the team can say:
+
+**“We pressed before confirming the fourth Switch.”**
+
+that is actionable.
+
+If the answer is:
+
+**“I thought you meant the other one.”**
+
+I need to know which part of the relay made “the other one” possible.
+
+If everyone is still arguing about what happened, immediately starting the next attempt usually adds another explosion without adding a lesson.
+
+I make one convention concrete first.
+
+For example:
+
+**everything is counted left to right**
+
+or:
+
+**Direction always uses Blind's perspective**
+
+or:
+
+**“again” means repeat the last value, while “reset call” means read the whole state again**
+
+Then I retry.
+
+The next run should contain at least one deliberate change.
+
+
+<h2 id="ktane" className="scroll-mt-24">
+  Is BOMBANANA Like Keep Talking and Nobody Explodes?
+</h2>
+
+They sit in the same broad family of co-op bomb-defusal games where information is split between the person interacting with the bomb and the people working from instructions.
+
+BOMBANANA's defining twist is the **three-role chain**.
+
+Blind, Deaf, and Mute do not simply share one open voice channel with equal access to the same information.
+
+The answer often has to be transformed as it moves between players.
+
+That makes the communication restriction itself part of the puzzle rather than just the way the manual is delivered.
+
+
+<h2 id="what-to-learn" className="scroll-mt-24">
+  I Would Memorize the Input Packet Before Memorizing the Answer Table
+</h2>
+
+The manual contains a lot of possible answers.
+
+Most runs use only a small fraction of them.
+
+The more reusable skill is knowing what each panel needs before anybody begins speaking.
+
+If I can identify:
+
+**which module this is**
+
+**which state matters**
+
+**which player can see or hear that state**
+
+**what form the final instruction must take**
+
+then the manual and solver can do their jobs quickly.
+
+If those four pieces are still unclear, memorizing another row of answers usually does not fix the real bottleneck.
+
+That is the overall rule I carry through BOMBANANA:
+
+**understand the state, preserve it through the relay, then make one confirmed action.**

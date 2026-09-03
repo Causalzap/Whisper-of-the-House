@@ -6,18 +6,22 @@ import {
 } from "react";
 
 import {
-  solveWire,
+  isWireCount,
+  solveWireDetailed,
   wireColors,
   wireLights,
   type WireColor,
   type WireCount,
   type WireLight,
+  type WireSolution,
 } from "@/data/bombanana/wireRules";
 
 import {
   arrowLights,
   arrowNumbers,
-  arrowRules,
+  getArrowDirection,
+  getDirectionLabel,
+  isArrowNumber,
   type ArrowLight,
   type ArrowNumber,
   type Direction,
@@ -35,10 +39,15 @@ import {
 } from "@/data/bombanana/calculatorRules";
 
 
-type ModuleType =
+export type BombananaModuleType =
   | "wire"
   | "arrow"
   | "calculator";
+
+
+export type BombananaModuleSolverProps = {
+  defaultModule?: BombananaModuleType;
+};
 
 
 type WireSlot =
@@ -53,35 +62,32 @@ const moduleTabs = [
   },
   {
     id: "arrow",
-    label: "Arrow",
+    label: "Direction",
   },
   {
     id: "calculator",
     label: "Calculator",
   },
 ] as const satisfies readonly {
-  id: ModuleType;
+  id: BombananaModuleType;
   label: string;
 }[];
 
 
-const directionLabels: Record<
-  Direction,
-  string
-> = {
-  up: "↑ Up",
-  down: "↓ Down",
-  left: "← Left",
-  right: "→ Right",
-};
+/* ========================================
+ * Main Solver
+ * ====================================== */
 
-
-export default function BombananaModuleSolver() {
+export default function BombananaModuleSolver({
+  defaultModule = "wire",
+}: BombananaModuleSolverProps) {
   const [
     activeModule,
     setActiveModule,
   ] =
-    useState<ModuleType>("wire");
+    useState<BombananaModuleType>(
+      defaultModule
+    );
 
 
   return (
@@ -90,7 +96,6 @@ export default function BombananaModuleSolver() {
         <div className="text-base font-semibold">
           Module Solver
         </div>
-
 
         <div
           className="grid grid-cols-3 gap-1 rounded-lg bg-gray-100 p-1"
@@ -142,7 +147,6 @@ export default function BombananaModuleSolver() {
           </div>
         )}
 
-
         {activeModule === "arrow" && (
           <div
             id="module-panel-arrow"
@@ -153,8 +157,8 @@ export default function BombananaModuleSolver() {
           </div>
         )}
 
-
-        {activeModule === "calculator" && (
+        {activeModule ===
+          "calculator" && (
           <div
             id="module-panel-calculator"
             role="tabpanel"
@@ -207,10 +211,9 @@ function WireSolver() {
     answer,
     setAnswer,
   ] =
-    useState<{
-      position: number;
-      color: WireColor;
-    } | null>(null);
+    useState<WireSolution | null>(
+      null
+    );
 
   const [
     message,
@@ -245,6 +248,30 @@ function WireSolver() {
     );
 
     clearResult();
+  }
+
+
+  function handleCountChange(
+    rawValue: string
+  ) {
+    const nextCount =
+      Number(rawValue);
+
+    if (
+      !isWireCount(nextCount)
+    ) {
+      setAnswer(null);
+
+      setMessage(
+        "Wire modules use either 3 or 4 cables."
+      );
+
+      return;
+    }
+
+    changeCount(
+      nextCount
+    );
   }
 
 
@@ -297,47 +324,67 @@ function WireSolver() {
 
 
     const selectedWires =
-      wires as WireColor[];
+      wires.filter(
+        (
+          wire
+        ): wire is WireColor =>
+          wire !== ""
+      );
 
 
     const result =
-      solveWire(
+      solveWireDetailed(
         selectedWires,
         light
       );
 
 
-    if (!result) {
+    /*
+     * Use property narrowing instead of:
+     *
+     * if (!result.ok)
+     *
+     * This is more reliable across TypeScript
+     * configurations for the discriminated union.
+     */
+    if ("error" in result) {
       setAnswer(null);
 
-      setMessage(
-        "No solution found. Re-check the wire count, order, and LED."
-      );
+      switch (
+        result.error
+      ) {
+        case "invalid-wire-count":
+          setMessage(
+            "Wire modules use either 3 or 4 cables. Re-check the cable count."
+          );
 
-      return;
-    }
-
-
-    const matches =
-      selectedWires.filter(
-        (color) =>
-          color === result.color
-      ).length;
+          return;
 
 
-    if (matches !== 1) {
-      setAnswer(null);
+        case "target-color-missing":
+          setMessage(
+            `${capitalize(
+              result.targetColor
+            )} is the target color, but it is missing from the selected cable order. Re-check the colors from left to right.`
+          );
 
-      setMessage(
-        "The target color is missing or appears more than once. Re-check the panel."
-      );
+          return;
 
-      return;
+
+        case "target-color-duplicated":
+          setMessage(
+            `${capitalize(
+              result.targetColor
+            )} appears more than once. Re-check the cable colors before cutting.`
+          );
+
+          return;
+      }
     }
 
 
     setAnswer(
-      result
+      result.solution
     );
 
     setMessage("");
@@ -362,7 +409,8 @@ function WireSolver() {
   return (
     <div className="space-y-3">
       <PanelIntro>
-        Count + LED + wires from left to right
+        Count + LED + cables from
+        left to right
       </PanelIntro>
 
 
@@ -371,13 +419,13 @@ function WireSolver() {
           <select
             value={count}
             onChange={(event) =>
-              changeCount(
-                Number(
-                  event.target.value
-                ) as WireCount
+              handleCountChange(
+                event.target.value
               )
             }
-            className={inputClassName}
+            className={
+              inputClassName
+            }
           >
             <option value={3}>
               3 wires
@@ -395,14 +443,17 @@ function WireSolver() {
             value={light}
             onChange={(event) => {
               setLight(
-                event.target.value as
+                event.target
+                  .value as
                   | WireLight
                   | ""
               );
 
               clearResult();
             }}
-            className={inputClassName}
+            className={
+              inputClassName
+            }
           >
             <option
               value=""
@@ -433,7 +484,6 @@ function WireSolver() {
           Wire colors
         </div>
 
-
         <div
           className={[
             "grid gap-2",
@@ -458,13 +508,18 @@ function WireSolver() {
                 <select
                   value={wire}
                   aria-label={`Wire ${index + 1} color`}
-                  onChange={(event) =>
+                  onChange={(
+                    event
+                  ) =>
                     changeWire(
                       index,
-                      event.target.value as WireSlot
+                      event.target
+                        .value as WireSlot
                     )
                   }
-                  className={inputClassName}
+                  className={
+                    inputClassName
+                  }
                 >
                   <option
                     value=""
@@ -475,18 +530,18 @@ function WireSolver() {
 
                   {wireColors.map(
                     (color) => {
-                      const usedElsewhere =
-                        wires.some(
-                          (
-                            selected,
-                            selectedIndex
-                          ) =>
-                            selectedIndex !==
-                              index &&
-                            selected ===
-                              color
-                        );
-
+                      const
+                        usedElsewhere =
+                          wires.some(
+                            (
+                              selected,
+                              selectedIndex
+                            ) =>
+                              selectedIndex !==
+                                index &&
+                              selected ===
+                                color
+                          );
 
                       return (
                         <option
@@ -544,7 +599,7 @@ function WireSolver() {
 
 
 /* ========================================
- * Arrow
+ * Direction
  * ====================================== */
 
 function ArrowSolver() {
@@ -552,19 +607,25 @@ function ArrowSolver() {
     light,
     setLight,
   ] =
-    useState<ArrowLight | "">("");
+    useState<
+      ArrowLight | ""
+    >("");
 
   const [
     number,
     setNumber,
   ] =
-    useState<ArrowNumber | "">("");
+    useState<
+      ArrowNumber | ""
+    >("");
 
   const [
     answer,
     setAnswer,
   ] =
-    useState<Direction | null>(null);
+    useState<
+      Direction | null
+    >(null);
 
   const [
     message,
@@ -576,6 +637,45 @@ function ArrowSolver() {
   function clearResult() {
     setAnswer(null);
     setMessage("");
+  }
+
+
+  function changeNumber(
+    rawValue: string
+  ) {
+    if (
+      rawValue === ""
+    ) {
+      setNumber("");
+      clearResult();
+
+      return;
+    }
+
+
+    const nextNumber =
+      Number(rawValue);
+
+
+    if (
+      !isArrowNumber(
+        nextNumber
+      )
+    ) {
+      setNumber("");
+      setAnswer(null);
+
+      setMessage("Direction uses Braille numbers 1 through 9.");
+
+      return;
+    }
+
+
+    setNumber(
+      nextNumber
+    );
+
+    clearResult();
   }
 
 
@@ -591,7 +691,9 @@ function ArrowSolver() {
     }
 
 
-    if (number === "") {
+    if (
+      number === ""
+    ) {
       setAnswer(null);
 
       setMessage(
@@ -602,29 +704,15 @@ function ArrowSolver() {
     }
 
 
-    const result =
-      arrowRules.find(
-        (rule) =>
-          rule.light ===
-            light &&
-          rule.number ===
-            number
+    const direction =
+      getArrowDirection(
+        light,
+        number
       );
-
-
-    if (!result) {
-      setAnswer(null);
-
-      setMessage(
-        "No matching direction found."
-      );
-
-      return;
-    }
 
 
     setAnswer(
-      result.answer
+      direction
     );
 
     setMessage("");
@@ -652,14 +740,17 @@ function ArrowSolver() {
             value={light}
             onChange={(event) => {
               setLight(
-                event.target.value as
+                event.target
+                  .value as
                   | ArrowLight
                   | ""
               );
 
               clearResult();
             }}
-            className={inputClassName}
+            className={
+              inputClassName
+            }
           >
             <option
               value=""
@@ -690,21 +781,14 @@ function ArrowSolver() {
         >
           <select
             value={number}
-            onChange={(event) => {
-              setNumber(
-                event.target.value ===
-                  ""
-                  ? ""
-                  : Number(
-                      event
-                        .target
-                        .value
-                    ) as ArrowNumber
-              );
-
-              clearResult();
-            }}
-            className={inputClassName}
+            onChange={(event) =>
+              changeNumber(
+                event.target.value
+              )
+            }
+            className={
+              inputClassName
+            }
           >
             <option
               value=""
@@ -744,9 +828,9 @@ function ArrowSolver() {
       {answer && (
         <AnswerStrip>
           Press{" "}
-          {directionLabels[
+          {getDirectionLabel(
             answer
-          ]}
+          )}
         </AnswerStrip>
       )}
     </div>
@@ -775,31 +859,41 @@ function CalculatorSolver() {
     operator,
     setOperator,
   ] =
-    useState<CalculatorOperator>("+");
+    useState<CalculatorOperator>(
+      "+"
+    );
 
   const [
     result,
     setResult,
   ] =
-    useState<number | null>(null);
+    useState<
+      number | null
+    >(null);
 
   const [
     parity,
     setParity,
   ] =
-    useState<Parity | null>(null);
+    useState<
+      Parity | null
+    >(null);
 
   const [
     light,
     setLight,
   ] =
-    useState<CalculatorLight | "">("");
+    useState<
+      CalculatorLight | ""
+    >("");
 
   const [
     finalAnswer,
     setFinalAnswer,
   ] =
-    useState<CalculatorKey | null>(null);
+    useState<
+      CalculatorKey | null
+    >(null);
 
   const [
     message,
@@ -862,8 +956,15 @@ function CalculatorSolver() {
       nextParity
     );
 
+    /*
+     * The LED belongs to stage two.
+     * Every newly calculated equation
+     * therefore starts with no LED.
+     */
     setLight("");
+
     setFinalAnswer(null);
+
     setMessage("");
   }
 
@@ -903,7 +1004,13 @@ function CalculatorSolver() {
     );
 
 
-    if (answer === null) {
+    /*
+     * 0 is a valid Calculator answer.
+     * Only null means no matching rule.
+     */
+    if (
+      answer === null
+    ) {
       setMessage(
         "No matching final-key rule found."
       );
@@ -950,7 +1057,9 @@ function CalculatorSolver() {
           }}
           placeholder="First"
           aria-label="First number"
-          className={inputClassName}
+          className={
+            inputClassName
+          }
         />
 
 
@@ -965,7 +1074,9 @@ function CalculatorSolver() {
             clearCalculation();
           }}
           aria-label="Operator"
-          className={operatorClassName}
+          className={
+            operatorClassName
+          }
         >
           <option value="+">
             +
@@ -991,7 +1102,9 @@ function CalculatorSolver() {
           }}
           placeholder="Second"
           aria-label="Second number"
-          className={inputClassName}
+          className={
+            inputClassName
+          }
         />
       </div>
 
@@ -1000,7 +1113,9 @@ function CalculatorSolver() {
         <button
           type="button"
           onClick={calculate}
-          className={primaryButtonClassName}
+          className={
+            primaryButtonClassName
+          }
         >
           Calculate
         </button>
@@ -1036,7 +1151,9 @@ function CalculatorSolver() {
             <CompactField label="LED after result">
               <select
                 value={light}
-                onChange={(event) =>
+                onChange={(
+                  event
+                ) =>
                   changeLight(
                     event.target
                       .value as
@@ -1044,7 +1161,9 @@ function CalculatorSolver() {
                       | ""
                   )
                 }
-                className={inputClassName}
+                className={
+                  inputClassName
+                }
               >
                 <option
                   value=""
@@ -1056,8 +1175,12 @@ function CalculatorSolver() {
                 {calculatorLights.map(
                   (color) => (
                     <option
-                      key={color}
-                      value={color}
+                      key={
+                        color
+                      }
+                      value={
+                        color
+                      }
                     >
                       {capitalize(
                         color
@@ -1153,7 +1276,9 @@ function ActionRow({
       <button
         type="button"
         onClick={onSolve}
-        className={primaryButtonClassName}
+        className={
+          primaryButtonClassName
+        }
       >
         Solve
       </button>
@@ -1175,7 +1300,9 @@ function ResetButton({
     <button
       type="button"
       onClick={onClick}
-      className={resetButtonClassName}
+      className={
+        resetButtonClassName
+      }
     >
       Reset
     </button>

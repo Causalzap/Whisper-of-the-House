@@ -1,8 +1,13 @@
+export const directions = [
+  "up",
+  "down",
+  "left",
+  "right",
+] as const;
+
+
 export type Direction =
-  | "up"
-  | "down"
-  | "left"
-  | "right";
+  typeof directions[number];
 
 
 export const arrowLights = [
@@ -25,6 +30,7 @@ export const arrowNumbers = [
   5,
   6,
   7,
+  8,
   9,
 ] as const;
 
@@ -40,257 +46,283 @@ export type ArrowRule = {
 };
 
 
+export type ArrowSolution = {
+  light: ArrowLight;
+  number: ArrowNumber;
+  direction: Direction;
+};
+
+
+export type ArrowSolveResult =
+  | {
+      ok: true;
+      solution: ArrowSolution;
+    }
+  | {
+      ok: false;
+      error: "unsupported-braille-number";
+      number: number;
+    };
+
+
 /**
  * BOMBANANA Arrow / Direction module rules.
  *
  * Input:
- * - LED light color
- * - Braille number
  *
- * Output:
- * - Direction to press
+ * active LED
+ * +
+ * current Braille number
+ * =
+ * direction to press
  *
- * Note:
- * The Direction module uses:
+ * Supported Direction numbers:
+ *
  * 1, 2, 3, 4, 5, 6, 7, 9
  *
- * There is no number 8 in this module.
+ * Number 8 is not used by this module.
+ *
+ * The nested Record makes TypeScript verify that
+ * every supported number contains every LED color.
  */
-export const arrowRules: ArrowRule[] = [
-
-  // =========================
-  // Number 1
-  // =========================
-
-  {
-    light: "red",
-    number: 1,
-    answer: "up",
+export const arrowRuleMap = {
+  1: {
+    red: "up",
+    blue: "right",
+    green: "left",
+    yellow: "down",
   },
 
-  {
-    light: "yellow",
-    number: 1,
-    answer: "down",
+  2: {
+    red: "right",
+    blue: "down",
+    green: "up",
+    yellow: "left",
   },
 
-  {
-    light: "green",
-    number: 1,
-    answer: "left",
+  3: {
+    red: "left",
+    blue: "up",
+    green: "right",
+    yellow: "up",
   },
 
-  {
-    light: "blue",
-    number: 1,
-    answer: "right",
+  4: {
+    red: "up",
+    blue: "right",
+    green: "left",
+    yellow: "down",
   },
 
-
-  // =========================
-  // Number 2
-  // =========================
-
-  {
-    light: "red",
-    number: 2,
-    answer: "right",
+  5: {
+    red: "left",
+    blue: "up",
+    green: "right",
+    yellow: "up",
   },
 
-  {
-    light: "yellow",
-    number: 2,
-    answer: "left",
+  6: {
+    red: "up",
+    blue: "left",
+    green: "down",
+    yellow: "right",
   },
 
-  {
-    light: "green",
-    number: 2,
-    answer: "up",
+  7: {
+    red: "right",
+    blue: "down",
+    green: "up",
+    yellow: "left",
   },
 
-  {
-    light: "blue",
-    number: 2,
-    answer: "down",
+  8: {
+    red: "up",
+    blue: "left",
+    green: "down",
+    yellow: "right",
   },
 
-
-  // =========================
-  // Number 3
-  // =========================
-
-  {
-    light: "red",
-    number: 3,
-    answer: "left",
+  9: {
+    red: "up",
+    blue: "left",
+    green: "down",
+    yellow: "right",
   },
-
-  {
-    light: "yellow",
-    number: 3,
-    answer: "up",
-  },
-
-  {
-    light: "green",
-    number: 3,
-    answer: "right",
-  },
-
-  {
-    light: "blue",
-    number: 3,
-    answer: "up",
-  },
+} as const satisfies Record<
+  ArrowNumber,
+  Record<ArrowLight, Direction>
+>;
 
 
-  // =========================
-  // Number 4
-  // Same pattern as 1
-  // =========================
-
-  {
-    light: "red",
-    number: 4,
-    answer: "up",
-  },
-
-  {
-    light: "yellow",
-    number: 4,
-    answer: "down",
-  },
-
-  {
-    light: "green",
-    number: 4,
-    answer: "left",
-  },
-
-  {
-    light: "blue",
-    number: 4,
-    answer: "right",
-  },
+/**
+ * Flat representation of the Direction rules.
+ *
+ * Keep this export for:
+ *
+ * - existing Solver code
+ * - guide tables
+ * - debugging
+ * - tests
+ *
+ * arrowRuleMap remains the single source of truth.
+ */
+export const arrowRules: ArrowRule[] =
+  arrowNumbers.flatMap(
+    (number) =>
+      arrowLights.map(
+        (light) => ({
+          light,
+          number,
+          answer:
+            arrowRuleMap[
+              number
+            ][light],
+        })
+      )
+  );
 
 
-  // =========================
-  // Number 5
-  // Same pattern as 3
-  // =========================
-
-  {
-    light: "red",
-    number: 5,
-    answer: "left",
-  },
-
-  {
-    light: "yellow",
-    number: 5,
-    answer: "up",
-  },
-
-  {
-    light: "green",
-    number: 5,
-    answer: "right",
-  },
-
-  {
-    light: "blue",
-    number: 5,
-    answer: "up",
-  },
+/**
+ * Runtime guard for Direction-module Braille numbers.
+ *
+ * Important:
+ *
+ * Generic Braille can represent other digits,
+ * including 8, but the Direction module only
+ * accepts the numbers listed in arrowNumbers.
+ */
+export function isArrowNumber(
+  value: number
+): value is ArrowNumber {
+  return (
+    arrowNumbers as readonly number[]
+  ).includes(value);
+}
 
 
-  // =========================
-  // Number 6
-  // =========================
-
-  {
-    light: "red",
-    number: 6,
-    answer: "up",
-  },
-
-  {
-    light: "yellow",
-    number: 6,
-    answer: "right",
-  },
-
-  {
-    light: "green",
-    number: 6,
-    answer: "down",
-  },
-
-  {
-    light: "blue",
-    number: 6,
-    answer: "left",
-  },
+/**
+ * Return the direction for one valid Direction state.
+ *
+ * Example:
+ *
+ * getArrowDirection(
+ *   "green",
+ *   2
+ * )
+ *
+ * => "up"
+ *
+ * With typed inputs, every combination has a rule,
+ * so there is no nullable result.
+ */
+export function getArrowDirection(
+  light: ArrowLight,
+  number: ArrowNumber
+): Direction {
+  return arrowRuleMap[number][light];
+}
 
 
-  // =========================
-  // Number 7
-  // Same pattern as 2
-  // =========================
+/**
+ * Solve a Direction state when the number may come
+ * from runtime input rather than a typed select.
+ *
+ * This is useful when the value comes from:
+ *
+ * - Braille conversion
+ * - URL/search parameters
+ * - stored state
+ * - parsed user input
+ *
+ * Unsupported numbers return a specific error instead
+ * of being cast to ArrowNumber.
+ *
+ * Example:
+ *
+ * solveArrowDetailed(
+ *   "red",
+ *   8
+ * )
+ *
+ * =>
+ * {
+ *   ok: false,
+ *   error: "unsupported-braille-number",
+ *   number: 8
+ * }
+ */
+export function solveArrowDetailed(
+  light: ArrowLight,
+  number: number
+): ArrowSolveResult {
+  if (!isArrowNumber(number)) {
+    return {
+      ok: false,
+      error: "unsupported-braille-number",
+      number,
+    };
+  }
 
-  {
-    light: "red",
-    number: 7,
-    answer: "right",
-  },
 
-  {
-    light: "yellow",
-    number: 7,
-    answer: "left",
-  },
-
-  {
-    light: "green",
-    number: 7,
-    answer: "up",
-  },
-
-  {
-    light: "blue",
-    number: 7,
-    answer: "down",
-  },
+  return {
+    ok: true,
+    solution: {
+      light,
+      number,
+      direction:
+        getArrowDirection(
+          light,
+          number
+        ),
+    },
+  };
+}
 
 
-  // =========================
-  // Number 9
-  // Same pattern as 6
-  // =========================
+/**
+ * Small convenience helper for code that already has
+ * a valid ArrowNumber.
+ *
+ * Example:
+ *
+ * solveArrow(
+ *   "blue",
+ *   9
+ * )
+ *
+ * => "left"
+ */
+export function solveArrow(
+  light: ArrowLight,
+  number: ArrowNumber
+): Direction {
+  return getArrowDirection(
+    light,
+    number
+  );
+}
 
-  {
-    light: "red",
-    number: 9,
-    answer: "up",
-  },
 
-  {
-    light: "yellow",
-    number: 9,
-    answer: "right",
-  },
+/**
+ * Human-readable Direction label.
+ *
+ * Useful for Solver output without duplicating
+ * direction labels inside the React component.
+ */
+export function getDirectionLabel(
+  direction: Direction
+): string {
+  switch (direction) {
+    case "up":
+      return "↑ Up";
 
-  {
-    light: "green",
-    number: 9,
-    answer: "down",
-  },
+    case "down":
+      return "↓ Down";
 
-  {
-    light: "blue",
-    number: 9,
-    answer: "left",
-  },
+    case "left":
+      return "← Left";
 
-];
+    case "right":
+      return "→ Right";
+  }
+}

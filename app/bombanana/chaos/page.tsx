@@ -3,99 +3,97 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaChaosContent from "@/data/bombanana/chaos.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/chaos`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
+  `${siteUrl}/images/bombanana/bombanana-chaos-warning-control.webp`,
   `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "why-chaos-is-different",
+    label: "Why Chaos is different",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "campaign-ramp",
+    label: "How Chaos ramps up",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "warning-control",
+    label: "When danger changes priority",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "attention-budget",
+    label: "The attention budget",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "who-watches",
+    label: "Who should watch Chaos",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "when-to-interrupt",
+    label: "When to interrupt a solve",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
+    id: "resume-cleanly",
+    label: "How to resume safely",
   },
   {
-    id: "communication",
-    label: "Communication failures",
+    id: "practice-points",
+    label: "Best practice levels",
   },
   {
-    id: "manual",
-    label: "Other modules",
-  },
-  {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "push-or-replay",
+    label: "Push or replay",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
-  },
-  {
-    href: "/bombanana/wire",
-    label: "BOMBANANA Cable / Wire Guide",
-  },
-  {
-    href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
+    href: "/bombanana/levels",
+    label: "BOMBANANA Levels & Walkthrough",
   },
   {
     href: "/bombanana/roles",
-    label: "BOMBANANA Roles Guide",
+    label: "BOMBANANA Roles & Communication Guide",
   },
   {
-    href: "/bombanana/levels",
-    label: "BOMBANANA Levels & Walkthrough",
+    href: "/bombanana/module-solver",
+    label: "BOMBANANA Module Solver",
+  },
+  {
+    href: "/bombanana/soundboard",
+    label: "BOMBANANA Soundboard Guide",
+  },
+  {
+    href: "/bombanana/piano",
+    label: "BOMBANANA Piano Guide",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
   },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Manage BOMBANANA Chaos modules, prioritize Slider, Pressure and Alarm, survive stacked hazards, and know when to interrupt or resume a solve.",
 
   alternates: {
     canonical:
@@ -104,10 +102,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Learn when BOMBANANA Chaos should interrupt a defusal, how to preserve the unfinished module state, and how stacked hazards change later Campaign levels.",
 
     url:
       pageUrl,
@@ -130,7 +128,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA bomb with a warning-marked Chaos control active beside the defusal modules.",
       },
     ],
   },
@@ -140,10 +138,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Control BOMBANANA Chaos without losing the defusal state, from the first Slider hazard to stacked late-game Pressure and Alarm setups.",
 
     images: [
       imageUrls[0],
@@ -201,7 +199,7 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Chaos Guide",
 
           item:
             pageUrl,
@@ -226,10 +224,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Chaos Guide: Slider, Pressure and Alarm",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Chaos guide covering Slider, Pressure and Alarm hazards, why Chaos must be managed while normal modules are being solved, how danger changes module priority, how to preserve an interrupted defusal state, how stacked Chaos affects the attention budget, and when to practice on Levels 4, 12 and 26 before pushing deeper into the Campaign.",
 
       image:
         imageUrls,
@@ -257,47 +255,81 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA module solver",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Cable Module",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Direction Module",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Calculator Module",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Braille",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
             "BOMBANANA Chaos Modules",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Slider Chaos",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Pressure Chaos",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Alarm Chaos",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Chaos management",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Campaign",
+        },
+      ],
+
+      mentions: [
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Level 4",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Level 12",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Level 26",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Level 29",
         },
       ],
 
@@ -355,15 +387,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Chaos Module Guide"
+          description="Learn when a Chaos hazard should interrupt the current solve, how to stabilize it without losing the unfinished module state, and when stacked Slider, Pressure, and Alarm setups mean the team should go back and practice."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaChaosContent />
         </GuideArticlePage>
       </main>
 

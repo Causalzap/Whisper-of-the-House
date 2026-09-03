@@ -3,73 +3,76 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaRolesContent from "@/data/bombanana/roles.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/roles`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
+  `${siteUrl}/images/bombanana/bombanana-role-selection-lobby.webp`,
+  `${siteUrl}/images/bombanana/bombanana-roles-blind-deaf-mute.webp`,
+  `${siteUrl}/images/bombanana/bombanana-manual-layout.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "choose-roles",
+    label: "How to choose roles",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "blind",
+    label: "Blind",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "deaf",
+    label: "Deaf",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "mute",
+    label: "Mute",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "signals",
+    label: "Team signals",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "left-right",
+    label: "Left & right perspective",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
+    id: "module-relay",
+    label: "Module callouts",
   },
   {
-    id: "communication",
-    label: "Communication failures",
+    id: "stale-state",
+    label: "Stale module states",
   },
   {
-    id: "manual",
-    label: "Other modules",
+    id: "swap-roles",
+    label: "When to swap roles",
   },
   {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "failed-run",
+    label: "Diagnose a failed run",
+  },
+  {
+    id: "before-start",
+    label: "Before the timer starts",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
+    href: "/bombanana/module-solver",
+    label: "BOMBANANA Module Solver & Manual",
   },
   {
     href: "/bombanana/wire",
@@ -77,25 +80,25 @@ const relatedLinks = [
   },
   {
     href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
-  },
-  {
-    href: "/bombanana/roles",
-    label: "BOMBANANA Roles Guide",
+    label: "BOMBANANA Calculator Guide & Solver",
   },
   {
     href: "/bombanana/levels",
     label: "BOMBANANA Levels & Walkthrough",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
   },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Roles Guide: Blind, Deaf & Mute Communication",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Choose Blind, Deaf, and Mute roles in BOMBANANA, fix broken relays, set clear signals, and avoid left/right, mixed-state, and stale-answer mistakes.",
 
   alternates: {
     canonical:
@@ -104,10 +107,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Roles Guide: Blind, Deaf & Mute Communication",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Build a cleaner BOMBANANA information chain between Blind, Deaf, and Mute with practical signals, fixed perspectives, module packets, and role swaps.",
 
     url:
       pageUrl,
@@ -130,7 +133,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA lobby where players choose Blind, Deaf, and Mute roles.",
       },
     ],
   },
@@ -140,10 +143,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Roles Guide: Blind, Deaf & Mute Communication",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Choose the right BOMBANANA roles, keep module states separate, use consistent signals, and fix the relay when correct answers still fail.",
 
     images: [
       imageUrls[0],
@@ -201,7 +204,7 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Roles Guide",
 
           item:
             pageUrl,
@@ -226,10 +229,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Roles Guide: Blind, Deaf & Mute Communication",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA roles guide for choosing Blind, Deaf, and Mute, translating manual answers into physical actions, keeping module states separate, building a compact signal vocabulary, fixing left-right perspective problems, deciding when to reset a callout, swapping roles after repeated failures, and diagnosing where information was lost.",
 
       image:
         imageUrls,
@@ -257,7 +260,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA module solver",
+            "BOMBANANA Blind role",
         },
 
         {
@@ -265,7 +268,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Cable Module",
+            "BOMBANANA Deaf role",
         },
 
         {
@@ -273,7 +276,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Direction Module",
+            "BOMBANANA Mute role",
         },
 
         {
@@ -281,7 +284,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Calculator Module",
+            "BOMBANANA communication",
         },
 
         {
@@ -289,7 +292,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Braille",
+            "BOMBANANA role signals",
         },
 
         {
@@ -297,7 +300,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA team roles",
         },
       ],
 
@@ -355,15 +358,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Blind, Deaf & Mute Roles Guide"
+          description="Choose each role by the job it actually has to do, keep one module state moving through the team at a time, and fix the exact link where correct information keeps getting lost."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaRolesContent />
         </GuideArticlePage>
       </main>
 

@@ -1,0 +1,627 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+export const roleColumns = [
+  {
+    key: "Role",
+    label: "Role",
+  },
+  {
+    key: "What reaches me",
+    label: "What reaches me",
+  },
+  {
+    key: "My job",
+    label: "My job",
+  },
+  {
+    key: "Bad fit looks like",
+    label: "Bad fit looks like",
+  },
+];
+
+
+export const roleRows = [
+  {
+    Role: "Blind",
+    "What reaches me":
+      "Spoken instructions through Deaf; Braille on the bomb",
+    "My job":
+      "Locate and manipulate the bomb, read Braille, perform the final inputs",
+    "Bad fit looks like":
+      "I keep receiving descriptions that I cannot turn into a physical action",
+  },
+  {
+    Role: "Deaf",
+    "What reaches me":
+      "The bomb state visually and Mute's gestures",
+    "My job":
+      "Move information between Blind and Mute without dropping, mixing, or aging the state",
+    "Bad fit looks like":
+      "Old colors, numbers, or answers keep leaking into the next module or stage",
+  },
+  {
+    Role: "Mute",
+    "What reaches me":
+      "The defusal manual and the questions Deaf brings me",
+    "My job":
+      "Read the correct rule and return a compact answer through gestures",
+    "Bad fit looks like":
+      "I find the rule but cannot turn the answer into a signal the other two can use quickly",
+  },
+];
+
+
+export const signalColumns = [
+  {
+    key: "Team signal",
+    label: "Team signal",
+  },
+  {
+    key: "Meaning",
+    label: "Meaning",
+  },
+  {
+    key: "Where it helps",
+    label: "Where it helps",
+  },
+];
+
+
+export const signalRows = [
+  {
+    "Team signal": "Thumbs up / nod",
+    Meaning: "Yes, correct, continue",
+    "Where it helps":
+      "Confirming one position, direction, symbol, note, or other proposed answer",
+  },
+  {
+    "Team signal": "Thumbs down / shake",
+    Meaning: "No, wrong, stop",
+    "Where it helps":
+      "Stopping a bad interpretation before Blind commits an input",
+  },
+  {
+    "Team signal": "Finger count",
+    Meaning: "1st / 2nd / 3rd / 4th",
+    "Where it helps":
+      "Returning a physical position instead of an ambiguous description",
+  },
+  {
+    "Team signal": "Repeat",
+    Meaning: "Send the last item again",
+    "Where it helps":
+      "One missed number, color, direction, symbol, or note",
+  },
+  {
+    "Team signal": "Full reset",
+    Meaning: "Restart this module's current state from the beginning",
+    "Where it helps":
+      "Nobody is sure which pieces of the current packet are still valid",
+  },
+  {
+    "Team signal": "Hands off",
+    Meaning: "Do not input anything yet",
+    "Where it helps":
+      "The answer is incomplete, disputed, or belongs to an uncertain stage",
+  },
+];
+
+
+<section
+  id="quick-answer"
+  className="scroll-mt-24"
+>
+  <GuideQuickAnswer title="Choose Roles by Where Your Team Loses Information">
+
+  BOMBANANA works through one information chain:
+
+  **Blind reads and operates the bomb → Deaf carries the state → Mute checks the manual → Deaf returns the answer → Blind performs the action**
+
+  I put the strongest bomb operator on **Blind**, the cleanest information manager on **Deaf**, and the fastest rule reader on **Mute**.
+
+  If a correct answer keeps dying between the manual and the bomb, I fix the relay before studying another module table.
+
+  </GuideQuickAnswer>
+</section>
+
+
+<h2
+  id="choose-roles"
+  className="scroll-mt-24"
+>
+  Pick roles by the mistake each player is least likely to make
+</h2>
+
+The names Blind, Deaf, and Mute describe the restrictions, but the useful way to assign them is by the work each player has to do.
+
+**Blind** operates the bomb.
+
+**Mute** has the defusal manual.
+
+**Deaf** connects those two sides.
+
+The normal path is:
+
+**bomb state → relay → manual answer → relay → physical input**
+
+<Image
+  src="/images/bombanana/bombanana-role-selection-lobby.webp"
+  alt="BOMBANANA lobby where players choose Blind, Deaf, and Mute roles before starting"
+  width={1600}
+  height={900}
+  priority={true}
+  className="my-8 rounded-xl"
+/>
+
+I do not automatically give Deaf to the loudest person or Mute to whoever remembers puzzle rules best.
+
+I look at what each position actually demands.
+
+<GuideTable
+  caption="What each BOMBANANA role has to handle."
+  columns={roleColumns}
+  rows={roleRows}
+/>
+
+A player can understand every module rule and still be badly placed if that role asks them to do the kind of task they regularly drop under pressure.
+
+
+<h2
+  id="blind"
+  className="scroll-mt-24"
+>
+  Blind needs an action, not the explanation that produced it
+</h2>
+
+Blind is the person who eventually has to touch the bomb.
+
+That changes what counts as a finished answer.
+
+Suppose the manual side determines that the correct Cable target is Blue.
+
+**“Blue.”**
+
+may solve the rule.
+
+It does not necessarily finish the communication.
+
+If Blue is physically second from the left, a more useful final call is:
+
+**“Second cable from the left.”**
+
+The same idea applies beyond Cable.
+
+I want Blind to receive things such as:
+
+- **second from the left**
+- **top-right**
+- **press Up**
+- **third slider down**
+- **enter 57**
+
+rather than a long explanation of how Mute reached that answer.
+
+<Image
+  src="/images/bombanana/bombanana-roles-blind-deaf-mute.webp"
+  alt="BOMBANANA manual explaining the Blind, Deaf, and Mute roles"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+Blind also has information the other two may need, including Braille on modules that use it.
+
+That means the role is already doing two jobs:
+
+**report what only Blind can read**
+
+and:
+
+**perform the action that comes back**
+
+I do not add unnecessary interpretation between those jobs.
+
+For Cable specifically, the complete color table and physical-position conversion are in the <Link href="/bombanana/wire">BOMBANANA Cable / Wire Guide</Link>.
+
+
+<h2
+  id="deaf"
+  className="scroll-mt-24"
+>
+  Deaf protects the current state from getting mixed with the next one
+</h2>
+
+Deaf is the role I care about most when the team has a communication problem rather than a puzzle problem.
+
+The danger is overlap.
+
+One module is still waiting for an answer.
+
+Another player starts describing a new panel.
+
+A color from the first state gets attached to a number from the second.
+
+Both facts can be correct and the run can still fail.
+
+I handle that by treating every current module state as one packet.
+
+A packet has:
+
+**module name**
+
+then:
+
+**the fields that module needs**
+
+then:
+
+**one returned answer**
+
+then:
+
+**confirmation that the action happened**
+
+Only after that do I begin another packet.
+
+For example, Cable may arrive as:
+
+**Cable → count → LED → colors left to right**
+
+Calculator uses a different rhythm because it changes state:
+
+**Calculator → equation → raw result**
+
+then, after the panel advances:
+
+**new LED + parity → final key**
+
+Direction is shorter:
+
+**Direction → LED + Braille → one direction**
+
+The exact module rules are not Deaf's job to memorize.
+
+Deaf's job is to stop those packets from blending together.
+
+
+<h2
+  id="mute"
+  className="scroll-mt-24"
+>
+  Mute works fastest when the question has already been reduced
+</h2>
+
+Mute has access to the manual, but that does not mean Mute should try to mime an entire manual paragraph.
+
+<Image
+  src="/images/bombanana/bombanana-manual-layout.webp"
+  alt="BOMBANANA manual layout showing a module name, image, instructions, and solve information"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+The easier pattern is:
+
+**Deaf brings a complete state.**
+
+Mute finds the relevant rule.
+
+Then the answer is reduced to something compact.
+
+Whenever possible, I want Mute answering with:
+
+- yes or no;
+- one number;
+- one position;
+- one direction;
+- one short ordered sequence.
+
+That is much easier than trying to invent gestures for an explanation.
+
+If the question is vague:
+
+**“What do we do?”**
+
+Mute has too much work.
+
+If the question has already become:
+
+**“Second one?”**
+
+or:
+
+**“Left?”**
+
+or:
+
+**“Three?”**
+
+the final confirmation becomes much cleaner.
+
+The goal is not to create a full sign language for BOMBANANA.
+
+It is to reduce each answer until the gesture can be understood reliably.
+
+
+<h2
+  id="signals"
+  className="scroll-mt-24"
+>
+  A small signal set is more useful than a complicated one
+</h2>
+
+Before the game becomes crowded with longer modules, I want a few gestures that nobody has to reinterpret.
+
+<GuideTable
+  caption="A compact signal set for BOMBANANA."
+  columns={signalColumns}
+  rows={signalRows}
+/>
+
+The most important distinction is between:
+
+**repeat**
+
+and:
+
+**full reset**
+
+They solve different problems.
+
+If I missed only one item, repeating that item is enough.
+
+If nobody agrees on which stage is active or whether the earlier values were correct, repeating one item can make the situation worse.
+
+That is when I use a full reset:
+
+**stop → reread this module's current state → rebuild the packet**
+
+I also keep a separate **hands off** signal.
+
+When two players disagree, Blind should not have to guess whether the silence means:
+
+**“go ahead”**
+
+or:
+
+**“wait.”**
+
+
+<h2
+  id="left-right"
+  className="scroll-mt-24"
+>
+  Choose one physical perspective before left and right matter
+</h2>
+
+Direction exposes this problem quickly.
+
+Someone receives:
+
+**Left**
+
+and the next question is:
+
+**“Your left or my left?”**
+
+The lookup may be completely correct, but the physical meaning is still unresolved.
+
+My convention is:
+
+**left and right mean Blind's perspective while facing the bomb.**
+
+The exact convention matters less than keeping it unchanged.
+
+If the team prefers another perspective, that can also work.
+
+What does not work is switching perspectives from one call to the next.
+
+I apply the same consistency to physical positions:
+
+**count objects from left to right**
+
+unless the team explicitly establishes something else.
+
+For grids, I use:
+
+**row first → column second**
+
+The point is to make a position sound the same regardless of who happens to be speaking.
+
+
+<h2
+  id="module-relay"
+  className="scroll-mt-24"
+>
+  Different modules need different information packets
+</h2>
+
+I do not use one generic callout format for every panel.
+
+The module name tells the team what information should come next.
+
+### Cable
+
+Send:
+
+**count → LED → cable colors left to right**
+
+Return:
+
+**target position**
+
+The complete rule table is in the <Link href="/bombanana/wire">Cable / Wire Guide</Link>.
+
+### Direction
+
+Send:
+
+**LED → Braille number**
+
+Return:
+
+**one direction**
+
+Then stop using that answer if the panel advances.
+
+### Calculator
+
+Send the equation first.
+
+After the raw result is accepted, treat the new LED state as a second packet.
+
+The full two-stage logic and final-key table are in the <Link href="/bombanana/calculator">Calculator Guide & Solver</Link>.
+
+### Symbol
+
+The team needs stable names for shapes.
+
+If a symbol is called **hourglass**, I keep using **hourglass** instead of changing to a different description halfway through the session.
+
+### Piano
+
+Longer ordered information becomes more important.
+
+I separate the identifying information from the note sequence instead of speaking everything as one uninterrupted block.
+
+### Color Slider and other ordered panels
+
+I keep the physical order fixed.
+
+If the panel is being read left to right, the answer also comes back left to right.
+
+The broader <Link href="/bombanana/module-solver">BOMBANANA Module Solver & Manual</Link> is where I go when the problem is the module procedure rather than the relay itself.
+
+
+<h2
+  id="stale-state"
+  className="scroll-mt-24"
+>
+  A correct answer stops being useful when the module state changes
+</h2>
+
+A communication chain can fail even when nobody misheard anything.
+
+The answer can simply arrive too late.
+
+Direction may advance after a press.
+
+Calculator changes state after the raw arithmetic result.
+
+Another panel may already have been cleared while someone is still repeating its last values.
+
+So I treat a successful input as a boundary.
+
+After Blind acts, Deaf checks:
+
+**Did the module clear or advance?**
+
+If it cleared, I discard the packet.
+
+If it advanced, I discard the old state and start a new packet.
+
+I do not let an old LED, number, direction, or sequence stay active just because somebody still remembers it.
+
+This is one of the easiest ways to prevent a correct answer from being reused on the wrong stage.
+
+
+<h2
+  id="swap-roles"
+  className="scroll-mt-24"
+>
+  Swap roles when the same link keeps breaking
+</h2>
+
+I do not rotate roles randomly after every explosion.
+
+I look for a repeated failure.
+
+If Mute consistently finds the correct rule but cannot return it in a usable form, another player may be better on the manual.
+
+If Deaf repeatedly drops one field or mixes two module states, I put a calmer information manager in the middle.
+
+If Blind regularly makes accidental inputs or struggles to report the bomb while manipulating it, another player can try the case.
+
+Those are role-fit problems.
+
+Protocol problems are different.
+
+If everyone disagrees about left and right, swapping Blind does not solve it.
+
+If nobody knows the difference between **repeat** and **full reset**, swapping Mute does not solve it.
+
+I fix the shared convention first.
+
+A role rotation can still be useful once because it lets each player see what the other positions have to manage.
+
+After that, I keep the setup that loses the least information.
+
+
+<h2
+  id="failed-run"
+  className="scroll-mt-24"
+>
+  After an explosion, find the link that failed
+</h2>
+
+I get more useful information from the failed run by asking about the relay than by asking:
+
+**“Who messed up?”**
+
+I check the chain in order:
+
+1. **Did Blind report the complete current state?**
+2. **Did Deaf deliver the same state without changing it?**
+3. **Did Mute solve the correct module and stage?**
+4. **Did Deaf return the answer in a form Blind could act on?**
+5. **Did Blind wait until the answer was confirmed?**
+6. **Did the panel change before that answer was used?**
+
+That separates very different problems.
+
+A Cable failure can come from a missing count or LED.
+
+A Direction failure can be a perspective mismatch.
+
+A Calculator failure can be a stage-label problem rather than bad arithmetic.
+
+A Piano failure can be one dropped note.
+
+Those should not all lead to the same response of:
+
+**“Let's just try the level again.”**
+
+If I can name which link failed, the next attempt has something concrete to change.
+
+
+<h2
+  id="before-start"
+  className="scroll-mt-24"
+>
+  Lock in these conventions before the timer starts
+</h2>
+
+Before a run where several modules may overlap, I want five things settled:
+
+1. **Left and right use one fixed perspective.**
+2. **Physical objects are counted in one fixed direction.**
+3. **Yes and no have obvious signals.**
+4. **Repeat and full reset are different commands.**
+5. **Blind does not input while the relay is still disputed.**
+
+That is enough structure to start.
+
+The team does not need every module memorized.
+
+What needs to survive from one bomb to the next is the information system.
+
+If the team knows the rule but the answer keeps disappearing between the manual and the bomb, I come back to this workflow.
+
+If the relay is clean and the problem is the puzzle itself, use the <Link href="/bombanana/module-solver">BOMBANANA Module Solver & Manual</Link>.
+
+If the question is whether to keep advancing or repeat an easier part of Campaign until the process becomes automatic, use the <Link href="/bombanana/levels">BOMBANANA Levels & Walkthrough</Link>.

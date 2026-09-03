@@ -3,99 +3,101 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaSoundboardContent from "@/data/bombanana/soundboard.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/soundboard`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
+  `${siteUrl}/images/bombanana/bombanana-soundboard-red-braille-four.webp`,
+  `${siteUrl}/images/bombanana/bombanana-soundboard-module-manual.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "find-the-sound",
+    label: "Find the sounding button",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "two-part-solve",
+    label: "Search, then resolve",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "position-key",
+    label: "3×3 position key",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "target-versus-answer",
+    label: "Target vs. answer pattern",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "red-four",
+    label: "Red + Braille 4",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "already-pressed",
+    label: "Track pressed cells",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
+    id: "misclicks",
+    label: "Avoid misclicks",
   },
   {
-    id: "communication",
-    label: "Communication failures",
+    id: "too-much-memory",
+    label: "Reduce memory load",
   },
   {
-    id: "manual",
-    label: "Other modules",
+    id: "relay",
+    label: "Relay the grid pattern",
   },
   {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "level-eleven",
+    label: "Practice on Level 11",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
+    href: "/bombanana/symbol",
+    label: "BOMBANANA Symbol Guide",
   },
   {
-    href: "/bombanana/wire",
-    label: "BOMBANANA Cable / Wire Guide",
-  },
-  {
-    href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
+    href: "/bombanana/piano",
+    label: "BOMBANANA Piano Guide",
   },
   {
     href: "/bombanana/roles",
-    label: "BOMBANANA Roles Guide",
+    label: "BOMBANANA Roles & Communication Guide",
+  },
+  {
+    href: "/bombanana/chaos",
+    label: "BOMBANANA Chaos Guide",
   },
   {
     href: "/bombanana/levels",
     label: "BOMBANANA Levels & Walkthrough",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
   },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Soundboard Guide: Braille, Colors & Grid",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Find the sounding button, match its Braille and color to the 3x3 pattern, track pressed cells, and practice Soundboard on Level 11.",
 
   alternates: {
     canonical:
@@ -104,10 +106,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Soundboard Guide: Braille, Colors & Grid",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Find the Soundboard target by sound, use its Braille number and color, then press the correct 3x3 grid positions without losing board state.",
 
     url:
       pageUrl,
@@ -130,7 +132,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA Soundboard showing the 3 by 3 button grid during a Braille 4 state.",
       },
     ],
   },
@@ -140,10 +142,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Soundboard Guide: Braille, Colors & Grid",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Find the sounding button, resolve its Braille and color, and press the correct Soundboard grid positions.",
 
     images: [
       imageUrls[0],
@@ -178,7 +180,6 @@ const jsonLd = {
           item:
             siteUrl,
         },
-
         {
           "@type":
             "ListItem",
@@ -192,7 +193,6 @@ const jsonLd = {
           item:
             `${siteUrl}/bombanana`,
         },
-
         {
           "@type":
             "ListItem",
@@ -201,14 +201,13 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Soundboard Guide",
 
           item:
             pageUrl,
         },
       ],
     },
-
 
     {
       "@type":
@@ -226,10 +225,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Soundboard Guide: Braille, Colors and Grid Patterns",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Soundboard guide covering how to locate the sounding button, combine its Braille number and color, read the 3-by-3 answer pattern, distinguish the target button from the required inputs, track already-pressed cells, recover from grid mistakes, and use Level 11 as the first fixed practice checkpoint.",
 
       image:
         imageUrls,
@@ -251,53 +250,50 @@ const jsonLd = {
           name:
             "BOMBANANA",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA module solver",
+            "BOMBANANA Soundboard Module",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Cable Module",
+            "BOMBANANA Soundboard Braille",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Direction Module",
+            "BOMBANANA Soundboard grid",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Calculator Module",
+            "BOMBANANA Soundboard colors",
         },
+      ],
 
+      mentions: [
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Braille",
+            "BOMBANANA Level 11",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA Level 12",
         },
       ],
 
@@ -355,15 +351,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Soundboard Module Guide"
+          description="Find the button that makes the sound first, convert its Braille number and color into the correct grid pattern, and keep track of what has already been pressed."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaSoundboardContent />
         </GuideArticlePage>
       </main>
 

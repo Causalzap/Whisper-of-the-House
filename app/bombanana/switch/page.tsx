@@ -3,99 +3,100 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaSwitchContent from "@/data/bombanana/switch.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/switch`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
+  `${siteUrl}/images/bombanana/bombanana-switch-module.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "whole-state",
+    label: "Read the whole state",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "order-matters",
+    label: "Why light order matters",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "numbers-change-answer",
+    label: "Why the numbers matter",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "read-packet",
+    label: "Send all eight values",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "set-switches",
+    label: "Set switches before Enter",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "when-to-reread",
+    label: "When to reread",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
+    id: "real-wall",
+    label: "The real Switch wall",
   },
   {
-    id: "communication",
-    label: "Communication failures",
+    id: "two-resets",
+    label: "Repeat vs. full reset",
   },
   {
-    id: "manual",
-    label: "Other modules",
+    id: "level-16",
+    label: "Practice on Level 16",
   },
   {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "push-or-return",
+    label: "Push or return",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
-  },
-  {
-    href: "/bombanana/wire",
-    label: "BOMBANANA Cable / Wire Guide",
-  },
-  {
-    href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
-  },
-  {
     href: "/bombanana/roles",
-    label: "BOMBANANA Roles Guide",
+    label: "BOMBANANA Roles & Communication Guide",
   },
   {
     href: "/bombanana/levels",
     label: "BOMBANANA Levels & Walkthrough",
+  },
+  {
+    href: "/bombanana/chaos",
+    label: "BOMBANANA Chaos Guide",
+  },
+  {
+    href: "/bombanana/soundboard",
+    label: "BOMBANANA Soundboard Guide",
+  },
+  {
+    href: "/bombanana/module-solver",
+    label: "BOMBANANA Module Solver",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
   },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Switch Guide: Lights, Numbers & Enter",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Read all four lights and numbers, resolve the four switch positions, confirm the full row before Enter, and practice Switch from Level 16.",
 
   alternates: {
     canonical:
@@ -104,10 +105,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Switch Guide: Lights, Numbers & Enter",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Keep the complete four-light and four-number state together, set every Switch position, and confirm the row before pressing Enter.",
 
     url:
       pageUrl,
@@ -130,7 +131,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA Switch Module with four colored lights, four physical switches, and the Enter control.",
       },
     ],
   },
@@ -140,10 +141,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Switch Guide: Lights, Numbers & Enter",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Read the complete Switch state, resolve all four positions, then confirm the row before Enter.",
 
     images: [
       imageUrls[0],
@@ -178,7 +179,6 @@ const jsonLd = {
           item:
             siteUrl,
         },
-
         {
           "@type":
             "ListItem",
@@ -192,7 +192,6 @@ const jsonLd = {
           item:
             `${siteUrl}/bombanana`,
         },
-
         {
           "@type":
             "ListItem",
@@ -201,14 +200,13 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Switch Guide",
 
           item:
             pageUrl,
         },
       ],
     },
-
 
     {
       "@type":
@@ -226,10 +224,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Switch Module Guide: Lights, Numbers and Enter",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Switch Module guide covering how to preserve the complete four-light and four-number state, why light order and number changes can alter the required Up and Down pattern, how to bind answers to the four physical switches, when to reread the full state, when Enter is safe, and how to use Levels 16 through 20 as Switch practice checkpoints.",
 
       image:
         imageUrls,
@@ -251,53 +249,57 @@ const jsonLd = {
           name:
             "BOMBANANA",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA module solver",
+            "BOMBANANA Switch Module",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Cable Module",
+            "BOMBANANA Switch lights",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Direction Module",
+            "BOMBANANA Switch numbers",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Calculator Module",
+            "BOMBANANA Switch positions",
         },
+      ],
 
+      mentions: [
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Braille",
+            "BOMBANANA Level 16",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA Level 17",
+        },
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Level 20",
         },
       ],
 
@@ -355,15 +357,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Switch Module Guide"
+          description="Keep all four light colors and all four numbers attached to one current state, resolve the physical switch row, and press Enter only after every position is confirmed."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaSwitchContent />
         </GuideArticlePage>
       </main>
 

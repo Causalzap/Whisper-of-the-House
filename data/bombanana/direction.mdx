@@ -1,0 +1,369 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import BombananaModuleSolver from "@/components/tools/BombananaModuleSolver";
+
+
+export const directionColumns = [
+  {
+    key: "Braille",
+    label: "Braille",
+  },
+  {
+    key: "Red",
+    label: "Red LED",
+  },
+  {
+    key: "Blue",
+    label: "Blue LED",
+  },
+  {
+    key: "Green",
+    label: "Green LED",
+  },
+  {
+    key: "Yellow",
+    label: "Yellow LED",
+  },
+];
+
+
+export const directionRows = [
+  {
+    Braille: "1 or 4",
+    Red: "Up",
+    Blue: "Right",
+    Green: "Left",
+    Yellow: "Down",
+  },
+  {
+    Braille: "2 or 7",
+    Red: "Right",
+    Blue: "Down",
+    Green: "Up",
+    Yellow: "Left",
+  },
+  {
+    Braille: "3 or 5",
+    Red: "Left",
+    Blue: "Up",
+    Green: "Right",
+    Yellow: "Up",
+  },
+  {
+    Braille: "6 or 8",
+    Red: "Up",
+    Blue: "Left",
+    Green: "Down",
+    Yellow: "Right",
+  },
+  {
+    Braille: "9",
+    Red: "Down",
+    Blue: "Up",
+    Green: "Left",
+    Yellow: "Right",
+  },
+];
+
+<section
+  id="quick-answer"
+  className="scroll-mt-24"
+>
+  <GuideQuickAnswer title="Read Two Values, Press Once, Re-read">
+
+  For Direction, get the **active LED color and the current Braille number together**.
+
+  Enter those two values into the solver, press the returned direction **once**, then look at the panel again.
+
+  If the module stays active, treat whatever appears next as a fresh state.
+
+  Direction uses Braille **1 through 9**. Read the number together with the active LED before pressing anything.
+
+  </GuideQuickAnswer>
+</section>
+
+
+<BombananaModuleSolver defaultModule="arrow" />
+
+
+<h2
+  id="two-inputs"
+  className="scroll-mt-24"
+>
+  Two values decide the next Direction press
+</h2>
+
+Direction gives me a very small input packet:
+
+**LED color + Braille number**
+
+That pair returns exactly one action:
+
+**Up, Down, Left, or Right**
+
+There is no cable order to preserve and no second Calculator value waiting behind the first one.
+
+The trap is that those two pieces of information may reach different players at different times.
+
+A call such as:
+
+**“Green.”**
+
+is incomplete.
+
+So is:
+
+**“Two.”**
+
+Together:
+
+**Green + 2**
+
+has a definite answer:
+
+**Up**
+
+<Image
+  src="/images/bombanana/bombanana-direction-green-light-braille-two.webp"
+  alt="BOMBANANA Direction module showing four arrow buttons and Braille number 2 during a live bomb"  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+That is the size of the packet I want during a live bomb.
+
+Once both values are known, there is nothing useful to gain from adding descriptions of the other arrow buttons or repeating older Direction states.
+
+
+<h2
+  id="direction-table"
+  className="scroll-mt-24"
+>
+  36 valid states collapse into five rule patterns
+</h2>
+
+Direction uses:
+
+**4 LED colors × 9 Braille numbers = 36 LED-number combinations**
+
+The table becomes much easier to scan because four number pairs share the same four-color pattern:
+
+**1 and 4**
+
+**2 and 7**
+
+**3 and 5**
+
+**6 and 8**
+
+Braille **9** keeps its own pattern.
+
+<GuideTable
+  caption="BOMBANANA Direction answers by Braille number and active LED."
+  columns={directionColumns}
+  rows={directionRows}
+/>
+
+That gives me five patterns instead of 36 unrelated answers.
+
+For example, **2 and 7** both return **Up** with a Green LED.
+
+Likewise, **6 and 8** share the same four-color mapping, while **9** must be read from its own row.
+
+The table owns the complete mapping. The rest of the page can stay focused on what causes mistakes during an actual solve.
+
+<Image
+  src="/images/bombanana/bombanana-direction-module-manual.webp"
+  alt="BOMBANANA Direction Module manual showing the LED and Braille direction rules"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+<h2
+  id="number-patterns"
+  className="scroll-mt-24"
+>
+  Braille 9 Is the Only Number Without a Paired Pattern
+</h2>
+
+Most Direction numbers have a partner that behaves exactly the same across all four LED colors:
+
+**1 matches 4**
+
+**2 matches 7**
+
+**3 matches 5**
+
+**6 matches 8**
+
+Braille **9** is the exception.
+
+Its answers are:
+
+**Red → Down**
+
+**Blue → Up**
+
+**Green → Left**
+
+**Yellow → Right**
+
+That makes 9 the number I am least willing to answer from memory based on a nearby pattern. If the panel shows 9, I use its own row.
+
+<h2
+  id="state-changes"
+  className="scroll-mt-24"
+>
+  One correct press makes the old answer disposable
+</h2>
+
+Direction can move quickly through several states.
+
+A sequence can look like:
+
+**Green + 2**
+
+then later:
+
+**Red + 3**
+
+then:
+
+**Blue + 1**
+
+then:
+
+**Red + 6**
+
+Those are separate lookups.
+
+The earlier direction does not become a default just because the same four arrow buttons are still sitting on the panel.
+
+My checkpoint is the press itself.
+
+Once a correct direction has been entered, the old LED-number pair is finished.
+
+If the panel remains active, I want two new values before another button is touched:
+
+**new LED**
+
+and:
+
+**new Braille number**
+
+This is where fast teams can make a surprisingly expensive mistake. The lookup was right; the answer simply survived longer than the state it belonged to.
+
+Repeating the previous direction from memory is riskier than spending another second reading the panel.
+
+
+<h2
+  id="left-right"
+  className="scroll-mt-24"
+>
+  Left and Right can be correct in the table and wrong at the bomb
+</h2>
+
+Up and Down are usually easy to execute.
+
+Left and Right introduce a different failure.
+
+The manual can return:
+
+**Left**
+
+while the team immediately asks:
+
+**“Whose left?”**
+
+At that point the Direction rule has already been solved.
+
+The remaining problem is physical perspective.
+
+I keep one perspective fixed for the entire session rather than translating left and right differently depending on who is speaking.
+
+If this argument keeps happening after the table answer is known, the useful fix is in the <Link href="/bombanana/roles">BOMBANANA Roles Guide</Link>, where the team can settle the physical convention and relay instead of repeatedly checking the Direction table.
+
+That separation matters:
+
+**wrong LED or Braille → Direction problem**
+
+**correct answer, disputed physical Left/Right → communication problem**
+
+
+<h2
+  id="wrong-answer"
+  className="scroll-mt-24"
+>
+  A strange result usually points back to one of three reads
+</h2>
+
+Because Direction has only two inputs, troubleshooting can stay short.
+
+When an answer does not fit what the team expected, I check three things.
+
+### The LED
+
+Was the current light actually Red, Blue, Green, or Yellow?
+
+An older color from the previous stage should not stay in the call after the panel advances.
+
+### The Braille number
+
+Is the number confirmed?
+
+Direction accepts **1 through 9**, so I solve the number that is actually showing rather than trying to force it into a remembered pair.
+
+### The current stage
+
+Did somebody already press a direction?
+
+If yes, the LED and number from before that press are no longer safe inputs.
+
+That is enough diagnosis for most Direction failures.
+
+Adding more people to the lookup rarely helps when the two source values themselves are still disputed.
+
+
+<h2
+  id="level-four"
+  className="scroll-mt-24"
+>
+  Level 4 is the clean place to practice Direction
+</h2>
+
+Direction first appears as a fixed Campaign module on **Level 4**.
+
+That bomb gives the team:
+
+**3:00**
+
+with:
+
+**Color Slider + Direction**
+
+and:
+
+**Slider Chaos**
+
+This makes Level 4 more useful than a later random encounter when I specifically want to check whether Direction is ready.
+
+I would replay Level 4 when any of these still happens repeatedly:
+
+- the LED and Braille number arrive as separate, unlabeled calls;
+- the Braille number is guessed instead of confirmed;
+- Left or Right starts a perspective argument;
+- an old direction gets reused after the panel changes;
+- one Direction state takes several rereads before anybody presses.
+The goal is not to memorize every table cell before leaving Level 4.
+
+What should become cheap is the procedure:
+
+**read two values → get one direction → press once → clear the old state**
+
+Once that happens without a discussion, Direction is no longer the reason to stay in the early Campaign.
+
+The broader fixed-module progression and the next guaranteed practice points are in the <Link href="/bombanana/levels">BOMBANANA Levels & Walkthrough</Link>.

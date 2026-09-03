@@ -3,81 +3,67 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaWireContent from "@/data/bombanana/wire.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/wire`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
   `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
+  `${siteUrl}/images/bombanana/bombanana-cable-module-three-cables.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "read-the-board",
+    label: "Cable rule table",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "translate-the-answer",
+    label: "Color to position",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "three-cable-example",
+    label: "3-cable example",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "four-cables",
+    label: "4-cable rules",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "callout-language",
+    label: "Cable callouts",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "what-not-to-send",
+    label: "Incomplete calls",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
+    id: "bad-read",
+    label: "Wrong-looking result",
   },
   {
-    id: "communication",
-    label: "Communication failures",
+    id: "roles",
+    label: "When the relay fails",
   },
   {
-    id: "manual",
-    label: "Other modules",
-  },
-  {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "when-ready",
+    label: "When Cable is mastered",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
-  },
-  {
-    href: "/bombanana/wire",
-    label: "BOMBANANA Cable / Wire Guide",
-  },
-  {
-    href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
+    href: "/bombanana/module-solver",
+    label: "BOMBANANA Module Solver",
   },
   {
     href: "/bombanana/roles",
@@ -87,15 +73,23 @@ const relatedLinks = [
     href: "/bombanana/levels",
     label: "BOMBANANA Levels & Walkthrough",
   },
+  {
+    href: "/bombanana/calculator",
+    label: "BOMBANANA Calculator Guide",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
+  },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Wire & Cable Guide: Which Cable to Cut",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Use the BOMBANANA Cable/Wire table to match cable count and LED color, find the target cable, convert it to a left-to-right position, and cut safely.",
 
   alternates: {
     canonical:
@@ -104,10 +98,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Wire & Cable Guide: Which Cable to Cut",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Match the Cable Module count and active light, find the target color, then turn that answer into the physical cable position Blind needs.",
 
     url:
       pageUrl,
@@ -130,7 +124,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA Cable Module manual showing the three-cable and four-cable rule table.",
       },
     ],
   },
@@ -140,10 +134,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Wire & Cable Guide: Which Cable to Cut",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Match cable count and LED color, get the target cable, then convert that result into a physical left-to-right position.",
 
     images: [
       imageUrls[0],
@@ -201,7 +195,7 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Wire & Cable Guide",
 
           item:
             pageUrl,
@@ -226,10 +220,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Wire & Cable Guide: Rules, Position and Which Cable to Cut",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Cable Module guide covering the complete three-cable and four-cable LED mappings, how to identify the target cable color, translate that color into a physical left-to-right position, diagnose bad input, and separate Cable-rule failures from communication failures.",
 
       image:
         imageUrls,
@@ -257,14 +251,6 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA module solver",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
             "BOMBANANA Cable Module",
         },
 
@@ -273,7 +259,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Direction Module",
+            "BOMBANANA wire guide",
         },
 
         {
@@ -281,7 +267,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Calculator Module",
+            "BOMBANANA cable rules",
         },
 
         {
@@ -289,15 +275,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Braille",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA which wire to cut",
         },
       ],
 
@@ -355,15 +333,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Cable / Wire Guide: Which Cable Do I Cut?"
+          description="Count the cables, read the active light, find the target color, then turn that answer into the physical cable position Blind can actually cut."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaWireContent />
         </GuideArticlePage>
       </main>
 

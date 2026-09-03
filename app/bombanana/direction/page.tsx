@@ -3,99 +3,89 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaDirectionContent from "@/data/bombanana/direction.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/direction`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
+  `${siteUrl}/images/bombanana/bombanana-direction-green-light-braille-two.webp`,
   `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "two-inputs",
+    label: "LED + Braille",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "direction-table",
+    label: "Direction answer table",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "number-patterns",
+    label: "Braille number patterns",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "state-changes",
+    label: "Re-read after each press",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "left-right",
+    label: "Left & right perspective",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "wrong-answer",
+    label: "Fix a wrong answer",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
-  },
-  {
-    id: "communication",
-    label: "Communication failures",
-  },
-  {
-    id: "manual",
-    label: "Other modules",
-  },
-  {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "level-four",
+    label: "Practice on Level 4",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
+    href: "/bombanana/module-solver",
+    label: "BOMBANANA Module Solver",
   },
   {
-    href: "/bombanana/wire",
-    label: "BOMBANANA Cable / Wire Guide",
+    href: "/bombanana/roles",
+    label: "BOMBANANA Roles & Communication Guide",
+  },
+  {
+    href: "/bombanana/levels",
+    label: "BOMBANANA Levels & Walkthrough",
   },
   {
     href: "/bombanana/calculator",
     label: "BOMBANANA Calculator Guide",
   },
   {
-    href: "/bombanana/roles",
-    label: "BOMBANANA Roles Guide",
+    href: "/bombanana/wire",
+    label: "BOMBANANA Cable / Wire Guide",
   },
   {
-    href: "/bombanana/levels",
-    label: "BOMBANANA Levels & Walkthrough",
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
   },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Direction Guide: Braille & LED Answers",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Solve BOMBANANA Direction with the LED and Braille number, use all 36 answer states, avoid stale inputs, and fix left/right mistakes.",
 
   alternates: {
     canonical:
@@ -104,10 +94,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Direction Guide: Braille & LED Answers",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Read the active LED and Braille number together, get the correct direction, press once, then re-read the BOMBANANA Direction panel.",
 
     url:
       pageUrl,
@@ -130,7 +120,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA Direction module showing four arrow buttons and Braille number 2 during a live bomb.",
       },
     ],
   },
@@ -140,10 +130,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Direction Guide: Braille & LED Answers",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Use the current LED and Braille number to solve Direction, then re-read the panel after every successful press.",
 
     images: [
       imageUrls[0],
@@ -201,7 +191,7 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Direction Guide",
 
           item:
             pageUrl,
@@ -226,10 +216,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Direction Guide: Braille, LED and Arrow Answers",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Direction Module guide covering all 36 LED and Braille states, the five repeating number patterns, Braille numbers 1 through 9, state changes after each press, left-right perspective mistakes, troubleshooting, and the Level 4 practice checkpoint.",
 
       image:
         imageUrls,
@@ -257,22 +247,6 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA module solver",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Cable Module",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
             "BOMBANANA Direction Module",
         },
 
@@ -281,7 +255,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Calculator Module",
+            "BOMBANANA Direction answers",
         },
 
         {
@@ -297,7 +271,23 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA Direction LED",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA arrow puzzle",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Level 4",
         },
       ],
 
@@ -355,15 +345,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Direction Module Guide"
+          description="Read the active LED and Braille number together, use the matching direction, and re-check the panel after every press so an old answer never leaks into the next state."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaDirectionContent />
         </GuideArticlePage>
       </main>
 

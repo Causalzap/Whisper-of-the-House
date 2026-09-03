@@ -81,7 +81,6 @@ const paths = [
   '/33-immortals',
   '/the-adventures-of-elliot',
   '/steam-next-fest',
-  '/bombanana',
   '/casualties-unknown',
   '/dust-front-rts',
   '/thank-you-for-your-application',
@@ -846,6 +845,20 @@ const paths = [
   '/neverness-to-everness/duskmoor-anomaly-commissions',
   '/neverness-to-everness/gauntlet-of-valor-guide',
 
+  '/bombanana',
+'/bombanana/module-solver',
+'/bombanana/levels',
+'/bombanana/wire',
+'/bombanana/calculator',
+'/bombanana/roles',
+'/bombanana/achievements',
+'/bombanana/direction',
+'/bombanana/symbol',
+'/bombanana/piano',
+'/bombanana/soundboard',
+'/bombanana/chaos',
+'/bombanana/switch',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -924,8 +937,19 @@ const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
   '/how-to-fish/all-fish-locations': '2026-08-23',
   '/how-to-fish/achievements': '2026-08-23',
 
-  '/bombanana': '2026-08-20',
-  '/bombanana/module-solver': '2026-09-01',
+  '/bombanana': '2026-09-03',
+'/bombanana/module-solver': '2026-09-03',
+'/bombanana/levels': '2026-09-03',
+'/bombanana/wire': '2026-09-03',
+'/bombanana/calculator': '2026-09-03',
+'/bombanana/roles': '2026-09-03',
+'/bombanana/achievements': '2026-09-03',
+'/bombanana/direction': '2026-09-03',
+'/bombanana/symbol': '2026-09-03',
+'/bombanana/piano': '2026-09-03',
+'/bombanana/soundboard': '2026-09-03',
+'/bombanana/chaos': '2026-09-03',
+'/bombanana/switch': '2026-09-03',
 
   '/project-pitt': '2026-08-20',
   '/project-pitt/progression-guide': '2026-08-20',

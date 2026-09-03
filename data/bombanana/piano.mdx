@@ -1,0 +1,357 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+
+export const pianoColumns = [
+  { key: "Octave", label: "Braille" },
+  { key: "Red", label: "Red" },
+  { key: "Yellow", label: "Yellow" },
+  { key: "Green", label: "Green" },
+  { key: "Blue", label: "Blue" },
+];
+
+export const pianoRows = [
+  {
+    Octave: "1",
+    Red: "C → D → E → C",
+    Yellow: "C → E → G → C",
+    Green: "C → D → E → F",
+    Blue: "E → E → F → G",
+  },
+  {
+    Octave: "2",
+    Red: "G → E → E → F",
+    Yellow: "F → A → C → F",
+    Green: "G → A → B → C",
+    Blue: "A → E → A → B",
+  },
+  {
+    Octave: "3",
+    Red: "C → C → G → G",
+    Yellow: "G → B → D → G",
+    Green: "E → F → G → A",
+    Blue: "C → D → C → E",
+  },
+  {
+    Octave: "4",
+    Red: "E → D → C → D",
+    Yellow: "E → C → D → G",
+    Green: "D → F → A → D",
+    Blue: "G → C → G → E",
+  },
+  {
+    Octave: "5",
+    Red: "A → B → C → A",
+    Yellow: "A → G → A → F",
+    Green: "C → G → C → G",
+    Blue: "B → G → A → B",
+  },
+  {
+    Octave: "6",
+    Red: "G → F → E → D",
+    Yellow: "B → A → G → F",
+    Green: "F → E → D → C",
+    Blue: "D → E → D → C",
+  },
+  {
+    Octave: "7",
+    Red: "B → F → G → A",
+    Yellow: "D → C → B → A",
+    Green: "G → B → A → G",
+    Blue: "A → B → A → G",
+  },
+];
+
+
+<section
+  id="quick-answer"
+  className="scroll-mt-24"
+>
+  <GuideQuickAnswer title="Read Two Clues, Then Play Four Notes">
+
+  Find the **Braille octave number** and the **active light color** before anyone starts pressing Piano keys.
+
+  Use the number as the table row and the light as the column. That gives one **four-note sequence**. Play those four notes in order, then check whether the module is finished before carrying any of that sequence into another panel.
+
+  </GuideQuickAnswer>
+</section>
+
+
+<h2
+  id="two-clues"
+  className="scroll-mt-24"
+>
+  28 Piano states collapse to one row and one color
+</h2>
+
+Piano looks information-heavy because the manual contains **7 Braille rows**, **4 light colors**, and **28 possible note sequences**.
+
+During the bomb, I only need two pieces of that table:
+
+**Which Braille number is showing?**
+
+and:
+
+**Which light is active?**
+
+Those two clues select exactly one sequence.
+
+That is the point where I want the lookup finished before the keyboard conversation begins.
+
+<Image
+  src="/images/bombanana/bombanana-piano-module-manual.webp"
+  alt="BOMBANANA Piano Module manual showing Braille octave rows and Red, Yellow, Green, and Blue four-note sequences"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+<GuideTable
+  caption="BOMBANANA Piano note sequence by Braille octave number and active light."
+  columns={pianoColumns}
+  rows={pianoRows}
+/>
+
+The table is the full lookup.
+
+Once I have the matching cell, I stop scanning the other 27 states.
+
+
+<h2
+  id="yellow-one"
+  className="scroll-mt-24"
+>
+  Braille 1 with a Yellow light is C, E, G, C
+</h2>
+
+A clean Piano solve gives a useful example of how short the call can become.
+
+The state was:
+
+**Braille 1**
+
+with:
+
+**Yellow light**
+
+Row 1 plus Yellow gives:
+
+**C → E → G → C**
+
+<Image
+  src="/images/bombanana/bombanana-piano-yellow-light.webp"
+  alt="BOMBANANA Piano Module with a yellow active light during a note-sequence solve"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+The notes were checked in that order:
+
+**C**
+
+then:
+
+**E**
+
+then:
+
+**G**
+
+then:
+
+**C**
+
+and the sequence completed successfully.
+
+That is the complete worked example for this state. The important part is not memorizing `C E G C`; it is being able to reach the correct four notes from **1 + Yellow** without opening three different conversations at once.
+
+
+<h2
+  id="where-teams-get-stuck"
+  className="scroll-mt-24"
+>
+  The first Piano wall is usually too much information, not too little
+</h2>
+
+One early attempt became much harder than the rule itself.
+
+Instead of reducing the panel to:
+
+**number + light → four notes**
+
+the call expanded into individual key labels, octave labels, several Braille values, the LED color, and questions about which player was supposed to pass which part.
+
+At one point the team was calling keys such as:
+
+**C7, D7, E7, F7, G7, A7, B7**
+
+while still trying to establish which Braille information actually mattered.
+
+That creates a bad order of operations.
+
+Seven key names are already more information than the lookup needs to begin.
+
+The manual first needs a **single Braille row and a single light color**.
+
+Only after that lookup returns four notes do those note names become actionable.
+
+When Piano is taking half a minute before anyone has even chosen the table cell, this is the first thing I simplify.
+
+
+<h2
+  id="keep-the-sequence"
+  className="scroll-mt-24"
+>
+  Four notes are short enough to relay once, but long enough to lose one
+</h2>
+
+Cable can come back as one position.
+
+Direction can come back as one button.
+
+Piano returns **four ordered inputs**.
+
+That changes the communication problem.
+
+If the answer is:
+
+**C → E → G → C**
+
+then hearing:
+
+**C, E, G**
+
+correctly is still a failed handoff if the final C disappears.
+
+I keep the four notes as one packet.
+
+A practical call sounds like:
+
+**“Piano. One Yellow. C, E, G, C.”**
+
+The player on the keys repeats:
+
+**“C, E, G, C.”**
+
+Then the input starts.
+
+Breaking the sequence into unrelated note guesses makes it harder to know whether the second E, repeated C, or another similar note belongs to the current answer or a previous question.
+
+
+<h2
+  id="color-and-braille"
+  className="scroll-mt-24"
+>
+  Missing either clue sends the manual reader to the wrong sequence
+</h2>
+
+The light is not decoration.
+
+The Braille number is not enough by itself.
+
+For Braille **1**, the four colors already produce four different answers:
+
+- Red selects one sequence
+- Yellow selects another
+- Green selects another
+- Blue selects another
+
+The table owns the exact notes, so I do not duplicate all four rows again here.
+
+The practical consequence is more important: if somebody says only:
+
+**“Piano, one.”**
+
+I wait for the light.
+
+Likewise:
+
+**“Piano, Yellow.”**
+
+still leaves seven possible rows.
+
+This became a real source of delay in an early run. The light had to be called again, then the team realized the Braille value also had to reach the manual reader before the notes could be settled.
+
+Two small clues sent together are faster than repeatedly repairing one incomplete clue.
+
+
+<h2
+  id="after-confusion"
+  className="scroll-mt-24"
+>
+  If the note chain gets muddy, rebuild the lookup before touching another key
+</h2>
+
+Suppose the team reaches:
+
+**“Was that E or F?”**
+
+or:
+
+**“Did we already press the third note?”**
+
+At that point, another isolated note does not repair the shared state.
+
+I go back to:
+
+**Braille number → active light → full four-note answer**
+
+and repeat the sequence from the communication side before continuing.
+
+The same applies when two players disagree about the light.
+
+A remembered note sequence is not strong enough evidence to choose between them because one different color can move the lookup into another column.
+
+If the table lookup is clear but the four-note answer repeatedly disappears between Mute, Deaf, and Blind, the bottleneck belongs to the <Link href="/bombanana/roles">BOMBANANA Roles Guide</Link>, not another Piano rule.
+
+
+<h2
+  id="level-nine"
+  className="scroll-mt-24"
+>
+  Level 9 tells me whether Piano is ready for a busier bomb
+</h2>
+
+Piano first becomes a fixed Campaign module on **Level 9**.
+
+That bomb gives **3:30** and contains:
+
+**Random Easy + Piano**
+
+with:
+
+**Pressure**
+
+Level 10 raises the coordination cost:
+
+**Symbol + Piano**
+
+with:
+
+**Alarm**
+
+and gives **4:00**.
+
+The extra thirty seconds does not automatically make Level 10 the better practice room. It also adds another medium module and changes the Chaos pressure.
+
+Level 9 is where I want the Piano procedure to become stable.
+
+I replay it when any of these keeps happening:
+
+- the Braille number arrives without the light;
+- the light has to be asked for several times;
+- the manual reader starts listing keyboard labels before selecting the table cell;
+- one of the four notes regularly disappears from the relay;
+- the team knows the right four notes but cannot agree which note has already been pressed.
+
+One messy attempt is not enough to send me backward.
+
+When the **same Piano failure** survives several attempts, moving into Symbol + Piano + Alarm only gives that failure more places to hide.
+
+Once `number + color` reliably becomes one four-note packet, I push on.
+
+The <Link href="/bombanana/levels">BOMBANANA Levels & Walkthrough</Link> owns the full Campaign route and the later points where Piano can return through Random Medium slots.

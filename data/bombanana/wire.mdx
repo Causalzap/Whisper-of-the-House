@@ -1,0 +1,417 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import BombananaModuleSolver from "@/components/tools/BombananaModuleSolver";
+
+export const wireRuleColumns = [
+  {
+    key: "Wire count",
+    label: "Cables",
+  },
+  {
+    key: "LED",
+    label: "Active light",
+  },
+  {
+    key: "Target color",
+    label: "Target cable",
+  },
+];
+
+
+export const wireRuleRows = [
+  {
+    "Wire count": "3",
+    LED: "Red",
+    "Target color": "Blue",
+  },
+  {
+    "Wire count": "3",
+    LED: "Blue",
+    "Target color": "Green",
+  },
+  {
+    "Wire count": "3",
+    LED: "Green",
+    "Target color": "Yellow",
+  },
+  {
+    "Wire count": "3",
+    LED: "Yellow",
+    "Target color": "Red",
+  },
+  {
+    "Wire count": "4",
+    LED: "Red",
+    "Target color": "Green",
+  },
+  {
+    "Wire count": "4",
+    LED: "Blue",
+    "Target color": "Yellow",
+  },
+  {
+    "Wire count": "4",
+    LED: "Green",
+    "Target color": "Red",
+  },
+  {
+    "Wire count": "4",
+    LED: "Yellow",
+    "Target color": "Blue",
+  },
+];
+
+
+<section
+  id="quick-answer"
+  className="scroll-mt-24"
+>
+  <GuideQuickAnswer title="Which Cable Do I Cut?">
+
+  BOMBANANA calls this the **Cable Module**.
+
+  To find the target cable color, I need:
+
+  **cable count + active light**
+
+  Then I use the cable order on the current bomb to turn that color into a physical position.
+
+  The full solve is:
+
+  **count → light → target color → position from the left → cut**
+
+  If the target color does not appear exactly once on the panel, I stop and reread the state instead of guessing.
+
+  </GuideQuickAnswer>
+</section>
+
+
+<BombananaModuleSolver defaultModule="wire" />
+
+
+<h2
+  id="read-the-board"
+  className="scroll-mt-24"
+>
+  The cable count chooses the rule set
+</h2>
+
+The first thing I read is not the light.
+
+I count the cables.
+
+BOMBANANA uses one mapping for **3 cables** and another for **4 cables**, so the same LED can point to a different target depending on the count.
+
+For example, a Blue light means:
+
+- **3 cables → Green**
+- **4 cables → Yellow**
+
+That is enough to make the count mandatory.
+
+<Image
+  src="/images/bombanana/bombanana-cable-module-manual.webp"
+  alt="BOMBANANA Cable Module manual showing the three-cable and four-cable rules for each active light color"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+The complete table is:
+
+<GuideTable
+  caption="BOMBANANA Cable Module target colors."
+  columns={wireRuleColumns}
+  rows={wireRuleRows}
+/>
+
+For three cables:
+
+- **Red light → Blue**
+- **Blue light → Green**
+- **Green light → Yellow**
+- **Yellow light → Red**
+
+For four cables:
+
+- **Red light → Green**
+- **Blue light → Yellow**
+- **Green light → Red**
+- **Yellow light → Blue**
+
+The mapping stops at the target **color**.
+
+The current cable order decides where that target sits physically on the bomb.
+
+
+<h2
+  id="translate-the-answer"
+  className="scroll-mt-24"
+>
+  The target color is not always the final instruction
+</h2>
+
+This is the part that turns Cable from a simple lookup into a three-player problem.
+
+The manual may tell me:
+
+**Blue**
+
+but the player touching the bomb still needs to know which cable that means.
+
+So I separate two jobs:
+
+**manual answer:** target color
+
+**physical answer:** target position from the left
+
+If Blue is the second cable, the final instruction is not just:
+
+**“Cut Blue.”**
+
+It is:
+
+**“Second cable from the left.”**
+
+I can include the color as confirmation, but the position is what makes the answer actionable.
+
+This is especially useful because Blind may not have the same visual information available to identify a cable by color alone.
+
+For the larger Blind / Deaf / Mute communication system, use the <Link href="/bombanana/roles">BOMBANANA Roles Guide</Link>.
+
+
+<h2
+  id="three-cable-example"
+  className="scroll-mt-24"
+>
+  One complete three-cable solve
+</h2>
+
+Take this state:
+
+**3 cables**
+
+**Green active light**
+
+Cable order from left to right:
+
+**Green / Blue / Yellow**
+
+<Image
+  src="/images/bombanana/bombanana-cable-module-three-cables.webp"
+  alt="BOMBANANA bomb with a three-cable Cable Module visible inside the case"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+First I use the count and light:
+
+**3 cables + Green light → Yellow**
+
+Then I locate Yellow on the current panel.
+
+It is third from the left.
+
+The final call is:
+
+**“Third cable from the left. Yellow.”**
+
+That is the whole procedure:
+
+1. **3** selects the three-cable rules.
+2. **Green light** returns Yellow.
+3. **Yellow's current position** returns cable #3.
+4. Blind cuts the third cable.
+
+This is the worked example I use to remember the structure of Cable rather than memorizing a physical slot.
+
+
+<h2
+  id="four-cables"
+  className="scroll-mt-24"
+>
+  Four cables can punish a remembered three-cable answer
+</h2>
+
+The easiest Cable mistake to make after learning the module is carrying a correct three-cable rule into a four-cable board.
+
+Suppose I remember:
+
+**Blue light → Green**
+
+That is correct with three cables.
+
+It is wrong with four.
+
+The four-cable rule is:
+
+**Blue light → Yellow**
+
+Nothing about the LED changed.
+
+The branch changed because the cable count changed.
+
+That is why my callout starts with:
+
+**“Cable. Four.”**
+
+before the LED or cable colors.
+
+If the count is confirmed first, the manual reader cannot silently solve the wrong half of the table.
+
+
+<h2
+  id="callout-language"
+  className="scroll-mt-24"
+>
+  Use one packet for the panel and one packet for the answer
+</h2>
+
+I keep the input and output deliberately different.
+
+The panel state sounds like:
+
+**“Cable. Three. Green light. Green, Blue, Yellow.”**
+
+The answer sounds like:
+
+**“Yellow. Third from the left.”**
+
+The input contains everything needed to solve.
+
+The output contains only what is needed to act.
+
+A useful template is:
+
+**Input**
+
+`Cable → count → LED → colors left to right`
+
+**Answer**
+
+`target color → position from the left`
+
+That prevents a color mentioned in the original panel description from being mistaken for the final target.
+
+It also means every new Cable starts from a fresh, complete packet instead of depending on somebody remembering the previous bomb.
+
+
+<h2
+  id="what-not-to-send"
+  className="scroll-mt-24"
+>
+  These partial calls are not enough
+</h2>
+
+### Only the cable colors
+
+**“Green, Blue, Yellow.”**
+
+That gives me the physical order but not the rule.
+
+I still need the **count and active light**.
+
+### Only the LED
+
+**“Blue light.”**
+
+That is ambiguous because 3-cable and 4-cable boards use different mappings.
+
+I still need the **cable count**.
+
+### Only the target color
+
+**“Cut Yellow.”**
+
+That may be the correct lookup result, but it may still be unusable to Blind.
+
+I convert the target into a **position from the left** before the cut.
+
+
+<h2
+  id="bad-read"
+  className="scroll-mt-24"
+>
+  If the target does not fit the panel, reread instead of improvising
+</h2>
+
+A normal Cable solve should produce one target color that appears in one clear physical position.
+
+If the solver says the target is Yellow but the current cable list contains no Yellow, I do not substitute another cable.
+
+I reread:
+
+- the cable count;
+- the active light;
+- every cable color;
+- the left-to-right order.
+
+The same applies if the state somehow produces more than one copy of the target in the information being entered.
+
+The solver can identify that the state is inconsistent, but it cannot decide which observation was wrong.
+
+I restart the Cable packet from the beginning.
+
+That is safer than trying to repair one field while the rest of the team is still holding an older version of the panel state.
+
+
+<h2
+  id="roles"
+  className="scroll-mt-24"
+>
+  Repeated Cable failures are not always a Cable-rule problem
+</h2>
+
+If the table is being read correctly but the cut still fails, I ask where the information was lost.
+
+The useful chain is:
+
+**panel state → target color → physical position → cut**
+
+If the cable count disappears before the lookup, the wrong rule set can be used.
+
+If the target color is correct but Blind receives no position, the solve can stall at the final handoff.
+
+If the position changes between players, another table lookup will not fix it.
+
+At that point I stop treating Cable as the problem and use the <Link href="/bombanana/roles">BOMBANANA Roles Guide</Link> to fix the relay, perspective, and physical-position language.
+
+
+<h2
+  id="when-ready"
+  className="scroll-mt-24"
+>
+  Cable is ready when the procedure needs almost no discussion
+</h2>
+
+I do not need the whole mapping memorized before moving deeper into the Campaign.
+
+The manual and solver can handle the lookup.
+
+What I want to become automatic is:
+
+**count → light → colors left to right**
+
+followed by:
+
+**target → position → cut**
+
+If Cable still starts with:
+
+**“How many?”**
+
+or ends with:
+
+**“Which one do you mean?”**
+
+I would fix that packet before adding more modules and Chaos pressure.
+
+Once the team can describe the state once, get one position back, and make the cut without reopening the same discussion, Cable is no longer the bottleneck.
+
+For the Campaign sequence and when later modules start appearing, use the <Link href="/bombanana/levels">BOMBANANA Levels & Walkthrough</Link>.
+
+For a fast lookup during a live bomb, use the <Link href="/bombanana/module-solver">BOMBANANA Module Solver</Link>.

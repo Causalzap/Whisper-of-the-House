@@ -1,0 +1,417 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+import BombananaModuleSolver from "@/components/tools/BombananaModuleSolver";
+
+
+export const calculatorColumns = [
+  {
+    key: "LED",
+    label: "LED",
+  },
+  {
+    key: "Odd result",
+    label: "Odd result",
+  },
+  {
+    key: "Even result",
+    label: "Even result",
+  },
+];
+
+
+export const calculatorRows = [
+  {
+    LED: "Red",
+    "Odd result": "3",
+    "Even result": "5",
+  },
+  {
+    LED: "Green",
+    "Odd result": "2",
+    "Even result": "9",
+  },
+  {
+    LED: "Blue",
+    "Odd result": "0",
+    "Even result": "1",
+  },
+  {
+    LED: "Yellow",
+    "Odd result": "7",
+    "Even result": "0",
+  },
+];
+
+
+<section
+  id="quick-answer"
+  className="scroll-mt-24"
+>
+  <GuideQuickAnswer title="No Light Yet? Do the Math First">
+
+  BOMBANANA Calculator has **two stages**.
+
+  First:
+
+  **equation → raw result → enter the raw result**
+
+  After that input is accepted, the Calculator reveals its second state:
+
+  **LED + odd/even raw result → final key**
+
+  If the panel still shows only an equation, I do not wait for a colored light. The LED belongs to the second stage.
+
+  </GuideQuickAnswer>
+</section>
+
+
+<BombananaModuleSolver defaultModule="calculator" />
+
+
+<h2
+  id="two-answers"
+  className="scroll-mt-24"
+>
+  The raw result and final key do different jobs
+</h2>
+
+The arithmetic answer does not finish the Calculator.
+
+It advances the module.
+
+I keep the two values separate:
+
+**raw result**  
+The answer to the equation. Enter this first.
+
+**final key**  
+The single digit chosen after the new LED appears.
+
+That distinction matters because both numbers can be correct at different moments.
+
+If the equation gives **57**, entering 57 may be exactly right even though 57 is not the number that eventually finishes the module.
+
+Once the raw result is accepted, I stop treating the Calculator as an unfinished math problem and read the new state.
+
+
+<h2
+  id="no-light"
+  className="scroll-mt-24"
+>
+  Why there is no colored light at the start
+</h2>
+
+The first Calculator state can show an equation with no useful LED at all.
+
+That is normal.
+
+The correct order is:
+
+1. Read the equation.
+2. Calculate the raw result.
+3. Enter that result.
+4. Wait for the module to change.
+5. Read the new LED.
+6. Classify the raw result as odd or even.
+7. Use the table for the final key.
+
+<Image
+  src="/images/bombanana/bombanana-calculator-red-led-keypad.webp"
+  alt="BOMBANANA Calculator with a red LED active beside the shuffled number keypad"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+So if I am staring at an equation and asking:
+
+**“Where is the light?”**
+
+I am usually one stage early.
+
+If the arithmetic result has already been accepted and a colored LED is now visible, I am in stage two and do not need to solve the equation again.
+
+
+<h2
+  id="manual"
+  className="scroll-mt-24"
+>
+  The final key comes from LED color and parity
+</h2>
+
+Once the raw result has been accepted, I need two pieces of information:
+
+**the new LED color**
+
+and:
+
+**whether the raw result is odd or even**
+
+Those two values select the final key.
+
+<Image
+  src="/images/bombanana/bombanana-calculator-module-manual.webp"
+  alt="BOMBANANA Calculator Module manual showing the Red, Green, Blue, and Yellow odd-even answer table"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+<GuideTable
+  caption="BOMBANANA Calculator final-key mapping."
+  columns={calculatorColumns}
+  rows={calculatorRows}
+/>
+
+The complete mapping is:
+
+- **Red:** odd **3**, even **5**
+- **Green:** odd **2**, even **9**
+- **Blue:** odd **0**, even **1**
+- **Yellow:** odd **7**, even **0**
+
+The digit **0 is a valid final answer**.
+
+A Blue LED with an odd raw result gives **0**.
+
+A Yellow LED with an even raw result also gives **0**.
+
+I do not treat zero as “no answer.”
+
+
+<h2
+  id="worked-solves"
+  className="scroll-mt-24"
+>
+  Two complete Calculator solves
+</h2>
+
+### 55 + 2, then a Red light
+
+Start with:
+
+**55 + 2 = 57**
+
+Enter:
+
+**57**
+
+The Calculator advances and shows a Red LED.
+
+Now classify the raw result:
+
+**57 is odd**
+
+The table gives:
+
+**Red + odd → 3**
+
+So the complete solve is:
+
+**55 + 2 → 57 → Red → odd → 3**
+
+The important transition is between **57** and **Red**.
+
+57 belongs to stage one.
+
+3 belongs to stage two.
+
+
+### 55 - 27, then a Green light
+
+Calculate:
+
+**55 - 27 = 28**
+
+Enter:
+
+**28**
+
+After the Calculator advances:
+
+**28 is even**
+
+With a Green LED:
+
+**Green + even → 9**
+
+The complete solve is:
+
+**55 - 27 → 28 → Green → even → 9**
+
+This second example confirms the same process with subtraction and an even result rather than adding another special rule.
+
+
+<h2
+  id="callout"
+  className="scroll-mt-24"
+>
+  Label the two numbers so they cannot be confused
+</h2>
+
+Calculator becomes much safer when the arithmetic result and the final key have different names.
+
+I use:
+
+**raw**
+
+for the equation result,
+
+and:
+
+**final**
+
+for the digit chosen from the LED table.
+
+A compact exchange can sound like:
+
+**“Calculator. Raw 57.”**
+
+then, after the panel changes:
+
+**“Red. Odd. Final 3.”**
+
+The important part is not the exact wording.
+
+It is that nobody hears an unlabeled number and has to guess whether it belongs to stage one or stage two.
+
+If the team understands Calculator but numbers still get lost or attached to another module, I move to the <Link href="/bombanana/roles">BOMBANANA Roles Guide</Link> instead of adding more Calculator rules here.
+
+
+<h2
+  id="diagnose"
+  className="scroll-mt-24"
+>
+  Diagnose the stage that failed
+</h2>
+
+When Calculator goes wrong, I check where the process stopped instead of restarting every rule from memory.
+
+### Equation visible, but no LED
+
+That is still stage one.
+
+Solve the equation and enter the raw result.
+
+### Raw result accepted, but no final answer yet
+
+Read the new LED.
+
+Then classify the **raw result** as odd or even.
+
+Do not classify the final key.
+
+### Final key looks impossible
+
+Check the process in this order:
+
+1. arithmetic;
+2. parity;
+3. LED color;
+4. table lookup.
+
+An arithmetic mistake changes parity and therefore contaminates every step after it.
+
+### The correct digit was called, but the press failed
+
+Look at the actual Calculator keypad.
+
+Press the **digit printed on the button**, not the physical position where that digit normally appears on a phone, keyboard, or standard numpad.
+
+The keypad layout can be shuffled.
+
+### Nobody knows whether the first number was already entered
+
+Stop using remembered state.
+
+Read the Calculator as it appears now before pressing anything else.
+
+
+<h2
+  id="when-to-stop"
+  className="scroll-mt-24"
+>
+  Re-read the panel when the current stage becomes uncertain
+</h2>
+
+I stop entering numbers when:
+
+- two players heard different equations;
+- nobody knows whether the raw result was already submitted;
+- the LED was called before the raw result was accepted;
+- odd/even is still being argued about;
+- a mistake has already occurred;
+- somebody remembers a number but not which stage it belonged to.
+
+At that point, another guess is less useful than rebuilding the current state.
+
+<Image
+  src="/images/bombanana/bombanana-calculator-mistake-state.webp"
+  alt="BOMBANANA bomb after a failed attempt with the Calculator still visible"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+If the panel still shows the equation, I am in stage one.
+
+If the raw result has been accepted and the LED is visible, I am in stage two.
+
+I continue from what the bomb shows now rather than from what somebody remembers seeing before the mistake.
+
+
+<h2
+  id="solver-or-manual"
+  className="scroll-mt-24"
+>
+  When I use the solver
+</h2>
+
+During a live bomb, the solver is useful for both parts of Calculator:
+
+**equation → raw result**
+
+and then:
+
+**LED + parity → final key**
+
+The tool removes the need to scan the table while the timer is running.
+
+The manual is still useful when learning the module because it makes the two-stage structure visible.
+
+What I actually want to remember is not eight isolated final digits.
+
+It is:
+
+**do the math → enter it → read the new state → finish the lookup**
+
+Once that sequence is automatic, the table itself becomes the easy part.
+
+
+<h2
+  id="move-on"
+  className="scroll-mt-24"
+>
+  Calculator is ready when nobody waits for the wrong stage
+</h2>
+
+I do not need the whole LED table memorized before moving deeper into the Campaign.
+
+I do want two mistakes to disappear:
+
+**waiting for an LED before solving the equation**
+
+and:
+
+**treating the raw arithmetic result as the final key**
+
+If those are gone, the team understands the module's real structure.
+
+The solver can handle forgotten table values.
+
+For the current Campaign progression and where Calculator starts overlapping with more modules and Chaos pressure, use the <Link href="/bombanana/levels">BOMBANANA Levels & Walkthrough</Link>.
+
+If another panel is causing the run to fail, return to the <Link href="/bombanana/module-solver">BOMBANANA Module Solver & Manual</Link>.

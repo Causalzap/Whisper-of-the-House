@@ -131,6 +131,386 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "BOMBANANA",
+    game: "BOMBANANA",
+    href: "/bombanana",
+    slug: "bombanana",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "Three-Player Co-op Bomb Defusal",
+    eyebrow: "Guide Hub",
+    hubStatus:
+      "30 Campaign levels + module solver + roles + 23 achievements",
+  
+    description:
+      "Use the BOMBANANA guide hub to diagnose what is stopping a run, solve individual modules, improve Blind / Deaf / Mute communication, follow all 30 Campaign levels, manage Chaos, and finish all 23 achievements.",
+  
+    coverage: [
+      "Full 30-level Campaign progression with timers, fixed module introductions, Random Easy / Medium / Hard slots, Chaos combinations, mistake allowances, practice checkpoints, and decisions about when to replay or push forward",
+      "Live Module Solver for Cable / Wire, Direction, and Calculator, including current-v1 rules, physical Cable positions, all 36 Direction LED-Braille states, and Calculator raw-result to final-key flow",
+      "Blind, Deaf, and Mute communication through role responsibilities, left/right perspective, physical-position language, repeat versus reset calls, ordered-state relay, and role-swap diagnosis",
+      "Symbol, Piano, Soundboard, and Switch procedures through sounding-shape identification, staged inputs, Braille and LED note sequences, 3×3 grid communication, and complete four-light / four-number Switch states",
+      "Chaos management across Slider, Pressure, and Alarm, including interruption priority, attention budgeting, preserving an unfinished defusal state, and late-Campaign stacked hazards",
+      "All 23 Steam achievements with an interactive checklist and cleanup route for Campaign milestones, repeated levels, dice, repairs, slaps, baskets, Just in Time!, Custom Hard, and Endless",
+    ],
+  
+    image:
+      "/images/bombanana/bombanana-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 43,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "BOMBANANA Guide: Modules, Roles, Levels & Achievements",
+        href: "/bombanana",
+        type: "Guide Hub",
+        description:
+          "Start here to diagnose the team's current bottleneck, choose the right module help, decide when to replay a level, and move between Campaign, Endless, Custom, and achievement cleanup.",
+        image:
+          "/images/bombanana/bombanana-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "30 Campaign levels, Blind / Deaf / Mute roles, Module Solver, Cable, Direction, Calculator, Symbol, Piano, Soundboard, Switch, Chaos, Endless, Custom, and 23 achievements",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Module Solver: Cable, Direction & Calculator",
+        href: "/bombanana/module-solver",
+        type: "Puzzle Help",
+        description:
+          "Enter the current Cable, Direction, or Calculator state and get the next usable answer without rereading the full manual during a live bomb.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-manual-layout.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 285,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Cable and Wire solver, Direction LED + Braille lookup, Calculator arithmetic, odd/even parity, final keypad digit, and current-v1 rules",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Levels & Walkthrough: All 30 Campaign Levels",
+        href: "/bombanana/levels",
+        type: "Walkthrough",
+        description:
+          "Follow all 30 Campaign levels with timers, module combinations, Chaos systems, mistake allowances, first appearances, and useful replay checkpoints.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-campaign-level-11-select.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 286,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "All 30 levels, timers, Random Easy / Medium / Hard slots, mistake allowance, Direction at Level 4, Switch at 16, Maze at 18, Morse at 21, Monkey-Says at 23, and late-game Chaos",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Cable / Wire Guide: LED Rules & Cut Positions",
+        href: "/bombanana/wire",
+        type: "Puzzle Help",
+        description:
+          "Use cable count and the active LED to find the target color, translate that color into a physical position, and give Blind a cut instruction that can actually be used.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-cable-module-three-cables.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Calculator Guide: Odd/Even & Final Key",
+        href: "/bombanana/calculator",
+        type: "Puzzle Help",
+        description:
+          "Solve the arithmetic result, enter it first, read the new LED, use odd or even parity, and press the correct final Calculator key.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-calculator-red-led-keypad.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Roles Guide: Blind, Deaf & Mute Communication",
+        href: "/bombanana/roles",
+        type: "Guide",
+        description:
+          "Build a reliable Blind, Deaf, and Mute relay with physical-position language, perspective rules, repeat and reset signals, and better role assignments.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-role-selection-lobby.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Direction Guide: Braille & LED Answers",
+        href: "/bombanana/direction",
+        type: "Puzzle Help",
+        description:
+          "Read the active LED and Braille number together, use the correct answer across all 36 states, and avoid stale-state and left/right mistakes.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-direction-green-light-braille-two.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 287,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Braille 1–9, 36 LED-number states, five repeating patterns, Green + 2, one-press re-read flow, and left/right perspective",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Symbol Guide: Sound, Stages & Buttons",
+        href: "/bombanana/symbol",
+        type: "Puzzle Help",
+        description:
+          "Rotate the pointer until one symbol makes a sound, describe that shape consistently, use the current stage, and press the matching colored button.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-symbol-active-shape.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 288,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Sounding symbol, pointer rotation, four stages, shape naming, look-alike symbols, current-stage color input, and Level 8 practice",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 8,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Piano Guide: Braille, LED & Note Sequences",
+        href: "/bombanana/piano",
+        type: "Puzzle Help",
+        description:
+          "Combine the Braille octave and active light, find the correct four-note sequence, keep the notes in order, and diagnose Piano input mistakes.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-piano-yellow-light.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 289,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Braille octave, Red / Yellow / Green / Blue light, four-note sequences, Yellow + 1 example, relay mistakes, and Level 9 practice",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 9,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Soundboard Guide: Braille, Colors & Grid",
+        href: "/bombanana/soundboard",
+        type: "Puzzle Help",
+        description:
+          "Find the button that makes a sound, combine its Braille number and color, resolve the 3×3 pattern, and track the cells still waiting to be pressed.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-soundboard-active-button.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 290,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "Sound search, Braille + color state, 3×3 grid positions, target versus answer cells, pressed-cell tracking, relay errors, and Level 11",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 10,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
+        href: "/bombanana/chaos",
+        type: "Systems",
+        description:
+          "Manage Slider, Pressure, and Alarm while normal modules are still active, decide when danger deserves an interruption, and resume the previous solve cleanly.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-chaos-modules.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 291,
+          spotlightFeature: true,
+          spotlightOrder: 7,
+          spotlightMeta:
+            "27 of 30 Campaign levels, Slider at Level 4, Pressure at 6, Alarm at 10, stacked Chaos, interruption priority, attention budget, and Levels 12 / 26 / 29",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 11,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Switch Guide: Lights, Numbers & Enter",
+        href: "/bombanana/switch",
+        type: "Puzzle Help",
+        description:
+          "Keep all four light colors and four numbers in one ordered state, resolve the four switch positions, reread uncertain values, and press Enter only after confirmation.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-switch-module.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestOrder: 292,
+          spotlightFeature: true,
+          spotlightOrder: 8,
+          spotlightMeta:
+            "Four-light order, four-number state, Up / Down outputs, physical switch positions, full-state rereads, Enter confirmation, and Level 16 practice",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 12,
+        },
+      },
+  
+      {
+        title:
+          "BOMBANANA Achievements Guide: All 23 & Checklist",
+        href: "/bombanana/achievements",
+        type: "Achievements",
+        description:
+          "Track all 23 Steam achievements with a persistent checklist and cleanup route for Campaign, repeat counters, slaps, repairs, baskets, Custom, and Endless.",
+        date: "Updated recently",
+        image:
+          "/images/bombanana/bombanana-slapping-between-rounds.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        archive: {
+          showInCollections: true,
+          order: 13,
+        },
+      },
+    ],
+  },
+  {
     title: "Neverness to Everness",
     game: "Neverness to Everness",
     href: "/neverness-to-everness",

@@ -7,56 +7,68 @@ import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
 
 import BombananaContent from "@/data/bombanana/index.mdx";
 
-const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/bombanana`;
+
+const siteUrl =
+  "https://www.whisperofthehouse.com";
+
+const pageUrl =
+  `${siteUrl}/bombanana`;
+
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-tutorial-book.webp`,
-  `${siteUrl}/images/bombanana/bombanana-wire-module-led.webp`,
-  `${siteUrl}/images/bombanana/bombanana-numpad-math-module.webp`,
-  `${siteUrl}/images/bombanana/bombanana-switch-module.webp`,
+  `${siteUrl}/images/bombanana/bombanana-hub.webp`,
+  `${siteUrl}/images/bombanana/bombanana-bomb-timer-mistakes.webp`,
 ];
+
 
 const toc = [
   {
-    id: "manual-quick-reference",
-    label: "Manual quick reference",
+    id: "what-kind-of-game",
+    label: "What the game asks from three players",
   },
   {
-    id: "how-many-levels",
-    label: "How many levels?",
+    id: "first-hour",
+    label: "What to learn first",
   },
   {
-    id: "how-to-play",
-    label: "How to play",
+    id: "campaign",
+    label: "30-level Campaign",
   },
   {
-    id: "wires-manual",
-    label: "Wires manual",
+    id: "when-to-use-solver",
+    label: "When to use the solver",
   },
   {
-    id: "direction-manual",
-    label: "Direction / D-pad",
+    id: "where-teams-get-stuck",
+    label: "Why teams get stuck",
   },
   {
-    id: "calculation-manual",
-    label: "Calculation / numpad",
+    id: "calculator",
+    label: "Calculator",
   },
   {
-    id: "switch-manual",
-    label: "Switch module",
+    id: "chaos",
+    label: "Chaos",
   },
   {
-    id: "levels-1-7",
-    label: "Levels 1–7",
+    id: "buy-or-skip",
+    label: "Buy or skip",
   },
   {
-    id: "best-module-order",
-    label: "Best module order",
+    id: "when-to-stop-session",
+    label: "When to stop retrying",
   },
   {
-    id: "common-mistakes",
-    label: "Common mistakes",
+    id: "modes",
+    label: "Campaign, Endless & Custom",
+  },
+  {
+    id: "completion",
+    label: "Completion",
+  },
+  {
+    id: "where-next",
+    label: "Where to go next",
   },
   {
     id: "faq",
@@ -64,216 +76,361 @@ const toc = [
   },
 ];
 
-const relatedLinks: {
-  href: string;
-  label: string;
-}[] = [];
+
+const relatedLinks = [
+  {
+    href: "/bombanana/module-solver",
+    label: "BOMBANANA Module Solver & Manual",
+  },
+  {
+    href: "/bombanana/levels",
+    label: "BOMBANANA Levels & Walkthrough",
+  },
+  {
+    href: "/bombanana/wire",
+    label: "BOMBANANA Cable / Wire Guide",
+  },
+  {
+    href: "/bombanana/calculator",
+    label: "BOMBANANA Calculator Guide",
+  },
+  {
+    href: "/bombanana/roles",
+    label: "BOMBANANA Roles Guide",
+  },
+  {
+    href: "/bombanana/achievements",
+    label: "BOMBANANA Achievements Guide",
+  },
+];
+
 
 export const metadata: Metadata = {
-  title: "BOMBANANA Manual & Guide: Modules, Levels & Solutions",
+  title:
+    "BOMBANANA Manual & Guide: Solver, Levels, Roles",
+
   description:
-    "BOMBANANA manual and guide for wires, D-pad, numpad math, switch modules, all 7 current levels, role communication, and puzzle solutions.",
+    "BOMBANANA manual and guide for module solving, all 30 Campaign levels, Blind/Deaf/Mute roles, achievements, Endless, Custom, and common run failures.",
+
   alternates: {
     canonical: pageUrl,
   },
+
   openGraph: {
-    title: "BOMBANANA Manual & Guide: Modules, Levels & Solutions",
+    title:
+      "BOMBANANA Manual & Guide: Solver, Levels, Roles",
+
     description:
-      "Use this BOMBANANA manual for wires, Direction and Braille, numpad math, switch rules, all 7 current levels, communication, and puzzle solutions.",
+      "Solve the problem that is actually ending your BOMBANANA run, from module lookups and 30-level progression to role communication, Chaos, and completion.",
+
     url: pageUrl,
-    siteName: "Whisper of the House",
-    type: "article",
+
+    siteName:
+      "Whisper of the House",
+
+    type:
+      "article",
+
     images: [
       {
         url: imageUrls[0],
         width: 1600,
         height: 900,
-        alt: "BOMBANANA manual showing bomb modules, roles, Braille, and puzzle instructions.",
+        alt:
+          "BOMBANANA three-player co-op bomb defusal gameplay.",
       },
     ],
   },
+
   twitter: {
-    card: "summary_large_image",
-    title: "BOMBANANA Manual & Guide: Modules, Levels & Solutions",
+    card:
+      "summary_large_image",
+
+    title:
+      "BOMBANANA Manual & Guide: Solver, Levels, Roles",
+
     description:
-      "BOMBANANA manual for wires, D-pad, numpad math, switches, all 7 current levels, role communication, and puzzle solutions.",
-    images: [imageUrls[0]],
+      "Use the BOMBANANA guide for module solving, 30 Campaign levels, Blind/Deaf/Mute communication, achievements, Endless, and Custom.",
+
+    images: [
+      imageUrls[0],
+    ],
   },
 };
 
+
 const jsonLd = {
-  "@context": "https://schema.org",
+  "@context":
+    "https://schema.org",
+
   "@graph": [
     {
-      "@type": "BreadcrumbList",
-      "@id": `${pageUrl}#breadcrumb`,
+      "@type":
+        "BreadcrumbList",
+
+      "@id":
+        `${pageUrl}#breadcrumb`,
+
       itemListElement: [
         {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: siteUrl,
+          "@type":
+            "ListItem",
+
+          position:
+            1,
+
+          name:
+            "Home",
+
+          item:
+            siteUrl,
         },
         {
-          "@type": "ListItem",
-          position: 2,
-          name: "BOMBANANA Manual & Guide",
-          item: pageUrl,
+          "@type":
+            "ListItem",
+
+          position:
+            2,
+
+          name:
+            "BOMBANANA Guide",
+
+          item:
+            pageUrl,
         },
       ],
     },
+
+
     {
-      "@type": "Article",
-      "@id": `${pageUrl}#article`,
+      "@type":
+        "Article",
+
+      "@id":
+        `${pageUrl}#article`,
+
       mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": pageUrl,
+        "@type":
+          "WebPage",
+
+        "@id":
+          pageUrl,
       },
-      headline: "BOMBANANA Manual & Guide: Modules, Levels & Solutions",
+
+      headline:
+        "BOMBANANA Guide: Modules, Roles, Levels & What to Fix Next",
+
       description:
-        "A player-focused BOMBANANA manual and guide covering wires, Direction and Braille, calculation and numpad logic, odd and even answers, switch-panel rules, all seven current levels, role communication, module order, and common puzzle mistakes.",
-      image: imageUrls,
-      inLanguage: "en",
-      datePublished: "2026-06-19",
-      dateModified: "2026-08-20",
-      articleSection: "Guides",
+        "A player-focused BOMBANANA guide for identifying why a run is failing, choosing between the module solver and deeper guides, progressing through the 30-level Campaign, fixing Blind, Deaf, and Mute communication, managing Chaos pressure, and moving into achievements, Endless, and Custom.",
+
+      image:
+        imageUrls,
+
+      inLanguage:
+        "en",
+
+      datePublished:
+        "2026-06-19",
+
+      dateModified:
+        "2026-09-03",
+
+      articleSection:
+        "Guides",
+
       about: [
         {
-          "@type": "VideoGame",
-          name: "BOMBANANA",
+          "@type":
+            "VideoGame",
+
+          name:
+            "BOMBANANA",
         },
         {
-          "@type": "Thing",
-          name: "BOMBANANA manual",
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA module solver",
         },
         {
-          "@type": "Thing",
-          name: "BOMBANANA guide",
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Campaign",
         },
         {
-          "@type": "Thing",
-          name: "BOMBANANA levels",
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Blind Deaf Mute roles",
         },
         {
-          "@type": "Thing",
-          name: "BOMBANANA wires",
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA achievements",
         },
         {
-          "@type": "Thing",
-          name: "BOMBANANA Direction module",
-        },
-        {
-          "@type": "Thing",
-          name: "BOMBANANA D-pad",
-        },
-        {
-          "@type": "Thing",
-          name: "BOMBANANA Braille",
-        },
-        {
-          "@type": "Thing",
-          name: "BOMBANANA calculation module",
-        },
-        {
-          "@type": "Thing",
-          name: "BOMBANANA numpad",
-        },
-        {
-          "@type": "Thing",
-          name: "BOMBANANA odd even answers",
-        },
-        {
-          "@type": "Thing",
-          name: "BOMBANANA switch module",
-        },
-        {
-          "@type": "Thing",
-          name: "BOMBANANA Level 5",
-        },
-        {
-          "@type": "Thing",
-          name: "BOMBANANA Level 7",
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA Endless and Custom modes",
         },
       ],
+
       isPartOf: {
-        "@type": "WebSite",
-        "@id": `${siteUrl}#website`,
-        name: "Whisper of the House",
-        url: siteUrl,
+        "@type":
+          "WebSite",
+
+        "@id":
+          `${siteUrl}#website`,
+
+        name:
+          "Whisper of the House",
+
+        url:
+          siteUrl,
       },
+
       publisher: {
-        "@type": "Organization",
-        "@id": `${siteUrl}#organization`,
-        name: "Whisper of the House",
-        url: siteUrl,
+        "@type":
+          "Organization",
+
+        "@id":
+          `${siteUrl}#organization`,
+
+        name:
+          "Whisper of the House",
+
+        url:
+          siteUrl,
       },
+
       breadcrumb: {
-        "@id": `${pageUrl}#breadcrumb`,
+        "@id":
+          `${pageUrl}#breadcrumb`,
       },
     },
+
+
     {
-      "@type": "FAQPage",
-      "@id": `${pageUrl}#faq`,
+      "@type":
+        "FAQPage",
+
+      "@id":
+        `${pageUrl}#faq`,
+
       mainEntity: [
         {
-          "@type": "Question",
-          name: "How many levels are in BOMBANANA?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "The current playable version of BOMBANANA has 7 levels, with Level 7 as the current maximum.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Is Level 5 the final BOMBANANA level?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "No. Level 5 introduces the switch panel as a major new mechanic, but the current progression continues through Levels 6 and 7.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What should I call out first for every BOMBANANA module?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text:
-              "Start with the module name and position. Then give only the state that module needs: wire count and LED for Wires, LED and Braille for Direction, equation result plus LED and odd or even for Numpad, or the full light order and four numbers for Switches.",
-          },
-        },
-        {
-          "@type": "Question",
+          "@type":
+            "Question",
+
           name:
-            "Why does the BOMBANANA numpad need another number after I solve the equation?",
+            "How many players is BOMBANANA for?",
+
           acceptedAnswer: {
-            "@type": "Answer",
+            "@type":
+              "Answer",
+
             text:
-              "The calculation module is two-stage. Enter the raw equation result first, then use the LED color and odd or even classification to determine the final single-digit key.",
+              "BOMBANANA is built around three-player co-op, with Blind, Deaf, and Mute splitting the bomb, communication, and manual information between them.",
           },
         },
+
+
         {
-          "@type": "Question",
-          name: "Why do BOMBANANA switch answers change between runs?",
+          "@type":
+            "Question",
+
+          name:
+            "How many Campaign levels are there in BOMBANANA?",
+
           acceptedAnswer: {
-            "@type": "Answer",
+            "@type":
+              "Answer",
+
             text:
-              "The switch panel does not use one universal color-to-position rule. The light order selects the rule family, while the four numbers determine which conditions apply in that setup.",
+              "The full-release BOMBANANA Campaign has 30 levels. The Levels & Walkthrough guide covers the detailed progression, module introductions, timers, and late-game structure.",
           },
         },
+
+
         {
-          "@type": "Question",
-          name: "What should I do if a BOMBANANA switch answer is wrong?",
+          "@type":
+            "Question",
+
+          name:
+            "Is there a BOMBANANA solver?",
+
           acceptedAnswer: {
-            "@type": "Answer",
+            "@type":
+              "Answer",
+
             text:
-              "Do not immediately press Enter again. Re-read the complete light order and all four numbers, identify which physical switch needs to change, correct it, and then confirm the full panel before pressing Enter.",
+              "Yes. The current BOMBANANA Module Solver handles Cable or Wire, Direction, and Calculator.",
+          },
+        },
+
+
+        {
+          "@type":
+            "Question",
+
+          name:
+            "Why can we know the correct answer and still fail a BOMBANANA module?",
+
+          acceptedAnswer: {
+            "@type":
+              "Answer",
+
+            text:
+              "The manual answer is not always the final instruction Blind needs. The team still has to move that answer through the three roles without losing position, perspective, stage, or sequence information.",
+          },
+        },
+
+
+        {
+          "@type":
+            "Question",
+
+          name:
+            "Should I memorize the whole BOMBANANA manual before playing?",
+
+          acceptedAnswer: {
+            "@type":
+              "Answer",
+
+            text:
+              "No. Learn what information each module needs, keep the callouts consistent, and use the manual or solver when a specific panel becomes the bottleneck.",
+          },
+        },
+
+
+        {
+          "@type":
+            "Question",
+
+          name:
+            "What should I do if the same BOMBANANA module keeps ending our run?",
+
+          acceptedAnswer: {
+            "@type":
+              "Answer",
+
+            text:
+              "Stop replaying the level unchanged. Identify whether the failure is the module rule, the physical input, or the role relay, fix that specific problem, and then return to the Campaign.",
           },
         },
       ],
     },
   ],
 };
+
 
 export default function Page() {
   return (
@@ -284,16 +441,19 @@ export default function Page() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd),
+            __html:
+              JSON.stringify(
+                jsonLd
+              ),
           }}
         />
 
         <GuideArticlePage
-          title="BOMBANANA Manual & Guide"
-          description="Use this BOMBANANA manual to solve wires, Direction and Braille, numpad math, switch modules, all seven current levels, and the communication mistakes that cost runs."
+          title="BOMBANANA Guide: Modules, Roles, Levels & What to Fix Next"
+          description="Start with the problem that is actually ending the run. Use the solver for a known module state, or jump to the guide that owns the rule, role, progression, or completion problem."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
-          updatedAt="August 20, 2026"
+          updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
@@ -302,8 +462,8 @@ export default function Page() {
 
         <GameDiscoveryCta
           gameTitle="BOMBANANA"
-          heading="Looking for another game after BOMBANANA?"
-          description="Use the quick recommender to find something that fits your current mood, platform, and play mode, or build a broader Gaming DNA profile from nine games you already love."
+          heading="Looking for another co-op game after BOMBANANA?"
+          description="Use the quick recommender to find another game that fits your platform, group size, and current mood, or build a broader Gaming DNA profile from games you already love."
         />
       </main>
 

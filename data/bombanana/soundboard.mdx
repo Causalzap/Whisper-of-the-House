@@ -1,0 +1,442 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+
+export const soundboardColumns = [
+  {
+    key: "Braille",
+    label: "Braille",
+  },
+  {
+    key: "Red",
+    label: "Red",
+  },
+  {
+    key: "Green",
+    label: "Green",
+  },
+  {
+    key: "Yellow",
+    label: "Yellow",
+  },
+  {
+    key: "Blue",
+    label: "Blue",
+  },
+];
+
+
+export const soundboardRows = [
+  {
+    Braille: "1",
+    Red: "TL · TC · ML · BR",
+    Green: "TL · MC · BC · BR",
+    Yellow: "TC · ML · MR · BC",
+    Blue: "TR · ML · MC · BC",
+  },
+  {
+    Braille: "2",
+    Red: "TC · ML · MR · BR",
+    Green: "TC · TR · ML · BC",
+    Yellow: "TL · TC · MC · BR",
+    Blue: "TL · MR · BL · BR",
+  },
+  {
+    Braille: "3",
+    Red: "TL · TR · MC · BL",
+    Green: "TR · ML · MC · BL",
+    Yellow: "TR · MC · BL",
+    Blue: "TC · ML · MC · MR",
+  },
+  {
+    Braille: "4",
+    Red: "TL · TC · MR · BC",
+    Green: "TL · MR · BL · BC",
+    Yellow: "TC · TR · ML · BC",
+    Blue: "TL · TR · MC · BL · BR",
+  },
+  {
+    Braille: "5",
+    Red: "TL · TC · TR · MR · BL · BR",
+    Green: "TL · TC · ML · MC · BR",
+    Yellow: "TL · TR · ML · MC · MR",
+    Blue: "TC · TR · ML · MR · BR",
+  },
+  {
+    Braille: "6",
+    Red: "TC · ML · MC · BL · BC",
+    Green: "TC · MC · MR · BL · BC · BR",
+    Yellow: "TR · ML · MC · BC · BR",
+    Blue: "TL · ML · MC · MR · BR",
+  },
+  {
+    Braille: "7",
+    Red: "TL · ML · MR · BC · BR",
+    Green: "TL · TC · TR · MR · BC",
+    Yellow: "TL · MC · BC · BR",
+    Blue: "TR · MC · MR · BL · BC",
+  },
+  {
+    Braille: "8",
+    Red: "TC · TR · ML · MC · MR · BR",
+    Green: "ML · MC · MR · BL · BC · BR",
+    Yellow: "TC · ML · MC · MR · BC",
+    Blue: "TL · TC · MC · BL · BC",
+  },
+  {
+    Braille: "9",
+    Red: "TL · TC · TR · ML · MR · BL · BC",
+    Green: "TL · TC · TR · ML · MC · BL · BC · BR",
+    Yellow: "TL · TC · TR · MC · BL · BC · BR",
+    Blue: "TL · TR · ML · MC · MR · BC · BR",
+  },
+];
+
+
+<section
+  id="quick-answer"
+  className="scroll-mt-24"
+>
+  <GuideQuickAnswer title="Find the Sounding Button Before Reading the Grid">
+
+  Press the Soundboard buttons **one at a time until one makes a sound**.
+
+  Once you find it, read only that button's **Braille number and color**. Match those two values in the table, then press every 3×3 position marked for that state.
+
+  The sounding button identifies the rule. The marked grid positions are the actual answer.
+
+  </GuideQuickAnswer>
+</section>
+
+
+<h2
+  id="find-the-sound"
+  className="scroll-mt-24"
+>
+  Nine visible buttons create the wrong first question
+</h2>
+
+Soundboard opens with a **3×3 grid of nine buttons**.
+
+Each button can carry Braille information, and the board can show several colors, so the first instinct is to start reporting everything:
+
+**top-left number**
+
+**top-middle number**
+
+**top-right color**
+
+**middle row**
+
+and so on.
+
+That is far more information than the manual needs at the start.
+
+The first job is simply to search the grid.
+
+Press one button.
+
+No sound? Move to the next.
+
+Keep going until one button produces the sound.
+
+That button becomes the only state I care about for the lookup.
+
+In an early attempt, the team was already calling long strings of colors and numbers before anyone had established which button made the sound. The entire conversation changed once the instruction was reduced to:
+
+**find the sound first**
+
+Only after that do the Braille number and color matter.
+
+
+<h2
+  id="two-part-solve"
+  className="scroll-mt-24"
+>
+  Soundboard has a search phase and an input phase
+</h2>
+
+I treat the module as two different jobs.
+
+### Search
+
+Move through the nine buttons until one makes a sound.
+
+### Resolve
+
+Read the sounding button's:
+
+**Braille number**
+
+and:
+
+**color**
+
+Then use those two values to find the required positions in the manual.
+
+<Image
+  src="/images/bombanana/bombanana-soundboard-red-braille-four.webp"
+  alt="BOMBANANA Soundboard after the sounding button has been identified as Red with Braille 4"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+This distinction fixes one of the most confusing first-run moments.
+
+A player can say:
+
+**“Red 4.”**
+
+and somebody else can still be pressing buttons randomly because they think the team is still searching for the sound.
+
+I therefore call the transition clearly:
+
+**“Sound found. Red 4.”**
+
+Once that sentence is heard, probing stops.
+
+Now the team is solving the grid pattern.
+
+
+<h2
+  id="position-key"
+  className="scroll-mt-24"
+>
+  Read the answer as positions on the 3×3 board
+</h2>
+
+The manual marks positions with Xs.
+
+For the compact table below, I use:
+
+TL · TC · TR
+ML · MC · MR
+BL · BC · BR
+
+which means:
+
+top-left · top-center · top-right
+
+middle-left · middle-center · middle-right
+
+bottom-left · bottom-center · bottom-right
+
+<Image src="/images/bombanana/bombanana-soundboard-module-manual.webp" alt="BOMBANANA Soundboard Module manual showing Braille rows, four color columns, and the 3 by 3 button patterns" width={1600} height={900} className="my-8 rounded-xl" />
+
+<GuideTable caption="BOMBANANA Soundboard positions. Find the sounding button first, then use its Braille number and color." columns={soundboardColumns} rows={soundboardRows} />
+
+That table is the full lookup.
+
+For example, if the sounding button is:
+
+Braille 4 + Red
+
+the answer is:
+
+TL · TC · MR · BC
+
+I press those four positions on the Soundboard.
+
+I do not need the Braille numbers printed on the other eight buttons to solve that state.
+
+<h2 id="target-versus-answer" className="scroll-mt-24" > The button that makes the sound is not necessarily the button pattern you press </h2>
+
+This is the conceptual mistake that causes a lot of wasted inputs.
+
+The sounding button gives me:
+
+which row
+
+and:
+
+which color column
+
+It is a key into the manual.
+
+The result of that lookup is a set of positions across the 3×3 board.
+
+So the flow is not:
+
+find sounding button → press that same button again
+
+It is:
+
+find sounding button
+
+→ read its Braille + color
+
+→ find the matching table cell
+
+→ press all marked positions
+
+That difference is easy to miss because both stages use the same nine physical buttons.
+
+Once I separate “button that identifies the rule” from “buttons required by the rule,” the module becomes much easier to reason about.
+
+<h2 id="red-four" className="scroll-mt-24" > Red 4 is a useful worked state </h2>
+
+One run reached the Soundboard and found a sounding button with:
+
+Red
+
+and:
+
+Braille 4
+
+The table gives:
+
+TL · TC · MR · BC
+
+So my finished packet is:
+
+“Soundboard. Red 4. Top-left, top-center, middle-right, bottom-center.”
+
+There is no benefit in repeating all nine visible Braille values after the target has already been found.
+
+This is also where physical naming matters.
+
+“First one” can work while everyone is staring at the same row.
+
+It becomes fragile as soon as somebody asks:
+
+first from the left? first row? first column?
+
+The 3×3 coordinate language removes that ambiguity.
+
+<h2 id="already-pressed" className="scroll-mt-24" > Track what has already been pressed before adding another position </h2>
+
+Later Soundboard attempts exposed a different failure.
+
+The rule was understood.
+
+The team knew which positions were supposed to be filled.
+
+The problem was keeping track of which cells had already changed.
+
+At that point, calls started sounding like:
+
+“That one is already pressed.”
+
+“The second column is full.”
+
+“Only top-left and middle-right are still open.”
+
+That is no longer a lookup problem.
+
+It is board-state bookkeeping.
+
+Once several cells are filled, I switch from repeating the entire pattern to calling only the positions still missing.
+
+If the current pattern itself becomes uncertain, then I rebuild from the sounding button's number and color.
+
+Those are two different resets:
+
+forgot which cells remain → reread the board
+
+forgot the actual rule → return to Braille + color
+
+<h2 id="misclicks" className="scroll-mt-24" > Soundboard punishes cursor drift as much as bad memory </h2>
+
+A later failure came after several correct position calls.
+
+The wrong input was not caused by a bad table lookup.
+
+The player meant to continue pressing Soundboard cells and clicked a different puzzle instead.
+
+That changes how I handle the final few positions.
+
+When the board is almost complete, speed has less value than keeping the cursor or hand centered on the Soundboard.
+
+I call one remaining position at a time.
+
+The next coordinate waits until the previous press is visibly confirmed.
+
+If the team is already under severe Chaos pressure, this is one of the modules where rushing three coordinates together can easily cost more time than it saves.
+
+<h2 id="too-much-memory" className="scroll-mt-24" > If Soundboard feels like a memory test, the callout is carrying too much </h2>
+
+After struggling with it for a while, one player described Soundboard as having too much to remember and even suggested needing a pencil.
+
+That reaction makes sense when the team is trying to retain:
+
+nine button positions;
+several Braille values;
+several colors;
+the sounding target;
+the manual pattern;
+which cells are already pressed.
+
+The module does not require all of those facts to stay active at once.
+
+I reduce the memory load in stages.
+
+I reduce the state as the solve progresses:
+
+- **Before the sound:** search position
+- **After the sound:** Braille number + color
+- **After the lookup:** required coordinates
+- **During execution:** unfinished coordinates
+
+That keeps old information from competing with the next decision.
+
+<h2 id="relay" className="scroll-mt-24" > When the correct pattern keeps disappearing, Soundboard is no longer the weak link </h2>
+
+The manual side can reach the correct cell and still lose the run if the coordinate pattern gets mangled on the way back.
+
+A four- or six-position answer is longer than a Direction call and less intuitive than a single Cable position.
+
+If Mute consistently finds the pattern but Deaf drops the third coordinate, or Blind cannot tell whether TC means top-center or something else, more Soundboard study will not solve that relay failure.
+
+That is where I use the <Link href="/bombanana/roles">BOMBANANA Roles Guide</Link> and settle one coordinate vocabulary before the next run.
+
+<h2 id="level-eleven" className="scroll-mt-24" > Level 11 is where I decide whether Soundboard is ready </h2>
+
+Soundboard first has a fixed Campaign slot on Level 11.
+
+The bomb gives:
+
+4:00
+
+with:
+
+Soundboard + Symbol
+
+and:
+
+Alarm
+
+That is already a busy introduction, but Level 12 raises the cost immediately:
+
+Random Easy + Soundboard + Random Medium
+
+with:
+
+Pressure + Slider
+
+also inside four minutes.
+
+So Level 11 is the cleaner checkpoint.
+
+I stay there when the same problem keeps repeating:
+
+all nine buttons are described before anybody searches for the sound;
+the sounding button is found but its Braille number is forgotten;
+the color and Braille arrive as separate, disputed calls;
+row/column language keeps producing wrong positions;
+the table pattern is correct but nobody knows which cells are already pressed.
+
+A single bad click is not enough reason to grind Level 11 again.
+
+Repeatedly spending the first thirty seconds figuring out what information matters is.
+
+Once the sequence becomes:
+
+probe → sound → number + color → pattern → remaining positions
+
+I move on.
+
+The <Link href="/bombanana/levels">BOMBANANA Levels & Walkthrough</Link> owns the larger Campaign decision about when Soundboard returns inside harder random combinations.

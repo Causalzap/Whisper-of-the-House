@@ -3,81 +3,68 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaCalculatorContent from "@/data/bombanana/calculator.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/calculator`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
   `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
+  `${siteUrl}/images/bombanana/bombanana-calculator-red-led-after-result.webp`,
+  `${siteUrl}/images/bombanana/bombanana-calculator-mistake-state.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "two-answers",
+    label: "Raw result vs final key",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
-  },
-  {
-    id: "direction",
-    label: "Direction",
-  },
-  {
-    id: "calculator",
-    label: "Calculator",
-  },
-  {
-    id: "chaos",
-    label: "Chaos",
-  },
-  {
-    id: "stale-answer",
-    label: "Stale answers",
-  },
-  {
-    id: "bad-input",
-    label: "Check bad input",
-  },
-  {
-    id: "communication",
-    label: "Communication failures",
+    id: "no-light",
+    label: "Why there is no light",
   },
   {
     id: "manual",
-    label: "Other modules",
+    label: "Calculator answer table",
   },
   {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "worked-solves",
+    label: "Worked examples",
+  },
+  {
+    id: "callout",
+    label: "Raw and final callouts",
+  },
+  {
+    id: "diagnose",
+    label: "Diagnose a failed solve",
+  },
+  {
+    id: "when-to-stop",
+    label: "When to reread",
+  },
+  {
+    id: "solver-or-manual",
+    label: "When to use the solver",
+  },
+  {
+    id: "move-on",
+    label: "When Calculator is mastered",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
-  },
-  {
-    href: "/bombanana/wire",
-    label: "BOMBANANA Cable / Wire Guide",
-  },
-  {
-    href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
+    href: "/bombanana/module-solver",
+    label: "BOMBANANA Module Solver",
   },
   {
     href: "/bombanana/roles",
@@ -87,15 +74,23 @@ const relatedLinks = [
     href: "/bombanana/levels",
     label: "BOMBANANA Levels & Walkthrough",
   },
+  {
+    href: "/bombanana/wire",
+    label: "BOMBANANA Cable / Wire Guide",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
+  },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Calculator Guide & Solver: LED Answers",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Solve BOMBANANA Calculator equations, find the final key from LED color and odd/even parity, handle the no-light stage, and avoid raw-result mistakes.",
 
   alternates: {
     canonical:
@@ -104,10 +99,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Calculator Guide & Solver: LED Answers",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Do the equation first, enter the raw result, then use the new LED and odd/even parity to find the final BOMBANANA Calculator key.",
 
     url:
       pageUrl,
@@ -130,7 +125,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA Calculator Module manual showing the LED and odd-even final-key table.",
       },
     ],
   },
@@ -140,10 +135,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Calculator Guide & Solver: LED Answers",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Enter the equation result first, then use the new LED and odd/even parity to get the final Calculator key.",
 
     images: [
       imageUrls[0],
@@ -201,7 +196,7 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Calculator Guide",
 
           item:
             pageUrl,
@@ -226,10 +221,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Calculator Guide & Solver: Equation, LED and Final Key",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Calculator guide covering the two-stage solve, the no-light first stage, raw arithmetic results, odd and even parity, the complete LED answer table, valid zero answers, shuffled keypad positions, worked examples, and recovery after a bad input.",
 
       image:
         imageUrls,
@@ -257,30 +252,6 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA module solver",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Cable Module",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Direction Module",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
             "BOMBANANA Calculator Module",
         },
 
@@ -289,7 +260,7 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Braille",
+            "BOMBANANA Calculator solver",
         },
 
         {
@@ -297,7 +268,23 @@ const jsonLd = {
             "Thing",
 
           name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA Calculator LED answers",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA odd even Calculator",
+        },
+
+        {
+          "@type":
+            "Thing",
+
+          name:
+            "BOMBANANA numpad",
         },
       ],
 
@@ -355,15 +342,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Calculator Guide & Solver"
+          description="Solve the equation first, enter the raw result, then use the new LED and odd/even parity to find the final key without mixing the two stages."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaCalculatorContent />
         </GuideArticlePage>
       </main>
 

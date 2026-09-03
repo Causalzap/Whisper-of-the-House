@@ -3,99 +3,89 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import BombananaModuleSolverContent from "@/data/bombanana/module-solver.mdx";
+
+import BombananaPianoContent from "@/data/bombanana/piano.mdx";
 
 
 const siteUrl =
   "https://www.whisperofthehouse.com";
 
 const pageUrl =
-  `${siteUrl}/bombanana/module-solver`;
+  `${siteUrl}/bombanana/piano`;
 
 
 const imageUrls = [
-  `${siteUrl}/images/bombanana/bombanana-modules-braille-stage-indicator.webp`,
-  `${siteUrl}/images/bombanana/bombanana-cable-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-direction-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-calculator-module-manual.webp`,
-  `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
+  `${siteUrl}/images/bombanana/bombanana-piano-yellow-light.webp`,
+  `${siteUrl}/images/bombanana/bombanana-piano-module-manual.webp`,
 ];
 
 
 const toc = [
   {
-    id: "which-module",
-    label: "Choose the right module",
+    id: "read-the-state",
+    label: "Read octave + light",
   },
   {
-    id: "cable",
-    label: "Cable / Wire",
+    id: "piano-table",
+    label: "Piano answer table",
   },
   {
-    id: "direction",
-    label: "Direction",
+    id: "four-note-sequence",
+    label: "Keep four notes together",
   },
   {
-    id: "calculator",
-    label: "Calculator",
+    id: "yellow-one",
+    label: "Yellow + Braille 1",
   },
   {
-    id: "chaos",
-    label: "Chaos",
+    id: "wrong-note",
+    label: "Diagnose a wrong note",
   },
   {
-    id: "stale-answer",
-    label: "Stale answers",
+    id: "relay",
+    label: "Relay the sequence",
   },
   {
-    id: "bad-input",
-    label: "Check bad input",
-  },
-  {
-    id: "communication",
-    label: "Communication failures",
-  },
-  {
-    id: "manual",
-    label: "Other modules",
-  },
-  {
-    id: "during-run",
-    label: "Use it during a run",
+    id: "level-nine",
+    label: "Practice on Level 9",
   },
 ];
 
 
 const relatedLinks = [
   {
-    href: "/bombanana",
-    label: "BOMBANANA Guide",
+    href: "/bombanana/symbol",
+    label: "BOMBANANA Symbol Guide",
   },
   {
-    href: "/bombanana/wire",
-    label: "BOMBANANA Cable / Wire Guide",
-  },
-  {
-    href: "/bombanana/calculator",
-    label: "BOMBANANA Calculator Guide",
+    href: "/bombanana/soundboard",
+    label: "BOMBANANA Soundboard Guide",
   },
   {
     href: "/bombanana/roles",
-    label: "BOMBANANA Roles Guide",
+    label: "BOMBANANA Roles & Communication Guide",
   },
   {
     href: "/bombanana/levels",
     label: "BOMBANANA Levels & Walkthrough",
+  },
+  {
+    href: "/bombanana/chaos",
+    label: "BOMBANANA Chaos Guide",
+  },
+  {
+    href: "/bombanana",
+    label: "BOMBANANA Guide",
   },
 ];
 
 
 export const metadata: Metadata = {
   title:
-    "BOMBANANA Module Solver: Wire, Direction & Calculator",
+    "BOMBANANA Piano Guide: Braille, LED & Note Sequences",
 
   description:
-    "Solve BOMBANANA Wire, Direction, and Calculator states fast. Enter the current panel state, get the next input, and avoid stale-answer mistakes.",
+    "Match the Braille octave and active light to a four-note sequence, play it in order, and fix Piano callouts before moving past Level 9.",
 
   alternates: {
     canonical:
@@ -104,10 +94,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Piano Guide: Braille, LED & Note Sequences",
 
     description:
-      "Enter the current BOMBANANA Wire, Direction, or Calculator state, get the next input, then recheck the panel before using another answer.",
+      "Read the Piano Braille octave and active light together, find the four-note answer, and play the sequence without dropping its order.",
 
     url:
       pageUrl,
@@ -130,7 +120,7 @@ export const metadata: Metadata = {
           900,
 
         alt:
-          "BOMBANANA manual showing module stages and Braille information.",
+          "BOMBANANA Piano Module active with Braille and a colored light during a bomb.",
       },
     ],
   },
@@ -140,10 +130,10 @@ export const metadata: Metadata = {
       "summary_large_image",
 
     title:
-      "BOMBANANA Module Solver: Wire, Direction & Calculator",
+      "BOMBANANA Piano Guide: Braille, LED & Note Sequences",
 
     description:
-      "Solve BOMBANANA Wire, Direction, and Calculator states, then recheck the panel so an old answer does not carry into the next stage.",
+      "Match the Piano octave and light to the correct four-note BOMBANANA sequence.",
 
     images: [
       imageUrls[0],
@@ -178,7 +168,6 @@ const jsonLd = {
           item:
             siteUrl,
         },
-
         {
           "@type":
             "ListItem",
@@ -192,7 +181,6 @@ const jsonLd = {
           item:
             `${siteUrl}/bombanana`,
         },
-
         {
           "@type":
             "ListItem",
@@ -201,14 +189,13 @@ const jsonLd = {
             3,
 
           name:
-            "BOMBANANA Module Solver",
+            "BOMBANANA Piano Guide",
 
           item:
             pageUrl,
         },
       ],
     },
-
 
     {
       "@type":
@@ -226,10 +213,10 @@ const jsonLd = {
       },
 
       headline:
-        "BOMBANANA Module Solver: Wire, Direction & Calculator",
+        "BOMBANANA Piano Module Guide: Braille, LED and Note Sequences",
 
       description:
-        "A player-focused BOMBANANA module solver and manual for entering the current Cable or Wire, Direction, and Calculator state, getting the next correct input, recognizing stage changes, checking bad callouts, and avoiding stale answers.",
+        "A player-focused BOMBANANA Piano Module guide covering how to combine the Braille octave and active light, read the complete note lookup, preserve a four-note sequence in order, troubleshoot wrong inputs and communication loss, and use Level 9 as the first fixed Piano practice point.",
 
       image:
         imageUrls,
@@ -251,53 +238,50 @@ const jsonLd = {
           name:
             "BOMBANANA",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA module solver",
+            "BOMBANANA Piano Module",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Cable Module",
+            "BOMBANANA Piano notes",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Direction Module",
+            "BOMBANANA Piano Braille",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Calculator Module",
+            "BOMBANANA Piano light colors",
         },
+      ],
 
+      mentions: [
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Braille",
+            "BOMBANANA Level 9",
         },
-
         {
           "@type":
             "Thing",
 
           name:
-            "BOMBANANA Chaos Modules",
+            "BOMBANANA Level 10",
         },
       ],
 
@@ -355,15 +339,15 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="BOMBANANA Module Solver & Manual"
-          description="Choose Wire, Direction, or Calculator, enter the state you see right now, use the next answer once, and recheck the bomb before carrying anything into another stage."
+          title="BOMBANANA Piano Module Guide"
+          description="Read the Braille octave and active light as one state, keep the resulting four notes in order, and know whether a failure came from the lookup, the keyboard, or the relay."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
           updatedAt="September 3, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
-          <BombananaModuleSolverContent />
+          <BombananaPianoContent />
         </GuideArticlePage>
       </main>
 
