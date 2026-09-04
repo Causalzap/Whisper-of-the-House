@@ -859,6 +859,15 @@ const paths = [
 '/bombanana/chaos',
 '/bombanana/switch',
 
+'/halloween-the-game',
+'/halloween-the-game/walkthrough',
+'/halloween-the-game/endings',
+'/halloween-the-game/multiplayer-guide',
+'/halloween-the-game/progression-perks',
+'/halloween-the-game/how-to-arrest-michael-myers',
+'/halloween-the-game/main-street-walkthrough',
+'/halloween-the-game/the-babysitters-walkthrough',
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -866,6 +875,15 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/halloween-the-game': '2026-09-04',
+'/halloween-the-game/walkthrough': '2026-09-04',
+'/halloween-the-game/endings': '2026-09-04',
+'/halloween-the-game/multiplayer-guide': '2026-09-04',
+'/halloween-the-game/progression-perks': '2026-09-04',
+'/halloween-the-game/how-to-arrest-michael-myers': '2026-09-04',
+'/halloween-the-game/main-street-walkthrough': '2026-09-04',
+'/halloween-the-game/the-babysitters-walkthrough': '2026-09-04',
+
   '/neverness-to-everness': '2026-09-02',
   '/neverness-to-everness/chapter-6-fogden-game-walkthrough': '2026-09-02',
   '/neverness-to-everness/duskmoor-100-percent-guide': '2026-09-02',
