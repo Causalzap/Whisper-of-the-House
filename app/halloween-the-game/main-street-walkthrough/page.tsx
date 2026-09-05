@@ -11,10 +11,10 @@ const hubUrl = `${siteUrl}/halloween-the-game`;
 const pageUrl = `${hubUrl}/main-street-walkthrough`;
 
 const metadataTitle =
-  "Halloween: The Game Main Street Walkthrough & Challenges";
+  "Halloween: The Game Chapter 2 Challenges – Main Street Guide";
 
 const metadataDescription =
-  "Complete Main Street and all 6 Chapter 2 challenges: Eric's shelf kill, Tanya's register, Slab's timing, Rachel's friends, body cleanup, and Judith's grave.";
+  "Complete all 6 Main Street challenges in Chapter 2, including Eric, Tanya, Slab, Rachel's group, Dead-End Job, body cleanup, and Judith's grave.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-main-street-challenges.webp`;
@@ -33,7 +33,7 @@ const imageUrls = [
 const toc = [
   {
     id: "main-street-route",
-    label: "Main Street challenge route",
+    label: "Best route for all 6 challenges",
   },
   {
     id: "hardware-store",
@@ -41,18 +41,22 @@ const toc = [
   },
   {
     id: "tanya-cash-register",
-    label: "Tanya cash-register kill",
+    label: "Tanya cash-register challenge",
   },
   {
-    id: "no-alert",
-    label: "Dead-End Job no-alert run",
+    id: "dead-end-job",
+    label: "Dead-End Job no-alert challenge",
+  },
+  {
+    id: "rachel-group",
+    label: "Rachel's group split",
   },
   {
     id: "slab",
     label: "Slab peeing challenge",
   },
   {
-    id: "rachel-group",
+    id: "rachel-environmental-kill",
     label: "Rachel environmental kill",
   },
   {
@@ -61,30 +65,26 @@ const toc = [
   },
   {
     id: "body-cleanup",
-    label: "Required body cleanup",
+    label: "Rachel body cleanup",
   },
   {
     id: "judith-gravestone",
     label: "Judith Myers' gravestone",
-  },
-  {
-    id: "replay-priorities",
-    label: "When to reset or finish",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/halloween-the-game/walkthrough",
-    label: "Complete Story Walkthrough",
+    label: "Complete Story Mode Walkthrough",
   },
   {
     href: "/halloween-the-game/the-babysitters-walkthrough",
-    label: "The Babysitters Walkthrough",
+    label: "Chapter 4 Babysitters Challenges",
   },
   {
-    href: "/halloween-the-game",
-    label: "Halloween: The Game Guide",
+    href: "/halloween-the-game/prologue-challenges",
+    label: "All 6 Prologue Challenges",
   },
 ];
 
@@ -99,9 +99,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Main Street Walkthrough — All 6 Challenges",
+    title: "Halloween: The Game Chapter 2 Main Street Challenges",
     description:
-      "Follow the Chapter 2 route through the hardware store, Tanya, Slab, Rachel and her friends, body cleanup, and Judith Myers' gravestone.",
+      "Clear all six Main Street challenges while preserving Eric, Slab, Rachel's group, and the no-alert condition through the Chapter 2 cemetery finish.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -115,9 +115,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Halloween: The Game Main Street Walkthrough",
+    title: "Halloween: The Game Chapter 2 Challenges",
     description:
-      "Complete all six Main Street challenges without losing Eric, Slab, Rachel, or the chapter's late cleanup states.",
+      "Protect the challenge states that can disappear, then finish Main Street through Rachel's cleanup, Judith Myers' grave, and the return to the car.",
     images: [heroImage],
   },
 };
@@ -144,7 +144,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Main Street Walkthrough",
+          name: "Chapter 2 Main Street Challenges",
           item: pageUrl,
         },
       ],
@@ -157,20 +157,24 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Halloween: The Game Main Street Walkthrough and All 6 Chapter 2 Challenges",
+        "Halloween: The Game Chapter 2 Challenges — Main Street Guide",
       description:
-        "A complete Main Street walkthrough for Halloween: The Game covering all six Chapter 2 challenges. It explains the hardware-store opening and Shape Jump lighting restriction, Eric's required stockroom shelf execution, Tanya's cash-register kill, the Dead-End Job no-alert condition, Slab's peeing timing window, Rachel's environmental execution, how to track all three of Rachel's friends, the required Rachel body-hiding objective, optional Tanya cleanup, and the final route from Judith Myers' gravestone back to the car.",
+        "A complete Chapter 2 challenge guide for Main Street in Halloween: The Game. It covers all six challenge conditions, including preserving Eric for the hardware-store stockroom shelf execution, positioning Tanya at the cash register, keeping the Dead-End Job no-alert attempt alive, waiting for Slab's peeing state before the grab, reading Rachel's group before using her environmental execution, tracking all three of Rachel's friends, completing the required Rachel body-hiding objective, and finishing the chapter by taking Judith Myers' tombstone back to the car.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-04",
-      dateModified: "2026-09-04",
-      articleSection: "Halloween: The Game Walkthroughs",
+      dateModified: "2026-09-05",
+      articleSection: "Halloween: The Game Challenges",
       about: [
         {
           "@type": "VideoGame",
           name: "Halloween: The Game",
           url: hubUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game Chapter 2",
         },
         {
           "@type": "Thing",
@@ -186,11 +190,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Stockroom Stalker",
+          name: "Eric stockroom shelf challenge",
         },
         {
           "@type": "Thing",
-          name: "Broken Record",
+          name: "Tanya cash register challenge",
+        },
+        {
+          "@type": "Thing",
+          name: "Slab peeing challenge",
+        },
+        {
+          "@type": "Thing",
+          name: "Rachel environmental execution",
+        },
+        {
+          "@type": "Thing",
+          name: "Rachel's three friends",
         },
         {
           "@type": "Thing",
@@ -230,13 +246,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Clear Main Street Without Losing the Challenge Setups"
-          description="Eric, Tanya, Slab, Rachel, and her friends all depend on different states. Keep the right targets alive long enough, then finish the body cleanup and Judith Myers cemetery route."
+          title="Halloween: The Game Chapter 2 Challenges – Main Street"
+          description="Clear all six challenges by protecting the states that disappear first: keep Eric for the stockroom shelf, let Slab reach his animation, track Rachel's group before it scatters, and finish the required cleanup before heading to Judith's grave."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 4, 2026"
+          updatedAt="September 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

@@ -10,10 +10,10 @@ const siteUrl = "https://www.whisperofthehouse.com";
 const pageUrl = `${siteUrl}/halloween-the-game`;
 
 const metadataTitle =
-  "Halloween: The Game Guide: Walkthrough, Multiplayer & More";
+  "Halloween: The Game Guide – Story, Multiplayer & Challenges";
 
 const metadataDescription =
-  "Start with the right Halloween: The Game guide for story, multiplayer, endings, progression, perks, challenges, maps, collectibles, and Michael Myers.";
+  "Find the right Halloween: The Game guide for Story Mode, challenges, Civilian multiplayer, Michael detainment, perks, progression, endings, and more.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-guide-haddonfield-night.webp`;
@@ -21,15 +21,19 @@ const heroImage =
 const toc = [
   {
     id: "where-to-start",
-    label: "Where to start",
+    label: "Choose what you need now",
   },
   {
     id: "story",
-    label: "Story mode",
+    label: "Story Mode",
   },
   {
-    id: "chapter-guides",
-    label: "Main Street & The Babysitters",
+    id: "prologue-challenges",
+    label: "Prologue challenges",
+  },
+  {
+    id: "chapter-challenges",
+    label: "Chapter 2 & 4 challenges",
   },
   {
     id: "multiplayer",
@@ -48,10 +52,6 @@ const toc = [
     label: "Story endings",
   },
   {
-    id: "after-first-clear",
-    label: "What to do after the first clear",
-  },
-  {
     id: "achievements-trophies",
     label: "Achievements & trophies",
   },
@@ -65,26 +65,26 @@ const toc = [
   },
   {
     id: "best-civilians-perks",
-    label: "Civilians & perks",
-  },
-  {
-    id: "recommended-route",
-    label: "Recommended learning route",
+    label: "Best Civilians & perks",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/halloween-the-game/walkthrough",
-    label: "Complete Story Walkthrough",
+    label: "Complete Story Mode Walkthrough",
+  },
+  {
+    href: "/halloween-the-game/prologue-challenges",
+    label: "All 6 Prologue Challenges",
   },
   {
     href: "/halloween-the-game/multiplayer-guide",
-    label: "Multiplayer Guide for Civilians",
+    label: "Civilian Multiplayer Guide",
   },
   {
     href: "/halloween-the-game/progression-perks",
-    label: "Progression, Perks & Prestige Guide",
+    label: "Progression, Perks & Prestige",
   },
 ];
 
@@ -99,9 +99,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Guide — Story, Multiplayer & Progression",
+    title: "Halloween: The Game Guide – Story, Multiplayer & Challenges",
     description:
-      "Choose the part of Halloween: The Game you need now, from the complete story and chapter challenges to Civilian multiplayer, Michael detainment, progression, perks, and endings.",
+      "Choose the part of Halloween: The Game you need now, from Story Mode and chapter challenges to Civilian multiplayer, progression, Michael detainment, and endings.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -117,7 +117,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Halloween: The Game Guide",
     description:
-      "Find the right route for story mode, Civilian multiplayer, progression, endings, chapter challenges, and detaining Michael Myers.",
+      "Find the right route for Story Mode, Prologue and chapter challenges, Civilian multiplayer, progression, endings, and Michael detainment.",
     images: [heroImage],
   },
 };
@@ -151,14 +151,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Halloween: The Game Guide — Story, Multiplayer, Progression, Endings and Challenges",
+        "Halloween: The Game Guide — Story Mode, Challenges, Multiplayer, Progression and Endings",
       description:
-        "A starting guide for Halloween: The Game that routes players to the part of the game they need now. It covers how story mode teaches Michael Myers, when Main Street and The Babysitters need dedicated challenge routes, how Civilian multiplayer differs from the campaign, how Michael detainment works as an alternative multiplayer finish, how Profile, Killer, Civilian, Weapon and Perk Point progression fit together, and why alternate endings can be cleaned up from Chapter 5. It also gives first-pass guidance for achievements, collectibles, multiplayer map learning, and choosing Civilians or perks around the job a team needs.",
+        "A central guide to Halloween: The Game for choosing the right route based on the player's current goal. It connects the complete Story Mode walkthrough, Smith's Grove Prologue challenges, the dedicated Prologue Challenge 5 no-alert route, Chapter 2 Main Street challenges, Chapter 4 The Babysitters challenges, Civilian multiplayer, Michael Myers detainment, progression and perks, and alternate endings. It also provides decision guidance for emerging topics including achievements and trophies, collectibles, multiplayer map knowledge, and choosing Civilians or perks around the job a team needs.",
       url: pageUrl,
       image: [heroImage],
       inLanguage: "en",
       datePublished: "2026-09-04",
-      dateModified: "2026-09-04",
+      dateModified: "2026-09-05",
       articleSection: "Halloween: The Game Guides",
       about: [
         {
@@ -168,7 +168,23 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game walkthrough",
+          name: "Halloween: The Game Story Mode",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game challenges",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game Prologue challenges",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game Chapter 2 challenges",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game Chapter 4 challenges",
         },
         {
           "@type": "Thing",
@@ -176,19 +192,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game progression",
-        },
-        {
-          "@type": "Thing",
-          name: "Halloween: The Game endings",
-        },
-        {
-          "@type": "Thing",
           name: "Michael Myers detainment",
         },
         {
           "@type": "Thing",
-          name: "Halloween: The Game challenges",
+          name: "Halloween: The Game progression",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game perks",
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game endings",
         },
       ],
       isPartOf: {
@@ -224,13 +240,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Start With the Part of Halloween: The Game You Actually Need"
-          description="Use the story, multiplayer, progression, ending, and chapter guides according to the problem in front of you, then return for completion goals once the core systems make sense."
+          title="Halloween: The Game Guide – Pick the Right Route for Your Next Goal"
+          description="Start with Story Mode, a specific challenge, Civilian multiplayer, progression, detainment, or another ending based on what you are trying to finish now."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 4, 2026"
+          updatedAt="September 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

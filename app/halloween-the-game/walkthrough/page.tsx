@@ -11,10 +11,10 @@ const hubUrl = `${siteUrl}/halloween-the-game`;
 const pageUrl = `${hubUrl}/walkthrough`;
 
 const metadataTitle =
-  "Halloween: The Game Walkthrough – All 6 Story Chapters";
+  "Halloween: The Game Story Mode Walkthrough – All 6 Chapters";
 
 const metadataDescription =
-  "Complete Halloween: The Game's story from Smith's Grove through Into the Shadows, with the main route for every chapter and when to skip challenges.";
+  "Finish Halloween: The Game Story Mode from Smith's Grove through Chapter 5, with the required route, key objectives, and when to leave challenges for replay.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-story-six-chapters.webp`;
@@ -32,7 +32,7 @@ const imageUrls = [
 const toc = [
   {
     id: "story-order",
-    label: "Story chapter order",
+    label: "Story Mode chapter order",
   },
   {
     id: "prologue",
@@ -64,22 +64,22 @@ const toc = [
   },
   {
     id: "chapter-replays",
-    label: "How to use chapter replays",
-  },
-  {
-    id: "route-check",
-    label: "What to check when you feel lost",
+    label: "What to save for chapter replay",
   },
 ];
 
 const relatedLinks = [
   {
+    href: "/halloween-the-game/prologue-challenges",
+    label: "All 6 Prologue Challenges",
+  },
+  {
     href: "/halloween-the-game/main-street-walkthrough",
-    label: "Main Street Walkthrough",
+    label: "Chapter 2 Main Street Challenges",
   },
   {
     href: "/halloween-the-game/the-babysitters-walkthrough",
-    label: "The Babysitters Walkthrough",
+    label: "Chapter 4 Babysitters Challenges",
   },
   {
     href: "/halloween-the-game/endings",
@@ -98,25 +98,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Complete Story Walkthrough",
+    title: "Halloween: The Game Story Mode Walkthrough",
     description:
-      "Follow Michael from Smith's Grove through all five story chapters, with the required route, major navigation stops, and the point where each chapter is ready to move on.",
+      "Follow Michael through the Smith's Grove Prologue and five story chapters, with the objective changes that tell you when to stop exploring and move on.",
     siteName: "Whisper of the House",
     images: [
       {
         url: heroImage,
         width: 1600,
         height: 900,
-        alt: "Halloween The Game story mode showing the Prologue and five chapters",
+        alt: "Halloween The Game Story Mode showing the Prologue and five chapters",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Halloween: The Game Complete Walkthrough",
+    title: "Halloween: The Game Story Mode Walkthrough",
     description:
-      "Follow the main story route through the Prologue and all five chapters without turning the first clear into a full challenge run.",
+      "Clear the Prologue and all five chapters by following the required story route instead of losing time on optional challenge states.",
     images: [heroImage],
   },
 };
@@ -143,7 +143,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Complete Walkthrough",
+          name: "Story Mode Walkthrough",
           item: pageUrl,
         },
       ],
@@ -156,20 +156,24 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Halloween: The Game Complete Walkthrough — Prologue Through Chapter 5",
+        "Halloween: The Game Story Mode Walkthrough — Prologue Through Chapter 5",
       description:
-        "A complete single-player walkthrough for Halloween: The Game covering Escape From Smith's Grove, The Road To Haddonfield, Main Street, Returning Home, The Babysitters, and Into The Shadows. The guide follows the required story route, explains where optional targets can pull Michael away from the current objective, covers the Myers house and Wallace House progression points, and shows when to stop challenge hunting and take the final exit.",
+        "A complete Story Mode walkthrough for Halloween: The Game covering the Smith's Grove Prologue and all five chapters: The Road To Haddonfield, Main Street, Returning Home, The Babysitters, and Into The Shadows. It follows the required campaign route, shows when the HUD has moved Michael to a new objective, explains the Myers House and Wallace House progression points, covers the Tier 3 recovery and police pressure in Chapter 5, and identifies when optional challenges, extra targets, collectibles, and alternate exits are better left for chapter replay.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-04",
-      dateModified: "2026-09-04",
+      dateModified: "2026-09-05",
       articleSection: "Halloween: The Game Walkthroughs",
       about: [
         {
           "@type": "VideoGame",
           name: "Halloween: The Game",
           url: hubUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game Story Mode",
         },
         {
           "@type": "Thing",
@@ -233,13 +237,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Complete the Story Without Getting Lost in Optional Challenges"
-          description="Follow Michael from Smith's Grove to the final escape, with the route changes that matter, the places where optional targets pull you off course, and the point where each chapter is ready to move on."
+          title="Halloween: The Game Story Walkthrough – Prologue to Final Escape"
+          description="Follow the required objective through all six Story Mode stages, know which target actually advances each chapter, and leave optional challenge cleanup for the replay where it belongs."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 4, 2026"
+          updatedAt="September 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

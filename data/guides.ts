@@ -143,20 +143,21 @@ export const guideClusters: GuideCluster[] = [
     label: "Asymmetrical Horror & Michael Myers",
     eyebrow: "Guide Hub",
     hubStatus:
-      "Full story + multiplayer + 3 endings + progression + Chapter 2 & 4 challenges",
+      "Story Mode + Prologue / Chapter 2 / Chapter 4 challenges + multiplayer + progression + 3 endings",
   
     description:
-      "Use the Halloween: The Game guide hub to choose what to do next in the story, survive Civilian multiplayer, complete Main Street and The Babysitters challenges, detain Michael Myers, understand progression and perks, and unlock all three confirmed endings.",
+      "Use the Halloween: The Game guide hub to choose your next goal: finish Story Mode, clear Smith's Grove or chapter challenges, survive as a Civilian, detain Michael Myers, build progression and perks, or replay Chapter 5 for another ending.",
   
     coverage: [
-      "Complete single-player route through the Prologue and five chapters, from Smith's Grove and Road to Haddonfield through Main Street, Returning Home, The Babysitters, Into the Shadows, and the final Chapter 5 escape",
-      "Main Street Chapter 2 challenge route through Michael's mask, Shape Jump lighting restrictions, Eric's stockroom shelf kill, Tanya's cash-register execution, Slab's peeing window, Rachel's environmental kill, all three friends, body cleanup, Judith Myers' gravestone, and the car",
-      "The Babysitters Chapter 4 sequence through Wallace House, Annie's car kill, Bob and Lynda stalking, Bloodthirsty, Bob's kitchen wall interaction, the Sheet disguise, Lynda's telephone kill, the staged upstairs scene, Laurie, and the film-plot challenge",
-      "Civilian multiplayer decisions through first objectives, police calls, residents, inventory limits, car repair, Sedan Keys, Storm Cellar access, route switching, police pressure, rescue decisions, and knowing when an open exit is worth taking",
-      "Michael Myers detainment through police setup, spectator mode, the CB radio, Loomis, Police Reinforcements, authority pressure, the arrest meter, knockdown timing, the final Arrest interaction, and MICHAEL DETAINED!",
-      "Progression through Profile, Killer, Civilian, and Weapon XP, passive and progressive challenges, Perk Points, perk rolls, temporary upgrades, scrapping, Civilian stats, starting items, and Profile Prestige",
-      "All three confirmed Chapter 5 endings through the railroad, cornfield, and sewer escape routes, including replaying Into the Shadows without restarting the full campaign",
-      "First-pass guidance for achievements and trophies, collectibles, multiplayer map learning, and Civilian or perk choices while those broader completion and optimization goals remain inside the hub",
+      "Complete Story Mode route through the Smith's Grove Prologue and five chapters, with the required objectives, major route changes, and the point where optional challenge cleanup is better left for replay",
+      "Smith's Grove Prologue challenge cleanup across all six objectives, with Challenge 5 separated into its own no-alert route when patrol timing and restart decisions become the main problem",
+      "Main Street Chapter 2 challenge decisions around Eric, Tanya, Slab, Rachel and her friends, Dead-End Job, required body cleanup, Judith Myers' grave, and the final return to the car",
+      "The Babysitters Chapter 4 challenge sequence through Annie's car, Bob and Lynda stalking, Bloodthirsty, Bob's kitchen wall, the Sheet, Lynda's telephone kill, Wallace House staging, the film-plot condition, and Laurie",
+      "Civilian multiplayer decisions through opening objectives, phones, police, residents, inventory, car and Storm Cellar escape progress, route switching, rescue choices, and knowing when an available exit is worth taking",
+      "Michael Myers detainment through police setup, spectator access, the CB radio, Loomis, Reinforcements, authority pressure, knockdown timing, the Arrest interaction, and the MICHAEL DETAINED! finish",
+      "Progression through Profile, Killer, Civilian, and Weapon XP, Perk Points, perk cards, upgrades, Civilian stats, starting items, challenge types, and Profile Prestige",
+      "All three confirmed Chapter 5 ending routes through the railroad, cornfield, and sewer, with alternate endings handled from Into the Shadows instead of replaying the full campaign",
+      "First-pass guidance for achievements, collectibles, multiplayer map learning, and Civilian or perk choices while those search needs remain broad enough to stay inside the hub",
     ],
   
     image:
@@ -175,11 +176,11 @@ export const guideClusters: GuideCluster[] = [
     pages: [
       {
         title:
-          "Halloween: The Game Guide: Walkthrough, Multiplayer & More",
+          "Halloween: The Game Guide – Story, Multiplayer & Challenges",
         href: "/halloween-the-game",
         type: "Guide Hub",
         description:
-          "Start here to choose the right guide for story mode, Civilian multiplayer, Michael detainment, progression, endings, chapter challenges, and later completion goals.",
+          "Start here to choose between Story Mode, Prologue and chapter challenges, Civilian multiplayer, Michael detainment, progression, endings, and broader completion goals.",
         image:
           "/images/halloween-the-game/halloween-the-game-guide-haddonfield-night.webp",
         imageFit: "cover",
@@ -188,7 +189,7 @@ export const guideClusters: GuideCluster[] = [
   
         home: {
           spotlightMeta:
-            "Prologue + 5 chapters, Main Street, The Babysitters, Civilian multiplayer, Michael detainment, progression, perks, Prestige, railroad, cornfield, and sewer endings",
+            "Story Mode, Prologue challenges, Chapter 2 and 4 challenges, Civilian multiplayer, Michael detainment, progression, perks, Prestige, railroad, cornfield, and sewer endings",
         },
   
         archive: {
@@ -199,11 +200,11 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
-          "Halloween: The Game Walkthrough – All 6 Story Chapters",
+          "Halloween: The Game Story Mode Walkthrough – All 6 Chapters",
         href: "/halloween-the-game/walkthrough",
         type: "Walkthrough",
         description:
-          "Follow Michael from Smith's Grove through all six story stages, with the required route, major chapter blockers, when to skip optional challenges, and how to reach the final escape.",
+          "Follow Michael through the Smith's Grove Prologue and five chapters, with the required route, objective changes, chapter blockers, and the point where optional work should wait for replay.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-story-six-chapters.webp",
@@ -218,7 +219,7 @@ export const guideClusters: GuideCluster[] = [
           spotlightFeature: true,
           spotlightOrder: 1,
           spotlightMeta:
-            "Prologue, Smith's Grove, Road to Haddonfield, Main Street, Returning Home, The Babysitters, Into the Shadows, HUD objectives, Shape Jump, detainment, and final exit",
+            "Smith's Grove Prologue, Road to Haddonfield, Main Street, Returning Home, The Babysitters, Into the Shadows, HUD objectives, Tier 3 recovery, police pressure, and final escape",
         },
   
         archive: {
@@ -229,11 +230,71 @@ export const guideClusters: GuideCluster[] = [
   
       {
         title:
+          "Halloween: The Game Prologue Challenges – All 6 Guide",
+        href: "/halloween-the-game/prologue-challenges",
+        type: "Guide",
+        description:
+          "Clear all six Smith's Grove Prologue challenges with a practical replay plan, including the flee condition, bare-hand kills, environmental executions, the no-alert attempt, and all 12 orderlies.",
+        date: "Updated recently",
+        image:
+          "/images/halloween-the-game/halloween-the-game-prologue-all-challenges-complete.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 300,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Six Prologue challenges, orderly flee, three bare-hand executions, telephone pole kill, throw-to-death execution, Challenge 5 no-alert run, 12 orderlies, and chapter-completion save rule",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Halloween: The Game Prologue Challenge 5 – No Alert Route",
+        href: "/halloween-the-game/prologue-challenge-5",
+        type: "Guide",
+        description:
+          "Escape Smith's Grove without alerting any Orderlies by using the opening patrol windows, ambulance wait, power-box flashlight timing, safe walk and sprint sections, and early restart cue.",
+        date: "Updated recently",
+        image:
+          "/images/halloween-the-game/halloween-the-game-prologue-challenge-5-complete.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 301,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Prologue Challenge 5, no Orderly alerts, opening patrol, ambulance wait, two guards, stuck-orderly restart, power-box flashlight, walk and sprint windows, final motor, and completion check",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
           "Halloween: The Game Multiplayer Guide for Civilians",
         href: "/halloween-the-game/multiplayer-guide",
         type: "Beginner Guide",
         description:
-          "Learn what to do first as a Civilian, call police, manage items and residents, progress car or Storm Cellar escapes, switch routes, and know when to leave.",
+          "Learn what to do first as a Civilian, call police, manage items and residents, build car or Storm Cellar escapes, switch routes, and know when an open exit is worth taking.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-multiplayer-first-objectives.webp",
@@ -246,14 +307,14 @@ export const guideClusters: GuideCluster[] = [
           latestFeatured: true,
           latestOrder: 294,
           spotlightFeature: true,
-          spotlightOrder: 2,
+          spotlightOrder: 4,
           spotlightMeta:
             "First objectives, phones, police calls, residents, inventory, Repair Kits, Sedan Keys, car escape, Storm Cellar, route switching, police windows, and open-exit decisions",
         },
   
         archive: {
           showInCollections: true,
-          order: 3,
+          order: 5,
         },
       },
   
@@ -263,7 +324,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/halloween-the-game/progression-perks",
         type: "Systems",
         description:
-          "Understand Profile, Killer, Civilian and Weapon XP, Perk Points, perk rolls and upgrades, Civilian stats, challenge types, starting items, and Prestige.",
+          "Understand Profile, Killer, Civilian and Weapon XP, Perk Points, perk cards and upgrades, Civilian stats, starting items, challenge types, and Prestige.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-progression-four-levels.webp",
@@ -275,14 +336,14 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 295,
           spotlightFeature: true,
-          spotlightOrder: 3,
+          spotlightOrder: 5,
           spotlightMeta:
-            "Profile, Killer, Civilian and Weapon levels, Perk Points, card rolls, rarity, Equip / Upgrade / Scrap, Civilian stats, starting items, challenges, Level 100 Profile Prestige, and timed Prestige Challenges",
+            "Profile, Killer, Civilian and Weapon levels, Perk Points, card rolls, rarity, Equip / Upgrade / Scrap, Civilian stats, starting items, challenges, Level 100 Profile Prestige, and Prestige Challenges",
         },
   
         archive: {
           showInCollections: true,
-          order: 4,
+          order: 6,
         },
       },
   
@@ -292,7 +353,7 @@ export const guideClusters: GuideCluster[] = [
         href: "/halloween-the-game/how-to-arrest-michael-myers",
         type: "Guide",
         description:
-          "Set up Michael Myers' multiplayer detainment with police, spectator mode, the CB radio, Loomis, Reinforcements, arrest pressure, knockdown, and the final Arrest interaction.",
+          "Turn police pressure into a Michael Myers detainment with spectator access, the CB radio, Loomis, Reinforcements, arrest pressure, the correct knockdown state, and the final Arrest interaction.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-arrest-michael-success.webp",
@@ -304,24 +365,24 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 296,
           spotlightFeature: true,
-          spotlightOrder: 4,
+          spotlightOrder: 6,
           spotlightMeta:
             "Police calls, spectator mode, CB radio, Loomis, Reinforcements Available, returned police officer, arrest meter, POLICE WAGON CALLED, knockdown, Arrest interaction, and MICHAEL DETAINED!",
         },
   
         archive: {
           showInCollections: true,
-          order: 5,
+          order: 7,
         },
       },
   
       {
         title:
-          "Halloween: The Game Main Street Walkthrough & Challenges",
+          "Halloween: The Game Chapter 2 Challenges – Main Street Guide",
         href: "/halloween-the-game/main-street-walkthrough",
-        type: "Walkthrough",
+        type: "Guide",
         description:
-          "Complete Main Street and all six Chapter 2 challenges, including Eric's shelf kill, Tanya's register, Slab's timing, Rachel and her friends, body cleanup, and Judith's grave.",
+          "Complete all six Chapter 2 challenges by protecting Eric, Tanya, Slab, Rachel and her friends, keeping Dead-End Job alive when possible, then finishing Rachel's cleanup and Judith's grave.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-main-street-challenges.webp",
@@ -333,24 +394,24 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 297,
           spotlightFeature: true,
-          spotlightOrder: 5,
+          spotlightOrder: 7,
           spotlightMeta:
-            "Six Chapter 2 challenges, hardware store, Michael's mask, Shape Jump lighting, Eric shelf kill, Tanya cash register, Slab peeing, Rachel Head Impale, three friends, body cleanup, Judith gravestone, and car",
+            "Six Chapter 2 challenges, hardware store, Eric stockroom shelf, Tanya cash register, Dead-End Job, Slab peeing state, Rachel environmental kill, three friends, body cleanup, Judith Myers' grave, and car",
         },
   
         archive: {
           showInCollections: true,
-          order: 6,
+          order: 8,
         },
       },
   
       {
         title:
-          "Halloween: The Game Babysitters Walkthrough & Challenges",
+          "Halloween: The Game Chapter 4 Challenges – Babysitters Guide",
         href: "/halloween-the-game/the-babysitters-walkthrough",
-        type: "Walkthrough",
+        type: "Guide",
         description:
-          "Complete all six Babysitters challenges through Annie's car kill, Bob and Lynda stalking, Bob's wall kill, Bloodthirsty, the Sheet, telephone kill, house setup, and Laurie.",
+          "Complete all six Chapter 4 challenges by preserving the Wallace House sequence through Annie's car, Bob and Lynda stalking, Bloodthirsty, Bob's wall, the Sheet, Lynda's telephone kill, staging, and Laurie.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-the-babysitters-challenges.webp",
@@ -362,24 +423,24 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 298,
           spotlightFeature: true,
-          spotlightOrder: 6,
+          spotlightOrder: 8,
           spotlightMeta:
-            "Six Chapter 4 challenges, Wallace House, Annie car kill, Bob and Lynda stalking, Bloodthirsty, Bob kitchen wall, Sheet disguise, Lynda telephone kill, staged bedroom, Laurie, and film-plot route",
+            "Six Chapter 4 challenges, Wallace House, Annie car kill, Bob and Lynda stalking, Bloodthirsty, Bob kitchen wall, Sheet disguise, Lynda telephone kill, staged bedroom, film-plot route, and Laurie",
         },
   
         archive: {
           showInCollections: true,
-          order: 7,
+          order: 9,
         },
       },
   
       {
         title:
-          "Halloween: The Game Endings: Full, Cornfield & Sewer",
+          "Halloween: The Game Endings – Railroad, Cornfield & Sewer",
         href: "/halloween-the-game/endings",
         type: "Endings",
         description:
-          "Get all three confirmed endings through the railroad, cornfield, and sewer routes, then replay Into the Shadows for the alternatives without restarting the story.",
+          "Reach all three confirmed Chapter 5 endings through the railroad, cornfield, and sewer routes, then replay Into the Shadows for the alternatives instead of restarting the campaign.",
         date: "Updated recently",
         image:
           "/images/halloween-the-game/halloween-the-game-endings-three-routes.webp",
@@ -391,14 +452,14 @@ export const guideClusters: GuideCluster[] = [
           latest: true,
           latestOrder: 299,
           spotlightFeature: true,
-          spotlightOrder: 7,
+          spotlightOrder: 9,
           spotlightMeta:
-            "Railroad Full Ending, one-minute train timer, Cornfield Ending, Sewer Ending, Escape Through the Sewer, final route commits, shared narration, and Chapter 5 replay order",
+            "Railroad ending, one-minute train timer, Cornfield Ending, Sewer Ending, Escape Through the Sewer, final route commits, shared narration, and Chapter 5 replay order",
         },
   
         archive: {
           showInCollections: true,
-          order: 8,
+          order: 10,
         },
       },
     ],

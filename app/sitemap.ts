@@ -867,6 +867,8 @@ const paths = [
 '/halloween-the-game/how-to-arrest-michael-myers',
 '/halloween-the-game/main-street-walkthrough',
 '/halloween-the-game/the-babysitters-walkthrough',
+'/halloween-the-game/prologue-challenge-5',
+'/halloween-the-game/prologue-challenges',
 
 ] as const;
 
@@ -875,14 +877,16 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
-  '/halloween-the-game': '2026-09-04',
-'/halloween-the-game/walkthrough': '2026-09-04',
-'/halloween-the-game/endings': '2026-09-04',
-'/halloween-the-game/multiplayer-guide': '2026-09-04',
-'/halloween-the-game/progression-perks': '2026-09-04',
-'/halloween-the-game/how-to-arrest-michael-myers': '2026-09-04',
-'/halloween-the-game/main-street-walkthrough': '2026-09-04',
-'/halloween-the-game/the-babysitters-walkthrough': '2026-09-04',
+  '/halloween-the-game': '2026-09-05',
+  '/halloween-the-game/walkthrough': '2026-09-05',
+  '/halloween-the-game/endings': '2026-09-04',
+  '/halloween-the-game/multiplayer-guide': '2026-09-04',
+  '/halloween-the-game/progression-perks': '2026-09-04',
+  '/halloween-the-game/how-to-arrest-michael-myers': '2026-09-04',
+  '/halloween-the-game/main-street-walkthrough': '2026-09-05',
+  '/halloween-the-game/the-babysitters-walkthrough': '2026-09-05',
+  '/halloween-the-game/prologue-challenge-5': '2026-09-05',
+  '/halloween-the-game/prologue-challenges': '2026-09-05',
 
   '/neverness-to-everness': '2026-09-02',
   '/neverness-to-everness/chapter-6-fogden-game-walkthrough': '2026-09-02',

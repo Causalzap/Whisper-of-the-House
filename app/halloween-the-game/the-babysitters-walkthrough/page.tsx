@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 
 import Header from "@/components/Header";
@@ -12,10 +11,10 @@ const hubUrl = `${siteUrl}/halloween-the-game`;
 const pageUrl = `${hubUrl}/the-babysitters-walkthrough`;
 
 const metadataTitle =
-  "Halloween: The Game Babysitters Walkthrough & Challenges";
+  "Halloween: The Game Chapter 4 Challenges – Babysitters Guide";
 
 const metadataDescription =
-  "Complete all 6 Babysitters challenges, including Annie's car kill, Bob and Lynda stalking, Bob's wall kill, Sheet disguise, telephone kill, and Laurie.";
+  "Complete all 6 Chapter 4 Babysitters challenges: Annie's car kill, Bob and Lynda stalking, Bloodthirsty, Bob's wall, Sheet, telephone, and film plot.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-the-babysitters-challenges.webp`;
@@ -34,11 +33,11 @@ const imageUrls = [
 const toc = [
   {
     id: "babysitters-sequence",
-    label: "The Babysitters challenge route",
+    label: "Best route for all 6 challenges",
   },
   {
     id: "annie",
-    label: "Annie's car kill",
+    label: "Annie's car challenge",
   },
   {
     id: "bob-lynda-stalk",
@@ -50,46 +49,46 @@ const toc = [
   },
   {
     id: "bob-wall",
-    label: "Bob's kitchen wall kill",
+    label: "Bob's kitchen wall challenge",
   },
   {
     id: "sheet",
-    label: "Get the Sheet disguise",
+    label: "Get and keep the Sheet",
   },
   {
     id: "lynda-telephone",
-    label: "Lynda telephone kill",
+    label: "Lynda telephone challenge",
   },
   {
     id: "stage-house",
-    label: "Prepare the Wallace House",
-  },
-  {
-    id: "laurie",
-    label: "Laurie chase",
+    label: "Stage the Wallace House",
   },
   {
     id: "film-plot",
     label: "Match the film's plot",
   },
   {
-    id: "replay",
-    label: "What to fix on a replay",
+    id: "laurie",
+    label: "Laurie's final chase",
+  },
+  {
+    id: "replay-decisions",
+    label: "When to restart or finish",
   },
 ];
 
 const relatedLinks = [
   {
     href: "/halloween-the-game/walkthrough",
-    label: "Complete Story Walkthrough",
+    label: "Complete Story Mode Walkthrough",
   },
   {
     href: "/halloween-the-game/main-street-walkthrough",
-    label: "Main Street Walkthrough",
+    label: "Chapter 2 Main Street Challenges",
   },
   {
-    href: "/halloween-the-game/endings",
-    label: "All Endings: Railroad, Cornfield & Sewer",
+    href: "/halloween-the-game/prologue-challenges",
+    label: "All 6 Prologue Challenges",
   },
 ];
 
@@ -104,10 +103,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title:
-      "Halloween: The Game The Babysitters Walkthrough — All 6 Challenges",
+    title: "Halloween: The Game Chapter 4 Babysitters Challenges",
     description:
-      "Follow the Wallace House sequence through Annie, Bob, Lynda, the Sheet disguise, the staged bedroom, and Laurie's final chase.",
+      "Clear all six Chapter 4 challenges by preserving Annie, Bob, and Lynda until their movie-specific scenes are ready, then finish the staged house and Laurie sequence.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -121,9 +119,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Halloween: The Game Babysitters Walkthrough",
+    title: "Halloween: The Game Chapter 4 Challenges",
     description:
-      "Complete Annie's car kill, Bob and Lynda stalking, Bob's wall challenge, the Sheet and telephone kill, and the Laurie sequence.",
+      "Time Annie's car kill, stalk Bob and Lynda before breaking their scene, preserve Bob for the wall, then keep the Sheet through Lynda's telephone kill.",
     images: [heroImage],
   },
 };
@@ -150,7 +148,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "The Babysitters Walkthrough",
+          name: "Chapter 4 Babysitters Challenges",
           item: pageUrl,
         },
       ],
@@ -163,20 +161,24 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Halloween: The Game The Babysitters Walkthrough and All 6 Chapter 4 Challenges",
+        "Halloween: The Game Chapter 4 Challenges — The Babysitters Guide",
       description:
-        "A complete walkthrough for The Babysitters in Halloween: The Game, covering all six Chapter 4 challenges and the Wallace House event sequence. It explains when to wait for Annie's car kill, how to fully stalk Bob and Lynda while they are making out, when to use a spare resident for Bloodthirsty, how to preserve Bob for the kitchen wall execution, why Michael must keep the Sheet equipped for Lynda's telephone kill, how to prepare the upstairs house scene, and what changes when Laurie begins the final chase.",
+        "A complete Chapter 4 challenge guide for The Babysitters in Halloween: The Game. It covers all six challenge conditions and the Wallace House event order: letting Annie reach the car-kill window, fully stalking Bob and Lynda while they are making out, using a spare resident for Bloodthirsty, preserving Bob for the kitchen wall execution, taking and keeping the Sheet disguise, killing Lynda with the telephone while the Sheet is equipped, staging the upstairs Wallace House scene, keeping the major events aligned with the film-plot challenge, and committing to Laurie's chase once the final objective begins.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-04",
-      dateModified: "2026-09-04",
-      articleSection: "Halloween: The Game Walkthroughs",
+      dateModified: "2026-09-05",
+      articleSection: "Halloween: The Game Challenges",
       about: [
         {
           "@type": "VideoGame",
           name: "Halloween: The Game",
           url: hubUrl,
+        },
+        {
+          "@type": "Thing",
+          name: "Halloween: The Game Chapter 4",
         },
         {
           "@type": "Thing",
@@ -192,15 +194,27 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Annie Brackett",
+          name: "Annie car challenge",
         },
         {
           "@type": "Thing",
-          name: "Bob Simms",
+          name: "Bob and Lynda stalking challenge",
         },
         {
           "@type": "Thing",
-          name: "Lynda van der Klok",
+          name: "Bloodthirsty execution",
+        },
+        {
+          "@type": "Thing",
+          name: "Bob kitchen wall challenge",
+        },
+        {
+          "@type": "Thing",
+          name: "Sheet disguise",
+        },
+        {
+          "@type": "Thing",
+          name: "Lynda telephone challenge",
         },
         {
           "@type": "Thing",
@@ -208,7 +222,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Sheet disguise",
+          name: "Halloween film plot challenge",
         },
       ],
       isPartOf: {
@@ -244,13 +258,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Let the Wallace House Scenes Reach Their Challenge Windows"
-          description="Annie, Bob, and Lynda all become easier when you stop rushing the scene. Follow the Chapter 4 timing from Annie's car through the Sheet, telephone kill, staged house, and Laurie chase."
+          title="Halloween: The Game Chapter 4 Challenges – The Babysitters"
+          description="Keep the Wallace House scenes intact long enough to use them: wait for Annie's car window, finish Bob and Lynda's stalking state before separating them, preserve Bob for the wall, and keep the Sheet through Lynda's telephone kill."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 4, 2026"
+          updatedAt="September 5, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
