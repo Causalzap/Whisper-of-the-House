@@ -6,76 +6,69 @@ import GuideArticlePage from "@/components/guides/GuideArticlePage";
 
 import BombananaChaosContent from "@/data/bombanana/chaos.mdx";
 
-
-const siteUrl =
-  "https://www.whisperofthehouse.com";
-
-const pageUrl =
-  `${siteUrl}/bombanana/chaos`;
-
+const siteUrl = "https://www.whisperofthehouse.com";
+const pageUrl = `${siteUrl}/bombanana/chaos`;
 
 const imageUrls = [
   `${siteUrl}/images/bombanana/bombanana-chaos-warning-control.webp`,
   `${siteUrl}/images/bombanana/bombanana-chaos-modules.webp`,
 ];
 
-
 const toc = [
   {
-    id: "why-chaos-is-different",
-    label: "Why Chaos is different",
+    id: "first-chaos",
+    label: "The first Chaos warning",
   },
   {
     id: "campaign-ramp",
-    label: "How Chaos ramps up",
+    label: "How Chaos ramps through Campaign",
   },
   {
-    id: "warning-control",
-    label: "When danger changes priority",
+    id: "interrupt-or-finish",
+    label: "Interrupt or finish the solve",
   },
   {
-    id: "attention-budget",
-    label: "The attention budget",
+    id: "three-players-reacting",
+    label: "Keep one warning from breaking the team",
   },
   {
-    id: "who-watches",
-    label: "Who should watch Chaos",
+    id: "return-check",
+    label: "Return to the right module state",
   },
   {
-    id: "when-to-interrupt",
-    label: "When to interrupt a solve",
+    id: "manage-not-solve",
+    label: "Why Chaos never feels finished",
   },
   {
-    id: "resume-cleanly",
-    label: "How to resume safely",
+    id: "practice-level-4",
+    label: "Practice one hazard on Level 4",
   },
   {
-    id: "practice-points",
-    label: "Best practice levels",
+    id: "replay-or-push",
+    label: "Replay or keep pushing",
   },
   {
-    id: "push-or-replay",
-    label: "Push or replay",
+    id: "late-game",
+    label: "Surviving Level 29 Chaos",
   },
 ];
 
-
 const relatedLinks = [
-  {
-    href: "/bombanana/levels",
-    label: "BOMBANANA Levels & Walkthrough",
-  },
   {
     href: "/bombanana/roles",
     label: "BOMBANANA Roles & Communication Guide",
+  },
+  {
+    href: "/bombanana/levels",
+    label: "BOMBANANA Levels & Walkthrough",
   },
   {
     href: "/bombanana/module-solver",
     label: "BOMBANANA Module Solver",
   },
   {
-    href: "/bombanana/soundboard",
-    label: "BOMBANANA Soundboard Guide",
+    href: "/bombanana/calculator",
+    label: "BOMBANANA Calculator Guide & Solver",
   },
   {
     href: "/bombanana/piano",
@@ -83,292 +76,182 @@ const relatedLinks = [
   },
   {
     href: "/bombanana",
-    label: "BOMBANANA Guide",
+    label: "BOMBANANA Manual & Guide",
   },
 ];
 
-
 export const metadata: Metadata = {
-  title:
-    "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
+  title: "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
 
   description:
-    "Manage BOMBANANA Chaos modules, prioritize Slider, Pressure and Alarm, survive stacked hazards, and know when to interrupt or resume a solve.",
+    "See when to stop a solve, stabilize Slider, Pressure or Alarm, recover the current module state, and decide when to replay easier Chaos levels.",
 
   alternates: {
-    canonical:
-      pageUrl,
+    canonical: pageUrl,
   },
 
   openGraph: {
-    title:
-      "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
+    title: "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
 
     description:
-      "Learn when BOMBANANA Chaos should interrupt a defusal, how to preserve the unfinished module state, and how stacked hazards change later Campaign levels.",
+      "Keep BOMBANANA Chaos under control without losing the module you were solving. Handle urgent hazards, resume safely, and survive stacked late-game pressure.",
 
-    url:
-      pageUrl,
+    url: pageUrl,
 
-    siteName:
-      "Whisper of the House",
+    siteName: "Whisper of the House",
 
-    type:
-      "article",
+    type: "article",
 
     images: [
       {
-        url:
-          imageUrls[0],
-
-        width:
-          1600,
-
-        height:
-          900,
-
-        alt:
-          "BOMBANANA bomb with a warning-marked Chaos control active beside the defusal modules.",
+        url: imageUrls[0],
+        width: 1600,
+        height: 900,
+        alt: "BOMBANANA warning-marked Chaos control rising beside active defusal modules",
       },
     ],
   },
 
   twitter: {
-    card:
-      "summary_large_image",
+    card: "summary_large_image",
 
-    title:
-      "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
+    title: "BOMBANANA Chaos Guide: Slider, Pressure & Alarm",
 
     description:
-      "Control BOMBANANA Chaos without losing the defusal state, from the first Slider hazard to stacked late-game Pressure and Alarm setups.",
+      "Know when Chaos should interrupt the solve, how to recover the panel you paused, and when stacked hazards mean it is time to replay an easier level.",
 
-    images: [
-      imageUrls[0],
-    ],
+    images: [imageUrls[0]],
   },
 };
 
-
 const jsonLd = {
-  "@context":
-    "https://schema.org",
+  "@context": "https://schema.org",
 
   "@graph": [
     {
-      "@type":
-        "BreadcrumbList",
+      "@type": "BreadcrumbList",
 
-      "@id":
-        `${pageUrl}#breadcrumb`,
+      "@id": `${pageUrl}#breadcrumb`,
 
       itemListElement: [
         {
-          "@type":
-            "ListItem",
-
-          position:
-            1,
-
-          name:
-            "Home",
-
-          item:
-            siteUrl,
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
         },
-
         {
-          "@type":
-            "ListItem",
-
-          position:
-            2,
-
-          name:
-            "BOMBANANA Guide",
-
-          item:
-            `${siteUrl}/bombanana`,
+          "@type": "ListItem",
+          position: 2,
+          name: "BOMBANANA Manual & Guide",
+          item: `${siteUrl}/bombanana`,
         },
-
         {
-          "@type":
-            "ListItem",
-
-          position:
-            3,
-
-          name:
-            "BOMBANANA Chaos Guide",
-
-          item:
-            pageUrl,
+          "@type": "ListItem",
+          position: 3,
+          name: "BOMBANANA Chaos Guide",
+          item: pageUrl,
         },
       ],
     },
 
-
     {
-      "@type":
-        "Article",
+      "@type": "Article",
 
-      "@id":
-        `${pageUrl}#article`,
+      "@id": `${pageUrl}#article`,
 
       mainEntityOfPage: {
-        "@type":
-          "WebPage",
-
-        "@id":
-          pageUrl,
+        "@type": "WebPage",
+        "@id": pageUrl,
       },
 
-      headline:
-        "BOMBANANA Chaos Guide: Slider, Pressure and Alarm",
+      headline: "BOMBANANA Chaos Guide: Slider, Pressure and Alarm",
 
       description:
-        "A player-focused BOMBANANA Chaos guide covering Slider, Pressure and Alarm hazards, why Chaos must be managed while normal modules are being solved, how danger changes module priority, how to preserve an interrupted defusal state, how stacked Chaos affects the attention budget, and when to practice on Levels 4, 12 and 26 before pushing deeper into the Campaign.",
+        "A player-focused guide to managing BOMBANANA Chaos hazards while normal defusal modules remain active. It covers the first warning Slider, the Campaign escalation from Level 4 onward, when urgent Slider, Pressure, or Alarm states should interrupt a solve, how to return to a confirmed module state after that interruption, why stale answers cause follow-up mistakes, and how Levels 4, 12, 26, and 29 expose different Chaos-management problems.",
 
-      image:
-        imageUrls,
+      image: imageUrls,
 
-      inLanguage:
-        "en",
+      inLanguage: "en",
 
-      dateModified:
-        "2026-09-03",
+      dateModified: "2026-09-06",
 
-      articleSection:
-        "Guides",
+      articleSection: "BOMBANANA Guides",
 
       about: [
         {
-          "@type":
-            "VideoGame",
-
-          name:
-            "BOMBANANA",
+          "@type": "VideoGame",
+          name: "BOMBANANA",
         },
-
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Chaos Modules",
+          "@type": "Thing",
+          name: "BOMBANANA Chaos Modules",
         },
-
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Slider Chaos",
+          "@type": "Thing",
+          name: "BOMBANANA Slider Chaos",
         },
-
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Pressure Chaos",
+          "@type": "Thing",
+          name: "BOMBANANA Pressure Chaos",
         },
-
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Alarm Chaos",
+          "@type": "Thing",
+          name: "BOMBANANA Alarm Chaos",
         },
-
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Chaos management",
-        },
-
-        {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Campaign",
+          "@type": "Thing",
+          name: "BOMBANANA Chaos management",
         },
       ],
 
       mentions: [
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Level 4",
+          "@type": "Thing",
+          name: "BOMBANANA Level 4",
         },
-
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Level 12",
+          "@type": "Thing",
+          name: "BOMBANANA Level 6",
         },
-
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Level 26",
+          "@type": "Thing",
+          name: "BOMBANANA Level 10",
         },
-
         {
-          "@type":
-            "Thing",
-
-          name:
-            "BOMBANANA Level 29",
+          "@type": "Thing",
+          name: "BOMBANANA Level 12",
+        },
+        {
+          "@type": "Thing",
+          name: "BOMBANANA Level 26",
+        },
+        {
+          "@type": "Thing",
+          name: "BOMBANANA Level 29",
         },
       ],
 
       isPartOf: {
-        "@type":
-          "WebSite",
-
-        "@id":
-          `${siteUrl}#website`,
-
-        name:
-          "Whisper of the House",
-
-        url:
-          siteUrl,
+        "@type": "WebSite",
+        "@id": `${siteUrl}#website`,
+        name: "Whisper of the House",
+        url: siteUrl,
       },
 
       publisher: {
-        "@type":
-          "Organization",
-
-        "@id":
-          `${siteUrl}#organization`,
-
-        name:
-          "Whisper of the House",
-
-        url:
-          siteUrl,
+        "@type": "Organization",
+        "@id": `${siteUrl}#organization`,
+        name: "Whisper of the House",
+        url: siteUrl,
       },
 
       breadcrumb: {
-        "@id":
-          `${pageUrl}#breadcrumb`,
+        "@id": `${pageUrl}#breadcrumb`,
       },
     },
   ],
 };
-
 
 export default function Page() {
   return (
@@ -379,19 +262,16 @@ export default function Page() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html:
-              JSON.stringify(
-                jsonLd
-              ),
+            __html: JSON.stringify(jsonLd),
           }}
         />
 
         <GuideArticlePage
-          title="BOMBANANA Chaos Module Guide"
-          description="Learn when a Chaos hazard should interrupt the current solve, how to stabilize it without losing the unfinished module state, and when stacked Slider, Pressure, and Alarm setups mean the team should go back and practice."
+          title="BOMBANANA Chaos: When to Stop the Solve and Save the Run"
+          description="If Slider, Pressure, or Alarm starts turning urgent, I stabilize it first, then return to the module state we can actually confirm instead of guessing from memory."
           gameTitle="BOMBANANA"
           gameHref="/bombanana"
-          updatedAt="September 3, 2026"
+          updatedAt="September 6, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

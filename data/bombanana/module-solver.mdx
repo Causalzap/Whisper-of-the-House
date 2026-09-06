@@ -4,342 +4,402 @@ import Link from "next/link";
 import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
 import BombananaModuleSolver from "@/components/tools/BombananaModuleSolver";
 
-<section
-  id="quick-answer"
-  className="scroll-mt-24"
->
-  <GuideQuickAnswer title="Solve the State You See Right Now">
+<section id="quick-answer" className="scroll-mt-24">
+  <GuideQuickAnswer title="Give the Solver a Complete Current State">
 
   The BOMBANANA solver currently handles **Cable / Wire, Direction, and Calculator**.
 
-  Pick the module, enter only the information visible on its **current stage**, use the answer once, then look at the bomb again.
+  Before I use it, I make sure the panel in front of us still matches the information being entered. A correct lookup is only useful for the exact state that produced it.
 
-  That last check matters. Direction can advance after a correct press, while Calculator deliberately changes state after the equation result is entered. A correct answer becomes useless as soon as the panel moves on.
+  **Read the current panel, enter the required fields, use the result once, then look back at the bomb before doing anything else.**
 
   </GuideQuickAnswer>
 </section>
 
-
 <BombananaModuleSolver />
 
 
-<h2
-  id="which-module"
-  className="scroll-mt-24"
->
-  Identify the module before sending any values
+<h2 id="which-module" className="scroll-mt-24">
+  I decide whether the panel belongs in the solver before entering a single value
 </h2>
 
-When several panels are active, I name the module before anybody starts calling numbers, colors, or symbols.
+The solver works best on modules that can be reduced to a small set of stable inputs.
 
-A short call such as **“Green, two”** is not enough when one player is reading Direction and another is waiting on a Calculator LED.
+Right now, that means three cases.
 
-The three solver inputs are deliberately different:
+**Cable / Wire** needs the number of cables, the active light, and the cable colors in their physical left-to-right order.
 
-- **Cable / Wire:** cable count, active light, cable colors from left to right
-- **Direction:** active light, Braille number
-- **Calculator:** equation first; the new LED is used only after the raw result has been entered
+**Direction** needs the current light and the Braille number Blind is reading.
 
-If the panel does not match one of those three input patterns, I do not try to force it into the tool.
+**Calculator** starts with the equation. The colored light only matters after the raw arithmetic result has been accepted.
+
+Anything else is a bad fit for this tool.
+
+A Symbol shape, a Piano sequence, a Soundboard position, a Morse pattern, or a moving Chaos hazard cannot be made reliable by forcing it into one of these three forms.
 
 <Image
   src="/images/bombanana/bombanana-modules-braille-stage-indicator.webp"
-  alt="BOMBANANA manual explaining modules, Braille, and the module stage indicator"
+  alt="BOMBANANA manual showing module information, Braille, and the stage indicator"
   width={1600}
   height={900}
   className="my-8 rounded-xl"
 />
 
-The stage indicator is worth watching because a successful input does not always remove the panel.
+The stage indicator gets my attention before the numbers do.
 
-If the module advances, I drop the old state and read the new one before entering anything else.
+If the panel has already advanced, the previous values are history. I would rather spend five seconds reading the new state than spend a strike proving that the old answer used to be correct.
 
 
-<h2
-  id="cable"
-  className="scroll-mt-24"
->
-  Cable / Wire needs the complete panel state
+<h2 id="cable" className="scroll-mt-24">
+  Cable starts with physical order, not the color I happen to notice first
 </h2>
 
-For Cable, I collect three things before solving:
+Cable looks simple enough that it invites incomplete callouts.
 
-**cable count → active light → cable colors from left to right**
+Someone sees a blue cable.
 
-The cable count matters because 3-cable and 4-cable boards do not use the same rule set.
+Someone else notices the light.
 
-The order matters for a different reason: once the target cable has been identified, Blind still needs the physical cable position on the bomb.
+A third player starts counting.
 
-That is why I enter the colors in the same left-to-right order they appear on the panel rather than treating them as an unordered list.
+That is exactly how a valid Cable state gets assembled from pieces that may not belong together.
+
+I collect the panel in one pass:
+
+- total cable count;
+- active light;
+- every cable color from left to right.
+
+The count comes first because a 3-cable panel and a 4-cable panel are not interchangeable.
+
+The left-to-right order stays intact because the final answer has to become a physical cut on Blind's side. Knowing the target color is much less useful if the team then has to reconstruct where that color sits.
 
 <Image
   src="/images/bombanana/bombanana-cable-module-manual.webp"
-  alt="BOMBANANA Cable Module manual showing the three-cable and four-cable solve table"
+  alt="BOMBANANA Cable Module manual showing rules for three-cable and four-cable panels"
   width={1600}
   height={900}
   className="my-8 rounded-xl"
 />
 
-If the solver says the required target color is missing or appears more than once, I reread the panel instead of guessing which cable was intended.
+If the result points somewhere that does not make sense on the panel, I do not rescue the solve with a guess.
 
-For the complete mapping, worked examples, and the safest way to translate the result into a physical cut, use the <Link href="/bombanana/wire">BOMBANANA Cable / Wire Guide</Link>.
+I check the count again.
+
+Then the light.
+
+Then the colors in order.
+
+A missing cable, a duplicated-looking color, or one swapped position can make a perfectly functioning lookup appear wrong.
+
+When the difficult part is the Cable rule itself rather than entering the state, the <Link href="/bombanana/wire">BOMBANANA Cable / Wire Guide</Link> has the full Cable workflow.
 
 
-<h2
-  id="direction"
-  className="scroll-mt-24"
->
-  Direction is one light, one Braille number, one press
+<h2 id="direction" className="scroll-mt-24">
+  Direction is fast only when the light and Braille number are from the same stage
 </h2>
 
-Direction has a compact input:
+Direction gives the solver very little information:
 
-**active light + current Braille number**
+**one active light**
 
-The solver returns one direction:
+and:
 
-**Up, Down, Left, or Right**
+**one Braille number**
 
-I use that answer for the current stage only.
+That compact state is the reason it can be solved quickly. It is also the reason one stale value causes so much trouble.
+
+A real call can be as small as:
+
+**Green light + 5**
+
+which returns:
+
+**Right**
+
+The physical input is immediate once both fields are confirmed.
 
 <Image
   src="/images/bombanana/bombanana-direction-module-manual.webp"
-  alt="BOMBANANA Direction Module manual showing the active-light and Braille-number direction table"
+  alt="BOMBANANA Direction Module manual showing the light and Braille number lookup"
   width={1600}
   height={900}
   className="my-8 rounded-xl"
 />
 
-After the press, I immediately look at the panel again.
+The dangerous part comes after the press.
 
-If the light, Braille number, or stage has changed, I treat it as a new state and solve again.
+Direction can advance instead of disappearing. If that happens, the new stage gets a fresh read.
 
-The current Direction table uses Braille numbers **1, 2, 3, 4, 5, 6, 7, and 9**. If I think I am seeing an 8, I reread the pattern before pressing anything.
+I do not carry the old green light forward.
 
-The lookup itself is usually fast. The more dangerous problem is letting different players use different meanings for left and right.
+I do not carry the old five forward.
 
-For the full Blind / Deaf / Mute perspective and callout convention, use the <Link href="/bombanana/roles">BOMBANANA Roles Guide</Link>.
+I do not assume the next direction is related to the previous one.
+
+The current Direction lookup uses Braille numbers **1, 2, 3, 4, 5, 6, 7, and 9**. If the reading appears to be an 8, that is a reason to inspect the Braille again before committing an input.
+
+One more failure sits outside the solver entirely: **Left** is useless if two players mean two different lefts.
+
+When the lookup is correct but the physical direction is still ambiguous, I use the <Link href="/bombanana/roles">BOMBANANA Roles & Communication Guide</Link> and settle the perspective before another press.
 
 
-<h2
-  id="calculator"
-  className="scroll-mt-24"
->
-  Calculator has two separate input stages
+<h2 id="calculator" className="scroll-mt-24">
+  Calculator changes the question halfway through the solve
 </h2>
 
-Calculator is the module where entering information too early causes the most confusion.
+Calculator is the module where I am most careful about asking:
 
-The first state gives me an equation.
+**What stage are we actually on?**
 
-At this point I do **not** need a colored LED.
+At the beginning, there is an equation.
 
-I solve the equation and enter the **raw result** first.
+That is all I need.
 
-If that input is accepted, the Calculator moves into its second state.
+The colored light is not part of the first arithmetic step.
 
-Now I need:
+I calculate the raw result and enter it.
 
-**the new LED + whether the raw result was odd or even**
+Only after the game accepts that result does the useful information change.
 
-That combination gives the final single-digit key.
+Now the Calculator is asking for:
+
+- the new light;
+- whether the raw result was odd or even.
+
+Those two facts produce the final key.
 
 <Image
   src="/images/bombanana/bombanana-calculator-module-manual.webp"
-  alt="BOMBANANA Calculator Module manual showing the odd-even and active-light answer table"
+  alt="BOMBANANA Calculator Module manual showing the odd-even and active-light final key table"
   width={1600}
   height={900}
   className="my-8 rounded-xl"
 />
 
-I keep the two values mentally separate:
+A clean real run makes the separation obvious.
 
-**raw result** advances the Calculator.
+The equation was:
 
-**final key** finishes the Calculator.
+**60 + 22**
 
-If the equation result was accepted and the panel is still active, I do not enter the same number again. I read the new LED and continue from stage two.
+The raw result was:
 
-The <Link href="/bombanana/calculator">BOMBANANA Calculator Guide & Solver</Link> owns the complete answer table, worked examples, shuffled-keypad warning, and the full explanation of why the LED appears late.
+**82**
+
+That result is even.
+
+After 82 was accepted, the Calculator showed a **blue** light. The next answer was **1**, and pressing 1 completed the step.
+
+The important part is not that 60 + 22 is easy arithmetic.
+
+The important part is that **82** and **1** are two different answers used at two different moments.
+
+If somebody hears “82” after the panel has already moved to the colored-light stage, the old number can sound completely legitimate while being completely useless.
+
+For the detailed Calculator logic, examples, keypad handling, and final-key lookup, use the <Link href="/bombanana/calculator">BOMBANANA Calculator Guide & Solver</Link>.
 
 
-<h2
-  id="chaos"
-  className="scroll-mt-24"
->
-  Chaos is not an input for this solver
+<h2 id="chaos" className="scroll-mt-24">
+  A rising Chaos hazard can make a good solver answer unsafe to use
 </h2>
 
-The solver handles modules that return a specific answer from a specific state.
+The solver does not calculate Chaos.
 
-Chaos can interrupt that solve when a danger control needs attention. Stabilize the danger, then return to the defusal panel and confirm its current state before using an older answer.
+Chaos is doing something different: it can demand attention while another module is still waiting for an answer.
 
-For Chaos priority, stacked hazards, and when I interrupt or resume a solve, use the <Link href="/bombanana/chaos">BOMBANANA Chaos Guide</Link>.
+Suppose Direction has already been entered into the solver and the result is sitting on screen.
 
-<h2
-  id="stale-answer"
-  className="scroll-mt-24"
->
-  A correct answer can become stale after one input
+Before Blind presses, a warning hazard becomes urgent.
+
+The team deals with the hazard.
+
+Several seconds pass.
+
+Now I do not automatically use the waiting Direction answer.
+
+I look back at Direction first.
+
+If the same light, Braille value, and stage are still there, the answer is still usable.
+
+If anything changed, I solve what is on the bomb now.
+
+The same rule applies to Cable and Calculator.
+
+Chaos can interrupt the timing of the answer even when the lookup itself was perfect.
+
+For Slider, Pressure, Alarm, interruption priority, and returning safely to a paused module, use the <Link href="/bombanana/chaos">BOMBANANA Chaos Guide</Link>.
+
+
+<h2 id="stale-answer" className="scroll-mt-24">
+  The solver result expires the moment the panel stops matching its inputs
 </h2>
 
-Once the team gets faster, stale answers become more dangerous than slow lookups.
+A stale answer is more dangerous than an obviously wrong one.
 
-The sequence is simple:
+An obviously wrong result makes everybody hesitate.
 
-the solver returns an answer;
+A stale result often sounds familiar enough to get pressed again.
 
-the correct input is made;
+The usual failure is straightforward.
 
-the module advances;
+The solver returns a valid answer.
 
-somebody repeats the old answer;
+Blind uses it.
 
-Blind acts on it again.
+The panel advances.
 
-Nothing was wrong with the original lookup. It belonged to the previous state.
+Someone repeats the answer they still remember.
 
-Calculator has the same risk when the raw result is accepted and the useful information changes from an equation to a colored LED.
+Blind uses it on the new state.
 
-I treat every successful input as a checkpoint.
+The first lookup was not bad. It was simply finished.
 
-After a press, cut, or accepted Calculator result, I check:
+Calculator makes this especially easy to see. The equation state produces a raw result, but once that result is accepted, the active light belongs to a new decision.
 
-**Did the module clear?**
+Direction creates the same risk whenever a correct press advances the stage.
 
-If yes, I drop every value attached to it.
+After any successful input, my attention goes back to the physical panel before the solver.
 
-If no, I read the current panel again before using another answer.
+If the module cleared, there is nothing left to reuse.
 
-That habit matters more as several modules begin competing for attention at the same time.
+If it advanced, I enter the new state.
+
+If nothing happened, I verify whether the intended physical action was actually performed before changing the lookup.
 
 
-<h2
-  id="bad-input"
-  className="scroll-mt-24"
->
-  If the result looks impossible, reread the input first
+<h2 id="bad-input" className="scroll-mt-24">
+  An impossible-looking result usually sends me back to the panel, not deeper into the tool
 </h2>
 
-The solver can only answer the state entered into it.
+The solver only knows the state it receives.
 
-If the result does not fit the panel, I do not immediately assume the rule table is wrong.
+If the output does not fit what is physically in front of Blind, I audit the observation before questioning the rule.
 
-For Cable, I check:
+For **Cable / Wire**, the first checks are:
 
-- whether there are 3 or 4 cables;
-- the active light;
+- 3 cables or 4;
+- active light;
 - every cable color;
-- the left-to-right order.
+- left-to-right order.
 
-For Direction, I check:
+For **Direction**:
 
-- the active light;
-- the Braille number;
-- whether the panel has already advanced.
+- current light;
+- current Braille number;
+- whether a previous press already advanced the module.
 
-For Calculator, I check:
+For **Calculator**:
 
-- both equation values;
-- the operator;
-- the raw result;
-- whether the current LED belongs to stage two.
+- first number;
+- second number;
+- operator;
+- raw result;
+- whether the panel is still on the equation stage or has moved to the light stage.
 
-I also restart the callout if two modules were being described at the same time.
+The operator deserves special attention.
 
-One extra fact rarely repairs a state that was already mixed together.
+A misread `+` or `-` does not create a slightly wrong answer. It sends the entire Calculator solve down a different path while everything else can still look normal.
 
-When the input packet becomes unreliable, I read the panel again from the beginning.
+I also become suspicious when two modules were being called out at the same time.
+
+“Blue, five, red, two” can contain four accurate observations and still be unusable if nobody remembers which values belonged together.
+
+Once the state is mixed, adding one more number rarely repairs it.
+
+The fastest recovery is usually a fresh read of the current panel.
 
 
-<h2
-  id="communication"
-  className="scroll-mt-24"
->
-  The solver cannot repair a broken information relay
+<h2 id="communication" className="scroll-mt-24">
+  A repeated correct lookup means the problem may have moved away from the solver
 </h2>
 
-There is a point where entering the same state into the tool again stops helping.
+There is a point where pressing Solve again stops adding information.
 
-If the lookup is correct but Blind still cannot identify the physical action, the problem is no longer the rule table.
+The tool says the same thing.
 
-If Direction is solved but players disagree about whose perspective the answer uses, another lookup changes nothing.
+The table agrees.
 
-If Calculator reaches stage two but the raw result and final key are both being passed around as unlabeled numbers, faster arithmetic will not fix the run.
+The bomb still gets a strike.
 
-Those are communication failures.
+Now I look at what happened between the returned answer and Blind's hand.
 
-That is when I switch to the <Link href="/bombanana/roles">BOMBANANA Roles Guide</Link>.
+Direction may be solved as **Right**, but Blind may be waiting to learn whose right that means.
 
-It covers the Blind / Deaf / Mute relay, physical-position language, perspective conventions, keeping module states separate, and deciding when swapping roles is more useful than another retry.
+Cable may identify the correct target, but the final call may still describe a color instead of the physical cable position.
+
+Calculator may have two correct numbers in circulation—the raw result and the final key—with neither one labeled by stage.
+
+Those are not lookup failures.
+
+The <Link href="/bombanana/roles">BOMBANANA Roles & Communication Guide</Link> is where I fix unclear gestures, unlabeled numbers, physical-position language, perspective, and information that changes meaning on the way back to Blind.
 
 
-<h2
-  id="manual"
-  className="scroll-mt-24"
->
-  Not every module needs the same kind of tool
+<h2 id="manual" className="scroll-mt-24">
+  Some modules cannot be compressed into a few solver fields
 </h2>
 
-Cable, Direction, and Calculator work well here because their current states can be reduced to short deterministic inputs.
+Cable, Direction, and Calculator fit this tool because a small amount of current state can produce one deterministic next action.
 
-Other BOMBANANA modules ask the team to do something different.
+Many BOMBANANA modules ask for something else entirely.
 
-A panel may depend on:
+**Symbol** depends on identifying shapes consistently.
 
-- recognizing a symbol;
-- hearing or reproducing a sound;
-- remembering a sequence;
-- reading several values together;
-- tracking multiple stages;
-- managing danger instead of clearing it.
+**Piano** can involve an ordered note sequence.
 
-That includes modules such as **Color Slider, Symbol, Piano, Soundboard, Maze, Morse, and Monkey-Says**.
+**Soundboard** needs the team to identify a sound and keep track of positions.
 
-For those panels, I use the relevant manual guidance instead of trying to translate them into a Cable, Direction, or Calculator input.
+**Morse** depends on reading and preserving a signal sequence.
 
-If I am still learning where a module appears in Campaign progression, I use the <Link href="/bombanana/levels">BOMBANANA Levels & Walkthrough</Link>.
+**Maze** is spatial.
 
-If I need the broader game route rather than one exact lookup, I return to the <Link href="/bombanana">BOMBANANA Guide</Link>.
+**Monkey-Says** can depend on what already happened in earlier stages.
+
+**Color Slider** combines several ordered values.
+
+**Chaos** is managed over time rather than cleared by one solver answer.
+
+Those panels need their own method.
+
+I do not choose Cable because a module happens to contain colors.
+
+I do not choose Direction because a panel contains a number.
+
+I do not choose Calculator because there is a light.
+
+The solver only helps when the module itself and the required fields match.
+
+If the question is where an unfamiliar module appears in Campaign, the <Link href="/bombanana/levels">BOMBANANA Levels & Walkthrough</Link> is the faster place to check.
 
 
-<h2
-  id="during-run"
-  className="scroll-mt-24"
->
-  How I use the solver while the timer is running
+<h2 id="during-run" className="scroll-mt-24">
+  Under the timer, my eyes move from bomb to solver and straight back to bomb
 </h2>
 
-During a bomb, I do not read this page from top to bottom.
+I use the tool in short bursts.
 
-I identify the active module and send the smallest complete input packet it needs.
+For Cable, I read the whole physical row before typing anything.
 
-For Cable:
+For Direction, I wait until the light and Braille number have both been confirmed.
 
-**count → LED → colors from left to right**
+For Calculator, I refuse to mix the equation stage with the later light stage.
 
-For Direction:
+Then the solver gives me one job.
 
-**LED → Braille number**
+I use that answer once.
 
-For Calculator:
+My next glance is not at the previous result.
 
-**equation first**
+It is at the bomb.
 
-then, if the module remains active:
+That single habit prevents a surprising number of mistakes because BOMBANANA modules do not promise to stay in the same state after a correct action.
 
-**new LED + parity of the raw result**
+When the panel still matches, the answer remains useful.
 
-I use the returned answer once and look at the bomb again.
+When it changes, the next solve starts from the new state.
 
-If the panel has changed, I solve the new state rather than carrying the previous answer forward.
+When the state cannot be read confidently, I wait instead of manufacturing a complete input from partial information.
 
-If I cannot identify what information the module needs, I stop guessing and use its manual guidance.
+The tool is fastest at one very specific moment:
 
-If the rule is understood but the answer keeps getting lost between players, I move to the <Link href="/bombanana/roles">Roles Guide</Link>.
-
-If the module is no longer the problem and I want to know what the Campaign introduces next, I use the <Link href="/bombanana/levels">Levels & Walkthrough</Link>.
-
-The solver is for one very specific moment:
-
-**I know which module this is, I can read its current state, and I need the next correct input now.**
+**the module is known, the current state is complete, and the team needs the next physical action now.**

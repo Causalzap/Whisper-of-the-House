@@ -1,0 +1,390 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import GuideTable from "@/components/GuideTable";
+
+export const morseColumns = [
+  {
+    key: "Digit",
+    label: "Digit",
+  },
+  {
+    key: "Pattern",
+    label: "Morse pattern",
+  },
+];
+
+export const morseRows = [
+  {
+    Digit: "0",
+    Pattern: "-----",
+  },
+  {
+    Digit: "1",
+    Pattern: ".----",
+  },
+  {
+    Digit: "2",
+    Pattern: "..---",
+  },
+  {
+    Digit: "3",
+    Pattern: "...--",
+  },
+  {
+    Digit: "4",
+    Pattern: "....-",
+  },
+  {
+    Digit: "5",
+    Pattern: ".....",
+  },
+  {
+    Digit: "6",
+    Pattern: "-....",
+  },
+  {
+    Digit: "7",
+    Pattern: "--...",
+  },
+  {
+    Digit: "8",
+    Pattern: "---..",
+  },
+  {
+    Digit: "9",
+    Pattern: "----.",
+  },
+];
+
+<section id="quick-answer" className="scroll-mt-24">
+  <GuideQuickAnswer title="Fill Four Confirmed Digits, Then Press Enter">
+
+  When one Morse slot becomes active, I identify **which of the four positions** it belongs to before decoding anything.
+
+  The player who can hear the Morse listens for the complete **five-signal pattern**, the pattern is converted to a digit, and that digit stays in the same slot.
+
+  Repeat until all four positions are confirmed. **A blank slot waits; a guessed slot does not go to Enter.**
+
+  </GuideQuickAnswer>
+</section>
+
+
+<h2 id="slot-is-position" className="scroll-mt-24">
+  The green flash tells me which slot the Morse belongs to
+</h2>
+
+Our first read of the Morse module went wrong before anyone had decoded a single digit.
+
+There were four number slots, each adjustable from **0 to 9**, and the slots were flashing green at different times.
+
+The obvious guess was that the number of flashes might be the answer.
+
+One player counted seven.
+
+Another slot seemed to flash eight times.
+
+Then another also looked like eight.
+
+For a moment, we were building a four-digit answer out of those counts.
+
+That was the wrong job for the green flash.
+
+The useful information was **position**.
+
+If the third slot is active, the next Morse pattern belongs in position three. The flash identifies where the answer goes; the sound determines what the answer is.
+
+Once that clicked, the module stopped being a counting puzzle.
+
+<Image
+  src="/images/bombanana/bombanana-morse-four-displays.webp"
+  alt="BOMBANANA Morse module on the bomb with four numbered input positions"
+  width={1600}
+  height={900}
+  className="my-8 rounded-xl"
+/>
+
+I keep a four-slot record in my head or on the call:
+
+**`_  _  _  _`**
+
+If position three becomes active, only the third space is in play.
+
+Nothing about the other three positions changes just because the current Morse code belongs somewhere else.
+
+
+<h2 id="digit-table" className="scroll-mt-24">
+  The manual turns each five-signal Morse pattern into one digit
+</h2>
+
+The Morse page gives the complete numeric code from **0 through 9**, so nobody needs to memorize Morse before playing.
+
+<Image
+  src="/images/bombanana/bombanana-morse-manual-table.webp"
+  alt="BOMBANANA Morse Module manual showing four input displays, Enter, and Morse digit patterns from 0 to 9"
+  width={1600}
+  height={1190}
+  className="my-8 rounded-xl"
+/>
+
+<GuideTable
+  caption="BOMBANANA Morse numbers. Every digit uses five dots or dashes."
+  columns={morseColumns}
+  rows={morseRows}
+/>
+
+A full module contains four digits, and every digit contains five Morse marks.
+
+That means a clean solve ultimately depends on **20 dot-or-dash decisions**.
+
+I would rather spend another cycle confirming one of those marks than carry a bad digit all the way to Enter.
+
+
+<h2 id="five-signals" className="scroll-mt-24">
+  Four signals can look convincing and still leave two possible answers
+</h2>
+
+The fifth signal matters because several digits only separate at the end.
+
+After hearing:
+
+**`....`**
+
+I still have two obvious possibilities.
+
+A final dash gives:
+
+**`....- = 4`**
+
+A final dot gives:
+
+**`..... = 5`**
+
+The same problem appears at the dash-heavy end:
+
+**`----. = 9`**
+
+**`----- = 0`**
+
+So four clean sounds are not “close enough.”
+
+They are an unfinished digit.
+
+This was one of the easiest mistakes to make when music, other modules, and player chatter were competing with the Morse audio. A pattern can feel obvious before the final sound arrives, especially when the first four marks are identical.
+
+My answer stays empty until all five are accounted for.
+
+
+<h2 id="position-before-pattern" className="scroll-mt-24">
+  I call the position before anyone starts translating the sound
+</h2>
+
+Morse splits its information in an unusual way.
+
+During our run, one player could hear the Morse code but could not see which slot it belonged to. Another player could see which position was active but did not have the Morse information needed to decode the digit.
+
+That creates a very specific path through the module.
+
+The visible player establishes:
+
+**“Position three.”**
+
+Now the listener knows that the next complete Morse pattern belongs to slot three.
+
+The manual side turns that five-signal pattern into a number.
+
+Only then does position three get filled.
+
+For example, if the decoded digit is 4:
+
+**`_  _  4  _`**
+
+The next active position might be one, four, or two. It does not need to arrive in numerical order.
+
+What matters is that the answer returns to the position announced before the Morse pattern was read.
+
+That small habit prevents the most expensive kind of error here: four correct digits attached to the wrong four slots.
+
+If our team repeatedly loses physical positions across several modules rather than only Morse, I use the <Link href="/bombanana/roles">BOMBANANA Roles & Communication Guide</Link> to settle the wider position and relay conventions.
+
+
+<h2 id="8145-run" className="scroll-mt-24">
+  8145 was the point where the module finally stopped being guesswork
+</h2>
+
+The first long Morse attempt was messy.
+
+We counted green flashes.
+
+We argued over which slot was active.
+
+Partial dot-and-dash strings were being called while another player was still trying to work out where they belonged.
+
+Once the team separated **slot identification** from **Morse decoding**, the four-number field eventually reached:
+
+**`8  1  4  5`**
+
+There was still hesitation because an earlier read had mixed up the third and fourth positions.
+
+The useful question at that point was no longer “what numbers did we hear?”
+
+It was:
+
+**“Are these numbers in the right four places?”**
+
+After the positions were checked, the number was confirmed and the module cleared.
+
+That run changed how I approach Morse.
+
+I am not trying to collect four numbers as fast as possible.
+
+I am trying to finish four labeled positions.
+
+
+<h2 id="wait-for-loop" className="scroll-mt-24">
+  When I miss the start of a pattern, I let that slot come around again
+</h2>
+
+A later Morse attempt gave us a cleaner recovery rule.
+
+One position started playing, but the listener was not confident that the beginning had been heard correctly.
+
+The response was simple: **wait for it to loop again**.
+
+That is cheaper than reconstructing a five-signal digit from the middle.
+
+Suppose I catch:
+
+**`? ? . . -`**
+
+There is no useful lookup yet.
+
+I leave that slot unresolved.
+
+The cycle can continue through the other positions. If another slot comes through clearly, I can bank that digit while waiting for the uncertain position to return.
+
+When the missed slot comes back, I listen from the beginning.
+
+This is one of the few places where waiting can actually make the solve faster. A guessed digit may survive unnoticed until the final submission; one extra loop exposes the uncertainty while it is still local.
+
+
+<h2 id="keep-confirmed" className="scroll-mt-24">
+  One bad slot costs one reread; losing the slot mapping can cost all four
+</h2>
+
+The size of the reset depends on what was lost.
+
+If my state is:
+
+**`8  1  _  5`**
+
+and everyone still agrees that positions one, two, and four are correct, there is no value in throwing those answers away.
+
+I wait for position three.
+
+The cost is one new read.
+
+Now consider a different problem:
+
+> “Was 1 in the second slot or the third?”
+
+The digit itself may be correct, but the part that tells me where to enter it is gone.
+
+Both affected positions become suspect.
+
+A worse version sounds like:
+
+> “We have 8, 1, 4, and 5, but I don't know which order they came in.”
+
+At that point the four digits are not a solved Morse module.
+
+They are four unlabeled answers.
+
+I would rebuild the positions rather than shuffle those numbers until something looks plausible.
+
+
+<h2 id="under-pressure" className="scroll-mt-24">
+  A completed digit survives an interruption; half a Morse pattern does not
+</h2>
+
+Morse becomes much harder when another part of the bomb pulls attention away halfway through a sound pattern.
+
+A confirmed state such as:
+
+**`8  1  _  _`**
+
+is worth keeping.
+
+A memory like:
+
+> “The third one started dash, dot, maybe dot…”
+
+is not.
+
+If the interruption forces my attention off Morse, I keep the finished digits and release the partial pattern. When that position cycles back, it gets a fresh five-signal listen.
+
+That distinction keeps the recovery small.
+
+Two finished positions still represent useful progress. Three remembered sounds from an unfinished five-sound code do not.
+
+When Slider, Pressure, or Alarm is what keeps breaking the listen, I handle that interruption with the <Link href="/bombanana/chaos">BOMBANANA Chaos Guide</Link>, then return to Morse from the last confirmed slot rather than trying to reconstruct the interrupted audio.
+
+
+<h2 id="enter" className="scroll-mt-24">
+  Enter only becomes useful after the four positions agree
+</h2>
+
+The manual gives one final action after the four Morse numbers are entered:
+
+**ENTER**
+
+I reach that button with a four-position answer, not a pile of decoded digits.
+
+Something like:
+
+**`8  1  4  5`**
+
+is ready when every number has three things behind it:
+
+a known slot;
+
+a complete five-signal Morse pattern;
+
+a matching digit from the manual.
+
+One unresolved position keeps Enter out of the conversation.
+
+So does a dispute over whether two digits were swapped.
+
+Once all four positions are settled, there is nothing left to infer. Enter simply submits the sequence already built.
+
+
+<h2 id="after-enter" className="scroll-mt-24">
+  If the module stays active, I rebuild the uncertain part instead of repeating the same four digits
+</h2>
+
+A cleared Morse module is finished information.
+
+I drop the four digits and move on.
+
+If Enter does not clear it, repeating the same sequence from memory gives me no reason to expect a different result.
+
+The mistake can only live in a few places:
+
+- the wrong slot was attached to a Morse pattern;
+- one of the five-signal patterns was incomplete or misheard;
+- the pattern was decoded to the wrong digit;
+- two confirmed digits were entered in the wrong positions.
+
+The fastest return is the smallest one I can still trust.
+
+One disputed sound means one slot comes around again.
+
+Two swapped positions mean those positions get rebuilt.
+
+If nobody can say which sound belonged to which slot, the board goes back to:
+
+**`_  _  _  _`**
+
+Four fresh positions are slower than one clean correction, but much faster than submitting the same broken sequence twice.
