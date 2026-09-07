@@ -2,24 +2,23 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import TheLastCaretakerOilWhaleContent from "@/data/the-last-caretaker/oil-whale-guide.mdx";
+import TheLastCaretakerHumanGrowthProfessionsContent from "@/data/the-last-caretaker/human-growth-professions-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-last-caretaker/oil-whale-guide`;
+const pageUrl = `${siteUrl}/the-last-caretaker/human-growth-professions-guide`;
 
 const imageUrls = [
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-oil-whale-parked-next-to-boat.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-oil-whale-wall-socket-connection.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-oil-whale-power-drain.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-oil-whale-extra-storage-20000l.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-oil-whale-gyrocopter-tow.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-human-growth-minimum-requirements.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-visual-technician-81-percent-missing-traits.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-human-growth-memory-traits.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-visual-technician-100-percent.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-council-missing-professions.webp`,
 ];
 
 export const metadata: Metadata = {
-  title:
-    "The Last Caretaker Oil Whale Guide: 10,000L, Power & Towing",
+  title: "The Last Caretaker Human Growth & Professions Guide",
   description:
-    "Start Project Jonah, charge the Oil Whale safely, collect 10,000L of oil, move Whales with the gyrocopter cable, and fix spawn or transfer issues.",
+    "Learn Human Growth in The Last Caretaker: fix Weight, Height and Life Expectancy, use Memories for traits, reach 100% professions, and fill Council roles.",
   alternates: {
     canonical: pageUrl,
   },
@@ -47,7 +46,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Oil Whale Guide",
+          name: "Human Growth & Professions Guide",
           item: pageUrl,
         },
       ],
@@ -60,9 +59,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "The Last Caretaker Oil Whale Guide: How to Get Oil, Charge and Move Whales",
+        "The Last Caretaker Human Growth, Professions and Council Guide",
       description:
-        "A practical The Last Caretaker Oil Whale guide covering the Project Jonah route, Omega Nursery progression, charging an Oil Whale with about 100kW, collecting roughly 10,000L of oil per dive, transferring oil back to the boat, using Whale-side storage and generation in Update 5.5, finding all three Whales, moving a Whale with the gyrocopter cable, and fixing missing Whale, power, storage, towing, and transfer problems.",
+        "A player-focused guide to Human Growth in The Last Caretaker, covering minimum Weight, Height and Life Expectancy requirements, food production, Memory traits, profession prediction, reaching 100% profession matches, Visual Technician setup, Council roles, missing traits, and when to stop spending growth resources.",
       image: imageUrls,
       inLanguage: "en",
       dateModified: "2026-09-07",
@@ -73,43 +72,43 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Oil Whale",
+          name: "Human Growth",
         },
         {
           "@type": "Thing",
-          name: "Project Jonah",
+          name: "Human Professions",
         },
         {
           "@type": "Thing",
-          name: "Omega Nursery",
+          name: "Council",
         },
         {
           "@type": "Thing",
-          name: "Platform Omega",
+          name: "Growth Prediction",
         },
         {
           "@type": "Thing",
-          name: "Oil Whale Oil",
+          name: "Memories",
         },
         {
           "@type": "Thing",
-          name: "Oil Whale Power",
+          name: "Visual Technician",
         },
         {
           "@type": "Thing",
-          name: "Oil Whale Storage",
+          name: "Sculptor",
         },
         {
           "@type": "Thing",
-          name: "Oil Whale Towing",
+          name: "Cultural Archivist",
         },
         {
           "@type": "Thing",
-          name: "Gyrocopter",
+          name: "Manual Holder",
         },
         {
           "@type": "Thing",
-          name: "The Last Caretaker Update 5.5",
+          name: "Life Expectancy",
         },
       ],
       isPartOf: {
@@ -132,6 +131,7 @@ export default function Page() {
   return (
     <>
       <Header />
+
       <main>
         <script
           type="application/ld+json"
@@ -141,8 +141,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Last Caretaker Oil Whale Guide: How Do You Get Oil and Move a Whale?"
-          description="Need the Whale for oil but unsure when it is actually worth the power? Follow Project Jonah, charge it safely, get the oil onto your boat, and use the 5.5 towing trick when moving one will save future trips."
+          title="The Last Caretaker Human Growth & Professions Guide"
+          description="Build the human you actually need: clear the physical growth requirements, use Memories to fill profession traits, reach a 100% match, and let the Council decide which specialist should come next."
           gameTitle="The Last Caretaker"
           gameHref="/the-last-caretaker"
           breadcrumbBaseHref="/"
@@ -150,44 +150,48 @@ export default function Page() {
           updatedAt="September 7, 2026"
           toc={[
             {
-              id: "when-oil-whale-is-worth-it",
-              label: "When the Whale is worth it",
+              id: "choose-the-human-first",
+              label: "Choose the profession first",
             },
             {
-              id: "start-project-jonah",
-              label: "Start Project Jonah",
+              id: "growth-system-ready",
+              label: "Get Human Growth ready",
             },
             {
-              id: "dock-and-charge-whale",
-              label: "Dock and charge",
+              id: "physical-requirements",
+              label: "Physical requirements",
             },
             {
-              id: "oil-whale-power",
-              label: "100kW power budget",
+              id: "memories-and-traits",
+              label: "Memories and traits",
             },
             {
-              id: "oil-whale-oil-storage",
-              label: "Oil and storage",
+              id: "visual-technician-81-percent",
+              label: "Visual Technician at 81%",
             },
             {
-              id: "transfer-oil-to-boat",
-              label: "Transfer oil to the boat",
+              id: "visual-technician-100-percent",
+              label: "Reach 100% profession",
             },
             {
-              id: "three-oil-whales",
-              label: "Three Oil Whales",
+              id: "council-professions",
+              label: "Council professions",
             },
             {
-              id: "move-oil-whale",
-              label: "Move an Oil Whale",
+              id: "when-to-stop-optimizing",
+              label: "When to stop optimizing",
             },
             {
-              id: "oil-whale-wont-work",
-              label: "Oil Whale not working",
+              id: "missing-profession-trait",
+              label: "Missing profession traits",
             },
             {
-              id: "oil-whale-or-refinery",
-              label: "Whale or refinery",
+              id: "human-growth-stuck",
+              label: "Human Growth stuck",
+            },
+            {
+              id: "after-growth",
+              label: "After growth",
             },
           ]}
           relatedLinks={[
@@ -196,16 +200,16 @@ export default function Page() {
               label: "The Last Caretaker Guide Hub",
             },
             {
-              href: "/the-last-caretaker/new-horizons-guide",
-              label: "New Horizons Guide",
-            },
-            {
               href: "/the-last-caretaker/walkthrough",
               label: "The Last Caretaker Walkthrough",
             },
             {
-              href: "/the-last-caretaker/power-fuel-wall-outlets",
-              label: "Power, Fuel & Wall Outlets Guide",
+              href: "/the-last-caretaker/exodus-launch-guide",
+              label: "Exodus Launch Guide",
+            },
+            {
+              href: "/the-last-caretaker/new-horizons-guide",
+              label: "New Horizons Guide",
             },
             {
               href: "/the-last-caretaker/project-eden-guide",
@@ -213,9 +217,10 @@ export default function Page() {
             },
           ]}
         >
-          <TheLastCaretakerOilWhaleContent />
+          <TheLastCaretakerHumanGrowthProfessionsContent />
         </GuideArticlePage>
       </main>
+
       <Footer />
     </>
   );

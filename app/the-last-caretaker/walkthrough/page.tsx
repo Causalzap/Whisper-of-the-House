@@ -2,22 +2,24 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import TheLastCaretakerContent from "@/data/the-last-caretaker/index.mdx";
+import TheLastCaretakerWalkthroughContent from "@/data/the-last-caretaker/walkthrough.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-last-caretaker`;
+const pageUrl = `${siteUrl}/the-last-caretaker/walkthrough`;
 
 const imageUrls = [
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-time-to-let-go-soon.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-new-horizons-pishon-marker.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-moses-field-reserve-program-locked.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-transposium-camera-room-998.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-beacon-49-lazarus-objective.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-lazarus-hall-of-humanity-power-restored.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-seed-vault-prometheus-arrival.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-human-seed-upkeep-warning.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-first-human-exodus-objective.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-rocket-facility.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "The Last Caretaker Guide: Walkthrough, Progression & Update 5.5",
+  title: "The Last Caretaker Walkthrough & Progression Guide",
   description:
-    "Find what to do next in The Last Caretaker, from Lazarus and Exodus to Project Eden, Theta 9, MOSES, Update 5.5 secrets, power, and human growth.",
+    "Follow The Last Caretaker from the starting dock through Lazarus, the Human Seed, your first Human, Exodus, and later Early Access progression.",
   alternates: {
     canonical: pageUrl,
   },
@@ -40,6 +42,12 @@ const jsonLd = {
           "@type": "ListItem",
           position: 2,
           name: "The Last Caretaker Guide",
+          item: `${siteUrl}/the-last-caretaker`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Walkthrough",
           item: pageUrl,
         },
       ],
@@ -51,12 +59,12 @@ const jsonLd = {
         "@type": "WebPage",
         "@id": pageUrl,
       },
-      headline:
-        "The Last Caretaker Guide: What to Do Next, Progression Routes and Update 5.5",
+      headline: "The Last Caretaker Walkthrough: What to Do Next",
       description:
-        "A player-focused guide hub for The Last Caretaker that helps new and returning players choose the next useful objective. It routes early progression through Lazarus, Human Growth and Exodus, then separates mature routes for New Horizons, Project Eden, Oil Whale, Research Outpost Theta 9, MOSES and Warehouse Alpha, Memory for Aaron, Transposium Room 998, ship power and fuel systems, while keeping unfinished Early Access mysteries from taking over the run.",
+        "A progression-focused The Last Caretaker walkthrough covering the Early Access route from the starting dock and Beacon 49 through Lazarus Complex, Seed Vault Prometheus, Human Seed recovery, first Human growth, the route toward Exodus, and the handoff into later Project Eden, Oil Whale, Theta 9, and Update 5 progression.",
       image: imageUrls,
       inLanguage: "en",
+      datePublished: "2026-09-07",
       dateModified: "2026-09-07",
       about: [
         {
@@ -69,7 +77,31 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "The Last Caretaker Progression",
+        },
+        {
+          "@type": "Thing",
+          name: "Beacon 49",
+        },
+        {
+          "@type": "Thing",
           name: "Lazarus Complex",
+        },
+        {
+          "@type": "Thing",
+          name: "Hall of Humanity",
+        },
+        {
+          "@type": "Thing",
+          name: "Seed Vault Prometheus",
+        },
+        {
+          "@type": "Thing",
+          name: "Human Seed",
+        },
+        {
+          "@type": "Thing",
+          name: "Human Growth",
         },
         {
           "@type": "Thing",
@@ -81,31 +113,11 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Pishon",
+          name: "Oil Whale",
         },
         {
           "@type": "Thing",
           name: "Research Outpost Theta 9",
-        },
-        {
-          "@type": "Thing",
-          name: "MOSES Field Reserve Program",
-        },
-        {
-          "@type": "Thing",
-          name: "Central Warehouse Alpha",
-        },
-        {
-          "@type": "Thing",
-          name: "Memory for Aaron",
-        },
-        {
-          "@type": "Thing",
-          name: "Transposium Room 998",
-        },
-        {
-          "@type": "Thing",
-          name: "Update 5.5 Deck Drop",
         },
       ],
       isPartOf: {
@@ -128,18 +140,15 @@ export default function Page() {
   return (
     <>
       <Header />
-
       <main>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
         <GuideArticlePage
-          title="The Last Caretaker Guide: What Should You Do Next?"
-          description="Use your current blocker to choose the next trip. Follow the main route if you are new; on a developed save, jump straight to the system, location, or Update 5.5 objective that is actually holding you up."
+          title="The Last Caretaker Walkthrough: What to Do Next"
+          description="Stuck between objectives? Follow the main progression from the starting dock to Lazarus, the Human Seed, your first Human, and Exodus, with clear points for when to leave, resupply, or come back later."
           gameTitle="The Last Caretaker"
           gameHref="/the-last-caretaker"
           breadcrumbBaseHref="/"
@@ -147,54 +156,42 @@ export default function Page() {
           updatedAt="September 7, 2026"
           toc={[
             {
-              id: "where-to-go-next",
-              label: "What to do next",
+              id: "starting-dock-beacon-49",
+              label: "Starting Dock & Beacon 49",
             },
             {
-              id: "core-progression",
-              label: "Core progression",
+              id: "lazarus-complex",
+              label: "Lazarus Complex",
             },
             {
-              id: "returning-new-horizons",
-              label: "Returning for New Horizons",
+              id: "seed-vault-prometheus",
+              label: "Seed Vault Prometheus",
             },
             {
-              id: "update-55",
-              label: "Update 5.5 routes",
+              id: "human-seed-lazarus",
+              label: "Human Seed at Lazarus",
             },
             {
-              id: "system-blockers",
-              label: "System blockers",
+              id: "grow-first-human",
+              label: "Grow Your First Human",
             },
             {
-              id: "when-to-turn-back",
-              label: "When to turn back",
+              id: "exodus",
+              label: "Go to Exodus",
             },
             {
-              id: "unfinished-searches",
-              label: "Unfinished searches",
+              id: "later-progression",
+              label: "Later Progression",
             },
             {
-              id: "early-access-rule",
-              label: "Early Access rule",
-            },
-            {
-              id: "pick-one-job",
-              label: "Give the next trip one job",
+              id: "progression-rule",
+              label: "Progression Rule",
             },
           ]}
           relatedLinks={[
             {
-              href: "/the-last-caretaker/walkthrough",
-              label: "The Last Caretaker Walkthrough",
-            },
-            {
-              href: "/the-last-caretaker/human-growth-professions-guide",
-              label: "Human Growth & Professions Guide",
-            },
-            {
-              href: "/the-last-caretaker/exodus-launch-guide",
-              label: "Exodus Launch Guide",
+              href: "/the-last-caretaker",
+              label: "The Last Caretaker Guide Hub",
             },
             {
               href: "/the-last-caretaker/new-horizons-guide",
@@ -205,15 +202,18 @@ export default function Page() {
               label: "Project Eden Guide",
             },
             {
+              href: "/the-last-caretaker/oil-whale-guide",
+              label: "Oil Whale Guide",
+            },
+            {
               href: "/the-last-caretaker/research-outpost-theta-9-guide",
               label: "Research Outpost Theta 9 Guide",
             },
           ]}
         >
-          <TheLastCaretakerContent />
+          <TheLastCaretakerWalkthroughContent />
         </GuideArticlePage>
       </main>
-
       <Footer />
     </>
   );

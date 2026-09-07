@@ -2,22 +2,24 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import TheLastCaretakerContent from "@/data/the-last-caretaker/index.mdx";
+import TheLastCaretakerExodusLaunchContent from "@/data/the-last-caretaker/exodus-launch-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-last-caretaker`;
+const pageUrl = `${siteUrl}/the-last-caretaker/exodus-launch-guide`;
 
 const imageUrls = [
   `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-time-to-let-go-soon.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-new-horizons-pishon-marker.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-moses-field-reserve-program-locked.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-transposium-camera-room-998.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-navigation-beacon-32.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-communications-array-objective.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-launch-facility-revealed.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-pod-elevator-logistics.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-exodus-rocket-launch.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "The Last Caretaker Guide: Walkthrough, Progression & Update 5.5",
+  title: "The Last Caretaker Exodus Guide: First Human & Rocket Launch",
   description:
-    "Find what to do next in The Last Caretaker, from Lazarus and Exodus to Project Eden, Theta 9, MOSES, Update 5.5 secrets, power, and human growth.",
+    "Take the first grown human from Lazarus to Exodus, restore Navigation Beacon 32, repair the Communications Array, reach the rocket, and complete the launch.",
   alternates: {
     canonical: pageUrl,
   },
@@ -40,6 +42,12 @@ const jsonLd = {
           "@type": "ListItem",
           position: 2,
           name: "The Last Caretaker Guide",
+          item: `${siteUrl}/the-last-caretaker`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Exodus Launch Guide",
           item: pageUrl,
         },
       ],
@@ -52,9 +60,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "The Last Caretaker Guide: What to Do Next, Progression Routes and Update 5.5",
+        "The Last Caretaker Exodus Guide: First Human and Rocket Launch",
       description:
-        "A player-focused guide hub for The Last Caretaker that helps new and returning players choose the next useful objective. It routes early progression through Lazarus, Human Growth and Exodus, then separates mature routes for New Horizons, Project Eden, Oil Whale, Research Outpost Theta 9, MOSES and Warehouse Alpha, Memory for Aaron, Transposium Room 998, ship power and fuel systems, while keeping unfinished Early Access mysteries from taking over the run.",
+        "A player-focused Exodus route for The Last Caretaker covering the first grown human after Lazarus, the southeast trip to Navigation Beacon 32, relay power, the Communications Array, the Exodus launch facility, departure hall, repeat pod logistics, rocket launch readiness, and launch-side methane and oxygen troubleshooting.",
       image: imageUrls,
       inLanguage: "en",
       dateModified: "2026-09-07",
@@ -65,7 +73,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "The Last Caretaker Walkthrough",
+          name: "Exodus Station",
         },
         {
           "@type": "Thing",
@@ -73,39 +81,35 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Exodus Station",
+          name: "Time to Let Go Soon",
         },
         {
           "@type": "Thing",
-          name: "Project Eden",
+          name: "Navigation Beacon 32",
         },
         {
           "@type": "Thing",
-          name: "Pishon",
+          name: "Communications Array",
         },
         {
           "@type": "Thing",
-          name: "Research Outpost Theta 9",
+          name: "Departure Hall",
         },
         {
           "@type": "Thing",
-          name: "MOSES Field Reserve Program",
+          name: "Rocket Launch",
         },
         {
           "@type": "Thing",
-          name: "Central Warehouse Alpha",
+          name: "Human Pods",
         },
         {
           "@type": "Thing",
-          name: "Memory for Aaron",
+          name: "Methane",
         },
         {
           "@type": "Thing",
-          name: "Transposium Room 998",
-        },
-        {
-          "@type": "Thing",
-          name: "Update 5.5 Deck Drop",
+          name: "Oxygen",
         },
       ],
       isPartOf: {
@@ -138,8 +142,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Last Caretaker Guide: What Should You Do Next?"
-          description="Use your current blocker to choose the next trip. Follow the main route if you are new; on a developed save, jump straight to the system, location, or Update 5.5 objective that is actually holding you up."
+          title="The Last Caretaker Exodus Launch Guide"
+          description="Move the first grown human out of Lazarus, restore the relay at Navigation Beacon 32, open the Exodus route, and get the rocket into a real launch-ready state."
           gameTitle="The Last Caretaker"
           gameHref="/the-last-caretaker"
           breadcrumbBaseHref="/"
@@ -147,43 +151,51 @@ export default function Page() {
           updatedAt="September 7, 2026"
           toc={[
             {
-              id: "where-to-go-next",
-              label: "What to do next",
+              id: "lazarus-to-exodus",
+              label: "Lazarus to Exodus",
             },
             {
-              id: "core-progression",
-              label: "Core progression",
+              id: "navigation-beacon-32",
+              label: "Navigation Beacon 32",
             },
             {
-              id: "returning-new-horizons",
-              label: "Returning for New Horizons",
+              id: "relay-power",
+              label: "Power the relay",
             },
             {
-              id: "update-55",
-              label: "Update 5.5 routes",
+              id: "communications-array",
+              label: "Communications Array",
             },
             {
-              id: "system-blockers",
-              label: "System blockers",
+              id: "bring-human-to-exodus",
+              label: "Bring the human to Exodus",
             },
             {
-              id: "when-to-turn-back",
-              label: "When to turn back",
+              id: "repeat-pod-logistics",
+              label: "Repeat pod logistics",
             },
             {
-              id: "unfinished-searches",
-              label: "Unfinished searches",
+              id: "rocket-ready",
+              label: "Rocket ready state",
             },
             {
-              id: "early-access-rule",
-              label: "Early Access rule",
+              id: "keep-exodus-or-strip-it",
+              label: "Keep or strip Exodus",
             },
             {
-              id: "pick-one-job",
-              label: "Give the next trip one job",
+              id: "rocket-not-filling",
+              label: "Rocket not filling",
+            },
+            {
+              id: "when-to-leave-exodus",
+              label: "When to leave Exodus",
             },
           ]}
           relatedLinks={[
+            {
+              href: "/the-last-caretaker",
+              label: "The Last Caretaker Guide Hub",
+            },
             {
               href: "/the-last-caretaker/walkthrough",
               label: "The Last Caretaker Walkthrough",
@@ -193,24 +205,16 @@ export default function Page() {
               label: "Human Growth & Professions Guide",
             },
             {
-              href: "/the-last-caretaker/exodus-launch-guide",
-              label: "Exodus Launch Guide",
+              href: "/the-last-caretaker/power-fuel-wall-outlets",
+              label: "Power, Fuel & Wall Outlets Guide",
             },
             {
               href: "/the-last-caretaker/new-horizons-guide",
               label: "New Horizons Guide",
             },
-            {
-              href: "/the-last-caretaker/project-eden-guide",
-              label: "Project Eden Guide",
-            },
-            {
-              href: "/the-last-caretaker/research-outpost-theta-9-guide",
-              label: "Research Outpost Theta 9 Guide",
-            },
           ]}
         >
-          <TheLastCaretakerContent />
+          <TheLastCaretakerExodusLaunchContent />
         </GuideArticlePage>
       </main>
 

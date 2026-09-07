@@ -2,22 +2,20 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import TheLastCaretakerProjectEdenContent from "@/data/the-last-caretaker/project-eden-guide.mdx";
+import TheLastCaretakerTransposiumRoom998Content from "@/data/the-last-caretaker/transposium-room-998-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-last-caretaker/project-eden-guide`;
+const pageUrl = `${siteUrl}/the-last-caretaker/transposium-room-998-guide`;
 
 const imageUrls = [
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-new-horizons-pishon-marker.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-pishon-eden-frame-platform.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-eden-frame-material-requirements.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-eden-frame-water-power-oxygen-inputs.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-transposium-camera-room-998.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-transposium-room-051-door.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "The Last Caretaker Project Eden Guide: Pishon & First Roots",
+  title: "The Last Caretaker Room 998 & Transposium Security Guide",
   description:
-    "Reach Pishon, build Project Eden, plan Stainless Steel costs, set up the Farming Platform, and fix water, power or First Roots progression issues.",
+    "Check Room 998 through Transposium Security, compare the camera feed with physical room numbers, and see what is and is not currently verified in Update 5.5.",
   alternates: {
     canonical: pageUrl,
   },
@@ -45,7 +43,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Project Eden Guide",
+          name: "Room 998 & Transposium Security Guide",
           item: pageUrl,
         },
       ],
@@ -58,9 +56,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "The Last Caretaker Project Eden Guide: How to Build at Pishon and Complete First Roots",
+        "The Last Caretaker Room 998 and Transposium Security Guide",
       description:
-        "A progression-focused Project Eden guide for The Last Caretaker covering the route to Pishon, the choice between scouting and building, Eden Frame - Small 1 placement, Stainless Steel crafting and oil costs, Farming Platform construction, fresh water through the lower Water Pump and Water Purifier, stable power, soil and seed setup, and troubleshooting when First Roots will not progress.",
+        "A player-focused look at the Room 998 mystery in The Last Caretaker, covering the Transposium Security camera feeds, the visible 998 room, physical numbered rooms such as Room 051, the reported Room 72 and keypad route, and the point where the current Update 5.5 evidence stops supporting a complete puzzle solution.",
       image: imageUrls,
       inLanguage: "en",
       dateModified: "2026-09-07",
@@ -71,35 +69,35 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Project Eden",
+          name: "Transposium",
         },
         {
           "@type": "Thing",
-          name: "Pishon",
+          name: "Room 998",
         },
         {
           "@type": "Thing",
-          name: "First Roots",
+          name: "Transposium Security",
         },
         {
           "@type": "Thing",
-          name: "Eden Frame - Small 1",
+          name: "Security Camera Feed",
         },
         {
           "@type": "Thing",
-          name: "Farming Platform",
+          name: "Room 051",
         },
         {
           "@type": "Thing",
-          name: "Stainless Steel",
+          name: "Room 72",
         },
         {
           "@type": "Thing",
-          name: "Water Purifier",
+          name: "99X Rooms",
         },
         {
           "@type": "Thing",
-          name: "Water Pump",
+          name: "Update 5.5 Deck Drop",
         },
       ],
       isPartOf: {
@@ -132,8 +130,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Last Caretaker Project Eden: How Do You Complete First Roots?"
-          description="Pishon gets expensive once the frame starts asking for real materials. Check the site first, build only what the current stage needs, then keep fresh water, power, soil and seeds working long enough for First Roots to progress."
+          title="The Last Caretaker Room 998 & Transposium Security Guide"
+          description="Room 998 is visible through Transposium Security, but seeing the room is not the same as having a verified physical route. Use the camera feeds and numbered doors to separate the clues that work from the steps that still do not reproduce."
           gameTitle="The Last Caretaker"
           gameHref="/the-last-caretaker"
           breadcrumbBaseHref="/"
@@ -141,32 +139,40 @@ export default function Page() {
           updatedAt="September 7, 2026"
           toc={[
             {
-              id: "reach-pishon",
-              label: "Reach Pishon",
+              id: "start-with-transposium-security",
+              label: "Start with Transposium Security",
             },
             {
-              id: "stainless-steel",
-              label: "Stainless Steel",
+              id: "find-room-998-camera",
+              label: "Find Room 998 in Security",
             },
             {
-              id: "build-eden-frame",
-              label: "Build the Eden Frame",
+              id: "room-72",
+              label: "The Room 72 problem",
             },
             {
-              id: "farming-platform",
-              label: "Farming Platform",
+              id: "room-998-status",
+              label: "Room 998 status in Update 5.5",
             },
             {
-              id: "support-first-roots",
-              label: "Water, power & planting",
+              id: "other-99x-rooms",
+              label: "Other 99X rooms",
             },
             {
-              id: "first-roots-stuck",
-              label: "First Roots stuck",
+              id: "security-camera-code",
+              label: "Security camera code",
             },
             {
-              id: "when-to-leave-pishon",
-              label: "When to leave Pishon",
+              id: "old-transposium-secrets",
+              label: "Older Transposium secrets",
+            },
+            {
+              id: "rising-tide",
+              label: "Rising Tide",
+            },
+            {
+              id: "when-to-stop-searching",
+              label: "When to stop searching",
             },
           ]}
           relatedLinks={[
@@ -175,24 +181,24 @@ export default function Page() {
               label: "The Last Caretaker Guide Hub",
             },
             {
-              href: "/the-last-caretaker/walkthrough",
-              label: "The Last Caretaker Walkthrough",
-            },
-            {
               href: "/the-last-caretaker/new-horizons-guide",
               label: "New Horizons Guide",
             },
             {
-              href: "/the-last-caretaker/power-fuel-wall-outlets",
-              label: "Power, Fuel & Wall Outlets Guide",
+              href: "/the-last-caretaker/memory-for-aaron-guide",
+              label: "Memory for Aaron Guide",
             },
             {
-              href: "/the-last-caretaker/oil-whale-guide",
-              label: "Oil Whale Guide",
+              href: "/the-last-caretaker/moses-warehouse-alpha-guide",
+              label: "MOSES & Warehouse Alpha Guide",
+            },
+            {
+              href: "/the-last-caretaker/walkthrough",
+              label: "The Last Caretaker Walkthrough",
             },
           ]}
         >
-          <TheLastCaretakerProjectEdenContent />
+          <TheLastCaretakerTransposiumRoom998Content />
         </GuideArticlePage>
       </main>
 

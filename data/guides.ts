@@ -11967,95 +11967,410 @@ export const guideClusters: GuideCluster[] = [
     },
     
   
-  {
-    "title": "The Last Caretaker",
-    "game": "The Last Caretaker",
-    "href": "/the-last-caretaker",
-    "slug": "the-last-caretaker",
-    "kind": "game",
-    "status": "active",
-    "accent": "purple",
-    "archiveCategory": "Older archive",
-    "label": "Survival Systems",
-    "eyebrow": "Spotlight Hub",
-    "hubStatus": "Active coverage",
-    "description": "Follow the active guide hub for New Horizons, Project Eden, Oil Whale, ship routing, wall outlets, fuel, roots, samples, power, and late-system cleanup decisions.",
-    "coverage": [
-      "New Horizons route",
-      "Project Eden setup",
-      "Oil Whale logistics",
-      "Ship power and cleanup"
-    ],
-    "image": "/images/home/the-last-caretaker-hub.webp",
-    "imageFit": "contain",
-    "imagePadding": true,
-    "home": {
-      "featuredHub": true,
-      "featuredHubSpotlight": true,
-      "featuredHubOrder": 1,
-      "footerFeatured": true
+    {
+      title: "The Last Caretaker",
+      game: "The Last Caretaker",
+      href: "/the-last-caretaker",
+      slug: "the-last-caretaker",
+      kind: "game",
+      status: "active",
+      accent: "purple",
+      archiveCategory: "Cozy, crafting, survival & systems",
+    
+      label: "Ocean Survival, Progression & Systems",
+      eyebrow: "Guide Hub",
+      hubStatus:
+        "Update 5.5 + main progression + human growth + Exodus + New Horizons + Early Access mysteries",
+    
+      description:
+        "Use The Last Caretaker guide hub to decide what your save needs next, follow the main progression from the early boat through Lazarus and Exodus, route mature blockers to their dedicated guides, and keep unfinished Early Access mysteries from derailing the run.",
+    
+      coverage: [
+        "Main progression from the opening boat systems through Lazarus, Seed Vault recovery, the first viable human, Exodus, Project Eden, Research Outpost Theta 9, and the current Early Access content boundary",
+    
+        "New-player and returning-save decisions based on the blocker already visible on screen, rather than treating every marker, Update 5 system, signal, and unfinished mystery as equally urgent",
+    
+        "Human Growth and profession planning through Weight, Height, Life Expectancy, fresh water, Soil Forge, Food Processor, Memories, profession traits, 100% profession matches, and Council role selection",
+    
+        "First Exodus launch progression through Time to Let Go Soon, Navigation Beacon 32, relay power, Communications Array repair, departure logistics, rocket readiness, later human pod runs, methane, and oxygen transfer troubleshooting",
+    
+        "New Horizons routing across Pishon and Project Eden, Project Jonah and Oil Whale logistics, Research Outpost Theta 9, Tide Ripper preparation, Samples, Memories, and the point where a developed save should split into dedicated Owner Pages",
+    
+        "Project Eden construction through Pishon scouting, Stainless Steel preparation, Eden Frame placement, frame requirements, Farming Platform, fresh water, power, soil, seeds, and First Roots troubleshooting",
+    
+        "Oil Whale and Project Jonah decisions through Omega Nursery, mature-human requirements, Whale docking, 10,000L oil pulls, temporary storage, transfer routing, power demand, and when the Whale is actually worth using",
+    
+        "Ship infrastructure through batteries, wall outlets, Grid Scan, power direction, cable cleanup, oil, diesel, petrol, gas routing, bulk storage, Fill and Equalize behavior, and reusable fixes before another major build",
+    
+        "Update 5.5 routes through MOSES Field Reserve Program and Central Warehouse Alpha, Rising Tide and Memory for Aaron, North Deep Intake Station, and the new storage designs added to existing locations",
+    
+        "Early Access mystery tracking for Transposium Security, Room 998, the wider 99X trail, Room 72 claims, older Transposium secrets, and a clear stopping rule when a normal playable route cannot be reproduced",
+    
+        "Smaller or still-developing search needs such as Salvage Gyro blueprints, Eden Cradle, additional 99X rooms, Council committee chains, achievements, Memories, and one-off locations remain inside the hub until they justify their own stable Owner Page",
+      ],
+    
+      image: "/images/home/the-last-caretaker-hub.webp",
+      imageFit: "contain",
+      imagePosition: "center",
+      imagePadding: true,
+    
+      home: {
+        featuredHub: true,
+        featuredHubSpotlight: true,
+        featuredHubOrder: 45,
+        footerFeatured: true,
+      },
+    
+      pages: [
+        {
+          title:
+            "The Last Caretaker Guide: Progression, Routes & Update 5.5",
+          href: "/the-last-caretaker",
+          type: "Guide Hub",
+          description:
+            "Start with the problem your save has right now, then move to the walkthrough, journey guide, system guide, or current Early Access status page that actually owns that blocker.",
+          image: "/images/home/the-last-caretaker-hub.webp",
+          imageFit: "contain",
+          imagePosition: "center",
+          imagePadding: true,
+    
+          home: {
+            spotlightMeta:
+              "Main progression, Lazarus, Human Growth, Exodus, New Horizons, Project Eden, Oil Whale, Theta 9, MOSES, Aaron Voss, Room 998, ship systems, and Update 5.5",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 1,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Walkthrough: Main Progression Route",
+          href: "/the-last-caretaker/walkthrough",
+          type: "Walkthrough",
+          description:
+            "Follow the main progression from the early boat and Lazarus through human recovery, Exodus, New Horizons, Project Eden, Theta 9, and the current Early Access progression boundary.",
+          date: "Updated recently",
+          image: "/images/home/the-last-caretaker-hub.webp",
+          imageFit: "contain",
+          imagePosition: "center",
+          imagePadding: true,
+    
+          home: {
+            latest: true,
+            latestFeatured: true,
+            latestOrder: 302,
+            spotlightFeature: true,
+            spotlightOrder: 1,
+            spotlightMeta:
+              "Opening boat, Lazarus, Seed Vault, first human, Exodus, New Horizons, Project Eden, Theta 9, current progression order, and when to leave side content for later",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 2,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Human Growth & Professions Guide",
+          href: "/the-last-caretaker/human-growth-professions-guide",
+          type: "Systems",
+          description:
+            "Fix Human Growth requirements, use food and Memories deliberately, reach a 100% profession match, and choose the Council specialist your save actually needs.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-visual-technician-100-percent.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestFeatured: true,
+            latestOrder: 303,
+            spotlightFeature: true,
+            spotlightOrder: 2,
+            spotlightMeta:
+              "Weight, Height, Life Expectancy, Soil Forge, Food Processor, Memories, traits, Growth Prediction, Visual Technician, 100% professions, and Council roles",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 3,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Exodus Guide: First Human & Rocket Launch",
+          href: "/the-last-caretaker/exodus-launch-guide",
+          type: "Walkthrough",
+          description:
+            "Take the first grown human out of Lazarus, restore Navigation Beacon 32 and the Communications Array, reach Exodus, read the rocket state, and complete the launch.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-exodus-rocket-launch.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestFeatured: true,
+            latestOrder: 304,
+            spotlightFeature: true,
+            spotlightOrder: 3,
+            spotlightMeta:
+              "Time to Let Go Soon, Navigation Beacon 32, relay power, Communications Array, launch facility, human transport, pod elevator logistics, rocket state, methane, oxygen, and repeat launches",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 4,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker New Horizons Guide",
+          href: "/the-last-caretaker/new-horizons-guide",
+          type: "Guide",
+          description:
+            "Return to a developed save, stabilize the boat, then decide whether Pishon, Project Jonah, Theta 9, ship routing, or another New Horizons system deserves the next trip.",
+          date: "Updated recently",
+          image:
+            "/images/home/the-last-caretaker-new-horizons.webp",
+          imageFit: "contain",
+          imagePosition: "center",
+          imagePadding: true,
+    
+          home: {
+            latest: true,
+            latestOrder: 305,
+            spotlightFeature: true,
+            spotlightOrder: 4,
+            spotlightMeta:
+              "Returning saves, Pishon, Project Eden, Project Jonah, Oil Whale, Theta 9, wall outlets, Samples, Memories, Tide Ripper, and route prioritization",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 5,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Project Eden Guide: Pishon & First Roots",
+          href: "/the-last-caretaker/project-eden-guide",
+          type: "Guide",
+          description:
+            "Scout Pishon, prepare Stainless Steel, place the Eden Frame, attach the Farming Platform, route fresh water and power, add soil and seeds, and complete First Roots.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-pishon-eden-frame-platform.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestOrder: 306,
+            spotlightFeature: true,
+            spotlightOrder: 5,
+            spotlightMeta:
+              "Pishon, Stainless Steel, Eden Frame, placement failures, Connection Ports, Farming Platform, Water Purifier, power, soil, seeds, and First Roots",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 6,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Oil Whale & Project Jonah Guide",
+          href: "/the-last-caretaker/oil-whale-guide",
+          type: "Systems",
+          description:
+            "Start Project Jonah with the right human, find and dock beside an Oil Whale, support its power demand, move oil into usable storage, and decide when the Whale beats refinery supply.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-oil-whale-parked-next-to-boat.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestOrder: 307,
+            spotlightFeature: true,
+            spotlightOrder: 6,
+            spotlightMeta:
+              "Project Jonah, Omega Nursery, mature human, three Oil Whales, side docking, 10,000L pulls, storage, transfer routing, 75–100kW planning, and Whale movement",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 7,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Research Outpost Theta 9 Guide",
+          href:
+            "/the-last-caretaker/research-outpost-theta-9-guide",
+          type: "Walkthrough",
+          description:
+            "Reach Research Outpost Theta 9, enter safely, clear the hostile rooms, understand door states, find the authorization route, and get through Ventilation 3.3.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-theta-9-ventilation-authorization.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestOrder: 308,
+            spotlightFeature: true,
+            spotlightOrder: 7,
+            spotlightMeta:
+              "Underwater entry, Tide Ripper preparation, nests, spiders, flying enemies, red and yellow locks, Pico terminals, authorization, Ventilation 3.3, and station backtracking",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 8,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Power, Fuel & Wall Outlets Guide",
+          href: "/the-last-caretaker/power-fuel-wall-outlets",
+          type: "Systems",
+          description:
+            "Debug ship power and fluid routing, clean up wall outlets and cable direction, manage batteries and tanks, and fix systems before another project multiplies the problem.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-wall-outlets-skill-unlocks.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestOrder: 309,
+            spotlightFeature: true,
+            spotlightOrder: 8,
+            spotlightMeta:
+              "Power direction, batteries, wall outlets, Grid Scan, cable range, oil, diesel, petrol, gas, bulk storage, Fill, Equalize, and reusable ship-routing fixes",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 9,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker MOSES & Warehouse Alpha Guide",
+          href: "/the-last-caretaker/moses-warehouse-alpha-guide",
+          type: "Guide",
+          description:
+            "Follow MOSES back into Central Warehouse Alpha, reach the field-logistics production area, recover the container specifications, and unlock the new storage designs.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-moses-container-specifications-unlocked.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestFeatured: true,
+            latestOrder: 310,
+            spotlightFeature: true,
+            spotlightOrder: 9,
+            spotlightMeta:
+              "MOSES Field Reserve Program, Central Warehouse Alpha, field logistics, production area, container specifications, storage prototypes, Battery Barrel, and bulk storage unlocks",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 10,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Memory for Aaron Guide",
+          href: "/the-last-caretaker/memory-for-aaron-guide",
+          type: "Walkthrough",
+          description:
+            "Progress Rising Tide until Aaron Voss appears, activate Memory for Aaron, follow the marker to North Deep Intake Station, find the grave, and stay until the quest completes.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-aaron-voss-grave.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestFeatured: true,
+            latestOrder: 311,
+            spotlightFeature: true,
+            spotlightOrder: 10,
+            spotlightMeta:
+              "Rising Tide, Pico Terminal, score gates, Aaron Voss, coordinates, access code, North Deep Intake Station, first grave, Alina Voss, quest completion, and salvage decisions",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 11,
+          },
+        },
+    
+        {
+          title:
+            "The Last Caretaker Room 998 & Transposium Security Guide",
+          href: "/the-last-caretaker/transposium-room-998-guide",
+          type: "Puzzle Help",
+          description:
+            "Inspect Room 998 through Transposium Security, test the claimed Room 72 route, track the wider 99X clues, and know where the verified Update 5.5 puzzle currently stops.",
+          date: "Updated recently",
+          image:
+            "/images/the-last-caretaker/the-last-caretaker-transposium-camera-room-998.webp",
+          imageFit: "cover",
+          imagePosition: "center",
+          imagePadding: false,
+    
+          home: {
+            latest: true,
+            latestFeatured: true,
+            latestOrder: 312,
+            spotlightFeature: true,
+            spotlightOrder: 11,
+            spotlightMeta:
+              "Transposium Security, Room 998, camera feeds, broken robot, two closed doors, Room 72 claims, three-digit code, Rooms 994–998, developer-tool distinction, and stopping rule",
+          },
+    
+          archive: {
+            showInCollections: true,
+            order: 12,
+          },
+        },
+      ],
     },
-    "pages": [
-      {
-        "title": "The Last Caretaker Guide Hub",
-        "href": "/the-last-caretaker",
-        "type": "Spotlight Coverage",
-        "description": "Follow the active guide hub for New Horizons, Project Eden, Oil Whale, ship routing, wall outlets, fuel, roots, samples, power, and late-system cleanup decisions.",
-        "image": "/images/home/the-last-caretaker-hub.webp",
-        "imageFit": "contain",
-        "imagePadding": true,
-        "home": {
-          "spotlightMeta": "Survival systems, ship routing, Project Eden, fuel, power, and cleanup"
-        },
-        "archive": {
-          "showInCollections": true,
-          "order": 1
-        }
-      },
-      {
-        "title": "New Horizons Guide, Project Eden & Ship Routes",
-        "href": "/the-last-caretaker/new-horizons-guide",
-        "type": "Walkthrough",
-        "description": "Start here for New Horizons, Project Eden, Oil Whale, power, fuel, wall outlets, roots, samples, and ship cleanup decisions.",
-        "date": "Updated recently",
-        "image": "/images/home/the-last-caretaker-new-horizons.webp",
-        "imageFit": "contain",
-        "imagePadding": true,
-        "home": {
-          "latest": true,
-          "latestFeatured": true,
-          "latestOrder": 1,
-          "spotlightFeature": true,
-          "spotlightOrder": 1,
-          "spotlightMeta": "Route help"
-        },
-        "archive": {
-          "showInCollections": true,
-          "order": 2
-        }
-      },
-      {
-        "title": "Oil Whale & Project Jonah Guide",
-        "href": "/the-last-caretaker/oil-whale-guide",
-        "type": "Guide",
-        "description": "Start Project Jonah, bring a mature human, dock beside the Oil Whale, handle 10,000L oil pulls, 75-100kW power, tanks, and transfer setup.",
-        "archive": {
-          "showInCollections": true,
-          "order": 3
-        }
-      },
-      {
-        "title": "Project Eden First Roots Guide",
-        "href": "/the-last-caretaker/project-eden-guide",
-        "type": "Guide",
-        "description": "Start Project Eden at Pishon, craft Stainless Steel with oil, place Eden Frame, build Farming Platform, connect water and power, then grow first roots.",
-        "archive": {
-          "showInCollections": true,
-          "order": 4
-        }
-      }
-    ]
-  },
   
   {
     "title": "Darktide Skitarii",

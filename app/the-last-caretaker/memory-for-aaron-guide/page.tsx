@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GuideArticlePage from "@/components/guides/GuideArticlePage";
-import TheLastCaretakerProjectEdenContent from "@/data/the-last-caretaker/project-eden-guide.mdx";
+import TheLastCaretakerMemoryForAaronContent from "@/data/the-last-caretaker/memory-for-aaron-guide.mdx";
 
 const siteUrl = "https://www.whisperofthehouse.com";
-const pageUrl = `${siteUrl}/the-last-caretaker/project-eden-guide`;
+const pageUrl = `${siteUrl}/the-last-caretaker/memory-for-aaron-guide`;
 
 const imageUrls = [
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-new-horizons-pishon-marker.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-pishon-eden-frame-platform.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-eden-frame-material-requirements.webp`,
-  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-eden-frame-water-power-oxygen-inputs.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-memory-for-aaron-rising-tide-aaron-voss.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-memory-for-aaron-quest-north-deep-intake.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-north-deep-intake-station.webp`,
+  `${siteUrl}/images/the-last-caretaker/the-last-caretaker-aaron-voss-grave.webp`,
 ];
 
 export const metadata: Metadata = {
-  title: "The Last Caretaker Project Eden Guide: Pishon & First Roots",
+  title: "The Last Caretaker Memory for Aaron Guide & North Deep Intake",
   description:
-    "Reach Pishon, build Project Eden, plan Stainless Steel costs, set up the Farming Platform, and fix water, power or First Roots progression issues.",
+    "Start Memory for Aaron with Rising Tide, reveal Aaron Voss, travel to North Deep Intake Station, find the grave, and finish the Update 5.5 quest.",
   alternates: {
     canonical: pageUrl,
   },
@@ -45,7 +45,7 @@ const jsonLd = {
         {
           "@type": "ListItem",
           position: 3,
-          name: "Project Eden Guide",
+          name: "Memory for Aaron Guide",
           item: pageUrl,
         },
       ],
@@ -58,9 +58,9 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "The Last Caretaker Project Eden Guide: How to Build at Pishon and Complete First Roots",
+        "The Last Caretaker Memory for Aaron Guide: Rising Tide and North Deep Intake",
       description:
-        "A progression-focused Project Eden guide for The Last Caretaker covering the route to Pishon, the choice between scouting and building, Eden Frame - Small 1 placement, Stainless Steel crafting and oil costs, Farming Platform construction, fresh water through the lower Water Pump and Water Purifier, stable power, soil and seed setup, and troubleshooting when First Roots will not progress.",
+        "A player-focused route for the Memory for Aaron quest in The Last Caretaker, covering the Rising Tide Pico cartridge, Aaron Voss coordinates and access information, the North Deep Intake Station objective, the station route, Aaron's grave, and the story revealed at the end of the Update 5.5 quest.",
       image: imageUrls,
       inLanguage: "en",
       dateModified: "2026-09-07",
@@ -71,35 +71,35 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Project Eden",
+          name: "Memory for Aaron",
         },
         {
           "@type": "Thing",
-          name: "Pishon",
+          name: "Aaron Voss",
         },
         {
           "@type": "Thing",
-          name: "First Roots",
+          name: "Alina Voss",
         },
         {
           "@type": "Thing",
-          name: "Eden Frame - Small 1",
+          name: "Rising Tide",
         },
         {
           "@type": "Thing",
-          name: "Farming Platform",
+          name: "Pico Terminal",
         },
         {
           "@type": "Thing",
-          name: "Stainless Steel",
+          name: "North Deep Intake Station",
         },
         {
           "@type": "Thing",
-          name: "Water Purifier",
+          name: "Aaron Voss Grave",
         },
         {
           "@type": "Thing",
-          name: "Water Pump",
+          name: "Update 5.5 Deck Drop",
         },
       ],
       isPartOf: {
@@ -132,8 +132,8 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="The Last Caretaker Project Eden: How Do You Complete First Roots?"
-          description="Pishon gets expensive once the frame starts asking for real materials. Check the site first, build only what the current stage needs, then keep fresh water, power, soil and seeds working long enough for First Roots to progress."
+          title="The Last Caretaker Memory for Aaron Guide"
+          description="Load Rising Tide into the Pico Terminal, expose the Aaron Voss clue, follow the new quest to North Deep Intake Station, and finish the route without confusing it with the separate 99X room mystery."
           gameTitle="The Last Caretaker"
           gameHref="/the-last-caretaker"
           breadcrumbBaseHref="/"
@@ -141,32 +141,40 @@ export default function Page() {
           updatedAt="September 7, 2026"
           toc={[
             {
-              id: "reach-pishon",
-              label: "Reach Pishon",
+              id: "start-memory-for-aaron",
+              label: "Start Memory for Aaron",
             },
             {
-              id: "stainless-steel",
-              label: "Stainless Steel",
+              id: "get-memory-for-aaron-quest",
+              label: "Get the Memory for Aaron quest",
             },
             {
-              id: "build-eden-frame",
-              label: "Build the Eden Frame",
+              id: "prepare-for-north-deep-intake",
+              label: "Prepare for North Deep Intake",
             },
             {
-              id: "farming-platform",
-              label: "Farming Platform",
+              id: "reach-north-deep-intake",
+              label: "Reach North Deep Intake",
             },
             {
-              id: "support-first-roots",
-              label: "Water, power & planting",
+              id: "find-aaron-grave",
+              label: "Find Aaron's grave",
             },
             {
-              id: "first-roots-stuck",
-              label: "First Roots stuck",
+              id: "north-deep-intake-access",
+              label: "Explore beyond the grave",
             },
             {
-              id: "when-to-leave-pishon",
-              label: "When to leave Pishon",
+              id: "complete-memory-for-aaron",
+              label: "Complete Memory for Aaron",
+            },
+            {
+              id: "memory-for-aaron-stuck",
+              label: "Memory for Aaron stuck",
+            },
+            {
+              id: "after-memory-for-aaron",
+              label: "After Memory for Aaron",
             },
           ]}
           relatedLinks={[
@@ -175,24 +183,24 @@ export default function Page() {
               label: "The Last Caretaker Guide Hub",
             },
             {
-              href: "/the-last-caretaker/walkthrough",
-              label: "The Last Caretaker Walkthrough",
-            },
-            {
               href: "/the-last-caretaker/new-horizons-guide",
               label: "New Horizons Guide",
             },
             {
-              href: "/the-last-caretaker/power-fuel-wall-outlets",
-              label: "Power, Fuel & Wall Outlets Guide",
+              href: "/the-last-caretaker/transposium-room-998-guide",
+              label: "Room 998 & Transposium Security Guide",
             },
             {
-              href: "/the-last-caretaker/oil-whale-guide",
-              label: "Oil Whale Guide",
+              href: "/the-last-caretaker/moses-warehouse-alpha-guide",
+              label: "MOSES & Warehouse Alpha Guide",
+            },
+            {
+              href: "/the-last-caretaker/walkthrough",
+              label: "The Last Caretaker Walkthrough",
             },
           ]}
         >
-          <TheLastCaretakerProjectEdenContent />
+          <TheLastCaretakerMemoryForAaronContent />
         </GuideArticlePage>
       </main>
 

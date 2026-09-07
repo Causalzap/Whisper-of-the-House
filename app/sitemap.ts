@@ -253,11 +253,19 @@ const paths = [
   '/deltarune/chapter-5-secret-boss-guide',
   '/deltarune/chapter-5-secret-boss-pink-coins',
   '/deltarune/chapter-5-weird-route',
+
+  '/the-last-caretaker/walkthrough',
+  '/the-last-caretaker/human-growth-professions-guide',
+  '/the-last-caretaker/exodus-launch-guide',
   '/the-last-caretaker/new-horizons-guide',
   '/the-last-caretaker/project-eden-guide',
   '/the-last-caretaker/oil-whale-guide',
   '/the-last-caretaker/research-outpost-theta-9-guide',
   '/the-last-caretaker/power-fuel-wall-outlets',
+  '/the-last-caretaker/moses-warehouse-alpha-guide',
+  '/the-last-caretaker/memory-for-aaron-guide',
+  '/the-last-caretaker/transposium-room-998-guide',
+
   '/darktide/best-skitarii-builds',
   '/darktide/skitarii-servo-skull',
   '/darktide/skitarii-weapons',
@@ -878,6 +886,19 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  "/the-last-caretaker": "2026-09-07",
+  "/the-last-caretaker/walkthrough": "2026-09-07",
+  "/the-last-caretaker/human-growth-professions-guide": "2026-09-07",
+  "/the-last-caretaker/exodus-launch-guide": "2026-09-07",
+  "/the-last-caretaker/new-horizons-guide": "2026-09-07",
+  "/the-last-caretaker/project-eden-guide": "2026-09-07",
+  "/the-last-caretaker/oil-whale-guide": "2026-09-07",
+  "/the-last-caretaker/research-outpost-theta-9-guide": "2026-09-07",
+  "/the-last-caretaker/power-fuel-wall-outlets": "2026-09-07",
+  "/the-last-caretaker/moses-warehouse-alpha-guide": "2026-09-07",
+  "/the-last-caretaker/memory-for-aaron-guide": "2026-09-07",
+  "/the-last-caretaker/transposium-room-998-guide": "2026-09-07",
+
   '/halloween-the-game': '2026-09-05',
   '/halloween-the-game/walkthrough': '2026-09-05',
   '/halloween-the-game/endings': '2026-09-04',
