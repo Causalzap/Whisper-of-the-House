@@ -1,0 +1,290 @@
+import Link from "next/link";
+import Image from "next/image";
+import GuideQuickAnswer from "@/components/guides/GuideQuickAnswer";
+import HalloweenEscapeHelper from "@/components/halloween-the-game/HalloweenEscapeHelper";
+import GameDiscoveryCta from "@/components/game-recommender/GameDiscoveryCta";
+
+<GuideQuickAnswer title="Quick Answer">
+Pick your current map, mark the **escapes your team has actually found**, add the
+items already confirmed across the team, and update any barriers you can see.
+Then follow **Do This Now**. If the helper sends you to a spawn area, mark it
+checked after you search it so the next recommendation moves somewhere useful
+instead of sending you through the same loop again.
+</GuideQuickAnswer>
+
+<HalloweenEscapeHelper />
+
+<h2 id="fewest-unknowns">
+  The best escape is usually the one with the fewest unknowns
+</h2>
+
+A *Halloween: The Game* multiplayer round gets expensive when I keep treating
+every possible escape as equally important.
+
+The car might already be two items deep into preparation. A Storm Cellar may be
+found but still have an unknown second barrier. The Escape Gate may need a Fuse
+I have not seen all match. Meanwhile, another route can become usable while I am
+still opening drawers for an item that no longer matters.
+
+That is the situation this helper is built around.
+
+I use it as a **live match state**, not as a pre-match checklist. Once something
+changes, I change it in the tool. Finding the Sedan matters. Discovering that the
+Cellar still has boards matters. A teammate saying they already have the missing
+Gas matters even if that item never enters my own inventory.
+
+That last part is especially important with the Sedan.
+
+The route needs **Sedan Key + Repair Kit + Gas**, but those three pieces do not
+need to sit on one Civilian. In one clean setup, one teammate had the Sedan Key
+while another already had both the Repair Kit and Gas. At that point the problem
+was no longer “find three car items.” The team had everything; the remaining
+job was to locate and finish the car.
+
+<figure className="my-8">
+  <Image
+    src="/images/halloween-the-game/halloween-escape-helper-team-sedan-items.webp"
+    alt="Civilian team preparing a Sedan escape with the Sedan Key, Repair Kit, and Gas split across teammates"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Treat Sedan resources as team progress. If one player has the Key and another
+    has the Repair Kit and Gas, searching for duplicate car items is wasted time.
+  </figcaption>
+</figure>
+
+This is why the item controls distinguish **Found**, **Carried**, **At exit**, and
+**Used**.
+
+Once Gas has gone into the car or a Key has already opened the route, I do not
+want the helper telling me to find that item again. The route state has moved
+forward even though the original item may have disappeared from somebody's
+hands.
+
+<h2 id="found-versus-ready">
+  Finding an exit is only the start of the decision
+</h2>
+
+A discovered Storm Cellar or Escape Gate can look much closer to completion than
+it really is.
+
+The first useful action is therefore inspection.
+
+If I reach an exit and see a Padlock, Chains, Boards, or a Fuse Box, I mark the
+barrier I actually found. I leave the other barrier fields uncertain instead of
+guessing what this version of the exit is going to require.
+
+That prevents a particularly bad search pattern: leaving a discovered exit,
+crossing half the map for a tool, returning, and only then discovering that a
+second obstacle was waiting behind the first one.
+
+I have seen an exit reach exactly that state. The Padlock Key was already
+available and the lock was used, but the route still was not open because wooden
+boards remained. The next useful item changed immediately from a key to a
+**Wood Axe**.
+
+<figure className="my-8">
+  <Image
+    src="/images/halloween-the-game/halloween-escape-helper-exit-key-axe.webp"
+    alt="Escape route still blocked by wooden boards after its key requirement was already completed"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Clearing one barrier does not guarantee the route is finished. Update the
+    remaining obstacle before starting another search.
+  </figcaption>
+</figure>
+
+That is why I pay attention to **Inspect First** when the helper returns it.
+
+It is not a weak recommendation. It means the cheapest useful information is
+sitting at the exit itself.
+
+Walking back to the Cellar and learning whether it has Boards can be much faster
+than searching houses for Gas, a Fuse, or another access item without knowing
+whether any of them would improve the route.
+
+<h2 id="spawn-search">
+  Checked spawn areas should shrink the search, not reset it
+</h2>
+
+The four current multiplayer maps are **East Haddonfield, Haddonfield Heights,
+Orange Grove Estates, and Haddonfield Town Center**.
+
+I treat known Sedan, Storm Cellar, Escape Gate, and Gas positions as **candidate
+areas**, not as a promise that every possible location has already been
+documented.
+
+That distinction lets the search stay useful while the location pool is still
+growing.
+
+When I need Gas, for example, the useful question is no longer simply “where can
+Gas spawn?” It becomes:
+
+**Which known Gas areas on this map have I not checked yet?**
+
+The helper removes areas marked **Checked — empty** from the next-search order.
+If I find the target there, I can mark **Found here**. If my current area is also
+one of the remaining candidates, it gets extra practical value because I can
+check it without spending another minute crossing the map.
+
+I do not clear ordinary houses at random when the missing object uses known
+candidate locations.
+
+The opposite applies to items such as Bolt Cutters, Keys, and Fuses. Those are
+handled as loot searches rather than fixed points. The helper can therefore
+recommend useful container types without pretending that one house always owns
+the item.
+
+For general multiplayer fundamentals — calls, Residents, Civilian roles, and the
+basic match loop — I keep that separate in the
+<Link href="/halloween-the-game/multiplayer-guide">
+  {" "}multiplayer guide
+</Link>
+This page is only concerned with what the current match state makes worth doing
+next.
+
+<h2 id="stop-searching">
+  A finished route changes the value of every item still on the map
+</h2>
+
+The biggest time save is sometimes not finding something faster.
+
+It is realizing I should **stop searching entirely**.
+
+If the Storm Cellar is Ready and my goal is simply to get out, another Sedan Key
+has almost no value. If the Sedan is fully prepared, opening six more houses for
+a Fuse is solving a route I no longer need.
+
+The helper marks that state explicitly with **Stop searching**.
+
+Before that point, I compare unfinished work rather than raw route names.
+
+A Sedan with Key and Repair Kit but no Gas can still be a good route. A Cellar
+with a known Padlock and a Padlock Key already in hand may be even better,
+because the next action is available immediately. Once I inspect that Cellar and
+discover Boards behind the lock, the calculation changes again.
+
+This is why I update the tool after meaningful events instead of filling it out
+once at spawn.
+
+A useful rhythm is:
+
+1. mark the first escape I find;
+2. add team items when they are called out;
+3. inspect the route before leaving it;
+4. mark candidate areas after checking them;
+5. re-read **Do This Now** whenever one of those states changes.
+
+A round can disappear surprisingly quickly when I keep searching without
+re-evaluating. I have seen the exit hunt consume roughly **20 minutes** before a
+Police Wagon finally became the practical getaway route.
+
+At that point, continuing the same house-to-house search is not persistence. The
+match has already supplied a different answer.
+
+<h2 id="police-wagon">
+  Police Wagon becomes useful because the match state changed
+</h2>
+
+The Police Wagon works differently from the other three routes in the helper.
+
+There is no Sedan-style inventory bundle to assemble and no reason to search
+drawers for a “Police Wagon item.” Its value appears when the match has already
+progressed far enough for the Wagon to become available.
+
+<figure className="my-8">
+  <Image
+    src="/images/halloween-the-game/halloween-escape-helper-police-wagon.webp"
+    alt="Police Wagon getaway route available during a Halloween The Game multiplayer match"
+    width={1600}
+    height={900}
+    className="rounded-xl"
+  />
+  <figcaption className="mt-3 text-sm text-slate-400">
+    Once the Police Wagon is genuinely available, mark it in the match state
+    instead of treating it like another loot-based route.
+  </figcaption>
+</figure>
+
+If I already have a clean normal escape, the Wagon does not automatically make
+that route bad.
+
+Its real value shows up when the other options have stalled: the car still needs
+multiple pieces, a Gate remains uncertain, or the Cellar search has gone cold
+while the match has already opened a getaway route through police progression.
+
+Arresting Michael is a different objective. The Police Wagon, Loomis, authority
+pressure, knockdowns, and the final detainment sequence have their own route in
+the
+<Link href="/halloween-the-game/how-to-arrest-michael-myers">
+  {" "}Michael Myers arrest guide
+</Link>
+The helper only needs to know whether the Wagon itself is currently available.
+
+<h2 id="achievement-runs">
+  Achievement runs deliberately change what counts as the best route
+</h2>
+
+Normally, a Ready escape should beat a longer unfinished route.
+
+That rule stops being useful when the route itself is part of the objective.
+
+If I select **Risky Escape**, the helper keeps the Sedan in priority even when a
+Storm Cellar is already open. Escaping through the easier Cellar would finish
+the match but abandon the goal I selected.
+
+The same idea applies to **I found the Car!**. A prepared Sedan is not enough if
+the Resident condition still needs attention, so **Stop searching** does not
+appear just because the car can move.
+
+I use Achievement Run only when I entered the match intending to pursue one of
+those conditions. Otherwise, normal escape ranking is cleaner and keeps me from
+turning every round into a special-case route.
+
+The exact unlock conditions and the rest of the 50-achievement cleanup belong in
+the
+<Link href="/halloween-the-game/achievements">
+  {" "}Halloween: The Game achievements guide
+</Link>
+Here, achievement selection only changes the decision the helper makes.
+
+<h2 id="live-route-example">
+  One missing Gas can still become the wrong thing to chase
+</h2>
+
+A typical decision becomes clearer when several routes are alive at once.
+
+Suppose I have found the Sedan. The team already confirmed the **Sedan Key** and
+**Repair Kit**, but nobody has Gas. Two known Gas areas have already been checked
+and came up empty.
+
+At first, the Sedan is straightforward: one missing item.
+
+Then I find a Storm Cellar.
+
+If I leave immediately and continue the Gas sweep, I still do not know whether
+the Cellar is almost free or several steps away. So I inspect it first.
+
+A visible Padlock while the team already has a Padlock Key makes the Cellar much
+more interesting. I use the key. If the route opens, the search ends. If Boards
+remain, the next comparison is finally concrete:
+
+**Wood Axe for the Cellar, or Gas for the Sedan?**
+
+Now the helper can work with actual unfinished steps instead of two vague escape
+names.
+
+If the Axe is already somewhere in team inventory, I return to the Cellar. If
+nobody has one and the remaining Gas candidate search is nearby, the Sedan may
+still be the better commitment.
+
+The important part happened before either decision: I stopped treating the map
+as a pile of unrelated loot and turned the current round into a small number of
+known states.
+
+That is when the search becomes manageable.
