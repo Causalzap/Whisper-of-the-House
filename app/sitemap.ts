@@ -879,6 +879,15 @@ const paths = [
 '/halloween-the-game/prologue-challenge-5',
 '/halloween-the-game/prologue-challenges',
 
+'/wanderburg',
+  '/wanderburg/progression-unlocks',
+  '/wanderburg/best-builds',
+  '/wanderburg/captains-tier-list',
+  '/wanderburg/how-to-unlock-spiderburg',
+  '/wanderburg/bosses',
+  '/wanderburg/achievements',
+
+
 ] as const;
 
 type SitemapPath = (typeof paths)[number];
@@ -886,6 +895,14 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/wanderburg': '2026-09-09',
+  '/wanderburg/progression-unlocks': '2026-09-09',
+  '/wanderburg/best-builds': '2026-09-09',
+  '/wanderburg/captains-tier-list': '2026-09-09',
+  '/wanderburg/how-to-unlock-spiderburg': '2026-09-09',
+  '/wanderburg/bosses': '2026-09-09',
+  '/wanderburg/achievements': '2026-09-09',
+  
   "/the-last-caretaker": "2026-09-07",
   "/the-last-caretaker/walkthrough": "2026-09-07",
   "/the-last-caretaker/human-growth-professions-guide": "2026-09-07",

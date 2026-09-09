@@ -131,6 +131,253 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Wanderburg",
+    game: "Wanderburg",
+    href: "/wanderburg",
+    slug: "wanderburg",
+    kind: "game",
+    status: "active",
+    accent: "amber",
+    archiveCategory: "RPG, action, builds & combat",
+  
+    label: "Mobile Fortress Roguelike & Meta Progression",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "Early Access + progression + builds + Captains + vehicles + bosses + 26 achievements",
+  
+    description:
+      "Use the Wanderburg guide hub to decide what the next run should accomplish, clear biome progression, build stronger permanent loadouts, choose Captains and vehicles, survive all four bosses, unlock Spiderburg, and finish all 26 achievements.",
+  
+    coverage: [
+      "Run diagnosis across overworld objectives, permanent loadout progression, current-build strength, Movement and Nitro limits, and vehicle compatibility, with each failed run routed to the layer that actually needs fixing",
+      "Permanent progression through Green Plains, Golden Dunes, Meadows and later Lands, Silver spending, Overtime decisions, module milestones, vehicle gates, and choosing the next objective by what it changes for future runs",
+      "Proven Arrow, Mine and Mortar, Ram, Summoner and Cannon builds, with upgrade concentration, Movement versus Defense, cooldown problems, chassis compatibility, and rules for pivoting away from a weak archetype",
+      "Captain rankings for Racer Ruth, Tankbert, Dieter the Drunk, Patchy, Empress and the wider roster, including exact bonuses, drawbacks, specialist roles, Silver prices, and which Captain fixes each progression problem",
+      "Spiderburg progression through the full Golden Dunes boss clear, the unlocked-but-unplayable state, two required Top Module positions, no Side slot, chassis handling, leg stomp damage, terrain immunity and double-Top scaling",
+      "Full four-boss run preparation, early fight mistakes, third-boss sustained-damage checks, Dark Tower Fire Tornado and inward pull, between-boss upgrade diagnosis, and late-run failure patterns",
+      "All 26 achievements with six progression milestones, four cumulative chains for distance, vehicles, consumed units and bosses, All Lands won!, Overtime cleanup value, and an efficient completion order",
+    ],
+  
+    image:
+      "/images/wanderburg/wanderburg-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 45,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Wanderburg Guide: Progression, Builds, Captains & Unlocks",
+        href: "/wanderburg",
+        type: "Guide Hub",
+        description:
+          "Start here to decide what the next Wanderburg run should accomplish, then move to progression, builds, Captains, bosses, vehicles, Spiderburg, or achievement cleanup.",
+        image:
+          "/images/wanderburg/wanderburg-overworld-full-map.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Green Plains, permanent progression, builds, Movement, Captains, Silver, Overtime, vehicles, Spiderburg, four-boss clears, module unlocks, and achievements",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Wanderburg Progression Guide: Biomes, Silver & Unlocks",
+        href: "/wanderburg/progression-unlocks",
+        type: "Guide",
+        description:
+          "Clear Green Plains, choose the next Land by its permanent reward, spend Silver on useful starting pieces, use Overtime well, and fix common progression stalls.",
+        date: "Updated recently",
+        image:
+          "/images/wanderburg/wanderburg-green-plains-biome-quests.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 302,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Green Plains, Golden Dunes, Meadows, Silver, Overtime, permanent modules, biome gates, vehicle progression, module milestones, and stuck-progression diagnosis",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Wanderburg Boss Guide: All Four Bosses & Dark Tower",
+        href: "/wanderburg/bosses",
+        type: "Bosses",
+        description:
+          "Prepare each boss spawn, survive the full four-fight sequence, diagnose late-run failures, choose better between-boss upgrades, and counter Dark Tower's Fire Tornado.",
+        date: "Updated recently",
+        image:
+          "/images/wanderburg/wanderburg-dark-tower-fire-tornado.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 303,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Four-boss clears, pre-boss preparation, boss one Ram mistake, boss two movement wall, boss three sustained damage, Dark Tower, Fire Tornado, inward pull, Nitro, and upgrade diagnosis",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Wanderburg Best Builds: Archer, Mines, Ram & Cannons",
+        href: "/wanderburg/best-builds",
+        type: "Builds",
+        description:
+          "Build around Archer Tower, mines, Ram, summons or Cannons, concentrate upgrades on one working damage engine, and learn when Movement matters more than Defense.",
+        date: "Updated recently",
+        image:
+          "/images/wanderburg/wanderburg-archer-ballista-turret-build.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 304,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Archer Tower, Side Ballista, Turret Layer, Mine Layer, Top Mortar, Ram, Summoner, Cannons, Movement versus Defense, cooldown, build pivots, and chassis compatibility",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Wanderburg Captains Tier List: Best Captains Ranked",
+        href: "/wanderburg/captains-tier-list",
+        type: "Guide",
+        description:
+          "Rank every Wanderburg Captain for progression and specialist use, compare Racer Ruth with Tankbert, and choose the Captain whose bonus fixes the current run.",
+        date: "Updated recently",
+        image:
+          "/images/wanderburg/wanderburg-racer-ruth-captain.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 305,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Racer Ruth, Tankbert, Dieter the Drunk, Patchy, Empress, The Count, Huntress, Lumberjack, Captain tiers, specialist rankings, Silver prices, bonuses, drawbacks, and first-buy decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "How to Unlock Spiderburg in Wanderburg",
+        href: "/wanderburg/how-to-unlock-spiderburg",
+        type: "Guide",
+        description:
+          "Clear all four Golden Dunes bosses to unlock Spiderburg, fix the second Top Module requirement, understand its slot layout, and decide when the chassis is worth using.",
+        date: "Updated recently",
+        image:
+          "/images/wanderburg/wanderburg-spiderburg-dark-forest-unlocked.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 306,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Golden Dunes four-boss clear, Spiderburg unlock message, two Top Modules, Front and Back slots, no Side slot, unusable-after-unlock fix, leg stomps, terrain immunity, and double-Top scaling",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "Wanderburg Achievements Guide: All 26 & Completion Order",
+        href: "/wanderburg/achievements",
+        type: "Achievements",
+        description:
+          "Complete all 26 Wanderburg achievements with an efficient order for Lands, vehicles, distance, consumed units, bosses, Spiderburg, Tankenburg, and final cleanup.",
+        date: "Updated recently",
+        image:
+          "/images/wanderburg/wanderburg-first-achievements-100-vehicles-10km.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 307,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "All 26 achievements, You won!, All Lands won!, Spiderburg, Tankenburg, 10,000 km, 10,000 vehicles, 100,000 units, 500 bosses, Overtime cleanup, and completion order",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Halloween: The Game",
     game: "Halloween: The Game",
     href: "/halloween-the-game",
