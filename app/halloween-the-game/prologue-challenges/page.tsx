@@ -11,10 +11,10 @@ const hubUrl = `${siteUrl}/halloween-the-game`;
 const pageUrl = `${hubUrl}/prologue-challenges`;
 
 const metadataTitle =
-  "Halloween: The Game Prologue Challenges – All 6 Guide";
+  "Halloween: The Game Prologue Challenges – Complete All 6";
 
 const metadataDescription =
-  "Complete all 6 Prologue challenges at Smith's Grove with the best run order, exact kill conditions, and the mistakes that force another attempt.";
+  "Complete all 6 Halloween: The Game Prologue challenges with a two-run Smith's Grove route, Challenge 5 no-alert guide, and all 12 orderlies for Challenge 6.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-prologue-all-challenges-complete.webp`;
@@ -29,7 +29,7 @@ const imageUrls = [
 const toc = [
   {
     id: "best-run-order",
-    label: "Best run order for all 6 challenges",
+    label: "Best route for all 6 challenges",
   },
   {
     id: "challenges-1-to-4",
@@ -45,7 +45,7 @@ const toc = [
   },
   {
     id: "finish-the-chapter",
-    label: "When challenge progress saves",
+    label: "Save challenge progress",
   },
 ];
 
@@ -56,11 +56,11 @@ const relatedLinks = [
   },
   {
     href: "/halloween-the-game/walkthrough",
-    label: "Complete Story Walkthrough",
+    label: "Complete Story Mode Walkthrough",
   },
   {
     href: "/halloween-the-game/main-street-walkthrough",
-    label: "Chapter 2 Main Street Challenges",
+    label: "Chapter 2 Main Street Walkthrough",
   },
 ];
 
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Prologue Challenges – All 6",
+    title: "Halloween: The Game Prologue Challenges – Complete All 6",
     description:
-      "Clear the six Smith's Grove challenges with a two-run approach, including the environmental kills, 12-orderly sweep, and separate no-alert attempt.",
+      "Clear all six Smith's Grove challenges with a two-run plan, including the no-alert route, environmental executions, and full 12-orderly sweep.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Halloween: The Game Prologue Challenges – All 6",
     description:
-      "Use one clean run for Challenge 5 and combine the other Smith's Grove objectives into a combat-focused replay.",
+      "Use one clean run for Challenge 5 and one combat run for Challenges 1–4 and the 12-orderly Challenge 6 sweep.",
     images: [heroImage],
   },
 };
@@ -133,14 +133,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "Halloween: The Game Prologue Challenges — All 6 Smith's Grove Challenges",
+        "Halloween: The Game Prologue Challenges — How to Complete All 6",
       description:
-        "A Smith's Grove Prologue challenge guide for Halloween: The Game covering all six optional objectives and the most efficient way to split them across replays. It explains how to make an orderly flee, complete three bare-hand executions, use the telephone pole environmental execution, throw an orderly to his death, separate the no-alert Challenge 5 into its own clean attempt, account for all 12 orderlies in Challenge 6, and finish the chapter so completed challenge progress is saved.",
+        "A complete guide to all six Smith's Grove Prologue challenges in Halloween: The Game. It covers the best two-run strategy, making an orderly flee, three bare-hand executions, the telephone-pole execution, throwing an orderly to his death, the separate no-alert Challenge 5 route, killing or driving away all 12 orderlies for Challenge 6, and finishing the Prologue so completed challenge progress saves.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-05",
-      dateModified: "2026-09-05",
+      dateModified: "2026-09-11",
       articleSection: "Halloween: The Game Challenges",
       about: [
         {
@@ -167,6 +167,14 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Prologue Challenge 6",
+        },
+        {
+          "@type": "Thing",
+          name: "Kill or drive away every orderly",
+        },
+        {
+          "@type": "Thing",
+          name: "Telephone pole execution",
         },
       ],
       isPartOf: {
@@ -202,13 +210,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Clear All 6 Smith's Grove Prologue Challenges"
-          description="Use one clean attempt for the no-alert challenge, combine the combat objectives on another run, and know which mistakes are worth restarting before you lose more time."
+          title="Halloween: The Game Prologue Challenges – How to Complete All 6"
+          description="Split the six Smith's Grove challenges into one no-alert run and one combat run, then finish the Prologue so every completed objective actually saves."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 5, 2026"
+          updatedAt="September 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

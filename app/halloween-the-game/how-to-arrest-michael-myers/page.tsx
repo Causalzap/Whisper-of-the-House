@@ -14,7 +14,7 @@ const metadataTitle =
   "How to Arrest Michael Myers in Halloween: The Game";
 
 const metadataDescription =
-  "Arrest Michael Myers by calling police, using spectator mode to bring in Loomis, building the arrest meter, knocking Michael down, and finishing Arrest.";
+  "Learn how to arrest and detain Michael Myers with police, spectator mode, the CB radio, Loomis, arrest pressure, knockdown, and the final Arrest interaction.";
 
 const socialImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-arrest-michael-success.webp`;
@@ -32,47 +32,43 @@ const imageUrls = [
 const toc = [
   {
     id: "arrest-sequence",
-    label: "Full arrest sequence",
+    label: "How to arrest Michael Myers",
   },
   {
     id: "police-setup",
-    label: "Get police into the match",
+    label: "Step 1 — Get police involved",
   },
   {
     id: "spectator-mode",
-    label: "Get a player into spectator mode",
+    label: "Step 2 — Reach spectator mode",
   },
   {
     id: "call-loomis",
-    label: "Call Loomis with the CB radio",
+    label: "Step 3 — Call Loomis",
   },
   {
     id: "reinforcements",
-    label: "Use Police Reinforcements",
+    label: "Police Reinforcements",
   },
   {
     id: "police-pressure",
-    label: "Build arrest pressure",
-  },
-  {
-    id: "police-wagon",
-    label: "POLICE WAGON CALLED",
+    label: "Step 4 — Build arrest pressure",
   },
   {
     id: "knockdown",
-    label: "When to knock Michael down",
+    label: "Step 5 — Knock Michael down",
   },
   {
     id: "final-arrest",
-    label: "Complete the Arrest interaction",
+    label: "Step 6 — Complete Arrest",
   },
   {
     id: "detained",
-    label: "MICHAEL DETAINED!",
+    label: "Step 7 — MICHAEL DETAINED!",
   },
   {
     id: "escape-instead",
-    label: "When to abandon the arrest",
+    label: "When to take the escape instead",
   },
 ];
 
@@ -83,7 +79,11 @@ const relatedLinks = [
   },
   {
     href: "/halloween-the-game/progression-perks",
-    label: "Progression, Perks & Prestige",
+    label: "Progression, Perks & Prestige Guide",
+  },
+  {
+    href: "/halloween-the-game/escape-helper",
+    label: "Multiplayer Escape & Spawn Helper",
   },
   {
     href: "/halloween-the-game",
@@ -104,7 +104,7 @@ export const metadata: Metadata = {
     url: pageUrl,
     title: "How to Arrest Michael Myers in Halloween: The Game",
     description:
-      "Set up the multiplayer detainment route with police, spectator mode, Loomis, Reinforcements, the arrest meter, and the final Arrest interaction.",
+      "Follow the multiplayer detainment route from police and spectator access through the CB radio, Loomis, arrest pressure, knockdown, and the final Arrest interaction.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -120,7 +120,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "How to Arrest Michael Myers in Halloween: The Game",
     description:
-      "Get police involved, bring in Loomis, build the arrest state, knock Michael down, and finish the Arrest interaction before he recovers.",
+      "Get police involved, call Loomis through spectator mode, build the arrest state, knock Michael down, and finish the Arrest interaction.",
     images: [socialImage],
   },
 };
@@ -160,14 +160,14 @@ const jsonLd = {
         "@id": pageUrl,
       },
       headline:
-        "How to Arrest Michael Myers in Halloween: The Game Multiplayer",
+        "How to Arrest Michael Myers in Halloween: The Game",
       description:
-        "A step-by-step guide to arresting and detaining Michael Myers in Halloween: The Game multiplayer. It covers getting police into the match, moving a human player into spectator mode, using the CB radio to call Loomis, returning through Police Reinforcements, keeping Michael under authority pressure, recognizing the POLICE WAGON CALLED state, filling the arrest meter before the knockdown, completing the final Arrest interaction, and knowing when an already-open escape is safer than continuing the detainment attempt.",
+        "A step-by-step multiplayer guide to arresting and detaining Michael Myers in Halloween: The Game. It covers police setup, spectator access, using the CB radio to call Loomis, Police Reinforcements, keeping Michael under police pressure, building the arrest state, knocking him down at the correct time, completing the Arrest interaction, and confirming the MICHAEL DETAINED result.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-04",
-      dateModified: "2026-09-04",
+      dateModified: "2026-09-11",
       articleSection: "Halloween: The Game Multiplayer Guides",
       about: [
         {
@@ -198,6 +198,10 @@ const jsonLd = {
         {
           "@type": "Thing",
           name: "Police Reinforcements",
+        },
+        {
+          "@type": "Thing",
+          name: "MICHAEL DETAINED",
         },
       ],
       isPartOf: {
@@ -233,13 +237,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Get Michael Into the Arrest State Before the Knockdown"
-          description="The final takedown only works after police pressure, spectator access, Loomis or Reinforcements, and the arrest meter have lined up. Here is the sequence that gets you to MICHAEL DETAINED!"
+          title="How to Arrest Michael Myers in Halloween: The Game"
+          description="Follow the full multiplayer arrest route: get police involved, reach spectator mode, call Loomis, build the arrest state, knock Michael down, and finish the Arrest interaction before he recovers."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 4, 2026"
+          updatedAt="September 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >

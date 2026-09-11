@@ -14,68 +14,48 @@ const metadataTitle =
   "Halloween: The Game Progression, Perks & Prestige Guide";
 
 const metadataDescription =
-  "Learn how XP, Perk Points, Civilian stats, perk rolls, temporary upgrades, weapon levels, challenges, and Prestige work in Halloween: The Game.";
+  "Learn how Halloween: The Game progression, Perk Points, perk cards and Prestige work, including four XP tracks, Level 100 and Prestige Challenges.";
 
 const heroImage =
   `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-four-levels.webp`;
 
 const imageUrls = [
   heroImage,
-  `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-challenge-types.webp`,
+  `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-prestige-level-100.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-perk-roll.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-perk-deck.webp`,
+  `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-challenge-types.webp`,
   `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-civilian-stats.webp`,
-  `${siteUrl}/images/halloween-the-game/halloween-the-game-progression-prestige-level-100.webp`,
 ];
 
 const toc = [
+  {
+    id: "progression-overview",
+    label: "Progression & Prestige overview",
+  },
+  {
+    id: "prestige",
+    label: "How Prestige Challenges work",
+  },
   {
     id: "progression-tracks",
     label: "Profile, Killer, Civilian & Weapon XP",
   },
   {
-    id: "unlocks",
-    label: "What progression unlocks",
+    id: "perk-points",
+    label: "Perk Points & card rolls",
   },
   {
     id: "challenge-types",
     label: "Challenge types",
   },
   {
-    id: "perk-points",
-    label: "How Perk Points work",
-  },
-  {
-    id: "perk-cards",
-    label: "How to judge perk cards",
-  },
-  {
-    id: "perk-management",
-    label: "Equip, upgrade or scrap perks",
-  },
-  {
-    id: "temporary-upgrades",
-    label: "Temporary perk upgrades",
-  },
-  {
     id: "civilian-stats",
-    label: "Civilian stats explained",
-  },
-  {
-    id: "starting-items",
-    label: "Starting-item unlocks",
-  },
-  {
-    id: "prestige",
-    label: "How Prestige works",
+    label: "Civilian stats & starting items",
   },
   {
     id: "spending-plan",
-    label: "When to spend Perk Points",
-  },
-  {
-    id: "what-to-level-first",
-    label: "What to level first",
+    label: "What to spend and level first",
   },
 ];
 
@@ -83,6 +63,10 @@ const relatedLinks = [
   {
     href: "/halloween-the-game/multiplayer-guide",
     label: "Multiplayer Guide for Civilians",
+  },
+  {
+    href: "/halloween-the-game/prologue-challenges",
+    label: "All 6 Prologue Challenges",
   },
   {
     href: "/halloween-the-game/how-to-arrest-michael-myers",
@@ -105,9 +89,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     url: pageUrl,
-    title: "Halloween: The Game Progression, Perks & Prestige",
+    title: "Halloween: The Game Progression, Perks & Prestige Guide",
     description:
-      "Understand the four XP tracks, Civilian perk economy, stats, challenges, starting-item unlocks, temporary upgrades, and the Prestige system.",
+      "Understand the four XP tracks, Perk Point economy, Civilian cards, challenge types, starting-item unlocks, and how Profile Prestige works.",
     siteName: "Whisper of the House",
     images: [
       {
@@ -121,9 +105,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Halloween: The Game Progression & Perks Guide",
+    title: "Halloween: The Game Progression, Perks & Prestige",
     description:
-      "Learn where XP goes, how Perk Points work, what Civilian stats mean, when to upgrade cards, and how Prestige changes your spending.",
+      "Learn how XP tracks, Perk Points, Civilian cards and Prestige Challenges work, including the Level 100 Profile Prestige requirement.",
     images: [heroImage],
   },
 };
@@ -165,12 +149,12 @@ const jsonLd = {
       headline:
         "Halloween: The Game Progression, Perks and Prestige Guide",
       description:
-        "A complete guide to Halloween: The Game progression covering Profile, Killer, Civilian, and Weapon XP tracks; progression unlocks; passive, progressive, and story challenges; the separate Perk Point economy; Civilian perk rolls, card effects, temporary upgrades, and scrapping; Athleticism, Personality, Resourcefulness, and Capability; starting-item unlocks; and the Prestige system. The Profile Prestige screen shown requires Level 100 before Prestige 1 becomes available, followed by a timed Prestige Challenge that can require additional Perk Points after a failed attempt.",
+        "A guide to Halloween: The Game progression covering Profile, Killer, Civilian, and Weapon XP; Perk Points and card rolls; perk upgrades and scrapping; passive, progressive, and Story Mode challenges; Civilian attributes and starting items; and Profile Prestige, including the Level 100 requirement and timed Prestige Challenge.",
       url: pageUrl,
       image: imageUrls,
       inLanguage: "en",
       datePublished: "2026-09-04",
-      dateModified: "2026-09-04",
+      dateModified: "2026-09-11",
       articleSection: "Halloween: The Game Guides",
       about: [
         {
@@ -184,15 +168,19 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
+          name: "Halloween: The Game Prestige",
+        },
+        {
+          "@type": "Thing",
+          name: "Prestige Challenges",
+        },
+        {
+          "@type": "Thing",
           name: "Perk Points",
         },
         {
           "@type": "Thing",
-          name: "Civilian perks",
-        },
-        {
-          "@type": "Thing",
-          name: "Civilian stats",
+          name: "Civilian perk cards",
         },
         {
           "@type": "Thing",
@@ -212,7 +200,7 @@ const jsonLd = {
         },
         {
           "@type": "Thing",
-          name: "Prestige",
+          name: "Civilian attributes",
         },
       ],
       isPartOf: {
@@ -248,13 +236,13 @@ export default function Page() {
         />
 
         <GuideArticlePage
-          title="Know Which Progression Track You Are Actually Building"
-          description="XP, Perk Points, Civilian levels, weapon progress, perk cards, and Prestige all move differently. Use each system for the unlock or match role you are trying to improve."
+          title="Halloween: The Game Progression, Perks & Prestige Guide"
+          description="Understand the four XP tracks, spend Perk Points without wasting early rolls, and know what changes once Profile Level 100 opens Prestige Challenges."
           gameTitle="Halloween: The Game"
           gameHref="/halloween-the-game"
           breadcrumbBaseHref="/"
           breadcrumbBaseLabel="Home"
-          updatedAt="September 4, 2026"
+          updatedAt="September 11, 2026"
           toc={toc}
           relatedLinks={relatedLinks}
         >
