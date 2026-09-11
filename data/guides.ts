@@ -131,6 +131,252 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "The Crust",
+    game: "The Crust",
+    href: "/the-crust",
+    slug: "the-crust",
+    kind: "game",
+    status: "active",
+    accent: "cyan",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "Lunar Base Management & Story Progression",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "Version 1.0 + base recovery + Hope-2 + Rover + Living Quarters + contracts + 28 achievements",
+  
+    description:
+      "Use The Crust guide hub to recover the damaged lunar base, choose the Hope-2 or FASM route, restore communications with the Rover, prepare Living Quarters, manage contracts and trading, and finish all 28 achievements.",
+  
+    coverage: [
+      "Version 1.0 progression from post-disaster power and elevator recovery through steel, silicon, research, conveyors, titanium, components, Hope-2, communications, habitation, and longer-range lunar operations",
+      "Hope-2 decision planning around the CRUST rescue route, Living Quarters commitment, delayed industrial priorities, the lost FASM upfront contract, Rover Scout progression, and preparing the base before committing",
+      "Rover and Cargo Terminal progression through approximate coordinates, outer and inner LPS scans, hidden-object discovery, terminal investigation, battery limits, and the transition into the Expedition Center",
+      "Living Quarters preparation through room planning, Electronic Board power, ice extraction, water, oxygen, beds, Hydroponic Farm, Kitchen, Fundamental Science Lab, Medical Block, and stuck-objective diagnosis",
+      "Contracts and trading through the Landing Platform, Online Market, supply-driven prices, Active Contracts, Send Resources, capsule setup, landing locations, wrong-destination troubleshooting, and production-priority decisions",
+      "All 28 Steam achievements with a persistent tracker, Hope-2 survivor requirement, five Laser Gun achievements, credit versus market-cap goals, colonist progression, 50-year cleanup, and full-Moon scanning",
+    ],
+  
+    image:
+      "/images/the-crust/the-crust-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 46,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "The Crust Guide – Progression, Hope-2 & 1.0 Priorities",
+        href: "/the-crust",
+        type: "Guide Hub",
+        description:
+          "Start here to recover the base, identify the current progression blocker, choose the Hope-2 route, manage Rover exploration, habitation, trade, and prepare for later lunar operations.",
+        image:
+          "/images/the-crust/the-crust-hub.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "Version 1.0 progression, base recovery, steel and silicon, Hope-2, Rover LPS, Living Quarters, contracts, far-side expedition, story decisions, and 28 achievements",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "The Crust Beginner Guide – Best Early-Game Build Order",
+        href: "/the-crust/beginners-guide",
+        type: "Beginner Guide",
+        description:
+          "Restore the elevator and power, rebuild steel and silicon production, automate the busiest routes, choose useful research, find titanium, and reach Hope-2 with a stable factory.",
+        date: "Updated recently",
+        image:
+          "/images/the-crust/the-crust-beginner-early-production-chain.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 313,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "Post-disaster recovery, elevator power, iron and silicon, Single Regolith Refineries, steel, Smart Concrete, conveyors, research, Ore Detector, titanium, components, and early credits",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "The Crust Hope-2 Choice Guide – Rescue or FASM?",
+        href: "/the-crust/hope-2-choice",
+        type: "Guide",
+        description:
+          "Choose between the Hope-2 rescue route and FASM, understand the Living Quarters and funding tradeoff, and prepare the base for Rover and communications progression.",
+        date: "Updated recently",
+        image:
+          "/images/the-crust/the-crust-hope-2-choice.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 314,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "Hope-2 rescue, CRUST cooperation, FASM upfront contract, Living Quarters commitment, delayed high-tech manufacturing, meteorite investigation, Rover Scout, communications, and route preparation",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "The Crust Cargo Terminal Guide – Rover LPS & Location",
+        href: "/the-crust/cargo-terminal",
+        type: "Puzzle Help",
+        description:
+          "Use approximate coordinates and the Rover LPS to find the hidden Cargo Terminal, complete its investigation, manage Rover power, and reach the Expedition Center step.",
+        date: "Updated recently",
+        image:
+          "/images/the-crust/the-crust-cargo-terminal-rover-lps.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 315,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Cargo Terminal coordinates, Rover Scout, Lunar Proximity Scanner, outer scan direction, inner scan reveal, hidden-object search, investigation, Expedition Center, and Rover battery",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "The Crust Living Quarters Guide – Power, Oxygen & Colonists",
+        href: "/the-crust/living-quarters",
+        type: "Guide",
+        description:
+          "Build functional Living Quarters with room planning, Electronic Board power, ice, water, oxygen, beds, food, science, medical support, and stuck-objective fixes.",
+        date: "Updated recently",
+        image:
+          "/images/the-crust/the-crust-living-quarters-ready.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 316,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Room Planner, Electronic Board, ice deposit, Ice Extractor, Ice Melter, Electrolysis Plant, oxygen, beds, Hydroponic Farm, Kitchen, Fundamental Science Lab, Medical Block, and colonist readiness",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "The Crust Contracts Guide – Market, Shipping & Destinations",
+        href: "/the-crust/contracts-guide",
+        type: "Systems",
+        description:
+          "Unlock trading, use the Online Market, configure contract shipments correctly, fix wrong destinations, and decide when a contract or resource purchase is worth the cost.",
+        date: "Updated recently",
+        image:
+          "/images/the-crust/the-crust-contract-send-resources.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 317,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Landing Platform, Online Market, buy and sell, supply-driven prices, Active Contracts, Send Resources, cargo capsule, landing location, wrong-destination fix, contract priorities, and resource purchases",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+  
+      {
+        title:
+          "The Crust Achievements Guide – All 28 & 100% Route",
+        href: "/the-crust/achievements",
+        type: "Achievements",
+        description:
+          "Track all 28 Steam achievements with a persistent checklist and plan Hope-2, Laser Gun outcomes, economy goals, colonist progression, and long-term completion.",
+        date: "Updated recently",
+        image:
+          "/images/the-crust/the-crust-achievement-a-single-spark.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 318,
+          spotlightFeature: true,
+          spotlightOrder: 6,
+          spotlightMeta:
+            "All 28 achievements, persistent tracker, A Single Spark, Hope-2 12 survivors, five Laser Gun achievements, credits, market capitalization, colonist profession level, 50 years, and full-Moon scan",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 7,
+        },
+      },
+    ],
+  },
+  {
     title: "Wanderburg",
     game: "Wanderburg",
     href: "/wanderburg",

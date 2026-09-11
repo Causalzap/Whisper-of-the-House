@@ -881,13 +881,21 @@ const paths = [
 '/halloween-the-game/achievements',
 '/halloween-the-game/escape-helper',
 
-'/wanderburg',
+  '/wanderburg',
   '/wanderburg/progression-unlocks',
   '/wanderburg/best-builds',
   '/wanderburg/captains-tier-list',
   '/wanderburg/how-to-unlock-spiderburg',
   '/wanderburg/bosses',
   '/wanderburg/achievements',
+
+  '/the-crust',
+  '/the-crust/beginners-guide',
+  '/the-crust/hope-2-choice',
+  '/the-crust/cargo-terminal',
+  '/the-crust/living-quarters',
+  '/the-crust/contracts-guide',
+  '/the-crust/achievements',
 
 
 ] as const;
@@ -897,6 +905,14 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/the-crust': '2026-09-11',
+  '/the-crust/beginners-guide': '2026-09-11',
+  '/the-crust/hope-2-choice': '2026-09-11',
+  '/the-crust/cargo-terminal': '2026-09-11',
+  '/the-crust/living-quarters': '2026-09-11',
+  '/the-crust/contracts-guide': '2026-09-11',
+  '/the-crust/achievements': '2026-09-11',
+
   '/wanderburg': '2026-09-09',
   '/wanderburg/progression-unlocks': '2026-09-09',
   '/wanderburg/best-builds': '2026-09-09',
