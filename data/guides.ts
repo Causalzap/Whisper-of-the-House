@@ -131,6 +131,222 @@ export type GuideCluster = HomeImageFields & {
 
 export const guideClusters: GuideCluster[] = [
   {
+    title: "Slay the Spire 2",
+    game: "Slay the Spire 2",
+    href: "/slay-the-spire-2",
+    slug: "slay-the-spire-2",
+    kind: "game",
+    status: "active",
+    accent: "purple",
+    archiveCategory: "Strategy, simulation, puzzle & discovery",
+  
+    label: "Deckbuilding Roguelike & Run Strategy",
+    eyebrow: "Spotlight Hub",
+    hubStatus:
+      "First-win strategy + Ascension A1–A10 + Regent + Necrobinder + multiplayer",
+  
+    description:
+      "Use the Slay the Spire 2 guide hub to diagnose what is breaking a run, get the first clear, climb Ascension from A1 to A10, learn Regent and Necrobinder, coordinate co-op teams, and move to SpireGenius when exact card, relic, monster, boss, or map data is the better answer.",
+  
+    coverage: [
+      "First-win decision making through full-map planning, card rewards and Skip decisions, Merchant value, card removal, Rest versus Smith, Elite readiness, potion timing, enemy priority, and resetting the plan between Acts",
+      "Ascension progression from A1 through A10, including stacked modifiers, route pressure, HP and Gold constraints, potion capacity, Ascender's Bane, fewer Rest Sites, Scarcity, tougher enemies, Elite risk, deck consistency, and the Act 3 double boss",
+      "Regent run strategy through Stars as a usable budget, Underdocks routing, defensive gaps, Merchant purchases, card removal, Rest versus upgrade decisions, boss preparation, and knowing when a working deck should stop adding cards",
+      "Necrobinder strategy through early removals, Osty defense, Doom timing, Forbidden Grimoire, aggressive Elite routes, stored Energy, Eradicate and Unleash finishers, potion use, and deciding when the engine is already complete",
+      "Multiplayer strategy through team roles, focus fire, shared Block, enemy debuffs, card passing, shared rewards, deck pollution, shop and campfire routing, backup plans, and separate co-op Ascension progression",
+      "Intent-based handoff to SpireGenius for structured Slay the Spire 2 card, relic, potion, monster, boss, map, pathing, and other exact game-data questions",
+    ],
+  
+    image:
+      "/images/slay-the-spire-2/slay-the-spire-2-hub.webp",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: false,
+  
+    home: {
+      featuredHub: true,
+      featuredHubSpotlight: true,
+      featuredHubOrder: 47,
+      footerFeatured: true,
+    },
+  
+    pages: [
+      {
+        title:
+          "Slay the Spire 2 Guide – Beginner, Ascension & Co-op",
+        href: "/slay-the-spire-2",
+        type: "Guide Hub",
+        description:
+          "Start with the problem your current run is showing you, then move to first-win fundamentals, Ascension, Regent, Necrobinder, multiplayer, or the exact data layer that owns the answer.",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-guide-ancient-boon-start.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          spotlightMeta:
+            "First wins, map decisions, Ascension A1–A10, Regent, Necrobinder, multiplayer, co-op roles, and SpireGenius structured data",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 1,
+        },
+      },
+  
+      {
+        title:
+          "Slay the Spire 2 Beginner Guide – How to Get Your First Win",
+        href: "/slay-the-spire-2/beginner-guide",
+        type: "Beginner Guide",
+        description:
+          "Plan the full map, take cards that solve real problems, use Skip, spend Gold with a purpose, judge Rest versus Smith, and enter Elites only when the current deck can support the risk.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-beginner-map-branching-route.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 321,
+          spotlightFeature: true,
+          spotlightOrder: 1,
+          spotlightMeta:
+            "First clear, full-map planning, card rewards, Skip, 118-Gold Merchant decisions, card removal, Rest versus Smith, Elite readiness, potions, and Act transitions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 2,
+        },
+      },
+  
+      {
+        title:
+          "Slay the Spire 2 Ascension Guide – How to Climb A1–A10",
+        href: "/slay-the-spire-2/ascension-guide",
+        type: "Guide",
+        description:
+          "Climb from A1 to A10 by adjusting routes, HP, Gold, potion use, Rest Sites, deck consistency and Elite risk as the Ascension modifiers stack.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-ascension-three-elites-too-greedy.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 322,
+          spotlightFeature: true,
+          spotlightOrder: 2,
+          spotlightMeta:
+            "A1–A10, stacked modifiers, Swarming Elites, Weary Traveler, Poverty, potion slots, Ascender's Bane, Gloom, Scarcity, tougher enemies, and double boss",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 3,
+        },
+      },
+  
+      {
+        title:
+          "Slay the Spire 2 Regent Guide – Stars, Routes & Winning Runs",
+        href: "/slay-the-spire-2/regent-guide",
+        type: "Guide",
+        description:
+          "Use Stars as a resource rather than a goal, cover weak defensive turns, choose better routes and Merchant purchases, remove dead weight, and stop adding cards once the deck already works.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-regent-underdocks-route.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 323,
+          spotlightFeature: true,
+          spotlightOrder: 3,
+          spotlightMeta:
+            "Regent, Stars, Underdocks, defensive gaps, Elite routes, Merchant decisions, card removal, Rest versus upgrade, boss preparation, and stopping card additions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 4,
+        },
+      },
+  
+      {
+        title:
+          "Slay the Spire 2 Necrobinder Guide – Doom, Osty & Runs",
+        href: "/slay-the-spire-2/necrobinder-guide",
+        type: "Guide",
+        description:
+          "Improve Necrobinder consistency with early removals, Osty defense, better Doom timing, stored Energy, aggressive routes, Eradicate and Unleash finishers, and cleaner draw cycles.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-necrobinder-forbidden-grimoire-remove.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 324,
+          spotlightFeature: true,
+          spotlightOrder: 4,
+          spotlightMeta:
+            "Necrobinder, Osty, Doom, Strike removal, Forbidden Grimoire, Elite routing, stored Energy, Eradicate, Unleash, potions, and finished-deck decisions",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 5,
+        },
+      },
+  
+      {
+        title:
+          "Slay the Spire 2 Co-op Guide – Teams, Roles & Ascension",
+        href: "/slay-the-spire-2/multiplayer-guide",
+        type: "Guide",
+        description:
+          "Coordinate multiplayer around team-wide Block, focus fire, shared debuffs, passed cards, reward allocation, route decisions, backup plans, and separate co-op Ascension progression.",
+        date: "Updated recently",
+        image:
+          "/images/slay-the-spire-2/slay-the-spire-2-multiplayer-rally-34-block.webp",
+        imageFit: "cover",
+        imagePosition: "center",
+        imagePadding: false,
+  
+        home: {
+          latest: true,
+          latestFeatured: true,
+          latestOrder: 325,
+          spotlightFeature: true,
+          spotlightOrder: 5,
+          spotlightMeta:
+            "Four-player co-op, team roles, Rally 34 Block, focus fire, debuffs, card passing, shared rewards, campfire routes, backup defense, and co-op Ascension",
+        },
+  
+        archive: {
+          showInCollections: true,
+          order: 6,
+        },
+      },
+    ],
+  },
+  {
     title: "The Crust",
     game: "The Crust",
     href: "/the-crust",

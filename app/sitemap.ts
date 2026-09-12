@@ -898,6 +898,13 @@ const paths = [
   '/the-crust/contracts-guide',
   '/the-crust/achievements',
 
+  '/slay-the-spire-2',
+  '/slay-the-spire-2/beginner-guide',
+  '/slay-the-spire-2/ascension-guide',
+  '/slay-the-spire-2/regent-guide',
+  '/slay-the-spire-2/necrobinder-guide',
+  '/slay-the-spire-2/multiplayer-guide',
+
 
 ] as const;
 
@@ -906,6 +913,13 @@ type SitemapPath = (typeof paths)[number];
 // Add a date only after a page receives a meaningful content update.
 // Do not use new Date() here: that would mark every deployment as a page update.
 const lastModifiedByPath: Partial<Record<SitemapPath, string>> = {
+  '/slay-the-spire-2': '2026-09-12',
+  '/slay-the-spire-2/beginner-guide': '2026-09-12',
+  '/slay-the-spire-2/ascension-guide': '2026-09-12',
+  '/slay-the-spire-2/regent-guide': '2026-09-12',
+  '/slay-the-spire-2/necrobinder-guide': '2026-09-12',
+  '/slay-the-spire-2/multiplayer-guide': '2026-09-12',
+
   '/the-crust': '2026-09-11',
   '/the-crust/beginners-guide': '2026-09-11',
   '/the-crust/hope-2-choice': '2026-09-11',
